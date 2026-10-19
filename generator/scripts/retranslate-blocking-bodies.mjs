@@ -2520,8 +2520,11 @@ export function engineTranslator(engine, {
   const runLocalCodex = async (args, provider) => {
     args._outcome ??= { tierAttempts: [] };
     const outcome = args._outcome;
+    // A field can call this once per template-heading segment. The previous
+    // return already advances `outcome.attempt` to the next number, so adding
+    // one here created gaps and overstated the field's report.
     const baseAttempt = Number.isInteger(outcome?.attempt) && outcome.attempt > 0
-      ? outcome.attempt + 1
+      ? outcome.attempt
       : 1;
     if (args?._outcome) args._outcome.attempt = baseAttempt;
     for (;;) {

@@ -3181,10 +3181,12 @@ function _prepareEngineSource(text, sourceLang, fieldType) {
  * are skipped and legitimate body prose ("nel nostro orologio") is never
  * rewritten. Glossary triggers are matched against the UNMASKED source.
  */
-function _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome }) {
+function _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome, jsonStructureSignature = null }) {
   const finalized = finalizeTranslatedText({
     sourceText: prepared.sourceClean,
-    translatedText: balanceMarkdownMarkers(out, { sourceText: prepared.clean }),
+    translatedText: jsonStructureSignature === null
+      ? balanceMarkdownMarkers(out, { sourceText: prepared.clean })
+      : out,
     targetLang,
     fieldType,
     protectedTokens: prepared.protectedTokens,
@@ -3193,24 +3195,20 @@ function _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome }
     noteTranslationOutcome(outcome, 'incomplete');
     return finalized;
   }
-  // Exit invariant. A tier's output is accepted because it has the line
-  // structure of the source (`tryTier`, and the same guard on the direct Codex
-  // path); this transform runs AFTER that guard, so whatever it breaks nobody
-  // else sees. It used to merge list items and drop the source's own `---`
-  // lines here. The repair steps are now unable to do that; this check keeps
-  // it true for the next rule added to the exit, and for the next caller that
-  // reaches the exit without a guard of its own:
-  //  - a text without the line skeleton of the source is a MISS, counted,
-  //    never a published text — whoever lost it;
-  //  - a changed opaque span (a URL the placeholder strip rewrote) is counted
-  //    and let through, because rejecting it would stop a translation that
-  //    was being published until now — the counter says when it reaches zero.
-  if (!hasSameLineSkeleton(prepared.structureSource, finalized)) {
+  // Exit invariant. Prose uses the line skeleton after finalization; JSON uses
+  // its key/container signature. A broken structure is a counted miss, never
+  // published. For prose, changed opaque spans remain an observability signal
+  // because rejecting them would stop translations that were already shipped.
+  const structurePreserved = jsonStructureSignature === null
+    ? hasSameLineSkeleton(prepared.structureSource, finalized)
+    : codexJsonStructureSignature(finalized) === jsonStructureSignature;
+  if (!structurePreserved) {
     noteTierStructureFailure('exit', 'exitTransformBroke', outcome);
     noteTranslationOutcome(outcome, 'incomplete');
     return '';
   }
-  if (hasSameLineStructure(prepared.clean, out)
+  if (jsonStructureSignature === null
+    && hasSameLineStructure(prepared.clean, out)
     && !hasSameLineStructure(prepared.structureSource, finalized)) {
     _cascadeStats.exitTransformOpaqueDrift += 1;
   }
@@ -3617,8 +3615,7 @@ export function codexPromptEchoMarker(out, source) {
 
 const CODEX_MALFORMED_JSON_PREFIX_RE = /^\s*(?:\{\s*[\x22}\]]|\[\s*[\x22{\]])/u;
 const CODEX_JSON_FENCE_RE = new RegExp('^```json[ \\t]*\\r?\\n([\\s\\S]*?)\\r?\\n```$', 'iu');
-
-/** Classify a plain-text Codex answer that is actually JSON-shaped output. */
+/** Classify a Codex answer that is actually JSON-shaped output. */
 function codexJsonOutputKind(out) {
   let candidate = String(out ?? '').trim();
   const fenced = candidate.match(CODEX_JSON_FENCE_RE);
@@ -3626,9 +3623,39 @@ function codexJsonOutputKind(out) {
   if (!/^[\[{]/u.test(candidate)) return null;
   try {
     const parsed = JSON.parse(candidate);
-    return parsed !== null && typeof parsed === 'object' ? 'structured' : null;
+    if (Array.isArray(parsed)) return 'array';
+    return parsed !== null && typeof parsed === 'object' ? 'object' : null;
   } catch {
     return CODEX_MALFORMED_JSON_PREFIX_RE.test(candidate) ? 'invalid' : null;
+  }
+}
+
+function codexJsonShape(value) {
+  if (value === null) return ['null'];
+  if (Array.isArray(value)) return ['array', value.map(codexJsonShape)];
+  if (typeof value === 'object') {
+    return ['object', Object.keys(value).sort().map((key) => [key, codexJsonShape(value[key])])];
+  }
+  if (typeof value === 'string') return ['string'];
+  return [typeof value, value];
+}
+
+/**
+ * Preserve object keys, container shape, array length, and non-string values
+ * while allowing translated JSON string values to change. Markdown line
+ * structure is a prose contract and does not model nested JSON reliably.
+ */
+function codexJsonStructureSignature(out) {
+  let candidate = String(out ?? '').trim();
+  const fenced = candidate.match(CODEX_JSON_FENCE_RE);
+  if (fenced) candidate = fenced[1].trim();
+  if (!/^[\[{]/u.test(candidate)) return null;
+  try {
+    const parsed = JSON.parse(candidate);
+    if (parsed === null || typeof parsed !== 'object') return null;
+    return JSON.stringify(codexJsonShape(parsed));
+  } catch {
+    return null;
   }
 }
 
@@ -3643,12 +3670,15 @@ export async function translateWithCodexEngine({ text, sourceLang, targetLang, f
     noteTranslationOutcome(_outcome, 'incomplete');
     return '';
   }
-  // The local transport is normally plain text. Keep the source/output JSON
-  // classification identical: structured source must stay structured, while
-  // plain-text source must not receive JSON-shaped output.
+  // The local transport is normally plain text. A JSON source must keep its
+  // top-level type and key/container shape while allowing string values to be
+  // translated.
   const jsonKind = codexJsonOutputKind(out);
   const sourceJsonKind = codexJsonOutputKind(prepared.sourceClean);
-  if (jsonKind !== sourceJsonKind) {
+  const jsonStructure = codexJsonStructureSignature(out);
+  const sourceJsonStructure = codexJsonStructureSignature(prepared.sourceClean);
+  if (jsonKind !== sourceJsonKind
+    || (sourceJsonStructure !== null && jsonStructure !== sourceJsonStructure)) {
     noteTranslationProviderReason(_outcome, 'codex', 'invalid-output');
     noteTranslationOutcome(_outcome, 'incomplete');
     return '';
@@ -3659,6 +3689,7 @@ export async function translateWithCodexEngine({ text, sourceLang, targetLang, f
   // Fail-closed sull'eco del prompt: si scarta il campo intero, e la bonifica
   // salta l'articolo invece di pubblicare le istruzioni del traduttore.
   if (codexPromptEchoMarker(out, prepared.sourceClean)) {
+    noteTranslationProviderReason(_outcome, 'codex', 'meta-response');
     noteTranslationOutcome(_outcome, 'incomplete');
     return '';
   }
@@ -3670,16 +3701,19 @@ export async function translateWithCodexEngine({ text, sourceLang, targetLang, f
   // processo `codex exec`, e una riga per processo non e' un costo che questo
   // percorso puo' pagare. Il campo e' un MISS contato; la bonifica salta
   // l'articolo e la seconda corsia lo lascia al giro successivo.
-  // Per una sorgente JSON strutturata il confronto Markdown vedrebbe l'oggetto
-  // come un placeholder opaco: la validazione JSON sopra e' il contratto
-  // corretto per quel formato, non la guardia delle righe di prosa.
-  const structuredJsonSource = sourceJsonKind === 'structured' && jsonKind === 'structured';
-  if (!structuredJsonSource && !hasSameLineStructure(prepared.clean, out)) {
+  if (sourceJsonStructure === null && !hasSameLineStructure(prepared.clean, out)) {
     noteTierStructureFailure('codex-engine', 'directPathRejected', _outcome);
     noteTranslationOutcome(_outcome, 'incomplete');
     return '';
   }
-  return _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome: _outcome });
+  return _finalizeEngineOutput({
+    prepared,
+    out,
+    targetLang,
+    fieldType,
+    outcome: _outcome,
+    jsonStructureSignature: sourceJsonStructure,
+  });
 }
 
 /**

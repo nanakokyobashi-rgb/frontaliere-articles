@@ -103,7 +103,10 @@ import { filterWrongLocalePairs, wrongLocalePair } from '../scripts/fix-faq-loca
 import { detectLanguage, detectLanguageWithConfidence } from '../scripts/lib/detect-language.mjs';
 import { translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 import { getKeyFactsHeading, getTldrHeading } from '../scripts/lib/ai-search-template.mjs';
-import { recordTranslationProviderAttempt } from '../scripts/lib/free-translate.mjs';
+import {
+  recordTranslationProviderAttempt,
+  summarizeTranslationOutcome,
+} from '../scripts/lib/free-translate.mjs';
 import { CodexExecError } from '../scripts/lib/codex-exec-call.mjs';
 
 const fileFor = (id, fields) => `const b: Record<string, string> = {\n`
@@ -2162,6 +2165,41 @@ test('il report Codex conserva reason, diagnosi e conteggio dei retry transitori
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
+});
+
+test('un campo diviso in segmenti continua il conteggio dei tentativi senza buchi', async () => {
+  const outcome = { tierAttempts: [] };
+  let calls = 0;
+  const translate = engineTranslator('codex', {
+    codexCall: async () => {
+      calls += 1;
+      return calls === 1 ? 'Zusammenfassung.' : '- **Was**: ein Wert.';
+    },
+    codexRetryBackoffMs: [0, 0],
+  });
+  const source = [
+    getTldrHeading('it'),
+    'Sintesi italiana.',
+    getKeyFactsHeading('it'),
+    '- **Cosa**: un valore.',
+  ].join('\n');
+  const out = await translateFieldFreeMt({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    fieldType: 'description',
+    fieldName: 'body1',
+    translate,
+    balanceMarkdown: (value) => value,
+    translationOutcome: outcome,
+  });
+  assert.ok(out);
+  assert.equal(calls, 2);
+  assert.deepEqual(outcome.tierAttempts.map(({ provider, attempt }) => ({ provider, attempt })), [
+    { provider: 'codex-local', attempt: 1 },
+    { provider: 'codex-local', attempt: 2 },
+  ]);
+  assert.equal(summarizeTranslationOutcome(outcome).attempts, 2);
 });
 
 test('il backoff Codex e configurabile ma resta limitato a due ritardi', () => {
