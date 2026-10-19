@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-sondaggio-imprese-st-gallen-2026.webp",
+      "sha256": "e759303d859919b590bd60eb21b0138d69daa421f9c5453cf209521d660c6901"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-sondaggio-imprese-st-gallen-2026-480w.webp",
+      "sha256": "ed0b699469d00123ea27c9daa02a903c5277c6205334772b2df9155b755a62d9"
+    }
+  ]
 }
