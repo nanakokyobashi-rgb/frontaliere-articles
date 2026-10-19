@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-10-19T02:30:40.156Z",
-  "contentHash": "928f6fe586d7e87bac8242325109ddec47e6cac1945e6922e23206b2a8a330cb",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "5d1d5abad133bcd514397c7414c67bab688abc5ec98cd22b7007c65131d74936",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-18T20:21:24.396Z",
+      "updatedAt": "2026-10-19T13:52:30.888Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "73",
+          "value": "74",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -63,6 +63,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
+              "label": "Workshop:Ätherische Öle & natürliche Alltagsprodukte erleben",
+              "detail": "Val Surses Savognin Bivio, Surses — in corso, ultimo giorno: 28 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshopaetherische-oele-natuerliche-alltagsprodukte-erleben/"
+            },
+            {
               "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
               "detail": "Ardez, Scuol — in corso, ultimo giorno: 7 novembre 2026",
               "date": "2026-10-19",
@@ -85,17 +91,11 @@
               "detail": "Hotel Restaurant Ustria Parlatsch, Trin — in corso, ultimo giorno: 19 ottobre 2026",
               "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pouletfluegeli-a-discretion/"
-            },
-            {
-              "label": "Fondue Plausch am Abig uf de Ochsenalp",
-              "detail": "Bergbeizli Ochsenalp, Arosa — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-plausch-am-abig-uf-de-ochsenalp/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T13:52:30.888Z"
         }
       ],
       "curatedArticles": [
@@ -147,7 +147,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "GR",
@@ -157,7 +157,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "73",
+          "value": "74",
           "note": "from the site’s events calendar"
         }
       ],
@@ -198,6 +198,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
+              "label": "Workshop:Ätherische Öle & natürliche Alltagsprodukte erleben",
+              "detail": "Val Surses Savognin Bivio, Surses — ongoing, last day: 28 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshopaetherische-oele-natuerliche-alltagsprodukte-erleben/"
+            },
+            {
               "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
               "detail": "Ardez, Scuol — ongoing, last day: 7 November 2026",
               "date": "2026-10-19",
@@ -220,17 +226,11 @@
               "detail": "Hotel Restaurant Ustria Parlatsch, Trin — ongoing, last day: 19 October 2026",
               "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pouletfluegeli-a-discretion/"
-            },
-            {
-              "label": "Fondue Plausch am Abig uf de Ochsenalp",
-              "detail": "Bergbeizli Ochsenalp, Arosa — ongoing, last day: 24 October 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-plausch-am-abig-uf-de-ochsenalp/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T13:52:30.888Z"
         }
       ],
       "curatedArticles": [
@@ -282,7 +282,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "GR",
@@ -292,7 +292,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "73",
+          "value": "74",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -333,6 +333,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
+              "label": "Workshop:Ätherische Öle & natürliche Alltagsprodukte erleben",
+              "detail": "Val Surses Savognin Bivio, Surses — läuft, letzter Tag: 28. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshopaetherische-oele-natuerliche-alltagsprodukte-erleben/"
+            },
+            {
               "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
               "detail": "Ardez, Scuol — läuft, letzter Tag: 7. November 2026",
               "date": "2026-10-19",
@@ -355,17 +361,11 @@
               "detail": "Hotel Restaurant Ustria Parlatsch, Trin — läuft, letzter Tag: 19. Oktober 2026",
               "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pouletfluegeli-a-discretion/"
-            },
-            {
-              "label": "Fondue Plausch am Abig uf de Ochsenalp",
-              "detail": "Bergbeizli Ochsenalp, Arosa — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-plausch-am-abig-uf-de-ochsenalp/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T13:52:30.888Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "GR",
@@ -427,7 +427,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "73",
+          "value": "74",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -468,6 +468,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
+              "label": "Workshop:Ätherische Öle & natürliche Alltagsprodukte erleben",
+              "detail": "Val Surses Savognin Bivio, Surses — en cours, dernier jour : 28 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshopaetherische-oele-natuerliche-alltagsprodukte-erleben/"
+            },
+            {
               "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
               "detail": "Ardez, Scuol — en cours, dernier jour : 7 novembre 2026",
               "date": "2026-10-19",
@@ -490,17 +496,11 @@
               "detail": "Hotel Restaurant Ustria Parlatsch, Trin — en cours, dernier jour : 19 octobre 2026",
               "date": "2026-10-19",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pouletfluegeli-a-discretion/"
-            },
-            {
-              "label": "Fondue Plausch am Abig uf de Ochsenalp",
-              "detail": "Bergbeizli Ochsenalp, Arosa — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-plausch-am-abig-uf-de-ochsenalp/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T13:52:30.888Z"
         }
       ],
       "curatedArticles": [
@@ -552,7 +552,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

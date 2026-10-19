@@ -30,6 +30,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.amministrazione-fiscale-berna-chiusura-2026.title': 'Administration fiscale de Berne : fermeture du 23 octobre au 1er novembre 2026',
     'blog.article.amministrazione-fiscale-berna-chiusura-2026.excerpt': 'L\'Administration fiscale du canton de Berne suspend ses services du 23 octobre à 16 h au 1er novembre 2026 pour une mise à niveau technologique.',
     'blog.article.amministrazione-fiscale-berna-chiusura-2026.imageAlt': 'Administration fiscale du Canton de Berne pendant la fermeture temporaire',
+    'blog.article.berna-governo-kita-gratuite.title': 'Berne, le Gouvernement rejette la gratuité des Kita',
+    'blog.article.berna-governo-kita-gratuite.excerpt': 'Le Gouvernement bernois recommande au Grand Conseil de rejeter la motion en faveur de Kita gratuites : pour les bénéficiaires actuels, plus de 160 millions de CHF par an.',
+    'blog.article.berna-governo-kita-gratuite.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBeFr;

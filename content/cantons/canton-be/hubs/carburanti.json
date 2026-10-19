@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-19T07:07:21.066Z",
-  "contentHash": "e2dd153b4cfe87b9df2c5d9a66ca576bb8470138135cfbd5c4bff02558b6e63b",
+  "updatedAt": "2026-10-19T19:02:48.012Z",
+  "contentHash": "b1f8558a0d976448cff6d64ce9bf783a633091af182abe6b84f5a8cdcd0a8a68",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-18T11:41:56.271Z",
+      "updatedAt": "2026-10-19T13:56:07.476Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Berna, il Governo respinge le Kita gratuite",
+          "url": "/articoli-berna/berna-governo-kita-gratuite/",
+          "excerpt": "Il Governo bernese raccomanda al Gran Consiglio di respingere la mozione per Kita gratuite: per gli attuali beneficiari, oltre 160 milioni di CHF annui.",
+          "date": "2026-10-19T18:54:07.095Z"
+        },
         {
           "title": "Amministrazione fiscale Berna: chiusura dal 23 ottobre al 1 novembre 2026",
           "url": "/articoli-berna/amministrazione-fiscale-berna-chiusura-2026/",
@@ -82,12 +88,6 @@
           "url": "/articoli-berna/cyberattacco-casse-pensione-berna/",
           "excerpt": "Una fornitrice software esterna di BPK e BLVK è stata colpita a fine settembre.",
           "date": "2026-10-09T23:26:36.398Z"
-        },
-        {
-          "title": "Berna invita i familiari curanti a un incontro",
-          "url": "/articoli-berna/berna-familiari-curanti-incontro/",
-          "excerpt": "Il Canton Berna invita i familiari curanti a uno scambio e a un incontro.",
-          "date": "2026-10-09T06:53:22.557Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-19T07:07:21.066Z"
+      "updatedAt": "2026-10-19T19:02:48.012Z"
     },
     "en": {
       "canton": "BE",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Bern, the government rejects free daycare centers",
+          "url": "/en/bern-articles/bern-government-free-daycares/",
+          "excerpt": "The Bernese Government recommends that the Grand Council reject the motion for free daycare: for current beneficiaries, over CHF 160 million annually.",
+          "date": "2026-10-19T18:54:07.095Z"
+        },
         {
           "title": "Bern tax administration: closure from October 23 to November 1, 2026",
           "url": "/en/bern-articles/bern-tax-administration-closure-2026/",
@@ -169,12 +175,6 @@
           "url": "/en/bern-articles/cyberattack-bern-pension-funds/",
           "excerpt": "An external software provider for BPK and BLVK was affected at the end of September.",
           "date": "2026-10-09T23:26:36.398Z"
-        },
-        {
-          "title": "Bern invites family caregivers to a meeting",
-          "url": "/en/bern-articles/bern-caregiving-relatives-meeting/",
-          "excerpt": "The Canton of Bern invites family caregivers to an exchange and a meeting.",
-          "date": "2026-10-09T06:53:22.557Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-19T07:07:21.066Z"
+      "updatedAt": "2026-10-19T19:02:48.012Z"
     },
     "de": {
       "canton": "BE",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Bern, die Regierung lehnt kostenlose Kitas ab",
+          "url": "/de/bern-artikel/bern-regierungsrat-kostenlose-kitas/",
+          "excerpt": "Die Berner Regierung empfiehlt dem Grossen Rat, die Motion für kostenlose Kitas abzulehnen: Für die heutigen Begünstigten wären dafür jährlich über 160 Millionen CHF nötig.",
+          "date": "2026-10-19T18:54:07.095Z"
+        },
         {
           "title": "Steuerverwaltung Bern: Schließung vom 23. Oktober bis zum 1. November 2026",
           "url": "/de/bern-artikel/steuerverwaltung-bern-schliessung-2026/",
@@ -256,12 +262,6 @@
           "url": "/de/bern-artikel/cyberangriff-berner-pensionskassen/",
           "excerpt": "Eine externe Softwareanbieterin für BPK und BLVK wurde Ende September angegriffen.",
           "date": "2026-10-09T23:26:36.398Z"
-        },
-        {
-          "title": "Bern lädt pflegende Angehörige zu einem Treffen ein",
-          "url": "/de/bern-artikel/bern-pflegende-angehoerige-treffen/",
-          "excerpt": "Der Kanton Bern lädt pflegende Angehörige zu einem Austausch und einem Treffen ein.",
-          "date": "2026-10-09T06:53:22.557Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-19T07:07:21.066Z"
+      "updatedAt": "2026-10-19T19:02:48.012Z"
     },
     "fr": {
       "canton": "BE",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Berne, le Gouvernement rejette la gratuité des Kita",
+          "url": "/fr/articles-berne/berne-gouvernement-creches-gratuites/",
+          "excerpt": "Le Gouvernement bernois recommande au Grand Conseil de rejeter la motion en faveur de Kita gratuites : pour les bénéficiaires actuels, plus de 160 millions de CHF par an.",
+          "date": "2026-10-19T18:54:07.095Z"
+        },
         {
           "title": "Administration fiscale de Berne : fermeture du 23 octobre au 1er novembre 2026",
           "url": "/fr/articles-berne/administration-fiscale-berne-fermeture-2026/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-berne/cyberattaque-caisses-pension-berne/",
           "excerpt": "Une fournisseuse externe de logiciels de BPK et de BLVK a été touchée fin septembre.",
           "date": "2026-10-09T23:26:36.398Z"
-        },
-        {
-          "title": "Berne invite les proches aidants à une rencontre",
-          "url": "/fr/articles-berne/berne-proches-aidants-rencontre/",
-          "excerpt": "Le canton de Berne invite les proches aidants à un échange et à une rencontre.",
-          "date": "2026-10-09T06:53:22.557Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-19T07:07:21.066Z"
+      "updatedAt": "2026-10-19T19:02:48.012Z"
     }
   }
 }

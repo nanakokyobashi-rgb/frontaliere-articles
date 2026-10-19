@@ -185,7 +185,15 @@ function normalizeCandidatePaths(options, data) {
 }
 
 function noVerifiedFallbackError({ data, candidateCount, rejectedCount, transientErrors }) {
-  const transientError = transientErrors[0];
+  // A shared deferral is valid only when every verifier exception carries the
+  // producer-owned shared-provider marker. A mixed local/unclassified failure
+  // must stay section-local even if another candidate also hit an outage.
+  const sharedProviderUnavailable = rejectedCount === 0
+    && transientErrors.length > 0
+    && transientErrors.every((error) => error?.sharedProviderUnavailable === true);
+  const transientError = sharedProviderUnavailable
+    ? transientErrors[0]
+    : transientErrors.find((error) => error?.sharedProviderUnavailable !== true) || transientErrors[0];
   const error = new Error(transientError
     ? `Unable to verify a relevant catalog cover for ${data?.id || '<unknown>'}: ${compactReason(transientError.message)}`
     : `No visually verified, topic-relevant catalog cover for ${data?.id || '<unknown>'}`);
@@ -194,6 +202,7 @@ function noVerifiedFallbackError({ data, candidateCount, rejectedCount, transien
     : ARTICLE_COVER_FALLBACK_ERROR_CODES.NO_RELEVANT_CANDIDATE;
   error.retryable = true;
   if (transientError) error.cause = transientError;
+  if (sharedProviderUnavailable) error.sharedProviderUnavailable = true;
   if (!transientError && rejectedCount > 0) error.imageQualityFailure = true;
   error.candidateCount = candidateCount;
   error.rejectedCount = rejectedCount;
@@ -271,7 +280,7 @@ export async function verifyCatalogFallbackCandidates(data, {
         continue;
       }
       transientErrors.push(error);
-      if (Date.now() >= deadlineAt || error?.code === 'ETIMEDOUT') break;
+      if (error?.sharedProviderUnavailable === true || Date.now() >= deadlineAt || error?.code === 'ETIMEDOUT') break;
     }
   }
 

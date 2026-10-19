@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-19T02:30:40.156Z",
-  "contentHash": "dad343fd28b711bb4bfe387bbfc6519dd470ca37bb93a576a4b9cdb810baaeb0",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "654e2ac84c39f14215c398ed59d7595d3f4525265eed0c8b256f5c6d44e76bef",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-18T20:21:24.396Z",
+      "updatedAt": "2026-10-19T13:52:30.888Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T19:43:29.238Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "27",
+          "value": "28",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -68,6 +68,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
             },
             {
+              "label": "Opening Reception: Ursula Palla / Petri Saarikko / Mara Röllin",
+              "detail": "Schaffhausen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/opening-reception-ursula-palla-petri-saarikko-mara-roellin/"
+            },
+            {
               "label": "In 80 Tagen um die Welt",
               "detail": "Schaffhausen",
               "date": "2026-10-24",
@@ -90,17 +96,11 @@
               "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/michael-elsener-gute-entscheidung-1/"
-            },
-            {
-              "label": "Schaffhauser Herbstmesse",
-              "detail": "Schaffhausen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhauser-herbstmesse/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T13:52:30.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "SH",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "27",
+          "value": "28",
           "note": "from the site’s events calendar"
         }
       ],
@@ -191,6 +191,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
             },
             {
+              "label": "Opening Reception: Ursula Palla / Petri Saarikko / Mara Röllin",
+              "detail": "Schaffhausen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/opening-reception-ursula-palla-petri-saarikko-mara-roellin/"
+            },
+            {
               "label": "In 80 Tagen um die Welt",
               "detail": "Schaffhausen",
               "date": "2026-10-24",
@@ -213,17 +219,11 @@
               "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/michael-elsener-gute-entscheidung-1/"
-            },
-            {
-              "label": "Schaffhauser Herbstmesse",
-              "detail": "Schaffhausen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhauser-herbstmesse/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T13:52:30.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "SH",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "27",
+          "value": "28",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -314,6 +314,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
             },
             {
+              "label": "Vernissage Ursula Palla / Petri Saarikko / Mara Röllin",
+              "detail": "Schaffhausen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/opening-reception-ursula-palla-petri-saarikko-mara-roellin/"
+            },
+            {
               "label": "In 80 Tagen um die Welt",
               "detail": "Schaffhausen",
               "date": "2026-10-24",
@@ -336,17 +342,11 @@
               "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/michael-elsener-gute-entscheidung-1/"
-            },
-            {
-              "label": "Schaffhauser Herbstmesse",
-              "detail": "Schaffhausen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhauser-herbstmesse/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T13:52:30.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "SH",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "27",
+          "value": "28",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -437,6 +437,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
             },
             {
+              "label": "Vernissage : Ursula Palla / Petri Saarikko / Mara Röllin",
+              "detail": "Schaffhausen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/opening-reception-ursula-palla-petri-saarikko-mara-roellin/"
+            },
+            {
               "label": "In 80 Tagen um die Welt",
               "detail": "Schaffhausen",
               "date": "2026-10-24",
@@ -459,17 +465,11 @@
               "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/michael-elsener-gute-entscheidung-1/"
-            },
-            {
-              "label": "Schaffhauser Herbstmesse",
-              "detail": "Schaffhausen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhauser-herbstmesse/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T13:52:30.888Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

@@ -30,6 +30,12 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.teufen-budget-deficit-2027.title': 'Teufen: Budget 2027 zur Verringerung des operativen Defizits',
     'blog.article.teufen-budget-deficit-2027.excerpt': 'Die Gemeinde Teufen erwartet für 2027 Steuereinnahmen von 38,9 Millionen Franken, was einem Anstieg von 2,2% gegenüber dem vorherigen Budget entspricht.',
     'blog.article.teufen-budget-deficit-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cambio-dirigenza-scuola-appenzell.title': 'Appenzell: Walzthöny ist nicht mehr Leiterin der Oberstufe',
+    'blog.article.cambio-dirigenza-scuola-appenzell.excerpt': 'Isabella Walzthöny begann am 1.',
+    'blog.article.cambio-dirigenza-scuola-appenzell.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.proporz-gran-consiglio-appenzello.title': 'Appenzell Innerrhoden: Der Proporz kommt im Grossen Rat nicht durch',
+    'blog.article.proporz-gran-consiglio-appenzello.excerpt': 'Am 19. Oktober hatte der Innerrhoder Grosse Rat eine lange Traktandenliste; die Totalrevision des Gastgewerbegesetzes erforderte Diskussionen.',
+    'blog.article.proporz-gran-consiglio-appenzello.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

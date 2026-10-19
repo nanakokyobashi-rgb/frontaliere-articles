@@ -58,7 +58,7 @@ test('il titolo digest ambiguo non viene risolto scegliendo il primo risultato',
   assert.match(guard[1], /exit 1/, 'più digest omonimi devono far fallire la classificazione');
 
   const guardAt = step.indexOf('if [ "$DIGEST_MATCH_COUNT" -gt 1 ]; then');
-  const numberAt = step.indexOf('N=');
+  const numberAt = step.indexOf('N=$(');
   assert.ok(guardAt !== -1 && numberAt !== -1 && guardAt < numberAt, 'il guard deve precedere la scelta del numero');
 
   const markerAt = step.indexOf('if HAS_LINES=');
@@ -122,6 +122,27 @@ test('il valore del titolo digest è validato prima del prompt Codex e passato c
   assert.ok(
     validationGuardAt !== -1 && searchCommandAt !== -1 && validationGuardAt < searchCommandAt,
     'il verdetto deve verificare il titolo prima del comando che interroga GitHub',
+  );
+});
+
+test('il classificatore usa il PAT runtime e non il bucket installation del runner', () => {
+  const outcome = stepBlock('Classify outcome (work-done, not CLI exit)');
+  const guardAt = outcome.indexOf('if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then');
+  const exportAt = outcome.indexOf('export GH_TOKEN="$GITHUB_PAT_NANAKO"');
+  const queryAt = outcome.indexOf('if DIGEST_MATCHES=');
+
+  assert.ok(guardAt !== -1, 'il classificatore deve verificare il PAT caricato dal runtime');
+  assert.ok(exportAt > guardAt, 'il classificatore deve esportare il PAT dopo la guardia');
+  assert.ok(queryAt > exportAt, 'la prima query GitHub deve usare il PAT runtime');
+  assert.match(
+    outcome.slice(guardAt, exportAt),
+    /exit 1/,
+    'un loader senza PAT deve fallire in modo esplicito, non ricadere sul token installation',
+  );
+  assert.doesNotMatch(
+    outcome,
+    /GH_TOKEN: \$\{\{ secrets\.GITHUB_TOKEN \}\}/,
+    'il classificatore non deve dichiarare il token installation come credenziale operativa',
   );
 });
 

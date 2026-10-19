@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-10-19T14:06:02.326Z",
-  "contentHash": "eb8c76eb5a863c261c3cc6b5528d513c843840872a9e1b5502b09d8dcf735657",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "c2c006aed87afa01bda481016c3eb32459e929fa339f10feffd955bab91bdef0",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,13 +13,13 @@
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-19T04:57:02.436Z",
-      "keyFacts": 0
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-19T13:13:42.861Z",
+      "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T19:43:29.238Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -35,6 +35,11 @@
           "value": "606,90 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "14",
+          "note": "offerta mediana 250 CHF"
         }
       ],
       "dataBlocks": [
@@ -59,18 +64,35 @@
           "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
-              "label": "Fribourg",
-              "value": "8 °C",
-              "detail": "oggi da 8 a 14 °C"
+              "label": "FR12026",
+              "value": "800 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7287&locale=fr_ch"
+            },
+            {
+              "label": "FR14632",
+              "value": "700 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7288&locale=fr_ch"
+            },
+            {
+              "label": "FR19739",
+              "value": "500 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7289&locale=fr_ch"
             }
           ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-19T04:57:02.436Z"
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -108,7 +130,7 @@
               "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -188,7 +210,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "FR",
@@ -201,6 +223,11 @@
           "value": "606.90 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "14",
+          "note": "typical bid 250 CHF"
         }
       ],
       "dataBlocks": [
@@ -225,18 +252,35 @@
           "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
-              "label": "Fribourg",
-              "value": "8 °C",
-              "detail": "today from 8 to 14 °C"
+              "label": "FR12026",
+              "value": "800 CHF",
+              "detail": "current bid",
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7287&locale=fr_ch"
+            },
+            {
+              "label": "FR14632",
+              "value": "700 CHF",
+              "detail": "current bid",
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7288&locale=fr_ch"
+            },
+            {
+              "label": "FR19739",
+              "value": "500 CHF",
+              "detail": "current bid",
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7289&locale=fr_ch"
             }
           ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-19T04:57:02.436Z"
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -274,7 +318,7 @@
               "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -350,7 +394,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "FR",
@@ -363,6 +407,11 @@
           "value": "606.90 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "14",
+          "note": "mittleres Gebot 250 CHF"
         }
       ],
       "dataBlocks": [
@@ -387,18 +436,35 @@
           "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
-              "label": "Fribourg",
-              "value": "8 °C",
-              "detail": "heute 8 bis 14 °C"
+              "label": "FR12026",
+              "value": "800 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7287&locale=fr_ch"
+            },
+            {
+              "label": "FR14632",
+              "value": "700 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7288&locale=fr_ch"
+            },
+            {
+              "label": "FR19739",
+              "value": "500 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7289&locale=fr_ch"
             }
           ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-19T04:57:02.436Z"
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -436,7 +502,7 @@
               "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -512,7 +578,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "FR",
@@ -525,6 +591,11 @@
           "value": "606,90 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "14",
+          "note": "offre centrale 250 CHF"
         }
       ],
       "dataBlocks": [
@@ -549,18 +620,35 @@
           "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
-              "label": "Fribourg",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 8 à 14 °C"
+              "label": "FR12026",
+              "value": "800 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7287&locale=fr_ch"
+            },
+            {
+              "label": "FR14632",
+              "value": "700 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7288&locale=fr_ch"
+            },
+            {
+              "label": "FR19739",
+              "value": "500 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-26T11:00:00.000Z",
+              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7289&locale=fr_ch"
             }
           ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-19T04:57:02.436Z"
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -598,7 +686,7 @@
               "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -670,7 +758,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

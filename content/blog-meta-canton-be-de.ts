@@ -30,6 +30,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.amministrazione-fiscale-berna-chiusura-2026.title': 'Steuerverwaltung Bern: Schließung vom 23. Oktober bis zum 1. November 2026',
     'blog.article.amministrazione-fiscale-berna-chiusura-2026.excerpt': 'Die Steuerverwaltung des Kantons Bern setzt die Dienstleistungen vom 23.',
     'blog.article.amministrazione-fiscale-berna-chiusura-2026.imageAlt': 'Steuerverwaltung des Kantons Bern während der vorübergehenden Schliessung',
+    'blog.article.berna-governo-kita-gratuite.title': 'Bern, die Regierung lehnt kostenlose Kitas ab',
+    'blog.article.berna-governo-kita-gratuite.excerpt': 'Die Berner Regierung empfiehlt dem Grossen Rat, die Motion für kostenlose Kitas abzulehnen: Für die heutigen Begünstigten wären dafür jährlich über 160 Millionen CHF nötig.',
+    'blog.article.berna-governo-kita-gratuite.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;

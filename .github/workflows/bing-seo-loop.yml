@@ -111,13 +111,16 @@ jobs:
           git config user.name 'frontaliere-automation[bot]'
           git config user.email 'frontaliere-automation[bot]@users.noreply.github.com'
           git fetch origin main
+          # Save the fetched SHA before fetching the producer branch, which
+          # would replace FETCH_HEAD and could leave origin/main stale.
+          main_head="$(git rev-parse FETCH_HEAD)"
           branch='automation/bing-seo-titles'
           if git ls-remote --exit-code --heads origin "$branch" >/dev/null 2>&1; then
             git fetch origin "$branch"
             git switch --create "$branch" --track "origin/$branch"
-            git rebase origin/main
+            git rebase "$main_head"
           else
-            git switch --create "$branch" origin/main
+            git switch --create "$branch" "$main_head"
           fi
           node scripts/seo/bing-seo-loop.mjs --apply-fixes
 

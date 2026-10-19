@@ -8531,6 +8531,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.lenu-referendum-firme-valide.title': 'Federal Nuclear Energy Act: referendum successful',
     'blog.article.lenu-referendum-firme-valide.excerpt': 'October 19, 2026: referendum formally successful October 6, 2026: 79 479 signatures submitted 78 922 signatures were declared valid LENu amendment dated 19',
     'blog.article.lenu-referendum-firme-valide.imageAlt': 'Federal Palace in Bern in an editorial scene about the LENu referendum',
+    'blog.article.water-summit-zurich-2024.title': 'EurEau Water Summit in Zurich: 60% untreated water',
+    'blog.article.water-summit-zurich-2024.excerpt': 'Drought and pollution threaten drinking water The summit brings together experts and operators in Zurich In Switzerland, 60% may have no or only simple treatment The 80%',
+    'blog.article.water-summit-zurich-2024.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.accordo-commercio-elettronico-omc.title': 'E-commerce: Switzerland launches consultation on the ACE',
+    'blog.article.accordo-commercio-elettronico-omc.excerpt': 'Consultation launched on October 14, 2026 ACE among 67 WTO members Deadline set for January 28, 2027 Tariffs on electronic transmissions prohibited What →',
+    'blog.article.accordo-commercio-elettronico-omc.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

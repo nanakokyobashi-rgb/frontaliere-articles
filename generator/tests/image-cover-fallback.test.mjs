@@ -233,6 +233,16 @@ test('skipped, unavailable, or non-topic vision never grants a fallback token', 
       { name: 'skipped', verifyImage: async () => undefined, code: 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE' },
       { name: 'unavailable', verifyImage: async () => { throw new Error('vision service unavailable'); }, code: 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE' },
       {
+        name: 'shared provider outage',
+        verifyImage: async () => {
+          const error = new Error('vision provider unavailable');
+          error.sharedProviderUnavailable = true;
+          throw error;
+        },
+        code: 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE',
+        sharedProviderUnavailable: true,
+      },
+      {
         name: 'missing topic signal',
         verifyImage: async () => {
           const { is_topic_relevant: _topic, ...partial } = safeGeneratedVision;
@@ -255,8 +265,63 @@ test('skipped, unavailable, or non-topic vision never grants a fallback token', 
         verifyImage: scenario.verifyImage,
       }), (error) => error.code === scenario.code
         && error.retryable === true
+        && Boolean(error.sharedProviderUnavailable) === (scenario.sharedProviderUnavailable === true)
         && Boolean(error.imageQualityFailure) === (scenario.imageQualityFailure === true), scenario.name);
     }
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('mixed local and shared verifier failures stay section-local', async () => {
+  const root = tempRoot();
+  try {
+    const data = article('fallback-mixed-verifier-outcomes', 'Cross-border jobs in Ticino');
+    const records = [0, 1].map((index) => {
+      const record = generatedCatalogRecord();
+      record.assetId = `catalog-fallback-mixed-${index}`;
+      record.imageUrl = `/images/blog/catalog-fallback-mixed-${index}.webp`;
+      const file = path.join(root, 'public', record.imageUrl.slice(1));
+      fs.mkdirSync(path.dirname(file), { recursive: true });
+      fs.writeFileSync(file, Buffer.alloc(record.bytes, 0x47 + index));
+      record.sha256 = sha256File(file);
+      appendGeneratedImageRecord(root, record);
+      return record;
+    });
+    const localFailure = Object.assign(new Error('vision verifier returned an incomplete verdict'), {
+      code: 'IMAGE_VISION_VERDICT_INCOMPLETE',
+      retryable: true,
+    });
+    const sharedFailure = Object.assign(new Error('shared vision provider unavailable'), {
+      sharedProviderUnavailable: true,
+    });
+    let attempts = 0;
+
+    await assert.rejects(verifyCatalogFallbackCandidates(data, {
+      root,
+      findCatalogImages: () => records.map((record) => record.imageUrl),
+      verifyImage: async () => {
+        throw attempts++ === 0 ? localFailure : sharedFailure;
+      },
+    }), (error) => error.code === 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE'
+      && error.retryable === true
+      && error.sharedProviderUnavailable !== true
+      && error.cause === localFailure);
+    assert.equal(attempts, 2);
+
+    attempts = 0;
+    await assert.rejects(verifyCatalogFallbackCandidates(data, {
+      root,
+      findCatalogImages: () => records.map((record) => record.imageUrl),
+      verifyImage: async () => {
+        if (attempts++ === 0) return { ...safeGeneratedVision, is_topic_relevant: false };
+        throw sharedFailure;
+      },
+    }), (error) => error.code === 'ARTICLE_COVER_VERIFICATION_UNAVAILABLE'
+      && error.retryable === true
+      && error.sharedProviderUnavailable !== true
+      && error.cause === sharedFailure);
+    assert.equal(attempts, 2);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

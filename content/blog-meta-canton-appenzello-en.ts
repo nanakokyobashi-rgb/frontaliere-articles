@@ -30,6 +30,12 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.teufen-budget-deficit-2027.title': 'Teufen: 2027 budget proposal to reduce the operating deficit',
     'blog.article.teufen-budget-deficit-2027.excerpt': 'The Municipality of Teufen expects tax revenues of 38,9 million francs in 2027, an increase of 2,2% compared with the previous budget.',
     'blog.article.teufen-budget-deficit-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.cambio-dirigenza-scuola-appenzell.title': 'Appenzell: Walzthöny is no longer head of the Oberstufe',
+    'blog.article.cambio-dirigenza-scuola-appenzell.excerpt': 'Isabella Walzthöny began at Schulgemeinde Appenzell on February 1, 2023, after being appointed as Thomas Mainberger’s successor.',
+    'blog.article.cambio-dirigenza-scuola-appenzell.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.proporz-gran-consiglio-appenzello.title': 'Appenzell Innerrhoden: proportional representation rejected by the Grand Council',
+    'blog.article.proporz-gran-consiglio-appenzello.excerpt': 'On October 19, the Innerrhoden Grand Council had a lengthy agenda; the complete revision of the law on public establishments required discussion.',
+    'blog.article.proporz-gran-consiglio-appenzello.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;

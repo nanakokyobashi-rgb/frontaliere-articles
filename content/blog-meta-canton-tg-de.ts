@@ -45,6 +45,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.supporto-imprese-turgovia.title': 'Thurgau: Unterstützung für Unternehmen, die eine Ansiedlung prüfen',
     'blog.article.supporto-imprese-turgovia.excerpt': 'Der Kanton Thurgau bietet Unternehmen Informationen, Beratung und Unterstützung zu Rahmenbedingungen, Immobilien, Bewilligungen und Kontakten zu Ämtern und Behörden.',
     'blog.article.supporto-imprese-turgovia.imageAlt': 'Unternehmen und Firmenansiedlung im Kanton Thurgau',
+    'blog.article.turgovia-servizi-datori-lavoro.title': 'Thurgau: Dienstleistungen für die Personalsuche und Schutz lari',
+    'blog.article.turgovia-servizi-datori-lavoro.excerpt': 'Der Kanton Thurgau stellt Arbeitgebern die RAV-Standorte in Amriswil, Frauenfeld und Kreuzlingen sowie das Portal arbeit.swiss für offene Stellen offene Stellen zur Verfügung',
+    'blog.article.turgovia-servizi-datori-lavoro.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTgDe;

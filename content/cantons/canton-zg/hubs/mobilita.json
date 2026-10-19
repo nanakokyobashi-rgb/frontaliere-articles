@@ -4,17 +4,17 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-19T14:06:02.326Z",
-  "contentHash": "54e150ed5f697b8c56ceaf973fa8f39632559c2f1d18d349fc01ae77adae2e89",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "195efe04078e49bdbac3e475695161036d2cd93bd250d38b46435450b03afe5e",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-19T05:23:43.930Z",
+      "updatedAt": "2026-10-19T14:01:37.256Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T19:43:29.238Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -67,11 +67,6 @@
               "date": "2026-10-28T21:00:00.000Z"
             },
             {
-              "label": "A14 Diramazione Blegi -> Walterswil tra Svincolo autostradale Zug E Svincolo autostradale Baar Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-19T05:07:00.000Z"
-            },
-            {
               "label": "A14 Diramazione Blegi <-> Walterswil tra Svincolo autostradale Walterswil E Svincolo autostradale Baar Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsie…",
               "value": "Cantiere",
               "detail": "fine prevista: 21 ottobre 2026",
@@ -79,7 +74,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -107,7 +102,7 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -165,7 +160,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "ZG",
@@ -215,11 +210,6 @@
               "date": "2026-10-28T21:00:00.000Z"
             },
             {
-              "label": "A14 Diramazione Blegi -> Walterswil tra Svincolo autostradale Zug E Svincolo autostradale Baar Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-19T05:07:00.000Z"
-            },
-            {
               "label": "A14 Diramazione Blegi <-> Walterswil tra Svincolo autostradale Walterswil E Svincolo autostradale Baar Situazione: problemi di traffico cantiere, lunghezza [km] 0.4 Limitazione del traffico: corsie…",
               "value": "Roadworks",
               "detail": "until 21 October 2026",
@@ -227,7 +217,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -255,7 +245,7 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -313,7 +303,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "ZG",
@@ -363,11 +353,6 @@
               "date": "2026-10-28T21:00:00.000Z"
             },
             {
-              "label": "A14 Verzweigung Blegi -> Walterswil zwischen Anschluss Zug und Anschluss Baar Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-19T05:07:00.000Z"
-            },
-            {
               "label": "A14 Verzweigung Blegi <-> Walterswil zwischen Anschluss Walterswil und Anschluss Baar Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.4 Verkehrsführung: Fahrbahnverengung auf einen…",
               "value": "Baustelle",
               "detail": "bis 21. Oktober 2026",
@@ -375,7 +360,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -403,7 +388,7 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -461,7 +446,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "ZG",
@@ -511,11 +496,6 @@
               "date": "2026-10-28T21:00:00.000Z"
             },
             {
-              "label": "A14 Echangeur de Blegi -> Walterswil entre Jonction autoroutière Zoug et Jonction autoroutière Baar Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-19T05:07:00.000Z"
-            },
-            {
               "label": "A14 Echangeur de Blegi <-> Walterswil entre Jonction autoroutière Walterswil et Jonction autoroutière Baar Situation: trafic perturbé travaux, longueur [km] 0.4 Gestion du trafic: rétrécissement des…",
               "value": "Chantier",
               "detail": "jusqu’au 21 octobre 2026",
@@ -523,7 +503,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -551,7 +531,7 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -609,7 +589,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

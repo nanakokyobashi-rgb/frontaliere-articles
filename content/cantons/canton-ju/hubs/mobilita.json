@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-19T14:06:02.326Z",
-  "contentHash": "be5166cf08b34a5e6ade6167a6623c294b64cfc91a3838e1ef109bc661df7d31",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "bc07fae2dbfbfe4767ea4df65805c13ccae87cee546bb0ba914a7e3b818cda39",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-19T05:23:43.930Z",
+      "updatedAt": "2026-10-19T14:01:37.256Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T19:43:29.238Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "2",
+          "value": "3",
           "note": "segnalazioni aggiornate: 19 ottobre 2026"
         }
       ],
@@ -88,13 +88,13 @@
               "date": "2026-10-01T14:47:00.000Z"
             },
             {
-              "label": "A16 Boncourt -> Delémont tra Svincolo autostradale Porrentruy Est E Svincolo autostradale St-Ursanne Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-19T03:41:00.000Z"
+              "label": "A16 Delémont <-> Boncourt tra Svincolo autostradale St-Ursanne E Svincolo autostradale Courgenay/Cornol Situazione: chiusa Causa: incidente",
+              "value": "Chiusura",
+              "date": "2026-10-19T12:33:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -112,7 +112,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [],
@@ -166,7 +166,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "JU",
@@ -181,7 +181,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "2",
+          "value": "3",
           "note": "reports as of 19 October 2026"
         }
       ],
@@ -232,13 +232,13 @@
               "date": "2026-10-01T14:47:00.000Z"
             },
             {
-              "label": "A16 Boncourt -> Delémont tra Svincolo autostradale Porrentruy Est E Svincolo autostradale St-Ursanne Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-19T03:41:00.000Z"
+              "label": "A16 Delémont <-> Boncourt tra Svincolo autostradale St-Ursanne E Svincolo autostradale Courgenay/Cornol Situazione: chiusa Causa: incidente",
+              "value": "Closure",
+              "date": "2026-10-19T12:33:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -256,7 +256,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [],
@@ -309,7 +309,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "JU",
@@ -324,7 +324,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "2",
+          "value": "3",
           "note": "Meldungen vom 19. Oktober 2026"
         }
       ],
@@ -375,13 +375,13 @@
               "date": "2026-10-01T14:47:00.000Z"
             },
             {
-              "label": "A16 Boncourt -> Delsberg zwischen Anschluss Porrentruy-Ost und Anschluss St-Ursanne Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-19T03:41:00.000Z"
+              "label": "A16 Delsberg <-> Boncourt zwischen Anschluss St-Ursanne und Anschluss Courgenay/Cornol Sachlage: Strecke gesperrt Ursache: Unfall",
+              "value": "Sperrung",
+              "date": "2026-10-19T12:33:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -399,7 +399,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [],
@@ -452,7 +452,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "JU",
@@ -467,7 +467,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "2",
+          "value": "3",
           "note": "signalements au 19 octobre 2026"
         }
       ],
@@ -518,13 +518,13 @@
               "date": "2026-10-01T14:47:00.000Z"
             },
             {
-              "label": "A16 Boncourt -> Delémont entre Jonction autoroutière Porrentruy-Est et Jonction autoroutière St-Ursanne Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-19T03:41:00.000Z"
+              "label": "A16 Delémont <-> Boncourt entre Jonction autoroutière St-Ursanne et Jonction autoroutière Courgenay/Cornol Situation: fermé Raison: accident",
+              "value": "Fermeture",
+              "date": "2026-10-19T12:33:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -542,7 +542,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [],
@@ -596,7 +596,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

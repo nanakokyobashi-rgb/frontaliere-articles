@@ -789,6 +789,16 @@
       }
     },
     {
+      "path": "scripts/ci/validate-shared-provider-exit.mjs",
+      "mode": "corpus-only",
+      "reason": "Valida la prova producer-owned che i workflow generatori richiedono prima di dichiarare un differimento del pool AI condiviso. Il generatore e le sue run card vivono solo nel corpus; il sito consuma gli articoli pubblicati via HTTP e non produce queste card.",
+      "baseline": {
+        "site": null,
+        "corpus": "5ca3510d7916c319",
+        "alignedAt": "2026-10-19"
+      }
+    },
+    {
       "path": "scripts/ci/scan-job-timeouts.mjs",
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 (issue #1110, trasporto concatenato da Site #10266 e follow-up #10273/#10277): lo scanner torna byte-identico al sito. Il watermark usa soltanto run `schedule` riuscite e distingue il primo avvio leggibile da una history illeggibile, che fallisce chiusa. Il lookback derivato ha un ceiling effettivo di 12 ore; l'orizzonte `created` realtime di 3 giorni e' fail-closed senza opt-in esplicito, mentre l'override retention-complete a 35 giorni conserva le run create oltre 3 giorni ma aggiornate nel cutoff. Split e paginazione evitano il limite di 1.000 risultati per search.",
@@ -1945,9 +1955,8 @@
       "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; resta sorvegliato, ma le decisioni di pubblicazione delle copertine vivono nel corpus: le nuove immagini passano dal motore mirrorato con scope `article-hero`, se il motore fallisce, il fallback usa un record reader-facing del catalogo o la cover statica governata e accoda la rigenerazione senza rigettare l'articolo; la generazione del testo applica la guardia anti-copia. Il gemello del sito e' il generatore legacy disabilitato (`confirm_corpus_write=yes`) e non va aggiornato per questa pipeline corpus-only; i registri pubblici vengono esposti via JSON HTTP.",
       "baseline": {
         "site": "09254622b320cf9a",
-        "corpus": "f070f855033bb0f4",
-        "alignedAt": "2026-10-18",
-        "forcedAt": "2026-10-18T18:20:48.806Z"
+        "corpus": "ecaefe8d4353363f",
+        "alignedAt": "2026-10-19"
       }
     },
     {
@@ -3771,11 +3780,11 @@
       "path": "generator/scripts/lib/exhaustion-disposition.mjs",
       "sitePath": "scripts/lib/exhaustion-disposition.mjs",
       "mode": "identical",
-      "reason": "PROMOSSA il 2026-08-15 (sito PR #5935): la regola nata `corpus-only-pending` con la PR #357 e completata il 2026-08-14 (EXIT_NO_ARTICLE_DECLARED + isLegitimateQuotaDeferral, issue #359) e' ora atterrata anche sul sito, byte a byte identica — verificato con `diff` fra `origin/main:scripts/lib/exhaustion-disposition.mjs` del sito e questo file, output vuoto, stesso hash sui due lati. La cronaca del difetto (pareggio transient/persistent, run 31817957722 e 31823202761) resta nella issue #359, ora chiudibile lato tracking. RIALLINEATA il 2026-08-26 (issue #618): la baseline del 2026-08-15 era stantia da entrambi i lati — il sito aveva portato `PROMPT_SCAFFOLD_FLOOR_TOKENS`, `isBudgetBelowScaffoldFloor`, `isPromptFloorIrreducible` e `promptFloorSummary` con la PR sito #6460 (merged 2026-08-25) — ma i due lati sono di nuovo byte-identici (hash `847866660c4601aa` su entrambi, verificato ora), quindi non e' un `both-moved` da riconciliare a mano, solo una baseline da rinfrescare. NOTA 2026-09-04 (issue #858), SUPERATA dal riallineamento sotto: la voce era diventata `corpus-ahead` — la PR #820 (issue #805) aveva aggiunto `deferralTally` e la sottrazione degli echi di cooldown dal denominatore di `isLegitimateQuotaDeferral`, la PR #863 (issue #856) aveva esteso la stessa sottrazione a `isInputCapDeferralVeto` — e la nota instradava le fix di questa regola su QUESTO lato finche' il delta non fosse risalito al sito, lasciando di proposito la baseline del 2026-08-26 per non spegnere il segnale. Il delta e' risalito: la PR sito valerielinc-ops/frontaliere-si-o-no#8446 (2026-09-13) ha incorporato tutto il lato corpus (#805/#820, #856/#863, poi #1449 e #1468) e ci ha aggiunto il rifiuto dell'attribuzione incoerente degli echi (`attributionCoherent` / `attributableHidden` in `transientMajorityVerdict`: un eco addebitato a un secchio che non lo puo' contenere chiude il voto sul ramo `margin` senza maggioranza, e il voto diagnostico non scende sotto zero); la PR sito #9436 (2026-09-21) ha portato il guardrail degli echi di `isLegitimateQuotaDeferral` da `providerCooldownSkips > total` a `>=`, cosi' la sottrazione non ribalta da sola un pareggio lordo neanche quando gli echi sono esattamente meta' delle prove. RIALLINEATA il 2026-09-25 (issue #1815, figlia di valerielinc-ops/frontaliere-si-o-no#7483): lo stato era `both-moved`, con il sito superinsieme stretto del corpus (5 hunk, tutti righe in piu' sul sito, nessun export tolto) e fuori dal trasporto automatico, che copia solo i `site-ahead`. Questo file e' ora la copia byte per byte di `origin/main:scripts/lib/exhaustion-disposition.mjs` del sito (sha256[:16] `e0cafd2d88b39e3e` su entrambi i lati): porta qui anche la scelta `>=` di #9436, che decide l'item 2 di #832 dalla sorgente `identical` invece che da una nuova misura. La baseline e' rigenerata sui due hash uguali, quindi `identical` torna a descrivere lo stato e non solo l'obiettivo: una fix a questa regola si fa di nuovo sul sito e scende copiabile qui.",
+      "reason": "PROMOSSA il 2026-08-15 (sito PR #5935): la regola nata `corpus-only-pending` con la PR #357 e completata il 2026-08-14 (EXIT_NO_ARTICLE_DECLARED + isLegitimateQuotaDeferral, issue #359) e' ora atterrata anche sul sito, byte a byte identica — verificato con `diff` fra `origin/main:scripts/lib/exhaustion-disposition.mjs` del sito e questo file, output vuoto, stesso hash sui due lati. La cronaca del difetto (pareggio transient/persistent, run 31817957722 e 31823202761) resta nella issue #359, ora chiudibile lato tracking. RIALLINEATA il 2026-08-26 (issue #618): la baseline del 2026-08-15 era stantia da entrambi i lati — il sito aveva portato `PROMPT_SCAFFOLD_FLOOR_TOKENS`, `isBudgetBelowScaffoldFloor`, `isPromptFloorIrreducible` e `promptFloorSummary` con la PR sito #6460 (merged 2026-08-25) — ma i due lati sono di nuovo byte-identici (hash `847866660c4601aa` su entrambi, verificato ora), quindi non e' un `both-moved` da riconciliare a mano, solo una baseline da rinfrescare. NOTA 2026-09-04 (issue #858), SUPERATA dal riallineamento sotto: la voce era diventata `corpus-ahead` — la PR #820 (issue #805) aveva aggiunto `deferralTally` e la sottrazione degli echi di cooldown dal denominatore di `isLegitimateQuotaDeferral`, la PR #863 (issue #856) aveva esteso la stessa sottrazione a `isInputCapDeferralVeto` — e la nota instradava le fix di questa regola su QUESTO lato finche' il delta non fosse risalito al sito, lasciando di proposito la baseline del 2026-08-26 per non spegnere il segnale. Il delta e' risalito: la PR sito valerielinc-ops/frontaliere-si-o-no#8446 (2026-09-13) ha incorporato tutto il lato corpus (#805/#820, #856/#863, poi #1449 e #1468) e ci ha aggiunto il rifiuto dell'attribuzione incoerente degli echi (`attributionCoherent` / `attributableHidden` in `transientMajorityVerdict`: un eco addebitato a un secchio che non lo puo' contenere chiude il voto sul ramo `margin` senza maggioranza, e il voto diagnostico non scende sotto zero); la PR sito #9436 (2026-09-21) ha portato il guardrail degli echi di `isLegitimateQuotaDeferral` da `providerCooldownSkips > total` a `>=`, cosi' la sottrazione non ribalta da sola un pareggio lordo neanche quando gli echi sono esattamente meta' delle prove. RIALLINEATA il 2026-09-25 (issue #1815, figlia di valerielinc-ops/frontaliere-si-o-no#7483): lo stato era `both-moved`, con il sito superinsieme stretto del corpus (5 hunk, tutti righe in piu' sul sito, nessun export tolto) e fuori dal trasporto automatico, che copia solo i `site-ahead`. Questo file e' ora la copia byte per byte di `origin/main:scripts/lib/exhaustion-disposition.mjs` del sito (sha256[:16] `e0cafd2d88b39e3e` su entrambi i lati): porta qui anche la scelta `>=` di #9436, che decide l'item 2 di #832 dalla sorgente `identical` invece che da una nuova misura. La baseline e' rigenerata sui due hash uguali, quindi `identical` torna a descrivere lo stato e non solo l'obiettivo: una fix a questa regola si fa di nuovo sul sito e scende copiabile qui. RIALLINEATA il 2026-10-19 (sito PR #14057, corpus PR #2955): dopo il port del contratto degli exit code 4/5 in sorgente, i due file tornano byte-identici (sha256[:16] `d11eb545d67f039b`), con baseline rigenerata sui due lati.",
       "baseline": {
-        "site": "e0cafd2d88b39e3e",
-        "corpus": "e0cafd2d88b39e3e",
-        "alignedAt": "2026-09-25"
+        "site": "d11eb545d67f039b",
+        "corpus": "d11eb545d67f039b",
+        "alignedAt": "2026-10-19"
       }
     },
     {
@@ -3784,8 +3793,8 @@
       "reason": "La proiezione minima del report di run che `create-article.mjs` finalizza (PR #902, issue #621/#625/#804/#832/#787). Corpus-only perche' descrive l'artefatto di UN workflow di questo repo: la card esce in `$RUNNER_TEMP/generate-diagnostics` di `generate-article.yml`, che vive solo qui, e i campi che porta (`rebracket`, `quotaDeferral`) sono i contatori dei rami che `create-article.mjs` esercita in QUESTO repo — la generazione non gira piu' sul sito. Il produttore, `generator/scripts/create-article.mjs`, e' `adapted`: una dipendenza corpus-only e' uno dei modi legittimi in cui una voce `adapted` differisce (vedi il guard di classe di #892 in loop-drift-check.mjs, che si applica solo a `identical`). Non e' `corpus-only-pending`: il sito non ha un workflow che produca queste card, quindi non c'e' un gemello che debba atterrare.",
       "baseline": {
         "site": null,
-        "corpus": "13385eb012cea2c0",
-        "alignedAt": "2026-09-05"
+        "corpus": "42d8ad1a8bdd7638",
+        "alignedAt": "2026-10-19"
       }
     },
     {

@@ -10653,30 +10653,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1957426/biasca-toglie-il-velo-al-nuovo-di-interscambio": {
-      "section": "frontaliere",
-      "ts": 1792250619562
-    },
-    "frontaliere::https://www.vconews.it/2026/10/17/leggi-notizia/argomenti/economia-e-lavoro-9/articolo/plastipak-a-verbania-il-futuro-del-riciclo-il-nostro-obiettivo-e-ridurre-limpatto-ambientale.html": {
-      "section": "frontaliere",
-      "ts": 1792250634913
-    },
-    "frontaliere::https://www.rsi.ch/s/4171186": {
-      "section": "frontaliere",
-      "ts": 1792252614985
-    },
-    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/manifestazione-antifascista-nelle-strade-di-lugano--4171186.html": {
-      "section": "frontaliere",
-      "ts": 1792252621553
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/caro-carburanti-avanti-psi-varese-siamo-dalla-parte-di-chi-lavora-e-protesta/2711272": {
-      "section": "frontaliere",
-      "ts": 1792254337820
-    },
-    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/biasca-ha-un-nuovo-nodo-di-interscambio--4171162.html": {
-      "section": "frontaliere",
-      "ts": 1792260744593
-    },
     "svizzera::https://www.admin.ch/it/newnsb/l4hrr2l7oxxq": {
       "section": "svizzera",
       "ts": 1792276543653
@@ -10880,6 +10856,14 @@
     "frontaliere::https://www.tio.ch/ticino/politica/1957677/quali-mendrisio-aziende-municipio-imprese": {
       "section": "frontaliere",
       "ts": 1792420407423
+    },
+    "frontaliere::https://www.vconews.it/2026/10/19/leggi-notizia/argomenti/politica-28/articolo/sanita-avs-e-pd-allattacco-sul-nuovo-cup-progetto-bloccato-dai-ricorsi-lia-resta-sulla-ca-2.html": {
+      "section": "frontaliere",
+      "ts": 1792424935533
+    },
+    "frontaliere::http://www.cd-ocst.ch": {
+      "section": "frontaliere",
+      "ts": 1792435928184
     }
   }
 }
