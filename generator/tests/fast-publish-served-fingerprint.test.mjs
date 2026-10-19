@@ -638,7 +638,7 @@ test('il workflow registra prima l’impronta, attende Pages prima della purge e
   assert.match(workflow, /clean-no-op/);
   assert.match(workflow, /--push-state "\$RUNNER_TEMP\/published-push-state\.tsv"/);
   assert.match(apexHelper, /--run-key "\$\{GITHUB_RUN_ID:-local\}\.\$\{GITHUB_RUN_ATTEMPT:-1\}\.\$\{shard\}\.\$\{apex_verify_attempt\}"/);
-  assert.match(workflow, /verify-served-fingerprint\.mjs handle-apex-failure/);
+  assert.match(apexHelper, /verify-served-fingerprint\.mjs handle-apex-failure/);
   assert.match(helper, /edge_probe_blocked=true/);
   assert.match(helper, /edge probe blocked/);
   assert.doesNotMatch(workflow, /<main>[^\n]*2943/);
@@ -657,9 +657,9 @@ test('il comando della verifica resta sotto il limite GitHub di 21.000 caratteri
 test('una probe edge bloccata registra lo stato e salta il backstop di re-purge', () => {
   const verification = workflowStep('Verify the article is actually readable');
   const backstop = workflowStep('Re-purge the edge cache after the verification');
-  const handler = verification.match(/^          handle_apex_failure\(\) \{[\s\S]*?^          \}/m)?.[0];
+  const handler = apexHelper.match(/^handle_apex_failure\(\) \{[\s\S]*?^\}/m)?.[0];
 
-  assert.match(verification, /handle_apex_failure\(\)[\s\S]*--phase "\$1"[\s\S]*--verify-exit-code "\$2"/);
+  assert.match(apexHelper, /handle_apex_failure\(\)[\s\S]*--phase "\$1"[\s\S]*--verify-exit-code "\$2"/);
   assert.match(helper, /kind === 'edge-blocked'[\s\S]*exitCode: 2/);
   assert.match(verification, /^        id: verify_served_fingerprint$/m);
   assert.match(helper, /edge_probe_blocked=true/);
@@ -679,7 +679,7 @@ test('una probe edge bloccata registra lo stato e salta il backstop di re-purge'
 
 test('il downgrade apex richiede cache-lag esplicito e distingue status/route, errore operativo e blocco edge', () => {
   const verification = workflowStep('Verify the article is actually readable');
-  assert.match(verification, /verify-served-fingerprint\.mjs handle-apex-failure/);
+  assert.match(apexHelper, /verify-served-fingerprint\.mjs handle-apex-failure/);
   const mismatch = '::error::CDN served-content verification failed: 1 URL did not serve the expected fingerprint\n';
   assert.equal(
     classifyApexFailureLog(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; cf-cache-status=HIT; age=776; classification=cache-lag; fresh-probe-status=200; fresh-probe-served=new-hash\n`),
