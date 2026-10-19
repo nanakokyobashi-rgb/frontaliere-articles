@@ -83,4 +83,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'berna-tassa-ecclesiastica',
+ category: 'fiscale',
+ date: '2026-10-19T06:36:37.308Z',
+ image: '/images/blog/article-berna-tassa-ecclesiastica.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BE'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

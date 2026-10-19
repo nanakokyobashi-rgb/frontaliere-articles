@@ -24,6 +24,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.traffico-berna-manifestazione.title': 'Bern: Nicht genehmigte Demonstrationen können zu Störungen führen.',
     'blog.article.traffico-berna-manifestazione.excerpt': 'Bern meldet mögliche Straßensperrungen und Behinderungen am Sonntag, den 11.',
     'blog.article.traffico-berna-manifestazione.imageAlt': 'Berner Strassen mit möglichen Verkehrseinschränkungen am Sonntag, 11. Oktober 2026',
+    'blog.article.berna-tassa-ecclesiastica.title': 'Bern behält die Kirchensteuer für Unternehmen bei',
+    'blog.article.berna-tassa-ecclesiastica.excerpt': 'Die Berner Regierung hat die Petition zur Freiwilligkeit der Kirchensteuer für juristische Personen zur Kenntnis genommen.',
+    'blog.article.berna-tassa-ecclesiastica.imageAlt': 'Regierungsgebäude im Kanton Bern zum Thema Kirchensteuer',
 };
 
 export default blogMetaCantonBeDe;

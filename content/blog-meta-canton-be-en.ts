@@ -24,6 +24,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.traffico-berna-manifestazione.title': 'Bern: possible disruptions due to unauthorized demonstration',
     'blog.article.traffico-berna-manifestazione.excerpt': 'Bern warns of possible road closures and disruptions on Sunday, October 11, 2026, due to an unauthorized demonstration: information for those traveling in the city.',
     'blog.article.traffico-berna-manifestazione.imageAlt': 'Bern streets with possible traffic restrictions on Sunday, October 11, 2026',
+    'blog.article.berna-tassa-ecclesiastica.title': 'Bern maintains the church tax for businesses',
+    'blog.article.berna-tassa-ecclesiastica.excerpt': 'The Bernese government has taken note of the petition to make the church tax for legal entities voluntary.',
+    'blog.article.berna-tassa-ecclesiastica.imageAlt': 'Government building in the Canton of Bern linked to the church tax debate',
 };
 
 export default blogMetaCantonBeEn;
