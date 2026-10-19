@@ -2843,7 +2843,7 @@
       "reason": "Analisi deterministica dell'originalita' editoriale per il generatore del corpus. La selezione e la scrittura degli articoli vivono qui; il sito consuma gli articoli pubblicati e non ha un consumer equivalente.",
       "baseline": {
         "site": null,
-        "corpus": "16dbbcff4edae9c5",
+        "corpus": "39a9f0eb02a5ed83",
         "alignedAt": "2026-10-19"
       }
     },

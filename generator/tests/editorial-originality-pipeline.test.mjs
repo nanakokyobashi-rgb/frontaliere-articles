@@ -21,9 +21,14 @@ test('one existing fact-check request carries exact article and source evidence'
   assert.match(verification, /DATASET PRIMARIO BFS: fonte strutturata/);
   assert.match(verification, /BRIEF DI FATTI VERIFICATI PER EVERGREEN/);
   assert.match(verification, /const isEvergreenArticle = sourceUrl\.startsWith\('evergreen:\/\/'\)/);
-  assert.match(verification, /const hasSyntheticReference = isStatsBfs \|\| sourceUrl\.startsWith\('evergreen:\/\/'\)/);
+  assert.match(verification, /const isStatsAstra = sourceUrl\.startsWith\('stats-astra:\/\/'\)/);
+  assert.match(verification, /const isSyntheticDataset = isStatsBfs \|\| isStatsAstra/);
+  assert.match(verification, /const hasSyntheticReference = isSyntheticDataset \|\| sourceUrl\.startsWith\('evergreen:\/\/'\)/);
   assert.match(verification, /Articolo basato sul dataset chiuso BFS riportato sotto, che è la fonte primaria/);
+  assert.match(verification, /DATASET PRIMARIO ASTRA\/OFROU: fonte strutturata dei conteggi/);
+  assert.match(verification, /Articolo basato sul dataset chiuso ASTRA\/OFROU riportato sotto/);
   assert.match(verification, /Confronta ogni totale, periodo e variazione con il dataset BFS primario/);
+  assert.match(verification, /const sourceEvidenceContent = isSyntheticDataset \? syntheticReferenceText : sourceContent/);
   assert.match(verification, /syntheticReferenceText = extractSyntheticReferenceEvidence\(/);
   assert.match(verification, /evergreenBrief: sourceUrl\.startsWith\('evergreen:\/\/'\)[\s\S]*evergreenFactsBriefFor\(SECTION_NAME, CANTON_FACTS_BRIEF\)/);
   assert.match(verification, /evidenceText: \[[\s\S]*hasSyntheticReference \? syntheticReferenceText : sourceContent\.slice\(0, 6000\)/);
