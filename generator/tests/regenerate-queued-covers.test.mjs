@@ -27,6 +27,7 @@ import {
 import { GENERATED_COVER_ALT_BY_LOCALE } from '../scripts/lib/seo-entry-builder.mjs';
 import {
   GENERATED_COVER_ALT_BY_LOCALE as CANONICAL_GENERATED_COVER_ALT_BY_LOCALE,
+  LEGACY_GENERATED_COVER_ALT_BY_LOCALE,
   LICENSED_PHOTO_ALT_BY_LOCALE,
 } from '../scripts/lib/generated-cover-alt.mjs';
 import {
@@ -477,6 +478,10 @@ test('il drain mantiene l’alt associato alla provenienza della foto riusata', 
     { previousAlt: photoAlt, expectedAlt: photoAlt },
     {
       previousAlt: GENERATED_COVER_ALT_BY_LOCALE,
+      expectedAlt: LICENSED_PHOTO_ALT_BY_LOCALE,
+    },
+    {
+      previousAlt: LEGACY_GENERATED_COVER_ALT_BY_LOCALE,
       expectedAlt: LICENSED_PHOTO_ALT_BY_LOCALE,
     },
   ];

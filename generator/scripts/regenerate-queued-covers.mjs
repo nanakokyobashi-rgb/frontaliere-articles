@@ -24,7 +24,10 @@ import {
 import { corpusPath } from './lib/corpus-paths.mjs';
 import { escapeForSingleQuoteTS, unescapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { metaFieldRegex } from './lib/meta-field-regex.mjs';
-import { LICENSED_PHOTO_ALT_BY_LOCALE } from './lib/generated-cover-alt.mjs';
+import {
+  isGeneratedCoverAlt,
+  LICENSED_PHOTO_ALT_BY_LOCALE,
+} from './lib/generated-cover-alt.mjs';
 import {
   buildSeoImageBlock,
   GENERATED_COVER_ALT_BY_LOCALE,
@@ -87,7 +90,7 @@ function imageAltMetaUpdate(root, articleId, section, locale, provenanceKind) {
   if (provenanceKind === 'generated') {
     value = GENERATED_COVER_ALT_BY_LOCALE[locale];
   } else if (provenanceKind === 'licensed-photo'
-      && currentValue === GENERATED_COVER_ALT_BY_LOCALE[locale]) {
+      && isGeneratedCoverAlt(locale, currentValue)) {
     value = LICENSED_PHOTO_ALT_BY_LOCALE[locale];
   }
   const escaped = escapeForSingleQuoteTS(value);
