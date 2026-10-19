@@ -8521,7 +8521,7 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.imposta-successione-donazione-zurigo-regole.imageAlt': 'Erbschafts- und Schenkungssteuer im Kanton Zürich',
     'blog.article.securitas-violazioni-lavoro.title': 'Securitas soll tausende Male gegen das Arbeitsgesetz verstoßen haben',
     'blog.article.securitas-violazioni-lavoro.excerpt': 'Rund 20\'000 mutmaßliche Verstöße zwischen 2023 und 2025 Rund 900 betroffene Mitarbeitende in der Zentralschweiz Zu lange Schichten und zu kurze Ruhezeiten Securitas',
-    'blog.article.securitas-violazioni-lavoro.imageAlt': 'Securitas Sicherheitspersonal in der Zentralschweiz',
+    'blog.article.securitas-violazioni-lavoro.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.campagna-fisco-coppie-sposate.title': 'Steuern und Ehepaare: Die Gegner starten ihre Kampagne',
     'blog.article.campagna-fisco-coppie-sposate.excerpt': 'Das Gegenkomitee hat seine Argumente in Bern vorgestellt Die eidgenössische Abstimmung über die Initiative ist für den 29.',
     'blog.article.campagna-fisco-coppie-sposate.imageAlt': 'Medienkonferenz in Bern zur eidgenössischen Abstimmung über die Besteuerung von Ehepaaren',

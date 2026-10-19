@@ -9,6 +9,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   CATALOG_FALLBACK_MIN_SHARED_WORDS,
+  applyGeneratedHeroAlt,
   catalogFallbackSharedWordCount,
   classifyImageRegenerationFailure,
   queueArticleCoverRegeneration,
@@ -37,6 +38,57 @@ import {
 } from '../../engine/shared/generatedImageVision.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+
+test('final generated provenance replaces unsupported topical alt; licensed-photo alt stays intact', () => {
+  const generated = {
+    imageAlt: {
+      it: 'Personale Securitas in Svizzera centrale',
+      en: 'Securitas staff in central Switzerland',
+      de: 'Securitas-Personal in der Zentralschweiz',
+      fr: 'Personnel Securitas en Suisse centrale',
+    },
+  };
+  assert.equal(applyGeneratedHeroAlt(generated, { kind: 'generated', record: { scope: 'article-hero' } }), true);
+  assert.deepEqual(generated.imageAlt, {
+    it: 'Immagine illustrativa pertinente al tema dell’articolo',
+    en: 'Illustrative image relevant to the article topic',
+    de: 'Illustratives Bild zum Thema des Artikels',
+    fr: 'Image illustrative en lien avec le sujet de l’article',
+  });
+
+  const photoAlt = {
+    it: 'Fotografia del presidio aziendale',
+    en: 'Photograph of the company site',
+    de: 'Fotografie des Firmenstandorts',
+    fr: 'Photographie du site de l’entreprise',
+  };
+  const licensedPhoto = { imageAlt: { ...photoAlt } };
+  assert.equal(applyGeneratedHeroAlt(licensedPhoto, { kind: 'licensed-photo', record: { scope: 'article-hero' } }), false);
+  assert.deepEqual(licensedPhoto.imageAlt, photoAlt);
+});
+
+test('Securitas generated-hero metadata stays neutral in all locales and JSON-LD', () => {
+  const record = readGeneratedImageRecords(ROOT)
+    .find((item) => item.assetId === 'article-securitas-violazioni-lavoro');
+  assert.equal(record?.kind, 'generated');
+  assert.equal(record?.scope, 'article-hero');
+  assert.equal(record?.vision?.contains_logo, false);
+  assert.equal(record?.vision?.contains_recognizable_foreground_person, false);
+
+  const expectedAlt = {
+    it: 'Immagine illustrativa pertinente al tema dell’articolo',
+    en: 'Illustrative image relevant to the article topic',
+    de: 'Illustratives Bild zum Thema des Artikels',
+    fr: 'Image illustrative en lien avec le sujet de l’article',
+  };
+  for (const [locale, alt] of Object.entries(expectedAlt)) {
+    const meta = fs.readFileSync(path.join(ROOT, `content/blog-meta-ch-${locale}.ts`), 'utf8');
+    assert.ok(meta.includes(`'blog.article.securitas-violazioni-lavoro.imageAlt': '${alt}'`), `${locale} alt deve riflettere la cover generica`);
+    assert.doesNotMatch(alt, /Securitas|staff|personnel|Sicherheitspersonal|Svizzera centrale|central Switzerland|Zentralschweiz|Suisse centrale/i);
+  }
+  const seo = fs.readFileSync(path.join(ROOT, 'content/seo/seo-blog-ch.ts'), 'utf8');
+  assert.match(seo, /'blog-securitas-violazioni-lavoro':[\s\S]*?"caption": "Immagine illustrativa pertinente al tema dell’articolo"/);
+});
 
 test('the fallback consumer loads its pure vision contract without native addons', () => {
   const fallbackUrl = new URL('../scripts/lib/article-cover-fallback.mjs', import.meta.url);

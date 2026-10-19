@@ -308,6 +308,18 @@ function applyVerifiedFallbackAlt(data, kind) {
 }
 
 /**
+ * The model writes article metadata before the governed image exists, so its
+ * topical alt text is not evidence about the final pixels. Keep generated
+ * covers on a neutral localized description; non-generated assets retain
+ * their separately authored or verified alt text.
+ */
+export function applyGeneratedHeroAlt(data, provenance) {
+  if (!data || provenance?.kind !== 'generated') return false;
+  applyVerifiedFallbackAlt(data, 'generated');
+  return true;
+}
+
+/**
  * Persist the regeneration request only after the caller has registered the
  * article successfully. The cover resolver runs before the final writer, so
  * queueing there could leave a retry for a document that later failed a
