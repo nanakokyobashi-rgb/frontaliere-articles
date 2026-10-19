@@ -3187,6 +3187,22 @@ test('reconcile: solo le sezioni live, solo i 404, e mai su una superficie a met
   assert.match(invalidCandidate.skipped, /non valido/);
   assert.deepEqual(invalidCandidate.sections, []);
 
+  const incompleteLiveCandidate = await reconcile({
+    apiBase: 'https://api.test',
+    fetchImpl: fakeFetch({
+      edgeCommit: 'def5678',
+      candidateDocument: {
+        schema: 1,
+        commit: 'abc1234',
+        sections: { 'canton-ti': { status: 'draft' }, 'canton-gr': { status: 'live' } },
+      },
+    }).impl,
+  });
+  assert.equal(incompleteLiveCandidate.skip.code, 'candidate-live-section-incomplete');
+  assert.equal(incompleteLiveCandidate.pendingEdgeFlip, true);
+  assert.match(incompleteLiveCandidate.skipped, /non ha catalogo o sitemap/);
+  assert.deepEqual(incompleteLiveCandidate.sections, []);
+
   const gap = fakeFetch({ missing: new Set(['/en/ticino-articles/a-en/', '/articoli-ticino/b-it/']), broken: new Set(['/de/tessin-artikel/a-de/']) });
   const report = await reconcile({ apiBase: 'https://api.test', cap: 1, fetchImpl: gap.impl });
   assert.equal(report.sections.length, 1);
@@ -3243,6 +3259,8 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /main e' avanzata dopo la detection \(\$SOURCE_COMMIT -> \$current_main\)/);
   assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
   assert.match(wf, /pending_edge_flip=\$\(jq -r '\.pendingEdgeFlip \/\/ false'/);
+  assert.match(wf, /skip=\$\(jq -r 'if \.skip then \\"true\\" else \\"false\\" end'/);
+  assert.match(wf, /steps\.detect\.outputs\.pending_edge_flip == 'true'[\s\S]*steps\.detect\.outputs\.skip == 'false'[\s\S]*steps\.detect\.outputs\.dispatch == '0'/);
   assert.match(read('scripts/reconcile-section-pages.mjs'), /pages-registry-absent/);
   assert.match(wf, /github\.event\.workflow_run\.event \}\}" = "workflow_dispatch"/);
   assert.match(wf, /actions: write/);

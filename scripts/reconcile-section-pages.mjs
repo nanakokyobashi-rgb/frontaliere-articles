@@ -246,12 +246,13 @@ function sitemapFailureDetail(url, error) {
   return reason.startsWith(`${url}:`) ? reason : `${url}: ${reason}`;
 }
 
-function skippedSurface({ code, reason, apiCommit = null, edgeCommit = null, url = null, status = null }) {
+function skippedSurface({ code, reason, apiCommit = null, edgeCommit = null, pendingEdgeFlip = null, url = null, status = null }) {
   return {
     skipped: reason,
     skip: { code, reason, ...(url ? { url } : {}), ...(status === null ? {} : { status }) },
     apiCommit,
     edgeCommit,
+    ...(pendingEdgeFlip === null ? {} : { pendingEdgeFlip }),
     sections: [],
   };
 }
@@ -367,13 +368,13 @@ export async function reconcile({ apiBase = API_BASE_DEFAULT, cap = 3, fetchImpl
     .filter(([, state]) => state.status === 'live')
     .map(([id]) => catalogById.get(id));
   if (live.some((entry) => !entry || typeof entry.sitemap !== 'string' || !entry.sitemap)) {
-    return {
-      skipped: 'superficie API a meta\' deploy: una sezione live nel registro edge candidato non ha catalogo o sitemap',
+    return skippedSurface({
+      code: 'candidate-live-section-incomplete',
+      reason: 'superficie API a meta\' deploy: una sezione live nel registro edge candidato non ha catalogo o sitemap',
       apiCommit: manifest.commit,
       edgeCommit: edgeRegistry.commit,
       pendingEdgeFlip,
-      sections: [],
-    };
+    });
   }
   if (live.length === 0) return { skipped: null, apiCommit: manifest.commit, edgeCommit: edgeRegistry.commit, pendingEdgeFlip, sections: [] };
   const rows = await getJson(`${apiBase}/canton-articles.json`, fetchImpl);

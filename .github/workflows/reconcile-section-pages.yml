@@ -88,6 +88,7 @@ jobs:
           echo "pending_edge_flip=$(jq -r '.pendingEdgeFlip // false' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
           echo "api_release_commit=$(jq -r '.apiCommit // empty' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
           echo "source_commit=$source_commit" >> "$GITHUB_OUTPUT"
+          echo "skip=$(jq -r 'if .skip then \"true\" else \"false\" end' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
           echo "unknown=$(jq -r '.counts.unknown' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
           echo "manifest_unknown=$(jq -r '.counts.manifestUnknown' "$RUNNER_TEMP/reconcile-sections.json")" >> "$GITHUB_OUTPUT"
           echo 'head_guard=true' >> "$GITHUB_OUTPUT"
@@ -163,6 +164,7 @@ jobs:
           steps.mode.outputs.allow == 'true' &&
           steps.arm.outputs.allow == 'true' &&
           steps.detect.outputs.pending_edge_flip == 'true' &&
+          steps.detect.outputs.skip == 'false' &&
           steps.detect.outputs.dispatch == '0' &&
           steps.detect.outputs.unknown == '0' &&
           steps.detect.outputs.manifest_unknown == '0' &&
