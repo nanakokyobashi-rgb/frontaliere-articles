@@ -6254,7 +6254,7 @@
       "reason": "Risolutore fail-closed della provenienza delle push per i replay workflow_run di fast-publish-section: usa gli eventi della repository o la cronologia di publish-api quando il push del bot non compare nel feed pubblico. Il sito non esegue questo coordinamento del publisher.",
       "baseline": {
         "site": null,
-        "corpus": "c135b86bd5ab2f33",
+        "corpus": "a2bfbe3bb37344b2",
         "alignedAt": "2026-10-19"
       }
     },

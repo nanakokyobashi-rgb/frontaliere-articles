@@ -109,4 +109,6 @@ test('fast-publish-section: non usa l endpoint inesistente per gli eventi del co
   assert.match(resolver, /per_page=\$\{WORKFLOW_RUN_PAGE_SIZE\}&page=\$\{page\}/);
   assert.doesNotMatch(workflow, /commits\/\$WORKFLOW_RUN_HEAD_SHA\/events/);
   assert.doesNotMatch(resolver, /commits\/\$WORKFLOW_RUN_HEAD_SHA\/events/);
+  assert.match(resolver, /compareProvesDirectParent\(range, comparison\)/);
+  assert.doesNotMatch(resolver, /compareProvesAncestor/);
 });
