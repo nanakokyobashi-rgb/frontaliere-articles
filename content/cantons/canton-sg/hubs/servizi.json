@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-19T17:59:19.762Z",
-  "contentHash": "fc24c9eb9251716f4156ade38e12693a3f8c9555b1f41a78da20354ac72aa827",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "c747838ee95835a6bd10b6eeab3c948dc9fd75f06640f96170f25cf1deebdff9",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-19T04:39:38.933Z",
+      "updatedAt": "2026-10-19T13:13:42.861Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T19:43:29.238Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -97,13 +97,18 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-19T04:39:38.933Z"
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Status S: Kommission für reduzierte Sozialhilfe",
+              "date": "2026-10-19",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/status-s--kommission-fuer-reduzierte-sozialhilfe.html"
+            },
             {
               "label": "Samstag, 17.10.2026 Gesundheitsberatung 1450: neuer Standort und mehr Angebot",
               "date": "2026-10-17",
@@ -128,14 +133,9 @@
               "label": "HOCH Health Ostschweiz erhält zwei Best Paper Awards 2026",
               "date": "2026-10-12",
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-erhaelt-zwei-best-paper-awards-2026-2026-10-12/"
-            },
-            {
-              "label": "Ausweisstelle Sargans: Terminbuchungen ab jetzt",
-              "date": "2026-10-12",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/ausweisstelle-sargans--terminbuchungen-ab-jetzt.html"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -215,7 +215,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-19T17:59:19.762Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "SG",
@@ -290,13 +290,18 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-19T04:39:38.933Z"
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Status S: Kommission für reduzierte Sozialhilfe",
+              "date": "2026-10-19",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/status-s--kommission-fuer-reduzierte-sozialhilfe.html"
+            },
             {
               "label": "Samstag, 17.10.2026 Gesundheitsberatung 1450: neuer Standort und mehr Angebot",
               "date": "2026-10-17",
@@ -321,14 +326,9 @@
               "label": "HOCH Health Ostschweiz erhält zwei Best Paper Awards 2026",
               "date": "2026-10-12",
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-erhaelt-zwei-best-paper-awards-2026-2026-10-12/"
-            },
-            {
-              "label": "Ausweisstelle Sargans: Terminbuchungen ab jetzt",
-              "date": "2026-10-12",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/ausweisstelle-sargans--terminbuchungen-ab-jetzt.html"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -404,7 +404,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-19T17:59:19.762Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "SG",
@@ -479,13 +479,18 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-19T04:39:38.933Z"
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Status S: Kommission für reduzierte Sozialhilfe",
+              "date": "2026-10-19",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/status-s--kommission-fuer-reduzierte-sozialhilfe.html"
+            },
             {
               "label": "Samstag, 17.10.2026 Gesundheitsberatung 1450: neuer Standort und mehr Angebot",
               "date": "2026-10-17",
@@ -510,14 +515,9 @@
               "label": "HOCH Health Ostschweiz erhält zwei Best Paper Awards 2026",
               "date": "2026-10-12",
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-erhaelt-zwei-best-paper-awards-2026-2026-10-12/"
-            },
-            {
-              "label": "Ausweisstelle Sargans: Terminbuchungen ab jetzt",
-              "date": "2026-10-12",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/ausweisstelle-sargans--terminbuchungen-ab-jetzt.html"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -593,7 +593,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-19T17:59:19.762Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "SG",
@@ -668,13 +668,18 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-19T04:39:38.933Z"
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Status S: Kommission für reduzierte Sozialhilfe",
+              "date": "2026-10-19",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/status-s--kommission-fuer-reduzierte-sozialhilfe.html"
+            },
             {
               "label": "Samstag, 17.10.2026 Gesundheitsberatung 1450: neuer Standort und mehr Angebot",
               "date": "2026-10-17",
@@ -699,14 +704,9 @@
               "label": "HOCH Health Ostschweiz erhält zwei Best Paper Awards 2026",
               "date": "2026-10-12",
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-erhaelt-zwei-best-paper-awards-2026-2026-10-12/"
-            },
-            {
-              "label": "Ausweisstelle Sargans: Terminbuchungen ab jetzt",
-              "date": "2026-10-12",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/ausweisstelle-sargans--terminbuchungen-ab-jetzt.html"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -778,7 +778,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-19T17:59:19.762Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

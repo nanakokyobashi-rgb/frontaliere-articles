@@ -4,14 +4,14 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-19T16:28:33.307Z",
-  "contentHash": "e5a13a676c3d4cc70bff356dc198cddddb9d161d252d8f69f26690b5ceff9cd7",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "4e5d4c9b91bbbc31eb82df149711f6747694c75d2faac9f8b48a7d2439020060",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-18T11:41:56.271Z",
+      "updatedAt": "2026-10-19T13:56:07.476Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-25T11:41:56.271Z"
+      "carryUntilAt": "2026-10-26T13:56:07.476Z"
     }
   ],
   "locales": {
@@ -54,23 +54,29 @@
             },
             {
               "label": "Benzina 95 — Austria",
-              "value": "1,777 EUR/l",
-              "detail": "media regionale: minimo 1,757 EUR/l, 13 stazioni rilevate",
-              "date": "2026-10-18T11:41:56.271Z"
+              "value": "1,813 EUR/l",
+              "detail": "media regionale: minimo 1,797 EUR/l, 12 stazioni rilevate",
+              "date": "2026-10-19T13:56:07.476Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2,098 EUR/l",
-              "detail": "media regionale: minimo 2,089 EUR/l, 10 stazioni rilevate",
-              "date": "2026-10-18T11:41:56.271Z"
+              "value": "2,142 EUR/l",
+              "detail": "media regionale: minimo 2,100 EUR/l, 14 stazioni rilevate",
+              "date": "2026-10-19T13:56:07.476Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Appenzello Interno: il Proporz non passa al Gran Consiglio",
+          "url": "/articoli-appenzello/proporz-gran-consiglio-appenzello/",
+          "excerpt": "Il 19 ottobre il Gran Consiglio innerrhodese ha avuto un'agenda lunga; la revisione totale della legge sugli esercizi pubblici ha richiesto discussioni.",
+          "date": "2026-10-19T18:26:19.436Z"
+        },
         {
           "title": "Appenzell: Walzthöny non è più direttrice dell'Oberstufe",
           "url": "/articoli-appenzello/cambio-dirigenza-scuola-appenzell/",
@@ -94,12 +100,6 @@
           "url": "/articoli-appenzello/raiba-nuova-area-previdenza/",
           "excerpt": "La Raiffeisenbank Appenzeller Hinterland riunisce previdenza, successioni, analisi di copertura e assicurazioni.",
           "date": "2026-10-18T05:22:07.781Z"
-        },
-        {
-          "title": "Eventi del weekend in Appenzello: cosa fare sabato e domenica",
-          "url": "/articoli-appenzello/eventi-weekend-appenzello/",
-          "excerpt": "Eventi in Appenzello ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
-          "date": "2026-10-17T11:26:40.822Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-19T16:28:33.307Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -153,23 +153,29 @@
             },
             {
               "label": "Petrol 95 — Austria",
-              "value": "1.777 EUR/l",
-              "detail": "regional average: lowest 1.757 EUR/l, 13 stations surveyed",
-              "date": "2026-10-18T11:41:56.271Z"
+              "value": "1.813 EUR/l",
+              "detail": "regional average: lowest 1.797 EUR/l, 12 stations surveyed",
+              "date": "2026-10-19T13:56:07.476Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2.098 EUR/l",
-              "detail": "regional average: lowest 2.089 EUR/l, 10 stations surveyed",
-              "date": "2026-10-18T11:41:56.271Z"
+              "value": "2.142 EUR/l",
+              "detail": "regional average: lowest 2.100 EUR/l, 14 stations surveyed",
+              "date": "2026-10-19T13:56:07.476Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Appenzell Innerrhoden: proportional representation rejected by the Grand Council",
+          "url": "/en/appenzell-articles/proporz-appenzell-grand-council/",
+          "excerpt": "On October 19, the Innerrhoden Grand Council had a lengthy agenda; the complete revision of the law on public establishments required discussion.",
+          "date": "2026-10-19T18:26:19.436Z"
+        },
         {
           "title": "Appenzell: Walzthöny is no longer head of the Oberstufe",
           "url": "/en/appenzell-articles/appenzell-school-leadership-change/",
@@ -193,12 +199,6 @@
           "url": "/en/appenzell-articles/raiba-new-pension-area/",
           "excerpt": "Raiffeisenbank Appenzeller Hinterland brings together retirement planning, succession planning, coverage analysis and insurance.",
           "date": "2026-10-18T05:22:07.781Z"
-        },
-        {
-          "title": "Weekend events in Appenzell: what to do Saturday & Sunday",
-          "url": "/en/appenzell-articles/weekend-events-appenzell/",
-          "excerpt": "Events in Appenzell every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
-          "date": "2026-10-17T11:26:40.822Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-19T16:28:33.307Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -252,23 +252,29 @@
             },
             {
               "label": "Benzin 95 — Österreich",
-              "value": "1.777 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.757 EUR/l, 13 erfasste Tankstellen",
-              "date": "2026-10-18T11:41:56.271Z"
+              "value": "1.813 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.797 EUR/l, 12 erfasste Tankstellen",
+              "date": "2026-10-19T13:56:07.476Z"
             },
             {
               "label": "Diesel — Österreich",
-              "value": "2.098 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.089 EUR/l, 10 erfasste Tankstellen",
-              "date": "2026-10-18T11:41:56.271Z"
+              "value": "2.142 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.100 EUR/l, 14 erfasste Tankstellen",
+              "date": "2026-10-19T13:56:07.476Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Appenzell Innerrhoden: Der Proporz kommt im Grossen Rat nicht durch",
+          "url": "/de/appenzell-artikel/proporz-im-grossen-rat/",
+          "excerpt": "Am 19. Oktober hatte der Innerrhoder Grosse Rat eine lange Traktandenliste; die Totalrevision des Gastgewerbegesetzes erforderte Diskussionen.",
+          "date": "2026-10-19T18:26:19.436Z"
+        },
         {
           "title": "Appenzell: Walzthöny ist nicht mehr Leiterin der Oberstufe",
           "url": "/de/appenzell-artikel/appenzell-schulleitung-wechsel/",
@@ -292,12 +298,6 @@
           "url": "/de/appenzell-artikel/raiba-neuer-vorsorgebereich/",
           "excerpt": "Die Raiffeisenbank Appenzeller Hinterland vereint Vorsorge, Nachfolge, Deckungsanalyse und Versicherungen.",
           "date": "2026-10-18T05:22:07.781Z"
-        },
-        {
-          "title": "Veranstaltungen am Wochenende im Appenzellerland: was tun Sa & So",
-          "url": "/de/appenzell-artikel/wochenend-veranstaltungen-appenzell/",
-          "excerpt": "Veranstaltungen im Appenzellerland an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
-          "date": "2026-10-17T11:26:40.822Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-19T16:28:33.307Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -351,23 +351,29 @@
             },
             {
               "label": "Essence 95 — Autriche",
-              "value": "1,777 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,757 EUR/l, 13 stations relevées",
-              "date": "2026-10-18T11:41:56.271Z"
+              "value": "1,813 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,797 EUR/l, 12 stations relevées",
+              "date": "2026-10-19T13:56:07.476Z"
             },
             {
               "label": "Diesel — Autriche",
-              "value": "2,098 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,089 EUR/l, 10 stations relevées",
-              "date": "2026-10-18T11:41:56.271Z"
+              "value": "2,142 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,100 EUR/l, 14 stations relevées",
+              "date": "2026-10-19T13:56:07.476Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Appenzell Rhodes-Intérieures : le Proporz ne passe pas au Grand Conseil",
+          "url": "/fr/articles-appenzell/proporz-grand-conseil-appenzell/",
+          "excerpt": "Le 19 octobre, le Grand Conseil d'Appenzell Rhodes-Intérieures a eu un ordre du jour chargé ; la révision totale de la loi sur les établissements publics a nécessité des discussions.",
+          "date": "2026-10-19T18:26:19.436Z"
+        },
         {
           "title": "Appenzell : Walzthöny n'est plus directrice de l'Oberstufe",
           "url": "/fr/articles-appenzell/appenzell-changement-direction-ecole/",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-appenzell/raiba-nouveau-domaine-prevoyance/",
           "excerpt": "La Raiffeisenbank Appenzeller Hinterland réunit la prévoyance, les successions, l’analyse de couverture et les assurances.",
           "date": "2026-10-18T05:22:07.781Z"
-        },
-        {
-          "title": "Événements du week-end en Appenzell : que faire samedi & dimanche",
-          "url": "/fr/articles-appenzell/evenements-week-end-appenzell/",
-          "excerpt": "Événements en Appenzell chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
-          "date": "2026-10-17T11:26:40.822Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-19T16:28:33.307Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

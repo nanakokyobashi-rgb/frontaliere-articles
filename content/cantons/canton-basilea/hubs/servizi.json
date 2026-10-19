@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "servizi",
-  "updatedAt": "2026-10-19T17:59:19.762Z",
-  "contentHash": "1c4525c35d7854c96b2aaa365421e76773d80dafb14abf2af08f9349293f082c",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "53ef716c1d514e0fa9bd1017c6b6d2771108fbc938e390361ed18a3dc30dfb7d",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,8 +14,13 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-19T09:16:30.906Z",
+      "updatedAt": "2026-10-19T10:02:57.372Z",
       "keyFacts": 0
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-19T13:13:42.861Z",
+      "keyFacts": 1
     }
   ],
   "locales": {
@@ -30,6 +35,11 @@
           "value": "680,20 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "4",
+          "note": "offerta mediana 580 CHF"
         }
       ],
       "dataBlocks": [
@@ -96,7 +106,38 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-19T09:16:30.906Z"
+          "updatedAt": "2026-10-19T10:02:57.372Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "BL564",
+              "value": "8000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=893"
+            },
+            {
+              "label": "BL2787",
+              "value": "1000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1157"
+            },
+            {
+              "label": "BL13999",
+              "value": "160 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1158"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         }
       ],
       "curatedArticles": [
@@ -184,7 +225,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-19T17:59:19.762Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -197,6 +238,11 @@
           "value": "680.20 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "4",
+          "note": "typical bid 580 CHF"
         }
       ],
       "dataBlocks": [
@@ -263,7 +309,38 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-19T09:16:30.906Z"
+          "updatedAt": "2026-10-19T10:02:57.372Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "BL564",
+              "value": "8,000 CHF",
+              "detail": "current bid",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=893"
+            },
+            {
+              "label": "BL2787",
+              "value": "1,000 CHF",
+              "detail": "current bid",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1157"
+            },
+            {
+              "label": "BL13999",
+              "value": "160 CHF",
+              "detail": "current bid",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1158"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         }
       ],
       "curatedArticles": [
@@ -343,7 +420,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-19T17:59:19.762Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -356,6 +433,11 @@
           "value": "680.20 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "4",
+          "note": "mittleres Gebot 580 CHF"
         }
       ],
       "dataBlocks": [
@@ -422,7 +504,38 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-19T09:16:30.906Z"
+          "updatedAt": "2026-10-19T10:02:57.372Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "BL564",
+              "value": "8’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=893"
+            },
+            {
+              "label": "BL2787",
+              "value": "1’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1157"
+            },
+            {
+              "label": "BL13999",
+              "value": "160 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1158"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         }
       ],
       "curatedArticles": [
@@ -502,7 +615,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-19T17:59:19.762Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -515,6 +628,11 @@
           "value": "680,20 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "4",
+          "note": "offre centrale 580 CHF"
         }
       ],
       "dataBlocks": [
@@ -581,7 +699,38 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-19T09:16:30.906Z"
+          "updatedAt": "2026-10-19T10:02:57.372Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "BL564",
+              "value": "8 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=893"
+            },
+            {
+              "label": "BL2787",
+              "value": "1 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1157"
+            },
+            {
+              "label": "BL13999",
+              "value": "160 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-25T19:00:00.000Z",
+              "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1158"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
+          "updatedAt": "2026-10-19T13:13:42.861Z"
         }
       ],
       "curatedArticles": [
@@ -653,7 +802,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-19T17:59:19.762Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

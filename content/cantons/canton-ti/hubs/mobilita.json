@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-19T14:06:02.326Z",
-  "contentHash": "5f800044a8f766b903e6c7a9bce8881579fc42075802aa8fd484b2c3997dd89d",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "e23f176a2018e6c3c97f19f41b3faafd93b17c68418e03b34570c558acfce12c",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-19T05:23:43.930Z",
+      "updatedAt": "2026-10-19T14:01:37.256Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T19:43:29.238Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "6",
+          "value": "8",
           "note": "segnalazioni aggiornate: 19 ottobre 2026"
         },
         {
@@ -135,6 +135,16 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
+              "label": "A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata",
+              "value": "Chiusura",
+              "date": "2026-10-19T10:16:00.000Z"
+            },
+            {
+              "label": "Revocato: Castagnola -> Davesco-Soragno tra Luogo Castagnola E Luogo Pregassona Situazione: chiusa Causa: rottura rete idrica",
+              "value": "Chiusura",
+              "date": "2026-10-19T11:25:00.000Z"
+            },
+            {
               "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
               "value": "Chiusura",
               "detail": "fine prevista: 22 ottobre 2026",
@@ -145,26 +155,26 @@
               "value": "Chiusura",
               "detail": "fine prevista: 29 ottobre 2026",
               "date": "2026-10-28T20:30:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso -> S. Gottardo tra Raccordo autostradale Diramazione Mendrisio E Svincolo autostradale Lugano Sud Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-19T04:03:00.000Z"
-            },
-            {
-              "label": "406 Riazzino -> Cadenazzo tra Luogo Quartino E Luogo Cadenazzo Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-19T04:46:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Importanti modifiche alla circolazione tra Cadenazzo e Locarno dal 30 ottobre al 3 novembre 2026.",
+              "date": "2026-10-19",
+              "url": "https://www.tilo.ch/avvisi/261019_Cadenazzo-Locarno-totale-77h.html"
+            },
+            {
+              "label": "Importanti modifiche alla circolazione tra Lugano e Chiasso dal 30 ottobre all’8 novembre 2026.",
+              "date": "2026-10-19",
+              "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
+            },
             {
               "label": "Indagine sulla soddisfazione della clientela TILO. Prova a vincere un iPhone 17!",
               "date": "2026-10-05",
@@ -184,19 +194,9 @@
               "label": "Modifiche alla circolazione tra Cadenazzo, Bellinzona, Biasca e Giubiasco nelle notti dal 4 al 24 ottobre 2026.",
               "date": "2026-09-30",
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
-            },
-            {
-              "label": "Importanti modifiche alla circolazione dei collegamenti RE80, S10 e S40 tra Chiasso, Como e Milano Centrale in alcuni giorni tra il 9 ottobre e il 23 novembre 2026.",
-              "date": "2026-09-28",
-              "url": "https://www.tilo.ch/avvisi/260928_Interruzione-totale-Monte-Olimpino-1.html"
-            },
-            {
-              "label": "Primi collegamenti mattutini TILO RE80 soppressi tra Milano Greco Pirelli e Milano Centrale dal martedì al sabato dal 22 settembre fino al 12 dicembre 2026.",
-              "date": "2026-09-22",
-              "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -292,7 +292,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "TI",
@@ -307,7 +307,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "6",
+          "value": "8",
           "note": "reports as of 19 October 2026"
         },
         {
@@ -405,6 +405,16 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
+              "label": "A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata",
+              "value": "Closure",
+              "date": "2026-10-19T10:16:00.000Z"
+            },
+            {
+              "label": "Revocato: Castagnola -> Davesco-Soragno tra Luogo Castagnola E Luogo Pregassona Situazione: chiusa Causa: rottura rete idrica",
+              "value": "Closure",
+              "date": "2026-10-19T11:25:00.000Z"
+            },
+            {
               "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
               "value": "Closure",
               "detail": "until 22 October 2026",
@@ -415,26 +425,26 @@
               "value": "Closure",
               "detail": "until 29 October 2026",
               "date": "2026-10-28T20:30:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso -> S. Gottardo tra Raccordo autostradale Diramazione Mendrisio E Svincolo autostradale Lugano Sud Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-19T04:03:00.000Z"
-            },
-            {
-              "label": "406 Riazzino -> Cadenazzo tra Luogo Quartino E Luogo Cadenazzo Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-19T04:46:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Importanti modifiche alla circolazione tra Cadenazzo e Locarno dal 30 ottobre al 3 novembre 2026.",
+              "date": "2026-10-19",
+              "url": "https://www.tilo.ch/avvisi/261019_Cadenazzo-Locarno-totale-77h.html"
+            },
+            {
+              "label": "Importanti modifiche alla circolazione tra Lugano e Chiasso dal 30 ottobre all’8 novembre 2026.",
+              "date": "2026-10-19",
+              "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
+            },
             {
               "label": "Indagine sulla soddisfazione della clientela TILO. Prova a vincere un iPhone 17!",
               "date": "2026-10-05",
@@ -454,19 +464,9 @@
               "label": "Modifiche alla circolazione tra Cadenazzo, Bellinzona, Biasca e Giubiasco nelle notti dal 4 al 24 ottobre 2026.",
               "date": "2026-09-30",
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
-            },
-            {
-              "label": "Importanti modifiche alla circolazione dei collegamenti RE80, S10 e S40 tra Chiasso, Como e Milano Centrale in alcuni giorni tra il 9 ottobre e il 23 novembre 2026.",
-              "date": "2026-09-28",
-              "url": "https://www.tilo.ch/avvisi/260928_Interruzione-totale-Monte-Olimpino-1.html"
-            },
-            {
-              "label": "Primi collegamenti mattutini TILO RE80 soppressi tra Milano Greco Pirelli e Milano Centrale dal martedì al sabato dal 22 settembre fino al 12 dicembre 2026.",
-              "date": "2026-09-22",
-              "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -561,7 +561,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "TI",
@@ -576,7 +576,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "6",
+          "value": "8",
           "note": "Meldungen vom 19. Oktober 2026"
         },
         {
@@ -674,6 +674,16 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
+              "label": "A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
+              "value": "Sperrung",
+              "date": "2026-10-19T10:16:00.000Z"
+            },
+            {
+              "label": "Aufgehoben: Castagnola -> Davesco-Soragno zwischen Ortschaft Castagnola und Ortschaft Pregassona Sachlage: Strecke gesperrt Ursache: Wasserrohrbruch",
+              "value": "Sperrung",
+              "date": "2026-10-19T11:25:00.000Z"
+            },
+            {
               "label": "A13 Bellinzona <-> Chur zwischen Anschluss San Bernardino und Anschluss San Bernardino-Pass Sachlage: Strecke gesperrt Baustelle, Länge [km] 7.5",
               "value": "Sperrung",
               "detail": "bis 22. Oktober 2026",
@@ -684,26 +694,26 @@
               "value": "Sperrung",
               "detail": "bis 29. Oktober 2026",
               "date": "2026-10-28T20:30:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso -> Gotthard zwischen Autobahndreieck Verzweigung Mendrisio und Anschluss Lugano-Süd Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-19T04:03:00.000Z"
-            },
-            {
-              "label": "406 Riazzino -> Cadenazzo zwischen Ortschaft Quartino und Ortschaft Cadenazzo Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-19T04:46:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Importanti modifiche alla circolazione tra Cadenazzo e Locarno dal 30 ottobre al 3 novembre 2026.",
+              "date": "2026-10-19",
+              "url": "https://www.tilo.ch/avvisi/261019_Cadenazzo-Locarno-totale-77h.html"
+            },
+            {
+              "label": "Importanti modifiche alla circolazione tra Lugano e Chiasso dal 30 ottobre all’8 novembre 2026.",
+              "date": "2026-10-19",
+              "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
+            },
             {
               "label": "Indagine sulla soddisfazione della clientela TILO. Prova a vincere un iPhone 17!",
               "date": "2026-10-05",
@@ -723,19 +733,9 @@
               "label": "Modifiche alla circolazione tra Cadenazzo, Bellinzona, Biasca e Giubiasco nelle notti dal 4 al 24 ottobre 2026.",
               "date": "2026-09-30",
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
-            },
-            {
-              "label": "Importanti modifiche alla circolazione dei collegamenti RE80, S10 e S40 tra Chiasso, Como e Milano Centrale in alcuni giorni tra il 9 ottobre e il 23 novembre 2026.",
-              "date": "2026-09-28",
-              "url": "https://www.tilo.ch/avvisi/260928_Interruzione-totale-Monte-Olimpino-1.html"
-            },
-            {
-              "label": "Primi collegamenti mattutini TILO RE80 soppressi tra Milano Greco Pirelli e Milano Centrale dal martedì al sabato dal 22 settembre fino al 12 dicembre 2026.",
-              "date": "2026-09-22",
-              "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -830,7 +830,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "TI",
@@ -845,7 +845,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "6",
+          "value": "8",
           "note": "signalements au 19 octobre 2026"
         },
         {
@@ -943,6 +943,16 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
+              "label": "A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
+              "value": "Fermeture",
+              "date": "2026-10-19T10:16:00.000Z"
+            },
+            {
+              "label": "Révoqué: Castagnola -> Davesco-Soragno entre Localité Castagnola et Localité Pregassona Situation: fermé Raison: rupture de conduite d'eau",
+              "value": "Fermeture",
+              "date": "2026-10-19T11:25:00.000Z"
+            },
+            {
               "label": "A13 Bellinzone <-> Coire entre Jonction autoroutière San Bernardino et Jonction autoroutière San Bernardino-Pass Situation: fermé travaux, longueur [km] 7.5",
               "value": "Fermeture",
               "detail": "jusqu’au 22 octobre 2026",
@@ -953,26 +963,26 @@
               "value": "Fermeture",
               "detail": "jusqu’au 29 octobre 2026",
               "date": "2026-10-28T20:30:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso -> St-Gothard entre Echangeur Echangeur de Mendrisio et Jonction autoroutière Lugano-Sud Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-19T04:03:00.000Z"
-            },
-            {
-              "label": "406 Riazzino -> Cadenazzo entre Localité Quartino et Localité Cadenazzo Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-19T04:46:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Importanti modifiche alla circolazione tra Cadenazzo e Locarno dal 30 ottobre al 3 novembre 2026.",
+              "date": "2026-10-19",
+              "url": "https://www.tilo.ch/avvisi/261019_Cadenazzo-Locarno-totale-77h.html"
+            },
+            {
+              "label": "Importanti modifiche alla circolazione tra Lugano e Chiasso dal 30 ottobre all’8 novembre 2026.",
+              "date": "2026-10-19",
+              "url": "https://www.tilo.ch/avvisi/261019_ZEB-Vezia-Capolago.html"
+            },
             {
               "label": "Indagine sulla soddisfazione della clientela TILO. Prova a vincere un iPhone 17!",
               "date": "2026-10-05",
@@ -992,19 +1002,9 @@
               "label": "Modifiche alla circolazione tra Cadenazzo, Bellinzona, Biasca e Giubiasco nelle notti dal 4 al 24 ottobre 2026.",
               "date": "2026-09-30",
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
-            },
-            {
-              "label": "Importanti modifiche alla circolazione dei collegamenti RE80, S10 e S40 tra Chiasso, Como e Milano Centrale in alcuni giorni tra il 9 ottobre e il 23 novembre 2026.",
-              "date": "2026-09-28",
-              "url": "https://www.tilo.ch/avvisi/260928_Interruzione-totale-Monte-Olimpino-1.html"
-            },
-            {
-              "label": "Primi collegamenti mattutini TILO RE80 soppressi tra Milano Greco Pirelli e Milano Centrale dal martedì al sabato dal 22 settembre fino al 12 dicembre 2026.",
-              "date": "2026-09-22",
-              "url": "https://www.tilo.ch/avvisi/260922_Rinnovo-deviatoi-Milano.html"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -1100,7 +1100,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }

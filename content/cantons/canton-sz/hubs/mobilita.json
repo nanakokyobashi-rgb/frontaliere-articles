@@ -4,17 +4,17 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "mobilita",
-  "updatedAt": "2026-10-19T14:06:02.326Z",
-  "contentHash": "ed84a2f5f6ac23f66dac784a727d75ce1cb2a3d860a7c2615de185b9975b3e79",
+  "updatedAt": "2026-10-19T18:33:18.720Z",
+  "contentHash": "8ab626b5f6817803bebca3322017f0c01eaff93883cdd4b13bbc95136baf0d45",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-19T05:23:43.930Z",
+      "updatedAt": "2026-10-19T14:01:37.256Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T19:43:29.238Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -51,7 +51,7 @@
             {
               "label": "A4 Zürich -> Brunnen Svincolo autostradale Arth Situazione: uscita chiusa cantiere",
               "value": "Chiusura",
-              "detail": "fine prevista: 21 ottobre 2026",
+              "detail": "fine prevista: 22 ottobre 2026",
               "date": "2026-10-13T12:02:00.000Z"
             },
             {
@@ -80,7 +80,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -147,7 +147,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "en": {
       "canton": "SZ",
@@ -181,7 +181,7 @@
             {
               "label": "A4 Zürich -> Brunnen Svincolo autostradale Arth Situazione: uscita chiusa cantiere",
               "value": "Closure",
-              "detail": "until 21 October 2026",
+              "detail": "until 22 October 2026",
               "date": "2026-10-13T12:02:00.000Z"
             },
             {
@@ -210,7 +210,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -243,7 +243,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -277,7 +277,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "de": {
       "canton": "SZ",
@@ -311,7 +311,7 @@
             {
               "label": "A4 Zürich -> Brunnen Anschluss Arth Sachlage: Ausfahrt gesperrt Baustelle",
               "value": "Sperrung",
-              "detail": "bis 21. Oktober 2026",
+              "detail": "bis 22. Oktober 2026",
               "date": "2026-10-13T12:02:00.000Z"
             },
             {
@@ -340,7 +340,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -373,7 +373,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -407,7 +407,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     },
     "fr": {
       "canton": "SZ",
@@ -441,7 +441,7 @@
             {
               "label": "A4 Zurich -> Brunnen Jonction autoroutière Arth Situation: sortie fermée travaux",
               "value": "Fermeture",
-              "detail": "jusqu’au 21 octobre 2026",
+              "detail": "jusqu’au 22 octobre 2026",
               "date": "2026-10-13T12:02:00.000Z"
             },
             {
@@ -470,7 +470,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-19T14:01:37.256Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -503,7 +503,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -537,7 +537,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-19T18:33:18.720Z"
     }
   }
 }
