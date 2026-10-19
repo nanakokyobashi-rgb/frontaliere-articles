@@ -2618,9 +2618,9 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "3604c629453c9f0b",
-        "corpus": "3604c629453c9f0b",
-        "alignedAt": "2026-10-14"
+        "site": "eec81dd5f065c2c6",
+        "corpus": "eec81dd5f065c2c6",
+        "alignedAt": "2026-10-19"
       }
     },
     {
@@ -3253,8 +3253,8 @@
       "sitePath": "scripts/lib/extract-article-text.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "6d94d2b35134f627",
-        "corpus": "6d94d2b35134f627",
+        "site": "c896aecb77764b2a",
+        "corpus": "c896aecb77764b2a",
         "alignedAt": "2026-10-19"
       }
     },
@@ -4863,9 +4863,9 @@
       "sitePath": "scripts/lib/github-actions-read-client.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "9b9bfdb0aca0843d",
-        "corpus": "9b9bfdb0aca0843d",
-        "alignedAt": "2026-10-11"
+        "site": "be53a863d879b85c",
+        "corpus": "be53a863d879b85c",
+        "alignedAt": "2026-10-19"
       }
     },
     {
