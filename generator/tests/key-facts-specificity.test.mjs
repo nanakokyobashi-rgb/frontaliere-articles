@@ -259,10 +259,8 @@ test('lo schema body1 condivide il contratto AI Search e il literal del guard', 
   const source = fs.readFileSync(CREATE_ARTICLE_PATH, 'utf8');
   const body1 = source.match(/"body1": "([^"]+)"/)?.[1];
   assert.ok(body1, 'literal body1 non trovato nello schema JSON del prompt');
-  assert.match(body1, /0-8 coppie termine→valore, tutte presenti nella fonte/);
-  assert.doesNotMatch(body1, /3-8 coppie/);
-  assert.match(body1, /ometti assenti e placeholder/);
-  assert.doesNotMatch(body1, /5-8 coppie/);
+  assert.match(body1, /0-8 valori presenti, ometti assenti/);
+  assert.doesNotMatch(body1, /(?:3|5)-8 coppie|coppie termine→valore/);
   assert.doesNotMatch(body1, /\*\*Cosa\/Quando\/Dove\/Chi\/Importo\*\*/);
   assert.ok(
     SCHEMA_PLACEHOLDER_LITERALS.includes(body1),
