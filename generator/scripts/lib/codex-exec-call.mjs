@@ -61,6 +61,9 @@ export const CODEX_EXEC_DISABLED_FEATURES = Object.freeze([
 /** Tetto di una chiamata: un body lungo a effort max sta sotto i 10 minuti. */
 export const CODEX_EXEC_TIMEOUT_MS = 10 * 60 * 1000;
 
+/** Finestra breve per chiudere gli stream dopo l'uscita del processo diretto. */
+export const CODEX_EXEC_DRAIN_TIMEOUT_MS = 5_000;
+
 const MAX_STDERR_TAIL_CHARS = 4096;
 const MAX_STDOUT_TAIL_CHARS = 4096;
 export const CODEX_DIAGNOSTIC_MAX_CHARS = 160;
@@ -228,6 +231,9 @@ function makeCodexExecError(details) {
   const classified = classifyCodexFailure(details);
   return new CodexExecError({
     ...classified,
+    diagnostic: details.streamsNotClosed
+      ? `stream non chiusi dopo exit: ${classified.diagnostic}`
+      : classified.diagnostic,
     durationMs: details.durationMs,
     timeoutMs: details.timeoutMs,
     exitCode: details.code,
@@ -316,6 +322,7 @@ export function codexExecArgs({ workdir, outputPath, instructionsPath, model = C
  * @param {string} [options.model]
  * @param {string} [options.effort]
  * @param {number} [options.timeoutMs]
+ * @param {number} [options.drainTimeoutMs]  finestra interna di test per il drain
  * @param {typeof spawn} [options.spawnImpl]  seam dei test
  * @param {NodeJS.ProcessEnv} [options.env]
  * @param {(event: {ms: number, ok: boolean, promptChars: number, reason?: string, diagnostic?: string}) => void} [options.onCall]
@@ -325,6 +332,7 @@ export function createCodexExecCall({
   model = CODEX_EXEC_MODEL,
   effort = CODEX_EXEC_EFFORT,
   timeoutMs = CODEX_EXEC_TIMEOUT_MS,
+  drainTimeoutMs = CODEX_EXEC_DRAIN_TIMEOUT_MS,
   spawnImpl = spawn,
   env = process.env,
   onCall = () => {},
@@ -341,6 +349,7 @@ export function createCodexExecCall({
     let failure = null;
     let stderrTail = '';
     let stdoutTail = '';
+    let streamsNotClosed = false;
     try {
       // `--cd` vuole una cartella esistente; vuota, cosi' il modello non ha
       // niente del checkout sotto mano.
@@ -362,10 +371,19 @@ export function createCodexExecCall({
         });
         let settled = false;
         let watchdogKilled = false;
+        let drainTimer = null;
+        let exitCode = null;
+        let exitSignal = null;
+        const clearDrainTimer = () => {
+          if (drainTimer === null) return;
+          clearTimeout(drainTimer);
+          drainTimer = null;
+        };
         const timer = setTimeout(() => {
           if (settled) return;
           watchdogKilled = true;
           settled = true;
+          clearDrainTimer();
           killProcessGroup(child);
           failure = makeCodexExecError({
             timedOut: watchdogKilled,
@@ -376,6 +394,23 @@ export function createCodexExecCall({
           });
           reject(failure);
         }, timeoutMs);
+        const settleFromTermination = (code, signal, drainExpired = false) => {
+          if (settled) return;
+          settled = true;
+          clearTimeout(timer);
+          clearDrainTimer();
+          if (code === 0) resolve();
+          else {
+            failure = makeCodexExecError({
+              code,
+              signal,
+              stdout: stdoutTail,
+              stderr: stderrTail,
+              streamsNotClosed: drainExpired,
+            });
+            reject(failure);
+          }
+        };
         // Keep the deadline referenced: a transport/fake child without its
         // own active handle must still settle this pending Promise.
         child.stderr?.setEncoding?.('utf8');
@@ -390,6 +425,7 @@ export function createCodexExecCall({
           if (settled) return;
           settled = true;
           clearTimeout(timer);
+          clearDrainTimer();
           failure = makeCodexExecError({
             spawnError: err,
             stdout: stdoutTail,
@@ -397,27 +433,25 @@ export function createCodexExecCall({
           });
           reject(failure);
         });
-        child.on('exit', () => {
+        child.on('exit', (code, signal) => {
           if (settled) return;
           // `close` follows `exit` after the stdio streams have closed. The
           // deadline must stop at `exit`, or a process already gone can be
           // reported as timeout while the empty output is being classified.
+          exitCode = code;
+          exitSignal = signal;
           clearTimeout(timer);
+          drainTimer = setTimeout(() => {
+            if (settled) return;
+            streamsNotClosed = true;
+            child.stdout?.destroy?.();
+            child.stderr?.destroy?.();
+            child.stdin?.destroy?.();
+            settleFromTermination(exitCode, exitSignal, true);
+          }, drainTimeoutMs);
         });
         child.on('close', (code, signal) => {
-          if (settled) return;
-          settled = true;
-          clearTimeout(timer);
-          if (code === 0) resolve();
-          else {
-            failure = makeCodexExecError({
-              code,
-              signal,
-              stdout: stdoutTail,
-              stderr: stderrTail,
-            });
-            reject(failure);
-          }
+          settleFromTermination(code, signal, streamsNotClosed);
         });
         child.stdin?.end(prompt);
       });
@@ -425,7 +459,12 @@ export function createCodexExecCall({
       try {
         result = readFileSync(outputPath, 'utf8').trim();
       } catch {
-        failure = makeCodexExecError({ invalidOutput: true, stdout: stdoutTail, stderr: stderrTail });
+        failure = makeCodexExecError({
+          invalidOutput: true,
+          stdout: stdoutTail,
+          stderr: stderrTail,
+          streamsNotClosed,
+        });
         throw failure;
       }
       if (!result) {
@@ -433,6 +472,7 @@ export function createCodexExecCall({
           outputEmpty: true,
           stdout: stdoutTail,
           stderr: stderrTail,
+          streamsNotClosed,
         });
         throw failure;
       }
@@ -444,6 +484,7 @@ export function createCodexExecCall({
             invalidOutput: true,
             stdout: stdoutTail,
             stderr: stderrTail,
+            streamsNotClosed,
           });
           throw failure;
         }

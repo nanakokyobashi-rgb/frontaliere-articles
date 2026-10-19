@@ -2523,6 +2523,7 @@ export function engineTranslator(engine, {
     const baseAttempt = Number.isInteger(outcome?.attempt) && outcome.attempt > 0
       ? outcome.attempt + 1
       : 1;
+    if (args?._outcome) args._outcome.attempt = baseAttempt;
     for (;;) {
       const attempt = Number.isInteger(args?._outcome?.attempt) && args._outcome.attempt > 0
         ? args._outcome.attempt

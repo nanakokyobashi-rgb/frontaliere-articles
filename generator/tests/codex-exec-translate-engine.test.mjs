@@ -21,7 +21,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { EventEmitter } from 'node:events';
 import { readFileSync, writeFileSync } from 'node:fs';
-import { spawnSync } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -185,6 +185,59 @@ function scriptedSpawn(steps, seen = {}) {
   };
 }
 
+/**
+ * Un processo Codex finto che esce subito, mentre un figlio tiene ereditati i
+ * pipe stdout/stderr: Node emette `exit`, ma aspetta il figlio dormiente per
+ * emettere `close`.
+ */
+function lingeringStreamSpawn({ answer = '', code = 0, holdMs = 10_000 } = {}) {
+  let child = null;
+  const spawnImpl = (_bin, args, opts) => {
+    const outputPath = args[args.indexOf('--output-last-message') + 1];
+    const holderScript = `setTimeout(() => {}, ${holdMs});`;
+    const script = [
+      "const { spawn } = require('node:child_process');",
+      "const fs = require('node:fs');",
+      `fs.writeFileSync(${JSON.stringify(outputPath)}, ${JSON.stringify(answer)});`,
+      `spawn(process.execPath, ['-e', ${JSON.stringify(holderScript)}], { stdio: ['ignore', 'inherit', 'inherit'] }).unref();`,
+      `process.exit(${code});`,
+    ].join('\n');
+    child = spawn(process.execPath, ['-e', script], opts);
+    return child;
+  };
+  return {
+    spawnImpl,
+    cleanup() {
+      if (child) killProcessGroup(child);
+    },
+  };
+}
+
+async function runLingeringCall(options) {
+  const transport = lingeringStreamSpawn(options);
+  const call = createCodexExecCall({
+    env: LOCAL_ENV,
+    timeoutMs: 1_000,
+    drainTimeoutMs: 5,
+    spawnImpl: transport.spawnImpl,
+  });
+  const result = await new Promise((resolveResult) => {
+    const guard = setTimeout(() => resolveResult({ pending: true }), 1_000);
+    call([{ role: 'user', content: 'x' }]).then(
+      (value) => {
+        clearTimeout(guard);
+        resolveResult({ value });
+      },
+      (error) => {
+        clearTimeout(guard);
+        resolveResult({ error });
+      },
+    );
+  });
+  transport.cleanup();
+  return result;
+}
+
 test('createCodexExecCall manda il prompt della lane (codexPromptFromMessages) e rende l\'ultimo messaggio', async () => {
   const seen = {};
   const calls = [];
@@ -253,6 +306,25 @@ test('Codex locale classifica timeout, uscita, segnale, quota, auth e output', a
   const empty = await run({ answer: '   ', exitBeforeClose: true }, { timeoutMs: 1 });
   assert.equal(empty.reason, 'empty-output');
   assert.equal(empty.retryable, false);
+});
+
+test('il drain chiude una chiamata dopo exit anche se un figlio tiene aperti gli stream', async () => {
+  const success = await runLingeringCall({ code: 0, answer: '  risposta  ' });
+  assert.equal(success.pending, undefined);
+  assert.equal(success.error, undefined);
+  assert.equal(success.value, 'risposta');
+
+  const empty = await runLingeringCall({ code: 0, answer: '' });
+  assert.equal(empty.pending, undefined);
+  assert.equal(empty.error?.reason, 'empty-output');
+  assert.match(empty.error?.diagnostic || '', /stream non chiusi/iu);
+  assert.notEqual(empty.error?.reason, 'timeout');
+
+  const failed = await runLingeringCall({ code: 1 });
+  assert.equal(failed.pending, undefined);
+  assert.equal(failed.error?.reason, 'exit-1');
+  assert.match(failed.error?.diagnostic || '', /stream non chiusi/iu);
+  assert.notEqual(failed.error?.reason, 'timeout');
 });
 
 test('Codex locale rifiuta JSON non valido come invalid-output', async () => {

@@ -75,6 +75,29 @@ test('la bonifica usa Codex locale solo dopo il vuoto della cascata', async () =
   }]);
 });
 
+test('il primo fallback locale usa il tentativo successivo nel report', async () => {
+  const outcome = { tierAttempts: [], attempt: 3 };
+  const translate = engineTranslator('cascade', {
+    codexCall: async () => 'unused transport stub',
+    cascadeTranslate: async () => '',
+    codexTranslate: async () => 'Texte récupéré par Codex.',
+  });
+
+  assert.equal(await translate({
+    text: 'Testo italiano.',
+    sourceLang: 'it',
+    targetLang: 'fr',
+    fieldType: 'description',
+    _outcome: outcome,
+  }), 'Texte récupéré par Codex.');
+
+  const summary = summarizeTranslationOutcome(outcome);
+  assert.equal(summary.attempts, 4);
+  assert.deepEqual(outcome.tierAttempts.map(({ attempt, status }) => ({ attempt, status })), [
+    { attempt: 4, status: 'success' },
+  ]);
+});
+
 test('una cascata riuscita non spende il fallback Codex locale', async () => {
   let codexCalls = 0;
   const translate = engineTranslator('cascade', {
