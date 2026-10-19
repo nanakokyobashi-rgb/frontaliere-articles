@@ -1297,34 +1297,110 @@ const CANTON_IMAGE_MIME_BY_EXTENSION = Object.freeze({
   '.webp': 'image/webp',
 });
 
-function imageBytesMatchAssetKey(bytes, key, contentType) {
-  if (!Buffer.isBuffer(bytes) || bytes.length === 0 || bytes.length > MAX_HELD_ASSET_BYTES) return false;
+function imageHeaderMatchesAssetKey(header, byteLength, key, contentType) {
+  if (!Buffer.isBuffer(header) || byteLength <= 0 || byteLength > MAX_HELD_ASSET_BYTES) return false;
   const extension = path.extname(key).toLowerCase();
   const expectedMime = CANTON_IMAGE_MIME_BY_EXTENSION[extension];
   if (!expectedMime || String(contentType ?? '').split(';', 1)[0].trim().toLowerCase() !== expectedMime) return false;
   if (extension === '.webp') {
-    return bytes.length >= 20
-      && bytes.toString('ascii', 0, 4) === 'RIFF'
-      && bytes.readUInt32LE(4) === bytes.length - 8
-      && bytes.toString('ascii', 8, 12) === 'WEBP'
-      && ['VP8 ', 'VP8L', 'VP8X'].includes(bytes.toString('ascii', 12, 16));
+    return byteLength >= 20
+      && header.length >= 16
+      && header.toString('ascii', 0, 4) === 'RIFF'
+      && header.readUInt32LE(4) === byteLength - 8
+      && header.toString('ascii', 8, 12) === 'WEBP'
+      && ['VP8 ', 'VP8L', 'VP8X'].includes(header.toString('ascii', 12, 16));
   }
   if (extension === '.jpg' || extension === '.jpeg') {
-    return bytes.length >= 4 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
+    return byteLength >= 4 && header.length >= 3 && header[0] === 0xff && header[1] === 0xd8 && header[2] === 0xff;
   }
   if (extension === '.png') {
-    return bytes.length >= 8 && bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+    return byteLength >= 8 && header.length >= 8 && header.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
   }
   if (extension === '.gif') {
-    return bytes.length >= 6 && ['GIF87a', 'GIF89a'].includes(bytes.toString('ascii', 0, 6));
+    return byteLength >= 6 && header.length >= 6 && ['GIF87a', 'GIF89a'].includes(header.toString('ascii', 0, 6));
   }
   if (extension === '.avif') {
-    return bytes.length >= 12
-      && bytes.toString('ascii', 4, 8) === 'ftyp'
-      && ['avif', 'avis'].includes(bytes.toString('ascii', 8, 12));
+    return byteLength >= 12
+      && header.length >= 12
+      && header.toString('ascii', 4, 8) === 'ftyp'
+      && ['avif', 'avis'].includes(header.toString('ascii', 8, 12));
   }
-  const svg = bytes.toString('utf8', 0, Math.min(bytes.length, 4096)).replace(/^\uFEFF?\s*/, '');
+  const svg = header.toString('utf8', 0, Math.min(header.length, 4096)).replace(/^\uFEFF?\s*/, '');
   return /^<(?:\?xml\b[^>]*>\s*)?<svg\b/i.test(svg);
+}
+
+function imageBytesMatchAssetKey(bytes, key, contentType) {
+  return Buffer.isBuffer(bytes)
+    && bytes.length <= MAX_HELD_ASSET_BYTES
+    && imageHeaderMatchesAssetKey(bytes.subarray(0, 4096), bytes.length, key, contentType);
+}
+
+async function cancelAssetReader(reader, reason) {
+  let cancellation;
+  try {
+    cancellation = Promise.resolve(reader.cancel(reason));
+  } catch {
+    return;
+  }
+  let timer;
+  const boundedWait = new Promise((resolve) => {
+    timer = setTimeout(resolve, 100);
+  });
+  try {
+    await Promise.race([cancellation, boundedWait]).catch(() => {});
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function readCantonAssetDigest(response, key, contentType, deadlineAt) {
+  const reader = response.body?.getReader?.();
+  if (!reader) return { ok: false, status: 'body CDN non disponibile come stream' };
+  const header = Buffer.alloc(4096);
+  const digest = createHash('sha256');
+  let headerBytes = 0;
+  let byteLength = 0;
+  let timeout;
+  let rejectTimeout;
+  const timeoutPromise = new Promise((_, reject) => {
+    rejectTimeout = reject;
+  });
+  // fetchWithRefTimeout keeps the transport deadline alive too; this local
+  // deadline bounds streams whose reader ignores the request abort signal.
+  timeout = setTimeout(() => {
+    const error = new Error('timeout durante la lettura del body immagine');
+    void cancelAssetReader(reader, error);
+    rejectTimeout(error);
+  }, Math.max(1, deadlineAt - Date.now()));
+  try {
+    while (true) {
+      const { done, value } = await Promise.race([reader.read(), timeoutPromise]);
+      if (done) break;
+      const chunk = Buffer.isBuffer(value)
+        ? value
+        : Buffer.from(value.buffer, value.byteOffset, value.byteLength);
+      byteLength += chunk.length;
+      if (byteLength > MAX_HELD_ASSET_BYTES) {
+        await cancelAssetReader(reader);
+        return { ok: false, status: 'asset oltre 5 MB' };
+      }
+      digest.update(chunk);
+      if (headerBytes < header.length) {
+        const count = Math.min(header.length - headerBytes, chunk.length);
+        chunk.copy(header, headerBytes, 0, count);
+        headerBytes += count;
+      }
+    }
+    if (!imageHeaderMatchesAssetKey(header.subarray(0, headerBytes), byteLength, key, contentType)) {
+      return { ok: false, status: 'body CDN non e\' un asset immagine verificabile' };
+    }
+    return { ok: true, status: 200, contentType, byteLength, sha256: digest.digest('hex') };
+  } catch (error) {
+    await cancelAssetReader(reader, error);
+    return { ok: false, status: error?.message ?? String(error) };
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 /** GET binario con cache-buster: una risposta HTML di fallback non e' un asset R2. */
@@ -1335,6 +1411,7 @@ async function probeCantonAsset(key) {
   }
   url.searchParams.set('_section_asset_sha256', String(Date.now()));
   let response;
+  const deadlineAt = Date.now() + HELD_ASSET_PROBE_TIMEOUT_MS;
   try {
     response = await fetchWithRefTimeout(url, {
       redirect: 'manual',
@@ -1346,28 +1423,22 @@ async function probeCantonAsset(key) {
     }, HELD_ASSET_PROBE_TIMEOUT_MS);
     if (response.status !== 200) {
       const status = `HTTP ${response.status}`;
-      releaseFetchWithRefTimeout(response);
       return { ok: false, status };
     }
     const contentType = String(response.headers?.get?.('content-type') ?? '').split(';', 1)[0].trim().toLowerCase();
     const extension = path.extname(url.pathname).toLowerCase();
     if (contentType !== CANTON_IMAGE_MIME_BY_EXTENSION[extension]) {
-      releaseFetchWithRefTimeout(response);
       return { ok: false, status: `content-type asset non valido: ${contentType || 'assente'}` };
     }
     const declaredLength = Number(response.headers?.get?.('content-length'));
     if (Number.isFinite(declaredLength) && declaredLength > MAX_HELD_ASSET_BYTES) {
-      releaseFetchWithRefTimeout(response);
       return { ok: false, status: 'asset oltre 5 MB' };
     }
-    const bytes = Buffer.from(await response.arrayBuffer());
-    if (!imageBytesMatchAssetKey(bytes, key, contentType)) {
-      return { ok: false, status: 'body CDN non e\' un asset immagine verificabile' };
-    }
-    return { ok: true, status: 200, contentType, bytes };
+    return await readCantonAssetDigest(response, key, contentType, deadlineAt);
   } catch (error) {
-    if (response) releaseFetchWithRefTimeout(response);
     return { ok: false, status: error?.message ?? String(error) };
+  } finally {
+    if (response) releaseFetchWithRefTimeout(response);
   }
 }
 
@@ -1386,7 +1457,7 @@ function sha256(bytes) {
   return createHash('sha256').update(bytes).digest('hex');
 }
 
-async function unchangedHeldAssetKeys({ candidateKeys, uploadByKey, assetProbeImpl, assetProbeCache }) {
+async function unchangedHeldAssetKeys({ candidateKeys, uploadByKey, assetProbeImpl }) {
   const unchanged = new Set();
   let cursor = 0;
   const workers = Array.from({ length: Math.min(HELD_ASSET_PROBE_CONCURRENCY, candidateKeys.length) }, async () => {
@@ -1401,18 +1472,28 @@ async function unchangedHeldAssetKeys({ candidateKeys, uploadByKey, assetProbeIm
         console.log(`::notice::[${LOG}] asset trattenuto ${key}: bytes locali assenti o non verificabili`);
         continue;
       }
-      if (!assetProbeCache.has(key)) {
-        assetProbeCache.set(key, Promise.resolve().then(() => assetProbeImpl(key)).catch((error) => ({
+      const localSha256 = sha256(localBytes);
+      let remote;
+      try {
+        remote = await assetProbeImpl(key);
+      } catch (error) {
+        remote = {
           ok: false,
           status: error?.message ?? String(error),
-        })));
+        };
       }
-      const remote = await assetProbeCache.get(key);
-      if (!remote?.ok || remote.status !== 200 || !imageBytesMatchAssetKey(remote.bytes, key, remote.contentType)) {
+      const expectedMime = CANTON_IMAGE_MIME_BY_EXTENSION[path.extname(key).toLowerCase()];
+      if (!remote?.ok
+        || remote.status !== 200
+        || remote.contentType !== expectedMime
+        || !Number.isSafeInteger(remote.byteLength)
+        || remote.byteLength <= 0
+        || remote.byteLength > MAX_HELD_ASSET_BYTES
+        || !/^[a-f0-9]{64}$/u.test(remote.sha256 ?? '')) {
         console.log(`::notice::[${LOG}] asset trattenuto ${key}: confronto CDN non verificabile (${remote?.status ?? 'nessuna risposta'})`);
         continue;
       }
-      if (remote.bytes.length !== localBytes.length || sha256(remote.bytes) !== sha256(localBytes)) {
+      if (remote.byteLength !== localBytes.length || remote.sha256 !== localSha256) {
         console.log(`::notice::[${LOG}] asset trattenuto ${key}: bytes CDN diversi dal candidato locale`);
         continue;
       }
@@ -1934,7 +2015,6 @@ export async function publish({
   };
   const uploaded = [];
   const immutableMismatches = [];
-  const assetProbeCache = new Map();
   let status = beforeStatus;
   console.log(`[${LOG}] preflight: sezione ${section} nel registro pubblicato = ${beforeStatus}`);
   let heldAssetKeys = new Set();
@@ -1990,7 +2070,6 @@ export async function publish({
         candidateKeys: [...candidateKeys],
         uploadByKey,
         assetProbeImpl,
-        assetProbeCache,
       });
       for (const key of unchangedAssetKeys) heldAssetKeys.delete(key);
       const heldPageKeys = new Set();
