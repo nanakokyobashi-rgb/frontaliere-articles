@@ -348,6 +348,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-voto-bahnhofplatz-wil-2026': {
+    title: 'Voto sul Bahnhofplatz Wil: credito di 63,66 milioni',
+    description: 'Il 29 novembre 2026 i cittadini di Wil voteranno sul progetto da 63,66 milioni per il nuovo terminale bus, la velostazione e la riqualificazione della stazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, voto, bahnhofplatz, credito, milioni',
+    ogTitle: 'Voto Bahnhofplatz Wil del 29 novembre 2026',
+    ogDescription: 'Scopri i dettagli del progetto per il Bahnhofplatz di Wil nel Canton San Gallo: nuovo terminale bus con 20 fermate, velostazione e crediti approvati per la votazione del 29 novembre 2026.',
+    canonicalPath: '/articoli-san-gallo/voto-bahnhofplatz-wil-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Voto sul Bahnhofplatz Wil: credito di 63,66 milioni",
+      "description": "Il 29 novembre 2026 i cittadini di Wil voteranno sul progetto da 63,66 milioni per il nuovo terminale bus, la velostazione e la riqualificazione della stazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-voto-bahnhofplatz-wil-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Bahnhofplatz di Wil nel Canton San Gallo"
+      },
+      "datePublished": "2026-10-19T12:16:44+00:00",
+      "dateModified": "2026-10-19T12:16:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/voto-bahnhofplatz-wil-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

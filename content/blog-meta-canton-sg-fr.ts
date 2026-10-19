@@ -30,6 +30,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.sondaggio-imprese-st-gallen-2026.title': 'St.Gallen lance l’enquête auprès des entreprises',
     'blog.article.sondaggio-imprese-st-gallen-2026.excerpt': 'La ville de St.Gallen lance une enquête auprès des entreprises afin d’évaluer la place économique.',
     'blog.article.sondaggio-imprese-st-gallen-2026.imageAlt': 'Ville de Saint-Gall, enquête auprès des entreprises',
+    'blog.article.voto-bahnhofplatz-wil-2026.title': 'Vote sur le Bahnhofplatz Wil : crédit de 63,66 millions',
+    'blog.article.voto-bahnhofplatz-wil-2026.excerpt': 'Le 29 novembre 2026, les citoyens de Wil voteront sur le projet du nouveau terminal de bus, de la vélostation et de la requalification de la gare.',
+    'blog.article.voto-bahnhofplatz-wil-2026.imageAlt': 'Bahnhofplatz à Wil dans le canton de Saint-Gall',
 };
 
 export default blogMetaCantonSgFr;

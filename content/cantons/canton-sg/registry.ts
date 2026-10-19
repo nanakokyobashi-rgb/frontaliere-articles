@@ -105,4 +105,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'voto-bahnhofplatz-wil-2026',
+ category: 'novita',
+ date: '2026-10-19T12:16:44.327Z',
+ image: '/images/blog/article-voto-bahnhofplatz-wil-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

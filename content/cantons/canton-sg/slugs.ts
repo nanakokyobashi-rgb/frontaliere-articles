@@ -12,6 +12,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'rheineck-mels-aquaplaning': { it: 'rheineck-mels-aquaplaning', en: 'rheineck-mels-aquaplaning-crashes', de: 'rheineck-mels-aquaplaning-unfaelle', fr: 'rheineck-mels-aquaplanage-accidents' },
  'hsg-optime-orario-lavoro': { it: 'hsg-optime-orario-lavoro', en: 'hsg-optime-working-time', de: 'hsg-optime-arbeitszeit', fr: 'hsg-optime-temps-travail' },
  'sondaggio-imprese-st-gallen-2026': { it: 'sondaggio-imprese-st-gallen-2026', en: 'st-gallen-business-survey-2026', de: 'st-gallen-unternehmensbefragung-2026', fr: 'enquete-entreprises-saint-gall-2026' },
+ 'voto-bahnhofplatz-wil-2026': { it: 'voto-bahnhofplatz-wil-2026', en: 'wil-bahnhofplatz-vote-2026', de: 'abstimmung-bahnhofplatz-wil-2026', fr: 'vote-bahnhofplatz-wil-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

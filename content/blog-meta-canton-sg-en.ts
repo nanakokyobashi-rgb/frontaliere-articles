@@ -30,6 +30,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.sondaggio-imprese-st-gallen-2026.title': 'St.Gallen launches the business survey',
     'blog.article.sondaggio-imprese-st-gallen-2026.excerpt': 'The city of St.Gallen is launching a survey aimed at businesses to assess the business location.',
     'blog.article.sondaggio-imprese-st-gallen-2026.imageAlt': 'City of St. Gallen, business survey and consultation',
+    'blog.article.voto-bahnhofplatz-wil-2026.title': 'Vote on Bahnhofplatz Wil: credit of 63,66 million',
+    'blog.article.voto-bahnhofplatz-wil-2026.excerpt': 'On November 29, 2026, the citizens of Wil will vote on the project for the new bus terminal, bicycle station, and redevelopment of the station.',
+    'blog.article.voto-bahnhofplatz-wil-2026.imageAlt': 'Bahnhofplatz in Wil, Canton of St. Gallen',
 };
 
 export default blogMetaCantonSgEn;
