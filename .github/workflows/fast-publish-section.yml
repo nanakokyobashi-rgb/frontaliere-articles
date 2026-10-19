@@ -882,7 +882,11 @@ jobs:
             deferred_retry='false'
             for publish_attempt in 1 2 3; do
               git fetch --no-tags origin main
-              git checkout --detach origin/main
+              # `git fetch origin main` aggiorna sempre FETCH_HEAD, ma non
+              # necessariamente il ref remoto locale in un checkout Actions.
+              # Il retry deve quindi usare esattamente il commit appena letto,
+              # altrimenti tre tentativi ripetono la stessa vecchia revisione.
+              git checkout --detach FETCH_HEAD
               export EXPECTED_MAIN_HEAD="$(git rev-parse HEAD)"
               echo "::notice::normal cover dispatch on main $EXPECTED_MAIN_HEAD (freshness attempt $publish_attempt/3)"
 

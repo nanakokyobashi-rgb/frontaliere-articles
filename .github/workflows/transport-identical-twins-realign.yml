@@ -126,7 +126,9 @@ jobs:
           git remote set-url origin "https://x-access-token:${runtime_pat}@github.com/${REPO}.git"
           for attempt in 1 2 3; do
             git fetch origin main --prune
-            git checkout --detach origin/main
+            # Il fetch rende affidabile FETCH_HEAD anche quando il refspec del
+            # checkout non aggiorna refs/remotes/origin/main.
+            git checkout --detach FETCH_HEAD
             rc=0
             node scripts/ci/transport-identical-twins.mjs --realign="$RUNNER_TEMP/transport-realign.tsv" --json > "$RUNNER_TEMP/realign.json" || rc=$?
             cat "$RUNNER_TEMP/realign.json"
@@ -234,7 +236,9 @@ jobs:
           git remote set-url origin "https://x-access-token:${runtime_pat}@github.com/${REPO}.git"
           for attempt in 1 2 3; do
             git fetch origin main --prune
-            git checkout --detach origin/main
+            # Il fetch rende affidabile FETCH_HEAD anche quando il refspec del
+            # checkout non aggiorna refs/remotes/origin/main.
+            git checkout --detach FETCH_HEAD
             rc=0
             node scripts/ci/realign-adapted-baseline.mjs ${args[@]+"${args[@]}"} || rc=$?
             # Solo 0 (tutto certificato) e 3 (esito parziale: voci certificate

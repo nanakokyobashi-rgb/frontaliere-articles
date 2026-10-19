@@ -3017,7 +3017,12 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     wf.indexOf('          for publish_attempt in 1 2 3; do'),
     wf.indexOf('      - name: Release bootstrap R2 gate'),
   );
-  const liveCheckout = liveRetryLoop.indexOf('git checkout --detach origin/main');
+  const liveCheckout = liveRetryLoop.indexOf('git checkout --detach FETCH_HEAD');
+  assert.equal(
+    liveRetryLoop.includes('git checkout --detach origin/main'),
+    false,
+    'il retry deve usare il commit appena restituito da fetch, non un ref remoto eventualmente stale',
+  );
   const liveKillSwitch = liveRetryLoop.indexOf('if [ -f .github/FAST_PUBLISH_DISABLED ]');
   const liveDependencyRefresh = liveRetryLoop.indexOf('bash scripts/lib/npm-ci-retry.sh');
   const liveEnsure = liveRetryLoop.indexOf('scripts/ci/ensure-host-shell-assets.mjs');
