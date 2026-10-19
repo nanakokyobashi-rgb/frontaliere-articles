@@ -27,6 +27,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.treni-zurigo-stoccarda.title': 'SBB e DB pianificano riserve tra Zurigo e Stoccarda',
     'blog.article.treni-zurigo-stoccarda.excerpt': 'SBB e DB pianificano riserve di percorrenza aggiuntive tra Zurigo e Stoccarda.',
     'blog.article.treni-zurigo-stoccarda.imageAlt': 'Treno passeggeri sul collegamento ferroviario tra Zurigo e Stoccarda',
+    'blog.article.pulizie-tunnel-sciaffusa.title': 'Bundesamt für Strassen chiuderà tre tunnel di notte',
+    'blog.article.pulizie-tunnel-sciaffusa.excerpt': 'Fäsenstaub, Cholfirst e Galgenbuck chiusi ogni notte dal 19 al 23 ottobre, dalle 20 alle 5, per lavori di pulizia.',
+    'blog.article.pulizie-tunnel-sciaffusa.imageAlt': 'Tunnel Fäsenstaub, Cholfirst e Galgenbuck chiusi di notte per lavori di pulizia',
 };
 
 export default blogMetaCantonShIt;
