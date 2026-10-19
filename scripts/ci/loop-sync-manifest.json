@@ -5169,6 +5169,16 @@
       }
     },
     {
+      "path": "scripts/ci/verify-served-fingerprint.mjs",
+      "mode": "corpus-only",
+      "reason": "Registra l'impronta dei byte HTML del set effettivamente pushato dal fast-publish, distingue pushed e clean-no-op per shard e lingua, attende che l'origine GitHub Pages serva il contenuto dove c'e' stato un push reale e verifica l'apex dopo la purge con una sola ripetizione diagnostica. Le sonde hanno un timeout per richiesta legato al budget residuo, cosi' una risposta appesa non blocca la purge. Il sito consuma la superficie risultante e non possiede il publisher o il suo workflow; il confronto e' specifico del corpus che scrive gli shard Pages.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-19"
+      }
+    },
+    {
       "path": "scripts/ci/twin-census-pr-gate.mjs",
       "mode": "corpus-only",
       "reason": "Censimento dei gemelli ristretto ai file AGGIUNTI dalla PR, nel check `tests` che governa il merge (issue 1610): le PR 2096 e 2097 hanno aggiunto due file byte-identici al sito senza dichiararli e il rosso e' comparso solo al cron di `loop-drift-check.yml`. Non esiste sul sito e non deve: il manifest e il suo censimento sono del lato che RICEVE il ciclo, come `loop-baseline-pr-gate.mjs` e `loop-drift-check.mjs`.",

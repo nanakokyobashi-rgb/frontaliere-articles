@@ -74,6 +74,7 @@ on:
       - '.github/workflows/fast-publish-article.yml'
       - 'scripts/publish-article-fast.mjs'
       - 'scripts/ci/fast-publish-section.mjs'
+      - 'scripts/ci/verify-served-fingerprint.mjs'
       - 'scripts/ci/article-image-fallbacks.mjs'
       - 'generator/scripts/lib/corpus-paths.mjs'
       # The body-link preflight is a publisher dependency too: changing its
@@ -730,6 +731,14 @@ jobs:
           summary="$RUNNER_TEMP/fast-summary.json"
           dist="$RUNNER_TEMP/fast-dist"
           shard="$FAST_PUBLISH_SHARD"
+          push_log="$RUNNER_TEMP/article-shard-push.log"
+          push_state="$RUNNER_TEMP/published-push-state.tsv"
+          pushed_hub_paths="$RUNNER_TEMP/pushed-hub-paths.tsv"
+          pushed_hub_summary="$RUNNER_TEMP/pushed-hub-landing.json"
+          : > "$push_log"
+          printf 'shard\tlocale\tstatus\n' > "$push_state"
+          : > "$pushed_hub_paths"
+          exec > >(tee -a "$push_log") 2>&1
 
           # UN SOLO push per locale, articolo + hub insieme.
           #
@@ -765,13 +774,41 @@ jobs:
             # esprimevano: l'articolo è duro, l'hub è morbido («the hub stays stale, the
             # article is unaffected»). Se il push combinato fallisce si riprova col solo
             # articolo, così una pagina hub malformata non può impedire la pubblicazione.
-            if ! bash scripts/lib/push-article-shard-incremental.sh \
+            locale_status="$RUNNER_TEMP/article-shard-push-$loc.status"
+            rm -f "$locale_status"
+            combined_pushed=true
+            if ! ARTICLE_PUSH_STATUS_FILE="$locale_status" bash scripts/lib/push-article-shard-incremental.sh \
                  "$shard" "$loc" "$dist" "${paths[@]}" ${hpaths[@]+"${hpaths[@]}"}; then
               echo "::warning::combined push failed for $shard/$loc — retrying with the article alone (the hub stays stale)"
-              bash scripts/lib/push-article-shard-incremental.sh \
+              combined_pushed=false
+              rm -f "$locale_status"
+              ARTICLE_PUSH_STATUS_FILE="$locale_status" bash scripts/lib/push-article-shard-incremental.sh \
                 "$shard" "$loc" "$dist" "${paths[@]}"
             fi
+            push_status="$(tr -d '\r\n' < "$locale_status")"
+            case "$push_status" in
+              pushed|clean-no-op) ;;
+              *)
+                echo "::error::unexpected push status for $shard/$loc: $push_status"
+                exit 1
+                ;;
+            esac
+            printf '%s\t%s\t%s\n' "$shard" "$loc" "$push_status" >> "$push_state"
+            if [ "$combined_pushed" = true ]; then
+              for hpath in "${hpaths[@]}"; do
+                printf '%s\t%s\n' "$loc" "$hpath" >> "$pushed_hub_paths"
+              done
+            fi
           done
+
+          # A combined push may fall back to the article alone. Build the hub
+          # summary from the paths that went through a successful combined push,
+          # so a stale landing can never enter the served-content TSV or purge.
+          jq -R -s '
+            split("\n")
+            | map(select(length > 0) | split("\t") | {locale: .[0], path: .[1]})
+            | {pages: .}
+          ' "$pushed_hub_paths" > "$pushed_hub_summary"
 
           while IFS=$'\t' read -r local key; do
             [ -n "$local" ] || continue
@@ -799,6 +836,32 @@ jobs:
               echo "::warning::no hub-landing.json — the landing grid was not refreshed for this article"
             fi
           fi
+
+          # Read the bytes after the publisher's CDN offload and after the hub
+          # refresh. These are the bytes that the shard push received, not a
+          # second render and not an HTML marker.
+          node scripts/ci/verify-served-fingerprint.mjs write \
+            --summary "$summary" \
+            --hub-summary "$pushed_hub_summary" \
+            --dist "$dist" \
+            --shard "$shard" \
+            --output "$RUNNER_TEMP/published-fingerprints.tsv"
+
+      - name: Wait for GitHub Pages origin to serve published content
+        if: needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
+        env:
+          PAGES_WAIT_SECONDS: ${{ vars.FAST_PUBLISH_PAGES_WAIT_SECONDS || '720' }}
+        run: |
+          set -euo pipefail
+          args=(
+            wait-origin
+            --fingerprints "$RUNNER_TEMP/published-fingerprints.tsv"
+            --push-state "$RUNNER_TEMP/published-push-state.tsv"
+            --timeout-seconds "$PAGES_WAIT_SECONDS"
+            --poll-seconds 15
+            --run-key "${GITHUB_RUN_ID}.${GITHUB_RUN_ATTEMPT}.${FAST_PUBLISH_SHARD}"
+          )
+          node scripts/ci/verify-served-fingerprint.mjs "${args[@]}"
 
       - name: Purge the edge cache for what was published
         if: needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
@@ -857,7 +920,7 @@ jobs:
           # The landing pages too, or the grid we just refreshed sits behind a
           # 4h edge cache and the article stays invisible on the page readers
           # land on — the exact symptom this refresh exists to fix.
-          hub="$RUNNER_TEMP/hub-landing.json"
+          hub="$RUNNER_TEMP/pushed-hub-landing.json"
           if [ -s "$hub" ]; then
             while IFS=$'\t' read -r loc rel; do
               [ -n "$rel" ] || continue
@@ -915,6 +978,22 @@ jobs:
           summary="$RUNNER_TEMP/fast-summary.json"
           shard="${{ matrix.target.shard }}"
           owner="$(jq -r --arg s "$shard" '.[$s] // "valerielinc-ops"' scripts/lib/section-shard-owners.json)"
+
+          # The first purge ran before this step. Check the canonical apex URL
+          # against the bytes recorded after the push; a 200 with old HTML is
+          # not a successful publish. One retry covers purge propagation or a
+          # transient Cloudflare miss; the second mismatch is terminal and the
+          # helper reports the URL, both fingerprints and cache headers.
+          verify_apex() {
+            node scripts/ci/verify-served-fingerprint.mjs verify-apex \
+              --fingerprints "$RUNNER_TEMP/published-fingerprints.tsv"
+          }
+          if ! verify_apex; then
+            echo "::warning::the apex served content different from the pushed fingerprints — repeating the targeted purge once"
+            bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs \
+              "--files-from=$RUNNER_TEMP/edge-purge-urls.txt"
+            verify_apex
+          fi
 
           # Two checks, deliberately different in strength, because they answer
           # different questions.
