@@ -111899,6 +111899,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-como-manifestazioni-24-ottobre': {
+    title: 'Como, due manifestazioni: una pacifica, l’altra a rischio',
+    description: 'Sarebbero in corso due possibili manifestazioni per il 24 ottobre Una è studentesca, con permessi in regola e finalità pacifiche L’altra è associata a timori',
+    keywords: 'frontalieri, ticino, svizzera, italia, como, manifestazioni, pacifica, altra',
+    ogTitle: 'Como, due manifestazioni e la partita al Sinigaglia',
+    ogDescription: 'Sarebbero in corso due possibili manifestazioni per il 24 ottobre Una è studentesca, con permessi in regola e finalità pacifiche L’altra è associata a timori',
+    canonicalPath: '/articoli-frontaliere/como-manifestazioni-24-ottobre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Como, due manifestazioni: una pacifica, l’altra a rischio",
+      "description": "Sarebbero in corso due possibili manifestazioni per il 24 ottobre Una è studentesca, con permessi in regola e finalità pacifiche L’altra è associata a timori",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-como-manifestazioni-24-ottobre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scorcio urbano di Mendrisio in una giornata autunnale"
+      },
+      "datePublished": "2026-10-19T03:34:10+00:00",
+      "dateModified": "2026-10-19T03:34:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/como-manifestazioni-24-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

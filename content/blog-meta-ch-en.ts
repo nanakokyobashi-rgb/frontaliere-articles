@@ -8513,6 +8513,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.agenda-federale-voto-2026.title': 'Federal Council has transmitted the Switzerland-EU package',
     'blog.article.agenda-federale-voto-2026.excerpt': 'The Switzerland-EU package was submitted on March 13, 2026 On November 29, 2026, a vote will be held on the additional financing of the AVS Guy Parmelin announced',
     'blog.article.agenda-federale-voto-2026.imageAlt': 'Swiss institutional scene linked to federal decisions and popular votes',
+    'blog.article.giovani-donne-stipendi-svizzera.title': 'More Young Swiss women earn less despite being more educated',
+    'blog.article.giovani-donne-stipendi-svizzera.excerpt': 'Born in 1995: income gap of 14% Born in 1965: income gap of 55% In 2025: tertiary education at 54% versus 48% Among parents',
+    'blog.article.giovani-donne-stipendi-svizzera.imageAlt': 'Young woman working in a modern office in Switzerland',
 };
 
 export default blogMetaChEn;

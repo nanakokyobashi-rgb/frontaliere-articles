@@ -30,6 +30,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.disoccupazione-neuchatel-luglio-2026.title': 'Stabilität der Arbeitslosenquote im Kanton Neuenburg im Juli 2026',
     'blog.article.disoccupazione-neuchatel-luglio-2026.excerpt': 'Die Zahl der Arbeitslosen im Kanton Neuenburg ist im Juli 2026 um 54 Personen gestiegen und erreichte 3.905 Personen.',
     'blog.article.disoccupazione-neuchatel-luglio-2026.imageAlt': 'Frau auf Stellensuche in Neuenburg',
+    'blog.article.neuchatel-disoccupazione-maggio-2026.title': 'Neuenburg: Die Arbeitslosenquote sinkt im Mai 2026 auf 4,3%',
+    'blog.article.neuchatel-disoccupazione-maggio-2026.excerpt': 'Im Mai 2026 sinkt die Zahl der Arbeitslosen im Kanton Neuenburg auf 3’924, und die kantonale Quote fällt auf 4,3%, unterstützt durch günstige saisonale Faktoren.',
+    'blog.article.neuchatel-disoccupazione-maggio-2026.imageAlt': 'Arbeitslosenstatistik im Kanton Neuenburg',
 };
 
 export default blogMetaCantonNeDe;

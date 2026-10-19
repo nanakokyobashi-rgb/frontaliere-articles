@@ -182,4 +182,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'rapporto-consiglio-federale-schengen',
+ category: 'novita',
+ date: '2026-10-19T02:54:59.119Z',
+ image: '/images/blog/article-rapporto-consiglio-federale-schengen.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

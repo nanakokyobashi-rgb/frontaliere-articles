@@ -2860,6 +2860,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso': { it: 'ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso', en: 'ps-supports-three-initiatives-and-a-document-on-decent-work', de: 'sp-unterstutzt-drei-initiativen-und-ein-dokument-zu-menschenwurdiger-arbeit', fr: 'le-ps-soutient-trois-initiatives-et-un-document-sur-le-travail-decent' },
  'apprendistato-zurigo-guida-pratica': { it: 'apprendistato-zurigo-guida-pratica', en: 'apprenticeship-zurich-practical-guide', de: 'lehrstelle-zuerich-praxisleitfaden', fr: 'apprentissage-zurich-guide-pratique' },
  'agenda-federale-voto-2026': { it: 'agenda-federale-voto-2026', en: 'swiss-federal-vote-2026', de: 'schweizer-bundesabstimmung-2026', fr: 'vote-federal-suisse-2026' },
+ 'giovani-donne-stipendi-svizzera': { it: 'giovani-donne-stipendi-svizzera', en: 'young-women-salaries-switzerland', de: 'junge-frauen-loehne-schweiz', fr: 'jeunes-femmes-salaires-suisse' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

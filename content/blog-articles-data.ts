@@ -45462,6 +45462,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'como-manifestazioni-24-ottobre',
+ category: 'novita',
+ date: '2026-10-19T03:34:10.246Z',
+ image: '/images/blog/article-como-manifestazioni-24-ottobre.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

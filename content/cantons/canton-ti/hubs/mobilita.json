@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-19T02:30:40.156Z",
-  "contentHash": "36249badc3b6feabbd53e6d6424bb03448b47da46a70277e7f6d2152d77a6745",
+  "updatedAt": "2026-10-19T03:12:38.869Z",
+  "contentHash": "50829a23388acc1b05927d55c85337265f2c5762c8cfd646df29f09c6590bd28",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "41",
+          "value": "39",
           "note": "segnalazioni aggiornate: 18 ottobre 2026"
         }
       ],
@@ -201,6 +201,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Frontalieri, cosa succederebbe senza Schengen?",
+          "url": "/articoli-ticino/rapporto-consiglio-federale-schengen/",
+          "excerpt": "Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Ticino tra le regioni più esposte nello scenario Fino",
+          "date": "2026-10-19T02:54:59.119Z"
+        },
+        {
           "title": "Schengen: possibili controlli sistematici ai confini",
           "url": "/articoli-ticino/uscita-svizzera-schengen-controlli/",
           "excerpt": "Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Fino a 422.000 ore al giorno perse negli ingorghi",
@@ -241,12 +247,6 @@
           "url": "/articoli-frontaliere/tram-treno-lugano-lavori-inizio/",
           "excerpt": "I lavori preliminari per il tram-treno del Luganese inizieranno a fine ottobre 2026 sulla tratta Bioggio-Manno.",
           "date": "2026-09-07T10:00:13.893Z"
-        },
-        {
-          "title": "Modifiche TILO: bus al posto della S10 Chiasso-Melide",
-          "url": "/articoli-frontaliere/tilo-s10-bus-chiasso-melide/",
-          "excerpt": "Dal 13 settembre 2026 la corsa TILO delle 4:11 da Mendrisio verso Chiasso sarà sostituita da un autobus, con partenza anticipata, fino al 19 ottobre 2026.",
-          "date": "2026-09-11T18:59:52.263Z"
         }
       ],
       "latestCantonArticles": [],
@@ -292,7 +292,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T03:12:38.869Z"
     },
     "en": {
       "canton": "TI",
@@ -312,7 +312,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "41",
+          "value": "39",
           "note": "reports as of 18 October 2026"
         }
       ],
@@ -471,6 +471,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Cross-border workers, what would happen without Schengen?",
+          "url": "/en/ticino-articles/federal-council-schengen-report/",
+          "excerpt": "Federal report published on September 18, 2026 Without Schengen: systematic border controls Ticino among the regions most exposed in the Fino scenario",
+          "date": "2026-10-19T02:54:59.119Z"
+        },
+        {
           "title": "Schengen: possible systematic border checks",
           "url": "/en/ticino-articles/switzerland-exit-schengen-border-controls/",
           "excerpt": "Federal report published on September 18, 2026 Without Schengen: systematic border checks Up to 422.000 hours per day lost in traffic jams",
@@ -510,12 +516,6 @@
           "url": "/en/cross-border-articles/tram-train-lugano-works-start/",
           "excerpt": "Preliminary work for the Luganese tram-train will begin at the end of October 2026 on the Bioggio-Manno section.",
           "date": "2026-09-07T10:00:13.893Z"
-        },
-        {
-          "title": "TILO changes: bus instead of the S10 Chiasso-Melide",
-          "url": "/en/cross-border-articles/tilo-changes-bus-instead-of-the-s10-chiasso-melide/",
-          "excerpt": "From 13 September 2026, the 4:11 TILO ride from Mendrisio to Chiasso will be replaced by a bus, with early departure, until 19 October 2026.",
-          "date": "2026-09-11T18:59:52.263Z"
         }
       ],
       "latestCantonArticles": [],
@@ -561,7 +561,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T03:12:38.869Z"
     },
     "de": {
       "canton": "TI",
@@ -581,7 +581,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "41",
+          "value": "39",
           "note": "Meldungen vom 18. Oktober 2026"
         }
       ],
@@ -740,6 +740,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Grenzgänger, was würde ohne Schengen geschehen?",
+          "url": "/de/tessin-artikel/bundesrat-schengen-bericht/",
+          "excerpt": "Am 18. September 2026 veröffentlichter Bundesbericht Ohne Schengen: systematische Kontrollen an den Grenzen Tessin unter den am stärksten betroffenen Regionen im Szenario Bis zu",
+          "date": "2026-10-19T02:54:59.119Z"
+        },
+        {
           "title": "Schengen: mögliche systematische Kontrollen an den Grenzen",
           "url": "/de/tessin-artikel/schweiz-schengen-austritt-grenzkontrollen/",
           "excerpt": "Bundesbericht veröffentlicht am 18.",
@@ -779,12 +785,6 @@
           "url": "/de/grenzgaenger-artikel/strassenbahn-bahn-lugano-bauarbeiten-beginnen/",
           "excerpt": "Die Vorarbeiten für den Luganer Tram-Zug werden Ende Oktober 2026 auf der Strecke Bioggio-Manno beginnen.",
           "date": "2026-09-07T10:00:13.893Z"
-        },
-        {
-          "title": "Änderungen TILO: Bus statt S10 Chiasso-Melide",
-          "url": "/de/grenzgaenger-artikel/anderungen-tilo-bus-statt-s10-chiasso-melide/",
-          "excerpt": "Ab dem 13. September 2026 wird die 4:11 -Tilo-Fahrt von Mendrisio nach Chiasso bis zum 19. Oktober 2026 durch einen Bus mit vorzeitiger Abfahrt ersetzt.",
-          "date": "2026-09-11T18:59:52.263Z"
         }
       ],
       "latestCantonArticles": [],
@@ -830,7 +830,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T03:12:38.869Z"
     },
     "fr": {
       "canton": "TI",
@@ -850,7 +850,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "41",
+          "value": "39",
           "note": "signalements au 18 octobre 2026"
         }
       ],
@@ -1009,6 +1009,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Frontaliers, que se passerait-il sans Schengen ?",
+          "url": "/fr/articles-tessin/rapport-conseil-federal-schengen/",
+          "excerpt": "Rapport fédéral publié le 18 septembre 2026 Sans Schengen : contrôles systématiques aux frontières Le Tessin parmi les régions les plus exposées dans le scénario Jusqu'à",
+          "date": "2026-10-19T02:54:59.119Z"
+        },
+        {
           "title": "Schengen : contrôles systématiques possibles aux frontières",
           "url": "/fr/articles-tessin/suisse-sortie-schengen-controles-frontaliers/",
           "excerpt": "Rapport fédéral publié le 18 septembre 2026 Sans Schengen : contrôles systématiques aux frontières Jusqu’à 422.000 heures perdues chaque jour dans les embouteillages",
@@ -1049,12 +1055,6 @@
           "url": "/fr/articles-frontalier/tram-train-lugano-travaux-debut/",
           "excerpt": "Les travaux préliminaires pour le tram-train du Luganese débuteront fin octobre 2026 sur le tronçon Bioggio-Manno.",
           "date": "2026-09-07T10:00:13.893Z"
-        },
-        {
-          "title": "Modifications TILO : bus à la place du S10 Chiasso-Melide",
-          "url": "/fr/articles-frontalier/modifications-tilo-bus-a-la-place-du-s10-chiasso-melide/",
-          "excerpt": "À partir du 13 septembre 2026, la course TILO de 4h11 de Mendrisio à Chiasso sera remplacée par un bus, avec départ anticipé, jusqu'au 19 octobre 2026.",
-          "date": "2026-09-11T18:59:52.263Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1100,7 +1100,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T03:12:38.869Z"
     }
   }
 }

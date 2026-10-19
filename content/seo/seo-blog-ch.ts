@@ -107544,6 +107544,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-giovani-donne-stipendi-svizzera': {
+    title: 'Di più Le giovani svizzere guadagnano meno nonostante siano più istruite',
+    description: 'Nati nel 1995: divario di reddito del 14% Nati nel 1965: divario di reddito del 55% Nel 2025: istruzione terziaria al 54% contro il 48% Tra i genitori',
+    keywords: 'frontalieri, ticino, svizzera, italia, giovani, svizzere, guadagnano, meno',
+    ogTitle: 'Le giovani svizzere guadagnano meno nonostante siano piu istruite',
+    ogDescription: 'Nati nel 1995: divario di reddito del 14% Nati nel 1965: divario di reddito del 55% Nel 2025: istruzione terziaria al 54% contro il 48% Tra i genitori',
+    canonicalPath: '/articoli-svizzera/giovani-donne-stipendi-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
+      "description": "Nati nel 1995: divario di reddito del 14% Nati nel 1965: divario di reddito del 55% Nel 2025: istruzione terziaria al 54% contro il 48% Tra i genitori",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-divario-reddito-giovani-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Giovane donna lavora in un ufficio moderno in Svizzera"
+      },
+      "datePublished": "2026-10-19T03:17:11+00:00",
+      "dateModified": "2026-10-19T03:17:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/giovani-donne-stipendi-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

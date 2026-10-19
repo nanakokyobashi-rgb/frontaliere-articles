@@ -51,6 +51,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.mozione-gran-consiglio-tassa-salute.title': 'Motion im Grossen Rat gegen die Gesundheitssteuer',
     'blog.article.mozione-gran-consiglio-tassa-salute.excerpt': 'Eine überparteiliche Motion wurde im Grossen Rat eingereicht Die Forderung betrifft die Sperrung der Rückerstattungen an Italien OCST weist auf den diplomatischen Weg hin',
     'blog.article.mozione-gran-consiglio-tassa-salute.imageAlt': 'Grosser Rat des Kantons Tessin in Bellinzona',
+    'blog.article.rapporto-consiglio-federale-schengen.title': 'Grenzgänger, was würde ohne Schengen geschehen?',
+    'blog.article.rapporto-consiglio-federale-schengen.excerpt': 'Am 18. September 2026 veröffentlichter Bundesbericht Ohne Schengen: systematische Kontrollen an den Grenzen Tessin unter den am stärksten betroffenen Regionen im Szenario Bis zu',
+    'blog.article.rapporto-consiglio-federale-schengen.imageAlt': 'Grenzübergang im Tessin und Zollkontrollen',
 };
 
 export default blogMetaCantonTiDe;

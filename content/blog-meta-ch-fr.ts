@@ -8513,6 +8513,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.agenda-federale-voto-2026.title': 'Le Conseil fédéral a transmis le paquet Suisse-UE',
     'blog.article.agenda-federale-voto-2026.excerpt': 'Le paquet Suisse-UE a été transmis le 13 mars 2026 Le 29 novembre 2026 on votera sur le financement supplémentaire de l\'AVS Guy Parmelin a annoncé',
     'blog.article.agenda-federale-voto-2026.imageAlt': 'Scène institutionnelle suisse liée aux décisions fédérales et aux votations populaires',
+    'blog.article.giovani-donne-stipendi-svizzera.title': 'Les jeunes Suissesses gagnent moins malgré leurs études',
+    'blog.article.giovani-donne-stipendi-svizzera.excerpt': 'Nés en 1995 : écart de revenu de 14 % Nés en 1965 : écart de revenu de 55 % En 2025 : formation tertiaire à 54 % contre 48 % Chez les parents',
+    'blog.article.giovani-donne-stipendi-svizzera.imageAlt': 'Jeune femme travaillant dans un bureau moderne en Suisse',
 };
 
 export default blogMetaChFr;
