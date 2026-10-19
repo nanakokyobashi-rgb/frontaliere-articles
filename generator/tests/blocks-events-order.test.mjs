@@ -233,6 +233,7 @@ test('eventi: riordina i gruppi secondo il record rappresentativo scelto', () =>
         url: 'https://events.example.org/event/shared#dettaglio',
         startTime: '08:00',
       }),
+      event('controllo-futuro', 'Evento di controllo', tomorrow, { id: 'future-event' }),
     ],
   };
 
