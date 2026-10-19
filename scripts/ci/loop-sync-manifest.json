@@ -6227,13 +6227,11 @@
     },
     {
       "path": "scripts/ci/guard-main-tree-shrink.mjs",
-      "mode": "corpus-only-pending",
-      "trackingIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/13874",
-      "reason": "La sorgente viene introdotta qui per proteggere i writer corpus; il follow-up tracciato nell'issue #13874 porta la copia agli altri writer diretti di main. Dopo entrambi i merge, verificare i blob e promuovere a identical.",
+      "mode": "identical",
       "baseline": {
-        "site": null,
-        "corpus": null,
-        "alignedAt": "2026-10-18"
+        "site": "6e5b0eecb97ac3e8",
+        "corpus": "6e5b0eecb97ac3e8",
+        "alignedAt": "2026-10-19"
       }
     },
     {
@@ -6264,6 +6262,24 @@
         "site": "a35decce7435839c",
         "corpus": "a35decce7435839c",
         "alignedAt": "2026-10-18"
+      }
+    },
+    {
+      "path": "scripts/lib/git-fetch-target.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "2a0403d019280e0f",
+        "corpus": "2a0403d019280e0f",
+        "alignedAt": "2026-10-19"
+      }
+    },
+    {
+      "path": "scripts/lib/single-flight-lock.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "4cb6ab1ae26b751c",
+        "corpus": "4cb6ab1ae26b751c",
+        "alignedAt": "2026-10-19"
       }
     }
   ]
