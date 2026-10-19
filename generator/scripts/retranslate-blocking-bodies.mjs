@@ -1420,11 +1420,37 @@ function addressPostalMatchFollowsAddressSegment(line, postalMatches, postalMatc
   });
 }
 
+function addressPostalCodesForLines(lines) {
+  const codes = [];
+  for (const rawLine of lines) {
+    const projection = visibleAddressOffsetMap(rawLine);
+    if (projection.opaque) continue;
+    const line = projection.text;
+    const postalMatches = addressPostalMatches(projection);
+    for (const postalMatch of postalMatches) {
+      const followsAddressSegment = addressPostalMatchFollowsAddressSegment(
+        line,
+        postalMatches,
+        postalMatch,
+      );
+      if (!isAddressLine(line, postalMatch) && !followsAddressSegment) continue;
+      codes.push(postalMatch[0]);
+    }
+  }
+  return codes;
+}
+
 function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
-  const allCandidates = [];
+  const allAddressCandidates = [];
   const candidates = [];
   let opaque = false;
+  let unexpectedAddressCandidate = false;
   const expectedLocalityTerms = addressLocalityFormsForSourceLine(sourceLine, locale);
+  const expectedPostalCodes = new Set(
+    Array.isArray(sourceLine.postalCodes) && sourceLine.postalCodes.length > 0
+      ? sourceLine.postalCodes
+      : [sourceLine.postalCode],
+  );
   lines.forEach((rawLine, index) => {
     // A single visible line may contain more than one postal-code/address
     // segment. Each CAP match is assigned at most once, including when the
@@ -1435,7 +1461,6 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
     const line = projection.text;
     const postalMatches = addressPostalMatches(projection);
     for (const postalMatch of postalMatches) {
-      if (postalMatch[0] !== sourceLine.postalCode) continue;
       const followsAddressSegment = addressPostalMatchFollowsAddressSegment(
         line,
         postalMatches,
@@ -1450,6 +1475,7 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
       const candidate = {
         index,
         matchKey,
+        postalCode: postalMatch[0],
         postalMatchIndex: postalMatch.postalMatchIndex,
         text: rawLine,
         segment: [
@@ -1462,11 +1488,17 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
         ].filter(Boolean).join(' '),
         context: addressContextForPostalCode(line, postalMatch),
       };
-      allCandidates.push(candidate);
+      allAddressCandidates.push(candidate);
+      if (!expectedPostalCodes.has(candidate.postalCode)) unexpectedAddressCandidate = true;
+      if (candidate.postalCode !== sourceLine.postalCode) continue;
       if (!usedTargetMatches.has(matchKey)) candidates.push(candidate);
     }
   });
   if (candidates.length === 0) return { index: -1, text: '', segment: '', opaque };
+  // A translated line may preserve the expected address and append another
+  // source-looking CAP. Do not let context/toponym matching select the valid
+  // candidate while silently accepting that extra address.
+  if (unexpectedAddressCandidate) return { index: -1, text: '', segment: '', opaque };
 
   const contextMatches = sourceLine.context
     ? candidates.filter((candidate) => candidate.context === sourceLine.context)
@@ -1481,11 +1513,11 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
   const ordinalMatches = candidates.filter((candidate) =>
     candidate.postalMatchIndex === sourceLine.postalMatchIndex);
   const targetHasCompleteOrdinalSet = sourceLine.postalMatchCount > 1
-    && allCandidates.length === sourceLine.postalMatchCount
-    && new Set(allCandidates.map((candidate) => candidate.postalMatchIndex)).size
+    && allAddressCandidates.length === sourceLine.postalMatchCount
+    && new Set(allAddressCandidates.map((candidate) => candidate.postalMatchIndex)).size
       === sourceLine.postalMatchCount
     && Array.from({ length: sourceLine.postalMatchCount }, (_, ordinal) => ordinal)
-      .every((ordinal) => allCandidates.some((candidate) =>
+      .every((ordinal) => allAddressCandidates.some((candidate) =>
         candidate.postalMatchIndex === ordinal));
   let selected = null;
   if (contextMatches.length === 1) {
@@ -1521,6 +1553,7 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
     const sourceLines = String(italianText ?? '').split('\n');
     const targetLines = String(newSections?.[field] ?? '').split('\n');
     const usedTargetMatches = new Set();
+    const sourceAddressPostalCodes = addressPostalCodesForLines(sourceLines);
     sourceLines.forEach((line, lineIndex) => {
       const projection = visibleAddressOffsetMap(line);
       if (projection.opaque && /\b\d{5}\b/u.test(line)) {
@@ -1565,6 +1598,7 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
           hasDescriptionColon: addressHasDescriptionColon(visibleLine, postalMatch),
           context: addressContextForPostalCode(visibleLine, postalMatch),
           tokens: [...new Set(tokens)],
+          postalCodes: sourceAddressPostalCodes,
         };
         const target = addressLineTarget(
           targetLines,

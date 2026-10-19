@@ -1499,6 +1499,17 @@ test('FU-004 lascia associare una riga sorgente spezzata in target distinti', ()
   ]);
 });
 
+test('FU-004 rifiuta un CAP-address aggiuntivo sulla riga target anche con toponimo valido', () => {
+  const mismatches = findAddressToponymMismatches({
+    italianSections: { body1: 'Via Roma 1, 22100 Como' },
+    newSections: { body1: 'Rue Roma 1, 22100 Como, 69000 Lyon' },
+    locale: 'en',
+  });
+  assert.deepEqual(mismatches.map(({ postalCode, missing }) => ({ postalCode, missing })), [
+    { postalCode: '22100', missing: ['Como'] },
+  ]);
+});
+
 test('FU-008 riconosce le particelle minuscole nelle località composte', () => {
   assert.deepEqual(addressPostalLocalityWords('San Giorgio a Liri'), [
     'San', 'Giorgio', 'a', 'Liri',
@@ -1645,6 +1656,24 @@ test('la guardia disambigua due righe con lo stesso CAP dopo il riordino', () =>
       body1: [
         'Via Milano 2, 22100 Varese',
         'Via Roma 1, 22100 Como',
+      ].join('\n'),
+    },
+    locale: 'en',
+  }), []);
+});
+
+test('la guardia non tratta il CAP della riga sorgente vicina come CAP surplus', () => {
+  assert.deepEqual(findAddressToponymMismatches({
+    italianSections: {
+      body1: [
+        'Via Roma 1, 22100 Como',
+        'Via Milano 2, 20100 Varese',
+      ].join('\n'),
+    },
+    newSections: {
+      body1: [
+        'Rue Roma 1, 22100 Como',
+        'Rue Milano 2, 20100 Varese',
       ].join('\n'),
     },
     locale: 'en',
