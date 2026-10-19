@@ -94,4 +94,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'teufen-budget-deficit-2027',
+ category: 'fiscale',
+ date: '2026-10-19T15:18:22.893Z',
+ image: '/images/blog/article-teufen-budget-deficit-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

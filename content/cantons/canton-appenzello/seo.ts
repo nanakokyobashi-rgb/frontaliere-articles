@@ -314,6 +314,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-teufen-budget-deficit-2027': {
+    title: 'Teufen: preventivo 2027 per ridurre il deficit operativo',
+    description: 'Teufen stima per il 2027 entrate fiscali di 38,9 milioni di franchi: +2,2%, pari a 0,8 milioni, soprattutto dalle persone fisiche, nel bilancio comunale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, teufen, preventivo, ridurre, deficit',
+    ogTitle: 'Teufen: +2,2% di entrate fiscali nel 2027',
+    ogDescription: 'Teufen punta a ridurre il deficit operativo con il preventivo 2027. Le entrate fiscali sono stimate in 38,9 milioni di franchi, 0,8 milioni in più del preventivo precedente (+2,2%); il Comune indica soprattutto le imposte delle persone fisiche.',
+    canonicalPath: '/articoli-appenzello/teufen-budget-deficit-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Teufen: preventivo 2027 per ridurre il deficit operativo",
+      "description": "Teufen stima per il 2027 entrate fiscali di 38,9 milioni di franchi: +2,2%, pari a 0,8 milioni, soprattutto dalle persone fisiche, nel bilancio comunale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-teufen-budget-deficit-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T15:18:22+00:00",
+      "dateModified": "2026-10-19T15:18:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/teufen-budget-deficit-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

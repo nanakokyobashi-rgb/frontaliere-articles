@@ -11,6 +11,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'eventi-weekend-appenzello': { it: 'eventi-weekend-appenzello', en: 'weekend-events-appenzell', de: 'wochenend-veranstaltungen-appenzell', fr: 'evenements-week-end-appenzell' },
  'raiba-nuova-area-previdenza': { it: 'raiba-nuova-area-previdenza', en: 'raiba-new-pension-area', de: 'raiba-neuer-vorsorgebereich', fr: 'raiba-nouveau-domaine-prevoyance' },
  'gais-alterszentrum-rotewies-rette-aumento': { it: 'gais-alterszentrum-rotewies-rette-aumento', en: 'gais-alterszentrum-rotewies-fee-increase', de: 'gais-alterszentrum-rotewies-gebuhren-erhoehung', fr: 'gais-centre-rotewies-augmentation-frais' },
+ 'teufen-budget-deficit-2027': { it: 'teufen-budget-deficit-2027', en: 'teufen-2027-budget-deficit', de: 'teufen-voranschlag-defizit-2027', fr: 'teufen-budget-2027-pour-reduire-le-deficit-operationnel' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
