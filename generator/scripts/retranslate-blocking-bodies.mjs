@@ -153,6 +153,10 @@
  *                      guardie (`translateFieldFreeMt`, `sanitizeBodyText`,
  *                      fatti chiave, `runFactualityGates`, residuo italiano,
  *                      `translationSanityIssue`, `shouldWrite`).
+ *   --empty-cascade-threshold <r>
+ *                      soglia osservatore in rapporto 0..1 (default 0.2),
+ *                      configurabile anche con
+ *                      RETRANSLATE_EMPTY_CASCADE_THRESHOLD
  *   --content-root <p> radice che contiene content/ (default: root del repo)
  *   --json             report macchina invece della tabella
  *   --out <file>       scrive il report `--json` in un file. Serve davvero: i
@@ -2379,6 +2383,17 @@ export function parseEngine(raw) {
   return TRANSLATION_ENGINES.includes(value) ? value : null;
 }
 
+function codexFailureReason(error) {
+  const text = `${error?.name || ''} ${error?.message || ''}`.toLowerCase();
+  if (/timeout|timed out|scadenza/u.test(text)) return 'timeout';
+  if (/429|quota|rate limit|rate-limit/u.test(text)) return 'quota-429';
+  if (/401|403|auth|credential|login|token|api key|unauthoriz/u.test(text)) {
+    return 'router-unconfigured';
+  }
+  if (/fetch failed|network|dns|tls|connection reset|econn/u.test(text)) return 'network-error';
+  return 'provider-error';
+}
+
 /**
  * Il `translate` iniettato in `translateFieldFreeMt` per il motore scelto.
  * E' l'UNICO punto in cui i motori differiscono: tutto cio' che segue
@@ -2418,7 +2433,7 @@ export function engineTranslator(engine, {
         provider,
         attempt,
         status: 'failed',
-        reasons: ['provider-error'],
+        reasons: [codexFailureReason(error)],
       });
       throw error;
     }
@@ -2427,7 +2442,16 @@ export function engineTranslator(engine, {
   if (engine === 'cascade') {
     return async (args) => {
       const out = await cascadeTranslate(args);
-      if (out || typeof codexCall !== 'function') return out;
+      if (out) return out;
+      if (typeof codexCall !== 'function') {
+        recordTranslationProviderAttempt(args?._outcome, {
+          provider: 'codex-local-fallback',
+          attempt: Number.isInteger(args?._outcome?.attempt) ? args._outcome.attempt + 1 : 1,
+          status: 'failed',
+          reasons: ['router-unconfigured'],
+        });
+        return out;
+      }
       return runLocalCodex(args, 'codex-local-fallback');
     };
   }
@@ -2515,6 +2539,15 @@ async function main() {
   const ENGINE = parseEngine(rawEngine);
   if (ENGINE === null) {
     console.error(`❌ --engine "${rawEngine}" non è un motore noto (${TRANSLATION_ENGINES.join(', ')}).`);
+    process.exit(2);
+  }
+  let emptyCascadeThreshold;
+  try {
+    emptyCascadeThreshold = parseEmptyCascadeThreshold(
+      flag('empty-cascade-threshold', process.env.RETRANSLATE_EMPTY_CASCADE_THRESHOLD),
+    );
+  } catch (error) {
+    console.error(`❌ ${error.message}`);
     process.exit(2);
   }
   let translate;
@@ -2651,7 +2684,15 @@ async function main() {
   };
   await Promise.all(Array.from({ length: Math.min(CONCURRENCY, pairs.length) }, worker));
 
-  report(results, { APPLY, AS_JSON, ENGINE, total: pairs.length, OUT: flag('out') && resolve(flag('out')) });
+  const emptyCascade = report(results, {
+    APPLY,
+    AS_JSON,
+    ENGINE,
+    total: pairs.length,
+    OUT: flag('out') && resolve(flag('out')),
+    emptyCascadeThreshold,
+  });
+  process.exitCode = emptyCascadeExitCode(emptyCascade);
 }
 
 export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeTranslateWithRetry }) {
@@ -2770,7 +2811,7 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
       if (!out) {
         missingField ??= f;
         missingFields.push(f);
-        translationFailures.push({ field: f, ...summarizeTranslationOutcome(translationOutcome) });
+        translationFailures.push({ field: f, ...summarizeTranslationFailure(translationOutcome) });
         translationFieldResults.push({ field: f, status: 'empty' });
         continue;
       }
@@ -2784,7 +2825,7 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
         translationFailures.push({
           field: f,
           stage: 'sanitize-output',
-          ...summarizeTranslationOutcome(translationOutcome),
+          ...summarizeTranslationFailure(translationOutcome),
         });
         translationFieldResults.push({ field: f, status: 'rejected' });
         continue;
@@ -2930,6 +2971,93 @@ export async function processPair(pair, { CONTENT_ROOT, APPLY, translate = freeT
 // singolo endpoint transiente in allarme su un lotto sostanzioso.
 export const EMPTY_CASCADE_RATE_THRESHOLD = 0.2;
 
+export const EMPTY_CASCADE_OBSERVER_EXIT_CODE = 3;
+
+/** Parse the configurable empty-cascade rate without accepting a silent no-op. */
+export function parseEmptyCascadeThreshold(raw, fallback = EMPTY_CASCADE_RATE_THRESHOLD) {
+  if (raw === null || raw === undefined) return fallback;
+  if (String(raw).trim() === '') {
+    throw new RangeError('soglia cascata vuota non valida: valore vuoto (atteso un numero fra 0 e 1)');
+  }
+  const value = Number(raw);
+  if (!Number.isFinite(value) || value < 0 || value > 1) {
+    throw new RangeError(`soglia cascata vuota non valida: ${raw} (atteso un numero fra 0 e 1)`);
+  }
+  return value;
+}
+
+export function emptyCascadeExitCode(metric) {
+  return metric?.firing ? EMPTY_CASCADE_OBSERVER_EXIT_CODE : 0;
+}
+
+const TRANSLATION_FAILURE_DESCRIPTORS = Object.freeze([
+  { test: (reason) => /router-unconfigured/u.test(reason), failureClass: 'config', message: 'router Codex non configurato' },
+  { test: (reason) => /quota|429|rate-limit|keys-exhausted|daily-cap/u.test(reason), failureClass: 'quota', message: 'quota o HTTP 429' },
+  { test: (reason) => /auth|401|403|credential/u.test(reason), failureClass: 'auth', message: 'autenticazione o HTTP 401/403' },
+  { test: (reason) => /timeout/u.test(reason), failureClass: 'timeout', message: 'timeout' },
+  { test: (reason) => /network|request-error|fetch|dns|tls|connection/u.test(reason), failureClass: 'network', message: 'errore di rete' },
+  { test: (reason) => /structure:/u.test(reason), failureClass: 'structure', message: 'rifiuto della struttura' },
+  { test: (reason) => /passthrough|source-echo/u.test(reason), failureClass: 'passthrough', message: 'passthrough della sorgente' },
+  { test: (reason) => /empty|incomplete|no-output/u.test(reason), failureClass: 'empty', message: 'uscita vuota' },
+  { test: (reason) => /meta-response/u.test(reason), failureClass: 'rejection', message: 'rifiuto del modello' },
+]);
+
+function translationFailureDescriptor(reason) {
+  const normalized = String(reason || 'provider-error');
+  return TRANSLATION_FAILURE_DESCRIPTORS.find(({ test }) => test(normalized))
+    || { failureClass: 'provider', message: 'errore del provider' };
+}
+
+function enrichTranslationProviderDiagnostic(provider) {
+  if (!provider?.failures) return provider;
+  const reasons = Object.keys(provider.reasons || {});
+  const descriptors = (reasons.length ? reasons : ['empty-output']).map(translationFailureDescriptor);
+  const failureClasses = [...new Set(descriptors.map(({ failureClass }) => failureClass))];
+  const messages = [...new Set(descriptors.map(({ message }) => message))];
+  return {
+    ...provider,
+    failureClass: failureClasses.length === 1 ? failureClasses[0] : 'multiple',
+    failureClasses,
+    message: messages.join('; '),
+  };
+}
+
+function summarizeTranslationFailure(outcome) {
+  const summary = summarizeTranslationOutcome(outcome);
+  return {
+    ...summary,
+    providers: summary.providers.map(enrichTranslationProviderDiagnostic),
+  };
+}
+
+/** Aggregate the failed fields so a lot can be triaged without opening each row. */
+export function summarizeEmptyCascadeProviders(results) {
+  const byProvider = new Map();
+  for (const row of Array.isArray(results) ? results : []) {
+    for (const failure of row?.translationFailures || []) {
+      for (const provider of failure?.providers || []) {
+        const current = byProvider.get(provider.provider) || {
+          provider: provider.provider,
+          attempts: 0,
+          successes: 0,
+          failures: 0,
+          reasons: {},
+        };
+        current.attempts += provider.attempts || 0;
+        current.successes += provider.successes || 0;
+        current.failures += provider.failures || 0;
+        for (const [reason, count] of Object.entries(provider.reasons || {})) {
+          current.reasons[reason] = (current.reasons[reason] || 0) + count;
+        }
+        byProvider.set(provider.provider, current);
+      }
+    }
+  }
+  return [...byProvider.values()]
+    .sort((a, b) => a.provider.localeCompare(b.provider))
+    .map(enrichTranslationProviderDiagnostic);
+}
+
 export function emptyCascadeMetric(results, threshold = EMPTY_CASCADE_RATE_THRESHOLD) {
   let count = 0;
   let total = 0;
@@ -2958,19 +3086,45 @@ export function emptyCascadeMetric(results, threshold = EMPTY_CASCADE_RATE_THRES
   return { count, total, rate, threshold, firing: total > 0 && rate > threshold };
 }
 
-function report(results, { APPLY, AS_JSON, ENGINE = 'cascade', total, OUT }) {
-  const emptyCascade = emptyCascadeMetric(results);
-  const metrics = { emptyCascade };
+function report(results, {
+  APPLY,
+  AS_JSON,
+  ENGINE = 'cascade',
+  total,
+  OUT,
+  emptyCascadeThreshold = EMPTY_CASCADE_RATE_THRESHOLD,
+}) {
+  const emptyCascade = emptyCascadeMetric(results, emptyCascadeThreshold);
+  const providers = summarizeEmptyCascadeProviders(results);
+  const metrics = { emptyCascade: { ...emptyCascade, providers } };
   const payload = () => JSON.stringify({
     mode: APPLY ? 'apply' : 'dry-run', engine: ENGINE, total, metrics, results,
   }, null, 2);
+  const printObserverSummary = () => {
+    if (!emptyCascade.firing) return;
+    const write = AS_JSON && !OUT ? console.error : console.log;
+    write(`\n⚠️ osservatore cascata vuota: ${emptyCascade.count}/${emptyCascade.total}`
+      + ` (${(emptyCascade.rate * 100).toFixed(1)}%, soglia ${(emptyCascade.threshold * 100).toFixed(1)}%)`);
+    if (!providers.length) {
+      write('  nessun dettaglio provider disponibile');
+      return;
+    }
+    write('  riepilogo provider:');
+    for (const provider of providers) {
+      write(`  ${provider.provider.padEnd(24)} ${provider.failures}/${provider.attempts}`
+        + ` — ${provider.failureClass}: ${provider.message}`);
+    }
+  };
   if (OUT) {
     // Su file, non su stdout: i tier loggano li' e romperebbero il parse.
     writeAtomic(OUT, payload());
     console.log(`report JSON → ${OUT}`);
+    printObserverSummary();
+    return emptyCascade;
   } else if (AS_JSON) {
     console.log(payload());
-    return;
+    printObserverSummary();
+    return emptyCascade;
   }
   const written = results.filter((r) => r.written).length;
   const clean = results.filter((r) => r.reason === 'pulita').length;
@@ -3013,6 +3167,8 @@ function report(results, { APPLY, AS_JSON, ENGINE = 'cascade', total, OUT }) {
     console.log('\n  esempi di ri-fallite (codice vecchio → nuovo):');
     for (const r of bad) console.log(`    ${r.locale}/${r.id}  ${r.oldCodes.join(',')} → ${r.newCodes.join(',')}`);
   }
+  printObserverSummary();
+  return emptyCascade;
 }
 
 // `import` dal test non deve far partire una run di rete. Risolviamo entrambi
