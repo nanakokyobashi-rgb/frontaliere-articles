@@ -1665,6 +1665,13 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
     const publisher = fs.readFileSync(new URL(publisherWorkflow, import.meta.url), 'utf8');
     assert.match(publisher, /dispatch_nonce:/u);
     assert.match(publisher, /run-name:[^\n]*nonce=\$\{\{ inputs\.dispatch_nonce \|\| 'none' \}\}/u);
+    const resolveJob = publisher.slice(publisher.indexOf('\n  resolve:'), publisher.indexOf('\n  publish:'));
+    assert.match(resolveJob, /\n    timeout-minutes: 10\n/u);
+    assert.match(
+      resolveJob,
+      /- name: [^\n]*base \(resolve\)[\s\S]*?&& ! git cat-file -e "\$\{PUSH_BEFORE\}\^\{commit\}" 2>\/dev\/null; then[\s\S]*?git fetch --no-tags --depth=1 origin "\$PUSH_BEFORE"/u,
+      `${publisherWorkflow}: resolve should fetch a missing push base only`,
+    );
   }
 
   const articlePublisher = fs.readFileSync(new URL('../../.github/workflows/fast-publish-article.yml', import.meta.url), 'utf8');

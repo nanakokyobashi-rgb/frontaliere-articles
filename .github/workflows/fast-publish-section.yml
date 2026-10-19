@@ -187,7 +187,10 @@ jobs:
         github.event.workflow_run.event == 'workflow_dispatch') &&
        github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    # Checkout plus runner teardown occasionally outlive the normal fast path;
+    # keep a successful resolution from being cancelled by transient runner
+    # overhead while still bounding a genuinely stuck resolver.
+    timeout-minutes: 10
     outputs:
       matrix: ${{ steps.plan.outputs.matrix }}
       any: ${{ steps.plan.outputs.any }}
@@ -298,7 +301,12 @@ jobs:
           PUSH_BEFORE: ${{ steps.push_range.outputs.before }}
         run: |
           set -euo pipefail
-          if [ -n "${PUSH_BEFORE:-}" ] && [[ ! "$PUSH_BEFORE" =~ ^0+$ ]]; then
+          # fetch-depth: 2 already contains the base for an ordinary
+          # single-commit push. Only pay for a network fetch when a multi-
+          # commit push needs a base outside that shallow checkout.
+          if [ -n "${PUSH_BEFORE:-}" ] \
+            && [[ ! "$PUSH_BEFORE" =~ ^0+$ ]] \
+            && ! git cat-file -e "${PUSH_BEFORE}^{commit}" 2>/dev/null; then
             git fetch --no-tags --depth=1 origin "$PUSH_BEFORE"
           fi
 

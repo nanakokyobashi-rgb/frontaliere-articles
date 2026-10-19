@@ -144,7 +144,10 @@ jobs:
   # un suo step: da qui la separazione.
   resolve:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    # Checkout plus runner teardown occasionally outlive the normal fast path;
+    # keep a successful resolution from being cancelled by transient runner
+    # overhead while still bounding a genuinely stuck resolver.
+    timeout-minutes: 10
     outputs:
       skip: ${{ steps.mode.outputs.skip }}
       skip_reason: ${{ steps.mode.outputs.skip_reason }}
@@ -168,7 +171,12 @@ jobs:
           PUSH_BEFORE: ${{ github.event.before }}
         run: |
           set -euo pipefail
-          if [ -n "${PUSH_BEFORE:-}" ] && [[ ! "$PUSH_BEFORE" =~ ^0+$ ]]; then
+          # fetch-depth: 2 already contains the base for an ordinary
+          # single-commit push. Only pay for a network fetch when a multi-
+          # commit push needs a base outside that shallow checkout.
+          if [ -n "${PUSH_BEFORE:-}" ] \
+            && [[ ! "$PUSH_BEFORE" =~ ^0+$ ]] \
+            && ! git cat-file -e "${PUSH_BEFORE}^{commit}" 2>/dev/null; then
             git fetch --no-tags --depth=1 origin "$PUSH_BEFORE"
           fi
 
