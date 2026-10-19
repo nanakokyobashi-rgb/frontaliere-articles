@@ -8516,6 +8516,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.giovani-donne-stipendi-svizzera.title': 'Les jeunes Suissesses gagnent moins malgré leurs études',
     'blog.article.giovani-donne-stipendi-svizzera.excerpt': 'Nés en 1995 : écart de revenu de 14 % Nés en 1965 : écart de revenu de 55 % En 2025 : formation tertiaire à 54 % contre 48 % Chez les parents',
     'blog.article.giovani-donne-stipendi-svizzera.imageAlt': 'Jeune femme travaillant dans un bureau moderne en Suisse',
+    'blog.article.imposta-successione-donazione-zurigo-regole.title': 'Impôt sur les successions et les donations dans le canton de Zurich',
+    'blog.article.imposta-successione-donazione-zurigo-regole.excerpt': 'Guide de l’impôt sur les successions et les donations dans le canton de Zurich : taux selon le degré de parenté, exonérations pour le conjoint et les descendants, et obligations.',
+    'blog.article.imposta-successione-donazione-zurigo-regole.imageAlt': 'Impôt sur les successions et donations dans le canton de Zurich',
 };
 
 export default blogMetaChFr;

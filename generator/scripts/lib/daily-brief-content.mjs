@@ -292,59 +292,13 @@ function canonicalDay(value) {
   return Number.isFinite(ms) && new Date(ms).toISOString().slice(0, 10) === value ? ms : null;
 }
 
-function completePeriod(period) {
-  const from = canonicalDay(period?.from);
-  const to = canonicalDay(period?.to);
-  return from !== null && to !== null && to - from === 6 * DAY_MS;
-}
-
-function jobsTrendPeriods(jobs, dateIso) {
-  if (jobs?.currentPeriod == null && jobs?.previousPeriod == null) {
-    const lastClosed = canonicalDay(jobs?.lastClosedDay);
-    const editionDate = canonicalDay(dateIso);
-    if (lastClosed === null || editionDate === null || lastClosed !== editionDate - DAY_MS) return null;
-    const previousTo = new Date(lastClosed - 7 * DAY_MS).toISOString().slice(0, 10);
-    return {
-      currentPeriod: { from: new Date(lastClosed - 6 * DAY_MS).toISOString().slice(0, 10), to: jobs.lastClosedDay },
-      previousPeriod: { from: new Date(lastClosed - 13 * DAY_MS).toISOString().slice(0, 10), to: previousTo },
-    };
-  }
-  return { currentPeriod: jobs?.currentPeriod, previousPeriod: jobs?.previousPeriod };
-}
-
-function validJobsTrend(jobs, dateIso) {
-  const periods = jobsTrendPeriods(jobs, dateIso);
-  const currentPeriod = periods?.currentPeriod;
-  const previousPeriod = periods?.previousPeriod;
-  const currentFrom = canonicalDay(currentPeriod?.from);
-  const currentTo = canonicalDay(currentPeriod?.to);
-  const previousFrom = canonicalDay(previousPeriod?.from);
-  const previousTo = canonicalDay(previousPeriod?.to);
-  const calculatedChange = Number.isFinite(jobs?.currentWeekAdded) && Number.isFinite(jobs?.previousWeekAdded)
-    ? jobs.currentWeekAdded - jobs.previousWeekAdded : null;
-  const calculatedPct = Number.isFinite(jobs?.currentWeekAdded) && Number.isFinite(jobs?.previousWeekAdded) && jobs.previousWeekAdded > 0
-    ? Math.round((jobs.currentWeekAdded / jobs.previousWeekAdded - 1) * 1000) / 10 : null;
-  const valid = completePeriod(currentPeriod) && completePeriod(previousPeriod)
-    && currentFrom !== null && currentTo !== null && previousFrom !== null && previousTo !== null
-    && previousTo + DAY_MS === currentFrom
-    && jobs.lastClosedDay === currentPeriod.to
-    && Number.isFinite(jobs.currentWeekAdded) && Number.isFinite(jobs.previousWeekAdded)
-    && jobs.previousWeekAdded > 0 && Number.isFinite(jobs.weeklyChange)
-    && Number.isFinite(jobs.weeklyChangePct)
-    && jobs.weeklyChange === calculatedChange
-    && jobs.weeklyChangePct === calculatedPct
-    && Math.abs(jobs.weeklyChangePct) >= EDITORIAL_SIGNAL_FLOORS.jobsChangePct
-    && Math.abs(jobs.weeklyChange) >= EDITORIAL_SIGNAL_FLOORS.jobsChangeCount;
-  return valid ? periods : null;
-}
-
 /**
  * Select one primary finding from comparisons with a traceable baseline. The
  * thresholds are expressed as multiples of documented materiality floors, so
  * unlike comparing minutes, listings and euros directly, the ranking is
  * dimensionless. A current queue of at least 30 minutes is also a valid
  * stand-alone finding. When no signal clears its floor, the headline stays
- * neutral; yesterday's raw job count is not a trend.
+ * neutral; an unfinalized job-board date bucket is not a lead signal.
  */
 export function pickHeadline(blocks, insights = {}, dateIso) {
   const candidates = [];
@@ -375,18 +329,6 @@ export function pickHeadline(blocks, insights = {}, dateIso) {
       add(bw.worst.waitMinutes / EDITORIAL_SIGNAL_FLOORS.borderWaitMinutes, 0,
         { kind: 'borderWait', name: bw.worst.name, minutes: bw.worst.waitMinutes });
     }
-  }
-
-  const jobs = insights?.jobs;
-  const periods = validJobsTrend(jobs, dateIso);
-  if (periods) {
-    add(Math.min(
-      Math.abs(jobs.weeklyChangePct) / EDITORIAL_SIGNAL_FLOORS.jobsChangePct,
-      Math.abs(jobs.weeklyChange) / EDITORIAL_SIGNAL_FLOORS.jobsChangeCount,
-    ), 1, { kind: 'jobsTrend', currentWeekAdded: jobs.currentWeekAdded,
-      previousWeekAdded: jobs.previousWeekAdded, weeklyChange: jobs.weeklyChange,
-      weeklyChangePct: jobs.weeklyChangePct, currentPeriod: periods.currentPeriod,
-      previousPeriod: periods.previousPeriod });
   }
 
   const exchange = blocks?.exchange;
@@ -491,33 +433,26 @@ const T = {
     headline: (h) => ({
       dailyBrief: 'i dati verificati di oggi',
       borderWaitChange: `${h.name}: attesa ${h.previousWaitMinutes} → ${h.waitMinutes} min`,
-      jobsTrend: `Nuovi annunci di lavoro in Svizzera: ${signed('it', h.weeklyChangePct, 1)}% settimana su settimana`,
       exchangeChange: `cambio ${signed('it', h.weeklySalaryChangeEur, 2)} € su 4.000 CHF`,
       borderWait: `a ${h.name} ${h.minutes} minuti di coda`,
-      jobs: `${fmt('it', h.count)} nuovi annunci in Svizzera ieri`,
-      jobsTotal: `${fmt('it', h.count)} annunci di lavoro attivi in Svizzera`,
       exchange: `franco a ${fmt('it', h.rate, 4)} €`,
       fuel: `benzina da ${fmt('it', h.priceEur, 3)} €/L a ${h.municipality}`,
       fuelSaving: `prezzi carburante a ${h.municipality}: ${fmt('it', h.saving50LEur, 0)} € su 50 L`,
     })[h.kind],
     primaryInsight: (h) => {
-      if (h.kind === 'jobsTrend') {
-        const direction = h.weeklyChange < 0 ? 'meno' : 'più';
-        return `Nel nostro job board sono entrati ${fmt('it', h.currentWeekAdded)} nuovi annunci nella settimana completa ${humanDate(h.currentPeriod.from, 'it')}–${humanDate(h.currentPeriod.to, 'it')}, contro ${fmt('it', h.previousWeekAdded)} nella settimana ${humanDate(h.previousPeriod.from, 'it')}–${humanDate(h.previousPeriod.to, 'it')}: ${signed('it', h.weeklyChange, 0)} (${signed('it', h.weeklyChangePct, 1)}%). Per chi cerca offerte sul sito, il flusso ha portato ${direction} annunci nuovi rispetto alla settimana precedente. Il dato riguarda le inserzioni aggiunte al nostro servizio: non misura le persone occupate e non indica da solo le cause della variazione.`;
-      }
       if (h.kind === 'borderWaitChange') return `A ${h.name}, la rilevazione è passata da ${h.previousWaitMinutes} minuti il ${humanDate(h.previousDate, 'it')} a ${h.waitMinutes} il ${humanDate(h.currentDate, 'it')} (${signed('it', h.changeMinutes, 0)} min). È il confronto fra due edizioni consecutive, non una previsione per le ore successive.`;
       if (h.kind === 'exchangeChange') return `Tra il ${humanDate(h.previousDate, 'it')} e il ${humanDate(h.currentDate, 'it')}, il tasso è passato da ${fmt('it', h.rate7dAgo, 4)} a ${fmt('it', h.rate, 4)} EUR per CHF. Applicata solo al cambio su ${fmt('it', h.referenceSalaryChf)} CHF, la differenza è ${signed('it', h.weeklySalaryChangeEur, 2)} EUR; non è una stima dello stipendio netto né considera commissioni.`;
       if (h.kind === 'fuelSaving') return `A ${h.municipality}, le quotazioni disponibili per la benzina (${fmt('it', h.italyPriceEur, 3)} €/L in Italia e ${fmt('it', h.swissPriceEur, 3)} €/L sul lato svizzero) differiscono di ${fmt('it', h.saving50LEur, 2)} EUR su 50 litri. Sono rilevazioni del ${formatFuelObservation(h.italyObservedAt, 'it', h.italyTimeZone)} e del ${formatFuelObservation(h.swissObservedAt, 'it', h.swissTimeZone)}: il confronto vale per questi prezzi e momenti, non per tutte le stazioni.`;
       if (h.kind === 'borderWait') return `La rilevazione disponibile indica ${h.minutes} minuti di attesa a ${h.name}. È una fotografia del monitoraggio, non una previsione per il resto della giornata.`;
       return 'Nessun confronto omogeneo supera le soglie per indicare una variazione come notizia principale. Riportiamo i dati disponibili e il periodo a cui si riferisce ciascuna rilevazione.';
     },
-    title: (dateLabel, headline, kind) => kind === 'jobsTrend' ? headline : `Frontalieri: ${headline} — ${dateLabel}`,
+    title: (dateLabel, headline) => `Frontalieri: ${headline} — ${dateLabel}`,
     excerpt: (dateLabel) =>
-      `I numeri di oggi, ${dateLabel}, per chi attraversa il confine: le ultime attese ai valichi, i comuni con la benzina meno cara, il cambio franco-euro e i nuovi annunci di lavoro aggiunti al nostro job board in Svizzera. Dati del nostro monitoraggio quotidiano.`,
+      `I numeri di oggi, ${dateLabel}, per chi attraversa il confine: le ultime attese ai valichi, i comuni con la benzina meno cara, il cambio franco-euro e gli annunci di lavoro attivi sul nostro job board in Svizzera. Dati del nostro monitoraggio quotidiano.`,
     seoDescription: (dateLabel) =>
-      `Bollettino frontalieri del ${dateLabel}: ultime code ai valichi, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.`,
+      `Bollettino quotidiano per frontalieri, ${dateLabel}: code ai valichi, prezzi della benzina, cambio CHF/EUR e offerte attive sul nostro job board svizzero.`,
     ogDescription: (dateLabel) =>
-      `I numeri del ${dateLabel} per i frontalieri: quanto si aspetta a ogni valico, in quali comuni conviene fare il pieno, quanto vale il franco al cambio rilevato e quanti nuovi annunci di lavoro sono usciti in Svizzera.`,
+      `I numeri del ${dateLabel} per i frontalieri: quanto si aspetta a ogni valico, in quali comuni conviene fare il pieno, quanto vale il franco al cambio rilevato e quanti annunci di lavoro attivi sono presenti sul nostro job board in Svizzera.`,
     imageAlt: (dateLabel) => `I numeri del giorno per i frontalieri – ${dateLabel}: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro`,
     intro: (wd, dateLabel) =>
       `È ${wd} ${dateLabel}. Questo è il bollettino quotidiano per chi vive da una parte del confine e lavora dall'altra: quattro temi seguiti dal nostro monitoraggio — code ai valichi, benzina, cambio e lavoro — con i link alle pagine live per seguirli durante la giornata.`,
@@ -546,9 +481,7 @@ const T = {
       `Un franco vale **${fmt('it', e.rate, 4)} €** (rilevamento del ${e.lastDate}). Rispetto al precedente rilevamento ${describeDeltaIt(e.delta1d)}; ${Number.isFinite(e.delta7d) ? `rispetto al riferimento settimanale disponibile la variazione è di ${signed('it', e.delta7d, 4)} €` : 'il confronto settimanale non è disponibile'}.`,
     fxWhy: `💡 Per chi prende lo stipendio in franchi e spende in euro, il cambio È una parte dello stipendio: su 4.000 CHF, un centesimo di variazione vale 40 € al mese. Il [calcolatore dello stipendio netto](${HUB.salary.it}) e il [confronto dei servizi di cambio](${HUB.fx.it}) fanno i conti sul tuo caso.`,
     fxDown: '⚠️ Non ci sono dati verificabili sul cambio per questa edizione: il blocco torna quando sono disponibili. Il confronto dei servizi di cambio resta [qui](/compara-servizi/cambio-franco-euro/).',
-    jobsH: 'Lavoro: i numeri di ieri',
-    jobsLead: (j) =>
-      `Ieri sono arrivati **${fmt('it', j.yesterdayAdded)} nuovi annunci** di lavoro in Svizzera sul nostro job board. In totale gli annunci attivi sono **${fmt('it', j.activeJobs)}**${j.activeCompanies ? `, da ${fmt('it', j.activeCompanies)} aziende` : ''}.`,
+    jobsH: 'Lavoro: annunci attivi',
     jobsLeadTotal: (j) =>
       `Sul nostro job board gli annunci di lavoro attivi in Svizzera sono **${fmt('it', j.activeJobs)}**${j.activeCompanies ? `, da ${fmt('it', j.activeCompanies)} aziende` : ''}.`,
     jobsLink: `Le offerte si filtrano per cantone, settore e città: [cerca lavoro in Ticino e in Svizzera](${HUB.jobs.it}).`,
@@ -567,33 +500,26 @@ const T = {
     headline: (h) => ({
       dailyBrief: "today's verified readings",
       borderWaitChange: `${h.name}: wait ${h.previousWaitMinutes} → ${h.waitMinutes} min`,
-      jobsTrend: `New Swiss job listings: ${signed('en', h.weeklyChangePct, 1)}% week on week`,
       exchangeChange: `exchange ${signed('en', h.weeklySalaryChangeEur, 2)} € on CHF 4,000`,
       borderWait: `${h.minutes}-minute queue at ${h.name}`,
-      jobs: `${fmt('en', h.count)} new Swiss job listings yesterday`,
-      jobsTotal: `${fmt('en', h.count)} active job listings in Switzerland`,
       exchange: `franc at €${fmt('en', h.rate, 4)}`,
       fuel: `petrol from €${fmt('en', h.priceEur, 3)}/L in ${h.municipality}`,
       fuelSaving: `fuel prices in ${h.municipality}: €${fmt('en', h.saving50LEur, 0)} per 50 L`,
     })[h.kind],
     primaryInsight: (h) => {
-      if (h.kind === 'jobsTrend') {
-        const direction = h.weeklyChange < 0 ? 'fewer' : 'more';
-        return `Our job board recorded ${fmt('en', h.currentWeekAdded)} new listings in the complete week ${humanDate(h.currentPeriod.from, 'en')}–${humanDate(h.currentPeriod.to, 'en')}, compared with ${fmt('en', h.previousWeekAdded)} in ${humanDate(h.previousPeriod.from, 'en')}–${humanDate(h.previousPeriod.to, 'en')}: ${signed('en', h.weeklyChange, 0)} (${signed('en', h.weeklyChangePct, 1)}%). For people searching the site, ${direction} new listings entered the board than in the previous complete week. This measures additions to our service; it does not count employed people or establish why the number changed.`;
-      }
       if (h.kind === 'borderWaitChange') return `At ${h.name}, the reported wait changed from ${h.previousWaitMinutes} minutes on ${humanDate(h.previousDate, 'en')} to ${h.waitMinutes} on ${humanDate(h.currentDate, 'en')} (${signed('en', h.changeMinutes, 0)} min). This compares two consecutive editions; it is not a forecast for later today.`;
       if (h.kind === 'exchangeChange') return `Between ${humanDate(h.previousDate, 'en')} and ${humanDate(h.currentDate, 'en')}, the rate moved from ${fmt('en', h.rate7dAgo, 4)} to ${fmt('en', h.rate, 4)} EUR per CHF. Applied only to CHF ${fmt('en', h.referenceSalaryChf)}, the exchange-only difference is ${signed('en', h.weeklySalaryChangeEur, 2)} EUR; this is not net pay and excludes fees.`;
       if (h.kind === 'fuelSaving') return `In ${h.municipality}, the available petrol quotes (${fmt('en', h.italyPriceEur, 3)} EUR/L in Italy and ${fmt('en', h.swissPriceEur, 3)} EUR/L on the Swiss side) differ by ${fmt('en', h.saving50LEur, 2)} EUR for 50 litres. The readings were reported on ${formatFuelObservation(h.italyObservedAt, 'en', h.italyTimeZone)} and ${formatFuelObservation(h.swissObservedAt, 'en', h.swissTimeZone)}; the comparison applies to these prices and times, not every station.`;
       if (h.kind === 'borderWait') return `The available reading reports a ${h.minutes}-minute wait at ${h.name}. It is a snapshot from the monitoring feed, not a forecast for the rest of the day.`;
       return 'No like-for-like comparison clears the threshold for a lead finding today. The edition reports the available readings and the period each source covers.';
     },
-    title: (dateLabel, headline, kind) => kind === 'jobsTrend' ? headline : `Cross-border workers: ${headline} — ${dateLabel}`,
+    title: (dateLabel, headline) => `Cross-border workers: ${headline} — ${dateLabel}`,
     excerpt: (dateLabel) =>
-      `Today's numbers, ${dateLabel}, for cross-border commuters: the latest crossing waits, cheapest fuel municipalities, the franc-euro rate and new Swiss job listings added to our job board. Measured daily by our own monitoring.`,
+      `Today's numbers, ${dateLabel}, for cross-border commuters: the latest crossing waits, cheapest fuel municipalities, the franc-euro rate and active Swiss job listings on our job board. Measured daily by our own monitoring.`,
     seoDescription: (dateLabel) =>
-      `Cross-border brief, ${dateLabel}: latest measured border waiting times, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.`,
+      `Daily cross-border brief for workers, ${dateLabel}: latest measured border waits, fuel prices, franc-euro rate and active Swiss job listings on our board.`,
     ogDescription: (dateLabel) =>
-      `The numbers for ${dateLabel}, for cross-border commuters: how long the queue is at each crossing, which towns have the cheapest fuel, what the latest recorded franc-euro rate is and how many Swiss job listings were posted.`,
+      `Daily figures for cross-border commuters, ${dateLabel}: measured waits at each crossing, where fuel costs least, the latest franc-euro rate and active Swiss job listings on our board, with links to live pages.`,
     imageAlt: (dateLabel) => `The day's numbers for cross-border commuters – ${dateLabel}: border waits, fuel prices, CHF-EUR rate and job listings`,
     intro: (wd, dateLabel) =>
       `Hello — it's ${wd}, ${dateLabel}. This is the daily brief for people who live on one side of the border and work on the other: four topics tracked by our monitoring — border queues, fuel, the exchange rate and jobs — each with a link to its live page.`,
@@ -622,9 +548,7 @@ const T = {
       `One franc buys **€${fmt('en', e.rate, 4)}** (reported on ${e.lastDate}). Versus the previous reading ${describeDeltaEn(e.delta1d)}; ${Number.isFinite(e.delta7d) ? `against the available weekly reference the move is ${signed('en', e.delta7d, 4)} €` : 'the weekly comparison is unavailable'}.`,
     fxWhy: `💡 If you earn francs and spend euros, the rate IS part of your salary: on CHF 4,000, one cent of movement is worth €40 a month. The [net salary calculator](${HUB.salary.en}) and the [currency-exchange comparison](${HUB.fx.en}) run the numbers for your case.`,
     fxDown: '⚠️ Verifiable exchange-rate data is unavailable for this edition; this section returns when it is available. The exchange comparison stays [here](/en/service-comparison/chf-eur-exchange-rate/).',
-    jobsH: 'Jobs: yesterday’s numbers',
-    jobsLead: (j) =>
-      `**${fmt('en', j.yesterdayAdded)} new Swiss job listings** landed on our job board yesterday. Active listings now total **${fmt('en', j.activeJobs)}**${j.activeCompanies ? ` from ${fmt('en', j.activeCompanies)} companies` : ''}.`,
+    jobsH: 'Jobs: active listings',
     jobsLeadTotal: (j) =>
       `Our job board currently carries **${fmt('en', j.activeJobs)} active Swiss job listings**${j.activeCompanies ? ` from ${fmt('en', j.activeCompanies)} companies` : ''}.`,
     jobsLink: `Filter by canton, sector and city: [find jobs in Ticino and Switzerland](${HUB.jobs.en}).`,
@@ -643,33 +567,26 @@ const T = {
     headline: (h) => ({
       dailyBrief: 'die verfügbaren Messwerte von heute',
       borderWaitChange: `${h.name}: Wartezeit ${h.previousWaitMinutes} → ${h.waitMinutes} Min.`,
-      jobsTrend: `Neue Stellenanzeigen in der Schweiz: ${signed('de', h.weeklyChangePct, 1)}% im Wochenvergleich`,
       exchangeChange: `Wechselkurs ${signed('de', h.weeklySalaryChangeEur, 2)} € bei CHF 4.000`,
       borderWait: `${h.minutes} Minuten Wartezeit in ${h.name}`,
-      jobs: `${fmt('de', h.count)} neue Stellen in der Schweiz gestern`,
-      jobsTotal: `${fmt('de', h.count)} aktive Stellenangebote in der Schweiz`,
       exchange: `Franken bei ${fmt('de', h.rate, 4)} €`,
       fuel: `Benzin ab ${fmt('de', h.priceEur, 3)} €/L in ${h.municipality}`,
       fuelSaving: `Kraftstoffpreise in ${h.municipality}: ${fmt('de', h.saving50LEur, 0)} € je 50 L`,
     })[h.kind],
     primaryInsight: (h) => {
-      if (h.kind === 'jobsTrend') {
-        const direction = h.weeklyChange < 0 ? 'weniger' : 'mehr';
-        return `Auf unserem Job-Board kamen in der vollständigen Woche vom ${humanDate(h.currentPeriod.from, 'de')} bis ${humanDate(h.currentPeriod.to, 'de')} ${fmt('de', h.currentWeekAdded)} neue Anzeigen hinzu, gegenüber ${fmt('de', h.previousWeekAdded)} vom ${humanDate(h.previousPeriod.from, 'de')} bis ${humanDate(h.previousPeriod.to, 'de')}: ${signed('de', h.weeklyChange, 0)} (${signed('de', h.weeklyChangePct, 1)}%). Für Personen, die dort Stellen suchen, bedeutet das ${direction} neue Einträge als in der vorherigen vollständigen Woche. Gemessen werden Ergänzungen unseres Angebots; die Zahl zählt weder beschäftigte Personen noch erklärt sie die Veränderung.`;
-      }
       if (h.kind === 'borderWaitChange') return `Bei ${h.name} änderte sich die gemeldete Wartezeit von ${h.previousWaitMinutes} Minuten am ${humanDate(h.previousDate, 'de')} auf ${h.waitMinutes} am ${humanDate(h.currentDate, 'de')} (${signed('de', h.changeMinutes, 0)} Min.). Das ist der Vergleich zweier aufeinanderfolgender Ausgaben, keine Vorhersage für den weiteren Tagesverlauf.`;
       if (h.kind === 'exchangeChange') return `Zwischen dem ${humanDate(h.previousDate, 'de')} und dem ${humanDate(h.currentDate, 'de')} änderte sich der Kurs von ${fmt('de', h.rate7dAgo, 4)} auf ${fmt('de', h.rate, 4)} EUR je CHF. Nur auf CHF ${fmt('de', h.referenceSalaryChf)} umgerechnet ergibt sich eine Differenz von ${signed('de', h.weeklySalaryChangeEur, 2)} EUR; das ist weder Nettolohn noch berücksichtigt es Gebühren.`;
       if (h.kind === 'fuelSaving') return `In ${h.municipality} liegen die gemeldeten Benzinpreise (${fmt('de', h.italyPriceEur, 3)} EUR/L in Italien und ${fmt('de', h.swissPriceEur, 3)} EUR/L auf Schweizer Seite) für 50 Liter um ${fmt('de', h.saving50LEur, 2)} EUR auseinander. Die Meldungen stammen vom ${formatFuelObservation(h.italyObservedAt, 'de', h.italyTimeZone)} und ${formatFuelObservation(h.swissObservedAt, 'de', h.swissTimeZone)}; der Vergleich gilt für diese Preise und Zeitpunkte, nicht für alle Tankstellen.`;
       if (h.kind === 'borderWait') return `Die verfügbare Messung meldet ${h.minutes} Minuten Wartezeit bei ${h.name}. Das ist eine Momentaufnahme des Monitorings, keine Vorhersage für den restlichen Tag.`;
       return 'Kein vergleichbarer Befund überschreitet heute die Schwelle für eine Hauptmeldung. Die Ausgabe nennt die verfügbaren Messwerte und den jeweiligen Beobachtungszeitraum.';
     },
-    title: (dateLabel, headline, kind) => kind === 'jobsTrend' ? headline : `Grenzgänger: ${headline} — ${dateLabel}`,
+    title: (dateLabel, headline) => `Grenzgänger: ${headline} — ${dateLabel}`,
     excerpt: (dateLabel) =>
-      `Die Zahlen von heute, ${dateLabel}, für Grenzgänger: die zuletzt gemeldeten Wartezeiten an den Übergängen, die günstigsten Benzinpreise, der Franken-Euro-Kurs und neue Stellenanzeigen in der Schweiz auf unserem Job-Board. Täglich aus unserem Monitoring.`,
+      `Die Zahlen von heute, ${dateLabel}, für Grenzgänger: die zuletzt gemeldeten Wartezeiten an den Übergängen, die günstigsten Benzinpreise, der Franken-Euro-Kurs und aktive Stellenanzeigen in der Schweiz auf unserem Job-Board. Täglich aus unserem Monitoring.`,
     seoDescription: (dateLabel) =>
-      `Grenzgänger-Bulletin vom ${dateLabel}: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.`,
+      `Grenzgänger-Bulletin heute, ${dateLabel}: Wartezeiten, Benzinpreise, Franken-Euro-Kurs und aktive Stellenanzeigen auf unserem Job-Board in der Schweiz.`,
     ogDescription: (dateLabel) =>
-      `Die Zahlen vom ${dateLabel} für Grenzgänger: wie lange man an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, wie der Franken zuletzt zum Euro stand und wie viele Stellen neu dazugekommen sind.`,
+      `Die Zahlen vom ${dateLabel} für Grenzgänger: wie lange man an jedem Übergang wartet, wo das Benzin am günstigsten ist, der aktuelle Franken-Euro-Kurs und die Zahl aktiver Stellenanzeigen auf unserem Job-Board in der Schweiz.`,
     imageAlt: (dateLabel) => `Die Zahlen des Tages für Grenzgänger – ${dateLabel}: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote`,
     intro: (wd, dateLabel) =>
       `Guten Tag — heute ist ${wd}, der ${dateLabel}. Das ist das tägliche Bulletin für alle, die auf der einen Seite der Grenze wohnen und auf der anderen arbeiten: vier Themen aus unserem Monitoring — Staus an den Übergängen, Benzin, Wechselkurs und Arbeitsmarkt — jeweils mit Link zur Live-Seite.`,
@@ -698,9 +615,7 @@ const T = {
       `Ein Franken ist **${fmt('de', e.rate, 4)} €** wert (Stand ${e.lastDate}). Gegenüber der vorherigen Messung ${describeDeltaDe(e.delta1d)}; ${Number.isFinite(e.delta7d) ? `gegenüber dem verfügbaren Wochenvergleich beträgt die Veränderung ${signed('de', e.delta7d, 4)} €` : 'der Wochenvergleich ist nicht verfügbar'}.`,
     fxWhy: `💡 Wer in Franken verdient und in Euro ausgibt, für den IST der Kurs ein Teil des Lohns: Bei 4.000 CHF ist ein Rappen Bewegung 40 € im Monat wert. Der [Nettolohn-Rechner](${HUB.salary.de}) und der [Vergleich der Wechseldienste](${HUB.fx.de}) rechnen Ihren Fall durch.`,
     fxDown: '⚠️ Für diese Ausgabe liegen keine verifizierbaren Wechselkursdaten vor; der Abschnitt kehrt zurück, sobald sie verfügbar sind. Der Vergleich der Wechseldienste bleibt [hier](/de/service-vergleich/chf-eur-wechselkurs/).',
-    jobsH: 'Arbeitsmarkt: die Zahlen von gestern',
-    jobsLead: (j) =>
-      `Gestern kamen **${fmt('de', j.yesterdayAdded)} neue Stellenangebote** in der Schweiz auf unser Job-Board. Insgesamt sind **${fmt('de', j.activeJobs)}** Anzeigen aktiv${j.activeCompanies ? `, von ${fmt('de', j.activeCompanies)} Unternehmen` : ''}.`,
+    jobsH: 'Stellenangebote: aktive Anzeigen',
     jobsLeadTotal: (j) =>
       `Auf unserem Job-Board sind derzeit **${fmt('de', j.activeJobs)} Stellenangebote in der Schweiz aktiv**${j.activeCompanies ? `, von ${fmt('de', j.activeCompanies)} Unternehmen` : ''}.`,
     jobsLink: `Nach Kanton, Branche und Stadt filtern: [Jobs im Tessin und in der Schweiz](${HUB.jobs.de}).`,
@@ -719,33 +634,26 @@ const T = {
     headline: (h) => ({
       dailyBrief: 'les relevés disponibles aujourd’hui',
       borderWaitChange: `${h.name} : attente ${h.previousWaitMinutes} → ${h.waitMinutes} min`,
-      jobsTrend: `Nouvelles offres d’emploi en Suisse : ${signed('fr', h.weeklyChangePct, 1)}% sur la semaine`,
       exchangeChange: `change ${signed('fr', h.weeklySalaryChangeEur, 2)} € sur 4 000 CHF`,
       borderWait: `${h.minutes} minutes d'attente à ${h.name}`,
-      jobs: `${fmt('fr', h.count)} nouvelles offres en Suisse hier`,
-      jobsTotal: `${fmt('fr', h.count)} offres d'emploi actives en Suisse`,
       exchange: `franc à ${fmt('fr', h.rate, 4)} €`,
       fuel: `essence dès ${fmt('fr', h.priceEur, 3)} €/L à ${h.municipality}`,
       fuelSaving: `prix du carburant à ${h.municipality} : ${fmt('fr', h.saving50LEur, 0)} € pour 50 L`,
     })[h.kind],
     primaryInsight: (h) => {
-      if (h.kind === 'jobsTrend') {
-        const direction = h.weeklyChange < 0 ? 'moins' : 'plus';
-        return `Notre job board a enregistré ${fmt('fr', h.currentWeekAdded)} nouvelles annonces durant la semaine complète du ${humanDate(h.currentPeriod.from, 'fr')} au ${humanDate(h.currentPeriod.to, 'fr')}, contre ${fmt('fr', h.previousWeekAdded)} du ${humanDate(h.previousPeriod.from, 'fr')} au ${humanDate(h.previousPeriod.to, 'fr')} : ${signed('fr', h.weeklyChange, 0)} (${signed('fr', h.weeklyChangePct, 1)}%). Pour les personnes qui consultent les offres du site, le flux a apporté ${direction} de nouvelles annonces que la semaine complète précédente. Cette mesure porte sur les ajouts à notre service ; elle ne compte pas les personnes en emploi et n’explique pas à elle seule la variation.`;
-      }
       if (h.kind === 'borderWaitChange') return `À ${h.name}, l’attente relevée est passée de ${h.previousWaitMinutes} minutes le ${humanDate(h.previousDate, 'fr')} à ${h.waitMinutes} le ${humanDate(h.currentDate, 'fr')} (${signed('fr', h.changeMinutes, 0)} min). Il s’agit de deux éditions consécutives, pas d’une prévision pour la suite de la journée.`;
       if (h.kind === 'exchangeChange') return `Entre le ${humanDate(h.previousDate, 'fr')} et le ${humanDate(h.currentDate, 'fr')}, le taux est passé de ${fmt('fr', h.rate7dAgo, 4)} à ${fmt('fr', h.rate, 4)} EUR par CHF. Appliquée uniquement à CHF ${fmt('fr', h.referenceSalaryChf)}, la différence liée au change est de ${signed('fr', h.weeklySalaryChangeEur, 2)} EUR ; ce n’est pas un salaire net et les frais ne sont pas inclus.`;
       if (h.kind === 'fuelSaving') return `À ${h.municipality}, les prix d’essence communiqués (${fmt('fr', h.italyPriceEur, 3)} EUR/L en Italie et ${fmt('fr', h.swissPriceEur, 3)} EUR/L côté suisse) diffèrent de ${fmt('fr', h.saving50LEur, 2)} EUR pour 50 litres. Les relevés datent du ${formatFuelObservation(h.italyObservedAt, 'fr', h.italyTimeZone)} et du ${formatFuelObservation(h.swissObservedAt, 'fr', h.swissTimeZone)} ; la comparaison porte sur ces prix et ces moments, pas sur toutes les stations.`;
       if (h.kind === 'borderWait') return `Le relevé disponible indique ${h.minutes} minutes d’attente à ${h.name}. C’est une photographie du monitoring, pas une prévision pour le reste de la journée.`;
       return 'Aucune comparaison homogène ne franchit aujourd’hui le seuil pour constituer le fait principal. Le bulletin présente les relevés disponibles et la période couverte par chaque source.';
     },
-    title: (dateLabel, headline, kind) => kind === 'jobsTrend' ? headline : `Frontaliers : ${headline} — ${dateLabel}`,
+    title: (dateLabel, headline) => `Frontaliers : ${headline} — ${dateLabel}`,
     excerpt: (dateLabel) =>
-      `Les chiffres du jour, ${dateLabel}, pour les frontaliers : les dernières attentes aux douanes, les communes où le carburant coûte le moins cher, le taux franc-euro et les nouvelles offres d'emploi en Suisse ajoutées à notre job board. Relevés quotidiens de notre suivi.`,
+      `Les chiffres du jour, ${dateLabel}, pour les frontaliers : les dernières attentes aux douanes, les communes où le carburant coûte le moins cher, le taux franc-euro et les offres d'emploi actives en Suisse sur notre job board. Relevés quotidiens de notre suivi.`,
     seoDescription: (dateLabel) =>
-      `Bulletin du frontalier du ${dateLabel} : les files relevées aux douanes, l'essence la moins chère, taux franc-euro et nouvelles offres d'emploi en Suisse.`,
+      `Bulletin quotidien des frontaliers ${dateLabel} : files aux douanes, prix du carburant, taux CHF/EUR, offres d'emploi actives sur notre job board suisse.`,
     ogDescription: (dateLabel) =>
-      `Les chiffres du ${dateLabel} pour les frontaliers : combien de temps on attend à chaque douane, où l'essence coûte le moins cher, quel est le dernier taux franc-euro relevé et combien d'offres d'emploi sont parues en Suisse.`,
+      `Les chiffres du ${dateLabel} pour les frontaliers : attentes aux douanes, communes où le carburant coûte le moins cher, dernier taux CHF/EUR et offres d'emploi actives sur notre job board suisse au quotidien.`,
     imageAlt: (dateLabel) => `Les chiffres du jour pour les frontaliers – ${dateLabel} : attentes aux douanes, prix de l'essence, taux CHF-EUR et offres d'emploi`,
     intro: (wd, dateLabel) =>
       `Bonjour — nous sommes ${wd} ${dateLabel}. Voici le bulletin quotidien pour celles et ceux qui vivent d'un côté de la frontière et travaillent de l'autre : quatre thèmes suivis par notre monitoring — files aux douanes, essence, taux de change et emploi — chacun avec le lien vers sa page en direct.`,
@@ -774,9 +682,7 @@ const T = {
       `Un franc vaut **${fmt('fr', e.rate, 4)} €** (relevé du ${e.lastDate}). Par rapport au relevé précédent ${describeDeltaFr(e.delta1d)} ; ${Number.isFinite(e.delta7d) ? `par rapport au relevé hebdomadaire disponible, la variation est de ${signed('fr', e.delta7d, 4)} €` : 'la comparaison hebdomadaire n’est pas disponible'}.`,
     fxWhy: `💡 Quand on gagne en francs et qu'on dépense en euros, le taux fait partie du salaire : sur 4 000 CHF, un centime de variation vaut 40 € par mois. Le [calculateur de salaire net](${HUB.salary.fr}) et le [comparatif des services de change](${HUB.fx.fr}) font le calcul pour votre cas.`,
     fxDown: '⚠️ Les données de change vérifiables ne sont pas disponibles pour cette édition ; la section revient dès qu’elles le sont. Le comparatif des services de change reste [ici](/fr/comparaison-services/taux-change-chf-eur/).',
-    jobsH: 'Emploi : les chiffres d’hier',
-    jobsLead: (j) =>
-      `Hier, **${fmt('fr', j.yesterdayAdded)} nouvelles offres d'emploi** en Suisse sont arrivées sur notre job board. Au total, **${fmt('fr', j.activeJobs)}** annonces sont actives${j.activeCompanies ? `, de ${fmt('fr', j.activeCompanies)} entreprises` : ''}.`,
+    jobsH: 'Offres d’emploi actives',
     jobsLeadTotal: (j) =>
       `Notre job board compte actuellement **${fmt('fr', j.activeJobs)} offres d'emploi actives en Suisse**${j.activeCompanies ? `, de ${fmt('fr', j.activeCompanies)} entreprises` : ''}.`,
     jobsLink: `Filtrez par canton, secteur et ville : [trouver un emploi au Tessin et en Suisse](${HUB.jobs.fr}).`,
@@ -864,10 +770,10 @@ function mdTable(headerCells, rows) {
 }
 
 const INSIGHT_COPY = {
-  it: { week: 'Annunci aggiunti nelle ultime due settimane complete', companies: 'Aziende con più annunci attivi in Svizzera', locations: 'Località con più annunci attivi', entity: 'Azienda / località', count: 'Annunci attivi', closed: 'Sette giorni fino al', prior: 'Sette giorni precedenti', change: 'Variazione', fx: 'Simulazione del solo cambio su 4.000 CHF', fxValue: 'Controvalore lordo in euro', fxDelta: 'Differenza rispetto al riferimento settimanale disponibile', waits: 'Confronto con la precedente edizione', fuel: 'Prezzi comunicati presso gli stessi distributori', petrol: 'Benzina €/L', diesel: 'Diesel €/L', observed: 'Ultima comunicazione', search: 'I temi cercati dai lettori', theme: 'Tema', demand: 'Impression in Ricerca Google', searches: 'Eventi di ricerca sul sito', note: 'Dati aggregati per tema: non sono pubblicate ricerche individuali. Le impression misurano esposizione su Google. Gli eventi sul sito possono includere aggiornamenti della ricerca; non sono persone o ricerche uniche.', source: 'Fonte', checked: 'Rilevamento', sample: 'campione parziale' },
-  en: { week: 'Listings added in the last two complete weeks', companies: 'Companies with the most active listings in Switzerland', locations: 'Locations with the most active listings', entity: 'Company / location', count: 'Active listings', closed: 'Seven days ending', prior: 'Previous seven days', change: 'Change', fx: 'Exchange-only illustration for CHF 4,000', fxValue: 'Gross euro equivalent', fxDelta: 'Difference from the available weekly exchange-rate reference', waits: 'Comparison with the previous edition', fuel: 'Reported prices at the same stations', petrol: 'Petrol EUR/L', diesel: 'Diesel EUR/L', observed: 'Last report', search: 'Topics readers search for', theme: 'Topic', demand: 'Google Search impressions', searches: 'Site search events', note: 'Aggregated topics only: individual searches are never published. Impressions measure Google exposure. Site events may include search updates; these are not counts of people or unique searches.', source: 'Source', checked: 'Observation', sample: 'partial sample' },
-  de: { week: 'Neue Inserate in den letzten zwei vollständigen Wochen', companies: 'Unternehmen mit den meisten aktiven Inseraten in der Schweiz', locations: 'Orte mit den meisten aktiven Inseraten', entity: 'Unternehmen / Ort', count: 'Aktive Inserate', closed: 'Sieben Tage bis', prior: 'Vorherige sieben Tage', change: 'Veränderung', fx: 'Reines Wechselkursbeispiel für CHF 4.000', fxValue: 'Bruttogegenwert in Euro', fxDelta: 'Differenz zum verfügbaren wöchentlichen Wechselkursvergleich', waits: 'Vergleich mit der vorherigen Ausgabe', fuel: 'Gemeldete Preise an denselben Tankstellen', petrol: 'Benzin EUR/L', diesel: 'Diesel EUR/L', observed: 'Letzte Meldung', search: 'Von Lesern gesuchte Themen', theme: 'Thema', demand: 'Impressionen in der Google Suche', searches: 'Suchereignisse auf der Website', note: 'Nur aggregierte Themen: einzelne Suchanfragen werden nie veröffentlicht. Impressionen messen Sichtbarkeit auf Google. Suchereignisse können Aktualisierungen enthalten; sie zählen weder Personen noch eindeutige Suchanfragen.', source: 'Quelle', checked: 'Messung', sample: 'unvollständige Stichprobe' },
-  fr: { week: 'Annonces ajoutées durant les deux dernières semaines complètes', companies: 'Entreprises avec le plus d’annonces actives en Suisse', locations: 'Localités avec le plus d’annonces actives', entity: 'Entreprise / localité', count: 'Annonces actives', closed: 'Sept jours jusqu’au', prior: 'Sept jours précédents', change: 'Variation', fx: 'Simulation du seul change pour 4.000 CHF', fxValue: 'Contre-valeur brute en euros', fxDelta: 'Différence avec le relevé de change hebdomadaire disponible', waits: 'Comparaison avec l’édition précédente', fuel: 'Prix communiqués dans les mêmes stations', petrol: 'Essence EUR/L', diesel: 'Diesel EUR/L', observed: 'Dernière communication', search: 'Les thèmes recherchés par les lecteurs', theme: 'Thème', demand: 'Impressions dans la Recherche Google', searches: 'Événements de recherche sur le site', note: 'Thèmes agrégés uniquement : aucune recherche individuelle n’est publiée. Les impressions mesurent la visibilité sur Google. Les événements peuvent inclure des mises à jour de recherche ; ce ne sont pas des personnes ou des recherches uniques.', source: 'Source', checked: 'Relevé', sample: 'échantillon partiel' },
+  it: { companies: 'Aziende con più annunci attivi in Svizzera', locations: 'Località con più annunci attivi', entity: 'Azienda / località', count: 'Annunci attivi', fx: 'Simulazione del solo cambio su 4.000 CHF', fxValue: 'Controvalore lordo in euro', fxDelta: 'Differenza rispetto al riferimento settimanale disponibile', waits: 'Confronto con la precedente edizione', fuel: 'Prezzi comunicati presso gli stessi distributori', petrol: 'Benzina €/L', diesel: 'Diesel €/L', observed: 'Ultima comunicazione', search: 'I temi cercati dai lettori', theme: 'Tema', demand: 'Impression in Ricerca Google', searches: 'Eventi di ricerca sul sito', note: 'Dati aggregati per tema: non sono pubblicate ricerche individuali. Le impression misurano esposizione su Google. Gli eventi sul sito possono includere aggiornamenti della ricerca; non sono persone o ricerche uniche.', source: 'Fonte', checked: 'Rilevamento', sample: 'campione parziale' },
+  en: { companies: 'Companies with the most active listings in Switzerland', locations: 'Locations with the most active listings', entity: 'Company / location', count: 'Active listings', fx: 'Exchange-only illustration for CHF 4,000', fxValue: 'Gross euro equivalent', fxDelta: 'Difference from the available weekly exchange-rate reference', waits: 'Comparison with the previous edition', fuel: 'Reported prices at the same stations', petrol: 'Petrol EUR/L', diesel: 'Diesel EUR/L', observed: 'Last report', search: 'Topics readers search for', theme: 'Topic', demand: 'Google Search impressions', searches: 'Site search events', note: 'Aggregated topics only: individual searches are never published. Impressions measure Google exposure. Site events may include search updates; these are not counts of people or unique searches.', source: 'Source', checked: 'Observation', sample: 'partial sample' },
+  de: { companies: 'Unternehmen mit den meisten aktiven Inseraten in der Schweiz', locations: 'Orte mit den meisten aktiven Inseraten', entity: 'Unternehmen / Ort', count: 'Aktive Inserate', fx: 'Reines Wechselkursbeispiel für CHF 4.000', fxValue: 'Bruttogegenwert in Euro', fxDelta: 'Differenz zum verfügbaren wöchentlichen Wechselkursvergleich', waits: 'Vergleich mit der vorherigen Ausgabe', fuel: 'Gemeldete Preise an denselben Tankstellen', petrol: 'Benzin EUR/L', diesel: 'Diesel EUR/L', observed: 'Letzte Meldung', search: 'Von Lesern gesuchte Themen', theme: 'Thema', demand: 'Impressionen in der Google Suche', searches: 'Suchereignisse auf der Website', note: 'Nur aggregierte Themen: einzelne Suchanfragen werden nie veröffentlicht. Impressionen messen Sichtbarkeit auf Google. Suchereignisse können Aktualisierungen enthalten; sie zählen weder Personen noch eindeutige Suchanfragen.', source: 'Quelle', checked: 'Messung', sample: 'unvollständige Stichprobe' },
+  fr: { companies: 'Entreprises avec le plus d’annonces actives en Suisse', locations: 'Localités avec le plus d’annonces actives', entity: 'Entreprise / localité', count: 'Annonces actives', fx: 'Simulation du seul change pour 4.000 CHF', fxValue: 'Contre-valeur brute en euros', fxDelta: 'Différence avec le relevé de change hebdomadaire disponible', waits: 'Comparaison avec l’édition précédente', fuel: 'Prix communiqués dans les mêmes stations', petrol: 'Essence EUR/L', diesel: 'Diesel EUR/L', observed: 'Dernière communication', search: 'Les thèmes recherchés par les lecteurs', theme: 'Thème', demand: 'Impressions dans la Recherche Google', searches: 'Événements de recherche sur le site', note: 'Thèmes agrégés uniquement : aucune recherche individuelle n’est publiée. Les impressions mesurent la visibilité sur Google. Les événements peuvent inclure des mises à jour de recherche ; ce ne sont pas des personnes ou des recherches uniques.', source: 'Source', checked: 'Relevé', sample: 'échantillon partiel' },
 };
 
 function insightSections(locale, brief) {
@@ -889,7 +795,6 @@ function insightSections(locale, brief) {
   }
   const jobs = insights.jobs;
   if (jobs) {
-    if (Number.isFinite(jobs.currentWeekAdded) && Number.isFinite(jobs.previousWeekAdded)) sections.jobs.push(`### ${copy.week}\n${mdTable([copy.closed, copy.prior, copy.change], [[`${jobs.lastClosedDay}: ${fmt(locale, jobs.currentWeekAdded)}`, fmt(locale, jobs.previousWeekAdded), signed(locale, jobs.weeklyChange, 0)]])}`);
     for (const [key, heading] of [['topCompanies', copy.companies], ['topLocations', copy.locations]]) {
       const rows = jobs[key];
       if (rows?.length) sections.jobs.push(`### ${heading}\n${mdTable([copy.entity, copy.count], rows.map(row => [key === 'topLocations' ? localizeBorderWaitName(row.name, locale) : row.name, fmt(locale, row.count)]))}`);
@@ -971,16 +876,11 @@ function buildLocaleContent(locale, brief, headline) {
     parts3.push(t.fxDown);
   }
 
-  // body4 — jobs + method. Gated on `available`, like the headline cascade:
-  // a null yesterdayAdded (the stats regenerate during the day — plausible on
-  // the morning cron) falls back to the totals lead, so the title and this
-  // section can never contradict each other (second review finding, PR #51).
+  // body4 — jobs + method. Only active totals are reported: date-keyed history
+  // does not prove that a prior calendar day has finished accumulating.
   const parts4 = [`## ${t.jobsH}`];
   const jobs = blocks.jobs;
-  if (jobs?.available && Number.isFinite(jobs.yesterdayAdded)) {
-    parts4.push(t.jobsLead(jobs));
-    parts4.push(t.jobsLink);
-  } else if (jobs?.available) {
+  if (jobs?.available) {
     parts4.push(t.jobsLeadTotal(jobs));
     parts4.push(t.jobsLink);
   } else {
