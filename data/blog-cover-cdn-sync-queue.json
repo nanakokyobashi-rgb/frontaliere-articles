@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-julmy-corsa-consiglio-stato.webp",
+      "sha256": "59c829c4fbb2cea18faf06cf9cf3206a2dbccce5972c906882ac35fa17380dcc"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-julmy-corsa-consiglio-stato-480w.webp",
+      "sha256": "9d8cb90d209659e1248b5c56f4cb14b710eeba814c20bf5884ff1e87ca03ffcb"
+    }
+  ]
 }
