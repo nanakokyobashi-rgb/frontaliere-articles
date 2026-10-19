@@ -1049,7 +1049,7 @@
     {
       "path": ".github/workflows/lessons-harvester.yml",
       "mode": "adapted",
-      "reason": "Solo la cadenza (53 5 invece di 17 5). NB: la mia esclusione iniziale era sbagliata — lo step Claude e' gatato su has_novel=='true', quindi senza pattern nuovi il workflow esce a costo ZERO, non brucia una run al giorno.",
+      "reason": "La cadenza e' adattata (53 5 invece di 17 5) e il guard delle proposte carica GITHUB_PAT_NANAKO da Remote Config prima della lettura paginata, con fallback fail-closed a GITHUB_TOKEN, per non consumare il bucket API dell'installation token. NB: la mia esclusione iniziale era sbagliata — lo step Claude e' gatato su has_novel=='true', quindi senza pattern nuovi il workflow esce a costo ZERO, non brucia una run al giorno.",
       "baseline": {
         "site": "c24d679b209811d3",
         "corpus": "c95cf2c66ed9a40e",
