@@ -65,6 +65,7 @@ on:
       - 'scripts/ci/fast-publish-section.mjs'
       - 'scripts/ci/resolve-workflow-run-push-range.mjs'
       - 'scripts/ci/retry-cmd.sh'
+      - 'scripts/ci/fetch-push-base-if-missing.sh'
       - 'scripts/cf-purge-cache.mjs'
       - 'scripts/offload-generated-images-cdn.mjs'
       - 'scripts/lib/article-render-pipeline.mjs'
@@ -296,19 +297,11 @@ jobs:
           echo "before=$before" >> "$GITHUB_OUTPUT"
           echo "after=$after" >> "$GITHUB_OUTPUT"
 
-      - name: Fetch originating push base (resolve)
+      - name: Fetch push base (resolve)
         env:
           PUSH_BEFORE: ${{ steps.push_range.outputs.before }}
         run: |
-          set -euo pipefail
-          # fetch-depth: 2 already contains the base for an ordinary
-          # single-commit push. Only pay for a network fetch when a multi-
-          # commit push needs a base outside that shallow checkout.
-          if [ -n "${PUSH_BEFORE:-}" ] \
-            && [[ ! "$PUSH_BEFORE" =~ ^0+$ ]] \
-            && ! git cat-file -e "${PUSH_BEFORE}^{commit}" 2>/dev/null; then
-            git fetch --no-tags --depth=1 origin "$PUSH_BEFORE"
-          fi
+          bash scripts/ci/fetch-push-base-if-missing.sh
 
       - name: Preflight — i link Markdown devono avere una destinazione canonica
         env:
@@ -654,17 +647,13 @@ jobs:
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
-          PREVIOUS_REVISION="${PUSH_BEFORE:-}"
           if [ "$EVENT_NAME" = 'workflow_run' ]; then
             if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || [ "$(git rev-parse HEAD)" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
               echo "::error::workflow_run head non coincide con il checkout"
               exit 1
             fi
           fi
-          if [ -n "${PREVIOUS_REVISION:-}" ] && [[ ! "$PREVIOUS_REVISION" =~ ^0+$ ]] \
-            && ! git cat-file -e "$PREVIOUS_REVISION^{commit}" 2>/dev/null; then
-            git fetch --no-tags --depth=1 origin "$PREVIOUS_REVISION"
-          fi
+          bash scripts/ci/fetch-push-base-if-missing.sh
 
       - name: Set up Node
         if: steps.replay_freshness.outputs.fresh == 'true'
