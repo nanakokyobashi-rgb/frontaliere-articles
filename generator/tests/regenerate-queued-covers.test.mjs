@@ -1695,7 +1695,8 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(sectionPublisher, /\[ "\$BOOTSTRAP" != 'true' \]/u);
   assert.match(sectionPublisher, /for publish_attempt in 1 2 3/u);
   assert.match(sectionPublisher, /git fetch --no-tags origin main/u);
-  assert.match(sectionPublisher, /git checkout --detach origin\/main/u);
+  assert.match(sectionPublisher, /git checkout --detach FETCH_HEAD/u);
+  assert.doesNotMatch(sectionPublisher, /git checkout --detach origin\/main/u);
   assert.match(sectionPublisher, /main avanzata durante il render/u);
   const sectionLiveLoop = sectionPublisher.slice(sectionPublisher.indexOf('for publish_attempt in 1 2 3'));
   assert.match(sectionLiveLoop, /if \[ -f \.github\/FAST_PUBLISH_DISABLED \]/u);
