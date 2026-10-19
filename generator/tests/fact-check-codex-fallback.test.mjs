@@ -54,7 +54,7 @@ describe('the call is pinned to Codex', () => {
     root = fs.mkdtempSync(path.join(os.tmpdir(), 'codex-fact-check-'));
     const socketPath = path.join(root, 'auth.sock');
     requests = [];
-    reply = '{"verdict":"FAIL","confidence":0.9,"issues":[{"claim":"x","reason":"non in fonte","severity":"critical","category":"fatti_inventati"}]}';
+    reply = '{"verdict":"FAIL","confidence":0.9,"editorialAssessment":{"classification":"unsupported_inference","finding":"La frase attribuisce alla fonte un fatto non supportato e cita una prova verificabile.","articleQuote":"La nostra redazione ha intervistato i residenti in Comune e ha verificato sul posto il cambiamento.","evidenceQuotes":["Il Comune ha registrato 120 domande di rinnovo nel 2024 e 156 nel 2025."]},"issues":[{"claim":"x","reason":"non in fonte","severity":"critical","category":"fatti_inventati"}]}';
     server = net.createServer({ allowHalfOpen: true }, (client) => {
       let buffer = '';
       client.setEncoding('utf8');
@@ -133,7 +133,7 @@ describe('llmFactCheck wiring', () => {
     // If the primary lane gives no vote, do not publish an article with a
     // single free opinion (review of PR #1871).
     assert.match(block, /if \(modelResults\.length < 2 && !codexAlreadyVoted && isModelAvailable\(AI_MODELS\.CODEX_CLI_PRIMARY\)\) \{/);
-    assert.match(block, /await _runSingleFactCheck\(codex, prompt, \{ isEvergreen, codexOnly: true \}\)/);
+    assert.match(block, /await _runSingleFactCheck\(codex, prompt, \{ isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true \}\)/);
   });
 
   test('its verdict is one vote like any other', () => {

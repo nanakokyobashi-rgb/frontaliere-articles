@@ -74,6 +74,14 @@ import {
   keyFactsGuardMode,
   templateHeadingIssue,
   TEMPLATE_HEADING_NOT_CANONICAL,
+  EMPTY_CASCADE_OBSERVER_EXIT_CODE,
+  EMPTY_CASCADE_RATE_THRESHOLD,
+  emptyCascadeExitCode,
+  emptyCascadeMetric,
+  engineTranslator,
+  parseEmptyCascadeThreshold,
+  processPair,
+  summarizeEmptyCascadeProviders,
 } from '../scripts/retranslate-blocking-bodies.mjs';
 import { diffIsExactlyRemovedLines } from '../scripts/lib/strip-leaked-title-marker.mjs';
 // Dal modulo corpus-only, NON da `lib/article-sanitizers.mjs`: quello e'
@@ -87,6 +95,7 @@ import { filterWrongLocalePairs, wrongLocalePair } from '../scripts/fix-faq-loca
 import { detectLanguage, detectLanguageWithConfidence } from '../scripts/lib/detect-language.mjs';
 import { translateFieldFreeMt } from '../scripts/lib/article-free-mt.mjs';
 import { getKeyFactsHeading, getTldrHeading } from '../scripts/lib/ai-search-template.mjs';
+import { recordTranslationProviderAttempt } from '../scripts/lib/free-translate.mjs';
 
 const fileFor = (id, fields) => `const b: Record<string, string> = {\n`
   + Object.entries(fields).map(([k, v]) => `  'blog.article.${id}.${k}': '${escapeForSingleQuoteTS(v)}',`).join('\n')
@@ -1831,6 +1840,183 @@ test('stratify non inventa coppie quando ce ne sono meno del limite', () => {
 const IT_LONG = 'Il frontaliere che lavora in Ticino deve dichiarare il reddito in Italia. '.repeat(12);
 const EN_LONG = 'The cross-border worker employed in Ticino must declare the income in Italy. '.repeat(12);
 const DE_LONG = 'Der Grenzgaenger der im Tessin arbeitet muss das Einkommen in Italien angeben. '.repeat(12);
+
+function writeTranslationPairFixture(root, id, source = IT_LONG, target = DE_LONG) {
+  const itDir = path.join(root, 'content/blog-body/it');
+  const deDir = path.join(root, 'content/blog-body/de');
+  fs.mkdirSync(itDir, { recursive: true });
+  fs.mkdirSync(deDir, { recursive: true });
+  const paths = {
+    source: path.join(itDir, `${id}.ts`),
+    target: path.join(deDir, `${id}.ts`),
+  };
+  fs.writeFileSync(paths.source, fileFor(id, { body1: source, body2: source, body3: source }));
+  fs.writeFileSync(paths.target, fileFor(id, { body1: target, body2: target, body3: target }));
+  return paths;
+}
+
+function translationPair(id) {
+  return {
+    id,
+    locale: 'de',
+    dir: 'services/locales/blog-body',
+    codes: ['translation-false-friend'],
+    structural: true,
+    fields: ['body1'],
+  };
+}
+
+test('il report per campo elenca ogni provider con classe e messaggio bounded', async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-provider-report-'));
+  try {
+    writeTranslationPairFixture(root, 'diagnostic');
+    const attempts = [
+      ['deepl', 'quota-refused'],
+      ['azure', 'auth-refused'],
+      ['googleCloud', 'timeout'],
+      ['mozhiDeepL', 'request-error'],
+      ['mozhiGoogle', 'structure:recoveryFailed'],
+      ['lingva', 'source-passthrough'],
+      ['google', 'empty-output'],
+    ];
+    const row = await processPair(translationPair('diagnostic'), {
+      CONTENT_ROOT: root,
+      APPLY: false,
+      translate: async ({ _outcome }) => {
+        for (const [provider, reason] of attempts) {
+          recordTranslationProviderAttempt(_outcome, {
+            provider,
+            status: 'failed',
+            reasons: [reason],
+          });
+        }
+        return '';
+      },
+    });
+
+    const providers = row.translationFailures[0].providers;
+    assert.deepEqual(
+      providers.map(({ provider, failureClass, message }) => [provider, failureClass, message]),
+      [
+        ['deepl', 'quota', 'quota o HTTP 429'],
+        ['azure', 'auth', 'autenticazione o HTTP 401/403'],
+        ['googleCloud', 'timeout', 'timeout'],
+        ['mozhiDeepL', 'network', 'errore di rete'],
+        ['mozhiGoogle', 'structure', 'rifiuto della struttura'],
+        ['lingva', 'passthrough', 'passthrough della sorgente'],
+        ['google', 'empty', 'uscita vuota'],
+      ],
+    );
+    assert.deepEqual(
+      summarizeEmptyCascadeProviders([row]).map(({ provider, failures, failureClass }) => [provider, failures, failureClass]),
+      [
+        ['azure', 1, 'auth'],
+        ['deepl', 1, 'quota'],
+        ['google', 1, 'empty'],
+        ['googleCloud', 1, 'timeout'],
+        ['lingva', 1, 'passthrough'],
+        ['mozhiDeepL', 1, 'network'],
+        ['mozhiGoogle', 1, 'structure'],
+      ],
+    );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('la riserva Codex scrive in apply quando la traduzione passa le guardie', async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-codex-apply-'));
+  try {
+    const paths = writeTranslationPairFixture(root, 'codex-ok');
+    const translate = engineTranslator('cascade', {
+      cascadeTranslate: async () => '',
+      codexCall: async () => DE_LONG,
+    });
+    const row = await processPair(translationPair('codex-ok'), {
+      CONTENT_ROOT: root,
+      APPLY: true,
+      translate,
+    });
+    assert.equal(row.written, true);
+    assert.equal(readBodyField(fs.readFileSync(paths.target, 'utf8'), 'codex-ok', 'body1'), DE_LONG.trim());
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('una riserva Codex rifiutata dalle guardie lascia la coppia intatta', async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-codex-rejected-'));
+  try {
+    const paths = writeTranslationPairFixture(root, 'codex-bad');
+    const before = fs.readFileSync(paths.target, 'utf8');
+    const translate = engineTranslator('cascade', {
+      cascadeTranslate: async () => '',
+      codexCall: async () => DE_LONG.slice(0, 600),
+    });
+    const row = await processPair(translationPair('codex-bad'), {
+      CONTENT_ROOT: root,
+      APPLY: true,
+      translate,
+    });
+    assert.equal(row.written, false);
+    assert.match(row.reason, /^troncata:/u);
+    assert.equal(fs.readFileSync(paths.target, 'utf8'), before);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('router Codex non configurato resta un rifiuto nominato nel report', async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-codex-unconfigured-'));
+  try {
+    writeTranslationPairFixture(root, 'codex-missing');
+    const translate = engineTranslator('cascade', {
+      cascadeTranslate: async () => '',
+      codexCall: null,
+    });
+    const row = await processPair(translationPair('codex-missing'), {
+      CONTENT_ROOT: root,
+      APPLY: false,
+      translate,
+    });
+    assert.equal(row.written, false);
+    assert.equal(row.reason, 'campo-vuoto-dalla-cascata');
+    const fallback = row.translationFailure.providers.find(({ provider }) => provider === 'codex-local-fallback');
+    assert.deepEqual(
+      [fallback.failureClass, fallback.message],
+      ['config', 'router Codex non configurato'],
+    );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('l osservatore ha soglia configurabile e codice d uscita distinto', () => {
+  assert.equal(parseEmptyCascadeThreshold('0.35'), 0.35);
+  assert.equal(parseEmptyCascadeThreshold(undefined), EMPTY_CASCADE_RATE_THRESHOLD);
+  assert.throws(() => parseEmptyCascadeThreshold(''), /valore vuoto/);
+  assert.throws(() => parseEmptyCascadeThreshold('1.1'), /fra 0 e 1/);
+
+  const above = emptyCascadeMetric([{
+    translationFieldResults: [
+      { field: 'body1', status: 'empty' },
+      { field: 'body2', status: 'translated' },
+    ],
+  }], 0.4);
+  assert.equal(above.firing, true);
+  assert.equal(emptyCascadeExitCode(above), EMPTY_CASCADE_OBSERVER_EXIT_CODE);
+
+  const below = emptyCascadeMetric([{
+    translationFieldResults: [
+      { field: 'body1', status: 'empty' },
+      { field: 'body2', status: 'translated' },
+      { field: 'body3', status: 'translated' },
+      { field: 'body4', status: 'translated' },
+    ],
+  }], 0.4);
+  assert.equal(below.firing, false);
+  assert.equal(emptyCascadeExitCode(below), 0);
+});
 
 test('translationSanityIssue accetta una ri-traduzione di lunghezza normale', () => {
   assert.equal(translationSanityIssue({

@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-19T02:30:40.156Z",
-  "contentHash": "78aa0b1553a61eb59dedc746cfc856f756be5e3182ad5d1c9fab1ffce33cf22e",
+  "updatedAt": "2026-10-19T05:23:08.856Z",
+  "contentHash": "3306f15e987a796747d2beffed1b0df5d8b378a8fed4cde68888aaa34ec4a265",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-18T19:35:54.382Z",
+      "updatedAt": "2026-10-18T21:56:13.114Z",
       "keyFacts": 0
     },
     {
@@ -24,7 +24,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-18T18:47:11.287Z",
+      "updatedAt": "2026-10-18T22:31:34.166Z",
       "keyFacts": 0
     },
     {
@@ -111,7 +111,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-18T19:35:54.382Z"
+          "updatedAt": "2026-10-18T21:56:13.114Z"
         },
         {
           "id": "aste-targhe",
@@ -145,31 +145,31 @@
             {
               "label": "Bellinzona",
               "value": "14 °C",
-              "detail": "oggi da 14 a 15 °C"
+              "detail": "oggi da 14 a 14 °C"
             },
             {
               "label": "Chiasso",
               "value": "15 °C",
-              "detail": "oggi da 14 a 16 °C"
+              "detail": "oggi da 15 a 15 °C"
             },
             {
               "label": "Locarno",
               "value": "15 °C",
-              "detail": "oggi da 16 a 16 °C"
+              "detail": "oggi da 15 a 15 °C"
             },
             {
               "label": "Lugano",
               "value": "15 °C",
-              "detail": "oggi da 15 a 16 °C"
+              "detail": "oggi da 15 a 15 °C"
             },
             {
               "label": "Mendrisio",
               "value": "14 °C",
-              "detail": "oggi da 14 a 15 °C"
+              "detail": "oggi da 14 a 14 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-18T18:47:11.287Z"
+          "updatedAt": "2026-10-18T22:31:34.166Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -295,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T05:23:08.856Z"
     },
     "en": {
       "canton": "TI",
@@ -374,7 +374,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-18T19:35:54.382Z"
+          "updatedAt": "2026-10-18T21:56:13.114Z"
         },
         {
           "id": "aste-targhe",
@@ -408,31 +408,31 @@
             {
               "label": "Bellinzona",
               "value": "14 °C",
-              "detail": "today from 14 to 15 °C"
+              "detail": "today from 14 to 14 °C"
             },
             {
               "label": "Chiasso",
               "value": "15 °C",
-              "detail": "today from 14 to 16 °C"
+              "detail": "today from 15 to 15 °C"
             },
             {
               "label": "Locarno",
               "value": "15 °C",
-              "detail": "today from 16 to 16 °C"
+              "detail": "today from 15 to 15 °C"
             },
             {
               "label": "Lugano",
               "value": "15 °C",
-              "detail": "today from 15 to 16 °C"
+              "detail": "today from 15 to 15 °C"
             },
             {
               "label": "Mendrisio",
               "value": "14 °C",
-              "detail": "today from 14 to 15 °C"
+              "detail": "today from 14 to 14 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-18T18:47:11.287Z"
+          "updatedAt": "2026-10-18T22:31:34.166Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -553,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T05:23:08.856Z"
     },
     "de": {
       "canton": "TI",
@@ -632,7 +632,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-18T19:35:54.382Z"
+          "updatedAt": "2026-10-18T21:56:13.114Z"
         },
         {
           "id": "aste-targhe",
@@ -666,31 +666,31 @@
             {
               "label": "Bellinzona",
               "value": "14 °C",
-              "detail": "heute 14 bis 15 °C"
+              "detail": "heute 14 bis 14 °C"
             },
             {
               "label": "Chiasso",
               "value": "15 °C",
-              "detail": "heute 14 bis 16 °C"
+              "detail": "heute 15 bis 15 °C"
             },
             {
               "label": "Locarno",
               "value": "15 °C",
-              "detail": "heute 16 bis 16 °C"
+              "detail": "heute 15 bis 15 °C"
             },
             {
               "label": "Lugano",
               "value": "15 °C",
-              "detail": "heute 15 bis 16 °C"
+              "detail": "heute 15 bis 15 °C"
             },
             {
               "label": "Mendrisio",
               "value": "14 °C",
-              "detail": "heute 14 bis 15 °C"
+              "detail": "heute 14 bis 14 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-18T18:47:11.287Z"
+          "updatedAt": "2026-10-18T22:31:34.166Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -811,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T05:23:08.856Z"
     },
     "fr": {
       "canton": "TI",
@@ -890,7 +890,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-18T19:35:54.382Z"
+          "updatedAt": "2026-10-18T21:56:13.114Z"
         },
         {
           "id": "aste-targhe",
@@ -924,31 +924,31 @@
             {
               "label": "Bellinzona",
               "value": "14 °C",
-              "detail": "aujourd’hui de 14 à 15 °C"
+              "detail": "aujourd’hui de 14 à 14 °C"
             },
             {
               "label": "Chiasso",
               "value": "15 °C",
-              "detail": "aujourd’hui de 14 à 16 °C"
+              "detail": "aujourd’hui de 15 à 15 °C"
             },
             {
               "label": "Locarno",
               "value": "15 °C",
-              "detail": "aujourd’hui de 16 à 16 °C"
+              "detail": "aujourd’hui de 15 à 15 °C"
             },
             {
               "label": "Lugano",
               "value": "15 °C",
-              "detail": "aujourd’hui de 15 à 16 °C"
+              "detail": "aujourd’hui de 15 à 15 °C"
             },
             {
               "label": "Mendrisio",
               "value": "14 °C",
-              "detail": "aujourd’hui de 14 à 15 °C"
+              "detail": "aujourd’hui de 14 à 14 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-18T18:47:11.287Z"
+          "updatedAt": "2026-10-18T22:31:34.166Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1066,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T05:23:08.856Z"
     }
   }
 }

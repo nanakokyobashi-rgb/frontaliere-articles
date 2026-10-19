@@ -51,6 +51,7 @@ import {
   shortHeadlineTokenPolicy,
   selectConsistentTitleEvidence,
   stripItemIdentity,
+  validateTitleEvidenceShape,
   withItemIdentity,
 } from '../scripts/lib/source-url-ledger.mjs';
 import { findCrossSectionSourceDuplicate } from '../scripts/lib/cross-section-dedup.mjs';
@@ -300,6 +301,26 @@ test('selectConsistentTitleEvidence rejects conflicting declarations before matc
   assert.equal(shortHeadlineEvidence(conflicting, matching), false);
   assert.equal(shortHeadlineEvidence(conflictingHtml, matching), false);
   assert.equal(shortHeadlineEvidence(`${matching}\r—`, matching), false);
+});
+
+test('title evidence rejects unsupported shapes before coercion', () => {
+  const matching = 'A 13: Stau';
+  const throwingObject = { toString() { throw new Error('must not stringify'); } };
+  const iteratorMaskedNestedArray = [[matching]];
+  iteratorMaskedNestedArray[Symbol.iterator] = function* () { yield matching; };
+
+  assert.equal(validateTitleEvidenceShape(matching), true);
+  assert.equal(validateTitleEvidenceShape([matching, 'A 13: STAU']), true);
+  assert.equal(validateTitleEvidenceShape([[matching]]), false);
+  assert.equal(validateTitleEvidenceShape(iteratorMaskedNestedArray), false);
+  assert.equal(validateTitleEvidenceShape([matching, {}]), false);
+  assert.equal(validateTitleEvidenceShape(throwingObject), false);
+  assert.equal(validateTitleEvidenceShape(Object.assign([], { 1: matching, length: 2 })), false);
+
+  assert.equal(selectConsistentTitleEvidence([[matching]]), '');
+  assert.equal(selectConsistentTitleEvidence(throwingObject), '');
+  assert.equal(pageCarriesItem('', matching, { titleEvidence: [[matching]] }), false);
+  assert.equal(pageCarriesItem('', matching, { titleEvidence: throwingObject }), false);
 });
 
 test('pageCarriesItem excludes conflicting metadata from multi-word headline evidence', () => {

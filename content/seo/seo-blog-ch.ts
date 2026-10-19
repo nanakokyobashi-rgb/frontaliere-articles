@@ -107583,6 +107583,84 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-imposta-successione-donazione-zurigo-regole': {
+    title: 'Imposta di successione e donazione nel Cantone di Zurigo',
+    description: 'Scopri le regole per l\'imposta di successione e donazione nel Cantone di Zurigo: gradi di parentela, esenzioni per coniuge e discendenti e dichiarazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, imposta, successione, donazione, cantone',
+    ogTitle: 'Imposta di successione e donazione nel Cantone di Zurigo',
+    ogDescription: 'Analisi completa dell\'imposta di successione e donazione nel Cantone di Zurigo. Scopri come funzionano le aliquote per grado di parentela, le esenzioni per coniuge e discendenti e gli adempimenti.',
+    canonicalPath: '/articoli-svizzera/imposta-successione-donazione-zurigo-regole/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Imposta di successione e donazione nel Cantone di Zurigo",
+      "description": "Scopri le regole per l'imposta di successione e donazione nel Cantone di Zurigo: gradi di parentela, esenzioni per coniuge e discendenti e dichiarazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-imposta-successione-donazione-zurigo-regole.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Imposta di successione e donazione nel Cantone di Zurigo"
+      },
+      "datePublished": "2026-10-19T05:15:43+00:00",
+      "dateModified": "2026-10-19T05:15:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/imposta-successione-donazione-zurigo-regole/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-securitas-violazioni-lavoro': {
+    title: 'Securitas avrebbe violato migliaia di volte la legge sul lavoro',
+    description: 'Circa 20\'000 presunte violazioni tra 2023 e 2025 Circa 900 dipendenti coinvolti nella Svizzera centrale Turni troppo lunghi e recuperi troppo brevi Securitas',
+    keywords: 'frontalieri, ticino, svizzera, italia, securitas, avrebbe, violato, migliaia',
+    ogTitle: 'Securitas avrebbe violato migliaia di volte la legge sul lavoro',
+    ogDescription: 'Circa 20\'000 presunte violazioni tra 2023 e 2025 Circa 900 dipendenti coinvolti nella Svizzera centrale Turni troppo lunghi e recuperi troppo brevi Securitas',
+    canonicalPath: '/articoli-svizzera/securitas-violazioni-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Securitas avrebbe violato migliaia di volte la legge sul lavoro",
+      "description": "Circa 20'000 presunte violazioni tra 2023 e 2025 Circa 900 dipendenti coinvolti nella Svizzera centrale Turni troppo lunghi e recuperi troppo brevi Securitas",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-securitas-violazioni-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Personale di sicurezza Securitas in Svizzera centrale"
+      },
+      "datePublished": "2026-10-19T06:33:36+00:00",
+      "dateModified": "2026-10-19T06:33:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/securitas-violazioni-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -98,8 +98,8 @@ function governedArticleCoverPath() {
 }
 
 test('the new-cover pipeline uses only the governed article-hero engine', () => {
-  const imageFunction = slice(CREATE, 'async function generateArticleImage(data) {', 'const imageDeadline');
-  const imageAdapter = slice(CREATE, 'async function generateArticleImage(data) {', '// ── Step 4: Modify source files');
+  const imageFunction = slice(CREATE, 'async function generateArticleImage(data, {', 'const imageDeadline');
+  const imageAdapter = slice(CREATE, 'async function generateArticleImage(data, {', '// ── Step 4: Modify source files');
   const imageStep = slice(CREATE, '  // Step 3b: Generate article image through the governed engine.', '  // Step 4: Modify files');
 
   assert.match(imageAdapter, /generateGovernedArticleHero/);
@@ -124,13 +124,22 @@ test('the new-cover pipeline uses only the governed article-hero engine', () => 
 
 test('a failed generation falls back without a quality rejection', () => {
   const imageStep = slice(CREATE, '  // Step 3b: Generate article image through the governed engine.', '  // Step 4: Modify files');
-  assert.match(imageStep, /findCatalogImage: findBestFallbackImage/);
+  assert.match(imageStep, /verifyCatalogFallbackCandidates\(data/);
+  assert.match(imageStep, /findCatalogImages: findBestFallbackImages/);
+  assert.match(imageStep, /verifiedCatalogImage/);
+  assert.doesNotMatch(imageStep, /findCatalogImage: findBestFallbackImage/);
   assert.match(imageStep, /reason: data\._imageGenerationFailureReason/);
   assert.doesNotMatch(imageStep, /imagePolicyReject|qualityReject/);
 });
 
+test('the governed fallback selector keeps the reserve pool when every image is recent', () => {
+  const fallbackSelector = slice(CREATE, 'function findBestFallbackImages(data) {', '\nfunction findBestFallbackImage(data) {');
+  assert.match(fallbackSelector, /return FALLBACK_IMAGES\s*\.map/);
+  assert.doesNotMatch(fallbackSelector, /recentImages|\.filter\(/);
+});
+
 test('the article adapter clears stale provenance before each governed attempt', () => {
-  const imageFunction = slice(CREATE, 'async function generateArticleImage(data) {', 'const imageDeadline');
+  const imageFunction = slice(CREATE, 'async function generateArticleImage(data, {', 'const imageDeadline');
   for (const field of ['_imageCredit', '_generatedImageRecord', '_editorialImageRecord']) {
     assert.match(imageFunction, new RegExp(`delete data\\.${field};`));
   }
@@ -142,13 +151,25 @@ test('journalist URLs are downloaded only after the four-field upload check', ()
   assert.match(resolver, /imageRecordForPath\(PROJECT_ROOT, rawImage, \{ strict: true \}\)/);
   assert.match(resolver, /if \(isEditorialUpload && upload\)/);
   assert.match(resolver, /appendEditorialImageRecord\(PROJECT_ROOT, record\)/);
-  assert.match(resolver, /generateArticleImage\(data\)/);
+  assert.match(resolver, /generateArticleImage\(data, \{ deadlineAt: imageDeadlineAt \}\)/);
   assert.match(resolver, /resolveArticleCoverFallback/);
   const downloadIndex = resolver.search(/\b(?:fetch|fetchWithRefTimeout)\(rawImage/);
   assert.ok(downloadIndex >= 0, 'rawImage is downloaded by the documented fetch wrapper');
   assert.ok(
     resolver.indexOf('if (isEditorialUpload && upload)') < downloadIndex,
     'rawImage is fetched only inside the documented upload branch',
+  );
+});
+
+test('the journalist engine and catalog verifier share one image-phase deadline', () => {
+  const resolver = slice(JOURNALIST, 'async function resolveHeroImage(data, doc) {', '\n/**\n * Resolves the byline');
+  assert.match(resolver, /const imageDeadlineAt = Date\.now\(\) \+ IMAGE_PHASE_BUDGET_MS;/);
+  assert.equal((resolver.match(/const imageDeadlineAt = Date\.now\(\) \+ IMAGE_PHASE_BUDGET_MS;/g) ?? []).length, 1);
+  assert.match(resolver, /generateArticleImage\(data, \{ deadlineAt: imageDeadlineAt \}\)/);
+  assert.match(resolver, /verifyCatalogFallbackCandidates\(data, \{[\s\S]*?deadlineAt: imageDeadlineAt,[\s\S]*?\}\)/);
+  assert.ok(
+    resolver.indexOf('const imageDeadlineAt =') < resolver.indexOf('generateArticleImage(data'),
+    'the shared budget begins before the governed image generation attempt',
   );
 });
 

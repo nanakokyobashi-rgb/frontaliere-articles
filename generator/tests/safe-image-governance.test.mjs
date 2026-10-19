@@ -67,11 +67,19 @@ test('la policy pura rifiuta URL arbitrari e accetta solo upload con quattro cam
   assert.equal(classifyJournalistImage('http://example.invalid/photo.jpg', {}).kind, 'rejected-url');
 });
 
-test('daily brief resta una card SVG deterministica, non un provider raster esterno', () => {
-  const source = read('generator/scripts/lib/daily-brief-image.mjs');
-  assert.match(source, /<svg/);
-  assert.match(source, /renderDailyBriefImage/);
-  assert.doesNotMatch(source, /fetch\(|gemini|pollinations|pixabay|pexels/i);
+test('daily brief genera un hero tematico fresco attraverso il motore governato', () => {
+  const producer = read('generator/scripts/generate-daily-brief-article.mjs');
+  const imageHelpers = read('generator/scripts/lib/daily-brief-image.mjs');
+  assert.match(producer, /generateGovernedArticleHero\(/);
+  assert.match(producer, /materializeDailyBriefHero\(/);
+  assert.match(producer, /buildDailyBriefImageContext\(h, data\.id\)/);
+  assert.match(producer, /refreshGovernedArticleCover\(/);
+  assert.match(producer, /refreshImageAlt: true/);
+  assert.doesNotMatch(producer, /buildDailyBriefSvg\(|renderDailyBriefImage\(/);
+  assert.match(imageHelpers, /buildDailyBriefCoverPrompt/);
+  assert.match(imageHelpers, /appendGeneratedImageRecord\(root, record\)/);
+  assert.match(imageHelpers, /record\.width < BLOG_IMAGE_WIDTH/);
+  assert.doesNotMatch(producer, /fetch\(|gemini|pollinations|pixabay|pexels/i);
 });
 
 test('la superficie API copia anche le immagini generate e pubblica il ledger aggregato', () => {

@@ -104,6 +104,7 @@ on:
       - 'scripts/lib/plate-auction-editorial.mjs'
       - 'generator/data/news-sitemap-whitelist.mjs'
       - 'generator/scripts/lib/daily-brief-content.mjs'
+      - 'generator/scripts/lib/daily-brief-data.mjs'
       - 'generator/scripts/lib/daily-brief-insights.mjs'
       - 'generator/scripts/generate-daily-brief-article.mjs'
       # Dynamic crossing localization imports these helpers and reads this

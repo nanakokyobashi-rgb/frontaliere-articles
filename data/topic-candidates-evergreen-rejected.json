@@ -1812,6 +1812,174 @@
       "firstSeenAt": "2026-10-18T21:19:25.389Z",
       "lastValidatedAt": "2026-10-18T21:19:25.389Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere licenziamento diritti preavviso indennita 2026 simulazione pratica",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T03:58:55.196Z",
+      "lastValidatedAt": "2026-10-19T03:58:55.196Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere licenziamento diritti preavviso indennita 2026 errori comuni",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:02:32.110Z",
+      "lastValidatedAt": "2026-10-19T04:02:32.110Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "apprendistato e formazione professionale canton Zurigo",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:19:11.751Z",
+      "lastValidatedAt": "2026-10-19T04:19:11.751Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "incentivi energetici canton Zurigo requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:19:12.013Z",
+      "lastValidatedAt": "2026-10-19T04:19:12.013Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "autorizzazione edilizia canton Zurigo requisiti e procedura",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:19:12.034Z",
+      "lastValidatedAt": "2026-10-19T04:19:12.034Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "voto cantonale canton Zurigo guida a iniziative e referendum",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:19:12.055Z",
+      "lastValidatedAt": "2026-10-19T04:19:12.055Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "elezioni cantonali canton Zurigo guida a calendario e voto",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:19:12.069Z",
+      "lastValidatedAt": "2026-10-19T04:19:12.069Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "protezione civile canton Zurigo requisiti e indennità",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:19:12.083Z",
+      "lastValidatedAt": "2026-10-19T04:19:12.083Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "avs e prestazioni complementari canton Zurigo cassa di compensazione",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:29:20.810Z",
+      "lastValidatedAt": "2026-10-19T04:29:20.810Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "assicurazione immobili canton Zurigo guida a obbligo e premi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:29:21.065Z",
+      "lastValidatedAt": "2026-10-19T04:29:21.065Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "aprire un'attività canton Zurigo registro di commercio e costi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:29:21.244Z",
+      "lastValidatedAt": "2026-10-19T04:29:21.244Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "formazione continua canton Zurigo requisiti e contributi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:29:21.264Z",
+      "lastValidatedAt": "2026-10-19T04:29:21.264Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "patente di guida canton Zurigo conversione ed esami",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:29:31.286Z",
+      "lastValidatedAt": "2026-10-19T04:29:31.286Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere formazione professionale riqualifica corsi 2026",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:46:27.066Z",
+      "lastValidatedAt": "2026-10-19T04:46:27.066Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -10185,14 +10353,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.seco.admin.ch/it/la-seco-in-qualita-di-datore-di-lavoro": {
-      "section": "svizzera",
-      "ts": 1792206975646
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/da-varese-a-londra-fino-a-fellini-le-musiche-di-lorenzo-bassignani-per-ultimo-fellini-alla-festa-del-cinema-di-roma/2710159": {
-      "section": "frontaliere",
-      "ts": 1792210072557
-    },
     "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1957292/il-centro-d-asilo-di-chiasso-a-gennaio-non-riaprira-imbucate-le-lettere-di-licenziamento": {
       "section": "frontaliere",
       "ts": 1792220546515
@@ -10440,6 +10600,22 @@
     "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1957426/biasca-toglie-il-velo-al-nuovo-nodo-di-interscambio": {
       "section": "frontaliere",
       "ts": 1792378641571
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/la-castellanzese-vola-al-terzo-posto-2-0-alla-correggese-con-castelletto-e-chessa/2711791": {
+      "section": "frontaliere",
+      "ts": 1792382099597
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/openjobmetis-il-campo-di-trento-e-maledetto-a-hale-non-riesce-lultimo-miracolo/2711371": {
+      "section": "frontaliere",
+      "ts": 1792382132337
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/ioannis-kastritis-sconfitta-dura-figlia-di-troppi-errori/2711839": {
+      "section": "frontaliere",
+      "ts": 1792382134199
+    },
+    "frontaliere::https://www.tio.ch/svizzera/cronaca/1957641/dipendenti-lavoro-svizzera-legge-securitas": {
+      "section": "frontaliere",
+      "ts": 1792387996935
     }
   }
 }

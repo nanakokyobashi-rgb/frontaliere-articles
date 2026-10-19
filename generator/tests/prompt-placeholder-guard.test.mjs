@@ -850,7 +850,7 @@ describe('LOCK — se il template acquisisce un segnaposto, questo test diventa 
     }
   });
 
-  it('il guard conserva separato il matcher dello schema storico di body1', () => {
+  it('il guard conserva i matcher degli schemi storici di body1, body2/body3 e cronaca locale', () => {
     const legacy = HISTORICAL_SCHEMA_PLACEHOLDER_LITERALS[0];
     assert.ok(!SCHEMA_PLACEHOLDER_LITERALS.includes(legacy), 'lo schema ritirato non deve rientrare nel lock del prompt corrente');
     const hits = findPromptPlaceholders(legacy);
@@ -869,6 +869,30 @@ describe('LOCK — se il template acquisisce un segnaposto, questo test diventa 
       findPromptPlaceholders(previous).some((hit) => hit.rule === 'legacy-schema-body1-optional-key-facts'),
       'il matcher storico del contratto 3-8 non viene piu\' riconosciuto',
     );
+
+    const historicalBodyMatchers = [
+      [3, 'legacy-schema-body1-source-backed-key-facts'],
+      [4, 'legacy-schema-body2-practical-analysis'],
+      [5, 'legacy-schema-body3-action'],
+      [6, 'legacy-schema-local-body1'],
+      [7, 'legacy-schema-local-body2'],
+      [8, 'legacy-schema-local-body3'],
+      [9, 'legacy-schema-faq-answer'],
+    ];
+    for (const [index, ruleId] of historicalBodyMatchers) {
+      const literal = HISTORICAL_SCHEMA_PLACEHOLDER_LITERALS[index];
+      assert.ok(literal, `manca il literal storico ${ruleId}`);
+      const legacyLead = leadOf(literal);
+      assert.ok(
+        findPromptPlaceholders(legacyLead).some((hit) => hit.rule === `${ruleId}-lead`),
+        `il matcher ${ruleId} non intercetta piu\' la testa dello schema legacy`,
+      );
+      assert.equal(
+        PLACEHOLDER_RULES.find((rule) => rule.id === ruleId)?.literal,
+        literal,
+        `${ruleId} deve restare ancorato al suo literal storico`,
+      );
+    }
   });
 });
 

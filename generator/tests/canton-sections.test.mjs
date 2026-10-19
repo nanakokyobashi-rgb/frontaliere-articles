@@ -212,8 +212,8 @@ test('viola: cronMinute duplicato o riservato a generate-article.yml', () => {
 
 test('viola: dailyBudget fuori dalla tabella D19', () => {
   const doc = clone();
-  canton(doc, 'SH').dailyBudget = 4;
-  expectViolation(doc, /SH: dailyBudget 4 != 1 \(D19\)/);
+  canton(doc, 'SH').dailyBudget = 5;
+  expectViolation(doc, /SH: dailyBudget 5 != 4 \(D19\)/);
 });
 
 test('viola: enum non validi e dato di categoria fra le news', () => {
