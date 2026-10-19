@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "carburanti",
-  "updatedAt": "2026-10-18T03:31:06.413Z",
-  "contentHash": "5e8ee4fa7f176185c94b3c9fc7bfbabeff80ccf3d4b3cd6c67ebfa7dca97f578",
+  "updatedAt": "2026-10-19T12:26:29.054Z",
+  "contentHash": "65562ca3fc05cc12a455937194ffb34afd94d6dfd616a29e0e842e6b8c5f6714",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-17T11:10:59.318Z",
+      "updatedAt": "2026-10-18T11:41:56.271Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-17T11:10:59.318Z"
+          "updatedAt": "2026-10-18T11:41:56.271Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Klöntalerstrasse: chiusura temporanea Staldengarten–Bützi",
+          "url": "/articoli-glarona/kloentalerstrasse-cantiere-2026/",
+          "excerpt": "Sono previsti lavori sulla Klöntalerstrasse dal 21 ottobre al 4 dicembre 2026: attese brevi, chiusura per l'asfalto e deviazione via Sackberg.",
+          "date": "2026-10-19T12:11:05.452Z"
+        },
         {
           "title": "Mühlehorn: Alte Kerenzerstrasse chiusa dal 19 ottobre",
           "url": "/articoli-glarona/muehlehorn-strada-chiusa-ottobre/",
@@ -82,12 +88,6 @@
           "url": "/articoli-glarona/imposta-seconde-case-glarona/",
           "excerpt": "La mozione è stata depositata il 10 settembre 2026.",
           "date": "2026-10-11T12:52:17.201Z"
-        },
-        {
-          "title": "Glarona: di nuovo i premi standard più bassi",
-          "url": "/articoli-glarona/premi-standard-glarona/",
-          "excerpt": "La Glarner Krankenversicherung torna ai premi standard più bassi. In passato, lo stesso primato aveva portato la cassa in serie difficoltà.",
-          "date": "2026-10-08T13:30:13.016Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-18T03:31:06.413Z"
+      "updatedAt": "2026-10-19T12:26:29.054Z"
     },
     "en": {
       "canton": "GL",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-17T11:10:59.318Z"
+          "updatedAt": "2026-10-18T11:41:56.271Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Klöntalerstrasse: temporary closure of Staldengarten–Bützi",
+          "url": "/en/glarus-articles/kloentalerstrasse-roadworks-2026/",
+          "excerpt": "Construction work is planned on Klöntalerstrasse from October 21 to December 4, 2026: brief waits, closure for asphalting, and a detour via Sackberg.",
+          "date": "2026-10-19T12:11:05.452Z"
+        },
         {
           "title": "Mühlehorn: Alte Kerenzerstrasse closed from October 19",
           "url": "/en/glarus-articles/muehlehorn-road-closure-october/",
@@ -169,12 +175,6 @@
           "url": "/en/glarus-articles/secondary-homes-tax-glarus/",
           "excerpt": "The motion was submitted on September 10, 2026.",
           "date": "2026-10-11T12:52:17.201Z"
-        },
-        {
-          "title": "Glarus: once again the lowest standard premiums",
-          "url": "/en/glarus-articles/glarner-lowest-standard-premiums/",
-          "excerpt": "Glarner Krankenversicherung returns to the lowest standard premiums. In the past, the same distinction had led the health insurer into serious difficulties.",
-          "date": "2026-10-08T13:30:13.016Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-18T03:31:06.413Z"
+      "updatedAt": "2026-10-19T12:26:29.054Z"
     },
     "de": {
       "canton": "GL",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-17T11:10:59.318Z"
+          "updatedAt": "2026-10-18T11:41:56.271Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Klöntalerstrasse: vorübergehende Sperrung Staldengarten–Bützi",
+          "url": "/de/glarus-artikel/kloentalerstrasse-bauarbeiten-2026/",
+          "excerpt": "An der Klöntalerstrasse sind vom 21.",
+          "date": "2026-10-19T12:11:05.452Z"
+        },
         {
           "title": "Mühlehorn: Alte Kerenzerstrasse ab dem 19. Oktober gesperrt",
           "url": "/de/glarus-artikel/muehlehorn-strassensperrung-oktober/",
@@ -256,12 +262,6 @@
           "url": "/de/glarus-artikel/zweitwohnungssteuer-glarus/",
           "excerpt": "Die Motion wurde am 10.",
           "date": "2026-10-11T12:52:17.201Z"
-        },
-        {
-          "title": "Glarus: wieder die niedrigsten Standardprämien",
-          "url": "/de/glarus-artikel/glarner-guenstigste-standardpraemien/",
-          "excerpt": "Die Glarner Krankenversicherung hat wieder die niedrigsten Standardprämien. In der Vergangenheit hatte derselbe Spitzenplatz die Kasse in ernsthafte Schwierigkeiten gebracht.",
-          "date": "2026-10-08T13:30:13.016Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-18T03:31:06.413Z"
+      "updatedAt": "2026-10-19T12:26:29.054Z"
     },
     "fr": {
       "canton": "GL",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-17T11:10:59.318Z"
+          "updatedAt": "2026-10-18T11:41:56.271Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Klöntalerstrasse : fermeture temporaire Staldengarten–Bützi",
+          "url": "/fr/articles-glaris/kloentalerstrasse-travaux-2026/",
+          "excerpt": "Des travaux sont prévus sur la Klöntalerstrasse du 21 octobre au 4 décembre 2026 : courtes attentes, fermeture pour l’asphaltage et déviation via Sackberg.",
+          "date": "2026-10-19T12:11:05.452Z"
+        },
         {
           "title": "Mühlehorn : Alte Kerenzerstrasse fermée à partir du 19 octobre",
           "url": "/fr/articles-glaris/muehlehorn-route-fermee-octobre/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-glaris/taxe-residences-secondaires-glaris/",
           "excerpt": "La motion a été déposée le 10 septembre 2026.",
           "date": "2026-10-11T12:52:17.201Z"
-        },
-        {
-          "title": "Glaris : de nouveau les primes standard les plus basses",
-          "url": "/fr/articles-glaris/glarner-primes-standard-basses/",
-          "excerpt": "La Glarner Krankenversicherung revient aux primes standard les plus basses. Par le passé, cette même distinction avait plongé la caisse dans de sérieuses difficultés.",
-          "date": "2026-10-08T13:30:13.016Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-18T03:31:06.413Z"
+      "updatedAt": "2026-10-19T12:26:29.054Z"
     }
   }
 }
