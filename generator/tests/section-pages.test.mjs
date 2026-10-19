@@ -2883,6 +2883,10 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     'scripts/publish-section-edge.mjs',
     'scripts/lib/engine-corpus-view.mjs',
     'scripts/lib/upload-cdn-file.sh',
+    'scripts/lib/r2-image-lease-process.sh',
+    'scripts/lib/r2-image-namespace-lock.mjs',
+    'scripts/lib/r2-section-lock.mjs',
+    'scripts/lib/is-invoked-directly.mjs',
     'scripts/lib/npm-ci-retry.sh',
     'scripts/lib/parse-positive-num.mjs',
     'scripts/ci/retry-cmd.sh',
@@ -3118,6 +3122,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'scripts/lib/assert-hub-locale-slug.mjs',
     'scripts/lib/section-page-manifest.mjs',
     'scripts/lib/upload-cdn-file.sh',
+    'scripts/lib/r2-image-lease-process.sh',
+    'scripts/lib/r2-image-namespace-lock.mjs',
+    'scripts/lib/r2-section-lock.mjs',
+    'scripts/lib/is-invoked-directly.mjs',
     'generator/scripts/load-rc-env.mjs',
   ]) assert.ok(wf.includes(`      - '${p}'\n`), p);
   assert.ok(wf.includes("      - 'engine/**'\n"));
@@ -3131,6 +3139,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'scripts/lib/cf-purge-variants.mjs',
     'scripts/lib/npm-ci-retry.sh',
     'scripts/lib/parse-positive-num.mjs',
+    'scripts/lib/upload-cdn-file.sh',
+    'scripts/lib/r2-image-lease-process.sh',
+    'scripts/lib/r2-image-namespace-lock.mjs',
+    'scripts/lib/r2-section-lock.mjs',
+    'scripts/lib/is-invoked-directly.mjs',
   ]) assert.ok(read('.github/workflows/fast-publish-article.yml').includes(`      - '${p}'\n`), p);
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'engine/**'\n"));
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'host/**'\n"));
