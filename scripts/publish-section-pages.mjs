@@ -1326,7 +1326,7 @@ function imageHeaderMatchesAssetKey(header, byteLength, key, contentType) {
       && ['avif', 'avis'].includes(header.toString('ascii', 8, 12));
   }
   const svg = header.toString('utf8', 0, Math.min(header.length, 4096)).replace(/^\uFEFF?\s*/, '');
-  return /^<(?:\?xml\b[^>]*>\s*)?<svg\b/i.test(svg);
+  return /^(?:<\?xml\b[^>]*>\s*)?<svg\b/i.test(svg);
 }
 
 function imageBytesMatchAssetKey(bytes, key, contentType) {

@@ -294,9 +294,9 @@ function webpFixture(byte) {
   return bytes;
 }
 
-async function publishFourLocaleSharedAsset({ localBytes, assetProbeImpl = null }) {
+async function publishFourLocaleSharedAsset({ localBytes, assetProbeImpl = null, assetKey = 'images/shared.webp' }) {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-shared-asset-'));
-  const sharedLocal = path.join(fixtureRoot, 'shared.webp');
+  const sharedLocal = path.join(fixtureRoot, `shared${path.extname(assetKey)}`);
   const unrelatedLocal = path.join(fixtureRoot, 'unrelated.webp');
   writeFileSync(sharedLocal, localBytes);
   writeFileSync(unrelatedLocal, webpFixture(0x33));
@@ -311,7 +311,7 @@ async function publishFourLocaleSharedAsset({ localBytes, assetProbeImpl = null 
     `${locale === 'it' ? '' : `${locale}/`}${ARTICLE_SECTION_CORE_ALL['canton-ti'].indexSlug[locale]}/rotta-live-${locale}/index.html`,
     'article',
   ));
-  const oldHtml = '<!doctype html><html><body><img src="https://cdn.frontaliereticino.ch/images/shared.webp"></body></html>';
+  const oldHtml = `<!doctype html><html><body><img src="https://cdn.frontaliereticino.ch/${assetKey}"></body></html>`;
   const stagedHtml = `${oldHtml}${CORPUS_ROUTE_OWNER_META_TAG}`;
   const uploadedPageKeys = new Set();
   const events = [];
@@ -329,7 +329,7 @@ async function publishFourLocaleSharedAsset({ localBytes, assetProbeImpl = null 
       immutablePages,
       snapshotPagesBeforeUpload: true,
       cdnUploads: [
-        { local: sharedLocal, key: 'images/shared.webp' },
+        { local: sharedLocal, key: assetKey },
         { local: unrelatedLocal, key: 'images/unrelated.webp' },
       ],
       obsoletePages: [],
@@ -513,6 +513,49 @@ test('publisher: stream image chunked oltre 5 MB viene cancellato e resta tratte
     assert.equal(fixture.events.filter((event) => event.startsWith('page-upload:')).length, 0);
   } finally {
     fixture.cleanup();
+  }
+});
+
+test('publisher: SVG plain/XML identici consentono le route; il fallback HTML resta trattenuto', async (t) => {
+  const cases = [
+    ['SVG senza dichiarazione XML', '<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"></svg>', true],
+    ['SVG con dichiarazione XML', '<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg"></svg>', true],
+    ['fallback HTML servito come SVG', '<!doctype html><html><body>not an image</body></html>', false],
+  ];
+  for (const [name, content, shouldReuse] of cases) {
+    await t.test(name, async () => {
+      const localBytes = Buffer.from(content, 'utf8');
+      const originalFetch = globalThis.fetch;
+      let requests = 0;
+      globalThis.fetch = async () => {
+        requests++;
+        return new Response(localBytes, { status: 200, headers: { 'content-type': 'image/svg+xml' } });
+      };
+      let fixture;
+      try {
+        fixture = await publishFourLocaleSharedAsset({ localBytes, assetKey: 'images/shared.svg' });
+      } finally {
+        globalThis.fetch = originalFetch;
+      }
+      try {
+        assert.equal(requests, shouldReuse ? 1 : 0, 'solo i candidati immagine validi arrivano al probe CDN');
+        assert.equal(fixture.result.failures, 0);
+        assert.ok(fixture.events.includes('asset-upload:images/unrelated.webp'));
+        if (shouldReuse) {
+          assert.equal(fixture.result.uploaded, 4);
+          assert.equal(fixture.result.deferredAssetPages, 0);
+          assert.equal(fixture.events.filter((event) => event.startsWith('page-upload:')).length, 4);
+          assert.ok(!fixture.events.includes('asset-upload:images/shared.svg'));
+        } else {
+          assert.equal(fixture.result.uploaded, 0);
+          assert.equal(fixture.result.deferredAssetPages, 4);
+          assert.equal(fixture.events.filter((event) => event.startsWith('page-upload:')).length, 0);
+          assert.ok(!fixture.events.includes('asset-upload:images/shared.svg'));
+        }
+      } finally {
+        fixture.cleanup();
+      }
+    });
   }
 });
 
