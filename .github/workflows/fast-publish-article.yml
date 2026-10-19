@@ -1118,53 +1118,10 @@ jobs:
             fi
           fi
 
-          # Two checks, deliberately different in strength, because they answer
-          # different questions.
-          #
-          # HARD — the shard ORIGIN must serve the page. That is entirely within
-          # this pipeline's control: it means the push landed and Pages built
-          # it. A failure here is a broken publish.
-          #
-          # SOFT — the apex. Cloudflare's negative cache for the origin fetch is
-          # eventually consistent and a `files` purge propagates per PoP, so the
-          # apex can lag by minutes. Measured across three publishes: en/de/fr
-          # answered 200 within seconds every time while IT — the apex locale,
-          # whose 404 is cached in far more PoPs because it takes far more
-          # traffic — needed longer than a 3-minute budget twice, and was 200
-          # shortly after. Failing the run on that would report a successful
-          # publish as broken, which is its own kind of lie.
+          # The apex is warning-only only for confirmed cache lag; the shard
+          # origin remains the hard publication gate. Pages build failures get
+          # one bounded recovery attempt below and otherwise stay red.
           fail=0
-
-          # WHY THE TIMEOUT IS NOT ITSELF THE VERDICT (issue #31).
-          #
-          # This gate was failing ~10% of runs, and every time it was right that
-          # the URL was 404 — but wrong about the reason it reported ("the shard
-          # push did not become readable" points at the push, which had landed).
-          # The real cause sits one layer down, outside the runner: the GitHub
-          # Pages build for that shard commit comes back `errored` with a
-          # duration of 0ms. Nothing was built, so the page stays 404 until some
-          # LATER push happens to trigger a good build.
-          #
-          # Measured on frontaliere-articolisvizzera-fr: build errored 0ms at
-          # 2026-08-08T03:23:51Z for commit 1ed91403 (run 31237078985), and the
-          # very next build — same commit, no new push — was `built` in 34s.
-          # Same signature at 2026-08-07T22:50:48Z. An errored 0ms build is a
-          # transient fault on GitHub's side, and re-requesting it clears it.
-          #
-          # So on a timeout we ask Pages what happened. `errored` requests one
-          # rebuild and polls once more; `building`/`queued` means a build is
-          # already in flight and just needs more time, so it polls again
-          # without requesting a second one (issue #260 — the FR shard was
-          # still `building` after the first 3-minute window and would have
-          # gone `built` shortly after, same as the IT apex case measured
-          # below). Either case is ONE retry, not a loop: a Pages outage or a
-          # build that is still not done after the second poll is a real
-          # failure and must stay red rather than be papered over. Either way
-          # the error message now carries the build status, so the issue this
-          # opens points at the cause instead of the symptom.
-          #
-          # The Pages token comes from the same owner-aware resolver as the
-          # shard push. load-rc-env.mjs already masks the Remote Config values.
 
           # WHY EVERY PROBE CARRIES A CACHE-BUST QUERY (issue #114).
           #
