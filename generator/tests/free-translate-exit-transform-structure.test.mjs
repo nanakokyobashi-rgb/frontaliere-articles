@@ -424,15 +424,15 @@ test('translateWithCodexEngine confronta il tipo JSON di primo livello', async (
   assert.deepEqual(objectArray.outcome._tierReasons, [{ provider: 'codex', reason: 'invalid-output' }]);
 
   const objectDifferentKey = await run('{"a":"ciao"}', '{"b":"hallo"}');
-  assert.equal(objectDifferentKey.out, '');
-  assert.deepEqual(objectDifferentKey.outcome._tierReasons, [{ provider: 'codex', reason: 'invalid-output' }]);
+  assert.equal(objectDifferentKey.out, '{"b":"hallo"}');
+  assert.equal(objectDifferentKey.outcome._tierReasons, undefined);
 
   const arrayDifferentLength = await run('["ciao"]', '["hallo", "welt"]');
-  assert.equal(arrayDifferentLength.out, '');
-  assert.deepEqual(arrayDifferentLength.outcome._tierReasons, [{ provider: 'codex', reason: 'invalid-output' }]);
+  assert.equal(arrayDifferentLength.out, '["hallo", "welt"]');
+  assert.equal(arrayDifferentLength.outcome._tierReasons, undefined);
 });
 
-test('translateWithCodexEngine finalizza JSON raw da una sorgente dentro un fence', async () => {
+test('translateWithCodexEngine non salta la guardia per JSON dentro un fence', async () => {
   const outcome = {};
   const out = await translateWithCodexEngine({
     text: '```json\n{"a":"ciao"}\n```',
@@ -441,9 +441,9 @@ test('translateWithCodexEngine finalizza JSON raw da una sorgente dentro un fenc
     call: async () => '{"a":"hallo"}',
     _outcome: outcome,
   });
-  assert.equal(out, '{"a":"hallo"}');
-  assert.equal(outcome.incomplete, undefined);
-  assert.equal(outcome._tierReasons, undefined);
+  assert.equal(out, '');
+  assert.equal(outcome.incomplete, true);
+  assert.deepEqual(outcome._tierReasons, [{ provider: 'codex-engine', reason: 'structure:directPathRejected' }]);
 });
 
 test('translateWithCodexEngine registra l eco del prompt come meta-response', async () => {

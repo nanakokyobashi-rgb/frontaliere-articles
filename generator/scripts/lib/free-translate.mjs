@@ -3181,12 +3181,10 @@ function _prepareEngineSource(text, sourceLang, fieldType) {
  * are skipped and legitimate body prose ("nel nostro orologio") is never
  * rewritten. Glossary triggers are matched against the UNMASKED source.
  */
-function _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome, jsonStructureSignature = null }) {
+function _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome }) {
   const finalized = finalizeTranslatedText({
     sourceText: prepared.sourceClean,
-    translatedText: jsonStructureSignature === null
-      ? balanceMarkdownMarkers(out, { sourceText: prepared.clean })
-      : out,
+    translatedText: balanceMarkdownMarkers(out, { sourceText: prepared.clean }),
     targetLang,
     fieldType,
     protectedTokens: prepared.protectedTokens,
@@ -3195,20 +3193,24 @@ function _finalizeEngineOutput({ prepared, out, targetLang, fieldType, outcome, 
     noteTranslationOutcome(outcome, 'incomplete');
     return finalized;
   }
-  // Exit invariant. Prose uses the line skeleton after finalization; JSON uses
-  // its key/container signature. A broken structure is a counted miss, never
-  // published. For prose, changed opaque spans remain an observability signal
-  // because rejecting them would stop translations that were already shipped.
-  const structurePreserved = jsonStructureSignature === null
-    ? hasSameLineSkeleton(prepared.structureSource, finalized)
-    : codexJsonStructureSignature(finalized) === jsonStructureSignature;
-  if (!structurePreserved) {
+  // Exit invariant. A tier's output is accepted because it has the line
+  // structure of the source (`tryTier`, and the same guard on the direct Codex
+  // path); this transform runs AFTER that guard, so whatever it breaks nobody
+  // else sees. It used to merge list items and drop the source's own `---`
+  // lines here. The repair steps are now unable to do that; this check keeps
+  // it true for the next rule added to the exit, and for the next caller that
+  // reaches the exit without a guard of its own:
+  //  - a text without the line skeleton of the source is a MISS, counted,
+  //    never a published text — whoever lost it;
+  //  - a changed opaque span (a URL the placeholder strip rewrote) is counted
+  //    and let through, because rejecting it would stop a translation that
+  //    was being published until now — the counter says when it reaches zero.
+  if (!hasSameLineSkeleton(prepared.structureSource, finalized)) {
     noteTierStructureFailure('exit', 'exitTransformBroke', outcome);
     noteTranslationOutcome(outcome, 'incomplete');
     return '';
   }
-  if (jsonStructureSignature === null
-    && hasSameLineStructure(prepared.clean, out)
+  if (hasSameLineStructure(prepared.clean, out)
     && !hasSameLineStructure(prepared.structureSource, finalized)) {
     _cascadeStats.exitTransformOpaqueDrift += 1;
   }
@@ -3615,6 +3617,7 @@ export function codexPromptEchoMarker(out, source) {
 
 const CODEX_MALFORMED_JSON_PREFIX_RE = /^\s*(?:\{\s*[\x22}\]]|\[\s*[\x22{\]])/u;
 const CODEX_JSON_FENCE_RE = new RegExp('^```json[ \\t]*\\r?\\n([\\s\\S]*?)\\r?\\n```$', 'iu');
+const CODEX_JSON_TOP_LEVEL_KINDS = new Set(['object', 'array']);
 /** Classify a Codex answer that is actually JSON-shaped output. */
 function codexJsonOutputKind(out) {
   let candidate = String(out ?? '').trim();
@@ -3630,33 +3633,18 @@ function codexJsonOutputKind(out) {
   }
 }
 
-function codexJsonShape(value) {
-  if (value === null) return ['null'];
-  if (Array.isArray(value)) return ['array', value.map(codexJsonShape)];
-  if (typeof value === 'object') {
-    return ['object', Object.keys(value).sort().map((key) => [key, codexJsonShape(value[key])])];
-  }
-  if (typeof value === 'string') return ['string'];
-  return [typeof value, value];
-}
-
 /**
- * Preserve object keys, container shape, array length, and non-string values
- * while allowing translated JSON string values to change. Markdown line
- * structure is a prose contract and does not model nested JSON reliably.
+ * Keep the main line-structure guard meaningful for one-line JSON payloads.
+ * `hasSameLineStructure` quite correctly treats `{...}` as one opaque
+ * placeholder in prose; for JSON that would compare translated values/keys,
+ * which is deliberately outside this guard. Preserve the line count and use a
+ * same-kind marker only for a complete one-line JSON value. A fenced source is
+ * left as-is, so raw JSON still takes the same direct-path rejection as main.
  */
-function codexJsonStructureSignature(out) {
-  let candidate = String(out ?? '').trim();
-  const fenced = candidate.match(CODEX_JSON_FENCE_RE);
-  if (fenced) candidate = fenced[1].trim();
-  if (!/^[\[{]/u.test(candidate)) return null;
-  try {
-    const parsed = JSON.parse(candidate);
-    if (parsed === null || typeof parsed !== 'object') return null;
-    return JSON.stringify(codexJsonShape(parsed));
-  } catch {
-    return null;
-  }
+function codexJsonStructureText(value, jsonKind) {
+  const normalized = normalizeStructuredBlock(value);
+  if (!CODEX_JSON_TOP_LEVEL_KINDS.has(jsonKind) || normalized.includes('\n')) return normalized;
+  return `__codex_json_${jsonKind}__`;
 }
 
 export async function translateWithCodexEngine({ text, sourceLang, targetLang, fieldType = 'description', call, _outcome = null }) {
@@ -3670,15 +3658,14 @@ export async function translateWithCodexEngine({ text, sourceLang, targetLang, f
     noteTranslationOutcome(_outcome, 'incomplete');
     return '';
   }
-  // The local transport is normally plain text. A JSON source must keep its
-  // top-level type and key/container shape while allowing string values to be
-  // translated.
+  // The local transport is normally plain text. Keep the source/output JSON
+  // classification identical, including the first-level object/array kind.
+  // This deliberately fails open on object keys and array contents: JSON
+  // sources are not a real body shape, and key comparison is the fragile part
+  // of this guard. The contract here is only the top-level JSON type.
   const jsonKind = codexJsonOutputKind(out);
   const sourceJsonKind = codexJsonOutputKind(prepared.sourceClean);
-  const jsonStructure = codexJsonStructureSignature(out);
-  const sourceJsonStructure = codexJsonStructureSignature(prepared.sourceClean);
-  if (jsonKind !== sourceJsonKind
-    || (sourceJsonStructure !== null && jsonStructure !== sourceJsonStructure)) {
+  if (jsonKind !== sourceJsonKind) {
     noteTranslationProviderReason(_outcome, 'codex', 'invalid-output');
     noteTranslationOutcome(_outcome, 'incomplete');
     return '';
@@ -3701,7 +3688,10 @@ export async function translateWithCodexEngine({ text, sourceLang, targetLang, f
   // processo `codex exec`, e una riga per processo non e' un costo che questo
   // percorso puo' pagare. Il campo e' un MISS contato; la bonifica salta
   // l'articolo e la seconda corsia lo lascia al giro successivo.
-  if (sourceJsonStructure === null && !hasSameLineStructure(prepared.clean, out)) {
+  if (!hasSameLineStructure(
+    codexJsonStructureText(prepared.clean, sourceJsonKind),
+    codexJsonStructureText(out, jsonKind),
+  )) {
     noteTierStructureFailure('codex-engine', 'directPathRejected', _outcome);
     noteTranslationOutcome(_outcome, 'incomplete');
     return '';
@@ -3712,7 +3702,6 @@ export async function translateWithCodexEngine({ text, sourceLang, targetLang, f
     targetLang,
     fieldType,
     outcome: _outcome,
-    jsonStructureSignature: sourceJsonStructure,
   });
 }
 
