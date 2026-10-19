@@ -898,6 +898,151 @@ const ADDRESS_LEADING_LABEL_RE = /^\s*(?:indirizzo|address|adresse|cap|codice\s+
 const ADDRESS_LOCALITY_PREAMBLE_PREFIX_RE = /^\s*(?:around|about|near|nearby|next\s+to|close\s+to|adjacent\s+to|at|by|from|across|behind|between|outside|inside|within|above|below|in\s+the\s+area\s+of|in\s+the\s+vicinity\s+of|vicino(?:\s+a)?|presso|nei\s+pressi\s+di|nelle\s+vicinanze\s+di|circa|près\s+de|à\s+proximité\s+de|à\s+côté\s+de|proche\s+de|aux\s+alentours\s+de|bei|nahe(?:\s+bei)?|in\s+der\s+Nähe\s+von|rund\s+um)\b/iu;
 
 /**
+ * Project an address to the text a reader sees while retaining the source
+ * offset of every visible character. Address guards compare this projection;
+ * the offsets keep a CAP occurrence tied to the corresponding raw line when
+ * Markdown/HTML metadata has a different length or contains nested links.
+ */
+export function visibleAddressOffsetMap(value) {
+  const source = String(value ?? '');
+  const visible = [];
+  const sourceOffsets = [];
+
+  const appendCharacter = (character, sourceIndex) => {
+    visible.push(character);
+    sourceOffsets.push(sourceIndex);
+  };
+
+  const appendSeparatorIfNeeded = (start, end) => {
+    const previous = visible.at(-1);
+    const next = source[end];
+    if (previous && next && !/\s/u.test(previous) && !/\s/u.test(next)) {
+      appendCharacter(' ', start);
+    }
+  };
+
+  const htmlTagEndAt = (start, limit) => {
+    if (source[start] !== '<') return -1;
+    let quote = '';
+    for (let index = start + 1; index < limit; index += 1) {
+      const character = source[index];
+      if (quote) {
+        if (character === quote) quote = '';
+        continue;
+      }
+      if (character === '"' || character === "'") quote = character;
+      else if (character === '>') return index + 1;
+    }
+    return -1;
+  };
+
+  const markdownLinkAt = (start, limit) => {
+    const marker = source[start] === '['
+      ? start
+      : source[start] === '!' && source[start + 1] === '['
+        ? start + 1
+        : -1;
+    if (marker < 0) return null;
+    let depth = 0;
+    let closeLabel = -1;
+    for (let index = marker + 1; index < limit; index += 1) {
+      if (source[index] === '\\') {
+        index += 1;
+        continue;
+      }
+      if (source[index] === '[') depth += 1;
+      else if (source[index] === ']') {
+        if (depth === 0) {
+          closeLabel = index;
+          break;
+        }
+        depth -= 1;
+      }
+    }
+    if (closeLabel < 0 || source[closeLabel + 1] !== '(') return null;
+
+    let parenthesisDepth = 0;
+    let angleDestination = false;
+    let closeDestination = -1;
+    for (let index = closeLabel + 2; index < limit; index += 1) {
+      if (source[index] === '\\') {
+        index += 1;
+        continue;
+      }
+      if (index === closeLabel + 2 && source[index] === '<') angleDestination = true;
+      else if (angleDestination && source[index] === '>') angleDestination = false;
+      else if (!angleDestination && source[index] === '(') parenthesisDepth += 1;
+      else if (!angleDestination && source[index] === ')') {
+        if (parenthesisDepth === 0) {
+          closeDestination = index;
+          break;
+        }
+        parenthesisDepth -= 1;
+      }
+    }
+    if (closeDestination < 0) return null;
+    return {
+      labelStart: marker + 1,
+      labelEnd: closeLabel,
+      end: closeDestination + 1,
+    };
+  };
+
+  const urlEndAt = (start, limit) => {
+    const hasUrlPrefix = source.startsWith('https://', start)
+      || source.startsWith('http://', start)
+      || source.startsWith('www.', start);
+    const isRoute = source[start] === '/'
+      && /[a-z0-9]/iu.test(source[start + 1] || '')
+      && (start === 0 || !/[\p{L}\p{N}@]/u.test(source[start - 1]));
+    if (!hasUrlPrefix && !isRoute) return -1;
+    let end = start + 1;
+    while (end < limit && !/[\s)\]>"]/u.test(source[end])) end += 1;
+    return end;
+  };
+
+  const scan = (start, limit, depth = 0) => {
+    if (depth > 12) {
+      for (let index = start; index < limit; index += 1) appendCharacter(source[index], index);
+      return;
+    }
+    for (let index = start; index < limit;) {
+      const link = markdownLinkAt(index, limit);
+      if (link) {
+        scan(link.labelStart, link.labelEnd, depth + 1);
+        index = link.end;
+        continue;
+      }
+      const tagEnd = htmlTagEndAt(index, limit);
+      if (tagEnd >= 0) {
+        appendSeparatorIfNeeded(index, tagEnd);
+        index = tagEnd;
+        continue;
+      }
+      const urlEnd = urlEndAt(index, limit);
+      if (urlEnd >= 0) {
+        appendSeparatorIfNeeded(index, urlEnd);
+        index = urlEnd;
+        continue;
+      }
+      if (source[index] === '*' || source[index] === '_' || source[index] === '\`') {
+        index += 1;
+        continue;
+      }
+      if (source[index] === '~' && source[index + 1] === '~') {
+        index += 2;
+        continue;
+      }
+      appendCharacter(source[index], index);
+      index += 1;
+    }
+  };
+
+  scan(0, source.length);
+  return { text: visible.join(''), sourceOffsets };
+}
+
+/**
  * The address guard is deliberately narrower than a generic capitalized-word
  * check: a five-digit number also occurs in dates, case numbers and source
  * URLs. These contexts are the address shapes used by the corpus, while the
@@ -919,11 +1064,41 @@ function foldAddressText(value) {
 
 /** Keep Markdown labels and HTML text, but discard opaque metadata and formatting. */
 function visibleAddressText(value) {
+  return visibleAddressOffsetMap(value).text;
+}
+
+const ADDRESS_POSTAL_LOCALITY_PARTICLES = new Set([
+  'a', 'al', 'am', 'an', 'and', 'at', 'auf', 'aux', 'bei', 'da', 'das', 'de',
+  'dei', 'del', 'della', 'delle', 'degli', 'dello', 'di', 'do', 'dos', 'du',
+  'des',
+  'e', 'el', 'het', 'i', 'il', 'im', 'in', 'la', 'las', 'le', 'les', 'los',
+  'na', 'nel', 'nei', 'nella', 'nelle', 'no', 'of', 'on', 'para', 'per',
+  'por', 'sous', 'su', 'sul', 'sulla', 'sur', 'the', 'van', 'von', 'y', 'zu',
+  'zum', 'zur', 'der', 'den', 'dem', 'am', 'an',
+].map((word) => foldAddressText(word)));
+const ADDRESS_POSTAL_CAPITALIZED_WORD_RE = /^\p{Lu}[\p{L}\p{M}]*(?:[’'\-][\p{L}\p{M}]+)*$/u;
+const ADDRESS_POSTAL_COMPOUND_PARTICLE_RE = /^\p{Ll}[\p{L}\p{M}]*[’'][\p{Lu}][\p{L}\p{M}]*(?:[’'\-][\p{L}\p{M}]+)*$/u;
+
+/** Tokenize a locality without treating its lower-case connector words as prose. */
+export function addressPostalLocalityWords(value) {
   return String(value ?? '')
-    .replace(ADDRESS_MARKDOWN_LINK_RE, '$1')
-    .replace(ADDRESS_URL_RE, ' ')
-    .replace(ADDRESS_HTML_TAG_RE, ' ')
-    .replace(ADDRESS_MARKDOWN_DECORATION_RE, '');
+    .normalize('NFKC')
+    .trim()
+    .split(/\s+/u)
+    .map((word) => word.replace(/^[,;:]+|[,;:]+$/gu, ''))
+    .filter(Boolean);
+}
+
+function isAddressPostalLocality(value) {
+  const words = addressPostalLocalityWords(value);
+  if (!words.length || !ADDRESS_POSTAL_CAPITALIZED_WORD_RE.test(words[0])) return false;
+  return words.every((word, index) => {
+    if (ADDRESS_POSTAL_CAPITALIZED_WORD_RE.test(word)) return true;
+    if (ADDRESS_POSTAL_COMPOUND_PARTICLE_RE.test(word)) return index > 0;
+    const folded = foldAddressText(word);
+    return index > 0 && index < words.length - 1
+      && ADDRESS_POSTAL_LOCALITY_PARTICLES.has(folded);
+  });
 }
 
 function addressTermPattern(term) {
@@ -1003,9 +1178,16 @@ function addressLocalityFormsForSourceLine(sourceLine, locale) {
   return [...forms];
 }
 
-function addressPostalMatches(line) {
+function addressPostalMatches(value) {
+  const projection = typeof value === 'string'
+    ? visibleAddressOffsetMap(value)
+    : value;
   ADDRESS_POSTAL_CODE_RE.lastIndex = 0;
-  const matches = [...String(line).matchAll(ADDRESS_POSTAL_CODE_RE)];
+  const matches = [...projection.text.matchAll(ADDRESS_POSTAL_CODE_RE)]
+    .map((match, postalMatchIndex) => Object.assign(match, {
+      postalMatchIndex,
+      sourceIndex: projection.sourceOffsets[match.index] ?? match.index,
+    }));
   ADDRESS_POSTAL_CODE_RE.lastIndex = 0;
   return matches;
 }
@@ -1078,7 +1260,9 @@ function postalSegmentHasLocality(addressSegment) {
   const afterPreposition = marker
     ? afterMarker.replace(ADDRESS_POSTAL_LOCALITY_PREPOSITION_PREFIX_RE, '')
     : afterMarker;
-  return ADDRESS_POSTAL_LOCALITY_RE.test(afterPreposition);
+  const localityCandidate = afterPreposition.split(/[,;:]/u, 1)[0].trim();
+  return isAddressPostalLocality(localityCandidate)
+    || ADDRESS_POSTAL_LOCALITY_RE.test(afterPreposition);
 }
 
 function postalSegmentContainsOnlyPlaceNames(addressSegment) {
@@ -1096,7 +1280,7 @@ function postalSegmentContainsOnlyPlaceNames(addressSegment) {
     const placeName = marker
       ? afterMarker.replace(ADDRESS_POSTAL_LOCALITY_PREPOSITION_PREFIX_RE, '')
       : afterMarker;
-    return ADDRESS_POSTAL_PLACE_NAME_RE.test(placeName);
+    return isAddressPostalLocality(placeName);
   });
 }
 
@@ -1172,6 +1356,26 @@ function addressTokenIsPreserved({ token, sourceSegment, targetSegment, locale }
   });
 }
 
+function addressPostalMatchFollowsAddressSegment(line, postalMatches, postalMatch) {
+  return postalMatches.some((previousMatch) => {
+    if (previousMatch.index >= postalMatch.index) return false;
+    const betweenMatches = line.slice(
+      previousMatch.index + previousMatch[0].length,
+      postalMatch.index,
+    );
+    const previousSegment = addressSegmentForPostalCode(line, previousMatch);
+    const currentSegment = addressSegmentForPostalCode(line, postalMatch);
+    return !ADDRESS_SENTENCE_BOUNDARY_RE.test(betweenMatches)
+      && !/:/u.test(betweenMatches)
+      && /[,;]\s*$/u.test(betweenMatches)
+      && isAddressLine(line, previousMatch)
+      && postalHasAddressSeparator(line, postalMatch)
+      && postalSegmentHasLocality(currentSegment)
+      && postalSegmentContainsOnlyPlaceNames(previousSegment)
+      && postalSegmentContainsOnlyPlaceNames(currentSegment);
+  });
+}
+
 function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
   const candidates = [];
   const expectedLocalityTerms = addressLocalityFormsForSourceLine(sourceLine, locale);
@@ -1179,29 +1383,21 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
     // A single visible line may contain more than one postal-code/address
     // segment. Each CAP match is assigned at most once, including when the
     // translation combines or reorders source rows on one line.
-    const line = visibleAddressText(rawLine);
-    const postalMatches = addressPostalMatches(line);
+    const projection = visibleAddressOffsetMap(rawLine);
+    const line = projection.text;
+    const postalMatches = addressPostalMatches(projection);
     for (const postalMatch of postalMatches) {
       if (postalMatch[0] !== sourceLine.postalCode) continue;
-      const followsAddressSegment = postalMatches.some((previousMatch) => {
-        if (previousMatch.index >= postalMatch.index) return false;
-        const betweenMatches = line.slice(
-          previousMatch.index + previousMatch[0].length,
-          postalMatch.index,
-        );
-        const previousSegment = addressSegmentForPostalCode(line, previousMatch);
-        const currentSegment = addressSegmentForPostalCode(line, postalMatch);
-        return !ADDRESS_SENTENCE_BOUNDARY_RE.test(betweenMatches)
-          && !/:/u.test(betweenMatches)
-          && /[,;]\s*$/u.test(betweenMatches)
-          && isAddressLine(line, previousMatch)
-          && postalHasAddressSeparator(line, postalMatch)
-          && postalSegmentHasLocality(currentSegment)
-          && postalSegmentContainsOnlyPlaceNames(previousSegment)
-          && postalSegmentContainsOnlyPlaceNames(currentSegment);
-      });
+      if (sourceLine.postalMatchCount > 1
+        && postalMatches.length > 1
+        && postalMatch.postalMatchIndex !== sourceLine.postalMatchIndex) continue;
+      const followsAddressSegment = addressPostalMatchFollowsAddressSegment(
+        line,
+        postalMatches,
+        postalMatch,
+      );
       if (!isAddressLine(line, postalMatch) && !followsAddressSegment) continue;
-      const matchKey = `${index}:${postalMatch.index}`;
+      const matchKey = index + ':' + postalMatch.sourceIndex;
       if (usedTargetMatches.has(matchKey)) continue;
       const targetSegment = addressSegmentForPostalCode(line, postalMatch, {
         forceFirstColonBoundary: sourceLine.hasDescriptionColon,
@@ -1210,6 +1406,7 @@ function addressLineTarget(lines, sourceLine, usedTargetMatches, locale) {
       candidates.push({
         index,
         matchKey,
+        postalMatchIndex: postalMatch.postalMatchIndex,
         text: rawLine,
         segment: [
           addressLocalityMarkerSegmentBeforePostalCode(
@@ -1264,9 +1461,17 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
     const targetLines = String(newSections?.[field] ?? '').split('\n');
     const usedTargetMatches = new Set();
     sourceLines.forEach((line, lineIndex) => {
-      const visibleLine = visibleAddressText(line);
-      for (const postalMatch of addressPostalMatches(visibleLine)) {
-        if (!isAddressLine(visibleLine, postalMatch)) continue;
+      const projection = visibleAddressOffsetMap(line);
+      const visibleLine = projection.text;
+      const sourcePostalMatches = addressPostalMatches(projection);
+      for (const postalMatch of sourcePostalMatches) {
+        const sourceIsAddressLine = isAddressLine(visibleLine, postalMatch)
+          || addressPostalMatchFollowsAddressSegment(
+            visibleLine,
+            sourcePostalMatches,
+            postalMatch,
+          );
+        if (!sourceIsAddressLine) continue;
         const sourceSegment = addressSegmentForPostalCode(visibleLine, postalMatch);
         const sourceLocalityMarkerSegment = addressLocalityMarkerSegmentBeforePostalCode(visibleLine, postalMatch);
         const sourceAddressSegment = [sourceLocalityMarkerSegment, sourceSegment].filter(Boolean).join(' ');
@@ -1279,6 +1484,8 @@ export function findAddressToponymMismatches({ italianSections, newSections, loc
         if (tokens.length === 0) continue;
         const sourceLine = {
           postalCode: postalMatch[0],
+          postalMatchIndex: postalMatch.postalMatchIndex,
+          postalMatchCount: sourcePostalMatches.length,
           line: line.trim(),
           segment: sourceAddressSegment,
           postalSegment: sourceSegment,
