@@ -278,7 +278,7 @@ test('publisher: lo staging snapshotta prima degli asset e trattiene quelli dell
   }
 });
 
-test('publisher: una pagina nuova che riusa un asset trattenuto viene differita al replay', async () => {
+test('publisher: un 404 richiesto viene caricato con l asset trattenuto senza mutare la pagina immutabile', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-live-held-page-'));
   const immutable = pageEntry('canton-ti', 'articoli-ticino/existing/index.html', 'article');
   const staged = pageEntry('canton-ti', 'articoli-ticino/new/index.html', 'article');
@@ -297,6 +297,7 @@ test('publisher: una pagina nuova che riusa un asset trattenuto viene differita 
       section: 'canton-ti',
       pages: [staged],
       immutablePages: [immutable],
+      requiredPagePaths: [staged.canonicalPath],
       snapshotPagesBeforeUpload: true,
       cdnUploads: [
         { local: 'public/images/shared.webp', key: 'images/shared.webp' },
@@ -325,18 +326,24 @@ test('publisher: una pagina nuova che riusa un asset trattenuto viene differita 
         if (url === staged.cdnUrl) {
           stagedProbeCalls++;
           events.push('snapshot:staged');
-          return { ok: false, status: 'HTTP 404' };
+          return stagedProbeCalls === 1
+            ? { ok: false, status: 'HTTP 404' }
+            : { ok: true, status: 200, body: `${stagedHtml}${CORPUS_ROUTE_OWNER_META_TAG}` };
+        }
+        if (url === staged.apexUrl) {
+          events.push('verify:staged-apex');
+          return { ok: true, status: 200, body: `${stagedHtml}${CORPUS_ROUTE_OWNER_META_TAG}` };
         }
         throw new Error(`URL inatteso: ${url}`);
       },
     });
     assert.equal(result.failures, 0);
-    assert.equal(result.uploaded, 0, 'la pagina che riusa l’asset trattenuto non viene pubblicata');
-    assert.equal(result.deferredAssetPages, 1);
-    assert.equal(stagedProbeCalls, 1, 'la pagina nuova viene comunque inclusa nella fotografia pre-upload');
+    assert.equal(result.uploaded, 1, 'il target 404 viene pubblicato prima del replay');
+    assert.equal(result.deferredAssetPages, 0);
+    assert.equal(stagedProbeCalls, 2, 'il target 404 viene fotografato e poi verificato dopo l upload');
     assert.ok(events.includes('asset-upload:images/new.webp'));
     assert.ok(!events.includes('asset-upload:images/shared.webp'));
-    assert.ok(!events.includes('page-upload'));
+    assert.ok(events.includes('page-upload'));
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }

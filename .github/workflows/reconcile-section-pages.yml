@@ -285,6 +285,7 @@ jobs:
         env:
           REPOSITORY: ${{ github.repository }}
           SOURCE_COMMIT: ${{ steps.detect.outputs.source_commit }}
+          CAP_INPUT: ${{ inputs.cap }}
         run: |
           set -euo pipefail
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
@@ -306,7 +307,20 @@ jobs:
             echo "::notice::main e' avanzata dopo la detection ($SOURCE_COMMIT -> $current_main); nessun replay API stantio"
             exit 0
           fi
-          echo "::notice::nessun backfill pagina necessario: replay API bounded sulla HEAD $SOURCE_COMMIT"
+          verified="$RUNNER_TEMP/reconcile-sections-after-backfill.json"
+          node scripts/reconcile-section-pages.mjs --out "$verified" --cap "${CAP_INPUT:-3}"
+          if [ "$(jq -r 'if .skip then "true" else "false" end' "$verified")" = 'true' ] \
+            || [ "$(jq -r '.counts.missingPages // 0' "$verified")" != '0' ] \
+            || [ "$(jq -r '.counts.unknown // 0' "$verified")" != '0' ] \
+            || [ "$(jq -r '.counts.manifestUnknown // 0' "$verified")" != '0' ]; then
+            echo "::notice::replay API rimandato: la verifica post-backfill non dimostra una superficie completa"
+            exit 0
+          fi
+          if [ "$(jq -r '.pendingEdgeFlip // false' "$verified")" != 'true' ]; then
+            echo "::notice::nessun flip API pendente dopo la verifica post-backfill"
+            exit 0
+          fi
+          echo "::notice::backfill globalmente verificato: replay API bounded sulla HEAD $SOURCE_COMMIT"
           gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main -f source_commit="$SOURCE_COMMIT"
 
       - name: Report

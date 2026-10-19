@@ -272,7 +272,7 @@ test('publisher: bootstrap live senza manifest non arma il percorso differito', 
   }
 });
 
-test('publisher: uno staged live bootstrap=false diventa verde solo col replay API armato', async () => {
+test('publisher: un flip pendente resta staged anche mentre il registro edge è draft', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-staged-live-'));
   const outDir = path.join(fixtureRoot, 'dist');
   const missingPage = { ...pageEntry('canton-ti', 'articoli-ticino/missing/index.html', 'article'), id: 'missing' };
@@ -291,7 +291,7 @@ test('publisher: uno staged live bootstrap=false diventa verde solo col replay A
       {
         parseArgsImpl: (argv) => parseArgs(argv, { active: ACTIVE_WITH_TI }),
         fetchPageManifestImpl: async () => ({ state: 'ok', doc: publishedDoc }),
-        publishedStatusImpl: async () => 'live',
+        publishedStatusImpl: async () => 'draft',
         publishedApiReleaseCommitImpl: async () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
         publishedReleaseReadyImpl: async () => ({ ok: false, reason: 'edge in transizione' }),
         currentMainHeadImpl: () => execFileSync('git', ['-C', ROOT, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
@@ -320,7 +320,7 @@ test('publisher: uno staged live bootstrap=false diventa verde solo col replay A
         },
         publishImpl: async (options) => {
           publishOptions = options;
-          return { failures: 0, uploaded: options.pages.length, deleted: 0, status: 'live' };
+          return { failures: 0, uploaded: options.pages.length, deleted: 0, status: 'draft' };
         },
         publishPageManifestImpl: () => {
           manifestCalls++;
@@ -3333,6 +3333,16 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /dispatch_nonce="reconcile-\$\{GITHUB_RUN_ID\}-\$\{section\}"/);
   assert.match(wf, /gh run list --repo "\$REPOSITORY" --workflow fast-publish-section\.yml/);
   assert.match(wf, /steps\.detect\.outputs\.leftover == '0'/);
+  const globalReplay = wf.slice(wf.indexOf('- name: Replay API after all staged backfills'));
+  const postBackfillProbe = globalReplay.indexOf('reconcile-sections-after-backfill.json');
+  const postBackfillMissingGuard = globalReplay.indexOf('.counts.missingPages // 0');
+  const globalApiDispatch = globalReplay.indexOf('gh workflow run publish-api.yml');
+  assert.ok(
+    postBackfillProbe >= 0 && postBackfillMissingGuard > postBackfillProbe && globalApiDispatch > postBackfillMissingGuard,
+    'il replay globale deve risondare la superficie dopo tutte le run e prima del dispatch API',
+  );
+  assert.match(globalReplay, /if \.skip then "true" else "false" end/);
+  assert.match(globalReplay, /\.pendingEdgeFlip \/\/ false/);
   assert.match(wf, /current_main="\$\(gh api "repos\/\$REPOSITORY\/git\/ref\/heads\/main" --jq '\.object\.sha'\)"/);
   assert.match(wf, /main e' avanzata dopo la detection \(\$SOURCE_COMMIT -> \$current_main\)/);
   assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);

@@ -1745,6 +1745,7 @@ export async function publish({
   sleepImpl = sleep,
   snapshotPagesBeforeUpload = false,
   immutablePages = [],
+  requiredPagePaths = [],
   assertMainFreshImpl = async () => {},
 }) {
   let failures = 0;
@@ -1752,6 +1753,7 @@ export async function publish({
   let rollbackRssPublication = null;
   let pageSnapshots = null;
   let pagesForUpload = pages;
+  const requiredPagePathSet = new Set(requiredPagePaths);
   const rollbackRss = async ({ neutralize = false } = {}) => {
     if (!rollbackRssPublication) return 0;
     const rollback = rollbackRssPublication;
@@ -1874,11 +1876,18 @@ export async function publish({
         if (!fs.existsSync(local) || heldAssetKeys.size === 0) continue;
         const body = fs.readFileSync(local, 'utf8');
         if ([...heldAssetKeys].some((key) => cantonPageReferencesAsset(body, key))) {
-          heldPageKeys.add(page.edgeKey);
-          console.log(
-            `::notice::[${LOG}] release live differita: differisco anche ${page.edgeKey}; ` +
-            'il render nuovo riusa un asset trattenuto dalla superficie precedente',
-          );
+          if (requiredPagePathSet.has(page.canonicalPath)) {
+            console.log(
+              `::notice::[${LOG}] release live differita: carico il 404 richiesto ${page.edgeKey} ` +
+              'riusando i byte dell asset trattenuto fino al replay',
+            );
+          } else {
+            heldPageKeys.add(page.edgeKey);
+            console.log(
+              `::notice::[${LOG}] release live differita: differisco anche ${page.edgeKey}; ` +
+              'il render nuovo riusa un asset trattenuto dalla superficie precedente',
+            );
+          }
         }
       }
       pagesForUpload = pages.filter((page) => !heldPageKeys.has(page.edgeKey));
@@ -2145,7 +2154,7 @@ export async function main(
   // checkout must not override an edge registry that is still live.
   const effectiveStatus = publishing ? await publishedStatusImpl(section) : null;
   const cleanupRssRequested = args.removeStaleCantonRssFeeds === true;
-  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested)) {
+  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested || allowDeferredLiveRelease)) {
     releaseCommit = await resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: publishedApiReleaseCommitImpl,
       apiReleaseCommitOverride: process.env.API_RELEASE_COMMIT,
@@ -2171,7 +2180,7 @@ export async function main(
   // completion replay finish the release after its edge pointer is served.
   let deferredLiveRelease = false;
   let liveBootstrapManifestMissing = false;
-  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested)) {
+  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested || allowDeferredLiveRelease)) {
     const readiness = await publishedReleaseReadyImpl(releaseCommit, { section, fetchImpl });
     // Quando la readiness è verificata, il set dichiarato dal manifest decide
     // anche se la landing può annunciare RSS: una sezione live senza articoli
@@ -2208,6 +2217,15 @@ export async function main(
         `::notice::[${LOG}] bootstrap ${section}: manifest precedente assente e release API/edge non pronta; ` +
         'blocco la pubblicazione finché la superficie precedente non è dimostrata',
       );
+    }
+    if (allowDeferredLiveRelease && publishedManifest.state === 'ok') {
+      deferredLiveRelease = true;
+      if (effectiveStatus !== 'live') {
+        console.log(
+          `::notice::[${LOG}] flip pendente per ${section}: il registro edge è ancora ${effectiveStatus}; ` +
+          'mantengo manifest, RSS e cancellazioni differiti fino al replay globale',
+        );
+      }
     }
     cantonRssFeeds = rssPlan.cantonRssFeeds;
     removeStaleCantonRssFeeds = rssPlan.removeStaleCantonRssFeeds;
@@ -2356,6 +2374,12 @@ export async function main(
       'pubblicazione bloccata per non calcolare cancellazioni dal parent del push',
     );
   }
+  if (publishing && allowDeferredLiveRelease && publishedManifest.state !== 'ok') {
+    defects.push(
+      `backfill staged ${section} senza manifest edge verificato: ` +
+      'inventario precedente non dimostrato, pubblicazione bloccata',
+    );
+  }
   if (liveBootstrapManifestMissing) {
     defects.push(
       `bootstrap live ${section} senza manifest precedente e senza release API/edge verificata: ` +
@@ -2492,6 +2516,7 @@ export async function main(
     publishCantonRssFeedsImpl,
     snapshotPagesBeforeUpload: deferredLiveRelease,
     immutablePages: immutableLivePages,
+    requiredPagePaths: [...confirmedMissingPagePaths],
     assertMainFreshImpl,
   });
   if (summary.published.failures === 0 && deferredLiveRelease) {
