@@ -28454,6 +28454,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'imposta-successione-donazione-zurigo-regole',
+    category: 'fiscale',
+    date: '2026-10-19T05:15:42.906Z',
+    image: '/images/blog/article-imposta-successione-donazione-zurigo-regole.webp',
+    hasCalculator: true,
+    articleType: 'evergreen',
+    canton: ['ZH'],
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -13495,6 +13495,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.frontaliere-formazione-riqualifica-2026.title': 'Frontier vocational training retraining courses 2026 within 20 km',
     'blog.article.frontaliere-formazione-riqualifica-2026.excerpt': 'Practical guide to vocational training and retraining courses for border workers in 2026, with focus within 20 km and evaluation of return.',
     'blog.article.frontaliere-formazione-riqualifica-2026.imageAlt': 'Professional training center in Ticino for courses and requalification',
+    'blog.article.indagini-morte-pierina-buffon.title': 'Death of buffoon pierina: cassan and gallarate investigations',
+    'blog.article.indagini-morte-pierina-buffon.excerpt': 'Friday morning the crash at Cassano Magnago The Jaguar would have been launched at 140 kilometers per hour The Prosecutor evaluates the planning of the crime Access',
+    'blog.article.indagini-morte-pierina-buffon.imageAlt': 'Investigative checks and findings on the vehicle involved',
 };
 
 export default blogMetaEn;

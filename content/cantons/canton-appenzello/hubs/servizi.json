@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-10-19T02:30:40.156Z",
-  "contentHash": "dedf18da7d55cc3f57543cb871e87c752959d9bffe53d73fadf6f60d91dd9c50",
+  "updatedAt": "2026-10-19T05:23:08.856Z",
+  "contentHash": "37d3ffefad096f2d7c9174fc69d98d742cacd41091b9d1c9d067aa97c52b13ba",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -19,7 +19,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-18T18:47:11.287Z",
+      "updatedAt": "2026-10-18T22:31:34.166Z",
       "keyFacts": 0
     },
     {
@@ -107,16 +107,16 @@
             {
               "label": "Appenzell",
               "value": "9 °C",
-              "detail": "oggi da 9 a 10 °C"
+              "detail": "oggi da 9 a 9 °C"
             },
             {
               "label": "Herisau",
               "value": "8 °C",
-              "detail": "oggi da 8 a 9 °C"
+              "detail": "oggi da 8 a 8 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-18T18:47:11.287Z"
+          "updatedAt": "2026-10-18T22:31:34.166Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -242,7 +242,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T05:23:08.856Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -322,16 +322,16 @@
             {
               "label": "Appenzell",
               "value": "9 °C",
-              "detail": "today from 9 to 10 °C"
+              "detail": "today from 9 to 9 °C"
             },
             {
               "label": "Herisau",
               "value": "8 °C",
-              "detail": "today from 8 to 9 °C"
+              "detail": "today from 8 to 8 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-18T18:47:11.287Z"
+          "updatedAt": "2026-10-18T22:31:34.166Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -449,7 +449,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T05:23:08.856Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -529,16 +529,16 @@
             {
               "label": "Appenzell",
               "value": "9 °C",
-              "detail": "heute 9 bis 10 °C"
+              "detail": "heute 9 bis 9 °C"
             },
             {
               "label": "Herisau",
               "value": "8 °C",
-              "detail": "heute 8 bis 9 °C"
+              "detail": "heute 8 bis 8 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-18T18:47:11.287Z"
+          "updatedAt": "2026-10-18T22:31:34.166Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -656,7 +656,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T05:23:08.856Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -736,16 +736,16 @@
             {
               "label": "Appenzell",
               "value": "9 °C",
-              "detail": "aujourd’hui de 9 à 10 °C"
+              "detail": "aujourd’hui de 9 à 9 °C"
             },
             {
               "label": "Herisau",
               "value": "8 °C",
-              "detail": "aujourd’hui de 8 à 9 °C"
+              "detail": "aujourd’hui de 8 à 8 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-18T18:47:11.287Z"
+          "updatedAt": "2026-10-18T22:31:34.166Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -855,7 +855,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-19T05:23:08.856Z"
     }
   }
 }

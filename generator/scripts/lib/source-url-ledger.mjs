@@ -260,6 +260,22 @@ export function shortHeadlineTokenPolicy(token) {
 }
 
 /**
+ * Accept only the documented title-evidence shape before any string coercion.
+ * Sparse arrays are invalid too: every declaration must be an actual string.
+ *
+ * @param {unknown} titleEvidence
+ * @returns {boolean}
+ */
+export function validateTitleEvidenceShape(titleEvidence) {
+  if (typeof titleEvidence === 'string') return true;
+  if (!Array.isArray(titleEvidence)) return false;
+  for (let index = 0; index < titleEvidence.length; index++) {
+    if (!Object.hasOwn(titleEvidence, index) || typeof titleEvidence[index] !== 'string') return false;
+  }
+  return true;
+}
+
+/**
  * Select title evidence only when every nonempty declaration agrees after the
  * same normalization used for headline comparison. Conflicting metadata does
  * not become positive evidence merely because one declaration happens to match.
@@ -268,10 +284,11 @@ export function shortHeadlineTokenPolicy(token) {
  * @returns {string} the first consistent declaration, or '' when absent/conflicting
  */
 export function selectConsistentTitleEvidence(titleEvidence) {
+  if (!validateTitleEvidenceShape(titleEvidence)) return '';
   const declarations = Array.isArray(titleEvidence) ? titleEvidence : [titleEvidence];
   const lines = declarations
-    .flatMap((declaration) => String(declaration ?? '').split(/\r\n|[\r\n]/))
-    .map((line) => String(line ?? '').trim())
+    .flatMap((declaration) => declaration.split(/\r\n|[\r\n]/))
+    .map((line) => line.trim())
     .filter(Boolean);
   if (lines.length === 0) return '';
 
@@ -322,6 +339,7 @@ export function pageCarriesItem(text, headline, {
   minShare = ITEM_ON_PAGE_MIN_SHARE,
   titleEvidence = '',
 } = {}) {
+  if (!validateTitleEvidenceShape(titleEvidence)) return false;
   const words = [...new Set(normalizeItemText(headline).split(' ').filter(shortHeadlineTokenPolicy))];
   if (words.length < 2) return shortHeadlineEvidence(titleEvidence, headline);
   const consistentTitle = selectConsistentTitleEvidence(titleEvidence);

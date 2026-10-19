@@ -13497,6 +13497,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.frontaliere-formazione-riqualifica-2026.title': 'Frontalier formation professionnelle requalifie cours 2026 dans les 20 km',
     'blog.article.frontaliere-formazione-riqualifica-2026.excerpt': 'Guide pratique de la formation professionnelle et des cours de recyclage pour les frontaliers en 2026, avec un focus dans les 20 km et une évaluation du retour.',
     'blog.article.frontaliere-formazione-riqualifica-2026.imageAlt': 'Centre de formation professionnelle au Tessin pour cours et reconversion',
+    'blog.article.indagini-morte-pierina-buffon.title': 'Morte pierina buffon : vérifications à cassano et gallarate',
+    'blog.article.indagini-morte-pierina-buffon.excerpt': 'Vendredi matin, le crash à Cassano Magnago La Jaguar aurait été lancée à 140 kilomètres par heure Le procureur évalue la planification du crime Accès',
+    'blog.article.indagini-morte-pierina-buffon.imageAlt': 'Enquêtes et constatations sur le véhicule impliqué',
 };
 
 export default blogMetaFr;

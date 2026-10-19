@@ -454,7 +454,7 @@ test('un 403 "nudo" (nessuna reason riconosciuta) resta NON retryable — compor
 });
 
 test('un 403 con reason di quota Google È retryable — stesso fallimento transitorio di #247 (2026-08-31)', () => {
-  for (const reason of ['rateLimitExceeded', 'userRateLimitExceeded', 'dailyLimitExceededUnreg', 'quotaExceeded', 'RESOURCE_EXHAUSTED']) {
+  for (const reason of ['rateLimitExceeded', 'userRateLimitExceeded', 'dailyLimitExceeded', 'dailyLimitExceededUnreg', 'quotaExceeded', 'RESOURCE_EXHAUSTED']) {
     assert.equal(isRetryableRcFetchStatus(403, reason), true, `reason=${reason} deve essere retryable`);
   }
 });
