@@ -150,7 +150,7 @@ function main() {
         `repos/${repo}/compare/${range.before}...${range.after}`,
         '{status, ahead_by, behind_by, total_commits, merge_base_commit: .merge_base_commit.sha}',
       );
-      if (!compareProvesAncestor(range, comparison)) range = null;
+      if (!compareProvesDirectParent(range, comparison)) range = null;
       else range = { ...range, source: 'workflow-history+compare' };
     }
   }
