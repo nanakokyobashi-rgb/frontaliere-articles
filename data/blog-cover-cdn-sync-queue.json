@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-evento-for-matching-varese-2026.webp",
+      "sha256": "4b6178abb95684786cf2e919346f860b29048ac6717d8f839aa0347e9563e6f7"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-evento-for-matching-varese-2026-480w.webp",
+      "sha256": "41d3dee0f1ba4d83e9c2cc31d20d28110ce46bc10314f62e809e2257a01f2edd"
+    }
+  ]
 }
