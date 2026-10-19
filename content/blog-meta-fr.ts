@@ -13511,7 +13511,7 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.oss-ticino-stipendio.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.riqualifica-aliquote-frontalieri-2026.title': 'Frontaliers 2026 : erreurs à éviter',
     'blog.article.riqualifica-aliquote-frontalieri-2026.excerpt': 'Accord sur les travailleurs frontaliers, franchises, impôt à la source et cotisations : les données à vérifier pour évaluer les formations et la requalification professionnelle en tant que travailleur frontalier en 2026.',
-    'blog.article.riqualifica-aliquote-frontalieri-2026.imageAlt': 'Un frontalier consulte des documents de formation professionnelle au Tessin.',
+    'blog.article.riqualifica-aliquote-frontalieri-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;

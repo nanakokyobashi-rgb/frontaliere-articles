@@ -23,7 +23,10 @@ import {
   articleImageSubject,
   articleImageTopic,
 } from './article-cover-identity.mjs';
-import { GENERATED_COVER_ALT_BY_LOCALE } from './generated-cover-alt.mjs';
+import {
+  GENERATED_COVER_ALT_BY_LOCALE,
+  LICENSED_PHOTO_ALT_BY_LOCALE,
+} from './generated-cover-alt.mjs';
 import { imageCreditRecordFromGeneratedImageRecord } from '../../../engine/shared/imageCredits.mjs';
 
 export const CATALOG_FALLBACK_MIN_SHARED_WORDS = 2;
@@ -42,12 +45,7 @@ const verificationCache = new Map();
 
 const VERIFIED_FALLBACK_ALT = Object.freeze({
   generated: GENERATED_COVER_ALT_BY_LOCALE,
-  'licensed-photo': Object.freeze({
-    it: 'Fotografia pertinente al tema dell’articolo',
-    en: 'Photograph relevant to the article topic',
-    de: 'Fotografie zum Thema des Artikels',
-    fr: 'Photographie en lien avec le sujet de l’article',
-  }),
+  'licensed-photo': LICENSED_PHOTO_ALT_BY_LOCALE,
 });
 
 function searchTokens(value) {

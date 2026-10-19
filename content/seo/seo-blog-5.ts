@@ -112160,7 +112160,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/blog/article-riqualifica-aliquote-frontalieri-2026.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Lavoratore frontaliere studia documenti di formazione professionale in Ticino."
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
       },
       "datePublished": "2026-10-19T09:23:32+00:00",
       "dateModified": "2026-10-19T09:23:32+00:00",

@@ -13510,7 +13510,7 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.oss-ticino-stipendio.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.riqualifica-aliquote-frontalieri-2026.title': 'Riqualifica frontalieri: errori comuni da evitare nel 2026',
     'blog.article.riqualifica-aliquote-frontalieri-2026.excerpt': 'Accordo frontalieri, franchigie, imposta alla fonte e contributi: i dati da controllare per valutare corsi e riqualifica professionale da frontaliere nel 2026.',
-    'blog.article.riqualifica-aliquote-frontalieri-2026.imageAlt': 'Lavoratore frontaliere studia documenti di formazione professionale in Ticino.',
+    'blog.article.riqualifica-aliquote-frontalieri-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

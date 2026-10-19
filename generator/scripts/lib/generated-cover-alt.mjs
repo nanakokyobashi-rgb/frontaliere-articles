@@ -10,3 +10,11 @@ export const GENERATED_COVER_ALT_BY_LOCALE = Object.freeze({
   de: 'Illustratives Bild zum Thema des Artikels',
   fr: 'Image illustrative en lien avec le sujet de l’article',
 });
+
+/** Localized fallback for a licensed photo when metadata still has generated-cover alt text. */
+export const LICENSED_PHOTO_ALT_BY_LOCALE = Object.freeze({
+  it: 'Fotografia pertinente al tema dell’articolo',
+  en: 'Photograph relevant to the article topic',
+  de: 'Fotografie zum Thema des Artikels',
+  fr: 'Photographie en lien avec le sujet de l’article',
+});

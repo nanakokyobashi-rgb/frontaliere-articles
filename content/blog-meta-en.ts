@@ -13509,7 +13509,7 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.oss-ticino-stipendio.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.riqualifica-aliquote-frontalieri-2026.title': 'Reclassification of cross-border workers: common mistakes to avoid in 2026',
     'blog.article.riqualifica-aliquote-frontalieri-2026.excerpt': 'Cross-border worker agreement, exemptions, withholding tax and contributions: the data to check when evaluating courses and professional retraining as a cross-border worker in 2026.',
-    'blog.article.riqualifica-aliquote-frontalieri-2026.imageAlt': 'Cross-border worker studies professional training documents in Ticino.',
+    'blog.article.riqualifica-aliquote-frontalieri-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

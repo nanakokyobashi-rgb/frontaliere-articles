@@ -13508,7 +13508,7 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.oss-ticino-stipendio.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.riqualifica-aliquote-frontalieri-2026.title': 'Grenzgänger-Umschulung: Fehler 2026 vermeiden',
     'blog.article.riqualifica-aliquote-frontalieri-2026.excerpt': 'Grenzgängerabkommen, Freibeträge, Quellensteuer und Beiträge: Die Daten, die Sie prüfen sollten, um Kurse und berufliche Neuqualifizierung als Grenzgänger im Jahr 2026 zu bewerten.',
-    'blog.article.riqualifica-aliquote-frontalieri-2026.imageAlt': 'Grenzgänger prüft Unterlagen zur beruflichen Weiterbildung im Tessin.',
+    'blog.article.riqualifica-aliquote-frontalieri-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;
