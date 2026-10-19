@@ -3091,6 +3091,12 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /git diff --name-status "\$before" HEAD/);
   assert.match(wf, /Fetch fallback corpus revision for manifest migration/);
   assert.match(wf, /--previous-revision/);
+  const fallbackFetchStart = wf.indexOf('name: Fetch fallback corpus revision for manifest migration');
+  const fallbackFetchEnd = wf.indexOf('- name: Set up Node', fallbackFetchStart);
+  const fallbackFetch = wf.slice(fallbackFetchStart, fallbackFetchEnd);
+  assert.match(fallbackFetch, /if \[ "\$EVENT_NAME" = 'workflow_run' \]/);
+  assert.match(fallbackFetch, /bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
+  assert.doesNotMatch(fallbackFetch, /git fetch --no-tags --depth=1 origin/);
   assert.match(wf, /bootstrap: \(\.bootstrap \/\/ false\)/);
   for (const p of [
     'generator/scripts/lib/corpus-paths.mjs',

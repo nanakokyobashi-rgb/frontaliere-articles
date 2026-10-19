@@ -647,17 +647,13 @@ jobs:
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
         run: |
           set -euo pipefail
-          PREVIOUS_REVISION="${PUSH_BEFORE:-}"
           if [ "$EVENT_NAME" = 'workflow_run' ]; then
             if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || [ "$(git rev-parse HEAD)" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
               echo "::error::workflow_run head non coincide con il checkout"
               exit 1
             fi
           fi
-          if [ -n "${PREVIOUS_REVISION:-}" ] && [[ ! "$PREVIOUS_REVISION" =~ ^0+$ ]] \
-            && ! git cat-file -e "$PREVIOUS_REVISION^{commit}" 2>/dev/null; then
-            git fetch --no-tags --depth=1 origin "$PREVIOUS_REVISION"
-          fi
+          bash scripts/ci/fetch-push-base-if-missing.sh
 
       - name: Set up Node
         if: steps.replay_freshness.outputs.fresh == 'true'
