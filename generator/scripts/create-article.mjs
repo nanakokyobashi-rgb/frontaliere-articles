@@ -6562,6 +6562,8 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // ALL models have exhausted their per-model retries.
   const FACTCHECK_429_BACKOFF_CAP_MS = 30_000;
   let fcLastRejectMsgs = [];
+  const fcProviderErrors = [];
+  let fcHadUnclassifiedResult = false;
   // True when an attempt's two verifiers collapsed into one model and no
   // independent second opinion came back: that attempt holds one opinion where
   // the consensus needs two, so it is retried like a verifier outage (review of
@@ -6619,11 +6621,15 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
       if (s.status === 'fulfilled' && s.value) {
         const earlier = addIndependentVote(modelResults, modelsToQuery[i], s.value);
         if (earlier) {
+          fcHadUnclassifiedResult = true;
           droppedDuplicate = true;
           console.error(`  ⚠️  LLM fact-check (${modelsToQuery[i]}): servito da ${earlier.servedBy}, che ha già votato per ${earlier.requested} — voto scartato, non è un secondo parere`);
         }
       } else {
-        const reason = s.status === 'rejected' ? s.reason?.message : 'no result';
+        const error = s.status === 'rejected' ? s.reason : null;
+        if (error) fcProviderErrors.push(error);
+        else fcHadUnclassifiedResult = true;
+        const reason = error?.message || 'no result';
         fcLastRejectMsgs.push(reason || '');
         console.error(`  ⚠️  LLM fact-check (${modelsToQuery[i]}): fallito — ${reason}`);
       }
@@ -6641,8 +6647,10 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
       try {
         const extra = await _runSingleFactCheck(next, prompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted });
         const earlier = extra ? addIndependentVote(modelResults, next, extra) : null;
+        if (!extra || earlier) fcHadUnclassifiedResult = true;
         if (earlier) console.error(`  ⚠️  LLM fact-check (${next}): servito di nuovo da ${earlier.servedBy} — resta un solo voto`);
       } catch (err) {
+        fcProviderErrors.push(err);
         fcLastRejectMsgs.push(err.message || '');
         console.error(`  ⚠️  LLM fact-check secondo parere (${next}): ${err.message}`);
       }
@@ -6657,7 +6665,9 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
       try {
         const fallback = await _runSingleFactCheck(verificationModels[2], prompt, { isEvergreen: isEvergreenArticle, editorialContext });
         if (fallback) addIndependentVote(modelResults, verificationModels[2], fallback);
+        else fcHadUnclassifiedResult = true;
       } catch (err) {
+        fcProviderErrors.push(err);
         fcLastRejectMsgs.push(err.message || '');
         console.error(`  ⚠️  LLM fact-check fallback (${verificationModels[2]}): ${err.message}`);
       }
@@ -6697,7 +6707,9 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     try {
       const vote = await _runSingleFactCheck(codex, prompt, { isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true });
       if (vote) addIndependentVote(modelResults, codex, vote);
+      else fcHadUnclassifiedResult = true;
     } catch (err) {
+      fcProviderErrors.push(err);
       fcLastRejectMsgs.push(err.message || '');
       console.error(`  ⚠️  LLM fact-check (${codex}): ${err.message}`);
     }
@@ -6744,6 +6756,10 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
         category: 'infra',
       }],
       unverified: true,
+      ...(!fcHadUnclassifiedResult
+        && isSharedTransientFactCheckRosterOutage(fcProviderErrors)
+        ? { sharedProviderUnavailable: true }
+        : {}),
     };
   }
 
@@ -17237,11 +17253,9 @@ const LOCAL_MIN_VIABLE_MS = 11 * 60_000;
 const MIN_VIABLE_ATTEMPT_MS = 2 * 60_000;
 
 /**
- * Turn a fail-closed verifier outage into a typed run-level error. The
- * `unverified` result is deliberately kept at the llmFactCheck boundary so
- * its existing fail-closed contract remains testable; callers must not feed
- * it into the content-remediation loop, which would regenerate the article
- * indefinitely while the verifier roster is unavailable.
+ * Turn a fail-closed missing consensus into a typed run-level error. Only a
+ * structured transient exhaustion of the full roster carries the shared
+ * outage marker; incomplete or unusable verdicts remain section-local.
  */
 function createFactCheckUnavailableError(result, stage) {
   const rawReason = Array.isArray(result?.issues) ? result.issues[0]?.reason : '';
@@ -17251,11 +17265,25 @@ function createFactCheckUnavailableError(result, stage) {
   const error = new Error(`Fact-check unavailable (${stage}): ${reason}`);
   error.factCheckUnavailable = true;
   error.unverified = true;
+  if (result?.sharedProviderUnavailable === true) error.sharedProviderUnavailable = true;
   return error;
 }
 
 function isFactCheckUnavailableError(e) {
   return e?.factCheckUnavailable === true;
+}
+
+function isSharedFactCheckUnavailableError(e) {
+  return isFactCheckUnavailableError(e) && e?.sharedProviderUnavailable === true;
+}
+
+function isSharedTransientFactCheckRosterOutage(errors) {
+  return Array.isArray(errors)
+    && errors.length > 0
+    && errors.every((error) => (
+      error?.code === 'ALL_MODELS_EXHAUSTED'
+      && error?.transientExhaustion === true
+    ));
 }
 
 function isSharedArticleCoverVerifierUnavailableError(e) {
@@ -21300,11 +21328,10 @@ if (invokedDirectly) {
   } catch (probeErr) {
     console.error(`  ⚠️  Campione di deferral non registrato: ${probeErr.message}`);
   }
-  // A verifier outage is already fail-closed at the article boundary. Stop
-  // before quota/quality classification so the run declares one clean
-  // deferral instead of rotating through every headline or mislabelling the
-  // outage as bad content.
-  if (isFactCheckUnavailableError(e)) {
+  // Only a structured transient exhaustion of the whole checker roster proves
+  // a shared outage. Stop before quota/quality classification so the sibling
+  // section does not repeat the same unavailable provider cascade.
+  if (isSharedFactCheckUnavailableError(e)) {
     finalizeRunReport('deferred', {
       notes: [...RUN_REPORT.notes, `Deferred (fact-check unavailable; article not published): ${e.message}`],
     });
@@ -21312,6 +21339,13 @@ if (invokedDirectly) {
     // Il verifier condivide il pool fra le sezioni: non ripetere subito la
     // stessa cascata e lasciare al prossimo cron la rivalutazione.
     await exitAfterFlush(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE);
+  }
+  if (isFactCheckUnavailableError(e)) {
+    finalizeRunReport('deferred', {
+      notes: [...RUN_REPORT.notes, `Deferred (fact-check returned no usable consensus; article not published): ${e.message}`],
+    });
+    console.error(`\n⚠️  Differito: il fact-check non ha prodotto un consenso utilizzabile; articolo non pubblicato. ${e.message}`);
+    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   if (isSharedArticleCoverVerifierUnavailableError(e)) {
     finalizeRunReport('deferred', {

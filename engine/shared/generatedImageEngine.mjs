@@ -361,7 +361,11 @@ function requestCodexBroker({ prompt, imagePath = '', imageOutputPath = '', gene
     const socketTimeoutMs = Number.isFinite(deadlineAt)
       ? Math.max(1, deadlineAt - Date.now())
       : timeoutMs + 30_000;
-    const socketTimeout = setTimeout(() => finish(new Error(`Codex broker timed out after ${timeoutMs}ms`)), socketTimeoutMs);
+    const socketTimeout = setTimeout(() => {
+      const error = new Error(`Codex broker timed out after ${timeoutMs}ms`);
+      error.code = 'ETIMEDOUT';
+      finish(error);
+    }, socketTimeoutMs);
     socketTimeout.unref?.();
     client.setEncoding('utf8');
     client.on('error', (error) => finish(error));
@@ -379,7 +383,12 @@ function requestCodexBroker({ prompt, imagePath = '', imageOutputPath = '', gene
       if (!parsed?.ok) finish(new Error(`Codex broker rejected the request: ${parsed?.error || 'unknown error'}`));
       else finish(null, { text: String(parsed.result || ''), started });
     });
-    client.on('end', () => { if (!settled) finish(new Error('Codex broker closed without a response')); });
+    client.on('end', () => {
+      if (settled) return;
+      const error = new Error('Codex broker closed without a response');
+      error.code = 'ECONNRESET';
+      finish(error);
+    });
     client.on('connect', () => client.end(`${JSON.stringify(request)}\n`));
   });
 }
@@ -1190,6 +1199,12 @@ export function isVisionProviderUnavailable(error) {
   if (causes.length === 0 || causes.some((cause) => cause.imageCandidateFileFailure === true
     || cause.code === 'IMAGE_VISION_VERDICT_INCOMPLETE'
     || cause.code === 'IMAGE_VISION_REJECTED')) return false;
+  if (causes.some((cause) => {
+    const status = Number(cause.status ?? cause.statusCode);
+    return [401, 403].includes(status)
+      || /(?:HTTP|status(?:\s+code)?)\s*(?:401|403)|\b(?:401|403)\b.*\b(?:unauthori[sz]ed|forbidden|access denied)\b|unauthori[sz]ed|forbidden|access denied|authentication failed/i
+        .test(String(cause.message || ''));
+  })) return false;
   return causes.some((cause) => {
     if (cause.sharedProviderUnavailable === true
       || VISION_PROVIDER_TRANSPORT_CODES.has(String(cause.code || ''))
@@ -1197,8 +1212,8 @@ export function isVisionProviderUnavailable(error) {
       || cause.name === 'TimeoutError'
       || cause.code === 'ABORT_ERR') return true;
     const status = Number(cause.status ?? cause.statusCode);
-    if ([401, 403, 408, 425, 429].includes(status) || (status >= 500 && status <= 599)) return true;
-    return /\b(?:provider|service|model).{0,32}\b(?:unavailable|overloaded|at capacity)\b|rate.?limit|quota.{0,24}(?:exceeded|unavailable)|too many requests|(?:HTTP|status)\s*(?:401|403|408|425|429|5\d\d)|unauthori[sz]ed|authentication failed/i
+    if ([408, 425, 429].includes(status) || (status >= 500 && status <= 599)) return true;
+    return /\b(?:provider|service|model).{0,32}\b(?:unavailable|overloaded|at capacity)\b|rate.?limit|quota.{0,24}(?:exceeded|unavailable)|too many requests|(?:HTTP|status)\s*(?:408|425|429|5\d\d)/i
       .test(String(cause.message || ''));
   });
 }

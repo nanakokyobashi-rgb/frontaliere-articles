@@ -53,6 +53,19 @@ test('classifica le cause annidate dei timeout vision e preserva il marker share
   timeout.name = 'TimeoutError';
   assert.equal(isVisionProviderUnavailable(timeout), true);
 
+  const unauthorized = Object.assign(new Error('HTTP 401: invalid API key'), { status: 401 });
+  const forbidden = Object.assign(new Error('HTTP 403: permission denied'), { statusCode: 403 });
+  assert.equal(isVisionProviderUnavailable(new Error('Request failed with status code 401')), false);
+  assert.equal(isVisionProviderUnavailable(new Error('403 Forbidden')), false);
+  assert.equal(isVisionProviderUnavailable(unauthorized), false);
+  assert.equal(isVisionProviderUnavailable(forbidden), false);
+  assert.equal(isVisionProviderUnavailable(new AggregateError([forbidden, transportCause])), false);
+
+  const codexBrokerTimeout = Object.assign(new Error('Codex broker timed out'), { code: 'ETIMEDOUT' });
+  const codexBrokerClosed = Object.assign(new Error('Codex broker closed without a response'), { code: 'ECONNRESET' });
+  assert.equal(isVisionProviderUnavailable(codexBrokerTimeout), true);
+  assert.equal(isVisionProviderUnavailable(codexBrokerClosed), true);
+
   const sharedMarker = Object.assign(new Error('shared vision pool is unavailable'), {
     sharedProviderUnavailable: true,
   });
