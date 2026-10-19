@@ -15977,7 +15977,7 @@ function checkTranslatedSlugCollisions(data, { locales = ['it', 'en', 'de', 'fr'
 
 // ── Governed image generation ───────────────────────────────────────────────
 
-const IMAGE_PHASE_BUDGET_MS = Math.max(
+export const IMAGE_PHASE_BUDGET_MS = Math.max(
   30_000,
   Math.min(120_000, Math.floor(resolvePositiveIntEnv(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS, 120_000))),
 );
