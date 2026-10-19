@@ -2022,6 +2022,9 @@ const RUN_REPORT = {
   // DISTINCT runs (one degraded run must not be able to confirm its own
   // hallucination six times over). 'local' outside CI.
   runId: process.env.GITHUB_RUN_ID || 'local',
+  // GitHub reuses a run id across re-runs. The attempt is part of the
+  // producer identity so an earlier card cannot attest a later exit decision.
+  runAttempt: process.env.GITHUB_RUN_ATTEMPT || '1',
   // Which pipeline produced the run (frontaliere | svizzera). Recorded because
   // the two have different gates and different budgets, so a rejection-rate
   // trend pooled across both hides which one moved. Set once SECTION resolves.

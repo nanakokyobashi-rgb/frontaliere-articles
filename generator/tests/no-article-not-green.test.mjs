@@ -349,9 +349,12 @@ test('entrambi i workflow richiedono la run card producer-owned prima di assorbi
     assert.ok(guardStart >= 0 && guardEnd > guardStart, `${path.basename(file)}: guard exit 5 non trovato`);
     const guard = workflow.slice(guardStart, guardEnd);
     assert.match(guard, /validate-shared-provider-exit\.mjs/);
+    assert.match(guard, /"\$run_id" "\$run_attempt"/);
     assert.match(guard, /all_declared=false/);
     assert.match(guard, /provider_blocked=true/);
-    assert.ok(workflow.includes('rm -f "$RUN_CARD_FILE"'), `${path.basename(file)} deve rimuovere card stale prima del tentativo`);
+    assert.match(workflow, /if ! rm -f "\$RUN_CARD_FILE"; then/, `${path.basename(file)} deve rimuovere card stale in modo fail-closed`);
+    assert.match(workflow, /run_id="\$\{GITHUB_RUN_ID:-local\}"/);
+    assert.match(workflow, /run_attempt="\$\{GITHUB_RUN_ATTEMPT:-1\}"/);
   }
 });
 
@@ -443,7 +446,7 @@ function runGenerateBlock({
       '  mkdir -p "$(dirname "$RUN_CARD_FILE")"',
       '  marker_section=${RUN_CARD_FILE##*/run-card-}',
       '  marker_section=${marker_section%.json}',
-      `  printf '{"schema":"run-card/1","section":"%s","status":"deferred","exitCode":5,"exitDisposition":"shared-provider-unavailable"}\\n' "$marker_section" > "$RUN_CARD_FILE"`,
+      `  printf '{"schema":"run-card/1","runId":"%s","runAttempt":"%s","section":"%s","status":"deferred","exitCode":5,"exitDisposition":"shared-provider-unavailable"}\\n' "\${GITHUB_RUN_ID:-local}" "\${GITHUB_RUN_ATTEMPT:-1}" "$marker_section" > "$RUN_CARD_FILE"`,
       'fi',
     ] : [];
     const stub = [

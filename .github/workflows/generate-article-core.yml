@@ -711,6 +711,8 @@ jobs:
           outcome_kind="error"
           outcome_reason="unclassified"
           outcome_section="$TARGET_SECTION"
+          run_id="${GITHUB_RUN_ID:-local}"
+          run_attempt="${GITHUB_RUN_ATTEMPT:-1}"
 
           for sec in "${sections[@]}"; do
             remaining=$(( budget_s - SECONDS ))
@@ -726,7 +728,15 @@ jobs:
             export CREATE_ARTICLE_MAX_WALL_MS=$(( (cap - 60) * 1000 ))
 
             export RUN_CARD_FILE="$diag_dir/run-card-$sec.json"
-            rm -f "$RUN_CARD_FILE"
+            if ! rm -f "$RUN_CARD_FILE"; then
+              all_declared=false
+              outcome_kind="error"
+              outcome_reason="undeclared"
+              outcome_section="$sec"
+              [ -n "$undeclared_why" ] || undeclared_why="impossibile rimuovere la run card precedente per la sezione $sec: una card stale non può attestare l'uscita corrente"
+              echo "::error::impossibile rimuovere la run card precedente per la sezione $sec; rifiuto fail-closed"
+              break
+            fi
 
             rm -f "$stall_flag"
             : > "$stall_log"
@@ -800,7 +810,7 @@ jobs:
             fi
 
             if [ "$rc" = "5" ]; then
-              if ! node "$GITHUB_WORKSPACE/scripts/ci/validate-shared-provider-exit.mjs" "$RUN_CARD_FILE" "$sec"; then
+              if ! node "$GITHUB_WORKSPACE/scripts/ci/validate-shared-provider-exit.mjs" "$RUN_CARD_FILE" "$sec" "$run_id" "$run_attempt"; then
                 all_declared=false
                 outcome_kind="error"
                 outcome_reason="undeclared"

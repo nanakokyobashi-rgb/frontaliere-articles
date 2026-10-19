@@ -1396,6 +1396,8 @@ jobs:
           outcome_kind="error"
           outcome_reason="unclassified"
           outcome_section="$TARGET_SECTION"
+          run_id="${GITHUB_RUN_ID:-local}"
+          run_attempt="${GITHUB_RUN_ATTEMPT:-1}"
 
           for sec in "${sections[@]}"; do
             remaining=$(( budget_s - SECONDS ))
@@ -1435,7 +1437,15 @@ jobs:
             export RUN_CARD_FILE="$diag_dir/run-card-$sec.json"
             # The card is also the producer-owned proof for a declared exit 5;
             # do not let a card from an earlier attempt attest this one.
-            rm -f "$RUN_CARD_FILE"
+            if ! rm -f "$RUN_CARD_FILE"; then
+              all_declared=false
+              outcome_kind="error"
+              outcome_reason="undeclared"
+              outcome_section="$sec"
+              [ -n "$undeclared_why" ] || undeclared_why="impossibile rimuovere la run card precedente per la sezione $sec: una card stale non può attestare l'uscita corrente"
+              echo "::error::impossibile rimuovere la run card precedente per la sezione $sec; rifiuto fail-closed"
+              break
+            fi
 
             # Il tentativo gira in background con l'output duplicato su
             # `$stall_log`: e' quel file a crescere (o a non crescere) che il
@@ -1554,7 +1564,7 @@ jobs:
             fi
 
             if [ "$rc" = "5" ]; then
-              if ! node "$GITHUB_WORKSPACE/scripts/ci/validate-shared-provider-exit.mjs" "$RUN_CARD_FILE" "$sec"; then
+              if ! node "$GITHUB_WORKSPACE/scripts/ci/validate-shared-provider-exit.mjs" "$RUN_CARD_FILE" "$sec" "$run_id" "$run_attempt"; then
                 all_declared=false
                 outcome_kind="error"
                 outcome_reason="undeclared"

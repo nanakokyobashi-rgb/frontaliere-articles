@@ -16,18 +16,20 @@ const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const VALIDATOR = path.join(REPO, 'scripts/ci/validate-shared-provider-exit.mjs');
 const VALID_CARD = {
   schema: RUN_CARD_SCHEMA,
+  runId: 'run-123',
+  runAttempt: '2',
   section: 'svizzera',
   status: 'deferred',
   exitCode: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
   exitDisposition: RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
 };
 
-function validate(card) {
+function validate(card, runId = 'run-123', runAttempt = '2') {
   const dir = mkdtempSync(path.join(os.tmpdir(), 'shared-provider-exit-'));
   try {
     const cardPath = path.join(dir, 'run-card.json');
     if (card !== undefined) writeFileSync(cardPath, typeof card === 'string' ? card : JSON.stringify(card));
-    return spawnSync(process.execPath, [VALIDATOR, cardPath, 'svizzera'], { encoding: 'utf8' });
+    return spawnSync(process.execPath, [VALIDATOR, cardPath, 'svizzera', runId, runAttempt], { encoding: 'utf8' });
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -40,7 +42,10 @@ test('the validator accepts only a producer run card for this section and exit',
   assert.notEqual(validate(null).status, 0, 'a JSON null cannot attest exit 5');
   assert.notEqual(validate([]).status, 0, 'a JSON array cannot attest exit 5');
   assert.notEqual(validate({ ...VALID_CARD, section: 'frontaliere' }).status, 0);
+  assert.notEqual(validate({ ...VALID_CARD, runId: 'run-old' }).status, 0, 'a card from another run cannot attest exit 5');
+  assert.notEqual(validate({ ...VALID_CARD, runAttempt: '1' }).status, 0, 'a card from another attempt cannot attest exit 5');
   assert.notEqual(validate({ ...VALID_CARD, status: 'error' }).status, 0);
   assert.notEqual(validate({ ...VALID_CARD, exitCode: 4 }).status, 0);
   assert.notEqual(validate({ ...VALID_CARD, exitDisposition: 'unclassified' }).status, 0);
+  assert.notEqual(validate(VALID_CARD, '', '').status, 0, 'missing run identity must fail closed');
 });

@@ -55,6 +55,7 @@ const read = (rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8');
 test('buildRunCard porta `calls` accanto a `viaFallbackUnsat` (#621)', () => {
   const card = buildRunCard({
     runId: '42',
+    runAttempt: '3',
     section: 'frontaliere',
     status: 'deferred',
     endedAt: '2026-09-05T10:00:00.000Z',
@@ -63,6 +64,7 @@ test('buildRunCard porta `calls` accanto a `viaFallbackUnsat` (#621)', () => {
   assert.equal(card.schema, RUN_CARD_SCHEMA);
   assert.equal(card.rebracket.calls, 7);
   assert.equal(card.rebracket.viaFallbackUnsat, 2);
+  assert.equal(card.runAttempt, '3');
   // Senza `calls`, «0 viaFallbackUnsat» non distingue «il ramo non si e' mai
   // acceso» da «il ri-bracketing non viene piu' eseguito»: e' la meta' che ai
   // cinque grep sui log del 2026-08/09 mancava.

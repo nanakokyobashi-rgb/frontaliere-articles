@@ -6,15 +6,15 @@ import {
   RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
 } from '../../generator/scripts/lib/run-card.mjs';
 
-const [cardPath, expectedSection] = process.argv.slice(2);
+const [cardPath, expectedSection, expectedRunId, expectedRunAttempt] = process.argv.slice(2);
 
 function reject(reason) {
   console.error(`shared-provider exit marker rejected: ${reason}`);
   process.exitCode = 1;
 }
 
-if (!cardPath || !expectedSection) {
-  reject('usage: validate-shared-provider-exit.mjs <run-card> <section>');
+if (!cardPath || !expectedSection || !expectedRunId || !expectedRunAttempt) {
+  reject('usage: validate-shared-provider-exit.mjs <run-card> <section> <run-id> <run-attempt>');
 } else {
   let card;
   let readable = false;
@@ -28,6 +28,8 @@ if (!cardPath || !expectedSection) {
   if (readable && (!card || typeof card !== 'object' || Array.isArray(card)
     || card.schema !== RUN_CARD_SCHEMA
     || card.section !== expectedSection
+    || String(card.runId) !== String(expectedRunId)
+    || String(card.runAttempt) !== String(expectedRunAttempt)
     || card.status !== 'deferred'
     || card.exitCode !== EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE
     || card.exitDisposition !== RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION)) {
