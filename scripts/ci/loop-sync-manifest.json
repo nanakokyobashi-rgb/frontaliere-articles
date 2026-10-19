@@ -2513,9 +2513,9 @@
       "path": "scripts/lib/upload-cdn-file.sh",
       "mode": "identical",
       "baseline": {
-        "site": "1e5ae2d628914224",
-        "corpus": "1e5ae2d628914224",
-        "alignedAt": "2026-10-11"
+        "site": "e3f6fcea9ddb5cee",
+        "corpus": "e3f6fcea9ddb5cee",
+        "alignedAt": "2026-10-19"
       }
     },
     {
@@ -3272,8 +3272,8 @@
       "sitePath": "scripts/lib/extract-article-text.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "c896aecb77764b2a",
-        "corpus": "c896aecb77764b2a",
+        "site": "24f32d759f736e41",
+        "corpus": "24f32d759f736e41",
         "alignedAt": "2026-10-19"
       }
     },
