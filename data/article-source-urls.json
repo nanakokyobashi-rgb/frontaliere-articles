@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/ministro-e-sindaci-in-fascia-con-smartt-valley-daverio-inaugura-il-campus-che-ricuce-scuola-e-fabbrica-non-si-innova-senza-competenze/2677099": {
-    "articleId": "inaugurazione-campus-smartt-valley",
-    "ts": "2026-09-13T01:23:00.266Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/politica/1949291/non-sono-ne-vittima-ne-pensionato": {
     "articleId": "savoia-avanti-ticino-lavoro",
     "ts": "2026-09-13T06:38:21.444Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/mercato-del-lavoro-e-gestione-delle-crisi-a-varese-arriva-levento-for-matching/2712193": {
     "articleId": "evento-for-matching-varese-2026",
     "ts": "2026-10-19T13:21:14.897Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/litalia-tra-rincari-energetici-e-crescita-debole-perche-il-2027-si-annuncia-piu-difficile/2711998": {
+    "articleId": "italia-rincari-crescita-2027",
+    "ts": "2026-10-19T14:41:28.063Z",
     "keyForm": 2
   }
 }

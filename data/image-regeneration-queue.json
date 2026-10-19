@@ -241,6 +241,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-19T03:17:12.439Z",
       "lastFailureAt": "2026-10-19T03:17:12.439Z"
+    },
+    {
+      "articleId": "italia-rincari-crescita-2027",
+      "title": "Italia: rincari energetici e crescita debole, 2027 più difficile",
+      "fallbackImage": "/images/blog/article-autotrasporto-rincari-confine-2026.webp",
+      "reason": "All image providers failed for article-italia-rincari-crescita-2027: openai-codex (vision gate rejected image: Generic synthetic Lake Lugano/Ticino scene with a distant train, but",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-19T14:41:28.061Z",
+      "lastFailureAt": "2026-10-19T14:41:28.061Z"
     }
   ]
 }

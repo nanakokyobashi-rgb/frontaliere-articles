@@ -10653,14 +10653,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/svizzera/cronaca/1957434/franchi-ffs-denaro-florida-casa-manager-lamborghini": {
-      "section": "frontaliere",
-      "ts": 1792245164312
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/manifestazione-antifascista-per-le-strade-di-lugano-444820": {
-      "section": "frontaliere",
-      "ts": 1792247582090
-    },
     "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1957426/biasca-toglie-il-velo-al-nuovo-di-interscambio": {
       "section": "frontaliere",
       "ts": 1792250619562
@@ -10876,6 +10868,18 @@
     "frontaliere::https://www.tio.ch/ticino/economia/1957675/competenze-imprese-valore-crescita-processi": {
       "section": "frontaliere",
       "ts": 1792416972530
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/aumenti-dei-biglietti-e-abbonamenti-trenord-la-protesta-dei-giovani-democratici-scelta-che-pesa-su-studenti-e-lavoratori/2712682": {
+      "section": "frontaliere",
+      "ts": 1792420206080
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/mobilita-elettrica-la-lombardia-investe-150-milioni-tra-auto-green-e-colonnine/2712505": {
+      "section": "frontaliere",
+      "ts": 1792420234094
+    },
+    "frontaliere::https://www.tio.ch/ticino/politica/1957677/quali-mendrisio-aziende-municipio-imprese": {
+      "section": "frontaliere",
+      "ts": 1792420407423
     }
   }
 }
