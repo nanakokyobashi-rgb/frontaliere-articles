@@ -26,6 +26,11 @@ import {
 } from '../scripts/regenerate-queued-covers.mjs';
 import { GENERATED_COVER_ALT_BY_LOCALE } from '../scripts/lib/seo-entry-builder.mjs';
 import {
+  GENERATED_COVER_ALT_BY_LOCALE as CANONICAL_GENERATED_COVER_ALT_BY_LOCALE,
+  LEGACY_GENERATED_COVER_ALT_BY_LOCALE,
+  LICENSED_PHOTO_ALT_BY_LOCALE,
+} from '../scripts/lib/generated-cover-alt.mjs';
+import {
   locateArticleRegistry,
   locateArticleSeoImage,
   updateArticleImageInRegistry,
@@ -42,6 +47,10 @@ import { registerLockPath } from '../scripts/lib/register-lock.mjs';
 function tempRoot() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'cover-queue-drain-'));
 }
+
+test('seo-entry-builder re-exports the canonical generated-cover alt map', () => {
+  assert.equal(GENERATED_COVER_ALT_BY_LOCALE, CANONICAL_GENERATED_COVER_ALT_BY_LOCALE);
+});
 
 function write(root, relativePath, content) {
   const filePath = path.join(root, relativePath);
@@ -458,6 +467,62 @@ test('ricostruisce ImageObject, diritti e imageAlt quando cambia la copertina', 
   }
 });
 
+test('il drain mantiene l’alt associato alla provenienza della foto riusata', async () => {
+  const photoAlt = {
+    it: 'Fotografia documentaria dell’ufficio del lavoro a Zurigo',
+    en: 'Documentary photograph of the employment office in Zurich',
+    de: 'Dokumentarisches Foto des Arbeitsamts in Zürich',
+    fr: 'Photographie documentaire de l’office du travail à Zurich',
+  };
+  const scenarios = [
+    { previousAlt: photoAlt, expectedAlt: photoAlt },
+    {
+      previousAlt: GENERATED_COVER_ALT_BY_LOCALE,
+      expectedAlt: LICENSED_PHOTO_ALT_BY_LOCALE,
+    },
+    {
+      previousAlt: LEGACY_GENERATED_COVER_ALT_BY_LOCALE,
+      expectedAlt: LICENSED_PHOTO_ALT_BY_LOCALE,
+    },
+  ];
+
+  for (const { previousAlt, expectedAlt } of scenarios) {
+    const root = tempRoot();
+    try {
+      const articleId = 'licensed-photo-cover-reuse';
+      const imageUrl = `/images/blog/${articleImageAssetId(articleId)}.webp`;
+      const record = licensedRecord(articleId, imageUrl);
+      const bytes = Buffer.alloc(record.bytes, 97);
+      record.sha256 = crypto.createHash('sha256').update(bytes).digest('hex');
+      write(root, 'content/blog-articles-data.ts', registryEntry(articleId, imageUrl));
+      fixture(root, [item(articleId, '2026-10-07T09:00:00.000Z')]);
+      write(root, `public${imageUrl}`, bytes);
+      write(root, 'data/generated-image-registry.json', JSON.stringify({ schema: 1, assetCount: 1, assets: [record] }));
+      for (const [locale, value] of Object.entries(previousAlt)) {
+        write(root, `content/blog-meta-${locale}.ts`, `const META = {\n  'blog.article.${articleId}.imageAlt': '${value}',\n};\n`);
+      }
+
+      const summary = await drain({
+        root,
+        limit: 1,
+        generateThumbnail: fakeThumbnail,
+      });
+
+      assert.equal(summary.drained, 1);
+      assert.equal(summary.reused, 1);
+      const seo = fs.readFileSync(path.join(root, 'content/seo/seo-blog-5.ts'), 'utf8');
+      assert.match(seo, new RegExp(`"caption": "${expectedAlt.it}"`));
+      for (const [locale, value] of Object.entries(expectedAlt)) {
+        const meta = fs.readFileSync(path.join(root, `content/blog-meta-${locale}.ts`), 'utf8');
+        assert.match(meta, new RegExp(`imageAlt': '${value}'`));
+        assert.doesNotMatch(meta, new RegExp(GENERATED_COVER_ALT_BY_LOCALE[locale]));
+      }
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  }
+});
+
 test('ancora il blocco ImageObject alla proprietà reale anche se il testo contiene "image"', async () => {
   const root = tempRoot();
   try {
@@ -597,6 +662,141 @@ test('una nuova accodatura aggiorna requestedAt ma conserva il contatore dei fal
   }
 });
 
+test('un append stale non può sostituire una richiesta più nuova, anche dal pending', () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'stale-queue-writer';
+    queue(root, [{
+      ...item(articleId, '2026-10-07T22:42:00.000Z'),
+      status: 'terminal',
+      terminalAt: '2026-10-07T22:42:00.000Z',
+      terminalReason: 'vision-safety-rejection',
+    }]);
+
+    assert.equal(appendImageRegenerationQueue(root, {
+      articleId,
+      title: articleId,
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'stale retry',
+      requestedAt: '2026-10-07T22:41:00.000Z',
+    }), true);
+
+    write(root, 'data/image-regeneration-queue-in-progress.json', '{}\n');
+    assert.equal(appendImageRegenerationQueue(root, {
+      articleId,
+      title: articleId,
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'stale pending retry',
+      requestedAt: '2026-10-07T22:40:00.000Z',
+    }), true);
+    fs.unlinkSync(path.join(root, 'data/image-regeneration-queue-in-progress.json'));
+
+    assert.equal(appendImageRegenerationQueue(root, {
+      articleId: 'flush-pending',
+      title: 'flush-pending',
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'new request',
+      requestedAt: '2026-10-07T22:43:00.000Z',
+    }), true);
+
+    const preserved = JSON.parse(
+      fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'),
+    ).items.find((entry) => entry.articleId === articleId);
+    assert.equal(preserved.status, 'terminal');
+    assert.equal(preserved.requestedAt, '2026-10-07T22:42:00.000Z');
+    assert.equal(preserved.reason, 'engine failed');
+    assert.equal(preserved.terminalReason, 'vision-safety-rejection');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('il percorso pending conserva un rifiuto terminale mentre il drain possiede il lock', () => {
+  const root = tempRoot();
+  try {
+    const lockPath = path.join(root, 'data/image-regeneration-queue-in-progress.json');
+    write(root, 'data/image-regeneration-queue-in-progress.json', '{}\n');
+    assert.equal(appendImageRegenerationQueue(root, {
+      articleId: 'terminal-pending',
+      title: 'Terminal pending',
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'vision gate rejected image: unsafe composition',
+      retryDisposition: 'terminal',
+      terminalReason: 'vision-safety-rejection',
+      requestedAt: '2026-10-07T22:41:00.000Z',
+    }), true);
+    fs.unlinkSync(lockPath);
+    assert.equal(appendImageRegenerationQueue(root, {
+      articleId: 'queued-after-lock',
+      title: 'Queued after lock',
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'provider timeout',
+      requestedAt: '2026-10-07T22:42:00.000Z',
+    }), true);
+
+    const items = JSON.parse(
+      fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'),
+    ).items;
+    const terminal = items.find((entry) => entry.articleId === 'terminal-pending');
+    assert.equal(terminal.status, 'terminal');
+    assert.equal(terminal.terminalAt, '2026-10-07T22:41:00.000Z');
+    assert.equal(terminal.terminalReason, 'vision-safety-rejection');
+
+    write(root, 'data/image-regeneration-queue-in-progress.json', '{}\n');
+    assert.equal(appendImageRegenerationQueue(root, {
+      articleId: 'terminal-pending',
+      title: 'Stale retry',
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'stale provider timeout',
+      requestedAt: '2026-10-07T22:40:00.000Z',
+    }), true);
+    fs.unlinkSync(lockPath);
+    appendImageRegenerationQueue(root, {
+      articleId: 'flush-stale-retry',
+      title: 'Flush stale retry',
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'provider timeout',
+      requestedAt: '2026-10-07T22:43:00.000Z',
+    });
+    const afterStaleRetry = JSON.parse(
+      fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'),
+    ).items.find((entry) => entry.articleId === 'terminal-pending');
+    assert.equal(afterStaleRetry.status, 'terminal', 'un pending più vecchio non riesuma il terminale');
+
+    appendImageRegenerationQueue(root, {
+      articleId: 'terminal-pending',
+      title: 'Fresh changed input',
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'new request after input change',
+      requestedAt: '2026-10-07T22:44:00.000Z',
+    });
+    write(root, 'data/image-regeneration-queue-in-progress.json', '{}\n');
+    appendImageRegenerationQueue(root, {
+      articleId: 'terminal-pending',
+      title: 'Stale terminal',
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'old safety rejection',
+      retryDisposition: 'terminal',
+      requestedAt: '2026-10-07T22:41:00.000Z',
+    });
+    fs.unlinkSync(lockPath);
+    appendImageRegenerationQueue(root, {
+      articleId: 'flush-stale-terminal',
+      title: 'Flush stale terminal',
+      fallbackImage: '/images/places/fallback.webp',
+      reason: 'provider timeout',
+      requestedAt: '2026-10-07T22:45:00.000Z',
+    });
+    const afterStaleTerminal = JSON.parse(
+      fs.readFileSync(path.join(root, 'data/image-regeneration-queue.json'), 'utf8'),
+    ).items.find((entry) => entry.articleId === 'terminal-pending');
+    assert.equal(afterStaleTerminal.status, 'queued', 'un terminale pending vecchio non sostituisce la nuova richiesta');
+    assert.equal(afterStaleTerminal.requestedAt, '2026-10-07T22:44:00.000Z');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('riconcilia all avvio le copertine già soddisfatte senza rigenerarle', async () => {
   const root = tempRoot();
   try {
@@ -719,10 +919,125 @@ test('un rifiuto visivo per testo o cartelli rafforza il prompt del ritentativo'
   assert.equal(isVisualTextFailure('vision gate rejected image: visible lettering and signage'), true);
   assert.equal(isVisualTextFailure('vision gate rejected image: words and numbers in the scene'), true);
   assert.equal(isVisualTextFailure('vision gate rejected image: forbidden content'), true);
+  assert.equal(isVisualTextFailure('vision gate rejected image: no visible text or logos; recognizable foreground person'), false);
+  assert.equal(isVisualTextFailure('vision gate rejected image: there is no readable text, but the face is recognizable'), false);
+  assert.equal(isVisualTextFailure('vision gate rejected image: contains_text=false; contains_logo=false; contains_recognizable_face=true'), false);
+  assert.equal(isVisualTextFailure('vision gate rejected image: {"contains_text": false, "contains_logo": false, "contains_recognizable_face": true}'), false);
+  assert.equal(isVisualTextFailure('vision gate rejected image: no text, but visible vehicle logos prevent approval'), true);
   assert.equal(isVisualTextFailure('vision gate rejected image: recognizable face'), false);
   assert.equal(isVisualTextFailure('provider unavailable'), false);
   assert.match(NO_TEXT_IMAGE_RETRY_HINT, /no signs/);
   assert.match(NO_TEXT_IMAGE_RETRY_HINT, /lettering/);
+});
+
+test('un item terminale resta nel ledger e non viene mai selezionato dal retry', async () => {
+  const root = tempRoot();
+  try {
+    const articleId = 'terminal-safety-ledger';
+    write(root, 'content/blog-articles-data.ts', registryEntry(articleId, '/images/places/fallback.webp'));
+    fixture(root, [{
+      ...item(articleId, '2026-10-07T09:00:00.000Z'),
+      status: 'terminal',
+      terminalAt: '2026-10-07T10:00:00.000Z',
+      terminalReason: 'vision-safety-rejection',
+    }]);
+    let calls = 0;
+    const summary = await drain({
+      root,
+      limit: 1,
+      retryFailed: true,
+      retryFailedAfterHours: 6,
+      now: () => '2026-10-08T12:00:00.000Z',
+      generateCover: async () => { calls += 1; return fakeCover(root)(); },
+      generateThumbnail: fakeThumbnail,
+    });
+
+    assert.equal(calls, 0);
+    assert.equal(summary.terminal, 1);
+    assert.deepEqual(summary.terminalIds, [articleId]);
+    assert.equal(summary.residual, 1);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('un fallimento strutturato solo vision diventa terminale, il transient rispetta il cooldown', async () => {
+  const root = tempRoot();
+  try {
+    const terminalId = 'terminal-after-governed-chain';
+    const transientId = 'transient-after-provider-timeout';
+    write(root, 'content/blog-articles-data.ts', [
+      'export const ARTICLES = [',
+      ` { id: '${terminalId}', image: '/images/places/fallback.webp' },`,
+      ` { id: '${transientId}', image: '/images/places/fallback.webp' },`,
+      '];',
+      '',
+    ].join('\n'));
+    fixture(root, [
+      item(terminalId, '2026-10-07T09:00:00.000Z'),
+      item(transientId, '2026-10-07T09:01:00.000Z'),
+    ]);
+    const terminalFailure = new Error('All image providers failed');
+    terminalFailure.failures = [
+      { provider: 'openai-codex', reason: 'vision gate rejected image: recognizable foreground person' },
+      { provider: 'gemini', reason: 'vision gate rejected image: recognizable human face' },
+    ];
+    terminalFailure.imageProviderLedger = {
+      schema: 1,
+      complete: true,
+      expectedProviders: ['openai-codex', 'gemini'],
+      attemptedProviders: ['openai-codex', 'gemini'],
+    };
+    let transientCalls = 0;
+    const first = await drain({
+      root,
+      limit: 2,
+      retryFailed: true,
+      retryFailedAfterHours: 6,
+      now: () => '2026-10-07T12:00:00.000Z',
+      generateCover: async (entry) => {
+        if (entry.articleId === terminalId) throw terminalFailure;
+        transientCalls += 1;
+        throw new Error('provider timeout');
+      },
+      generateThumbnail: fakeThumbnail,
+    });
+    assert.equal(first.terminalized, 1);
+    assert.deepEqual(first.terminalizedIds, [terminalId]);
+    assert.equal(transientCalls, 1);
+
+    let retryCalls = 0;
+    const tooSoon = await drain({
+      root,
+      limit: 2,
+      retryFailed: true,
+      retryFailedAfterHours: 6,
+      now: () => '2026-10-07T17:59:59.000Z',
+      generateCover: async () => { retryCalls += 1; return fakeCover(root)(); },
+      generateThumbnail: fakeThumbnail,
+    });
+    assert.equal(retryCalls, 0);
+    assert.deepEqual(tooSoon.requeued, []);
+
+    const afterCooldown = await drain({
+      root,
+      limit: 2,
+      retryFailed: true,
+      retryFailedAfterHours: 6,
+      now: () => '2026-10-07T18:00:00.000Z',
+      generateCover: async (...args) => {
+        retryCalls += 1;
+        return fakeCover(root)(...args);
+      },
+      generateThumbnail: fakeThumbnail,
+    });
+    assert.equal(retryCalls, 1);
+    assert.deepEqual(afterCooldown.requeued, [transientId]);
+    assert.equal(afterCooldown.terminal, 1);
+    assert.deepEqual(afterCooldown.terminalIds, [terminalId]);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('non ritenta le voci failed senza retry esplicito e il retry manuale e immediato', async () => {
@@ -1327,6 +1642,7 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(workflow, /queued-cover-job-start-ms/);
   assert.match(workflow, /deadline_ms=\$\(\(job_started_ms \+ 40 \* 60 \* 1000\)\)/);
   assert.match(workflow, /40m internal deadline/);
+  assert.match(workflow, /prepublish_deadline_ms=\$\(\(deadline_ms - 5 \* 60 \* 1000\)\)/);
   assert.match(workflow, /publisher_reserve_ms=\$\(\(15 \* 60 \* 1000\)\)/);
   assert.match(workflow, /generation_overhead_ms=\$\(\(5 \* 60 \* 1000\)\)/);
   assert.match(workflow, /skippedBeforeDrain:true/);
@@ -1353,6 +1669,10 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
 
   const articlePublisher = fs.readFileSync(new URL('../../.github/workflows/fast-publish-article.yml', import.meta.url), 'utf8');
   assert.match(articlePublisher, /publisher omitted requested article IDs/u);
+  assert.match(articlePublisher, /name: Verify shard assignment against publish checkout/u);
+  assert.match(articlePublisher, /actual_shard="\$\(node scripts\/ci\/fast-publish-section\.mjs shard-of "\$SECTION"\)"/u);
+  assert.match(articlePublisher, /actual_shard" != "\$EXPECTED_SHARD"/u);
+  assert.match(articlePublisher, /shard="\$FAST_PUBLISH_SHARD"/u);
   assert.equal(
     articlePublisher.match(/ref: \$\{\{ github\.event_name == 'workflow_dispatch' && github\.ref \|\| github\.sha \}\}/gu)?.length,
     2,
@@ -1381,7 +1701,12 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(sectionLiveLoop, /if \[ -f \.github\/FAST_PUBLISH_DISABLED \]/u);
   assert.match(sectionLiveLoop, /build_publish_args "\$attempt_dry"/u);
   assert.match(sectionLiveLoop, /bash scripts\/lib\/npm-ci-retry\.sh/u);
-  assert.doesNotMatch(sectionLiveLoop, /if bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/u);
+  assert.match(sectionLiveLoop, /rm -f "\$RUNNER_TEMP\/section-summary\.json"/u);
+  assert.match(sectionLiveLoop, /if RETRY_CMD_ATTEMPTS=2 bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/u);
+  assert.match(sectionLiveLoop, /deferredLiveRelease == true and \.published\.deferredReason != null/u);
+  assert.match(sectionPublisher, /deferred_replay_deadline_ms=\$\(\( \$\(date \+%s%3N\) \+ 30 \* 60 \* 1000 \)\)/u);
+  assert.match(sectionLiveLoop, /staging live completata ma API\/edge non ancora pronta/u);
+  assert.match(sectionLiveLoop, /if \[ "\$deferred_retry" = 'true' \]; then[\s\S]*continue/u);
   for (const publisher of [articlePublisher, sectionPublisher]) {
     assert.match(publisher, /COVER_DRAIN_COMMIT_MESSAGE: \$\{\{ github\.event\.head_commit\.message \}\}/u);
     assert.match(publisher, /cover_drain_marker="\$\(node scripts\/ci\/cover-drain-commit\.mjs is-cover-drain\)"/u);

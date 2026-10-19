@@ -4,22 +4,22 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T14:03:25.701Z",
-  "contentHash": "037e1932f91aa5d4dda2af3057bd0fb2bfa4d106abe0c30564f9e0a54e6911c5",
+  "updatedAt": "2026-10-19T14:06:02.326Z",
+  "contentHash": "f1202d0433f076fbd2df57c2c5b6a2431961b3257d58bdc475eb58ddaa7f03b5",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-16T23:59:59.000Z",
+      "updatedAt": "2026-10-18T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-17T05:03:12.314Z",
+      "updatedAt": "2026-10-19T05:23:43.930Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T20:07:19.130Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -33,25 +33,31 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Les Verrières, settimana conclusa: 16 ottobre 2026"
+          "note": "Col-des-Roches (Col France), settimana conclusa: 18 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "11",
-          "note": "segnalazioni aggiornate: 17 ottobre 2026"
+          "note": "segnalazioni aggiornate: 19 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "5",
-          "note": "segnalazioni aggiornate: 17 ottobre 2026"
+          "note": "segnalazioni aggiornate: 19 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 10 ottobre 2026 – 16 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 12 ottobre 2026 – 18 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
+            {
+              "label": "Col-des-Roches (Col France)",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/col-des-roches/oggi/"
+            },
             {
               "label": "Les Verrières",
               "value": "0 min",
@@ -63,17 +69,11 @@
               "value": "0 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/biaufond/oggi/"
-            },
-            {
-              "label": "Col-des-Roches (Col France)",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/col-des-roches/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -129,7 +129,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -147,7 +147,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -189,7 +189,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "en": {
       "canton": "NE",
@@ -200,25 +200,31 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Les Verrières, week ending 16 October 2026"
+          "note": "Col-des-Roches (Col France), week ending 18 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "11",
-          "note": "reports as of 17 October 2026"
+          "note": "reports as of 19 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "5",
-          "note": "reports as of 17 October 2026"
+          "note": "reports as of 19 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 10 October 2026 to 16 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 12 October 2026 to 18 October 2026, fastest first.",
           "items": [
+            {
+              "label": "Col-des-Roches (Col France)",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/col-des-roches/today/"
+            },
             {
               "label": "Les Verrières",
               "value": "0 min",
@@ -230,17 +236,11 @@
               "value": "0 min",
               "detail": "47 readings",
               "url": "/en/border-wait/biaufond/today/"
-            },
-            {
-              "label": "Col-des-Roches (Col France)",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/col-des-roches/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -296,7 +296,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -314,7 +314,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -356,7 +356,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "de": {
       "canton": "NE",
@@ -367,25 +367,31 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Les Verrières, Woche bis 16. Oktober 2026"
+          "note": "Col-des-Roches (Col France), Woche bis 18. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "11",
-          "note": "Meldungen vom 17. Oktober 2026"
+          "note": "Meldungen vom 19. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "5",
-          "note": "Meldungen vom 17. Oktober 2026"
+          "note": "Meldungen vom 19. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 10. Oktober 2026 bis 16. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 12. Oktober 2026 bis 18. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
+            {
+              "label": "Col-des-Roches (Col France)",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/col-des-roches/heute/"
+            },
             {
               "label": "Les Verrières",
               "value": "0 Min.",
@@ -397,17 +403,11 @@
               "value": "0 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/biaufond/heute/"
-            },
-            {
-              "label": "Col-des-Roches (Col France)",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/col-des-roches/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -463,7 +463,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -481,7 +481,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -523,7 +523,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "fr": {
       "canton": "NE",
@@ -534,25 +534,31 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Les Verrières, semaine jusqu’au 16 octobre 2026"
+          "note": "Col-des-Roches (Col France), semaine jusqu’au 18 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "11",
-          "note": "signalements au 17 octobre 2026"
+          "note": "signalements au 19 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "5",
-          "note": "signalements au 17 octobre 2026"
+          "note": "signalements au 19 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 10 octobre 2026 au 16 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 12 octobre 2026 au 18 octobre 2026, du plus fluide au plus lent.",
           "items": [
+            {
+              "label": "Col-des-Roches (Col France)",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/col-des-roches/aujourd-hui/"
+            },
             {
               "label": "Les Verrières",
               "value": "0 min",
@@ -564,17 +570,11 @@
               "value": "0 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/biaufond/aujourd-hui/"
-            },
-            {
-              "label": "Col-des-Roches (Col France)",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/col-des-roches/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -630,7 +630,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -648,7 +648,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -690,7 +690,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     }
   }
 }

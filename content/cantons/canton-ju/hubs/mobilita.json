@@ -4,22 +4,22 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T14:03:25.701Z",
-  "contentHash": "8d13cc751e4b5b95e9b292c569275d06302dbc22569809a04e70de0f6d9a30de",
+  "updatedAt": "2026-10-19T14:06:02.326Z",
+  "contentHash": "be5166cf08b34a5e6ade6167a6623c294b64cfc91a3838e1ef109bc661df7d31",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-16T23:59:59.000Z",
+      "updatedAt": "2026-10-18T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-17T05:03:12.314Z",
+      "updatedAt": "2026-10-19T05:23:43.930Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T20:07:19.130Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -33,20 +33,26 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Fahy-Abbévillers, settimana conclusa: 16 ottobre 2026"
+          "note": "Boncourt-Delle (A16), settimana conclusa: 18 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "2",
-          "note": "segnalazioni aggiornate: 17 ottobre 2026"
+          "note": "segnalazioni aggiornate: 19 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 10 ottobre 2026 – 16 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 12 ottobre 2026 – 18 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
+            {
+              "label": "Boncourt-Delle (A16)",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/boncourt-delle/oggi/"
+            },
             {
               "label": "Fahy-Abbévillers",
               "value": "0 min",
@@ -58,17 +64,11 @@
               "value": "0 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/goumois/oggi/"
-            },
-            {
-              "label": "Boncourt-Delle (A16)",
-              "value": "0,1 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/boncourt-delle/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -86,10 +86,15 @@
               "value": "Chiusura",
               "detail": "fine prevista: 20 ottobre 2026",
               "date": "2026-10-01T14:47:00.000Z"
+            },
+            {
+              "label": "A16 Boncourt -> Delémont tra Svincolo autostradale Porrentruy Est E Svincolo autostradale St-Ursanne Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-19T03:41:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -107,7 +112,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [],
@@ -161,7 +166,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "en": {
       "canton": "JU",
@@ -172,20 +177,26 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Fahy-Abbévillers, week ending 16 October 2026"
+          "note": "Boncourt-Delle (A16), week ending 18 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "2",
-          "note": "reports as of 17 October 2026"
+          "note": "reports as of 19 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 10 October 2026 to 16 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 12 October 2026 to 18 October 2026, fastest first.",
           "items": [
+            {
+              "label": "Boncourt-Delle (A16)",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/boncourt-delle/today/"
+            },
             {
               "label": "Fahy-Abbévillers",
               "value": "0 min",
@@ -197,17 +208,11 @@
               "value": "0 min",
               "detail": "47 readings",
               "url": "/en/border-wait/goumois/today/"
-            },
-            {
-              "label": "Boncourt-Delle (A16)",
-              "value": "0.1 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/boncourt-delle/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -225,10 +230,15 @@
               "value": "Closure",
               "detail": "until 20 October 2026",
               "date": "2026-10-01T14:47:00.000Z"
+            },
+            {
+              "label": "A16 Boncourt -> Delémont tra Svincolo autostradale Porrentruy Est E Svincolo autostradale St-Ursanne Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-19T03:41:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -246,7 +256,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [],
@@ -299,7 +309,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "de": {
       "canton": "JU",
@@ -310,20 +320,26 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Fahy-Abbévillers, Woche bis 16. Oktober 2026"
+          "note": "Boncourt-Delle (A16), Woche bis 18. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "2",
-          "note": "Meldungen vom 17. Oktober 2026"
+          "note": "Meldungen vom 19. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 10. Oktober 2026 bis 16. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 12. Oktober 2026 bis 18. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
+            {
+              "label": "Boncourt-Delle (A16)",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/boncourt-delle/heute/"
+            },
             {
               "label": "Fahy-Abbévillers",
               "value": "0 Min.",
@@ -335,17 +351,11 @@
               "value": "0 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/goumois/heute/"
-            },
-            {
-              "label": "Boncourt-Delle (A16)",
-              "value": "0.1 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/boncourt-delle/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -363,10 +373,15 @@
               "value": "Sperrung",
               "detail": "bis 20. Oktober 2026",
               "date": "2026-10-01T14:47:00.000Z"
+            },
+            {
+              "label": "A16 Boncourt -> Delsberg zwischen Anschluss Porrentruy-Ost und Anschluss St-Ursanne Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-19T03:41:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -384,7 +399,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [],
@@ -437,7 +452,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "fr": {
       "canton": "JU",
@@ -448,20 +463,26 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Fahy-Abbévillers, semaine jusqu’au 16 octobre 2026"
+          "note": "Boncourt-Delle (A16), semaine jusqu’au 18 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "2",
-          "note": "signalements au 17 octobre 2026"
+          "note": "signalements au 19 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 10 octobre 2026 au 16 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 12 octobre 2026 au 18 octobre 2026, du plus fluide au plus lent.",
           "items": [
+            {
+              "label": "Boncourt-Delle (A16)",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/boncourt-delle/aujourd-hui/"
+            },
             {
               "label": "Fahy-Abbévillers",
               "value": "0 min",
@@ -473,17 +494,11 @@
               "value": "0 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/goumois/aujourd-hui/"
-            },
-            {
-              "label": "Boncourt-Delle (A16)",
-              "value": "0,1 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/boncourt-delle/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -501,10 +516,15 @@
               "value": "Fermeture",
               "detail": "jusqu’au 20 octobre 2026",
               "date": "2026-10-01T14:47:00.000Z"
+            },
+            {
+              "label": "A16 Boncourt -> Delémont entre Jonction autoroutière Porrentruy-Est et Jonction autoroutière St-Ursanne Situation: trafic en accordéon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-19T03:41:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-17T05:03:12.314Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -522,7 +542,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [],
@@ -576,7 +596,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-17T14:03:25.701Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     }
   }
 }

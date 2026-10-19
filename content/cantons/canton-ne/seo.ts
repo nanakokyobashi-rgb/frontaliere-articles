@@ -348,6 +348,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-neuchatel-disoccupazione-maggio-2026': {
+    title: 'Neuchatel: il tasso di disoccupazione scende al 4,3% a maggio 2026',
+    description: 'A maggio 2026 nel Canton Neuchatel i disoccupati scendono a 3’924 e il tasso cantonale cala al 4,3%. Dati ufficiali DECS per fasce d\'età e settori.',
+    keywords: 'frontalieri, ticino, svizzera, italia, neuchatel, tasso, disoccupazione, scende',
+    ogTitle: 'Neuchatel: il tasso di disoccupazione scende al 4,3% a maggio 2026',
+    ogDescription: 'Il numero dei disoccupati nel Canton Neuchatel scende a quota 3’924 nel mese di maggio 2026. Il tasso cantonale cala al 4,3% grazie ai fattori stagionali positivi nella costruzione e nella ristorazione.',
+    canonicalPath: '/articoli-neuchatel/neuchatel-disoccupazione-maggio-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Neuchatel: il tasso di disoccupazione scende al 4,3% a maggio 2026",
+      "description": "A maggio 2026 nel Canton Neuchatel i disoccupati scendono a 3’924 e il tasso cantonale cala al 4,3%. Dati ufficiali DECS per fasce d'età e settori.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-neuchatel-disoccupazione-maggio-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Statistiche sulla disoccupazione nel Canton Neuchatel"
+      },
+      "datePublished": "2026-10-19T03:29:08+00:00",
+      "dateModified": "2026-10-19T03:29:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/neuchatel-disoccupazione-maggio-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

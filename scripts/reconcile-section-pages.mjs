@@ -12,9 +12,9 @@
  * `slugs.json`, nella sitemap della sezione e assente su R2; lo stesso
  * manifest permette di vedere una pagina ritirata rimasta sull'edge.
  *
- * Cosa confronta, da UNA osservazione della superficie pubblicata (stesso
- * `commit` in manifest, sections, slugs e registro edge, altrimenti il deploy
- * e' a meta' e si rimanda al giro dopo):
+ * Cosa confronta, da UNA osservazione della superficie pubblicata (`manifest`,
+ * `sections`, `slugs` e il registro edge CANDIDATO su Pages devono avere lo
+ * stesso `commit`):
  *
  *   atteso    ogni URL annunciato dalla sitemap pubblicata della sezione
  *             (loc e tutti gli xhtml:link href), quindi landing, hub,
@@ -23,12 +23,20 @@
  *             e per le pagine articolo candidate come orfane dal manifest,
  *             `https://cdn.frontaliereticino.ch/edge/sections/<path>/index.html`
  *
+ * Il registro R2 puo' essere ancora sul commit precedente: e' precisamente il
+ * caso di recovery in cui publish-api ha gia' pubblicato Pages ma ha rifiutato
+ * il flip perche' mancano pagine. Lo stato candidato resta verificabile dal
+ * registro generato su Pages; il registro R2 deve comunque essere valido,
+ * perche' publish-section-pages lo usa per proteggere la release servita.
+ *
  * Solo un 404 conta come «mancante». Ogni altra risposta (5xx, timeout) e'
  * «non verificabile»: non si ripubblica su un dubbio, lo si riporta.
  *
  * CAP PER SEZIONE (D8): al massimo N articoli per sezione per giro (default
  * 3, `--cap` o RECONCILE_SECTION_CAP), i piu' recenti prima. Il workflow
- * dispatcha fast-publish-section.yml una volta per sezione con quegli id; se
+ * dispatcha fast-publish-section.yml una volta per sezione con quegli id e
+ * trasporta separatamente tutti i 404 osservati, cosi' i leftover restano
+ * fuori dall'inventario immutabile mentre attendono il giro successivo; se
  * manca solo una pagina di sezione, con `ids: []` (rinfresco di landing,
  * archivio e hub).
  *
@@ -151,6 +159,14 @@ export function planSectionBackfill(section, pages, dateById, cap, orphanPages =
     return byDate || a.localeCompare(b);
   });
   const sectionMissing = missing.filter((page) => page.kind === 'section').map((page) => page.path);
+  const selected = missingIds.slice(0, n);
+  const selectedIds = new Set(selected);
+  const missingOrphanPagePaths = orphanPages.filter((page) => page.state === 'missing').map((page) => page.path);
+  const expectedMissingPagePaths = [...new Set(missing.map((page) => page.path))];
+  const knownMissingPagePaths = [...new Set([...missing.map((page) => page.path), ...missingOrphanPagePaths])];
+  const missingPagePaths = missing
+    .filter((page) => page.kind === 'section' || selectedIds.has(page.id))
+    .map((page) => page.path);
   const orphaned = orphanPages.filter((page) => page.state === 'present');
   const orphanedUnknown = orphanPages.filter((page) => page.state === 'unknown').map((page) => page.path);
   return {
@@ -162,12 +178,15 @@ export function planSectionBackfill(section, pages, dateById, cap, orphanPages =
     orphanedIds: [...new Set(orphaned.map((page) => page.id))].sort(),
     orphanedUnknown,
     missingIds,
-    selected: missingIds.slice(0, n),
+    selected,
+    missingPagePaths,
+    expectedMissingPagePaths,
+    knownMissingPagePaths,
     leftover: missingIds.slice(n),
     // Un giro di sola sezione (ids vuoti) serve quando manca una pagina di
     // sezione e nessun articolo: con articoli selezionati la sezione viene
     // comunque resa per intero dallo stesso publish.
-    dispatch: missingIds.length > 0 || sectionMissing.length > 0 || orphaned.length > 0,
+    dispatch: missingIds.length > 0 || sectionMissing.length > 0 || orphaned.length > 0 || missingOrphanPagePaths.length > 0,
   };
 }
 
@@ -178,6 +197,30 @@ async function getJson(url, fetchImpl) {
     throw new Error(`${url}: HTTP ${res.status}`);
   }
   return res.json();
+}
+
+/**
+ * Legge il registry candidato su Pages conservando la differenza fra 404
+ * (build-api non lo ha pubblicato, tipicamente per un gate Remote Config non
+ * verificato) e una risposta corrotta/non verificabile. Entrambi fermano il
+ * backfill, ma il report deve dire quale superficie manca.
+ */
+async function getJsonState(url, fetchImpl) {
+  try {
+    const res = await fetchWithRefTimeout(`${url}?_rcb=${Date.now()}`, { headers: { 'user-agent': UA } }, 30000, fetchImpl);
+    if (res.status === 404) {
+      releaseFetchWithRefTimeout(res);
+      return { state: 'absent', url, status: 404 };
+    }
+    if (!res.ok) {
+      const status = res.status;
+      releaseFetchWithRefTimeout(res);
+      return { state: 'unknown', url, status, reason: `HTTP ${status}` };
+    }
+    return { state: 'ok', url, status: res.status, value: await res.json() };
+  } catch (error) {
+    return { state: 'unknown', url, reason: error?.message ?? String(error) };
+  }
 }
 
 async function getText(url, fetchImpl) {
@@ -214,6 +257,17 @@ function unknownSitemapPlan(section, detail) {
 function sitemapFailureDetail(url, error) {
   const reason = String(error?.message ?? error);
   return reason.startsWith(`${url}:`) ? reason : `${url}: ${reason}`;
+}
+
+function skippedSurface({ code, reason, apiCommit = null, edgeCommit = null, pendingEdgeFlip = null, url = null, status = null }) {
+  return {
+    skipped: reason,
+    skip: { code, reason, ...(url ? { url } : {}), ...(status === null ? {} : { status }) },
+    apiCommit,
+    edgeCommit,
+    ...(pendingEdgeFlip === null ? {} : { pendingEdgeFlip }),
+    sections: [],
+  };
 }
 
 /** HEAD con due tentativi; 405/501 ricadono su GET, 200 presente, 404 mancante. */
@@ -267,28 +321,75 @@ async function mapLimit(items, limit, fn) {
 }
 
 /**
- * @returns {Promise<{ skipped: string | null, apiCommit: string | null, sections: ReturnType<typeof planSectionBackfill>[] }>}
+ * @returns {Promise<{ skipped: string | null, apiCommit: string | null, edgeCommit?: string | null, pendingEdgeFlip?: boolean, sections: ReturnType<typeof planSectionBackfill>[] }>}
  */
 export async function reconcile({ apiBase = API_BASE_DEFAULT, cap = 3, fetchImpl = fetch } = {}) {
-  const [manifest, catalog, slugs, edgeRegistry] = await Promise.all(
+  const [manifest, catalog, slugs, candidateRegistryResult, edgeRegistry] = await Promise.all(
     ['manifest.json', 'sections.json', 'slugs.json'].map((name) => getJson(`${apiBase}/${name}`, fetchImpl)).concat(
+      getJsonState(`${apiBase}/edge/sections/registry.json`, fetchImpl),
       getJson(`${CDN_BASE}/edge/sections/registry.json`, fetchImpl),
     ),
   );
-  if (!manifest?.commit || catalog?.commit !== manifest.commit || slugs?.commit !== manifest.commit || edgeRegistry?.commit !== manifest.commit) {
-    return { skipped: 'superficie a meta\' deploy: manifest, sections, slugs e registro edge non portano lo stesso commit', apiCommit: manifest?.commit ?? null, sections: [] };
+  if (candidateRegistryResult.state === 'absent') {
+    return skippedSurface({
+      code: 'pages-registry-absent',
+      reason: 'registry edge Pages assente (build-api non ha dimostrato la configurazione Remote Config; backfill rimandato)',
+      apiCommit: manifest?.commit ?? null,
+      edgeCommit: edgeRegistry?.commit ?? null,
+      url: candidateRegistryResult.url,
+      status: candidateRegistryResult.status,
+    });
+  }
+  if (candidateRegistryResult.state !== 'ok') {
+    return skippedSurface({
+      code: 'pages-registry-unknown',
+      reason: `registry edge Pages non verificabile (${candidateRegistryResult.reason ?? 'risposta sconosciuta'}; backfill rimandato)`,
+      apiCommit: manifest?.commit ?? null,
+      edgeCommit: edgeRegistry?.commit ?? null,
+      url: candidateRegistryResult.url,
+      status: candidateRegistryResult.status ?? null,
+    });
+  }
+  const candidateRegistry = candidateRegistryResult.value;
+  if (!manifest?.commit || catalog?.commit !== manifest.commit || slugs?.commit !== manifest.commit || candidateRegistry?.commit !== manifest.commit) {
+    return skippedSurface({
+      code: 'pages-surface-mismatch',
+      reason: 'superficie API a meta\' deploy: manifest, sections, slugs e registro edge candidato non portano lo stesso commit',
+      apiCommit: manifest?.commit ?? null,
+      edgeCommit: edgeRegistry?.commit ?? null,
+    });
+  }
+  if (!validateEdgeSectionRegistry(candidateRegistry)) {
+    return skippedSurface({
+      code: 'pages-registry-invalid',
+      reason: 'registry edge Pages non valido: release API non dimostrata; backfill rimandato',
+      apiCommit: manifest.commit,
+      edgeCommit: edgeRegistry?.commit ?? null,
+    });
   }
   if (!validateEdgeSectionRegistry(edgeRegistry)) {
-    return { skipped: 'registro edge non valido o non leggibile: stato live non dimostrato', apiCommit: manifest.commit, sections: [] };
+    return skippedSurface({
+      code: 'edge-registry-invalid',
+      reason: 'registro edge non valido o non leggibile: stato servito non dimostrato',
+      apiCommit: manifest.commit,
+      edgeCommit: edgeRegistry?.commit ?? null,
+    });
   }
+  const pendingEdgeFlip = edgeRegistry.commit !== manifest.commit;
   const catalogById = new Map((catalog.sections ?? []).map((entry) => [entry.id, entry]));
-  const live = Object.entries(edgeRegistry.sections ?? {})
+  const live = Object.entries(candidateRegistry.sections ?? {})
     .filter(([, state]) => state.status === 'live')
     .map(([id]) => catalogById.get(id));
   if (live.some((entry) => !entry || typeof entry.sitemap !== 'string' || !entry.sitemap)) {
-    return { skipped: 'superficie a meta\' deploy: una sezione live nel registro edge non ha catalogo o sitemap', apiCommit: manifest.commit, sections: [] };
+    return skippedSurface({
+      code: 'candidate-live-section-incomplete',
+      reason: 'superficie API a meta\' deploy: una sezione live nel registro edge candidato non ha catalogo o sitemap',
+      apiCommit: manifest.commit,
+      edgeCommit: edgeRegistry.commit,
+      pendingEdgeFlip,
+    });
   }
-  if (live.length === 0) return { skipped: null, apiCommit: manifest.commit, sections: [] };
+  if (live.length === 0) return { skipped: null, apiCommit: manifest.commit, edgeCommit: edgeRegistry.commit, pendingEdgeFlip, sections: [] };
   const rows = await getJson(`${apiBase}/canton-articles.json`, fetchImpl);
   const dateById = new Map(rows.map((row) => [row.id, row.updatedAt || row.date || '']));
   const sections = [];
@@ -330,7 +431,7 @@ export async function reconcile({ apiBase = API_BASE_DEFAULT, cap = 3, fetchImpl
     if (pageManifest.reason) plan.pageManifestReason = pageManifest.reason;
     sections.push(plan);
   }
-  return { skipped: null, apiCommit: manifest.commit, sections };
+  return { skipped: null, apiCommit: manifest.commit, edgeCommit: edgeRegistry.commit, pendingEdgeFlip, sections };
 }
 
 export async function main(argv = process.argv.slice(2)) {
@@ -351,6 +452,7 @@ export async function main(argv = process.argv.slice(2)) {
     sections: report.sections.length,
     dispatch: report.sections.filter((s) => s.dispatch).length,
     missing: report.sections.reduce((n, s) => n + s.missingIds.length, 0),
+    missingPages: report.sections.reduce((n, s) => n + (s.expectedMissingPagePaths?.length ?? 0), 0),
     leftover: report.sections.reduce((n, s) => n + s.leftover.length, 0),
     orphaned: report.sections.reduce((n, s) => n + s.orphaned.length, 0),
     manifestUnknown: report.sections.filter((s) => s.pageManifest !== 'ok').length,
@@ -361,7 +463,7 @@ export async function main(argv = process.argv.slice(2)) {
   if (report.skipped) console.log(`[reconcile-sections] rimandato: ${report.skipped}`);
   console.log(
     `[reconcile-sections] corpus @${String(report.apiCommit).slice(0, 8)} — sezioni live ${report.counts.sections}, ` +
-      `da ripubblicare ${report.counts.dispatch}, articoli mancanti ${report.counts.missing} (oltre il cap ${report.counts.leftover}), ` +
+      `da ripubblicare ${report.counts.dispatch}, pagine mancanti ${report.counts.missingPages}, articoli mancanti ${report.counts.missing} (oltre il cap ${report.counts.leftover}), ` +
       `orfane ${report.counts.orphaned}, manifest non verificabili ${report.counts.manifestUnknown}, ` +
       `non verificabili ${report.counts.unknown}`,
   );

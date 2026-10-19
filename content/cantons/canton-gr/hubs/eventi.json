@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "22bc3689ef7fbf6e65732d42d2a2de43b8decda65816d217ebe0c802136dcd8d",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "928f6fe586d7e87bac8242325109ddec47e6cac1945e6922e23206b2a8a330cb",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-18T20:21:24.396Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "83",
+          "value": "73",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Sagra della castagna",
-              "detail": "Campascio, Brusio",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-dautunno/"
-            },
-            {
-              "label": "Matinée concert Choir Stilli",
-              "detail": "Kloster St. Johann, Val Müstair",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/matinee-konzert-chor-stilli/"
-            },
-            {
-              "label": "Matinée-Konzert Chor Stilli",
-              "detail": "Kloster St. Johann",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/muestair/matinee-concert-choir-stilli_AGBP64e"
-            },
-            {
-              "label": "Rendez-vous des arts mit Hans-Ulrich Obrist und Susan Hefuna",
-              "detail": "Bündner Kunstmuseum, Chur",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rendez-vous-des-arts-mit-hans-ulrich-obrist-und-susan-hefuna/"
-            },
-            {
-              "label": "Bergkonzert mit \"Trio u Fiore\" (CH)",
-              "detail": "Skihütte Feldis",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/feldis-veulden/bergkonzert-mit-trio-u-fiore-ch_AAfZXkM"
-            },
-            {
-              "label": "Tanznachmittag im Hotel Sunstar Pontresina – Herbstserie 2026",
-              "detail": "Sunstar Hotel Pontresina, Pontresina",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/pontresina/dance-afternoon-at-hotel-sunstar-pontresina-autumn-series-2026_AGthkV8"
-            },
-            {
-              "label": "Buchvorstellung von Laura Decurtins in Ilanz",
-              "detail": "Ilanz, Ilanz/Glion",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/buchvorstellung-von-laura-decurtins-in-ilanz/"
-            },
-            {
-              "label": "Cinzia & Romana Ganzoni - Per Tai",
+              "label": "Herbstferienkurs Theater in Ilanz (9-15 Jahre)",
               "detail": "Chur",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cinzia-romana-ganzoni-per-tai/"
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstferienkurs-theater-in-ilanz-915-jahre/"
             },
             {
-              "label": "Klapperlapapp: the fairy tale & story festival",
-              "detail": "Taiswald, Pontresina — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/klapperlapapp-the-fairy-tale-story-festival/"
+              "label": "Kutschenfahrt zur Agata",
+              "detail": "Scuol",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kutschenfahrt-zur-agata/"
             },
             {
-              "label": "Bergbierfestival 2026",
-              "detail": "Bergbierfestival — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ramosch/bergbierfestival-2026_At6NGRX"
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol — in corso, ultimo giorno: 6 novembre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Mushroom half-days in the afternoon",
+              "detail": "Treffpunkt: Talstation Rothorn — in corso, ultimo giorno: 21 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mushroom-half-days-in-the-afternoon/"
+            },
+            {
+              "label": "Caffè Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — in corso, ultimo giorno: 11 novembre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
+              "label": "Giri in pony in Piazza Catrina",
+              "detail": "Catrina Experience — in corso, ultimo giorno: 21 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giri-in-pony-in-piazza-catrina/"
+            },
+            {
+              "label": "Naturerlebnis: Steine schleifen in der Rheinschlucht",
+              "detail": "Versam, Safiental — in corso, ultimo giorno: 21 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturerlebnis-steine-schleifen-in-der-rheinschlucht/"
+            },
+            {
+              "label": "Pouletflügeli à Discretion",
+              "detail": "Hotel Restaurant Ustria Parlatsch, Trin — in corso, ultimo giorno: 19 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pouletfluegeli-a-discretion/"
+            },
+            {
+              "label": "Fondue Plausch am Abig uf de Ochsenalp",
+              "detail": "Bergbeizli Ochsenalp, Arosa — in corso, ultimo giorno: 24 ottobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-plausch-am-abig-uf-de-ochsenalp/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -147,7 +147,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "GR",
@@ -157,7 +157,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "83",
+          "value": "73",
           "note": "from the site’s events calendar"
         }
       ],
@@ -168,69 +168,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Chestnut Festival",
-              "detail": "Campascio, Brusio",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-dautunno/"
-            },
-            {
-              "label": "Matinée concert Choir Stilli",
-              "detail": "Kloster St. Johann, Val Müstair",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/matinee-konzert-chor-stilli/"
-            },
-            {
-              "label": "Matinée concert Choir Stilli",
-              "detail": "Kloster St. Johann",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/muestair/matinee-concert-choir-stilli_AGBP64e"
-            },
-            {
-              "label": "Rendez-vous des arts mit Hans-Ulrich Obrist und Susan Hefuna",
-              "detail": "Bündner Kunstmuseum, Chur",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rendez-vous-des-arts-mit-hans-ulrich-obrist-und-susan-hefuna/"
-            },
-            {
-              "label": "Bergkonzert mit \"Trio u Fiore\" (CH)",
-              "detail": "Skihütte Feldis",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/feldis-veulden/bergkonzert-mit-trio-u-fiore-ch_AAfZXkM"
-            },
-            {
-              "label": "Dance afternoon at Hotel Sunstar Pontresina – Autumn series 2026",
-              "detail": "Sunstar Hotel Pontresina, Pontresina",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/pontresina/dance-afternoon-at-hotel-sunstar-pontresina-autumn-series-2026_AGthkV8"
-            },
-            {
-              "label": "Buchvorstellung von Laura Decurtins in Ilanz",
-              "detail": "Ilanz, Ilanz/Glion",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/buchvorstellung-von-laura-decurtins-in-ilanz/"
-            },
-            {
-              "label": "Cinzia & Romana Ganzoni - Per Tai",
+              "label": "Herbstferienkurs Theater in Ilanz (9-15 Jahre)",
               "detail": "Chur",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cinzia-romana-ganzoni-per-tai/"
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstferienkurs-theater-in-ilanz-915-jahre/"
             },
             {
-              "label": "Klapperlapapp: the fairy tale & story festival",
-              "detail": "Taiswald, Pontresina — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/klapperlapapp-the-fairy-tale-story-festival/"
+              "label": "Kutschenfahrt zur Agata",
+              "detail": "Scuol",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kutschenfahrt-zur-agata/"
             },
             {
-              "label": "Bergbierfestival 2026",
-              "detail": "Bergbierfestival — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ramosch/bergbierfestival-2026_At6NGRX"
+              "label": "Forest Bathing Alpin",
+              "detail": "Scuol — ongoing, last day: 6 November 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Mushroom half-days in the afternoon",
+              "detail": "Treffpunkt: Talstation Rothorn — ongoing, last day: 21 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mushroom-half-days-in-the-afternoon/"
+            },
+            {
+              "label": "Café Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — ongoing, last day: 11 November 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — ongoing, last day: 7 November 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
+              "label": "Pony rides in Piazza Catrina",
+              "detail": "Catrina Experience — ongoing, last day: 21 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giri-in-pony-in-piazza-catrina/"
+            },
+            {
+              "label": "Naturerlebnis: Steine schleifen in der Rheinschlucht",
+              "detail": "Versam, Safiental — ongoing, last day: 21 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturerlebnis-steine-schleifen-in-der-rheinschlucht/"
+            },
+            {
+              "label": "Pouletflügeli à Discretion",
+              "detail": "Hotel Restaurant Ustria Parlatsch, Trin — ongoing, last day: 19 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pouletfluegeli-a-discretion/"
+            },
+            {
+              "label": "Fondue Plausch am Abig uf de Ochsenalp",
+              "detail": "Bergbeizli Ochsenalp, Arosa — ongoing, last day: 24 October 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-plausch-am-abig-uf-de-ochsenalp/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -282,7 +282,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "GR",
@@ -292,7 +292,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "83",
+          "value": "73",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -303,69 +303,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Kastanienfest",
-              "detail": "Campascio, Brusio",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-dautunno/"
-            },
-            {
-              "label": "Matinée-Konzert Chor Stilli",
-              "detail": "Kloster St. Johann, Val Müstair",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/matinee-konzert-chor-stilli/"
-            },
-            {
-              "label": "Matinée-Konzert Chor Stilli",
-              "detail": "Kloster St. Johann",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/muestair/matinee-concert-choir-stilli_AGBP64e"
-            },
-            {
-              "label": "Rendez-vous des arts mit Hans-Ulrich Obrist und Susan Hefuna",
-              "detail": "Bündner Kunstmuseum, Chur",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rendez-vous-des-arts-mit-hans-ulrich-obrist-und-susan-hefuna/"
-            },
-            {
-              "label": "Bergkonzert mit \"Trio u Fiore\" (CH)",
-              "detail": "Skihütte Feldis",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/feldis-veulden/bergkonzert-mit-trio-u-fiore-ch_AAfZXkM"
-            },
-            {
-              "label": "Tanznachmittag im Hotel Sunstar Pontresina – Herbstserie 2026",
-              "detail": "Sunstar Hotel Pontresina, Pontresina",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/pontresina/dance-afternoon-at-hotel-sunstar-pontresina-autumn-series-2026_AGthkV8"
-            },
-            {
-              "label": "Buchvorstellung von Laura Decurtins in Ilanz",
-              "detail": "Ilanz, Ilanz/Glion",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/buchvorstellung-von-laura-decurtins-in-ilanz/"
-            },
-            {
-              "label": "Cinzia & Romana Ganzoni - Per Tai",
+              "label": "Herbstferienkurs Theater in Ilanz (9-15 Jahre)",
               "detail": "Chur",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cinzia-romana-ganzoni-per-tai/"
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstferienkurs-theater-in-ilanz-915-jahre/"
             },
             {
-              "label": "Klapperlapapp: das Märchen- & Geschichtenfestival",
-              "detail": "Taiswald, Pontresina — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/klapperlapapp-the-fairy-tale-story-festival/"
+              "label": "Kutschenfahrt zur Agata",
+              "detail": "Scuol",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kutschenfahrt-zur-agata/"
             },
             {
-              "label": "Bergbierfestival 2026",
-              "detail": "Bergbierfestival — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ramosch/bergbierfestival-2026_At6NGRX"
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol — läuft, letzter Tag: 6. November 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Pilze sammeln am Nachmittag",
+              "detail": "Treffpunkt: Talstation Rothorn — läuft, letzter Tag: 21. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mushroom-half-days-in-the-afternoon/"
+            },
+            {
+              "label": "Cafè Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — läuft, letzter Tag: 11. November 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
+              "label": "Ponyreiten auf der Piazza Catrina",
+              "detail": "Catrina Experience — läuft, letzter Tag: 21. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giri-in-pony-in-piazza-catrina/"
+            },
+            {
+              "label": "Naturerlebnis: Steine schleifen in der Rheinschlucht",
+              "detail": "Versam, Safiental — läuft, letzter Tag: 21. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturerlebnis-steine-schleifen-in-der-rheinschlucht/"
+            },
+            {
+              "label": "Pouletflügeli à Discretion",
+              "detail": "Hotel Restaurant Ustria Parlatsch, Trin — läuft, letzter Tag: 19. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pouletfluegeli-a-discretion/"
+            },
+            {
+              "label": "Fondue Plausch am Abig uf de Ochsenalp",
+              "detail": "Bergbeizli Ochsenalp, Arosa — läuft, letzter Tag: 24. Oktober 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-plausch-am-abig-uf-de-ochsenalp/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "GR",
@@ -427,7 +427,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "83",
+          "value": "73",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -438,69 +438,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Fête des châtaignes",
-              "detail": "Campascio, Brusio",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mercatino-dautunno/"
-            },
-            {
-              "label": "Matinée concert Choir Stilli",
-              "detail": "Kloster St. Johann, Val Müstair",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/matinee-konzert-chor-stilli/"
-            },
-            {
-              "label": "Matinée-Konzert Chor Stilli",
-              "detail": "Kloster St. Johann",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/muestair/matinee-concert-choir-stilli_AGBP64e"
-            },
-            {
-              "label": "Rendez-vous des arts mit Hans-Ulrich Obrist und Susan Hefuna",
-              "detail": "Bündner Kunstmuseum, Chur",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rendez-vous-des-arts-mit-hans-ulrich-obrist-und-susan-hefuna/"
-            },
-            {
-              "label": "Bergkonzert mit \"Trio u Fiore\" (CH)",
-              "detail": "Skihütte Feldis",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/feldis-veulden/bergkonzert-mit-trio-u-fiore-ch_AAfZXkM"
-            },
-            {
-              "label": "Tanznachmittag im Hotel Sunstar Pontresina – Herbstserie 2026",
-              "detail": "Sunstar Hotel Pontresina, Pontresina",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/pontresina/dance-afternoon-at-hotel-sunstar-pontresina-autumn-series-2026_AGthkV8"
-            },
-            {
-              "label": "Buchvorstellung von Laura Decurtins in Ilanz",
-              "detail": "Ilanz, Ilanz/Glion",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/buchvorstellung-von-laura-decurtins-in-ilanz/"
-            },
-            {
-              "label": "Cinzia & Romana Ganzoni - Per Tai",
+              "label": "Herbstferienkurs Theater in Ilanz (9-15 Jahre)",
               "detail": "Chur",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/cinzia-romana-ganzoni-per-tai/"
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/herbstferienkurs-theater-in-ilanz-915-jahre/"
             },
             {
-              "label": "Klapperlapapp: the fairy tale & story festival",
-              "detail": "Taiswald, Pontresina — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/klapperlapapp-the-fairy-tale-story-festival/"
+              "label": "Kutschenfahrt zur Agata",
+              "detail": "Scuol",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/kutschenfahrt-zur-agata/"
             },
             {
-              "label": "Bergbierfestival 2026",
-              "detail": "Bergbierfestival — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ramosch/bergbierfestival-2026_At6NGRX"
+              "label": "Waldbaden Alpin",
+              "detail": "Scuol — en cours, dernier jour : 6 novembre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
+            },
+            {
+              "label": "Mushroom half-days in the afternoon",
+              "detail": "Treffpunkt: Talstation Rothorn — en cours, dernier jour : 21 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mushroom-half-days-in-the-afternoon/"
+            },
+            {
+              "label": "Café Rumantsch ad Ardez",
+              "detail": "Ardez, Scuol — en cours, dernier jour : 11 novembre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
+            },
+            {
+              "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
+              "detail": "Ardez, Scuol — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
+              "label": "Promenades à poney sur la Piazza Catrina",
+              "detail": "Catrina Experience — en cours, dernier jour : 21 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giri-in-pony-in-piazza-catrina/"
+            },
+            {
+              "label": "Naturerlebnis: Steine schleifen in der Rheinschlucht",
+              "detail": "Versam, Safiental — en cours, dernier jour : 21 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/naturerlebnis-steine-schleifen-in-der-rheinschlucht/"
+            },
+            {
+              "label": "Pouletflügeli à Discretion",
+              "detail": "Hotel Restaurant Ustria Parlatsch, Trin — en cours, dernier jour : 19 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pouletfluegeli-a-discretion/"
+            },
+            {
+              "label": "Fondue Plausch am Abig uf de Ochsenalp",
+              "detail": "Bergbeizli Ochsenalp, Arosa — en cours, dernier jour : 24 octobre 2026",
+              "date": "2026-10-19",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-plausch-am-abig-uf-de-ochsenalp/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -552,7 +552,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }

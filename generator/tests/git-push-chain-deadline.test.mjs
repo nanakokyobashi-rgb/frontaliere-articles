@@ -31,7 +31,7 @@ test('#625 una catena scaduta non avvia il comando successivo', () => {
   );
 });
 
-test('#625 tutti e cinque i comandi seriali consumano lo stesso budget', () => {
+test('#625 commit, pull e abort condividono la deadline; i due push usano la guardia', () => {
   const source = readFileSync(SOURCE, 'utf8');
   const start = source.indexOf('function gitCommitAndPush');
   const end = source.indexOf('\nfunction commitIfNeeded', start);
@@ -39,9 +39,15 @@ test('#625 tutti e cinque i comandi seriali consumano lo stesso budget', () => {
   const body = source.slice(start, end);
   assert.equal(
     (body.match(/timeout:\s*gitPushChainTimeoutMs\(chainStartedAt,/g) || []).length,
-    5,
-    'commit, push, pull --rebase, retry push e rebase --abort devono condividere la deadline',
+    3,
+    'commit, pull --rebase e rebase --abort devono condividere la deadline',
   );
+  assert.equal(
+    (body.match(/pushMainWithTreeGuard\(chainStartedAt/g) || []).length,
+    2,
+    'push iniziale e retry devono restare dentro la deadline complessiva',
+  );
+  assert.match(source, /gitPushChainTimeoutMs\(chainStartedAt, 60_000, Date\.now\(\), reserveMs\)/u);
   assert.doesNotMatch(
     body,
     /timeout:\s*(?:30000|60000)\b/,

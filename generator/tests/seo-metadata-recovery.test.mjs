@@ -10,6 +10,7 @@ import { findSeoEntryMatches, removeSeoEntriesFromSource } from '../../engine/sh
 import {
   appendSeoEntrySource,
   buildSeoEntry,
+  GENERATED_COVER_ALT_BY_LOCALE,
   insertSeoEntriesAtHead,
   removeSeoEntriesWithSeparator,
   toIsoWithTz,
@@ -202,6 +203,8 @@ test('il builder mantiene una sola forma JSON-LD e distingue Commons da fallback
   });
   assert.match(generatedEntry, /"license": "https:\/\/openai\.com\/policies\/terms-of-use\/"/);
   assert.match(generatedEntry, /"url": `\$\{BASE_URL\}\/images\/places\/lugano-view\.webp`/);
+  assert.match(generatedEntry, new RegExp(`"caption": "${GENERATED_COVER_ALT_BY_LOCALE.it}"`));
+  assert.doesNotMatch(generatedEntry, /Panorama del Ticino/);
 
   const deterministic = article();
   deriveSeoMetadata(deterministic);
@@ -372,17 +375,34 @@ test('la recovery detiene il lock coda mentre registra le mutazioni della transa
   );
 });
 
-test('la recovery legge e valida la provenienza solo dopo i lock condivisi', () => {
+test('la recovery verifica i candidati prima del lock e riapplica il token al contesto riletto', () => {
   const source = fs.readFileSync(
     new URL('../scripts/recover-seo-orphans.mjs', import.meta.url),
     'utf8',
   );
+  const fallbackPlan = source.indexOf('const fallbackPlans = await prepareFallbackPlans(ids);');
   const queueStart = source.indexOf('const queue = withImageRegenerationQueueLock');
   const registrationLock = source.indexOf('beginRegisterLock(ROOT, `seo-orphan-recovery:${ids[0]}`', queueStart);
-  const entriesBuild = source.indexOf('const entries = buildEntries(ids);', registrationLock);
+  const entriesBuild = source.indexOf('buildEntries(ids, fallbackPlans)', registrationLock);
+  assert.ok(fallbackPlan > -1 && fallbackPlan < queueStart);
   assert.ok(queueStart > -1 && registrationLock > queueStart && entriesBuild > registrationLock);
+  assert.match(source, /verifyCatalogFallbackCandidates\(data,/);
+  assert.match(source, /verifiedCatalogImage: fallbackPlan\.verifiedCatalogImage/);
   assert.doesNotMatch(source, /credits\.get\(registryEntry\.image\)/);
   assert.match(source, /imageRecordForPath\(ROOT, registryEntry\.image, \{ strict: true \}\)/);
+  assert.doesNotMatch(source, /STATIC_FALLBACK_IMAGE/);
+});
+
+test('un ID bloccato non annulla gli altri recuperi e porta un esito di riparazione esplicito', () => {
+  const source = fs.readFileSync(
+    new URL('../scripts/recover-seo-orphans.mjs', import.meta.url),
+    'utf8',
+  );
+  assert.match(source, /const entries = \[\];\s+const blockedEntries = \[\];/);
+  assert.match(source, /entries\.push\(buildArticle\(registryEntry, meta, slugs, fallbackPlans\.get\(id\)\)\);/);
+  assert.match(source, /blockedEntries\.push\(\{[\s\S]*?nextAction:/);
+  assert.match(source, /const idsToWrite = entries\.map\(\(\{ data \}\) => data\.id\);/);
+  assert.match(source, /blockedEntries: summary\.blockedEntries/);
 });
 
 test('mergeQueueWithSnapshot mette le voci nuove prima dell\'ultima che c\'era', () => {

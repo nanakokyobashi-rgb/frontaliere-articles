@@ -1,34 +1,4 @@
 {
-  "https://www.rsi.ch/s/4076029": {
-    "articleId": "imprese-culturali-svizzera-2024",
-    "ts": "2026-09-12T04:52:17.141Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/newsblog/valute-e-frontiere/1949618/benzina-la-svizzera-apre-le-riserve-cosa-puo-succedere-ai-prezzi-per-i-frontalieri": {
-    "articleId": "benzina-riserve-svizzera-frontalieri",
-    "ts": "2026-09-12T08:27:31.105Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/info/ticino-grigioni-e-insubria/pi%c3%b9-acqua-per-il-mendrisiotto--4078136.html": {
-    "articleId": "serbatoio-bella-cima-stabio",
-    "ts": "2026-09-13T00:04:13.857Z",
-    "keyForm": 2
-  },
-  "https://www.laregione.ch/cantone/ticino/1949373/formazione-e-lavoro-un-equazione-complessa": {
-    "articleId": "formazione-lavoro-ticino",
-    "ts": "2026-09-13T00:17:00.850Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/mercato-dei-pacchi%2c-l%27offensiva-cinese%3a-speedaf-sbarca-in-svizzera/92044340": {
-    "articleId": "speedaf-in-svizzera-50-000-pacchi-al-giorno",
-    "ts": "2026-09-13T01:04:04.794Z",
-    "keyForm": 2
-  },
-  "https://www.varesenoi.it/2026/09/11/leggi-notizia/argomenti/economia-13/articolo/teleriscaldamento-di-varese-prenotazioni-aperte-per-visitare-la-centrale.html": {
-    "articleId": "teleriscaldamento-varese-porte-aperte",
-    "ts": "2026-09-13T01:12:31.119Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/ministro-e-sindaci-in-fascia-con-smartt-valley-daverio-inaugura-il-campus-che-ricuce-scuola-e-fabbrica-non-si-innova-senza-competenze/2677099": {
     "articleId": "inaugurazione-campus-smartt-valley",
     "ts": "2026-09-13T01:23:00.266Z",
@@ -2497,6 +2467,36 @@
   "https://www.varesenoi.it/2026/10/18/leggi-notizia/articolo/varese-morta-in-incidente-dauto-ex-accusato-di-femminicidio.html": {
     "articleId": "cassano-indagine-schianto",
     "ts": "2026-10-18T13:16:47.493Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/arconatese-varese-in-diretta-2/2708986": {
+    "articleId": "live-arconatese-varese-caronno",
+    "ts": "2026-10-18T15:47:29.359Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/como-razionalista-il-comune-finanzia-due-associazioni-si-dividono-78mila-euro-in-3-anni": {
+    "articleId": "como-razionalista-fondi-associazioni",
+    "ts": "2026-10-19T02:46:29.420Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/como-giallo-su-due-manifestazioni-una-sara-pacifica-nellaltra-vogliono-spaccare-tutto": {
+    "articleId": "como-manifestazioni-24-ottobre",
+    "ts": "2026-10-19T03:34:10.881Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/la-diffida-i-gps-e-lo-schianto-a-cassano-magnago-a-140-allora-gli-accertamenti-sulla-morte-di-pierina-buffon/2711917": {
+    "articleId": "indagini-morte-pierina-buffon",
+    "ts": "2026-10-19T05:57:45.423Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/a-cunardo-la-quinta-sagra-della-zucca-e-della-castagna-tre-giorni-alla-baita-del-fondista/2711941": {
+    "articleId": "sagra-zucca-castagna-cunardo",
+    "ts": "2026-10-19T07:18:03.424Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/mercato-del-lavoro-e-gestione-delle-crisi-a-varese-arriva-levento-for-matching/2712193": {
+    "articleId": "evento-for-matching-varese-2026",
+    "ts": "2026-10-19T13:21:14.897Z",
     "keyForm": 2
   }
 }

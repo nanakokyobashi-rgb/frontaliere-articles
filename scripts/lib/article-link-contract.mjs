@@ -7,6 +7,7 @@
  * Keep the small legacy repair table here so the writer and the corpus gate
  * share one definition of what can be repaired without guessing.
  */
+import { localizeNavLinkLabels } from './nav-link-labels.mjs';
 
 export const VALID_NAV_ACTIONS = new Set([
   'calculator', 'exchange', 'health', 'cost-of-living', 'pension', 'pillar3',
@@ -424,7 +425,9 @@ function canonicalArticleLinkOccurrenceTarget(link, locale) {
 
 /**
  * Normalize generated article Markdown and inline anchors before persistence.
- * Unknown or malformed targets deliberately lose their clickable href.
+ * Unknown or malformed targets deliberately lose their clickable href. The
+ * deterministic nav-label pass runs after target repair, so every provider
+ * shares the same visible-label correction before a body is written.
  */
 function sanitizeArticleMarkdownLinksInternal(source, locale, allowedBlankLines, scanHtmlAnchors = true) {
   let output = '';
@@ -492,7 +495,8 @@ function sanitizeArticleMarkdownLinksInternal(source, locale, allowedBlankLines,
 
 export function sanitizeArticleMarkdownLinks(text, locale = 'it') {
   const source = String(text ?? '');
-  return sanitizeArticleMarkdownLinksInternal(source, locale, fencedBlankLineStarts(source));
+  const sanitized = sanitizeArticleMarkdownLinksInternal(source, locale, fencedBlankLineStarts(source));
+  return localizeNavLinkLabels(sanitized, locale);
 }
 
 /**

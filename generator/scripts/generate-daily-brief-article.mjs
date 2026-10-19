@@ -15,10 +15,10 @@
  * reuse, don't reimplement). Idempotent per day: if today's id exists the body
  * files are refreshed in place instead of duplicating.
  *
- * The hero is generated from the day's numbers (sharp, 1200×675 webp + 480w
- * thumbnail) — Discover requires a unique ≥1200px image per edition, which is
- * exactly what the evergreen catalog photos cannot provide. No image → no
- * edition (hard fail): publishing without it would defeat the goal.
+ * The hero is a fresh, number-free scene selected from the day's primary
+ * editorial signal and generated through the governed article-hero engine.
+ * No image → no edition (hard fail): publishing without it would defeat the
+ * goal. Measurements stay in the article copy, not in the hero artwork.
  *
  * Refusals (all exit 0 — a day without data must not break the cron):
  *   - snapshot missing, or its dateIso ≠ today  → stale, refuse
@@ -49,10 +49,16 @@ import { reportStrippedControlChars } from './lib/control-char-write-report.mjs'
 // loadSnapshot/buildData live in the lib (not here) so `node --test` can pin
 // the refusal rules without importing create-article.mjs, whose static deps
 // (jsdom) exist only where `npm ci` ran.
-import { loadSnapshot, buildData, projectDailyBriefForLocale } from './lib/daily-brief-content.mjs';
-import { buildDailyBriefImageRecord, buildDailyBriefSvg, renderDailyBriefImage } from './lib/daily-brief-image.mjs';
-import { appendGeneratedImageRecord, sha256File } from './lib/blog-image-registry.mjs';
+import { loadSnapshot, buildData } from './lib/daily-brief-content.mjs';
+import {
+  buildDailyBriefCoverAlt,
+  buildDailyBriefImageContext,
+  buildDailyBriefCoverPrompt,
+  materializeDailyBriefHero,
+} from './lib/daily-brief-image.mjs';
+import { generateGovernedArticleHero } from './lib/article-cover-engine.mjs';
 import { refreshDescriptiveTexts } from './lib/article-meta-refresh.mjs';
+import { refreshGovernedArticleCover } from './lib/governed-article-cover-refresh.mjs';
 import { sanitizePromptPlaceholders } from './lib/prompt-placeholder-guard.mjs';
 
 // Scrittura ATOMICA del corpus: temp accanto al target + renameSync.
@@ -141,6 +147,7 @@ export function refreshMetaAndSeo(data, repoRoot = REPO_ROOT, { lockHeld = false
       excerpt: c.excerpt,
       seoDescription: c.seoDescription,
       ogDescription: c.ogDescription,
+      imageAlt: data.imageAlt?.[locale],
     };
   }
   return refreshDescriptiveTexts(
@@ -148,14 +155,15 @@ export function refreshMetaAndSeo(data, repoRoot = REPO_ROOT, { lockHeld = false
     localeTexts,
     { description: data.seo?.description, ogDescription: data.seo?.ogDescription,
       title: data.seo?.title, ogTitle: data.seo?.ogTitle, headline: data.seo?.headline },
-    { repoRoot, lockHeld, refreshTitles: true },
+    { repoRoot, lockHeld, refreshTitles: true, refreshImageAlt: true },
   );
 }
 
 export function heroPaths(id, repoRoot = REPO_ROOT) {
+  const imageStem = `article-${id}`;
   return {
-    hero: path.join(repoRoot, 'public', 'images', 'blog', `${id}.webp`),
-    thumb: path.join(repoRoot, 'public', 'images', 'blog', 'thumbnails', `${id}-480w.webp`),
+    hero: path.join(repoRoot, 'public', 'images', 'blog', `${imageStem}.webp`),
+    thumb: path.join(repoRoot, 'public', 'images', 'blog', 'thumbnails', `${imageStem}-480w.webp`),
   };
 }
 
@@ -179,7 +187,6 @@ async function main() {
   // `generator/tests/prompt-placeholder-guard.test.mjs` lo verifica, e diventa
   // rosso il giorno in cui uno arriva.
   const data = buildData(brief);
-  const heroBrief = projectDailyBriefForLocale(brief, 'it');
   // Il marker di un run interrotto va risolto PRIMA di decidere sulla presenza
   // dell'id (issue #964): dopo un kill a meta' registrazione l'id e' gia' nella
   // registry, quindi `checkArticleIdExists()` risponde `true` sopra un corpus
@@ -191,6 +198,8 @@ async function main() {
   assertArticlePassesFactualityGates(data);
   const exists = checkArticleIdExists(data.id);
   const h = data._headline;
+  data.imagePrompt = buildDailyBriefCoverPrompt(h);
+  data.imageAlt = buildDailyBriefCoverAlt(h);
   console.log(
     `🗞️  daily brief edition — id=${data.id} blocks=${brief.counts.availableBlocks}/4 headline=${h.kind} author=${data.author.slug} exists=${exists} dry=${dryRun}`,
   );
@@ -199,26 +208,32 @@ async function main() {
     console.log('DRY_RUN — no files written.');
     console.log('  IT title :', data.content.it.title);
     console.log('  IT body1 :', data.content.it.body1.slice(0, 180).replace(/\n/g, ' '));
-    const svg = buildDailyBriefSvg(heroBrief, { locale: 'it' });
-    console.log(`  hero SVG : ${svg.length} bytes (would render 1200×675 webp + 480w thumb)`);
+    console.log('  hero prompt :', data.imagePrompt);
+    console.log('  hero alt IT :', data.imageAlt.it);
+    console.log('  hero output : fresh governed 1200×675 WebP + 480w thumbnail');
     return;
   }
 
-  // Image FIRST, and fatally: a registered edition without its unique hero
-  // would ship exactly the recycled-image profile this project is escaping.
-  const { hero, thumb } = heroPaths(data.id);
-  const svg = buildDailyBriefSvg(heroBrief, { locale: 'it' });
-  const { heroBytes, thumbBytes } = await renderDailyBriefImage(svg, hero, thumb);
-  // The card is site-owned deterministic media, so persist its byte-level
-  // provenance immediately after the same render that materializes the hero.
-  // appendGeneratedImageRecord is idempotent for a same-day rerun.
-  const imageRecord = buildDailyBriefImageRecord({
-    id: data.id,
-    sha256: sha256File(hero),
-    bytes: heroBytes,
+  // Always regenerate, including same-day reruns: article ID alone is not a
+  // visual cache key and the old daily SVG card must be replaced by a cover
+  // that reflects the current primary insight.
+  const imageContext = buildDailyBriefImageContext(h, data.id);
+  const imageResult = await generateGovernedArticleHero({
+    root: REPO_ROOT,
+    data: imageContext,
+    area: 'Ticino e pendolarismo transfrontaliero',
+    deadlineAt: Date.now() + 120_000,
+    onProviderAttempt: ({ provider, attempt }) => {
+      console.error(`  🎨 Copertina daily: ${provider}, tentativo ${attempt}`);
+    },
   });
-  appendGeneratedImageRecord(REPO_ROOT, imageRecord);
-  console.log(`🖼️  hero ${path.relative(REPO_ROOT, hero)} (${heroBytes} B), thumb (${thumbBytes} B)`);
+  const { imageUrl, heroBytes, thumbBytes, record } = await materializeDailyBriefHero({
+    root: REPO_ROOT,
+    data,
+    result: imageResult,
+  });
+  const hero = path.join(REPO_ROOT, 'public', imageUrl.slice(1));
+  console.log(`🖼️  hero ${path.relative(REPO_ROOT, hero)} (${heroBytes} B, ${record.provider}/${record.model}), thumb (${thumbBytes} B)`);
 
   if (!exists) {
     console.log('📂 registering today’s edition across the blog system…');
@@ -232,6 +247,13 @@ async function main() {
   // surfaces as recover-seo-orphans. Claim the section marker before the
   // first body/meta/registry read; on any error it remains as evidence.
   beginExistingArticleRefreshLock(data.id);
+  refreshGovernedArticleCover({
+    repoRoot: REPO_ROOT,
+    articleId: data.id,
+    imagePath: data._generatedImagePath,
+    caption: data.imageAlt.it,
+    section: 'frontaliere',
+  });
   refreshBodyFiles(data);
   // Meta (excerpt/seoDescription/ogDescription) + SEO (description/
   // ogDescription) — issue #85: registerArticleFiles writes these ONCE, at

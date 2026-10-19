@@ -4,22 +4,22 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T23:29:53.062Z",
-  "contentHash": "dd8ba9a8789f01abe657cc27fd470644e360422248874871e3e52edaf04dca48",
+  "updatedAt": "2026-10-19T14:06:02.326Z",
+  "contentHash": "15dccb031592b22006ed8fd839ca7c0443d6004174b472151eefe0a678f8f95b",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-16T23:59:59.000Z",
+      "updatedAt": "2026-10-18T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-17T16:00:38.819Z",
+      "updatedAt": "2026-10-19T05:23:43.930Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T14:28:40.900Z",
+      "updatedAt": "2026-10-18T19:43:29.238Z",
       "keyFacts": 0
     }
   ],
@@ -33,25 +33,31 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Dettighofen – Wil ZH, settimana conclusa: 16 ottobre 2026"
+          "note": "Dettighofen – Rafz, settimana conclusa: 18 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "11",
-          "note": "segnalazioni aggiornate: 17 ottobre 2026"
+          "value": "9",
+          "note": "segnalazioni aggiornate: 19 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "20",
-          "note": "segnalazioni aggiornate: 17 ottobre 2026"
+          "note": "segnalazioni aggiornate: 19 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 10 ottobre 2026 – 16 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 12 ottobre 2026 – 18 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
+            {
+              "label": "Dettighofen – Rafz",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/dettighofen-rafz/oggi/"
+            },
             {
               "label": "Dettighofen – Wil ZH",
               "value": "0 min",
@@ -63,18 +69,6 @@
               "value": "0 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/hohentengen-am-hochrhein-wasterkingen/oggi/"
-            },
-            {
-              "label": "Jestetten – Rheinau",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/jestetten-rheinau/oggi/"
-            },
-            {
-              "label": "Lottstetten – Nack",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/lottstetten-nack/oggi/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
@@ -89,10 +83,16 @@
               "url": "/traffico-dogane/jestetten-laufen-uhwiesen-grenzstrasse/oggi/"
             },
             {
-              "label": "Klettgau – Wil ZH",
+              "label": "Jestetten – Rheinau",
               "value": "0 min",
               "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/klettgau-wil-zh/oggi/"
+              "url": "/traffico-dogane/jestetten-rheinau/oggi/"
+            },
+            {
+              "label": "Lottstetten – Nack",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/lottstetten-nack/oggi/"
             },
             {
               "label": "Lottstetten – Rafz, Landstrasse",
@@ -103,7 +103,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -141,26 +141,26 @@
               "date": "2026-09-30T19:00:00.000Z"
             },
             {
-              "label": "A52 Zürich -> Hinwil tra Svincolo autostradale Hinteregg E Svincolo autostradale Oetwil am See Situazione: chiusa cantiere Causa: lavori di costruzione",
-              "value": "Chiusura",
-              "detail": "fine prevista: 19 ottobre 2026",
-              "date": "2026-10-07T18:31:00.000Z"
-            },
-            {
-              "label": "A4 Winterthur -> Schaffhausen tra Svincolo autostradale Henggart E Svincolo autostradale Adlikon Situazione: chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 19 ottobre 2026",
-              "date": "2026-10-14T10:58:00.000Z"
-            },
-            {
               "label": "A51 Zürich -> Aeroporto tra Svincolo autostradale Glattbrugg E Svincolo autostradale Aeroporto Situazione: chiusa cantiere",
               "value": "Chiusura",
               "detail": "fine prevista: 6 novembre 2026",
               "date": "2026-10-14T11:08:00.000Z"
+            },
+            {
+              "label": "A51 Aeroporto -> Zürich tra Svincolo autostradale Aeroporto E Svincolo autostradale Glattbrugg Situazione: chiusa cantiere",
+              "value": "Chiusura",
+              "detail": "fine prevista: 13 novembre 2026",
+              "date": "2026-10-14T11:17:00.000Z"
+            },
+            {
+              "label": "A3W Wiedikon -> Diramazione Zürich Süd tra Svincolo autostradale Wiedikon E Svincolo autostradale Brunau Situazione: chiusa cantiere, lunghezza [km] 2.3",
+              "value": "Chiusura",
+              "detail": "fine prevista: 30 ottobre 2026",
+              "date": "2026-10-15T09:42:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-17T16:00:38.819Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -183,7 +183,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -261,7 +261,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "en": {
       "canton": "ZH",
@@ -272,25 +272,31 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Dettighofen – Wil ZH, week ending 16 October 2026"
+          "note": "Dettighofen – Rafz, week ending 18 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "11",
-          "note": "reports as of 17 October 2026"
+          "value": "9",
+          "note": "reports as of 19 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "20",
-          "note": "reports as of 17 October 2026"
+          "note": "reports as of 19 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 10 October 2026 to 16 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 12 October 2026 to 18 October 2026, fastest first.",
           "items": [
+            {
+              "label": "Dettighofen – Rafz",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/dettighofen-rafz/today/"
+            },
             {
               "label": "Dettighofen – Wil ZH",
               "value": "0 min",
@@ -302,18 +308,6 @@
               "value": "0 min",
               "detail": "47 readings",
               "url": "/en/border-wait/hohentengen-am-hochrhein-wasterkingen/today/"
-            },
-            {
-              "label": "Jestetten – Rheinau",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/jestetten-rheinau/today/"
-            },
-            {
-              "label": "Lottstetten – Nack",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/lottstetten-nack/today/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
@@ -328,10 +322,16 @@
               "url": "/en/border-wait/jestetten-laufen-uhwiesen-grenzstrasse/today/"
             },
             {
-              "label": "Klettgau – Wil ZH",
+              "label": "Jestetten – Rheinau",
               "value": "0 min",
               "detail": "47 readings",
-              "url": "/en/border-wait/klettgau-wil-zh/today/"
+              "url": "/en/border-wait/jestetten-rheinau/today/"
+            },
+            {
+              "label": "Lottstetten – Nack",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/lottstetten-nack/today/"
             },
             {
               "label": "Lottstetten – Rafz, Landstrasse",
@@ -342,7 +342,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -380,26 +380,26 @@
               "date": "2026-09-30T19:00:00.000Z"
             },
             {
-              "label": "A52 Zürich -> Hinwil tra Svincolo autostradale Hinteregg E Svincolo autostradale Oetwil am See Situazione: chiusa cantiere Causa: lavori di costruzione",
-              "value": "Closure",
-              "detail": "until 19 October 2026",
-              "date": "2026-10-07T18:31:00.000Z"
-            },
-            {
-              "label": "A4 Winterthur -> Schaffhausen tra Svincolo autostradale Henggart E Svincolo autostradale Adlikon Situazione: chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 19 October 2026",
-              "date": "2026-10-14T10:58:00.000Z"
-            },
-            {
               "label": "A51 Zürich -> Aeroporto tra Svincolo autostradale Glattbrugg E Svincolo autostradale Aeroporto Situazione: chiusa cantiere",
               "value": "Closure",
               "detail": "until 6 November 2026",
               "date": "2026-10-14T11:08:00.000Z"
+            },
+            {
+              "label": "A51 Aeroporto -> Zürich tra Svincolo autostradale Aeroporto E Svincolo autostradale Glattbrugg Situazione: chiusa cantiere",
+              "value": "Closure",
+              "detail": "until 13 November 2026",
+              "date": "2026-10-14T11:17:00.000Z"
+            },
+            {
+              "label": "A3W Wiedikon -> Diramazione Zürich Süd tra Svincolo autostradale Wiedikon E Svincolo autostradale Brunau Situazione: chiusa cantiere, lunghezza [km] 2.3",
+              "value": "Closure",
+              "detail": "until 30 October 2026",
+              "date": "2026-10-15T09:42:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-17T16:00:38.819Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -422,7 +422,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -500,7 +500,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "de": {
       "canton": "ZH",
@@ -511,25 +511,31 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Dettighofen – Wil ZH, Woche bis 16. Oktober 2026"
+          "note": "Dettighofen – Rafz, Woche bis 18. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "11",
-          "note": "Meldungen vom 17. Oktober 2026"
+          "value": "9",
+          "note": "Meldungen vom 19. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "20",
-          "note": "Meldungen vom 17. Oktober 2026"
+          "note": "Meldungen vom 19. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 10. Oktober 2026 bis 16. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 12. Oktober 2026 bis 18. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
+            {
+              "label": "Dettighofen – Rafz",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/dettighofen-rafz/heute/"
+            },
             {
               "label": "Dettighofen – Wil ZH",
               "value": "0 Min.",
@@ -541,18 +547,6 @@
               "value": "0 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/hohentengen-am-hochrhein-wasterkingen/heute/"
-            },
-            {
-              "label": "Jestetten – Rheinau",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/jestetten-rheinau/heute/"
-            },
-            {
-              "label": "Lottstetten – Nack",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/lottstetten-nack/heute/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
@@ -567,10 +561,16 @@
               "url": "/de/wartezeit-grenze/jestetten-laufen-uhwiesen-grenzstrasse/heute/"
             },
             {
-              "label": "Klettgau – Wil ZH",
+              "label": "Jestetten – Rheinau",
               "value": "0 Min.",
               "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/klettgau-wil-zh/heute/"
+              "url": "/de/wartezeit-grenze/jestetten-rheinau/heute/"
+            },
+            {
+              "label": "Lottstetten – Nack",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/lottstetten-nack/heute/"
             },
             {
               "label": "Lottstetten – Rafz, Landstrasse",
@@ -581,7 +581,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -619,26 +619,26 @@
               "date": "2026-09-30T19:00:00.000Z"
             },
             {
-              "label": "A52 Zürich -> Hinwil zwischen Anschluss Hinteregg und Anschluss Oetwil am See Sachlage: Strecke gesperrt Baustelle Ursache: Bauarbeiten",
-              "value": "Sperrung",
-              "detail": "bis 19. Oktober 2026",
-              "date": "2026-10-07T18:31:00.000Z"
-            },
-            {
-              "label": "A4 Winterthur -> Schaffhausen zwischen Anschluss Henggart und Anschluss Adlikon Sachlage: Strecke gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 19. Oktober 2026",
-              "date": "2026-10-14T10:58:00.000Z"
-            },
-            {
               "label": "A51 Zürich -> Flughafen zwischen Anschluss Glattbrugg und Anschluss Flughafen Sachlage: Strecke gesperrt Baustelle",
               "value": "Sperrung",
               "detail": "bis 6. November 2026",
               "date": "2026-10-14T11:08:00.000Z"
+            },
+            {
+              "label": "A51 Flughafen -> Zürich zwischen Anschluss Flughafen und Anschluss Glattbrugg Sachlage: Strecke gesperrt Baustelle",
+              "value": "Sperrung",
+              "detail": "bis 13. November 2026",
+              "date": "2026-10-14T11:17:00.000Z"
+            },
+            {
+              "label": "A3W Wiedikon -> Verzweigung Zürich-Süd zwischen Anschluss Wiedikon und Anschluss Brunau Sachlage: Strecke gesperrt Baustelle, Länge [km] 2.3",
+              "value": "Sperrung",
+              "detail": "bis 30. Oktober 2026",
+              "date": "2026-10-15T09:42:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-17T16:00:38.819Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -661,7 +661,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -739,7 +739,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     },
     "fr": {
       "canton": "ZH",
@@ -750,25 +750,31 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Dettighofen – Wil ZH, semaine jusqu’au 16 octobre 2026"
+          "note": "Dettighofen – Rafz, semaine jusqu’au 18 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "11",
-          "note": "signalements au 17 octobre 2026"
+          "value": "9",
+          "note": "signalements au 19 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "20",
-          "note": "signalements au 17 octobre 2026"
+          "note": "signalements au 19 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 10 octobre 2026 au 16 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 12 octobre 2026 au 18 octobre 2026, du plus fluide au plus lent.",
           "items": [
+            {
+              "label": "Dettighofen – Rafz",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/dettighofen-rafz/aujourd-hui/"
+            },
             {
               "label": "Dettighofen – Wil ZH",
               "value": "0 min",
@@ -780,18 +786,6 @@
               "value": "0 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/hohentengen-am-hochrhein-wasterkingen/aujourd-hui/"
-            },
-            {
-              "label": "Jestetten – Rheinau",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/jestetten-rheinau/aujourd-hui/"
-            },
-            {
-              "label": "Lottstetten – Nack",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/lottstetten-nack/aujourd-hui/"
             },
             {
               "label": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
@@ -806,10 +800,16 @@
               "url": "/fr/temps-attente-douane/jestetten-laufen-uhwiesen-grenzstrasse/aujourd-hui/"
             },
             {
-              "label": "Klettgau – Wil ZH",
+              "label": "Jestetten – Rheinau",
               "value": "0 min",
               "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/klettgau-wil-zh/aujourd-hui/"
+              "url": "/fr/temps-attente-douane/jestetten-rheinau/aujourd-hui/"
+            },
+            {
+              "label": "Lottstetten – Nack",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/lottstetten-nack/aujourd-hui/"
             },
             {
               "label": "Lottstetten – Rafz, Landstrasse",
@@ -820,7 +820,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-18T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -858,26 +858,26 @@
               "date": "2026-09-30T19:00:00.000Z"
             },
             {
-              "label": "A52 Zurich -> Hinwil entre Jonction autoroutière Hinteregg et Jonction autoroutière Oetwil am See Situation: fermé travaux Raison: travaux de construction",
-              "value": "Fermeture",
-              "detail": "jusqu’au 19 octobre 2026",
-              "date": "2026-10-07T18:31:00.000Z"
-            },
-            {
-              "label": "A4 Winterthur -> Schaffhouse entre Jonction autoroutière Henggart et Jonction autoroutière Adlikon Situation: fermé travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 19 octobre 2026",
-              "date": "2026-10-14T10:58:00.000Z"
-            },
-            {
               "label": "A51 Zurich -> Aéroport entre Jonction autoroutière Glattbrugg et Jonction autoroutière Aéroport Situation: fermé travaux",
               "value": "Fermeture",
               "detail": "jusqu’au 6 novembre 2026",
               "date": "2026-10-14T11:08:00.000Z"
+            },
+            {
+              "label": "A51 Aéroport -> Zurich entre Jonction autoroutière Aéroport et Jonction autoroutière Glattbrugg Situation: fermé travaux",
+              "value": "Fermeture",
+              "detail": "jusqu’au 13 novembre 2026",
+              "date": "2026-10-14T11:17:00.000Z"
+            },
+            {
+              "label": "A3W Wiedikon -> Echangeur de Zurich Sud entre Jonction autoroutière Wiedikon et Jonction autoroutière Brunau Situation: fermé travaux, longueur [km] 2.3",
+              "value": "Fermeture",
+              "detail": "jusqu’au 30 octobre 2026",
+              "date": "2026-10-15T09:42:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-17T16:00:38.819Z"
+          "updatedAt": "2026-10-19T05:23:43.930Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -900,7 +900,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-18T19:43:29.238Z"
         }
       ],
       "curatedArticles": [
@@ -978,7 +978,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-19T14:06:02.326Z"
     }
   }
 }

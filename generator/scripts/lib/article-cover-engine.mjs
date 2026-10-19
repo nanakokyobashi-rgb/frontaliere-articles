@@ -3,6 +3,7 @@ import '../../../host/cantonSectionsBootstrap.mjs';
 import path from 'node:path';
 
 import {
+  DEFAULT_AUTO_PROVIDER_CHAIN,
   DEFAULT_GENERATION_PROVIDER_CHAIN,
   generateImageFromSpec,
 } from '../../../engine/shared/generatedImageEngine.mjs';
@@ -258,9 +259,13 @@ export async function generateGovernedArticleHero({
     'generated-article-images',
     `${assetId}-${process.pid}-${Date.now()}`,
   );
+  let expectedProviderChain = null;
 
   try {
     const photoUsage = usedArticlePhotoRecords(root);
+    expectedProviderChain = photoUsage.hasUnmatchableLegacy
+      ? DEFAULT_GENERATION_PROVIDER_CHAIN
+      : DEFAULT_AUTO_PROVIDER_CHAIN;
     const result = await generateImageFromSpec(
       {
         scope: 'article-hero',
@@ -291,6 +296,13 @@ export async function generateGovernedArticleHero({
     return { ...result, stagingDir };
   } catch (error) {
     rmSync(stagingDir, { recursive: true, force: true });
+    // The shared engine exposes the failures it actually recorded. The corpus
+    // adapter also records the chain it asked that engine to exhaust, so queue
+    // classification can distinguish a complete verdict from a deadline-
+    // truncated prefix without changing the mirrored engine contract.
+    if (error && typeof error === 'object' && Array.isArray(expectedProviderChain)) {
+      error.imageProviderChain = [...expectedProviderChain];
+    }
     throw error;
   }
 }

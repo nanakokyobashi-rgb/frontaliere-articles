@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "99abb96d3bc56113a500e606e2594a0f235dbb6293555492d08a868787a5341f",
+  "updatedAt": "2026-10-19T02:30:40.156Z",
+  "contentHash": "73f56c162d8bdb12494e1e93d3be0d0b825bfb5665f0550ec59a448412370e7b",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-18T20:21:24.396Z",
       "keyFacts": 1
     }
   ],
@@ -32,12 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Raduno di Capodanno",
-              "detail": "Rösslisaal, Trogen — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
-            },
             {
               "label": "Cinema: Mondi intermedi",
               "detail": "Herisau",
@@ -91,11 +85,17 @@
               "detail": "Altes Zeughaus, Herisau",
               "date": "2026-10-24",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/manuel-stahlberger-es-geht_ARGwXiE"
+            },
+            {
+              "label": "Musica nel Gern Beizli",
+              "detail": "Gern Beizli, Bühler",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/events/music/buehler/music-in-the-gern-beizli_AWWgCjL"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -137,12 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "New Year's Eve Gathering",
-              "detail": "Rösslisaal, Trogen — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
-            },
             {
               "label": "Movies: Between Worlds",
               "detail": "Herisau",
@@ -196,11 +190,17 @@
               "detail": "Altes Zeughaus, Herisau",
               "date": "2026-10-24",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/manuel-stahlberger-es-geht_ARGwXiE"
+            },
+            {
+              "label": "Music in the Gern Beizli",
+              "detail": "Gern Beizli, Bühler",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/events/music/buehler/music-in-the-gern-beizli_AWWgCjL"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -242,12 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Herbst Gathering",
-              "detail": "Rösslisaal, Trogen — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
-            },
             {
               "label": "Kino: Beyond Tradition",
               "detail": "Herisau",
@@ -301,11 +295,17 @@
               "detail": "Altes Zeughaus, Herisau",
               "date": "2026-10-24",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/manuel-stahlberger-es-geht_ARGwXiE"
+            },
+            {
+              "label": "Musik im Gern Beizli",
+              "detail": "Gern Beizli, Bühler",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/events/music/buehler/music-in-the-gern-beizli_AWWgCjL"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -347,12 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Rencontre du Nouvel An",
-              "detail": "Rösslisaal, Trogen — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/trogen/herbst-gathering_AZxKRs9"
-            },
             {
               "label": "Cinéma : Entre deux mondes",
               "detail": "Herisau",
@@ -406,11 +400,17 @@
               "detail": "Altes Zeughaus, Herisau",
               "date": "2026-10-24",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/manuel-stahlberger-es-geht_ARGwXiE"
+            },
+            {
+              "label": "Musique au Gern Beizli",
+              "detail": "Gern Beizli, Bühler",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/events/music/buehler/music-in-the-gern-beizli_AWWgCjL"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-18T20:21:24.396Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-19T02:30:40.156Z"
     }
   }
 }

@@ -186,7 +186,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'truffa-falsi-poliziotti-vaud',
  category: 'pratico',
  date: '2026-10-18T07:26:28.156Z',
- image: '/images/blog/article-tuffe-falsi-poliziotti-vaud.webp',
+ image: '/images/blog/article-truffa-falsi-poliziotti-vaud.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['VD'],

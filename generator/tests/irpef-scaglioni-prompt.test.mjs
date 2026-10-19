@@ -41,10 +41,19 @@ function importFromSource(source) {
   return import(`data:text/javascript;base64,${encoded}`);
 }
 
-function renderTemplate(raw) {
+function renderTemplate(raw, {
+  isStatsAstra = false,
+  isStatsBfs = false,
+  isEvergreenArticle = false,
+} = {}) {
   const names = Object.keys(IRPEF);
   // eslint-disable-next-line no-new-func
-  return new Function(...names, `return \`${raw}\`;`)(...names.map((k) => IRPEF[k]));
+  return new Function(...names, 'isStatsAstra', 'isStatsBfs', 'isEvergreenArticle', `return \`${raw}\`;`)(
+    ...names.map((k) => IRPEF[k]),
+    isStatsAstra,
+    isStatsBfs,
+    isEvergreenArticle,
+  );
 }
 
 function extractConstTemplate(name) {
@@ -153,6 +162,22 @@ test('criteri 3 e 4 del fact-check: IRPEF 2026 = 23%/33%/43%', () => {
   assert.ok(c4.includes(`IRPEF ${RATE_2026}`), c4);
   assert35OnlyAs2025(c3, 'criterio 3');
   assert35OnlyAs2025(c4, 'criterio 4');
+});
+
+test('i criteri ASTRA separano dataset, fatti normativi e angolo editoriale', () => {
+  const astraScope = { isStatsAstra: true };
+  const c1 = renderTemplate(extractPromptLine('1. **LEGGI E DECRETI**'), astraScope);
+  const c4 = renderTemplate(extractPromptLine('**STATISTICHE E PERCENTUALI**'), astraScope);
+  const c5 = renderTemplate(extractPromptLine('5. **DATE E EVENTI**'), astraScope);
+  const c6 = renderTemplate(extractPromptLine('6. **COERENZA CON LA FONTE**'), astraScope);
+
+  assert.match(c1, /verifica leggi, accordi e date normative nei fatti di dominio verificati sopra/);
+  assert.match(c1, /Non segnalare una norma come sospetta solo perché è assente dal dataset ASTRA/);
+  assert.match(c4, /numeratore, denominatore, unità e periodo sono coerenti e il calcolo è corretto/);
+  assert.match(c5, /periodo di misurazione e periodi del confronto devono corrispondere al dataset primario/);
+  assert.match(c5, /verifica invece le date di leggi e accordi nei fatti di dominio verificati sopra/);
+  assert.match(c6, /L’angolo editoriale richiesto non è prova/);
+  assert.match(c6, /un’affermazione causale non sostenuta dai fatti verificati è critical/);
 });
 
 test('EVERGREEN_FACTS_BRIEF: il writer vede gli scaglioni 2026', () => {

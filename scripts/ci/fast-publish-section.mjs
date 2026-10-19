@@ -19,6 +19,11 @@
  *                          cantonali, pubblicate da fast-publish-section.yml).
  *                          Senza sezioni del tipo chiesto l'ERE non combacia
  *                          con niente.
+ *   body-plan [shard|r2]   legge da stdin i file cambiati e stampa i body
+ *                          pubblicabili raggruppati per sezione. I body orfani
+ *                          dal registry restano in `skippedIds`: non possono
+ *                          essere renderizzati e non devono bloccare gli ID
+ *                          validi dello stesso commit.
  *   r2-plan                legge da stdin i file cambiati (uno per riga; accetta
  *                          anche `git diff --name-status`) e stampa la matrice
  *                          JSON `[{section, ids, bootstrap, removeStaleCantonRssFeeds?}]`
@@ -284,6 +289,73 @@ export function bodyRegex(coreList = activeCorpusCoreEntries(), { served } = {})
   return `^content/(${dirs.join('|')})/[a-z]{2}/.+\\.ts$`;
 }
 
+function registryArticleIds(section) {
+  const registryFile = sectionSourceSurfaces(section.section).registryFile;
+  if (!existsSync(registryFile)) {
+    throw new Error(`registry della sezione '${section.section}' non trovato: ${registryFile}`);
+  }
+  const source = readFileSync(registryFile, 'utf8');
+  return new Set(
+    articleRegistryObjectBodies(source)
+      .map((body) => articleRegistryObjectFields(body).get('id'))
+      .filter(Boolean),
+  );
+}
+
+/**
+ * Piano dei body cambiati che il renderer puo' davvero risolvere.
+ *
+ * Il nome di un file body non prova che esista una voce nel registry. Il
+ * corpus storico contiene body orfani (issue #2453): includerne uno in un
+ * batch fa rifiutare l'intero render, compresi gli articoli registrati. Gli ID
+ * espliciti restano fail-closed nel renderer; solo la derivazione automatica
+ * da un diff separa gli orfani in `skippedIds`.
+ */
+export function bodyPublishPlan(
+  files,
+  coreList = activeCorpusCoreEntries(),
+  {
+    served,
+    fileExists = existsSync,
+    articleIdsForSection = registryArticleIds,
+  } = {},
+) {
+  if (served !== undefined && served !== 'shard' && served !== 'r2') {
+    throw new Error(`body-plan: tipo "${served}" sconosciuto (shard | r2)`);
+  }
+  const sections = activeSourceSections(coreList)
+    .filter((section) => served === undefined || (served === 'shard') === Boolean(section.shardKey));
+  const byName = new Map(sections.map((section) => [section.section, section]));
+  const plan = new Map();
+
+  for (const { rel, status } of changedFileRecords(files)) {
+    const body = sectionForBodyPath(rel, coreList);
+    const section = body && byName.get(body.section);
+    if (!section || status === 'D' || status === 'R' || !fileExists(rel)) continue;
+
+    if (!plan.has(section.section)) {
+      plan.set(section.section, {
+        ids: new Set(),
+        skippedIds: new Set(),
+        registeredIds: new Set(articleIdsForSection(section)),
+      });
+    }
+    const state = plan.get(section.section);
+    (state.registeredIds.has(body.id) ? state.ids : state.skippedIds).add(body.id);
+  }
+
+  return sections
+    .filter((section) => plan.has(section.section))
+    .map((section) => {
+      const state = plan.get(section.section);
+      return {
+        section: section.section,
+        ids: [...state.ids].sort(),
+        skippedIds: [...state.skippedIds].sort(),
+      };
+    });
+}
+
 /** La sezione che possiede il corpo, o un errore. */
 export function sectionOf(rel, coreList = activeCorpusCoreEntries()) {
   const hit = sectionForBodyPath(rel, coreList);
@@ -403,6 +475,7 @@ if (isMain()) {
   const [cmd, arg] = process.argv.slice(2);
   const run = async () => {
     if (cmd === 'body-regex') console.log(bodyRegex(activeCorpusCoreEntries(), { served: arg }));
+    else if (cmd === 'body-plan') console.log(JSON.stringify(bodyPublishPlan(readFileSync(0, 'utf8').split('\n'), activeCorpusCoreEntries(), { served: arg })));
     else if (cmd === 'r2-plan') {
       const files = readFileSync(0, 'utf8').split('\n');
       let registryRefreshSections = [];
@@ -439,7 +512,7 @@ if (isMain()) {
     else if (cmd === 'image-plan') console.log(JSON.stringify(imagePublishPlan(readFileSync(0, 'utf8').split('\n'), activeCorpusCoreEntries(), { served: arg })));
     else if (cmd === 'section-of' && arg) console.log(sectionOf(arg));
     else if (cmd === 'shard-of' && arg) console.log(shardOf(arg));
-    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files | r2-reconcile-plan <commit> | r2-api-push-plan < diff.json edge.json');
+    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | body-plan [shard|r2] < files | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files | r2-reconcile-plan <commit> | r2-api-push-plan < diff.json edge.json');
   };
   run().catch((error) => {
     console.error(`::error::fast-publish-section: ${error?.message ?? error}`);

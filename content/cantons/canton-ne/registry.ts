@@ -105,4 +105,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'neuchatel-disoccupazione-maggio-2026',
+ category: 'novita',
+ date: '2026-10-19T03:29:08.971Z',
+ image: '/images/blog/article-neuchatel-disoccupazione-maggio-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

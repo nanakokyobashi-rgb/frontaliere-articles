@@ -47,10 +47,12 @@ import {
   checkItemOnPage,
   pageCarriesItem,
   pageTitleEvidence,
+  normalizeTitleEvidenceShare,
   shortHeadlineEvidence,
   shortHeadlineTokenPolicy,
   selectConsistentTitleEvidence,
   stripItemIdentity,
+  validateTitleEvidenceShape,
   withItemIdentity,
 } from '../scripts/lib/source-url-ledger.mjs';
 import { findCrossSectionSourceDuplicate } from '../scripts/lib/cross-section-dedup.mjs';
@@ -267,6 +269,22 @@ test('shortHeadlineTokenPolicy counts visible Unicode characters instead of UTF-
   assert.equal(pageCarriesItem('', headline, { titleEvidence: headline }), true);
 });
 
+test('shortHeadlineEvidence splits CR, LF and CRLF title declarations', () => {
+  const matching = 'A 13: Stau';
+  for (const separator of ['\r', '\n', '\r\n']) {
+    assert.equal(
+      shortHeadlineEvidence(`${matching}${separator}${matching}`, matching),
+      true,
+      `separator ${JSON.stringify(separator)} should preserve two matching declarations`,
+    );
+    assert.equal(
+      shortHeadlineEvidence(`A 13: Unfall${separator}${matching}`, matching),
+      false,
+      `separator ${JSON.stringify(separator)} should not hide a conflicting declaration`,
+    );
+  }
+});
+
 test('selectConsistentTitleEvidence rejects conflicting declarations before matching a headline', () => {
   const matching = 'A 13: Stau';
   const equivalent = 'a 13 – STAU';
@@ -277,11 +295,59 @@ test('selectConsistentTitleEvidence rejects conflicting declarations before matc
   );
 
   assert.equal(selectConsistentTitleEvidence(`${matching}\r${equivalent}`), matching);
-  assert.equal(selectConsistentTitleEvidence([`${matching}\r${equivalent}`, 'A 13: STAU']), matching);
+  assert.equal(selectConsistentTitleEvidence([`${matching}\r\n${equivalent}`, 'A 13: STAU']), matching);
   assert.equal(selectConsistentTitleEvidence(conflicting), '');
   assert.equal(selectConsistentTitleEvidence([conflicting]), '');
+  assert.equal(selectConsistentTitleEvidence(`${matching}\r—`), '', 'punctuation-only declarations are not silently ignored');
   assert.equal(shortHeadlineEvidence(conflicting, matching), false);
   assert.equal(shortHeadlineEvidence(conflictingHtml, matching), false);
+  assert.equal(shortHeadlineEvidence(`${matching}\r—`, matching), false);
+});
+
+test('title evidence rejects unsupported shapes before coercion', () => {
+  const matching = 'A 13: Stau';
+  const throwingObject = { toString() { throw new Error('must not stringify'); } };
+  const iteratorMaskedNestedArray = [[matching]];
+  iteratorMaskedNestedArray[Symbol.iterator] = function* () { yield matching; };
+
+  assert.equal(validateTitleEvidenceShape(matching), true);
+  assert.equal(validateTitleEvidenceShape([matching, 'A 13: STAU']), true);
+  assert.equal(validateTitleEvidenceShape([[matching]]), false);
+  assert.equal(validateTitleEvidenceShape(iteratorMaskedNestedArray), false);
+  assert.equal(validateTitleEvidenceShape([matching, {}]), false);
+  assert.equal(validateTitleEvidenceShape(throwingObject), false);
+  assert.equal(validateTitleEvidenceShape(Object.assign([], { 1: matching, length: 2 })), false);
+
+  assert.equal(selectConsistentTitleEvidence([[matching]]), '');
+  assert.equal(selectConsistentTitleEvidence(throwingObject), '');
+  assert.equal(pageCarriesItem('', matching, { titleEvidence: [[matching]] }), false);
+  assert.equal(pageCarriesItem('', matching, { titleEvidence: throwingObject }), false);
+});
+
+test('pageCarriesItem rejects non-finite or out-of-range evidence thresholds', () => {
+  assert.equal(normalizeTitleEvidenceShare(undefined), 0.6);
+  assert.equal(normalizeTitleEvidenceShare(0), 0);
+  assert.equal(normalizeTitleEvidenceShare(1), 1);
+  for (const invalid of [NaN, Infinity, -Infinity, -0.01, 1.01, null, '0.6']) {
+    assert.equal(normalizeTitleEvidenceShare(invalid), null, String(invalid));
+    assert.equal(
+      pageCarriesItem('unrelated text', 'alpha beta', { minShare: invalid }),
+      false,
+      `invalid minShare ${String(invalid)} must fail closed`,
+    );
+  }
+});
+
+test('pageCarriesItem excludes conflicting metadata from multi-word headline evidence', () => {
+  const headline = 'Grossbrand fordert mehrere Verletzte';
+  const conflicting = `Fahrplanänderung betrifft Pendler\r${headline}`;
+
+  assert.equal(pageCarriesItem('', headline, { titleEvidence: headline }), true);
+  assert.equal(pageCarriesItem('', headline, { titleEvidence: conflicting }), false);
+  assert.deepEqual(
+    checkItemOnPage({ title: conflicting, text: '' }, { headline }),
+    { ok: false, reason: 'title-not-on-page' },
+  );
 });
 
 test('checkItemOnPage: titoli della pagina, testo e giornata — sulla pagina reale del ticker', () => {

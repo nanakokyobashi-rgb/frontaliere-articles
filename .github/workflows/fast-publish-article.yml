@@ -74,6 +74,7 @@ on:
       - '.github/workflows/fast-publish-article.yml'
       - 'scripts/publish-article-fast.mjs'
       - 'scripts/ci/fast-publish-section.mjs'
+      - 'scripts/ci/verify-served-fingerprint.mjs'
       - 'scripts/ci/article-image-fallbacks.mjs'
       - 'generator/scripts/lib/corpus-paths.mjs'
       # The body-link preflight is a publisher dependency too: changing its
@@ -302,9 +303,12 @@ jobs:
           fi
 
           # Keep the legacy empty-dispatch behavior: with no explicit id, use
-          # the body files from the last corpus commit. Collect every match,
-          # group it by its owning section and publish the whole batch, even
-          # when one commit legitimately updates more than one Pages section.
+          # the registered body files from the last corpus commit. Group every
+          # publishable match by its owning section and publish the whole batch,
+          # even when one commit legitimately updates more than one Pages
+          # section. Historical orphan bodies cannot be rendered because they
+          # have no registry entry: report and skip them without suppressing
+          # the registered IDs changed by the same commit.
           # Which directories hold article bodies, and which section owns each,
           # comes from the section core (scripts/ci/fast-publish-section.mjs):
           # the old `case` sent every non-`blog-body-ch` body to frontaliere,
@@ -312,23 +316,23 @@ jobs:
           # shard without an error.
           if [ "${#ids[@]}" -eq 0 ]; then
             changed="$(git diff --name-only "$before" HEAD 2>/dev/null || true)"
-            body_re="$(node scripts/ci/fast-publish-section.mjs body-regex shard)"
-            mapfile -t bodies < <(
-              printf '%s\n' "$changed" \
-                | grep -E "$body_re" \
-                | sort -u || true
-            )
-            for body in "${bodies[@]}"; do
-              [ -f "$body" ] || continue
-              body_id="$(basename "$body" .ts)"
-              body_section="$(node scripts/ci/fast-publish-section.mjs section-of "$body")"
+            body_plan="$(printf '%s\n' "$changed" | node scripts/ci/fast-publish-section.mjs body-plan shard)"
+            while IFS= read -r body_target; do
+              [ -n "$body_target" ] || continue
+              body_section="$(printf '%s' "$body_target" | jq -r '.section')"
+              body_ids_json="$(printf '%s' "$body_target" | jq -c '.ids')"
+              skipped_ids_json="$(printf '%s' "$body_target" | jq -c '.skippedIds')"
+              while IFS= read -r skipped_id; do
+                [ -n "$skipped_id" ] || continue
+                echo "::warning::skipping changed body '$skipped_id' in section '$body_section': no publishable registry entry"
+              done < <(printf '%s' "$skipped_ids_json" | jq -r '.[]')
               if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -n "${section:-}" ] && [ "$section" != "$body_section" ]; then
                 echo "::error::derived body section '$body_section' does not match requested section '$section'"
                 exit 1
               fi
-              body_ids_json="$(jq -cn --arg id "$body_id" '[$id]')"
+              [ "$(printf '%s' "$body_ids_json" | jq 'length')" -gt 0 ] || continue
               groups="$(jq -c --arg s "$body_section" --argjson ids "$body_ids_json" '.[$s] = ((.[$s] // []) + $ids | unique | sort)' <<<"$groups")"
-            done
+            done < <(printf '%s' "$body_plan" | jq -c '.[]')
           fi
 
           # Explicit dispatch ids form one target; body and image changes are
@@ -423,6 +427,20 @@ jobs:
           # `contents: read` token, which cannot write and whose push fires no
           # workflow anyway.
           persist-credentials: false
+
+      - name: Verify shard assignment against publish checkout
+        if: needs.resolve.outputs.skip != 'true'
+        env:
+          SECTION: ${{ matrix.target.section }}
+          EXPECTED_SHARD: ${{ matrix.target.shard }}
+        run: |
+          set -euo pipefail
+          actual_shard="$(node scripts/ci/fast-publish-section.mjs shard-of "$SECTION")"
+          if [ "$actual_shard" != "$EXPECTED_SHARD" ]; then
+            echo "::error::section-to-shard mapping changed after matrix resolution; refusing to publish to stale shard (expected $EXPECTED_SHARD, checkout maps to $actual_shard)"
+            exit 1
+          fi
+          echo "FAST_PUBLISH_SHARD=$actual_shard" >> "$GITHUB_ENV"
 
       - name: Set up Node
         if: needs.resolve.outputs.skip != 'true'
@@ -712,7 +730,15 @@ jobs:
           set -euo pipefail
           summary="$RUNNER_TEMP/fast-summary.json"
           dist="$RUNNER_TEMP/fast-dist"
-          shard="${{ matrix.target.shard }}"
+          shard="$FAST_PUBLISH_SHARD"
+          push_log="$RUNNER_TEMP/article-shard-push.log"
+          push_state="$RUNNER_TEMP/published-push-state.tsv"
+          pushed_hub_paths="$RUNNER_TEMP/pushed-hub-paths.tsv"
+          pushed_hub_summary="$RUNNER_TEMP/pushed-hub-landing.json"
+          : > "$push_log"
+          printf 'shard\tlocale\tstatus\n' > "$push_state"
+          : > "$pushed_hub_paths"
+          exec > >(tee -a "$push_log") 2>&1
 
           # UN SOLO push per locale, articolo + hub insieme.
           #
@@ -748,13 +774,41 @@ jobs:
             # esprimevano: l'articolo è duro, l'hub è morbido («the hub stays stale, the
             # article is unaffected»). Se il push combinato fallisce si riprova col solo
             # articolo, così una pagina hub malformata non può impedire la pubblicazione.
-            if ! bash scripts/lib/push-article-shard-incremental.sh \
+            locale_status="$RUNNER_TEMP/article-shard-push-$loc.status"
+            rm -f "$locale_status"
+            combined_pushed=true
+            if ! ARTICLE_PUSH_STATUS_FILE="$locale_status" bash scripts/lib/push-article-shard-incremental.sh \
                  "$shard" "$loc" "$dist" "${paths[@]}" ${hpaths[@]+"${hpaths[@]}"}; then
               echo "::warning::combined push failed for $shard/$loc — retrying with the article alone (the hub stays stale)"
-              bash scripts/lib/push-article-shard-incremental.sh \
+              combined_pushed=false
+              rm -f "$locale_status"
+              ARTICLE_PUSH_STATUS_FILE="$locale_status" bash scripts/lib/push-article-shard-incremental.sh \
                 "$shard" "$loc" "$dist" "${paths[@]}"
             fi
+            push_status="$(tr -d '\r\n' < "$locale_status")"
+            case "$push_status" in
+              pushed|clean-no-op) ;;
+              *)
+                echo "::error::unexpected push status for $shard/$loc: $push_status"
+                exit 1
+                ;;
+            esac
+            printf '%s\t%s\t%s\n' "$shard" "$loc" "$push_status" >> "$push_state"
+            if [ "$combined_pushed" = true ]; then
+              for hpath in "${hpaths[@]}"; do
+                printf '%s\t%s\n' "$loc" "$hpath" >> "$pushed_hub_paths"
+              done
+            fi
           done
+
+          # A combined push may fall back to the article alone. Build the hub
+          # summary from the paths that went through a successful combined push,
+          # so a stale landing can never enter the served-content TSV or purge.
+          jq -R -s '
+            split("\n")
+            | map(select(length > 0) | split("\t") | {locale: .[0], path: .[1]})
+            | {pages: .}
+          ' "$pushed_hub_paths" > "$pushed_hub_summary"
 
           while IFS=$'\t' read -r local key; do
             [ -n "$local" ] || continue
@@ -782,6 +836,32 @@ jobs:
               echo "::warning::no hub-landing.json — the landing grid was not refreshed for this article"
             fi
           fi
+
+          # Read the bytes after the publisher's CDN offload and after the hub
+          # refresh. These are the bytes that the shard push received, not a
+          # second render and not an HTML marker.
+          node scripts/ci/verify-served-fingerprint.mjs write \
+            --summary "$summary" \
+            --hub-summary "$pushed_hub_summary" \
+            --dist "$dist" \
+            --shard "$shard" \
+            --output "$RUNNER_TEMP/published-fingerprints.tsv"
+
+      - name: Wait for GitHub Pages origin to serve published content
+        if: needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
+        env:
+          PAGES_WAIT_SECONDS: ${{ vars.FAST_PUBLISH_PAGES_WAIT_SECONDS || '720' }}
+        run: |
+          set -euo pipefail
+          args=(
+            wait-origin
+            --fingerprints "$RUNNER_TEMP/published-fingerprints.tsv"
+            --push-state "$RUNNER_TEMP/published-push-state.tsv"
+            --timeout-seconds "$PAGES_WAIT_SECONDS"
+            --poll-seconds 15
+            --run-key "${GITHUB_RUN_ID}.${GITHUB_RUN_ATTEMPT}.${FAST_PUBLISH_SHARD}"
+          )
+          node scripts/ci/verify-served-fingerprint.mjs "${args[@]}"
 
       - name: Purge the edge cache for what was published
         if: needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
@@ -840,7 +920,7 @@ jobs:
           # The landing pages too, or the grid we just refreshed sits behind a
           # 4h edge cache and the article stays invisible on the page readers
           # land on — the exact symptom this refresh exists to fix.
-          hub="$RUNNER_TEMP/hub-landing.json"
+          hub="$RUNNER_TEMP/pushed-hub-landing.json"
           if [ -s "$hub" ]; then
             while IFS=$'\t' read -r loc rel; do
               [ -n "$rel" ] || continue
@@ -891,6 +971,7 @@ jobs:
           bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files-from=$RUNNER_TEMP/edge-purge-urls.txt"
 
       - name: Verify the article is actually readable
+        id: verify_served_fingerprint
         if: needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
         run: |
           set -euo pipefail
@@ -898,6 +979,44 @@ jobs:
           summary="$RUNNER_TEMP/fast-summary.json"
           shard="${{ matrix.target.shard }}"
           owner="$(jq -r --arg s "$shard" '.[$s] // "valerielinc-ops"' scripts/lib/section-shard-owners.json)"
+
+          # The first purge ran before this step. Check the canonical apex URL
+          # against the bytes recorded after the push; a 200 with old HTML is
+          # not proof that the edge is fresh. One retry covers purge
+          # propagation or a transient Cloudflare miss. A mismatch that
+          # survives that retry is warning-only: the origin gate below is the
+          # publish proof, while the apex can lag across Cloudflare PoPs. An
+          # edge-blocked probe (exit 2) is a transport result, so record it and
+          # skip both the retry here and the post-verification backstop purge
+          # below.
+          verify_apex() {
+            node scripts/ci/verify-served-fingerprint.mjs verify-apex \
+              --fingerprints "$RUNNER_TEMP/published-fingerprints.tsv"
+          }
+          if verify_apex; then
+            :
+          else
+            verify_rc=$?
+            if [ "$verify_rc" -eq 2 ]; then
+              echo "edge_probe_blocked=true" >> "$GITHUB_OUTPUT"
+              echo "::error::edge probe blocked (exit 2) — skipping the post-verification backstop purge"
+              exit "$verify_rc"
+            fi
+            echo "::warning::the apex served content different from the pushed fingerprints — repeating the targeted purge once"
+            bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs \
+              "--files-from=$RUNNER_TEMP/edge-purge-urls.txt"
+            if verify_apex; then
+              :
+            else
+              verify_rc=$?
+              if [ "$verify_rc" -eq 2 ]; then
+                echo "edge_probe_blocked=true" >> "$GITHUB_OUTPUT"
+                echo "::error::edge probe blocked (exit 2) after the retry — skipping the post-verification backstop purge"
+                exit "$verify_rc"
+              fi
+              echo "::warning::the apex still served content different from the pushed fingerprints after the retry — continuing with the origin hard gate"
+            fi
+          fi
 
           # Two checks, deliberately different in strength, because they answer
           # different questions.
@@ -1288,7 +1407,10 @@ jobs:
         # when a negative entry is most likely to be sitting in the cache.
         # Skipping the cleanup on failure would leave that 404 behind on exactly
         # the runs that needed the cleanup most.
-        if: always() && needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
+        # EDGE_PROBE_BLOCKED is a transport result, not evidence that another
+        # purge is needed. The verification step records it so this backstop
+        # can preserve the failure without sending a blind purge request.
+        if: always() && needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true' && steps.verify_served_fingerprint.outputs.edge_probe_blocked != 'true'
         run: |
           set -euo pipefail
 

@@ -35,6 +35,7 @@ import { isExplicitNonFunnelDisposition, isMalformedReviewBody } from './lib/rev
 import { intFromEnv } from '../lib/int-from-env.mjs';
 import { ACCEPTANCE_CONDITION, hasEnumeratedItems } from './followup-resolution-match.mjs';
 import { isAggregate, isAggregateForAnalytics } from './check-issue-already-resolved.mjs';
+import { pinnedBy } from './manifest-pinned-issues.mjs';
 
 export { hasEnumeratedItems };
 
@@ -65,6 +66,7 @@ export const SEARCH_RESULT_CAP = 1000;
 // `gh pr view` / `gh issue view`, che paginano.
 export const NESTED_PAGE_CAP = 100;
 const OUT = process.env.HARVEST_OUT || 'harvest-clusters.json';
+const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
 const NO_AUTOCLOSE = process.env.FOLLOWUP_NO_AUTOCLOSE === '1' || process.env.NO_AUTOCLOSE === '1';
 // EFFICACY_FACTOR: a documented pattern that STILL recurs at ≥ THRESHOLD×factor
 // is evidence the prose rule isn't preventing the mistake → escalate to a
@@ -449,7 +451,7 @@ function fingerprintFinding(text) {
 //       diligence, not a confirmed defect. tallyFindings already skips ❓ via
 //       COUNTABLE_SEVERITIES; the classifier repeats the rule so a direct call
 //       cannot reintroduce them.
-// Crucially the deterministic gate `pr-body-contract.yml` ALREADY enforces section
+// Crucially the deterministic gate `tests.yml` ALREADY enforces section
 // PRESENCE (`hasImpl`/`hasNon`, multi-issue `Closes`) and the next-step check
 // already accepts `per scelta` / `by construction` as motivated decisions — the
 // structural fix for missing-section / no-plan violations already shipped. The
@@ -864,7 +866,7 @@ export function bucketFinding(text) {
     }
     // pr-body-contract: drop affirmations / location-label false positives so the
     // bucket counts only genuine contract violations (the deterministic gate
-    // pr-body-contract.yml already blocks missing sections). Falls through to the
+    // tests.yml body-contract step already blocks missing sections). Falls through to the
     // next matching taxonomy entry / fingerprint net so a co-mentioned real defect
     // (sibling-class-fix, stale-comment) still clusters in its own bucket.
     if (t.key === 'pr-body-contract' && !isGenuinePrBodyContractViolation(text)) continue;
@@ -1244,6 +1246,10 @@ export function isAvoidableOverlapSkip(title, labels, hasDeliveredPr = false) {
 // e context nel summary del harvest restano visibili); smette solo di poter
 // aprire una PR di regole. Il segnale di capacità ha già la sua sede giusta: il
 // failure-rate di `issue-fix.yml` nel tracker #1951 (loop-health-report).
+// `blocked-secrets` (site #13396, instradata dal corpus #2765): il marker copre
+// blocchi esterni diagnosticati correttamente — credenziali/provider o scrittura
+// Remote Config. Non descrive una violazione prevenibile con una regola agentica;
+// resta nel volume del report, ma non puo' aprire una falsa escalation.
 // `skip-duplicate-diagnosis` (2026-08-08, #5288): emesso SOLO dal Mode 2 di
 // check-workflows-scope.mjs, cioè quando una issue con titolo identico a una
 // precedente già diagnosticata viene short-circuitata PRIMA di spendere un turno
@@ -1272,6 +1278,7 @@ export function isEscalationDriver(source, key) {
   const bareKey = key.startsWith(`${source}:`) ? key.slice(source.length + 1) : key;
   if (source === 'fix-outcome' && bareKey === 'no-root-cause') return false;
   if (source === 'fix-outcome' && bareKey === 'rate-limited') return false;
+  if (source === 'fix-outcome' && bareKey === 'blocked-secrets') return false;
   if (source === 'fix-outcome' && bareKey === 'skip-duplicate-diagnosis') return false;
   if (source === 'fix-outcome' && bareKey === 'overlap-skip') return false;
   if (source === 'fix-outcome' && bareKey === 'pr-already-open') return false;
@@ -1554,7 +1561,7 @@ export function measureBucket({ source, count, examples = [], escalationCutoff =
 // (`scripts/lib/classify-issue.mjs`) e del veto `KEEP_OPEN_LABELS` di
 // `reconcile-followups.mjs`: tenuta qui e non importata perche' questo file
 // scende `identical` nel corpus, e la parita' la verifica un test.
-export const SELF_HEAL_PIN_LABELS = Object.freeze(['keep-open', 'agent:no-age-out', 'pinned', 'tracker',
+export const SELF_HEAL_PIN_LABELS = Object.freeze(['keep-open', 'agent:no-age-out', 'operations-audit-review', 'pinned', 'tracker',
   'do-not-close', 'revenue']);
 // Claim del fixer: una issue in lavorazione non si chiude sotto i suoi piedi.
 export const SELF_HEAL_CLAIM_LABEL = 'agent:in-progress';
@@ -2261,6 +2268,11 @@ async function main() {
     for (const iss of openEsc) {
       const key = parseEscalationKey(iss.title);
       if (liveKeys.has(key)) continue; // ancora attivo → lascia aperta
+      const pinnedEntry = pinnedBy(iss.number, REPO);
+      if (pinnedEntry) {
+        console.log(`SELF-HEAL close skipped #${iss.number} — manifest pin ${pinnedEntry}`);
+        continue;
+      }
       if (NO_AUTOCLOSE) {
         console.log(`SELF-HEAL close skipped #${iss.number} — no-autoclose`);
         continue;

@@ -640,10 +640,10 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-tuffe-falsi-poliziotti-vaud.webp`,
+        "url": `${BASE_URL}/images/blog/article-truffa-falsi-poliziotti-vaud.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Anziano che riceve una chiamata sospetta da finto polizioso sul divano, con sfondo di una casa tipica del canton Vaud"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-18T07:26:28+00:00",
       "dateModified": "2026-10-18T07:26:28+00:00",

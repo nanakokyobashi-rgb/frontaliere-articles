@@ -260,6 +260,41 @@ export function shortHeadlineTokenPolicy(token) {
 }
 
 /**
+ * Normalize the optional share threshold without allowing JavaScript's
+ * comparison coercions to turn malformed configuration into a permissive
+ * match. `null` is the fail-closed result for every non-finite or out-of-range
+ * value; callers may still distinguish it from the valid boundary `0`.
+ *
+ * @param {unknown} minShare
+ * @returns {number | null}
+ */
+export function normalizeTitleEvidenceShare(minShare) {
+  if (minShare === undefined) return ITEM_ON_PAGE_MIN_SHARE;
+  return typeof minShare === 'number'
+    && Number.isFinite(minShare)
+    && minShare >= 0
+    && minShare <= 1
+    ? minShare
+    : null;
+}
+
+/**
+ * Accept only the documented title-evidence shape before any string coercion.
+ * Sparse arrays are invalid too: every declaration must be an actual string.
+ *
+ * @param {unknown} titleEvidence
+ * @returns {boolean}
+ */
+export function validateTitleEvidenceShape(titleEvidence) {
+  if (typeof titleEvidence === 'string') return true;
+  if (!Array.isArray(titleEvidence)) return false;
+  for (let index = 0; index < titleEvidence.length; index++) {
+    if (!Object.hasOwn(titleEvidence, index) || typeof titleEvidence[index] !== 'string') return false;
+  }
+  return true;
+}
+
+/**
  * Select title evidence only when every nonempty declaration agrees after the
  * same normalization used for headline comparison. Conflicting metadata does
  * not become positive evidence merely because one declaration happens to match.
@@ -268,14 +303,21 @@ export function shortHeadlineTokenPolicy(token) {
  * @returns {string} the first consistent declaration, or '' when absent/conflicting
  */
 export function selectConsistentTitleEvidence(titleEvidence) {
+  if (!validateTitleEvidenceShape(titleEvidence)) return '';
   const declarations = Array.isArray(titleEvidence) ? titleEvidence : [titleEvidence];
   const lines = declarations
-    .flatMap((declaration) => String(declaration ?? '').split(/\r\n|[\r\n]/u))
-    .map((line) => String(line ?? '').trim())
+    .flatMap((declaration) => declaration.split(/\r\n|[\r\n]/))
+    .map((line) => line.trim())
     .filter(Boolean);
   if (lines.length === 0) return '';
 
-  const normalized = new Set(lines.map(normalizeItemText).filter(Boolean));
+  // A raw, non-empty declaration that normalizes to nothing (for example an
+  // entity or punctuation-only title) is still a declaration. Dropping it
+  // would let a matching sibling become positive evidence by accident.
+  const normalizedLines = lines.map(normalizeItemText);
+  if (normalizedLines.some((line) => !line)) return '';
+
+  const normalized = new Set(normalizedLines);
   return normalized.size === 1 ? lines[0] : '';
 }
 
@@ -284,7 +326,7 @@ export function selectConsistentTitleEvidence(titleEvidence) {
  * titolo risultante coincide con l'intero item. Il corpo non basta: parole come
  * «Stau» possono comparire in una pagina diversa o nella sua navigazione.
  *
- * @param {string} titleEvidence titoli da `pageTitleEvidence()`
+ * @param {string | string[]} titleEvidence titoli da `pageTitleEvidence()`
  * @param {string} headline
  * @returns {boolean}
  */
@@ -301,25 +343,30 @@ export function shortHeadlineEvidence(titleEvidence, headline) {
 }
 
 /**
- * Il testo porta almeno il 60% delle parole distintive (almeno 4 caratteri visibili)?
- * Sulle parole e non sulla frase: una pagina non sempre ripete il titolo alla
- * lettera. Con meno di due parole distintive il corpo e' evidenza debole e
- * serve la corrispondenza esatta con un titolo dichiarato dalla pagina.
+ * Il corpo e i titoli coerenti della pagina portano almeno il 60% delle parole
+ * distintive (almeno 4 caratteri visibili)? Sulle parole e non sulla frase: una
+ * pagina non sempre ripete il titolo alla lettera. Con meno di due parole
+ * distintive il corpo e' evidenza debole e serve la corrispondenza esatta con
+ * un titolo dichiarato dalla pagina.
  *
  * @param {string} text
  * @param {string} headline
- * @param {{ minShare?: number, titleEvidence?: string }} [options]
+ * @param {{ minShare?: number, titleEvidence?: string | string[] }} [options]
  * @returns {boolean}
  */
 export function pageCarriesItem(text, headline, {
   minShare = ITEM_ON_PAGE_MIN_SHARE,
   titleEvidence = '',
 } = {}) {
+  const normalizedMinShare = normalizeTitleEvidenceShare(minShare);
+  if (normalizedMinShare === null) return false;
+  if (!validateTitleEvidenceShape(titleEvidence)) return false;
   const words = [...new Set(normalizeItemText(headline).split(' ').filter(shortHeadlineTokenPolicy))];
   if (words.length < 2) return shortHeadlineEvidence(titleEvidence, headline);
-  const page = new Set(normalizeItemText(text).split(' '));
+  const consistentTitle = selectConsistentTitleEvidence(titleEvidence);
+  const page = new Set(normalizeItemText(`${consistentTitle}\n${text}`).split(' '));
   const found = words.filter((w) => page.has(w)).length;
-  return found / words.length >= minShare;
+  return found / words.length >= normalizedMinShare;
 }
 
 // A `<textarea>` or `<title>` is active document content when it appears in
@@ -894,9 +941,9 @@ export function pageTitleEvidence(html, opts = {}) {
  */
 export function checkItemOnPage(page, item) {
   const titleEvidence = String(page?.title || '');
-  const evidence = `${titleEvidence}\n${page?.text || ''}`;
-  if (!evidence.trim()) return { ok: false, reason: 'no-page' };
-  if (!pageCarriesItem(evidence, item?.headline || '', { titleEvidence })) {
+  const body = String(page?.text || '');
+  if (!titleEvidence.trim() && !body.trim()) return { ok: false, reason: 'no-page' };
+  if (!pageCarriesItem(body, item?.headline || '', { titleEvidence })) {
     return { ok: false, reason: 'title-not-on-page' };
   }
   const dayOf = (raw) => {

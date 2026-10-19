@@ -240,6 +240,14 @@ jobs:
       - name: Install generator dependencies
         run: bash scripts/lib/npm-ci-retry.sh --no-audit --no-fund
 
+      # This focused integration test exercises the real jsdom-backed HTML
+      # extractor. Keep it in this dependency-installed lane so the required
+      # dependency-free node:test gates above remain install-free. The
+      # `.integration.mjs` suffix also keeps generic test auto-discovery from
+      # importing jsdom before dependencies are installed.
+      - name: Extract article text from noscript fallbacks
+        run: node --test generator/integration/extract-article-text-noscript.integration.mjs
+
       # generate-border-wait-ranking-article.mjs now REQUIRES the fetched window
       # (it is the article's data). Fetch it first so the dry-run exercises the
       # real path instead of the missing-cache error branch.

@@ -10,8 +10,8 @@
     "keyForm": 2
   },
   "https://syna.ch/aargau/ag-aktuell/lohngleichheit-im-kanton-aargau-jetzt": {
-    "articleId": "argovia-parita-salariale",
-    "ts": "2026-10-07T19:59:34.749Z",
+    "articleId": "iniziativa-parita-salariale-ag",
+    "ts": "2026-10-18T17:13:03.705Z",
     "keyForm": 2
   },
   "https://www.suedkurier.de/hochrhein/hochrheinbahn-schienenersatzverkehr-ab-10-oktober-2026-zwischen-basel-und-rheinfelden-7-115396006": {
@@ -47,6 +47,11 @@
   "https://www.aarau24.ch/articles/410101-trotz-gefahr-kanton-will-kampfhunde-nicht-verbieten": {
     "articleId": "argovia-cani-divieto-respinto",
     "ts": "2026-10-12T06:22:16.197Z",
+    "keyForm": 2
+  },
+  "https://www.watson.ch/schweiz/fdp/538138896-fdp-nationalraetin-maja-riniker-in-aargauer-regierung-gewaehlt": {
+    "articleId": "riniker-governo-argovia",
+    "ts": "2026-10-18T16:09:14.876Z",
     "keyForm": 2
   }
 }

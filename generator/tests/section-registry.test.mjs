@@ -1211,7 +1211,8 @@ test('edge: il bootstrap live tiene il lock fino al rilascio prima del flip', as
 
 test('edge: il lease R2 copre il timeout bootstrap massimo e il tombstone resta scaduto', () => {
   const fastPublish = readFileSync(path.join(ROOT, '.github/workflows/fast-publish-section.yml'), 'utf8');
-  const publishJob = fastPublish.match(/\n  publish:\n([\s\S]*?)(?=\n  replay-api-after-bootstrap:)/)?.[1];
+  const publishJob = fastPublish.match(/\n  publish:\n([\s\S]*?)(?=\n  [a-z0-9_-]+:)/)?.[1]
+    ?? fastPublish.slice(fastPublish.indexOf('\n  publish:\n'));
   const fastPublishTimeoutMinutes = Number(publishJob?.match(/^\s+timeout-minutes:\s+(\d+)\s*$/m)?.[1]);
   assert.ok(Number.isFinite(fastPublishTimeoutMinutes) && fastPublishTimeoutMinutes > 0, 'timeout job fast-publish assente');
   const publishApi = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
@@ -1608,6 +1609,12 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.match(wf, /Verify bounded replay source is still main/);
   assert.match(wf, /gh api "repos\/\$REPOSITORY\/git\/ref\/heads\/main"/);
   assert.match(wf, /SOURCE_COMMIT: \$\{\{ inputs\.source_commit \}\}/);
+  assert.match(wf, /git fetch --no-tags origin main/);
+  assert.match(wf, /git merge-base --is-ancestor "\$SOURCE_COMMIT" "\$current_main"/);
+  assert.match(wf, /apiInputChangedInRange/);
+  assert.match(wf, /git checkout --detach "\$current_main"/);
+  assert.match(wf, /PUBLISH_API_SOURCE_COMMIT=\$current_main/);
+  assert.match(wf, /nessun input publish-api nel delta/);
   const filters = [...wf.slice(0, wf.indexOf('\n  schedule:')).matchAll(/^      - '([^']+)'$/gm)].map((m) => m[1]);
   const covered = (file) => filters.some((p) => p === file || (p.endsWith('/**') && file.startsWith(p.slice(0, -2))));
   for (const p of ['sections/**', 'scripts/lib/section-registry.mjs', 'scripts/publish-section-edge.mjs', 'scripts/lib/delete-cdn-file.sh', 'generator/scripts/load-rc-env.mjs']) {

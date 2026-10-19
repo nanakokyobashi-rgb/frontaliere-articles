@@ -24,6 +24,21 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.rheineck-mels-aquaplaning.title': 'Rheineck and Mels: two hydroplaning accidents',
     'blog.article.rheineck-mels-aquaplaning.excerpt': 'Two cars hit the guardrails on October 10, 2026 Separate accidents on A1 and N13 The two drivers were not injured Damage: approximately CHF 35\'000 and CHF 4\'000',
     'blog.article.rheineck-mels-aquaplaning.imageAlt': 'Rain-soaked motorway in the Canton of St. Gallen with guardrails',
+    'blog.article.hsg-optime-orario-lavoro.title': 'HSG leads EU study on reducing working hours',
+    'blog.article.hsg-optime-orario-lavoro.excerpt': 'The University of St.',
+    'blog.article.hsg-optime-orario-lavoro.imageAlt': 'University of St. Gallen campus in an editorial scene about work research',
+    'blog.article.sondaggio-imprese-st-gallen-2026.title': 'St.Gallen launches the business survey',
+    'blog.article.sondaggio-imprese-st-gallen-2026.excerpt': 'The city of St.Gallen is launching a survey aimed at businesses to assess the business location.',
+    'blog.article.sondaggio-imprese-st-gallen-2026.imageAlt': 'City of St. Gallen, business survey and consultation',
+    'blog.article.voto-bahnhofplatz-wil-2026.title': 'Vote on Bahnhofplatz Wil: credit of 63,66 million',
+    'blog.article.voto-bahnhofplatz-wil-2026.excerpt': 'On November 29, 2026, the citizens of Wil will vote on the project for the new bus terminal, bicycle station, and redevelopment of the station.',
+    'blog.article.voto-bahnhofplatz-wil-2026.imageAlt': 'Bahnhofplatz in Wil, Canton of St. Gallen',
+    'blog.article.status-s-san-gallo-assistenza.title': 'St. Gallen: reduced assistance for Status S holders',
+    'blog.article.status-s-san-gallo-assistenza.excerpt': 'The commission proposes reduced assistance even after the permit.',
+    'blog.article.status-s-san-gallo-assistenza.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.voto-rete-gas-wil-2026.title': 'Wil: vote on the gas network on November 29, 2026',
+    'blog.article.voto-rete-gas-wil-2026.excerpt': 'Vote on the fund: November 29, 2026.',
+    'blog.article.voto-rete-gas-wil-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

@@ -30,6 +30,8 @@
  *   respinto o non e' partito.
  */
 import { spawnSync } from 'node:child_process';
+import { realpathSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
 
 import { pinnedBy } from './manifest-pinned-issues.mjs';
 
@@ -241,7 +243,10 @@ function parseArgs(argv) {
   };
 }
 
-if (process.argv[1]?.endsWith('resolve-issue-verified.mjs')) {
+if ((() => {
+  try { return import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href; }
+  catch { return false; }
+})()) {
   const options = parseArgs(process.argv.slice(2));
   if (!options.number && !options.title) {
     console.error('::error::resolve-issue-verified: serve --number <n> oppure --title "..."');
