@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-19T15:24:57.777Z",
-  "contentHash": "97e6e17d29ccf3d1c5e850130049c6c20053b4101ae7d0c17c0142a395255026",
+  "updatedAt": "2026-10-19T16:28:33.307Z",
+  "contentHash": "e5a13a676c3d4cc70bff356dc198cddddb9d161d252d8f69f26690b5ceff9cd7",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell: Walzthöny non è più direttrice dell'Oberstufe",
+          "url": "/articoli-appenzello/cambio-dirigenza-scuola-appenzell/",
+          "excerpt": "Isabella Walzthöny iniziò il 1° febbraio 2023 alla Schulgemeinde Appenzell, dopo la designazione come successora di Thomas Mainberger.",
+          "date": "2026-10-19T16:21:04.781Z"
+        },
+        {
           "title": "Teufen: preventivo 2027 per ridurre il deficit operativo",
           "url": "/articoli-appenzello/teufen-budget-deficit-2027/",
           "excerpt": "Il Comune di Teufen prevede per il 2027 entrate fiscali di 38,9 milioni di franchi, in aumento del 2,2% rispetto al preventivo precedente.",
@@ -94,12 +100,6 @@
           "url": "/articoli-appenzello/eventi-weekend-appenzello/",
           "excerpt": "Eventi in Appenzello ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
           "date": "2026-10-17T11:26:40.822Z"
-        },
-        {
-          "title": "Appenzello: tasso fiscale previsto a 3,90 unità",
-          "url": "/articoli-appenzello/appenzello-tasso-fiscale-390/",
-          "excerpt": "Il preventivo 2027 prevede un disavanzo di CHF 323'670: il tasso fiscale dovrebbe salire a 3,90 unità.",
-          "date": "2026-10-17T00:31:56.459Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-19T15:24:57.777Z"
+      "updatedAt": "2026-10-19T16:28:33.307Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell: Walzthöny is no longer head of the Oberstufe",
+          "url": "/en/appenzell-articles/appenzell-school-leadership-change/",
+          "excerpt": "Isabella Walzthöny began at Schulgemeinde Appenzell on February 1, 2023, after being appointed as Thomas Mainberger’s successor.",
+          "date": "2026-10-19T16:21:04.781Z"
+        },
+        {
           "title": "Teufen: 2027 budget proposal to reduce the operating deficit",
           "url": "/en/appenzell-articles/teufen-2027-budget-deficit/",
           "excerpt": "The Municipality of Teufen expects tax revenues of 38,9 million francs in 2027, an increase of 2,2% compared with the previous budget.",
@@ -193,12 +199,6 @@
           "url": "/en/appenzell-articles/weekend-events-appenzell/",
           "excerpt": "Events in Appenzell every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
           "date": "2026-10-17T11:26:40.822Z"
-        },
-        {
-          "title": "Appenzell: projected tax rate at 3,90 units",
-          "url": "/en/appenzell-articles/appenzell-tax-rate-390/",
-          "excerpt": "The 2027 budget forecasts a deficit of CHF 323'670: the tax rate should rise to 3,90 units.",
-          "date": "2026-10-17T00:31:56.459Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-19T15:24:57.777Z"
+      "updatedAt": "2026-10-19T16:28:33.307Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell: Walzthöny ist nicht mehr Leiterin der Oberstufe",
+          "url": "/de/appenzell-artikel/appenzell-schulleitung-wechsel/",
+          "excerpt": "Isabella Walzthöny begann am 1.",
+          "date": "2026-10-19T16:21:04.781Z"
+        },
+        {
           "title": "Teufen: Budget 2027 zur Verringerung des operativen Defizits",
           "url": "/de/appenzell-artikel/teufen-voranschlag-defizit-2027/",
           "excerpt": "Die Gemeinde Teufen erwartet für 2027 Steuereinnahmen von 38,9 Millionen Franken, was einem Anstieg von 2,2% gegenüber dem vorherigen Budget entspricht.",
@@ -292,12 +298,6 @@
           "url": "/de/appenzell-artikel/wochenend-veranstaltungen-appenzell/",
           "excerpt": "Veranstaltungen im Appenzellerland an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
           "date": "2026-10-17T11:26:40.822Z"
-        },
-        {
-          "title": "Appenzell: Voraussichtlicher Steuerfuss bei 3,90 Einheiten",
-          "url": "/de/appenzell-artikel/appenzell-steuerfuss-390/",
-          "excerpt": "Der Voranschlag 2027 sieht ein Defizit von CHF 323'670 vor: Der Steuerfuss soll auf 3,90 Einheiten steigen.",
-          "date": "2026-10-17T00:31:56.459Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-19T15:24:57.777Z"
+      "updatedAt": "2026-10-19T16:28:33.307Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Appenzell : Walzthöny n'est plus directrice de l'Oberstufe",
+          "url": "/fr/articles-appenzell/appenzell-changement-direction-ecole/",
+          "excerpt": "Isabella Walzthöny a pris ses fonctions le 1er février 2023 à la Schulgemeinde Appenzell, après avoir été désignée comme successeure de Thomas Mainberger.",
+          "date": "2026-10-19T16:21:04.781Z"
+        },
+        {
           "title": "Teufen : budget 2027 pour réduire le déficit opérationnel",
           "url": "/fr/articles-appenzell/teufen-budget-2027-pour-reduire-le-deficit-operationnel/",
           "excerpt": "La commune de Teufen prévoit pour 2027 des recettes fiscales de 38,9 millions de francs, en hausse de 2,2% par rapport au budget précédent.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-appenzell/evenements-week-end-appenzell/",
           "excerpt": "Événements en Appenzell chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
           "date": "2026-10-17T11:26:40.822Z"
-        },
-        {
-          "title": "Appenzell : taux d'imposition prévu à 3,90 unités",
-          "url": "/fr/articles-appenzell/appenzell-taux-fiscal-390/",
-          "excerpt": "Le budget 2027 prévoit un déficit de CHF 323'670 : le taux d'imposition devrait passer à 3,90 unités.",
-          "date": "2026-10-17T00:31:56.459Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-19T15:24:57.777Z"
+      "updatedAt": "2026-10-19T16:28:33.307Z"
     }
   }
 }
