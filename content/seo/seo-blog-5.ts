@@ -111977,6 +111977,84 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-indagini-morte-pierina-buffon': {
+    title: 'Morte pierina buffon: accertamenti a cassano e gallarate',
+    description: 'Venerdì mattina lo schianto a Cassano Magnago La Jaguar sarebbe stata lanciata a 140 chilometri orari La Procura valuta la pianificazione del delitto Accesso',
+    keywords: 'frontalieri, ticino, svizzera, italia, morte, pierina, buffon, accertamenti',
+    ogTitle: 'Morte Pierina Buffon: indagini e accertamenti a Cassano',
+    ogDescription: 'Venerdì mattina lo schianto a Cassano Magnago La Jaguar sarebbe stata lanciata a 140 chilometri orari La Procura valuta la pianificazione del delitto Accesso',
+    canonicalPath: '/articoli-frontaliere/indagini-morte-pierina-buffon/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Morte pierina buffon: accertamenti a cassano e gallarate",
+      "description": "Venerdì mattina lo schianto a Cassano Magnago La Jaguar sarebbe stata lanciata a 140 chilometri orari La Procura valuta la pianificazione del delitto Accesso",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-indagini-morte-pierina-buffon.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Accertamenti e rilievi investigativi sull'auto coinvolta"
+      },
+      "datePublished": "2026-10-19T05:57:44+00:00",
+      "dateModified": "2026-10-19T05:57:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/indagini-morte-pierina-buffon/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sagra-zucca-castagna-cunardo': {
+    title: 'A Cunardo la quinta Sagra della zucca e della castagna',
+    description: 'Quinta edizione alla Baita del Fondista di Cunardo Da venerdì 23 a domenica 25 ottobre Cena del venerdì: novità del programma Sabato musica dalle 21 Cosa: Sagra',
+    keywords: 'frontalieri, ticino, svizzera, italia, cunardo, quinta, sagra, zucca',
+    ogTitle: 'A Cunardo la quinta Sagra della zucca e della castagna',
+    ogDescription: 'Quinta edizione alla Baita del Fondista di Cunardo Da venerdì 23 a domenica 25 ottobre Cena del venerdì: novità del programma Sabato musica dalle 21 Cosa: Sagra',
+    canonicalPath: '/articoli-frontaliere/sagra-zucca-castagna-cunardo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "A Cunardo la quinta Sagra della zucca e della castagna",
+      "description": "Quinta edizione alla Baita del Fondista di Cunardo Da venerdì 23 a domenica 25 ottobre Cena del venerdì: novità del programma Sabato musica dalle 21 Cosa: Sagra",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sagra-zucca-castagna-cunardo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sagra della zucca e della castagna alla Baita del Fondista di Cunardo"
+      },
+      "datePublished": "2026-10-19T07:18:02+00:00",
+      "dateModified": "2026-10-19T07:18:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sagra-zucca-castagna-cunardo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

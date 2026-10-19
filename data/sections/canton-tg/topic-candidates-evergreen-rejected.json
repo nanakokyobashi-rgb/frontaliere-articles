@@ -4,13 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-tg::https://www.suedkurier.de/kreis-konstanz/seehaesle-strecke-arbeiten-am-bahnuebergang-unterbrechen-zugverkehr-115512894": {
-      "section": "canton-tg",
-      "ts": 1792196739855
-    },
     "canton-tg::https://awa.tg.ch/public/upload/assets/34935/infoblatt_was_tun_bei_ausstehendem_lohn.pdf?fp=1": {
       "section": "canton-tg",
-      "ts": 1792196743246
+      "ts": 1792388979430
     }
   }
 }

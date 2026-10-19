@@ -10,6 +10,8 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'berna-familiari-curanti-incontro': { it: 'berna-familiari-curanti-incontro', en: 'bern-caregiving-relatives-meeting', de: 'bern-pflegende-angehoerige-treffen', fr: 'berne-proches-aidants-rencontre' },
  'cyberattacco-casse-pensione-berna': { it: 'cyberattacco-casse-pensione-berna', en: 'cyberattack-bern-pension-funds', de: 'cyberangriff-berner-pensionskassen', fr: 'cyberattaque-caisses-pension-berne' },
  'traffico-berna-manifestazione': { it: 'traffico-berna-manifestazione', en: 'bern-traffic-demonstration', de: 'bern-verkehr-kundgebung', fr: 'berne-trafic-manifestation' },
+ 'berna-tassa-ecclesiastica': { it: 'berna-tassa-ecclesiastica', en: 'bern-church-tax-legal-entities', de: 'bern-kirchensteuer-juristische-personen', fr: 'berne-taxe-eglise-personnes-morales' },
+ 'amministrazione-fiscale-berna-chiusura-2026': { it: 'amministrazione-fiscale-berna-chiusura-2026', en: 'bern-tax-administration-closure-2026', de: 'steuerverwaltung-bern-schliessung-2026', fr: 'administration-fiscale-berne-fermeture-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

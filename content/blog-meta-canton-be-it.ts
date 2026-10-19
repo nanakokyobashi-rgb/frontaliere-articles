@@ -24,6 +24,12 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.traffico-berna-manifestazione.title': 'Berna: possibili disagi per manifestazione non autorizzata',
     'blog.article.traffico-berna-manifestazione.excerpt': 'Berna segnala possibili chiusure stradali e disagi domenica 11 ottobre 2026 per una manifestazione non autorizzata: indicazioni per chi viaggia in città.',
     'blog.article.traffico-berna-manifestazione.imageAlt': 'Strade di Berna con possibili limitazioni del traffico domenica 11 ottobre 2026',
+    'blog.article.berna-tassa-ecclesiastica.title': 'Berna mantiene la tassa ecclesiastica per le imprese',
+    'blog.article.berna-tassa-ecclesiastica.excerpt': 'Il Governo bernese ha preso atto della petizione per rendere volontaria la tassa ecclesiastica delle persone giuridiche.',
+    'blog.article.berna-tassa-ecclesiastica.imageAlt': 'Edificio istituzionale nel Canton Berna sul tema della tassa ecclesiastica',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.title': 'Amministrazione fiscale Berna: chiusura dal 23 ottobre al 1 novembre 2026',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.excerpt': 'L\'Amministrazione fiscale del Canton Berna sospende i servizi dal 23 ottobre alle 16 fino al 1 novembre 2026 per rinnovo tecnologico.',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.imageAlt': 'Amministrazione fiscale del Canton Berna durante la chiusura temporanea',
 };
 
 export default blogMetaCantonBeIt;

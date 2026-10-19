@@ -27,6 +27,9 @@ const blogMetaCantonGeDe: Record<string, string> = {
     'blog.article.indagini-imprese-ginevrine.title': 'Konjunkturumfragen bei Genfer Unternehmen',
     'blog.article.indagini-imprese-ginevrine.excerpt': 'Die Republik und der Kanton Genf melden Konjunkturumfragen im September bei Genfer Unternehmen.',
     'blog.article.indagini-imprese-ginevrine.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.taf-regolamento-aeroporto-ginevra.title': 'Flughafen Genf: Das TAF genehmigt das Betriebsreglement',
+    'blog.article.taf-regolamento-aeroporto-ginevra.excerpt': 'Das TAF genehmigt das Betriebsreglement des Flughafens Genf Die beanstandeten Maßnahmen entsprechen den Umweltvorschriften Die Beschwerden gegen',
+    'blog.article.taf-regolamento-aeroporto-ginevra.imageAlt': 'Flughafen Genf und nahe gelegene Gemeinden',
 };
 
 export default blogMetaCantonGeDe;
