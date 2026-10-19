@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/attualita/1950676/rendite-pensionati-rendita-versamento-gennaio": {
-    "articleId": "malinteso-rendite-avs-moutier",
-    "ts": "2026-09-16T17:33:56.263Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4087039": {
     "articleId": "revolut-banca-svizzera-finma",
     "ts": "2026-09-17T00:55:00.855Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/farmaci-antiobesit%c3%a0-glp-1%3a-diversi-approcci-industria-alimentare/92238132": {
     "articleId": "impatto-glp1-industria-alimentare",
     "ts": "2026-10-19T11:07:21.267Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/bskoqvviyqjx": {
+    "articleId": "lenu-referendum-firme-valide",
+    "ts": "2026-10-19T12:13:26.628Z",
     "keyForm": 2
   }
 }

@@ -8528,6 +8528,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.impatto-glp1-industria-alimentare.title': 'GLP-1 anti-obesity drugs: impact on the food industry',
     'blog.article.impatto-glp1-industria-alimentare.excerpt': 'In Switzerland, less than 2% are on GLP-1 therapy In the USA, the food budget falls by up to 5% Emmi, Danone and Nestlé adapt their product ranges Givaudan estimates growth',
     'blog.article.impatto-glp1-industria-alimentare.imageAlt': 'A Swiss supermarket aisle featuring fresh food products',
+    'blog.article.lenu-referendum-firme-valide.title': 'Federal Nuclear Energy Act: referendum successful',
+    'blog.article.lenu-referendum-firme-valide.excerpt': 'October 19, 2026: referendum formally successful October 6, 2026: 79 479 signatures submitted 78 922 signatures were declared valid LENu amendment dated 19',
+    'blog.article.lenu-referendum-firme-valide.imageAlt': 'Federal Palace in Bern in an editorial scene about the LENu referendum',
 };
 
 export default blogMetaChEn;

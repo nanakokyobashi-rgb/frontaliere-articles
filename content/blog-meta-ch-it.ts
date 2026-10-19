@@ -8528,6 +8528,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.impatto-glp1-industria-alimentare.title': 'Farmaci antiobesità GLP-1: impatto sull\'industria alimentare',
     'blog.article.impatto-glp1-industria-alimentare.excerpt': 'In Svizzera, meno del 2% è in terapia GLP-1 Negli USA il budget alimentare cala fino al 5% Emmi, Danone e Nestlé adattano le gamme Givaudan stima una crescita',
     'blog.article.impatto-glp1-industria-alimentare.imageAlt': 'Reparto di un supermercato svizzero con prodotti alimentari freschi',
+    'blog.article.lenu-referendum-firme-valide.title': 'Legge federale sull’energia nucleare: referendum riuscito',
+    'blog.article.lenu-referendum-firme-valide.excerpt': '19 ottobre 2026: referendum formalmente riuscito 6 ottobre 2026: presentate 79 479 firme 78 922 firme sono state dichiarate valide Modifica LENu datata 19',
+    'blog.article.lenu-referendum-firme-valide.imageAlt': 'Palazzo federale a Berna in una scena editoriale sul referendum LENu',
 };
 
 export default blogMetaChIt;

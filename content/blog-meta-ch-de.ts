@@ -8528,6 +8528,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.impatto-glp1-industria-alimentare.title': 'GLP-1-Medikamente gegen Adipositas: Auswirkungen auf die Lebensmittelindustrie',
     'blog.article.impatto-glp1-industria-alimentare.excerpt': 'In der Schweiz befinden sich weniger als 2% in einer GLP-1-Therapie In den USA sinkt das Lebensmittelbudget um bis zu 5% Emmi, Danone und Nestlé passen ihre Sortimente an Givaudan prognostiziert Wachstum',
     'blog.article.impatto-glp1-industria-alimentare.imageAlt': 'Ein Supermarktregal in der Schweiz mit frischen Lebensmitteln',
+    'blog.article.lenu-referendum-firme-valide.title': 'Bundesgesetz über die Kernenergie: Referendum zustande gekommen',
+    'blog.article.lenu-referendum-firme-valide.excerpt': '19. Oktober 2026: Referendum formell zustande gekommen 6. Oktober 2026: 79 479 Unterschriften eingereicht 78 922 Unterschriften für gültig erklärt Änderung LENu vom 19',
+    'blog.article.lenu-referendum-firme-valide.imageAlt': 'Bundeshaus in Bern in einer redaktionellen Szene zum LENu-Referendum',
 };
 
 export default blogMetaChDe;
