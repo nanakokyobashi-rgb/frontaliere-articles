@@ -6,6 +6,8 @@ import { pathToFileURL } from 'node:url';
 
 const FULL_SHA_RE = /^[a-f0-9]{40}$/u;
 const ZERO_SHA = '0'.repeat(40);
+const WORKFLOW_RUN_PAGE_SIZE = 100;
+const MAX_WORKFLOW_RUN_PAGES = 100;
 
 function isFullSha(value) {
   return FULL_SHA_RE.test(String(value ?? ''));
@@ -77,12 +79,38 @@ export function resolvePushRange({
   return null;
 }
 
-function readApiJson(endpoint, query = '.') {
-  const output = execFileSync('gh', ['api', endpoint, '--jq', query], {
+/** Flatten the page objects returned by the paginated Actions API. */
+export function flattenWorkflowRunPages(pages) {
+  return (Array.isArray(pages) ? pages : [pages]).flatMap((page) => (
+    Array.isArray(page?.workflow_runs) ? page.workflow_runs : []
+  ));
+}
+
+function readApiJson(endpoint, query = null) {
+  const args = ['api', endpoint];
+  if (query !== null) args.push('--jq', query);
+  const output = execFileSync('gh', args, {
     encoding: 'utf8',
-    maxBuffer: 4 * 1024 * 1024,
+    maxBuffer: 16 * 1024 * 1024,
   });
   return JSON.parse(output);
+}
+
+function readWorkflowRunHistory({ repo, headSha, workflowRunId }) {
+  const pages = [];
+  for (let page = 1; page <= MAX_WORKFLOW_RUN_PAGES; page += 1) {
+    const payload = readApiJson(
+      `repos/${repo}/actions/workflows/publish-api.yml/runs?branch=main&event=push&per_page=${WORKFLOW_RUN_PAGE_SIZE}&page=${page}`,
+    );
+    if (!Array.isArray(payload?.workflow_runs)) {
+      throw new Error(`cronologia publish-api illeggibile alla pagina ${page}`);
+    }
+    pages.push(payload);
+    const workflowRuns = flattenWorkflowRunPages(pages);
+    if (resolvePushRange({ headSha, workflowRuns, workflowRunId })) return workflowRuns;
+    if (payload.workflow_runs.length < WORKFLOW_RUN_PAGE_SIZE) return workflowRuns;
+  }
+  return flattenWorkflowRunPages(pages);
 }
 
 function main() {
@@ -91,6 +119,7 @@ function main() {
   const workflowRunId = String(process.env.WORKFLOW_RUN_ID ?? '').trim();
   if (!repo) throw new Error('REPO assente');
   if (!isFullSha(headSha)) throw new Error(`WORKFLOW_RUN_HEAD_SHA non valido: ${headSha}`);
+  if (!workflowRunId) throw new Error('WORKFLOW_RUN_ID assente');
 
   const events = readApiJson(
     `repos/${repo}/events?per_page=100`,
@@ -98,13 +127,10 @@ function main() {
   );
   let range = resolvePushRange({ headSha, events, workflowRunId });
   if (!range) {
-    const workflowRuns = readApiJson(
-      `repos/${repo}/actions/workflows/publish-api.yml/runs?branch=main&event=push&per_page=100`,
-      '{workflow_runs: [.workflow_runs[] | {id, event, head_sha, created_at}]}',
-    );
+    const workflowRuns = readWorkflowRunHistory({ repo, headSha, workflowRunId });
     range = resolvePushRange({
       headSha,
-      workflowRuns: workflowRuns?.workflow_runs,
+      workflowRuns,
       workflowRunId,
     });
   }
