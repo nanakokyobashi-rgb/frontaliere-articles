@@ -971,6 +971,7 @@ jobs:
           bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files-from=$RUNNER_TEMP/edge-purge-urls.txt"
 
       - name: Verify the article is actually readable
+        id: verify_served_fingerprint
         if: needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
         run: |
           set -euo pipefail
@@ -982,9 +983,9 @@ jobs:
           # The first purge ran before this step. Check the canonical apex URL
           # against the bytes recorded after the push; a 200 with old HTML is
           # not a successful publish. One retry covers purge propagation or a
-          # transient Cloudflare miss. Edge probe blocked (exit 2) — not
-          # repeating the targeted purge inside this step; the post-verification
-          # backstop re-purge (#114) still runs by design.
+          # transient Cloudflare miss. An edge-blocked probe (exit 2) is a
+          # transport result, so record it and skip both the retry here and the
+          # post-verification backstop purge below.
           verify_apex() {
             node scripts/ci/verify-served-fingerprint.mjs verify-apex \
               --fingerprints "$RUNNER_TEMP/published-fingerprints.tsv"
@@ -994,7 +995,8 @@ jobs:
           else
             verify_rc=$?
             if [ "$verify_rc" -eq 2 ]; then
-              echo "::error::edge probe blocked (exit 2) — not repeating the targeted purge inside this step; the post-verification backstop re-purge (#114) still runs by design"
+              echo "edge_probe_blocked=true" >> "$GITHUB_OUTPUT"
+              echo "::error::edge probe blocked (exit 2) — skipping the post-verification backstop purge"
               exit "$verify_rc"
             fi
             echo "::warning::the apex served content different from the pushed fingerprints — repeating the targeted purge once"
@@ -1392,10 +1394,10 @@ jobs:
         # when a negative entry is most likely to be sitting in the cache.
         # Skipping the cleanup on failure would leave that 404 behind on exactly
         # the runs that needed the cleanup most.
-        # This step also runs after EDGE_PROBE_BLOCKED (verification exit 2) by
-        # design: the purge is idempotent and independent of probe outcome, and
-        # a blocked probe provides no evidence that the edge is clean.
-        if: always() && needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
+        # EDGE_PROBE_BLOCKED is a transport result, not evidence that another
+        # purge is needed. The verification step records it so this backstop
+        # can preserve the failure without sending a blind purge request.
+        if: always() && needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true' && steps.verify_served_fingerprint.outputs.edge_probe_blocked != 'true'
         run: |
           set -euo pipefail
 

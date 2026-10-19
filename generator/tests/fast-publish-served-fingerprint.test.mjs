@@ -560,22 +560,25 @@ test('il workflow registra prima l’impronta, attende Pages prima della purge e
   assert.doesNotMatch(workflow, /<main>[^\n]*2943/);
 });
 
-test('una probe edge bloccata lascia attivo il backstop di re-purge', () => {
+test('una probe edge bloccata registra lo stato e salta il backstop di re-purge', () => {
   const verification = workflowStep('Verify the article is actually readable');
   const backstop = workflowStep('Re-purge the edge cache after the verification');
   const blockedBranch = verification.match(/if \[ "\$verify_rc" -eq 2 \];([\s\S]*?)\n            fi/);
 
   assert.ok(blockedBranch, 'missing the EDGE_PROBE_BLOCKED branch');
+  assert.match(verification, /^        id: verify_served_fingerprint$/m);
+  assert.match(blockedBranch[1], /edge_probe_blocked=true.*GITHUB_OUTPUT/s);
   assert.match(blockedBranch[1], /exit "\$verify_rc"/);
   assert.doesNotMatch(blockedBranch[1], /cf-purge-cache/);
 
   const condition = backstop.match(/^\s+if: (.+)$/m);
   assert.ok(condition, 'backstop condition is missing');
   assert.match(condition[1], /^always\(\)/);
+  assert.match(condition[1], /steps\.verify_served_fingerprint\.outputs\.edge_probe_blocked != 'true'/);
   assert.match(backstop, /edge-purge-urls\.txt/);
   assert.doesNotMatch(backstop, /verify_rc/);
   assert.match(
     verification,
-    /::error::edge probe blocked \(exit 2\) — not repeating the targeted purge inside this step; the post-verification backstop re-purge \(#114\) still runs by design/,
+    /::error::edge probe blocked \(exit 2\) — skipping the post-verification backstop purge/,
   );
 });
