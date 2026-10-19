@@ -13493,6 +13493,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.como-manifestazioni-24-ottobre.title': 'Como, due manifestazioni: una pacifica, l’altra a rischio',
     'blog.article.como-manifestazioni-24-ottobre.excerpt': 'Sarebbero in corso due possibili manifestazioni per il 24 ottobre Una è studentesca, con permessi in regola e finalità pacifiche L’altra è associata a timori',
     'blog.article.como-manifestazioni-24-ottobre.imageAlt': 'Scorcio urbano di Mendrisio in una giornata autunnale',
+    'blog.article.frontaliere-formazione-riqualifica-2026.title': 'Frontaliere formazione professionale riqualifica corsi 2026 entro 20 km',
+    'blog.article.frontaliere-formazione-riqualifica-2026.excerpt': 'Guida pratica alla formazione professionale e ai corsi di riqualifica per i frontalieri nel 2026, con focus entro 20 km e valutazione del ritorno.',
+    'blog.article.frontaliere-formazione-riqualifica-2026.imageAlt': 'Centro di formazione professionale in Ticino per corsi e riqualifica',
 };
 
 export default blogMetaIt;

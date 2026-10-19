@@ -1968,6 +1968,18 @@
       "firstSeenAt": "2026-10-19T04:29:31.286Z",
       "lastValidatedAt": "2026-10-19T04:29:31.286Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere formazione professionale riqualifica corsi 2026",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-19T04:46:27.066Z",
+      "lastValidatedAt": "2026-10-19T04:46:27.066Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
