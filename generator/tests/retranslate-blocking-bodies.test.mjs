@@ -2044,6 +2044,28 @@ test('il report per campo elenca ogni provider con classe e messaggio bounded', 
   }
 });
 
+test('il riepilogo aggregato conserva diagnosi deduplicate e limitate per provider', () => {
+  const [provider] = summarizeEmptyCascadeProviders([{
+    translationFailures: [
+      {
+        providers: [{
+          provider: 'codex-local', attempts: 1, successes: 0, failures: 1,
+          reasons: { 'rate-limit': 1 }, diagnostics: ['at capacity', 'campo 1'],
+        }],
+      },
+      {
+        providers: [{
+          provider: 'codex-local', attempts: 1, successes: 0, failures: 1,
+          reasons: { timeout: 1 }, diagnostics: ['campo 1', 'campo 2', 'campo 3'],
+        }],
+      },
+    ],
+  }]);
+
+  assert.deepEqual(provider.diagnostics, ['at capacity', 'campo 1', 'campo 2']);
+  assert.match(provider.message, /at capacity/);
+});
+
 test('la riserva Codex scrive in apply quando la traduzione passa le guardie', async () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'retranslate-codex-apply-'));
   try {

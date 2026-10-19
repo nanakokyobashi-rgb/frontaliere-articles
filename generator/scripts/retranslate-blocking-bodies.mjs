@@ -3143,6 +3143,7 @@ const TRANSLATION_FAILURE_DESCRIPTORS = Object.freeze([
   { test: (reason) => /empty|incomplete|no-output/u.test(reason), failureClass: 'empty', message: 'uscita vuota' },
   { test: (reason) => /meta-response/u.test(reason), failureClass: 'rejection', message: 'rifiuto del modello' },
 ]);
+const MAX_TRANSLATION_DIAGNOSTICS = 3;
 
 function translationFailureDescriptor(reason) {
   const normalized = String(reason || 'provider-error');
@@ -3155,10 +3156,18 @@ function enrichTranslationProviderDiagnostic(provider) {
   const reasons = Object.keys(provider.reasons || {});
   const descriptors = (reasons.length ? reasons : ['empty-output']).map(translationFailureDescriptor);
   const failureClasses = [...new Set(descriptors.map(({ failureClass }) => failureClass))];
-  const { diagnostics = [], ...withoutDiagnostics } = provider;
+  const diagnostics = [...new Set(
+    (Array.isArray(provider.diagnostics) ? provider.diagnostics : [])
+      .filter((diagnostic) => typeof diagnostic === 'string')
+      .map((diagnostic) => diagnostic.replace(/\s+/gu, ' ').trim().slice(0, 160))
+      .filter(Boolean),
+  )].slice(0, MAX_TRANSLATION_DIAGNOSTICS);
+  const withoutDiagnostics = { ...provider };
+  delete withoutDiagnostics.diagnostics;
   const messages = diagnostics.length ? diagnostics : [...new Set(descriptors.map(({ message }) => message))];
   return {
     ...withoutDiagnostics,
+    ...(diagnostics.length ? { diagnostics } : {}),
     failureClass: failureClasses.length === 1 ? failureClasses[0] : 'multiple',
     failureClasses,
     message: messages.join('; ').slice(0, 160),
@@ -3185,12 +3194,17 @@ export function summarizeEmptyCascadeProviders(results) {
           successes: 0,
           failures: 0,
           reasons: {},
+          diagnostics: [],
         };
         current.attempts += provider.attempts || 0;
         current.successes += provider.successes || 0;
         current.failures += provider.failures || 0;
         for (const [reason, count] of Object.entries(provider.reasons || {})) {
           current.reasons[reason] = (current.reasons[reason] || 0) + count;
+        }
+        for (const diagnostic of provider.diagnostics || []) {
+          if (current.diagnostics.length >= MAX_TRANSLATION_DIAGNOSTICS) break;
+          if (!current.diagnostics.includes(diagnostic)) current.diagnostics.push(diagnostic);
         }
         byProvider.set(provider.provider, current);
       }

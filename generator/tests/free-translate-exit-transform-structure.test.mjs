@@ -336,6 +336,38 @@ test('translateWithCodexEngine rifiuta la prosa al posto del filetto della sorge
   assert.equal(directPathRejections(), before + 1);
 });
 
+test('translateWithCodexEngine rifiuta JSON strutturato ma conserva le graffe della prosa', async () => {
+  for (const answer of [
+    '{"translation":"x"}',
+    '["x"]',
+    '```json\n{"translation":"x"}\n```',
+  ]) {
+    const outcome = {};
+    const out = await translateWithCodexEngine({
+      text: CODEX_SOURCE,
+      sourceLang: 'it',
+      targetLang: 'de',
+      call: async () => answer,
+      _outcome: outcome,
+    });
+    assert.equal(out, '', answer);
+    assert.deepEqual(outcome._tierReasons, [{ provider: 'codex', reason: 'invalid-output' }], answer);
+  }
+
+  const source = '## Offerta\n\nIl ruolo {aperto\nè disponibile}.';
+  const answer = '## Angebot\n\nDie Stelle {offen\nist verfügbar}.';
+  const outcome = {};
+  const out = await translateWithCodexEngine({
+    text: source,
+    sourceLang: 'it',
+    targetLang: 'de',
+    call: async () => answer,
+    _outcome: outcome,
+  });
+  assert.equal(out, answer);
+  assert.equal(outcome._tierReasons, undefined);
+});
+
 // ── il campo articolo ────────────────────────────────────────────────────────
 
 test('translateFieldFreeMt conserva le righe con il bilanciatore di produzione', async () => {

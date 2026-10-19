@@ -374,7 +374,8 @@ export function createCodexExecCall({
           });
           reject(failure);
         }, timeoutMs);
-        timer.unref?.();
+        // Keep the deadline referenced: a transport/fake child without its
+        // own active handle must still settle this pending Promise.
         child.stderr?.setEncoding?.('utf8');
         child.stderr?.on('data', (chunk) => {
           stderrTail = (stderrTail + chunk).slice(-MAX_STDERR_TAIL_CHARS);

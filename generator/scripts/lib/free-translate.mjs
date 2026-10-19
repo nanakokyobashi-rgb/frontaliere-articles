@@ -3615,31 +3615,45 @@ export function codexPromptEchoMarker(out, source) {
   return CODEX_PROMPT_ECHO_MARKERS.find((marker) => text.includes(marker) && !src.includes(marker)) ?? null;
 }
 
+const CODEX_MALFORMED_JSON_PREFIX_RE = /^\s*(?:\{\s*["}\]]|\[\s*["{\]])/u;
+const CODEX_JSON_FENCE_RE = /^```json[ \t]*\r?\n([\s\S]*?)\r?\n```$/iu;
+
+/** Classify a plain-text Codex answer that is actually JSON-shaped output. */
+function codexJsonOutputKind(out) {
+  let candidate = String(out ?? '').trim();
+  const fenced = candidate.match(CODEX_JSON_FENCE_RE);
+  if (fenced) candidate = fenced[1].trim();
+  if (!/^[\[{]/u.test(candidate)) return null;
+  try {
+    const parsed = JSON.parse(candidate);
+    return parsed !== null && typeof parsed === 'object' ? 'structured' : null;
+  } catch {
+    return CODEX_MALFORMED_JSON_PREFIX_RE.test(candidate) ? 'invalid' : null;
+  }
+}
+
 export async function translateWithCodexEngine({ text, sourceLang, targetLang, fieldType = 'description', call, _outcome = null }) {
   if (typeof call !== 'function') throw new TypeError('translateWithCodexEngine: `call` è richiesto');
   const prepared = _prepareEngineSource(text, sourceLang, fieldType);
   if (!prepared) return '';
   if (sourceLang === targetLang) return prepared.sourceClean;
   const out = await _codexTranslateOne(call, {}, prepared.clean, sourceLang, targetLang);
-  if (rejectedAsPassthroughWithSourceVariants('codex', prepared.clean, prepared.rawSourceClean, out, _outcome)) {
-    return '';
-  }
   if (!out) {
     noteTranslationProviderReason(_outcome, 'codex', 'empty-output');
     noteTranslationOutcome(_outcome, 'incomplete');
     return '';
   }
-  // The local transport is normally plain text. A malformed JSON-looking
-  // answer is a provider-output failure, not a structural translation refusal;
-  // keep that distinction for the report and never retry it.
-  if (/^\s*(?:\{\s*["}\]]|\[\s*["{\]])/u.test(out)) {
-    try {
-      JSON.parse(out);
-    } catch {
-      noteTranslationProviderReason(_outcome, 'codex', 'invalid-output');
-      noteTranslationOutcome(_outcome, 'incomplete');
-      return '';
-    }
+  // The local transport is normally plain text. JSON objects/arrays (including
+  // fenced JSON) are provider-output failures, not structural refusals; keep
+  // that distinction for the report and never retry them.
+  const jsonKind = codexJsonOutputKind(out);
+  if (jsonKind) {
+    noteTranslationProviderReason(_outcome, 'codex', 'invalid-output');
+    noteTranslationOutcome(_outcome, 'incomplete');
+    return '';
+  }
+  if (rejectedAsPassthroughWithSourceVariants('codex', prepared.clean, prepared.rawSourceClean, out, _outcome)) {
+    return '';
   }
   // Fail-closed sull'eco del prompt: si scarta il campo intero, e la bonifica
   // salta l'articolo invece di pubblicare le istruzioni del traduttore.
