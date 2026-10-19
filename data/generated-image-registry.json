@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 747,
+  "assetCount": 748,
   "assets": [
     {
       "schema": 1,
@@ -30234,6 +30234,49 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Generic synthetic photorealistic illustration of a Swiss school entrance; no people, text, logos, or event-specific cues."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-accordo-commercio-elettronico-omc",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "efc959423b7ab6b2ae16561dea35e737625ce47388457f905c2c7804ca9433b2",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "617cc90393b296b683c2d226ab932220586e5379b9a63e8565df1e0f64b5773d",
+      "bytes": 137080,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-19T18:02:02.998Z",
+      "verifiedAt": "2026-10-19T18:02:09.886Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-accordo-commercio-elettronico-omc.webp",
+      "area": "Svizzera",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Original generic synthetic editorial illustration of a modern Swiss office building with abstract digital connectivity elements; no people, text, logos, or signage."
       }
     }
   ]

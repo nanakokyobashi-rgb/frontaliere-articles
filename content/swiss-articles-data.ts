@@ -28516,6 +28516,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'accordo-commercio-elettronico-omc',
+    category: 'novita',
+    date: '2026-10-19T18:02:10.306Z',
+    image: '/images/blog/article-accordo-commercio-elettronico-omc.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
