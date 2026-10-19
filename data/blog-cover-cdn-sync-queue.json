@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-sagra-zucca-castagna-cunardo.webp",
+      "sha256": "625df52d956793ca72e2a24ca63e9a2f9e1f66dc9f3fcc18997e6e5f8710542b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-sagra-zucca-castagna-cunardo-480w.webp",
+      "sha256": "c1ff638dd7604af0008b8d8c3d2f89100a040663790893fb4b5bcead7e4f5779"
+    }
+  ]
 }
