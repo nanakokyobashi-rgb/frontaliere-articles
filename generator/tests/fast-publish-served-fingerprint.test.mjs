@@ -244,6 +244,54 @@ test('la verifica CDN invia un User-Agent esplicito accettato dal bordo', async 
   });
 });
 
+test('un mismatch HIT è cache lag solo se la probe anti-cache serve l’hash atteso', async () => {
+  let fetches = 0;
+  await assert.rejects(
+    () => verifyApex({
+      records: [RECORD],
+      fetchImpl: async (url, options) => {
+        fetches += 1;
+        if (fetches === 1) {
+          assert.equal(url, RECORD.url);
+          return response(OLD_HTML, { 'cf-cache-status': 'HIT', age: '776' });
+        }
+        assert.match(url, /_fpcb=/);
+        assert.equal(options.headers['Cache-Control'], 'no-cache');
+        return response(NEW_HTML, { 'cf-cache-status': 'MISS', age: '0' });
+      },
+    }),
+    (error) => {
+      assert.match(error.message, /classification=cache-lag/);
+      assert.match(error.message, /fresh-probe-status=200/);
+      assert.match(error.message, new RegExp(`fresh-probe-served=${RECORD.sha}`));
+      assert.equal(error.failures[0].freshProbe.cacheLagConfirmed, true);
+      return true;
+    },
+  );
+  assert.equal(fetches, 2);
+});
+
+test('un fallback HTTP 200 resta hard se la probe anti-cache non serve l’hash atteso', async () => {
+  let fetches = 0;
+  await assert.rejects(
+    () => verifyApex({
+      records: [RECORD],
+      fetchImpl: async () => {
+        fetches += 1;
+        return fetches === 1
+          ? response(OLD_HTML, { 'cf-cache-status': 'HIT', age: '776' })
+          : response('<main>fallback sbagliato</main>\n', { 'cf-cache-status': 'MISS' });
+      },
+    }),
+    (error) => {
+      assert.doesNotMatch(error.message, /classification=cache-lag/);
+      assert.match(error.message, /fresh-probe-served=/);
+      return true;
+    },
+  );
+  assert.equal(fetches, 2);
+});
+
 test('un giro interamente bloccato non ripete la purge', async () => {
   let purges = 0;
   await assert.rejects(
@@ -321,12 +369,19 @@ test('CDN vecchia dopo la purge: una sola ripetizione della purge poi passa', as
   let purges = 0;
   const result = await verifyAfterPurge({
     records: [RECORD],
-    fetchImpl: async (url) => {
-      assert.equal(url, RECORD.url, 'la verifica CDN deve leggere l’URL apex senza query');
+    fetchImpl: async (url, options) => {
       fetches += 1;
-      return fetches === 1
-        ? response(OLD_HTML, { 'cf-cache-status': 'HIT', age: '776' })
-        : response(NEW_HTML, { 'cf-cache-status': 'MISS', age: '0' });
+      if (fetches === 1) {
+        assert.equal(url, RECORD.url, 'la verifica CDN deve leggere prima l’URL apex senza query');
+        return response(OLD_HTML, { 'cf-cache-status': 'HIT', age: '776' });
+      }
+      if (fetches === 2) {
+        assert.match(url, /_fpcb=/);
+        assert.equal(options.headers['Cache-Control'], 'no-cache');
+        return response(NEW_HTML, { 'cf-cache-status': 'MISS', age: '0' });
+      }
+      assert.equal(url, RECORD.url, 'dopo la purge deve ricontrollare l’URL apex canonico');
+      return response(NEW_HTML, { 'cf-cache-status': 'MISS', age: '0' });
     },
     purge: async () => {
       purges += 1;
@@ -336,6 +391,7 @@ test('CDN vecchia dopo la purge: una sola ripetizione della purge poi passa', as
   assert.equal(result.checked, 1);
   assert.equal(result.repurges, 1);
   assert.equal(purges, 1);
+  assert.equal(fetches, 3);
 });
 
 test('CDN vecchia per sempre: fallisce con fingerprint e diagnostica Cloudflare', async () => {
@@ -359,6 +415,7 @@ test('CDN vecchia per sempre: fallisce con fingerprint e diagnostica Cloudflare'
       assert.match(error.message, /cf-cache-status=HIT/);
       assert.match(error.message, /age=776/);
       assert.match(error.message, /last-modified=Mon, 19 Oct 2026 05:00:00 GMT/);
+      assert.doesNotMatch(error.message, /classification=cache-lag/);
       return true;
     },
   );
@@ -583,7 +640,7 @@ test('una probe edge bloccata registra lo stato e salta il backstop di re-purge'
   );
 });
 
-test('il downgrade apex distingue lag 200, status/route, errore operativo e blocco misto', () => {
+test('il downgrade apex richiede cache-lag esplicito e distingue status/route, errore operativo e blocco edge', () => {
   const verification = workflowStep('Verify the article is actually readable');
   const classifier = verification.match(/^          apex_failure_kind\(\) \{[\s\S]*?^          \}/m);
   assert.ok(classifier, 'missing the apex failure classifier');
@@ -604,8 +661,16 @@ test('il downgrade apex distingue lag 200, status/route, errore operativo e bloc
 
     const mismatch = '::error::CDN served-content verification failed: 1 URL did not serve the expected fingerprint\n';
     assert.equal(
-      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; cf-cache-status=HIT; age=776\n`),
+      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; cf-cache-status=HIT; age=776; classification=cache-lag; fresh-probe-status=200; fresh-probe-served=new-hash\n`),
       'lag',
+    );
+    assert.equal(
+      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; cf-cache-status=HIT; age=776; fresh-probe-status=200; fresh-probe-served=route-hash\n`),
+      'hard',
+    );
+    assert.equal(
+      run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=200; classification=cache-lag\nURL https://frontaliereticino.ch/en/demo/; expected=other-new; served=other-old; status=200\n`),
+      'hard',
     );
     assert.equal(
       run(`${mismatch}URL ${RECORD.url}; expected=new-hash; served=old-hash; status=404; cf-cache-status=MISS; age=0\n`),

@@ -982,11 +982,11 @@ jobs:
 
           # The first purge ran before this step. Check the canonical apex URL
           # against the bytes recorded after the push; a 200 with old HTML is
-          # not proof that the edge is fresh. One retry covers purge
-          # propagation or a transient Cloudflare miss. Only that known
-          # fingerprint-lag result may survive the retry as a warning: an
-          # operational verifier failure, a non-200/route response, or an
-          # edge-blocked probe is not evidence that the public URL is healthy.
+          # not proof that the edge is fresh. A cache mismatch is classified
+          # as lag only when the canonical response was a cache HIT and a
+          # second cache-busted request to the same URL serves the expected
+          # hash. A route/fallback response, operational failure, or
+          # edge-blocked probe remains fail-closed.
           # Edge-blocked probes also skip the post-verification backstop purge
           # below because the transport result is not evidence of stale cache.
           apex_verify_log="$RUNNER_TEMP/fast-publish-apex-verification.log"
@@ -1004,9 +1004,9 @@ jobs:
           }
 
           # The verifier is a separate process, so its typed errors arrive as
-          # exit status plus diagnostics. Keep the downgrade narrow: a known
-          # FingerprintMismatchError whose every failed URL is HTTP 200 with a
-          # different served hash is the only result classified as edge lag.
+          # exit status plus diagnostics. Keep the downgrade narrow: only an
+          # explicit cache-lag classification from the verifier can be a
+          # warning. A bare HTTP 200 mismatch is hard.
           # The `classification` line is emitted per failure, which preserves
           # an edge-blocked observation even when other URLs are mismatches and
           # the verifier cannot return its all-observations exit code 2.
@@ -1027,15 +1027,17 @@ jobs:
                 expected = ""
                 served = ""
                 status = ""
+                classification = ""
                 fields = split($0, parts, /; /)
                 for (i = 1; i <= fields; i += 1) {
                   if (parts[i] ~ /^expected=/) expected = substr(parts[i], 10)
                   if (parts[i] ~ /^served=/) served = substr(parts[i], 8)
                   if (parts[i] ~ /^status=/) status = substr(parts[i], 8)
+                  if (parts[i] ~ /^classification=/) classification = substr(parts[i], 16)
                 }
                 if (status == "network-error" || status == "") {
                   operational = 1
-                } else if (status != "200" || expected == "" || served == "" || expected == served) {
+                } else if (status != "200" || expected == "" || served == "" || expected == served || classification != "cache-lag") {
                   invalid = 1
                 }
               }
