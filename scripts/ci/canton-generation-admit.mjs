@@ -31,7 +31,7 @@
  *   2. C'E' ANCORA BUDGET? (D19) I commit `Generate blog article (<sezione>)`
  *      delle ultime 24 ore sul ramo di destinazione, contro `dailyBudget` del
  *      profilo (`generator/data/canton-sections.json`), eventualmente abbassato
- *      da `vars.CANTON_DAILY_BUDGET_CAP` (il pilota a <=2/giorno).
+ *      da `vars.CANTON_DAILY_BUDGET_CAP` (override di rollout che può solo ridurre il profilo).
  *   3. QUANTI CANTONI STANNO GIA' GENERANDO? Una sola lettura delle run
  *      `in_progress` del repo: quelle dei workflow `generate-article-<cantone>.yml`
  *      PIU' VECCHIE di questa non devono raggiungere

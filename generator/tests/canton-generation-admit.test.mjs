@@ -199,16 +199,16 @@ test('budget: a budget raggiunto salta, sotto procede', () => {
   assert.equal(decide({}, readers({ subjects: full.slice(1) })).proceed, true);
 });
 
-test('budget: vars.CANTON_DAILY_BUDGET_CAP abbassa il budget, non lo alza', () => {
+test('budget: vars.CANTON_DAILY_BUDGET_CAP abbassa il budget dichiarato, non lo alza', () => {
   const profile = { section: SECTION, dailyBudget: 4 };
   assert.equal(effectiveDailyBudget(profile, ''), 4);
-  assert.equal(effectiveDailyBudget(profile, '2'), 2, 'il pilota a <=2/giorno (D19)');
+  assert.equal(effectiveDailyBudget(profile, '3'), 3, 'il tetto di rollout riduce il budget dichiarato');
   assert.equal(effectiveDailyBudget(profile, '9'), 4);
   assert.equal(effectiveDailyBudget(profile, 'due'), 4, 'un valore illeggibile non cambia il budget');
   assert.throws(() => effectiveDailyBudget({ section: SECTION }, ''), /dailyBudget non valido/);
 
-  const two = [articleCommitSubject(SECTION), articleCommitSubject(SECTION)];
-  const v = decide({ env: { ...ENV_ON, CANTON_DAILY_BUDGET_CAP: '2' } }, readers({ subjects: two }));
+  const three = Array.from({ length: 3 }, () => articleCommitSubject(SECTION));
+  const v = decide({ env: { ...ENV_ON, CANTON_DAILY_BUDGET_CAP: '3' } }, readers({ subjects: three }));
   assert.equal(v.reason, 'daily-budget');
 });
 

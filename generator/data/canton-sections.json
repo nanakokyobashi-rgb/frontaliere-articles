@@ -5272,7 +5272,7 @@
       "cadenceHours": 4,
       "dailyBudget": 4,
       "cronMinute": 14,
-      "notes": "R2 del 2026-10-06: dopo la riverifica live il flusso resta sotto 5 item/settimana; cadenceHours e dailyBudget restano invariati.",
+      "notes": "R2 del 2026-10-06: dopo la riverifica live il flusso resta sotto 5 item/settimana. Dal rollout 2026-10-19, cadenceHours=4 e dailyBudget=4 aumentano i tentativi; candidati e gate editoriali restano determinanti.",
       "frontalieriContext": "Obvaldo e' un cantone interno senza confine nazionale (Svizzera centrale, ~38k abitanti): non esistono flussi di frontalieri significativi ne' valichi doganali ne' fonti lato estero pertinenti. Il pubblico e' fatto da residenti e lavoratori stranieri/permessi in Svizzera centrale (turismo a Engelberg, industria metalmeccanica, sanita'); i temi frontalieri vanno trattati in chiave nazionale (AVS, imposta alla fonte, LAMal). Nessuna fonte lato estero e' stata cercata per questo motivo.",
       "newsSources": [
         {
