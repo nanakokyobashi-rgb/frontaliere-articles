@@ -84,6 +84,7 @@ on:
       - 'generator/scripts/lib/article-meta-block.mjs'
       - 'generator/scripts/lib/article-excerpt.mjs'
       - 'scripts/ci/retry-cmd.sh'
+      - 'scripts/ci/fetch-push-base-if-missing.sh'
       - 'scripts/cf-purge-cache.mjs'
       - 'generator/scripts/load-rc-env.mjs'
       - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
@@ -170,15 +171,7 @@ jobs:
         env:
           PUSH_BEFORE: ${{ github.event.before }}
         run: |
-          set -euo pipefail
-          # fetch-depth: 2 already contains the base for an ordinary
-          # single-commit push. Only pay for a network fetch when a multi-
-          # commit push needs a base outside that shallow checkout.
-          if [ -n "${PUSH_BEFORE:-}" ] \
-            && [[ ! "$PUSH_BEFORE" =~ ^0+$ ]] \
-            && ! git cat-file -e "${PUSH_BEFORE}^{commit}" 2>/dev/null; then
-            git fetch --no-tags --depth=1 origin "$PUSH_BEFORE"
-          fi
+          bash scripts/ci/fetch-push-base-if-missing.sh
 
       - name: Preflight — i link Markdown devono avere una destinazione canonica
         env:

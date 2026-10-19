@@ -3009,6 +3009,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(pushRangeResolver, /actions\/workflows\/publish-api\.yml\/runs/);
   assert.match(pushRangeResolver, /candidate\?\.type === 'PushEvent'[\s\S]*payload\?\.ref === ref[\s\S]*eventHead === headSha/);
   assert.match(wf, /push_before: \$\{\{ steps\.push_range\.outputs\.before \}\}/);
+  assert.match(wf, /timeout-minutes: 10/);
+  assert.match(wf, /name: Fetch originating push base \(resolve\)[\s\S]*?bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
   assert.doesNotMatch(wf, /diff_args=\(\)[\s\S]*sections\/registry\.json/);
   assert.match(wf, /PUSH_BEFORE="\$before" node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
   assert.match(wf, /r2-reconcile-plan \\\n\s+"\$WORKFLOW_RUN_HEAD_SHA"/);
