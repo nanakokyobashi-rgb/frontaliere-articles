@@ -165,13 +165,14 @@ jobs:
           fi
           export GH_TOKEN="$runtime_pat"
           fail=0
-          while IFS=$'\t' read -r section ids missing_page_paths; do
+          while IFS=$'\t' read -r section ids missing_page_paths known_missing_page_paths; do
             [ -n "$section" ] || continue
             echo "── backfill $section ids=$ids"
             args=(
               -f "section=$section"
               -f "article_ids=$ids"
               -f "missing_page_paths=$missing_page_paths"
+              -f "known_missing_page_paths=$known_missing_page_paths"
               -f 'bootstrap=false'
               -f 'dry_run=false'
             )
@@ -187,7 +188,7 @@ jobs:
               echo "::warning::dispatch fallito per $section — riprovera' il prossimo giro"
               fail=1
             fi
-          done < <(jq -r '.sections[] | select(.dispatch) | [.section, (.selected | tojson), (.missingPagePaths | tojson)] | @tsv' "$RUNNER_TEMP/reconcile-sections.json")
+          done < <(jq -r '.sections[] | select(.dispatch) | [.section, (.selected | tojson), (.missingPagePaths | tojson), (.knownMissingPagePaths | tojson)] | @tsv' "$RUNNER_TEMP/reconcile-sections.json")
           [ "$fail" = "0" ] || exit 1
 
       - name: Replay API when the edge flip has no page backfill

@@ -1045,8 +1045,16 @@ test('publisher: argomenti', () => {
     parseArgs(['--section', 'canton-ti', '--missing-pages', '["/articoli-ticino/a/"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).missingPages,
     ['/articoli-ticino/a/'],
   );
+  assert.deepEqual(
+    parseArgs(['--section', 'canton-ti', '--known-missing-pages', '["/articoli-ticino/a/","/articoli-ticino/a/"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).knownMissingPages,
+    ['/articoli-ticino/a/'],
+  );
   assert.throws(
     () => parseArgs(['--section', 'canton-ti', '--missing-pages', '["../a"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }),
+    /path canonici/,
+  );
+  assert.throws(
+    () => parseArgs(['--section', 'canton-ti', '--known-missing-pages', '["//a/"]', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }),
     /path canonici/,
   );
   assert.throws(() => parseArgs(['--section', 'canton-ti', '--boh']), /argomento sconosciuto/);
@@ -1066,10 +1074,16 @@ test('publisher: argomenti', () => {
 test('publisher: solo le chiavi confermate 404 escono dall inventario immutabile staged', () => {
   const missing = pageEntry('canton-ti', 'articoli-ticino/missing/index.html', 'article');
   const present = pageEntry('canton-ti', 'articoli-ticino/present/index.html', 'article');
+  const leftover = pageEntry('canton-ti', 'articoli-ticino/leftover/index.html', 'article');
   const rendered = [missing, present];
-  const published = [missing, present];
+  const published = [missing, present, leftover];
   assert.deepEqual(stagedReleasePageSets(rendered, published).pagesForPublish, []);
-  const selected = stagedReleasePageSets(rendered, published, [missing.canonicalPath]);
+  const selected = stagedReleasePageSets(
+    rendered,
+    published,
+    [missing.canonicalPath],
+    [missing.canonicalPath, leftover.canonicalPath],
+  );
   assert.deepEqual(selected.pagesForPublish.map((page) => page.canonicalPath), [missing.canonicalPath]);
   assert.deepEqual(selected.immutableLivePages.map((page) => page.canonicalPath), [present.canonicalPath]);
 });
@@ -2868,8 +2882,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /source_main_commit:/);
   assert.match(wf, /replay_api_after_publish:/);
   assert.match(wf, /missing_page_paths:/);
+  assert.match(wf, /known_missing_page_paths:/);
   assert.match(wf, /MISSING_PAGE_PATHS_JSON: \$\{\{ toJSON\(matrix\.target\.missingPagePaths \|\| fromJSON\('\[\]'\)\) \}\}/);
+  assert.match(wf, /KNOWN_MISSING_PAGE_PATHS_JSON: \$\{\{ toJSON\(matrix\.target\.knownMissingPagePaths \|\| fromJSON\('\[\]'\)\) \}\}/);
   assert.match(wf, /args\+=\(--missing-pages "\$\(printf '%s' "\$MISSING_PAGE_PATHS_JSON" \| jq -c \.\)"\)/);
+  assert.match(wf, /args\+=\(--known-missing-pages "\$\(printf '%s' "\$KNOWN_MISSING_PAGE_PATHS_JSON" \| jq -c \.\)"\)/);
   assert.match(wf, /ALLOW_DEFERRED_LIVE_RELEASE: \$\{\{ needs\.resolve\.outputs\.replay_api_after_publish \}\}/);
   assert.match(wf, /EXPECTED_MAIN_HEAD: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_main_commit \|\| github\.event\.after \|\| github\.sha \}\}/);
   assert.match(wf, /-f source_main_commit="\$CURRENT_MAIN"/);
@@ -2933,15 +2950,18 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(stagedReplay, /Redispatch staged backfill on current main after stale replay/);
   assert.match(stagedReplay, /TARGET_MATRIX: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/);
   assert.match(stagedReplay, /-f missing_page_paths="\$missing_page_paths"/);
+  assert.match(stagedReplay, /-f known_missing_page_paths="\$known_missing_page_paths"/);
   const replayDispatchStep = stagedReplay.slice(
     stagedReplay.indexOf('- name: Replay publish-api after staged release'),
   );
   assert.match(replayDispatchStep, /git fetch --no-tags --depth=1 origin main/);
   const mainRevisionGuard = replayDispatchStep.indexOf('if [ "$current_main" != "$SOURCE_COMMIT" ]');
+  const globalReadiness = replayDispatchStep.indexOf('node scripts/reconcile-section-pages.mjs --out "$readiness" --cap 1');
+  const missingPagesGuard = replayDispatchStep.indexOf(".counts.missingPages");
   const apiDispatch = replayDispatchStep.indexOf('gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main');
   assert.ok(
-    mainRevisionGuard >= 0 && apiDispatch > mainRevisionGuard,
-    'il replay API deve saltare il dispatch se main e\' avanzata dal backfill',
+    mainRevisionGuard >= 0 && globalReadiness > mainRevisionGuard && missingPagesGuard > globalReadiness && apiDispatch > missingPagesGuard,
+    'il replay API deve richiedere main stabile e zero pagine 404 globali prima del dispatch',
   );
   assert.match(replayDispatchStep, /-f source_commit="\$SOURCE_COMMIT"/);
   const staleRecoveryStep = stagedReplay.slice(
@@ -3132,6 +3152,7 @@ test('reconcile: cap per sezione, i piu\' recenti prima; il dubbio non si ripubb
   assert.deepEqual(plan.missingIds, ['nuovo', 'medio', 'vecchio']);
   assert.deepEqual(plan.selected, ['nuovo', 'medio']);
   assert.deepEqual(plan.missingPagePaths, ['/p2/', '/p3/', '/p4/']);
+  assert.deepEqual(plan.knownMissingPagePaths, ['/p1/', '/p2/', '/p3/', '/p4/']);
   assert.deepEqual(plan.leftover, ['vecchio']);
   assert.deepEqual(plan.unknown, ['/p5/']);
   assert.equal(plan.dispatch, true);
@@ -3140,6 +3161,7 @@ test('reconcile: cap per sezione, i piu\' recenti prima; il dubbio non si ripubb
   const refresh = planSectionBackfill('canton-ti', [{ kind: 'section', path: '/articoli-ticino/fisco/', state: 'missing' }], dates, 3);
   assert.deepEqual([refresh.dispatch, refresh.selected, refresh.sectionMissing], [true, [], ['/articoli-ticino/fisco/']]);
   assert.deepEqual(refresh.missingPagePaths, ['/articoli-ticino/fisco/']);
+  assert.deepEqual(refresh.knownMissingPagePaths, ['/articoli-ticino/fisco/']);
   assert.equal(planSectionBackfill('canton-ti', [{ kind: 'section', path: '/x/', state: 'unknown' }], dates, 3).dispatch, false);
   const orphan = planSectionBackfill('canton-ti', [], dates, 3, [{ id: 'gone', path: '/articoli-ticino/gone/', state: 'present' }]);
   assert.deepEqual([orphan.dispatch, orphan.orphaned, orphan.orphanedIds], [true, ['/articoli-ticino/gone/'], ['gone']]);
@@ -3296,6 +3318,7 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   assert.match(wf, /node scripts\/reconcile-section-pages\.mjs/);
   assert.match(wf, /args=\([\s\S]*-f "section=\$section"[\s\S]*-f "article_ids=\$ids"[\s\S]*'bootstrap=false'[\s\S]*'dry_run=false'/);
   assert.match(wf, /-f "missing_page_paths=\$missing_page_paths"/);
+  assert.match(wf, /-f "known_missing_page_paths=\$known_missing_page_paths"/);
   assert.match(wf, /-f 'replay_api_after_publish=true'/);
   assert.match(wf, /-f "api_release_commit=\$API_RELEASE_COMMIT"/);
   assert.match(wf, /-f "source_commit=\$SOURCE_COMMIT"/);
