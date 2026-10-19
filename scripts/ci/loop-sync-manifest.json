@@ -234,7 +234,7 @@
       "reason": "Helper del workflow fast-publish-article che contiene la verifica apex e il retry della purge, estratto dal run scalar per restare sotto il limite di 21.000 byte di GitHub Actions. E' usato solo dal publisher del corpus e il sito non possiede questo percorso di pubblicazione, quindi resta corpus-only.",
       "baseline": {
         "site": null,
-        "corpus": "75b9ca474a7ab31a",
+        "corpus": "d3504a694b79c58e",
         "alignedAt": "2026-10-19"
       }
     },
