@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-19T05:23:08.856Z",
-  "contentHash": "a42ea36120adbbe24b01cda5539c697a210f97db1a8efaca21e42a200fe72104",
+  "updatedAt": "2026-10-19T07:07:21.066Z",
+  "contentHash": "db57644d0152aaf8fc0f506e21429ab091979637d32b7a96a9258078d786d2dd",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -146,6 +146,12 @@
           "date": "2026-10-07T07:11:43.423Z"
         },
         {
+          "title": "Amministrazione fiscale Berna: chiusura dal 23 ottobre al 1 novembre 2026",
+          "url": "/articoli-berna/amministrazione-fiscale-berna-chiusura-2026/",
+          "excerpt": "L'Amministrazione fiscale del Canton Berna sospende i servizi dal 23 ottobre alle 16 fino al 1 novembre 2026 per rinnovo tecnologico.",
+          "date": "2026-10-19T06:59:44.908Z"
+        },
+        {
           "title": "Abbonamenti trasporti pubblici Canton Berna: zone e tariffe",
           "url": "/articoli-svizzera/trasporti-pubblici-canton-berna-abbonamenti/",
           "excerpt": "Informazioni sulle zone e le tariffe degli abbonamenti trasporti pubblici nel Canton Berna",
@@ -169,7 +175,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T07:07:21.066Z"
     },
     "en": {
       "canton": "BE",
@@ -298,6 +304,12 @@
           "date": "2026-10-07T07:11:43.423Z"
         },
         {
+          "title": "Bern tax administration: closure from October 23 to November 1, 2026",
+          "url": "/en/bern-articles/bern-tax-administration-closure-2026/",
+          "excerpt": "The tax administration of the Canton of Bern will suspend services from 4 p.m.",
+          "date": "2026-10-19T06:59:44.908Z"
+        },
+        {
           "title": "Public transport passes Canton Bern: zones and fares",
           "url": "/en/swiss-articles/public-transport-canton-bern-subscriptions/",
           "excerpt": "Information on areas and fares for public transport passes in the Canton of Bern",
@@ -321,7 +333,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T07:07:21.066Z"
     },
     "de": {
       "canton": "BE",
@@ -450,6 +462,12 @@
           "date": "2026-10-07T07:11:43.423Z"
         },
         {
+          "title": "Steuerverwaltung Bern: Schließung vom 23. Oktober bis zum 1. November 2026",
+          "url": "/de/bern-artikel/steuerverwaltung-bern-schliessung-2026/",
+          "excerpt": "Die Steuerverwaltung des Kantons Bern setzt die Dienstleistungen vom 23.",
+          "date": "2026-10-19T06:59:44.908Z"
+        },
+        {
           "title": "Öffentliche Verkehrsmittel Kanton Bern: Zonen und Tarife",
           "url": "/de/schweiz-artikel/offentlicher-verkehr-kanton-bern-abonnements/",
           "excerpt": "Informationen zu den Zonen und Tarifen der ÖV-Abos im Kanton Bern",
@@ -473,7 +491,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T07:07:21.066Z"
     },
     "fr": {
       "canton": "BE",
@@ -602,6 +620,12 @@
           "date": "2026-10-07T07:11:43.423Z"
         },
         {
+          "title": "Administration fiscale de Berne : fermeture du 23 octobre au 1er novembre 2026",
+          "url": "/fr/articles-berne/administration-fiscale-berne-fermeture-2026/",
+          "excerpt": "L'Administration fiscale du canton de Berne suspend ses services du 23 octobre à 16 h au 1er novembre 2026 pour une mise à niveau technologique.",
+          "date": "2026-10-19T06:59:44.908Z"
+        },
+        {
           "title": "Abonnements transports publics Canton de Berne : zones et tarifs",
           "url": "/fr/articles-suisse/transports-publiques-canton-de-berne-abonnements/",
           "excerpt": "Informations sur les zones et les tarifs des abonnements transports publics dans le canton de Berne",
@@ -625,7 +649,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-19T07:07:21.066Z"
     }
   }
 }
