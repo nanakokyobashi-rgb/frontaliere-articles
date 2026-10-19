@@ -398,6 +398,33 @@ test('protegge il nome ufficiale e ripara un toponimo autonomo nella stessa fras
   assert.equal(repaired.replacements, 1);
 });
 
+test('protegge i nomi ufficiali dopo articoli tradotti e ripara solo l occorrenza autonoma', () => {
+  const source = 'La Caisse Santé Genève conferma il servizio. Ginevra resta coinvolta.';
+  const cases = [
+    {
+      locale: 'de',
+      target: 'Die Caisse Santé Genève bestätigt den Dienst. Genève bleibt beteiligt.',
+      expected: 'Die Caisse Santé Genève bestätigt den Dienst. Genf bleibt beteiligt.',
+    },
+    {
+      locale: 'fr',
+      target: 'La Caisse Santé Genève confirme le service. Ginevra reste concernée.',
+      expected: 'La Caisse Santé Genève confirme le service. Genève reste concernée.',
+    },
+    {
+      locale: 'fr',
+      target: 'Le rapport de la Caisse Santé Genève confirme le service. Ginevra reste concernée.',
+      expected: 'Le rapport de la Caisse Santé Genève confirme le service. Genève reste concernée.',
+    },
+  ];
+
+  for (const { locale, target, expected } of cases) {
+    const repaired = replaceLocalizedToponymMismatches({ sourceText: source, targetText: target, locale });
+    assert.equal(repaired.text, expected, locale);
+    assert.equal(repaired.replacements, 1, locale);
+  }
+});
+
 test('mantiene gli offset grezzi quando il nome ufficiale contiene un entità HTML', () => {
   const source = 'Il servizio è gestito da Caisse Sant&#233; Genève, Genève.';
   const target = 'Der Dienst wird von Caisse Sant&#233; Genève, Genève betrieben.';
@@ -407,6 +434,15 @@ test('mantiene gli offset grezzi quando il nome ufficiale contiene un entità HT
   );
   const repaired = replaceLocalizedToponymMismatches({ sourceText: source, targetText: target, locale: 'de' });
   assert.equal(repaired.text, 'Der Dienst wird von Caisse Sant&#233; Genève, Genf betrieben.');
+  assert.equal(repaired.replacements, 1);
+});
+
+test('non riscrive un toponimo dentro un code span che attraversa un URL', () => {
+  const source = 'Il cantone di Ticino ospita molte aziende.';
+  const target = '`Ticino https://example.org/x` e Ticino resta in prosa.';
+  const repaired = replaceLocalizedToponymMismatches({ sourceText: source, targetText: target, locale: 'de' });
+
+  assert.equal(repaired.text, '`Ticino https://example.org/x` e Tessin resta in prosa.');
   assert.equal(repaired.replacements, 1);
 });
 

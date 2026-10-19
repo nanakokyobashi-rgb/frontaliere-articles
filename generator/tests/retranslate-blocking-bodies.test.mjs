@@ -802,6 +802,29 @@ test('lo scan usa un margine di lingua, ignora fonti e URL francesi ma conserva 
   );
 });
 
+test('il gate conta la heading Fonti italiana ma ignora una fonte con contenuto', () => {
+  const body1 = [
+    '## Fonti',
+    'Le autorità hanno deciso nuove misure',
+    'Il governo ha annunciato controlli nei cantoni',
+  ].join('\n');
+  const hits = scanItalianResidue({ body1 }, 'fr');
+
+  assert.equal(hits.length, ITALIAN_RESIDUE_MIN_LINES);
+  assert.deepEqual(hits[0], {
+    field: 'body1',
+    line: 1,
+    reason: 'heading',
+    text: 'Fonti',
+  });
+  assert.equal(hasItalianResidue({ body1 }, 'fr'), true);
+  assert.equal(
+    translationSanityIssue({ oldSections: {}, newSections: { body1 }, italianSections: {}, locale: 'fr' }),
+    'italian-residue: 3 righe residue',
+  );
+  assert.deepEqual(scanItalianResidue({ body1: 'Source : laregione.ch' }, 'fr'), []);
+});
+
 test('lo scan ignora heading localizzati in blockquote, lista e forma Setext', () => {
   const body1 = [
     '> ## What to do',

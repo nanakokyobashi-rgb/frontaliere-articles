@@ -284,7 +284,7 @@ function normalizeItalianResidueLine(line) {
 
 function isItalianResidueMetadataLine(clean) {
   const withoutBullet = String(clean ?? '').replace(/^[-+*]\s+/u, '').trim();
-  if (/^(?:source|sources|fonte|fonti|quelle)\s*(?:[:：]|$)/iu.test(withoutBullet)) return true;
+  if (/^(?:source|sources|fonte|fonti|quelle)\s*(?:[:：])\s*\S/iu.test(withoutBullet)) return true;
   return /^(?:(?:https?|ftp):\/\/|www\.)\S+$/iu.test(withoutBullet)
     || /^(?:[\p{L}\p{N}-]+\.)+[a-z]{2,}(?:[/:?#]\S*)?$/iu.test(withoutBullet);
 }
@@ -515,7 +515,6 @@ function italianResidueLineReason(line, locale, nextLine, heading = undefined) {
   if (locale === 'it') return null;
   const clean = normalizeItalianResidueLine(line);
   if (!clean) return null;
-  if (isItalianResidueMetadataLine(clean)) return null;
   const headingText = heading === undefined
     ? markdownHeadingText(line, nextLine)
     : heading;
@@ -524,6 +523,7 @@ function italianResidueLineReason(line, locale, nextLine, heading = undefined) {
     if (ITALIAN_RESIDUE_HEADING_RE.test(headingText)) return 'heading';
     return italianMarkdownHeadingReason(headingText, locale);
   }
+  if (isItalianResidueMetadataLine(clean)) return null;
   if (ITALIAN_RESIDUE_HEADING_RE.test(clean)) return 'heading';
 
   const words = clean.match(ITALIAN_RESIDUE_WORD_RE) || [];

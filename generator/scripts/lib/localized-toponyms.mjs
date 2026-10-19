@@ -144,7 +144,8 @@ function rawTermPattern(term) {
 const URL_PATTERN = /(?:https?|evergreen|stats-(?:bfs|astra)):\/\/[^\s)]+|(?<![\p{L}\p{N}@])(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:ch|com|org|net|it|fr|de|io|info)(?:\/[^\s)]*)?|(?<![\p{L}\p{N}@])\/[a-z0-9][^\s)\]>"]*/giu;
 
 function withoutUrls(value) {
-  return String(value || '').replace(URL_PATTERN, ' ');
+  // Preserve raw offsets so a code span that contains a URL stays one range.
+  return String(value || '').replace(URL_PATTERN, (match) => ' '.repeat(match.length));
 }
 
 function entityForms(entity) {
@@ -283,11 +284,16 @@ const QUOTED_NAME_PATTERN = /["«“]([^"»”\r\n]+)["»”]/gu;
 const NAME_TOKEN_PATTERN = /[\p{L}\p{N}]+(?:['’.-][\p{L}\p{N}]+)*/gu;
 const NAME_LEADING_STOP_WORDS = new Set([
   'il', 'lo', 'la', 'i', 'gli', 'le', 'un', 'una', 'uno',
+  'al', 'allo', 'alla', 'ai', 'agli', 'alle', 'dal', 'dallo', 'dalla', 'dai', 'dagli', 'dalle',
+  'del', 'dello', 'della', 'dei', 'degli', 'delle', 'nel', 'nello', 'nella', 'nei', 'negli', 'nelle',
+  'sul', 'sullo', 'sulla', 'sui', 'sugli', 'sulle', 'tra', 'fra',
   'der', 'die', 'das', 'ein', 'eine', 'einer', 'einem', 'einen',
+  'den', 'dem', 'des', 'eines', 'ins', 'ans', 'aus', 'bei', 'nach', 'seit', 'vom', 'zum', 'zur',
   'the', 'a', 'an', 'le', 'les', 'un', 'une', 'des',
-  'ad', 'al', 'alla', 'allo', 'ai', 'agli', 'da', 'dal', 'dalla',
-  'di', 'in', 'nel', 'nella', 'sul', 'sulla', 'con', 'per',
-  'au', 'aux', 'du', 'dans', 'en', 'à', 'im', 'am', 'auf', 'mit',
+  'from', 'to', 'in', 'on', 'at', 'by', 'with',
+  'ad', 'da', 'di', 'con',
+  'au', 'aux', 'du', 'dans', 'en', 'à', 'sur', 'sous', 'chez', 'avec', 'par', 'sans', 'entre', 'vers',
+  'im', 'am', 'auf', 'mit', 'über', 'unter', 'für', 'vor', 'zu',
 ]);
 const OFFICIAL_NAME_MARKERS = new Set([
   'associazione', 'association', 'azienda', 'banca', 'bancastato', 'bank',
@@ -334,7 +340,8 @@ function containsTokenBoundedText(text, candidate) {
  * Source-identical proper/official names are opaque to the generic canton
  * normalizer. A bare `Canton Ticino` in prose remains a canton phrase; a
  * multiword title such as `Caisse Santé Genève` or `Fondazione Canton Ticino`
- * is protected only when the same span exists in the Italian source.
+ * is protected only when the same marker-anchored span exists in the Italian
+ * source, with a translated leading article or preposition removed.
  */
 function sourceIdenticalNameRanges(value, sourceText) {
   if (!sourceText) return [];
@@ -355,16 +362,27 @@ function sourceIdenticalNameRanges(value, sourceText) {
     if (!candidateSearchText || !containsTokenBoundedText(sourceSearchText, candidateSearchText)) return;
     ranges.push([start, end]);
   };
+  const addMarkerAnchoredSubspans = (start, end) => {
+    const candidate = text.slice(start, end);
+    NAME_TOKEN_PATTERN.lastIndex = 0;
+    for (const token of candidate.matchAll(NAME_TOKEN_PATTERN)) {
+      if (!OFFICIAL_NAME_MARKERS.has(token[0].toLocaleLowerCase('en'))) continue;
+      const markerStart = start + (token.index ?? 0);
+      add(markerStart, end, text.slice(markerStart, end));
+    }
+  };
 
   NAME_SPAN_PATTERN.lastIndex = 0;
   for (const match of text.matchAll(NAME_SPAN_PATTERN)) {
     const start = match.index ?? 0;
     add(start, start + match[0].length, match[0]);
+    addMarkerAnchoredSubspans(start, start + match[0].length);
   }
   QUOTED_NAME_PATTERN.lastIndex = 0;
   for (const match of text.matchAll(QUOTED_NAME_PATTERN)) {
     const start = (match.index ?? 0) + match[0].indexOf(match[1]);
     add(start, start + match[1].length, match[1]);
+    addMarkerAnchoredSubspans(start, start + match[1].length);
   }
   return ranges;
 }
@@ -437,19 +455,23 @@ function replaceOutsideUrls(value, pattern, replacer) {
   const text = String(value || '');
   let result = '';
   let cursor = 0;
+  const replaceSegment = (segment, segmentStart) => segment.replace(pattern, (match, offset) => (
+    replacer(match, segmentStart + Number(offset), text)
+  ));
   URL_PATTERN.lastIndex = 0;
   for (const match of text.matchAll(URL_PATTERN)) {
     const offset = match.index ?? cursor;
-    result += text.slice(cursor, offset).replace(pattern, replacer);
+    result += replaceSegment(text.slice(cursor, offset), cursor);
     result += match[0];
     cursor = offset + match[0].length;
   }
-  return result + text.slice(cursor).replace(pattern, replacer);
+  return result + replaceSegment(text.slice(cursor), cursor);
 }
 
 function localizedToponymHits(value, { protectNames = false, sourceText = '', slug = false } = {}) {
-  const text = withoutUrls(normalizeToponymMatchText(value));
-  const protectedNameRanges = protectNames ? protectedRanges(text, sourceText) : [];
+  const normalizedText = normalizeToponymMatchText(value);
+  const text = withoutUrls(normalizedText);
+  const protectedNameRanges = protectNames ? protectedRanges(normalizedText, sourceText) : [];
   const hits = [];
   const pattern = slug ? TOPONYM_SLUG_PATTERN : TOPONYM_PATTERN;
   for (const match of text.matchAll(pattern)) {
@@ -537,24 +559,39 @@ export function replaceLocalizedToponymMismatches({ sourceText = '', targetText 
   // the matched exonym span is replaced.
   let replacements = 0;
   const replacementCounts = new Map();
-  for (const issue of [...issues].sort((left, right) => right.form.length - left.form.length)) {
-    const pattern = new RegExp(
-      `(?<![\\p{L}\\p{N}])${slug ? slugTermPattern(issue.form) : rawTermPattern(issue.form)}(?![\\p{L}\\p{N}])`,
-      'giu',
-    );
-    let issueReplacements = 0;
-    text = replaceOutsideUrls(text, pattern, (match, offset, segment) => {
-      const start = Number(offset);
-      const end = start + match.length;
-      if (protectedRanges(segment, sourceText).some(([rangeStart, rangeEnd]) => start >= rangeStart && end <= rangeEnd)) {
-        return match;
-      }
-      replacements += 1;
-      issueReplacements += 1;
-      return slug ? localizedSlugForm(issue.expected) : issue.expected;
+  const issuePatterns = [...issues]
+    .sort((left, right) => right.form.length - left.form.length)
+    .map((issue) => {
+      const termPattern = slug ? slugTermPattern(issue.form) : rawTermPattern(issue.form);
+      return {
+        issue,
+        termPattern,
+        matcher: new RegExp(`^(?:${termPattern})$`, 'iu'),
+      };
     });
-    replacementCounts.set(issueKey(issue), issueReplacements);
-  }
+  for (const { issue } of issuePatterns) replacementCounts.set(issueKey(issue), 0);
+  const pattern = new RegExp(
+    `(?<![\\p{L}\\p{N}])(?:${issuePatterns.map(({ termPattern }) => termPattern).join('|')})(?![\\p{L}\\p{N}])`,
+    'giu',
+  );
+  // These are raw coordinates on the complete target. URL splitting below
+  // must not recalculate them on partial segments.
+  const protectedNameRanges = protectedRanges(text, sourceText);
+  text = replaceOutsideUrls(text, pattern, (match, offset) => {
+    const matchedIssue = issuePatterns.find(({ matcher }) => matcher.test(match));
+    if (!matchedIssue) return match;
+    const start = Number(offset);
+    const end = start + match.length;
+    if (protectedNameRanges.some(([rangeStart, rangeEnd]) => start >= rangeStart && end <= rangeEnd)) {
+      return match;
+    }
+    replacements += 1;
+    replacementCounts.set(
+      issueKey(matchedIssue.issue),
+      (replacementCounts.get(issueKey(matchedIssue.issue)) || 0) + 1,
+    );
+    return slug ? localizedSlugForm(matchedIssue.issue.expected) : matchedIssue.issue.expected;
+  });
   return { text, replacements, replacementCounts, issues };
 }
 
