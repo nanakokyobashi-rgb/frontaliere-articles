@@ -16042,6 +16042,14 @@ async function generateArticleImage(data, { deadlineAt = Date.now() + IMAGE_PHAS
     const stagingDir = result?.stagingDir || (result?.filePath ? path.dirname(result.filePath) : null);
     if (stagingDir && existsSync(stagingDir)) rmSync(stagingDir, { recursive: true, force: true });
     console.error(`  ⚠️  Motore immagini governato fallito: ${error.message}`);
+    if (error?.sharedProviderUnavailable === true) {
+      const unavailable = new Error(`Article cover verification is blocked by a shared provider outage: ${error.message}`);
+      unavailable.code = ARTICLE_COVER_FALLBACK_ERROR_CODES.VERIFICATION_UNAVAILABLE;
+      unavailable.retryable = true;
+      unavailable.sharedProviderUnavailable = true;
+      unavailable.cause = error;
+      throw unavailable;
+    }
     data._imageGenerationFailureDisposition = classifyImageRegenerationFailure(error);
     data._imageGenerationFailureReason = String(error.message || 'engine-failed')
       .replace(/\s+/g, ' ').trim().slice(0, 180) || 'engine-failed';

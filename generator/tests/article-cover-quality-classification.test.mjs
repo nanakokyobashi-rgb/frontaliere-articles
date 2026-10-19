@@ -121,6 +121,18 @@ test('only a cover-verifier outage uses the shared provider deferral', () => {
   assert.match(SRC.slice(start, sectionLocal), /EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE/);
 });
 
+test('a shared image-verifier outage bypasses catalog fallback retries', () => {
+  const imageFunction = SRC.indexOf('async function generateArticleImage(');
+  const engineCatch = SRC.indexOf('} catch (error) {', imageFunction);
+  const genericRetry = SRC.indexOf('data._imageGenerationFailureDisposition = classifyImageRegenerationFailure(error);', engineCatch);
+  const catchBlock = SRC.slice(engineCatch, genericRetry);
+  assert.ok(imageFunction !== -1 && engineCatch > imageFunction && genericRetry > engineCatch);
+  assert.match(catchBlock, /error\?\.sharedProviderUnavailable === true/);
+  assert.match(catchBlock, /ARTICLE_COVER_FALLBACK_ERROR_CODES\.VERIFICATION_UNAVAILABLE/);
+  assert.match(catchBlock, /unavailable\.sharedProviderUnavailable = true/);
+  assert.match(catchBlock, /throw unavailable/);
+});
+
 test('candidate-specific retryable cover failures retain their section-local exit', () => {
   assert.match(
     SRC,

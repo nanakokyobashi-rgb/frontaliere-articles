@@ -834,10 +834,6 @@ jobs:
             outcome_kind="error"
             outcome_reason="no-attempt"
             outcome_section="$effective"
-          elif [ "$provider_blocked" = "true" ]; then
-            outcome_kind="no-article"
-            outcome_reason="provider-unavailable"
-            outcome_section="$effective"
           elif [ "$roster_blocked" = "true" ]; then
             outcome_kind="error"
             outcome_reason="roster-blocked"
@@ -845,6 +841,10 @@ jobs:
           elif [ "$outcome_kind" != "timeout" ] && [ "$all_declared" != "true" ]; then
             outcome_kind="error"
             outcome_reason="undeclared"
+            outcome_section="$effective"
+          elif [ "$provider_blocked" = "true" ]; then
+            outcome_kind="no-article"
+            outcome_reason="provider-unavailable"
             outcome_section="$effective"
           elif [ "$all_declared" = "true" ]; then
             outcome_kind="no-article"
@@ -869,11 +869,6 @@ jobs:
           if [ "$produced" = "true" ]; then
             exit 0
           fi
-          if [ "$provider_blocked" = "true" ]; then
-            echo "::notice::pool AI condiviso temporaneamente indisponibile: nessun retry immediato, si attende il prossimo cron"
-            exit 0
-          fi
-
           if [ "$tried" = "0" ]; then
             echo "::error::nessun tentativo eseguito: il budget wall-clock era gia' speso prima del primo. Una run che non prova nemmeno non e' un esito normale."
             exit 1
@@ -885,6 +880,10 @@ jobs:
           if [ "$all_declared" != "true" ]; then
             echo "::error::nessun articolo in $tried tentativi, e la ragione NON e' dichiarata: ${undeclared_why}. Vedi generator/scripts/lib/exhaustion-disposition.mjs per i codici dichiarati. Un'uscita senza articolo e senza dichiarazione e' il verde silenzioso della #313 (60+ run 'success' consecutive, 06:06Z→16:30Z del 2026-08-14), e da qui in poi e' rossa."
             exit 1
+          fi
+          if [ "$provider_blocked" = "true" ]; then
+            echo "::notice::pool AI condiviso temporaneamente indisponibile: nessun retry immediato, si attende il prossimo cron"
+            exit 0
           fi
           echo "nessun articolo, ma ogni tentativo ha dichiarato una ragione locale alla sezione (exit 4) — verde"
           exit 0

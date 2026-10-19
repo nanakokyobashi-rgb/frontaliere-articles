@@ -508,6 +508,22 @@ test('exit 5 per indisponibilita\' AI resta verde e ferma i retry immediati', ()
   assert.match(r.stdout, /si attende il prossimo cron/);
 });
 
+test('exit 5 successivo non nasconde un errore precedente non dichiarato', () => {
+  const r = runGenerateBlock({ exitPerAttempt: [1, EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE] });
+  assert.equal(r.status, 1, 'il blocco condiviso non puo\' rendere verde un run con un errore precedente');
+  assert.equal(r.attempts, 2, 'il caso riproduce un primo errore e il successivo exit 5');
+  assert.match(r.outputs, /declared=false/);
+  assert.match(r.stdout, /codice non dichiarato/);
+});
+
+test('exit 5 successivo non nasconde un roster gia\' bloccato', () => {
+  const r = runGenerateBlock({ exitPerAttempt: [3, EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE] });
+  assert.equal(r.status, 1, 'un blocco del roster resta rosso anche se la sezione gemella esce 5');
+  assert.equal(r.attempts, 2);
+  assert.match(r.outputs, /roster_blocked=true/);
+  assert.match(r.stdout, /roster esaurito/);
+});
+
 test('i codici prima assorbiti come «no-article-this-run» ora sono rossi', () => {
   // Erano tutti verdi: e' la superficie su cui qualunque miscela di errori
   // poteva tornare, ed e' la ragione per cui la #357 non ha chiuso il difetto.
