@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-frontaliere-formazione-riqualifica-2026.webp",
-      "sha256": "e0172f7e46dfbe7f1f8d85694cebf69100ea37e93e400403695adebc20dfe5fe"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-frontaliere-formazione-riqualifica-2026-480w.webp",
-      "sha256": "21b08126123727be79680752e91c50b4b7dc2d2ce9d575204b62c59f30c2b609"
-    }
-  ]
+  "items": []
 }
