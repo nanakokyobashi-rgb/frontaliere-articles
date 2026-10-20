@@ -556,6 +556,20 @@ jobs:
             echo "stagedContentPaths.length=${#stagedContentPaths[@]}"
           }
 
+          await_cooperative_stop_marker() {
+            local marker_file="$1" token="$2" line
+            [ -r "$marker_file" ] || return 1
+            while IFS= read -r line; do
+              case "$line" in
+                "GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGTERM token=$token"|\
+                "GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGINT token=$token")
+                  return 0
+                  ;;
+              esac
+            done < "$marker_file"
+            return 1
+          }
+
           sections=("$TARGET_SECTION")
           if [ -z "${SOURCE_URL:-}" ] && {
             [ "${EVENT_NAME:-}" != "workflow_dispatch" ] ||
@@ -741,6 +755,11 @@ jobs:
 
             rm -f "$stall_flag"
             : > "$stall_log"
+            stop_marker_file="$diag_dir/generation-stop-$tried"
+            stop_marker_token="${run_id}-${run_attempt}-${tried}-${RANDOM}-$$"
+            rm -f "$stop_marker_file"
+            export GENERATION_STOP_FILE="$stop_marker_file"
+            export GENERATION_STOP_TOKEN="$stop_marker_token"
             if [ -n "${SOURCE_URL:-}" ]; then
               timeout --signal=TERM --kill-after=60s "${cap}s" \
                 node --report-on-signal --report-signal=SIGUSR2 --report-directory="$diag_dir" \
@@ -770,11 +789,11 @@ jobs:
               [ -n "$undeclared_why" ] || undeclared_why="stallo: nessun output per ${stall_s}s sulla sezione $sec (kill del watchdog, exit $rc) — l'event loop e' bloccato da lavoro sincrono, ed e' un difetto DIVERSO dal kill duro per budget scaduto. Lo stack e' nell'artifact generate-article-diagnostics."
               break
             fi
+            cooperative_stop=false
+            if [ "$rc" = "124" ] && await_cooperative_stop_marker "$stop_marker_file" "$stop_marker_token"; then
+              cooperative_stop=true
+            fi
             if [ "$rc" = "124" ] || [ "$rc" = "137" ]; then
-              cooperative_stop=false
-              if [ "$rc" = "124" ] && grep -Fq 'GENERATION_STOP kind=timeout reason=cooperative-sigterm' "$stall_log"; then
-                cooperative_stop=true
-              fi
               if [ "$cooperative_stop" = "true" ]; then
                 body="$(article_body_added || true)"
                 if [ -n "$body" ]; then

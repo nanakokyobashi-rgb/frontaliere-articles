@@ -13,8 +13,9 @@
  * Cosa questo test NON difende: l'atomicita' della scrittura. Quella e' gia'
  * chiusa da #561 (temp + `renameSync`) ed e' difesa da
  * `create-article-write-atomic.test.mjs`. E' anche il motivo per cui l'handler
- * qui e' un FLAG e non una routine di salvataggio: lavorare dentro un signal
- * handler correrebbe contro il flush che #561 ha reso atomico.
+ * qui e' un FLAG e non una routine di salvataggio: l'unico effetto aggiuntivo
+ * e' la piccola prova di controllo per il wrapper, che non scrive il corpus e
+ * non corre contro il flush che #561 ha reso atomico.
  *
  * Forma del test: by-construction sul sorgente, come il gemello write-atomic e
  * per la stessa ragione — importare il modulo esegue `main()`, e gli helper
@@ -119,6 +120,15 @@ test('#525: la fermata e\' DICHIARATA, non muta', () => {
     'una fermata voluta non e\' un errore: ::error qui produrrebbe un rosso di CI che nessun fix puo\' chiudere (stessa classe di #170)');
   assert.match(ATTIVO, /GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=\$\{signal\}/,
     'il wrapper timeout deve poter distinguere il SIGTERM cooperativo da un SIGKILL hard');
+});
+
+test('#525: la dichiarazione machine-readable usa il canale per-attempt', () => {
+  assert.match(ATTIVO, /GENERATION_STOP_FILE/,
+    'il workflow deve poter fornire un file di controllo separato dal log misto');
+  assert.match(ATTIVO, /GENERATION_STOP_TOKEN/,
+    'la prova deve essere legata al tentativo corrente, non solo alla stringa del marker');
+  assert.match(ATTIVO, /writeFileSync\(process\.env\.GENERATION_STOP_FILE,[\s\S]{0,260}flag:\s*'wx'/,
+    'il marker deve essere scritto sincronicamente e senza sovrascrivere una prova stale');
 });
 
 test('#525: l\'handler resta idempotente — due SIGTERM non raddoppiano l\'uscita', () => {
