@@ -951,23 +951,46 @@ async function waitForPublishRetry(ms, sleepImpl, signal) {
   await publishSignalBoundary(signal);
 }
 
+/** Interrompe anche una sonda iniettata che non onora il signal da sola. */
+async function runWithPublishSignal(operation, signal) {
+  if (!signal) return operation();
+  await publishSignalBoundary(signal);
+  let onAbort;
+  const aborted = new Promise((_, reject) => {
+    onAbort = () => reject(publishAbortError());
+    signal.addEventListener('abort', onAbort, { once: true });
+    if (signal.aborted) onAbort();
+  });
+  try {
+    return await Promise.race([
+      Promise.resolve().then(operation),
+      aborted,
+    ]);
+  } finally {
+    signal.removeEventListener('abort', onAbort);
+  }
+}
+
 /** GET con cache-buster, ritentata: una pagina appena caricata puo' metterci qualche secondo. */
-async function probe(url, { attempts = 6, delayMs = 4000, want = () => true } = {}) {
+async function probe(url, { attempts = 6, delayMs = 4000, want = () => true, signal } = {}) {
   let last = 'nessuna risposta';
   for (let i = 1; i <= attempts; i++) {
     try {
+      await publishSignalBoundary(signal);
       const res = await fetchWithRefTimeout(`${url}${url.includes('?') ? '&' : '?'}_spcb=${Date.now()}.${i}`, {
         redirect: 'manual',
         headers: { 'user-agent': 'frontaliere-corpus-publisher/1 (+https://frontaliereticino.ch)' },
+        signal,
       }, 20000);
       const body = res.status === 200 ? await res.text() : '';
       if (res.status !== 200) releaseFetchWithRefTimeout(res);
       if (res.status === 200 && want(body)) return { ok: true, status: 200, body };
       last = res.status === 200 ? 'risposta 200 senza il contenuto atteso' : `HTTP ${res.status}`;
     } catch (error) {
+      if (signal?.aborted) throw error;
       last = error?.message ?? String(error);
     }
-    if (i < attempts) await sleep(delayMs);
+    if (i < attempts) await waitForPublishRetry(delayMs, sleep, signal);
   }
   return { ok: false, status: last };
 }
@@ -1344,23 +1367,32 @@ function isNotFoundStatus(status) {
   return status === 404 || status === 'HTTP 404';
 }
 
-export async function confirmCantonPageMissing(
+export async function confirmCantonPageMissingWithSignal(
   url,
-  { probeImpl = probe, sleepImpl = sleep, attempts = 3, delayMs = 1000 } = {},
+  { probeImpl = probe, sleepImpl = sleep, attempts = 3, delayMs = 1000, signal } = {},
 ) {
   const statuses = [];
   for (let attempt = 0; attempt < attempts; attempt++) {
     let observed;
     try {
-      observed = await probeImpl(url, { attempts: 1, delayMs: 0 });
+      observed = await runWithPublishSignal(
+        () => probeImpl(url, { attempts: 1, delayMs: 0, signal }),
+        signal,
+      );
     } catch (error) {
+      if (signal?.aborted) throw error;
       observed = { status: error?.message ?? String(error) };
     }
+    await publishSignalBoundary(signal);
     statuses.push(observed?.status ?? 'nessuna risposta');
     if (!isNotFoundStatus(observed?.status)) return { confirmed: false, statuses };
-    if (attempt + 1 < attempts) await sleepImpl(delayMs);
+    if (attempt + 1 < attempts) await waitForPublishRetry(delayMs, sleepImpl, signal);
   }
   return { confirmed: statuses.length === attempts, statuses };
+}
+
+export async function confirmCantonPageMissing(url, options = {}) {
+  return confirmCantonPageMissingWithSignal(url, options);
 }
 
 /** Snapshot del feed attualmente servito, usato per ripristinare un set parziale. */
@@ -2709,16 +2741,49 @@ export async function main(
       ...requestedMissingPagePaths,
       ...[...knownMissingPagePaths].filter((pagePath) => publishedPagePaths.has(pagePath)),
     ]);
-    for (const pagePath of pathsToConfirm) {
-      const page = renderedPagePaths.get(pagePath) ?? publishedPagePaths.get(pagePath);
-      if (!page) continue;
-      const confirmation = await confirmCantonPageMissing(page.cdnUrl, { probeImpl, sleepImpl });
-      if (!confirmation.confirmed) {
-        defects.push(`pagina dichiarata mancante ora presente o non verificabile: ${pagePath} (${confirmation.statuses.join(' → ')})`);
-        continue;
+    const confirmationAbortController = new AbortController();
+    let confirmationSignalExitStatus = 0;
+    const recordConfirmationSignal = (exitStatus) => {
+      confirmationSignalExitStatus ||= exitStatus;
+      confirmationAbortController.abort();
+    };
+    const onConfirmationSigint = () => recordConfirmationSignal(130);
+    const onConfirmationSigterm = () => recordConfirmationSignal(143);
+    const confirmationSignalHandlersInstalled = publishing && pathsToConfirm.size > 0;
+    if (confirmationSignalHandlersInstalled) {
+      process.on('SIGINT', onConfirmationSigint);
+      process.on('SIGTERM', onConfirmationSigterm);
+    }
+    try {
+      for (const pagePath of pathsToConfirm) {
+        const page = renderedPagePaths.get(pagePath) ?? publishedPagePaths.get(pagePath);
+        if (!page) continue;
+        const confirmation = await confirmCantonPageMissingWithSignal(page.cdnUrl, {
+          probeImpl,
+          sleepImpl,
+          signal: confirmationAbortController.signal,
+        });
+        if (!confirmation.confirmed) {
+          defects.push(`pagina dichiarata mancante ora presente o non verificabile: ${pagePath} (${confirmation.statuses.join(' → ')})`);
+          continue;
+        }
+        if (requestedMissingPagePaths.has(pagePath)) confirmedMissingPagePaths.add(pagePath);
+        if (knownMissingPagePaths.has(pagePath)) confirmedKnownMissingPagePaths.add(pagePath);
       }
-      if (requestedMissingPagePaths.has(pagePath)) confirmedMissingPagePaths.add(pagePath);
-      if (knownMissingPagePaths.has(pagePath)) confirmedKnownMissingPagePaths.add(pagePath);
+    } catch (error) {
+      if (confirmationSignalExitStatus !== 0) {
+        const signalName = confirmationSignalExitStatus === 130 ? 'SIGINT' : 'SIGTERM';
+        const interrupted = new Error(`[${LOG}] publish interrupted by ${signalName}`);
+        interrupted.cause = error;
+        interrupted.exitCode = confirmationSignalExitStatus;
+        throw interrupted;
+      }
+      throw error;
+    } finally {
+      if (confirmationSignalHandlersInstalled) {
+        process.removeListener('SIGINT', onConfirmationSigint);
+        process.removeListener('SIGTERM', onConfirmationSigterm);
+      }
     }
   }
   // During a deferred live release the old sitemap and edge registry are still
