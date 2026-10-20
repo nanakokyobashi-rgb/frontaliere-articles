@@ -149,4 +149,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sezione-medicina-nucleare',
+ category: 'novita',
+ date: '2026-10-20T12:05:23.812Z',
+ image: '/images/blog/article-sezione-medicina-nucleare.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
