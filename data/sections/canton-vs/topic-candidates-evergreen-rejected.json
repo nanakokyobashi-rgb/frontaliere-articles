@@ -4,42 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/814878/politik-stellt-fragen-gehen-beim-saaser-hallendebakel-steuergelder-fl%c3%b6ten": {
-      "section": "canton-vs",
-      "ts": 1792308212502
-    },
-    "canton-vs::https://www.pomona.ch/story/815483/post-weg-digitaler-ersatz-zu-sp%c3%a4t": {
-      "section": "canton-vs",
-      "ts": 1792308219211
-    },
-    "canton-vs::https://www.pomona.ch/story/815406/flossen-f%c3%bcr-die-saastalhalle-steuergelder": {
-      "section": "canton-vs",
-      "ts": 1792308455833
-    },
-    "canton-vs::https://www.pomona.ch/story/814920/digital-oder-auf-papier-die-zahlen-sprechen-beim-brief-f%c3%bcr-sich": {
-      "section": "canton-vs",
-      "ts": 1792308465711
-    },
-    "canton-vs::https://www.pomona.ch/story/815290/glacierexpresschefin-annemarie-meyer-verl%c3%a4sst-das-unternehmen": {
-      "section": "canton-vs",
-      "ts": 1792308471337
-    },
-    "canton-vs::https://www.pomona.ch/story/814440/energie-sparen-im-alltag-einfache-tipps-f%c3%bcr-tiefere-stromkosten": {
-      "section": "canton-vs",
-      "ts": 1792310191013
-    },
-    "canton-vs::https://www.rhonefm.ch/valais/un-projet-immobilier-de-christian-constantin-divise-au-tessin-1813147": {
-      "section": "canton-vs",
-      "ts": 1792310211506
-    },
-    "canton-vs::https://www.pomona.ch/story/815541/sbbmanager-kaufte-sich-lamborghini-mit-steuergeldern-so-lief-der-millionenbetrug-ab": {
-      "section": "canton-vs",
-      "ts": 1792310218539
-    },
-    "canton-vs::https://www.pomona.ch/story/815146/in-deutschland-gilt-sie-als-antisemitisch-israelfeindliche-organisation-mischt-sich-in-abstimmungskampf-ein": {
-      "section": "canton-vs",
-      "ts": 1792310233497
-    },
     "canton-vs::https://www.pomona.ch/story/815298/ausbau-des-%c3%b6vangebots-am-brigerberg": {
       "section": "canton-vs",
       "ts": 1792412612439
@@ -63,6 +27,14 @@
     "canton-vs::https://www.pomona.ch/story/815611/ein-immobilienprojekt-von-christian-constantin-sorgt-im-tessin-f%c3%bcr-kontroversen": {
       "section": "canton-vs",
       "ts": 1792432081947
+    },
+    "canton-vs::https://www.pomona.ch/story/814440/energie-sparen-im-alltag-einfache-tipps-f%c3%bcr-tiefere-stromkosten": {
+      "section": "canton-vs",
+      "ts": 1792492383459
+    },
+    "canton-vs::https://www.lastampa.it/torino/2026/10/20/news/treni_torino_milano_carnet_viaggi_cancellato_protesta_pendolari-15771510": {
+      "section": "canton-vs",
+      "ts": 1792492404195
     }
   }
 }
