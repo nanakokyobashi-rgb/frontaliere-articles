@@ -1162,6 +1162,7 @@ function runChainStep({
   dry = 'false',
   article = 'false',
   declared = 'true',
+  cooperativeStop = 'false',
   rosterBlocked = 'false',
   providerBlocked = 'false',
   sectionProduced = 'frontaliere',
@@ -1216,6 +1217,7 @@ exit 0
         DRY: dry,
         ARTICLE: article,
         DECLARED: declared,
+        COOPERATIVE_STOP: cooperativeStop,
         ROSTER_BLOCKED: rosterBlocked,
         PROVIDER_BLOCKED: providerBlocked,
         SECTION_PRODUCED: sectionProduced,
@@ -1301,6 +1303,10 @@ test('LA GUARDIA STRUTTURALE: senza dichiarazione non parte MAI un anello', () =
     assert.match(r.stdout, /pool AI condiviso temporaneamente indisponibile; si cede al cron/);
     assert.equal(r.status, 0);
   }
+  const cooperative = runChainStep({ cooperativeStop: 'true', declared: 'true' });
+  assert.equal(cooperative.dispatches.length, 0, 'un cap cooperativo non deve dispatchare un successore');
+  assert.match(cooperative.stdout, /cap cooperativo raggiunto/);
+  assert.equal(cooperative.status, 0);
 });
 
 test('IL SOCCORSO E\' UNO PER CATENA: speso il gettone, si cede al cron', () => {
@@ -1398,6 +1404,7 @@ test('lo step Chain non interpola nulla: e\' la regola che lo rende eseguibile q
 test('lo step di generazione espone i blocchi noti separatamente dalla dichiarazione', () => {
   const gen = extractRun('Generate the article');
   assert.match(gen, /echo "declared=\$all_declared"/);
+  assert.match(gen, /echo "cooperative_stop=\$cooperative_stop"/);
   assert.match(gen, /echo "roster_blocked=\$roster_blocked"/);
   assert.match(gen, /echo "provider_blocked=\$provider_blocked"/);
   // `all_declared` resta true quando il roster non serve il prompt (exit 3
@@ -1405,4 +1412,5 @@ test('lo step di generazione espone i blocchi noti separatamente dalla dichiaraz
   // ripartirebbe contro lo stesso muro.
   assert.match(CHAIN_RUN, /ROSTER_BLOCKED/);
   assert.match(CHAIN_RUN, /PROVIDER_BLOCKED/);
+  assert.match(CHAIN_RUN, /COOPERATIVE_STOP/);
 });

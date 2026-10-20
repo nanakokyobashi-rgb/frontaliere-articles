@@ -1760,6 +1760,7 @@ jobs:
             echo "article=$produced"
             echo "section=$effective"
             echo "declared=$all_declared"
+            echo "cooperative_stop=$cooperative_stop"
             echo "roster_blocked=$roster_blocked"
             echo "provider_blocked=$provider_blocked"
             echo "partial_failure=$partial_failure"
@@ -2462,6 +2463,7 @@ jobs:
           DRY: ${{ steps.mode.outputs.dry }}
           ARTICLE: ${{ steps.generate.outputs.article }}
           DECLARED: ${{ steps.generate.outputs.declared }}
+          COOPERATIVE_STOP: ${{ steps.generate.outputs.cooperative_stop }}
           ROSTER_BLOCKED: ${{ steps.generate.outputs.roster_blocked }}
           PROVIDER_BLOCKED: ${{ steps.generate.outputs.provider_blocked }}
           SECTION_PRODUCED: ${{ steps.generate.outputs.section }}
@@ -2515,6 +2517,7 @@ jobs:
           [ "${ARTICLE:-}" = "true" ] && stop "articolo prodotto — il successore lo fa gia' il push su content/**"
           [ "${PROVIDER_BLOCKED:-}" = "true" ] && stop "pool AI condiviso temporaneamente indisponibile; si cede al cron"
           [ "${ROSTER_BLOCKED:-}" = "true" ] && stop "roster esaurito: il prossimo tentativo troverebbe lo stesso muro, non una finestra nuova"
+          [ "${COOPERATIVE_STOP:-}" = "true" ] && stop "cap cooperativo raggiunto: nessun articolo e nessun dispatch immediato; si cede al cron"
 
           # `kind` tiene distinte due cose che finiscono entrambe in un dispatch.
           # L'ANELLO presume che valga la pena riprovare, e lo si concede solo a
