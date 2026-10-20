@@ -121,7 +121,9 @@ test('publisher R2 propaga immagini recuperate e verdetto aggregati dalla pipeli
   for (const match of publisher.matchAll(/\bcurrentManifest\b/g)) {
     assert.ok(match.index >= manifestDeclaration, 'currentManifest non deve essere letto prima della dichiarazione');
   }
-  const imageLeaseAcquire = publisher.indexOf('imageLeases = await acquireImageNamespaceLeasesImpl(imageNamespaces)');
+  const imageLeaseAcquire = publisher.search(
+    /imageLeases = await acquireImageNamespaceLeasesImpl\(imageNamespaces,\s*\{\s*signal:\s*imageLeaseAbortController\.signal,\s*\}\)/,
+  );
   const publishImplCall = publisher.indexOf('summary.published = await publishImpl({');
   const imageLeaseRelease = publisher.indexOf('const imageLeaseReleaseError = await releaseImageLeases();');
   assert.ok(imageLeaseAcquire >= 0 && imageLeaseAcquire < publishImplCall, 'le lease immagini devono essere acquisite prima della transazione di publish');
