@@ -192,7 +192,7 @@ test('publisher: il trasporto R2 propaga la deadline e cancella il body arrivato
   const pending = request({
     method: 'GET',
     key: 'internal/ci/image-namespace-locks/blog.json',
-    deadline: Date.now() + 10,
+    deadline: Date.now() + 1_000,
   });
   await assert.rejects(pending);
   resolveFetch({
