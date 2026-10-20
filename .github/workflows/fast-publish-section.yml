@@ -391,13 +391,41 @@ jobs:
           REPO: ${{ github.repository }}
           SOURCE_COMMIT_INPUT: ${{ inputs.source_commit }}
           SOURCE_MAIN_COMMIT_INPUT: ${{ inputs.source_main_commit }}
+          DISPATCH_NONCE_INPUT: ${{ inputs.dispatch_nonce }}
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
           set -euo pipefail
           # A workflow_run or a bounded workflow_dispatch can be queued after
-          # main has moved. Do not ask the edge registry for the old release:
-          # that turns a harmless stale replay into a deterministic red run
-          # before the publish job can apply its own freshness guard.
+          # main has moved while the edge pointer is still between releases.
+          # Reconcile against the pinned/current release and retry within the
+          # resolve budget instead of turning a harmless stale replay into a
+          # deterministic red run before the publish freshness guard.
+          reconcile_edge_matrix() {
+            local expected_commit="${1:-}"
+            local fallback_commit="${2:-}"
+            local deadline=$(( $(date +%s) + 8 * 60 ))
+            local attempt=0
+            local matrix=''
+            while :; do
+              attempt=$((attempt + 1))
+              if matrix="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$expected_commit" | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"; then
+                printf '%s' "$matrix"
+                return 0
+              fi
+              if [ -n "$fallback_commit" ] && [ "$fallback_commit" != "$expected_commit" ] \
+                && matrix="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$fallback_commit" | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"; then
+                echo "::notice::registro edge coerente sulla release $fallback_commit dopo il tentativo $attempt" >&2
+                printf '%s' "$matrix"
+                return 0
+              fi
+              if [ "$(date +%s)" -ge "$deadline" ]; then
+                echo "::error::registro edge non coerente dopo $attempt tentativi; nessun replay verra' accodato" >&2
+                return 1
+              fi
+              echo "::notice::registro edge in transizione; ritento il piano di riconciliazione tra 5 secondi (tentativo $attempt)" >&2
+              sleep 5
+            done
+          }
           pinned_source=''
           if [ "$EVENT_NAME" = 'workflow_run' ]; then
             pinned_source="${WORKFLOW_RUN_HEAD_SHA:-}"
@@ -445,7 +473,11 @@ jobs:
                 local allow_deferred_live_release="${9:-false}"
                 local replay_before="${10:-}"
                 local replay_after="${11:-}"
+                local dispatch_nonce="${12:-}"
                 [ -n "$section" ] || { echo "::error::sezione assente nel redispatch stale"; return 1; }
+                if [ -z "$dispatch_nonce" ]; then
+                  dispatch_nonce="stale-resolve-${GITHUB_RUN_ID}-${section}"
+                fi
                 gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
                   -f section="$section" \
                   -f article_ids="$article_ids" \
@@ -460,7 +492,7 @@ jobs:
                   -f dry_run="$dry" \
                   -f push_before="$replay_before" \
                   -f push_after="$replay_after" \
-                  -f dispatch_nonce="stale-resolve-${GITHUB_RUN_ID}-${section}"
+                  -f dispatch_nonce="$dispatch_nonce"
               }
               replay_dry=false
               replay_api_after_publish=false
@@ -489,15 +521,13 @@ jobs:
                   "$replay_api_after_publish" \
                   "$allow_deferred_live_release" \
                   "$replay_before" \
-                  "$replay_after"
+                  "$replay_after" \
+                  "${DISPATCH_NONCE_INPUT:-}"
               else
                 if [ -n "$replay_before" ]; then
                   replay_after="$current_main"
                 fi
-                if ! replay_matrix="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$pinned_source" | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"; then
-                  echo "::notice::registro edge non piu' sulla release stantia; provo la HEAD corrente $current_main"
-                  replay_matrix="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$current_main" | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
-                fi
+                replay_matrix="$(reconcile_edge_matrix "$pinned_source" "$current_main")"
                 dispatched=0
                 while IFS=$'\t' read -r section article_ids bootstrap remove_stale; do
                   [ -n "$section" ] || continue
@@ -593,9 +623,7 @@ jobs:
               # release appena completata: anche una kill-switch o un hub
               # mancante puo' rendere non-live una sezione senza una
               # transizione in sections/registry.json.
-              edge_matrix="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan \
-                "$WORKFLOW_RUN_HEAD_SHA" \
-                | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
+              edge_matrix="$(reconcile_edge_matrix "$WORKFLOW_RUN_HEAD_SHA")"
               if [ "$WORKFLOW_RUN_EVENT" = 'push' ]; then
                 if [ -z "$before" ] || [[ "$before" =~ ^0+$ ]]; then before=HEAD~1; fi
                 # Il replay della push API deve riprodurre il piano dei contenuti
@@ -753,6 +781,7 @@ jobs:
           STALE_HEAD: ${{ github.event.workflow_run.head_sha }}
           CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
           ORIGINAL_PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
+          DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
         run: |
           set -euo pipefail
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
@@ -761,6 +790,10 @@ jobs:
             exit 1
           fi
           export GH_TOKEN="$runtime_pat"
+          dispatch_nonce="${DISPATCH_NONCE:-}"
+          if [ -z "$dispatch_nonce" ]; then
+            dispatch_nonce="stale-publish-${GITHUB_RUN_ID}-${SECTION}"
+          fi
           replay_before="${ORIGINAL_PUSH_BEFORE:-$STALE_HEAD}"
           replay_after=''
           if [ -n "$replay_before" ]; then
@@ -813,7 +846,8 @@ jobs:
             -f source_main_commit="$CURRENT_MAIN" \
             -f dry_run="$DRY" \
             -f push_before="$replay_before" \
-            -f push_after="$replay_after"
+            -f push_after="$replay_after" \
+            -f dispatch_nonce="$dispatch_nonce"
 
       - name: Fetch fallback corpus revision for manifest migration
         if: steps.replay_freshness.outputs.fresh == 'true'
@@ -926,8 +960,10 @@ jobs:
           REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
           API_RELEASE_COMMIT: ${{ inputs.api_release_commit }}
           ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
+          REPLAY_API_AFTER_PUBLISH: ${{ needs.resolve.outputs.replay_api_after_publish }}
           SOURCE_COMMIT: ${{ inputs.source_commit }}
           SOURCE_MAIN_COMMIT: ${{ inputs.source_main_commit }}
+          DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
           REF: ${{ github.ref }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           EXPECTED_MAIN_HEAD: ${{ github.event.workflow_run.head_sha || inputs.source_main_commit || github.event.after || github.sha }}
@@ -975,6 +1011,10 @@ jobs:
                 exit 1
               fi
               export GH_TOKEN="$runtime_pat"
+              dispatch_nonce="${DISPATCH_NONCE:-}"
+              if [ -z "$dispatch_nonce" ]; then
+                dispatch_nonce="stale-late-${GITHUB_RUN_ID}-${SECTION}"
+              fi
               if [ "$EVENT_NAME" = 'workflow_run' ]; then
                 echo "::notice::replay workflow_run redispatchato prima degli upload: main e' avanzato da $pinned_replay_main a $current_main"
               else
@@ -1017,13 +1057,15 @@ jobs:
                 -f known_missing_page_paths="$KNOWN_MISSING_PAGE_PATHS_JSON" \
                 -f bootstrap="$BOOTSTRAP" \
                 -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
+                -f replay_api_after_publish="$REPLAY_API_AFTER_PUBLISH" \
                 -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
                 -f api_release_commit="$api_release_commit" \
                 -f source_commit="$current_main" \
                 -f source_main_commit="$current_main" \
                 -f dry_run="$DRY" \
                 -f push_before="$replay_before" \
-                -f push_after="$replay_after"
+                -f push_after="$replay_after" \
+                -f dispatch_nonce="$dispatch_nonce"
               exit 0
             fi
           fi
@@ -1265,6 +1307,7 @@ jobs:
           DRY: ${{ needs.resolve.outputs.dry }}
           REPLAY_API_AFTER_PUBLISH: ${{ needs.resolve.outputs.replay_api_after_publish }}
           ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
+          DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
         run: |
           set -euo pipefail
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
@@ -1277,9 +1320,14 @@ jobs:
             exit 1
           fi
           export GH_TOKEN="$runtime_pat"
+          dispatch_nonce_input="${DISPATCH_NONCE:-}"
           dispatched=0
           while IFS=$'\t' read -r section article_ids missing_page_paths known_missing_page_paths bootstrap remove_stale; do
             [ -n "$section" ] || continue
+            dispatch_nonce="$dispatch_nonce_input"
+            if [ -z "$dispatch_nonce" ]; then
+              dispatch_nonce="stale-staged-recovery-${GITHUB_RUN_ID}-${section}"
+            fi
             echo "::notice::recovery staged $section sulla HEAD corrente $CURRENT_MAIN"
             gh workflow run fast-publish-section.yml --repo "$REPOSITORY" --ref main \
               -f section="$section" \
@@ -1293,7 +1341,7 @@ jobs:
               -f replay_api_after_publish="$REPLAY_API_AFTER_PUBLISH" \
               -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
               -f dry_run="$DRY" \
-              -f dispatch_nonce="stale-staged-recovery-${GITHUB_RUN_ID}-${section}"
+              -f dispatch_nonce="$dispatch_nonce"
             dispatched=$((dispatched + 1))
           done < <(jq -r '.[] | [.section, ((.ids // []) | tojson), ((.missingPagePaths // []) | tojson), ((.knownMissingPagePaths // []) | tojson), (.bootstrap // false), (.removeStaleCantonRssFeeds // false)] | @tsv' <<<"$TARGET_MATRIX")
           if [ "$dispatched" -eq 0 ]; then

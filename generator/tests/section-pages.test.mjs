@@ -3126,6 +3126,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /id: replay_freshness[\s\S]*gh api "repos\/\$REPO\/git\/ref\/heads\/main"/);
   assert.match(wf, /SOURCE_COMMIT_INPUT: \$\{\{ inputs\.source_commit \}\}/);
   assert.match(wf, /SOURCE_MAIN_COMMIT_INPUT: \$\{\{ inputs\.source_main_commit \}\}/);
+  assert.match(wf, /DISPATCH_NONCE_INPUT: \$\{\{ inputs\.dispatch_nonce \}\}/);
   assert.match(
     wf,
     /pinned_source="\$\{SOURCE_MAIN_COMMIT_INPUT:-\$SOURCE_COMMIT_INPUT\}[\s\S]*replay stantio saltato nel resolve/,
@@ -3138,6 +3139,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(staleResolve, /FIREBASE_SERVICE_ACCOUNT_JSON assente/);
   assert.match(staleResolve, /gh workflow run fast-publish-section\.yml --repo "\$REPO" --ref main/);
   assert.match(staleResolve, /-f source_commit="\$current_main"/);
+  assert.match(staleResolve, /-f dispatch_nonce="\$dispatch_nonce"/);
+  assert.match(staleResolve, /"\$replay_after" \\\n\s+"\$\{DISPATCH_NONCE_INPUT:-\}"/);
   assert.match(staleResolve, /replay_after="\$current_main"/);
   assert.doesNotMatch(staleResolve, /replay_after="\$\{DISPATCH_PUSH_AFTER:-\}"/);
   assert.ok(
@@ -3160,6 +3163,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.equal((wf.match(/gh workflow run fast-publish-section\.yml --repo "\$(?:REPO|REPOSITORY)" --ref main/g) ?? []).length, 4);
   assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /-f source_commit="\$current_main"/);
+  assert.equal(
+    (wf.match(/-f dispatch_nonce="\$dispatch_nonce"/g) ?? []).length,
+    4,
+    'ogni redispatch stale deve conservare il nonce della run originaria o generarne un fallback per sezione',
+  );
   assert.match(wf, /source_commit richiede una SHA completa/);
   assert.match(wf, /source_main_commit e' obbligatorio e richiede una SHA completa quando source_commit e' valorizzato/);
   assert.match(wf, /if \[ "\$SOURCE_COMMIT_INPUT" != "\$SOURCE_MAIN_COMMIT_INPUT" \]/);
@@ -3201,6 +3209,16 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /Load dispatch token for stale replay recovery\n\s+if: steps\.replay_freshness\.outputs\.fresh == 'false'/);
   assert.match(wf, /REPLAY_API_AFTER_PUBLISH: \$\{\{ inputs\.replay_api_after_publish \}\}/);
   assert.match(wf, /-f replay_api_after_publish="\$REPLAY_API_AFTER_PUBLISH"/);
+  assert.match(wf, /REPLAY_API_AFTER_PUBLISH: \$\{\{ needs\.resolve\.outputs\.replay_api_after_publish \}\}/);
+  assert.equal(
+    (wf.match(/-f replay_api_after_publish="\$REPLAY_API_AFTER_PUBLISH"/g) ?? []).length,
+    3,
+    'resolve, late guard e recovery devono propagare il flag del replay API',
+  );
+  assert.match(wf, /reconcile_edge_matrix\(\) \{/);
+  assert.match(wf, /registro edge in transizione; ritento il piano di riconciliazione tra 5 secondi/);
+  assert.match(wf, /replay_matrix="\$\(reconcile_edge_matrix "\$pinned_source" "\$current_main"\)"/);
+  assert.match(wf, /edge_matrix="\$\(reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"\)"/);
   assert.match(wf, /replay bounded stantio: ricalcolo la release API sulla HEAD/);
   assert.match(wf, /git rev-parse --is-shallow-repository/);
   assert.match(wf, /remove_stale_canton_rss_feeds/);
@@ -3229,8 +3247,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /name: Fetch push base \(resolve\)[\s\S]*?bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
   assert.doesNotMatch(wf, /diff_args=\(\)[\s\S]*sections\/registry\.json/);
   assert.match(wf, /PUSH_BEFORE="\$before" node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
-  assert.match(wf, /r2-reconcile-plan \\\n\s+"\$WORKFLOW_RUN_HEAD_SHA"/);
-  assert.match(wf, /edge_matrix="\$\(node scripts\/ci\/fast-publish-section\.mjs r2-reconcile-plan/);
+  assert.match(wf, /reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"/);
+  assert.match(wf, /edge_matrix="\$\(reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"\)"/);
   assert.match(wf, /if \[ "\$WORKFLOW_RUN_EVENT" = 'push' \]/);
   assert.match(wf, /r2-api-push-plan/);
   assert.match(wf, /landing\/archive\/hub\/RSS/);
