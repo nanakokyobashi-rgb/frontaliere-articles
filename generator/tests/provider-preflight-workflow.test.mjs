@@ -50,7 +50,7 @@ test('anche il batch FAQ usa lo stesso preflight e non il solo PAT GitHub', () =
 
 test('il daily brief prepara il broker Codex prima del producer della copertina', () => {
   const load = DAILY_BRIEF_WORKFLOW.indexOf('- name: Load generation secrets from Remote Config');
-  const setup = DAILY_BRIEF_WORKFLOW.indexOf('id: setup_codex_image_lane');
+  const setup = DAILY_BRIEF_WORKFLOW.indexOf('id: setup_claude_haiku_fallback');
   const producer = DAILY_BRIEF_WORKFLOW.indexOf('- name: Generate the daily edition');
   const cleanup = DAILY_BRIEF_WORKFLOW.indexOf('- name: Cleanup Codex auth broker');
 

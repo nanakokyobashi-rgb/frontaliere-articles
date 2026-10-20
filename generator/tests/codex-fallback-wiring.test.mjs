@@ -70,6 +70,7 @@ const NON_CRAWLER_CONSUMERS = [
   '.github/workflows/batch-faq-articles.yml',
   '.github/workflows/generate-article-core.yml',
   '.github/workflows/generate-article.yml',
+  '.github/workflows/generate-daily-brief.yml',
   '.github/workflows/regenerate-queued-covers.yml',
 ];
 

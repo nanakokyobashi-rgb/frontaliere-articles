@@ -144,7 +144,7 @@ jobs:
       # without this lane the daily producer reports `spawn codex ENOENT` and
       # then exhausts providers whose keys are intentionally optional.
       - name: Setup Codex image lane
-        id: setup_codex_image_lane
+        id: setup_claude_haiku_fallback
         if: steps.mode.outputs.dry != 'true'
         continue-on-error: true
         uses: ./.github/actions/setup-claude-haiku-fallback
@@ -158,14 +158,14 @@ jobs:
         id: producer
         env:
           DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
-          CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_codex_image_lane.outputs.codex_auth_broker_socket }}
+          CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
         run: node generator/scripts/generate-daily-brief-article.mjs
 
       - name: Cleanup Codex auth broker
         if: always()
         continue-on-error: true
         env:
-          CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_codex_image_lane.outputs.codex_auth_broker_socket }}
+          CODEX_AUTH_BROKER_SOCKET: ${{ steps.setup_claude_haiku_fallback.outputs.codex_auth_broker_socket }}
         run: |
           if [ -z "$CODEX_AUTH_BROKER_SOCKET" ] || [ ! -S "$CODEX_AUTH_BROKER_SOCKET" ]; then
             exit 0
