@@ -3128,7 +3128,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /SOURCE_MAIN_COMMIT_INPUT: \$\{\{ inputs\.source_main_commit \}\}/);
   assert.match(
     wf,
-    /replay stantio saltato nel resolve[\s\S]*pinned_source="\$\{SOURCE_MAIN_COMMIT_INPUT:-\$SOURCE_COMMIT_INPUT\}/,
+    /pinned_source="\$\{SOURCE_MAIN_COMMIT_INPUT:-\$SOURCE_COMMIT_INPUT\}[\s\S]*replay stantio saltato nel resolve/,
     'il resolve deve saltare un bounded replay quando main e\u0027 avanzata',
   );
   assert.match(wf, /- name: Guard pinned replay freshness/);
