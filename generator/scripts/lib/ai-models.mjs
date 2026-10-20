@@ -8969,9 +8969,11 @@ async function _callGeminiRaw(model, messages, opts) {
 // ── Model routing ────────────────────────────────────────────
 
 /**
- * Grace added on top of the computed worst case, so the provider's OWN abort
- * (the per-request transport / claude-CLI SIGKILL timer) always gets the first shot
- * at ending the call — the hard cap below is the backstop for when it doesn't.
+ * Grace added on top of the computed worst case when the caller did not provide
+ * an absolute deadline, so the provider's OWN abort (the per-request transport /
+ * claude-CLI SIGKILL timer) always gets the first shot at ending the call — the
+ * hard cap below is the backstop for when it doesn't. Once a caller provides a
+ * deadline, that deadline is authoritative and the cap must not outlive it.
  */
 const HARD_CALL_CAP_GRACE_MS = 60_000;
 
@@ -9028,9 +9030,12 @@ function _hardCallCapMs(model, opts) {
   let cap = attempts * (base + MAX_RETRY_AFTER_MS) * 2 + HARD_CALL_CAP_GRACE_MS;
   if (opts?.deadlineMs) {
     const remaining = opts.deadlineMs - Date.now();
-    // Floor at the grace window so an already-expired deadline still gets one
-    // honest short attempt instead of an instant 0ms abort.
-    cap = Math.min(cap, Math.max(HARD_CALL_CAP_GRACE_MS, remaining + HARD_CALL_CAP_GRACE_MS));
+    // An absolute caller deadline is a hard boundary. The grace above is only
+    // for calls without one: adding it here lets an in-flight provider survive
+    // past the run deadline and leaves the external workflow kill to collect
+    // the unfinished attempt. Keep one millisecond for an already-expired
+    // deadline so the Promise.race still takes its normal timeout path.
+    cap = Math.min(cap, Math.max(1, remaining));
   }
   return cap;
 }
