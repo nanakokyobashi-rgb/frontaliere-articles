@@ -236,6 +236,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-kloentalerstrasse-cantiere-2026': {
+    title: 'Klöntalerstrasse: chiusura temporanea Staldengarten–Bützi',
+    description: 'Lavori previsti sulla Klöntalerstrasse dal 21 ottobre al 4 dicembre 2026: attese brevi, weekend liberi, chiusura temporanea e deviazione via Sackberg.',
+    keywords: 'frontalieri, ticino, svizzera, italia, klöntalerstrasse, chiusura, temporanea, staldengarten',
+    ogTitle: 'Lavori e chiusura sulla Klöntalerstrasse',
+    ogDescription: 'Dal 21 ottobre 2026 la Klöntalerstrasse, tra Staldengarten e Bützi, sarà interessata da lavori. Tra il 15 novembre e il 4 dicembre è prevista una chiusura temporanea per l\'asfalto, con deviazione segnalata via Sackberg.',
+    canonicalPath: '/articoli-glarona/kloentalerstrasse-cantiere-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Klöntalerstrasse: chiusura temporanea Staldengarten–Bützi",
+      "description": "Lavori previsti sulla Klöntalerstrasse dal 21 ottobre al 4 dicembre 2026: attese brevi, weekend liberi, chiusura temporanea e deviazione via Sackberg.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-kloentalerstrasse-cantiere-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavori sulla Klöntalerstrasse tra Staldengarten e Bützi nel Canton Glarona"
+      },
+      "datePublished": "2026-10-19T12:11:05+00:00",
+      "dateModified": "2026-10-19T12:11:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-glarona/kloentalerstrasse-cantiere-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

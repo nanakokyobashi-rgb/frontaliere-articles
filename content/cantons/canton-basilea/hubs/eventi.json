@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "5374e272064fbe636215ecb969b021cb6a855e26a6593ed27288bffaaa17395f",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "807a7fa5f7ffbfd9db3af57434123d21661a073cd38a1ac2c8bab36061771f13",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-19T15:42:28.810Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "102",
+          "value": "91",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Der Tag, an dem die Musik verboten wurde | The Day Music Was Banned",
+              "label": "Daniel Migliosi Quintet",
               "detail": "the bird's eye jazz club",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/der-tag-an-dem-die-musik-verboten-wurde-the-day-music-was-banned_AfY6sf7"
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/daniel-migliosi-quintet_AC3pN6i"
             },
             {
-              "label": "Ruth Asawa",
-              "detail": "Fondation Beyeler, Riehen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ruth-asawa/"
-            },
-            {
-              "label": "Zaubersocken - Neue Trixx, frisch serviert!",
+              "label": "Komponist, Münsterorganist und Pädagoge in Basel",
               "detail": "Basel",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubersocken-neue-trixx-frisch-serviert/"
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/komponist-muensterorganist-und-paedagoge-in-basel/"
             },
             {
-              "label": "OpenSunday Riehen",
-              "detail": "Hallenbad Schulhaus Wasserstelzen, Riehen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/opensunday-riehen/"
+              "label": "Flook - präsentiert von Celtic Carrousel Tours",
+              "detail": "Barakuba",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/flook-praesentiert-von-celtic-carrousel-tours_ASxKt5g"
             },
             {
-              "label": "Sing & Jam Session #zusammen singen und musizieren, #pop/rock cover songs",
-              "detail": "Quartiertreffpunkt LoLa",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sing-und-jam-session-zusammen-singen-und-musizieren-poprock-cover-songs_A3miUT6"
+              "label": "Nat Su/Jean-Paul Brodbeck Duo",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/nat-sujean-paul-brodbeck-duo_Aj4BVF7"
             },
             {
-              "label": "«Les Voix» - Jubiläumskonzert",
-              "detail": "Röm.-kath. Kirche St. Stephan, Therwil",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/therwil/les-voix-jubilaeumskonzert_AwcggBs"
-            },
-            {
-              "label": "«Les Voix» - Jubiläumskonzert",
-              "detail": "Therwil",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-voix-jubilaeumskonzert/"
-            },
-            {
-              "label": "Famiglia Dimitri mit - Cabaret Sorelle Forelle",
-              "detail": "Basel",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/famiglia-dimitri-mit-cabaret-sorelle-forelle-1/"
-            },
-            {
-              "label": "Sofalesung mit Julia Trachsel",
+              "label": "Quiz Abend in der Bibliothek Dorf",
               "detail": "Riehen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sofalesung-mit-julia-trachsel/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/quiz-abend-in-der-bibliothek-dorf/"
             },
             {
-              "label": "Auf allerhand Art",
-              "detail": "Kartäuserkirche",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/auf-allerhand-art_AJvHsH2"
+              "label": "Vivaldi - Die vier Jahreszeiten",
+              "detail": "Stadtcasino Basel, Basel",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/vivaldi-die-vier-jahreszeiten_Ar6DnuC"
+            },
+            {
+              "label": "Berni Wagner: «Monster»",
+              "detail": "Der Teufelhof Basel, Basel",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/berni-wagner-monster/"
+            },
+            {
+              "label": "ANDY MIDDLETON QUARTET",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/andy-middleton-quartet_AGGhKR2"
+            },
+            {
+              "label": "Cordon Bleu Festial",
+              "detail": "Läufelfingen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cordon-bleu-festial/"
+            },
+            {
+              "label": "Line Dance uff em Rhy",
+              "detail": "Basel Schifflände, Basel",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/museums/children/events/basel/line-dance-cruise-on-the-river-rhine_A5yXACG"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "102",
+          "value": "91",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Der Tag, an dem die Musik verboten wurde | The Day Music Was Banned",
+              "label": "Daniel Migliosi Quintet",
               "detail": "the bird's eye jazz club",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/der-tag-an-dem-die-musik-verboten-wurde-the-day-music-was-banned_AfY6sf7"
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/daniel-migliosi-quintet_AC3pN6i"
             },
             {
-              "label": "Ruth Asawa",
-              "detail": "Fondation Beyeler, Riehen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ruth-asawa/"
-            },
-            {
-              "label": "Zaubersocken - Neue Trixx, frisch serviert!",
+              "label": "Komponist, Münsterorganist und Pädagoge in Basel",
               "detail": "Basel",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubersocken-neue-trixx-frisch-serviert/"
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/komponist-muensterorganist-und-paedagoge-in-basel/"
             },
             {
-              "label": "OpenSunday Riehen",
-              "detail": "Hallenbad Schulhaus Wasserstelzen, Riehen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/opensunday-riehen/"
+              "label": "Flook - präsentiert von Celtic Carrousel Tours",
+              "detail": "Barakuba",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/flook-praesentiert-von-celtic-carrousel-tours_ASxKt5g"
             },
             {
-              "label": "Sing & Jam Session #zusammen singen und musicieren, #pop/rock cover songs",
-              "detail": "Quartiertreffpunkt LoLa",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sing-und-jam-session-zusammen-singen-und-musizieren-poprock-cover-songs_A3miUT6"
+              "label": "Nat Su/Jean-Paul Brodbeck Duo",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/nat-sujean-paul-brodbeck-duo_Aj4BVF7"
             },
             {
-              "label": "«Les Voix» - Jubiläumskonzert",
-              "detail": "Röm.-kath. Kirche St. Stephan, Therwil",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/therwil/les-voix-jubilaeumskonzert_AwcggBs"
-            },
-            {
-              "label": "«Les Voix» - Jubiläumskonzert",
-              "detail": "Therwil",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-voix-jubilaeumskonzert/"
-            },
-            {
-              "label": "Famiglia Dimitri mit - Cabaret Sorelle Forelle",
-              "detail": "Basel",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/famiglia-dimitri-mit-cabaret-sorelle-forelle-1/"
-            },
-            {
-              "label": "Sofalesung mit Julia Trachsel",
+              "label": "Quiz Abend in der Bibliothek Dorf",
               "detail": "Riehen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sofalesung-mit-julia-trachsel/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/quiz-abend-in-der-bibliothek-dorf/"
             },
             {
-              "label": "Auf allerhand Art",
-              "detail": "Kartäuserkirche",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/auf-allerhand-art_AJvHsH2"
+              "label": "Vivaldi - Die vier Jahreszeiten",
+              "detail": "Stadtcasino Basel, Basel",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/vivaldi-die-vier-jahreszeiten_Ar6DnuC"
+            },
+            {
+              "label": "Berni Wagner: «Monster»",
+              "detail": "Der Teufelhof Basel, Basel",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/berni-wagner-monster/"
+            },
+            {
+              "label": "ANDY MIDDLETON QUARTET",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/andy-middleton-quartet_AGGhKR2"
+            },
+            {
+              "label": "Cordon Bleu Festial",
+              "detail": "Läufelfingen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cordon-bleu-festial/"
+            },
+            {
+              "label": "Line Dance Cruise on the river Rhine",
+              "detail": "Basel Schifflände, Basel",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/museums/children/events/basel/line-dance-cruise-on-the-river-rhine_A5yXACG"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "102",
+          "value": "91",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Der Tag, an dem die Musik verboten wurde | The Day Music Was Banned",
+              "label": "Daniel Migliosi Quintet",
               "detail": "the bird's eye jazz club",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/der-tag-an-dem-die-musik-verboten-wurde-the-day-music-was-banned_AfY6sf7"
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/daniel-migliosi-quintet_AC3pN6i"
             },
             {
-              "label": "Ruth Asawa",
-              "detail": "Fondation Beyeler, Riehen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ruth-asawa/"
-            },
-            {
-              "label": "Zaubersocken - Neue Trixx, frisch serviert!",
+              "label": "Komponist, Münsterorganist und Pädagoge in Basel",
               "detail": "Basel",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubersocken-neue-trixx-frisch-serviert/"
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/komponist-muensterorganist-und-paedagoge-in-basel/"
             },
             {
-              "label": "OpenSunday Riehen",
-              "detail": "Hallenbad Schulhaus Wasserstelzen, Riehen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/opensunday-riehen/"
+              "label": "Flook - präsentiert von Celtic Carrousel Tours",
+              "detail": "Barakuba",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/flook-praesentiert-von-celtic-carrousel-tours_ASxKt5g"
             },
             {
-              "label": "Sing & Jam Session #zusammen singen und musizieren, #pop/Rock-Coversongs",
-              "detail": "Quartiertreffpunkt LoLa",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sing-und-jam-session-zusammen-singen-und-musizieren-poprock-cover-songs_A3miUT6"
+              "label": "Nat Su/Jean-Paul Brodbeck Duo",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/nat-sujean-paul-brodbeck-duo_Aj4BVF7"
             },
             {
-              "label": "«Les Voix» - Jubiläumskonzert",
-              "detail": "Röm.-kath. Kirche St. Stephan, Therwil",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/therwil/les-voix-jubilaeumskonzert_AwcggBs"
-            },
-            {
-              "label": "«Les Voix» - Jubiläumskonzert",
-              "detail": "Therwil",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-voix-jubilaeumskonzert/"
-            },
-            {
-              "label": "Famiglia Dimitri mit - Cabaret Sorelle Forelle",
-              "detail": "Basel",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/famiglia-dimitri-mit-cabaret-sorelle-forelle-1/"
-            },
-            {
-              "label": "Sofalesung mit Julia Trachsel",
+              "label": "Quiz Abend in der Bibliothek Dorf",
               "detail": "Riehen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sofalesung-mit-julia-trachsel/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/quiz-abend-in-der-bibliothek-dorf/"
             },
             {
-              "label": "Auf allerhand Art",
-              "detail": "Kartäuserkirche",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/auf-allerhand-art_AJvHsH2"
+              "label": "Vivaldi - Die vier Jahreszeiten",
+              "detail": "Stadtcasino Basel, Basel",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/vivaldi-die-vier-jahreszeiten_Ar6DnuC"
+            },
+            {
+              "label": "Berni Wagner: «Monster»",
+              "detail": "Der Teufelhof Basel, Basel",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/berni-wagner-monster/"
+            },
+            {
+              "label": "ANDY MIDDLETON QUARTET",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/andy-middleton-quartet_AGGhKR2"
+            },
+            {
+              "label": "Cordon Bleu Festial",
+              "detail": "Läufelfingen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cordon-bleu-festial/"
+            },
+            {
+              "label": "Line Dance uff em Rhy",
+              "detail": "Basel Schifflände, Basel",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/museums/children/events/basel/line-dance-cruise-on-the-river-rhine_A5yXACG"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "102",
+          "value": "91",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Der Tag, an dem die Musik verboten wurde | The Day Music Was Banned",
+              "label": "Daniel Migliosi Quintet",
               "detail": "the bird's eye jazz club",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/der-tag-an-dem-die-musik-verboten-wurde-the-day-music-was-banned_AfY6sf7"
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/daniel-migliosi-quintet_AC3pN6i"
             },
             {
-              "label": "Ruth Asawa",
-              "detail": "Fondation Beyeler, Riehen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ruth-asawa/"
-            },
-            {
-              "label": "Zaubersocken - Neue Trixx, frisch serviert!",
+              "label": "Komponist, Münsterorganist und Pädagoge in Basel",
               "detail": "Basel",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubersocken-neue-trixx-frisch-serviert/"
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/komponist-muensterorganist-und-paedagoge-in-basel/"
             },
             {
-              "label": "OpenSunday Riehen",
-              "detail": "Hallenbad Schulhaus Wasserstelzen, Riehen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/opensunday-riehen/"
+              "label": "Flook - präsentiert von Celtic Carrousel Tours",
+              "detail": "Barakuba",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/flook-praesentiert-von-celtic-carrousel-tours_ASxKt5g"
             },
             {
-              "label": "Session Sing & Jam #zusammen singen und musizieren, reprises #pop/rock",
-              "detail": "Quartiertreffpunkt LoLa",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sing-und-jam-session-zusammen-singen-und-musizieren-poprock-cover-songs_A3miUT6"
+              "label": "Nat Su/Jean-Paul Brodbeck Duo",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/nat-sujean-paul-brodbeck-duo_Aj4BVF7"
             },
             {
-              "label": "«Les Voix» - Jubiläumskonzert",
-              "detail": "Röm.-kath. Kirche St. Stephan, Therwil",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/therwil/les-voix-jubilaeumskonzert_AwcggBs"
-            },
-            {
-              "label": "«Les Voix» - Jubiläumskonzert",
-              "detail": "Therwil",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/les-voix-jubilaeumskonzert/"
-            },
-            {
-              "label": "Famiglia Dimitri mit - Cabaret Sorelle Forelle",
-              "detail": "Basel",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/famiglia-dimitri-mit-cabaret-sorelle-forelle-1/"
-            },
-            {
-              "label": "Sofalesung mit Julia Trachsel",
+              "label": "Quiz Abend in der Bibliothek Dorf",
               "detail": "Riehen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sofalesung-mit-julia-trachsel/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/quiz-abend-in-der-bibliothek-dorf/"
             },
             {
-              "label": "Auf allerhand Art",
-              "detail": "Kartäuserkirche",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/auf-allerhand-art_AJvHsH2"
+              "label": "Vivaldi - Die vier Jahreszeiten",
+              "detail": "Stadtcasino Basel, Basel",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/vivaldi-die-vier-jahreszeiten_Ar6DnuC"
+            },
+            {
+              "label": "Berni Wagner: «Monster»",
+              "detail": "Der Teufelhof Basel, Basel",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/berni-wagner-monster/"
+            },
+            {
+              "label": "ANDY MIDDLETON QUARTET",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/andy-middleton-quartet_AGGhKR2"
+            },
+            {
+              "label": "Cordon Bleu Festial",
+              "detail": "Läufelfingen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cordon-bleu-festial/"
+            },
+            {
+              "label": "Line Dance uff em Rhy",
+              "detail": "Basel Schifflände, Basel",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/museums/children/events/basel/line-dance-cruise-on-the-river-rhine_A5yXACG"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

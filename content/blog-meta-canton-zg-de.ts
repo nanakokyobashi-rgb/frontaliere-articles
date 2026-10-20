@@ -27,6 +27,9 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.eventi-weekend-zugo.title': 'Veranstaltungen am Wochenende im Kanton Zug: was tun Sa & So',
     'blog.article.eventi-weekend-zugo.excerpt': 'Veranstaltungen im Kanton Zug an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.',
     'blog.article.eventi-weekend-zugo.imageAlt': 'Veranstaltungen am Wochenende im Kanton Zug',
+    'blog.article.ricorso-federale-espulsione-zugo.title': 'Zug: Beschwerde gegen die Ausweisung vom Bundesgericht abgewiesen',
+    'blog.article.ricorso-federale-espulsione-zugo.excerpt': 'Mai 2026: Der Kanton Zug verlängert die Kurzaufenthaltsbewilligung nicht.',
+    'blog.article.ricorso-federale-espulsione-zugo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZgDe;

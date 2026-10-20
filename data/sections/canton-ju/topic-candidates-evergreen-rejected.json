@@ -1,30 +1,24 @@
 {
-  "keywords": [],
-  "strikes": {},
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
   "topicGateUrls": {
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261009-l-initiative-pour-le-solaire-sans-autorisation-echoue.html": {
+    "canton-ju::https://www.estrepublicain.fr/economie/2026/10/18/frontaliers-ca-tangue-pour-les-marques-horlogeres-du-groupe-de-luxe-lvmh": {
       "section": "canton-ju",
-      "ts": 1791660532487
+      "ts": 1792390876004
     },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261009-stadler-rail-contrat-de-300-millions-de-francs-en-arabie-saoudite.html": {
+    "canton-ju::https://www.h-ju.ch/fr/a-propos/medias-presse/communiques-de-presse/la-sante-mentale-au-coeur-de-la-27eme-journee-scientifique-interjurassienne-de-la-sante.html": {
       "section": "canton-ju",
-      "ts": 1791713481037
+      "ts": 1792455865196
     },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261009-kering-anthony-vaccarello-quitte-saint-laurent.html": {
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261019-plr-et-gauche-montent-au-creneau-contre-l-initiative-du-centre.html": {
       "section": "canton-ju",
-      "ts": 1791713486705
+      "ts": 1792456089624
     },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261009-delta-air-lines-decoit-la-facture-de-carburant-pese.html": {
+    "canton-ju::https://france3-regions.franceinfo.fr/bourgogne-franche-comte/doubs/une-idee-de-taxe-sur-l-embauche-des-etrangers-en-suisse-pourrait-elle-menacer-l-emploi-des-frontaliers-francais-3435600.html": {
       "section": "canton-ju",
-      "ts": 1791713492458
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261010-espagne-pedro-sanchez-lance-sa-campagne-en-parlant-logement.html": {
-      "section": "canton-ju",
-      "ts": 1791746871133
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261011-douze-morts-dans-une-attaque-contre-l-aeroport-de-ryad.html": {
-      "section": "canton-ju",
-      "ts": 1791746878942
+      "ts": 1792475807365
     }
   }
 }

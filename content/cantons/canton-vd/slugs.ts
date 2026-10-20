@@ -20,6 +20,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'hopital-nounours-chuv-lausanne': { it: 'hopital-nounours-chuv-lausanne', en: 'lausanne-teddy-bear-hospital-chuv', de: 'lausanne-kuscheltier-spital-chuv', fr: 'lausanne-hopital-des-nounours-au-chuv-les-14-et-15-novembre' },
  'truffe-falsi-banchieri-lausanna': { it: 'truffe-falsi-banchieri-lausanna', en: 'fake-police-bankers-vaud', de: 'falsche-polizisten-banker-waadt', fr: 'faux-policiers-banquiers-vaud' },
  'truffa-falsi-poliziotti-vaud': { it: 'truffa-falsi-poliziotti-vaud', en: 'seven-million-defrauded-in-vaud-by-fake-agents', de: 'sieben-millionen-im-kanton-waadt-von-falschen-agenten-ergaunert', fr: 'sept-millions-escroques-dans-le-canton-de-vaud-par-de-faux-agents' },
+ 'cdhr-contributo-differenziale-2025': { it: 'cdhr-contributo-differenziale-2025', en: 'cdhr-differential-contribution-2025', de: 'cdhr-differenzbeitrag-2025', fr: 'cdhr-contribution-differentielle-2025' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

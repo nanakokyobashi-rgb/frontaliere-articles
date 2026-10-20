@@ -1,74 +1,64 @@
 {
-  "keywords": [],
-  "strikes": {},
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/700245/so-will-man-im-jurabogen-die-gesundheitskosten-senken": {
+    "canton-be::https://ajour.ch/story/702073/neue-karte-zeigt-wo-mieterinnen-verdr%c3%a4ngt-werden": {
       "section": "canton-be",
-      "ts": 1791616010457
+      "ts": 1792390708186
     },
-    "canton-be::https://ajour.ch/story/700598/suppression-de-18-emplois-chez-osterwalder-technology-ag-lyss": {
+    "canton-be::https://ajour.ch/story/702109/verkehrsmassnahmen-w%c3%a4hrend-des-zibelem%c3%a4rits": {
       "section": "canton-be",
-      "ts": 1791616014464
+      "ts": 1792390711342
     },
-    "canton-be::https://ajour.ch/story/701055/pr%c3%a4mien-wieso-ist-das-telefon-pl%c3%b6tzlich-teurer-als-der-arzt": {
+    "canton-be::https://www.nau.ch/news/schweiz/rund-100-hitzebedingte-gleisverformungen-bei-den-sbb-registriert-67190115": {
       "section": "canton-be",
-      "ts": 1791616015866
+      "ts": 1792390966096
     },
-    "canton-be::https://ajour.ch/story/700772/poursuite-de-la-croissance-de-lconomie-bernoise": {
+    "canton-be::https://ajour.ch/story/702309/zoll-wird-zum-m%c3%a4nnerclub-seit-der-reform-sinkt-der-frauenanteil-deutlich": {
       "section": "canton-be",
-      "ts": 1791702881252
+      "ts": 1792390973540
     },
-    "canton-be::https://ajour.ch/story/700764/f%c3%bcr-die-berner-wirtschaft-k%c3%b6nnte-2026-besser-ausfallen-als-erwartet": {
+    "canton-be::https://www.be.ch/de/start.html?newsid=0e523c57-f03b-4650-8f67-68125ac0ae47": {
       "section": "canton-be",
-      "ts": 1791702882474
+      "ts": 1792438515092
     },
-    "canton-be::https://ajour.ch/story/700883/gewitterwolken-%c3%bcber-dem-finanzmarkt-partners-group-holt-die-segel-ein": {
+    "canton-be::https://ajour.ch/story/702236/lintelligence-artificielle-une-solution-pour-lemploi-cibl-des-pesticides-selon-agroscope": {
       "section": "canton-be",
-      "ts": 1791702883534
+      "ts": 1792438525362
     },
-    "canton-be::https://ajour.ch/story/701023/voici-comment-prend-forme-le-nouveau-complexe-immobilier-sur-le-site-spiess-bienne": {
+    "canton-be::https://ajour.ch/story/702209/sbbmanager-kaufte-sich-lamborghini-mit-steuergeldern-so-lief-der-millionenbetrug-ab": {
       "section": "canton-be",
-      "ts": 1791702884501
+      "ts": 1792438531557
     },
-    "canton-be::https://ajour.ch/story/700736/sperrungen-auf-der-a6-im-raum-br%c3%bcgg": {
+    "canton-be::https://ajour.ch/story/662005/die-besten-immobilienspezialisten-aus-der-region-auf-einen-blick": {
       "section": "canton-be",
-      "ts": 1791702885422
+      "ts": 1792438536788
     },
-    "canton-be::https://ajour.ch/story/700743/sbbbauarbeiten-hauptstrasse-bei-ligerz-in-der-nacht-auf-samstag-gesperrt": {
+    "canton-be::https://www.nau.ch/news/schweiz/ausgerechnet-jetzt-sbb-wirbt-fur-paris-und-erntet-spott-67190274": {
       "section": "canton-be",
-      "ts": 1791702886162
+      "ts": 1792438548768
     },
-    "canton-be::https://ajour.ch/story/700783/freiburger-parlament-bringt-sprachengesetz-unter-dach": {
+    "canton-be::https://www.lejdj.ch/articles/le-canton-de-berne-offre-plusieurs-bouffees-doxygene-aux-proches-aidants-104587": {
       "section": "canton-be",
-      "ts": 1791702887176
+      "ts": 1792439218729
     },
-    "canton-be::https://ajour.ch/story/700202/jensgasse-wird-gesperrt": {
+    "canton-be::https://ajour.ch/story/702540/kanton-die-frist-f%c3%bcr-die-steuererkl%c3%a4rung-verl%c3%a4ngert-sich-automatisch": {
       "section": "canton-be",
-      "ts": 1791759325270
+      "ts": 1792504733958
     },
-    "canton-be::https://ajour.ch/story/700951/haltekante-f%c3%bcr-postautolinie-insavenches": {
+    "canton-be::https://ajour.ch/story/702388/kantonsstrasse-durch-schwarzenburg-ist-bald-nur-noch-einspurig-befahrbar": {
       "section": "canton-be",
-      "ts": 1791759336507
+      "ts": 1792504741094
     },
-    "canton-be::https://ajour.ch/story/701188/lacunes-chez-les-apprentis-les-entreprises-formatrices-reviennent-sur-leurs-exigences": {
+    "canton-be::https://ajour.ch/story/702470/budget-2027-sieht-ertrags%c3%bcberschuss-vor": {
       "section": "canton-be",
-      "ts": 1791759344096
+      "ts": 1792504757309
     },
-    "canton-be::https://ajour.ch/story/700908/aggressives-verhalten-gegen%c3%bcber-dem-personal-nimmt-auch-bei-den-bieler-verkehrsbetrieben-zu": {
+    "canton-be::https://ajour.ch/story/702686/grossratskommission-unterst%c3%bctzt-ausl%c3%a4nderstimmrecht-im-kanton-bern": {
       "section": "canton-be",
-      "ts": 1791759358119
-    },
-    "canton-be::https://ajour.ch/story/700917/parlamentarier-werden-gefilmt-zum-ersten-mal-wird-eine-bieler-stadtratsdebatte-live-%c3%bcbertragen": {
-      "section": "canton-be",
-      "ts": 1791759364665
-    },
-    "canton-be::https://www.lejdj.ch/articles/a-la-neuveville-le-blabla-cafe-fete-10-ans-d-entraide-couture-autonomie-et-rencontres-pour-les-femmes-migrantes-103971": {
-      "section": "canton-be",
-      "ts": 1791759380091
-    },
-    "canton-be::https://ajour.ch/story/701002/rauchpetarden-brandalarm-zugausf%c3%a4lle-warum-die-sbb-fussballfans-trotzdem-nicht-verbannen-k%c3%b6nnen": {
-      "section": "canton-be",
-      "ts": 1791759920601
+      "ts": 1792504779693
     }
   }
 }

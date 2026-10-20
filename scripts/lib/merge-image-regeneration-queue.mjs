@@ -10,13 +10,19 @@
  * non va reintrodotta. Un requestedAt successivo identifica invece una nuova
  * richiesta, che resta in coda; le aggiunte senza uno stage 1 restano sempre.
  * Per lo stesso articolo la metadata della richiesta segue il requestedAt piu'
- * recente; a parita' di richiesta vince il fallimento piu' recente. I contatori
- * di fallimento vengono fusi separatamente, cosi' un tentativo stale non puo'
- * cambiare lo stato di una nuova richiesta.
+ * recente; a parita' di richiesta uno stato terminale prevale su un fallimento
+ * concorrente piu' recente. I contatori di fallimento vengono fusi
+ * separatamente, cosi' un tentativo stale non puo' cambiare lo stato di una
+ * nuova richiesta.
  */
 import { execFileSync } from 'node:child_process';
 import { realpathSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import {
+  IMAGE_REGENERATION_TERMINAL_STATUS,
+  IMAGE_REGENERATION_TERMINAL_VISION_REASON,
+  imageRegenerationTimestamp,
+} from '../../generator/scripts/lib/image-regeneration-queue.mjs';
 
 export const IMAGE_REGENERATION_QUEUE = 'data/image-regeneration-queue.json';
 export const IMAGE_REGENERATION_QUEUE_SCHEMA = 1;
@@ -57,14 +63,9 @@ function parseQueue(text, label) {
   return queue;
 }
 
-function timeOf(value) {
-  const time = Date.parse(String(value || ''));
-  return Number.isFinite(time) ? time : null;
-}
-
 function latest(a, b) {
-  const left = timeOf(a);
-  const right = timeOf(b);
+  const left = imageRegenerationTimestamp(a);
+  const right = imageRegenerationTimestamp(b);
   if (left == null) return b || a;
   if (right == null) return a || b;
   return left >= right ? a : b;
@@ -84,8 +85,8 @@ function sameItem(left, right) {
 }
 
 function requestWinner(existing, candidate) {
-  const existingRequestedAt = timeOf(existing.requestedAt);
-  const candidateRequestedAt = timeOf(candidate.requestedAt);
+  const existingRequestedAt = imageRegenerationTimestamp(existing.requestedAt);
+  const candidateRequestedAt = imageRegenerationTimestamp(candidate.requestedAt);
   if (existingRequestedAt != null || candidateRequestedAt != null) {
     if (existingRequestedAt == null) return candidate;
     if (candidateRequestedAt == null) return existing;
@@ -94,16 +95,16 @@ function requestWinner(existing, candidate) {
     }
   }
 
-  const existingFailureAt = timeOf(existing.lastFailureAt) ?? -Infinity;
-  const candidateFailureAt = timeOf(candidate.lastFailureAt) ?? -Infinity;
+  const existingFailureAt = imageRegenerationTimestamp(existing.lastFailureAt) ?? -Infinity;
+  const candidateFailureAt = imageRegenerationTimestamp(candidate.lastFailureAt) ?? -Infinity;
   // A tie deliberately prefers the replayed commit: it is the article commit
   // currently being kept alive by the retry, matching the registry resolver.
   return candidateFailureAt >= existingFailureAt ? candidate : existing;
 }
 
 function sameRequest(existing, candidate) {
-  const existingRequestedAt = timeOf(existing.requestedAt);
-  const candidateRequestedAt = timeOf(candidate.requestedAt);
+  const existingRequestedAt = imageRegenerationTimestamp(existing.requestedAt);
+  const candidateRequestedAt = imageRegenerationTimestamp(candidate.requestedAt);
   if (existingRequestedAt != null || candidateRequestedAt != null) {
     return existingRequestedAt != null
       && candidateRequestedAt != null
@@ -113,9 +114,16 @@ function sameRequest(existing, candidate) {
 }
 
 function mergeItem(existing, candidate) {
-  const winner = requestWinner(existing, candidate);
-  if (!sameRequest(existing, candidate)) return { ...winner, articleId: String(existing.articleId) };
-  return {
+  const same = sameRequest(existing, candidate);
+  const terminalWinner = same
+    ? [existing, candidate].find((item) => item.status === IMAGE_REGENERATION_TERMINAL_STATUS)
+    : null;
+  // A later failure timestamp belongs to the same generation request and must
+  // not revive a terminal safety verdict produced concurrently. A genuinely
+  // new request is still selected by requestedAt below.
+  const winner = terminalWinner || requestWinner(existing, candidate);
+  if (!same) return { ...winner, articleId: String(existing.articleId) };
+  const merged = {
     ...winner,
     articleId: String(existing.articleId),
     lastFailureAt: latest(existing.lastFailureAt, candidate.lastFailureAt),
@@ -124,6 +132,12 @@ function mergeItem(existing, candidate) {
       Number.isInteger(candidate.failureCount) && candidate.failureCount >= 0 ? candidate.failureCount : 0,
     ),
   };
+  if (terminalWinner) {
+    merged.status = IMAGE_REGENERATION_TERMINAL_STATUS;
+    merged.terminalAt = terminalWinner.terminalAt || terminalWinner.lastFailureAt || terminalWinner.requestedAt;
+    merged.terminalReason = terminalWinner.terminalReason || IMAGE_REGENERATION_TERMINAL_VISION_REASON;
+  }
+  return merged;
 }
 
 function indexItems(items) {
@@ -137,8 +151,8 @@ function indexItems(items) {
 }
 
 function isNewRequestAfterDrainStart(baseItem, candidate) {
-  const baseRequestedAt = timeOf(baseItem.requestedAt);
-  const candidateRequestedAt = timeOf(candidate.requestedAt);
+  const baseRequestedAt = imageRegenerationTimestamp(baseItem.requestedAt);
+  const candidateRequestedAt = imageRegenerationTimestamp(candidate.requestedAt);
   return candidateRequestedAt != null
     && (baseRequestedAt == null || candidateRequestedAt > baseRequestedAt);
 }
@@ -176,10 +190,23 @@ export function mergeImageRegenerationQueues(upstream, replayed, base = { items:
     }
 
     if (upstreamItem && replayedItem) {
-      if (baseItem && sameItem(upstreamItem, baseItem) && !sameItem(replayedItem, baseItem)) {
-        byArticle.set(articleId, {...replayedItem, articleId});
-      } else if (baseItem && sameItem(replayedItem, baseItem) && !sameItem(upstreamItem, baseItem)) {
-        byArticle.set(articleId, {...upstreamItem, articleId});
+      const upstreamUnchanged = baseItem && sameItem(upstreamItem, baseItem);
+      const replayedUnchanged = baseItem && sameItem(replayedItem, baseItem);
+      if (upstreamUnchanged && !replayedUnchanged) {
+        // Preserve a real state-only change (for example failed -> queued)
+        // unless the unchanged base already contains a terminal verdict for
+        // the same request, which stale retry progress cannot revive.
+        byArticle.set(articleId, sameRequest(upstreamItem, replayedItem)
+          && upstreamItem.status === IMAGE_REGENERATION_TERMINAL_STATUS
+          && replayedItem.status !== IMAGE_REGENERATION_TERMINAL_STATUS
+          ? mergeItem(upstreamItem, replayedItem)
+          : { ...replayedItem, articleId });
+      } else if (replayedUnchanged && !upstreamUnchanged) {
+        byArticle.set(articleId, sameRequest(upstreamItem, replayedItem)
+          && replayedItem.status === IMAGE_REGENERATION_TERMINAL_STATUS
+          && upstreamItem.status !== IMAGE_REGENERATION_TERMINAL_STATUS
+          ? mergeItem(upstreamItem, replayedItem)
+          : { ...upstreamItem, articleId });
       } else {
         byArticle.set(articleId, mergeItem(upstreamItem, replayedItem));
       }

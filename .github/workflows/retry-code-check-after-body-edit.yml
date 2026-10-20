@@ -62,6 +62,8 @@ jobs:
           sparse-checkout: |
             scripts/lib
             scripts/ci/lib
+            scripts/ci/guard-main-tree-shrink.mjs
+            scripts/ci/old-history-guard.mjs
             scripts/ci/report-rate-limit-budget.mjs
             generator/scripts/load-rc-env.mjs
             generator/scripts/lib/source-copy-guard.mjs

@@ -24,6 +24,18 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.traffico-berna-manifestazione.title': 'Bern: possible disruptions due to unauthorized demonstration',
     'blog.article.traffico-berna-manifestazione.excerpt': 'Bern warns of possible road closures and disruptions on Sunday, October 11, 2026, due to an unauthorized demonstration: information for those traveling in the city.',
     'blog.article.traffico-berna-manifestazione.imageAlt': 'Bern streets with possible traffic restrictions on Sunday, October 11, 2026',
+    'blog.article.berna-tassa-ecclesiastica.title': 'Bern maintains the church tax for businesses',
+    'blog.article.berna-tassa-ecclesiastica.excerpt': 'The Bernese government has taken note of the petition to make the church tax for legal entities voluntary.',
+    'blog.article.berna-tassa-ecclesiastica.imageAlt': 'Government building in the Canton of Bern linked to the church tax debate',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.title': 'Bern tax administration: closure from October 23 to November 1, 2026',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.excerpt': 'The tax administration of the Canton of Bern will suspend services from 4 p.m.',
+    'blog.article.amministrazione-fiscale-berna-chiusura-2026.imageAlt': 'Tax administration of the Canton of Bern during temporary closure',
+    'blog.article.berna-governo-kita-gratuite.title': 'Bern, the government rejects free daycare centers',
+    'blog.article.berna-governo-kita-gratuite.excerpt': 'The Bernese Government recommends that the Grand Council reject the motion for free daycare: for current beneficiaries, over CHF 160 million annually.',
+    'blog.article.berna-governo-kita-gratuite.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.corridoio-linea-wynigen.title': 'Swissgrid is planning an overhead line between Bern and Lucerne',
+    'blog.article.corridoio-linea-wynigen.excerpt': 'Swissgrid proposes an overhead line between Bickigen BE and Mettlen LU to replace the nearly century-old one.',
+    'blog.article.corridoio-linea-wynigen.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBeEn;

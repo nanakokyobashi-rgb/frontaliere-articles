@@ -3,7 +3,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, rmSync, symlinkSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { test } from 'node:test';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -19,6 +19,7 @@ const ENTRYPOINTS = [
   'generator/scripts/migrate-evergreen-rejected-ledger.mjs',
   'generator/scripts/scan-vacuous-key-facts.mjs',
   'scripts/ci/check-node-test-stdout.mjs',
+  'scripts/ci/guard-main-tree-shrink.mjs',
   'scripts/ci/claude-codex-fallback.mjs',
   'scripts/ci/redcheck-review-prefilter.mjs',
   'scripts/ci/review-claim.mjs',
@@ -63,6 +64,18 @@ test('i producer/repairer del follow-up canonicalizzano entrambi i lati del main
     assert.doesNotMatch(guard, /pathToFileURL\(process\.argv\[1\]/, relativePath);
     assert.doesNotMatch(guard, /path\.resolve\(process\.argv\[1\]\)/, relativePath);
   }
+});
+
+test('la guardia è importabile quando argv[1] non è un path esistente', () => {
+  const guard = pathToFileURL(path.join(ROOT, 'scripts/ci/guard-main-tree-shrink.mjs')).href;
+  const result = spawnSync(process.execPath, [
+    '-e',
+    `import(${JSON.stringify(guard)})`,
+    'unrelated-argument',
+  ], { cwd: ROOT, encoding: 'utf8' });
+
+  assert.ifError(result.error);
+  assert.equal(result.status, 0, result.stderr);
 });
 
 test('gli entrypoint di #2317 eseguono davvero main quando invocati tramite symlink', () => {

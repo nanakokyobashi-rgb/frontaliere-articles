@@ -94,4 +94,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'acqua-domleschg-feldis-scheid',
+ category: 'pratico',
+ date: '2026-10-20T10:34:42.547Z',
+ image: '/images/blog/article-acqua-domleschg-feldis-scheid.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

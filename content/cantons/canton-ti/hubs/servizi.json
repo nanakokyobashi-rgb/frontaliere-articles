@@ -4,27 +4,32 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-18T10:55:16.337Z",
-  "contentHash": "98fd1295e0182b0a3747c4f9670d16fbe39e0de4f28c2dadc48269fb103c0d6a",
+  "updatedAt": "2026-10-20T13:42:35.891Z",
+  "contentHash": "fbd2d09fde6fa4c5b2b2def95fc364c92904335059289d7cba66d8753da2115c",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-11T10:51:47.772Z",
+      "updatedAt": "2026-10-18T08:53:01.888Z",
       "keyFacts": 1
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-17T23:03:55.617Z",
+      "updatedAt": "2026-10-20T05:09:27.831Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-17T20:37:10.348Z",
+      "updatedAt": "2026-10-20T04:48:51.023Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-20T05:04:18.322Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T19:45:28.268Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -66,7 +71,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-11T10:51:47.772Z"
+          "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -77,16 +82,6 @@
               "label": "delle Alpi",
               "detail": "Faido, Biasca e Valli",
               "date": "2026-10-16T16:00:00.000Z"
-            },
-            {
-              "label": "Semine",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-16T16:30:00.000Z"
-            },
-            {
-              "label": "Ferregutti",
-              "detail": "Mendrisio, Mendrisiotto",
-              "date": "2026-10-17T06:00:00.000Z"
             },
             {
               "label": "Farmacia Salus",
@@ -102,11 +97,21 @@
               "label": "Fuoriporta",
               "detail": "Mendrisio, Mendrisiotto",
               "date": "2026-10-20T06:00:00.000Z"
+            },
+            {
+              "label": "Amavita Biasca",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-10-23T16:00:00.000Z"
+            },
+            {
+              "label": "Portone",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-23T16:30:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-17T23:03:55.617Z"
+          "updatedAt": "2026-10-20T05:09:27.831Z"
         },
         {
           "id": "aste-targhe",
@@ -130,7 +135,41 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-17T20:37:10.348Z"
+          "updatedAt": "2026-10-20T04:48:51.023Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "14 °C",
+              "detail": "oggi da 13 a 16 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "14 °C",
+              "detail": "oggi da 13 a 16 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "15 °C",
+              "detail": "oggi da 15 a 16 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "14 °C",
+              "detail": "oggi da 13 a 16 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "13 °C",
+              "detail": "oggi da 13 a 15 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-20T05:04:18.322Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -168,7 +207,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -256,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "en": {
       "canton": "TI",
@@ -295,7 +334,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-11T10:51:47.772Z"
+          "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -306,16 +345,6 @@
               "label": "delle Alpi",
               "detail": "Faido, Biasca e Valli",
               "date": "2026-10-16T16:00:00.000Z"
-            },
-            {
-              "label": "Semine",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-16T16:30:00.000Z"
-            },
-            {
-              "label": "Ferregutti",
-              "detail": "Mendrisio, Mendrisiotto",
-              "date": "2026-10-17T06:00:00.000Z"
             },
             {
               "label": "Farmacia Salus",
@@ -331,11 +360,21 @@
               "label": "Fuoriporta",
               "detail": "Mendrisio, Mendrisiotto",
               "date": "2026-10-20T06:00:00.000Z"
+            },
+            {
+              "label": "Amavita Biasca",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-10-23T16:00:00.000Z"
+            },
+            {
+              "label": "Portone",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-23T16:30:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-17T23:03:55.617Z"
+          "updatedAt": "2026-10-20T05:09:27.831Z"
         },
         {
           "id": "aste-targhe",
@@ -359,7 +398,41 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-17T20:37:10.348Z"
+          "updatedAt": "2026-10-20T04:48:51.023Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "14 °C",
+              "detail": "today from 13 to 16 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "14 °C",
+              "detail": "today from 13 to 16 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "15 °C",
+              "detail": "today from 15 to 16 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "14 °C",
+              "detail": "today from 13 to 16 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "13 °C",
+              "detail": "today from 13 to 15 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-20T05:04:18.322Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -397,7 +470,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -480,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "de": {
       "canton": "TI",
@@ -519,7 +592,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-11T10:51:47.772Z"
+          "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -530,16 +603,6 @@
               "label": "delle Alpi",
               "detail": "Faido, Biasca e Valli",
               "date": "2026-10-16T16:00:00.000Z"
-            },
-            {
-              "label": "Semine",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-16T16:30:00.000Z"
-            },
-            {
-              "label": "Ferregutti",
-              "detail": "Mendrisio, Mendrisiotto",
-              "date": "2026-10-17T06:00:00.000Z"
             },
             {
               "label": "Farmacia Salus",
@@ -555,11 +618,21 @@
               "label": "Fuoriporta",
               "detail": "Mendrisio, Mendrisiotto",
               "date": "2026-10-20T06:00:00.000Z"
+            },
+            {
+              "label": "Amavita Biasca",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-10-23T16:00:00.000Z"
+            },
+            {
+              "label": "Portone",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-23T16:30:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-17T23:03:55.617Z"
+          "updatedAt": "2026-10-20T05:09:27.831Z"
         },
         {
           "id": "aste-targhe",
@@ -583,7 +656,41 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-17T20:37:10.348Z"
+          "updatedAt": "2026-10-20T04:48:51.023Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "14 °C",
+              "detail": "heute 13 bis 16 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "14 °C",
+              "detail": "heute 13 bis 16 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "15 °C",
+              "detail": "heute 15 bis 16 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "14 °C",
+              "detail": "heute 13 bis 16 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "13 °C",
+              "detail": "heute 13 bis 15 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-20T05:04:18.322Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -621,7 +728,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -704,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "fr": {
       "canton": "TI",
@@ -743,7 +850,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-11T10:51:47.772Z"
+          "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
           "id": "farmacie-di-turno",
@@ -754,16 +861,6 @@
               "label": "delle Alpi",
               "detail": "Faido, Biasca e Valli",
               "date": "2026-10-16T16:00:00.000Z"
-            },
-            {
-              "label": "Semine",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-16T16:30:00.000Z"
-            },
-            {
-              "label": "Ferregutti",
-              "detail": "Mendrisio, Mendrisiotto",
-              "date": "2026-10-17T06:00:00.000Z"
             },
             {
               "label": "Farmacia Salus",
@@ -779,11 +876,21 @@
               "label": "Fuoriporta",
               "detail": "Mendrisio, Mendrisiotto",
               "date": "2026-10-20T06:00:00.000Z"
+            },
+            {
+              "label": "Amavita Biasca",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-10-23T16:00:00.000Z"
+            },
+            {
+              "label": "Portone",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-23T16:30:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-17T23:03:55.617Z"
+          "updatedAt": "2026-10-20T05:09:27.831Z"
         },
         {
           "id": "aste-targhe",
@@ -807,7 +914,41 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-17T20:37:10.348Z"
+          "updatedAt": "2026-10-20T04:48:51.023Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Bellinzona",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 13 à 16 °C"
+            },
+            {
+              "label": "Chiasso",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 13 à 16 °C"
+            },
+            {
+              "label": "Locarno",
+              "value": "15 °C",
+              "detail": "aujourd’hui de 15 à 16 °C"
+            },
+            {
+              "label": "Lugano",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 13 à 16 °C"
+            },
+            {
+              "label": "Mendrisio",
+              "value": "13 °C",
+              "detail": "aujourd’hui de 13 à 15 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-20T05:04:18.322Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -845,7 +986,7 @@
               "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -925,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-18T10:55:16.337Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     }
   }
 }

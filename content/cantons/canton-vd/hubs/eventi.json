@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "318dddb7a76c51e421a450f8f99c71597e5743c31cbeeb6ddd16bf620a9ceaf6",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "8b3314e2f41f28728062fc024f0cbe68bd57c71444eeed33bc0a76861a313fa4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-19T15:42:28.810Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T14:28:40.900Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "PREVIEW: Derborence: The Time of the Animals",
-              "detail": "Cinéma Astor, Vevey",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/preview-derborence-the-time-of-the-animals/"
-            },
-            {
-              "label": "Kite-making workshop",
+              "label": "Crafts Workshop",
               "detail": "Bougy-Villars",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kite-making-workshop/"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crafts-workshop/"
             },
             {
-              "label": "Décors. Chefs-d'oeuvre des collections",
+              "label": "The Biblio in your neighborhood!",
+              "detail": "Foyer de la Providence EVAM, Vevey",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/the-biblio-in-your-neighborhood-5/"
+            },
+            {
+              "label": "Reflections",
+              "detail": "Vevey",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "Améliorez votre allemand au musée",
               "detail": "Prangins",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/decors-chefsdoeuvre-des-collections/"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ameliorez-votre-allemand-au-musee-1/"
             },
             {
-              "label": "Kenny Garrett - Sounds from the Ancestors",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/kenny-garrett-sounds-from-the-ancestors_Ay7xDpT"
+              "label": "EHC Kloten - Lausanne HC",
+              "detail": "SWISS Arena, Lausanne",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ehc-kloten-lausanne-hc/"
             },
             {
-              "label": "Autumn classical concert in Gryon",
-              "detail": "Temple de Gryon, Gryon",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-classical-concert-in-gryon/"
+              "label": "Pop Art Party: explore sparkling art",
+              "detail": "Musée de Montreux, Montreux — in corso, ultimo giorno: 23 ottobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pop-art-party-explore-sparkling-art/"
             },
             {
               "label": "Tokyo-Ga",
               "detail": "Cinémathèque suisse, Lausanne — in corso, ultimo giorno: 30 ottobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
-            },
-            {
-              "label": "Circus Knie",
-              "detail": "Vevey — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-15/"
             },
             {
               "label": "Cooking Together − Fall Delights",
               "detail": "Alimentarium, Musée de l'alimentation, Vevey — in corso, ultimo giorno: 21 ottobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-en-cuisine-delices-dautomne/"
             },
             {
-              "label": "Lausanne Underground Film & Music Festival - LUFF",
-              "detail": "Divers lieux, Lausanne — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-underground-film-music-festival-luff/"
+              "label": "Château de Mathod & Truffles",
+              "detail": "Château de Mathod, Mathod — in corso, ultimo giorno: 24 ottobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chateau-de-mathod-truffles/"
             },
             {
-              "label": "Festival Le Bois qui Chante",
-              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — in corso, ultimo giorno: 19 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
+              "label": "Before Midnight",
+              "detail": "Cinémathèque suisse, Lausanne — in corso, ultimo giorno: 29 ottobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "VD",
@@ -161,69 +161,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "PREVIEW: Derborence: The Time of the Animals",
-              "detail": "Cinéma Astor, Vevey",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/preview-derborence-the-time-of-the-animals/"
-            },
-            {
-              "label": "Kite-making workshop",
+              "label": "Crafts Workshop",
               "detail": "Bougy-Villars",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kite-making-workshop/"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crafts-workshop/"
             },
             {
-              "label": "Décors. Chefs-d'oeuvre des collections",
+              "label": "The Biblio in your neighborhood!",
+              "detail": "Foyer de la Providence EVAM, Vevey",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/the-biblio-in-your-neighborhood-5/"
+            },
+            {
+              "label": "Reflections",
+              "detail": "Vevey",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "Améliorez votre allemand au musée",
               "detail": "Prangins",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/decors-chefsdoeuvre-des-collections/"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ameliorez-votre-allemand-au-musee-1/"
             },
             {
-              "label": "Kenny Garrett - Sounds from the Ancestors",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/kenny-garrett-sounds-from-the-ancestors_Ay7xDpT"
+              "label": "EHC Kloten - Lausanne HC",
+              "detail": "SWISS Arena, Lausanne",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ehc-kloten-lausanne-hc/"
             },
             {
-              "label": "Autumn classical concert in Gryon",
-              "detail": "Temple de Gryon, Gryon",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-classical-concert-in-gryon/"
+              "label": "Pop Art Party: explore sparkling art",
+              "detail": "Musée de Montreux, Montreux — ongoing, last day: 23 October 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pop-art-party-explore-sparkling-art/"
             },
             {
               "label": "Tokyo-Ga",
               "detail": "Cinémathèque suisse, Lausanne — ongoing, last day: 30 October 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
-            },
-            {
-              "label": "Circus Knie",
-              "detail": "Vevey — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-15/"
             },
             {
               "label": "Cooking Together − Fall Delights",
               "detail": "Alimentarium, Musée de l'alimentation, Vevey — ongoing, last day: 21 October 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-en-cuisine-delices-dautomne/"
             },
             {
-              "label": "Lausanne Underground Film & Music Festival - LUFF",
-              "detail": "Divers lieux, Lausanne — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-underground-film-music-festival-luff/"
+              "label": "Château de Mathod & Truffles",
+              "detail": "Château de Mathod, Mathod — ongoing, last day: 24 October 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chateau-de-mathod-truffles/"
             },
             {
-              "label": "Bois qui Chante",
-              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — ongoing, last day: 19 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
+              "label": "Before Midnight",
+              "detail": "Cinémathèque suisse, Lausanne — ongoing, last day: 29 October 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "VD",
@@ -284,69 +284,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "VORPREMIERE: Derborence – Die Zeit der Tiere",
-              "detail": "Cinéma Astor, Vevey",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/preview-derborence-the-time-of-the-animals/"
-            },
-            {
-              "label": "Drachenbau-Workshop",
+              "label": "Bastelwerkstatt",
               "detail": "Bougy-Villars",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kite-making-workshop/"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crafts-workshop/"
             },
             {
-              "label": "Décors. Chefs-d'oeuvre des collections",
+              "label": "Die Biblio in deinem Viertel!",
+              "detail": "Foyer de la Providence EVAM, Vevey",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/the-biblio-in-your-neighborhood-5/"
+            },
+            {
+              "label": "Reflexionen",
+              "detail": "Vevey",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "Améliorez votre allemand au musée",
               "detail": "Prangins",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/decors-chefsdoeuvre-des-collections/"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ameliorez-votre-allemand-au-musee-1/"
             },
             {
-              "label": "Kenny Garrett - Sounds from the Ancestors",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/kenny-garrett-sounds-from-the-ancestors_Ay7xDpT"
+              "label": "EHC Kloten - Lausanne HC",
+              "detail": "SWISS Arena, Lausanne",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ehc-kloten-lausanne-hc/"
             },
             {
-              "label": "Herbstliches Klassikkonzert in Gryon",
-              "detail": "Temple de Gryon, Gryon",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-classical-concert-in-gryon/"
+              "label": "Pop Art Party: Erforsche eine Kunst, die sprudelt",
+              "detail": "Musée de Montreux, Montreux — läuft, letzter Tag: 23. Oktober 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pop-art-party-explore-sparkling-art/"
             },
             {
               "label": "Tokyo-Ga",
               "detail": "Cinémathèque suisse, Lausanne — läuft, letzter Tag: 30. Oktober 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
-            },
-            {
-              "label": "Zirkus Knie",
-              "detail": "Vevey — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-15/"
             },
             {
               "label": "Gemeinsam in der Küche – Herbstliche Köstlichkeiten",
               "detail": "Alimentarium, Musée de l'alimentation, Vevey — läuft, letzter Tag: 21. Oktober 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-en-cuisine-delices-dautomne/"
             },
             {
-              "label": "Lausanne Underground Film & Music Festival - LUFF",
-              "detail": "Divers lieux, Lausanne — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-underground-film-music-festival-luff/"
+              "label": "Château de Mathod & Trüffel",
+              "detail": "Château de Mathod, Mathod — läuft, letzter Tag: 24. Oktober 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chateau-de-mathod-truffles/"
             },
             {
-              "label": "Bois qui Gesang",
-              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — läuft, letzter Tag: 19. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
+              "label": "Before Midnight",
+              "detail": "Cinémathèque suisse, Lausanne — läuft, letzter Tag: 29. Oktober 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "VD",
@@ -407,69 +407,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Avant-Première : Derborence le temps des animaux",
-              "detail": "Cinéma Astor, Vevey",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/preview-derborence-the-time-of-the-animals/"
-            },
-            {
-              "label": "Atelier Cerf-volant",
+              "label": "Atelier Bricolages",
               "detail": "Bougy-Villars",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kite-making-workshop/"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crafts-workshop/"
             },
             {
-              "label": "Décors. Chefs-d'oeuvre des collections",
+              "label": "La Biblio dans ton quartier !",
+              "detail": "Foyer de la Providence EVAM, Vevey",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/the-biblio-in-your-neighborhood-5/"
+            },
+            {
+              "label": "Reflets",
+              "detail": "Vevey",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
+            },
+            {
+              "label": "Améliorez votre allemand au musée",
               "detail": "Prangins",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/decors-chefsdoeuvre-des-collections/"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ameliorez-votre-allemand-au-musee-1/"
             },
             {
-              "label": "Kenny Garrett - Sounds from the Ancestors",
-              "detail": "Jumeaux Jazz Club",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/kenny-garrett-sounds-from-the-ancestors_Ay7xDpT"
+              "label": "EHC Kloten - Lausanne HC",
+              "detail": "SWISS Arena, Lausanne",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ehc-kloten-lausanne-hc/"
             },
             {
-              "label": "Concert classique d'automne à Gryon",
-              "detail": "Temple de Gryon, Gryon",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/autumn-classical-concert-in-gryon/"
+              "label": "Ateliers d'automne au Musée de Montreux",
+              "detail": "Musée de Montreux, Montreux — en cours, dernier jour : 23 octobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pop-art-party-explore-sparkling-art/"
             },
             {
               "label": "Tokyo-Ga",
               "detail": "Cinémathèque suisse, Lausanne — en cours, dernier jour : 30 octobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
-            },
-            {
-              "label": "Cirque Knie",
-              "detail": "Vevey — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/circus-knie-2026-15/"
             },
             {
               "label": "Ensemble en cuisine - Trésors de la Bénichon",
               "detail": "Alimentarium, Musée de l'alimentation, Vevey — en cours, dernier jour : 21 octobre 2026",
-              "date": "2026-10-18",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-en-cuisine-delices-dautomne/"
             },
             {
-              "label": "Lausanne Underground Film & Music Festival - LUFF",
-              "detail": "Divers lieux, Lausanne — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-underground-film-music-festival-luff/"
+              "label": "Mathod & Truffe : Visite de la Truffière, cavage et apéritif truffé",
+              "detail": "Château de Mathod, Mathod — en cours, dernier jour : 24 octobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chateau-de-mathod-truffles/"
             },
             {
-              "label": "Festival Le Bois qui Chante",
-              "detail": "Parc naturel régional Gruyère Pays-d'Enhaut, Château-d'Oex — en cours, dernier jour : 19 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/chateau-doex/bois-qui-chante_AgTa66j"
+              "label": "Before Midnight",
+              "detail": "Cinémathèque suisse, Lausanne — en cours, dernier jour : 29 octobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

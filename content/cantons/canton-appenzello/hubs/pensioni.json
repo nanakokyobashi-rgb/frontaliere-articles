@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "pensioni",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "19c6cf5022b2955f2cffd288bf70dfa1e6e1238f1c64e138fecfddc70c290a1d",
+  "updatedAt": "2026-10-19T14:46:40.544Z",
+  "contentHash": "8a5369af81d63d8a44fbfbde2083d253c1a24b85cbbce4c53814a582e9e135a5",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -145,6 +145,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Rotenwies di Gais alza le rette di pensione e assistenza",
+          "url": "/articoli-appenzello/gais-alterszentrum-rotewies-rette-aumento/",
+          "excerpt": "Il centro per anziani Rotenwies di Gais aumenterà le rette di pensione e assistenza a causa di un deficit finanziario protratto da anni e dei costi in crescita.",
+          "date": "2026-10-19T14:39:09.729Z"
+        },
+        {
           "title": "Gestione del primo pilastro AVS nel Cantone di Appenzello Esterno",
           "url": "/articoli-svizzera/avs-prestazioni-complementari-appenzello-esterno/",
           "excerpt": "Il Cantone di Appenzello Esterno gestisce il primo pilastro AVS tramite una cassa di compensazione cantonale, garantendo le prestazioni ai contribuenti.",
@@ -182,7 +188,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T14:46:40.544Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -305,6 +311,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Rotenwies in Gais raises its residential and care fees",
+          "url": "/en/appenzell-articles/gais-alterszentrum-rotewies-fee-increase/",
+          "excerpt": "The Rotenwies senior center in Gais will increase its accommodation and care fees due to a financial deficit that has persisted for years and rising costs.",
+          "date": "2026-10-19T14:39:09.729Z"
+        },
+        {
           "title": "Management of the first AVS pillar in the Canton of Appenzell Outer",
           "url": "/en/swiss-articles/avs-complementary-benefits-appenzell-outer-rhodes/",
           "excerpt": "The Canton of Appenzell Outermost manages the first AVS pillar through a cantonal compensation fund, guaranteeing benefits to taxpayers.",
@@ -342,7 +354,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T14:46:40.544Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -465,6 +477,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Rotenwies in Gais erhöht die Pensions- und Betreuungstaxen",
+          "url": "/de/appenzell-artikel/gais-alterszentrum-rotewies-gebuhren-erhoehung/",
+          "excerpt": "Das Alterszentrum Rotenwies in Gais wird die Pensions- und Betreuungstaxen aufgrund eines seit Jahren anhaltenden Finanzdefizits und der steigenden Kosten erhöhen.",
+          "date": "2026-10-19T14:39:09.729Z"
+        },
+        {
           "title": "Verwaltung der ersten AHV-Säule im Kanton Appenzell Ausserrhoden",
           "url": "/de/schweiz-artikel/avs-zusatzleistungen-appenzell-ausserrhoden/",
           "excerpt": "Der Kanton Appenzell Ausserrhoden betreibt die erste AHV-Säule über eine kantonale Ausgleichskasse und stellt die Leistungen für die Steuerpflichtigen sicher.",
@@ -502,7 +520,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T14:46:40.544Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -625,6 +643,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Rotenwies di Gais augmente les tarifs de pension et d'assistance",
+          "url": "/fr/articles-appenzell/gais-centre-rotewies-augmentation-frais/",
+          "excerpt": "Le centre pour personnes âgées Rotenwies di Gais augmentera les tarifs de pension et d'assistance en raison d'un déficit financier qui se prolonge depuis des années et de la hausse des coûts.",
+          "date": "2026-10-19T14:39:09.729Z"
+        },
+        {
           "title": "Gestion du premier pilier AVS dans le canton d'Appenzell Extérieur",
           "url": "/fr/articles-suisse/avs-prestations-complementaires-appenzell-exterieur/",
           "excerpt": "Le canton d'Appenzell-Extérieur gère le premier pilier AVS par l'intermédiaire d'une caisse de compensation cantonale, garantissant les prestations aux contribuables.",
@@ -662,7 +686,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-19T14:46:40.544Z"
     }
   }
 }

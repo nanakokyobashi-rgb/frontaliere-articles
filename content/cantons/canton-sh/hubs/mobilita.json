@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-18T07:04:15.428Z",
-  "contentHash": "5519ba84fdd35e76101e497f93449aaf0df38cf1d5e74fd86a204fb7a76e7cbd",
+  "updatedAt": "2026-10-20T13:42:35.891Z",
+  "contentHash": "6e047bd1f8469e4ff8bcbf6c10950030b246a911191d546f0bc28e30befc26bc",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-16T23:59:59.000Z",
+      "updatedAt": "2026-10-19T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T19:45:28.268Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -28,20 +28,32 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, settimana conclusa: 16 ottobre 2026"
+          "note": "Bargen SH – Tengen, settimana conclusa: 19 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 10 ottobre 2026 – 16 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 13 ottobre 2026 – 19 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
               "value": "0 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/bargen-sh-tengen/oggi/"
+            },
+            {
+              "label": "Blumberg – Bargen SH, Alte Bargener Strasse",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/blumberg-bargen-sh-alte-bargener-strasse/oggi/"
+            },
+            {
+              "label": "Blumberg – Bargen SH, Autostrasse H4",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/blumberg-bargen-sh-autostrasse-h4/oggi/"
             },
             {
               "label": "Blumberg – Beggingen",
@@ -62,33 +74,21 @@
               "url": "/traffico-dogane/busingen-am-hochrhein-dorflingen-l202/oggi/"
             },
             {
-              "label": "Dörflingen – Gottmadingen-Randegg",
+              "label": "Büsingen am Hochrhein – Dörflingen, Siedlerstrasse",
               "value": "0 min",
               "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/dorflingen-gottmadingen-randegg/oggi/"
+              "url": "/traffico-dogane/busingen-am-hochrhein-dorflingen-siedlerstrasse/oggi/"
             },
             {
-              "label": "Gailingen am Hochrhein – Ramsen SH",
+              "label": "Büsingen am Hochrhein – Schaffhausen, Felsgasse",
               "value": "0 min",
               "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/gailingen-am-hochrhein-ramsen-sh/oggi/"
-            },
-            {
-              "label": "Gottmadingen – Thayngen, Ebringerstrasse",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/gottmadingen-thayngen-ebringerstrasse/oggi/"
-            },
-            {
-              "label": "Hilzingen – Thayngen, Barzheimer Strasse",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/hilzingen-thayngen-barzheimer-strasse/oggi/"
+              "url": "/traffico-dogane/busingen-am-hochrhein-schaffhausen-felsgasse/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -126,7 +126,7 @@
               "url": "https://www.stadt-schaffhausen.ch/_rte/information/2992849"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -137,10 +137,22 @@
           "date": "2026-10-17T01:47:28.492Z"
         },
         {
+          "title": "Incidente scooter a Schleitheim: donna ferita, Hohbrugg chiusa",
+          "url": "/articoli-sciaffusa/schleitheim-scooter-incidente-2026/",
+          "excerpt": "Domenica 18 ottobre 2026, una 61enne cade dallo scooter sulla Hohbrugg: proiezione di 12 metri nel pendio, elicottero per il trasporto in ospedale, strada chiusa oltre un'ora.",
+          "date": "2026-10-20T07:10:47.167Z"
+        },
+        {
           "title": "SBB e DB pianificano riserve tra Zurigo e Stoccarda",
           "url": "/articoli-sciaffusa/treni-zurigo-stoccarda/",
           "excerpt": "SBB e DB pianificano riserve di percorrenza aggiuntive tra Zurigo e Stoccarda.",
           "date": "2026-10-18T06:56:55.996Z"
+        },
+        {
+          "title": "Bundesamt für Strassen chiuderà tre tunnel di notte",
+          "url": "/articoli-sciaffusa/pulizie-tunnel-sciaffusa/",
+          "excerpt": "Fäsenstaub, Cholfirst e Galgenbuck chiusi ogni notte dal 19 al 23 ottobre, dalle 20 alle 5, per lavori di pulizia.",
+          "date": "2026-10-19T12:03:42.288Z"
         },
         {
           "title": "Abbonamenti trasporti Sciaffusa: zone e tariffe",
@@ -180,7 +192,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-18T07:04:15.428Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "en": {
       "canton": "SH",
@@ -191,20 +203,32 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, week ending 16 October 2026"
+          "note": "Bargen SH – Tengen, week ending 19 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 10 October 2026 to 16 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 13 October 2026 to 19 October 2026, fastest first.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
               "value": "0 min",
               "detail": "47 readings",
               "url": "/en/border-wait/bargen-sh-tengen/today/"
+            },
+            {
+              "label": "Blumberg – Bargen SH, Alte Bargener Strasse",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/blumberg-bargen-sh-alte-bargener-strasse/today/"
+            },
+            {
+              "label": "Blumberg – Bargen SH, Autostrasse H4",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/blumberg-bargen-sh-autostrasse-h4/today/"
             },
             {
               "label": "Blumberg – Beggingen",
@@ -225,33 +249,21 @@
               "url": "/en/border-wait/busingen-am-hochrhein-dorflingen-l202/today/"
             },
             {
-              "label": "Dörflingen – Gottmadingen-Randegg",
+              "label": "Büsingen am Hochrhein – Dörflingen, Siedlerstrasse",
               "value": "0 min",
               "detail": "47 readings",
-              "url": "/en/border-wait/dorflingen-gottmadingen-randegg/today/"
+              "url": "/en/border-wait/busingen-am-hochrhein-dorflingen-siedlerstrasse/today/"
             },
             {
-              "label": "Gailingen am Hochrhein – Ramsen SH",
+              "label": "Büsingen am Hochrhein – Schaffhausen, Felsgasse",
               "value": "0 min",
               "detail": "47 readings",
-              "url": "/en/border-wait/gailingen-am-hochrhein-ramsen-sh/today/"
-            },
-            {
-              "label": "Gottmadingen – Thayngen, Ebringerstrasse",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/gottmadingen-thayngen-ebringerstrasse/today/"
-            },
-            {
-              "label": "Hilzingen – Thayngen, Barzheimer Strasse",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/hilzingen-thayngen-barzheimer-strasse/today/"
+              "url": "/en/border-wait/busingen-am-hochrhein-schaffhausen-felsgasse/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -289,7 +301,7 @@
               "url": "https://www.stadt-schaffhausen.ch/_rte/information/2992849"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -300,10 +312,22 @@
           "date": "2026-10-17T01:47:28.492Z"
         },
         {
+          "title": "Scooter accident in Schleitheim: woman injured, Hohbrugg closed",
+          "url": "/en/schaffhausen-articles/schleitheim-scooter-accident-2026/",
+          "excerpt": "Sunday, October 18, 2026, a 61-year-old woman falls from her scooter on Hohbrugg: thrown 12 meters down the slope, helicopter transport to hospital, road closed for over an hour.",
+          "date": "2026-10-20T07:10:47.167Z"
+        },
+        {
           "title": "SBB and DB plan reserve services between Zurich and Stuttgart",
           "url": "/en/schaffhausen-articles/zurich-stuttgart-trains/",
           "excerpt": "SBB and DB plan additional running-time reserves between Zurich and Stuttgart.",
           "date": "2026-10-18T06:56:55.996Z"
+        },
+        {
+          "title": "Bundesamt für Strassen will close three tunnels at night",
+          "url": "/en/schaffhausen-articles/schaffhausen-tunnel-cleaning/",
+          "excerpt": "Fäsenstaub, Cholfirst and Galgenbuck closed every night from October 19 to 23, from 8 p.m.",
+          "date": "2026-10-19T12:03:42.288Z"
         },
         {
           "title": "Schaffhausen transport subscriptions: zones and rates",
@@ -343,7 +367,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-18T07:04:15.428Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "de": {
       "canton": "SH",
@@ -354,20 +378,32 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Bargen SH – Tengen, Woche bis 16. Oktober 2026"
+          "note": "Bargen SH – Tengen, Woche bis 19. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 10. Oktober 2026 bis 16. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 13. Oktober 2026 bis 19. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
               "value": "0 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/bargen-sh-tengen/heute/"
+            },
+            {
+              "label": "Blumberg – Bargen SH, Alte Bargener Strasse",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/blumberg-bargen-sh-alte-bargener-strasse/heute/"
+            },
+            {
+              "label": "Blumberg – Bargen SH, Autostrasse H4",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/blumberg-bargen-sh-autostrasse-h4/heute/"
             },
             {
               "label": "Blumberg – Beggingen",
@@ -388,33 +424,21 @@
               "url": "/de/wartezeit-grenze/busingen-am-hochrhein-dorflingen-l202/heute/"
             },
             {
-              "label": "Dörflingen – Gottmadingen-Randegg",
+              "label": "Büsingen am Hochrhein – Dörflingen, Siedlerstrasse",
               "value": "0 Min.",
               "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/dorflingen-gottmadingen-randegg/heute/"
+              "url": "/de/wartezeit-grenze/busingen-am-hochrhein-dorflingen-siedlerstrasse/heute/"
             },
             {
-              "label": "Gailingen am Hochrhein – Ramsen SH",
+              "label": "Büsingen am Hochrhein – Schaffhausen, Felsgasse",
               "value": "0 Min.",
               "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/gailingen-am-hochrhein-ramsen-sh/heute/"
-            },
-            {
-              "label": "Gottmadingen – Thayngen, Ebringerstrasse",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/gottmadingen-thayngen-ebringerstrasse/heute/"
-            },
-            {
-              "label": "Hilzingen – Thayngen, Barzheimer Strasse",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/hilzingen-thayngen-barzheimer-strasse/heute/"
+              "url": "/de/wartezeit-grenze/busingen-am-hochrhein-schaffhausen-felsgasse/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -452,7 +476,7 @@
               "url": "https://www.stadt-schaffhausen.ch/_rte/information/2992849"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -463,10 +487,22 @@
           "date": "2026-10-17T01:47:28.492Z"
         },
         {
+          "title": "Scooterunfall in Schleitheim: Frau verletzt, Hohbrugg gesperrt",
+          "url": "/de/schaffhausen-artikel/schleitheim-roller-unfall-2026/",
+          "excerpt": "Am Sonntag, 18.",
+          "date": "2026-10-20T07:10:47.167Z"
+        },
+        {
           "title": "SBB und DB planen Reserven zwischen Zürich und Stuttgart",
           "url": "/de/schaffhausen-artikel/zuerich-stuttgart-zuege/",
           "excerpt": "SBB und DB planen zusätzliche Fahrzeitreserven zwischen Zürich und Stuttgart.",
           "date": "2026-10-18T06:56:55.996Z"
+        },
+        {
+          "title": "Bundesamt für Strassen wird nachts drei Tunnel schließen",
+          "url": "/de/schaffhausen-artikel/naechtliche-tunnelreinigung-schaffhausen/",
+          "excerpt": "Fäsenstaub, Cholfirst und Galgenbuck jede Nacht vom 19.",
+          "date": "2026-10-19T12:03:42.288Z"
         },
         {
           "title": "Verkehrstickets Schaffhausen: Zonen und Tarife",
@@ -506,7 +542,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-18T07:04:15.428Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "fr": {
       "canton": "SH",
@@ -517,20 +553,32 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, semaine jusqu’au 16 octobre 2026"
+          "note": "Bargen SH – Tengen, semaine jusqu’au 19 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 10 octobre 2026 au 16 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 13 octobre 2026 au 19 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
               "value": "0 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/bargen-sh-tengen/aujourd-hui/"
+            },
+            {
+              "label": "Blumberg – Bargen SH, Alte Bargener Strasse",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/blumberg-bargen-sh-alte-bargener-strasse/aujourd-hui/"
+            },
+            {
+              "label": "Blumberg – Bargen SH, Autostrasse H4",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/blumberg-bargen-sh-autostrasse-h4/aujourd-hui/"
             },
             {
               "label": "Blumberg – Beggingen",
@@ -551,33 +599,21 @@
               "url": "/fr/temps-attente-douane/busingen-am-hochrhein-dorflingen-l202/aujourd-hui/"
             },
             {
-              "label": "Dörflingen – Gottmadingen-Randegg",
+              "label": "Büsingen am Hochrhein – Dörflingen, Siedlerstrasse",
               "value": "0 min",
               "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/dorflingen-gottmadingen-randegg/aujourd-hui/"
+              "url": "/fr/temps-attente-douane/busingen-am-hochrhein-dorflingen-siedlerstrasse/aujourd-hui/"
             },
             {
-              "label": "Gailingen am Hochrhein – Ramsen SH",
+              "label": "Büsingen am Hochrhein – Schaffhausen, Felsgasse",
               "value": "0 min",
               "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/gailingen-am-hochrhein-ramsen-sh/aujourd-hui/"
-            },
-            {
-              "label": "Gottmadingen – Thayngen, Ebringerstrasse",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/gottmadingen-thayngen-ebringerstrasse/aujourd-hui/"
-            },
-            {
-              "label": "Hilzingen – Thayngen, Barzheimer Strasse",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/hilzingen-thayngen-barzheimer-strasse/aujourd-hui/"
+              "url": "/fr/temps-attente-douane/busingen-am-hochrhein-schaffhausen-felsgasse/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-16T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -615,7 +651,7 @@
               "url": "https://www.stadt-schaffhausen.ch/_rte/information/2992849"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -626,10 +662,22 @@
           "date": "2026-10-17T01:47:28.492Z"
         },
         {
+          "title": "Accident de scooter à Schleitheim : une femme blessée, Hohbrugg fermée",
+          "url": "/fr/articles-schaffhouse/schleitheim-accident-scooter-2026/",
+          "excerpt": "Dimanche 18 octobre 2026, une femme de 61 ans chute de son scooter sur la Hohbrugg : elle est projetée à 12 mètres dans la pente, un hélicoptère est utilisé pour son transport à l’hôpital, route fermée pendant plus…",
+          "date": "2026-10-20T07:10:47.167Z"
+        },
+        {
           "title": "SBB et DB planifient des réserves entre Zurich et Stuttgart",
           "url": "/fr/articles-schaffhouse/trains-zurich-stuttgart/",
           "excerpt": "SBB et DB planifient des réserves de temps de parcours supplémentaires entre Zurich et Stuttgart.",
           "date": "2026-10-18T06:56:55.996Z"
+        },
+        {
+          "title": "Bundesamt für Strassen fermera trois tunnels la nuit",
+          "url": "/fr/articles-schaffhouse/nettoyage-tunnels-schaffhouse/",
+          "excerpt": "Fäsenstaub, Cholfirst et Galgenbuck fermés chaque nuit du 19 au 23 octobre, de 20 heures à 5 heures, pour des travaux de nettoyage.",
+          "date": "2026-10-19T12:03:42.288Z"
         },
         {
           "title": "Abonnements transports Schaffhouse : zones et tarifs",
@@ -669,7 +717,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-18T07:04:15.428Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     }
   }
 }

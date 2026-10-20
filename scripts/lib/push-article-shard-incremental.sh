@@ -64,6 +64,8 @@
 #     Missing → notice + exit 0 (silent no-op, matches the sibling).
 # Optional env:
 #   RUNNER_TEMP — scratch dir; falls back to a mktemp dir if unset (logged).
+#   ARTICLE_PUSH_STATUS_FILE — optional one-line outcome for the caller:
+#       `pushed`, `clean-no-op`, or `failed`.
 #
 # Exit codes:
 #   0 — pushed, or a clean no-op (identical content already live, or the
@@ -159,6 +161,9 @@ if [ -z "$key_val" ]; then
     echo "no $key_var secret — pushing $loc $section over HTTPS with the PAT instead"
   else
     echo "no $key_var secret and no owner-aware shard PAT — skipping $loc $section article fast-path push (no write credential)"
+    if [ -n "${ARTICLE_PUSH_STATUS_FILE:-}" ]; then
+      printf '%s\n' 'clean-no-op' > "$ARTICLE_PUSH_STATUS_FILE" || true
+    fi
     exit 0
   fi
 fi
@@ -174,7 +179,7 @@ GIT_PAT_OPTS=()
 keyfile="$RUNNER_TEMP/article-shard_${section}_${loc}_key"
 if [ "$pat_mode" = 0 ]; then
   printf '%s\n' "$key_val" > "$keyfile" && chmod 600 "$keyfile"
-  export GIT_SSH_COMMAND="ssh -i $keyfile -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
+  export GIT_SSH_COMMAND="ssh -i $keyfile -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new -o ServerAliveInterval=30 -o ServerAliveCountMax=6 -o TCPKeepAlive=yes"
 else
   # HTTPS remote + the same credential helper shard_pat_push uses: the token is
   # read from $SHARD_PUSH_TOKEN inside the helper, so it never reaches the
@@ -369,6 +374,16 @@ write_push_summary() {
     "$last_history_warning_count" > "$summary_file" || true
 }
 
+write_push_status() {
+  local status_file="${ARTICLE_PUSH_STATUS_FILE:-}"
+  [ -n "$status_file" ] || return 0
+  if ! mkdir -p "$(dirname "$status_file")" 2>/dev/null; then
+    echo "::warning::unable to create push status directory for $status_file" >&2
+    return 0
+  fi
+  printf '%s\n' "$1" > "$status_file" || true
+}
+
 _attempt() {
   rm -rf "$stage"
   local clone_err
@@ -485,6 +500,7 @@ _attempt() {
   head_tree="$(git -C "$stage" rev-parse HEAD^{tree})"
   if [ "$new_tree" = "$head_tree" ]; then
     echo "$section-$loc article shard: no content changes vs remote — clean no-op ($new_count new, prev_n=$prev_n)"
+    write_push_status 'clean-no-op'
     return 0
   fi
 
@@ -506,6 +522,7 @@ _attempt() {
   # in the meantime. Re-clone onto the new tip and rebuild, don't overwrite it.
   if git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} -C "$stage" push "$SHARD_REPO" "$commit":main; then
     echo "✅ $section-$loc article shard: pushed $commit ($new_count new file(s), filecount $prev_n -> $new_total)"
+    write_push_status 'pushed'
     return 0
   fi
   return 1
@@ -538,8 +555,10 @@ if [ "$ok" != 1 ]; then
   if [ "$permanent_fail" != 1 ]; then
     echo "::error::$section-$loc article shard push failed after 3 attempts (+ PAT fallback)" >&2
   fi
+  write_push_status 'failed'
   write_push_summary
   exit 1
 fi
+write_push_status 'pushed'
 write_push_summary
 exit 0

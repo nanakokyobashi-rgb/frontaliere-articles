@@ -4,12 +4,12 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "31dbe0efc70d6a6f2f468d200ecbd44b878c979d15724fa5a8e0f231691ddc32",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "44fdb478d7d3e1ade0c29158f393da2decd95595066875ea9c163c081911135e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-19T15:42:28.810Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "292",
+          "value": "317",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "À voix basse",
+              "label": "Annulé - RYAN ADAMS",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/voix-basse"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/ryan-adams"
             },
             {
-              "label": "Brass Band Arquebuse Genève",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/brass-band-arquebuse-geneve"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-0"
             },
             {
-              "label": "Graines en fête!",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/graines-fete"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-3"
             },
             {
-              "label": "Improvisation - Ardoise en scène - Place Publique",
+              "label": "Atelier de fabrication d'un film en Stop Motion à la Bibliothèque de la Cité",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/improvisation-ardoise-scene-place-publique"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/atelier-fabrication-film-stop-motion-bibliotheque-cite"
             },
             {
-              "label": "Le Cabinet d’Émerveille s’invite au MEG",
+              "label": "Au fil des pas et des pages",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/cabinet-emerveille-invite-meg-1"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/pages"
             },
             {
-              "label": "LES 7 PÉCHÉS CAPITAUX",
+              "label": "Avishai Cohen",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/7-peches-capitaux"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/avishai-cohen"
             },
             {
-              "label": "Promenade botanique à Carouge",
+              "label": "C'est MAHgique!",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/promenade-botanique-carouge"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/mahgique"
             },
             {
-              "label": "Ravens de Genève contre Fribourg - SBL Women league",
+              "label": "Café mortel",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/ravens-geneve-contre-fribourg-women-league"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/cafe-mortel-2"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
-              "detail": "Genève — in corso, ultimo giorno: 21 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - De la Jonction à Rive: au cœur…",
+              "detail": "Genève",
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-jonction-rive-coeur-ville-plus-vivante"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
-              "detail": "Genève — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "label": "Conférence \"Gérer ses photos sur smartphone\" - Permanence numérique Rive gauche",
+              "detail": "Genève",
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/conference-gerer-photos-smartphone-permanence-numerique-rive-gauche"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "GE",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "292",
+          "value": "317",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "À voix basse",
+              "label": "Annulé - RYAN ADAMS",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/voix-basse"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/ryan-adams"
             },
             {
-              "label": "Brass Band Arquebuse Genève",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/brass-band-arquebuse-geneve"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-0"
             },
             {
-              "label": "Graines en fête!",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/graines-fete"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-3"
             },
             {
-              "label": "Improvisation - Ardoise en scène - Place Publique",
+              "label": "Atelier de fabrication d'un film en Stop Motion à la Bibliothèque de la Cité",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/improvisation-ardoise-scene-place-publique"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/atelier-fabrication-film-stop-motion-bibliotheque-cite"
             },
             {
-              "label": "Le Cabinet d’Émerveille s’invite au MEG",
+              "label": "Au fil des pas et des pages",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/cabinet-emerveille-invite-meg-1"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/pages"
             },
             {
-              "label": "LES 7 PÉCHÉS CAPITAUX",
+              "label": "Avishai Cohen",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/7-peches-capitaux"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/avishai-cohen"
             },
             {
-              "label": "Promenade botanique à Carouge",
+              "label": "C'est MAHgique!",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/promenade-botanique-carouge"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/mahgique"
             },
             {
-              "label": "Ravens de Genève contre Fribourg - SBL Women league",
+              "label": "Café mortel",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/ravens-geneve-contre-fribourg-women-league"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/cafe-mortel-2"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
-              "detail": "Genève — ongoing, last day: 21 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - De la Jonction à Rive: au cœur…",
+              "detail": "Genève",
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-jonction-rive-coeur-ville-plus-vivante"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
-              "detail": "Genève — ongoing, last day: 31 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "label": "Conférence \"Gérer ses photos sur smartphone\" - Permanence numérique Rive gauche",
+              "detail": "Genève",
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/conference-gerer-photos-smartphone-permanence-numerique-rive-gauche"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "GE",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "292",
+          "value": "317",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "À voix basse",
+              "label": "Annulé - RYAN ADAMS",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/voix-basse"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/ryan-adams"
             },
             {
-              "label": "Brass Band Arquebuse Genève",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/brass-band-arquebuse-geneve"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-0"
             },
             {
-              "label": "Graines en fête!",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/graines-fete"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-3"
             },
             {
-              "label": "Improvisation - Ardoise en scène - Place Publique",
+              "label": "Atelier de fabrication d'un film en Stop Motion à la Bibliothèque de la Cité",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/improvisation-ardoise-scene-place-publique"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/atelier-fabrication-film-stop-motion-bibliotheque-cite"
             },
             {
-              "label": "Le Cabinet d’Émerveille s’invite au MEG",
+              "label": "Au fil des pas et des pages",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/cabinet-emerveille-invite-meg-1"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/pages"
             },
             {
-              "label": "LES 7 PÉCHÉS CAPITAUX",
+              "label": "Avishai Cohen",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/7-peches-capitaux"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/avishai-cohen"
             },
             {
-              "label": "Promenade botanique à Carouge",
+              "label": "C'est MAHgique!",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/promenade-botanique-carouge"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/mahgique"
             },
             {
-              "label": "Ravens de Genève contre Fribourg - SBL Women league",
+              "label": "Café mortel",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/ravens-geneve-contre-fribourg-women-league"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/cafe-mortel-2"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
-              "detail": "Genève — läuft, letzter Tag: 21. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - De la Jonction à Rive: au cœur…",
+              "detail": "Genève",
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-jonction-rive-coeur-ville-plus-vivante"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
-              "detail": "Genève — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "label": "Conférence \"Gérer ses photos sur smartphone\" - Permanence numérique Rive gauche",
+              "detail": "Genève",
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/conference-gerer-photos-smartphone-permanence-numerique-rive-gauche"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "GE",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "292",
+          "value": "317",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "À voix basse",
+              "label": "Annulé - RYAN ADAMS",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/voix-basse"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/ryan-adams"
             },
             {
-              "label": "Brass Band Arquebuse Genève",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/brass-band-arquebuse-geneve"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-0"
             },
             {
-              "label": "Graines en fête!",
+              "label": "Atelier Créez Votre Chocolat Halloween",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/graines-fete"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-3"
             },
             {
-              "label": "Improvisation - Ardoise en scène - Place Publique",
+              "label": "Atelier de fabrication d'un film en Stop Motion à la Bibliothèque de la Cité",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/improvisation-ardoise-scene-place-publique"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/atelier-fabrication-film-stop-motion-bibliotheque-cite"
             },
             {
-              "label": "Le Cabinet d’Émerveille s’invite au MEG",
+              "label": "Au fil des pas et des pages",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/cabinet-emerveille-invite-meg-1"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/pages"
             },
             {
-              "label": "LES 7 PÉCHÉS CAPITAUX",
+              "label": "Avishai Cohen",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/7-peches-capitaux"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/avishai-cohen"
             },
             {
-              "label": "Promenade botanique à Carouge",
+              "label": "C'est MAHgique!",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/promenade-botanique-carouge"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/mahgique"
             },
             {
-              "label": "Ravens de Genève contre Fribourg - SBL Women league",
+              "label": "Café mortel",
               "detail": "Genève",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/ravens-geneve-contre-fribourg-women-league"
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/cafe-mortel-2"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
-              "detail": "Genève — en cours, dernier jour : 21 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "label": "Cité Seniors fête ses 20 ans | Regards croisés sur l'évolution des espaces publics - De la Jonction à Rive: au cœur…",
+              "detail": "Genève",
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/cite-seniors-fete-20-regards-croises-evolution-espaces-publics-jonction-rive-coeur-ville-plus-vivante"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
-              "detail": "Genève — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "label": "Conférence \"Gérer ses photos sur smartphone\" - Permanence numérique Rive gauche",
+              "detail": "Genève",
+              "date": "2026-10-20",
+              "url": "https://www.geneve.ch/agenda/conference-gerer-photos-smartphone-permanence-numerique-rive-gauche"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

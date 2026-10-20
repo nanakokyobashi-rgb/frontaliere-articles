@@ -51,6 +51,15 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.mozione-gran-consiglio-tassa-salute.title': 'Motion im Grossen Rat gegen die Gesundheitssteuer',
     'blog.article.mozione-gran-consiglio-tassa-salute.excerpt': 'Eine überparteiliche Motion wurde im Grossen Rat eingereicht Die Forderung betrifft die Sperrung der Rückerstattungen an Italien OCST weist auf den diplomatischen Weg hin',
     'blog.article.mozione-gran-consiglio-tassa-salute.imageAlt': 'Grosser Rat des Kantons Tessin in Bellinzona',
+    'blog.article.rapporto-consiglio-federale-schengen.title': 'Grenzgänger, was würde ohne Schengen geschehen?',
+    'blog.article.rapporto-consiglio-federale-schengen.excerpt': 'Am 18. September 2026 veröffentlichter Bundesbericht Ohne Schengen: systematische Kontrollen an den Grenzen Tessin unter den am stärksten betroffenen Regionen im Szenario Bis zu',
+    'blog.article.rapporto-consiglio-federale-schengen.imageAlt': 'Grenzübergang im Tessin und Zollkontrollen',
+    'blog.article.ustat-manutenzione-chiusura.title': 'Ustat-Mitteilungen: Wartung und Schließung der Verwaltung',
+    'blog.article.ustat-manutenzione-chiusura.excerpt': 'Wartung: Dienstag, 2.',
+    'blog.article.ustat-manutenzione-chiusura.imageAlt': 'Statistisches Amt und kantonale Verwaltungskommunikation im Tessin',
+    'blog.article.frontalieri-ticino-indagine-salari-2026.title': 'Tessin: 55,6% der Grenzgänger fühlen sich unterbezahlt',
+    'blog.article.frontalieri-ticino-indagine-salari-2026.excerpt': '1.542 Beschäftigte haben im Mai 2026 an der Umfrage teilgenommen 55,6% fühlen sich bei gleicher Tätigkeit schlechter bezahlt Aus den Provinzen Como und Varese: über 60 Tausend',
+    'blog.article.frontalieri-ticino-indagine-salari-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTiDe;

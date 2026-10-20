@@ -130,6 +130,8 @@ export const RC_TO_ENV = {
   SUMUP_API_KEY:                    ['SUMUP_API_KEY'],
   SUMUP_MERCHANT_CODE:              ['SUMUP_MERCHANT_CODE'],
   SUMUP_ASSISTED_APPLICATION_WEBHOOK_URL: ['SUMUP_ASSISTED_APPLICATION_WEBHOOK_URL'],
+  // Public Google merchant ID consumed by the SumUp Payment Widget.
+  SUMUP_GOOGLE_PAY_MERCHANT_ID:     ['SUMUP_GOOGLE_PAY_MERCHANT_ID'],
   GOOGLE_OAUTH_CLIENT_ID:         ['GOOGLE_OAUTH_CLIENT_ID', 'GSC_CLIENT_ID'],
   RESEND_API_KEY:                 ['RESEND_API_KEY'],
   NEWSLETTER_SECRET:              ['NEWSLETTER_SECRET'],
@@ -469,6 +471,7 @@ export const EXPECTED_ABSENT_RC_KEYS = new Set([
   'SUMUP_API_KEY',
   'SUMUP_MERCHANT_CODE',
   'SUMUP_ASSISTED_APPLICATION_WEBHOOK_URL',
+  'SUMUP_GOOGLE_PAY_MERCHANT_ID',
 ]);
 
 export function rcValueState(value, rcKey) {
@@ -551,6 +554,7 @@ export function isTrivialSecret(value) {
 const QUOTA_RC_FETCH_REASONS = new Set([
   'rateLimitExceeded',
   'userRateLimitExceeded',
+  'dailyLimitExceeded',
   'dailyLimitExceededUnreg',
   'quotaExceeded',
   'RESOURCE_EXHAUSTED',

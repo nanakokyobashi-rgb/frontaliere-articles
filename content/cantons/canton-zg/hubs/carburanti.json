@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T11:38:04.345Z",
-  "contentHash": "28b764b5bd3003e718c9063ae4f14faebf36c147d029c0f91a517dfedc68b1dc",
+  "updatedAt": "2026-10-20T02:52:32.084Z",
+  "contentHash": "0c35db3cef9062743ca59ab5204f41fbcc98363c890af98e0b987884d939528c",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-16T11:53:35.759Z",
+      "updatedAt": "2026-10-19T13:56:07.476Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-16T11:53:35.759Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zugo: ricorso espulsione respinto dal Tribunale federale",
+          "url": "/articoli-zugo/ricorso-federale-espulsione-zugo/",
+          "excerpt": "Maggio 2026: Zugo non rinnova il permesso breve.",
+          "date": "2026-10-20T02:44:35.163Z"
+        },
         {
           "title": "Eventi del weekend nel Canton Zugo: cosa fare sabato e domenica",
           "url": "/articoli-zugo/eventi-weekend-zugo/",
@@ -82,12 +88,6 @@
           "url": "/articoli-zugo/zuger-rapporto-gestione-2025/",
           "excerpt": "Il Geschäftsbericht 2025 della Zuger Pensionskasse offre una panoramica sull'esercizio concluso e rinvia alla Jahresrechnung 2025 per ulteriori informazioni.",
           "date": "2026-10-17T00:53:57.792Z"
-        },
-        {
-          "title": "Scuola Sternmatt 1: l'IA segna il 2026/27",
-          "url": "/articoli-zugo/scuola-sternmatt-ia-2026/",
-          "excerpt": "La scuola Sternmatt 1 affronta il 2026/27 mettendo al centro un uso responsabile dell'intelligenza artificiale nelle aule.",
-          "date": "2026-10-08T18:01:57.824Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-20T02:52:32.084Z"
     },
     "en": {
       "canton": "ZG",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-16T11:53:35.759Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zug: appeal against expulsion rejected by the Federal Supreme Court",
+          "url": "/en/zug-articles/federal-appeal-expulsion-zug/",
+          "excerpt": "May 2026: Zug does not renew the short-term permit.",
+          "date": "2026-10-20T02:44:35.163Z"
+        },
         {
           "title": "Weekend events in the canton of Zug: what to do Saturday & Sunday",
           "url": "/en/zug-articles/weekend-events-zug/",
@@ -169,12 +175,6 @@
           "url": "/en/zug-articles/zuger-annual-report-2025/",
           "excerpt": "The 2025 annual report of the Zuger Pensionskasse provides an overview of the completed financial year and refers to the 2025 annual financial statements for further information.",
           "date": "2026-10-17T00:53:57.792Z"
-        },
-        {
-          "title": "Sternmatt School 1: AI marks 2026/27",
-          "url": "/en/zug-articles/sternmatt-school-ai-2026/",
-          "excerpt": "The Sternmatt 1 school is entering 2026/27 with the responsible use of artificial intelligence in classrooms at the forefront.",
-          "date": "2026-10-08T18:01:57.824Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-20T02:52:32.084Z"
     },
     "de": {
       "canton": "ZG",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-16T11:53:35.759Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zug: Beschwerde gegen die Ausweisung vom Bundesgericht abgewiesen",
+          "url": "/de/zug-artikel/bundesgerichtliche-beschwerde-ausweisung-zug/",
+          "excerpt": "Mai 2026: Der Kanton Zug verlängert die Kurzaufenthaltsbewilligung nicht.",
+          "date": "2026-10-20T02:44:35.163Z"
+        },
         {
           "title": "Veranstaltungen am Wochenende im Kanton Zug: was tun Sa & So",
           "url": "/de/zug-artikel/wochenend-veranstaltungen-zug/",
@@ -256,12 +262,6 @@
           "url": "/de/zug-artikel/zuger-geschaeftsbericht-2025/",
           "excerpt": "Der Geschäftsbericht 2025 der Zuger Pensionskasse bietet einen Überblick über das abgeschlossene Geschäftsjahr und verweist für weitere Informationen auf die Jahresrechnung 2025.",
           "date": "2026-10-17T00:53:57.792Z"
-        },
-        {
-          "title": "Schule Sternmatt 1: KI prägt das Schuljahr 2026/27",
-          "url": "/de/zug-artikel/sternmatt-schule-ki-2026/",
-          "excerpt": "Die Schule Sternmatt 1 nimmt das Schuljahr 2026/27 in Angriff und stellt dabei einen verantwortungsvollen Einsatz künstlicher Intelligenz in den Klassenzimmern in den Mittelpunkt.",
-          "date": "2026-10-08T18:01:57.824Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-20T02:52:32.084Z"
     },
     "fr": {
       "canton": "ZG",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-16T11:53:35.759Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zoug : recours contre l’expulsion rejeté par le Tribunal fédéral",
+          "url": "/fr/articles-zoug/recours-federal-expulsion-zoug/",
+          "excerpt": "Mai 2026 : Zoug ne renouvelle pas le permis de courte durée.",
+          "date": "2026-10-20T02:44:35.163Z"
+        },
         {
           "title": "Événements du week-end dans le canton de Zoug : que faire samedi & dimanche",
           "url": "/fr/articles-zoug/evenements-week-end-zoug/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-zoug/zuger-rapport-gestion-2025/",
           "excerpt": "Le Geschäftsbericht 2025 de la Zuger Pensionskasse offre une vue d’ensemble de l’exercice écoulé et renvoie à la Jahresrechnung 2025 pour de plus amples informations.",
           "date": "2026-10-17T00:53:57.792Z"
-        },
-        {
-          "title": "École Sternmatt 1 : l’IA marque l’année 2026/27",
-          "url": "/fr/articles-zoug/ecole-sternmatt-ia-2026/",
-          "excerpt": "L’école Sternmatt 1 aborde l’année 2026/27 en mettant au centre un usage responsable de l’intelligence artificielle dans les salles de classe.",
-          "date": "2026-10-08T18:01:57.824Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T11:38:04.345Z"
+      "updatedAt": "2026-10-20T02:52:32.084Z"
     }
   }
 }

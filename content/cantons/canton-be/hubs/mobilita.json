@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-18T03:12:27.140Z",
-  "contentHash": "245f6c5eb5306f4302870b3d8a2e708e417c8eb7b545aa3fdc30d4dd882e3864",
+  "updatedAt": "2026-10-20T15:13:18.424Z",
+  "contentHash": "72824564dc234a32f18d9d5a2a07e7941c6d701cd5d89605e68923236c96e3dd",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-17T21:02:52.166Z",
+      "updatedAt": "2026-10-20T05:22:50.234Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T19:45:28.268Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "30",
-          "note": "segnalazioni aggiornate: 17 ottobre 2026"
+          "value": "23",
+          "note": "segnalazioni aggiornate: 20 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "94",
-          "note": "segnalazioni aggiornate: 17 ottobre 2026"
+          "note": "segnalazioni aggiornate: 20 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -84,20 +84,25 @@
               "date": "2026-08-12T02:00:00.000Z"
             },
             {
-              "label": "Autobahnzubringer Bern-Neufeld Bern-Neufeld <-> Tiefenaustrasse tra Svincolo autostradale Bern-Neufeld E Svincolo autostradale Bern-Tiefenaustrasse Situazione: chiusa cantiere",
+              "label": "A6W Diramazione Lattigen -> Port Raccordo autostradale Diramazione Lattigen Situazione: uscita chiusa cantiere, lunghezza [km] 0.3",
               "value": "Chiusura",
-              "detail": "fine prevista: 19 ottobre 2026",
-              "date": "2026-08-19T05:15:00.000Z"
+              "detail": "fine prevista: 12 novembre 2026",
+              "date": "2026-08-28T15:09:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-17T21:02:52.166Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
+              "date": "2026-10-19",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-19-mm-bahnhof-kandersteg"
+            },
             {
               "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
               "date": "2026-10-15T05:00:00.000Z",
@@ -122,14 +127,9 @@
               "label": "Buslinie 10: Haltekante L am Bahnhof Bern wird hindernisfrei",
               "date": "2026-10-08T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
-            },
-            {
-              "label": "Bahnstrecke in Interlaken wegen Bauarbeiten acht Wochen gesperrt",
-              "date": "2026-10-08",
-              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -144,6 +144,12 @@
           "url": "/articoli-berna/wabern-tram-risanamento/",
           "excerpt": "Il BAV approva il tram fino a Kleinwabern e il risanamento della Seftigenstrasse: lavori non prima del 2028, fase di ricorso in corso.",
           "date": "2026-10-07T07:11:43.423Z"
+        },
+        {
+          "title": "Amministrazione fiscale Berna: chiusura dal 23 ottobre al 1 novembre 2026",
+          "url": "/articoli-berna/amministrazione-fiscale-berna-chiusura-2026/",
+          "excerpt": "L'Amministrazione fiscale del Canton Berna sospende i servizi dal 23 ottobre alle 16 fino al 1 novembre 2026 per rinnovo tecnologico.",
+          "date": "2026-10-19T06:59:44.908Z"
         },
         {
           "title": "Abbonamenti trasporti pubblici Canton Berna: zone e tariffe",
@@ -169,7 +175,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-18T03:12:27.140Z"
+      "updatedAt": "2026-10-20T15:13:18.424Z"
     },
     "en": {
       "canton": "BE",
@@ -179,13 +185,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "30",
-          "note": "reports as of 17 October 2026"
+          "value": "23",
+          "note": "reports as of 20 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "94",
-          "note": "reports as of 17 October 2026"
+          "note": "reports as of 20 October 2026"
         }
       ],
       "dataBlocks": [
@@ -236,20 +242,25 @@
               "date": "2026-08-12T02:00:00.000Z"
             },
             {
-              "label": "Autobahnzubringer Bern-Neufeld Bern-Neufeld <-> Tiefenaustrasse tra Svincolo autostradale Bern-Neufeld E Svincolo autostradale Bern-Tiefenaustrasse Situazione: chiusa cantiere",
+              "label": "A6W Diramazione Lattigen -> Port Raccordo autostradale Diramazione Lattigen Situazione: uscita chiusa cantiere, lunghezza [km] 0.3",
               "value": "Closure",
-              "detail": "until 19 October 2026",
-              "date": "2026-08-19T05:15:00.000Z"
+              "detail": "until 12 November 2026",
+              "date": "2026-08-28T15:09:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-17T21:02:52.166Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
+              "date": "2026-10-19",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-19-mm-bahnhof-kandersteg"
+            },
             {
               "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
               "date": "2026-10-15T05:00:00.000Z",
@@ -274,14 +285,9 @@
               "label": "Buslinie 10: Haltekante L am Bahnhof Bern wird hindernisfrei",
               "date": "2026-10-08T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
-            },
-            {
-              "label": "Bahnstrecke in Interlaken wegen Bauarbeiten acht Wochen gesperrt",
-              "date": "2026-10-08",
-              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -296,6 +302,12 @@
           "url": "/en/bern-articles/kleinwabern-tram-wabern-renovation/",
           "excerpt": "The BAV approves the tram extension to Kleinwabern and the renovation of Seftigenstrasse: construction will not begin before 2028, with the appeals phase ongoing.",
           "date": "2026-10-07T07:11:43.423Z"
+        },
+        {
+          "title": "Bern tax administration: closure from October 23 to November 1, 2026",
+          "url": "/en/bern-articles/bern-tax-administration-closure-2026/",
+          "excerpt": "The tax administration of the Canton of Bern will suspend services from 4 p.m.",
+          "date": "2026-10-19T06:59:44.908Z"
         },
         {
           "title": "Public transport passes Canton Bern: zones and fares",
@@ -321,7 +333,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-18T03:12:27.140Z"
+      "updatedAt": "2026-10-20T15:13:18.424Z"
     },
     "de": {
       "canton": "BE",
@@ -331,13 +343,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "30",
-          "note": "Meldungen vom 17. Oktober 2026"
+          "value": "23",
+          "note": "Meldungen vom 20. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "94",
-          "note": "Meldungen vom 17. Oktober 2026"
+          "note": "Meldungen vom 20. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -388,20 +400,25 @@
               "date": "2026-08-12T02:00:00.000Z"
             },
             {
-              "label": "Autobahnzubringer Bern-Neufeld Bern-Neufeld <-> Tiefenaustrasse zwischen Anschluss Bern-Neufeld und Anschluss Bern-Tiefenaustrasse Sachlage: Strecke gesperrt Baustelle",
+              "label": "A6W Verzweigung Lattigen -> Port Autobahndreieck Verzweigung Lattigen Sachlage: Ausfahrt gesperrt Baustelle, Länge [km] 0.3",
               "value": "Sperrung",
-              "detail": "bis 19. Oktober 2026",
-              "date": "2026-08-19T05:15:00.000Z"
+              "detail": "bis 12. November 2026",
+              "date": "2026-08-28T15:09:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-17T21:02:52.166Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
+              "date": "2026-10-19",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-19-mm-bahnhof-kandersteg"
+            },
             {
               "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
               "date": "2026-10-15T05:00:00.000Z",
@@ -426,14 +443,9 @@
               "label": "Buslinie 10: Haltekante L am Bahnhof Bern wird hindernisfrei",
               "date": "2026-10-08T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
-            },
-            {
-              "label": "Bahnstrecke in Interlaken wegen Bauarbeiten acht Wochen gesperrt",
-              "date": "2026-10-08",
-              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -448,6 +460,12 @@
           "url": "/de/bern-artikel/tram-kleinwabern-sanierung-wabern/",
           "excerpt": "Das BAV genehmigt die Tramverlängerung bis Kleinwabern und die Sanierung der Seftigenstrasse: Bauarbeiten frühestens 2028, Beschwerdephase läuft.",
           "date": "2026-10-07T07:11:43.423Z"
+        },
+        {
+          "title": "Steuerverwaltung Bern: Schließung vom 23. Oktober bis zum 1. November 2026",
+          "url": "/de/bern-artikel/steuerverwaltung-bern-schliessung-2026/",
+          "excerpt": "Die Steuerverwaltung des Kantons Bern setzt die Dienstleistungen vom 23.",
+          "date": "2026-10-19T06:59:44.908Z"
         },
         {
           "title": "Öffentliche Verkehrsmittel Kanton Bern: Zonen und Tarife",
@@ -473,7 +491,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-18T03:12:27.140Z"
+      "updatedAt": "2026-10-20T15:13:18.424Z"
     },
     "fr": {
       "canton": "BE",
@@ -483,13 +501,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "30",
-          "note": "signalements au 17 octobre 2026"
+          "value": "23",
+          "note": "signalements au 20 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "94",
-          "note": "signalements au 17 octobre 2026"
+          "note": "signalements au 20 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -540,20 +558,25 @@
               "date": "2026-08-12T02:00:00.000Z"
             },
             {
-              "label": "Autobahnzubringer Bern-Neufeld Berne-Neufeld <-> Tiefenaustrasse entre Jonction autoroutière Berne-Neufeld et Jonction autoroutière Bern-Tiefenaustrasse Situation: fermé travaux",
+              "label": "A6W Echangeur de Lattigen -> Port Echangeur Echangeur de Lattigen Situation: sortie fermée travaux, longueur [km] 0.3",
               "value": "Fermeture",
-              "detail": "jusqu’au 19 octobre 2026",
-              "date": "2026-08-19T05:15:00.000Z"
+              "detail": "jusqu’au 12 novembre 2026",
+              "date": "2026-08-28T15:09:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-17T21:02:52.166Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
+              "date": "2026-10-19",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-19-mm-bahnhof-kandersteg"
+            },
             {
               "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
               "date": "2026-10-15T05:00:00.000Z",
@@ -578,14 +601,9 @@
               "label": "Buslinie 10: Haltekante L am Bahnhof Bern wird hindernisfrei",
               "date": "2026-10-08T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
-            },
-            {
-              "label": "Bahnstrecke in Interlaken wegen Bauarbeiten acht Wochen gesperrt",
-              "date": "2026-10-08",
-              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -600,6 +618,12 @@
           "url": "/fr/articles-berne/tram-kleinwabern-renovation-wabern/",
           "excerpt": "L’OFT approuve le tram jusqu’à Kleinwabern et l’assainissement de la Seftigenstrasse : travaux pas avant 2028, phase de recours en cours.",
           "date": "2026-10-07T07:11:43.423Z"
+        },
+        {
+          "title": "Administration fiscale de Berne : fermeture du 23 octobre au 1er novembre 2026",
+          "url": "/fr/articles-berne/administration-fiscale-berne-fermeture-2026/",
+          "excerpt": "L'Administration fiscale du canton de Berne suspend ses services du 23 octobre à 16 h au 1er novembre 2026 pour une mise à niveau technologique.",
+          "date": "2026-10-19T06:59:44.908Z"
         },
         {
           "title": "Abonnements transports publics Canton de Berne : zones et tarifs",
@@ -625,7 +649,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-18T03:12:27.140Z"
+      "updatedAt": "2026-10-20T15:13:18.424Z"
     }
   }
 }

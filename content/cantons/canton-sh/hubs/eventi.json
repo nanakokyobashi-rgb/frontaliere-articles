@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T03:12:27.140Z",
-  "contentHash": "1487ba0c8ddbebdc9574e04df2df8c56f91e28ce3a59eb0db247b578108a9e61",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "41681230f96fc6037e5902794f49c4e4eba2374454efbc0897fb41a0c17604db",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T20:56:06.181Z",
+      "updatedAt": "2026-10-19T15:42:28.810Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T19:45:28.268Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "27",
+          "value": "28",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,30 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Public Moped Tour in Chläggli",
-              "detail": "Mofun Töffli Garage in Gächlingen, Gächlingen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/public-moped-tour-in-chlaeggli/"
-            },
-            {
-              "label": "Conferenza: \"Bisogna morire mentre si è in vita, per vivere quando si muore.\"",
-              "detail": "Christliche Gemeinde Neuhausen (CGN)",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/neuhausen/vortrag-du-musst-sterben-waehrend-du-lebst-damit-du-lebst-wenn-du-stirbst_ANjpwEh"
-            },
-            {
-              "label": "Sagi Fish",
-              "detail": "Buchberg — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
-            },
-            {
-              "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
             {
               "label": "Riscoprire Sciaffusa - Un viaggio archeologico e storico nel tempo",
               "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen",
@@ -72,6 +48,12 @@
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
               "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
+            },
+            {
+              "label": "Wine mobile",
+              "detail": "Bringolf Weinbau, Hallau — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Flook",
@@ -86,6 +68,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
             },
             {
+              "label": "Opening Reception: Ursula Palla / Petri Saarikko / Mara Röllin",
+              "detail": "Schaffhausen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/opening-reception-ursula-palla-petri-saarikko-mara-roellin/"
+            },
+            {
               "label": "In 80 Tagen um die Welt",
               "detail": "Schaffhausen",
               "date": "2026-10-24",
@@ -96,11 +84,23 @@
               "detail": "Kulturzentrum Kammgarn",
               "date": "2026-10-24",
               "url": "https://www.guidle.com/it/events/music/schaffhausen/jule-x-ch_Aa7FMYe"
+            },
+            {
+              "label": "JULE X [CH]",
+              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jule-x-ch/"
+            },
+            {
+              "label": "Michael Elsener - «Gute Entscheidung!»",
+              "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/michael-elsener-gute-entscheidung-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-17T20:56:06.181Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T03:12:27.140Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "SH",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "27",
+          "value": "28",
           "note": "from the site’s events calendar"
         }
       ],
@@ -160,30 +160,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Public Moped Tour in Chläggli",
-              "detail": "Mofun Töffli Garage in Gächlingen, Gächlingen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/public-moped-tour-in-chlaeggli/"
-            },
-            {
-              "label": "Presentation: \"You must die while you live, so that you live when you die.\"",
-              "detail": "Christliche Gemeinde Neuhausen (CGN)",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/neuhausen/vortrag-du-musst-sterben-waehrend-du-lebst-damit-du-lebst-wenn-du-stirbst_ANjpwEh"
-            },
-            {
-              "label": "Sagi Fish",
-              "detail": "Buchberg — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
-            },
-            {
-              "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau — ongoing, last day: 25 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
             {
               "label": "Rediscover Schaffhausen - An archaeological-historical journey through time",
               "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen",
@@ -195,6 +171,12 @@
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
               "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
+            },
+            {
+              "label": "Wine mobile",
+              "detail": "Bringolf Weinbau, Hallau — ongoing, last day: 25 October 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Flook",
@@ -209,6 +191,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
             },
             {
+              "label": "Opening Reception: Ursula Palla / Petri Saarikko / Mara Röllin",
+              "detail": "Schaffhausen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/opening-reception-ursula-palla-petri-saarikko-mara-roellin/"
+            },
+            {
               "label": "In 80 Tagen um die Welt",
               "detail": "Schaffhausen",
               "date": "2026-10-24",
@@ -219,11 +207,23 @@
               "detail": "Kulturzentrum Kammgarn",
               "date": "2026-10-24",
               "url": "https://www.guidle.com/it/events/music/schaffhausen/jule-x-ch_Aa7FMYe"
+            },
+            {
+              "label": "JULE X [CH]",
+              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jule-x-ch/"
+            },
+            {
+              "label": "Michael Elsener - «Gute Entscheidung!»",
+              "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/michael-elsener-gute-entscheidung-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-17T20:56:06.181Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T03:12:27.140Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "SH",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "27",
+          "value": "28",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -283,30 +283,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Öffentliche Töffli Tour im Chläggli",
-              "detail": "Mofun Töffli Garage in Gächlingen, Gächlingen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/public-moped-tour-in-chlaeggli/"
-            },
-            {
-              "label": "Vortrag: «Du musst sterben, während du lebst, damit du lebst, wenn du stirbst.»",
-              "detail": "Christliche Gemeinde Neuhausen (CGN)",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/neuhausen/vortrag-du-musst-sterben-waehrend-du-lebst-damit-du-lebst-wenn-du-stirbst_ANjpwEh"
-            },
-            {
-              "label": "Sagi-Fisch",
-              "detail": "Buchberg — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
-            },
-            {
-              "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
             {
               "label": "Schaffhausen neu entdecken ̶ Eine archäologisch-historische Zeitreise",
               "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen",
@@ -318,6 +294,12 @@
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
               "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
+            },
+            {
+              "label": "Weinmobil",
+              "detail": "Bringolf Weinbau, Hallau — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Flook",
@@ -332,6 +314,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
             },
             {
+              "label": "Vernissage Ursula Palla / Petri Saarikko / Mara Röllin",
+              "detail": "Schaffhausen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/opening-reception-ursula-palla-petri-saarikko-mara-roellin/"
+            },
+            {
               "label": "In 80 Tagen um die Welt",
               "detail": "Schaffhausen",
               "date": "2026-10-24",
@@ -342,11 +330,23 @@
               "detail": "Kulturzentrum Kammgarn",
               "date": "2026-10-24",
               "url": "https://www.guidle.com/it/events/music/schaffhausen/jule-x-ch_Aa7FMYe"
+            },
+            {
+              "label": "JULE X [CH]",
+              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jule-x-ch/"
+            },
+            {
+              "label": "Michael Elsener - «Gute Entscheidung!»",
+              "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/michael-elsener-gute-entscheidung-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-17T20:56:06.181Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T03:12:27.140Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "SH",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "27",
+          "value": "28",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -406,30 +406,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Balade publique en mobylette au Chläggli",
-              "detail": "Mofun Töffli Garage in Gächlingen, Gächlingen",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/public-moped-tour-in-chlaeggli/"
-            },
-            {
-              "label": "Conférence «Il faut mourir pendant qu’on vit, afin de vivre quand on meurt.»",
-              "detail": "Christliche Gemeinde Neuhausen (CGN)",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/neuhausen/vortrag-du-musst-sterben-waehrend-du-lebst-damit-du-lebst-wenn-du-stirbst_ANjpwEh"
-            },
-            {
-              "label": "Poisson sagi",
-              "detail": "Buchberg — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sagi-fish/"
-            },
-            {
-              "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
             {
               "label": "Redécouvrir Schaffhouse ̶ Un voyage dans le temps archéologique et historique",
               "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen",
@@ -441,6 +417,12 @@
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
               "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
+            },
+            {
+              "label": "Weinmobil",
+              "detail": "Bringolf Weinbau, Hallau — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Flook",
@@ -455,6 +437,12 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
             },
             {
+              "label": "Vernissage : Ursula Palla / Petri Saarikko / Mara Röllin",
+              "detail": "Schaffhausen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/opening-reception-ursula-palla-petri-saarikko-mara-roellin/"
+            },
+            {
               "label": "In 80 Tagen um die Welt",
               "detail": "Schaffhausen",
               "date": "2026-10-24",
@@ -465,11 +453,23 @@
               "detail": "Kulturzentrum Kammgarn",
               "date": "2026-10-24",
               "url": "https://www.guidle.com/it/events/music/schaffhausen/jule-x-ch_Aa7FMYe"
+            },
+            {
+              "label": "JULE X [CH]",
+              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jule-x-ch/"
+            },
+            {
+              "label": "Michael Elsener - «Gute Entscheidung!»",
+              "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/michael-elsener-gute-entscheidung-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-17T20:56:06.181Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T03:12:27.140Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

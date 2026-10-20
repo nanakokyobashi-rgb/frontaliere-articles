@@ -74,6 +74,8 @@ on:
       - '.github/workflows/fast-publish-article.yml'
       - 'scripts/publish-article-fast.mjs'
       - 'scripts/ci/fast-publish-section.mjs'
+      - 'scripts/ci/verify-served-fingerprint.mjs'
+      - 'scripts/ci/fast-publish-apex-verification.sh'
       - 'scripts/ci/article-image-fallbacks.mjs'
       - 'generator/scripts/lib/corpus-paths.mjs'
       # The body-link preflight is a publisher dependency too: changing its
@@ -83,6 +85,7 @@ on:
       - 'generator/scripts/lib/article-meta-block.mjs'
       - 'generator/scripts/lib/article-excerpt.mjs'
       - 'scripts/ci/retry-cmd.sh'
+      - 'scripts/ci/fetch-push-base-if-missing.sh'
       - 'scripts/cf-purge-cache.mjs'
       - 'generator/scripts/load-rc-env.mjs'
       - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
@@ -97,6 +100,10 @@ on:
       - 'scripts/lib/parse-positive-num.mjs'
       - 'scripts/lib/sanitize-control-chars.mjs'
       - 'scripts/lib/upload-cdn-file.sh'
+      - 'scripts/lib/r2-image-lease-process.sh'
+      - 'scripts/lib/r2-image-namespace-lock.mjs'
+      - 'scripts/lib/r2-section-lock.mjs'
+      - 'scripts/lib/is-invoked-directly.mjs'
       - 'scripts/lib/push-article-shard-incremental.sh'
       # THE CHAIN LINK — a corpus push means an article was produced.
       - 'content/**'
@@ -143,7 +150,10 @@ jobs:
   # un suo step: da qui la separazione.
   resolve:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    # Checkout plus runner teardown occasionally outlive the normal fast path;
+    # keep a successful resolution from being cancelled by transient runner
+    # overhead while still bounding a genuinely stuck resolver.
+    timeout-minutes: 10
     outputs:
       skip: ${{ steps.mode.outputs.skip }}
       skip_reason: ${{ steps.mode.outputs.skip_reason }}
@@ -166,10 +176,7 @@ jobs:
         env:
           PUSH_BEFORE: ${{ github.event.before }}
         run: |
-          set -euo pipefail
-          if [ -n "${PUSH_BEFORE:-}" ] && [[ ! "$PUSH_BEFORE" =~ ^0+$ ]]; then
-            git fetch --no-tags --depth=1 origin "$PUSH_BEFORE"
-          fi
+          bash scripts/ci/fetch-push-base-if-missing.sh
 
       - name: Preflight — i link Markdown devono avere una destinazione canonica
         env:
@@ -302,9 +309,12 @@ jobs:
           fi
 
           # Keep the legacy empty-dispatch behavior: with no explicit id, use
-          # the body files from the last corpus commit. Collect every match,
-          # group it by its owning section and publish the whole batch, even
-          # when one commit legitimately updates more than one Pages section.
+          # the registered body files from the last corpus commit. Group every
+          # publishable match by its owning section and publish the whole batch,
+          # even when one commit legitimately updates more than one Pages
+          # section. Historical orphan bodies cannot be rendered because they
+          # have no registry entry: report and skip them without suppressing
+          # the registered IDs changed by the same commit.
           # Which directories hold article bodies, and which section owns each,
           # comes from the section core (scripts/ci/fast-publish-section.mjs):
           # the old `case` sent every non-`blog-body-ch` body to frontaliere,
@@ -312,23 +322,23 @@ jobs:
           # shard without an error.
           if [ "${#ids[@]}" -eq 0 ]; then
             changed="$(git diff --name-only "$before" HEAD 2>/dev/null || true)"
-            body_re="$(node scripts/ci/fast-publish-section.mjs body-regex shard)"
-            mapfile -t bodies < <(
-              printf '%s\n' "$changed" \
-                | grep -E "$body_re" \
-                | sort -u || true
-            )
-            for body in "${bodies[@]}"; do
-              [ -f "$body" ] || continue
-              body_id="$(basename "$body" .ts)"
-              body_section="$(node scripts/ci/fast-publish-section.mjs section-of "$body")"
+            body_plan="$(printf '%s\n' "$changed" | node scripts/ci/fast-publish-section.mjs body-plan shard)"
+            while IFS= read -r body_target; do
+              [ -n "$body_target" ] || continue
+              body_section="$(printf '%s' "$body_target" | jq -r '.section')"
+              body_ids_json="$(printf '%s' "$body_target" | jq -c '.ids')"
+              skipped_ids_json="$(printf '%s' "$body_target" | jq -c '.skippedIds')"
+              while IFS= read -r skipped_id; do
+                [ -n "$skipped_id" ] || continue
+                echo "::warning::skipping changed body '$skipped_id' in section '$body_section': no publishable registry entry"
+              done < <(printf '%s' "$skipped_ids_json" | jq -r '.[]')
               if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -n "${section:-}" ] && [ "$section" != "$body_section" ]; then
                 echo "::error::derived body section '$body_section' does not match requested section '$section'"
                 exit 1
               fi
-              body_ids_json="$(jq -cn --arg id "$body_id" '[$id]')"
+              [ "$(printf '%s' "$body_ids_json" | jq 'length')" -gt 0 ] || continue
               groups="$(jq -c --arg s "$body_section" --argjson ids "$body_ids_json" '.[$s] = ((.[$s] // []) + $ids | unique | sort)' <<<"$groups")"
-            done
+            done < <(printf '%s' "$body_plan" | jq -c '.[]')
           fi
 
           # Explicit dispatch ids form one target; body and image changes are
@@ -423,6 +433,20 @@ jobs:
           # `contents: read` token, which cannot write and whose push fires no
           # workflow anyway.
           persist-credentials: false
+
+      - name: Verify shard assignment against publish checkout
+        if: needs.resolve.outputs.skip != 'true'
+        env:
+          SECTION: ${{ matrix.target.section }}
+          EXPECTED_SHARD: ${{ matrix.target.shard }}
+        run: |
+          set -euo pipefail
+          actual_shard="$(node scripts/ci/fast-publish-section.mjs shard-of "$SECTION")"
+          if [ "$actual_shard" != "$EXPECTED_SHARD" ]; then
+            echo "::error::section-to-shard mapping changed after matrix resolution; refusing to publish to stale shard (expected $EXPECTED_SHARD, checkout maps to $actual_shard)"
+            exit 1
+          fi
+          echo "FAST_PUBLISH_SHARD=$actual_shard" >> "$GITHUB_ENV"
 
       - name: Set up Node
         if: needs.resolve.outputs.skip != 'true'
@@ -712,7 +736,15 @@ jobs:
           set -euo pipefail
           summary="$RUNNER_TEMP/fast-summary.json"
           dist="$RUNNER_TEMP/fast-dist"
-          shard="${{ matrix.target.shard }}"
+          shard="$FAST_PUBLISH_SHARD"
+          push_log="$RUNNER_TEMP/article-shard-push.log"
+          push_state="$RUNNER_TEMP/published-push-state.tsv"
+          pushed_hub_paths="$RUNNER_TEMP/pushed-hub-paths.tsv"
+          pushed_hub_summary="$RUNNER_TEMP/pushed-hub-landing.json"
+          : > "$push_log"
+          printf 'shard\tlocale\tstatus\n' > "$push_state"
+          : > "$pushed_hub_paths"
+          exec > >(tee -a "$push_log") 2>&1
 
           # UN SOLO push per locale, articolo + hub insieme.
           #
@@ -748,13 +780,41 @@ jobs:
             # esprimevano: l'articolo è duro, l'hub è morbido («the hub stays stale, the
             # article is unaffected»). Se il push combinato fallisce si riprova col solo
             # articolo, così una pagina hub malformata non può impedire la pubblicazione.
-            if ! bash scripts/lib/push-article-shard-incremental.sh \
+            locale_status="$RUNNER_TEMP/article-shard-push-$loc.status"
+            rm -f "$locale_status"
+            combined_pushed=true
+            if ! ARTICLE_PUSH_STATUS_FILE="$locale_status" bash scripts/lib/push-article-shard-incremental.sh \
                  "$shard" "$loc" "$dist" "${paths[@]}" ${hpaths[@]+"${hpaths[@]}"}; then
               echo "::warning::combined push failed for $shard/$loc — retrying with the article alone (the hub stays stale)"
-              bash scripts/lib/push-article-shard-incremental.sh \
+              combined_pushed=false
+              rm -f "$locale_status"
+              ARTICLE_PUSH_STATUS_FILE="$locale_status" bash scripts/lib/push-article-shard-incremental.sh \
                 "$shard" "$loc" "$dist" "${paths[@]}"
             fi
+            push_status="$(tr -d '\r\n' < "$locale_status")"
+            case "$push_status" in
+              pushed|clean-no-op) ;;
+              *)
+                echo "::error::unexpected push status for $shard/$loc: $push_status"
+                exit 1
+                ;;
+            esac
+            printf '%s\t%s\t%s\n' "$shard" "$loc" "$push_status" >> "$push_state"
+            if [ "$combined_pushed" = true ]; then
+              for hpath in "${hpaths[@]}"; do
+                printf '%s\t%s\n' "$loc" "$hpath" >> "$pushed_hub_paths"
+              done
+            fi
           done
+
+          # A combined push may fall back to the article alone. Build the hub
+          # summary from the paths that went through a successful combined push,
+          # so a stale landing can never enter the served-content TSV or purge.
+          jq -R -s '
+            split("\n")
+            | map(select(length > 0) | split("\t") | {locale: .[0], path: .[1]})
+            | {pages: .}
+          ' "$pushed_hub_paths" > "$pushed_hub_summary"
 
           while IFS=$'\t' read -r local key; do
             [ -n "$local" ] || continue
@@ -782,6 +842,32 @@ jobs:
               echo "::warning::no hub-landing.json — the landing grid was not refreshed for this article"
             fi
           fi
+
+          # Read the bytes after the publisher's CDN offload and after the hub
+          # refresh. These are the bytes that the shard push received, not a
+          # second render and not an HTML marker.
+          node scripts/ci/verify-served-fingerprint.mjs write \
+            --summary "$summary" \
+            --hub-summary "$pushed_hub_summary" \
+            --dist "$dist" \
+            --shard "$shard" \
+            --output "$RUNNER_TEMP/published-fingerprints.tsv"
+
+      - name: Wait for GitHub Pages origin to serve published content
+        if: needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
+        env:
+          PAGES_WAIT_SECONDS: ${{ vars.FAST_PUBLISH_PAGES_WAIT_SECONDS || '720' }}
+        run: |
+          set -euo pipefail
+          args=(
+            wait-origin
+            --fingerprints "$RUNNER_TEMP/published-fingerprints.tsv"
+            --push-state "$RUNNER_TEMP/published-push-state.tsv"
+            --timeout-seconds "$PAGES_WAIT_SECONDS"
+            --poll-seconds 15
+            --run-key "${GITHUB_RUN_ID}.${GITHUB_RUN_ATTEMPT}.${FAST_PUBLISH_SHARD}"
+          )
+          node scripts/ci/verify-served-fingerprint.mjs "${args[@]}"
 
       - name: Purge the edge cache for what was published
         if: needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
@@ -840,7 +926,7 @@ jobs:
           # The landing pages too, or the grid we just refreshed sits behind a
           # 4h edge cache and the article stays invisible on the page readers
           # land on — the exact symptom this refresh exists to fix.
-          hub="$RUNNER_TEMP/hub-landing.json"
+          hub="$RUNNER_TEMP/pushed-hub-landing.json"
           if [ -s "$hub" ]; then
             while IFS=$'\t' read -r loc rel; do
               [ -n "$rel" ] || continue
@@ -891,6 +977,7 @@ jobs:
           bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files-from=$RUNNER_TEMP/edge-purge-urls.txt"
 
       - name: Verify the article is actually readable
+        id: verify_served_fingerprint
         if: needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
         run: |
           set -euo pipefail
@@ -899,53 +986,12 @@ jobs:
           shard="${{ matrix.target.shard }}"
           owner="$(jq -r --arg s "$shard" '.[$s] // "valerielinc-ops"' scripts/lib/section-shard-owners.json)"
 
-          # Two checks, deliberately different in strength, because they answer
-          # different questions.
-          #
-          # HARD — the shard ORIGIN must serve the page. That is entirely within
-          # this pipeline's control: it means the push landed and Pages built
-          # it. A failure here is a broken publish.
-          #
-          # SOFT — the apex. Cloudflare's negative cache for the origin fetch is
-          # eventually consistent and a `files` purge propagates per PoP, so the
-          # apex can lag by minutes. Measured across three publishes: en/de/fr
-          # answered 200 within seconds every time while IT — the apex locale,
-          # whose 404 is cached in far more PoPs because it takes far more
-          # traffic — needed longer than a 3-minute budget twice, and was 200
-          # shortly after. Failing the run on that would report a successful
-          # publish as broken, which is its own kind of lie.
-          fail=0
+          source scripts/ci/fast-publish-apex-verification.sh
 
-          # WHY THE TIMEOUT IS NOT ITSELF THE VERDICT (issue #31).
-          #
-          # This gate was failing ~10% of runs, and every time it was right that
-          # the URL was 404 — but wrong about the reason it reported ("the shard
-          # push did not become readable" points at the push, which had landed).
-          # The real cause sits one layer down, outside the runner: the GitHub
-          # Pages build for that shard commit comes back `errored` with a
-          # duration of 0ms. Nothing was built, so the page stays 404 until some
-          # LATER push happens to trigger a good build.
-          #
-          # Measured on frontaliere-articolisvizzera-fr: build errored 0ms at
-          # 2026-08-08T03:23:51Z for commit 1ed91403 (run 31237078985), and the
-          # very next build — same commit, no new push — was `built` in 34s.
-          # Same signature at 2026-08-07T22:50:48Z. An errored 0ms build is a
-          # transient fault on GitHub's side, and re-requesting it clears it.
-          #
-          # So on a timeout we ask Pages what happened. `errored` requests one
-          # rebuild and polls once more; `building`/`queued` means a build is
-          # already in flight and just needs more time, so it polls again
-          # without requesting a second one (issue #260 — the FR shard was
-          # still `building` after the first 3-minute window and would have
-          # gone `built` shortly after, same as the IT apex case measured
-          # below). Either case is ONE retry, not a loop: a Pages outage or a
-          # build that is still not done after the second poll is a real
-          # failure and must stay red rather than be papered over. Either way
-          # the error message now carries the build status, so the issue this
-          # opens points at the cause instead of the symptom.
-          #
-          # The Pages token comes from the same owner-aware resolver as the
-          # shard push. load-rc-env.mjs already masks the Remote Config values.
+          # The apex is warning-only only for confirmed cache lag; the shard
+          # origin remains the hard publication gate. Pages build failures get
+          # one bounded recovery attempt below and otherwise stay red.
+          fail=0
 
           # WHY EVERY PROBE CARRIES A CACHE-BUST QUERY (issue #114).
           #
@@ -1288,7 +1334,10 @@ jobs:
         # when a negative entry is most likely to be sitting in the cache.
         # Skipping the cleanup on failure would leave that 404 behind on exactly
         # the runs that needed the cleanup most.
-        if: always() && needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
+        # EDGE_PROBE_BLOCKED is a transport result, not evidence that another
+        # purge is needed. The verification step records it so this backstop
+        # can preserve the failure without sending a blind purge request.
+        if: always() && needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true' && steps.verify_served_fingerprint.outputs.edge_probe_blocked != 'true'
         run: |
           set -euo pipefail
 

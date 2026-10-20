@@ -241,6 +241,162 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-prioswiss-ricorso-luks': {
+    title: 'Prio Swiss ricorre al Tribunale per mandato esofago Luks',
+    description: 'Prio Swiss ha presentato un ricorso al Tribunale amministrativo federale contro il mandato per le operazioni all’esofago affidato al Luzerner Kantonsspital',
+    keywords: 'frontalieri, ticino, svizzera, italia, prio, swiss, ricorre, tribunale',
+    ogTitle: 'Prio Swiss ricorre al Tribunale per mandato esofago al Luks',
+    ogDescription: 'L’associazione degli assicuratori malattia svizzeri, Prio Swiss, ha chiesto al Tribunale amministrativo federale di annullare il mandato di prestazioni per le operazioni all’esofago attribuito al Luzerner Kantonsspital. L’organo HSM aveva concesso',
+    canonicalPath: '/articoli-lucerna/prioswiss-ricorso-luks/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Prio Swiss ricorre al Tribunale per mandato esofago Luks",
+      "description": "Prio Swiss ha presentato un ricorso al Tribunale amministrativo federale contro il mandato per le operazioni all’esofago affidato al Luzerner Kantonsspital",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-prioswiss-ricorso-luks.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T14:58:13+00:00",
+      "dateModified": "2026-10-19T14:58:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/prioswiss-ricorso-luks/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lucerna-forensic-nurses-violenza': {
+    title: 'Lucerna: Forensic Nurses contro la violenza domestica',
+    description: 'Il Canton Lucerna prepara per l\'estate 2027 un progetto pilota con Forensic Nurses, assistenza medica e una nuova Fachstelle contro la violenza domestica.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lucerna, forensic, nurses, contro',
+    ogTitle: 'Lucerna prepara Forensic Nurses contro la violenza',
+    ogDescription: 'Il progetto pilota dovrebbe partire nell\'estate 2027. Il Canton Lucerna annuncia anche un\'offerta di prima assistenza medica, una nuova Fachstelle presso la polizia lucernese e una maggiore specializzazione della Staatsanwaltschaft.',
+    canonicalPath: '/articoli-lucerna/lucerna-forensic-nurses-violenza/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lucerna: Forensic Nurses contro la violenza domestica",
+      "description": "Il Canton Lucerna prepara per l'estate 2027 un progetto pilota con Forensic Nurses, assistenza medica e una nuova Fachstelle contro la violenza domestica.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lucerna-forensic-nurses-violenza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T23:59:14+00:00",
+      "dateModified": "2026-10-19T23:59:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/lucerna-forensic-nurses-violenza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lucerna-bilancio-budget-2027': {
+    title: 'Lucerna: Parlamento conferma il BIP per il budget 2027',
+    description: 'Il Parlamento di Lucerna conferma il BIP come riferimento per le spese. Previsto avanzo di 22,1 milioni nel 2027 e sgravi fiscali per il 2029.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lucerna, parlamento, conferma, budget',
+    ogTitle: 'Lucerna: Parlamento approva il budget 2027 e il piano BIP',
+    ogDescription: 'Il Consiglio cantonale di Lucerna definisce le linee finanziarie fino al 2030: confermato il BIP come parametro di spesa, avanzo per il 2027 e sgravi fiscali dal 2029.',
+    canonicalPath: '/articoli-lucerna/lucerna-bilancio-budget-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lucerna: Parlamento conferma il BIP per il budget 2027",
+      "description": "Il Parlamento di Lucerna conferma il BIP come riferimento per le spese. Previsto avanzo di 22,1 milioni nel 2027 e sgravi fiscali per il 2029.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lucerna-bilancio-budget-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T00:16:43+00:00",
+      "dateModified": "2026-10-20T00:16:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/lucerna-bilancio-budget-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lucerna-finanze-sessione-ottobre': {
+    title: 'Lucerna: cinque ore di dibattito sulle finanze cantonali',
+    description: 'Il Consiglio cantonale di Lucerna ha discusso per oltre cinque ore l\'AFP 2027–2030: proposta di aliquota da 1,45 a 1,40 unità e voto in programma il 20 ottobre.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lucerna, cinque, dibattito, sulle',
+    ogTitle: 'Lucerna, cinque ore sulle finanze cantonali',
+    ogDescription: 'La prima giornata della sessione autunnale ha aperto il confronto sul piano dei compiti e finanziario 2027–2030. Il Governo propone di portare lo Steuerfuss cantonale da 1,45 a 1,40 unità; il Parlamento voterà il 20 ottobre.',
+    canonicalPath: '/articoli-lucerna/lucerna-finanze-sessione-ottobre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lucerna: cinque ore di dibattito sulle finanze cantonali",
+      "description": "Il Consiglio cantonale di Lucerna ha discusso per oltre cinque ore l'AFP 2027–2030: proposta di aliquota da 1,45 a 1,40 unità e voto in programma il 20 ottobre.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lucerna-finanze-sessione-ottobre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T00:56:42+00:00",
+      "dateModified": "2026-10-20T00:56:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/lucerna-finanze-sessione-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

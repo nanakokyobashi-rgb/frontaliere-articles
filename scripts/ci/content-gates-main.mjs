@@ -139,6 +139,9 @@ export const CONTENT_GATES = [
   // I link Markdown sono HTML crawlable dopo il render: il gate deve vedere
   // anche un articolo scritto da un produttore direttamente su main.
   'generator/tests/blog-body-link-contract.test.mjs',
+  // Il ratchet verifica che i body tradotti non accumulino nuove label nav:
+  // legge entrambe le superfici pubblicate, blog-body e blog-body-ch.
+  'generator/tests/nav-link-labels.test.mjs',
   // Il caso canonical override apre una superficie reale sotto content/ oltre
   // al corpus sintetico: una nuova coppia shadowed/winner deve restare valida.
   'generator/tests/canton-hubs.test.mjs',
@@ -162,6 +165,9 @@ export const CONTENT_GATES = [
   // 20 articoli piu' recenti: il recupero non puo' introdurre un dialetto SEO.
   'generator/tests/seo-entry-equivalence.test.mjs',
   'generator/tests/article-body-wordcount.test.mjs',
+  // Le sei guide per educatori devono restare allineate alle prove ufficiali
+  // LIS e ai titoli localizzati: i produttori scrivono direttamente su main.
+  'generator/tests/educator-guides-evidence.test.mjs',
   'generator/tests/article-fabrication-guard.test.mjs',
   'generator/tests/article-slug-i18n.test.mjs',
   'generator/tests/article-unrendered-markup.test.mjs',

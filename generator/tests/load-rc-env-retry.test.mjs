@@ -107,6 +107,7 @@ test('il loader mantiene attivabile il checkout SumUp senza renderlo il default'
     'SUMUP_API_KEY',
     'SUMUP_MERCHANT_CODE',
     'SUMUP_ASSISTED_APPLICATION_WEBHOOK_URL',
+    'SUMUP_GOOGLE_PAY_MERCHANT_ID',
   ];
   for (const key of sumupKeys) {
     assert.ok(RC_TO_ENV[key], `${key} deve essere mappata nel runtime`);
@@ -454,7 +455,7 @@ test('un 403 "nudo" (nessuna reason riconosciuta) resta NON retryable — compor
 });
 
 test('un 403 con reason di quota Google È retryable — stesso fallimento transitorio di #247 (2026-08-31)', () => {
-  for (const reason of ['rateLimitExceeded', 'userRateLimitExceeded', 'dailyLimitExceededUnreg', 'quotaExceeded', 'RESOURCE_EXHAUSTED']) {
+  for (const reason of ['rateLimitExceeded', 'userRateLimitExceeded', 'dailyLimitExceeded', 'dailyLimitExceededUnreg', 'quotaExceeded', 'RESOURCE_EXHAUSTED']) {
     assert.equal(isRetryableRcFetchStatus(403, reason), true, `reason=${reason} deve essere retryable`);
   }
 });

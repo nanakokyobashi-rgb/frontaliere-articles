@@ -1,10 +1,12 @@
 {
-  "keywords": [],
-  "strikes": {},
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
   "topicGateUrls": {
-    "canton-so::https://so.ch/verwaltung/departement-des-innern/polizei/medienmitteilungen/medienmitteilungen/news/olten-wohnwagen-in-brand-eine-person-schwer-verletzt": {
+    "canton-so::https://so.ch/verwaltung/departement-des-innern/polizei/ueber-uns/polizeikommando/kommunikation-und-medien": {
       "section": "canton-so",
-      "ts": 1791669886425
+      "ts": 1792493019470
     }
   }
 }

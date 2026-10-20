@@ -35,8 +35,8 @@
     "keyForm": 2
   },
   "https://www.tio.ch/newsblog/valute-e-frontiere/1951203/svizzera-schengen-controlli-ogni-federale-potrebbe-frontalieri-ticino-italia-studio": {
-    "articleId": "uscita-svizzera-schengen-controlli",
-    "ts": "2026-10-12T23:42:13.550Z",
+    "articleId": "rapporto-consiglio-federale-schengen",
+    "ts": "2026-10-19T02:54:59.209Z",
     "keyForm": 2
   },
   "https://www.eoc.ch/media-e-news/news/2026/blocco-operatorio-san-giovanni-bellinzona.html": {
@@ -77,6 +77,16 @@
   "https://www.ocst.ch/articoli/17-news-frontalieri/2566-mozione-in-gran-consiglio-contro-la-tassa-sulla-salute-il-ticino-minaccia-il-blocco-dei-ristorni": {
     "articleId": "mozione-gran-consiglio-tassa-salute",
     "ts": "2026-10-18T01:16:12.268Z",
+    "keyForm": 2
+  },
+  "https://www3.ti.ch/dfe/dr/ustat/index.php?fuseaction=news.dettaglio&id=261341&tipo=2": {
+    "articleId": "ustat-manutenzione-chiusura",
+    "ts": "2026-10-19T10:54:19.424Z",
+    "keyForm": 2
+  },
+  "https://www.verbanonews.it/canali-tematici/economia-varese/2026/10/20/sui-frontalieri-pesano-le-disparita-uno-su-due-si-sente-pagato-meno-degli-svizzeri/1032631": {
+    "articleId": "frontalieri-ticino-indagine-salari-2026",
+    "ts": "2026-10-20T10:00:10.932Z",
     "keyForm": 2
   }
 }

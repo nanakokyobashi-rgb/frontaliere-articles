@@ -27,6 +27,18 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.treni-zurigo-stoccarda.title': 'SBB and DB plan reserve services between Zurich and Stuttgart',
     'blog.article.treni-zurigo-stoccarda.excerpt': 'SBB and DB plan additional running-time reserves between Zurich and Stuttgart.',
     'blog.article.treni-zurigo-stoccarda.imageAlt': 'Passenger train on the rail connection between Zurich and Stuttgart',
+    'blog.article.pulizie-tunnel-sciaffusa.title': 'Bundesamt für Strassen will close three tunnels at night',
+    'blog.article.pulizie-tunnel-sciaffusa.excerpt': 'Fäsenstaub, Cholfirst and Galgenbuck closed every night from October 19 to 23, from 8 p.m.',
+    'blog.article.pulizie-tunnel-sciaffusa.imageAlt': 'Fäsenstaub, Cholfirst and Galgenbuck tunnels closed at night for cleaning',
+    'blog.article.svp-sciaffusa-candidati-2027.title': 'SVP Schaffhausen selects candidates for the 2027 elections',
+    'blog.article.svp-sciaffusa-candidati-2027.excerpt': 'The delegates’ assembly in Oberhallau chose Andreas Gnädinger for the Council of States and Thomas Hurter and Thomas Müller for the National Council.',
+    'blog.article.svp-sciaffusa-candidati-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.beringen-vbsh-fermate-chiuse.title': 'ATM exploded in Beringen: three VBSH stops not served',
+    'blog.article.beringen-vbsh-fermate-chiuse.excerpt': 'After the explosions this morning at Enge, VBSH is not serving Enge, Hägli and Sonne until 13:30.',
+    'blog.article.beringen-vbsh-fermate-chiuse.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.schleitheim-scooter-incidente-2026.title': 'Scooter accident in Schleitheim: woman injured, Hohbrugg closed',
+    'blog.article.schleitheim-scooter-incidente-2026.excerpt': 'Sunday, October 18, 2026, a 61-year-old woman falls from her scooter on Hohbrugg: thrown 12 meters down the slope, helicopter transport to hospital, road closed for over an hour.',
+    'blog.article.schleitheim-scooter-incidente-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

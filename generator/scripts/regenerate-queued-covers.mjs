@@ -22,8 +22,12 @@ import {
   updateArticleImageInRegistry,
 } from './lib/article-registry-image.mjs';
 import { corpusPath } from './lib/corpus-paths.mjs';
-import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
+import { escapeForSingleQuoteTS, unescapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { metaFieldRegex } from './lib/meta-field-regex.mjs';
+import {
+  isGeneratedCoverAlt,
+  LICENSED_PHOTO_ALT_BY_LOCALE,
+} from './lib/generated-cover-alt.mjs';
 import {
   buildSeoImageBlock,
   GENERATED_COVER_ALT_BY_LOCALE,
@@ -33,7 +37,10 @@ import {
   IMAGE_REGENERATION_PUBLISH_OUTBOX_REL,
 } from './lib/image-regeneration-publish-outbox.mjs';
 import {
+  classifyImageRegenerationFailure,
   failedImageRegenerationRetryIsEligible,
+  IMAGE_REGENERATION_TERMINAL_STATUS,
+  isVisualTextFailure,
   withImageRegenerationQueueLockAsync,
 } from './lib/image-regeneration-queue.mjs';
 import {
@@ -48,6 +55,7 @@ export const DEFAULT_LIMIT = 10;
 export const MAX_LIMIT = 100;
 export const IMAGE_BUDGET_MS = 120_000;
 export const NO_TEXT_IMAGE_RETRY_HINT = 'Safety retry: absolutely no signs, lettering, words, numbers, logos, labels, banners, watermarks, or signature-like marks anywhere in the image.';
+export { isVisualTextFailure } from './lib/image-regeneration-queue.mjs';
 
 const GENERATED_REGISTRY_REL = 'data/generated-image-registry.json';
 let writeTmpSeq = 0;
@@ -57,7 +65,7 @@ function absolute(root, relativePath) {
   return path.join(root, relativePath);
 }
 
-function imageAltMetaUpdate(root, articleId, section, locale) {
+function imageAltMetaUpdate(root, articleId, section, locale, provenanceKind) {
   const sectionCore = ARTICLE_SECTION_CORE_ALL[section];
   if (!sectionCore) throw new Error(`unknown article section ${section}`);
   const relativePath = corpusPath(`services/locales/${sectionCore.metaPrefix}-${locale}.ts`);
@@ -77,9 +85,17 @@ function imageAltMetaUpdate(root, articleId, section, locale) {
   }
 
   const match = matches[0];
-  const escaped = escapeForSingleQuoteTS(GENERATED_COVER_ALT_BY_LOCALE[locale]);
+  const currentValue = unescapeForSingleQuoteTS(match[2]);
+  let value = currentValue;
+  if (provenanceKind === 'generated') {
+    value = GENERATED_COVER_ALT_BY_LOCALE[locale];
+  } else if (provenanceKind === 'licensed-photo'
+      && isGeneratedCoverAlt(locale, currentValue)) {
+    value = LICENSED_PHOTO_ALT_BY_LOCALE[locale];
+  }
+  const escaped = escapeForSingleQuoteTS(value);
   if (match[2] === escaped) {
-    return { filePath, before: source, nextText: source, changed: false };
+    return { filePath, before: source, nextText: source, changed: false, locale, value };
   }
 
   const valueStart = match[0].indexOf("'", match[0].indexOf(':') + 1);
@@ -93,23 +109,26 @@ function imageAltMetaUpdate(root, articleId, section, locale) {
   const nextText = source.slice(0, match.index)
     + replacement
     + source.slice(match.index + match[0].length);
-  return { filePath, before: source, nextText, changed: true };
+  return { filePath, before: source, nextText, changed: true, locale, value };
 }
 
-function imageAltMetaUpdates(root, articleId, section) {
+function imageAltMetaUpdates(root, articleId, section, provenanceKind) {
   return Object.keys(GENERATED_COVER_ALT_BY_LOCALE)
-    .map((locale) => imageAltMetaUpdate(root, articleId, section, locale));
+    .map((locale) => imageAltMetaUpdate(root, articleId, section, locale, provenanceKind));
 }
 
-function governedCoverSeoImage(root, record) {
+function governedCoverSeoImage(root, record, articleId, section) {
   const provenance = imageRecordForPath(root, record.imageUrl, { strict: true });
   if (!provenance) throw new Error(`cover has no governed provenance record: ${record.imageUrl}`);
+  const metadata = imageAltMetaUpdates(root, articleId, section, provenance.kind);
+  const caption = metadata.find(({ locale }) => locale === 'it')?.value;
   return {
     provenance,
+    metadata,
     imageBlock: buildSeoImageBlock({
       imagePath: record.imageUrl,
       provenance,
-      caption: GENERATED_COVER_ALT_BY_LOCALE.it,
+      caption,
     }),
   };
 }
@@ -165,12 +184,6 @@ function normalizeReason(value) {
     .trim()
     .slice(0, 240);
   return reason || 'engine-failed';
-}
-
-export function isVisualTextFailure(reason) {
-  const normalized = String(reason || '');
-  return /vision gate rejected image/i.test(normalized)
-    && /(?:text|letter(?:ing)?|sign(?:age)?|watermark|signature|writing|logo|emblem|mark(?:ing)?s?|word|number|caption|label|banner|inscription|poster|typograph|brand|trademark|contains[_ ]text\s*[:=]\s*true|cartell|segnaletica|scritte?|parol[ae]|numer[io]|beschriftung|schrift|texte?|forbidden content)/i.test(normalized);
 }
 
 function parseLimit(value) {
@@ -291,8 +304,7 @@ async function alreadySatisfiedCover(root, item, registryFiles, decodeThumbnail)
     if (!await hasValidThumbnail(root, record, decodeThumbnail)) return false;
     const section = sectionForRegistry(location);
     const seo = locateArticleSeoImage(root, item.articleId, { section });
-    const { imageBlock } = governedCoverSeoImage(root, record);
-    const metadata = imageAltMetaUpdates(root, item.articleId, section);
+    const { imageBlock, metadata } = governedCoverSeoImage(root, record, item.articleId, section);
     return seo.previousImage === record.imageUrl
       && comparableSeoImageBlock(seo.imageBlock) === comparableSeoImageBlock(imageBlock)
       && metadata.every(({ changed }) => !changed);
@@ -308,7 +320,9 @@ async function defaultGenerateCover(item, context) {
     articleId: item.articleId,
     title: item.title,
     area: context.area,
-    safetyHint: isVisualTextFailure(item.reason) ? NO_TEXT_IMAGE_RETRY_HINT : '',
+    safetyHint: item.retryHint === 'no-text' || isVisualTextFailure(item.reason)
+      ? NO_TEXT_IMAGE_RETRY_HINT
+      : '',
     deadlineAt: Date.now() + IMAGE_BUDGET_MS,
     onProviderAttempt: ({ provider, attempt }) => {
       console.error(`  🎨 Copertina ${item.articleId}: ${provider}, tentativo ${attempt}`);
@@ -359,7 +373,7 @@ async function finalizeCover({ root, item, record, location, snapshots, generate
   const section = sectionForRegistry(location);
   const seoLocation = locateArticleSeoImage(root, item.articleId, { section });
   trackFile(snapshots, absolute(root, seoLocation.path));
-  const metadata = imageAltMetaUpdates(root, item.articleId, section);
+  const { imageBlock, metadata } = governedCoverSeoImage(root, record, item.articleId, section);
   for (const update of metadata) trackFile(snapshots, update.filePath);
 
   if (!await hasValidThumbnail(root, record, decodeThumbnail)) await generateThumbnail(destination, { root, item, record });
@@ -369,7 +383,6 @@ async function finalizeCover({ root, item, record, location, snapshots, generate
   if (currentImage !== record.imageUrl) {
     updateArticleImageInRegistry(root, item.articleId, record.imageUrl, { registryFiles });
   }
-  const { imageBlock } = governedCoverSeoImage(root, record);
   updateArticleSeoImageBlock(root, item.articleId, imageBlock, { section });
   for (const update of metadata) {
     if (update.changed) writeTextAtomic(update.filePath, update.nextText);
@@ -461,12 +474,19 @@ async function processItem({ root, item, generateCover, generateThumbnail, regis
 }
 
 function summaryFor(queue, result) {
+  const terminalIds = queue.items
+    .filter((item) => item.status === IMAGE_REGENERATION_TERMINAL_STATUS)
+    .map((item) => item.articleId);
   return {
     drained: result.drained,
     residual: queue.items.length,
     failed: result.failed,
     marked: queue.items.filter((item) => Number(item.failureCount || 0) >= 3).map((item) => item.articleId),
     failedIds: result.failedIds,
+    terminal: terminalIds.length,
+    terminalIds,
+    terminalized: result.terminalizedIds.length,
+    terminalizedIds: result.terminalizedIds,
     reused: result.reused,
     alreadySatisfied: result.alreadySatisfiedIds.length,
     alreadySatisfiedIds: result.alreadySatisfiedIds,
@@ -529,7 +549,7 @@ export async function drainQueuedCovers({
     if (requeued.length > 0) write(queue);
   }
   const selected = queue.items
-    .filter((item) => item.status !== 'failed')
+    .filter((item) => item.status !== 'failed' && item.status !== IMAGE_REGENERATION_TERMINAL_STATUS)
     .map((item, index) => ({ item, index }))
     .sort(queueAttemptSort)
     .slice(0, boundedLimit)
@@ -538,6 +558,7 @@ export async function drainQueuedCovers({
     drained: 0,
     failed: 0,
     failedIds: [],
+    terminalizedIds: [],
     reused: 0,
     alreadySatisfiedIds,
     requeued,
@@ -597,13 +618,23 @@ export async function drainQueuedCovers({
       if (outcome?.snapshots) restoreTransaction(outcome.snapshots);
       const failureCount = Number.isInteger(item.failureCount) && item.failureCount >= 0 ? item.failureCount + 1 : 1;
       item.failureCount = failureCount;
+      const disposition = classifyImageRegenerationFailure(error);
       // Automatic runs pass an explicit cooldown. Persist the first failure as
       // failed immediately so the next automatic run cannot select it while
       // the cooldown is active. Manual callers keep the bounded immediate
       // retry burst because they deliberately omit the cooldown.
-      item.status = retryAfterHours !== null || failureCount >= 3 ? 'failed' : 'queued';
+      item.status = disposition.retryable === false
+        ? IMAGE_REGENERATION_TERMINAL_STATUS
+        : retryAfterHours !== null || failureCount >= 3 ? 'failed' : 'queued';
       item.lastFailureAt = typeof now === 'function' ? now() : String(now);
       item.reason = normalizeReason(error);
+      if (disposition.retryHint === 'no-text') item.retryHint = 'no-text';
+      else delete item.retryHint;
+      if (disposition.retryable === false) {
+        item.terminalAt = item.lastFailureAt;
+        item.terminalReason = disposition.reason;
+        result.terminalizedIds.push(item.articleId);
+      }
       write(queue);
       result.failed += 1;
       result.failedIds.push(item.articleId);

@@ -33,5 +33,25 @@
     "articleId": "traffico-berna-manifestazione",
     "ts": "2026-10-10T07:15:47.712Z",
     "keyForm": 2
+  },
+  "https://www.be.ch/de/start.html?newsid=ad395728-1eaf-4b73-80da-dc40cb354838": {
+    "articleId": "berna-tassa-ecclesiastica",
+    "ts": "2026-10-19T06:36:37.354Z",
+    "keyForm": 2
+  },
+  "https://www.be.ch/de/start.html?newsid=e087c104-7079-41d5-817b-5e28af70cbfa": {
+    "articleId": "amministrazione-fiscale-berna-chiusura-2026",
+    "ts": "2026-10-19T06:59:44.950Z",
+    "keyForm": 2
+  },
+  "https://www.nau.ch/politik/regional/berner-regierungsrat-lehnt-kostenlose-kitas-ab-67190489": {
+    "articleId": "berna-governo-kita-gratuite",
+    "ts": "2026-10-19T18:54:07.138Z",
+    "keyForm": 2
+  },
+  "https://www.nau.ch/news/wirtschaft/swissgrid-plant-neue-stromleitung-zwischen-kantonen-bern-und-luzern-67190442": {
+    "articleId": "corridoio-linea-wynigen",
+    "ts": "2026-10-20T02:20:36.785Z",
+    "keyForm": 2
   }
 }

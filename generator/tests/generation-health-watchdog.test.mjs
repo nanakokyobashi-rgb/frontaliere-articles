@@ -685,6 +685,7 @@ function healthy() {
       oldestRequestedAt: null,
       oldestAgeHours: null,
       actionableCount: 0,
+      terminalCount: 0,
       oldestActionableRequestedAt: null,
       oldestActionableAt: null,
       oldestActionableAgeHours: null,
@@ -706,6 +707,7 @@ describe('collectCoverQueue — la coda è una misura fail-closed', () => {
         oldestRequestedAt: null,
         oldestAgeHours: null,
         actionableCount: 0,
+        terminalCount: 0,
         oldestActionableRequestedAt: null,
         oldestActionableAt: null,
         oldestActionableAgeHours: null,
@@ -738,6 +740,7 @@ describe('collectCoverQueue — la coda è una misura fail-closed', () => {
       assert.equal(result.oldestRequestedAt, '2026-10-07T06:00:00.000Z');
       assert.equal(result.oldestAgeHours, 6);
       assert.equal(result.actionableCount, 1);
+      assert.equal(result.terminalCount, 0);
       assert.equal(result.oldestActionableRequestedAt, '2026-10-07T06:00:00.000Z');
       assert.equal(result.oldestActionableAt, '2026-10-07T06:00:00.000Z');
       assert.equal(result.oldestActionableAgeHours, 6);
@@ -789,6 +792,31 @@ describe('collectCoverQueue — la coda è una misura fail-closed', () => {
       assert.equal(result.oldestActionableRequestedAt, '2026-10-06T12:00:00.000Z');
       assert.equal(result.oldestActionableAt, '2026-10-07T12:00:00.000Z');
       assert.equal(result.oldestActionableAgeHours, 0);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+
+  test('un terminale resta contato ma non diventa azionabile con l età', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'generation-health-cover-'));
+    try {
+      fs.mkdirSync(path.join(root, 'data'), { recursive: true });
+      fs.writeFileSync(path.join(root, 'data/image-regeneration-queue.json'), JSON.stringify({
+        schema: 1,
+        items: [{
+          articleId: 'terminal-safety',
+          requestedAt: '2026-10-01T12:00:00.000Z',
+          lastFailureAt: '2026-10-01T13:00:00.000Z',
+          terminalAt: '2026-10-01T13:00:00.000Z',
+          terminalReason: 'vision-safety-rejection',
+          status: 'terminal',
+        }],
+      }));
+      const result = collectCoverQueue(root, Date.parse('2026-10-07T12:00:00.000Z'));
+      assert.equal(result.actionableCount, 0);
+      assert.equal(result.terminalCount, 1);
+      assert.equal(result.oldestActionableAgeHours, null);
+      assert.deepEqual(result.statuses, { terminal: 1 });
     } finally {
       fs.rmSync(root, { recursive: true, force: true });
     }
@@ -1136,6 +1164,29 @@ describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
     assert.equal(v.firing, true);
     assert.match(v.body, /non misurati/);
     assert.match(v.body, /6\.5h/);
+  });
+
+  test('un terminale chiude il segnale di coda azionabile ma accende il degrado dedicato', () => {
+    const m = healthy();
+    m.coverQueue = {
+      available: true,
+      count: 1,
+      oldestRequestedAt: '2026-10-01T12:00:00.000Z',
+      oldestAgeHours: 144,
+      actionableCount: 0,
+      terminalCount: 1,
+      oldestActionableRequestedAt: null,
+      oldestActionableAt: null,
+      oldestActionableAgeHours: null,
+      statuses: { terminal: 1 },
+    };
+    const actionable = verdictFor(m, 'cover-fallback-health');
+    assert.equal(actionable.firing, false);
+    const terminal = verdictFor(m, 'cover-terminal-rejections');
+    assert.equal(terminal.firing, true);
+    assert.match(terminal.body, /terminal=1/);
+    assert.match(terminal.body, /\*\*1\*\* copertine/);
+    assert.match(terminal.body, /resta nel ledger/);
   });
 
   test('cover-fallback-health resta non misurabile se la coda non è leggibile', () => {
@@ -1597,6 +1648,7 @@ describe('ogni condizione che si apre si può chiudere — il test del precedent
     m.runs = { available: false };
     m.commits = { available: false, lookbackHours: 48 };
     m.corpus = { available: false };
+    m.coverQueue = { available: false };
 
     const created = [];
     const resolved = [];

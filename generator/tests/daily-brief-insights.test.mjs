@@ -10,31 +10,83 @@ const now = Date.parse('2026-10-14T12:00:00.000Z');
 const day = n => new Date(now - n * 86400000).toISOString().slice(0, 10);
 const history = Array.from({ length: 14 }, (_, i) => ({ date: day(i + 1), added: i < 7 ? 10 : 5 }));
 
-test('compares complete closed weeks, never a partial day or an incomplete baseline', () => {
-  const input = { blocks: { jobs: { available: true } }, todayIso: day(0), jobsStats: { history: [...history, { date: day(0), added: 999 }], leaders: { topCompaniesActive: [{ name: 'Employer', count: 8 }] } } };
+test('date buckets without finalization evidence do not produce weekly job comparisons', () => {
+  const input = { blocks: { jobs: { available: true } }, todayIso: day(0), jobsStats: { history: [...history, { date: day(0), added: 999 }], leaders: { topCompaniesActive: [{ name: 'Employer', count: 8 }], topLocationsActive: [{ name: 'Chiasso', count: 5 }] } } };
   const result = buildDailyBriefInsights(input).jobs;
-  assert.equal(result.currentWeekAdded, 70);
-  assert.equal(result.previousWeekAdded, 35);
-  assert.equal(result.weeklyChange, 35);
-  assert.equal(result.weeklyChangePct, 100);
+  assert.equal(result.currentWeekAdded, undefined);
+  assert.equal(result.previousWeekAdded, undefined);
+  assert.equal(result.currentPeriod, undefined);
+  assert.equal(result.weeklyChange, undefined);
+  assert.deepEqual(result.topCompanies, [{ name: 'Employer', count: 8 }]);
+  assert.deepEqual(result.topLocations, [{ name: 'Chiasso', count: 5 }]);
   input.jobsStats.history = history.slice(0, 13);
-  assert.equal(buildDailyBriefInsights(input).jobs.previousWeekAdded, null);
-  assert.equal(buildDailyBriefInsights(input).jobs.weeklyChange, null);
+  assert.equal(buildDailyBriefInsights(input).jobs.currentWeekAdded, undefined);
+  assert.equal(buildDailyBriefInsights(input).jobs.weeklyChange, undefined);
 });
 
 test('FX illustration uses the observed rate and refuses an absent weekly change', () => {
-  const input = { todayIso: day(0), blocks: { exchange: { available: true, rate: 1.07, delta7d: -0.01, lastDate: day(1) } } };
+  const input = { todayIso: day(0), blocks: { exchange: { available: true, rate: 1.07, rate7dAgo: 1.08, rate7dAgoDate: day(9), delta7d: -0.01, lastDate: day(1) } } };
   assert.equal(buildDailyBriefInsights(input).exchange.salaryValueEur, 4280);
   assert.equal(buildDailyBriefInsights(input).exchange.weeklySalaryChangeEur, -40);
+  assert.equal(buildDailyBriefInsights(input).exchange.previousDate, day(9));
+  assert.equal(buildDailyBriefInsights(input).exchange.rate7dAgo, 1.08);
   input.blocks.exchange.delta7d = null;
   assert.equal(buildDailyBriefInsights(input).exchange.weeklySalaryChangeEur, null);
+});
+
+test('CHF 4,000 FX comparison uses the same rounded rates shown in its lead', () => {
+  const insight = buildDailyBriefInsights({ todayIso: day(0), blocks: { exchange: {
+    available: true, rate: 0.875, rate7dAgo: 0.8701, rate7dAgoDate: day(8),
+    delta7d: 0.005, lastDate: day(1),
+  } } }).exchange;
+  assert.equal(insight.weeklyRateDelta, 0.0049);
+  assert.equal(insight.weeklySalaryChangeEur, 19.6);
 });
 
 test('crossing comparison needs the same crossing and consecutive editions', () => {
   const input = { todayIso: day(0), blocks: { borderWait: { available: true, worst: { slug: 'crossing', name: 'Crossing', waitMinutes: 20 } } }, previousSnapshot: { dateIso: day(1), blocks: { borderWait: { available: true, crossings: [{ slug: 'crossing', waitMinutes: 10 }] } } } };
   assert.equal(buildDailyBriefInsights(input).borderWait.changeMinutes, 10);
+  assert.equal(buildDailyBriefInsights(input).borderWait.previousDate, day(1));
+  assert.equal(buildDailyBriefInsights(input).borderWait.currentDate, day(0));
   input.previousSnapshot.dateIso = day(2);
   assert.equal(buildDailyBriefInsights(input).borderWait, undefined);
+});
+
+test('same-day refresh retains the first edition baseline and replaces its reading', () => {
+  const todayIso = day(0);
+  const first = buildDailyBriefInsights({ todayIso, blocks: { borderWait: { available: true,
+    worst: { slug: 'crossing', name: 'Crossing', waitMinutes: 20 } } }, previousSnapshot: {
+    dateIso: day(1), blocks: { borderWait: { available: true, crossings: [
+      { slug: 'crossing', waitMinutes: 5 }, { slug: 'other-crossing', waitMinutes: 10 },
+    ] } },
+  } });
+  assert.equal(first.borderWait.changeMinutes, 15);
+
+  const refreshed = buildDailyBriefInsights({ todayIso, blocks: { borderWait: { available: true,
+    worst: { slug: 'other-crossing', name: 'Other crossing', waitMinutes: 28 } } }, previousSnapshot: {
+    dateIso: todayIso,
+    insights: first,
+  } });
+  assert.equal(refreshed.borderWait.previousDate, day(1));
+  assert.equal(refreshed.borderWait.slug, 'other-crossing');
+  assert.equal(refreshed.borderWait.previousWaitMinutes, 10);
+  assert.equal(refreshed.borderWait.waitMinutes, 28);
+  assert.equal(refreshed.borderWait.changeMinutes, 18);
+
+  const duringOutage = buildDailyBriefInsights({ todayIso, blocks: { borderWait: { available: false } },
+    previousSnapshot: { dateIso: todayIso, insights: first } });
+  assert.deepEqual(duringOutage.borderWaitBaseline, first.borderWaitBaseline);
+  const restored = buildDailyBriefInsights({ todayIso, blocks: { borderWait: { available: true,
+    worst: { slug: 'other-crossing', name: 'Other crossing', waitMinutes: 29 } } },
+    previousSnapshot: { dateIso: todayIso, insights: duringOutage } });
+  assert.equal(restored.borderWait.previousWaitMinutes, 10);
+  assert.equal(restored.borderWait.changeMinutes, 19);
+
+  const stale = buildDailyBriefInsights({ todayIso, blocks: { borderWait: { available: true,
+    worst: { slug: 'other-crossing', name: 'Other crossing', waitMinutes: 28 } } }, previousSnapshot: {
+    dateIso: day(2), insights: first,
+  } });
+  assert.equal(stale.borderWait, undefined, 'a D-2 snapshot cannot carry its D-1 baseline forward');
 });
 
 test('a fresh fuel aggregate cannot make an explicit old quote fresh', () => {
@@ -72,13 +124,14 @@ test('one failed audience source is optional and never takes down the edition', 
   assert.equal(result.endDate, day(3));
 });
 
-test('each locale renders observed demand and a number-first daily headline', () => {
+test('each locale renders observed demand and uses a neutral lead below signal floors', () => {
   const blocks = { jobs: { available: true, yesterdayAdded: 40, last7dAdded: 70, activeJobs: 100, activeCompanies: 5 }, exchange: { available: true, rate: 1.07, delta1d: 0, delta7d: null, lastDate: day(1) } };
   const searchDemand = shapeSearchDemand({ startDate: day(9), endDate: day(3), gscAvailable: true, ga4Available: false, gscRows: [{ keys: ['diesel prices'], impressions: 100 }] });
   const insights = buildDailyBriefInsights({ blocks, todayIso: day(0), jobsStats: { history }, searchDemand });
   const article = buildDailyBriefArticle({ dateIso: day(0), blocks, insights });
+  assert.equal(article._headline.kind, 'dailyBrief');
   for (const locale of ['it', 'en', 'de', 'fr']) {
-    assert.ok(article.content[locale].title.indexOf('40') < article.content[locale].title.indexOf(String(new Date(now).getUTCFullYear())));
+    assert.doesNotMatch(article.content[locale].title, /40/);
     assert.match(article.content[locale].body4, /Google Search Console/);
     assert.match(article.content[locale].body4, /100/);
     assert.doesNotMatch(article.content[locale].body4, /PRIVATE_USER_INPUT/);
@@ -106,6 +159,8 @@ test('fuel savings require a matching fresh Italian quote and a fresh explicit S
   } }, { nowMs: now });
   assert.equal(fuel.available, true);
   assert.deepEqual(fuel.bestSavings.map(row => row.municipality), ['Fresh']);
+  assert.equal(fuel.bestSavings[0].italyObservedAt, fresh.cheapestStation.updatedAt);
+  assert.equal(fuel.bestSavings[0].swissObservedAt, saving.swissStation.updatedAt);
   for (const field of ['municipalityCount', 'cheaperItalyCount', 'cheaperSwissCount', 'comparedMunicipalityCount', 'tieCount']) assert.equal(fuel[field], null);
   const article = buildDailyBriefArticle({ dateIso: day(0), blocks: { fuel } });
   for (const locale of ['it', 'en', 'de', 'fr']) {

@@ -26,6 +26,8 @@
 import { buildDailyBriefInsights } from './daily-brief-insights.mjs';
 
 const HOUR_MS = 60 * 60 * 1000;
+export const ITALY_FUEL_TIME_ZONE = 'Europe/Rome';
+export const SWISS_FUEL_TIME_ZONE = 'Europe/Zurich';
 
 /** A block whose source is fresh no longer than this is publishable. */
 export const BORDER_WAIT_MAX_AGE_MS = 6 * HOUR_MS;
@@ -54,25 +56,14 @@ export const JOBS_MAX_AGE_MS = 48 * HOUR_MS;
  * a field-for-field replay of 2026-08-29 (`totalJobs` 22943, `added` 33,
  * `updated` 22557, `removed` 3), then caught up with a +5982 spike on 09-01.
  * `generatedAt` was fresh throughout, so the edition published a carried-over
- * "new listings yesterday" figure as fact. Same silent-staleness shape as
- * a tolerated push-contention loss upstream: nothing fails, the number is just
- * old (#744).
+ * active-jobs figure as current. Same silent-staleness shape as a tolerated
+ * push-contention loss upstream: nothing fails, the total is simply old (#744).
  *
  * `shapeExchange` already keys on the data's own advance (the last point's
  * `date`) rather than on a producer timestamp; these two rules give the jobs
  * block the same property.
  */
-/**
- * The newest CLOSED history day may lag `todayIso` by at most this many days.
- *
- * The healthy baseline is **1**, not 0: the tail of the raw series is the day
- * in progress, which the guard scopes out, so on a corpus that is advancing
- * normally the newest closed day is always yesterday. A lag of 2 therefore
- * already means the closed row for D-1 never landed — the same state in which
- * `shapeJobs` would have no `yesterdayAdded` to headline with. So 1 is both
- * the tightest and the only honest value: raising it buys nothing but extra
- * calendar days of a frozen corpus published as fact.
- */
+/** The newest prior-date history row may lag `todayIso` by at most one day. */
 export const JOBS_HISTORY_MAX_LAG_DAYS = 1;
 /** Counters compared field-for-field to detect a replayed (frozen) day. */
 const JOBS_HISTORY_COUNTERS = ['totalJobs', 'added', 'updated', 'removed'];
@@ -84,7 +75,7 @@ const JOBS_HISTORY_MOVEMENT_COUNTERS = ['added', 'updated', 'removed'];
  * The format check below is fail-closed on purpose, but its blast radius has to
  * stop where reading stops. Measured on the live payload (2026-09-05):
  * `jobs-stats.json` carries 164 rows back to 2026-03-20, and the guard reads
- * two of them — the newest closed day and its predecessor. Judging the format
+ * two of them — the newest prior-date row and its predecessor. Judging the format
  * of all 164 means one legacy archive row, or the partial row for the day in
  * progress that the guard deliberately scopes out, takes the whole jobs block
  * down for a shape nobody reads. Seven days is generous against the two rows
@@ -379,6 +370,12 @@ export function shapeFuel(meta, { nowMs = Date.now() } = {}) {
       swissPriceEur: round(m?.swissPriceEur, 3),
       swissPriceChf: round(m?.swissPriceChf, 3),
       saving50LEur: round(m?.saving50LEur, 2),
+      // The timestamp fields retain the source's wall-clock basis. Publish
+      // their zones explicitly instead of deriving an instant from generatedAt.
+      italyTimeZone: ITALY_FUEL_TIME_ZONE,
+      swissTimeZone: SWISS_FUEL_TIME_ZONE,
+      italyObservedAt: verifiedItaly.find(row => row.municipality === m.municipality && row.province === m.province)?.cheapestStation?.updatedAt ?? null,
+      swissObservedAt: m?.swissStation?.updatedAt ?? null,
     }))
     .filter((m) => m.municipality && m.saving50LEur != null)
     .slice(0, 3);
@@ -470,15 +467,19 @@ export function shapeExchange(doc, { todayIso } = {}) {
   // `EXCHANGE_MAX_AGE_DAYS` is the established tolerance for missing FX days.
   // Do not turn a point from a much older gap into a fresh-looking weekly delta.
   const weekAgo = [...points].reverse().find((p) => p.date <= weekAgoIso && p.date >= lookbackFloorIso) || null;
+  const rate = round(last.rate, 4);
+  const prevRate = round(prev.rate, 4);
+  const rate7dAgo = weekAgo ? round(weekAgo.rate, 4) : null;
   return {
     available: true,
-    rate: round(last.rate, 4),
+    rate,
     lastDate: last.date,
-    prevRate: round(prev.rate, 4),
+    prevRate,
     prevDate: prev.date,
-    delta1d: round(last.rate - prev.rate, 4),
-    rate7dAgo: weekAgo ? round(weekAgo.rate, 4) : null,
-    delta7d: weekAgo ? round(last.rate - weekAgo.rate, 4) : null,
+    delta1d: round(rate - prevRate, 4),
+    rate7dAgo,
+    rate7dAgoDate: weekAgo?.date ?? null,
+    delta7d: weekAgo ? round(rate - rate7dAgo, 4) : null,
     source: doc.source ?? null,
     pointCount: points.length,
   };
@@ -495,20 +496,20 @@ export function shapeExchange(doc, { todayIso } = {}) {
  * "nobody could judge" published as "judged fine" is the whole failure this
  * function exists to close.
  *
- * Only CLOSED days are read. The aggregator seeds a `history` row for the day
- * in progress that mirrors the live partials in `totals`, so the raw tail of
- * the series is always "today": comparing it against `todayIso` would make the
- * lag rule inert, and comparing it field-for-field against a full day would put
- * two non-homogeneous quantities side by side. Scoping to `date < todayIso` is
- * the same idiom `windowFileNames` uses for the border-wait window, which ends
- * the day BEFORE `todayIso` for this reason.
+ * Only prior-date buckets are read for corpus-health checks. The aggregator
+ * seeds a `history` row for the day in progress that mirrors the live partials
+ * in `totals`, so the raw tail is always "today": comparing it against
+ * `todayIso` would make the lag rule inert, and comparing it field-for-field
+ * against an earlier bucket would put non-homogeneous quantities side by side.
+ * Scoping to `date < todayIso` excludes today's partial row; it does not attest
+ * that an earlier date bucket has received its final update. Accordingly, the
+ * D-1 `added` value is not published as a completed daily count.
  */
 export function jobsCorpusFrozenReason(stats, { todayIso } = {}) {
   const todayMs = isoDayMs(todayIso);
   // No clock, no verdict — and "no verdict" must not read as "corpus fine".
   // This was the last fail-open door left in the guard: `shapeJobs` without a
-  // `todayIso` published `activeJobs` and a "new listings yesterday" figure
-  // from a corpus nobody had judged. `buildDailyBrief` validates `todayIso`
+  // `todayIso` published `activeJobs` from a corpus nobody had judged. `buildDailyBrief` validates `todayIso`
   // and is the only caller today, so the door is shut before the next caller
   // finds it open — the same reason the `history` case is degraded one level
   // up rather than left to the producer's discretion. `shapeExchange` already
@@ -530,7 +531,7 @@ export function jobsCorpusFrozenReason(stats, { todayIso } = {}) {
   // A row whose date is not canonical cannot be ordered against the others.
   // Dropping it would empty the window and return "corpus fine" — the exact
   // silent-staleness shape this guard exists to close — so a format change is
-  // reported as a finding instead. Scoped to the closed-day window this guard
+  // reported as a finding instead. Scoped to the prior-date window this guard
   // reads (`[today - JOBS_HISTORY_WINDOW_DAYS, today)`): the archive rows at the
   // head of the series and the partial row for the day in progress are outside
   // every verdict below, so their shape cannot make the block wrong.
@@ -564,20 +565,21 @@ export function jobsCorpusFrozenReason(stats, { todayIso } = {}) {
     return `jobs history stops at ${newest.date}, ${lagDays}d before ${todayIso} (max ${JOBS_HISTORY_MAX_LAG_DAYS}d) — corpus is not advancing`;
   }
 
-  // The zero-day rule is decided on the movement counters ALONE, and before the
+  // The no-movement rule is decided on the counters ALONE, and before the
   // four-field completeness check that only the replay rule needs. Requiring
   // `totalJobs`/`updated`/`removed` up front would return "corpus fine" on a
   // row that carries just `totalJobs` and `added` — the very shape this
   // module's own healthy fixture uses — so the rule would be inert on the
-  // producer shape it is most likely to meet, and `added: 0` would headline the
-  // edition as "0 new listings yesterday".
+  // producer shape it is most likely to meet. A zero count is not reported as
+  // a daily total because the producer does not attest that the date bucket
+  // has finished.
   const movement = JOBS_HISTORY_MOVEMENT_COUNTERS
     .map((key) => ({ key, value: toFiniteNumber(newest[key]) }))
     .filter(({ value }) => Number.isFinite(value));
 
-  // With the lag rule satisfied the newest closed row IS D-1, the row whose
-  // `added` the section headlines with. A D-1 carrying no readable movement
-  // counter at all says nothing about whether the crawler ran, so the guard
+  // With the lag rule satisfied, the newest prior-date row is usually D-1.
+  // A row carrying no readable movement counter at all says nothing about
+  // whether the crawler ran, so the guard
   // degrades rather than passing an unjudged corpus (`NaN === 0` is false, so
   // staying silent here would be failing open by accident rather than by
   // decision).
@@ -585,14 +587,13 @@ export function jobsCorpusFrozenReason(stats, { todayIso } = {}) {
     return `jobs history day ${newest.date} carries no readable added/updated/removed — the corpus-advance guard cannot tell whether the crawler ran`;
   }
 
-  // A CLOSED day on which nothing was added, updated or removed is not an idle
-  // day on this corpus — it has thousands of daily updates — it is a crawler
-  // that did not run. Publishing it would put "0 new listings yesterday" in the
-  // edition as a fact, which is worse than dropping the section. Judged on the
-  // counters the row actually carries: an absent counter is not a zero.
+  // A prior-date row with all available movement counters at zero cannot
+  // distinguish an idle crawler from a bucket that has not received its final
+  // update. Keep the existing freshness guard closed in that case; an absent
+  // counter is not a zero.
   if (movement.every(({ value }) => value === 0)) {
     const carried = movement.map(({ key }) => key).join('/');
-    return `jobs history day ${newest.date} closed with ${carried} all at 0 — the crawler did not run, that is not a quiet day`;
+    return `jobs history day ${newest.date} has ${carried} all at 0 — the corpus has not demonstrated movement`;
   }
 
   // A row can be present, and moving, and still be a replay of the previous
@@ -625,24 +626,15 @@ export function shapeJobs(stats, { nowMs = Date.now(), todayIso } = {}) {
   if (!Number.isFinite(activeJobs) || activeJobs <= 0) return unavailable('jobs stats carry no activeJobs total');
   const frozenReason = jobsCorpusFrozenReason(stats, { todayIso });
   if (frozenReason) return unavailable(frozenReason);
-  // The morning cron runs before the day has accumulated: "yesterday" from the
-  // history series is the honest daily number, todayAdded is the live partial.
-  // No longer gated on `todayIso`: the guard above now degrades when the clock
-  // is missing, so past this line there is always a canonical day, and the
-  // `if (todayIso)` that used to wrap this rule was the second half of the same
-  // fail-open door.
+  // Keep requiring a prior-date row so a fresh generatedAt alone cannot make
+  // a source with no usable corpus history appear healthy. The producer has
+  // no finalization marker, so do not publish that row's `added` value as a
+  // completed "yesterday" count.
   const history = Array.isArray(stats.history) ? stats.history : [];
   const yesterdayIso = new Date(isoDayMs(todayIso) - 24 * HOUR_MS).toISOString().slice(0, 10);
   const entry = history.find((h) => h?.date === yesterdayIso);
-  const yesterdayAdded = finiteOrNull(entry?.added);
-  // The headline of the section IS this number. If the aggregator appends
-  // yesterday's closed row only after the 05:05 cron, the block would go out
-  // `available: true` with the figure missing — degrade instead, the same way
-  // a stale row degrades. `refresh-daily-brief-data.mjs` counts how many
-  // editions in a row this happens for: a late append is a morning, a lag that
-  // repeats is a broken aggregator.
-  if (yesterdayAdded === null) {
-    return unavailable(`jobs history has no closed row for ${yesterdayIso} — no "new listings yesterday" figure to publish`);
+  if (!entry) {
+    return unavailable(`jobs history has no prior-date row for ${yesterdayIso}`);
   }
   return {
     available: true,
@@ -650,7 +642,7 @@ export function shapeJobs(stats, { nowMs = Date.now(), todayIso } = {}) {
     activeJobs,
     activeCompanies: finiteOrNull(totals.activeCompanies),
     todayAdded: finiteOrNull(totals.todayAdded),
-    yesterdayAdded,
+    yesterdayAdded: null,
     last7dAdded: finiteOrNull(totals?.last7d?.added),
   };
 }

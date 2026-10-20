@@ -176,18 +176,6 @@ const NOT_YET_WRAPPED = {
       "Stesso file e stesso motivo del precedente: e' il refresh degli hub che segue la " +
       'pubblicazione veloce, e un blip qui lascia gli hub indietro rispetto allo shard.',
   },
-  // Eccezione documentata dal guard: il loop `publish_attempt` di
-  // `fast-publish-section.yml` deve ricevere direttamente il fallimento di
-  // freschezza. `scripts/publish-section-pages.mjs` verifica
-  // `EXPECTED_MAIN_HEAD`, mentre il workflow rilegge `main` e rifà checkout
-  // solo se quella HEAD è avanzata; `generator/tests/section-pages.test.mjs`
-  // vincola esplicitamente questa forma non avvolta.
-  'fast-publish-section.yml :: npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"; then': {
-    issue: 98,
-    reason:
-      'Il retry live deve osservare il fallimento di freschezza, ricontrollare main e rifare checkout; ' +
-      'avvolgere il render nasconderebbe quel segnale al loop esterno.',
-  },
   'generate-border-wait-ranking-weekly.yml :: npx -y tsx@4.23.15 generator/scripts/generate-border-wait-ranking-article.mjs': {
     issue: 98,
     reason:

@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "6a1926ad3308aae0b9c7dd965b13d697298dfcf51fe3632d47237ec9fb543578",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "1f2bd73e7bbd509e02fae51ab5279899c54ae9fb36675dba37627e984110a256",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-19T15:42:28.810Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "33",
+          "value": "29",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,48 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "«Die Schöpfung» von Joseph Haydn",
-              "detail": "Kirche St. Martin, Baar",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/baar/konzert-die-schoepfung-von-joseph-haydn_AyR6S5N"
-            },
-            {
-              "label": "Klangbad in Steinhausen",
-              "detail": "Praxis anderscht GmbH, Steinhausen — in corso, ultimo giorno: 22 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/steinhausen/klangbad-in-steinhausen_Ady2NYs"
-            },
-            {
-              "label": "Metzgete Hütten Zug",
-              "detail": "aigu Restaurant & Bar, Zug — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
-            },
-            {
-              "label": "Tea time on Lake Zug",
-              "detail": "Zug — in corso, ultimo giorno: 18 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tea-time-on-lake-zug/"
-            },
-            {
-              "label": "Klangmeditation in Steinhausen",
-              "detail": "Steinhausen — in corso, ultimo giorno: 22 ottobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
-            },
-            {
-              "label": "AEGERI CONCERTS 26: Asya Fateyeva, Saxophon & Severin von Eckardstein, Klavier",
-              "detail": "Aegerihalle, Unterägeri",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/unteraegeri/aegeri-concerts-26-asya-fateyeva-saxophon-und-severin-von-eckardstein-klavier_AfU3cTx"
-            },
-            {
-              "label": "CONCERTI AEGERI 26: Aeneas Humm, baritono & Kit Armstrong, pianoforte",
-              "detail": "Unterägeri",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concerti-aegeri-26-aeneas-humm-baritono-kit-armstrong-pianoforte-1/"
-            },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug",
@@ -91,11 +49,53 @@
               "detail": "Bücher Balmer, Zug",
               "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesung-mit-blanca-imboden/"
+            },
+            {
+              "label": "Klangbad in Steinhausen",
+              "detail": "Praxis anderscht GmbH, Steinhausen — in corso, ultimo giorno: 22 ottobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/events/music/steinhausen/klangbad-in-steinhausen_Ady2NYs"
+            },
+            {
+              "label": "Metzgete Hütten Zug",
+              "detail": "aigu Restaurant & Bar, Zug — in corso, ultimo giorno: 29 ottobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
+            },
+            {
+              "label": "Klangmeditation in Steinhausen",
+              "detail": "Steinhausen — in corso, ultimo giorno: 22 ottobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
+            },
+            {
+              "label": "Fiirabig-Singe",
+              "detail": "Katholische Pfarrkirche Heilig Geist, Hünenberg",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/huenenberg/fiirabig-singe_AKHfed3"
+            },
+            {
+              "label": "ALLI KENNED DE JOZO & DE JOZO KENNT NÜT",
+              "detail": "Kultroom 15, Unterägeri",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/alli-kenned-de-jozo-de-jozo-kennt-nuet/"
+            },
+            {
+              "label": "Zuger Messe 2026",
+              "detail": "Stierenmarktareal, Zug",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
+            },
+            {
+              "label": "Timeless Cabinet",
+              "detail": "Bibliothek Zug, Zug",
+              "date": "2026-10-24",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/timeless-cabinet_A6PwHuk"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "ZG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "33",
+          "value": "29",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,48 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "«Die Schöpfung» von Joseph Haydn",
-              "detail": "Kirche St. Martin, Baar",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/baar/konzert-die-schoepfung-von-joseph-haydn_AyR6S5N"
-            },
-            {
-              "label": "Klangbad in Steinhausen",
-              "detail": "Praxis anderscht GmbH, Steinhausen — ongoing, last day: 22 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/steinhausen/klangbad-in-steinhausen_Ady2NYs"
-            },
-            {
-              "label": "Metzgete Hütten Zug",
-              "detail": "aigu Restaurant & Bar, Zug — ongoing, last day: 29 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
-            },
-            {
-              "label": "Tea time on Lake Zug",
-              "detail": "Zug — ongoing, last day: 18 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tea-time-on-lake-zug/"
-            },
-            {
-              "label": "Klangmeditation in Steinhausen",
-              "detail": "Steinhausen — ongoing, last day: 22 October 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
-            },
-            {
-              "label": "AEGERI CONCERTS 26: As Fat",
-              "detail": "Aegerihalle, Unterägeri",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/unteraegeri/aegeri-concerts-26-asya-fateyeva-saxophon-und-severin-von-eckardstein-klavier_AfU3cTx"
-            },
-            {
-              "label": "AEGERI CONCERTS 26: Asya Fateyeva, Saxophon & Severin von Eckardstein, Klavier",
-              "detail": "Unterägeri",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concerti-aegeri-26-aeneas-humm-baritono-kit-armstrong-pianoforte-1/"
-            },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug",
@@ -196,11 +154,53 @@
               "detail": "Bücher Balmer, Zug",
               "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesung-mit-blanca-imboden/"
+            },
+            {
+              "label": "Klangbad in Steinhausen",
+              "detail": "Praxis anderscht GmbH, Steinhausen — ongoing, last day: 22 October 2026",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/events/music/steinhausen/klangbad-in-steinhausen_Ady2NYs"
+            },
+            {
+              "label": "Metzgete Hütten Zug",
+              "detail": "aigu Restaurant & Bar, Zug — ongoing, last day: 29 October 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
+            },
+            {
+              "label": "Klangmeditation in Steinhausen",
+              "detail": "Steinhausen — ongoing, last day: 22 October 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
+            },
+            {
+              "label": "Fiirabig-Singe",
+              "detail": "Katholische Pfarrkirche Heilig Geist, Hünenberg",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/huenenberg/fiirabig-singe_AKHfed3"
+            },
+            {
+              "label": "ALLI KENNED DE JOZO & DE JOZO KENNT NÜT",
+              "detail": "Kultroom 15, Unterägeri",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/alli-kenned-de-jozo-de-jozo-kennt-nuet/"
+            },
+            {
+              "label": "Zuger Messe 2026",
+              "detail": "Stierenmarktareal, Zug",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
+            },
+            {
+              "label": "Timeless Cabinet",
+              "detail": "Bibliothek Zug, Zug",
+              "date": "2026-10-24",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/timeless-cabinet_A6PwHuk"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "ZG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "33",
+          "value": "29",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,48 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "«Die Schöpfung» von Joseph Haydn",
-              "detail": "Kirche St. Martin, Baar",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/baar/konzert-die-schoepfung-von-joseph-haydn_AyR6S5N"
-            },
-            {
-              "label": "Klangbad in Steinhausen",
-              "detail": "Praxis anderscht GmbH, Steinhausen — läuft, letzter Tag: 22. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/steinhausen/klangbad-in-steinhausen_Ady2NYs"
-            },
-            {
-              "label": "Metzgete Hütten Zug",
-              "detail": "aigu Restaurant & Bar, Zug — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
-            },
-            {
-              "label": "Tea Time auf dem Zugersee",
-              "detail": "Zug — läuft, letzter Tag: 18. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tea-time-on-lake-zug/"
-            },
-            {
-              "label": "Klangmeditation in Steinhausen",
-              "detail": "Steinhausen — läuft, letzter Tag: 22. Oktober 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
-            },
-            {
-              "label": "AEGERI-KONZERTE 26: Asya Fateyeva, Saxophon & Severin von Eckardstein, Klavier",
-              "detail": "Aegerihalle, Unterägeri",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/unteraegeri/aegeri-concerts-26-asya-fateyeva-saxophon-und-severin-von-eckardstein-klavier_AfU3cTx"
-            },
-            {
-              "label": "AEGERI CONCERTS 26: Asya Fateyeva, Saxophon & Severin von Eckardstein, Klavier",
-              "detail": "Unterägeri",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concerti-aegeri-26-aeneas-humm-baritono-kit-armstrong-pianoforte-1/"
-            },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug",
@@ -301,11 +259,53 @@
               "detail": "Bücher Balmer, Zug",
               "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesung-mit-blanca-imboden/"
+            },
+            {
+              "label": "Klangbad in Steinhausen",
+              "detail": "Praxis anderscht GmbH, Steinhausen — läuft, letzter Tag: 22. Oktober 2026",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/events/music/steinhausen/klangbad-in-steinhausen_Ady2NYs"
+            },
+            {
+              "label": "Metzgete Hütten Zug",
+              "detail": "aigu Restaurant & Bar, Zug — läuft, letzter Tag: 29. Oktober 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
+            },
+            {
+              "label": "Klangmeditation in Steinhausen",
+              "detail": "Steinhausen — läuft, letzter Tag: 22. Oktober 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
+            },
+            {
+              "label": "Fiirabig-Singe",
+              "detail": "Katholische Pfarrkirche Heilig Geist, Hünenberg",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/huenenberg/fiirabig-singe_AKHfed3"
+            },
+            {
+              "label": "ALLI KENNED DE JOZO & DE JOZO KENNT NÜT",
+              "detail": "Kultroom 15, Unterägeri",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/alli-kenned-de-jozo-de-jozo-kennt-nuet/"
+            },
+            {
+              "label": "Zuger Messe 2026",
+              "detail": "Stierenmarktareal, Zug",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
+            },
+            {
+              "label": "Timeless Cabinet",
+              "detail": "Bibliothek Zug, Zug",
+              "date": "2026-10-24",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/timeless-cabinet_A6PwHuk"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "ZG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "33",
+          "value": "29",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,48 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "«Die Schöpfung» von Joseph Haydn",
-              "detail": "Kirche St. Martin, Baar",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/baar/konzert-die-schoepfung-von-joseph-haydn_AyR6S5N"
-            },
-            {
-              "label": "Klangbad in Steinhausen",
-              "detail": "Praxis anderscht GmbH, Steinhausen — en cours, dernier jour : 22 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/events/music/steinhausen/klangbad-in-steinhausen_Ady2NYs"
-            },
-            {
-              "label": "Cabanes de boucherie à Zoug",
-              "detail": "aigu Restaurant & Bar, Zug — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
-            },
-            {
-              "label": "Tea time on Lake Zug",
-              "detail": "Zug — en cours, dernier jour : 18 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tea-time-on-lake-zug/"
-            },
-            {
-              "label": "Klangmeditation in Steinhausen",
-              "detail": "Steinhausen — en cours, dernier jour : 22 octobre 2026",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
-            },
-            {
-              "label": "AEGERI CONCERTS 26 : Asya Fateyeva, Saxophon & Severin von Eckardstein, Klavier",
-              "detail": "Aegerihalle, Unterägeri",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/unteraegeri/aegeri-concerts-26-asya-fateyeva-saxophon-und-severin-von-eckardstein-klavier_AfU3cTx"
-            },
-            {
-              "label": "AEGERI CONCERTS 26 : Soirée de lied Aeneas Humm, baryton & Kit Armstrong, piano",
-              "detail": "Unterägeri",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concerti-aegeri-26-aeneas-humm-baritono-kit-armstrong-pianoforte-1/"
-            },
             {
               "label": "Gemeinsam sprechen und lernen",
               "detail": "Zug",
@@ -406,11 +364,53 @@
               "detail": "Bücher Balmer, Zug",
               "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesung-mit-blanca-imboden/"
+            },
+            {
+              "label": "Klangbad in Steinhausen",
+              "detail": "Praxis anderscht GmbH, Steinhausen — en cours, dernier jour : 22 octobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/events/music/steinhausen/klangbad-in-steinhausen_Ady2NYs"
+            },
+            {
+              "label": "Cabanes de boucherie à Zoug",
+              "detail": "aigu Restaurant & Bar, Zug — en cours, dernier jour : 29 octobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
+            },
+            {
+              "label": "Klangmeditation in Steinhausen",
+              "detail": "Steinhausen — en cours, dernier jour : 22 octobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
+            },
+            {
+              "label": "Fiirabig-Singe",
+              "detail": "Katholische Pfarrkirche Heilig Geist, Hünenberg",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/huenenberg/fiirabig-singe_AKHfed3"
+            },
+            {
+              "label": "ALLI KENNED DE JOZO & DE JOZO KENNT NÜT",
+              "detail": "Kultroom 15, Unterägeri",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/alli-kenned-de-jozo-de-jozo-kennt-nuet/"
+            },
+            {
+              "label": "Zuger Messe 2026",
+              "detail": "Stierenmarktareal, Zug",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/fr-ch/experiences/events/zuger-messe-2026/"
+            },
+            {
+              "label": "Timeless Cabinet",
+              "detail": "Bibliothek Zug, Zug",
+              "date": "2026-10-24",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/timeless-cabinet_A6PwHuk"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

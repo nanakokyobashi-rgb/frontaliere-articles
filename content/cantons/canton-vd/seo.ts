@@ -640,10 +640,10 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-tuffe-falsi-poliziotti-vaud.webp`,
+        "url": `${BASE_URL}/images/blog/article-truffa-falsi-poliziotti-vaud.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Anziano che riceve una chiamata sospetta da finto polizioso sul divano, con sfondo di una casa tipica del canton Vaud"
+        "caption": "Illustrazione generata per questo articolo"
       },
       "datePublished": "2026-10-18T07:26:28+00:00",
       "dateModified": "2026-10-18T07:26:28+00:00",
@@ -656,6 +656,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-vaud/truffa-falsi-poliziotti-vaud/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-cdhr-contributo-differenziale-2025': {
+    title: 'CDHR 2025: soglie 250.000/500.000 € per frontalieri in Francia',
+    description: 'La CDHR 2025 colpisce i redditi elevati dei frontalieri residenti in Francia: soglie a 250.000/500.000 €, verifica al 20%, acconto 95% a dicembre. Guida',
+    keywords: 'frontalieri, ticino, svizzera, italia, cdhr, soglie, francia, contribution',
+    ogTitle: 'CDHR 2025: come funziona per i frontalieri in Francia',
+    ogDescription: 'Scopri le soglie (250.000 e 500.000 €), la verifica del 20% e l\'acconto del 95% della contribution différentielle sur les hauts revenus per i lavoratori transfrontalieri residenti in Francia nel 2025.',
+    canonicalPath: '/articoli-vaud/cdhr-contributo-differenziale-2025/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "CDHR 2025: soglie 250.000/500.000 € per frontalieri in Francia",
+      "description": "La CDHR 2025 colpisce i redditi elevati dei frontalieri residenti in Francia: soglie a 250.000/500.000 €, verifica al 20%, acconto 95% a dicembre. Guida",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cdhr-contributo-differenziale-2025.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T02:03:43+00:00",
+      "dateModified": "2026-10-20T02:03:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/cdhr-contributo-differenziale-2025/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

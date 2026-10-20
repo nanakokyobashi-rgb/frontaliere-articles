@@ -319,6 +319,162 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-pulizie-tunnel-sciaffusa': {
+    title: 'Bundesamt für Strassen chiuderà tre tunnel di notte',
+    description: 'Dal 19 al 23 ottobre il Bundesamt für Strassen chiude ogni notte i tunnel Fäsenstaub, Cholfirst e Galgenbuck per lavori di pulizia, dalle 20 fino alle 5.',
+    keywords: 'frontalieri, ticino, svizzera, italia, bundesamt, strassen, chiuderà, tunnel',
+    ogTitle: 'Tre tunnel chiusi di notte per lavori di pulizia',
+    ogDescription: 'Il Bundesamt für Strassen fermerà ogni notte i tunnel Fäsenstaub, Cholfirst e Galgenbuck per lavori di pulizia. La finestra indicata va dal 19 al 23 ottobre, con chiusura dalle 20 fino alle 5 del giorno successivo.',
+    canonicalPath: '/articoli-sciaffusa/pulizie-tunnel-sciaffusa/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bundesamt für Strassen chiuderà tre tunnel di notte",
+      "description": "Dal 19 al 23 ottobre il Bundesamt für Strassen chiude ogni notte i tunnel Fäsenstaub, Cholfirst e Galgenbuck per lavori di pulizia, dalle 20 fino alle 5.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-pulizie-tunnel-sciaffusa.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Tunnel Fäsenstaub, Cholfirst e Galgenbuck chiusi di notte per lavori di pulizia"
+      },
+      "datePublished": "2026-10-19T12:03:42+00:00",
+      "dateModified": "2026-10-19T12:03:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/pulizie-tunnel-sciaffusa/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-svp-sciaffusa-candidati-2027': {
+    title: 'SVP Sciaffusa definisce candidati per le elezioni 2027',
+    description: 'La SVP di Sciaffusa ha fissato le candidature per il 2027: Gnädinger agli Stati, Hurter e Müller al Nazionale. Voto previsto per il 24 ottobre 2027.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sciaffusa, definisce, candidati, elezioni',
+    ogTitle: 'SVP Sciaffusa definisce candidati per le elezioni 2027',
+    ogDescription: 'L\'assemblea della SVP a Oberhallau ha scelto i nomi per le elezioni del 24 ottobre 2027: Andreas Gnädinger per gli Stati e Thomas Hurter e Thomas Müller per il Nazionale.',
+    canonicalPath: '/articoli-sciaffusa/svp-sciaffusa-candidati-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "SVP Sciaffusa definisce candidati per le elezioni 2027",
+      "description": "La SVP di Sciaffusa ha fissato le candidature per il 2027: Gnädinger agli Stati, Hurter e Müller al Nazionale. Voto previsto per il 24 ottobre 2027.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-svp-sciaffusa-candidati-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T06:05:14+00:00",
+      "dateModified": "2026-10-20T06:05:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/svp-sciaffusa-candidati-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-beringen-vbsh-fermate-chiuse': {
+    title: 'Bancomat esploso a Beringen: tre fermate VBSH non servite',
+    description: 'A Beringen, dopo le esplosioni a Enge, VBSH non serve tre fermate fino alle 13:30; la Schaffhauserstrasse resta chiusa nella mattina del 19 ottobre 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, bancomat, esploso, beringen, fermate',
+    ogTitle: 'Beringen: tre fermate VBSH non servite',
+    ogDescription: 'Le esplosioni di un Bancomat nella Beringer Enge hanno portato alla sospensione fino alle 13:30 delle fermate VBSH Enge, Hägli e Sonne. La Schaffhauserstrasse risulta ancora chiusa nel bollettino delle 11:30 del 19 ottobre 2026.',
+    canonicalPath: '/articoli-sciaffusa/beringen-vbsh-fermate-chiuse/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bancomat esploso a Beringen: tre fermate VBSH non servite",
+      "description": "A Beringen, dopo le esplosioni a Enge, VBSH non serve tre fermate fino alle 13:30; la Schaffhauserstrasse resta chiusa nella mattina del 19 ottobre 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-beringen-vbsh-fermate-chiuse.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T06:41:00+00:00",
+      "dateModified": "2026-10-20T06:41:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/beringen-vbsh-fermate-chiuse/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-schleitheim-scooter-incidente-2026': {
+    title: 'Incidente scooter a Schleitheim: donna ferita, Hohbrugg chiusa',
+    description: 'Incidente sulla Hohbrugg a Schleitheim il 18 ottobre 2026: scooterista 61enne cade 12 metri nel pendio, elitrasporto in ospedale, strada chiusa per rilievi',
+    keywords: 'frontalieri, ticino, svizzera, italia, incidente, scooter, schleitheim, donna',
+    ogTitle: 'Incidente scooter a Schleitheim: donna elitrasportata, Hohbrugg bloccata',
+    ogDescription: 'Domenica 18 ottobre 2026 sulla Hohbrugg verso Siblingen: una 61enne perde il controllo dello scooter nella curva prima dello Zwärenbach, finisce 12 metri oltre il guardrail nel pendio. Ferite gravi, soccorsa da ambulanza ed elicottero Lions 1. Strada',
+    canonicalPath: '/articoli-sciaffusa/schleitheim-scooter-incidente-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Incidente scooter a Schleitheim: donna ferita, Hohbrugg chiusa",
+      "description": "Incidente sulla Hohbrugg a Schleitheim il 18 ottobre 2026: scooterista 61enne cade 12 metri nel pendio, elitrasporto in ospedale, strada chiusa per rilievi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-schleitheim-scooter-incidente-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T07:10:47+00:00",
+      "dateModified": "2026-10-20T07:10:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/schleitheim-scooter-incidente-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

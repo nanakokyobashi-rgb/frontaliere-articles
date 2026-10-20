@@ -53,7 +53,10 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.truffe-falsi-banchieri-lausanna.imageAlt': 'Lausanne im Waadtland im Zusammenhang mit Betrug durch falsche Polizisten und Banker',
     'blog.article.truffa-falsi-poliziotti-vaud.title': 'Sieben Millionen im Kanton Waadt von falschen Agenten ergaunert',
     'blog.article.truffa-falsi-poliziotti-vaud.excerpt': 'Fast 2.300 Fälle seit Jahresbeginn Gesamtschaden: CHF 7 Millionen Über 100 Personen befragt, 19 in Haft 16 Befragungen Anfang Oktober, 5 in Lausanne Fälle →',
-    'blog.article.truffa-falsi-poliziotti-vaud.imageAlt': 'Ältere Person erhält einen verdächtigen Anruf von einem falschen Polizisten auf dem Sofa, mit Hintergrund eines typischen Waadtländer Hauses',
+    'blog.article.truffa-falsi-poliziotti-vaud.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.cdhr-contributo-differenziale-2025.title': 'CDHR 2025: Schwellenwerte von 250.000/500.000 € für Grenzgänger in Frankreich',
+    'blog.article.cdhr-contributo-differenziale-2025.excerpt': 'Die Differenzabgabe auf hohe Einkommen zielt auf eine Mindestbesteuerung von 20% ab.',
+    'blog.article.cdhr-contributo-differenziale-2025.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVdDe;

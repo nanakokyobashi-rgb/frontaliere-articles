@@ -17,6 +17,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'eventi-weekend-turgovia': { it: 'eventi-weekend-turgovia', en: 'weekend-events-thurgau', de: 'wochenend-veranstaltungen-thurgau', fr: 'evenements-week-end-thurgovie' },
  'felben-wellhausen-cantiere': { it: 'felben-wellhausen-cantiere', en: 'felben-wellhausen-road-works', de: 'felben-wellhausen-hauptstrasse-sanierung', fr: 'felben-wellhausen-travaux-route' },
  'supporto-imprese-turgovia': { it: 'supporto-imprese-turgovia', en: 'thurgau-business-support', de: 'thurgau-unterstuetzung-firmen', fr: 'soutien-entreprises-thurgovie' },
+ 'turgovia-servizi-datori-lavoro': { it: 'turgovia-servizi-datori-lavoro', en: 'thurgau-services-employers', de: 'thurgau-dienstleistungen-arbeitgeber', fr: 'thurgovie-services-employeurs' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

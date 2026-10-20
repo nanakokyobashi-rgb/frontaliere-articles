@@ -1128,6 +1128,42 @@ test('la chiusura degli import include una dipendenza aggiunta dal site-ahead', 
   assert.equal(couplings[0].mode, 'identical');
 });
 
+test('la chiusura non conserva un import rimosso dal site-ahead', () => {
+  const manifest = {
+    files: [
+      {
+        path: 'scripts/ci/scan-job-timeouts.mjs',
+        sitePath: 'scripts/ci/scan-job-timeouts.mjs',
+        mode: 'identical',
+      },
+      {
+        path: 'scripts/ci/report-validate-dist-failure.mjs',
+        sitePath: 'scripts/ci/report-validate-dist-failure.mjs',
+        mode: 'adapted',
+      },
+      {
+        path: 'scripts/lib/workflow-scope-detect.mjs',
+        sitePath: 'scripts/lib/workflow-scope-detect.mjs',
+        mode: 'identical',
+      },
+    ],
+  };
+  const couplings = relativeImportCouplings(
+    manifest.files[0],
+    "import { redactWorkflowPaths } from './report-validate-dist-failure.mjs';\n",
+    "import { redactWorkflowPaths } from '../lib/workflow-scope-detect.mjs';\n",
+    manifest,
+    (rel) => manifest.files.some((entry) => entry.path === rel),
+  );
+  assert.deepEqual(couplings.map((coupling) => coupling.path), ['scripts/lib/workflow-scope-detect.mjs']);
+  assert.equal(couplings[0].mode, 'identical');
+  assert.equal(
+    permanentBlock(manifest.files[0], { couplings }),
+    null,
+    'l import adattato rimosso dal site-ahead non deve bloccare la copia',
+  );
+});
+
 test('la chiusura conserva anche il coupling quando entrambi i lati risolvono lo stesso twin identical', () => {
   const manifest = {
     files: [

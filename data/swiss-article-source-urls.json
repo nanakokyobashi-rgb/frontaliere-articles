@@ -1,44 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1950325/online-migros-nuovo-colosso-strutture": {
-    "articleId": "migros-ristruttura-online-retail",
-    "ts": "2026-09-16T01:48:49.535Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/economia/1950337/svizzera-domanda-turismo-estate-destinazioni": {
-    "articleId": "turismo-svizzera-estate-normalizzazione",
-    "ts": "2026-09-16T02:14:12.187Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/cronaca/1950305/esercitazione-polizia-sicurezza-esercito-collaborazione-risultati": {
-    "articleId": "fides-26-polizia-esercito-berna",
-    "ts": "2026-09-16T02:26:07.712Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/s/4086055": {
-    "articleId": "calcio-hockey-svizzera-economia-pubblico",
-    "ts": "2026-09-16T02:41:41.933Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/attualita/1950481/franchi-figlia-celine-racconta-spese-restano-mese": {
-    "articleId": "costi-nascosti-rientro-scolastico-svizzera",
-    "ts": "2026-09-16T17:11:11.922Z",
-    "keyForm": 2
-  },
-  "https://www.tio.ch/svizzera/attualita/1950676/rendite-pensionati-rendita-versamento-gennaio": {
-    "articleId": "malinteso-rendite-avs-moutier",
-    "ts": "2026-09-16T17:33:56.263Z",
-    "keyForm": 2
-  },
-  "https://www.rsi.ch/s/4087039": {
-    "articleId": "revolut-banca-svizzera-finma",
-    "ts": "2026-09-17T00:55:00.855Z",
-    "keyForm": 2
-  },
-  "https://www.laregione.ch/economia/economia/1950387/dietro-il-paradiso-del-trading-la-maledizione-delle-risorse": {
-    "articleId": "paradiso-trading-risorse-naturali",
-    "ts": "2026-09-17T01:04:23.219Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/alloggio%3a-%22situazione-continua-a-peggiorare%22%2c-dice-berna/92069715": {
     "articleId": "mercato-alloggio-svizzera-ufab",
     "ts": "2026-09-17T01:55:49.264Z",
@@ -2125,13 +2085,13 @@
     "keyForm": 2
   },
   "https://www.tvsvizzera.it/tvs/lavoro-ed-economia/le-giovani-guadagnano-meno-nonostante-maggiore-istruzione/92206648": {
-    "articleId": "divario-reddito-giovani-svizzera",
-    "ts": "2026-10-14T00:12:27.072Z",
+    "articleId": "giovani-donne-stipendi-svizzera",
+    "ts": "2026-10-19T03:17:12.441Z",
     "keyForm": 2
   },
   "https://www.admin.ch/it": {
-    "articleId": "decisioni-avs-ue-voto",
-    "ts": "2026-10-14T00:54:06.449Z",
+    "articleId": "agenda-federale-voto-2026",
+    "ts": "2026-10-19T02:24:47.548Z",
     "keyForm": 2
   },
   "https://www.tio.ch/ticino/attualita/1956548/pfister-svizzera-esercito-lugano-federale": {
@@ -2170,8 +2130,8 @@
     "keyForm": 2
   },
   "https://www.seco.admin.ch/it/newnsb/cx62zqr2mreh": {
-    "articleId": "nuovo-accordo-commercio-elettronico",
-    "ts": "2026-10-14T17:04:53.632Z",
+    "articleId": "accordo-commercio-elettronico-omc",
+    "ts": "2026-10-19T18:02:10.921Z",
     "keyForm": 2
   },
   "https://www.swissinfo.ch/ita/aziende-caute-nell%27assumere%2c-malgrado-la-buona-congiuntura/92217267": {
@@ -2497,6 +2457,46 @@
   "https://www.tio.ch/svizzera/attualita/1957532/ffs-estate-binari-casi-dilatazione": {
     "articleId": "ffs-binari-deformazioni-canicola-2024",
     "ts": "2026-10-18T13:36:40.494Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1957573/seco-controlli-aziende-abusi-centinaia-indennita": {
+    "articleId": "indennita-covid-abusi-aziende",
+    "ts": "2026-10-18T16:04:42.645Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/ps%3a-s%c3%ac-a-tre-iniziative-e-a-documento-per-lavoro-pi%c3%b9-dignitoso/92235291": {
+    "articleId": "ps-sostiene-tre-iniziative-e-documento-lavoro-dignitoso",
+    "ts": "2026-10-18T17:36:19.970Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/cronaca/1957641/dipendenti-lavoro-svizzera-legge-securitas": {
+    "articleId": "securitas-violazioni-lavoro",
+    "ts": "2026-10-19T06:33:37.217Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4174753": {
+    "articleId": "campagna-fisco-coppie-sposate",
+    "ts": "2026-10-19T09:57:57.025Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/farmaci-antiobesit%c3%a0-glp-1%3a-diversi-approcci-industria-alimentare/92238132": {
+    "articleId": "impatto-glp1-industria-alimentare",
+    "ts": "2026-10-19T11:07:21.267Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/bskoqvviyqjx": {
+    "articleId": "lenu-referendum-firme-valide",
+    "ts": "2026-10-19T12:13:26.628Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/siccit%c3%a0-e-inquinamento-minacciano-l%27acqua-potabile/92238972": {
+    "articleId": "water-summit-zurich-2024",
+    "ts": "2026-10-19T15:35:52.589Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4175494": {
+    "articleId": "rickli-ritiro-consiglio-federale",
+    "ts": "2026-10-20T03:16:01.566Z",
     "keyForm": 2
   }
 }

@@ -1,10 +1,16 @@
 {
-  "keywords": [],
-  "strikes": {},
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
   "topicGateUrls": {
-    "canton-gr::https://www.laregione.ch/cantone/grigioni/1955920/autostrada-mesocco-domenica-ottobre-venerdi": {
+    "canton-gr::https://www.suedostschweiz.ch/graubuenden/gesetz-gegen-haeusliche-gewalt-warum-die-rechte-nicht-dahintersteht-2195285#ft-item=b96fba7211e5": {
       "section": "canton-gr",
-      "ts": 1791655791317
+      "ts": 1792476441643
+    },
+    "canton-gr::https://ilmoesano.ch/notizie/politica/avs-e-pilastro-3a-le-novita-per-il-2026-e-il-2027": {
+      "section": "canton-gr",
+      "ts": 1792492122987
     }
   }
 }

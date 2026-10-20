@@ -20,6 +20,9 @@ import {
   imageCreditRecordFromGeneratedImageRecord,
   imageObjectCreditFields,
 } from '../../../engine/shared/imageCredits.mjs';
+import { GENERATED_COVER_ALT_BY_LOCALE } from './generated-cover-alt.mjs';
+
+export { GENERATED_COVER_ALT_BY_LOCALE };
 
 export const BASE_URL = 'https://frontaliereticino.ch';
 export const SEO_TIME_ZONE = 'Europe/Zurich';
@@ -30,13 +33,6 @@ export const SEO_TIME_ZONE = 'Europe/Zurich';
  * instead of carrying the description of the previous image into the new
  * structured-data and accessibility surfaces.
  */
-export const GENERATED_COVER_ALT_BY_LOCALE = Object.freeze({
-  it: 'Illustrazione generata per questo articolo',
-  en: 'Illustration generated for this article',
-  de: 'Für diesen Artikel erstellte Illustration',
-  fr: 'Illustration générée pour cet article',
-});
-
 const SEO_DATE_ONLY_RE = /^(\d{4})-(\d{2})-(\d{2})$/;
 const SEO_EXPLICIT_TIMESTAMP_RE = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
 const SEO_ZURICH_PARTS = new Intl.DateTimeFormat('en-GB', {
@@ -205,7 +201,9 @@ export function buildSeoEntry(data, {
   const imagePath = data._generatedImagePath.replace(/^\//, '');
   const canonicalPath = `/${hubSlug}/${data.slugs.it}/`;
   const headline = data.seo.headline || data.seo.title;
-  const caption = data.imageAlt?.it || headline;
+  const caption = provenance?.kind === 'generated'
+    ? GENERATED_COVER_ALT_BY_LOCALE.it
+    : data.imageAlt?.it || headline;
   const imageBlock = buildSeoImageBlock({
     imagePath,
     provenance,

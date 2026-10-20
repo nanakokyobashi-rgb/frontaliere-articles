@@ -621,6 +621,123 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rapporto-consiglio-federale-schengen': {
+    title: 'Frontalieri, cosa succederebbe senza Schengen?',
+    description: 'Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Ticino tra le regioni più esposte nello scenario Fino',
+    keywords: 'frontalieri, ticino, svizzera, italia, cosa, succederebbe, senza, schengen',
+    ogTitle: 'Frontalieri e Schengen: cosa succederebbe senza gli accordi',
+    ogDescription: 'Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Ticino tra le regioni più esposte nello scenario Fino',
+    canonicalPath: '/articoli-ticino/rapporto-consiglio-federale-schengen/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri, cosa succederebbe senza Schengen?",
+      "description": "Rapporto federale pubblicato il 18 settembre 2026 Senza Schengen: controlli sistematici alle frontiere Ticino tra le regioni più esposte nello scenario Fino",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-rapporto-consiglio-federale-schengen.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Valico di frontiera in Ticino e controlli doganali"
+      },
+      "datePublished": "2026-10-19T02:54:59+00:00",
+      "dateModified": "2026-10-19T02:54:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/rapporto-consiglio-federale-schengen/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ustat-manutenzione-chiusura': {
+    title: 'Avvisi Ustat: manutenzione e chiusura amministrazione',
+    description: 'Manutenzione: martedì 2 dicembre, 20.00-22.00 circa Possibili brevi interruzioni sul sito Ustat Chiusura dei servizi: pomeriggio del 31 dicembre 2025 Ustat',
+    keywords: 'frontalieri, ticino, svizzera, italia, avvisi, ustat, manutenzione, chiusura',
+    ogTitle: 'Avvisi Ustat e Chiusura Servizi Amministrazione Cantonale Ticino',
+    ogDescription: 'Manutenzione: martedì 2 dicembre, 20.00-22.00 circa Possibili brevi interruzioni sul sito Ustat Chiusura dei servizi: pomeriggio del 31 dicembre 2025 Ustat',
+    canonicalPath: '/articoli-ticino/ustat-manutenzione-chiusura/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Avvisi Ustat: manutenzione e chiusura amministrazione",
+      "description": "Manutenzione: martedì 2 dicembre, 20.00-22.00 circa Possibili brevi interruzioni sul sito Ustat Chiusura dei servizi: pomeriggio del 31 dicembre 2025 Ustat",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ustat-manutenzione-chiusura.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio di statistica e comunicazioni amministrative cantonali in Ticino"
+      },
+      "datePublished": "2026-10-19T10:54:19+00:00",
+      "dateModified": "2026-10-19T10:54:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/ustat-manutenzione-chiusura/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-frontalieri-ticino-indagine-salari-2026': {
+    title: 'Indagine frontalieri Ticino: 55,6% si sente pagato meno degli svizzeri',
+    description: '1.542 lavoratori hanno risposto all\'indagine nel maggio 2026 Il 55,6% si sente pagato meno a parità di mansioni Dalle province di Como e Varese: oltre 60mila',
+    keywords: 'frontalieri, ticino, svizzera, italia, indagine, sente, pagato, meno',
+    ogTitle: 'Frontalieri Ticino: indagine su salari, disparità e condizioni lavoro',
+    ogDescription: '1.542 lavoratori hanno risposto all\'indagine nel maggio 2026 Il 55,6% si sente pagato meno a parità di mansioni Dalle province di Como e Varese: oltre 60mila',
+    canonicalPath: '/articoli-ticino/frontalieri-ticino-indagine-salari-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Indagine frontalieri Ticino: 55,6% si sente pagato meno degli svizzeri",
+      "description": "1.542 lavoratori hanno risposto all'indagine nel maggio 2026 Il 55,6% si sente pagato meno a parità di mansioni Dalle province di Como e Varese: oltre 60mila",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-frontalieri-ticino-indagine-salari-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T10:00:10+00:00",
+      "dateModified": "2026-10-20T10:00:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/frontalieri-ticino-indagine-salari-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

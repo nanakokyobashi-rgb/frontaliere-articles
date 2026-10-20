@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-18T00:18:32.280Z",
-  "contentHash": "f575cddd8cc7037fb9fa6bb50152b956f3669b65521bf89f4f3468327326d183",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "db4488b22d470a8e075aada7d9a066c60f9775bead0a0845c1ece26fdedd26b7",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-17T17:01:03.100Z",
+      "updatedAt": "2026-10-19T15:42:28.810Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "375",
+          "value": "374",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Einblick in die Zukunft des Museums – Fokus \"Spinnen\"",
-              "detail": "Bäretswil",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einblick-in-die-zukunft-des-museums-fokus-spinnen-1/"
+              "label": "Alternative Investments Forum 2026",
+              "detail": "Zürich Marriott Hotel, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/alternative-investments-forum-2026_AA6KDtr"
             },
             {
-              "label": "Sonntagszmorge mit Oldtimerpostauto",
-              "detail": "Bauma",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonntagszmorge-mit-oldtimerpostauto-1/"
+              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-23/"
             },
             {
-              "label": "Ein tierisch lustiger Fall (Kursnr. 2.2e)",
-              "detail": "Freizeitanlage Chrüzacher, Dietikon",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ein-tierisch-lustiger-fall-kursnr-22e/"
+              "label": "Jahrgängerverein Dübendorf, Erste Hilfe Kurs (BLS/AED)",
+              "detail": "Dübendorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/jahrgaengerverein-duebendorf-erste-hilfe-kurs-blsaed/"
             },
             {
-              "label": "Familientag",
-              "detail": "Landesmuseum Zürich, Zürich",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/familientag/"
+              "label": "Nordic Walking",
+              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-29/"
             },
             {
-              "label": "Guided tour of the exhibition \"Swiss Design Collection\"",
+              "label": "Bilder-Vortrag: Biber",
+              "detail": "Kulturpark Zürich, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/bilder-vortrag-biber_AFFARkw"
+            },
+            {
+              "label": "Nachhall",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tour-of-the-exhibition-swiss-design-collection/"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachhall/"
             },
             {
-              "label": "Sichlete Dietikon 2026",
-              "detail": "Festgelände Sichlete Dietikon, Dietikon",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sichlete-dietikon-2026/"
+              "label": "Offenes Singen „KRAFT der LIEDER“ | StimmVolk",
+              "detail": "Loorensiedlung, Affoltern am Albis",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/affoltern-am-albis/offenes-singen-kraft-der-lieder-stimmvolk_AEW2YxX"
             },
             {
-              "label": "Transnatura - Bilder der Aescher Künstlerin Mariann Wiederkehr",
-              "detail": "Aesch ZH, Aesch (ZH)",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/werkschau-mariann-wiederkehr/"
+              "label": "Jugend Sinfonieorchester Zürich",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jugend-sinfonieorchester-zuerich/"
             },
             {
-              "label": "Europäischer Tag der Restaurierung",
-              "detail": "Winterthur",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/europaeischer-tag-der-restaurierung/"
+              "label": "Stimme der Farben – Chor: neuer Kurs ab 20.10.26",
+              "detail": "Galotti",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/stimme-der-farben-chor-neuer-kurs-ab-201026_A6PRiGe"
             },
             {
-              "label": "Collection Insights: “She-Devils on Wheels – Headquaters” mit Kamilla Ødegård",
-              "detail": "Migros Museum für Gegenwartskunst, Zürich",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/collection-insights-she-devils-on-wheels-headquaters-mit-kamilla-odegard/"
-            },
-            {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Musik Container Uster, Uster",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/uster/leidenschaft-und-samba_ATLTvK3"
+              "label": "Teresa Vittucci & Sophía Rodríguez: Anger Angels (ETERNAL LETDOWN)",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/teresa-vittucci-sophia-rodriguez-anger-angels-eternal-letdown/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -129,7 +129,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "ZH",
@@ -139,7 +139,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "375",
+          "value": "374",
           "note": "from the site’s events calendar"
         }
       ],
@@ -150,69 +150,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Einblick in die Zukunft des Museums – Fokus \"Spinnen\"",
-              "detail": "Bäretswil",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einblick-in-die-zukunft-des-museums-fokus-spinnen-1/"
+              "label": "Alternative Investments Forum 2026",
+              "detail": "Zürich Marriott Hotel, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/alternative-investments-forum-2026_AA6KDtr"
             },
             {
-              "label": "Sonntagszmorge mit Oldtimerpostauto",
-              "detail": "Bauma",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonntagszmorge-mit-oldtimerpostauto-1/"
+              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-23/"
             },
             {
-              "label": "Ein tierisch lustiger Fall (Kursnr. 2.2e)",
-              "detail": "Freizeitanlage Chrüzacher, Dietikon",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ein-tierisch-lustiger-fall-kursnr-22e/"
+              "label": "Jahrgängerverein Dübendorf, Erste Hilfe Kurs (BLS/AED)",
+              "detail": "Dübendorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/jahrgaengerverein-duebendorf-erste-hilfe-kurs-blsaed/"
             },
             {
-              "label": "Familientag",
-              "detail": "Landesmuseum Zürich, Zürich",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/familientag/"
+              "label": "Nordic Walking",
+              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-29/"
             },
             {
-              "label": "Guided tour of the exhibition \"Swiss Design Collection\"",
+              "label": "Bilder-Vortrag: Biber",
+              "detail": "Kulturpark Zürich, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/bilder-vortrag-biber_AFFARkw"
+            },
+            {
+              "label": "Nachhall",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tour-of-the-exhibition-swiss-design-collection/"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachhall/"
             },
             {
-              "label": "Sichlete Dietikon 2026",
-              "detail": "Festgelände Sichlete Dietikon, Dietikon",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sichlete-dietikon-2026/"
+              "label": "Offenes Singen „KRAFT der LIEDER“",
+              "detail": "Loorensiedlung, Affoltern am Albis",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/affoltern-am-albis/offenes-singen-kraft-der-lieder-stimmvolk_AEW2YxX"
             },
             {
-              "label": "Transnatura - Bilder der Aescher Künstlerin Mariann Wiederkehr",
-              "detail": "Aesch ZH, Aesch (ZH)",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/werkschau-mariann-wiederkehr/"
+              "label": "Jugend Sinfonieorchester Zürich",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jugend-sinfonieorchester-zuerich/"
             },
             {
-              "label": "Europäischer Tag der Restaurierung",
-              "detail": "Winterthur",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/europaeischer-tag-der-restaurierung/"
+              "label": "Voices of Colors – Choir: New Course Starting October 20, 2026",
+              "detail": "Galotti",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/stimme-der-farben-chor-neuer-kurs-ab-201026_A6PRiGe"
             },
             {
-              "label": "Collection Insights: “She-Devils on Wheels – Headquaters” mit Kamilla Ødegård",
-              "detail": "Migros Museum für Gegenwartskunst, Zürich",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/collection-insights-she-devils-on-wheels-headquaters-mit-kamilla-odegard/"
-            },
-            {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Musik Container Uster, Uster",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/uster/leidenschaft-und-samba_ATLTvK3"
+              "label": "Teresa Vittucci & Sophía Rodríguez: Anger Angels (ETERNAL LETDOWN)",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/teresa-vittucci-sophia-rodriguez-anger-angels-eternal-letdown/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -246,7 +246,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "ZH",
@@ -256,7 +256,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "375",
+          "value": "374",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -267,69 +267,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Einblick in die Zukunft des Museums – Fokus \"Spinnen\"",
-              "detail": "Bäretswil",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einblick-in-die-zukunft-des-museums-fokus-spinnen-1/"
+              "label": "Alternative Investments Forum 2026",
+              "detail": "Zürich Marriott Hotel, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/alternative-investments-forum-2026_AA6KDtr"
             },
             {
-              "label": "Sonntagszmorge mit Oldtimerpostauto",
-              "detail": "Bauma",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonntagszmorge-mit-oldtimerpostauto-1/"
+              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-23/"
             },
             {
-              "label": "Ein tierisch lustiger Fall (Kursnr. 2.2e)",
-              "detail": "Freizeitanlage Chrüzacher, Dietikon",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ein-tierisch-lustiger-fall-kursnr-22e/"
+              "label": "Jahrgängerverein Dübendorf, Erste Hilfe Kurs (BLS/AED)",
+              "detail": "Dübendorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/jahrgaengerverein-duebendorf-erste-hilfe-kurs-blsaed/"
             },
             {
-              "label": "Familientag",
-              "detail": "Landesmuseum Zürich, Zürich",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/familientag/"
+              "label": "Nordic Walking",
+              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-29/"
             },
             {
-              "label": "Guided tour of the exhibition \"Swiss Design Collection\"",
+              "label": "Bilder-Vortrag: Biber",
+              "detail": "Kulturpark Zürich, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/bilder-vortrag-biber_AFFARkw"
+            },
+            {
+              "label": "Nachhall",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tour-of-the-exhibition-swiss-design-collection/"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachhall/"
             },
             {
-              "label": "Sichlete Dietikon 2026",
-              "detail": "Festgelände Sichlete Dietikon, Dietikon",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sichlete-dietikon-2026/"
+              "label": "Offenes Singen „KRAFT der LIEDER“",
+              "detail": "Loorensiedlung, Affoltern am Albis",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/affoltern-am-albis/offenes-singen-kraft-der-lieder-stimmvolk_AEW2YxX"
             },
             {
-              "label": "Transnatura - Bilder der Aescher Künstlerin Mariann Wiederkehr",
-              "detail": "Aesch ZH, Aesch (ZH)",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/werkschau-mariann-wiederkehr/"
+              "label": "Jugend Sinfonieorchester Zürich",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jugend-sinfonieorchester-zuerich/"
             },
             {
-              "label": "Europäischer Tag der Restaurierung",
-              "detail": "Winterthur",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/europaeischer-tag-der-restaurierung/"
+              "label": "Stimme der Farben – Chor: neuer Kurs ab dem 20.10.26",
+              "detail": "Galotti",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/stimme-der-farben-chor-neuer-kurs-ab-201026_A6PRiGe"
             },
             {
-              "label": "Collection Insights: “She-Devils on Wheels – Headquaters” mit Kamilla Ødegård",
-              "detail": "Migros Museum für Gegenwartskunst, Zürich",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/collection-insights-she-devils-on-wheels-headquaters-mit-kamilla-odegard/"
-            },
-            {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Musik Container Uster, Uster",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/uster/leidenschaft-und-samba_ATLTvK3"
+              "label": "Teresa Vittucci & Sophía Rodríguez: anger angels (ETERNAL LETDOWN)",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/teresa-vittucci-sophia-rodriguez-anger-angels-eternal-letdown/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -363,7 +363,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "ZH",
@@ -373,7 +373,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "375",
+          "value": "374",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -384,69 +384,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Einblick in die Zukunft des Museums – Fokus \"Spinnen\"",
-              "detail": "Bäretswil",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einblick-in-die-zukunft-des-museums-fokus-spinnen-1/"
+              "label": "Alternative Investments Forum 2026",
+              "detail": "Zürich Marriott Hotel, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/alternative-investments-forum-2026_AA6KDtr"
             },
             {
-              "label": "Sonntagszmorge mit Oldtimerpostauto",
-              "detail": "Bauma",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sonntagszmorge-mit-oldtimerpostauto-1/"
+              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-23/"
             },
             {
-              "label": "Ein tierisch lustiger Fall (Kursnr. 2.2e)",
-              "detail": "Freizeitanlage Chrüzacher, Dietikon",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ein-tierisch-lustiger-fall-kursnr-22e/"
+              "label": "Jahrgängerverein Dübendorf, Erste Hilfe Kurs (BLS/AED)",
+              "detail": "Dübendorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/jahrgaengerverein-duebendorf-erste-hilfe-kurs-blsaed/"
             },
             {
-              "label": "Familientag",
-              "detail": "Landesmuseum Zürich, Zürich",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/familientag/"
+              "label": "Nordic Walking",
+              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-29/"
             },
             {
-              "label": "Guided tour of the exhibition \"Swiss Design Collection\"",
+              "label": "Bilder-Vortrag: Biber",
+              "detail": "Kulturpark Zürich, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/bilder-vortrag-biber_AFFARkw"
+            },
+            {
+              "label": "Nachhall",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guided-tour-of-the-exhibition-swiss-design-collection/"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachhall/"
             },
             {
-              "label": "Sichlete Dietikon 2026",
-              "detail": "Festgelände Sichlete Dietikon, Dietikon",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sichlete-dietikon-2026/"
+              "label": "Offenes Singen „KRAFT der LIEDER“",
+              "detail": "Loorensiedlung, Affoltern am Albis",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/affoltern-am-albis/offenes-singen-kraft-der-lieder-stimmvolk_AEW2YxX"
             },
             {
-              "label": "Transnatura - Bilder der Aescher Künstlerin Mariann Wiederkehr",
-              "detail": "Aesch ZH, Aesch (ZH)",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/werkschau-mariann-wiederkehr/"
+              "label": "Jugend Sinfonieorchester Zürich",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jugend-sinfonieorchester-zuerich/"
             },
             {
-              "label": "Europäischer Tag der Restaurierung",
-              "detail": "Winterthur",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/europaeischer-tag-der-restaurierung/"
+              "label": "Stimme der Farben – Chor : nouveau cours à partir du 20 octobre 2026",
+              "detail": "Galotti",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/stimme-der-farben-chor-neuer-kurs-ab-201026_A6PRiGe"
             },
             {
-              "label": "Collection Insights: “She-Devils on Wheels – Headquaters” mit Kamilla Ødegård",
-              "detail": "Migros Museum für Gegenwartskunst, Zürich",
-              "date": "2026-10-18",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/collection-insights-she-devils-on-wheels-headquaters-mit-kamilla-odegard/"
-            },
-            {
-              "label": "«LEIDENSCHAFT & SAMBA»",
-              "detail": "Musik Container Uster, Uster",
-              "date": "2026-10-18",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/uster/leidenschaft-und-samba_ATLTvK3"
+              "label": "Teresa Vittucci & Sophía Rodríguez: Anger Angels (ETERNAL LETDOWN)",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/teresa-vittucci-sophia-rodriguez-anger-angels-eternal-letdown/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-17T17:01:03.100Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -480,7 +480,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-18T00:18:32.280Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

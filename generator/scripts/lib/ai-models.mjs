@@ -7955,6 +7955,7 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
     let response = '';
     let settled = false;
     let client;
+    let deadlineTimer;
     try {
       client = net.createConnection(socketPath);
     } catch (error) {
@@ -7964,6 +7965,7 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
     const finish = (error, value) => {
       if (settled) return;
       settled = true;
+      if (deadlineTimer) clearTimeout(deadlineTimer);
       client.destroy();
       if (error) reject(error);
       else resolve(value);
@@ -7988,9 +7990,18 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
     };
     let started = false;
     const initialTimeoutMs = boundedByDeadline(queueWaitMs + executionSocketTimeoutMs);
-    client.setTimeout(initialTimeoutMs, () => finish(started
+    const timeoutError = () => finish(started
       ? _codexTransportError('Codex auth broker socket timed out')
-      : _codexTransportError(`Codex auth broker queue wait timed out after ${Math.round(initialTimeoutMs / 1000)}s before Codex started`)));
+      : _codexTransportError(`Codex auth broker queue wait timed out after ${Math.round(initialTimeoutMs / 1000)}s before Codex started`));
+    client.setTimeout(initialTimeoutMs, timeoutError);
+    // A socket timeout measures inactivity and can be re-armed by the broker's
+    // control byte. The caller deadline is absolute: keep a separate watchdog
+    // so a queued request or a started request cannot be handed to the generic
+    // _hardCallCapMs race when the socket has seen activity but never answers.
+    if (Number.isFinite(remaining)) {
+      deadlineTimer = setTimeout(timeoutError, Math.max(1, Math.floor(remaining)));
+      deadlineTimer.unref?.();
+    }
     client.on('error', (error) => {
       if (settled) return;
       const code = String(error?.code || 'socket error');
@@ -8969,9 +8980,11 @@ async function _callGeminiRaw(model, messages, opts) {
 // ── Model routing ────────────────────────────────────────────
 
 /**
- * Grace added on top of the computed worst case, so the provider's OWN abort
- * (the per-request transport / claude-CLI SIGKILL timer) always gets the first shot
- * at ending the call — the hard cap below is the backstop for when it doesn't.
+ * Grace added on top of the computed worst case when the caller did not provide
+ * an absolute deadline, so the provider's OWN abort (the per-request transport /
+ * claude-CLI SIGKILL timer) always gets the first shot at ending the call — the
+ * hard cap below is the backstop for when it doesn't. Once a caller provides a
+ * deadline, that deadline is authoritative and the cap must not outlive it.
  */
 const HARD_CALL_CAP_GRACE_MS = 60_000;
 
@@ -9028,9 +9041,12 @@ function _hardCallCapMs(model, opts) {
   let cap = attempts * (base + MAX_RETRY_AFTER_MS) * 2 + HARD_CALL_CAP_GRACE_MS;
   if (opts?.deadlineMs) {
     const remaining = opts.deadlineMs - Date.now();
-    // Floor at the grace window so an already-expired deadline still gets one
-    // honest short attempt instead of an instant 0ms abort.
-    cap = Math.min(cap, Math.max(HARD_CALL_CAP_GRACE_MS, remaining + HARD_CALL_CAP_GRACE_MS));
+    // An absolute caller deadline is a hard boundary. The grace above is only
+    // for calls without one: adding it here lets an in-flight provider survive
+    // past the run deadline and leaves the external workflow kill to collect
+    // the unfinished attempt. Keep one millisecond for an already-expired
+    // deadline so the Promise.race still takes its normal timeout path.
+    cap = Math.min(cap, Math.max(1, remaining));
   }
   return cap;
 }

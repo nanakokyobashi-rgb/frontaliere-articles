@@ -426,6 +426,162 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-riniker-governo-argovia': {
+    title: 'Maja Riniker (FDP) eletta nel governo argoviese',
+    description: 'Maja Riniker eletta nel governo del Canton Argovia: 70\'137 voti, affluenza al 21,01%. Per la prima volta, due donne siedono nell\'esecutivo cantonale argoviese.',
+    keywords: 'frontalieri, ticino, svizzera, italia, maja, riniker, eletta, governo',
+    ogTitle: 'Maja Riniker entra nel governo argoviese',
+    ogDescription: 'Il voto per il seggio FDP si è chiuso con 70\'137 preferenze per Maja Riniker, sostenuta da SVP, Mitte, Gewerbeverband e Hauseigentümerverband. Nell\'esecutivo argoviese siedono ora, per la prima volta, due donne.',
+    canonicalPath: '/articoli-argovia/riniker-governo-argovia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Maja Riniker (FDP) eletta nel governo argoviese",
+      "description": "Maja Riniker eletta nel governo del Canton Argovia: 70'137 voti, affluenza al 21,01%. Per la prima volta, due donne siedono nell'esecutivo cantonale argoviese.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-riniker-governo-argovia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Governo cantonale argoviese dopo l'elezione di Maja Riniker"
+      },
+      "datePublished": "2026-10-18T16:09:14+00:00",
+      "dateModified": "2026-10-18T16:09:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/riniker-governo-argovia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-iniziativa-parita-salariale-ag': {
+    title: 'Argovia: iniziativa per rafforzare la parità salariale',
+    description: 'In Canton Argovia, ArbeitAargau e un\'alleanza di donne e partiti chiedono analisi salariali da 50 dipendenti, sanzioni e un ufficio per la parità.',
+    keywords: 'frontalieri, ticino, svizzera, italia, argovia, iniziativa, rafforzare, parità',
+    ogTitle: 'Argovia, la proposta sulla parità salariale',
+    ogDescription: 'La raccolta firme, iniziata il 14 giugno 2023, accompagna una richiesta precisa: analisi salariali per aziende da 50 dipendenti, sanzioni per il mancato adempimento e ripristino della Fachstelle per l\'uguaglianza.',
+    canonicalPath: '/articoli-argovia/iniziativa-parita-salariale-ag/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Argovia: iniziativa per rafforzare la parità salariale",
+      "description": "In Canton Argovia, ArbeitAargau e un'alleanza di donne e partiti chiedono analisi salariali da 50 dipendenti, sanzioni e un ufficio per la parità.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-argovia-parita-salariale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Iniziativa per la parità salariale nel Canton Argovia"
+      },
+      "datePublished": "2026-10-18T17:13:03+00:00",
+      "dateModified": "2026-10-18T17:13:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/iniziativa-parita-salariale-ag/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sezione-medicina-nucleare': {
+    title: 'Nuklearforum crea la sezione Medicina nucleare svizzera',
+    description: 'Il Nuklearforum Schweiz crea una nuova sezione Assemblea costitutiva il 12 ottobre a Olten KSB, PSI e Molecular Partners tra i fondatori Focus su radionuclidi',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuklearforum, crea, sezione, medicina',
+    ogTitle: 'Medicina nucleare: nuova sezione del Nuklearforum',
+    ogDescription: 'Il Nuklearforum Schweiz crea una nuova sezione Assemblea costitutiva il 12 ottobre a Olten KSB, PSI e Molecular Partners tra i fondatori Focus su radionuclidi',
+    canonicalPath: '/articoli-argovia/sezione-medicina-nucleare/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nuklearforum crea la sezione Medicina nucleare svizzera",
+      "description": "Il Nuklearforum Schweiz crea una nuova sezione Assemblea costitutiva il 12 ottobre a Olten KSB, PSI e Molecular Partners tra i fondatori Focus su radionuclidi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sezione-medicina-nucleare.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T12:05:23+00:00",
+      "dateModified": "2026-10-20T12:05:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/sezione-medicina-nucleare/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-murales-pediatria-ksb-baden': {
+    title: 'KSB Baden: murales in pediatria e pronto soccorso',
+    description: 'Al KSB Baden, dieci artisti di Paint a Smile hanno dipinto circa 200 mq tra pediatria e pronto soccorso. L\'asta ha raccolto CHF 154\'200 per la decorazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, baden, murales, pediatria, pronto',
+    ogTitle: 'KSB Baden: murales in pediatria e pronto soccorso',
+    ogDescription: 'Le pareti del reparto pediatrico e del pronto soccorso del KSB sono state dipinte con foreste, animali e altri dettagli. Dieci artisti di Paint a Smile hanno lavorato per diverse settimane; l\'asta di un orologio ha raccolto CHF 154\'200.',
+    canonicalPath: '/articoli-argovia/murales-pediatria-ksb-baden/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "KSB Baden: murales in pediatria e pronto soccorso",
+      "description": "Al KSB Baden, dieci artisti di Paint a Smile hanno dipinto circa 200 mq tra pediatria e pronto soccorso. L'asta ha raccolto CHF 154'200 per la decorazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-murales-pediatria-ksb-baden.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T12:20:50+00:00",
+      "dateModified": "2026-10-20T12:20:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/murales-pediatria-ksb-baden/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

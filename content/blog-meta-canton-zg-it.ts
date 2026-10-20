@@ -27,6 +27,9 @@ const blogMetaCantonZgIt: Record<string, string> = {
     'blog.article.eventi-weekend-zugo.title': 'Eventi del weekend nel Canton Zugo: cosa fare sabato e domenica',
     'blog.article.eventi-weekend-zugo.excerpt': 'Eventi nel Canton Zugo ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
     'blog.article.eventi-weekend-zugo.imageAlt': 'Eventi del weekend nel Canton Zugo',
+    'blog.article.ricorso-federale-espulsione-zugo.title': 'Zugo: ricorso espulsione respinto dal Tribunale federale',
+    'blog.article.ricorso-federale-espulsione-zugo.excerpt': 'Maggio 2026: Zugo non rinnova il permesso breve.',
+    'blog.article.ricorso-federale-espulsione-zugo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZgIt;

@@ -4,17 +4,17 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-17T23:29:53.062Z",
-  "contentHash": "c0cd2e9c589e709f50b37529f8158fc43ac6eaf016cace1b0ca2733555008a56",
+  "updatedAt": "2026-10-20T10:04:48.803Z",
+  "contentHash": "8868cc1f5e6570d8c6602404928e75abb2988f53c6d545fc3e48b6d56a33e3ee",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-17T16:00:38.819Z",
+      "updatedAt": "2026-10-20T00:43:33.013Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T14:28:40.900Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 17 ottobre 2026"
+          "note": "segnalazioni aggiornate: 20 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "9",
-          "note": "segnalazioni aggiornate: 17 ottobre 2026"
+          "note": "segnalazioni aggiornate: 20 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-17T16:00:38.819Z"
+          "updatedAt": "2026-10-20T00:43:33.013Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,10 +129,16 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Axenstrasse chiusa per quattro notti dal 2 al 6 novembre",
+          "url": "/articoli-uri/axenstrasse-chiusa-quattro-notti/",
+          "excerpt": "La Axenstrasse sarà completamente chiusa dal 2 al 6 novembre, ogni notte dalle 22 alle 5, per lavori di manutenzione.",
+          "date": "2026-10-20T09:56:09.960Z"
+        },
         {
           "title": "Passhöhe-Urnerboden: chiusura notturna della strada",
           "url": "/articoli-uri/uri-chiusura-passhoehe/",
@@ -175,7 +181,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-20T10:04:48.803Z"
     },
     "en": {
       "canton": "UR",
@@ -186,12 +192,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "4",
-          "note": "reports as of 17 October 2026"
+          "note": "reports as of 20 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "9",
-          "note": "reports as of 17 October 2026"
+          "note": "reports as of 20 October 2026"
         }
       ],
       "dataBlocks": [
@@ -249,7 +255,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-17T16:00:38.819Z"
+          "updatedAt": "2026-10-20T00:43:33.013Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -287,10 +293,16 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Axenstrasse closed for four nights from November 2 to 6",
+          "url": "/en/uri-articles/axenstrasse-closed-four-nights/",
+          "excerpt": "Axenstrasse will be completely closed from November 2 to 6, every night from 22 to 5, for maintenance work.",
+          "date": "2026-10-20T09:56:09.960Z"
+        },
         {
           "title": "Passhöhe-Urnerboden: nighttime road closure",
           "url": "/en/uri-articles/uri-night-road-closure/",
@@ -333,7 +345,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-20T10:04:48.803Z"
     },
     "de": {
       "canton": "UR",
@@ -344,12 +356,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "4",
-          "note": "Meldungen vom 17. Oktober 2026"
+          "note": "Meldungen vom 20. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "9",
-          "note": "Meldungen vom 17. Oktober 2026"
+          "note": "Meldungen vom 20. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -407,7 +419,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-17T16:00:38.819Z"
+          "updatedAt": "2026-10-20T00:43:33.013Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -445,10 +457,16 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Axenstrasse vom 2. bis 6. November vier Nächte lang gesperrt",
+          "url": "/de/uri-artikel/axenstrasse-vier-naechte-gesperrt/",
+          "excerpt": "Die Axenstrasse wird vom 2.",
+          "date": "2026-10-20T09:56:09.960Z"
+        },
         {
           "title": "Passhöhe-Urnerboden: nächtliche Sperrung der Straße",
           "url": "/de/uri-artikel/uri-nachtsperrung-passhoehe/",
@@ -491,7 +509,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-20T10:04:48.803Z"
     },
     "fr": {
       "canton": "UR",
@@ -502,12 +520,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "4",
-          "note": "signalements au 17 octobre 2026"
+          "note": "signalements au 20 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "9",
-          "note": "signalements au 17 octobre 2026"
+          "note": "signalements au 20 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -565,7 +583,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-17T16:00:38.819Z"
+          "updatedAt": "2026-10-20T00:43:33.013Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -603,10 +621,16 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-17T14:28:40.900Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Axenstrasse fermée pendant quatre nuits du 2 au 6 novembre",
+          "url": "/fr/articles-uri/axenstrasse-fermee-quatre-nuits/",
+          "excerpt": "L’Axenstrasse sera complètement fermée du 2 au 6 novembre, chaque nuit de 22 à 5, pour des travaux d’entretien.",
+          "date": "2026-10-20T09:56:09.960Z"
+        },
         {
           "title": "Passhöhe-Urnerboden : fermeture nocturne de la route",
           "url": "/fr/articles-uri/uri-fermeture-nocturne-route/",
@@ -649,7 +673,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-17T23:29:53.062Z"
+      "updatedAt": "2026-10-20T10:04:48.803Z"
     }
   }
 }

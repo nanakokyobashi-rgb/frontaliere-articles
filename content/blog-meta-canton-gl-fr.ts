@@ -21,6 +21,9 @@ const blogMetaCantonGlFr: Record<string, string> = {
     'blog.article.muehlehorn-strada-chiusa-ottobre.title': 'Mühlehorn : Alte Kerenzerstrasse fermée à partir du 19 octobre',
     'blog.article.muehlehorn-strada-chiusa-ottobre.excerpt': 'Mühlehorn : fermeture totale de Alte Kerenzerstrasse entre Hanenchilchli et Rüteggli jusqu’au 23 octobre 2026, à 17.00.',
     'blog.article.muehlehorn-strada-chiusa-ottobre.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.kloentalerstrasse-cantiere-2026.title': 'Klöntalerstrasse : fermeture temporaire Staldengarten–Bützi',
+    'blog.article.kloentalerstrasse-cantiere-2026.excerpt': 'Des travaux sont prévus sur la Klöntalerstrasse du 21 octobre au 4 décembre 2026 : courtes attentes, fermeture pour l’asphaltage et déviation via Sackberg.',
+    'blog.article.kloentalerstrasse-cantiere-2026.imageAlt': 'Travaux sur la Klöntalerstrasse entre Staldengarten et Bützi à Glaris',
 };
 
 export default blogMetaCantonGlFr;

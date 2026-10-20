@@ -270,6 +270,162 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-berna-tassa-ecclesiastica': {
+    title: 'Berna mantiene la tassa ecclesiastica per le imprese',
+    description: 'Il Governo bernese ha preso atto della petizione per rendere volontaria la tassa ecclesiastica delle persone giuridiche. Il Gran Consiglio la mantiene.',
+    keywords: 'frontalieri, ticino, svizzera, italia, berna, mantiene, tassa, ecclesiastica',
+    ogTitle: 'Tassa ecclesiastica: Berna mantiene la forma attuale',
+    ogDescription: 'La petizione chiedeva di rendere volontaria la tassa ecclesiastica per le persone giuridiche nel Canton Berna. Il Governo ha mostrato comprensione, ma richiama la decisione del Gran Consiglio nella sessione autunnale 2026: la forma attuale resta.',
+    canonicalPath: '/articoli-berna/berna-tassa-ecclesiastica/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Berna mantiene la tassa ecclesiastica per le imprese",
+      "description": "Il Governo bernese ha preso atto della petizione per rendere volontaria la tassa ecclesiastica delle persone giuridiche. Il Gran Consiglio la mantiene.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-berna-tassa-ecclesiastica.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio istituzionale nel Canton Berna sul tema della tassa ecclesiastica"
+      },
+      "datePublished": "2026-10-19T06:36:37+00:00",
+      "dateModified": "2026-10-19T06:36:37+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/berna-tassa-ecclesiastica/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-amministrazione-fiscale-berna-chiusura-2026': {
+    title: 'Amministrazione fiscale Berna: chiusura dal 23 ottobre al 1 novembre 2026',
+    description: 'Chiusura temporanea per l\'Amministrazione fiscale del Canton Berna dal 23 ottobre al 1 novembre 2026. Scadenza dichiarazione 2025 prorogata al 30 novembre.',
+    keywords: 'frontalieri, ticino, svizzera, italia, amministrazione, fiscale, berna, chiusura',
+    ogTitle: 'Amministrazione fiscale Berna: chiusura servizi e proroga dichiarazione 2025',
+    ogDescription: 'Scopri le date dell\'interruzione programmata dei servizi dell\'Amministrazione fiscale del Canton Berna dal 23 ottobre al 1 novembre 2026 e la proroga della dichiarazione al 30 novembre.',
+    canonicalPath: '/articoli-berna/amministrazione-fiscale-berna-chiusura-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Amministrazione fiscale Berna: chiusura dal 23 ottobre al 1 novembre 2026",
+      "description": "Chiusura temporanea per l'Amministrazione fiscale del Canton Berna dal 23 ottobre al 1 novembre 2026. Scadenza dichiarazione 2025 prorogata al 30 novembre.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-amministrazione-fiscale-berna-chiusura-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Amministrazione fiscale del Canton Berna durante la chiusura temporanea"
+      },
+      "datePublished": "2026-10-19T06:59:44+00:00",
+      "dateModified": "2026-10-19T06:59:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/amministrazione-fiscale-berna-chiusura-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-berna-governo-kita-gratuite': {
+    title: 'Berna, il Governo respinge le Kita gratuite | Frontaliere Ticino',
+    description: 'Il Governo bernese respinge le Kita gratuite: la gratuità costerebbe oltre 160 milioni CHF annui a Cantone e Comuni per gli attuali beneficiari dei buoni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, berna, governo, respinge, kita',
+    ogTitle: 'Berna, il Governo respinge le Kita gratuite',
+    ogDescription: 'La risposta del Governo bernese a una mozione di SP e Verdi descrive il confronto tra buoni per la custodia legati al reddito e gratuità delle Kita. La cifra indicata per Cantone e Comuni supera 160 milioni CHF l\'anno.',
+    canonicalPath: '/articoli-berna/berna-governo-kita-gratuite/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Berna, il Governo respinge le Kita gratuite",
+      "description": "Il Governo bernese respinge le Kita gratuite: la gratuità costerebbe oltre 160 milioni CHF annui a Cantone e Comuni per gli attuali beneficiari dei buoni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-berna-governo-kita-gratuite.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T18:54:07+00:00",
+      "dateModified": "2026-10-19T18:54:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/berna-governo-kita-gratuite/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-corridoio-linea-wynigen': {
+    title: 'Swissgrid pianifica una linea aerea tra Berna e Lucerna',
+    description: 'Swissgrid indica il corridoio per sostituire la linea quasi centenaria tra Berna e Lucerna: consultazione di 30 giorni e decisione attesa entro metà 2027.',
+    keywords: 'frontalieri, ticino, svizzera, italia, swissgrid, pianifica, linea, aerea',
+    ogTitle: 'Swissgrid: piano per la linea tra Berna e Lucerna',
+    ogDescription: 'Il progetto prevede una linea aerea tra le sottostazioni di Bickigen BE e Mettlen LU, usando soprattutto spazi infrastrutturali esistenti. La consultazione pubblica durerà 30 giorni; il corridoio definitivo è atteso entro metà 2027.',
+    canonicalPath: '/articoli-berna/corridoio-linea-wynigen/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Swissgrid pianifica una linea aerea tra Berna e Lucerna",
+      "description": "Swissgrid indica il corridoio per sostituire la linea quasi centenaria tra Berna e Lucerna: consultazione di 30 giorni e decisione attesa entro metà 2027.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-corridoio-linea-wynigen.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T02:20:36+00:00",
+      "dateModified": "2026-10-20T02:20:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/corridoio-linea-wynigen/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

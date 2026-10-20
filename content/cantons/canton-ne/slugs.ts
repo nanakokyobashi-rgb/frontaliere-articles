@@ -12,6 +12,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'cpcn-tasso-grado-copertura': { it: 'cpcn-tasso-grado-copertura', en: 'cpcn-coverage-rate-distinction', de: 'cpcn-deckungsgrad-unterschied', fr: 'cpcn-taux-couverture-distinction' },
  'eventi-weekend-neuchatel': { it: 'eventi-weekend-neuchatel', en: 'weekend-events-neuchatel', de: 'wochenend-veranstaltungen-neuenburg', fr: 'evenements-week-end-neuchatel' },
  'disoccupazione-neuchatel-luglio-2026': { it: 'disoccupazione-neuchatel-luglio-2026', en: 'neuchatel-unemployment-july-2026', de: 'neuenburg-arbeitslosigkeit-juli-2026', fr: 'chomage-neuchatel-juillet-2026' },
+ 'neuchatel-disoccupazione-maggio-2026': { it: 'neuchatel-disoccupazione-maggio-2026', en: 'neuchatel-unemployment-may-2026', de: 'neuenburg-arbeitslosigkeit-mai-2026', fr: 'neuchatel-chomage-mai-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

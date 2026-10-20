@@ -27,6 +27,9 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.eventi-weekend-zugo.title': 'Événements du week-end dans le canton de Zoug : que faire samedi & dimanche',
     'blog.article.eventi-weekend-zugo.excerpt': 'Événements dans le canton de Zoug chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.',
     'blog.article.eventi-weekend-zugo.imageAlt': 'Événements du week-end dans le canton de Zoug',
+    'blog.article.ricorso-federale-espulsione-zugo.title': 'Zoug : recours contre l’expulsion rejeté par le Tribunal fédéral',
+    'blog.article.ricorso-federale-espulsione-zugo.excerpt': 'Mai 2026 : Zoug ne renouvelle pas le permis de courte durée.',
+    'blog.article.ricorso-federale-espulsione-zugo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZgFr;

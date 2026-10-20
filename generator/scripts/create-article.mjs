@@ -249,6 +249,7 @@ import {
 // vincolo di mirror, ed e' condiviso dai due scrittori di body del corpus.
 import { sanitizeBodyText } from './lib/sanitize-body-braces.mjs';
 import { addIndependentVote, extractFactCheckJson, factCheckRawSnippet } from './lib/fact-check-response.mjs';
+import { editorialOriginalityIssue, extractSyntheticReferenceEvidence, validateEditorialAssessment } from './lib/editorial-originality.mjs';
 import { decodeHtmlEntities } from './lib/decode-html-entities.mjs';
 import {
   PERFORMANCE_PATH as ARTICLE_PERF_PATH,
@@ -316,10 +317,13 @@ import {
 import { imageCreditRecordFromGeneratedImageRecord } from '../../engine/shared/imageCredits.mjs';
 import { DETERMINISTIC_CARD_KIND, DETERMINISTIC_CARD_LICENSE_URL } from './lib/deterministic-card-provenance.mjs';
 import {
-  CATALOG_FALLBACK_MIN_SHARED_WORDS,
+  ARTICLE_COVER_FALLBACK_ERROR_CODES,
   catalogFallbackSharedWordCount,
+  classifyImageRegenerationFailure,
+  applyGeneratedHeroAlt,
   queueArticleCoverRegeneration,
   resolveArticleCoverFallback,
+  verifyCatalogFallbackCandidates,
 } from './lib/article-cover-fallback.mjs';
 import { generateGovernedArticleHero } from './lib/article-cover-engine.mjs';
 import {
@@ -377,6 +381,7 @@ import { findContentDuplicate } from './lib/article-content-duplicate.mjs';
 import {
   EXIT_ROSTER_CANNOT_SERVE_PROMPT,
   EXIT_NO_ARTICLE_DECLARED,
+  EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
   isInputCapDeferralVeto,
   inputCapVetoSummary,
   providerCooldownEchoOnlySummary,
@@ -396,7 +401,10 @@ import {
 // parte perche' i test non possono importare QUESTO file (761 KB, e la prima
 // cosa che fa e' rete), che e' la stessa ragione per cui ci vive
 // `exhaustion-disposition.mjs`.
-import { writeRunCard } from './lib/run-card.mjs';
+import {
+  RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
+  writeRunCard,
+} from './lib/run-card.mjs';
 // Il guard sui segnaposto del prompt. Copre OGNI campo di testo pubblicato —
 // corpo, FAQ, excerpt, imageAlt, title, seo — con un criterio solo, derivato
 // dai letterali dello schema JSON che il prompt piu' sotto mostra al modello.
@@ -1657,23 +1665,16 @@ const AVAILABLE_IMAGES = PLACES_IMAGES;
  * a weak match is deliberate: the caller's governed fallback resolver then
  * chooses the static place cover instead of borrowing an unrelated story.
  */
+function findBestFallbackImages(data) {
+  return FALLBACK_IMAGES
+    .map(imagePath => ({ imagePath, score: catalogFallbackSharedWordCount(data, imagePath) }))
+    .sort((a, b) => b.score - a.score || a.imagePath.localeCompare(b.imagePath))
+    .slice(0, 5)
+    .map(({ imagePath }) => imagePath);
+}
+
 function findBestFallbackImage(data) {
-  const recentImages = new Set(_getRecentArticleImages());
-
-  let bestBlogMatch = null;
-  let bestBlogScore = 0;
-  for (const imagePath of FALLBACK_IMAGES) {
-    if (recentImages.has(imagePath)) continue;
-    const score = catalogFallbackSharedWordCount(data, imagePath);
-    if (score > bestBlogScore) {
-      bestBlogScore = score;
-      bestBlogMatch = imagePath;
-    }
-  }
-  if (bestBlogMatch && bestBlogScore >= CATALOG_FALLBACK_MIN_SHARED_WORDS) return bestBlogMatch;
-
-  // No arbitrary catalog cover: the governed resolver owns the static fallback.
-  return null;
+  return findBestFallbackImages(data)[0] || null;
 }
 
 const CATEGORIES = ['fiscale', 'pratico', 'novita', 'pensione'];
@@ -2022,11 +2023,16 @@ const RUN_REPORT = {
   // DISTINCT runs (one degraded run must not be able to confirm its own
   // hallucination six times over). 'local' outside CI.
   runId: process.env.GITHUB_RUN_ID || 'local',
+  // GitHub reuses a run id across re-runs. The attempt is part of the
+  // producer identity so an earlier card cannot attest a later exit decision.
+  runAttempt: process.env.GITHUB_RUN_ATTEMPT || '1',
   // Which pipeline produced the run (frontaliere | svizzera). Recorded because
   // the two have different gates and different budgets, so a rejection-rate
   // trend pooled across both hides which one moved. Set once SECTION resolves.
   section: null,
   status: 'running',
+  exitCode: null,
+  exitDisposition: null,
   selectedArticleType: null, // news | evergreen_static | evergreen_dynamic
   selectedSource: null,
   selectedUrl: null,
@@ -6352,12 +6358,53 @@ async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '', verif
     contentIt?.body1 || '', contentIt?.body2 || '', contentIt?.body3 || '',
   ].join('\n\n');
 
-  const isEvergreen = !sourceContent || sourceContent.length < 100 || sourceUrl.startsWith('evergreen://') || sourceUrl.startsWith('stats-bfs://');
+  const isStatsBfs = sourceUrl.startsWith('stats-bfs://');
+  const isStatsAstra = sourceUrl.startsWith('stats-astra://');
+  const isSyntheticDataset = isStatsBfs || isStatsAstra;
+  const isEvergreenArticle = sourceUrl.startsWith('evergreen://')
+    || (!isSyntheticDataset && (!sourceContent || sourceContent.length < 100));
+  const hasSyntheticReference = isSyntheticDataset || sourceUrl.startsWith('evergreen://');
+  const checkerArticleText = articleText.slice(0, MAX_FACTCHECK_ARTICLE_CHARS);
+  const articleBodyStart = [contentIt?.title || '', contentIt?.excerpt || ''].join('\n\n').length + 2;
+  const syntheticReferenceType = isStatsBfs
+    ? 'DATASET PRIMARIO BFS: fonte strutturata dei dati e dei periodi verificati; non è una fonte di cronaca.'
+    : isStatsAstra
+    ? 'DATASET PRIMARIO ASTRA/OFROU: fonte strutturata dei conteggi e dei periodi verificati; non è una fonte di cronaca.'
+    : sourceUrl.startsWith('evergreen://')
+    ? 'BRIEF DI FATTI VERIFICATI PER EVERGREEN: materiale di riferimento stabile fornito al generatore; non è una notizia né una fonte giornalistica.'
+    : '';
+  const syntheticReferenceText = extractSyntheticReferenceEvidence({
+    sourceUrl,
+    sourceContent: typeof sourceContent === 'string' ? sourceContent.slice(0, 6000) : '',
+    evergreenBrief: sourceUrl.startsWith('evergreen://')
+      ? evergreenFactsBriefFor(SECTION_NAME, CANTON_FACTS_BRIEF)
+      : '',
+  });
+  const syntheticReferenceBlock = syntheticReferenceText
+    ? `\n${syntheticReferenceType}\n"""\n${syntheticReferenceText}\n"""\n`
+    : '';
+  const sourceEvidenceContent = isSyntheticDataset ? syntheticReferenceText : sourceContent;
+  const editorialContext = {
+    articleBody: checkerArticleText.slice(articleBodyStart),
+    evidenceText: [
+      hasSyntheticReference ? syntheticReferenceText : sourceContent.slice(0, 6000),
+      VERIFIED_DOMAIN_FACTS,
+      verifiedCantonFactsBlock(verifiedReferenceText),
+    ].join('\n\n'),
+  };
 
   if (articleText.length > MAX_FACTCHECK_ARTICLE_CHARS) {
     console.error(`  ⚠️  Fact-check: articolo di ${articleText.length} chars > cap ${MAX_FACTCHECK_ARTICLE_CHARS} `
       + `— la coda oltre il cap è verificata solo dai gate deterministici`);
   }
+
+  const sourceFraming = isStatsBfs
+    ? 'NOTA: Articolo basato sul dataset chiuso BFS riportato sotto, che è la fonte primaria dei totali e dei periodi. Verifica ogni numero e periodo contro quel dataset; i fatti di dominio verificati restano un riferimento separato. Il dataset non è una notizia di cronaca.'
+    : isStatsAstra
+    ? 'NOTA: Articolo basato sul dataset chiuso ASTRA/OFROU riportato sotto, che è la fonte primaria dei conteggi e dei periodi. Verifica ogni conteggio e periodo contro quel dataset; i fatti di dominio verificati restano un riferimento separato. Il dataset non è una notizia di cronaca.'
+    : isEvergreenArticle
+    ? 'NOTA: Articolo evergreen senza fonte specifica. Verifica basandoti sulle tue conoscenze del dominio e sui fatti di riferimento sotto. Per evergreen, NON segnalare come issue un fatto solo perché non compare in una fonte originale: segnala solo se è falso, contraddetto dai fatti verificati, troppo specifico senza attribuzione, o presentato come caso reale non verificato.'
+    : `FONTE ORIGINALE (l'articolo doveva basarsi su questo testo):\n"""\n${sourceEvidenceContent.slice(0, 6000)}\n"""`;
 
   const prompt = `${IS_CANTON
     ? CANTON_LINES.factCheckPersona
@@ -6367,27 +6414,28 @@ async function llmFactCheck(contentIt, sourceContent = '', sourceUrl = '', verif
 
 ARTICOLO DA VERIFICARE:
 """
-${articleText.slice(0, MAX_FACTCHECK_ARTICLE_CHARS)}
+${checkerArticleText}
 """
 
-${isEvergreen ? 'NOTA: Articolo evergreen senza fonte specifica. Verifica basandoti sulle tue conoscenze del dominio e sui fatti di riferimento sotto. Per evergreen, NON segnalare come issue un fatto solo perché non compare in una fonte originale: segnala solo se è falso, contraddetto dai fatti verificati, troppo specifico senza attribuzione, o presentato come caso reale non verificato.' : `FONTE ORIGINALE (l'articolo doveva basarsi su questo testo):\n"""\n${sourceContent.slice(0, 6000)}\n"""`}
+${sourceFraming}
+${syntheticReferenceBlock}
 
 ${VERIFIED_DOMAIN_FACTS}
 ${verifiedCantonFactsBlock(verifiedReferenceText)}
 
 VERIFICA SISTEMATICA — controlla OGNI categoria:
 
-1. **LEGGI E DECRETI**: Ogni riferimento normativo (D.Lgs, DL, DPR, L.) deve esistere realmente con numero e anno corretti. Verifica che il contenuto attribuito alla legge sia corretto. Confronta con i fatti verificati sopra. ${isEvergreen ? '' : 'Se il riferimento NON è presente nella fonte originale, segnalalo come sospetto.'}
+1. **LEGGI E DECRETI**: Ogni riferimento normativo (D.Lgs, DL, DPR, L.) deve esistere realmente con numero e anno corretti. Verifica che il contenuto attribuito alla legge sia corretto. Confronta con i fatti verificati sopra. ${isEvergreenArticle ? '' : isStatsAstra ? 'Il dataset ASTRA è fonte primaria solo per conteggi e periodi, non per norme: verifica leggi, accordi e date normative nei fatti di dominio verificati sopra. Non segnalare una norma come sospetta solo perché è assente dal dataset ASTRA.' : isStatsBfs ? 'Il dataset BFS è fonte primaria solo per totali e periodi, non per norme: verifica le norme con i fatti di dominio riportati sopra.' : 'Se il riferimento NON è presente nella fonte originale, segnalalo come sospetto.'}
 
 2. **ISTITUZIONI E ENTI**: Ogni istituzione menzionata deve esistere realmente. Confronta con la lista di istituzioni reali nei fatti verificati. Segnala qualsiasi acronimo NON presente in quella lista come sospetto. NON esiste: "Codice federale del lavoro", "CFL", "UFOL", "UWL", "Commissione federale per i frontalieri", "Ufficio federale dell'integrazione sanitaria (UFIS)".
 
 3. **ALIQUOTE E CIFRE FISCALI**: Confronta OGNI aliquota con i valori nei fatti verificati. AVS=5.3%, AC=1.1%, IRPEF ${irpefAliquoteBreve(IRPEF_ANNO_CORRENTE)} (2024-${IRPEF_ANNO_PRECEDENTE}: ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}). Se un'aliquota non corrisponde = critical.
 
-4. **STATISTICHE E PERCENTUALI**: Percentuali precise con decimali (es. "il 73,2% dei frontalieri") DEVONO provenire da studi reali citati per nome E ISTITUTO. Senza attribuzione precisa = probabile invenzione. ECCEZIONE: arrotondamenti a numeri interi da fonti note (es. "circa il 30% della forza lavoro" da USTAT) sono accettabili. Non segnalare aliquote esplicitamente elencate nei fatti verificati (AVS=5.3%, AC=1.1%, IRPEF ${irpefAliquoteBreve(IRPEF_ANNO_CORRENTE)} o 2024-${IRPEF_ANNO_PRECEDENTE} ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}, franchigia 10.000 euro) come issue se sono riportate correttamente.
+4. **STATISTICHE E PERCENTUALI**: Percentuali precise con decimali (es. "il 73,2% dei frontalieri") DEVONO provenire da studi reali citati per nome E ISTITUTO. Senza attribuzione precisa = probabile invenzione. ECCEZIONE: arrotondamenti a numeri interi da fonti note (es. "circa il 30% della forza lavoro" da USTAT) sono accettabili. ${isStatsAstra ? 'Per ASTRA, accetta anche una percentuale o variazione calcolata direttamente dai conteggi espliciti del dataset solo se numeratore, denominatore, unità e periodo sono coerenti e il calcolo è corretto; presentala come calcolo sui dati ASTRA, non come percentuale pubblicata dalla fonte. Il dataset non prova cause o percentuali non ricavabili dai valori forniti.' : ''} Non segnalare aliquote esplicitamente elencate nei fatti verificati (AVS=5.3%, AC=1.1%, IRPEF ${irpefAliquoteBreve(IRPEF_ANNO_CORRENTE)} o 2024-${IRPEF_ANNO_PRECEDENTE} ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}, franchigia 10.000 euro) come issue se sono riportate correttamente.
 
-5. **DATE E EVENTI**: Confronta con le date verificate: Convenzione 9/3/1976, Nuovo Accordo 23/12/2020, vigenza dal 1/1/2024, Legge 83/2023. ${isEvergreen ? '' : 'Date presenti nell\'articolo ma ASSENTI dalla fonte = altamente sospette.'}
+5. **DATE E EVENTI**: Confronta con le date verificate: Convenzione 9/3/1976, Nuovo Accordo 23/12/2020, vigenza dal 1/1/2024, Legge 83/2023. ${isEvergreenArticle ? '' : isStatsAstra ? 'Per ASTRA, periodo di misurazione e periodi del confronto devono corrispondere al dataset primario; verifica invece le date di leggi e accordi nei fatti di dominio verificati sopra. Non trattare una data normativa come sospetta perché manca dal dataset ASTRA.' : isStatsBfs ? 'Per il dato BFS, periodo e confronto devono corrispondere esattamente al dataset primario qui sopra.' : 'Date presenti nell\'articolo ma ASSENTI dalla fonte = altamente sospette.'}
 
-6. **COERENZA CON LA FONTE**: ${isEvergreen ? 'N/A per evergreen.' : "Confronta ogni affermazione dell'articolo con la fonte originale. DISTINGUI tra: (a) arricchimento contestuale con fatti di dominio CORRETTI e verificabili (contesto frontaliere, aliquote note, geografia ticinese) = 'minor', (b) fatti specifici inventati (leggi/decreti inesistenti, statistiche precise senza fonte, istituzioni inventate, eventi mai avvenuti) NON presenti nella fonte = 'critical', (c) informazione che CONTRADDICE la fonte o i fatti verificati = 'critical'."}
+6. **COERENZA CON LA FONTE**: ${isStatsAstra ? 'Confronta ogni conteggio, periodo e variazione aritmetica con il dataset ASTRA primario riportato sopra. Accetta una differenza o percentuale ricavata dai valori espliciti solo se base, unità, periodo e calcolo sono coerenti; verifica leggi e date normative nei fatti di dominio verificati, non nel dataset. L’angolo editoriale richiesto non è prova. I conteggi ASTRA non dimostrano cause, effetti o previsioni: un’affermazione causale non sostenuta dai fatti verificati è critical.' : isStatsBfs ? 'Confronta ogni totale, periodo e variazione con il dataset BFS primario riportato sopra. Una lettura o un calcolo ricavato dai suoi valori è valido se la base è coerente; l’angolo editoriale richiesto non è prova e non deve essere trattato come fatto.' : isEvergreenArticle ? 'N/A per evergreen senza fonte specifica.' : "Confronta ogni affermazione dell'articolo con la fonte originale. DISTINGUI tra: (a) arricchimento contestuale con fatti di dominio CORRETTI e verificabili (contesto frontaliere, aliquote note, geografia ticinese) = 'minor', (b) fatti specifici inventati (leggi/decreti inesistenti, statistiche precise senza fonte, istituzioni inventate, eventi mai avvenuti) NON presenti nella fonte = 'critical', (c) informazione che CONTRADDICE la fonte o i fatti verificati = 'critical'."}
 
 7. **FATTI INVENTATI**: Cerca eventi, conferenze, referendum, proteste, dichiarazioni che sembrano plausibili ma potrebbero non essere mai avvenuti. SEGNALE D'ALLARME: eventi descritti con molti dettagli specifici (data precisa, luogo, partecipanti) che non appaiono in nessuna fonte nota.
 
@@ -6416,22 +6464,28 @@ VERIFICA SISTEMATICA — controlla OGNI categoria:
    - Ministri o funzionari con nomi plausibili ma non verificabili
    - Accordi/protocolli bilaterali mai firmati (controllare attentamente)
 
-${IS_CANTON ? CANTON_LINES.factCheckRelevance(isEvergreen) : IS_FRONTALIERE ? `11. **RILEVANZA TOPICA AL FRONTALIERE TICINO-ITALIA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita del frontaliere Ticino-Italia. Sono nessi reali: norme/sentenze su Permesso G o B, fiscalità CH-IT (imposta alla fonte, nuovo accordo, ristorni, doppia imposizione), AVS/LPP/LAMal/CMI, busta paga svizzera, dogane/valichi (Chiasso, Brogeda, Gaggiolo, Ponte Tresa), pendolarismo CH-IT e viabilità del tragitto casa-lavoro (chiusure, cantieri, deviazioni su A2/A9, strade ticinesi e delle province di Varese, Como e VCO, treni TILO/FFS), mercato del lavoro ticinese anche quando la fonte non nomina i frontalieri (licenziamenti, riorganizzazioni, appalti, salari, dumping), politica e finanze del Canton Ticino (preventivo, imposte cantonali, servizi), cronaca locale in Ticino e nelle province di Varese, Como e VCO anche senza nesso con i frontalieri (cronaca nera, incidenti stradali, sport, cultura ed eventi), telelavoro frontaliere, accordi bilaterali CH-IT/UE, banche e cambio CHF-EUR per frontalieri.
+${IS_CANTON ? CANTON_LINES.factCheckRelevance(isEvergreenArticle) : IS_FRONTALIERE ? `11. **RILEVANZA TOPICA AL FRONTALIERE TICINO-ITALIA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita del frontaliere Ticino-Italia. Sono nessi reali: norme/sentenze su Permesso G o B, fiscalità CH-IT (imposta alla fonte, nuovo accordo, ristorni, doppia imposizione), AVS/LPP/LAMal/CMI, busta paga svizzera, dogane/valichi (Chiasso, Brogeda, Gaggiolo, Ponte Tresa), pendolarismo CH-IT e viabilità del tragitto casa-lavoro (chiusure, cantieri, deviazioni su A2/A9, strade ticinesi e delle province di Varese, Como e VCO, treni TILO/FFS), mercato del lavoro ticinese anche quando la fonte non nomina i frontalieri (licenziamenti, riorganizzazioni, appalti, salari, dumping), politica e finanze del Canton Ticino (preventivo, imposte cantonali, servizi), cronaca locale in Ticino e nelle province di Varese, Como e VCO anche senza nesso con i frontalieri (cronaca nera, incidenti stradali, sport, cultura ed eventi), telelavoro frontaliere, accordi bilaterali CH-IT/UE, banche e cambio CHF-EUR per frontalieri.
 
-   ${isEvergreen ? '' : 'NON sono nessi reali (segnala "critical" come "rilevanza_topica"): cronaca, sport e cultura fuori dal Ticino e dalle province di Varese, Como e VCO (es. arresti a Milano, eventi USA, criminalità urbana a Roma/Napoli/Palermo), gossip, infrastruttura italiana lontana dal confine, eventi a Malpensa SENZA impatto sui voli o trasporti frontalieri.'}
+   ${isEvergreenArticle ? '' : 'NON sono nessi reali (segnala "critical" come "rilevanza_topica"): cronaca, sport e cultura fuori dal Ticino e dalle province di Varese, Como e VCO (es. arresti a Milano, eventi USA, criminalità urbana a Roma/Napoli/Palermo), gossip, infrastruttura italiana lontana dal confine, eventi a Malpensa SENZA impatto sui voli o trasporti frontalieri.'}
 
    SEGNALE D'ALLARME (= "critical: rilevanza_topica"): paragrafi con titoli del tipo "Implicazioni per i frontalieri", "I frontalieri devono essere consapevoli di…", "Cosa significa per i frontalieri", su un evento SENZA implicazione concreta. Sezioni di consigli generici ("consulta un avvocato", "verifica la copertura assicurativa", "informati sui tuoi diritti") inserite per riempire spazio su un argomento non-frontaliere sono indicatori di forzatura.
 
-   ${isEvergreen ? '' : "Se l'articolo sostituisce i fatti di una notizia di cronaca con un commento generico (procedure di estradizione generiche, consigli legali universali, considerazioni assicurative generiche) o con un angolo frontalieri che la fonte non ha, il verdetto è FAIL."}` : `11. **RILEVANZA TOPICA NAZIONALE SVIZZERA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita, l'economia o la politica in Svizzera a livello nazionale o cantonale. Sono nessi reali: policy federale/cantonale, fiscalità (imposta federale diretta, IVA, imposte cantonali), AVS/LPP/LAMal, mercato del lavoro e salari svizzeri, costo della vita, affitti e casa, previdenza, economia e BNS, decisioni del Consiglio federale o dei Cantoni, accordi internazionali della Svizzera. NON è richiesto alcun nesso frontaliere/Ticino: un articolo nazionale (es. salario minimo cantonale, IVA, affitti) è PIENAMENTE rilevante.
+   ${isEvergreenArticle ? '' : "Se l'articolo sostituisce i fatti di una notizia di cronaca con un commento generico (procedure di estradizione generiche, consigli legali universali, considerazioni assicurative generiche) o con un angolo frontalieri che la fonte non ha, il verdetto è FAIL."}` : `11. **RILEVANZA TOPICA NAZIONALE SVIZZERA (CRITICO)**: L'articolo deve avere un nesso REALE, SPECIFICO e VERIFICABILE con la vita, l'economia o la politica in Svizzera a livello nazionale o cantonale. Sono nessi reali: policy federale/cantonale, fiscalità (imposta federale diretta, IVA, imposte cantonali), AVS/LPP/LAMal, mercato del lavoro e salari svizzeri, costo della vita, affitti e casa, previdenza, economia e BNS, decisioni del Consiglio federale o dei Cantoni, accordi internazionali della Svizzera. NON è richiesto alcun nesso frontaliere/Ticino: un articolo nazionale (es. salario minimo cantonale, IVA, affitti) è PIENAMENTE rilevante.
 
-   ${isEvergreen ? '' : 'NON sono nessi reali (segnala "critical" come "rilevanza_topica"): cronaca nera senza implicazione di policy/economia, eventi sportivi, gossip, intrattenimento, eventi esteri senza impatto sulla Svizzera.'}
+   ${isEvergreenArticle ? '' : 'NON sono nessi reali (segnala "critical" come "rilevanza_topica"): cronaca nera senza implicazione di policy/economia, eventi sportivi, gossip, intrattenimento, eventi esteri senza impatto sulla Svizzera.'}
 
    SEGNALE D'ALLARME (= "critical: rilevanza_topica"): forzare "implicazioni nazionali" su un evento che non ne ha, o riempire con consigli generici ("consulta un avvocato", "verifica la copertura assicurativa", "informati sui tuoi diritti") un argomento senza reale rilevanza nazionale, sono indicatori di forzatura.
 
-   ${isEvergreen ? '' : "Se l'articolo è un commento generico attaccato a una notizia di cronaca SENZA alcun nesso di policy/economia/vita in Svizzera, il verdetto è FAIL — l'articolo non doveva essere generato."}`}
+   ${isEvergreenArticle ? '' : "Se l'articolo è un commento generico attaccato a una notizia di cronaca SENZA alcun nesso di policy/economia/vita in Svizzera, il verdetto è FAIL — l'articolo non doveva essere generato."}`}
+
+═══ VALUTAZIONE EDITORIALE E PROVE (OBBLIGATORIA) ═══
+Valuta body1–body3 nel loro insieme. Un articolo non supera questo controllo se si limita a riassumere o parafrasare la fonte: deve offrire almeno una relazione, spiegazione o confronto concreto e utile, dimostrabile con fatti e periodi esatti. Un calcolo ricavato da valori espliciti può essere un contributo valido; non serve inventare un cambiamento o una conseguenza che la fonte non documenta. Un confronto deve usare periodi, unità e basi coerenti. Non aggiungere un angolo sul lavoro o sui frontalieri a una notizia non pertinente.
+Attribuisci le notizie alla fonte. Non ritenere supportati reportage sul posto, interviste, fonti proprie o verifiche umane non documentati; ometti cause, effetti, previsioni e consigli fiscali o finanziari senza prove.
+Cita esattamente almeno 40 caratteri e 7 parole dal corpo dell'articolo e almeno 16 dalla fonte o da un riferimento verificato; non ricostruire citazioni a memoria né usare titolo, excerpt o schema. Scrivi in italiano un finding specifico (almeno 35 caratteri e 6 parole) sul dato o sulla relazione dimostrata.
+Usa grounded_analysis solo per un contributo concreto, tracciabile e non già contenuto nella fonte. Usa source_restatement per un riassunto/parafrasi senza contributo aggiunto; unsupported_inference per affermazioni non provate o reportage/interviste/verifiche inventate; insufficient_evidence quando le prove non permettono una valutazione positiva. Una valutazione vaga o dichiarativa non basta.
 
 CRITERI DI GIUDIZIO:
-- "critical" = fatto verificabilmente FALSO, o CONTRADDICE i fatti verificati di riferimento (legge inesistente, istituzione inventata, aliquota sbagliata, evento mai avvenuto, dato che contraddice la fonte)
+- "critical" = fatto verificabilmente FALSO, o CONTRADDICE i fatti verificati di riferimento (legge inesistente, istituzione inventata, aliquota sbagliata, evento mai avvenuto, dato che contraddice la fonte). Per ASTRA, anche una relazione causale presentata come fatto e non sostenuta dai fatti verificati è critical, pur se il solo dataset non permette di provarla falsa: registra conteggi e periodi, non cause.
 - "major" = fatto sospetto non verificabile con certezza (percentuale senza fonte, dato plausibile ma non confermabile, informazione specifica aggiunta non presente nella fonte e non nei fatti verificati). Per evergreen, "non presente nella fonte" NON basta: serve falso/sospetto concreto.
 - "minor" = imprecisione che non fuorvia il lettore (arrotondamento, data approssimata) O arricchimento contestuale con fatti di dominio noti e corretti (contesto frontaliere, informazioni generali sulla Svizzera/Ticino)
 - FAIL = almeno 1 critical O almeno 3 major
@@ -6452,6 +6506,12 @@ Rispondi SOLO in JSON valido:
 {
   "verdict": "PASS" | "FAIL",
   "confidence": 0.0-1.0,
+  "editorialAssessment": {
+    "classification": "grounded_analysis" | "source_restatement" | "unsupported_inference" | "insufficient_evidence",
+    "finding": "relazione concreta che il testo aggiunge, con dati o periodo specifici",
+    "articleQuote": "citazione esatta di almeno 40 caratteri da body1, body2 o body3",
+    "evidenceQuotes": ["citazione esatta di almeno 16 caratteri dalla fonte o da un riferimento verificato"]
+  },
   "issues": [
     { "claim": "testo dell'affermazione", "reason": "perché è problematica", "severity": "critical|major|minor", "category": "categoria", "sourceQuote": "porzione esatta di fonte a supporto, o \"\" se la fonte non tratta l'argomento" }
   ]
@@ -6511,6 +6571,11 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // ALL models have exhausted their per-model retries.
   const FACTCHECK_429_BACKOFF_CAP_MS = 30_000;
   let fcLastRejectMsgs = [];
+  const fcProviderErrors = [];
+  // A usable vote, an empty fulfilled response, or a duplicate vote means at
+  // least one verifier answered; none proves a shared pool outage, even if a
+  // sibling lane exhausted transiently. Keep this across all attempts.
+  let fcHadNonOutageResult = false;
   // True when an attempt's two verifiers collapsed into one model and no
   // independent second opinion came back: that attempt holds one opinion where
   // the consensus needs two, so it is retried like a verifier outage (review of
@@ -6547,7 +6612,8 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     // Query up to 2 models in parallel for consensus
     const modelsToQuery = verificationModels.slice(0, 2);
     const promises = modelsToQuery.map((model, index) => _runSingleFactCheck(model, prompt, {
-      isEvergreen,
+      isEvergreen: isEvergreenArticle,
+      editorialContext,
       // The first verifier owns the Codex primary slot. Keep the parallel
       // second opinion independent without changing its existing fallback
       // family/order.
@@ -6564,14 +6630,19 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     let droppedDuplicate = false;
     for (let i = 0; i < settled.length; i++) {
       const s = settled[i];
+      if (s.status === 'fulfilled') fcHadNonOutageResult = true;
       if (s.status === 'fulfilled' && s.value) {
         const earlier = addIndependentVote(modelResults, modelsToQuery[i], s.value);
         if (earlier) {
+          fcHadNonOutageResult = true;
           droppedDuplicate = true;
           console.error(`  ⚠️  LLM fact-check (${modelsToQuery[i]}): servito da ${earlier.servedBy}, che ha già votato per ${earlier.requested} — voto scartato, non è un secondo parere`);
         }
       } else {
-        const reason = s.status === 'rejected' ? s.reason?.message : 'no result';
+        const error = s.status === 'rejected' ? s.reason : null;
+        if (error) fcProviderErrors.push(error);
+        else fcHadNonOutageResult = true;
+        const reason = error?.message || 'no result';
         fcLastRejectMsgs.push(reason || '');
         console.error(`  ⚠️  LLM fact-check (${modelsToQuery[i]}): fallito — ${reason}`);
       }
@@ -6587,10 +6658,12 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
         || verificationModels.find((m) => !voted.includes(m))
         || modelsToQuery[1];
       try {
-        const extra = await _runSingleFactCheck(next, prompt, { isEvergreen, excludeModels: voted });
+        const extra = await _runSingleFactCheck(next, prompt, { isEvergreen: isEvergreenArticle, editorialContext, excludeModels: voted });
         const earlier = extra ? addIndependentVote(modelResults, next, extra) : null;
+        fcHadNonOutageResult = true;
         if (earlier) console.error(`  ⚠️  LLM fact-check (${next}): servito di nuovo da ${earlier.servedBy} — resta un solo voto`);
       } catch (err) {
+        fcProviderErrors.push(err);
         fcLastRejectMsgs.push(err.message || '');
         console.error(`  ⚠️  LLM fact-check secondo parere (${next}): ${err.message}`);
       }
@@ -6603,9 +6676,11 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     // If both primary models failed, try fallback
     if (modelResults.length === 0 && verificationModels.length > 2) {
       try {
-        const fallback = await _runSingleFactCheck(verificationModels[2], prompt, { isEvergreen });
+        const fallback = await _runSingleFactCheck(verificationModels[2], prompt, { isEvergreen: isEvergreenArticle, editorialContext });
         if (fallback) addIndependentVote(modelResults, verificationModels[2], fallback);
+        fcHadNonOutageResult = true;
       } catch (err) {
+        fcProviderErrors.push(err);
         fcLastRejectMsgs.push(err.message || '');
         console.error(`  ⚠️  LLM fact-check fallback (${verificationModels[2]}): ${err.message}`);
       }
@@ -6643,9 +6718,11 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
     const selfCheck = _codexWroteThisHeadline ? ' — ha scritto anche questo articolo: si verifica da solo (decisione del proprietario)' : '';
     console.error(`  🛟 LLM fact-check: ${why}, verifico con ${codex}${selfCheck}`);
     try {
-      const vote = await _runSingleFactCheck(codex, prompt, { isEvergreen, codexOnly: true });
+      const vote = await _runSingleFactCheck(codex, prompt, { isEvergreen: isEvergreenArticle, editorialContext, codexOnly: true });
       if (vote) addIndependentVote(modelResults, codex, vote);
+      fcHadNonOutageResult = true;
     } catch (err) {
+      fcProviderErrors.push(err);
       fcLastRejectMsgs.push(err.message || '');
       console.error(`  ⚠️  LLM fact-check (${codex}): ${err.message}`);
     }
@@ -6692,7 +6769,36 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
         category: 'infra',
       }],
       unverified: true,
+      ...(isSharedTransientFactCheckRosterOutage(fcProviderErrors, {
+        hadNonOutageResult: fcHadNonOutageResult,
+      })
+        ? { sharedProviderUnavailable: true }
+        : {}),
     };
+  }
+
+  // An original editorial contribution is a separate blocking quality gate:
+  // unlike a verifier outage, a valid assessment that finds only a restatement
+  // or unsupported inference belongs in the existing bounded rewrite loop.
+  // Require every independent reviewer to support the contribution, and keep
+  // the exact evidence-based correction alongside any factual issues found.
+  const originalityFailures = modelResults
+    .filter(result => !result.editorialAssessment?.passed)
+    .map(result => ({ result, assessment: result.editorialAssessment }));
+  if (originalityFailures.length > 0) {
+    const uniqueFailures = new Map();
+    for (const { result, assessment } of originalityFailures) {
+      const key = `${assessment.classification}\u0000${assessment.reason}`;
+      if (!uniqueFailures.has(key)) uniqueFailures.set(key, { result, assessment });
+    }
+    const originalityIssues = [...uniqueFailures.values()].map(({ result, assessment }) => {
+      console.error(`  🚫 Originalità editoriale (${result.model}): ${assessment.classification} — ${assessment.reason}`);
+      return editorialOriginalityIssue(assessment);
+    });
+    const factualIssues = modelResults.flatMap(result => result.issues)
+      .filter(issue => issue.severity === 'critical' || issue.severity === 'major')
+      .slice(0, 6);
+    return { passed: false, issues: [...originalityIssues, ...factualIssues] };
   }
 
   // ── Drop verdicts the source itself refutes ──
@@ -6702,10 +6808,10 @@ Categorie valide: ${FACT_CHECK_CATEGORIES.join(', ')}`;
   // 2026-07-28: both models flagged the source's own opening sentence, the
   // article was blocked, and the rewrite loop then walked the draft away from
   // the source until it passed by inventing). See dropSourceContradictedIssues.
-  if (!isEvergreen && sourceContent) {
+  if (!isEvergreenArticle && sourceEvidenceContent) {
     let droppedTotal = 0;
     for (const r of modelResults) {
-      const { kept, dropped } = dropSourceContradictedIssues(r.issues, sourceContent);
+      const { kept, dropped } = dropSourceContradictedIssues(r.issues, sourceEvidenceContent);
       if (dropped.length) {
         droppedTotal += dropped.length;
         for (const d of dropped) {
@@ -6963,8 +7069,14 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
   const verdict = result.verdict.trim().toUpperCase();
   const confidence = Number(result.confidence) || 0;
   const issues = normalizeFactCheckIssues(result.issues, opts);
+  const editorialAssessment = validateEditorialAssessment(result.editorialAssessment, opts.editorialContext);
+  if (!editorialAssessment.verifiable) {
+    console.error(`  ⚠️  LLM fact-check (${model}${servedBy && servedBy !== model ? ` via ${servedBy}` : ''}): `
+      + `valutazione editoriale senza prove leggibili (${editorialAssessment.reason}) — voto scartato`);
+    return null;
+  }
 
-  return { verdict, confidence, issues, servedBy };
+  return { verdict, confidence, issues, editorialAssessment, servedBy };
 }
 
 // assertNoFabricatedStatistics() REMOVED — replaced by LLM-based fact-checking.
@@ -7710,12 +7822,12 @@ export function checkStatsAstraCountFidelity(articleText, sourceText) {
 // Sono cio' da cui l'estrattore ricava il ramo migliore (`articleBody`) e la
 // data di pubblicazione della fonte, ma il markup inattivo non deve riattivarli.
 //
-// `extract-article-text.mjs` non viene toccato di proposito: e'
-// `mode: identical` nel manifest del ciclo (gemello di scripts/lib/ del sito),
-// e una modifica la' va fatta sul sito e scende col mirror. Quando il pezzo
-// scelto contiene un `<noscript>` body, qui lo si rende esplicito come markup
-// attivo prima di consegnare lo stesso HTML all'estrattore e alla title
-// evidence: e' la modalita' scripting-disabled prevista dal parser HTML.
+// `extract-article-text.mjs` resta `mode: identical`; la modifica trasportata
+// da questa PR arriva dal suo gemello sul sito. Le modifiche future a quel file
+// vanno fatte sul sito e trasportate. Quando il pezzo scelto contiene un
+// `<noscript>` body, qui lo si rende esplicito come markup attivo prima di
+// consegnare lo stesso HTML all'estrattore e alla title evidence: e' la
+// modalita' scripting-disabled prevista dal parser HTML.
 
 // Sotto questa soglia di testo visibile il blocco isolato non e' un corpo
 // d'articolo: si preferisce non isolare affatto, per non regredire sotto il
@@ -11321,11 +11433,11 @@ Almeno 6 dei seguenti termini, SE PERTINENTI al tema, DEVONO comparire naturalme
 AVS/AHV, LPP/BVG, LAMal/KVG, imposta federale diretta, IVA, SECO, UST/BFS, BNS/SNB, Consiglio federale, Cantoni, salario minimo, costo della vita.\n`;
 
   // ── Section-aware prompt fragments ──────────────────────────────
-  // Frontaliere branch = byte-identical to the historical prompt (drives ~95%
-  // revenue). Svizzera branch reframes section-specific blocks around NATIONAL
-  // Swiss relevance for a general Swiss-resident audience. Every section-AGNOSTIC
-  // rule (fedeltà alla fonte, anti-allucinazione, anti-AI, formatting, internal
-  // links, CTA divieti, grassetto, H3, anti-ripetitività) stays verbatim below.
+  // Section-specific rules set topical relevance, while the shared editorial
+  // contract requires a traceable contribution without inventing impacts.
+  // Svizzera frames relevance nationally; Frontaliere and canton sections keep
+  // their own audiences. Evidence, attribution and no-fabrication rules apply
+  // to every generated article.
   // Il RUOLO e' gia' fissato dal messaggio `system` («Sei un giornalista
   // finanziario esperto di …», con `systemRoleQualifier` per la sezione): qui
   // resta solo cio' che quel messaggio non dice — testata, sezione, e il
@@ -11338,26 +11450,24 @@ AVS/AHV, LPP/BVG, LAMal/KVG, imposta federale diretta, IVA, SECO, UST/BFS, BNS/S
     : `You write for "Frontaliere Ticino" (frontaliereticino.ch), national Switzerland section — economy, fiscal policy, labour market, cost of living, housing, federal & cantonal politics, for a general Swiss-resident audience. Based on the following source, write a blog article.`;
 
   const reachMinimumImplicationsLine = localNewsSource
-    ? `- Racconta i fatti della fonte e cosa cambia per chi vive o si sposta nella zona; i frontalieri solo se la fonte ne parla`
+    ? `- Spiega il rilievo locale solo quando i fatti della fonte lo documentano; cita eventuali cambiamenti, confronti o limiti esattamente come risultano dalle prove`
     : IS_CANTON
     ? CANTON_LINES.reachLine
     : IS_FRONTALIERE
-    ? `- Analizza le IMPLICAZIONI PRATICHE per i frontalieri (cosa cambia nella vita quotidiana)`
-    : `- Analizza le IMPLICAZIONI PRATICHE a livello nazionale/cantonale (cosa cambia nella vita di chi vive o lavora in Svizzera)`;
-  // Local news has no procedure, scenario or site tool to offer: its words
-  // come from the facts, statements and local context of the source. Every
-  // frontaliere-only demand below has a local branch for the same reason
-  // (review of PR #1871): one left behind is the off-topic copy the density
-  // bypass would otherwise publish.
+    ? `- Spiega un confronto, una relazione o un effetto documentato rilevante per i frontalieri; se la fonte non documenta un cambiamento, non inventarlo`
+    : `- Spiega un confronto, una relazione o un effetto documentato rilevante per chi vive o lavora in Svizzera; se la fonte non documenta un cambiamento, non inventarlo`;
+  // The original contribution must be grounded. Procedures, scenarios and
+  // advice are optional and only belong when the source/reference documents
+  // their factual basis; a sparse source is not a reason to invent them.
   const reachMinimumMethodLines = localNewsSource
-    ? `- Riporta dichiarazioni, reazioni e sviluppi presenti nella fonte
-- Dai il contesto locale che la fonte fornisce (luogo, precedenti, organizzatori, risultati)`
-    : `- Descrivi PROCEDURE concrete (cosa fare, dove andare, quali documenti servono)
-- Aggiungi SCENARI "cosa succede se" basati sui fatti della fonte
-- Confronta con la situazione precedente (prima vs dopo il cambiamento descritto nella fonte)`;
+    ? `- Aggiungi contesto, dichiarazioni, confronti o sviluppi solo se compaiono nella fonte o in un riferimento verificato
+- Se non c'è un seguito documentato, chiarisci i fatti e i limiti senza simulare un'indagine o un aggiornamento`
+    : `- Spiega termini e numeri utili al caso usando fatti citati, date e periodi verificabili
+- Calcola un confronto solo da valori e basi esplicite; rendi visibili i dati e il periodo usato
+- Distingui ciò che la fonte riferisce da ciò che i dati permettono di dedurre; niente cause, previsioni o consigli senza prova`;
   const reachMinimumToolsLine = localNewsSource
     ? `- NON aggiungere procedure, checklist, scadenze o strumenti del sito che la notizia non richiede`
-    : `- Collega agli strumenti del sito (calcolatore, comparatore, guide) per approfondire`;
+    : `- Collega agli strumenti del sito solo se direttamente pertinenti al fatto e senza presentarli come consiglio fiscale o finanziario`;
 
   const topicalRelevanceGate = IS_CANTON
     ? CANTON_LINES.topicalRelevanceGate
@@ -11420,43 +11530,29 @@ NON inventare un angolo "implicazioni pratiche" su un evento irrilevante per rie
   const editorialFundamentalBlock = localNewsSource
     ? `REGOLA EDITORIALE FONDAMENTALE — CRONACA LOCALE:
 La fonte è cronaca locale (cronaca nera, incidente, sport, cultura o evento) in Ticino o nelle province di Varese, Como e VCO: il nesso richiesto da REGOLA #0 è il luogo, non i frontalieri. NON rifiutare per mancanza di un angolo frontalieri.
-- body1 deve riportare i fatti verificabili della fonte, senza costruire un angolo frontaliere.
-- body2 deve aggiungere soltanto contesto, sviluppi, dati o reazioni locali documentati dalla fonte.
-- body3 deve descrivere le ricadute locali soltanto quando la fonte le documenta.
+- Attribuisci le notizie alla fonte e riporta in body1 i fatti verificabili, senza costruire un angolo frontaliere.
+- body2 può spiegare un contesto, un confronto o uno sviluppo locale soltanto se documentato dalla fonte o da un riferimento verificato.
+- body3 può aggiungere altre prove o ricadute locali documentate; se non esistono, non inventare un seguito, cause o conseguenze.
 - NON aggiungere permessi, fiscalità, procedure, scadenze, strumenti del sito o consigli per frontalieri che la fonte non sostiene.
-- Se la fonte non documenta un'azione concreta, chiudi senza procedura, tool, CTA o link nav obbligatorio: la completezza non giustifica l'invenzione.`
+- Non simulare reportage, interviste, testimonianze o verifiche sul posto. Se la fonte non documenta un'azione concreta, chiudi senza procedura, tool, CTA o link nav obbligatorio: la completezza non giustifica l'invenzione.`
     : IS_FRONTALIERE
-    ? `REGOLA EDITORIALE FONDAMENTALE — FRONTALIERI AL CENTRO (CONDIZIONALE):
-Se la fonte ha implicazioni CONCRETE e SPECIFICHE per il frontaliere (importi CHF/EUR cambiati, scadenze fiscali, procedure modificate, permessi, valichi, accordi CH-IT, AVS/LPP/LAMal, busta paga, autostrade A2/A9, sciopero che blocca pendolari):
-- Il frontaliere deve essere il PROTAGONISTA dell'articolo dall'inizio alla fine.
-- NON è accettabile aggiungere una sezione "Impatto sui frontalieri" solo in fondo.
-- ALMENO il 50% del testo dei campi body1, body2, body3 deve essere indirizzato al lettore frontaliere con dati pratici (importi, scadenze, procedure), guide operative (checklist, step-by-step, confronto scenari) e informazioni azionabili (cosa fare, dove andare, documenti).
-
-Se le implicazioni sono DEBOLI o GENERICHE (la fonte non parla direttamente di frontalieri, ma il contesto può essere tangenzialmente utile):
-- Limita la copertura a 1-2 paragrafi brevi di contesto. NON gonfiare l'articolo con platitudini ("consulta un avvocato", "verifica la copertura", "conosci i tuoi diritti", "informati sulle leggi locali").
-- Onestamente dichiara nel body1 cosa la fonte dice E NULLA DI PIÙ, e segnala in body2/body3 i 1-2 ganci pratici reali (se esistono). Meglio un articolo da 400 parole onesto che 1200 parole di forzatura.
-- Se anche 1-2 paragrafi di nesso reale non esistono → torna al GATE DI RILEVANZA TOPICA (REGOLA #0) e rifiuta con "abort_topical_relevance": true.`
-    : `REGOLA EDITORIALE FONDAMENTALE — INTERESSE NAZIONALE AL CENTRO (CONDIZIONALE):
-Se la fonte ha implicazioni CONCRETE e SPECIFICHE per chi vive o lavora in Svizzera (importi CHF cambiati, scadenze fiscali, nuove leggi federali/cantonali, premi cassa malati, affitti, salari, AVS/LPP, IVA, decisioni del Consiglio federale o dei cantoni):
-- Le implicazioni pratiche a livello nazionale/cantonale devono essere al CENTRO dell'articolo dall'inizio alla fine.
-- NON è accettabile aggiungere una sezione "implicazioni pratiche" solo in fondo.
-- ALMENO il 50% del testo dei campi body1, body2, body3 deve dare al lettore dati pratici (importi, scadenze, procedure), guide operative (checklist, step-by-step, confronto scenari) e informazioni azionabili (cosa fare, dove andare, documenti) a livello nazionale o cantonale.
-
-Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico diretto, ma il contesto può essere tangenzialmente utile):
-- Limita la copertura a 1-2 paragrafi brevi di contesto. NON gonfiare l'articolo con platitudini ("consulta un avvocato", "verifica la copertura", "conosci i tuoi diritti", "informati sulle leggi locali").
-- Onestamente dichiara nel body1 cosa la fonte dice E NULLA DI PIÙ, e segnala in body2/body3 i 1-2 ganci pratici reali (se esistono). Meglio un articolo da 400 parole onesto che 1200 parole di forzatura.
-- Se anche 1-2 paragrafi di nesso reale non esistono → torna al GATE DI RILEVANZA TOPICA (REGOLA #0) e rifiuta con "abort_topical_relevance": true.`;
+    ? `REGOLA EDITORIALE FONDAMENTALE — TEMI FRONTALIERE:
+- Attribuisci la notizia alla fonte. Spiega in body2 soltanto il confronto o l'effetto sui frontalieri che i fatti citati dimostrano; la fonte può riguardare il confine senza parlare direttamente di frontalieri.
+- In body3 aggiungi dati, sviluppi o limiti documentati e pertinenti; non imporre checklist, scenari, procedure o consigli quando non servono o non sono sostenuti.
+- Non collegare a permessi, fiscalità, lavoro, valichi o strumenti del sito se non sono pertinenti al fatto. Non ampliare una notizia con metriche sul lavoro o sui frontalieri per riempire spazio.
+- Se non esiste un nesso concreto, rispetta il GATE DI RILEVANZA TOPICA; non inventare consigli o reportage per crearne uno.`
+    : `REGOLA EDITORIALE FONDAMENTALE — TEMI NAZIONALI SVIZZERI:
+- Attribuisci la notizia alla fonte. Spiega in body2 soltanto il confronto o l'effetto per chi vive o lavora in Svizzera che i fatti citati dimostrano.
+- In body3 aggiungi dati, sviluppi o limiti documentati e pertinenti; non imporre procedure, scenari o consigli quando non servono o non sono sostenuti.
+- Non collegare a fiscalità, lavoro, previdenza, costo della vita o strumenti del sito se non sono pertinenti al fatto. Non ampliare una notizia con metriche sul lavoro o sui frontalieri per riempire spazio.
+- Se non esiste un nesso concreto, rispetta il GATE DI RILEVANZA TOPICA; non inventare consigli o reportage per crearne uno.`;
 
   const body2AntiRepLine = localNewsSource
-    ? `- body2 = CONTESTO: sviluppi, dati, reazioni e ricadute locali riportati dalla fonte. Informazione che NON era nel body1.`
-    : IS_FRONTALIERE
-    ? `- body2 = ANALISI PRATICA: implicazioni per i frontalieri, confronti prima/dopo, scenari concreti. Informazione che NON era nel body1.`
-    : `- body2 = ANALISI PRATICA: implicazioni concrete a livello nazionale/cantonale, confronti prima/dopo, scenari concreti. Informazione che NON era nel body1.`;
+    ? `- body2 = CONTESTO O CONFRONTO: spiega un elemento locale documentato dalla fonte o da un riferimento verificato; niente ricadute ipotetiche.`
+    : `- body2 = SPIEGAZIONE O CONFRONTO: aggiungi una relazione utile e verificabile a partire da fatti citati, senza dedurre cause o effetti non documentati.`;
   const body3AntiRepLine = localNewsSource
-    ? `- body3 = SEGUITO: cosa succede ora secondo la fonte (indagini, prossime tappe, date e luoghi dell'evento, viabilità). NON riassumere body1 o body2.`
-    : IS_FRONTALIERE
-    ? `- body3 = AZIONE: cosa fare concretamente, scadenze, procedura step-by-step, strumenti del sito. NON riassumere body1 o body2.`
-    : `- body3 = AZIONE: cosa fare concretamente in Svizzera, scadenze, procedura step-by-step, strumenti del sito. NON riassumere body1 o body2.`;
+    ? `- body3 = ALTRI FATTI O LIMITI: aggiungi soltanto sviluppi e ricadute documentati; se la fonte non indica un seguito, non inventarlo.`
+    : `- body3 = ULTERIORI PROVE O LIMITI: aggiungi fatti pertinenti della fonte/riferimenti verificati e chiarisci cosa non è documentato; niente azioni o consigli arbitrari.`;
 
   const ctaDefaultLine = localNewsSource
     ? `CTA: nessuna CTA obbligatoria. Chiudi body3 con un link nav: solo se un tool è davvero pertinente alla notizia (es. strade e valichi → border, traffic-history).`
@@ -11536,7 +11632,7 @@ Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico d
   const truncatedDomainFactsBrief = domainFactsBrief.length > MAX_DOMAIN_FACTS_CHARS
     ? domainFactsBrief.slice(0, MAX_DOMAIN_FACTS_CHARS).replace(/\n-[^\n]*$/, '') + '\n[...altri fatti di dominio omessi per brevità]'
     : domainFactsBrief;
-  const domainFactsBlock = isSyntheticSource ? '' : `\nFATTI DI DOMINIO VERIFICATI (materiale di riferimento per contesto/implicazioni pratiche, SEPARATO dalla notizia sopra — non attribuirli alla fonte, usali solo se pertinenti al tema):\n${truncatedDomainFactsBrief}\n`;
+  const domainFactsBlock = isSyntheticSource ? '' : `\nFATTI DI DOMINIO VERIFICATI (riferimento facoltativo, separato dalla notizia sopra — attribuiscili al riferimento, non alla fonte, e usali solo se direttamente pertinenti al fatto; non inserirli per creare un nesso o allungare il testo):\n${truncatedDomainFactsBrief}\n`;
 
   // Il template e' una FUNZIONE dei due blocchi elastici invece di una
   // costante, perche' il pre-flight del budget piu' sotto deve poterlo
@@ -11575,11 +11671,11 @@ ${_isMeta ? '' : topicalRelevanceGate}
 ${!_isMeta && sourceContract ? `\n${sourceContract}\n` : ''}
 ═══ REGOLA #1 — FEDELTÀ ALLA FONTE (PRIORITÀ MASSIMA) ═══
 
-Il tuo articolo è una RISCRITTURA EDITORIALE della fonte, NON un articolo originale. Questo significa:
-- OGNI fatto, cifra, data, legge, aliquota, istituzione e statistica DEVE essere presente nel SOURCE CONTENT sopra.
-- Se la fonte NON specifica un dato: omettilo; niente placeholder (es. "non specificato").
-- Le citazioni dirette devono essere VERBATIM dalla fonte. Se parafrasate, usa il discorso indiretto.
-- NON aggiungere "contesto di background" non verificabile (es. date di trattati, numeri di legge, statistiche) a meno che non sia nella fonte.
+Offri una spiegazione, un confronto o una relazione concreta e verificabile oltre la parafrasi; non forzare cambiamenti o impatti che le prove non mostrano.
+- Usa solo SOURCE CONTENT e riferimenti verificati; attribuisci le notizie alle fonti e separa fatti, calcoli e deduzioni.
+- Per ogni confronto mostra dati, unità e periodi comparabili; non trasformarlo in previsione.
+- Ometti cause, conseguenze, sviluppi o azioni non documentati. Non inventare reportage, interviste, fonti proprie, testimonianze, verifiche umane o citazioni.
+- Ometti i dati assenti o non verificati, senza placeholder. Le citazioni dirette sono verbatim; niente background non provato.
 
 ${_isMeta ? '' : `COME RAGGIUNGERE IL MINIMO DI PAROLE SENZA INVENTARE:
 ${reachMinimumImplicationsLine}
@@ -11592,7 +11688,7 @@ ${_isMeta ? '' : `═══ REGOLE EDITORIALI ═══
 
 STILE: Scrivi come giornalista finanziario italiano reale, NON come AI. Varia lunghezza frasi (da 5 a 30 parole). Alterna paragrafi brevi (1-2 frasi) a paragrafi più lunghi. Usa numeri, date, luoghi reali, istituzioni — MA SOLO se presenti nella fonte. ${styleColorLine}
 MAI usare: "In conclusione", "È importante notare", "In questo contesto", "Vale la pena", "È fondamentale", "Alla luce di", "Ecco cosa sapere", "Vediamo nel dettaglio", "Andiamo con ordine", "Non è un caso che", "Un aspetto cruciale", "Sempre più", "In un contesto di".
-Linguaggio diretto: "conviene" non "potrebbe essere utile".
+Linguaggio diretto e preciso; formula consigli pratici o fiscali soltanto quando sono pertinenti e sostenuti da una fonte o da un riferimento verificato.
 ANTI-AI (CRITICO — il testo DEVE superare l'AI detection):
 - MAI aprire body1 con una frase generica tipo "Il tema dei frontalieri...". Inizia con un FATTO concreto DALLA FONTE (data, numero, nome, luogo).
 - MAI elenchi puntati di >5 elementi (spezzali in paragrafi narrativi)
@@ -11702,15 +11798,15 @@ Genera JSON (no markdown, no code fences):
     "it": {${_isBody ? '' : `
       "title": "${editorialHeadlineGuidance(primaryLocale)}",
       "excerpt": "Sottotitolo con dati concreti DALLA FONTE (max 160 chars)",`}${_isMeta ? '' : `
-${localNewsSource ? `      "body1": "Cronaca locale — inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. Lunghezza secondo MINIMUM LENGTH (escluse TL;DR/Fatti chiave).",
-      "body2": "Contesto: sviluppi, reazioni e dati della fonte. Contenuto DIVERSO da body1. Lunghezza secondo MINIMUM LENGTH.",
-      "body3": "Seguito: cosa succede ora secondo la fonte. NON riassumere body1/body2. Lunghezza secondo MINIMUM LENGTH."` : `      "body1": "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (0-8 coppie termine→valore, tutte presenti nella fonte; ometti assenti e placeholder). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
-      "body2": "Analisi pratica: implicazioni, confronti, scenari. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.",
-      "body3": "Azione: procedura step-by-step, scadenze, strumenti + CTA finale. NON riassumere body1/body2. 300-400 parole."`}${_isBody ? '' : ','}`}${_isBody ? '' : `
+${localNewsSource ? `      "body1": "Cronaca locale — '## In breve' (3-4 bullet ≤80 char) + '## Fatti chiave' (0-8 valori presenti, ometti assenti). Poi lead con fatti verificabili (chi, cosa, dove, quando; cause solo se documentate).",
+      "body2": "Contesto o confronto locale documentato dalla fonte o da un riferimento verificato; niente ricadute ipotetiche.",
+      "body3": "Altri fatti o limiti documentati; non inventare sviluppi o un seguito."` : `      "body1": "'## In breve' (3-4 bullet ≤80 char) + '## Fatti chiave' (0-8 valori presenti, ometti assenti). Poi lead con fatti verificabili (chi, cosa, dove, quando; cause solo se documentate). Min 1 ### sotto-sezione.",
+      "body2": "Spiegazione o confronto utile, tracciabile nei fatti citati e nei periodi; niente cause o effetti non documentati. Min 1 ### sotto-sezione.",
+      "body3": "Ulteriori prove, sviluppi o limiti documentati; niente procedure, consigli o azioni arbitrarie."`}${_isBody ? '' : ','}`}${_isBody ? '' : `
       "faq": [
         {"q": "Domanda frequente 1 basata sui fatti dell'articolo?", "a": "Risposta con dati DALLA FONTE. 50-100 parole."},
         {"q": "Domanda frequente 2?", "a": "Risposta pratica basata sulla fonte."},
-        {"q": "Domanda frequente 3?", "a": "Risposta con procedura o scadenza dalla fonte."}
+        {"q": "Domanda frequente 3?", "a": "Risposta con un dato o un limite documentato."}
       ]`}
     }
   }${_isBody ? '' : `,
@@ -11730,7 +11826,7 @@ REGOLE FINALI:
 ${_isBody ? '' : `- Slug: lowercase, trattini, no accenti, max 50 chars
 ${localNewsSource ? '- hasCalculator: false per cronaca locale, salvo un bisogno concreto documentato dalla fonte.' : '- hasCalculator: true sempre'}
 `}- Apostrofi diritti ('), normative 2026
-${_isBody ? '' : `- FAQ: genera 3-5 coppie domanda/risposta basate sui FATTI ${_isMeta ? "dell'ARTICOLO qui sopra" : 'della fonte'}. Risposte: 50-100 parole, con dati concreti ${_isMeta ? "dall'articolo" : 'dalla fonte'}.`}`;
+${_isBody ? '' : `- FAQ: genera 3-5 coppie domanda/risposta basate sui FATTI ${_isMeta ? "dell'ARTICOLO qui sopra" : 'della fonte'}. Risposte: 50-100 parole con dati e limiti documentati; niente procedure o consigli inventati.`}`;
   };
 
   // The per-field minimum is a third of the total the validator enforces, not
@@ -14955,16 +15051,11 @@ function validate(data, opts = {}) {
     }
   }
   if (!AVAILABLE_IMAGES.includes(data.image)) {
-    // A catalog fallback is allowed only when its provenance record is valid.
-    const matched = findBestFallbackImage(data);
-    if (matched) {
-      console.error(`⚠️  Immagine "${data.image}" non trovata, uso match per keyword: "${matched}"`);
-      data._generatedImagePath = matched;
-      const imageRecord = imageRecordForPath(PROJECT_ROOT, matched);
-      if (imageRecord?.kind === 'wikimedia-commons') data._imageCredit = imageRecord.record;
-      if (imageRecord?.kind === 'licensed-photo') {
-        data._imageCredit = imageCreditRecordFromGeneratedImageRecord(imageRecord.record);
-      }
+    // The model's legacy image field is a compatibility placeholder only.
+    // Catalog paths are ranked here only after a governed image failure, then
+    // accepted only after the current article context passes fresh vision.
+    if (data.image) {
+      console.error(`⚠️  Immagine "${data.image}" non accettata dal contratto legacy; genero una cover governata più avanti.`);
     }
     data.image = PLACES_IMAGES[0]; // compatibility placeholder; path takes priority
   }
@@ -15918,10 +16009,27 @@ function checkTranslatedSlugCollisions(data, { locales = ['it', 'en', 'de', 'fr'
 
 // ── Governed image generation ───────────────────────────────────────────────
 
-const IMAGE_PHASE_BUDGET_MS = Math.max(
+export const IMAGE_PHASE_BUDGET_MS = Math.max(
   30_000,
   Math.min(120_000, Math.floor(resolvePositiveIntEnv(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS, 120_000))),
 );
+
+// Importing producers do not declare a process wall-clock cap; keep their
+// existing per-image window. The CLI installs the run deadline below before
+// starting the generation pipeline, so a late cover attempt cannot open a
+// fresh 120s window after the run budget has already expired.
+let _articleRunDeadlineMs = null;
+
+export function getArticleImageDeadlineAt(now = Date.now()) {
+  const phaseDeadline = now + IMAGE_PHASE_BUDGET_MS;
+  return _articleRunDeadlineMs === null
+    ? phaseDeadline
+    : Math.min(phaseDeadline, _articleRunDeadlineMs);
+}
+
+function articleImageArea() {
+  return IS_CANTON ? CANTON_LINES.title : IS_FRONTALIERE ? 'Ticino e pendolarismo transfrontaliero' : 'Svizzera';
+}
 
 function materializeGovernedArticleImage(result) {
   const record = result?.record;
@@ -15947,17 +16055,25 @@ function materializeGovernedArticleImage(result) {
  * the article scope/subject and persists the record where the corpus publisher
  * can expose it.
  */
-async function generateArticleImage(data) {
+async function generateArticleImage(data, { deadlineAt = getArticleImageDeadlineAt(), area = articleImageArea() } = {}) {
   delete data._imageCredit;
   delete data._generatedImageRecord;
   delete data._editorialImageRecord;
   delete data._imageGenerationFailureReason;
+  delete data._imageGenerationFailureDisposition;
 
-  const imageDeadline = Date.now() + IMAGE_PHASE_BUDGET_MS;
+  const imageDeadline = deadlineAt;
   if (Date.now() >= imageDeadline) {
     console.error('  ⏱️  Budget fase immagini esaurito prima del motore governato.');
     data._imageGenerationFailureReason = 'image-budget-expired';
     console.error(`[cover] article=${data.id} source=engine reason=image-budget-expired`);
+    if (_articleRunDeadlineMs !== null && Date.now() >= _articleRunDeadlineMs) {
+      const unavailable = new Error('Article cover generation budget expired before the governed image engine');
+      unavailable.code = ARTICLE_COVER_FALLBACK_ERROR_CODES.VERIFICATION_UNAVAILABLE;
+      unavailable.retryable = true;
+      unavailable.deadlineExpired = true;
+      throw unavailable;
+    }
     return null;
   }
 
@@ -15966,7 +16082,7 @@ async function generateArticleImage(data) {
     result = await generateGovernedArticleHero({
       root: PROJECT_ROOT,
       data,
-      area: IS_CANTON ? CANTON_LINES.title : IS_FRONTALIERE ? 'Ticino e pendolarismo transfrontaliero' : 'Svizzera',
+      area,
       deadlineAt: imageDeadline,
       onProviderAttempt: ({ provider, attempt }) => {
         console.error(`  🎨 Motore immagini: ${provider}, tentativo ${attempt}`);
@@ -15976,6 +16092,15 @@ async function generateArticleImage(data) {
     const stagingDir = result?.stagingDir || (result?.filePath ? path.dirname(result.filePath) : null);
     if (stagingDir && existsSync(stagingDir)) rmSync(stagingDir, { recursive: true, force: true });
     console.error(`  ⚠️  Motore immagini governato fallito: ${error.message}`);
+    if (error?.sharedProviderUnavailable === true) {
+      const unavailable = new Error(`Article cover verification is blocked by a shared provider outage: ${error.message}`);
+      unavailable.code = ARTICLE_COVER_FALLBACK_ERROR_CODES.VERIFICATION_UNAVAILABLE;
+      unavailable.retryable = true;
+      unavailable.sharedProviderUnavailable = true;
+      unavailable.cause = error;
+      throw unavailable;
+    }
+    data._imageGenerationFailureDisposition = classifyImageRegenerationFailure(error);
     data._imageGenerationFailureReason = String(error.message || 'engine-failed')
       .replace(/\s+/g, ' ').trim().slice(0, 180) || 'engine-failed';
     console.error(`[cover] article=${data.id} source=engine reason=${data._imageGenerationFailureReason}`);
@@ -15989,6 +16114,7 @@ async function generateArticleImage(data) {
   } catch (error) {
     if (materialized?.destination && existsSync(materialized.destination)) unlinkSync(materialized.destination);
     console.error(`  ⚠️  Provenienza immagine governata rifiutata: ${error.message}`);
+    data._imageGenerationFailureDisposition = classifyImageRegenerationFailure(error);
     data._imageGenerationFailureReason = String(error.message || 'provenance-rejected')
       .replace(/\s+/g, ' ').trim().slice(0, 180) || 'provenance-rejected';
     console.error(`[cover] article=${data.id} source=engine reason=${data._imageGenerationFailureReason}`);
@@ -16004,6 +16130,8 @@ async function generateArticleImage(data) {
   }
   data._generatedImageRecord = result.record;
   data._generatedImagePath = result.record.imageUrl;
+  const finalProvenance = imageRecordForPath(PROJECT_ROOT, data._generatedImagePath, { strict: true });
+  applyGeneratedHeroAlt(data, finalProvenance);
   console.error(`  ✅ Copertina governata: ${result.record.imageUrl} (${result.record.provider}/${result.record.model})`);
   return result.record.imageUrl;
 }
@@ -16998,9 +17126,11 @@ const RUN_START_MS = Date.now();
  * il processo a 657 s, con l'articolo IT gia' pronto. Con la scadenza
  * dichiarata il tier non avvia chiamate che non possono finire entro
  * `RUN_START_MS + RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS`: i testi
- * rimasti scendono ai tier successivi o restano a translate-pending. I 30 s,
- * sommati ai 60 s che il workflow lascia fra CREATE_ARTICLE_MAX_WALL_MS e il
- * SIGTERM, restano a immagine e scrittura dei file.
+ * rimasti scendono ai tier successivi o restano a translate-pending. La fase
+ * immagini riusa la scadenza del run e non può aprire un nuovo budget di 120 s
+ * quando il cap è già consumato; il margine residuo e i 60 s che il workflow
+ * lascia fra CREATE_ARTICLE_MAX_WALL_MS e il SIGTERM restano a cover, scrittura
+ * e uscita dichiarata.
  *
  * Installata SOLO nel percorso CLI (`if (invokedDirectly)` in fondo al file),
  * mai all'import: i producer secondari che importano questo modulo per
@@ -17011,6 +17141,7 @@ const RUN_START_MS = Date.now();
 const TRANSLATE_DEADLINE_MARGIN_MS = 30_000;
 
 function installCodexTranslateProcessDeadline() {
+  _articleRunDeadlineMs = RUN_START_MS + RUN_WALL_BUDGET_MS;
   setCodexTranslateProcessDeadline(RUN_START_MS + RUN_WALL_BUDGET_MS - TRANSLATE_DEADLINE_MARGIN_MS);
   // Stessa scadenza per la seconda corsia dei body in attesa, che si arma
   // solo qui: vedi `translatePendingBodyWithCodex`.
@@ -17161,11 +17292,9 @@ const LOCAL_MIN_VIABLE_MS = 11 * 60_000;
 const MIN_VIABLE_ATTEMPT_MS = 2 * 60_000;
 
 /**
- * Turn a fail-closed verifier outage into a typed run-level error. The
- * `unverified` result is deliberately kept at the llmFactCheck boundary so
- * its existing fail-closed contract remains testable; callers must not feed
- * it into the content-remediation loop, which would regenerate the article
- * indefinitely while the verifier roster is unavailable.
+ * Turn a fail-closed missing consensus into a typed run-level error. Only a
+ * structured transient exhaustion of the full roster carries the shared
+ * outage marker; incomplete or unusable verdicts remain section-local.
  */
 function createFactCheckUnavailableError(result, stage) {
   const rawReason = Array.isArray(result?.issues) ? result.issues[0]?.reason : '';
@@ -17175,11 +17304,46 @@ function createFactCheckUnavailableError(result, stage) {
   const error = new Error(`Fact-check unavailable (${stage}): ${reason}`);
   error.factCheckUnavailable = true;
   error.unverified = true;
+  if (result?.sharedProviderUnavailable === true) error.sharedProviderUnavailable = true;
   return error;
 }
 
 function isFactCheckUnavailableError(e) {
   return e?.factCheckUnavailable === true;
+}
+
+function isSharedFactCheckUnavailableError(e) {
+  return isFactCheckUnavailableError(e) && e?.sharedProviderUnavailable === true;
+}
+
+function isSharedTransientFactCheckRosterOutage(errors, { hadNonOutageResult = false } = {}) {
+  return !hadNonOutageResult
+    && Array.isArray(errors)
+    && errors.length > 0
+    && errors.every((error) => (
+      error?.code === 'ALL_MODELS_EXHAUSTED'
+      && error?.transientExhaustion === true
+    ));
+}
+
+function isSharedArticleCoverVerifierUnavailableError(e) {
+  return e?.retryable === true
+    && e?.code === ARTICLE_COVER_FALLBACK_ERROR_CODES.VERIFICATION_UNAVAILABLE
+    && e?.sharedProviderUnavailable === true;
+}
+
+/**
+ * A governed cover failure is already fail-closed: no article was written
+ * without a verified hero. Keep retryable cover-boundary failures at the run
+ * level so a provider/verifier outage is declared as a clean deferral instead
+ * of becoming an undeclared generation error. A deterministic rejection of
+ * every catalog candidate remains candidate quality and is handled by
+ * isQualityRejectError().
+ */
+function isRetryableArticleCoverError(e) {
+  return e?.retryable === true
+    && Object.values(ARTICLE_COVER_FALLBACK_ERROR_CODES).includes(e?.code)
+    && e?.imageQualityFailure !== true;
 }
 
 /**
@@ -17221,6 +17385,11 @@ function isQualityRejectError(e) {
   // registrazione e' stata interrotta a meta' e nessun errore di questo run
   // e' piu' un differimento pulito.
   if (isRegisterLockError(e) || isRegisterLockHeld()) return false;
+  // An available verifier that rejects every catalog image is a permanent
+  // candidate-quality result: skip this headline and try the next candidate.
+  // Provider/verifier outages remain retryable infrastructure errors and do
+  // not set this explicit marker.
+  if (e.imageQualityFailure === true) return true;
   if (e.qualityReject === true || e.topicGateAbort === true) return true;
   // `troppo corto` covers the whole thin-content class (too-short IT body
   // after the retry+expand ladder, too-short char count, too-short locale
@@ -18162,7 +18331,7 @@ async function main() {
       // `status=running` e trasforma una condizione prevista in
       // `no-article-undeclared-exit`.
       finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, note] });
-      // Ragione legittima #8 di nove (corpus): il budget della run e' finito
+      // Ragione legittima #8 di dieci (corpus): il budget della run e' finito
       // prima del fallback evergreen; il giro successivo puo' scegliere fonti
       // e tempi diversi. Non si abbassa nessun gate e non si pubblica slop.
       await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
@@ -18173,10 +18342,10 @@ async function main() {
       // articolo in questo run, dichiarato come le altre ragioni legittime.
       console.error(`CANTON_EVERGREEN_POOL_DISABLED section=${SECTION_NAME} — nessuna news utilizzabile e nessun pool evergreen per le sezioni cantonali: nessun articolo in questo run.`);
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, `No usable news for canton section ${SECTION_NAME} (no evergreen pool by construction)`] });
-      // Ragione legittima #7 di nove — vedi EXIT_NO_ARTICLE_DECLARED. Esiste
+      // Ragione legittima #7 di dieci — vedi EXIT_NO_ARTICLE_DECLARED. Esiste
       // solo nel corpus: lib/exhaustion-disposition.mjs e' un gemello identico
-      // del sito, dove create-article non ha sezioni cantonali, e il suo elenco
-      // resta quello delle sei ragioni comuni ai due repo.
+      // del sito, dove create-article non ha sezioni cantonali. Il codice 4
+      // resta riservato agli esiti locali alla sezione in entrambi i repo.
       await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     } else if (!newsSuccess && !candidateSuccess) {
       console.error('📚 Fase 2: Fallback evergreen — generazione articolo SEO long-tail...\n');
@@ -18288,7 +18457,7 @@ async function main() {
         reportEvergreenPoolSaturation('preflight');
         console.error('\n⚠️  Tutte le keyword evergreen risultano già coperte dal pre-flight. Push prosegue senza nuovo articolo.');
         finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'All evergreen keywords rejected by pre-generation duplicate checks'] });
-        // Ragione legittima #1 di nove: niente da pubblicare. Exit 4 e non 0 —
+        // Ragione legittima #1 di dieci: niente da pubblicare. Exit 4 e non 0 —
         // vedi EXIT_NO_ARTICLE_DECLARED: da qui in poi un exit 0 SENZA articolo
         // e' un percorso che non ha dichiarato niente, ed e' rosso.
         await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
@@ -18379,7 +18548,7 @@ async function main() {
               selectedTopic.keyword,
               isTopicGateAbort ? 'topic-gate' : 'duplicate',
             );
-          } else if (isQualityReject && selectedTopic) {
+          } else if (isQualityReject && e.imageQualityFailure !== true && selectedTopic) {
             // A STRIKE, not a ban — the reasoning above is right that one bad
             // draft is variance, but "never record it" was the wrong conclusion:
             // it left no way to tell variance from a keyword that fails every
@@ -18448,7 +18617,7 @@ async function main() {
             reportEvergreenPoolSaturation('retry');
             console.error('\n⚠️  Nessuna keyword evergreen disponibile. Push prosegue senza nuovo articolo.');
             finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'No evergreen keyword available after duplicate checks'] });
-            // Ragione legittima #2 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
+            // Ragione legittima #2 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
             await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
           }
         }
@@ -18457,7 +18626,7 @@ async function main() {
       // All retry attempts exhausted
       console.error('\n⚠️  Tentativi evergreen esauriti. Push prosegue senza nuovo articolo.');
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'Evergreen retries exhausted'] });
-      // Ragione legittima #3 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
+      // Ragione legittima #3 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
       await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     }
     return;
@@ -18832,7 +19001,7 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
       // MISURATO su 926 run (2026-08-13 → 18): 2510s mediani per una run
       // `failure` contro 254s per una `success`.
       //
-      // NON e' un `success` muto e non e' una delle nove ragioni legittime: si
+      // NON e' un `success` muto e non e' una delle dieci ragioni legittime: si
       // marca l'errore e lo si rilancia, cosi' che il catch di primo livello
       // esca `EXIT_ROSTER_CANNOT_SERVE_PROMPT`. Vedi isPromptFloorIrreducible()
       // per il perche' dichiararla «legittima» ricreerebbe il verde di #313.
@@ -19883,21 +20052,31 @@ async function generateAndValidateArticle(sourceUrl, sourceContext = null) {
 
   // Step 3b: Generate article image through the governed engine.
   console.error('🎨 Generazione immagine articolo:');
-  const imagePath = await generateArticleImage(data);
+  const imageArea = articleImageArea();
+  const imageDeadlineAt = getArticleImageDeadlineAt();
+  const imagePath = await generateArticleImage(data, { area: imageArea, deadlineAt: imageDeadlineAt });
   if (imagePath) {
     data._generatedImagePath = imagePath;
     console.error(`  ✅ Immagine generata: ${imagePath}`);
     console.error(`[cover] article=${data.id} source=engine reason=generated`);
   } else {
-    // A cover-provider failure is recoverable: keep the article and queue the
-    // cover for later regeneration after selecting a governed fallback.
+    // Filename relevance only ranks candidates. The shared verifier checks
+    // each current binary against this article's actual hero context before
+    // the private capability can cross the resolver boundary.
+    const verifiedCatalogImage = await verifyCatalogFallbackCandidates(data, {
+      root: PROJECT_ROOT,
+      findCatalogImages: findBestFallbackImages,
+      area: imageArea,
+      deadlineAt: imageDeadlineAt,
+    });
     resolveArticleCoverFallback(data, {
       root: PROJECT_ROOT,
-      findCatalogImage: findBestFallbackImage,
+      verifiedCatalogImage,
       reason: data._imageGenerationFailureReason || 'engine-failed',
     });
   }
   delete data._imageGenerationFailureReason;
+  delete data._imageGenerationFailureDisposition;
 
   // Step 4: Modify files
   console.error('\n📂 Modifica file sorgente:');
@@ -21062,7 +21241,7 @@ export { buildBodyFile };
 // own en/de/fr slugs (deriveLocaleSlugs()) but, before this fix, never
 // validated them against the registry — the same gap that historically only
 // existed for the IT slug in the AI path.
-export { translateArticle, enforceStrongInternalLinks, findBestFallbackImage, generateArticleImage, resolveArticleCoverFallback, pickAuthorForTopic, getAuthorByUid, sanitizeBoldFormatting, validateAndEnforceCTA, optimizeSeoMetadata, checkTranslatedSlugCollisions, assertNoFabricatedReferences, assertNoFabricatedLaborOfficeCrossLocale, assertGeneratedArticleQuality };
+export { translateArticle, enforceStrongInternalLinks, findBestFallbackImage, findBestFallbackImages, generateArticleImage, resolveArticleCoverFallback, pickAuthorForTopic, getAuthorByUid, sanitizeBoldFormatting, validateAndEnforceCTA, optimizeSeoMetadata, checkTranslatedSlugCollisions, assertNoFabricatedReferences, assertNoFabricatedLaborOfficeCrossLocale, assertGeneratedArticleQuality };
 
 // Redazione redesign (issue #3174 follow-up): the journalist now authors only
 // {title, body}; these derive the title-casing/excerpt/body1-3/cover-image
@@ -21139,8 +21318,8 @@ if (invokedDirectly) {
     if (RUN_REPORT?.status === 'generated') return;
     console.error(
       `\n❌ Uscita non dichiarata: main() e' ritornato con status='${RUN_REPORT?.status ?? '(mai finalizzato)'}'`
-      + ' senza aver prodotto un articolo e senza dichiarare una delle nove ragioni legittime'
-      + ' (vedi EXIT_NO_ARTICLE_DECLARED in lib/exhaustion-disposition.mjs).'
+      + ' senza aver prodotto un articolo e senza dichiarare un esito legittimo'
+      + ' (codice 4 locale alla sezione o codice 5 del pool condiviso).'
       + ' Un exit 0 in questo stato e\' esattamente il verde silenzioso di #313.',
     );
     console.error(`::error::no-article-undeclared-exit: status=${RUN_REPORT?.status ?? 'unfinalized'}`);
@@ -21189,37 +21368,66 @@ if (invokedDirectly) {
   } catch (probeErr) {
     console.error(`  ⚠️  Campione di deferral non registrato: ${probeErr.message}`);
   }
-  // A verifier outage is already fail-closed at the article boundary. Stop
-  // before quota/quality classification so the run declares one clean
-  // deferral instead of rotating through every headline or mislabelling the
-  // outage as bad content.
-  if (isFactCheckUnavailableError(e)) {
+  // Only a structured transient exhaustion of the whole checker roster proves
+  // a shared outage. Stop before quota/quality classification so the sibling
+  // section does not repeat the same unavailable provider cascade.
+  if (isSharedFactCheckUnavailableError(e)) {
     finalizeRunReport('deferred', {
+      exitCode: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
+      exitDisposition: RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
       notes: [...RUN_REPORT.notes, `Deferred (fact-check unavailable; article not published): ${e.message}`],
     });
     console.error(`\n⚠️  Differito: fact-check indisponibile, articolo non pubblicato. Riprovo al prossimo run. ${e.message}`);
-    // Ragione legittima #9 di nove — il verifier non ha prodotto un verdetto:
-    // il run si differisce fail-closed e non pubblica contenuto non verificato.
+    // Il verifier condivide il pool fra le sezioni: non ripetere subito la
+    // stessa cascata e lasciare al prossimo cron la rivalutazione.
+    await exitAfterFlush(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE);
+  }
+  if (isFactCheckUnavailableError(e)) {
+    finalizeRunReport('deferred', {
+      notes: [...RUN_REPORT.notes, `Deferred (fact-check returned no usable consensus; article not published): ${e.message}`],
+    });
+    console.error(`\n⚠️  Differito: il fact-check non ha prodotto un consenso utilizzabile; articolo non pubblicato. ${e.message}`);
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
-  // Transient free-model pool exhaustion (every model in the fallback chain hit
-  // its daily quota / rate limit) is NOT a code bug — free-tier daily limits
-  // reset at 00:00 UTC, so the next scheduled run normally succeeds. Treat it as
-  // a clean deferral (exit 0, no file changes) so the workflow's self-trigger
-  // back-off retries later instead of marking the run failed and raising a
-  // false-positive "Workflow Failure: Generate Blog Article" Bug issue (#1652).
-  // Mirrors the graceful quota-exhausted handling in dedicated-crawler-common.mjs.
+  if (isSharedArticleCoverVerifierUnavailableError(e)) {
+    finalizeRunReport('deferred', {
+      exitCode: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
+      exitDisposition: RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
+      notes: [...RUN_REPORT.notes, `Deferred (article cover verifier unavailable; article not published): ${e.message}`],
+    });
+    console.error(`\n⚠️  Differito: verifier della copertina indisponibile, articolo non pubblicato. Riprovo al prossimo run. ${e.message}`);
+    // Il verifier serve tutte le sezioni: non ripetere la stessa chiamata
+    // sulla sezione gemella mentre il servizio condiviso non risponde.
+    await exitAfterFlush(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE);
+  }
+  // The article-hero verifier is a publication boundary just like the
+  // fact-check: a missing verdict must not publish an unverified image, but it
+  // is also not a candidate-quality rejection. Candidate-specific gaps defer
+  // through the section-local path; provider outages were handled above.
+  if (isRetryableArticleCoverError(e)) {
+    finalizeRunReport('deferred', {
+      notes: [...RUN_REPORT.notes, 'Deferred (article cover unavailable; article not published): ' + e.message],
+    });
+    console.error('\n⚠️  Differito: copertina articolo non verificabile, articolo non pubblicato. Riprovo al prossimo run. ' + e.message);
+    // Ragione legittima #10 di dieci — il verifier della copertina non ha prodotto
+    // un verdetto utilizzabile: il run si differisce senza pubblicare l'articolo.
+    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
+  }
+  // Transient free-model pool exhaustion is not a code bug: free-tier limits
+  // reset and a later cron can retry. Use a distinct declared outcome so the
+  // workflow does not rerun this shared pool for the sibling section or start
+  // another chain link immediately.
   // ISSUE #452 — l'uscita anticipata, e viene per PRIMA di tutte.
   //
   // Non e' prudenza d'ordine: e' che questo ramo descrive una DECISIONE gia'
   // presa a monte — il ciclo di retry ha smesso di macinare e ha marcato
   // l'errore — e i rami sotto la descriverebbero al posto suo con un'altra
   // ragione. Su un errore con quota dominante `isInputCapDeferralVeto` risponde
-  // `false` e `isLegitimateQuotaDeferral` risponde `true`: la run uscirebbe 4,
-  // «ragione legittima dichiarata», e il workflow CHAINEREBBE il successore
-  // contro un muro che il prossimo tentativo trova identico. Il differimento
-  // sarebbe per giunta falso: nessuna finestra di quota alza il cap di un
-  // modello sopra il peso dell'impalcatura del prompt.
+  // `false` e `isLegitimateQuotaDeferral` risponde `true`: prima la run usciva
+  // 4 e il workflow concatenava un successore contro un pool condiviso che il
+  // prossimo tentativo trovava identico. Ora l'esito usa il codice 5. Il
+  // differimento sarebbe per giunta falso: nessuna finestra di quota alza il
+  // cap di un modello sopra il peso dell'impalcatura del prompt.
   //
   // Esce 3 e non un codice nuovo perche' 3 e' gia' esattamente questo esito —
   // «il roster non puo' servire questo prompt» — e il blocco bash dello step
@@ -21316,10 +21524,15 @@ if (invokedDirectly) {
     // sopra il veto — vedi il commento li': dentro questo ramo sarebbe cieco
     // proprio sui pareggi (#924).
     if (isLegitimateQuotaDeferral(e)) {
-      finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`] });
+      finalizeRunReport('deferred', {
+        exitCode: EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE,
+        exitDisposition: RUN_CARD_SHARED_PROVIDER_EXIT_DISPOSITION,
+        notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`],
+      });
       console.error(`\n⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera, ${share.transient}/${share.total} = ${pct}%). Riprovo al prossimo run. ${e.message}`);
-      // Ragione legittima #6 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
-      await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
+      // La quota riguarda il pool condiviso: cedere al prossimo cron senza
+      // ritentare subito sulla sezione gemella.
+      await exitAfterFlush(EXIT_AI_PROVIDER_ROSTER_UNAVAILABLE);
     }
     finalizeRunReport('error', {
       notes: [...RUN_REPORT.notes, `Roster down, not deferrable (transient ${share.transient}/${share.total}): ${e.message}`],
@@ -21346,7 +21559,7 @@ if (invokedDirectly) {
   if (isQualityRejectError(e)) {
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (content quality rejected, slop not published): ${e.message}`] });
     console.error(`\n⚠️  Differito: nessun articolo conforme prodotto in questa run (rigetto qualità — slop non pubblicato). Riprovo al prossimo run. ${e.message}`);
-    // Ragione legittima #5 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
+    // Ragione legittima #5 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   // Duplicate rejection that bubbled all the way up from the direct-URL
@@ -21356,7 +21569,7 @@ if (invokedDirectly) {
     captureDuplicateReasons(e.message);
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (duplicate detected, not published): ${e.message}`] });
     console.error(`\n⚠️  Differito: duplicato rilevato, articolo non pubblicato in questa run. Riprovo al prossimo run. ${e.message}`);
-    // Ragione legittima #4 di nove — vedi EXIT_NO_ARTICLE_DECLARED.
+    // Ragione legittima #4 di dieci — vedi EXIT_NO_ARTICLE_DECLARED.
     await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   finalizeRunReport('error', { notes: [...RUN_REPORT.notes, `Error: ${e.message}`] });

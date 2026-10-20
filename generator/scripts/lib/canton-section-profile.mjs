@@ -960,7 +960,7 @@ export function cantonPromptLines(p) {
 
    ${isEvergreen ? '' : "Se l'articolo è un commento generico attaccato a una notizia SENZA nesso concreto con chi vive o lavora nel cantone, il verdetto è FAIL."}`,
     systemRoleLine: `You write for "Frontaliere Ticino" (frontaliereticino.ch), Canton ${name} section — news that matters to people who live or work in the canton (including cross-border commuters): jobs and wages, cantonal tax and withholding tax, social insurance, permits, cantonal government decisions, housing, mobility and public services. The source may be in German or French: write the article in Italian. Based on the following source, write a blog article.`,
-    reachLine: `- Analizza le IMPLICAZIONI PRATICHE per chi vive o lavora nel Canton ${name} (frontalieri compresi, se la fonte li riguarda)`,
+    reachLine: `- Spiega soltanto relazioni o confronti documentati che riguardano chi vive o lavora nel Canton ${name}; non inventare cambiamenti, conseguenze o consigli quando la fonte non li documenta`,
     topicalRelevanceGate: `═══ REGOLA #0 — GATE DI RILEVANZA TOPICA (BLOCCANTE — PRIMA DI TUTTO) ═══
 
 Prima di scrivere, valuta se la fonte ha un nesso REALE e VERIFICABILE con chi vive o lavora nel Canton ${name}, frontalieri compresi. Esempi di nesso reale:

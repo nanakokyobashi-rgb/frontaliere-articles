@@ -141,17 +141,11 @@ function rawTermPattern(term) {
 // that route is not a translated sentence and must neither trigger the gate nor
 // be rewritten by the deterministic repair. Plain article slugs, passed as a
 // separate projection field, do not start with `/` and remain visible.
-const URL_PATTERN = /(?:https?|evergreen|stats-(?:bfs|astra)):\/\/[^\s)]+|(?<![\p{L}\p{N}@])(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:ch|com|org|net|it|fr|de|io|info)(?:\/[^\s)]*)?|(?<![\p{L}\p{N}@])\/[a-z0-9][^\s)\]>"]*/giu;
+const URL_PATTERN = /(?:https?|evergreen|stats-(?:bfs|astra)):\/\/[^\s)]+|(?<![\p{L}\p{N}@])(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[\p{L}]{2,63}(?:\/[^\s)]*)?|(?<![\p{L}\p{N}@])\/[a-z0-9][^\s)\]>"]*/giu;
 
-function withoutUrls(value) {
-  return String(value || '').replace(URL_PATTERN, ' ');
-}
-
-function containsTerm(value, term) {
-  const text = withoutUrls(normalizeToponymMatchText(value));
-  const pattern = termPattern(term);
-  if (!pattern) return false;
-  return new RegExp(`(?<![\\p{L}\\p{N}])${pattern}(?![\\p{L}\\p{N}])`, 'iu').test(text);
+export function withoutUrls(value) {
+  // Preserve raw offsets so a code span that contains a URL stays one range.
+  return String(value || '').replace(URL_PATTERN, (match) => ' '.repeat(match.length));
 }
 
 function entityForms(entity) {
@@ -278,34 +272,270 @@ const PROTECTED_NAME_PATTERNS = Object.freeze([
   /\bsva\s+(?:aargau|argovie|argovia|tessin|ticino)\b/giu,
 ]);
 
-function protectedRanges(value) {
+const NAME_SPAN_PATTERN = new RegExp(
+  '(?<![\\p{L}\\p{N}])'
+    + '(?:\\p{Lu}[\\p{L}\\p{M}\'’.-]*|[\\p{Lu}\\p{N}]{2,})'
+    + '(?:[ \\t]+(?:\\p{Lu}[\\p{L}\\p{M}\'’.-]*|[\\p{Lu}\\p{N}]{2,}'
+    + '|e|et|&|de|di|del|della|dello|du|des|la|le|von|of|the|for|per)){1,}'
+    + '(?![\\p{L}\\p{N}])',
+  'gu',
+);
+const QUOTED_NAME_PATTERN = /["«“]([^"»”\r\n]+)["»”]/gu;
+const NAME_TOKEN_PATTERN = /[\p{L}\p{N}]+(?:['’.-][\p{L}\p{N}]+)*/gu;
+const NAME_LEADING_STOP_WORDS = new Set([
+  'il', 'lo', 'la', 'i', 'gli', 'le', 'un', 'una', 'uno',
+  'al', 'allo', 'alla', 'ai', 'agli', 'alle', 'dal', 'dallo', 'dalla', 'dai', 'dagli', 'dalle',
+  'del', 'dello', 'della', 'dei', 'degli', 'delle', 'nel', 'nello', 'nella', 'nei', 'negli', 'nelle',
+  'sul', 'sullo', 'sulla', 'sui', 'sugli', 'sulle', 'tra', 'fra',
+  'der', 'die', 'das', 'ein', 'eine', 'einer', 'einem', 'einen',
+  'den', 'dem', 'des', 'eines', 'ins', 'ans', 'aus', 'bei', 'nach', 'seit', 'vom', 'zum', 'zur',
+  'the', 'a', 'an', 'le', 'les', 'un', 'une', 'des',
+  'from', 'to', 'in', 'on', 'at', 'by', 'with',
+  'ad', 'da', 'di', 'con',
+  'au', 'aux', 'du', 'dans', 'en', 'à', 'sur', 'sous', 'chez', 'avec', 'par', 'sans', 'entre', 'vers',
+  'im', 'am', 'auf', 'mit', 'über', 'unter', 'für', 'vor', 'zu',
+]);
+export const OFFICIAL_NAME_MARKERS = new Set([
+  'associazione', 'association', 'azienda', 'banca', 'bancastato', 'bank',
+  'bureau', 'caisse', 'cassa', 'centro', 'centre', 'comune',
+  'dipartimento delle finanze ed economia', 'ente',
+  'fondazione', 'fondation', 'foundation', 'istituto', 'istituzione',
+  'modello redditi',
+  'ospedale', 'spital', 'ufficio', 'università', 'universita',
+  'université', 'universite', 'universität', 'universitaet',
+  'società', 'societa', 'société', 'societe',
+  'canton', 'cantone', 'kanton',
+]);
+const OFFICIAL_NAME_PHRASE_MARKERS = Object.freeze(
+  [...OFFICIAL_NAME_MARKERS].filter((marker) => marker.includes(' ')),
+);
+const OFFICIAL_NAME_PHRASE_PATTERN = new RegExp(
+  "(?<![\\p{L}\\p{N}])(?:"
+  + OFFICIAL_NAME_PHRASE_MARKERS
+    .map((marker) => marker.split(/\s+/u).map(escapeRegExp).join("\\s+"))
+    .join("|")
+  + ")(?:\\s+(?:del|della|delle|dello|di)\\s+\\p{Lu}[\\p{L}\\p{M}'’.-]*)*(?![\\p{L}\\p{N}])",
+  'giu',
+);
+const ADMINISTRATIVE_NAME_PREFIXES = new Set(['canton', 'cantone', 'kanton']);
+const CODE_SPAN_PATTERN = /`+[\s\S]*?`+/gu;
+const MAX_PROTECTED_NAME_SPAN_CHARS = 160;
+const MAX_PROTECTED_NAME_SPAN_TOKENS = 12;
+
+function isLikelyProperNameSpan(value) {
+  if (String(value).length > MAX_PROTECTED_NAME_SPAN_CHARS) return false;
+  const tokens = String(value).match(NAME_TOKEN_PATTERN) || [];
+  while (tokens.length > 0 && NAME_LEADING_STOP_WORDS.has(tokens[0].toLocaleLowerCase('en'))) tokens.shift();
+  if (tokens.length < 2) return false;
+  if (tokens.length > MAX_PROTECTED_NAME_SPAN_TOKENS) return false;
+  const normalizedTokens = tokens.map((token) => token.toLocaleLowerCase('en'));
+  const normalizedName = normalizedTokens.join(' ');
+  const hasMarker = normalizedTokens.some((token) => OFFICIAL_NAME_MARKERS.has(token))
+    || OFFICIAL_NAME_PHRASE_MARKERS.some((marker) => normalizedName.includes(marker));
+  if (!hasMarker) return false;
+  return !(normalizedTokens.length === 2 && ADMINISTRATIVE_NAME_PREFIXES.has(normalizedTokens[0]));
+}
+
+function recognizedOfficialNameRanges(value) {
+  const text = normalizeToponymMatchText(value);
   const ranges = [];
-  for (const pattern of PROTECTED_NAME_PATTERNS) {
+  const add = (start, end) => {
+    if (isLikelyProperNameSpan(text.slice(start, end))) ranges.push([start, end]);
+  };
+
+  NAME_SPAN_PATTERN.lastIndex = 0;
+  for (const match of text.matchAll(NAME_SPAN_PATTERN)) {
+    const start = match.index ?? 0;
+    add(start, start + match[0].length);
+  }
+  OFFICIAL_NAME_PHRASE_PATTERN.lastIndex = 0;
+  for (const match of text.matchAll(OFFICIAL_NAME_PHRASE_PATTERN)) {
+    const start = match.index ?? 0;
+    add(start, start + match[0].length);
+  }
+  QUOTED_NAME_PATTERN.lastIndex = 0;
+  for (const match of text.matchAll(QUOTED_NAME_PATTERN)) {
+    const start = (match.index ?? 0) + match[0].indexOf(match[1]);
+    add(start, start + match[1].length);
+  }
+  return ranges;
+}
+
+function maskRanges(value, ranges) {
+  const text = String(value);
+  let result = '';
+  let cursor = 0;
+  for (const [start, end] of [...ranges].sort((left, right) => left[0] - right[0])) {
+    if (start < cursor) continue;
+    result += text.slice(cursor, start) + ' '.repeat(end - start);
+    cursor = end;
+  }
+  return result + text.slice(cursor);
+}
+
+/** Keep recognized official names opaque when another detector counts words. */
+export function withoutOfficialNameWords(value) {
+  const text = normalizeLocalizedToponymText(value);
+  return maskRanges(text, recognizedOfficialNameRanges(text));
+}
+
+function normalizeNameSearchText(value) {
+  return withoutUrls(normalizeToponymMatchText(value))
+    .normalize('NFKC')
+    .replace(DASH_VARIANT_PATTERN, '-')
+    .replace(/\s+/gu, ' ')
+    .toLocaleLowerCase('en');
+}
+
+function containsTokenBoundedText(text, candidate) {
+  const pattern = new RegExp(
+    `(?<![\\p{L}\\p{N}\\p{M}])${escapeRegExp(candidate)}(?![\\p{L}\\p{N}\\p{M}])`,
+    'u',
+  );
+  return pattern.test(text);
+}
+
+/**
+ * Source-identical proper/official names are opaque to the generic canton
+ * normalizer. A bare `Canton Ticino` in prose remains a canton phrase; a
+ * multiword title such as `Caisse Santé Genève` or `Fondazione Canton Ticino`
+ * is protected only when the same marker-anchored span exists in the Italian
+ * source, with a translated leading article or preposition removed.
+ */
+function sourceIdenticalNameRanges(value, sourceText) {
+  if (!sourceText) return [];
+  const text = normalizeToponymMatchText(value);
+  const sourceSearchText = normalizeNameSearchText(sourceText);
+  const knownToponymRanges = [];
+  TOPONYM_PATTERN.lastIndex = 0;
+  for (const match of withoutUrls(text).matchAll(TOPONYM_PATTERN)) {
+    const start = match.index ?? 0;
+    knownToponymRanges.push([start, start + match[0].length]);
+  }
+  if (knownToponymRanges.length === 0) return [];
+  const ranges = [];
+  const add = (start, end, candidate) => {
+    if (!knownToponymRanges.some(([toponymStart, toponymEnd]) => toponymStart >= start && toponymEnd <= end)) return;
+    if (!isLikelyProperNameSpan(candidate)) return;
+    const candidateSearchText = normalizeNameSearchText(candidate);
+    if (!candidateSearchText || !containsTokenBoundedText(sourceSearchText, candidateSearchText)) return;
+    ranges.push([start, end]);
+  };
+  const addMarkerAnchoredSubspans = (start, end) => {
+    const candidate = text.slice(start, end);
+    NAME_TOKEN_PATTERN.lastIndex = 0;
+    for (const token of candidate.matchAll(NAME_TOKEN_PATTERN)) {
+      if (!OFFICIAL_NAME_MARKERS.has(token[0].toLocaleLowerCase('en'))) continue;
+      const markerStart = start + (token.index ?? 0);
+      add(markerStart, end, text.slice(markerStart, end));
+    }
+  };
+
+  NAME_SPAN_PATTERN.lastIndex = 0;
+  for (const match of text.matchAll(NAME_SPAN_PATTERN)) {
+    const start = match.index ?? 0;
+    add(start, start + match[0].length, match[0]);
+    addMarkerAnchoredSubspans(start, start + match[0].length);
+  }
+  OFFICIAL_NAME_PHRASE_PATTERN.lastIndex = 0;
+  for (const match of text.matchAll(OFFICIAL_NAME_PHRASE_PATTERN)) {
+    const start = match.index ?? 0;
+    add(start, start + match[0].length, match[0]);
+  }
+  QUOTED_NAME_PATTERN.lastIndex = 0;
+  for (const match of text.matchAll(QUOTED_NAME_PATTERN)) {
+    const start = (match.index ?? 0) + match[0].indexOf(match[1]);
+    add(start, start + match[1].length, match[1]);
+    addMarkerAnchoredSubspans(start, start + match[1].length);
+  }
+  return ranges;
+}
+
+const RAW_ENTITY_SEQUENCE_AT_START_PATTERN = /^&(?:amp;)*(?:#(?:x[0-9a-f]+|[0-9]+);|[a-z][a-z0-9]*;)/iu;
+const COMBINING_MARK_PATTERN = /^\p{M}$/u;
+
+/** Map normalized ranges back to the raw string used by the replacement writer. */
+function mapNormalizedRangesToRaw(value, ranges) {
+  const rawText = String(value);
+  const normalizedText = normalizeToponymMatchText(rawText);
+  if (rawText === normalizedText || ranges.length === 0) return ranges;
+
+  const units = [];
+  let rawOffset = 0;
+  let normalizedOffset = 0;
+  while (rawOffset < rawText.length) {
+    const entity = rawText.slice(rawOffset).match(RAW_ENTITY_SEQUENCE_AT_START_PATTERN);
+    let rawEnd = entity ? rawOffset + entity[0].length : rawOffset + (rawText.codePointAt(rawOffset) > 0xffff ? 2 : 1);
+    while (rawEnd < rawText.length) {
+      const codePoint = rawText.codePointAt(rawEnd);
+      const character = String.fromCodePoint(codePoint);
+      if (!COMBINING_MARK_PATTERN.test(character)) break;
+      rawEnd += codePoint > 0xffff ? 2 : 1;
+    }
+    const normalizedUnit = normalizeToponymMatchText(rawText.slice(rawOffset, rawEnd));
+    units.push({
+      rawStart: rawOffset,
+      rawEnd,
+      normalizedStart: normalizedOffset,
+      normalizedEnd: normalizedOffset + normalizedUnit.length,
+    });
+    normalizedOffset += normalizedUnit.length;
+    rawOffset = rawEnd;
+  }
+
+  const rawOffsetFor = (offset, endBoundary) => {
+    if (offset <= 0) return 0;
+    for (const unit of units) {
+      if (offset < unit.normalizedStart) return unit.rawStart;
+      if (offset <= unit.normalizedEnd) {
+        if (offset === unit.normalizedEnd) return unit.rawEnd;
+        return endBoundary ? unit.rawEnd : unit.rawStart;
+      }
+    }
+    return rawText.length;
+  };
+
+  return ranges.map(([start, end]) => [
+    rawOffsetFor(start, false),
+    rawOffsetFor(end, true),
+  ]);
+}
+
+function protectedRanges(value, sourceText = '') {
+  const ranges = [];
+  const rawText = String(value);
+  const text = normalizeToponymMatchText(rawText);
+  for (const pattern of [...PROTECTED_NAME_PATTERNS, CODE_SPAN_PATTERN]) {
     pattern.lastIndex = 0;
-    for (const match of String(value).matchAll(pattern)) {
+    for (const match of text.matchAll(pattern)) {
       ranges.push([match.index ?? 0, (match.index ?? 0) + match[0].length]);
     }
   }
-  return ranges;
+  ranges.push(...sourceIdenticalNameRanges(text, sourceText));
+  return mapNormalizedRangesToRaw(rawText, ranges);
 }
 
 function replaceOutsideUrls(value, pattern, replacer) {
   const text = String(value || '');
   let result = '';
   let cursor = 0;
+  const replaceSegment = (segment, segmentStart) => segment.replace(pattern, (match, offset) => (
+    replacer(match, segmentStart + Number(offset), text)
+  ));
   URL_PATTERN.lastIndex = 0;
   for (const match of text.matchAll(URL_PATTERN)) {
     const offset = match.index ?? cursor;
-    result += text.slice(cursor, offset).replace(pattern, replacer);
+    result += replaceSegment(text.slice(cursor, offset), cursor);
     result += match[0];
     cursor = offset + match[0].length;
   }
-  return result + text.slice(cursor).replace(pattern, replacer);
+  return result + replaceSegment(text.slice(cursor), cursor);
 }
 
-function localizedToponymHits(value, { protectNames = false, slug = false } = {}) {
-  const text = withoutUrls(normalizeToponymMatchText(value));
-  const protectedNameRanges = protectNames ? protectedRanges(text) : [];
+function localizedToponymHits(value, { protectNames = false, sourceText = '', slug = false } = {}) {
+  const normalizedText = normalizeToponymMatchText(value);
+  const text = withoutUrls(normalizedText);
+  const protectedNameRanges = protectNames ? protectedRanges(normalizedText, sourceText) : [];
   const hits = [];
   const pattern = slug ? TOPONYM_SLUG_PATTERN : TOPONYM_PATTERN;
   for (const match of text.matchAll(pattern)) {
@@ -329,7 +559,7 @@ export function findLocalizedToponymMismatches({ sourceText = '', targetText = '
   if (!LOCALE_SET.has(locale)) return [];
   const sourceEntities = new Set(localizedToponymHits(sourceText).map((hit) => hit.entity.code));
   if (sourceEntities.size === 0) return [];
-  const targetHits = localizedToponymHits(targetText, { protectNames: true, slug });
+  const targetHits = localizedToponymHits(targetText, { protectNames: true, sourceText, slug });
   const issues = [];
   for (const entity of LOCALIZED_TOPONYMS) {
     if (!sourceEntities.has(entity.code)) continue;
@@ -393,24 +623,39 @@ export function replaceLocalizedToponymMismatches({ sourceText = '', targetText 
   // the matched exonym span is replaced.
   let replacements = 0;
   const replacementCounts = new Map();
-  for (const issue of [...issues].sort((left, right) => right.form.length - left.form.length)) {
-    const pattern = new RegExp(
-      `(?<![\\p{L}\\p{N}])${slug ? slugTermPattern(issue.form) : rawTermPattern(issue.form)}(?![\\p{L}\\p{N}])`,
-      'giu',
-    );
-    let issueReplacements = 0;
-    text = replaceOutsideUrls(text, pattern, (match, offset, segment) => {
-      const start = Number(offset);
-      const end = start + match.length;
-      if (protectedRanges(segment).some(([rangeStart, rangeEnd]) => start >= rangeStart && end <= rangeEnd)) {
-        return match;
-      }
-      replacements += 1;
-      issueReplacements += 1;
-      return slug ? localizedSlugForm(issue.expected) : issue.expected;
+  const issuePatterns = [...issues]
+    .sort((left, right) => right.form.length - left.form.length)
+    .map((issue) => {
+      const termPattern = slug ? slugTermPattern(issue.form) : rawTermPattern(issue.form);
+      return {
+        issue,
+        termPattern,
+        matcher: new RegExp(`^(?:${termPattern})$`, 'iu'),
+      };
     });
-    replacementCounts.set(issueKey(issue), issueReplacements);
-  }
+  for (const { issue } of issuePatterns) replacementCounts.set(issueKey(issue), 0);
+  const pattern = new RegExp(
+    `(?<![\\p{L}\\p{N}])(?:${issuePatterns.map(({ termPattern }) => termPattern).join('|')})(?![\\p{L}\\p{N}])`,
+    'giu',
+  );
+  // These are raw coordinates on the complete target. URL splitting below
+  // must not recalculate them on partial segments.
+  const protectedNameRanges = protectedRanges(text, sourceText);
+  text = replaceOutsideUrls(text, pattern, (match, offset) => {
+    const matchedIssue = issuePatterns.find(({ matcher }) => matcher.test(match));
+    if (!matchedIssue) return match;
+    const start = Number(offset);
+    const end = start + match.length;
+    if (protectedNameRanges.some(([rangeStart, rangeEnd]) => start >= rangeStart && end <= rangeEnd)) {
+      return match;
+    }
+    replacements += 1;
+    replacementCounts.set(
+      issueKey(matchedIssue.issue),
+      (replacementCounts.get(issueKey(matchedIssue.issue)) || 0) + 1,
+    );
+    return slug ? localizedSlugForm(matchedIssue.issue.expected) : matchedIssue.issue.expected;
+  });
   return { text, replacements, replacementCounts, issues };
 }
 

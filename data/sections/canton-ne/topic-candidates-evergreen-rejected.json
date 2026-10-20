@@ -4,46 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-fed-l-ia-est-le-changement-le-plus-determinant-pour-l-economie.html": {
-      "section": "canton-ne",
-      "ts": 1792197092204
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-loi-sur-la-poste-face-a-des-critiques-lors-de-la-consultation.html": {
-      "section": "canton-ne",
-      "ts": 1792197242008
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-progression-du-parc-automobile-en-suisse-a-fin-septembre.html": {
-      "section": "canton-ne",
-      "ts": 1792294783703
-    },
-    "canton-ne::https://www.rts.ch/info/regions/neuchatel/2026/article/affichage-a-la-chaux-de-fonds-brigitte-leitenberg-porte-plainte-contre-les-jeunes-pop-29383293.html": {
-      "section": "canton-ne",
-      "ts": 1792294796537
-    },
-    "canton-ne::https://www.canalalpha.ch/play/meta/lieux/canton-de-neuchatel": {
-      "section": "canton-ne",
-      "ts": 1792294810922
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-nvidia-toute-entreprise-finira-par-devenir-une-societe-d-ia.html": {
-      "section": "canton-ne",
-      "ts": 1792294822901
-    },
-    "canton-ne::https://www.estrepublicain.fr/economie/2026/10/18/frontaliers-ca-tangue-pour-les-marques-horlogeres-du-groupe-de-luxe-lvmh": {
-      "section": "canton-ne",
-      "ts": 1792306308843
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-alcon-obtient-l-approbation-de-la-fda-pour-un-collyre.html": {
-      "section": "canton-ne",
-      "ts": 1792307730775
-    },
-    "canton-ne::https://www.letemps.ch/sciences/la-mission-suisse-solarstratos-obtient-le-record-mondial-du-plus-haut-vol-solaire-et-electrique": {
-      "section": "canton-ne",
-      "ts": 1792307745489
-    },
-    "canton-ne::https://www.rts.ch/play/tv/emission/couleurs-locales?id=470618": {
-      "section": "canton-ne",
-      "ts": 1792307759847
-    },
     "canton-ne::https://www.ne.ch/communiques-de-presse/pour-sa-30eme-edition-le-prix-interculturel-salut-letranger-recompense-le-centre-portugais-de-neuchatel-et-madame-carmen-diaz-pumarejo": {
       "section": "canton-ne",
       "ts": 1792323251760
@@ -55,6 +15,74 @@
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-des-drones-pour-observer-les-chauffards-st-gall-suit-la-thurgovie.html": {
       "section": "canton-ne",
       "ts": 1792326329040
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-tx-group-goldbach-cede-a-nouveau-une-filiale-allemande.html": {
+      "section": "canton-ne",
+      "ts": 1792344813377
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261018-il-y-a-50-ans-mcdonald-s-ouvrait-sa-premiere-succursale-suisse.html": {
+      "section": "canton-ne",
+      "ts": 1792344830542
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261018-ukraine-nouvelles-frappes-croisees-sur-le-systeme-energetique.html": {
+      "section": "canton-ne",
+      "ts": 1792344849379
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261017-l-exemption-des-sanctions-contre-la-russie-par-trump-est-historique.html": {
+      "section": "canton-ne",
+      "ts": 1792344861609
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261017-le-president-americain-donald-trump-encore-invite-au-wef-en-2027.html": {
+      "section": "canton-ne",
+      "ts": 1792344878223
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-zelensky-reclame-a-l-ue-70-milliards-d-euros-en-plus-en-2027.html": {
+      "section": "canton-ne",
+      "ts": 1792348925479
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261017-le-cabriolet-volant-de-tesla-n-est-pas-un-aeronef-affirme-la-faa.html": {
+      "section": "canton-ne",
+      "ts": 1792349103604
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-trump-limoge-sa-porte-parole-apres-seulement-une-semaine.html": {
+      "section": "canton-ne",
+      "ts": 1792349110392
+    },
+    "canton-ne::https://www.ne.ch/communiques-de-presse/les-benefices-de-la-loterie-romande-ont-permis-de-distribuer-plus-de-155-millions-de-francs-dans-le-canton-de-neuchatel": {
+      "section": "canton-ne",
+      "ts": 1792411802436
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261019-plr-et-gauche-montent-au-creneau-contre-l-initiative-du-centre.html": {
+      "section": "canton-ne",
+      "ts": 1792421393122
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261019-alstom-decroche-une-commande-de-800-millions-d-euros-au-vietnam.html": {
+      "section": "canton-ne",
+      "ts": 1792421408571
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261019-lindt-spruengli-remercie-son-patron-dieter-weisskopf-rempile.html": {
+      "section": "canton-ne",
+      "ts": 1792421420897
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261019-iran-un-petrolier-percute-une-mine-et-prend-feu-a-ormuz.html": {
+      "section": "canton-ne",
+      "ts": 1792421434213
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261019-elon-musk-veut-donner-une-action-spacex-a-chaque-enfant-en-amerique.html": {
+      "section": "canton-ne",
+      "ts": 1792421461969
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261019-convergence-entre-jeux-video-et-d-argent-deletere-pour-les-mineurs.html": {
+      "section": "canton-ne",
+      "ts": 1792426463488
+    },
+    "canton-ne::https://www.estrepublicain.fr/economie/2026/10/18/frontaliers-ca-tangue-pour-les-marques-horlogeres-du-groupe-de-luxe-lvmh": {
+      "section": "canton-ne",
+      "ts": 1792483280690
+    },
+    "canton-ne::https://france3-regions.franceinfo.fr/bourgogne-franche-comte/doubs/une-idee-de-taxe-sur-l-embauche-des-etrangers-en-suisse-pourrait-elle-menacer-l-emploi-des-frontaliers-francais-3435600.html": {
+      "section": "canton-ne",
+      "ts": 1792483582220
     }
   }
 }

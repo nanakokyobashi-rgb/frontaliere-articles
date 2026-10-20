@@ -53,6 +53,7 @@
  * confermato o se il verify fallisce.
  */
 import '../host/cantonSectionsBootstrap.mjs';
+import { createHash } from 'node:crypto';
 import fs, { realpathSync } from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -60,6 +61,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 
+import { IMAGE_FETCH_TIMEOUT_MS, MAX_DECLARED_IMAGE_BYTES } from './lib/declared-image-fetch.mjs';
 import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
 import { ARTICLES_PAGE_SIZE } from '../engine/shared/articleArchiveConfig.mjs';
 import { CANTON_ARCHIVE_ALL_SLUG } from '../engine/shared/cantonSectionCopy.mjs';
@@ -83,6 +85,13 @@ import {
   pageManifestKey,
   pageManifestUrl,
 } from './lib/section-page-manifest.mjs';
+import {
+  acquireImageNamespaceLeases,
+  imageNamespaceForKey,
+  releaseImageNamespaceLeases,
+  serializeImageLeaseContext,
+  IMAGE_LEASE_CONTEXT_ENV,
+} from './lib/r2-image-namespace-lock.mjs';
 import { purgeChunks } from './publish-section-edge.mjs';
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -98,10 +107,28 @@ export const RELEASE_READY_MAX_WAIT_MS = 120_000;
 export const RELEASE_READY_RETRY_DELAY_MS = 10_000;
 /** Inventario delle pagine: si aggiorna solo dopo una pubblicazione verificata. */
 export const PAGE_MANIFEST_CACHE_CONTROL = 'public,max-age=60';
+/** Il confronto riusa i limiti del fetch immagini del render. */
+const MAX_HELD_ASSET_BYTES = MAX_DECLARED_IMAGE_BYTES;
+const HELD_ASSET_PROBE_TIMEOUT_MS = IMAGE_FETCH_TIMEOUT_MS;
+const HELD_ASSET_PROBE_CONCURRENCY = 4;
 /** Ordine di upload: la landing per ultima, perche' linka tutto il resto. */
 export const UPLOAD_ORDER = Object.freeze(['article', 'archive', 'hub', 'landing']);
 const PUBLISH_API_WORKFLOW = '.github/workflows/publish-api.yml';
 const FULL_GIT_SHA_RE = /^[a-f0-9]{40}$/;
+const CANONICAL_PAGE_PATH_RE = /^\/[a-z0-9/-]+\/$/u;
+
+function parseCanonicalPagePaths(raw, option) {
+  let pages;
+  try {
+    pages = JSON.parse(raw);
+  } catch (error) {
+    throw new Error(`${option} deve essere un array JSON di path: ${error.message}`);
+  }
+  if (!Array.isArray(pages) || pages.some((page) => typeof page !== 'string' || !CANONICAL_PAGE_PATH_RE.test(page) || page.includes('//'))) {
+    throw new Error(`${option} deve contenere solo path canonici assoluti`);
+  }
+  return pages;
+}
 
 function publishedMainHead() {
   const repository = process.env.GITHUB_REPOSITORY;
@@ -131,7 +158,15 @@ async function assertExpectedMainHead(expected, readMainHead = publishedMainHead
 }
 
 export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activeCorpusCoreMap() } = {}) {
-  const out = { ids: [], bootstrap: false, publish: false, dryRun: false, removeStaleCantonRssFeeds: false };
+  const out = {
+    ids: [],
+    missingPages: [],
+    knownMissingPages: [],
+    bootstrap: false,
+    publish: false,
+    dryRun: false,
+    removeStaleCantonRssFeeds: false,
+  };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     const value = () => {
@@ -151,6 +186,10 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
       }
       if (!Array.isArray(ids) || ids.some((id) => typeof id !== 'string' || !id)) throw new Error('--ids deve essere un array JSON di id non vuoti');
       out.ids.push(...ids);
+    } else if (a === '--missing-pages' || a === '--known-missing-pages') {
+      const pages = parseCanonicalPagePaths(value(), a);
+      if (a === '--missing-pages') out.missingPages.push(...pages);
+      else out.knownMissingPages.push(...pages);
     } else if (a === '--bootstrap') out.bootstrap = true;
     else if (a === '--remove-stale-canton-rss-feeds') out.removeStaleCantonRssFeeds = true;
     else if (a === '--publish') out.publish = true;
@@ -160,11 +199,23 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
     else throw new Error(`argomento sconosciuto: ${a}`);
   }
   out.ids = [...new Set(out.ids)];
+  out.missingPages = [...new Set(out.missingPages)];
+  out.knownMissingPages = [...new Set(out.knownMissingPages)];
   for (const flag of ['section', 'out', 'summary']) if (!out[flag]) throw new Error(`manca --${flag}`);
   if (out.publish && out.dryRun) throw new Error('--publish e --dry-run sono alternativi');
   if (out.bootstrap && out.ids.length) throw new Error('--bootstrap rende tutti gli articoli della sezione: non si combina con --id/--ids');
   assertPublishableSection(out.section, { all, active });
   return out;
+}
+
+export function stagedReleasePageSets(pages, publishedLivePages, confirmedUploadPagePaths = [], confirmedKnownMissingPagePaths = confirmedUploadPagePaths) {
+  const confirmedUpload = new Set(confirmedUploadPagePaths);
+  const confirmedKnownMissing = new Set(confirmedKnownMissingPagePaths);
+  const publishedPageKeys = new Set(publishedLivePages.map((page) => page.edgeKey));
+  return {
+    pagesForPublish: pages.filter((page) => !publishedPageKeys.has(page.edgeKey) || confirmedUpload.has(page.canonicalPath)),
+    immutableLivePages: publishedLivePages.filter((page) => !confirmedKnownMissing.has(page.canonicalPath)),
+  };
 }
 
 export function missingRenderedArticleIds(requestedIds, entries) {
@@ -305,7 +356,8 @@ export function cantonRssPublishPlan(section, {
       // A normal live publish must enter publishCantonRssFeeds even when the
       // first readiness probe is stale. That phase retries for a bounded
       // window and fails before HTML upload if API/edge never become verifiable.
-      // Only a safe bootstrap with a previous page manifest may defer this phase.
+      // Only a safe staged live release with a previous page manifest may defer
+      // this phase to the workflow_run replay.
       cantonRssFeeds = cleanupRssRequested || effectiveStatus !== 'live'
         ? []
         : cantonRssFeedEntries(section);
@@ -831,8 +883,8 @@ function writePage(distDir, rel, html) {
   fs.writeFileSync(abs, clean, 'utf-8');
 }
 
-function run(cmd, args) {
-  const res = spawnSync(cmd, args, { cwd: ROOT_DIR, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+function run(cmd, args, { env = process.env } = {}) {
+  const res = spawnSync(cmd, args, { cwd: ROOT_DIR, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env });
   process.stdout.write(res.stdout ?? '');
   process.stderr.write(res.stderr ?? '');
   return { code: res.status ?? 1, stdout: res.stdout ?? '' };
@@ -844,31 +896,101 @@ export function publishPageManifest({ manifest, distDir, runImpl = run }) {
   try {
     fs.writeFileSync(local, `${JSON.stringify(manifest, null, 2)}\n`, 'utf-8');
     const result = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', local, pageManifestKey(manifest.section), PAGE_MANIFEST_CACHE_CONTROL]);
-    return result.stdout.includes('✅ uploaded');
+    return result.code === 0 && result.stdout.includes('✅ uploaded');
   } finally {
     fs.rmSync(local, { force: true });
   }
 }
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+function publishAbortError() {
+  const error = new Error('pubblicazione interrotta da segnale');
+  error.name = 'AbortError';
+  return error;
+}
+
+const sleep = (ms, signal) => new Promise((resolve, reject) => {
+  const onAbort = () => {
+    clearTimeout(timer);
+    signal.removeEventListener('abort', onAbort);
+    reject(publishAbortError());
+  };
+  const timer = setTimeout(() => {
+    signal?.removeEventListener('abort', onAbort);
+    resolve();
+  }, ms);
+  if (signal) {
+    signal.addEventListener('abort', onAbort, { once: true });
+    if (signal.aborted) onAbort();
+  }
+});
+
+/** Lascia terminare l'operazione R2 corrente, poi osserva i segnali prima della successiva. */
+async function publishSignalBoundary(signal) {
+  if (!signal) return;
+  await new Promise((resolve) => setImmediate(resolve));
+  if (signal.aborted) throw publishAbortError();
+}
+
+async function waitForPublishRetry(ms, sleepImpl, signal) {
+  if (!signal) return sleepImpl(ms);
+  await publishSignalBoundary(signal);
+  let onAbort;
+  const aborted = new Promise((_, reject) => {
+    onAbort = () => reject(publishAbortError());
+    signal.addEventListener('abort', onAbort, { once: true });
+    if (signal.aborted) onAbort();
+  });
+  try {
+    await Promise.race([
+      Promise.resolve().then(() => sleepImpl(ms, signal)),
+      aborted,
+    ]);
+  } finally {
+    signal.removeEventListener('abort', onAbort);
+  }
+  await publishSignalBoundary(signal);
+}
+
+/** Interrompe anche una sonda iniettata che non onora il signal da sola. */
+async function runWithPublishSignal(operation, signal) {
+  if (!signal) return operation();
+  await publishSignalBoundary(signal);
+  let onAbort;
+  const aborted = new Promise((_, reject) => {
+    onAbort = () => reject(publishAbortError());
+    signal.addEventListener('abort', onAbort, { once: true });
+    if (signal.aborted) onAbort();
+  });
+  try {
+    return await Promise.race([
+      Promise.resolve().then(operation),
+      aborted,
+    ]);
+  } finally {
+    signal.removeEventListener('abort', onAbort);
+  }
+}
 
 /** GET con cache-buster, ritentata: una pagina appena caricata puo' metterci qualche secondo. */
-async function probe(url, { attempts = 6, delayMs = 4000, want = () => true } = {}) {
+async function probe(url, { attempts = 6, delayMs = 4000, want = () => true, signal } = {}) {
   let last = 'nessuna risposta';
   for (let i = 1; i <= attempts; i++) {
     try {
+      await publishSignalBoundary(signal);
       const res = await fetchWithRefTimeout(`${url}${url.includes('?') ? '&' : '?'}_spcb=${Date.now()}.${i}`, {
         redirect: 'manual',
         headers: { 'user-agent': 'frontaliere-corpus-publisher/1 (+https://frontaliereticino.ch)' },
+        signal,
       }, 20000);
       const body = res.status === 200 ? await res.text() : '';
       if (res.status !== 200) releaseFetchWithRefTimeout(res);
       if (res.status === 200 && want(body)) return { ok: true, status: 200, body };
       last = res.status === 200 ? 'risposta 200 senza il contenuto atteso' : `HTTP ${res.status}`;
     } catch (error) {
+      if (signal?.aborted) throw error;
       last = error?.message ?? String(error);
     }
-    if (i < attempts) await sleep(delayMs);
+    if (i < attempts) await waitForPublishRetry(delayMs, sleep, signal);
   }
   return { ok: false, status: last };
 }
@@ -892,10 +1014,11 @@ function cacheBustedUrl(url, parameter, suffix = '') {
   return `${url}${separator}${parameter}=${Date.now()}${suffix ? `.${suffix}` : ''}`;
 }
 
-async function fetchJsonAt(url, fetchImpl) {
+async function fetchJsonAt(url, fetchImpl, signal) {
   try {
     const res = await fetchWithRefTimeout(cacheBustedUrl(url, '_sppr'), {
       headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
+      signal,
     }, 20000, fetchImpl);
     if (!res.ok) {
       releaseFetchWithRefTimeout(res);
@@ -1118,9 +1241,15 @@ export async function resolvePublishedReleaseCommit(
     throw new Error(`commit API esplicito non valido: ${override}`);
   }
   const apiCommit = await apiReleaseCommitImpl({ fetchImpl });
-  if (override && apiCommit !== override) {
+  if (override && apiCommit !== override && apiCommit !== publisherCommit) {
     throw new Error(`commit API osservato ${apiCommit ?? 'assente'} diverso da quello propagato ${override}`);
   }
+  // The reconciler can snapshot an older API release immediately before the
+  // API publisher flips the exact publisher HEAD. That transition is safe:
+  // the source checkout and the observed API release now agree, and the
+  // readiness gate below still verifies the served edge before any cleanup.
+  // Keep rejecting every other override mismatch, because it could pair the
+  // page render with an unrelated API surface.
   if (typeof apiCommit !== 'string' || !apiCommit.trim()) {
     throw new Error('commit API pubblicato assente o non verificabile; pubblicazione interrotta');
   }
@@ -1190,13 +1319,13 @@ export async function resolvePublishedReleaseCommit(
  * commit selezionato. Se uno e' ancora vecchio, il run fallisce senza
  * cancellare; il retry del workflow ripete la prova dopo il deploy API.
  */
-export async function publishedReleaseReady(expectedCommit, { fetchImpl = fetch } = {}) {
+export async function publishedReleaseReady(expectedCommit, { fetchImpl = fetch, signal } = {}) {
   if (!expectedCommit) return { ok: false, reason: 'commit corrente non disponibile' };
   const [manifest, catalog, slugs, edgeRegistry] = await Promise.all([
-    fetchJsonAt(`${API_BASE}/manifest.json`, fetchImpl),
-    fetchJsonAt(`${API_BASE}/sections.json`, fetchImpl),
-    fetchJsonAt(`${API_BASE}/slugs.json`, fetchImpl),
-    fetchJsonAt(`${CDN_BASE}/${EDGE_SECTION_REGISTRY_FILE}`, fetchImpl),
+    fetchJsonAt(`${API_BASE}/manifest.json`, fetchImpl, signal),
+    fetchJsonAt(`${API_BASE}/sections.json`, fetchImpl, signal),
+    fetchJsonAt(`${API_BASE}/slugs.json`, fetchImpl, signal),
+    fetchJsonAt(`${CDN_BASE}/${EDGE_SECTION_REGISTRY_FILE}`, fetchImpl, signal),
   ]);
   if (!manifest || manifest.commit !== expectedCommit) {
     return { ok: false, reason: `manifest API non ancora sul commit ${expectedCommit}` };
@@ -1238,6 +1367,34 @@ function isNotFoundStatus(status) {
   return status === 404 || status === 'HTTP 404';
 }
 
+export async function confirmCantonPageMissingWithSignal(
+  url,
+  { probeImpl = probe, sleepImpl = sleep, attempts = 3, delayMs = 1000, signal } = {},
+) {
+  const statuses = [];
+  for (let attempt = 0; attempt < attempts; attempt++) {
+    let observed;
+    try {
+      observed = await runWithPublishSignal(
+        () => probeImpl(url, { attempts: 1, delayMs: 0, signal }),
+        signal,
+      );
+    } catch (error) {
+      if (signal?.aborted) throw error;
+      observed = { status: error?.message ?? String(error) };
+    }
+    await publishSignalBoundary(signal);
+    statuses.push(observed?.status ?? 'nessuna risposta');
+    if (!isNotFoundStatus(observed?.status)) return { confirmed: false, statuses };
+    if (attempt + 1 < attempts) await waitForPublishRetry(delayMs, sleepImpl, signal);
+  }
+  return { confirmed: statuses.length === attempts, statuses };
+}
+
+export async function confirmCantonPageMissing(url, options = {}) {
+  return confirmCantonPageMissingWithSignal(url, options);
+}
+
 /** Snapshot del feed attualmente servito, usato per ripristinare un set parziale. */
 async function snapshotCantonRssFeed(url, { probeImpl = probe } = {}) {
   return probeImpl(url, { attempts: 3, delayMs: 1000, want: () => true });
@@ -1270,6 +1427,250 @@ async function snapshotCantonPages(pages, { probeImpl = probe } = {}) {
   return snapshots;
 }
 
+/** Indica se una pagina gia' live contiene una chiave immagine candidata all'upload. */
+function cantonPageReferencesAsset(body, key) {
+  const escapedKey = escapeRegex(key);
+  const boundary = '(?![\\w./%-])';
+  return new RegExp(
+    `(?:${escapeRegex(CDN_BASE)}|${escapeRegex(APEX)})/${escapedKey}${boundary}|(?<![\\w.@])/${escapedKey}${boundary}`,
+    'u',
+  ).test(String(body ?? ''));
+}
+
+const CANTON_IMAGE_MIME_BY_EXTENSION = Object.freeze({
+  '.avif': 'image/avif',
+  '.gif': 'image/gif',
+  '.jpeg': 'image/jpeg',
+  '.jpg': 'image/jpeg',
+  '.png': 'image/png',
+  '.svg': 'image/svg+xml',
+  '.webp': 'image/webp',
+});
+
+function imageHeaderMatchesAssetKey(header, byteLength, key, contentType) {
+  if (!Buffer.isBuffer(header) || byteLength <= 0 || byteLength > MAX_HELD_ASSET_BYTES) return false;
+  const extension = path.extname(key).toLowerCase();
+  const expectedMime = CANTON_IMAGE_MIME_BY_EXTENSION[extension];
+  if (!expectedMime || String(contentType ?? '').split(';', 1)[0].trim().toLowerCase() !== expectedMime) return false;
+  if (extension === '.webp') {
+    return byteLength >= 20
+      && header.length >= 16
+      && header.toString('ascii', 0, 4) === 'RIFF'
+      && header.readUInt32LE(4) === byteLength - 8
+      && header.toString('ascii', 8, 12) === 'WEBP'
+      && ['VP8 ', 'VP8L', 'VP8X'].includes(header.toString('ascii', 12, 16));
+  }
+  if (extension === '.jpg' || extension === '.jpeg') {
+    return byteLength >= 4 && header.length >= 3 && header[0] === 0xff && header[1] === 0xd8 && header[2] === 0xff;
+  }
+  if (extension === '.png') {
+    return byteLength >= 8 && header.length >= 8 && header.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+  }
+  if (extension === '.gif') {
+    return byteLength >= 6 && header.length >= 6 && ['GIF87a', 'GIF89a'].includes(header.toString('ascii', 0, 6));
+  }
+  if (extension === '.avif') {
+    return byteLength >= 12
+      && header.length >= 12
+      && header.toString('ascii', 4, 8) === 'ftyp'
+      && ['avif', 'avis'].includes(header.toString('ascii', 8, 12));
+  }
+  const svg = header.toString('utf8', 0, Math.min(header.length, 4096)).replace(/^\uFEFF?\s*/, '');
+  return /^(?:<\?xml\b[^>]*>\s*)?<svg\b/i.test(svg);
+}
+
+function imageBytesMatchAssetKey(bytes, key, contentType) {
+  return Buffer.isBuffer(bytes)
+    && bytes.length <= MAX_HELD_ASSET_BYTES
+    && imageHeaderMatchesAssetKey(bytes.subarray(0, 4096), bytes.length, key, contentType);
+}
+
+async function cancelAssetReader(reader, reason) {
+  let cancellation;
+  try {
+    cancellation = Promise.resolve(reader.cancel(reason));
+  } catch {
+    return;
+  }
+  let timer;
+  const boundedWait = new Promise((resolve) => {
+    timer = setTimeout(resolve, 100);
+  });
+  try {
+    await Promise.race([cancellation, boundedWait]).catch(() => {});
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function readCantonAssetDigest(response, key, contentType, deadlineAt) {
+  const reader = response.body?.getReader?.();
+  if (!reader) return { ok: false, status: 'body CDN non disponibile come stream' };
+  const header = Buffer.alloc(4096);
+  const digest = createHash('sha256');
+  let headerBytes = 0;
+  let byteLength = 0;
+  let timeout;
+  let rejectTimeout;
+  const timeoutPromise = new Promise((_, reject) => {
+    rejectTimeout = reject;
+  });
+  // fetchWithRefTimeout keeps the transport deadline alive too; this local
+  // deadline bounds streams whose reader ignores the request abort signal.
+  timeout = setTimeout(() => {
+    const error = new Error('timeout durante la lettura del body immagine');
+    void cancelAssetReader(reader, error);
+    rejectTimeout(error);
+  }, Math.max(1, deadlineAt - Date.now()));
+  try {
+    while (true) {
+      const { done, value } = await Promise.race([reader.read(), timeoutPromise]);
+      if (done) break;
+      const chunk = Buffer.isBuffer(value)
+        ? value
+        : Buffer.from(value.buffer, value.byteOffset, value.byteLength);
+      byteLength += chunk.length;
+      if (byteLength > MAX_HELD_ASSET_BYTES) {
+        await cancelAssetReader(reader);
+        return { ok: false, status: 'asset oltre 5 MB' };
+      }
+      digest.update(chunk);
+      if (headerBytes < header.length) {
+        const count = Math.min(header.length - headerBytes, chunk.length);
+        chunk.copy(header, headerBytes, 0, count);
+        headerBytes += count;
+      }
+    }
+    if (!imageHeaderMatchesAssetKey(header.subarray(0, headerBytes), byteLength, key, contentType)) {
+      return { ok: false, status: 'body CDN non e\' un asset immagine verificabile' };
+    }
+    return { ok: true, status: 200, contentType, byteLength, sha256: digest.digest('hex') };
+  } catch (error) {
+    await cancelAssetReader(reader, error);
+    return { ok: false, status: error?.message ?? String(error) };
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+/** GET binario con cache-buster: una risposta HTML di fallback non e' un asset R2. */
+async function probeCantonAsset(key) {
+  const url = new URL(key, `${CDN_BASE}/`);
+  if (url.origin !== new URL(CDN_BASE).origin || url.protocol !== 'https:') {
+    return { ok: false, status: 'origine asset non autorizzata' };
+  }
+  url.searchParams.set('_section_asset_sha256', String(Date.now()));
+  let response;
+  const deadlineAt = Date.now() + HELD_ASSET_PROBE_TIMEOUT_MS;
+  try {
+    response = await fetchWithRefTimeout(url, {
+      redirect: 'manual',
+      cache: 'no-store',
+      headers: {
+        'cache-control': 'no-cache',
+        'user-agent': 'frontaliere-corpus-publisher/1 (+https://frontaliereticino.ch)',
+      },
+    }, HELD_ASSET_PROBE_TIMEOUT_MS);
+    if (response.status !== 200) {
+      const status = `HTTP ${response.status}`;
+      return { ok: false, status };
+    }
+    const contentType = String(response.headers?.get?.('content-type') ?? '').split(';', 1)[0].trim().toLowerCase();
+    const extension = path.extname(url.pathname).toLowerCase();
+    if (contentType !== CANTON_IMAGE_MIME_BY_EXTENSION[extension]) {
+      return { ok: false, status: `content-type asset non valido: ${contentType || 'assente'}` };
+    }
+    const declaredLength = Number(response.headers?.get?.('content-length'));
+    if (Number.isFinite(declaredLength) && declaredLength > MAX_HELD_ASSET_BYTES) {
+      return { ok: false, status: 'asset oltre 5 MB' };
+    }
+    return await readCantonAssetDigest(response, key, contentType, deadlineAt);
+  } catch (error) {
+    return { ok: false, status: error?.message ?? String(error) };
+  } finally {
+    if (response) releaseFetchWithRefTimeout(response);
+  }
+}
+
+function localCantonAssetBytes(local) {
+  try {
+    const filePath = path.isAbsolute(local) ? local : path.resolve(ROOT_DIR, local);
+    const stat = fs.lstatSync(filePath);
+    if (!stat.isFile() || stat.size === 0 || stat.size > MAX_HELD_ASSET_BYTES) return null;
+    return fs.readFileSync(filePath);
+  } catch {
+    return null;
+  }
+}
+
+function sha256(bytes) {
+  return createHash('sha256').update(bytes).digest('hex');
+}
+
+async function unchangedHeldAssetKeys({ candidateKeys, uploadByKey, assetProbeImpl }) {
+  const unchanged = new Set();
+  let cursor = 0;
+  const workers = Array.from({ length: Math.min(HELD_ASSET_PROBE_CONCURRENCY, candidateKeys.length) }, async () => {
+    while (cursor < candidateKeys.length) {
+      const key = candidateKeys[cursor++];
+      const localBytes = localCantonAssetBytes(uploadByKey.get(key)?.local);
+      if (!localBytes || !imageBytesMatchAssetKey(
+        localBytes,
+        key,
+        CANTON_IMAGE_MIME_BY_EXTENSION[path.extname(key).toLowerCase()],
+      )) {
+        console.log(`::notice::[${LOG}] asset trattenuto ${key}: bytes locali assenti o non verificabili`);
+        continue;
+      }
+      const localSha256 = sha256(localBytes);
+      let remote;
+      try {
+        remote = await assetProbeImpl(key);
+      } catch (error) {
+        remote = {
+          ok: false,
+          status: error?.message ?? String(error),
+        };
+      }
+      const expectedMime = CANTON_IMAGE_MIME_BY_EXTENSION[path.extname(key).toLowerCase()];
+      if (!remote?.ok
+        || remote.status !== 200
+        || remote.contentType !== expectedMime
+        || !Number.isSafeInteger(remote.byteLength)
+        || remote.byteLength <= 0
+        || remote.byteLength > MAX_HELD_ASSET_BYTES
+        || !/^[a-f0-9]{64}$/u.test(remote.sha256 ?? '')) {
+        console.log(`::notice::[${LOG}] asset trattenuto ${key}: confronto CDN non verificabile (${remote?.status ?? 'nessuna risposta'})`);
+        continue;
+      }
+      if (remote.byteLength !== localBytes.length || remote.sha256 !== localSha256) {
+        console.log(`::notice::[${LOG}] asset trattenuto ${key}: bytes CDN diversi dal candidato locale`);
+        continue;
+      }
+      unchanged.add(key);
+      console.log(`::notice::[${LOG}] asset ${key} già presente con SHA-256 identico; PUT omesso in questa release`);
+    }
+  });
+  await Promise.all(workers);
+  return unchanged;
+}
+
+async function uploadCantonAssets({ cdnUploads, heldAssetKeys, unchangedAssetKeys, runImpl, assertMainFreshImpl, signal }) {
+  let failures = 0;
+  await assertMainFreshImpl();
+  await publishSignalBoundary(signal);
+  for (const { local, key } of cdnUploads) {
+    if (heldAssetKeys.has(key) || unchangedAssetKeys.has(key)) continue;
+    await publishSignalBoundary(signal);
+    const { code = 1, stdout = '' } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', local, key]);
+    if (code !== 0 || !stdout.includes('✅ uploaded')) {
+      failures++;
+      console.log(`::warning::[${LOG}] immagine non caricata: ${key}`);
+    }
+  }
+  return failures;
+}
+
 /** Ripristina HTML, purge e verifica prima che la transazione RSS torni indietro. */
 async function rollbackCantonPages({ pages, snapshots, distDir, runImpl, probeImpl, live }) {
   const rollbackFiles = [];
@@ -1286,13 +1687,13 @@ async function rollbackCantonPages({ pages, snapshots, distDir, runImpl, probeIm
           const local = path.join(distDir, `.canton-page-rollback-${i}.html`);
           fs.writeFileSync(local, previous.body, 'utf8');
           rollbackFiles.push(local);
-          const { stdout = '' } = runImpl('bash', [
+          const { code = 1, stdout = '' } = runImpl('bash', [
             'scripts/lib/upload-cdn-file.sh',
             local,
             page.edgeKey,
             PAGE_CACHE_CONTROL,
           ]);
-          if (!stdout.includes('✅ uploaded')) throw new Error(`restore upload non confermato: ${page.edgeKey}`);
+          if (code !== 0 || !stdout.includes('✅ uploaded')) throw new Error(`restore upload non confermato: ${page.edgeKey}`);
         } else {
           const { stdout = '' } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', page.edgeKey]);
           if (!stdout.includes('✅ deleted')) throw new Error(`restore delete non confermato: ${page.edgeKey}`);
@@ -1370,13 +1771,13 @@ async function rollbackCantonRssFeeds({ prepared, snapshots, distDir, runImpl, p
           const local = path.join(distDir, `.canton-rss-rollback-${feed.name}`);
           fs.writeFileSync(local, previous.body, 'utf8');
           rollbackFiles.push(local);
-          const { stdout = '' } = runImpl('bash', [
+          const { code = 1, stdout = '' } = runImpl('bash', [
             'scripts/lib/upload-cdn-file.sh',
             local,
             feed.key,
             PAGE_CACHE_CONTROL,
           ]);
-          if (!stdout.includes('✅ uploaded')) throw new Error(`restore upload non confermato: ${feed.key}`);
+          if (code !== 0 || !stdout.includes('✅ uploaded')) throw new Error(`restore upload non confermato: ${feed.key}`);
         } else {
           const { stdout = '' } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', feed.key]);
           if (!stdout.includes('✅ deleted')) throw new Error(`restore delete non confermato: ${feed.key}`);
@@ -1446,6 +1847,7 @@ export async function publishCantonRssFeeds({
   releaseReadyMaxWaitMs = RELEASE_READY_MAX_WAIT_MS,
   releaseReadyRetryDelayMs = RELEASE_READY_RETRY_DELAY_MS,
   assertMainFreshImpl = async () => {},
+  signal,
 }) {
   const cleanupRequested = removeStaleCantonRssFeeds === true;
   const inactiveCleanup = cleanupRequested && ['draft', 'retired'].includes(effectiveStatus);
@@ -1473,6 +1875,7 @@ export async function publishCantonRssFeeds({
       sleepImpl,
       maxWaitMs: releaseReadyMaxWaitMs,
       retryDelayMs: releaseReadyRetryDelayMs,
+      signal,
     });
     if (!(readiness === true || readiness?.ok)) {
       console.error(`::error::[${LOG}] feed RSS ${section}: API/edge non pronti (${readiness?.reason ?? 'verifica fallita'})`);
@@ -1491,6 +1894,7 @@ export async function publishCantonRssFeeds({
     const removingStaleFeeds = inactiveCleanup || declaredFeeds.length === 0;
     if (typeof publishedStatusImpl === 'function') {
       const currentStatus = await publishedStatusImpl(section);
+      await publishSignalBoundary(signal);
       if (currentStatus !== effectiveStatus) {
         console.error(`::error::[${LOG}] feed RSS ${section}: il registro edge è cambiato dopo la readiness gate`);
         return { failures: 1, uploaded: 0, verified: 0, status: currentStatus };
@@ -1546,6 +1950,7 @@ export async function publishCantonRssFeeds({
     if (removingStaleFeeds) {
       for (const feed of prepared) {
         await assertMainFreshImpl();
+        await publishSignalBoundary(signal);
         mutationStarted = true;
         const { stdout = '' } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', feed.key]);
         if (!stdout.includes('✅ deleted')) throw new Error(`feed RSS non cancellato: ${feed.key}`);
@@ -1554,14 +1959,15 @@ export async function publishCantonRssFeeds({
       for (let i = 0; i < prepared.length; i++) {
         const feed = prepared[i];
         await assertMainFreshImpl();
+        await publishSignalBoundary(signal);
         mutationStarted = true;
-        const { stdout } = runImpl('bash', [
+        const { code = 1, stdout = '' } = runImpl('bash', [
           'scripts/lib/upload-cdn-file.sh',
           localFiles[i],
           feed.key,
           PAGE_CACHE_CONTROL,
         ]);
-        if (!stdout.includes('✅ uploaded')) {
+        if (code !== 0 || !stdout.includes('✅ uploaded')) {
           throw new Error(`feed RSS non caricato: ${feed.key}`);
         }
         uploaded++;
@@ -1570,6 +1976,7 @@ export async function publishCantonRssFeeds({
 
     for (const chunk of purgeChunks(prepared.map((feed) => feed.url))) {
       await assertMainFreshImpl();
+      await publishSignalBoundary(signal);
       mutationStarted = true;
       const { code } = runImpl('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]);
       if (code !== 0) {
@@ -1578,6 +1985,7 @@ export async function publishCantonRssFeeds({
     }
 
     for (const feed of prepared) {
+      await publishSignalBoundary(signal);
       if (removingStaleFeeds) {
         const result = await probeImpl(feed.url, { attempts: 3, delayMs: 1000, want: () => false });
         if (result?.ok === true || !isNotFoundStatus(result?.status)) {
@@ -1641,16 +2049,19 @@ export async function waitForPublishedReleaseReady(
     sleepImpl = sleep,
     maxWaitMs = RELEASE_READY_MAX_WAIT_MS,
     retryDelayMs = RELEASE_READY_RETRY_DELAY_MS,
+    signal,
   } = {},
 ) {
   const deadline = Date.now() + Math.max(0, maxWaitMs);
   let last = { ok: false, reason: 'verifica release non eseguita' };
   while (true) {
-    last = await releaseReadyImpl(expectedCommit, { section, fetchImpl });
+    await publishSignalBoundary(signal);
+    last = await releaseReadyImpl(expectedCommit, { section, fetchImpl, signal });
+    await publishSignalBoundary(signal);
     if (last === true || last?.ok) return last;
     const remaining = deadline - Date.now();
     if (remaining <= 0) return last;
-    await sleepImpl(Math.min(Math.max(0, retryDelayMs), remaining));
+    await waitForPublishRetry(Math.min(Math.max(0, retryDelayMs), remaining), sleepImpl, signal);
   }
 }
 
@@ -1675,6 +2086,7 @@ export async function publish({
   runImpl = run,
   publishedStatusImpl = publishedStatus,
   probeImpl = probe,
+  assetProbeImpl = probeCantonAsset,
   releaseReadyImpl = publishedReleaseReady,
   publishCantonRssFeedsImpl = publishCantonRssFeeds,
   releaseReadyMaxWaitMs = RELEASE_READY_MAX_WAIT_MS,
@@ -1682,12 +2094,23 @@ export async function publish({
   sleepImpl = sleep,
   snapshotPagesBeforeUpload = false,
   immutablePages = [],
+  requiredPagePaths = [],
   assertMainFreshImpl = async () => {},
+  imageLeaseContext = null,
+  signal,
 }) {
+  if (imageLeaseContext) {
+    const baseRunImpl = runImpl;
+    runImpl = (command, args) => baseRunImpl(command, args, {
+      env: { ...process.env, [IMAGE_LEASE_CONTEXT_ENV]: imageLeaseContext },
+    });
+  }
   let failures = 0;
   let verifiedRssFeeds = cantonRssFeeds;
   let rollbackRssPublication = null;
   let pageSnapshots = null;
+  let pagesForUpload = pages;
+  const requiredPagePathSet = new Set(requiredPagePaths);
   const rollbackRss = async ({ neutralize = false } = {}) => {
     if (!rollbackRssPublication) return 0;
     const rollback = rollbackRssPublication;
@@ -1707,6 +2130,7 @@ export async function publish({
   // into that state: otherwise the CDN verify below can be green while a live
   // apex still serves stale/404 pages. A valid draft is the bootstrap case.
   const beforeStatus = await publishedStatusImpl(section);
+  await publishSignalBoundary(signal);
   if (beforeStatus === null) {
     console.error(`::error::[${LOG}] registro edge della sezione ${section} illeggibile o con stato sconosciuto: pubblicazione bloccata`);
     return { failures: 1, uploaded: 0, status: null };
@@ -1717,7 +2141,7 @@ export async function publish({
     pageSnapshots = null;
     try {
       const result = await rollbackCantonPages({
-        pages,
+        pages: pagesForUpload,
         snapshots,
         distDir,
         runImpl,
@@ -1766,17 +2190,93 @@ export async function publish({
   const immutableMismatches = [];
   let status = beforeStatus;
   console.log(`[${LOG}] preflight: sezione ${section} nel registro pubblicato = ${beforeStatus}`);
-  // This is the first remote mutation after render/preflight. Recheck here,
-  // not only in the workflow before rendering: main may advance while pages
-  // and feeds are being built.
-  await assertMainFreshImpl();
-  for (const { local, key } of cdnUploads) {
-    const { stdout } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', local, key]);
-    if (!stdout.includes('✅ uploaded')) {
-      failures++;
-      console.log(`::warning::[${LOG}] immagine non caricata: ${key}`);
+  let heldAssetKeys = new Set();
+  let unchangedAssetKeys = new Set();
+  if (snapshotPagesBeforeUpload && !pageSnapshots) {
+    await assertMainFreshImpl();
+    try {
+      const snapshots = await snapshotCantonPages([...pages, ...immutablePages], { probeImpl });
+      await publishSignalBoundary(signal);
+      const immutableSnapshotPages = uniqueCantonPages(immutablePages);
+      for (const page of immutableSnapshotPages) {
+        const previous = snapshots.get(page.edgeKey);
+        const local = path.join(distDir, page.rel);
+        const next = fs.existsSync(local) ? fs.readFileSync(local, 'utf8') : null;
+        if (!previous?.exists) {
+          console.error(
+            `::error::[${LOG}] release live differita: non è possibile dimostrare la pagina precedente per ${page.edgeKey}; ` +
+            'la release non può proseguire',
+          );
+          return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
+        }
+        if (next === null) {
+          console.log(
+            `::notice::[${LOG}] release live differita: ${page.edgeKey} non è stata rigenerata nel render parziale; ` +
+            'la pagina precedente resta immutabile fino al replay',
+          );
+          continue;
+        }
+        if (next !== previous.body) {
+          immutableMismatches.push(page.edgeKey);
+          console.log(
+            `::notice::[${LOG}] release live differita: il render di ${page.edgeKey} differisce; ` +
+            'la chiave precedente resta servita e la sostituzione viene differita al replay post-flip',
+          );
+        }
+      }
+      const immutableBodies = immutableSnapshotPages.map((page) => snapshots.get(page.edgeKey)?.body ?? '');
+      heldAssetKeys = new Set(
+        cdnUploads
+          .filter(({ key }) => immutableBodies.some((body) => cantonPageReferencesAsset(body, key)))
+          .map(({ key }) => key),
+      );
+      const uploadByKey = new Map(cdnUploads.map((upload) => [upload.key, upload]));
+      const candidateKeys = new Set();
+      for (const page of pages) {
+        const local = path.join(distDir, page.rel);
+        if (!fs.existsSync(local)) continue;
+        const body = fs.readFileSync(local, 'utf8');
+        for (const key of heldAssetKeys) {
+          if (cantonPageReferencesAsset(body, key)) candidateKeys.add(key);
+        }
+      }
+      unchangedAssetKeys = await unchangedHeldAssetKeys({
+        candidateKeys: [...candidateKeys],
+        uploadByKey,
+        assetProbeImpl,
+      });
+      await publishSignalBoundary(signal);
+      for (const key of unchangedAssetKeys) heldAssetKeys.delete(key);
+      const heldPageKeys = new Set();
+      for (const page of pages) {
+        const local = path.join(distDir, page.rel);
+        if (!fs.existsSync(local) || heldAssetKeys.size === 0) continue;
+        const body = fs.readFileSync(local, 'utf8');
+        if ([...heldAssetKeys].some((key) => cantonPageReferencesAsset(body, key))) {
+          heldPageKeys.add(page.edgeKey);
+          const reason = requiredPagePathSet.has(page.canonicalPath)
+            ? 'il target mancante resta differito finché ogni asset condiviso non è verificato sul CDN'
+            : 'il render nuovo riusa un asset trattenuto dalla superficie precedente';
+          console.log(`::notice::[${LOG}] release live differita: differisco anche ${page.edgeKey}; ${reason}`);
+        }
+      }
+      pagesForUpload = pages.filter((page) => !heldPageKeys.has(page.edgeKey));
+      pageSnapshots = new Map(uniqueCantonPages(pagesForUpload).map((page) => [page.edgeKey, snapshots.get(page.edgeKey)]));
+    } catch (error) {
+      console.error(`::error::[${LOG}] snapshot della release HTML precedente fallito: ${error?.message ?? String(error)}`);
+      return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
     }
   }
+
+  failures += await uploadCantonAssets({
+    cdnUploads,
+    heldAssetKeys,
+    unchangedAssetKeys,
+    runImpl,
+    assertMainFreshImpl,
+    signal,
+  });
+  await publishSignalBoundary(signal);
   // Un HTML che punta a un hero non ancora confermato e' una pubblicazione
   // parziale: il reconcile controlla la pagina, non ogni asset CDN. Lasciare
   // partire gli upload delle pagine qui renderebbe quindi servibile un nuovo
@@ -1787,35 +2287,6 @@ export async function publish({
     return { failures, uploaded: 0, deleted: 0, status: beforeStatus };
   }
   try {
-  if (snapshotPagesBeforeUpload && !pageSnapshots) {
-    await assertMainFreshImpl();
-    try {
-      const snapshots = await snapshotCantonPages([...pages, ...immutablePages], { probeImpl });
-      for (const page of uniqueCantonPages(immutablePages)) {
-        const previous = snapshots.get(page.edgeKey);
-        const local = path.join(distDir, page.rel);
-        const next = fs.existsSync(local) ? fs.readFileSync(local, 'utf8') : null;
-        if (!previous?.exists || next === null) {
-          console.error(
-            `::error::[${LOG}] bootstrap live: non è possibile dimostrare la pagina precedente o il render locale per ${page.edgeKey}; ` +
-            'la release non può proseguire',
-          );
-          return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
-        }
-        if (next !== previous.body) {
-          immutableMismatches.push(page.edgeKey);
-          console.log(
-            `::notice::[${LOG}] bootstrap live: il render di ${page.edgeKey} differisce; ` +
-            'la chiave precedente resta servita e la sostituzione viene differita al replay post-flip',
-          );
-        }
-      }
-      pageSnapshots = new Map(uniqueCantonPages(pages).map((page) => [page.edgeKey, snapshots.get(page.edgeKey)]));
-    } catch (error) {
-      console.error(`::error::[${LOG}] snapshot della release HTML precedente fallito: ${error?.message ?? String(error)}`);
-      return { failures: 1, uploaded: 0, deleted: 0, status: beforeStatus };
-    }
-  }
   if (cantonRssFeeds.length > 0 || removeStaleCantonRssFeeds) {
     const rssStatus = await publishedStatusImpl(section);
     if (rssStatus !== 'live' && !removeStaleCantonRssFeeds) {
@@ -1840,14 +2311,17 @@ export async function publish({
       releaseReadyMaxWaitMs,
       releaseReadyRetryDelayMs,
       assertMainFreshImpl,
+      signal,
     });
+    if (typeof rssResult.rollback === 'function') rollbackRssPublication = rssResult.rollback;
+    await publishSignalBoundary(signal);
     if (rssResult.failures > 0) {
       console.error(`::error::[${LOG}] feed RSS ${section} non verificati: nessuna pagina viene caricata`);
       return { failures: rssResult.failures, uploaded: 0, deleted: 0, status: rssResult.status ?? rssStatus };
     }
     if (Array.isArray(rssResult.feeds)) verifiedRssFeeds = rssResult.feeds;
     if (Array.isArray(rssResult.feeds) && rssResult.feeds.length === 0) {
-      for (const page of pages.filter(({ kind }) => kind === 'landing')) {
+      for (const page of pagesForUpload.filter(({ kind }) => kind === 'landing')) {
         const local = path.join(distDir, page.rel);
         if (!fs.existsSync(local)) continue;
         const html = fs.readFileSync(local, 'utf-8');
@@ -1855,10 +2329,10 @@ export async function publish({
         if (withoutRss !== html) fs.writeFileSync(local, withoutRss, 'utf-8');
       }
     }
-    if (typeof rssResult.rollback === 'function') {
-      rollbackRssPublication = rssResult.rollback;
+    if (rollbackRssPublication) {
       try {
-        pageSnapshots = await snapshotCantonPages(pages, { probeImpl });
+      pageSnapshots = await snapshotCantonPages(pagesForUpload, { probeImpl });
+      await publishSignalBoundary(signal);
       } catch (error) {
         console.error(`::error::[${LOG}] snapshot della release HTML precedente fallito: ${error?.message ?? String(error)}`);
         const rollbackFailures = await rollbackTransaction();
@@ -1866,10 +2340,11 @@ export async function publish({
       }
     }
   }
-  for (const page of inUploadOrder(pages)) {
+  for (const page of inUploadOrder(pagesForUpload)) {
     await assertMainFreshImpl();
-    const { stdout } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', path.join(distDir, page.rel), page.edgeKey, PAGE_CACHE_CONTROL]);
-    if (stdout.includes('✅ uploaded')) uploaded.push(page);
+    await publishSignalBoundary(signal);
+    const { code = 1, stdout = '' } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', path.join(distDir, page.rel), page.edgeKey, PAGE_CACHE_CONTROL]);
+    if (code === 0 && stdout.includes('✅ uploaded')) uploaded.push(page);
     else {
       failures++;
       console.log(`::error::[${LOG}] pagina non caricata: ${page.edgeKey}`);
@@ -1891,6 +2366,7 @@ export async function publish({
     const urls = pageList.flatMap((page) => [page.apexUrl, page.cdnUrl]);
     for (const chunk of purgeChunks(urls)) {
       await assertMainFreshImpl();
+      await publishSignalBoundary(signal);
       const { code } = runImpl('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]);
       if (code !== 0) failures++;
     }
@@ -1901,6 +2377,7 @@ export async function publish({
   // by a partially published replacement.
   await purgePages(uploaded);
   status = await publishedStatusImpl(section);
+  await publishSignalBoundary(signal);
   console.log(`[${LOG}] verify: sezione ${section} nel registro pubblicato = ${status ?? 'registro illeggibile'}`);
   if (status === null) {
     console.error(`::error::[${LOG}] registro edge della sezione ${section} diventato illeggibile durante la pubblicazione`);
@@ -1921,6 +2398,7 @@ export async function publish({
     const wantsPublishedPage = (body) => hasMeta(body)
       && (!requiredRssUrl || hasExpectedCantonRssFeedLinks(body, requiredRssUrl));
     const cdn = await probeImpl(page.cdnUrl, { want: wantsPublishedPage });
+    await publishSignalBoundary(signal);
     if (!cdn.ok) {
       failures++;
       console.log(`::error::[${LOG}] non leggibile sul CDN: ${page.cdnUrl} (${cdn.status})`);
@@ -1928,6 +2406,7 @@ export async function publish({
     }
     if (status === 'live') {
       const apex = await probeImpl(page.apexUrl, { want: wantsPublishedPage });
+      await publishSignalBoundary(signal);
       if (!apex.ok) {
         failures++;
         console.log(`::error::[${LOG}] non leggibile all'apex: ${page.apexUrl} (${apex.status})`);
@@ -1948,7 +2427,9 @@ export async function publish({
       sleepImpl,
       maxWaitMs: releaseReadyMaxWaitMs,
       retryDelayMs: releaseReadyRetryDelayMs,
+      signal,
     });
+    await publishSignalBoundary(signal);
     if (!(releaseReady === true || releaseReady?.ok)) {
       console.error(`::error::[${LOG}] API/edge non hanno ancora servito la release corrente: ${releaseReady?.reason ?? 'verifica fallita'}; nessuna pagina obsoleta viene cancellata`);
       const rollbackFailures = await rollbackTransaction();
@@ -1958,6 +2439,7 @@ export async function publish({
 
   for (const page of obsoletePages) {
     await assertMainFreshImpl();
+    await publishSignalBoundary(signal);
     const { stdout } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', page.edgeKey]);
     if (stdout.includes('✅ deleted')) deleted.push(page);
     else {
@@ -1970,17 +2452,20 @@ export async function publish({
   await purgePages(deleted);
   for (const page of obsoletePages) {
     const old = await probeImpl(page.cdnUrl, { attempts: 3, delayMs: 1000 });
+    await publishSignalBoundary(signal);
     if (old.status !== 'HTTP 404') {
       failures++;
       console.log(`::error::[${LOG}] vecchia pagina ancora servita o non verificabile: ${page.cdnUrl} (${old.status})`);
     }
   }
   await assertMainFreshImpl();
+  await publishSignalBoundary(signal);
   const rollbackFailures = failures > 0 ? await rollbackRssAfterObsoleteMutation() : 0;
   return {
     failures: failures + rollbackFailures,
     rollbackFailures,
     uploaded: uploaded.length,
+    deferredAssetPages: pages.length - pagesForUpload.length,
     deleted: deleted.length,
     status,
     immutableMismatch: immutableMismatches.length > 0,
@@ -2010,7 +2495,15 @@ export async function main(
     latestApiInputCommitImpl = latestApiInputCommit,
     sourceRegistryIdsImpl = sourceRegistryIds,
     currentMainHeadImpl = publishedMainHead,
+    probeImpl = probe,
+    sleepImpl = sleep,
+    publisherCommitImpl = () => execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
     fetchImpl = fetch,
+    runImpl = run,
+    acquireImageNamespaceLeasesImpl = acquireImageNamespaceLeases,
+    releaseImageNamespaceLeasesImpl = releaseImageNamespaceLeases,
+    serializeImageLeaseContextImpl = serializeImageLeaseContext,
+    imageNamespaceForKeyImpl = imageNamespaceForKey,
   } = {},
 ) {
   const t0 = Date.now();
@@ -2020,9 +2513,8 @@ export async function main(
   fs.mkdirSync(distDir, { recursive: true });
   const ids = args.bootstrap ? sourceRegistryIdsImpl(ROOT_DIR, section) : args.ids;
   const publishing = args.publish && !args.dryRun;
-  const publisherCommit = publishing
-    ? execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim()
-    : null;
+  const allowDeferredLiveRelease = process.env.ALLOW_DEFERRED_LIVE_RELEASE === 'true';
+  const publisherCommit = publishing ? publisherCommitImpl() : null;
   const expectedMainHead = process.env.EXPECTED_MAIN_HEAD || publisherCommit;
   const assertMainFreshImpl = async () => {
     if (!publishing) return;
@@ -2059,7 +2551,7 @@ export async function main(
   // checkout must not override an edge registry that is still live.
   const effectiveStatus = publishing ? await publishedStatusImpl(section) : null;
   const cleanupRssRequested = args.removeStaleCantonRssFeeds === true;
-  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested)) {
+  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested || allowDeferredLiveRelease)) {
     releaseCommit = await resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: publishedApiReleaseCommitImpl,
       apiReleaseCommitOverride: process.env.API_RELEASE_COMMIT,
@@ -2076,24 +2568,23 @@ export async function main(
   }
   let cantonRssFeeds = [];
   let removeStaleCantonRssFeeds = false;
-  // A live section can receive its first article pages in the same corpus
-  // release that updates the API registry. The API publisher cannot flip that
-  // registry until those pages exist on R2, while the normal live-page path
-  // waits for the flipped registry before touching RSS. Bootstrap is the
-  // deliberate two-phase exception: validate and upload HTML first, preserve
-  // the old RSS/obsolete-page surface, and let the API completion replay do
-  // the feed/deletion phase after its release is actually served.
-  let deferredLiveBootstrapRelease = false;
+  // A live section can receive new or changed pages in the same corpus release
+  // that updates the API registry. The API publisher cannot flip that registry
+  // until the required pages exist on R2, while the normal live-page path waits
+  // for the flipped registry before touching RSS. When a verified page manifest
+  // exists, stage the live release in two phases: upload only keys that are not
+  // already announced, preserve RSS/obsolete-page state, and let the API
+  // completion replay finish the release after its edge pointer is served.
+  let deferredLiveRelease = false;
   let liveBootstrapManifestMissing = false;
-  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested)) {
+  if (publishing && (effectiveStatus === 'live' || cleanupRssRequested || allowDeferredLiveRelease)) {
     const readiness = await publishedReleaseReadyImpl(releaseCommit, { section, fetchImpl });
     // Quando la readiness è verificata, il set dichiarato dal manifest decide
     // anche se la landing può annunciare RSS: una sezione live senza articoli
     // emette zero feed legittimamente. Se è transitoria, il primo pass deve
     // caricare l'HTML senza avviare RSS; il replay workflow_run riprova dopo
     // il flip edge.
-    const canDeferRssToBootstrapReplay = args.bootstrap
-      && effectiveStatus === 'live'
+    const canDeferRssToReplay = effectiveStatus === 'live'
       && !cleanupRssRequested
       && publishedManifest.state === 'ok'
       && publishedManifestPages;
@@ -2107,13 +2598,13 @@ export async function main(
       effectiveStatus,
       cleanupRssRequested,
       readiness,
-      deferUntilReplay: canDeferRssToBootstrapReplay,
+      deferUntilReplay: canDeferRssToReplay,
     });
     if (rssPlan.deferred) {
-      deferredLiveBootstrapRelease = true;
+      deferredLiveRelease = true;
       console.log(
-        `::notice::[${LOG}] bootstrap ${section}: release API/edge non ancora servita; ` +
-        'differisco RSS e cancellazioni obsolete dopo il flip, senza allentare la verifica HTML',
+        `::notice::[${LOG}] live ${section}: release API/edge non ancora servita; ` +
+        'differisco RSS e cancellazioni obsolete al replay dopo il flip, senza allentare la verifica HTML',
       );
     } else if (hasPreviousManifestForLiveBootstrap && !readinessVerified) {
       liveBootstrapManifestMissing = true;
@@ -2123,6 +2614,15 @@ export async function main(
         `::notice::[${LOG}] bootstrap ${section}: manifest precedente assente e release API/edge non pronta; ` +
         'blocco la pubblicazione finché la superficie precedente non è dimostrata',
       );
+    }
+    if (allowDeferredLiveRelease && !readinessVerified && publishedManifest.state === 'ok') {
+      deferredLiveRelease = true;
+      if (effectiveStatus !== 'live') {
+        console.log(
+          `::notice::[${LOG}] flip pendente per ${section}: il registro edge è ancora ${effectiveStatus}; ` +
+          'mantengo manifest, RSS e cancellazioni differiti fino al replay globale',
+        );
+      }
     }
     cantonRssFeeds = rssPlan.cantonRssFeeds;
     removeStaleCantonRssFeeds = rssPlan.removeStaleCantonRssFeeds;
@@ -2213,22 +2713,87 @@ export async function main(
     aggregatePagesAllowed,
   });
   const defects = [];
-  const obsoletePagesForPublish = deferredLiveBootstrapRelease ? [] : obsoletePages;
-  const publishedPageKeys = new Set(
-    publishedManifestPages
-      ? Object.values(publishedManifestPages).flatMap((kindPages) => kindPages.map((page) => page.edgeKey))
-      : [],
-  );
-  // During the bootstrap phase the old sitemap and edge registry are still
+  const obsoletePagesForPublish = deferredLiveRelease ? [] : obsoletePages;
+  // Keep two inventories separate during a staged release: the current render
+  // decides which pages can be uploaded now, while the complete published
+  // manifest is the surface that remains live until the API pointer flips.
+  // With --ids the current render is intentionally partial; using it as the
+  // immutable inventory would miss untouched pages and could let an asset PUT
+  // change bytes still referenced by one of those pages.
+  const publishedLivePages = publishedManifestPages
+    ? Object.values(publishedManifestPages).flat()
+    : [];
+  const requestedMissingPagePaths = new Set(args.missingPages);
+  const knownMissingPagePaths = new Set(deferredLiveRelease ? [...args.knownMissingPages, ...args.missingPages] : args.missingPages);
+  const renderedPagePaths = new Map(pages.map((page) => [page.canonicalPath, page]));
+  const publishedPagePaths = new Map(publishedLivePages.map((page) => [page.canonicalPath, page]));
+  const confirmedMissingPagePaths = new Set();
+  const confirmedKnownMissingPagePaths = new Set();
+  if (requestedMissingPagePaths.size > 0 && (!publishing || (deferredLiveRelease && !allowDeferredLiveRelease))) {
+    defects.push('missing-pages richiede un publish; se la release è staged deve avere il differimento esplicitamente armato');
+  } else {
+    for (const requestedPath of requestedMissingPagePaths) {
+      if (!renderedPagePaths.has(requestedPath)) {
+        defects.push(`pagina dichiarata mancante non resa dal backfill: ${requestedPath}`);
+      }
+    }
+    const pathsToConfirm = new Set([
+      ...requestedMissingPagePaths,
+      ...[...knownMissingPagePaths].filter((pagePath) => publishedPagePaths.has(pagePath)),
+    ]);
+    const confirmationAbortController = new AbortController();
+    let confirmationSignalExitStatus = 0;
+    const recordConfirmationSignal = (exitStatus) => {
+      confirmationSignalExitStatus ||= exitStatus;
+      confirmationAbortController.abort();
+    };
+    const onConfirmationSigint = () => recordConfirmationSignal(130);
+    const onConfirmationSigterm = () => recordConfirmationSignal(143);
+    const confirmationSignalHandlersInstalled = publishing && pathsToConfirm.size > 0;
+    if (confirmationSignalHandlersInstalled) {
+      process.on('SIGINT', onConfirmationSigint);
+      process.on('SIGTERM', onConfirmationSigterm);
+    }
+    try {
+      for (const pagePath of pathsToConfirm) {
+        const page = renderedPagePaths.get(pagePath) ?? publishedPagePaths.get(pagePath);
+        if (!page) continue;
+        const confirmation = await confirmCantonPageMissingWithSignal(page.cdnUrl, {
+          probeImpl,
+          sleepImpl,
+          signal: confirmationAbortController.signal,
+        });
+        if (!confirmation.confirmed) {
+          defects.push(`pagina dichiarata mancante ora presente o non verificabile: ${pagePath} (${confirmation.statuses.join(' → ')})`);
+          continue;
+        }
+        if (requestedMissingPagePaths.has(pagePath)) confirmedMissingPagePaths.add(pagePath);
+        if (knownMissingPagePaths.has(pagePath)) confirmedKnownMissingPagePaths.add(pagePath);
+      }
+    } catch (error) {
+      if (confirmationSignalExitStatus !== 0) {
+        const signalName = confirmationSignalExitStatus === 130 ? 'SIGINT' : 'SIGTERM';
+        const interrupted = new Error(`[${LOG}] publish interrupted by ${signalName}`);
+        interrupted.cause = error;
+        interrupted.exitCode = confirmationSignalExitStatus;
+        throw interrupted;
+      }
+      throw error;
+    } finally {
+      if (confirmationSignalHandlersInstalled) {
+        process.removeListener('SIGINT', onConfirmationSigint);
+        process.removeListener('SIGTERM', onConfirmationSigterm);
+      }
+    }
+  }
+  // During a deferred live release the old sitemap and edge registry are still
   // live. Only keys absent from the verified old page manifest are immutable
   // additions; replacing an already announced key here would mix two releases
-  // before the API/edge pointer flips.
-  const pagesForPublish = deferredLiveBootstrapRelease
-    ? pages.filter((page) => !publishedPageKeys.has(page.edgeKey))
-    : pages;
-  const immutableBootstrapPages = deferredLiveBootstrapRelease
-    ? pages.filter((page) => publishedPageKeys.has(page.edgeKey))
-    : [];
+  // before the API/edge pointer flips, except for an announced key confirmed
+  // 404 by the reconciler, which has no live bytes to preserve.
+  const stagedPageSets = stagedReleasePageSets(pages, publishedLivePages, confirmedMissingPagePaths, confirmedKnownMissingPagePaths);
+  const pagesForPublish = deferredLiveRelease ? stagedPageSets.pagesForPublish : pages;
+  const immutableLivePages = deferredLiveRelease ? stagedPageSets.immutableLivePages : [];
 
   if (publishing && effectiveStatus === null) {
     defects.push('registro edge illeggibile o non valido: stato effettivo della sezione non dimostrato');
@@ -2237,6 +2802,12 @@ export async function main(
     defects.push(
       `manifest edge ${section} non verificabile (${publishedManifest.reason ?? 'errore sconosciuto'}): ` +
       'pubblicazione bloccata per non calcolare cancellazioni dal parent del push',
+    );
+  }
+  if (publishing && allowDeferredLiveRelease && publishedManifest.state !== 'ok') {
+    defects.push(
+      `backfill staged ${section} senza manifest edge verificato: ` +
+      'inventario precedente non dimostrato, pubblicazione bloccata',
     );
   }
   if (liveBootstrapManifestMissing) {
@@ -2299,12 +2870,22 @@ export async function main(
     aggregatePagesAllowed,
     publishedPageManifest: publishedManifest.state,
     effectiveStatus,
-    deferredLiveBootstrapRelease,
+    deferredLiveRelease,
+    // Kept for consumers of the pre-RSS summary shape; this legacy field
+    // retains its bootstrap-only meaning while deferredLiveRelease covers the
+    // broader staged live-release path.
+    deferredLiveBootstrapRelease: args.bootstrap && deferredLiveRelease,
     liveBootstrapManifestMissing,
     cantonRssFeeds: cantonRssFeeds.map(({ name, key, url }) => ({ name, key, url })),
     pages,
     pagesForPublish,
-    immutableBootstrapPages,
+    immutableLivePages,
+    requestedMissingPagePaths: [...requestedMissingPagePaths],
+    confirmedMissingPagePaths: [...confirmedMissingPagePaths],
+    knownMissingPagePaths: [...knownMissingPagePaths],
+    confirmedKnownMissingPagePaths: [...confirmedKnownMissingPagePaths],
+    // Legacy summary key retains its bootstrap-only meaning.
+    immutableBootstrapPages: args.bootstrap ? immutableLivePages : [],
     cdnUploads,
     obsoletePages,
     obsoletePagesForPublish,
@@ -2351,28 +2932,174 @@ export async function main(
       return 1;
     }
   }
-  summary.published = await publishImpl({
-    pages: pagesForPublish,
-    cdnUploads,
-    cantonRssFeeds,
-    removeStaleCantonRssFeeds,
-    // Keep the previous page manifest until the API flip is live: otherwise a
-    // bootstrap retry would lose the inventory needed to delete old slugs.
-    obsoletePages: obsoletePagesForPublish,
-    distDir,
-    section,
-    releaseCommit,
-    publishCantonRssFeedsImpl,
-    snapshotPagesBeforeUpload: deferredLiveBootstrapRelease,
-    immutablePages: immutableBootstrapPages,
-    assertMainFreshImpl,
-  });
-  if (summary.published.failures === 0 && deferredLiveBootstrapRelease) {
+  const imageNamespaces = [...new Set(
+    cdnUploads
+      .map(({ key }) => imageNamespaceForKeyImpl(key))
+      .filter(Boolean),
+  )];
+  let imageLeases = [];
+  let imageLeaseContext = null;
+  let imageLeaseReleaseAttempted = false;
+  let imageLeaseSignalExitStatus = 0;
+  let imageLeaseSecondSignalExitStatus = 0;
+  const imageLeaseAbortController = new AbortController();
+  const effectiveImageLeaseExitStatus = () => imageLeaseSecondSignalExitStatus || imageLeaseSignalExitStatus;
+  const recordImageLeaseSignal = (exitStatus) => {
+    if (imageLeaseSignalExitStatus !== 0) {
+      imageLeaseSecondSignalExitStatus ||= exitStatus;
+      console.error(`::warning::[${LOG}] second signal received; deferring exit ${exitStatus} until image lease cleanup completes`);
+      imageLeaseAbortController.abort();
+      return;
+    }
+    imageLeaseSignalExitStatus = exitStatus;
+    imageLeaseAbortController.abort();
+  };
+  const onImageLeaseSigint = () => recordImageLeaseSignal(130);
+  const onImageLeaseSigterm = () => recordImageLeaseSignal(143);
+  const imageLeaseSignalHandlersInstalled = publishing && imageNamespaces.length > 0;
+  if (imageLeaseSignalHandlersInstalled) {
+    process.on('SIGINT', onImageLeaseSigint);
+    process.on('SIGTERM', onImageLeaseSigterm);
+  }
+  const removeImageLeaseSignalHandlers = () => {
+    if (!imageLeaseSignalHandlersInstalled) return;
+    process.removeListener('SIGINT', onImageLeaseSigint);
+    process.removeListener('SIGTERM', onImageLeaseSigterm);
+  };
+  const imageLeaseSignalError = (cause) => {
+    const exitStatus = effectiveImageLeaseExitStatus();
+    const signalName = exitStatus === 130 ? 'SIGINT' : 'SIGTERM';
+    const causeMessage = cause instanceof Error ? `: ${cause.message}` : '';
+    const error = new Error(`[${LOG}] publish interrupted by ${signalName}${causeMessage}`);
+    if (cause !== undefined) error.cause = cause;
+    error.exitCode = exitStatus;
+    return error;
+  };
+  const releaseImageLeases = async () => {
+    if (imageLeaseReleaseAttempted || imageLeases.length === 0) return null;
+    imageLeaseReleaseAttempted = true;
+    try {
+      const released = await releaseImageNamespaceLeasesImpl(imageLeases);
+      const releasedSet = new Set(released);
+      if (releasedSet.size !== imageLeases.length
+          || imageLeases.some(({ namespace }) => !releasedSet.has(namespace))) {
+        throw new Error(`lease immagini non completamente rilasciata: attese ${imageLeases.map(({ namespace }) => namespace).join(', ')}, ricevute ${released.join(', ')}`);
+      }
+      return null;
+    } catch (error) {
+      return error;
+    }
+  };
+  try {
+    if (publishing && imageNamespaces.length > 0) {
+      imageLeases = await acquireImageNamespaceLeasesImpl(imageNamespaces, {
+        signal: imageLeaseAbortController.signal,
+      });
+      if (imageLeaseSignalExitStatus !== 0) throw imageLeaseSignalError();
+      imageLeaseContext = serializeImageLeaseContextImpl(imageLeases);
+    }
+  } catch (error) {
+    const releaseError = await releaseImageLeases();
+    removeImageLeaseSignalHandlers();
+    if (imageLeaseSignalExitStatus !== 0) {
+      const interrupted = imageLeaseSignalError(error);
+      if (releaseError) {
+        const aggregate = new AggregateError(
+          [interrupted, releaseError],
+          `publish interrotto e rollback della lease immagini non riuscito: ${interrupted.message}; ${releaseError?.message ?? releaseError}`,
+          { cause: interrupted },
+        );
+        aggregate.exitCode = effectiveImageLeaseExitStatus();
+        throw aggregate;
+      }
+      throw interrupted;
+    }
+    if (releaseError) {
+      throw new AggregateError(
+        [error, releaseError],
+        `acquisizione lease immagini fallita e rollback non riuscito: ${error?.message ?? error}; ${releaseError?.message ?? releaseError}`,
+        { cause: error },
+      );
+    }
+    throw error;
+  }
+  try {
+    if (imageLeaseSignalExitStatus !== 0) throw imageLeaseSignalError();
+    summary.published = await publishImpl({
+      pages: pagesForPublish,
+      cdnUploads,
+      cantonRssFeeds,
+      removeStaleCantonRssFeeds,
+      // Keep the previous page manifest until the API flip is live: otherwise a
+      // bootstrap retry would lose the inventory needed to delete old slugs.
+      obsoletePages: obsoletePagesForPublish,
+      distDir,
+      section,
+      releaseCommit,
+      publishCantonRssFeedsImpl,
+      snapshotPagesBeforeUpload: deferredLiveRelease,
+      immutablePages: immutableLivePages,
+      requiredPagePaths: [...confirmedMissingPagePaths],
+      assertMainFreshImpl,
+      runImpl,
+      imageLeaseContext,
+      signal: imageLeaseAbortController.signal,
+    });
+  } catch (error) {
+    const releaseError = await releaseImageLeases();
+    removeImageLeaseSignalHandlers();
+    if (releaseError) {
+      console.error(`::error::[${LOG}] rilascio lease immagini fallito dopo errore di pubblicazione: ${releaseError?.message ?? releaseError}`);
+    }
+    if (imageLeaseSignalExitStatus !== 0) {
+      const interrupted = imageLeaseSignalError(error);
+      if (releaseError) {
+        const aggregate = new AggregateError(
+          [interrupted, releaseError],
+          `publish interrotto e rilascio della lease immagini non riuscito: ${interrupted.message}; ${releaseError?.message ?? releaseError}`,
+          { cause: interrupted },
+        );
+        aggregate.exitCode = effectiveImageLeaseExitStatus();
+        throw aggregate;
+      }
+      throw interrupted;
+    }
+    throw error;
+  }
+  const imageLeaseReleaseError = await releaseImageLeases();
+  removeImageLeaseSignalHandlers();
+  const imageLeaseExitStatus = effectiveImageLeaseExitStatus();
+  if (imageLeaseExitStatus !== 0) {
+    summary.published.failures = Math.max(1, Number.isSafeInteger(summary.published.failures) ? summary.published.failures : 0);
+    summary.published.interruptedBy = imageLeaseExitStatus === 130 ? 'SIGINT' : 'SIGTERM';
+  }
+  if (imageLeaseReleaseError) {
+    summary.published.failures = (Number.isSafeInteger(summary.published.failures) ? summary.published.failures : 0) + 1;
+    console.error(`::error::[${LOG}] rilascio lease immagini fallito: ${imageLeaseReleaseError?.message ?? imageLeaseReleaseError}`);
+    writeSummary();
+    return imageLeaseExitStatus || 1;
+  }
+  if (imageLeaseExitStatus !== 0) {
+    writeSummary();
+    return imageLeaseExitStatus;
+  }
+  if (summary.published.failures === 0 && deferredLiveRelease) {
     summary.published.manifestDeferred = true;
-    console.log(
-      `::notice::[${LOG}] manifest edge ${section} differito: ` +
-      'verrà riscritto dal replay dopo la release API/edge',
-    );
+    if (!args.bootstrap) {
+      summary.published.deferredForReplay = allowDeferredLiveRelease;
+      summary.published.deferredReason = 'release API/edge non verificata: il replay deve riallineare il registry prima di pubblicare il manifest';
+      if (!allowDeferredLiveRelease) summary.published.failures = 1;
+      console.log(
+        `::notice::[${LOG}] manifest edge ${section} differito: ` +
+        (allowDeferredLiveRelease
+          ? 'backfill staged completato; il replay API deve verificare la release prima del manifest'
+          : 'il run resta rosso finché il replay non verifica la release API/edge'),
+      );
+      writeSummary();
+      return summary.published.failures ? 1 : 0;
+    }
+    writeSummary();
+    return 0;
   } else if (summary.published.failures === 0) {
     const manifestPages = aggregatePagesAllowed
       ? [
@@ -2419,7 +3146,7 @@ if (invokedDirectly) {
     },
     (error) => {
       console.error(`::error::[${LOG}] ${error?.message ?? error}`);
-      process.exitCode = 1;
+      process.exitCode = [130, 143].includes(error?.exitCode) ? error.exitCode : 1;
     },
   );
 }

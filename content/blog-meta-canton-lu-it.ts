@@ -21,6 +21,18 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.juso-lucerna-humbel-governo.title': 'Juso Lucerna: Valentin Humbel candidato al governo',
     'blog.article.juso-lucerna-humbel-governo.excerpt': 'Valentin Humbel è il candidato Juso al governo lucernese.',
     'blog.article.juso-lucerna-humbel-governo.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.prioswiss-ricorso-luks.title': 'Prio Swiss ricorre al Tribunale per mandato esofago Luks',
+    'blog.article.prioswiss-ricorso-luks.excerpt': 'L’associazione contesta il mandato per le operazioni all’esofago al Luzerner Kantonsspital, sostenendo che non ha raggiunto i casi minimi e che dieci altri centri coprono già il fabbisogno.',
+    'blog.article.prioswiss-ricorso-luks.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lucerna-forensic-nurses-violenza.title': 'Lucerna: Forensic Nurses contro la violenza domestica',
+    'blog.article.lucerna-forensic-nurses-violenza.excerpt': 'Il Canton Lucerna prevede per l\'estate 2027 un progetto pilota con Forensic Nurses e annuncia nuovi servizi medici e di polizia.',
+    'blog.article.lucerna-forensic-nurses-violenza.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lucerna-bilancio-budget-2027.title': 'Lucerna: Parlamento conferma il BIP per il budget 2027',
+    'blog.article.lucerna-bilancio-budget-2027.excerpt': 'Il Consiglio cantonale di Lucerna approva il riferimento al BIP per la crescita delle spese.',
+    'blog.article.lucerna-bilancio-budget-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lucerna-finanze-sessione-ottobre.title': 'Lucerna: cinque ore di dibattito sulle finanze cantonali',
+    'blog.article.lucerna-finanze-sessione-ottobre.excerpt': 'Il Consiglio cantonale di Lucerna ha discusso oltre cinque ore l\'AFP 2027–2030; la proposta porta l\'aliquota 2027 da 1,45 a 1,40 unità, con voto il 20 ottobre.',
+    'blog.article.lucerna-finanze-sessione-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonLuIt;

@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
+  "topicGateUrls": {
+    "canton-nw::https://www.hergiswil.ch/_rte/information/3014485": {
+      "section": "canton-nw",
+      "ts": 1792426575596
+    },
+    "canton-nw::https://www.nidwaldnerzeitung.ch/zentralschweiz/stadt-region-luzern/campus-horw-weniger-parkplaetze-mehr-oev-ld.4247202": {
+      "section": "canton-nw",
+      "ts": 1792453351954
+    }
+  }
+}

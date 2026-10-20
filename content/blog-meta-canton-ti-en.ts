@@ -51,6 +51,15 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.mozione-gran-consiglio-tassa-salute.title': 'Motion in the Grand Council against the health tax',
     'blog.article.mozione-gran-consiglio-tassa-salute.excerpt': 'A cross-party motion has been submitted to the Grand Council The request concerns blocking the tax rebates to Italy OCST points to the diplomatic route',
     'blog.article.mozione-gran-consiglio-tassa-salute.imageAlt': 'Grand Council of Canton Ticino in Bellinzona',
+    'blog.article.rapporto-consiglio-federale-schengen.title': 'Cross-border workers, what would happen without Schengen?',
+    'blog.article.rapporto-consiglio-federale-schengen.excerpt': 'Federal report published on September 18, 2026 Without Schengen: systematic border controls Ticino among the regions most exposed in the Fino scenario',
+    'blog.article.rapporto-consiglio-federale-schengen.imageAlt': 'Border crossing point in Ticino and customs controls',
+    'blog.article.ustat-manutenzione-chiusura.title': 'Ustat notices: maintenance and administrative closure',
+    'blog.article.ustat-manutenzione-chiusura.excerpt': 'Maintenance: Tuesday, December 2, approximately 20.00-22.00 Possible brief interruptions on the Ustat website Service closure: afternoon of December 31, 2025 Ustat',
+    'blog.article.ustat-manutenzione-chiusura.imageAlt': 'Statistical office and cantonal administrative communications in Ticino',
+    'blog.article.frontalieri-ticino-indagine-salari-2026.title': 'Ticino cross-border workers: 55.6% feel underpaid',
+    'blog.article.frontalieri-ticino-indagine-salari-2026.excerpt': '1.542 workers responded to the survey in May 2026 55,6% feel they are paid less for the same duties From the provinces of Como and Varese: over 60 thousand',
+    'blog.article.frontalieri-ticino-indagine-salari-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTiEn;

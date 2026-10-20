@@ -21,6 +21,12 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.furti-raggiro-soletta.title': 'Vols par ruse à Soleure : la police met en garde',
     'blog.article.furti-raggiro-soletta.excerpt': 'La Police cantonale de Soleure signale une dizaine de vols par ruse ces derniers jours : les autrices et auteurs utilisent des bijoux bon marché pour distraire les victimes.',
     'blog.article.furti-raggiro-soletta.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.soletta-parlamento-budget-2027-inchiesta-soh.title': 'Soleure: le gouvernement approuve le devis 2027 et la session de septembre',
+    'blog.article.soletta-parlamento-budget-2027-inchiesta-soh.excerpt': 'Le Regierungsrat approuve le Voranschlag 2027 ; Kantonsrat en session 1-9 septembre avec 51 objets ; GPK publie un rapport sur les irrégularités à la soH.',
+    'blog.article.soletta-parlamento-budget-2027-inchiesta-soh.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.governo-soletta-ottobre-2026.title': 'Gouvernement de Soleure : décisions du 20 octobre 2026',
+    'blog.article.governo-soletta-ottobre-2026.excerpt': 'NEST, formation des enseignants, Famel, police à Lugano et dossier au Conseil cantonal entre les points de la séance du 20 octobre 2026.',
+    'blog.article.governo-soletta-ottobre-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;

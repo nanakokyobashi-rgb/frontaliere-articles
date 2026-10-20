@@ -53,7 +53,10 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.truffe-falsi-banchieri-lausanna.imageAlt': 'Lausanne in Vaud amid scams involving fake police officers and bankers',
     'blog.article.truffa-falsi-poliziotti-vaud.title': 'Seven million defrauded in Vaud by fake agents',
     'blog.article.truffa-falsi-poliziotti-vaud.excerpt': 'Nearly 2,300 cases since the beginning of the year Total damage: CHF 7 million More than 100 people apprehended, 19 in detention 16 apprehensions in early',
-    'blog.article.truffa-falsi-poliziotti-vaud.imageAlt': 'Elderly person receiving a suspicious call from a fake policeman on the sofa, with a typical Vaud home background',
+    'blog.article.truffa-falsi-poliziotti-vaud.imageAlt': 'Illustration generated for this article',
+    'blog.article.cdhr-contributo-differenziale-2025.title': 'CDHR 2025: 250.000/500.000 € thresholds for cross-border workers in France',
+    'blog.article.cdhr-contributo-differenziale-2025.excerpt': 'The differential contribution on high incomes aims for a minimum levy of 20%.',
+    'blog.article.cdhr-contributo-differenziale-2025.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVdEn;

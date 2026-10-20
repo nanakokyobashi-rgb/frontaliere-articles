@@ -4,14 +4,14 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-17T19:17:26.345Z",
-  "contentHash": "f35280908037c55877813276089b3a062fca7ed787cbb5881cfa718b49abdd78",
+  "updatedAt": "2026-10-20T15:13:18.424Z",
+  "contentHash": "67f414596f51c1ba89ced12d552e504fc18030292600302d3c17d2b7dc2fd883",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-17T11:10:59.318Z",
+      "updatedAt": "2026-10-19T13:56:07.476Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-24T08:45:45.000Z"
+      "carryUntilAt": "2026-10-26T12:46:00.000Z"
     }
   ],
   "locales": {
@@ -54,23 +54,35 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,260 EUR/l",
-              "detail": "media regionale: minimo 1,990 EUR/l, 76 stazioni rilevate",
-              "date": "2026-10-17T08:45:46.000Z"
+              "value": "2,270 EUR/l",
+              "detail": "media regionale: minimo 1,990 EUR/l, 72 stazioni rilevate",
+              "date": "2026-10-19T12:46:00.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,455 EUR/l",
-              "detail": "media regionale: minimo 2,208 EUR/l, 76 stazioni rilevate",
-              "date": "2026-10-17T08:45:45.000Z"
+              "value": "2,457 EUR/l",
+              "detail": "media regionale: minimo 2,225 EUR/l, 77 stazioni rilevate",
+              "date": "2026-10-19T12:46:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-17T11:10:59.318Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Governo di Soletta: decisioni del 20 ottobre 2026",
+          "url": "/articoli-soletta/governo-soletta-ottobre-2026/",
+          "excerpt": "NEST, formazione dei docenti, FamEL, polizia a Lugano e dossier al Consiglio cantonale tra i punti della seduta del 20 ottobre 2026.",
+          "date": "2026-10-20T15:04:51.328Z"
+        },
+        {
+          "title": "Soletta: Governo approva preventivo 2027, sessione settembre e inchiesta soH",
+          "url": "/articoli-soletta/soletta-parlamento-budget-2027-inchiesta-soh/",
+          "excerpt": "Il Regierungsrat approva il Voranschlag 2027; Kantonsrat in sessione 1-9 settembre con 51 oggetti; GPK pubblica rapporto su irregolarità alla soH.",
+          "date": "2026-10-20T06:13:06.286Z"
+        },
         {
           "title": "Furti con raggiro a Soletta: la polizia mette in guardia",
           "url": "/articoli-soletta/furti-raggiro-soletta/",
@@ -88,18 +100,6 @@
           "url": "/articoli-soletta/soletta-progetti-trasporto-governo/",
           "excerpt": "Soletta sostiene «Verkehr ’45» e chiede correzioni.",
           "date": "2026-10-08T11:40:05.556Z"
-        },
-        {
-          "title": "A5 a Luterbach: quattro rampe chiuse a ottobre",
-          "url": "/articoli-soletta/luterbach-a5-rampe-notte/",
-          "excerpt": "A Luterbach, sulla A5, la viabilità cambia nell'ottobre 2026: quattro rampe saranno chiuse di notte tra il 12 e il 20 ottobre. Le deviazioni saranno segnalate.",
-          "date": "2026-10-08T11:26:57.068Z"
-        },
-        {
-          "title": "Premi cassa malati a Soletta: +6% nel 2027",
-          "url": "/articoli-soletta/premi-malattia-soletta-2027/",
-          "excerpt": "Nel Canton Soletta il premio medio salirà di CHF 23.50 a CHF 417.50 nel 2027, 5.50 in più della media svizzera.",
-          "date": "2026-10-07T11:11:51.115Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-20T15:13:18.424Z"
     },
     "en": {
       "canton": "SO",
@@ -153,23 +153,35 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.260 EUR/l",
-              "detail": "regional average: lowest 1.990 EUR/l, 76 stations surveyed",
-              "date": "2026-10-17T08:45:46.000Z"
+              "value": "2.270 EUR/l",
+              "detail": "regional average: lowest 1.990 EUR/l, 72 stations surveyed",
+              "date": "2026-10-19T12:46:00.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.455 EUR/l",
-              "detail": "regional average: lowest 2.208 EUR/l, 76 stations surveyed",
-              "date": "2026-10-17T08:45:45.000Z"
+              "value": "2.457 EUR/l",
+              "detail": "regional average: lowest 2.225 EUR/l, 77 stations surveyed",
+              "date": "2026-10-19T12:46:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-17T11:10:59.318Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Government of Solothurn: decisions of October 20, 2026",
+          "url": "/en/solothurn-articles/solothurn-government-october-2026/",
+          "excerpt": "NEST, teacher training, FamEL, police in Lugano and dossiers before the Cantonal Council among the items on the agenda for the meeting of October 20, 2026.",
+          "date": "2026-10-20T15:04:51.328Z"
+        },
+        {
+          "title": "Soleta: Government approves 2027 budget, September session and soH investigation",
+          "url": "/en/solothurn-articles/solothurn-parliament-budget-2027-soh-investigation/",
+          "excerpt": "Regierungsrat approves Voranschlag 2027; Kantonsrat in session 1-9 September with 51 items; GPK publishes report on soH irregularities.",
+          "date": "2026-10-20T06:13:06.286Z"
+        },
         {
           "title": "Thefts by deception in Solothurn: police issue warning",
           "url": "/en/solothurn-articles/solothurn-trick-thefts-warning/",
@@ -186,18 +198,6 @@
           "title": "Solothurn: Government calls for corrections to transport projects",
           "url": "/en/solothurn-articles/solothurn-transport-projects-government/",
           "date": "2026-10-08T11:40:05.556Z"
-        },
-        {
-          "title": "A5 at Luterbach: four ramps closed in October",
-          "url": "/en/solothurn-articles/luterbach-a5-night-ramps/",
-          "excerpt": "At Luterbach, on the A5, traffic patterns will change in October 2026: four ramps will be closed at night between October 12 and 20. Detours will be signposted.",
-          "date": "2026-10-08T11:26:57.068Z"
-        },
-        {
-          "title": "Health insurance premiums in Solothurn: +6% in 2027",
-          "url": "/en/solothurn-articles/solothurn-health-premiums-2027/",
-          "excerpt": "In the Canton of Solothurn, the average premium will rise by CHF 23.50 to CHF 417.50 in 2027, 5.50 more than the Swiss average.",
-          "date": "2026-10-07T11:11:51.115Z"
         }
       ],
       "links": [
@@ -210,7 +210,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-20T15:13:18.424Z"
     },
     "de": {
       "canton": "SO",
@@ -251,23 +251,35 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.260 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 76 erfasste Tankstellen",
-              "date": "2026-10-17T08:45:46.000Z"
+              "value": "2.270 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 72 erfasste Tankstellen",
+              "date": "2026-10-19T12:46:00.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.455 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.208 EUR/l, 76 erfasste Tankstellen",
-              "date": "2026-10-17T08:45:45.000Z"
+              "value": "2.457 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.225 EUR/l, 77 erfasste Tankstellen",
+              "date": "2026-10-19T12:46:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-17T11:10:59.318Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Regierung des Kantons Solothurn: Beschlüsse vom 20. Oktober 2026",
+          "url": "/de/solothurn-artikel/solothurn-regierungsrat-oktober-2026/",
+          "excerpt": "NEST, die Ausbildung der Lehrpersonen, FamEL, die Polizei in Lugano und ein Dossier für den Kantonsrat gehören zu den Traktanden der Sitzung vom 20.",
+          "date": "2026-10-20T15:04:51.328Z"
+        },
+        {
+          "title": "Solothurn genehmigt Budget 2027, SOH-Untersuchung",
+          "url": "/de/solothurn-artikel/solothurn-parlament-budget-2027-untersuchung-soh/",
+          "excerpt": "Der Regierungsrat genehmigt den Voranschlag 2027; Kantonsrat in der Sitzung vom 1.",
+          "date": "2026-10-20T06:13:06.286Z"
+        },
         {
           "title": "Trickdiebstähle in Solothurn: Die Polizei warnt",
           "url": "/de/solothurn-artikel/solothurn-warnung-trickdiebstahle/",
@@ -284,18 +296,6 @@
           "title": "Solothurn: Regierung fordert Korrekturen bei Verkehrsprojekten",
           "url": "/de/solothurn-artikel/solothurn-verkehrsprojekte-regierung/",
           "date": "2026-10-08T11:40:05.556Z"
-        },
-        {
-          "title": "A5 bei Luterbach: vier Rampen im Oktober gesperrt",
-          "url": "/de/solothurn-artikel/luterbach-a5-nachtsperren/",
-          "excerpt": "Bei Luterbach ändert sich auf der A5 im Oktober 2026 die Verkehrsführung: Vier Rampen werden zwischen dem 12. und 20. Oktober nachts gesperrt. Die Umleitungen werden ausgeschildert.",
-          "date": "2026-10-08T11:26:57.068Z"
-        },
-        {
-          "title": "Krankenkassenprämien in Solothurn: +6% im Jahr 2027",
-          "url": "/de/solothurn-artikel/solothurn-krankenkassenpraemien-2027/",
-          "excerpt": "Im Kanton Solothurn steigt die durchschnittliche Prämie im Jahr 2027 um CHF 23.50 auf CHF 417.50, 5.50 mehr als der Schweizer Durchschnitt.",
-          "date": "2026-10-07T11:11:51.115Z"
         }
       ],
       "links": [
@@ -308,7 +308,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-20T15:13:18.424Z"
     },
     "fr": {
       "canton": "SO",
@@ -349,23 +349,35 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,260 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 76 stations relevées",
-              "date": "2026-10-17T08:45:46.000Z"
+              "value": "2,270 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 72 stations relevées",
+              "date": "2026-10-19T12:46:00.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,455 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,208 EUR/l, 76 stations relevées",
-              "date": "2026-10-17T08:45:45.000Z"
+              "value": "2,457 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,225 EUR/l, 77 stations relevées",
+              "date": "2026-10-19T12:46:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-17T11:10:59.318Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Gouvernement de Soleure : décisions du 20 octobre 2026",
+          "url": "/fr/articles-soleure/gouvernement-soleure-octobre-2026/",
+          "excerpt": "NEST, formation des enseignants, Famel, police à Lugano et dossier au Conseil cantonal entre les points de la séance du 20 octobre 2026.",
+          "date": "2026-10-20T15:04:51.328Z"
+        },
+        {
+          "title": "Soleure: le gouvernement approuve le devis 2027 et la session de septembre",
+          "url": "/fr/articles-soleure/soleure-parlement-budget-2027-enquete-soh/",
+          "excerpt": "Le Regierungsrat approuve le Voranschlag 2027 ; Kantonsrat en session 1-9 septembre avec 51 objets ; GPK publie un rapport sur les irrégularités à la soH.",
+          "date": "2026-10-20T06:13:06.286Z"
+        },
         {
           "title": "Vols par ruse à Soleure : la police met en garde",
           "url": "/fr/articles-soleure/soleure-alerte-vols-par-ruse/",
@@ -383,18 +395,6 @@
           "url": "/fr/articles-soleure/soleure-projets-transport-gouvernement/",
           "excerpt": "Soleure soutient « Verkehr ’45 » et demande des corrections.",
           "date": "2026-10-08T11:40:05.556Z"
-        },
-        {
-          "title": "A5 à Luterbach : quatre bretelles fermées en octobre",
-          "url": "/fr/articles-soleure/luterbach-a5-rampes-nuit/",
-          "excerpt": "À Luterbach, sur l’A5, la circulation change en octobre 2026 : quatre bretelles seront fermées de nuit entre le 12 et le 20 octobre. Les déviations seront signalées.",
-          "date": "2026-10-08T11:26:57.068Z"
-        },
-        {
-          "title": "Primes d’assurance-maladie à Soleure : +6 % en 2027",
-          "url": "/fr/articles-soleure/primes-maladie-soleure-2027/",
-          "excerpt": "Dans le canton de Soleure, la prime moyenne augmentera de CHF 23.50 pour atteindre CHF 417.50 en 2027, soit 5.50 de plus que la moyenne suisse.",
-          "date": "2026-10-07T11:11:51.115Z"
         }
       ],
       "links": [
@@ -407,7 +407,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-17T19:17:26.345Z"
+      "updatedAt": "2026-10-20T15:13:18.424Z"
     }
   }
 }

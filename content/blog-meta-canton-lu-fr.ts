@@ -21,6 +21,18 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.juso-lucerna-humbel-governo.title': 'Juso Lucerne : Valentin Humbel candidat au gouvernement',
     'blog.article.juso-lucerna-humbel-governo.excerpt': 'Valentin Humbel est le candidat de Juso au gouvernement lucernois.',
     'blog.article.juso-lucerna-humbel-governo.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.prioswiss-ricorso-luks.title': 'Prio Swiss recourt au Tribunal pour le mandat Luks',
+    'blog.article.prioswiss-ricorso-luks.excerpt': 'L’association conteste le mandat pour les opérations à l’œsophage au Luzerner Kantonsspital, soutenant qu’il n’a pas atteint le nombre minimal de cas et que dix autres centres couvrent déjà les besoins.',
+    'blog.article.prioswiss-ricorso-luks.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lucerna-forensic-nurses-violenza.title': 'Lucerne : Forensic Nurses contre la violence domestique',
+    'blog.article.lucerna-forensic-nurses-violenza.excerpt': 'Le canton de Lucerne prévoit pour l’été 2027 un projet pilote avec Forensic Nurses et annonce de nouveaux services médicaux et de police.',
+    'blog.article.lucerna-forensic-nurses-violenza.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lucerna-bilancio-budget-2027.title': 'Lucerne : le Parlement confirme le PIB pour le budget 2027',
+    'blog.article.lucerna-bilancio-budget-2027.excerpt': 'Le Conseil cantonal de Lucerne approuve la référence au PIB pour la croissance des dépenses.',
+    'blog.article.lucerna-bilancio-budget-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lucerna-finanze-sessione-ottobre.title': 'Lucerne : cinq heures de débat sur les finances cantonales',
+    'blog.article.lucerna-finanze-sessione-ottobre.excerpt': 'Le Conseil cantonal de Lucerne a débattu de l\'AFP 2027–2030 pendant plus de cinq heures ; la proposition fait passer le taux 2027 de 1,45 à 1,40 unité, avec un vote le 20 octobre.',
+    'blog.article.lucerna-finanze-sessione-ottobre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

@@ -38,6 +38,8 @@ jobs:
           sparse-checkout: |
             scripts/monitor-jobs-pipeline-queue.mjs
             scripts/lib
+            scripts/ci/guard-main-tree-shrink.mjs
+            scripts/ci/old-history-guard.mjs
           sparse-checkout-cone-mode: false
 
       - name: Scan queue depth, wait, and utilization

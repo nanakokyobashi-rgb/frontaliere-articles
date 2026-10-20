@@ -36,6 +36,18 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.eventi-weekend-argovia.title': 'Eventi del weekend in Argovia: cosa fare sabato e domenica',
     'blog.article.eventi-weekend-argovia.excerpt': 'Eventi in Argovia ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.',
     'blog.article.eventi-weekend-argovia.imageAlt': 'Eventi del weekend in Argovia',
+    'blog.article.riniker-governo-argovia.title': 'Maja Riniker (FDP) eletta nel governo argoviese',
+    'blog.article.riniker-governo-argovia.excerpt': 'Con 70\'137 voti e un\'affluenza del 21,01%, Maja Riniker è eletta nel governo argoviese.',
+    'blog.article.riniker-governo-argovia.imageAlt': 'Governo cantonale argoviese dopo l\'elezione di Maja Riniker',
+    'blog.article.iniziativa-parita-salariale-ag.title': 'Argovia: iniziativa per rafforzare la parità salariale',
+    'blog.article.iniziativa-parita-salariale-ag.excerpt': 'ArbeitAargau e un\'alleanza di organizzazioni femminili e partiti chiedono analisi salariali da 50 dipendenti, sanzioni e il ripristino della Fachstelle.',
+    'blog.article.iniziativa-parita-salariale-ag.imageAlt': 'Iniziativa per la parità salariale nel Canton Argovia',
+    'blog.article.sezione-medicina-nucleare.title': 'Nuklearforum crea la sezione Medicina nucleare svizzera',
+    'blog.article.sezione-medicina-nucleare.excerpt': 'Il Nuklearforum Schweiz crea una nuova sezione Assemblea costitutiva il 12 ottobre a Olten KSB, PSI e Molecular Partners tra i fondatori Focus su radionuclidi',
+    'blog.article.sezione-medicina-nucleare.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.murales-pediatria-ksb-baden.title': 'KSB Baden: murales in pediatria e pronto soccorso',
+    'blog.article.murales-pediatria-ksb-baden.excerpt': 'Dieci artisti di Paint a Smile hanno dipinto circa 200 metri quadrati al KSB Baden.',
+    'blog.article.murales-pediatria-ksb-baden.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAgIt;

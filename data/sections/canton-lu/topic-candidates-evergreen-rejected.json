@@ -1,14 +1,16 @@
 {
-  "keywords": [],
-  "strikes": {},
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
   "topicGateUrls": {
-    "canton-lu::https://www.nau.ch/news/wirtschaft/schweizer-ki-stellenmarkt-wachst-rasant-67186423": {
+    "canton-lu::https://www.zentralplus.ch/wirtschaft/emmen-center-gleich-drei-laeden-schliessen-2905630": {
       "section": "canton-lu",
-      "ts": 1791623359046
+      "ts": 1792425869088
     },
-    "canton-lu::https://www.zentralplus.ch/news/neue-partnervermittlung-startet-im-kanton-luzern-2903833": {
+    "canton-lu::https://www.zentralplus.ch/politik/luzern-plant-steuersenkung-doch-es-gibt-widerstand-2905798": {
       "section": "canton-lu",
-      "ts": 1791623368555
+      "ts": 1792436466130
     }
   }
 }

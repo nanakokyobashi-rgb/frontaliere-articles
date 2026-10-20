@@ -21,6 +21,12 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.furti-raggiro-soletta.title': 'Furti con raggiro a Soletta: la polizia mette in guardia',
     'blog.article.furti-raggiro-soletta.excerpt': 'La Polizia cantonale di Soletta segnala circa dieci furti con raggiro negli ultimi giorni: autrici e autori usano gioielli economici per distrarre le vittime.',
     'blog.article.furti-raggiro-soletta.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.soletta-parlamento-budget-2027-inchiesta-soh.title': 'Soletta: Governo approva preventivo 2027, sessione settembre e inchiesta soH',
+    'blog.article.soletta-parlamento-budget-2027-inchiesta-soh.excerpt': 'Il Regierungsrat approva il Voranschlag 2027; Kantonsrat in sessione 1-9 settembre con 51 oggetti; GPK pubblica rapporto su irregolarità alla soH.',
+    'blog.article.soletta-parlamento-budget-2027-inchiesta-soh.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.governo-soletta-ottobre-2026.title': 'Governo di Soletta: decisioni del 20 ottobre 2026',
+    'blog.article.governo-soletta-ottobre-2026.excerpt': 'NEST, formazione dei docenti, FamEL, polizia a Lugano e dossier al Consiglio cantonale tra i punti della seduta del 20 ottobre 2026.',
+    'blog.article.governo-soletta-ottobre-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;
