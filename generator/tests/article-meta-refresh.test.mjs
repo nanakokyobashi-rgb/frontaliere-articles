@@ -407,7 +407,7 @@ test('refreshDescriptiveTexts: scrive tutte e 4 le locali + il file SEO, e ripor
     const localeTexts = {};
     for (const locale of ['it', 'en', 'de', 'fr']) {
       localeTexts[locale] = {
-        excerpt: `Estratto lungo e ricco ${locale}`,
+        excerpt: `${locale}: ${VALID_SEO_DESCRIPTION}`,
         seoDescription: `SERP ${locale}`,
         ogDescription: `Social ${locale}`,
       };
@@ -422,8 +422,9 @@ test('refreshDescriptiveTexts: scrive tutte e 4 le locali + il file SEO, e ripor
     assert.equal(touched.length, 5, '4 file meta + 1 file seo');
 
     const en = fs.readFileSync(path.join(root, 'content', 'blog-meta-en.ts'), 'utf-8');
-    assert.ok(en.includes("'blog.article.demo-id.excerpt': 'Estratto lungo e ricco en',"));
-    assert.ok(en.includes("'blog.article.demo-id.seoDescription': 'SERP en',"));
+    const enExcerpt = `en: ${VALID_SEO_DESCRIPTION}`;
+    assert.ok(en.includes(`'blog.article.demo-id.excerpt': '${enExcerpt}',`));
+    assert.ok(en.includes(`'blog.article.demo-id.seoDescription': '${enExcerpt}',`));
     assert.ok(en.includes("'blog.article.demo-id.ogDescription': 'Social en',"));
 
     const seo = fs.readFileSync(path.join(root, 'content', 'seo', 'seo-blog-5.ts'), 'utf-8');
@@ -501,6 +502,11 @@ test('refreshDescriptiveTexts: writer e reader iniettati permettono lo staging s
   try {
     const staged = new Map();
     const writes = [];
+    const localeFields = {
+      excerpt: `it: ${VALID_SEO_DESCRIPTION}`,
+      seoDescription: 'SERP staged',
+      ogDescription: 'Social staged',
+    };
     const read = (file) => staged.has(file) ? staged.get(file) : fs.readFileSync(file, 'utf8');
     const write = (file, content) => {
       staged.set(file, content);
@@ -510,7 +516,7 @@ test('refreshDescriptiveTexts: writer e reader iniettati permettono lo staging s
     const before = fs.readFileSync(metaPath, 'utf8');
     const result = refreshDescriptiveTexts(
       'demo-id',
-      { it: { excerpt: 'Estratto staged', seoDescription: 'SERP staged', ogDescription: 'Social staged' } },
+      { it: localeFields },
       { description: VALID_SEO_DESCRIPTION, ogDescription: 'Social staged' },
       { repoRoot: root, readFile: read, writeFile: write },
     );
@@ -518,11 +524,11 @@ test('refreshDescriptiveTexts: writer e reader iniettati permettono lo staging s
     assert.equal(result.changed, true);
     assert.equal(writes.length, 2, 'solo la locale richiesta e il file SEO devono essere staged');
     assert.equal(fs.readFileSync(metaPath, 'utf8'), before, 'il writer iniettato non deve scrivere il target');
-    assert.match(staged.get(metaPath), /Estratto staged/);
+    assert.ok(staged.get(metaPath).includes(`'blog.article.demo-id.seoDescription': '${localeFields.excerpt}',`));
     assert.equal(
       refreshDescriptiveTexts(
         'demo-id',
-        { it: { excerpt: 'Estratto staged', seoDescription: 'SERP staged', ogDescription: 'Social staged' } },
+        { it: localeFields },
         { description: VALID_SEO_DESCRIPTION, ogDescription: 'Social staged' },
         { repoRoot: root, readFile: read, writeFile: write },
       ).changed,
@@ -576,7 +582,11 @@ test('refreshDescriptiveTexts: un secondo giro con gli stessi testi non scrive n
   try {
     const localeTexts = {};
     for (const locale of ['it', 'en', 'de', 'fr']) {
-      localeTexts[locale] = { excerpt: `E ${locale}`, seoDescription: `S ${locale}`, ogDescription: `O ${locale}` };
+      localeTexts[locale] = {
+        excerpt: `${locale}: ${VALID_SEO_DESCRIPTION}`,
+        seoDescription: `S ${locale}`,
+        ogDescription: `O ${locale}`,
+      };
     }
     const seoTexts = { description: VALID_SEO_DESCRIPTION, ogDescription: 'O it' };
     const first = refreshDescriptiveTexts('demo-id', localeTexts, seoTexts, { repoRoot: root });
@@ -719,7 +729,7 @@ test('refreshDescriptiveTexts: rifiuta truncamenti insicuri o sotto il floor pri
         undefined,
         { repoRoot: root },
       ),
-      /falls below the 80-character minimum after capping/,
+      /must contain at least 80 characters/,
     );
     assert.equal(fs.readFileSync(metaPath, 'utf-8'), metaBefore, 'una descrizione tagliata sotto il floor non deve essere scritta');
     assert.equal(fs.existsSync(registerLockPath(root, 'frontaliere')), false, 'il rifiuto del clamp deve rilasciare il lock');
