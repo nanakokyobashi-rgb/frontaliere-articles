@@ -77,6 +77,7 @@ on:
       # RC_ENV_LOADED che build-api legge: un fix al loader deve ripubblicare.
       - 'generator/scripts/load-rc-env.mjs'
       - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
+      - 'generator/scripts/lib/seo-description-contract.mjs'
       # Il resto della chiusura degli import del publisher (build-api,
       # build-blog-index, verify-api-floors, publish-section-edge): ogni modulo
       # che uno di loro importa e' un input della superficie pubblicata, e un
