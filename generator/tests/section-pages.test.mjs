@@ -25,6 +25,7 @@ import {
   APEX,
   apiInputChangedInRange,
   CANTON_RSS_PREFIX,
+  IMAGE_LEASE_RELEASE_TIMEOUT_MS,
   PAGE_CACHE_CONTROL,
   UPLOAD_ORDER,
   addCantonRssFeedLink,
@@ -59,6 +60,7 @@ import {
   publish,
   publishApiTriggerPaths,
   publishCantonRssFeeds,
+  releaseImageLeasesWithDeadline,
   removeCantonRssFeedLinks,
   resolveStaleReplayApiReleaseCommit,
   resolvePublishedReleaseCommit,
@@ -141,6 +143,20 @@ test('publisher: un secondo segnale attende il cleanup bounded delle lease immag
   assert.match(handler, /imageLeaseSecondSignalExitStatus/);
   assert.match(handler, /deferring exit/);
   assert.doesNotMatch(handler, /process\.exit/);
+  assert.match(publisher, /releaseImageLeasesWithDeadline\(imageLeases/);
+});
+
+test('publisher: il cleanup lease restituisce un timeout osservabile se R2 resta pendente', async () => {
+  const result = await releaseImageLeasesWithDeadline(
+    [{ namespace: 'blog' }],
+    { releaseImpl: () => new Promise(() => {}), timeoutMs: 20 },
+  );
+  assert.equal(result.status, 'timeout');
+  assert.equal(result.timedOut, true);
+  assert.equal(result.released, null);
+  assert.equal(result.error?.code, 'IMAGE_LEASE_RELEASE_TIMEOUT');
+  assert.equal(result.error?.timeoutMs, 20);
+  assert.equal(IMAGE_LEASE_RELEASE_TIMEOUT_MS, 30_000);
 });
 
 test('publisher: un marker upload con exit non-zero non viene considerato riuscito e il lease context arriva al comando', async () => {

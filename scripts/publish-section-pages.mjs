@@ -105,6 +105,8 @@ export const PAGE_CACHE_CONTROL = 'public,max-age=600';
 /** Dopo il deploy API la superficie pubblica puo' arrivare in ritardo: la delete attende, ma con un limite. */
 export const RELEASE_READY_MAX_WAIT_MS = 120_000;
 export const RELEASE_READY_RETRY_DELAY_MS = 10_000;
+/** Il cleanup della lease non puo' trattenere l'uscita oltre il tempo del fallback. */
+export const IMAGE_LEASE_RELEASE_TIMEOUT_MS = 30_000;
 /** Inventario delle pagine: si aggiorna solo dopo una pubblicazione verificata. */
 export const PAGE_MANIFEST_CACHE_CONTROL = 'public,max-age=60';
 /** Il confronto riusa i limiti del fetch immagini del render. */
@@ -929,6 +931,57 @@ async function publishSignalBoundary(signal) {
   if (!signal) return;
   await new Promise((resolve) => setImmediate(resolve));
   if (signal.aborted) throw publishAbortError();
+}
+
+/**
+ * Rilascia le lease senza lasciare il publisher appeso a una richiesta R2.
+ *
+ * Il trasporto sottostante puo' essere gia' in-flight e non sempre espone un
+ * abort al chiamante. La promise resta quindi osservata anche quando scade il
+ * limite, cosi' un eventuale rigetto tardivo non diventa un unhandled
+ * rejection; il chiamante riceve comunque subito un esito timeout esplicito.
+ */
+export async function releaseImageLeasesWithDeadline(
+  leases,
+  {
+    releaseImpl = releaseImageNamespaceLeases,
+    timeoutMs = IMAGE_LEASE_RELEASE_TIMEOUT_MS,
+  } = {},
+) {
+  if (!Array.isArray(leases)) throw new TypeError('image leases must be an array');
+  if (typeof releaseImpl !== 'function') throw new TypeError('image lease release must be a function');
+  if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) {
+    throw new TypeError('image lease release timeout must be positive');
+  }
+
+  let timer;
+  const release = Promise.resolve().then(() => releaseImpl(leases));
+  const timeout = new Promise((resolve) => {
+    timer = setTimeout(() => resolve({ timedOut: true }), timeoutMs);
+  });
+  try {
+    const outcome = await Promise.race([
+      release.then(
+        (released) => ({ timedOut: false, released, error: null }),
+        (error) => ({ timedOut: false, released: null, error }),
+      ),
+      timeout,
+    ]);
+    if (outcome.timedOut) {
+      const error = new Error(`[${LOG}] rilascio lease immagini oltre il limite di ${timeoutMs}ms`);
+      error.code = 'IMAGE_LEASE_RELEASE_TIMEOUT';
+      error.timeoutMs = timeoutMs;
+      return { status: 'timeout', timedOut: true, released: null, error };
+    }
+    return {
+      status: outcome.error ? 'failed' : 'released',
+      timedOut: false,
+      released: outcome.released,
+      error: outcome.error,
+    };
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 async function waitForPublishRetry(ms, sleepImpl, signal) {
@@ -2978,17 +3031,21 @@ export async function main(
   const releaseImageLeases = async () => {
     if (imageLeaseReleaseAttempted || imageLeases.length === 0) return null;
     imageLeaseReleaseAttempted = true;
-    try {
-      const released = await releaseImageNamespaceLeasesImpl(imageLeases);
-      const releasedSet = new Set(released);
-      if (releasedSet.size !== imageLeases.length
-          || imageLeases.some(({ namespace }) => !releasedSet.has(namespace))) {
-        throw new Error(`lease immagini non completamente rilasciata: attese ${imageLeases.map(({ namespace }) => namespace).join(', ')}, ricevute ${released.join(', ')}`);
-      }
-      return null;
-    } catch (error) {
-      return error;
+    const result = await releaseImageLeasesWithDeadline(imageLeases, {
+      releaseImpl: async (leases) => {
+        const released = await releaseImageNamespaceLeasesImpl(leases);
+        const releasedSet = new Set(released);
+        if (releasedSet.size !== imageLeases.length
+            || imageLeases.some(({ namespace }) => !releasedSet.has(namespace))) {
+          throw new Error(`lease immagini non completamente rilasciata: attese ${imageLeases.map(({ namespace }) => namespace).join(', ')}, ricevute ${released.join(', ')}`);
+        }
+        return released;
+      },
+    });
+    if (result.timedOut) {
+      console.error(`::error::[${LOG}] cleanup lease immagini timeout dopo ${IMAGE_LEASE_RELEASE_TIMEOUT_MS}ms`);
     }
+    return result.error;
   };
   try {
     if (publishing && imageNamespaces.length > 0) {
