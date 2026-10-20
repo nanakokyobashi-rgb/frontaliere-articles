@@ -21048,12 +21048,24 @@ function clampSeoDescriptions(data) {
   }
   const content = data?.content;
   if (content && typeof content === 'object') {
-    for (const localeContent of Object.values(content)) {
+    for (const [locale, localeContent] of Object.entries(content)) {
       if (!localeContent || typeof localeContent !== 'object') continue;
       for (const [field, max] of Object.entries(LOCALE_SEO_DESCRIPTION_BUDGETS)) {
         const value = localeContent[field];
         if (typeof value !== 'string' || value.length === 0) continue;
-        localeContent[field] = truncateAtWordBoundary(value, max);
+        let clamped = truncateAtWordBoundary(value, max);
+        if (field === 'seoDescription' && value.length > max && clamped.length < SEO_DESCRIPTION_MIN) {
+          const excerpt = stripExcerptMarkdown(
+            typeof localeContent.excerpt === 'string' ? localeContent.excerpt : '',
+          );
+          const fallback = truncateAtWordBoundary(excerpt, max);
+          clamped = assertSeoDescriptionMinimum(fallback, {
+            id: `${data?.id || 'unknown'}:${locale}`,
+            sourceDescriptionLength: value.length,
+            sourceExcerptLength: excerpt.length,
+          });
+        }
+        localeContent[field] = clamped;
       }
     }
   }
