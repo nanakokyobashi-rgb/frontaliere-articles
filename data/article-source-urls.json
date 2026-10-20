@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/stadler-rail-punta-sul-kazakistan%2c-nuovi-investimenti-ad-astana/92044872": {
-    "articleId": "stadler-rail-investimenti-kazakistan",
-    "ts": "2026-09-13T06:55:26.644Z",
-    "keyForm": 2
-  },
   "https://comozero.it/attualita/a-pochi-km-da-como-ecco-la-smart-valley-laboratori-per-creare-lavoratori-su-misura-per-le-imprese": {
     "articleId": "inaugurazione-campus-smart-valley-daverio",
     "ts": "2026-09-13T07:02:10.986Z",
@@ -2497,6 +2492,11 @@
   "https://www.ticinonews.ch/ticino/scuola-inoltre-ventanni-di-formazione-dietro-le-sbarre-444924": {
     "articleId": "scuola-inoltre-ventanni-formazione-carcere",
     "ts": "2026-10-20T05:19:32.695Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/sui-frontalieri-pesano-le-disparita-uno-su-due-si-sente-pagato-meno-degli-svizzeri/2713108": {
+    "articleId": "indagine-disparita-salariali-frontalieri",
+    "ts": "2026-10-20T10:53:09.923Z",
     "keyForm": 2
   }
 }
