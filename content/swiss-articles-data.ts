@@ -28537,6 +28537,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'circolare-221-deduzione-figli-2027',
+    category: 'fiscale',
+    date: '2026-10-20T17:41:42.699Z',
+    image: '/images/blog/article-circolare-221-deduzione-figli-2027.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
