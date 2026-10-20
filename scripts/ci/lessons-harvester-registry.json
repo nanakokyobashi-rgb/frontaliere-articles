@@ -120,6 +120,27 @@
       "decidedAt": "2026-10-04T11:15:12Z",
       "ref": "#11033, #10476, #10182",
       "reason": "Gia' coperto da AGENTS.md #6: parser e guard funnel-critical non classificano ogni token o linea per shape, ma validano dominio e contesto e gestiscono unknown, ambigui e non-target."
+    },
+    {
+      "key": "fix-outcome/fix-outcome:evidence-only",
+      "outcome": "added",
+      "decidedAt": "2026-10-20T10:33:39Z",
+      "ref": "#2885, #2819, #2736, #2735, #2722",
+      "reason": "ISSUES.md ora vieta `evidence-only`: audit senza diff code-owned deve usare `no-root-cause` con defer tecnico, un capability `blocked-*` specifico o `already-fixed` solo con prova di recovery."
+    },
+    {
+      "key": "fix-outcome/fix-outcome:pr-updated",
+      "outcome": "added",
+      "decidedAt": "2026-10-20T10:33:39Z",
+      "ref": "#2990, #2978, #2977, #2518, #2422",
+      "reason": "ISSUES.md chiarisce che un commit pushato su una PR già aperta è delivery (`pr-created`), mentre `pr-already-open` è solo lo skip senza commit; `pr-updated` non è un codice."
+    },
+    {
+      "key": "fix-outcome/fix-outcome:blocked-external",
+      "outcome": "added",
+      "decidedAt": "2026-10-20T10:33:39Z",
+      "ref": "#2963, #2880, #2518, #1610, #911",
+      "reason": "ISSUES.md aggiunge il capability-guard per dipendenze esterne, quota/API e prove live e vieta il marker non riconosciuto `blocked-external`."
     }
   ]
 }
