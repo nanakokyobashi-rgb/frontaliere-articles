@@ -168,6 +168,14 @@ Non ogni issue produce una PR, e forzarne una è peggio che non farla:
   presenti in CI → il `blocked-*` che la nomina. **Valutalo al turno 1, non
   alla fine:** fare tutto il lavoro per poi scoprire il blocco al push spreca
   l'intero run.
+- **Blocco esterno / sola evidenza** — se la run produce solo audit o misure e
+  nessun diff code-owned verificabile, oppure dipende da altro repo/PR, quota
+  API, CDN/produzione o una nuova run, fermati senza PR: non inventare
+  `evidence-only` o `blocked-external`; usa `no-root-cause` +
+  `AUTOMATION_DEFERRED: technical` quando causa/fix non sono dimostrabili,
+  oppure il `blocked-*` specifico quando è davvero una capability mancante.
+  `already-fixed` vale solo con prova su `main` o runtime che il difetto è
+  rientrato.
 - **Issue nel repo sbagliato** → migrala nel repo proprietario, collega le
   schede e chiudi l'errata con evidenza. **Manca solo il dato** → strumenta
   (emetti il dato quando l'evento accade), non parcheggiare.
@@ -177,7 +185,9 @@ Non ogni issue produce una PR, e forzarne una è peggio che non farla:
   post-fix dimostra che il difetto è rientrato, termina senza PR: commenta
   l'evidenza e usa `already-fixed`; non inventare codici come
   `verified-recovered`. Una run verde isolata non basta se la failure ricorre.
-- **PR già in volo**.
+- **PR già in volo**. Se la aggiorni con un commit pushato, è una consegna:
+  usa `pr-created` con numero/head della PR, non inventare `pr-updated`;
+  `pr-already-open` vale solo quando non hai aggiunto commit e hai saltato.
 
 ## Telemetria degli esiti (obbligatoria)
 
