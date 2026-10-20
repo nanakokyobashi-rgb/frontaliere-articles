@@ -161,6 +161,9 @@ export const CONTENT_GATES = [
   // pipeline: una voce in una sola delle due lascia l'articolo non renderizzabile
   // o fa servire una SEO per un id che il registro non conosce.
   'generator/tests/content-seo-registry-parity.test.mjs',
+  // Il producer JSON deve continuare a leggere body e metadata reali, inclusi
+  // i 24 record delle sei guide educatori da pubblicare via API.
+  'generator/tests/article-body-api.test.mjs',
   // Il builder condiviso deve restare byte-equivalente al writer di main sui
   // 20 articoli piu' recenti: il recupero non puo' introdurre un dialetto SEO.
   'generator/tests/seo-entry-equivalence.test.mjs',

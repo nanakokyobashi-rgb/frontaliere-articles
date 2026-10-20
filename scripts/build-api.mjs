@@ -155,6 +155,8 @@ import {
   validateReleaseMarkers,
 } from './lib/announced-surface.mjs';
 
+import { emitArticleBodyApi, verifyArticleBodyApiOnDisk } from './lib/article-body-api.mjs';
+
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist', 'api');
 const LOCALES = ['it', 'en', 'de', 'fr'];
@@ -303,6 +305,19 @@ for (const section of PUBLISHED_API_SECTIONS) {
   }
   SECTION_REGISTRIES[section.section] = registry;
 }
+const globalArticleOwners = new Map();
+for (const section of PUBLISHED_API_SECTIONS) {
+  for (const article of SECTION_REGISTRIES[section.section]) {
+    if (typeof article?.id !== 'string' || !article.id) {
+      throw new Error(`${section.section}: registry contains an article without an id — refusing to publish article bodies`);
+    }
+    const owner = globalArticleOwners.get(article.id);
+    if (owner) {
+      throw new Error(`article id "${article.id}" appears in ${owner} and ${section.section} — global body namespace must be unique`);
+    }
+    globalArticleOwners.set(article.id, section.section);
+  }
+}
 // Il registro frontaliere ha consumer che sono suoi per costruzione (ticker
 // della homepage, edizioni quotidiane ritirate): li si nomina per tipo.
 const FRONTALIERE = API_SECTIONS.find((section) => section.kind === 'frontaliere');
@@ -369,11 +384,15 @@ for (const section of API_SECTIONS) {
 
 // Per locale e poi per sezione: e' l'ordine in cui i file sono sempre stati
 // scritti, quindi anche l'ordine di `manifest.files`.
+const SECTION_META_BY_LOCALE = Object.fromEntries(
+  PUBLISHED_API_SECTIONS.map((section) => [section.section, {}]),
+);
 for (const loc of LOCALES) {
   for (const section of API_SECTIONS) {
     const metaName = path.basename(section.metaFile(loc), '.ts');
     const meta = (await load(section.metaFile(loc))).default;
     if (!meta || typeof meta !== 'object') throw new Error(`${metaName} default is not an object`);
+    SECTION_META_BY_LOCALE[section.section][loc] = meta;
     write(section.api.metaFile(loc), meta);
   }
 }
@@ -383,6 +402,7 @@ async function loadSectionMeta(section, loc) {
   if (familyFileMissing(section, section.metaFile(loc))) return {};
   const meta = (await load(section.metaFile(loc))).default;
   if (!meta || typeof meta !== 'object') throw new Error(`${path.basename(section.metaFile(loc), '.ts')} default is not an object`);
+  SECTION_META_BY_LOCALE[section.section][loc] = meta;
   return meta;
 }
 
@@ -423,6 +443,38 @@ for (const family of PUBLIC_API_FAMILIES) {
     write(family.api.metaFile(loc), merged);
   }
 }
+
+// Article bodies cross the repository boundary only as versioned JSON. The
+// compact indexes declare every registry id and every intentionally missing
+// source file; payload revisions cover identity, localized metadata and body.
+// Individual payloads stay out of manifest.files (the per-locale index carries
+// their hashes), but they are all re-read and validated by the final disk gate.
+const articleBodyApi = emitArticleBodyApi({
+  root: ROOT,
+  outDir: OUT,
+  locales: LOCALES,
+  sections: PUBLISHED_API_SECTIONS,
+  registries: SECTION_REGISTRIES,
+  publicSections: new Set(PUBLIC_API_SECTIONS.map((section) => section.section)),
+  metaBySectionLocale: SECTION_META_BY_LOCALE,
+  sanitize(value, relativePath) {
+    const filePath = path.join(OUT, relativePath);
+    const clean = sanitizeDeep(value);
+    reportStrippedControlCharsDeep(filePath, value, clean);
+    return clean;
+  },
+});
+for (const section of PUBLISHED_API_SECTIONS) {
+  for (const loc of LOCALES) {
+    const indexPath = `bodies/${section.section}/${loc}/index.json`;
+    const indexBytes = fs.readFileSync(path.join(OUT, indexPath), 'utf8');
+    written[indexPath] = byteSize(indexBytes);
+  }
+}
+console.log(
+  `[build-api] article bodies: ${articleBodyApi.totals.available}/${articleBodyApi.totals.expected} available, `
+    + `${articleBodyApi.totals.missing} explicitly missing`,
+);
 
 /** Il modulo della mappa slug di ogni sezione: mappa, inversa e provenienza dei fallback. */
 const SECTION_SLUG_MODULES = {};
@@ -1440,6 +1492,9 @@ write('manifest.json', {
     dailyBriefBlocks,
     plateAuctionEditorialLocales,
     cantonHubs: cantonHubApiCount,
+    articleBodyRecordsExpected: articleBodyApi.totals.expected,
+    articleBodyRecordsAvailable: articleBodyApi.totals.available,
+    articleBodyRecordsMissing: articleBodyApi.totals.missing,
     // Le sezioni del catalogo e le sitemap elencate dall'indice (0 = indice
     // non emesso). Quante sezioni sono LIVE non e' un contatore del manifest:
     // lo stato servito lo dice solo il registro su R2.
@@ -1455,7 +1510,23 @@ write('manifest.json', {
       ]),
     ),
   },
+  capabilities: {
+    articleBodies: articleBodyApi.capability,
+  },
   files: written,
+});
+
+// The body API's count source is the bytes on disk, not emitArticleBodyApi's
+// in-memory summary. Validate every index, payload, revision and public ID set
+// before allowing this manifest to leave the build.
+const articleBodyManifest = JSON.parse(fs.readFileSync(path.join(OUT, 'manifest.json'), 'utf8'));
+const articleBodyDisk = verifyArticleBodyApiOnDisk({
+  outDir: OUT,
+  capability: articleBodyManifest.capabilities?.articleBodies,
+  sections: PUBLISHED_API_SECTIONS,
+  registries: SECTION_REGISTRIES,
+  publicSections: new Set(PUBLIC_API_SECTIONS.map((section) => section.section)),
+  locales: LOCALES,
 });
 
 console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`);
@@ -1654,6 +1725,9 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
         0,
       ),
     ),
+    articleBodyRecordsExpected: articleBodyDisk.totals.expected,
+    articleBodyRecordsAvailable: articleBodyDisk.totals.available,
+    articleBodyRecordsMissing: articleBodyDisk.totals.missing,
     sections: derivedAlways(SECTIONS_CATALOG_FILE, () => jsonOut(SECTIONS_CATALOG_FILE).sections.length),
     // L'indice e' opzionale per costruzione, e la sua assenza e' legittima
     // solo se il registro edge emesso non ha sezioni live (o non e' stato
