@@ -1,14 +1,12 @@
 {
-  "keywords": [],
-  "strikes": {},
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
   "topicGateUrls": {
-    "canton-sg::https://www.unisg.ch/de/newsroom/themenschwerpunkt-kuenstliche-intelligenz": {
+    "canton-sg::https://www.sg.ch/news/sgch_kantonspolizei/2026/10/niederuzwil--verkehrsunfall--wer-hatte-gruen----zeugenaufruf.html": {
       "section": "canton-sg",
-      "ts": 1791678055636
-    },
-    "canton-sg::https://www.unisg.ch/de/newsroom/themenschwerpunkt-nachhaltigkeit": {
-      "section": "canton-sg",
-      "ts": 1791678096997
+      "ts": 1792521215445
     }
   }
 }
