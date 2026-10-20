@@ -72,4 +72,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'soletta-parlamento-budget-2027-inchiesta-soh',
+ category: 'novita',
+ date: '2026-10-20T06:13:06.286Z',
+ image: '/images/blog/article-soletta-parlamento-budget-2027-inchiesta-soh.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

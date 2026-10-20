@@ -21,6 +21,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.furti-raggiro-soletta.title': 'Thefts by deception in Solothurn: police issue warning',
     'blog.article.furti-raggiro-soletta.excerpt': 'The Solothurn cantonal police report around ten thefts involving deception in recent days: perpetrators use inexpensive jewelry to distract their victims.',
     'blog.article.furti-raggiro-soletta.imageAlt': 'Illustration generated for this article',
+    'blog.article.soletta-parlamento-budget-2027-inchiesta-soh.title': 'Soleta: Government approves 2027 budget, September session and soH investigation',
+    'blog.article.soletta-parlamento-budget-2027-inchiesta-soh.excerpt': 'Regierungsrat approves Voranschlag 2027; Kantonsrat in session 1-9 September with 51 items; GPK publishes report on soH irregularities.',
+    'blog.article.soletta-parlamento-budget-2027-inchiesta-soh.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

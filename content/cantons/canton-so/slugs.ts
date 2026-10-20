@@ -9,6 +9,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'soletta-progetti-trasporto-governo': { it: 'soletta-progetti-trasporto-governo', en: 'solothurn-transport-projects-government', de: 'solothurn-verkehrsprojekte-regierung', fr: 'soleure-projets-transport-gouvernement' },
  'solothurn-pneumonia-suini': { it: 'solothurn-pneumonia-suini', en: 'solothurn-pig-pneumonia-cull', de: 'solothurn-schweinepneumonie-keulung', fr: 'soleure-pneumonie-porcine-abattage' },
  'furti-raggiro-soletta': { it: 'furti-raggiro-soletta', en: 'solothurn-trick-thefts-warning', de: 'solothurn-warnung-trickdiebstahle', fr: 'soleure-alerte-vols-par-ruse' },
+ 'soletta-parlamento-budget-2027-inchiesta-soh': { it: 'soletta-parlamento-budget-2027-inchiesta-soh', en: 'solothurn-parliament-budget-2027-soh-investigation', de: 'solothurn-parlament-budget-2027-untersuchung-soh', fr: 'soleure-parlement-budget-2027-enquete-soh' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
