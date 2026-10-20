@@ -1,10 +1,12 @@
 {
-  "keywords": [],
-  "strikes": {},
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
   "topicGateUrls": {
-    "canton-zh::https://www.suedkurier.de/schweiz/achtung-zollfalle-wer-ueber-die-schweiz-zurueck-aus-dem-urlaub-reist-sollte-diese-regeln-beachten-76-114839880": {
+    "canton-zh::https://www.tagesanzeiger.ch/kraftwerk1-300-mietende-brauchen-ersatzunterkunft-365450547754": {
       "section": "canton-zh",
-      "ts": 1791767503552
+      "ts": 1792475392740
     }
   }
 }
