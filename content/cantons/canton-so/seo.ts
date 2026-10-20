@@ -314,6 +314,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-soletta-regierungsrat-attiparlamentari-2026': {
+    title: 'Soletta: 15 risposte a iniziative parlamentari e progetto diritti voto',
+    description: 'Il 20 ottobre 2026 il Regierungsrat solettese ha reso noti 15 risposte a iniziative parlamentari, 5 prese di posizione su soH e il messaggio per abolire',
+    keywords: 'frontalieri, ticino, svizzera, italia, soletta, risposte, iniziative, parlamentari',
+    ogTitle: 'Soletta: 15 risposte parlamentari e progetto abolizione esclusione voto',
+    ogDescription: 'Il Governo solettese ha pubblicato i documenti della 34ª seduta 2026: 15 iniziative parlamentari evase, cinque incarichi urgenti sull\'ospedale cantonale soH (governance, consiglio d\'amministrazione, remunerazioni, risparmi personale) e messaggio',
+    canonicalPath: '/articoli-soletta/soletta-regierungsrat-attiparlamentari-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Soletta: 15 risposte a iniziative parlamentari e progetto diritti voto",
+      "description": "Il 20 ottobre 2026 il Regierungsrat solettese ha reso noti 15 risposte a iniziative parlamentari, 5 prese di posizione su soH e il messaggio per abolire",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-soletta-regierungsrat-attiparlamentari-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T15:42:25+00:00",
+      "dateModified": "2026-10-20T15:42:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/soletta-regierungsrat-attiparlamentari-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
