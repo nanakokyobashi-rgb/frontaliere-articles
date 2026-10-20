@@ -32,6 +32,35 @@ export function normalizeHtml(html) {
     .join('\n');
 }
 
+/**
+ * Cloudflare's edge may append its JavaScript-detection probe immediately
+ * before </body>. The probe is not part of the static document published to
+ * the shard, so remove only that exact, trailing edge-owned script before
+ * comparing fingerprints. Any other script, marker, or placement remains a
+ * real byte mismatch.
+ */
+export function stripCloudflareBotFightScript(html) {
+  if (typeof html !== 'string') throw new TypeError('HTML must be a string');
+  const bodyClose = html.lastIndexOf('</body>');
+  if (bodyClose < 0) return html;
+
+  const beforeBody = html.slice(0, bodyClose);
+  const scriptStart = beforeBody.lastIndexOf('<script>');
+  if (scriptStart < 0) return html;
+  const candidateWithWhitespace = beforeBody.slice(scriptStart);
+  const trailingWhitespace = candidateWithWhitespace.match(/[ \t\r\n]*$/u)?.[0] || '';
+  const candidate = trailingWhitespace
+    ? candidateWithWhitespace.slice(0, -trailingWhitespace.length)
+    : candidateWithWhitespace;
+  if (!candidate.endsWith('</script>')
+    || !candidate.includes('window.__CF$cv$params=')
+    || !candidate.includes("a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js'")) {
+    return html;
+  }
+
+  return `${beforeBody.slice(0, scriptStart)}${trailingWhitespace}${html.slice(bodyClose)}`;
+}
+
 export function fingerprintHtml(html) {
   return crypto.createHash('sha256').update(normalizeHtml(html), 'utf8').digest('hex');
 }
@@ -451,7 +480,7 @@ async function fetchFingerprint(record, {
     const cfCacheStatus = optionalHeader(response, 'cf-cache-status');
     return {
       status: Number(response.status) || 0,
-      sha: fingerprintHtml(body),
+      sha: fingerprintHtml(stripCloudflareBotFightScript(body)),
       cfCacheStatus: cfCacheStatus || 'unknown',
       hasCfCacheStatus: cfCacheStatus !== null,
       age: header(response, 'age'),
