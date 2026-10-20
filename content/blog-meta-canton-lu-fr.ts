@@ -30,6 +30,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.lucerna-bilancio-budget-2027.title': 'Lucerne : le Parlement confirme le PIB pour le budget 2027',
     'blog.article.lucerna-bilancio-budget-2027.excerpt': 'Le Conseil cantonal de Lucerne approuve la référence au PIB pour la croissance des dépenses.',
     'blog.article.lucerna-bilancio-budget-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lucerna-finanze-sessione-ottobre.title': 'Lucerne : cinq heures de débat sur les finances cantonales',
+    'blog.article.lucerna-finanze-sessione-ottobre.excerpt': 'Le Conseil cantonal de Lucerne a débattu de l\'AFP 2027–2030 pendant plus de cinq heures ; la proposition fait passer le taux 2027 de 1,45 à 1,40 unité, avec un vote le 20 octobre.',
+    'blog.article.lucerna-finanze-sessione-ottobre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

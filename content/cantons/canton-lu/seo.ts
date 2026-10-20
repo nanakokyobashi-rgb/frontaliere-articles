@@ -358,6 +358,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lucerna-finanze-sessione-ottobre': {
+    title: 'Lucerna: cinque ore di dibattito sulle finanze cantonali',
+    description: 'Il Consiglio cantonale di Lucerna ha discusso per oltre cinque ore l\'AFP 2027–2030: proposta di aliquota da 1,45 a 1,40 unità e voto in programma il 20 ottobre.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lucerna, cinque, dibattito, sulle',
+    ogTitle: 'Lucerna, cinque ore sulle finanze cantonali',
+    ogDescription: 'La prima giornata della sessione autunnale ha aperto il confronto sul piano dei compiti e finanziario 2027–2030. Il Governo propone di portare lo Steuerfuss cantonale da 1,45 a 1,40 unità; il Parlamento voterà il 20 ottobre.',
+    canonicalPath: '/articoli-lucerna/lucerna-finanze-sessione-ottobre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lucerna: cinque ore di dibattito sulle finanze cantonali",
+      "description": "Il Consiglio cantonale di Lucerna ha discusso per oltre cinque ore l'AFP 2027–2030: proposta di aliquota da 1,45 a 1,40 unità e voto in programma il 20 ottobre.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lucerna-finanze-sessione-ottobre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T00:56:42+00:00",
+      "dateModified": "2026-10-20T00:56:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/lucerna-finanze-sessione-ottobre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

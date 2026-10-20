@@ -30,6 +30,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.lucerna-bilancio-budget-2027.title': 'Lucerne: Parliament confirms BIP for the 2027 budget',
     'blog.article.lucerna-bilancio-budget-2027.excerpt': 'The Cantonal Council of Lucerne approves the use of GDP as a reference for expenditure growth.',
     'blog.article.lucerna-bilancio-budget-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lucerna-finanze-sessione-ottobre.title': 'Lucerne: five hours of debate on cantonal finances',
+    'blog.article.lucerna-finanze-sessione-ottobre.excerpt': 'Lucerne’s Cantonal Council discussed the AFP 2027–2030 for more than five hours; the proposal sets the 2027 tax rate at 1,40 units instead of 1,45, with a vote on October 20.',
+    'blog.article.lucerna-finanze-sessione-ottobre.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;

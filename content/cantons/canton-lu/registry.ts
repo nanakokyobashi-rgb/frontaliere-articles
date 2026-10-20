@@ -105,4 +105,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'lucerna-finanze-sessione-ottobre',
+ category: 'fiscale',
+ date: '2026-10-20T00:56:42.893Z',
+ image: '/images/blog/article-lucerna-finanze-sessione-ottobre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
