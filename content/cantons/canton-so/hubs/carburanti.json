@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-20T15:13:18.424Z",
-  "contentHash": "67f414596f51c1ba89ced12d552e504fc18030292600302d3c17d2b7dc2fd883",
+  "updatedAt": "2026-10-20T15:49:15.826Z",
+  "contentHash": "8d249d6493c6de88e43bc9048a6d3e223987209a7fd0fedeb370663ffc65bce7",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Soletta: 15 risposte a iniziative parlamentari e progetto diritti voto",
+          "url": "/articoli-soletta/soletta-regierungsrat-attiparlamentari-2026/",
+          "excerpt": "Il 20 ottobre 2026 il Regierungsrat ha pubblicato i documenti della 34ª seduta: 15 iniziative evase, 5 urgenti sulla soH e messaggio per abolire l'esclusione dal voto (RG 0270/2026).",
+          "date": "2026-10-20T15:42:25.788Z"
+        },
+        {
           "title": "Governo di Soletta: decisioni del 20 ottobre 2026",
           "url": "/articoli-soletta/governo-soletta-ottobre-2026/",
           "excerpt": "NEST, formazione dei docenti, FamEL, polizia a Lugano e dossier al Consiglio cantonale tra i punti della seduta del 20 ottobre 2026.",
@@ -94,12 +100,6 @@
           "url": "/articoli-soletta/solothurn-pneumonia-suini/",
           "excerpt": "Il Servizio veterinario del Canton Soletta ha sgomberato due allevamenti: 80 scrofe e 50 giovani macellati, 930 suini uccisi e 1200 giovani esportati vivi.",
           "date": "2026-10-09T14:03:47.492Z"
-        },
-        {
-          "title": "Soletta: Governo chiede correzioni su progetti trasporti",
-          "url": "/articoli-soletta/soletta-progetti-trasporto-governo/",
-          "excerpt": "Soletta sostiene «Verkehr ’45» e chiede correzioni.",
-          "date": "2026-10-08T11:40:05.556Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-20T15:13:18.424Z"
+      "updatedAt": "2026-10-20T15:49:15.826Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Solothurn: 15 responses to parliamentary initiatives and voting rights project",
+          "url": "/en/solothurn-articles/solothurn-regierungsrat-parliamentary-items-october-2026/",
+          "excerpt": "On October 20, 2026, the Regierungsrat published the documents from the 34th session: 15 initiatives processed, 5 urgent matters concerning the soH, and a message to abolish exclusion from voting (RG 0270/2026).",
+          "date": "2026-10-20T15:42:25.788Z"
+        },
+        {
           "title": "Government of Solothurn: decisions of October 20, 2026",
           "url": "/en/solothurn-articles/solothurn-government-october-2026/",
           "excerpt": "NEST, teacher training, FamEL, police in Lugano and dossiers before the Cantonal Council among the items on the agenda for the meeting of October 20, 2026.",
@@ -193,11 +199,6 @@
           "url": "/en/solothurn-articles/solothurn-pig-pneumonia-cull/",
           "excerpt": "The Veterinary Service of the Canton of Solothurn has cleared out two farms: 80 sows and 50 young pigs slaughtered, 930 pigs killed and 1200 young pigs exported alive.",
           "date": "2026-10-09T14:03:47.492Z"
-        },
-        {
-          "title": "Solothurn: Government calls for corrections to transport projects",
-          "url": "/en/solothurn-articles/solothurn-transport-projects-government/",
-          "date": "2026-10-08T11:40:05.556Z"
         }
       ],
       "links": [
@@ -210,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-20T15:13:18.424Z"
+      "updatedAt": "2026-10-20T15:49:15.826Z"
     },
     "de": {
       "canton": "SO",
@@ -269,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Solothurn: 15 Antworten und Entwurf zu Stimmrechten",
+          "url": "/de/solothurn-artikel/solothurn-regierungsrat-geschaefte-oktober-2026/",
+          "excerpt": "Am 20. Oktober 2026 hat der Regierungsrat die Unterlagen der 34. Sitzung veröffentlicht: 15 erledigte Vorstösse, 5 dringende zur soH und eine Botschaft zur Aufhebung des Ausschlusses vom Stimmrecht (RG 0270/2026).",
+          "date": "2026-10-20T15:42:25.788Z"
+        },
+        {
           "title": "Regierung des Kantons Solothurn: Beschlüsse vom 20. Oktober 2026",
           "url": "/de/solothurn-artikel/solothurn-regierungsrat-oktober-2026/",
           "excerpt": "NEST, die Ausbildung der Lehrpersonen, FamEL, die Polizei in Lugano und ein Dossier für den Kantonsrat gehören zu den Traktanden der Sitzung vom 20.",
@@ -291,11 +298,6 @@
           "url": "/de/solothurn-artikel/solothurn-schweinepneumonie-keulung/",
           "excerpt": "Der Veterinärdienst des Kantons Solothurn hat zwei Betriebe geräumt: 80 Sauen und 50 Jungtiere geschlachtet, 930 Schweine getötet und 1200 Jungtiere lebend exportiert.",
           "date": "2026-10-09T14:03:47.492Z"
-        },
-        {
-          "title": "Solothurn: Regierung fordert Korrekturen bei Verkehrsprojekten",
-          "url": "/de/solothurn-artikel/solothurn-verkehrsprojekte-regierung/",
-          "date": "2026-10-08T11:40:05.556Z"
         }
       ],
       "links": [
@@ -308,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-20T15:13:18.424Z"
+      "updatedAt": "2026-10-20T15:49:15.826Z"
     },
     "fr": {
       "canton": "SO",
@@ -367,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Soleure : 15 réponses sur initiatives et droits de vote",
+          "url": "/fr/articles-soleure/soleure-conseil-executif-objets-parlementaires-octobre-2026/",
+          "excerpt": "Le 20 octobre 2026, le Regierungsrat a publié les documents de la 34e séance : 15 initiatives traitées, 5 urgentes concernant la soH et un message visant à abolir l’exclusion du droit de vote (RG 0270/2026).",
+          "date": "2026-10-20T15:42:25.788Z"
+        },
+        {
           "title": "Gouvernement de Soleure : décisions du 20 octobre 2026",
           "url": "/fr/articles-soleure/gouvernement-soleure-octobre-2026/",
           "excerpt": "NEST, formation des enseignants, Famel, police à Lugano et dossier au Conseil cantonal entre les points de la séance du 20 octobre 2026.",
@@ -389,12 +397,6 @@
           "url": "/fr/articles-soleure/soleure-pneumonie-porcine-abattage/",
           "excerpt": "Le Service vétérinaire du canton de Soleure a fait évacuer deux élevages : 80 truies et 50 jeunes porcs abattus, 930 porcs tués et 1200 jeunes porcs exportés vivants.",
           "date": "2026-10-09T14:03:47.492Z"
-        },
-        {
-          "title": "Soleure : projets de transport, corrections demandées",
-          "url": "/fr/articles-soleure/soleure-projets-transport-gouvernement/",
-          "excerpt": "Soleure soutient « Verkehr ’45 » et demande des corrections.",
-          "date": "2026-10-08T11:40:05.556Z"
         }
       ],
       "links": [
@@ -407,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-20T15:13:18.424Z"
+      "updatedAt": "2026-10-20T15:49:15.826Z"
     }
   }
 }
