@@ -30,6 +30,12 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.ricorso-federale-espulsione-zugo.title': 'Zoug : recours contre l’expulsion rejeté par le Tribunal fédéral',
     'blog.article.ricorso-federale-espulsione-zugo.excerpt': 'Mai 2026 : Zoug ne renouvelle pas le permis de courte durée.',
     'blog.article.ricorso-federale-espulsione-zugo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.zugo-governo-direzioni-2027.title': 'Zoug : le gouvernement maintient les directions à partir de 2027',
+    'blog.article.zugo-governo-direzioni-2027.excerpt': 'Pour le mandat à partir de 2027, tous les membres du Gouvernement de Zoug maintiendront les directions actuelles, a communiqué mardi la Chancellerie de l\'État.',
+    'blog.article.zugo-governo-direzioni-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.zugo-assegnazione-mandato-2030.title': 'Zoug : attributions des directions pour la période 2027-2030',
+    'blog.article.zugo-assegnazione-mandato-2030.excerpt': 'Le Conseil d\'État de Zoug a attribué les directions pour la période 2027-2030 et réglé les suppléances à compter du 1er janvier 2027.',
+    'blog.article.zugo-assegnazione-mandato-2030.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZgFr;

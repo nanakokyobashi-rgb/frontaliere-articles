@@ -30,6 +30,12 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.ricorso-federale-espulsione-zugo.title': 'Zug: appeal against expulsion rejected by the Federal Supreme Court',
     'blog.article.ricorso-federale-espulsione-zugo.excerpt': 'May 2026: Zug does not renew the short-term permit.',
     'blog.article.ricorso-federale-espulsione-zugo.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.zugo-governo-direzioni-2027.title': 'Zug: the Government has maintained its leadership since 2027',
+    'blog.article.zugo-governo-direzioni-2027.excerpt': 'For the mandate from 2027, all members of the Zug Government will maintain their current leaderships, the State Chancellery said on Tuesday.',
+    'blog.article.zugo-governo-direzioni-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.zugo-assegnazione-mandato-2030.title': 'Zug: departments assigned for the 2027–2030 period',
+    'blog.article.zugo-assegnazione-mandato-2030.excerpt': 'The State Council of Zug has assigned the departments for the 2027–2030 term and regulated deputizing arrangements from January 1, 2027.',
+    'blog.article.zugo-assegnazione-mandato-2030.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZgEn;
