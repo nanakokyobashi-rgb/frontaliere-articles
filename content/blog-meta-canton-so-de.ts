@@ -21,6 +21,15 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.furti-raggiro-soletta.title': 'Trickdiebstähle in Solothurn: Die Polizei warnt',
     'blog.article.furti-raggiro-soletta.excerpt': 'Die Kantonspolizei Solothurn meldet rund zehn Trickdiebstähle in den letzten Tagen: Täterinnen und Täter verwenden günstigen Schmuck, um die Opfer abzulenken.',
     'blog.article.furti-raggiro-soletta.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.soletta-parlamento-budget-2027-inchiesta-soh.title': 'Solothurn genehmigt Budget 2027, SOH-Untersuchung',
+    'blog.article.soletta-parlamento-budget-2027-inchiesta-soh.excerpt': 'Der Regierungsrat genehmigt den Voranschlag 2027; Kantonsrat in der Sitzung vom 1.',
+    'blog.article.soletta-parlamento-budget-2027-inchiesta-soh.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.governo-soletta-ottobre-2026.title': 'Regierung des Kantons Solothurn: Beschlüsse vom 20. Oktober 2026',
+    'blog.article.governo-soletta-ottobre-2026.excerpt': 'NEST, die Ausbildung der Lehrpersonen, FamEL, die Polizei in Lugano und ein Dossier für den Kantonsrat gehören zu den Traktanden der Sitzung vom 20.',
+    'blog.article.governo-soletta-ottobre-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.soletta-regierungsrat-attiparlamentari-2026.title': 'Solothurn: 15 Antworten und Entwurf zu Stimmrechten',
+    'blog.article.soletta-regierungsrat-attiparlamentari-2026.excerpt': 'Am 20. Oktober 2026 hat der Regierungsrat die Unterlagen der 34. Sitzung veröffentlicht: 15 erledigte Vorstösse, 5 dringende zur soH und eine Botschaft zur Aufhebung des Ausschlusses vom Stimmrecht (RG 0270/2026).',
+    'blog.article.soletta-regierungsrat-attiparlamentari-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;

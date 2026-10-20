@@ -13,6 +13,7 @@ const publisher = readFileSync(resolve(here, '../../scripts/publish-article-fast
 // La catena di render condivisa: gli id passano di qui al renderer.
 const pipeline = readFileSync(resolve(here, '../../scripts/lib/article-render-pipeline.mjs'), 'utf8');
 const observer = readFileSync(resolve(here, '../../scripts/ci/article-publication-observer.mjs'), 'utf8');
+const pushBaseGuard = readFileSync(resolve(here, '../../scripts/ci/fetch-push-base-if-missing.sh'), 'utf8');
 
 function stepText(name) {
   const matches = [...workflow.matchAll(/^ {6}- name: (.+)$/gm)];
@@ -44,6 +45,13 @@ test('il trigger push conserva tutti gli ID dei body cambiati', () => {
   assert.match(resolveStep, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);
   assert.match(resolveStep, /if \[ "\$\{#ids\[@\]\}" -eq 0 \]; then[\s\S]*git diff --name-only "\$before" HEAD/);
   assert.doesNotMatch(resolveStep, /head\s+-1/);
+});
+
+test('il resolver article non rifà il fetch del parent già presente nel checkout', () => {
+  const resolveFetchStep = stepText('Fetch push base (resolve)');
+  assert.match(resolveFetchStep, /bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
+  assert.match(pushBaseGuard, /git cat-file -e "\$\{PUSH_BEFORE\}\^\{commit\}"/);
+  assert.match(pushBaseGuard, /git fetch --no-tags --depth=1 origin "\$PUSH_BEFORE"/);
 });
 
 test('i body orfani non bloccano gli articoli registrati dello stesso push', () => {

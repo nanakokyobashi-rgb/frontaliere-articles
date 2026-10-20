@@ -33,6 +33,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.berna-governo-kita-gratuite.title': 'Berna, il Governo respinge le Kita gratuite',
     'blog.article.berna-governo-kita-gratuite.excerpt': 'Il Governo bernese raccomanda al Gran Consiglio di respingere la mozione per Kita gratuite: per gli attuali beneficiari, oltre 160 milioni di CHF annui.',
     'blog.article.berna-governo-kita-gratuite.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.corridoio-linea-wynigen.title': 'Swissgrid pianifica una linea aerea tra Berna e Lucerna',
+    'blog.article.corridoio-linea-wynigen.excerpt': 'Swissgrid propone una linea aerea tra Bickigen BE e Mettlen LU per sostituire quella quasi centenaria.',
+    'blog.article.corridoio-linea-wynigen.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBeIt;

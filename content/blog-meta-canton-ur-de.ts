@@ -21,6 +21,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.silenen-muri-secco.title': 'Silenen: Landrat genehmigt CHF 207.000 für Trockenmauern',
     'blog.article.silenen-muri-secco.excerpt': 'Der Landrat genehmigt CHF 207.000 ohne Gegenstimmen 3,6 km historische Mauern im Gebiet von Silenen Rund 60% stellen ein Sicherheitsrisiko dar Die Arbeiten',
     'blog.article.silenen-muri-secco.imageAlt': 'Historische Trockenmauern im Gebiet Hinter- und Vorderried in Silenen, Kanton Uri',
+    'blog.article.axenstrasse-chiusa-quattro-notti.title': 'Axenstrasse vom 2. bis 6. November vier Nächte lang gesperrt',
+    'blog.article.axenstrasse-chiusa-quattro-notti.excerpt': 'Die Axenstrasse wird vom 2.',
+    'blog.article.axenstrasse-chiusa-quattro-notti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonUrDe;

@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-10-19T17:59:19.762Z",
-  "contentHash": "b8dcbbf71d6856b08f7647aa8a2958fa26ae9d2c531455592ca9db85993bb960",
+  "updatedAt": "2026-10-20T13:42:35.891Z",
+  "contentHash": "9adfe5cd153c1f96660bd7d410071c2a6fce094d78d160c23a6737e79aca42a5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-19T04:39:38.933Z",
+      "updatedAt": "2026-10-20T04:48:51.023Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-20T05:04:18.322Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T19:43:29.238Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -39,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "18",
-          "note": "offerta mediana 1520 CHF"
+          "note": "offerta mediana 1620 CHF"
         }
       ],
       "dataBlocks": [
@@ -79,7 +84,7 @@
             },
             {
               "label": "AG7835",
-              "value": "4200 CHF",
+              "value": "4400 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58791"
@@ -87,7 +92,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-19T04:39:38.933Z"
+          "updatedAt": "2026-10-20T04:48:51.023Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "9 °C",
+              "detail": "oggi da 9 a 16 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-20T05:04:18.322Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -125,7 +144,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -134,6 +153,12 @@
           "url": "/articoli-argovia/riduzione-premi-argovia-2027/",
           "excerpt": "La SVA Aargau invia i codici per la riduzione dei premi. Per il 2027 la domanda va presentata entro giovedì 31 dicembre.",
           "date": "2026-10-07T09:03:30.904Z"
+        },
+        {
+          "title": "KSB Baden: murales in pediatria e pronto soccorso",
+          "url": "/articoli-argovia/murales-pediatria-ksb-baden/",
+          "excerpt": "Dieci artisti di Paint a Smile hanno dipinto circa 200 metri quadrati al KSB Baden.",
+          "date": "2026-10-20T12:20:50.431Z"
         },
         {
           "title": "Sistema sanitario svizzero LAMal: guida 2026 Canton Argovia",
@@ -199,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-19T17:59:19.762Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "en": {
       "canton": "AG",
@@ -216,7 +241,7 @@
         {
           "label": "Plate auctions running",
           "value": "18",
-          "note": "typical bid 1,520 CHF"
+          "note": "typical bid 1,620 CHF"
         }
       ],
       "dataBlocks": [
@@ -256,7 +281,7 @@
             },
             {
               "label": "AG7835",
-              "value": "4,200 CHF",
+              "value": "4,400 CHF",
               "detail": "current bid",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58791"
@@ -264,7 +289,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-19T04:39:38.933Z"
+          "updatedAt": "2026-10-20T04:48:51.023Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "9 °C",
+              "detail": "today from 9 to 16 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-20T05:04:18.322Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -302,7 +341,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -311,6 +350,12 @@
           "url": "/en/aargau-articles/aargau-premium-reduction-2027/",
           "excerpt": "SVA Aargau sends the codes for premium reduction. For 2027, the application must be submitted by Thursday, December 31.",
           "date": "2026-10-07T09:03:30.904Z"
+        },
+        {
+          "title": "KSB Baden: murals in pediatrics and the emergency department",
+          "url": "/en/aargau-articles/murals-ksb-baden-pediatrics/",
+          "excerpt": "Ten artists from Paint a Smile painted approximately 200 square meters at KSB Baden.",
+          "date": "2026-10-20T12:20:50.431Z"
         },
         {
           "title": "Swiss LAMal healthcare system: 2026 guide to the Canton of Aargau",
@@ -372,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-19T17:59:19.762Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "de": {
       "canton": "AG",
@@ -389,7 +434,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "18",
-          "note": "mittleres Gebot 1’520 CHF"
+          "note": "mittleres Gebot 1’620 CHF"
         }
       ],
       "dataBlocks": [
@@ -429,7 +474,7 @@
             },
             {
               "label": "AG7835",
-              "value": "4’200 CHF",
+              "value": "4’400 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58791"
@@ -437,7 +482,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-19T04:39:38.933Z"
+          "updatedAt": "2026-10-20T04:48:51.023Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "9 °C",
+              "detail": "heute 9 bis 16 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-20T05:04:18.322Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -475,7 +534,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -484,6 +543,12 @@
           "url": "/de/aargau-artikel/praemienverbilligung-aargau-2027/",
           "excerpt": "Die SVA Aargau versendet die Codes für die Prämienverbilligung. Für 2027 muss der Antrag bis Donnerstag, 31. Dezember, eingereicht werden.",
           "date": "2026-10-07T09:03:30.904Z"
+        },
+        {
+          "title": "KSB Baden: Wandbilder in der Pädiatrie und Notaufnahme",
+          "url": "/de/aargau-artikel/wandbilder-ksb-kinderabteilung/",
+          "excerpt": "Zehn Künstler von Paint a Smile haben im KSB Baden etwa 200 Quadratmeter bemalt.",
+          "date": "2026-10-20T12:20:50.431Z"
         },
         {
           "title": "Schweizer Gesundheitssystem nach LAMal: Leitfaden 2026 für den Kanton Aargau",
@@ -545,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-19T17:59:19.762Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "fr": {
       "canton": "AG",
@@ -562,7 +627,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "18",
-          "note": "offre centrale 1 520 CHF"
+          "note": "offre centrale 1 620 CHF"
         }
       ],
       "dataBlocks": [
@@ -602,7 +667,7 @@
             },
             {
               "label": "AG7835",
-              "value": "4 200 CHF",
+              "value": "4 400 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58791"
@@ -610,7 +675,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-19T04:39:38.933Z"
+          "updatedAt": "2026-10-20T04:48:51.023Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "9 °C",
+              "detail": "aujourd’hui de 9 à 16 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-20T05:04:18.322Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -648,7 +727,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -657,6 +736,12 @@
           "url": "/fr/articles-argovie/reduction-primes-argovie-2027/",
           "excerpt": "La SVA Aargau envoie les codes pour la réduction des primes. Pour 2027, la demande doit être déposée d’ici au jeudi 31 décembre.",
           "date": "2026-10-07T09:03:30.904Z"
+        },
+        {
+          "title": "KSB Baden : fresques en pédiatrie et aux urgences",
+          "url": "/fr/articles-argovie/murales-ksb-pediatrie-baden/",
+          "excerpt": "Dix artistes de Paint a Smile ont peint environ 200 mètres carrés au KSB Baden.",
+          "date": "2026-10-20T12:20:50.431Z"
         },
         {
           "title": "Système de santé suisse LAMal : guide 2026 du canton d'Argovie",
@@ -714,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-19T17:59:19.762Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     }
   }
 }

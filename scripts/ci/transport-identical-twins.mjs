@@ -482,6 +482,8 @@ export function transportMaxFilesForContract(maxFiles, contractSource) {
  * alberi. Gli import vengono raccolti da ENTRAMBI i byte: una versione
  * `site-ahead` puo' aggiungere o rimuovere un import rispetto al corpus, e la
  * sorgente locale da sola non descrive piu' la dipendenza che verra' copiata.
+ * Un import rimasto SOLO nel corpus viene scartato: il byte trasportato non lo
+ * contiene piu', quindi non puo' diventare un blocker permanente (issue #2990).
  * Se il file sul sito, sotto il suo `sitePath`, risolve un import a un path il
  * cui gemello corpus e' diverso da quello risolto localmente, il gemello
  * importato entra nello stesso componente di trasporto. Se un import presente
@@ -528,24 +530,15 @@ export function relativeImportCouplings(entry, localSource, siteSourceBytes, man
   const couplings = [];
 
   for (const spec of specs) {
+    // A spec that exists only in the old corpus byte disappears when the
+    // site-ahead source is written; it is not part of the incoming closure.
+    if (!siteSpecs.has(spec)) continue;
     const localTarget = resolveRelativeImport(entry.path, spec, corpusKnown);
     const siteTarget = resolveRelativeImport(siteSource, spec, (candidate) => bySite.has(candidate));
     if (!siteTarget) {
-      // Un import rimasto solo nel corpus non e' una dipendenza del file che
-      // verra' copiato dal sito, ma resta nel grafo per conservare la chiusura
-      // gia' attestata dal lato locale. Un import presente sul sito senza
-      // target manifesto, invece, e' un blocker anche se il corpus ha un
-      // omonimo: il byte copiato avrebbe una dipendenza non verificata.
-      if (!siteSpecs.has(spec) && !localTarget) continue;
-      if (!siteSpecs.has(spec)) {
-        couplings.push({
-          path: localTarget,
-          mode: modeOf.get(localTarget) || 'non registrato',
-          declaredBy: 'relative-import',
-          reason: `import relativo ${spec} presente solo nel corpus: il gemello locale ${localTarget} resta nella chiusura`,
-        });
-        continue;
-      }
+      // Un import presente sul sito senza target manifesto resta un blocker
+      // anche se il corpus ha un omonimo: il byte copiato avrebbe una
+      // dipendenza non verificata.
       couplings.push({
         path: localTarget || path.posix.normalize(path.posix.join(path.posix.dirname(siteSource), spec)),
         mode: 'non registrato',

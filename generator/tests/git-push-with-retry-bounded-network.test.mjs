@@ -20,6 +20,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const PUSH_WITH_RETRY_SCRIPT = path.join(ROOT, 'scripts/lib/git-push-with-retry.sh');
 const BOUNDED_COMMAND_WRAPPER = 'scripts/lib/run-bounded-command.mjs';
 const TREE_SHRINK_GUARD = 'scripts/ci/guard-main-tree-shrink.mjs';
+const OLD_HISTORY_GUARD = 'scripts/ci/old-history-guard.mjs';
 const HELPER_RELATIVE_PATH = 'scripts/lib/git-push-with-retry.sh';
 const WORKFLOWS_DIR = path.join(ROOT, '.github/workflows');
 const BASH_BIN = ['/opt/homebrew/bin/bash', '/usr/local/bin/bash'].find(existsSync) ?? 'bash';
@@ -517,9 +518,10 @@ test('il lettore distingue comandi da parole quotate e legge bash -c', () => {
   ]);
 });
 
-test('ogni sparse checkout che porta l helper porta anche wrapper e tree guard', () => {
+test('ogni sparse checkout che porta l helper porta anche i suoi guard e il wrapper', () => {
   assert.ok(existsSync(path.join(ROOT, BOUNDED_COMMAND_WRAPPER)));
   assert.ok(existsSync(path.join(ROOT, TREE_SHRINK_GUARD)));
+  assert.ok(existsSync(path.join(ROOT, OLD_HISTORY_GUARD)));
   const { fixed, computed } = sparseCheckouts();
   assert.ok(fixed.length > 0, 'non sono stati trovati checkout sparse espliciti');
   assert.deepEqual(computed, [], `liste sparse calcolate non verificabili: ${computed.join('; ')}`);
@@ -533,6 +535,10 @@ test('ogni sparse checkout che porta l helper porta anche wrapper e tree guard',
     .filter((checkout) => !materializes(checkout, TREE_SHRINK_GUARD))
     .map(({ where }) => where);
   assert.deepEqual(missingTreeGuard, []);
+  const missingOldHistoryGuard = carriesHelper
+    .filter((checkout) => !materializes(checkout, OLD_HISTORY_GUARD))
+    .map(({ where }) => where);
+  assert.deepEqual(missingOldHistoryGuard, []);
 
   const externalCopies = externalHelperCopies();
   const missingExternalWrapper = externalCopies.filter(({ text }) => !text.includes(BOUNDED_COMMAND_WRAPPER));

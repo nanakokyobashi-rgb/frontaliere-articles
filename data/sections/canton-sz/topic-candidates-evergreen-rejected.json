@@ -4,22 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.bote.ch/nachrichten/schwyz/kanton-schwyz-beteiligt-sich-an-taskforce-gegen-bestellte-diebstaehle-aus-frankreich-art-1727206": {
-      "section": "canton-sz",
-      "ts": 1792294501565
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/hier-setzt-die-polizei-bei-verkehrskontrollen-jetzt-drohnen-ein-art-1727240": {
-      "section": "canton-sz",
-      "ts": 1792294769070
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/chruescheli-muss-mit-ein-spital-zieht-um-und-die-8-jaehrige-zoe-ist-mittendrin-art-1727399": {
-      "section": "canton-sz",
-      "ts": 1792294788489
-    },
-    "canton-sz::https://www.bote.ch/nachrichten/schwyz/agro-baut-neue-leitungen-beim-energiezentrum-art-1727183": {
-      "section": "canton-sz",
-      "ts": 1792294808638
-    },
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/stans-605-unterschriften-gegen-baustellenverkehr-durch-den-dorfkern-art-1727632": {
       "section": "canton-sz",
       "ts": 1792421396425
@@ -27,6 +11,14 @@
     "canton-sz::https://www.einsiedeln.ch/verwaltung/mitteilungen/aktuelle-mitteilungen?m=4563": {
       "section": "canton-sz",
       "ts": 1792428746005
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/luzerner-kantonsrat-wird-steuerfuss-nur-leicht-senken-art-1727654": {
+      "section": "canton-sz",
+      "ts": 1792505302860
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/budget-2027-der-stadt-luzern-gruene-drohen-mit-referendum-art-1727601": {
+      "section": "canton-sz",
+      "ts": 1792505461685
     }
   }
 }

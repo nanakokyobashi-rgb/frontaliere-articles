@@ -4,12 +4,16 @@ import test from 'node:test';
 import {
   bucketState,
   dailyBucketInfo,
+  dailyBucketSourcePrNumbers,
   dailyKeyFromBucketBody,
   hasDailyBucketRepositoryConsistency,
   parseFollowupItems,
   selectFirstOpenItem,
 } from '../../scripts/ci/followup-resolution-match.mjs';
-import { decideDailyMintGate } from '../../scripts/ci/gate-minted-followups.mjs';
+import {
+  decideDailyMintGate,
+  normalizeDailyItemIdsForKey,
+} from '../../scripts/ci/gate-minted-followups.mjs';
 import {
   dailyBucketCloseGate,
   hasStrongDailyAcceptanceEvidence,
@@ -53,6 +57,50 @@ test('il gate recupera un daily shorthand e apre gli item senza State', () => {
   const fencedDecision = decideDailyMintGate({ title: TITLE, body: fencedExample }, { triageComplete: true });
   assert.equal(fencedDecision.action, 'seal');
   assert.equal(selectFirstOpenItem(fencedDecision.body)?.id, `FU-${DAY}-001`);
+});
+
+test('il gate normalizza il formato storico FU-YYYY-MM-NNN usando il Daily key', () => {
+  const malformed = BODY.replace(`FU-${DAY}-001`, 'FU-2026-09-001');
+  assert.equal(
+    normalizeDailyItemIdsForKey(malformed, DAY).includes(`### FU-${DAY}-001`),
+    true,
+  );
+
+  const decision = decideDailyMintGate({
+    title: TITLE,
+    body: malformed,
+  }, { triageComplete: true });
+  assert.equal(decision.action, 'seal');
+  assert.equal(selectFirstOpenItem(decision.body)?.id, `FU-${DAY}-001`);
+  assert.equal(bucketState(decision.body), 'sealed');
+});
+
+test('il normalizzatore resta fail-closed per mese errato, duplicati e heading protetti', () => {
+  const wrongMonth = BODY.replace(`FU-${DAY}-001`, 'FU-2026-08-001');
+  assert.equal(normalizeDailyItemIdsForKey(wrongMonth, DAY), wrongMonth);
+
+  const duplicate = BODY.replace(
+    `FU-${DAY}-001`,
+    'FU-2026-09-001',
+  ).replace(
+    '- Suggested action: verificare `firstGuard()` in scripts/example.mjs',
+    '- Suggested action: verificare `firstGuard()` in scripts/example.mjs\n\n### FU-2026-09-001 — duplicate',
+  );
+  assert.equal(normalizeDailyItemIdsForKey(duplicate, DAY), duplicate);
+
+  const fenced = BODY.replace(
+    `### FU-${DAY}-001 — shorthand bucket`,
+    '```md\n### FU-2026-09-001 — example\n```',
+  );
+  assert.equal(normalizeDailyItemIdsForKey(fenced, DAY), fenced);
+});
+
+test('la preflight di recovery può estrarre le Sources dopo la normalizzazione', () => {
+  const malformed = BODY.replace(`FU-${DAY}-001`, 'FU-2026-09-001');
+  const recoveredBody = normalizeDailyItemIdsForKey(malformed, DAY);
+
+  assert.equal(hasDailyBucketRepositoryConsistency(recoveredBody, 'owner/repo'), true);
+  assert.deepEqual(dailyBucketSourcePrNumbers(recoveredBody), [1398]);
 });
 
 test('il reconciler usa l acceptance token strutturale del daily item', () => {

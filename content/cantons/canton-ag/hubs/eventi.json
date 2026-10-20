@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-10-19T18:33:18.720Z",
-  "contentHash": "505a508672d2b16cbbfbc7e639f44e2a01f6b0640ff8dfdac17f52ab4b4035ff",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "8189620ee95ec89e520a1d3d3c55a686ce1cbdc28ea25f0099a8ac60c35674b4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-19T13:52:30.888Z",
+      "updatedAt": "2026-10-19T15:42:28.810Z",
       "keyFacts": 1
     },
     {
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "101",
+          "value": "99",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,42 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Verslimorgen",
-              "detail": "Muri AG",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verslimorgen-6/"
-            },
-            {
-              "label": "Bänz Oester – Together",
-              "detail": "Stadtbistro Isebähnli, Baden",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/baenz-oester-together_AScS6C2"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — in corso, ultimo giorno: 30 ottobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
-            {
-              "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
-              "detail": "Wettingen — in corso, ultimo giorno: 19 ottobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
-            },
             {
               "label": "Essigkurs für die Direktvermarktung",
               "detail": "FiBL Kurssekretariat, Frick",
@@ -86,6 +50,24 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/frauenbund-muri-hormonbalance-ue35-wechseljahre/"
             },
             {
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — in corso, ultimo giorno: 30 ottobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
+            },
+            {
               "label": "LEHRplätz Bremgarten",
               "detail": "Bremgarten",
               "date": "2026-10-21",
@@ -96,11 +78,29 @@
               "detail": "Baden",
               "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/corso-di-jass-per-principianti-parte-1-a-baden-de-karten/"
+            },
+            {
+              "label": "Panflötenkonzert mit Duo Pantastico",
+              "detail": "Röm.-kath. Kirche St. Nikolaus, Waltenschwil",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/waltenschwil/panfloetenkonzert-mit-duo-pantastico_ATWFSmp"
+            },
+            {
+              "label": "Ref. Frauenverein Muri Sins: Vortrag: Indische Malerei - ferne Kunst ganz nah",
+              "detail": "Muri AG, Sins",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ref-frauenverein-muri-sins-vortrag-indische-malerei-ferne-kunst-ganz-nah/"
+            },
+            {
+              "label": "Tribute to Johnny Cash",
+              "detail": "Saalbau Reinach",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-ag/tribute-to-johnny-cash_A7rvQrK"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-10-19T13:52:30.888Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -140,7 +140,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "AG",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "101",
+          "value": "99",
           "note": "from the site’s events calendar"
         }
       ],
@@ -160,42 +160,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Verslimorgen",
-              "detail": "Muri AG",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verslimorgen-6/"
-            },
-            {
-              "label": "Bänz Oester – Together",
-              "detail": "Stadtbistro Isebähnli, Baden",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/baenz-oester-together_AScS6C2"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — ongoing, last day: 1 November 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — ongoing, last day: 31 October 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — ongoing, last day: 30 October 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
-            {
-              "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
-              "detail": "Wettingen — ongoing, last day: 19 October 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
-            },
             {
               "label": "Essigkurs für die Direktvermarktung",
               "detail": "FiBL Kurssekretariat, Frick",
@@ -209,6 +173,24 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/frauenbund-muri-hormonbalance-ue35-wechseljahre/"
             },
             {
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg — ongoing, last day: 1 November 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — ongoing, last day: 31 October 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — ongoing, last day: 30 October 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
+            },
+            {
               "label": "LEHRplätz Bremgarten",
               "detail": "Bremgarten",
               "date": "2026-10-21",
@@ -219,11 +201,29 @@
               "detail": "Baden",
               "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/corso-di-jass-per-principianti-parte-1-a-baden-de-karten/"
+            },
+            {
+              "label": "Pan flute concert with Duo Pantastico",
+              "detail": "Röm.-kath. Kirche St. Nikolaus, Waltenschwil",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/waltenschwil/panfloetenkonzert-mit-duo-pantastico_ATWFSmp"
+            },
+            {
+              "label": "Ref. Frauenverein Muri Sins: Vortrag: Indische Malerei - ferne Kunst ganz nah",
+              "detail": "Muri AG, Sins",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ref-frauenverein-muri-sins-vortrag-indische-malerei-ferne-kunst-ganz-nah/"
+            },
+            {
+              "label": "Tribute to Johnny Cash",
+              "detail": "Saalbau Reinach",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-ag/tribute-to-johnny-cash_A7rvQrK"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-10-19T13:52:30.888Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -263,7 +263,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "AG",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "101",
+          "value": "99",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -283,42 +283,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Verslimorgen",
-              "detail": "Muri AG",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verslimorgen-6/"
-            },
-            {
-              "label": "Bänz Oester – Together",
-              "detail": "Stadtbistro Isebähnli, Baden",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/baenz-oester-together_AScS6C2"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — läuft, letzter Tag: 30. Oktober 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
-            {
-              "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
-              "detail": "Wettingen — läuft, letzter Tag: 19. Oktober 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
-            },
             {
               "label": "Essigkurs für die Direktvermarktung",
               "detail": "FiBL Kurssekretariat, Frick",
@@ -332,6 +296,24 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/frauenbund-muri-hormonbalance-ue35-wechseljahre/"
             },
             {
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — läuft, letzter Tag: 30. Oktober 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
+            },
+            {
               "label": "LEHRplätz Bremgarten",
               "detail": "Bremgarten",
               "date": "2026-10-21",
@@ -342,11 +324,29 @@
               "detail": "Baden",
               "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/corso-di-jass-per-principianti-parte-1-a-baden-de-karten/"
+            },
+            {
+              "label": "Panflötenkonzert mit Pantastischem Duo",
+              "detail": "Röm.-kath. Kirche St. Nikolaus, Waltenschwil",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/waltenschwil/panfloetenkonzert-mit-duo-pantastico_ATWFSmp"
+            },
+            {
+              "label": "Ref. Frauenverein Muri Sins: Vortrag: Indische Malerei - ferne Kunst ganz nah",
+              "detail": "Muri AG, Sins",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ref-frauenverein-muri-sins-vortrag-indische-malerei-ferne-kunst-ganz-nah/"
+            },
+            {
+              "label": "Tribute to Johnny Cash",
+              "detail": "Saalbau Reinach",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-ag/tribute-to-johnny-cash_A7rvQrK"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-10-19T13:52:30.888Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "AG",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "101",
+          "value": "99",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -406,42 +406,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Verslimorgen",
-              "detail": "Muri AG",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/verslimorgen-6/"
-            },
-            {
-              "label": "Bänz Oester – Together",
-              "detail": "Stadtbistro Isebähnli, Baden",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/baenz-oester-together_AScS6C2"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — en cours, dernier jour : 30 octobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
-            {
-              "label": "«ROCKSTAR MATTHIAS» kommt ins Kino!",
-              "detail": "Wettingen — en cours, dernier jour : 19 octobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rockstar-matthias-kommt-ins-kino/"
-            },
             {
               "label": "Essigkurs für die Direktvermarktung",
               "detail": "FiBL Kurssekretariat, Frick",
@@ -455,6 +419,24 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/frauenbund-muri-hormonbalance-ue35-wechseljahre/"
             },
             {
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — en cours, dernier jour : 30 octobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
+            },
+            {
               "label": "LEHRplätz Bremgarten",
               "detail": "Bremgarten",
               "date": "2026-10-21",
@@ -465,11 +447,29 @@
               "detail": "Baden",
               "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/corso-di-jass-per-principianti-parte-1-a-baden-de-karten/"
+            },
+            {
+              "label": "Panflötenkonzert mit Duo Fantastique",
+              "detail": "Röm.-kath. Kirche St. Nikolaus, Waltenschwil",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/waltenschwil/panfloetenkonzert-mit-duo-pantastico_ATWFSmp"
+            },
+            {
+              "label": "Ref. Frauenverein Muri Sins: Vortrag: Indische Malerei - ferne Kunst ganz nah",
+              "detail": "Muri AG, Sins",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ref-frauenverein-muri-sins-vortrag-indische-malerei-ferne-kunst-ganz-nah/"
+            },
+            {
+              "label": "Tribute to Johnny Cash",
+              "detail": "Saalbau Reinach",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-ag/tribute-to-johnny-cash_A7rvQrK"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-10-19T13:52:30.888Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

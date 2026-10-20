@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "carburanti",
-  "updatedAt": "2026-10-19T18:33:18.720Z",
-  "contentHash": "b8aced385dad785d3d0b0716028c2b5e2fa83da28f6977824892c488ee80866f",
+  "updatedAt": "2026-10-20T02:10:59.813Z",
+  "contentHash": "15bd5186551271430d0acf68a92cc50b78e17c3e760058367165de4300ffcccc",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "CDHR 2025: soglie 250.000/500.000 € per frontalieri in Francia",
+          "url": "/articoli-vaud/cdhr-contributo-differenziale-2025/",
+          "excerpt": "La contribution différentielle sur les hauts revenus mira a un prelievo minimo del 20%.",
+          "date": "2026-10-20T02:03:43.122Z"
+        },
+        {
           "title": "Sette milioni truffati nel Vaud da falsi agenti",
           "url": "/articoli-vaud/truffa-falsi-poliziotti-vaud/",
           "excerpt": "Quasi 2.300 casi dall'inizio dell'anno Danno complessivo: CHF 7 milioni Oltre 100 interpellati, 19 in detenzione 16 interpellazioni a inizio ottobre, 5",
@@ -94,12 +100,6 @@
           "url": "/articoli-vaud/eventi-weekend-vaud/",
           "excerpt": "Eventi nel Canton Vaud ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
           "date": "2026-10-17T11:32:57.082Z"
-        },
-        {
-          "title": "Truffe falsi poliziotti e banchieri nel Vaud: 100 interpellati",
-          "url": "/articoli-vaud/tuffe-falsi-poliziotti-vaud/",
-          "excerpt": "Oltre cento persone interpellate nel Vaud nel 2026 Sedici interpellazioni dall'inizio di ottobre Quasi 2.300 casi e 900 truffe riuscite Danno cumulato: circa",
-          "date": "2026-10-17T02:07:47.946Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T02:10:59.813Z"
     },
     "en": {
       "canton": "VD",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "CDHR 2025: 250.000/500.000 € thresholds for cross-border workers in France",
+          "url": "/en/vaud-articles/cdhr-differential-contribution-2025/",
+          "excerpt": "The differential contribution on high incomes aims for a minimum levy of 20%.",
+          "date": "2026-10-20T02:03:43.122Z"
+        },
+        {
           "title": "Seven million defrauded in Vaud by fake agents",
           "url": "/en/vaud-articles/seven-million-defrauded-in-vaud-by-fake-agents/",
           "excerpt": "Nearly 2,300 cases since the beginning of the year Total damage: CHF 7 million More than 100 people apprehended, 19 in detention 16 apprehensions in early",
@@ -193,12 +199,6 @@
           "url": "/en/vaud-articles/weekend-events-vaud/",
           "excerpt": "Events in the canton of Vaud every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
           "date": "2026-10-17T11:32:57.082Z"
-        },
-        {
-          "title": "Scams involving fake police officers and bankers in Vaud: 100 questioned",
-          "url": "/en/vaud-articles/fake-police-bankers-scams-vaud/",
-          "excerpt": "More than one hundred people contacted in Vaud in 2026 Sixteen contacts since the beginning of October Almost 2.300 cases and 900 successful scams Cumulative",
-          "date": "2026-10-17T02:07:47.946Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T02:10:59.813Z"
     },
     "de": {
       "canton": "VD",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "CDHR 2025: Schwellenwerte von 250.000/500.000 € für Grenzgänger in Frankreich",
+          "url": "/de/waadt-artikel/cdhr-differenzbeitrag-2025/",
+          "excerpt": "Die Differenzabgabe auf hohe Einkommen zielt auf eine Mindestbesteuerung von 20% ab.",
+          "date": "2026-10-20T02:03:43.122Z"
+        },
+        {
           "title": "Sieben Millionen im Kanton Waadt von falschen Agenten ergaunert",
           "url": "/de/waadt-artikel/sieben-millionen-im-kanton-waadt-von-falschen-agenten-ergaunert/",
           "excerpt": "Fast 2.300 Fälle seit Jahresbeginn Gesamtschaden: CHF 7 Millionen Über 100 Personen befragt, 19 in Haft 16 Befragungen Anfang Oktober, 5 in Lausanne Fälle →",
@@ -292,12 +298,6 @@
           "url": "/de/waadt-artikel/wochenend-veranstaltungen-waadt/",
           "excerpt": "Veranstaltungen in der Waadt an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
           "date": "2026-10-17T11:32:57.082Z"
-        },
-        {
-          "title": "Betrug durch falsche Polizisten/Banker: 100 kontaktiert",
-          "url": "/de/waadt-artikel/betrug-falsche-polizisten-waadt/",
-          "excerpt": "Im Kanton Waadt 2026 über hundert Personen kontaktiert Sechzehn Kontaktaufnahmen seit Anfang Oktober Fast 2.300 Fälle und 900 erfolgreiche Betrugsfälle",
-          "date": "2026-10-17T02:07:47.946Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T02:10:59.813Z"
     },
     "fr": {
       "canton": "VD",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "CDHR 2025 : seuils 250.000/500.000 € pour les travailleurs frontaliers en France",
+          "url": "/fr/articles-vaud/cdhr-contribution-differentielle-2025/",
+          "excerpt": "La contribution différentielle sur les hauts revenus vise un prélèvement minimum de 20%.",
+          "date": "2026-10-20T02:03:43.122Z"
+        },
+        {
           "title": "Sept millions escroqués dans le canton de Vaud par de faux agents",
           "url": "/fr/articles-vaud/sept-millions-escroques-dans-le-canton-de-vaud-par-de-faux-agents/",
           "excerpt": "Près de 2.300 cas depuis le début de l'année Préjudice total : CHF 7 millions Plus de 100 personnes interpellées, 19 en détention 16 interpellations début",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-vaud/evenements-week-end-vaud/",
           "excerpt": "Événements dans le canton de Vaud chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
           "date": "2026-10-17T11:32:57.082Z"
-        },
-        {
-          "title": "Arnaques: faux policiers et banquiers, 100 interpellés",
-          "url": "/fr/articles-vaud/arnaques-faux-policiers-vaud/",
-          "excerpt": "Plus de cent personnes interpellées dans le Vaud en 2026 Seize interpellations depuis le début d'octobre Près de 2.300 cas et 900 arnaques réussies Préjudice",
-          "date": "2026-10-17T02:07:47.946Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T02:10:59.813Z"
     }
   }
 }

@@ -2268,6 +2268,18 @@
       "firstSeenAt": "2026-10-19T12:47:26.741Z",
       "lastValidatedAt": "2026-10-19T12:47:26.741Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere assistente di cura ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-20T02:28:41.680Z",
+      "lastValidatedAt": "2026-10-20T02:28:41.680Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -10653,50 +10665,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.admin.ch/it/newnsb/l4hrr2l7oxxq": {
-      "section": "svizzera",
-      "ts": 1792276543653
-    },
-    "frontaliere::https://www.rsi.ch/s/4171162": {
-      "section": "frontaliere",
-      "ts": 1792283151640
-    },
-    "frontaliere::https://comozero.it/attualita/como-dopo-i-lavori-riaprono-i-giardini-di-via-anzani-e-volpati-profonda-rigenerazione-e-riqualificazione": {
-      "section": "frontaliere",
-      "ts": 1792283194965
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/monteiro-barbosa-raddrizza-la-solbiatese-2-2-contro-il-lentigione/2711191": {
-      "section": "frontaliere",
-      "ts": 1792283205200
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/lavori-sulla-ss34-cambia-la-navigazione-tra-laveno-e-intra/2711356": {
-      "section": "frontaliere",
-      "ts": 1792288653783
-    },
-    "svizzera::https://www.tio.ch/svizzera/cronaca/1957423/clima-lettere-accuse-direzione-carceri-terrore": {
-      "section": "svizzera",
-      "ts": 1792290149958
-    },
-    "svizzera::https://www.laregione.ch/svizzera/svizzera/1957422/irregolarita-sugli-orari-mobbing-e-clima-tossico-fra-le-sbarre": {
-      "section": "svizzera",
-      "ts": 1792291113345
-    },
-    "svizzera::https://www.tio.ch/ticino/cronaca/1957467/auto-sbanda-e-finisce-nel-prato-dell-aeroporto": {
-      "section": "svizzera",
-      "ts": 1792291119357
-    },
-    "svizzera::https://www.tio.ch/sport/hockey/1957445/ambri-ginevra-ambri-ginevra-gottardo-arena": {
-      "section": "svizzera",
-      "ts": 1792291125701
-    },
-    "frontaliere::https://comozero.it/attualita/como-scomparso-ricardo-anthony-stibane-appello-nonna": {
-      "section": "frontaliere",
-      "ts": 1792292435066
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/openjobmetis-contro-il-tabu-trento-varese-non-vince-dalla-doppietta-di-roijakkers/2710981": {
-      "section": "frontaliere",
-      "ts": 1792296009319
-    },
     "svizzera::https://www.tio.ch/svizzera/attualita/1957270/favore-giovani-svizzera-ricerca-progetto": {
       "section": "svizzera",
       "ts": 1792306051428
@@ -10864,6 +10832,102 @@
     "frontaliere::http://www.cd-ocst.ch": {
       "section": "frontaliere",
       "ts": 1792435928184
+    },
+    "svizzera::https://www.admin.ch/it/newnsb/e9jr6pxxz25m": {
+      "section": "svizzera",
+      "ts": 1792450313611
+    },
+    "frontaliere::https://cassa-disoccupazione.unia.ch": {
+      "section": "frontaliere",
+      "ts": 1792455234584
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/casciago-cantieri-aqst-per-il-lago-di-varese-in-dirittura-darrivo-gli-ultimi-interventi-e-le-modifiche-alla-viabilita/2712265": {
+      "section": "frontaliere",
+      "ts": 1792455419642
+    },
+    "frontaliere::https://www.laregione.ch/cantone/luganese/1957734/via-industria-a-caslano-e-ricorso-al-consiglio-di-stato": {
+      "section": "frontaliere",
+      "ts": 1792456042027
+    },
+    "frontaliere::https://www.tio.ch/ticino/attualita/1957694/niente-banchi-si-sale-a-bordo-a-lugano-la-scuola-viaggia-in-elettrico": {
+      "section": "frontaliere",
+      "ts": 1792456062620
+    },
+    "frontaliere::https://www.tio.ch/ticino/politica/1957849/si-all-ex-lati-per-i-pompieri-ma-si-profila-il-referendum": {
+      "section": "frontaliere",
+      "ts": 1792456226355
+    },
+    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/scuol-per-il-sindacato-si-dovr%c3%a0-andare-al-secondo-turno--4176388.html": {
+      "section": "frontaliere",
+      "ts": 1792456260265
+    },
+    "frontaliere::https://www.tio.ch/sport/calcio/1957833/ronaldo-nazionale-sospensione-euro-multa": {
+      "section": "frontaliere",
+      "ts": 1792461600726
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1957558/oro-e-tornato-il-momento-di-acquistarlo": {
+      "section": "frontaliere",
+      "ts": 1792461608637
+    },
+    "frontaliere::https://www.rsi.ch/s/4176388": {
+      "section": "frontaliere",
+      "ts": 1792461616291
+    },
+    "frontaliere::https://www.rsi.ch/s/4176097": {
+      "section": "frontaliere",
+      "ts": 1792461630413
+    },
+    "frontaliere::https://www.rsi.ch/s/4171186": {
+      "section": "frontaliere",
+      "ts": 1792461634297
+    },
+    "frontaliere::https://www.rsi.ch/s/4171162": {
+      "section": "frontaliere",
+      "ts": 1792461885707
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1957803/salari-che-crescono-meno-della-media-svizzera-e-potere-d-acquisto-che-si-riduce": {
+      "section": "frontaliere",
+      "ts": 1792463017375
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1957822/vent-anni-di-scuola-inoltre-un-tassello-essenziale-di-risocializzazione": {
+      "section": "frontaliere",
+      "ts": 1792463069371
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/btp-valore-il-risparmio-torna-al-tesoro-i-titoli-di-stato-restano-un-porto-sicuro-per-i-risparmiatori/2713021": {
+      "section": "frontaliere",
+      "ts": 1792464011562
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/chiusa-per-una-notte-luscita-della-stazione-di-castelletto-ticino-sulla-diramazione-gallarate-gattico/2712598": {
+      "section": "frontaliere",
+      "ts": 1792464037489
+    },
+    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1957809/pompieri-all-ex-lati-si-tirato-ma-decidera-il-referendum": {
+      "section": "frontaliere",
+      "ts": 1792464068113
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/agricoltura-coldiretti-varese-otto-aziende-su-dieci-pronte-a-investire-nellinnovazione-tecnologica/2712787": {
+      "section": "frontaliere",
+      "ts": 1792464091379
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/19/leggi-notizia/argomenti/economia-13/articolo/coldiretti-varese-otto-aziende-agricole-su-dieci-pronte-a-investire-nellinnovazione.html": {
+      "section": "frontaliere",
+      "ts": 1792464118843
+    },
+    "frontaliere::https://comozero.it/attualita/leterno-cantiere-dei-nuovi-giardini-lago-di-como-nuova-proroga-sui-tempi-ecco-quando-apriranno": {
+      "section": "frontaliere",
+      "ts": 1792466723548
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1957763/mondo-economico-e-politica-capiscano-cosa-e-possibile-e-cosa-non-lo-e": {
+      "section": "frontaliere",
+      "ts": 1792468128351
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/19/leggi-notizia/argomenti/territorio/articolo/lavori-a-tutela-del-lago-di-varese-in-dirittura-darrivo-a-casciago.html": {
+      "section": "frontaliere",
+      "ts": 1792470043375
+    },
+    "frontaliere::https://www.tio.ch/newsblog/verita-immobiliari/1957681/il-ticino-non-e-il-tuo-bancomat": {
+      "section": "frontaliere",
+      "ts": 1792478098551
     }
   }
 }

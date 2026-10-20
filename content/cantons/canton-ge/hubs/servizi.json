@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-10-19T17:59:19.762Z",
-  "contentHash": "0dcaa3396f32640a6f78e99977ddf2ac5c0cb17ab275f9bbdc6085c9f2cffbfc",
+  "updatedAt": "2026-10-20T13:42:35.891Z",
+  "contentHash": "661e0df2db35a69c89c3d1d730ad7bc2db4f2efdb205f15e0ff600b9a4133871",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-19T09:16:29.771Z",
+      "updatedAt": "2026-10-20T05:10:14.912Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-20T05:04:18.322Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T19:43:29.238Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -61,11 +66,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-18T22:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-19T22:00:00.000Z"
             },
             {
@@ -87,11 +87,30 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-10-23T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-24T22:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-19T09:16:29.771Z"
+          "updatedAt": "2026-10-20T05:10:14.912Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "12 °C",
+              "detail": "oggi da 11 a 14 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-20T05:04:18.322Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -119,17 +138,17 @@
               "url": "https://www.ge.ch/node/43758"
             },
             {
+              "label": "Mardi 27 octobre 2026 : fermeture de l'OCE de 9h45 à 13h00",
+              "date": "2026-10-12",
+              "url": "https://www.ge.ch/node/45194"
+            },
+            {
               "label": "Indexation du salaire minimum pour 2027",
               "date": "2026-10-07",
               "url": "https://www.ge.ch/node/45114"
-            },
-            {
-              "label": "J'arrive en fin de droit, et après ?",
-              "date": "2026-10-07",
-              "url": "https://www.ge.ch/node/261"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-19T17:59:19.762Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "en": {
       "canton": "GE",
@@ -248,11 +267,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-18T22:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-19T22:00:00.000Z"
             },
             {
@@ -274,11 +288,30 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-10-23T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-24T22:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-19T09:16:29.771Z"
+          "updatedAt": "2026-10-20T05:10:14.912Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "12 °C",
+              "detail": "today from 11 to 14 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-20T05:04:18.322Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -306,17 +339,17 @@
               "url": "https://www.ge.ch/node/43758"
             },
             {
+              "label": "Mardi 27 octobre 2026 : fermeture de l'OCE de 9h45 à 13h00",
+              "date": "2026-10-12",
+              "url": "https://www.ge.ch/node/45194"
+            },
+            {
               "label": "Indexation du salaire minimum pour 2027",
               "date": "2026-10-07",
               "url": "https://www.ge.ch/node/45114"
-            },
-            {
-              "label": "J'arrive en fin de droit, et après ?",
-              "date": "2026-10-07",
-              "url": "https://www.ge.ch/node/261"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -391,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-19T17:59:19.762Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "de": {
       "canton": "GE",
@@ -430,11 +463,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-18T22:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-19T22:00:00.000Z"
             },
             {
@@ -456,11 +484,30 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-10-23T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-24T22:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-19T09:16:29.771Z"
+          "updatedAt": "2026-10-20T05:10:14.912Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "12 °C",
+              "detail": "heute 11 bis 14 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-20T05:04:18.322Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -488,17 +535,17 @@
               "url": "https://www.ge.ch/node/43758"
             },
             {
+              "label": "Mardi 27 octobre 2026 : fermeture de l'OCE de 9h45 à 13h00",
+              "date": "2026-10-12",
+              "url": "https://www.ge.ch/node/45194"
+            },
+            {
               "label": "Indexation du salaire minimum pour 2027",
               "date": "2026-10-07",
               "url": "https://www.ge.ch/node/45114"
-            },
-            {
-              "label": "J'arrive en fin de droit, et après ?",
-              "date": "2026-10-07",
-              "url": "https://www.ge.ch/node/261"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -573,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-19T17:59:19.762Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "fr": {
       "canton": "GE",
@@ -612,11 +659,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-18T22:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-19T22:00:00.000Z"
             },
             {
@@ -638,11 +680,30 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-10-23T22:00:00.000Z"
+            },
+            {
+              "label": "pharma24",
+              "detail": "Genève, Genève",
+              "date": "2026-10-24T22:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-19T09:16:29.771Z"
+          "updatedAt": "2026-10-20T05:10:14.912Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "12 °C",
+              "detail": "aujourd’hui de 11 à 14 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-20T05:04:18.322Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -670,17 +731,17 @@
               "url": "https://www.ge.ch/node/43758"
             },
             {
+              "label": "Mardi 27 octobre 2026 : fermeture de l'OCE de 9h45 à 13h00",
+              "date": "2026-10-12",
+              "url": "https://www.ge.ch/node/45194"
+            },
+            {
               "label": "Indexation du salaire minimum pour 2027",
               "date": "2026-10-07",
               "url": "https://www.ge.ch/node/45114"
-            },
-            {
-              "label": "J'arrive en fin de droit, et après ?",
-              "date": "2026-10-07",
-              "url": "https://www.ge.ch/node/261"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -752,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-19T17:59:19.762Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     }
   }
 }

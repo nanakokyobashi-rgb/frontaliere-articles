@@ -27,6 +27,9 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.eventi-weekend-zugo.title': 'Weekend events in the canton of Zug: what to do Saturday & Sunday',
     'blog.article.eventi-weekend-zugo.excerpt': 'Events in the canton of Zug every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.',
     'blog.article.eventi-weekend-zugo.imageAlt': 'Weekend events in the canton of Zug',
+    'blog.article.ricorso-federale-espulsione-zugo.title': 'Zug: appeal against expulsion rejected by the Federal Supreme Court',
+    'blog.article.ricorso-federale-espulsione-zugo.excerpt': 'May 2026: Zug does not renew the short-term permit.',
+    'blog.article.ricorso-federale-espulsione-zugo.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZgEn;

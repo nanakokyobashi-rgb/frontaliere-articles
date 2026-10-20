@@ -1,14 +1,12 @@
 {
-  "keywords": [],
-  "strikes": {},
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
   "topicGateUrls": {
-    "canton-ge::https://www.heidi.news/articles/amir-et-les-40-barbiers-ou-le-vilain-petit-secret-d-annemasse": {
+    "canton-ge::https://lecourrier.ch/2026/10/19/viry-reve-dune-bretelle-dautoroute": {
       "section": "canton-ge",
-      "ts": 1791752297878
-    },
-    "canton-ge::https://lecourrier.ch/2026/10/09/acte-criminel-a-lorigine-de-lincendie-des-voies-cff-a-eclepens": {
-      "section": "canton-ge",
-      "ts": 1791752317918
+      "ts": 1792450645553
     }
   }
 }

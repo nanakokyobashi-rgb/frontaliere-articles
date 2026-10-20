@@ -94,4 +94,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'ricorso-federale-espulsione-zugo',
+ category: 'pratico',
+ date: '2026-10-20T02:44:35.163Z',
+ image: '/images/blog/article-ricorso-federale-espulsione-zugo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

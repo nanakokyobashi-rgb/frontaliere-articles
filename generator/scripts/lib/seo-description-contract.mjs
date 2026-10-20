@@ -1,3 +1,9 @@
+/** Shared upper bound for the public SERP description surface. */
+export const SEO_DESCRIPTION_MAX = 150;
+
+/** Shared upper bound for the public social-card description surface. */
+export const SEO_OG_DESCRIPTION_MAX = 250;
+
 /** Shared lower bound for the public SERP description surface. */
 export const SEO_DESCRIPTION_MIN = 80;
 

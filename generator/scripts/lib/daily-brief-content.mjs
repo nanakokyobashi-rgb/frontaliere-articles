@@ -398,9 +398,9 @@ export function pickHeadline(blocks, insights = {}, dateIso) {
  *                      trim it below 200: that regression is the one that
  *                      already happened once (#80, 2026-08-09).
  *
- *   `seoDescription`   150–160 chars. Google truncates a SERP snippet around
- *                      160, and the site's `tests/seo-description-length.test.ts`
- *                      hard-fails above 170 on EVERY branch. Written to stand
+ *   `seoDescription`   120–150 chars. The cap leaves a buffer before Google
+ *                      truncates the snippet; the site's
+ *                      `tests/seo-description-length.test.ts` hard-fails above 170. Written to stand
  *                      alone in a result list: date first, then the two or
  *                      three things people actually search for.
  *
@@ -414,13 +414,14 @@ export function pickHeadline(blocks, insights = {}, dateIso) {
  * checks every month at both ends.
  *
  * `clampSeoDescriptions` in create-article.mjs stays as a SAFETY NET at the
- * shared write path (160 for description, 250 for ogDescription). After this
+ * shared write path (150 for description, 250 for ogDescription). After this
  * split it must never fire on the brief — these texts are born the right size.
  *
  * ONE CAVEAT, and it is a site-side one. Only the IT `seoDescription` reaches a
  * meta description today: the SEO entry `blog-<id>` is IT-only, and the site's
  * `packages/articles/engine/ogPagesPlugin.ts` still derives the en/de/fr meta
- * description from the LOCALE EXCERPT, clipping it at 155 with an ellipsis.
+ * description from the LOCALE EXCERPT, clipping it to the active SERP budget
+ * (150 characters in the current shell) with an ellipsis.
  * The localized `seoDescription`s below are therefore written and tested here,
  * but consuming them needs a change on the site — see the PR body.
  *
@@ -450,7 +451,7 @@ const T = {
     excerpt: (dateLabel) =>
       `I numeri di oggi, ${dateLabel}, per chi attraversa il confine: le ultime attese ai valichi, i comuni con la benzina meno cara, il cambio franco-euro e gli annunci di lavoro attivi sul nostro job board in Svizzera. Dati del nostro monitoraggio quotidiano.`,
     seoDescription: (dateLabel) =>
-      `Bollettino quotidiano per frontalieri, ${dateLabel}: code ai valichi, prezzi della benzina, cambio CHF/EUR e offerte attive sul nostro job board svizzero.`,
+      `Bollettino frontalieri ${dateLabel}: attese ai valichi, prezzi benzina, cambio CHF/EUR e offerte attive di lavoro in Svizzera.`,
     ogDescription: (dateLabel) =>
       `I numeri del ${dateLabel} per i frontalieri: quanto si aspetta a ogni valico, in quali comuni conviene fare il pieno, quanto vale il franco al cambio rilevato e quanti annunci di lavoro attivi sono presenti sul nostro job board in Svizzera.`,
     imageAlt: (dateLabel) => `I numeri del giorno per i frontalieri – ${dateLabel}: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro`,
@@ -517,7 +518,7 @@ const T = {
     excerpt: (dateLabel) =>
       `Today's numbers, ${dateLabel}, for cross-border commuters: the latest crossing waits, cheapest fuel municipalities, the franc-euro rate and active Swiss job listings on our job board. Measured daily by our own monitoring.`,
     seoDescription: (dateLabel) =>
-      `Daily cross-border brief for workers, ${dateLabel}: latest measured border waits, fuel prices, franc-euro rate and active Swiss job listings on our board.`,
+      `Cross-border daily brief for workers, ${dateLabel}: latest waits, fuel prices, CHF/EUR rate and active jobs in Switzerland.`,
     ogDescription: (dateLabel) =>
       `Daily figures for cross-border commuters, ${dateLabel}: measured waits at each crossing, where fuel costs least, the latest franc-euro rate and active Swiss job listings on our board, with links to live pages.`,
     imageAlt: (dateLabel) => `The day's numbers for cross-border commuters – ${dateLabel}: border waits, fuel prices, CHF-EUR rate and job listings`,
@@ -584,7 +585,7 @@ const T = {
     excerpt: (dateLabel) =>
       `Die Zahlen von heute, ${dateLabel}, für Grenzgänger: die zuletzt gemeldeten Wartezeiten an den Übergängen, die günstigsten Benzinpreise, der Franken-Euro-Kurs und aktive Stellenanzeigen in der Schweiz auf unserem Job-Board. Täglich aus unserem Monitoring.`,
     seoDescription: (dateLabel) =>
-      `Grenzgänger-Bulletin heute, ${dateLabel}: Wartezeiten, Benzinpreise, Franken-Euro-Kurs und aktive Stellenanzeigen auf unserem Job-Board in der Schweiz.`,
+      `Grenzgänger-Bulletin am ${dateLabel}: aktuelle Wartezeiten, Benzinpreise, CHF/EUR-Kurs und offene Stellen in der Schweiz.`,
     ogDescription: (dateLabel) =>
       `Die Zahlen vom ${dateLabel} für Grenzgänger: wie lange man an jedem Übergang wartet, wo das Benzin am günstigsten ist, der aktuelle Franken-Euro-Kurs und die Zahl aktiver Stellenanzeigen auf unserem Job-Board in der Schweiz.`,
     imageAlt: (dateLabel) => `Die Zahlen des Tages für Grenzgänger – ${dateLabel}: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote`,
@@ -651,7 +652,7 @@ const T = {
     excerpt: (dateLabel) =>
       `Les chiffres du jour, ${dateLabel}, pour les frontaliers : les dernières attentes aux douanes, les communes où le carburant coûte le moins cher, le taux franc-euro et les offres d'emploi actives en Suisse sur notre job board. Relevés quotidiens de notre suivi.`,
     seoDescription: (dateLabel) =>
-      `Bulletin quotidien des frontaliers ${dateLabel} : files aux douanes, prix du carburant, taux CHF/EUR, offres d'emploi actives sur notre job board suisse.`,
+      `Bulletin frontalier ${dateLabel} : attentes aux douanes, prix du carburant, taux CHF/EUR et offres d'emploi actives en Suisse.`,
     ogDescription: (dateLabel) =>
       `Les chiffres du ${dateLabel} pour les frontaliers : attentes aux douanes, communes où le carburant coûte le moins cher, dernier taux CHF/EUR et offres d'emploi actives sur notre job board suisse au quotidien.`,
     imageAlt: (dateLabel) => `Les chiffres du jour pour les frontaliers – ${dateLabel} : attentes aux douanes, prix de l'essence, taux CHF-EUR et offres d'emploi`,
@@ -976,10 +977,10 @@ export function buildData(brief) {
       title: it.title,
       // NOT `it.excerpt`. The excerpt is the reader-facing teaser and is
       // deliberately ~280 chars; this is the SERP snippet and is written for
-      // 160. Collapsing the two is the defect #79/#80 came from — the SERP
+      // 150. Collapsing the two is the defect #79/#80 came from — the SERP
       // budget ended up governing what the reader was allowed to see.
       // `structuredData.description` in the SEO entry is emitted from this same
-      // field, so it inherits the 160-char budget.
+      // field, so it inherits the 150-char budget.
       description: it.seoDescription,
       // 'dogana' is deliberate: it is a news-sitemap whitelist token, so each
       // edition becomes Google News-eligible inside the 48h window on its own.

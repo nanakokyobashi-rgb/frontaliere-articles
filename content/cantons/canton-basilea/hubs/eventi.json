@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-19T02:30:40.156Z",
-  "contentHash": "ad4a3983abe44d3f813a7d826ab81bc13ce12c5c12a85624922dfa347b35dcab",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "807a7fa5f7ffbfd9db3af57434123d21661a073cd38a1ac2c8bab36061771f13",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-18T20:21:24.396Z",
+      "updatedAt": "2026-10-19T15:42:28.810Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "94",
+          "value": "91",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,24 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Azymuth",
-              "detail": "Kaserne Basel, Basel",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/basel/azymuth_AVRhkZS"
-            },
-            {
-              "label": "Baloise Session: NILE RODGERS & CHIC | RICK ASTLE",
-              "detail": "Messe Basel, Basel",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/baloise-session-nile-rodgers-und-chic-rick-astle_AncUFGv"
-            },
-            {
-              "label": "Max Küng: «Supertoskana»",
-              "detail": "Der Teufelhof Basel, Basel",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/max-kueng-supertoskana-1/"
-            },
             {
               "label": "Daniel Migliosi Quintet",
               "detail": "the bird's eye jazz club",
@@ -91,11 +73,29 @@
               "detail": "Der Teufelhof Basel, Basel",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/berni-wagner-monster/"
+            },
+            {
+              "label": "ANDY MIDDLETON QUARTET",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/andy-middleton-quartet_AGGhKR2"
+            },
+            {
+              "label": "Cordon Bleu Festial",
+              "detail": "Läufelfingen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cordon-bleu-festial/"
+            },
+            {
+              "label": "Line Dance uff em Rhy",
+              "detail": "Basel Schifflände, Basel",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/museums/children/events/basel/line-dance-cruise-on-the-river-rhine_A5yXACG"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "94",
+          "value": "91",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,24 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Azmuth",
-              "detail": "Kaserne Basel, Basel",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/basel/azymuth_AVRhkZS"
-            },
-            {
-              "label": "Baloise Session: NILE RODGERS & CHIC | RICK ASTLEY",
-              "detail": "Messe Basel, Basel",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/baloise-session-nile-rodgers-und-chic-rick-astle_AncUFGv"
-            },
-            {
-              "label": "Max Küng: «Supertoskana»",
-              "detail": "Der Teufelhof Basel, Basel",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/max-kueng-supertoskana-1/"
-            },
             {
               "label": "Daniel Migliosi Quintet",
               "detail": "the bird's eye jazz club",
@@ -196,11 +178,29 @@
               "detail": "Der Teufelhof Basel, Basel",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/berni-wagner-monster/"
+            },
+            {
+              "label": "ANDY MIDDLETON QUARTET",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/andy-middleton-quartet_AGGhKR2"
+            },
+            {
+              "label": "Cordon Bleu Festial",
+              "detail": "Läufelfingen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cordon-bleu-festial/"
+            },
+            {
+              "label": "Line Dance Cruise on the river Rhine",
+              "detail": "Basel Schifflände, Basel",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/museums/children/events/basel/line-dance-cruise-on-the-river-rhine_A5yXACG"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "94",
+          "value": "91",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,24 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Azymut",
-              "detail": "Kaserne Basel, Basel",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/basel/azymuth_AVRhkZS"
-            },
-            {
-              "label": "Baloise Session: NILE RODGERS & CHIC | RICK ASTLE",
-              "detail": "Messe Basel, Basel",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/baloise-session-nile-rodgers-und-chic-rick-astle_AncUFGv"
-            },
-            {
-              "label": "Max Küng: «Supertoskana»",
-              "detail": "Der Teufelhof Basel, Basel",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/max-kueng-supertoskana-1/"
-            },
             {
               "label": "Daniel Migliosi Quintet",
               "detail": "the bird's eye jazz club",
@@ -301,11 +283,29 @@
               "detail": "Der Teufelhof Basel, Basel",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/berni-wagner-monster/"
+            },
+            {
+              "label": "ANDY MIDDLETON QUARTET",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/andy-middleton-quartet_AGGhKR2"
+            },
+            {
+              "label": "Cordon Bleu Festial",
+              "detail": "Läufelfingen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cordon-bleu-festial/"
+            },
+            {
+              "label": "Line Dance uff em Rhy",
+              "detail": "Basel Schifflände, Basel",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/museums/children/events/basel/line-dance-cruise-on-the-river-rhine_A5yXACG"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "94",
+          "value": "91",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,24 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Azmuth",
-              "detail": "Kaserne Basel, Basel",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/basel/azymuth_AVRhkZS"
-            },
-            {
-              "label": "Baloise Session: NILE RODGERS & CHIC | RICK ASTLEY",
-              "detail": "Messe Basel, Basel",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/baloise-session-nile-rodgers-und-chic-rick-astle_AncUFGv"
-            },
-            {
-              "label": "Max Küng: «Supertoskana»",
-              "detail": "Der Teufelhof Basel, Basel",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/max-kueng-supertoskana-1/"
-            },
             {
               "label": "Daniel Migliosi Quintet",
               "detail": "the bird's eye jazz club",
@@ -406,11 +388,29 @@
               "detail": "Der Teufelhof Basel, Basel",
               "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/berni-wagner-monster/"
+            },
+            {
+              "label": "ANDY MIDDLETON QUARTET",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/andy-middleton-quartet_AGGhKR2"
+            },
+            {
+              "label": "Cordon Bleu Festial",
+              "detail": "Läufelfingen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cordon-bleu-festial/"
+            },
+            {
+              "label": "Line Dance uff em Rhy",
+              "detail": "Basel Schifflände, Basel",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/museums/children/events/basel/line-dance-cruise-on-the-river-rhine_A5yXACG"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-10-19T02:30:40.156Z",
-  "contentHash": "c64d2bf093a69051a782b26bd9dbb151d4381bc9482d3a4aeeed442321273788",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "b3ec3225b548c186cfad778d1079c56f23a7c0088749ecb9e8605326bc86cb98",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-18T20:21:24.396Z",
+      "updatedAt": "2026-10-19T15:42:28.810Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "23",
+          "value": "22",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,12 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Chilbi im Urirotstock",
-              "detail": "Hotel Urirotstock, Isenthal",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chilbi-im-urirotstock-3/"
-            },
             {
               "label": "Digitale Medienangebote",
               "detail": "Altdorf",
@@ -91,11 +85,17 @@
               "detail": "6490 Andermatt, Andermatt",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woldmanndli-umzug/"
+            },
+            {
+              "label": "Sitzdampfbad - Yonisteaming",
+              "detail": "Rüttihof, Schattdorf",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sitzdampfbad-yonisteaming/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "UR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "23",
+          "value": "22",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,12 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Chilbi im Urirotstock",
-              "detail": "Hotel Urirotstock, Isenthal",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chilbi-im-urirotstock-3/"
-            },
             {
               "label": "Digitale Medienangebote",
               "detail": "Altdorf",
@@ -196,11 +190,17 @@
               "detail": "6490 Andermatt, Andermatt",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woldmanndli-umzug/"
+            },
+            {
+              "label": "Sitzdampfbad - Yonisteaming",
+              "detail": "Rüttihof, Schattdorf",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sitzdampfbad-yonisteaming/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "UR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "23",
+          "value": "22",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,12 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Chilbi im Urirotstock",
-              "detail": "Hotel Urirotstock, Isenthal",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chilbi-im-urirotstock-3/"
-            },
             {
               "label": "Digitale Medienangebote",
               "detail": "Altdorf",
@@ -301,11 +295,17 @@
               "detail": "6490 Andermatt, Andermatt",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woldmanndli-umzug/"
+            },
+            {
+              "label": "Sitzdampfbad - Yonisteaming",
+              "detail": "Rüttihof, Schattdorf",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sitzdampfbad-yonisteaming/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "UR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "23",
+          "value": "22",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,12 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Chilbi im Urirotstock",
-              "detail": "Hotel Urirotstock, Isenthal",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chilbi-im-urirotstock-3/"
-            },
             {
               "label": "Digitale Medienangebote",
               "detail": "Altdorf",
@@ -406,11 +400,17 @@
               "detail": "6490 Andermatt, Andermatt",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woldmanndli-umzug/"
+            },
+            {
+              "label": "Sitzdampfbad - Yonisteaming",
+              "detail": "Rüttihof, Schattdorf",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sitzdampfbad-yonisteaming/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

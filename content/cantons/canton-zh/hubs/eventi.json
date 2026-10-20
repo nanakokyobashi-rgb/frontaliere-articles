@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-19T02:30:40.156Z",
-  "contentHash": "8931e35415ca5df8323e4aa8b91526d7a51925587ab9d75dd55f955868bf5176",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "db4488b22d470a8e075aada7d9a066c60f9775bead0a0845c1ece26fdedd26b7",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-18T20:21:24.396Z",
+      "updatedAt": "2026-10-19T15:42:28.810Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "375",
+          "value": "374",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Art and Healing Workshop mit Living Museum Zürich",
-              "detail": "Migros Museum für Gegenwartskunst, Zürich",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/art-and-healing-workshop-mit-living-museum-zuerich/"
+              "label": "Alternative Investments Forum 2026",
+              "detail": "Zürich Marriott Hotel, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/alternative-investments-forum-2026_AA6KDtr"
             },
             {
-              "label": "Kursreihe- Clowneskes Theater",
-              "detail": "Wetzikon",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-clowneskes-theater/"
+              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-23/"
             },
             {
-              "label": "Kids-Week MVZU: Offene Probe Musikverein Rümlang",
-              "detail": "Gemeindesaal Rümlang, Rümlang",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ruemlang/kids-week-mvzu-offene-probe-musikverein-ruemlang_AKkc3Kc"
+              "label": "Jahrgängerverein Dübendorf, Erste Hilfe Kurs (BLS/AED)",
+              "detail": "Dübendorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/jahrgaengerverein-duebendorf-erste-hilfe-kurs-blsaed/"
             },
             {
-              "label": "\"Was wäre, wenn?\" Lieder für die Erde von und mit Olga Tucek",
-              "detail": "Zwinglikirche, Winterthur",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/was-waere-wenn-lieder-fuer-die-erde-von-und-mit-olga-tucek_A3sWfw8"
+              "label": "Nordic Walking",
+              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-29/"
             },
             {
-              "label": "Abendmusiken in St. Josef",
-              "detail": "Röm.-kath. Kirche St. Josef, Zürich",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/abendmusiken-in-st-josef-1/"
+              "label": "Bilder-Vortrag: Biber",
+              "detail": "Kulturpark Zürich, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/bilder-vortrag-biber_AFFARkw"
             },
             {
-              "label": "Freya Ridings (UK)",
-              "detail": "X-TRA",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/zuerich/freya-ridings-uk_AheiWQM"
-            },
-            {
-              "label": "Freya Ridings (UK)",
+              "label": "Nachhall",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/freya-ridings-uk/"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachhall/"
             },
             {
-              "label": "Série jeunes: Junyan Chen",
+              "label": "Offenes Singen „KRAFT der LIEDER“ | StimmVolk",
+              "detail": "Loorensiedlung, Affoltern am Albis",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/affoltern-am-albis/offenes-singen-kraft-der-lieder-stimmvolk_AEW2YxX"
+            },
+            {
+              "label": "Jugend Sinfonieorchester Zürich",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jugend-sinfonieorchester-zuerich/"
+            },
+            {
+              "label": "Stimme der Farben – Chor: neuer Kurs ab 20.10.26",
+              "detail": "Galotti",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/stimme-der-farben-chor-neuer-kurs-ab-201026_A6PRiGe"
+            },
+            {
+              "label": "Teresa Vittucci & Sophía Rodríguez: Anger Angels (ETERNAL LETDOWN)",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/serie-jeunes-junyan-chen/"
-            },
-            {
-              "label": "Einblick in die Zukunft des Museums – Fokus \"Spinnen\"",
-              "detail": "Bäretswil — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einblick-in-die-zukunft-des-museums-fokus-spinnen-1/"
-            },
-            {
-              "label": "Ghosts (Re)Visited: Kunst als Exil",
-              "detail": "PFAUEN, PFAUEN KAMMER — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/ghosts-revisited-kunst-als-exil_AR5RVgH"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/teresa-vittucci-sophia-rodriguez-anger-angels-eternal-letdown/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -129,7 +129,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "ZH",
@@ -139,7 +139,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "375",
+          "value": "374",
           "note": "from the site’s events calendar"
         }
       ],
@@ -150,69 +150,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Art and Healing Workshop mit Living Museum Zürich",
-              "detail": "Migros Museum für Gegenwartskunst, Zürich",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/art-and-healing-workshop-mit-living-museum-zuerich/"
+              "label": "Alternative Investments Forum 2026",
+              "detail": "Zürich Marriott Hotel, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/alternative-investments-forum-2026_AA6KDtr"
             },
             {
-              "label": "Kursreihe- Clowneskes Theater",
-              "detail": "Wetzikon",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-clowneskes-theater/"
+              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-23/"
             },
             {
-              "label": "Kids-Week MVZU: Offene Probe Musikverein Rümlang",
-              "detail": "Gemeindesaal Rümlang, Rümlang",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ruemlang/kids-week-mvzu-offene-probe-musikverein-ruemlang_AKkc3Kc"
+              "label": "Jahrgängerverein Dübendorf, Erste Hilfe Kurs (BLS/AED)",
+              "detail": "Dübendorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/jahrgaengerverein-duebendorf-erste-hilfe-kurs-blsaed/"
             },
             {
-              "label": "\"Was wäre, wenn?\" Lieder für die Erde von und mit Olga Tucek",
-              "detail": "Zwinglikirche, Winterthur",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/was-waere-wenn-lieder-fuer-die-erde-von-und-mit-olga-tucek_A3sWfw8"
+              "label": "Nordic Walking",
+              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-29/"
             },
             {
-              "label": "Abendmusiken in St. Josef",
-              "detail": "Röm.-kath. Kirche St. Josef, Zürich",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/abendmusiken-in-st-josef-1/"
+              "label": "Bilder-Vortrag: Biber",
+              "detail": "Kulturpark Zürich, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/bilder-vortrag-biber_AFFARkw"
             },
             {
-              "label": "Freya Ridings (UK)",
-              "detail": "X-TRA",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/zuerich/freya-ridings-uk_AheiWQM"
-            },
-            {
-              "label": "Freya Ridings (UK)",
+              "label": "Nachhall",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/freya-ridings-uk/"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachhall/"
             },
             {
-              "label": "Série jeunes: Junyan Chen",
+              "label": "Offenes Singen „KRAFT der LIEDER“",
+              "detail": "Loorensiedlung, Affoltern am Albis",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/affoltern-am-albis/offenes-singen-kraft-der-lieder-stimmvolk_AEW2YxX"
+            },
+            {
+              "label": "Jugend Sinfonieorchester Zürich",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jugend-sinfonieorchester-zuerich/"
+            },
+            {
+              "label": "Voices of Colors – Choir: New Course Starting October 20, 2026",
+              "detail": "Galotti",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/stimme-der-farben-chor-neuer-kurs-ab-201026_A6PRiGe"
+            },
+            {
+              "label": "Teresa Vittucci & Sophía Rodríguez: Anger Angels (ETERNAL LETDOWN)",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/serie-jeunes-junyan-chen/"
-            },
-            {
-              "label": "Einblick in die Zukunft des Museums – Fokus \"Spinnen\"",
-              "detail": "Bäretswil — ongoing, last day: 25 October 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einblick-in-die-zukunft-des-museums-fokus-spinnen-1/"
-            },
-            {
-              "label": "Ghosts (Re)Visited: Kunst als Exil",
-              "detail": "PFAUEN, PFAUEN KAMMER — ongoing, last day: 25 October 2026",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/ghosts-revisited-kunst-als-exil_AR5RVgH"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/teresa-vittucci-sophia-rodriguez-anger-angels-eternal-letdown/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -246,7 +246,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "ZH",
@@ -256,7 +256,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "375",
+          "value": "374",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -267,69 +267,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Art and Healing Workshop mit Living Museum Zürich",
-              "detail": "Migros Museum für Gegenwartskunst, Zürich",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/art-and-healing-workshop-mit-living-museum-zuerich/"
+              "label": "Alternative Investments Forum 2026",
+              "detail": "Zürich Marriott Hotel, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/alternative-investments-forum-2026_AA6KDtr"
             },
             {
-              "label": "Kursreihe- Clowneskes Theater",
-              "detail": "Wetzikon",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-clowneskes-theater/"
+              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-23/"
             },
             {
-              "label": "Kids-Week MVZU: Offene Probe Musikverein Rümlang",
-              "detail": "Gemeindesaal Rümlang, Rümlang",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ruemlang/kids-week-mvzu-offene-probe-musikverein-ruemlang_AKkc3Kc"
+              "label": "Jahrgängerverein Dübendorf, Erste Hilfe Kurs (BLS/AED)",
+              "detail": "Dübendorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/jahrgaengerverein-duebendorf-erste-hilfe-kurs-blsaed/"
             },
             {
-              "label": "\"Was wäre, wenn?\" Lieder für die Erde von und mit Olga Tucek",
-              "detail": "Zwinglikirche, Winterthur",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/was-waere-wenn-lieder-fuer-die-erde-von-und-mit-olga-tucek_A3sWfw8"
+              "label": "Nordic Walking",
+              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-29/"
             },
             {
-              "label": "Abendmusiken in St. Josef",
-              "detail": "Röm.-kath. Kirche St. Josef, Zürich",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/abendmusiken-in-st-josef-1/"
+              "label": "Bilder-Vortrag: Biber",
+              "detail": "Kulturpark Zürich, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/bilder-vortrag-biber_AFFARkw"
             },
             {
-              "label": "Freya Ridings (UK)",
-              "detail": "X-TRA",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/zuerich/freya-ridings-uk_AheiWQM"
-            },
-            {
-              "label": "Freya Ridings (UK)",
+              "label": "Nachhall",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/freya-ridings-uk/"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachhall/"
             },
             {
-              "label": "Série jeunes: Junyan Chen",
+              "label": "Offenes Singen „KRAFT der LIEDER“",
+              "detail": "Loorensiedlung, Affoltern am Albis",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/affoltern-am-albis/offenes-singen-kraft-der-lieder-stimmvolk_AEW2YxX"
+            },
+            {
+              "label": "Jugend Sinfonieorchester Zürich",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jugend-sinfonieorchester-zuerich/"
+            },
+            {
+              "label": "Stimme der Farben – Chor: neuer Kurs ab dem 20.10.26",
+              "detail": "Galotti",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/stimme-der-farben-chor-neuer-kurs-ab-201026_A6PRiGe"
+            },
+            {
+              "label": "Teresa Vittucci & Sophía Rodríguez: anger angels (ETERNAL LETDOWN)",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/serie-jeunes-junyan-chen/"
-            },
-            {
-              "label": "Einblick in die Zukunft des Museums – Fokus \"Spinnen\"",
-              "detail": "Bäretswil — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einblick-in-die-zukunft-des-museums-fokus-spinnen-1/"
-            },
-            {
-              "label": "Ghosts (Re)Visited: Kunst als Exil",
-              "detail": "PFAUEN, PFAUEN KAMMER — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/ghosts-revisited-kunst-als-exil_AR5RVgH"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/teresa-vittucci-sophia-rodriguez-anger-angels-eternal-letdown/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -363,7 +363,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "ZH",
@@ -373,7 +373,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "375",
+          "value": "374",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -384,69 +384,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Art and Healing Workshop mit Living Museum Zürich",
-              "detail": "Migros Museum für Gegenwartskunst, Zürich",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/art-and-healing-workshop-mit-living-museum-zuerich/"
+              "label": "Alternative Investments Forum 2026",
+              "detail": "Zürich Marriott Hotel, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/alternative-investments-forum-2026_AA6KDtr"
             },
             {
-              "label": "Kursreihe- Clowneskes Theater",
-              "detail": "Wetzikon",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kursreihe-clowneskes-theater/"
+              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-23/"
             },
             {
-              "label": "Kids-Week MVZU: Offene Probe Musikverein Rümlang",
-              "detail": "Gemeindesaal Rümlang, Rümlang",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ruemlang/kids-week-mvzu-offene-probe-musikverein-ruemlang_AKkc3Kc"
+              "label": "Jahrgängerverein Dübendorf, Erste Hilfe Kurs (BLS/AED)",
+              "detail": "Dübendorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/jahrgaengerverein-duebendorf-erste-hilfe-kurs-blsaed/"
             },
             {
-              "label": "\"Was wäre, wenn?\" Lieder für die Erde von und mit Olga Tucek",
-              "detail": "Zwinglikirche, Winterthur",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/winterthur/was-waere-wenn-lieder-fuer-die-erde-von-und-mit-olga-tucek_A3sWfw8"
+              "label": "Nordic Walking",
+              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-29/"
             },
             {
-              "label": "Abendmusiken in St. Josef",
-              "detail": "Röm.-kath. Kirche St. Josef, Zürich",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/abendmusiken-in-st-josef-1/"
+              "label": "Bilder-Vortrag: Biber",
+              "detail": "Kulturpark Zürich, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/bilder-vortrag-biber_AFFARkw"
             },
             {
-              "label": "Freya Ridings (UK)",
-              "detail": "X-TRA",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/museen/kinder/veranstaltungen/zuerich/freya-ridings-uk_AheiWQM"
-            },
-            {
-              "label": "Freya Ridings (UK)",
+              "label": "Nachhall",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/freya-ridings-uk/"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachhall/"
             },
             {
-              "label": "Série jeunes: Junyan Chen",
+              "label": "Offenes Singen „KRAFT der LIEDER“",
+              "detail": "Loorensiedlung, Affoltern am Albis",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/affoltern-am-albis/offenes-singen-kraft-der-lieder-stimmvolk_AEW2YxX"
+            },
+            {
+              "label": "Jugend Sinfonieorchester Zürich",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jugend-sinfonieorchester-zuerich/"
+            },
+            {
+              "label": "Stimme der Farben – Chor : nouveau cours à partir du 20 octobre 2026",
+              "detail": "Galotti",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/stimme-der-farben-chor-neuer-kurs-ab-201026_A6PRiGe"
+            },
+            {
+              "label": "Teresa Vittucci & Sophía Rodríguez: Anger Angels (ETERNAL LETDOWN)",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/serie-jeunes-junyan-chen/"
-            },
-            {
-              "label": "Einblick in die Zukunft des Museums – Fokus \"Spinnen\"",
-              "detail": "Bäretswil — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/einblick-in-die-zukunft-des-museums-fokus-spinnen-1/"
-            },
-            {
-              "label": "Ghosts (Re)Visited: Kunst als Exil",
-              "detail": "PFAUEN, PFAUEN KAMMER — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/ghosts-revisited-kunst-als-exil_AR5RVgH"
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/teresa-vittucci-sophia-rodriguez-anger-angels-eternal-letdown/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -480,7 +480,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

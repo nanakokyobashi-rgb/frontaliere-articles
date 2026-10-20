@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-10-18T07:04:15.428Z",
-  "contentHash": "04662a9d912b1d3862f869b21ad8570c5dcd1fc6a80bac146009485d611c2827",
+  "updatedAt": "2026-10-20T10:04:48.803Z",
+  "contentHash": "211d6df1c4d0abc00442d617d116bdce4b3bcc6afd322ef9327bd7084a7e5503",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-17T11:10:59.318Z",
+      "updatedAt": "2026-10-19T13:56:07.476Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-17T11:10:59.318Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Axenstrasse chiusa per quattro notti dal 2 al 6 novembre",
+          "url": "/articoli-uri/axenstrasse-chiusa-quattro-notti/",
+          "excerpt": "La Axenstrasse sarà completamente chiusa dal 2 al 6 novembre, ogni notte dalle 22 alle 5, per lavori di manutenzione.",
+          "date": "2026-10-20T09:56:09.960Z"
+        },
         {
           "title": "Silenen: Landrat approva CHF 207.000 per muri a secco",
           "url": "/articoli-uri/silenen-muri-secco/",
@@ -82,12 +88,6 @@
           "url": "/articoli-uri/uri-budget-avanzo-2027/",
           "excerpt": "Il Canton Uri prevede per il 2027 un avanzo di CHF 1,1 milioni: entrate a 514,4 milioni e spese a 513,3 milioni.",
           "date": "2026-10-10T22:08:05.095Z"
-        },
-        {
-          "title": "Passhöhe-Urnerboden: chiusura notturna della strada",
-          "url": "/articoli-uri/uri-chiusura-passhoehe/",
-          "excerpt": "Strada cantonale chiusa di notte tra Passhöhe e Urnerboden dal 14 al 15 ottobre per lavori di pavimentazione; con maltempo, i lavori slittano.",
-          "date": "2026-10-08T23:39:16.200Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-18T07:04:15.428Z"
+      "updatedAt": "2026-10-20T10:04:48.803Z"
     },
     "en": {
       "canton": "UR",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-17T11:10:59.318Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Axenstrasse closed for four nights from November 2 to 6",
+          "url": "/en/uri-articles/axenstrasse-closed-four-nights/",
+          "excerpt": "Axenstrasse will be completely closed from November 2 to 6, every night from 22 to 5, for maintenance work.",
+          "date": "2026-10-20T09:56:09.960Z"
+        },
         {
           "title": "Silenen: Cantonal Parliament approves CHF 207.000 for dry stone walls",
           "url": "/en/uri-articles/silenen-dry-stone-walls/",
@@ -169,12 +175,6 @@
           "url": "/en/uri-articles/uri-budget-surplus-2027/",
           "excerpt": "The Canton of Uri expects a surplus of CHF 1,1 million in 2027: revenue of 514,4 million and expenditure of 513,3 million.",
           "date": "2026-10-10T22:08:05.095Z"
-        },
-        {
-          "title": "Passhöhe-Urnerboden: nighttime road closure",
-          "url": "/en/uri-articles/uri-night-road-closure/",
-          "excerpt": "Cantonal road closed at night between Passhöhe and Urnerboden from October 14 to 15 for paving work; in bad weather, the work will be postponed.",
-          "date": "2026-10-08T23:39:16.200Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-18T07:04:15.428Z"
+      "updatedAt": "2026-10-20T10:04:48.803Z"
     },
     "de": {
       "canton": "UR",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-17T11:10:59.318Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Axenstrasse vom 2. bis 6. November vier Nächte lang gesperrt",
+          "url": "/de/uri-artikel/axenstrasse-vier-naechte-gesperrt/",
+          "excerpt": "Die Axenstrasse wird vom 2.",
+          "date": "2026-10-20T09:56:09.960Z"
+        },
         {
           "title": "Silenen: Landrat genehmigt CHF 207.000 für Trockenmauern",
           "url": "/de/uri-artikel/silenen-trockenmauern-sanierung/",
@@ -256,12 +262,6 @@
           "url": "/de/uri-artikel/uri-budget-ueberschuss-2027/",
           "excerpt": "Der Kanton Uri erwartet für 2027 einen Überschuss von CHF 1,1 Millionen: Einnahmen von 514,4 Millionen und Ausgaben von 513,3 Millionen.",
           "date": "2026-10-10T22:08:05.095Z"
-        },
-        {
-          "title": "Passhöhe-Urnerboden: nächtliche Sperrung der Straße",
-          "url": "/de/uri-artikel/uri-nachtsperrung-passhoehe/",
-          "excerpt": "Kantonsstraße zwischen Passhöhe und Urnerboden in der Nacht vom 14.",
-          "date": "2026-10-08T23:39:16.200Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-18T07:04:15.428Z"
+      "updatedAt": "2026-10-20T10:04:48.803Z"
     },
     "fr": {
       "canton": "UR",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-17T11:10:59.318Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Axenstrasse fermée pendant quatre nuits du 2 au 6 novembre",
+          "url": "/fr/articles-uri/axenstrasse-fermee-quatre-nuits/",
+          "excerpt": "L’Axenstrasse sera complètement fermée du 2 au 6 novembre, chaque nuit de 22 à 5, pour des travaux d’entretien.",
+          "date": "2026-10-20T09:56:09.960Z"
+        },
         {
           "title": "Silenen : le Landrat approuve CHF 207.000 pour des murs en pierre sèche",
           "url": "/fr/articles-uri/silenen-murs-pierre-seche/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-uri/budget-uri-excedent-2027/",
           "excerpt": "Le canton d’Uri prévoit pour 2027 un excédent de CHF 1,1 million : recettes de 514,4 millions et dépenses de 513,3 millions.",
           "date": "2026-10-10T22:08:05.095Z"
-        },
-        {
-          "title": "Passhöhe-Urnerboden : fermeture nocturne de la route",
-          "url": "/fr/articles-uri/uri-fermeture-nocturne-route/",
-          "excerpt": "Route cantonale fermée de nuit entre Passhöhe et Urnerboden du 14 au 15 octobre pour des travaux de revêtement ; en cas de mauvais temps, les travaux sont reportés.",
-          "date": "2026-10-08T23:39:16.200Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-18T07:04:15.428Z"
+      "updatedAt": "2026-10-20T10:04:48.803Z"
     }
   }
 }

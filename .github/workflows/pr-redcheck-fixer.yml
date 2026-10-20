@@ -232,9 +232,10 @@ jobs:
             skip "PR #$PR e' draft → fuori scope (come ogni altro strato), skip (no-op)."
           fi
 
-          # La PR del mirror engine ha il proprio auto-merge dedicato e il body
-          # generato dal workflow del sito: riscriverla qui e' un errore di
-          # categoria, esattamente come pretenderne il contratto del body.
+          # La PR mirror ha un flusso dedicato e il branch e' rigenerato e
+          # force-pushato dal sito. Questo fixer modifica e pusha codice, quindi
+          # non puo' intervenire senza competere con la prossima derivazione.
+          # `tests.yml` esegue comunque qui il contratto body e la review completa.
           if [ "$head_ref" = "engine-lockstep-auto" ]; then
             skip "PR #$PR e' la lockstep del mirror engine → fuori scope, skip (no-op)."
           fi

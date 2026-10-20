@@ -1,29 +1,4 @@
 {
-  "https://www.tio.ch/ticino/politica/1949291/non-sono-ne-vittima-ne-pensionato": {
-    "articleId": "savoia-avanti-ticino-lavoro",
-    "ts": "2026-09-13T06:38:21.444Z",
-    "keyForm": 2
-  },
-  "https://www.vconews.it/2026/09/13/leggi-notizia/argomenti/viabilita-e-trasporti-9/articolo/verbania-lavori-notturni-sul-ponte-san-giovanni-senso-unico-alternato-per-cinque-giorni.html": {
-    "articleId": "verbania-lavori-ponte-san-giovanni",
-    "ts": "2026-09-13T06:46:31.772Z",
-    "keyForm": 2
-  },
-  "https://www.swissinfo.ch/ita/stadler-rail-punta-sul-kazakistan%2c-nuovi-investimenti-ad-astana/92044872": {
-    "articleId": "stadler-rail-investimenti-kazakistan",
-    "ts": "2026-09-13T06:55:26.644Z",
-    "keyForm": 2
-  },
-  "https://comozero.it/attualita/a-pochi-km-da-como-ecco-la-smart-valley-laboratori-per-creare-lavoratori-su-misura-per-le-imprese": {
-    "articleId": "inaugurazione-campus-smart-valley-daverio",
-    "ts": "2026-09-13T07:02:10.986Z",
-    "keyForm": 2
-  },
-  "https://www.varesenoi.it/2026/09/11/leggi-notizia/argomenti/varese/articolo/ospedale-del-ponte-asst-sette-laghi-replica-a-palazzo-estense-nessun-blocco-del-terzo-lotto-lav.html": {
-    "articleId": "ospedale-del-ponte-terzo-lotto",
-    "ts": "2026-09-13T07:44:01.033Z",
-    "keyForm": 2
-  },
   "https://comozero.it/attualita/la-tristissima-fine-del-brand-di-lusso-che-ha-fatto-la-storia-altri-25-licenziati-in-ticino-rosso-per-milioni": {
     "articleId": "crisi-bally-caslano-licenziamenti",
     "ts": "2026-09-14T00:20:15.112Z",
@@ -2497,6 +2472,31 @@
   "https://www.varesenews.it/2026/10/litalia-tra-rincari-energetici-e-crescita-debole-perche-il-2027-si-annuncia-piu-difficile/2711998": {
     "articleId": "italia-rincari-crescita-2027",
     "ts": "2026-10-19T14:41:28.063Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/schianto-allalba-in-provincia-di-como-auto-contro-moto-un-ferito-grave": {
+    "articleId": "schianto-auto-moto-appiano-gentile",
+    "ts": "2026-10-20T03:38:17.057Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/scuola-inoltre-ventanni-di-formazione-dietro-le-sbarre-444924": {
+    "articleId": "scuola-inoltre-ventanni-formazione-carcere",
+    "ts": "2026-10-20T05:19:32.695Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/sui-frontalieri-pesano-le-disparita-uno-su-due-si-sente-pagato-meno-degli-svizzeri/2713108": {
+    "articleId": "indagine-disparita-salariali-frontalieri",
+    "ts": "2026-10-20T10:53:09.923Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1957988/troppi-frontalieri-la-lega-chiede-di-intervenire": {
+    "articleId": "lega-misure-lugano",
+    "ts": "2026-10-20T14:47:13.183Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/la-lunga-battaglia-dei-frontalieri-tra-tasse-diritti-e-disparita/2713135": {
+    "articleId": "battaglia-frontalieri-tasse-diritti",
+    "ts": "2026-10-20T15:23:15.999Z",
     "keyForm": 2
   }
 }
