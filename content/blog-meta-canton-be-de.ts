@@ -39,6 +39,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.voto-comunale-stranieri-berna.title': 'Kommission Bern: freiwilliges kommunales Stimmrecht für Ausländer',
     'blog.article.voto-comunale-stranieri-berna.excerpt': 'Die SAK unterstützt das freiwillige kommunale Stimmrecht für Ausländer mit Niederlassungsbewilligung, 10 Jahren Aufenthalt in der Schweiz, 5 Jahren im Kanton und 3 Monaten in der Gemeinde.',
     'blog.article.voto-comunale-stranieri-berna.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.weissenbach-incidente-quattro-auto.title': 'Weissenbach: fünf Verletzte bei einem Zusammenstoß zwischen vier Autos',
+    'blog.article.weissenbach-incidente-quattro-auto.excerpt': 'Der Unfall ereignete sich am 19.',
+    'blog.article.weissenbach-incidente-quattro-auto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;

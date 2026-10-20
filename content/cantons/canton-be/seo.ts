@@ -465,6 +465,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-weissenbach-incidente-quattro-auto': {
+    title: 'Weissenbach: cinque feriti nello scontro tra quattro auto',
+    description: 'A Weissenbach, nel Comune di Boltigen, quattro auto sono state coinvolte in collisioni: cinque feriti e strada chiusa per quasi due ore.',
+    keywords: 'frontalieri, ticino, svizzera, italia, weissenbach, cinque, feriti, nello',
+    ogTitle: 'Incidente a Weissenbach: cinque feriti',
+    ogDescription: 'Lunedì 19 ottobre 2026, poco dopo le 16.30, un\'auto ha invaso la corsia opposta a Weissenbach. Quattro auto sono state coinvolte, cinque persone ferite e la strada principale è rimasta chiusa per quasi due ore.',
+    canonicalPath: '/articoli-berna/weissenbach-incidente-quattro-auto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Weissenbach: cinque feriti nello scontro tra quattro auto",
+      "description": "A Weissenbach, nel Comune di Boltigen, quattro auto sono state coinvolte in collisioni: cinque feriti e strada chiusa per quasi due ore.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-weissenbach-incidente-quattro-auto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T22:21:08+00:00",
+      "dateModified": "2026-10-20T22:21:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/weissenbach-incidente-quattro-auto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
