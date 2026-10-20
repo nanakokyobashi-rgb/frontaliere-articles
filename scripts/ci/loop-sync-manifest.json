@@ -2569,8 +2569,8 @@
       "path": "scripts/lib/r2-image-namespace-lock.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "b4cbd5750ac6d5f5",
-        "corpus": "b4cbd5750ac6d5f5",
+        "site": "53d88f93b5cb239e",
+        "corpus": "53d88f93b5cb239e",
         "alignedAt": "2026-10-20"
       }
     },
@@ -2578,8 +2578,8 @@
       "path": "scripts/lib/r2-section-lock.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "6cb8e90d07c896c2",
-        "corpus": "6cb8e90d07c896c2",
+        "site": "6d6bbbe648046d19",
+        "corpus": "6d6bbbe648046d19",
         "alignedAt": "2026-10-20"
       }
     },
