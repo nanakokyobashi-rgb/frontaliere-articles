@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-sezione-medicina-nucleare.webp",
-      "sha256": "2d1ef45926bf240c0194fb0f779cd1f8258f3ef1ad97ef4806ad40ad25fb9587"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-sezione-medicina-nucleare-480w.webp",
-      "sha256": "8044a60c4e3792d6fc86c798b92075930d533c6f8c791c411862aa218a591481"
-    }
-  ]
+  "items": []
 }
