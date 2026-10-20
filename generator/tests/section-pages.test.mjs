@@ -116,10 +116,47 @@ test('publisher R2 propaga immagini recuperate e verdetto aggregati dalla pipeli
   assert.match(publisher, /heroCdnUploads\(\{[\s\S]*?downloadedImageKeys,[\s\S]*?\}\);/);
   assert.match(publisher, /imageFetchFailures,[\s\S]*imagePostcondition,[\s\S]*aggregatePagesAllowed,/);
   const manifestDeclaration = publisher.indexOf('const currentManifest =');
-  const publishCall = publisher.indexOf('summary.published = await publish(');
+  const publishCall = publisher.indexOf('summary.published = await publishImpl({');
   assert.ok(manifestDeclaration > publishCall, 'il manifest corrente si calcola solo dopo il publish verificato');
   for (const match of publisher.matchAll(/\bcurrentManifest\b/g)) {
     assert.ok(match.index >= manifestDeclaration, 'currentManifest non deve essere letto prima della dichiarazione');
+  }
+  const imageLeaseAcquire = publisher.indexOf('imageLeases = await acquireImageNamespaceLeasesImpl(imageNamespaces)');
+  const publishImplCall = publisher.indexOf('summary.published = await publishImpl({');
+  const imageLeaseRelease = publisher.indexOf('const imageLeaseReleaseError = await releaseImageLeases();');
+  assert.ok(imageLeaseAcquire >= 0 && imageLeaseAcquire < publishImplCall, 'le lease immagini devono essere acquisite prima della transazione di publish');
+  assert.ok(publishImplCall < imageLeaseRelease, 'le lease immagini devono restare attive fino alla fine della transazione');
+  assert.match(publisher.slice(publishImplCall, imageLeaseRelease), /imageLeaseContext,/);
+});
+
+test('publisher: un marker upload con exit non-zero non viene considerato riuscito e il lease context arriva al comando', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-upload-result-'));
+  const page = pageEntry('canton-ti', 'articoli-ticino/upload-result/index.html', 'article');
+  const localPage = path.join(fixtureRoot, page.rel);
+  mkdirSync(path.dirname(localPage), { recursive: true });
+  writeFileSync(localPage, '<!doctype html><html><body>upload</body></html>', 'utf8');
+  let seenEnv = null;
+  try {
+    const result = await publish({
+      section: 'canton-ti',
+      pages: [page],
+      cdnUploads: [],
+      cantonRssFeeds: [],
+      obsoletePages: [],
+      distDir: fixtureRoot,
+      publishedStatusImpl: async () => 'draft',
+      imageLeaseContext: 'test-image-lease-context',
+      runImpl: (_command, args, options) => {
+        assert.equal(args[0], 'scripts/lib/upload-cdn-file.sh');
+        seenEnv = options?.env;
+        return { code: 1, stdout: '✅ uploaded' };
+      },
+    });
+    assert.equal(result.failures, 1);
+    assert.equal(result.uploaded, 0);
+    assert.equal(seenEnv?.FRONTALIERE_R2_IMAGE_LEASE_CONTEXT, 'test-image-lease-context');
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
   }
 });
 

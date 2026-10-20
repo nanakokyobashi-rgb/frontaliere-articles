@@ -85,6 +85,13 @@ import {
   pageManifestKey,
   pageManifestUrl,
 } from './lib/section-page-manifest.mjs';
+import {
+  acquireImageNamespaceLeases,
+  imageNamespaceForKey,
+  releaseImageNamespaceLeases,
+  serializeImageLeaseContext,
+  IMAGE_LEASE_CONTEXT_ENV,
+} from './lib/r2-image-namespace-lock.mjs';
 import { purgeChunks } from './publish-section-edge.mjs';
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -876,8 +883,8 @@ function writePage(distDir, rel, html) {
   fs.writeFileSync(abs, clean, 'utf-8');
 }
 
-function run(cmd, args) {
-  const res = spawnSync(cmd, args, { cwd: ROOT_DIR, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+function run(cmd, args, { env = process.env } = {}) {
+  const res = spawnSync(cmd, args, { cwd: ROOT_DIR, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'], env });
   process.stdout.write(res.stdout ?? '');
   process.stderr.write(res.stderr ?? '');
   return { code: res.status ?? 1, stdout: res.stdout ?? '' };
@@ -889,7 +896,7 @@ export function publishPageManifest({ manifest, distDir, runImpl = run }) {
   try {
     fs.writeFileSync(local, `${JSON.stringify(manifest, null, 2)}\n`, 'utf-8');
     const result = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', local, pageManifestKey(manifest.section), PAGE_MANIFEST_CACHE_CONTROL]);
-    return result.stdout.includes('✅ uploaded');
+    return result.code === 0 && result.stdout.includes('✅ uploaded');
   } finally {
     fs.rmSync(local, { force: true });
   }
@@ -1567,8 +1574,8 @@ async function uploadCantonAssets({ cdnUploads, heldAssetKeys, unchangedAssetKey
   await assertMainFreshImpl();
   for (const { local, key } of cdnUploads) {
     if (heldAssetKeys.has(key) || unchangedAssetKeys.has(key)) continue;
-    const { stdout } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', local, key]);
-    if (!stdout.includes('✅ uploaded')) {
+    const { code = 1, stdout = '' } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', local, key]);
+    if (code !== 0 || !stdout.includes('✅ uploaded')) {
       failures++;
       console.log(`::warning::[${LOG}] immagine non caricata: ${key}`);
     }
@@ -1592,13 +1599,13 @@ async function rollbackCantonPages({ pages, snapshots, distDir, runImpl, probeIm
           const local = path.join(distDir, `.canton-page-rollback-${i}.html`);
           fs.writeFileSync(local, previous.body, 'utf8');
           rollbackFiles.push(local);
-          const { stdout = '' } = runImpl('bash', [
+          const { code = 1, stdout = '' } = runImpl('bash', [
             'scripts/lib/upload-cdn-file.sh',
             local,
             page.edgeKey,
             PAGE_CACHE_CONTROL,
           ]);
-          if (!stdout.includes('✅ uploaded')) throw new Error(`restore upload non confermato: ${page.edgeKey}`);
+          if (code !== 0 || !stdout.includes('✅ uploaded')) throw new Error(`restore upload non confermato: ${page.edgeKey}`);
         } else {
           const { stdout = '' } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', page.edgeKey]);
           if (!stdout.includes('✅ deleted')) throw new Error(`restore delete non confermato: ${page.edgeKey}`);
@@ -1676,13 +1683,13 @@ async function rollbackCantonRssFeeds({ prepared, snapshots, distDir, runImpl, p
           const local = path.join(distDir, `.canton-rss-rollback-${feed.name}`);
           fs.writeFileSync(local, previous.body, 'utf8');
           rollbackFiles.push(local);
-          const { stdout = '' } = runImpl('bash', [
+          const { code = 1, stdout = '' } = runImpl('bash', [
             'scripts/lib/upload-cdn-file.sh',
             local,
             feed.key,
             PAGE_CACHE_CONTROL,
           ]);
-          if (!stdout.includes('✅ uploaded')) throw new Error(`restore upload non confermato: ${feed.key}`);
+          if (code !== 0 || !stdout.includes('✅ uploaded')) throw new Error(`restore upload non confermato: ${feed.key}`);
         } else {
           const { stdout = '' } = runImpl('bash', ['scripts/lib/delete-cdn-file.sh', feed.key]);
           if (!stdout.includes('✅ deleted')) throw new Error(`restore delete non confermato: ${feed.key}`);
@@ -1861,13 +1868,13 @@ export async function publishCantonRssFeeds({
         const feed = prepared[i];
         await assertMainFreshImpl();
         mutationStarted = true;
-        const { stdout } = runImpl('bash', [
+        const { code = 1, stdout = '' } = runImpl('bash', [
           'scripts/lib/upload-cdn-file.sh',
           localFiles[i],
           feed.key,
           PAGE_CACHE_CONTROL,
         ]);
-        if (!stdout.includes('✅ uploaded')) {
+        if (code !== 0 || !stdout.includes('✅ uploaded')) {
           throw new Error(`feed RSS non caricato: ${feed.key}`);
         }
         uploaded++;
@@ -1991,7 +1998,14 @@ export async function publish({
   immutablePages = [],
   requiredPagePaths = [],
   assertMainFreshImpl = async () => {},
+  imageLeaseContext = null,
 }) {
+  if (imageLeaseContext) {
+    const baseRunImpl = runImpl;
+    runImpl = (command, args) => baseRunImpl(command, args, {
+      env: { ...process.env, [IMAGE_LEASE_CONTEXT_ENV]: imageLeaseContext },
+    });
+  }
   let failures = 0;
   let verifiedRssFeeds = cantonRssFeeds;
   let rollbackRssPublication = null;
@@ -2221,8 +2235,8 @@ export async function publish({
   }
   for (const page of inUploadOrder(pagesForUpload)) {
     await assertMainFreshImpl();
-    const { stdout } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', path.join(distDir, page.rel), page.edgeKey, PAGE_CACHE_CONTROL]);
-    if (stdout.includes('✅ uploaded')) uploaded.push(page);
+    const { code = 1, stdout = '' } = runImpl('bash', ['scripts/lib/upload-cdn-file.sh', path.join(distDir, page.rel), page.edgeKey, PAGE_CACHE_CONTROL]);
+    if (code === 0 && stdout.includes('✅ uploaded')) uploaded.push(page);
     else {
       failures++;
       console.log(`::error::[${LOG}] pagina non caricata: ${page.edgeKey}`);
@@ -2368,6 +2382,11 @@ export async function main(
     sleepImpl = sleep,
     publisherCommitImpl = () => execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
     fetchImpl = fetch,
+    runImpl = run,
+    acquireImageNamespaceLeasesImpl = acquireImageNamespaceLeases,
+    releaseImageNamespaceLeasesImpl = releaseImageNamespaceLeases,
+    serializeImageLeaseContextImpl = serializeImageLeaseContext,
+    imageNamespaceForKeyImpl = imageNamespaceForKey,
   } = {},
 ) {
   const t0 = Date.now();
@@ -2763,23 +2782,79 @@ export async function main(
       return 1;
     }
   }
-  summary.published = await publishImpl({
-    pages: pagesForPublish,
-    cdnUploads,
-    cantonRssFeeds,
-    removeStaleCantonRssFeeds,
-    // Keep the previous page manifest until the API flip is live: otherwise a
-    // bootstrap retry would lose the inventory needed to delete old slugs.
-    obsoletePages: obsoletePagesForPublish,
-    distDir,
-    section,
-    releaseCommit,
-    publishCantonRssFeedsImpl,
-    snapshotPagesBeforeUpload: deferredLiveRelease,
-    immutablePages: immutableLivePages,
-    requiredPagePaths: [...confirmedMissingPagePaths],
-    assertMainFreshImpl,
-  });
+  const imageNamespaces = [...new Set(
+    cdnUploads
+      .map(({ key }) => imageNamespaceForKeyImpl(key))
+      .filter(Boolean),
+  )];
+  let imageLeases = [];
+  let imageLeaseContext = null;
+  let imageLeaseReleaseAttempted = false;
+  const releaseImageLeases = async () => {
+    if (imageLeaseReleaseAttempted || imageLeases.length === 0) return null;
+    imageLeaseReleaseAttempted = true;
+    try {
+      const released = await releaseImageNamespaceLeasesImpl(imageLeases);
+      const releasedSet = new Set(released);
+      if (releasedSet.size !== imageLeases.length
+          || imageLeases.some(({ namespace }) => !releasedSet.has(namespace))) {
+        throw new Error(`lease immagini non completamente rilasciata: attese ${imageLeases.map(({ namespace }) => namespace).join(', ')}, ricevute ${released.join(', ')}`);
+      }
+      return null;
+    } catch (error) {
+      return error;
+    }
+  };
+  try {
+    if (publishing && imageNamespaces.length > 0) {
+      imageLeases = await acquireImageNamespaceLeasesImpl(imageNamespaces);
+      imageLeaseContext = serializeImageLeaseContextImpl(imageLeases);
+    }
+  } catch (error) {
+    const releaseError = await releaseImageLeases();
+    if (releaseError) {
+      throw new AggregateError(
+        [error, releaseError],
+        `acquisizione lease immagini fallita e rollback non riuscito: ${error?.message ?? error}; ${releaseError?.message ?? releaseError}`,
+        { cause: error },
+      );
+    }
+    throw error;
+  }
+  try {
+    summary.published = await publishImpl({
+      pages: pagesForPublish,
+      cdnUploads,
+      cantonRssFeeds,
+      removeStaleCantonRssFeeds,
+      // Keep the previous page manifest until the API flip is live: otherwise a
+      // bootstrap retry would lose the inventory needed to delete old slugs.
+      obsoletePages: obsoletePagesForPublish,
+      distDir,
+      section,
+      releaseCommit,
+      publishCantonRssFeedsImpl,
+      snapshotPagesBeforeUpload: deferredLiveRelease,
+      immutablePages: immutableLivePages,
+      requiredPagePaths: [...confirmedMissingPagePaths],
+      assertMainFreshImpl,
+      runImpl,
+      imageLeaseContext,
+    });
+  } catch (error) {
+    const releaseError = await releaseImageLeases();
+    if (releaseError) {
+      console.error(`::error::[${LOG}] rilascio lease immagini fallito dopo errore di pubblicazione: ${releaseError?.message ?? releaseError}`);
+    }
+    throw error;
+  }
+  const imageLeaseReleaseError = await releaseImageLeases();
+  if (imageLeaseReleaseError) {
+    summary.published.failures = (Number.isSafeInteger(summary.published.failures) ? summary.published.failures : 0) + 1;
+    console.error(`::error::[${LOG}] rilascio lease immagini fallito: ${imageLeaseReleaseError?.message ?? imageLeaseReleaseError}`);
+    writeSummary();
+    return 1;
+  }
   if (summary.published.failures === 0 && deferredLiveRelease) {
     summary.published.manifestDeferred = true;
     if (!args.bootstrap) {
