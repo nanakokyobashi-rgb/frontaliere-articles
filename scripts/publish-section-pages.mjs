@@ -89,10 +89,14 @@ import {
   acquireImageNamespaceLeases,
   imageNamespaceForKey,
   releaseImageNamespaceLeases,
+  releaseImageNamespaceLeasesWithDeadline as releaseImageLeasesWithDeadline,
   serializeImageLeaseContext,
   IMAGE_LEASE_CONTEXT_ENV,
+  IMAGE_LEASE_RELEASE_TIMEOUT_MS,
 } from './lib/r2-image-namespace-lock.mjs';
 import { purgeChunks } from './publish-section-edge.mjs';
+
+export { IMAGE_LEASE_RELEASE_TIMEOUT_MS, releaseImageLeasesWithDeadline };
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const LOG = 'publish-section-pages';
@@ -2978,17 +2982,27 @@ export async function main(
   const releaseImageLeases = async () => {
     if (imageLeaseReleaseAttempted || imageLeases.length === 0) return null;
     imageLeaseReleaseAttempted = true;
-    try {
-      const released = await releaseImageNamespaceLeasesImpl(imageLeases);
-      const releasedSet = new Set(released);
-      if (releasedSet.size !== imageLeases.length
-          || imageLeases.some(({ namespace }) => !releasedSet.has(namespace))) {
-        throw new Error(`lease immagini non completamente rilasciata: attese ${imageLeases.map(({ namespace }) => namespace).join(', ')}, ricevute ${released.join(', ')}`);
-      }
-      return null;
-    } catch (error) {
-      return error;
+    const result = await releaseImageLeasesWithDeadline(imageLeases, {
+      // Ogni namespace riceve l'intero budget in parallelo: il rollback di
+      // `blog` non può consumare il tempo prima che `places` venga tentato.
+      perLease: true,
+      releaseImpl: async (leases, releaseOptions) => {
+        const released = await releaseImageNamespaceLeasesImpl(leases, releaseOptions);
+        const releasedSet = new Set(released);
+        if (releasedSet.size !== leases.length
+            || leases.some(({ namespace }) => !releasedSet.has(namespace))) {
+          throw new Error(`lease immagini non completamente rilasciata: attese ${leases.map(({ namespace }) => namespace).join(', ')}, ricevute ${released.join(', ')}`);
+        }
+        return released;
+      },
+    });
+    if (result.timedOut) {
+      console.error(`::error::[${LOG}] cleanup lease immagini timeout dopo ${IMAGE_LEASE_RELEASE_TIMEOUT_MS}ms`);
     }
+    if (result.status !== 'released') {
+      return result.error ?? new Error(`[${LOG}] rilascio lease immagini fallito senza un errore descrivibile`);
+    }
+    return null;
   };
   try {
     if (publishing && imageNamespaces.length > 0) {
