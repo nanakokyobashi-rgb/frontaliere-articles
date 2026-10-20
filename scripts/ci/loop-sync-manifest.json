@@ -2551,8 +2551,8 @@
       "path": "scripts/lib/upload-cdn-file.sh",
       "mode": "identical",
       "baseline": {
-        "site": "46958422fccb573e",
-        "corpus": "46958422fccb573e",
+        "site": "4ba724a93b9f7976",
+        "corpus": "4ba724a93b9f7976",
         "alignedAt": "2026-10-20"
       }
     },
