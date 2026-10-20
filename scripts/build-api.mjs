@@ -52,8 +52,16 @@ import {
 // This Node-only builder cannot import the TypeScript renderer clamp. Keep its
 // RSS SERP budget aligned with META_DESCRIPTION_MAX_CHARS in the site shell.
 const RSS_SERP_DESCRIPTION_MAX_CHARS = 150;
-const repairSerpSnippet = (text) =>
-  truncateToClause(repairSerpSnippetBase(text), RSS_SERP_DESCRIPTION_MAX_CHARS);
+const repairSerpSnippet = (text) => {
+  const repaired = repairSerpSnippetBase(text);
+  const bounded = truncateToClause(repaired, RSS_SERP_DESCRIPTION_MAX_CHARS);
+  if (!bounded) {
+    throw new Error(
+      `build-api: refusing to publish an RSS item without a safe non-empty description within ${RSS_SERP_DESCRIPTION_MAX_CHARS} characters.`,
+    );
+  }
+  return bounded;
+};
 // The vendored Google News whitelist (issue #4974 item 3, §5.3). Imported, not
 // re-copied: main pulls the eligibility decision from this repo and a third copy
 // of the token list is exactly the drift that module's header warns about. A
@@ -164,6 +172,14 @@ import {
 } from './lib/announced-surface.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const siteTitleSuffix = fs.readFileSync(path.join(ROOT, 'host', 'shared', 'titleSuffix.ts'), 'utf8');
+const siteDescriptionBudget = siteTitleSuffix.match(/export const META_DESCRIPTION_MAX_CHARS = (\d+);/);
+if (!siteDescriptionBudget || Number(siteDescriptionBudget[1]) !== RSS_SERP_DESCRIPTION_MAX_CHARS) {
+  throw new Error(
+    `build-api: RSS description cap ${RSS_SERP_DESCRIPTION_MAX_CHARS} must match ` +
+      'META_DESCRIPTION_MAX_CHARS in host/shared/titleSuffix.ts.',
+  );
+}
 const OUT = path.join(ROOT, 'dist', 'api');
 const LOCALES = ['it', 'en', 'de', 'fr'];
 

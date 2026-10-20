@@ -136,7 +136,26 @@ function clampBudgetedFields(fields, budgets) {
   let out = fields;
   for (const [field, max] of Object.entries(budgets)) {
     if (!(field in fields)) continue;
-    const clamped = clampField(fields[field], max);
+    let clamped = clampField(fields[field], max);
+    if (
+      field === 'seoDescription' &&
+      typeof fields[field] === 'string' &&
+      fields[field].length > max &&
+      clamped.length < SEO_DESCRIPTION_MIN
+    ) {
+      const excerptFallback = clampField(fields.excerpt, max);
+      if (typeof excerptFallback === 'string' && excerptFallback.trim().length >= SEO_DESCRIPTION_MIN) {
+        clamped = excerptFallback;
+      } else if (fields[field].length > max && clamped === '') {
+        throw new Error(
+          `clampBudgetedFields: ${field} has no safe clause boundary within ${max} characters; refusing a mid-word write.`,
+        );
+      } else {
+        throw new Error(
+          `clampBudgetedFields: ${field} falls below the ${SEO_DESCRIPTION_MIN}-character minimum after capping; refusing the write.`,
+        );
+      }
+    }
     if (typeof fields[field] === 'string' && fields[field].length > max && clamped === '') {
       throw new Error(
         `clampBudgetedFields: ${field} has no safe clause boundary within ${max} characters; refusing a mid-word write.`,
