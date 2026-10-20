@@ -15584,9 +15584,15 @@ export function refreshSourceCopyDerivedMetadata(data) {
     content.excerpt = excerpt;
     applyMicrocopyGuard(content, locale);
     if (typeof content.seoDescription === 'string') {
-      content.seoDescription = stripExcerptMarkdown(
-        capBlogDescription(excerpt, SEO_DESCRIPTION_MAX).value,
-      );
+      let seoDescription = capBlogDescription(excerpt, SEO_DESCRIPTION_MAX).value;
+      if (seoDescription.length < SEO_DESCRIPTION_MIN) {
+        seoDescription = truncateToClauseNonEmpty(stripExcerptMarkdown(body), SEO_DESCRIPTION_MAX);
+      }
+      content.seoDescription = stripExcerptMarkdown(assertSeoDescriptionMinimum(seoDescription, {
+        id: `${data?.id || 'unknown'}:${locale}`,
+        sourceDescriptionLength: excerpt.length,
+        sourceExcerptLength: excerpt.length,
+      }));
     }
     if (typeof content.ogDescription === 'string') {
       content.ogDescription = stripExcerptMarkdown(capBlogDescription(excerpt, SEO_OG_DESCRIPTION_MAX).value);
