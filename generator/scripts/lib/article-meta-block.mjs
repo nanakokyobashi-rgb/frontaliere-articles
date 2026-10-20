@@ -43,7 +43,7 @@
  *
  * Nessuno, ancora: `engine/ogPagesPlugin.ts` (che vive nel repo del SITO e
  * scende qui col mirror) riconosce solo `title|excerpt|imageAlt` e ricava la
- * meta description di en/de/fr dall'excerpt della locale troncato a 155. La
+ * meta description di en/de/fr dall'excerpt della locale troncato a 150. La
  * meta' engine e' una PR gemella sul sito. Emettere il campo PRIMA e' l'ordine
  * giusto: il campo in piu' e' inerte finche' non viene letto, mentre un lettore
  * che cerca un campo non ancora emesso legge `undefined` e cade sul fallback

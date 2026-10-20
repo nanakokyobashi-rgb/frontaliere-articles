@@ -137,8 +137,7 @@ function clampBudgetedFields(fields, budgets) {
     if (
       field === 'seoDescription' &&
       typeof fields[field] === 'string' &&
-      fields[field].length > max &&
-      clamped.length < SEO_DESCRIPTION_MIN
+      clamped.trim().length < SEO_DESCRIPTION_MIN
     ) {
       const excerptFallback = clampField(fields.excerpt, max);
       if (typeof excerptFallback === 'string' && excerptFallback.trim().length >= SEO_DESCRIPTION_MIN) {
