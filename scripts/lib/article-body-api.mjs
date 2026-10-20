@@ -9,6 +9,7 @@ export const REQUIRED_ARTICLE_BODY_FIELDS = Object.freeze(['body1', 'body2', 'bo
 
 const BODY_FIELD_RE = /^body(?:[1-9]|1[0-9]|20)$/u;
 const ARTICLE_KEY_RE = /^blog\.article\.([^'"\r\n]+)\.(body\d+|faq)$/u;
+const ARTICLE_SECTION_RE = /^[a-z0-9-]+$/u;
 const PAYLOAD_KEYS = Object.freeze(['schemaVersion', 'section', 'locale', 'id', 'revision', 'meta', 'translations']);
 const META_KEYS = Object.freeze(['title', 'excerpt', 'imageAlt']);
 
@@ -229,6 +230,28 @@ function assertValidId(id, label = 'article id') {
   if (typeof id !== 'string' || !/^[a-z0-9][a-z0-9-]*$/u.test(id)) {
     throw new Error(`${label} non valido: ${String(id)}`);
   }
+  if (id === 'index') {
+    throw new Error(`${label} riservato: "index" collide con il file di indice articolo`);
+  }
+}
+
+function assertValidSection(section) {
+  if (typeof section !== 'string' || !ARTICLE_SECTION_RE.test(section)) {
+    throw new Error(`section non valida: ${String(section)}`);
+  }
+}
+
+function assertValidLocale(locale) {
+  if (!ARTICLE_BODY_LOCALES.includes(locale)) throw new Error(`locale non valida: ${String(locale)}`);
+}
+
+function validatedRegistryIds(section, registry) {
+  if (!Array.isArray(registry)) throw new Error(`${section}: registry non valido per article bodies`);
+  const ids = registry.map((article) => article?.id);
+  if (ids.some((id) => typeof id !== 'string')) throw new Error(`${section}: registry contiene id mancante`);
+  if (new Set(ids).size !== ids.length) throw new Error(`${section}: registry contiene id duplicati`);
+  for (const id of ids) assertValidId(id, `${section} registry id`);
+  return ids;
 }
 
 function assertMeta(meta, id, locale) {
@@ -246,8 +269,8 @@ function assertMeta(meta, id, locale) {
 
 export function buildArticleBodyPayload({ section, locale, id, meta, source }) {
   assertValidId(id);
-  if (typeof section !== 'string' || !/^[a-z0-9-]+$/u.test(section)) throw new Error(`section non valida: ${String(section)}`);
-  if (!ARTICLE_BODY_LOCALES.includes(locale)) throw new Error(`locale non valida: ${String(locale)}`);
+  assertValidSection(section);
+  assertValidLocale(locale);
   const articleMeta = assertMeta(meta, id, locale);
   const entries = extractArticleBodyFields(source);
   const translations = {};
@@ -291,6 +314,8 @@ export function buildArticleBodyPayload({ section, locale, id, meta, source }) {
 }
 
 export function articleBodyDocumentPath(section, locale, id) {
+  assertValidSection(section);
+  assertValidLocale(locale);
   assertValidId(id);
   return `bodies/${section}/${locale}/${id}.json`;
 }
@@ -349,15 +374,20 @@ export function emitArticleBodyApi({
   sanitize = (value) => value,
 }) {
   const publicSet = publicSections instanceof Set ? publicSections : new Set(publicSections);
+  // Validate every published identity before writing any body or index file.
+  // Otherwise an id named `index` would overwrite this locale's index.json.
+  const idsBySection = new Map();
+  for (const section of sections) {
+    assertValidSection(section.section);
+    for (const locale of locales) assertValidLocale(locale);
+    const registry = publicSet.has(section.section) ? registries[section.section] : [];
+    idsBySection.set(section.section, validatedRegistryIds(section.section, registry));
+  }
   const capabilitySections = {};
   const totals = { expected: 0, available: 0, missing: 0 };
   for (const section of sections) {
     const isPublic = publicSet.has(section.section);
-    const registry = isPublic ? registries[section.section] : [];
-    if (!Array.isArray(registry)) throw new Error(`${section.section}: registry non valido per article bodies`);
-    const ids = registry.map((article) => article?.id);
-    if (ids.some((id) => typeof id !== 'string')) throw new Error(`${section.section}: registry contiene id mancante`);
-    if (new Set(ids).size !== ids.length) throw new Error(`${section.section}: registry contiene id duplicati`);
+    const ids = idsBySection.get(section.section);
     capabilitySections[section.section] = { status: isPublic ? 'public' : 'inactive', locales: {} };
 
     for (const locale of locales) {
@@ -461,10 +491,12 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
 
   for (const section of sections) {
     const isPublic = publicSet.has(section.section);
-    const ids = isPublic ? registries[section.section].map((article) => article.id) : [];
-    if (new Set(ids).size !== ids.length) throw new Error(`${section.section}: duplicate registry ids in body disk gate`);
+    assertValidSection(section.section);
+    const registry = isPublic ? registries[section.section] : [];
+    const ids = validatedRegistryIds(section.section, registry);
     diskSections[section.section] = { status: isPublic ? 'public' : 'inactive', locales: {} };
     for (const locale of locales) {
+      assertValidLocale(locale);
       const indexPath = `bodies/${section.section}/${locale}/index.json`;
       expectedIndexPaths.add(indexPath);
       const index = readJson(path.join(outDir, indexPath), indexPath);

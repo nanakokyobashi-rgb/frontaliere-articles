@@ -5,6 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {
   articleBodyRevision,
+  articleBodyDocumentPath,
   buildArticleBodyPayload,
   emitArticleBodyApi,
   extractArticleBodyFields,
@@ -261,4 +262,41 @@ test('a missing source locale directory cannot be confused with an all-missing i
     publicSections: new Set(['frontaliere']),
     metaBySectionLocale: {},
   }), /directory assente/u);
+});
+
+test('reserved and path-traversing article ids fail before any body API output', () => {
+  for (const [id, expectedError] of [
+    ['index', /riservato/u],
+    ['../escape', /non valido/u],
+  ]) {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-invalid-id-source-'));
+    const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-invalid-id-output-'));
+    const localeDir = path.join(root, 'content/frontaliere/it');
+    fs.mkdirSync(localeDir, { recursive: true });
+    if (id === 'index') {
+      fs.writeFileSync(path.join(localeDir, 'index.ts'), sourceFor(id));
+    } else {
+      const escapedSource = path.join(root, 'content/frontaliere/escape.ts');
+      fs.writeFileSync(escapedSource, 'must stay untouched');
+    }
+
+    assert.throws(() => emitArticleBodyApi({
+      root,
+      outDir,
+      locales: ['it'],
+      sections: [{ section: 'frontaliere', bodyDir: 'content/frontaliere' }],
+      registries: { frontaliere: [{ id }] },
+      publicSections: new Set(['frontaliere']),
+      metaBySectionLocale: { frontaliere: { it: metaFor(id) } },
+    }), expectedError);
+    assert.equal(fs.existsSync(path.join(outDir, 'bodies')), false);
+    if (id === '../escape') {
+      assert.equal(fs.readFileSync(path.join(root, 'content/frontaliere/escape.ts'), 'utf8'), 'must stay untouched');
+    }
+  }
+
+  assert.throws(() => articleBodyDocumentPath('frontaliere', 'it', 'index'), /riservato/u);
+  assert.throws(() => articleBodyDocumentPath('frontaliere', 'it', '../escape'), /non valido/u);
+  assert.throws(() => articleBodyDocumentPath('../outside', 'it', articleId), /section non valida/u);
+  assert.throws(() => articleBodyDocumentPath('frontaliere', '../it', articleId), /locale non valida/u);
 });
