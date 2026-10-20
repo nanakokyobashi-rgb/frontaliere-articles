@@ -7955,6 +7955,7 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
     let response = '';
     let settled = false;
     let client;
+    let deadlineTimer;
     try {
       client = net.createConnection(socketPath);
     } catch (error) {
@@ -7964,6 +7965,7 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
     const finish = (error, value) => {
       if (settled) return;
       settled = true;
+      if (deadlineTimer) clearTimeout(deadlineTimer);
       client.destroy();
       if (error) reject(error);
       else resolve(value);
@@ -7988,9 +7990,18 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
     };
     let started = false;
     const initialTimeoutMs = boundedByDeadline(queueWaitMs + executionSocketTimeoutMs);
-    client.setTimeout(initialTimeoutMs, () => finish(started
+    const timeoutError = () => finish(started
       ? _codexTransportError('Codex auth broker socket timed out')
-      : _codexTransportError(`Codex auth broker queue wait timed out after ${Math.round(initialTimeoutMs / 1000)}s before Codex started`)));
+      : _codexTransportError(`Codex auth broker queue wait timed out after ${Math.round(initialTimeoutMs / 1000)}s before Codex started`));
+    client.setTimeout(initialTimeoutMs, timeoutError);
+    // A socket timeout measures inactivity and can be re-armed by the broker's
+    // control byte. The caller deadline is absolute: keep a separate watchdog
+    // so a queued request or a started request cannot be handed to the generic
+    // _hardCallCapMs race when the socket has seen activity but never answers.
+    if (Number.isFinite(remaining)) {
+      deadlineTimer = setTimeout(timeoutError, Math.max(1, Math.floor(remaining)));
+      deadlineTimer.unref?.();
+    }
     client.on('error', (error) => {
       if (settled) return;
       const code = String(error?.code || 'socket error');
