@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-lucerna-forensic-nurses-violenza.webp",
+      "sha256": "dabfe9d67c60356531d9f73b0fbeadc28bdcf28b66b57304db80eb7ac71856df"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-lucerna-forensic-nurses-violenza-480w.webp",
+      "sha256": "edf99d61088272e1db14167eb1b1ee9afe0b1022049e2153349a150463193fbe"
+    }
+  ]
 }
