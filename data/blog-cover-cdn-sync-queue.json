@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-ricorso-federale-espulsione-zugo.webp",
+      "sha256": "6750e4f0385cefc9cbf605fcdc3eac96297a6f01fc375d7a9c2d71967beb925a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-ricorso-federale-espulsione-zugo-480w.webp",
+      "sha256": "e2e96ee9ab57cf532e5d861c729b1f9be044e9b355e7c28b4872730bb9916419"
+    }
+  ]
 }
