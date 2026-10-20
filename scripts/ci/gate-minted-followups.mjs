@@ -1289,17 +1289,24 @@ function recoverableDailyIdentities(open, repoArgs, sourceLookups) {
         '--json', 'number,title,body,createdAt,labels'], { allowFail: true }));
       const actualIdentity = dailyBucketIdentity(issue?.title || '');
       const info = dailyBucketInfo(issue?.title || '');
-      const state = issue ? bucketState(issue.body || '') : null;
-      if (!issue || actualIdentity !== identity || !info || typeof issue.body !== 'string'
-          || hasUnterminatedMarkdownFence(issue.body)
-          || !hasDailyBucketRepositoryConsistency(issue.body, info.targetRepository)
+      // Historical daily buckets can carry the one recoverable truncated-ID shape
+      // handled by the mint gate. Normalize before the recovery preflight too:
+      // otherwise this path rejects the body before `dailyBucketSourcePrNumbers()`
+      // can extract its source PRs, leaving a safe bucket collecting forever.
+      const recoveryBody = issue && info && typeof issue.body === 'string'
+        ? normalizeDailyItemIdsForKey(issue.body, info.dailyKey)
+        : null;
+      const state = recoveryBody === null ? null : bucketState(recoveryBody);
+      if (!issue || actualIdentity !== identity || !info || recoveryBody === null
+          || hasUnterminatedMarkdownFence(recoveryBody)
+          || !hasDailyBucketRepositoryConsistency(recoveryBody, info.targetRepository)
           || !['collecting', 'sealed'].includes(state)) {
         readable = false;
         console.log(`⚠️ daily ${identity}: prova storica incompleta/illeggibile su #${member.number} → nessun sealing da recovery.`);
         break;
       }
       if (state === 'collecting') hasCollecting = true;
-      sourcePrs.push(...dailyBucketSourcePrNumbers(issue.body));
+      sourcePrs.push(...dailyBucketSourcePrNumbers(recoveryBody));
     }
     // A group made only of sealed buckets needs queue repair, not historical
     // recovery. Mixed groups may be consolidated and sealed again after proof.

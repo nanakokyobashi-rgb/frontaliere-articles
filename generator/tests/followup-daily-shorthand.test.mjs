@@ -4,6 +4,7 @@ import test from 'node:test';
 import {
   bucketState,
   dailyBucketInfo,
+  dailyBucketSourcePrNumbers,
   dailyKeyFromBucketBody,
   hasDailyBucketRepositoryConsistency,
   parseFollowupItems,
@@ -92,6 +93,14 @@ test('il normalizzatore resta fail-closed per mese errato, duplicati e heading p
     '```md\n### FU-2026-09-001 — example\n```',
   );
   assert.equal(normalizeDailyItemIdsForKey(fenced, DAY), fenced);
+});
+
+test('la preflight di recovery può estrarre le Sources dopo la normalizzazione', () => {
+  const malformed = BODY.replace(`FU-${DAY}-001`, 'FU-2026-09-001');
+  const recoveredBody = normalizeDailyItemIdsForKey(malformed, DAY);
+
+  assert.equal(hasDailyBucketRepositoryConsistency(recoveredBody, 'owner/repo'), true);
+  assert.deepEqual(dailyBucketSourcePrNumbers(recoveredBody), [1398]);
 });
 
 test('il reconciler usa l acceptance token strutturale del daily item', () => {
