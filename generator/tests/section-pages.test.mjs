@@ -3124,6 +3124,17 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'resolve e publish devono distinguere dispatch live, bootstrap e source_commit del replay',
   );
   assert.match(wf, /id: replay_freshness[\s\S]*gh api "repos\/\$REPO\/git\/ref\/heads\/main"/);
+  assert.match(wf, /SOURCE_COMMIT_INPUT: \$\{\{ inputs\.source_commit \}\}/);
+  assert.match(wf, /SOURCE_MAIN_COMMIT_INPUT: \$\{\{ inputs\.source_main_commit \}\}/);
+  assert.match(
+    wf,
+    /replay stantio saltato nel resolve[\s\S]*pinned_source="\$\{SOURCE_MAIN_COMMIT_INPUT:-\$SOURCE_COMMIT_INPUT\}/,
+    'il resolve deve saltare un bounded replay quando main e\u0027 avanzata',
+  );
+  assert.match(wf, /- name: Guard pinned replay freshness/);
+  assert.match(wf, /PINNED_SOURCE_COMMIT: \$\{\{ inputs\.source_commit \}\}/);
+  assert.match(wf, /PINNED_SOURCE_MAIN: \$\{\{ inputs\.source_main_commit \}\}/);
+  assert.match(wf, /EVENT_NAME[\s\S]*workflow_dispatch[\s\S]*PINNED_SOURCE_COMMIT/);
   assert.match(wf, /if: steps\.replay_freshness\.outputs\.fresh == 'true'/);
   assert.match(wf, /Dispatch bounded replay with current corpus checkout/);
   const dispatchPlanStart = wf.indexOf('if [ "${{ github.event_name }}" = "workflow_dispatch" ]');

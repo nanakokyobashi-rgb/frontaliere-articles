@@ -386,8 +386,44 @@ jobs:
           PUSH_BEFORE: ${{ steps.push_range.outputs.before }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           WORKFLOW_RUN_EVENT: ${{ github.event.workflow_run.event }}
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SOURCE_COMMIT_INPUT: ${{ inputs.source_commit }}
+          SOURCE_MAIN_COMMIT_INPUT: ${{ inputs.source_main_commit }}
         run: |
           set -euo pipefail
+          # A workflow_run or a bounded workflow_dispatch can be queued after
+          # main has moved. Do not ask the edge registry for the old release:
+          # that turns a harmless stale replay into a deterministic red run
+          # before the publish job can apply its own freshness guard.
+          pinned_source=''
+          if [ "$EVENT_NAME" = 'workflow_run' ]; then
+            pinned_source="${WORKFLOW_RUN_HEAD_SHA:-}"
+          elif [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -n "${SOURCE_COMMIT_INPUT:-}" ]; then
+            pinned_source="${SOURCE_MAIN_COMMIT_INPUT:-$SOURCE_COMMIT_INPUT}"
+          fi
+          if [ -n "$pinned_source" ]; then
+            if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
+              echo "::error::impossibile verificare la revisione corrente di main prima del piano"
+              exit 1
+            fi
+            if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::error::revisione corrente di main non valida prima del piano"
+              exit 1
+            fi
+            if [ "$current_main" != "$pinned_source" ]; then
+              echo "::notice::replay stantio saltato nel resolve: main e' avanzata da $pinned_source a $current_main"
+              {
+                echo 'matrix=[]'
+                echo 'any=false'
+                echo 'dry=false'
+                echo 'bootstrap=false'
+                echo 'replay_api_after_publish=false'
+                echo 'allow_deferred_live_release=false'
+              } >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
           if [ "$EVENT_NAME" = 'push' ] || { [ "$EVENT_NAME" = 'workflow_run' ] && [ "$WORKFLOW_RUN_EVENT" = 'push' ]; }; then
             cover_drain_message="${COVER_DRAIN_COMMIT_MESSAGE:-}"
             if [ "$EVENT_NAME" = 'workflow_run' ]; then
@@ -541,21 +577,28 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Guard replay freshness
+      - name: Guard pinned replay freshness
         id: replay_freshness
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
           EVENT_NAME: ${{ github.event_name }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          PINNED_SOURCE_COMMIT: ${{ inputs.source_commit }}
+          PINNED_SOURCE_MAIN: ${{ inputs.source_main_commit }}
         run: |
           set -euo pipefail
-          if [ "$EVENT_NAME" != 'workflow_run' ]; then
+          pinned_source=''
+          if [ "$EVENT_NAME" = 'workflow_run' ]; then
+            pinned_source="${WORKFLOW_RUN_HEAD_SHA:-}"
+          elif [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -n "${PINNED_SOURCE_COMMIT:-}" ]; then
+            pinned_source="${PINNED_SOURCE_MAIN:-$PINNED_SOURCE_COMMIT}"
+          else
             echo 'fresh=true' >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          if [ -z "${WORKFLOW_RUN_HEAD_SHA:-}" ] || ! [[ "$WORKFLOW_RUN_HEAD_SHA" =~ ^[a-f0-9]{40}$ ]]; then
-            echo "::error::workflow_run head SHA non valido per il guard di freschezza"
+          if [ -z "$pinned_source" ] || ! [[ "$pinned_source" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::revisione pinned non valida per il guard di freschezza"
             exit 1
           fi
           if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
@@ -567,8 +610,8 @@ jobs:
             exit 1
           fi
           echo "current_main=$current_main" >> "$GITHUB_OUTPUT"
-          if [ "$current_main" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
-            echo "::notice::replay workflow_run saltato: main e' avanzato da $WORKFLOW_RUN_HEAD_SHA a $current_main"
+          if [ "$current_main" != "$pinned_source" ]; then
+            echo "::notice::replay pinned saltato: main e' avanzata da $pinned_source a $current_main"
             echo 'fresh=false' >> "$GITHUB_OUTPUT"
             exit 0
           fi
