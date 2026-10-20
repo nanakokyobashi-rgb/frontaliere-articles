@@ -609,6 +609,19 @@ export const SECTIONS = ['frontaliere', 'svizzera'];
 /** Sopra questa quota di log illeggibili le condizioni sui log non si valutano. */
 export const MIN_LOG_SUCCESS_RATE = 0.5;
 
+// A watchdog pass can race the generation run that will publish the next
+// article.  The run can be observed in `queued`/`in_progress` before its
+// commit reaches `main`; treating that short interval as a dry section opens
+// a false issue (the failure mode recorded by #3030).  Do not suppress a
+// genuine stall forever: a run older than this grace window is evidence that
+// the worker itself may be stuck and the normal condition must remain active.
+export const IN_FLIGHT_GENERATION_GRACE_HOURS = 2;
+export const IN_FLIGHT_GENERATION_STATUSES = new Set([
+  'queued', 'in_progress', 'requested', 'waiting', 'pending',
+]);
+
+const FRONTALIERE_GENERATION_TITLE_RE = /^generate blog article(?: \((?:frontaliere|svizzera)\))?$/i;
+
 /**
  * `cover-fallback-health` — quattro ripieghi consecutivi sono già oltre la
  * normalità osservabile; tre è il limite che l'operatore può tollerare senza
@@ -649,6 +662,40 @@ export function parseGenerationCommit(subject) {
   m = COMMIT_REJECTED_RE.exec(s);
   if (m) return { kind: 'rejected', section: m[1] };
   return null;
+}
+
+/**
+ * Count generation workflow runs that are still able to publish an article
+ * within the grace window of the current watchdog pass.
+ *
+ * The workflow has two section-specific display titles and a scheduled title,
+ * so the watchdog deliberately treats every recent non-terminal run of this
+ * workflow as a possible producer.  A false negative merely delays the
+ * section signal until the next pass; a false positive would hide a real
+ * section outage while a different section is running.
+ *
+ * @param {Array<{status?: string, createdAt?: string, displayTitle?: string}>} runs
+ * @param {number} now
+ * @param {number} graceHours
+ */
+export function countRecentInFlightGenerations(
+  runs,
+  now = Date.now(),
+  graceHours = IN_FLIGHT_GENERATION_GRACE_HOURS,
+) {
+  const graceMs = graceHours * 3_600_000;
+  return (runs || []).filter((run) => {
+    if (!IN_FLIGHT_GENERATION_STATUSES.has(String(run?.status || ''))) return false;
+    // The same workflow file also hosts the canton article producer.  Its
+    // `Generate blog article (canton-xx)` runs cannot publish either of the two
+    // sections watched here and must not suppress their alarm.  A missing
+    // title is kept as a possible producer for compatibility with old API
+    // fixtures and fail-closed behaviour when GitHub changes its projection.
+    const title = String(run?.displayTitle || '').trim();
+    if (title && !FRONTALIERE_GENERATION_TITLE_RE.test(title)) return false;
+    const createdAt = Date.parse(run?.createdAt || '');
+    return Number.isFinite(createdAt) && createdAt <= now && now - createdAt <= graceMs;
+  }).length;
 }
 
 // `\w+` e non `.+`: la riga viene stampata DUE volte nel log, prima come eco del
@@ -1589,6 +1636,9 @@ export const CONDITIONS = [
     title: () => 'Watchdog generazione: nessun articolo da nessuna sezione',
     evaluate(m) {
       if (!m.commits.available) return { available: false };
+      if ((m.runs?.inFlight || 0) > 0) {
+        return { firing: false, reason: 'generazione ancora in corso entro la finestra di grazia' };
+      }
       const last = m.commits.lastArticleAt;
       if (last === null) {
         // Nessun articolo in TUTTA la finestra di commit letta: è la forma
@@ -2011,6 +2061,9 @@ export const CONDITIONS = [
     title: (section) => `Watchdog generazione, sezione ${section}: nessun articolo pubblicato`,
     evaluate(m, section) {
       if (!m.commits.available) return { available: false };
+      if ((m.runs?.inFlight || 0) > 0) {
+        return { firing: false, reason: 'generazione ancora in corso entro la finestra di grazia' };
+      }
       const per = m.commits.perSection[section];
       const other = SECTIONS.find((s) => s !== section);
       const otherPer = m.commits.perSection[other];
@@ -2401,21 +2454,22 @@ export async function collectRunLogs(repo, { maxRuns, lookbackHours, concurrency
   const since = Date.now() - lookbackHours * 3_600_000;
   const raw = gh(['run', 'list', '--repo', repo, '--workflow=generate-article.yml',
     '--limit', String(Math.min(200, maxRuns * 3)),
-    '--json', 'databaseId,conclusion,status,createdAt,updatedAt']);
-  if (raw === null) return { available: false };
+    '--json', 'databaseId,conclusion,status,createdAt,updatedAt,displayTitle']);
+  if (raw === null) return { available: false, inFlight: null };
 
   let runs;
   try {
     runs = JSON.parse(raw || '[]');
   } catch {
-    return { available: false };
+    return { available: false, inFlight: null };
   }
+  const inFlight = countRecentInFlightGenerations(runs, Date.now());
   const eligible = runs
     .filter((r) => r.status === 'completed' && r.conclusion && r.conclusion !== 'cancelled'
       && Date.parse(r.createdAt) >= since)
     .slice(0, maxRuns);
 
-  if (!eligible.length) return { available: false };
+  if (!eligible.length) return { available: false, inFlight };
 
   const parsed = [];
   let failures = 0;
@@ -2441,13 +2495,14 @@ export async function collectRunLogs(repo, { maxRuns, lookbackHours, concurrency
   const okRate = eligible.length ? parsed.length / eligible.length : 0;
   if (okRate < MIN_LOG_SUCCESS_RATE) {
     console.warn(`::warning::[generation-health] solo ${parsed.length}/${eligible.length} log leggibili (${(okRate * 100).toFixed(0)}%) — le condizioni sui log NON vengono valutate: «non ho misurato» non è «sta bene».`);
-    return { available: false };
+    return { available: false, inFlight };
   }
 
   const summary = summarizeRuns(parsed);
   const times = eligible.map((r) => Date.parse(r.createdAt)).filter(Number.isFinite);
   return {
     available: true,
+    inFlight,
     total: parsed.length,
     logFailures: failures,
     spanHours: times.length > 1 ? (Math.max(...times) - Math.min(...times)) / 3_600_000 : 0,
