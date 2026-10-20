@@ -17,7 +17,7 @@ import {
 } from './seo-title-repair.mjs';
 import { assertSeoDescriptionMinimum, SEO_DESCRIPTION_MIN } from './seo-description-contract.mjs';
 
-const DESCRIPTION_MAX_CHARS = 160;
+const DESCRIPTION_MAX_CHARS = 150;
 const OG_DESCRIPTION_MAX_CHARS = 250;
 const FALLBACK_YEAR = '2026';
 const KEYWORD_STOP_WORDS = new Set([

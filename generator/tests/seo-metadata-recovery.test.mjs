@@ -59,7 +59,7 @@ test('la derivazione mantiene il titolo dei meta e usa la regola di troncamento 
     modifiedAt: data.date,
   });
   assert.match(entry, /"headline": "Titolo deterministico per"/);
-  assert.ok(data.seo.description.length <= 160);
+  assert.ok(data.seo.description.length <= 150);
   assert.match(data.seo.keywords, /^frontalieri, ticino, svizzera, italia,/);
 });
 
@@ -74,7 +74,7 @@ test('la recovery usa il fallback italiano quando una description persistita ini
     'Una descrizione abbastanza lunga da verificare il percorso SEO senza generazione automatica e con una fine di frase completa per il limite. Dati locali',
   );
   assert.ok(data.seo.description.length >= 80);
-  assert.ok(data.seo.description.length <= 160);
+  assert.ok(data.seo.description.length <= 150);
   assert.ok(!data.seo.description.includes('X'));
 });
 
@@ -132,7 +132,7 @@ test('la recovery usa il fallback italiano se il cap accorcia una descrizione pe
   deriveSeoMetadata(data);
 
   assert.ok(data.seo.description.length >= 80);
-  assert.ok(data.seo.description.length <= 160);
+  assert.ok(data.seo.description.length <= 150);
   assert.ok(data.seo.description.startsWith('Una descrizione abbastanza lunga'));
 });
 

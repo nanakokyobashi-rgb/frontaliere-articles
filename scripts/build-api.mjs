@@ -45,7 +45,15 @@ import { buildSectionFeeds, RSS_SECTIONS } from '../engine/rssFeeds.mjs';
 // repairSerpSnippet vive in clauseTail.mjs (un .mjs) proprio perche' questo file
 // non puo' importare un .ts: e' la sorgente unica che il layer TS riesporta.
 // Senza passarla, rssFeeds.mjs spedirebbe le description verbatim (#5453).
-import { repairSerpSnippet } from '../host/shared/clauseTail.mjs';
+import {
+  repairSerpSnippet as repairSerpSnippetBase,
+  truncateToClause,
+} from '../host/shared/clauseTail.mjs';
+// This Node-only builder cannot import the TypeScript renderer clamp. Keep its
+// RSS SERP budget aligned with META_DESCRIPTION_MAX_CHARS in the site shell.
+const RSS_SERP_DESCRIPTION_MAX_CHARS = 150;
+const repairSerpSnippet = (text) =>
+  truncateToClause(repairSerpSnippetBase(text), RSS_SERP_DESCRIPTION_MAX_CHARS);
 // The vendored Google News whitelist (issue #4974 item 3, §5.3). Imported, not
 // re-copied: main pulls the eligibility decision from this repo and a third copy
 // of the token list is exactly the drift that module's header warns about. A

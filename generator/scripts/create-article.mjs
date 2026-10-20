@@ -4648,7 +4648,7 @@ function truncateAtWordBoundary(text, maxLen) {
 
 // ── SEO length caps (Semrush + Google snippet compliance) ──
 // Title: ≤ 60 chars (excluding " | Frontaliere Ticino" brand suffix appended downstream)
-// Description: ≤ 160 chars (Google snippet truncation point)
+// Reader-facing excerpt: ≤ 160 chars; SERP fields use SEO_DESCRIPTION_MAX.
 // Hard cap so the auto-generated blog never regresses the title-length-baseline ratchet.
 // Headline is never truncated; > 80 char triggers a stricter LLM re-prompt only.
 const BLOG_TITLE_MAX = 200; // advisory soft ceiling — capBlogTitle returns input verbatim
@@ -11812,7 +11812,7 @@ ${localNewsSource ? `      "body1": "Cronaca locale — '## In breve' (3-4 bulle
   }${_isBody ? '' : `,
   "seo": {
     "title": "SEO Title senza brand suffix (OBBLIGATORIO ≤ 60 caratteri TOTALI; il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo)",
-    "description": "Meta description 150-160 chars (HARD CAP: ≤ 160 caratteri)",
+    "description": "Meta description 120-150 chars (HARD CAP: ≤ 150 caratteri)",
     "keywords": "6-8 keywords IT",
     "ogTitle": "OG title (OBBLIGATORIO ≤ 60 caratteri)",
     "ogDescription": "OG desc per la card social — 200-250 caratteri, NON una copia della description: Facebook/LinkedIn/WhatsApp mostrano molto piu' di una SERP (HARD CAP: ≤ 250 caratteri)",
@@ -14897,8 +14897,8 @@ function validate(data, opts = {}) {
     // confine di parola, poi taglio duro) invece di rifiutare.
     const title = truncateToClauseNonEmpty(String(it.title || data.id), 57);
     const rawDesc = String(it.excerpt || it.title || '').replace(/\s+/g, ' ').trim();
-    const desc = truncateAtWordBoundary(rawDesc, 160);
-    // ogDescription gets its own cap (SEO_OG_DESCRIPTION_MAX), not the 160
+    const desc = truncateAtWordBoundary(rawDesc, SEO_DESCRIPTION_MAX);
+    // ogDescription gets its own cap (SEO_OG_DESCRIPTION_MAX), not the SERP
     // description limit — otherwise this fallback ships the same capped
     // string the L6850 clamp was fixed to stop producing.
     const ogDesc = truncateAtWordBoundary(rawDesc, SEO_OG_DESCRIPTION_MAX);
@@ -15579,7 +15579,9 @@ export function refreshSourceCopyDerivedMetadata(data) {
     content.excerpt = excerpt;
     applyMicrocopyGuard(content, locale);
     if (typeof content.seoDescription === 'string') {
-      content.seoDescription = stripExcerptMarkdown(capBlogDescription(excerpt).value);
+      content.seoDescription = stripExcerptMarkdown(
+        capBlogDescription(excerpt, SEO_DESCRIPTION_MAX).value,
+      );
     }
     if (typeof content.ogDescription === 'string') {
       content.ogDescription = stripExcerptMarkdown(capBlogDescription(excerpt, SEO_OG_DESCRIPTION_MAX).value);
@@ -20962,9 +20964,9 @@ export function buildArticlePublishedUrls(data) {
  *
  * The site's `tests/seo-description-length.test.ts` hard-fails below 80 and
  * above 170. The writer requires 80 characters of article-specific copy and
- * keeps the 160-character cap as headroom below the site's maximum.
+ * keeps the 150-character cap below the site's 170-character hard maximum.
  */
-const SEO_DESCRIPTION_MAX = 160;
+const SEO_DESCRIPTION_MAX = 150;
 
 /**
  * The SOCIAL budget, deliberately looser than the SERP one.
@@ -20987,7 +20989,7 @@ const SEO_OG_DESCRIPTION_MAX = 250;
  * `packages/articles/content/`, where `tests/seo-description-length.test.ts`
  * fails the whole repo when any entry exceeds 170 characters — on every branch,
  * not just the one that met it. The cap existed here too, as
- * `truncateAtWordBoundary(desc, 160)`, but it lived inside the AI flow's own
+ * `truncateAtWordBoundary(desc, SEO_DESCRIPTION_MAX)`, but it lived inside the AI flow's own
  * enrichment step, so only articles created through `main()` ever got it.
  *
  * `generate-daily-brief-article.mjs` imports `registerArticleFiles` directly and
@@ -20997,8 +20999,8 @@ const SEO_OG_DESCRIPTION_MAX = 250;
  * of at the choke point they all share. This is the port of the site's fix
  * (valerielinc-ops#5360) to this repo's fork of the generator.
  *
- * 160, not 170: the same value the AI flow already used, leaving headroom under
- * the test's hard bound. Word-boundary truncation, never a mid-word cut.
+ * 150, not 170: a 20-character buffer under the site's hard bound. Word-boundary
+ * truncation, never a mid-word cut.
  *
  * TWO THRESHOLDS, not one. `description` is the SERP snippet and also the
  * source of `structuredData.description` in the SEO entry, so both live under
@@ -21145,7 +21147,7 @@ export async function registerArticleFiles(data, opts = {}) {
   // produttore, e generate-daily-brief-article.mjs, generate-events-digest-article.mjs,
   // generate-border-wait-ranking-article.mjs e publish-journalist-article.mjs
   // importano registerArticleFiles() direttamente senza passarci mai.
-  // Prima di clampSeoDescriptions: troncare a 160 caratteri un campo che e' il
+  // Prima di clampSeoDescriptions: troncare a 150 caratteri un campo che e' il
   // segnaposto lo renderebbe solo un segnaposto piu' corto.
   sanitizePromptPlaceholders(data);
   // Normalize before metadata and slug derivation: the slug must use the same

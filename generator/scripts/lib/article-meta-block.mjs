@@ -70,7 +70,7 @@ const META_ALWAYS_EMITTED = Object.freeze(['title', 'excerpt']);
 
 /**
  * I campi descrittivi introdotti dalla separazione delle tre superfici (#83):
- * `seoDescription` e' cio' che Google mostra (150-160), `ogDescription` cio'
+ * `seoDescription` e' cio' che Google mostra (120-150), `ogDescription` cio'
  * che Facebook/LinkedIn/WhatsApp mostrano (200-250). Opzionali per costruzione:
  * li scrive solo un content builder che sa scriverli per la propria locale
  * (oggi il Bollettino del Frontaliere), e per tutti gli altri articoli il

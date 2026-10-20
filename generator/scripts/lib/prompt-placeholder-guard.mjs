@@ -157,7 +157,7 @@ export const SCHEMA_PLACEHOLDER_LITERALS = Object.freeze([
   'Domanda frequente 3?',
   'Risposta con un dato o un limite documentato.',
   "SEO Title senza brand suffix (OBBLIGATORIO ≤ 60 caratteri TOTALI; il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo)",
-  'Meta description 150-160 chars (HARD CAP: ≤ 160 caratteri)',
+  'Meta description 120-150 chars (HARD CAP: ≤ 150 caratteri)',
   '6-8 keywords IT',
   'OG title (OBBLIGATORIO ≤ 60 caratteri)',
   "OG desc per la card social — 200-250 caratteri, NON una copia della description: Facebook/LinkedIn/WhatsApp mostrano molto piu' di una SERP (HARD CAP: ≤ 250 caratteri)",
