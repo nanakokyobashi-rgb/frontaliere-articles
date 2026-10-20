@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-20T06:12:59.171Z",
-  "contentHash": "a727e1ced6518e2d6acb2d6bb34e4310d50287cfdb67ae062330dc4f5c00a2d8",
+  "updatedAt": "2026-10-20T06:48:15.919Z",
+  "contentHash": "9d5985c398fb579be9f0a38535b2f57a5e31f88c12a03a9e94f7341b468a8aed",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bancomat esploso a Beringen: tre fermate VBSH non servite",
+          "url": "/articoli-sciaffusa/beringen-vbsh-fermate-chiuse/",
+          "excerpt": "Dopo le esplosioni della mattina a Enge, VBSH non serve Enge, Hägli e Sonne fino alle 13:30.",
+          "date": "2026-10-20T06:41:00.427Z"
+        },
+        {
           "title": "SVP Sciaffusa definisce candidati per le elezioni 2027",
           "url": "/articoli-sciaffusa/svp-sciaffusa-candidati-2027/",
           "excerpt": "L'assemblea dei delegati a Oberhallau ha scelto Andreas Gnädinger per il Consiglio degli Stati e Thomas Hurter e Thomas Müller per il Nazionale.",
@@ -94,12 +100,6 @@
           "url": "/articoli-sciaffusa/eventi-weekend-sciaffusa/",
           "excerpt": "Eventi nel Canton Sciaffusa ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
           "date": "2026-10-17T11:30:26.249Z"
-        },
-        {
-          "title": "Singen, chiusa la Schaffhauser Straße dal 26 al 30 ottobre",
-          "url": "/articoli-sciaffusa/singen-chiusura-schaffhauser-strasse/",
-          "excerpt": "A Singen la strada sarà chiusa al traffico dal 26 al 30 ottobre 2026 per lavori alla fermata Landesgartenschau.",
-          "date": "2026-10-17T01:47:28.492Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-20T06:12:59.171Z"
+      "updatedAt": "2026-10-20T06:48:15.919Z"
     },
     "en": {
       "canton": "SH",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "ATM exploded in Beringen: three VBSH stops not served",
+          "url": "/en/schaffhausen-articles/beringen-vbsh-stops-closed/",
+          "excerpt": "After the explosions this morning at Enge, VBSH is not serving Enge, Hägli and Sonne until 13:30.",
+          "date": "2026-10-20T06:41:00.427Z"
+        },
+        {
           "title": "SVP Schaffhausen selects candidates for the 2027 elections",
           "url": "/en/schaffhausen-articles/svp-schaffhausen-candidates-2027/",
           "excerpt": "The delegates’ assembly in Oberhallau chose Andreas Gnädinger for the Council of States and Thomas Hurter and Thomas Müller for the National Council.",
@@ -193,12 +199,6 @@
           "url": "/en/schaffhausen-articles/weekend-events-schaffhausen/",
           "excerpt": "Events in the canton of Schaffhausen every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
           "date": "2026-10-17T11:30:26.249Z"
-        },
-        {
-          "title": "Singen, Schaffhauser Straße closed from October 26 to 30",
-          "url": "/en/schaffhausen-articles/singen-schaffhauser-strasse-closure/",
-          "excerpt": "In Singen, the road will be closed to traffic from October 26 to 30, 2026, due to work at the Landesgartenschau stop.",
-          "date": "2026-10-17T01:47:28.492Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-20T06:12:59.171Z"
+      "updatedAt": "2026-10-20T06:48:15.919Z"
     },
     "de": {
       "canton": "SH",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bancomat in Beringen explodiert: drei VBSH-Haltestellen nicht bedient",
+          "url": "/de/schaffhausen-artikel/beringen-vbsh-haltestellen-gesperrt/",
+          "excerpt": "Nach den Explosionen am Morgen in Enge werden die Haltestellen Enge, Hägli und Sonne von VBSH bis 13:30 Uhr nicht bedient.",
+          "date": "2026-10-20T06:41:00.427Z"
+        },
+        {
           "title": "SVP Schaffhausen bestimmt Kandidaten für die Wahlen 2027",
           "url": "/de/schaffhausen-artikel/svp-schaffhausen-kandidaturen-2027/",
           "excerpt": "Die Delegiertenversammlung in Oberhallau hat Andreas Gnädinger für den Ständerat sowie Thomas Hurter und Thomas Müller für den Nationalrat gewählt.",
@@ -292,12 +298,6 @@
           "url": "/de/schaffhausen-artikel/wochenend-veranstaltungen-schaffhausen/",
           "excerpt": "Veranstaltungen im Kanton Schaffhausen an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
           "date": "2026-10-17T11:30:26.249Z"
-        },
-        {
-          "title": "Singen, Schaffhauser Straße vom 26. bis 30. Oktober gesperrt",
-          "url": "/de/schaffhausen-artikel/singen-sperrung-schaffhauser-strasse/",
-          "excerpt": "In Singen wird die Straße vom 26.",
-          "date": "2026-10-17T01:47:28.492Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-20T06:12:59.171Z"
+      "updatedAt": "2026-10-20T06:48:15.919Z"
     },
     "fr": {
       "canton": "SH",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Distributeur automatique de billets explosé à Beringen : trois arrêts VBSH non desservis",
+          "url": "/fr/articles-schaffhouse/beringen-vbsh-arrets-fermes/",
+          "excerpt": "Après les explosions de la matinée à Enge, VBSH ne dessert pas Enge, Hägli et Sonne jusqu’à 13:30.",
+          "date": "2026-10-20T06:41:00.427Z"
+        },
+        {
           "title": "L'UDC de Schaffhouse désigne ses candidats pour les élections de 2027",
           "url": "/fr/articles-schaffhouse/svp-schaffhouse-candidatures-2027/",
           "excerpt": "L'assemblée des délégués à Oberhallau a choisi Andreas Gnädinger pour le Conseil des États et Thomas Hurter et Thomas Müller pour le Conseil national.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-schaffhouse/evenements-week-end-schaffhouse/",
           "excerpt": "Événements dans le canton de Schaffhouse chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
           "date": "2026-10-17T11:30:26.249Z"
-        },
-        {
-          "title": "Singen, la Schaffhauser Straße fermée du 26 au 30 octobre",
-          "url": "/fr/articles-schaffhouse/singen-fermeture-schaffhauser-strasse/",
-          "excerpt": "À Singen, la route sera fermée à la circulation du 26 au 30 octobre 2026 pour des travaux à l’arrêt Landesgartenschau.",
-          "date": "2026-10-17T01:47:28.492Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-20T06:12:59.171Z"
+      "updatedAt": "2026-10-20T06:48:15.919Z"
     }
   }
 }
