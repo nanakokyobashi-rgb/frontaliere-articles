@@ -3131,6 +3131,17 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     /pinned_source="\$\{SOURCE_MAIN_COMMIT_INPUT:-\$SOURCE_COMMIT_INPUT\}[\s\S]*replay stantio saltato nel resolve/,
     'il resolve deve saltare un bounded replay quando main e\u0027 avanzata',
   );
+  const staleResolve = wf.slice(
+    wf.indexOf('if [ "$current_main" != "$pinned_source" ]'),
+    wf.indexOf("if [ \"$EVENT_NAME\" = 'push' ]"),
+  );
+  assert.match(staleResolve, /FIREBASE_SERVICE_ACCOUNT_JSON assente/);
+  assert.match(staleResolve, /gh workflow run fast-publish-section\.yml --repo "\$REPO" --ref main/);
+  assert.match(staleResolve, /-f source_commit="\$current_main"/);
+  assert.ok(
+    staleResolve.indexOf('gh workflow run fast-publish-section.yml') < staleResolve.indexOf("echo 'matrix=[]'"),
+    'il resolve deve redispatchare un replay stale prima di produrre una matrix vuota',
+  );
   assert.match(wf, /- name: Guard pinned replay freshness/);
   assert.match(wf, /PINNED_SOURCE_COMMIT: \$\{\{ inputs\.source_commit \}\}/);
   assert.match(wf, /PINNED_SOURCE_MAIN: \$\{\{ inputs\.source_main_commit \}\}/);
@@ -3144,7 +3155,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(dispatchPlan, /FAST_PUBLISH_ARMED/);
   assert.equal((wf.match(/-f dry_run="\$DRY"/g) ?? []).length, 3, 'tutti i redispatch propagano il dry-run calcolato');
   assert.doesNotMatch(wf, /-f dry_run=false/);
-  assert.equal((wf.match(/gh workflow run fast-publish-section\.yml --repo "\$(?:REPO|REPOSITORY)" --ref main/g) ?? []).length, 3);
+  assert.equal((wf.match(/gh workflow run fast-publish-section\.yml --repo "\$(?:REPO|REPOSITORY)" --ref main/g) ?? []).length, 4);
   assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /-f source_commit="\$current_main"/);
   assert.match(wf, /source_commit richiede una SHA completa/);
@@ -3177,6 +3188,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /-f push_after="\$replay_after"/);
   assert.equal((wf.match(/-f api_release_commit="\$api_release_commit"/g) ?? []).length, 2);
   assert.match(wf, /resolveStaleReplayApiReleaseCommit/);
+  assert.match(wf, /Prepare Firebase credentials for stale replay recovery\n\s+if: steps\.replay_freshness\.outputs\.fresh == 'false'/);
+  assert.match(wf, /Load dispatch token for stale replay recovery\n\s+if: steps\.replay_freshness\.outputs\.fresh == 'false'/);
+  assert.match(wf, /REPLAY_API_AFTER_PUBLISH: \$\{\{ inputs\.replay_api_after_publish \}\}/);
+  assert.match(wf, /-f replay_api_after_publish="\$REPLAY_API_AFTER_PUBLISH"/);
+  assert.match(wf, /replay bounded stantio: ricalcolo la release API sulla HEAD/);
   assert.match(wf, /git rev-parse --is-shallow-repository/);
   assert.match(wf, /remove_stale_canton_rss_feeds/);
   assert.match(wf, /API_RELEASE_COMMIT: \$\{\{ inputs\.api_release_commit \}\}/);

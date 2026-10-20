@@ -384,12 +384,14 @@ jobs:
           COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           WORKFLOW_RUN_COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.workflow_run.head_commit.message }}
           PUSH_BEFORE: ${{ steps.push_range.outputs.before }}
+          PUSH_AFTER: ${{ steps.push_range.outputs.after }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           WORKFLOW_RUN_EVENT: ${{ github.event.workflow_run.event }}
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
           SOURCE_COMMIT_INPUT: ${{ inputs.source_commit }}
           SOURCE_MAIN_COMMIT_INPUT: ${{ inputs.source_main_commit }}
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
           set -euo pipefail
           # A workflow_run or a bounded workflow_dispatch can be queued after
@@ -413,6 +415,92 @@ jobs:
             fi
             if [ "$current_main" != "$pinned_source" ]; then
               echo "::notice::replay stantio saltato nel resolve: main e' avanzata da $pinned_source a $current_main"
+              if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+                echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON assente: impossibile redispatchare il replay stantio"
+                exit 1
+              fi
+              resolve_sa="$RUNNER_TEMP/fast-publish-section-resolve-sa.json"
+              printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$resolve_sa"
+              rc_exports="$(
+                env -u GITHUB_ENV \
+                  GOOGLE_APPLICATION_CREDENTIALS="$resolve_sa" \
+                  node generator/scripts/load-rc-env.mjs
+              )"
+              eval "$rc_exports"
+              runtime_pat="${GITHUB_PAT_NANAKO:-}"
+              if [ -z "$runtime_pat" ]; then
+                echo "::error::GITHUB_PAT_NANAKO assente: impossibile redispatchare il replay stantio"
+                exit 1
+              fi
+              export GH_TOKEN="$runtime_pat"
+              dispatch_stale_replay() {
+                local section="${1:-}"
+                local article_ids="${2:-[]}"
+                local missing_page_paths="${3:-[]}"
+                local known_missing_page_paths="${4:-[]}"
+                local bootstrap="${5:-false}"
+                local remove_stale="${6:-false}"
+                local dry="${7:-false}"
+                local replay_api_after_publish="${8:-false}"
+                local allow_deferred_live_release="${9:-false}"
+                local replay_before="${10:-}"
+                local replay_after="${11:-}"
+                [ -n "$section" ] || { echo "::error::sezione assente nel redispatch stale"; return 1; }
+                gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
+                  -f section="$section" \
+                  -f article_ids="$article_ids" \
+                  -f missing_page_paths="$missing_page_paths" \
+                  -f known_missing_page_paths="$known_missing_page_paths" \
+                  -f bootstrap="$bootstrap" \
+                  -f remove_stale_canton_rss_feeds="$remove_stale" \
+                  -f replay_api_after_publish="$replay_api_after_publish" \
+                  -f allow_deferred_live_release="$allow_deferred_live_release" \
+                  -f source_commit="$current_main" \
+                  -f source_main_commit="$current_main" \
+                  -f dry_run="$dry" \
+                  -f push_before="$replay_before" \
+                  -f push_after="$replay_after" \
+                  -f dispatch_nonce="stale-resolve-${GITHUB_RUN_ID}-${section}"
+              }
+              replay_dry=false
+              replay_api_after_publish=false
+              allow_deferred_live_release=false
+              replay_before="${PUSH_BEFORE:-}"
+              replay_after="${PUSH_AFTER:-}"
+              if [ "$EVENT_NAME" = 'workflow_dispatch' ]; then
+                replay_dry="${DRY_RUN_INPUT:-true}"
+                replay_api_after_publish="${REPLAY_API_INPUT:-false}"
+                allow_deferred_live_release="${ALLOW_DEFERRED_LIVE_RELEASE_INPUT:-false}"
+                replay_before="${DISPATCH_PUSH_BEFORE:-}"
+                replay_after="${DISPATCH_PUSH_AFTER:-}"
+                dispatch_stale_replay \
+                  "$SECTION_INPUT" \
+                  "${ARTICLE_IDS_INPUT:-[]}" \
+                  "${MISSING_PAGE_PATHS_INPUT:-[]}" \
+                  "${KNOWN_MISSING_PAGE_PATHS_INPUT:-[]}" \
+                  "${BOOTSTRAP_INPUT:-false}" \
+                  "${REMOVE_STALE_INPUT:-false}" \
+                  "$replay_dry" \
+                  "$replay_api_after_publish" \
+                  "$allow_deferred_live_release" \
+                  "$replay_before" \
+                  "$replay_after"
+              else
+                if ! replay_matrix="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$pinned_source" | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"; then
+                  echo "::notice::registro edge non piu' sulla release stantia; provo la HEAD corrente $current_main"
+                  replay_matrix="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$current_main" | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
+                fi
+                dispatched=0
+                while IFS=$'\t' read -r section article_ids bootstrap remove_stale; do
+                  [ -n "$section" ] || continue
+                  dispatch_stale_replay \
+                    "$section" "$article_ids" '[]' '[]' "$bootstrap" "$remove_stale" \
+                    "$replay_dry" "$replay_api_after_publish" "$allow_deferred_live_release" \
+                    "$replay_before" "$replay_after"
+                  dispatched=$((dispatched + 1))
+                done < <(jq -r '.[] | [.section, ((.ids // []) | tojson), (.bootstrap // false), (.removeStaleCantonRssFeeds // false)] | @tsv' <<<"$replay_matrix")
+                echo "::notice::redispatch stale completato per $dispatched sezioni sulla HEAD $current_main"
+              fi
               {
                 echo 'matrix=[]'
                 echo 'any=false'
@@ -617,14 +705,15 @@ jobs:
           fi
           echo 'fresh=true' >> "$GITHUB_OUTPUT"
 
-      # Il replay della run API osservata e' ormai stantio. Il redispatch usa
-      # il workflow corrente su main e la sua HEAD come sorgente del corpus.
-      # Conserva P come release API solo se P copre tutti gli input raggiungibili
-      # dalla HEAD corrente; altrimenti usa la HEAD corrente come gate di
-      # readiness, cosi' il replay attende la completion API invece di creare
-      # una superficie mista.
+      # Un replay stantio usa il workflow corrente su main e la sua HEAD come
+      # sorgente del corpus. Per una run API osservata conserva P come release
+      # solo se P copre tutti gli input raggiungibili dalla HEAD corrente;
+      # un bounded dispatch riparte senza il vecchio override e lascia che il
+      # publisher ricalcoli una release compatibile. In entrambi i casi, se la
+      # release corrente non e' pronta il replay resta in attesa invece di
+      # creare una superficie mista.
       - name: Prepare Firebase credentials for stale replay recovery
-        if: github.event_name == 'workflow_run'
+        if: steps.replay_freshness.outputs.fresh == 'false'
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
@@ -637,7 +726,7 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/stale-replay-sa.json" >> "$GITHUB_ENV"
 
       - name: Load dispatch token for stale replay recovery
-        if: github.event_name == 'workflow_run'
+        if: steps.replay_freshness.outputs.fresh == 'false'
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Dispatch bounded replay with current corpus checkout
@@ -652,6 +741,7 @@ jobs:
           REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
           ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
           DRY: ${{ needs.resolve.outputs.dry }}
+          REPLAY_API_AFTER_PUBLISH: ${{ inputs.replay_api_after_publish }}
           STALE_HEAD: ${{ github.event.workflow_run.head_sha }}
           CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
           ORIGINAL_PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
@@ -666,21 +756,32 @@ jobs:
           export GH_TOKEN="$runtime_pat"
           replay_before="${ORIGINAL_PUSH_BEFORE:-$STALE_HEAD}"
           replay_after="${ORIGINAL_PUSH_AFTER:-$STALE_HEAD}"
-          if [ "$(git rev-parse --is-shallow-repository)" = 'true' ]; then
-            git fetch --no-tags --unshallow origin main
+          api_release_commit=''
+          if [ -n "${STALE_HEAD:-}" ]; then
+            if ! [[ "$STALE_HEAD" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::error::head API stantia non valida per il recovery workflow_run"
+              exit 1
+            fi
+            if [ "$(git rev-parse --is-shallow-repository)" = 'true' ]; then
+              git fetch --no-tags --unshallow origin main
+            else
+              git fetch --no-tags origin main
+            fi
+            api_release_commit="$(
+              CURRENT_MAIN="$CURRENT_MAIN" STALE_API_RELEASE="$STALE_HEAD" node --input-type=module -e '
+                import { resolveStaleReplayApiReleaseCommit } from "./scripts/publish-section-pages.mjs";
+                process.stdout.write(resolveStaleReplayApiReleaseCommit(
+                  process.env.CURRENT_MAIN,
+                  process.env.STALE_API_RELEASE,
+                ));
+              '
+            )"
+            echo "::notice::replay stantio: release API attesa $api_release_commit"
           else
-            git fetch --no-tags origin main
+            # Un bounded dispatch deve ripartire senza la release osservata:
+            # il publisher ricalcola quella compatibile con la HEAD corrente.
+            echo "::notice::replay bounded stantio: ricalcolo la release API sulla HEAD $CURRENT_MAIN"
           fi
-          api_release_commit="$(
-            CURRENT_MAIN="$CURRENT_MAIN" STALE_API_RELEASE="$STALE_HEAD" node --input-type=module -e '
-              import { resolveStaleReplayApiReleaseCommit } from "./scripts/publish-section-pages.mjs";
-              process.stdout.write(resolveStaleReplayApiReleaseCommit(
-                process.env.CURRENT_MAIN,
-                process.env.STALE_API_RELEASE,
-              ));
-            '
-          )"
-          echo "::notice::replay stantio: release API attesa $api_release_commit"
           gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
             -f section="$SECTION" \
             -f article_ids="$ARTICLE_IDS_JSON" \
@@ -688,6 +789,7 @@ jobs:
             -f known_missing_page_paths="$KNOWN_MISSING_PAGE_PATHS_JSON" \
             -f bootstrap="$BOOTSTRAP" \
             -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
+            -f replay_api_after_publish="$REPLAY_API_AFTER_PUBLISH" \
             -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
             -f api_release_commit="$api_release_commit" \
             -f source_commit="$CURRENT_MAIN" \
