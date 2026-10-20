@@ -38,6 +38,7 @@ import {
   COVER_QUEUE_MAX_AGE_HOURS,
   exitCodeForCollectionError,
   IDLE_HOURS,
+  IN_FLIGHT_GENERATION_GRACE_HOURS,
   OVERSIZE_MIN_MODELS,
   OVERSIZE_MIN_RUNS,
   PAIR_WINDOW_MINUTES,
@@ -60,6 +61,7 @@ import {
   collectCoverQueue,
   collectCommits,
   collectMeasurements,
+  countRecentInFlightGenerations,
   evaluateConditions,
   findDuplicateTopicPairs,
   formatCantonCommitSummary,
@@ -645,7 +647,7 @@ function healthy() {
       }])),
     },
     runs: {
-      available: true, total: 60, logFailures: 0, spanHours: 12, bySection,
+      available: true, total: 60, logFailures: 0, spanHours: 12, inFlight: 0, bySection,
       outcomes: { total: 0, generated: 0, noArticle: 0, timeout: 0, skipped: 0, error: 0, unknown: 0, byReason: {} },
       coverHealth: {
         observations: 60,
@@ -1069,6 +1071,25 @@ describe('#658 — raccolta commit: il cutoff è obbligatorio e fail-closed', ()
 });
 
 describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
+  test('un run di generazione recente in corso non apre un falso allarme di finestra', () => {
+    const now = Date.parse('2026-10-20T17:45:58.000Z');
+    assert.equal(countRecentInFlightGenerations([
+      { status: 'in_progress', createdAt: '2026-10-20T17:29:40.000Z' },
+      { status: 'completed', createdAt: '2026-10-20T17:00:00.000Z' },
+      { status: 'in_progress', displayTitle: 'Generate blog article (canton-ag)', createdAt: '2026-10-20T17:40:00.000Z' },
+      { status: 'in_progress', createdAt: '2026-10-20T14:00:00.000Z' },
+    ], now), 1);
+    assert.equal(IN_FLIGHT_GENERATION_GRACE_HOURS, 2);
+
+    const m = healthy();
+    m.commits.lastArticleAt = NOW - 7 * H;
+    m.commits.perSection.svizzera.lastArticleAt = NOW - 12 * H;
+    m.commits.perSection.frontaliere.timestamps = Array.from({ length: 5 }, (_, i) => NOW - i * H);
+    m.runs.inFlight = 1;
+    assert.equal(verdictFor(m, 'generation-idle').firing, false);
+    assert.equal(verdictFor(m, 'section-dry', 'svizzera').firing, false);
+  });
+
   test('generation-idle: nessun articolo da 6h', () => {
     const m = healthy();
     m.commits.lastArticleAt = NOW - 6.5 * H;
