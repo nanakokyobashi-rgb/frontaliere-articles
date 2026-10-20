@@ -2551,9 +2551,9 @@
       "path": "scripts/lib/upload-cdn-file.sh",
       "mode": "identical",
       "baseline": {
-        "site": "e3f6fcea9ddb5cee",
-        "corpus": "e3f6fcea9ddb5cee",
-        "alignedAt": "2026-10-19"
+        "site": "46958422fccb573e",
+        "corpus": "46958422fccb573e",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -2569,8 +2569,8 @@
       "path": "scripts/lib/r2-image-namespace-lock.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "53d88f93b5cb239e",
-        "corpus": "53d88f93b5cb239e",
+        "site": "128b105756d961a4",
+        "corpus": "128b105756d961a4",
         "alignedAt": "2026-10-20"
       }
     },
@@ -2578,8 +2578,8 @@
       "path": "scripts/lib/r2-section-lock.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "6d6bbbe648046d19",
-        "corpus": "6d6bbbe648046d19",
+        "site": "5ece44d921fdedc4",
+        "corpus": "5ece44d921fdedc4",
         "alignedAt": "2026-10-20"
       }
     },
