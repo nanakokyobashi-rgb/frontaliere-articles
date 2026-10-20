@@ -27,6 +27,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.lucerna-forensic-nurses-violenza.title': 'Luzern: Forensic Nurses gegen häusliche Gewalt',
     'blog.article.lucerna-forensic-nurses-violenza.excerpt': 'Der Kanton Luzern plant für den Sommer 2027 ein Pilotprojekt mit Forensic Nurses und kündigt neue medizinische und polizeiliche Angebote an.',
     'blog.article.lucerna-forensic-nurses-violenza.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lucerna-bilancio-budget-2027.title': 'Luzern: Parlament bestätigt das BIP als Referenz für das Budget 2027',
+    'blog.article.lucerna-bilancio-budget-2027.excerpt': 'Der Luzerner Kantonsrat genehmigt die Bezugnahme auf das BIP für das Ausgabenwachstum.',
+    'blog.article.lucerna-bilancio-budget-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;

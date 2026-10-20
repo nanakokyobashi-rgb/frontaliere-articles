@@ -27,6 +27,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.lucerna-forensic-nurses-violenza.title': 'Lucerne : Forensic Nurses contre la violence domestique',
     'blog.article.lucerna-forensic-nurses-violenza.excerpt': 'Le canton de Lucerne prévoit pour l’été 2027 un projet pilote avec Forensic Nurses et annonce de nouveaux services médicaux et de police.',
     'blog.article.lucerna-forensic-nurses-violenza.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lucerna-bilancio-budget-2027.title': 'Lucerne : le Parlement confirme le PIB pour le budget 2027',
+    'blog.article.lucerna-bilancio-budget-2027.excerpt': 'Le Conseil cantonal de Lucerne approuve la référence au PIB pour la croissance des dépenses.',
+    'blog.article.lucerna-bilancio-budget-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

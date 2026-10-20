@@ -94,4 +94,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lucerna-bilancio-budget-2027',
+ category: 'fiscale',
+ date: '2026-10-20T00:16:43.132Z',
+ image: '/images/blog/article-lucerna-bilancio-budget-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

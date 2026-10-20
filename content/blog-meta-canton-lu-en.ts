@@ -27,6 +27,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.lucerna-forensic-nurses-violenza.title': 'Lucerne: Forensic Nurses against domestic violence',
     'blog.article.lucerna-forensic-nurses-violenza.excerpt': 'The Canton of Lucerne is planning a pilot project with Forensic Nurses for summer 2027 and announces new medical and police services.',
     'blog.article.lucerna-forensic-nurses-violenza.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lucerna-bilancio-budget-2027.title': 'Lucerne: Parliament confirms BIP for the 2027 budget',
+    'blog.article.lucerna-bilancio-budget-2027.excerpt': 'The Cantonal Council of Lucerne approves the use of GDP as a reference for expenditure growth.',
+    'blog.article.lucerna-bilancio-budget-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;
