@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-20T06:48:15.919Z",
-  "contentHash": "9d5985c398fb579be9f0a38535b2f57a5e31f88c12a03a9e94f7341b468a8aed",
+  "updatedAt": "2026-10-20T07:17:29.748Z",
+  "contentHash": "ec47abae5cc2dfd07d9f186378f3f2bcadd5c120d0f7a1be6a84ae85ede3f987",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Incidente scooter a Schleitheim: donna ferita, Hohbrugg chiusa",
+          "url": "/articoli-sciaffusa/schleitheim-scooter-incidente-2026/",
+          "excerpt": "Domenica 18 ottobre 2026, una 61enne cade dallo scooter sulla Hohbrugg: proiezione di 12 metri nel pendio, elicottero per il trasporto in ospedale, strada chiusa oltre un'ora.",
+          "date": "2026-10-20T07:10:47.167Z"
+        },
+        {
           "title": "Bancomat esploso a Beringen: tre fermate VBSH non servite",
           "url": "/articoli-sciaffusa/beringen-vbsh-fermate-chiuse/",
           "excerpt": "Dopo le esplosioni della mattina a Enge, VBSH non serve Enge, Hägli e Sonne fino alle 13:30.",
@@ -94,12 +100,6 @@
           "url": "/articoli-sciaffusa/treni-zurigo-stoccarda/",
           "excerpt": "SBB e DB pianificano riserve di percorrenza aggiuntive tra Zurigo e Stoccarda.",
           "date": "2026-10-18T06:56:55.996Z"
-        },
-        {
-          "title": "Eventi del weekend nel Canton Sciaffusa: cosa fare sabato e domenica",
-          "url": "/articoli-sciaffusa/eventi-weekend-sciaffusa/",
-          "excerpt": "Eventi nel Canton Sciaffusa ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
-          "date": "2026-10-17T11:30:26.249Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-20T06:48:15.919Z"
+      "updatedAt": "2026-10-20T07:17:29.748Z"
     },
     "en": {
       "canton": "SH",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Scooter accident in Schleitheim: woman injured, Hohbrugg closed",
+          "url": "/en/schaffhausen-articles/schleitheim-scooter-accident-2026/",
+          "excerpt": "Sunday, October 18, 2026, a 61-year-old woman falls from her scooter on Hohbrugg: thrown 12 meters down the slope, helicopter transport to hospital, road closed for over an hour.",
+          "date": "2026-10-20T07:10:47.167Z"
+        },
+        {
           "title": "ATM exploded in Beringen: three VBSH stops not served",
           "url": "/en/schaffhausen-articles/beringen-vbsh-stops-closed/",
           "excerpt": "After the explosions this morning at Enge, VBSH is not serving Enge, Hägli and Sonne until 13:30.",
@@ -193,12 +199,6 @@
           "url": "/en/schaffhausen-articles/zurich-stuttgart-trains/",
           "excerpt": "SBB and DB plan additional running-time reserves between Zurich and Stuttgart.",
           "date": "2026-10-18T06:56:55.996Z"
-        },
-        {
-          "title": "Weekend events in the canton of Schaffhausen: what to do Saturday & Sunday",
-          "url": "/en/schaffhausen-articles/weekend-events-schaffhausen/",
-          "excerpt": "Events in the canton of Schaffhausen every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
-          "date": "2026-10-17T11:30:26.249Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-20T06:48:15.919Z"
+      "updatedAt": "2026-10-20T07:17:29.748Z"
     },
     "de": {
       "canton": "SH",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Scooterunfall in Schleitheim: Frau verletzt, Hohbrugg gesperrt",
+          "url": "/de/schaffhausen-artikel/schleitheim-roller-unfall-2026/",
+          "excerpt": "Am Sonntag, 18.",
+          "date": "2026-10-20T07:10:47.167Z"
+        },
+        {
           "title": "Bancomat in Beringen explodiert: drei VBSH-Haltestellen nicht bedient",
           "url": "/de/schaffhausen-artikel/beringen-vbsh-haltestellen-gesperrt/",
           "excerpt": "Nach den Explosionen am Morgen in Enge werden die Haltestellen Enge, Hägli und Sonne von VBSH bis 13:30 Uhr nicht bedient.",
@@ -292,12 +298,6 @@
           "url": "/de/schaffhausen-artikel/zuerich-stuttgart-zuege/",
           "excerpt": "SBB und DB planen zusätzliche Fahrzeitreserven zwischen Zürich und Stuttgart.",
           "date": "2026-10-18T06:56:55.996Z"
-        },
-        {
-          "title": "Veranstaltungen am Wochenende im Kanton Schaffhausen: was tun Sa & So",
-          "url": "/de/schaffhausen-artikel/wochenend-veranstaltungen-schaffhausen/",
-          "excerpt": "Veranstaltungen im Kanton Schaffhausen an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
-          "date": "2026-10-17T11:30:26.249Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-20T06:48:15.919Z"
+      "updatedAt": "2026-10-20T07:17:29.748Z"
     },
     "fr": {
       "canton": "SH",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Accident de scooter à Schleitheim : une femme blessée, Hohbrugg fermée",
+          "url": "/fr/articles-schaffhouse/schleitheim-accident-scooter-2026/",
+          "excerpt": "Dimanche 18 octobre 2026, une femme de 61 ans chute de son scooter sur la Hohbrugg : elle est projetée à 12 mètres dans la pente, un hélicoptère est utilisé pour son transport à l’hôpital, route fermée pendant plus…",
+          "date": "2026-10-20T07:10:47.167Z"
+        },
+        {
           "title": "Distributeur automatique de billets explosé à Beringen : trois arrêts VBSH non desservis",
           "url": "/fr/articles-schaffhouse/beringen-vbsh-arrets-fermes/",
           "excerpt": "Après les explosions de la matinée à Enge, VBSH ne dessert pas Enge, Hägli et Sonne jusqu’à 13:30.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-schaffhouse/trains-zurich-stuttgart/",
           "excerpt": "SBB et DB planifient des réserves de temps de parcours supplémentaires entre Zurich et Stuttgart.",
           "date": "2026-10-18T06:56:55.996Z"
-        },
-        {
-          "title": "Événements du week-end dans le canton de Schaffhouse : que faire samedi & dimanche",
-          "url": "/fr/articles-schaffhouse/evenements-week-end-schaffhouse/",
-          "excerpt": "Événements dans le canton de Schaffhouse chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
-          "date": "2026-10-17T11:30:26.249Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-20T06:48:15.919Z"
+      "updatedAt": "2026-10-20T07:17:29.748Z"
     }
   }
 }
