@@ -387,6 +387,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-corridoio-linea-wynigen': {
+    title: 'Swissgrid pianifica una linea aerea tra Berna e Lucerna',
+    description: 'Swissgrid indica il corridoio per sostituire la linea quasi centenaria tra Berna e Lucerna: consultazione di 30 giorni e decisione attesa entro metà 2027.',
+    keywords: 'frontalieri, ticino, svizzera, italia, swissgrid, pianifica, linea, aerea',
+    ogTitle: 'Swissgrid: piano per la linea tra Berna e Lucerna',
+    ogDescription: 'Il progetto prevede una linea aerea tra le sottostazioni di Bickigen BE e Mettlen LU, usando soprattutto spazi infrastrutturali esistenti. La consultazione pubblica durerà 30 giorni; il corridoio definitivo è atteso entro metà 2027.',
+    canonicalPath: '/articoli-berna/corridoio-linea-wynigen/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Swissgrid pianifica una linea aerea tra Berna e Lucerna",
+      "description": "Swissgrid indica il corridoio per sostituire la linea quasi centenaria tra Berna e Lucerna: consultazione di 30 giorni e decisione attesa entro metà 2027.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-corridoio-linea-wynigen.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T02:20:36+00:00",
+      "dateModified": "2026-10-20T02:20:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/corridoio-linea-wynigen/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

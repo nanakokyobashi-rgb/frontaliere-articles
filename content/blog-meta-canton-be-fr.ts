@@ -33,6 +33,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.berna-governo-kita-gratuite.title': 'Berne, le Gouvernement rejette la gratuité des Kita',
     'blog.article.berna-governo-kita-gratuite.excerpt': 'Le Gouvernement bernois recommande au Grand Conseil de rejeter la motion en faveur de Kita gratuites : pour les bénéficiaires actuels, plus de 160 millions de CHF par an.',
     'blog.article.berna-governo-kita-gratuite.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.corridoio-linea-wynigen.title': 'Swissgrid planifie une ligne aérienne entre Berne et Lucerne',
+    'blog.article.corridoio-linea-wynigen.excerpt': 'Swissgrid propose une ligne aérienne entre Bickigen BE et Mettlen LU pour remplacer celle qui est presque centenaire.',
+    'blog.article.corridoio-linea-wynigen.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBeFr;

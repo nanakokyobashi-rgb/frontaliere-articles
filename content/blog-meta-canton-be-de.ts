@@ -33,6 +33,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.berna-governo-kita-gratuite.title': 'Bern, die Regierung lehnt kostenlose Kitas ab',
     'blog.article.berna-governo-kita-gratuite.excerpt': 'Die Berner Regierung empfiehlt dem Grossen Rat, die Motion für kostenlose Kitas abzulehnen: Für die heutigen Begünstigten wären dafür jährlich über 160 Millionen CHF nötig.',
     'blog.article.berna-governo-kita-gratuite.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.corridoio-linea-wynigen.title': 'Swissgrid plant eine Freileitung zwischen Bern und Luzern',
+    'blog.article.corridoio-linea-wynigen.excerpt': 'Swissgrid schlägt eine Freileitung zwischen Bickigen BE und Mettlen LU vor, um die fast hundert Jahre alte Leitung zu ersetzen.',
+    'blog.article.corridoio-linea-wynigen.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;

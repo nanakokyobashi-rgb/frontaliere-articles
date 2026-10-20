@@ -116,4 +116,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'corridoio-linea-wynigen',
+ category: 'novita',
+ date: '2026-10-20T02:20:36.757Z',
+ image: '/images/blog/article-corridoio-linea-wynigen.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BE', 'LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

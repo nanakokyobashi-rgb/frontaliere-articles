@@ -33,6 +33,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.berna-governo-kita-gratuite.title': 'Bern, the government rejects free daycare centers',
     'blog.article.berna-governo-kita-gratuite.excerpt': 'The Bernese Government recommends that the Grand Council reject the motion for free daycare: for current beneficiaries, over CHF 160 million annually.',
     'blog.article.berna-governo-kita-gratuite.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.corridoio-linea-wynigen.title': 'Swissgrid is planning an overhead line between Bern and Lucerne',
+    'blog.article.corridoio-linea-wynigen.excerpt': 'Swissgrid proposes an overhead line between Bickigen BE and Mettlen LU to replace the nearly century-old one.',
+    'blog.article.corridoio-linea-wynigen.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBeEn;
