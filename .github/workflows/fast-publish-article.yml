@@ -75,6 +75,7 @@ on:
       - 'scripts/publish-article-fast.mjs'
       - 'scripts/ci/fast-publish-section.mjs'
       - 'scripts/ci/verify-served-fingerprint.mjs'
+      - 'scripts/ci/fast-publish-apex-verification.sh'
       - 'scripts/ci/article-image-fallbacks.mjs'
       - 'generator/scripts/lib/corpus-paths.mjs'
       # The body-link preflight is a publisher dependency too: changing its
@@ -84,6 +85,7 @@ on:
       - 'generator/scripts/lib/article-meta-block.mjs'
       - 'generator/scripts/lib/article-excerpt.mjs'
       - 'scripts/ci/retry-cmd.sh'
+      - 'scripts/ci/fetch-push-base-if-missing.sh'
       - 'scripts/cf-purge-cache.mjs'
       - 'generator/scripts/load-rc-env.mjs'
       - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
@@ -174,15 +176,7 @@ jobs:
         env:
           PUSH_BEFORE: ${{ github.event.before }}
         run: |
-          set -euo pipefail
-          # fetch-depth: 2 already contains the base for an ordinary
-          # single-commit push. Only pay for a network fetch when a multi-
-          # commit push needs a base outside that shallow checkout.
-          if [ -n "${PUSH_BEFORE:-}" ] \
-            && [[ ! "$PUSH_BEFORE" =~ ^0+$ ]] \
-            && ! git cat-file -e "${PUSH_BEFORE}^{commit}" 2>/dev/null; then
-            git fetch --no-tags --depth=1 origin "$PUSH_BEFORE"
-          fi
+          bash scripts/ci/fetch-push-base-if-missing.sh
 
       - name: Preflight — i link Markdown devono avere una destinazione canonica
         env:
@@ -992,70 +986,7 @@ jobs:
           shard="${{ matrix.target.shard }}"
           owner="$(jq -r --arg s "$shard" '.[$s] // "valerielinc-ops"' scripts/lib/section-shard-owners.json)"
 
-          # The first purge ran before this step. Check the canonical apex URL
-          # against the bytes recorded after the push; a 200 with old HTML is
-          # not proof that the edge is fresh. A cache mismatch is classified
-          # as lag only when the canonical response was a cache HIT and a
-          # second cache-busted request to the same URL serves the expected
-          # hash. A route/fallback response, operational failure, or
-          # edge-blocked probe remains fail-closed.
-          # Edge-blocked probes also skip the post-verification backstop purge
-          # below because the transport result is not evidence of stale cache.
-          apex_verify_log="$RUNNER_TEMP/fast-publish-apex-verification.log"
-          apex_verify_attempt=0
-          verify_apex() {
-            local verify_rc
-            apex_verify_attempt=$((apex_verify_attempt + 1))
-            : > "$apex_verify_log"
-            set +e
-            node scripts/ci/verify-served-fingerprint.mjs verify-apex \
-              --fingerprints "$RUNNER_TEMP/published-fingerprints.tsv" \
-              --run-key "${GITHUB_RUN_ID:-local}.${GITHUB_RUN_ATTEMPT:-1}.${shard}.${apex_verify_attempt}" \
-              > "$apex_verify_log" 2>&1
-            verify_rc=$?
-            set -e
-            cat "$apex_verify_log"
-            return "$verify_rc"
-          }
-
-          # The verifier is a separate process, so its typed errors arrive as
-          # exit status plus diagnostics. Keep the downgrade narrow: only an
-          # explicit cache-lag classification from the verifier can be a
-          # warning. A bare HTTP 200 mismatch is hard.
-          # The `classification` line is emitted per failure, which preserves
-          # an edge-blocked observation even when other URLs are mismatches and
-          # the verifier cannot return its all-observations exit code 2.
-          handle_apex_failure() {
-            node scripts/ci/verify-served-fingerprint.mjs handle-apex-failure \
-              --log "$apex_verify_log" --phase "$1" --verify-exit-code "$2" \
-              --github-output "$GITHUB_OUTPUT"
-          }
-          if verify_apex; then
-            :
-          else
-            verify_rc=$?
-            if handle_apex_failure "before retry" "$verify_rc"; then
-              :
-            else
-              apex_failure_rc=$?
-              exit "$apex_failure_rc"
-            fi
-            echo "::warning::the apex served content different from the pushed fingerprints — repeating the targeted purge once"
-            bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs \
-              "--files-from=$RUNNER_TEMP/edge-purge-urls.txt"
-            if verify_apex; then
-              :
-            else
-              verify_rc=$?
-              if handle_apex_failure "after retry" "$verify_rc"; then
-                :
-              else
-                apex_failure_rc=$?
-                exit "$apex_failure_rc"
-              fi
-              echo "::warning::the apex still served content different from the pushed fingerprints after the retry — continuing with the origin hard gate"
-            fi
-          fi
+          source scripts/ci/fast-publish-apex-verification.sh
 
           # The apex is warning-only only for confirmed cache lag; the shard
           # origin remains the hard publication gate. Pages build failures get

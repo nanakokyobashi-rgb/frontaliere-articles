@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "eventi",
-  "updatedAt": "2026-10-19T02:30:40.156Z",
-  "contentHash": "fba996a91b3abc0ab2f99c10a3d7bfc0574b9f5b479b33f55bc94c92e340f259",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "8a45fccf84fb04499571e46d6c300cdea2f3a5024e09f5ed000f9f08e4c1dce6",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-18T20:21:24.396Z",
+      "updatedAt": "2026-10-19T15:42:28.810Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "62",
+          "value": "61",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,30 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Mosaikworkshop",
-              "detail": "Solothurn",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mosaikworkshop/"
-            },
-            {
-              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
-              "detail": "Hauslimattschulhaus, Balsthal — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
-            },
-            {
-              "label": "Herbstaromen à la carte",
-              "detail": "Genussfabrik Solothurn, Solothurn — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
-            },
-            {
-              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
-              "detail": "Car Parking — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
-            },
             {
               "label": "3D-Modelle erstellen mit Cinema 4D",
               "detail": "Volkshochschule Region Solothurn, Solothurn",
@@ -67,6 +43,24 @@
               "detail": "Volkshochschule Solothurn, Solothurn",
               "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
+            },
+            {
+              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
+              "detail": "Hauslimattschulhaus, Balsthal — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
+            },
+            {
+              "label": "Herbstaromen à la carte",
+              "detail": "Genussfabrik Solothurn, Solothurn — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
+            },
+            {
+              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
+              "detail": "Car Parking — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
             },
             {
               "label": "BreastLove - Know Your Boobs @ Solothurn",
@@ -91,11 +85,17 @@
               "detail": "Olten",
               "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/figuren-und-formen/"
+            },
+            {
+              "label": "Buchvernissage und Gespräch mit Marc du Buisson",
+              "detail": "Solothurn",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchvernissage-und-gespraech-mit-marc-du-buisson/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/soletta/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/soletta/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "SO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "62",
+          "value": "61",
           "note": "from the site’s events calendar"
         }
       ],
@@ -143,30 +143,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Mosaikworkshop",
-              "detail": "Solothurn",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mosaikworkshop/"
-            },
-            {
-              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
-              "detail": "Hauslimattschulhaus, Balsthal — ongoing, last day: 31 October 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
-            },
-            {
-              "label": "Herbstaromen à la carte",
-              "detail": "Genussfabrik Solothurn, Solothurn — ongoing, last day: 31 October 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
-            },
-            {
-              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
-              "detail": "Car Parking — ongoing, last day: 25 October 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
-            },
             {
               "label": "3D-Modelle erstellen mit Cinema 4D",
               "detail": "Volkshochschule Region Solothurn, Solothurn",
@@ -178,6 +154,24 @@
               "detail": "Volkshochschule Solothurn, Solothurn",
               "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
+            },
+            {
+              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
+              "detail": "Hauslimattschulhaus, Balsthal — ongoing, last day: 31 October 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
+            },
+            {
+              "label": "Herbstaromen à la carte",
+              "detail": "Genussfabrik Solothurn, Solothurn — ongoing, last day: 31 October 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
+            },
+            {
+              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
+              "detail": "Car Parking — ongoing, last day: 25 October 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
             },
             {
               "label": "BreastLove - Know Your Boobs @ Solothurn",
@@ -202,11 +196,17 @@
               "detail": "Olten",
               "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/figuren-und-formen/"
+            },
+            {
+              "label": "Buchvernissage und Gespräch mit Marc du Buisson",
+              "detail": "Solothurn",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchvernissage-und-gespraech-mit-marc-du-buisson/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/solothurn/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/solothurn/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "SO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "62",
+          "value": "61",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -254,30 +254,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Mosaikworkshop",
-              "detail": "Solothurn",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mosaikworkshop/"
-            },
-            {
-              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
-              "detail": "Hauslimattschulhaus, Balsthal — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
-            },
-            {
-              "label": "Herbstaromen à la carte",
-              "detail": "Genussfabrik Solothurn, Solothurn — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
-            },
-            {
-              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
-              "detail": "Car Parking — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
-            },
             {
               "label": "3D-Modelle erstellen mit Cinema 4D",
               "detail": "Volkshochschule Region Solothurn, Solothurn",
@@ -289,6 +265,24 @@
               "detail": "Volkshochschule Solothurn, Solothurn",
               "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
+            },
+            {
+              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
+              "detail": "Hauslimattschulhaus, Balsthal — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
+            },
+            {
+              "label": "Herbstaromen à la carte",
+              "detail": "Genussfabrik Solothurn, Solothurn — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
+            },
+            {
+              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
+              "detail": "Car Parking — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
             },
             {
               "label": "BreastLove - Know Your Boobs @ Solothurn",
@@ -313,11 +307,17 @@
               "detail": "Olten",
               "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/figuren-und-formen/"
+            },
+            {
+              "label": "Buchvernissage und Gespräch mit Marc du Buisson",
+              "detail": "Solothurn",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchvernissage-und-gespraech-mit-marc-du-buisson/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/solothurn/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/solothurn/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "SO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "62",
+          "value": "61",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -365,30 +365,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Mosaikworkshop",
-              "detail": "Solothurn",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mosaikworkshop/"
-            },
-            {
-              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
-              "detail": "Hauslimattschulhaus, Balsthal — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
-            },
-            {
-              "label": "Herbstaromen à la carte",
-              "detail": "Genussfabrik Solothurn, Solothurn — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
-            },
-            {
-              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
-              "detail": "Car Parking — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
-            },
             {
               "label": "3D-Modelle erstellen mit Cinema 4D",
               "detail": "Volkshochschule Region Solothurn, Solothurn",
@@ -400,6 +376,24 @@
               "detail": "Volkshochschule Solothurn, Solothurn",
               "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
+            },
+            {
+              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
+              "detail": "Hauslimattschulhaus, Balsthal — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
+            },
+            {
+              "label": "Herbstaromen à la carte",
+              "detail": "Genussfabrik Solothurn, Solothurn — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
+            },
+            {
+              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
+              "detail": "Car Parking — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
             },
             {
               "label": "BreastLove - Know Your Boobs @ Solothurn",
@@ -424,11 +418,17 @@
               "detail": "Olten",
               "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/figuren-und-formen/"
+            },
+            {
+              "label": "Buchvernissage und Gespräch mit Marc du Buisson",
+              "detail": "Solothurn",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchvernissage-und-gespraech-mit-marc-du-buisson/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/soleure/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/soleure/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

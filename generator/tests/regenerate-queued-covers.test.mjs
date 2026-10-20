@@ -1661,6 +1661,10 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
     '../../.github/workflows/fast-publish-article.yml',
     '../../.github/workflows/fast-publish-section.yml',
   ];
+  const pushBaseGuard = fs.readFileSync(
+    new URL('../../scripts/ci/fetch-push-base-if-missing.sh', import.meta.url),
+    'utf8',
+  );
   for (const publisherWorkflow of publisherWorkflows) {
     const publisher = fs.readFileSync(new URL(publisherWorkflow, import.meta.url), 'utf8');
     assert.match(publisher, /dispatch_nonce:/u);
@@ -1669,10 +1673,12 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
     assert.match(resolveJob, /\n    timeout-minutes: 10\n/u);
     assert.match(
       resolveJob,
-      /- name: [^\n]*base \(resolve\)[\s\S]*?&& ! git cat-file -e "\$\{PUSH_BEFORE\}\^\{commit\}" 2>\/dev\/null; then[\s\S]*?git fetch --no-tags --depth=1 origin "\$PUSH_BEFORE"/u,
-      `${publisherWorkflow}: resolve should fetch a missing push base only`,
+      /- name: Fetch push base \(resolve\)[\s\S]*?bash scripts\/ci\/fetch-push-base-if-missing\.sh/u,
+      `${publisherWorkflow}: resolve should call the shared missing-base guard`,
     );
   }
+  assert.match(pushBaseGuard, /git cat-file -e "\$\{PUSH_BEFORE\}\^\{commit\}"/u);
+  assert.match(pushBaseGuard, /git fetch --no-tags --depth=1 origin "\$PUSH_BEFORE"/u);
 
   const articlePublisher = fs.readFileSync(new URL('../../.github/workflows/fast-publish-article.yml', import.meta.url), 'utf8');
   assert.match(articlePublisher, /publisher omitted requested article IDs/u);

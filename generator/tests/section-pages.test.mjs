@@ -696,6 +696,16 @@ test('publisher: il fallback API copre l\'ultimo input raggiungibile dal publish
     }),
     apiCommit,
   );
+  assert.equal(
+    await resolvePublishedReleaseCommit(publisherCommit, {
+      apiReleaseCommitImpl: async () => publisherCommit,
+      apiReleaseCommitOverride: apiCommit,
+      latestApiInputCommitImpl: () => { throw new Error('un override stantio non deve riaprire il bookkeeping'); },
+      isAncestorImpl: () => { throw new Error('la HEAD corrente non richiede un fallback di antenato'); },
+    }),
+    publisherCommit,
+    'un override stantio e\u0027 superato quando l\u0027API ha gia\u0027 raggiunto la HEAD del publisher',
+  );
   await assert.rejects(
     resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: async () => 'c'.repeat(40),
@@ -3050,6 +3060,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(pushRangeResolver, /actions\/workflows\/publish-api\.yml\/runs/);
   assert.match(pushRangeResolver, /candidate\?\.type === 'PushEvent'[\s\S]*payload\?\.ref === ref[\s\S]*eventHead === headSha/);
   assert.match(wf, /push_before: \$\{\{ steps\.push_range\.outputs\.before \}\}/);
+  assert.match(wf, /timeout-minutes: 10/);
+  assert.match(wf, /name: Fetch push base \(resolve\)[\s\S]*?bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
   assert.doesNotMatch(wf, /diff_args=\(\)[\s\S]*sections\/registry\.json/);
   assert.match(wf, /PUSH_BEFORE="\$before" node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
   assert.match(wf, /r2-reconcile-plan \\\n\s+"\$WORKFLOW_RUN_HEAD_SHA"/);
@@ -3130,6 +3142,12 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /git diff --name-status "\$before" HEAD/);
   assert.match(wf, /Fetch fallback corpus revision for manifest migration/);
   assert.match(wf, /--previous-revision/);
+  const fallbackFetchStart = wf.indexOf('name: Fetch fallback corpus revision for manifest migration');
+  const fallbackFetchEnd = wf.indexOf('- name: Set up Node', fallbackFetchStart);
+  const fallbackFetch = wf.slice(fallbackFetchStart, fallbackFetchEnd);
+  assert.match(fallbackFetch, /if \[ "\$EVENT_NAME" = 'workflow_run' \]/);
+  assert.match(fallbackFetch, /bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
+  assert.doesNotMatch(fallbackFetch, /git fetch --no-tags --depth=1 origin/);
   assert.match(wf, /bootstrap: \(\.bootstrap \/\/ false\)/);
   for (const p of [
     'generator/scripts/lib/corpus-paths.mjs',

@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-19T15:05:27.345Z",
-  "contentHash": "256fc05ab913023854239e578f987981bb2dd144e6d6aa3a56ff340820e7be78",
+  "updatedAt": "2026-10-20T00:32:46.463Z",
+  "contentHash": "a5afccf027901886fcaaeef0d005f12c052bc54f55b5ac3e07501c1a1aa8cf64",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-18T11:41:56.271Z",
+      "updatedAt": "2026-10-19T13:56:07.476Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,23 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Lucerna: Parlamento conferma il BIP per il budget 2027",
+          "url": "/articoli-lucerna/lucerna-bilancio-budget-2027/",
+          "excerpt": "Il Consiglio cantonale di Lucerna approva il riferimento al BIP per la crescita delle spese.",
+          "date": "2026-10-20T00:16:43.132Z"
+        },
+        {
+          "title": "Lucerna: Forensic Nurses contro la violenza domestica",
+          "url": "/articoli-lucerna/lucerna-forensic-nurses-violenza/",
+          "excerpt": "Il Canton Lucerna prevede per l'estate 2027 un progetto pilota con Forensic Nurses e annuncia nuovi servizi medici e di polizia.",
+          "date": "2026-10-19T23:59:14.540Z"
+        },
         {
           "title": "Prio Swiss ricorre al Tribunale per mandato esofago Luks",
           "url": "/articoli-lucerna/prioswiss-ricorso-luks/",
@@ -76,18 +88,6 @@
           "url": "/articoli-lucerna/riduzione-premi-padre-divorziato-lucerna/",
           "excerpt": "Il Tribunale federale conferma: niente forfait 9.000 CHF/figlio se già detratti i contributi di mantenimento.",
           "date": "2026-10-10T09:02:37.771Z"
-        },
-        {
-          "title": "Progetto latte: Nestlé ed Emmi puntano all'estensione",
-          "url": "/articoli-lucerna/progetto-latte-climatico/",
-          "excerpt": "Dal 2022, KlimaStaR Milch ha ridotto del 23% i mangimi commestibili e dell'8% le emissioni per kg.",
-          "date": "2026-10-09T00:54:58.572Z"
-        },
-        {
-          "title": "Kriens torna in rosso dopo surplus milionari",
-          "url": "/articoli-lucerna/kriens-torna-in-deficit/",
-          "excerpt": "Dopo surplus milionari, Kriens torna in deficit: il titolo segnala un nuovo passivo, ma non indica ancora importo, data o causa.",
-          "date": "2026-10-09T00:40:17.368Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-19T15:05:27.345Z"
+      "updatedAt": "2026-10-20T00:32:46.463Z"
     },
     "en": {
       "canton": "LU",
@@ -141,11 +141,23 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Lucerne: Parliament confirms BIP for the 2027 budget",
+          "url": "/en/lucerne-articles/lucerne-budget-2027-plan/",
+          "excerpt": "The Cantonal Council of Lucerne approves the use of GDP as a reference for expenditure growth.",
+          "date": "2026-10-20T00:16:43.132Z"
+        },
+        {
+          "title": "Lucerne: Forensic Nurses against domestic violence",
+          "url": "/en/lucerne-articles/lucerne-forensic-nurses-domestic-violence/",
+          "excerpt": "The Canton of Lucerne is planning a pilot project with Forensic Nurses for summer 2027 and announces new medical and police services.",
+          "date": "2026-10-19T23:59:14.540Z"
+        },
         {
           "title": "Prio Swiss appeals to the Court over the Luks esophagus mandate",
           "url": "/en/lucerne-articles/prioswiss-appeal-luks/",
@@ -163,18 +175,6 @@
           "url": "/en/lucerne-articles/premium-reduction-divorced-father-lucerne/",
           "excerpt": "The Federal Tribunal confirms: no flat rate of 9.000 CHF/child if maintenance contributions have already been deducted.",
           "date": "2026-10-10T09:02:37.771Z"
-        },
-        {
-          "title": "Milk project: Nestlé and Emmi are aiming for an extension",
-          "url": "/en/lucerne-articles/swiss-milk-climate-project/",
-          "excerpt": "Since 2022, KlimaStaR Milch has reduced edible feed by 23% and emissions per kg by 8%.",
-          "date": "2026-10-09T00:54:58.572Z"
-        },
-        {
-          "title": "Kriens back in the red after million-dollar surpluses",
-          "url": "/en/lucerne-articles/kriens-returns-to-deficit/",
-          "excerpt": "After multimillion surpluses, Kriens returns to a deficit: the headline indicates a new liability, but does not yet specify the amount, date, or cause.",
-          "date": "2026-10-09T00:40:17.368Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-19T15:05:27.345Z"
+      "updatedAt": "2026-10-20T00:32:46.463Z"
     },
     "de": {
       "canton": "LU",
@@ -228,11 +228,23 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Luzern: Parlament bestätigt das BIP als Referenz für das Budget 2027",
+          "url": "/de/luzern-artikel/luzern-budget-2027-planung/",
+          "excerpt": "Der Luzerner Kantonsrat genehmigt die Bezugnahme auf das BIP für das Ausgabenwachstum.",
+          "date": "2026-10-20T00:16:43.132Z"
+        },
+        {
+          "title": "Luzern: Forensic Nurses gegen häusliche Gewalt",
+          "url": "/de/luzern-artikel/luzern-forensic-nurses-haeusliche-gewalt/",
+          "excerpt": "Der Kanton Luzern plant für den Sommer 2027 ein Pilotprojekt mit Forensic Nurses und kündigt neue medizinische und polizeiliche Angebote an.",
+          "date": "2026-10-19T23:59:14.540Z"
+        },
         {
           "title": "Prio Swiss klagt gegen LUKS-Mandat für Speiseröhren-OPs",
           "url": "/de/luzern-artikel/prioswiss-berufung-luks/",
@@ -250,18 +262,6 @@
           "url": "/de/luzern-artikel/praemienverbilligung-geschiedener-vater-luzern/",
           "excerpt": "Das Bundesgericht bestätigt: kein Pauschalabzug von 9.000 CHF/Kind, wenn die Unterhaltsbeiträge bereits abgezogen wurden.",
           "date": "2026-10-10T09:02:37.771Z"
-        },
-        {
-          "title": "Milchprojekt: Nestlé und Emmi streben eine Ausweitung an",
-          "url": "/de/luzern-artikel/schweizer-milch-klimaprojekt/",
-          "excerpt": "Seit 2022 hat KlimaStaR Milch die für die menschliche Ernährung geeigneten Futtermittel um 23% und die Emissionen pro kg um 8% reduziert.",
-          "date": "2026-10-09T00:54:58.572Z"
-        },
-        {
-          "title": "Kriens schreibt nach Überschüssen in Millionenhöhe wieder rote Zahlen",
-          "url": "/de/luzern-artikel/kriens-rutscht-wieder-ins-minus/",
-          "excerpt": "Nach Überschüssen in Millionenhöhe ist Kriens wieder im Defizit: Die Überschrift weist auf einen neuen Fehlbetrag hin, nennt aber noch keinen Betrag, kein Datum und keine Ursache.",
-          "date": "2026-10-09T00:40:17.368Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-19T15:05:27.345Z"
+      "updatedAt": "2026-10-20T00:32:46.463Z"
     },
     "fr": {
       "canton": "LU",
@@ -315,11 +315,23 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Lucerne : le Parlement confirme le PIB pour le budget 2027",
+          "url": "/fr/articles-lucerne/lucerne-budget-2027-planification/",
+          "excerpt": "Le Conseil cantonal de Lucerne approuve la référence au PIB pour la croissance des dépenses.",
+          "date": "2026-10-20T00:16:43.132Z"
+        },
+        {
+          "title": "Lucerne : Forensic Nurses contre la violence domestique",
+          "url": "/fr/articles-lucerne/lucerne-infirmiers-medico-legaux-violence-domestique/",
+          "excerpt": "Le canton de Lucerne prévoit pour l’été 2027 un projet pilote avec Forensic Nurses et annonce de nouveaux services médicaux et de police.",
+          "date": "2026-10-19T23:59:14.540Z"
+        },
         {
           "title": "Prio Swiss recourt au Tribunal pour le mandat Luks",
           "url": "/fr/articles-lucerne/prioswiss-recours-luks/",
@@ -337,18 +349,6 @@
           "url": "/fr/articles-lucerne/reduction-primes-pere-divorce-lucerne/",
           "excerpt": "Le Tribunal fédéral confirme : pas de forfait 9.000 CHF/enfant si les contributions d’entretien ont déjà été déduites.",
           "date": "2026-10-10T09:02:37.771Z"
-        },
-        {
-          "title": "Projet laitier : Nestlé et Emmi misent sur l'extension",
-          "url": "/fr/articles-lucerne/projet-lait-climatique-suisse/",
-          "excerpt": "Depuis 2022, KlimaStaR Milch a réduit de 23 % les aliments comestibles et de 8 % les émissions par kg.",
-          "date": "2026-10-09T00:54:58.572Z"
-        },
-        {
-          "title": "Kriens repasse dans le rouge après des excédents de plusieurs millions",
-          "url": "/fr/articles-lucerne/kriens-repasse-dans-le-rouge/",
-          "excerpt": "Après des excédents de plusieurs millions, Kriens repasse en déficit : le titre signale un nouveau passif, mais n’indique encore ni montant, ni date ni cause.",
-          "date": "2026-10-09T00:40:17.368Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-19T15:05:27.345Z"
+      "updatedAt": "2026-10-20T00:32:46.463Z"
     }
   }
 }

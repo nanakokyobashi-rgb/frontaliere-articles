@@ -1170,9 +1170,15 @@ export async function resolvePublishedReleaseCommit(
     throw new Error(`commit API esplicito non valido: ${override}`);
   }
   const apiCommit = await apiReleaseCommitImpl({ fetchImpl });
-  if (override && apiCommit !== override) {
+  if (override && apiCommit !== override && apiCommit !== publisherCommit) {
     throw new Error(`commit API osservato ${apiCommit ?? 'assente'} diverso da quello propagato ${override}`);
   }
+  // The reconciler can snapshot an older API release immediately before the
+  // API publisher flips the exact publisher HEAD. That transition is safe:
+  // the source checkout and the observed API release now agree, and the
+  // readiness gate below still verifies the served edge before any cleanup.
+  // Keep rejecting every other override mismatch, because it could pair the
+  // page render with an unrelated API surface.
   if (typeof apiCommit !== 'string' || !apiCommit.trim()) {
     throw new Error('commit API pubblicato assente o non verificabile; pubblicazione interrotta');
   }

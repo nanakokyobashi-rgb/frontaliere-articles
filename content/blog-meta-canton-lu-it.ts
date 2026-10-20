@@ -24,6 +24,12 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.prioswiss-ricorso-luks.title': 'Prio Swiss ricorre al Tribunale per mandato esofago Luks',
     'blog.article.prioswiss-ricorso-luks.excerpt': 'L’associazione contesta il mandato per le operazioni all’esofago al Luzerner Kantonsspital, sostenendo che non ha raggiunto i casi minimi e che dieci altri centri coprono già il fabbisogno.',
     'blog.article.prioswiss-ricorso-luks.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lucerna-forensic-nurses-violenza.title': 'Lucerna: Forensic Nurses contro la violenza domestica',
+    'blog.article.lucerna-forensic-nurses-violenza.excerpt': 'Il Canton Lucerna prevede per l\'estate 2027 un progetto pilota con Forensic Nurses e annuncia nuovi servizi medici e di polizia.',
+    'blog.article.lucerna-forensic-nurses-violenza.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lucerna-bilancio-budget-2027.title': 'Lucerna: Parlamento conferma il BIP per il budget 2027',
+    'blog.article.lucerna-bilancio-budget-2027.excerpt': 'Il Consiglio cantonale di Lucerna approva il riferimento al BIP per la crescita delle spese.',
+    'blog.article.lucerna-bilancio-budget-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonLuIt;
