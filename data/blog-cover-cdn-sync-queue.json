@@ -6,12 +6,20 @@
       "sha256": "cb4743dcea8998e4508196bdf9061296f0ed1ab2a224bfb7b0160e9a5178a42e"
     },
     {
+      "path": "public/images/blog/article-soletta-parlamento-budget-2027-inchiesta-soh.webp",
+      "sha256": "492da45c7c72d0eab55d50f7c80ed599e3e05326bb9735d308f8f00c7c922d13"
+    },
+    {
       "path": "public/images/blog/article-svp-sciaffusa-candidati-2027.webp",
       "sha256": "bdee3bbd023bb6c1d5d551b1292c36694321e0fa066ca2899e682fb891431e2b"
     },
     {
       "path": "public/images/blog/thumbnails/article-scuola-inoltre-ventanni-formazione-carcere-480w.webp",
       "sha256": "b127334ce727e899ed1f32eec06e478ea75bd5afe7a6342ef4c36b9fd6b7a993"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-soletta-parlamento-budget-2027-inchiesta-soh-480w.webp",
+      "sha256": "f8b604cef15f73f9cdcad8b322274f722de3146101dcb0547c76f2bc52bfb72d"
     },
     {
       "path": "public/images/blog/thumbnails/article-svp-sciaffusa-candidati-2027-480w.webp",
