@@ -12,6 +12,7 @@ import {
   extractArticleBodyFields,
   verifyArticleBodyApiOnDisk,
 } from '../../scripts/lib/article-body-api.mjs';
+import { findNonCanonicalArticleLinks } from '../../scripts/lib/article-link-contract.mjs';
 import { metaFieldRegex, unescapeTsValue } from '../scripts/lib/meta-field-regex.mjs';
 
 const articleId = 'example-article';
@@ -65,7 +66,7 @@ line\`,`;
   assert.equal(fields[4].value, '[{"q":"Q","a":"A"}]');
 });
 
-test('the repaired FAQ sources have valid JSON, unchanged Q/A text, and closed nav links', () => {
+test('the repaired FAQ sources have valid JSON, unchanged Q/A text, and canonical links', () => {
   const repairedFaqs = [
     {
       locale: 'en',
@@ -115,6 +116,13 @@ test('the repaired FAQ sources have valid JSON, unchanged Q/A text, and closed n
       assert.equal(typeof a, 'string', `${id}/${locale}: FAQ answer is text`);
       assert.ok(q.trim(), `${id}/${locale}: FAQ question is nonempty`);
       assert.ok(a.trim(), `${id}/${locale}: FAQ answer is nonempty`);
+      for (const [field, value] of [['q', q], ['a', a]]) {
+        assert.deepEqual(
+          findNonCanonicalArticleLinks(value, locale),
+          [],
+          `${id}/${locale} FAQ ${field}: every remaining Markdown destination is canonical`,
+        );
+      }
       return { q: stripClosedNavLinks(q), a: stripClosedNavLinks(a) };
     });
     const actualQaHash = createHash('sha256').update(JSON.stringify(normalizedQa)).digest('hex');
