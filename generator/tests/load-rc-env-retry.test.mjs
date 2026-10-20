@@ -108,6 +108,9 @@ test('il loader mantiene attivabile il checkout SumUp senza renderlo il default'
     'SUMUP_MERCHANT_CODE',
     'SUMUP_ASSISTED_APPLICATION_WEBHOOK_URL',
     'SUMUP_GOOGLE_PAY_MERCHANT_ID',
+    'SUMUP_SANDBOX_API_KEY',
+    'SUMUP_SANDBOX_MERCHANT_CODE',
+    'SUMUP_SANDBOX_PAYMENT_TEST_WEBHOOK_URL',
   ];
   for (const key of sumupKeys) {
     assert.ok(RC_TO_ENV[key], `${key} deve essere mappata nel runtime`);
