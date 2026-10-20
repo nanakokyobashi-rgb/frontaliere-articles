@@ -77,6 +77,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
 const LOCALES = ['it', 'en', 'de', 'fr'];
 const SNAPSHOT_PATH = path.join(REPO_ROOT, 'public', 'data', 'daily-brief.json');
+const DAILY_BRIEF_CODEX_TIMEOUT_MS = 45_000;
 
 /** Rewrite only the 4 body files (idempotent same-day refresh). */
 export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) {
@@ -222,6 +223,8 @@ async function main() {
     root: REPO_ROOT,
     data: imageContext,
     area: 'Ticino e pendolarismo transfrontaliero',
+    // Leave room in the total 120 s deadline for Gemini and image verification.
+    providerTimeouts: { 'openai-codex': DAILY_BRIEF_CODEX_TIMEOUT_MS },
     deadlineAt: Date.now() + 120_000,
     onProviderAttempt: ({ provider, attempt }) => {
       console.error(`  🎨 Copertina daily: ${provider}, tentativo ${attempt}`);

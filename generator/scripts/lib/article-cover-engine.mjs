@@ -248,6 +248,7 @@ export async function generateGovernedArticleHero({
   area,
   safetyHint = '',
   deadlineAt,
+  providerTimeouts,
   onProviderAttempt,
 } = {}) {
   const articleData = data || { id: articleId, title, imagePrompt };
@@ -285,6 +286,7 @@ export async function generateGovernedArticleHero({
         usedRecords: photoUsage.records,
         ...(photoUsage.hasUnmatchableLegacy ? { chain: DEFAULT_GENERATION_PROVIDER_CHAIN } : {}),
         deadlineAt,
+        providerTimeouts,
         onProviderAttempt,
       },
     );
