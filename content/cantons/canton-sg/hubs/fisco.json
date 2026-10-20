@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "fisco",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "ee70c177b336cc64ac17d8b76b1a192cd3b092e9f4e33bf8afbbe24b05e97544",
+  "updatedAt": "2026-10-20T17:48:42.935Z",
+  "contentHash": "5d76a889b9733b84fa38f1b4a95562044eb7c1767b7770a24cff1a1c54dd455d",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-20T10:27:43.943Z",
       "keyFacts": 0
     }
   ],
@@ -110,6 +110,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Die St.Galler Bevölkerung treibt mehr Sport",
+              "date": "2026-10-19",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/die-st-galler-bevoelkerung-treibt-mehr-sport.html"
+            },
+            {
               "label": "Liechtenstein und Philippinen unterzeichnen Doppelbesteuerungsabkommen",
               "date": "2026-10-13",
               "url": "https://www.regierung.li/medienportal-medium/16182/234994/0/medienmitteilung"
@@ -133,14 +138,9 @@
               "label": "Der Kanton St.Gallen war Gastgeber der Arge Alp-Sport-Koordinationssitzung",
               "date": "2026-10-02",
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
-            },
-            {
-              "label": "30. Internationaler Bodenseeschulcup",
-              "date": "2026-09-28",
-              "url": "https://www.sg.ch/news/sgch_sport/2026/09/30--internationaler-bodenseeschulcup.html"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -214,7 +214,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "en": {
       "canton": "SG",
@@ -302,6 +302,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Die St.Galler Bevölkerung treibt mehr Sport",
+              "date": "2026-10-19",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/die-st-galler-bevoelkerung-treibt-mehr-sport.html"
+            },
+            {
               "label": "Liechtenstein und Philippinen unterzeichnen Doppelbesteuerungsabkommen",
               "date": "2026-10-13",
               "url": "https://www.regierung.li/medienportal-medium/16182/234994/0/medienmitteilung"
@@ -325,14 +330,9 @@
               "label": "Der Kanton St.Gallen war Gastgeber der Arge Alp-Sport-Koordinationssitzung",
               "date": "2026-10-02",
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
-            },
-            {
-              "label": "30. Internationaler Bodenseeschulcup",
-              "date": "2026-09-28",
-              "url": "https://www.sg.ch/news/sgch_sport/2026/09/30--internationaler-bodenseeschulcup.html"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -406,7 +406,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "de": {
       "canton": "SG",
@@ -494,6 +494,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Die St.Galler Bevölkerung treibt mehr Sport",
+              "date": "2026-10-19",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/die-st-galler-bevoelkerung-treibt-mehr-sport.html"
+            },
+            {
               "label": "Liechtenstein und Philippinen unterzeichnen Doppelbesteuerungsabkommen",
               "date": "2026-10-13",
               "url": "https://www.regierung.li/medienportal-medium/16182/234994/0/medienmitteilung"
@@ -517,14 +522,9 @@
               "label": "Der Kanton St.Gallen war Gastgeber der Arge Alp-Sport-Koordinationssitzung",
               "date": "2026-10-02",
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
-            },
-            {
-              "label": "30. Internationaler Bodenseeschulcup",
-              "date": "2026-09-28",
-              "url": "https://www.sg.ch/news/sgch_sport/2026/09/30--internationaler-bodenseeschulcup.html"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -598,7 +598,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "fr": {
       "canton": "SG",
@@ -686,6 +686,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Die St.Galler Bevölkerung treibt mehr Sport",
+              "date": "2026-10-19",
+              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/die-st-galler-bevoelkerung-treibt-mehr-sport.html"
+            },
+            {
               "label": "Liechtenstein und Philippinen unterzeichnen Doppelbesteuerungsabkommen",
               "date": "2026-10-13",
               "url": "https://www.regierung.li/medienportal-medium/16182/234994/0/medienmitteilung"
@@ -709,14 +714,9 @@
               "label": "Der Kanton St.Gallen war Gastgeber der Arge Alp-Sport-Koordinationssitzung",
               "date": "2026-10-02",
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
-            },
-            {
-              "label": "30. Internationaler Bodenseeschulcup",
-              "date": "2026-09-28",
-              "url": "https://www.sg.ch/news/sgch_sport/2026/09/30--internationaler-bodenseeschulcup.html"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -790,7 +790,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     }
   }
 }

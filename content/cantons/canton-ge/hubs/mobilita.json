@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T13:42:35.891Z",
-  "contentHash": "d5aa3e3b1919026224e7c045b891504fe5689a46abc6abb693d39ee2d5a936de",
+  "updatedAt": "2026-10-20T17:48:42.935Z",
+  "contentHash": "ef5e1da7b3c3334b2994f1d7b362b5e6d8021b01ddd564789ef25a3718fca24d",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T05:22:50.234Z",
+      "updatedAt": "2026-10-20T12:16:17.109Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T17:49:38.738Z",
+      "updatedAt": "2026-10-20T10:27:43.943Z",
       "keyFacts": 0
     }
   ],
@@ -160,13 +160,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T05:22:50.234Z"
+          "updatedAt": "2026-10-20T12:16:17.109Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "NUIT DU 24 AU 25 OCTOBRE : PASSAGE A L’HEURE HIVER",
+              "date": "2026-10-20T04:54:57.000Z",
+              "url": "https://www.lemanexpress.com/2026/10/20/nuit-du-24-au-25-octobre-passage-a-lheure-hiver/"
+            },
             {
               "label": "Fermeture exceptionnelle du guichet d'information de l'office de l'urbanisme",
               "date": "2026-10-19",
@@ -191,14 +196,9 @@
               "label": "Travaux avenue de l’Europe / route de Bonneville (Vétraz-Monthoux)",
               "date": "2026-10-15",
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/travaux-avenue-de-leurope-route-de-bonneville-vetraz-monthoux"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 19 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.ge.ch/node/45210"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "en": {
       "canton": "GE",
@@ -396,13 +396,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T05:22:50.234Z"
+          "updatedAt": "2026-10-20T12:16:17.109Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "NUIT DU 24 AU 25 OCTOBRE : PASSAGE A L’HEURE HIVER",
+              "date": "2026-10-20T04:54:57.000Z",
+              "url": "https://www.lemanexpress.com/2026/10/20/nuit-du-24-au-25-octobre-passage-a-lheure-hiver/"
+            },
             {
               "label": "Fermeture exceptionnelle du guichet d'information de l'office de l'urbanisme",
               "date": "2026-10-19",
@@ -427,14 +432,9 @@
               "label": "Travaux avenue de l’Europe / route de Bonneville (Vétraz-Monthoux)",
               "date": "2026-10-15",
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/travaux-avenue-de-leurope-route-de-bonneville-vetraz-monthoux"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 19 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.ge.ch/node/45210"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -494,7 +494,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "de": {
       "canton": "GE",
@@ -632,13 +632,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T05:22:50.234Z"
+          "updatedAt": "2026-10-20T12:16:17.109Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "NUIT DU 24 AU 25 OCTOBRE : PASSAGE A L’HEURE HIVER",
+              "date": "2026-10-20T04:54:57.000Z",
+              "url": "https://www.lemanexpress.com/2026/10/20/nuit-du-24-au-25-octobre-passage-a-lheure-hiver/"
+            },
             {
               "label": "Fermeture exceptionnelle du guichet d'information de l'office de l'urbanisme",
               "date": "2026-10-19",
@@ -663,14 +668,9 @@
               "label": "Travaux avenue de l’Europe / route de Bonneville (Vétraz-Monthoux)",
               "date": "2026-10-15",
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/travaux-avenue-de-leurope-route-de-bonneville-vetraz-monthoux"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 19 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.ge.ch/node/45210"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -730,7 +730,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "fr": {
       "canton": "GE",
@@ -868,13 +868,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T05:22:50.234Z"
+          "updatedAt": "2026-10-20T12:16:17.109Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "NUIT DU 24 AU 25 OCTOBRE : PASSAGE A L’HEURE HIVER",
+              "date": "2026-10-20T04:54:57.000Z",
+              "url": "https://www.lemanexpress.com/2026/10/20/nuit-du-24-au-25-octobre-passage-a-lheure-hiver/"
+            },
             {
               "label": "Fermeture exceptionnelle du guichet d'information de l'office de l'urbanisme",
               "date": "2026-10-19",
@@ -899,14 +904,9 @@
               "label": "Travaux avenue de l’Europe / route de Bonneville (Vétraz-Monthoux)",
               "date": "2026-10-15",
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/travaux-avenue-de-leurope-route-de-bonneville-vetraz-monthoux"
-            },
-            {
-              "label": "Impacts Mobilités : démarrage de nouveaux chantiers impactant les déplacements dès le 19 octobre 2026",
-              "date": "2026-10-15",
-              "url": "https://www.ge.ch/node/45210"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -966,7 +966,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     }
   }
 }

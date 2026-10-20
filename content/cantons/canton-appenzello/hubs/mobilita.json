@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T13:42:35.891Z",
-  "contentHash": "736feb4e9f4484ffbdf85470115062bec6ca82d55fa00d8b2cc8693706be070b",
+  "updatedAt": "2026-10-20T17:48:42.935Z",
+  "contentHash": "42fddcb01a788642d4b29b276fe9ae0b570ccf49c198a971da9fd928fa9731a8",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T05:22:50.234Z",
+      "updatedAt": "2026-10-20T12:16:17.109Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T17:49:38.738Z",
+      "updatedAt": "2026-10-20T10:27:43.943Z",
       "keyFacts": 0
     }
   ],
@@ -40,13 +40,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffico",
-              "date": "2026-10-20T05:22:50.234Z",
+              "date": "2026-10-20T12:16:17.109Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffico",
-              "date": "2026-10-20T05:22:50.234Z",
+              "date": "2026-10-20T12:16:17.109Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -63,7 +63,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T05:22:50.234Z"
+          "updatedAt": "2026-10-20T12:16:17.109Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -101,7 +101,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/sperrungen-wegen-steinschlaggefahr-auf-der-schwaegalp/"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -129,7 +129,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -152,13 +152,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffic",
-              "date": "2026-10-20T05:22:50.234Z",
+              "date": "2026-10-20T12:16:17.109Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffic",
-              "date": "2026-10-20T05:22:50.234Z",
+              "date": "2026-10-20T12:16:17.109Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -175,7 +175,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T05:22:50.234Z"
+          "updatedAt": "2026-10-20T12:16:17.109Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -213,7 +213,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/sperrungen-wegen-steinschlaggefahr-auf-der-schwaegalp/"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -241,7 +241,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -264,13 +264,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Verkehr",
-              "date": "2026-10-20T05:22:50.234Z",
+              "date": "2026-10-20T12:16:17.109Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Verkehr",
-              "date": "2026-10-20T05:22:50.234Z",
+              "date": "2026-10-20T12:16:17.109Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -287,7 +287,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T05:22:50.234Z"
+          "updatedAt": "2026-10-20T12:16:17.109Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -325,7 +325,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/sperrungen-wegen-steinschlaggefahr-auf-der-schwaegalp/"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -353,7 +353,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -376,13 +376,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Trafic",
-              "date": "2026-10-20T05:22:50.234Z",
+              "date": "2026-10-20T12:16:17.109Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Trafic",
-              "date": "2026-10-20T05:22:50.234Z",
+              "date": "2026-10-20T12:16:17.109Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -399,7 +399,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T05:22:50.234Z"
+          "updatedAt": "2026-10-20T12:16:17.109Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -437,7 +437,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/sperrungen-wegen-steinschlaggefahr-auf-der-schwaegalp/"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     }
   }
 }

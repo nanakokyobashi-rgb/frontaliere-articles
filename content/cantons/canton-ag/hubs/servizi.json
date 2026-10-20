@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-10-20T13:42:35.891Z",
-  "contentHash": "9adfe5cd153c1f96660bd7d410071c2a6fce094d78d160c23a6737e79aca42a5",
+  "updatedAt": "2026-10-20T17:48:42.935Z",
+  "contentHash": "8589fe98fd794bd2b790171eedefc96bcdb3fa67318a9b49b2c7523714245bac",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-20T04:48:51.023Z",
+      "updatedAt": "2026-10-20T11:35:05.549Z",
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-20T05:04:18.322Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T17:49:38.738Z",
+      "updatedAt": "2026-10-20T10:27:43.943Z",
       "keyFacts": 0
     }
   ],
@@ -92,27 +87,18 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-20T04:48:51.023Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Aarau",
-              "value": "9 °C",
-              "detail": "oggi da 9 a 16 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-20T05:04:18.322Z"
+          "updatedAt": "2026-10-20T11:35:05.549Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Wenn Spitalwände Geschichten erzählen",
+              "date": "2026-10-20",
+              "url": "https://www.kantonsspitalbaden.ch/news/wenn-spitalwaende-geschichten-erzaehlen"
+            },
             {
               "label": "Einbürgerungsgesuche",
               "date": "2026-10-09",
@@ -137,14 +123,9 @@
               "label": "Linearbeschleuniger: KSB verzichtet auf Rekurs",
               "date": "2026-09-23",
               "url": "https://www.kantonsspitalbaden.ch/news/linearbeschleuniger-ksb-verzichtet-auf-rekurs"
-            },
-            {
-              "label": "KSB und Asklepios gehen im Spitaleinkauf neue Wege",
-              "date": "2026-08-10",
-              "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -224,7 +205,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "en": {
       "canton": "AG",
@@ -289,27 +270,18 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-20T04:48:51.023Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Aarau",
-              "value": "9 °C",
-              "detail": "today from 9 to 16 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-20T05:04:18.322Z"
+          "updatedAt": "2026-10-20T11:35:05.549Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Wenn Spitalwände Geschichten erzählen",
+              "date": "2026-10-20",
+              "url": "https://www.kantonsspitalbaden.ch/news/wenn-spitalwaende-geschichten-erzaehlen"
+            },
             {
               "label": "Einbürgerungsgesuche",
               "date": "2026-10-09",
@@ -334,14 +306,9 @@
               "label": "Linearbeschleuniger: KSB verzichtet auf Rekurs",
               "date": "2026-09-23",
               "url": "https://www.kantonsspitalbaden.ch/news/linearbeschleuniger-ksb-verzichtet-auf-rekurs"
-            },
-            {
-              "label": "KSB und Asklepios gehen im Spitaleinkauf neue Wege",
-              "date": "2026-08-10",
-              "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +384,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "de": {
       "canton": "AG",
@@ -482,27 +449,18 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-20T04:48:51.023Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Aarau",
-              "value": "9 °C",
-              "detail": "heute 9 bis 16 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-20T05:04:18.322Z"
+          "updatedAt": "2026-10-20T11:35:05.549Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Wenn Spitalwände Geschichten erzählen",
+              "date": "2026-10-20",
+              "url": "https://www.kantonsspitalbaden.ch/news/wenn-spitalwaende-geschichten-erzaehlen"
+            },
             {
               "label": "Einbürgerungsgesuche",
               "date": "2026-10-09",
@@ -527,14 +485,9 @@
               "label": "Linearbeschleuniger: KSB verzichtet auf Rekurs",
               "date": "2026-09-23",
               "url": "https://www.kantonsspitalbaden.ch/news/linearbeschleuniger-ksb-verzichtet-auf-rekurs"
-            },
-            {
-              "label": "KSB und Asklepios gehen im Spitaleinkauf neue Wege",
-              "date": "2026-08-10",
-              "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -610,7 +563,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "fr": {
       "canton": "AG",
@@ -675,27 +628,18 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-20T04:48:51.023Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Aarau",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 9 à 16 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-20T05:04:18.322Z"
+          "updatedAt": "2026-10-20T11:35:05.549Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Wenn Spitalwände Geschichten erzählen",
+              "date": "2026-10-20",
+              "url": "https://www.kantonsspitalbaden.ch/news/wenn-spitalwaende-geschichten-erzaehlen"
+            },
             {
               "label": "Einbürgerungsgesuche",
               "date": "2026-10-09",
@@ -720,14 +664,9 @@
               "label": "Linearbeschleuniger: KSB verzichtet auf Rekurs",
               "date": "2026-09-23",
               "url": "https://www.kantonsspitalbaden.ch/news/linearbeschleuniger-ksb-verzichtet-auf-rekurs"
-            },
-            {
-              "label": "KSB und Asklepios gehen im Spitaleinkauf neue Wege",
-              "date": "2026-08-10",
-              "url": "https://www.kantonsspitalbaden.ch/news/ksb-und-asklepios-gehen-im-spitaleinkauf-neue-wege"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -799,7 +738,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     }
   }
 }

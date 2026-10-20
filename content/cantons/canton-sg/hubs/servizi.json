@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-20T13:42:35.891Z",
-  "contentHash": "61e3ef3f01fa26d088f142c2916a7fc58685cbbc0080a5163a40113457ec46e3",
+  "updatedAt": "2026-10-20T17:48:42.935Z",
+  "contentHash": "5781c22ba1df5851767ef46c0dddd74c22f2f9e5f9ce8af76a7007481f9b1341",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-20T04:48:51.023Z",
+      "updatedAt": "2026-10-20T11:35:05.549Z",
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-20T05:04:18.322Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T17:49:38.738Z",
+      "updatedAt": "2026-10-20T10:27:43.943Z",
       "keyFacts": 0
     }
   ],
@@ -93,30 +88,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6648"
             },
             {
-              "label": "SG31179",
+              "label": "SG28752",
               "value": "700 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-21T17:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6650"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6649"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-20T04:48:51.023Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "St. Gallen",
-              "value": "7 °C",
-              "detail": "oggi da 7 a 14 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-20T05:04:18.322Z"
+          "updatedAt": "2026-10-20T11:35:05.549Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -154,7 +135,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-erhaelt-zwei-best-paper-awards-2026-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +215,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "en": {
       "canton": "SG",
@@ -300,30 +281,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6648"
             },
             {
-              "label": "SG31179",
+              "label": "SG28752",
               "value": "700 CHF",
               "detail": "current bid",
               "date": "2026-10-21T17:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6650"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6649"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-20T04:48:51.023Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "St. Gallen",
-              "value": "7 °C",
-              "detail": "today from 7 to 14 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-20T05:04:18.322Z"
+          "updatedAt": "2026-10-20T11:35:05.549Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -361,7 +328,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-erhaelt-zwei-best-paper-awards-2026-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -437,7 +404,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "de": {
       "canton": "SG",
@@ -503,30 +470,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6648"
             },
             {
-              "label": "SG31179",
+              "label": "SG28752",
               "value": "700 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-21T17:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6650"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6649"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-20T04:48:51.023Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "St. Gallen",
-              "value": "7 °C",
-              "detail": "heute 7 bis 14 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-20T05:04:18.322Z"
+          "updatedAt": "2026-10-20T11:35:05.549Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -564,7 +517,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-erhaelt-zwei-best-paper-awards-2026-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -640,7 +593,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "fr": {
       "canton": "SG",
@@ -706,30 +659,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6648"
             },
             {
-              "label": "SG31179",
+              "label": "SG28752",
               "value": "700 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-21T17:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6650"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6649"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-20T04:48:51.023Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "St. Gallen",
-              "value": "7 °C",
-              "detail": "aujourd’hui de 7 à 14 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-20T05:04:18.322Z"
+          "updatedAt": "2026-10-20T11:35:05.549Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -767,7 +706,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-erhaelt-zwei-best-paper-awards-2026-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -839,7 +778,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     }
   }
 }

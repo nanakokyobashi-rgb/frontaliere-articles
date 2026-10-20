@@ -4,14 +4,14 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-19T18:33:18.720Z",
-  "contentHash": "4e5d4c9b91bbbc31eb82df149711f6747694c75d2faac9f8b48a7d2439020060",
+  "updatedAt": "2026-10-20T17:48:42.935Z",
+  "contentHash": "3a7dd6831fa2c350bb5587466624d296986702ad5563c072e38d6901c953c8f1",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-19T13:56:07.476Z",
+      "updatedAt": "2026-10-20T12:04:15.773Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-26T13:56:07.476Z"
+      "carryUntilAt": "2026-10-27T12:04:15.773Z"
     }
   ],
   "locales": {
@@ -54,19 +54,19 @@
             },
             {
               "label": "Benzina 95 — Austria",
-              "value": "1,813 EUR/l",
-              "detail": "media regionale: minimo 1,797 EUR/l, 12 stazioni rilevate",
-              "date": "2026-10-19T13:56:07.476Z"
+              "value": "1,833 EUR/l",
+              "detail": "media regionale: minimo 1,823 EUR/l, 12 stazioni rilevate",
+              "date": "2026-10-20T12:04:15.773Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2,142 EUR/l",
+              "value": "2,162 EUR/l",
               "detail": "media regionale: minimo 2,100 EUR/l, 14 stazioni rilevate",
-              "date": "2026-10-19T13:56:07.476Z"
+              "date": "2026-10-20T12:04:15.773Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-19T13:56:07.476Z"
+          "updatedAt": "2026-10-20T12:04:15.773Z"
         }
       ],
       "curatedArticles": [],
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -153,19 +153,19 @@
             },
             {
               "label": "Petrol 95 — Austria",
-              "value": "1.813 EUR/l",
-              "detail": "regional average: lowest 1.797 EUR/l, 12 stations surveyed",
-              "date": "2026-10-19T13:56:07.476Z"
+              "value": "1.833 EUR/l",
+              "detail": "regional average: lowest 1.823 EUR/l, 12 stations surveyed",
+              "date": "2026-10-20T12:04:15.773Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2.142 EUR/l",
+              "value": "2.162 EUR/l",
               "detail": "regional average: lowest 2.100 EUR/l, 14 stations surveyed",
-              "date": "2026-10-19T13:56:07.476Z"
+              "date": "2026-10-20T12:04:15.773Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-19T13:56:07.476Z"
+          "updatedAt": "2026-10-20T12:04:15.773Z"
         }
       ],
       "curatedArticles": [],
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -252,19 +252,19 @@
             },
             {
               "label": "Benzin 95 — Österreich",
-              "value": "1.813 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.797 EUR/l, 12 erfasste Tankstellen",
-              "date": "2026-10-19T13:56:07.476Z"
+              "value": "1.833 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.823 EUR/l, 12 erfasste Tankstellen",
+              "date": "2026-10-20T12:04:15.773Z"
             },
             {
               "label": "Diesel — Österreich",
-              "value": "2.142 EUR/l",
+              "value": "2.162 EUR/l",
               "detail": "regionaler Durchschnitt: tiefster Preis 2.100 EUR/l, 14 erfasste Tankstellen",
-              "date": "2026-10-19T13:56:07.476Z"
+              "date": "2026-10-20T12:04:15.773Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-19T13:56:07.476Z"
+          "updatedAt": "2026-10-20T12:04:15.773Z"
         }
       ],
       "curatedArticles": [],
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -351,19 +351,19 @@
             },
             {
               "label": "Essence 95 — Autriche",
-              "value": "1,813 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,797 EUR/l, 12 stations relevées",
-              "date": "2026-10-19T13:56:07.476Z"
+              "value": "1,833 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,823 EUR/l, 12 stations relevées",
+              "date": "2026-10-20T12:04:15.773Z"
             },
             {
               "label": "Diesel — Autriche",
-              "value": "2,142 EUR/l",
+              "value": "2,162 EUR/l",
               "detail": "moyenne régionale : prix le plus bas 2,100 EUR/l, 14 stations relevées",
-              "date": "2026-10-19T13:56:07.476Z"
+              "date": "2026-10-20T12:04:15.773Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-19T13:56:07.476Z"
+          "updatedAt": "2026-10-20T12:04:15.773Z"
         }
       ],
       "curatedArticles": [],
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     }
   }
 }
