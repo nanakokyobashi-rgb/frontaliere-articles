@@ -4,17 +4,17 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T09:50:40.544Z",
-  "contentHash": "3edbb764a4c51ce0645868f1beb33f5ea1cf82f5842c5ff24b517726b59b00ed",
+  "updatedAt": "2026-10-20T13:42:35.891Z",
+  "contentHash": "0f165a30b09510d136afbef657d10e40ec609765e0c32f17a9be367030c6f8de",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-18T23:59:59.000Z",
+      "updatedAt": "2026-10-19T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T00:43:33.013Z",
+      "updatedAt": "2026-10-20T05:22:50.234Z",
       "keyFacts": 2
     },
     {
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Buchs (SG)-Schaan, settimana conclusa: 18 ottobre 2026"
+          "note": "Au-Lustenau, settimana conclusa: 19 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
@@ -50,8 +50,14 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 12 ottobre 2026 – 18 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 13 ottobre 2026 – 19 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
+            {
+              "label": "Au-Lustenau",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/au-lustenau/oggi/"
+            },
             {
               "label": "Buchs (SG)-Schaan",
               "value": "0 min",
@@ -63,6 +69,18 @@
               "value": "0 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/diepoldsau-hohenems/oggi/"
+            },
+            {
+              "label": "Haag-Bendern",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/haag-bendern/oggi/"
+            },
+            {
+              "label": "Kriessern-Mäder",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/kriessern-mader/oggi/"
             },
             {
               "label": "Montlingen-Koblach",
@@ -81,29 +99,11 @@
               "value": "0 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/ruthi-meiningen/oggi/"
-            },
-            {
-              "label": "Salez-Ruggell",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/salez-ruggell/oggi/"
-            },
-            {
-              "label": "Sevelen-Vaduz",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/sevelen-vaduz/oggi/"
-            },
-            {
-              "label": "Trübbach-Balzers",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/trubbach-balzers/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -160,7 +160,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -262,7 +262,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "en": {
       "canton": "SG",
@@ -273,7 +273,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Buchs (SG)-Schaan, week ending 18 October 2026"
+          "note": "Au-Lustenau, week ending 19 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
@@ -290,8 +290,14 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 12 October 2026 to 18 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 13 October 2026 to 19 October 2026, fastest first.",
           "items": [
+            {
+              "label": "Au-Lustenau",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/au-lustenau/today/"
+            },
             {
               "label": "Buchs (SG)-Schaan",
               "value": "0 min",
@@ -303,6 +309,18 @@
               "value": "0 min",
               "detail": "47 readings",
               "url": "/en/border-wait/diepoldsau-hohenems/today/"
+            },
+            {
+              "label": "Haag-Bendern",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/haag-bendern/today/"
+            },
+            {
+              "label": "Kriessern-Mäder",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/kriessern-mader/today/"
             },
             {
               "label": "Montlingen-Koblach",
@@ -321,29 +339,11 @@
               "value": "0 min",
               "detail": "47 readings",
               "url": "/en/border-wait/ruthi-meiningen/today/"
-            },
-            {
-              "label": "Salez-Ruggell",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/salez-ruggell/today/"
-            },
-            {
-              "label": "Sevelen-Vaduz",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/sevelen-vaduz/today/"
-            },
-            {
-              "label": "Trübbach-Balzers",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/trubbach-balzers/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -400,7 +400,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -501,7 +501,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "de": {
       "canton": "SG",
@@ -512,7 +512,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Buchs (SG)-Schaan, Woche bis 18. Oktober 2026"
+          "note": "Au-Lustenau, Woche bis 19. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
@@ -529,8 +529,14 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 12. Oktober 2026 bis 18. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 13. Oktober 2026 bis 19. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
+            {
+              "label": "Au-Lustenau",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/au-lustenau/heute/"
+            },
             {
               "label": "Buchs (SG)-Schaan",
               "value": "0 Min.",
@@ -542,6 +548,18 @@
               "value": "0 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/diepoldsau-hohenems/heute/"
+            },
+            {
+              "label": "Haag-Bendern",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/haag-bendern/heute/"
+            },
+            {
+              "label": "Kriessern-Mäder",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/kriessern-mader/heute/"
             },
             {
               "label": "Montlingen-Koblach",
@@ -560,29 +578,11 @@
               "value": "0 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/ruthi-meiningen/heute/"
-            },
-            {
-              "label": "Salez-Ruggell",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/salez-ruggell/heute/"
-            },
-            {
-              "label": "Sevelen-Vaduz",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/sevelen-vaduz/heute/"
-            },
-            {
-              "label": "Trübbach-Balzers",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/trubbach-balzers/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -639,7 +639,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -740,7 +740,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "fr": {
       "canton": "SG",
@@ -751,7 +751,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Buchs (SG)-Schaan, semaine jusqu’au 18 octobre 2026"
+          "note": "Au-Lustenau, semaine jusqu’au 19 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
@@ -768,8 +768,14 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 12 octobre 2026 au 18 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 13 octobre 2026 au 19 octobre 2026, du plus fluide au plus lent.",
           "items": [
+            {
+              "label": "Au-Lustenau",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/au-lustenau/aujourd-hui/"
+            },
             {
               "label": "Buchs (SG)-Schaan",
               "value": "0 min",
@@ -781,6 +787,18 @@
               "value": "0 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/diepoldsau-hohenems/aujourd-hui/"
+            },
+            {
+              "label": "Haag-Bendern",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/haag-bendern/aujourd-hui/"
+            },
+            {
+              "label": "Kriessern-Mäder",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/kriessern-mader/aujourd-hui/"
             },
             {
               "label": "Montlingen-Koblach",
@@ -799,29 +817,11 @@
               "value": "0 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/ruthi-meiningen/aujourd-hui/"
-            },
-            {
-              "label": "Salez-Ruggell",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/salez-ruggell/aujourd-hui/"
-            },
-            {
-              "label": "Sevelen-Vaduz",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/sevelen-vaduz/aujourd-hui/"
-            },
-            {
-              "label": "Trübbach-Balzers",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/trubbach-balzers/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -878,7 +878,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -980,7 +980,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     }
   }
 }

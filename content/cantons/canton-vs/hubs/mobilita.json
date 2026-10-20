@@ -4,17 +4,17 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T09:50:40.544Z",
-  "contentHash": "d4de83a5421fe4848d46018a0515b3fabf7d7e7380e8f60247f6c0aac2616b58",
+  "updatedAt": "2026-10-20T13:42:35.891Z",
+  "contentHash": "0b7438c7ef2ff9ee1af25137a40ecafc37ecc1df2b61114289f48018d6cca4bc",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-18T23:59:59.000Z",
+      "updatedAt": "2026-10-19T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T00:43:33.013Z",
+      "updatedAt": "2026-10-20T05:22:50.234Z",
       "keyFacts": 2
     },
     {
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Le Châtelard-Vallorcine, settimana conclusa: 18 ottobre 2026"
+          "note": "Le Châtelard-Vallorcine, settimana conclusa: 19 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
@@ -50,7 +50,7 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 12 ottobre 2026 – 18 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 13 ottobre 2026 – 19 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Le Châtelard-Vallorcine",
@@ -71,21 +71,21 @@
               "url": "/traffico-dogane/saint-gingolph/oggi/"
             },
             {
+              "label": "Sempione (Iselle-Gondo)",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/sempione/oggi/"
+            },
+            {
               "label": "Traforo del Gran San Bernardo",
               "value": "0 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/traforo-del-gran-san-bernardo/oggi/"
-            },
-            {
-              "label": "Sempione (Iselle-Gondo)",
-              "value": "0,4 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/sempione/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -142,7 +142,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -250,7 +250,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "en": {
       "canton": "VS",
@@ -261,7 +261,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Le Châtelard-Vallorcine, week ending 18 October 2026"
+          "note": "Le Châtelard-Vallorcine, week ending 19 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
@@ -278,7 +278,7 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 12 October 2026 to 18 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 13 October 2026 to 19 October 2026, fastest first.",
           "items": [
             {
               "label": "Le Châtelard-Vallorcine",
@@ -299,21 +299,21 @@
               "url": "/en/border-wait/saint-gingolph/today/"
             },
             {
+              "label": "Sempione (Iselle-Gondo)",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/sempione/today/"
+            },
+            {
               "label": "Traforo del Gran San Bernardo",
               "value": "0 min",
               "detail": "47 readings",
               "url": "/en/border-wait/traforo-del-gran-san-bernardo/today/"
-            },
-            {
-              "label": "Sempione (Iselle-Gondo)",
-              "value": "0.4 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/sempione/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -370,7 +370,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -478,7 +478,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "de": {
       "canton": "VS",
@@ -489,7 +489,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Le Châtelard-Vallorcine, Woche bis 18. Oktober 2026"
+          "note": "Le Châtelard-Vallorcine, Woche bis 19. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
@@ -506,7 +506,7 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 12. Oktober 2026 bis 18. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 13. Oktober 2026 bis 19. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Le Châtelard-Vallorcine",
@@ -527,21 +527,21 @@
               "url": "/de/wartezeit-grenze/saint-gingolph/heute/"
             },
             {
+              "label": "Sempione (Iselle-Gondo)",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/sempione/heute/"
+            },
+            {
               "label": "Traforo del Gran San Bernardo",
               "value": "0 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/traforo-del-gran-san-bernardo/heute/"
-            },
-            {
-              "label": "Sempione (Iselle-Gondo)",
-              "value": "0.4 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/sempione/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -598,7 +598,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -706,7 +706,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "fr": {
       "canton": "VS",
@@ -717,7 +717,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Le Châtelard-Vallorcine, semaine jusqu’au 18 octobre 2026"
+          "note": "Le Châtelard-Vallorcine, semaine jusqu’au 19 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
@@ -734,7 +734,7 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 12 octobre 2026 au 18 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 13 octobre 2026 au 19 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Le Châtelard-Vallorcine",
@@ -755,21 +755,21 @@
               "url": "/fr/temps-attente-douane/saint-gingolph/aujourd-hui/"
             },
             {
+              "label": "Sempione (Iselle-Gondo)",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/sempione/aujourd-hui/"
+            },
+            {
               "label": "Traforo del Gran San Bernardo",
               "value": "0 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/traforo-del-gran-san-bernardo/aujourd-hui/"
-            },
-            {
-              "label": "Sempione (Iselle-Gondo)",
-              "value": "0,4 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/sempione/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -826,7 +826,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -934,7 +934,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     }
   }
 }

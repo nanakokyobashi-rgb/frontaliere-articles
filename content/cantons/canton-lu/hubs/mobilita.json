@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T09:50:40.544Z",
-  "contentHash": "705157eabf3755e85bfeb57dca1e04abe2c9dca43d91c611fb4f0b3b8ee27c66",
+  "updatedAt": "2026-10-20T13:42:35.891Z",
+  "contentHash": "3936b3b7946a9ae83ff3e3821dede7cecf3578980cbce1d642deb24e0fcf82ae",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T00:43:33.013Z",
+      "updatedAt": "2026-10-20T05:22:50.234Z",
       "keyFacts": 2
     },
     {
@@ -55,6 +55,26 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
+              "label": "A2 Basel -> Luzern tra Svincolo autostradale Rothenburg E Raccordo autostradale Diramazione Rotsee Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-20T04:23:00.000Z"
+            },
+            {
+              "label": "A14 Luzern -> Zug tra Raccordo autostradale Diramazione Rotsee E Galleria Galleria Rathausen Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-20T04:28:00.000Z"
+            },
+            {
+              "label": "A14 Zug -> Luzern tra Svincolo autostradale Buchrain E Raccordo autostradale Diramazione Rotsee Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-20T05:06:00.000Z"
+            },
+            {
+              "label": "H4 Luzern -> Zürich tra Svincolo autostradale Walterswil E Luogo Sihlbrugg Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-20T05:07:00.000Z"
+            },
+            {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
               "value": "Cantiere",
               "detail": "fine prevista: 17 dicembre 2027",
@@ -65,34 +85,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2027",
               "date": "2025-04-15T18:21:00.000Z"
-            },
-            {
-              "label": "H10 Berna <-> Lucerna tra Svincolo autostradale Schachen E Luogo Wolhusen Situazione: problemi di traffico cantiere",
-              "value": "Cantiere",
-              "detail": "fine prevista: 30 giugno 2027",
-              "date": "2025-04-23T22:00:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna <-> Basilea tra Area di servizio Weil am Rhein E Raccordo autostradale Raccordo di Hagnau Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: nuova…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 11 dicembre 2026",
-              "date": "2025-12-04T19:00:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna -> Basilea Parcheggio Eggberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.4",
-              "value": "Cantiere",
-              "detail": "fine prevista: 12 novembre 2026",
-              "date": "2026-02-02T07:02:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna -> Basilea Parcheggio Sonnenberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.2",
-              "value": "Cantiere",
-              "detail": "fine prevista: 13 novembre 2026",
-              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -156,7 +152,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "en": {
       "canton": "LU",
@@ -194,6 +190,26 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
+              "label": "A2 Basel -> Luzern tra Svincolo autostradale Rothenburg E Raccordo autostradale Diramazione Rotsee Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-20T04:23:00.000Z"
+            },
+            {
+              "label": "A14 Luzern -> Zug tra Raccordo autostradale Diramazione Rotsee E Galleria Galleria Rathausen Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-20T04:28:00.000Z"
+            },
+            {
+              "label": "A14 Zug -> Luzern tra Svincolo autostradale Buchrain E Raccordo autostradale Diramazione Rotsee Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-20T05:06:00.000Z"
+            },
+            {
+              "label": "H4 Luzern -> Zürich tra Svincolo autostradale Walterswil E Luogo Sihlbrugg Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-20T05:07:00.000Z"
+            },
+            {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
               "value": "Roadworks",
               "detail": "until 17 December 2027",
@@ -204,34 +220,10 @@
               "value": "Roadworks",
               "detail": "until 31 December 2027",
               "date": "2025-04-15T18:21:00.000Z"
-            },
-            {
-              "label": "H10 Berna <-> Lucerna tra Svincolo autostradale Schachen E Luogo Wolhusen Situazione: problemi di traffico cantiere",
-              "value": "Roadworks",
-              "detail": "until 30 June 2027",
-              "date": "2025-04-23T22:00:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna <-> Basilea tra Area di servizio Weil am Rhein E Raccordo autostradale Raccordo di Hagnau Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: nuova…",
-              "value": "Roadworks",
-              "detail": "until 11 December 2026",
-              "date": "2025-12-04T19:00:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna -> Basilea Parcheggio Eggberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.4",
-              "value": "Roadworks",
-              "detail": "until 12 November 2026",
-              "date": "2026-02-02T07:02:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna -> Basilea Parcheggio Sonnenberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.2",
-              "value": "Roadworks",
-              "detail": "until 13 November 2026",
-              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -293,7 +285,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "de": {
       "canton": "LU",
@@ -331,6 +323,26 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
+              "label": "A2 Basel -> Luzern zwischen Anschluss Rothenburg und Autobahndreieck Verzweigung Rotsee Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-20T04:23:00.000Z"
+            },
+            {
+              "label": "A14 Luzern -> Zug zwischen Autobahndreieck Verzweigung Rotsee und Tunnel Rathausen-Tunnel Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-20T04:28:00.000Z"
+            },
+            {
+              "label": "A14 Zug -> Luzern zwischen Anschluss Buchrain und Autobahndreieck Verzweigung Rotsee Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-20T05:06:00.000Z"
+            },
+            {
+              "label": "H4 Luzern -> Zürich zwischen Anschluss Walterswil und Ortschaft Sihlbrugg Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-20T05:07:00.000Z"
+            },
+            {
               "label": "H10 Bern <-> Luzern zwischen Ortschaft Wiggen und Ortschaft Kröschenbrunnen Sachlage: Verkehrsbehinderung Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
               "value": "Baustelle",
               "detail": "bis 17. Dezember 2027",
@@ -341,34 +353,10 @@
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2027",
               "date": "2025-04-15T18:21:00.000Z"
-            },
-            {
-              "label": "H10 Bern <-> Luzern zwischen Anschluss Schachen und Ortschaft Wolhusen Sachlage: Verkehrsbehinderung Baustelle",
-              "value": "Baustelle",
-              "detail": "bis 30. Juni 2027",
-              "date": "2025-04-23T22:00:00.000Z"
-            },
-            {
-              "label": "A2 Luzern <-> Basel zwischen Raststätte Weil am Rhein und Autobahndreieck Verzweigung Hagnau Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: veränderte Verkehrsführung…",
-              "value": "Baustelle",
-              "detail": "bis 11. Dezember 2026",
-              "date": "2025-12-04T19:00:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> Basel Parkplatz Eggberg Sachlage: Parkplatz geschlossen Baustelle, Länge [km] 0.4",
-              "value": "Baustelle",
-              "detail": "bis 12. November 2026",
-              "date": "2026-02-02T07:02:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> Basel Parkplatz Sonnenberg Sachlage: Parkplatz geschlossen Baustelle, Länge [km] 0.2",
-              "value": "Baustelle",
-              "detail": "bis 13. November 2026",
-              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -430,7 +418,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "fr": {
       "canton": "LU",
@@ -468,6 +456,26 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
+              "label": "A2 Bâle -> Lucerne entre Jonction autoroutière Rothenburg et Echangeur Echangeur du Rotsee Situation: trafic en accordéon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-20T04:23:00.000Z"
+            },
+            {
+              "label": "A14 Lucerne -> Zoug entre Echangeur Echangeur du Rotsee et Tunnel Tunnel de Rathausen Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-20T04:28:00.000Z"
+            },
+            {
+              "label": "A14 Zoug -> Lucerne entre Jonction autoroutière Buchrain et Echangeur Echangeur du Rotsee Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-20T05:06:00.000Z"
+            },
+            {
+              "label": "H4 Lucerne -> Zurich entre Jonction autoroutière Walterswil et Localité Sihlbrugg Situation: trafic en accordéon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-20T05:07:00.000Z"
+            },
+            {
               "label": "H10 Berne <-> Lucerne entre Localité Wiggen et Localité Kröschenbrunnen Situation: trafic perturbé Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
               "value": "Chantier",
               "detail": "jusqu’au 17 décembre 2027",
@@ -478,34 +486,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2027",
               "date": "2025-04-15T18:21:00.000Z"
-            },
-            {
-              "label": "H10 Berne <-> Lucerne entre Jonction autoroutière Schachen et Localité Wolhusen Situation: trafic perturbé travaux",
-              "value": "Chantier",
-              "detail": "jusqu’au 30 juin 2027",
-              "date": "2025-04-23T22:00:00.000Z"
-            },
-            {
-              "label": "A2 Lucerne <-> Bâle entre Aire de service Weil am Rhein et Echangeur Echangeur de Hagnau Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: nouveau plan de circulation…",
-              "value": "Chantier",
-              "detail": "jusqu’au 11 décembre 2026",
-              "date": "2025-12-04T19:00:00.000Z"
-            },
-            {
-              "label": "A2 Lucerne -> Bâle Parking Eggberg Situation: parking fermé travaux, longueur [km] 0.4",
-              "value": "Chantier",
-              "detail": "jusqu’au 12 novembre 2026",
-              "date": "2026-02-02T07:02:00.000Z"
-            },
-            {
-              "label": "A2 Lucerne -> Bâle Parking Sonnenberg Situation: parking fermé travaux, longueur [km] 0.2",
-              "value": "Chantier",
-              "detail": "jusqu’au 13 novembre 2026",
-              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -569,7 +553,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     }
   }
 }

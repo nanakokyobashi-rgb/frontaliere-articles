@@ -4,12 +4,12 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T07:17:29.748Z",
-  "contentHash": "a3abf9ec31fc39e53a6f90c7a6e1dbdf7e19ca121eb0d16b53250dcd3adc2aa4",
+  "updatedAt": "2026-10-20T13:42:35.891Z",
+  "contentHash": "6e047bd1f8469e4ff8bcbf6c10950030b246a911191d546f0bc28e30befc26bc",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-18T23:59:59.000Z",
+      "updatedAt": "2026-10-19T23:59:59.000Z",
       "keyFacts": 1
     },
     {
@@ -28,14 +28,14 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, settimana conclusa: 18 ottobre 2026"
+          "note": "Bargen SH – Tengen, settimana conclusa: 19 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 12 ottobre 2026 – 18 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 13 ottobre 2026 – 19 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -48,6 +48,12 @@
               "value": "0 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/blumberg-bargen-sh-alte-bargener-strasse/oggi/"
+            },
+            {
+              "label": "Blumberg – Bargen SH, Autostrasse H4",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/blumberg-bargen-sh-autostrasse-h4/oggi/"
             },
             {
               "label": "Blumberg – Beggingen",
@@ -78,17 +84,11 @@
               "value": "0 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/busingen-am-hochrhein-schaffhausen-felsgasse/oggi/"
-            },
-            {
-              "label": "Büsingen am Hochrhein – Schaffhausen, Gennersbrunnerstrasse",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/busingen-am-hochrhein-schaffhausen-gennersbrunnerstrasse/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -192,7 +192,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-20T07:17:29.748Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "en": {
       "canton": "SH",
@@ -203,14 +203,14 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, week ending 18 October 2026"
+          "note": "Bargen SH – Tengen, week ending 19 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 12 October 2026 to 18 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 13 October 2026 to 19 October 2026, fastest first.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -223,6 +223,12 @@
               "value": "0 min",
               "detail": "47 readings",
               "url": "/en/border-wait/blumberg-bargen-sh-alte-bargener-strasse/today/"
+            },
+            {
+              "label": "Blumberg – Bargen SH, Autostrasse H4",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/blumberg-bargen-sh-autostrasse-h4/today/"
             },
             {
               "label": "Blumberg – Beggingen",
@@ -253,17 +259,11 @@
               "value": "0 min",
               "detail": "47 readings",
               "url": "/en/border-wait/busingen-am-hochrhein-schaffhausen-felsgasse/today/"
-            },
-            {
-              "label": "Büsingen am Hochrhein – Schaffhausen, Gennersbrunnerstrasse",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/busingen-am-hochrhein-schaffhausen-gennersbrunnerstrasse/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -367,7 +367,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-20T07:17:29.748Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "de": {
       "canton": "SH",
@@ -378,14 +378,14 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Bargen SH – Tengen, Woche bis 18. Oktober 2026"
+          "note": "Bargen SH – Tengen, Woche bis 19. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 12. Oktober 2026 bis 18. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 13. Oktober 2026 bis 19. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -398,6 +398,12 @@
               "value": "0 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/blumberg-bargen-sh-alte-bargener-strasse/heute/"
+            },
+            {
+              "label": "Blumberg – Bargen SH, Autostrasse H4",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/blumberg-bargen-sh-autostrasse-h4/heute/"
             },
             {
               "label": "Blumberg – Beggingen",
@@ -428,17 +434,11 @@
               "value": "0 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/busingen-am-hochrhein-schaffhausen-felsgasse/heute/"
-            },
-            {
-              "label": "Büsingen am Hochrhein – Schaffhausen, Gennersbrunnerstrasse",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/busingen-am-hochrhein-schaffhausen-gennersbrunnerstrasse/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -542,7 +542,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-20T07:17:29.748Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "fr": {
       "canton": "SH",
@@ -553,14 +553,14 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, semaine jusqu’au 18 octobre 2026"
+          "note": "Bargen SH – Tengen, semaine jusqu’au 19 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 12 octobre 2026 au 18 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 13 octobre 2026 au 19 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -573,6 +573,12 @@
               "value": "0 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/blumberg-bargen-sh-alte-bargener-strasse/aujourd-hui/"
+            },
+            {
+              "label": "Blumberg – Bargen SH, Autostrasse H4",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/blumberg-bargen-sh-autostrasse-h4/aujourd-hui/"
             },
             {
               "label": "Blumberg – Beggingen",
@@ -603,17 +609,11 @@
               "value": "0 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/busingen-am-hochrhein-schaffhausen-felsgasse/aujourd-hui/"
-            },
-            {
-              "label": "Büsingen am Hochrhein – Schaffhausen, Gennersbrunnerstrasse",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/busingen-am-hochrhein-schaffhausen-gennersbrunnerstrasse/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -717,7 +717,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-20T07:17:29.748Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     }
   }
 }

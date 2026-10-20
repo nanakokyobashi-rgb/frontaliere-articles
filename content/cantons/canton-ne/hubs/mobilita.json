@@ -4,17 +4,17 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T09:50:40.544Z",
-  "contentHash": "c2208e262e592cc80b970dab18f0477cfcfcef09f12baf2d2220ae86427d4745",
+  "updatedAt": "2026-10-20T13:42:35.891Z",
+  "contentHash": "eb76e6724c1bca7d9571a9e9841eeb5f62f43ff9ba08aa7c25a33c0fbbc2d675",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-18T23:59:59.000Z",
+      "updatedAt": "2026-10-19T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T00:43:33.013Z",
+      "updatedAt": "2026-10-20T05:22:50.234Z",
       "keyFacts": 2
     },
     {
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Col-des-Roches (Col France), settimana conclusa: 18 ottobre 2026"
+          "note": "Biaufond, settimana conclusa: 19 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
@@ -50,8 +50,14 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 12 ottobre 2026 – 18 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 13 ottobre 2026 – 19 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
+            {
+              "label": "Biaufond",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/biaufond/oggi/"
+            },
             {
               "label": "Col-des-Roches (Col France)",
               "value": "0 min",
@@ -63,17 +69,11 @@
               "value": "0 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/les-verrieres/oggi/"
-            },
-            {
-              "label": "Biaufond",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/biaufond/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -129,7 +129,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -189,7 +189,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "en": {
       "canton": "NE",
@@ -200,7 +200,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Col-des-Roches (Col France), week ending 18 October 2026"
+          "note": "Biaufond, week ending 19 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
@@ -217,8 +217,14 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 12 October 2026 to 18 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 13 October 2026 to 19 October 2026, fastest first.",
           "items": [
+            {
+              "label": "Biaufond",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/biaufond/today/"
+            },
             {
               "label": "Col-des-Roches (Col France)",
               "value": "0 min",
@@ -230,17 +236,11 @@
               "value": "0 min",
               "detail": "47 readings",
               "url": "/en/border-wait/les-verrieres/today/"
-            },
-            {
-              "label": "Biaufond",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/biaufond/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -296,7 +296,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -356,7 +356,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "de": {
       "canton": "NE",
@@ -367,7 +367,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Col-des-Roches (Col France), Woche bis 18. Oktober 2026"
+          "note": "Biaufond, Woche bis 19. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
@@ -384,8 +384,14 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 12. Oktober 2026 bis 18. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 13. Oktober 2026 bis 19. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
+            {
+              "label": "Biaufond",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/biaufond/heute/"
+            },
             {
               "label": "Col-des-Roches (Col France)",
               "value": "0 Min.",
@@ -397,17 +403,11 @@
               "value": "0 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/les-verrieres/heute/"
-            },
-            {
-              "label": "Biaufond",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/biaufond/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -463,7 +463,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -523,7 +523,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "fr": {
       "canton": "NE",
@@ -534,7 +534,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Col-des-Roches (Col France), semaine jusqu’au 18 octobre 2026"
+          "note": "Biaufond, semaine jusqu’au 19 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
@@ -551,8 +551,14 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 12 octobre 2026 au 18 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 13 octobre 2026 au 19 octobre 2026, du plus fluide au plus lent.",
           "items": [
+            {
+              "label": "Biaufond",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/biaufond/aujourd-hui/"
+            },
             {
               "label": "Col-des-Roches (Col France)",
               "value": "0 min",
@@ -564,17 +570,11 @@
               "value": "0 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/les-verrieres/aujourd-hui/"
-            },
-            {
-              "label": "Biaufond",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/biaufond/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -630,7 +630,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -690,7 +690,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     }
   }
 }
