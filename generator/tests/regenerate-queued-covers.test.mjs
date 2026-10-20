@@ -1671,6 +1671,12 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
     assert.match(publisher, /run-name:[^\n]*nonce=\$\{\{ inputs\.dispatch_nonce \|\| 'none' \}\}/u);
     const resolveJob = publisher.slice(publisher.indexOf('\n  resolve:'), publisher.indexOf('\n  publish:'));
     assert.match(resolveJob, /\n    timeout-minutes: 10\n/u);
+    assert.match(resolveJob, /\n          filter: blob:none\n/u);
+    assert.match(
+      resolveJob,
+      /sparse-checkout: \|\n            \/\*\n            !\/data\n            !\/dist\n            !\/public\n          sparse-checkout-cone-mode: false/u,
+      `${publisherWorkflow}: resolve should exclude generated heavyweight trees`,
+    );
     assert.match(
       resolveJob,
       /- name: Fetch push base \(resolve\)[\s\S]*?bash scripts\/ci\/fetch-push-base-if-missing\.sh/u,
