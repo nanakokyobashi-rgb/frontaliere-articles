@@ -214,6 +214,17 @@ jobs:
           # bounded replays, and bootstrap keep their exact source revision.
           ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || (github.event_name == 'workflow_dispatch' && inputs.bootstrap != true && github.ref) || github.sha }}
           fetch-depth: 2
+          # The resolve gate reads the source corpus and publisher code, but
+          # never generated `data/`, `dist/`, or `public/`. Keep those large
+          # trees out of the shallow fetch so an intermittent GitHub transfer
+          # cannot consume the whole resolve budget before the gate starts.
+          filter: blob:none
+          sparse-checkout: |
+            /*
+            !/data
+            !/dist
+            !/public
+          sparse-checkout-cone-mode: false
           persist-credentials: false
 
       - name: Resolve originating push range
