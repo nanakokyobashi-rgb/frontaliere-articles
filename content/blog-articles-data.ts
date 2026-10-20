@@ -45563,6 +45563,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'schianto-auto-moto-appiano-gentile',
+ category: 'novita',
+ date: '2026-10-20T03:38:16.053Z',
+ image: '/images/blog/article-caslano-colombera-incidente-moto.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

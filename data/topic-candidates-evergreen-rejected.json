@@ -10665,10 +10665,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://comozero.it/attualita/como-scomparso-ricardo-anthony-stibane-appello-nonna": {
-      "section": "frontaliere",
-      "ts": 1792292435066
-    },
     "frontaliere::https://www.varesenews.it/2026/10/openjobmetis-contro-il-tabu-trento-varese-non-vince-dalla-doppietta-di-roijakkers/2710981": {
       "section": "frontaliere",
       "ts": 1792296009319
@@ -10920,6 +10916,10 @@
     "frontaliere::https://www.varesenoi.it/2026/10/19/leggi-notizia/argomenti/economia-13/articolo/coldiretti-varese-otto-aziende-agricole-su-dieci-pronte-a-investire-nellinnovazione.html": {
       "section": "frontaliere",
       "ts": 1792464118843
+    },
+    "frontaliere::https://comozero.it/attualita/leterno-cantiere-dei-nuovi-giardini-lago-di-como-nuova-proroga-sui-tempi-ecco-quando-apriranno": {
+      "section": "frontaliere",
+      "ts": 1792466723548
     }
   }
 }

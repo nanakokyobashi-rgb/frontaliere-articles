@@ -251,6 +251,17 @@
       "failureCount": 0,
       "requestedAt": "2026-10-19T14:41:28.061Z",
       "lastFailureAt": "2026-10-19T14:41:28.061Z"
+    },
+    {
+      "articleId": "schianto-auto-moto-appiano-gentile",
+      "title": "Schianto ad Appiano Gentile: auto contro moto, un ferito grave",
+      "fallbackImage": "/images/blog/article-caslano-colombera-incidente-moto.webp",
+      "reason": "All image providers failed for article-schianto-auto-moto-appiano-gentile: openai-codex (vision gate rejected image: Synthetic illustrative crash scene relevant to the topic; a vis",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-20T03:38:17.054Z",
+      "lastFailureAt": "2026-10-20T03:38:17.054Z",
+      "retryHint": "no-text"
     }
   ]
 }
