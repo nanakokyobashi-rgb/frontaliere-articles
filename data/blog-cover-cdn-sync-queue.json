@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-indagine-disparita-salariali-frontalieri.webp",
-      "sha256": "89f0d7a234f0965b2d07df2fe89595f0fd463f31375e986f96f7057537290406"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-indagine-disparita-salariali-frontalieri-480w.webp",
-      "sha256": "ccf2ceae74e1ac0e7da259022729d883ad23c8555be1082a4cedb8c536ccb6bb"
-    }
-  ]
+  "items": []
 }
