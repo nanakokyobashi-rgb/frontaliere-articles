@@ -4,17 +4,17 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T17:48:42.935Z",
-  "contentHash": "115c62396d2abd65b6a35be38a02573e58994d6b1a18ca0841dfb329b0d8227f",
+  "updatedAt": "2026-10-20T23:51:34.303Z",
+  "contentHash": "3a3b6830c140609f6e48f5c2169dc180ef8a9272e2e5b9a26042d6fedfa927fc",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T12:16:17.109Z",
+      "updatedAt": "2026-10-20T17:37:05.348Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T10:27:43.943Z",
+      "updatedAt": "2026-10-20T15:53:28.523Z",
       "keyFacts": 0
     }
   ],
@@ -74,7 +74,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -102,10 +102,16 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Zugo: assegnate le direzioni per il periodo 2027-2030",
+          "url": "/articoli-zugo/zugo-assegnazione-mandato-2030/",
+          "excerpt": "Il Consiglio di Stato di Zugo ha assegnato le direzioni per il periodo 2027-2030 e regolato le supplenze dal 1° gennaio 2027.",
+          "date": "2026-10-20T23:44:17.371Z"
+        },
         {
           "title": "Abbonamenti trasporti pubblici Canton Zugo zone e tariffe",
           "url": "/articoli-svizzera/trasporti-pubblici-zugo-abbonamenti/",
@@ -160,7 +166,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T23:51:34.303Z"
     },
     "en": {
       "canton": "ZG",
@@ -217,7 +223,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -245,10 +251,16 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Zug: departments assigned for the 2027–2030 period",
+          "url": "/en/zug-articles/zug-directorates-term-2030/",
+          "excerpt": "The State Council of Zug has assigned the departments for the 2027–2030 term and regulated deputizing arrangements from January 1, 2027.",
+          "date": "2026-10-20T23:44:17.371Z"
+        },
         {
           "title": "Public transport passes Canton Zug zones and fares",
           "url": "/en/swiss-articles/public-transport-zug-subscriptions/",
@@ -303,7 +315,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T23:51:34.303Z"
     },
     "de": {
       "canton": "ZG",
@@ -360,7 +372,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -388,10 +400,16 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Zug: Direktionen für den Zeitraum 2027-2030 zugewiesen",
+          "url": "/de/zug-artikel/zug-direktionen-amtsperiode-2030/",
+          "excerpt": "Der Regierungsrat des Kantons Zug hat die Direktionen für den Zeitraum 2027-2030 zugewiesen und die Stellvertretungen ab dem 1.",
+          "date": "2026-10-20T23:44:17.371Z"
+        },
         {
           "title": "Fahrkarten für öffentliche Verkehrsmittel Kanton Zug Zonen und Tarife",
           "url": "/de/schweiz-artikel/offentliche-verkehrsmittel-zug-abos/",
@@ -446,7 +464,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T23:51:34.303Z"
     },
     "fr": {
       "canton": "ZG",
@@ -503,7 +521,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -531,10 +549,16 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Zoug : attributions des directions pour la période 2027-2030",
+          "url": "/fr/articles-zoug/zoug-directions-mandat-2030/",
+          "excerpt": "Le Conseil d'État de Zoug a attribué les directions pour la période 2027-2030 et réglé les suppléances à compter du 1er janvier 2027.",
+          "date": "2026-10-20T23:44:17.371Z"
+        },
         {
           "title": "Abonnements transports publics Canton Zoug zones et tarifs",
           "url": "/fr/articles-suisse/transports-publics-zoug-abonnements/",
@@ -589,7 +613,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T23:51:34.303Z"
     }
   }
 }

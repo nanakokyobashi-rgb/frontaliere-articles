@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-20T23:20:19.994Z",
-  "contentHash": "c199d3ff6cf86618cfe2768954570b41ecad87328f1b9950c52ca419657c488e",
+  "updatedAt": "2026-10-20T23:51:34.303Z",
+  "contentHash": "ed8892dbe347cf3f80158be1aa23868ee7d09e1a0da1363242c43d346c7d5416",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zugo: assegnate le direzioni per il periodo 2027-2030",
+          "url": "/articoli-zugo/zugo-assegnazione-mandato-2030/",
+          "excerpt": "Il Consiglio di Stato di Zugo ha assegnato le direzioni per il periodo 2027-2030 e regolato le supplenze dal 1° gennaio 2027.",
+          "date": "2026-10-20T23:44:17.371Z"
+        },
+        {
           "title": "Zugo: il Governo mantiene le direzioni dal 2027",
           "url": "/articoli-zugo/zugo-governo-direzioni-2027/",
           "excerpt": "Per il mandato dal 2027, tutti i membri del Governo di Zugo manterranno le direzioni attuali, ha comunicato martedì la Cancelleria dello Stato.",
@@ -82,12 +88,6 @@
           "url": "/articoli-zugo/zugo-piano-direttore-26-1/",
           "excerpt": "La modifica 26/1 prepara le «zone bianche», coordina il Piano direttore con la revisione del PBG e attua RPG 2.",
           "date": "2026-10-17T01:28:47.924Z"
-        },
-        {
-          "title": "Revisione parziale del PBG a Zugo: consultazione dal 17 settembre 2026",
-          "url": "/articoli-zugo/zugo-revisione-legge-edilizia-2026/",
-          "excerpt": "Il Cantone di Zugo avvia la consultazione sulla revisione del PBG per creare più alloggi a prezzi accessibili e semplificare le procedure edilizie.",
-          "date": "2026-10-17T01:12:22.654Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-20T23:20:19.994Z"
+      "updatedAt": "2026-10-20T23:51:34.303Z"
     },
     "en": {
       "canton": "ZG",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zug: departments assigned for the 2027–2030 period",
+          "url": "/en/zug-articles/zug-directorates-term-2030/",
+          "excerpt": "The State Council of Zug has assigned the departments for the 2027–2030 term and regulated deputizing arrangements from January 1, 2027.",
+          "date": "2026-10-20T23:44:17.371Z"
+        },
+        {
           "title": "Zug: the Government has maintained its leadership since 2027",
           "url": "/en/zug-articles/zug-government-directorates-2027/",
           "excerpt": "For the mandate from 2027, all members of the Zug Government will maintain their current leaderships, the State Chancellery said on Tuesday.",
@@ -169,12 +175,6 @@
           "url": "/en/zug-articles/zug-structure-plan-26-1/",
           "excerpt": "The 1/26 amendment prepares the “white zones,” coordinates the master plan with the revision of the PBG, and implements RPG 2.",
           "date": "2026-10-17T01:28:47.924Z"
-        },
-        {
-          "title": "Partial revision of the PBG in Zug: consultation from September 17, 2026",
-          "url": "/en/zug-articles/zug-building-law-revision-2026/",
-          "excerpt": "The Canton of Zug launches the consultation on the revision of the PBG to create more affordable housing and simplify building procedures.",
-          "date": "2026-10-17T01:12:22.654Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-20T23:20:19.994Z"
+      "updatedAt": "2026-10-20T23:51:34.303Z"
     },
     "de": {
       "canton": "ZG",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zug: Direktionen für den Zeitraum 2027-2030 zugewiesen",
+          "url": "/de/zug-artikel/zug-direktionen-amtsperiode-2030/",
+          "excerpt": "Der Regierungsrat des Kantons Zug hat die Direktionen für den Zeitraum 2027-2030 zugewiesen und die Stellvertretungen ab dem 1.",
+          "date": "2026-10-20T23:44:17.371Z"
+        },
+        {
           "title": "Zug: Die Regierung bleibt seit 2027 in der Geschäftsführung",
           "url": "/de/zug-artikel/zug-regierung-direktionen-2027/",
           "excerpt": "Für die Amtszeit ab 2027 werden alle Mitglieder der Regierung in Zug die aktuellen Leitungen beibehalten, teilte die Staatskanzlei am Dienstag mit.",
@@ -256,12 +262,6 @@
           "url": "/de/zug-artikel/zug-richtplan-26-1/",
           "excerpt": "Die Änderung 26/1 bereitet die «weissen Zonen» vor, stimmt den Richtplan auf die Revision des PBG ab und setzt RPG 2 um.",
           "date": "2026-10-17T01:28:47.924Z"
-        },
-        {
-          "title": "Teilrevision des PBG in Zug: Vernehmlassung ab 17. September 2026",
-          "url": "/de/zug-artikel/zug-baugesetz-revision-2026/",
-          "excerpt": "Der Kanton Zug eröffnet die Vernehmlassung zur Revision des PBG, um mehr preisgünstigen Wohnraum zu schaffen und die Bauverfahren zu vereinfachen.",
-          "date": "2026-10-17T01:12:22.654Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-20T23:20:19.994Z"
+      "updatedAt": "2026-10-20T23:51:34.303Z"
     },
     "fr": {
       "canton": "ZG",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zoug : attributions des directions pour la période 2027-2030",
+          "url": "/fr/articles-zoug/zoug-directions-mandat-2030/",
+          "excerpt": "Le Conseil d'État de Zoug a attribué les directions pour la période 2027-2030 et réglé les suppléances à compter du 1er janvier 2027.",
+          "date": "2026-10-20T23:44:17.371Z"
+        },
+        {
           "title": "Zoug : le gouvernement maintient les directions à partir de 2027",
           "url": "/fr/articles-zoug/zoug-gouvernement-directions-2027/",
           "excerpt": "Pour le mandat à partir de 2027, tous les membres du Gouvernement de Zoug maintiendront les directions actuelles, a communiqué mardi la Chancellerie de l'État.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-zoug/plan-directeur-zoug-26-1/",
           "excerpt": "La modification 26/1 prépare les « zones blanches », coordonne le Plan directeur avec la révision du PBG et met en œuvre RPG 2.",
           "date": "2026-10-17T01:28:47.924Z"
-        },
-        {
-          "title": "Révision partielle du PBG à Zoug : consultation à partir du 17 septembre 2026",
-          "url": "/fr/articles-zoug/zoug-revision-loi-construction-2026/",
-          "excerpt": "Le canton de Zoug lance la consultation sur la révision du PBG afin de créer davantage de logements à prix abordables et de simplifier les procédures de construction.",
-          "date": "2026-10-17T01:12:22.654Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-20T23:20:19.994Z"
+      "updatedAt": "2026-10-20T23:51:34.303Z"
     }
   }
 }
