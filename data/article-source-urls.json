@@ -1,9 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/premi-di-cassa-malati-2027-interrogazione-al-governo-442569": {
-    "articleId": "premi-cassa-malati-2027-ticino",
-    "ts": "2026-09-15T00:05:51.697Z",
-    "keyForm": 2
-  },
   "https://comozero.it/attualita/provincia-di-como-lo-stipendio-medio-e-di-30mila-euro-ma-gli-under-35-non-superano-i-20mila": {
     "articleId": "stipendi-como-lombardia-2024",
     "ts": "2026-09-15T00:15:59.285Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenoi.it/2026/10/20/leggi-notizia/argomenti/economia-13/articolo/la-ricerca-della-cisl-dei-laghi-sui-frontalieri-diminuito-il-potere-dacquisto-tassa-della-salut.html": {
     "articleId": "ricerca-cisl-frontalieri-2026",
     "ts": "2026-10-20T19:40:20.584Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/frontalieri-alle-ville-ponti-di-varese-il-confronto-su-lavoro-economia-e-diritti/2713201": {
+    "articleId": "ville-ponti-frontalieri-confronto",
+    "ts": "2026-10-20T21:30:49.829Z",
     "keyForm": 2
   }
 }
