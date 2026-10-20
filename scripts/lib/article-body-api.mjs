@@ -255,16 +255,29 @@ function validatedRegistryIds(section, registry) {
 }
 
 function assertMeta(meta, id, locale) {
-  if (!meta || typeof meta !== 'object') throw new Error(`${id}/${locale}: meta assente`);
-  const result = {};
-  for (const field of META_KEYS) {
-    const value = meta[`blog.article.${id}.${field}`];
-    if (typeof value !== 'string' || !value.trim()) {
-      throw new Error(`${id}/${locale}: meta ${field} mancante o vuoto`);
-    }
-    result[field] = value;
+  if (!meta || typeof meta !== 'object' || Array.isArray(meta)) throw new Error(`${id}/${locale}: meta assente`);
+  const title = meta[`blog.article.${id}.title`];
+  const excerpt = meta[`blog.article.${id}.excerpt`];
+  const imageAlt = meta[`blog.article.${id}.imageAlt`];
+  if (typeof title !== 'string' || !title.trim()) {
+    throw new Error(`${id}/${locale}: meta title mancante o vuoto`);
   }
-  return result;
+  if (typeof excerpt !== 'string') {
+    throw new Error(`${id}/${locale}: meta excerpt mancante o non testuale`);
+  }
+  if (imageAlt !== undefined && imageAlt !== null && typeof imageAlt !== 'string') {
+    throw new Error(`${id}/${locale}: meta imageAlt non testuale`);
+  }
+
+  // title ed excerpt sono sempre presenti nei file metadata; excerpt può essere
+  // vuoto. imageAlt è opzionale nel writer storico, quindi l'API lo rende
+  // esplicito come null senza inventare una descrizione. Le stringhe whitespace
+  // restano tali, in linea con il writer che le emette.
+  return {
+    title,
+    excerpt,
+    imageAlt: imageAlt === undefined || imageAlt === null || imageAlt === '' ? null : imageAlt,
+  };
 }
 
 export function buildArticleBodyPayload({ section, locale, id, meta, source }) {
@@ -330,7 +343,9 @@ function assertPayloadShape(payload, { section, locale, id }) {
     || Object.keys(payload.meta).sort().join(',') !== [...META_KEYS].sort().join(',')) {
     throw new Error('meta payload non valido');
   }
-  if (META_KEYS.some((key) => typeof payload.meta[key] !== 'string' || !payload.meta[key].trim())) {
+  if (typeof payload.meta.title !== 'string' || !payload.meta.title.trim()
+    || typeof payload.meta.excerpt !== 'string'
+    || (payload.meta.imageAlt !== null && typeof payload.meta.imageAlt !== 'string')) {
     throw new Error('meta payload incompleto');
   }
   if (!payload.translations || typeof payload.translations !== 'object' || Array.isArray(payload.translations)) {
