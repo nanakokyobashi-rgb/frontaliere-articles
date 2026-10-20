@@ -216,21 +216,34 @@ function configFromEnv(env) {
   };
 }
 
+function cancelR2ResponseBody(response) {
+  try {
+    return Promise.resolve(response?.body?.cancel?.()).catch(() => {});
+  } catch {
+    return Promise.resolve();
+  }
+}
+
 /**
  * Build the signed R2 transport. Keeping the transport injectable makes the
- * lease race testable without ever contacting the production bucket.
+ * lease race testable without ever contacting the production bucket. A
+ * caller-supplied deadline is an absolute Unix timestamp in milliseconds and
+ * bounds both the request and any response body the caller reads.
  */
 export function createR2Request(env = process.env, { fetchImpl = globalThis.fetch, now = () => new Date() } = {}) {
   const config = configFromEnv(env);
   if (typeof fetchImpl !== 'function') throw new Error('[r2-section-lock] fetch is unavailable');
 
-  return async ({ method, key, body = '', headers = {} }) => {
+  return async ({ method, key, body = '', headers = {}, deadline }) => {
     // Cloudflare can rewrite a strong R2 ETag to a weak validator when the
-    // response is compressed. Lock readers need a strong ETag for If-Match,
-    // so make GET/HEAD requests unambiguously identity-encoded before
-    // signing them. PUT/DELETE keep their caller-provided headers.
+    // response is compressed. Weak validators are not safe for the If-Match
+    // CAS used by the lease protocol, so metadata reads must stay unencoded.
     const requestHeaders = method === 'GET' || method === 'HEAD'
       ? {
+        // The identity encoding is part of the CAS safety contract, not a
+        // caller preference. Remove every spelling before adding one
+        // canonical header so a mixed-case override cannot produce a weak
+        // ETag or duplicate signed headers.
         ...Object.fromEntries(
           Object.entries(headers).filter(([name]) => name.toLowerCase() !== 'accept-encoding'),
         ),
@@ -238,13 +251,94 @@ export function createR2Request(env = process.env, { fetchImpl = globalThis.fetc
       }
       : headers;
     const signed = signRequest({ ...config, now: now(), method, key, body, headers: requestHeaders });
-    const response = await fetchImpl(signed.url, {
+    const deadlineAt = deadline === undefined ? Date.now() + 30_000 : deadline;
+    if (!Number.isFinite(deadlineAt)) throw new Error('[r2-section-lock] request deadline must be finite');
+    const timeoutMs = deadlineAt - Date.now();
+    const timeoutError = new Error('[r2-section-lock] R2 request deadline exceeded');
+    timeoutError.name = 'TimeoutError';
+    timeoutError.code = 'R2_REQUEST_TIMEOUT';
+    if (timeoutMs <= 0) throw timeoutError;
+
+    const controller = new AbortController();
+    let timedOut = false;
+    let timeoutId;
+    let receivedResponse;
+    const timeout = new Promise((resolve, reject) => {
+      timeoutId = setTimeout(() => {
+        timedOut = true;
+        controller.abort(timeoutError);
+        cancelR2ResponseBody(receivedResponse);
+        reject(timeoutError);
+      }, timeoutMs);
+    });
+    const responsePromise = Promise.resolve().then(() => fetchImpl(signed.url, {
       method,
       headers: signed.headers,
       ...(method === 'GET' || method === 'HEAD' || method === 'DELETE' ? {} : { body: signed.body }),
-      signal: typeof AbortSignal?.timeout === 'function' ? AbortSignal.timeout(30_000) : undefined,
+      signal: controller.signal,
+    })).then((response) => {
+      if (timedOut || Date.now() >= deadlineAt) {
+        timedOut = true;
+        controller.abort(timeoutError);
+        cancelR2ResponseBody(response);
+        throw timeoutError;
+      }
+      receivedResponse = response;
+      return response;
     });
-    return response;
+    try {
+      const response = await Promise.race([responsePromise, timeout]);
+      const responseNeedsBody = response?.body
+        && ((method === 'GET' || method === 'HEAD')
+          ? response.status !== 404
+          : !(response.status >= 200 && response.status < 300)
+            && response.status !== 409 && response.status !== 412);
+      if (responseNeedsBody && typeof response.text === 'function') {
+        const readText = response.text.bind(response);
+        try {
+          Object.defineProperty(response, 'text', {
+            configurable: true,
+            value: (...args) => {
+              if (Date.now() >= deadlineAt) {
+                timedOut = true;
+                controller.abort(timeoutError);
+                cancelR2ResponseBody(response);
+                clearTimeout(timeoutId);
+                return Promise.reject(timeoutError);
+              }
+              return Promise.race([
+                Promise.resolve().then(() => readText(...args)),
+                timeout,
+              ]).then((text) => {
+                if (Date.now() >= deadlineAt) {
+                  timedOut = true;
+                  controller.abort(timeoutError);
+                  cancelR2ResponseBody(response);
+                  throw timeoutError;
+                }
+                return text;
+              }).finally(() => clearTimeout(timeoutId));
+            },
+          });
+        } catch {
+          // The deadline timer still aborts/cancels a non-extensible response body.
+        }
+      } else {
+        await Promise.race([cancelR2ResponseBody(response), timeout]);
+        if (Date.now() >= deadlineAt) {
+          timedOut = true;
+          controller.abort(timeoutError);
+          cancelR2ResponseBody(response);
+          throw timeoutError;
+        }
+        clearTimeout(timeoutId);
+      }
+      return response;
+    } catch (error) {
+      clearTimeout(timeoutId);
+      if (timedOut) throw timeoutError;
+      throw error;
+    }
   };
 }
 
@@ -475,13 +569,26 @@ function leaseIdForSection(section, options = {}) {
   return undefined;
 }
 
+function leaseForSection(section, options = {}) {
+  if (!Array.isArray(options.locks)) return undefined;
+  return options.locks.find((lock) => lock?.section === section);
+}
+
 /**
  * Extend a lease only if the exact lock read above is still present. A late
  * heartbeat must never revive a lease that another owner already replaced.
  */
 export async function renewSectionLock(
   section,
-  { owner, leaseId, request = createR2Request(), now = Date.now, leaseMs = LOCK_LEASE_MS } = {},
+  {
+    owner,
+    leaseId,
+    lock,
+    onRenewed = () => {},
+    request = createR2Request(),
+    now = Date.now,
+    leaseMs = LOCK_LEASE_MS,
+  } = {},
 ) {
   asString(owner, 'owner');
   asString(leaseId, 'leaseId');
@@ -510,6 +617,8 @@ export async function renewSectionLock(
     console.log(`[r2-section-lock] ${section} changed before renewal; leaving it intact`);
     return false;
   }
+  if (lock) lock.etag = replacement.etag;
+  await onRenewed({ section, owner, leaseId, etag: replacement.etag });
   return true;
 }
 
@@ -518,7 +627,8 @@ export async function renewSectionLocks(sections, options = {}) {
   const normalized = parseSections(sections.join(','));
   for (const section of normalized) {
     const leaseId = leaseIdForSection(section, options);
-    if (!(await renewSectionLock(section, { ...options, leaseId }))) return false;
+    const lock = leaseForSection(section, options);
+    if (!(await renewSectionLock(section, { ...options, leaseId, lock }))) return false;
   }
   return true;
 }
@@ -550,6 +660,7 @@ export async function renewSectionLocksUntilStopped(
     leaseId,
     leaseIds,
     locks,
+    onRenewed = () => {},
     request = createR2Request(),
     now = Date.now,
     leaseMs = LOCK_LEASE_MS,
@@ -577,6 +688,7 @@ export async function renewSectionLocksUntilStopped(
       leaseId,
       leaseIds,
       locks,
+      onRenewed,
       request,
       now,
       leaseMs,
@@ -589,6 +701,7 @@ export async function renewSectionLocksUntilStopped(
         leaseId,
         leaseIds,
         locks,
+        onRenewed,
         request,
         now,
         leaseMs,
@@ -604,7 +717,7 @@ export async function renewSectionLocksUntilStopped(
 
 export async function releaseSectionLock(
   section,
-  { owner, leaseId, request = createR2Request() } = {},
+  { owner, leaseId, etag, request = createR2Request() } = {},
 ) {
   asString(owner, 'owner');
   asString(leaseId, 'leaseId');
@@ -616,13 +729,14 @@ export async function releaseSectionLock(
     console.log(`[r2-section-lock] ${section} is owned by another run; leaving it intact`);
     return false;
   }
-  if (!current.etag) {
+  const matchEtag = current.etag ?? normalizeS3MatchEtag(etag);
+  if (!matchEtag) {
     throw new Error(`[r2-section-lock] lock ${section} has no ETag; refusing an unsafe release`);
   }
   const response = await request({
     method: 'DELETE',
     key: lockKey(section),
-    headers: { 'if-match': current.etag },
+    headers: { 'if-match': matchEtag },
   });
   if (response.status === 404 || response.status === 409 || response.status === 412) return false;
   if (response.status < 200 || response.status >= 300) {
@@ -641,6 +755,7 @@ export async function releaseSectionLocks(locks, options = {}) {
         ...options,
         owner: lock.owner,
         leaseId: lock.leaseId,
+        etag: lock.etag,
       })) released.push(lock.section);
     } catch (error) {
       firstError ??= error;
@@ -685,7 +800,11 @@ function writeSectionLeaseFile(file, owner, locks) {
       `${JSON.stringify({
         version: SECTION_LEASE_FILE_VERSION,
         owner,
-        locks: locks.map(({ section, leaseId }) => ({ section, leaseId })),
+        locks: locks.map(({ section, leaseId, etag }) => ({
+          section,
+          leaseId,
+          ...(etag ? { etag } : {}),
+        })),
       })}\n`,
       { encoding: 'utf8', mode: 0o600 },
     );
@@ -721,7 +840,17 @@ function readSectionLeaseFile(file, owner, sections, { allowMissing = false } = 
     if (!lock || typeof lock.leaseId !== 'string' || lock.leaseId.length === 0) {
       throw new Error(`[r2-section-lock] lease context file has no leaseId for ${section}`);
     }
-    return { section, owner, leaseId: lock.leaseId, key: lockKey(section) };
+    const etag = lock.etag === undefined ? undefined : normalizeS3MatchEtag(lock.etag);
+    if (lock.etag !== undefined && !etag) {
+      throw new Error(`[r2-section-lock] lease context file has no strong ETag for ${section}`);
+    }
+    return {
+      section,
+      owner,
+      leaseId: lock.leaseId,
+      key: lockKey(section),
+      ...(etag ? { etag } : {}),
+    };
   });
 }
 
@@ -769,6 +898,7 @@ async function main(args = process.argv.slice(2), env = process.env) {
         owner,
         locks,
         request,
+        onRenewed: () => writeSectionLeaseFile(leaseFile, owner, locks),
         intervalMs,
         initialDelayMs,
       });
