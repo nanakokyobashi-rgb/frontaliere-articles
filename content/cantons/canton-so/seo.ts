@@ -236,6 +236,123 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-soletta-parlamento-budget-2027-inchiesta-soh': {
+    title: 'Soletta: Governo approva preventivo 2027, sessione settembre e inchiesta soH',
+    description: 'Governo approva budget 2027 con Globalbudget; Parlamento in sessione 1-9 settembre con 51 oggetti; GPK pubblica rapporto su irregolarità alla soH.',
+    keywords: 'frontalieri, ticino, svizzera, italia, soletta, governo, approva, preventivo',
+    ogTitle: 'Soletta: Governo approva preventivo 2027 e Parlamento in sessione',
+    ogDescription: 'Il Regierungsrat ha approvato il Voranschlag 2027 con Globalbudget e pianificazione pluriennale. Il Kantonsrat si riunisce a settembre con 51 affari, mentre la GPK ha pubblicato l\'inchiesta su irregolarità finanziarie e di personale alla Solothurner',
+    canonicalPath: '/articoli-soletta/soletta-parlamento-budget-2027-inchiesta-soh/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Soletta: Governo approva preventivo 2027, sessione settembre e inchiesta soH",
+      "description": "Governo approva budget 2027 con Globalbudget; Parlamento in sessione 1-9 settembre con 51 oggetti; GPK pubblica rapporto su irregolarità alla soH.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-soletta-parlamento-budget-2027-inchiesta-soh.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T06:13:06+00:00",
+      "dateModified": "2026-10-20T06:13:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/soletta-parlamento-budget-2027-inchiesta-soh/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-governo-soletta-ottobre-2026': {
+    title: 'Governo di Soletta: decisioni del 20 ottobre 2026',
+    description: 'Il Governo di Soletta elenca le decisioni del 20 ottobre 2026 su NEST, scuola, FamEL, polizia a Lugano, sanità e dossier al Consiglio cantonale e le scadenze.',
+    keywords: 'frontalieri, ticino, svizzera, italia, governo, soletta, decisioni, ottobre',
+    ogTitle: 'Soletta, decisioni del Governo del 20 ottobre 2026',
+    ogDescription: 'Dal rinnovo della soluzione fiscale NEST alla formazione dei docenti, il comunicato del Governo di Soletta riporta misure per il 2027, la cooperazione BRNW, l\'intervento di polizia a Lugano e i dossier trasmessi al Consiglio cantonale.',
+    canonicalPath: '/articoli-soletta/governo-soletta-ottobre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Governo di Soletta: decisioni del 20 ottobre 2026",
+      "description": "Il Governo di Soletta elenca le decisioni del 20 ottobre 2026 su NEST, scuola, FamEL, polizia a Lugano, sanità e dossier al Consiglio cantonale e le scadenze.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-governo-soletta-ottobre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T15:04:51+00:00",
+      "dateModified": "2026-10-20T15:04:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/governo-soletta-ottobre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-soletta-regierungsrat-attiparlamentari-2026': {
+    title: 'Soletta: 15 risposte a iniziative parlamentari e progetto diritti voto',
+    description: 'Il 20 ottobre 2026 il Regierungsrat solettese ha reso noti 15 risposte a iniziative parlamentari, 5 prese di posizione su soH e il messaggio per abolire',
+    keywords: 'frontalieri, ticino, svizzera, italia, soletta, risposte, iniziative, parlamentari',
+    ogTitle: 'Soletta: 15 risposte parlamentari e progetto abolizione esclusione voto',
+    ogDescription: 'Il Governo solettese ha pubblicato i documenti della 34ª seduta 2026: 15 iniziative parlamentari evase, cinque incarichi urgenti sull\'ospedale cantonale soH (governance, consiglio d\'amministrazione, remunerazioni, risparmi personale) e messaggio',
+    canonicalPath: '/articoli-soletta/soletta-regierungsrat-attiparlamentari-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Soletta: 15 risposte a iniziative parlamentari e progetto diritti voto",
+      "description": "Il 20 ottobre 2026 il Regierungsrat solettese ha reso noti 15 risposte a iniziative parlamentari, 5 prese di posizione su soH e il messaggio per abolire",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-soletta-regierungsrat-attiparlamentari-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T15:42:25+00:00",
+      "dateModified": "2026-10-20T15:42:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/soletta-regierungsrat-attiparlamentari-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

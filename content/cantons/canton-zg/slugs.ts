@@ -11,6 +11,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'zugo-revisione-legge-edilizia-2026': { it: 'zugo-revisione-legge-edilizia-2026', en: 'zug-building-law-revision-2026', de: 'zug-baugesetz-revision-2026', fr: 'zoug-revision-loi-construction-2026' },
  'zugo-piano-direttore-26-1': { it: 'zugo-piano-direttore-26-1', en: 'zug-structure-plan-26-1', de: 'zug-richtplan-26-1', fr: 'plan-directeur-zoug-26-1' },
  'eventi-weekend-zugo': { it: 'eventi-weekend-zugo', en: 'weekend-events-zug', de: 'wochenend-veranstaltungen-zug', fr: 'evenements-week-end-zoug' },
+ 'ricorso-federale-espulsione-zugo': { it: 'ricorso-federale-espulsione-zugo', en: 'federal-appeal-expulsion-zug', de: 'bundesgerichtliche-beschwerde-ausweisung-zug', fr: 'recours-federal-expulsion-zoug' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

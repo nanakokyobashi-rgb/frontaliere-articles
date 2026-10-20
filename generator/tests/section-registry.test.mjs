@@ -1617,7 +1617,18 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   assert.match(wf, /nessun input publish-api nel delta/);
   const filters = [...wf.slice(0, wf.indexOf('\n  schedule:')).matchAll(/^      - '([^']+)'$/gm)].map((m) => m[1]);
   const covered = (file) => filters.some((p) => p === file || (p.endsWith('/**') && file.startsWith(p.slice(0, -2))));
-  for (const p of ['sections/**', 'scripts/lib/section-registry.mjs', 'scripts/publish-section-edge.mjs', 'scripts/lib/delete-cdn-file.sh', 'generator/scripts/load-rc-env.mjs']) {
+  for (const p of [
+    'sections/**',
+    'scripts/lib/section-registry.mjs',
+    'scripts/publish-section-edge.mjs',
+    'scripts/lib/delete-cdn-file.sh',
+    'scripts/lib/upload-cdn-file.sh',
+    'scripts/lib/r2-image-lease-process.sh',
+    'scripts/lib/r2-image-namespace-lock.mjs',
+    'scripts/lib/r2-section-lock.mjs',
+    'scripts/lib/is-invoked-directly.mjs',
+    'generator/scripts/load-rc-env.mjs',
+  ]) {
     assert.ok(filters.includes(p), p);
   }
   // La chiusura degli import (statici e dinamici, relativi) dei quattro

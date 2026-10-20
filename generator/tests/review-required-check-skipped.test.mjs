@@ -8,8 +8,8 @@
  * L'invariante qui sotto modella il comportamento osservabile del workflow:
  * su una PR non-draft, `review_gate=skipped` deve essere un fallimento del job;
  * sugli eventi che non richiedono una review non deve diventare un falso rosso.
- * L'unica eccezione e' la PR `engine-lockstep-auto`: il mirror e' gia' stato
- * reviewato sul sito e qui passa dal gate generator-ci engine/host.
+ * Anche il mirror `engine-lockstep-auto` deve ricevere body contract e review:
+ * la review del sito non produce il verdetto richiesto dal corpus.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -39,20 +39,33 @@ function stepBlock(src, name) {
  * presenza. Se lo YAML perde la guardia o l'exit non-zero, il caso skipped
  * torna verde e questo test lo espone.
  */
-function requiredCheckOutcome({ step, eventName, draft, headRef = '', reviewGateOutcome }) {
+function requiredCheckOutcome({
+  step,
+  eventName,
+  draft,
+  headRef = '',
+  headRepoIsCurrent = false,
+  prNumber = '',
+  reviewGateOutcome,
+}) {
   const failClosedGuard =
     /always\(\)/.test(step) &&
     /github\.event_name\s*==\s*['"]pull_request['"]/.test(step) &&
     /github\.event\.pull_request\.draft\s*==\s*false/.test(step) &&
+    /github\.event_name\s*==\s*['"]workflow_dispatch['"]/.test(step) &&
+    /inputs\.pr_number\s*!=\s*''/.test(step) &&
     /steps\.review_gate\.outcome\s*==\s*['"]skipped['"]/.test(step) &&
     /\bexit\s+1\b/.test(step);
   const mirrorExemption =
     /github\.event_name\s*!=\s*['"]pull_request['"]/.test(step) &&
     /github\.event\.pull_request\.head\.ref\s*!=\s*['"]engine-lockstep-auto['"]/.test(step) &&
     /github\.event\.pull_request\.head\.repo\.full_name\s*!=\s*github\.repository/.test(step);
+  const reviewRequiredEvent =
+    (eventName === 'pull_request' && draft === false) ||
+    (eventName === 'workflow_dispatch' && prNumber !== '');
+  const mirrorIsExempt = headRef === 'engine-lockstep-auto' && headRepoIsCurrent && mirrorExemption;
 
-  return failClosedGuard && mirrorExemption && eventName === 'pull_request' && draft === false &&
-    headRef !== 'engine-lockstep-auto' && reviewGateOutcome === 'skipped'
+  return failClosedGuard && !mirrorIsExempt && reviewRequiredEvent && reviewGateOutcome === 'skipped'
     ? 'failure'
     : 'success';
 }
@@ -66,21 +79,8 @@ test('un run PR che soddisfa il check con review gate skipped deve essere rosso'
         step,
         eventName: 'pull_request',
         draft: false,
-        headRef: 'content-fix',
-        reviewGateOutcome: 'skipped',
-      }),
-      requiredCheckOutcome({
-        step,
-        eventName: 'pull_request',
-        draft: false,
-        headRef: 'content-fix',
-        reviewGateOutcome: 'failure',
-      }),
-      requiredCheckOutcome({
-        step,
-        eventName: 'push',
-        draft: false,
-        headRef: '',
+        headRef: 'engine-lockstep-auto',
+        headRepoIsCurrent: true,
         reviewGateOutcome: 'skipped',
       }),
       requiredCheckOutcome({
@@ -88,12 +88,56 @@ test('un run PR che soddisfa il check con review gate skipped deve essere rosso'
         eventName: 'pull_request',
         draft: false,
         headRef: 'engine-lockstep-auto',
+        headRepoIsCurrent: false,
+        reviewGateOutcome: 'skipped',
+      }),
+      requiredCheckOutcome({
+        step,
+        eventName: 'pull_request',
+        draft: false,
+        reviewGateOutcome: 'skipped',
+      }),
+      requiredCheckOutcome({
+        step,
+        eventName: 'pull_request',
+        draft: false,
+        reviewGateOutcome: 'failure',
+      }),
+      requiredCheckOutcome({
+        step,
+        eventName: 'push',
+        draft: false,
+        reviewGateOutcome: 'skipped',
+      }),
+      requiredCheckOutcome({
+        step,
+        eventName: 'pull_request',
+        draft: true,
+        reviewGateOutcome: 'skipped',
+      }),
+      requiredCheckOutcome({
+        step,
+        eventName: 'workflow_dispatch',
+        draft: false,
+        prNumber: '3018',
+        reviewGateOutcome: 'skipped',
+      }),
+      requiredCheckOutcome({
+        step,
+        eventName: 'workflow_dispatch',
+        draft: false,
+        prNumber: '',
         reviewGateOutcome: 'skipped',
       }),
     ],
-    ['failure', 'success', 'success', 'success'],
-    'Una PR di contenuto con il review gate skipped deve essere rossa; la PR mirror e\u0027 esente perche\u0027 reviewata sul sito.',
+    ['failure', 'failure', 'failure', 'success', 'success', 'success', 'failure', 'success'],
+    'Ogni PR non-draft, incluso il mirror sullo stesso repo, il branch omonimo da fork e una PR di recovery, deve fallire se il review gate viene saltato.',
   );
+
+  const bodyContract = stepBlock(yaml, 'PR-body completeness + multi-issue Closes (zero-Claude)');
+  assert.match(bodyContract, /github\.event\.pull_request\.draft\s*==\s*false/);
+  assert.doesNotMatch(bodyContract, /head\.ref\s*!=\s*['"]engine-lockstep-auto['"]/);
+  assert.doesNotMatch(bodyContract, /head\.repo\.full_name\s*!=\s*github\.repository/);
 });
 
 test('workflow_dispatch risolve e valida la base PR prima dei gate diff-scoped', () => {
@@ -145,17 +189,14 @@ test('workflow_dispatch risolve e valida la base PR prima dei gate diff-scoped',
   assert.match(resolve, /github\.event_name == 'workflow_dispatch'/);
   assert.match(resolve, /github\.event\.pull_request\.number \|\| inputs\.pr_number/);
   assert.match(resolve, /inputs\.head_sha \|\| github\.event\.pull_request\.head\.sha \|\| github\.sha/);
-  assert.match(resolve, /La PR indicata deve essere aperta, non draft/);
+  assert.match(resolve, /La PR indicata deve essere aperta e non draft/);
+  assert.match(resolve, /should_review=true/);
+  assert.doesNotMatch(resolve, /github\.event\.pull_request\.head\.ref\s*!=\s*['"]engine-lockstep-auto['"]/);
+  assert.doesNotMatch(resolve, /engine-lockstep-auto del repository/);
   const skipped = stepBlock(yaml, 'Fail when required review gate is skipped');
   assert.match(skipped, /github\.event_name == 'workflow_dispatch'/);
   assert.match(skipped, /inputs\.pr_number/);
-  assert.match(skipped, /github\.event_name != 'pull_request'/);
-  assert.match(skipped, /github\.event\.pull_request\.head\.ref != 'engine-lockstep-auto'/);
-  assert.match(skipped, /github\.event\.pull_request\.head\.repo\.full_name != github\.repository/);
+  assert.doesNotMatch(skipped, /head\.ref\s*!=\s*['"]engine-lockstep-auto['"]/);
+  assert.doesNotMatch(skipped, /head\.repo\.full_name\s*!=\s*github\.repository/);
 
-  for (const name of ['PR-body completeness + multi-issue Closes (zero-Claude)', 'Resolve PR']) {
-    const block = stepBlock(yaml, name);
-    assert.match(block, /github\.event\.pull_request\.head\.ref != 'engine-lockstep-auto'/);
-    assert.match(block, /github\.event\.pull_request\.head\.repo\.full_name != github\.repository/);
-  }
 });

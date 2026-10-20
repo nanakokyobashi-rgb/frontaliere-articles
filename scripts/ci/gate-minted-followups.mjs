@@ -187,14 +187,15 @@ export function partitionMintedItems(body, opts = {}) {
 
 /** Partition a daily bucket while retaining each stable heading and item state. */
 export function partitionDailyBucketItems(body, opts = {}) {
-  const src = String(body || '');
+  const raw = String(body || '');
+  const bodyDailyKey = dailyKeyFromBucketBody(raw);
+  const dailyKey = String(opts.dailyKey || bodyDailyKey || '').trim();
+  const src = normalizeDailyItemIdsForKey(raw, bodyDailyKey || dailyKey);
   const parsed = parseFollowupItems(src);
   if (hasUnterminatedMarkdownFence(src)
       || !parsed.length || !hasStableItemIds(src) || !hasDailyBucketRepositoryConsistency(src)) {
     return { head: src, valid: [], demoted: [], unparsed: true };
   }
-  const bodyDailyKey = dailyKeyFromBucketBody(src);
-  const dailyKey = String(opts.dailyKey || bodyDailyKey || '').trim();
   if (!bodyDailyKey || (opts.dailyKey && bodyDailyKey !== dailyKey)
       || !hasStableItemIdsForDailyKey(parsed, bodyDailyKey)
       || !hasStableItemIdsForDailyKey(parsed, dailyKey)) {
@@ -264,6 +265,69 @@ export function partitionDailyBucketItems(body, opts = {}) {
     rewritten,
     unparsed: false,
   };
+}
+
+/**
+ * Repair the one truncated daily-ID shape emitted by the historical triage prompt.
+ *
+ * A bucket declares its day in the header, so `FU-YYYY-MM-NNN` is unambiguous only
+ * when its month matches that declared day.  Normalize that exact shape before the
+ * strict parser sees it; every other malformed/protected heading remains untouched
+ * and therefore still fails closed in `partitionDailyBucketItems`.
+ */
+export function normalizeDailyItemIdsForKey(body, dailyKey) {
+  const source = String(body || '');
+  const key = String(dailyKey || '').trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(key)) return source;
+
+  const lines = source.split('\n');
+  const candidateLines = [];
+  const seenIds = new Set();
+  let fence = null;
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index];
+    const marker = /^\s*(`{3,}|~{3,})(.*)$/.exec(line);
+    const quoted = /^\s*>/.test(line);
+    const protectedLine = quoted || Boolean(fence);
+
+    if (!protectedLine) {
+      const stable = /^(#{2,3})\s+(FU-\d{4}-\d{2}-\d{2}-\d{3})\s*[—–-]\s*.*$/i.exec(line);
+      const truncated = /^(#{2,3}\s+)FU-(\d{4}-\d{2})-(\d{3})(\s*[—–-]\s*.*)$/i.exec(line);
+      const itemLike = /^(#{2,3})\s+FU-/i.test(line);
+
+      if (stable) {
+        const id = stable[2].toUpperCase();
+        if (seenIds.has(id)) return source;
+        seenIds.add(id);
+      } else if (truncated) {
+        if (truncated[2] !== key.slice(0, 7)) return source;
+        const id = followupItemId(key, Number(truncated[3]));
+        if (seenIds.has(id)) return source;
+        seenIds.add(id);
+        candidateLines.push({ index, match: truncated, id });
+      } else if (itemLike) {
+        // Do not guess at a second malformed shape (missing sequence, separator,
+        // or date component); the normal stable-ID gate must reject it.
+        return source;
+      }
+    }
+
+    if (fence) {
+      if (!quoted && marker && marker[1][0] === fence.char
+          && marker[1].length >= fence.length && /^\s*$/.test(marker[2])) {
+        fence = null;
+      }
+    } else if (!quoted && marker) {
+      fence = { char: marker[1][0], length: marker[1].length };
+    }
+  }
+
+  if (!candidateLines.length) return source;
+  for (const { index, match, id } of candidateLines) {
+    lines[index] = `${match[1]}${id}${match[4]}`;
+  }
+  return lines.join('\n');
 }
 
 /** Rebuild a daily body without changing stable IDs, source order, or item states. */
@@ -455,9 +519,13 @@ export function decideMintGate(issue, opts = {}) {
  * parsed item has a stable ID and passes the shared acceptance/machine oracles.
  */
 export function decideDailyMintGate(issue, opts = {}) {
-  const src = String(issue?.body || '');
-  const state = bucketState(src);
   const daily = dailyBucketInfo(issue?.title || '');
+  // Repair the historical truncated-ID emission before any structural reader runs;
+  // otherwise the malformed heading hides every item and the repository-consistency
+  // guard exits before the deterministic normalizer can prove the repair safe.
+  const rawSrc = String(issue?.body || '');
+  const src = normalizeDailyItemIdsForKey(rawSrc, daily?.dailyKey || '');
+  const state = bucketState(src);
   if (hasUnterminatedMarkdownFence(src)) {
     return { action: 'skip', reason: 'unterminated-markdown-fence', valid: [], demoted: [], duplicates: [], body: null };
   }
@@ -1221,17 +1289,24 @@ function recoverableDailyIdentities(open, repoArgs, sourceLookups) {
         '--json', 'number,title,body,createdAt,labels'], { allowFail: true }));
       const actualIdentity = dailyBucketIdentity(issue?.title || '');
       const info = dailyBucketInfo(issue?.title || '');
-      const state = issue ? bucketState(issue.body || '') : null;
-      if (!issue || actualIdentity !== identity || !info || typeof issue.body !== 'string'
-          || hasUnterminatedMarkdownFence(issue.body)
-          || !hasDailyBucketRepositoryConsistency(issue.body, info.targetRepository)
+      // Historical daily buckets can carry the one recoverable truncated-ID shape
+      // handled by the mint gate. Normalize before the recovery preflight too:
+      // otherwise this path rejects the body before `dailyBucketSourcePrNumbers()`
+      // can extract its source PRs, leaving a safe bucket collecting forever.
+      const recoveryBody = issue && info && typeof issue.body === 'string'
+        ? normalizeDailyItemIdsForKey(issue.body, info.dailyKey)
+        : null;
+      const state = recoveryBody === null ? null : bucketState(recoveryBody);
+      if (!issue || actualIdentity !== identity || !info || recoveryBody === null
+          || hasUnterminatedMarkdownFence(recoveryBody)
+          || !hasDailyBucketRepositoryConsistency(recoveryBody, info.targetRepository)
           || !['collecting', 'sealed'].includes(state)) {
         readable = false;
         console.log(`⚠️ daily ${identity}: prova storica incompleta/illeggibile su #${member.number} → nessun sealing da recovery.`);
         break;
       }
       if (state === 'collecting') hasCollecting = true;
-      sourcePrs.push(...dailyBucketSourcePrNumbers(issue.body));
+      sourcePrs.push(...dailyBucketSourcePrNumbers(recoveryBody));
     }
     // A group made only of sealed buckets needs queue repair, not historical
     // recovery. Mixed groups may be consolidated and sealed again after proof.

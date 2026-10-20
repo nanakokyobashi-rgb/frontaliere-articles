@@ -42,9 +42,9 @@
  *
  * Il cap nasceva con una soglia sola per `description` e `ogDescription`, il
  * che risolveva il rosso ma rifaceva lo stesso errore un livello piu' in
- * basso: il vincolo piu' stretto (lo snippet di Google, 160) diventava il
+ * basso: il vincolo piu' stretto (lo snippet di Google, 150) diventava il
  * tetto anche per la card social, che ne regge molti di piu'. Ora
- * `SEO_DESCRIPTION_BUDGETS` tiene un budget per campo — 160 alla description
+ * `SEO_DESCRIPTION_BUDGETS` tiene un budget per campo — 150 alla description
  * (che alimenta anche `structuredData.description`), 250 alla ogDescription —
  * e lo scan sull'output misura ogni campo col proprio metro.
  *
@@ -61,12 +61,15 @@ import { fileURLToPath } from 'node:url';
 import { truncateToClause } from '../../host/shared/clauseTail.mjs';
 import { stripExcerptMarkdown } from '../scripts/lib/article-excerpt.mjs';
 import {
+  SEO_DESCRIPTION_MAX as SHARED_SEO_DESCRIPTION_MAX,
+  SEO_OG_DESCRIPTION_MAX as SHARED_SEO_OG_DESCRIPTION_MAX,
   SEO_DESCRIPTION_MIN as SHARED_SEO_DESCRIPTION_MIN,
   assertSeoDescriptionMinimum,
 } from '../scripts/lib/seo-description-contract.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
+const TITLE_SUFFIX = path.join(ROOT, 'host', 'shared', 'titleSuffix.ts');
 const SEO_DIR = path.join(ROOT, 'content', 'seo');
 
 /** Il tetto duro di `tests/seo-description-length.test.ts` sul sito. */
@@ -99,16 +102,12 @@ function sliceConst(src, header) {
 
 function extractCapBlock() {
   const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
-  const max = src.match(/^const SEO_DESCRIPTION_MAX = (\d+);$/m);
-  if (!max) throw new Error('SEO_DESCRIPTION_MAX non trovato in create-article.mjs');
-  const ogMax = src.match(/^const SEO_OG_DESCRIPTION_MAX = (\d+);$/m);
-  if (!ogMax) throw new Error('SEO_OG_DESCRIPTION_MAX non trovato in create-article.mjs');
   const maxBodyKeys = src.match(/^const MAX_BODY_KEYS = (\d+);$/m);
   if (!maxBodyKeys) throw new Error('MAX_BODY_KEYS non trovato in create-article.mjs');
   const block = [
     sliceFn(src, 'function truncateAtWordBoundary(text, maxLen) {'),
-    `const SEO_DESCRIPTION_MAX = ${max[1]};`,
-    `const SEO_OG_DESCRIPTION_MAX = ${ogMax[1]};`,
+    `const SEO_DESCRIPTION_MAX = ${SHARED_SEO_DESCRIPTION_MAX};`,
+    `const SEO_OG_DESCRIPTION_MAX = ${SHARED_SEO_OG_DESCRIPTION_MAX};`,
     `const MAX_BODY_KEYS = ${maxBodyKeys[1]};`,
     // Estratto dal sorgente, non riscritto: se la mappa dei budget cambia
     // forma il test la vede, invece di misurare una copia divergente.
@@ -153,7 +152,13 @@ const OFFENDER =
 describe('clampSeoDescriptions', () => {
   it('mantiene entrambi i limiti hard della description del sito', () => {
     expect(SEO_DESCRIPTION_MIN).toBe(SITE_HARD_MIN);
+    expect(SEO_DESCRIPTION_MAX).toBe(150);
     expect(SEO_DESCRIPTION_MAX).toBeLessThan(SITE_HARD_MAX);
+
+    const titleSuffix = fs.readFileSync(TITLE_SUFFIX, 'utf-8');
+    const siteMax = titleSuffix.match(/^export const META_DESCRIPTION_MAX_CHARS = (\d+);$/m);
+    if (!siteMax) throw new Error('META_DESCRIPTION_MAX_CHARS non trovato in host/shared/titleSuffix.ts');
+    expect(SEO_DESCRIPTION_MAX).toBe(Number(siteMax[1]));
   });
 
   it('lascia margine sotto il tetto del sito', () => {
@@ -173,7 +178,7 @@ describe('clampSeoDescriptions', () => {
    * sola la og description lunga scritta apposta per Facebook/LinkedIn veniva
    * riportata a 160, e le tre superfici tornavano a essere una sola.
    */
-  it('applica DUE soglie: 160 alla description, 250 alla ogDescription', () => {
+  it('applica DUE soglie: 150 alla description, 250 alla ogDescription', () => {
     expect(SEO_OG_DESCRIPTION_MAX).toBeGreaterThan(SEO_DESCRIPTION_MAX);
     expect(SEO_DESCRIPTION_BUDGETS.description).toBe(SEO_DESCRIPTION_MAX);
     expect(SEO_DESCRIPTION_BUDGETS.ogDescription).toBe(SEO_OG_DESCRIPTION_MAX);
@@ -226,7 +231,7 @@ describe('clampSeoDescriptions', () => {
   });
 
   it('lascia intatta una description gia dentro il budget', () => {
-    const fine = 'I numeri di oggi, 9 agosto 2026, per i frontalieri: attese ai valichi, benzina piu economica, cambio franco-euro e nuovi annunci di lavoro in Svizzera.';
+    const fine = 'I numeri di oggi, 9 agosto 2026, per i frontalieri: attese ai valichi, prezzi benzina, cambio franco-euro e nuovi annunci di lavoro in Svizzera.';
     expect(fine.length).toBeLessThan(SEO_DESCRIPTION_MAX + 1);
     const data = { seo: { description: fine } };
     clampSeoDescriptions(data);
@@ -258,7 +263,7 @@ describe('ensureSeoDescriptionMinimum', () => {
     };
 
     const result = ensureSeoDescriptionMinimum(data);
-    expect(result.startsWith(body)).toBe(true);
+    expect(result.startsWith('Il Parlamento friburghese ha rinviato la mozione')).toBe(true);
     expect(result.length).toBeGreaterThanOrEqual(SEO_DESCRIPTION_MIN);
     expect(result.length <= SEO_DESCRIPTION_MAX).toBe(true);
     expect(data.seo.description).toBe(result);
@@ -286,7 +291,7 @@ describe('ensureSeoDescriptionMinimum', () => {
 
   it('usa l’excerpt italiano reale quando la description è troppo breve', () => {
     const excerpt =
-      'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi antichi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';
+      'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';
     const data = {
       id: 'fischiava-treno-gorla',
       seo: { description: 'Domenica 11 ottobre 2026 a Gorla Minore' },
@@ -300,7 +305,7 @@ describe('ensureSeoDescriptionMinimum', () => {
 
   it('usa l’excerpt quando il clamp della description primaria scende sotto il floor', () => {
     const excerpt =
-      'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi antichi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';
+      'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';
     const data = {
       id: 'fischiava-treno-gorla',
       seo: { description: 'x'.repeat(SEO_DESCRIPTION_MAX + 1) },
@@ -353,7 +358,7 @@ describe('ensureSeoDescriptionMinimum', () => {
   it('usa l’excerpt se il taglio clause-safe porta la description sotto il floor', () => {
     const description = `${'A'.repeat(78)} per ${'B'.repeat(100)}`;
     const excerpt =
-      'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi antichi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';
+      'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';
     const data = {
       id: 'fischiava-treno-gorla',
       seo: { description },
@@ -393,9 +398,9 @@ describe('wiring', () => {
 
   /**
    * Il prompt e' un contratto SENZA forma di import: nessun guard che segue gli
-   * import lo vede, e finche' istruiva "OG desc (≤ 160 caratteri)" il tetto a
+   * import lo vede, e finche' istruiva "OG desc (≤ 150 caratteri)" il tetto a
    * 250 aiutava solo i casi in cui il modello lo ignorava. Se qualcuno lo
-   * riporta a 160, questo test lo dice — la CI resterebbe verde altrimenti.
+   * riporta a 150, questo test lo dice — la CI resterebbe verde altrimenti.
    */
   it("il prompt non istruisce un budget og piu' stretto del cap", () => {
     const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
@@ -405,7 +410,7 @@ describe('wiring', () => {
     expect(budgets.length).toBeGreaterThan(0);
     expect(Math.max(...budgets)).toBe(SEO_OG_DESCRIPTION_MAX);
     // E nessun numero nella riga puo' stare sotto il vecchio tetto: sarebbe il
-    // 160 tornato indietro sotto altra forma.
+    // 150 tornato indietro sotto altra forma.
     expect(Math.min(...budgets)).toBeGreaterThan(SEO_DESCRIPTION_MAX);
   });
 

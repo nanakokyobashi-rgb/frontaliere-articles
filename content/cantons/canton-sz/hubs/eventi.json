@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-10-19T02:30:40.156Z",
-  "contentHash": "1d9150f951a6c0a72441fd185349164d74a84ea77ed2c623b9cd10e21179f2ef",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "421bbee517e6c9bb73ed0cebccbd68d72ee4be45524fe3e5daf783254a457e94",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-18T20:21:24.396Z",
+      "updatedAt": "2026-10-19T15:42:28.810Z",
       "keyFacts": 1
     }
   ],
@@ -34,14 +34,14 @@
           "items": [
             {
               "label": "Greifler-Musig \"Arther Chilbi\"",
-              "detail": "Restaurant Engel, Arth",
-              "date": "2026-10-19",
+              "detail": "Restaurant Engel, Arth — in corso, ultimo giorno: 20 ottobre 2026",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/greifler-musig-arther-chilbi/"
             },
             {
               "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
               "detail": "Einsiedeln — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
             },
             {
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "SZ",
@@ -139,14 +139,14 @@
           "items": [
             {
               "label": "Greifler-Musig \"Arther Chilbi\"",
-              "detail": "Restaurant Engel, Arth",
-              "date": "2026-10-19",
+              "detail": "Restaurant Engel, Arth — ongoing, last day: 20 October 2026",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/greifler-musig-arther-chilbi/"
             },
             {
               "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
               "detail": "Einsiedeln — ongoing, last day: 24 October 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
             },
             {
@@ -200,7 +200,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "SZ",
@@ -244,14 +244,14 @@
           "items": [
             {
               "label": "Greifler-Musig \"Arther Chilbi\"",
-              "detail": "Restaurant Engel, Arth",
-              "date": "2026-10-19",
+              "detail": "Restaurant Engel, Arth — läuft, letzter Tag: 20. Oktober 2026",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/greifler-musig-arther-chilbi/"
             },
             {
               "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
               "detail": "Einsiedeln — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
             },
             {
@@ -305,7 +305,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "SZ",
@@ -349,14 +349,14 @@
           "items": [
             {
               "label": "Greifler-Musig \"Arther Chilbi\"",
-              "detail": "Restaurant Engel, Arth",
-              "date": "2026-10-19",
+              "detail": "Restaurant Engel, Arth — en cours, dernier jour : 20 octobre 2026",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/greifler-musig-arther-chilbi/"
             },
             {
               "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
               "detail": "Einsiedeln — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
             },
             {
@@ -410,7 +410,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

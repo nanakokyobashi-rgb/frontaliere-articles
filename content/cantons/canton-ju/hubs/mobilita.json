@@ -4,22 +4,22 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-19T18:33:18.720Z",
-  "contentHash": "bc07fae2dbfbfe4767ea4df65805c13ccae87cee546bb0ba914a7e3b818cda39",
+  "updatedAt": "2026-10-20T13:42:35.891Z",
+  "contentHash": "51cc0979afbb4f325ccd2776203cf5ccdcd6cb1ee7d231d4fdcdde7a9da6937d",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-18T23:59:59.000Z",
+      "updatedAt": "2026-10-19T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-19T14:01:37.256Z",
+      "updatedAt": "2026-10-20T05:22:50.234Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -33,19 +33,19 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), settimana conclusa: 18 ottobre 2026"
+          "note": "Boncourt-Delle (A16), settimana conclusa: 19 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "3",
-          "note": "segnalazioni aggiornate: 19 ottobre 2026"
+          "value": "1",
+          "note": "segnalazioni aggiornate: 20 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 12 ottobre 2026 – 18 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 13 ottobre 2026 – 19 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -68,7 +68,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -82,19 +82,13 @@
               "date": "2026-10-01T14:41:00.000Z"
             },
             {
-              "label": "A16 Delémont <-> Boncourt tra Svincolo autostradale Porrentruy Ouest E Svincolo autostradale Courgenay/Cornol Situazione: chiusa cantiere, lunghezza [km] 8.2",
-              "value": "Chiusura",
-              "detail": "fine prevista: 20 ottobre 2026",
-              "date": "2026-10-01T14:47:00.000Z"
-            },
-            {
-              "label": "A16 Delémont <-> Boncourt tra Svincolo autostradale St-Ursanne E Svincolo autostradale Courgenay/Cornol Situazione: chiusa Causa: incidente",
-              "value": "Chiusura",
-              "date": "2026-10-19T12:33:00.000Z"
+              "label": "A16 Boncourt -> Delémont tra Svincolo autostradale Porrentruy Est E Svincolo autostradale St-Ursanne Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-20T03:47:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -112,7 +106,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [],
@@ -166,7 +160,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "en": {
       "canton": "JU",
@@ -177,19 +171,19 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), week ending 18 October 2026"
+          "note": "Boncourt-Delle (A16), week ending 19 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "3",
-          "note": "reports as of 19 October 2026"
+          "value": "1",
+          "note": "reports as of 20 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 12 October 2026 to 18 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 13 October 2026 to 19 October 2026, fastest first.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -212,7 +206,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -226,19 +220,13 @@
               "date": "2026-10-01T14:41:00.000Z"
             },
             {
-              "label": "A16 Delémont <-> Boncourt tra Svincolo autostradale Porrentruy Ouest E Svincolo autostradale Courgenay/Cornol Situazione: chiusa cantiere, lunghezza [km] 8.2",
-              "value": "Closure",
-              "detail": "until 20 October 2026",
-              "date": "2026-10-01T14:47:00.000Z"
-            },
-            {
-              "label": "A16 Delémont <-> Boncourt tra Svincolo autostradale St-Ursanne E Svincolo autostradale Courgenay/Cornol Situazione: chiusa Causa: incidente",
-              "value": "Closure",
-              "date": "2026-10-19T12:33:00.000Z"
+              "label": "A16 Boncourt -> Delémont tra Svincolo autostradale Porrentruy Est E Svincolo autostradale St-Ursanne Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-20T03:47:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -256,7 +244,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [],
@@ -309,7 +297,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "de": {
       "canton": "JU",
@@ -320,19 +308,19 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Boncourt-Delle (A16), Woche bis 18. Oktober 2026"
+          "note": "Boncourt-Delle (A16), Woche bis 19. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "3",
-          "note": "Meldungen vom 19. Oktober 2026"
+          "value": "1",
+          "note": "Meldungen vom 20. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 12. Oktober 2026 bis 18. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 13. Oktober 2026 bis 19. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -355,7 +343,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -369,19 +357,13 @@
               "date": "2026-10-01T14:41:00.000Z"
             },
             {
-              "label": "A16 Delsberg <-> Boncourt zwischen Anschluss Porrentruy-West und Anschluss Courgenay/Cornol Sachlage: Strecke gesperrt Baustelle, Länge [km] 8.2",
-              "value": "Sperrung",
-              "detail": "bis 20. Oktober 2026",
-              "date": "2026-10-01T14:47:00.000Z"
-            },
-            {
-              "label": "A16 Delsberg <-> Boncourt zwischen Anschluss St-Ursanne und Anschluss Courgenay/Cornol Sachlage: Strecke gesperrt Ursache: Unfall",
-              "value": "Sperrung",
-              "date": "2026-10-19T12:33:00.000Z"
+              "label": "A16 Boncourt -> Delsberg zwischen Anschluss Porrentruy-Ost und Anschluss St-Ursanne Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-20T03:47:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -399,7 +381,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [],
@@ -452,7 +434,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     },
     "fr": {
       "canton": "JU",
@@ -463,19 +445,19 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), semaine jusqu’au 18 octobre 2026"
+          "note": "Boncourt-Delle (A16), semaine jusqu’au 19 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "3",
-          "note": "signalements au 19 octobre 2026"
+          "value": "1",
+          "note": "signalements au 20 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 12 octobre 2026 au 18 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 13 octobre 2026 au 19 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -498,7 +480,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -512,19 +494,13 @@
               "date": "2026-10-01T14:41:00.000Z"
             },
             {
-              "label": "A16 Delémont <-> Boncourt entre Jonction autoroutière Porrentruy-Ouest et Jonction autoroutière Courgenay/Cornol Situation: fermé travaux, longueur [km] 8.2",
-              "value": "Fermeture",
-              "detail": "jusqu’au 20 octobre 2026",
-              "date": "2026-10-01T14:47:00.000Z"
-            },
-            {
-              "label": "A16 Delémont <-> Boncourt entre Jonction autoroutière St-Ursanne et Jonction autoroutière Courgenay/Cornol Situation: fermé Raison: accident",
-              "value": "Fermeture",
-              "date": "2026-10-19T12:33:00.000Z"
+              "label": "A16 Boncourt -> Delémont entre Jonction autoroutière Porrentruy-Est et Jonction autoroutière St-Ursanne Situation: trafic en accordéon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-20T03:47:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -542,7 +518,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [],
@@ -596,7 +572,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T13:42:35.891Z"
     }
   }
 }

@@ -30,6 +30,15 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.pulizie-tunnel-sciaffusa.title': 'Bundesamt für Strassen fermera trois tunnels la nuit',
     'blog.article.pulizie-tunnel-sciaffusa.excerpt': 'Fäsenstaub, Cholfirst et Galgenbuck fermés chaque nuit du 19 au 23 octobre, de 20 heures à 5 heures, pour des travaux de nettoyage.',
     'blog.article.pulizie-tunnel-sciaffusa.imageAlt': 'Tunnels de Fäsenstaub, Cholfirst et Galgenbuck fermés la nuit pour nettoyage',
+    'blog.article.svp-sciaffusa-candidati-2027.title': 'L\'UDC de Schaffhouse désigne ses candidats pour les élections de 2027',
+    'blog.article.svp-sciaffusa-candidati-2027.excerpt': 'L\'assemblée des délégués à Oberhallau a choisi Andreas Gnädinger pour le Conseil des États et Thomas Hurter et Thomas Müller pour le Conseil national.',
+    'blog.article.svp-sciaffusa-candidati-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.beringen-vbsh-fermate-chiuse.title': 'Distributeur automatique de billets explosé à Beringen : trois arrêts VBSH non desservis',
+    'blog.article.beringen-vbsh-fermate-chiuse.excerpt': 'Après les explosions de la matinée à Enge, VBSH ne dessert pas Enge, Hägli et Sonne jusqu’à 13:30.',
+    'blog.article.beringen-vbsh-fermate-chiuse.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.schleitheim-scooter-incidente-2026.title': 'Accident de scooter à Schleitheim : une femme blessée, Hohbrugg fermée',
+    'blog.article.schleitheim-scooter-incidente-2026.excerpt': 'Dimanche 18 octobre 2026, une femme de 61 ans chute de son scooter sur la Hohbrugg : elle est projetée à 12 mètres dans la pente, un hélicoptère est utilisé pour son transport à l’hôpital, route fermée pendant plus d’une heure.',
+    'blog.article.schleitheim-scooter-incidente-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

@@ -211,21 +211,16 @@ jobs:
       # così la recovery dopo un edit può rieseguire subito il run concluso.
       # Negli altri casi restano le condizioni indipendenti delle famiglie.
       #
-      # Due esclusioni, entrambe portate qui dal workflow che sostituisce:
-      #  - le draft sono lavoro in corso, il body si completa prima di uscirne;
-      #  - la PR del MIRROR dell'engine e' esente solo quando il branch e'
-      #    `engine-lockstep-auto` E la HEAD arriva da questo stesso repository:
-      #    il body lo genera il workflow del sito, non un agente di qui, e
-      #    pretendere il contratto umano su di essa e' un errore di categoria.
+      # Le draft sono lavoro in corso: il body si completa prima di uscirne.
+      # Anche il mirror `engine-lockstep-auto` passa da questo contratto: il
+      # workflow del sito non sostituisce i controlli richiesti dal corpus.
       # ══════════════════════════════════════════════════════════════════════
       - name: PR-body completeness + multi-issue Closes (zero-Claude)
         id: body_contract
         if: >-
           ${{ !cancelled() &&
           ((github.event_name == 'pull_request' &&
-            github.event.pull_request.draft == false &&
-            (github.event.pull_request.head.ref != 'engine-lockstep-auto' ||
-             github.event.pull_request.head.repo.full_name != github.repository)) ||
+            github.event.pull_request.draft == false) ||
            (github.event_name == 'workflow_dispatch' && inputs.pr_number != '')) }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -455,17 +450,12 @@ jobs:
       # ══════════════════════════════════════════════════════════════════════
       - name: Resolve PR
         id: resolve
-        # La PR del mirror dell'engine, quando arriva dal repository stesso con
-        # il branch `engine-lockstep-auto`, e' gia' stata reviewata SUL SITO
-        # prima di essere mirrorata. Reviewarla di nuovo qui spende quota
-        # condivisa per ripetere un giudizio gia' dato — e un `## LGTM` negato
-        # bloccherebbe il canale con cui le correzioni all'engine scendono.
+        # Anche il mirror dell'engine riceve la review completa in questo repo:
+        # il verdetto richiesto deve coprire la PR e il suo contratto locale.
         if: >-
           ${{ steps.body_contract.outcome != 'failure' &&
           ((github.event_name == 'pull_request' &&
-            github.event.pull_request.draft == false &&
-            (github.event.pull_request.head.ref != 'engine-lockstep-auto' ||
-             github.event.pull_request.head.repo.full_name != github.repository)) ||
+            github.event.pull_request.draft == false) ||
            (github.event_name == 'workflow_dispatch' && inputs.pr_number != '')) }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -477,18 +467,15 @@ jobs:
           set -uo pipefail
           title=$(gh pr view "$PRN" --repo "$REPO" --json title --jq '.title // ""' 2>/dev/null || true)
           if [ "${EVENT_NAME:-}" = 'workflow_dispatch' ]; then
-            if ! details=$(gh pr view "$PRN" --repo "$REPO" --json state,isDraft,headRefName,headRefOid,headRepository); then
+            if ! details=$(gh pr view "$PRN" --repo "$REPO" --json state,isDraft,headRefOid); then
               echo '::error::Impossibile risolvere la PR indicata dal workflow_dispatch.'
               exit 1
             fi
             state=$(printf '%s' "$details" | jq -r '.state // ""')
             is_draft=$(printf '%s' "$details" | jq -r '.isDraft // false')
-            head_ref=$(printf '%s' "$details" | jq -r '.headRefName // ""')
             resolved_head=$(printf '%s' "$details" | jq -r '.headRefOid // ""')
-            head_repo=$(printf '%s' "$details" | jq -r '.headRepository.nameWithOwner // ""')
-            if [ "$state" != 'OPEN' ] || [ "$is_draft" = 'true' ] || \
-               { [ "$head_ref" = 'engine-lockstep-auto' ] && [ "$head_repo" = "$REPO" ]; }; then
-              echo '::error::La PR indicata deve essere aperta, non draft e non il mirror engine-lockstep-auto del repository.'
+            if [ "$state" != 'OPEN' ] || [ "$is_draft" = 'true' ]; then
+              echo '::error::La PR indicata deve essere aperta e non draft.'
               exit 1
             fi
             if [ "$resolved_head" != "$HEAD_SHA" ]; then
@@ -1937,19 +1924,13 @@ jobs:
       # questo step trasforma ogni percorso non risolvibile in un rosso reale.
       # Il gate sopra resta sempre il punto che valuta LGTM, Important e
       # carry-forward; qui si sorveglia soltanto che quel punto abbia girato.
-      # `engine-lockstep-auto` e' l'eccezione intenzionale: `Resolve PR` lo
-      # esclude solo quando il branch e' nel repository proprietario, perche'
-      # l'engine e' gia' stato reviewato sul sito; il `Generator CI gate` in
-      # fondo a questo job verifica qui il contratto engine/host. Un branch
-      # omonimo da fork resta nel percorso di review e fail-closed.
+      # Si applica a ogni PR non-draft che richiede review, incluso il mirror
+      # dell'engine. Un gate saltato non produce un verdetto LGTM verificabile.
       - name: Fail when required review gate is skipped
         if: >-
           ${{ steps.body_contract.outcome != 'failure' && always() &&
           ((github.event_name == 'pull_request' && github.event.pull_request.draft == false) ||
            (github.event_name == 'workflow_dispatch' && inputs.pr_number != '')) &&
-          (github.event_name != 'pull_request' ||
-           github.event.pull_request.head.ref != 'engine-lockstep-auto' ||
-           github.event.pull_request.head.repo.full_name != github.repository) &&
           steps.review_gate.outcome == 'skipped' }}
         run: |
           echo "::error::Required review gate was skipped on a pull request; no approving review verdict was evaluated."
@@ -1986,9 +1967,8 @@ jobs:
       # ogni PR e il ruleset non puo' richiederlo (bloccherebbe per sempre le PR
       # che non lo attivano). Il gate condizionale che teneva il workflow
       # dell'auto-merge su LGTM torna quindi dentro il job che PRODUCE il check
-      # richiesto. Non e' escluso su `engine-lockstep-auto`: quella PR e' esente
-      # dalla review perche' gia' giudicata sul sito, ma il contratto
-      # engine/host e' proprio cio' che deve essere verificato QUI.
+      # richiesto. Anche `engine-lockstep-auto` riceve la review completa sopra;
+      # questo gate aggiunge i controlli generator-ci quando il diff li richiede.
       #
       # Sta in fondo di proposito: quando ci arriva, `generator-ci` ha gia' avuto
       # tutta la durata della review per concludere, quindi l'attesa e' quasi

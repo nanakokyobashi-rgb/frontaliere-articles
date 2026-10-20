@@ -504,6 +504,84 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sezione-medicina-nucleare': {
+    title: 'Nuklearforum crea la sezione Medicina nucleare svizzera',
+    description: 'Il Nuklearforum Schweiz crea una nuova sezione Assemblea costitutiva il 12 ottobre a Olten KSB, PSI e Molecular Partners tra i fondatori Focus su radionuclidi',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuklearforum, crea, sezione, medicina',
+    ogTitle: 'Medicina nucleare: nuova sezione del Nuklearforum',
+    ogDescription: 'Il Nuklearforum Schweiz crea una nuova sezione Assemblea costitutiva il 12 ottobre a Olten KSB, PSI e Molecular Partners tra i fondatori Focus su radionuclidi',
+    canonicalPath: '/articoli-argovia/sezione-medicina-nucleare/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nuklearforum crea la sezione Medicina nucleare svizzera",
+      "description": "Il Nuklearforum Schweiz crea una nuova sezione Assemblea costitutiva il 12 ottobre a Olten KSB, PSI e Molecular Partners tra i fondatori Focus su radionuclidi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sezione-medicina-nucleare.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T12:05:23+00:00",
+      "dateModified": "2026-10-20T12:05:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/sezione-medicina-nucleare/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-murales-pediatria-ksb-baden': {
+    title: 'KSB Baden: murales in pediatria e pronto soccorso',
+    description: 'Al KSB Baden, dieci artisti di Paint a Smile hanno dipinto circa 200 mq tra pediatria e pronto soccorso. L\'asta ha raccolto CHF 154\'200 per la decorazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, baden, murales, pediatria, pronto',
+    ogTitle: 'KSB Baden: murales in pediatria e pronto soccorso',
+    ogDescription: 'Le pareti del reparto pediatrico e del pronto soccorso del KSB sono state dipinte con foreste, animali e altri dettagli. Dieci artisti di Paint a Smile hanno lavorato per diverse settimane; l\'asta di un orologio ha raccolto CHF 154\'200.',
+    canonicalPath: '/articoli-argovia/murales-pediatria-ksb-baden/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "KSB Baden: murales in pediatria e pronto soccorso",
+      "description": "Al KSB Baden, dieci artisti di Paint a Smile hanno dipinto circa 200 mq tra pediatria e pronto soccorso. L'asta ha raccolto CHF 154'200 per la decorazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-murales-pediatria-ksb-baden.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T12:20:50+00:00",
+      "dateModified": "2026-10-20T12:20:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/murales-pediatria-ksb-baden/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

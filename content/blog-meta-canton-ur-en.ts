@@ -21,6 +21,9 @@ const blogMetaCantonUrEn: Record<string, string> = {
     'blog.article.silenen-muri-secco.title': 'Silenen: Cantonal Parliament approves CHF 207.000 for dry stone walls',
     'blog.article.silenen-muri-secco.excerpt': 'The Landrat approves CHF 207.000 with no votes against 3,6 km of historic walls in the Silenen area Around 60% pose a safety risk Work starts in October',
     'blog.article.silenen-muri-secco.imageAlt': 'Historic dry-stone walls in the Hinter- and Vorderried area of Silenen, Canton Uri',
+    'blog.article.axenstrasse-chiusa-quattro-notti.title': 'Axenstrasse closed for four nights from November 2 to 6',
+    'blog.article.axenstrasse-chiusa-quattro-notti.excerpt': 'Axenstrasse will be completely closed from November 2 to 6, every night from 22 to 5, for maintenance work.',
+    'blog.article.axenstrasse-chiusa-quattro-notti.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonUrEn;

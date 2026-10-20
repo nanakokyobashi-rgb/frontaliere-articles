@@ -1,0 +1,8 @@
+# Keep only the scanner clone's HEAD and refs; the Dockerfile fetches that exact
+# commit shallowly instead of transferring the full Git object store.
+**
+!.git/
+!.git/HEAD
+!.git/packed-refs
+!.git/refs/
+!.git/refs/**

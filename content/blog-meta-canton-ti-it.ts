@@ -57,6 +57,9 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.ustat-manutenzione-chiusura.title': 'Avvisi Ustat: manutenzione e chiusura amministrazione',
     'blog.article.ustat-manutenzione-chiusura.excerpt': 'Manutenzione: martedì 2 dicembre, 20.00-22.00 circa Possibili brevi interruzioni sul sito Ustat Chiusura dei servizi: pomeriggio del 31 dicembre 2025 Ustat',
     'blog.article.ustat-manutenzione-chiusura.imageAlt': 'Ufficio di statistica e comunicazioni amministrative cantonali in Ticino',
+    'blog.article.frontalieri-ticino-indagine-salari-2026.title': 'Indagine frontalieri Ticino: 55,6% si sente pagato meno degli svizzeri',
+    'blog.article.frontalieri-ticino-indagine-salari-2026.excerpt': '1.542 lavoratori hanno risposto all\'indagine nel maggio 2026 Il 55,6% si sente pagato meno a parità di mansioni Dalle province di Como e Varese: oltre 60mila',
+    'blog.article.frontalieri-ticino-indagine-salari-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTiIt;

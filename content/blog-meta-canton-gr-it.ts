@@ -27,6 +27,9 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.lido-grono-estate-2027.title': 'Lido Grono, apertura confermata per l\'estate 2027',
     'blog.article.lido-grono-estate-2027.excerpt': 'Apertura del Lido Grono confermata per l\'estate 2027 Cantiere della nuova piscina comunale ancora in corso Costi previsti: circa 5 milioni Annuncio del sindaco',
     'blog.article.lido-grono-estate-2027.imageAlt': 'Cantiere della nuova piscina comunale di Grono per l\'apertura confermata nell\'estate 2027.',
+    'blog.article.acqua-domleschg-feldis-scheid.title': 'Domleschg: camion cisterna per l\'acqua a Feldis e Scheid',
+    'blog.article.acqua-domleschg-feldis-scheid.excerpt': 'Domleschg intende portare acqua potabile a Feldis e Scheid.',
+    'blog.article.acqua-domleschg-feldis-scheid.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGrIt;

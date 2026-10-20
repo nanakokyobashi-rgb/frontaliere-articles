@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-19T18:33:18.720Z",
-  "contentHash": "381d701e64cf9f169f4f5b440d474ab59fa2da12d17a9f87e63cfaf55007c474",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "d1053a9390cdc602c9bb5beaec3a1bd33981b62f5cd340e5e58fa0cb6140e600",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-19T13:52:30.888Z",
+      "updatedAt": "2026-10-19T15:42:28.810Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "210",
+          "value": "205",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Corpi in prestito",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/58243"
+              "label": "Gyotaku - Tracce di pesci",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/61721"
             },
             {
-              "label": "Fra Roberto tra le mura",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/61525"
+              "label": "Jannis Kounellis: Io sono un pittore",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/63037"
             },
             {
-              "label": "Impressioni - Mostra di pittura di Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64414"
+              "label": "Mona Caron - La resilienza della vita",
+              "detail": "Museo Centovalli e Pedemonte, Centovalli",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/63363"
             },
             {
-              "label": "Ivo Soldini - Progetto Castel Grande",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/62822"
+              "label": "Caffè riparazione, riparare anziché buttare",
+              "detail": "Campo di calcio, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/64536"
             },
             {
-              "label": "PoPoetic",
-              "detail": "Centro ricreativo Il Pettirosso, Savosa",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63593"
+              "label": "Bertille Bak. Voci dalla terra",
+              "detail": "Museo Vincenzo Vela, Mendrisio",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/62429"
             },
             {
-              "label": "Videokunst.ch × PalaCinema",
-              "detail": "PalaCinema, Locarno",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63679"
+              "label": "Kaari Upson. Dollhouse – Una retrospettiva",
+              "detail": "MASI, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/63581"
             },
             {
-              "label": "Was America",
-              "detail": "Fondazione Rolla | Kindergarten, Mendrisio",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63776"
+              "label": "Schermo aperto. Opere video dalla collezione",
+              "detail": "Masi, sede Palazzo Reali, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/64595"
             },
             {
-              "label": "Giovanni Anselmo",
-              "detail": "Repetto Gallery, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63802"
+              "label": "Sentimento e osservazione",
+              "detail": "MASI, sede Lac, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/53980"
             },
             {
-              "label": "Dove la luce si posa di Elisabeth Hübscher",
-              "detail": "Caslano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64356"
+              "label": "Umberto Boccioni",
+              "detail": "Museo d’arte della Svizzera italiana, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/62804"
             },
             {
-              "label": "Isa Hesse-Rabinovitch!",
-              "detail": "Museo Hermann Hesse, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/61534"
+              "label": "Gruppo di auto-aiuto - Riparto dal mio parto",
+              "detail": "Sede Ass. Nascere bene Ticino, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/64130"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-10-19T13:52:30.888Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -142,10 +142,10 @@
           "date": "2026-10-09T23:43:17.647Z"
         },
         {
-          "title": "Rientro al lavoro dopo la maternità: incontri a Mendrisio",
-          "url": "/articoli-svizzera/rientro-maternita-filanda/",
-          "excerpt": "Le Città di Chiasso e Mendrisio promuovono a LaFilanda un percorso gratuito con colloqui, incontri e babysitting per il rientro al lavoro dopo la maternità.",
-          "date": "2026-10-02T07:54:35.169Z"
+          "title": "Locarno Film Festival: la cultura come legame",
+          "url": "/articoli-frontaliere/locarno-film-festival-resistenza-legami/",
+          "excerpt": "Il Locarno Film Festival inaugura con 'Les Yeux Verts', esplorando temi di trauma e resilienza attraverso il cinema in Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "210",
+          "value": "205",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,69 +184,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Borrowed bodies",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/58243"
+              "label": "Gyotaku - Fish Trails",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/61721"
             },
             {
-              "label": "Fra Roberto fra le mura",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/61525"
+              "label": "Jannis Kounellis: I am a painter",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/63037"
             },
             {
-              "label": "Impressions - Painting exhibition by Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64414"
+              "label": "Mona Caron - The Resilience of Life",
+              "detail": "Museo Centovalli e Pedemonte, Centovalli",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/63363"
             },
             {
-              "label": "Ivo Soldini - Castel Grande Project",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/62822"
+              "label": "Coffee Repair, repair rather than discard",
+              "detail": "Campo di calcio, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/64536"
             },
             {
-              "label": "PoPoetic",
-              "detail": "Centro ricreativo Il Pettirosso, Savosa",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63593"
+              "label": "Bertille Bak. Voices from the Earth",
+              "detail": "Museo Vincenzo Vela, Mendrisio",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/62429"
             },
             {
-              "label": "Videokunst.ch PalaCinema",
-              "detail": "PalaCinema, Locarno",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63679"
+              "label": "Kaari Upson. Dollhouse – A Retrospective",
+              "detail": "MASI, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/63581"
             },
             {
-              "label": "America W",
-              "detail": "Fondazione Rolla | Kindergarten, Mendrisio",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63776"
+              "label": "Open screen. Video works from the collection",
+              "detail": "Masi, sede Palazzo Reali, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/64595"
             },
             {
-              "label": "John Anselm",
-              "detail": "Repetto Gallery, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63802"
+              "label": "Feeling and Observation",
+              "detail": "MASI, sede Lac, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/53980"
             },
             {
-              "label": "Where the Light Sets by Elisabeth Hübscher",
-              "detail": "Caslano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64356"
+              "label": "Umberto Boccioni",
+              "detail": "Museo d’arte della Svizzera italiana, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/62804"
             },
             {
-              "label": "Isa Hesse-Rabinovitch!",
-              "detail": "Museo Hermann Hesse, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/61534"
+              "label": "Self-help group - Starting from my birth",
+              "detail": "Sede Ass. Nascere bene Ticino, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/64130"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-10-19T13:52:30.888Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -293,10 +293,10 @@
           "date": "2026-10-09T23:43:17.647Z"
         },
         {
-          "title": "Returning to Work After Maternity Leave: Events in Mendrisio",
-          "url": "/en/swiss-articles/return-to-work-maternity-filanda/",
-          "excerpt": "The cities of Chiasso and Mendrisio are offering a free program at LaFilanda that includes counseling sessions, meetings, and childcare services to help women return to work after maternity leave.",
-          "date": "2026-10-02T07:54:35.169Z"
+          "title": "Locarno Film Festival: culture as a link",
+          "url": "/en/cross-border-articles/locarno-film-festival-bonds-resistance/",
+          "excerpt": "The Locarno Film Festival opens with 'Les Yeux Verts', exploring themes of trauma and resilience through cinema in Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "210",
+          "value": "205",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,69 +335,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Leihkörper",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/58243"
+              "label": "Gyotaku - Spuren von Fischen",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/61721"
             },
             {
-              "label": "Fra Roberto zwischen den Mauern",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/61525"
+              "label": "Jannis Kounellis: Ich bin Maler",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/63037"
             },
             {
-              "label": "Impressionen - Gemäldeausstellung von Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64414"
+              "label": "Mona Caron - Die Belastbarkeit des Lebens",
+              "detail": "Museo Centovalli e Pedemonte, Centovalli",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/63363"
             },
             {
-              "label": "Ivo Soldini - Projekt Castel Grande",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/62822"
+              "label": "Kaffee reparieren, reparieren statt wegwerfen",
+              "detail": "Campo di calcio, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/64536"
             },
             {
-              "label": "PoPoetisch",
-              "detail": "Centro ricreativo Il Pettirosso, Savosa",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63593"
+              "label": "Bertille Bak. Stimmen aus der Erde",
+              "detail": "Museo Vincenzo Vela, Mendrisio",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/62429"
             },
             {
-              "label": "Videokunst.ch ⑤ PalaCinema",
-              "detail": "PalaCinema, Locarno",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63679"
+              "label": "Kaari Upson. Dollhouse – Eine Retrospektive",
+              "detail": "MASI, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/63581"
             },
             {
-              "label": "War Amerika",
-              "detail": "Fondazione Rolla | Kindergarten, Mendrisio",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63776"
+              "label": "Offener Bildschirm. Videoarbeiten aus der Sammlung",
+              "detail": "Masi, sede Palazzo Reali, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/64595"
             },
             {
-              "label": "Johannes Anselm",
-              "detail": "Repetto Gallery, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63802"
+              "label": "Gefühl und Beobachtung",
+              "detail": "MASI, sede Lac, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/53980"
             },
             {
-              "label": "Wo das Licht ruht von Elisabeth Hübscher",
-              "detail": "Caslano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64356"
+              "label": "Umberto Boccioni",
+              "detail": "Museo d’arte della Svizzera italiana, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/62804"
             },
             {
-              "label": "Isa Hesse-Rabinowitsch!",
-              "detail": "Museo Hermann Hesse, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/61534"
+              "label": "Selbsthilfegruppe - Ich fahre von meiner Geburt ab",
+              "detail": "Sede Ass. Nascere bene Ticino, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/64130"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-10-19T13:52:30.888Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -444,10 +444,10 @@
           "date": "2026-10-09T23:43:17.647Z"
         },
         {
-          "title": "Rückkehr in den Beruf nach dem Mutterschaftsurlaub: Veranstaltungen in Mendrisio",
-          "url": "/de/schweiz-artikel/wiedereinstieg-mutterschaft-filanda/",
-          "excerpt": "Die Städte Chiasso und Mendrisio bieten bei LaFilanda ein kostenloses Programm mit Beratungsgesprächen, Treffen und Kinderbetreuung an, um Frauen den Wiedereinstieg in den Beruf nach der Mutterschaft zu erleichtern.",
-          "date": "2026-10-02T07:54:35.169Z"
+          "title": "Locarno Film Festival: Kultur als Verbindung",
+          "url": "/de/grenzgaenger-artikel/locarno-film-festival-bande-widerstand/",
+          "excerpt": "Das Locarno Film Festival eröffnet mit \"Les Yeux Verts\" und erforscht Themen wie Trauma und Resilienz durch das Kino auf der Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "210",
+          "value": "205",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,69 +486,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Corps prêtés",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/58243"
+              "label": "Gyotaku - Traces de poissons",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/61721"
             },
             {
-              "label": "Frère Roberto entre les murs",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/61525"
+              "label": "Jannis Kounellis : Je suis un peintre",
+              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/63037"
             },
             {
-              "label": "Impressions - Exposition de peinture de Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64414"
+              "label": "Mona Caron - La résilience de la vie",
+              "detail": "Museo Centovalli e Pedemonte, Centovalli",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/63363"
             },
             {
-              "label": "Ivo Soldini - Projet Castel Grande",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/62822"
+              "label": "Café Réparation, réparer au lieu de jeter",
+              "detail": "Campo di calcio, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/64536"
             },
             {
-              "label": "PoPoétique",
-              "detail": "Centro ricreativo Il Pettirosso, Savosa",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63593"
+              "label": "Bertille Bak. Des voix de la terre",
+              "detail": "Museo Vincenzo Vela, Mendrisio",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/62429"
             },
             {
-              "label": "Videokunst.ch Palais Cinema",
-              "detail": "PalaCinema, Locarno",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63679"
+              "label": "Kaari Upson. Dollhouse – Une rétrospective",
+              "detail": "MASI, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/63581"
             },
             {
-              "label": "Était l'Amérique",
-              "detail": "Fondazione Rolla | Kindergarten, Mendrisio",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63776"
+              "label": "Écran ouvert. Œuvres vidéo de la collection",
+              "detail": "Masi, sede Palazzo Reali, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/64595"
             },
             {
-              "label": "Giovanni Anselme",
-              "detail": "Repetto Gallery, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/63802"
+              "label": "Sentiment et observation",
+              "detail": "MASI, sede Lac, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/53980"
             },
             {
-              "label": "Où la lumière se pose par Elisabeth Hübscher",
-              "detail": "Caslano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/64356"
+              "label": "Umberto Boccioni a écrit:",
+              "detail": "Museo d’arte della Svizzera italiana, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/62804"
             },
             {
-              "label": "Isa Hesse-Rabinovitch !",
-              "detail": "Museo Hermann Hesse, Lugano",
-              "date": "2026-10-19",
-              "url": "https://www.tio.ch/agenda/day/20261019/61534"
+              "label": "Groupe d'entraide - Repartir de mon accouchement",
+              "detail": "Sede Ass. Nascere bene Ticino, Lugano",
+              "date": "2026-10-20",
+              "url": "https://www.tio.ch/agenda/day/20261020/64130"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-10-19T13:52:30.888Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         }
       ],
       "curatedArticles": [
@@ -595,10 +595,10 @@
           "date": "2026-10-09T23:43:17.647Z"
         },
         {
-          "title": "Retour au travail après un congé maternité : rencontres à Mendrisio",
-          "url": "/fr/articles-suisse/retour-travail-maternite-filanda/",
-          "excerpt": "Les villes de Chiasso et de Mendrisio proposent à LaFilanda un parcours gratuit comprenant des entretiens, des rencontres et un service de garde d'enfants pour faciliter le retour au travail après un congé maternité.",
-          "date": "2026-10-02T07:54:35.169Z"
+          "title": "Festival du film de Locarno : la culture comme lien",
+          "url": "/fr/articles-frontalier/locarno-film-festival-liens-resistance/",
+          "excerpt": "Le Locarno Film Festival ouvre avec « Les Yeux Verts », explorant les thèmes du traumatisme et de la résilience à travers le cinéma sur la Piazza Grande.",
+          "date": "2026-08-05T04:40:05.340Z"
         }
       ],
       "latestCantonArticles": [],
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

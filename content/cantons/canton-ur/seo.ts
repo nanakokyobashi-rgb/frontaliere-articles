@@ -236,6 +236,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-axenstrasse-chiusa-quattro-notti': {
+    title: 'Axenstrasse chiusa per quattro notti dal 2 al 6 novembre',
+    description: 'La Axenstrasse sarà completamente chiusa dal 2 al 6 novembre, per quattro notti dalle 22 alle 5, a causa di lavori di manutenzione. Orari e durata dell\'avviso.',
+    keywords: 'frontalieri, ticino, svizzera, italia, axenstrasse, chiusa, quattro, notti',
+    ogTitle: 'Axenstrasse chiusa per quattro notti a novembre',
+    ogDescription: 'L\'avviso riguarda quattro finestre notturne di chiusura totale: la Axenstrasse sarà chiusa dalle 22.00 alle 5.00 nel periodo dal 2 al 6 novembre. La causa indicata è l\'esecuzione di lavori di manutenzione; il testo non specifica altri orari.',
+    canonicalPath: '/articoli-uri/axenstrasse-chiusa-quattro-notti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Axenstrasse chiusa per quattro notti dal 2 al 6 novembre",
+      "description": "La Axenstrasse sarà completamente chiusa dal 2 al 6 novembre, per quattro notti dalle 22 alle 5, a causa di lavori di manutenzione. Orari e durata dell'avviso.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-axenstrasse-chiusa-quattro-notti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T09:56:10+00:00",
+      "dateModified": "2026-10-20T09:56:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-uri/axenstrasse-chiusa-quattro-notti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

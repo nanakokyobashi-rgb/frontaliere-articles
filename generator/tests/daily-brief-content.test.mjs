@@ -203,7 +203,7 @@ test('the cover follows the article headline without rendering place names or nu
  *                   the excerpt to make a SEO test pass. There is no maximum
  *                   the site enforces on it — nothing truncates a card teaser —
  *                   so the only ceiling here is a sanity one.
- *   seoDescription  150–160. Google truncates around 160 and the site hard-fails
+ *   seoDescription  120–150. The render cap is 150 and the site hard-fails
  *                   above 170 (`tests/seo-description-length.test.ts`).
  *   ogDescription   200–250. Social cards render far more than a SERP does.
  *
@@ -213,7 +213,7 @@ test('the cover follows the article headline without rendering place names or nu
  */
 const SURFACE_BUDGETS = {
   excerpt: { min: 200, max: 320 },
-  seoDescription: { min: 150, max: 160 },
+  seoDescription: { min: 120, max: 150 },
   ogDescription: { min: 200, max: 250 },
 };
 /** The site's hard bound on `description`, mirrored so a drift here is loud. */

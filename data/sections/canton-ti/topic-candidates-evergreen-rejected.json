@@ -4,25 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ti::https://www3.ti.ch/dfe/dr/ustat/index.php?fuseaction=news.dettaglio&id=261264&tipo=2": {
-      "section": "canton-ti",
-      "ts": 1791940613342
-    },
-    "canton-ti::https://www.tio.ch/newsblog/valute-e-frontiere/1946445/le-nuove-banconote-svizzere-prendono-forma-ecco-come-saranno-i-franchi-del-futuro": {
-      "section": "canton-ti",
-      "ts": 1791960979305
-    },
-    "canton-ti::https://www4.ti.ch/tich/area-media/comunicati/dettaglio-comunicato?chash=6425b6e4eafc18eda0c1f59087dfe78c&news_id=261301": {
-      "section": "canton-ti",
-      "ts": 1791961606860
-    },
-    "canton-ti::https://www.mattinonline.ch/it/article/60575/con-un-passaporto-finto-riesce-a-ottenere-un-permesso-da-frontaliere-e-aprire-due-aziende-prima-di-essere-scoperto-e-condannato": {
-      "section": "canton-ti",
-      "ts": 1792057561913
-    },
     "canton-ti::https://www.laregione.ch/estero/confine/1954732/euro-ponte-interno-stata-bagagli": {
       "section": "canton-ti",
-      "ts": 1792060528376
+      "ts": 1792466792077
     }
   }
 }

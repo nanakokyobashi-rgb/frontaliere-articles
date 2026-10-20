@@ -57,6 +57,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.ustat-manutenzione-chiusura.title': 'Ustat-Mitteilungen: Wartung und Schließung der Verwaltung',
     'blog.article.ustat-manutenzione-chiusura.excerpt': 'Wartung: Dienstag, 2.',
     'blog.article.ustat-manutenzione-chiusura.imageAlt': 'Statistisches Amt und kantonale Verwaltungskommunikation im Tessin',
+    'blog.article.frontalieri-ticino-indagine-salari-2026.title': 'Tessin: 55,6% der Grenzgänger fühlen sich unterbezahlt',
+    'blog.article.frontalieri-ticino-indagine-salari-2026.excerpt': '1.542 Beschäftigte haben im Mai 2026 an der Umfrage teilgenommen 55,6% fühlen sich bei gleicher Tätigkeit schlechter bezahlt Aus den Provinzen Como und Varese: über 60 Tausend',
+    'blog.article.frontalieri-ticino-indagine-salari-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTiDe;

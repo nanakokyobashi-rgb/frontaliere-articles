@@ -1192,7 +1192,7 @@ describe('sanitizePromptPlaceholders — le due risposte, di proposito diverse',
 
   it('seo.description segnaposto → LANCIA', () => {
     assert.throws(
-      () => sanitizePromptPlaceholders({ id: 'x', content: { it: { title: 'T' } }, seo: { description: 'Meta description 150-160 chars (HARD CAP: ≤ 160 caratteri)' } }),
+      () => sanitizePromptPlaceholders({ id: 'x', content: { it: { title: 'T' } }, seo: { description: 'Meta description 120-150 chars (HARD CAP: ≤ 150 caratteri)' } }),
       /seo\.description/,
     );
   });

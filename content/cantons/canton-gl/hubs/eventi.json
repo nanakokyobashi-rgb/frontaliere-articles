@@ -4,17 +4,17 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-10-19T02:30:40.156Z",
-  "contentHash": "5f2f37da6feca3f25b8b2d47d6f1b11306b1755c2c49dabd490e35ef632e31a0",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "4c7ab61ac267abab594e94c103fa6ec92935f9cbc707463fb80ac54ea01173a7",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-18T20:21:24.396Z",
+      "updatedAt": "2026-10-19T15:42:28.810Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T19:43:29.238Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -39,20 +39,20 @@
           "items": [
             {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
-              "detail": "Luchsingen-Hätzingen",
-              "date": "2026-10-19",
+              "detail": "Luchsingen-Hätzingen — in corso, ultimo giorno: 26 ottobre 2026",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
               "label": "Stricken in der Bibliothek Grosstal Hätzingen",
-              "detail": "Bibliothek Grosstal Hätzingen",
-              "date": "2026-10-19",
+              "detail": "Bibliothek Grosstal Hätzingen — in corso, ultimo giorno: 26 ottobre 2026",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
               "label": "Trachtenausstellung im Dorfkern Elm",
               "detail": "Elm, Glarus Süd — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "GL",
@@ -157,20 +157,20 @@
           "items": [
             {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
-              "detail": "Luchsingen-Hätzingen",
-              "date": "2026-10-19",
+              "detail": "Luchsingen-Hätzingen — ongoing, last day: 26 October 2026",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
               "label": "Stricken in der Bibliothek Grosstal Hätzingen",
-              "detail": "Bibliothek Grosstal Hätzingen",
-              "date": "2026-10-19",
+              "detail": "Bibliothek Grosstal Hätzingen — ongoing, last day: 26 October 2026",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
               "label": "Trachtenausstellung im Dorfkern Elm",
               "detail": "Elm, Glarus Süd — ongoing, last day: 24 October 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
@@ -218,7 +218,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -231,7 +231,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +253,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "GL",
@@ -275,20 +275,20 @@
           "items": [
             {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
-              "detail": "Luchsingen-Hätzingen",
-              "date": "2026-10-19",
+              "detail": "Luchsingen-Hätzingen — läuft, letzter Tag: 26. Oktober 2026",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
               "label": "Stricken in der Bibliothek Grosstal Hätzingen",
-              "detail": "Bibliothek Grosstal Hätzingen",
-              "date": "2026-10-19",
+              "detail": "Bibliothek Grosstal Hätzingen — läuft, letzter Tag: 26. Oktober 2026",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
               "label": "Trachtenausstellung im Dorfkern Elm",
               "detail": "Elm, Glarus Süd — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
@@ -336,7 +336,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -349,7 +349,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "GL",
@@ -393,20 +393,20 @@
           "items": [
             {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
-              "detail": "Luchsingen-Hätzingen",
-              "date": "2026-10-19",
+              "detail": "Luchsingen-Hätzingen — en cours, dernier jour : 26 octobre 2026",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
               "label": "Stricken in der Bibliothek Grosstal Hätzingen",
-              "detail": "Bibliothek Grosstal Hätzingen",
-              "date": "2026-10-19",
+              "detail": "Bibliothek Grosstal Hätzingen — en cours, dernier jour : 26 octobre 2026",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
               "label": "Trachtenausstellung im Dorfkern Elm",
               "detail": "Elm, Glarus Süd — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
@@ -454,7 +454,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -467,7 +467,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

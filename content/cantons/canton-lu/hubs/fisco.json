@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "fisco",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "eb6973a964b37c343bf31d89476fbdfcfa5b73006e9fd40c2e249ab36319d099",
+  "updatedAt": "2026-10-20T00:32:46.463Z",
+  "contentHash": "387b871b8ac628b8c1c32d67f52bf14425451baba5d136ef67d5c502f5aba12c",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -115,7 +115,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -124,6 +124,12 @@
           "url": "/articoli-lucerna/kriens-torna-in-deficit/",
           "excerpt": "Dopo surplus milionari, Kriens torna in deficit: il titolo segnala un nuovo passivo, ma non indica ancora importo, data o causa.",
           "date": "2026-10-09T00:40:17.368Z"
+        },
+        {
+          "title": "Lucerna: Parlamento conferma il BIP per il budget 2027",
+          "url": "/articoli-lucerna/lucerna-bilancio-budget-2027/",
+          "excerpt": "Il Consiglio cantonale di Lucerna approva il riferimento al BIP per la crescita delle spese.",
+          "date": "2026-10-20T00:16:43.132Z"
         },
         {
           "title": "Imposta cantonale confronto Svizzera 2026: canton Lucerna",
@@ -160,12 +166,6 @@
           "url": "/articoli-frontaliere/lucerna-paradiso-fiscale-frontalieri/",
           "excerpt": "Lucerna riduce l'imposta sugli utili al 11,66%, superando Zugo. Impatto sui frontalieri e confronto con l'UE.",
           "date": "2026-05-07T09:05:42.794Z"
-        },
-        {
-          "title": "Imposta sugli autoveicoli canton Lucerna: calcolo e pagamento",
-          "url": "/articoli-svizzera/imposta-autoveicoli-lucerna-calcolo/",
-          "excerpt": "Imposta sugli autoveicoli nel Cantone di Lucerna: calcolo, scadenze, importi e pagamento. Cambio veicolo e indirizzo secondo le regole cantonali di Lucerna.",
-          "date": "2026-10-08T03:11:14.601Z"
         }
       ],
       "latestCantonArticles": [],
@@ -191,7 +191,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-20T00:32:46.463Z"
     },
     "en": {
       "canton": "LU",
@@ -284,7 +284,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -293,6 +293,12 @@
           "url": "/en/lucerne-articles/kriens-returns-to-deficit/",
           "excerpt": "After multimillion surpluses, Kriens returns to a deficit: the headline indicates a new liability, but does not yet specify the amount, date, or cause.",
           "date": "2026-10-09T00:40:17.368Z"
+        },
+        {
+          "title": "Lucerne: Parliament confirms BIP for the 2027 budget",
+          "url": "/en/lucerne-articles/lucerne-budget-2027-plan/",
+          "excerpt": "The Cantonal Council of Lucerne approves the use of GDP as a reference for expenditure growth.",
+          "date": "2026-10-20T00:16:43.132Z"
         },
         {
           "title": "Swiss Cantonal Tax Comparison 2026: Canton of Lucerne",
@@ -329,12 +335,6 @@
           "url": "/en/cross-border-articles/lucerne-new-swiss-tax-haven/",
           "excerpt": "Lucerne reduces corporate tax to 11.66%, surpassing Zug. Impact on cross-border workers and comparison with the EU.",
           "date": "2026-05-07T09:05:42.794Z"
-        },
-        {
-          "title": "Motor vehicle tax in the canton of Lucerne: calculation and payment",
-          "url": "/en/swiss-articles/lucerne-vehicle-tax-calculation/",
-          "excerpt": "Motor vehicle tax in the Canton of Lucerne: calculation, deadlines, amounts and payment. Change of vehicle and address according to the cantonal rules of Lucerne.",
-          "date": "2026-10-08T03:11:14.601Z"
         }
       ],
       "latestCantonArticles": [],
@@ -360,7 +360,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-20T00:32:46.463Z"
     },
     "de": {
       "canton": "LU",
@@ -453,7 +453,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -462,6 +462,12 @@
           "url": "/de/luzern-artikel/kriens-rutscht-wieder-ins-minus/",
           "excerpt": "Nach Überschüssen in Millionenhöhe ist Kriens wieder im Defizit: Die Überschrift weist auf einen neuen Fehlbetrag hin, nennt aber noch keinen Betrag, kein Datum und keine Ursache.",
           "date": "2026-10-09T00:40:17.368Z"
+        },
+        {
+          "title": "Luzern: Parlament bestätigt das BIP als Referenz für das Budget 2027",
+          "url": "/de/luzern-artikel/luzern-budget-2027-planung/",
+          "excerpt": "Der Luzerner Kantonsrat genehmigt die Bezugnahme auf das BIP für das Ausgabenwachstum.",
+          "date": "2026-10-20T00:16:43.132Z"
         },
         {
           "title": "Kantonale Steuern im Vergleich – Schweiz 2026: Kanton Luzern",
@@ -498,12 +504,6 @@
           "url": "/de/grenzgaenger-artikel/luzern-neuer-steuerparadies-schweiz/",
           "excerpt": "Luzern senkt die Gewinnsteuer auf 11,66%, überholt Zug. Auswirkungen auf Grenzgänger und Vergleich mit der EU.",
           "date": "2026-05-07T09:05:42.794Z"
-        },
-        {
-          "title": "Motorfahrzeugsteuer im Kanton Luzern: Berechnung und Zahlung",
-          "url": "/de/schweiz-artikel/luzern-motorfahrzeugsteuer-berechnung/",
-          "excerpt": "Motorfahrzeugsteuer im Kanton Luzern: Berechnung, Fristen, Beträge und Zahlung. Fahrzeug- und Adresswechsel gemäß den kantonalen Regeln von Luzern.",
-          "date": "2026-10-08T03:11:14.601Z"
         }
       ],
       "latestCantonArticles": [],
@@ -529,7 +529,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-20T00:32:46.463Z"
     },
     "fr": {
       "canton": "LU",
@@ -622,7 +622,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -631,6 +631,12 @@
           "url": "/fr/articles-lucerne/kriens-repasse-dans-le-rouge/",
           "excerpt": "Après des excédents de plusieurs millions, Kriens repasse en déficit : le titre signale un nouveau passif, mais n’indique encore ni montant, ni date ni cause.",
           "date": "2026-10-09T00:40:17.368Z"
+        },
+        {
+          "title": "Lucerne : le Parlement confirme le PIB pour le budget 2027",
+          "url": "/fr/articles-lucerne/lucerne-budget-2027-planification/",
+          "excerpt": "Le Conseil cantonal de Lucerne approuve la référence au PIB pour la croissance des dépenses.",
+          "date": "2026-10-20T00:16:43.132Z"
         },
         {
           "title": "Comparaison fiscale cantonale en Suisse 2026 : canton de Lucerne",
@@ -667,12 +673,6 @@
           "url": "/fr/articles-frontalier/lucerne-nouveau-paradis-fiscal-suisse/",
           "excerpt": "Lucerne réduit l'impôt sur les bénéfices à 11,66%, dépassant Zoug. Impact sur les frontaliers et comparaison avec l'UE.",
           "date": "2026-05-07T09:05:42.794Z"
-        },
-        {
-          "title": "Impôt sur les véhicules à Lucerne : calcul et paiement",
-          "url": "/fr/articles-suisse/lucerne-impot-vehicules-calcul/",
-          "excerpt": "Impôt sur les véhicules automobiles dans le canton de Lucerne : calcul, échéances, montants et paiement. Changement de véhicule et d’adresse selon les règles cantonales de Lucerne.",
-          "date": "2026-10-08T03:11:14.601Z"
         }
       ],
       "latestCantonArticles": [],
@@ -698,7 +698,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-20T00:32:46.463Z"
     }
   }
 }

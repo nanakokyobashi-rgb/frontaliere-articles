@@ -15,10 +15,15 @@ import {
   SEO_TITLE_BRAND_SUFFIX as TITLE_SUFFIX,
   SEO_TITLE_MAX_CHARS as TITLE_MAX_CHARS,
 } from './seo-title-repair.mjs';
-import { assertSeoDescriptionMinimum, SEO_DESCRIPTION_MIN } from './seo-description-contract.mjs';
+import {
+  assertSeoDescriptionMinimum,
+  SEO_DESCRIPTION_MAX,
+  SEO_OG_DESCRIPTION_MAX,
+  SEO_DESCRIPTION_MIN,
+} from './seo-description-contract.mjs';
 
-const DESCRIPTION_MAX_CHARS = 160;
-const OG_DESCRIPTION_MAX_CHARS = 250;
+const DESCRIPTION_MAX_CHARS = SEO_DESCRIPTION_MAX;
+const OG_DESCRIPTION_MAX_CHARS = SEO_OG_DESCRIPTION_MAX;
 const FALLBACK_YEAR = '2026';
 const KEYWORD_STOP_WORDS = new Set([
   'frontaliere', 'frontalieri', 'ticino', 'svizzera', 'italia',

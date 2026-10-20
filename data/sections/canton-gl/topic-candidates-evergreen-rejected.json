@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
+  "topicGateUrls": {
+    "canton-gl::https://www.suedostschweiz.ch/glarus/ade-lift-diese-skigebiete-im-glarnerland-sind-verschwunden-braunwald-2194454#ft-item=f87e644b8075": {
+      "section": "canton-gl",
+      "ts": 1792451292247
+    },
+    "canton-gl::https://www.suedostschweiz.ch/glarus/herr-schmidt-wie-viele-schusswaffen-gibt-es-ueberhaupt-im-kanton-glarus-2183207#ft-item=4f04422293d6": {
+      "section": "canton-gl",
+      "ts": 1792451302882
+    },
+    "canton-gl::https://www.suedostschweiz.ch/linth/im-linthgebiet-mangelt-es-an-michelin-sternen-und-punkten-bei-gault-millau-kein-problem-2196431#ft-item=20efc4e18cd1": {
+      "section": "canton-gl",
+      "ts": 1792451314485
+    },
+    "canton-gl::https://www.suedostschweiz.ch/glarus/wir-testen-haselnussaufstriche-von-laederach-mueller-und-nutella-lohnt-sich-der-aufpreis-2198605#ft-item=4e7e1a35825d": {
+      "section": "canton-gl",
+      "ts": 1792451325360
+    },
+    "canton-gl::https://www.suedostschweiz.ch/glarus/bilten-vollendet-den-glarner-chilbi-herbst-hier-findet-ihr-die-schoensten-bilder-vom-fest-2201104#ft-item=6ef790e64cd2": {
+      "section": "canton-gl",
+      "ts": 1792451335632
+    },
+    "canton-gl::https://www.suedostschweiz.ch/glarus/der-traum-vom-titel-lebt-volley-naefels-fegt-colombier-vom-feld-1532362#ft-item=f39092ed9933": {
+      "section": "canton-gl",
+      "ts": 1792451345171
+    },
+    "canton-gl::https://www.suedostschweiz.ch/glarus/meldungen-aus-dem-glarnerland-1916134#ft-item=4c684703f455": {
+      "section": "canton-gl",
+      "ts": 1792501303214
+    },
+    "canton-gl::https://www.suedostschweiz.ch/glarus/der-traum-vom-titel-lebt-volley-naefels-fegt-colombier-vom-feld-1532362#ft-item=be28072a1658": {
+      "section": "canton-gl",
+      "ts": 1792501821195
+    }
+  }
+}

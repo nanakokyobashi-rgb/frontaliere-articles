@@ -4,22 +4,22 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-19T18:33:18.720Z",
-  "contentHash": "e23f176a2018e6c3c97f19f41b3faafd93b17c68418e03b34570c558acfce12c",
+  "updatedAt": "2026-10-20T15:13:18.424Z",
+  "contentHash": "e8947ce775cca4086b790c99ae5c29f06fed99e5480d8d14ff9750c4a3fe3561",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-18T23:59:59.000Z",
+      "updatedAt": "2026-10-19T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-19T14:01:37.256Z",
+      "updatedAt": "2026-10-20T05:22:50.234Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -33,30 +33,60 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Camedo (Re-Centovalli), settimana conclusa: 18 ottobre 2026"
+          "note": "Biegno-Indemini, settimana conclusa: 19 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "8",
-          "note": "segnalazioni aggiornate: 19 ottobre 2026"
+          "value": "5",
+          "note": "segnalazioni aggiornate: 20 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "39",
-          "note": "segnalazioni aggiornate: 19 ottobre 2026"
+          "value": "35",
+          "note": "segnalazioni aggiornate: 20 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 12 ottobre 2026 – 18 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 13 ottobre 2026 – 19 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
+            {
+              "label": "Biegno-Indemini",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/biegno-indemini/oggi/"
+            },
+            {
+              "label": "Bizzarone-Novazzano",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/bizzarone-novazzano/oggi/"
+            },
             {
               "label": "Camedo (Re-Centovalli)",
               "value": "0 min",
               "detail": "47 rilevazioni",
               "url": "/traffico-dogane/camedo/oggi/"
+            },
+            {
+              "label": "Clivio-Ligornetto",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/clivio-ligornetto/oggi/"
+            },
+            {
+              "label": "Cremenaga-Ponte Cremenaga",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/cremenaga-ponte-cremenaga/oggi/"
+            },
+            {
+              "label": "Crociale dei Mulini",
+              "value": "0 min",
+              "detail": "47 rilevazioni",
+              "url": "/traffico-dogane/crociale-dei-mulini/oggi/"
             },
             {
               "label": "Drezzo-Pedrinate",
@@ -65,57 +95,21 @@
               "url": "/traffico-dogane/drezzo-pedrinate/oggi/"
             },
             {
-              "label": "Lanzo d'Intelvi-Arogno",
+              "label": "Dumenza-Cassinone",
               "value": "0 min",
               "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/lanzo-d-intelvi-arogno/oggi/"
-            },
-            {
-              "label": "Maslianico-Pizzamiglio",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/maslianico-pizzamiglio/oggi/"
-            },
-            {
-              "label": "Oria-Gandria",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/oria-gandria/oggi/"
-            },
-            {
-              "label": "Piaggio Valmara (Cannobio-Brissago)",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/piaggio-valmara/oggi/"
-            },
-            {
-              "label": "Zenna-Dirinella",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/zenna-dirinella/oggi/"
-            },
-            {
-              "label": "Cremenaga-Ponte Cremenaga",
-              "value": "0 min",
-              "detail": "47 rilevazioni",
-              "url": "/traffico-dogane/cremenaga-ponte-cremenaga/oggi/"
+              "url": "/traffico-dogane/dumenza-cassinone/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Chiusure, cantieri e disagi",
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
-            {
-              "label": "A13 Ascona <-> Aeroporto di Locarno Svincolo autostradale Locarno Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.5, sulla corsia dêmergenza",
-              "value": "Chiusura",
-              "detail": "fine prevista: 20 ottobre 2026",
-              "date": "2026-07-10T03:00:00.000Z"
-            },
             {
               "label": "A13 Ascona <-> Aeroporto di Locarno tra Svincolo autostradale Minusio E Svincolo autostradale Locarno Situazione: chiusa cantiere, lunghezza [km] 5.5",
               "value": "Chiusura",
@@ -135,16 +129,6 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata",
-              "value": "Chiusura",
-              "date": "2026-10-19T10:16:00.000Z"
-            },
-            {
-              "label": "Revocato: Castagnola -> Davesco-Soragno tra Luogo Castagnola E Luogo Pregassona Situazione: chiusa Causa: rottura rete idrica",
-              "value": "Chiusura",
-              "date": "2026-10-19T11:25:00.000Z"
-            },
-            {
               "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
               "value": "Chiusura",
               "detail": "fine prevista: 22 ottobre 2026",
@@ -155,10 +139,25 @@
               "value": "Chiusura",
               "detail": "fine prevista: 29 ottobre 2026",
               "date": "2026-10-28T20:30:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Mendrisio E Svincolo autostradale Melide/Bissone Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 15",
+              "value": "Traffico",
+              "date": "2026-10-20T04:04:00.000Z"
+            },
+            {
+              "label": "406 Riazzino -> Cadenazzo tra Svincolo autostradale Aeroporto di Locarno E Luogo Contone Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-20T04:51:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Chiasso tra Svincolo autostradale Chiasso Centro E Svincolo autostradale Chiasso Dogana commerciale Situazione: colonna per autocarro Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-20T05:16:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -196,7 +195,7 @@
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -292,7 +291,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T15:13:18.424Z"
     },
     "en": {
       "canton": "TI",
@@ -303,30 +302,60 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Camedo (Re-Centovalli), week ending 18 October 2026"
+          "note": "Biegno-Indemini, week ending 19 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "8",
-          "note": "reports as of 19 October 2026"
+          "value": "5",
+          "note": "reports as of 20 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "39",
-          "note": "reports as of 19 October 2026"
+          "value": "35",
+          "note": "reports as of 20 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 12 October 2026 to 18 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 13 October 2026 to 19 October 2026, fastest first.",
           "items": [
+            {
+              "label": "Biegno-Indemini",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/biegno-indemini/today/"
+            },
+            {
+              "label": "Bizzarone-Novazzano",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/bizzarone-novazzano/today/"
+            },
             {
               "label": "Camedo (Re-Centovalli)",
               "value": "0 min",
               "detail": "47 readings",
               "url": "/en/border-wait/camedo/today/"
+            },
+            {
+              "label": "Clivio-Ligornetto",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/clivio-ligornetto/today/"
+            },
+            {
+              "label": "Cremenaga-Ponte Cremenaga",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/cremenaga-ponte-cremenaga/today/"
+            },
+            {
+              "label": "Crociale dei Mulini",
+              "value": "0 min",
+              "detail": "47 readings",
+              "url": "/en/border-wait/crociale-dei-mulini/today/"
             },
             {
               "label": "Drezzo-Pedrinate",
@@ -335,57 +364,21 @@
               "url": "/en/border-wait/drezzo-pedrinate/today/"
             },
             {
-              "label": "Lanzo d'Intelvi-Arogno",
+              "label": "Dumenza-Cassinone",
               "value": "0 min",
               "detail": "47 readings",
-              "url": "/en/border-wait/lanzo-d-intelvi-arogno/today/"
-            },
-            {
-              "label": "Maslianico-Pizzamiglio",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/maslianico-pizzamiglio/today/"
-            },
-            {
-              "label": "Oria-Gandria",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/oria-gandria/today/"
-            },
-            {
-              "label": "Piaggio Valmara (Cannobio-Brissago)",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/piaggio-valmara/today/"
-            },
-            {
-              "label": "Zenna-Dirinella",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/zenna-dirinella/today/"
-            },
-            {
-              "label": "Cremenaga-Ponte Cremenaga",
-              "value": "0 min",
-              "detail": "47 readings",
-              "url": "/en/border-wait/cremenaga-ponte-cremenaga/today/"
+              "url": "/en/border-wait/dumenza-cassinone/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Closures, roadworks and disruptions",
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
-            {
-              "label": "A13 Ascona <-> Aeroporto di Locarno Svincolo autostradale Locarno Situazione: raccordo autostradale chiuso in entrata cantiere, lunghezza [km] 0.5, sulla corsia dêmergenza",
-              "value": "Closure",
-              "detail": "until 20 October 2026",
-              "date": "2026-07-10T03:00:00.000Z"
-            },
             {
               "label": "A13 Ascona <-> Aeroporto di Locarno tra Svincolo autostradale Minusio E Svincolo autostradale Locarno Situazione: chiusa cantiere, lunghezza [km] 5.5",
               "value": "Closure",
@@ -405,16 +398,6 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata",
-              "value": "Closure",
-              "date": "2026-10-19T10:16:00.000Z"
-            },
-            {
-              "label": "Revocato: Castagnola -> Davesco-Soragno tra Luogo Castagnola E Luogo Pregassona Situazione: chiusa Causa: rottura rete idrica",
-              "value": "Closure",
-              "date": "2026-10-19T11:25:00.000Z"
-            },
-            {
               "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
               "value": "Closure",
               "detail": "until 22 October 2026",
@@ -425,10 +408,25 @@
               "value": "Closure",
               "detail": "until 29 October 2026",
               "date": "2026-10-28T20:30:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Mendrisio E Svincolo autostradale Melide/Bissone Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 15",
+              "value": "Traffic",
+              "date": "2026-10-20T04:04:00.000Z"
+            },
+            {
+              "label": "406 Riazzino -> Cadenazzo tra Svincolo autostradale Aeroporto di Locarno E Luogo Contone Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-20T04:51:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Chiasso tra Svincolo autostradale Chiasso Centro E Svincolo autostradale Chiasso Dogana commerciale Situazione: colonna per autocarro Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-20T05:16:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -466,7 +464,7 @@
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -561,7 +559,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T15:13:18.424Z"
     },
     "de": {
       "canton": "TI",
@@ -572,30 +570,60 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Camedo (Re-Centovalli), Woche bis 18. Oktober 2026"
+          "note": "Biegno-Indemini, Woche bis 19. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "8",
-          "note": "Meldungen vom 19. Oktober 2026"
+          "value": "5",
+          "note": "Meldungen vom 20. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "39",
-          "note": "Meldungen vom 19. Oktober 2026"
+          "value": "35",
+          "note": "Meldungen vom 20. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 12. Oktober 2026 bis 18. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 13. Oktober 2026 bis 19. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
+            {
+              "label": "Biegno-Indemini",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/biegno-indemini/heute/"
+            },
+            {
+              "label": "Bizzarone-Novazzano",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/bizzarone-novazzano/heute/"
+            },
             {
               "label": "Camedo (Re-Centovalli)",
               "value": "0 Min.",
               "detail": "47 Messungen",
               "url": "/de/wartezeit-grenze/camedo/heute/"
+            },
+            {
+              "label": "Clivio-Ligornetto",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/clivio-ligornetto/heute/"
+            },
+            {
+              "label": "Cremenaga-Ponte Cremenaga",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/cremenaga-ponte-cremenaga/heute/"
+            },
+            {
+              "label": "Crociale dei Mulini",
+              "value": "0 Min.",
+              "detail": "47 Messungen",
+              "url": "/de/wartezeit-grenze/crociale-dei-mulini/heute/"
             },
             {
               "label": "Drezzo-Pedrinate",
@@ -604,57 +632,21 @@
               "url": "/de/wartezeit-grenze/drezzo-pedrinate/heute/"
             },
             {
-              "label": "Lanzo d'Intelvi-Arogno",
+              "label": "Dumenza-Cassinone",
               "value": "0 Min.",
               "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/lanzo-d-intelvi-arogno/heute/"
-            },
-            {
-              "label": "Maslianico-Pizzamiglio",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/maslianico-pizzamiglio/heute/"
-            },
-            {
-              "label": "Oria-Gandria",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/oria-gandria/heute/"
-            },
-            {
-              "label": "Piaggio Valmara (Cannobio-Brissago)",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/piaggio-valmara/heute/"
-            },
-            {
-              "label": "Zenna-Dirinella",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/zenna-dirinella/heute/"
-            },
-            {
-              "label": "Cremenaga-Ponte Cremenaga",
-              "value": "0 Min.",
-              "detail": "47 Messungen",
-              "url": "/de/wartezeit-grenze/cremenaga-ponte-cremenaga/heute/"
+              "url": "/de/wartezeit-grenze/dumenza-cassinone/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Sperrungen, Baustellen und Störungen",
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
-            {
-              "label": "A13 Ascona <-> Flughafen Locarno Anschluss Locarno Sachlage: Einfahrt gesperrt Baustelle, Länge [km] 0.5, auf dem Pannenstreifen",
-              "value": "Sperrung",
-              "detail": "bis 20. Oktober 2026",
-              "date": "2026-07-10T03:00:00.000Z"
-            },
             {
               "label": "A13 Ascona <-> Flughafen Locarno zwischen Anschluss Minusio und Anschluss Locarno Sachlage: Strecke gesperrt Baustelle, Länge [km] 5.5",
               "value": "Sperrung",
@@ -674,16 +666,6 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
-              "value": "Sperrung",
-              "date": "2026-10-19T10:16:00.000Z"
-            },
-            {
-              "label": "Aufgehoben: Castagnola -> Davesco-Soragno zwischen Ortschaft Castagnola und Ortschaft Pregassona Sachlage: Strecke gesperrt Ursache: Wasserrohrbruch",
-              "value": "Sperrung",
-              "date": "2026-10-19T11:25:00.000Z"
-            },
-            {
               "label": "A13 Bellinzona <-> Chur zwischen Anschluss San Bernardino und Anschluss San Bernardino-Pass Sachlage: Strecke gesperrt Baustelle, Länge [km] 7.5",
               "value": "Sperrung",
               "detail": "bis 22. Oktober 2026",
@@ -694,10 +676,25 @@
               "value": "Sperrung",
               "detail": "bis 29. Oktober 2026",
               "date": "2026-10-28T20:30:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso -> Gotthard zwischen Anschluss Mendrisio und Anschluss Melide/Bissone Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 15",
+              "value": "Verkehr",
+              "date": "2026-10-20T04:04:00.000Z"
+            },
+            {
+              "label": "406 Riazzino -> Cadenazzo zwischen Anschluss Flughafen Locarno und Ortschaft Contone Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-20T04:51:00.000Z"
+            },
+            {
+              "label": "A2 Gotthard -> Chiasso zwischen Anschluss Chiasso-Centro und Anschluss Chiasso-Warenzoll Sachlage: Stau für LKW Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-20T05:16:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -735,7 +732,7 @@
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -830,7 +827,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T15:13:18.424Z"
     },
     "fr": {
       "canton": "TI",
@@ -841,30 +838,60 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Camedo (Re-Centovalli), semaine jusqu’au 18 octobre 2026"
+          "note": "Biegno-Indemini, semaine jusqu’au 19 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "8",
-          "note": "signalements au 19 octobre 2026"
+          "value": "5",
+          "note": "signalements au 20 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "39",
-          "note": "signalements au 19 octobre 2026"
+          "value": "35",
+          "note": "signalements au 20 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 12 octobre 2026 au 18 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 13 octobre 2026 au 19 octobre 2026, du plus fluide au plus lent.",
           "items": [
+            {
+              "label": "Biegno-Indemini",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/biegno-indemini/aujourd-hui/"
+            },
+            {
+              "label": "Bizzarone-Novazzano",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/bizzarone-novazzano/aujourd-hui/"
+            },
             {
               "label": "Camedo (Re-Centovalli)",
               "value": "0 min",
               "detail": "47 relevés",
               "url": "/fr/temps-attente-douane/camedo/aujourd-hui/"
+            },
+            {
+              "label": "Clivio-Ligornetto",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/clivio-ligornetto/aujourd-hui/"
+            },
+            {
+              "label": "Cremenaga-Ponte Cremenaga",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/cremenaga-ponte-cremenaga/aujourd-hui/"
+            },
+            {
+              "label": "Crociale dei Mulini",
+              "value": "0 min",
+              "detail": "47 relevés",
+              "url": "/fr/temps-attente-douane/crociale-dei-mulini/aujourd-hui/"
             },
             {
               "label": "Drezzo-Pedrinate",
@@ -873,57 +900,21 @@
               "url": "/fr/temps-attente-douane/drezzo-pedrinate/aujourd-hui/"
             },
             {
-              "label": "Lanzo d'Intelvi-Arogno",
+              "label": "Dumenza-Cassinone",
               "value": "0 min",
               "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/lanzo-d-intelvi-arogno/aujourd-hui/"
-            },
-            {
-              "label": "Maslianico-Pizzamiglio",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/maslianico-pizzamiglio/aujourd-hui/"
-            },
-            {
-              "label": "Oria-Gandria",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/oria-gandria/aujourd-hui/"
-            },
-            {
-              "label": "Piaggio Valmara (Cannobio-Brissago)",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/piaggio-valmara/aujourd-hui/"
-            },
-            {
-              "label": "Zenna-Dirinella",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/zenna-dirinella/aujourd-hui/"
-            },
-            {
-              "label": "Cremenaga-Ponte Cremenaga",
-              "value": "0 min",
-              "detail": "47 relevés",
-              "url": "/fr/temps-attente-douane/cremenaga-ponte-cremenaga/aujourd-hui/"
+              "url": "/fr/temps-attente-douane/dumenza-cassinone/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-18T23:59:59.000Z"
+          "updatedAt": "2026-10-19T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
           "title": "Fermetures, chantiers et perturbations",
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
-            {
-              "label": "A13 Ascona <-> Aeroprt de Locarno Jonction autoroutière Locarno Situation: entrée fermée travaux, longueur [km] 0.5, sur la bande d'arrêt d'urgence",
-              "value": "Fermeture",
-              "detail": "jusqu’au 20 octobre 2026",
-              "date": "2026-07-10T03:00:00.000Z"
-            },
             {
               "label": "A13 Ascona <-> Aeroprt de Locarno entre Jonction autoroutière Minusio et Jonction autoroutière Locarno Situation: fermé travaux, longueur [km] 5.5",
               "value": "Fermeture",
@@ -943,16 +934,6 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
-              "value": "Fermeture",
-              "date": "2026-10-19T10:16:00.000Z"
-            },
-            {
-              "label": "Révoqué: Castagnola -> Davesco-Soragno entre Localité Castagnola et Localité Pregassona Situation: fermé Raison: rupture de conduite d'eau",
-              "value": "Fermeture",
-              "date": "2026-10-19T11:25:00.000Z"
-            },
-            {
               "label": "A13 Bellinzone <-> Coire entre Jonction autoroutière San Bernardino et Jonction autoroutière San Bernardino-Pass Situation: fermé travaux, longueur [km] 7.5",
               "value": "Fermeture",
               "detail": "jusqu’au 22 octobre 2026",
@@ -963,10 +944,25 @@
               "value": "Fermeture",
               "detail": "jusqu’au 29 octobre 2026",
               "date": "2026-10-28T20:30:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso -> St-Gothard entre Jonction autoroutière Mendrisio et Jonction autoroutière Melide/Bissone Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 15",
+              "value": "Trafic",
+              "date": "2026-10-20T04:04:00.000Z"
+            },
+            {
+              "label": "406 Riazzino -> Cadenazzo entre Jonction autoroutière Aeroprt de Locarno et Localité Contone Situation: trafic en accordéon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-20T04:51:00.000Z"
+            },
+            {
+              "label": "A2 St-Gothard -> Chiasso entre Jonction autoroutière Chiasso-Centro et Jonction autoroutière Chiasso-Douane commercial Situation: bouchon pour poids lourd Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-20T05:16:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-20T05:22:50.234Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1004,7 +1000,7 @@
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -1100,7 +1096,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T15:13:18.424Z"
     }
   }
 }

@@ -162,6 +162,7 @@ test('body edits re-enter through the trusted recovery, not through a tests.yml 
     'scripts/lib',
     'scripts/ci/lib',
     'scripts/ci/guard-main-tree-shrink.mjs',
+    'scripts/ci/old-history-guard.mjs',
     'scripts/ci/report-rate-limit-budget.mjs',
     'generator/scripts/load-rc-env.mjs',
     'generator/scripts/lib/source-copy-guard.mjs',
