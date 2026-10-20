@@ -33,6 +33,9 @@ const blogMetaCantonZgIt: Record<string, string> = {
     'blog.article.zugo-governo-direzioni-2027.title': 'Zugo: il Governo mantiene le direzioni dal 2027',
     'blog.article.zugo-governo-direzioni-2027.excerpt': 'Per il mandato dal 2027, tutti i membri del Governo di Zugo manterranno le direzioni attuali, ha comunicato martedì la Cancelleria dello Stato.',
     'blog.article.zugo-governo-direzioni-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.zugo-assegnazione-mandato-2030.title': 'Zugo: assegnate le direzioni per il periodo 2027-2030',
+    'blog.article.zugo-assegnazione-mandato-2030.excerpt': 'Il Consiglio di Stato di Zugo ha assegnato le direzioni per il periodo 2027-2030 e regolato le supplenze dal 1° gennaio 2027.',
+    'blog.article.zugo-assegnazione-mandato-2030.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZgIt;

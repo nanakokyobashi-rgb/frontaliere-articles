@@ -116,4 +116,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'zugo-assegnazione-mandato-2030',
+ category: 'novita',
+ date: '2026-10-20T23:44:17.371Z',
+ image: '/images/blog/article-zugo-assegnazione-mandato-2030.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
