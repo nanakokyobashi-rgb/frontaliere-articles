@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-10-20T05:26:42.124Z",
-  "contentHash": "0dff2ebb50e3e50e0474810c179b5c49979d5ddeb08de1a2f7324869999bc644",
+  "updatedAt": "2026-10-20T09:50:40.544Z",
+  "contentHash": "c2c006aed87afa01bda481016c3eb32459e929fa339f10feffd955bab91bdef0",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,11 +16,6 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-19T22:22:54.680Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-19T21:11:59.421Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -98,20 +93,6 @@
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
           "updatedAt": "2026-10-19T22:22:54.680Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Fribourg",
-              "value": "10 °C",
-              "detail": "oggi da 9 a 11 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -229,7 +210,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-20T05:26:42.124Z"
+      "updatedAt": "2026-10-20T09:50:40.544Z"
     },
     "en": {
       "canton": "FR",
@@ -300,20 +281,6 @@
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
           "updatedAt": "2026-10-19T22:22:54.680Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Fribourg",
-              "value": "10 °C",
-              "detail": "today from 9 to 11 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -427,7 +394,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-20T05:26:42.124Z"
+      "updatedAt": "2026-10-20T09:50:40.544Z"
     },
     "de": {
       "canton": "FR",
@@ -498,20 +465,6 @@
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
           "updatedAt": "2026-10-19T22:22:54.680Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Fribourg",
-              "value": "10 °C",
-              "detail": "heute 9 bis 11 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -625,7 +578,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-20T05:26:42.124Z"
+      "updatedAt": "2026-10-20T09:50:40.544Z"
     },
     "fr": {
       "canton": "FR",
@@ -696,20 +649,6 @@
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
           "updatedAt": "2026-10-19T22:22:54.680Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Fribourg",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 9 à 11 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -819,7 +758,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-20T05:26:42.124Z"
+      "updatedAt": "2026-10-20T09:50:40.544Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-19T14:06:02.326Z",
-  "contentHash": "f1202d0433f076fbd2df57c2c5b6a2431961b3257d58bdc475eb58ddaa7f03b5",
+  "updatedAt": "2026-10-20T09:50:40.544Z",
+  "contentHash": "c2208e262e592cc80b970dab18f0477cfcfcef09f12baf2d2220ae86427d4745",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-19T05:23:43.930Z",
+      "updatedAt": "2026-10-20T00:43:33.013Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T19:43:29.238Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -38,12 +38,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "11",
-          "note": "segnalazioni aggiornate: 19 ottobre 2026"
+          "note": "segnalazioni aggiornate: 20 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "5",
-          "note": "segnalazioni aggiornate: 19 ottobre 2026"
+          "note": "segnalazioni aggiornate: 20 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -129,7 +129,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-20T00:43:33.013Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -147,7 +147,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -189,7 +189,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-20T09:50:40.544Z"
     },
     "en": {
       "canton": "NE",
@@ -205,12 +205,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "11",
-          "note": "reports as of 19 October 2026"
+          "note": "reports as of 20 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "5",
-          "note": "reports as of 19 October 2026"
+          "note": "reports as of 20 October 2026"
         }
       ],
       "dataBlocks": [
@@ -296,7 +296,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-20T00:43:33.013Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -314,7 +314,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -356,7 +356,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-20T09:50:40.544Z"
     },
     "de": {
       "canton": "NE",
@@ -372,12 +372,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "11",
-          "note": "Meldungen vom 19. Oktober 2026"
+          "note": "Meldungen vom 20. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "5",
-          "note": "Meldungen vom 19. Oktober 2026"
+          "note": "Meldungen vom 20. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -463,7 +463,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-20T00:43:33.013Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -481,7 +481,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -523,7 +523,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-20T09:50:40.544Z"
     },
     "fr": {
       "canton": "NE",
@@ -539,12 +539,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "11",
-          "note": "signalements au 19 octobre 2026"
+          "note": "signalements au 20 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "5",
-          "note": "signalements au 19 octobre 2026"
+          "note": "signalements au 20 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -630,7 +630,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-19T05:23:43.930Z"
+          "updatedAt": "2026-10-20T00:43:33.013Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -648,7 +648,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/circulation-perturbee-et-stationnement-difficile-avant-et-pendant-la-fete-des-vendanges-privilegiez-les-parkings-exterieurs"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -690,7 +690,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-19T14:06:02.326Z"
+      "updatedAt": "2026-10-20T09:50:40.544Z"
     }
   }
 }

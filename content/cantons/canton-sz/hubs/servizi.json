@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-10-20T05:26:42.124Z",
-  "contentHash": "035302f73d6976607a7e60afc6d3158a64b5e0f4f170baa3aa5d43b34ddf30e2",
+  "updatedAt": "2026-10-20T09:50:40.544Z",
+  "contentHash": "53e8de7625c20077b4212793388b78b7e81d6b11a0e7aaaf2d5c5493bc438629",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,11 +16,6 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-19T22:22:54.680Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-19T21:11:59.421Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -93,20 +88,6 @@
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
           "updatedAt": "2026-10-19T22:22:54.680Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Schwyz",
-              "value": "12 °C",
-              "detail": "oggi da 10 a 14 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -224,7 +205,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-20T05:26:42.124Z"
+      "updatedAt": "2026-10-20T09:50:40.544Z"
     },
     "en": {
       "canton": "SZ",
@@ -290,20 +271,6 @@
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
           "updatedAt": "2026-10-19T22:22:54.680Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Schwyz",
-              "value": "12 °C",
-              "detail": "today from 10 to 14 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -417,7 +384,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-20T05:26:42.124Z"
+      "updatedAt": "2026-10-20T09:50:40.544Z"
     },
     "de": {
       "canton": "SZ",
@@ -483,20 +450,6 @@
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
           "updatedAt": "2026-10-19T22:22:54.680Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Schwyz",
-              "value": "12 °C",
-              "detail": "heute 10 bis 14 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -610,7 +563,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-20T05:26:42.124Z"
+      "updatedAt": "2026-10-20T09:50:40.544Z"
     },
     "fr": {
       "canton": "SZ",
@@ -676,20 +629,6 @@
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
           "updatedAt": "2026-10-19T22:22:54.680Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Schwyz",
-              "value": "12 °C",
-              "detail": "aujourd’hui de 10 à 14 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -799,7 +738,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-20T05:26:42.124Z"
+      "updatedAt": "2026-10-20T09:50:40.544Z"
     }
   }
 }

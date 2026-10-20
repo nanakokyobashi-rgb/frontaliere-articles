@@ -4,17 +4,17 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T03:21:16.902Z",
-  "contentHash": "a4a095b917922f547d54c8778d14ac64cb5b16b6ccb6440ae45c5b55e5e279dd",
+  "updatedAt": "2026-10-20T09:50:40.544Z",
+  "contentHash": "6395a2e9fa449ca91348e769aa0a1ece7d4c4e4cdbb95586d2bf7f1b3cd99419",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-19T14:01:37.256Z",
+      "updatedAt": "2026-10-20T00:43:33.013Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 19 ottobre 2026"
+          "note": "segnalazioni aggiornate: 20 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 19 ottobre 2026"
+          "note": "segnalazioni aggiornate: 20 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -68,7 +68,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-20T00:43:33.013Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -96,7 +96,7 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -154,7 +154,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T09:50:40.544Z"
     },
     "en": {
       "canton": "ZG",
@@ -165,12 +165,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "3",
-          "note": "reports as of 19 October 2026"
+          "note": "reports as of 20 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "1",
-          "note": "reports as of 19 October 2026"
+          "note": "reports as of 20 October 2026"
         }
       ],
       "dataBlocks": [
@@ -205,7 +205,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-20T00:43:33.013Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -233,7 +233,7 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -291,7 +291,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T09:50:40.544Z"
     },
     "de": {
       "canton": "ZG",
@@ -302,12 +302,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "3",
-          "note": "Meldungen vom 19. Oktober 2026"
+          "note": "Meldungen vom 20. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "1",
-          "note": "Meldungen vom 19. Oktober 2026"
+          "note": "Meldungen vom 20. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -342,7 +342,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-20T00:43:33.013Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -370,7 +370,7 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -428,7 +428,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T09:50:40.544Z"
     },
     "fr": {
       "canton": "ZG",
@@ -439,12 +439,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "3",
-          "note": "signalements au 19 octobre 2026"
+          "note": "signalements au 20 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "1",
-          "note": "signalements au 19 octobre 2026"
+          "note": "signalements au 20 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -479,7 +479,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-20T00:43:33.013Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -507,7 +507,7 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -565,7 +565,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T09:50:40.544Z"
     }
   }
 }
