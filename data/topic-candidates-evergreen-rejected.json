@@ -2268,6 +2268,18 @@
       "firstSeenAt": "2026-10-19T12:47:26.741Z",
       "lastValidatedAt": "2026-10-19T12:47:26.741Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere assistente di cura ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "topic-gate",
+      "firstSeenAt": "2026-10-20T02:28:41.680Z",
+      "lastValidatedAt": "2026-10-20T02:28:41.680Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -10653,14 +10665,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/lavori-sulla-ss34-cambia-la-navigazione-tra-laveno-e-intra/2711356": {
-      "section": "frontaliere",
-      "ts": 1792288653783
-    },
-    "svizzera::https://www.tio.ch/svizzera/cronaca/1957423/clima-lettere-accuse-direzione-carceri-terrore": {
-      "section": "svizzera",
-      "ts": 1792290149958
-    },
     "svizzera::https://www.laregione.ch/svizzera/svizzera/1957422/irregolarita-sugli-orari-mobbing-e-clima-tossico-fra-le-sbarre": {
       "section": "svizzera",
       "ts": 1792291113345
@@ -10876,6 +10880,38 @@
     "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/scuol-per-il-sindacato-si-dovr%c3%a0-andare-al-secondo-turno--4176388.html": {
       "section": "frontaliere",
       "ts": 1792456260265
+    },
+    "frontaliere::https://www.tio.ch/sport/calcio/1957833/ronaldo-nazionale-sospensione-euro-multa": {
+      "section": "frontaliere",
+      "ts": 1792461600726
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1957558/oro-e-tornato-il-momento-di-acquistarlo": {
+      "section": "frontaliere",
+      "ts": 1792461608637
+    },
+    "frontaliere::https://www.rsi.ch/s/4176388": {
+      "section": "frontaliere",
+      "ts": 1792461616291
+    },
+    "frontaliere::https://www.rsi.ch/s/4176097": {
+      "section": "frontaliere",
+      "ts": 1792461630413
+    },
+    "frontaliere::https://www.rsi.ch/s/4171186": {
+      "section": "frontaliere",
+      "ts": 1792461634297
+    },
+    "frontaliere::https://www.rsi.ch/s/4171162": {
+      "section": "frontaliere",
+      "ts": 1792461885707
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1957803/salari-che-crescono-meno-della-media-svizzera-e-potere-d-acquisto-che-si-riduce": {
+      "section": "frontaliere",
+      "ts": 1792463017375
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1957822/vent-anni-di-scuola-inoltre-un-tassello-essenziale-di-risocializzazione": {
+      "section": "frontaliere",
+      "ts": 1792463069371
     }
   }
 }
