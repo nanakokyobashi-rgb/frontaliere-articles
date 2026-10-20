@@ -202,6 +202,11 @@ su riga propria — in testa o in coda, indifferentemente:
 `blocked-admin-settings` · `no-root-cause` · `overlap-skip` ·
 `pr-already-open` · `already-fixed`.
 
+`FIX_OUTCOME` è riservato all'ultima azione di `issue-fix.yml`. Riconciliazioni
+e note manuali che riportano solo evidenza o stato (`evidence-only`,
+`pr-updated`, ricorrenza o recovery in corso) documentano la prova senza
+inventare un marker.
+
 La posizione non conta: `FIX_OUTCOME_RE` in `followup-drainer.mjs` non è
 ancorata, e il drainer stesso scrive il marker in fondo ai propri commenti. Una
 regola più stretta di quanto il codice richieda verrebbe violata innocuamente
