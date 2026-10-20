@@ -5,7 +5,7 @@
  * ## Il difetto che pinna
  *
  * La PR #83 ha separato tre superfici descrittive del Bollettino — `excerpt`
- * (~250-280, cio' che l'utente LEGGE), `seoDescription` (150-160, cio' che
+ * (~250-280, cio' che l'utente LEGGE), `seoDescription` (120-150, cio' che
  * Google mostra), `ogDescription` (200-250, la card social) — e le ha scritte e
  * misurate in tutte e quattro le locali. Poi nessuna delle tre localizzate e'
  * uscita dal processo: `buildMetaBlock` emetteva `title|excerpt|imageAlt` e
@@ -227,7 +227,7 @@ const BRIEF = {
  * della stessa catena, ed e' fra i due che il testo si perdeva.
  */
 const BUDGET = {
-  seoDescription: { min: 120, max: 165 },
+  seoDescription: { min: 120, max: 150 },
   ogDescription: { min: 180, max: 250 },
 };
 

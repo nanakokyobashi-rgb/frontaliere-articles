@@ -57,13 +57,11 @@
  * — the exact failure `seo-description-cap.test.mjs` exists to stop, and it
  * already happened twice (see that file's header).
  *
- * `SEO_DESCRIPTION_MIN` is imported from the shared contract so registration
- * and refresh enforce the same floor. `SEO_DESCRIPTION_MAX`/`SEO_OG_DESCRIPTION_MAX` below are NOT imported from
- * create-article.mjs: importing that module pulls in its static `jsdom`
- * dependency, which this module deliberately stays free of (see above). They
- * are the same two numbers, kept in sync by
- * `article-meta-refresh.test.mjs`'s budget-sync test, per AGENTS.md #6 (a
- * value that cannot be imported gets the link covered by a test instead).
+ * All three bounds are imported from the shared description contract, so
+ * registration and refresh use the same limits without importing
+ * create-article.mjs (whose static `jsdom` dependency this module deliberately
+ * stays free of). `seo-description-cap.test.mjs` also checks that the SERP cap
+ * matches the SiteShell contract in `host/shared/titleSuffix.ts`.
  * `truncateToClause` is imported from the same dependency-free module
  * `clampSeoDescriptions` delegates to. Refusing an overlong first token is
  * intentional here: repair must not publish a mid-word SEO description.
@@ -77,7 +75,12 @@ import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
 import { assertPlainDescriptionFields } from './article-excerpt.mjs';
-import { SEO_DESCRIPTION_MIN, assertSeoDescriptionMinimum } from './seo-description-contract.mjs';
+import {
+  SEO_DESCRIPTION_MAX,
+  SEO_OG_DESCRIPTION_MAX,
+  SEO_DESCRIPTION_MIN,
+  assertSeoDescriptionMinimum,
+} from './seo-description-contract.mjs';
 import { truncateToClause } from '../../../host/shared/clauseTail.mjs';
 import { escapeRegExpLiteral } from './escape-regexp.mjs';
 import {
@@ -86,6 +89,8 @@ import {
   endRegisterLock,
   readRegisterLock,
 } from './register-lock.mjs';
+
+export { SEO_DESCRIPTION_MAX, SEO_OG_DESCRIPTION_MAX };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Two levels up from `generator/scripts/lib/` is `generator/`; one more is the
@@ -101,14 +106,6 @@ const LOCALES = ['it', 'en', 'de', 'fr'];
  * explicit `refreshTitles` option.
  */
 const LOCALE_FIELDS = ['excerpt', 'seoDescription', 'ogDescription'];
-
-/**
- * Same values as create-article.mjs's SEO_DESCRIPTION_MAX / SEO_OG_
- * DESCRIPTION_MAX — see the header for why they are duplicated, not
- * imported, and how the duplication is covered.
- */
-export const SEO_DESCRIPTION_MAX = 160;
-export const SEO_OG_DESCRIPTION_MAX = 250;
 
 /** `excerpt` is never clamped — it is the RICH surface, nothing truncates it
  * downstream (see `daily-brief-content.mjs`), same as `LOCALE_SEO_
@@ -131,12 +128,35 @@ function clampField(value, maxLen) {
 /** Clamp only the budgeted fields of a per-locale `{excerpt, seoDescription,
  * ogDescription}` record; everything else (including `excerpt`) passes
  * through untouched. */
-function clampBudgetedFields(fields, budgets) {
+function clampBudgetedFields(fields, budgets, { id = 'unknown', locale = '' } = {}) {
   if (!fields) return fields;
   let out = fields;
   for (const [field, max] of Object.entries(budgets)) {
     if (!(field in fields)) continue;
-    const clamped = clampField(fields[field], max);
+    let clamped = clampField(fields[field], max);
+    if (
+      field === 'seoDescription' &&
+      typeof fields[field] === 'string' &&
+      clamped.trim().length < SEO_DESCRIPTION_MIN
+    ) {
+      const excerptFallback = clampField(fields.excerpt, max);
+      if (
+        typeof excerptFallback === 'string' &&
+        excerptFallback.trim().length >= SEO_DESCRIPTION_MIN
+      ) {
+        clamped = excerptFallback;
+      } else if (fields[field].length > max && clamped === '') {
+        throw new Error(
+          `clampBudgetedFields: ${field} has no safe clause boundary within ${max} characters; refusing a mid-word write.`,
+        );
+      } else {
+        assertSeoDescriptionMinimum(clamped, {
+          id: locale ? `${id}:${locale}` : id,
+          sourceDescriptionLength: fields[field].length,
+          sourceExcerptLength: typeof fields.excerpt === 'string' ? fields.excerpt.length : undefined,
+        });
+      }
+    }
     if (typeof fields[field] === 'string' && fields[field].length > max && clamped === '') {
       throw new Error(
         `clampBudgetedFields: ${field} has no safe clause boundary within ${max} characters; refusing a mid-word write.`,
@@ -405,7 +425,7 @@ export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
     for (const locale of LOCALES) {
       const rawFields = localeTexts?.[locale];
       if (!rawFields) continue;
-      const fields = clampBudgetedFields(rawFields, LOCALE_DESCRIPTION_BUDGETS);
+      const fields = clampBudgetedFields(rawFields, LOCALE_DESCRIPTION_BUDGETS, { id, locale });
       const file = path.join(repoRoot, corpusPath(`services/locales/${metaPrefix}-${locale}.ts`));
       const before = readFile(file, 'utf-8');
       const after = upsertLocaleMetaFields(before, id, fields, opts);

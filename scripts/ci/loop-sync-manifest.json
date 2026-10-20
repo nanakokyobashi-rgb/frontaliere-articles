@@ -1008,7 +1008,7 @@
     {
       "path": ".github/workflows/tests.yml",
       "mode": "adapted",
-      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped, le esclusioni draft/engine-lockstep-auto e la review senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte. Dal 2026-09-25 il corpus legge il body in `Resolve review input revision` tramite `scripts/ci/lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso che nomina il rate limit e il reset), preso dalla directory trusted del bootstrap del review gate e mai dal checkout della PR: il bucket REST del `GITHUB_TOKEN` e' uno solo per tutti i workflow di questo repo e si e' esaurito il 2026-09-25 06:58-07:10 UTC. Adattamento corpus: la review Codex ora registra causa startup/telemetria sicura e concede una sola ripetizione al claim `failed-transient`; la baseline corpus riattesta questa modifica, quella site resta al riferimento gia' registrato cosi' il movimento del sito resta visibile. 2026-10-08: il gate generator-ci risolve lo scope dal diff locale `base...head` e passa alla REST dei file PR solo nelle invocazioni legacy senza `PR_BASE_SHA`, eliminando la lettura inutile su ogni PR non-generator.",
+      "reason": "Un solo check obbligatorio per codice, test e review in entrambi i repo; gli edit del body sono gestiti dal recupero selettivo esterno. Il sito usa Vitest e un contratto API prima del checkout; il corpus usa node:test e i propri validatori modulari del body dopo il checkout. Il corpus conserva il gate generator-ci path-scoped e sottopone anche il mirror engine-lockstep-auto al contratto body e alla review completa, senza proxy Headroom. RICONCILIATO 2026-09-25: dopo la riconciliazione #9443 il sito ha cambiato il file solo in valerielinc-ops/frontaliere-si-o-no#9715 (prompt di review postato con --body-file), portato nel corpus da #1773; baseline riregistrata con --force. I due digest registrano le revisioni correnti dei lati adattati, non una falsa identità byte-a-byte. Dal 2026-09-25 il corpus legge il body in `Resolve review input revision` tramite `scripts/ci/lib/gh-rate-limit.mjs` (attesa del reset entro 15 min e un solo retry, altrimenti rosso che nomina il rate limit e il reset), preso dalla directory trusted del bootstrap del review gate e mai dal checkout della PR: il bucket REST del `GITHUB_TOKEN` e' uno solo per tutti i workflow di questo repo e si e' esaurito il 2026-09-25 06:58-07:10 UTC. Adattamento corpus: la review Codex ora registra causa startup/telemetria sicura e concede una sola ripetizione al claim `failed-transient`; la baseline corpus riattesta questa modifica, quella site resta al riferimento gia' registrato cosi' il movimento del sito resta visibile. 2026-10-08: il gate generator-ci risolve lo scope dal diff locale `base...head` e passa alla REST dei file PR solo nelle invocazioni legacy senza `PR_BASE_SHA`, eliminando la lettura inutile su ogni PR non-generator.",
       "baseline": {
         "site": "a5bde04943e54f3c",
         "corpus": "2d1545ebc9f7a413",
@@ -2024,11 +2024,11 @@
       "path": "host/shared/titleSuffix.ts",
       "sitePath": "build-plugins/shared/titleSuffix.ts",
       "mode": "identical",
-      "reason": "Riesporta tipizzata clauseTail.mjs e ospita repairSerpSnippet, che l'engine chiama a render time (SiteShellContract) per riparare le description gia' scritte. Stessa ragione di clauseTail.mjs — fuori dall'allowlist del mirror dell'engine — piu' una specifica: generator/tests/seo-clause-truncation.test.mjs lega il letterale della guardia «gia' completo» di repairSerpSnippet, perche' quel .ts non e' importabile da node:test. E' un contratto senza forma di import, la classe che loop-references-exist.test.mjs esiste per coprire. RICONCILIATO il 2026-08-14 insieme a clauseTail.mjs, stessa dinamica (both-moved apparente risolto in fast-forward): qui il delta e' la sola riesportazione tipizzata di `truncateToClauseNonEmpty`.",
+      "reason": "Riesporta tipizzata clauseTail.mjs e ospita repairSerpSnippet, che l'engine chiama a render time (SiteShellContract) per riparare le description gia' scritte. Stessa ragione di clauseTail.mjs — fuori dall'allowlist del mirror dell'engine — piu' una specifica: generator/tests/seo-clause-truncation.test.mjs lega il letterale della guardia «gia' completo» di repairSerpSnippet, perche' quel .ts non e' importabile da node:test. E' un contratto senza forma di import, la classe che loop-references-exist.test.mjs esiste per coprire. RICONCILIATO il 2026-08-14 insieme a clauseTail.mjs, stessa dinamica (both-moved apparente risolto in fast-forward): qui il delta e' la sola riesportazione tipizzata di `truncateToClauseNonEmpty`. Riallineato il 2026-10-20 alla policy condivisa di 150 caratteri.",
       "baseline": {
-        "site": "2c0d386aea7eccd3",
-        "corpus": "2c0d386aea7eccd3",
-        "alignedAt": "2026-10-01"
+        "site": "a6a7e780f58c78d4",
+        "corpus": "a6a7e780f58c78d4",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -3918,7 +3918,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest cd702c32… registra il riferimento a gtag-init con il nome derivato dal contenuto in GTAG_SNIPPET (`/assets/gtag-init-<sha256[:12] di GTAG_INIT_CONTENT>.js`, sito PR #12150, issue 9403; fino al digest 082cd6c3… era la query `?v=` della PR #11496), per cui GTAG_INIT_CONTENT e ANALYTICS_EMISSION_ID_FACTORY_JS restano nella chiusura e scripts/ci/ensure-host-shell-assets.mjs carica quel file sulla CDN prima di ogni pubblicazione (sito issue 12270); conserva Organization come tipo base dell'identita' canonica e lo snippet Funding Choices che trattiene l'Offerwall fino al click su Candidati nelle sezioni job board; il gate segue anche i cambi di rotta SPA. La specializzazione editoriale resta in additionalType. Allineamento verificato contro main del sito dopo PR #12150; il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 2cc55d3… comprende il budget SERP a 150 caratteri e il riferimento a gtag-init con il nome derivato dal contenuto in GTAG_SNIPPET (`/assets/gtag-init-<sha256[:12] di GTAG_INIT_CONTENT>.js`, sito PR #12150, issue 9403; fino al digest 082cd6c3… era la query `?v=` della PR #11496), per cui GTAG_INIT_CONTENT e ANALYTICS_EMISSION_ID_FACTORY_JS restano nella chiusura e scripts/ci/ensure-host-shell-assets.mjs carica quel file sulla CDN prima di ogni pubblicazione (sito issue 12270); conserva Organization come tipo base dell'identita' canonica e lo snippet Funding Choices che trattiene l'Offerwall fino al click su Candidati nelle sezioni job board; il gate segue anche i cambi di rotta SPA. La specializzazione editoriale resta in additionalType. Allineamento verificato contro main del sito dopo PR #12150; il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
       "baseline": {
         "site": "5bedfc2a3453a9f5",
         "corpus": "db9e22109da26397",
@@ -3929,7 +3929,7 @@
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 22,
-        "sha256": "cd702c32d250a58012beb5da86d107bd2a5af9036e5248a1567043d6ea0c2e78"
+        "sha256": "2cc55d337bbce2e78b89f6d8104f9417b06c2efb3fb8f63d07077d12b93912fd"
       }
     },
     {
@@ -4146,9 +4146,9 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
-        "site": "26c08f554ddc2f44",
-        "corpus": "26c08f554ddc2f44",
-        "alignedAt": "2026-10-08"
+        "site": "22338808c554207d",
+        "corpus": "22338808c554207d",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4236,9 +4236,9 @@
       "sitePath": "tests/articles-shell-contract-functions.golden.json",
       "mode": "identical",
       "baseline": {
-        "site": "e6aebdbec94daf6a",
-        "corpus": "e6aebdbec94daf6a",
-        "alignedAt": "2026-10-15"
+        "site": "11ad4f82ad3291ff",
+        "corpus": "11ad4f82ad3291ff",
+        "alignedAt": "2026-10-20"
       },
       "couplingSnapshot": [
         {
@@ -4520,9 +4520,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-01.yml",
       "mode": "identical",
       "baseline": {
-        "site": "04c0ba189d127af0",
-        "corpus": "04c0ba189d127af0",
-        "alignedAt": "2026-10-19"
+        "site": "26f9e8009d6dcbfa",
+        "corpus": "26f9e8009d6dcbfa",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4530,9 +4530,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-02.yml",
       "mode": "identical",
       "baseline": {
-        "site": "53ee90fb30772bca",
-        "corpus": "53ee90fb30772bca",
-        "alignedAt": "2026-10-19"
+        "site": "f7be34c3d1f9f31f",
+        "corpus": "f7be34c3d1f9f31f",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4540,9 +4540,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-03.yml",
       "mode": "identical",
       "baseline": {
-        "site": "c6609c60704db16e",
-        "corpus": "c6609c60704db16e",
-        "alignedAt": "2026-10-19"
+        "site": "f5fb7d93c691e52e",
+        "corpus": "f5fb7d93c691e52e",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4550,9 +4550,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-04.yml",
       "mode": "identical",
       "baseline": {
-        "site": "216f521ed60e5c1e",
-        "corpus": "216f521ed60e5c1e",
-        "alignedAt": "2026-10-19"
+        "site": "a6f38378661d9b95",
+        "corpus": "a6f38378661d9b95",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4560,9 +4560,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-05.yml",
       "mode": "identical",
       "baseline": {
-        "site": "e06a44cc3d4bc739",
-        "corpus": "e06a44cc3d4bc739",
-        "alignedAt": "2026-10-19"
+        "site": "865def800432851e",
+        "corpus": "865def800432851e",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4570,9 +4570,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-06.yml",
       "mode": "identical",
       "baseline": {
-        "site": "5066077baad83293",
-        "corpus": "5066077baad83293",
-        "alignedAt": "2026-10-19"
+        "site": "6d1cc429d59d029d",
+        "corpus": "6d1cc429d59d029d",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4580,9 +4580,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-07.yml",
       "mode": "identical",
       "baseline": {
-        "site": "6414a3021868e857",
-        "corpus": "6414a3021868e857",
-        "alignedAt": "2026-10-19"
+        "site": "210a383fe1c789d7",
+        "corpus": "210a383fe1c789d7",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4590,9 +4590,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-08.yml",
       "mode": "identical",
       "baseline": {
-        "site": "b2c99a529096e3a4",
-        "corpus": "b2c99a529096e3a4",
-        "alignedAt": "2026-10-19"
+        "site": "c9fb9a69bd8feb1f",
+        "corpus": "c9fb9a69bd8feb1f",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4600,9 +4600,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-09.yml",
       "mode": "identical",
       "baseline": {
-        "site": "d8ef98ed1339919f",
-        "corpus": "d8ef98ed1339919f",
-        "alignedAt": "2026-10-19"
+        "site": "802dd9cff2ba0604",
+        "corpus": "802dd9cff2ba0604",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4610,9 +4610,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-10.yml",
       "mode": "identical",
       "baseline": {
-        "site": "2f8162a56a62fb70",
-        "corpus": "2f8162a56a62fb70",
-        "alignedAt": "2026-10-19"
+        "site": "1a672eb56a46c9a8",
+        "corpus": "1a672eb56a46c9a8",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4620,9 +4620,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-11.yml",
       "mode": "identical",
       "baseline": {
-        "site": "026bb3bd7b2e587e",
-        "corpus": "026bb3bd7b2e587e",
-        "alignedAt": "2026-10-19"
+        "site": "9ee0a1183bde4f0c",
+        "corpus": "9ee0a1183bde4f0c",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4630,9 +4630,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-12.yml",
       "mode": "identical",
       "baseline": {
-        "site": "d60b3fe59b6d66ab",
-        "corpus": "d60b3fe59b6d66ab",
-        "alignedAt": "2026-10-19"
+        "site": "a26fc936375916cd",
+        "corpus": "a26fc936375916cd",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4640,9 +4640,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-13.yml",
       "mode": "identical",
       "baseline": {
-        "site": "c17c61806c5960f1",
-        "corpus": "c17c61806c5960f1",
-        "alignedAt": "2026-10-19"
+        "site": "bffa0983094650d6",
+        "corpus": "bffa0983094650d6",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4650,9 +4650,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-14.yml",
       "mode": "identical",
       "baseline": {
-        "site": "f0af849a8a39e09e",
-        "corpus": "f0af849a8a39e09e",
-        "alignedAt": "2026-10-19"
+        "site": "e6c50af7f6d57f49",
+        "corpus": "e6c50af7f6d57f49",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4660,9 +4660,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-15.yml",
       "mode": "identical",
       "baseline": {
-        "site": "e19d30d43f0748b7",
-        "corpus": "e19d30d43f0748b7",
-        "alignedAt": "2026-10-19"
+        "site": "9ea2279783b835d7",
+        "corpus": "9ea2279783b835d7",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4670,8 +4670,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-16.yml",
       "mode": "identical",
       "baseline": {
-        "site": "3b688a931359681d",
-        "corpus": "3b688a931359681d",
+        "site": "eea097d6d198dd34",
+        "corpus": "eea097d6d198dd34",
         "alignedAt": "2026-10-20"
       }
     },
@@ -4680,9 +4680,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-17.yml",
       "mode": "identical",
       "baseline": {
-        "site": "bb9c5f8d3b7f7ad0",
-        "corpus": "bb9c5f8d3b7f7ad0",
-        "alignedAt": "2026-10-19"
+        "site": "8a5ca699c1804356",
+        "corpus": "8a5ca699c1804356",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4690,9 +4690,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-18.yml",
       "mode": "identical",
       "baseline": {
-        "site": "74081ffed022dda1",
-        "corpus": "74081ffed022dda1",
-        "alignedAt": "2026-10-19"
+        "site": "04b1f2c71fb6bbbd",
+        "corpus": "04b1f2c71fb6bbbd",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4700,8 +4700,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-19.yml",
       "mode": "identical",
       "baseline": {
-        "site": "e92ccf068fff1b82",
-        "corpus": "e92ccf068fff1b82",
+        "site": "55f840383ceae25b",
+        "corpus": "55f840383ceae25b",
         "alignedAt": "2026-10-20"
       }
     },
@@ -4710,8 +4710,8 @@
       "sitePath": ".github/corpus-workflows/crawler-group-20.yml",
       "mode": "identical",
       "baseline": {
-        "site": "aef03d8464ac68e6",
-        "corpus": "aef03d8464ac68e6",
+        "site": "0e91c66472483638",
+        "corpus": "0e91c66472483638",
         "alignedAt": "2026-10-20"
       }
     },
@@ -4720,9 +4720,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-21.yml",
       "mode": "identical",
       "baseline": {
-        "site": "a69525d5afed2325",
-        "corpus": "a69525d5afed2325",
-        "alignedAt": "2026-10-19"
+        "site": "5355398128fad08e",
+        "corpus": "5355398128fad08e",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4730,9 +4730,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-22.yml",
       "mode": "identical",
       "baseline": {
-        "site": "445b7a22b9360cda",
-        "corpus": "445b7a22b9360cda",
-        "alignedAt": "2026-10-19"
+        "site": "b3d3f83c5e18fc47",
+        "corpus": "b3d3f83c5e18fc47",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4740,9 +4740,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-23.yml",
       "mode": "identical",
       "baseline": {
-        "site": "0c26636eb45dcd0d",
-        "corpus": "0c26636eb45dcd0d",
-        "alignedAt": "2026-10-19"
+        "site": "8f94f61ab50a5436",
+        "corpus": "8f94f61ab50a5436",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -4761,8 +4761,8 @@
       "mode": "identical",
       "reason": "La baseline del 2026-10-19 registra lo stesso digest SHA-256 raw sui due lati (9c30512e730b26d6); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "19f565274149dd3c",
-        "corpus": "19f565274149dd3c",
+        "site": "bb939897ec4bfeb9",
+        "corpus": "bb939897ec4bfeb9",
         "alignedAt": "2026-10-20"
       }
     },
@@ -5689,9 +5689,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-24.yml",
       "mode": "identical",
       "baseline": {
-        "site": "84363c3d862daec3",
-        "corpus": "84363c3d862daec3",
-        "alignedAt": "2026-10-19"
+        "site": "f10d1d65041d2ed6",
+        "corpus": "f10d1d65041d2ed6",
+        "alignedAt": "2026-10-20"
       }
     },
     {

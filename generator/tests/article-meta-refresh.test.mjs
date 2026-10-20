@@ -43,11 +43,14 @@ import { buildDescriptiveTexts, buildDailyBriefArticle } from '../scripts/lib/da
 import { sanitizePromptPlaceholders } from '../scripts/lib/prompt-placeholder-guard.mjs';
 import { bumpDateModified } from '../scripts/lib/evergreen-article-refresh.mjs';
 import { registerLockPath } from '../scripts/lib/register-lock.mjs';
-import { SEO_DESCRIPTION_MIN } from '../scripts/lib/seo-description-contract.mjs';
+import {
+  SEO_DESCRIPTION_MAX as SHARED_SEO_DESCRIPTION_MAX,
+  SEO_OG_DESCRIPTION_MAX as SHARED_SEO_OG_DESCRIPTION_MAX,
+  SEO_DESCRIPTION_MIN,
+} from '../scripts/lib/seo-description-contract.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const GENERATE_SCRIPT = path.join(HERE, '..', 'scripts', 'generate-daily-brief-article.mjs');
-const CREATE_ARTICLE = path.join(HERE, '..', 'scripts', 'create-article.mjs');
 const VALID_SEO_DESCRIPTION =
   'I dati quotidiani sui valichi, i prezzi dei carburanti e gli annunci di lavoro in Svizzera sono verificati con fonti aggiornate.';
 assert.ok(VALID_SEO_DESCRIPTION.length >= SEO_DESCRIPTION_MIN);
@@ -404,7 +407,7 @@ test('refreshDescriptiveTexts: scrive tutte e 4 le locali + il file SEO, e ripor
     const localeTexts = {};
     for (const locale of ['it', 'en', 'de', 'fr']) {
       localeTexts[locale] = {
-        excerpt: `Estratto lungo e ricco ${locale}`,
+        excerpt: `${locale}: ${VALID_SEO_DESCRIPTION}`,
         seoDescription: `SERP ${locale}`,
         ogDescription: `Social ${locale}`,
       };
@@ -419,8 +422,9 @@ test('refreshDescriptiveTexts: scrive tutte e 4 le locali + il file SEO, e ripor
     assert.equal(touched.length, 5, '4 file meta + 1 file seo');
 
     const en = fs.readFileSync(path.join(root, 'content', 'blog-meta-en.ts'), 'utf-8');
-    assert.ok(en.includes("'blog.article.demo-id.excerpt': 'Estratto lungo e ricco en',"));
-    assert.ok(en.includes("'blog.article.demo-id.seoDescription': 'SERP en',"));
+    const enExcerpt = `en: ${VALID_SEO_DESCRIPTION}`;
+    assert.ok(en.includes(`'blog.article.demo-id.excerpt': '${enExcerpt}',`));
+    assert.ok(en.includes(`'blog.article.demo-id.seoDescription': '${enExcerpt}',`));
     assert.ok(en.includes("'blog.article.demo-id.ogDescription': 'Social en',"));
 
     const seo = fs.readFileSync(path.join(root, 'content', 'seo', 'seo-blog-5.ts'), 'utf-8');
@@ -498,6 +502,11 @@ test('refreshDescriptiveTexts: writer e reader iniettati permettono lo staging s
   try {
     const staged = new Map();
     const writes = [];
+    const localeFields = {
+      excerpt: `it: ${VALID_SEO_DESCRIPTION}`,
+      seoDescription: 'SERP staged',
+      ogDescription: 'Social staged',
+    };
     const read = (file) => staged.has(file) ? staged.get(file) : fs.readFileSync(file, 'utf8');
     const write = (file, content) => {
       staged.set(file, content);
@@ -507,7 +516,7 @@ test('refreshDescriptiveTexts: writer e reader iniettati permettono lo staging s
     const before = fs.readFileSync(metaPath, 'utf8');
     const result = refreshDescriptiveTexts(
       'demo-id',
-      { it: { excerpt: 'Estratto staged', seoDescription: 'SERP staged', ogDescription: 'Social staged' } },
+      { it: localeFields },
       { description: VALID_SEO_DESCRIPTION, ogDescription: 'Social staged' },
       { repoRoot: root, readFile: read, writeFile: write },
     );
@@ -515,11 +524,11 @@ test('refreshDescriptiveTexts: writer e reader iniettati permettono lo staging s
     assert.equal(result.changed, true);
     assert.equal(writes.length, 2, 'solo la locale richiesta e il file SEO devono essere staged');
     assert.equal(fs.readFileSync(metaPath, 'utf8'), before, 'il writer iniettato non deve scrivere il target');
-    assert.match(staged.get(metaPath), /Estratto staged/);
+    assert.ok(staged.get(metaPath).includes(`'blog.article.demo-id.seoDescription': '${localeFields.excerpt}',`));
     assert.equal(
       refreshDescriptiveTexts(
         'demo-id',
-        { it: { excerpt: 'Estratto staged', seoDescription: 'SERP staged', ogDescription: 'Social staged' } },
+        { it: localeFields },
         { description: VALID_SEO_DESCRIPTION, ogDescription: 'Social staged' },
         { repoRoot: root, readFile: read, writeFile: write },
       ).changed,
@@ -573,7 +582,11 @@ test('refreshDescriptiveTexts: un secondo giro con gli stessi testi non scrive n
   try {
     const localeTexts = {};
     for (const locale of ['it', 'en', 'de', 'fr']) {
-      localeTexts[locale] = { excerpt: `E ${locale}`, seoDescription: `S ${locale}`, ogDescription: `O ${locale}` };
+      localeTexts[locale] = {
+        excerpt: `${locale}: ${VALID_SEO_DESCRIPTION}`,
+        seoDescription: `S ${locale}`,
+        ogDescription: `O ${locale}`,
+      };
     }
     const seoTexts = { description: VALID_SEO_DESCRIPTION, ogDescription: 'O it' };
     const first = refreshDescriptiveTexts('demo-id', localeTexts, seoTexts, { repoRoot: root });
@@ -675,7 +688,7 @@ test('refreshDescriptiveTexts: rifiuta una SEO description sotto il floor prima 
   }
 });
 
-test('refreshDescriptiveTexts: rifiuta un primo token oltre il budget prima di qualsiasi write', () => {
+test('refreshDescriptiveTexts: rifiuta truncamenti insicuri o sotto il floor prima di qualsiasi write', () => {
   const root = syntheticCorpus();
   try {
     const metaPath = path.join(root, 'content', 'blog-meta-it.ts');
@@ -707,6 +720,19 @@ test('refreshDescriptiveTexts: rifiuta un primo token oltre il budget prima di q
     );
     assert.equal(fs.readFileSync(metaPath, 'utf-8'), metaBefore, 'la locale non deve essere modificata nel percorso senza SEO entry');
     assert.equal(fs.existsSync(registerLockPath(root, 'frontaliere')), false, 'un rifiuto pre-write deve rilasciare il lock');
+
+    const shortClauseThenLongToken = `Descrizione specifica. ${'x'.repeat(SEO_DESCRIPTION_MAX)}`;
+    assert.throws(
+      () => refreshDescriptiveTexts(
+        'demo-id',
+        { it: { seoDescription: shortClauseThenLongToken } },
+        undefined,
+        { repoRoot: root },
+      ),
+      /must contain at least 80 characters/,
+    );
+    assert.equal(fs.readFileSync(metaPath, 'utf-8'), metaBefore, 'una descrizione tagliata sotto il floor non deve essere scritta');
+    assert.equal(fs.existsSync(registerLockPath(root, 'frontaliere')), false, 'il rifiuto del clamp deve rilasciare il lock');
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
@@ -742,22 +768,9 @@ test('refreshDescriptiveTexts: il clamp e\' idempotente sul rerun (nessuna riscr
   }
 });
 
-test('SEO_DESCRIPTION_MAX/SEO_OG_DESCRIPTION_MAX restano allineati ai valori di create-article.mjs', () => {
-  const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
-  const max = src.match(/^const SEO_DESCRIPTION_MAX = (\d+);$/m);
-  const ogMax = src.match(/^const SEO_OG_DESCRIPTION_MAX = (\d+);$/m);
-  assert.ok(max, 'SEO_DESCRIPTION_MAX non trovato in create-article.mjs — aggiornare i delimitatori di questo test');
-  assert.ok(ogMax, 'SEO_OG_DESCRIPTION_MAX non trovato in create-article.mjs — aggiornare i delimitatori di questo test');
-  assert.equal(
-    SEO_DESCRIPTION_MAX,
-    Number(max[1]),
-    "article-meta-refresh.mjs duplica questo valore (non puo' importarlo senza jsdom) — i due sono andati fuori sincrono",
-  );
-  assert.equal(
-    SEO_OG_DESCRIPTION_MAX,
-    Number(ogMax[1]),
-    "article-meta-refresh.mjs duplica questo valore (non puo' importarlo senza jsdom) — i due sono andati fuori sincrono",
-  );
+test('article-meta-refresh esporta i budget del contratto descrizioni condiviso', () => {
+  assert.equal(SEO_DESCRIPTION_MAX, SHARED_SEO_DESCRIPTION_MAX);
+  assert.equal(SEO_OG_DESCRIPTION_MAX, SHARED_SEO_OG_DESCRIPTION_MAX);
 });
 
 // ── 2b. Ricostruzione pura per una data passata (la riparazione delle 2 edizioni) ─

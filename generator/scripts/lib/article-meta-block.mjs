@@ -43,7 +43,8 @@
  *
  * Nessuno, ancora: `engine/ogPagesPlugin.ts` (che vive nel repo del SITO e
  * scende qui col mirror) riconosce solo `title|excerpt|imageAlt` e ricava la
- * meta description di en/de/fr dall'excerpt della locale troncato a 155. La
+ * meta description di en/de/fr dall'excerpt della locale troncato entro il
+ * budget SERP attivo (150 caratteri nello shell corrente). La
  * meta' engine e' una PR gemella sul sito. Emettere il campo PRIMA e' l'ordine
  * giusto: il campo in piu' e' inerte finche' non viene letto, mentre un lettore
  * che cerca un campo non ancora emesso legge `undefined` e cade sul fallback
@@ -70,7 +71,7 @@ const META_ALWAYS_EMITTED = Object.freeze(['title', 'excerpt']);
 
 /**
  * I campi descrittivi introdotti dalla separazione delle tre superfici (#83):
- * `seoDescription` e' cio' che Google mostra (150-160), `ogDescription` cio'
+ * `seoDescription` e' cio' che Google mostra (120-150), `ogDescription` cio'
  * che Facebook/LinkedIn/WhatsApp mostrano (200-250). Opzionali per costruzione:
  * li scrive solo un content builder che sa scriverli per la propria locale
  * (oggi il Bollettino del Frontaliere), e per tutti gli altri articoli il
