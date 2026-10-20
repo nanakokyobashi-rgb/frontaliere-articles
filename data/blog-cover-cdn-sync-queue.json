@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-scuola-inoltre-ventanni-formazione-carcere.webp",
+      "sha256": "cb4743dcea8998e4508196bdf9061296f0ed1ab2a224bfb7b0160e9a5178a42e"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-scuola-inoltre-ventanni-formazione-carcere-480w.webp",
+      "sha256": "b127334ce727e899ed1f32eec06e478ea75bd5afe7a6342ef4c36b9fd6b7a993"
+    }
+  ]
 }
