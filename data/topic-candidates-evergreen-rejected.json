@@ -10665,10 +10665,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/openjobmetis-contro-il-tabu-trento-varese-non-vince-dalla-doppietta-di-roijakkers/2710981": {
-      "section": "frontaliere",
-      "ts": 1792296009319
-    },
     "svizzera::https://www.tio.ch/svizzera/attualita/1957270/favore-giovani-svizzera-ricerca-progetto": {
       "section": "svizzera",
       "ts": 1792306051428
@@ -10924,6 +10920,10 @@
     "frontaliere::https://www.laregione.ch/cantone/ticino/1957763/mondo-economico-e-politica-capiscano-cosa-e-possibile-e-cosa-non-lo-e": {
       "section": "frontaliere",
       "ts": 1792468128351
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/19/leggi-notizia/argomenti/territorio/articolo/lavori-a-tutela-del-lago-di-varese-in-dirittura-darrivo-a-casciago.html": {
+      "section": "frontaliere",
+      "ts": 1792470043375
     }
   }
 }
