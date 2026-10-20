@@ -36,10 +36,6 @@
       "section": "canton-sh",
       "ts": 1792434414992
     },
-    "canton-sh::https://www.radiomunot.ch/p/neue-gemeindeprasidenten-ziehen-zwischenbilanz-5pwvhifcyo2pp8i6qohcjf": {
-      "section": "canton-sh",
-      "ts": 1792435621825
-    },
     "canton-sh::https://www.radiomunot.ch/p/zurcher-svp-wird-kandidatin-oder-kandidat-fur-bundesratswahlen-stellen-1aanvamj0fa9yj6ybmraej": {
       "section": "canton-sh",
       "ts": 1792435644668
@@ -55,6 +51,10 @@
     "canton-sh::https://www.schaffhausen24.ch/articles/413407-wo-genuss-kultur-und-die-region-zusammenkommen": {
       "section": "canton-sh",
       "ts": 1792436063872
+    },
+    "canton-sh::https://www.radiomunot.ch/p/neue-gemeindeprasidenten-ziehen-zwischenbilanz-5pwvhifcyo2pp8i6qohcjf": {
+      "section": "canton-sh",
+      "ts": 1792474986593
     }
   }
 }

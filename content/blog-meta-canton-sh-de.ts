@@ -30,6 +30,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.pulizie-tunnel-sciaffusa.title': 'Bundesamt für Strassen wird nachts drei Tunnel schließen',
     'blog.article.pulizie-tunnel-sciaffusa.excerpt': 'Fäsenstaub, Cholfirst und Galgenbuck jede Nacht vom 19.',
     'blog.article.pulizie-tunnel-sciaffusa.imageAlt': 'Fäsenstaub-, Cholfirst- und Galgenbucktunnel nachts wegen Reinigung gesperrt',
+    'blog.article.svp-sciaffusa-candidati-2027.title': 'SVP Schaffhausen bestimmt Kandidaten für die Wahlen 2027',
+    'blog.article.svp-sciaffusa-candidati-2027.excerpt': 'Die Delegiertenversammlung in Oberhallau hat Andreas Gnädinger für den Ständerat sowie Thomas Hurter und Thomas Müller für den Nationalrat gewählt.',
+    'blog.article.svp-sciaffusa-candidati-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

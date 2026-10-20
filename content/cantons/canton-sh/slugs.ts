@@ -12,6 +12,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'eventi-weekend-sciaffusa': { it: 'eventi-weekend-sciaffusa', en: 'weekend-events-schaffhausen', de: 'wochenend-veranstaltungen-schaffhausen', fr: 'evenements-week-end-schaffhouse' },
  'treni-zurigo-stoccarda': { it: 'treni-zurigo-stoccarda', en: 'zurich-stuttgart-trains', de: 'zuerich-stuttgart-zuege', fr: 'trains-zurich-stuttgart' },
  'pulizie-tunnel-sciaffusa': { it: 'pulizie-tunnel-sciaffusa', en: 'schaffhausen-tunnel-cleaning', de: 'naechtliche-tunnelreinigung-schaffhausen', fr: 'nettoyage-tunnels-schaffhouse' },
+ 'svp-sciaffusa-candidati-2027': { it: 'svp-sciaffusa-candidati-2027', en: 'svp-schaffhausen-candidates-2027', de: 'svp-schaffhausen-kandidaturen-2027', fr: 'svp-schaffhouse-candidatures-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -30,6 +30,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.pulizie-tunnel-sciaffusa.title': 'Bundesamt für Strassen will close three tunnels at night',
     'blog.article.pulizie-tunnel-sciaffusa.excerpt': 'Fäsenstaub, Cholfirst and Galgenbuck closed every night from October 19 to 23, from 8 p.m.',
     'blog.article.pulizie-tunnel-sciaffusa.imageAlt': 'Fäsenstaub, Cholfirst and Galgenbuck tunnels closed at night for cleaning',
+    'blog.article.svp-sciaffusa-candidati-2027.title': 'SVP Schaffhausen selects candidates for the 2027 elections',
+    'blog.article.svp-sciaffusa-candidati-2027.excerpt': 'The delegates’ assembly in Oberhallau chose Andreas Gnädinger for the Council of States and Thomas Hurter and Thomas Müller for the National Council.',
+    'blog.article.svp-sciaffusa-candidati-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

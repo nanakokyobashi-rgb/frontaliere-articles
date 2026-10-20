@@ -30,6 +30,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.pulizie-tunnel-sciaffusa.title': 'Bundesamt für Strassen fermera trois tunnels la nuit',
     'blog.article.pulizie-tunnel-sciaffusa.excerpt': 'Fäsenstaub, Cholfirst et Galgenbuck fermés chaque nuit du 19 au 23 octobre, de 20 heures à 5 heures, pour des travaux de nettoyage.',
     'blog.article.pulizie-tunnel-sciaffusa.imageAlt': 'Tunnels de Fäsenstaub, Cholfirst et Galgenbuck fermés la nuit pour nettoyage',
+    'blog.article.svp-sciaffusa-candidati-2027.title': 'L\'UDC de Schaffhouse désigne ses candidats pour les élections de 2027',
+    'blog.article.svp-sciaffusa-candidati-2027.excerpt': 'L\'assemblée des délégués à Oberhallau a choisi Andreas Gnädinger pour le Conseil des États et Thomas Hurter et Thomas Müller pour le Conseil national.',
+    'blog.article.svp-sciaffusa-candidati-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

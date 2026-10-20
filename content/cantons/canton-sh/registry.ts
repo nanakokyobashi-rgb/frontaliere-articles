@@ -105,4 +105,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'svp-sciaffusa-candidati-2027',
+ category: 'novita',
+ date: '2026-10-20T06:05:14.822Z',
+ image: '/images/blog/article-svp-sciaffusa-candidati-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
