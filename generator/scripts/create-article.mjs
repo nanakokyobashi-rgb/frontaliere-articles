@@ -21052,13 +21052,16 @@ function clampSeoDescriptions(data) {
       if (!localeContent || typeof localeContent !== 'object') continue;
       for (const [field, max] of Object.entries(LOCALE_SEO_DESCRIPTION_BUDGETS)) {
         const value = localeContent[field];
-        if (typeof value !== 'string' || value.length === 0) continue;
+        if (typeof value !== 'string') continue;
         let clamped = truncateAtWordBoundary(value, max);
-        if (field === 'seoDescription' && value.length > max && clamped.length < SEO_DESCRIPTION_MIN) {
+        if (field === 'seoDescription' && clamped.trim().length < SEO_DESCRIPTION_MIN) {
           const excerpt = stripExcerptMarkdown(
             typeof localeContent.excerpt === 'string' ? localeContent.excerpt : '',
           );
-          const fallback = truncateAtWordBoundary(excerpt, max);
+          const body = stripExcerptMarkdown(bodyTextForQuality(localeContent));
+          const fallback = [excerpt, body]
+            .map((candidate) => truncateAtWordBoundary(candidate, max))
+            .find((candidate) => candidate.trim().length >= SEO_DESCRIPTION_MIN);
           clamped = assertSeoDescriptionMinimum(fallback, {
             id: `${data?.id || 'unknown'}:${locale}`,
             sourceDescriptionLength: value.length,

@@ -128,7 +128,7 @@ function clampField(value, maxLen) {
 /** Clamp only the budgeted fields of a per-locale `{excerpt, seoDescription,
  * ogDescription}` record; everything else (including `excerpt`) passes
  * through untouched. */
-function clampBudgetedFields(fields, budgets) {
+function clampBudgetedFields(fields, budgets, { id = 'unknown', locale = '' } = {}) {
   if (!fields) return fields;
   let out = fields;
   for (const [field, max] of Object.entries(budgets)) {
@@ -137,20 +137,24 @@ function clampBudgetedFields(fields, budgets) {
     if (
       field === 'seoDescription' &&
       typeof fields[field] === 'string' &&
-      fields[field].length > max &&
-      clamped.length < SEO_DESCRIPTION_MIN
+      clamped.trim().length < SEO_DESCRIPTION_MIN
     ) {
       const excerptFallback = clampField(fields.excerpt, max);
-      if (typeof excerptFallback === 'string' && excerptFallback.trim().length >= SEO_DESCRIPTION_MIN) {
+      if (
+        typeof excerptFallback === 'string' &&
+        excerptFallback.trim().length >= SEO_DESCRIPTION_MIN
+      ) {
         clamped = excerptFallback;
       } else if (fields[field].length > max && clamped === '') {
         throw new Error(
           `clampBudgetedFields: ${field} has no safe clause boundary within ${max} characters; refusing a mid-word write.`,
         );
       } else {
-        throw new Error(
-          `clampBudgetedFields: ${field} falls below the ${SEO_DESCRIPTION_MIN}-character minimum after capping; refusing the write.`,
-        );
+        assertSeoDescriptionMinimum(clamped, {
+          id: locale ? `${id}:${locale}` : id,
+          sourceDescriptionLength: fields[field].length,
+          sourceExcerptLength: typeof fields.excerpt === 'string' ? fields.excerpt.length : undefined,
+        });
       }
     }
     if (typeof fields[field] === 'string' && fields[field].length > max && clamped === '') {
@@ -421,7 +425,7 @@ export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
     for (const locale of LOCALES) {
       const rawFields = localeTexts?.[locale];
       if (!rawFields) continue;
-      const fields = clampBudgetedFields(rawFields, LOCALE_DESCRIPTION_BUDGETS);
+      const fields = clampBudgetedFields(rawFields, LOCALE_DESCRIPTION_BUDGETS, { id, locale });
       const file = path.join(repoRoot, corpusPath(`services/locales/${metaPrefix}-${locale}.ts`));
       const before = readFile(file, 'utf-8');
       const after = upsertLocaleMetaFields(before, id, fields, opts);

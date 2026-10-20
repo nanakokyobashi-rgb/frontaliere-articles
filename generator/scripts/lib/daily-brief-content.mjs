@@ -420,7 +420,8 @@ export function pickHeadline(blocks, insights = {}, dateIso) {
  * ONE CAVEAT, and it is a site-side one. Only the IT `seoDescription` reaches a
  * meta description today: the SEO entry `blog-<id>` is IT-only, and the site's
  * `packages/articles/engine/ogPagesPlugin.ts` still derives the en/de/fr meta
- * description from the LOCALE EXCERPT, clipping it at 155 with an ellipsis.
+ * description from the LOCALE EXCERPT, clipping it to the active SERP budget
+ * (150 characters in the current shell) with an ellipsis.
  * The localized `seoDescription`s below are therefore written and tested here,
  * but consuming them needs a change on the site — see the PR body.
  *
