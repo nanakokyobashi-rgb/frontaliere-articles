@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T13:42:35.891Z",
-  "contentHash": "96f267fb836b5575ca25ccb2540f585baeeabf7a23b5ab6ec95f14be5ba4e0aa",
+  "updatedAt": "2026-10-20T14:29:13.956Z",
+  "contentHash": "94f11472f2e0d0ab833a4b290ca1b9edddb003677b70e4b92831a57d5286b2e4",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "37",
+          "value": "36",
           "note": "segnalazioni aggiornate: 20 ottobre 2026"
         }
       ],
@@ -238,7 +238,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T14:29:13.956Z"
     },
     "en": {
       "canton": "AG",
@@ -258,7 +258,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "37",
+          "value": "36",
           "note": "reports as of 20 October 2026"
         }
       ],
@@ -454,7 +454,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T14:29:13.956Z"
     },
     "de": {
       "canton": "AG",
@@ -474,7 +474,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "37",
+          "value": "36",
           "note": "Meldungen vom 20. Oktober 2026"
         }
       ],
@@ -670,7 +670,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T14:29:13.956Z"
     },
     "fr": {
       "canton": "AG",
@@ -690,7 +690,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "37",
+          "value": "36",
           "note": "signalements au 20 octobre 2026"
         }
       ],
@@ -886,7 +886,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T14:29:13.956Z"
     }
   }
 }
