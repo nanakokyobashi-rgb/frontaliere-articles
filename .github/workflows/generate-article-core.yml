@@ -794,8 +794,7 @@ jobs:
             kill_tree KILL "$watch_pid"
             wait "$watch_pid" 2>/dev/null || true
             watch_pid=""
-            tee_rc=0
-            if ! wait "$tee_pid"; then tee_rc=$?; fi
+            if wait "$tee_pid"; then tee_rc=0; else tee_rc=$?; fi
             tee_pid=""
             rm -f "$attempt_pipe"
             attempt_pipe=""
