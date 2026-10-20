@@ -44,6 +44,11 @@ on:
       - 'generator/scripts/lib/daily-brief-insights.mjs'
       - 'generator/scripts/lib/daily-brief-content.mjs'
       - 'generator/scripts/lib/daily-brief-image.mjs'
+      - 'scripts/lib/upload-cdn-file.sh'
+      - 'scripts/lib/r2-image-lease-process.sh'
+      - 'scripts/lib/r2-image-namespace-lock.mjs'
+      - 'scripts/lib/r2-section-lock.mjs'
+      - 'scripts/lib/is-invoked-directly.mjs'
   workflow_dispatch:
     inputs:
       dry_run:

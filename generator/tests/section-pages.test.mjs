@@ -116,10 +116,60 @@ test('publisher R2 propaga immagini recuperate e verdetto aggregati dalla pipeli
   assert.match(publisher, /heroCdnUploads\(\{[\s\S]*?downloadedImageKeys,[\s\S]*?\}\);/);
   assert.match(publisher, /imageFetchFailures,[\s\S]*imagePostcondition,[\s\S]*aggregatePagesAllowed,/);
   const manifestDeclaration = publisher.indexOf('const currentManifest =');
-  const publishCall = publisher.indexOf('summary.published = await publish(');
+  const publishCall = publisher.indexOf('summary.published = await publishImpl({');
   assert.ok(manifestDeclaration > publishCall, 'il manifest corrente si calcola solo dopo il publish verificato');
   for (const match of publisher.matchAll(/\bcurrentManifest\b/g)) {
     assert.ok(match.index >= manifestDeclaration, 'currentManifest non deve essere letto prima della dichiarazione');
+  }
+  const imageLeaseAcquire = publisher.search(
+    /imageLeases = await acquireImageNamespaceLeasesImpl\(imageNamespaces,\s*\{\s*signal:\s*imageLeaseAbortController\.signal,\s*\}\)/,
+  );
+  const publishImplCall = publisher.indexOf('summary.published = await publishImpl({');
+  const imageLeaseRelease = publisher.indexOf('const imageLeaseReleaseError = await releaseImageLeases();');
+  assert.ok(imageLeaseAcquire >= 0 && imageLeaseAcquire < publishImplCall, 'le lease immagini devono essere acquisite prima della transazione di publish');
+  assert.ok(publishImplCall < imageLeaseRelease, 'le lease immagini devono restare attive fino alla fine della transazione');
+  assert.match(publisher.slice(publishImplCall, imageLeaseRelease), /imageLeaseContext,/);
+});
+
+test('publisher: un secondo segnale attende il cleanup bounded delle lease immagini', () => {
+  const publisher = read('scripts/publish-section-pages.mjs');
+  const start = publisher.indexOf('const recordImageLeaseSignal =');
+  const end = publisher.indexOf('const onImageLeaseSigint =', start);
+  assert.ok(start >= 0 && end > start, 'handler dei segnali non trovato');
+  const handler = publisher.slice(start, end);
+  assert.match(handler, /imageLeaseSecondSignalExitStatus/);
+  assert.match(handler, /deferring exit/);
+  assert.doesNotMatch(handler, /process\.exit/);
+});
+
+test('publisher: un marker upload con exit non-zero non viene considerato riuscito e il lease context arriva al comando', async () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-upload-result-'));
+  const page = pageEntry('canton-ti', 'articoli-ticino/upload-result/index.html', 'article');
+  const localPage = path.join(fixtureRoot, page.rel);
+  mkdirSync(path.dirname(localPage), { recursive: true });
+  writeFileSync(localPage, '<!doctype html><html><body>upload</body></html>', 'utf8');
+  let seenEnv = null;
+  try {
+    const result = await publish({
+      section: 'canton-ti',
+      pages: [page],
+      cdnUploads: [],
+      cantonRssFeeds: [],
+      obsoletePages: [],
+      distDir: fixtureRoot,
+      publishedStatusImpl: async () => 'draft',
+      imageLeaseContext: 'test-image-lease-context',
+      runImpl: (_command, args, options) => {
+        assert.equal(args[0], 'scripts/lib/upload-cdn-file.sh');
+        seenEnv = options?.env;
+        return { code: 1, stdout: '✅ uploaded' };
+      },
+    });
+    assert.equal(result.failures, 1);
+    assert.equal(result.uploaded, 0);
+    assert.equal(seenEnv?.FRONTALIERE_R2_IMAGE_LEASE_CONTEXT, 'test-image-lease-context');
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
   }
 });
 
@@ -2893,6 +2943,10 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     'scripts/publish-section-edge.mjs',
     'scripts/lib/engine-corpus-view.mjs',
     'scripts/lib/upload-cdn-file.sh',
+    'scripts/lib/r2-image-lease-process.sh',
+    'scripts/lib/r2-image-namespace-lock.mjs',
+    'scripts/lib/r2-section-lock.mjs',
+    'scripts/lib/is-invoked-directly.mjs',
     'scripts/lib/npm-ci-retry.sh',
     'scripts/lib/parse-positive-num.mjs',
     'scripts/ci/retry-cmd.sh',
@@ -3029,7 +3083,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /r2-api-push-plan/);
   assert.match(wf, /landing\/archive\/hub\/RSS/);
   assert.match(wf, /Il replay della push API deve riprodurre il piano dei\s+contenuti/);
-  assert.match(read('scripts/publish-section-pages.mjs'), /await assertMainFreshImpl\(\);\n  for \(const \{ local, key \} of cdnUploads\)/);
+  assert.match(
+    read('scripts/publish-section-pages.mjs'),
+    /await assertMainFreshImpl\(\);\n  await publishSignalBoundary\(signal\);\n  for \(const \{ local, key \} of cdnUploads\)/,
+  );
   assert.match(read('scripts/publish-section-pages.mjs'), /EXPECTED_MAIN_HEAD non contiene una SHA completa/);
   const publishCheckout = wf.slice(wf.indexOf('      - name: Checkout\n', wf.indexOf('\n  publish:\n')));
   assert.match(publishCheckout, /fetch-depth: 0/);
@@ -3136,6 +3193,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'scripts/lib/assert-hub-locale-slug.mjs',
     'scripts/lib/section-page-manifest.mjs',
     'scripts/lib/upload-cdn-file.sh',
+    'scripts/lib/r2-image-lease-process.sh',
+    'scripts/lib/r2-image-namespace-lock.mjs',
+    'scripts/lib/r2-section-lock.mjs',
+    'scripts/lib/is-invoked-directly.mjs',
     'generator/scripts/load-rc-env.mjs',
   ]) assert.ok(wf.includes(`      - '${p}'\n`), p);
   assert.ok(wf.includes("      - 'engine/**'\n"));
@@ -3149,6 +3210,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'scripts/lib/cf-purge-variants.mjs',
     'scripts/lib/npm-ci-retry.sh',
     'scripts/lib/parse-positive-num.mjs',
+    'scripts/lib/upload-cdn-file.sh',
+    'scripts/lib/r2-image-lease-process.sh',
+    'scripts/lib/r2-image-namespace-lock.mjs',
+    'scripts/lib/r2-section-lock.mjs',
+    'scripts/lib/is-invoked-directly.mjs',
   ]) assert.ok(read('.github/workflows/fast-publish-article.yml').includes(`      - '${p}'\n`), p);
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'engine/**'\n"));
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'host/**'\n"));

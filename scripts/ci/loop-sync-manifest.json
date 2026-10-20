@@ -823,9 +823,9 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 (issue #1110, trasporto concatenato da Site #10266 e follow-up #10273/#10277): lo scanner torna byte-identico al sito. Il watermark usa soltanto run `schedule` riuscite e distingue il primo avvio leggibile da una history illeggibile, che fallisce chiusa. Il lookback derivato ha un ceiling effettivo di 12 ore; l'orizzonte `created` realtime di 3 giorni e' fail-closed senza opt-in esplicito, mentre l'override retention-complete a 35 giorni conserva le run create oltre 3 giorni ma aggiornate nel cutoff. Split e paginazione evitano il limite di 1.000 risultati per search.",
       "baseline": {
-        "site": "17d7c9144c5357bd",
-        "corpus": "17d7c9144c5357bd",
-        "alignedAt": "2026-10-12"
+        "site": "585c7b08ab1830dd",
+        "corpus": "585c7b08ab1830dd",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -948,9 +948,9 @@
       "path": "scripts/lib/workflow-scope-detect.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "1ae49b1d896e4463",
-        "corpus": "1ae49b1d896e4463",
-        "alignedAt": "2026-09-23"
+        "site": "61a818f5d7400e37",
+        "corpus": "61a818f5d7400e37",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -2551,9 +2551,36 @@
       "path": "scripts/lib/upload-cdn-file.sh",
       "mode": "identical",
       "baseline": {
-        "site": "1e5ae2d628914224",
-        "corpus": "1e5ae2d628914224",
-        "alignedAt": "2026-10-11"
+        "site": "46958422fccb573e",
+        "corpus": "46958422fccb573e",
+        "alignedAt": "2026-10-20"
+      }
+    },
+    {
+      "path": "scripts/lib/r2-image-lease-process.sh",
+      "mode": "identical",
+      "baseline": {
+        "site": "c7b5d53bdf10af12",
+        "corpus": "c7b5d53bdf10af12",
+        "alignedAt": "2026-10-20"
+      }
+    },
+    {
+      "path": "scripts/lib/r2-image-namespace-lock.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "128b105756d961a4",
+        "corpus": "128b105756d961a4",
+        "alignedAt": "2026-10-20"
+      }
+    },
+    {
+      "path": "scripts/lib/r2-section-lock.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "5ece44d921fdedc4",
+        "corpus": "5ece44d921fdedc4",
+        "alignedAt": "2026-10-20"
       }
     },
     {
@@ -3310,8 +3337,8 @@
       "sitePath": "scripts/lib/extract-article-text.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "c896aecb77764b2a",
-        "corpus": "c896aecb77764b2a",
+        "site": "24f32d759f736e41",
+        "corpus": "24f32d759f736e41",
         "alignedAt": "2026-10-19"
       }
     },

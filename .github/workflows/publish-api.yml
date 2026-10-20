@@ -92,6 +92,10 @@ on:
       # su R2, retry, purge) e gli import del purge: non sono import del
       # publisher ma ne decidono l'esito, quindi un loro fix deve ripubblicare.
       - 'scripts/lib/upload-cdn-file.sh'
+      - 'scripts/lib/r2-image-lease-process.sh'
+      - 'scripts/lib/r2-image-namespace-lock.mjs'
+      - 'scripts/lib/r2-section-lock.mjs'
+      - 'scripts/lib/is-invoked-directly.mjs'
       - 'scripts/ci/retry-cmd.sh'
       - 'scripts/cf-purge-cache.mjs'
       - 'scripts/lib/cf-analytics.mjs'
