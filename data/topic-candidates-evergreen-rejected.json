@@ -10665,18 +10665,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.laregione.ch/svizzera/svizzera/1957422/irregolarita-sugli-orari-mobbing-e-clima-tossico-fra-le-sbarre": {
-      "section": "svizzera",
-      "ts": 1792291113345
-    },
-    "svizzera::https://www.tio.ch/ticino/cronaca/1957467/auto-sbanda-e-finisce-nel-prato-dell-aeroporto": {
-      "section": "svizzera",
-      "ts": 1792291119357
-    },
-    "svizzera::https://www.tio.ch/sport/hockey/1957445/ambri-ginevra-ambri-ginevra-gottardo-arena": {
-      "section": "svizzera",
-      "ts": 1792291125701
-    },
     "frontaliere::https://comozero.it/attualita/como-scomparso-ricardo-anthony-stibane-appello-nonna": {
       "section": "frontaliere",
       "ts": 1792292435066
@@ -10912,6 +10900,26 @@
     "frontaliere::https://www.laregione.ch/cantone/ticino/1957822/vent-anni-di-scuola-inoltre-un-tassello-essenziale-di-risocializzazione": {
       "section": "frontaliere",
       "ts": 1792463069371
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/btp-valore-il-risparmio-torna-al-tesoro-i-titoli-di-stato-restano-un-porto-sicuro-per-i-risparmiatori/2713021": {
+      "section": "frontaliere",
+      "ts": 1792464011562
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/chiusa-per-una-notte-luscita-della-stazione-di-castelletto-ticino-sulla-diramazione-gallarate-gattico/2712598": {
+      "section": "frontaliere",
+      "ts": 1792464037489
+    },
+    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1957809/pompieri-all-ex-lati-si-tirato-ma-decidera-il-referendum": {
+      "section": "frontaliere",
+      "ts": 1792464068113
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/agricoltura-coldiretti-varese-otto-aziende-su-dieci-pronte-a-investire-nellinnovazione-tecnologica/2712787": {
+      "section": "frontaliere",
+      "ts": 1792464091379
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/19/leggi-notizia/argomenti/economia-13/articolo/coldiretti-varese-otto-aziende-agricole-su-dieci-pronte-a-investire-nellinnovazione.html": {
+      "section": "frontaliere",
+      "ts": 1792464118843
     }
   }
 }
