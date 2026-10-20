@@ -28547,6 +28547,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'orologi-svizzeri-export-a-2-2-miliardi-a-settembre-11-7',
+    category: 'novita',
+    date: '2026-10-20T23:39:39.771Z',
+    image: '/images/blog/article-orologi-svizzeri-export-a-2-2-miliardi-a-settembre-11-7.webp',
+    hasCalculator: false,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
