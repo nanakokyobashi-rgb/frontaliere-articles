@@ -36,6 +36,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.beringen-vbsh-fermate-chiuse.title': 'ATM exploded in Beringen: three VBSH stops not served',
     'blog.article.beringen-vbsh-fermate-chiuse.excerpt': 'After the explosions this morning at Enge, VBSH is not serving Enge, Hägli and Sonne until 13:30.',
     'blog.article.beringen-vbsh-fermate-chiuse.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.schleitheim-scooter-incidente-2026.title': 'Scooter accident in Schleitheim: woman injured, Hohbrugg closed',
+    'blog.article.schleitheim-scooter-incidente-2026.excerpt': 'Sunday, October 18, 2026, a 61-year-old woman falls from her scooter on Hohbrugg: thrown 12 meters down the slope, helicopter transport to hospital, road closed for over an hour.',
+    'blog.article.schleitheim-scooter-incidente-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

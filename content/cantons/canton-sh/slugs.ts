@@ -14,6 +14,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'pulizie-tunnel-sciaffusa': { it: 'pulizie-tunnel-sciaffusa', en: 'schaffhausen-tunnel-cleaning', de: 'naechtliche-tunnelreinigung-schaffhausen', fr: 'nettoyage-tunnels-schaffhouse' },
  'svp-sciaffusa-candidati-2027': { it: 'svp-sciaffusa-candidati-2027', en: 'svp-schaffhausen-candidates-2027', de: 'svp-schaffhausen-kandidaturen-2027', fr: 'svp-schaffhouse-candidatures-2027' },
  'beringen-vbsh-fermate-chiuse': { it: 'beringen-vbsh-fermate-chiuse', en: 'beringen-vbsh-stops-closed', de: 'beringen-vbsh-haltestellen-gesperrt', fr: 'beringen-vbsh-arrets-fermes' },
+ 'schleitheim-scooter-incidente-2026': { it: 'schleitheim-scooter-incidente-2026', en: 'schleitheim-scooter-accident-2026', de: 'schleitheim-roller-unfall-2026', fr: 'schleitheim-accident-scooter-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

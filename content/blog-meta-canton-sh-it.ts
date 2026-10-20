@@ -36,6 +36,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.beringen-vbsh-fermate-chiuse.title': 'Bancomat esploso a Beringen: tre fermate VBSH non servite',
     'blog.article.beringen-vbsh-fermate-chiuse.excerpt': 'Dopo le esplosioni della mattina a Enge, VBSH non serve Enge, Hägli e Sonne fino alle 13:30.',
     'blog.article.beringen-vbsh-fermate-chiuse.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.schleitheim-scooter-incidente-2026.title': 'Incidente scooter a Schleitheim: donna ferita, Hohbrugg chiusa',
+    'blog.article.schleitheim-scooter-incidente-2026.excerpt': 'Domenica 18 ottobre 2026, una 61enne cade dallo scooter sulla Hohbrugg: proiezione di 12 metri nel pendio, elicottero per il trasporto in ospedale, strada chiusa oltre un\'ora.',
+    'blog.article.schleitheim-scooter-incidente-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

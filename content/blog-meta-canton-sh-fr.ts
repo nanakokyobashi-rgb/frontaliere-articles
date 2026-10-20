@@ -36,6 +36,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.beringen-vbsh-fermate-chiuse.title': 'Distributeur automatique de billets explosé à Beringen : trois arrêts VBSH non desservis',
     'blog.article.beringen-vbsh-fermate-chiuse.excerpt': 'Après les explosions de la matinée à Enge, VBSH ne dessert pas Enge, Hägli et Sonne jusqu’à 13:30.',
     'blog.article.beringen-vbsh-fermate-chiuse.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.schleitheim-scooter-incidente-2026.title': 'Accident de scooter à Schleitheim : une femme blessée, Hohbrugg fermée',
+    'blog.article.schleitheim-scooter-incidente-2026.excerpt': 'Dimanche 18 octobre 2026, une femme de 61 ans chute de son scooter sur la Hohbrugg : elle est projetée à 12 mètres dans la pente, un hélicoptère est utilisé pour son transport à l’hôpital, route fermée pendant plus d’une heure.',
+    'blog.article.schleitheim-scooter-incidente-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

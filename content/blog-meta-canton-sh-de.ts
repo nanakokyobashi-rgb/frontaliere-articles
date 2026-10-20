@@ -36,6 +36,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.beringen-vbsh-fermate-chiuse.title': 'Bancomat in Beringen explodiert: drei VBSH-Haltestellen nicht bedient',
     'blog.article.beringen-vbsh-fermate-chiuse.excerpt': 'Nach den Explosionen am Morgen in Enge werden die Haltestellen Enge, Hägli und Sonne von VBSH bis 13:30 Uhr nicht bedient.',
     'blog.article.beringen-vbsh-fermate-chiuse.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.schleitheim-scooter-incidente-2026.title': 'Scooterunfall in Schleitheim: Frau verletzt, Hohbrugg gesperrt',
+    'blog.article.schleitheim-scooter-incidente-2026.excerpt': 'Am Sonntag, 18.',
+    'blog.article.schleitheim-scooter-incidente-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;
