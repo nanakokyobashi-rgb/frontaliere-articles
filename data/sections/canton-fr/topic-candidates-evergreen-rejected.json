@@ -79,6 +79,18 @@
     "canton-fr::https://www.freiburger-nachrichten.ch/story/298021/zoll-wird-zum-m%c3%a4nnerclub-seit-der-reform-sinkt-der-frauenanteil-deutlich": {
       "section": "canton-fr",
       "ts": 1792503450361
+    },
+    "canton-fr::https://www.lagruyere.ch/articles/gruyere/nicolas-repond-doublement-recompense-1467758": {
+      "section": "canton-fr",
+      "ts": 1792508553734
+    },
+    "canton-fr::https://www.frapp.ch/fr/articles/stories/macron-refuse-la-demission-de-laurent-nunez": {
+      "section": "canton-fr",
+      "ts": 1792508568425
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/298416/die-welt-wird-staunen-iran-bereitet-sich-auf-n%c3%a4chsten-krieg-vor": {
+      "section": "canton-fr",
+      "ts": 1792508575449
     }
   }
 }
