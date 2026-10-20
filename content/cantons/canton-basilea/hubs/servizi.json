@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "servizi",
-  "updatedAt": "2026-10-19T18:33:18.720Z",
-  "contentHash": "53ef716c1d514e0fa9bd1017c6b6d2771108fbc938e390361ed18a3dc30dfb7d",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "524d4c5ded9c7cdaf692b5ac08be0d7d941a528309e9f3aa1112f64f7bccdbf3",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,13 +14,18 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-19T10:02:57.372Z",
+      "updatedAt": "2026-10-19T16:35:32.380Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
       "updatedAt": "2026-10-19T13:13:42.861Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-19T15:46:42.722Z",
+      "keyFacts": 0
     }
   ],
   "locales": {
@@ -76,11 +81,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-18T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-10-19T22:00:00.000Z"
             },
             {
@@ -102,11 +102,16 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-10-23T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-24T22:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-19T10:02:57.372Z"
+          "updatedAt": "2026-10-19T16:35:32.380Z"
         },
         {
           "id": "aste-targhe",
@@ -138,6 +143,25 @@
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
           "updatedAt": "2026-10-19T13:13:42.861Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Basel",
+              "value": "13 °C",
+              "detail": "oggi da 9 a 13 °C"
+            },
+            {
+              "label": "Liestal",
+              "value": "14 °C",
+              "detail": "oggi da 9 a 14 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-19T15:46:42.722Z"
         }
       ],
       "curatedArticles": [
@@ -225,7 +249,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -279,11 +303,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-18T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-10-19T22:00:00.000Z"
             },
             {
@@ -305,11 +324,16 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-10-23T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-24T22:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-19T10:02:57.372Z"
+          "updatedAt": "2026-10-19T16:35:32.380Z"
         },
         {
           "id": "aste-targhe",
@@ -341,6 +365,25 @@
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
           "updatedAt": "2026-10-19T13:13:42.861Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Basel",
+              "value": "13 °C",
+              "detail": "today from 9 to 13 °C"
+            },
+            {
+              "label": "Liestal",
+              "value": "14 °C",
+              "detail": "today from 9 to 14 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-19T15:46:42.722Z"
         }
       ],
       "curatedArticles": [
@@ -420,7 +463,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -474,11 +517,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-18T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-10-19T22:00:00.000Z"
             },
             {
@@ -500,11 +538,16 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-10-23T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-24T22:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-19T10:02:57.372Z"
+          "updatedAt": "2026-10-19T16:35:32.380Z"
         },
         {
           "id": "aste-targhe",
@@ -536,6 +579,25 @@
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
           "updatedAt": "2026-10-19T13:13:42.861Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Basel",
+              "value": "13 °C",
+              "detail": "heute 9 bis 13 °C"
+            },
+            {
+              "label": "Liestal",
+              "value": "14 °C",
+              "detail": "heute 9 bis 14 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-19T15:46:42.722Z"
         }
       ],
       "curatedArticles": [
@@ -615,7 +677,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -669,11 +731,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-18T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-10-19T22:00:00.000Z"
             },
             {
@@ -695,11 +752,16 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-10-23T22:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-24T22:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-19T10:02:57.372Z"
+          "updatedAt": "2026-10-19T16:35:32.380Z"
         },
         {
           "id": "aste-targhe",
@@ -731,6 +793,25 @@
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
           "updatedAt": "2026-10-19T13:13:42.861Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Basel",
+              "value": "13 °C",
+              "detail": "aujourd’hui de 9 à 13 °C"
+            },
+            {
+              "label": "Liestal",
+              "value": "14 °C",
+              "detail": "aujourd’hui de 9 à 14 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-19T15:46:42.722Z"
         }
       ],
       "curatedArticles": [
@@ -802,7 +883,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

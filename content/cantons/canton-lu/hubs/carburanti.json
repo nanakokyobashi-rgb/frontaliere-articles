@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-19T15:05:27.345Z",
-  "contentHash": "256fc05ab913023854239e578f987981bb2dd144e6d6aa3a56ff340820e7be78",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "464adb9d01eb6354922107a81267f069bb66b3c394470ca663ae75b40a179f97",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-18T11:41:56.271Z",
+      "updatedAt": "2026-10-19T13:56:07.476Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Lucerna: Forensic Nurses contro la violenza domestica",
+          "url": "/articoli-lucerna/lucerna-forensic-nurses-violenza/",
+          "excerpt": "Il Canton Lucerna prevede per l'estate 2027 un progetto pilota con Forensic Nurses e annuncia nuovi servizi medici e di polizia.",
+          "date": "2026-10-19T23:59:14.540Z"
+        },
         {
           "title": "Prio Swiss ricorre al Tribunale per mandato esofago Luks",
           "url": "/articoli-lucerna/prioswiss-ricorso-luks/",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/progetto-latte-climatico/",
           "excerpt": "Dal 2022, KlimaStaR Milch ha ridotto del 23% i mangimi commestibili e dell'8% le emissioni per kg.",
           "date": "2026-10-09T00:54:58.572Z"
-        },
-        {
-          "title": "Kriens torna in rosso dopo surplus milionari",
-          "url": "/articoli-lucerna/kriens-torna-in-deficit/",
-          "excerpt": "Dopo surplus milionari, Kriens torna in deficit: il titolo segnala un nuovo passivo, ma non indica ancora importo, data o causa.",
-          "date": "2026-10-09T00:40:17.368Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-19T15:05:27.345Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "LU",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Lucerne: Forensic Nurses against domestic violence",
+          "url": "/en/lucerne-articles/lucerne-forensic-nurses-domestic-violence/",
+          "excerpt": "The Canton of Lucerne is planning a pilot project with Forensic Nurses for summer 2027 and announces new medical and police services.",
+          "date": "2026-10-19T23:59:14.540Z"
+        },
         {
           "title": "Prio Swiss appeals to the Court over the Luks esophagus mandate",
           "url": "/en/lucerne-articles/prioswiss-appeal-luks/",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/swiss-milk-climate-project/",
           "excerpt": "Since 2022, KlimaStaR Milch has reduced edible feed by 23% and emissions per kg by 8%.",
           "date": "2026-10-09T00:54:58.572Z"
-        },
-        {
-          "title": "Kriens back in the red after million-dollar surpluses",
-          "url": "/en/lucerne-articles/kriens-returns-to-deficit/",
-          "excerpt": "After multimillion surpluses, Kriens returns to a deficit: the headline indicates a new liability, but does not yet specify the amount, date, or cause.",
-          "date": "2026-10-09T00:40:17.368Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-19T15:05:27.345Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "LU",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Luzern: Forensic Nurses gegen häusliche Gewalt",
+          "url": "/de/luzern-artikel/luzern-forensic-nurses-haeusliche-gewalt/",
+          "excerpt": "Der Kanton Luzern plant für den Sommer 2027 ein Pilotprojekt mit Forensic Nurses und kündigt neue medizinische und polizeiliche Angebote an.",
+          "date": "2026-10-19T23:59:14.540Z"
+        },
         {
           "title": "Prio Swiss klagt gegen LUKS-Mandat für Speiseröhren-OPs",
           "url": "/de/luzern-artikel/prioswiss-berufung-luks/",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/schweizer-milch-klimaprojekt/",
           "excerpt": "Seit 2022 hat KlimaStaR Milch die für die menschliche Ernährung geeigneten Futtermittel um 23% und die Emissionen pro kg um 8% reduziert.",
           "date": "2026-10-09T00:54:58.572Z"
-        },
-        {
-          "title": "Kriens schreibt nach Überschüssen in Millionenhöhe wieder rote Zahlen",
-          "url": "/de/luzern-artikel/kriens-rutscht-wieder-ins-minus/",
-          "excerpt": "Nach Überschüssen in Millionenhöhe ist Kriens wieder im Defizit: Die Überschrift weist auf einen neuen Fehlbetrag hin, nennt aber noch keinen Betrag, kein Datum und keine Ursache.",
-          "date": "2026-10-09T00:40:17.368Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-19T15:05:27.345Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "LU",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-19T13:56:07.476Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Lucerne : Forensic Nurses contre la violence domestique",
+          "url": "/fr/articles-lucerne/lucerne-infirmiers-medico-legaux-violence-domestique/",
+          "excerpt": "Le canton de Lucerne prévoit pour l’été 2027 un projet pilote avec Forensic Nurses et annonce de nouveaux services médicaux et de police.",
+          "date": "2026-10-19T23:59:14.540Z"
+        },
         {
           "title": "Prio Swiss recourt au Tribunal pour le mandat Luks",
           "url": "/fr/articles-lucerne/prioswiss-recours-luks/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/projet-lait-climatique-suisse/",
           "excerpt": "Depuis 2022, KlimaStaR Milch a réduit de 23 % les aliments comestibles et de 8 % les émissions par kg.",
           "date": "2026-10-09T00:54:58.572Z"
-        },
-        {
-          "title": "Kriens repasse dans le rouge après des excédents de plusieurs millions",
-          "url": "/fr/articles-lucerne/kriens-repasse-dans-le-rouge/",
-          "excerpt": "Après des excédents de plusieurs millions, Kriens repasse en déficit : le titre signale un nouveau passif, mais n’indique encore ni montant, ni date ni cause.",
-          "date": "2026-10-09T00:40:17.368Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-19T15:05:27.345Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

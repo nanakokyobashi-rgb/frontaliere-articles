@@ -4,12 +4,12 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-19T18:33:18.720Z",
-  "contentHash": "654e2ac84c39f14215c398ed59d7595d3f4525265eed0c8b256f5c6d44e76bef",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "41681230f96fc6037e5902794f49c4e4eba2374454efbc0897fb41a0c17604db",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-19T13:52:30.888Z",
+      "updatedAt": "2026-10-19T15:42:28.810Z",
       "keyFacts": 1
     },
     {
@@ -38,12 +38,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
-            {
               "label": "Riscoprire Sciaffusa - Un viaggio archeologico e storico nel tempo",
               "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen",
               "date": "2026-10-20",
@@ -54,6 +48,12 @@
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
               "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
+            },
+            {
+              "label": "Wine mobile",
+              "detail": "Bringolf Weinbau, Hallau — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Flook",
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-19T13:52:30.888Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -140,7 +140,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "SH",
@@ -161,12 +161,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau — ongoing, last day: 25 October 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
-            {
               "label": "Rediscover Schaffhausen - An archaeological-historical journey through time",
               "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen",
               "date": "2026-10-20",
@@ -177,6 +171,12 @@
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
               "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
+            },
+            {
+              "label": "Wine mobile",
+              "detail": "Bringolf Weinbau, Hallau — ongoing, last day: 25 October 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Flook",
@@ -223,7 +223,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-19T13:52:30.888Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -263,7 +263,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "SH",
@@ -284,12 +284,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
-            {
               "label": "Schaffhausen neu entdecken ̶ Eine archäologisch-historische Zeitreise",
               "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen",
               "date": "2026-10-20",
@@ -300,6 +294,12 @@
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
               "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
+            },
+            {
+              "label": "Weinmobil",
+              "detail": "Bringolf Weinbau, Hallau — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Flook",
@@ -346,7 +346,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-19T13:52:30.888Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "SH",
@@ -407,12 +407,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
-            {
               "label": "Redécouvrir Schaffhouse ̶ Un voyage dans le temps archéologique et historique",
               "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen",
               "date": "2026-10-20",
@@ -423,6 +417,12 @@
               "detail": "Stadttheater Schaffhausen, Schaffhausen",
               "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
+            },
+            {
+              "label": "Weinmobil",
+              "detail": "Bringolf Weinbau, Hallau — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Flook",
@@ -469,7 +469,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-19T13:52:30.888Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

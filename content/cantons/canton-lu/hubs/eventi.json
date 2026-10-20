@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-19T18:33:18.720Z",
-  "contentHash": "d3a082d0ddc0630d04ef5b52fbb5cbd4841158f795643d665b15a6fb1d34b755",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "199f7dd5045813c7f2c10c86728730cb81034c5319519cf03776f73911a7bda2",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-19T13:52:30.888Z",
+      "updatedAt": "2026-10-19T15:42:28.810Z",
       "keyFacts": 1
     },
     {
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "77",
+          "value": "74",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,74 +38,80 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Kilbi-Markt in Willisau 19.10.",
-              "detail": "Willisau",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kilbimarkt-in-willisau-1910/"
+              "label": "Winter Qi Gong Inseli",
+              "detail": "Ebikon",
+              "date": "2026-10-20",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
             },
             {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-19",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648405"
-            },
-            {
-              "label": "IMPROVTHEATER vs PAARTHERAPIE: Von Liebe, Beziehungen und anderen Turbulenzen",
-              "detail": "Kino Bourbaki, Luzern",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/improvtheater-vs-paartherapie-von-liebe-beziehungen-und-anderen-turbulenzen/"
-            },
-            {
-              "label": "Interaktives Improvisationstheater „IMPROTHEATER vs PAARTHERAPIE“",
-              "detail": "Lucerne, Luzern",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/interaktives-improvisationstheater-improtheater-vs-paartherapie/"
-            },
-            {
-              "label": "Avishai Cohen Quintet - Jazz Classics",
-              "detail": "KKL Luzern, Luzern",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/avishai-cohen-quintet-jazz-classics_AVvcfVi"
+              "label": "The Kruger Brothers & Kaleidoscope String Quartet - DER HERBST 26",
+              "detail": "Vitznau",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-kruger-brothers-feat-kaleidoscope-string-quartet-der-herbst-26/"
             },
             {
               "label": "Ausstellung NachtLeben",
               "detail": "Luzern — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
             },
             {
               "label": "360° Mitsingen",
               "detail": "Bourbaki Panorama — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             },
             {
               "label": "Pilzkontrolle",
               "detail": "Museum Luzern, Luzern — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
             },
             {
               "label": "Sunset cruises Brienzer Rothorn with 3-course menu",
               "detail": "Gipfel-Restaurant Rothorn — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
             },
             {
               "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
               "detail": "Museum Luzern, Luzern — in corso, ultimo giorno: 23 ottobre 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
+            },
+            {
+              "label": "Spoken Word Festival woerdz 2026: Dead or Alive Slam",
+              "detail": "Kriens",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spoken-word-festival-woerdz-2026-dead-or-alive-slam/"
+            },
+            {
+              "label": "Konzert \"In Dur und Moll\"",
+              "detail": "Lucerne",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-in-dur-und-moll/"
+            },
+            {
+              "label": "Das Schicksal der Kronjuwelen",
+              "detail": "Fach- und Wirtschafts-Mittelschulzentrum, Luzern",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/das-schicksal-der-kronjuwelen/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-10-19T13:52:30.888Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-10-19T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
+            },
             {
               "label": "Bewegung und Begegnung - Feldenkrais",
               "date": "2026-10-18T22:00:00.000Z",
@@ -130,11 +136,6 @@
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-10-15T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-10-15T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
             }
           ],
           "updatedAt": "2026-10-19T11:18:25.537Z"
@@ -171,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "LU",
@@ -181,7 +182,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "77",
+          "value": "74",
           "note": "from the site’s events calendar"
         }
       ],
@@ -192,74 +193,80 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Kilbi-Markt in Willisau 19.10.",
-              "detail": "Willisau",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kilbimarkt-in-willisau-1910/"
+              "label": "Winter Qi Gong Inseli",
+              "detail": "Ebikon",
+              "date": "2026-10-20",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
             },
             {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-19",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648405"
-            },
-            {
-              "label": "IMPROVTHEATER vs PAARTHERAPIE: Von Liebe, Beziehungen und anderen Turbulenzen",
-              "detail": "Kino Bourbaki, Luzern",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/improvtheater-vs-paartherapie-von-liebe-beziehungen-und-anderen-turbulenzen/"
-            },
-            {
-              "label": "Interaktives Improvisationstheater „IMPROTHEATER vs PAARTHERAPIE“",
-              "detail": "Lucerne, Luzern",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/interaktives-improvisationstheater-improtheater-vs-paartherapie/"
-            },
-            {
-              "label": "Avishai Cohen Quintet - Jazz Classics",
-              "detail": "KKL Luzern, Luzern",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/avishai-cohen-quintet-jazz-classics_AVvcfVi"
+              "label": "The Kruger Brothers & Kaleidoscope String Quartet - DER HERBST 26",
+              "detail": "Vitznau",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-kruger-brothers-feat-kaleidoscope-string-quartet-der-herbst-26/"
             },
             {
               "label": "Ausstellung NachtLeben",
               "detail": "Luzern — ongoing, last day: 25 October 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
             },
             {
               "label": "360° Mitsingen",
               "detail": "Bourbaki Panorama — ongoing, last day: 12 November 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             },
             {
               "label": "Pilzkontrolle",
               "detail": "Museum Luzern, Luzern — ongoing, last day: 26 October 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
             },
             {
               "label": "Sunset cruises Brienzer Rothorn with 3-course menu",
               "detail": "Gipfel-Restaurant Rothorn — ongoing, last day: 25 October 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
             },
             {
               "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
               "detail": "Museum Luzern, Luzern — ongoing, last day: 23 October 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
+            },
+            {
+              "label": "Spoken Word Festival woerdz 2026: Dead or Alive Slam",
+              "detail": "Kriens",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spoken-word-festival-woerdz-2026-dead-or-alive-slam/"
+            },
+            {
+              "label": "Konzert \"In Dur und Moll\"",
+              "detail": "Lucerne",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-in-dur-und-moll/"
+            },
+            {
+              "label": "Das Schicksal der Kronjuwelen",
+              "detail": "Fach- und Wirtschafts-Mittelschulzentrum, Luzern",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/das-schicksal-der-kronjuwelen/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-10-19T13:52:30.888Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-10-19T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
+            },
             {
               "label": "Bewegung und Begegnung - Feldenkrais",
               "date": "2026-10-18T22:00:00.000Z",
@@ -284,11 +291,6 @@
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-10-15T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-10-15T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
             }
           ],
           "updatedAt": "2026-10-19T11:18:25.537Z"
@@ -325,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "LU",
@@ -335,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "77",
+          "value": "74",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -346,74 +348,80 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Kilbi-Markt in Willisau 19.10.",
-              "detail": "Willisau",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kilbimarkt-in-willisau-1910/"
+              "label": "Winter Qi Gong Inseli",
+              "detail": "Ebikon",
+              "date": "2026-10-20",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
             },
             {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-19",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648405"
-            },
-            {
-              "label": "IMPROVTHEATER vs PAARTHERAPIE: Von Liebe, Beziehungen und anderen Turbulenzen",
-              "detail": "Kino Bourbaki, Luzern",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/improvtheater-vs-paartherapie-von-liebe-beziehungen-und-anderen-turbulenzen/"
-            },
-            {
-              "label": "Interaktives Improvisationstheater „IMPROTHEATER vs PAARTHERAPIE“",
-              "detail": "Lucerne, Luzern",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/interaktives-improvisationstheater-improtheater-vs-paartherapie/"
-            },
-            {
-              "label": "Avishai Cohen Quintet - Jazz Classics",
-              "detail": "KKL Luzern, Luzern",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/avishai-cohen-quintet-jazz-classics_AVvcfVi"
+              "label": "The Kruger Brothers & Kaleidoscope String Quartet - DER HERBST 26",
+              "detail": "Vitznau",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-kruger-brothers-feat-kaleidoscope-string-quartet-der-herbst-26/"
             },
             {
               "label": "Ausstellung NachtLeben",
               "detail": "Luzern — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
             },
             {
               "label": "360° Mitsingen",
               "detail": "Bourbaki Panorama — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             },
             {
               "label": "Pilzkontrolle",
               "detail": "Museum Luzern, Luzern — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
             },
             {
               "label": "Sonnenuntergangsfahrten Brienzer Rothorn mit 3-Gänge-Menü",
               "detail": "Gipfel-Restaurant Rothorn — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
             },
             {
               "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
               "detail": "Museum Luzern, Luzern — läuft, letzter Tag: 23. Oktober 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
+            },
+            {
+              "label": "Spoken Word Festival woerdz 2026: Dead or Alive Slam",
+              "detail": "Kriens",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spoken-word-festival-woerdz-2026-dead-or-alive-slam/"
+            },
+            {
+              "label": "Konzert \"In Dur und Moll\"",
+              "detail": "Lucerne",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-in-dur-und-moll/"
+            },
+            {
+              "label": "Das Schicksal der Kronjuwelen",
+              "detail": "Fach- und Wirtschafts-Mittelschulzentrum, Luzern",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/das-schicksal-der-kronjuwelen/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-10-19T13:52:30.888Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-10-19T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
+            },
             {
               "label": "Bewegung und Begegnung - Feldenkrais",
               "date": "2026-10-18T22:00:00.000Z",
@@ -438,11 +446,6 @@
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-10-15T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-10-15T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
             }
           ],
           "updatedAt": "2026-10-19T11:18:25.537Z"
@@ -479,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "LU",
@@ -489,7 +492,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "77",
+          "value": "74",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -500,74 +503,80 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Kilbi-Markt in Willisau 19.10.",
-              "detail": "Willisau",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kilbimarkt-in-willisau-1910/"
+              "label": "Winter Qi Gong Inseli",
+              "detail": "Ebikon",
+              "date": "2026-10-20",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
             },
             {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-19",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648405"
-            },
-            {
-              "label": "IMPROVTHEATER vs PAARTHERAPIE: Von Liebe, Beziehungen und anderen Turbulenzen",
-              "detail": "Kino Bourbaki, Luzern",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/improvtheater-vs-paartherapie-von-liebe-beziehungen-und-anderen-turbulenzen/"
-            },
-            {
-              "label": "Interaktives Improvisationstheater „IMPROTHEATER vs PAARTHERAPIE“",
-              "detail": "Lucerne, Luzern",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/interaktives-improvisationstheater-improtheater-vs-paartherapie/"
-            },
-            {
-              "label": "Avishai Cohen Quintet - Jazz Classics",
-              "detail": "KKL Luzern, Luzern",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/avishai-cohen-quintet-jazz-classics_AVvcfVi"
+              "label": "The Kruger Brothers & Kaleidoscope String Quartet - DER HERBST 26",
+              "detail": "Vitznau",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-kruger-brothers-feat-kaleidoscope-string-quartet-der-herbst-26/"
             },
             {
               "label": "Ausstellung NachtLeben",
               "detail": "Luzern — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
             },
             {
               "label": "360° Mitsingen",
               "detail": "Bourbaki Panorama — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             },
             {
               "label": "Pilzkontrolle",
               "detail": "Museum Luzern, Luzern — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
             },
             {
               "label": "Croisières au coucher du soleil au Rothorn de Brienz avec menu à 3 plats",
               "detail": "Gipfel-Restaurant Rothorn — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
             },
             {
               "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
               "detail": "Museum Luzern, Luzern — en cours, dernier jour : 23 octobre 2026",
-              "date": "2026-10-19",
+              "date": "2026-10-20",
               "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
+            },
+            {
+              "label": "Spoken Word Festival woerdz 2026: Dead or Alive Slam",
+              "detail": "Kriens",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spoken-word-festival-woerdz-2026-dead-or-alive-slam/"
+            },
+            {
+              "label": "Konzert \"In Dur und Moll\"",
+              "detail": "Lucerne",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-in-dur-und-moll/"
+            },
+            {
+              "label": "Das Schicksal der Kronjuwelen",
+              "detail": "Fach- und Wirtschafts-Mittelschulzentrum, Luzern",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/das-schicksal-der-kronjuwelen/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-10-19T13:52:30.888Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-10-19T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
+            },
             {
               "label": "Bewegung und Begegnung - Feldenkrais",
               "date": "2026-10-18T22:00:00.000Z",
@@ -592,11 +601,6 @@
               "label": "Winter Qi Gong Waldfriedhof Staffeln",
               "date": "2026-10-15T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
-            },
-            {
-              "label": "Salonkonzert",
-              "date": "2026-10-15T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7463707"
             }
           ],
           "updatedAt": "2026-10-19T11:18:25.537Z"
@@ -633,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }

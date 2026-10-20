@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-10-19T02:30:40.156Z",
-  "contentHash": "7491098297ba3932fe875db8d9032280fe3f47d2446b6ffe823a89ebe3d7785d",
+  "updatedAt": "2026-10-20T00:06:33.415Z",
+  "contentHash": "f3d204859b4ab6411bf6573f821d12b5bc1387e1bd5ca27cac97d537dd0bc20f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-18T20:21:24.396Z",
+      "updatedAt": "2026-10-19T15:42:28.810Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T19:43:29.238Z",
+      "updatedAt": "2026-10-19T11:18:25.537Z",
       "keyFacts": 0
     }
   ],
@@ -38,24 +38,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Gruppen Kunstausstellung",
-              "detail": "Tierpark Lange Erlen, Erlen — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
-            {
-              "label": "Mission Erde",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
-            },
-            {
               "label": "Schulden- und Budgetberatungen Caritas",
               "detail": "Kreuzlingen",
               "date": "2026-10-20",
@@ -66,6 +48,24 @@
               "detail": "Kreuzlingen",
               "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/schriftbilder-bilderschrift/"
+            },
+            {
+              "label": "Gruppen Kunstausstellung",
+              "detail": "Tierpark Lange Erlen, Erlen — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
+            },
+            {
+              "label": "Mission Erde",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
             },
             {
               "label": "Ursus & Nadeschkin - Prspktvnwchsl",
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -146,7 +146,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "en": {
       "canton": "TG",
@@ -167,24 +167,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Gruppen Kunstausstellung",
-              "detail": "Tierpark Lange Erlen, Erlen — ongoing, last day: 25 October 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — ongoing, last day: 31 October 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
-            {
-              "label": "Mission Erde",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — ongoing, last day: 25 October 2026",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
-            },
-            {
               "label": "Schulden- und Budgetberatungen Caritas",
               "detail": "Kreuzlingen",
               "date": "2026-10-20",
@@ -195,6 +177,24 @@
               "detail": "Kreuzlingen",
               "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/schriftbilder-bilderschrift/"
+            },
+            {
+              "label": "Gruppen Kunstausstellung",
+              "detail": "Tierpark Lange Erlen, Erlen — ongoing, last day: 25 October 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — ongoing, last day: 31 October 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
+            },
+            {
+              "label": "Mission Erde",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — ongoing, last day: 25 October 2026",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
             },
             {
               "label": "Ursus & Nadeschkin - Prspktvnwchsl",
@@ -229,7 +229,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -247,7 +247,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -275,7 +275,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "de": {
       "canton": "TG",
@@ -296,24 +296,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Gruppen Kunstausstellung",
-              "detail": "Tierpark Lange Erlen, Erlen — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
-            {
-              "label": "Mission Erde",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
-            },
-            {
               "label": "Schulden- und Budgetberatungen Caritas",
               "detail": "Kreuzlingen",
               "date": "2026-10-20",
@@ -324,6 +306,24 @@
               "detail": "Kreuzlingen",
               "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/schriftbilder-bilderschrift/"
+            },
+            {
+              "label": "Gruppen Kunstausstellung",
+              "detail": "Tierpark Lange Erlen, Erlen — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
+            },
+            {
+              "label": "Mission Erde",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
             },
             {
               "label": "Ursus & Nadeschkin - Prspktvnwchsl",
@@ -358,7 +358,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -376,7 +376,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -404,7 +404,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     },
     "fr": {
       "canton": "TG",
@@ -425,24 +425,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Gruppen Kunstausstellung",
-              "detail": "Tierpark Lange Erlen, Erlen — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
-            {
-              "label": "Mission Erde",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-19",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
-            },
-            {
               "label": "Schulden- und Budgetberatungen Caritas",
               "detail": "Kreuzlingen",
               "date": "2026-10-20",
@@ -453,6 +435,24 @@
               "detail": "Kreuzlingen",
               "date": "2026-10-20",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/schriftbilder-bilderschrift/"
+            },
+            {
+              "label": "Gruppen Kunstausstellung",
+              "detail": "Tierpark Lange Erlen, Erlen — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
+            },
+            {
+              "label": "Ziegentrekking",
+              "detail": "geissgada, Hohentannen — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
+            },
+            {
+              "label": "Mission Erde",
+              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-20",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
             },
             {
               "label": "Ursus & Nadeschkin - Prspktvnwchsl",
@@ -487,7 +487,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-10-18T20:21:24.396Z"
+          "updatedAt": "2026-10-19T15:42:28.810Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -505,7 +505,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-19T11:18:25.537Z"
         }
       ],
       "curatedArticles": [
@@ -533,7 +533,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-19T02:30:40.156Z"
+      "updatedAt": "2026-10-20T00:06:33.415Z"
     }
   }
 }
