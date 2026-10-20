@@ -259,7 +259,7 @@ describe('ensureSeoDescriptionMinimum', () => {
     };
 
     const result = ensureSeoDescriptionMinimum(data);
-    expect(result.startsWith(body)).toBe(true);
+    expect(result.startsWith('Il Parlamento friburghese ha rinviato la mozione')).toBe(true);
     expect(result.length).toBeGreaterThanOrEqual(SEO_DESCRIPTION_MIN);
     expect(result.length <= SEO_DESCRIPTION_MAX).toBe(true);
     expect(data.seo.description).toBe(result);

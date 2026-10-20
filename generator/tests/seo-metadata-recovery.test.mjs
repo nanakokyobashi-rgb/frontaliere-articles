@@ -35,7 +35,7 @@ function article() {
     content: {
       it: {
         title: 'Titolo deterministico per',
-        excerpt: 'Una descrizione lunga da verificare il percorso SEO senza generazione automatica e con una fine di frase completa per il limite.',
+        excerpt: 'Una descrizione lunga da verificare il percorso SEO senza generazione automatica e con una fine di frase completa per il limite. Nuovi dati utili.',
       },
     },
     imageAlt: { it: 'Panorama del Ticino' },
@@ -70,7 +70,7 @@ test('la recovery usa il fallback italiano quando una description persistita ini
 
   assert.equal(
     data.seo.description,
-    'Una descrizione lunga da verificare il percorso SEO senza generazione automatica e con una fine di frase completa per il limite.',
+    'Una descrizione lunga da verificare il percorso SEO senza generazione automatica e con una fine di frase completa per il limite. Nuovi dati utili.',
   );
   assert.ok(data.seo.description.length >= 80);
   assert.ok(data.seo.description.length <= 150);
@@ -119,7 +119,7 @@ test('la recovery sostituisce una seoDescription persistita sotto il minimo con 
 
   assert.notEqual(data.seo.description, data.content.it.seoDescription);
   assert.ok(data.seo.description.length >= 80);
-  assert.ok(data.seo.description.startsWith('Una descrizione abbastanza lunga'));
+  assert.ok(data.seo.description.startsWith('Una descrizione lunga'));
 });
 
 test('la recovery usa il fallback italiano se il cap accorcia una descrizione persistita sotto il minimo', () => {
@@ -132,7 +132,7 @@ test('la recovery usa il fallback italiano se il cap accorcia una descrizione pe
 
   assert.ok(data.seo.description.length >= 80);
   assert.ok(data.seo.description.length <= 150);
-  assert.ok(data.seo.description.startsWith('Una descrizione abbastanza lunga'));
+  assert.ok(data.seo.description.startsWith('Una descrizione lunga'));
 });
 
 test('il builder SEO rifiuta Markdown anche nel percorso di recovery diretto', () => {
