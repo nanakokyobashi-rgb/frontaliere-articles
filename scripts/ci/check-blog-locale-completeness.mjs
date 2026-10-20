@@ -20,6 +20,9 @@ import { detectLanguageWithConfidence } from '../../generator/scripts/lib/detect
 import '../../host/cantonSectionsBootstrap.mjs';
 import { CORPUS_SECTIONS } from '../lib/corpus-sections.mjs';
 import { floorFrom } from '../lib/corpus-floors.mjs';
+import { extractBodyFields } from '../lib/article-body-api.mjs';
+
+export { extractBodyFields };
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 // Le radici dei corpi vengono dal core (sezioni ATTIVE), non da una coppia
@@ -64,106 +67,6 @@ export const MIN_ITALIAN_FILES = 1000;
 export const MIN_ITALIAN_FIELDS = 3000;
 export const LANGUAGE_CHECK_MIN_CHARS = 120;
 export const LANGUAGE_CHECK_MIN_CONFIDENCE = 0.65;
-
-const STRING_QUOTES = new Set(["'", '"', '`']);
-const BODY_KEY_VALUE_RE = /^blog\.article\.([^'"\r\n]+)\.(body(?:[1-9]|1[0-9]|20))$/u;
-
-function decodeTsString(raw) {
-  let out = '';
-  for (let i = 0; i < raw.length; i += 1) {
-    if (raw[i] !== '\\' || i + 1 >= raw.length) {
-      out += raw[i];
-      continue;
-    }
-    const next = raw[++i];
-    if (next === 'n') out += '\n';
-    else if (next === 'r') out += '\r';
-    else if (next === 't') out += '\t';
-    else if (next === 'b') out += '\b';
-    else if (next === 'f') out += '\f';
-    else if (next === 'v') out += '\v';
-    else if (next === '0') out += '\0';
-    else out += next;
-  }
-  return out;
-}
-
-function readQuotedValue(source, offset) {
-  let i = offset;
-  while (i < source.length && /\s/u.test(source[i])) i += 1;
-  const token = readQuotedToken(source, i);
-  if (!token) return null;
-  return { value: token.value, end: token.end };
-}
-
-function readQuotedToken(source, offset) {
-  const quote = source[offset];
-  if (!STRING_QUOTES.has(quote)) return null;
-  const start = offset + 1;
-  let i = start;
-  for (; i < source.length; i += 1) {
-    if (source[i] === '\\') {
-      i += 1;
-      continue;
-    }
-    if (source[i] === quote) {
-      return { value: decodeTsString(source.slice(start, i)), end: i + 1 };
-    }
-  }
-  return null;
-}
-
-function skipComment(source, offset) {
-  if (source[offset] !== '/' || offset + 1 >= source.length) return offset;
-  if (source[offset + 1] === '/') {
-    const newline = source.indexOf('\n', offset + 2);
-    return newline === -1 ? source.length : newline + 1;
-  }
-  if (source[offset + 1] === '*') {
-    const end = source.indexOf('*/', offset + 2);
-    return end === -1 ? source.length : end + 2;
-  }
-  return offset;
-}
-
-/**
- * Extracts body1..body20 entries and their decoded values. The writer emits
- * body1..body3 for the historical schema and body4..body20 opportunistically.
- *
- * @returns {Array<{id: string, field: string, value: string}>}
- */
-export function extractBodyFields(source) {
-  const text = String(source ?? '');
-  const entries = [];
-  // Scan string tokens instead of matching the whole file with a regexp:
-  // body text and comments can contain examples that look like i18n keys.
-  // A real writer key is a quoted token followed by the object-property colon.
-  for (let i = 0; i < text.length;) {
-    const afterComment = skipComment(text, i);
-    if (afterComment !== i) {
-      i = afterComment;
-      continue;
-    }
-    const token = readQuotedToken(text, i);
-    if (!token) {
-      i += 1;
-      continue;
-    }
-    let next = token.end;
-    while (next < text.length && /\s/u.test(text[next])) next += 1;
-    const key = BODY_KEY_VALUE_RE.exec(token.value);
-    if (key && text[next] === ':') {
-      const parsed = readQuotedValue(text, next + 1);
-      entries.push({
-        id: key[1],
-        field: key[2],
-        value: parsed?.value ?? null,
-      });
-    }
-    i = token.end;
-  }
-  return entries;
-}
 
 function normalizeComparable(value) {
   return String(value ?? '').replace(/\r\n?/gu, '\n').trim();

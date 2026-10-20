@@ -50,6 +50,7 @@ import { API_SECTIONS } from '../../scripts/lib/corpus-sections.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const SRC = readFileSync(resolve(ROOT, 'scripts/build-api.mjs'), 'utf-8');
+const BODY_API_SRC = readFileSync(resolve(ROOT, 'scripts/lib/article-body-api.mjs'), 'utf-8');
 
 // Ritagliare da `indexOf` senza controllarne il valore e' la stessa forma di
 // leak che questo file va a caccia nel gate: con l'ancora sparita `indexOf` da'
@@ -107,6 +108,25 @@ test('ogni contatore di manifest.counts e’ ri-derivato o dichiarato non ri-der
       `il contatore '${key}' non compare nel gate: cablalo in \`derived\` o in NOT_ON_DISK`,
     );
   }
+});
+
+test('article body API publishes compact indexes and derives body counts from disk', () => {
+  for (const literal of [
+    "articleBodyRecordsExpected: articleBodyApi.totals.expected",
+    "articleBodyRecordsAvailable: articleBodyApi.totals.available",
+    "articleBodyRecordsMissing: articleBodyApi.totals.missing",
+    "capabilities: {\n    articleBodies: articleBodyApi.capability",
+  ]) assert.ok(SRC.includes(literal), `build-api deve dichiarare ${literal}`);
+  assert.ok(SRC.includes('const articleBodyDisk = verifyArticleBodyApiOnDisk({'));
+  const gate = sliceFrom(SRC, 'const derived = {');
+  for (const literal of [
+    'articleBodyRecordsExpected: articleBodyDisk.totals.expected',
+    'articleBodyRecordsAvailable: articleBodyDisk.totals.available',
+    'articleBodyRecordsMissing: articleBodyDisk.totals.missing',
+  ]) assert.ok(gate.includes(literal), `il gate deve rileggere dal disco ${literal}`);
+  assert.match(BODY_API_SRC, /bodies\/\$\{section\.section\}\/\$\{locale\}\/index\.json/);
+  assert.match(SRC, /Individual payloads stay out of manifest\.files/);
+  assert.match(SRC, /globalArticleOwners = new Map\(\)/);
 });
 
 test('la cartella delle immagini e’ confrontata con l’indice che la dichiara', () => {
@@ -211,8 +231,11 @@ test('nessun contatore mappa l’ARTEFATTO ASSENTE su 0 in accordo col manifest'
     `attese almeno 11 voci in \`derived\`, trovate ${entries.length + spreads.length * API_SECTIONS.length}`,
   );
   for (const [, key, rhs] of entries) {
+    const bodyApiIsDiskVerified = key.startsWith('articleBodyRecords')
+      && SRC.includes('const articleBodyDisk = verifyArticleBodyApiOnDisk({')
+      && BODY_API_SRC.includes('Re-read every index and payload from disk');
     assert.ok(
-      wired.some((fn) => rhs.includes(fn)),
+      wired.some((fn) => rhs.includes(fn)) || bodyApiIsDiskVerified,
       `il contatore '${key}' non dichiara come tratta l’artefatto assente: usa derivedAlways o derivedOptional`,
     );
   }
