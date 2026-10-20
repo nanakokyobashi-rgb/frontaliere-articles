@@ -13536,6 +13536,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.battaglia-frontalieri-tasse-diritti.title': 'La longue bataille des travailleurs frontaliers : impôts, droits et disparités',
     'blog.article.battaglia-frontalieri-tasse-diritti.excerpt': 'Environ 31 mille travailleurs frontaliers dans le Varesotto et 32 mille dans le Comasco Varese reste exclue des rétrocessions après le retour à 4 % Les 31,7 % dépassent une heure et demie de trajet',
     'blog.article.battaglia-frontalieri-tasse-diritti.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.interrogazione-wicht-clausola-regionale.title': 'Lugano : question sur la clause de sauvegarde et frontaliers',
+    'blog.article.interrogazione-wicht-clausola-regionale.excerpt': 'Omar Wicht interroge la Mairie de Lugano Clause régionale approuvée en septembre 2026 Limites temporaires à l\'immigration parmi les mesures prévues Possible',
+    'blog.article.interrogazione-wicht-clausola-regionale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;

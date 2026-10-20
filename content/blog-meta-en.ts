@@ -13534,6 +13534,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.battaglia-frontalieri-tasse-diritti.title': 'The long battle of cross-border workers: taxes, rights and disparities',
     'blog.article.battaglia-frontalieri-tasse-diritti.excerpt': 'About 31 thousand cross-border commuters in the Varese area and 32 thousand in the Como area Varese remains excluded from tax rebates after the return of 4% 31,7% spend more than an hour and a half traveling',
     'blog.article.battaglia-frontalieri-tasse-diritti.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.interrogazione-wicht-clausola-regionale.title': 'Lugano: parliamentary question on safeguard clause and cross-border workers',
+    'blog.article.interrogazione-wicht-clausola-regionale.excerpt': 'Omar Wicht questions the Municipality of Lugano Regional clause approved in September 2026 Temporary limits on immigration among the measures envisaged Possible',
+    'blog.article.interrogazione-wicht-clausola-regionale.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

@@ -13533,6 +13533,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.battaglia-frontalieri-tasse-diritti.title': 'Der lange Kampf der Grenzgänger: Steuern, Rechte und Ungleichheiten',
     'blog.article.battaglia-frontalieri-tasse-diritti.excerpt': 'Etwa 31 Tausend Grenzgänger im Varesotto und 32 Tausend im Comasco Varese bleibt nach der Rückkehr des 4%-Satzes von den Steuerrückvergütungen ausgeschlossen 31,7% sind länger als eineinhalb Stunden unterwegs',
     'blog.article.battaglia-frontalieri-tasse-diritti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.interrogazione-wicht-clausola-regionale.title': 'Lugano: Anfrage zu Schutzklausel und Grenzgängern',
+    'blog.article.interrogazione-wicht-clausola-regionale.excerpt': 'Omar Wicht befragt die Gemeinde Lugano im September 2026 genehmigte Regionalklausel Vorübergehende Einwanderungsbeschränkungen unter den vorgesehenen Maßnahmen Möglich',
+    'blog.article.interrogazione-wicht-clausola-regionale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

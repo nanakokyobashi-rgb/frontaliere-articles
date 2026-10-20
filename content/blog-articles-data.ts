@@ -45620,6 +45620,17 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'interrogazione-wicht-clausola-regionale',
+ category: 'novita',
+ date: '2026-10-20T19:20:36.800Z',
+ image: '/images/blog/article-interrogazione-wicht-clausola-regionale.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
