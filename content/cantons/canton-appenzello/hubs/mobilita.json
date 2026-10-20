@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T22:08:32.508Z",
-  "contentHash": "7b9ddc52088934d0a7d3194a0a4a2def612465bac35df4842a066ec364207638",
+  "updatedAt": "2026-10-20T23:20:19.994Z",
+  "contentHash": "c456fd83930a5851c506c5de9d04ccfeb3dfa64b7849e7f214b8cde60e155edd",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -71,6 +71,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "12.10. - 21.10.2026, Einbahnverkehr Gemeinde Waldstatt",
+              "date": "2026-10-21",
+              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1210-21102026-einbahnverkehr-gemeinde-waldstatt/"
+            },
+            {
               "label": "14.10. - 15.10.2026, Strassensperrung Gemeinde Walzenhausen",
               "date": "2026-10-15",
               "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1410-15102026-strassensperrung-gemeinde-walzenhausen/"
@@ -94,11 +99,6 @@
               "label": "Instandsetzung der Oberen Bruderbachbrücke",
               "date": "2026-09-14",
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
-            },
-            {
-              "label": "Sperrungen wegen Steinschlaggefahr auf der Schwägalp",
-              "date": "2026-09-03",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/sperrungen-wegen-steinschlaggefahr-auf-der-schwaegalp/"
             }
           ],
           "updatedAt": "2026-10-20T15:53:28.523Z"
@@ -129,7 +129,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-20T23:20:19.994Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -183,6 +183,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "12.10. - 21.10.2026, Einbahnverkehr Gemeinde Waldstatt",
+              "date": "2026-10-21",
+              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1210-21102026-einbahnverkehr-gemeinde-waldstatt/"
+            },
+            {
               "label": "14.10. - 15.10.2026, Strassensperrung Gemeinde Walzenhausen",
               "date": "2026-10-15",
               "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1410-15102026-strassensperrung-gemeinde-walzenhausen/"
@@ -206,11 +211,6 @@
               "label": "Instandsetzung der Oberen Bruderbachbrücke",
               "date": "2026-09-14",
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
-            },
-            {
-              "label": "Sperrungen wegen Steinschlaggefahr auf der Schwägalp",
-              "date": "2026-09-03",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/sperrungen-wegen-steinschlaggefahr-auf-der-schwaegalp/"
             }
           ],
           "updatedAt": "2026-10-20T15:53:28.523Z"
@@ -241,7 +241,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-20T23:20:19.994Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -295,6 +295,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "12.10. - 21.10.2026, Einbahnverkehr Gemeinde Waldstatt",
+              "date": "2026-10-21",
+              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1210-21102026-einbahnverkehr-gemeinde-waldstatt/"
+            },
+            {
               "label": "14.10. - 15.10.2026, Strassensperrung Gemeinde Walzenhausen",
               "date": "2026-10-15",
               "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1410-15102026-strassensperrung-gemeinde-walzenhausen/"
@@ -318,11 +323,6 @@
               "label": "Instandsetzung der Oberen Bruderbachbrücke",
               "date": "2026-09-14",
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
-            },
-            {
-              "label": "Sperrungen wegen Steinschlaggefahr auf der Schwägalp",
-              "date": "2026-09-03",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/sperrungen-wegen-steinschlaggefahr-auf-der-schwaegalp/"
             }
           ],
           "updatedAt": "2026-10-20T15:53:28.523Z"
@@ -353,7 +353,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-20T23:20:19.994Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -407,6 +407,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "12.10. - 21.10.2026, Einbahnverkehr Gemeinde Waldstatt",
+              "date": "2026-10-21",
+              "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1210-21102026-einbahnverkehr-gemeinde-waldstatt/"
+            },
+            {
               "label": "14.10. - 15.10.2026, Strassensperrung Gemeinde Walzenhausen",
               "date": "2026-10-15",
               "url": "https://ar.ch/verwaltung/departement-inneres-und-sicherheit/kantonspolizei/verkehrsmeldungen-strassensperrungen/detail/news/1410-15102026-strassensperrung-gemeinde-walzenhausen/"
@@ -430,11 +435,6 @@
               "label": "Instandsetzung der Oberen Bruderbachbrücke",
               "date": "2026-09-14",
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
-            },
-            {
-              "label": "Sperrungen wegen Steinschlaggefahr auf der Schwägalp",
-              "date": "2026-09-03",
-              "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/sperrungen-wegen-steinschlaggefahr-auf-der-schwaegalp/"
             }
           ],
           "updatedAt": "2026-10-20T15:53:28.523Z"
@@ -465,7 +465,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-20T23:20:19.994Z"
     }
   }
 }
