@@ -223,7 +223,7 @@ async function main() {
     root: REPO_ROOT,
     data: imageContext,
     area: 'Ticino e pendolarismo transfrontaliero',
-    // Leave room in the total 120 s deadline for Gemini and image verification.
+    // Leave room in the total 120 s deadline for the fallback provider and image verification.
     providerTimeouts: { 'openai-codex': DAILY_BRIEF_CODEX_TIMEOUT_MS },
     deadlineAt: Date.now() + 120_000,
     onProviderAttempt: ({ provider, attempt }) => {
