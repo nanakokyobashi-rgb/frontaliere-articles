@@ -7822,12 +7822,12 @@ export function checkStatsAstraCountFidelity(articleText, sourceText) {
 // Sono cio' da cui l'estrattore ricava il ramo migliore (`articleBody`) e la
 // data di pubblicazione della fonte, ma il markup inattivo non deve riattivarli.
 //
-// `extract-article-text.mjs` non viene toccato di proposito: e'
-// `mode: identical` nel manifest del ciclo (gemello di scripts/lib/ del sito),
-// e una modifica la' va fatta sul sito e scende col mirror. Quando il pezzo
-// scelto contiene un `<noscript>` body, qui lo si rende esplicito come markup
-// attivo prima di consegnare lo stesso HTML all'estrattore e alla title
-// evidence: e' la modalita' scripting-disabled prevista dal parser HTML.
+// `extract-article-text.mjs` resta `mode: identical`; la modifica trasportata
+// da questa PR arriva dal suo gemello sul sito. Le modifiche future a quel file
+// vanno fatte sul sito e trasportate. Quando il pezzo scelto contiene un
+// `<noscript>` body, qui lo si rende esplicito come markup attivo prima di
+// consegnare lo stesso HTML all'estrattore e alla title evidence: e' la
+// modalita' scripting-disabled prevista dal parser HTML.
 
 // Sotto questa soglia di testo visibile il blocco isolato non e' un corpo
 // d'articolo: si preferisce non isolare affatto, per non regredire sotto il
