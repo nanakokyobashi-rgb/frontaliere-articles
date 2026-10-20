@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-19T18:33:18.720Z",
-  "contentHash": "abb319d11793d8dc409578f07ecf31d63b7170dc680f7c5fd408b4532b149221",
+  "updatedAt": "2026-10-20T12:12:46.397Z",
+  "contentHash": "bd4be26c71614b3ceb4ad96788854611b874ed3c433866f51a2205b7ce1c5f19",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Nuklearforum crea la sezione Medicina nucleare svizzera",
+          "url": "/articoli-argovia/sezione-medicina-nucleare/",
+          "excerpt": "Il Nuklearforum Schweiz crea una nuova sezione Assemblea costitutiva il 12 ottobre a Olten KSB, PSI e Molecular Partners tra i fondatori Focus su radionuclidi",
+          "date": "2026-10-20T12:05:23.812Z"
+        },
+        {
           "title": "Argovia: iniziativa per rafforzare la parità salariale",
           "url": "/articoli-argovia/iniziativa-parita-salariale-ag/",
           "excerpt": "ArbeitAargau e un'alleanza di organizzazioni femminili e partiti chiedono analisi salariali da 50 dipendenti, sanzioni e il ripristino della Fachstelle.",
@@ -94,12 +100,6 @@
           "url": "/articoli-argovia/argovia-cani-divieto-respinto/",
           "excerpt": "Il governo argoviese respinge il divieto dei cani pericolosi: in due anni, nessuno dei sei gravi ferimenti a persone ha coinvolto un cane della lista.",
           "date": "2026-10-12T06:22:16.181Z"
-        },
-        {
-          "title": "Axpo e le concessioni delle centrali idroelettriche",
-          "url": "/articoli-argovia/axpo-concessioni-idroelettriche/",
-          "excerpt": "Axpo pubblica un White Paper: nei prossimi anni comuni e Cantoni potranno ridisegnare proprietà, partecipazioni e rischi.",
-          "date": "2026-10-11T13:20:39.471Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T12:12:46.397Z"
     },
     "en": {
       "canton": "AG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Nuklearforum creates the Swiss Nuclear Medicine section",
+          "url": "/en/aargau-articles/swiss-nuclear-medicine-section/",
+          "excerpt": "Nuklearforum Schweiz creates a new section Founding assembly on October 12 in Olten KSB, PSI and Molecular Partners among the founders Focus on radionuclides",
+          "date": "2026-10-20T12:05:23.812Z"
+        },
+        {
           "title": "Aargau: initiative to strengthen pay equality",
           "url": "/en/aargau-articles/aargau-pay-equality-initiative/",
           "excerpt": "ArbeitAargau and an alliance of women’s organizations and political parties are calling for pay analyses for companies with 50 or more employees, sanctions, and the restoration of the Fachstelle.",
@@ -193,12 +199,6 @@
           "url": "/en/aargau-articles/aargau-dangerous-dog-ban-rejected/",
           "excerpt": "The Aargau government rejects the ban on dangerous dogs: in two years, none of the six serious injuries to people involved a dog from the list.",
           "date": "2026-10-12T06:22:16.181Z"
-        },
-        {
-          "title": "Axpo and the concessions for hydroelectric power plants",
-          "url": "/en/aargau-articles/axpo-hydropower-concessions/",
-          "excerpt": "Axpo publishes a White Paper: in the coming years, municipalities and cantons will be able to redesign ownership, holdings and risks.",
-          "date": "2026-10-11T13:20:39.471Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T12:12:46.397Z"
     },
     "de": {
       "canton": "AG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Nuklearforum gründet die Sektion Nuklearmedizin Schweiz",
+          "url": "/de/aargau-artikel/sektion-nuklearmedizin-schweiz/",
+          "excerpt": "Das Nuklearforum Schweiz gründet eine neue Sektion Gründungsversammlung am 12.",
+          "date": "2026-10-20T12:05:23.812Z"
+        },
+        {
           "title": "Aargau: Initiative zur Stärkung der Lohngleichheit",
           "url": "/de/aargau-artikel/aargau-lohngleichheitsinitiative/",
           "excerpt": "ArbeitAargau und ein Bündnis von Frauenorganisationen und Parteien fordern Lohnanalysen ab 50 Beschäftigten, Sanktionen und die Wiederherstellung der Fachstelle.",
@@ -292,12 +298,6 @@
           "url": "/de/aargau-artikel/aargau-kampfhunde-verbot-abgelehnt/",
           "excerpt": "Die Aargauer Regierung lehnt das Verbot gefährlicher Hunde ab: In zwei Jahren war bei keinem der sechs schweren Verletzungsfälle an Menschen ein Hund von der Liste beteiligt.",
           "date": "2026-10-12T06:22:16.181Z"
-        },
-        {
-          "title": "Axpo und die Konzessionen der Wasserkraftwerke",
-          "url": "/de/aargau-artikel/axpo-wasserkraftkonzessionen/",
-          "excerpt": "Axpo veröffentlicht ein White Paper: In den kommenden Jahren können Gemeinden und Kantone Eigentumsverhältnisse, Beteiligungen und Risiken neu gestalten.",
-          "date": "2026-10-11T13:20:39.471Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T12:12:46.397Z"
     },
     "fr": {
       "canton": "AG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Nuklearforum crée la section Médecine nucléaire suisse",
+          "url": "/fr/articles-argovie/section-medecine-nucleaire/",
+          "excerpt": "Le Nuklearforum Schweiz crée une nouvelle section Assemblée constitutive le 12 octobre à Olten KSB, PSI et Molecular Partners parmi les fondateurs Focus",
+          "date": "2026-10-20T12:05:23.812Z"
+        },
+        {
           "title": "Argovie : initiative visant à renforcer l’égalité salariale",
           "url": "/fr/articles-argovie/initiative-egalite-salariale-argovie/",
           "excerpt": "ArbeitAargau et une alliance d’organisations féminines et de partis demandent des analyses salariales à partir de 50 employés, des sanctions et le rétablissement de la Fachstelle.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-argovie/argovie-interdiction-chiens-dangereux/",
           "excerpt": "Le gouvernement argovien rejette l’interdiction des chiens dangereux : en deux ans, aucune des six graves blessures infligées à des personnes n’a impliqué un chien figurant sur la liste.",
           "date": "2026-10-12T06:22:16.181Z"
-        },
-        {
-          "title": "Axpo et les concessions des centrales hydroélectriques",
-          "url": "/fr/articles-argovie/axpo-concessions-hydroelectriques/",
-          "excerpt": "Axpo publie un White Paper : dans les prochaines années, les communes et les cantons pourront redéfinir la propriété, les participations et les risques.",
-          "date": "2026-10-11T13:20:39.471Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T12:12:46.397Z"
     }
   }
 }
