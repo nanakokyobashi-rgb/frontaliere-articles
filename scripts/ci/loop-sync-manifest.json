@@ -6430,6 +6430,16 @@
         "corpus": "4cb6ab1ae26b751c",
         "alignedAt": "2026-10-19"
       }
+    },
+    {
+      "path": "scripts/lib/article-body-api.mjs",
+      "mode": "corpus-only",
+      "reason": "Producer della superficie HTTP article bodies: estrae i sorgenti del corpus, pubblica namespace completi con revisione e verifica indici/payload. Il sito consuma il contratto JSON via HTTP e non importa questo modulo.",
+      "baseline": {
+        "site": null,
+        "corpus": "174b620060f801b4",
+        "alignedAt": "2026-10-20"
+      }
     }
   ]
 }
