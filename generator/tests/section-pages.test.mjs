@@ -659,6 +659,16 @@ test('publisher: il fallback API copre l\'ultimo input raggiungibile dal publish
     }),
     apiCommit,
   );
+  assert.equal(
+    await resolvePublishedReleaseCommit(publisherCommit, {
+      apiReleaseCommitImpl: async () => publisherCommit,
+      apiReleaseCommitOverride: apiCommit,
+      latestApiInputCommitImpl: () => { throw new Error('un override stantio non deve riaprire il bookkeeping'); },
+      isAncestorImpl: () => { throw new Error('la HEAD corrente non richiede un fallback di antenato'); },
+    }),
+    publisherCommit,
+    'un override stantio e\u0027 superato quando l\u0027API ha gia\u0027 raggiunto la HEAD del publisher',
+  );
   await assert.rejects(
     resolvePublishedReleaseCommit(publisherCommit, {
       apiReleaseCommitImpl: async () => 'c'.repeat(40),
