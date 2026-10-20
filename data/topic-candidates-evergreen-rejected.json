@@ -2280,6 +2280,78 @@
       "firstSeenAt": "2026-10-20T02:28:41.680Z",
       "lastValidatedAt": "2026-10-20T02:28:41.680Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere polimeccanico ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-20T22:26:25.898Z",
+      "lastValidatedAt": "2026-10-20T22:26:25.898Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere meccanico ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-20T22:26:26.022Z",
+      "lastValidatedAt": "2026-10-20T22:26:26.022Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere meccatronico ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-20T22:26:26.139Z",
+      "lastValidatedAt": "2026-10-20T22:26:26.139Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere operatore cnc ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-20T22:32:07.998Z",
+      "lastValidatedAt": "2026-10-20T22:32:07.998Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere disegnatore tecnico ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-20T22:32:08.175Z",
+      "lastValidatedAt": "2026-10-20T22:32:08.175Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere tecnico automazione ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-20T22:34:12.217Z",
+      "lastValidatedAt": "2026-10-20T22:34:12.217Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -2366,6 +2438,18 @@
       "firstStrikeAt": "2026-10-19T10:55:17.668Z",
       "lastStrikeAt": "2026-10-19T10:55:17.668Z",
       "expiresAt": "2026-11-18T10:55:17.668Z"
+    },
+    {
+      "keyword": "frontaliere saldatore ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-10-20T22:32:07.868Z",
+      "lastStrikeAt": "2026-10-20T22:32:07.868Z",
+      "expiresAt": "2026-11-19T22:32:07.868Z"
     }
   ],
   "legacy": [
