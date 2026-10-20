@@ -27,6 +27,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.governo-soletta-ottobre-2026.title': 'Gouvernement de Soleure : décisions du 20 octobre 2026',
     'blog.article.governo-soletta-ottobre-2026.excerpt': 'NEST, formation des enseignants, Famel, police à Lugano et dossier au Conseil cantonal entre les points de la séance du 20 octobre 2026.',
     'blog.article.governo-soletta-ottobre-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.soletta-regierungsrat-attiparlamentari-2026.title': 'Soleure : 15 réponses sur initiatives et droits de vote',
+    'blog.article.soletta-regierungsrat-attiparlamentari-2026.excerpt': 'Le 20 octobre 2026, le Regierungsrat a publié les documents de la 34e séance : 15 initiatives traitées, 5 urgentes concernant la soH et un message visant à abolir l’exclusion du droit de vote (RG 0270/2026).',
+    'blog.article.soletta-regierungsrat-attiparlamentari-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;

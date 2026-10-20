@@ -27,6 +27,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.governo-soletta-ottobre-2026.title': 'Government of Solothurn: decisions of October 20, 2026',
     'blog.article.governo-soletta-ottobre-2026.excerpt': 'NEST, teacher training, FamEL, police in Lugano and dossiers before the Cantonal Council among the items on the agenda for the meeting of October 20, 2026.',
     'blog.article.governo-soletta-ottobre-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.soletta-regierungsrat-attiparlamentari-2026.title': 'Solothurn: 15 responses to parliamentary initiatives and voting rights project',
+    'blog.article.soletta-regierungsrat-attiparlamentari-2026.excerpt': 'On October 20, 2026, the Regierungsrat published the documents from the 34th session: 15 initiatives processed, 5 urgent matters concerning the soH, and a message to abolish exclusion from voting (RG 0270/2026).',
+    'blog.article.soletta-regierungsrat-attiparlamentari-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

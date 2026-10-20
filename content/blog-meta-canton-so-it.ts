@@ -27,6 +27,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.governo-soletta-ottobre-2026.title': 'Governo di Soletta: decisioni del 20 ottobre 2026',
     'blog.article.governo-soletta-ottobre-2026.excerpt': 'NEST, formazione dei docenti, FamEL, polizia a Lugano e dossier al Consiglio cantonale tra i punti della seduta del 20 ottobre 2026.',
     'blog.article.governo-soletta-ottobre-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.soletta-regierungsrat-attiparlamentari-2026.title': 'Soletta: 15 risposte a iniziative parlamentari e progetto diritti voto',
+    'blog.article.soletta-regierungsrat-attiparlamentari-2026.excerpt': 'Il 20 ottobre 2026 il Regierungsrat ha pubblicato i documenti della 34ª seduta: 15 iniziative evase, 5 urgenti sulla soH e messaggio per abolire l\'esclusione dal voto (RG 0270/2026).',
+    'blog.article.soletta-regierungsrat-attiparlamentari-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;

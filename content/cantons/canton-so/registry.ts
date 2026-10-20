@@ -94,4 +94,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'soletta-regierungsrat-attiparlamentari-2026',
+ category: 'novita',
+ date: '2026-10-20T15:42:25.788Z',
+ image: '/images/blog/article-soletta-regierungsrat-attiparlamentari-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
