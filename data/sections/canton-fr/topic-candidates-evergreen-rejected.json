@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-fr::https://latele.ch/emissions/info-fribourg/info-fribourg-s-2026-e-128?s=1": {
-      "section": "canton-fr",
-      "ts": 1792293573951
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/296701/grosser-rat-%c3%b6ffnet-weg-f%c3%bcr-zweisprachige-gemeinden": {
-      "section": "canton-fr",
-      "ts": 1792293584924
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/297111/laupen-%c3%b6ffnet-die-baustelle-f%c3%bcr-die-bev%c3%b6lkerung": {
-      "section": "canton-fr",
-      "ts": 1792293586032
-    },
     "canton-fr::https://www.freiburger-nachrichten.ch/story/297505/betr%c3%bcger-erbeuten-im-kanton-freiburg-fast-800000-franken": {
       "section": "canton-fr",
       "ts": 1792388895505
@@ -63,6 +51,18 @@
     "canton-fr::https://latele.ch/emissions/info-fribourg/info-fribourg-s-2026-e-129?s=3": {
       "section": "canton-fr",
       "ts": 1792457085884
+    },
+    "canton-fr::https://www.laliberte.ch/articles/regions/ville-de-fribourg/lexecutif-ferme-les-vannes-1467574": {
+      "section": "canton-fr",
+      "ts": 1792479721554
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/296701/grosser-rat-%c3%b6ffnet-weg-f%c3%bcr-zweisprachige-gemeinden": {
+      "section": "canton-fr",
+      "ts": 1792479737276
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/298337/wenn-es-denn-%c3%bcberhaupt-einen-gibt-gantner-zweifelt-am-nutzen-der-bilateralen": {
+      "section": "canton-fr",
+      "ts": 1792479747974
     }
   }
 }
