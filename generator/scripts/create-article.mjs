@@ -17188,6 +17188,11 @@ function requestCooperativeStop(signal) {
   setCodexTranslateProcessDeadline(Date.now());
   _pendingBodyCodexDeadlineMs = Date.now();
   const spentS = Math.round((Date.now() - RUN_START_MS) / 1000);
+  // Machine-readable marker for the outer `timeout` wrapper. GNU timeout
+  // returns 124 even when the child receives SIGTERM and exits cooperatively;
+  // without a marker the shell cannot distinguish that controlled deadline
+  // stop from a genuine hard kill and reports a false undeclared failure.
+  console.warn(`GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=${signal}`);
   // `::warning` and not `::error`: the run is not broken, it is being stopped.
   // A declared stop that prints nothing is indistinguishable from a crash, and
   // that ambiguity is exactly what #525 reports.

@@ -161,8 +161,11 @@ echo "$n" > "${calls}"
 printf '%s\\n' "$*" >> "${argv}"
 line="$(sed -n "\${n}p" "${planFile}")"
 [ -z "$line" ] && line="0 0 0"
-read -r rc prod slp <<< "$line"
+read -r rc prod slp marker <<< "$line"
 [ -n "\${slp:-}" ] && [ "$slp" != "0" ] && sleep "$slp"
+if [ "$marker" = "cooperative-stop" ]; then
+  echo "GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGTERM"
+fi
 talk="\${TALK_FOR_S:-0}"
 i=0
 while [ "$i" -lt "$talk" ]; do sleep 1; echo "[stub] riga $i"; i=$((i + 1)); done
@@ -331,6 +334,20 @@ test('lo step emette un esito distinto per articolo, no-op dichiarato e timeout'
     hardKill: 5,
   });
   assert.match(timeout.stdout, /GENERATION_OUTCOME kind=timeout reason=hard-kill section=frontaliere/);
+});
+
+test('un SIGTERM cooperativo del timeout e\' un differimento dichiarato, non un hard kill', () => {
+  const r = runGenerateStep({
+    section: 'frontaliere',
+    plan: ['124 0 0 cooperative-stop'],
+    budget: 600,
+    hardKill: 5,
+  });
+  assert.equal(r.status, 0, 'un arresto cooperativo senza body deve lasciare il run verde');
+  assert.equal(r.outputs.article, 'false');
+  assert.equal(r.outputs.declared, 'true');
+  assert.match(r.stdout, /GENERATION_OUTCOME kind=no-article reason=cooperative-deadline section=frontaliere/);
+  assert.doesNotMatch(r.stdout, /reason=hard-kill/);
 });
 
 test('il summary non puo\' dire «generato» su un dry run', () => {

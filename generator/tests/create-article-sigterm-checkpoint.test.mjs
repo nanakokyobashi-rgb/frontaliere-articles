@@ -117,6 +117,8 @@ test('#525: la fermata e\' DICHIARATA, non muta', () => {
   assert.match(ATTIVO, /::warning::create-article\.mjs: ricevuto/);
   assert.ok(!/::error::create-article\.mjs: ricevuto/.test(ATTIVO),
     'una fermata voluta non e\' un errore: ::error qui produrrebbe un rosso di CI che nessun fix puo\' chiudere (stessa classe di #170)');
+  assert.match(ATTIVO, /GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=\$\{signal\}/,
+    'il wrapper timeout deve poter distinguere il SIGTERM cooperativo da un SIGKILL hard');
 });
 
 test('#525: l\'handler resta idempotente — due SIGTERM non raddoppiano l\'uscita', () => {

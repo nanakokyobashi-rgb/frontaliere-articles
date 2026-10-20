@@ -711,6 +711,7 @@ jobs:
           outcome_kind="error"
           outcome_reason="unclassified"
           outcome_section="$TARGET_SECTION"
+          cooperative_stop=false
           run_id="${GITHUB_RUN_ID:-local}"
           run_attempt="${GITHUB_RUN_ATTEMPT:-1}"
 
@@ -770,6 +771,33 @@ jobs:
               break
             fi
             if [ "$rc" = "124" ] || [ "$rc" = "137" ]; then
+              cooperative_stop=false
+              if [ "$rc" = "124" ] && grep -Fq 'GENERATION_STOP kind=timeout reason=cooperative-sigterm' "$stall_log"; then
+                cooperative_stop=true
+              fi
+              if [ "$cooperative_stop" = "true" ]; then
+                body="$(article_body_added || true)"
+                if [ -n "$body" ]; then
+                  partial_failure=true
+                  all_declared=false
+                  [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs ha ricevuto SIGTERM cooperativo dopo aver scritto un body sulla sezione $sec: output parziale non pubblicabile"
+                  echo "::error::create-article.mjs ha ricevuto SIGTERM cooperativo ma ha lasciato un body sulla sezione $sec — output parziale non pubblicabile"
+                  break
+                fi
+                registration_state_dirty
+                if [ "${#stagedContentPaths[@]}" -gt 0 ]; then
+                  partial_failure=true
+                  all_declared=false
+                  [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs ha ricevuto SIGTERM cooperativo dopo una registrazione dirty sulla sezione $sec: output parziale non pubblicabile"
+                  echo "::error::create-article.mjs ha ricevuto SIGTERM cooperativo ma ha lasciato registrazione dirty sulla sezione $sec — output parziale non pubblicabile"
+                  break
+                fi
+                echo "::warning::create-article.mjs fermato cooperativamente dal cap di durata (${cap}s) sulla sezione $sec — nessun articolo questo run"
+                outcome_kind="no-article"
+                outcome_reason="cooperative-deadline"
+                outcome_section="$sec"
+                break
+              fi
               echo "::warning::create-article.mjs hard-killed after ${cap}s on section $sec — no article this run"
               outcome_kind="timeout"
               outcome_reason="hard-kill"
@@ -846,6 +874,10 @@ jobs:
             outcome_section="$effective"
           elif [ "$outcome_kind" = "timeout" ]; then
             :
+          elif [ "$cooperative_stop" = "true" ]; then
+            outcome_kind="no-article"
+            outcome_reason="cooperative-deadline"
+            outcome_section="$effective"
           elif [ "$produced" = "true" ]; then
             outcome_kind="generated"
             outcome_reason="article"
