@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-lega-misure-lugano.webp",
-      "sha256": "c47725ab01b6871b8bf70242bfd8a1f4b9b71087631d068eb9e30011f969ec98"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-lega-misure-lugano-480w.webp",
-      "sha256": "3d11d9cbd5df681f65f38b17b2363fdbc7ed6fd6b4d29732b976b1d5b94505b5"
-    }
-  ]
+  "items": []
 }
