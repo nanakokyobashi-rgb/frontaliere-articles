@@ -45,7 +45,24 @@ import { buildSectionFeeds, RSS_SECTIONS } from '../engine/rssFeeds.mjs';
 // repairSerpSnippet vive in clauseTail.mjs (un .mjs) proprio perche' questo file
 // non puo' importare un .ts: e' la sorgente unica che il layer TS riesporta.
 // Senza passarla, rssFeeds.mjs spedirebbe le description verbatim (#5453).
-import { repairSerpSnippet } from '../host/shared/clauseTail.mjs';
+import {
+  repairSerpSnippet as repairSerpSnippetBase,
+  truncateToClause,
+} from '../host/shared/clauseTail.mjs';
+// This Node-only builder shares the metadata writers' budget and validates
+// that it remains aligned with the SiteShell contract.
+import { SEO_DESCRIPTION_MAX } from '../generator/scripts/lib/seo-description-contract.mjs';
+const RSS_SERP_DESCRIPTION_MAX_CHARS = SEO_DESCRIPTION_MAX;
+const repairSerpSnippet = (text) => {
+  const repaired = repairSerpSnippetBase(text);
+  const bounded = truncateToClause(repaired, RSS_SERP_DESCRIPTION_MAX_CHARS);
+  if (!bounded) {
+    throw new Error(
+      `build-api: refusing to publish an RSS item without a safe non-empty description within ${RSS_SERP_DESCRIPTION_MAX_CHARS} characters.`,
+    );
+  }
+  return bounded;
+};
 // The vendored Google News whitelist (issue #4974 item 3, §5.3). Imported, not
 // re-copied: main pulls the eligibility decision from this repo and a third copy
 // of the token list is exactly the drift that module's header warns about. A
@@ -156,6 +173,14 @@ import {
 } from './lib/announced-surface.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const siteTitleSuffix = fs.readFileSync(path.join(ROOT, 'host', 'shared', 'titleSuffix.ts'), 'utf8');
+const siteDescriptionBudget = siteTitleSuffix.match(/export const META_DESCRIPTION_MAX_CHARS = (\d+);/);
+if (!siteDescriptionBudget || Number(siteDescriptionBudget[1]) !== RSS_SERP_DESCRIPTION_MAX_CHARS) {
+  throw new Error(
+    `build-api: RSS description cap ${RSS_SERP_DESCRIPTION_MAX_CHARS} must match ` +
+      'META_DESCRIPTION_MAX_CHARS in host/shared/titleSuffix.ts.',
+  );
+}
 const OUT = path.join(ROOT, 'dist', 'api');
 const LOCALES = ['it', 'en', 'de', 'fr'];
 

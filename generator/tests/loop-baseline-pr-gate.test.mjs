@@ -134,6 +134,10 @@ test('localHistoryMatch: un blob storico illeggibile (partial clone) rende la st
     git('init', '-q');
     git('config', 'user.email', 'test@example.invalid');
     git('config', 'user.name', 'test');
+    // La fixture rimuove un blob loose: configurazioni GC del runner non
+    // devono impacchettarlo prima che il test simuli il fetch fallito.
+    git('config', 'gc.auto', '0');
+    git('config', 'maintenance.auto', 'false');
     fs.mkdirSync(path.join(dir, 'scripts'), { recursive: true });
     const rel = 'scripts/x.mjs';
     fs.writeFileSync(path.join(dir, rel), 'v1\n');
@@ -150,7 +154,9 @@ test('localHistoryMatch: un blob storico illeggibile (partial clone) rende la st
 
     // Il blob di v1 non arriva (fetch su richiesta fallito): il tree dice che
     // il file c'era, quindi NON e' una prova di assenza.
-    fs.rmSync(path.join(dir, '.git', 'objects', v1Blob.slice(0, 2), v1Blob.slice(2)));
+    const v1BlobPath = path.join(dir, '.git', 'objects', v1Blob.slice(0, 2), v1Blob.slice(2));
+    assert.equal(fs.existsSync(v1BlobPath), true, 'il fixture deve lasciare il blob v1 loose da rimuovere');
+    fs.rmSync(v1BlobPath);
     const partial = localHistoryMatch(rel, hash('v1\n'), dir);
     assert.deepEqual([partial.match, partial.exhausted, partial.historyReadable], [false, false, false]);
     // `exhausted: false` e' cio' che fa passare il chiamante all'API invece
