@@ -77,6 +77,7 @@
 set -euo pipefail
 
 BOUNDED_COMMAND_SCRIPT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/run-bounded-command.mjs"
+OLD_HISTORY_GUARD_SCRIPT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../ci" && pwd)/old-history-guard.mjs"
 
 # The 300-second fetch ceiling is supported by issue 12175's 61.6, 62.6,
 # 83.0 and 95.1-second commit-graph measurements. The 180-second push ceiling
@@ -372,8 +373,18 @@ PUSH_STDERR_FILE="$(mktemp)"
 trap 'rm -f -- "$PUSH_STDERR_FILE"' EXIT
 TREE_GUARD_FAILED=0
 TREE_SHRINK_GUARD_SCRIPT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../ci" && pwd)/guard-main-tree-shrink.mjs"
+OLD_HISTORY_GUARD_FAILED=0
+run_old_history_guard() {
+  run_bounded "$GIT_PUSH_WITH_RETRY_FETCH_TIMEOUT_SECONDS" "old-history guard" \
+    node "$OLD_HISTORY_GUARD_SCRIPT" --remote origin --branch "$BRANCH" --candidate HEAD
+}
+
 push_head() {
   local status=0
+  if ! run_old_history_guard; then
+    OLD_HISTORY_GUARD_FAILED=1
+    return 1
+  fi
   if [ "${BRANCH#refs/heads/}" = "main" ]; then
     local push_timeout_ms=$((GIT_PUSH_WITH_RETRY_PUSH_TIMEOUT_SECONDS * 1000))
     local guarded_push_safety_margin_ms=$((push_timeout_ms / 2))
@@ -401,6 +412,10 @@ push_head() {
   return "$status"
 }
 until push_head; do
+  if [ "$OLD_HISTORY_GUARD_FAILED" = "1" ]; then
+    echo "::error::Push refused by the old-history guard; HEAD is not based on origin/${BRANCH}."
+    exit 1
+  fi
   if [ "$TREE_GUARD_FAILED" = "1" ]; then
     echo "::error::Push refused by the main-tree integrity check; this is not a retryable ref race."
     exit 1
