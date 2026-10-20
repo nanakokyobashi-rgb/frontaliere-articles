@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-20T13:42:35.891Z",
-  "contentHash": "d6cca477444c3498bb76a46fd6cf2ffadf7a7371f62e9d4fbb7502db6694ab22",
+  "updatedAt": "2026-10-20T17:48:42.935Z",
+  "contentHash": "763d9919ec0ac82efab43b11abd713e9228c5b088ea6c28be7272bc693a879fd",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,22 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-20T05:10:16.079Z",
+      "updatedAt": "2026-10-20T10:09:13.321Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-20T04:48:51.023Z",
+      "updatedAt": "2026-10-20T11:35:05.549Z",
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-20T05:04:18.322Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T17:49:38.738Z",
+      "updatedAt": "2026-10-20T10:27:43.943Z",
       "keyFacts": 0
     }
   ],
@@ -49,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "31",
-          "note": "offerta mediana 680 CHF"
+          "note": "offerta mediana 720 CHF"
         }
       ],
       "dataBlocks": [
@@ -116,7 +111,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-20T05:10:16.079Z"
+          "updatedAt": "2026-10-20T10:09:13.321Z"
         },
         {
           "id": "aste-targhe",
@@ -139,7 +134,7 @@
             },
             {
               "label": "ZH10114",
-              "value": "2600 CHF",
+              "value": "2650 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43626"
@@ -147,27 +142,18 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-20T04:48:51.023Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "10 °C",
-              "detail": "oggi da 9 a 17 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-20T05:04:18.322Z"
+          "updatedAt": "2026-10-20T11:35:05.549Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "MITTE1|2 im Fachdialog: Das USZ präsentiert sein Neubauprojekt",
+              "date": "2026-10-20T07:39:43.000Z",
+              "url": "https://www.usz.ch/mitte12-im-fachdialog-das-usz-praesentiert-sein-neubauprojekt/"
+            },
             {
               "label": "Brustkrebs Zelle für Zelle verstehen",
               "date": "2026-10-19T08:34:22.000Z",
@@ -192,14 +178,9 @@
               "label": "Auszeichnung für innovative FLASH-Strahlentherapie am USZ",
               "date": "2026-10-13T13:53:49.000Z",
               "url": "https://www.usz.ch/auszeichnung-fuer-innovative-flash-strahlentherapie-am-usz/"
-            },
-            {
-              "label": "Newsletter CTC Oktober 2026",
-              "date": "2026-10-13T13:46:05.000Z",
-              "url": "https://www.usz.ch/newsletter-ctc-oktober-2026/"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -279,7 +260,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "en": {
       "canton": "ZH",
@@ -296,7 +277,7 @@
         {
           "label": "Plate auctions running",
           "value": "31",
-          "note": "typical bid 680 CHF"
+          "note": "typical bid 720 CHF"
         }
       ],
       "dataBlocks": [
@@ -363,7 +344,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-20T05:10:16.079Z"
+          "updatedAt": "2026-10-20T10:09:13.321Z"
         },
         {
           "id": "aste-targhe",
@@ -386,7 +367,7 @@
             },
             {
               "label": "ZH10114",
-              "value": "2,600 CHF",
+              "value": "2,650 CHF",
               "detail": "current bid",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43626"
@@ -394,27 +375,18 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-20T04:48:51.023Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "10 °C",
-              "detail": "today from 9 to 17 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-20T05:04:18.322Z"
+          "updatedAt": "2026-10-20T11:35:05.549Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "MITTE1|2 im Fachdialog: Das USZ präsentiert sein Neubauprojekt",
+              "date": "2026-10-20T07:39:43.000Z",
+              "url": "https://www.usz.ch/mitte12-im-fachdialog-das-usz-praesentiert-sein-neubauprojekt/"
+            },
             {
               "label": "Brustkrebs Zelle für Zelle verstehen",
               "date": "2026-10-19T08:34:22.000Z",
@@ -439,14 +411,9 @@
               "label": "Auszeichnung für innovative FLASH-Strahlentherapie am USZ",
               "date": "2026-10-13T13:53:49.000Z",
               "url": "https://www.usz.ch/auszeichnung-fuer-innovative-flash-strahlentherapie-am-usz/"
-            },
-            {
-              "label": "Newsletter CTC Oktober 2026",
-              "date": "2026-10-13T13:46:05.000Z",
-              "url": "https://www.usz.ch/newsletter-ctc-oktober-2026/"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -522,7 +489,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "de": {
       "canton": "ZH",
@@ -539,7 +506,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "31",
-          "note": "mittleres Gebot 680 CHF"
+          "note": "mittleres Gebot 720 CHF"
         }
       ],
       "dataBlocks": [
@@ -606,7 +573,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-20T05:10:16.079Z"
+          "updatedAt": "2026-10-20T10:09:13.321Z"
         },
         {
           "id": "aste-targhe",
@@ -629,7 +596,7 @@
             },
             {
               "label": "ZH10114",
-              "value": "2’600 CHF",
+              "value": "2’650 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43626"
@@ -637,27 +604,18 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-20T04:48:51.023Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "10 °C",
-              "detail": "heute 9 bis 17 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-20T05:04:18.322Z"
+          "updatedAt": "2026-10-20T11:35:05.549Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "MITTE1|2 im Fachdialog: Das USZ präsentiert sein Neubauprojekt",
+              "date": "2026-10-20T07:39:43.000Z",
+              "url": "https://www.usz.ch/mitte12-im-fachdialog-das-usz-praesentiert-sein-neubauprojekt/"
+            },
             {
               "label": "Brustkrebs Zelle für Zelle verstehen",
               "date": "2026-10-19T08:34:22.000Z",
@@ -682,14 +640,9 @@
               "label": "Auszeichnung für innovative FLASH-Strahlentherapie am USZ",
               "date": "2026-10-13T13:53:49.000Z",
               "url": "https://www.usz.ch/auszeichnung-fuer-innovative-flash-strahlentherapie-am-usz/"
-            },
-            {
-              "label": "Newsletter CTC Oktober 2026",
-              "date": "2026-10-13T13:46:05.000Z",
-              "url": "https://www.usz.ch/newsletter-ctc-oktober-2026/"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -765,7 +718,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "fr": {
       "canton": "ZH",
@@ -782,7 +735,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "31",
-          "note": "offre centrale 680 CHF"
+          "note": "offre centrale 720 CHF"
         }
       ],
       "dataBlocks": [
@@ -849,7 +802,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-20T05:10:16.079Z"
+          "updatedAt": "2026-10-20T10:09:13.321Z"
         },
         {
           "id": "aste-targhe",
@@ -872,7 +825,7 @@
             },
             {
               "label": "ZH10114",
-              "value": "2 600 CHF",
+              "value": "2 650 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43626"
@@ -880,27 +833,18 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-20T04:48:51.023Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Zürich",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 9 à 17 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-20T05:04:18.322Z"
+          "updatedAt": "2026-10-20T11:35:05.549Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "MITTE1|2 im Fachdialog: Das USZ präsentiert sein Neubauprojekt",
+              "date": "2026-10-20T07:39:43.000Z",
+              "url": "https://www.usz.ch/mitte12-im-fachdialog-das-usz-praesentiert-sein-neubauprojekt/"
+            },
             {
               "label": "Brustkrebs Zelle für Zelle verstehen",
               "date": "2026-10-19T08:34:22.000Z",
@@ -925,14 +869,9 @@
               "label": "Auszeichnung für innovative FLASH-Strahlentherapie am USZ",
               "date": "2026-10-13T13:53:49.000Z",
               "url": "https://www.usz.ch/auszeichnung-fuer-innovative-flash-strahlentherapie-am-usz/"
-            },
-            {
-              "label": "Newsletter CTC Oktober 2026",
-              "date": "2026-10-13T13:46:05.000Z",
-              "url": "https://www.usz.ch/newsletter-ctc-oktober-2026/"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -1004,7 +943,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     }
   }
 }

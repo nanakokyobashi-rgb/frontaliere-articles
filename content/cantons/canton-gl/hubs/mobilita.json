@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-10-19T12:26:29.054Z",
-  "contentHash": "f7e4881b17e00b18811510f6872728eed0bb3e091faee325b3d7397e7064392a",
+  "updatedAt": "2026-10-20T17:48:42.935Z",
+  "contentHash": "401b62f065e16584ea8786b23dc813b5a973874df5d8ce554bc92d39e5265ec5",
   "blocks": [
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-18T19:43:29.238Z",
+      "updatedAt": "2026-10-20T10:27:43.943Z",
       "keyFacts": 0
     }
   ],
@@ -26,6 +26,11 @@
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Wanderwegsperrung Trogacher–Gugger",
+              "date": "2026-10-20",
+              "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30301"
+            },
             {
               "label": "Totalsperrung der Alten Kerenzerstrasse in Mühlehorn infolge Belagsarbeiten",
               "date": "2026-10-14",
@@ -50,14 +55,9 @@
               "label": "Neue Bushaltestelle in Bilten",
               "date": "2026-10-02",
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16051/title/neue-bushaltestelle-in-bilten"
-            },
-            {
-              "label": "Grundstein für die Erweiterung der Berufsfachschule Ziegelbrücke gelegt",
-              "date": "2026-10-02",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -109,7 +109,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-19T12:26:29.054Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "en": {
       "canton": "GL",
@@ -123,6 +123,11 @@
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Wanderwegsperrung Trogacher–Gugger",
+              "date": "2026-10-20",
+              "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30301"
+            },
             {
               "label": "Totalsperrung der Alten Kerenzerstrasse in Mühlehorn infolge Belagsarbeiten",
               "date": "2026-10-14",
@@ -147,14 +152,9 @@
               "label": "Neue Bushaltestelle in Bilten",
               "date": "2026-10-02",
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16051/title/neue-bushaltestelle-in-bilten"
-            },
-            {
-              "label": "Grundstein für die Erweiterung der Berufsfachschule Ziegelbrücke gelegt",
-              "date": "2026-10-02",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -206,7 +206,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-19T12:26:29.054Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "de": {
       "canton": "GL",
@@ -220,6 +220,11 @@
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Wanderwegsperrung Trogacher–Gugger",
+              "date": "2026-10-20",
+              "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30301"
+            },
             {
               "label": "Totalsperrung der Alten Kerenzerstrasse in Mühlehorn infolge Belagsarbeiten",
               "date": "2026-10-14",
@@ -244,14 +249,9 @@
               "label": "Neue Bushaltestelle in Bilten",
               "date": "2026-10-02",
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16051/title/neue-bushaltestelle-in-bilten"
-            },
-            {
-              "label": "Grundstein für die Erweiterung der Berufsfachschule Ziegelbrücke gelegt",
-              "date": "2026-10-02",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -303,7 +303,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-19T12:26:29.054Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "fr": {
       "canton": "GL",
@@ -317,6 +317,11 @@
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Wanderwegsperrung Trogacher–Gugger",
+              "date": "2026-10-20",
+              "url": "https://www.glarus-nord.ch/services/aktuelles/details.html/2806/news/30301"
+            },
             {
               "label": "Totalsperrung der Alten Kerenzerstrasse in Mühlehorn infolge Belagsarbeiten",
               "date": "2026-10-14",
@@ -341,14 +346,9 @@
               "label": "Neue Bushaltestelle in Bilten",
               "date": "2026-10-02",
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16051/title/neue-bushaltestelle-in-bilten"
-            },
-            {
-              "label": "Grundstein für die Erweiterung der Berufsfachschule Ziegelbrücke gelegt",
-              "date": "2026-10-02",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16135/title/grundstein-f%C3%BCr-die-erweiterung-der-berufsfachschule-ziegelbr%C3%BCcke-gelegt"
             }
           ],
-          "updatedAt": "2026-10-18T19:43:29.238Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -400,7 +400,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-19T12:26:29.054Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     }
   }
 }

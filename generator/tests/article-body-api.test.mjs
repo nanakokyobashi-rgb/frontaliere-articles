@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -62,6 +63,63 @@ line\`,`;
   assert.equal(fields[2].value, 'three `ticks` and escaped ${placeholder}');
   assert.equal(fields[3].value, 'continuedline');
   assert.equal(fields[4].value, '[{"q":"Q","a":"A"}]');
+});
+
+test('the repaired FAQ sources have valid JSON, unchanged Q/A text, and closed nav links', () => {
+  const repairedFaqs = [
+    {
+      locale: 'en',
+      id: 'svizzera-canada-mercati-alternativi-trump',
+      count: 6,
+      qaHash: 'fdf1bfa73bc654bf9b73256f0ada6493296f760082cb6ad3c51f9d0eaea85378',
+    },
+    {
+      locale: 'de',
+      id: 'chiasso-scoperta-enti-primo-intervento',
+      count: 3,
+      qaHash: '69384b40e11c172208d826f062bef8011623bc0a0eb51bfee728f08c849cae68',
+    },
+    {
+      locale: 'fr',
+      id: 'ritardi-disoccupazione-ticino',
+      count: 5,
+      qaHash: '8511b895d4fbfaa2b152202d2030456cdaef2f909737229604122a64d203b442',
+    },
+    {
+      locale: 'fr',
+      id: 'startup-scuola-ticino-frontalieri',
+      count: 5,
+      qaHash: '93d074412543b89a687fd1ac51dfad3421e66eb13df95305a1ef342d3aa69ba5',
+    },
+  ];
+
+  for (const { locale, id, count, qaHash } of repairedFaqs) {
+    const source = fs.readFileSync(new URL(`../../content/blog-body/${locale}/${id}.ts`, import.meta.url), 'utf8');
+    const payload = buildArticleBodyPayload({
+      section: 'frontaliere', locale, id, meta: metaFor(id), source,
+    });
+    const faq = JSON.parse(payload.translations.faq);
+    assert.equal(faq.length, count, `${id}/${locale}: FAQ answer count`);
+
+    const stripClosedNavLinks = (value) => {
+      const links = [...value.matchAll(/\[([^\]]+)\]\(nav:([^)]+)\)/gu)];
+      assert.equal(links.length, [...value.matchAll(/nav:/gu)].length, `${id}/${locale}: every nav target is inside a closed Markdown link`);
+      for (const [, label, target] of links) {
+        assert.ok(label.trim(), `${id}/${locale}: nav link label is nonempty`);
+        assert.ok(target.trim(), `${id}/${locale}: nav target is nonempty`);
+      }
+      return value.replace(/\[([^\]]+)\]\(nav:([^)]+)\)/gu, '$1');
+    };
+    const normalizedQa = faq.map(({ q, a }) => {
+      assert.equal(typeof q, 'string', `${id}/${locale}: FAQ question is text`);
+      assert.equal(typeof a, 'string', `${id}/${locale}: FAQ answer is text`);
+      assert.ok(q.trim(), `${id}/${locale}: FAQ question is nonempty`);
+      assert.ok(a.trim(), `${id}/${locale}: FAQ answer is nonempty`);
+      return { q: stripClosedNavLinks(q), a: stripClosedNavLinks(a) };
+    });
+    const actualQaHash = createHash('sha256').update(JSON.stringify(normalizedQa)).digest('hex');
+    assert.equal(actualQaHash, qaHash, `${id}/${locale}: ordered Q/A text matches the reviewed source`);
+  }
 });
 
 test('Unicode escapes are decoded once, preserving backslashes for body text and FAQ JSON', () => {

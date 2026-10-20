@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "a7a1c409f78ef1a6df6fd8257ce535278b37518ad6a2952ce48d3244e8b8cd3a",
+  "updatedAt": "2026-10-20T17:48:42.935Z",
+  "contentHash": "07dfd219099c0a7653c7e75fc06afd1bb9e7039a66c3391bc3d7cbb50e7e0a54",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-20T10:27:43.943Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Aidants : dans quels cas l’accompagnement d’un proche compte pour la retraite ?",
+              "date": "2026-10-20",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19097"
+            },
+            {
               "label": "Quelle revalorisation pour les retraites complémentaires du privé ?",
               "date": "2026-10-15",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17790"
@@ -159,14 +164,9 @@
               "label": "Bike to work : la CPEG à vélo",
               "date": "2026-07-21",
               "url": "https://www.cpeg.ch/information-generale/bike-to-work-la-cpeg-a-velo/"
-            },
-            {
-              "label": "Le CPEG Info n°25, édition juin 2026, est en ligne !",
-              "date": "2026-06-26",
-              "url": "https://www.cpeg.ch/information-generale/le-cpeg-info-n25-edition-juin-2026-est-en-ligne/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -208,7 +208,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "en": {
       "canton": "GE",
@@ -317,6 +317,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Aidants : dans quels cas l’accompagnement d’un proche compte pour la retraite ?",
+              "date": "2026-10-20",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19097"
+            },
+            {
               "label": "Quelle revalorisation pour les retraites complémentaires du privé ?",
               "date": "2026-10-15",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17790"
@@ -340,14 +345,9 @@
               "label": "Bike to work : la CPEG à vélo",
               "date": "2026-07-21",
               "url": "https://www.cpeg.ch/information-generale/bike-to-work-la-cpeg-a-velo/"
-            },
-            {
-              "label": "Le CPEG Info n°25, édition juin 2026, est en ligne !",
-              "date": "2026-06-26",
-              "url": "https://www.cpeg.ch/information-generale/le-cpeg-info-n25-edition-juin-2026-est-en-ligne/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -389,7 +389,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "de": {
       "canton": "GE",
@@ -498,6 +498,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Aidants : dans quels cas l’accompagnement d’un proche compte pour la retraite ?",
+              "date": "2026-10-20",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19097"
+            },
+            {
               "label": "Quelle revalorisation pour les retraites complémentaires du privé ?",
               "date": "2026-10-15",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17790"
@@ -521,14 +526,9 @@
               "label": "Bike to work : la CPEG à vélo",
               "date": "2026-07-21",
               "url": "https://www.cpeg.ch/information-generale/bike-to-work-la-cpeg-a-velo/"
-            },
-            {
-              "label": "Le CPEG Info n°25, édition juin 2026, est en ligne !",
-              "date": "2026-06-26",
-              "url": "https://www.cpeg.ch/information-generale/le-cpeg-info-n25-edition-juin-2026-est-en-ligne/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -570,7 +570,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     },
     "fr": {
       "canton": "GE",
@@ -679,6 +679,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Aidants : dans quels cas l’accompagnement d’un proche compte pour la retraite ?",
+              "date": "2026-10-20",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19097"
+            },
+            {
               "label": "Quelle revalorisation pour les retraites complémentaires du privé ?",
               "date": "2026-10-15",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A17790"
@@ -702,14 +707,9 @@
               "label": "Bike to work : la CPEG à vélo",
               "date": "2026-07-21",
               "url": "https://www.cpeg.ch/information-generale/bike-to-work-la-cpeg-a-velo/"
-            },
-            {
-              "label": "Le CPEG Info n°25, édition juin 2026, est en ligne !",
-              "date": "2026-06-26",
-              "url": "https://www.cpeg.ch/information-generale/le-cpeg-info-n25-edition-juin-2026-est-en-ligne/"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-20T10:27:43.943Z"
         }
       ],
       "curatedArticles": [
@@ -751,7 +751,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-20T17:48:42.935Z"
     }
   }
 }
