@@ -12,6 +12,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'prioswiss-ricorso-luks': { it: 'prioswiss-ricorso-luks', en: 'prioswiss-appeal-luks', de: 'prioswiss-berufung-luks', fr: 'prioswiss-recours-luks' },
  'lucerna-forensic-nurses-violenza': { it: 'lucerna-forensic-nurses-violenza', en: 'lucerne-forensic-nurses-domestic-violence', de: 'luzern-forensic-nurses-haeusliche-gewalt', fr: 'lucerne-infirmiers-medico-legaux-violence-domestique' },
  'lucerna-bilancio-budget-2027': { it: 'lucerna-bilancio-budget-2027', en: 'lucerne-budget-2027-plan', de: 'luzern-budget-2027-planung', fr: 'lucerne-budget-2027-planification' },
+ 'lucerna-finanze-sessione-ottobre': { it: 'lucerna-finanze-sessione-ottobre', en: 'lucerne-cantonal-finances-october', de: 'luzerner-kantonsfinanzen-oktober', fr: 'finances-cantonales-lucerne-octobre' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -21,6 +21,7 @@ import {
   readFingerprintFile,
   readPushStateFile,
   recordsFromSummary,
+  stripCloudflareBotFightScript,
   verifyApex,
   verifyAfterPurge,
   waitForOrigin,
@@ -54,6 +55,7 @@ function workflowRun(name) {
 
 const NEW_HTML = '<main>\n  <h1>Nuovo articolo</h1>\n</main>\n';
 const OLD_HTML = '<main>\n  <h1>Articolo vecchio</h1>\n</main>\n';
+const CF_BOT_FIGHT_SCRIPT = "<script>(function(){window.__CF$cv$params={r:'ray',t:'time'};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';})();</script>";
 const RECORD = {
   url: 'https://frontaliereticino.ch/articoli-ticino/demo/',
   origin: 'https://origin-articolifrontaliere-it.frontaliereticino.ch/articoli-ticino/demo/',
@@ -116,7 +118,7 @@ function runCurlCli(record, {
         '--timeout-seconds',
         '5',
         '--probe-timeout-seconds',
-        '0.5',
+        '2',
       ],
       {
         cwd: resolve(here, '../..'),
@@ -259,6 +261,26 @@ test('la verifica CDN invia un User-Agent esplicito accettato dal bordo', async 
   });
 });
 
+test('il fingerprint ignora solo lo script Cloudflare di bot-fight in coda al body', async () => {
+  const baseHtml = '<html><body><main>Nuovo articolo</main></body></html>\n';
+  const servedHtml = baseHtml.replace('</body>', `${CF_BOT_FIGHT_SCRIPT}</body>`);
+  const record = { ...RECORD, sha: fingerprintHtml(baseHtml) };
+
+  assert.equal(stripCloudflareBotFightScript(servedHtml), baseHtml);
+  await assert.doesNotReject(() => verifyApex({
+    records: [record],
+    fetchImpl: async () => response(servedHtml, { 'cf-cache-status': 'MISS' }),
+  }));
+});
+
+test('un marker Cloudflare fuori dal contratto non viene normalizzato', () => {
+  const body = '<html><body><main>Nuovo articolo</main></body></html>\n';
+  const wrongScript = "<script>window.__CF$cv$params={r:'ray'};var a=document.createElement('script');a.src='/other/script.js';</script>";
+  const servedHtml = body.replace('</body>', `${wrongScript}</body>`);
+
+  assert.equal(stripCloudflareBotFightScript(servedHtml), servedHtml);
+});
+
 test('un mismatch HIT è cache lag solo se la probe anti-cache serve l’hash atteso', async () => {
   let fetches = 0;
   await assert.rejects(
@@ -338,7 +360,7 @@ test('il CLI usa curl senza User-Agent esplicito, legge header/body e non interp
   assert.ok(result.curlArgs.includes('-s'));
   assert.ok(result.curlArgs.includes('-L'));
   assert.equal(result.curlArgs[result.curlArgs.indexOf('-H') + 1], 'Cache-Control: no-cache');
-  assert.equal(result.curlArgs[result.curlArgs.indexOf('--max-time') + 1], '0.5');
+  assert.equal(result.curlArgs[result.curlArgs.indexOf('--max-time') + 1], '2');
   assert.equal(result.curlArgs.at(-1), result.effectiveUrl);
   assert.equal(result.markerExists, false);
 });
