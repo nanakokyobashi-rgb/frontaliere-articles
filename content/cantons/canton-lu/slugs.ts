@@ -10,6 +10,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'riduzione-premi-padre-divorziato-lucerna': { it: 'riduzione-premi-padre-divorziato-lucerna', en: 'premium-reduction-divorced-father-lucerne', de: 'praemienverbilligung-geschiedener-vater-luzern', fr: 'reduction-primes-pere-divorce-lucerne' },
  'juso-lucerna-humbel-governo': { it: 'juso-lucerna-humbel-governo', en: 'juso-lucerne-humbel-government', de: 'juso-luzern-humbel-regierungsrat', fr: 'juso-lucerne-humbel-gouvernement' },
  'prioswiss-ricorso-luks': { it: 'prioswiss-ricorso-luks', en: 'prioswiss-appeal-luks', de: 'prioswiss-berufung-luks', fr: 'prioswiss-recours-luks' },
+ 'lucerna-forensic-nurses-violenza': { it: 'lucerna-forensic-nurses-violenza', en: 'lucerne-forensic-nurses-domestic-violence', de: 'luzern-forensic-nurses-haeusliche-gewalt', fr: 'lucerne-infirmiers-medico-legaux-violence-domestique' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

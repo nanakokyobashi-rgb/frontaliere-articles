@@ -24,6 +24,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.prioswiss-ricorso-luks.title': 'Prio Swiss klagt gegen LUKS-Mandat für Speiseröhren-OPs',
     'blog.article.prioswiss-ricorso-luks.excerpt': 'Der Verband ficht den Leistungsauftrag für Speiseröhrenoperationen am Luzerner Kantonsspital an und macht geltend, dass die Mindestfallzahl nicht erreicht wurde und zehn weitere Zentren den Bedarf bereits abdecken.',
     'blog.article.prioswiss-ricorso-luks.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lucerna-forensic-nurses-violenza.title': 'Luzern: Forensic Nurses gegen häusliche Gewalt',
+    'blog.article.lucerna-forensic-nurses-violenza.excerpt': 'Der Kanton Luzern plant für den Sommer 2027 ein Pilotprojekt mit Forensic Nurses und kündigt neue medizinische und polizeiliche Angebote an.',
+    'blog.article.lucerna-forensic-nurses-violenza.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;

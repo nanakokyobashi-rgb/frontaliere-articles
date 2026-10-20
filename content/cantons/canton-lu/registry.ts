@@ -83,4 +83,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lucerna-forensic-nurses-violenza',
+ category: 'novita',
+ date: '2026-10-19T23:59:14.540Z',
+ image: '/images/blog/article-lucerna-forensic-nurses-violenza.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

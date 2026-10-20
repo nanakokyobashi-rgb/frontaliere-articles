@@ -24,6 +24,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.prioswiss-ricorso-luks.title': 'Prio Swiss appeals to the Court over the Luks esophagus mandate',
     'blog.article.prioswiss-ricorso-luks.excerpt': 'The association challenges the mandate for esophageal surgeries at the Luzerner Kantonsspital, arguing that it has not reached the minimum number of cases and that ten other centers already cover the need.',
     'blog.article.prioswiss-ricorso-luks.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lucerna-forensic-nurses-violenza.title': 'Lucerne: Forensic Nurses against domestic violence',
+    'blog.article.lucerna-forensic-nurses-violenza.excerpt': 'The Canton of Lucerne is planning a pilot project with Forensic Nurses for summer 2027 and announces new medical and police services.',
+    'blog.article.lucerna-forensic-nurses-violenza.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;

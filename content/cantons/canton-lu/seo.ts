@@ -280,6 +280,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lucerna-forensic-nurses-violenza': {
+    title: 'Lucerna: Forensic Nurses contro la violenza domestica',
+    description: 'Il Canton Lucerna prepara per l\'estate 2027 un progetto pilota con Forensic Nurses, assistenza medica e una nuova Fachstelle contro la violenza domestica.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lucerna, forensic, nurses, contro',
+    ogTitle: 'Lucerna prepara Forensic Nurses contro la violenza',
+    ogDescription: 'Il progetto pilota dovrebbe partire nell\'estate 2027. Il Canton Lucerna annuncia anche un\'offerta di prima assistenza medica, una nuova Fachstelle presso la polizia lucernese e una maggiore specializzazione della Staatsanwaltschaft.',
+    canonicalPath: '/articoli-lucerna/lucerna-forensic-nurses-violenza/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lucerna: Forensic Nurses contro la violenza domestica",
+      "description": "Il Canton Lucerna prepara per l'estate 2027 un progetto pilota con Forensic Nurses, assistenza medica e una nuova Fachstelle contro la violenza domestica.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lucerna-forensic-nurses-violenza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-19T23:59:14+00:00",
+      "dateModified": "2026-10-19T23:59:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/lucerna-forensic-nurses-violenza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
