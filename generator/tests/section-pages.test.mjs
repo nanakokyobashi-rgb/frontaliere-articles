@@ -3072,7 +3072,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /r2-api-push-plan/);
   assert.match(wf, /landing\/archive\/hub\/RSS/);
   assert.match(wf, /Il replay della push API deve riprodurre il piano dei\s+contenuti/);
-  assert.match(read('scripts/publish-section-pages.mjs'), /await assertMainFreshImpl\(\);\n  for \(const \{ local, key \} of cdnUploads\)/);
+  assert.match(
+    read('scripts/publish-section-pages.mjs'),
+    /await assertMainFreshImpl\(\);\n  await publishSignalBoundary\(signal\);\n  for \(const \{ local, key \} of cdnUploads\)/,
+  );
   assert.match(read('scripts/publish-section-pages.mjs'), /EXPECTED_MAIN_HEAD non contiene una SHA completa/);
   const publishCheckout = wf.slice(wf.indexOf('      - name: Checkout\n', wf.indexOf('\n  publish:\n')));
   assert.match(publishCheckout, /fetch-depth: 0/);
