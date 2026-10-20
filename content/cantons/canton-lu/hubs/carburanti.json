@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-20T00:06:33.415Z",
-  "contentHash": "464adb9d01eb6354922107a81267f069bb66b3c394470ca663ae75b40a179f97",
+  "updatedAt": "2026-10-20T01:04:15.659Z",
+  "contentHash": "beff8daadcc0b4a067bdb24efaef3ac9f9d1c54735c1d8c734530a5d1b9a19d7",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lucerna: cinque ore di dibattito sulle finanze cantonali",
+          "url": "/articoli-lucerna/lucerna-finanze-sessione-ottobre/",
+          "excerpt": "Il Consiglio cantonale di Lucerna ha discusso oltre cinque ore l'AFP 2027–2030; la proposta porta l'aliquota 2027 da 1,45 a 1,40 unità, con voto il 20 ottobre.",
+          "date": "2026-10-20T00:56:42.893Z"
+        },
+        {
+          "title": "Lucerna: Parlamento conferma il BIP per il budget 2027",
+          "url": "/articoli-lucerna/lucerna-bilancio-budget-2027/",
+          "excerpt": "Il Consiglio cantonale di Lucerna approva il riferimento al BIP per la crescita delle spese.",
+          "date": "2026-10-20T00:16:43.132Z"
+        },
+        {
           "title": "Lucerna: Forensic Nurses contro la violenza domestica",
           "url": "/articoli-lucerna/lucerna-forensic-nurses-violenza/",
           "excerpt": "Il Canton Lucerna prevede per l'estate 2027 un progetto pilota con Forensic Nurses e annuncia nuovi servizi medici e di polizia.",
@@ -76,18 +88,6 @@
           "url": "/articoli-lucerna/juso-lucerna-humbel-governo/",
           "excerpt": "Valentin Humbel è il candidato Juso al governo lucernese.",
           "date": "2026-10-10T23:52:13.512Z"
-        },
-        {
-          "title": "Riduzione premi negata a padre divorziato a Lucerna",
-          "url": "/articoli-lucerna/riduzione-premi-padre-divorziato-lucerna/",
-          "excerpt": "Il Tribunale federale conferma: niente forfait 9.000 CHF/figlio se già detratti i contributi di mantenimento.",
-          "date": "2026-10-10T09:02:37.771Z"
-        },
-        {
-          "title": "Progetto latte: Nestlé ed Emmi puntano all'estensione",
-          "url": "/articoli-lucerna/progetto-latte-climatico/",
-          "excerpt": "Dal 2022, KlimaStaR Milch ha ridotto del 23% i mangimi commestibili e dell'8% le emissioni per kg.",
-          "date": "2026-10-09T00:54:58.572Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T01:04:15.659Z"
     },
     "en": {
       "canton": "LU",
@@ -147,6 +147,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lucerne: five hours of debate on cantonal finances",
+          "url": "/en/lucerne-articles/lucerne-cantonal-finances-october/",
+          "excerpt": "Lucerne’s Cantonal Council discussed the AFP 2027–2030 for more than five hours; the proposal sets the 2027 tax rate at 1,40 units instead of 1,45, with a vote on October 20.",
+          "date": "2026-10-20T00:56:42.893Z"
+        },
+        {
+          "title": "Lucerne: Parliament confirms BIP for the 2027 budget",
+          "url": "/en/lucerne-articles/lucerne-budget-2027-plan/",
+          "excerpt": "The Cantonal Council of Lucerne approves the use of GDP as a reference for expenditure growth.",
+          "date": "2026-10-20T00:16:43.132Z"
+        },
+        {
           "title": "Lucerne: Forensic Nurses against domestic violence",
           "url": "/en/lucerne-articles/lucerne-forensic-nurses-domestic-violence/",
           "excerpt": "The Canton of Lucerne is planning a pilot project with Forensic Nurses for summer 2027 and announces new medical and police services.",
@@ -163,18 +175,6 @@
           "url": "/en/lucerne-articles/juso-lucerne-humbel-government/",
           "excerpt": "Valentin Humbel is the Juso candidate for the Lucerne cantonal government.",
           "date": "2026-10-10T23:52:13.512Z"
-        },
-        {
-          "title": "Premium reduction denied to divorced father in Lucerne",
-          "url": "/en/lucerne-articles/premium-reduction-divorced-father-lucerne/",
-          "excerpt": "The Federal Tribunal confirms: no flat rate of 9.000 CHF/child if maintenance contributions have already been deducted.",
-          "date": "2026-10-10T09:02:37.771Z"
-        },
-        {
-          "title": "Milk project: Nestlé and Emmi are aiming for an extension",
-          "url": "/en/lucerne-articles/swiss-milk-climate-project/",
-          "excerpt": "Since 2022, KlimaStaR Milch has reduced edible feed by 23% and emissions per kg by 8%.",
-          "date": "2026-10-09T00:54:58.572Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T01:04:15.659Z"
     },
     "de": {
       "canton": "LU",
@@ -234,6 +234,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Luzern: fünf Stunden Debatte über die kantonalen Finanzen",
+          "url": "/de/luzern-artikel/luzerner-kantonsfinanzen-oktober/",
+          "excerpt": "Der Luzerner Kantonsrat hat über fünf Stunden über den AFP 2027–2030 diskutiert; der Vorschlag sieht vor, den Steuerfuss 2027 von 1,45 auf 1,40 Einheiten zu senken; die Abstimmung findet am 20.",
+          "date": "2026-10-20T00:56:42.893Z"
+        },
+        {
+          "title": "Luzern: Parlament bestätigt das BIP als Referenz für das Budget 2027",
+          "url": "/de/luzern-artikel/luzern-budget-2027-planung/",
+          "excerpt": "Der Luzerner Kantonsrat genehmigt die Bezugnahme auf das BIP für das Ausgabenwachstum.",
+          "date": "2026-10-20T00:16:43.132Z"
+        },
+        {
           "title": "Luzern: Forensic Nurses gegen häusliche Gewalt",
           "url": "/de/luzern-artikel/luzern-forensic-nurses-haeusliche-gewalt/",
           "excerpt": "Der Kanton Luzern plant für den Sommer 2027 ein Pilotprojekt mit Forensic Nurses und kündigt neue medizinische und polizeiliche Angebote an.",
@@ -250,18 +262,6 @@
           "url": "/de/luzern-artikel/juso-luzern-humbel-regierungsrat/",
           "excerpt": "Valentin Humbel ist der Juso-Kandidat für den Luzerner Regierungsrat.",
           "date": "2026-10-10T23:52:13.512Z"
-        },
-        {
-          "title": "Prämienverbilligung für geschiedenen Vater in Luzern abgelehnt",
-          "url": "/de/luzern-artikel/praemienverbilligung-geschiedener-vater-luzern/",
-          "excerpt": "Das Bundesgericht bestätigt: kein Pauschalabzug von 9.000 CHF/Kind, wenn die Unterhaltsbeiträge bereits abgezogen wurden.",
-          "date": "2026-10-10T09:02:37.771Z"
-        },
-        {
-          "title": "Milchprojekt: Nestlé und Emmi streben eine Ausweitung an",
-          "url": "/de/luzern-artikel/schweizer-milch-klimaprojekt/",
-          "excerpt": "Seit 2022 hat KlimaStaR Milch die für die menschliche Ernährung geeigneten Futtermittel um 23% und die Emissionen pro kg um 8% reduziert.",
-          "date": "2026-10-09T00:54:58.572Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T01:04:15.659Z"
     },
     "fr": {
       "canton": "LU",
@@ -321,6 +321,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lucerne : cinq heures de débat sur les finances cantonales",
+          "url": "/fr/articles-lucerne/finances-cantonales-lucerne-octobre/",
+          "excerpt": "Le Conseil cantonal de Lucerne a débattu de l'AFP 2027–2030 pendant plus de cinq heures ; la proposition fait passer le taux 2027 de 1,45 à 1,40 unité, avec un vote le 20 octobre.",
+          "date": "2026-10-20T00:56:42.893Z"
+        },
+        {
+          "title": "Lucerne : le Parlement confirme le PIB pour le budget 2027",
+          "url": "/fr/articles-lucerne/lucerne-budget-2027-planification/",
+          "excerpt": "Le Conseil cantonal de Lucerne approuve la référence au PIB pour la croissance des dépenses.",
+          "date": "2026-10-20T00:16:43.132Z"
+        },
+        {
           "title": "Lucerne : Forensic Nurses contre la violence domestique",
           "url": "/fr/articles-lucerne/lucerne-infirmiers-medico-legaux-violence-domestique/",
           "excerpt": "Le canton de Lucerne prévoit pour l’été 2027 un projet pilote avec Forensic Nurses et annonce de nouveaux services médicaux et de police.",
@@ -337,18 +349,6 @@
           "url": "/fr/articles-lucerne/juso-lucerne-humbel-gouvernement/",
           "excerpt": "Valentin Humbel est le candidat de Juso au gouvernement lucernois.",
           "date": "2026-10-10T23:52:13.512Z"
-        },
-        {
-          "title": "Réduction des primes refusée à un père divorcé à Lucerne",
-          "url": "/fr/articles-lucerne/reduction-primes-pere-divorce-lucerne/",
-          "excerpt": "Le Tribunal fédéral confirme : pas de forfait 9.000 CHF/enfant si les contributions d’entretien ont déjà été déduites.",
-          "date": "2026-10-10T09:02:37.771Z"
-        },
-        {
-          "title": "Projet laitier : Nestlé et Emmi misent sur l'extension",
-          "url": "/fr/articles-lucerne/projet-lait-climatique-suisse/",
-          "excerpt": "Depuis 2022, KlimaStaR Milch a réduit de 23 % les aliments comestibles et de 8 % les émissions par kg.",
-          "date": "2026-10-09T00:54:58.572Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T01:04:15.659Z"
     }
   }
 }

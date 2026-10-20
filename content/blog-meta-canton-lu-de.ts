@@ -30,6 +30,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.lucerna-bilancio-budget-2027.title': 'Luzern: Parlament bestätigt das BIP als Referenz für das Budget 2027',
     'blog.article.lucerna-bilancio-budget-2027.excerpt': 'Der Luzerner Kantonsrat genehmigt die Bezugnahme auf das BIP für das Ausgabenwachstum.',
     'blog.article.lucerna-bilancio-budget-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lucerna-finanze-sessione-ottobre.title': 'Luzern: fünf Stunden Debatte über die kantonalen Finanzen',
+    'blog.article.lucerna-finanze-sessione-ottobre.excerpt': 'Der Luzerner Kantonsrat hat über fünf Stunden über den AFP 2027–2030 diskutiert; der Vorschlag sieht vor, den Steuerfuss 2027 von 1,45 auf 1,40 Einheiten zu senken; die Abstimmung findet am 20.',
+    'blog.article.lucerna-finanze-sessione-ottobre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;
