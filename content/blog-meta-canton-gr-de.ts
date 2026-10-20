@@ -27,6 +27,9 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.lido-grono-estate-2027.title': 'Lido Grono, Eröffnung für den Sommer 2027 bestätigt',
     'blog.article.lido-grono-estate-2027.excerpt': 'Eröffnung des Lido Grono für den Sommer 2027 bestätigt Baustelle des neuen kommunalen Schwimmbads weiterhin im Gange Vorgesehene Kosten: etwa 5 Millionen Ankündigung des Bürgermeisters',
     'blog.article.lido-grono-estate-2027.imageAlt': 'Baustelle des neuen Gemeindebads in Grono vor der bestätigten Eröffnung im Sommer 2027.',
+    'blog.article.acqua-domleschg-feldis-scheid.title': 'Domleschg: Wassertankwagen für Feldis und Scheid',
+    'blog.article.acqua-domleschg-feldis-scheid.excerpt': 'Domleschg beabsichtigt, Trinkwasser nach Feldis und Scheid zu bringen.',
+    'blog.article.acqua-domleschg-feldis-scheid.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGrDe;

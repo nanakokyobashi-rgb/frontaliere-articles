@@ -27,6 +27,9 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.lido-grono-estate-2027.title': 'Lido Grono, opening confirmed for summer 2027',
     'blog.article.lido-grono-estate-2027.excerpt': 'Opening of Lido Grono confirmed for summer 2027 Construction of the new municipal swimming pool still ongoing Expected costs: approximately 5 million Mayor\'s announcement',
     'blog.article.lido-grono-estate-2027.imageAlt': 'Construction of Grono\'s new municipal pool for the confirmed summer 2027 opening.',
+    'blog.article.acqua-domleschg-feldis-scheid.title': 'Domleschg: water tanker truck for Feldis and Scheid',
+    'blog.article.acqua-domleschg-feldis-scheid.excerpt': 'Domleschg intends to bring drinking water to Feldis and Scheid.',
+    'blog.article.acqua-domleschg-feldis-scheid.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGrEn;
