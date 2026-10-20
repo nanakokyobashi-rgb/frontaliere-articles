@@ -72,6 +72,8 @@ import {
 import { assertHubLocaleSlug } from '../../scripts/lib/assert-hub-locale-slug.mjs';
 import { assertHubTopicEntries } from '../../scripts/lib/assert-hub-locale-slug.mjs';
 import { familySectionPages } from '../../scripts/lib/build-sitemap.mjs';
+import { createR2Request } from '../../scripts/lib/r2-section-lock.mjs';
+import { acquireImageNamespaceLeases } from '../../scripts/lib/r2-image-namespace-lock.mjs';
 import {
   fetchPageManifest,
   mergePageManifests,
@@ -157,6 +159,75 @@ test('publisher: il cleanup lease restituisce un timeout osservabile se R2 resta
   assert.equal(result.error?.code, 'IMAGE_LEASE_RELEASE_TIMEOUT');
   assert.equal(result.error?.timeoutMs, 20);
   assert.equal(IMAGE_LEASE_RELEASE_TIMEOUT_MS, 30_000);
+});
+
+test('publisher: il cleanup bounded tenta ogni namespace entro lo stesso budget', async () => {
+  const started = [];
+  const result = await releaseImageLeasesWithDeadline(
+    [{ namespace: 'blog' }, { namespace: 'places' }],
+    {
+      perLease: true,
+      timeoutMs: 20,
+      releaseImpl: ([lease]) => {
+        started.push(lease.namespace);
+        return new Promise(() => {});
+      },
+    },
+  );
+  assert.equal(result.status, 'timeout');
+  assert.deepEqual(started.sort(), ['blog', 'places']);
+});
+
+test('publisher: il trasporto R2 propaga la deadline e cancella il body arrivato tardi', async () => {
+  let resolveFetch;
+  let lateBodyCancelled = false;
+  const request = createR2Request({
+    R2_S3_ENDPOINT: 'https://account.r2.cloudflarestorage.com',
+    R2_BUCKET: 'articles',
+    R2_ACCESS_KEY_ID: 'test-access-key',
+    R2_SECRET_ACCESS_KEY: 'test-secret-key',
+  }, {
+    fetchImpl: () => new Promise((resolve) => { resolveFetch = resolve; }),
+  });
+  const pending = request({
+    method: 'GET',
+    key: 'internal/ci/image-namespace-locks/blog.json',
+    deadline: Date.now() + 10,
+  });
+  await assert.rejects(pending);
+  resolveFetch({
+    status: 200,
+    body: {
+      cancel() {
+        lateBodyCancelled = true;
+        return Promise.reject(new Error('late body cancellation failed'));
+      },
+    },
+  });
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.equal(lateBodyCancelled, true);
+});
+
+test('publisher: il rollback interno dell acquisizione è bounded dopo un segnale', async () => {
+  const controller = new AbortController();
+  let firstPut = true;
+  const startedAt = Date.now();
+  await assert.rejects(
+    acquireImageNamespaceLeases(['blog', 'places'], {
+      signal: controller.signal,
+      rollbackTimeoutMs: 20,
+      request: async ({ method, key }) => {
+        if (method === 'PUT' && key.endsWith('/blog.json') && firstPut) {
+          firstPut = false;
+          queueMicrotask(() => controller.abort());
+          return { status: 200, body: null, headers: { get: () => '"etag-blog"' } };
+        }
+        return new Promise(() => {});
+      },
+    }),
+    (error) => error instanceof AggregateError && /rilascio lease immagini oltre il limite/.test(error.message),
+  );
+  assert.ok(Date.now() - startedAt < 1_000, 'il rollback non deve restare appeso alla richiesta R2');
 });
 
 test('publisher: un marker upload con exit non-zero non viene considerato riuscito e il lease context arriva al comando', async () => {
