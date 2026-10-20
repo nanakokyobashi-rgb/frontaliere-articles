@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-governo-soletta-ottobre-2026.webp",
-      "sha256": "9c31acafff3d073a4d21ec421717e92371cc4fdbc698fe84673bd4b6c0ce249f"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-governo-soletta-ottobre-2026-480w.webp",
-      "sha256": "82549df97caf9331efc3548aec37aff4caaab30c24070f50a127500c50066417"
-    }
-  ]
+  "items": []
 }
