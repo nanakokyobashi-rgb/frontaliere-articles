@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-19T18:33:18.720Z",
-  "contentHash": "bb7297084933d08e243d6c8cc420635c9db5906ed7ba22899b62e48b96da381c",
+  "updatedAt": "2026-10-20T06:19:46.005Z",
+  "contentHash": "c6f0af3e4e606352e098aadafd309ea7108de37f7053c60733469c97ab653dcb",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Soletta: Governo approva preventivo 2027, sessione settembre e inchiesta soH",
+          "url": "/articoli-soletta/soletta-parlamento-budget-2027-inchiesta-soh/",
+          "excerpt": "Il Regierungsrat approva il Voranschlag 2027; Kantonsrat in sessione 1-9 settembre con 51 oggetti; GPK pubblica rapporto su irregolarità alla soH.",
+          "date": "2026-10-20T06:13:06.286Z"
+        },
+        {
           "title": "Furti con raggiro a Soletta: la polizia mette in guardia",
           "url": "/articoli-soletta/furti-raggiro-soletta/",
           "excerpt": "La Polizia cantonale di Soletta segnala circa dieci furti con raggiro negli ultimi giorni: autrici e autori usano gioielli economici per distrarre le vittime.",
@@ -94,12 +100,6 @@
           "url": "/articoli-soletta/luterbach-a5-rampe-notte/",
           "excerpt": "A Luterbach, sulla A5, la viabilità cambia nell'ottobre 2026: quattro rampe saranno chiuse di notte tra il 12 e il 20 ottobre. Le deviazioni saranno segnalate.",
           "date": "2026-10-08T11:26:57.068Z"
-        },
-        {
-          "title": "Premi cassa malati a Soletta: +6% nel 2027",
-          "url": "/articoli-soletta/premi-malattia-soletta-2027/",
-          "excerpt": "Nel Canton Soletta il premio medio salirà di CHF 23.50 a CHF 417.50 nel 2027, 5.50 in più della media svizzera.",
-          "date": "2026-10-07T11:11:51.115Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T06:19:46.005Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Soleta: Government approves 2027 budget, September session and soH investigation",
+          "url": "/en/solothurn-articles/solothurn-parliament-budget-2027-soh-investigation/",
+          "excerpt": "Regierungsrat approves Voranschlag 2027; Kantonsrat in session 1-9 September with 51 items; GPK publishes report on soH irregularities.",
+          "date": "2026-10-20T06:13:06.286Z"
+        },
+        {
           "title": "Thefts by deception in Solothurn: police issue warning",
           "url": "/en/solothurn-articles/solothurn-trick-thefts-warning/",
           "excerpt": "The Solothurn cantonal police report around ten thefts involving deception in recent days: perpetrators use inexpensive jewelry to distract their victims.",
@@ -192,12 +198,6 @@
           "url": "/en/solothurn-articles/luterbach-a5-night-ramps/",
           "excerpt": "At Luterbach, on the A5, traffic patterns will change in October 2026: four ramps will be closed at night between October 12 and 20. Detours will be signposted.",
           "date": "2026-10-08T11:26:57.068Z"
-        },
-        {
-          "title": "Health insurance premiums in Solothurn: +6% in 2027",
-          "url": "/en/solothurn-articles/solothurn-health-premiums-2027/",
-          "excerpt": "In the Canton of Solothurn, the average premium will rise by CHF 23.50 to CHF 417.50 in 2027, 5.50 more than the Swiss average.",
-          "date": "2026-10-07T11:11:51.115Z"
         }
       ],
       "links": [
@@ -210,7 +210,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T06:19:46.005Z"
     },
     "de": {
       "canton": "SO",
@@ -269,6 +269,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Solothurn genehmigt Budget 2027, SOH-Untersuchung",
+          "url": "/de/solothurn-artikel/solothurn-parlament-budget-2027-untersuchung-soh/",
+          "excerpt": "Der Regierungsrat genehmigt den Voranschlag 2027; Kantonsrat in der Sitzung vom 1.",
+          "date": "2026-10-20T06:13:06.286Z"
+        },
+        {
           "title": "Trickdiebstähle in Solothurn: Die Polizei warnt",
           "url": "/de/solothurn-artikel/solothurn-warnung-trickdiebstahle/",
           "excerpt": "Die Kantonspolizei Solothurn meldet rund zehn Trickdiebstähle in den letzten Tagen: Täterinnen und Täter verwenden günstigen Schmuck, um die Opfer abzulenken.",
@@ -290,12 +296,6 @@
           "url": "/de/solothurn-artikel/luterbach-a5-nachtsperren/",
           "excerpt": "Bei Luterbach ändert sich auf der A5 im Oktober 2026 die Verkehrsführung: Vier Rampen werden zwischen dem 12. und 20. Oktober nachts gesperrt. Die Umleitungen werden ausgeschildert.",
           "date": "2026-10-08T11:26:57.068Z"
-        },
-        {
-          "title": "Krankenkassenprämien in Solothurn: +6% im Jahr 2027",
-          "url": "/de/solothurn-artikel/solothurn-krankenkassenpraemien-2027/",
-          "excerpt": "Im Kanton Solothurn steigt die durchschnittliche Prämie im Jahr 2027 um CHF 23.50 auf CHF 417.50, 5.50 mehr als der Schweizer Durchschnitt.",
-          "date": "2026-10-07T11:11:51.115Z"
         }
       ],
       "links": [
@@ -308,7 +308,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T06:19:46.005Z"
     },
     "fr": {
       "canton": "SO",
@@ -367,6 +367,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Soleure: le gouvernement approuve le devis 2027 et la session de septembre",
+          "url": "/fr/articles-soleure/soleure-parlement-budget-2027-enquete-soh/",
+          "excerpt": "Le Regierungsrat approuve le Voranschlag 2027 ; Kantonsrat en session 1-9 septembre avec 51 objets ; GPK publie un rapport sur les irrégularités à la soH.",
+          "date": "2026-10-20T06:13:06.286Z"
+        },
+        {
           "title": "Vols par ruse à Soleure : la police met en garde",
           "url": "/fr/articles-soleure/soleure-alerte-vols-par-ruse/",
           "excerpt": "La Police cantonale de Soleure signale une dizaine de vols par ruse ces derniers jours : les autrices et auteurs utilisent des bijoux bon marché pour distraire les victimes.",
@@ -389,12 +395,6 @@
           "url": "/fr/articles-soleure/luterbach-a5-rampes-nuit/",
           "excerpt": "À Luterbach, sur l’A5, la circulation change en octobre 2026 : quatre bretelles seront fermées de nuit entre le 12 et le 20 octobre. Les déviations seront signalées.",
           "date": "2026-10-08T11:26:57.068Z"
-        },
-        {
-          "title": "Primes d’assurance-maladie à Soleure : +6 % en 2027",
-          "url": "/fr/articles-soleure/primes-maladie-soleure-2027/",
-          "excerpt": "Dans le canton de Soleure, la prime moyenne augmentera de CHF 23.50 pour atteindre CHF 417.50 en 2027, soit 5.50 de plus que la moyenne suisse.",
-          "date": "2026-10-07T11:11:51.115Z"
         }
       ],
       "links": [
@@ -407,7 +407,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T06:19:46.005Z"
     }
   }
 }

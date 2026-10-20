@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T05:26:42.124Z",
-  "contentHash": "5af4544cb02e9d3b5f64c811138cda64fbbbbd6129aa1918f07e784994d16322",
+  "updatedAt": "2026-10-20T06:19:46.005Z",
+  "contentHash": "8d3ccd1980bf486133d31a8015c6f64a858af9c93ffa7e193b34f2d9d1f64a25",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -115,16 +115,16 @@
       ],
       "curatedArticles": [
         {
-          "title": "A5 a Luterbach: quattro rampe chiuse a ottobre",
-          "url": "/articoli-soletta/luterbach-a5-rampe-notte/",
-          "excerpt": "A Luterbach, sulla A5, la viabilità cambia nell'ottobre 2026: quattro rampe saranno chiuse di notte tra il 12 e il 20 ottobre. Le deviazioni saranno segnalate.",
-          "date": "2026-10-08T11:26:57.068Z"
-        },
-        {
           "title": "Soletta: Governo chiede correzioni su progetti trasporti",
           "url": "/articoli-soletta/soletta-progetti-trasporto-governo/",
           "excerpt": "Soletta sostiene «Verkehr ’45» e chiede correzioni.",
           "date": "2026-10-08T11:40:05.556Z"
+        },
+        {
+          "title": "A5 a Luterbach: quattro rampe chiuse a ottobre",
+          "url": "/articoli-soletta/luterbach-a5-rampe-notte/",
+          "excerpt": "A Luterbach, sulla A5, la viabilità cambia nell'ottobre 2026: quattro rampe saranno chiuse di notte tra il 12 e il 20 ottobre. Le deviazioni saranno segnalate.",
+          "date": "2026-10-08T11:26:57.068Z"
         },
         {
           "title": "Abbonamenti trasporti pubblici Canton Soletta zone e tariffe",
@@ -150,7 +150,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-20T05:26:42.124Z"
+      "updatedAt": "2026-10-20T06:19:46.005Z"
     },
     "en": {
       "canton": "SO",
@@ -248,15 +248,15 @@
       ],
       "curatedArticles": [
         {
+          "title": "Solothurn: Government calls for corrections to transport projects",
+          "url": "/en/solothurn-articles/solothurn-transport-projects-government/",
+          "date": "2026-10-08T11:40:05.556Z"
+        },
+        {
           "title": "A5 at Luterbach: four ramps closed in October",
           "url": "/en/solothurn-articles/luterbach-a5-night-ramps/",
           "excerpt": "At Luterbach, on the A5, traffic patterns will change in October 2026: four ramps will be closed at night between October 12 and 20. Detours will be signposted.",
           "date": "2026-10-08T11:26:57.068Z"
-        },
-        {
-          "title": "Solothurn: Government calls for corrections to transport projects",
-          "url": "/en/solothurn-articles/solothurn-transport-projects-government/",
-          "date": "2026-10-08T11:40:05.556Z"
         },
         {
           "title": "Public transport subscriptions Canton Solothurn zones and fares",
@@ -282,7 +282,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-20T05:26:42.124Z"
+      "updatedAt": "2026-10-20T06:19:46.005Z"
     },
     "de": {
       "canton": "SO",
@@ -380,15 +380,15 @@
       ],
       "curatedArticles": [
         {
+          "title": "Solothurn: Regierung fordert Korrekturen bei Verkehrsprojekten",
+          "url": "/de/solothurn-artikel/solothurn-verkehrsprojekte-regierung/",
+          "date": "2026-10-08T11:40:05.556Z"
+        },
+        {
           "title": "A5 bei Luterbach: vier Rampen im Oktober gesperrt",
           "url": "/de/solothurn-artikel/luterbach-a5-nachtsperren/",
           "excerpt": "Bei Luterbach ändert sich auf der A5 im Oktober 2026 die Verkehrsführung: Vier Rampen werden zwischen dem 12. und 20. Oktober nachts gesperrt. Die Umleitungen werden ausgeschildert.",
           "date": "2026-10-08T11:26:57.068Z"
-        },
-        {
-          "title": "Solothurn: Regierung fordert Korrekturen bei Verkehrsprojekten",
-          "url": "/de/solothurn-artikel/solothurn-verkehrsprojekte-regierung/",
-          "date": "2026-10-08T11:40:05.556Z"
         },
         {
           "title": "Abonnements für öffentliche Verkehrsmittel Kanton Solothurn Zonen und Tarife",
@@ -414,7 +414,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-20T05:26:42.124Z"
+      "updatedAt": "2026-10-20T06:19:46.005Z"
     },
     "fr": {
       "canton": "SO",
@@ -512,16 +512,16 @@
       ],
       "curatedArticles": [
         {
-          "title": "A5 à Luterbach : quatre bretelles fermées en octobre",
-          "url": "/fr/articles-soleure/luterbach-a5-rampes-nuit/",
-          "excerpt": "À Luterbach, sur l’A5, la circulation change en octobre 2026 : quatre bretelles seront fermées de nuit entre le 12 et le 20 octobre. Les déviations seront signalées.",
-          "date": "2026-10-08T11:26:57.068Z"
-        },
-        {
           "title": "Soleure : projets de transport, corrections demandées",
           "url": "/fr/articles-soleure/soleure-projets-transport-gouvernement/",
           "excerpt": "Soleure soutient « Verkehr ’45 » et demande des corrections.",
           "date": "2026-10-08T11:40:05.556Z"
+        },
+        {
+          "title": "A5 à Luterbach : quatre bretelles fermées en octobre",
+          "url": "/fr/articles-soleure/luterbach-a5-rampes-nuit/",
+          "excerpt": "À Luterbach, sur l’A5, la circulation change en octobre 2026 : quatre bretelles seront fermées de nuit entre le 12 et le 20 octobre. Les déviations seront signalées.",
+          "date": "2026-10-08T11:26:57.068Z"
         },
         {
           "title": "Abonnements transports publics Canton Soleure zones et tarifs",
@@ -547,7 +547,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-20T05:26:42.124Z"
+      "updatedAt": "2026-10-20T06:19:46.005Z"
     }
   }
 }
