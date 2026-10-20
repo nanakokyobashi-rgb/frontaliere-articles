@@ -13,6 +13,7 @@ import {
   verifyArticleBodyApiOnDisk,
 } from '../../scripts/lib/article-body-api.mjs';
 import { findNonCanonicalArticleLinks } from '../../scripts/lib/article-link-contract.mjs';
+import { sanitizeDeep } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { metaFieldRegex, unescapeTsValue } from '../scripts/lib/meta-field-regex.mjs';
 
 const articleId = 'example-article';
@@ -283,7 +284,7 @@ test('metadata permits an empty excerpt and hashes an absent image alt as explic
   assert.equal(buildArticleBodyPayload({
     section: 'frontaliere', locale: 'it', id: articleId,
     meta: metaFor(articleId, 'Example title', '', '   '), source: sourceFor(),
-  }).meta.imageAlt, '   ');
+  }).meta.imageAlt, null);
 });
 
 test('metadata rejects missing excerpts, blank titles, and non-text values', () => {
@@ -301,6 +302,42 @@ test('metadata rejects missing excerpts, blank titles, and non-text values', () 
       section: 'frontaliere', locale: 'it', id: articleId, meta, source: sourceFor(),
     }), expected, label);
   }
+});
+
+test('sanitized blank image alternatives become null before hashing and disk verification', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-sanitized-alt-source-'));
+  const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-sanitized-alt-output-'));
+  const localeDir = path.join(root, 'content/frontaliere/it');
+  fs.mkdirSync(localeDir, { recursive: true });
+  fs.writeFileSync(path.join(localeDir, `${articleId}.ts`), sourceFor());
+
+  const sections = [{ section: 'frontaliere', bodyDir: 'content/frontaliere' }];
+  const registries = { frontaliere: [{ id: articleId }] };
+  const metaBySectionLocale = {
+    frontaliere: { it: metaFor(articleId, 'Example title', 'Short summary.', '\u0000') },
+  };
+  const emitted = emitArticleBodyApi({
+    root,
+    outDir,
+    locales: ['it'],
+    sections,
+    registries,
+    publicSections: new Set(['frontaliere']),
+    metaBySectionLocale,
+    sanitize: (value) => sanitizeDeep(value),
+  });
+  const payloadPath = path.join(outDir, `bodies/frontaliere/it/${articleId}.json`);
+  const payload = JSON.parse(fs.readFileSync(payloadPath, 'utf8'));
+  assert.deepEqual(payload.meta, { title: 'Example title', excerpt: 'Short summary.', imageAlt: null });
+  assert.equal(payload.revision, articleBodyRevision(payload));
+  assert.deepEqual(verifyArticleBodyApiOnDisk({
+    outDir,
+    capability: emitted.capability,
+    sections,
+    registries,
+    publicSections: new Set(['frontaliere']),
+    locales: ['it'],
+  }).totals, emitted.totals);
 });
 
 test('section/locale indexes explicitly represent missing sources and inactive sections', () => {

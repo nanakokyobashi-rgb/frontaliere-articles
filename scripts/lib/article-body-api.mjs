@@ -271,12 +271,12 @@ function assertMeta(meta, id, locale) {
 
   // title ed excerpt sono sempre presenti nei file metadata; excerpt può essere
   // vuoto. imageAlt è opzionale nel writer storico, quindi l'API lo rende
-  // esplicito come null senza inventare una descrizione. Le stringhe whitespace
-  // restano tali, in linea con il writer che le emette.
+  // esplicito come null senza inventare una descrizione. Un valore composto
+  // soltanto da whitespace è vuoto per il contratto.
   return {
     title,
     excerpt,
-    imageAlt: imageAlt === undefined || imageAlt === null || imageAlt === '' ? null : imageAlt,
+    imageAlt: imageAlt === undefined || imageAlt === null || imageAlt.trim() === '' ? null : imageAlt,
   };
 }
 
@@ -345,7 +345,8 @@ function assertPayloadShape(payload, { section, locale, id }) {
   }
   if (typeof payload.meta.title !== 'string' || !payload.meta.title.trim()
     || typeof payload.meta.excerpt !== 'string'
-    || (payload.meta.imageAlt !== null && typeof payload.meta.imageAlt !== 'string')) {
+    || (payload.meta.imageAlt !== null
+      && (typeof payload.meta.imageAlt !== 'string' || !payload.meta.imageAlt.trim()))) {
     throw new Error('meta payload incompleto');
   }
   if (!payload.translations || typeof payload.translations !== 'object' || Array.isArray(payload.translations)) {
@@ -440,7 +441,11 @@ export function emitArticleBodyApi({
           meta: rawPayload.meta,
           translations: rawPayload.translations,
         }, articleBodyDocumentPath(section.section, locale, id));
-        const payload = { ...cleanPayloadInput, revision: articleBodyRevision(cleanPayloadInput) };
+        const normalizedPayloadInput = typeof cleanPayloadInput.meta?.imageAlt === 'string'
+          && cleanPayloadInput.meta.imageAlt.trim() === ''
+          ? { ...cleanPayloadInput, meta: { ...cleanPayloadInput.meta, imageAlt: null } }
+          : cleanPayloadInput;
+        const payload = { ...normalizedPayloadInput, revision: articleBodyRevision(normalizedPayloadInput) };
         const relativeOutput = articleBodyDocumentPath(section.section, locale, id);
         const outputPath = path.join(outDir, relativeOutput);
         fs.mkdirSync(path.dirname(outputPath), { recursive: true });
