@@ -161,8 +161,17 @@ echo "$n" > "${calls}"
 printf '%s\\n' "$*" >> "${argv}"
 line="$(sed -n "\${n}p" "${planFile}")"
 [ -z "$line" ] && line="0 0 0"
-read -r rc prod slp <<< "$line"
+read -r rc prod slp marker <<< "$line"
 [ -n "\${slp:-}" ] && [ "$slp" != "0" ] && sleep "$slp"
+if [ "$marker" = "cooperative-stop" ]; then
+  marker_line="GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGTERM token=\${GENERATION_STOP_TOKEN:-missing}"
+  printf '%s\\n' "$marker_line" > "\${GENERATION_STOP_FILE:?}"
+  echo "GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGTERM"
+elif [ "$marker" = "ordinary-marker" ]; then
+  echo "GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGTERM"
+elif [ "$marker" = "stale-marker" ]; then
+  printf '%s\\n' 'GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGTERM token=stale-token' > "\${GENERATION_STOP_FILE:?}"
+fi
 talk="\${TALK_FOR_S:-0}"
 i=0
 while [ "$i" -lt "$talk" ]; do sleep 1; echo "[stub] riga $i"; i=$((i + 1)); done
@@ -331,6 +340,50 @@ test('lo step emette un esito distinto per articolo, no-op dichiarato e timeout'
     hardKill: 5,
   });
   assert.match(timeout.stdout, /GENERATION_OUTCOME kind=timeout reason=hard-kill section=frontaliere/);
+});
+
+test('un SIGTERM cooperativo del timeout e\' un differimento dichiarato, non un hard kill', () => {
+  const r = runGenerateStep({
+    section: 'frontaliere',
+    plan: ['124 0 0 cooperative-stop'],
+    budget: 600,
+    hardKill: 5,
+  });
+  assert.equal(r.status, 0, 'un arresto cooperativo senza body deve lasciare il run verde');
+  assert.equal(r.outputs.article, 'false');
+  assert.equal(r.outputs.declared, 'true');
+  assert.match(r.stdout, /GENERATION_OUTCOME kind=no-article reason=cooperative-deadline section=frontaliere/);
+  assert.doesNotMatch(r.stdout, /reason=hard-kill/);
+});
+
+test('un marker omonimo nel log non puo\' dichiarare un timeout cooperativo', () => {
+  const r = runGenerateStep({
+    section: 'frontaliere',
+    plan: ['124 0 0 ordinary-marker'],
+    budget: 600,
+    hardKill: 5,
+  });
+  assert.equal(r.status, 1, 'un testo ordinario nel log non deve rendere verde il run');
+  assert.match(r.stdout, /GENERATION_OUTCOME kind=timeout reason=hard-kill section=frontaliere/);
+});
+
+test('un marker di controllo con token stale resta un hard kill', () => {
+  const r = runGenerateStep({
+    section: 'frontaliere',
+    plan: ['124 0 0 stale-marker'],
+    budget: 600,
+    hardKill: 5,
+  });
+  assert.equal(r.status, 1, 'un token di un altro tentativo non deve dichiarare il timeout');
+  assert.match(r.stdout, /GENERATION_OUTCOME kind=timeout reason=hard-kill section=frontaliere/);
+});
+
+test('il controllo attende il flush del tee prima di classificare il tentativo', () => {
+  assert.match(GENERATE_RUN, /mkfifo "\$attempt_pipe"/);
+  assert.match(GENERATE_RUN, /tee -a "\$stall_log" < "\$attempt_pipe" &/);
+  assert.match(GENERATE_RUN, /wait "\$tee_pid"/);
+  assert.match(GENERATE_RUN, /GENERATION_STOP_FILE/);
+  assert.match(GENERATE_RUN, /GENERATION_STOP_TOKEN/);
 });
 
 test('il summary non puo\' dire «generato» su un dry run', () => {
@@ -1109,6 +1162,7 @@ function runChainStep({
   dry = 'false',
   article = 'false',
   declared = 'true',
+  cooperativeStop = 'false',
   rosterBlocked = 'false',
   providerBlocked = 'false',
   sectionProduced = 'frontaliere',
@@ -1163,6 +1217,7 @@ exit 0
         DRY: dry,
         ARTICLE: article,
         DECLARED: declared,
+        COOPERATIVE_STOP: cooperativeStop,
         ROSTER_BLOCKED: rosterBlocked,
         PROVIDER_BLOCKED: providerBlocked,
         SECTION_PRODUCED: sectionProduced,
@@ -1248,6 +1303,10 @@ test('LA GUARDIA STRUTTURALE: senza dichiarazione non parte MAI un anello', () =
     assert.match(r.stdout, /pool AI condiviso temporaneamente indisponibile; si cede al cron/);
     assert.equal(r.status, 0);
   }
+  const cooperative = runChainStep({ cooperativeStop: 'true', declared: 'true' });
+  assert.equal(cooperative.dispatches.length, 0, 'un cap cooperativo non deve dispatchare un successore');
+  assert.match(cooperative.stdout, /cap cooperativo raggiunto/);
+  assert.equal(cooperative.status, 0);
 });
 
 test('IL SOCCORSO E\' UNO PER CATENA: speso il gettone, si cede al cron', () => {
@@ -1345,6 +1404,7 @@ test('lo step Chain non interpola nulla: e\' la regola che lo rende eseguibile q
 test('lo step di generazione espone i blocchi noti separatamente dalla dichiarazione', () => {
   const gen = extractRun('Generate the article');
   assert.match(gen, /echo "declared=\$all_declared"/);
+  assert.match(gen, /echo "cooperative_stop=\$cooperative_stop"/);
   assert.match(gen, /echo "roster_blocked=\$roster_blocked"/);
   assert.match(gen, /echo "provider_blocked=\$provider_blocked"/);
   // `all_declared` resta true quando il roster non serve il prompt (exit 3
@@ -1352,4 +1412,5 @@ test('lo step di generazione espone i blocchi noti separatamente dalla dichiaraz
   // ripartirebbe contro lo stesso muro.
   assert.match(CHAIN_RUN, /ROSTER_BLOCKED/);
   assert.match(CHAIN_RUN, /PROVIDER_BLOCKED/);
+  assert.match(CHAIN_RUN, /COOPERATIVE_STOP/);
 });
