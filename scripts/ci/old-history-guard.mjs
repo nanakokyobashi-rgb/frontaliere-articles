@@ -33,9 +33,9 @@ function validateRef(value, label) {
   return value;
 }
 
-function resolveCommit(reference, cwd) {
+function resolveCommit(reference, cwd, gitImpl = git) {
   try {
-    return git(['rev-parse', '--verify', '--end-of-options', `${reference}^{commit}`], { cwd });
+    return gitImpl(['rev-parse', '--verify', '--end-of-options', `${reference}^{commit}`], { cwd });
   } catch {
     throw new Error(`cannot resolve ${reference} as a commit`);
   }
@@ -104,6 +104,8 @@ export function inspectHistory({
   branch = 'main',
   base = null,
   candidate = 'HEAD',
+  gitImpl = git,
+  ancestorImpl = isAncestor,
 } = {}) {
   if (!SAFE_REMOTE_RE.test(remote)) throw new TypeError('remote must be a local Git remote name');
   validateRef(branch, 'branch');
@@ -111,16 +113,16 @@ export function inspectHistory({
   if (base !== null) validateRef(base, 'base');
 
   const root = resolve(cwd);
-  if (git(['rev-parse', '--is-inside-work-tree'], { cwd: root }) !== 'true') {
+  if (gitImpl(['rev-parse', '--is-inside-work-tree'], { cwd: root }) !== 'true') {
     throw new Error('current directory is not a Git work tree');
   }
 
   const baseRef = base || `${remote}/${branch}`;
-  const baseSha = resolveCommit(baseRef, root);
-  const candidateSha = resolveCommit(candidate, root);
-  const shallow = git(['rev-parse', '--is-shallow-repository'], { cwd: root }) === 'true';
+  const baseSha = resolveCommit(baseRef, root, gitImpl);
+  const candidateSha = resolveCommit(candidate, root, gitImpl);
+  const shallow = gitImpl(['rev-parse', '--is-shallow-repository'], { cwd: root }) === 'true';
 
-  if (!isAncestor(baseSha, candidateSha, root)) {
+  if (!ancestorImpl(baseSha, candidateSha, root)) {
     throw new Error(
       `OLD_HISTORY_GUARD: candidate ${candidateSha} does not descend from ${baseRef} (${baseSha}); `
       + 'refusing a push from old or unrelated history',

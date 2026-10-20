@@ -6358,8 +6358,8 @@
       "mode": "identical",
       "reason": "Guardia fail-closed del retry helper: verifica che il candidato discenda dalla ref remota gia' acquisita, anche nei checkout shallow, prima di consentire il push. Portata insieme alla dipendenza condivisa `scripts/lib/is-invoked-directly.mjs` e sorvegliata perche' un writer basato su storia vecchia non deve entrare ne' nel push ne' nel soft-fail.",
       "baseline": {
-        "site": "a13449d453215d29",
-        "corpus": "a13449d453215d29",
+        "site": "eaa660a9d1474ce7",
+        "corpus": "eaa660a9d1474ce7",
         "alignedAt": "2026-10-20"
       }
     },
