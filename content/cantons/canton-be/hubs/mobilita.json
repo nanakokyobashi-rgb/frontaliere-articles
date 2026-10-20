@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T02:10:59.813Z",
-  "contentHash": "89c9ffb4ce6e997c335ea8471a8d3847b5111e811e7eaa012a8fbd83812224cf",
+  "updatedAt": "2026-10-20T02:52:32.084Z",
+  "contentHash": "74275ea2d78bd12a430be753bcba4beafd758c514eca9d8eee71d52c48766c37",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "25",
+          "value": "24",
           "note": "segnalazioni aggiornate: 19 ottobre 2026"
         },
         {
@@ -175,7 +175,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-20T02:10:59.813Z"
+      "updatedAt": "2026-10-20T02:52:32.084Z"
     },
     "en": {
       "canton": "BE",
@@ -185,7 +185,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "25",
+          "value": "24",
           "note": "reports as of 19 October 2026"
         },
         {
@@ -333,7 +333,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-20T02:10:59.813Z"
+      "updatedAt": "2026-10-20T02:52:32.084Z"
     },
     "de": {
       "canton": "BE",
@@ -343,7 +343,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "25",
+          "value": "24",
           "note": "Meldungen vom 19. Oktober 2026"
         },
         {
@@ -491,7 +491,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-20T02:10:59.813Z"
+      "updatedAt": "2026-10-20T02:52:32.084Z"
     },
     "fr": {
       "canton": "BE",
@@ -501,7 +501,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "25",
+          "value": "24",
           "note": "signalements au 19 octobre 2026"
         },
         {
@@ -649,7 +649,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-20T02:10:59.813Z"
+      "updatedAt": "2026-10-20T02:52:32.084Z"
     }
   }
 }
