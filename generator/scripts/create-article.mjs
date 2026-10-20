@@ -365,7 +365,12 @@ import {
 } from './lib/canton-news-sources.mjs';
 import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
 import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
-import { SEO_DESCRIPTION_MIN, assertSeoDescriptionMinimum } from './lib/seo-description-contract.mjs';
+import {
+  SEO_DESCRIPTION_MAX,
+  SEO_OG_DESCRIPTION_MAX,
+  SEO_DESCRIPTION_MIN,
+  assertSeoDescriptionMinimum,
+} from './lib/seo-description-contract.mjs';
 import { repairSeoTitleFields } from './lib/seo-title-repair.mjs';
 import { editorialHeadlineGuidance } from './lib/editorial-headline-guidance.mjs';
 import { enrichArticleInternalLinks } from './lib/contextual-article-links.mjs';
@@ -20960,15 +20965,6 @@ export function buildArticlePublishedUrls(data) {
  * @returns {Promise<{ slugs: Record<string, string>, publishedUrls: Record<string, string> }>}
  */
 /**
- * Budget for `seo.description` / `seo.ogDescription`.
- *
- * The site's `tests/seo-description-length.test.ts` hard-fails below 80 and
- * above 170. The writer requires 80 characters of article-specific copy and
- * keeps the 150-character cap below the site's 170-character hard maximum.
- */
-const SEO_DESCRIPTION_MAX = 150;
-
-/**
  * The SOCIAL budget, deliberately looser than the SERP one.
  *
  * `ogDescription` never reaches a Google snippet: it reaches Facebook,
@@ -20980,8 +20976,6 @@ const SEO_DESCRIPTION_MAX = 150;
  * 250 is a real ceiling, not a formality: the OG card does eventually clip, and
  * `content/seo/**` entries are scanned against it by seo-description-cap.test.mjs.
  */
-const SEO_OG_DESCRIPTION_MAX = 250;
-
 /**
  * Hard cap on the meta descriptions, applied at the SHARED write path.
  *

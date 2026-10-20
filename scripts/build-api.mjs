@@ -49,9 +49,10 @@ import {
   repairSerpSnippet as repairSerpSnippetBase,
   truncateToClause,
 } from '../host/shared/clauseTail.mjs';
-// This Node-only builder cannot import the TypeScript renderer clamp. Keep its
-// RSS SERP budget aligned with META_DESCRIPTION_MAX_CHARS in the site shell.
-const RSS_SERP_DESCRIPTION_MAX_CHARS = 150;
+// This Node-only builder shares the metadata writers' budget and validates
+// that it remains aligned with the SiteShell contract.
+import { SEO_DESCRIPTION_MAX } from '../generator/scripts/lib/seo-description-contract.mjs';
+const RSS_SERP_DESCRIPTION_MAX_CHARS = SEO_DESCRIPTION_MAX;
 const repairSerpSnippet = (text) => {
   const repaired = repairSerpSnippetBase(text);
   const bounded = truncateToClause(repaired, RSS_SERP_DESCRIPTION_MAX_CHARS);

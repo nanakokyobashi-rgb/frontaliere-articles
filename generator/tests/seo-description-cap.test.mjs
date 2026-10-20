@@ -61,12 +61,15 @@ import { fileURLToPath } from 'node:url';
 import { truncateToClause } from '../../host/shared/clauseTail.mjs';
 import { stripExcerptMarkdown } from '../scripts/lib/article-excerpt.mjs';
 import {
+  SEO_DESCRIPTION_MAX as SHARED_SEO_DESCRIPTION_MAX,
+  SEO_OG_DESCRIPTION_MAX as SHARED_SEO_OG_DESCRIPTION_MAX,
   SEO_DESCRIPTION_MIN as SHARED_SEO_DESCRIPTION_MIN,
   assertSeoDescriptionMinimum,
 } from '../scripts/lib/seo-description-contract.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
+const TITLE_SUFFIX = path.join(ROOT, 'host', 'shared', 'titleSuffix.ts');
 const SEO_DIR = path.join(ROOT, 'content', 'seo');
 
 /** Il tetto duro di `tests/seo-description-length.test.ts` sul sito. */
@@ -99,16 +102,12 @@ function sliceConst(src, header) {
 
 function extractCapBlock() {
   const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
-  const max = src.match(/^const SEO_DESCRIPTION_MAX = (\d+);$/m);
-  if (!max) throw new Error('SEO_DESCRIPTION_MAX non trovato in create-article.mjs');
-  const ogMax = src.match(/^const SEO_OG_DESCRIPTION_MAX = (\d+);$/m);
-  if (!ogMax) throw new Error('SEO_OG_DESCRIPTION_MAX non trovato in create-article.mjs');
   const maxBodyKeys = src.match(/^const MAX_BODY_KEYS = (\d+);$/m);
   if (!maxBodyKeys) throw new Error('MAX_BODY_KEYS non trovato in create-article.mjs');
   const block = [
     sliceFn(src, 'function truncateAtWordBoundary(text, maxLen) {'),
-    `const SEO_DESCRIPTION_MAX = ${max[1]};`,
-    `const SEO_OG_DESCRIPTION_MAX = ${ogMax[1]};`,
+    `const SEO_DESCRIPTION_MAX = ${SHARED_SEO_DESCRIPTION_MAX};`,
+    `const SEO_OG_DESCRIPTION_MAX = ${SHARED_SEO_OG_DESCRIPTION_MAX};`,
     `const MAX_BODY_KEYS = ${maxBodyKeys[1]};`,
     // Estratto dal sorgente, non riscritto: se la mappa dei budget cambia
     // forma il test la vede, invece di misurare una copia divergente.
@@ -155,6 +154,11 @@ describe('clampSeoDescriptions', () => {
     expect(SEO_DESCRIPTION_MIN).toBe(SITE_HARD_MIN);
     expect(SEO_DESCRIPTION_MAX).toBe(150);
     expect(SEO_DESCRIPTION_MAX).toBeLessThan(SITE_HARD_MAX);
+
+    const titleSuffix = fs.readFileSync(TITLE_SUFFIX, 'utf-8');
+    const siteMax = titleSuffix.match(/^export const META_DESCRIPTION_MAX_CHARS = (\d+);$/m);
+    if (!siteMax) throw new Error('META_DESCRIPTION_MAX_CHARS non trovato in host/shared/titleSuffix.ts');
+    expect(SEO_DESCRIPTION_MAX).toBe(Number(siteMax[1]));
   });
 
   it('lascia margine sotto il tetto del sito', () => {
