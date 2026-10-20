@@ -14,6 +14,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'amministrazione-fiscale-berna-chiusura-2026': { it: 'amministrazione-fiscale-berna-chiusura-2026', en: 'bern-tax-administration-closure-2026', de: 'steuerverwaltung-bern-schliessung-2026', fr: 'administration-fiscale-berne-fermeture-2026' },
  'berna-governo-kita-gratuite': { it: 'berna-governo-kita-gratuite', en: 'bern-government-free-daycares', de: 'bern-regierungsrat-kostenlose-kitas', fr: 'berne-gouvernement-creches-gratuites' },
  'corridoio-linea-wynigen': { it: 'corridoio-linea-wynigen', en: 'wynigen-grid-corridor', de: 'wynigen-netzkorridor', fr: 'corridor-reseau-wynigen' },
+ 'voto-comunale-stranieri-berna': { it: 'voto-comunale-stranieri-berna', en: 'municipal-voting-foreigners-bern', de: 'kommunales-wahlrecht-auslaender-bern', fr: 'vote-communal-etrangers-berne' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

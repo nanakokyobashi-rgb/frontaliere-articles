@@ -36,6 +36,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.corridoio-linea-wynigen.title': 'Swissgrid is planning an overhead line between Bern and Lucerne',
     'blog.article.corridoio-linea-wynigen.excerpt': 'Swissgrid proposes an overhead line between Bickigen BE and Mettlen LU to replace the nearly century-old one.',
     'blog.article.corridoio-linea-wynigen.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.voto-comunale-stranieri-berna.title': 'Bern Commission: optional municipal voting rights for foreigners',
+    'blog.article.voto-comunale-stranieri-berna.excerpt': 'SAK supports voluntary municipal voting for foreigners with a settlement permit, 10 years in Switzerland, 5 in the canton, 3 months in the municipality.',
+    'blog.article.voto-comunale-stranieri-berna.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBeEn;

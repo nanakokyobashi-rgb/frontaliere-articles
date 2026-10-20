@@ -36,6 +36,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.corridoio-linea-wynigen.title': 'Swissgrid planifie une ligne aérienne entre Berne et Lucerne',
     'blog.article.corridoio-linea-wynigen.excerpt': 'Swissgrid propose une ligne aérienne entre Bickigen BE et Mettlen LU pour remplacer celle qui est presque centenaire.',
     'blog.article.corridoio-linea-wynigen.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.voto-comunale-stranieri-berna.title': 'Commission de Berne : droit de vote communal facultatif pour les étrangers',
+    'blog.article.voto-comunale-stranieri-berna.excerpt': 'La SAK soutient le droit de vote communal facultatif pour les étrangers titulaires d’un permis d’établissement, ayant vécu 10 ans en Suisse, 5 ans dans le canton et 3 mois dans la commune.',
+    'blog.article.voto-comunale-stranieri-berna.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBeFr;

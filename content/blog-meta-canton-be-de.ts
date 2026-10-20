@@ -36,6 +36,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.corridoio-linea-wynigen.title': 'Swissgrid plant eine Freileitung zwischen Bern und Luzern',
     'blog.article.corridoio-linea-wynigen.excerpt': 'Swissgrid schlägt eine Freileitung zwischen Bickigen BE und Mettlen LU vor, um die fast hundert Jahre alte Leitung zu ersetzen.',
     'blog.article.corridoio-linea-wynigen.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.voto-comunale-stranieri-berna.title': 'Kommission Bern: freiwilliges kommunales Stimmrecht für Ausländer',
+    'blog.article.voto-comunale-stranieri-berna.excerpt': 'Die SAK unterstützt das freiwillige kommunale Stimmrecht für Ausländer mit Niederlassungsbewilligung, 10 Jahren Aufenthalt in der Schweiz, 5 Jahren im Kanton und 3 Monaten in der Gemeinde.',
+    'blog.article.voto-comunale-stranieri-berna.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;

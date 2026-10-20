@@ -426,6 +426,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-voto-comunale-stranieri-berna': {
+    title: 'Commissione Berna: voto comunale facoltativo per stranieri',
+    description: 'La SAK bernese appoggia il voto comunale volontario per stranieri con permesso di domicilio e lunga residenza. Decidono i comuni. Anche nuova regola',
+    keywords: 'frontalieri, ticino, svizzera, italia, commissione, berna, voto, comunale',
+    ogTitle: 'Berna: commissione per voto comunale facoltativo agli stranieri integrati',
+    ogDescription: 'La maggioranza della commissione cantonale propone ai comuni di Berna la facoltà di concedere il voto locale a stranieri con permesso di domicilio residenti da 10 anni in Svizzera, 5 nel Cantone e 3 mesi nel comune. Il diritto varrebbe solo',
+    canonicalPath: '/articoli-berna/voto-comunale-stranieri-berna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Commissione Berna: voto comunale facoltativo per stranieri",
+      "description": "La SAK bernese appoggia il voto comunale volontario per stranieri con permesso di domicilio e lunga residenza. Decidono i comuni. Anche nuova regola",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-voto-comunale-stranieri-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T22:00:47+00:00",
+      "dateModified": "2026-10-20T22:00:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/voto-comunale-stranieri-berna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

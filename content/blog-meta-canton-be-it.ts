@@ -36,6 +36,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.corridoio-linea-wynigen.title': 'Swissgrid pianifica una linea aerea tra Berna e Lucerna',
     'blog.article.corridoio-linea-wynigen.excerpt': 'Swissgrid propone una linea aerea tra Bickigen BE e Mettlen LU per sostituire quella quasi centenaria.',
     'blog.article.corridoio-linea-wynigen.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.voto-comunale-stranieri-berna.title': 'Commissione Berna: voto comunale facoltativo per stranieri',
+    'blog.article.voto-comunale-stranieri-berna.excerpt': 'La SAK sostiene il voto comunale volontario per stranieri con permesso di domicilio, 10 anni in Svizzera, 5 nel Cantone, 3 mesi nel comune.',
+    'blog.article.voto-comunale-stranieri-berna.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBeIt;

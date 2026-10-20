@@ -127,4 +127,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'voto-comunale-stranieri-berna',
+ category: 'novita',
+ date: '2026-10-20T22:00:47.607Z',
+ image: '/images/blog/article-voto-comunale-stranieri-berna.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
