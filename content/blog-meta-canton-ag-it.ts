@@ -48,6 +48,9 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.murales-pediatria-ksb-baden.title': 'KSB Baden: murales in pediatria e pronto soccorso',
     'blog.article.murales-pediatria-ksb-baden.excerpt': 'Dieci artisti di Paint a Smile hanno dipinto circa 200 metri quadrati al KSB Baden.',
     'blog.article.murales-pediatria-ksb-baden.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.maja-riniker-eletta-governo-argovia.title': 'Maja Riniker eletta in Consiglio di Stato argoviese con 70.137 voti',
+    'blog.article.maja-riniker-eletta-governo-argovia.excerpt': 'La deputata FDP di Suhr ottiene il seggio di Stephan Attiger; partecipazione al 21,01% nei 196 comuni.',
+    'blog.article.maja-riniker-eletta-governo-argovia.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAgIt;

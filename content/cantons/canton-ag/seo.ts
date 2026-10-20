@@ -582,6 +582,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-maja-riniker-eletta-governo-argovia': {
+    title: 'Maja Riniker eletta in Consiglio di Stato argoviese con 70.137 voti',
+    description: 'Risultati elezioni suppletive Argovia: Maja Riniker (FDP) entra in Consiglio di Stato con 70.137 voti, partecipazione 21,01%. Dettagli per distretto',
+    keywords: 'frontalieri, ticino, svizzera, italia, maja, riniker, eletta, consiglio',
+    ogTitle: 'Maja Riniker nuova consigliera di Stato argoviese con ampio margine',
+    ogDescription: 'La deputata nazionale FDP di Suhr, 48 anni, vince l\'elezione suppletiva per il seggio di Stephan Attiger con 70.137 voti su maggioranza di 45.217. Partecipazione cantonale al 21,01%; dettagli voti per distretto e successione al Consiglio nazionale.',
+    canonicalPath: '/articoli-argovia/maja-riniker-eletta-governo-argovia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Maja Riniker eletta in Consiglio di Stato argoviese con 70.137 voti",
+      "description": "Risultati elezioni suppletive Argovia: Maja Riniker (FDP) entra in Consiglio di Stato con 70.137 voti, partecipazione 21,01%. Dettagli per distretto",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-maja-riniker-eletta-governo-argovia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T18:24:51+00:00",
+      "dateModified": "2026-10-20T18:24:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/maja-riniker-eletta-governo-argovia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

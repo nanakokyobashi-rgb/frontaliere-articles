@@ -48,6 +48,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.murales-pediatria-ksb-baden.title': 'KSB Baden : fresques en pédiatrie et aux urgences',
     'blog.article.murales-pediatria-ksb-baden.excerpt': 'Dix artistes de Paint a Smile ont peint environ 200 mètres carrés au KSB Baden.',
     'blog.article.murales-pediatria-ksb-baden.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.maja-riniker-eletta-governo-argovia.title': 'Maja Riniker élue au Conseil d\'État argovien avec 70.137 voix',
+    'blog.article.maja-riniker-eletta-governo-argovia.excerpt': 'La députée du PLR de Suhr obtient le siège de Stephan Attiger ; participation au 21,01% dans les 196 communes.',
+    'blog.article.maja-riniker-eletta-governo-argovia.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAgFr;

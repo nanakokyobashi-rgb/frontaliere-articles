@@ -18,6 +18,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'iniziativa-parita-salariale-ag': { it: 'iniziativa-parita-salariale-ag', en: 'aargau-pay-equality-initiative', de: 'aargau-lohngleichheitsinitiative', fr: 'initiative-egalite-salariale-argovie' },
  'sezione-medicina-nucleare': { it: 'sezione-medicina-nucleare', en: 'swiss-nuclear-medicine-section', de: 'sektion-nuklearmedizin-schweiz', fr: 'section-medecine-nucleaire' },
  'murales-pediatria-ksb-baden': { it: 'murales-pediatria-ksb-baden', en: 'murals-ksb-baden-pediatrics', de: 'wandbilder-ksb-kinderabteilung', fr: 'murales-ksb-pediatrie-baden' },
+ 'maja-riniker-eletta-governo-argovia': { it: 'maja-riniker-eletta-governo-argovia', en: 'maja-riniker-elected-aargau-government', de: 'maja-riniker-gewaehlt-aargau-regierung', fr: 'maja-riniker-elue-gouvernement-argovie' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
