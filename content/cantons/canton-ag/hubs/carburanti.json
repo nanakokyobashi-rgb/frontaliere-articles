@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-20T12:12:46.397Z",
-  "contentHash": "bd4be26c71614b3ceb4ad96788854611b874ed3c433866f51a2205b7ce1c5f19",
+  "updatedAt": "2026-10-20T12:28:30.526Z",
+  "contentHash": "0479e87b48ce30f4583dd6c23f10643edf25519e224c7a1b8afcceedee4541d4",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "KSB Baden: murales in pediatria e pronto soccorso",
+          "url": "/articoli-argovia/murales-pediatria-ksb-baden/",
+          "excerpt": "Dieci artisti di Paint a Smile hanno dipinto circa 200 metri quadrati al KSB Baden.",
+          "date": "2026-10-20T12:20:50.431Z"
+        },
+        {
           "title": "Nuklearforum crea la sezione Medicina nucleare svizzera",
           "url": "/articoli-argovia/sezione-medicina-nucleare/",
           "excerpt": "Il Nuklearforum Schweiz crea una nuova sezione Assemblea costitutiva il 12 ottobre a Olten KSB, PSI e Molecular Partners tra i fondatori Focus su radionuclidi",
@@ -94,12 +100,6 @@
           "url": "/articoli-argovia/eventi-weekend-argovia/",
           "excerpt": "Eventi in Argovia ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
           "date": "2026-10-17T11:26:03.017Z"
-        },
-        {
-          "title": "Argovia: respinto il divieto per i cani pericolosi",
-          "url": "/articoli-argovia/argovia-cani-divieto-respinto/",
-          "excerpt": "Il governo argoviese respinge il divieto dei cani pericolosi: in due anni, nessuno dei sei gravi ferimenti a persone ha coinvolto un cane della lista.",
-          "date": "2026-10-12T06:22:16.181Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-20T12:12:46.397Z"
+      "updatedAt": "2026-10-20T12:28:30.526Z"
     },
     "en": {
       "canton": "AG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "KSB Baden: murals in pediatrics and the emergency department",
+          "url": "/en/aargau-articles/murals-ksb-baden-pediatrics/",
+          "excerpt": "Ten artists from Paint a Smile painted approximately 200 square meters at KSB Baden.",
+          "date": "2026-10-20T12:20:50.431Z"
+        },
+        {
           "title": "Nuklearforum creates the Swiss Nuclear Medicine section",
           "url": "/en/aargau-articles/swiss-nuclear-medicine-section/",
           "excerpt": "Nuklearforum Schweiz creates a new section Founding assembly on October 12 in Olten KSB, PSI and Molecular Partners among the founders Focus on radionuclides",
@@ -193,12 +199,6 @@
           "url": "/en/aargau-articles/weekend-events-aargau/",
           "excerpt": "Events in Aargau every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
           "date": "2026-10-17T11:26:03.017Z"
-        },
-        {
-          "title": "Aargau: ban on dangerous dogs rejected",
-          "url": "/en/aargau-articles/aargau-dangerous-dog-ban-rejected/",
-          "excerpt": "The Aargau government rejects the ban on dangerous dogs: in two years, none of the six serious injuries to people involved a dog from the list.",
-          "date": "2026-10-12T06:22:16.181Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-20T12:12:46.397Z"
+      "updatedAt": "2026-10-20T12:28:30.526Z"
     },
     "de": {
       "canton": "AG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "KSB Baden: Wandbilder in der Pädiatrie und Notaufnahme",
+          "url": "/de/aargau-artikel/wandbilder-ksb-kinderabteilung/",
+          "excerpt": "Zehn Künstler von Paint a Smile haben im KSB Baden etwa 200 Quadratmeter bemalt.",
+          "date": "2026-10-20T12:20:50.431Z"
+        },
+        {
           "title": "Nuklearforum gründet die Sektion Nuklearmedizin Schweiz",
           "url": "/de/aargau-artikel/sektion-nuklearmedizin-schweiz/",
           "excerpt": "Das Nuklearforum Schweiz gründet eine neue Sektion Gründungsversammlung am 12.",
@@ -292,12 +298,6 @@
           "url": "/de/aargau-artikel/wochenend-veranstaltungen-aargau/",
           "excerpt": "Veranstaltungen im Aargau an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
           "date": "2026-10-17T11:26:03.017Z"
-        },
-        {
-          "title": "Aargau: Verbot für gefährliche Hunde abgelehnt",
-          "url": "/de/aargau-artikel/aargau-kampfhunde-verbot-abgelehnt/",
-          "excerpt": "Die Aargauer Regierung lehnt das Verbot gefährlicher Hunde ab: In zwei Jahren war bei keinem der sechs schweren Verletzungsfälle an Menschen ein Hund von der Liste beteiligt.",
-          "date": "2026-10-12T06:22:16.181Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-20T12:12:46.397Z"
+      "updatedAt": "2026-10-20T12:28:30.526Z"
     },
     "fr": {
       "canton": "AG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "KSB Baden : fresques en pédiatrie et aux urgences",
+          "url": "/fr/articles-argovie/murales-ksb-pediatrie-baden/",
+          "excerpt": "Dix artistes de Paint a Smile ont peint environ 200 mètres carrés au KSB Baden.",
+          "date": "2026-10-20T12:20:50.431Z"
+        },
+        {
           "title": "Nuklearforum crée la section Médecine nucléaire suisse",
           "url": "/fr/articles-argovie/section-medecine-nucleaire/",
           "excerpt": "Le Nuklearforum Schweiz crée une nouvelle section Assemblée constitutive le 12 octobre à Olten KSB, PSI et Molecular Partners parmi les fondateurs Focus",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-argovie/evenements-week-end-argovie/",
           "excerpt": "Événements en Argovie chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
           "date": "2026-10-17T11:26:03.017Z"
-        },
-        {
-          "title": "Argovie : l’interdiction des chiens dangereux rejetée",
-          "url": "/fr/articles-argovie/argovie-interdiction-chiens-dangereux/",
-          "excerpt": "Le gouvernement argovien rejette l’interdiction des chiens dangereux : en deux ans, aucune des six graves blessures infligées à des personnes n’a impliqué un chien figurant sur la liste.",
-          "date": "2026-10-12T06:22:16.181Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-20T12:12:46.397Z"
+      "updatedAt": "2026-10-20T12:28:30.526Z"
     }
   }
 }
