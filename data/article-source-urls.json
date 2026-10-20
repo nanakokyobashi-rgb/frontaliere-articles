@@ -1,9 +1,4 @@
 {
-  "https://comozero.it/attualita/a-pochi-km-da-como-ecco-la-smart-valley-laboratori-per-creare-lavoratori-su-misura-per-le-imprese": {
-    "articleId": "inaugurazione-campus-smart-valley-daverio",
-    "ts": "2026-09-13T07:02:10.986Z",
-    "keyForm": 2
-  },
   "https://www.varesenoi.it/2026/09/11/leggi-notizia/argomenti/varese/articolo/ospedale-del-ponte-asst-sette-laghi-replica-a-palazzo-estense-nessun-blocco-del-terzo-lotto-lav.html": {
     "articleId": "ospedale-del-ponte-terzo-lotto",
     "ts": "2026-09-13T07:44:01.033Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/sui-frontalieri-pesano-le-disparita-uno-su-due-si-sente-pagato-meno-degli-svizzeri/2713108": {
     "articleId": "indagine-disparita-salariali-frontalieri",
     "ts": "2026-10-20T10:53:09.923Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1957988/troppi-frontalieri-la-lega-chiede-di-intervenire": {
+    "articleId": "lega-misure-lugano",
+    "ts": "2026-10-20T14:47:13.183Z",
     "keyForm": 2
   }
 }

@@ -13530,6 +13530,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.indagine-disparita-salariali-frontalieri.title': 'Frontaliers : 55,6% gagnent moins que les résidents',
     'blog.article.indagine-disparita-salariali-frontalieri.excerpt': '1.542 réponses recueillies auprès de travailleuses et travailleurs 55,6% se sentent moins bien payés qu’un résident suisse L’étude sera présentée le 24 octobre à Varese',
     'blog.article.indagine-disparita-salariali-frontalieri.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lega-misure-lugano.title': 'La Lega demande des mesures concernant les travailleurs frontaliers à Lugano',
+    'blog.article.lega-misure-lugano.excerpt': 'Le renforcement a été approuvé le 29 septembre 2026 Wicht demande à la Municipalité de Lugano de solliciter le Canton La demande concerne le paquet',
+    'blog.article.lega-misure-lugano.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;

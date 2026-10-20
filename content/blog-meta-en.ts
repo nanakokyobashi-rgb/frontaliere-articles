@@ -13528,6 +13528,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.indagine-disparita-salariali-frontalieri.title': 'Cross-border workers: 55.6% receive lower salaries than residents',
     'blog.article.indagine-disparita-salariali-frontalieri.excerpt': '1.542 responses collected from female and male workers 55,6% feel they are paid less than a Swiss resident The research will be presented on October 24 at Varese',
     'blog.article.indagine-disparita-salariali-frontalieri.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lega-misure-lugano.title': 'The Lega calls for measures on cross-border commuters in Lugano',
+    'blog.article.lega-misure-lugano.excerpt': 'The strengthening was approved on September 29, 2026 Wicht asks the Municipality of Lugano to urge the Canton The request concerns the package',
+    'blog.article.lega-misure-lugano.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

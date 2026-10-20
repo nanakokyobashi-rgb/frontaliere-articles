@@ -13527,6 +13527,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.indagine-disparita-salariali-frontalieri.title': 'Grenzgänger: 55,6% verdienen weniger als die Einwohner',
     'blog.article.indagine-disparita-salariali-frontalieri.excerpt': '1.542 Antworten von Arbeitnehmerinnen und Arbeitnehmern gesammelt 55,6% fühlen sich schlechter bezahlt als eine in der Schweiz ansässige Person Die Studie wird am 24. (Varese)',
     'blog.article.indagine-disparita-salariali-frontalieri.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lega-misure-lugano.title': 'Die Lega fordert in Lugano Maßnahmen für Grenzgänger',
+    'blog.article.lega-misure-lugano.excerpt': 'Die Verschärfung wurde am 29.',
+    'blog.article.lega-misure-lugano.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;
