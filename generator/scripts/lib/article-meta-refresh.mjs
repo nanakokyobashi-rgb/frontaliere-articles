@@ -107,7 +107,7 @@ const LOCALE_FIELDS = ['excerpt', 'seoDescription', 'ogDescription'];
  * DESCRIPTION_MAX — see the header for why they are duplicated, not
  * imported, and how the duplication is covered.
  */
-export const SEO_DESCRIPTION_MAX = 160;
+export const SEO_DESCRIPTION_MAX = 150;
 export const SEO_OG_DESCRIPTION_MAX = 250;
 
 /** `excerpt` is never clamped — it is the RICH surface, nothing truncates it

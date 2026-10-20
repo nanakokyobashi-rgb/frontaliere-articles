@@ -171,7 +171,7 @@ test('SEO: descrizioni senza la NASpI «introdotta» e dentro i tetti', () => {
   assert.doesNotMatch(block, /introduzione del NASPI/);
   const description = block.match(/\n {4}description: '((?:[^'\\]|\\.)*)',/)[1].replace(/\\'/g, "'");
   const ogDescription = block.match(/\n {4}ogDescription: '((?:[^'\\]|\\.)*)',/)[1].replace(/\\'/g, "'");
-  assert.ok(description.length <= 160, `description ${description.length} > 160`);
+  assert.ok(description.length <= 150, `description ${description.length} > 150`);
   assert.ok(ogDescription.length <= 250, `ogDescription ${ogDescription.length} > 250`);
   assert.match(block, /"description": "La NASpI del frontaliere residente in Italia/);
   assert.match(block, new RegExp(`"dateModified": "${REFRESHED_ON}T`));

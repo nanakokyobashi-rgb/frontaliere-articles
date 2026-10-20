@@ -42,9 +42,9 @@
  *
  * Il cap nasceva con una soglia sola per `description` e `ogDescription`, il
  * che risolveva il rosso ma rifaceva lo stesso errore un livello piu' in
- * basso: il vincolo piu' stretto (lo snippet di Google, 160) diventava il
+ * basso: il vincolo piu' stretto (lo snippet di Google, 150) diventava il
  * tetto anche per la card social, che ne regge molti di piu'. Ora
- * `SEO_DESCRIPTION_BUDGETS` tiene un budget per campo — 160 alla description
+ * `SEO_DESCRIPTION_BUDGETS` tiene un budget per campo — 150 alla description
  * (che alimenta anche `structuredData.description`), 250 alla ogDescription —
  * e lo scan sull'output misura ogni campo col proprio metro.
  *
@@ -153,6 +153,7 @@ const OFFENDER =
 describe('clampSeoDescriptions', () => {
   it('mantiene entrambi i limiti hard della description del sito', () => {
     expect(SEO_DESCRIPTION_MIN).toBe(SITE_HARD_MIN);
+    expect(SEO_DESCRIPTION_MAX).toBe(150);
     expect(SEO_DESCRIPTION_MAX).toBeLessThan(SITE_HARD_MAX);
   });
 
@@ -173,7 +174,7 @@ describe('clampSeoDescriptions', () => {
    * sola la og description lunga scritta apposta per Facebook/LinkedIn veniva
    * riportata a 160, e le tre superfici tornavano a essere una sola.
    */
-  it('applica DUE soglie: 160 alla description, 250 alla ogDescription', () => {
+  it('applica DUE soglie: 150 alla description, 250 alla ogDescription', () => {
     expect(SEO_OG_DESCRIPTION_MAX).toBeGreaterThan(SEO_DESCRIPTION_MAX);
     expect(SEO_DESCRIPTION_BUDGETS.description).toBe(SEO_DESCRIPTION_MAX);
     expect(SEO_DESCRIPTION_BUDGETS.ogDescription).toBe(SEO_OG_DESCRIPTION_MAX);
@@ -393,9 +394,9 @@ describe('wiring', () => {
 
   /**
    * Il prompt e' un contratto SENZA forma di import: nessun guard che segue gli
-   * import lo vede, e finche' istruiva "OG desc (≤ 160 caratteri)" il tetto a
+   * import lo vede, e finche' istruiva "OG desc (≤ 150 caratteri)" il tetto a
    * 250 aiutava solo i casi in cui il modello lo ignorava. Se qualcuno lo
-   * riporta a 160, questo test lo dice — la CI resterebbe verde altrimenti.
+   * riporta a 150, questo test lo dice — la CI resterebbe verde altrimenti.
    */
   it("il prompt non istruisce un budget og piu' stretto del cap", () => {
     const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
@@ -405,7 +406,7 @@ describe('wiring', () => {
     expect(budgets.length).toBeGreaterThan(0);
     expect(Math.max(...budgets)).toBe(SEO_OG_DESCRIPTION_MAX);
     // E nessun numero nella riga puo' stare sotto il vecchio tetto: sarebbe il
-    // 160 tornato indietro sotto altra forma.
+    // 150 tornato indietro sotto altra forma.
     expect(Math.min(...budgets)).toBeGreaterThan(SEO_DESCRIPTION_MAX);
   });
 
