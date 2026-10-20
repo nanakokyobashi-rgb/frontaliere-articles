@@ -225,7 +225,19 @@ export function createR2Request(env = process.env, { fetchImpl = globalThis.fetc
   if (typeof fetchImpl !== 'function') throw new Error('[r2-section-lock] fetch is unavailable');
 
   return async ({ method, key, body = '', headers = {} }) => {
-    const signed = signRequest({ ...config, now: now(), method, key, body, headers });
+    // Cloudflare can rewrite a strong R2 ETag to a weak validator when the
+    // response is compressed. Lock readers need a strong ETag for If-Match,
+    // so make GET/HEAD requests unambiguously identity-encoded before
+    // signing them. PUT/DELETE keep their caller-provided headers.
+    const requestHeaders = method === 'GET' || method === 'HEAD'
+      ? {
+        ...Object.fromEntries(
+          Object.entries(headers).filter(([name]) => name.toLowerCase() !== 'accept-encoding'),
+        ),
+        'accept-encoding': 'identity',
+      }
+      : headers;
+    const signed = signRequest({ ...config, now: now(), method, key, body, headers: requestHeaders });
     const response = await fetchImpl(signed.url, {
       method,
       headers: signed.headers,
