@@ -54,6 +54,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.truffa-falsi-poliziotti-vaud.title': 'Sette milioni truffati nel Vaud da falsi agenti',
     'blog.article.truffa-falsi-poliziotti-vaud.excerpt': 'Quasi 2.300 casi dall\'inizio dell\'anno Danno complessivo: CHF 7 milioni Oltre 100 interpellati, 19 in detenzione 16 interpellazioni a inizio ottobre, 5',
     'blog.article.truffa-falsi-poliziotti-vaud.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.cdhr-contributo-differenziale-2025.title': 'CDHR 2025: soglie 250.000/500.000 € per frontalieri in Francia',
+    'blog.article.cdhr-contributo-differenziale-2025.excerpt': 'La contribution différentielle sur les hauts revenus mira a un prelievo minimo del 20%.',
+    'blog.article.cdhr-contributo-differenziale-2025.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVdIt;

@@ -193,4 +193,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'cdhr-contributo-differenziale-2025',
+ category: 'fiscale',
+ date: '2026-10-20T02:03:43.122Z',
+ image: '/images/blog/article-cdhr-contributo-differenziale-2025.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
