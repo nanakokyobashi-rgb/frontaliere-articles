@@ -582,6 +582,9 @@ jobs:
           mkdir -p "$diag_dir"
           stall_flag="$diag_dir/stalled"
           stall_log="$diag_dir/attempt.log"
+          tee_pid=""
+          attempt_pipe=""
+          stop_marker=""
           cdp_client="${RUNNER_TEMP:-/tmp}/cdp-stack.mjs"
 
           proc_tree() {
@@ -691,6 +694,8 @@ jobs:
           watch_pid=""
           stall_atexit() {
             kill_tree KILL "${watch_pid:-}"
+            kill_tree KILL "${tee_pid:-}"
+            [ -z "${attempt_pipe:-}" ] || rm -f "$attempt_pipe"
             if [ ! -f "$stall_flag" ] && [ "${produced:-false}" = "true" ]; then
               rm -f "$stall_log" "$diag_dir/resources.log"
             fi
@@ -741,25 +746,54 @@ jobs:
 
             rm -f "$stall_flag"
             : > "$stall_log"
+            attempt_pipe="$diag_dir/attempt-${tried}.pipe"
+            stop_marker="$diag_dir/generation-stop-${tried}.marker"
+            stop_token="${run_id}-${run_attempt}-${tried}-$$"
+            if ! rm -f "$attempt_pipe" "$stop_marker" || ! mkfifo "$attempt_pipe"; then
+              all_declared=false
+              outcome_kind="error"
+              outcome_reason="undeclared"
+              outcome_section="$sec"
+              [ -n "$undeclared_why" ] || undeclared_why="impossibile preparare il canale di controllo per la sezione $sec: classificazione fail-closed"
+              echo "::error::impossibile preparare il canale di controllo per la sezione $sec; rifiuto fail-closed"
+              break
+            fi
+            export GENERATION_STOP_FILE="$stop_marker"
+            export GENERATION_STOP_TOKEN="$stop_token"
+            tee -a "$stall_log" < "$attempt_pipe" &
+            tee_pid=$!
             if [ -n "${SOURCE_URL:-}" ]; then
               timeout --signal=TERM --kill-after=60s "${cap}s" \
                 node --report-on-signal --report-signal=SIGUSR2 --report-directory="$diag_dir" \
                 generator/scripts/create-article.mjs --section="$sec" "$SOURCE_URL" \
-                > >(tee -a "$stall_log") 2>&1 &
+                > "$attempt_pipe" 2>&1 &
             else
               timeout --signal=TERM --kill-after=60s "${cap}s" \
                 node --report-on-signal --report-signal=SIGUSR2 --report-directory="$diag_dir" \
                 generator/scripts/create-article.mjs --section="$sec" \
-                > >(tee -a "$stall_log") 2>&1 &
+                > "$attempt_pipe" 2>&1 &
             fi
             attempt_pid=$!
             stall_watchdog "$attempt_pid" &
             watch_pid=$!
-            wait "$attempt_pid"
-            rc=$?
+            if wait "$attempt_pid"; then rc=0; else rc=$?; fi
             kill_tree KILL "$watch_pid"
             wait "$watch_pid" 2>/dev/null || true
             watch_pid=""
+            tee_rc=0
+            if ! wait "$tee_pid"; then tee_rc=$?; fi
+            tee_pid=""
+            rm -f "$attempt_pipe"
+            attempt_pipe=""
+            if [ "$tee_rc" -ne 0 ]; then
+              all_declared=false
+              outcome_kind="error"
+              outcome_reason="undeclared"
+              outcome_section="$sec"
+              [ -n "$undeclared_why" ] || undeclared_why="il canale di diagnostica della sezione $sec non ha completato il flush (tee exit $tee_rc): classificazione fail-closed"
+              echo "::error::il canale di diagnostica della sezione $sec non ha completato il flush; rifiuto fail-closed"
+              break
+            fi
 
             if [ -f "$stall_flag" ]; then
               echo "::warning::create-article.mjs muto per ${stall_s}s sulla sezione $sec — ucciso dal watchdog dello stallo, mentre il cap di durata (${cap}s) non era nemmeno vicino"
@@ -772,7 +806,7 @@ jobs:
             fi
             if [ "$rc" = "124" ] || [ "$rc" = "137" ]; then
               cooperative_stop=false
-              if [ "$rc" = "124" ] && grep -Fq 'GENERATION_STOP kind=timeout reason=cooperative-sigterm' "$stall_log"; then
+              if [ "$rc" = "124" ] && grep -Fqx "GENERATION_STOP token=$stop_token kind=timeout reason=cooperative-sigterm signal=SIGTERM" "$stop_marker" 2>/dev/null; then
                 cooperative_stop=true
               fi
               if [ "$cooperative_stop" = "true" ]; then

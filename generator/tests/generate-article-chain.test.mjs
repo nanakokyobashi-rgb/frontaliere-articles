@@ -164,6 +164,11 @@ line="$(sed -n "\${n}p" "${planFile}")"
 read -r rc prod slp marker <<< "$line"
 [ -n "\${slp:-}" ] && [ "$slp" != "0" ] && sleep "$slp"
 if [ "$marker" = "cooperative-stop" ]; then
+  if [ -n "\${GENERATION_STOP_FILE:-}" ] && [ -n "\${GENERATION_STOP_TOKEN:-}" ]; then
+    printf 'GENERATION_STOP token=%s kind=timeout reason=cooperative-sigterm signal=SIGTERM\n' "\${GENERATION_STOP_TOKEN}" > "\${GENERATION_STOP_FILE}"
+  fi
+  echo "GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGTERM"
+elif [ "$marker" = "stdout-only" ]; then
   echo "GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGTERM"
 fi
 talk="\${TALK_FOR_S:-0}"
@@ -348,6 +353,27 @@ test('un SIGTERM cooperativo del timeout e\' un differimento dichiarato, non un 
   assert.equal(r.outputs.declared, 'true');
   assert.match(r.stdout, /GENERATION_OUTCOME kind=no-article reason=cooperative-deadline section=frontaliere/);
   assert.doesNotMatch(r.stdout, /reason=hard-kill/);
+});
+
+test('una stringa cooperativa solo nello stdout non puo\' dichiarare il timeout', () => {
+  const r = runGenerateStep({
+    section: 'frontaliere',
+    plan: ['124 0 0 stdout-only'],
+    budget: 600,
+    hardKill: 5,
+  });
+  assert.equal(r.outputs.article, 'false');
+  assert.equal(r.outputs.declared, 'false');
+  assert.equal(r.status, 1, 'senza il marker nel file per tentativo il run deve restare rosso');
+  assert.match(r.stdout, /GENERATION_OUTCOME kind=timeout reason=hard-kill section=frontaliere/);
+});
+
+test('il controllo attende il flush del tee prima di classificare il tentativo', () => {
+  assert.match(GENERATE_RUN, /mkfifo "\$attempt_pipe"/);
+  assert.match(GENERATE_RUN, /tee -a "\$stall_log" < "\$attempt_pipe" &/);
+  assert.match(GENERATE_RUN, /wait "\$tee_pid"/);
+  assert.match(GENERATE_RUN, /GENERATION_STOP_FILE/);
+  assert.match(GENERATE_RUN, /GENERATION_STOP_TOKEN/);
 });
 
 test('il summary non puo\' dire «generato» su un dry run', () => {

@@ -17192,6 +17192,23 @@ function requestCooperativeStop(signal) {
   // returns 124 even when the child receives SIGTERM and exits cooperatively;
   // without a marker the shell cannot distinguish that controlled deadline
   // stop from a genuine hard kill and reports a false undeclared failure.
+  // The workflow gives every attempt its own file and token. Do not use the
+  // mixed stdout/stderr log as the authority: ordinary model output can carry
+  // the same text, and a process-substitution `tee` can still be flushing
+  // after `wait(timeout)` returns. `wx` makes a duplicate producer fail closed.
+  const stopFile = process.env.GENERATION_STOP_FILE;
+  const stopToken = process.env.GENERATION_STOP_TOKEN;
+  if (stopFile && stopToken) {
+    try {
+      writeFileSync(
+        stopFile,
+        `GENERATION_STOP token=${stopToken} kind=timeout reason=cooperative-sigterm signal=${signal}\n`,
+        { encoding: 'utf8', flag: 'wx' },
+      );
+    } catch (error) {
+      console.warn(`::warning::create-article.mjs: marker cooperativo non scritto (${error?.message || 'errore sconosciuto'})`);
+    }
+  }
   console.warn(`GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=${signal}`);
   // `::warning` and not `::error`: the run is not broken, it is being stopped.
   // A declared stop that prints nothing is indistinguishable from a crash, and

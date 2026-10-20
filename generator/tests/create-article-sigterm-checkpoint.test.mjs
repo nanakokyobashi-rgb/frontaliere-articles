@@ -119,6 +119,12 @@ test('#525: la fermata e\' DICHIARATA, non muta', () => {
     'una fermata voluta non e\' un errore: ::error qui produrrebbe un rosso di CI che nessun fix puo\' chiudere (stessa classe di #170)');
   assert.match(ATTIVO, /GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=\$\{signal\}/,
     'il wrapper timeout deve poter distinguere il SIGTERM cooperativo da un SIGKILL hard');
+  assert.match(ATTIVO, /GENERATION_STOP_FILE/,
+    'il log misto non e\' un canale di controllo sufficiente: il marker deve avere un file per tentativo');
+  assert.match(ATTIVO, /GENERATION_STOP_TOKEN/,
+    'il marker deve essere legato al tentativo corrente, non solo a una stringa ripetibile');
+  assert.match(ATTIVO, /flag:\s*\'wx\'/,
+    'un secondo produttore non deve poter sovrascrivere la prova del tentativo');
 });
 
 test('#525: l\'handler resta idempotente — due SIGTERM non raddoppiano l\'uscita', () => {
