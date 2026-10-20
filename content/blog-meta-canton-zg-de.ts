@@ -30,6 +30,9 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.ricorso-federale-espulsione-zugo.title': 'Zug: Beschwerde gegen die Ausweisung vom Bundesgericht abgewiesen',
     'blog.article.ricorso-federale-espulsione-zugo.excerpt': 'Mai 2026: Der Kanton Zug verlängert die Kurzaufenthaltsbewilligung nicht.',
     'blog.article.ricorso-federale-espulsione-zugo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.zugo-governo-direzioni-2027.title': 'Zug: Die Regierung bleibt seit 2027 in der Geschäftsführung',
+    'blog.article.zugo-governo-direzioni-2027.excerpt': 'Für die Amtszeit ab 2027 werden alle Mitglieder der Regierung in Zug die aktuellen Leitungen beibehalten, teilte die Staatskanzlei am Dienstag mit.',
+    'blog.article.zugo-governo-direzioni-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZgDe;
