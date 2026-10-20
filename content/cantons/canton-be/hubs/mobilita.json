@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T00:06:33.415Z",
-  "contentHash": "092cd5ea54b8561b125dc6351a8f5d9b7e6edc2e17747750e56a1e2948d2a9ce",
+  "updatedAt": "2026-10-20T02:10:59.813Z",
+  "contentHash": "89c9ffb4ce6e997c335ea8471a8d3847b5111e811e7eaa012a8fbd83812224cf",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "26",
+          "value": "25",
           "note": "segnalazioni aggiornate: 19 ottobre 2026"
         },
         {
@@ -84,10 +84,10 @@
               "date": "2026-08-12T02:00:00.000Z"
             },
             {
-              "label": "A6 Bern -> Thun Svincolo autostradale Bern-Ostring Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "label": "A6W Diramazione Lattigen -> Port Raccordo autostradale Diramazione Lattigen Situazione: uscita chiusa cantiere, lunghezza [km] 0.3",
               "value": "Chiusura",
-              "detail": "fine prevista: 20 ottobre 2026",
-              "date": "2026-08-19T05:24:00.000Z"
+              "detail": "fine prevista: 12 novembre 2026",
+              "date": "2026-08-28T15:09:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -175,7 +175,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T02:10:59.813Z"
     },
     "en": {
       "canton": "BE",
@@ -185,7 +185,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "26",
+          "value": "25",
           "note": "reports as of 19 October 2026"
         },
         {
@@ -242,10 +242,10 @@
               "date": "2026-08-12T02:00:00.000Z"
             },
             {
-              "label": "A6 Bern -> Thun Svincolo autostradale Bern-Ostring Situazione: raccordo autostradale chiuso in entrata cantiere",
+              "label": "A6W Diramazione Lattigen -> Port Raccordo autostradale Diramazione Lattigen Situazione: uscita chiusa cantiere, lunghezza [km] 0.3",
               "value": "Closure",
-              "detail": "until 20 October 2026",
-              "date": "2026-08-19T05:24:00.000Z"
+              "detail": "until 12 November 2026",
+              "date": "2026-08-28T15:09:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -333,7 +333,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T02:10:59.813Z"
     },
     "de": {
       "canton": "BE",
@@ -343,7 +343,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "26",
+          "value": "25",
           "note": "Meldungen vom 19. Oktober 2026"
         },
         {
@@ -400,10 +400,10 @@
               "date": "2026-08-12T02:00:00.000Z"
             },
             {
-              "label": "A6 Bern -> Thun Anschluss Bern-Ostring Sachlage: Einfahrt gesperrt Baustelle",
+              "label": "A6W Verzweigung Lattigen -> Port Autobahndreieck Verzweigung Lattigen Sachlage: Ausfahrt gesperrt Baustelle, Länge [km] 0.3",
               "value": "Sperrung",
-              "detail": "bis 20. Oktober 2026",
-              "date": "2026-08-19T05:24:00.000Z"
+              "detail": "bis 12. November 2026",
+              "date": "2026-08-28T15:09:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -491,7 +491,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T02:10:59.813Z"
     },
     "fr": {
       "canton": "BE",
@@ -501,7 +501,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "26",
+          "value": "25",
           "note": "signalements au 19 octobre 2026"
         },
         {
@@ -558,10 +558,10 @@
               "date": "2026-08-12T02:00:00.000Z"
             },
             {
-              "label": "A6 Berne -> Thoune Jonction autoroutière Berne-Ostring Situation: entrée fermée travaux",
+              "label": "A6W Echangeur de Lattigen -> Port Echangeur Echangeur de Lattigen Situation: sortie fermée travaux, longueur [km] 0.3",
               "value": "Fermeture",
-              "detail": "jusqu’au 20 octobre 2026",
-              "date": "2026-08-19T05:24:00.000Z"
+              "detail": "jusqu’au 12 novembre 2026",
+              "date": "2026-08-28T15:09:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -649,7 +649,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T02:10:59.813Z"
     }
   }
 }
