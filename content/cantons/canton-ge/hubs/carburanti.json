@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-20T17:48:42.935Z",
-  "contentHash": "1f3d91f263d8b85aa383f508820f18192dc611930ab44c1adb10eb3363c0f665",
+  "updatedAt": "2026-10-20T18:48:28.903Z",
+  "contentHash": "ff4f2a06d92d7bef28153d05499e236599f46a79996adb93b8ba6d4911d0b0fd",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Guasto tecnico dimezza la capacità a Ginevra e Zurigo",
+          "url": "/articoli-ginevra/skyguide-ginevra-capacita-ottobre/",
+          "excerpt": "Skyguide ha ridotto del 50% la capacità dello spazio aereo svizzero.",
+          "date": "2026-10-20T18:26:56.192Z"
+        },
+        {
           "title": "Aeroporto di Ginevra: il TAF approva il regolamento",
           "url": "/articoli-ginevra/taf-regolamento-aeroporto-ginevra/",
           "excerpt": "Il TAF approva il regolamento dell’aeroporto di Ginevra Le misure contestate rispettano le norme ambientali Respinti i ricorsi contro la decisione DETEC del 17",
@@ -94,12 +100,6 @@
           "url": "/articoli-ginevra/unige-natura-equilibrio-mentale/",
           "excerpt": "La Settimana della salute mentale 2026 va dal 5 al 10 ottobre.",
           "date": "2026-10-09T16:43:09.560Z"
-        },
-        {
-          "title": "Comunicato Consiglio di Stato Ginevra: 7 ottobre 2026",
-          "url": "/articoli-ginevra/comunicato-consiglio-stato-ginevra/",
-          "excerpt": "Il comunicato settimanale del Consiglio di Stato del 7 ottobre 2026: il materiale disponibile identifica la pubblicazione, senza altri dettagli.",
-          "date": "2026-10-09T16:16:45.029Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T18:48:28.903Z"
     },
     "en": {
       "canton": "GE",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Technical failure halves capacity in Geneva and Zurich",
+          "url": "/en/geneva-articles/skyguide-geneva-airspace-cut/",
+          "excerpt": "Skyguide reduced Swiss airspace capacity by 50%.",
+          "date": "2026-10-20T18:26:56.192Z"
+        },
+        {
           "title": "Geneva Airport: the TAF approves the regulation",
           "url": "/en/geneva-articles/geneva-airport-taf-ruling/",
           "excerpt": "The TAF approves Geneva Airport's operating regulations The contested measures comply with environmental regulations Appeals against DETEC's decision",
@@ -193,12 +199,6 @@
           "url": "/en/geneva-articles/unige-nature-mental-wellbeing/",
           "excerpt": "Mental Health Week 2026 runs from October 5 to 10.",
           "date": "2026-10-09T16:43:09.560Z"
-        },
-        {
-          "title": "Geneva State Council press release: October 7, 2026",
-          "url": "/en/geneva-articles/geneva-state-council-communique/",
-          "excerpt": "The weekly press release of the Council of State of October 7, 2026: the available material identifies the publication, without further details.",
-          "date": "2026-10-09T16:16:45.029Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T18:48:28.903Z"
     },
     "de": {
       "canton": "GE",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Technische Störung halbiert die Kapazität in Genf und Zürich",
+          "url": "/de/genf-artikel/skyguide-genf-luftraum-stoerung/",
+          "excerpt": "Skyguide hat die Kapazität des Schweizer Luftraums um 50% reduziert.",
+          "date": "2026-10-20T18:26:56.192Z"
+        },
+        {
           "title": "Flughafen Genf: Das TAF genehmigt das Betriebsreglement",
           "url": "/de/genf-artikel/genfer-flughafen-taf-urteil/",
           "excerpt": "Das TAF genehmigt das Betriebsreglement des Flughafens Genf Die beanstandeten Maßnahmen entsprechen den Umweltvorschriften Die Beschwerden gegen",
@@ -292,12 +298,6 @@
           "url": "/de/genf-artikel/unige-natur-psychisches-wohlbefinden/",
           "excerpt": "Die Woche der psychischen Gesundheit 2026 findet vom 5.",
           "date": "2026-10-09T16:43:09.560Z"
-        },
-        {
-          "title": "Mitteilung des Genfer Staatsrats: 7. Oktober 2026",
-          "url": "/de/genf-artikel/mitteilung-genfer-staatsrat/",
-          "excerpt": "Die wöchentliche Mitteilung des Staatsrats vom 7.",
-          "date": "2026-10-09T16:16:45.029Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T18:48:28.903Z"
     },
     "fr": {
       "canton": "GE",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Une panne technique réduit de moitié la capacité à Genève et Zurich",
+          "url": "/fr/articles-geneve/skyguide-geneve-espace-aerien/",
+          "excerpt": "Skyguide a réduit de 50% la capacité de l'espace aérien suisse.",
+          "date": "2026-10-20T18:26:56.192Z"
+        },
+        {
           "title": "Aéroport de Genève : le TAF approuve le règlement",
           "url": "/fr/articles-geneve/aeroport-geneve-arret-taf/",
           "excerpt": "Le TAF approuve le règlement de l’aéroport de Genève Les mesures contestées respectent les normes environnementales Les recours contre la décision du DETEC",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-geneve/unige-nature-sante-mentale/",
           "excerpt": "La Semaine de la santé mentale 2026 va du 5 au 10 octobre.",
           "date": "2026-10-09T16:43:09.560Z"
-        },
-        {
-          "title": "Communiqué du Conseil d'État de Genève : 7 octobre 2026",
-          "url": "/fr/articles-geneve/communique-conseil-etat-geneve/",
-          "excerpt": "Le communiqué hebdomadaire du Conseil d'État du 7 octobre 2026 : le matériel disponible identifie la publication, sans autres détails.",
-          "date": "2026-10-09T16:16:45.029Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T18:48:28.903Z"
     }
   }
 }
