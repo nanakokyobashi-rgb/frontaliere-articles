@@ -2,6 +2,10 @@
   "schema": 1,
   "items": [
     {
+      "path": "public/images/blog/article-beringen-vbsh-fermate-chiuse.webp",
+      "sha256": "ae89e0b089faf858afc0a7926e2f09b558f5e879b9811d9c0aba1d40f4a2b5c9"
+    },
+    {
       "path": "public/images/blog/article-scuola-inoltre-ventanni-formazione-carcere.webp",
       "sha256": "cb4743dcea8998e4508196bdf9061296f0ed1ab2a224bfb7b0160e9a5178a42e"
     },
@@ -12,6 +16,10 @@
     {
       "path": "public/images/blog/article-svp-sciaffusa-candidati-2027.webp",
       "sha256": "bdee3bbd023bb6c1d5d551b1292c36694321e0fa066ca2899e682fb891431e2b"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-beringen-vbsh-fermate-chiuse-480w.webp",
+      "sha256": "2243626df637d9ac23b8cba8d6f3e519de367f953a30279a4accdcfd71c9cd41"
     },
     {
       "path": "public/images/blog/thumbnails/article-scuola-inoltre-ventanni-formazione-carcere-480w.webp",
