@@ -131,6 +131,17 @@ test('publisher R2 propaga immagini recuperate e verdetto aggregati dalla pipeli
   assert.match(publisher.slice(publishImplCall, imageLeaseRelease), /imageLeaseContext,/);
 });
 
+test('publisher: un secondo segnale attende il cleanup bounded delle lease immagini', () => {
+  const publisher = read('scripts/publish-section-pages.mjs');
+  const start = publisher.indexOf('const recordImageLeaseSignal =');
+  const end = publisher.indexOf('const onImageLeaseSigint =', start);
+  assert.ok(start >= 0 && end > start, 'handler dei segnali non trovato');
+  const handler = publisher.slice(start, end);
+  assert.match(handler, /imageLeaseSecondSignalExitStatus/);
+  assert.match(handler, /deferring exit/);
+  assert.doesNotMatch(handler, /process\.exit/);
+});
+
 test('publisher: un marker upload con exit non-zero non viene considerato riuscito e il lease context arriva al comando', async () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'section-pages-upload-result-'));
   const page = pageEntry('canton-ti', 'articoli-ticino/upload-result/index.html', 'article');

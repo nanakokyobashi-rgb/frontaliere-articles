@@ -2876,11 +2876,15 @@ export async function main(
   let imageLeaseContext = null;
   let imageLeaseReleaseAttempted = false;
   let imageLeaseSignalExitStatus = 0;
+  let imageLeaseSecondSignalExitStatus = 0;
   const imageLeaseAbortController = new AbortController();
+  const effectiveImageLeaseExitStatus = () => imageLeaseSecondSignalExitStatus || imageLeaseSignalExitStatus;
   const recordImageLeaseSignal = (exitStatus) => {
     if (imageLeaseSignalExitStatus !== 0) {
-      console.error(`::warning::[${LOG}] second signal received; forcing exit ${exitStatus}`);
-      process.exit(exitStatus);
+      imageLeaseSecondSignalExitStatus ||= exitStatus;
+      console.error(`::warning::[${LOG}] second signal received; deferring exit ${exitStatus} until image lease cleanup completes`);
+      imageLeaseAbortController.abort();
+      return;
     }
     imageLeaseSignalExitStatus = exitStatus;
     imageLeaseAbortController.abort();
@@ -2898,11 +2902,12 @@ export async function main(
     process.removeListener('SIGTERM', onImageLeaseSigterm);
   };
   const imageLeaseSignalError = (cause) => {
-    const signalName = imageLeaseSignalExitStatus === 130 ? 'SIGINT' : 'SIGTERM';
+    const exitStatus = effectiveImageLeaseExitStatus();
+    const signalName = exitStatus === 130 ? 'SIGINT' : 'SIGTERM';
     const causeMessage = cause instanceof Error ? `: ${cause.message}` : '';
     const error = new Error(`[${LOG}] publish interrupted by ${signalName}${causeMessage}`);
     if (cause !== undefined) error.cause = cause;
-    error.exitCode = imageLeaseSignalExitStatus;
+    error.exitCode = exitStatus;
     return error;
   };
   const releaseImageLeases = async () => {
@@ -2939,7 +2944,7 @@ export async function main(
           `publish interrotto e rollback della lease immagini non riuscito: ${interrupted.message}; ${releaseError?.message ?? releaseError}`,
           { cause: interrupted },
         );
-        aggregate.exitCode = imageLeaseSignalExitStatus;
+        aggregate.exitCode = effectiveImageLeaseExitStatus();
         throw aggregate;
       }
       throw interrupted;
@@ -2989,7 +2994,7 @@ export async function main(
           `publish interrotto e rilascio della lease immagini non riuscito: ${interrupted.message}; ${releaseError?.message ?? releaseError}`,
           { cause: interrupted },
         );
-        aggregate.exitCode = imageLeaseSignalExitStatus;
+        aggregate.exitCode = effectiveImageLeaseExitStatus();
         throw aggregate;
       }
       throw interrupted;
@@ -2998,19 +3003,20 @@ export async function main(
   }
   const imageLeaseReleaseError = await releaseImageLeases();
   removeImageLeaseSignalHandlers();
-  if (imageLeaseSignalExitStatus !== 0) {
+  const imageLeaseExitStatus = effectiveImageLeaseExitStatus();
+  if (imageLeaseExitStatus !== 0) {
     summary.published.failures = Math.max(1, Number.isSafeInteger(summary.published.failures) ? summary.published.failures : 0);
-    summary.published.interruptedBy = imageLeaseSignalExitStatus === 130 ? 'SIGINT' : 'SIGTERM';
+    summary.published.interruptedBy = imageLeaseExitStatus === 130 ? 'SIGINT' : 'SIGTERM';
   }
   if (imageLeaseReleaseError) {
     summary.published.failures = (Number.isSafeInteger(summary.published.failures) ? summary.published.failures : 0) + 1;
     console.error(`::error::[${LOG}] rilascio lease immagini fallito: ${imageLeaseReleaseError?.message ?? imageLeaseReleaseError}`);
     writeSummary();
-    return imageLeaseSignalExitStatus || 1;
+    return imageLeaseExitStatus || 1;
   }
-  if (imageLeaseSignalExitStatus !== 0) {
+  if (imageLeaseExitStatus !== 0) {
     writeSummary();
-    return imageLeaseSignalExitStatus;
+    return imageLeaseExitStatus;
   }
   if (summary.published.failures === 0 && deferredLiveRelease) {
     summary.published.manifestDeferred = true;
