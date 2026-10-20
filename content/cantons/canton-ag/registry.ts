@@ -160,4 +160,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'murales-pediatria-ksb-baden',
+ category: 'novita',
+ date: '2026-10-20T12:20:50.431Z',
+ image: '/images/blog/article-murales-pediatria-ksb-baden.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

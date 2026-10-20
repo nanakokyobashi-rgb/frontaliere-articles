@@ -45,6 +45,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.sezione-medicina-nucleare.title': 'Nuklearforum crée la section Médecine nucléaire suisse',
     'blog.article.sezione-medicina-nucleare.excerpt': 'Le Nuklearforum Schweiz crée une nouvelle section Assemblée constitutive le 12 octobre à Olten KSB, PSI et Molecular Partners parmi les fondateurs Focus',
     'blog.article.sezione-medicina-nucleare.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.murales-pediatria-ksb-baden.title': 'KSB Baden : fresques en pédiatrie et aux urgences',
+    'blog.article.murales-pediatria-ksb-baden.excerpt': 'Dix artistes de Paint a Smile ont peint environ 200 mètres carrés au KSB Baden.',
+    'blog.article.murales-pediatria-ksb-baden.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAgFr;

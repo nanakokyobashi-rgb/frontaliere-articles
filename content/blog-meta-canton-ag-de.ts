@@ -45,6 +45,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.sezione-medicina-nucleare.title': 'Nuklearforum gründet die Sektion Nuklearmedizin Schweiz',
     'blog.article.sezione-medicina-nucleare.excerpt': 'Das Nuklearforum Schweiz gründet eine neue Sektion Gründungsversammlung am 12.',
     'blog.article.sezione-medicina-nucleare.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.murales-pediatria-ksb-baden.title': 'KSB Baden: Wandbilder in der Pädiatrie und Notaufnahme',
+    'blog.article.murales-pediatria-ksb-baden.excerpt': 'Zehn Künstler von Paint a Smile haben im KSB Baden etwa 200 Quadratmeter bemalt.',
+    'blog.article.murales-pediatria-ksb-baden.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAgDe;
