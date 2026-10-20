@@ -40,6 +40,7 @@ import {
   cantonRssPublishPlan,
   cantonRssFeedUrlForLocale,
   confirmCantonPageMissing,
+  confirmCantonPageMissingWithSignal,
   createRenderRoot,
   ensureRouteOwnerMeta,
   hubMissingIsFatal,
@@ -1241,6 +1242,27 @@ test('publisher: un 404 transitorio non conferma una pagina come assente', async
   });
   assert.deepEqual(result, { confirmed: false, statuses: ['HTTP 404', 200] });
   assert.equal(calls, 2, 'la conferma si ferma appena la pagina torna presente');
+});
+
+test('publisher: la conferma 404 interrompe probe e retry sul signal della transazione', async () => {
+  const controller = new AbortController();
+  let probeSignal;
+  let probeStarted;
+  const started = new Promise((resolve) => { probeStarted = resolve; });
+  const confirmation = confirmCantonPageMissingWithSignal('https://cdn.test/edge/page', {
+    signal: controller.signal,
+    probeImpl: async (_url, options) => {
+      probeSignal = options.signal;
+      probeStarted();
+      return new Promise(() => {});
+    },
+  });
+
+  await started;
+  controller.abort();
+
+  await assert.rejects(confirmation, (error) => error?.name === 'AbortError');
+  assert.equal(probeSignal, controller.signal, 'la sonda deve ricevere lo stesso signal della conferma');
 });
 
 test('publisher: chiave R2 = quella che il Worker calcola dal path canonico', () => {
