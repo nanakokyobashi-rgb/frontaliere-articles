@@ -6437,7 +6437,7 @@
       "reason": "Producer della superficie HTTP article bodies: estrae i sorgenti del corpus, pubblica namespace completi con revisione e verifica indici/payload. Il sito consuma il contratto JSON via HTTP e non importa questo modulo.",
       "baseline": {
         "site": null,
-        "corpus": "79ea120de8bbfab9",
+        "corpus": "bcfbb4f1abcac73a",
         "alignedAt": "2026-10-20"
       }
     }

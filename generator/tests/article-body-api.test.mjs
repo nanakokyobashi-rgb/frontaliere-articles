@@ -13,6 +13,7 @@ import {
   verifyArticleBodyApiOnDisk,
 } from '../../scripts/lib/article-body-api.mjs';
 import { findNonCanonicalArticleLinks } from '../../scripts/lib/article-link-contract.mjs';
+import { sanitizeDeep } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { metaFieldRegex, unescapeTsValue } from '../scripts/lib/meta-field-regex.mjs';
 
 const articleId = 'example-article';
@@ -25,10 +26,15 @@ const sourceFor = (id = articleId, body = 'First body') => [
   '};',
 ].join('\n');
 
-const metaFor = (id = articleId, title = 'Example title') => ({
+const metaFor = (
+  id = articleId,
+  title = 'Example title',
+  excerpt = 'Short summary.',
+  imageAlt = 'A descriptive image alternative.',
+) => ({
   [`blog.article.${id}.title`]: title,
-  [`blog.article.${id}.excerpt`]: 'Short summary.',
-  [`blog.article.${id}.imageAlt`]: 'A descriptive image alternative.',
+  [`blog.article.${id}.excerpt`]: excerpt,
+  [`blog.article.${id}.imageAlt`]: imageAlt,
 });
 
 function readRealArticleMeta(locale, id) {
@@ -235,6 +241,105 @@ test('payload revisions cover identity, localized metadata, and translations', (
   }), /campo non supportato body21/u);
 });
 
+test('metadata permits an empty excerpt and hashes an absent image alt as explicit null', () => {
+  const meta = metaFor(articleId, 'Example title', '');
+  delete meta[`blog.article.${articleId}.imageAlt`];
+  const payload = buildArticleBodyPayload({
+    section: 'frontaliere',
+    locale: 'it',
+    id: articleId,
+    meta,
+    source: sourceFor(),
+  });
+  const expectedMeta = { title: 'Example title', excerpt: '', imageAlt: null };
+  const expectedCanonical = {
+    schemaVersion: 1,
+    section: 'frontaliere',
+    locale: 'it',
+    id: articleId,
+    meta: expectedMeta,
+    translations: {
+      body1: 'First body',
+      body2: 'Second body',
+      body3: 'Third body',
+      faq: '[{"q":"Question?","a":"Answer."}]',
+    },
+  };
+  const expectedRevision = createHash('sha256')
+    .update(JSON.stringify(expectedCanonical), 'utf8')
+    .digest('hex');
+
+  assert.deepEqual(payload.meta, expectedMeta);
+  assert.deepEqual(Object.keys(payload.meta), ['title', 'excerpt', 'imageAlt']);
+  assert.equal(payload.revision, expectedRevision);
+  assert.equal(articleBodyRevision(payload), expectedRevision);
+
+  for (const imageAlt of [undefined, null, '']) {
+    const optionalAltMeta = metaFor(articleId, 'Example title', '', imageAlt);
+    if (imageAlt === undefined) delete optionalAltMeta[`blog.article.${articleId}.imageAlt`];
+    assert.equal(buildArticleBodyPayload({
+      section: 'frontaliere', locale: 'it', id: articleId, meta: optionalAltMeta, source: sourceFor(),
+    }).meta.imageAlt, null);
+  }
+  assert.equal(buildArticleBodyPayload({
+    section: 'frontaliere', locale: 'it', id: articleId,
+    meta: metaFor(articleId, 'Example title', '', '   '), source: sourceFor(),
+  }).meta.imageAlt, null);
+});
+
+test('metadata rejects missing excerpts, blank titles, and non-text values', () => {
+  const valid = metaFor();
+  const cases = [
+    ['blank title', { ...valid, [`blog.article.${articleId}.title`]: ' \t ' }, /meta title/u],
+    ['non-text title', { ...valid, [`blog.article.${articleId}.title`]: 42 }, /meta title/u],
+    ['missing title', Object.fromEntries(Object.entries(valid).filter(([key]) => !key.endsWith('.title'))), /meta title/u],
+    ['missing excerpt', Object.fromEntries(Object.entries(valid).filter(([key]) => !key.endsWith('.excerpt'))), /meta excerpt/u],
+    ['non-text excerpt', { ...valid, [`blog.article.${articleId}.excerpt`]: null }, /meta excerpt/u],
+    ['non-text image alt', { ...valid, [`blog.article.${articleId}.imageAlt`]: false }, /meta imageAlt/u],
+  ];
+  for (const [label, meta, expected] of cases) {
+    assert.throws(() => buildArticleBodyPayload({
+      section: 'frontaliere', locale: 'it', id: articleId, meta, source: sourceFor(),
+    }), expected, label);
+  }
+});
+
+test('sanitized blank image alternatives become null before hashing and disk verification', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-sanitized-alt-source-'));
+  const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-sanitized-alt-output-'));
+  const localeDir = path.join(root, 'content/frontaliere/it');
+  fs.mkdirSync(localeDir, { recursive: true });
+  fs.writeFileSync(path.join(localeDir, `${articleId}.ts`), sourceFor());
+
+  const sections = [{ section: 'frontaliere', bodyDir: 'content/frontaliere' }];
+  const registries = { frontaliere: [{ id: articleId }] };
+  const metaBySectionLocale = {
+    frontaliere: { it: metaFor(articleId, 'Example title', 'Short summary.', '\u0000') },
+  };
+  const emitted = emitArticleBodyApi({
+    root,
+    outDir,
+    locales: ['it'],
+    sections,
+    registries,
+    publicSections: new Set(['frontaliere']),
+    metaBySectionLocale,
+    sanitize: (value) => sanitizeDeep(value),
+  });
+  const payloadPath = path.join(outDir, `bodies/frontaliere/it/${articleId}.json`);
+  const payload = JSON.parse(fs.readFileSync(payloadPath, 'utf8'));
+  assert.deepEqual(payload.meta, { title: 'Example title', excerpt: 'Short summary.', imageAlt: null });
+  assert.equal(payload.revision, articleBodyRevision(payload));
+  assert.deepEqual(verifyArticleBodyApiOnDisk({
+    outDir,
+    capability: emitted.capability,
+    sections,
+    registries,
+    publicSections: new Set(['frontaliere']),
+    locales: ['it'],
+  }).totals, emitted.totals);
+});
+
 test('section/locale indexes explicitly represent missing sources and inactive sections', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-source-'));
   const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-output-'));
@@ -252,7 +357,12 @@ test('section/locale indexes explicitly represent missing sources and inactive s
     const localeDir = path.join(root, 'content/frontaliere', locale);
     fs.mkdirSync(localeDir, { recursive: true });
     fs.writeFileSync(path.join(localeDir, `${articleId}.ts`), sourceFor());
-    metaBySectionLocale.frontaliere[locale] = metaFor();
+    if (locale === 'en') {
+      metaBySectionLocale.frontaliere[locale] = metaFor(articleId, 'Example title', '', undefined);
+      delete metaBySectionLocale.frontaliere[locale][`blog.article.${articleId}.imageAlt`];
+    } else {
+      metaBySectionLocale.frontaliere[locale] = metaFor();
+    }
   }
   const emitted = emitArticleBodyApi({
     root,
@@ -267,6 +377,8 @@ test('section/locale indexes explicitly represent missing sources and inactive s
   const itIndex = JSON.parse(fs.readFileSync(path.join(outDir, 'bodies/frontaliere/it/index.json'), 'utf8'));
   assert.equal(itIndex.entries[articleId].status, 'available');
   assert.equal(itIndex.entries['missing-article'].status, 'missing');
+  const enPayload = JSON.parse(fs.readFileSync(path.join(outDir, `bodies/frontaliere/en/${articleId}.json`), 'utf8'));
+  assert.deepEqual(enPayload.meta, { title: 'Example title', excerpt: '', imageAlt: null });
   const inactive = JSON.parse(fs.readFileSync(path.join(outDir, 'bodies/canton-example/it/index.json'), 'utf8'));
   assert.equal(inactive.status, 'inactive');
   assert.deepEqual(inactive.entries, {});
