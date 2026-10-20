@@ -57,6 +57,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.ustat-manutenzione-chiusura.title': 'Avis Ustat : maintenance et fermeture administrative',
     'blog.article.ustat-manutenzione-chiusura.excerpt': 'Maintenance : mardi 2 décembre, 20.00-22.00 environ De brèves interruptions sont possibles sur le site Ustat Fermeture des services : l’après-midi du 31 décembre 2025 Ustat',
     'blog.article.ustat-manutenzione-chiusura.imageAlt': 'Office de la statistique et communications administratives cantonales au Tessin',
+    'blog.article.frontalieri-ticino-indagine-salari-2026.title': 'Frontaliers au Tessin : 55,6% se disent moins bien payés',
+    'blog.article.frontalieri-ticino-indagine-salari-2026.excerpt': '1.542 travailleurs ont répondu à l’enquête en mai 2026 55,6% se sentent moins payés à tâches égales Des provinces de Como et Varese : plus de 60mila',
+    'blog.article.frontalieri-ticino-indagine-salari-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTiFr;
