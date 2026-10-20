@@ -35,8 +35,7 @@ function article() {
     content: {
       it: {
         title: 'Titolo deterministico per',
-        excerpt: 'Una descrizione abbastanza lunga da verificare il percorso SEO senza generazione automatica e con una fine di frase completa per il limite.'
-          + ' Dati locali del Ticino.',
+        excerpt: 'Una descrizione lunga da verificare il percorso SEO senza generazione automatica e con una fine di frase completa per il limite.',
       },
     },
     imageAlt: { it: 'Panorama del Ticino' },
@@ -71,7 +70,7 @@ test('la recovery usa il fallback italiano quando una description persistita ini
 
   assert.equal(
     data.seo.description,
-    'Una descrizione abbastanza lunga da verificare il percorso SEO senza generazione automatica e con una fine di frase completa per il limite. Dati locali',
+    'Una descrizione lunga da verificare il percorso SEO senza generazione automatica e con una fine di frase completa per il limite.',
   );
   assert.ok(data.seo.description.length >= 80);
   assert.ok(data.seo.description.length <= 150);

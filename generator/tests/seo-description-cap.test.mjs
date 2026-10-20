@@ -227,7 +227,7 @@ describe('clampSeoDescriptions', () => {
   });
 
   it('lascia intatta una description gia dentro il budget', () => {
-    const fine = 'I numeri di oggi, 9 agosto 2026, per i frontalieri: attese ai valichi, benzina piu economica, cambio franco-euro e nuovi annunci di lavoro in Svizzera.';
+    const fine = 'I numeri di oggi, 9 agosto 2026, per i frontalieri: attese ai valichi, prezzi benzina, cambio franco-euro e nuovi annunci di lavoro in Svizzera.';
     expect(fine.length).toBeLessThan(SEO_DESCRIPTION_MAX + 1);
     const data = { seo: { description: fine } };
     clampSeoDescriptions(data);
@@ -287,7 +287,7 @@ describe('ensureSeoDescriptionMinimum', () => {
 
   it('usa l’excerpt italiano reale quando la description è troppo breve', () => {
     const excerpt =
-      'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi antichi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';
+      'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';
     const data = {
       id: 'fischiava-treno-gorla',
       seo: { description: 'Domenica 11 ottobre 2026 a Gorla Minore' },
@@ -301,7 +301,7 @@ describe('ensureSeoDescriptionMinimum', () => {
 
   it('usa l’excerpt quando il clamp della description primaria scende sotto il floor', () => {
     const excerpt =
-      'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi antichi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';
+      'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';
     const data = {
       id: 'fischiava-treno-gorla',
       seo: { description: 'x'.repeat(SEO_DESCRIPTION_MAX + 1) },
@@ -354,7 +354,7 @@ describe('ensureSeoDescriptionMinimum', () => {
   it('usa l’excerpt se il taglio clause-safe porta la description sotto il floor', () => {
     const description = `${'A'.repeat(78)} per ${'B'.repeat(100)}`;
     const excerpt =
-      'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi antichi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';
+      'La festa ferroviaria di Gorla Minore propone pranzo, trenini e giochi vicino alla vecchia stazione, con programma previsto solo in caso di bel tempo.';
     const data = {
       id: 'fischiava-treno-gorla',
       seo: { description },
