@@ -13529,6 +13529,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.indagine-disparita-salariali-frontalieri.title': 'Frontalieri: il 55,6% percepisce salari inferiori ai residenti',
     'blog.article.indagine-disparita-salariali-frontalieri.excerpt': '1.542 risposte raccolte tra lavoratrici e lavoratori Il 55,6% si sente pagato meno di un residente svizzero La ricerca sarà presentata il 24 ottobre a Varese',
     'blog.article.indagine-disparita-salariali-frontalieri.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lega-misure-lugano.title': 'La Lega chiede misure sui frontalieri a Lugano',
+    'blog.article.lega-misure-lugano.excerpt': 'Il rafforzamento è stato approvato il 29 settembre 2026 Wicht chiede al Municipio di Lugano di sollecitare il Cantone La richiesta riguarda il pacchetto',
+    'blog.article.lega-misure-lugano.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;
