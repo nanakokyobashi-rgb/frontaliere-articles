@@ -39,6 +39,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.voto-comunale-stranieri-berna.title': 'Commissione Berna: voto comunale facoltativo per stranieri',
     'blog.article.voto-comunale-stranieri-berna.excerpt': 'La SAK sostiene il voto comunale volontario per stranieri con permesso di domicilio, 10 anni in Svizzera, 5 nel Cantone, 3 mesi nel comune.',
     'blog.article.voto-comunale-stranieri-berna.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.weissenbach-incidente-quattro-auto.title': 'Weissenbach: cinque feriti nello scontro tra quattro auto',
+    'blog.article.weissenbach-incidente-quattro-auto.excerpt': 'L\'incidente è avvenuto il 19 ottobre 2026 sulla strada principale di Weissenbach, nel Comune di Boltigen: cinque feriti e strada chiusa per quasi due ore.',
+    'blog.article.weissenbach-incidente-quattro-auto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBeIt;

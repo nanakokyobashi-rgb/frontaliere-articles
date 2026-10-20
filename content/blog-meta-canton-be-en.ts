@@ -39,6 +39,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.voto-comunale-stranieri-berna.title': 'Bern Commission: optional municipal voting rights for foreigners',
     'blog.article.voto-comunale-stranieri-berna.excerpt': 'SAK supports voluntary municipal voting for foreigners with a settlement permit, 10 years in Switzerland, 5 in the canton, 3 months in the municipality.',
     'blog.article.voto-comunale-stranieri-berna.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.weissenbach-incidente-quattro-auto.title': 'Weissenbach: five injured in collision involving four cars',
+    'blog.article.weissenbach-incidente-quattro-auto.excerpt': 'The accident occurred on October 19, 2026, on the main road in Weissenbach, in the municipality of Boltigen: five people injured and the road closed for almost two hours.',
+    'blog.article.weissenbach-incidente-quattro-auto.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBeEn;

@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-20T22:08:32.508Z",
-  "contentHash": "a0e5317ae83d21955cda46be9e1194f6b5026c8fa60a862de864e8da857fc31b",
+  "updatedAt": "2026-10-20T22:28:48.616Z",
+  "contentHash": "c60033788a43ef39a245efbddfe737b07dccde18492c46c9e351e774f4ee896f",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Weissenbach: cinque feriti nello scontro tra quattro auto",
+          "url": "/articoli-berna/weissenbach-incidente-quattro-auto/",
+          "excerpt": "L'incidente è avvenuto il 19 ottobre 2026 sulla strada principale di Weissenbach, nel Comune di Boltigen: cinque feriti e strada chiusa per quasi due ore.",
+          "date": "2026-10-20T22:21:08.267Z"
+        },
+        {
           "title": "Commissione Berna: voto comunale facoltativo per stranieri",
           "url": "/articoli-berna/voto-comunale-stranieri-berna/",
           "excerpt": "La SAK sostiene il voto comunale volontario per stranieri con permesso di domicilio, 10 anni in Svizzera, 5 nel Cantone, 3 mesi nel comune.",
@@ -82,12 +88,6 @@
           "url": "/articoli-berna/amministrazione-fiscale-berna-chiusura-2026/",
           "excerpt": "L'Amministrazione fiscale del Canton Berna sospende i servizi dal 23 ottobre alle 16 fino al 1 novembre 2026 per rinnovo tecnologico.",
           "date": "2026-10-19T06:59:44.908Z"
-        },
-        {
-          "title": "Berna mantiene la tassa ecclesiastica per le imprese",
-          "url": "/articoli-berna/berna-tassa-ecclesiastica/",
-          "excerpt": "Il Governo bernese ha preso atto della petizione per rendere volontaria la tassa ecclesiastica delle persone giuridiche.",
-          "date": "2026-10-19T06:36:37.308Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-20T22:28:48.616Z"
     },
     "en": {
       "canton": "BE",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Weissenbach: five injured in collision involving four cars",
+          "url": "/en/bern-articles/weissenbach-four-car-crash/",
+          "excerpt": "The accident occurred on October 19, 2026, on the main road in Weissenbach, in the municipality of Boltigen: five people injured and the road closed for almost two hours.",
+          "date": "2026-10-20T22:21:08.267Z"
+        },
+        {
           "title": "Bern Commission: optional municipal voting rights for foreigners",
           "url": "/en/bern-articles/municipal-voting-foreigners-bern/",
           "excerpt": "SAK supports voluntary municipal voting for foreigners with a settlement permit, 10 years in Switzerland, 5 in the canton, 3 months in the municipality.",
@@ -169,12 +175,6 @@
           "url": "/en/bern-articles/bern-tax-administration-closure-2026/",
           "excerpt": "The tax administration of the Canton of Bern will suspend services from 4 p.m.",
           "date": "2026-10-19T06:59:44.908Z"
-        },
-        {
-          "title": "Bern maintains the church tax for businesses",
-          "url": "/en/bern-articles/bern-church-tax-legal-entities/",
-          "excerpt": "The Bernese government has taken note of the petition to make the church tax for legal entities voluntary.",
-          "date": "2026-10-19T06:36:37.308Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-20T22:28:48.616Z"
     },
     "de": {
       "canton": "BE",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Weissenbach: fünf Verletzte bei einem Zusammenstoß zwischen vier Autos",
+          "url": "/de/bern-artikel/weissenbach-unfall-vier-autos/",
+          "excerpt": "Der Unfall ereignete sich am 19.",
+          "date": "2026-10-20T22:21:08.267Z"
+        },
+        {
           "title": "Kommission Bern: freiwilliges kommunales Stimmrecht für Ausländer",
           "url": "/de/bern-artikel/kommunales-wahlrecht-auslaender-bern/",
           "excerpt": "Die SAK unterstützt das freiwillige kommunale Stimmrecht für Ausländer mit Niederlassungsbewilligung, 10 Jahren Aufenthalt in der Schweiz, 5 Jahren im Kanton und 3 Monaten in der Gemeinde.",
@@ -256,12 +262,6 @@
           "url": "/de/bern-artikel/steuerverwaltung-bern-schliessung-2026/",
           "excerpt": "Die Steuerverwaltung des Kantons Bern setzt die Dienstleistungen vom 23.",
           "date": "2026-10-19T06:59:44.908Z"
-        },
-        {
-          "title": "Bern behält die Kirchensteuer für Unternehmen bei",
-          "url": "/de/bern-artikel/bern-kirchensteuer-juristische-personen/",
-          "excerpt": "Die Berner Regierung hat die Petition zur Freiwilligkeit der Kirchensteuer für juristische Personen zur Kenntnis genommen.",
-          "date": "2026-10-19T06:36:37.308Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-20T22:28:48.616Z"
     },
     "fr": {
       "canton": "BE",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Weissenbach : cinq blessés dans une collision entre quatre voitures",
+          "url": "/fr/articles-berne/weissenbach-accident-quatre-voitures/",
+          "excerpt": "L’accident a eu lieu le 19 octobre 2026 sur la route principale de Weissenbach, dans la commune de Boltigen : cinq blessés et route fermée pendant près de deux heures.",
+          "date": "2026-10-20T22:21:08.267Z"
+        },
+        {
           "title": "Commission de Berne : droit de vote communal facultatif pour les étrangers",
           "url": "/fr/articles-berne/vote-communal-etrangers-berne/",
           "excerpt": "La SAK soutient le droit de vote communal facultatif pour les étrangers titulaires d’un permis d’établissement, ayant vécu 10 ans en Suisse, 5 ans dans le canton et 3 mois dans la commune.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-berne/administration-fiscale-berne-fermeture-2026/",
           "excerpt": "L'Administration fiscale du canton de Berne suspend ses services du 23 octobre à 16 h au 1er novembre 2026 pour une mise à niveau technologique.",
           "date": "2026-10-19T06:59:44.908Z"
-        },
-        {
-          "title": "Berne maintient l'impôt ecclésiastique pour les entreprises",
-          "url": "/fr/articles-berne/berne-taxe-eglise-personnes-morales/",
-          "excerpt": "Le Gouvernement bernois a pris acte de la pétition visant à rendre volontaire l'impôt ecclésiastique des personnes morales.",
-          "date": "2026-10-19T06:36:37.308Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-20T22:28:48.616Z"
     }
   }
 }
