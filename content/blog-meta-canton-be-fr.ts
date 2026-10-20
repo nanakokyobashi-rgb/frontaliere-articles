@@ -39,6 +39,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.voto-comunale-stranieri-berna.title': 'Commission de Berne : droit de vote communal facultatif pour les étrangers',
     'blog.article.voto-comunale-stranieri-berna.excerpt': 'La SAK soutient le droit de vote communal facultatif pour les étrangers titulaires d’un permis d’établissement, ayant vécu 10 ans en Suisse, 5 ans dans le canton et 3 mois dans la commune.',
     'blog.article.voto-comunale-stranieri-berna.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.weissenbach-incidente-quattro-auto.title': 'Weissenbach : cinq blessés dans une collision entre quatre voitures',
+    'blog.article.weissenbach-incidente-quattro-auto.excerpt': 'L’accident a eu lieu le 19 octobre 2026 sur la route principale de Weissenbach, dans la commune de Boltigen : cinq blessés et route fermée pendant près de deux heures.',
+    'blog.article.weissenbach-incidente-quattro-auto.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBeFr;

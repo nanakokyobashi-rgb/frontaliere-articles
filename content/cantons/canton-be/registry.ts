@@ -138,4 +138,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'weissenbach-incidente-quattro-auto',
+ category: 'pratico',
+ date: '2026-10-20T22:21:08.267Z',
+ image: '/images/blog/article-weissenbach-incidente-quattro-auto.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
