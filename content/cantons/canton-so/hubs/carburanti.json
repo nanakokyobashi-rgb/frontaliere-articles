@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-20T06:19:46.005Z",
-  "contentHash": "c6f0af3e4e606352e098aadafd309ea7108de37f7053c60733469c97ab653dcb",
+  "updatedAt": "2026-10-20T15:13:18.424Z",
+  "contentHash": "67f414596f51c1ba89ced12d552e504fc18030292600302d3c17d2b7dc2fd883",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Governo di Soletta: decisioni del 20 ottobre 2026",
+          "url": "/articoli-soletta/governo-soletta-ottobre-2026/",
+          "excerpt": "NEST, formazione dei docenti, FamEL, polizia a Lugano e dossier al Consiglio cantonale tra i punti della seduta del 20 ottobre 2026.",
+          "date": "2026-10-20T15:04:51.328Z"
+        },
+        {
           "title": "Soletta: Governo approva preventivo 2027, sessione settembre e inchiesta soH",
           "url": "/articoli-soletta/soletta-parlamento-budget-2027-inchiesta-soh/",
           "excerpt": "Il Regierungsrat approva il Voranschlag 2027; Kantonsrat in sessione 1-9 settembre con 51 oggetti; GPK pubblica rapporto su irregolarità alla soH.",
@@ -94,12 +100,6 @@
           "url": "/articoli-soletta/soletta-progetti-trasporto-governo/",
           "excerpt": "Soletta sostiene «Verkehr ’45» e chiede correzioni.",
           "date": "2026-10-08T11:40:05.556Z"
-        },
-        {
-          "title": "A5 a Luterbach: quattro rampe chiuse a ottobre",
-          "url": "/articoli-soletta/luterbach-a5-rampe-notte/",
-          "excerpt": "A Luterbach, sulla A5, la viabilità cambia nell'ottobre 2026: quattro rampe saranno chiuse di notte tra il 12 e il 20 ottobre. Le deviazioni saranno segnalate.",
-          "date": "2026-10-08T11:26:57.068Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-20T06:19:46.005Z"
+      "updatedAt": "2026-10-20T15:13:18.424Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Government of Solothurn: decisions of October 20, 2026",
+          "url": "/en/solothurn-articles/solothurn-government-october-2026/",
+          "excerpt": "NEST, teacher training, FamEL, police in Lugano and dossiers before the Cantonal Council among the items on the agenda for the meeting of October 20, 2026.",
+          "date": "2026-10-20T15:04:51.328Z"
+        },
+        {
           "title": "Soleta: Government approves 2027 budget, September session and soH investigation",
           "url": "/en/solothurn-articles/solothurn-parliament-budget-2027-soh-investigation/",
           "excerpt": "Regierungsrat approves Voranschlag 2027; Kantonsrat in session 1-9 September with 51 items; GPK publishes report on soH irregularities.",
@@ -192,12 +198,6 @@
           "title": "Solothurn: Government calls for corrections to transport projects",
           "url": "/en/solothurn-articles/solothurn-transport-projects-government/",
           "date": "2026-10-08T11:40:05.556Z"
-        },
-        {
-          "title": "A5 at Luterbach: four ramps closed in October",
-          "url": "/en/solothurn-articles/luterbach-a5-night-ramps/",
-          "excerpt": "At Luterbach, on the A5, traffic patterns will change in October 2026: four ramps will be closed at night between October 12 and 20. Detours will be signposted.",
-          "date": "2026-10-08T11:26:57.068Z"
         }
       ],
       "links": [
@@ -210,7 +210,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-20T06:19:46.005Z"
+      "updatedAt": "2026-10-20T15:13:18.424Z"
     },
     "de": {
       "canton": "SO",
@@ -269,6 +269,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Regierung des Kantons Solothurn: Beschlüsse vom 20. Oktober 2026",
+          "url": "/de/solothurn-artikel/solothurn-regierungsrat-oktober-2026/",
+          "excerpt": "NEST, die Ausbildung der Lehrpersonen, FamEL, die Polizei in Lugano und ein Dossier für den Kantonsrat gehören zu den Traktanden der Sitzung vom 20.",
+          "date": "2026-10-20T15:04:51.328Z"
+        },
+        {
           "title": "Solothurn genehmigt Budget 2027, SOH-Untersuchung",
           "url": "/de/solothurn-artikel/solothurn-parlament-budget-2027-untersuchung-soh/",
           "excerpt": "Der Regierungsrat genehmigt den Voranschlag 2027; Kantonsrat in der Sitzung vom 1.",
@@ -290,12 +296,6 @@
           "title": "Solothurn: Regierung fordert Korrekturen bei Verkehrsprojekten",
           "url": "/de/solothurn-artikel/solothurn-verkehrsprojekte-regierung/",
           "date": "2026-10-08T11:40:05.556Z"
-        },
-        {
-          "title": "A5 bei Luterbach: vier Rampen im Oktober gesperrt",
-          "url": "/de/solothurn-artikel/luterbach-a5-nachtsperren/",
-          "excerpt": "Bei Luterbach ändert sich auf der A5 im Oktober 2026 die Verkehrsführung: Vier Rampen werden zwischen dem 12. und 20. Oktober nachts gesperrt. Die Umleitungen werden ausgeschildert.",
-          "date": "2026-10-08T11:26:57.068Z"
         }
       ],
       "links": [
@@ -308,7 +308,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-20T06:19:46.005Z"
+      "updatedAt": "2026-10-20T15:13:18.424Z"
     },
     "fr": {
       "canton": "SO",
@@ -367,6 +367,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Gouvernement de Soleure : décisions du 20 octobre 2026",
+          "url": "/fr/articles-soleure/gouvernement-soleure-octobre-2026/",
+          "excerpt": "NEST, formation des enseignants, Famel, police à Lugano et dossier au Conseil cantonal entre les points de la séance du 20 octobre 2026.",
+          "date": "2026-10-20T15:04:51.328Z"
+        },
+        {
           "title": "Soleure: le gouvernement approuve le devis 2027 et la session de septembre",
           "url": "/fr/articles-soleure/soleure-parlement-budget-2027-enquete-soh/",
           "excerpt": "Le Regierungsrat approuve le Voranschlag 2027 ; Kantonsrat en session 1-9 septembre avec 51 objets ; GPK publie un rapport sur les irrégularités à la soH.",
@@ -389,12 +395,6 @@
           "url": "/fr/articles-soleure/soleure-projets-transport-gouvernement/",
           "excerpt": "Soleure soutient « Verkehr ’45 » et demande des corrections.",
           "date": "2026-10-08T11:40:05.556Z"
-        },
-        {
-          "title": "A5 à Luterbach : quatre bretelles fermées en octobre",
-          "url": "/fr/articles-soleure/luterbach-a5-rampes-nuit/",
-          "excerpt": "À Luterbach, sur l’A5, la circulation change en octobre 2026 : quatre bretelles seront fermées de nuit entre le 12 et le 20 octobre. Les déviations seront signalées.",
-          "date": "2026-10-08T11:26:57.068Z"
         }
       ],
       "links": [
@@ -407,7 +407,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-20T06:19:46.005Z"
+      "updatedAt": "2026-10-20T15:13:18.424Z"
     }
   }
 }
