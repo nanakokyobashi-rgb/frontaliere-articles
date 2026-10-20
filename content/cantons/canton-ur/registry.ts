@@ -72,4 +72,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'axenstrasse-chiusa-quattro-notti',
+ category: 'pratico',
+ date: '2026-10-20T09:56:09.960Z',
+ image: '/images/blog/article-axenstrasse-chiusa-quattro-notti.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['UR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

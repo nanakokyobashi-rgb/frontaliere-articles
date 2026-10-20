@@ -21,6 +21,9 @@ const blogMetaCantonUrIt: Record<string, string> = {
     'blog.article.silenen-muri-secco.title': 'Silenen: Landrat approva CHF 207.000 per muri a secco',
     'blog.article.silenen-muri-secco.excerpt': 'Il Landrat approva CHF 207.000 senza voti contrari 3,6 km di muri storici nell\'area di Silenen Circa il 60% presenta un rischio per la sicurezza I lavori',
     'blog.article.silenen-muri-secco.imageAlt': 'Muri a secco storici nell\'area di Hinter- e Vorderried a Silenen, nel Canton Uri',
+    'blog.article.axenstrasse-chiusa-quattro-notti.title': 'Axenstrasse chiusa per quattro notti dal 2 al 6 novembre',
+    'blog.article.axenstrasse-chiusa-quattro-notti.excerpt': 'La Axenstrasse sarà completamente chiusa dal 2 al 6 novembre, ogni notte dalle 22 alle 5, per lavori di manutenzione.',
+    'blog.article.axenstrasse-chiusa-quattro-notti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonUrIt;

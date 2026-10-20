@@ -9,6 +9,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'uri-budget-2027-surplus': { it: 'uri-budget-2027-surplus', en: 'uri-2027-budget-with-a-surplus-of-chf-1-1-million', de: 'uri-budget-2027-ueberschuss', fr: 'uri-budget-2027-excedent' },
  'eventi-weekend-uri': { it: 'eventi-weekend-uri', en: 'weekend-events-uri', de: 'wochenend-veranstaltungen-uri', fr: 'evenements-week-end-uri' },
  'silenen-muri-secco': { it: 'silenen-muri-secco', en: 'silenen-dry-stone-walls', de: 'silenen-trockenmauern-sanierung', fr: 'silenen-murs-pierre-seche' },
+ 'axenstrasse-chiusa-quattro-notti': { it: 'axenstrasse-chiusa-quattro-notti', en: 'axenstrasse-closed-four-nights', de: 'axenstrasse-vier-naechte-gesperrt', fr: 'axenstrasse-fermee-quatre-nuits' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
