@@ -165,6 +165,9 @@ export const CONTENT_GATES = [
   // 20 articoli piu' recenti: il recupero non puo' introdurre un dialetto SEO.
   'generator/tests/seo-entry-equivalence.test.mjs',
   'generator/tests/article-body-wordcount.test.mjs',
+  // Le sei guide per educatori devono restare allineate alle prove ufficiali
+  // LIS e ai titoli localizzati: i produttori scrivono direttamente su main.
+  'generator/tests/educator-guides-evidence.test.mjs',
   'generator/tests/article-fabrication-guard.test.mjs',
   'generator/tests/article-slug-i18n.test.mjs',
   'generator/tests/article-unrendered-markup.test.mjs',

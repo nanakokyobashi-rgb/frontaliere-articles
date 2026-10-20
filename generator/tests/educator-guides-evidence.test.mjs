@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, it } from 'node:test';
+import { metaFieldRegex, unescapeTsValue } from '../scripts/lib/meta-field-regex.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const LOCALES = ['it', 'en', 'de', 'fr'];
@@ -48,10 +49,19 @@ const SALARY_FACTS = {
 
 function readStringField(filePath, key) {
   const source = fs.readFileSync(filePath, 'utf8');
+  const match = key.match(/^blog\.article\.(.+)\.([^.]+)$/);
+  assert.ok(match, `invalid metadata key ${key}`);
+  const [, id, field] = match;
+  if (['title', 'excerpt', 'imageAlt'].includes(field)) {
+    for (const [, foundId, value] of source.matchAll(metaFieldRegex(field))) {
+      if (foundId === id) return unescapeTsValue(value);
+    }
+    assert.fail(`missing ${key} in ${path.relative(ROOT, filePath)}`);
+  }
+
   const line = source.split(/\r?\n/).find((candidate) => candidate.includes(key));
   assert.ok(line, `missing ${key} in ${path.relative(ROOT, filePath)}`);
-  const colon = line.indexOf(':');
-  const literal = line.slice(colon + 1).trim().replace(/,$/, '');
+  const literal = line.slice(line.indexOf(':') + 1).trim().replace(/,$/, '');
   return JSON.parse(literal);
 }
 
