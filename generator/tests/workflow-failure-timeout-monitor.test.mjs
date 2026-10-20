@@ -181,6 +181,8 @@ case "$2" in
     printf '%s' '{"workflow_runs":[]}' ;;
   *"actions/runs?status=cancelled"*)
     printf '%s' '${JSON.stringify({ workflow_runs: [run] })}' ;;
+  *"actions/runs?status=startup_failure"*)
+    printf '%s' '{"workflow_runs":[]}' ;;
   *"actions/runs?status=failure"*)
     printf '%s' '{"workflow_runs":[]}' ;;
   "repos/o/r/actions/runs/456/jobs?per_page=100")
