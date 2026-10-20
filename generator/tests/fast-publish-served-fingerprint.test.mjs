@@ -76,13 +76,11 @@ function response(body, headers = {}) {
 }
 
 const CURL_STUB_SOURCE = [
-  '#!/usr/bin/env node',
-  "import { writeFileSync } from 'node:fs';",
-  'const args = process.argv.slice(2);',
-  "writeFileSync(process.env.CURL_ARGS_FILE, JSON.stringify(args));",
-  "writeFileSync(args[args.indexOf('-D') + 1], process.env.CURL_HEADERS);",
-  "writeFileSync(args[args.indexOf('-o') + 1], process.env.CURL_BODY);",
-  "process.stdout.write(process.env.CURL_STATUS);",
+  '#!/bin/sh',
+  'printf \'["-s","-L","--max-time","%s","-H","%s","-D","%s","-o","%s","-w","%%{http_code}","%s"]\' "$4" "$6" "$8" "${10}" "${13}" > "$CURL_ARGS_FILE"',
+  'printf \'%s\' "$CURL_HEADERS" > "$8"',
+  'printf \'%s\' "$CURL_BODY" > "${10}"',
+  'printf \'%s\' "$CURL_STATUS"',
 ].join('\n');
 
 function runCurlCli(record, {
@@ -116,7 +114,7 @@ function runCurlCli(record, {
         '--timeout-seconds',
         '5',
         '--probe-timeout-seconds',
-        '0.5',
+        '2',
       ],
       {
         cwd: resolve(here, '../..'),
@@ -338,7 +336,7 @@ test('il CLI usa curl senza User-Agent esplicito, legge header/body e non interp
   assert.ok(result.curlArgs.includes('-s'));
   assert.ok(result.curlArgs.includes('-L'));
   assert.equal(result.curlArgs[result.curlArgs.indexOf('-H') + 1], 'Cache-Control: no-cache');
-  assert.equal(result.curlArgs[result.curlArgs.indexOf('--max-time') + 1], '0.5');
+  assert.equal(result.curlArgs[result.curlArgs.indexOf('--max-time') + 1], '2');
   assert.equal(result.curlArgs.at(-1), result.effectiveUrl);
   assert.equal(result.markerExists, false);
 });
