@@ -53,7 +53,9 @@ set troncato è il caso peggiore proprio perché non fallisce.
    ma per un fix di pattern (regex, guard, soglia, selettore) cerca i gemelli e
    sweepali nella stessa PR, oppure giustifica ogni gemello non toccato. Un fix
    mono-file su un antipattern condiviso non è "rispetto dello scope": è un fix
-   incompleto, e costa due cicli di review.
+   incompleto, e costa due cicli di review. Per parser e guard, prova anche le
+   rappresentazioni reali del consumer (case, Unicode, prefissi/bullet, header
+   duplicati o misti) e verifica l'invariante dopo la normalizzazione.
 6. **Un valore condiviso ha UNA sorgente.** Niente regex o costanti duplicate
    fra uno script e lo YAML che lo invoca: se non possono importarsi, il legame
    va coperto da un test (è esattamente ciò che fa
