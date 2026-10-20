@@ -33,6 +33,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.svp-sciaffusa-candidati-2027.title': 'L\'UDC de Schaffhouse désigne ses candidats pour les élections de 2027',
     'blog.article.svp-sciaffusa-candidati-2027.excerpt': 'L\'assemblée des délégués à Oberhallau a choisi Andreas Gnädinger pour le Conseil des États et Thomas Hurter et Thomas Müller pour le Conseil national.',
     'blog.article.svp-sciaffusa-candidati-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.beringen-vbsh-fermate-chiuse.title': 'Distributeur automatique de billets explosé à Beringen : trois arrêts VBSH non desservis',
+    'blog.article.beringen-vbsh-fermate-chiuse.excerpt': 'Après les explosions de la matinée à Enge, VBSH ne dessert pas Enge, Hägli et Sonne jusqu’à 13:30.',
+    'blog.article.beringen-vbsh-fermate-chiuse.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

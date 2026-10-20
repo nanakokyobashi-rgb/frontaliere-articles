@@ -397,6 +397,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-beringen-vbsh-fermate-chiuse': {
+    title: 'Bancomat esploso a Beringen: tre fermate VBSH non servite',
+    description: 'A Beringen, dopo le esplosioni a Enge, VBSH non serve tre fermate fino alle 13:30; la Schaffhauserstrasse resta chiusa nella mattina del 19 ottobre 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, bancomat, esploso, beringen, fermate',
+    ogTitle: 'Beringen: tre fermate VBSH non servite',
+    ogDescription: 'Le esplosioni di un Bancomat nella Beringer Enge hanno portato alla sospensione fino alle 13:30 delle fermate VBSH Enge, Hägli e Sonne. La Schaffhauserstrasse risulta ancora chiusa nel bollettino delle 11:30 del 19 ottobre 2026.',
+    canonicalPath: '/articoli-sciaffusa/beringen-vbsh-fermate-chiuse/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bancomat esploso a Beringen: tre fermate VBSH non servite",
+      "description": "A Beringen, dopo le esplosioni a Enge, VBSH non serve tre fermate fino alle 13:30; la Schaffhauserstrasse resta chiusa nella mattina del 19 ottobre 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-beringen-vbsh-fermate-chiuse.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-20T06:41:00+00:00",
+      "dateModified": "2026-10-20T06:41:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/beringen-vbsh-fermate-chiuse/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

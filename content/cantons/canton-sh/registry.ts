@@ -116,4 +116,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'beringen-vbsh-fermate-chiuse',
+ category: 'pratico',
+ date: '2026-10-20T06:41:00.427Z',
+ image: '/images/blog/article-beringen-vbsh-fermate-chiuse.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

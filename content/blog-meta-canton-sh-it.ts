@@ -33,6 +33,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.svp-sciaffusa-candidati-2027.title': 'SVP Sciaffusa definisce candidati per le elezioni 2027',
     'blog.article.svp-sciaffusa-candidati-2027.excerpt': 'L\'assemblea dei delegati a Oberhallau ha scelto Andreas Gnädinger per il Consiglio degli Stati e Thomas Hurter e Thomas Müller per il Nazionale.',
     'blog.article.svp-sciaffusa-candidati-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.beringen-vbsh-fermate-chiuse.title': 'Bancomat esploso a Beringen: tre fermate VBSH non servite',
+    'blog.article.beringen-vbsh-fermate-chiuse.excerpt': 'Dopo le esplosioni della mattina a Enge, VBSH non serve Enge, Hägli e Sonne fino alle 13:30.',
+    'blog.article.beringen-vbsh-fermate-chiuse.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

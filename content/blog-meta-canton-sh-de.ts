@@ -33,6 +33,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.svp-sciaffusa-candidati-2027.title': 'SVP Schaffhausen bestimmt Kandidaten für die Wahlen 2027',
     'blog.article.svp-sciaffusa-candidati-2027.excerpt': 'Die Delegiertenversammlung in Oberhallau hat Andreas Gnädinger für den Ständerat sowie Thomas Hurter und Thomas Müller für den Nationalrat gewählt.',
     'blog.article.svp-sciaffusa-candidati-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.beringen-vbsh-fermate-chiuse.title': 'Bancomat in Beringen explodiert: drei VBSH-Haltestellen nicht bedient',
+    'blog.article.beringen-vbsh-fermate-chiuse.excerpt': 'Nach den Explosionen am Morgen in Enge werden die Haltestellen Enge, Hägli und Sonne von VBSH bis 13:30 Uhr nicht bedient.',
+    'blog.article.beringen-vbsh-fermate-chiuse.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

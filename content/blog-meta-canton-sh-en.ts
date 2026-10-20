@@ -33,6 +33,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.svp-sciaffusa-candidati-2027.title': 'SVP Schaffhausen selects candidates for the 2027 elections',
     'blog.article.svp-sciaffusa-candidati-2027.excerpt': 'The delegates’ assembly in Oberhallau chose Andreas Gnädinger for the Council of States and Thomas Hurter and Thomas Müller for the National Council.',
     'blog.article.svp-sciaffusa-candidati-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.beringen-vbsh-fermate-chiuse.title': 'ATM exploded in Beringen: three VBSH stops not served',
+    'blog.article.beringen-vbsh-fermate-chiuse.excerpt': 'After the explosions this morning at Enge, VBSH is not serving Enge, Hägli and Sonne until 13:30.',
+    'blog.article.beringen-vbsh-fermate-chiuse.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;
