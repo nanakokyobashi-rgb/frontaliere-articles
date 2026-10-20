@@ -1335,7 +1335,7 @@
     {
       "path": "AGENTS.md",
       "mode": "adapted",
-      "reason": "Stessa struttura del contratto del sito, con i non-negoziabili del corpus: mai importare content/ nel sito, engine in packages/articles del SITO, SiteShellContract+host/ insieme e glob obbligatorio in node --test. 2026-10-20 (#14175): site AGENTS.md #6 richiede test delle rappresentazioni consumer al confine parser/guard e dell'invariante dopo normalizzazione; qui l'adattamento è nell'item #5, insieme allo sweep dei sibling. Il richiamo CWV (#5001) resta non applicabile: il corpus non ha Reference Docs né docs/. Le variazioni future del sito restano osservate dalla baseline adapted.",
+      "reason": "Stessa struttura del contratto del sito, con i non-negoziabili del corpus: mai importare content/ nel sito, engine in packages/articles del SITO, SiteShellContract+host/ insieme e glob obbligatorio in node --test. Il contratto condiviso richiede test delle rappresentazioni consumer al confine parser/guard e dell'invariante dopo normalizzazione; qui l'adattamento è nell'item #5, insieme allo sweep dei sibling. Il richiamo CWV (#5001) resta non applicabile: il corpus non ha Reference Docs né docs/. Le variazioni future del sito restano osservate dalla baseline adapted.",
       "baseline": {
         "site": "7d7fc256b858ca13",
         "corpus": "dfa73cae2fda5969",
@@ -1346,7 +1346,7 @@
     {
       "path": "ISSUES.md",
       "mode": "adapted",
-      "reason": "Contratto fixer adattato alle categorie corpus e al gate node --test; la catena 429 cita i numeri del sito perché spiega l'obbligo FIX_OUTCOME. 2026-10-20 (#14175): il namespace resta riservato al terminale issue-fix.yml; ricorrenze e recovery manuali documentano prove senza marker, come nell'adattamento corpus.",
+      "reason": "Contratto fixer adattato alle categorie corpus e al gate node --test; la catena 429 cita i numeri del sito perché spiega l'obbligo FIX_OUTCOME. Il namespace resta riservato al terminale issue-fix.yml; ricorrenze e recovery manuali documentano prove senza marker, come nell'adattamento corpus.",
       "baseline": {
         "site": "ca1f58b703f38b36",
         "corpus": "7cdcf8c158a68181",
