@@ -30,6 +30,9 @@ const blogMetaCantonGeEn: Record<string, string> = {
     'blog.article.taf-regolamento-aeroporto-ginevra.title': 'Geneva Airport: the TAF approves the regulation',
     'blog.article.taf-regolamento-aeroporto-ginevra.excerpt': 'The TAF approves Geneva Airport\'s operating regulations The contested measures comply with environmental regulations Appeals against DETEC\'s decision',
     'blog.article.taf-regolamento-aeroporto-ginevra.imageAlt': 'Geneva Airport and nearby communes',
+    'blog.article.skyguide-ginevra-capacita-ottobre.title': 'Technical failure halves capacity in Geneva and Zurich',
+    'blog.article.skyguide-ginevra-capacita-ottobre.excerpt': 'Skyguide reduced Swiss airspace capacity by 50%.',
+    'blog.article.skyguide-ginevra-capacita-ottobre.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGeEn;

@@ -105,4 +105,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'skyguide-ginevra-capacita-ottobre',
+ category: 'novita',
+ date: '2026-10-20T18:26:56.192Z',
+ image: '/images/blog/article-skyguide-ginevra-capacita-ottobre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GE', 'ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -12,6 +12,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'cantieri-mobilita-ginevra': { it: 'cantieri-mobilita-ginevra', en: 'geneva-mobility-construction', de: 'genf-mobilitaetsbaustellen', fr: 'chantiers-mobilite-geneve' },
  'indagini-imprese-ginevrine': { it: 'indagini-imprese-ginevrine', en: 'geneva-business-surveys', de: 'konjunkturumfragen-genfer-unternehmen', fr: 'enquetes-conjoncture-entreprises-genevoises' },
  'taf-regolamento-aeroporto-ginevra': { it: 'taf-regolamento-aeroporto-ginevra', en: 'geneva-airport-taf-ruling', de: 'genfer-flughafen-taf-urteil', fr: 'aeroport-geneve-arret-taf' },
+ 'skyguide-ginevra-capacita-ottobre': { it: 'skyguide-ginevra-capacita-ottobre', en: 'skyguide-geneva-airspace-cut', de: 'skyguide-genf-luftraum-stoerung', fr: 'skyguide-geneve-espace-aerien' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -30,6 +30,9 @@ const blogMetaCantonGeIt: Record<string, string> = {
     'blog.article.taf-regolamento-aeroporto-ginevra.title': 'Aeroporto di Ginevra: il TAF approva il regolamento',
     'blog.article.taf-regolamento-aeroporto-ginevra.excerpt': 'Il TAF approva il regolamento dell’aeroporto di Ginevra Le misure contestate rispettano le norme ambientali Respinti i ricorsi contro la decisione DETEC del 17',
     'blog.article.taf-regolamento-aeroporto-ginevra.imageAlt': 'Aeroporto di Ginevra e comuni limitrofi sullo sfondo',
+    'blog.article.skyguide-ginevra-capacita-ottobre.title': 'Guasto tecnico dimezza la capacità a Ginevra e Zurigo',
+    'blog.article.skyguide-ginevra-capacita-ottobre.excerpt': 'Skyguide ha ridotto del 50% la capacità dello spazio aereo svizzero.',
+    'blog.article.skyguide-ginevra-capacita-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGeIt;

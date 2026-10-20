@@ -30,6 +30,9 @@ const blogMetaCantonGeDe: Record<string, string> = {
     'blog.article.taf-regolamento-aeroporto-ginevra.title': 'Flughafen Genf: Das TAF genehmigt das Betriebsreglement',
     'blog.article.taf-regolamento-aeroporto-ginevra.excerpt': 'Das TAF genehmigt das Betriebsreglement des Flughafens Genf Die beanstandeten Maßnahmen entsprechen den Umweltvorschriften Die Beschwerden gegen',
     'blog.article.taf-regolamento-aeroporto-ginevra.imageAlt': 'Flughafen Genf und nahe gelegene Gemeinden',
+    'blog.article.skyguide-ginevra-capacita-ottobre.title': 'Technische Störung halbiert die Kapazität in Genf und Zürich',
+    'blog.article.skyguide-ginevra-capacita-ottobre.excerpt': 'Skyguide hat die Kapazität des Schweizer Luftraums um 50% reduziert.',
+    'blog.article.skyguide-ginevra-capacita-ottobre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGeDe;

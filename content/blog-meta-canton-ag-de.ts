@@ -48,6 +48,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.murales-pediatria-ksb-baden.title': 'KSB Baden: Wandbilder in der Pädiatrie und Notaufnahme',
     'blog.article.murales-pediatria-ksb-baden.excerpt': 'Zehn Künstler von Paint a Smile haben im KSB Baden etwa 200 Quadratmeter bemalt.',
     'blog.article.murales-pediatria-ksb-baden.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.maja-riniker-eletta-governo-argovia.title': 'Maja Riniker mit 70.137 Stimmen in den Aargauer Regierungsrat gewählt',
+    'blog.article.maja-riniker-eletta-governo-argovia.excerpt': 'Die FDP-Grossrätin aus Suhr erhält den Sitz von Stephan Attiger; Wahlbeteiligung von 21,01% in den 196 Gemeinden.',
+    'blog.article.maja-riniker-eletta-governo-argovia.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAgDe;
