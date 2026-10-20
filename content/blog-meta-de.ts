@@ -13536,6 +13536,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.interrogazione-wicht-clausola-regionale.title': 'Lugano: Anfrage zu Schutzklausel und Grenzgängern',
     'blog.article.interrogazione-wicht-clausola-regionale.excerpt': 'Omar Wicht befragt die Gemeinde Lugano im September 2026 genehmigte Regionalklausel Vorübergehende Einwanderungsbeschränkungen unter den vorgesehenen Maßnahmen Möglich',
     'blog.article.interrogazione-wicht-clausola-regionale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.ricerca-cisl-frontalieri-2026.title': 'CISL-Studie: Kaufkraft der Grenzgänger sinkt',
+    'blog.article.ricerca-cisl-frontalieri-2026.excerpt': '1.542 im Mai 2026 gesammelte Antworten 31,7% mehr als eineinhalb Stunden unterwegs 87,8% halten die «Gesundheitssteuer» für nachteilig 76,9% ziehen nicht in Betracht',
+    'blog.article.ricerca-cisl-frontalieri-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

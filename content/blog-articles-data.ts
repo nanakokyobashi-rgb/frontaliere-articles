@@ -45631,6 +45631,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'ricerca-cisl-frontalieri-2026',
+ category: 'pratico',
+ date: '2026-10-20T19:40:19.854Z',
+ image: '/images/blog/article-ricerca-cisl-frontalieri-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

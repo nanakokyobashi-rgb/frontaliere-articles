@@ -13538,6 +13538,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.interrogazione-wicht-clausola-regionale.title': 'Lugano: interrogazione su clausola salvaguardia e frontalieri',
     'blog.article.interrogazione-wicht-clausola-regionale.excerpt': 'Omar Wicht interroga il Municipio di Lugano Clausola regionale approvata a settembre 2026 Limiti temporanei all\'immigrazione tra le misure previste Possibile',
     'blog.article.interrogazione-wicht-clausola-regionale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.ricerca-cisl-frontalieri-2026.title': 'Ricerca CISL: potere d\'acquisto in calo per i frontalieri',
+    'blog.article.ricerca-cisl-frontalieri-2026.excerpt': '1.542 risposte raccolte nel maggio 2026 31,7% oltre un\'ora e mezza negli spostamenti 87,8% considera penalizzante la «tassa sulla salute» 76,9% non valuta',
+    'blog.article.ricerca-cisl-frontalieri-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

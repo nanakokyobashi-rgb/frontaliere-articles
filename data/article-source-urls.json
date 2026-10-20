@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/attualita/1949689/sulla-cannabis-terapeutica-c-e-chi-rilancia-i-pazienti-hanno-bisogno-di-risposte": {
-    "articleId": "cannabis-terapeutica-ticino-proposta",
-    "ts": "2026-09-14T01:49:27.280Z",
-    "keyForm": 2
-  },
   "https://www.ticinonews.ch/ticino/premi-di-cassa-malati-2027-interrogazione-al-governo-442569": {
     "articleId": "premi-cassa-malati-2027-ticino",
     "ts": "2026-09-15T00:05:51.697Z",
@@ -2497,6 +2492,11 @@
   "https://comozero.it/attualita/lugano-durissimo-attacco-ai-frontalieri-per-colpa-loro-affitti-sempre-piu-alti-stipendi-bassi-e-disagi-per-il-traffico-urbano": {
     "articleId": "interrogazione-wicht-clausola-regionale",
     "ts": "2026-10-20T19:20:37.692Z",
+    "keyForm": 2
+  },
+  "https://www.varesenoi.it/2026/10/20/leggi-notizia/argomenti/economia-13/articolo/la-ricerca-della-cisl-dei-laghi-sui-frontalieri-diminuito-il-potere-dacquisto-tassa-della-salut.html": {
+    "articleId": "ricerca-cisl-frontalieri-2026",
+    "ts": "2026-10-20T19:40:20.584Z",
     "keyForm": 2
   }
 }
