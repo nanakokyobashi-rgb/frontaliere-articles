@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-20T00:06:33.415Z",
-  "contentHash": "41681230f96fc6037e5902794f49c4e4eba2374454efbc0897fb41a0c17604db",
+  "updatedAt": "2026-10-20T22:08:32.508Z",
+  "contentHash": "a7343ed3a9b072c653d4cfb20f2b8f16e6b3180469a071f90135b360ce367c9d",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-19T15:42:28.810Z",
+      "updatedAt": "2026-10-20T17:28:37.181Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-20T15:53:28.523Z",
       "keyFacts": 0
     }
   ],
@@ -100,13 +100,18 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "2. Philharmonisches Konzert: Unter dem Titel „Skandalös“ stellt die Bodensee Philharmonie am 21. und 23. Oktober im Konzil Konstanz drei Werke nebeneinander, die Erwartungen auf unterschiedliche…",
+              "date": "2026-10-20T13:12:35.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/2_+philharmonische+konzert_+wenn+das+unerhoerte+irgendwann+vertraut+klingt"
+            },
             {
               "label": "Vortrag zur Sonderausstellung Rosgartenmuseum \"August Mosbrugger – Architekt, Professor und Sohn einer bedeutenden Künstlerfamilie\"",
               "date": "2026-10-17T15:00:00.000Z",
@@ -118,7 +123,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +145,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     },
     "en": {
       "canton": "SH",
@@ -223,13 +228,18 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "2. Philharmonisches Konzert: Unter dem Titel „Skandalös“ stellt die Bodensee Philharmonie am 21. und 23. Oktober im Konzil Konstanz drei Werke nebeneinander, die Erwartungen auf unterschiedliche…",
+              "date": "2026-10-20T13:12:35.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/2_+philharmonische+konzert_+wenn+das+unerhoerte+irgendwann+vertraut+klingt"
+            },
             {
               "label": "Vortrag zur Sonderausstellung Rosgartenmuseum \"August Mosbrugger – Architekt, Professor und Sohn einer bedeutenden Künstlerfamilie\"",
               "date": "2026-10-17T15:00:00.000Z",
@@ -241,7 +251,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +273,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     },
     "de": {
       "canton": "SH",
@@ -346,13 +356,18 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "2. Philharmonisches Konzert: Unter dem Titel „Skandalös“ stellt die Bodensee Philharmonie am 21. und 23. Oktober im Konzil Konstanz drei Werke nebeneinander, die Erwartungen auf unterschiedliche…",
+              "date": "2026-10-20T13:12:35.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/2_+philharmonische+konzert_+wenn+das+unerhoerte+irgendwann+vertraut+klingt"
+            },
             {
               "label": "Vortrag zur Sonderausstellung Rosgartenmuseum \"August Mosbrugger – Architekt, Professor und Sohn einer bedeutenden Künstlerfamilie\"",
               "date": "2026-10-17T15:00:00.000Z",
@@ -364,7 +379,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +401,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     },
     "fr": {
       "canton": "SH",
@@ -469,13 +484,18 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "2. Philharmonisches Konzert: Unter dem Titel „Skandalös“ stellt die Bodensee Philharmonie am 21. und 23. Oktober im Konzil Konstanz drei Werke nebeneinander, die Erwartungen auf unterschiedliche…",
+              "date": "2026-10-20T13:12:35.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/2_+philharmonische+konzert_+wenn+das+unerhoerte+irgendwann+vertraut+klingt"
+            },
             {
               "label": "Vortrag zur Sonderausstellung Rosgartenmuseum \"August Mosbrugger – Architekt, Professor und Sohn einer bedeutenden Künstlerfamilie\"",
               "date": "2026-10-17T15:00:00.000Z",
@@ -487,7 +507,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +529,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     }
   }
 }

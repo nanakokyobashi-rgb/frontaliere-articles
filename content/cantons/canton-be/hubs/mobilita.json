@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T17:48:42.935Z",
-  "contentHash": "4ac1e0bc4db53551a4e8160aa2baf6242799debfcb168e81b6409323e332b7dd",
+  "updatedAt": "2026-10-20T22:08:32.508Z",
+  "contentHash": "c134cca11ff0d4fbc8a0a5e417529021ddac84b0bf1c29db4ca28273eebb732e",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T12:16:17.109Z",
+      "updatedAt": "2026-10-20T17:37:05.348Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T10:27:43.943Z",
+      "updatedAt": "2026-10-20T15:53:28.523Z",
       "keyFacts": 0
     }
   ],
@@ -27,12 +27,12 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "25",
+          "value": "24",
           "note": "segnalazioni aggiornate: 20 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "95",
+          "value": "96",
           "note": "segnalazioni aggiornate: 20 ottobre 2026"
         }
       ],
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -175,7 +175,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     },
     "en": {
       "canton": "BE",
@@ -185,12 +185,12 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "25",
+          "value": "24",
           "note": "reports as of 20 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "95",
+          "value": "96",
           "note": "reports as of 20 October 2026"
         }
       ],
@@ -249,7 +249,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -287,7 +287,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -333,7 +333,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     },
     "de": {
       "canton": "BE",
@@ -343,12 +343,12 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "25",
+          "value": "24",
           "note": "Meldungen vom 20. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "95",
+          "value": "96",
           "note": "Meldungen vom 20. Oktober 2026"
         }
       ],
@@ -407,7 +407,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -445,7 +445,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -491,7 +491,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     },
     "fr": {
       "canton": "BE",
@@ -501,12 +501,12 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "25",
+          "value": "24",
           "note": "signalements au 20 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "95",
+          "value": "96",
           "note": "signalements au 20 octobre 2026"
         }
       ],
@@ -565,7 +565,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -603,7 +603,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -649,7 +649,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T17:48:42.935Z",
-  "contentHash": "38e51ce8c742d18f1a48ab661b760ae49e6572ac3e2d0b772e7fd604653e2b6a",
+  "updatedAt": "2026-10-20T22:08:32.508Z",
+  "contentHash": "e645ed732feb04f729838cf55a7daee4298846be8caa9ddc4a176c58975ff278",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T12:16:17.109Z",
+      "updatedAt": "2026-10-20T17:37:05.348Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T10:27:43.943Z",
+      "updatedAt": "2026-10-20T15:53:28.523Z",
       "keyFacts": 0
     }
   ],
@@ -55,9 +55,9 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "A2 Luzern -> Basel tra Raccordo autostradale Diramazione Hagnau E Raccordo autostradale Diramazione Wiese Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "Revocato: A14 Zug -> Luzern tra Svincolo autostradale Gisikon-Root E Raccordo autostradale Diramazione Rotsee Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffico",
-              "date": "2026-10-20T11:53:00.000Z"
+              "date": "2026-10-20T14:26:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -109,7 +109,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     },
     "en": {
       "canton": "LU",
@@ -193,9 +193,9 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "A2 Luzern -> Basel tra Raccordo autostradale Diramazione Hagnau E Raccordo autostradale Diramazione Wiese Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "Revocato: A14 Zug -> Luzern tra Svincolo autostradale Gisikon-Root E Raccordo autostradale Diramazione Rotsee Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffic",
-              "date": "2026-10-20T11:53:00.000Z"
+              "date": "2026-10-20T14:26:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -229,7 +229,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -247,7 +247,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -291,7 +291,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     },
     "de": {
       "canton": "LU",
@@ -329,9 +329,9 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "A2 Luzern -> Basel zwischen Autobahndreieck Verzweigung Hagnau und Autobahndreieck Verzweigung Wiese Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "label": "Aufgehoben: A14 Zug -> Luzern zwischen Anschluss Gisikon-Root und Autobahndreieck Verzweigung Rotsee Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
               "value": "Verkehr",
-              "date": "2026-10-20T11:53:00.000Z"
+              "date": "2026-10-20T14:26:00.000Z"
             },
             {
               "label": "H10 Bern <-> Luzern zwischen Ortschaft Wiggen und Ortschaft Kröschenbrunnen Sachlage: Verkehrsbehinderung Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
@@ -365,7 +365,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -383,7 +383,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -427,7 +427,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     },
     "fr": {
       "canton": "LU",
@@ -465,9 +465,9 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "A2 Lucerne -> Bâle entre Echangeur Echangeur de Hagnau et Echangeur Echangeur de Wiese Situation: trafic en accordéon Raison: surcharge de trafic",
+              "label": "Révoqué: A14 Zoug -> Lucerne entre Jonction autoroutière Gisikon-Root et Echangeur Echangeur du Rotsee Situation: trafic en accordéon Raison: surcharge de trafic",
               "value": "Trafic",
-              "date": "2026-10-20T11:53:00.000Z"
+              "date": "2026-10-20T14:26:00.000Z"
             },
             {
               "label": "H10 Berne <-> Lucerne entre Localité Wiggen et Localité Kröschenbrunnen Situation: trafic perturbé Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
@@ -501,7 +501,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -519,7 +519,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -565,7 +565,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     }
   }
 }

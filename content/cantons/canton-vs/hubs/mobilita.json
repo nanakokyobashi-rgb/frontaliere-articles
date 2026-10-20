@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T17:48:42.935Z",
-  "contentHash": "c5d390aa735afe450af47948f0454ebbf54c1dd84279d326f06209d4e752a69c",
+  "updatedAt": "2026-10-20T22:08:32.508Z",
+  "contentHash": "6cb07fe3b6abcb2a864b482759a7310413d3ad9b2fab5e58a38b2815d322604f",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T12:16:17.109Z",
+      "updatedAt": "2026-10-20T17:37:05.348Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T10:27:43.943Z",
+      "updatedAt": "2026-10-20T15:53:28.523Z",
       "keyFacts": 0
     }
   ],
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "18",
+          "value": "19",
           "note": "segnalazioni aggiornate: 20 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "25",
+          "value": "27",
           "note": "segnalazioni aggiornate: 20 ottobre 2026"
         }
       ],
@@ -142,7 +142,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -180,7 +180,7 @@
               "url": "https://www.ossolanews.it/2026/10/16/leggi-notizia/argomenti/attualita-26/articolo/macugnaga-incontro-tra-il-prefetto-e-i-sindaci-della-valle-anzasca-al-centro-sicurezza-e-viabilit.html"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -250,7 +250,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     },
     "en": {
       "canton": "VS",
@@ -265,12 +265,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "18",
+          "value": "19",
           "note": "reports as of 20 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "25",
+          "value": "27",
           "note": "reports as of 20 October 2026"
         }
       ],
@@ -370,7 +370,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -408,7 +408,7 @@
               "url": "https://www.ossolanews.it/2026/10/16/leggi-notizia/argomenti/attualita-26/articolo/macugnaga-incontro-tra-il-prefetto-e-i-sindaci-della-valle-anzasca-al-centro-sicurezza-e-viabilit.html"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -478,7 +478,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     },
     "de": {
       "canton": "VS",
@@ -493,12 +493,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "18",
+          "value": "19",
           "note": "Meldungen vom 20. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "25",
+          "value": "27",
           "note": "Meldungen vom 20. Oktober 2026"
         }
       ],
@@ -598,7 +598,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -636,7 +636,7 @@
               "url": "https://www.ossolanews.it/2026/10/16/leggi-notizia/argomenti/attualita-26/articolo/macugnaga-incontro-tra-il-prefetto-e-i-sindaci-della-valle-anzasca-al-centro-sicurezza-e-viabilit.html"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -706,7 +706,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     },
     "fr": {
       "canton": "VS",
@@ -721,12 +721,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "18",
+          "value": "19",
           "note": "signalements au 20 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "25",
+          "value": "27",
           "note": "signalements au 20 octobre 2026"
         }
       ],
@@ -826,7 +826,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -864,7 +864,7 @@
               "url": "https://www.ossolanews.it/2026/10/16/leggi-notizia/argomenti/attualita-26/articolo/macugnaga-incontro-tra-il-prefetto-e-i-sindaci-della-valle-anzasca-al-centro-sicurezza-e-viabilit.html"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -934,7 +934,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     }
   }
 }

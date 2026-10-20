@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-20T02:25:24.863Z",
-  "contentHash": "05172d9c4452b48b523b1aeca8c475547028d9a4f338918e1874d9c7aa4fad54",
+  "updatedAt": "2026-10-20T22:08:32.508Z",
+  "contentHash": "a0e5317ae83d21955cda46be9e1194f6b5026c8fa60a862de864e8da857fc31b",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-19T13:56:07.476Z",
+      "updatedAt": "2026-10-20T12:04:15.773Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-19T13:56:07.476Z"
+          "updatedAt": "2026-10-20T12:04:15.773Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Commissione Berna: voto comunale facoltativo per stranieri",
+          "url": "/articoli-berna/voto-comunale-stranieri-berna/",
+          "excerpt": "La SAK sostiene il voto comunale volontario per stranieri con permesso di domicilio, 10 anni in Svizzera, 5 nel Cantone, 3 mesi nel comune.",
+          "date": "2026-10-20T22:00:47.607Z"
+        },
         {
           "title": "Swissgrid pianifica una linea aerea tra Berna e Lucerna",
           "url": "/articoli-berna/corridoio-linea-wynigen/",
@@ -82,12 +88,6 @@
           "url": "/articoli-berna/berna-tassa-ecclesiastica/",
           "excerpt": "Il Governo bernese ha preso atto della petizione per rendere volontaria la tassa ecclesiastica delle persone giuridiche.",
           "date": "2026-10-19T06:36:37.308Z"
-        },
-        {
-          "title": "Berna: possibili disagi per manifestazione non autorizzata",
-          "url": "/articoli-berna/traffico-berna-manifestazione/",
-          "excerpt": "Berna segnala possibili chiusure stradali e disagi domenica 11 ottobre 2026 per una manifestazione non autorizzata: indicazioni per chi viaggia in città.",
-          "date": "2026-10-10T07:15:47.682Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-20T02:25:24.863Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     },
     "en": {
       "canton": "BE",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-19T13:56:07.476Z"
+          "updatedAt": "2026-10-20T12:04:15.773Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Bern Commission: optional municipal voting rights for foreigners",
+          "url": "/en/bern-articles/municipal-voting-foreigners-bern/",
+          "excerpt": "SAK supports voluntary municipal voting for foreigners with a settlement permit, 10 years in Switzerland, 5 in the canton, 3 months in the municipality.",
+          "date": "2026-10-20T22:00:47.607Z"
+        },
         {
           "title": "Swissgrid is planning an overhead line between Bern and Lucerne",
           "url": "/en/bern-articles/wynigen-grid-corridor/",
@@ -169,12 +175,6 @@
           "url": "/en/bern-articles/bern-church-tax-legal-entities/",
           "excerpt": "The Bernese government has taken note of the petition to make the church tax for legal entities voluntary.",
           "date": "2026-10-19T06:36:37.308Z"
-        },
-        {
-          "title": "Bern: possible disruptions due to unauthorized demonstration",
-          "url": "/en/bern-articles/bern-traffic-demonstration/",
-          "excerpt": "Bern warns of possible road closures and disruptions on Sunday, October 11, 2026, due to an unauthorized demonstration: information for those traveling in the city.",
-          "date": "2026-10-10T07:15:47.682Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-20T02:25:24.863Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     },
     "de": {
       "canton": "BE",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-19T13:56:07.476Z"
+          "updatedAt": "2026-10-20T12:04:15.773Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Kommission Bern: freiwilliges kommunales Stimmrecht für Ausländer",
+          "url": "/de/bern-artikel/kommunales-wahlrecht-auslaender-bern/",
+          "excerpt": "Die SAK unterstützt das freiwillige kommunale Stimmrecht für Ausländer mit Niederlassungsbewilligung, 10 Jahren Aufenthalt in der Schweiz, 5 Jahren im Kanton und 3 Monaten in der Gemeinde.",
+          "date": "2026-10-20T22:00:47.607Z"
+        },
         {
           "title": "Swissgrid plant eine Freileitung zwischen Bern und Luzern",
           "url": "/de/bern-artikel/wynigen-netzkorridor/",
@@ -256,12 +262,6 @@
           "url": "/de/bern-artikel/bern-kirchensteuer-juristische-personen/",
           "excerpt": "Die Berner Regierung hat die Petition zur Freiwilligkeit der Kirchensteuer für juristische Personen zur Kenntnis genommen.",
           "date": "2026-10-19T06:36:37.308Z"
-        },
-        {
-          "title": "Bern: Nicht genehmigte Demonstrationen können zu Störungen führen.",
-          "url": "/de/bern-artikel/bern-verkehr-kundgebung/",
-          "excerpt": "Bern meldet mögliche Straßensperrungen und Behinderungen am Sonntag, den 11.",
-          "date": "2026-10-10T07:15:47.682Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-20T02:25:24.863Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     },
     "fr": {
       "canton": "BE",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-19T13:56:07.476Z"
+          "updatedAt": "2026-10-20T12:04:15.773Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Commission de Berne : droit de vote communal facultatif pour les étrangers",
+          "url": "/fr/articles-berne/vote-communal-etrangers-berne/",
+          "excerpt": "La SAK soutient le droit de vote communal facultatif pour les étrangers titulaires d’un permis d’établissement, ayant vécu 10 ans en Suisse, 5 ans dans le canton et 3 mois dans la commune.",
+          "date": "2026-10-20T22:00:47.607Z"
+        },
         {
           "title": "Swissgrid planifie une ligne aérienne entre Berne et Lucerne",
           "url": "/fr/articles-berne/corridor-reseau-wynigen/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-berne/berne-taxe-eglise-personnes-morales/",
           "excerpt": "Le Gouvernement bernois a pris acte de la pétition visant à rendre volontaire l'impôt ecclésiastique des personnes morales.",
           "date": "2026-10-19T06:36:37.308Z"
-        },
-        {
-          "title": "Berne : perturbations possibles en raison d'une manifestation non autorisée",
-          "url": "/fr/articles-berne/berne-trafic-manifestation/",
-          "excerpt": "Berne signale de possibles fermetures de routes et des perturbations le dimanche 11 octobre 2026 en raison d'une manifestation non autorisée : indications pour les personnes qui se déplacent en ville.",
-          "date": "2026-10-10T07:15:47.682Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-20T02:25:24.863Z"
+      "updatedAt": "2026-10-20T22:08:32.508Z"
     }
   }
 }
