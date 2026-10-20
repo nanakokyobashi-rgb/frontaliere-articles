@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-19T18:33:18.720Z",
-  "contentHash": "b461ab64e632041ff6808b07043ac6212c83c73bab68a5157bc528e583b8900f",
+  "updatedAt": "2026-10-20T06:12:59.171Z",
+  "contentHash": "a727e1ced6518e2d6acb2d6bb34e4310d50287cfdb67ae062330dc4f5c00a2d8",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "SVP Sciaffusa definisce candidati per le elezioni 2027",
+          "url": "/articoli-sciaffusa/svp-sciaffusa-candidati-2027/",
+          "excerpt": "L'assemblea dei delegati a Oberhallau ha scelto Andreas Gnädinger per il Consiglio degli Stati e Thomas Hurter e Thomas Müller per il Nazionale.",
+          "date": "2026-10-20T06:05:14.822Z"
+        },
+        {
           "title": "Bundesamt für Strassen chiuderà tre tunnel di notte",
           "url": "/articoli-sciaffusa/pulizie-tunnel-sciaffusa/",
           "excerpt": "Fäsenstaub, Cholfirst e Galgenbuck chiusi ogni notte dal 19 al 23 ottobre, dalle 20 alle 5, per lavori di pulizia.",
@@ -94,12 +100,6 @@
           "url": "/articoli-sciaffusa/singen-chiusura-schaffhauser-strasse/",
           "excerpt": "A Singen la strada sarà chiusa al traffico dal 26 al 30 ottobre 2026 per lavori alla fermata Landesgartenschau.",
           "date": "2026-10-17T01:47:28.492Z"
-        },
-        {
-          "title": "Sciaffusa: previste cifre rosse tra il 2027 e il 2030",
-          "url": "/articoli-sciaffusa/finanze-cantone-sciaffusa-2027/",
-          "excerpt": "Il governo cantonale attende risultati negativi per il quadriennio 2027-2030 a causa del calo delle entrate dalle imposte sulle imprese.",
-          "date": "2026-10-10T21:14:11.679Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T06:12:59.171Z"
     },
     "en": {
       "canton": "SH",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "SVP Schaffhausen selects candidates for the 2027 elections",
+          "url": "/en/schaffhausen-articles/svp-schaffhausen-candidates-2027/",
+          "excerpt": "The delegates’ assembly in Oberhallau chose Andreas Gnädinger for the Council of States and Thomas Hurter and Thomas Müller for the National Council.",
+          "date": "2026-10-20T06:05:14.822Z"
+        },
+        {
           "title": "Bundesamt für Strassen will close three tunnels at night",
           "url": "/en/schaffhausen-articles/schaffhausen-tunnel-cleaning/",
           "excerpt": "Fäsenstaub, Cholfirst and Galgenbuck closed every night from October 19 to 23, from 8 p.m.",
@@ -193,12 +199,6 @@
           "url": "/en/schaffhausen-articles/singen-schaffhauser-strasse-closure/",
           "excerpt": "In Singen, the road will be closed to traffic from October 26 to 30, 2026, due to work at the Landesgartenschau stop.",
           "date": "2026-10-17T01:47:28.492Z"
-        },
-        {
-          "title": "Schaffhausen: red figures expected between 2027 and 2030",
-          "url": "/en/schaffhausen-articles/schaffhausen-canton-finances-2027/",
-          "excerpt": "The cantonal government expects negative results for the four-year period 2027–2030 due to declining revenue from corporate taxes.",
-          "date": "2026-10-10T21:14:11.679Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T06:12:59.171Z"
     },
     "de": {
       "canton": "SH",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "SVP Schaffhausen bestimmt Kandidaten für die Wahlen 2027",
+          "url": "/de/schaffhausen-artikel/svp-schaffhausen-kandidaturen-2027/",
+          "excerpt": "Die Delegiertenversammlung in Oberhallau hat Andreas Gnädinger für den Ständerat sowie Thomas Hurter und Thomas Müller für den Nationalrat gewählt.",
+          "date": "2026-10-20T06:05:14.822Z"
+        },
+        {
           "title": "Bundesamt für Strassen wird nachts drei Tunnel schließen",
           "url": "/de/schaffhausen-artikel/naechtliche-tunnelreinigung-schaffhausen/",
           "excerpt": "Fäsenstaub, Cholfirst und Galgenbuck jede Nacht vom 19.",
@@ -292,12 +298,6 @@
           "url": "/de/schaffhausen-artikel/singen-sperrung-schaffhauser-strasse/",
           "excerpt": "In Singen wird die Straße vom 26.",
           "date": "2026-10-17T01:47:28.492Z"
-        },
-        {
-          "title": "Schaffhausen: Zwischen 2027 und 2030 werden rote Zahlen erwartet",
-          "url": "/de/schaffhausen-artikel/finanzen-kanton-schaffhausen-2027/",
-          "excerpt": "Die Kantonsregierung rechnet für den Vierjahreszeitraum 2027–2030 aufgrund des Rückgangs der Einnahmen aus den Unternehmenssteuern mit negativen Ergebnissen.",
-          "date": "2026-10-10T21:14:11.679Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T06:12:59.171Z"
     },
     "fr": {
       "canton": "SH",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "L'UDC de Schaffhouse désigne ses candidats pour les élections de 2027",
+          "url": "/fr/articles-schaffhouse/svp-schaffhouse-candidatures-2027/",
+          "excerpt": "L'assemblée des délégués à Oberhallau a choisi Andreas Gnädinger pour le Conseil des États et Thomas Hurter et Thomas Müller pour le Conseil national.",
+          "date": "2026-10-20T06:05:14.822Z"
+        },
+        {
           "title": "Bundesamt für Strassen fermera trois tunnels la nuit",
           "url": "/fr/articles-schaffhouse/nettoyage-tunnels-schaffhouse/",
           "excerpt": "Fäsenstaub, Cholfirst et Galgenbuck fermés chaque nuit du 19 au 23 octobre, de 20 heures à 5 heures, pour des travaux de nettoyage.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-schaffhouse/singen-fermeture-schaffhauser-strasse/",
           "excerpt": "À Singen, la route sera fermée à la circulation du 26 au 30 octobre 2026 pour des travaux à l’arrêt Landesgartenschau.",
           "date": "2026-10-17T01:47:28.492Z"
-        },
-        {
-          "title": "Schaffhouse : des chiffres rouges prévus entre 2027 et 2030",
-          "url": "/fr/articles-schaffhouse/finances-canton-schaffhouse-2027/",
-          "excerpt": "Le gouvernement cantonal s’attend à des résultats négatifs pour la période quadriennale 2027-2030 en raison de la baisse des recettes provenant des impôts sur les entreprises.",
-          "date": "2026-10-10T21:14:11.679Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-20T06:12:59.171Z"
     }
   }
 }

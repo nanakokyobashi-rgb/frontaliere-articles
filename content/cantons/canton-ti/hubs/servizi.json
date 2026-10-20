@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-20T05:26:42.124Z",
-  "contentHash": "8505f0214e6b1fc0921db9f375d6eb41ba709c0af64e50ad28c89abcccc76b99",
+  "updatedAt": "2026-10-20T06:12:59.171Z",
+  "contentHash": "08f712285e2337f45e3346c84a87be0a7d8fb9123cff2bbeb33f466d30bde41e",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -84,11 +84,6 @@
               "date": "2026-10-16T16:00:00.000Z"
             },
             {
-              "label": "Ferregutti",
-              "detail": "Mendrisio, Mendrisiotto",
-              "date": "2026-10-17T06:00:00.000Z"
-            },
-            {
               "label": "Farmacia Salus",
               "detail": "Lugano, Luganese",
               "date": "2026-10-17T06:00:00.000Z"
@@ -107,6 +102,11 @@
               "label": "Amavita Biasca",
               "detail": "Biasca, Biasca e Valli",
               "date": "2026-10-23T16:00:00.000Z"
+            },
+            {
+              "label": "Portone",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-23T16:30:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
@@ -295,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-20T05:26:42.124Z"
+      "updatedAt": "2026-10-20T06:12:59.171Z"
     },
     "en": {
       "canton": "TI",
@@ -347,11 +347,6 @@
               "date": "2026-10-16T16:00:00.000Z"
             },
             {
-              "label": "Ferregutti",
-              "detail": "Mendrisio, Mendrisiotto",
-              "date": "2026-10-17T06:00:00.000Z"
-            },
-            {
               "label": "Farmacia Salus",
               "detail": "Lugano, Luganese",
               "date": "2026-10-17T06:00:00.000Z"
@@ -370,6 +365,11 @@
               "label": "Amavita Biasca",
               "detail": "Biasca, Biasca e Valli",
               "date": "2026-10-23T16:00:00.000Z"
+            },
+            {
+              "label": "Portone",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-23T16:30:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
@@ -553,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-20T05:26:42.124Z"
+      "updatedAt": "2026-10-20T06:12:59.171Z"
     },
     "de": {
       "canton": "TI",
@@ -605,11 +605,6 @@
               "date": "2026-10-16T16:00:00.000Z"
             },
             {
-              "label": "Ferregutti",
-              "detail": "Mendrisio, Mendrisiotto",
-              "date": "2026-10-17T06:00:00.000Z"
-            },
-            {
               "label": "Farmacia Salus",
               "detail": "Lugano, Luganese",
               "date": "2026-10-17T06:00:00.000Z"
@@ -628,6 +623,11 @@
               "label": "Amavita Biasca",
               "detail": "Biasca, Biasca e Valli",
               "date": "2026-10-23T16:00:00.000Z"
+            },
+            {
+              "label": "Portone",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-23T16:30:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
@@ -811,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-20T05:26:42.124Z"
+      "updatedAt": "2026-10-20T06:12:59.171Z"
     },
     "fr": {
       "canton": "TI",
@@ -863,11 +863,6 @@
               "date": "2026-10-16T16:00:00.000Z"
             },
             {
-              "label": "Ferregutti",
-              "detail": "Mendrisio, Mendrisiotto",
-              "date": "2026-10-17T06:00:00.000Z"
-            },
-            {
               "label": "Farmacia Salus",
               "detail": "Lugano, Luganese",
               "date": "2026-10-17T06:00:00.000Z"
@@ -886,6 +881,11 @@
               "label": "Amavita Biasca",
               "detail": "Biasca, Biasca e Valli",
               "date": "2026-10-23T16:00:00.000Z"
+            },
+            {
+              "label": "Portone",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-23T16:30:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
@@ -1066,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-20T05:26:42.124Z"
+      "updatedAt": "2026-10-20T06:12:59.171Z"
     }
   }
 }
