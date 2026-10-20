@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const WORKFLOW = fs.readFileSync(path.join(HERE, '../../.github/workflows/generate-article.yml'), 'utf8');
 const FAQ_WORKFLOW = fs.readFileSync(path.join(HERE, '../../.github/workflows/batch-faq-articles.yml'), 'utf8');
+const DAILY_BRIEF_WORKFLOW = fs.readFileSync(path.join(HERE, '../../.github/workflows/generate-daily-brief.yml'), 'utf8');
 
 test('Generate Blog Article esegue il preflight dopo il setup opzionale e prima della generazione', () => {
   const setup = WORKFLOW.indexOf('id: setup_claude_haiku_fallback');
@@ -45,4 +46,17 @@ test('anche il batch FAQ usa lo stesso preflight e non il solo PAT GitHub', () =
   assert.match(block, /if: steps\.mode\.outputs\.dry != 'true'/);
   assert.match(block, /Upload provider preflight report/);
   assert.doesNotMatch(block, /GH_MODELS_PAT/);
+});
+
+test('il daily brief prepara il broker Codex prima del producer della copertina', () => {
+  const load = DAILY_BRIEF_WORKFLOW.indexOf('- name: Load generation secrets from Remote Config');
+  const setup = DAILY_BRIEF_WORKFLOW.indexOf('id: setup_codex_image_lane');
+  const producer = DAILY_BRIEF_WORKFLOW.indexOf('- name: Generate the daily edition');
+  const cleanup = DAILY_BRIEF_WORKFLOW.indexOf('- name: Cleanup Codex auth broker');
+
+  assert.ok(load >= 0 && setup > load && producer > setup && cleanup > producer);
+  const producerBlock = DAILY_BRIEF_WORKFLOW.slice(producer, cleanup);
+  assert.match(producerBlock, /CODEX_AUTH_BROKER_SOCKET:/);
+  assert.match(DAILY_BRIEF_WORKFLOW.slice(setup, producer), /codex_auth_json:/);
+  assert.match(DAILY_BRIEF_WORKFLOW.slice(cleanup), /--cleanup --socket/);
 });
