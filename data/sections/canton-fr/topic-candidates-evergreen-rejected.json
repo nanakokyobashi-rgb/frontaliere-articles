@@ -63,6 +63,14 @@
     "canton-fr::https://www.freiburger-nachrichten.ch/story/298337/wenn-es-denn-%c3%bcberhaupt-einen-gibt-gantner-zweifelt-am-nutzen-der-bilateralen": {
       "section": "canton-fr",
       "ts": 1792479747974
+    },
+    "canton-fr::https://www.frapp.ch/fr/articles/stories/gestion-de-crise-nouveau-cas-a-luniversite-de-fribourg": {
+      "section": "canton-fr",
+      "ts": 1792492840067
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/298277/dieser-regierungsrat-%c3%bcberlegt-sich-eine-bundesratskandidatur": {
+      "section": "canton-fr",
+      "ts": 1792492852973
     }
   }
 }
