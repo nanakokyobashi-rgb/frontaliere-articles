@@ -71,6 +71,14 @@
     "canton-fr::https://www.freiburger-nachrichten.ch/story/298277/dieser-regierungsrat-%c3%bcberlegt-sich-eine-bundesratskandidatur": {
       "section": "canton-fr",
       "ts": 1792492852973
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/295160/sie-bauen-ihre-fahrzeuge-selbst-und-treffen-sich-jetzt-erstmals-im-kanton-freiburg": {
+      "section": "canton-fr",
+      "ts": 1792503421723
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/298021/zoll-wird-zum-m%c3%a4nnerclub-seit-der-reform-sinkt-der-frauenanteil-deutlich": {
+      "section": "canton-fr",
+      "ts": 1792503450361
     }
   }
 }
