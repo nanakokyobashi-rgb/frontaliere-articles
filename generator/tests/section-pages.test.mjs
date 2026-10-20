@@ -3138,6 +3138,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(staleResolve, /FIREBASE_SERVICE_ACCOUNT_JSON assente/);
   assert.match(staleResolve, /gh workflow run fast-publish-section\.yml --repo "\$REPO" --ref main/);
   assert.match(staleResolve, /-f source_commit="\$current_main"/);
+  assert.match(staleResolve, /replay_after="\$current_main"/);
+  assert.doesNotMatch(staleResolve, /replay_after="\$\{DISPATCH_PUSH_AFTER:-\}"/);
   assert.ok(
     staleResolve.indexOf('gh workflow run fast-publish-section.yml') < staleResolve.indexOf("echo 'matrix=[]'"),
     'il resolve deve redispatchare un replay stale prima di produrre una matrix vuota',
@@ -3183,11 +3185,18 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /-f source_main_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /-f source_main_commit="\$current_main"/);
   assert.match(wf, /replay_before="\$\{ORIGINAL_PUSH_BEFORE:-\$STALE_HEAD\}"/);
-  assert.match(wf, /replay_after="\$\{ORIGINAL_PUSH_AFTER:-\$STALE_HEAD\}"/);
+  assert.doesNotMatch(wf, /replay_after="\$\{ORIGINAL_PUSH_AFTER:-\$STALE_HEAD\}"/);
+  assert.match(wf, /replay_after="\$CURRENT_MAIN"/);
+  assert.match(wf, /replay_after="\$current_main"/);
   assert.match(wf, /-f push_before="\$replay_before"/);
   assert.match(wf, /-f push_after="\$replay_after"/);
   assert.equal((wf.match(/-f api_release_commit="\$api_release_commit"/g) ?? []).length, 2);
   assert.match(wf, /resolveStaleReplayApiReleaseCommit/);
+  assert.equal(
+    (wf.match(/release API stantia non copre la HEAD corrente; il replay ricalcolera' la release senza override/g) ?? []).length,
+    2,
+    'i redispatch devono lasciare vuoto l override quando la release futura non e ancora pubblicata',
+  );
   assert.match(wf, /Prepare Firebase credentials for stale replay recovery\n\s+if: steps\.replay_freshness\.outputs\.fresh == 'false'/);
   assert.match(wf, /Load dispatch token for stale replay recovery\n\s+if: steps\.replay_freshness\.outputs\.fresh == 'false'/);
   assert.match(wf, /REPLAY_API_AFTER_PUBLISH: \$\{\{ inputs\.replay_api_after_publish \}\}/);
@@ -3203,6 +3212,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
   assert.match(wf, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(wf, /replay workflow_run redispatchato prima degli upload/);
+  assert.match(wf, /elif \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ -n "\$\{SOURCE_COMMIT:-\}" \]; then\n\s+pinned_replay_main="\$SOURCE_MAIN_COMMIT"/);
+  assert.match(wf, /replay bounded redispatchato prima degli upload/);
   assert.match(wf, /id: push_range[\s\S]*resolve-workflow-run-push-range\.mjs/);
   assert.doesNotMatch(wf, /commits\/\$WORKFLOW_RUN_HEAD_SHA\/events/);
   const pushRangeResolver = read('scripts/ci/resolve-workflow-run-push-range.mjs');

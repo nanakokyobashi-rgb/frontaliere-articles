@@ -466,13 +466,18 @@ jobs:
               replay_api_after_publish=false
               allow_deferred_live_release=false
               replay_before="${PUSH_BEFORE:-}"
-              replay_after="${PUSH_AFTER:-}"
+              replay_after=''
               if [ "$EVENT_NAME" = 'workflow_dispatch' ]; then
                 replay_dry="${DRY_RUN_INPUT:-true}"
                 replay_api_after_publish="${REPLAY_API_INPUT:-false}"
                 allow_deferred_live_release="${ALLOW_DEFERRED_LIVE_RELEASE_INPUT:-false}"
                 replay_before="${DISPATCH_PUSH_BEFORE:-}"
-                replay_after="${DISPATCH_PUSH_AFTER:-}"
+                # The source checkout is current_main. Keep a push range only
+                # when it has a base, and always end that range at current_main
+                # so a stale head cannot select an older API release.
+                if [ -n "$replay_before" ]; then
+                  replay_after="$current_main"
+                fi
                 dispatch_stale_replay \
                   "$SECTION_INPUT" \
                   "${ARTICLE_IDS_INPUT:-[]}" \
@@ -486,6 +491,9 @@ jobs:
                   "$replay_before" \
                   "$replay_after"
               else
+                if [ -n "$replay_before" ]; then
+                  replay_after="$current_main"
+                fi
                 if ! replay_matrix="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$pinned_source" | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"; then
                   echo "::notice::registro edge non piu' sulla release stantia; provo la HEAD corrente $current_main"
                   replay_matrix="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$current_main" | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
@@ -745,7 +753,6 @@ jobs:
           STALE_HEAD: ${{ github.event.workflow_run.head_sha }}
           CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
           ORIGINAL_PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
-          ORIGINAL_PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
         run: |
           set -euo pipefail
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
@@ -755,7 +762,12 @@ jobs:
           fi
           export GH_TOKEN="$runtime_pat"
           replay_before="${ORIGINAL_PUSH_BEFORE:-$STALE_HEAD}"
-          replay_after="${ORIGINAL_PUSH_AFTER:-$STALE_HEAD}"
+          replay_after=''
+          if [ -n "$replay_before" ]; then
+            # The redispatch checks out CURRENT_MAIN; an old push_after would
+            # make release resolution inspect the stale replay range.
+            replay_after="$CURRENT_MAIN"
+          fi
           api_release_commit=''
           if [ -n "${STALE_HEAD:-}" ]; then
             if ! [[ "$STALE_HEAD" =~ ^[a-f0-9]{40}$ ]]; then
@@ -776,7 +788,12 @@ jobs:
                 ));
               '
             )"
-            echo "::notice::replay stantio: release API attesa $api_release_commit"
+            if [ "$api_release_commit" = "$CURRENT_MAIN" ]; then
+              echo "::notice::release API stantia non copre la HEAD corrente; il replay ricalcolera' la release senza override"
+              api_release_commit=''
+            else
+              echo "::notice::replay stantio: release API attesa $api_release_commit"
+            fi
           else
             # Un bounded dispatch deve ripartire senza la release osservata:
             # il publisher ricalcola quella compatibile con la HEAD corrente.
@@ -936,36 +953,63 @@ jobs:
               exit 1
             fi
           fi
+          pinned_replay_main=''
           if [ "$EVENT_NAME" = 'workflow_run' ]; then
+            pinned_replay_main="$WORKFLOW_RUN_HEAD_SHA"
+          elif [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -n "${SOURCE_COMMIT:-}" ]; then
+            pinned_replay_main="$SOURCE_MAIN_COMMIT"
+          fi
+          if [ -n "$pinned_replay_main" ]; then
             if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
               echo "::error::impossibile verificare la revisione corrente di main prima degli upload"
               exit 1
             fi
-            if [ "$current_main" != "$WORKFLOW_RUN_HEAD_SHA" ]; then
+            if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::error::revisione corrente di main non valida prima degli upload"
+              exit 1
+            fi
+            if [ "$current_main" != "$pinned_replay_main" ]; then
               runtime_pat="${GITHUB_PAT_NANAKO:-}"
               if [ -z "$runtime_pat" ]; then
                 echo "::error::GITHUB_PAT_NANAKO assente: impossibile redispatchare il replay stantio prima degli upload"
                 exit 1
               fi
               export GH_TOKEN="$runtime_pat"
-              echo "::notice::replay workflow_run redispatchato prima degli upload: main e' avanzato da $WORKFLOW_RUN_HEAD_SHA a $current_main"
-              replay_before="${PUSH_BEFORE:-$WORKFLOW_RUN_HEAD_SHA}"
-              replay_after="${PUSH_AFTER:-$WORKFLOW_RUN_HEAD_SHA}"
-              if [ "$(git rev-parse --is-shallow-repository)" = 'true' ]; then
-                git fetch --no-tags --unshallow origin main
+              if [ "$EVENT_NAME" = 'workflow_run' ]; then
+                echo "::notice::replay workflow_run redispatchato prima degli upload: main e' avanzato da $pinned_replay_main a $current_main"
               else
-                git fetch --no-tags origin main
+                echo "::notice::replay bounded redispatchato prima degli upload: main e' avanzato da $pinned_replay_main a $current_main"
               fi
-              api_release_commit="$(
-                CURRENT_MAIN="$current_main" STALE_API_RELEASE="$WORKFLOW_RUN_HEAD_SHA" node --input-type=module -e '
-                  import { resolveStaleReplayApiReleaseCommit } from "./scripts/publish-section-pages.mjs";
-                  process.stdout.write(resolveStaleReplayApiReleaseCommit(
-                    process.env.CURRENT_MAIN,
-                    process.env.STALE_API_RELEASE,
-                  ));
-                '
-              )"
-              echo "::notice::replay workflow_run: release API attesa $api_release_commit"
+              replay_before="${PUSH_BEFORE:-$pinned_replay_main}"
+              replay_after=''
+              if [ -n "$replay_before" ]; then
+                # The replay source is current_main; do not retain the old
+                # range head or release selection.
+                replay_after="$current_main"
+              fi
+              api_release_commit=''
+              if [ "$EVENT_NAME" = 'workflow_run' ]; then
+                if [ "$(git rev-parse --is-shallow-repository)" = 'true' ]; then
+                  git fetch --no-tags --unshallow origin main
+                else
+                  git fetch --no-tags origin main
+                fi
+                api_release_commit="$(
+                  CURRENT_MAIN="$current_main" STALE_API_RELEASE="$pinned_replay_main" node --input-type=module -e '
+                    import { resolveStaleReplayApiReleaseCommit } from "./scripts/publish-section-pages.mjs";
+                    process.stdout.write(resolveStaleReplayApiReleaseCommit(
+                      process.env.CURRENT_MAIN,
+                      process.env.STALE_API_RELEASE,
+                    ));
+                  '
+                )"
+                if [ "$api_release_commit" = "$current_main" ]; then
+                  echo "::notice::release API stantia non copre la HEAD corrente; il replay ricalcolera' la release senza override"
+                  api_release_commit=''
+                else
+                  echo "::notice::replay workflow_run: release API attesa $api_release_commit"
+                fi
+              fi
               gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
                 -f section="$SECTION" \
                 -f article_ids="$ARTICLE_IDS_JSON" \
@@ -1020,7 +1064,8 @@ jobs:
           # API/edge pointer is still catching up: publish-section-pages writes
           # a summary proving that only the deferred, non-destructive phase
           # remains. Every other error stays fail-closed. workflow_run and
-          # bounded replays keep their existing pinned-source behavior.
+          # bounded replays are redispatched if their pinned source goes stale
+          # before render, preserving the source/API freshness invariant.
           normal_dispatch='false'
           if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ "$REF" = 'refs/heads/main' ] && [ -z "${SOURCE_COMMIT:-}" ] && [ "$BOOTSTRAP" != 'true' ]; then
             normal_dispatch='true'
