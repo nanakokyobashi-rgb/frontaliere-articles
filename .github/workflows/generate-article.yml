@@ -1045,6 +1045,25 @@ jobs:
             echo "stagedContentPaths.length=${#stagedContentPaths[@]}"
           }
 
+          # The cooperative-stop proof has its own channel. Reading the file
+          # to EOF after the attempt has been waited for means the classifier
+          # never depends on the asynchronous `tee` that carries human logs.
+          # The token binds the proof to this exact attempt, so a stale or
+          # ordinary diagnostic marker cannot declare a timeout.
+          await_cooperative_stop_marker() {
+            local marker_file="$1" token="$2" line
+            [ -r "$marker_file" ] || return 1
+            while IFS= read -r line; do
+              case "$line" in
+                "GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGTERM token=$token"|\
+                "GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGINT token=$token")
+                  return 0
+                  ;;
+              esac
+            done < "$marker_file"
+            return 1
+          }
+
           # The attempt list, fixed before the loop — this is the termination
           # argument in code: one entry per section, never more.
           sections=("$TARGET_SECTION")
@@ -1377,9 +1396,11 @@ jobs:
           # differimento, e assorbirli e' lo stesso silenzio verde a un'altra
           # riga.
           #
-          # L'ORACOLO E' IL CODICE DI USCITA, mai una stringa dello stdout: quel
-          # flusso e' pieno di sequenze ANSI e di virgolette tipografiche, e un
-          # `grep` su di esso e' un oracolo che si acceca da solo senza dirlo.
+          # L'ORACOLO E' IL CODICE DI USCITA, con una sola eccezione dichiarata:
+          # il SIGTERM cooperativo deve avere la prova nel file di controllo
+          # per-attempt, vincolata al token corrente. Mai una stringa dello
+          # stdout/stderr: quel flusso e' pieno di diagnostica, e un `grep` su
+          # di esso e' un oracolo che si acceca da solo senza dirlo.
           #
           # COSA QUESTA REGOLA NON COPRE, dichiarato perche' non venga
           # ri-derivato: un differimento VERO che si ripete per ore (quota vera
@@ -1455,16 +1476,18 @@ jobs:
 
             # Il tentativo gira in background con l'output duplicato su
             # `$stall_log`: e' quel file a crescere (o a non crescere) che il
-            # watchdog campiona. `$!` e' il pid di `timeout`, quindi `wait` piu'
-            # sotto restituisce il suo codice di uscita esattamente come prima.
+            # watchdog campiona. Il marker cooperativo va invece nel file di
+            # controllo dedicato: il log resta diagnostica, mai un oracolo.
+            # `$!` e' il pid di `timeout`, quindi `wait` piu' sotto restituisce
+            # il suo codice di uscita esattamente come prima.
             # I flag `--report-*` vanno PRIMA del path dello script, e non
             # cambiano la forma degli argomenti di `timeout` (tre, come prima).
             rm -f "$stall_flag"
             : > "$stall_log"
             attempt_pipe="$diag_dir/attempt-${tried}.pipe"
-            stop_marker="$diag_dir/generation-stop-${tried}.marker"
-            stop_token="${run_id}-${run_attempt}-${tried}-$$"
-            if ! rm -f "$attempt_pipe" "$stop_marker" || ! mkfifo "$attempt_pipe"; then
+            stop_marker_file="$diag_dir/generation-stop-$tried"
+            stop_marker_token="${run_id}-${run_attempt}-${tried}-${RANDOM}-$$"
+            if ! rm -f "$attempt_pipe" "$stop_marker_file" || ! mkfifo "$attempt_pipe"; then
               all_declared=false
               outcome_kind="error"
               outcome_reason="undeclared"
@@ -1473,8 +1496,8 @@ jobs:
               echo "::error::impossibile preparare il canale di controllo per la sezione $sec; rifiuto fail-closed"
               break
             fi
-            export GENERATION_STOP_FILE="$stop_marker"
-            export GENERATION_STOP_TOKEN="$stop_token"
+            export GENERATION_STOP_FILE="$stop_marker_file"
+            export GENERATION_STOP_TOKEN="$stop_marker_token"
             tee -a "$stall_log" < "$attempt_pipe" &
             tee_pid=$!
             if [ -n "${SOURCE_URL:-}" ]; then
@@ -1528,17 +1551,19 @@ jobs:
               [ -n "$undeclared_why" ] || undeclared_why="stallo: nessun output per ${stall_s}s sulla sezione $sec (kill del watchdog, exit $rc) — l'event loop e' bloccato da lavoro sincrono, ed e' un difetto DIVERSO dal kill duro per budget scaduto. Lo stack e' nell'artifact generate-article-diagnostics."
               break
             fi
+            cooperative_stop=false
+            if [ "$rc" = "124" ] && await_cooperative_stop_marker "$stop_marker_file" "$stop_marker_token"; then
+              cooperative_stop=true
+            fi
             if [ "$rc" = "124" ] || [ "$rc" = "137" ]; then
               # GNU `timeout` reports 124 when the child receives its initial
               # SIGTERM, even if the child handles that signal and exits cleanly
               # before the --kill-after grace. The machine marker is emitted by
-              # create-article.mjs before its cooperative-stop warning. Without
-              # this distinction a controlled deadline stop is misreported as a
-              # hard kill and opens a recurring workflow-failure issue.
-              cooperative_stop=false
-              if [ "$rc" = "124" ] && grep -Fqx "GENERATION_STOP token=$stop_token kind=timeout reason=cooperative-sigterm signal=SIGTERM" "$stop_marker" 2>/dev/null; then
-                cooperative_stop=true
-              fi
+              # create-article.mjs into the per-attempt control file before its
+              # cooperative-stop warning. Without this distinction a controlled
+              # deadline stop is misreported as a hard kill and opens a recurring
+              # workflow-failure issue; without the token/file check an ordinary
+              # diagnostic could make a real hard kill green.
               if [ "$cooperative_stop" = "true" ]; then
                 # A signal received after a body/registration write is still a
                 # partial transaction. Only a clean, body-less stop is a

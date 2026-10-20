@@ -1,9 +1,4 @@
 {
-  "https://www.varesenoi.it/2026/09/11/leggi-notizia/argomenti/varese/articolo/ospedale-del-ponte-asst-sette-laghi-replica-a-palazzo-estense-nessun-blocco-del-terzo-lotto-lav.html": {
-    "articleId": "ospedale-del-ponte-terzo-lotto",
-    "ts": "2026-09-13T07:44:01.033Z",
-    "keyForm": 2
-  },
   "https://comozero.it/attualita/la-tristissima-fine-del-brand-di-lusso-che-ha-fatto-la-storia-altri-25-licenziati-in-ticino-rosso-per-milioni": {
     "articleId": "crisi-bally-caslano-licenziamenti",
     "ts": "2026-09-14T00:20:15.112Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/attualita/1957988/troppi-frontalieri-la-lega-chiede-di-intervenire": {
     "articleId": "lega-misure-lugano",
     "ts": "2026-10-20T14:47:13.183Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/la-lunga-battaglia-dei-frontalieri-tra-tasse-diritti-e-disparita/2713135": {
+    "articleId": "battaglia-frontalieri-tasse-diritti",
+    "ts": "2026-10-20T15:23:15.999Z",
     "keyForm": 2
   }
 }

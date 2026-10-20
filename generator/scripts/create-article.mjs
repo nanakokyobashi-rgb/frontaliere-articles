@@ -17164,8 +17164,10 @@ function installCodexTranslateProcessDeadline() {
  * already closed by #561, which made `write()` commit via temp + `renameSync`
  * (a single atomic POSIX syscall). A SIGKILL mid-write still cannot leave a
  * half-written file at the final path, with or without this handler — which is
- * why the handler stays a *flag*, not a rescue routine. Doing work inside a
- * signal handler here would only race the very flush that #561 made atomic.
+ * why the handler stays a *flag*, not a rescue routine for the corpus. The
+ * only synchronous side effect below is the tiny per-attempt control proof
+ * requested by the outer wrapper; it never touches corpus files or score
+ * flushing, so it does not race the atomic write that #561 made safe.
  *
  * The flag is read by `wallBudgetExceeded()`, and that is the whole point: the
  * generation loop already polls it at 11 distinct sites (topic attempts, body2
@@ -17192,24 +17194,23 @@ function requestCooperativeStop(signal) {
   // returns 124 even when the child receives SIGTERM and exits cooperatively;
   // without a marker the shell cannot distinguish that controlled deadline
   // stop from a genuine hard kill and reports a false undeclared failure.
-  // The workflow gives every attempt its own file and token. Do not use the
-  // mixed stdout/stderr log as the authority: ordinary model output can carry
-  // the same text, and a process-substitution `tee` can still be flushing
-  // after `wait(timeout)` returns. `wx` makes a duplicate producer fail closed.
-  const stopFile = process.env.GENERATION_STOP_FILE;
-  const stopToken = process.env.GENERATION_STOP_TOKEN;
-  if (stopFile && stopToken) {
+  const marker = `GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=${signal}`;
+  const controlMarker = `${marker} token=${process.env.GENERATION_STOP_TOKEN || 'unscoped'}`;
+  // The workflow supplies a fresh file and token for every attempt. Write the
+  // proof synchronously, with exclusive creation, before the human-readable
+  // warning: the classifier must never infer a cooperative stop from the
+  // mixed stdout/stderr stream, where an ordinary diagnostic could repeat the
+  // same words or where `tee` could still be flushing after `wait` returns.
+  if (process.env.GENERATION_STOP_FILE && process.env.GENERATION_STOP_TOKEN) {
     try {
-      writeFileSync(
-        stopFile,
-        `GENERATION_STOP token=${stopToken} kind=timeout reason=cooperative-sigterm signal=${signal}\n`,
-        { encoding: 'utf8', flag: 'wx' },
-      );
+      writeFileSync(process.env.GENERATION_STOP_FILE, `${controlMarker}\n`, { encoding: 'utf8', flag: 'wx' });
     } catch (error) {
-      console.warn(`::warning::create-article.mjs: marker cooperativo non scritto (${error?.message || 'errore sconosciuto'})`);
+      // Fail closed in the workflow: a missing control proof must remain a
+      // red hard-kill classification. Keep the reason visible for diagnosis.
+      console.error(`GENERATION_STOP_CONTROL_WRITE_FAILED token=${process.env.GENERATION_STOP_TOKEN} code=${error?.code || 'unknown'}`);
     }
   }
-  console.warn(`GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=${signal}`);
+  console.warn(marker);
   // `::warning` and not `::error`: the run is not broken, it is being stopped.
   // A declared stop that prints nothing is indistinguishable from a crash, and
   // that ambiguity is exactly what #525 reports.

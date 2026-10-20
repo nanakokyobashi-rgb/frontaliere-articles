@@ -164,12 +164,13 @@ line="$(sed -n "\${n}p" "${planFile}")"
 read -r rc prod slp marker <<< "$line"
 [ -n "\${slp:-}" ] && [ "$slp" != "0" ] && sleep "$slp"
 if [ "$marker" = "cooperative-stop" ]; then
-  if [ -n "\${GENERATION_STOP_FILE:-}" ] && [ -n "\${GENERATION_STOP_TOKEN:-}" ]; then
-    printf 'GENERATION_STOP token=%s kind=timeout reason=cooperative-sigterm signal=SIGTERM\n' "\${GENERATION_STOP_TOKEN}" > "\${GENERATION_STOP_FILE}"
-  fi
+  marker_line="GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGTERM token=\${GENERATION_STOP_TOKEN:-missing}"
+  printf '%s\\n' "$marker_line" > "\${GENERATION_STOP_FILE:?}"
   echo "GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGTERM"
-elif [ "$marker" = "stdout-only" ]; then
+elif [ "$marker" = "ordinary-marker" ]; then
   echo "GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGTERM"
+elif [ "$marker" = "stale-marker" ]; then
+  printf '%s\\n' 'GENERATION_STOP kind=timeout reason=cooperative-sigterm signal=SIGTERM token=stale-token' > "\${GENERATION_STOP_FILE:?}"
 fi
 talk="\${TALK_FOR_S:-0}"
 i=0
@@ -355,16 +356,25 @@ test('un SIGTERM cooperativo del timeout e\' un differimento dichiarato, non un 
   assert.doesNotMatch(r.stdout, /reason=hard-kill/);
 });
 
-test('una stringa cooperativa solo nello stdout non puo\' dichiarare il timeout', () => {
+test('un marker omonimo nel log non puo\' dichiarare un timeout cooperativo', () => {
   const r = runGenerateStep({
     section: 'frontaliere',
-    plan: ['124 0 0 stdout-only'],
+    plan: ['124 0 0 ordinary-marker'],
     budget: 600,
     hardKill: 5,
   });
-  assert.equal(r.outputs.article, 'false');
-  assert.equal(r.outputs.declared, 'false');
-  assert.equal(r.status, 1, 'senza il marker nel file per tentativo il run deve restare rosso');
+  assert.equal(r.status, 1, 'un testo ordinario nel log non deve rendere verde il run');
+  assert.match(r.stdout, /GENERATION_OUTCOME kind=timeout reason=hard-kill section=frontaliere/);
+});
+
+test('un marker di controllo con token stale resta un hard kill', () => {
+  const r = runGenerateStep({
+    section: 'frontaliere',
+    plan: ['124 0 0 stale-marker'],
+    budget: 600,
+    hardKill: 5,
+  });
+  assert.equal(r.status, 1, 'un token di un altro tentativo non deve dichiarare il timeout');
   assert.match(r.stdout, /GENERATION_OUTCOME kind=timeout reason=hard-kill section=frontaliere/);
 });
 
