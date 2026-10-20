@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "servizi",
-  "updatedAt": "2026-10-20T00:06:33.415Z",
-  "contentHash": "66442f5a69e07675d55112e6521c120422311af5b605d66e87fe54976df9248e",
+  "updatedAt": "2026-10-20T05:26:42.124Z",
+  "contentHash": "7879536d219296859f6391c2fed45d0f4246e33a8efa860d3f9e349a7f61c668",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-19T15:46:42.722Z",
+      "updatedAt": "2026-10-19T21:11:59.421Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -60,18 +60,23 @@
           "items": [
             {
               "label": "Glarus",
-              "value": "17 °C",
-              "detail": "oggi da 10 a 17 °C"
+              "value": "13 °C",
+              "detail": "oggi da 11 a 14 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Neue Identitätskarte mit Chip ab November 2026: Kanton Glarus bündelt Ausweisgeschäfte beim Passbüro",
+              "date": "2026-10-19",
+              "url": "https://www.glarus-sued.ch/services/aktuelles/details.html/3780/news/30272"
+            },
             {
               "label": "Glarner Spitalliste Psychiatrie wird angepasst",
               "date": "2026-10-05",
@@ -93,7 +98,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -173,7 +178,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "en": {
       "canton": "GL",
@@ -211,18 +216,23 @@
           "items": [
             {
               "label": "Glarus",
-              "value": "17 °C",
-              "detail": "today from 10 to 17 °C"
+              "value": "13 °C",
+              "detail": "today from 11 to 14 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Neue Identitätskarte mit Chip ab November 2026: Kanton Glarus bündelt Ausweisgeschäfte beim Passbüro",
+              "date": "2026-10-19",
+              "url": "https://www.glarus-sued.ch/services/aktuelles/details.html/3780/news/30272"
+            },
             {
               "label": "Glarner Spitalliste Psychiatrie wird angepasst",
               "date": "2026-10-05",
@@ -244,7 +254,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -320,7 +330,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "de": {
       "canton": "GL",
@@ -358,18 +368,23 @@
           "items": [
             {
               "label": "Glarus",
-              "value": "17 °C",
-              "detail": "heute 10 bis 17 °C"
+              "value": "13 °C",
+              "detail": "heute 11 bis 14 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Neue Identitätskarte mit Chip ab November 2026: Kanton Glarus bündelt Ausweisgeschäfte beim Passbüro",
+              "date": "2026-10-19",
+              "url": "https://www.glarus-sued.ch/services/aktuelles/details.html/3780/news/30272"
+            },
             {
               "label": "Glarner Spitalliste Psychiatrie wird angepasst",
               "date": "2026-10-05",
@@ -391,7 +406,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -467,7 +482,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "fr": {
       "canton": "GL",
@@ -505,18 +520,23 @@
           "items": [
             {
               "label": "Glarus",
-              "value": "17 °C",
-              "detail": "aujourd’hui de 10 à 17 °C"
+              "value": "13 °C",
+              "detail": "aujourd’hui de 11 à 14 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Neue Identitätskarte mit Chip ab November 2026: Kanton Glarus bündelt Ausweisgeschäfte beim Passbüro",
+              "date": "2026-10-19",
+              "url": "https://www.glarus-sued.ch/services/aktuelles/details.html/3780/news/30272"
+            },
             {
               "label": "Glarner Spitalliste Psychiatrie wird angepasst",
               "date": "2026-10-05",
@@ -538,7 +558,7 @@
               "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -610,7 +630,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     }
   }
 }

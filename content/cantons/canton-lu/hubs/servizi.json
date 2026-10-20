@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "servizi",
-  "updatedAt": "2026-10-20T00:06:33.415Z",
-  "contentHash": "c6e9b4b545ef30e918599b8ab6c5f288df6ecaa89b7f9c2d867f8a1968fa1890",
+  "updatedAt": "2026-10-20T05:26:42.124Z",
+  "contentHash": "c2d7f4ef5c8d14be3068abbb03382d7cefa17c08232a8da4bee94a5888b0e8d3",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-19T15:46:42.722Z",
+      "updatedAt": "2026-10-19T21:11:59.421Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -70,12 +70,12 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "14 °C",
-              "detail": "oggi da 10 a 14 °C"
+              "value": "12 °C",
+              "detail": "oggi da 10 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -193,7 +193,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "en": {
       "canton": "LU",
@@ -241,12 +241,12 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "14 °C",
-              "detail": "today from 10 to 14 °C"
+              "value": "12 °C",
+              "detail": "today from 10 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -284,7 +284,7 @@
               "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -359,7 +359,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "de": {
       "canton": "LU",
@@ -407,12 +407,12 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "14 °C",
-              "detail": "heute 10 bis 14 °C"
+              "value": "12 °C",
+              "detail": "heute 10 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -450,7 +450,7 @@
               "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -525,7 +525,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "fr": {
       "canton": "LU",
@@ -573,12 +573,12 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "14 °C",
-              "detail": "aujourd’hui de 10 à 14 °C"
+              "value": "12 °C",
+              "detail": "aujourd’hui de 10 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -616,7 +616,7 @@
               "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -688,7 +688,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     }
   }
 }

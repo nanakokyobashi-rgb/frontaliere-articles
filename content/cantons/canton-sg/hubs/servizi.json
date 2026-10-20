@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-20T00:06:33.415Z",
-  "contentHash": "0e73065b9cacb9c5e67c0643da2a854748d66180371bc4d98f4143d73829c8df",
+  "updatedAt": "2026-10-20T05:26:42.124Z",
+  "contentHash": "3dce1cd02346b74325084f49362fe660e0c5bc1f82dd4065a40cf8df624adf46",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-19T13:13:42.861Z",
+      "updatedAt": "2026-10-19T22:22:54.680Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-19T15:46:42.722Z",
+      "updatedAt": "2026-10-19T21:11:59.421Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "10",
-          "note": "offerta mediana 520 CHF"
+          "note": "offerta mediana 530 CHF"
         }
       ],
       "dataBlocks": [
@@ -102,7 +102,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-19T13:13:42.861Z"
+          "updatedAt": "2026-10-19T22:22:54.680Z"
         },
         {
           "id": "meteo",
@@ -111,12 +111,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "12 °C",
-              "detail": "oggi da 8 a 12 °C"
+              "value": "9 °C",
+              "detail": "oggi da 7 a 10 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -154,7 +154,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-erhaelt-zwei-best-paper-awards-2026-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "en": {
       "canton": "SG",
@@ -251,7 +251,7 @@
         {
           "label": "Plate auctions running",
           "value": "10",
-          "note": "typical bid 520 CHF"
+          "note": "typical bid 530 CHF"
         }
       ],
       "dataBlocks": [
@@ -309,7 +309,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-19T13:13:42.861Z"
+          "updatedAt": "2026-10-19T22:22:54.680Z"
         },
         {
           "id": "meteo",
@@ -318,12 +318,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "12 °C",
-              "detail": "today from 8 to 12 °C"
+              "value": "9 °C",
+              "detail": "today from 7 to 10 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -361,7 +361,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-erhaelt-zwei-best-paper-awards-2026-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -437,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "de": {
       "canton": "SG",
@@ -454,7 +454,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "10",
-          "note": "mittleres Gebot 520 CHF"
+          "note": "mittleres Gebot 530 CHF"
         }
       ],
       "dataBlocks": [
@@ -512,7 +512,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-19T13:13:42.861Z"
+          "updatedAt": "2026-10-19T22:22:54.680Z"
         },
         {
           "id": "meteo",
@@ -521,12 +521,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "12 °C",
-              "detail": "heute 8 bis 12 °C"
+              "value": "9 °C",
+              "detail": "heute 7 bis 10 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -564,7 +564,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-erhaelt-zwei-best-paper-awards-2026-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -640,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "fr": {
       "canton": "SG",
@@ -657,7 +657,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "10",
-          "note": "offre centrale 520 CHF"
+          "note": "offre centrale 530 CHF"
         }
       ],
       "dataBlocks": [
@@ -715,7 +715,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-19T13:13:42.861Z"
+          "updatedAt": "2026-10-19T22:22:54.680Z"
         },
         {
           "id": "meteo",
@@ -724,12 +724,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "12 °C",
-              "detail": "aujourd’hui de 8 à 12 °C"
+              "value": "9 °C",
+              "detail": "aujourd’hui de 7 à 10 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -767,7 +767,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-erhaelt-zwei-best-paper-awards-2026-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -839,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     }
   }
 }

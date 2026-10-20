@@ -4,17 +4,17 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T03:21:16.902Z",
-  "contentHash": "c2fb7ad4b25c713148e7ee7320800aa59b3b1ffee7c23a61e0e73167bf334bff",
+  "updatedAt": "2026-10-20T05:26:42.124Z",
+  "contentHash": "5af4544cb02e9d3b5f64c811138cda64fbbbbd6129aa1918f07e784994d16322",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-19T14:01:37.256Z",
+      "updatedAt": "2026-10-19T20:47:42.578Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -73,11 +73,6 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "Revocato: A2 Luzern -> Basel tra Svincolo autostradale Egerkingen E Galleria Galleria Belchen Situazione: traffico fortemente rallentato Causa: incidente precedente",
-              "value": "Traffico",
-              "date": "2026-10-19T12:01:00.000Z"
-            },
-            {
               "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2028",
@@ -88,10 +83,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2029",
               "date": "2024-12-30T05:49:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna <-> Basilea Svincolo autostradale Egerkingen Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5",
+              "value": "Cantiere",
+              "detail": "fine prevista: 30 luglio 2027",
+              "date": "2025-04-11T05:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -109,7 +110,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -149,7 +150,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "en": {
       "canton": "SO",
@@ -205,11 +206,6 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "Revocato: A2 Luzern -> Basel tra Svincolo autostradale Egerkingen E Galleria Galleria Belchen Situazione: traffico fortemente rallentato Causa: incidente precedente",
-              "value": "Traffic",
-              "date": "2026-10-19T12:01:00.000Z"
-            },
-            {
               "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
               "value": "Roadworks",
               "detail": "until 31 December 2028",
@@ -220,10 +216,16 @@
               "value": "Roadworks",
               "detail": "until 31 December 2029",
               "date": "2024-12-30T05:49:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna <-> Basilea Svincolo autostradale Egerkingen Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 3.5",
+              "value": "Roadworks",
+              "detail": "until 30 July 2027",
+              "date": "2025-04-11T05:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +243,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -280,7 +282,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "de": {
       "canton": "SO",
@@ -336,11 +338,6 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "Aufgehoben: A2 Luzern -> Basel zwischen Anschluss Egerkingen und Tunnel Belchen-Tunnel Sachlage: stockender Verkehr Ursache: vorausgegangener Unfall",
-              "value": "Verkehr",
-              "date": "2026-10-19T12:01:00.000Z"
-            },
-            {
               "label": "Balsthal <-> Laufen zwischen Ortschaft Oberbeinwil und Pass Passwang Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung",
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2028",
@@ -351,10 +348,16 @@
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2029",
               "date": "2024-12-30T05:49:00.000Z"
+            },
+            {
+              "label": "A2 Luzern <-> Basel Anschluss Egerkingen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.6 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 3.5",
+              "value": "Baustelle",
+              "detail": "bis 30. Juli 2027",
+              "date": "2025-04-11T05:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -372,7 +375,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -411,7 +414,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "fr": {
       "canton": "SO",
@@ -467,11 +470,6 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "Révoqué: A2 Lucerne -> Bâle entre Jonction autoroutière Egerkingen et Tunnel Tunnel du Belchen Situation: trafic en accordéon Raison: accident précédent",
-              "value": "Trafic",
-              "date": "2026-10-19T12:01:00.000Z"
-            },
-            {
               "label": "Balsthal <-> Laufon entre Localité Oberbeinwil et Col Passwang Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies",
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2028",
@@ -482,10 +480,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2029",
               "date": "2024-12-30T05:49:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne <-> Bâle Jonction autoroutière Egerkingen Situation: trafic perturbé travaux, longueur [km] 0.6 Complément 1: limitation temporaire de largeur largeur de la voie [m] 3.5",
+              "value": "Chantier",
+              "detail": "jusqu’au 30 juillet 2027",
+              "date": "2025-04-11T05:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -503,7 +507,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -543,7 +547,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     }
   }
 }

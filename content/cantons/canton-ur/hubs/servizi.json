@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "servizi",
-  "updatedAt": "2026-10-20T00:06:33.415Z",
-  "contentHash": "35dccf5d9fa0080bd46ab1c41bac8b7ea0f1ec9db55c5bbae938cc7710f37d59",
+  "updatedAt": "2026-10-20T05:26:42.124Z",
+  "contentHash": "75244aeb9d189a5c5fa81e825e3e277faedf1648fbb586d3ce5a44141c580128",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-19T15:46:42.722Z",
+      "updatedAt": "2026-10-19T21:11:59.421Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -60,12 +60,12 @@
           "items": [
             {
               "label": "Altdorf",
-              "value": "16 °C",
-              "detail": "oggi da 12 a 16 °C"
+              "value": "13 °C",
+              "detail": "oggi da 12 a 15 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -78,7 +78,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -158,7 +158,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "en": {
       "canton": "UR",
@@ -196,12 +196,12 @@
           "items": [
             {
               "label": "Altdorf",
-              "value": "16 °C",
-              "detail": "today from 12 to 16 °C"
+              "value": "13 °C",
+              "detail": "today from 12 to 15 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -214,7 +214,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -290,7 +290,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "de": {
       "canton": "UR",
@@ -328,12 +328,12 @@
           "items": [
             {
               "label": "Altdorf",
-              "value": "16 °C",
-              "detail": "heute 12 bis 16 °C"
+              "value": "13 °C",
+              "detail": "heute 12 bis 15 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -346,7 +346,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -422,7 +422,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "fr": {
       "canton": "UR",
@@ -460,12 +460,12 @@
           "items": [
             {
               "label": "Altdorf",
-              "value": "16 °C",
-              "detail": "aujourd’hui de 12 à 16 °C"
+              "value": "13 °C",
+              "detail": "aujourd’hui de 12 à 15 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -478,7 +478,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -550,7 +550,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     }
   }
 }

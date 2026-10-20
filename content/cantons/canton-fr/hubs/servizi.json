@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-10-20T00:06:33.415Z",
-  "contentHash": "7a63b960948b3a9144165784bf94312aab989dd66ef3757d3cf36518b82e852f",
+  "updatedAt": "2026-10-20T05:26:42.124Z",
+  "contentHash": "0dff2ebb50e3e50e0474810c179b5c49979d5ddeb08de1a2f7324869999bc644",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-19T13:13:42.861Z",
+      "updatedAt": "2026-10-19T22:22:54.680Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-19T15:46:42.722Z",
+      "updatedAt": "2026-10-19T21:11:59.421Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -97,7 +97,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-19T13:13:42.861Z"
+          "updatedAt": "2026-10-19T22:22:54.680Z"
         },
         {
           "id": "meteo",
@@ -106,12 +106,12 @@
           "items": [
             {
               "label": "Fribourg",
-              "value": "13 °C",
-              "detail": "oggi da 9 a 13 °C"
+              "value": "10 °C",
+              "detail": "oggi da 9 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -149,7 +149,7 @@
               "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -229,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "en": {
       "canton": "FR",
@@ -299,7 +299,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-19T13:13:42.861Z"
+          "updatedAt": "2026-10-19T22:22:54.680Z"
         },
         {
           "id": "meteo",
@@ -308,12 +308,12 @@
           "items": [
             {
               "label": "Fribourg",
-              "value": "13 °C",
-              "detail": "today from 9 to 13 °C"
+              "value": "10 °C",
+              "detail": "today from 9 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -351,7 +351,7 @@
               "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -427,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "de": {
       "canton": "FR",
@@ -497,7 +497,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-19T13:13:42.861Z"
+          "updatedAt": "2026-10-19T22:22:54.680Z"
         },
         {
           "id": "meteo",
@@ -506,12 +506,12 @@
           "items": [
             {
               "label": "Fribourg",
-              "value": "13 °C",
-              "detail": "heute 9 bis 13 °C"
+              "value": "10 °C",
+              "detail": "heute 9 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -549,7 +549,7 @@
               "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -625,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "fr": {
       "canton": "FR",
@@ -695,7 +695,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-19T13:13:42.861Z"
+          "updatedAt": "2026-10-19T22:22:54.680Z"
         },
         {
           "id": "meteo",
@@ -704,12 +704,12 @@
           "items": [
             {
               "label": "Fribourg",
-              "value": "13 °C",
-              "detail": "aujourd’hui de 9 à 13 °C"
+              "value": "10 °C",
+              "detail": "aujourd’hui de 9 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -747,7 +747,7 @@
               "url": "https://www.fr.ch/dsas/actualites/le-centre-fribourgeois-de-sante-sexuelle-fete-ses-40-ans"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -819,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     }
   }
 }

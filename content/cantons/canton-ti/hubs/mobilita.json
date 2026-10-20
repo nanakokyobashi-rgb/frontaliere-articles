@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T03:21:16.902Z",
-  "contentHash": "504d45b7f7016e7c50644fd9899f0ad1f0b99c87b61444424675214a4eee2be7",
+  "updatedAt": "2026-10-20T05:26:42.124Z",
+  "contentHash": "fcfe16ee2ad72804341a99f35d5006c7e1ab1583fb6088ef53d61813790fba7f",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-19T14:01:37.256Z",
+      "updatedAt": "2026-10-19T20:47:42.578Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "8",
+          "value": "6",
           "note": "segnalazioni aggiornate: 19 ottobre 2026"
         },
         {
@@ -135,16 +135,6 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata",
-              "value": "Chiusura",
-              "date": "2026-10-19T10:16:00.000Z"
-            },
-            {
-              "label": "Revocato: Castagnola -> Davesco-Soragno tra Luogo Castagnola E Luogo Pregassona Situazione: chiusa Causa: rottura rete idrica",
-              "value": "Chiusura",
-              "date": "2026-10-19T11:25:00.000Z"
-            },
-            {
               "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
               "value": "Chiusura",
               "detail": "fine prevista: 22 ottobre 2026",
@@ -155,10 +145,22 @@
               "value": "Chiusura",
               "detail": "fine prevista: 29 ottobre 2026",
               "date": "2026-10-28T20:30:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
+              "value": "Cantiere",
+              "detail": "fine prevista: 29 dicembre 2028",
+              "date": "2021-06-25T03:00:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso -> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 29 dicembre 2028",
+              "date": "2022-04-20T03:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -196,7 +198,7 @@
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -292,7 +294,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "en": {
       "canton": "TI",
@@ -307,7 +309,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "8",
+          "value": "6",
           "note": "reports as of 19 October 2026"
         },
         {
@@ -405,16 +407,6 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo Svincolo autostradale Airolo Situazione: raccordo autostradale chiuso in entrata",
-              "value": "Closure",
-              "date": "2026-10-19T10:16:00.000Z"
-            },
-            {
-              "label": "Revocato: Castagnola -> Davesco-Soragno tra Luogo Castagnola E Luogo Pregassona Situazione: chiusa Causa: rottura rete idrica",
-              "value": "Closure",
-              "date": "2026-10-19T11:25:00.000Z"
-            },
-            {
               "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
               "value": "Closure",
               "detail": "until 22 October 2026",
@@ -425,10 +417,22 @@
               "value": "Closure",
               "detail": "until 29 October 2026",
               "date": "2026-10-28T20:30:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
+              "value": "Roadworks",
+              "detail": "until 29 December 2028",
+              "date": "2021-06-25T03:00:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso -> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
+              "value": "Roadworks",
+              "detail": "until 29 December 2028",
+              "date": "2022-04-20T03:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -466,7 +470,7 @@
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -561,7 +565,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "de": {
       "canton": "TI",
@@ -576,7 +580,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "8",
+          "value": "6",
           "note": "Meldungen vom 19. Oktober 2026"
         },
         {
@@ -674,16 +678,6 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> Gotthard Anschluss Airolo Sachlage: Einfahrt gesperrt",
-              "value": "Sperrung",
-              "date": "2026-10-19T10:16:00.000Z"
-            },
-            {
-              "label": "Aufgehoben: Castagnola -> Davesco-Soragno zwischen Ortschaft Castagnola und Ortschaft Pregassona Sachlage: Strecke gesperrt Ursache: Wasserrohrbruch",
-              "value": "Sperrung",
-              "date": "2026-10-19T11:25:00.000Z"
-            },
-            {
               "label": "A13 Bellinzona <-> Chur zwischen Anschluss San Bernardino und Anschluss San Bernardino-Pass Sachlage: Strecke gesperrt Baustelle, Länge [km] 7.5",
               "value": "Sperrung",
               "detail": "bis 22. Oktober 2026",
@@ -694,10 +688,22 @@
               "value": "Sperrung",
               "detail": "bis 29. Oktober 2026",
               "date": "2026-10-28T20:30:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
+              "value": "Baustelle",
+              "detail": "bis 29. Dezember 2028",
+              "date": "2021-06-25T03:00:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso -> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
+              "value": "Baustelle",
+              "detail": "bis 29. Dezember 2028",
+              "date": "2022-04-20T03:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -735,7 +741,7 @@
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -830,7 +836,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "fr": {
       "canton": "TI",
@@ -845,7 +851,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "8",
+          "value": "6",
           "note": "signalements au 19 octobre 2026"
         },
         {
@@ -943,16 +949,6 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> St-Gothard Jonction autoroutière Airolo Situation: entrée fermée",
-              "value": "Fermeture",
-              "date": "2026-10-19T10:16:00.000Z"
-            },
-            {
-              "label": "Révoqué: Castagnola -> Davesco-Soragno entre Localité Castagnola et Localité Pregassona Situation: fermé Raison: rupture de conduite d'eau",
-              "value": "Fermeture",
-              "date": "2026-10-19T11:25:00.000Z"
-            },
-            {
               "label": "A13 Bellinzone <-> Coire entre Jonction autoroutière San Bernardino et Jonction autoroutière San Bernardino-Pass Situation: fermé travaux, longueur [km] 7.5",
               "value": "Fermeture",
               "detail": "jusqu’au 22 octobre 2026",
@@ -963,10 +959,22 @@
               "value": "Fermeture",
               "detail": "jusqu’au 29 octobre 2026",
               "date": "2026-10-28T20:30:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
+              "value": "Chantier",
+              "detail": "jusqu’au 29 décembre 2028",
+              "date": "2021-06-25T03:00:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso -> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de…",
+              "value": "Chantier",
+              "detail": "jusqu’au 29 décembre 2028",
+              "date": "2022-04-20T03:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1004,7 +1012,7 @@
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -1100,7 +1108,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     }
   }
 }

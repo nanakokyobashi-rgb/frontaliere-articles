@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T03:46:02.214Z",
-  "contentHash": "4a7bd1ae0e20111ae18b482dcde6ebd9b4c9023f6b7654bc94e4971517474481",
+  "updatedAt": "2026-10-20T05:26:42.124Z",
+  "contentHash": "c3a2798d94133854c79c5b008fd3a5f6fc64a43dcd43c79175ccf63481891dfa",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-19T14:01:37.256Z",
+      "updatedAt": "2026-10-19T20:47:42.578Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -91,13 +91,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
+              "date": "2026-10-19",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-19-mm-bahnhof-kandersteg"
+            },
             {
               "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
               "date": "2026-10-15T05:00:00.000Z",
@@ -122,14 +127,9 @@
               "label": "Buslinie 10: Haltekante L am Bahnhof Bern wird hindernisfrei",
               "date": "2026-10-08T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
-            },
-            {
-              "label": "Bahnstrecke in Interlaken wegen Bauarbeiten acht Wochen gesperrt",
-              "date": "2026-10-08",
-              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -175,7 +175,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-20T03:46:02.214Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "en": {
       "canton": "BE",
@@ -249,13 +249,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
+              "date": "2026-10-19",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-19-mm-bahnhof-kandersteg"
+            },
             {
               "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
               "date": "2026-10-15T05:00:00.000Z",
@@ -280,14 +285,9 @@
               "label": "Buslinie 10: Haltekante L am Bahnhof Bern wird hindernisfrei",
               "date": "2026-10-08T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
-            },
-            {
-              "label": "Bahnstrecke in Interlaken wegen Bauarbeiten acht Wochen gesperrt",
-              "date": "2026-10-08",
-              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -333,7 +333,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-20T03:46:02.214Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "de": {
       "canton": "BE",
@@ -407,13 +407,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
+              "date": "2026-10-19",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-19-mm-bahnhof-kandersteg"
+            },
             {
               "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
               "date": "2026-10-15T05:00:00.000Z",
@@ -438,14 +443,9 @@
               "label": "Buslinie 10: Haltekante L am Bahnhof Bern wird hindernisfrei",
               "date": "2026-10-08T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
-            },
-            {
-              "label": "Bahnstrecke in Interlaken wegen Bauarbeiten acht Wochen gesperrt",
-              "date": "2026-10-08",
-              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -491,7 +491,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-20T03:46:02.214Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "fr": {
       "canton": "BE",
@@ -565,13 +565,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
+              "date": "2026-10-19",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-19-mm-bahnhof-kandersteg"
+            },
             {
               "label": "Neue Veloverbindung von Schauplatzgasse auf Bubenbergplatz",
               "date": "2026-10-15T05:00:00.000Z",
@@ -596,14 +601,9 @@
               "label": "Buslinie 10: Haltekante L am Bahnhof Bern wird hindernisfrei",
               "date": "2026-10-08T10:00:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
-            },
-            {
-              "label": "Bahnstrecke in Interlaken wegen Bauarbeiten acht Wochen gesperrt",
-              "date": "2026-10-08",
-              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-08-mm-bauarbeiten-interlaken"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -649,7 +649,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-20T03:46:02.214Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     }
   }
 }

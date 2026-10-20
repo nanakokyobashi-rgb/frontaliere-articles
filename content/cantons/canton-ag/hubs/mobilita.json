@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T03:21:16.902Z",
-  "contentHash": "0b6878b8b3559692dd0afb0f086541a20d2cdb73ecd68cd291b883fc28fded49",
+  "updatedAt": "2026-10-20T05:26:42.124Z",
+  "contentHash": "e610a349ec0910480dd18e3aebaf1cf908f92b573df8ba63df3e275414ec9ea9",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-19T14:01:37.256Z",
+      "updatedAt": "2026-10-19T20:47:42.578Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -141,25 +141,31 @@
               "date": "2026-10-14T16:00:00.000Z"
             },
             {
-              "label": "A3 Diramazione Rheinfelden -> Germania tra Raccordo autostradale Diramazione Rheinfelden E Dogana Rheinfelden Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-19T13:46:00.000Z"
-            },
-            {
               "label": "Langenthal <-> Zofingen tra Luogo Strengelbach E Luogo St. Urban Situazione: pericolo Causa: lavori di costruzione",
               "value": "Cantiere",
               "detail": "fine prevista: 30 aprile 2027",
               "date": "2025-04-07T09:38:00.000Z"
+            },
+            {
+              "label": "H24 Aarau <-> Frick Luogo Rombach Situazione: problemi di traffico cantiere Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
+              "value": "Cantiere",
+              "detail": "fine prevista: 1 luglio 2027",
+              "date": "2025-09-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Kreisstraße 6556 zwischen Berghaus und Krenkingen wegen ...",
+              "date": "2026-10-19",
+              "url": "https://www.landkreis-waldshut.de/news/kreisstrasse-6556-zwischen-berghaus-und-krenkingen-wegen-bauarbeiten-gesperrt/"
+            },
             {
               "label": "Ersatzneubau der Brücke über die Bahnstrecke in Albbruck ge...",
               "date": "2026-10-09",
@@ -184,14 +190,9 @@
               "label": "Verkehrskontrollgruppe stärkt Verkehrssicherheit",
               "date": "2026-10-05T06:34:00.000Z",
               "url": "https://www.baden.ch/de/home/politik-verwaltung/medien/aktuelle-meldungen.html/901/news/19603"
-            },
-            {
-              "label": "Brücke über Höllenbach in Niedingen für schwere Fahrzeuge...",
-              "date": "2026-09-24",
-              "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -239,7 +240,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "en": {
       "canton": "AG",
@@ -358,25 +359,31 @@
               "date": "2026-10-14T16:00:00.000Z"
             },
             {
-              "label": "A3 Diramazione Rheinfelden -> Germania tra Raccordo autostradale Diramazione Rheinfelden E Dogana Rheinfelden Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-19T13:46:00.000Z"
-            },
-            {
               "label": "Langenthal <-> Zofingen tra Luogo Strengelbach E Luogo St. Urban Situazione: pericolo Causa: lavori di costruzione",
               "value": "Roadworks",
               "detail": "until 30 April 2027",
               "date": "2025-04-07T09:38:00.000Z"
+            },
+            {
+              "label": "H24 Aarau <-> Frick Luogo Rombach Situazione: problemi di traffico cantiere Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
+              "value": "Roadworks",
+              "detail": "until 1 July 2027",
+              "date": "2025-09-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Kreisstraße 6556 zwischen Berghaus und Krenkingen wegen ...",
+              "date": "2026-10-19",
+              "url": "https://www.landkreis-waldshut.de/news/kreisstrasse-6556-zwischen-berghaus-und-krenkingen-wegen-bauarbeiten-gesperrt/"
+            },
             {
               "label": "Ersatzneubau der Brücke über die Bahnstrecke in Albbruck ge...",
               "date": "2026-10-09",
@@ -401,14 +408,9 @@
               "label": "Verkehrskontrollgruppe stärkt Verkehrssicherheit",
               "date": "2026-10-05T06:34:00.000Z",
               "url": "https://www.baden.ch/de/home/politik-verwaltung/medien/aktuelle-meldungen.html/901/news/19603"
-            },
-            {
-              "label": "Brücke über Höllenbach in Niedingen für schwere Fahrzeuge...",
-              "date": "2026-09-24",
-              "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +458,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "de": {
       "canton": "AG",
@@ -575,25 +577,31 @@
               "date": "2026-10-14T16:00:00.000Z"
             },
             {
-              "label": "A3 Verzweigung Rheinfelden -> Deutschland zwischen Autobahndreieck Verzweigung Rheinfelden und Zollstation Rheinfelden Sachlage: Stau Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-19T13:46:00.000Z"
-            },
-            {
               "label": "Langenthal <-> Zofingen zwischen Ortschaft Strengelbach und Ortschaft St. Urban Sachlage: Gefahr Ursache: Bauarbeiten",
               "value": "Baustelle",
               "detail": "bis 30. April 2027",
               "date": "2025-04-07T09:38:00.000Z"
+            },
+            {
+              "label": "H24 Aarau <-> Frick Ortschaft Rombach Sachlage: Verkehrsbehinderung Baustelle Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
+              "value": "Baustelle",
+              "detail": "bis 1. Juli 2027",
+              "date": "2025-09-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Kreisstraße 6556 zwischen Berghaus und Krenkingen wegen ...",
+              "date": "2026-10-19",
+              "url": "https://www.landkreis-waldshut.de/news/kreisstrasse-6556-zwischen-berghaus-und-krenkingen-wegen-bauarbeiten-gesperrt/"
+            },
             {
               "label": "Ersatzneubau der Brücke über die Bahnstrecke in Albbruck ge...",
               "date": "2026-10-09",
@@ -618,14 +626,9 @@
               "label": "Verkehrskontrollgruppe stärkt Verkehrssicherheit",
               "date": "2026-10-05T06:34:00.000Z",
               "url": "https://www.baden.ch/de/home/politik-verwaltung/medien/aktuelle-meldungen.html/901/news/19603"
-            },
-            {
-              "label": "Brücke über Höllenbach in Niedingen für schwere Fahrzeuge...",
-              "date": "2026-09-24",
-              "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -673,7 +676,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "fr": {
       "canton": "AG",
@@ -792,25 +795,31 @@
               "date": "2026-10-14T16:00:00.000Z"
             },
             {
-              "label": "A3 Echangeur de Rheinfelden -> Allemagne entre Echangeur Echangeur de Rheinfelden et Poste de douane Rheinfelden Situation: bouchon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-19T13:46:00.000Z"
-            },
-            {
               "label": "Langenthal <-> Zofingen entre Localité Strengelbach et Localité St. Urban Situation: danger Raison: travaux de construction",
               "value": "Chantier",
               "detail": "jusqu’au 30 avril 2027",
               "date": "2025-04-07T09:38:00.000Z"
+            },
+            {
+              "label": "H24 Aarau <-> Frick Localité Rombach Situation: trafic perturbé travaux Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
+              "value": "Chantier",
+              "detail": "jusqu’au 1er juillet 2027",
+              "date": "2025-09-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Kreisstraße 6556 zwischen Berghaus und Krenkingen wegen ...",
+              "date": "2026-10-19",
+              "url": "https://www.landkreis-waldshut.de/news/kreisstrasse-6556-zwischen-berghaus-und-krenkingen-wegen-bauarbeiten-gesperrt/"
+            },
             {
               "label": "Ersatzneubau der Brücke über die Bahnstrecke in Albbruck ge...",
               "date": "2026-10-09",
@@ -835,14 +844,9 @@
               "label": "Verkehrskontrollgruppe stärkt Verkehrssicherheit",
               "date": "2026-10-05T06:34:00.000Z",
               "url": "https://www.baden.ch/de/home/politik-verwaltung/medien/aktuelle-meldungen.html/901/news/19603"
-            },
-            {
-              "label": "Brücke über Höllenbach in Niedingen für schwere Fahrzeuge...",
-              "date": "2026-09-24",
-              "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -890,7 +894,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     }
   }
 }

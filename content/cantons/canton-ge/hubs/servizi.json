@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-10-20T00:06:33.415Z",
-  "contentHash": "6e1be62ae6fb113e9922c00b9800f9764249ae7b68aa4495e9d634882f4cf60f",
+  "updatedAt": "2026-10-20T05:26:42.124Z",
+  "contentHash": "cfeb05697aac00e368c52a4a660354fd7799722e33349e7e20e9392e1cd87298",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-19T16:35:31.098Z",
+      "updatedAt": "2026-10-19T21:17:10.948Z",
       "keyFacts": 0
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-19T15:46:42.722Z",
+      "updatedAt": "2026-10-19T21:11:59.421Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -96,7 +96,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-19T16:35:31.098Z"
+          "updatedAt": "2026-10-19T21:17:10.948Z"
         },
         {
           "id": "meteo",
@@ -105,12 +105,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "14 °C",
-              "detail": "oggi da 10 a 14 °C"
+              "value": "11 °C",
+              "detail": "oggi da 10 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -138,17 +138,17 @@
               "url": "https://www.ge.ch/node/43758"
             },
             {
+              "label": "Mardi 27 octobre 2026 : fermeture de l'OCE de 9h45 à 13h00",
+              "date": "2026-10-12",
+              "url": "https://www.ge.ch/node/45194"
+            },
+            {
               "label": "Indexation du salaire minimum pour 2027",
               "date": "2026-10-07",
               "url": "https://www.ge.ch/node/45114"
-            },
-            {
-              "label": "J'arrive en fin de droit, et après ?",
-              "date": "2026-10-07",
-              "url": "https://www.ge.ch/node/261"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -228,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "en": {
       "canton": "GE",
@@ -297,7 +297,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-19T16:35:31.098Z"
+          "updatedAt": "2026-10-19T21:17:10.948Z"
         },
         {
           "id": "meteo",
@@ -306,12 +306,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "14 °C",
-              "detail": "today from 10 to 14 °C"
+              "value": "11 °C",
+              "detail": "today from 10 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -339,17 +339,17 @@
               "url": "https://www.ge.ch/node/43758"
             },
             {
+              "label": "Mardi 27 octobre 2026 : fermeture de l'OCE de 9h45 à 13h00",
+              "date": "2026-10-12",
+              "url": "https://www.ge.ch/node/45194"
+            },
+            {
               "label": "Indexation du salaire minimum pour 2027",
               "date": "2026-10-07",
               "url": "https://www.ge.ch/node/45114"
-            },
-            {
-              "label": "J'arrive en fin de droit, et après ?",
-              "date": "2026-10-07",
-              "url": "https://www.ge.ch/node/261"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -424,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "de": {
       "canton": "GE",
@@ -493,7 +493,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-19T16:35:31.098Z"
+          "updatedAt": "2026-10-19T21:17:10.948Z"
         },
         {
           "id": "meteo",
@@ -502,12 +502,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "14 °C",
-              "detail": "heute 10 bis 14 °C"
+              "value": "11 °C",
+              "detail": "heute 10 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -535,17 +535,17 @@
               "url": "https://www.ge.ch/node/43758"
             },
             {
+              "label": "Mardi 27 octobre 2026 : fermeture de l'OCE de 9h45 à 13h00",
+              "date": "2026-10-12",
+              "url": "https://www.ge.ch/node/45194"
+            },
+            {
               "label": "Indexation du salaire minimum pour 2027",
               "date": "2026-10-07",
               "url": "https://www.ge.ch/node/45114"
-            },
-            {
-              "label": "J'arrive en fin de droit, et après ?",
-              "date": "2026-10-07",
-              "url": "https://www.ge.ch/node/261"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -620,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "fr": {
       "canton": "GE",
@@ -689,7 +689,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-19T16:35:31.098Z"
+          "updatedAt": "2026-10-19T21:17:10.948Z"
         },
         {
           "id": "meteo",
@@ -698,12 +698,12 @@
           "items": [
             {
               "label": "Genève",
-              "value": "14 °C",
-              "detail": "aujourd’hui de 10 à 14 °C"
+              "value": "11 °C",
+              "detail": "aujourd’hui de 10 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -731,17 +731,17 @@
               "url": "https://www.ge.ch/node/43758"
             },
             {
+              "label": "Mardi 27 octobre 2026 : fermeture de l'OCE de 9h45 à 13h00",
+              "date": "2026-10-12",
+              "url": "https://www.ge.ch/node/45194"
+            },
+            {
               "label": "Indexation du salaire minimum pour 2027",
               "date": "2026-10-07",
               "url": "https://www.ge.ch/node/45114"
-            },
-            {
-              "label": "J'arrive en fin de droit, et après ?",
-              "date": "2026-10-07",
-              "url": "https://www.ge.ch/node/261"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -813,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     }
   }
 }

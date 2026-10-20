@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T03:21:16.902Z",
-  "contentHash": "82581083befbe2f5e36e81dd653487a57f1d0c76cfaf72462d063421e891bca7",
+  "updatedAt": "2026-10-20T05:26:42.124Z",
+  "contentHash": "0447181869aeb93c3a5c9faf05bb43737672b873b92f18cd37315dfb9bef8642",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-19T14:01:37.256Z",
+      "updatedAt": "2026-10-19T20:47:42.578Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -55,11 +55,6 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "A14 Zug -> Luzern tra Svincolo autostradale Buchrain E Raccordo autostradale Diramazione Rotsee Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-19T14:00:00.000Z"
-            },
-            {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
               "value": "Cantiere",
               "detail": "fine prevista: 17 dicembre 2027",
@@ -88,10 +83,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 12 novembre 2026",
               "date": "2026-02-02T07:02:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna -> Basilea Parcheggio Sonnenberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.2",
+              "value": "Cantiere",
+              "detail": "fine prevista: 13 novembre 2026",
+              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -109,7 +110,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +156,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "en": {
       "canton": "LU",
@@ -193,11 +194,6 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "A14 Zug -> Luzern tra Svincolo autostradale Buchrain E Raccordo autostradale Diramazione Rotsee Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-19T14:00:00.000Z"
-            },
-            {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
               "value": "Roadworks",
               "detail": "until 17 December 2027",
@@ -226,10 +222,16 @@
               "value": "Roadworks",
               "detail": "until 12 November 2026",
               "date": "2026-02-02T07:02:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna -> Basilea Parcheggio Sonnenberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.2",
+              "value": "Roadworks",
+              "detail": "until 13 November 2026",
+              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -247,7 +249,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -291,7 +293,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "de": {
       "canton": "LU",
@@ -329,11 +331,6 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "A14 Zug -> Luzern zwischen Anschluss Buchrain und Autobahndreieck Verzweigung Rotsee Sachlage: Stau Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-19T14:00:00.000Z"
-            },
-            {
               "label": "H10 Bern <-> Luzern zwischen Ortschaft Wiggen und Ortschaft Kröschenbrunnen Sachlage: Verkehrsbehinderung Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
               "value": "Baustelle",
               "detail": "bis 17. Dezember 2027",
@@ -362,10 +359,16 @@
               "value": "Baustelle",
               "detail": "bis 12. November 2026",
               "date": "2026-02-02T07:02:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Basel Parkplatz Sonnenberg Sachlage: Parkplatz geschlossen Baustelle, Länge [km] 0.2",
+              "value": "Baustelle",
+              "detail": "bis 13. November 2026",
+              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -383,7 +386,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -427,7 +430,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "fr": {
       "canton": "LU",
@@ -465,11 +468,6 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "A14 Zoug -> Lucerne entre Jonction autoroutière Buchrain et Echangeur Echangeur du Rotsee Situation: bouchon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-19T14:00:00.000Z"
-            },
-            {
               "label": "H10 Berne <-> Lucerne entre Localité Wiggen et Localité Kröschenbrunnen Situation: trafic perturbé Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
               "value": "Chantier",
               "detail": "jusqu’au 17 décembre 2027",
@@ -498,10 +496,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 12 novembre 2026",
               "date": "2026-02-02T07:02:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne -> Bâle Parking Sonnenberg Situation: parking fermé travaux, longueur [km] 0.2",
+              "value": "Chantier",
+              "detail": "jusqu’au 13 novembre 2026",
+              "date": "2026-02-02T07:35:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-19T14:01:37.256Z"
+          "updatedAt": "2026-10-19T20:47:42.578Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -519,7 +523,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -565,7 +569,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-20T03:21:16.902Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     }
   }
 }

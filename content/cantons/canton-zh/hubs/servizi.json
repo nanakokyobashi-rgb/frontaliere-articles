@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-20T00:06:33.415Z",
-  "contentHash": "229b1857a5d7fc3b5cff98167853350d118d5c15c75751832eae4080c6ada149",
+  "updatedAt": "2026-10-20T05:26:42.124Z",
+  "contentHash": "502734c709fb6153350fde8665e7fadc1ce037f01dbebab96d05de583bc33cb2",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,22 +14,22 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-19T16:35:32.380Z",
+      "updatedAt": "2026-10-19T21:17:12.564Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-19T13:13:42.861Z",
+      "updatedAt": "2026-10-19T22:22:54.680Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-19T15:46:42.722Z",
+      "updatedAt": "2026-10-19T21:11:59.421Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-19T17:49:38.738Z",
       "keyFacts": 0
     }
   ],
@@ -116,7 +116,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-19T16:35:32.380Z"
+          "updatedAt": "2026-10-19T21:17:12.564Z"
         },
         {
           "id": "aste-targhe",
@@ -139,7 +139,7 @@
             },
             {
               "label": "ZH10114",
-              "value": "2250 CHF",
+              "value": "2600 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43626"
@@ -147,7 +147,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-19T13:13:42.861Z"
+          "updatedAt": "2026-10-19T22:22:54.680Z"
         },
         {
           "id": "meteo",
@@ -156,12 +156,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "14 °C",
-              "detail": "oggi da 9 a 14 °C"
+              "value": "11 °C",
+              "detail": "oggi da 9 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -199,7 +199,7 @@
               "url": "https://www.usz.ch/newsletter-ctc-oktober-2026/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -279,7 +279,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "en": {
       "canton": "ZH",
@@ -363,7 +363,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-19T16:35:32.380Z"
+          "updatedAt": "2026-10-19T21:17:12.564Z"
         },
         {
           "id": "aste-targhe",
@@ -386,7 +386,7 @@
             },
             {
               "label": "ZH10114",
-              "value": "2,250 CHF",
+              "value": "2,600 CHF",
               "detail": "current bid",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43626"
@@ -394,7 +394,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-19T13:13:42.861Z"
+          "updatedAt": "2026-10-19T22:22:54.680Z"
         },
         {
           "id": "meteo",
@@ -403,12 +403,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "14 °C",
-              "detail": "today from 9 to 14 °C"
+              "value": "11 °C",
+              "detail": "today from 9 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -446,7 +446,7 @@
               "url": "https://www.usz.ch/newsletter-ctc-oktober-2026/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -522,7 +522,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "de": {
       "canton": "ZH",
@@ -606,7 +606,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-19T16:35:32.380Z"
+          "updatedAt": "2026-10-19T21:17:12.564Z"
         },
         {
           "id": "aste-targhe",
@@ -629,7 +629,7 @@
             },
             {
               "label": "ZH10114",
-              "value": "2’250 CHF",
+              "value": "2’600 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43626"
@@ -637,7 +637,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-19T13:13:42.861Z"
+          "updatedAt": "2026-10-19T22:22:54.680Z"
         },
         {
           "id": "meteo",
@@ -646,12 +646,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "14 °C",
-              "detail": "heute 9 bis 14 °C"
+              "value": "11 °C",
+              "detail": "heute 9 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -689,7 +689,7 @@
               "url": "https://www.usz.ch/newsletter-ctc-oktober-2026/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -765,7 +765,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     },
     "fr": {
       "canton": "ZH",
@@ -849,7 +849,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-19T16:35:32.380Z"
+          "updatedAt": "2026-10-19T21:17:12.564Z"
         },
         {
           "id": "aste-targhe",
@@ -872,7 +872,7 @@
             },
             {
               "label": "ZH10114",
-              "value": "2 250 CHF",
+              "value": "2 600 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-21T17:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43626"
@@ -880,7 +880,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-19T13:13:42.861Z"
+          "updatedAt": "2026-10-19T22:22:54.680Z"
         },
         {
           "id": "meteo",
@@ -889,12 +889,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "14 °C",
-              "detail": "aujourd’hui de 9 à 14 °C"
+              "value": "11 °C",
+              "detail": "aujourd’hui de 9 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-19T15:46:42.722Z"
+          "updatedAt": "2026-10-19T21:11:59.421Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -932,7 +932,7 @@
               "url": "https://www.usz.ch/newsletter-ctc-oktober-2026/"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-19T17:49:38.738Z"
         }
       ],
       "curatedArticles": [
@@ -1004,7 +1004,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-20T05:26:42.124Z"
     }
   }
 }
