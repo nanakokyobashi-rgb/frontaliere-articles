@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { isInvokedDirectly } from './is-invoked-directly.mjs';
 
-// A small lease for the two client article registries.
+// A small, dependency-free lease for the two client article registries.
 //
 // GitHub Actions concurrency cannot protect only the registry-to-shard window:
 // a section-wide group keeps one pending run and cancels the previous pending
@@ -16,10 +16,6 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { createHash, createHmac, randomUUID } from 'node:crypto';
-import {
-  fetchWithRefTimeout,
-  releaseFetchWithRefTimeout,
-} from '../../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 export const ARTICLE_SECTIONS = Object.freeze(['frontaliere', 'svizzera']);
 export const LOCK_KEY_PREFIX = 'internal/ci/article-chunk-locks';
 export const LOCK_LEASE_MS = 30 * 60 * 1000;
@@ -31,7 +27,6 @@ export const LOCK_RENEW_INTERVAL_MS = Math.floor(LOCK_LEASE_MS / 3);
 export const LOCK_RENEW_INITIAL_DELAY_MS = LOCK_RENEW_INTERVAL_MS;
 export const LOCK_ACQUIRE_TIMEOUT_MS = 15 * 60 * 1000;
 export const LOCK_POLL_MS = 5_000;
-const R2_REQUEST_TIMEOUT_MS = 30_000;
 
 function asString(value, name) {
   if (typeof value !== 'string' || value.length === 0) {
@@ -201,17 +196,6 @@ async function responseText(response) {
   return '';
 }
 
-function requestTimeoutMs(deadline) {
-  if (!Number.isFinite(deadline)) return R2_REQUEST_TIMEOUT_MS;
-  const remaining = deadline - Date.now();
-  if (remaining <= 0) {
-    const error = new Error('[r2-section-lock] R2 request deadline exceeded');
-    error.code = 'R2_REQUEST_DEADLINE_EXCEEDED';
-    throw error;
-  }
-  return Math.max(1, Math.min(R2_REQUEST_TIMEOUT_MS, Math.ceil(remaining)));
-}
-
 function r2ResponseError(message, status) {
   const error = new Error(message);
   error.r2Status = status;
@@ -240,7 +224,7 @@ export function createR2Request(env = process.env, { fetchImpl = globalThis.fetc
   const config = configFromEnv(env);
   if (typeof fetchImpl !== 'function') throw new Error('[r2-section-lock] fetch is unavailable');
 
-  return async ({ method, key, body = '', headers = {}, signal, deadline }) => {
+  return async ({ method, key, body = '', headers = {} }) => {
     // Cloudflare can rewrite a strong R2 ETag to a weak validator when the
     // response is compressed. Lock readers need a strong ETag for If-Match,
     // so make GET/HEAD requests unambiguously identity-encoded before
@@ -254,16 +238,12 @@ export function createR2Request(env = process.env, { fetchImpl = globalThis.fetc
       }
       : headers;
     const signed = signRequest({ ...config, now: now(), method, key, body, headers: requestHeaders });
-    const response = await fetchWithRefTimeout(signed.url, {
+    const response = await fetchImpl(signed.url, {
       method,
       headers: signed.headers,
       ...(method === 'GET' || method === 'HEAD' || method === 'DELETE' ? {} : { body: signed.body }),
-      ...(signal ? { signal } : {}),
-    }, requestTimeoutMs(deadline), fetchImpl);
-    // Minimal request doubles often omit `body`; do not retain the referenced
-    // timeout in that case. Real Responses with a null body are cleaned up by
-    // fetchWithRefTimeout itself.
-    if (response.body === undefined) releaseFetchWithRefTimeout(response);
+      signal: typeof AbortSignal?.timeout === 'function' ? AbortSignal.timeout(30_000) : undefined,
+    });
     return response;
   };
 }
@@ -274,10 +254,7 @@ function delay(ms) {
 
 async function readCurrentLock(request, section) {
   const response = await request({ method: 'GET', key: lockKey(section) });
-  if (response.status === 404) {
-    releaseFetchWithRefTimeout(response);
-    return null;
-  }
+  if (response.status === 404) return null;
   const body = await responseText(response);
   if (response.status < 200 || response.status >= 300) {
     throw new Error(`[r2-section-lock] read ${section} failed (${response.status}): ${body.slice(0, 300)}`);
@@ -308,16 +285,9 @@ async function putLock(request, section, payload, condition) {
     headers,
   });
   if (response.status >= 200 && response.status < 300) {
-    try {
-      return { etag: requireStrongEtag(section, readHeader(response, 'etag')) };
-    } finally {
-      releaseFetchWithRefTimeout(response);
-    }
+    return { etag: requireStrongEtag(section, readHeader(response, 'etag')) };
   }
-  if (response.status === 409 || response.status === 412) {
-    releaseFetchWithRefTimeout(response);
-    return null;
-  }
+  if (response.status === 409 || response.status === 412) return null;
   const body = await responseText(response);
   throw r2ResponseError(`[r2-section-lock] acquire ${section} failed (${response.status}): ${body.slice(0, 300)}`, response.status);
 }
@@ -654,15 +624,11 @@ export async function releaseSectionLock(
     key: lockKey(section),
     headers: { 'if-match': current.etag },
   });
-  if (response.status === 404 || response.status === 409 || response.status === 412) {
-    releaseFetchWithRefTimeout(response);
-    return false;
-  }
+  if (response.status === 404 || response.status === 409 || response.status === 412) return false;
   if (response.status < 200 || response.status >= 300) {
     const body = await responseText(response);
     throw new Error(`[r2-section-lock] release ${section} failed (${response.status}): ${body.slice(0, 300)}`);
   }
-  releaseFetchWithRefTimeout(response);
   return true;
 }
 
