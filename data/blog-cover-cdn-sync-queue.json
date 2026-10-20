@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-voto-comunale-stranieri-berna.webp",
+      "sha256": "7a77d09088244e9302885468d9d05cbd06594edfd70d4fc7c8af632566abbd97"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-voto-comunale-stranieri-berna-480w.webp",
+      "sha256": "574bfaac7e7723d11b0c082ade820b6738ec0668c17fb4ec956fca8cc49ca0e8"
+    }
+  ]
 }
