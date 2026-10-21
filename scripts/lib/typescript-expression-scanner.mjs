@@ -83,6 +83,7 @@ function scanTypeScriptExpression(source, offset, terminator) {
   const braceBlockStack = [];
   let statementBoundary = false;
   let awaitingFunctionParams = false;
+  let functionGenericDepth = 0;
   let awaitingFunctionDeclaration = false;
   let awaitingAsyncFunction = false;
   let asyncFunctionDeclaration = false;
@@ -218,6 +219,7 @@ function scanTypeScriptExpression(source, offset, terminator) {
           : { kind: 'paren' });
       awaitingControlParen = false;
       awaitingFunctionParams = false;
+      functionGenericDepth = 0;
       awaitingFunctionDeclaration = false;
       canStartRegex = true;
       afterMemberAccess = false;
@@ -270,6 +272,7 @@ function scanTypeScriptExpression(source, offset, terminator) {
         asyncFunctionDeclaration = statementBoundary;
       } else if (!memberProperty && word === 'function') {
         awaitingFunctionParams = true;
+        functionGenericDepth = 0;
         awaitingFunctionDeclaration = awaitingAsyncFunction ? asyncFunctionDeclaration : statementBoundary;
         awaitingAsyncFunction = false;
       } else {
@@ -343,7 +346,10 @@ function scanTypeScriptExpression(source, offset, terminator) {
       awaitingControlParen = false;
       awaitingBlock = false;
       statementBoundary = ch === ';' && braceBlockStack.some((frame) => frame.isBlock);
-      if (!['*', '<', '>'].includes(ch)) awaitingFunctionParams = false;
+      const insideFunctionGenerics = awaitingFunctionParams && functionGenericDepth > 0;
+      if (awaitingFunctionParams && ch === '<') functionGenericDepth += 1;
+      else if (awaitingFunctionParams && ch === '>' && functionGenericDepth > 0) functionGenericDepth -= 1;
+      else if (!['*', '<', '>'].includes(ch) && !insideFunctionGenerics) awaitingFunctionParams = false;
       if (ch === '[') {
         bracketDepth += 1;
         if (!templateTerminator) depth += 1;
