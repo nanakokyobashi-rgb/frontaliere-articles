@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
-      "section": "canton-vs",
-      "ts": 1792413362688
-    },
     "canton-vs::https://www.pomona.ch/story/815912/verkehrsunfall-auf-der-strecke-gampelgoppenstein-fordert-drei-verletzte-personen": {
       "section": "canton-vs",
       "ts": 1792420407225
@@ -75,6 +71,14 @@
     "canton-vs::https://www.pomona.ch/story/816089/immobilien-trump-macht-den%c2%a0-eigenheimtraum-noch-weniger-erschwinglich": {
       "section": "canton-vs",
       "ts": 1792586053076
+    },
+    "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
+      "section": "canton-vs",
+      "ts": 1792588987239
+    },
+    "canton-vs::https://www.pomona.ch/story/816089/immobilien-trump-macht-schweizer-eigenheimtraum-noch-unerreichbarer": {
+      "section": "canton-vs",
+      "ts": 1792589022307
     }
   }
 }
