@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/815912/verkehrsunfall-auf-der-strecke-gampelgoppenstein-fordert-drei-verletzte-personen": {
-      "section": "canton-vs",
-      "ts": 1792420407225
-    },
-    "canton-vs::https://www.pomona.ch/story/816121/zoll-wird-zum-m%c3%a4nnerclub-seit-der-reform-sinkt-der-frauenanteil-deutlich": {
-      "section": "canton-vs",
-      "ts": 1792420414868
-    },
-    "canton-vs::https://vework-public.vs.ch/app/publication/fr/27-09-2026/1": {
-      "section": "canton-vs",
-      "ts": 1792420419464
-    },
     "canton-vs::https://www.pomona.ch/story/815611/ein-immobilienprojekt-von-christian-constantin-sorgt-im-tessin-f%c3%bcr-kontroversen": {
       "section": "canton-vs",
       "ts": 1792432081947
@@ -79,6 +67,10 @@
     "canton-vs::https://www.pomona.ch/story/816089/immobilien-trump-macht-schweizer-eigenheimtraum-noch-unerreichbarer": {
       "section": "canton-vs",
       "ts": 1792589022307
+    },
+    "canton-vs::https://vework-public.vs.ch/app/publication/fr/27-09-2026/1": {
+      "section": "canton-vs",
+      "ts": 1792596575430
     }
   }
 }
