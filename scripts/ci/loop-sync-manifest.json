@@ -3623,6 +3623,7 @@
       "path": "generator/scripts/lib/meta-field-regex.mjs",
       "sitePath": "scripts/lib/meta-field-regex.mjs",
       "mode": "adapted",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3042",
       "reason": "Il wrapper CORPUS vive in `generator/scripts/lib/` e il gemello SITE in `scripts/lib/`; quando entrambi useranno il parser engine locale, gli import relativi saranno `../../../engine/shared/staticArticleSource.mjs` e `../../packages/articles/engine/shared/staticArticleSource.mjs`. Questa voce protegge tale adattamento topologico prima delle modifiche staged; l’API RegExp resta disponibile finché i caller non sono migrati.",
       "baseline": {
         "site": "782afafe9c39e70f",
