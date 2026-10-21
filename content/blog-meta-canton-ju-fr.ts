@@ -12,6 +12,9 @@ const blogMetaCantonJuFr: Record<string, string> = {
     'blog.article.casse-pensioni-migliorano-terzo-trimestre.title': 'Les caisses de pension suisses améliorent Q3 2026',
     'blog.article.casse-pensioni-migliorano-terzo-trimestre.excerpt': 'L\'indice WTW passe de 130,2 % à 131,9 % Le taux d\'actualisation atteint 1,65 % Les engagements de retraite baissent de 6,5 % Les actifs des plans baissent',
     'blog.article.casse-pensioni-migliorano-terzo-trimestre.imageAlt': 'Vue sur les montagnes du Jura avec un bâtiment de bureaux moderne symbolisant la stabilité des caisses de pension',
+    'blog.article.giura-formazione-postobbligatoria-2026.title': 'Jura : le Gouvernement propose des révisions concernant la formation postobligatoire et le financement',
+    'blog.article.giura-formazione-postobbligatoria-2026.excerpt': 'Deux projets de révision transmis au Parlement Quatre domaines : formation, restaurants scolaires, langues, admissions La mesure n° 506 figure dans le Plan',
+    'blog.article.giura-formazione-postobbligatoria-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonJuFr;

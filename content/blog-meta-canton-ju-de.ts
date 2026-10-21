@@ -12,6 +12,9 @@ const blogMetaCantonJuDe: Record<string, string> = {
     'blog.article.casse-pensioni-migliorano-terzo-trimestre.title': 'Schweizer Pensionskassen verbessern Q3 2026',
     'blog.article.casse-pensioni-migliorano-terzo-trimestre.excerpt': 'Der WTW-Index steigt von 130,2% auf 131,9% Der Abzinsungssatz beträgt bis zu 1,65% Pensionsverpflichtungen sinken um 6,5% Die Aktiva der Stockwerke sinken um',
     'blog.article.casse-pensioni-migliorano-terzo-trimestre.imageAlt': 'Blick auf die Juraberge mit einem modernen Bürogebäude, das die Stabilität der Pensionskassen symbolisiert',
+    'blog.article.giura-formazione-postobbligatoria-2026.title': 'Jura: Regierung schlägt Revisionen zur nachobligatorischen Ausbildung und Finanzierung vor',
+    'blog.article.giura-formazione-postobbligatoria-2026.excerpt': 'Zwei Revisionsvorlagen an das Parlament übermittelt Vier Bereiche: Ausbildung, Schulrestaurants, Sprachen, Zulassungen Die Maßnahme Nr.',
+    'blog.article.giura-formazione-postobbligatoria-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonJuDe;

@@ -12,6 +12,9 @@ const blogMetaCantonJuEn: Record<string, string> = {
     'blog.article.casse-pensioni-migliorano-terzo-trimestre.title': 'Swiss pension funds improve Q3 2026',
     'blog.article.casse-pensioni-migliorano-terzo-trimestre.excerpt': 'WTW index rises from 130.2% to 131.9% The discount rate reaches 1.65% Pension commitments fall by 6.5% Plan assets fall by 0.6% Who → Willis Towers Watson (WTW)',
     'blog.article.casse-pensioni-migliorano-terzo-trimestre.imageAlt': 'View of the Jura mountains with a modern office building symbolizing pension fund stability',
+    'blog.article.giura-formazione-postobbligatoria-2026.title': 'Jura: Government proposes revisions to post-compulsory education and funding',
+    'blog.article.giura-formazione-postobbligatoria-2026.excerpt': 'Two revision projects submitted to Parliament Four areas: education, school restaurants, languages, admissions Measure No.',
+    'blog.article.giura-formazione-postobbligatoria-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonJuEn;

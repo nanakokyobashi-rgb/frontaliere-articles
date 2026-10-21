@@ -39,4 +39,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'giura-formazione-postobbligatoria-2026',
+ category: 'novita',
+ date: '2026-10-21T12:36:10.998Z',
+ image: '/images/blog/article-giura-formazione-postobbligatoria-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['JU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
