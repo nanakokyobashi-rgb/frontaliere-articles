@@ -22,7 +22,7 @@ function hexCodePoint(raw) {
   return value <= 0x10FFFF ? value : null;
 }
 
-/** Decodifica il letterale TS che comincia a `i` (apice singolo, doppio o backtick). */
+/** Decodifica un letterale TS statico che comincia a `i` (apice singolo, doppio o backtick). */
 export function readTsStringLiteral(src, i) {
   const quote = src[i];
   if (quote !== "'" && quote !== '"' && quote !== '`') return null;
@@ -61,22 +61,82 @@ export function readTsStringLiteral(src, i) {
       continue;
     }
     if (c === quote) return { value: out, end: j + 1 };
+    if (quote === '`' && c === '$' && src[j + 1] === '{') {
+      throw new Error('Interpolated template literal is not supported in static article fields');
+    }
     out += c;
     j += 1;
   }
   return null;
 }
 
+/**
+ * Tokenizza il sottoinsieme lessicale usato dai moduli dati del corpus. I commenti
+ * non producono token; ogni letterale resta un singolo token. Un'interpolazione
+ * in qualunque template del file rende il sorgente non statico, quindi si rifiuta
+ * il file intero prima di estrarre qualsiasi chiave.
+ */
+function staticSourceTokens(src) {
+  const tokens = [];
+  let i = 0;
+
+  while (i < src.length) {
+    const c = src[i];
+    const next = src[i + 1];
+
+    if (/\s/u.test(c)) {
+      i += 1;
+      continue;
+    }
+    if (c === '/' && next === '/') {
+      i += 2;
+      while (i < src.length && src[i] !== '\n' && src[i] !== '\r') i += 1;
+      continue;
+    }
+    if (c === '/' && next === '*') {
+      const end = src.indexOf('*/', i + 2);
+      if (end === -1) throw new Error('Unterminated comment in static article source');
+      i = end + 2;
+      continue;
+    }
+    if (c === "'" || c === '"' || c === '`') {
+      const literal = readTsStringLiteral(src, i);
+      if (!literal) throw new Error('Unterminated string literal in static article source');
+      tokens.push({ type: 'string', value: literal.value });
+      i = literal.end;
+      continue;
+    }
+
+    // Keep every significant source character so a key only matches an actual
+    // adjacent `string : string` property, not text spanning intervening code.
+    tokens.push({ type: 'punctuation', value: c });
+    i += 1;
+  }
+
+  return tokens;
+}
+
 /** Tutte le coppie `'chiave': <letterale>` di un sorgente TS di stringhe. */
 export function readTsStringMap(src) {
+  const tokens = staticSourceTokens(src);
   const out = new Map();
-  const rx = /(['"])(blog\.article\.[^'"]+)\1\s*:\s*/gu;
-  let m;
-  while ((m = rx.exec(src)) !== null) {
-    const lit = readTsStringLiteral(src, m.index + m[0].length);
-    if (!lit) continue;
-    out.set(m[2], lit.value);
-    rx.lastIndex = lit.end;
+  for (let i = 0; i < tokens.length; i += 1) {
+    const key = tokens[i];
+    const separator = tokens[i + 1];
+    if (key.type !== 'string' || !key.value.startsWith('blog.article.') || !separator ||
+      separator.type !== 'punctuation' || separator.value !== ':') continue;
+    const value = tokens[i + 2];
+    if (!value || value.type !== 'string') {
+      throw new Error(`Non-static value for article field ${key.value}`);
+    }
+
+    const end = tokens[i + 3];
+    if (end && !(end.type === 'punctuation' && (end.value === ',' || end.value === '}'))) {
+      throw new Error(`Unexpected token after static article field ${key.value}`);
+    }
+
+    out.set(key.value, value.value);
+    i += 2;
   }
   return out;
 }

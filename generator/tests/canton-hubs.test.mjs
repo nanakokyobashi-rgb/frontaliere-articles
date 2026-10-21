@@ -804,6 +804,26 @@ test('canonical override: si leggono le chiavi di `overrides`; una forma sconosc
   }
 });
 
+test('gli hub rifiutano un meta interpolato anche in una locale non predefinita', () => {
+  const root = tmpRoot();
+  try {
+    writeCorpus(root);
+    const metaDe = path.join(root, sectionSourceSurfaces('frontaliere').metaFile('de'));
+    const source = fs.readFileSync(metaDe, 'utf8');
+    const staticTitle = "'blog.article.incidente-ospedale.title': 'Incidente in moto: ferito portato in ospedale (DE)'";
+    const dynamicTitle = "'blog.article.incidente-ospedale.title': `Incidente ${resolveTitle()}`";
+    assert.ok(source.includes(staticTitle), 'il fixture contiene il meta atteso in tedesco');
+    fs.writeFileSync(metaDe, source.replace(staticTitle, dynamicTitle));
+
+    assert.throws(
+      () => loadSectionArticles(root, 'frontaliere'),
+      /Interpolated template literal is not supported/u,
+    );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('eventi: conta l\'intersezione con la finestra, non solo il giorno d\'inizio', () => {
   const day = (offset) => new Date(NOW + offset * DAY_MS).toISOString().slice(0, 10);
   const ev = (id, start, end, extra = {}) => ({ id, title: `Evento ${id}`, startDate: day(start), ...(end == null ? {} : { endDate: day(end) }), canton: 'TI', ...extra });

@@ -239,6 +239,120 @@ describe('lettore TS condiviso', () => {
       assert.equal(backfillCantons[name], tsStringMap[name], `backfill-article-cantons: ${name}`);
     }
   });
+
+  test('mantiene testo simile a interpolazione in stringhe, template escaped e commenti', () => {
+    const source = [
+      "// 'blog.article.line-comment.body1': 'fake', `${commentValue}`",
+      "/* 'blog.article.block-comment.body1': 'fake', `${blockValue}` */",
+      `const prose = "'blog.article.string.body1': 'fake', \${quotedValue}";`,
+      "'blog.article.demo.title': 'testo ${quotedValue}',",
+      "'blog.article.demo.body1': `testo \\${escapedValue}` ,",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.demo.title', 'testo ${quotedValue}'],
+      ['blog.article.demo.body1', 'testo ${escapedValue}'],
+    ]);
+  });
+
+  test('rifiuta il file intero per template dinamici anche prima o dopo le chiavi', () => {
+    const before = [
+      'const unrelated = `prefix ${beforeValue}`;',
+      "'blog.article.demo.body1': 'reale',",
+    ].join('\n');
+    const after = [
+      "'blog.article.demo.body1': 'reale',",
+      'const unrelated = `suffix ${afterValue}`;',
+    ].join('\n');
+    const nestedFakeKey = [
+      "'blog.article.demo.body1': 'reale',",
+      "const unrelated = `prefix ${(render({ 'blog.article.fake.body4': 'fake' }))}`;",
+    ].join('\n');
+    const nestedExpression = [
+      "'blog.article.demo.title': 'campo precedente',",
+      "'blog.article.demo.body1': `inizio ${(() => /[}]/u.test(input) ? `interno ${value}` : '')()} fine`,",
+      "'blog.article.demo.body2': 'campo successivo',",
+    ].join('\n');
+
+    for (const source of [before, after, nestedFakeKey, nestedExpression]) {
+      assert.throws(() => readTsStringMap(source), /Interpolated template literal is not supported/u);
+    }
+  });
+
+  test('non interpreta come proprietà chiavi contenute in commenti o prosa', () => {
+    const source = [
+      "// 'blog.article.comment.body1': 'fake',",
+      "/* 'blog.article.block.body1': 'fake', */",
+      `const prose = "'blog.article.string.body1': 'fake',";`,
+      "'blog.article.real.body1': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.body1', 'actual'],
+    ]);
+  });
+
+  test('conta le barre prima di una interpolazione escaped', () => {
+    const genuinelyInterpolated = "'blog.article.demo.body1': `literal \\\\${value}`,";
+    assert.throws(
+      () => readTsStringMap(genuinelyInterpolated),
+      /Interpolated template literal is not supported/u,
+    );
+  });
+
+  test('rifiuta valori concatenati, chiamate postfix e valori non letterali senza restituire campi precedenti', () => {
+    const invalidSources = [
+      "'blog.article.demo.body1': 'valid',\n'blog.article.demo.body2': 'head' + getTail(),",
+      "'blog.article.demo.body1': 'valid',\n'blog.article.demo.body2': 'head'.trim(),",
+      "'blog.article.demo.body1': 'valid',\n'blog.article.demo.body2': buildBody(),",
+    ];
+
+    for (const source of invalidSources) {
+      assert.throws(() => readTsStringMap(source), /Non-static value|Unexpected token/u);
+    }
+  });
+
+  test('rifiuta un commento non chiuso invece di restituire la mappa parziale', () => {
+    const source = "'blog.article.demo.body1': 'valid',\n/* commento incompleto";
+    assert.throws(() => readTsStringMap(source), /Unterminated comment/u);
+  });
+
+  test('rifiuta un valore mancante a EOF invece di restituire i campi precedenti', () => {
+    const source = "'blog.article.demo.body1': 'valid',\n'blog.article.demo.body2':";
+    assert.throws(() => readTsStringMap(source), /Non-static value/u);
+  });
+
+  test('il lettore del backfill interrompe la lettura di meta e body interpolati in una locale sorella', () => {
+    const root = mkdtempSync(join(tmpdir(), 'ts-string-map-caller-'));
+    const spec = {
+      registry: 'registry.ts',
+      meta: 'meta-fr.ts',
+      sourceLedger: 'missing-ledger.json',
+      sidecarDir: 'sidecars',
+      bodyDir: 'body/fr',
+    };
+
+    try {
+      mkdirSync(join(root, 'body/fr'), { recursive: true });
+      writeFileSync(join(root, spec.registry), "const articles = [{ id: 'demo', date: '2026-10-01' }];\n");
+      writeFileSync(join(root, spec.meta), "'blog.article.demo.title': `titolo ${resolveTitle()}`,\n");
+      writeFileSync(join(root, spec.bodyDir, 'demo.ts'), "'blog.article.demo.body1': 'testo statico',\n");
+
+      assert.throws(
+        () => backfillCantons.loadSectionInputs(root, spec),
+        /Interpolated template literal is not supported/u,
+      );
+
+      writeFileSync(join(root, spec.meta), "'blog.article.demo.title': 'titolo statico',\n");
+      writeFileSync(join(root, spec.bodyDir, 'demo.ts'), "'blog.article.demo.body1': `testo ${resolveBody()}`,\n");
+      assert.throws(
+        () => backfillCantons.loadSectionInputs(root, spec),
+        /Interpolated template literal is not supported/u,
+      );
+    } finally {
+      rmSync(root, { recursive: true, force: true });
+    }
+  });
 });
 
 describe('scrittura del registry', () => {
