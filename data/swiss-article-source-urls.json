@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1950840/barometro-previsione-risparmiano-vecchiaia-condizioni": {
-    "articleId": "barometro-previdenza-raiffeisen-zhaw",
-    "ts": "2026-09-17T10:27:05.962Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/falle-sicurezza-impianti-solari-minacciano-rete-elettrica-elvetica/92076053": {
     "articleId": "sicurezza-impianti-solari-rete",
     "ts": "2026-09-18T00:24:00.803Z",
@@ -2497,6 +2492,11 @@
   "https://www.swissinfo.ch/ita/cf%3a-pacchetto-competitivit%c3%a0-economia%2c-bilancio-positivo/92249999": {
     "articleId": "pacchetto-imprese-sgravi",
     "ts": "2026-10-21T10:00:03.991Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/politica/1958172/protezione-servizio-militi-carenze-organizzazioni": {
+    "articleId": "piano-berna-civilisti-cantoni",
+    "ts": "2026-10-21T11:26:40.707Z",
     "keyForm": 2
   }
 }

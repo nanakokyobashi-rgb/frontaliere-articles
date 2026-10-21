@@ -2628,6 +2628,30 @@
       "firstSeenAt": "2026-10-21T03:27:40.410Z",
       "lastValidatedAt": "2026-10-21T03:27:40.410Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere responsabile di negozio ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T10:56:51.243Z",
+      "lastValidatedAt": "2026-10-21T10:56:51.243Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere macellaio ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T10:56:51.441Z",
+      "lastValidatedAt": "2026-10-21T10:56:51.441Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
