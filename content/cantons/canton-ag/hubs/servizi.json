@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-10-21T11:36:06.478Z",
-  "contentHash": "8589fe98fd794bd2b790171eedefc96bcdb3fa67318a9b49b2c7523714245bac",
+  "updatedAt": "2026-10-21T12:43:43.682Z",
+  "contentHash": "43f68c0f01d7d74f41d79fc9a5ab6029e45ef379e63492aa32250b782fc2b1c5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,8 +14,13 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-20T21:38:20.661Z",
+      "updatedAt": "2026-10-21T04:45:23.537Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-21T05:04:28.498Z",
+      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -87,7 +92,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-20T21:38:20.661Z"
+          "updatedAt": "2026-10-21T04:45:23.537Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "10 °C",
+              "detail": "oggi da 8 a 12 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-21T05:04:28.498Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -205,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-21T11:36:06.478Z"
+      "updatedAt": "2026-10-21T12:43:43.682Z"
     },
     "en": {
       "canton": "AG",
@@ -270,7 +289,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-20T21:38:20.661Z"
+          "updatedAt": "2026-10-21T04:45:23.537Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "10 °C",
+              "detail": "today from 8 to 12 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-21T05:04:28.498Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -384,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-21T11:36:06.478Z"
+      "updatedAt": "2026-10-21T12:43:43.682Z"
     },
     "de": {
       "canton": "AG",
@@ -449,7 +482,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-20T21:38:20.661Z"
+          "updatedAt": "2026-10-21T04:45:23.537Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "10 °C",
+              "detail": "heute 8 bis 12 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-21T05:04:28.498Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -563,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-21T11:36:06.478Z"
+      "updatedAt": "2026-10-21T12:43:43.682Z"
     },
     "fr": {
       "canton": "AG",
@@ -628,7 +675,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-20T21:38:20.661Z"
+          "updatedAt": "2026-10-21T04:45:23.537Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Aarau",
+              "value": "10 °C",
+              "detail": "aujourd’hui de 8 à 12 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-21T05:04:28.498Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -738,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-21T11:36:06.478Z"
+      "updatedAt": "2026-10-21T12:43:43.682Z"
     }
   }
 }

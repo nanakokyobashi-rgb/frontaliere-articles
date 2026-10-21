@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-21T04:08:52.546Z",
-  "contentHash": "a4933c86edf3729da4b77f5784698bb62dfa30e0d6b9314b158ca9207ee88867",
+  "updatedAt": "2026-10-21T12:43:43.682Z",
+  "contentHash": "211f6c7b171b800d6a4a46e5d49f2b27f794a3a4a3329bba68efbe4665aae562",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T21:56:57.353Z",
+      "updatedAt": "2026-10-21T05:23:11.896Z",
       "keyFacts": 1
     },
     {
@@ -28,7 +28,7 @@
         {
           "label": "Cantieri attivi o imminenti",
           "value": "2",
-          "note": "segnalazioni aggiornate: 20 ottobre 2026"
+          "note": "segnalazioni aggiornate: 21 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -38,15 +38,20 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
+              "label": "H8 Wattwil -> St. Gallen tra Luogo Waldstatt E Luogo Herisau Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-21T04:50:00.000Z"
+            },
+            {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffico",
-              "date": "2026-10-20T21:56:57.353Z",
+              "date": "2026-10-21T05:23:11.896Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffico",
-              "date": "2026-10-20T21:56:57.353Z",
+              "date": "2026-10-21T05:23:11.896Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -63,7 +68,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T21:56:57.353Z"
+          "updatedAt": "2026-10-21T05:23:11.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +134,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T12:43:43.682Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -140,7 +145,7 @@
         {
           "label": "Roadworks active or imminent",
           "value": "2",
-          "note": "reports as of 20 October 2026"
+          "note": "reports as of 21 October 2026"
         }
       ],
       "dataBlocks": [
@@ -150,15 +155,20 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
+              "label": "H8 Wattwil -> St. Gallen tra Luogo Waldstatt E Luogo Herisau Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-21T04:50:00.000Z"
+            },
+            {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffic",
-              "date": "2026-10-20T21:56:57.353Z",
+              "date": "2026-10-21T05:23:11.896Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffic",
-              "date": "2026-10-20T21:56:57.353Z",
+              "date": "2026-10-21T05:23:11.896Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -175,7 +185,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T21:56:57.353Z"
+          "updatedAt": "2026-10-21T05:23:11.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +251,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T12:43:43.682Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -252,7 +262,7 @@
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "2",
-          "note": "Meldungen vom 20. Oktober 2026"
+          "note": "Meldungen vom 21. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -262,15 +272,20 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
+              "label": "H8 Wattwil -> St. Gallen zwischen Ortschaft Waldstatt und Ortschaft Herisau Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-21T04:50:00.000Z"
+            },
+            {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Verkehr",
-              "date": "2026-10-20T21:56:57.353Z",
+              "date": "2026-10-21T05:23:11.896Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Verkehr",
-              "date": "2026-10-20T21:56:57.353Z",
+              "date": "2026-10-21T05:23:11.896Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -287,7 +302,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T21:56:57.353Z"
+          "updatedAt": "2026-10-21T05:23:11.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -353,7 +368,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T12:43:43.682Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -364,7 +379,7 @@
         {
           "label": "Chantiers actifs ou imminents",
           "value": "2",
-          "note": "signalements au 20 octobre 2026"
+          "note": "signalements au 21 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -374,15 +389,20 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
+              "label": "H8 Wattwil -> St-Gall entre Localité Waldstatt et Localité Herisau Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-21T04:50:00.000Z"
+            },
+            {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Trafic",
-              "date": "2026-10-20T21:56:57.353Z",
+              "date": "2026-10-21T05:23:11.896Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Trafic",
-              "date": "2026-10-20T21:56:57.353Z",
+              "date": "2026-10-21T05:23:11.896Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -399,7 +419,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T21:56:57.353Z"
+          "updatedAt": "2026-10-21T05:23:11.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -465,7 +485,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T12:43:43.682Z"
     }
   }
 }

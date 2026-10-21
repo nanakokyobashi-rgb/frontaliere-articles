@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-21T04:08:52.546Z",
-  "contentHash": "6e7b1b6e70a1dfc0d38eda3fd5ab4232164fe6fa917746cefc15d5cf4deb0628",
+  "updatedAt": "2026-10-21T12:43:43.682Z",
+  "contentHash": "4e5bd26d3d25386edda28a1ecb84b3505f3df03aedc26a40a32c8aa2affce5ad",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T21:56:57.353Z",
+      "updatedAt": "2026-10-21T05:23:11.896Z",
       "keyFacts": 2
     },
     {
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "5",
-          "note": "segnalazioni aggiornate: 20 ottobre 2026"
+          "note": "segnalazioni aggiornate: 21 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "15",
-          "note": "segnalazioni aggiornate: 20 ottobre 2026"
+          "note": "segnalazioni aggiornate: 21 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -73,25 +73,24 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "Revocato: A2 Luzern -> Basel tra Raccordo autostradale Diramazione Härkingen E Svincolo autostradale Egerkingen Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico…",
+              "label": "A1 Zürich -> Bern tra Raccordo autostradale Diramazione Härkingen E Raccordo autostradale Diramazione Luterbach Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffico",
-              "date": "2026-10-20T21:24:00.000Z"
+              "date": "2026-10-21T04:08:00.000Z"
+            },
+            {
+              "label": "A5 Bienne -> Solothurn tra Svincolo autostradale Solothurn Ost E Raccordo autostradale Diramazione Luterbach Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-21T05:21:00.000Z"
             },
             {
               "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2028",
               "date": "2024-12-30T04:49:00.000Z"
-            },
-            {
-              "label": "Balsthal <-> Laufen tra Passo Passwang E Luogo Oberbeinwil Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
-              "value": "Cantiere",
-              "detail": "fine prevista: 31 dicembre 2029",
-              "date": "2024-12-30T05:49:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T21:56:57.353Z"
+          "updatedAt": "2026-10-21T05:23:11.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -149,7 +148,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T12:43:43.682Z"
     },
     "en": {
       "canton": "SO",
@@ -160,12 +159,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "5",
-          "note": "reports as of 20 October 2026"
+          "note": "reports as of 21 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "15",
-          "note": "reports as of 20 October 2026"
+          "note": "reports as of 21 October 2026"
         }
       ],
       "dataBlocks": [
@@ -205,25 +204,24 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "Revocato: A2 Luzern -> Basel tra Raccordo autostradale Diramazione Härkingen E Svincolo autostradale Egerkingen Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico…",
+              "label": "A1 Zürich -> Bern tra Raccordo autostradale Diramazione Härkingen E Raccordo autostradale Diramazione Luterbach Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffic",
-              "date": "2026-10-20T21:24:00.000Z"
+              "date": "2026-10-21T04:08:00.000Z"
+            },
+            {
+              "label": "A5 Bienne -> Solothurn tra Svincolo autostradale Solothurn Ost E Raccordo autostradale Diramazione Luterbach Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-21T05:21:00.000Z"
             },
             {
               "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
               "value": "Roadworks",
               "detail": "until 31 December 2028",
               "date": "2024-12-30T04:49:00.000Z"
-            },
-            {
-              "label": "Balsthal <-> Laufen tra Passo Passwang E Luogo Oberbeinwil Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
-              "value": "Roadworks",
-              "detail": "until 31 December 2029",
-              "date": "2024-12-30T05:49:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T21:56:57.353Z"
+          "updatedAt": "2026-10-21T05:23:11.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -280,7 +278,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T12:43:43.682Z"
     },
     "de": {
       "canton": "SO",
@@ -291,12 +289,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "5",
-          "note": "Meldungen vom 20. Oktober 2026"
+          "note": "Meldungen vom 21. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "15",
-          "note": "Meldungen vom 20. Oktober 2026"
+          "note": "Meldungen vom 21. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -336,25 +334,24 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "Aufgehoben: A2 Luzern -> Basel zwischen Autobahndreieck Verzweigung Härkingen und Anschluss Egerkingen Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug Verkehrsführung: linker Fahrstreifen…",
+              "label": "A1 Zürich -> Bern zwischen Autobahndreieck Verzweigung Härkingen und Autobahndreieck Verzweigung Luterbach Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
               "value": "Verkehr",
-              "date": "2026-10-20T21:24:00.000Z"
+              "date": "2026-10-21T04:08:00.000Z"
+            },
+            {
+              "label": "A5 Biel -> Solothurn zwischen Anschluss Solothurn-Ost und Autobahndreieck Verzweigung Luterbach Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-21T05:21:00.000Z"
             },
             {
               "label": "Balsthal <-> Laufen zwischen Ortschaft Oberbeinwil und Pass Passwang Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung",
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2028",
               "date": "2024-12-30T04:49:00.000Z"
-            },
-            {
-              "label": "Balsthal <-> Laufen zwischen Pass Passwang und Ortschaft Oberbeinwil Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung",
-              "value": "Baustelle",
-              "detail": "bis 31. Dezember 2029",
-              "date": "2024-12-30T05:49:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T21:56:57.353Z"
+          "updatedAt": "2026-10-21T05:23:11.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -411,7 +408,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T12:43:43.682Z"
     },
     "fr": {
       "canton": "SO",
@@ -422,12 +419,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "5",
-          "note": "signalements au 20 octobre 2026"
+          "note": "signalements au 21 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "15",
-          "note": "signalements au 20 octobre 2026"
+          "note": "signalements au 21 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -467,25 +464,24 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "Révoqué: A2 Lucerne -> Bâle entre Echangeur Echangeur de Härkingen et Jonction autoroutière Egerkingen Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: voie de gauche bloquée",
+              "label": "A1 Zurich -> Berne entre Echangeur Echangeur de Härkingen et Echangeur Echangeur de Luterbach Situation: trafic en accordéon Raison: surcharge de trafic",
               "value": "Trafic",
-              "date": "2026-10-20T21:24:00.000Z"
+              "date": "2026-10-21T04:08:00.000Z"
+            },
+            {
+              "label": "A5 Bienne -> Soleure entre Jonction autoroutière Soleure-Est et Echangeur Echangeur de Luterbach Situation: trafic en accordéon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-21T05:21:00.000Z"
             },
             {
               "label": "Balsthal <-> Laufon entre Localité Oberbeinwil et Col Passwang Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies",
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2028",
               "date": "2024-12-30T04:49:00.000Z"
-            },
-            {
-              "label": "Balsthal <-> Laufon entre Col Passwang et Localité Oberbeinwil Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies",
-              "value": "Chantier",
-              "detail": "jusqu’au 31 décembre 2029",
-              "date": "2024-12-30T05:49:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T21:56:57.353Z"
+          "updatedAt": "2026-10-21T05:23:11.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -543,7 +539,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T12:43:43.682Z"
     }
   }
 }
