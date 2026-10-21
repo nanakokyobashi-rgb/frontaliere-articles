@@ -3322,9 +3322,15 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(replayDispatcher, /startswith\(\$title \+ " \/ dry="\)/);
   assert.match(replayDispatcher, /endswith\(" \/ dry=false"\)/);
   assert.match(replayDispatcher, /endswith\(" \/ dry=true"\)/);
-  assert.match(replayDispatcher, /\.status == "queued" or \.status == "in_progress"/);
-  assert.match(replayDispatcher, /\.status == "completed" and \.conclusion == "success"/);
+  assert.match(replayDispatcher, /\.status != "completed"\) then "pending"/);
+  assert.match(replayDispatcher, /\.status == "completed" and \.conclusion == "success"\) then "accepted"/);
+  assert.match(replayDispatcher, /any\(\$legacy_runs\[\]; \.status == "completed"\) then "ambiguous"/);
   assert.match(replayDispatcher, /\.status == "completed" and \.conclusion != "success"/);
+  assert.match(replayDispatcher, /earliest_pending_run_id/);
+  assert.match(replayDispatcher, /\[\$after_runs\[\] \| select\(\(\.displayTitle \/\/ ""\) == \$title\)\] as \$legacy_runs/);
+  assert.match(replayDispatcher, /if \[ "\$state" = 'pending' \]/);
+  assert.match(replayDispatcher, /if \[ "\$state" = 'ambiguous' \]/);
+  assert.match(replayDispatcher, /non invio un dispatch duplicato/);
   assert.match(replayDispatcher, /for poll in \{1\.\.10\}; do/);
   assert.match(replayDispatcher, /ultimo replay fallito; riaccodo/);
   const reconcileStart = wf.indexOf('          reconcile_edge_matrix() {');
