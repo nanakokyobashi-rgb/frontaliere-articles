@@ -4,22 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/702073/neue-karte-zeigt-wo-mieterinnen-verdr%c3%a4ngt-werden": {
-      "section": "canton-be",
-      "ts": 1792390708186
-    },
-    "canton-be::https://ajour.ch/story/702109/verkehrsmassnahmen-w%c3%a4hrend-des-zibelem%c3%a4rits": {
-      "section": "canton-be",
-      "ts": 1792390711342
-    },
-    "canton-be::https://www.nau.ch/news/schweiz/rund-100-hitzebedingte-gleisverformungen-bei-den-sbb-registriert-67190115": {
-      "section": "canton-be",
-      "ts": 1792390966096
-    },
-    "canton-be::https://ajour.ch/story/702309/zoll-wird-zum-m%c3%a4nnerclub-seit-der-reform-sinkt-der-frauenanteil-deutlich": {
-      "section": "canton-be",
-      "ts": 1792390973540
-    },
     "canton-be::https://www.be.ch/de/start.html?newsid=0e523c57-f03b-4650-8f67-68125ac0ae47": {
       "section": "canton-be",
       "ts": 1792438515092
@@ -179,6 +163,22 @@
     "canton-be::https://ajour.ch/story/702849/man-muss-jagen-damit-man-nicht-gejagt-wird-er-hat-die-ahv-erh%c3%b6ht-nun-will-er-unsere-pks-retten": {
       "section": "canton-be",
       "ts": 1792559285986
+    },
+    "canton-be::https://www.nau.ch/politik/international/bundesrat-will-co2-grenzausgleich-bei-zementimporten-67191311": {
+      "section": "canton-be",
+      "ts": 1792584667294
+    },
+    "canton-be::https://www.nau.ch/politik/international/bundesrat-will-parlamentarisches-veto-bei-notkrediten-verhindern-67191312": {
+      "section": "canton-be",
+      "ts": 1792584845375
+    },
+    "canton-be::https://www.nau.ch/politik/international/bundesrat-beharrt-bei-tox-info-auf-mitfinanzierung-durch-industrie-67191310": {
+      "section": "canton-be",
+      "ts": 1792585047620
+    },
+    "canton-be::https://www.be.ch/de/start.html?newsid=0c7f020d-17c8-463d-9d39-a795814e9442": {
+      "section": "canton-be",
+      "ts": 1792585060152
     }
   }
 }
