@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-guida-saldatore-ticino-frontiera.webp",
-      "sha256": "e0287984ce8389d33fdfa39e550511d0196b01161d300f7460fe2c2f5481c66e"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-guida-saldatore-ticino-frontiera-480w.webp",
-      "sha256": "3d118038aa7df99d2bb58958c719b019d85dff04fe6976cbe4d3b4981b883410"
-    }
-  ]
+  "items": []
 }
