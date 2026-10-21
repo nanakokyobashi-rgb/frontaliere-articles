@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-20T17:48:42.935Z",
-  "contentHash": "b6644daf25196915454da0291d575c698aaaddcbc1c32f777c0e819a9ad93ee3",
+  "updatedAt": "2026-10-21T08:38:49.888Z",
+  "contentHash": "88e017cccfc473be902aaa4cfcaffeb1286c3482365f54e26c5224e1e3e3137e",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Nuovo edificio e ristrutturazioni al collegio di Longueville",
+          "url": "/articoli-neuchatel/collegio-longueville-cantiere-colombier/",
+          "excerpt": "A Colombier, nuovo stabile scolastico entro il 2028 con 24 aule; nel frattempo sono già operative la piscina e la palestra rinnovate.",
+          "date": "2026-10-21T08:31:34.879Z"
+        },
+        {
           "title": "Neuchatel: il tasso di disoccupazione scende al 4,3% a maggio 2026",
           "url": "/articoli-neuchatel/neuchatel-disoccupazione-maggio-2026/",
           "excerpt": "A maggio 2026 i disoccupati nel Canton Neuchatel scendono a 3’924 e il tasso cantonale cala al 4,3%, sostenuto da fattori stagionali favorevoli.",
@@ -94,12 +100,6 @@
           "url": "/articoli-neuchatel/cpcn-tasso-grado-copertura/",
           "excerpt": "Il tasso esclude la RFV dal calcolo.",
           "date": "2026-10-17T00:59:33.660Z"
-        },
-        {
-          "title": "CPCN registra +5,6% nel 2025: copertura 84,8%",
-          "url": "/articoli-neuchatel/cpcn-rendimento-2025-copertura/",
-          "excerpt": "+5,6% per la performance CPCN nel 2025 3% di remunerazione sugli averi di vecchiaia 84,8% di copertura al 31.12.2025 RFV da CHF 979 milioni, al 92%",
-          "date": "2026-10-17T00:07:41.161Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T08:38:49.888Z"
     },
     "en": {
       "canton": "NE",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "New building and renovations at Longueville College",
+          "url": "/en/neuchatel-articles/longueville-college-construction-colombier/",
+          "excerpt": "In Colombier, a new school building with 24 classrooms by 2028; in the meantime, the renovated pool and gym are already operational.",
+          "date": "2026-10-21T08:31:34.879Z"
+        },
+        {
           "title": "Neuchatel: unemployment rate falls to 4,3% in May 2026",
           "url": "/en/neuchatel-articles/neuchatel-unemployment-may-2026/",
           "excerpt": "In May 2026, the unemployed in Canton Neuchatel fell to 3’924 and the cantonal rate dropped to 4,3%, supported by favorable seasonal factors.",
@@ -193,12 +199,6 @@
           "url": "/en/neuchatel-articles/cpcn-coverage-rate-distinction/",
           "excerpt": "The rate excludes the RFV from the calculation.",
           "date": "2026-10-17T00:59:33.660Z"
-        },
-        {
-          "title": "CPCN records +5,6% in 2025: coverage 84,8%",
-          "url": "/en/neuchatel-articles/cpcn-2025-return-coverage/",
-          "excerpt": "+5,6% for CPCN performance in 2025 3% remuneration on retirement savings 84,8% coverage as at December 31, 2025 RFV of CHF 979 million, at 92% of the target",
-          "date": "2026-10-17T00:07:41.161Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T08:38:49.888Z"
     },
     "de": {
       "canton": "NE",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Neubau und Renovierung des Kollegiums von Longueville",
+          "url": "/de/neuenburg-artikel/longueville-kolleg-baustelle-colombier/",
+          "excerpt": "In Colombier, einem neuen Schulgebäude bis 2028 mit 24 Klassenzimmern; in der Zwischenzeit sind das renovierte Schwimmbad und das Fitnessstudio bereits in Betrieb.",
+          "date": "2026-10-21T08:31:34.879Z"
+        },
+        {
           "title": "Neuenburg: Die Arbeitslosenquote sinkt im Mai 2026 auf 4,3%",
           "url": "/de/neuenburg-artikel/neuenburg-arbeitslosigkeit-mai-2026/",
           "excerpt": "Im Mai 2026 sinkt die Zahl der Arbeitslosen im Kanton Neuenburg auf 3’924, und die kantonale Quote fällt auf 4,3%, unterstützt durch günstige saisonale Faktoren.",
@@ -292,12 +298,6 @@
           "url": "/de/neuenburg-artikel/cpcn-deckungsgrad-unterschied/",
           "excerpt": "Der Deckungssatz schließt die RFV aus der Berechnung aus.",
           "date": "2026-10-17T00:59:33.660Z"
-        },
-        {
-          "title": "CPCN verzeichnet 2025 ein Plus von +5,6%: Deckungsgrad 84,8%",
-          "url": "/de/neuenburg-artikel/cpcn-rendite-2025-deckung/",
-          "excerpt": "+5,6% bei der Performance der CPCN im Jahr 2025 3% Verzinsung der Altersguthaben 84,8% Deckungsgrad am 31.12.2025 RFV in Höhe von CHF 979 Millionen, bei 92%",
-          "date": "2026-10-17T00:07:41.161Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T08:38:49.888Z"
     },
     "fr": {
       "canton": "NE",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Nouveau bâtiment et rénovations au collège de Longueville",
+          "url": "/fr/articles-neuchatel/college-longueville-chantier-colombier/",
+          "excerpt": "À Colombier, nouveau bâtiment scolaire d'ici 2028 avec 24 salles de classe ; entre-temps, la piscine et la salle de sport rénovées sont déjà opérationnelles.",
+          "date": "2026-10-21T08:31:34.879Z"
+        },
+        {
           "title": "Neuchatel : le taux de chômage baisse à 4,3 % en mai 2026",
           "url": "/fr/articles-neuchatel/neuchatel-chomage-mai-2026/",
           "excerpt": "En mai 2026, le nombre de chômeurs dans le canton de Neuchatel baisse à 3’924 et le taux cantonal baisse à 4,3 %, soutenu par des facteurs saisonniers favorables.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-neuchatel/cpcn-taux-couverture-distinction/",
           "excerpt": "Le taux exclut la RFV du calcul.",
           "date": "2026-10-17T00:59:33.660Z"
-        },
-        {
-          "title": "La CPCN enregistre +5,6% en 2025 : taux de couverture de 84,8%",
-          "url": "/fr/articles-neuchatel/cpcn-performance-2025-couverture/",
-          "excerpt": "+5,6% pour la performance de la CPCN en 2025 3% de rémunération sur les avoirs de vieillesse 84,8% de couverture au 31 décembre 2025 RFV de CHF 979 millions",
-          "date": "2026-10-17T00:07:41.161Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T08:38:49.888Z"
     }
   }
 }
