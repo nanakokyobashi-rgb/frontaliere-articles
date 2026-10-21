@@ -312,6 +312,20 @@ describe('lettore TS condiviso', () => {
     }
   });
 
+  test('rifiuta chiavi computate prima di restituire una mappa parziale', () => {
+    const invalidSources = [
+      "'blog.article.demo.body1': 'valid',\n['blog.article.' + id + '.title']: 'dynamic',",
+      "'blog.article.demo.body1': 'valid',\n['blog.article.demo.title']: 'computed',",
+    ];
+
+    for (const source of invalidSources) {
+      assert.throws(
+        () => readTsStringMap(source),
+        /Computed article map keys are not supported/u,
+      );
+    }
+  });
+
   test('rifiuta un commento non chiuso invece di restituire la mappa parziale', () => {
     const source = "'blog.article.demo.body1': 'valid',\n/* commento incompleto";
     assert.throws(() => readTsStringMap(source), /Unterminated comment/u);

@@ -116,9 +116,46 @@ function staticSourceTokens(src) {
   return tokens;
 }
 
+/**
+ * Le chiavi fra parentesi quadre sono espressioni, anche quando contengono un
+ * solo letterale. Non possono quindi contribuire a una mappa statica: se le
+ * ignorassimo, il chiamante riceverebbe una mappa parziale.
+ */
+function assertNoComputedPropertyKeys(tokens) {
+  for (let i = 0; i < tokens.length; i += 1) {
+    const token = tokens[i];
+    if (token.type !== 'punctuation' || token.value !== '[') continue;
+
+    const previous = tokens[i - 1];
+    const startsProperty = !previous || (
+      previous.type === 'punctuation' && (previous.value === '{' || previous.value === ',')
+    );
+    if (!startsProperty) continue;
+
+    let depth = 1;
+    let end = i + 1;
+    while (end < tokens.length && depth > 0) {
+      const current = tokens[end];
+      if (current.type === 'punctuation' && current.value === '[') depth += 1;
+      if (current.type === 'punctuation' && current.value === ']') depth -= 1;
+      end += 1;
+    }
+    if (depth !== 0) throw new Error('Unterminated computed article map key');
+
+    const next = tokens[end];
+    const afterOptionalMarker = next?.type === 'punctuation' && next.value === '?'
+      ? tokens[end + 1]
+      : next;
+    if (afterOptionalMarker?.type === 'punctuation' && afterOptionalMarker.value === ':') {
+      throw new Error('Computed article map keys are not supported in static article sources');
+    }
+  }
+}
+
 /** Tutte le coppie `'chiave': <letterale>` di un sorgente TS di stringhe. */
 export function readTsStringMap(src) {
   const tokens = staticSourceTokens(src);
+  assertNoComputedPropertyKeys(tokens);
   const out = new Map();
   for (let i = 0; i < tokens.length; i += 1) {
     const key = tokens[i];
