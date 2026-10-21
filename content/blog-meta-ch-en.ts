@@ -8567,6 +8567,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.cofinanziamento-tox-info-suisse.title': 'Tox Info Suisse: mandatory co-financing for industry',
     'blog.article.cofinanziamento-tox-info-suisse.excerpt': 'The Federal Council wants to impose co-financing for Tox Info Suisse Chemical and pharmaceutical industries involved Consultation planned until mid-',
     'blog.article.cofinanziamento-tox-info-suisse.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.consiglio-poverta-prima-conferenza.title': 'National Council on Poverty: presented on November 9',
+    'blog.article.consiglio-poverta-prima-conferenza.excerpt': 'National structure approved by the Federal Council in 2024 First press conference: November 9, 2026, 10:00-11:00 The Council represents those who have',
+    'blog.article.consiglio-poverta-prima-conferenza.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

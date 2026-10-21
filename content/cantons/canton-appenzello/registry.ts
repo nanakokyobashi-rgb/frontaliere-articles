@@ -138,4 +138,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'appenzell-remunerazioni-energia-2027',
+ category: 'novita',
+ date: '2026-10-21T18:16:59.022Z',
+ image: '/images/blog/article-appenzell-remunerazioni-energia-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

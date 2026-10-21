@@ -108246,6 +108246,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-consiglio-poverta-prima-conferenza': {
+    title: 'Consiglio nazionale sulla povertà: si presenta il 9 novembre',
+    description: 'Struttura nazionale approvata dal Consiglio federale nel 2024 Prima conferenza stampa: 9 novembre 2026, ore 10.00-11.00 Il Consiglio rappresenta chi',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, nazionale, sulla, povertà',
+    ogTitle: 'Povertà, il Consiglio nazionale si presenta a Berna',
+    ogDescription: 'Struttura nazionale approvata dal Consiglio federale nel 2024 Prima conferenza stampa: 9 novembre 2026, ore 10.00-11.00 Il Consiglio rappresenta chi ha',
+    canonicalPath: '/articoli-svizzera/consiglio-poverta-prima-conferenza/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio nazionale sulla povertà: si presenta il 9 novembre",
+      "description": "Struttura nazionale approvata dal Consiglio federale nel 2024 Prima conferenza stampa: 9 novembre 2026, ore 10.00-11.00 Il Consiglio rappresenta chi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-consiglio-poverta-prima-conferenza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T18:30:03+00:00",
+      "dateModified": "2026-10-21T18:30:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/consiglio-poverta-prima-conferenza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

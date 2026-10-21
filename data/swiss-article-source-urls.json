@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/smi-riceve-un%27iniezione-farmaceutica%2c-entrano-galderma-e-sandoz/92077634": {
-    "articleId": "smi-galderma-sandoz-2026",
-    "ts": "2026-09-18T01:31:17.756Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/politica/1950922/crisi-ubs-at1-caso-soluzione-banca-capitale-cs-obbligazioni-commissione": {
     "articleId": "consiglio-stati-lex-ubs-at1",
     "ts": "2026-09-18T01:45:48.275Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/attualita/1958245/federale-info-tox-consiglio-casi-industria-cofinanziamento": {
     "articleId": "cofinanziamento-tox-info-suisse",
     "ts": "2026-10-21T15:09:04.428Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/mz8iabac8pdo": {
+    "articleId": "consiglio-poverta-prima-conferenza",
+    "ts": "2026-10-21T18:30:04.030Z",
     "keyForm": 2
   }
 }

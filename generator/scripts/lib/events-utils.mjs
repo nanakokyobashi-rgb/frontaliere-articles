@@ -98,7 +98,7 @@ export const EVENT_SOURCES = {
   guidle: {
     key: 'guidle',
     label: 'Guidle',
-    homepage: 'https://www.guidle.com',
+    homepage: 'https://www.guidle.com/de',
     canton: null,
   },
   myswitzerland: {
