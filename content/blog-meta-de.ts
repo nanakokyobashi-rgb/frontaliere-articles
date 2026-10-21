@@ -13565,6 +13565,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.trasporti-varese-peduncolo-vedano-gallarate-luino.title': 'Verkehr: Zusagen für Varese – Peduncolo & Gallarate-Luino',
     'blog.article.trasporti-varese-peduncolo-vedano-gallarate-luino.excerpt': 'Die Pd erhält Zusagen zum PRMT in der Lombardei Der Peduncolo di Vedano wird in die vertieften Prüfungen aufgenommen Gallarate-Luino wird in die Projektphasen des Plans aufgenommen Ja',
     'blog.article.trasporti-varese-peduncolo-vedano-gallarate-luino.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.arresto-ticino-banca-occulta.title': 'Festnahme im Tessin im Rahmen einer internationalen Anti-Mafia-Operation',
+    'blog.article.arresto-ticino-banca-occulta.excerpt': 'Am Mittwoch wurde im Tessin eine Person festgenommen.',
+    'blog.article.arresto-ticino-banca-occulta.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;
