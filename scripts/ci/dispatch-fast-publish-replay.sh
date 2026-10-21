@@ -14,7 +14,10 @@ list_matching_runs() {
   local runs
   runs="$(gh run list --repo "$repository" --workflow fast-publish-section.yml --branch main --event workflow_dispatch --limit 100 --json databaseId,displayTitle,status,conclusion)" || return 1
   jq -c --arg title "$display_title" --arg current "$current_run_id" '
-    [.[] | select(.displayTitle == $title and ((.databaseId | tostring) != $current))]
+    [.[] | select(
+      ((.displayTitle // "") == $title or ((.displayTitle // "") | startswith($title + " / dry=")))
+      and ((.databaseId | tostring) != $current)
+    )]
   ' <<< "$runs"
 }
 
@@ -22,10 +25,12 @@ query_state() {
   local runs="$1"
   local after_id="${2:-}"
   jq -r --arg after "$after_id" '
-    [.[] | select($after == "" or ((.databaseId | tonumber) > ($after | tonumber)))]
-    | if any(.[]; .status == "queued" or .status == "in_progress" or .status == "waiting" or .status == "pending" or .status == "requested" or (.status == "completed" and .conclusion == "success")) then "accepted"
-      elif any(.[]; .status == "completed" and .conclusion != "success") then "failed"
-      elif length == 0 then "missing"
+    [.[] | select($after == "" or ((.databaseId | tonumber) > ($after | tonumber)))] as $after_runs
+    | [$after_runs[] | select((.displayTitle // "") | endswith(" / dry=false"))] as $publishing_runs
+    | if any($publishing_runs[]; .status == "queued" or .status == "in_progress" or .status == "waiting" or .status == "pending" or .status == "requested" or (.status == "completed" and .conclusion == "success")) then "accepted"
+      elif any($publishing_runs[]; .status == "completed" and .conclusion != "success") then "failed"
+      elif any($after_runs[]; (.displayTitle // "") | endswith(" / dry=true")) then "dry"
+      elif ($after_runs | length) == 0 then "missing"
       else "ambiguous"
       end
   ' <<< "$runs"
@@ -70,6 +75,10 @@ for attempt in 1 2; do
     if [ "$state" = 'failed' ]; then
       echo "::warning::il replay e' visibile ma e' gia' fallito: $display_title"
       break
+    fi
+    if [ "$state" = 'dry' ]; then
+      echo "::error::il replay $display_title e' stato forzato in dry-run e non ha pubblicato la superficie"
+      exit 1
     fi
   done
   echo "::warning::replay assente o ambiguo dopo il tentativo $attempt: $display_title"

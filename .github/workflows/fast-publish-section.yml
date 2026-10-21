@@ -1,5 +1,5 @@
 name: fast-publish-section
-run-name: cover-publish-section / ${{ inputs.section || 'auto' }} / nonce=${{ inputs.dispatch_nonce || 'none' }}
+run-name: cover-publish-section / ${{ inputs.section || 'auto' }} / nonce=${{ inputs.dispatch_nonce || 'none' }} / dry=${{ inputs.dry_run }}
 
 # Pubblica su R2 le pagine delle sezioni articoli CANTONALI (piano «sezioni
 # articoli per cantone», D3/D8; P7b). E' il gemello di fast-publish-article.yml
@@ -415,6 +415,14 @@ jobs:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
         run: |
           set -euo pipefail
+          # Un replay richiesto come produttivo non può diventare un dry-run
+          # silenzioso: il nome della run riflette l'input, quindi falliamo
+          # prima di risolvere o redispatchare se il kill switch lo disarma.
+          if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ "$DRY_RUN_INPUT" = 'false' ] \
+            && { [ -f .github/FAST_PUBLISH_DISABLED ] || [ "${{ vars.FAST_PUBLISH_ARMED }}" = 'false' ]; }; then
+            echo "::error::replay richiesto con dry_run=false ma il publisher è disarmato; nessuna pubblicazione è stata eseguita"
+            exit 1
+          fi
           # A workflow_run or a bounded workflow_dispatch can be queued after
           # main has moved while the edge pointer is still between releases.
           # Reconcile against the pinned/current release and retry within the
@@ -829,6 +837,10 @@ jobs:
           elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "false" ]; then
             echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
             dry=true
+          fi
+          if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ "$DRY_RUN_INPUT" = 'false' ] && [ "$dry" = 'true' ]; then
+            echo "::error::replay richiesto con dry_run=false ma il publisher è disarmato; nessuna pubblicazione è stata eseguita"
+            exit 1
           fi
           any=false
           [ "$(printf '%s' "$matrix" | jq 'length')" -gt 0 ] && any=true

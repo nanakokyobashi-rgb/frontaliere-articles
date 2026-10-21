@@ -1864,6 +1864,7 @@ export async function publishCantonRssFeeds({
   releaseReadyImpl = publishedReleaseReady,
   publishedStatusImpl,
   removeStaleCantonRssFeeds = false,
+  cleanupInactiveSurface = false,
   fetchImpl = fetch,
   snapshotImpl = snapshotCantonRssFeed,
   sleepImpl = sleep,
@@ -1873,7 +1874,10 @@ export async function publishCantonRssFeeds({
   signal,
 }) {
   const cleanupRequested = removeStaleCantonRssFeeds === true;
-  const inactiveCleanup = cleanupRequested && ['draft', 'retired'].includes(effectiveStatus);
+  const inactiveCleanup = cleanupRequested && (
+    ['draft', 'retired'].includes(effectiveStatus)
+    || (cleanupInactiveSurface === true && effectiveStatus === 'live')
+  );
   if (effectiveStatus !== 'live' && !inactiveCleanup) {
     console.error(`::error::[${LOG}] feed RSS ${section}: la sezione non è live nel registro edge`);
     return { failures: 1, uploaded: 0, verified: 0 };
@@ -1909,8 +1913,9 @@ export async function publishCantonRssFeeds({
       return { failures: 1, uploaded: 0, verified: 0 };
     }
     // Le sezioni non-live sono deliberatamente assenti da manifest/API. Il
-    // cleanup e' autorizzato solo da una transizione esplicita draft/retired;
-    // una sezione ancora live deve invece provare il conteggio zero nel manifest.
+    // cleanup esplicito di una sezione rimossa dalla core puo' essere necessario
+    // anche mentre il registro edge la dichiara ancora live; il cleanup RSS
+    // ordinario su una sezione live richiede invece un manifest senza feed.
     const declaredFeeds = inactiveCleanup
       ? []
       : cantonRssFeedsDeclaredInManifest(section, readiness.files, readiness.counts);
@@ -2102,6 +2107,7 @@ export async function publish({
   cdnUploads,
   cantonRssFeeds = [],
   removeStaleCantonRssFeeds = false,
+  cleanupInactiveSurface = false,
   obsoletePages,
   distDir,
   section,
@@ -2325,6 +2331,7 @@ export async function publish({
       feedEntries: cantonRssFeeds,
       effectiveStatus: rssStatus,
       removeStaleCantonRssFeeds,
+      cleanupInactiveSurface,
       distDir,
       runImpl,
       probeImpl,
@@ -2602,6 +2609,7 @@ export async function main(
           cdnUploads: [],
           cantonRssFeeds: [],
           removeStaleCantonRssFeeds: true,
+          cleanupInactiveSurface: true,
           obsoletePages,
           distDir,
           section,

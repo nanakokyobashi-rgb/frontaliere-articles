@@ -2465,10 +2465,12 @@ test('publisher: il contratto RSS precede gli upload HTML e il rollback ripristi
     ...common,
     cantonRssFeeds: [],
     removeStaleCantonRssFeeds: true,
+    cleanupInactiveSurface: true,
     runImpl: makeRun(emptyEvents),
     publishCantonRssFeedsImpl: async (options) => {
       emptyEvents.push('rss-cleanup');
       assert.deepEqual(options.feedEntries, []);
+      assert.equal(options.cleanupInactiveSurface, true);
       return { failures: 0, uploaded: 0, deleted: 5, verified: 5, feeds: [] };
     },
   });
@@ -2753,6 +2755,28 @@ test('publisher: RSS non live fallisce, e un manifest senza feed elimina la supe
     deleted.length = 0;
     verifiedMissing.length = 0;
     restoring = false;
+    const inactiveLive = await publishCantonRssFeeds({
+      ...common,
+      effectiveStatus: 'live',
+      removeStaleCantonRssFeeds: true,
+      cleanupInactiveSurface: true,
+      releaseReadyImpl: async (commit) => ({
+        ok: true,
+        commit,
+        files: Object.fromEntries(feeds.map(({ name }) => [name, 1])),
+        counts: { bySection: { 'canton-ti': { articles: 1 } } },
+      }),
+      publishedStatusImpl: async () => 'live',
+    });
+    assert.equal(inactiveLive.failures, 0);
+    assert.equal(inactiveLive.deleted, feeds.length);
+    assert.equal(inactiveLive.verified, feeds.length);
+    assert.deepEqual(inactiveLive.feeds, []);
+    assert.deepEqual(deleted.sort(), feeds.map(({ key }) => key).sort());
+    assert.deepEqual(verifiedMissing.sort(), feeds.map(({ name }) => name).sort());
+
+    deleted.length = 0;
+    verifiedMissing.length = 0;
     const retired = await publishCantonRssFeeds({
       ...common,
       effectiveStatus: 'retired',
@@ -3292,7 +3316,12 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'resolve, late guard e recovery devono propagare il flag del replay API',
   );
   const replayDispatcher = read('scripts/ci/dispatch-fast-publish-replay.sh');
+  assert.match(wf, /^run-name:.*inputs\.dry_run/m);
+  assert.match(wf, /replay richiesto con dry_run=false ma il publisher è disarmato/);
   assert.match(replayDispatcher, /--json databaseId,displayTitle,status,conclusion/);
+  assert.match(replayDispatcher, /startswith\(\$title \+ " \/ dry="\)/);
+  assert.match(replayDispatcher, /endswith\(" \/ dry=false"\)/);
+  assert.match(replayDispatcher, /endswith\(" \/ dry=true"\)/);
   assert.match(replayDispatcher, /\.status == "queued" or \.status == "in_progress"/);
   assert.match(replayDispatcher, /\.status == "completed" and \.conclusion == "success"/);
   assert.match(replayDispatcher, /\.status == "completed" and \.conclusion != "success"/);
@@ -3321,6 +3350,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(fastPublishSection, /status !== 'live' && status !== 'retired'/);
   const sectionPublisher = read('scripts/publish-section-pages.mjs');
   assert.match(sectionPublisher, /--cleanup-inactive-surface/);
+  assert.match(sectionPublisher, /removeStaleCantonRssFeeds: true,\s*cleanupInactiveSurface: true,/);
   assert.match(sectionPublisher, /assertKnownCantonSection/);
   assert.match(sectionPublisher, /manifest pagine edge assente o non verificabile; nessuna pagina viene cancellata/);
   assert.match(wf, /replay bounded stantio: ricalcolo la release API sulla HEAD/);
