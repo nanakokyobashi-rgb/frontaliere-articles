@@ -9,6 +9,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'kuessnacht-rete-teleriscaldamento': { it: 'kuessnacht-rete-teleriscaldamento', en: 'kuessnacht-district-heating', de: 'kuessnacht-fernwaerme', fr: 'kuessnacht-chauffage-distance' },
  'eventi-weekend-svitto': { it: 'eventi-weekend-svitto', en: 'weekend-events-schwyz', de: 'wochenend-veranstaltungen-schwyz', fr: 'evenements-week-end-schwytz' },
  'unteriberg-budget-2027': { it: 'unteriberg-budget-2027', en: 'unteriberg-2027-budget', de: 'unteriberg-budget-2027-uberschuss-von-13-500-franken', fr: 'budget-2027-unteriberg' },
+ 'kantonsrat-biberbrugg-chaltenboden': { it: 'kantonsrat-biberbrugg-chaltenboden', en: 'cantonal-council-biberbrugg-chaltenboden', de: 'kantonsrat-ja-zu-36-millionen-zwischen-biberbrugg-und-chaltenboden', fr: 'conseil-biberbrugg-chaltenboden' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

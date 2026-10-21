@@ -236,6 +236,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-kantonsrat-biberbrugg-chaltenboden': {
+    title: 'Kantonsrat: sì a 36 milioni tra Biberbrugg e Chaltenboden',
+    description: 'Il Kantonsrat approva 64-28 la spesa di 36 milioni per la mobilità lenta tra Biberbrugg e Chaltenboden. Ora decide il popolo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, kantonsrat, milioni, biberbrugg, chaltenboden',
+    ogTitle: 'Kantonsrat: sì a 36 milioni tra Biberbrugg e Chaltenboden',
+    ogDescription: 'Dopo un dibattito in parte acceso, il Kantonsrat ha approvato con 64 voti contro 28 la spesa di 36 milioni per la mobilità lenta tra Biberbrugg e Chaltenboden. Il titolo annuncia che ora decide il popolo; la fonte pubblica non indica data né esito.',
+    canonicalPath: '/articoli-svitto/kantonsrat-biberbrugg-chaltenboden/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Kantonsrat: sì a 36 milioni tra Biberbrugg e Chaltenboden",
+      "description": "Il Kantonsrat approva 64-28 la spesa di 36 milioni per la mobilità lenta tra Biberbrugg e Chaltenboden. Ora decide il popolo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-kantonsrat-biberbrugg-chaltenboden.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T13:31:24+00:00",
+      "dateModified": "2026-10-21T13:31:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svitto/kantonsrat-biberbrugg-chaltenboden/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

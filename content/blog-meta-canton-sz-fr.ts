@@ -21,6 +21,9 @@ const blogMetaCantonSzFr: Record<string, string> = {
     'blog.article.unteriberg-budget-2027.title': 'Unteriberg, budget 2027 : excédent de 13.500 francs',
     'blog.article.unteriberg-budget-2027.excerpt': 'La Kirchgemeinde Unteriberg prévoit 525.743 francs de recettes et 512.245 de dépenses en 2027 ; l\'excédent indiqué est de 13.500 francs.',
     'blog.article.unteriberg-budget-2027.imageAlt': 'Paysage alpin symbolique pour le budget de la Kirchgemeinde Unteriberg',
+    'blog.article.kantonsrat-biberbrugg-chaltenboden.title': 'Kantonsrat : oui à 36 millions entre Biberbrugg et Chaltenboden',
+    'blog.article.kantonsrat-biberbrugg-chaltenboden.excerpt': 'Le Kantonsrat approuve par 64 voix contre 28 la dépense de 36 millions pour la mobilité douce entre Biberbrugg et Chaltenboden.',
+    'blog.article.kantonsrat-biberbrugg-chaltenboden.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSzFr;

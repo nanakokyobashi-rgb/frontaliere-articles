@@ -21,6 +21,9 @@ const blogMetaCantonSzEn: Record<string, string> = {
     'blog.article.unteriberg-budget-2027.title': 'Unteriberg, budget 2027: surplus of 13.500 francs',
     'blog.article.unteriberg-budget-2027.excerpt': 'Kirchgemeinde Unteriberg forecasts revenues of 525.743 francs and expenditures of 512.245 in 2027; the indicated surplus is 13.500 francs.',
     'blog.article.unteriberg-budget-2027.imageAlt': 'Symbolic Alpine scene for the Kirchgemeinde Unteriberg budget',
+    'blog.article.kantonsrat-biberbrugg-chaltenboden.title': 'Cantonal Council: yes to 36 million between Biberbrugg and Chaltenboden',
+    'blog.article.kantonsrat-biberbrugg-chaltenboden.excerpt': 'The Cantonal Council approved 64-28 spending 36 million on active mobility between Biberbrugg and Chaltenboden.',
+    'blog.article.kantonsrat-biberbrugg-chaltenboden.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSzEn;

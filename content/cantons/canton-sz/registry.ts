@@ -72,4 +72,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'kantonsrat-biberbrugg-chaltenboden',
+ category: 'novita',
+ date: '2026-10-21T13:31:24.335Z',
+ image: '/images/blog/article-kantonsrat-biberbrugg-chaltenboden.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SZ'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
