@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "fisco",
-  "updatedAt": "2026-10-19T05:23:08.856Z",
-  "contentHash": "4708c3358fff95f926290d4d9fefe956d2e3c499da9e926681137474deef2d09",
+  "updatedAt": "2026-10-21T11:39:23.427Z",
+  "contentHash": "b4d7763bed88a063efd835dbe86f15288162467fc0bef686d8fc396ba3a85a76",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Budget 2027 di Zurigo: 640 posti in più in amministrazione",
+          "url": "/articoli-zurigo/organico-comunale-zurigo/",
+          "excerpt": "Il bilancio 2027 della città di Zurigo prevede altri 640 posti nell'amministrazione.",
+          "date": "2026-10-21T11:30:34.419Z"
+        },
+        {
           "title": "Imposte a Zurigo: aliquote e deduzioni",
           "url": "/articoli-svizzera/imposte-zurigo-aliquote-deduzioni/",
           "excerpt": "Guida a tre livelli: federale, cantonale e comunale.",
@@ -142,12 +148,6 @@
           "url": "/articoli-svizzera/imposta-auto-zurigo-pagamento/",
           "excerpt": "Nel Cantone di Zurigo calcolo, scadenze e pagamento dell'imposta sugli autoveicoli seguono regole cantonali; verifica anche cambio veicolo e indirizzo.",
           "date": "2026-10-04T15:14:54.836Z"
-        },
-        {
-          "title": "Tasse universitarie Canton Zurigo: guida e iscrizione",
-          "url": "/articoli-svizzera/tasse-universitarie-zurigo-guida/",
-          "excerpt": "Scopri come orientarti tra le tasse universitarie nel Cantone di Zurigo, dalle categorie di studenti alle procedure di iscrizione e contributi.",
-          "date": "2026-10-14T04:09:09.746Z"
         }
       ],
       "latestCantonArticles": [],
@@ -177,7 +177,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-21T11:39:23.427Z"
     },
     "en": {
       "canton": "ZH",
@@ -262,6 +262,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Zurich's 2027 budget: 640 additional positions in administration",
+          "url": "/en/zurich-articles/zurich-city-staff-budget-2027/",
+          "excerpt": "The 2027 budget of the city of Zurich provides for another 640 positions in the administration.",
+          "date": "2026-10-21T11:30:34.419Z"
+        },
+        {
           "title": "Taxes in Zurich: rates and deductions",
           "url": "/en/swiss-articles/zurich-tax-rates-deductions/",
           "excerpt": "Guide to three levels: federal, cantonal and municipal.",
@@ -302,12 +308,6 @@
           "url": "/en/swiss-articles/zurich-vehicle-tax-calculation/",
           "excerpt": "In the Canton of Zurich, the calculation, deadlines and payment of the motor vehicle tax follow cantonal rules; also check vehicle and address changes.",
           "date": "2026-10-04T15:14:54.836Z"
-        },
-        {
-          "title": "University tuition fees in the Canton of Zurich: guide and enrollment",
-          "url": "/en/swiss-articles/zurich-university-tuition-fees-guide/",
-          "excerpt": "Discover how to navigate university fees in the Canton of Zurich, from student categories to enrollment procedures and contributions.",
-          "date": "2026-10-14T04:09:09.746Z"
         }
       ],
       "latestCantonArticles": [],
@@ -337,7 +337,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-21T11:39:23.427Z"
     },
     "de": {
       "canton": "ZH",
@@ -422,6 +422,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Budget 2027 der Stadt Zürich: 640 zusätzliche Stellen in der Verwaltung",
+          "url": "/de/zurich-artikel/zuerich-stadtpersonal-budget-2027/",
+          "excerpt": "Das Budget 2027 der Stadt Zürich sieht 640 weitere Stellen in der Verwaltung vor.",
+          "date": "2026-10-21T11:30:34.419Z"
+        },
+        {
           "title": "Steuern in Zürich: Steuersätze und Abzüge",
           "url": "/de/schweiz-artikel/zuerich-steuersaetze-abzugsvo/",
           "excerpt": "Fahren auf drei Ebenen: Bund, Kanton und Gemeinde.",
@@ -462,12 +468,6 @@
           "url": "/de/schweiz-artikel/fahrzeugsteuer-zuerich-berechnung/",
           "excerpt": "Im Kanton Zürich richten sich Berechnung, Fälligkeiten und Zahlung der Motorfahrzeugsteuer nach kantonalen Regeln; prüfen Sie auch den Fahrzeug- und Adresswechsel.",
           "date": "2026-10-04T15:14:54.836Z"
-        },
-        {
-          "title": "Studiengebühren im Kanton Zürich: Leitfaden und Einschreibung",
-          "url": "/de/schweiz-artikel/universitaetsgebuehren-zuerich-leitfaden/",
-          "excerpt": "Erfahre, wie du dich bei den Studiengebühren im Kanton Zürich zurechtfindest, von den Studierendenkategorien bis zu den Einschreibungsverfahren und Beiträgen.",
-          "date": "2026-10-14T04:09:09.746Z"
         }
       ],
       "latestCantonArticles": [],
@@ -497,7 +497,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-21T11:39:23.427Z"
     },
     "fr": {
       "canton": "ZH",
@@ -582,6 +582,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Budget 2027 de Zurich : 640 postes supplémentaires dans l’administration",
+          "url": "/fr/articles-zurich/budget-zurich-personnel-ville-2027/",
+          "excerpt": "Le budget 2027 de la ville de Zurich prévoit 640 postes supplémentaires dans l’administration.",
+          "date": "2026-10-21T11:30:34.419Z"
+        },
+        {
           "title": "Impôts à Zurich : taux et déductions",
           "url": "/fr/articles-suisse/impots-zurich-baremes-deduct/",
           "excerpt": "Conduite à trois niveaux : fédéral, cantonal et communal.",
@@ -622,12 +628,6 @@
           "url": "/fr/articles-suisse/impot-vehicules-zurich-calcul/",
           "excerpt": "Dans le canton de Zurich, le calcul, les échéances et le paiement de l'impôt sur les véhicules automobiles suivent les règles cantonales ; vérifiez également le changement de véhicule et d'adresse.",
           "date": "2026-10-04T15:14:54.836Z"
-        },
-        {
-          "title": "Frais universitaires dans le canton de Zurich : guide et inscription",
-          "url": "/fr/articles-suisse/frais-universitaires-zurich-guide/",
-          "excerpt": "Découvrez comment vous y retrouver parmi les frais universitaires dans le canton de Zurich, des catégories d’étudiants aux procédures d’inscription et aux contributions.",
-          "date": "2026-10-14T04:09:09.746Z"
         }
       ],
       "latestCantonArticles": [],
@@ -657,7 +657,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-19T05:23:08.856Z"
+      "updatedAt": "2026-10-21T11:39:23.427Z"
     }
   }
 }
