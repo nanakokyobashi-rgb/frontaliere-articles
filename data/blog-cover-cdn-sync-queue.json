@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-guasto-sistemi-skyguide-scali.webp",
+      "sha256": "ce021014f5d7ad2b7d54f422650149ecde4ab615b07d398c604f2c3c7750599f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-guasto-sistemi-skyguide-scali-480w.webp",
+      "sha256": "ecdb6e10a4503cad6c5e1f4c247f920d482903329be02a08611a754fb36ebdaa"
+    }
+  ]
 }
