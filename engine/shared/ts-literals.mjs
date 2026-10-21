@@ -35,10 +35,10 @@ export function readStaticStringLiteral(source, startIdx, sourcePath = 'source',
 }
 
 /** Decode a static literal using the same escape contract as the TS readers. */
-export function decodeStaticStringLiteral(raw, quote = "'", { newlineAs = '\n' } = {}) {
+export function decodeStaticStringLiteral(raw, quote = "'") {
   return raw.replace(TS_ESCAPE_RX, (whole, escape) => {
     switch (escape[0]) {
-      case 'n': return newlineAs;
+      case 'n': return '\n';
       case 'r': return '';
       case '\n': return '';
       case '\r': return '';
@@ -94,35 +94,13 @@ export function skipStaticTrivia(source, startIdx, sourcePath = 'source', errorL
 export function readStaticObjectEntries(
   source,
   sourcePath = 'source',
-  {
-    errorLabel = 'static-literal',
-    allowTerminalFragment = false,
-    newlineAs = '\n',
-    requireObjectClosure = !allowTerminalFragment,
-  } = {},
+  { errorLabel = 'static-literal', allowTerminalFragment = false } = {},
 ) {
   const entries = [];
   let cursor = 0;
-  let braceDepth = 0;
-  let sawObjectOpen = false;
-  let closedObject = false;
   while (cursor < source.length) {
     cursor = skipStaticTrivia(source, cursor, sourcePath, errorLabel);
     if (cursor >= source.length) break;
-    if (source[cursor] === '{') {
-      braceDepth += 1;
-      sawObjectOpen = true;
-      cursor += 1;
-      continue;
-    }
-    if (source[cursor] === '}') {
-      if (braceDepth > 0) {
-        braceDepth -= 1;
-        if (braceDepth === 0) closedObject = true;
-      }
-      cursor += 1;
-      continue;
-    }
     if (!STATIC_LITERAL_QUOTES.has(source[cursor])) {
       cursor += 1;
       continue;
@@ -150,31 +128,26 @@ export function readStaticObjectEntries(
     }
     if (source[afterValue] === ',') {
       const nextToken = skipStaticTrivia(source, afterValue + 1, sourcePath, errorLabel);
-      if (nextToken >= source.length && !allowTerminalFragment) {
+      if (nextToken >= source.length) {
         throw new Error(`[${errorLabel}] Static property cannot end with a dangling comma in ${sourcePath}`);
       }
     }
 
     const entry = {
       key: decodeStaticStringLiteral(keyLiteral.value, keyLiteral.quote),
-      value: decodeStaticStringLiteral(valueLiteral.value, valueLiteral.quote, { newlineAs }),
+      value: decodeStaticStringLiteral(valueLiteral.value, valueLiteral.quote),
       keyQuote: keyLiteral.quote,
       valueQuote: valueLiteral.quote,
     };
-    // Keep source spelling and offsets available to compatibility adapters
-    // without changing the enumerable reader contract used by deep equality
-    // tests and existing consumers.
+    // Preserve source spelling and offsets for compatibility adapters without
+    // changing the enumerable reader contract used by existing consumers.
     Object.defineProperties(entry, {
       rawKey: { value: keyLiteral.value },
       rawValue: { value: valueLiteral.value },
       start: { value: cursor },
-      end: { value: valueLiteral.end },
     });
     entries.push(entry);
     cursor = valueLiteral.end;
-  }
-  if (requireObjectClosure && (!sawObjectOpen || braceDepth !== 0 || !closedObject)) {
-    throw new Error(`[${errorLabel}] Static object is not closed in ${sourcePath}`);
   }
   return entries;
 }
