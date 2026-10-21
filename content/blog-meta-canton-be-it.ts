@@ -45,6 +45,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.berna-stato-pagina-non-disponibile.title': 'Stato della pagina dell\'amministrazione bernese',
     'blog.article.berna-stato-pagina-non-disponibile.excerpt': 'Il contenuto della pagina indicata non risulta disponibile.',
     'blog.article.berna-stato-pagina-non-disponibile.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.kurzarbeit-regole-ordinarie.title': 'Consiglio federale: Kurzarbeit verso il regime ordinario',
+    'blog.article.kurzarbeit-regole-ordinarie.excerpt': 'Il Consiglio federale prospetta un ritorno graduale: Kurzarbeit da 24 a 12 mesi e Karenzzeit da 1 giorno a un massimo di tre giorni.',
+    'blog.article.kurzarbeit-regole-ordinarie.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBeIt;
