@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-frontalieri-luino-incontro-fisco-previdenza-sanita.webp",
-      "sha256": "532f37e2d8eb54d6c4678626f73ce763e016f46aabfa19a379fd4a23968e3270"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-frontalieri-luino-incontro-fisco-previdenza-sanita-480w.webp",
-      "sha256": "84aec1c0b2955ec7ba644786d469b2f11b470ff52dc6ecdbd147754ef198180c"
-    }
-  ]
+  "items": []
 }
