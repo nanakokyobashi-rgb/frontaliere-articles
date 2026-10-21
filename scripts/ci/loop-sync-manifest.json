@@ -3623,6 +3623,7 @@
       "path": "generator/scripts/lib/meta-field-regex.mjs",
       "sitePath": "scripts/lib/meta-field-regex.mjs",
       "mode": "adapted",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3042",
       "reason": "Il reader corpus usa il parser condiviso sotto engine/shared, mentre il gemello del sito vive nel layout del generatore e resta dependency-free per il trasporto standalone: il contratto di scansione e gli offset devono restare allineati, ma gli import relativi non sono copiabili tra i due repository.",
       "baseline": {
         "site": "782afafe9c39e70f",
