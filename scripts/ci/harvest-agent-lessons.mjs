@@ -1250,6 +1250,12 @@ export function isAvoidableOverlapSkip(title, labels, hasDeliveredPr = false) {
 // blocchi esterni diagnosticati correttamente — credenziali/provider o scrittura
 // Remote Config. Non descrive una violazione prevenibile con una regola agentica;
 // resta nel volume del report, ma non puo' aprire una falsa escalation.
+// `blocked-admin-settings` e' la stessa classe di diagnosi corretta quando il
+// fix richiede un'impostazione esterna oppure vive sul lato proprietario del
+// mirror. Il fixer ha trovato la causa ma non ha un diff applicabile qui: la
+// ricorrenza misura il confine di capacita', non una regola che l'agente ha
+// violato. Come `blocked-secrets`, resta visibile nel report ma non puo' creare
+// un'escalation che chiederebbe un fix strutturale inesistente in questo repo.
 // `skip-duplicate-diagnosis` (2026-08-08, #5288): emesso SOLO dal Mode 2 di
 // check-workflows-scope.mjs, cioè quando una issue con titolo identico a una
 // precedente già diagnosticata viene short-circuitata PRIMA di spendere un turno
@@ -1279,6 +1285,7 @@ export function isEscalationDriver(source, key) {
   if (source === 'fix-outcome' && bareKey === 'no-root-cause') return false;
   if (source === 'fix-outcome' && bareKey === 'rate-limited') return false;
   if (source === 'fix-outcome' && bareKey === 'blocked-secrets') return false;
+  if (source === 'fix-outcome' && bareKey === 'blocked-admin-settings') return false;
   if (source === 'fix-outcome' && bareKey === 'skip-duplicate-diagnosis') return false;
   if (source === 'fix-outcome' && bareKey === 'overlap-skip') return false;
   if (source === 'fix-outcome' && bareKey === 'pr-already-open') return false;
