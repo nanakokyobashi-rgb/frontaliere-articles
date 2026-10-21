@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T22:08:32.508Z",
-  "contentHash": "c134cca11ff0d4fbc8a0a5e417529021ddac84b0bf1c29db4ca28273eebb732e",
+  "updatedAt": "2026-10-21T03:09:34.669Z",
+  "contentHash": "112aeeedd6f2a1256a3ce46389795314c40df910c008f784083a9040c078bd90",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -27,12 +27,12 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "24",
+          "value": "23",
           "note": "segnalazioni aggiornate: 20 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "96",
+          "value": "95",
           "note": "segnalazioni aggiornate: 20 ottobre 2026"
         }
       ],
@@ -175,7 +175,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T03:09:34.669Z"
     },
     "en": {
       "canton": "BE",
@@ -185,12 +185,12 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "24",
+          "value": "23",
           "note": "reports as of 20 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "96",
+          "value": "95",
           "note": "reports as of 20 October 2026"
         }
       ],
@@ -333,7 +333,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T03:09:34.669Z"
     },
     "de": {
       "canton": "BE",
@@ -343,12 +343,12 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "24",
+          "value": "23",
           "note": "Meldungen vom 20. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "96",
+          "value": "95",
           "note": "Meldungen vom 20. Oktober 2026"
         }
       ],
@@ -491,7 +491,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T03:09:34.669Z"
     },
     "fr": {
       "canton": "BE",
@@ -501,12 +501,12 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "24",
+          "value": "23",
           "note": "signalements au 20 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "96",
+          "value": "95",
           "note": "signalements au 20 octobre 2026"
         }
       ],
@@ -649,7 +649,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T03:09:34.669Z"
     }
   }
 }
