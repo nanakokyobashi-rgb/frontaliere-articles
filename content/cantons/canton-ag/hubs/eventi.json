@@ -4,17 +4,17 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-10-20T00:06:33.415Z",
-  "contentHash": "8189620ee95ec89e520a1d3d3c55a686ce1cbdc28ea25f0099a8ac60c35674b4",
+  "updatedAt": "2026-10-21T00:56:25.671Z",
+  "contentHash": "2452b05472a0f40f0825e9116566061a17ca89774e12ddd1bd4ec143aae43f4e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-19T15:42:28.810Z",
+      "updatedAt": "2026-10-20T17:28:37.181Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-20T15:53:28.523Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "99",
+          "value": "103",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,36 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Essigkurs für die Direktvermarktung",
-              "detail": "FiBL Kurssekretariat, Frick",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/essigkurs-fuer-die-direktvermarktung/"
-            },
-            {
-              "label": "Frauenbund Muri - Hormonbalance Ü35 - Wechseljahre",
-              "detail": "Muri AG",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frauenbund-muri-hormonbalance-ue35-wechseljahre/"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — in corso, ultimo giorno: 30 ottobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
             {
               "label": "LEHRplätz Bremgarten",
               "detail": "Bremgarten",
@@ -96,11 +66,41 @@
               "detail": "Saalbau Reinach",
               "date": "2026-10-21",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-ag/tribute-to-johnny-cash_A7rvQrK"
+            },
+            {
+              "label": "EIN.ANDER - SAISONAUFTAKT ENDLICH MITTWOCH!",
+              "detail": "Baden",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eroeffnung-endlich-mittwoch-21102026/"
+            },
+            {
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — in corso, ultimo giorno: 30 ottobre 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
+            },
+            {
+              "label": "PALETTENMESSE Bremgarten",
+              "detail": "Casino Bremgarten",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/palettenmesse-bremgarten/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "en": {
       "canton": "AG",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "99",
+          "value": "103",
           "note": "from the site’s events calendar"
         }
       ],
@@ -160,36 +160,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Essigkurs für die Direktvermarktung",
-              "detail": "FiBL Kurssekretariat, Frick",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/essigkurs-fuer-die-direktvermarktung/"
-            },
-            {
-              "label": "Frauenbund Muri - Hormonbalance Ü35 - Wechseljahre",
-              "detail": "Muri AG",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frauenbund-muri-hormonbalance-ue35-wechseljahre/"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — ongoing, last day: 1 November 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — ongoing, last day: 31 October 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — ongoing, last day: 30 October 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
             {
               "label": "LEHRplätz Bremgarten",
               "detail": "Bremgarten",
@@ -219,11 +189,41 @@
               "detail": "Saalbau Reinach",
               "date": "2026-10-21",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-ag/tribute-to-johnny-cash_A7rvQrK"
+            },
+            {
+              "label": "EIN.ANDER - SAISONAUFTAKT ENDLICH MITTWOCH!",
+              "detail": "Baden",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eroeffnung-endlich-mittwoch-21102026/"
+            },
+            {
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg — ongoing, last day: 1 November 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — ongoing, last day: 31 October 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — ongoing, last day: 30 October 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
+            },
+            {
+              "label": "PALETTENMESSE Bremgarten",
+              "detail": "Casino Bremgarten",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/palettenmesse-bremgarten/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "de": {
       "canton": "AG",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "99",
+          "value": "103",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -283,36 +283,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Essigkurs für die Direktvermarktung",
-              "detail": "FiBL Kurssekretariat, Frick",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/essigkurs-fuer-die-direktvermarktung/"
-            },
-            {
-              "label": "Frauenbund Muri - Hormonbalance Ü35 - Wechseljahre",
-              "detail": "Muri AG",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frauenbund-muri-hormonbalance-ue35-wechseljahre/"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — läuft, letzter Tag: 30. Oktober 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
             {
               "label": "LEHRplätz Bremgarten",
               "detail": "Bremgarten",
@@ -342,11 +312,41 @@
               "detail": "Saalbau Reinach",
               "date": "2026-10-21",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-ag/tribute-to-johnny-cash_A7rvQrK"
+            },
+            {
+              "label": "EIN.ANDER - SAISONAUFTAKT ENDLICH MITTWOCH!",
+              "detail": "Baden",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eroeffnung-endlich-mittwoch-21102026/"
+            },
+            {
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — läuft, letzter Tag: 30. Oktober 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
+            },
+            {
+              "label": "PALETTENMESSE Bremgarten",
+              "detail": "Casino Bremgarten",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/palettenmesse-bremgarten/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "fr": {
       "canton": "AG",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "99",
+          "value": "103",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -406,36 +406,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Essigkurs für die Direktvermarktung",
-              "detail": "FiBL Kurssekretariat, Frick",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/essigkurs-fuer-die-direktvermarktung/"
-            },
-            {
-              "label": "Frauenbund Muri - Hormonbalance Ü35 - Wechseljahre",
-              "detail": "Muri AG",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/frauenbund-muri-hormonbalance-ue35-wechseljahre/"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — en cours, dernier jour : 30 octobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
             {
               "label": "LEHRplätz Bremgarten",
               "detail": "Bremgarten",
@@ -465,11 +435,41 @@
               "detail": "Saalbau Reinach",
               "date": "2026-10-21",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-ag/tribute-to-johnny-cash_A7rvQrK"
+            },
+            {
+              "label": "EIN.ANDER - SAISONAUFTAKT ENDLICH MITTWOCH!",
+              "detail": "Baden",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eroeffnung-endlich-mittwoch-21102026/"
+            },
+            {
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — en cours, dernier jour : 30 octobre 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
+            },
+            {
+              "label": "PALETTENMESSE Bremgarten",
+              "detail": "Casino Bremgarten",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/palettenmesse-bremgarten/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-20T22:08:32.508Z",
-  "contentHash": "a7343ed3a9b072c653d4cfb20f2b8f16e6b3180469a071f90135b360ce367c9d",
+  "updatedAt": "2026-10-21T00:56:25.671Z",
+  "contentHash": "06c6a2b6ad139d91c887025770767e2993f99a673bfe8ec64267beadf6f059f0",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "28",
+          "value": "27",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -39,20 +39,14 @@
           "items": [
             {
               "label": "Riscoprire Sciaffusa - Un viaggio archeologico e storico nel tempo",
-              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen",
-              "date": "2026-10-20",
+              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — in corso, ultimo giorno: 26 ottobre 2026",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
-            {
-              "label": "My Fair Lady",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
             },
             {
               "label": "Wine mobile",
               "detail": "Bringolf Weinbau, Hallau — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
@@ -96,6 +90,12 @@
               "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/michael-elsener-gute-entscheidung-1/"
+            },
+            {
+              "label": "Schaffhauser Herbstmesse",
+              "detail": "Schaffhausen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhauser-herbstmesse/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -145,7 +145,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "en": {
       "canton": "SH",
@@ -155,7 +155,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "28",
+          "value": "27",
           "note": "from the site’s events calendar"
         }
       ],
@@ -167,20 +167,14 @@
           "items": [
             {
               "label": "Rediscover Schaffhausen - An archaeological-historical journey through time",
-              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen",
-              "date": "2026-10-20",
+              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — ongoing, last day: 26 October 2026",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
-            {
-              "label": "My Fair Lady",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
             },
             {
               "label": "Wine mobile",
               "detail": "Bringolf Weinbau, Hallau — ongoing, last day: 25 October 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
@@ -224,6 +218,12 @@
               "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/michael-elsener-gute-entscheidung-1/"
+            },
+            {
+              "label": "Schaffhauser Herbstmesse",
+              "detail": "Schaffhausen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhauser-herbstmesse/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -273,7 +273,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "de": {
       "canton": "SH",
@@ -283,7 +283,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "28",
+          "value": "27",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -295,20 +295,14 @@
           "items": [
             {
               "label": "Schaffhausen neu entdecken ̶ Eine archäologisch-historische Zeitreise",
-              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen",
-              "date": "2026-10-20",
+              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — läuft, letzter Tag: 26. Oktober 2026",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
-            {
-              "label": "My Fair Lady",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
             },
             {
               "label": "Weinmobil",
               "detail": "Bringolf Weinbau, Hallau — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
@@ -352,6 +346,12 @@
               "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/michael-elsener-gute-entscheidung-1/"
+            },
+            {
+              "label": "Schaffhauser Herbstmesse",
+              "detail": "Schaffhausen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhauser-herbstmesse/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -401,7 +401,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "fr": {
       "canton": "SH",
@@ -411,7 +411,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "28",
+          "value": "27",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -423,20 +423,14 @@
           "items": [
             {
               "label": "Redécouvrir Schaffhouse ̶ Un voyage dans le temps archéologique et historique",
-              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen",
-              "date": "2026-10-20",
+              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — en cours, dernier jour : 26 octobre 2026",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
-            {
-              "label": "My Fair Lady",
-              "detail": "Stadttheater Schaffhausen, Schaffhausen",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/my-fair-lady_Aug88GK"
             },
             {
               "label": "Weinmobil",
               "detail": "Bringolf Weinbau, Hallau — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
@@ -480,6 +474,12 @@
               "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/michael-elsener-gute-entscheidung-1/"
+            },
+            {
+              "label": "Schaffhauser Herbstmesse",
+              "detail": "Schaffhausen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhauser-herbstmesse/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -529,7 +529,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     }
   }
 }

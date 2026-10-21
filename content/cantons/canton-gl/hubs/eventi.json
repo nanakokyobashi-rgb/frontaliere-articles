@@ -4,17 +4,17 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-10-20T00:06:33.415Z",
-  "contentHash": "4c7ab61ac267abab594e94c103fa6ec92935f9cbc707463fb80ac54ea01173a7",
+  "updatedAt": "2026-10-21T00:56:25.671Z",
+  "contentHash": "580d7d6de3a8a4e4f2c13270e6bcf5a59fcc7ee1cd619d1bfa6d912f890427eb",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-19T15:42:28.810Z",
+      "updatedAt": "2026-10-20T17:28:37.181Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-20T15:53:28.523Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "26",
+          "value": "27",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,24 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
-              "detail": "Luchsingen-Hätzingen — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
-            },
-            {
-              "label": "Stricken in der Bibliothek Grosstal Hätzingen",
-              "detail": "Bibliothek Grosstal Hätzingen — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
-            },
-            {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
             {
               "label": "«Industriespionage» bei der GESKA AG & Glarona Käsegenossenschaft",
               "detail": "Glarona Käsegenossenschaft, Glarus",
@@ -72,6 +54,24 @@
               "detail": "Ennenda, Glarus",
               "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
+              "detail": "Luchsingen-Hätzingen — in corso, ultimo giorno: 26 ottobre 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "Stricken in der Bibliothek Grosstal Hätzingen",
+              "detail": "Bibliothek Grosstal Hätzingen — in corso, ultimo giorno: 26 ottobre 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "Trachtenausstellung im Dorfkern Elm",
+              "detail": "Elm, Glarus Süd — in corso, ultimo giorno: 24 ottobre 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
               "label": "Lesung im Wortreich: Caroline Roger mit \"Unter Gästen\"",
@@ -100,7 +100,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "en": {
       "canton": "GL",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "26",
+          "value": "27",
           "note": "from the site’s events calendar"
         }
       ],
@@ -155,24 +155,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
-              "detail": "Luchsingen-Hätzingen — ongoing, last day: 26 October 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
-            },
-            {
-              "label": "Stricken in der Bibliothek Grosstal Hätzingen",
-              "detail": "Bibliothek Grosstal Hätzingen — ongoing, last day: 26 October 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
-            },
-            {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — ongoing, last day: 24 October 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
             {
               "label": "«Industriespionage» bei der GESKA AG & Glarona Käsegenossenschaft",
               "detail": "Glarona Käsegenossenschaft, Glarus",
@@ -190,6 +172,24 @@
               "detail": "Ennenda, Glarus",
               "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
+              "detail": "Luchsingen-Hätzingen — ongoing, last day: 26 October 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "Stricken in der Bibliothek Grosstal Hätzingen",
+              "detail": "Bibliothek Grosstal Hätzingen — ongoing, last day: 26 October 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "Trachtenausstellung im Dorfkern Elm",
+              "detail": "Elm, Glarus Süd — ongoing, last day: 24 October 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
               "label": "Lesung im Wortreich: Caroline Roger mit \"Unter Gästen\"",
@@ -218,7 +218,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -231,7 +231,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +253,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "de": {
       "canton": "GL",
@@ -263,7 +263,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "26",
+          "value": "27",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -273,24 +273,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
-              "detail": "Luchsingen-Hätzingen — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
-            },
-            {
-              "label": "Stricken in der Bibliothek Grosstal Hätzingen",
-              "detail": "Bibliothek Grosstal Hätzingen — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
-            },
-            {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
             {
               "label": "«Industriespionage» bei der GESKA AG & Glarona Käsegenossenschaft",
               "detail": "Glarona Käsegenossenschaft, Glarus",
@@ -308,6 +290,24 @@
               "detail": "Ennenda, Glarus",
               "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
+              "detail": "Luchsingen-Hätzingen — läuft, letzter Tag: 26. Oktober 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "Stricken in der Bibliothek Grosstal Hätzingen",
+              "detail": "Bibliothek Grosstal Hätzingen — läuft, letzter Tag: 26. Oktober 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "Trachtenausstellung im Dorfkern Elm",
+              "detail": "Elm, Glarus Süd — läuft, letzter Tag: 24. Oktober 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
               "label": "Lesung im Wortreich: Caroline Roger mit \"Unter Gästen\"",
@@ -336,7 +336,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -349,7 +349,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "fr": {
       "canton": "GL",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "26",
+          "value": "27",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -391,24 +391,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
-              "detail": "Luchsingen-Hätzingen — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
-            },
-            {
-              "label": "Stricken in der Bibliothek Grosstal Hätzingen",
-              "detail": "Bibliothek Grosstal Hätzingen — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
-            },
-            {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
             {
               "label": "«Industriespionage» bei der GESKA AG & Glarona Käsegenossenschaft",
               "detail": "Glarona Käsegenossenschaft, Glarus",
@@ -426,6 +408,24 @@
               "detail": "Ennenda, Glarus",
               "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
+            },
+            {
+              "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
+              "detail": "Luchsingen-Hätzingen — en cours, dernier jour : 26 octobre 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "Stricken in der Bibliothek Grosstal Hätzingen",
+              "detail": "Bibliothek Grosstal Hätzingen — en cours, dernier jour : 26 octobre 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
+            },
+            {
+              "label": "Trachtenausstellung im Dorfkern Elm",
+              "detail": "Elm, Glarus Süd — en cours, dernier jour : 24 octobre 2026",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
             },
             {
               "label": "Lesung im Wortreich: Caroline Roger mit \"Unter Gästen\"",
@@ -454,7 +454,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -467,7 +467,7 @@
               "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     }
   }
 }
