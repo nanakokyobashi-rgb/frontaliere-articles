@@ -42,6 +42,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.organico-comunale-zurigo.title': 'Zurich\'s 2027 budget: 640 additional positions in administration',
     'blog.article.organico-comunale-zurigo.excerpt': 'The 2027 budget of the city of Zurich provides for another 640 positions in the administration.',
     'blog.article.organico-comunale-zurigo.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.zurigo-incentivi-e-cargo-velo.title': 'Zurich: incentives for businesses to purchase E-Cargovelo',
+    'blog.article.zurigo-incentivi-e-cargo-velo.excerpt': 'The City of Zurich is making hundreds of thousands of francs available to support the purchase of E-Cargovelo and offers driving courses at half price.',
+    'blog.article.zurigo-incentivi-e-cargo-velo.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZhEn;

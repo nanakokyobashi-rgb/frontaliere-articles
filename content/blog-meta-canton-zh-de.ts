@@ -42,6 +42,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.organico-comunale-zurigo.title': 'Budget 2027 der Stadt Zürich: 640 zusätzliche Stellen in der Verwaltung',
     'blog.article.organico-comunale-zurigo.excerpt': 'Das Budget 2027 der Stadt Zürich sieht 640 weitere Stellen in der Verwaltung vor.',
     'blog.article.organico-comunale-zurigo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.zurigo-incentivi-e-cargo-velo.title': 'Zürich: Förderungen für den Kauf von E-Cargovelo für Unternehmen',
+    'blog.article.zurigo-incentivi-e-cargo-velo.excerpt': 'Die Stadt Zürich stellt Hunderttausende Franken zur Verfügung, um den Kauf von E-Cargovelo zu unterstützen, und bietet Fahrkurse zum halben Preis an.',
+    'blog.article.zurigo-incentivi-e-cargo-velo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZhDe;

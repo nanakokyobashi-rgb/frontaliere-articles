@@ -42,6 +42,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.organico-comunale-zurigo.title': 'Budget 2027 di Zurigo: 640 posti in più in amministrazione',
     'blog.article.organico-comunale-zurigo.excerpt': 'Il bilancio 2027 della città di Zurigo prevede altri 640 posti nell\'amministrazione.',
     'blog.article.organico-comunale-zurigo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.zurigo-incentivi-e-cargo-velo.title': 'Zurigo: incentivi per l\'acquisto di E-Cargovelo per le imprese',
+    'blog.article.zurigo-incentivi-e-cargo-velo.excerpt': 'La Città di Zurigo mette a disposizione centinaia di migliaia di franchi per sostenere l\'acquisto di E-Cargovelo e offre corsi di guida a metà prezzo.',
+    'blog.article.zurigo-incentivi-e-cargo-velo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZhIt;
