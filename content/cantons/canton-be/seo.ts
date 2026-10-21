@@ -543,6 +543,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-kurzarbeit-regole-ordinarie': {
+    title: 'Consiglio federale: Kurzarbeit verso il regime ordinario',
+    description: 'Il Consiglio federale prepara il ritorno graduale al regime ordinario: Kurzarbeit da 24 a 12 mesi e Karenzzeit da un giorno a un massimo di tre',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, kurzarbeit, verso',
+    ogTitle: 'Kurzarbeit verso il regime ordinario',
+    ogDescription: 'Il Consiglio federale collega il ritorno graduale alle migliori prospettive economiche. Oggi la Kurzarbeit può durare 24 mesi e la Karenzzeit è di un giorno; il regime ordinario prevede 12 mesi e fino a tre giorni.',
+    canonicalPath: '/articoli-berna/kurzarbeit-regole-ordinarie/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio federale: Kurzarbeit verso il regime ordinario",
+      "description": "Il Consiglio federale prepara il ritorno graduale al regime ordinario: Kurzarbeit da 24 a 12 mesi e Karenzzeit da un giorno a un massimo di tre",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-kurzarbeit-regole-ordinarie.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T15:33:53+00:00",
+      "dateModified": "2026-10-21T15:33:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/kurzarbeit-regole-ordinarie/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

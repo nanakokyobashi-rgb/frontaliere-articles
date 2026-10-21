@@ -195,6 +195,18 @@ test('files: ogni `adapted` allineato indica l issue che governa l adattamento',
   }
 });
 
+test('mint-app-token: il gemello adattato non rientra nel trasporto isolato (#3041)', () => {
+  const entry = byPath.get('scripts/ci/mint-app-token.mjs');
+  assert.ok(entry, 'mint-app-token.mjs deve restare censito');
+  assert.equal(entry.mode, 'adapted');
+  assert.equal(
+    entry.adaptationIssue,
+    'https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3041',
+  );
+  assert.match(entry.reason, /githubApiHeaders/);
+  assert.match(entry.reason, /APP_TOKEN_REQUEST_DEPLOYMENTS_READ|APP_TOKEN_DEPLOYMENTS_READ/);
+});
+
 test('mark-claude-terminal-outcome: la divergenza corpus e\' dichiarata adapted (#1084)', () => {
   const entry = byPath.get('scripts/ci/mark-claude-terminal-outcome.mjs');
   assert.ok(entry, 'mark-claude-terminal-outcome.mjs deve restare censito');

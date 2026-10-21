@@ -45,6 +45,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.berna-stato-pagina-non-disponibile.title': 'Status of the Bernese administration page',
     'blog.article.berna-stato-pagina-non-disponibile.excerpt': 'The content of the indicated page is not available.',
     'blog.article.berna-stato-pagina-non-disponibile.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.kurzarbeit-regole-ordinarie.title': 'Federal Council: short-time work towards the ordinary regime',
+    'blog.article.kurzarbeit-regole-ordinarie.excerpt': 'The Federal Council envisages a gradual return: short-time work from 24 to 12 months and the waiting period from 1 day to a maximum of three days.',
+    'blog.article.kurzarbeit-regole-ordinarie.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBeEn;

@@ -160,4 +160,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'kurzarbeit-regole-ordinarie',
+ category: 'novita',
+ date: '2026-10-21T15:33:53.249Z',
+ image: '/images/blog/article-kurzarbeit-regole-ordinarie.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

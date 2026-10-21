@@ -744,12 +744,14 @@
     },
     {
       "path": "scripts/ci/mint-app-token.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3041",
       "baseline": {
         "site": "03d134062c864679",
         "corpus": "03d134062c864679",
         "alignedAt": "2026-10-07"
-      }
+      },
+      "reason": "Il trasporto non puo' copiare questo entry point in isolamento: il corpus usa l'implementazione inline adattata di `scripts/lib/githubApiHeaders.mjs`, mentre il sito re-esporta il builder dalle Cloud Functions; inoltre il sito ha il capability gate `APP_TOKEN_REQUEST_DEPLOYMENTS_READ`/`APP_TOKEN_DEPLOYMENTS_READ` che qui non esiste. La divergenza e' intenzionale e resta governata da #3041 finche' i due contratti non vengono riconciliati."
     },
     {
       "path": "scripts/ci/pr-autorebase.mjs",

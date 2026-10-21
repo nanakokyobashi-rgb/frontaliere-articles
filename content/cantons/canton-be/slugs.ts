@@ -17,6 +17,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'voto-comunale-stranieri-berna': { it: 'voto-comunale-stranieri-berna', en: 'municipal-voting-foreigners-bern', de: 'kommunales-wahlrecht-auslaender-bern', fr: 'vote-communal-etrangers-berne' },
  'weissenbach-incidente-quattro-auto': { it: 'weissenbach-incidente-quattro-auto', en: 'weissenbach-four-car-crash', de: 'weissenbach-unfall-vier-autos', fr: 'weissenbach-accident-quatre-voitures' },
  'berna-stato-pagina-non-disponibile': { it: 'berna-stato-pagina-non-disponibile', en: 'bern-page-status-unavailable', de: 'bern-seitenstatus-nicht-verfuegbar', fr: 'berne-statut-page-indisponible' },
+ 'kurzarbeit-regole-ordinarie': { it: 'kurzarbeit-regole-ordinarie', en: 'short-time-work-normal-rules', de: 'kurzarbeit-ordentliche-regeln', fr: 'chomage-partiel-regles-ordinaires' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

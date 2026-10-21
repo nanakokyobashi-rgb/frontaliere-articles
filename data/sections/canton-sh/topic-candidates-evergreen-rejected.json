@@ -4,34 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-02/bei-der-wefa-in-thayngen-kommt-es-zu-einem-wechsel": {
-      "section": "canton-sh",
-      "ts": 1792413956311
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-07/georg-fischer-schlaegt-ton-buechner-als-neuen-praesidenten": {
-      "section": "canton-sh",
-      "ts": 1792413957164
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-01/gf-verkauft-luft-und-raumfahrt-sowie-industriegasturbinen": {
-      "section": "canton-sh",
-      "ts": 1792414090877
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-23/gvs-weine-ag-verlaesst-herblingen-und-zieht-nach-osterfingen": {
-      "section": "canton-sh",
-      "ts": 1792414091714
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-30/ist-orange-das-neue-schwarz-wie-sich-weidmueller-im-ki": {
-      "section": "canton-sh",
-      "ts": 1792415498073
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-12/gf-vizepraesidentin-gehoert-zu-den-top-100-women-in-business": {
-      "section": "canton-sh",
-      "ts": 1792415539534
-    },
-    "canton-sh::https://www.radiomunot.ch/p/geldbeutel-und-umwelt-schutzen-reparaturtag-auf-dem-fronwagplatz-6wcbqgqbjn2xlcimdsgnev": {
-      "section": "canton-sh",
-      "ts": 1792421492770
-    },
     "canton-sh::https://www.schaffhausen24.ch/articles/413387-natalie-rickli-nein-zu-bern-ja-zu-zuerich": {
       "section": "canton-sh",
       "ts": 1792434414992
@@ -71,6 +43,10 @@
     "canton-sh::https://sh.ch/webseite/kanton-schaffhausen/beh-rde/regierung/staatskanzlei/medienmitteilungen-24148367-de.html": {
       "section": "canton-sh",
       "ts": 1792585330115
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-01/gf-verkauft-luft-und-raumfahrt-sowie-industriegasturbinen": {
+      "section": "canton-sh",
+      "ts": 1792595368376
     }
   }
 }

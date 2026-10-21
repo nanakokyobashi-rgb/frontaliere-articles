@@ -45,6 +45,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.berna-stato-pagina-non-disponibile.title': 'Status der Seite der Berner Verwaltung',
     'blog.article.berna-stato-pagina-non-disponibile.excerpt': 'Der Inhalt der angegebenen Seite ist nicht verfügbar.',
     'blog.article.berna-stato-pagina-non-disponibile.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.kurzarbeit-regole-ordinarie.title': 'Bundesrat: Kurzarbeit auf dem Weg zur ordentlichen Regelung',
+    'blog.article.kurzarbeit-regole-ordinarie.excerpt': 'Der Bundesrat stellt eine schrittweise Rückkehr in Aussicht: Kurzarbeit von 24 auf 12 Monate und Karenzzeit von 1 Tag auf höchstens drei Tage.',
+    'blog.article.kurzarbeit-regole-ordinarie.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;
