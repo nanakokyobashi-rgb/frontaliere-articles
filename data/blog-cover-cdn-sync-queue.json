@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-lucerna-riduce-imposte.webp",
-      "sha256": "3bae3b9dddb84e89330f7257fdbec1f87f5d4813b8c14cfc28886c90202c50c5"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-lucerna-riduce-imposte-480w.webp",
-      "sha256": "c60f476f5117621f535566eda26dd3d478177dfac867f847e26807342e3640a3"
-    }
-  ]
+  "items": []
 }
