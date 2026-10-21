@@ -24,8 +24,9 @@ function hexCodePoint(raw) {
 
 /**
  * Decodifica il letterale TS che comincia a `i` (apice singolo, doppio o
- * backtick). I template interpolati non sono valori statici: vengono rifiutati
- * prima che un backtick annidato possa far restituire un testo parziale.
+ * backtick). I template interpolati non sono valori statici: fanno fallire
+ * l'intera lettura prima che un backtick annidato possa restituire testo
+ * parziale.
  */
 export function readTsStringLiteral(src, i) {
   const quote = src[i];
@@ -64,7 +65,9 @@ export function readTsStringLiteral(src, i) {
       j += 2;
       continue;
     }
-    if (quote === '`' && c === '$' && src[j + 1] === '{') return null;
+    if (quote === '`' && c === '$' && src[j + 1] === '{') {
+      throw new Error('Interpolated template literal is not supported in static TS string map');
+    }
     if (c === quote) return { value: out, end: j + 1 };
     out += c;
     j += 1;

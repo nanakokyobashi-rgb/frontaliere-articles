@@ -288,20 +288,18 @@ test('il lettore TS decodifica il body3 italiano con apostrofi ed escape', () =>
   assert.equal(readTsStringMap(source).get('blog.article.demo.body3'), "L'articolo\n\nFonte");
 });
 
-test('il lettore TS rifiuta template interpolati senza perdere le voci successive', () => {
-  const source = [
+test('il lettore TS rifiuta il source con template interpolati prima di accettare dati parziali', () => {
+  const dynamicSource = [
     'const m = {',
     "  'blog.article.dynamic.body1': `prima ${condition ? `interno` : 'altro'} dopo`,",
-    "  'blog.article.escaped.body1': `letterale \\${notCode}`,",
     "  'blog.article.static.body1': 'valore statico',",
     '};',
   ].join('\n');
 
   for (const reader of [backfillType.readTsStringMap, backfillCantons.readTsStringMap]) {
-    const map = reader(source);
-    assert.equal(map.has('blog.article.dynamic.body1'), false);
-    assert.equal(map.get('blog.article.escaped.body1'), 'letterale ${notCode}');
-    assert.equal(map.get('blog.article.static.body1'), 'valore statico');
+    assert.throws(() => reader(dynamicSource), /Interpolated template literal/u);
+    const escaped = reader("'blog.article.escaped.body1': `letterale \\${notCode}`, ");
+    assert.equal(escaped.get('blog.article.escaped.body1'), 'letterale ${notCode}');
   }
 });
 
