@@ -45,6 +45,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.hundwil-imposte-preventivo.title': 'Hundwil veut réduire les impôts dans le budget 2027',
     'blog.article.hundwil-imposte-preventivo.excerpt': 'Hundwil prévoit en 2027 un excédent de CHF 111\'200, avec des recettes de CHF 6\'421\'000 et des dépenses de CHF 6\'309\'800, ainsi qu\'une réduction des impôts.',
     'blog.article.hundwil-imposte-preventivo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.heiden-risparmi-preventivo-2027.title': 'Heiden poursuit ses efforts d’économies : déficit de CHF 204\'200 en 2027',
+    'blog.article.heiden-risparmi-preventivo-2027.excerpt': 'Le budget 2027 de Heiden prévoit des recettes de CHF 35,308 millions, des dépenses de CHF 35,512 millions et un déficit de CHF 204\'200.',
+    'blog.article.heiden-risparmi-preventivo-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAppenzelloFr;

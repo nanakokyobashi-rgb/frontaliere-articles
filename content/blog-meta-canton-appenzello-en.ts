@@ -45,6 +45,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.hundwil-imposte-preventivo.title': 'Hundwil wants to reduce taxes in the 2027 budget',
     'blog.article.hundwil-imposte-preventivo.excerpt': 'Hundwil expects a surplus of CHF 111\'200 in 2027, with revenue of CHF 6\'421\'000 and expenses of CHF 6\'309\'800, along with a reduction in taxes.',
     'blog.article.hundwil-imposte-preventivo.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.heiden-risparmi-preventivo-2027.title': 'Heiden continues its savings measures: deficit of CHF 204\'200 in 2027',
+    'blog.article.heiden-risparmi-preventivo-2027.excerpt': 'Heiden\'s 2027 budget projects revenues of CHF 35,308 million, expenditures of CHF 35,512 million, and a deficit of CHF 204\'200.',
+    'blog.article.heiden-risparmi-preventivo-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;

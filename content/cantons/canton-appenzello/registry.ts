@@ -160,4 +160,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'heiden-risparmi-preventivo-2027',
+ category: 'fiscale',
+ date: '2026-10-21T19:28:07.751Z',
+ image: '/images/blog/article-heiden-risparmi-preventivo-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
