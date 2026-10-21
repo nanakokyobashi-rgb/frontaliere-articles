@@ -6451,7 +6451,7 @@
       "reason": "Producer della superficie HTTP article bodies: estrae i sorgenti del corpus, pubblica namespace completi con revisione e verifica indici/payload. Il sito consuma il contratto JSON via HTTP e non importa questo modulo.",
       "baseline": {
         "site": null,
-        "corpus": "92ce0f56b41b10e8",
+        "corpus": "516afc2605149fd4",
         "alignedAt": "2026-10-21"
       }
     },
@@ -6461,8 +6461,8 @@
       "mode": "adapted",
       "reason": "Il corpus passa al builder mirrorato il parser statico dell'API attraverso scripts/lib/rss-feed-body-adapter.mjs, cosi' RSS rifiuta chiavi computate e sorgenti troncati senza importare moduli corpus-only dentro engine/. Il sito mantiene il proprio scanner lessicale mirrorabile; l'adattamento riguarda solo l'input parser e non duplica l'emissione RSS.",
       "baseline": {
-        "site": "3bff523fa712aec8",
-        "corpus": "67902f3fd993f07d",
+        "site": "c7ac2c23986e6768",
+        "corpus": "bcf8436d6220572a",
         "alignedAt": "2026-10-21"
       }
     },
@@ -6472,7 +6472,7 @@
       "reason": "Adapter del publisher che collega l'engine RSS mirrorato al parser dei body API, senza far entrare dipendenze generator o script corpus-only nell'engine. Il sito ha il proprio scanner nel package articoli e non ha questo entry point.",
       "baseline": {
         "site": null,
-        "corpus": "26a9aa644750b4fd",
+        "corpus": "29eb9fef7549255a",
         "alignedAt": "2026-10-21"
       }
     },
