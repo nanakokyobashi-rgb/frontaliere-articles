@@ -11,6 +11,14 @@
     "canton-tg::https://schalter.tg.ch": {
       "section": "canton-tg",
       "ts": 1792406204638
+    },
+    "canton-tg::https://www.frauenfeld.ch/wohnen-mobilitaet/wohnen/bauen-und-umwelt/oeffentliche-auflagen.html/1009/news/12567": {
+      "section": "canton-tg",
+      "ts": 1792548390998
+    },
+    "canton-tg::https://www.frauenfeld.ch/wohnen-mobilitaet/wohnen/bauen-und-umwelt/oeffentliche-auflagen.html/1009/news/12568": {
+      "section": "canton-tg",
+      "ts": 1792548392444
     }
   }
 }
