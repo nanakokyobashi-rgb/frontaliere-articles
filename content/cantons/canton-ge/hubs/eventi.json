@@ -4,17 +4,17 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-21T00:56:25.671Z",
-  "contentHash": "f7d97ba2cfe6145a87cca2f32b2d668b7c0e0da700cec6bb7bfae0422e335211",
+  "updatedAt": "2026-10-21T17:12:16.125Z",
+  "contentHash": "e9a2d53a68e381e8f5f2c4dd07ef2927ff7ad1fa017b6bda904fda92ca592803",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-20T17:28:37.181Z",
+      "updatedAt": "2026-10-21T12:38:14.154Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T15:53:28.523Z",
+      "updatedAt": "2026-10-21T10:37:42.748Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "319",
+          "value": "321",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -50,16 +50,34 @@
               "url": "https://www.geneve.ch/agenda/atelier-creation-enfants-autour-portrait"
             },
             {
+              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+            },
+            {
               "label": "Atelier Initiation à la Chocolaterie - Tempérage du chocolat",
               "detail": "Genève",
               "date": "2026-10-21",
               "url": "https://www.geneve.ch/agenda/atelier-initiation-chocolaterie-temperage-chocolat"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
               "label": "Au fil des pas et des pages",
               "detail": "Genève",
               "date": "2026-10-21",
               "url": "https://www.geneve.ch/agenda/pages-0"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
             },
             {
               "label": "C'est MAHgique!",
@@ -78,29 +96,11 @@
               "detail": "Genève",
               "date": "2026-10-21",
               "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve"
-            },
-            {
-              "label": "Complet - Les secrets du monde fongique : à la découverte des champignons du Jardin Botanique de Genève - En anglais",
-              "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve-anglais"
-            },
-            {
-              "label": "Complet - Un objet, un son, une histoire : découvre l'arbre de Sobo",
-              "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/objet-histoire-decouvre-arbre-sobo"
-            },
-            {
-              "label": "Escape Game en extérieur dans le parc des Bastions",
-              "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/escape-game-exterieur-parc-bastions"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "en": {
       "canton": "GE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "319",
+          "value": "321",
           "note": "from the site’s events calendar"
         }
       ],
@@ -168,16 +168,34 @@
               "url": "https://www.geneve.ch/agenda/atelier-creation-enfants-autour-portrait"
             },
             {
+              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+            },
+            {
               "label": "Atelier Initiation à la Chocolaterie - Tempérage du chocolat",
               "detail": "Genève",
               "date": "2026-10-21",
               "url": "https://www.geneve.ch/agenda/atelier-initiation-chocolaterie-temperage-chocolat"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
               "label": "Au fil des pas et des pages",
               "detail": "Genève",
               "date": "2026-10-21",
               "url": "https://www.geneve.ch/agenda/pages-0"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
             },
             {
               "label": "C'est MAHgique!",
@@ -196,29 +214,11 @@
               "detail": "Genève",
               "date": "2026-10-21",
               "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve"
-            },
-            {
-              "label": "Complet - Les secrets du monde fongique : à la découverte des champignons du Jardin Botanique de Genève - En anglais",
-              "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve-anglais"
-            },
-            {
-              "label": "Complet - Un objet, un son, une histoire : découvre l'arbre de Sobo",
-              "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/objet-histoire-decouvre-arbre-sobo"
-            },
-            {
-              "label": "Escape Game en extérieur dans le parc des Bastions",
-              "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/escape-game-exterieur-parc-bastions"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -231,7 +231,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +253,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "de": {
       "canton": "GE",
@@ -263,7 +263,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "319",
+          "value": "321",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -286,16 +286,34 @@
               "url": "https://www.geneve.ch/agenda/atelier-creation-enfants-autour-portrait"
             },
             {
+              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+            },
+            {
               "label": "Atelier Initiation à la Chocolaterie - Tempérage du chocolat",
               "detail": "Genève",
               "date": "2026-10-21",
               "url": "https://www.geneve.ch/agenda/atelier-initiation-chocolaterie-temperage-chocolat"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
               "label": "Au fil des pas et des pages",
               "detail": "Genève",
               "date": "2026-10-21",
               "url": "https://www.geneve.ch/agenda/pages-0"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
             },
             {
               "label": "C'est MAHgique!",
@@ -314,29 +332,11 @@
               "detail": "Genève",
               "date": "2026-10-21",
               "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve"
-            },
-            {
-              "label": "Complet - Les secrets du monde fongique : à la découverte des champignons du Jardin Botanique de Genève - En anglais",
-              "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve-anglais"
-            },
-            {
-              "label": "Complet - Un objet, un son, une histoire : découvre l'arbre de Sobo",
-              "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/objet-histoire-decouvre-arbre-sobo"
-            },
-            {
-              "label": "Escape Game en extérieur dans le parc des Bastions",
-              "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/escape-game-exterieur-parc-bastions"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -349,7 +349,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "fr": {
       "canton": "GE",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "319",
+          "value": "321",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -404,16 +404,34 @@
               "url": "https://www.geneve.ch/agenda/atelier-creation-enfants-autour-portrait"
             },
             {
+              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+            },
+            {
               "label": "Atelier Initiation à la Chocolaterie - Tempérage du chocolat",
               "detail": "Genève",
               "date": "2026-10-21",
               "url": "https://www.geneve.ch/agenda/atelier-initiation-chocolaterie-temperage-chocolat"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
               "label": "Au fil des pas et des pages",
               "detail": "Genève",
               "date": "2026-10-21",
               "url": "https://www.geneve.ch/agenda/pages-0"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
             },
             {
               "label": "C'est MAHgique!",
@@ -432,29 +450,11 @@
               "detail": "Genève",
               "date": "2026-10-21",
               "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve"
-            },
-            {
-              "label": "Complet - Les secrets du monde fongique : à la découverte des champignons du Jardin Botanique de Genève - En anglais",
-              "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve-anglais"
-            },
-            {
-              "label": "Complet - Un objet, un son, une histoire : découvre l'arbre de Sobo",
-              "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/objet-histoire-decouvre-arbre-sobo"
-            },
-            {
-              "label": "Escape Game en extérieur dans le parc des Bastions",
-              "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/escape-game-exterieur-parc-bastions"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -467,7 +467,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "fisco",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "f28a4407ccbf39f40c76f6161dd7759825ac3b6d92dbf2e9c8f00f4a28d4ff7e",
+  "updatedAt": "2026-10-21T17:12:16.125Z",
+  "contentHash": "feba2d4e99d529d016ee77c24e3c41a66347c414b46849013691f5a04da08ab2",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-21T10:37:42.748Z",
       "keyFacts": 0
     }
   ],
@@ -150,6 +150,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Kanton Basel-Stadt platziert zum zweiten Mal einen Social Bond am Markt",
+              "date": "2026-10-21",
+              "url": "https://www.bs.ch/medienmitteilungen/fd/2026-kanton-basel-stadt-platziert-zum-zweiten-mal-einen-social-bond-am-markt"
+            },
+            {
               "label": "Direktabzug der Steuern vom Lohn soll in zwei Phasen umgesetzt werden",
               "date": "2026-10-13",
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-direktabzug-der-steuern-vom-lohn-soll-zwei-phasen-umgesetzt-werden"
@@ -160,7 +165,7 @@
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -240,7 +245,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -368,6 +373,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Kanton Basel-Stadt platziert zum zweiten Mal einen Social Bond am Markt",
+              "date": "2026-10-21",
+              "url": "https://www.bs.ch/medienmitteilungen/fd/2026-kanton-basel-stadt-platziert-zum-zweiten-mal-einen-social-bond-am-markt"
+            },
+            {
               "label": "Direktabzug der Steuern vom Lohn soll in zwei Phasen umgesetzt werden",
               "date": "2026-10-13",
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-direktabzug-der-steuern-vom-lohn-soll-zwei-phasen-umgesetzt-werden"
@@ -378,7 +388,7 @@
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -458,7 +468,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -586,6 +596,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Kanton Basel-Stadt platziert zum zweiten Mal einen Social Bond am Markt",
+              "date": "2026-10-21",
+              "url": "https://www.bs.ch/medienmitteilungen/fd/2026-kanton-basel-stadt-platziert-zum-zweiten-mal-einen-social-bond-am-markt"
+            },
+            {
               "label": "Direktabzug der Steuern vom Lohn soll in zwei Phasen umgesetzt werden",
               "date": "2026-10-13",
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-direktabzug-der-steuern-vom-lohn-soll-zwei-phasen-umgesetzt-werden"
@@ -596,7 +611,7 @@
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -676,7 +691,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -804,6 +819,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Kanton Basel-Stadt platziert zum zweiten Mal einen Social Bond am Markt",
+              "date": "2026-10-21",
+              "url": "https://www.bs.ch/medienmitteilungen/fd/2026-kanton-basel-stadt-platziert-zum-zweiten-mal-einen-social-bond-am-markt"
+            },
+            {
               "label": "Direktabzug der Steuern vom Lohn soll in zwei Phasen umgesetzt werden",
               "date": "2026-10-13",
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-direktabzug-der-steuern-vom-lohn-soll-zwei-phasen-umgesetzt-werden"
@@ -814,7 +834,7 @@
               "url": "https://www.bs.ch/medienmitteilungen/fd/2026-warnung-vor-betruegerischen-e-mails-zu-steuerzahlungen-und-mahnungen"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -894,7 +914,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     }
   }
 }

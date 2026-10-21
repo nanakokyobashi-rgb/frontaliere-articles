@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-21T12:43:43.682Z",
-  "contentHash": "07826d49a2cfc5b3ea8c71469d5d74e00e8d77f3a51e72c51b016c446a725198",
+  "updatedAt": "2026-10-21T17:12:16.125Z",
+  "contentHash": "f943fb6aef08a7d20f67ebabd4cd65fad4570fd43eaf4fa280465605051b9dc7",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-21T05:23:11.896Z",
+      "updatedAt": "2026-10-21T12:30:01.132Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T20:55:38.574Z",
+      "updatedAt": "2026-10-21T10:37:42.748Z",
       "keyFacts": 0
     }
   ],
@@ -27,12 +27,12 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "3",
+          "value": "2",
           "note": "segnalazioni aggiornate: 21 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "28",
+          "value": "30",
           "note": "segnalazioni aggiornate: 21 ottobre 2026"
         }
       ],
@@ -55,24 +55,14 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "A2 S. Gottardo -> Luzern tra Svincolo autostradale Luzern-Kriens E Galleria Galleria Sonnenberg Situazione: colonna Causa: incidente Limitazione del traffico: corsia di sinistra chiusa",
-              "value": "Chiusura",
-              "date": "2026-10-21T05:17:00.000Z"
+              "label": "H26 Emmenbrücke -> Lenzburg tra Luogo Emmen E Luogo Waldibrücke Situazione: problemi di traffico Causa: incendio Limitazione del traffico: circolazione a corsie alternate",
+              "value": "Traffico",
+              "date": "2026-10-21T08:28:00.000Z"
             },
             {
-              "label": "A14 Luzern -> Zug tra Raccordo autostradale Diramazione Rotsee E Galleria Galleria Rathausen Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "A2 Basel -> Luzern tra Svincolo autostradale Dagmersellen E Parcheggio Knutwil Nord Situazione: problemi di traffico Causa: incidente Limitazione del traffico: corsia d'emergenza bloccata",
               "value": "Traffico",
-              "date": "2026-10-21T04:09:00.000Z"
-            },
-            {
-              "label": "A2 Basel -> Luzern tra Svincolo autostradale Sempach E Raccordo autostradale Diramazione Rotsee Situazione: traffico fortemente rallentato Causa: traffico congestionato Aggiunta 1: ritardi No. [min]…",
-              "value": "Traffico",
-              "date": "2026-10-21T04:20:00.000Z"
-            },
-            {
-              "label": "Revocato: A2 S. Gottardo -> Basel tra Svincolo autostradale Luzern-Kriens E Raccordo autostradale Diramazione Rotsee Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-21T04:24:00.000Z"
+              "date": "2026-10-21T12:17:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -85,10 +75,22 @@
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2027",
               "date": "2025-04-15T18:21:00.000Z"
+            },
+            {
+              "label": "H10 Berna <-> Lucerna tra Svincolo autostradale Schachen E Luogo Wolhusen Situazione: problemi di traffico cantiere",
+              "value": "Cantiere",
+              "detail": "fine prevista: 30 giugno 2027",
+              "date": "2025-04-23T22:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna <-> Basilea tra Area di servizio Weil am Rhein E Raccordo autostradale Raccordo di Hagnau Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: nuova…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 11 dicembre 2026",
+              "date": "2025-12-04T19:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -106,7 +108,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -152,7 +154,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "en": {
       "canton": "LU",
@@ -162,12 +164,12 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "3",
+          "value": "2",
           "note": "reports as of 21 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "28",
+          "value": "30",
           "note": "reports as of 21 October 2026"
         }
       ],
@@ -190,24 +192,14 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "A2 S. Gottardo -> Luzern tra Svincolo autostradale Luzern-Kriens E Galleria Galleria Sonnenberg Situazione: colonna Causa: incidente Limitazione del traffico: corsia di sinistra chiusa",
-              "value": "Closure",
-              "date": "2026-10-21T05:17:00.000Z"
+              "label": "H26 Emmenbrücke -> Lenzburg tra Luogo Emmen E Luogo Waldibrücke Situazione: problemi di traffico Causa: incendio Limitazione del traffico: circolazione a corsie alternate",
+              "value": "Traffic",
+              "date": "2026-10-21T08:28:00.000Z"
             },
             {
-              "label": "A14 Luzern -> Zug tra Raccordo autostradale Diramazione Rotsee E Galleria Galleria Rathausen Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "A2 Basel -> Luzern tra Svincolo autostradale Dagmersellen E Parcheggio Knutwil Nord Situazione: problemi di traffico Causa: incidente Limitazione del traffico: corsia d'emergenza bloccata",
               "value": "Traffic",
-              "date": "2026-10-21T04:09:00.000Z"
-            },
-            {
-              "label": "A2 Basel -> Luzern tra Svincolo autostradale Sempach E Raccordo autostradale Diramazione Rotsee Situazione: traffico fortemente rallentato Causa: traffico congestionato Aggiunta 1: ritardi No. [min]…",
-              "value": "Traffic",
-              "date": "2026-10-21T04:20:00.000Z"
-            },
-            {
-              "label": "Revocato: A2 S. Gottardo -> Basel tra Svincolo autostradale Luzern-Kriens E Raccordo autostradale Diramazione Rotsee Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-21T04:24:00.000Z"
+              "date": "2026-10-21T12:17:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -220,10 +212,22 @@
               "value": "Roadworks",
               "detail": "until 31 December 2027",
               "date": "2025-04-15T18:21:00.000Z"
+            },
+            {
+              "label": "H10 Berna <-> Lucerna tra Svincolo autostradale Schachen E Luogo Wolhusen Situazione: problemi di traffico cantiere",
+              "value": "Roadworks",
+              "detail": "until 30 June 2027",
+              "date": "2025-04-23T22:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna <-> Basilea tra Area di servizio Weil am Rhein E Raccordo autostradale Raccordo di Hagnau Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: nuova…",
+              "value": "Roadworks",
+              "detail": "until 11 December 2026",
+              "date": "2025-12-04T19:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +245,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +289,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "de": {
       "canton": "LU",
@@ -295,12 +299,12 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "3",
+          "value": "2",
           "note": "Meldungen vom 21. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "28",
+          "value": "30",
           "note": "Meldungen vom 21. Oktober 2026"
         }
       ],
@@ -323,24 +327,14 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "A2 Gotthard -> Luzern zwischen Anschluss Luzern-Kriens und Tunnel Sonnenberg-Tunnel Sachlage: Stau Ursache: Unfall Verkehrsführung: linker Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "date": "2026-10-21T05:17:00.000Z"
+              "label": "H26 Emmenbrücke -> Lenzburg zwischen Ortschaft Emmen und Ortschaft Waldibrücke Sachlage: Verkehrsbehinderung Ursache: Brand Verkehrsführung: wechselseitige Verkehrsführung",
+              "value": "Verkehr",
+              "date": "2026-10-21T08:28:00.000Z"
             },
             {
-              "label": "A14 Luzern -> Zug zwischen Autobahndreieck Verzweigung Rotsee und Tunnel Rathausen-Tunnel Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "label": "A2 Basel -> Luzern zwischen Anschluss Dagmersellen und Parkplatz Knutwil-Nord Sachlage: Verkehrsbehinderung Ursache: Unfall Verkehrsführung: Pannenstreifen blockiert",
               "value": "Verkehr",
-              "date": "2026-10-21T04:09:00.000Z"
-            },
-            {
-              "label": "A2 Basel -> Luzern zwischen Anschluss Sempach und Autobahndreieck Verzweigung Rotsee Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 25",
-              "value": "Verkehr",
-              "date": "2026-10-21T04:20:00.000Z"
-            },
-            {
-              "label": "Aufgehoben: A2 Gotthard -> Basel zwischen Anschluss Luzern-Kriens und Autobahndreieck Verzweigung Rotsee Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-21T04:24:00.000Z"
+              "date": "2026-10-21T12:17:00.000Z"
             },
             {
               "label": "H10 Bern <-> Luzern zwischen Ortschaft Wiggen und Ortschaft Kröschenbrunnen Sachlage: Verkehrsbehinderung Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
@@ -353,10 +347,22 @@
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2027",
               "date": "2025-04-15T18:21:00.000Z"
+            },
+            {
+              "label": "H10 Bern <-> Luzern zwischen Anschluss Schachen und Ortschaft Wolhusen Sachlage: Verkehrsbehinderung Baustelle",
+              "value": "Baustelle",
+              "detail": "bis 30. Juni 2027",
+              "date": "2025-04-23T22:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern <-> Basel zwischen Raststätte Weil am Rhein und Autobahndreieck Verzweigung Hagnau Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: veränderte Verkehrsführung…",
+              "value": "Baustelle",
+              "detail": "bis 11. Dezember 2026",
+              "date": "2025-12-04T19:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -374,7 +380,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -418,7 +424,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "fr": {
       "canton": "LU",
@@ -428,12 +434,12 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "3",
+          "value": "2",
           "note": "signalements au 21 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "28",
+          "value": "30",
           "note": "signalements au 21 octobre 2026"
         }
       ],
@@ -456,24 +462,14 @@
               "date": "2026-10-14T19:00:00.000Z"
             },
             {
-              "label": "A2 St-Gothard -> Lucerne entre Jonction autoroutière Lucerne-Kriens et Tunnel Tunnel du Sonnenberg Situation: bouchon Raison: accident Gestion du trafic: voie de gauche fermée",
-              "value": "Fermeture",
-              "date": "2026-10-21T05:17:00.000Z"
+              "label": "H26 Emmenbrücke -> Lenzburg entre Localité Emmen et Localité Waldibrücke Situation: trafic perturbé Raison: incendie Gestion du trafic: circulation alternée à une voie",
+              "value": "Trafic",
+              "date": "2026-10-21T08:28:00.000Z"
             },
             {
-              "label": "A14 Lucerne -> Zoug entre Echangeur Echangeur du Rotsee et Tunnel Tunnel de Rathausen Situation: trafic en accordéon Raison: surcharge de trafic",
+              "label": "A2 Bâle -> Lucerne entre Jonction autoroutière Dagmersellen et Parking Knutwil-Nord Situation: trafic perturbé Raison: accident Gestion du trafic: bande d'arrêt d'urgence bloquée",
               "value": "Trafic",
-              "date": "2026-10-21T04:09:00.000Z"
-            },
-            {
-              "label": "A2 Bâle -> Lucerne entre Jonction autoroutière Sempach et Echangeur Echangeur du Rotsee Situation: trafic en accordéon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 25",
-              "value": "Trafic",
-              "date": "2026-10-21T04:20:00.000Z"
-            },
-            {
-              "label": "Révoqué: A2 St-Gothard -> Bâle entre Jonction autoroutière Lucerne-Kriens et Echangeur Echangeur du Rotsee Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-21T04:24:00.000Z"
+              "date": "2026-10-21T12:17:00.000Z"
             },
             {
               "label": "H10 Berne <-> Lucerne entre Localité Wiggen et Localité Kröschenbrunnen Situation: trafic perturbé Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
@@ -486,10 +482,22 @@
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2027",
               "date": "2025-04-15T18:21:00.000Z"
+            },
+            {
+              "label": "H10 Berne <-> Lucerne entre Jonction autoroutière Schachen et Localité Wolhusen Situation: trafic perturbé travaux",
+              "value": "Chantier",
+              "detail": "jusqu’au 30 juin 2027",
+              "date": "2025-04-23T22:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne <-> Bâle entre Aire de service Weil am Rhein et Echangeur Echangeur de Hagnau Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: nouveau plan de circulation…",
+              "value": "Chantier",
+              "detail": "jusqu’au 11 décembre 2026",
+              "date": "2025-12-04T19:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -507,7 +515,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +561,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     }
   }
 }

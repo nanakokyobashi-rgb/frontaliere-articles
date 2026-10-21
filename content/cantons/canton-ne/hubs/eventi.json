@@ -4,17 +4,17 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-10-21T00:56:25.671Z",
-  "contentHash": "617ea3ed6b31def77159a72ca6509e036a205990072bd4e5f9647e06d07a486a",
+  "updatedAt": "2026-10-21T17:12:16.125Z",
+  "contentHash": "93aaa7a60b1556c13fd57ae9637445292e439c7cedd9fc05e809ceb2b1a58495",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-20T17:28:37.181Z",
+      "updatedAt": "2026-10-21T12:38:14.154Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T15:53:28.523Z",
+      "updatedAt": "2026-10-21T10:37:42.748Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "42",
+          "value": "46",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -92,15 +92,15 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-bebe-du-ruckers/"
             },
             {
-              "label": "INCANTATIONS",
-              "detail": "La Chaux-de-Fonds",
+              "label": "Le verger en fête. Fête d’automne et Bourse aux arbres",
+              "detail": "Neuchâtel",
               "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/incantations/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-verger-en-fete-fete-dautomne-et-bourse-aux-arbres/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/neuchatel/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -128,7 +128,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -150,7 +150,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "en": {
       "canton": "NE",
@@ -160,7 +160,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "42",
+          "value": "46",
           "note": "from the site’s events calendar"
         }
       ],
@@ -225,15 +225,15 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-bebe-du-ruckers/"
             },
             {
-              "label": "INCANTATIONS",
-              "detail": "La Chaux-de-Fonds",
+              "label": "Le verger en fête. Fête d’automne et Bourse aux arbres",
+              "detail": "Neuchâtel",
               "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/incantations/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-verger-en-fete-fete-dautomne-et-bourse-aux-arbres/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/neuchatel/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -261,7 +261,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -283,7 +283,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "de": {
       "canton": "NE",
@@ -293,7 +293,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "42",
+          "value": "46",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -358,15 +358,15 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-bebe-du-ruckers/"
             },
             {
-              "label": "INCANTATIONS",
-              "detail": "La Chaux-de-Fonds",
+              "label": "Le verger en fête. Fête d’automne et Bourse aux arbres",
+              "detail": "Neuchâtel",
               "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/incantations/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-verger-en-fete-fete-dautomne-et-bourse-aux-arbres/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/neuenburg/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -394,7 +394,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -416,7 +416,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "fr": {
       "canton": "NE",
@@ -426,7 +426,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "42",
+          "value": "46",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -491,15 +491,15 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-bebe-du-ruckers/"
             },
             {
-              "label": "INCANTATIONS",
-              "detail": "La Chaux-de-Fonds",
+              "label": "Le verger en fête. Fête d’automne et Bourse aux arbres",
+              "detail": "Neuchâtel",
               "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/incantations/"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-verger-en-fete-fete-dautomne-et-bourse-aux-arbres/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/neuchatel/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -527,7 +527,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     }
   }
 }
