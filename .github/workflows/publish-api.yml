@@ -431,6 +431,7 @@ jobs:
               engine/shared/articleSectionCore.mjs
               engine/shared/cantonArticleSectionCore.generated.mjs
               engine/shared/normalizeArticleMarkdown.ts
+              engine/shared/ts-literals.mjs
               generator/data/canton-url-slugs.json
               generator/data/canton-sections.json
               generator/scripts/lib/corpus-paths.mjs
@@ -438,6 +439,7 @@ jobs:
               scripts/ci/check-blog-body-links.mjs
               scripts/lib/article-link-contract.mjs
               scripts/lib/corpus-sections.mjs
+              scripts/lib/ts-literals.mjs
               generator/scripts/lib/article-meta-block.mjs
               generator/scripts/lib/article-excerpt.mjs
             )

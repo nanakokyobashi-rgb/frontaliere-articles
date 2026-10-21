@@ -12,6 +12,10 @@ const ENGINE_IMPORT_RE = /(?:from\s+|import\s*\(\s*)['"][^'"]*engine\//g;
 const DIRECTORIES = ['scripts', 'generator/scripts', 'generator/tests', 'host'];
 const CLOSED_SET_HELPERS = new Set([
   'generator/scripts/lib/canton-section-profile.mjs',
+  // The metadata matcher only imports the static-literal reader; it never
+  // consumes the active canton set and is an adapter, not an engine entrypoint.
+  'generator/scripts/lib/meta-field-regex.mjs',
+  'scripts/lib/ts-literals.mjs',
   'scripts/lib/corpus-sections.mjs',
 ]);
 const DYNAMIC_ENTRYPOINTS = [

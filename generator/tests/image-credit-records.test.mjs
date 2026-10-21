@@ -378,8 +378,8 @@ function blogIndexTree() {
   writeRaw(root, 'content/blog-articles-data.ts', "export const RAW_ARTICLES = [{ id: 'uno', category: 'news', date: '2026-10-01', image: '/images/blog/uno.webp' }];\n");
   writeRaw(root, 'content/swiss-articles-data.ts', "export const RAW_SWISS_ARTICLES = [{ id: 'due', category: 'news', date: '2026-10-02', image: '/images/blog/due.webp' }];\n");
   for (const locale of ['it', 'en', 'de', 'fr']) {
-    writeRaw(root, `content/blog-meta-${locale}.ts`, "'blog.article.uno.title': 'Uno',\n");
-    writeRaw(root, `content/blog-meta-ch-${locale}.ts`, "'blog.article.due.title': 'Due',\n");
+    writeRaw(root, `content/blog-meta-${locale}.ts`, "export const blogMeta = {\n'blog.article.uno.title': 'Uno',\n};\n");
+    writeRaw(root, `content/blog-meta-ch-${locale}.ts`, "export const blogMetaCh = {\n'blog.article.due.title': 'Due',\n};\n");
   }
   writeCreditRecord(root, recordFor('Locarno 1.jpg', '/images/blog/uno.webp'));
   return root;
@@ -424,7 +424,7 @@ test('build-blog-index still publishes when two covers credit one file different
     const first = recordFor('Locarno 1.jpg', '/images/blog/uno.webp');
     writeRaw(root, 'content/blog-articles-data.ts', "export const RAW_ARTICLES = [{ id: 'uno', category: 'news', date: '2026-10-01', image: '/images/blog/uno.webp' }, { id: 'tre', category: 'news', date: '2026-10-03', image: '/images/blog/tre.webp' }];\n");
     writeRaw(root, 'content/blog-body/it/tre.ts', 'export const tre = true;\n');
-    for (const locale of ['it', 'en', 'de', 'fr']) writeRaw(root, `content/blog-meta-${locale}.ts`, "'blog.article.uno.title': 'Uno',\n'blog.article.tre.title': 'Tre',\n");
+    for (const locale of ['it', 'en', 'de', 'fr']) writeRaw(root, `content/blog-meta-${locale}.ts`, "export const blogMeta = {\n'blog.article.uno.title': 'Uno',\n'blog.article.tre.title': 'Tre',\n};\n");
     writeCreditRecord(root, { ...first, cover: '/images/blog/tre.webp', author: { ...first.author, name: 'Someone Else' } });
     const out = path.join(root, 'out');
     const result = spawnSync(process.execPath, [path.join(root, 'scripts/build-blog-index.mjs'), '--out', out], { cwd: root, encoding: 'utf8' });

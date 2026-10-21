@@ -121,8 +121,12 @@ test('una voce di meta senza registro ne\' slug fa cadere la premessa, e viene n
   const withOrphan = (rel) => {
     const text = readCorpusFile(rel);
     if (rel !== target.surface.metaFile) return text;
-    return `${text}\n  'blog.article.${orphan}.title': 'Titolo rimasto',\n`
-      + `  'blog.article.${orphan}.excerpt': 'Estratto rimasto',\n`;
+    const close = text.lastIndexOf('};');
+    assert.ok(close >= 0, `${rel}: meta IT senza chiusura object`);
+    return `${text.slice(0, close)}`
+      + `  'blog.article.${orphan}.title': 'Titolo rimasto',\n`
+      + `  'blog.article.${orphan}.excerpt': 'Estratto rimasto',\n`
+      + text.slice(close);
   };
   assert.throws(
     () => snapshotSections([target.surface], withOrphan, 'corpus'),
