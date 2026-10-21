@@ -13,11 +13,64 @@
  * while the script regressed.
  */
 
+import { readStaticObjectEntries } from '../../../engine/shared/ts-literals.mjs';
 import { unescapeTsString } from './unescape-ts-string.mjs';
 
-/** Global regex matching `'blog.article.<id>.<field>': '<escaped value>'`. */
+function makeMatch(source, entry, index) {
+  const full = source.slice(index, entry.end);
+  const lastDot = entry.key.lastIndexOf('.');
+  const match = [full, entry.key.slice('blog.article.'.length, lastDot), entry.rawValue];
+  match.index = index;
+  match.input = source;
+  return match;
+}
+
+/**
+ * Token-aware replacement for the old raw RegExp API.
+ *
+ * Callers historically use both `source.matchAll(metaFieldRegex(field))` and
+ * `metaFieldRegex(field).exec(source)`, so keep that surface while making the
+ * matching lexical: quoted keys in comments/prose are ignored and escaped
+ * apostrophes do not terminate a value. The returned object deliberately
+ * exposes only the small RegExp-compatible surface used by this repository.
+ */
 export function metaFieldRegex(field) {
-  return new RegExp(`'blog\\.article\\.([^']+)\\.${field}':\\s*'((?:[^'\\\\]|\\\\.)*)'`, 'g');
+  if (!/^[A-Za-z][A-Za-z0-9]*$/u.test(field)) {
+    throw new TypeError(`invalid meta field: ${field}`);
+  }
+  let sourceRef = null;
+  let matches = [];
+  let cursor = 0;
+  const collect = (source) => {
+    if (sourceRef === source) return;
+    sourceRef = source;
+    matches = readStaticObjectEntries(source, 'blog-meta.ts', { allowTerminalFragment: true })
+      .filter(({ key }) => {
+        const suffix = `.${field}`;
+        return key.startsWith('blog.article.') && key.endsWith(suffix);
+      })
+      .map((entry) => ({ entry, index: entry.start }));
+    cursor = 0;
+  };
+  const matcher = {
+    global: true,
+    lastIndex: 0,
+    exec(source) {
+      collect(source);
+      if (cursor >= matches.length) {
+        matcher.lastIndex = 0;
+        return null;
+      }
+      const current = matches[cursor++];
+      matcher.lastIndex = current.index + 1;
+      return makeMatch(source, current.entry, current.index);
+    },
+    *[Symbol.matchAll](source) {
+      collect(source);
+      for (const current of matches) yield makeMatch(source, current.entry, current.index);
+    },
+  };
+  return matcher;
 }
 
 /**
