@@ -816,6 +816,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-impetigine-casi-vaud': {
+    title: 'Impetigine in aumento nel Vaud: pediatri rassicurano',
+    description: 'Nel Canton Vaud aumentano i casi di impetigine in autunno: i pediatri escludono un\'epidemia e indicano come limitare il contagio.',
+    keywords: 'frontalieri, ticino, svizzera, italia, impetigine, aumento, vaud, pediatri',
+    ogTitle: 'Impetigine in aumento nel Vaud: cosa dicono i pediatri',
+    ogDescription: 'La malattia cutanea colpisce soprattutto i bambini dai due anni. Manon Peter, pediatra a Losanna, esclude un\'epidemia ma segnala possibili aumenti locali in nidi, scuole e famiglie: pulire tessili e oggetti a contatto.',
+    canonicalPath: '/articoli-vaud/impetigine-casi-vaud/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Impetigine in aumento nel Vaud: pediatri rassicurano",
+      "description": "Nel Canton Vaud aumentano i casi di impetigine in autunno: i pediatri escludono un'epidemia e indicano come limitare il contagio.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-impetigine-casi-vaud.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T21:39:24+00:00",
+      "dateModified": "2026-10-21T21:39:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/impetigine-casi-vaud/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

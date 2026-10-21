@@ -66,6 +66,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.lausanne-marathon-2026-chiusure-strade.title': 'Lausanne Marathon 2026: chiusure strade cantonali e vie cittadine il 25 ottobre',
     'blog.article.lausanne-marathon-2026-chiusure-strade.excerpt': 'Domenica 25 ottobre 2026 si corre il Lausanne Marathon Strade cantonali interessate: 777-B-P e 780-B-P Chiusure totali o parziali circa dalle 07:30 alle 17:30',
     'blog.article.lausanne-marathon-2026-chiusure-strade.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.impetigine-casi-vaud.title': 'Impetigine in aumento nel Vaud: pediatri rassicurano',
+    'blog.article.impetigine-casi-vaud.excerpt': 'Nel Canton Vaud l\'impetigine cresce quest\'autunno: colpisce soprattutto i bambini dai due anni, ma i pediatri escludono un\'epidemia.',
+    'blog.article.impetigine-casi-vaud.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVdIt;

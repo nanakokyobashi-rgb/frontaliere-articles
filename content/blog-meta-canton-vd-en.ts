@@ -66,6 +66,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.lausanne-marathon-2026-chiusure-strade.title': 'Lausanne Marathon 2026: road and street closures Oct 25',
     'blog.article.lausanne-marathon-2026-chiusure-strade.excerpt': 'On Sunday, October 25, 2026, the Lausanne Marathon will be held Affected cantonal roads: 777-B-P and 780-B-P Full or partial closures from approximately 07:30',
     'blog.article.lausanne-marathon-2026-chiusure-strade.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.impetigine-casi-vaud.title': 'Impetigo on the rise in Vaud: pediatricians reassure',
+    'blog.article.impetigine-casi-vaud.excerpt': 'In the Canton of Vaud, impetigo is on the rise this autumn: it mainly affects children aged two and over, but pediatricians rule out an epidemic.',
+    'blog.article.impetigine-casi-vaud.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVdEn;

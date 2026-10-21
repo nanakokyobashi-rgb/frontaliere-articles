@@ -66,6 +66,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.lausanne-marathon-2026-chiusure-strade.title': 'Lausanne Marathon 2026: Strassensperren am 25. Oktober',
     'blog.article.lausanne-marathon-2026-chiusure-strade.excerpt': 'Am Sonntag, dem 25.',
     'blog.article.lausanne-marathon-2026-chiusure-strade.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.impetigine-casi-vaud.title': 'Impetigo im Kanton Waadt nimmt zu: Kinderärzte geben Entwarnung',
+    'blog.article.impetigine-casi-vaud.excerpt': 'Im Kanton Waadt nimmt die Impetigo diesen Herbst zu: Betroffen sind vor allem Kinder ab zwei Jahren, aber die Kinderärzte schließen eine Epidemie aus.',
+    'blog.article.impetigine-casi-vaud.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVdDe;
