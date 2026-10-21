@@ -3336,7 +3336,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /replay workflow_run redispatchato prima degli upload/);
   assert.match(wf, /elif \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ -n "\$\{SOURCE_COMMIT:-\}" \]; then\n\s+pinned_replay_main="\$SOURCE_MAIN_COMMIT"/);
   assert.match(wf, /replay bounded redispatchato prima degli upload/);
-  const lateGuardNonceStart = wf.indexOf('dispatch_nonce="${DISPATCH_NONCE:-}"');
+  // Il workflow ha due guard con lo stesso assegnamento locale; questa
+  // asserzione riguarda quello finale, che costruisce il nonce `stale-late`.
+  const lateGuardNonceStart = wf.lastIndexOf('dispatch_nonce="${DISPATCH_NONCE:-}"');
   const lateGuardTitleStart = wf.indexOf('dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"', lateGuardNonceStart);
   const lateGuardNonce = wf.slice(lateGuardNonceStart, lateGuardTitleStart);
   assert.match(lateGuardNonce, /nonce_hash="\$\(printf '%s\\0%s\\0%s' "\$nonce_seed" "\$current_main" "\$SECTION" \| sha256sum \| cut -c1-16\)"/);
