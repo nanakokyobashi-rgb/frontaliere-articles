@@ -11073,14 +11073,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.vconews.it/2026/10/19/leggi-notizia/argomenti/politica-28/articolo/sanita-avs-e-pd-allattacco-sul-nuovo-cup-progetto-bloccato-dai-ricorsi-lia-resta-sulla-ca-2.html": {
-      "section": "frontaliere",
-      "ts": 1792424935533
-    },
-    "frontaliere::http://www.cd-ocst.ch": {
-      "section": "frontaliere",
-      "ts": 1792435928184
-    },
     "svizzera::https://www.admin.ch/it/newnsb/e9jr6pxxz25m": {
       "section": "svizzera",
       "ts": 1792450313611
@@ -11200,6 +11192,10 @@
     "frontaliere::https://www.varesenews.it/2026/10/maxi-operazione-della-guardia-di-finanza-tra-italia-svizzera-e-spagna-30-indagati-sequestri-per-oltre-21-milioni/2714272": {
       "section": "frontaliere",
       "ts": 1792596109509
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/strade-ferrovie-e-trasporto-pubblico-la-lombardia-ridisegna-la-mobilita-fino-al-2036/2715067": {
+      "section": "frontaliere",
+      "ts": 1792612035305
     }
   }
 }
