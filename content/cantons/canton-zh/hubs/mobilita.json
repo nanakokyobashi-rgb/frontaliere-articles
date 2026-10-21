@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-21T04:08:52.546Z",
-  "contentHash": "64a3d22d5849aac96e500ec930e5235866550f0c1d84d2c725edf3c13459e0a0",
+  "updatedAt": "2026-10-21T10:28:31.671Z",
+  "contentHash": "23869329a4892d08874e4c45325c70bc2cfe699f68a8af23dd7a3d38f7c7438c",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -204,6 +204,12 @@
           "date": "2026-10-08T17:26:18.316Z"
         },
         {
+          "title": "Dal 13 dicembre soppressi i tram 50 e 51",
+          "url": "/articoli-zurigo/vbz-tram-50-51-cambio/",
+          "excerpt": "Dal 13 dicembre spariscono le linee 50 e 51 I tram 4, 11, 13, 14 e 17 tornano sul Bahnhofquai La linea 83 viaggia ogni giorno fino alle 22 La linea notturna N8",
+          "date": "2026-10-21T10:20:51.886Z"
+        },
+        {
           "title": "Zurigo: no al divieto delle velostrade davanti alle scuole",
           "url": "/articoli-zurigo/zurigo-velostrade-scuole/",
           "excerpt": "Dopo le obiezioni provenienti da Wollishofen, il governo cantonale di Zurigo si schiera contro il divieto delle velostrade davanti alle scuole.",
@@ -271,7 +277,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T10:28:31.671Z"
     },
     "en": {
       "canton": "ZH",
@@ -453,6 +459,12 @@
           "date": "2026-10-08T17:26:18.316Z"
         },
         {
+          "title": "Trams 50 and 51 discontinued from December 13",
+          "url": "/en/zurich-articles/vbz-tram-50-51-timetable-change/",
+          "excerpt": "From December 13, lines 50 and 51 will disappear Trams 4, 11, 13, 14 and 17 return to Bahnhofquai Line 83 runs every day until 22 Night line N8 becomes N80 Date",
+          "date": "2026-10-21T10:20:51.886Z"
+        },
+        {
           "title": "Zurich: no to the ban on cycle highways in front of schools",
           "url": "/en/zurich-articles/zurich-school-bike-routes-ban/",
           "excerpt": "Following objections from Wollishofen, the cantonal government of Zurich opposes the ban on bicycle streets in front of schools.",
@@ -520,7 +532,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T10:28:31.671Z"
     },
     "de": {
       "canton": "ZH",
@@ -702,6 +714,12 @@
           "date": "2026-10-08T17:26:18.316Z"
         },
         {
+          "title": "Ab dem 13. Dezember entfallen die Trams 50 und 51",
+          "url": "/de/zurich-artikel/vbz-tram-50-51-fahrplanwechsel/",
+          "excerpt": "Ab dem 13. Dezember entfallen die Linien 50 und 51 Die Trams 4, 11, 13, 14 und 17 fahren wieder über den Bahnhofquai Die Linie 83 fährt täglich bis 22 Uhr",
+          "date": "2026-10-21T10:20:51.886Z"
+        },
+        {
           "title": "Zürich: Nein zum Verbot von Velostrassen vor Schulen",
           "url": "/de/zurich-artikel/zuerich-veloschnellstrassen-schulen/",
           "excerpt": "Nach Einwänden aus Wollishofen stellt sich die Zürcher Kantonsregierung gegen das Verbot von Velostrassen vor Schulen.",
@@ -769,7 +787,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T10:28:31.671Z"
     },
     "fr": {
       "canton": "ZH",
@@ -951,6 +969,12 @@
           "date": "2026-10-08T17:26:18.316Z"
         },
         {
+          "title": "Dès le 13 décembre, suppression des tramways 50 et 51",
+          "url": "/fr/articles-zurich/vbz-tram-50-51-changement-horaire/",
+          "excerpt": "Dès le 13 décembre, les lignes 50 et 51 disparaissent Les tramways 4, 11, 13, 14 et 17 reprennent leur parcours sur le Bahnhofquai La ligne 83 circule tous",
+          "date": "2026-10-21T10:20:51.886Z"
+        },
+        {
           "title": "Zurich : non à l’interdiction des véloroutes devant les écoles",
           "url": "/fr/articles-zurich/zurich-veloroutes-ecoles/",
           "excerpt": "Après les objections venues de Wollishofen, le gouvernement cantonal de Zurich se prononce contre l’interdiction des véloroutes devant les écoles.",
@@ -1018,7 +1042,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T10:28:31.671Z"
     }
   }
 }

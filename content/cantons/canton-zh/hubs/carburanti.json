@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-20T17:48:42.935Z",
-  "contentHash": "3f6e40983451ef287213f3f1c857967958af789d382a51169253f32b701e8820",
+  "updatedAt": "2026-10-21T10:28:31.671Z",
+  "contentHash": "2d7875c136e08d4bdac72cb675830bf938c06ebd438d7055bd49bb0bc1e90b5e",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Dal 13 dicembre soppressi i tram 50 e 51",
+          "url": "/articoli-zurigo/vbz-tram-50-51-cambio/",
+          "excerpt": "Dal 13 dicembre spariscono le linee 50 e 51 I tram 4, 11, 13, 14 e 17 tornano sul Bahnhofquai La linea 83 viaggia ogni giorno fino alle 22 La linea notturna N8",
+          "date": "2026-10-21T10:20:51.886Z"
+        },
+        {
           "title": "Zurigo prepara i residenti alle crisi: 9 litri d'acqua",
           "url": "/articoli-zurigo/crisi-resilienza-zurigo/",
           "excerpt": "Le settimane della resilienza di Zurigo affrontano due scenari: informazioni senza elettricità e internet e 9 litri d'acqua per tre giorni.",
@@ -94,12 +100,6 @@
           "url": "/articoli-zurigo/lex-ubs-zurigo-capitale/",
           "excerpt": "Walker Späh e Filippo Leutenegger cercano a Berna sostegno FDP per regole di capitale meno severe per UBS.",
           "date": "2026-10-11T00:57:18.753Z"
-        },
-        {
-          "title": "Eolico nel Canton Zurigo: scetticismo nel Weinland",
-          "url": "/articoli-zurigo/eolico-weinland-zurigo/",
-          "excerpt": "Nel Canton Zurigo, quasi metà dell'elettricità eolica arriverebbe dal Weinland.",
-          "date": "2026-10-09T22:48:28.421Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T10:28:31.671Z"
     },
     "en": {
       "canton": "ZH",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Trams 50 and 51 discontinued from December 13",
+          "url": "/en/zurich-articles/vbz-tram-50-51-timetable-change/",
+          "excerpt": "From December 13, lines 50 and 51 will disappear Trams 4, 11, 13, 14 and 17 return to Bahnhofquai Line 83 runs every day until 22 Night line N8 becomes N80 Date",
+          "date": "2026-10-21T10:20:51.886Z"
+        },
+        {
           "title": "Zurich prepares residents for crises: 9 liters of water",
           "url": "/en/zurich-articles/zurich-crisis-resilience/",
           "excerpt": "Zurich's resilience weeks address two scenarios: information without electricity and internet and 9 liters of water for three days.",
@@ -193,12 +199,6 @@
           "url": "/en/zurich-articles/zurich-ubs-capital-rules/",
           "excerpt": "Walker Späh and Filippo Leutenegger seek FDP support in Bern for less stringent capital rules for UBS.",
           "date": "2026-10-11T00:57:18.753Z"
-        },
-        {
-          "title": "Wind power in the Canton of Zurich: skepticism in the Weinland",
-          "url": "/en/zurich-articles/wind-power-zurich-weinland/",
-          "excerpt": "In the Canton of Zurich, almost half of the wind-generated electricity would come from the Weinland.",
-          "date": "2026-10-09T22:48:28.421Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T10:28:31.671Z"
     },
     "de": {
       "canton": "ZH",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Ab dem 13. Dezember entfallen die Trams 50 und 51",
+          "url": "/de/zurich-artikel/vbz-tram-50-51-fahrplanwechsel/",
+          "excerpt": "Ab dem 13. Dezember entfallen die Linien 50 und 51 Die Trams 4, 11, 13, 14 und 17 fahren wieder über den Bahnhofquai Die Linie 83 fährt täglich bis 22 Uhr",
+          "date": "2026-10-21T10:20:51.886Z"
+        },
+        {
           "title": "Zürich bereitet die Einwohner auf Krisen vor: 9 Liter Wasser",
           "url": "/de/zurich-artikel/zuerich-krisenresilienz/",
           "excerpt": "Die Zürcher Resilienzwochen befassen sich mit zwei Szenarien: Informationen ohne Strom und Internet sowie 9 Liter Wasser für drei Tage.",
@@ -292,12 +298,6 @@
           "url": "/de/zurich-artikel/zuerich-ubs-kapitalregeln/",
           "excerpt": "Walker Späh und Filippo Leutenegger suchen in Bern FDP-Unterstützung für weniger strenge Kapitalregeln für UBS.",
           "date": "2026-10-11T00:57:18.753Z"
-        },
-        {
-          "title": "Windenergie im Kanton Zürich: Skepsis im Weinland",
-          "url": "/de/zurich-artikel/windkraft-zuerich-weinland/",
-          "excerpt": "Im Kanton Zürich käme fast die Hälfte des Windstroms aus dem Weinland.",
-          "date": "2026-10-09T22:48:28.421Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T10:28:31.671Z"
     },
     "fr": {
       "canton": "ZH",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Dès le 13 décembre, suppression des tramways 50 et 51",
+          "url": "/fr/articles-zurich/vbz-tram-50-51-changement-horaire/",
+          "excerpt": "Dès le 13 décembre, les lignes 50 et 51 disparaissent Les tramways 4, 11, 13, 14 et 17 reprennent leur parcours sur le Bahnhofquai La ligne 83 circule tous",
+          "date": "2026-10-21T10:20:51.886Z"
+        },
+        {
           "title": "Zurich prépare ses habitants aux crises : 9 litres d’eau",
           "url": "/fr/articles-zurich/zurich-resilience-crises/",
           "excerpt": "Les semaines de la résilience de Zurich abordent deux scénarios : des informations sans électricité ni internet et 9 litres d’eau pour trois jours.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-zurich/zurich-ubs-regles-capital/",
           "excerpt": "Walker Späh et Filippo Leutenegger cherchent à Berne le soutien du FDP en faveur de règles de fonds propres moins strictes pour UBS.",
           "date": "2026-10-11T00:57:18.753Z"
-        },
-        {
-          "title": "Éolien dans le canton de Zurich : scepticisme dans le Weinland",
-          "url": "/fr/articles-zurich/eolien-weinland-zurich/",
-          "excerpt": "Dans le canton de Zurich, près de la moitié de l'électricité éolienne proviendrait du Weinland.",
-          "date": "2026-10-09T22:48:28.421Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T10:28:31.671Z"
     }
   }
 }
