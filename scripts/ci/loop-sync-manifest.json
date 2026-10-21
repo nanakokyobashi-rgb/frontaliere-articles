@@ -835,9 +835,9 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 (issue #1110, trasporto concatenato da Site #10266 e follow-up #10273/#10277): lo scanner torna byte-identico al sito. Il watermark usa soltanto run `schedule` riuscite e distingue il primo avvio leggibile da una history illeggibile, che fallisce chiusa. Il lookback derivato ha un ceiling effettivo di 12 ore; l'orizzonte `created` realtime di 3 giorni e' fail-closed senza opt-in esplicito, mentre l'override retention-complete a 35 giorni conserva le run create oltre 3 giorni ma aggiornate nel cutoff. Split e paginazione evitano il limite di 1.000 risultati per search.",
       "baseline": {
-        "site": "0d4847a8632bd513",
-        "corpus": "0d4847a8632bd513",
-        "alignedAt": "2026-10-20"
+        "site": "04d704edc431c84d",
+        "corpus": "04d704edc431c84d",
+        "alignedAt": "2026-10-21"
       }
     },
     {
@@ -3932,7 +3932,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 2cc55d3… comprende il budget SERP a 150 caratteri e il riferimento a gtag-init con il nome derivato dal contenuto in GTAG_SNIPPET (`/assets/gtag-init-<sha256[:12] di GTAG_INIT_CONTENT>.js`, sito PR #12150, issue 9403; fino al digest 082cd6c3… era la query `?v=` della PR #11496), per cui GTAG_INIT_CONTENT e ANALYTICS_EMISSION_ID_FACTORY_JS restano nella chiusura e scripts/ci/ensure-host-shell-assets.mjs carica quel file sulla CDN prima di ogni pubblicazione (sito issue 12270); conserva Organization come tipo base dell'identita' canonica e lo snippet Funding Choices che trattiene l'Offerwall fino al click su Candidati nelle sezioni job board; il gate segue anche i cambi di rotta SPA. La specializzazione editoriale resta in additionalType. Allineamento verificato contro main del sito dopo PR #12150; il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 39427a7… comprende il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs della PR sito #14411 e il riferimento a gtag-init con il nome derivato dal contenuto in GTAG_SNIPPET (`/assets/gtag-init-<sha256[:12] di GTAG_INIT_CONTENT>.js`, sito PR #12150, issue 9403; fino al digest 082cd6c3… era la query `?v=` della PR #11496), per cui GTAG_INIT_CONTENT e ANALYTICS_EMISSION_ID_FACTORY_JS restano nella chiusura e scripts/ci/ensure-host-shell-assets.mjs carica quel file sulla CDN prima di ogni pubblicazione (sito issue 12270); conserva Organization come tipo base dell'identita' canonica e lo snippet Funding Choices che trattiene l'Offerwall fino al click su Candidati nelle sezioni job board; il gate segue anche i cambi di rotta SPA. La specializzazione editoriale resta in additionalType. Allineamento verificato contro main del sito dopo PR #12150; il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
       "baseline": {
         "site": "5bedfc2a3453a9f5",
         "corpus": "db9e22109da26397",
@@ -3943,7 +3943,7 @@
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 22,
-        "sha256": "2cc55d337bbce2e78b89f6d8104f9417b06c2efb3fb8f63d07077d12b93912fd"
+        "sha256": "39427a7e57c98c531d72141429a5786e2bef4deeb9c6455aeea84191460d846f"
       }
     },
     {
@@ -3982,9 +3982,9 @@
       "sitePath": "services/seo/organizationLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "b012a9d1b3ada67a",
-        "corpus": "b012a9d1b3ada67a",
-        "alignedAt": "2026-10-11"
+        "site": "79e55d5374ef8b1a",
+        "corpus": "79e55d5374ef8b1a",
+        "alignedAt": "2026-10-21"
       }
     },
     {
@@ -4160,9 +4160,9 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
-        "site": "22338808c554207d",
-        "corpus": "22338808c554207d",
-        "alignedAt": "2026-10-20"
+        "site": "c4f1330703973856",
+        "corpus": "c4f1330703973856",
+        "alignedAt": "2026-10-21"
       }
     },
     {
@@ -6440,9 +6440,9 @@
       "path": "scripts/lib/single-flight-lock.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "4cb6ab1ae26b751c",
-        "corpus": "4cb6ab1ae26b751c",
-        "alignedAt": "2026-10-19"
+        "site": "86e684459d8d6afa",
+        "corpus": "86e684459d8d6afa",
+        "alignedAt": "2026-10-21"
       }
     },
     {
