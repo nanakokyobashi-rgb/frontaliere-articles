@@ -1296,6 +1296,10 @@ test('publisher: argomenti', () => {
     true,
   );
   assert.throws(
+    () => parseArgs(['--section', 'canton-ti', '--remove-stale-canton-rss-feeds', '--cleanup-inactive-surface', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }),
+    /sezione attiva/,
+  );
+  assert.throws(
     () => parseArgs(['--section', 'canton-ti', '--cleanup-inactive-surface', '--out', 'o', '--summary', 's'], { active: HISTORICAL_CORE }),
     /richiede --remove-stale-canton-rss-feeds/,
   );
@@ -3143,6 +3147,16 @@ test('piano API push: aggiorna tutte le superfici cantonali live senza ampliare 
     }],
     'il piano API conserva il cleanup-only di una sezione rimossa dalla core attiva',
   );
+  assert.throws(
+    () => r2ApiPushPlan([], [{
+      section: 'canton-ti',
+      ids: [],
+      bootstrap: false,
+      removeStaleCantonRssFeeds: true,
+      cleanupInactiveSurface: true,
+    }], [...HISTORICAL_CORE_LIST, TI]),
+    /cleanup-only non consentito per sezione attiva/,
+  );
 });
 
 test('fast-publish verso gli shard ignora i corpi cantonali, quello R2 ignora le storiche', () => {
@@ -3184,7 +3198,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     wf.indexOf('\n          before="${PUSH_BEFORE:-}"', staleResolveStart),
   );
   assert.match(staleResolve, /FIREBASE_SERVICE_ACCOUNT_JSON assente/);
-  assert.match(staleResolve, /bash scripts\/ci\/dispatch-fast-publish-replay\.sh "\$REPO" "\$dispatch_title" --ref main/);
+  assert.match(staleResolve, /bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh "\$REPO" "\$dispatch_title" --ref main/);
   assert.match(staleResolve, /-f source_commit="\$current_main"/);
   assert.match(staleResolve, /-f dispatch_nonce="\$dispatch_nonce"/);
   assert.match(staleResolve, /-f push_after="\$replay_after"/);
@@ -3196,7 +3210,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(staleResolve, /tar -x -C "\$current_main_source"/);
   assert.match(staleResolve, /replay_matrix="\$\(reconcile_edge_matrix "\$pinned_source" "\$current_main" "\$current_main_source"\)"/);
   assert.ok(
-    staleResolve.indexOf('bash scripts/ci/dispatch-fast-publish-replay.sh') < staleResolve.indexOf("echo 'matrix=[]'"),
+    staleResolve.indexOf('bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh') < staleResolve.indexOf("echo 'matrix=[]'"),
     'il resolve deve redispatchare un replay stale prima di produrre una matrix vuota',
   );
   assert.match(wf, /- name: Guard pinned replay freshness/);
@@ -3212,7 +3226,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(dispatchPlan, /FAST_PUBLISH_ARMED/);
   assert.equal((wf.match(/-f dry_run="\$DRY"/g) ?? []).length, 3, 'tutti i redispatch propagano il dry-run calcolato');
   assert.doesNotMatch(wf, /-f dry_run=false/);
-  assert.equal((wf.match(/bash scripts\/ci\/dispatch-fast-publish-replay\.sh/g) ?? []).length, 4);
+  assert.equal((wf.match(/bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh/g) ?? []).length, 4);
+  assert.equal((wf.match(/name: Checkout replay dispatcher from workflow revision/g) ?? []).length, 3);
+  assert.equal((wf.match(/ref: \$\{\{ github\.sha \}\}\n\s+path: \.replay-dispatcher-source/g) ?? []).length, 3);
+  assert.match(wf, /sparse-checkout:\n\s+scripts\/ci\/dispatch-fast-publish-replay\.sh/);
   assert.equal((wf.match(/-f cleanup_inactive_surface="\$[A-Za-z_]+"/g) ?? []).length, 4);
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE_INPUT: \$\{\{ inputs\.cleanup_inactive_surface \}\}/);
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE: \$\{\{ matrix\.target\.cleanupInactiveSurface \|\| false \}\}/);
@@ -3395,7 +3412,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     stagedReplay.indexOf('- name: Replay publish-api after staged release'),
   );
   assert.match(staleRecoveryStep, /if: steps\.replay_freshness\.outputs\.fresh == 'false'/);
-  assert.match(staleRecoveryStep, /bash scripts\/ci\/dispatch-fast-publish-replay\.sh "\$REPOSITORY" "\$dispatch_title" --ref main/);
+  assert.match(staleRecoveryStep, /bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh "\$REPOSITORY" "\$dispatch_title" --ref main/);
   assert.match(staleRecoveryStep, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(staleRecoveryStep, /-f source_main_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /push_before:/);

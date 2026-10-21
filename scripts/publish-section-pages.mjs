@@ -215,6 +215,9 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
     if (out.bootstrap || out.ids.length || out.missingPages.length || out.knownMissingPages.length) {
       throw new Error('--cleanup-inactive-surface non si combina con bootstrap, id o path pagina');
     }
+    if (Object.prototype.hasOwnProperty.call(active, out.section)) {
+      throw new Error(`--cleanup-inactive-surface non e' consentito per la sezione attiva "${out.section}"`);
+    }
     assertKnownCantonSection(out.section, { all });
   } else {
     assertPublishableSection(out.section, { all, active });

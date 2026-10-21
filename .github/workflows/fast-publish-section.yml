@@ -233,6 +233,19 @@ jobs:
           sparse-checkout-cone-mode: false
           persist-credentials: false
 
+      - name: Checkout replay dispatcher from workflow revision
+        uses: actions/checkout@v7
+        with:
+          # workflow_run checks out the older publish source at the workspace
+          # root; github.sha points to the default-branch workflow revision.
+          ref: ${{ github.sha }}
+          path: .replay-dispatcher-source
+          fetch-depth: 1
+          sparse-checkout: |
+            scripts/ci/dispatch-fast-publish-replay.sh
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+
       - name: Resolve originating push range
         id: push_range
         env:
@@ -552,7 +565,7 @@ jobs:
                 nonce_hash="$(printf '%s\0%s\0%s' "$nonce_seed" "$current_main" "$section" | sha256sum | cut -c1-16)"
                 dispatch_nonce="stale-resolve-${current_main:0:12}-${section}-${nonce_hash}"
                 dispatch_title="cover-publish-section / ${section} / nonce=${dispatch_nonce}"
-                if bash scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
+                if bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
                   -f section="$section" \
                   -f article_ids="$article_ids" \
                   -f missing_page_paths="$missing_page_paths" \
@@ -810,6 +823,19 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - name: Checkout replay dispatcher from workflow revision
+        uses: actions/checkout@v7
+        with:
+          # workflow_run checks out the older publish source at the workspace
+          # root; github.sha points to the default-branch workflow revision.
+          ref: ${{ github.sha }}
+          path: .replay-dispatcher-source
+          fetch-depth: 1
+          sparse-checkout: |
+            scripts/ci/dispatch-fast-publish-replay.sh
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+
       - name: Guard pinned replay freshness
         id: replay_freshness
         env:
@@ -943,7 +969,7 @@ jobs:
             # il publisher ricalcola quella compatibile con la HEAD corrente.
             echo "::notice::replay bounded stantio: ricalcolo la release API sulla HEAD $CURRENT_MAIN"
           fi
-          bash scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
+          bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
             -f section="$SECTION" \
             -f article_ids="$ARTICLE_IDS_JSON" \
             -f missing_page_paths="$MISSING_PAGE_PATHS_JSON" \
@@ -1164,7 +1190,7 @@ jobs:
                 fi
               fi
               dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"
-              bash scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
+              bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
                 -f section="$SECTION" \
                 -f article_ids="$ARTICLE_IDS_JSON" \
                 -f missing_page_paths="$MISSING_PAGE_PATHS_JSON" \
@@ -1360,6 +1386,17 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
 
+      - name: Checkout replay dispatcher from workflow revision
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          path: .replay-dispatcher-source
+          fetch-depth: 1
+          sparse-checkout: |
+            scripts/ci/dispatch-fast-publish-replay.sh
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+
       - name: Verify staged release revision is still main
         id: replay_freshness
         env:
@@ -1448,7 +1485,7 @@ jobs:
             dispatch_nonce="stale-staged-${CURRENT_MAIN:0:12}-${section}-${nonce_hash}"
             dispatch_title="cover-publish-section / ${section} / nonce=${dispatch_nonce}"
             echo "::notice::recovery staged $section sulla HEAD corrente $CURRENT_MAIN"
-            if bash scripts/ci/dispatch-fast-publish-replay.sh "$REPOSITORY" "$dispatch_title" --ref main \
+            if bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh "$REPOSITORY" "$dispatch_title" --ref main \
               -f section="$section" \
               -f article_ids="$article_ids" \
               -f missing_page_paths="$missing_page_paths" \

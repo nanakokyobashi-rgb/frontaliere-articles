@@ -281,6 +281,9 @@ export function r2ApiPushPlan(diffPlan, edgePlan, coreList = activeCorpusCoreEnt
       if (!known || known.kind !== 'canton' || known.shardKey) {
         throw new Error(`r2 API push plan cleanup-only per sezione R2 sconosciuta: ${section}`);
       }
+      if (active.has(section)) {
+        throw new Error(`r2 API push plan cleanup-only non consentito per sezione attiva: ${section}`);
+      }
       return;
     }
     if (!sections.some((entry) => entry.section === section && entry.kind === 'canton')) {
