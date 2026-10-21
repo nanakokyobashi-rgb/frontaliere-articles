@@ -470,6 +470,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-appenzell-remunerazioni-energia-2027': {
+    title: 'Feuerschaukommission Appenzell fissa le remunerazioni 2027',
+    description: 'Appenzell lega la remunerazione dell\'energia immessa al prezzo di mercato orario; per gli impianti fino a 150 kW è previsto un premio minimo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, feuerschaukommission, appenzell, fissa, remunerazioni',
+    ogTitle: 'Appenzell: remunerazioni energia fissate per il 2027',
+    ogDescription: 'La Feuerschaukommission della Feuerschaugemeinde Appenzell descrive il criterio per il 2027: l\'energia immessa segue il prezzo di borsa del momento e gli impianti fino a 150 kW ricevono un premio di remunerazione minima.',
+    canonicalPath: '/articoli-appenzello/appenzell-remunerazioni-energia-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Feuerschaukommission Appenzell fissa le remunerazioni 2027",
+      "description": "Appenzell lega la remunerazione dell'energia immessa al prezzo di mercato orario; per gli impianti fino a 150 kW è previsto un premio minimo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-appenzell-remunerazioni-energia-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T18:16:59+00:00",
+      "dateModified": "2026-10-21T18:16:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/appenzell-remunerazioni-energia-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
