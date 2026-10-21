@@ -6450,6 +6450,16 @@
         "corpus": "e8dcd6f4d358e7ab",
         "alignedAt": "2026-10-21"
       }
+    },
+    {
+      "path": "scripts/lib/typescript-expression-scanner.mjs",
+      "mode": "corpus-only",
+      "reason": "Scanner lessicale condiviso per estrazione dei body e gate dei link nel publisher del corpus. Il sito riceve i body tramite JSON HTTP e non importa questo scanner né i sorgenti del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-21"
+      }
     }
   ]
 }

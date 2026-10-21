@@ -537,7 +537,7 @@ test('il gate continua a controllare i body dopo regex di controllo e divisione 
     const result = scanBlogBodyLinks(fixtureRoot);
     assert.equal(result.errors.length, 0);
     assert.equal(result.offenders.length, 1);
-    assert.match(result.offenders[0].markdown, /bare-target/u);
+    assert.equal(result.offenders[0].target, 'bare-target');
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }
@@ -563,7 +563,7 @@ test('il gate conserva il confine delle template expression con tipi TypeScript 
     const result = scanBlogBodyLinks(fixtureRoot);
     assert.equal(result.errors.length, 0);
     assert.equal(result.offenders.length, 1);
-    assert.match(result.offenders[0].markdown, /bare-target/u);
+    assert.equal(result.offenders[0].target, 'bare-target');
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }
