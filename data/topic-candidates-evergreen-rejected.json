@@ -2726,6 +2726,18 @@
       "firstStrikeAt": "2026-10-20T22:32:07.868Z",
       "lastStrikeAt": "2026-10-20T22:32:07.868Z",
       "expiresAt": "2026-11-19T22:32:07.868Z"
+    },
+    {
+      "keyword": "frontaliere cassiere ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "quality-strike-ttl",
+      "count": 1,
+      "firstStrikeAt": "2026-10-21T06:08:47.198Z",
+      "lastStrikeAt": "2026-10-21T06:08:47.198Z",
+      "expiresAt": "2026-11-20T06:08:47.198Z"
     }
   ],
   "legacy": [
