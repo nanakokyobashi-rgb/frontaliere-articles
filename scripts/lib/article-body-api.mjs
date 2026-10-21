@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import {
+  isTypeScriptObjectLiteralMemberStart,
   unsupportedObjectMemberAt,
 } from './typescript-expression-scanner.mjs';
 import { repairLegacyDoubleEscapedBreaks, tsStringEscapesWithNewlineAs } from '../../generator/scripts/lib/unescape-ts-string.mjs';
@@ -142,6 +143,9 @@ export function extractArticleBodyFields(source, { allowEndOfInput = false, vali
     }
     const key = ARTICLE_KEY_RE.exec(keyToken.value ?? '');
     const colon = skipTrivia(text, keyToken.end);
+    if (key && isTypeScriptObjectLiteralMemberStart(text, index) && text[colon] !== ':') {
+      throw new Error('Article body properties must use a static key/value property in object literals');
+    }
     if (!key || keyToken.error || text[colon] !== ':') {
       index = keyToken.end;
       continue;

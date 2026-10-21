@@ -70,12 +70,23 @@ const REGEX_PREFIX_KEYWORDS = new Set([
 const REGEX_PREFIX_PUNCTUATION = new Set([
   '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>', '=>',
 ]);
+const OBJECT_LITERAL_PREFIX_TOKENS = new Set(['=', ':', 'return', 'default', '(', '[', ',', '?']);
+const OBJECT_MEMBER_PREFIX_MODIFIERS = new Set(['get', 'set', 'async', '*']);
 const TS_TRIVIA_PATTERN = String.raw`(?:\s|\/\*[\s\S]*?\*\/|\/\/[^\r\n]*(?:\r?\n|$))*`;
 const COMPUTED_PROPERTY_PREFIX_RE = new RegExp(
   `(?:^|[,{])${TS_TRIVIA_PATTERN}(?:(?:get|set|async|\\*)${TS_TRIVIA_PATTERN})*$`,
   'u',
 );
-const OBJECT_MEMBER_PREFIX_RE = new RegExp(`(?:^|[,{])${TS_TRIVIA_PATTERN}$`, 'u');
+
+function isArrowObjectPattern(source, openingOffset) {
+  const objectEnd = scanTypeScriptExpression(source, openingOffset + 1, '}');
+  if (objectEnd >= source.length) return false;
+  const afterObject = skipTrivia(source, objectEnd);
+  if (source[afterObject] === '=' && source[afterObject + 1] !== '>') return true;
+  if (source[afterObject] !== ')') return false;
+  return source.startsWith('=>', skipTrivia(source, afterObject + 1));
+}
+
 function typeAliasHeaderEqualsOffset(source, offset) {
   let cursor = skipTrivia(source, offset);
   if (!/[$_\p{ID_Start}]/u.test(source[cursor] || '')) return -1;
@@ -243,6 +254,15 @@ function delimiterContextAt(source, offset) {
         || ch === '{' && typeAliasDepth >= 0;
       const functionParameters = ch === '(' && awaitingFunctionParametersDepth === delimiters.length
         && functionTypeParameterDepth === 0;
+      const bindingPattern = ch === '{' && (
+        variableNamePending && delimiters.length === variableDeclarationDepth
+        || delimiters.at(-1)?.functionParameters === true
+      );
+      const objectLiteral = ch === '{' && !typeLiteral && !bindingPattern
+        && OBJECT_LITERAL_PREFIX_TOKENS.has(previousToken)
+        && !(previousToken === '('
+          && /(?:=|return|yield)\s*\(\s*$/u.test(source.slice(0, index))
+          && isArrowObjectPattern(source, index));
       if (functionParameters) {
         awaitingFunctionParametersDepth = -1;
         functionTypeParameterDepth = 0;
@@ -252,7 +272,7 @@ function delimiterContextAt(source, offset) {
         interfaceTypeParameterDepth = 0;
       }
       markToken(ch);
-      delimiters.push({ delimiter: ch, offset: index, lastToken: null, typeLiteral, functionParameters });
+      delimiters.push({ delimiter: ch, offset: index, lastToken: null, typeLiteral, functionParameters, objectLiteral });
       pendingFunctionReturnObjectType = false;
       pendingVariableTypeObject = false;
       index += 1;
@@ -378,19 +398,17 @@ export function hasComputedPropertyPrefix(source, offset) {
   return COMPUTED_PROPERTY_PREFIX_RE.test(prefix) && !isParenthesizedCommaContext(source, offset);
 }
 
+export function isTypeScriptObjectLiteralMemberStart(source, offset) {
+  const current = delimiterContextAt(source, offset).at(-1);
+  return current?.delimiter === '{'
+    && current.objectLiteral === true
+    && (current.lastToken == null
+      || current.lastToken === ','
+      || OBJECT_MEMBER_PREFIX_MODIFIERS.has(current.lastToken));
+}
+
 function hasObjectMemberPrefix(source, offset) {
-  if (!OBJECT_MEMBER_PREFIX_RE.test(source.slice(0, offset))) return false;
-  const contexts = delimiterContextAt(source, offset);
-  const current = contexts.at(-1);
-  if (!current || current.delimiter !== '{' || current.typeLiteral) return false;
-  if (contexts.at(-2)?.functionParameters) return false;
-  if (/\b(?:const|let|var|import|export)\s*$/u.test(source.slice(0, current.offset))) return false;
-  const objectEnd = scanTypeScriptExpression(source, current.offset + 1, '}');
-  if (objectEnd >= source.length) return true;
-  const afterObject = skipTrivia(source, objectEnd);
-  if (source[afterObject] === '=' && source[afterObject + 1] !== '>') return false;
-  if (source[afterObject] !== ')') return true;
-  return !source.startsWith('=>', skipTrivia(source, afterObject + 1));
+  return isTypeScriptObjectLiteralMemberStart(source, offset);
 }
 
 /**
@@ -401,7 +419,9 @@ function hasObjectMemberPrefix(source, offset) {
  */
 export function unsupportedObjectMemberAt(source, offset) {
   const character = source[offset];
-  if (character === '[' && hasComputedPropertyPrefix(source, offset)) {
+  if (character === '['
+    && isTypeScriptObjectLiteralMemberStart(source, offset)
+    && hasComputedPropertyPrefix(source, offset)) {
     const keyEnd = computedPropertyKeyEnd(source, offset);
     if (!isTypeScriptIndexSignature(source, offset, keyEnd)
       && !isTypeScriptMappedTypeMember(source, offset, keyEnd)) {
