@@ -60,6 +60,7 @@ jobs:
             /scripts/ci/article-publication-observer.mjs
             /scripts/lib/article-registry-reader.mjs
             /scripts/lib/ts-literals.mjs
+            /engine/shared/ts-literals.mjs
             /scripts/lib/article-image-postcondition.mjs
             /scripts/lib/article-image-degradation-ledger.mjs
             /scripts/lib/declared-image-fetch.mjs
