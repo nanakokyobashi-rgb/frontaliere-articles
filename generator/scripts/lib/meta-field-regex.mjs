@@ -57,6 +57,14 @@ function createMetaFieldMatcher(field, { allowTerminalFragment = false } = {}) {
   const collect = (source) => {
     if (sourceRef === source) return;
     sourceRef = source;
+    // A missing metadata section is a valid zero-match input during the
+    // first article selection. Do not make the strict full-object reader
+    // report an absent file as a malformed object.
+    if (source.length === 0) {
+      matches = [];
+      cursor = 0;
+      return;
+    }
     matches = readStaticObjectEntries(
       source,
       'blog-meta.ts',

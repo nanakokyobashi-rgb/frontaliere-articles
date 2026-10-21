@@ -113,6 +113,11 @@ test('metaFieldRegex rifiuta una mappa troncata mentre l adapter accetta solo il
   assert.equal([...fragment.matchAll(metaFieldRegexFragment('title'))][0][1], 'reale');
 });
 
+test('metaFieldRegex tratta una sezione metadata assente come zero match', () => {
+  assert.deepEqual([...''.matchAll(metaFieldRegex('title'))], []);
+  assert.equal(metaFieldRegex('title').exec(''), null);
+});
+
 test('metaFieldRegex conserva gli offset raw e gli id che contengono punti', () => {
   const source = "const meta = {\n  \"blog.article.id.con.punti.title\" : \"Titolo\\nraw\",\n};";
   const match = [...source.matchAll(metaFieldRegex('title'))][0];
