@@ -13566,6 +13566,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.trasporti-varese-peduncolo-vedano-gallarate-luino.title': 'Varese transport commitments: Vedano spur, Gallarate-Luino',
     'blog.article.trasporti-varese-peduncolo-vedano-gallarate-luino.excerpt': 'The Pd secures commitments on the PRMT in Lombardy The Peduncolo di Vedano enters further studies Gallarate-Luino enters the planning phases of the Si Plan',
     'blog.article.trasporti-varese-peduncolo-vedano-gallarate-luino.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.arresto-ticino-banca-occulta.title': 'Arrest in Ticino in international anti-mafia operation',
+    'blog.article.arresto-ticino-banca-occulta.excerpt': 'A person was arrested in Ticino on Wednesday.',
+    'blog.article.arresto-ticino-banca-occulta.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

@@ -13567,6 +13567,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.trasporti-varese-peduncolo-vedano-gallarate-luino.title': 'Trasporti, impegni per Varese: Peduncolo di Vedano e ferrovie Gallarate-Luino al centro del PRMT',
     'blog.article.trasporti-varese-peduncolo-vedano-gallarate-luino.excerpt': 'Il Pd ottiene impegni sul PRMT in Lombardia Il Peduncolo di Vedano entra negli approfondimenti Gallarate-Luino entra nelle fasi progettuali del Piano Si',
     'blog.article.trasporti-varese-peduncolo-vedano-gallarate-luino.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.arresto-ticino-banca-occulta.title': 'Arresto in Ticino nell\'operazione antimafia internazionale',
+    'blog.article.arresto-ticino-banca-occulta.excerpt': 'Arrestata una persona in Ticino mercoledì.',
+    'blog.article.arresto-ticino-banca-occulta.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

@@ -272,6 +272,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-20T21:30:49.827Z",
       "lastFailureAt": "2026-10-20T21:30:49.827Z"
+    },
+    {
+      "articleId": "arresto-ticino-banca-occulta",
+      "title": "Arresto in Ticino nell'operazione antimafia internazionale",
+      "fallbackImage": "/images/blog/article-arresto-lite-domestica-ticino.webp",
+      "reason": "All image providers failed for article-arresto-ticino-banca-occulta: openai-codex (vision gate rejected image: Generic synthetic photorealistic editorial scene relevant to a Ticino",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-21T23:28:09.292Z",
+      "lastFailureAt": "2026-10-21T23:28:09.292Z"
     }
   ]
 }
