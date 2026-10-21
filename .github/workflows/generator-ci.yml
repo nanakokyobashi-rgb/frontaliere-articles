@@ -20,6 +20,7 @@ on:
       - '.github/actions/setup-article-source-runtime/**'
       - 'scripts/ci/article-source-runtime/**'
       - 'scripts/ci/check-article-source-runtime.mjs'
+      - 'scripts/lib/npm-ci-retry.sh'
       - 'scripts/ci/loop-sync-manifest.json'
       - '.github/workflows/generator-ci.yml'
       # engine/ and host/ are two halves of one contract and must be tested
@@ -44,6 +45,7 @@ on:
       - '.github/actions/setup-article-source-runtime/**'
       - 'scripts/ci/article-source-runtime/**'
       - 'scripts/ci/check-article-source-runtime.mjs'
+      - 'scripts/lib/npm-ci-retry.sh'
       - 'scripts/ci/loop-sync-manifest.json'
       - '.github/workflows/generator-ci.yml'
       - 'package.json'

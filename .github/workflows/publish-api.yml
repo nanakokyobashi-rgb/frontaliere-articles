@@ -98,6 +98,7 @@ on:
       - 'scripts/lib/r2-section-lock.mjs'
       - 'scripts/lib/is-invoked-directly.mjs'
       - 'scripts/ci/retry-cmd.sh'
+      - 'scripts/lib/npm-ci-retry.sh'
       - 'scripts/cf-purge-cache.mjs'
       - 'scripts/lib/cf-analytics.mjs'
       - 'scripts/lib/cf-purge-variants.mjs'
@@ -264,6 +265,7 @@ jobs:
             scripts/ci/article-source-runtime/package.json
             scripts/ci/article-source-runtime/package-lock.json
             scripts/ci/check-article-source-runtime.mjs
+            scripts/lib/npm-ci-retry.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
 

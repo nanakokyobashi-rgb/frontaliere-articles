@@ -187,74 +187,12 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Setup isolated article source runtime
-        uses: ./.github/actions/setup-article-source-runtime
-
       - name: Fetch push base (resolve)
         if: github.event_name == 'push'
         env:
           PUSH_BEFORE: ${{ github.event.before }}
         run: |
           bash scripts/ci/fetch-push-base-if-missing.sh
-
-      - name: Preflight — i link Markdown devono avere una destinazione canonica
-        env:
-          BEFORE: ${{ github.event.before }}
-          AFTER: ${{ github.sha }}
-          EVENT_NAME: ${{ github.event_name }}
-          ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
-          ARTICLE_ID_INPUT: ${{ inputs.article_id }}
-          SECTION_INPUT: ${{ inputs.section }}
-        run: |
-          set -euo pipefail
-          changed_files="$RUNNER_TEMP/fast-publish-article-changed-bodies.txt"
-          : > "$changed_files"
-          scan_mode=full
-          preflight_article_ids=''
-          if [ "$EVENT_NAME" = 'workflow_dispatch' ]; then
-            if [ -n "${ARTICLE_IDS_INPUT:-}" ]; then
-              preflight_article_ids="$ARTICLE_IDS_INPUT"
-            elif [ -n "${ARTICLE_ID_INPUT:-}" ]; then
-              preflight_article_ids="$(jq -cn --arg id "$ARTICLE_ID_INPUT" '[$id]')"
-            fi
-          fi
-          # Keep this dependency closure identical to publish-api.yml. A mixed
-          # push that changes a body and its gate must scan the full corpus.
-          gate_input_paths=(
-            .github/workflows/fast-publish-article.yml
-            .github/workflows/publish-api.yml
-            engine/articleSeoFallback.ts
-            engine/ogPagesPlugin.ts
-            engine/rssFeeds.mjs
-            engine/shared/articleSectionCore.mjs
-            engine/shared/cantonArticleSectionCore.generated.mjs
-            engine/shared/normalizeArticleMarkdown.ts
-            generator/data/canton-url-slugs.json
-            generator/data/canton-sections.json
-            generator/scripts/lib/corpus-paths.mjs
-            host/cantonSectionsBootstrap.mjs
-            scripts/ci/check-blog-body-links.mjs
-            scripts/lib/article-link-contract.mjs
-            scripts/lib/corpus-sections.mjs
-            generator/scripts/lib/article-meta-block.mjs
-            generator/scripts/lib/article-excerpt.mjs
-          )
-          if [ "$EVENT_NAME" = 'push' ] \
-            && [[ "${BEFORE:-}" =~ ^[a-f0-9]{40}$ ]] \
-            && [[ "${AFTER:-}" =~ ^[a-f0-9]{40}$ ]] \
-            && [ "$BEFORE" != '0000000000000000000000000000000000000000' ] \
-            && git cat-file -e "${BEFORE}^{commit}" 2>/dev/null \
-            && git cat-file -e "${AFTER}^{commit}" 2>/dev/null; then
-            if git diff --quiet "$BEFORE" "$AFTER" -- "${gate_input_paths[@]}" 2>/dev/null; then
-              git diff --name-only "$BEFORE" "$AFTER" -- content > "$changed_files"
-              if [ -s "$changed_files" ]; then scan_mode=changed; fi
-            fi
-          fi
-          PREFLIGHT_SCAN_MODE="$scan_mode" \
-            PREFLIGHT_ARTICLE_IDS="$preflight_article_ids" \
-            PREFLIGHT_SECTION="${SECTION_INPUT:-frontaliere}" \
-            PREFLIGHT_CHANGED_FILES_FILE="$changed_files" \
-            node scripts/ci/check-blog-body-links.mjs
 
       - name: Resolve mode, article ids and section
         id: mode
@@ -421,6 +359,70 @@ jobs:
             echo "skip_reason=publish"
           } >> "$GITHUB_OUTPUT"
           echo "resolved matrix=$matrix_with_shards dry=$dry"
+
+      - name: Setup isolated article source runtime
+        if: steps.mode.outputs.skip != 'true'
+        uses: ./.github/actions/setup-article-source-runtime
+
+      - name: Preflight — i link Markdown devono avere una destinazione canonica
+        if: steps.mode.outputs.skip != 'true'
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+          EVENT_NAME: ${{ github.event_name }}
+          ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
+          ARTICLE_ID_INPUT: ${{ inputs.article_id }}
+          SECTION_INPUT: ${{ inputs.section }}
+        run: |
+          set -euo pipefail
+          changed_files="$RUNNER_TEMP/fast-publish-article-changed-bodies.txt"
+          : > "$changed_files"
+          scan_mode=full
+          preflight_article_ids=''
+          if [ "$EVENT_NAME" = 'workflow_dispatch' ]; then
+            if [ -n "${ARTICLE_IDS_INPUT:-}" ]; then
+              preflight_article_ids="$ARTICLE_IDS_INPUT"
+            elif [ -n "${ARTICLE_ID_INPUT:-}" ]; then
+              preflight_article_ids="$(jq -cn --arg id "$ARTICLE_ID_INPUT" '[$id]')"
+            fi
+          fi
+          # Keep this dependency closure identical to publish-api.yml. A mixed
+          # push that changes a body and its gate must scan the full corpus.
+          gate_input_paths=(
+            .github/workflows/fast-publish-article.yml
+            .github/workflows/publish-api.yml
+            engine/articleSeoFallback.ts
+            engine/ogPagesPlugin.ts
+            engine/rssFeeds.mjs
+            engine/shared/articleSectionCore.mjs
+            engine/shared/cantonArticleSectionCore.generated.mjs
+            engine/shared/normalizeArticleMarkdown.ts
+            generator/data/canton-url-slugs.json
+            generator/data/canton-sections.json
+            generator/scripts/lib/corpus-paths.mjs
+            host/cantonSectionsBootstrap.mjs
+            scripts/ci/check-blog-body-links.mjs
+            scripts/lib/article-link-contract.mjs
+            scripts/lib/corpus-sections.mjs
+            generator/scripts/lib/article-meta-block.mjs
+            generator/scripts/lib/article-excerpt.mjs
+          )
+          if [ "$EVENT_NAME" = 'push' ] \
+            && [[ "${BEFORE:-}" =~ ^[a-f0-9]{40}$ ]] \
+            && [[ "${AFTER:-}" =~ ^[a-f0-9]{40}$ ]] \
+            && [ "$BEFORE" != '0000000000000000000000000000000000000000' ] \
+            && git cat-file -e "${BEFORE}^{commit}" 2>/dev/null \
+            && git cat-file -e "${AFTER}^{commit}" 2>/dev/null; then
+            if git diff --quiet "$BEFORE" "$AFTER" -- "${gate_input_paths[@]}" 2>/dev/null; then
+              git diff --name-only "$BEFORE" "$AFTER" -- content > "$changed_files"
+              if [ -s "$changed_files" ]; then scan_mode=changed; fi
+            fi
+          fi
+          PREFLIGHT_SCAN_MODE="$scan_mode" \
+            PREFLIGHT_ARTICLE_IDS="$preflight_article_ids" \
+            PREFLIGHT_SECTION="${SECTION_INPUT:-frontaliere}" \
+            PREFLIGHT_CHANGED_FILES_FILE="$changed_files" \
+            node scripts/ci/check-blog-body-links.mjs
 
   publish:
     needs: resolve

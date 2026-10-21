@@ -246,6 +246,7 @@ jobs:
             scripts/ci/article-source-runtime/package.json
             scripts/ci/article-source-runtime/package-lock.json
             scripts/ci/check-article-source-runtime.mjs
+            scripts/lib/npm-ci-retry.sh
             scripts/ci/dispatch-fast-publish-replay.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
@@ -254,9 +255,6 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: '22'
-
-      - name: Setup isolated article source runtime
-        uses: ./.replay-dispatcher-source/.github/actions/setup-article-source-runtime
 
       - name: Resolve originating push range
         id: push_range
@@ -349,56 +347,8 @@ jobs:
         run: |
           bash scripts/ci/fetch-push-base-if-missing.sh
 
-      - name: Preflight — i link Markdown devono avere una destinazione canonica
-        env:
-          BEFORE: ${{ steps.push_range.outputs.before }}
-          AFTER: ${{ steps.push_range.outputs.after }}
-          ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
-          SECTION_INPUT: ${{ inputs.section }}
-        run: |
-          set -euo pipefail
-          changed_files="$RUNNER_TEMP/fast-publish-section-changed-bodies.txt"
-          : > "$changed_files"
-          scan_mode=full
-          # Keep this dependency closure identical to publish-api.yml. A mixed
-          # push that changes a body and its gate must scan the full corpus.
-          gate_input_paths=(
-            .github/workflows/fast-publish-section.yml
-            .github/workflows/publish-api.yml
-            engine/articleSeoFallback.ts
-            engine/ogPagesPlugin.ts
-            engine/rssFeeds.mjs
-            engine/shared/articleSectionCore.mjs
-            engine/shared/cantonArticleSectionCore.generated.mjs
-            engine/shared/normalizeArticleMarkdown.ts
-            generator/data/canton-url-slugs.json
-            generator/data/canton-sections.json
-            generator/scripts/lib/corpus-paths.mjs
-            host/cantonSectionsBootstrap.mjs
-            scripts/ci/check-blog-body-links.mjs
-            scripts/lib/article-link-contract.mjs
-            scripts/lib/corpus-sections.mjs
-            generator/scripts/lib/article-meta-block.mjs
-            generator/scripts/lib/article-excerpt.mjs
-          )
-          if [[ "${BEFORE:-}" =~ ^[a-f0-9]{40}$ ]] \
-            && [[ "${AFTER:-}" =~ ^[a-f0-9]{40}$ ]] \
-            && [ "$BEFORE" != '0000000000000000000000000000000000000000' ] \
-            && git cat-file -e "${BEFORE}^{commit}" 2>/dev/null \
-            && git cat-file -e "${AFTER}^{commit}" 2>/dev/null; then
-            if git diff --quiet "$BEFORE" "$AFTER" -- "${gate_input_paths[@]}" 2>/dev/null; then
-              git diff --name-only "$BEFORE" "$AFTER" -- content > "$changed_files"
-              if [ -s "$changed_files" ]; then scan_mode=changed; fi
-            fi
-          fi
-          PREFLIGHT_SCAN_MODE="$scan_mode" \
-            PREFLIGHT_ARTICLE_IDS="${ARTICLE_IDS_INPUT:-}" \
-            PREFLIGHT_SECTION="${SECTION_INPUT:-}" \
-            PREFLIGHT_CHANGED_FILES_FILE="$changed_files" \
-            node scripts/ci/check-blog-body-links.mjs
-
-      # Solo builtin Node (fast-publish-section.mjs): niente setup-node/npm ci
-      # per decidere se c'e' qualcosa da pubblicare.
+      # Solo builtin Node (fast-publish-section.mjs): decide prima se c'e' un
+      # target, cosi' un resolve vuoto non installa il parser né avvia il gate.
       - name: Resolve sections and article ids
         id: plan
         env:
@@ -880,6 +830,59 @@ jobs:
           } >> "$GITHUB_OUTPUT"
           echo "resolved matrix=$matrix dry=$dry"
 
+      - name: Setup isolated article source runtime
+        if: steps.plan.outputs.any == 'true'
+        uses: ./.replay-dispatcher-source/.github/actions/setup-article-source-runtime
+
+      - name: Preflight — i link Markdown devono avere una destinazione canonica
+        if: steps.plan.outputs.any == 'true'
+        env:
+          BEFORE: ${{ steps.push_range.outputs.before }}
+          AFTER: ${{ steps.push_range.outputs.after }}
+          ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
+          SECTION_INPUT: ${{ inputs.section }}
+        run: |
+          set -euo pipefail
+          changed_files="$RUNNER_TEMP/fast-publish-section-changed-bodies.txt"
+          : > "$changed_files"
+          scan_mode=full
+          # Keep this dependency closure identical to publish-api.yml. A mixed
+          # push that changes a body and its gate must scan the full corpus.
+          gate_input_paths=(
+            .github/workflows/fast-publish-section.yml
+            .github/workflows/publish-api.yml
+            engine/articleSeoFallback.ts
+            engine/ogPagesPlugin.ts
+            engine/rssFeeds.mjs
+            engine/shared/articleSectionCore.mjs
+            engine/shared/cantonArticleSectionCore.generated.mjs
+            engine/shared/normalizeArticleMarkdown.ts
+            generator/data/canton-url-slugs.json
+            generator/data/canton-sections.json
+            generator/scripts/lib/corpus-paths.mjs
+            host/cantonSectionsBootstrap.mjs
+            scripts/ci/check-blog-body-links.mjs
+            scripts/lib/article-link-contract.mjs
+            scripts/lib/corpus-sections.mjs
+            generator/scripts/lib/article-meta-block.mjs
+            generator/scripts/lib/article-excerpt.mjs
+          )
+          if [[ "${BEFORE:-}" =~ ^[a-f0-9]{40}$ ]] \
+            && [[ "${AFTER:-}" =~ ^[a-f0-9]{40}$ ]] \
+            && [ "$BEFORE" != '0000000000000000000000000000000000000000' ] \
+            && git cat-file -e "${BEFORE}^{commit}" 2>/dev/null \
+            && git cat-file -e "${AFTER}^{commit}" 2>/dev/null; then
+            if git diff --quiet "$BEFORE" "$AFTER" -- "${gate_input_paths[@]}" 2>/dev/null; then
+              git diff --name-only "$BEFORE" "$AFTER" -- content > "$changed_files"
+              if [ -s "$changed_files" ]; then scan_mode=changed; fi
+            fi
+          fi
+          PREFLIGHT_SCAN_MODE="$scan_mode" \
+            PREFLIGHT_ARTICLE_IDS="${ARTICLE_IDS_INPUT:-}" \
+            PREFLIGHT_SECTION="${SECTION_INPUT:-}" \
+            PREFLIGHT_CHANGED_FILES_FILE="$changed_files" \
+            node scripts/ci/check-blog-body-links.mjs
+
   publish:
     needs: resolve
     if: needs.resolve.outputs.any == 'true'
@@ -921,6 +924,7 @@ jobs:
             scripts/ci/article-source-runtime/package.json
             scripts/ci/article-source-runtime/package-lock.json
             scripts/ci/check-article-source-runtime.mjs
+            scripts/lib/npm-ci-retry.sh
             scripts/ci/dispatch-fast-publish-replay.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false

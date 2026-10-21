@@ -17,7 +17,7 @@ runs:
         cp "$source_dir/package-lock.json" "$runtime_dir/package-lock.json"
         (
           cd "$runtime_dir"
-          npm ci --ignore-scripts --no-audit --no-fund
+          bash "$action_root/scripts/lib/npm-ci-retry.sh" --ignore-scripts --no-audit --no-fund
         )
         compiler_entry="$runtime_dir/node_modules/typescript/lib/typescript.js"
         if [ ! -f "$compiler_entry" ]; then

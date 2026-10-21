@@ -107,9 +107,6 @@ jobs:
       # run 31245282583 è morto proprio su npm — il meccanismo che recupera
       # quel fallimento non deve poter fallire nello stesso modo.
 
-      - name: Setup isolated article source runtime
-        uses: ./.github/actions/setup-article-source-runtime
-
       - name: Detect ghosts (slug annunciati senza pagina sullo shard)
         id: detect
         run: |

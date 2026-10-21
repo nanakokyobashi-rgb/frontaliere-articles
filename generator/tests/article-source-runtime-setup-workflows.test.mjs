@@ -41,11 +41,11 @@ const PARSER_JOBS = {
   '.github/workflows/generator-ci.yml': ['test', 'dry-run'],
   '.github/workflows/publish-api.yml': ['publish'],
   '.github/workflows/publish-journalist-articles.yml': ['publish'],
-  '.github/workflows/reconcile-article-shards.yml': ['reconcile'],
+  '.github/workflows/reconcile-article-shards.yml': [],
   '.github/workflows/refresh-canton-hubs.yml': ['refresh'],
   '.github/workflows/refresh-events-digest.yml': ['refresh'],
   '.github/workflows/regenerate-queued-covers.yml': ['drain'],
-  '.github/workflows/republish-dirty-content.yml': ['republish'],
+  '.github/workflows/republish-dirty-content.yml': [],
   '.github/workflows/tests.yml': ['tests'],
 };
 const RUNTIME_ACTION_PATHS = {
@@ -68,7 +68,7 @@ function getJobBlock(workflow, jobName) {
   return jobs.slice(starts[index].index, starts[index + 1]?.index ?? jobs.length);
 }
 
-test('article-source runtime is isolated, pinned, and installed in every parser workflow', () => {
+test('article-source runtime is isolated, pinned, retried, and limited to parser paths', () => {
   const pkg = JSON.parse(read('scripts/ci/article-source-runtime/package.json'));
   const lock = JSON.parse(read('scripts/ci/article-source-runtime/package-lock.json'));
   assert.deepEqual(pkg.dependencies, { typescript: '5.8.3' });
@@ -78,7 +78,11 @@ test('article-source runtime is isolated, pinned, and installed in every parser 
   assert.ok(!JSON.stringify(lock).includes('file:'), 'lock must not point at a temporary local package');
 
   const action = read('.github/actions/setup-article-source-runtime/action.yml');
-  assert.match(action, /npm ci --ignore-scripts --no-audit --no-fund/);
+  assert.match(action, /bash "\$action_root\/scripts\/lib\/npm-ci-retry\.sh" --ignore-scripts --no-audit --no-fund/);
+  const npmCiRetry = read('scripts/lib/npm-ci-retry.sh');
+  assert.match(npmCiRetry, /ATTEMPTS="\$\{NPM_CI_RETRY_ATTEMPTS:-3\}"/);
+  assert.match(npmCiRetry, /BACKOFF_STEP="\$\{NPM_CI_RETRY_BACKOFF:-10\}"/);
+  assert.match(npmCiRetry, /if \[ "\$attempt" -ge "\$ATTEMPTS" \]; then/);
   assert.match(action, /ACTION_PATH: \$\{\{ github\.action_path \}\}/);
   assert.match(action, /action_root="\$\(cd "\$ACTION_PATH\/\.\.\/\.\.\/\.\." && pwd\)"/);
   assert.doesNotMatch(action, /GITHUB_WORKSPACE\/scripts\/ci\//, 'action assets must be resolved relative to the action checkout');
@@ -104,25 +108,53 @@ test('article-source runtime is isolated, pinned, and installed in every parser 
     }
   }
 
-  for (const workflowPath of ['.github/workflows/fast-publish-article.yml', '.github/workflows/fast-publish-section.yml']) {
-    const workflow = read(workflowPath);
-    const resolveJob = getJobBlock(workflow, 'resolve');
-    const preflight = resolveJob.indexOf('node scripts/ci/check-blog-body-links.mjs');
-    assert.ok(preflight >= 0, `${workflowPath}/resolve: expected link preflight`);
-    assert.ok(resolveJob.indexOf('Setup isolated article source runtime') < preflight, `${workflowPath}/resolve: parser runtime must be ready before link preflight`);
-  }
+  const fastArticle = read('.github/workflows/fast-publish-article.yml');
+  const fastArticleResolve = getJobBlock(fastArticle, 'resolve');
+  const articlePlan = fastArticleResolve.indexOf('Resolve mode, article ids and section');
+  const articleRuntime = fastArticleResolve.indexOf('Setup isolated article source runtime');
+  const articlePreflight = fastArticleResolve.indexOf('node scripts/ci/check-blog-body-links.mjs');
+  assert.ok(articlePlan >= 0 && articlePlan < articleRuntime && articleRuntime < articlePreflight,
+    'fast-publish-article must decide no-op with builtin Node before installing the parser, then run the real preflight');
+  const articleRuntimeStep = fastArticleResolve.slice(articleRuntime).split('\n      - ')[0];
+  const articlePreflightStep = fastArticleResolve.slice(fastArticleResolve.lastIndexOf('      - name: Preflight', articlePreflight), articlePreflight);
+  assert.match(articleRuntimeStep, /if: steps\.mode\.outputs\.skip != 'true'/);
+  assert.match(articlePreflightStep, /if: steps\.mode\.outputs\.skip != 'true'/);
 
   const fastSection = read('.github/workflows/fast-publish-section.yml');
+  const fastSectionResolve = getJobBlock(fastSection, 'resolve');
+  const sectionPlan = fastSectionResolve.indexOf('Resolve sections and article ids');
+  const sectionRuntime = fastSectionResolve.indexOf('Setup isolated article source runtime');
+  const sectionPreflight = fastSectionResolve.indexOf('node scripts/ci/check-blog-body-links.mjs');
+  assert.ok(sectionPlan >= 0 && sectionPlan < sectionRuntime && sectionRuntime < sectionPreflight,
+    'fast-publish-section must decide no-op with builtin Node before installing the parser, then run the real preflight');
+  const sectionRuntimeStep = fastSectionResolve.slice(sectionRuntime).split('\n      - ')[0];
+  const sectionPreflightStep = fastSectionResolve.slice(fastSectionResolve.lastIndexOf('      - name: Preflight', sectionPreflight), sectionPreflight);
+  assert.match(sectionRuntimeStep, /if: steps\.plan\.outputs\.any == 'true'/);
+  assert.match(sectionPreflightStep, /if: steps\.plan\.outputs\.any == 'true'/);
+
+  for (const [workflowPath, jobName, detectCommand] of [
+    ['.github/workflows/reconcile-article-shards.yml', 'reconcile', 'node scripts/reconcile-article-shards.mjs'],
+    ['.github/workflows/republish-dirty-content.yml', 'republish', 'node scripts/find-dirty-content-ids.mjs'],
+  ]) {
+    const job = getJobBlock(read(workflowPath), jobName);
+    assert.ok(job.includes(detectCommand), `${workflowPath}/${jobName}: expected builtin-only detection`);
+    assert.doesNotMatch(job, /setup-article-source-runtime/,
+      `${workflowPath}/${jobName}: detection must not depend on npm or the TypeScript parser`);
+  }
+
   for (const jobName of ['resolve', 'publish']) {
     const job = getJobBlock(fastSection, jobName);
-    assert.match(job, /ref: \$\{\{ github\.sha \}\}[\s\S]*?path: \.replay-dispatcher-source[\s\S]*?sparse-checkout:\s*\|[\s\S]*?\.github\/actions\/setup-article-source-runtime\/action\.yml[\s\S]*?scripts\/ci\/article-source-runtime\/package-lock\.json[\s\S]*?scripts\/ci\/check-article-source-runtime\.mjs/);
+    assert.match(job, /ref: \$\{\{ github\.sha \}\}[\s\S]*?path: \.replay-dispatcher-source[\s\S]*?sparse-checkout:\s*\|[\s\S]*?\.github\/actions\/setup-article-source-runtime\/action\.yml[\s\S]*?scripts\/ci\/article-source-runtime\/package-lock\.json[\s\S]*?scripts\/ci\/check-article-source-runtime\.mjs[\s\S]*?scripts\/lib\/npm-ci-retry\.sh/);
     assert.match(job, /uses: \.\/\.replay-dispatcher-source\/\.github\/actions\/setup-article-source-runtime/);
   }
 
-  const publishApi = getJobBlock(read('.github/workflows/publish-api.yml'), 'publish');
-  assert.match(publishApi, /ref: \$\{\{ github\.sha \}\}[\s\S]*?path: \.article-source-runtime[\s\S]*?sparse-checkout:\s*\|[\s\S]*?\.github\/actions\/setup-article-source-runtime\/action\.yml[\s\S]*?scripts\/ci\/article-source-runtime\/package-lock\.json[\s\S]*?scripts\/ci\/check-article-source-runtime\.mjs/);
+  const publishApiWorkflow = read('.github/workflows/publish-api.yml');
+  const publishApi = getJobBlock(publishApiWorkflow, 'publish');
+  assert.match(publishApi, /ref: \$\{\{ github\.sha \}\}[\s\S]*?path: \.article-source-runtime[\s\S]*?sparse-checkout:\s*\|[\s\S]*?\.github\/actions\/setup-article-source-runtime\/action\.yml[\s\S]*?scripts\/ci\/article-source-runtime\/package-lock\.json[\s\S]*?scripts\/ci\/check-article-source-runtime\.mjs[\s\S]*?scripts\/lib\/npm-ci-retry\.sh/);
   assert.match(publishApi, /uses: \.\/\.article-source-runtime\/\.github\/actions\/setup-article-source-runtime/);
   assert.ok(publishApi.indexOf('Setup isolated article source runtime') < publishApi.indexOf('Verify bounded replay source is still main'), 'publish-api must install parser runtime before the historical-source guard runs');
+  const publishApiPushPaths = publishApiWorkflow.slice(publishApiWorkflow.indexOf('on:'), publishApiWorkflow.indexOf('permissions:'));
+  assert.ok(publishApiPushPaths.includes("'scripts/lib/npm-ci-retry.sh'"), 'changing the action retry helper must rerun publish-api');
 
   assert.match(getJobBlock(read('.github/workflows/fast-publish-article.yml'), 'publish'), /Setup isolated article source runtime\n        if: needs\.resolve\.outputs\.skip != 'true'/);
   assert.match(getJobBlock(read('.github/workflows/fast-publish-section.yml'), 'publish'), /Setup isolated article source runtime\n        if: steps\.replay_freshness\.outputs\.fresh == 'true'/);
@@ -132,6 +164,7 @@ test('article-source runtime is isolated, pinned, and installed in every parser 
     "'.github/actions/setup-article-source-runtime/**'",
     "'scripts/ci/article-source-runtime/**'",
     "'scripts/ci/check-article-source-runtime.mjs'",
+    "'scripts/lib/npm-ci-retry.sh'",
   ]) {
     assert.equal(generatorCi.split(pattern).length - 1, 2, `${pattern}: both push and pull_request filters`);
   }
