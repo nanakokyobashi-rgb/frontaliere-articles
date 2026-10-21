@@ -42,6 +42,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.weissenbach-incidente-quattro-auto.title': 'Weissenbach: cinque feriti nello scontro tra quattro auto',
     'blog.article.weissenbach-incidente-quattro-auto.excerpt': 'L\'incidente è avvenuto il 19 ottobre 2026 sulla strada principale di Weissenbach, nel Comune di Boltigen: cinque feriti e strada chiusa per quasi due ore.',
     'blog.article.weissenbach-incidente-quattro-auto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.berna-stato-pagina-non-disponibile.title': 'Stato della pagina dell\'amministrazione bernese',
+    'blog.article.berna-stato-pagina-non-disponibile.excerpt': 'Il contenuto della pagina indicata non risulta disponibile.',
+    'blog.article.berna-stato-pagina-non-disponibile.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBeIt;

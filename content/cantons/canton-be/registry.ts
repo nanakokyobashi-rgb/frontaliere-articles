@@ -149,4 +149,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'berna-stato-pagina-non-disponibile',
+ category: 'novita',
+ date: '2026-10-21T02:11:38.957Z',
+ image: '/images/blog/article-berna-stato-pagina-non-disponibile.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
