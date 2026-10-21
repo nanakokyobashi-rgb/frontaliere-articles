@@ -36,6 +36,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.vbz-tram-50-51-cambio.title': 'Ab dem 13. Dezember entfallen die Trams 50 und 51',
     'blog.article.vbz-tram-50-51-cambio.excerpt': 'Ab dem 13. Dezember entfallen die Linien 50 und 51 Die Trams 4, 11, 13, 14 und 17 fahren wieder über den Bahnhofquai Die Linie 83 fährt täglich bis 22 Uhr',
     'blog.article.vbz-tram-50-51-cambio.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.zurigo-niente-iniziativa-congedo-parentale.title': 'Zürich: Keine Initiative zum Elternurlaub, Linke und Mitte gespalten',
+    'blog.article.zurigo-niente-iniziativa-congedo-parentale.excerpt': 'Der Kanton Zürich wird die Standesinitiative zum Elternurlaub nicht einreichen: Die Linke und die Parteien der Mitte, die zunächst dafür waren, haben keine Einigung gefunden.',
+    'blog.article.zurigo-niente-iniziativa-congedo-parentale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZhDe;

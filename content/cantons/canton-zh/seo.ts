@@ -426,6 +426,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-zurigo-niente-iniziativa-congedo-parentale': {
+    title: 'Zurigo: niente iniziativa congedo parentale, sinistra e centro divisi',
+    description: 'Il Canton Zurigo non presenterà la Standesinitiative sul congedo parentale. Inizialmente sostenuta da sinistra e centro, la proposta è stata',
+    keywords: 'frontalieri, ticino, svizzera, italia, zurigo, niente, iniziativa, congedo',
+    ogTitle: 'Zurigo: niente iniziativa congedo parentale, sinistra e centro divisi',
+    ogDescription: 'Il Canton Zurigo ha deciso di non presentare la Standesinitiative per un congedo parentale. Dopo un iniziale sostegno congiunto di sinistra e partiti di centro, le parti non hanno raggiunto un accordo. La proposta non andrà avanti a livello',
+    canonicalPath: '/articoli-zurigo/zurigo-niente-iniziativa-congedo-parentale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Zurigo: niente iniziativa congedo parentale, sinistra e centro divisi",
+      "description": "Il Canton Zurigo non presenterà la Standesinitiative sul congedo parentale. Inizialmente sostenuta da sinistra e centro, la proposta è stata",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-zurigo-niente-iniziativa-congedo-parentale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T11:09:26+00:00",
+      "dateModified": "2026-10-21T11:09:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/zurigo-niente-iniziativa-congedo-parentale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

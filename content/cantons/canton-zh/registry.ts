@@ -127,4 +127,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'zurigo-niente-iniziativa-congedo-parentale',
+ category: 'novita',
+ date: '2026-10-21T11:09:26.023Z',
+ image: '/images/blog/article-zurigo-niente-iniziativa-congedo-parentale.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

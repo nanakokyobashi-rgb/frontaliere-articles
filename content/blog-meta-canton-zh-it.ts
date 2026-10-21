@@ -36,6 +36,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.vbz-tram-50-51-cambio.title': 'Dal 13 dicembre soppressi i tram 50 e 51',
     'blog.article.vbz-tram-50-51-cambio.excerpt': 'Dal 13 dicembre spariscono le linee 50 e 51 I tram 4, 11, 13, 14 e 17 tornano sul Bahnhofquai La linea 83 viaggia ogni giorno fino alle 22 La linea notturna N8',
     'blog.article.vbz-tram-50-51-cambio.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.zurigo-niente-iniziativa-congedo-parentale.title': 'Zurigo: niente iniziativa congedo parentale, sinistra e centro divisi',
+    'blog.article.zurigo-niente-iniziativa-congedo-parentale.excerpt': 'Il Canton Zurigo non presenterà la Standesinitiative sul congedo parentale: sinistra e partiti di centro, inizialmente favorevoli, non hanno trovato un accordo.',
+    'blog.article.zurigo-niente-iniziativa-congedo-parentale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZhIt;

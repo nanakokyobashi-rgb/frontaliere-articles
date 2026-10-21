@@ -14,6 +14,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'bank-now-dipendenti-zurigo': { it: 'bank-now-dipendenti-zurigo', en: 'bank-now-employees-zurich', de: 'bank-now-mitarbeitende-zuerich', fr: 'bank-now-employes-zurich' },
  'crisi-resilienza-zurigo': { it: 'crisi-resilienza-zurigo', en: 'zurich-crisis-resilience', de: 'zuerich-krisenresilienz', fr: 'zurich-resilience-crises' },
  'vbz-tram-50-51-cambio': { it: 'vbz-tram-50-51-cambio', en: 'vbz-tram-50-51-timetable-change', de: 'vbz-tram-50-51-fahrplanwechsel', fr: 'vbz-tram-50-51-changement-horaire' },
+ 'zurigo-niente-iniziativa-congedo-parentale': { it: 'zurigo-niente-iniziativa-congedo-parentale', en: 'zurich-no-parental-leave-initiative', de: 'zuerich-keine-elternzeit-initiative', fr: 'zurich-pas-initiative-conge-parental' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
