@@ -16,7 +16,7 @@ import { getSiteShell, type ArticleAuthor, type SiteShellContract } from './site
 import { buildArticleSeoSections, cleanupArticleBodySections, articleBodySectionLabel, renderArticleDerivedSectionsHtml, renderArticleInlineMarkup } from './articleSeoFallback';
 import { loadSwissArticleCanonicalOverrides, resolveSwissArticleCanonicalUrl, resolveShadowedArticleWinnerSlug } from './shared/swissArticleCanonicalOverrides';
 import { loadArticleReviewOverrides, resolveArticleReviewerSlug } from './shared/articleReviewOverrides';
-import { stripMarkdownPlain } from './shared/stripMarkdownPlain';
+import { normalizeArticleExcerptPlain, stripMarkdownPlain } from './shared/stripMarkdownPlain';
 import { isFaqQuestionHeading } from './shared/faqQuestionPrefixes';
 import { boostDescriptionForCtr } from './shared/ctrBoostDescription';
 import { ARTICLE_SECTION_DESCRIPTORS, SITE_RENDERED_ARTICLE_SECTION_DESCRIPTORS, extractBlogEntryPositions, blogKeyToArticleId, type OgSection as OgSectionDescriptor } from './shared/articleSectionDescriptors';
@@ -241,172 +241,6 @@ function readStaticTsStringLiteral(source: string, start: number, sourcePath: st
  throw new Error(`[og-pages] Unterminated string literal in ${sourcePath}`);
 }
 
-interface ScannedTemplateLiteral {
- end: number;
- hasInterpolation: boolean;
-}
-
-const REGEX_AFTER_KEYWORDS = new Set([
- 'case', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return', 'throw',
- 'typeof', 'void', 'yield', 'await',
-]);
-
-function skipRegularExpressionLiteral(source: string, start: number, sourcePath: string): number {
- let inCharacterClass = false;
- let cursor = start + 1;
- while (cursor < source.length) {
-  const char = source[cursor];
-  if (char === '\\') {
-   cursor += 2;
-   continue;
-  }
-  if (char === '\n' || char === '\r' || char === '\u2028' || char === '\u2029') {
-   throw new Error(`[og-pages] Unterminated regular expression literal in ${sourcePath}`);
-  }
-  if (char === '[') {
-   inCharacterClass = true;
-   cursor += 1;
-   continue;
-  }
-  if (char === ']' && inCharacterClass) {
-   inCharacterClass = false;
-   cursor += 1;
-   continue;
-  }
-  if (char === '/' && !inCharacterClass) {
-   cursor += 1;
-   while (/[A-Za-z]/.test(source[cursor] || '')) cursor += 1;
-   return cursor;
-  }
-  cursor += 1;
- }
-
- throw new Error(`[og-pages] Unterminated regular expression literal in ${sourcePath}`);
-}
-
-function skipTemplateExpression(source: string, start: number, sourcePath: string): number {
- let depth = 1;
- let cursor = start;
- let canStartRegex = true;
- while (cursor < source.length) {
-  if (source.startsWith('//', cursor)) {
-   cursor += 2;
-   while (cursor < source.length && source[cursor] !== '\n' && source[cursor] !== '\r') cursor += 1;
-   continue;
-  }
-  if (source.startsWith('/*', cursor)) {
-   const close = source.indexOf('*/', cursor + 2);
-   if (close === -1) throw new Error(`[og-pages] Unterminated comment in ${sourcePath}`);
-   cursor = close + 2;
-   continue;
-  }
-
-  const char = source[cursor];
-  if (char === "'" || char === '"') {
-   cursor = readStaticTsStringLiteral(source, cursor, sourcePath).end;
-   canStartRegex = false;
-   continue;
-  }
-  if (char === '`') {
-   cursor = scanTemplateLiteral(source, cursor, sourcePath).end;
-   canStartRegex = false;
-   continue;
-  }
-  if ((char === '+' && source[cursor + 1] === '+') || (char === '-' && source[cursor + 1] === '-')) {
-   // Consume update operators as one token. Keeping the current context makes
-   // postfix updates leave the following slash as division, while prefix
-   // updates still allow a regex literal before the operand.
-   cursor += 2;
-   continue;
-  }
-  if (char === '/' && canStartRegex) {
-   cursor = skipRegularExpressionLiteral(source, cursor, sourcePath);
-   canStartRegex = false;
-   continue;
-  }
-  if (char === '/') {
-   cursor += 1;
-   canStartRegex = true;
-   continue;
-  }
-  if (char === '{') {
-   depth += 1;
-   cursor += 1;
-   canStartRegex = true;
-   continue;
-  }
-  if (char === '}') {
-   depth -= 1;
-   cursor += 1;
-   if (depth === 0) return cursor;
-   canStartRegex = false;
-   continue;
-  }
-
-  if (/\s/.test(char)) {
-   cursor += 1;
-   continue;
-  }
-  if (/[A-Za-z_$]/.test(char)) {
-   let end = cursor + 1;
-   while (end < source.length && /[A-Za-z0-9_$]/.test(source[end])) end += 1;
-   canStartRegex = REGEX_AFTER_KEYWORDS.has(source.slice(cursor, end));
-   cursor = end;
-   continue;
-  }
-  if ('([{,;:=!?&|+\-*%^~<>'.includes(char)) {
-   canStartRegex = true;
-   cursor += 1;
-   continue;
-  }
-  if (')]}'.includes(char) || char === '.') {
-   canStartRegex = false;
-   cursor += 1;
-   continue;
-  }
-  canStartRegex = false;
-  cursor += 1;
- }
-
- throw new Error(`[og-pages] Unterminated template expression in ${sourcePath}`);
-}
-
-function scanTemplateLiteral(source: string, start: number, sourcePath: string): ScannedTemplateLiteral {
- let cursor = start + 1;
- let hasInterpolation = false;
- while (cursor < source.length) {
-  const char = source[cursor];
-  if (char === '\\') {
-   if (source[cursor + 1] === '\r' && source[cursor + 2] === '\n') {
-    cursor += 3;
-   } else {
-    cursor += 2;
-   }
-   continue;
-  }
-  if (char === '`') return { end: cursor + 1, hasInterpolation };
-  if (char === '$' && source[cursor + 1] === '{') {
-   hasInterpolation = true;
-   cursor = skipTemplateExpression(source, cursor + 2, sourcePath);
-   continue;
-  }
-  cursor += 1;
- }
-
- throw new Error(`[og-pages] Unterminated string literal in ${sourcePath}`);
-}
-
-/**
- * Skip a dynamic template while scanning for article keys. Its expression can
- * contain arbitrary strings and nested templates, so none of those tokens may
- * be interpreted as article data. Article values still use the strict reader
- * below and therefore keep rejecting dynamic content.
- */
-function skipNonArticleTemplateLiteral(source: string, start: number, sourcePath: string): number | null {
- const scanned = scanTemplateLiteral(source, start, sourcePath);
- return scanned.hasInterpolation ? scanned.end : null;
-}
-
 function skipStaticTsTrivia(source: string, start: number, sourcePath: string): number {
  let cursor = start;
  while (cursor < source.length) {
@@ -494,14 +328,6 @@ export function parseStaticBlogBodySource(source: string, sourcePath: string): R
   if (char !== "'" && char !== '"' && char !== '`') {
    cursor += 1;
    continue;
-  }
-
-  if (char === '`') {
-   const skippedTemplateEnd = skipNonArticleTemplateLiteral(source, cursor, sourcePath);
-   if (skippedTemplateEnd !== null) {
-    cursor = skippedTemplateEnd;
-    continue;
-   }
   }
 
   const keyToken = readStaticTsStringLiteral(source, cursor, sourcePath);
@@ -1601,6 +1427,14 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  // text fields, so carrying that syntax into the lede makes it visible rather
  // than rendered; strip it before every surface receives the value.
  const localizedDesc = repairSerpSnippet(stripLiteralMarkdown(localizedMeta?.excerpt || en.ogD));
+ // The visible lede follows the editorial excerpt for the page locale. SEO metadata
+ // remains on localizedDesc above; Italian ogDescription can intentionally differ.
+ // Match the SPA's plain editorial excerpt normalization. Keep this separate from
+ // localizedDesc: an editorial excerpt may be empty or end in a word (including
+ // a preposition) that the SEO snippet repair correctly changes for search.
+ const localizedVisibleExcerpt = normalizeArticleExcerptPlain(
+  blogMetaByLocale[articleLocale][en.articleId]?.excerpt ?? localizedDesc,
+ );
  // Hero alt text. The corpus already carries a per-locale `imageAlt` (parsed
  // out of the blog-meta chunks alongside title/excerpt) and nothing consumed
  // it — og:image:alt fell back to the headline. Prefer the real alt, keep the
@@ -2192,7 +2026,7 @@ ${headTags}
  ${OFFERWALL_FC_SNIPPET}
  </head>
  <body class="bg-surface-alt text-heading overflow-x-hidden">
- ${articleRootShell(true)}<main class="seo-static-content"><article class="ft-blog-article"><h1>${esc(h1Display)}</h1><p class="article-byline s-L_lk4l">Di ${en.authorSlug && en.authorName ? `<a href="/autori/${en.authorSlug}/" rel="author">${esc(en.authorName)}</a>` : esc(en.authorName || 'Redazione Frontaliere Ticino')}${dateByline ? ` · ${dateByline}` : ''}</p>${heroFigureHtml}<p>${esc(localizedDesc)}</p>${articleBodyHtml}${visibleFaqHtml}${imageCreditHtml}${buildRelatedArticlesHtml(en.articleId, articleCategoryById[en.articleId] || '', locale)}<nav><a href="/">Simulatore Fiscale</a> | <a href="/compara-servizi/">Confronta Servizi</a> | <a href="/tasse-e-pensione/">Tasse e Pensione</a> | <a href="/guida-frontaliere/">Guida Frontaliere</a> | <a href="/domande-frequenti-frontalieri/">FAQ</a> | <a href="/glossario-frontaliere/">Glossario</a> | <a href="${articleSectionNavPath}">Articoli</a></nav>${buildArticleLegalNav(locale)}</article></main>${ARTICLE_FOOTER_ROOT}
+ ${articleRootShell(true)}<main class="seo-static-content"><article class="ft-blog-article"><h1>${esc(h1Display)}</h1><p class="article-byline s-L_lk4l">Di ${en.authorSlug && en.authorName ? `<a href="/autori/${en.authorSlug}/" rel="author">${esc(en.authorName)}</a>` : esc(en.authorName || 'Redazione Frontaliere Ticino')}${dateByline ? ` · ${dateByline}` : ''}</p>${heroFigureHtml}<p>${esc(localizedVisibleExcerpt)}</p>${articleBodyHtml}${visibleFaqHtml}${imageCreditHtml}${buildRelatedArticlesHtml(en.articleId, articleCategoryById[en.articleId] || '', locale)}<nav><a href="/">Simulatore Fiscale</a> | <a href="/compara-servizi/">Confronta Servizi</a> | <a href="/tasse-e-pensione/">Tasse e Pensione</a> | <a href="/guida-frontaliere/">Guida Frontaliere</a> | <a href="/domande-frequenti-frontalieri/">FAQ</a> | <a href="/glossario-frontaliere/">Glossario</a> | <a href="${articleSectionNavPath}">Articoli</a></nav>${buildArticleLegalNav(locale)}</article></main>${ARTICLE_FOOTER_ROOT}
  <script type="module" crossorigin fetchpriority="high" src="/assets/${entryJs}"></script>
  </body>
 </html>`;
@@ -2216,7 +2050,7 @@ ${headTags}
  ${OFFERWALL_FC_SNIPPET}
  </head>
  <body>
- ${articleRootShell(false)}<main class="seo-static-content"><article class="ft-blog-article"><h1>${esc(h1Display)}</h1>${heroFigureHtml}<p>${esc(localizedDesc)}</p>${imageCreditHtml}<nav><a href="/">Simulatore Fiscale</a> | <a href="/compara-servizi/">Confronta Servizi</a> | <a href="/tasse-e-pensione/">Tasse e Pensione</a> | <a href="/guida-frontaliere/">Guida Frontaliere</a> | <a href="/domande-frequenti-frontalieri/">FAQ</a> | <a href="/glossario-frontaliere/">Glossario</a> | <a href="${articleSectionNavPath}">Articoli</a></nav>${buildArticleLegalNav(locale)}</article></main>${ARTICLE_FOOTER_ROOT}
+ ${articleRootShell(false)}<main class="seo-static-content"><article class="ft-blog-article"><h1>${esc(h1Display)}</h1>${heroFigureHtml}<p>${esc(localizedVisibleExcerpt)}</p>${imageCreditHtml}<nav><a href="/">Simulatore Fiscale</a> | <a href="/compara-servizi/">Confronta Servizi</a> | <a href="/tasse-e-pensione/">Tasse e Pensione</a> | <a href="/guida-frontaliere/">Guida Frontaliere</a> | <a href="/domande-frequenti-frontalieri/">FAQ</a> | <a href="/glossario-frontaliere/">Glossario</a> | <a href="${articleSectionNavPath}">Articoli</a></nav>${buildArticleLegalNav(locale)}</article></main>${ARTICLE_FOOTER_ROOT}
  </body>
 </html>`;
  };
