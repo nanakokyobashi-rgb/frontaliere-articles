@@ -835,9 +835,9 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 (issue #1110, trasporto concatenato da Site #10266 e follow-up #10273/#10277): lo scanner torna byte-identico al sito. Il watermark usa soltanto run `schedule` riuscite e distingue il primo avvio leggibile da una history illeggibile, che fallisce chiusa. Il lookback derivato ha un ceiling effettivo di 12 ore; l'orizzonte `created` realtime di 3 giorni e' fail-closed senza opt-in esplicito, mentre l'override retention-complete a 35 giorni conserva le run create oltre 3 giorni ma aggiornate nel cutoff. Split e paginazione evitano il limite di 1.000 risultati per search.",
       "baseline": {
-        "site": "0d4847a8632bd513",
-        "corpus": "0d4847a8632bd513",
-        "alignedAt": "2026-10-20"
+        "site": "04d704edc431c84d",
+        "corpus": "04d704edc431c84d",
+        "alignedAt": "2026-10-21"
       }
     },
     {
@@ -3980,9 +3980,9 @@
       "sitePath": "services/seo/organizationLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "b012a9d1b3ada67a",
-        "corpus": "b012a9d1b3ada67a",
-        "alignedAt": "2026-10-11"
+        "site": "79e55d5374ef8b1a",
+        "corpus": "79e55d5374ef8b1a",
+        "alignedAt": "2026-10-21"
       }
     },
     {
@@ -6438,9 +6438,9 @@
       "path": "scripts/lib/single-flight-lock.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "4cb6ab1ae26b751c",
-        "corpus": "4cb6ab1ae26b751c",
-        "alignedAt": "2026-10-19"
+        "site": "86e684459d8d6afa",
+        "corpus": "86e684459d8d6afa",
+        "alignedAt": "2026-10-21"
       }
     },
     {
