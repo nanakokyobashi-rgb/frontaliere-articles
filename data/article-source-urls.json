@@ -1,9 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/mendrisio-melano-i-dettagli-del-progetto-che-ridurra-il-rumore-dellautostrada-442563": {
-    "articleId": "mendrisio-melano-progetto-meme-risanamento-fonico",
-    "ts": "2026-09-15T02:42:05.557Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/economia/1950237/offerta-franchi-appartamenti-affitto-calo-comuni-svizzera-affitti-rispetto-ticino": {
     "articleId": "affitti-ticino-calo-2026",
     "ts": "2026-09-16T00:14:04.716Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/frontalieri-sabato-a-luino-un-incontro-pubblico-su-fisco-previdenza-e-sanita/2714200": {
     "articleId": "frontalieri-luino-incontro-fisco-previdenza-sanita",
     "ts": "2026-10-21T09:25:14.977Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/mondo/problemi-di-funzionamento-di-revolut-toccata-anche-la-svizzera--4178758.html": {
+    "articleId": "revolut-servizi-interrotti",
+    "ts": "2026-10-21T14:40:20.829Z",
     "keyForm": 2
   }
 }

@@ -45687,11 +45687,21 @@ const RAW_ARTICLES = [
  id: 'bollettino-frontaliere-2026-10-21',
  category: 'novita',
  date: '2026-10-21T10:06:04.418Z',
- image: '/images/blog/article-bollettino-frontaliere-2026-10-21.webp',
+ image: '/images/blog/bollettino-frontaliere-2026-10-18.webp',
  hasCalculator: false,
  articleType: 'news',
  authorSlug: 'samuele-valente',
  authorName: 'Samuele Valente',
+ },
+ {
+ id: 'revolut-servizi-interrotti',
+ category: 'novita',
+ date: '2026-10-21T14:40:19.762Z',
+ image: '/images/blog/article-revolut-servizi-interrotti.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
  },
 ] satisfies Article[];
 
