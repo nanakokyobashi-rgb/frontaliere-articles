@@ -3215,8 +3215,18 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     3,
     'resolve, late guard e recovery devono propagare il flag del replay API',
   );
-  assert.match(wf, /reconcile_edge_matrix\(\) \{/);
-  assert.match(wf, /registro edge in transizione; ritento il piano di riconciliazione tra 5 secondi/);
+  const reconcileStart = wf.indexOf('          reconcile_edge_matrix() {');
+  const reconcileEnd = wf.indexOf('          pinned_source=', reconcileStart);
+  const reconcile = wf.slice(reconcileStart, reconcileEnd);
+  assert.match(reconcile, /if ! command -v timeout >\/dev\/null 2>&1/);
+  assert.match(reconcile, /local deadline=\$\(\( SECONDS \+ 8 \* 60 \)\)/);
+  assert.match(reconcile, /remaining=\$\(\( deadline - SECONDS \)\)/);
+  assert.match(reconcile, /timeout --signal=TERM --kill-after=1s "\$\{candidate_timeout\}s"/);
+  assert.match(reconcile, /reconcile_edge_attempt "\$expected_commit" "\$attempt_timeout"/);
+  assert.match(reconcile, /reconcile_edge_attempt "\$fallback_commit" "\$attempt_timeout"/);
+  assert.match(wf, /registro edge in transizione; ritento il piano di riconciliazione tra \$\{delay\} secondi/);
+  assert.match(staleResolve, /replay_before="\$\{PUSH_BEFORE:-\}"/);
+  assert.doesNotMatch(staleResolve, /replay_before="\$\{DISPATCH_PUSH_BEFORE:-\}"/);
   assert.match(wf, /replay_matrix="\$\(reconcile_edge_matrix "\$pinned_source" "\$current_main"\)"/);
   assert.match(wf, /edge_matrix="\$\(reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"\)"/);
   assert.match(wf, /replay bounded stantio: ricalcolo la release API sulla HEAD/);

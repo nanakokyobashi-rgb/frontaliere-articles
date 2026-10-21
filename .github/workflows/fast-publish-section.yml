@@ -403,28 +403,65 @@ jobs:
           reconcile_edge_matrix() {
             local expected_commit="${1:-}"
             local fallback_commit="${2:-}"
-            local deadline=$(( $(date +%s) + 8 * 60 ))
+            local deadline=$(( SECONDS + 8 * 60 ))
             local attempt=0
             local matrix=''
-            while :; do
+            local remaining=0
+            local attempt_timeout=0
+            local delay=0
+            local max_attempt_seconds=30
+            if ! command -v timeout >/dev/null 2>&1; then
+              echo "::error::timeout command unavailable; refusing an unbounded edge reconciliation" >&2
+              return 1
+            fi
+            reconcile_edge_attempt() {
+              local candidate="${1:-}"
+              local budget_seconds="${2:-0}"
+              local candidate_timeout="$budget_seconds"
+              if [ "$candidate_timeout" -gt "$max_attempt_seconds" ]; then
+                candidate_timeout="$max_attempt_seconds"
+              fi
+              if [ "$candidate_timeout" -le 0 ]; then
+                return 124
+              fi
+              timeout --signal=TERM --kill-after=1s "${candidate_timeout}s" \
+                node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$candidate" \
+                | jq -c 'map(. + {bootstrap: (.bootstrap // false)})'
+            }
+            while (( SECONDS < deadline )); do
+              remaining=$(( deadline - SECONDS ))
+              if [ "$remaining" -le 0 ]; then break; fi
               attempt=$((attempt + 1))
-              if matrix="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$expected_commit" | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"; then
+              attempt_timeout="$remaining"
+              if [ "$attempt_timeout" -gt "$max_attempt_seconds" ]; then
+                attempt_timeout="$max_attempt_seconds"
+              fi
+              if matrix="$(reconcile_edge_attempt "$expected_commit" "$attempt_timeout")"; then
                 printf '%s' "$matrix"
                 return 0
               fi
-              if [ -n "$fallback_commit" ] && [ "$fallback_commit" != "$expected_commit" ] \
-                && matrix="$(node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$fallback_commit" | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"; then
-                echo "::notice::registro edge coerente sulla release $fallback_commit dopo il tentativo $attempt" >&2
-                printf '%s' "$matrix"
-                return 0
+              remaining=$(( deadline - SECONDS ))
+              if [ "$remaining" -gt 0 ] && [ -n "$fallback_commit" ] && [ "$fallback_commit" != "$expected_commit" ]; then
+                attempt=$((attempt + 1))
+                attempt_timeout="$remaining"
+                if [ "$attempt_timeout" -gt "$max_attempt_seconds" ]; then
+                  attempt_timeout="$max_attempt_seconds"
+                fi
+                if matrix="$(reconcile_edge_attempt "$fallback_commit" "$attempt_timeout")"; then
+                  echo "::notice::registro edge coerente sulla release $fallback_commit dopo il tentativo $attempt" >&2
+                  printf '%s' "$matrix"
+                  return 0
+                fi
               fi
-              if [ "$(date +%s)" -ge "$deadline" ]; then
-                echo "::error::registro edge non coerente dopo $attempt tentativi; nessun replay verra' accodato" >&2
-                return 1
-              fi
-              echo "::notice::registro edge in transizione; ritento il piano di riconciliazione tra 5 secondi (tentativo $attempt)" >&2
-              sleep 5
+              remaining=$(( deadline - SECONDS ))
+              if [ "$remaining" -le 0 ]; then break; fi
+              delay=5
+              if [ "$remaining" -lt "$delay" ]; then delay="$remaining"; fi
+              echo "::notice::registro edge in transizione; ritento il piano di riconciliazione tra ${delay} secondi (tentativo $attempt, budget residuo ${remaining}s)" >&2
+              sleep "$delay"
             done
+            echo "::error::registro edge non coerente dopo $attempt tentativi; nessun replay verra' accodato" >&2
+            return 1
           }
           pinned_source=''
           if [ "$EVENT_NAME" = 'workflow_run' ]; then
@@ -503,7 +540,7 @@ jobs:
                 replay_dry="${DRY_RUN_INPUT:-true}"
                 replay_api_after_publish="${REPLAY_API_INPUT:-false}"
                 allow_deferred_live_release="${ALLOW_DEFERRED_LIVE_RELEASE_INPUT:-false}"
-                replay_before="${DISPATCH_PUSH_BEFORE:-}"
+                replay_before="${PUSH_BEFORE:-}"
                 # The source checkout is current_main. Keep a push range only
                 # when it has a base, and always end that range at current_main
                 # so a stale head cannot select an older API release.
