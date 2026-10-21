@@ -7,6 +7,7 @@ import {
   readStaticObjectEntries,
   readStaticStringLiteral,
 } from '../../scripts/lib/ts-literals.mjs';
+import { metaFieldRegex } from '../scripts/lib/meta-field-regex.mjs';
 
 const ROOT = resolve(new URL('../..', import.meta.url).pathname);
 
@@ -57,9 +58,37 @@ test('il reader richiede il delimitatore dopo il valore e rifiuta interpolazioni
     /must end with/u,
   );
   assert.throws(
+    () => readStaticObjectEntries("'blog.article.tail.title': 'ultimo',", 'fixture.ts'),
+    /dangling comma/u,
+  );
+  assert.throws(
     () => readStaticObjectEntries("const x = { 'blog.article.fake.title': `prefix ${value}` };", 'fixture.ts'),
     /Interpolated template literal/u,
   );
+});
+
+test('il reader gestisce commenti CR-only e continuazioni CRLF', () => {
+  const source = "// 'blog.article.fake.title': 'commento'\r'blog.article.reale.title': 'prima\\\r\nsecond' }";
+  assert.deepEqual(readStaticObjectEntries(source, 'fixture.ts'), [
+    {
+      key: 'blog.article.reale.title',
+      value: 'primasecond',
+      keyQuote: "'",
+      valueQuote: "'",
+    },
+  ]);
+});
+
+test('metaFieldRegex conserva la superficie RegExp senza scansionare commenti e prosa', () => {
+  const source = [
+    "// 'blog.article.fake.title': 'commento'",
+    'const prose = "testo con \'blog.article.fake.title\': \'prosa\'";',
+    "const meta = { 'blog.article.reale.title': 'L\\'incontro' };",
+  ].join('\n');
+  const matches = [...source.matchAll(metaFieldRegex('title'))];
+  assert.equal(matches.length, 1);
+  assert.equal(matches[0][1], 'reale');
+  assert.equal(matches[0][2], "L\\'incontro");
 });
 
 test('il decoder conserva Unicode e newline senza ri-scansionare il risultato', () => {
