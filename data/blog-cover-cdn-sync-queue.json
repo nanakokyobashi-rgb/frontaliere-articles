@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-negozio-ticino-fisco-frontiere.webp",
+      "sha256": "4d144a2fca08ae3231ff2fe86013ad4bf429753816464770de699dd3ace33556"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-negozio-ticino-fisco-frontiere-480w.webp",
+      "sha256": "210146c4f33c990e15c692e071f027bdbaeacafb9f540f16d42a4b51690af257"
+    }
+  ]
 }
