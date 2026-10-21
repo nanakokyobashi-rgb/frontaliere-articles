@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "d317ac9c23135ffbadb203a9215b069891a4f0abc09460d2b6e295ae7ffa8b43",
+  "updatedAt": "2026-10-21T21:02:11.427Z",
+  "contentHash": "ae139f97164d2112d43937f156a463dc00f9b800bbfd9ad1ceb2b3c7ad4a6fc0",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lausanne Marathon 2026: chiusure strade cantonali e vie cittadine il 25 ottobre",
+          "url": "/articoli-vaud/lausanne-marathon-2026-chiusure-strade/",
+          "excerpt": "Domenica 25 ottobre 2026 si corre il Lausanne Marathon Strade cantonali interessate: 777-B-P e 780-B-P Chiusure totali o parziali circa dalle 07:30 alle 17:30",
+          "date": "2026-10-21T20:50:06.586Z"
+        },
+        {
           "title": "Fisco Vaud: imposte su indennità abusi, ricorso in vista",
           "url": "/articoli-vaud/fisco-vaud-indennita-abuso-imposte/",
           "excerpt": "A Pully: abusi al Collège de Champittet alla fine degli anni '70 Indennità della Chiesa: CHF 220'000, divisa in due parti Dopo l'opposizione: CHF 120'000 ancora",
@@ -94,12 +100,6 @@
           "url": "/articoli-vaud/truffa-falsi-poliziotti-vaud/",
           "excerpt": "Quasi 2.300 casi dall'inizio dell'anno Danno complessivo: CHF 7 milioni Oltre 100 interpellati, 19 in detenzione 16 interpellazioni a inizio ottobre, 5",
           "date": "2026-10-18T07:26:28.156Z"
-        },
-        {
-          "title": "Falsi poliziotti: oltre 100 interpellati nel Vaud",
-          "url": "/articoli-vaud/truffe-falsi-banchieri-lausanna/",
-          "excerpt": "Oltre cento persone interpellate nel Vaud dall'inizio del 2026 Sedici persone interpellate dall'inizio di ottobre Coinvolte polizia cantonale, Lausanne",
-          "date": "2026-10-18T07:14:52.238Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T21:02:11.427Z"
     },
     "en": {
       "canton": "VD",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lausanne Marathon 2026: road and street closures Oct 25",
+          "url": "/en/vaud-articles/lausanne-marathon-2026-road-closures/",
+          "excerpt": "On Sunday, October 25, 2026, the Lausanne Marathon will be held Affected cantonal roads: 777-B-P and 780-B-P Full or partial closures from approximately 07:30",
+          "date": "2026-10-21T20:50:06.586Z"
+        },
+        {
           "title": "Vaud tax authorities: tax on abuse compensation, appeal in sight",
           "url": "/en/vaud-articles/vaud-tax-abuse-compensation-taxes/",
           "excerpt": "In Pully: abuses at Collège de Champittet in the late 1970s Compensation from the Church: CHF 220'000, divided into two parts After the objection: CHF 120'000",
@@ -193,12 +199,6 @@
           "url": "/en/vaud-articles/seven-million-defrauded-in-vaud-by-fake-agents/",
           "excerpt": "Nearly 2,300 cases since the beginning of the year Total damage: CHF 7 million More than 100 people apprehended, 19 in detention 16 apprehensions in early",
           "date": "2026-10-18T07:26:28.156Z"
-        },
-        {
-          "title": "Fake police officers: more than 100 questioned in Vaud",
-          "url": "/en/vaud-articles/fake-police-bankers-vaud/",
-          "excerpt": "More than one hundred people questioned in Vaud since the beginning of 2026 Sixteen people questioned since the beginning of October Cantonal police, Lausanne",
-          "date": "2026-10-18T07:14:52.238Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T21:02:11.427Z"
     },
     "de": {
       "canton": "VD",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lausanne Marathon 2026: Strassensperren am 25. Oktober",
+          "url": "/de/waadt-artikel/lausanne-marathon-2026-strassensperrungen/",
+          "excerpt": "Am Sonntag, dem 25.",
+          "date": "2026-10-21T20:50:06.586Z"
+        },
+        {
           "title": "Waadt: Steuern auf Missbrauchs-Entschädigung, Rekurs",
           "url": "/de/waadt-artikel/waadt-steuer-missbrauchsentschadigung-steuern/",
           "excerpt": "In Pully: Missbrauch am Collège de Champittet Ende der 70er-Jahre Entschädigung der Kirche: CHF 220'000, in zwei Teile aufgeteilt Nach der Einsprache: CHF",
@@ -292,12 +298,6 @@
           "url": "/de/waadt-artikel/sieben-millionen-im-kanton-waadt-von-falschen-agenten-ergaunert/",
           "excerpt": "Fast 2.300 Fälle seit Jahresbeginn Gesamtschaden: CHF 7 Millionen Über 100 Personen befragt, 19 in Haft 16 Befragungen Anfang Oktober, 5 in Lausanne Fälle →",
           "date": "2026-10-18T07:26:28.156Z"
-        },
-        {
-          "title": "Falsche Polizisten: über 100 Befragte im Kanton Waadt",
-          "url": "/de/waadt-artikel/falsche-polizisten-banker-waadt/",
-          "excerpt": "Über hundert Personen im Kanton Waadt seit Anfang 2026 befragt Sechzehn Personen seit Anfang Oktober befragt Beteiligt sind die Kantonspolizei, Lausanne",
-          "date": "2026-10-18T07:14:52.238Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T21:02:11.427Z"
     },
     "fr": {
       "canton": "VD",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lausanne Marathon 2026 : routes fermées le 25 octobre",
+          "url": "/fr/articles-vaud/marathon-lausanne-2026-fermetures-routes/",
+          "excerpt": "Dimanche 25 octobre 2026 a lieu le Lausanne Marathon Routes cantonales concernées : 777-B-P et 780-B-P Fermetures totales ou partielles approximativement",
+          "date": "2026-10-21T20:50:06.586Z"
+        },
+        {
           "title": "Fisc vaudois : impôts sur une indemnité pour abus, recours en vue",
           "url": "/fr/articles-vaud/fisc-vaud-indemnite-abus-impots/",
           "excerpt": "À Pully : abus au Collège de Champittet à la fin des années 70 Indemnité de l'Église : CHF 220'000, divisée en deux parties Après l'opposition : CHF 120'000",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-vaud/sept-millions-escroques-dans-le-canton-de-vaud-par-de-faux-agents/",
           "excerpt": "Près de 2.300 cas depuis le début de l'année Préjudice total : CHF 7 millions Plus de 100 personnes interpellées, 19 en détention 16 interpellations début",
           "date": "2026-10-18T07:26:28.156Z"
-        },
-        {
-          "title": "Faux policiers : plus de 100 personnes interpellées dans le canton de Vaud",
-          "url": "/fr/articles-vaud/faux-policiers-banquiers-vaud/",
-          "excerpt": "Plus de cent personnes interpellées dans le canton de Vaud depuis le début de 2026 Seize personnes interpellées depuis le début du mois d’octobre Police",
-          "date": "2026-10-18T07:14:52.238Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T21:02:11.427Z"
     }
   }
 }
