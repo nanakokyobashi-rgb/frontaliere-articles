@@ -3092,7 +3092,7 @@
       "reason": "Lettore fail-closed dei sorgenti TS di stringhe del corpus (`readTsStringLiteral`, `readTsStringMap`): un solo decodificatore per i due backfill del registry (`backfill-article-cantons.mjs` e `backfill-article-type.mjs`), che ne avevano una copia ciascuno identica riga per riga (review della PR #2312); rifiuta valori e chiavi computate prima di restituire una mappa parziale. Corpus-only: legge `content/blog-body*/it`, che esiste solo qui; il sito non ha i due backfill. Senza dipendenze, come gli altri moduli del registry.",
       "baseline": {
         "site": null,
-        "corpus": "ea751bceb94720a8",
+        "corpus": "fed0aa34d8498825",
         "alignedAt": "2026-10-21"
       }
     },
