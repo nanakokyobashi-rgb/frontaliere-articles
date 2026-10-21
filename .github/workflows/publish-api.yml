@@ -98,6 +98,7 @@ on:
       - 'scripts/lib/r2-section-lock.mjs'
       - 'scripts/lib/is-invoked-directly.mjs'
       - 'scripts/ci/retry-cmd.sh'
+      - 'scripts/lib/npm-ci-retry.sh'
       - 'scripts/cf-purge-cache.mjs'
       - 'scripts/lib/cf-analytics.mjs'
       - 'scripts/lib/cf-purge-variants.mjs'
@@ -250,6 +251,41 @@ jobs:
           # token del checkout non serve a nessuno.
           persist-credentials: false
 
+      - name: Checkout runtime support from workflow revision
+        uses: actions/checkout@v7
+        with:
+          # Bounded replays may check out an older content revision at the
+          # workspace root. Load the local setup action from the workflow's
+          # own revision so it exists independently of that source commit.
+          ref: ${{ github.sha }}
+          path: .article-source-runtime
+          fetch-depth: 1
+          sparse-checkout: |
+            .github/actions/setup-article-source-runtime/action.yml
+            scripts/ci/article-source-runtime/package.json
+            scripts/ci/article-source-runtime/package-lock.json
+            scripts/ci/check-article-source-runtime.mjs
+            scripts/lib/npm-ci-retry.sh
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+
+      # La meta' strutturale della mitigazione di #98, e quella che conta di
+      # piu': il retry accorcia le probabilita', la cache toglie la richiesta.
+      # Senza questa riga NIENTE in questo job era cachato — ne' `npx -y
+      # tsx@4.23.15` (che risolve e scarica tsx dal registro a OGNI run) ne'
+      # l'install del parser qui sotto. `cache: 'npm'` conserva `~/.npm`, che
+      # include sia la cache dei tarball sia `_npx/`: a cache calda entrambi
+      # i comandi sono serviti da disco.
+      # La chiave e' l'hash di package-lock.json, che questo repo ha e che
+      # cambia di rado.
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Setup isolated article source runtime
+        uses: ./.article-source-runtime/.github/actions/setup-article-source-runtime
+
       # A bounded replay starts from the exact corpus revision that uploaded the
       # HTML. If main advances after dispatch, the source remains usable only
       # when it is an ancestor and the intervening commits do not change an
@@ -305,20 +341,6 @@ jobs:
           git checkout --detach "$current_main"
           echo "PUBLISH_API_SOURCE_COMMIT=$current_main" >> "$GITHUB_ENV"
           echo "::notice::replay bounded riallineato dalla sorgente $SOURCE_COMMIT alla HEAD corrente $current_main: nessun input publish-api nel delta"
-
-      - uses: actions/setup-node@v7
-        with:
-          node-version: '22'
-          # La meta' strutturale della mitigazione di #98, e quella che conta di
-          # piu': il retry accorcia le probabilita', la cache toglie la richiesta.
-          # Senza questa riga NIENTE in questo job era cachato — ne' `npx -y
-          # tsx@4.23.15` (che risolve e scarica tsx dal registro a OGNI run) ne'
-          # l'install del parser qui sotto. `cache: 'npm'` conserva `~/.npm`, che
-          # include sia la cache dei tarball sia `_npx/`: a cache calda entrambi
-          # i comandi sono serviti da disco.
-          # La chiave e' l'hash di package-lock.json, che questo repo ha e che
-          # cambia di rado.
-          cache: 'npm'
 
       # ── PREFLIGHT: la sintassi dei corpi articolo ────────────────────────────
       #

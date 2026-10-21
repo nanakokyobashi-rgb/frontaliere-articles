@@ -90,6 +90,9 @@ jobs:
       # the Actions installation token shares a small API bucket with other
       # workflows. Missing RC credentials keep the existing fail-closed
       # GITHUB_TOKEN fallback.
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
+
       - name: Prepare Firebase credentials for open-proposal guard
         continue-on-error: true
         env:

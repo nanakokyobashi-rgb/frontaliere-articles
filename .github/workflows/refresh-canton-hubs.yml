@@ -115,6 +115,9 @@ jobs:
       # (D16). Il loader esce 0 anche quando non carica niente: il controllo di
       # successo e' esplicito qui sotto, perche' un elenco vuoto per un
       # fallimento di auth sarebbe indistinguibile da «nessun cantone acceso».
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
+
       - name: Prepare Firebase credentials
         if: steps.mode.outputs.dry != 'true'
         env:

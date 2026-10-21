@@ -215,6 +215,9 @@ jobs:
       # Anche il mirror `engine-lockstep-auto` passa da questo contratto: il
       # workflow del sito non sostituisce i controlli richiesti dal corpus.
       # ══════════════════════════════════════════════════════════════════════
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
+
       - name: PR-body completeness + multi-issue Closes (zero-Claude)
         id: body_contract
         if: >-

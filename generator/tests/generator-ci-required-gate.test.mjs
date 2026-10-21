@@ -76,6 +76,7 @@ test('touchesGeneratorCiPaths: riconosce i path di cartella (generator/, engine/
 test('touchesGeneratorCiPaths: riconosce i match esatti di file', () => {
   assert.equal(touchesGeneratorCiPaths(['package.json']), true);
   assert.equal(touchesGeneratorCiPaths(['package-lock.json']), true);
+  assert.equal(touchesGeneratorCiPaths(['scripts/lib/npm-ci-retry.sh']), true);
   assert.equal(touchesGeneratorCiPaths(['.github/workflows/generator-ci.yml']), true);
 });
 

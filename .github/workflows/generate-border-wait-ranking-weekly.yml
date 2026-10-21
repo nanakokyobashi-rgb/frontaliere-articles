@@ -109,6 +109,9 @@ jobs:
       # --ignore-scripts: this job renders text and fetches one JSON. It does not
       # need sharp's or playwright's postinstall, which are the slowest part of a
       # full install here.
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
+
       - name: Install dependencies
         run: bash scripts/lib/npm-ci-retry.sh --no-audit --no-fund --ignore-scripts
 
