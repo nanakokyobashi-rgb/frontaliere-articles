@@ -2579,9 +2579,9 @@
       "path": "scripts/lib/r2-image-namespace-lock.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "02cfcb16a3c28075",
-        "corpus": "02cfcb16a3c28075",
-        "alignedAt": "2026-10-20"
+        "site": "1b3225e85d686a57",
+        "corpus": "1b3225e85d686a57",
+        "alignedAt": "2026-10-21"
       }
     },
     {
@@ -3887,9 +3887,9 @@
       "sitePath": "build-plugins/batchWrite.ts",
       "mode": "identical",
       "baseline": {
-        "site": "33e2ddbfa2d92820",
-        "corpus": "33e2ddbfa2d92820",
-        "alignedAt": "2026-09-20"
+        "site": "bcc5a104a2dbbd49",
+        "corpus": "bcc5a104a2dbbd49",
+        "alignedAt": "2026-10-21"
       }
     },
     {
