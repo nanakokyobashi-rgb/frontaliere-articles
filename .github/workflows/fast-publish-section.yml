@@ -241,7 +241,7 @@ jobs:
           ref: ${{ github.sha }}
           path: .replay-dispatcher-source
           fetch-depth: 1
-          sparse-checkout: |
+          sparse-checkout:
             scripts/ci/dispatch-fast-publish-replay.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
@@ -831,7 +831,7 @@ jobs:
           ref: ${{ github.sha }}
           path: .replay-dispatcher-source
           fetch-depth: 1
-          sparse-checkout: |
+          sparse-checkout:
             scripts/ci/dispatch-fast-publish-replay.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
@@ -1392,7 +1392,7 @@ jobs:
           ref: ${{ github.sha }}
           path: .replay-dispatcher-source
           fetch-depth: 1
-          sparse-checkout: |
+          sparse-checkout:
             scripts/ci/dispatch-fast-publish-replay.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
