@@ -186,6 +186,7 @@ const { rewriteBlogImageRefs, hasBlogImageLeak } = await import('../engine/blogI
 // but always pass the callback to the shared renderer so the resolver becomes
 // effective as soon as the engine carries it.
 let resolveArticleHref = (href) => href;
+let routeOwnershipMode = 'legacy-fallback';
 const routeOwnershipModule = path.join(ROOT, 'engine', 'shared', 'articleRouteOwnership.mjs');
 if (fs.existsSync(routeOwnershipModule)) {
   const { loadArticleRouteRedirects, resolveArticleRouteHref } =
@@ -212,7 +213,13 @@ if (fs.existsSync(routeOwnershipModule)) {
     canonicalOverrides: articleLinkCanonicalOverrides,
   };
   resolveArticleHref = (href) => resolveArticleRouteHref(href, articleRouteMaps);
+  routeOwnershipMode = 'resolved';
+} else {
+  console.warn(
+    '[hub-landing] article route ownership resolver unavailable; using legacy article hrefs until the engine mirror lands',
+  );
 }
+console.log(`[hub-landing] article route ownership: ${routeOwnershipMode}`);
 
 /** Trailing-slash key form, identical to staticPagesPlugin's `seoKey`. */
 const seoKey = (p) => {
