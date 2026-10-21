@@ -4,17 +4,17 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T10:04:48.803Z",
-  "contentHash": "8868cc1f5e6570d8c6602404928e75abb2988f53c6d545fc3e48b6d56a33e3ee",
+  "updatedAt": "2026-10-21T03:09:34.669Z",
+  "contentHash": "8e898c857b0d4a3a92310fe27bff432cf4c61779fa24d90e376e8251a6006a0a",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T00:43:33.013Z",
+      "updatedAt": "2026-10-20T17:37:05.348Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T17:49:38.738Z",
+      "updatedAt": "2026-10-20T15:53:28.523Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "9",
+          "value": "8",
           "note": "segnalazioni aggiornate: 20 ottobre 2026"
         }
       ],
@@ -78,20 +78,20 @@
               "date": "2026-09-21T06:49:00.000Z"
             },
             {
-              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Svincolo autostradale Wassen Situazione: problemi di traffico cantiere, lunghezza [km] 4.0 Limitazione del traffico: circolazione…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 21 ottobre 2026",
-              "date": "2026-09-21T06:51:00.000Z"
-            },
-            {
               "label": "A2 S. Gottardo -> Luzern tra Galleria Galleria Teiftal E Svincolo autostradale Amsteg Situazione: problemi di traffico cantiere, lunghezza [km] 3.5 Limitazione del traffico: circolazione…",
               "value": "Cantiere",
               "detail": "fine prevista: 28 ottobre 2026",
               "date": "2026-09-21T06:53:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Luzern Galleria Galleria Seelisberg Situazione: problemi di traffico cantiere, lunghezza [km] 9.5 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 12 novembre 2026",
+              "date": "2026-09-22T09:24:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -181,7 +181,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-20T10:04:48.803Z"
+      "updatedAt": "2026-10-21T03:09:34.669Z"
     },
     "en": {
       "canton": "UR",
@@ -196,7 +196,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "9",
+          "value": "8",
           "note": "reports as of 20 October 2026"
         }
       ],
@@ -242,20 +242,20 @@
               "date": "2026-09-21T06:49:00.000Z"
             },
             {
-              "label": "A2 Luzern -> S. Gottardo tra Svincolo autostradale Amsteg E Svincolo autostradale Wassen Situazione: problemi di traffico cantiere, lunghezza [km] 4.0 Limitazione del traffico: circolazione…",
-              "value": "Roadworks",
-              "detail": "until 21 October 2026",
-              "date": "2026-09-21T06:51:00.000Z"
-            },
-            {
               "label": "A2 S. Gottardo -> Luzern tra Galleria Galleria Teiftal E Svincolo autostradale Amsteg Situazione: problemi di traffico cantiere, lunghezza [km] 3.5 Limitazione del traffico: circolazione…",
               "value": "Roadworks",
               "detail": "until 28 October 2026",
               "date": "2026-09-21T06:53:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Luzern Galleria Galleria Seelisberg Situazione: problemi di traffico cantiere, lunghezza [km] 9.5 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo larghezza…",
+              "value": "Roadworks",
+              "detail": "until 12 November 2026",
+              "date": "2026-09-22T09:24:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -293,7 +293,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-20T10:04:48.803Z"
+      "updatedAt": "2026-10-21T03:09:34.669Z"
     },
     "de": {
       "canton": "UR",
@@ -360,7 +360,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "9",
+          "value": "8",
           "note": "Meldungen vom 20. Oktober 2026"
         }
       ],
@@ -406,20 +406,20 @@
               "date": "2026-09-21T06:49:00.000Z"
             },
             {
-              "label": "A2 Luzern -> Gotthard zwischen Anschluss Amsteg und Anschluss Wassen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 4.0 Verkehrsführung: Verkehr wird über die Gegenfahrbahn geleitet Zusatz 1…",
-              "value": "Baustelle",
-              "detail": "bis 21. Oktober 2026",
-              "date": "2026-09-21T06:51:00.000Z"
-            },
-            {
               "label": "A2 Gotthard -> Luzern zwischen Tunnel Teiftal-Tunnel und Anschluss Amsteg Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 3.5 Verkehrsführung: Verkehr wird über die Gegenfahrbahn geleitet Zusatz…",
               "value": "Baustelle",
               "detail": "bis 28. Oktober 2026",
               "date": "2026-09-21T06:53:00.000Z"
+            },
+            {
+              "label": "A2 Gotthard -> Luzern Tunnel Seelisberg-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 9.5 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
+              "value": "Baustelle",
+              "detail": "bis 12. November 2026",
+              "date": "2026-09-22T09:24:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -457,7 +457,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-20T10:04:48.803Z"
+      "updatedAt": "2026-10-21T03:09:34.669Z"
     },
     "fr": {
       "canton": "UR",
@@ -524,7 +524,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "9",
+          "value": "8",
           "note": "signalements au 20 octobre 2026"
         }
       ],
@@ -570,20 +570,20 @@
               "date": "2026-09-21T06:49:00.000Z"
             },
             {
-              "label": "A2 Lucerne -> St-Gothard entre Jonction autoroutière Amsteg et Jonction autoroutière Wassen Situation: trafic perturbé travaux, longueur [km] 4.0 Gestion du trafic: trafic bidirectionnel Complément…",
-              "value": "Chantier",
-              "detail": "jusqu’au 21 octobre 2026",
-              "date": "2026-09-21T06:51:00.000Z"
-            },
-            {
               "label": "A2 St-Gothard -> Lucerne entre Tunnel Tunnel Teiftal et Jonction autoroutière Amsteg Situation: trafic perturbé travaux, longueur [km] 3.5 Gestion du trafic: trafic bidirectionnel Complément 1…",
               "value": "Chantier",
               "detail": "jusqu’au 28 octobre 2026",
               "date": "2026-09-21T06:53:00.000Z"
+            },
+            {
+              "label": "A2 St-Gothard -> Lucerne Tunnel Tunnel du Seelisberg Situation: trafic perturbé travaux, longueur [km] 9.5 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de…",
+              "value": "Chantier",
+              "detail": "jusqu’au 12 novembre 2026",
+              "date": "2026-09-22T09:24:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -621,7 +621,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -673,7 +673,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-20T10:04:48.803Z"
+      "updatedAt": "2026-10-21T03:09:34.669Z"
     }
   }
 }

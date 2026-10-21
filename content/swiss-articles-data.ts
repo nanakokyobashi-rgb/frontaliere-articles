@@ -28567,6 +28567,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'finma-etf-bitcoin-primo-fondo',
+    category: 'novita',
+    date: '2026-10-21T03:02:48.833Z',
+    image: '/images/blog/article-finma-etf-bitcoin-primo-fondo.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
