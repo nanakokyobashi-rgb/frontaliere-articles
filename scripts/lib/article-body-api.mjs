@@ -33,7 +33,8 @@ function skipTrivia(source, offset) {
     }
     if (source[index + 1] === '*') {
       const close = source.indexOf('*/', index + 2);
-      index = close < 0 ? source.length : close + 2;
+      if (close < 0) throw new Error('Unterminated block comment in static article body source');
+      index = close + 2;
       continue;
     }
     break;
@@ -151,6 +152,9 @@ export function extractArticleBodyFields(source, { allowEndOfInput = false, vali
     if (!keyToken) {
       index += 1;
       continue;
+    }
+    if (keyToken.error) {
+      throw new Error('Malformed string token in static article body source: ' + keyToken.error);
     }
     const key = ARTICLE_KEY_RE.exec(keyToken.value ?? '');
     const colon = skipTrivia(text, keyToken.end);

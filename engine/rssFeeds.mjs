@@ -10,8 +10,9 @@
  * It is MOVED here rather than reimplemented there. A second copy of this
  * parse/emit logic would drift silently — a feed is not diffed by anyone once
  * it is served, so an emitter that quietly stopped matching would go unnoticed
- * until an aggregator dropped the channel. AGENTS.md #6: one module, two
- * callers, drift impossible by construction.
+ * until an aggregator dropped the channel. The corpus adapter injects its
+ * article body parser at call time because that parser depends on corpus-only
+ * scripts; no script dependency enters this mirrored engine.
  *
  * The only site-shaped inputs are hoisted into `layout`:
  *   - `seoDir`     where `seo-blog*.ts` live               (site: services/seo)
@@ -36,7 +37,7 @@ import {
   SITE_RENDERED_ARTICLE_SECTIONS,
 } from './shared/articleSectionCore.mjs';
 import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
-import { extractArticleBodyFields } from '../scripts/lib/article-body-api.mjs';
+import { decodeTsStringEscapes, repairLegacyDoubleEscapedBreaks } from './shared/tsStringEscapes.ts';
 import { findAllSeoEntryMatches } from './shared/seo-entry.mjs';
 import { createImageCreditReader, mediaRssCreditXml, renderImageCreditHtml } from './shared/imageCredits.mjs';
 import { articleSectionEntry } from './shared/articleSectionCore.mjs';
@@ -340,8 +341,100 @@ function parseLocalizedField(fs, path, rootDir, localesDir, metaFileName, field)
   return out;
 }
 
+const BODY_LITERAL_QUOTES = new Set(['"', "'", String.fromCharCode(96)]);
+const BLOG_BODY_KEY = /^blog\.article\.(.+)\.(body\d+)$/u;
+
+function skipBodyLineComment(source, startIndex) {
+  let cursor = startIndex + 2;
+  while (cursor < source.length && source[cursor] !== '\n' && source[cursor] !== '\r') cursor += 1;
+  return cursor;
+}
+
+function skipBodyTrivia(source, startIndex, sourcePath) {
+  let cursor = startIndex;
+  while (cursor < source.length) {
+    if (/\s/u.test(source[cursor])) {
+      cursor += 1;
+      continue;
+    }
+    if (source.startsWith('//', cursor)) {
+      cursor = skipBodyLineComment(source, cursor);
+      continue;
+    }
+    if (source.startsWith('/*', cursor)) {
+      const close = source.indexOf('*/', cursor + 2);
+      if (close === -1) throw new Error('[rss] Unterminated comment in ' + sourcePath);
+      cursor = close + 2;
+      continue;
+    }
+    break;
+  }
+  return cursor;
+}
+
+function readBodyStringLiteral(source, startIndex, sourcePath) {
+  const quote = source[startIndex];
+  if (!BODY_LITERAL_QUOTES.has(quote)) return null;
+
+  let cursor = startIndex + 1;
+  while (cursor < source.length) {
+    const char = source[cursor];
+    if (char === '\\') {
+      cursor += source[cursor + 1] === '\r' && source[cursor + 2] === '\n' ? 3 : 2;
+      continue;
+    }
+    if (quote === String.fromCharCode(96) && char === '$' && source[cursor + 1] === '{') {
+      throw new Error('[rss] Interpolated template literal is not supported in static article body source: ' + sourcePath);
+    }
+    if (quote !== String.fromCharCode(96) && (char === '\n' || char === '\r')) return null;
+    if (char === quote) {
+      return {
+        quote,
+        value: source.slice(startIndex + 1, cursor),
+        end: cursor + 1,
+      };
+    }
+    cursor += 1;
+  }
+  return null;
+}
+
+function decodeBodyStringLiteral(raw, quote) {
+  let value = '';
+  for (let cursor = 0; cursor < raw.length;) {
+    if (raw[cursor] !== '\\') {
+      value += raw[cursor];
+      cursor += 1;
+      continue;
+    }
+
+    const escaped = raw[cursor + 1];
+    if (escaped === undefined) {
+      value += '\\';
+      cursor += 1;
+      continue;
+    }
+    if (escaped === '\r' || escaped === '\n' || escaped === '\u2028' || escaped === '\u2029') {
+      cursor += escaped === '\r' && raw[cursor + 2] === '\n' ? 3 : 2;
+      continue;
+    }
+    if (quote === String.fromCharCode(96) && (escaped === String.fromCharCode(96) || escaped === '$')) {
+      value += escaped;
+      cursor += 2;
+      continue;
+    }
+
+    const escapeLength = escaped === 'u' && /^[0-9a-fA-F]{4}$/u.test(raw.slice(cursor + 2, cursor + 6))
+      ? 6
+      : 2;
+    value += decodeTsStringEscapes(raw.slice(cursor, cursor + escapeLength), { newlineAs: '\n' });
+    cursor += escapeLength;
+  }
+  return value;
+}
+
 /** Concatenate the per-locale body chunks of every article in a body dir. */
-function parseBlogBodies(fs, path, rootDir, localesDir, bodyDir, locale) {
+function parseBlogBodies(fs, path, rootDir, localesDir, bodyDir, locale, bodyFieldParser) {
   const bodies = new Map();
   const dir = path.join(rootDir, localesDir, bodyDir, locale);
   if (!fs.existsSync(dir)) return bodies;
@@ -352,16 +445,61 @@ function parseBlogBodies(fs, path, rootDir, localesDir, bodyDir, locale) {
     const filePath = path.join(dir, file);
     const src = fs.readFileSync(filePath, 'utf-8');
     const articleParts = new Map(); // articleId → { body1: '...', body2: '...' }
-    // Reuse the API parser's lexical scanner so both published surfaces reject
-    // computed body keys instead of silently omitting one and emitting a
-    // partial article. It also gives RSS the same decoded static values.
-    for (const { id, field, value, error } of extractArticleBodyFields(src)) {
-      if (!/^body\d+$/u.test(field)) continue;
-      if (error || typeof value !== 'string') {
-        throw new Error(`[rss] Body property ${id}.${field} is not a static string literal in ${filePath}: ${error || 'no value'}`);
+    if (bodyFieldParser) {
+      if (typeof bodyFieldParser !== 'function') {
+        throw new TypeError('[rss] bodyFieldParser must be a function');
       }
-      if (!articleParts.has(id)) articleParts.set(id, new Map());
-      articleParts.get(id).set(field, value);
+      for (const { id, field, value, error } of bodyFieldParser(src)) {
+        if (!/^body\d+$/u.test(field)) continue;
+        if (error || typeof value !== 'string') {
+          throw new Error(
+            '[rss] Body property ' + id + '.' + field +
+              ' is not a static string literal in ' + filePath + ': ' + (error || 'no value'),
+          );
+        }
+        if (!articleParts.has(id)) articleParts.set(id, new Map());
+        articleParts.get(id).set(field, value);
+      }
+    } else {
+      // Standalone callers retain the engine's lexical scanner. The corpus
+      // publisher supplies bodyFieldParser so bracket keys and API parser
+      // errors share the same fail-closed path as the article body API.
+      let cursor = 0;
+      while (cursor < src.length) {
+        cursor = skipBodyTrivia(src, cursor, filePath);
+        if (cursor >= src.length) break;
+        if (!BODY_LITERAL_QUOTES.has(src[cursor])) {
+          cursor += 1;
+          continue;
+        }
+
+        const keyLiteral = readBodyStringLiteral(src, cursor, filePath);
+        if (!keyLiteral) throw new Error('[rss] Unterminated string literal in ' + filePath);
+        const afterKey = skipBodyTrivia(src, keyLiteral.end, filePath);
+        const key = decodeBodyStringLiteral(keyLiteral.value, keyLiteral.quote);
+        const keyMatch = BLOG_BODY_KEY.exec(key);
+        if (!keyMatch || src[afterKey] !== ':') {
+          cursor = keyLiteral.end;
+          continue;
+        }
+
+        const valueStart = skipBodyTrivia(src, afterKey + 1, filePath);
+        if (!BODY_LITERAL_QUOTES.has(src[valueStart])) {
+          throw new Error('[rss] Body property ' + key + ' must have a static string literal value in ' + filePath);
+        }
+        const valueLiteral = readBodyStringLiteral(src, valueStart, filePath);
+        if (!valueLiteral) throw new Error('[rss] Unterminated body value for ' + key + ' in ' + filePath);
+        const afterValue = skipBodyTrivia(src, valueLiteral.end, filePath);
+        if (src[afterValue] !== ',' && src[afterValue] !== '}') {
+          throw new Error('[rss] Body property ' + key + ' must end with a comma or closing brace in ' + filePath);
+        }
+
+        const [, id, field] = keyMatch;
+        if (!articleParts.has(id)) articleParts.set(id, new Map());
+        const decoded = decodeBodyStringLiteral(valueLiteral.value, valueLiteral.quote);
+        articleParts.get(id).set(field, repairLegacyDoubleEscapedBreaks(decoded));
+        cursor = valueLiteral.end;
+      }
     }
 
     for (const [id, parts] of articleParts) {
@@ -551,8 +689,19 @@ ${itemsXml}
  * `registry` is the section's article array; `id` and `image` are read to
  * resolve `media:content` without touching the filesystem, and `date === ''`
  * (publication date unknown) keeps that article out of the feed.
+ * The corpus adapter may inject bodyFieldParser so its API and RSS use the
+ * same static body-field extraction rules.
  */
-export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], layout = {}, repairSerpSnippet }) {
+export function buildSectionFeeds({
+  fs,
+  path,
+  rootDir,
+  section,
+  registry = [],
+  layout = {},
+  repairSerpSnippet,
+  bodyFieldParser,
+}) {
   // NON opzionale, e senza fallback identita'. Il produttore reale dei feed e'
   // `scripts/build-api.mjs` del repo corpus (qui dentro l'unico altro chiamante
   // e' tests/rss-feeds-module.test.ts), quindi un default silenzioso renderebbe
@@ -620,7 +769,7 @@ export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], l
     const metaFileName = section.metaFile(locale);
     const titles = parseLocalizedField(fs, path, rootDir, localesDir, metaFileName, 'title');
     const excerpts = parseLocalizedField(fs, path, rootDir, localesDir, metaFileName, 'excerpt');
-    const bodies = parseBlogBodies(fs, path, rootDir, localesDir, section.bodyDir, locale);
+    const bodies = parseBlogBodies(fs, path, rootDir, localesDir, section.bodyDir, locale, bodyFieldParser);
 
     const xml = renderFeed(section, locale, feedArticles, slugs, titles, excerpts, bodies, images, credits, repairSerpSnippet);
     if (!xml) continue;
@@ -639,7 +788,16 @@ export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], l
  * Defaults to the active publisher table for the corpus/R2 caller; a site
  * emitter must pass `SITE_RSS_SECTIONS` explicitly.
  */
-export function buildAllRssFeeds({ fs, path, rootDir, registries = {}, layout = {}, repairSerpSnippet, sections = RSS_SECTIONS }) {
+export function buildAllRssFeeds({
+  fs,
+  path,
+  rootDir,
+  registries = {},
+  layout = {},
+  repairSerpSnippet,
+  bodyFieldParser,
+  sections = RSS_SECTIONS,
+}) {
   return sections.map((section) =>
     buildSectionFeeds({
       fs,
@@ -649,6 +807,7 @@ export function buildAllRssFeeds({ fs, path, rootDir, registries = {}, layout = 
       registry: registries[section.id] ?? [],
       layout,
       repairSerpSnippet,
+      bodyFieldParser,
     }),
   );
 }
