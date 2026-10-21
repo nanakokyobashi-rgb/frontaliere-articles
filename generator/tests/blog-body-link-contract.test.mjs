@@ -621,12 +621,14 @@ test('publish-api esegue il link gate prima della pubblicazione', () => {
   assert.ok(build > linkGate, 'il link gate deve precedere la pubblicazione della superficie API');
   assert.ok(pushPaths.includes("'scripts/ci/check-blog-body-links.mjs'"), 'le modifiche al gate devono riattivare publish-api');
   assert.ok(pushPaths.includes("'scripts/lib/article-link-contract.mjs'"), 'le modifiche al contratto devono riattivare publish-api');
+  assert.ok(pushPaths.includes("'scripts/lib/typescript-expression-scanner.mjs'"), 'le modifiche allo scanner devono riattivare publish-api');
   assert.ok(pushPaths.includes("'generator/scripts/lib/article-excerpt.mjs'"), 'la dipendenza transitiva del writer deve riattivare publish-api');
   assert.ok(pushPaths.includes("'generator/data/canton-url-slugs.json'"), 'la sorgente delle radici attive deve riattivare publish-api');
   assert.match(linkGateStep, /PREFLIGHT_SCAN_MODE/);
   assert.match(workflow, /engine\/shared\/cantonArticleSectionCore\.generated\.mjs/);
   assert.match(gateInputBlock, /generator\/data\/canton-url-slugs\.json/);
   assert.match(gateInputBlock, /generator\/scripts\/lib\/article-excerpt\.mjs/);
+  assert.match(gateInputBlock, /scripts\/lib\/typescript-expression-scanner\.mjs/);
   assert.match(gateInputBlock, /engine\/ogPagesPlugin\.ts/);
   assert.match(gateInputBlock, /engine\/shared\/normalizeArticleMarkdown\.ts/);
   assert.match(workflow, /generator\/data\/canton-url-slugs\.json/);
@@ -643,6 +645,7 @@ test('i publisher rapidi eseguono il link gate prima di ogni pubblicazione', () 
     for (const dependency of [
       'scripts/ci/check-blog-body-links.mjs',
       'scripts/lib/article-link-contract.mjs',
+      'scripts/lib/typescript-expression-scanner.mjs',
       'generator/scripts/lib/article-meta-block.mjs',
       'generator/scripts/lib/article-excerpt.mjs',
     ]) {
@@ -665,6 +668,7 @@ test('i publisher rapidi usano la stessa chiusura delle dipendenze del gate di p
     'engine/ogPagesPlugin.ts',
     'engine/rssFeeds.mjs',
     'engine/shared/normalizeArticleMarkdown.ts',
+    'scripts/lib/typescript-expression-scanner.mjs',
   ]) {
     assert.ok(apiPaths.includes(dependency), `publish-api.yml deve includere ${dependency}`);
   }
