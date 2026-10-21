@@ -36,6 +36,9 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.zugo-assegnazione-mandato-2030.title': 'Zug: departments assigned for the 2027–2030 period',
     'blog.article.zugo-assegnazione-mandato-2030.excerpt': 'The State Council of Zug has assigned the departments for the 2027–2030 term and regulated deputizing arrangements from January 1, 2027.',
     'blog.article.zugo-assegnazione-mandato-2030.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.zugo-agenda-consiglio-29-ottobre.title': 'Zug makes available the agenda of the Cantonal Council',
+    'blog.article.zugo-agenda-consiglio-29-ottobre.excerpt': 'The agenda of the meeting of the Cantonal Council of Zug on 29 October 2026 is available, but the text does not list the issues.',
+    'blog.article.zugo-agenda-consiglio-29-ottobre.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZgEn;

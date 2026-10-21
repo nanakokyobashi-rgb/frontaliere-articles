@@ -36,6 +36,9 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.zugo-assegnazione-mandato-2030.title': 'Zoug : attributions des directions pour la période 2027-2030',
     'blog.article.zugo-assegnazione-mandato-2030.excerpt': 'Le Conseil d\'État de Zoug a attribué les directions pour la période 2027-2030 et réglé les suppléances à compter du 1er janvier 2027.',
     'blog.article.zugo-assegnazione-mandato-2030.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.zugo-agenda-consiglio-29-ottobre.title': 'Zoug rend disponible l\'agenda du Conseil cantonal',
+    'blog.article.zugo-agenda-consiglio-29-ottobre.excerpt': 'L\'ordre du jour de la séance du Conseil cantonal de Zoug du 29 octobre 2026 est disponible, mais le texte n\'en dresse pas la liste.',
+    'blog.article.zugo-agenda-consiglio-29-ottobre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZgFr;

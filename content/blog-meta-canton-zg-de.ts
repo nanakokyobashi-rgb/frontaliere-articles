@@ -36,6 +36,9 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.zugo-assegnazione-mandato-2030.title': 'Zug: Direktionen für den Zeitraum 2027-2030 zugewiesen',
     'blog.article.zugo-assegnazione-mandato-2030.excerpt': 'Der Regierungsrat des Kantons Zug hat die Direktionen für den Zeitraum 2027-2030 zugewiesen und die Stellvertretungen ab dem 1.',
     'blog.article.zugo-assegnazione-mandato-2030.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.zugo-agenda-consiglio-29-ottobre.title': 'Zug stellt die Tagesordnung des Kantonsrates zur Verfügung',
+    'blog.article.zugo-agenda-consiglio-29-ottobre.excerpt': 'Die Tagesordnung der Sitzung des Kantonsrates Zug vom 29.',
+    'blog.article.zugo-agenda-consiglio-29-ottobre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZgDe;
