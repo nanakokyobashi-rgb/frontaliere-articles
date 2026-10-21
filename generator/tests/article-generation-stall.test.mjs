@@ -28,7 +28,13 @@ import {
   EVERGREEN_REJECTED_MAX_IDS,
   computeEvergreenPoolEpoch,
   migrateEvergreenRejectedTracker,
+  extractItTitlesFromMeta,
 } from '../scripts/lib/article-topic-selector.mjs';
+
+test('extractItTitlesFromMeta restituisce il valore del titolo, non lo slug', () => {
+  const source = "'blog.article.titolo.con.punti.title': 'L\\'iniziativa dell\\'A9',";
+  assert.deepEqual(extractItTitlesFromMeta(source), ["L'iniziativa dell'A9"]);
+});
 
 // ── Defect 1: all-caps emphasis harvested as required "institutions" ──
 //
