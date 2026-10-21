@@ -28648,6 +28648,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'ora-solare-ritorno-ottobre-svizzera',
+    category: 'novita',
+    date: '2026-10-21T23:00:36.449Z',
+    image: '/images/blog/article-ora-solare-ritorno-ottobre-svizzera.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

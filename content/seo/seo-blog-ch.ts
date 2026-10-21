@@ -108324,6 +108324,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ora-solare-ritorno-ottobre-svizzera': {
+    title: 'Ritorno all\'ora solare: lancette indietro il 25 ottobre',
+    description: 'Tra il 24 e il 25 ottobre torna l\'ora solare Alle 3 le lancette tornano indietro di un\'ora Il 71% degli intervistati Forsa vuole abolire il cambio',
+    keywords: 'frontalieri, ticino, svizzera, italia, ritorno, solare, lancette, indietro',
+    ogTitle: 'Ritorno all\'ora solare: un\'ora in più di sonno ma buio prima',
+    ogDescription: 'Tra il 24 e il 25 ottobre torna l\'ora solare Alle 3 le lancette tornano indietro di un\'ora Il 71% degli intervistati Forsa vuole abolire il cambio Sonno',
+    canonicalPath: '/articoli-svizzera/ora-solare-ritorno-ottobre-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ritorno all'ora solare: lancette indietro il 25 ottobre",
+      "description": "Tra il 24 e il 25 ottobre torna l'ora solare Alle 3 le lancette tornano indietro di un'ora Il 71% degli intervistati Forsa vuole abolire il cambio",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ora-solare-ritorno-ottobre-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T23:00:36+00:00",
+      "dateModified": "2026-10-21T23:00:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ora-solare-ritorno-ottobre-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

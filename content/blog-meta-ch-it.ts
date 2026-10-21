@@ -8573,6 +8573,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.furto-dati-publica-100mila-dipendenti.title': 'Hacker Akira rubano dati di 100.000 dipendenti federali da Publica',
     'blog.article.furto-dati-publica-100mila-dipendenti.excerpt': 'Oltre 100’000 dipendenti federali coinvolti Dati anche relativi a partner e figli L’attacco a un fornitore esterno risale a fine settembre Akira minaccia',
     'blog.article.furto-dati-publica-100mila-dipendenti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.ora-solare-ritorno-ottobre-svizzera.title': 'Ritorno all\'ora solare: lancette indietro il 25 ottobre',
+    'blog.article.ora-solare-ritorno-ottobre-svizzera.excerpt': 'Tra il 24 e il 25 ottobre torna l\'ora solare Alle 3 le lancette tornano indietro di un\'ora Il 71% degli intervistati Forsa vuole abolire il cambio Sonno',
+    'blog.article.ora-solare-ritorno-ottobre-svizzera.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

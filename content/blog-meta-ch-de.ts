@@ -8573,6 +8573,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.furto-dati-publica-100mila-dipendenti.title': 'Hacker Akira stehlen bei Publica Daten von 100.000 Bundesangestellten',
     'blog.article.furto-dati-publica-100mila-dipendenti.excerpt': 'Über 100’000 Bundesangestellte betroffen Daten auch zu Partnern und Kindern Der Angriff auf einen externen Dienstleister geht auf Ende September zurück Akira droht',
     'blog.article.furto-dati-publica-100mila-dipendenti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.ora-solare-ritorno-ottobre-svizzera.title': 'Rückkehr zur Normalzeit: Am 25. Oktober werden die Zeiger zurückgestellt',
+    'blog.article.ora-solare-ritorno-ottobre-svizzera.excerpt': 'Zwischen dem 24.',
+    'blog.article.ora-solare-ritorno-ottobre-svizzera.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;
