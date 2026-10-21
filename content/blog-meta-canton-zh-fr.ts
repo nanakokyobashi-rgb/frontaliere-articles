@@ -36,6 +36,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.vbz-tram-50-51-cambio.title': 'Dès le 13 décembre, suppression des tramways 50 et 51',
     'blog.article.vbz-tram-50-51-cambio.excerpt': 'Dès le 13 décembre, les lignes 50 et 51 disparaissent Les tramways 4, 11, 13, 14 et 17 reprennent leur parcours sur le Bahnhofquai La ligne 83 circule tous',
     'blog.article.vbz-tram-50-51-cambio.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.zurigo-niente-iniziativa-congedo-parentale.title': 'Zurich : pas d’initiative sur le congé parental, gauche et centre divisés',
+    'blog.article.zurigo-niente-iniziativa-congedo-parentale.excerpt': 'Le canton de Zurich ne présentera pas l’initiative cantonale sur le congé parental : la gauche et les partis du centre, initialement favorables, ne sont pas parvenus à un accord.',
+    'blog.article.zurigo-niente-iniziativa-congedo-parentale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZhFr;

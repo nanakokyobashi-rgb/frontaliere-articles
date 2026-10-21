@@ -36,6 +36,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.vbz-tram-50-51-cambio.title': 'Trams 50 and 51 discontinued from December 13',
     'blog.article.vbz-tram-50-51-cambio.excerpt': 'From December 13, lines 50 and 51 will disappear Trams 4, 11, 13, 14 and 17 return to Bahnhofquai Line 83 runs every day until 22 Night line N8 becomes N80 Date',
     'blog.article.vbz-tram-50-51-cambio.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.zurigo-niente-iniziativa-congedo-parentale.title': 'Zurich: no parental leave initiative, left and center divided',
+    'blog.article.zurigo-niente-iniziativa-congedo-parentale.excerpt': 'The Canton of Zurich will not submit the cantonal initiative on parental leave: left-wing and centrist parties, initially in favor, failed to reach an agreement.',
+    'blog.article.zurigo-niente-iniziativa-congedo-parentale.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZhEn;
