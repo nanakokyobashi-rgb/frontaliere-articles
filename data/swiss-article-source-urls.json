@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/cn-approva-accordo-col-mercosur-e-aiuti-all%27agricoltura/92069687": {
-    "articleId": "accordo-mercosur-agricoltura-svizzera",
-    "ts": "2026-09-17T02:46:34.341Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/ticino/economia/1950666/sul-digitale-non-dovrebbe-esserci-una-strategia-di-destra-di-centro-o-di-sinistra": {
     "articleId": "atted-digitale-ticino-cyber-security",
     "ts": "2026-09-17T02:56:11.239Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/attualita/1957991/zurigo-skyguide-aereo-capacita-guasto-spazio": {
     "articleId": "guasto-sistemi-skyguide-scali",
     "ts": "2026-10-21T05:09:47.480Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1957983/zurigo-dipendenti-svizzera-tamedia-licenziamenti-ia": {
+    "articleId": "tamedia-zurigo-protesta-licenziamenti-ia",
+    "ts": "2026-10-21T07:32:05.353Z",
     "keyForm": 2
   }
 }
