@@ -252,7 +252,7 @@ function delimiterContextAt(source, offset) {
         interfaceTypeParameterDepth = 0;
       }
       markToken(ch);
-      delimiters.push({ delimiter: ch, lastToken: null, typeLiteral, functionParameters });
+      delimiters.push({ delimiter: ch, offset: index, lastToken: null, typeLiteral, functionParameters });
       pendingFunctionReturnObjectType = false;
       pendingVariableTypeObject = false;
       index += 1;
@@ -380,8 +380,17 @@ export function hasComputedPropertyPrefix(source, offset) {
 
 function hasObjectMemberPrefix(source, offset) {
   if (!OBJECT_MEMBER_PREFIX_RE.test(source.slice(0, offset))) return false;
-  const current = delimiterContextAt(source, offset).at(-1);
-  return !current || current.delimiter === '{';
+  const contexts = delimiterContextAt(source, offset);
+  const current = contexts.at(-1);
+  if (!current || current.delimiter !== '{' || current.typeLiteral) return false;
+  if (contexts.at(-2)?.functionParameters) return false;
+  if (/\b(?:const|let|var|import|export)\s*$/u.test(source.slice(0, current.offset))) return false;
+  const objectEnd = scanTypeScriptExpression(source, current.offset + 1, '}');
+  if (objectEnd >= source.length) return true;
+  const afterObject = skipTrivia(source, objectEnd);
+  if (source[afterObject] === '=' && source[afterObject + 1] !== '>') return false;
+  if (source[afterObject] !== ')') return true;
+  return !source.startsWith('=>', skipTrivia(source, afterObject + 1));
 }
 
 /**

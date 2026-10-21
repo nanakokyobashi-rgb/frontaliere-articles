@@ -294,6 +294,14 @@ test('interpolated templates fail the whole source before or after static body f
   assert.doesNotThrow(() => buildArticleBodyPayload({
     section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source: sourceWithTypedArrayDestructuringHelper,
   }));
+  const sourceWithObjectDestructuringHelper = [
+    'const pick = ({ extraFields }) => extraFields;',
+    'const rest = ({ ...extraFields }) => extraFields;',
+    sourceFor(),
+  ].join('\n');
+  assert.doesNotThrow(() => buildArticleBodyPayload({
+    section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source: sourceWithObjectDestructuringHelper,
+  }));
 
   const deceptiveNestedExpression = [
     'const body = { "blog.article.example-article.body1": "valid before failure" };',

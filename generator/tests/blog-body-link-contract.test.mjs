@@ -485,6 +485,26 @@ test('il gate ammette destrutturazione array in helper accanto a body statici', 
   }
 });
 
+test('il gate ammette destrutturazione object in helper accanto a body statici', () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'article-body-link-object-helper-'));
+  const relative = `${BLOG_BODY_ROOTS[0]}/it/object-helper.ts`;
+  const file = path.join(fixtureRoot, relative);
+  mkdirSync(path.dirname(file), { recursive: true });
+  writeFileSync(file, [
+    'const pick = ({ extraFields }) => extraFields;',
+    'const rest = ({ ...extraFields }) => extraFields;',
+    "const body = { 'blog.article.fixture.body1': '[ok](https://example.com)' };",
+    '',
+  ].join('\n'), 'utf8');
+  try {
+    const result = scanBlogBodyLinks(fixtureRoot);
+    assert.deepEqual(result.errors, []);
+    assert.deepEqual(result.offenders, []);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('il gate fallisce chiuso sulle chiavi body computed e riporta l’espressione', () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'article-body-link-computed-key-'));
   const relative = `${BLOG_BODY_ROOTS[0]}/it/computed-key.ts`;
