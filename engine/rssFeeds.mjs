@@ -36,7 +36,7 @@ import {
   SITE_RENDERED_ARTICLE_SECTIONS,
 } from './shared/articleSectionCore.mjs';
 import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
-import { decodeTsStringEscapes, repairLegacyDoubleEscapedBreaks } from './shared/tsStringEscapes.ts';
+import { extractArticleBodyFields } from '../scripts/lib/article-body-api.mjs';
 import { findAllSeoEntryMatches } from './shared/seo-entry.mjs';
 import { createImageCreditReader, mediaRssCreditXml, renderImageCreditHtml } from './shared/imageCredits.mjs';
 import { articleSectionEntry } from './shared/articleSectionCore.mjs';
@@ -321,115 +321,6 @@ function parseBlogSlugs(fs, path, rootDir, slugFile, slugConst) {
   return new Map(Object.entries(parseArticleUrlSlugs(src, slugConst)));
 }
 
-const STATIC_LITERAL_QUOTES = new Set(['"', "'", '`']);
-
-function skipLineComment(source, startIndex) {
-  let cursor = startIndex + 2;
-  while (cursor < source.length && source[cursor] !== '\n' && source[cursor] !== '\r') cursor += 1;
-  return cursor;
-}
-
-/**
- * Read one JS/TS string literal without treating another quote style inside it
- * as a terminator. Any unescaped template interpolation aborts extraction of
- * this source file so the generated feed cannot contain a partial body.
- *
- * @param {string} source
- * @param {number} startIndex
- * @param {string} sourcePath
- * @returns {{ quote: '"' | "'" | '`', value: string, end: number } | null}
- */
-function readStaticStringLiteral(source, startIndex, sourcePath) {
-  const quote = source[startIndex];
-  if (!STATIC_LITERAL_QUOTES.has(quote)) return null;
-
-  let cursor = startIndex + 1;
-  while (cursor < source.length) {
-    const char = source[cursor];
-    if (char === '\\') {
-      if (source[cursor + 1] === '\r' && source[cursor + 2] === '\n') {
-        cursor += 3;
-      } else {
-        cursor += 2;
-      }
-      continue;
-    }
-    if (quote === '`' && char === '$' && source[cursor + 1] === '{') {
-      throw new Error(`[rss] Interpolated template literal is not supported in static article body source: ${sourcePath}`);
-    }
-    if (quote !== '`' && (char === '\n' || char === '\r')) return null;
-    if (char === quote) {
-      return {
-        quote,
-        value: source.slice(startIndex + 1, cursor),
-        end: cursor + 1,
-      };
-    }
-    cursor += 1;
-  }
-
-  return null;
-}
-
-/** Decode a static literal with the same escape policy as the OG reader. */
-function decodeStaticStringLiteral(raw, quote) {
-  let value = '';
-  for (let cursor = 0; cursor < raw.length;) {
-    if (raw[cursor] !== '\\') {
-      value += raw[cursor];
-      cursor += 1;
-      continue;
-    }
-
-    const escaped = raw[cursor + 1];
-    if (escaped === undefined) {
-      value += '\\';
-      cursor += 1;
-      continue;
-    }
-    if (escaped === '\r' || escaped === '\n' || escaped === '\u2028' || escaped === '\u2029') {
-      cursor += escaped === '\r' && raw[cursor + 2] === '\n' ? 3 : 2;
-      continue;
-    }
-    if (quote === '`' && (escaped === '`' || escaped === '$')) {
-      value += escaped;
-      cursor += 2;
-      continue;
-    }
-
-    const escapeLength = escaped === 'u' && /^[0-9a-fA-F]{4}$/.test(raw.slice(cursor + 2, cursor + 6))
-      ? 6
-      : 2;
-    value += decodeTsStringEscapes(raw.slice(cursor, cursor + escapeLength), { newlineAs: '\n' });
-    cursor += escapeLength;
-  }
-  return value;
-}
-
-function skipStaticTrivia(source, startIndex, sourcePath) {
-  let cursor = startIndex;
-  while (cursor < source.length) {
-    if (/\s/.test(source[cursor])) {
-      cursor += 1;
-      continue;
-    }
-    if (source.startsWith('//', cursor)) {
-      cursor = skipLineComment(source, cursor);
-      continue;
-    }
-    if (source.startsWith('/*', cursor)) {
-      const close = source.indexOf('*/', cursor + 2);
-      if (close === -1) throw new Error(`[rss] Unterminated comment in ${sourcePath}`);
-      cursor = close + 2;
-      continue;
-    }
-    break;
-  }
-  return cursor;
-}
-
-const BLOG_BODY_KEY = /^blog\.article\.(.+)\.(body\d+)$/;
-
 function parseLocalizedField(fs, path, rootDir, localesDir, metaFileName, field) {
   const filePath = path.join(rootDir, localesDir, metaFileName);
   if (!fs.existsSync(filePath)) return new Map();
@@ -461,49 +352,16 @@ function parseBlogBodies(fs, path, rootDir, localesDir, bodyDir, locale) {
     const filePath = path.join(dir, file);
     const src = fs.readFileSync(filePath, 'utf-8');
     const articleParts = new Map(); // articleId → { body1: '...', body2: '...' }
-    let cursor = 0;
-    while (cursor < src.length) {
-      cursor = skipStaticTrivia(src, cursor, filePath);
-      if (cursor >= src.length) break;
-      if (!STATIC_LITERAL_QUOTES.has(src[cursor])) {
-        cursor += 1;
-        continue;
+    // Reuse the API parser's lexical scanner so both published surfaces reject
+    // computed body keys instead of silently omitting one and emitting a
+    // partial article. It also gives RSS the same decoded static values.
+    for (const { id, field, value, error } of extractArticleBodyFields(src)) {
+      if (!/^body\d+$/u.test(field)) continue;
+      if (error || typeof value !== 'string') {
+        throw new Error(`[rss] Body property ${id}.${field} is not a static string literal in ${filePath}: ${error || 'no value'}`);
       }
-
-      const keyLiteral = readStaticStringLiteral(src, cursor, filePath);
-      if (!keyLiteral) throw new Error(`[rss] Unterminated string literal in ${filePath}`);
-      const afterKey = skipStaticTrivia(src, keyLiteral.end, filePath);
-
-      const key = decodeStaticStringLiteral(keyLiteral.value, keyLiteral.quote);
-      const keyMatch = BLOG_BODY_KEY.exec(key);
-      if (!keyMatch || src[afterKey] !== ':') {
-        cursor = keyLiteral.end;
-        continue;
-      }
-
-      const valueStart = skipStaticTrivia(src, afterKey + 1, filePath);
-      if (!STATIC_LITERAL_QUOTES.has(src[valueStart])) {
-        throw new Error(`[rss] Body property ${key} must have a static string literal value in ${filePath}`);
-      }
-      const valueLiteral = readStaticStringLiteral(src, valueStart, filePath);
-      if (!valueLiteral) throw new Error(`[rss] Unterminated body value for ${key} in ${filePath}`);
-      const afterValue = skipStaticTrivia(src, valueLiteral.end, filePath);
-      if (src[afterValue] !== ',' && src[afterValue] !== '}') {
-        throw new Error(`[rss] Body property ${key} must end with ',' or '}' in ${filePath}`);
-      }
-
-      const [, id, part] = keyMatch;
       if (!articleParts.has(id)) articleParts.set(id, new Map());
-      // Unescape here, not at render: this text goes straight into
-      // <content:encoded>, and it is the one parsed field that actually
-      // reaches the served bytes — the title/description paths are masked by
-      // the locale-meta lookup winning in renderFeed, this one is not.
-      // All three quote styles are accepted, but interpolated templates are
-      // rejected above: evaluating source code here would make the feed differ
-      // from the static corpus that the OG reader consumes.
-      const decoded = decodeStaticStringLiteral(valueLiteral.value, valueLiteral.quote);
-      articleParts.get(id).set(part, repairLegacyDoubleEscapedBreaks(decoded));
-      cursor = valueLiteral.end;
+      articleParts.get(id).set(field, value);
     }
 
     for (const [id, parts] of articleParts) {
