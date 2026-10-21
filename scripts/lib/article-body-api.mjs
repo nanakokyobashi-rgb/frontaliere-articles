@@ -36,31 +36,6 @@ function skipTrivia(source, offset) {
   return index;
 }
 
-function skipTemplateExpression(source, offset) {
-  let depth = 1;
-  let index = offset;
-  while (index < source.length) {
-    const ch = source[index];
-    if (ch === '"' || ch === "'" || ch === '`') {
-      const token = readQuotedToken(source, index);
-      if (!token) return source.length;
-      index = token.end;
-      continue;
-    }
-    if (ch === '/' && (source[index + 1] === '/' || source[index + 1] === '*')) {
-      index = skipTrivia(source, index);
-      continue;
-    }
-    if (ch === '{') depth += 1;
-    else if (ch === '}') {
-      depth -= 1;
-      if (depth === 0) return index + 1;
-    }
-    index += 1;
-  }
-  return source.length;
-}
-
 function decodeTsLiteral(raw, quote) {
   let decoded = '';
   const escapes = {
@@ -103,7 +78,6 @@ function readQuotedToken(source, offset) {
   if (quote !== "'" && quote !== '"' && quote !== '`') return null;
   const start = offset + 1;
   let index = start;
-  let dynamic = false;
   let unescapedNewline = false;
   while (index < source.length) {
     const ch = source[index];
@@ -113,27 +87,24 @@ function readQuotedToken(source, offset) {
     }
     if (quote !== '`' && (ch === '\n' || ch === '\r')) unescapedNewline = true;
     if (quote === '`' && ch === '$' && source[index + 1] === '{') {
-      dynamic = true;
-      index = skipTemplateExpression(source, index + 2);
-      continue;
+      throw new Error('Interpolated template literal is not supported in static article body source');
     }
     if (ch === quote) {
       const raw = source.slice(start, index);
       if (unescapedNewline) {
-        return { value: null, raw, quote, end: index + 1, dynamic: false, error: 'newline-in-quoted-string' };
+        return { value: null, raw, quote, end: index + 1, error: 'newline-in-quoted-string' };
       }
       return {
-        value: dynamic ? null : decodeTsLiteral(raw, quote),
+        value: decodeTsLiteral(raw, quote),
         raw,
         quote,
         end: index + 1,
-        dynamic,
-        error: dynamic ? 'dynamic-template' : null,
+        error: null,
       };
     }
     index += 1;
   }
-  return { value: null, raw: source.slice(start), quote, end: source.length, dynamic, error: 'unterminated-string' };
+  return { value: null, raw: source.slice(start), quote, end: source.length, error: 'unterminated-string' };
 }
 
 /**

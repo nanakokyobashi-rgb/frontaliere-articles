@@ -11,7 +11,7 @@
  *
  * Il controllo è intenzionalmente dependency-free: gira prima di npm e non
  * importa il parser TypeScript. Legge soltanto la forma emessa dagli writer
- * del corpus (chiavi quoted e stringhe single/double-quoted/template-literal).
+ * del corpus (chiavi quoted e stringhe single/double-quoted/static template literals).
  */
 import fs from 'node:fs';
 import path from 'node:path';

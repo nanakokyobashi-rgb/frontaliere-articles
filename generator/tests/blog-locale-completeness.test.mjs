@@ -77,7 +77,7 @@ test('extractBodyFields ignora chiavi dentro commenti e prosa dei body', () => {
     '/* "blog.article.demo.body5": "commento" */',
     'const body = {',
     "  'blog.article.demo.body1': 'Testo con \\'blog.article.demo.body4\\': falso',",
-    '  \'blog.article.demo.body2\': `Testo con ${"blog.article.demo.body5: falso"}`,',
+    '  \'blog.article.demo.body2\': `Testo con blog.article.demo.body5: falso`,',
     "  'blog.article.demo.body3': 'Tre',",
     '};',
   ].join('\n'));
@@ -86,6 +86,15 @@ test('extractBodyFields ignora chiavi dentro commenti e prosa dei body', () => {
     { id: 'demo', field: 'body2' },
     { id: 'demo', field: 'body3' },
   ]);
+});
+
+test('extractBodyFields rejects interpolation before returning partial body keys', () => {
+  const source = [
+    "const body = { 'blog.article.demo.body1': 'valid before failure' };",
+    'const unrelated = `runtime ${value}`;',
+  ].join('\n');
+
+  assert.throws(() => extractBodyFields(source), /Interpolated template literal/u);
 });
 
 test('FU-009 — il controllo rileva chiavi mancanti e copie italiane', () => {

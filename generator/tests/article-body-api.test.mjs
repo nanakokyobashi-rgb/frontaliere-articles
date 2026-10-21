@@ -55,6 +55,10 @@ test('the static body scanner supports quoted keys, all literal delimiters, FAQ,
 line\`,`;
   const source = [
     '// \'blog.article.example-article.body8\': \'comment\'',
+    '// A template marker in a comment is not source code: `${notDynamic}`',
+    '/* Neither is this: `${notDynamic}` */',
+    'const singleQuoted = \'${notDynamic}\';',
+    'const doubleQuoted = "${notDynamic}";',
     'const body = {',
     "  'blog.article.example-article.body1': 'one\\nline \\'quoted\\' and \\u00a0',",
     '  "blog.article.example-article.body2": "two \\"quoted\\"",',
@@ -189,14 +193,35 @@ test('the producer accepts real body and localized metadata for the 24 educator 
   assert.equal(built, 24);
 });
 
-test('dynamic templates and expressions after literals are reported as invalid', () => {
-  const dynamic = extractArticleBodyFields([
+test('interpolated templates fail the whole source before or after static body fields', () => {
+  const dynamicBefore = [
+    'const unrelated = `prefix ${compute()} suffix`;',
     'const body = {',
-    '  "blog.article.example-article.body1": `prefix ${compute()} suffix`,',
+    '  "blog.article.example-article.body1": `static body`,',
     '};',
-  ].join('\n'));
-  assert.equal(dynamic[0].error, 'dynamic-template');
-  assert.equal(dynamic[0].value, null);
+  ].join('\n');
+  const dynamicAfter = [
+    'const body = {',
+    '  "blog.article.example-article.body1": `static body`,',
+    '};',
+    'const unrelated = `prefix ${compute()} suffix`;',
+  ].join('\n');
+  assert.throws(() => extractArticleBodyFields(dynamicBefore), /Interpolated template literal/u);
+  assert.throws(() => extractArticleBodyFields(dynamicAfter), /Interpolated template literal/u);
+  assert.throws(
+    () => extractArticleBodyFields("const body = { [`blog.article.example-article.${field}.body1`]: 'value' };"),
+    /Interpolated template literal/u,
+  );
+  const sourceWithDynamic = `${sourceFor()}\nconst unrelated = ` + '`prefix ${compute()} suffix`;';
+  assert.throws(() => buildArticleBodyPayload({
+    section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source: sourceWithDynamic,
+  }), /Interpolated template literal/u);
+
+  const deceptiveNestedExpression = [
+    'const body = { "blog.article.example-article.body1": "valid before failure" };',
+    "const other = `prefix ${obj.return / /}/.test(`inner 'blog.article.example-article.body4': 'fake'`)} suffix`;",
+  ].join('\n');
+  assert.throws(() => extractArticleBodyFields(deceptiveNestedExpression), /Interpolated template literal/u);
 
   for (const suffix of [" + ' tail'", ".replace('x', 'y')"]) {
     const fields = extractArticleBodyFields([
