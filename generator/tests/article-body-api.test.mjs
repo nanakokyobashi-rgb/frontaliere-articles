@@ -210,12 +210,49 @@ test('interpolated templates fail the whole source before or after static body f
   assert.throws(() => extractArticleBodyFields(dynamicAfter), /Interpolated template literal/u);
   assert.throws(
     () => extractArticleBodyFields("const body = { [`blog.article.example-article.${field}.body1`]: 'value' };"),
-    /Interpolated template literal/u,
+    /Computed article body properties are not supported/u,
   );
   const sourceWithDynamic = `${sourceFor()}\nconst unrelated = ` + '`prefix ${compute()} suffix`;';
   assert.throws(() => buildArticleBodyPayload({
     section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source: sourceWithDynamic,
   }), /Interpolated template literal/u);
+
+  const sourceWithComputedGetter = [
+    `const bodyKey = 'blog.article.${articleId}.body4';`,
+    sourceFor().replace(
+      `  'blog.article.${articleId}.faq':`,
+      [
+        `  get [bodyKey]() { return 'Optional body'; },`,
+        `  'blog.article.${articleId}.faq':`,
+      ].join('\n'),
+    ),
+  ].join('\n');
+  assert.throws(() => buildArticleBodyPayload({
+    section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source: sourceWithComputedGetter,
+  }), /Computed article body properties are not supported/u);
+
+  const sourceWithComputedGenerator = [
+    `const bodyKey = 'blog.article.${articleId}.body4';`,
+    sourceFor().replace(
+      `  'blog.article.${articleId}.faq':`,
+      [
+        `  *[bodyKey]() { return 'Optional body'; },`,
+        `  'blog.article.${articleId}.faq':`,
+      ].join('\n'),
+    ),
+  ].join('\n');
+  assert.throws(() => buildArticleBodyPayload({
+    section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source: sourceWithComputedGenerator,
+  }), /Computed article body properties are not supported/u);
+
+  const sourceWithArrayDestructuringHelper = `const split = (head, [tail]) => tail;\n${sourceFor()}`;
+  assert.doesNotThrow(() => buildArticleBodyPayload({
+    section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source: sourceWithArrayDestructuringHelper,
+  }));
+  const sourceWithTypedArrayDestructuringHelper = `const split = (head: string, [tail]: string[]) => tail;\n${sourceFor()}`;
+  assert.doesNotThrow(() => buildArticleBodyPayload({
+    section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source: sourceWithTypedArrayDestructuringHelper,
+  }));
 
   const deceptiveNestedExpression = [
     'const body = { "blog.article.example-article.body1": "valid before failure" };',

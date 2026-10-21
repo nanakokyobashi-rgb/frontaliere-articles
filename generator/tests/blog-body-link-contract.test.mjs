@@ -465,6 +465,26 @@ test('il gate rifiuta espressioni concatenate dopo un literal invece di saltarle
   }
 });
 
+test('il gate ammette destrutturazione array in helper accanto a body statici', () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'article-body-link-array-destructure-'));
+  const relative = `${BLOG_BODY_ROOTS[0]}/it/helper.ts`;
+  const file = path.join(fixtureRoot, relative);
+  mkdirSync(path.dirname(file), { recursive: true });
+  writeFileSync(file, [
+    'const split = (head, [tail]) => tail;',
+    'const splitTyped = (head: string, [tail]: string[]) => tail;',
+    "const body = { 'blog.article.fixture.body1': '[ok](https://example.com)' };",
+    '',
+  ].join('\n'), 'utf8');
+  try {
+    const result = scanBlogBodyLinks(fixtureRoot);
+    assert.deepEqual(result.errors, []);
+    assert.deepEqual(result.offenders, []);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('il gate fallisce chiuso sulle chiavi body computed e riporta l’espressione', () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'article-body-link-computed-key-'));
   const relative = `${BLOG_BODY_ROOTS[0]}/it/computed-key.ts`;
@@ -473,6 +493,8 @@ test('il gate fallisce chiuso sulle chiavi body computed e riporta l’espressio
   const sources = [
     "const body = { [`blog.article.${id}.body1`]: '[x](bare-target)' };\n",
     "const body = { [bodyKey]: '[x](bare-target)' };\n",
+    "const body = { 'blog.article.fixture.body1': 'safe', get [bodyKey]() { return 'optional'; } };\n",
+    "const body = { 'blog.article.fixture.body1': 'safe', *[bodyKey]() { return 'optional'; } };\n",
     "const body = { [`blog.article.${id}.${field}`]: '[x](bare-target)' };\n",
     "const body = { [/(?:\\])/.source]: '[x](bare-target)' };\n",
     "const body = { [value.return / /]/]: '[x](bare-target)' };\n",
@@ -503,9 +525,11 @@ test('il gate fallisce chiuso sulle chiavi body computed e riporta l’espressio
       const result = scanBlogBodyLinks(fixtureRoot);
       assert.deepEqual(result.offenders, []);
       assert.equal(result.errors.length, 1);
-      assert.match(result.errors[0].message, /chiave TypeScript computata non verificabile/);
+      assert.match(result.errors[0].message, /chiave TypeScript computata non verificabile/u);
       assert.ok(result.errors[0].message.includes([
         'blog.article.${id}.body1',
+        'bodyKey',
+        'bodyKey',
         'bodyKey',
         'blog.article.${id}.${field}',
         '/(?:\\])/.source',

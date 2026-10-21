@@ -1,6 +1,12 @@
 import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
+import {
+  computedPropertyKeyEnd,
+  hasComputedPropertyPrefix,
+  isTypeScriptIndexSignature,
+  isTypeScriptMappedTypeMember,
+} from './typescript-expression-scanner.mjs';
 import { repairLegacyDoubleEscapedBreaks, tsStringEscapesWithNewlineAs } from '../../generator/scripts/lib/unescape-ts-string.mjs';
 
 export const ARTICLE_BODY_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
@@ -12,7 +18,6 @@ const ARTICLE_KEY_RE = /^blog\.article\.([^'"\r\n]+)\.(body\d+|faq)$/u;
 const ARTICLE_SECTION_RE = /^[a-z0-9-]+$/u;
 const PAYLOAD_KEYS = Object.freeze(['schemaVersion', 'section', 'locale', 'id', 'revision', 'meta', 'translations']);
 const META_KEYS = Object.freeze(['title', 'excerpt', 'imageAlt']);
-
 function skipTrivia(source, offset) {
   let index = offset;
   while (index < source.length) {
@@ -34,6 +39,15 @@ function skipTrivia(source, offset) {
     break;
   }
   return index;
+}
+
+function computedPropertyDelimiter(source, offset) {
+  if (!hasComputedPropertyPrefix(source, offset)) return null;
+  const keyEnd = computedPropertyKeyEnd(source, offset);
+  if (keyEnd < 0) return { keyEnd, delimiter: null };
+  const delimiterOffset = skipTrivia(source, keyEnd);
+  const delimiter = source[delimiterOffset];
+  return { keyEnd, delimiter };
 }
 
 function decodeTsLiteral(raw, quote) {
@@ -121,6 +135,17 @@ export function extractArticleBodyFields(source, { allowEndOfInput = false, vali
     if (afterTrivia !== index) {
       index = afterTrivia;
       continue;
+    }
+    if (text[index] === '[') {
+      const computedProperty = computedPropertyDelimiter(text, index);
+      if (computedProperty
+        && !isTypeScriptIndexSignature(text, index, computedProperty.keyEnd)
+        && !isTypeScriptMappedTypeMember(text, index, computedProperty.keyEnd)
+        && (
+        computedProperty.keyEnd < 0 || computedProperty.delimiter === ':' || computedProperty.delimiter === '('
+      )) {
+        throw new Error('Computed article body properties are not supported in static source');
+      }
     }
     const keyToken = readQuotedToken(text, index);
     if (!keyToken) {

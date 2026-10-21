@@ -22,6 +22,9 @@ import {
 import { decodeTypeScriptString } from '../../generator/scripts/lib/article-meta-block.mjs';
 import {
   computedPropertyKeyEnd,
+  hasComputedPropertyPrefix,
+  isTypeScriptIndexSignature,
+  isTypeScriptMappedTypeMember,
   skipTypeScriptQuotedToken as skipQuotedToken,
 } from '../lib/typescript-expression-scanner.mjs';
 
@@ -158,12 +161,12 @@ function extractArticleBodyValues(source) {
       cursor = skipBlockComment(source, cursor);
       continue;
     }
-    if (char === '[' && (previousToken === '{' || previousToken === ',')) {
+    if (char === '[' && hasComputedPropertyPrefix(source, cursor)) {
       const keyEnd = computedPropertyKeyEnd(source, cursor);
-      if (keyEnd < 0 || source[skipTriviaAndComments(source, keyEnd)] === ':') {
-        // A complete bracketed expression followed by a non-colon can be an
-        // array or destructuring pattern after a call/array comma. Reject an
-        // actual computed property, and fail closed when its end is unknown.
+      const afterKey = keyEnd < 0 ? source.length : skipTriviaAndComments(source, keyEnd);
+      if (!isTypeScriptIndexSignature(source, cursor, keyEnd)
+        && !isTypeScriptMappedTypeMember(source, cursor, keyEnd)
+        && (keyEnd < 0 || source[afterKey] === ':' || source[afterKey] === '(')) {
         const expressionEnd = keyEnd >= 0 ? keyEnd - 1 : source.length;
         const expression = source.slice(cursor + 1, expressionEnd).trim();
         const reported = expression.length > 160 ? expression.slice(0, 157) + '...' : expression;

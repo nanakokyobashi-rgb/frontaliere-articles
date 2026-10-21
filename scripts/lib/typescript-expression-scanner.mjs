@@ -63,6 +63,352 @@ function skipRegexLiteral(source, offset) {
   return -1;
 }
 
+const REGEX_PREFIX_KEYWORDS = new Set([
+  'await', 'case', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return', 'throw',
+  'typeof', 'void', 'yield',
+]);
+const REGEX_PREFIX_PUNCTUATION = new Set([
+  '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>', '=>',
+]);
+const TS_TRIVIA_PATTERN = String.raw`(?:\s|\/\*[\s\S]*?\*\/|\/\/[^\r\n]*(?:\r?\n|$))*`;
+const COMPUTED_PROPERTY_PREFIX_RE = new RegExp(
+  `(?:^|[,{])${TS_TRIVIA_PATTERN}(?:(?:get|set|async|\\*)${TS_TRIVIA_PATTERN})*$`,
+  'u',
+);
+function typeAliasHeaderEqualsOffset(source, offset) {
+  let cursor = skipTrivia(source, offset);
+  if (!/[$_\p{ID_Start}]/u.test(source[cursor] || '')) return -1;
+  cursor += 1;
+  while (/[$_\u200c\u200d\p{ID_Continue}]/u.test(source[cursor] || '')) cursor += 1;
+  cursor = skipTrivia(source, cursor);
+  if (source[cursor] !== '<') return source[cursor] === '=' ? cursor : -1;
+
+  let depth = 0;
+  while (cursor < source.length) {
+    const ch = source[cursor];
+    const next = source[cursor + 1];
+    if (ch === '/' && (next === '/' || next === '*')) {
+      cursor = skipTrivia(source, cursor);
+      continue;
+    }
+    if (ch === '"' || ch === "'" || source.charCodeAt(cursor) === 96) {
+      cursor = skipTypeScriptQuotedToken(source, cursor);
+      continue;
+    }
+    if (ch === '<') depth += 1;
+    else if (ch === '>' && source[cursor - 1] !== '=') {
+      depth -= 1;
+      if (depth === 0) {
+        cursor = skipTrivia(source, cursor + 1);
+        return source[cursor] === '=' ? cursor : -1;
+      }
+    }
+    cursor += 1;
+  }
+  return -1;
+}
+
+function isTypeAssertionBeforeExpression(source, offset) {
+  let cursor = offset;
+  let depth = 0;
+  while (cursor < source.length) {
+    const ch = source[cursor];
+    const next = source[cursor + 1];
+    if (ch === '/' && (next === '/' || next === '*')) {
+      cursor = skipTrivia(source, cursor);
+      continue;
+    }
+    if (ch === '"' || ch === "'" || source.charCodeAt(cursor) === 96) {
+      cursor = skipTypeScriptQuotedToken(source, cursor);
+      continue;
+    }
+    if (ch === '<') depth += 1;
+    else if (ch === '>' && source[cursor - 1] !== '=') {
+      depth -= 1;
+      if (depth === 0) {
+        cursor = skipTrivia(source, cursor + 1);
+        return source[cursor] === '{'
+          || source[cursor] === '('
+          || source[cursor] === '['
+          || ['"', "'", '`', '/'].includes(source[cursor])
+          || ['!', '~', '+', '-'].includes(source[cursor])
+          || /[0-9]/u.test(source[cursor] || '')
+          || source[cursor] === '.' && /[0-9]/u.test(source[cursor + 1] || '')
+          || /[$_\p{ID_Start}]/u.test(source[cursor] || '');
+      }
+    }
+    cursor += 1;
+  }
+  return false;
+}
+
+/**
+ * Report whether `offset` begins a comma-separated element inside parentheses.
+ * Array binding patterns in helper parameters can otherwise look like computed
+ * properties to source scanners. Delimiter nesting keeps commas in annotations
+ * such as callback and object types from changing the outer parameter context.
+ */
+function delimiterContextAt(source, offset) {
+  const delimiters = [];
+  let previousToken = null;
+  let previousSignificantEnd = 0;
+  let pendingTypeAliasEquals = -1;
+  let pendingTypeAliasDepth = -1;
+  let typeAliasDepth = -1;
+  let typeAliasHasRhsToken = false;
+  let typeAliasAngleDepth = 0;
+  let awaitingFunctionParametersDepth = -1;
+  let functionTypeParameterDepth = 0;
+  let awaitingInterfaceBodyDepth = -1;
+  let interfaceTypeParameterDepth = 0;
+  let lastClosedFunctionParameters = false;
+  let pendingFunctionReturnObjectType = false;
+  let variableDeclarationDepth = -1;
+  let variableNamePending = false;
+  let variableTypePending = false;
+  let pendingVariableTypeObject = false;
+  const markToken = (token, closesFunctionParameters = false) => {
+    if (delimiters.length) delimiters.at(-1).lastToken = token;
+    previousToken = token;
+    lastClosedFunctionParameters = closesFunctionParameters;
+    if (typeAliasDepth >= 0 && delimiters.length === typeAliasDepth) typeAliasHasRhsToken = true;
+  };
+  let index = 0;
+  while (index < offset) {
+    const ch = source[index];
+    const next = source[index + 1];
+    if (/\s/u.test(ch)) {
+      index += 1;
+      continue;
+    }
+    if (ch === '/' && (next === '/' || next === '*')) {
+      index = skipTrivia(source, index);
+      continue;
+    }
+    if (ch !== '{') {
+      pendingFunctionReturnObjectType = false;
+      pendingVariableTypeObject = false;
+    }
+    if (awaitingFunctionParametersDepth >= 0 && delimiters.length === awaitingFunctionParametersDepth) {
+      if (ch === '<') functionTypeParameterDepth += 1;
+      else if (ch === '>' && source[index - 1] !== '=' && functionTypeParameterDepth > 0) {
+        functionTypeParameterDepth -= 1;
+      }
+    }
+    if (awaitingInterfaceBodyDepth >= 0 && delimiters.length === awaitingInterfaceBodyDepth) {
+      if (ch === '<') interfaceTypeParameterDepth += 1;
+      else if (ch === '>' && source[index - 1] !== '=' && interfaceTypeParameterDepth > 0) {
+        interfaceTypeParameterDepth -= 1;
+      }
+    }
+    const token = source.startsWith('=>', index)
+      ? '=>'
+      : /[$_\p{ID_Start}]/u.test(ch)
+      ? /^[\w$]+/u.exec(source.slice(index, offset))?.[0]
+      : ch;
+    if (typeAliasDepth >= 0 && typeAliasHasRhsToken && delimiters.length === typeAliasDepth
+      && /[\r\n\u2028\u2029]/u.test(source.slice(previousSignificantEnd, index))
+      && !['&', '|', '?', '[', ':', ',', '>', '=>', 'extends'].includes(token)
+      && !(token === '<' && !isTypeAssertionBeforeExpression(source, index))
+      && !['=', '&', '|', '?', ':', ',', '<', '=>', 'extends'].includes(previousToken)
+      && !(previousToken === '>' && typeAliasAngleDepth > 0)) {
+      typeAliasDepth = -1;
+      typeAliasHasRhsToken = false;
+      typeAliasAngleDepth = 0;
+    }
+    if (ch === "'" || ch === '"' || source.charCodeAt(index) === 96) {
+      index = skipTypeScriptQuotedToken(source, index);
+      markToken('literal');
+      previousSignificantEnd = index;
+      continue;
+    }
+    if (ch === '/' && (previousToken === null
+      || REGEX_PREFIX_PUNCTUATION.has(previousToken)
+      || REGEX_PREFIX_KEYWORDS.has(previousToken))) {
+      const regexEnd = skipRegexLiteral(source, index);
+      if (regexEnd >= 0) {
+        index = regexEnd;
+        markToken('literal');
+        continue;
+      }
+    }
+    if (ch === '(' || ch === '[' || ch === '{') {
+      const interfaceBody = ch === '{' && awaitingInterfaceBodyDepth === delimiters.length
+        && interfaceTypeParameterDepth === 0;
+      const typeLiteral = interfaceBody
+        || ch === '{' && previousToken === ':'
+        && (delimiters.some(({ typeLiteral: parentIsTypeLiteral }) => parentIsTypeLiteral)
+          || pendingFunctionReturnObjectType || pendingVariableTypeObject)
+        || ch === '{' && typeAliasDepth >= 0;
+      const functionParameters = ch === '(' && awaitingFunctionParametersDepth === delimiters.length
+        && functionTypeParameterDepth === 0;
+      if (functionParameters) {
+        awaitingFunctionParametersDepth = -1;
+        functionTypeParameterDepth = 0;
+      }
+      if (interfaceBody) {
+        awaitingInterfaceBodyDepth = -1;
+        interfaceTypeParameterDepth = 0;
+      }
+      markToken(ch);
+      delimiters.push({ delimiter: ch, lastToken: null, typeLiteral, functionParameters });
+      pendingFunctionReturnObjectType = false;
+      pendingVariableTypeObject = false;
+      index += 1;
+      previousSignificantEnd = index;
+      continue;
+    }
+    if (ch === ')' || ch === ']' || ch === '}') {
+      const matching = { ')': '(', ']': '[', '}': '{' }[ch];
+      const closesFunctionParameters = matching === '('
+        && delimiters.at(-1)?.functionParameters === true;
+      if (delimiters.at(-1)?.delimiter === matching) delimiters.pop();
+      if (typeAliasDepth >= 0 && delimiters.length < typeAliasDepth) {
+        typeAliasDepth = -1;
+        typeAliasHasRhsToken = false;
+        typeAliasAngleDepth = 0;
+      }
+      if (pendingTypeAliasDepth >= 0 && delimiters.length < pendingTypeAliasDepth) {
+        pendingTypeAliasEquals = -1;
+        pendingTypeAliasDepth = -1;
+      }
+      markToken(ch, closesFunctionParameters);
+      index += 1;
+      previousSignificantEnd = index;
+      continue;
+    }
+    if (/[A-Za-z_$]/u.test(ch)) {
+      const identifier = /^[A-Za-z_$][\w$]*/u.exec(source.slice(index, offset))[0];
+      if (['const', 'let', 'var'].includes(identifier)) {
+        variableDeclarationDepth = delimiters.length;
+        variableNamePending = true;
+        variableTypePending = false;
+      } else if (variableNamePending && delimiters.length === variableDeclarationDepth) {
+        variableNamePending = false;
+        variableTypePending = true;
+      }
+      if (identifier === 'function' && !['.', '?.'].includes(previousToken)) {
+        awaitingFunctionParametersDepth = delimiters.length;
+        functionTypeParameterDepth = 0;
+      }
+      const afterInterfaceKeyword = identifier === 'interface'
+        ? skipTrivia(source, index + identifier.length)
+        : -1;
+      const hasInterfaceName = afterInterfaceKeyword >= 0
+        && /[$_\p{ID_Start}]/u.test(source[afterInterfaceKeyword] || '');
+      if (identifier === 'interface' && hasInterfaceName && !['.', '?.'].includes(previousToken)) {
+        awaitingInterfaceBodyDepth = delimiters.length;
+        interfaceTypeParameterDepth = 0;
+      }
+      if (identifier === 'type') {
+        const equalsOffset = typeAliasHeaderEqualsOffset(source, index + identifier.length);
+        if (equalsOffset >= 0) {
+          pendingTypeAliasEquals = equalsOffset;
+          pendingTypeAliasDepth = delimiters.length;
+        }
+      }
+      index += identifier.length;
+      markToken(identifier);
+      previousSignificantEnd = index;
+      continue;
+    }
+    if ((ch === '+' && next === '+') || (ch === '-' && next === '-')) {
+      index += 2;
+      markToken('postfix');
+      previousSignificantEnd = index;
+      continue;
+    }
+    if (ch === '=' && next === '>') {
+      index += 2;
+      markToken('=>');
+      previousSignificantEnd = index;
+      continue;
+    }
+    if (ch === ':') {
+      pendingFunctionReturnObjectType = lastClosedFunctionParameters;
+      pendingVariableTypeObject = variableTypePending
+        && delimiters.length === variableDeclarationDepth;
+      variableTypePending = false;
+    } else {
+      pendingFunctionReturnObjectType = false;
+      pendingVariableTypeObject = false;
+    }
+    if ((ch === '=' || ch === ';') && delimiters.length === variableDeclarationDepth) {
+      variableDeclarationDepth = -1;
+      variableNamePending = false;
+      variableTypePending = false;
+    }
+    markToken(ch);
+    index += 1;
+    if (ch === ';' && delimiters.length === typeAliasDepth) {
+      typeAliasDepth = -1;
+      typeAliasHasRhsToken = false;
+      typeAliasAngleDepth = 0;
+    }
+    if (ch === ';' && delimiters.length === pendingTypeAliasDepth) {
+      pendingTypeAliasEquals = -1;
+      pendingTypeAliasDepth = -1;
+    } else if (ch === '=' && index - 1 === pendingTypeAliasEquals
+      && delimiters.length === pendingTypeAliasDepth) {
+      typeAliasDepth = delimiters.length;
+      typeAliasHasRhsToken = false;
+      typeAliasAngleDepth = 0;
+      pendingTypeAliasEquals = -1;
+      pendingTypeAliasDepth = -1;
+    } else if (typeAliasDepth >= 0 && ch === '<') {
+      typeAliasAngleDepth += 1;
+    } else if (typeAliasDepth >= 0 && ch === '>' && typeAliasAngleDepth > 0) {
+      typeAliasAngleDepth -= 1;
+    }
+    previousSignificantEnd = index;
+  }
+
+  return delimiters;
+}
+
+export function isParenthesizedCommaContext(source, offset) {
+  if (source[offset] !== '[') return false;
+  const current = delimiterContextAt(source, offset).at(-1);
+  return current?.delimiter === '(' && current.lastToken === ',';
+}
+
+export function hasComputedPropertyPrefix(source, offset) {
+  const prefix = source.slice(0, offset);
+  return COMPUTED_PROPERTY_PREFIX_RE.test(prefix) && !isParenthesizedCommaContext(source, offset);
+}
+
+/**
+ * A TypeScript index signature has its name annotation inside the brackets,
+ * unlike a computed object key whose colon follows the closing bracket.
+ */
+export function isTypeScriptIndexSignature(source, start, end) {
+  if (end < 0 || source[start] !== '[' || source[end - 1] !== ']') return false;
+  let cursor = skipTrivia(source, start + 1);
+  if (!/[$_\p{ID_Start}]/u.test(source[cursor] || '')) return false;
+  cursor += 1;
+  while (/[$_\u200c\u200d\p{ID_Continue}]/u.test(source[cursor] || '')) cursor += 1;
+  cursor = skipTrivia(source, cursor);
+  if (source[cursor] === '?') cursor = skipTrivia(source, cursor + 1);
+  return source[cursor] === ':';
+}
+
+/**
+ * A mapped type member is written `[Key in Constraint]: Value` directly inside
+ * a type literal. `in keyof T` is also an unambiguous type-only constraint when
+ * the alias is not nested in a parameter annotation.
+ */
+export function isTypeScriptMappedTypeMember(source, start, end) {
+  if (end < 0 || source[start] !== '[' || source[end - 1] !== ']') return false;
+  let cursor = skipTrivia(source, start + 1);
+  if (!/[$_\p{ID_Start}]/u.test(source[cursor] || '')) return false;
+  cursor += 1;
+  while (/[$_\u200c\u200d\p{ID_Continue}]/u.test(source[cursor] || '')) cursor += 1;
+  cursor = skipTrivia(source, cursor);
+  if (source.slice(cursor, cursor + 2) !== 'in'
+    || /[$_\u200c\u200d\p{ID_Continue}]/u.test(source[cursor + 2] || '')) return false;
+  return delimiterContextAt(source, start).at(-1)?.typeLiteral === true;
+}
+
 /**
  * Skip a JavaScript/TypeScript expression up to its matching `}` or `]`.
  * The small lexer tracks regex-vs-division context so delimiters inside regex
