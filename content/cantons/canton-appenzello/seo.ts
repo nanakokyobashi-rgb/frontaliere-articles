@@ -509,6 +509,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-hundwil-imposte-preventivo': {
+    title: 'Hundwil vuole ridurre le imposte nel preventivo 2027',
+    description: 'Il Comune di Hundwil prevede per il 2027 un avanzo di CHF 111\'200, con entrate di CHF 6\'421\'000 e uscite di CHF 6\'309\'800.',
+    keywords: 'frontalieri, ticino, svizzera, italia, hundwil, vuole, ridurre, imposte',
+    ogTitle: 'Hundwil vuole ridurre le imposte nel 2027',
+    ogDescription: 'Hundwil comunica un avanzo previsto di CHF 111\'200 nel 2027, dopo l\'obiettivo di mantenere almeno CHF 100\'000 nonostante la riduzione del coefficiente d\'imposta. Il preventivo indica CHF 6\'421\'000 di entrate e CHF 6\'309\'800 di spese.',
+    canonicalPath: '/articoli-appenzello/hundwil-imposte-preventivo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Hundwil vuole ridurre le imposte nel preventivo 2027",
+      "description": "Il Comune di Hundwil prevede per il 2027 un avanzo di CHF 111'200, con entrate di CHF 6'421'000 e uscite di CHF 6'309'800.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-hundwil-imposte-preventivo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T19:06:08+00:00",
+      "dateModified": "2026-10-21T19:06:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/hundwil-imposte-preventivo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -42,6 +42,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.appenzell-remunerazioni-energia-2027.title': 'Feuerschaukommission Appenzell legt die Vergütungen für 2027 fest',
     'blog.article.appenzell-remunerazioni-energia-2027.excerpt': 'Die Feuerschaukommission Appenzell koppelt die eingespeiste Energie an den stündlichen Börsenpreis und sieht für Anlagen bis 150 kW eine Mindestprämie vor.',
     'blog.article.appenzell-remunerazioni-energia-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.hundwil-imposte-preventivo.title': 'Hundwil will die Steuern im Voranschlag 2027 senken',
+    'blog.article.hundwil-imposte-preventivo.excerpt': 'Für 2027 rechnet Hundwil mit einem Überschuss von CHF 111\'200, Einnahmen von CHF 6\'421\'000 und Ausgaben von CHF 6\'309\'800 sowie einer Senkung der Steuern.',
+    'blog.article.hundwil-imposte-preventivo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

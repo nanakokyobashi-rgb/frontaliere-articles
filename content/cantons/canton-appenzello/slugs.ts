@@ -16,6 +16,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'proporz-gran-consiglio-appenzello': { it: 'proporz-gran-consiglio-appenzello', en: 'proporz-appenzell-grand-council', de: 'proporz-im-grossen-rat', fr: 'proporz-grand-conseil-appenzell' },
  'driessen-oncologia-herisau-2026': { it: 'driessen-oncologia-herisau-2026', en: 'driessen-oncology-herisau-2026', de: 'driessen-onkologie-herisau-2026', fr: 'driessen-oncologie-herisau-2026' },
  'appenzell-remunerazioni-energia-2027': { it: 'appenzell-remunerazioni-energia-2027', en: 'appenzell-energy-remuneration-2027', de: 'appenzell-ruecklieferverguetung-2027', fr: 'appenzell-remuneration-energie-2027' },
+ 'hundwil-imposte-preventivo': { it: 'hundwil-imposte-preventivo', en: 'hundwil-tax-budget', de: 'hundwil-steuern-budget', fr: 'hundwil-impots-budget' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
