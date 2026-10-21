@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/falle-sicurezza-impianti-solari-minacciano-rete-elettrica-elvetica/92076053": {
-    "articleId": "sicurezza-impianti-solari-rete",
-    "ts": "2026-09-18T00:24:00.803Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/smi-riceve-un%27iniezione-farmaceutica%2c-entrano-galderma-e-sandoz/92077634": {
     "articleId": "smi-galderma-sandoz-2026",
     "ts": "2026-09-18T01:31:17.756Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/politica/1958172/protezione-servizio-militi-carenze-organizzazioni": {
     "articleId": "piano-berna-civilisti-cantoni",
     "ts": "2026-10-21T11:26:40.707Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1958245/federale-info-tox-consiglio-casi-industria-cofinanziamento": {
+    "articleId": "cofinanziamento-tox-info-suisse",
+    "ts": "2026-10-21T15:09:04.428Z",
     "keyForm": 2
   }
 }

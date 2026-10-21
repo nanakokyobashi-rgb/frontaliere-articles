@@ -8564,6 +8564,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.piano-berna-civilisti-cantoni.title': 'Civil protection: Bern plans to deploy civilian service personnel',
     'blog.article.piano-berna-civilisti-cantoni.excerpt': 'From January, civil service personnel will be able to work in civil protection The Federal Council amends the implementing ordinances As of January 1, 2025, civil protection had 57\'000',
     'blog.article.piano-berna-civilisti-cantoni.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.cofinanziamento-tox-info-suisse.title': 'Tox Info Suisse: mandatory co-financing for industry',
+    'blog.article.cofinanziamento-tox-info-suisse.excerpt': 'The Federal Council wants to impose co-financing for Tox Info Suisse Chemical and pharmaceutical industries involved Consultation planned until mid-',
+    'blog.article.cofinanziamento-tox-info-suisse.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

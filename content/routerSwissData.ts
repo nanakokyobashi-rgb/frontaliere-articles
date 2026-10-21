@@ -2877,6 +2877,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'tamedia-zurigo-protesta-licenziamenti-ia': { it: 'tamedia-zurigo-protesta-licenziamenti-ia', en: 'tamedia-zurich-protest-layoffs-ai', de: 'tamedia-zuerich-protest-stellenabbau-ki', fr: 'tamedia-zurich-proteste-licenciements-ia' },
  'pacchetto-imprese-sgravi': { it: 'pacchetto-imprese-sgravi', en: 'swiss-competitiveness-package', de: 'schweizer-wettbewerbspaket', fr: 'paquet-competitivite-suisse' },
  'piano-berna-civilisti-cantoni': { it: 'piano-berna-civilisti-cantoni', en: 'bern-civil-protection-plan', de: 'bern-zivilschutz-plan', fr: 'plan-berne-protection-civile' },
+ 'cofinanziamento-tox-info-suisse': { it: 'cofinanziamento-tox-info-suisse', en: 'cofinancing-tox-info-suisse', de: 'cofinanzierung-tox-info-suisse', fr: 'cofinancement-tox-info-suisse' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
