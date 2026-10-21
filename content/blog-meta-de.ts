@@ -13551,6 +13551,11 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.frontalieri-luino-incontro-fisco-previdenza-sanita.title': 'Grenzgänger: Treffen zu Steuern, Vorsorge und Gesundheit',
     'blog.article.frontalieri-luino-incontro-fisco-previdenza-sanita.excerpt': 'Samstag, 24. (Verbania)',
     'blog.article.frontalieri-luino-incontro-fisco-previdenza-sanita.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.bollettino-frontaliere-2026-10-21.title': 'Grenzgänger: die verfügbaren Messwerte von heute — 21. Oktober 2026',
+    'blog.article.bollettino-frontaliere-2026-10-21.excerpt': 'Die Zahlen von heute, 21. Oktober 2026, für Grenzgänger: die zuletzt gemeldeten Wartezeiten an den Übergängen, die günstigsten Benzinpreise, der Franken-Euro-Kurs und aktive Stellenanzeigen in der Schweiz auf unserem Job-Board. Täglich aus unserem Monitoring.',
+    'blog.article.bollettino-frontaliere-2026-10-21.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.bollettino-frontaliere-2026-10-21.seoDescription': 'Grenzgänger-Bulletin am 21. Oktober 2026: aktuelle Wartezeiten, Benzinpreise, CHF/EUR-Kurs und offene Stellen in der Schweiz.',
+    'blog.article.bollettino-frontaliere-2026-10-21.ogDescription': 'Die Zahlen vom 21. Oktober 2026 für Grenzgänger: wie lange man an jedem Übergang wartet, wo das Benzin am günstigsten ist, der aktuelle Franken-Euro-Kurs und die Zahl aktiver Stellenanzeigen auf unserem Job-Board in der Schweiz.',
 };
 
 export default blogMetaDe;

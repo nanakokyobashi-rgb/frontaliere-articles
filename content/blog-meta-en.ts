@@ -13552,6 +13552,11 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.frontalieri-luino-incontro-fisco-previdenza-sanita.title': 'Cross-Border Workers Meet: Tax, Social Security & Health',
     'blog.article.frontalieri-luino-incontro-fisco-previdenza-sanita.excerpt': 'Saturday, October 24, meeting at Palazzo Verbania Three sessions on tax, health and social security Reception from 9.30; proceedings at 10 Free admission',
     'blog.article.frontalieri-luino-incontro-fisco-previdenza-sanita.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.bollettino-frontaliere-2026-10-21.title': 'Cross-border workers: today\'s verified readings — October 21, 2026',
+    'blog.article.bollettino-frontaliere-2026-10-21.excerpt': 'Today\'s numbers, October 21, 2026, for cross-border commuters: the latest crossing waits, cheapest fuel municipalities, the franc-euro rate and active Swiss job listings on our job board. Measured daily by our own monitoring.',
+    'blog.article.bollettino-frontaliere-2026-10-21.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.bollettino-frontaliere-2026-10-21.seoDescription': 'Cross-border daily brief for workers, October 21, 2026: latest waits, fuel prices, CHF/EUR rate and active jobs in Switzerland.',
+    'blog.article.bollettino-frontaliere-2026-10-21.ogDescription': 'Daily figures for cross-border commuters, October 21, 2026: measured waits at each crossing, where fuel costs least, the latest franc-euro rate and active Swiss job listings on our board, with links to live pages.',
 };
 
 export default blogMetaEn;

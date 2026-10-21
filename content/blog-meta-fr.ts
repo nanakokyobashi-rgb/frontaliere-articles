@@ -13554,6 +13554,11 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.frontalieri-luino-incontro-fisco-previdenza-sanita.title': 'Réunion pour frontaliers : fiscalité, prévoyance, santé',
     'blog.article.frontalieri-luino-incontro-fisco-previdenza-sanita.excerpt': 'Samedi 24 octobre, rencontre au Palazzo Verbania Trois sessions sur la fiscalité, la santé et la prévoyance Accueil à partir de 9.30 ; début des travaux à 10',
     'blog.article.frontalieri-luino-incontro-fisco-previdenza-sanita.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.bollettino-frontaliere-2026-10-21.title': 'Frontaliers : les relevés disponibles aujourd’hui — 21 octobre 2026',
+    'blog.article.bollettino-frontaliere-2026-10-21.excerpt': 'Les chiffres du jour, 21 octobre 2026, pour les frontaliers : les dernières attentes aux douanes, les communes où le carburant coûte le moins cher, le taux franc-euro et les offres d\'emploi actives en Suisse sur notre job board. Relevés quotidiens de notre suivi.',
+    'blog.article.bollettino-frontaliere-2026-10-21.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.bollettino-frontaliere-2026-10-21.seoDescription': 'Bulletin frontalier 21 octobre 2026 : attentes aux douanes, prix du carburant, taux CHF/EUR et offres d\'emploi actives en Suisse.',
+    'blog.article.bollettino-frontaliere-2026-10-21.ogDescription': 'Les chiffres du 21 octobre 2026 pour les frontaliers : attentes aux douanes, communes où le carburant coûte le moins cher, dernier taux CHF/EUR et offres d\'emploi actives sur notre job board suisse au quotidien.',
 };
 
 export default blogMetaFr;
