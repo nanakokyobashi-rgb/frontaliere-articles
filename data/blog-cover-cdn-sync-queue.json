@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-tamedia-zurigo-protesta-licenziamenti-ia.webp",
+      "sha256": "51a667880b75a16f37c83fd5b993d125c7c39b518c9ffd6ac7f2c7bc08a2ca26"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-tamedia-zurigo-protesta-licenziamenti-ia-480w.webp",
+      "sha256": "ad4bfaeaab59162f46665f6c483e08a50841d36c9db9e1a09feaa800cf3edb81"
+    }
+  ]
 }
