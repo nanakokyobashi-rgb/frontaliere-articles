@@ -234,7 +234,7 @@
       "reason": "Deduplica e riaccoda i replay stale dei workflow fast-publish di sezione dopo aver verificato lo stato reale della run. Il sito non ha il publisher per-corpus né questo helper di dispatch, quindi il path resta specifico del corpus.",
       "baseline": {
         "site": null,
-        "corpus": "1ef29537c6eb45ab",
+        "corpus": "ca37c2446467fcec",
         "alignedAt": "2026-10-21"
       }
     },
