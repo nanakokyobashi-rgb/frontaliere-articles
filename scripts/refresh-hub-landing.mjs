@@ -181,6 +181,39 @@ const { renderArticleHubCards, ensureArticleHubCards, ARTICLE_HUB_GRID_OPEN: GRI
   await import('../engine/articlesHubCards.ts');
 const { rewriteBlogImageRefs, hasBlogImageLeak } = await import('../engine/blogImageCdnFinalize.ts');
 
+// The route-owner resolver is introduced by the mirrored engine lockstep. Keep
+// the writer runnable against the older engine while that mirror is landing,
+// but always pass the callback to the shared renderer so the resolver becomes
+// effective as soon as the engine carries it.
+let resolveArticleHref = (href) => href;
+const routeOwnershipModule = path.join(ROOT, 'engine', 'shared', 'articleRouteOwnership.mjs');
+if (fs.existsSync(routeOwnershipModule)) {
+  const { loadArticleRouteRedirects, resolveArticleRouteHref } =
+    await import('../engine/shared/articleRouteOwnership.mjs');
+  const { loadSwissArticleCanonicalOverrides } =
+    await import('../engine/shared/swissArticleCanonicalOverrides.ts');
+  const articleLinkCanonicalOverrides = {};
+  for (const section of SHARD_SECTIONS) {
+    if (!section.canonicalOverrides) continue;
+    Object.assign(
+      articleLinkCanonicalOverrides,
+      loadSwissArticleCanonicalOverrides(
+        fs,
+        path.join(ROOT, section.canonicalOverrides),
+      ),
+    );
+  }
+  const articleRouteMaps = {
+    redirects: loadArticleRouteRedirects(
+      fs,
+      path.join(ROOT, 'data', 'article-redirects.json'),
+      path.join(ROOT, 'build-plugins', 'legacyRedirectsPlugin.ts'),
+    ),
+    canonicalOverrides: articleLinkCanonicalOverrides,
+  };
+  resolveArticleHref = (href) => resolveArticleRouteHref(href, articleRouteMaps);
+}
+
 /** Trailing-slash key form, identical to staticPagesPlugin's `seoKey`. */
 const seoKey = (p) => {
   const clean = String(p).replace(/\/+$/, '');
@@ -368,6 +401,7 @@ for (const section of SECTIONS) {
       localePrefix: locale === 'it' ? '' : locale,
       resolveSlug: (id) => slugMap[id]?.[locale],
       resolveMeta,
+      resolveHref: resolveArticleHref,
     });
     if (missing > 0) {
       console.error(`[hub-landing] ${section.name}/${locale}: ${missing} of the top 100 have no title in either source — refusing to publish a degraded grid`);

@@ -52,6 +52,12 @@ test('the writer applies the fast-publish generic-image fallback map to cards', 
   assert.match(writer, /rewriteGenericImageRefs\(rewriteBlogImageRefs\(cards\), RELEASED_ARTICLES\)/);
 });
 
+test('the writer passes the shared article route-owner resolver to cards', () => {
+  assert.match(writer, /loadArticleRouteRedirects/);
+  assert.match(writer, /canonicalOverrides: articleLinkCanonicalOverrides/);
+  assert.match(writer, /resolveHref: resolveArticleHref/);
+});
+
 test('the writer does not fall back to refresh-only', () => {
   // A regression to `replaceArticleHubCards` would restore the exact silent
   // no-op: null on a marker-less page, "nothing to refresh", exit 0.
