@@ -39,6 +39,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.title': 'Zurich : pas d’initiative sur le congé parental, gauche et centre divisés',
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.excerpt': 'Le canton de Zurich ne présentera pas l’initiative cantonale sur le congé parental : la gauche et les partis du centre, initialement favorables, ne sont pas parvenus à un accord.',
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.organico-comunale-zurigo.title': 'Budget 2027 de Zurich : 640 postes supplémentaires dans l’administration',
+    'blog.article.organico-comunale-zurigo.excerpt': 'Le budget 2027 de la ville de Zurich prévoit 640 postes supplémentaires dans l’administration.',
+    'blog.article.organico-comunale-zurigo.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZhFr;

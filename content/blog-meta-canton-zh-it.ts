@@ -39,6 +39,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.title': 'Zurigo: niente iniziativa congedo parentale, sinistra e centro divisi',
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.excerpt': 'Il Canton Zurigo non presenterà la Standesinitiative sul congedo parentale: sinistra e partiti di centro, inizialmente favorevoli, non hanno trovato un accordo.',
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.organico-comunale-zurigo.title': 'Budget 2027 di Zurigo: 640 posti in più in amministrazione',
+    'blog.article.organico-comunale-zurigo.excerpt': 'Il bilancio 2027 della città di Zurigo prevede altri 640 posti nell\'amministrazione.',
+    'blog.article.organico-comunale-zurigo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZhIt;

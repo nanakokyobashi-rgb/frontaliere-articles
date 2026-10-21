@@ -39,6 +39,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.title': 'Zurich: no parental leave initiative, left and center divided',
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.excerpt': 'The Canton of Zurich will not submit the cantonal initiative on parental leave: left-wing and centrist parties, initially in favor, failed to reach an agreement.',
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.organico-comunale-zurigo.title': 'Zurich\'s 2027 budget: 640 additional positions in administration',
+    'blog.article.organico-comunale-zurigo.excerpt': 'The 2027 budget of the city of Zurich provides for another 640 positions in the administration.',
+    'blog.article.organico-comunale-zurigo.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZhEn;
