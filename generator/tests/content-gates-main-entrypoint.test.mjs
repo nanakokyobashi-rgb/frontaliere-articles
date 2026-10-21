@@ -11,6 +11,7 @@ const ENTRYPOINT = path.join(ROOT, 'scripts/ci/content-gates-main.mjs');
 const OFFLINE_ENV = {
   PATH: '/usr/bin:/bin',
   TMPDIR: os.tmpdir(),
+  ARTICLE_SOURCE_TYPESCRIPT: process.env.ARTICLE_SOURCE_TYPESCRIPT,
 };
 test('content-gates-main si importa senza eseguire il ramo CLI', () => {
   const result = spawnSync(process.execPath, [
