@@ -1291,6 +1291,18 @@ test('publisher: argomenti', () => {
   assert.throws(() => parseArgs(['--section', 'canton-ti', '--boh']), /argomento sconosciuto/);
   assert.equal(parseArgs(['--section', 'canton-ti', '--previous-revision', 'abc1234', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).previousRevision, 'abc1234');
   assert.equal(parseArgs(['--section', 'canton-ti', '--remove-stale-canton-rss-feeds', '--out', 'o', '--summary', 's'], { active: ACTIVE_WITH_TI }).removeStaleCantonRssFeeds, true);
+  assert.equal(
+    parseArgs(['--section', 'canton-ti', '--remove-stale-canton-rss-feeds', '--cleanup-inactive-surface', '--out', 'o', '--summary', 's'], { active: HISTORICAL_CORE }).cleanupInactiveSurface,
+    true,
+  );
+  assert.throws(
+    () => parseArgs(['--section', 'canton-ti', '--cleanup-inactive-surface', '--out', 'o', '--summary', 's'], { active: HISTORICAL_CORE }),
+    /richiede --remove-stale-canton-rss-feeds/,
+  );
+  assert.throws(
+    () => parseArgs(['--section', 'canton-ti', '--remove-stale-canton-rss-feeds', '--cleanup-inactive-surface', '--bootstrap', '--out', 'o', '--summary', 's'], { active: HISTORICAL_CORE }),
+    /non si combina con bootstrap/,
+  );
   assert.throws(
     () => parseArgs(['--section', 'canton-ti', '--bootstrap', '--id', 'a', '--out', 'o', '--summary', 's']),
     /non si combina/,
@@ -3013,6 +3025,21 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     [{ section: 'canton-ti', ids: [], bootstrap: false, removeStaleCantonRssFeeds: true }],
     'il reconcile schedule/manuale deve pulire i feed dopo un kill-switch o una demozione',
   );
+  assert.deepEqual(
+    liveR2ReconciliationPlan({
+      schema: 1,
+      commit: releaseCommit,
+      sections: {
+        'canton-ti': { status: 'live' },
+        'canton-gr': { status: 'live' },
+      },
+    }, WITH_TI, releaseCommit),
+    [
+      { section: 'canton-ti', ids: [], bootstrap: true },
+      { section: 'canton-gr', ids: [], bootstrap: false, removeStaleCantonRssFeeds: true, cleanupInactiveSurface: true },
+    ],
+    'una sezione live nell edge ma assente dalla core attiva riceve un cleanup esplicito',
+  );
   assert.deepEqual(liveRegistryTransitionSections(registryAfter, registryAfter, WITH_TI), []);
   assert.throws(
     () => liveRegistryTransitionSections(
@@ -3099,6 +3126,23 @@ test('piano API push: aggiorna tutte le superfici cantonali live senza ampliare 
     ],
     'conserva il diff degli articoli e aggiunge il cleanup edge delle sezioni non-live',
   );
+  assert.deepEqual(
+    r2ApiPushPlan([], [{
+      section: 'canton-gr',
+      ids: [],
+      bootstrap: false,
+      removeStaleCantonRssFeeds: true,
+      cleanupInactiveSurface: true,
+    }], [...HISTORICAL_CORE_LIST, TI]),
+    [{
+      section: 'canton-gr',
+      ids: [],
+      bootstrap: false,
+      removeStaleCantonRssFeeds: true,
+      cleanupInactiveSurface: true,
+    }],
+    'il piano API conserva il cleanup-only di una sezione rimossa dalla core attiva',
+  );
 });
 
 test('fast-publish verso gli shard ignora i corpi cantonali, quello R2 ignora le storiche', () => {
@@ -3140,11 +3184,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     wf.indexOf('\n          before="${PUSH_BEFORE:-}"', staleResolveStart),
   );
   assert.match(staleResolve, /FIREBASE_SERVICE_ACCOUNT_JSON assente/);
-  assert.match(staleResolve, /gh workflow run fast-publish-section\.yml --repo "\$REPO" --ref main/);
+  assert.match(staleResolve, /bash scripts\/ci\/dispatch-fast-publish-replay\.sh "\$REPO" "\$dispatch_title" --ref main/);
   assert.match(staleResolve, /-f source_commit="\$current_main"/);
   assert.match(staleResolve, /-f dispatch_nonce="\$dispatch_nonce"/);
   assert.match(staleResolve, /-f push_after="\$replay_after"/);
-  assert.match(staleResolve, /"\$replay_after" \\\n\s+"\$\{DISPATCH_NONCE_INPUT:-\}"/);
+  assert.match(staleResolve, /-f cleanup_inactive_surface="\$cleanup_inactive_surface"/);
   assert.match(staleResolve, /replay_after="\$current_main"/);
   assert.doesNotMatch(staleResolve, /replay_after="\$\{DISPATCH_PUSH_AFTER:-\}"/);
   assert.match(staleResolve, /git fetch --no-tags --depth=1 origin[\s\S]*refs\/heads\/main:refs\/remotes\/origin\/fast-publish-current-main/);
@@ -3152,7 +3196,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(staleResolve, /tar -x -C "\$current_main_source"/);
   assert.match(staleResolve, /replay_matrix="\$\(reconcile_edge_matrix "\$pinned_source" "\$current_main" "\$current_main_source"\)"/);
   assert.ok(
-    staleResolve.indexOf('gh workflow run fast-publish-section.yml') < staleResolve.indexOf("echo 'matrix=[]'"),
+    staleResolve.indexOf('bash scripts/ci/dispatch-fast-publish-replay.sh') < staleResolve.indexOf("echo 'matrix=[]'"),
     'il resolve deve redispatchare un replay stale prima di produrre una matrix vuota',
   );
   assert.match(wf, /- name: Guard pinned replay freshness/);
@@ -3168,7 +3212,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(dispatchPlan, /FAST_PUBLISH_ARMED/);
   assert.equal((wf.match(/-f dry_run="\$DRY"/g) ?? []).length, 3, 'tutti i redispatch propagano il dry-run calcolato');
   assert.doesNotMatch(wf, /-f dry_run=false/);
-  assert.equal((wf.match(/gh workflow run fast-publish-section\.yml --repo "\$(?:REPO|REPOSITORY)" --ref main/g) ?? []).length, 4);
+  assert.equal((wf.match(/bash scripts\/ci\/dispatch-fast-publish-replay\.sh/g) ?? []).length, 4);
+  assert.equal((wf.match(/-f cleanup_inactive_surface="\$[A-Za-z_]+"/g) ?? []).length, 4);
+  assert.match(wf, /CLEANUP_INACTIVE_SURFACE_INPUT: \$\{\{ inputs\.cleanup_inactive_surface \}\}/);
+  assert.match(wf, /CLEANUP_INACTIVE_SURFACE: \$\{\{ matrix\.target\.cleanupInactiveSurface \|\| false \}\}/);
   assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /-f source_commit="\$current_main"/);
   assert.equal(
@@ -3223,6 +3270,13 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     3,
     'resolve, late guard e recovery devono propagare il flag del replay API',
   );
+  const replayDispatcher = read('scripts/ci/dispatch-fast-publish-replay.sh');
+  assert.match(replayDispatcher, /--json databaseId,displayTitle,status,conclusion/);
+  assert.match(replayDispatcher, /\.status == "queued" or \.status == "in_progress"/);
+  assert.match(replayDispatcher, /\.status == "completed" and \.conclusion == "success"/);
+  assert.match(replayDispatcher, /\.status == "completed" and \.conclusion != "success"/);
+  assert.match(replayDispatcher, /for poll in \{1\.\.10\}; do/);
+  assert.match(replayDispatcher, /ultimo replay fallito; riaccodo/);
   const reconcileStart = wf.indexOf('          reconcile_edge_matrix() {');
   const reconcileEnd = wf.indexOf('          pinned_source=', reconcileStart);
   const reconcile = wf.slice(reconcileStart, reconcileEnd);
@@ -3239,6 +3293,15 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.doesNotMatch(staleResolve, /replay_before="\$\{DISPATCH_PUSH_BEFORE:-\}"/);
   assert.match(wf, /replay_matrix="\$\(reconcile_edge_matrix "\$pinned_source" "\$current_main" "\$current_main_source"\)"/);
   assert.match(wf, /edge_matrix="\$\(reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"\)"/);
+  assert.match(wf, /cleanupInactiveSurface/);
+  const fastPublishSection = read('scripts/ci/fast-publish-section.mjs');
+  assert.match(fastPublishSection, /allCore = ARTICLE_SECTION_CORE_ALL/);
+  assert.match(fastPublishSection, /cleanupInactiveSurface: true/);
+  assert.match(fastPublishSection, /status !== 'live' && status !== 'retired'/);
+  const sectionPublisher = read('scripts/publish-section-pages.mjs');
+  assert.match(sectionPublisher, /--cleanup-inactive-surface/);
+  assert.match(sectionPublisher, /assertKnownCantonSection/);
+  assert.match(sectionPublisher, /manifest pagine edge assente o non verificabile; nessuna pagina viene cancellata/);
   assert.match(wf, /replay bounded stantio: ricalcolo la release API sulla HEAD/);
   assert.match(wf, /git rev-parse --is-shallow-repository/);
   assert.match(wf, /remove_stale_canton_rss_feeds/);
@@ -3332,7 +3395,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     stagedReplay.indexOf('- name: Replay publish-api after staged release'),
   );
   assert.match(staleRecoveryStep, /if: steps\.replay_freshness\.outputs\.fresh == 'false'/);
-  assert.match(staleRecoveryStep, /gh workflow run fast-publish-section\.yml --repo "\$REPOSITORY" --ref main/);
+  assert.match(staleRecoveryStep, /bash scripts\/ci\/dispatch-fast-publish-replay\.sh "\$REPOSITORY" "\$dispatch_title" --ref main/);
   assert.match(staleRecoveryStep, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(staleRecoveryStep, /-f source_main_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /push_before:/);
