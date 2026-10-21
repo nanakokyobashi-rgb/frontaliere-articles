@@ -326,6 +326,21 @@ describe('lettore TS condiviso', () => {
     }
   });
 
+  test('rifiuta metodi, accessor e spread prima di restituire una mappa parziale', () => {
+    const invalidSources = [
+      "'blog.article.demo.title'() { return 'dynamic'; },\n'blog.article.demo.body1': 'valid',",
+      "get ['blog.article.demo.title']() { return 'dynamic'; },\n'blog.article.demo.body1': 'valid',",
+      "...dynamic,\n'blog.article.demo.body1': 'valid',",
+    ];
+
+    for (const source of invalidSources) {
+      assert.throws(
+        () => readTsStringMap(source),
+        /(?:methods and accessors|Spread members)/u,
+      );
+    }
+  });
+
   test('rifiuta un commento non chiuso invece di restituire la mappa parziale', () => {
     const source = "'blog.article.demo.body1': 'valid',\n/* commento incompleto";
     assert.throws(() => readTsStringMap(source), /Unterminated comment/u);

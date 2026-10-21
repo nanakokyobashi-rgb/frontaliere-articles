@@ -119,7 +119,8 @@ function staticSourceTokens(src) {
 /**
  * Le chiavi fra parentesi quadre sono espressioni, anche quando contengono un
  * solo letterale. Non possono quindi contribuire a una mappa statica: se le
- * ignorassimo, il chiamante riceverebbe una mappa parziale.
+ * ignorassimo, il chiamante riceverebbe una mappa parziale. La stessa guardia
+ * copre i metodi e gli accessor con chiave computata.
  */
 function assertNoComputedPropertyKeys(tokens) {
   for (let i = 0; i < tokens.length; i += 1) {
@@ -130,7 +131,6 @@ function assertNoComputedPropertyKeys(tokens) {
     const startsProperty = !previous || (
       previous.type === 'punctuation' && (previous.value === '{' || previous.value === ',')
     );
-    if (!startsProperty) continue;
 
     let depth = 1;
     let end = i + 1;
@@ -146,8 +146,34 @@ function assertNoComputedPropertyKeys(tokens) {
     const afterOptionalMarker = next?.type === 'punctuation' && next.value === '?'
       ? tokens[end + 1]
       : next;
+    if (!startsProperty && !(afterOptionalMarker?.type === 'punctuation' && afterOptionalMarker.value === '(')) {
+      continue;
+    }
     if (afterOptionalMarker?.type === 'punctuation' && afterOptionalMarker.value === ':') {
       throw new Error('Computed article map keys are not supported in static article sources');
+    }
+    if (afterOptionalMarker?.type === 'punctuation' && afterOptionalMarker.value === '(') {
+      throw new Error('Computed article map methods and accessors are not supported in static article sources');
+    }
+  }
+}
+
+/** Rifiuta membri che il lettore non puo' materializzare senza eseguire codice. */
+function assertNoDynamicObjectMembers(tokens) {
+  for (let i = 0; i < tokens.length; i += 1) {
+    const token = tokens[i];
+    const next = tokens[i + 1];
+    const nextNext = tokens[i + 2];
+
+    if (token.type === 'punctuation' && token.value === '.' &&
+      next?.type === 'punctuation' && next.value === '.' &&
+      nextNext?.type === 'punctuation' && nextNext.value === '.') {
+      throw new Error('Spread members are not supported in static article sources');
+    }
+
+    if (token.type === 'string' && token.value.startsWith('blog.article.') &&
+      next?.type === 'punctuation' && next.value === '(') {
+      throw new Error('Article map methods and accessors are not supported in static article sources');
     }
   }
 }
@@ -155,6 +181,7 @@ function assertNoComputedPropertyKeys(tokens) {
 /** Tutte le coppie `'chiave': <letterale>` di un sorgente TS di stringhe. */
 export function readTsStringMap(src) {
   const tokens = staticSourceTokens(src);
+  assertNoDynamicObjectMembers(tokens);
   assertNoComputedPropertyKeys(tokens);
   const out = new Map();
   for (let i = 0; i < tokens.length; i += 1) {
