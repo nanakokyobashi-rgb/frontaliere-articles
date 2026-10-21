@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-hackeraggio-ipct-casse-pensioni-ticino.webp",
+      "sha256": "89a7f3f8d2f65ee46bccde1d25b6e2ea1b539ba519464eac5757ef19af485720"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-hackeraggio-ipct-casse-pensioni-ticino-480w.webp",
+      "sha256": "34e3bd407ffab38d4887a815261d848c053cea1c71a1d5fffe1bafeca7731618"
+    }
+  ]
 }
