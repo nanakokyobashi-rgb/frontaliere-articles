@@ -169,6 +169,26 @@ without escape',`);
   assert.equal(invalid[0].error, 'newline-in-quoted-string');
 });
 
+test('the body parser fails closed on truncated trivia and strings after valid fields', () => {
+  const truncatedComment = [
+    "'blog.article.example-article.body1': 'valid before failure',",
+    '/* unfinished',
+  ].join('\n');
+  assert.throws(
+    () => extractArticleBodyFields(truncatedComment),
+    /Unterminated block comment in static article body source/u,
+  );
+
+  const truncatedString = [
+    "'blog.article.example-article.body1': 'valid before failure',",
+    "'not-an-article-key",
+  ].join('\n');
+  assert.throws(
+    () => extractArticleBodyFields(truncatedString),
+    /Malformed string token in static article body source: unterminated-string/u,
+  );
+});
+
 test('the producer accepts real body and localized metadata for the 24 educator pages', () => {
   const ids = [
     'frontaliere-educatore-ticino-stipendio-requisiti',
