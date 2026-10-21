@@ -744,12 +744,14 @@
     },
     {
       "path": "scripts/ci/mint-app-token.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3041",
       "baseline": {
         "site": "03d134062c864679",
         "corpus": "03d134062c864679",
         "alignedAt": "2026-10-07"
-      }
+      },
+      "reason": "Il trasporto non puo' copiare questo entry point in isolamento: il corpus usa l'implementazione inline adattata di `scripts/lib/githubApiHeaders.mjs`, mentre il sito re-esporta il builder dalle Cloud Functions; inoltre il sito ha il capability gate `APP_TOKEN_REQUEST_DEPLOYMENTS_READ`/`APP_TOKEN_DEPLOYMENTS_READ` che qui non esiste. La divergenza e' intenzionale e resta governata da #3041 finche' i due contratti non vengono riconciliati."
     },
     {
       "path": "scripts/ci/pr-autorebase.mjs",
@@ -3087,11 +3089,11 @@
     {
       "path": "generator/scripts/lib/ts-string-map.mjs",
       "mode": "corpus-only",
-      "reason": "Lettore dei sorgenti TS di stringhe del corpus (`readTsStringLiteral`, `readTsStringMap`): un solo decodificatore per i due backfill del registry (`backfill-article-cantons.mjs` e `backfill-article-type.mjs`), che ne avevano una copia ciascuno identica riga per riga (review della PR #2312). Corpus-only: legge `content/blog-body*/it`, che esiste solo qui; il sito non ha i due backfill. Senza dipendenze, come gli altri moduli del registry.",
+      "reason": "Lettore fail-closed dei sorgenti TS di stringhe del corpus (`readTsStringLiteral`, `readTsStringMap`): un solo decodificatore per i due backfill del registry (`backfill-article-cantons.mjs` e `backfill-article-type.mjs`), che ne avevano una copia ciascuno identica riga per riga (review della PR #2312); rifiuta valori e chiavi computate prima di restituire una mappa parziale. Corpus-only: legge `content/blog-body*/it`, che esiste solo qui; il sito non ha i due backfill. Senza dipendenze, come gli altri moduli del registry.",
       "baseline": {
         "site": null,
-        "corpus": "628630f8ef0e0852",
-        "alignedAt": "2026-10-06"
+        "corpus": "ea751bceb94720a8",
+        "alignedAt": "2026-10-21"
       }
     },
     {

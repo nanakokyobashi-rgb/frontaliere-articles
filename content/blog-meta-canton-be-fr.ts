@@ -45,6 +45,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.berna-stato-pagina-non-disponibile.title': 'État de la page de l\'administration bernoise',
     'blog.article.berna-stato-pagina-non-disponibile.excerpt': 'Le contenu de la page indiquée n\'est pas disponible.',
     'blog.article.berna-stato-pagina-non-disponibile.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.kurzarbeit-regole-ordinarie.title': 'Conseil fédéral : le chômage partiel vers le régime ordinaire',
+    'blog.article.kurzarbeit-regole-ordinarie.excerpt': 'Le Conseil fédéral envisage un retour progressif : le chômage partiel de 24 à 12 mois et le délai d’attente de 1 jour à un maximum de trois jours.',
+    'blog.article.kurzarbeit-regole-ordinarie.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBeFr;

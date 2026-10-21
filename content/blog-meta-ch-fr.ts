@@ -8564,6 +8564,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.piano-berna-civilisti-cantoni.title': 'Protection civile : Berne prévoit l\'emploi des civilistes',
     'blog.article.piano-berna-civilisti-cantoni.excerpt': 'Dès janvier, les civilistes pourront intervenir dans la protection civile Le Conseil fédéral modifie les ordonnances d\'application Au 1er janvier 2025, la PC comptait 57\'000',
     'blog.article.piano-berna-civilisti-cantoni.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.cofinanziamento-tox-info-suisse.title': 'Tox Info Suisse : cofinancement obligatoire pour l’industrie',
+    'blog.article.cofinanziamento-tox-info-suisse.excerpt': 'Le Conseil fédéral veut imposer le cofinancement de Tox Info Suisse L’industrie chimique et l’industrie pharmaceutique concernées Consultation prévue jusqu’à la moitié',
+    'blog.article.cofinanziamento-tox-info-suisse.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

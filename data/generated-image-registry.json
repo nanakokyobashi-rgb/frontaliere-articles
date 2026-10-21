@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 812,
+  "assetCount": 814,
   "assets": [
     {
       "schema": 1,
@@ -33029,6 +33029,92 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Generic synthetic editorial illustration of a digital banking outage beside a payment card, with no readable text, logos, faces, or specific-event cues."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-cofinanziamento-tox-info-suisse",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "e32c8352ccbae312bc01f65672cc5f00ca6c1e18c7ab0943dd5573912dc0c9f5",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "37b962a0238733ab7039dd0cb596991e2f1469b457ddc3dc636f21d6bb74642d",
+      "bytes": 57986,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-21T15:08:56.578Z",
+      "verifiedAt": "2026-10-21T15:09:03.205Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-cofinanziamento-tox-info-suisse.webp",
+      "area": "Svizzera",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic synthetic pharmaceutical laboratory scene with no visible text, logos, people, or event-specific cues."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-kurzarbeit-regole-ordinarie",
+      "kind": "generated",
+      "provider": "openai-codex",
+      "model": "gpt-image-2.5",
+      "executorModel": "gpt-5.6-luna",
+      "promptVersion": "frontaliereticino.generated-image-policy.v1",
+      "promptHash": "3e9f26cf1f97f030129c05d8194f58e03c92cf08489091af0c134029e08e30ea",
+      "license": "generated-provider",
+      "licenseUrl": "https://openai.com/policies/terms-of-use/",
+      "credit": "frontaliereticino.ch",
+      "sha256": "fd536168572c412417b7c39e279b8206e2609d5fbcd6f5baed443d89e2d9b55f",
+      "bytes": 172866,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-21T15:33:35.898Z",
+      "verifiedAt": "2026-10-21T15:33:53.186Z",
+      "restrictions": [
+        "illustrative-only",
+        "no-real-recognizable-foreground-person",
+        "no-public-figure-face",
+        "no-logo-brand-or-text",
+        "no-specific-real-event-photojournalism"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-kurzarbeit-regole-ordinarie.webp",
+      "area": "Swiss border region",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": false,
+        "is_topic_relevant": true,
+        "notes": "Generic synthetic editorial scene with unidentifiable employees; no readable text, logos, or specific real event."
       }
     }
   ]

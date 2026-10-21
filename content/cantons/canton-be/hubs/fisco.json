@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "fisco",
-  "updatedAt": "2026-10-19T19:02:48.012Z",
-  "contentHash": "4020efef8b867da82f61838ea1639801f4353bc79407426506492da9685b2e98",
+  "updatedAt": "2026-10-21T15:40:17.008Z",
+  "contentHash": "b9fff1276b1f348b37983949de3a3841a779b15a307d0e74bdd8e258f6190613",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -108,16 +108,16 @@
           "date": "2026-10-19T06:59:44.908Z"
         },
         {
-          "title": "Imposta trasferimenti Berna: franchigia 800k",
-          "url": "/articoli-berna/simplificazione-imposta-trasferimento-berna/",
-          "excerpt": "Il Governo propone l'uso non esclusivo e il rimborso entro 4 anni. Consultazione aperta fino al 7 gennaio 2027.",
-          "date": "2026-10-07T06:54:25.689Z"
-        },
-        {
           "title": "Berna mantiene la tassa ecclesiastica per le imprese",
           "url": "/articoli-berna/berna-tassa-ecclesiastica/",
           "excerpt": "Il Governo bernese ha preso atto della petizione per rendere volontaria la tassa ecclesiastica delle persone giuridiche.",
           "date": "2026-10-19T06:36:37.308Z"
+        },
+        {
+          "title": "Imposta trasferimenti Berna: franchigia 800k",
+          "url": "/articoli-berna/simplificazione-imposta-trasferimento-berna/",
+          "excerpt": "Il Governo propone l'uso non esclusivo e il rimborso entro 4 anni. Consultazione aperta fino al 7 gennaio 2027.",
+          "date": "2026-10-07T06:54:25.689Z"
         },
         {
           "title": "Dichiarazione imposte svizzera: guida pratica 2026 a Berna",
@@ -173,7 +173,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-19T19:02:48.012Z"
+      "updatedAt": "2026-10-21T15:40:17.008Z"
     },
     "en": {
       "canton": "BE",
@@ -264,16 +264,16 @@
           "date": "2026-10-19T06:59:44.908Z"
         },
         {
-          "title": "Bern transfer tax: 800k exemption",
-          "url": "/en/bern-articles/berns-transfer-tax-simplification/",
-          "excerpt": "The Government proposes non-exclusive use and repayment within 4 years. Consultation open until January 7, 2027.",
-          "date": "2026-10-07T06:54:25.689Z"
-        },
-        {
           "title": "Bern maintains the church tax for businesses",
           "url": "/en/bern-articles/bern-church-tax-legal-entities/",
           "excerpt": "The Bernese government has taken note of the petition to make the church tax for legal entities voluntary.",
           "date": "2026-10-19T06:36:37.308Z"
+        },
+        {
+          "title": "Bern transfer tax: 800k exemption",
+          "url": "/en/bern-articles/berns-transfer-tax-simplification/",
+          "excerpt": "The Government proposes non-exclusive use and repayment within 4 years. Consultation open until January 7, 2027.",
+          "date": "2026-10-07T06:54:25.689Z"
         },
         {
           "title": "Swiss tax return: practical guide for 2026 in Bern",
@@ -329,7 +329,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-19T19:02:48.012Z"
+      "updatedAt": "2026-10-21T15:40:17.008Z"
     },
     "de": {
       "canton": "BE",
@@ -420,16 +420,16 @@
           "date": "2026-10-19T06:59:44.908Z"
         },
         {
-          "title": "Handänderungssteuer Bern: Freibetrag 800k",
-          "url": "/de/bern-artikel/berner-handaenderungssteuer-vereinfachung/",
-          "excerpt": "Die Regierung schlägt eine nicht ausschließliche Nutzung und eine Rückerstattung innerhalb von 4 Jahren vor. Die Vernehmlassung ist bis zum 7. Januar 2027 offen.",
-          "date": "2026-10-07T06:54:25.689Z"
-        },
-        {
           "title": "Bern behält die Kirchensteuer für Unternehmen bei",
           "url": "/de/bern-artikel/bern-kirchensteuer-juristische-personen/",
           "excerpt": "Die Berner Regierung hat die Petition zur Freiwilligkeit der Kirchensteuer für juristische Personen zur Kenntnis genommen.",
           "date": "2026-10-19T06:36:37.308Z"
+        },
+        {
+          "title": "Handänderungssteuer Bern: Freibetrag 800k",
+          "url": "/de/bern-artikel/berner-handaenderungssteuer-vereinfachung/",
+          "excerpt": "Die Regierung schlägt eine nicht ausschließliche Nutzung und eine Rückerstattung innerhalb von 4 Jahren vor. Die Vernehmlassung ist bis zum 7. Januar 2027 offen.",
+          "date": "2026-10-07T06:54:25.689Z"
         },
         {
           "title": "Schweizer Steuererklärung: praktischer Leitfaden 2026 in Bern",
@@ -485,7 +485,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-19T19:02:48.012Z"
+      "updatedAt": "2026-10-21T15:40:17.008Z"
     },
     "fr": {
       "canton": "BE",
@@ -576,16 +576,16 @@
           "date": "2026-10-19T06:59:44.908Z"
         },
         {
-          "title": "Impôt sur les transferts à Berne : franchise de 800k",
-          "url": "/fr/articles-berne/simplification-impot-transfer-berne/",
-          "excerpt": "Le Gouvernement propose l’usage non exclusif et le remboursement dans un délai de 4 ans. Consultation ouverte jusqu’au 7 janvier 2027.",
-          "date": "2026-10-07T06:54:25.689Z"
-        },
-        {
           "title": "Berne maintient l'impôt ecclésiastique pour les entreprises",
           "url": "/fr/articles-berne/berne-taxe-eglise-personnes-morales/",
           "excerpt": "Le Gouvernement bernois a pris acte de la pétition visant à rendre volontaire l'impôt ecclésiastique des personnes morales.",
           "date": "2026-10-19T06:36:37.308Z"
+        },
+        {
+          "title": "Impôt sur les transferts à Berne : franchise de 800k",
+          "url": "/fr/articles-berne/simplification-impot-transfer-berne/",
+          "excerpt": "Le Gouvernement propose l’usage non exclusif et le remboursement dans un délai de 4 ans. Consultation ouverte jusqu’au 7 janvier 2027.",
+          "date": "2026-10-07T06:54:25.689Z"
         },
         {
           "title": "Déclaration fiscale suisse : guide pratique 2026 à Berne",
@@ -641,7 +641,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-19T19:02:48.012Z"
+      "updatedAt": "2026-10-21T15:40:17.008Z"
     }
   }
 }
