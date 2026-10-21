@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "carburanti",
-  "updatedAt": "2026-10-19T12:26:29.054Z",
-  "contentHash": "65562ca3fc05cc12a455937194ffb34afd94d6dfd616a29e0e842e6b8c5f6714",
+  "updatedAt": "2026-10-21T01:44:55.473Z",
+  "contentHash": "b750f8766a76e1990b9afbd30ed7c81f10d901998fb6fbacfe378e2e1b5d2323",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-18T11:41:56.271Z",
+      "updatedAt": "2026-10-20T12:04:15.773Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-20T12:04:15.773Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Mercato immobiliare a Glarona: prezzi in crescita nel 2026",
+          "url": "/articoli-glarona/glarona-mercato-immobiliare-2026/",
+          "excerpt": "La domanda immobiliare resta alta nel Canton Glarona L'offerta limitata sostiene l'aumento dei prezzi Condomini +4,4% tra il 2° trimestre 2025 e il 2° 2026",
+          "date": "2026-10-21T01:34:50.414Z"
+        },
         {
           "title": "Klöntalerstrasse: chiusura temporanea Staldengarten–Bützi",
           "url": "/articoli-glarona/kloentalerstrasse-cantiere-2026/",
@@ -82,12 +88,6 @@
           "url": "/articoli-glarona/klontalstrasse-staldengarten-butzi/",
           "excerpt": "Una limitazione al traffico riguarda la Klöntalerstrasse nel tratto Staldengarten–Bützi, nel Canton Glarona.",
           "date": "2026-10-17T00:33:53.716Z"
-        },
-        {
-          "title": "Imposta immobiliare seconde case Glarona: via libera dal Governo",
-          "url": "/articoli-glarona/imposta-seconde-case-glarona/",
-          "excerpt": "La mozione è stata depositata il 10 settembre 2026.",
-          "date": "2026-10-11T12:52:17.201Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-19T12:26:29.054Z"
+      "updatedAt": "2026-10-21T01:44:55.473Z"
     },
     "en": {
       "canton": "GL",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-20T12:04:15.773Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Real estate market in Glarus: prices rising in 2026",
+          "url": "/en/glarus-articles/glarus-real-estate-market-2026/",
+          "excerpt": "Housing demand remains high in the Canton of Glarus Limited supply supports rising prices Condominiums +4,4% between the 2nd quarter of 2025 and the 2nd quarter",
+          "date": "2026-10-21T01:34:50.414Z"
+        },
         {
           "title": "Klöntalerstrasse: temporary closure of Staldengarten–Bützi",
           "url": "/en/glarus-articles/kloentalerstrasse-roadworks-2026/",
@@ -169,12 +175,6 @@
           "url": "/en/glarus-articles/klontalstrasse-traffic-restriction/",
           "excerpt": "A traffic restriction affects Klöntalerstrasse on the Staldengarten–Bützi section, in the Canton of Glarus.",
           "date": "2026-10-17T00:33:53.716Z"
-        },
-        {
-          "title": "Glarus second-home property tax: government gives the green light",
-          "url": "/en/glarus-articles/secondary-homes-tax-glarus/",
-          "excerpt": "The motion was submitted on September 10, 2026.",
-          "date": "2026-10-11T12:52:17.201Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-19T12:26:29.054Z"
+      "updatedAt": "2026-10-21T01:44:55.473Z"
     },
     "de": {
       "canton": "GL",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-20T12:04:15.773Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Immobilienmarkt in Glarus: steigende Preise im Jahr 2026",
+          "url": "/de/glarus-artikel/glarner-immobilienmarkt-2026/",
+          "excerpt": "Die Nachfrage nach Immobilien bleibt im Kanton Glarus hoch Das begrenzte Angebot stützt den Preisanstieg Eigentumswohnungen +4,4% zwischen dem 2.",
+          "date": "2026-10-21T01:34:50.414Z"
+        },
         {
           "title": "Klöntalerstrasse: vorübergehende Sperrung Staldengarten–Bützi",
           "url": "/de/glarus-artikel/kloentalerstrasse-bauarbeiten-2026/",
@@ -256,12 +262,6 @@
           "url": "/de/glarus-artikel/verkehrseinschraenkung-kloentalerstrasse/",
           "excerpt": "Eine Verkehrsbeschränkung betrifft die Klöntalerstrasse im Abschnitt Staldengarten–Bützi im Kanton Glarus.",
           "date": "2026-10-17T00:33:53.716Z"
-        },
-        {
-          "title": "Immobiliensteuer für Zweitwohnungen in Glarus: grünes Licht von der Regierung",
-          "url": "/de/glarus-artikel/zweitwohnungssteuer-glarus/",
-          "excerpt": "Die Motion wurde am 10.",
-          "date": "2026-10-11T12:52:17.201Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-19T12:26:29.054Z"
+      "updatedAt": "2026-10-21T01:44:55.473Z"
     },
     "fr": {
       "canton": "GL",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-18T11:41:56.271Z"
+          "updatedAt": "2026-10-20T12:04:15.773Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Marché immobilier à Glaris : les prix en hausse en 2026",
+          "url": "/fr/articles-glaris/marche-immobilier-glaris-2026/",
+          "excerpt": "La demande immobilière reste élevée dans le canton de Glaris L'offre limitée soutient la hausse des prix Appartements en copropriété +4,4% entre le 2e trimestre",
+          "date": "2026-10-21T01:34:50.414Z"
+        },
         {
           "title": "Klöntalerstrasse : fermeture temporaire Staldengarten–Bützi",
           "url": "/fr/articles-glaris/kloentalerstrasse-travaux-2026/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-glaris/restriction-trafic-kloentalerstrasse/",
           "excerpt": "Une restriction de circulation concerne la Klöntalerstrasse sur le tronçon Staldengarten–Bützi, dans le canton de Glaris.",
           "date": "2026-10-17T00:33:53.716Z"
-        },
-        {
-          "title": "Impôt immobilier à Glaris : feu vert du Gouvernement",
-          "url": "/fr/articles-glaris/taxe-residences-secondaires-glaris/",
-          "excerpt": "La motion a été déposée le 10 septembre 2026.",
-          "date": "2026-10-11T12:52:17.201Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-19T12:26:29.054Z"
+      "updatedAt": "2026-10-21T01:44:55.473Z"
     }
   }
 }

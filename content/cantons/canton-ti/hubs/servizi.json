@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-20T22:08:32.508Z",
-  "contentHash": "df989bb3d2166c4fde01627d9180b26e52c087f410e1dbdef901906b4dc643b9",
+  "updatedAt": "2026-10-21T01:44:55.473Z",
+  "contentHash": "d73473ab6f103b32a7d9847368cdd5808f96e455b2234361852ba7167e07b442",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -21,11 +21,6 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-20T17:03:18.684Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-20T13:43:04.913Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -136,40 +131,6 @@
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
           "updatedAt": "2026-10-20T17:03:18.684Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Bellinzona",
-              "value": "15 °C",
-              "detail": "oggi da 13 a 15 °C"
-            },
-            {
-              "label": "Chiasso",
-              "value": "16 °C",
-              "detail": "oggi da 13 a 17 °C"
-            },
-            {
-              "label": "Locarno",
-              "value": "15 °C",
-              "detail": "oggi da 15 a 16 °C"
-            },
-            {
-              "label": "Lugano",
-              "value": "16 °C",
-              "detail": "oggi da 13 a 16 °C"
-            },
-            {
-              "label": "Mendrisio",
-              "value": "15 °C",
-              "detail": "oggi da 13 a 16 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-20T13:43:04.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -295,7 +256,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T01:44:55.473Z"
     },
     "en": {
       "canton": "TI",
@@ -399,40 +360,6 @@
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
           "updatedAt": "2026-10-20T17:03:18.684Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Bellinzona",
-              "value": "15 °C",
-              "detail": "today from 13 to 15 °C"
-            },
-            {
-              "label": "Chiasso",
-              "value": "16 °C",
-              "detail": "today from 13 to 17 °C"
-            },
-            {
-              "label": "Locarno",
-              "value": "15 °C",
-              "detail": "today from 15 to 16 °C"
-            },
-            {
-              "label": "Lugano",
-              "value": "16 °C",
-              "detail": "today from 13 to 16 °C"
-            },
-            {
-              "label": "Mendrisio",
-              "value": "15 °C",
-              "detail": "today from 13 to 16 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-20T13:43:04.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -553,7 +480,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T01:44:55.473Z"
     },
     "de": {
       "canton": "TI",
@@ -657,40 +584,6 @@
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
           "updatedAt": "2026-10-20T17:03:18.684Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Bellinzona",
-              "value": "15 °C",
-              "detail": "heute 13 bis 15 °C"
-            },
-            {
-              "label": "Chiasso",
-              "value": "16 °C",
-              "detail": "heute 13 bis 17 °C"
-            },
-            {
-              "label": "Locarno",
-              "value": "15 °C",
-              "detail": "heute 15 bis 16 °C"
-            },
-            {
-              "label": "Lugano",
-              "value": "16 °C",
-              "detail": "heute 13 bis 16 °C"
-            },
-            {
-              "label": "Mendrisio",
-              "value": "15 °C",
-              "detail": "heute 13 bis 16 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-20T13:43:04.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -811,7 +704,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T01:44:55.473Z"
     },
     "fr": {
       "canton": "TI",
@@ -915,40 +808,6 @@
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
           "updatedAt": "2026-10-20T17:03:18.684Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Bellinzona",
-              "value": "15 °C",
-              "detail": "aujourd’hui de 13 à 15 °C"
-            },
-            {
-              "label": "Chiasso",
-              "value": "16 °C",
-              "detail": "aujourd’hui de 13 à 17 °C"
-            },
-            {
-              "label": "Locarno",
-              "value": "15 °C",
-              "detail": "aujourd’hui de 15 à 16 °C"
-            },
-            {
-              "label": "Lugano",
-              "value": "16 °C",
-              "detail": "aujourd’hui de 13 à 16 °C"
-            },
-            {
-              "label": "Mendrisio",
-              "value": "15 °C",
-              "detail": "aujourd’hui de 13 à 16 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-20T13:43:04.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1066,7 +925,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T01:44:55.473Z"
     }
   }
 }
