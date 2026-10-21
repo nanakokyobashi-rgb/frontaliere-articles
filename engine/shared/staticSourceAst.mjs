@@ -16,19 +16,29 @@
 
 import { loadArticleSourceTypeScript } from './typescriptRuntime.mjs';
 
-const ts = loadArticleSourceTypeScript();
+// Keep importing the reader dependency-free. Corpus gates import these helpers
+// to expose pure entry points even when the pinned compiler is not installed;
+// load TypeScript only when an AST operation is actually requested.
+let loadedTypeScript;
+const ts = new Proxy({}, {
+  get(_target, property) {
+    loadedTypeScript ??= loadArticleSourceTypeScript();
+    return loadedTypeScript[property];
+  },
+});
 
 const SCRIPT_KIND_BY_EXTENSION = new Map([
-  ['.js', ts.ScriptKind.JS],
-  ['.jsx', ts.ScriptKind.JSX],
-  ['.mjs', ts.ScriptKind.JS],
-  ['.cjs', ts.ScriptKind.JS],
-  ['.tsx', ts.ScriptKind.TSX],
+  ['.js', 'JS'],
+  ['.jsx', 'JSX'],
+  ['.mjs', 'JS'],
+  ['.cjs', 'JS'],
+  ['.tsx', 'TSX'],
 ]);
 
 function scriptKindFor(fileName) {
   const match = /\.[^.]+$/.exec(String(fileName));
-  return SCRIPT_KIND_BY_EXTENSION.get(match?.[0].toLowerCase()) ?? ts.ScriptKind.TS;
+  const kind = SCRIPT_KIND_BY_EXTENSION.get(match?.[0].toLowerCase()) ?? 'TS';
+  return ts.ScriptKind[kind];
 }
 
 function diagnosticText(message) {
