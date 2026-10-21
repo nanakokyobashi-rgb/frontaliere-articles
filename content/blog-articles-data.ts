@@ -45693,6 +45693,16 @@ const RAW_ARTICLES = [
  authorSlug: 'samuele-valente',
  authorName: 'Samuele Valente',
  },
+ {
+ id: 'revolut-servizi-interrotti',
+ category: 'novita',
+ date: '2026-10-21T14:40:19.762Z',
+ image: '/images/blog/article-revolut-servizi-interrotti.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

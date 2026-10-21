@@ -13558,6 +13558,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-21.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.bollettino-frontaliere-2026-10-21.seoDescription': 'Bollettino frontalieri 21 ottobre 2026: attese ai valichi, prezzi benzina, cambio CHF/EUR e offerte attive di lavoro in Svizzera.',
     'blog.article.bollettino-frontaliere-2026-10-21.ogDescription': 'I numeri del 21 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico, in quali comuni conviene fare il pieno, quanto vale il franco al cambio rilevato e quanti annunci di lavoro attivi sono presenti sul nostro job board in Svizzera.',
+    'blog.article.revolut-servizi-interrotti.title': 'Banca digitale, disservizi in Svizzera per pagamenti e cambi',
+    'blog.article.revolut-servizi-interrotti.excerpt': 'Problemi su pagamenti, versamenti e cambio di valute Disagi iniziati poco dopo le 8:00 in Svizzera Google indica un ritorno graduale dei servizi Revolut: denaro',
+    'blog.article.revolut-servizi-interrotti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;
