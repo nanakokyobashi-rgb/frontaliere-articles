@@ -218,7 +218,7 @@ export function extractItTitlesFromMeta(metaSrc) {
   if (!metaSrc) return [];
   const out = [];
   for (const m of metaSrc.matchAll(TITLE_RE)) {
-    out.push(unescapeTsValue(m[1]));
+    out.push(unescapeTsValue(m[2]));
   }
   return out;
 }
