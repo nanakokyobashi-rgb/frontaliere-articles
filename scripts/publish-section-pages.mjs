@@ -170,6 +170,7 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
     publish: false,
     dryRun: false,
     removeStaleCantonRssFeeds: false,
+    cleanupInactiveSurface: false,
   };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
@@ -196,6 +197,7 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
       else out.knownMissingPages.push(...pages);
     } else if (a === '--bootstrap') out.bootstrap = true;
     else if (a === '--remove-stale-canton-rss-feeds') out.removeStaleCantonRssFeeds = true;
+    else if (a === '--cleanup-inactive-surface') out.cleanupInactiveSurface = true;
     else if (a === '--publish') out.publish = true;
     else if (a === '--dry-run') out.dryRun = true;
     else if (a === '--out') out.out = value();
@@ -208,7 +210,15 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
   for (const flag of ['section', 'out', 'summary']) if (!out[flag]) throw new Error(`manca --${flag}`);
   if (out.publish && out.dryRun) throw new Error('--publish e --dry-run sono alternativi');
   if (out.bootstrap && out.ids.length) throw new Error('--bootstrap rende tutti gli articoli della sezione: non si combina con --id/--ids');
-  assertPublishableSection(out.section, { all, active });
+  if (out.cleanupInactiveSurface) {
+    if (!out.removeStaleCantonRssFeeds) throw new Error('--cleanup-inactive-surface richiede --remove-stale-canton-rss-feeds');
+    if (out.bootstrap || out.ids.length || out.missingPages.length || out.knownMissingPages.length) {
+      throw new Error('--cleanup-inactive-surface non si combina con bootstrap, id o path pagina');
+    }
+    assertKnownCantonSection(out.section, { all });
+  } else {
+    assertPublishableSection(out.section, { all, active });
+  }
   return out;
 }
 
@@ -241,13 +251,19 @@ function normalizedSectionRoutes(section, all = ARTICLE_SECTION_CORE_ALL) {
   }));
 }
 
-/** La sezione deve essere cantonale (R2) e ATTIVA nel core: l'engine rende solo le sezioni attive. */
-export function assertPublishableSection(section, { all = ARTICLE_SECTION_CORE_ALL, active = activeCorpusCoreMap() } = {}) {
+/** Sezione cantonale nota al core, anche quando ora è disattivata. */
+export function assertKnownCantonSection(section, { all = ARTICLE_SECTION_CORE_ALL } = {}) {
   const core = Object.prototype.hasOwnProperty.call(all, section) ? all[section] : undefined;
   if (!core) throw new Error(`sezione sconosciuta: "${section}"`);
   if (core.kind !== 'canton' || core.shardKey) {
     throw new Error(`la sezione "${section}" e' servita da uno shard Pages: usa publish-article-fast.mjs`);
   }
+  return core;
+}
+
+/** La sezione deve essere cantonale (R2) e ATTIVA nel core: l'engine rende solo le sezioni attive. */
+export function assertPublishableSection(section, { all = ARTICLE_SECTION_CORE_ALL, active = activeCorpusCoreMap() } = {}) {
+  const core = assertKnownCantonSection(section, { all });
   if (!Object.prototype.hasOwnProperty.call(active, section)) {
     throw new Error(
       `la sezione "${section}" non e' attiva nel core (ACTIVE_CANTON_SECTIONS): l'engine rende solo le sezioni attive. ` +
@@ -2569,6 +2585,56 @@ export async function main(
         `::notice::[${LOG}] uso la release API verificata ${releaseCommit} invece di HEAD ${publisherCommit}`,
       );
     }
+  }
+  if (args.cleanupInactiveSurface) {
+    let cleanupResult = null;
+    if (publishing) {
+      if (publishedManifest.state !== 'ok' || !publishedManifestPages) {
+        cleanupResult = { failures: 1, uploaded: 0, deleted: 0, status: effectiveStatus };
+        console.error(`::error::[${LOG}] cleanup sezione inattiva ${section}: manifest pagine edge assente o non verificabile; nessuna pagina viene cancellata`);
+      } else {
+        const obsoletePages = Object.values(publishedManifestPages).flat();
+        cleanupResult = await publishImpl({
+          pages: [],
+          cdnUploads: [],
+          cantonRssFeeds: [],
+          removeStaleCantonRssFeeds: true,
+          obsoletePages,
+          distDir,
+          section,
+          releaseCommit,
+          runImpl,
+          publishedStatusImpl,
+          probeImpl,
+          releaseReadyImpl: publishedReleaseReadyImpl,
+          publishCantonRssFeedsImpl,
+          sleepImpl,
+          assertMainFreshImpl,
+        });
+        if (cleanupResult.failures === 0) {
+          await assertMainFreshImpl();
+          cleanupResult.manifestPublished = publishPageManifestImpl({
+            manifest: pageManifestFromPages({ section, commit: releaseCommit, pages: [] }),
+            distDir,
+          });
+          if (!cleanupResult.manifestPublished) cleanupResult.failures++;
+        }
+      }
+    }
+    const declaredStatus = JSON.parse(readFileSync(path.join(ROOT_DIR, SECTION_REGISTRY_FILE), 'utf8'))
+      .sections?.[section]?.status ?? null;
+    const cleanupSummary = {
+      section,
+      declaredStatus,
+      cleanupInactiveSurface: true,
+      counts: { articles: 0, archive: 0, hubs: 0, landing: 0 },
+      hubsMissing: [],
+      defects: cleanupResult?.failures > 0 ? ['cleanup della superficie inattiva non completato'] : [],
+      published: cleanupResult,
+    };
+    fs.mkdirSync(path.dirname(path.resolve(args.summary)), { recursive: true });
+    fs.writeFileSync(path.resolve(args.summary), `${JSON.stringify(cleanupSummary, null, 2)}\n`, 'utf-8');
+    return cleanupResult?.failures > 0 ? 1 : 0;
   }
   let cantonRssFeeds = [];
   let removeStaleCantonRssFeeds = false;

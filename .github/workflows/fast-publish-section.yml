@@ -63,6 +63,7 @@ on:
       - 'scripts/ci/section-bootstrap-lock.mjs'
       - 'scripts/lib/conditional-cdn-put.sh'
       - 'scripts/ci/fast-publish-section.mjs'
+      - 'scripts/ci/dispatch-fast-publish-replay.sh'
       - 'scripts/ci/resolve-workflow-run-push-range.mjs'
       - 'scripts/ci/retry-cmd.sh'
       - 'scripts/ci/fetch-push-base-if-missing.sh'
@@ -149,6 +150,11 @@ on:
         type: string
       remove_stale_canton_rss_feeds:
         description: 'Rimuovi i feed RSS rimasti da una sezione demossa'
+        required: false
+        default: false
+        type: boolean
+      cleanup_inactive_surface:
+        description: 'Rimuovi pagine e feed di una sezione disattivata senza renderizzarla'
         required: false
         default: false
         type: boolean
@@ -378,6 +384,7 @@ jobs:
           BOOTSTRAP_INPUT: ${{ inputs.bootstrap }}
           DRY_RUN_INPUT: ${{ inputs.dry_run }}
           REMOVE_STALE_INPUT: ${{ inputs.remove_stale_canton_rss_feeds }}
+          CLEANUP_INACTIVE_SURFACE_INPUT: ${{ inputs.cleanup_inactive_surface }}
           REPLAY_API_INPUT: ${{ inputs.replay_api_after_publish }}
           ALLOW_DEFERRED_LIVE_RELEASE_INPUT: ${{ inputs.allow_deferred_live_release }}
           EVENT_NAME: ${{ github.event_name }}
@@ -534,10 +541,10 @@ jobs:
                 local replay_before="${10:-}"
                 local replay_after="${11:-}"
                 local dispatch_nonce="${12:-}"
+                local cleanup_inactive_surface="${13:-false}"
                 local nonce_seed="$dispatch_nonce"
                 local nonce_hash=''
                 local dispatch_title=''
-                local existing_dispatch=''
                 [ -n "$section" ] || { echo "::error::sezione assente nel redispatch stale"; return 1; }
                 if [ -z "$nonce_seed" ]; then
                   nonce_seed='stale-resolve'
@@ -545,21 +552,14 @@ jobs:
                 nonce_hash="$(printf '%s\0%s\0%s' "$nonce_seed" "$current_main" "$section" | sha256sum | cut -c1-16)"
                 dispatch_nonce="stale-resolve-${current_main:0:12}-${section}-${nonce_hash}"
                 dispatch_title="cover-publish-section / ${section} / nonce=${dispatch_nonce}"
-                if ! existing_dispatch="$(gh run list --repo "$REPO" --workflow fast-publish-section.yml --branch main --event workflow_dispatch --limit 100 --json databaseId,displayTitle | jq -r --arg title "$dispatch_title" --arg current_run "$GITHUB_RUN_ID" 'any(.[]; .displayTitle == $title and ((.databaseId | tostring) != $current_run))')"; then
-                  echo "::error::impossibile verificare se il replay della sezione $section e' gia' stato accodato"
-                  return 1
-                fi
-                if [ "$existing_dispatch" = 'true' ]; then
-                  echo "::notice::replay gia' accodato per $section sulla HEAD $current_main"
-                  return 0
-                fi
-                if gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
+                if bash scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
                   -f section="$section" \
                   -f article_ids="$article_ids" \
                   -f missing_page_paths="$missing_page_paths" \
                   -f known_missing_page_paths="$known_missing_page_paths" \
                   -f bootstrap="$bootstrap" \
                   -f remove_stale_canton_rss_feeds="$remove_stale" \
+                  -f cleanup_inactive_surface="$cleanup_inactive_surface" \
                   -f replay_api_after_publish="$replay_api_after_publish" \
                   -f allow_deferred_live_release="$allow_deferred_live_release" \
                   -f source_commit="$current_main" \
@@ -568,10 +568,6 @@ jobs:
                   -f push_before="$replay_before" \
                   -f push_after="$replay_after" \
                   -f dispatch_nonce="$dispatch_nonce"; then
-                  return 0
-                fi
-                if existing_dispatch="$(gh run list --repo "$REPO" --workflow fast-publish-section.yml --branch main --event workflow_dispatch --limit 100 --json databaseId,displayTitle | jq -r --arg title "$dispatch_title" --arg current_run "$GITHUB_RUN_ID" 'any(.[]; .displayTitle == $title and ((.databaseId | tostring) != $current_run))')" && [ "$existing_dispatch" = 'true' ]; then
-                  echo "::notice::GitHub ha accettato il replay di $section anche se gh workflow run ha segnalato un errore"
                   return 0
                 fi
                 echo "::error::replay non accodato per $section sulla HEAD $current_main"
@@ -605,7 +601,8 @@ jobs:
                   "$allow_deferred_live_release" \
                   "$replay_before" \
                   "$replay_after" \
-                  "${DISPATCH_NONCE_INPUT:-}"
+                  "${DISPATCH_NONCE_INPUT:-}" \
+                  "${CLEANUP_INACTIVE_SURFACE_INPUT:-false}"
               else
                 if [ -n "$replay_before" ]; then
                   replay_after="$current_main"
@@ -648,17 +645,17 @@ jobs:
                 replay_matrix="$(reconcile_edge_matrix "$pinned_source" "$current_main" "$current_main_source")"
                 dispatched=0
                 failed_sections=()
-                while IFS=$'\t' read -r section article_ids bootstrap remove_stale; do
+                while IFS=$'\t' read -r section article_ids bootstrap remove_stale cleanup_inactive_surface; do
                   [ -n "$section" ] || continue
                   if dispatch_stale_replay \
                     "$section" "$article_ids" '[]' '[]' "$bootstrap" "$remove_stale" \
                     "$replay_dry" "$replay_api_after_publish" "$allow_deferred_live_release" \
-                    "$replay_before" "$replay_after"; then
+                    "$replay_before" "$replay_after" '' "$cleanup_inactive_surface"; then
                     dispatched=$((dispatched + 1))
                   else
                     failed_sections+=("$section")
                   fi
-                done < <(jq -r '.[] | [.section, ((.ids // []) | tojson), (.bootstrap // false), (.removeStaleCantonRssFeeds // false)] | @tsv' <<<"$replay_matrix")
+                done < <(jq -r '.[] | [.section, ((.ids // []) | tojson), (.bootstrap // false), (.removeStaleCantonRssFeeds // false), (.cleanupInactiveSurface // false)] | @tsv' <<<"$replay_matrix")
                 if (( ${#failed_sections[@]} > 0 )); then
                   printf -v failed_sections_csv '%s, ' "${failed_sections[@]}"
                   failed_sections_csv="${failed_sections_csv%, }"
@@ -722,8 +719,11 @@ jobs:
               echo "::error::bootstrap rende tutti gli articoli: non si combina con article_ids"
               exit 1
             fi
-            matrix="$(jq -cn --arg s "$SECTION_INPUT" --argjson ids "$ids_json" --argjson missing "$missing_pages_json" --argjson knownMissing "$known_missing_pages_json" --argjson b "$bootstrap" --argjson r "$remove_stale" \
-              '[{section: $s, ids: $ids, missingPagePaths: $missing, knownMissingPagePaths: $knownMissing, bootstrap: $b, removeStaleCantonRssFeeds: $r}]')"
+            cleanup_inactive_surface=false
+            [ "${CLEANUP_INACTIVE_SURFACE_INPUT:-false}" = "true" ] && cleanup_inactive_surface=true
+            [ "$cleanup_inactive_surface" = "true" ] && remove_stale=true
+            matrix="$(jq -cn --arg s "$SECTION_INPUT" --argjson ids "$ids_json" --argjson missing "$missing_pages_json" --argjson knownMissing "$known_missing_pages_json" --argjson b "$bootstrap" --argjson r "$remove_stale" --argjson c "$cleanup_inactive_surface" \
+              '[{section: $s, ids: $ids, missingPagePaths: $missing, knownMissingPagePaths: $knownMissing, bootstrap: $b, removeStaleCantonRssFeeds: $r, cleanupInactiveSurface: $c}]')"
           else
             dry=false
             allow_deferred_live_release=false
@@ -884,6 +884,7 @@ jobs:
           KNOWN_MISSING_PAGE_PATHS_JSON: ${{ toJSON(matrix.target.knownMissingPagePaths || fromJSON('[]')) }}
           BOOTSTRAP: ${{ matrix.target.bootstrap }}
           REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
+          CLEANUP_INACTIVE_SURFACE: ${{ matrix.target.cleanupInactiveSurface || false }}
           ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
           DRY: ${{ needs.resolve.outputs.dry }}
           REPLAY_API_AFTER_PUBLISH: ${{ inputs.replay_api_after_publish }}
@@ -903,6 +904,7 @@ jobs:
           if [ -z "$dispatch_nonce" ]; then
             dispatch_nonce="stale-publish-${GITHUB_RUN_ID}-${SECTION}"
           fi
+          dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"
           replay_before="${ORIGINAL_PUSH_BEFORE:-$STALE_HEAD}"
           replay_after=''
           if [ -n "$replay_before" ]; then
@@ -941,13 +943,14 @@ jobs:
             # il publisher ricalcola quella compatibile con la HEAD corrente.
             echo "::notice::replay bounded stantio: ricalcolo la release API sulla HEAD $CURRENT_MAIN"
           fi
-          gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
+          bash scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
             -f section="$SECTION" \
             -f article_ids="$ARTICLE_IDS_JSON" \
             -f missing_page_paths="$MISSING_PAGE_PATHS_JSON" \
             -f known_missing_page_paths="$KNOWN_MISSING_PAGE_PATHS_JSON" \
             -f bootstrap="$BOOTSTRAP" \
             -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
+            -f cleanup_inactive_surface="$CLEANUP_INACTIVE_SURFACE" \
             -f replay_api_after_publish="$REPLAY_API_AFTER_PUBLISH" \
             -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
             -f api_release_commit="$api_release_commit" \
@@ -1067,6 +1070,7 @@ jobs:
           PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
           PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
           REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
+          CLEANUP_INACTIVE_SURFACE: ${{ matrix.target.cleanupInactiveSurface || false }}
           API_RELEASE_COMMIT: ${{ inputs.api_release_commit }}
           ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
           REPLAY_API_AFTER_PUBLISH: ${{ needs.resolve.outputs.replay_api_after_publish }}
@@ -1159,13 +1163,15 @@ jobs:
                   echo "::notice::replay workflow_run: release API attesa $api_release_commit"
                 fi
               fi
-              gh workflow run fast-publish-section.yml --repo "$REPO" --ref main \
+              dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"
+              bash scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
                 -f section="$SECTION" \
                 -f article_ids="$ARTICLE_IDS_JSON" \
                 -f missing_page_paths="$MISSING_PAGE_PATHS_JSON" \
                 -f known_missing_page_paths="$KNOWN_MISSING_PAGE_PATHS_JSON" \
                 -f bootstrap="$BOOTSTRAP" \
                 -f remove_stale_canton_rss_feeds="$REMOVE_STALE_CANTON_RSS_FEEDS" \
+                -f cleanup_inactive_surface="$CLEANUP_INACTIVE_SURFACE" \
                 -f replay_api_after_publish="$REPLAY_API_AFTER_PUBLISH" \
                 -f allow_deferred_live_release="$ALLOW_DEFERRED_LIVE_RELEASE" \
                 -f api_release_commit="$api_release_commit" \
@@ -1200,6 +1206,9 @@ jobs:
             args+=(--known-missing-pages "$(printf '%s' "$KNOWN_MISSING_PAGE_PATHS_JSON" | jq -c .)")
             if [ "$REMOVE_STALE_CANTON_RSS_FEEDS" = "true" ]; then
               args+=(--remove-stale-canton-rss-feeds)
+            fi
+            if [ "$CLEANUP_INACTIVE_SURFACE" = "true" ]; then
+              args+=(--cleanup-inactive-surface)
             fi
             if [ "$dry_mode" = "true" ]; then
               args+=(--dry-run)
@@ -1432,30 +1441,21 @@ jobs:
           dispatch_nonce_input="${DISPATCH_NONCE:-}"
           dispatched=0
           failed_sections=()
-          while IFS=$'\t' read -r section article_ids missing_page_paths known_missing_page_paths bootstrap remove_stale; do
+          while IFS=$'\t' read -r section article_ids missing_page_paths known_missing_page_paths bootstrap remove_stale cleanup_inactive_surface; do
             [ -n "$section" ] || continue
             nonce_seed="${dispatch_nonce_input:-stale-staged-recovery}"
             nonce_hash="$(printf '%s\0%s\0%s' "$nonce_seed" "$CURRENT_MAIN" "$section" | sha256sum | cut -c1-16)"
             dispatch_nonce="stale-staged-${CURRENT_MAIN:0:12}-${section}-${nonce_hash}"
             dispatch_title="cover-publish-section / ${section} / nonce=${dispatch_nonce}"
-            if ! existing_dispatch="$(gh run list --repo "$REPOSITORY" --workflow fast-publish-section.yml --branch main --event workflow_dispatch --limit 100 --json databaseId,displayTitle | jq -r --arg title "$dispatch_title" --arg current_run "$GITHUB_RUN_ID" 'any(.[]; .displayTitle == $title and ((.databaseId | tostring) != $current_run))')"; then
-              echo "::error::impossibile verificare se il recovery staged di $section e' gia' stato accodato"
-              failed_sections+=("$section")
-              continue
-            fi
-            if [ "$existing_dispatch" = 'true' ]; then
-              echo "::notice::recovery staged gia' accodato per $section sulla HEAD $CURRENT_MAIN"
-              dispatched=$((dispatched + 1))
-              continue
-            fi
             echo "::notice::recovery staged $section sulla HEAD corrente $CURRENT_MAIN"
-            if gh workflow run fast-publish-section.yml --repo "$REPOSITORY" --ref main \
+            if bash scripts/ci/dispatch-fast-publish-replay.sh "$REPOSITORY" "$dispatch_title" --ref main \
               -f section="$section" \
               -f article_ids="$article_ids" \
               -f missing_page_paths="$missing_page_paths" \
               -f known_missing_page_paths="$known_missing_page_paths" \
               -f bootstrap="$bootstrap" \
               -f remove_stale_canton_rss_feeds="$remove_stale" \
+              -f cleanup_inactive_surface="$cleanup_inactive_surface" \
               -f source_commit="$CURRENT_MAIN" \
               -f source_main_commit="$CURRENT_MAIN" \
               -f replay_api_after_publish="$REPLAY_API_AFTER_PUBLISH" \
@@ -1463,14 +1463,11 @@ jobs:
               -f dry_run="$DRY" \
               -f dispatch_nonce="$dispatch_nonce"; then
               dispatched=$((dispatched + 1))
-            elif existing_dispatch="$(gh run list --repo "$REPOSITORY" --workflow fast-publish-section.yml --branch main --event workflow_dispatch --limit 100 --json databaseId,displayTitle | jq -r --arg title "$dispatch_title" --arg current_run "$GITHUB_RUN_ID" 'any(.[]; .displayTitle == $title and ((.databaseId | tostring) != $current_run))')" && [ "$existing_dispatch" = 'true' ]; then
-              echo "::notice::GitHub ha accettato il recovery staged di $section anche se gh workflow run ha segnalato un errore"
-              dispatched=$((dispatched + 1))
             else
               echo "::error::recovery staged non accodato per $section sulla HEAD $CURRENT_MAIN"
               failed_sections+=("$section")
             fi
-          done < <(jq -r '.[] | [.section, ((.ids // []) | tojson), ((.missingPagePaths // []) | tojson), ((.knownMissingPagePaths // []) | tojson), (.bootstrap // false), (.removeStaleCantonRssFeeds // false)] | @tsv' <<<"$TARGET_MATRIX")
+          done < <(jq -r '.[] | [.section, ((.ids // []) | tojson), ((.missingPagePaths // []) | tojson), ((.knownMissingPagePaths // []) | tojson), (.bootstrap // false), (.removeStaleCantonRssFeeds // false), (.cleanupInactiveSurface // false)] | @tsv' <<<"$TARGET_MATRIX")
           if (( ${#failed_sections[@]} > 0 )); then
             printf -v failed_sections_csv '%s, ' "${failed_sections[@]}"
             failed_sections_csv="${failed_sections_csv%, }"
