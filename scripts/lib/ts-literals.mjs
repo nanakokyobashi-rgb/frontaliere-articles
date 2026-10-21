@@ -151,7 +151,11 @@ export function readStaticObjectEntries(source, sourcePath = 'source', { errorLa
     const valueLiteral = readStaticStringLiteral(source, valueStart, sourcePath, errorLabel);
     if (!valueLiteral) throw new Error(`[${errorLabel}] Unterminated value in ${sourcePath}`);
     const afterValue = skipStaticTrivia(source, valueLiteral.end, sourcePath, errorLabel);
-    if (source[afterValue] !== ',' && source[afterValue] !== '}') {
+    // Some generated TS maps are emitted as a property fragment rather than
+    // an object literal: the final property is the end of the source and has
+    // no trailing comma or closing brace. That is still a real delimiter;
+    // anything after the literal must remain rejected fail-closed.
+    if (afterValue < source.length && source[afterValue] !== ',' && source[afterValue] !== '}') {
       throw new Error(`[${errorLabel}] Static property must end with ',' or '}' in ${sourcePath}`);
     }
 
