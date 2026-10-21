@@ -41,7 +41,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import os from 'node:os';
 import { execSync } from 'node:child_process';
-import { buildSectionFeeds, RSS_SECTIONS } from '../engine/rssFeeds.mjs';
+import { buildSectionFeeds, RSS_SECTIONS } from './lib/rss-feed-body-adapter.mjs';
 // repairSerpSnippet vive in clauseTail.mjs (un .mjs) proprio perche' questo file
 // non puo' importare un .ts: e' la sorgente unica che il layer TS riesporta.
 // Senza passarla, rssFeeds.mjs spedirebbe le description verbatim (#5453).
@@ -870,13 +870,15 @@ console.log(
 //
 // Same argument as the sitemaps: the feeds are a pure function of the corpus,
 // so the repo that owns the corpus is the one that can emit them without being
-// a publish cycle behind. The generator itself is NOT reimplemented here — it
-// is `engine/rssFeeds.mjs`, the very module the site repo calls, arriving with
-// the mirror. A second copy would drift silently: nobody diffs a feed once it
-// is served, so a divergence surfaces only when an aggregator drops the channel.
+// a publish cycle behind. The emitter remains `engine/rssFeeds.mjs`, the module
+// the site repo calls, arriving with the mirror. This corpus adapter injects
+// the API's static body parser without making the mirror import scripts that
+// exist only in this repo. A second emitter copy would drift silently: nobody
+// diffs a feed once it is served, so a divergence surfaces only when an
+// aggregator drops the channel.
 //
-// `layout` is the whole difference between the two callers: the site keeps the
-// corpus under services/, this repo under content/.
+// `layout` is the data-path difference between the two callers: the site keeps
+// the corpus under services/, this repo under content/.
 //
 // ── `registries` is passed UNFILTERED, and that is the decision, not an omission ──
 //

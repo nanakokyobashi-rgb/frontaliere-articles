@@ -92,6 +92,23 @@ test('il reader richiede la chiusura dell oggetto completo e può appiattire i m
   assert.equal(entries[0].value, 'prima seconda');
 });
 
+test('il reader fallisce chiuso su commenti e stringhe troncati dopo entry valide', () => {
+  assert.throws(
+    () => readStaticObjectEntries(
+      "const meta = { 'blog.article.reale.title': 'valido', /* troncato",
+      'truncated-comment.ts',
+    ),
+    /Unterminated comment/u,
+  );
+  assert.throws(
+    () => readStaticObjectEntries(
+      "const meta = { 'blog.article.reale.title': 'valido', 'blog.article.alt.title",
+      'truncated-string.ts',
+    ),
+    /Unterminated string literal/u,
+  );
+});
+
 test('metaFieldRegex conserva la superficie RegExp senza scansionare commenti e prosa', () => {
   const source = [
     "// 'blog.article.fake.title': 'commento'",

@@ -10,8 +10,9 @@
  * It is MOVED here rather than reimplemented there. A second copy of this
  * parse/emit logic would drift silently — a feed is not diffed by anyone once
  * it is served, so an emitter that quietly stopped matching would go unnoticed
- * until an aggregator dropped the channel. AGENTS.md #6: one module, two
- * callers, drift impossible by construction.
+ * until an aggregator dropped the channel. The corpus adapter injects its
+ * article body parser at call time because that parser depends on corpus-only
+ * scripts; no script dependency enters this mirrored engine.
  *
  * The only site-shaped inputs are hoisted into `layout`:
  *   - `seoDir`     where `seo-blog*.ts` live               (site: services/seo)
@@ -322,7 +323,7 @@ function parseBlogSlugs(fs, path, rootDir, slugFile, slugConst) {
   return new Map(Object.entries(parseArticleUrlSlugs(src, slugConst)));
 }
 
-const BLOG_BODY_KEY = /^blog\.article\.(.+)\.(body\d+)$/;
+const BLOG_BODY_KEY = /^blog\.article\.(.+)\.(body\d+)$/u;
 
 function parseLocalizedField(fs, path, rootDir, localesDir, metaFileName, field) {
   const filePath = path.join(rootDir, localesDir, metaFileName);
@@ -343,7 +344,7 @@ function parseLocalizedField(fs, path, rootDir, localesDir, metaFileName, field)
 }
 
 /** Concatenate the per-locale body chunks of every article in a body dir. */
-function parseBlogBodies(fs, path, rootDir, localesDir, bodyDir, locale) {
+function parseBlogBodies(fs, path, rootDir, localesDir, bodyDir, locale, bodyFieldParser) {
   const bodies = new Map();
   const dir = path.join(rootDir, localesDir, bodyDir, locale);
   if (!fs.existsSync(dir)) return bodies;
@@ -354,20 +355,33 @@ function parseBlogBodies(fs, path, rootDir, localesDir, bodyDir, locale) {
     const filePath = path.join(dir, file);
     const src = fs.readFileSync(filePath, 'utf-8');
     const articleParts = new Map(); // articleId → { body1: '...', body2: '...' }
-    const entries = readStaticObjectEntries(src, filePath, { errorLabel: 'rss' });
-    for (const { key, value } of entries) {
-      const keyMatch = BLOG_BODY_KEY.exec(key);
-      if (!keyMatch) continue;
-      const [, id, part] = keyMatch;
-      if (!articleParts.has(id)) articleParts.set(id, new Map());
-      // Unescape here, not at render: this text goes straight into
-      // <content:encoded>, and it is the one parsed field that actually
-      // reaches the served bytes — the title/description paths are masked by
-      // the locale-meta lookup winning in renderFeed, this one is not.
-      // All three quote styles are accepted, but interpolated templates are
-      // rejected above: evaluating source code here would make the feed differ
-      // from the static corpus that the OG reader consumes.
-      articleParts.get(id).set(part, repairLegacyDoubleEscapedBreaks(value));
+    if (bodyFieldParser) {
+      if (typeof bodyFieldParser !== 'function') {
+        throw new TypeError('[rss] bodyFieldParser must be a function');
+      }
+      for (const { id, field, value, error } of bodyFieldParser(src)) {
+        if (!/^body\d+$/u.test(field)) continue;
+        if (error || typeof value !== 'string') {
+          throw new Error(
+            '[rss] Body property ' + id + '.' + field +
+              ' is not a static string literal in ' + filePath + ': ' + (error || 'no value'),
+          );
+        }
+        if (!articleParts.has(id)) articleParts.set(id, new Map());
+        articleParts.get(id).set(field, value);
+      }
+    } else {
+      // The mirrored engine uses the shared fail-closed reader by default;
+      // the corpus adapter may inject the API scanner to keep both publisher
+      // paths on one parser contract.
+      const entries = readStaticObjectEntries(src, filePath, { errorLabel: 'rss' });
+      for (const { key, value } of entries) {
+        const keyMatch = BLOG_BODY_KEY.exec(key);
+        if (!keyMatch) continue;
+        const [, id, part] = keyMatch;
+        if (!articleParts.has(id)) articleParts.set(id, new Map());
+        articleParts.get(id).set(part, repairLegacyDoubleEscapedBreaks(value));
+      }
     }
 
     for (const [id, parts] of articleParts) {
@@ -557,8 +571,19 @@ ${itemsXml}
  * `registry` is the section's article array; `id` and `image` are read to
  * resolve `media:content` without touching the filesystem, and `date === ''`
  * (publication date unknown) keeps that article out of the feed.
+ * The corpus adapter may inject bodyFieldParser so its API and RSS use the
+ * same static body-field extraction rules.
  */
-export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], layout = {}, repairSerpSnippet }) {
+export function buildSectionFeeds({
+  fs,
+  path,
+  rootDir,
+  section,
+  registry = [],
+  layout = {},
+  repairSerpSnippet,
+  bodyFieldParser,
+}) {
   // NON opzionale, e senza fallback identita'. Il produttore reale dei feed e'
   // `scripts/build-api.mjs` del repo corpus (qui dentro l'unico altro chiamante
   // e' tests/rss-feeds-module.test.ts), quindi un default silenzioso renderebbe
@@ -626,7 +651,7 @@ export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], l
     const metaFileName = section.metaFile(locale);
     const titles = parseLocalizedField(fs, path, rootDir, localesDir, metaFileName, 'title');
     const excerpts = parseLocalizedField(fs, path, rootDir, localesDir, metaFileName, 'excerpt');
-    const bodies = parseBlogBodies(fs, path, rootDir, localesDir, section.bodyDir, locale);
+    const bodies = parseBlogBodies(fs, path, rootDir, localesDir, section.bodyDir, locale, bodyFieldParser);
 
     const xml = renderFeed(section, locale, feedArticles, slugs, titles, excerpts, bodies, images, credits, repairSerpSnippet);
     if (!xml) continue;
@@ -645,7 +670,16 @@ export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], l
  * Defaults to the active publisher table for the corpus/R2 caller; a site
  * emitter must pass `SITE_RSS_SECTIONS` explicitly.
  */
-export function buildAllRssFeeds({ fs, path, rootDir, registries = {}, layout = {}, repairSerpSnippet, sections = RSS_SECTIONS }) {
+export function buildAllRssFeeds({
+  fs,
+  path,
+  rootDir,
+  registries = {},
+  layout = {},
+  repairSerpSnippet,
+  bodyFieldParser,
+  sections = RSS_SECTIONS,
+}) {
   return sections.map((section) =>
     buildSectionFeeds({
       fs,
@@ -655,6 +689,7 @@ export function buildAllRssFeeds({ fs, path, rootDir, registries = {}, layout = 
       registry: registries[section.id] ?? [],
       layout,
       repairSerpSnippet,
+      bodyFieldParser,
     }),
   );
 }

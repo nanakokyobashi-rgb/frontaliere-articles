@@ -85,7 +85,7 @@
       },
       {
         "prefix": "engine/",
-        "reason": "25 file, tutti byte-identici a packages/articles/engine/ del sito — ma hanno gia' un canale di discesa AUTOMATICO: mirror-articles-engine.yml (push sui path dell'engine + schedule 6h) apre una PR qui. Registrarli produrrebbe un site-ahead per tutta la durata di ogni PR di mirror, cioe' rumore su un canale che funziona. Se quel canale si rompe di nuovo — e' gia' successo, nove commit persi visibili solo come audit:footer-root-presence da 23 a 3608 — il segnale giusto e' un allarme sul mirror, non un drift check giornaliero."
+        "reason": "Il prefisso resta escluso dal censimento giornaliero perche' mirror-articles-engine.yml porta automaticamente l'engine dal sito. engine/rssFeeds.mjs e' l'eccezione esplicita: la voce adapted in files sorveglia il parser iniettato dal publisher corpus. Gli altri file sotto engine/ restano coperti dal trasporto automatico; un drift check durante ogni PR di mirror produrrebbe solo rumore."
       },
       {
         "prefix": "index.ts",
@@ -3092,7 +3092,7 @@
       "reason": "Lettore fail-closed dei sorgenti TS di stringhe del corpus (`readTsStringLiteral`, `readTsStringMap`): un solo decodificatore per i due backfill del registry (`backfill-article-cantons.mjs` e `backfill-article-type.mjs`), che ne avevano una copia ciascuno identica riga per riga (review della PR #2312); rifiuta valori e chiavi computate prima di restituire una mappa parziale. Corpus-only: legge `content/blog-body*/it`, che esiste solo qui; il sito non ha i due backfill. Senza dipendenze, come gli altri moduli del registry.",
       "baseline": {
         "site": null,
-        "corpus": "fed0aa34d8498825",
+        "corpus": "901ea756882fc730",
         "alignedAt": "2026-10-21"
       }
     },
@@ -6453,6 +6453,37 @@
       "baseline": {
         "site": null,
         "corpus": "e8dcd6f4d358e7ab",
+        "alignedAt": "2026-10-21"
+      }
+    },
+    {
+      "path": "engine/rssFeeds.mjs",
+      "sitePath": "packages/articles/engine/rssFeeds.mjs",
+      "mode": "adapted",
+      "reason": "Il corpus passa al builder mirrorato il parser statico dell'API attraverso scripts/lib/rss-feed-body-adapter.mjs, cosi' RSS rifiuta chiavi computate e sorgenti troncati senza importare moduli corpus-only dentro engine/. Il sito mantiene il proprio scanner lessicale mirrorabile; l'adattamento riguarda solo l'input parser e non duplica l'emissione RSS.",
+      "baseline": {
+        "site": "c7ac2c23986e6768",
+        "corpus": "2085f39e8eb2bc3a",
+        "alignedAt": "2026-10-21"
+      }
+    },
+    {
+      "path": "scripts/lib/rss-feed-body-adapter.mjs",
+      "mode": "corpus-only",
+      "reason": "Adapter del publisher che collega l'engine RSS mirrorato al parser dei body API, senza far entrare dipendenze generator o script corpus-only nell'engine. Il sito ha il proprio scanner nel package articoli e non ha questo entry point.",
+      "baseline": {
+        "site": null,
+        "corpus": "66e75a0252219a09",
+        "alignedAt": "2026-10-21"
+      }
+    },
+    {
+      "path": "scripts/lib/typescript-expression-scanner.mjs",
+      "mode": "corpus-only",
+      "reason": "Scanner lessicale condiviso per estrazione dei body e gate dei link nel publisher del corpus. Il sito riceve i body tramite JSON HTTP e non importa questo scanner né i sorgenti del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
         "alignedAt": "2026-10-21"
       }
     },

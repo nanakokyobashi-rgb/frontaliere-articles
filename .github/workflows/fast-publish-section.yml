@@ -53,6 +53,8 @@ on:
       # to its implementation or parser helpers must rerun this publisher.
       - 'scripts/ci/check-blog-body-links.mjs'
       - 'scripts/lib/article-link-contract.mjs'
+      - 'scripts/lib/typescript-expression-scanner.mjs'
+      - 'scripts/lib/rss-feed-body-adapter.mjs'
       - 'generator/scripts/lib/article-meta-block.mjs'
       - 'generator/scripts/lib/article-excerpt.mjs'
       - 'engine/**'
@@ -864,6 +866,8 @@ jobs:
             host/cantonSectionsBootstrap.mjs
             scripts/ci/check-blog-body-links.mjs
             scripts/lib/article-link-contract.mjs
+            scripts/lib/typescript-expression-scanner.mjs
+            scripts/lib/rss-feed-body-adapter.mjs
             scripts/lib/corpus-sections.mjs
             scripts/lib/ts-literals.mjs
             generator/scripts/lib/article-meta-block.mjs
