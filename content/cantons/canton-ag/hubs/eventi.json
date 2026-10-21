@@ -4,18 +4,13 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-10-21T00:56:25.671Z",
-  "contentHash": "2452b05472a0f40f0825e9116566061a17ca89774e12ddd1bd4ec143aae43f4e",
+  "updatedAt": "2026-10-21T17:12:16.125Z",
+  "contentHash": "5ef1e38640694d7a7314067eb6b0ba3055688ffe67ad8668dcc77fc6e5113c9e",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-20T17:28:37.181Z",
+      "updatedAt": "2026-10-21T12:38:14.154Z",
       "keyFacts": 1
-    },
-    {
-      "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T15:53:28.523Z",
-      "keyFacts": 0
     }
   ],
   "locales": {
@@ -100,25 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Avvisi ufficiali",
-          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
-          "items": [
-            {
-              "label": "Ausstellung im Rathaus: Sadhyo Niederberger",
-              "date": "2026-10-19",
-              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11882"
-            },
-            {
-              "label": "Veranstaltung im Wald",
-              "date": "2026-10-02",
-              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
-            }
-          ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "en": {
       "canton": "AG",
@@ -223,25 +200,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Official notices",
-          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
-          "items": [
-            {
-              "label": "Ausstellung im Rathaus: Sadhyo Niederberger",
-              "date": "2026-10-19",
-              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11882"
-            },
-            {
-              "label": "Veranstaltung im Wald",
-              "date": "2026-10-02",
-              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
-            }
-          ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "de": {
       "canton": "AG",
@@ -346,25 +305,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Amtliche Mitteilungen",
-          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
-          "items": [
-            {
-              "label": "Ausstellung im Rathaus: Sadhyo Niederberger",
-              "date": "2026-10-19",
-              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11882"
-            },
-            {
-              "label": "Veranstaltung im Wald",
-              "date": "2026-10-02",
-              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
-            }
-          ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "fr": {
       "canton": "AG",
@@ -469,25 +410,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Avis officiels",
-          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
-          "items": [
-            {
-              "label": "Ausstellung im Rathaus: Sadhyo Niederberger",
-              "date": "2026-10-19",
-              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11882"
-            },
-            {
-              "label": "Veranstaltung im Wald",
-              "date": "2026-10-02",
-              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11857"
-            }
-          ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     }
   }
 }

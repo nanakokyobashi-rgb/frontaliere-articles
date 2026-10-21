@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-21T12:43:43.682Z",
-  "contentHash": "211f6c7b171b800d6a4a46e5d49f2b27f794a3a4a3329bba68efbe4665aae562",
+  "updatedAt": "2026-10-21T17:12:16.125Z",
+  "contentHash": "ba59d34c251dfba0edd18fca920787a578305d4cac5dcb07b7b37f5a44828452",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-21T05:23:11.896Z",
+      "updatedAt": "2026-10-21T12:30:01.132Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T20:55:38.574Z",
+      "updatedAt": "2026-10-21T10:37:42.748Z",
       "keyFacts": 0
     }
   ],
@@ -38,20 +38,15 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "H8 Wattwil -> St. Gallen tra Luogo Waldstatt E Luogo Herisau Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-21T04:50:00.000Z"
-            },
-            {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffico",
-              "date": "2026-10-21T05:23:11.896Z",
+              "date": "2026-10-21T12:30:01.132Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffico",
-              "date": "2026-10-21T05:23:11.896Z",
+              "date": "2026-10-21T12:30:01.132Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -68,7 +63,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -106,7 +101,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -134,7 +129,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -155,20 +150,15 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "H8 Wattwil -> St. Gallen tra Luogo Waldstatt E Luogo Herisau Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-21T04:50:00.000Z"
-            },
-            {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffic",
-              "date": "2026-10-21T05:23:11.896Z",
+              "date": "2026-10-21T12:30:01.132Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffic",
-              "date": "2026-10-21T05:23:11.896Z",
+              "date": "2026-10-21T12:30:01.132Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -185,7 +175,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -223,7 +213,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -251,7 +241,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -272,20 +262,15 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "H8 Wattwil -> St. Gallen zwischen Ortschaft Waldstatt und Ortschaft Herisau Sachlage: Stau Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-21T04:50:00.000Z"
-            },
-            {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Verkehr",
-              "date": "2026-10-21T05:23:11.896Z",
+              "date": "2026-10-21T12:30:01.132Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Verkehr",
-              "date": "2026-10-21T05:23:11.896Z",
+              "date": "2026-10-21T12:30:01.132Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -302,7 +287,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -340,7 +325,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -368,7 +353,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -389,20 +374,15 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "H8 Wattwil -> St-Gall entre Localité Waldstatt et Localité Herisau Situation: bouchon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-21T04:50:00.000Z"
-            },
-            {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Trafic",
-              "date": "2026-10-21T05:23:11.896Z",
+              "date": "2026-10-21T12:30:01.132Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Trafic",
-              "date": "2026-10-21T05:23:11.896Z",
+              "date": "2026-10-21T12:30:01.132Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -419,7 +399,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -457,7 +437,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -485,7 +465,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     }
   }
 }

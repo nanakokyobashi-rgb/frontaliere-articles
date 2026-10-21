@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "servizi",
-  "updatedAt": "2026-10-21T12:43:43.682Z",
-  "contentHash": "e1ee4de6589a9195939a65eb97f2779a3c9cabc6677c4b470a6c40aa241bbce9",
+  "updatedAt": "2026-10-21T17:12:16.125Z",
+  "contentHash": "efb954000a48cdf4d1323b6ccc7d3640c79a7a603a6a7f6cfe3b033dec156d3b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-21T04:45:23.537Z",
+      "updatedAt": "2026-10-21T11:47:42.573Z",
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-21T05:04:28.498Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T20:55:38.574Z",
+      "updatedAt": "2026-10-21T10:37:42.748Z",
       "keyFacts": 0
     }
   ],
@@ -79,6 +74,13 @@
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
           "items": [
             {
+              "label": "BE222002",
+              "value": "700 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-21T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231210"
+            },
+            {
               "label": "BE74448",
               "value": "690 CHF",
               "detail": "offerta attuale",
@@ -91,32 +93,11 @@
               "detail": "offerta attuale",
               "date": "2026-10-21T19:00:00.000Z",
               "url": "https://www.auktion-be.ch/de/auction/231207"
-            },
-            {
-              "label": "BE222002",
-              "value": "490 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-21T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231210"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-21T04:45:23.537Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Bern",
-              "value": "11 °C",
-              "detail": "oggi da 7 a 12 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-21T05:04:28.498Z"
+          "updatedAt": "2026-10-21T11:47:42.573Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +110,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +190,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "en": {
       "canton": "BE",
@@ -261,6 +242,13 @@
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
           "items": [
             {
+              "label": "BE222002",
+              "value": "700 CHF",
+              "detail": "current bid",
+              "date": "2026-10-21T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231210"
+            },
+            {
               "label": "BE74448",
               "value": "690 CHF",
               "detail": "current bid",
@@ -273,32 +261,11 @@
               "detail": "current bid",
               "date": "2026-10-21T19:00:00.000Z",
               "url": "https://www.auktion-be.ch/de/auction/231207"
-            },
-            {
-              "label": "BE222002",
-              "value": "490 CHF",
-              "detail": "current bid",
-              "date": "2026-10-21T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231210"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-21T04:45:23.537Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Bern",
-              "value": "11 °C",
-              "detail": "today from 7 to 12 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-21T05:04:28.498Z"
+          "updatedAt": "2026-10-21T11:47:42.573Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -311,7 +278,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -387,7 +354,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "de": {
       "canton": "BE",
@@ -439,6 +406,13 @@
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
           "items": [
             {
+              "label": "BE222002",
+              "value": "700 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-21T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231210"
+            },
+            {
               "label": "BE74448",
               "value": "690 CHF",
               "detail": "aktuelles Gebot",
@@ -451,32 +425,11 @@
               "detail": "aktuelles Gebot",
               "date": "2026-10-21T19:00:00.000Z",
               "url": "https://www.auktion-be.ch/de/auction/231207"
-            },
-            {
-              "label": "BE222002",
-              "value": "490 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-21T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231210"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-21T04:45:23.537Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Bern",
-              "value": "11 °C",
-              "detail": "heute 7 bis 12 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-21T05:04:28.498Z"
+          "updatedAt": "2026-10-21T11:47:42.573Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -489,7 +442,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -565,7 +518,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "fr": {
       "canton": "BE",
@@ -617,6 +570,13 @@
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
           "items": [
             {
+              "label": "BE222002",
+              "value": "700 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-21T19:00:00.000Z",
+              "url": "https://www.auktion-be.ch/de/auction/231210"
+            },
+            {
               "label": "BE74448",
               "value": "690 CHF",
               "detail": "offre actuelle",
@@ -629,32 +589,11 @@
               "detail": "offre actuelle",
               "date": "2026-10-21T19:00:00.000Z",
               "url": "https://www.auktion-be.ch/de/auction/231207"
-            },
-            {
-              "label": "BE222002",
-              "value": "490 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-21T19:00:00.000Z",
-              "url": "https://www.auktion-be.ch/de/auction/231210"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-be.ch/de/",
-          "updatedAt": "2026-10-21T04:45:23.537Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Bern",
-              "value": "11 °C",
-              "detail": "aujourd’hui de 7 à 12 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-21T05:04:28.498Z"
+          "updatedAt": "2026-10-21T11:47:42.573Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -667,7 +606,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/gesundheit-am-arbeitsplatz-zeitdruck-groesste-herausforderung"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -739,7 +678,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     }
   }
 }

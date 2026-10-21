@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-21T12:43:43.682Z",
-  "contentHash": "0fc928d05b428a2c9671da746b339be619f2edb2da9b29f71e3435c1a65d0409",
+  "updatedAt": "2026-10-21T17:12:16.125Z",
+  "contentHash": "5bbd18ee37347421577bd730bd6646fe1b8e9b740eb2b73ca6d12d032b181936",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-21T05:23:11.896Z",
+      "updatedAt": "2026-10-21T12:30:01.132Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T20:55:38.574Z",
+      "updatedAt": "2026-10-21T10:37:42.748Z",
       "keyFacts": 0
     }
   ],
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "7",
+          "value": "6",
           "note": "segnalazioni aggiornate: 21 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "32",
+          "value": "30",
           "note": "segnalazioni aggiornate: 21 ottobre 2026"
         }
       ],
@@ -141,19 +141,19 @@
               "date": "2026-10-14T16:00:00.000Z"
             },
             {
-              "label": "A4 Brunnen <-> Zürich tra Galleria Galleria Islisberg E Galleria Galleria Eigi Situazione: uscita chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 9 novembre 2026",
-              "date": "2026-10-20T18:00:00.000Z"
+              "label": "A3 Diramazione Rheinfelden -> Germania tra Raccordo autostradale Diramazione Rheinfelden E Dogana Rheinfelden Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-21T12:18:00.000Z"
             },
             {
-              "label": "A1 Bern -> Zürich tra Svincolo autostradale Aarau Ost E Raccordo autostradale Diramazione Birrfeld Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-21T04:11:00.000Z"
+              "label": "Langenthal <-> Zofingen tra Luogo Strengelbach E Luogo St. Urban Situazione: pericolo Causa: lavori di costruzione",
+              "value": "Cantiere",
+              "detail": "fine prevista: 30 aprile 2027",
+              "date": "2025-04-07T09:38:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -171,11 +171,6 @@
               "url": "https://www.landkreis-waldshut.de/news/ersatzneubau-der-bruecke-ueber-die-bahnstrecke-in-albbruck-ge-nehmigt-landratsamt-waldshut-bereitet-umsetzung-vor/"
             },
             {
-              "label": "Nachhaltigkeit im Aargau entdecken: Ausstellung auf dem Bahnhofplatz",
-              "date": "2026-10-07",
-              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11866"
-            },
-            {
               "label": "Vollsperrung der Kreisstraße 6557 Richtung Nöggenschwiel",
               "date": "2026-10-06",
               "url": "https://www.landkreis-waldshut.de/news/vollsperrung-der-kreisstrasse-6557-richtung-noeggenschwiel/"
@@ -186,12 +181,17 @@
               "url": "https://www.landkreis-waldshut.de/news/vollsperrung-zwischen-weiler-und-blumegg/"
             },
             {
-              "label": "Verkehrskontrollgruppe stärkt Verkehrssicherheit",
-              "date": "2026-10-05T06:34:00.000Z",
-              "url": "https://www.baden.ch/de/home/politik-verwaltung/medien/aktuelle-meldungen.html/901/news/19603"
+              "label": "Brücke über Höllenbach in Niedingen für schwere Fahrzeuge...",
+              "date": "2026-09-24",
+              "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
+            },
+            {
+              "label": "WSB: Ersatzverkehr und Bauarbeiten zwischen Aarau und Schöftland",
+              "date": "2026-09-02",
+              "url": "https://www.aargauverkehr.ch/aktuell/meldungen/wsb-ersatzverkehr-und-bauarbeiten-zwischen-aarau-und-schoeftland"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -245,7 +245,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "en": {
       "canton": "AG",
@@ -260,12 +260,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "7",
+          "value": "6",
           "note": "reports as of 21 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "32",
+          "value": "30",
           "note": "reports as of 21 October 2026"
         }
       ],
@@ -364,19 +364,19 @@
               "date": "2026-10-14T16:00:00.000Z"
             },
             {
-              "label": "A4 Brunnen <-> Zürich tra Galleria Galleria Islisberg E Galleria Galleria Eigi Situazione: uscita chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 9 November 2026",
-              "date": "2026-10-20T18:00:00.000Z"
+              "label": "A3 Diramazione Rheinfelden -> Germania tra Raccordo autostradale Diramazione Rheinfelden E Dogana Rheinfelden Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-21T12:18:00.000Z"
             },
             {
-              "label": "A1 Bern -> Zürich tra Svincolo autostradale Aarau Ost E Raccordo autostradale Diramazione Birrfeld Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-21T04:11:00.000Z"
+              "label": "Langenthal <-> Zofingen tra Luogo Strengelbach E Luogo St. Urban Situazione: pericolo Causa: lavori di costruzione",
+              "value": "Roadworks",
+              "detail": "until 30 April 2027",
+              "date": "2025-04-07T09:38:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -394,11 +394,6 @@
               "url": "https://www.landkreis-waldshut.de/news/ersatzneubau-der-bruecke-ueber-die-bahnstrecke-in-albbruck-ge-nehmigt-landratsamt-waldshut-bereitet-umsetzung-vor/"
             },
             {
-              "label": "Nachhaltigkeit im Aargau entdecken: Ausstellung auf dem Bahnhofplatz",
-              "date": "2026-10-07",
-              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11866"
-            },
-            {
               "label": "Vollsperrung der Kreisstraße 6557 Richtung Nöggenschwiel",
               "date": "2026-10-06",
               "url": "https://www.landkreis-waldshut.de/news/vollsperrung-der-kreisstrasse-6557-richtung-noeggenschwiel/"
@@ -409,12 +404,17 @@
               "url": "https://www.landkreis-waldshut.de/news/vollsperrung-zwischen-weiler-und-blumegg/"
             },
             {
-              "label": "Verkehrskontrollgruppe stärkt Verkehrssicherheit",
-              "date": "2026-10-05T06:34:00.000Z",
-              "url": "https://www.baden.ch/de/home/politik-verwaltung/medien/aktuelle-meldungen.html/901/news/19603"
+              "label": "Brücke über Höllenbach in Niedingen für schwere Fahrzeuge...",
+              "date": "2026-09-24",
+              "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
+            },
+            {
+              "label": "WSB: Ersatzverkehr und Bauarbeiten zwischen Aarau und Schöftland",
+              "date": "2026-09-02",
+              "url": "https://www.aargauverkehr.ch/aktuell/meldungen/wsb-ersatzverkehr-und-bauarbeiten-zwischen-aarau-und-schoeftland"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -468,7 +468,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "de": {
       "canton": "AG",
@@ -483,12 +483,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "7",
+          "value": "6",
           "note": "Meldungen vom 21. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "32",
+          "value": "30",
           "note": "Meldungen vom 21. Oktober 2026"
         }
       ],
@@ -587,19 +587,19 @@
               "date": "2026-10-14T16:00:00.000Z"
             },
             {
-              "label": "A4 Brunnen <-> Zürich zwischen Tunnel Islisberg-Tunnel und Tunnel Überdeckung Eigi Sachlage: Ausfahrt gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 9. November 2026",
-              "date": "2026-10-20T18:00:00.000Z"
+              "label": "A3 Verzweigung Rheinfelden -> Deutschland zwischen Autobahndreieck Verzweigung Rheinfelden und Zollstation Rheinfelden Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-21T12:18:00.000Z"
             },
             {
-              "label": "A1 Bern -> Zürich zwischen Anschluss Aarau-Ost und Autobahndreieck Verzweigung Birrfeld Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-21T04:11:00.000Z"
+              "label": "Langenthal <-> Zofingen zwischen Ortschaft Strengelbach und Ortschaft St. Urban Sachlage: Gefahr Ursache: Bauarbeiten",
+              "value": "Baustelle",
+              "detail": "bis 30. April 2027",
+              "date": "2025-04-07T09:38:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -617,11 +617,6 @@
               "url": "https://www.landkreis-waldshut.de/news/ersatzneubau-der-bruecke-ueber-die-bahnstrecke-in-albbruck-ge-nehmigt-landratsamt-waldshut-bereitet-umsetzung-vor/"
             },
             {
-              "label": "Nachhaltigkeit im Aargau entdecken: Ausstellung auf dem Bahnhofplatz",
-              "date": "2026-10-07",
-              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11866"
-            },
-            {
               "label": "Vollsperrung der Kreisstraße 6557 Richtung Nöggenschwiel",
               "date": "2026-10-06",
               "url": "https://www.landkreis-waldshut.de/news/vollsperrung-der-kreisstrasse-6557-richtung-noeggenschwiel/"
@@ -632,12 +627,17 @@
               "url": "https://www.landkreis-waldshut.de/news/vollsperrung-zwischen-weiler-und-blumegg/"
             },
             {
-              "label": "Verkehrskontrollgruppe stärkt Verkehrssicherheit",
-              "date": "2026-10-05T06:34:00.000Z",
-              "url": "https://www.baden.ch/de/home/politik-verwaltung/medien/aktuelle-meldungen.html/901/news/19603"
+              "label": "Brücke über Höllenbach in Niedingen für schwere Fahrzeuge...",
+              "date": "2026-09-24",
+              "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
+            },
+            {
+              "label": "WSB: Ersatzverkehr und Bauarbeiten zwischen Aarau und Schöftland",
+              "date": "2026-09-02",
+              "url": "https://www.aargauverkehr.ch/aktuell/meldungen/wsb-ersatzverkehr-und-bauarbeiten-zwischen-aarau-und-schoeftland"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -691,7 +691,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "fr": {
       "canton": "AG",
@@ -706,12 +706,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "7",
+          "value": "6",
           "note": "signalements au 21 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "32",
+          "value": "30",
           "note": "signalements au 21 octobre 2026"
         }
       ],
@@ -810,19 +810,19 @@
               "date": "2026-10-14T16:00:00.000Z"
             },
             {
-              "label": "A4 Brunnen <-> Zurich entre Tunnel Tunnel de Islisberg et Tunnel Gallerie Eigi Situation: sortie fermée travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 9 novembre 2026",
-              "date": "2026-10-20T18:00:00.000Z"
+              "label": "A3 Echangeur de Rheinfelden -> Allemagne entre Echangeur Echangeur de Rheinfelden et Poste de douane Rheinfelden Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-21T12:18:00.000Z"
             },
             {
-              "label": "A1 Berne -> Zurich entre Jonction autoroutière Aarau-Est et Echangeur Echangeur de Birrfeld Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-21T04:11:00.000Z"
+              "label": "Langenthal <-> Zofingen entre Localité Strengelbach et Localité St. Urban Situation: danger Raison: travaux de construction",
+              "value": "Chantier",
+              "detail": "jusqu’au 30 avril 2027",
+              "date": "2025-04-07T09:38:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -840,11 +840,6 @@
               "url": "https://www.landkreis-waldshut.de/news/ersatzneubau-der-bruecke-ueber-die-bahnstrecke-in-albbruck-ge-nehmigt-landratsamt-waldshut-bereitet-umsetzung-vor/"
             },
             {
-              "label": "Nachhaltigkeit im Aargau entdecken: Ausstellung auf dem Bahnhofplatz",
-              "date": "2026-10-07",
-              "url": "https://www.aarau.ch/politik-verwaltung/aktuelles.html/204/news/11866"
-            },
-            {
               "label": "Vollsperrung der Kreisstraße 6557 Richtung Nöggenschwiel",
               "date": "2026-10-06",
               "url": "https://www.landkreis-waldshut.de/news/vollsperrung-der-kreisstrasse-6557-richtung-noeggenschwiel/"
@@ -855,12 +850,17 @@
               "url": "https://www.landkreis-waldshut.de/news/vollsperrung-zwischen-weiler-und-blumegg/"
             },
             {
-              "label": "Verkehrskontrollgruppe stärkt Verkehrssicherheit",
-              "date": "2026-10-05T06:34:00.000Z",
-              "url": "https://www.baden.ch/de/home/politik-verwaltung/medien/aktuelle-meldungen.html/901/news/19603"
+              "label": "Brücke über Höllenbach in Niedingen für schwere Fahrzeuge...",
+              "date": "2026-09-24",
+              "url": "https://www.landkreis-waldshut.de/news/bruecke-ueber-hoellenbach-in-niedingen-fuer-schwere-fahrzeuge-ge-sperrt/"
+            },
+            {
+              "label": "WSB: Ersatzverkehr und Bauarbeiten zwischen Aarau und Schöftland",
+              "date": "2026-09-02",
+              "url": "https://www.aargauverkehr.ch/aktuell/meldungen/wsb-ersatzverkehr-und-bauarbeiten-zwischen-aarau-und-schoeftland"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -914,7 +914,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     }
   }
 }

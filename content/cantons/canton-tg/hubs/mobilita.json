@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-21T12:43:43.682Z",
-  "contentHash": "77e2ca6c7a7d60a3b81d074fab8fa87eca475c9f159a74b0f839a78246209c79",
+  "updatedAt": "2026-10-21T17:12:16.125Z",
+  "contentHash": "b886873dab8a56965c6195427199f3c0dc9d97b43884ac2e74339d996336381c",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-21T05:23:11.896Z",
+      "updatedAt": "2026-10-21T12:30:01.132Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T20:55:38.574Z",
+      "updatedAt": "2026-10-21T10:37:42.748Z",
       "keyFacts": 0
     }
   ],
@@ -82,26 +82,6 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
-              "label": "H14 Romanshorn -> Frauenfeld tra Luogo Riedt E Luogo Bürglen Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-21T04:49:00.000Z"
-            },
-            {
-              "label": "H14 Romanshorn -> Frauenfeld tra Luogo Weinfelden E Luogo Märstetten-Station Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 15",
-              "value": "Traffico",
-              "date": "2026-10-21T05:02:00.000Z"
-            },
-            {
-              "label": "H14 Frauenfeld -> Romanshorn tra Luogo Bürglen E Luogo Sulgen Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-21T05:03:00.000Z"
-            },
-            {
-              "label": "H14 Frauenfeld -> Romanshorn tra Svincolo autostradale Eschikofen E Luogo Märstetten-Station Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 15",
-              "value": "Traffico",
-              "date": "2026-10-21T05:05:00.000Z"
-            },
-            {
               "label": "A7 Winterthur <-> Kreuzlingen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 7.5 Limitazione del…",
               "value": "Cantiere",
               "detail": "fine prevista: 23 ottobre 2026",
@@ -127,7 +107,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -165,7 +145,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80332"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -225,7 +205,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "en": {
       "canton": "TG",
@@ -285,26 +265,6 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
-              "label": "H14 Romanshorn -> Frauenfeld tra Luogo Riedt E Luogo Bürglen Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-21T04:49:00.000Z"
-            },
-            {
-              "label": "H14 Romanshorn -> Frauenfeld tra Luogo Weinfelden E Luogo Märstetten-Station Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 15",
-              "value": "Traffic",
-              "date": "2026-10-21T05:02:00.000Z"
-            },
-            {
-              "label": "H14 Frauenfeld -> Romanshorn tra Luogo Bürglen E Luogo Sulgen Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-21T05:03:00.000Z"
-            },
-            {
-              "label": "H14 Frauenfeld -> Romanshorn tra Svincolo autostradale Eschikofen E Luogo Märstetten-Station Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 15",
-              "value": "Traffic",
-              "date": "2026-10-21T05:05:00.000Z"
-            },
-            {
               "label": "A7 Winterthur <-> Kreuzlingen tra Raccordo autostradale Diramazione Grüneck E Svincolo autostradale Frauenfeld Ost Situazione: problemi di traffico cantiere, lunghezza [km] 7.5 Limitazione del…",
               "value": "Roadworks",
               "detail": "until 23 October 2026",
@@ -330,7 +290,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -368,7 +328,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80332"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -428,7 +388,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "de": {
       "canton": "TG",
@@ -488,26 +448,6 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
-              "label": "H14 Romanshorn -> Frauenfeld zwischen Ortschaft Riedt und Ortschaft Bürglen Sachlage: Stau Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-21T04:49:00.000Z"
-            },
-            {
-              "label": "H14 Romanshorn -> Frauenfeld zwischen Ortschaft Weinfelden und Ortschaft Märstetten-Station Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 15",
-              "value": "Verkehr",
-              "date": "2026-10-21T05:02:00.000Z"
-            },
-            {
-              "label": "H14 Frauenfeld -> Romanshorn zwischen Ortschaft Bürglen und Ortschaft Sulgen Sachlage: Stau Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-21T05:03:00.000Z"
-            },
-            {
-              "label": "H14 Frauenfeld -> Romanshorn zwischen Anschluss Eschikofen und Ortschaft Märstetten-Station Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 15",
-              "value": "Verkehr",
-              "date": "2026-10-21T05:05:00.000Z"
-            },
-            {
               "label": "A7 Winterthur <-> Kreuzlingen zwischen Autobahndreieck Verzweigung Grüneck und Anschluss Frauenfeld-Ost Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 7.5 Verkehrsführung: Fahrbahnverengung auf…",
               "value": "Baustelle",
               "detail": "bis 23. Oktober 2026",
@@ -533,7 +473,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -571,7 +511,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80332"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -631,7 +571,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "fr": {
       "canton": "TG",
@@ -691,26 +631,6 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
-              "label": "H14 Romanshorn -> Frauenfeld entre Localité Riedt et Localité Bürglen Situation: bouchon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-21T04:49:00.000Z"
-            },
-            {
-              "label": "H14 Romanshorn -> Frauenfeld entre Localité Weinfelden et Localité Märstetten-Station Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 15",
-              "value": "Trafic",
-              "date": "2026-10-21T05:02:00.000Z"
-            },
-            {
-              "label": "H14 Frauenfeld -> Romanshorn entre Localité Bürglen et Localité Sulgen Situation: bouchon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-21T05:03:00.000Z"
-            },
-            {
-              "label": "H14 Frauenfeld -> Romanshorn entre Jonction autoroutière Eschikofen et Localité Märstetten-Station Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 15",
-              "value": "Trafic",
-              "date": "2026-10-21T05:05:00.000Z"
-            },
-            {
               "label": "A7 Winterthur <-> Kreuzlingen entre Echangeur Echangeur de Grüneck et Jonction autoroutière Frauenfeld-Est Situation: trafic perturbé travaux, longueur [km] 7.5 Gestion du trafic: rétrécissement des…",
               "value": "Chantier",
               "detail": "jusqu’au 23 octobre 2026",
@@ -736,7 +656,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -774,7 +694,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80332"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -834,7 +754,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     }
   }
 }

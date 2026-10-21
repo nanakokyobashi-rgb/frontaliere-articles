@@ -4,17 +4,17 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-21T12:43:43.682Z",
-  "contentHash": "4e5bd26d3d25386edda28a1ecb84b3505f3df03aedc26a40a32c8aa2affce5ad",
+  "updatedAt": "2026-10-21T17:12:16.125Z",
+  "contentHash": "674f509a594eeb5dbec0b4407146f3a735e2bba1fec2b7f51bb29b7c1fa9e0c1",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-21T05:23:11.896Z",
+      "updatedAt": "2026-10-21T12:30:01.132Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T20:55:38.574Z",
+      "updatedAt": "2026-10-21T10:37:42.748Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "5",
+          "value": "6",
           "note": "segnalazioni aggiornate: 21 ottobre 2026"
         },
         {
@@ -73,14 +73,14 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A1 Zürich -> Bern tra Raccordo autostradale Diramazione Härkingen E Raccordo autostradale Diramazione Luterbach Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-21T04:08:00.000Z"
+              "label": "A1 Zürich -> Bern tra Raccordo autostradale Diramazione Härkingen E Svincolo autostradale Oensingen Situazione: colonna Causa: incidente Limitazione del traffico: corsia di sorpasso chiusa",
+              "value": "Chiusura",
+              "date": "2026-10-21T12:21:00.000Z"
             },
             {
-              "label": "A5 Bienne -> Solothurn tra Svincolo autostradale Solothurn Ost E Raccordo autostradale Diramazione Luterbach Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "A1 Zürich -> Bern tra Raccordo autostradale Diramazione Härkingen E Svincolo autostradale Oensingen Situazione: pericolo Causa: oggetto sulla strada",
               "value": "Traffico",
-              "date": "2026-10-21T05:21:00.000Z"
+              "date": "2026-10-21T12:20:00.000Z"
             },
             {
               "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
@@ -90,7 +90,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -108,7 +108,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -148,7 +148,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "en": {
       "canton": "SO",
@@ -158,7 +158,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "5",
+          "value": "6",
           "note": "reports as of 21 October 2026"
         },
         {
@@ -204,14 +204,14 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A1 Zürich -> Bern tra Raccordo autostradale Diramazione Härkingen E Raccordo autostradale Diramazione Luterbach Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-21T04:08:00.000Z"
+              "label": "A1 Zürich -> Bern tra Raccordo autostradale Diramazione Härkingen E Svincolo autostradale Oensingen Situazione: colonna Causa: incidente Limitazione del traffico: corsia di sorpasso chiusa",
+              "value": "Closure",
+              "date": "2026-10-21T12:21:00.000Z"
             },
             {
-              "label": "A5 Bienne -> Solothurn tra Svincolo autostradale Solothurn Ost E Raccordo autostradale Diramazione Luterbach Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "A1 Zürich -> Bern tra Raccordo autostradale Diramazione Härkingen E Svincolo autostradale Oensingen Situazione: pericolo Causa: oggetto sulla strada",
               "value": "Traffic",
-              "date": "2026-10-21T05:21:00.000Z"
+              "date": "2026-10-21T12:20:00.000Z"
             },
             {
               "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
@@ -221,7 +221,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -239,7 +239,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -278,7 +278,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "de": {
       "canton": "SO",
@@ -288,7 +288,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "5",
+          "value": "6",
           "note": "Meldungen vom 21. Oktober 2026"
         },
         {
@@ -334,14 +334,14 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A1 Zürich -> Bern zwischen Autobahndreieck Verzweigung Härkingen und Autobahndreieck Verzweigung Luterbach Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-21T04:08:00.000Z"
+              "label": "A1 Zürich -> Bern zwischen Autobahndreieck Verzweigung Härkingen und Anschluss Oensingen Sachlage: Stau Ursache: Unfall Verkehrsführung: Überholstreifen gesperrt",
+              "value": "Sperrung",
+              "date": "2026-10-21T12:21:00.000Z"
             },
             {
-              "label": "A5 Biel -> Solothurn zwischen Anschluss Solothurn-Ost und Autobahndreieck Verzweigung Luterbach Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "label": "A1 Zürich -> Bern zwischen Autobahndreieck Verzweigung Härkingen und Anschluss Oensingen Sachlage: Gefahr Ursache: Gegenstände auf der Fahrbahn",
               "value": "Verkehr",
-              "date": "2026-10-21T05:21:00.000Z"
+              "date": "2026-10-21T12:20:00.000Z"
             },
             {
               "label": "Balsthal <-> Laufen zwischen Ortschaft Oberbeinwil und Pass Passwang Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung",
@@ -351,7 +351,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -369,7 +369,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -408,7 +408,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "fr": {
       "canton": "SO",
@@ -418,7 +418,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "5",
+          "value": "6",
           "note": "signalements au 21 octobre 2026"
         },
         {
@@ -464,14 +464,14 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A1 Zurich -> Berne entre Echangeur Echangeur de Härkingen et Echangeur Echangeur de Luterbach Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-21T04:08:00.000Z"
+              "label": "A1 Zurich -> Berne entre Echangeur Echangeur de Härkingen et Jonction autoroutière Oensingen Situation: bouchon Raison: accident Gestion du trafic: voie de dépassement fermée",
+              "value": "Fermeture",
+              "date": "2026-10-21T12:21:00.000Z"
             },
             {
-              "label": "A5 Bienne -> Soleure entre Jonction autoroutière Soleure-Est et Echangeur Echangeur de Luterbach Situation: trafic en accordéon Raison: surcharge de trafic",
+              "label": "A1 Zurich -> Berne entre Echangeur Echangeur de Härkingen et Jonction autoroutière Oensingen Situation: danger Raison: objets sur la chaussée",
               "value": "Trafic",
-              "date": "2026-10-21T05:21:00.000Z"
+              "date": "2026-10-21T12:20:00.000Z"
             },
             {
               "label": "Balsthal <-> Laufon entre Localité Oberbeinwil et Col Passwang Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies",
@@ -481,7 +481,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -499,7 +499,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -539,7 +539,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     }
   }
 }

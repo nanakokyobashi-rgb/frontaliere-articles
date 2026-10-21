@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-21T15:16:39.188Z",
-  "contentHash": "4fc5e28b7ef95919c0dd087034c9bbe51d42593a3d7e6747eb716b6c1ff7fbf0",
+  "updatedAt": "2026-10-21T17:12:16.125Z",
+  "contentHash": "a2b2326edbd63bbc0d7b8960c813aec371920ede9fed161a3c91695c0c02ca5b",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-21T05:23:11.896Z",
+      "updatedAt": "2026-10-21T12:30:01.132Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T20:55:38.574Z",
+      "updatedAt": "2026-10-21T10:37:42.748Z",
       "keyFacts": 0
     }
   ],
@@ -27,12 +27,12 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "23",
+          "value": "22",
           "note": "segnalazioni aggiornate: 21 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "94",
+          "value": "95",
           "note": "segnalazioni aggiornate: 21 ottobre 2026"
         }
       ],
@@ -91,13 +91,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Grundstein für neue BLS-Werkstätte gelegt",
+              "date": "2026-10-21",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/mm-grundsteinlegung-werkstaette-oberburg"
+            },
             {
               "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
               "date": "2026-10-19",
@@ -122,14 +127,9 @@
               "label": "29.08.-11.10.26: Bauarbeiten untere Thunstrasse",
               "date": "2026-10-11",
               "url": "https://www.bernmobil.ch/de/2908-111026-bauarbeiten-untere-thunstrasse"
-            },
-            {
-              "label": "Buslinie 10: Haltekante L am Bahnhof Bern wird hindernisfrei",
-              "date": "2026-10-08T10:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -175,7 +175,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-21T15:16:39.188Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "en": {
       "canton": "BE",
@@ -185,12 +185,12 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "23",
+          "value": "22",
           "note": "reports as of 21 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "94",
+          "value": "95",
           "note": "reports as of 21 October 2026"
         }
       ],
@@ -249,13 +249,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Grundstein für neue BLS-Werkstätte gelegt",
+              "date": "2026-10-21",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/mm-grundsteinlegung-werkstaette-oberburg"
+            },
             {
               "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
               "date": "2026-10-19",
@@ -280,14 +285,9 @@
               "label": "29.08.-11.10.26: Bauarbeiten untere Thunstrasse",
               "date": "2026-10-11",
               "url": "https://www.bernmobil.ch/de/2908-111026-bauarbeiten-untere-thunstrasse"
-            },
-            {
-              "label": "Buslinie 10: Haltekante L am Bahnhof Bern wird hindernisfrei",
-              "date": "2026-10-08T10:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -333,7 +333,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-21T15:16:39.188Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "de": {
       "canton": "BE",
@@ -343,12 +343,12 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "23",
+          "value": "22",
           "note": "Meldungen vom 21. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "94",
+          "value": "95",
           "note": "Meldungen vom 21. Oktober 2026"
         }
       ],
@@ -407,13 +407,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Grundstein für neue BLS-Werkstätte gelegt",
+              "date": "2026-10-21",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/mm-grundsteinlegung-werkstaette-oberburg"
+            },
             {
               "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
               "date": "2026-10-19",
@@ -438,14 +443,9 @@
               "label": "29.08.-11.10.26: Bauarbeiten untere Thunstrasse",
               "date": "2026-10-11",
               "url": "https://www.bernmobil.ch/de/2908-111026-bauarbeiten-untere-thunstrasse"
-            },
-            {
-              "label": "Buslinie 10: Haltekante L am Bahnhof Bern wird hindernisfrei",
-              "date": "2026-10-08T10:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -491,7 +491,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-21T15:16:39.188Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     },
     "fr": {
       "canton": "BE",
@@ -501,12 +501,12 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "23",
+          "value": "22",
           "note": "signalements au 21 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "94",
+          "value": "95",
           "note": "signalements au 21 octobre 2026"
         }
       ],
@@ -565,13 +565,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Grundstein für neue BLS-Werkstätte gelegt",
+              "date": "2026-10-21",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/mm-grundsteinlegung-werkstaette-oberburg"
+            },
             {
               "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
               "date": "2026-10-19",
@@ -596,14 +601,9 @@
               "label": "29.08.-11.10.26: Bauarbeiten untere Thunstrasse",
               "date": "2026-10-11",
               "url": "https://www.bernmobil.ch/de/2908-111026-bauarbeiten-untere-thunstrasse"
-            },
-            {
-              "label": "Buslinie 10: Haltekante L am Bahnhof Bern wird hindernisfrei",
-              "date": "2026-10-08T10:00:00.000Z",
-              "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/buslinie-10-haltekante-l-am-bahnhof-bern-wird-hindernis-frei"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -649,7 +649,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-21T15:16:39.188Z"
+      "updatedAt": "2026-10-21T17:12:16.125Z"
     }
   }
 }
