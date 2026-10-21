@@ -94,6 +94,9 @@ jobs:
       # Nessun `npm ci`: lo scanner usa solo builtin Node, `gh`, e i moduli di
       # questo repo (github-issue-creator, topic-coverage-guard).
 
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
+
       - name: Prepare Firebase credentials
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}

@@ -263,11 +263,19 @@ export const GENERATOR_CI_JOB_NAME = 'test';
  * attendere, perché `generator-ci.yml` non parte nemmeno). Drift dai path
  * reali del workflow → guard in
  * `generator/tests/generator-ci-required-gate.test.mjs`.
+ * `scripts/lib/npm-ci-retry.sh` è incluso perché l'action isolata del runtime
+ * lo invoca: modificarlo deve far rieseguire anche i test che verificano il
+ * cablaggio dell'action e dei workflow publisher.
  */
 export const GENERATOR_CI_TRIGGER_PATHS = [
   'generator/',
   'engine/',
   'host/',
+  '.github/actions/setup-article-source-runtime/',
+  'scripts/ci/article-source-runtime/',
+  'scripts/ci/check-article-source-runtime.mjs',
+  'scripts/lib/npm-ci-retry.sh',
+  'scripts/ci/loop-sync-manifest.json',
   '.github/workflows/generator-ci.yml',
   'package.json',
   'package-lock.json',

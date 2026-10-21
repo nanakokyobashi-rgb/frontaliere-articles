@@ -112801,6 +112801,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-hackeraggio-ipct-casse-pensioni-ticino': {
+    title: 'Attacco hacker a PK Softech: 27.000 affiliati IPCT a rischio',
+    description: '27\'000 affiliati IPCT potrebbero essere vittime Attacco a PK Softech a fine settembre Dati di alcune centinaia in una cartella IPCT IPCT prepara',
+    keywords: 'frontalieri, ticino, svizzera, italia, attacco, hacker, softech, affiliati',
+    ogTitle: 'Attacco hacker a PK Softech: 27.000 affiliati IPCT a rischio',
+    ogDescription: '27\'000 affiliati IPCT potrebbero essere vittime Attacco a PK Softech a fine settembre Dati di alcune centinaia in una cartella IPCT IPCT prepara una lettera',
+    canonicalPath: '/articoli-frontaliere/hackeraggio-ipct-casse-pensioni-ticino/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Attacco hacker a PK Softech: 27.000 affiliati IPCT a rischio",
+      "description": "27'000 affiliati IPCT potrebbero essere vittime Attacco a PK Softech a fine settembre Dati di alcune centinaia in una cartella IPCT IPCT prepara",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-hackeraggio-ipct-casse-pensioni-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T17:53:56+00:00",
+      "dateModified": "2026-10-21T17:53:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/hackeraggio-ipct-casse-pensioni-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

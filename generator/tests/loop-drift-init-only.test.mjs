@@ -25,7 +25,8 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -61,6 +62,19 @@ test('localHash --init rifiuta un file presente nel working tree ma non in HEAD'
   } finally {
     rmSync(scratch, { recursive: true, force: true });
   }
+});
+
+test('localHash e la baseline del lettore corpus-only usano SHA-256 dei byte committati', () => {
+  const rel = 'generator/scripts/lib/ts-string-map.mjs';
+  const source = readFileSync(path.join(REPO_ROOT, rel));
+  const expected = createHash('sha256').update(source).digest('hex').slice(0, 16);
+  const manifest = JSON.parse(readFileSync(path.join(REPO_ROOT, 'scripts/ci/loop-sync-manifest.json'), 'utf8'));
+  const entry = manifest.files.find((file) => file.path === rel);
+
+  assert.ok(entry, `${rel} deve restare dichiarato nel manifest`);
+  assert.equal(entry.mode, 'corpus-only');
+  assert.equal(localHash(rel, { committed: true }), expected);
+  assert.equal(entry.baseline.corpus, expected);
 });
 
 test('parseOnly: forma `--only=a,b`', () => {

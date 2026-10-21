@@ -835,9 +835,9 @@
       "mode": "identical",
       "reason": "RICONCILIATO 2026-09-28 (issue #1110, trasporto concatenato da Site #10266 e follow-up #10273/#10277): lo scanner torna byte-identico al sito. Il watermark usa soltanto run `schedule` riuscite e distingue il primo avvio leggibile da una history illeggibile, che fallisce chiusa. Il lookback derivato ha un ceiling effettivo di 12 ore; l'orizzonte `created` realtime di 3 giorni e' fail-closed senza opt-in esplicito, mentre l'override retention-complete a 35 giorni conserva le run create oltre 3 giorni ma aggiornate nel cutoff. Split e paginazione evitano il limite di 1.000 risultati per search.",
       "baseline": {
-        "site": "0d4847a8632bd513",
-        "corpus": "0d4847a8632bd513",
-        "alignedAt": "2026-10-20"
+        "site": "04d704edc431c84d",
+        "corpus": "04d704edc431c84d",
+        "alignedAt": "2026-10-21"
       }
     },
     {
@@ -3092,7 +3092,7 @@
       "reason": "Lettore fail-closed dei sorgenti TS di stringhe del corpus (`readTsStringLiteral`, `readTsStringMap`): un solo decodificatore per i due backfill del registry (`backfill-article-cantons.mjs` e `backfill-article-type.mjs`), che ne avevano una copia ciascuno identica riga per riga (review della PR #2312); rifiuta valori e chiavi computate prima di restituire una mappa parziale. Corpus-only: legge `content/blog-body*/it`, che esiste solo qui; il sito non ha i due backfill. Senza dipendenze, come gli altri moduli del registry.",
       "baseline": {
         "site": null,
-        "corpus": "ea751bceb94720a8",
+        "corpus": "fed0aa34d8498825",
         "alignedAt": "2026-10-21"
       }
     },
@@ -3622,12 +3622,14 @@
     {
       "path": "generator/scripts/lib/meta-field-regex.mjs",
       "sitePath": "scripts/lib/meta-field-regex.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il wrapper CORPUS vive in `generator/scripts/lib/` e il gemello SITE in `scripts/lib/`; quando entrambi useranno il parser engine locale, gli import relativi saranno `../../../engine/shared/staticArticleSource.mjs` e `../../packages/articles/engine/shared/staticArticleSource.mjs`. Questa voce protegge tale adattamento topologico prima delle modifiche staged; l’API RegExp resta disponibile finché i caller non sono migrati.",
       "baseline": {
         "site": "782afafe9c39e70f",
         "corpus": "782afafe9c39e70f",
-        "alignedAt": "2026-08-14"
-      }
+        "alignedAt": "2026-10-21"
+      },
+      "adaptationIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/14418"
     },
     {
       "path": "generator/scripts/lib/unescape-ts-string.mjs",
@@ -3930,7 +3932,7 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 2cc55d3… comprende il budget SERP a 150 caratteri e il riferimento a gtag-init con il nome derivato dal contenuto in GTAG_SNIPPET (`/assets/gtag-init-<sha256[:12] di GTAG_INIT_CONTENT>.js`, sito PR #12150, issue 9403; fino al digest 082cd6c3… era la query `?v=` della PR #11496), per cui GTAG_INIT_CONTENT e ANALYTICS_EMISSION_ID_FACTORY_JS restano nella chiusura e scripts/ci/ensure-host-shell-assets.mjs carica quel file sulla CDN prima di ogni pubblicazione (sito issue 12270); conserva Organization come tipo base dell'identita' canonica e lo snippet Funding Choices che trattiene l'Offerwall fino al click su Candidati nelle sezioni job board; il gate segue anche i cambi di rotta SPA. La specializzazione editoriale resta in additionalType. Allineamento verificato contro main del sito dopo PR #12150; il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 39427a7… comprende il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs della PR sito #14411 e il riferimento a gtag-init con il nome derivato dal contenuto in GTAG_SNIPPET (`/assets/gtag-init-<sha256[:12] di GTAG_INIT_CONTENT>.js`, sito PR #12150, issue 9403; fino al digest 082cd6c3… era la query `?v=` della PR #11496), per cui GTAG_INIT_CONTENT e ANALYTICS_EMISSION_ID_FACTORY_JS restano nella chiusura e scripts/ci/ensure-host-shell-assets.mjs carica quel file sulla CDN prima di ogni pubblicazione (sito issue 12270); conserva Organization come tipo base dell'identita' canonica e lo snippet Funding Choices che trattiene l'Offerwall fino al click su Candidati nelle sezioni job board; il gate segue anche i cambi di rotta SPA. La specializzazione editoriale resta in additionalType. Allineamento verificato contro main del sito dopo PR #12150; il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
       "baseline": {
         "site": "5bedfc2a3453a9f5",
         "corpus": "db9e22109da26397",
@@ -3941,7 +3943,7 @@
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 22,
-        "sha256": "2cc55d337bbce2e78b89f6d8104f9417b06c2efb3fb8f63d07077d12b93912fd"
+        "sha256": "39427a7e57c98c531d72141429a5786e2bef4deeb9c6455aeea84191460d846f"
       }
     },
     {
@@ -3980,9 +3982,9 @@
       "sitePath": "services/seo/organizationLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "b012a9d1b3ada67a",
-        "corpus": "b012a9d1b3ada67a",
-        "alignedAt": "2026-10-11"
+        "site": "79e55d5374ef8b1a",
+        "corpus": "79e55d5374ef8b1a",
+        "alignedAt": "2026-10-21"
       }
     },
     {
@@ -4158,9 +4160,9 @@
       "mode": "identical",
       "reason": "Impronta SHA-256 dei 22 campi scalari di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Il gemello del sito vive in `tests/articles-shell-contract-fingerprint.json` con lo stesso contenuto; i due artefatti restano `identical` e la baseline ne sorveglia il drift. E' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
       "baseline": {
-        "site": "22338808c554207d",
-        "corpus": "22338808c554207d",
-        "alignedAt": "2026-10-20"
+        "site": "c4f1330703973856",
+        "corpus": "c4f1330703973856",
+        "alignedAt": "2026-10-21"
       }
     },
     {
@@ -6438,9 +6440,9 @@
       "path": "scripts/lib/single-flight-lock.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "4cb6ab1ae26b751c",
-        "corpus": "4cb6ab1ae26b751c",
-        "alignedAt": "2026-10-19"
+        "site": "86e684459d8d6afa",
+        "corpus": "86e684459d8d6afa",
+        "alignedAt": "2026-10-21"
       }
     },
     {
@@ -6460,6 +6462,46 @@
       "baseline": {
         "site": null,
         "corpus": null,
+        "alignedAt": "2026-10-21"
+      }
+    },
+    {
+      "path": "scripts/ci/article-source-runtime/README.md",
+      "mode": "corpus-only",
+      "reason": "Istruzioni locali per il runtime TypeScript isolato dei lettori statici del corpus; il sito mantiene setup e dipendenze nel proprio package manager.",
+      "baseline": {
+        "site": null,
+        "corpus": "23662d66c817eb38",
+        "alignedAt": "2026-10-21"
+      }
+    },
+    {
+      "path": "scripts/ci/article-source-runtime/package-lock.json",
+      "mode": "corpus-only",
+      "reason": "Lockfile dedicato all’installazione isolata del compilatore TypeScript usato dai job del corpus; non modifica le dipendenze npm di produzione del corpus o del sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "d8742810631cb7c4",
+        "alignedAt": "2026-10-21"
+      }
+    },
+    {
+      "path": "scripts/ci/article-source-runtime/package.json",
+      "mode": "corpus-only",
+      "reason": "Manifest dedicato al runtime TypeScript isolato dei job corpus che leggono sorgenti statici; il sito ha un setup distinto nel proprio repository.",
+      "baseline": {
+        "site": null,
+        "corpus": "e0167279ff94a32d",
+        "alignedAt": "2026-10-21"
+      }
+    },
+    {
+      "path": "scripts/ci/check-article-source-runtime.mjs",
+      "mode": "corpus-only",
+      "reason": "Smoke check del runtime TypeScript isolato nei job del corpus; il sito ha i propri entrypoint e non esegue questo checker.",
+      "baseline": {
+        "site": null,
+        "corpus": "5266ac18972026d9",
         "alignedAt": "2026-10-21"
       }
     }

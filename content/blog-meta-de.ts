@@ -13559,6 +13559,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.revolut-servizi-interrotti.title': 'Digitalbank, Störungen in der Schweiz bei Zahlungen und Währungsumtausch',
     'blog.article.revolut-servizi-interrotti.excerpt': 'Probleme bei Zahlungen, Einzahlungen und beim Währungsumtausch Beeinträchtigungen begannen in der Schweiz kurz nach 8:00 Google weist auf eine schrittweise Wiederaufnahme der Dienste hin Revolut: Geld',
     'blog.article.revolut-servizi-interrotti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.hackeraggio-ipct-casse-pensioni-ticino.title': 'Hackerangriff auf PK Softech: 27.000 IPCT-Versicherte gefährdet',
+    'blog.article.hackeraggio-ipct-casse-pensioni-ticino.excerpt': '27\'000 IPCT-Versicherte könnten Opfer werden Angriff auf PK Softech Ende September Daten von einigen Hundert in einem IPCT-Ordner IPCT bereitet ein Schreiben vor',
+    'blog.article.hackeraggio-ipct-casse-pensioni-ticino.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

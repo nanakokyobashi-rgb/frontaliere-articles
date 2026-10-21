@@ -32,7 +32,11 @@
  *      (NON solo != failure: richiede success → niente merge su pending/missing).
  *   4. Generator CI gate (#242): SOLO se la PR tocca i path che fanno scattare
  *      `generator-ci.yml` (`GENERATOR_CI_TRIGGER_PATHS` — generator/, engine/,
- *      host/, generator-ci.yml stesso, package.json/-lock.json), richiede ANCHE
+ *      host/, `.github/actions/setup-article-source-runtime/`,
+ *      `scripts/ci/article-source-runtime/`,
+ *      `scripts/ci/check-article-source-runtime.mjs`,
+ *      `scripts/ci/loop-sync-manifest.json`, generator-ci.yml stesso,
+ *      package.json/-lock.json), richiede ANCHE
  *      il check-run `GENERATOR_CI_JOB_NAME` == `success`. Prima di questo gate
  *      i due test del `SiteShellContract` (host/tests/shell-contract-*) e gli
  *      altri gate del generatore erano accesi ma NON bloccanti: nessun required
