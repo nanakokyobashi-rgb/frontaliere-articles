@@ -6473,7 +6473,7 @@
       "reason": "Adapter del publisher che collega l'engine RSS mirrorato al parser dei body API, senza far entrare dipendenze generator o script corpus-only nell'engine. Il sito ha il proprio scanner nel package articoli e non ha questo entry point.",
       "baseline": {
         "site": null,
-        "corpus": "29eb9fef7549255a",
+        "corpus": "66e75a0252219a09",
         "alignedAt": "2026-10-21"
       }
     },
