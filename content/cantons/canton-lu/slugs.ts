@@ -14,6 +14,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'lucerna-bilancio-budget-2027': { it: 'lucerna-bilancio-budget-2027', en: 'lucerne-budget-2027-plan', de: 'luzern-budget-2027-planung', fr: 'lucerne-budget-2027-planification' },
  'lucerna-finanze-sessione-ottobre': { it: 'lucerna-finanze-sessione-ottobre', en: 'lucerne-cantonal-finances-october', de: 'luzerner-kantonsfinanzen-oktober', fr: 'finances-cantonales-lucerne-octobre' },
  'lucerna-riduce-imposte': { it: 'lucerna-riduce-imposte', en: 'lucerne-canton-cuts-taxes', de: 'luzern-senkt-steuern', fr: 'lucerne-baisse-impots' },
+ 'lucerna-stop-riscaldamenti-fossili-2050': { it: 'lucerna-stop-riscaldamenti-fossili-2050', en: 'lucerne-ban-fossil-heating-2050', de: 'luzern-ausstieg-oelgasheizungen-2050', fr: 'lucerne-fin-chauffage-fossile-2050' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

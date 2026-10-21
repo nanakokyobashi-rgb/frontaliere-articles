@@ -36,6 +36,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.lucerna-riduce-imposte.title': 'Le canton de Lucerne réduit les impôts : décision définitive',
     'blog.article.lucerna-riduce-imposte.excerpt': 'La source Zentralplus présente la réduction des impôts dans le canton de Lucerne comme définitive ; le jeu de données fiscales 2026 indique des charges sur les revenus annuels et des valeurs A0.',
     'blog.article.lucerna-riduce-imposte.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lucerna-stop-riscaldamenti-fossili-2050.title': 'Lucerne : fin des chauffages au mazout et au gaz d’ici 2050',
+    'blog.article.lucerna-stop-riscaldamenti-fossili-2050.excerpt': 'Le Conseil cantonal a approuvé la révision de la loi sur l’énergie : interdiction des nouvelles installations fossiles et échéance finale pour tous d’ici 2050.',
+    'blog.article.lucerna-stop-riscaldamenti-fossili-2050.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

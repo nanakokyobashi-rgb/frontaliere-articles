@@ -36,6 +36,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.lucerna-riduce-imposte.title': 'Canton Lucerne cuts taxes: final decision',
     'blog.article.lucerna-riduce-imposte.excerpt': 'The Zentralplus source presents the tax reduction in the Canton of Lucerne as definitive; the 2026 tax dataset reports tax burdens on annual incomes and A0 values.',
     'blog.article.lucerna-riduce-imposte.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lucerna-stop-riscaldamenti-fossili-2050.title': 'Lucerne: phase out oil and gas heating by 2050',
+    'blog.article.lucerna-stop-riscaldamenti-fossili-2050.excerpt': 'The Cantonal Council approved the revision of the Energy Act: a ban on new fossil fuel installations and a final deadline for all by 2050.',
+    'blog.article.lucerna-stop-riscaldamenti-fossili-2050.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;

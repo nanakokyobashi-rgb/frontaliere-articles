@@ -127,4 +127,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'lucerna-stop-riscaldamenti-fossili-2050',
+ category: 'novita',
+ date: '2026-10-21T12:47:58.727Z',
+ image: '/images/blog/article-lucerna-stop-riscaldamenti-fossili-2050.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
