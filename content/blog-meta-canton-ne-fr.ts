@@ -33,6 +33,9 @@ const blogMetaCantonNeFr: Record<string, string> = {
     'blog.article.neuchatel-disoccupazione-maggio-2026.title': 'Neuchatel : le taux de chômage baisse à 4,3 % en mai 2026',
     'blog.article.neuchatel-disoccupazione-maggio-2026.excerpt': 'En mai 2026, le nombre de chômeurs dans le canton de Neuchatel baisse à 3’924 et le taux cantonal baisse à 4,3 %, soutenu par des facteurs saisonniers favorables.',
     'blog.article.neuchatel-disoccupazione-maggio-2026.imageAlt': 'Statistiques du chômage dans le canton de Neuchatel',
+    'blog.article.collegio-longueville-cantiere-colombier.title': 'Nouveau bâtiment et rénovations au collège de Longueville',
+    'blog.article.collegio-longueville-cantiere-colombier.excerpt': 'À Colombier, nouveau bâtiment scolaire d\'ici 2028 avec 24 salles de classe ; entre-temps, la piscine et la salle de sport rénovées sont déjà opérationnelles.',
+    'blog.article.collegio-longueville-cantiere-colombier.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonNeFr;

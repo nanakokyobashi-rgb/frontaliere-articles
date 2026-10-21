@@ -33,6 +33,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.neuchatel-disoccupazione-maggio-2026.title': 'Neuchatel: unemployment rate falls to 4,3% in May 2026',
     'blog.article.neuchatel-disoccupazione-maggio-2026.excerpt': 'In May 2026, the unemployed in Canton Neuchatel fell to 3’924 and the cantonal rate dropped to 4,3%, supported by favorable seasonal factors.',
     'blog.article.neuchatel-disoccupazione-maggio-2026.imageAlt': 'Unemployment statistics in Canton Neuchatel',
+    'blog.article.collegio-longueville-cantiere-colombier.title': 'New building and renovations at Longueville College',
+    'blog.article.collegio-longueville-cantiere-colombier.excerpt': 'In Colombier, a new school building with 24 classrooms by 2028; in the meantime, the renovated pool and gym are already operational.',
+    'blog.article.collegio-longueville-cantiere-colombier.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNeEn;

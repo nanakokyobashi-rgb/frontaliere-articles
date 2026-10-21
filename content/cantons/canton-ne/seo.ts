@@ -387,6 +387,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-collegio-longueville-cantiere-colombier': {
+    title: 'Nuovo edificio e ristrutturazioni al collegio di Longueville',
+    description: 'Nuovo edificio scolastico al collegio di Longueville a Colombier entro il 2028: 24 aule, refettorio e ristrutturazioni in corso.',
+    keywords: 'frontalieri, ticino, svizzera, italia, nuovo, edificio, ristrutturazioni, collegio',
+    ogTitle: 'Nuovo edificio e lavori al collegio di Longueville a Colombier',
+    ogDescription: 'Entro il 2028 sarà pronto il nuovo stabile con 24 aule e refettorio per 250 posti. Già operative piscina e palestra. Attenzione: divieto di sosta per accompagnamento figli in auto.',
+    canonicalPath: '/articoli-neuchatel/collegio-longueville-cantiere-colombier/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Nuovo edificio e ristrutturazioni al collegio di Longueville",
+      "description": "Nuovo edificio scolastico al collegio di Longueville a Colombier entro il 2028: 24 aule, refettorio e ristrutturazioni in corso.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-collegio-longueville-cantiere-colombier.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T08:31:34+00:00",
+      "dateModified": "2026-10-21T08:31:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/collegio-longueville-cantiere-colombier/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

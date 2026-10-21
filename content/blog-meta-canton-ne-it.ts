@@ -33,6 +33,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.neuchatel-disoccupazione-maggio-2026.title': 'Neuchatel: il tasso di disoccupazione scende al 4,3% a maggio 2026',
     'blog.article.neuchatel-disoccupazione-maggio-2026.excerpt': 'A maggio 2026 i disoccupati nel Canton Neuchatel scendono a 3’924 e il tasso cantonale cala al 4,3%, sostenuto da fattori stagionali favorevoli.',
     'blog.article.neuchatel-disoccupazione-maggio-2026.imageAlt': 'Statistiche sulla disoccupazione nel Canton Neuchatel',
+    'blog.article.collegio-longueville-cantiere-colombier.title': 'Nuovo edificio e ristrutturazioni al collegio di Longueville',
+    'blog.article.collegio-longueville-cantiere-colombier.excerpt': 'A Colombier, nuovo stabile scolastico entro il 2028 con 24 aule; nel frattempo sono già operative la piscina e la palestra rinnovate.',
+    'blog.article.collegio-longueville-cantiere-colombier.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonNeIt;

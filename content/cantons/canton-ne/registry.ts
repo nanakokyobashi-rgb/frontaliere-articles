@@ -116,4 +116,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'collegio-longueville-cantiere-colombier',
+ category: 'novita',
+ date: '2026-10-21T08:31:34.879Z',
+ image: '/images/blog/article-collegio-longueville-cantiere-colombier.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

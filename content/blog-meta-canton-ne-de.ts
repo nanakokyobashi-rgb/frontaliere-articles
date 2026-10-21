@@ -33,6 +33,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.neuchatel-disoccupazione-maggio-2026.title': 'Neuenburg: Die Arbeitslosenquote sinkt im Mai 2026 auf 4,3%',
     'blog.article.neuchatel-disoccupazione-maggio-2026.excerpt': 'Im Mai 2026 sinkt die Zahl der Arbeitslosen im Kanton Neuenburg auf 3’924, und die kantonale Quote fällt auf 4,3%, unterstützt durch günstige saisonale Faktoren.',
     'blog.article.neuchatel-disoccupazione-maggio-2026.imageAlt': 'Arbeitslosenstatistik im Kanton Neuenburg',
+    'blog.article.collegio-longueville-cantiere-colombier.title': 'Neubau und Renovierung des Kollegiums von Longueville',
+    'blog.article.collegio-longueville-cantiere-colombier.excerpt': 'In Colombier, einem neuen Schulgebäude bis 2028 mit 24 Klassenzimmern; in der Zwischenzeit sind das renovierte Schwimmbad und das Fitnessstudio bereits in Betrieb.',
+    'blog.article.collegio-longueville-cantiere-colombier.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNeDe;

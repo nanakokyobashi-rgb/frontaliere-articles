@@ -13,6 +13,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'eventi-weekend-neuchatel': { it: 'eventi-weekend-neuchatel', en: 'weekend-events-neuchatel', de: 'wochenend-veranstaltungen-neuenburg', fr: 'evenements-week-end-neuchatel' },
  'disoccupazione-neuchatel-luglio-2026': { it: 'disoccupazione-neuchatel-luglio-2026', en: 'neuchatel-unemployment-july-2026', de: 'neuenburg-arbeitslosigkeit-juli-2026', fr: 'chomage-neuchatel-juillet-2026' },
  'neuchatel-disoccupazione-maggio-2026': { it: 'neuchatel-disoccupazione-maggio-2026', en: 'neuchatel-unemployment-may-2026', de: 'neuenburg-arbeitslosigkeit-mai-2026', fr: 'neuchatel-chomage-mai-2026' },
+ 'collegio-longueville-cantiere-colombier': { it: 'collegio-longueville-cantiere-colombier', en: 'longueville-college-construction-colombier', de: 'longueville-kolleg-baustelle-colombier', fr: 'college-longueville-chantier-colombier' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
