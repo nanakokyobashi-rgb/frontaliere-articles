@@ -115,6 +115,25 @@ test('the daily producer makes a fresh governed hero before either first registr
   assert.match(source, /imageAlt: data\.imageAlt\?\.\[locale\]/);
 });
 
+test('the daily workflow stages and warms the governed article hero path', () => {
+  const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/generate-daily-brief.yml'), 'utf8');
+  const commitStep = workflow.slice(
+    workflow.indexOf('- name: Commit and push'),
+    workflow.indexOf('- name: Preserve the unpushed article'),
+  );
+  const cdnStep = workflow.slice(
+    workflow.indexOf('- name: Push hero + thumbnail to the CDN'),
+    workflow.indexOf('- name: Summary'),
+  );
+
+  assert.match(commitStep, /public\/images\/blog\/article-bollettino-frontaliere-\*\.webp/);
+  assert.match(commitStep, /public\/images\/blog\/thumbnails\/article-bollettino-frontaliere-\*-480w\.webp/);
+  assert.doesNotMatch(commitStep, /public\/images\/blog\/bollettino-frontaliere-\*\.webp/);
+  assert.match(cdnStep, /ID="article-bollettino-frontaliere-\$\(date -u \+%F\)"/);
+  assert.match(cdnStep, /upload-cdn-file\.sh "\$HERO" "images\/blog\/\$ID\.webp"/);
+  assert.doesNotMatch(cdnStep, /ID="bollettino-frontaliere-/);
+});
+
 test('the daily cover scene follows the headline kind without embedding its numbers', () => {
   const cases = [
     [{ kind: 'jobsTrend', weeklyChange: -247, weeklyChangePct: -18.4 }, /contemporary workplace/i],
