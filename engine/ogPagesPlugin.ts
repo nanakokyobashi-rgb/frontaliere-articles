@@ -313,9 +313,9 @@ function skipTemplateExpression(source: string, start: number, sourcePath: strin
    continue;
   }
   if ((char === '+' && source[cursor + 1] === '+') || (char === '-' && source[cursor + 1] === '-')) {
-   // Consume update operators as one token. Preserving the current context
-   // keeps postfix updates after an operand from turning the following `/`
-   // into a regex start, while prefix updates remain valid before an operand.
+   // Consume update operators as one token. Keeping the current context makes
+   // postfix updates leave the following slash as division, while prefix
+   // updates still allow a regex literal before the operand.
    cursor += 2;
    continue;
   }
