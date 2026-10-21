@@ -487,6 +487,11 @@ test('il gate fallisce chiuso sulle chiavi body computed e riporta l’espressio
     "const body = { [(() => { function typed(): { value: { nested: unknown } } | null { {} /foo\\]/.test(value); return null; } return 'id'; })()]: '[x](bare-target)' };\n",
     "const body = { [(() => { class Check<T extends { value: unknown }> {} /foo\\]/.test(value); return 'id'; })()]: '[x](bare-target)' };\n",
     "const body = { [(() => { class Check extends mixin({}) {} /foo\\]/.test(value); return 'id'; })()]: '[x](bare-target)' };\n",
+    "const body = { [(() => { class Pick extends (x < y ? Left : Right) {} /foo\\]/.test(value); return 'id'; })()]: '[x](bare-target)' };\n",
+    "const body = { [(() => { class Indexed extends foo[x < y] {} /foo\\]/.test(value); return 'id'; })()]: '[x](bare-target)' };\n",
+    "const body = { [(() => { class ArrowIndexed extends foo[x => {}] {} /foo\\]/.test(value); return 'id'; })()]: '[x](bare-target)' };\n",
+    "const body = { [(() => { class ObjectIndexed extends foo[{ key: value }] {} /foo\\]/.test(value); return 'id'; })()]: '[x](bare-target)' };\n",
+    "const body = { [(() => { class Generic extends Base<{ value: unknown }> {} /foo\\]/.test(value); return 'id'; })()]: '[x](bare-target)' };\n",
     "const body = { [(() => { class Outer extends mixin(class Inner {}) {} /foo\\]/.test(value); return 'id'; })()]: '[x](bare-target)' };\n",
     "const body = { [(() => { async () => { function nested() {} /foo\\]/.test(value); }; return 'id'; })()]: '[x](bare-target)' };\n",
   ];
@@ -514,6 +519,11 @@ test('il gate fallisce chiuso sulle chiavi body computed e riporta l’espressio
         "function typed(): { value: { nested: unknown } } | null { {} /foo\\]/.test(value); return null; }",
         "class Check<T extends { value: unknown }> {} /foo\\]/.test(value)",
         "class Check extends mixin({}) {} /foo\\]/.test(value)",
+        "class Pick extends (x < y ? Left : Right) {} /foo\\]/.test(value)",
+        "class Indexed extends foo[x < y] {} /foo\\]/.test(value)",
+        "class ArrowIndexed extends foo[x => {}] {} /foo\\]/.test(value)",
+        "class ObjectIndexed extends foo[{ key: value }] {} /foo\\]/.test(value)",
+        "class Generic extends Base<{ value: unknown }> {} /foo\\]/.test(value)",
         "class Outer extends mixin(class Inner {}) {} /foo\\]/.test(value)",
         "async () => { function nested() {} /foo\\]/.test(value); }",
       ][index]));
@@ -580,6 +590,25 @@ test('il gate non tronca una template expression su una graffa dentro una regex'
     assert.deepEqual(result.offenders, []);
     assert.equal(result.errors.length, 1);
     assert.match(result.errors[0].message, /template TypeScript dinamico non verificabile/u);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('il gate non espone il contenuto dopo una regex con new in una template expression annidata', () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'article-body-link-regex-new-'));
+  const relative = `${BLOG_BODY_ROOTS[0]}/it/dynamic-regex-new.ts`;
+  const file = path.join(fixtureRoot, relative);
+  mkdirSync(path.dirname(file), { recursive: true });
+  writeFileSync(file, [
+    "const helper = `prefix ${false ? new /}/ : `nested ${value}`} const body = { 'blog.article.fake.body1': '[fake](bare-target)' };`;",
+    "const body = { 'blog.article.fixture.body1': '[ok](https://example.com)' };",
+    '',
+  ].join('\n'), 'utf8');
+  try {
+    const result = scanBlogBodyLinks(fixtureRoot);
+    assert.deepEqual(result.errors, []);
+    assert.deepEqual(result.offenders, []);
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }

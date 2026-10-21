@@ -72,6 +72,7 @@ function skipRegexLiteral(source, offset) {
 function scanTypeScriptExpression(source, offset, terminator) {
   const templateTerminator = terminator === '}';
   let depth = templateTerminator ? 1 : 0;
+  let bracketDepth = 0;
   let index = offset;
   let canStartRegex = true;
   let afterMemberAccess = false;
@@ -152,6 +153,7 @@ function scanTypeScriptExpression(source, offset, terminator) {
       const classBody = awaitingClassBody !== null && !classType
         && !awaitingClassBody.bodyOpen
         && controlParenStack.length === awaitingClassBody.parenDepth
+        && bracketDepth === awaitingClassBody.bracketDepth
         && !awaitingClassBody.inTypeParameters && !awaitingClassBody.expectsType;
       const functionBody = pendingFunctionBody !== null && !functionType;
       const isBareBlock = statementBoundary && braceBlockStack.some((frame) => frame.isBlock);
@@ -258,7 +260,7 @@ function scanTypeScriptExpression(source, offset, terminator) {
       const word = source.slice(index, end);
       const memberProperty = afterMemberAccess;
       canStartRegex = !memberProperty
-        && /^(?:case|delete|do|else|in|instanceof|of|return|throw|typeof|void|yield|await)$/u.test(word);
+        && /^(?:case|delete|do|else|in|instanceof|new|of|return|throw|typeof|void|yield|await)$/u.test(word);
       awaitingControlParen = (!memberProperty && /^(?:catch|for|if|switch|while|with)$/u.test(word))
         || (awaitingControlParen && word === 'await');
       awaitingBlock = !memberProperty && /^(?:catch|do|else|finally|try)$/u.test(word);
@@ -277,7 +279,9 @@ function scanTypeScriptExpression(source, offset, terminator) {
         awaitingClassBody = {
           endsStatement: statementBoundary,
           parenDepth: controlParenStack.length,
+          bracketDepth,
           inTypeParameters: false,
+          inHeritageExpression: false,
           expectsType: false,
           typeDepth: 0,
           genericDepth: 0,
@@ -290,6 +294,8 @@ function scanTypeScriptExpression(source, offset, terminator) {
       }
       if (awaitingClassBody?.inTypeParameters) {
         awaitingClassBody.expectsType = word === 'extends';
+      } else if (awaitingClassBody && !awaitingClassBody.bodyOpen && word === 'extends') {
+        awaitingClassBody.inHeritageExpression = true;
       }
       statementBoundary = false;
       index = end;
@@ -338,7 +344,10 @@ function scanTypeScriptExpression(source, offset, terminator) {
       awaitingBlock = false;
       statementBoundary = ch === ';' && braceBlockStack.some((frame) => frame.isBlock);
       if (!['*', '<', '>'].includes(ch)) awaitingFunctionParams = false;
-      if (ch === '[' && !templateTerminator) depth += 1;
+      if (ch === '[') {
+        bracketDepth += 1;
+        if (!templateTerminator) depth += 1;
+      }
       if (pendingFunctionBody) {
         if (ch === ':' && !pendingFunctionBody.inReturnType) {
           pendingFunctionBody.inReturnType = true;
@@ -354,12 +363,16 @@ function scanTypeScriptExpression(source, offset, terminator) {
           }
         }
       }
-      if (awaitingClassBody) {
+      const classTypeContext = awaitingClassBody && !awaitingClassBody.bodyOpen
+        && (!awaitingClassBody.inHeritageExpression
+          || (controlParenStack.length === awaitingClassBody.parenDepth
+            && bracketDepth === awaitingClassBody.bracketDepth));
+      if (classTypeContext) {
         if (ch === '<') {
           const nestedTypeArguments = awaitingClassBody.inTypeParameters;
           awaitingClassBody.inTypeParameters = true;
           awaitingClassBody.genericDepth += 1;
-          awaitingClassBody.expectsType = nestedTypeArguments;
+          awaitingClassBody.expectsType = nestedTypeArguments || awaitingClassBody.inHeritageExpression;
         } else if (ch === '>' && awaitingClassBody.inTypeParameters) {
           awaitingClassBody.genericDepth -= 1;
           if (awaitingClassBody.genericDepth <= 0) {
@@ -383,16 +396,19 @@ function scanTypeScriptExpression(source, offset, terminator) {
       index += 1;
       continue;
     }
-    if (ch === ']' && !templateTerminator) {
-      if (depth === 0) return index + 1;
-      depth -= 1;
-      canStartRegex = false;
-      afterMemberAccess = false;
-      awaitingControlParen = false;
-      awaitingBlock = false;
-      statementBoundary = false;
-      index += 1;
-      continue;
+    if (ch === ']') {
+      if (bracketDepth > 0) bracketDepth -= 1;
+      if (!templateTerminator) {
+        if (depth === 0) return index + 1;
+        depth -= 1;
+        canStartRegex = false;
+        afterMemberAccess = false;
+        awaitingControlParen = false;
+        awaitingBlock = false;
+        statementBoundary = false;
+        index += 1;
+        continue;
+      }
     }
     if (')]}'.includes(ch)) {
       canStartRegex = false;

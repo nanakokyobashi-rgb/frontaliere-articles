@@ -288,6 +288,17 @@ test('il lettore TS decodifica il body3 italiano con apostrofi ed escape', () =>
   assert.equal(readTsStringMap(source).get('blog.article.demo.body3'), "L'articolo\n\nFonte");
 });
 
+test('il lettore TS rifiuta template interpolati ma preserva l’interpolazione escapata', () => {
+  const dynamic = "'blog.article.demo.body1': `prefix ${bodyText}`,";
+  assert.throws(
+    () => readTsStringMap(dynamic),
+    /Interpolated template literal is not supported in static article string source/u,
+  );
+
+  const escaped = "'blog.article.demo.body1': `literal \\${bodyText}`,";
+  assert.equal(readTsStringMap(escaped).get('blog.article.demo.body1'), 'literal ${bodyText}');
+});
+
 describe('ledger di lettura e piano di backfill', () => {
   test('il ledger reale copre i 210 stale con forma e conteggi attesi', () => {
     const rows = backfillType.readArticleTypeReadings();
