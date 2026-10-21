@@ -2592,6 +2592,42 @@
       "firstSeenAt": "2026-10-21T02:20:57.031Z",
       "lastValidatedAt": "2026-10-21T02:20:57.031Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere fiduciario ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T03:26:29.813Z",
+      "lastValidatedAt": "2026-10-21T03:26:29.813Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere consulente alla clientela ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T03:27:08.740Z",
+      "lastValidatedAt": "2026-10-21T03:27:08.740Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere lattoniere ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T03:27:40.410Z",
+      "lastValidatedAt": "2026-10-21T03:27:40.410Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
