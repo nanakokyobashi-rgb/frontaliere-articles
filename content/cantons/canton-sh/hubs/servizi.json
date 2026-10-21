@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "servizi",
-  "updatedAt": "2026-10-21T01:44:55.473Z",
-  "contentHash": "7ff69aeb0e435202aa2ace291783fc7172c1a0658d2a5bcaa915d85581c00fc1",
+  "updatedAt": "2026-10-21T04:08:52.546Z",
+  "contentHash": "2634e4c5dddfdbefeb3cd31f6483d3655974038d815af8d54f72772d4bdf77a3",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,8 +14,13 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-20T17:03:18.684Z",
+      "updatedAt": "2026-10-20T21:38:20.661Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-20T23:17:38.181Z",
+      "keyFacts": 0
     }
   ],
   "locales": {
@@ -72,7 +77,7 @@
             },
             {
               "label": "SH3402",
-              "value": "1000 CHF",
+              "value": "1050 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-21T20:00:00.000Z",
               "url": "https://www.auktion-stva.sh.ch/de/auction/69629"
@@ -87,7 +92,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-20T17:03:18.684Z"
+          "updatedAt": "2026-10-20T21:38:20.661Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "9 °C",
+              "detail": "oggi da 8 a 9 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-20T23:17:38.181Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +174,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-21T01:44:55.473Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "en": {
       "canton": "SH",
@@ -210,7 +229,7 @@
             },
             {
               "label": "SH3402",
-              "value": "1,000 CHF",
+              "value": "1,050 CHF",
               "detail": "current bid",
               "date": "2026-10-21T20:00:00.000Z",
               "url": "https://www.auktion-stva.sh.ch/de/auction/69629"
@@ -225,7 +244,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-20T17:03:18.684Z"
+          "updatedAt": "2026-10-20T21:38:20.661Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "9 °C",
+              "detail": "today from 8 to 9 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-20T23:17:38.181Z"
         }
       ],
       "curatedArticles": [
@@ -289,7 +322,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-21T01:44:55.473Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "de": {
       "canton": "SH",
@@ -344,7 +377,7 @@
             },
             {
               "label": "SH3402",
-              "value": "1’000 CHF",
+              "value": "1’050 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-21T20:00:00.000Z",
               "url": "https://www.auktion-stva.sh.ch/de/auction/69629"
@@ -359,7 +392,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-20T17:03:18.684Z"
+          "updatedAt": "2026-10-20T21:38:20.661Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "9 °C",
+              "detail": "heute 8 bis 9 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-20T23:17:38.181Z"
         }
       ],
       "curatedArticles": [
@@ -423,7 +470,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-21T01:44:55.473Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "fr": {
       "canton": "SH",
@@ -478,7 +525,7 @@
             },
             {
               "label": "SH3402",
-              "value": "1 000 CHF",
+              "value": "1 050 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-21T20:00:00.000Z",
               "url": "https://www.auktion-stva.sh.ch/de/auction/69629"
@@ -493,7 +540,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-20T17:03:18.684Z"
+          "updatedAt": "2026-10-20T21:38:20.661Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "9 °C",
+              "detail": "aujourd’hui de 8 à 9 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-20T23:17:38.181Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +614,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-21T01:44:55.473Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     }
   }
 }

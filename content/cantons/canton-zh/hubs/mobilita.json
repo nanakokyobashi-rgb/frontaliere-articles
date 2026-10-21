@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-21T03:09:34.669Z",
-  "contentHash": "78e19e766bc82597668914cc0f0b5bd82a840b4b41c471490362206b6d48aae1",
+  "updatedAt": "2026-10-21T04:08:52.546Z",
+  "contentHash": "64a3d22d5849aac96e500ec930e5235866550f0c1d84d2c725edf3c13459e0a0",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T17:37:05.348Z",
+      "updatedAt": "2026-10-20T21:56:57.353Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T15:53:28.523Z",
+      "updatedAt": "2026-10-20T20:55:38.574Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "8",
+          "value": "10",
           "note": "segnalazioni aggiornate: 20 ottobre 2026"
         },
         {
@@ -160,13 +160,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T17:37:05.348Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Mann wirft Brandsatz im Bahnhof Oerlikon",
+              "date": "2026-10-20T16:29:18.000Z",
+              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/mann-wirft-brandsatz-im-bahnhof-oerlikon.html"
+            },
             {
               "label": "Die Stadt unterstützt den Kauf von E-Cargovelos für gewerbliche Nutzungen",
               "date": "2026-10-20T08:30:00.000Z",
@@ -188,7 +193,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -266,7 +271,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-21T03:09:34.669Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "en": {
       "canton": "ZH",
@@ -281,7 +286,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "8",
+          "value": "10",
           "note": "reports as of 20 October 2026"
         },
         {
@@ -404,13 +409,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T17:37:05.348Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Mann wirft Brandsatz im Bahnhof Oerlikon",
+              "date": "2026-10-20T16:29:18.000Z",
+              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/mann-wirft-brandsatz-im-bahnhof-oerlikon.html"
+            },
             {
               "label": "Die Stadt unterstützt den Kauf von E-Cargovelos für gewerbliche Nutzungen",
               "date": "2026-10-20T08:30:00.000Z",
@@ -432,7 +442,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -510,7 +520,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-21T03:09:34.669Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "de": {
       "canton": "ZH",
@@ -525,7 +535,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "8",
+          "value": "10",
           "note": "Meldungen vom 20. Oktober 2026"
         },
         {
@@ -648,13 +658,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T17:37:05.348Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Mann wirft Brandsatz im Bahnhof Oerlikon",
+              "date": "2026-10-20T16:29:18.000Z",
+              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/mann-wirft-brandsatz-im-bahnhof-oerlikon.html"
+            },
             {
               "label": "Die Stadt unterstützt den Kauf von E-Cargovelos für gewerbliche Nutzungen",
               "date": "2026-10-20T08:30:00.000Z",
@@ -676,7 +691,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -754,7 +769,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-21T03:09:34.669Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "fr": {
       "canton": "ZH",
@@ -769,7 +784,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "8",
+          "value": "10",
           "note": "signalements au 20 octobre 2026"
         },
         {
@@ -892,13 +907,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T17:37:05.348Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Mann wirft Brandsatz im Bahnhof Oerlikon",
+              "date": "2026-10-20T16:29:18.000Z",
+              "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/10/mann-wirft-brandsatz-im-bahnhof-oerlikon.html"
+            },
             {
               "label": "Die Stadt unterstützt den Kauf von E-Cargovelos für gewerbliche Nutzungen",
               "date": "2026-10-20T08:30:00.000Z",
@@ -920,7 +940,7 @@
               "url": "https://www.stadt-zuerich.ch/de/aktuell/medienmitteilungen/2026/09/aufwendigere-teilinstandsetzung-woko-wohnheim-tannenrauchstrasse-35.html"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -998,7 +1018,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-21T03:09:34.669Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     }
   }
 }

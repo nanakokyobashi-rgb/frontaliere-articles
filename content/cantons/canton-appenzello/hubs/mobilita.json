@@ -4,17 +4,17 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T23:20:19.994Z",
-  "contentHash": "c456fd83930a5851c506c5de9d04ccfeb3dfa64b7849e7f214b8cde60e155edd",
+  "updatedAt": "2026-10-21T04:08:52.546Z",
+  "contentHash": "a4933c86edf3729da4b77f5784698bb62dfa30e0d6b9314b158ca9207ee88867",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T17:37:05.348Z",
+      "updatedAt": "2026-10-20T21:56:57.353Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T15:53:28.523Z",
+      "updatedAt": "2026-10-20T20:55:38.574Z",
       "keyFacts": 0
     }
   ],
@@ -40,13 +40,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffico",
-              "date": "2026-10-20T17:37:05.348Z",
+              "date": "2026-10-20T21:56:57.353Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffico",
-              "date": "2026-10-20T17:37:05.348Z",
+              "date": "2026-10-20T21:56:57.353Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -63,7 +63,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T17:37:05.348Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -101,7 +101,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -129,7 +129,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-20T23:20:19.994Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -152,13 +152,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffic",
-              "date": "2026-10-20T17:37:05.348Z",
+              "date": "2026-10-20T21:56:57.353Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Traffic",
-              "date": "2026-10-20T17:37:05.348Z",
+              "date": "2026-10-20T21:56:57.353Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -175,7 +175,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T17:37:05.348Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -213,7 +213,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -241,7 +241,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-20T23:20:19.994Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -264,13 +264,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Verkehr",
-              "date": "2026-10-20T17:37:05.348Z",
+              "date": "2026-10-20T21:56:57.353Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Verkehr",
-              "date": "2026-10-20T17:37:05.348Z",
+              "date": "2026-10-20T21:56:57.353Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -287,7 +287,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T17:37:05.348Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -325,7 +325,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -353,7 +353,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-20T23:20:19.994Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -376,13 +376,13 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Trafic",
-              "date": "2026-10-20T17:37:05.348Z",
+              "date": "2026-10-20T21:56:57.353Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
               "label": "Appenzell-Grossviehschau",
               "value": "Trafic",
-              "date": "2026-10-20T17:37:05.348Z",
+              "date": "2026-10-20T21:56:57.353Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/grossviehschau-verkehrsbehinderung"
             },
             {
@@ -399,7 +399,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T17:37:05.348Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -437,7 +437,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-20T23:20:19.994Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     }
   }
 }
