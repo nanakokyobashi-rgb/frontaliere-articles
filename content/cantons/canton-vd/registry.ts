@@ -226,4 +226,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'lausanne-marathon-2026-chiusure-strade',
+ category: 'pratico',
+ date: '2026-10-21T20:50:06.586Z',
+ image: '/images/blog/article-lausanne-marathon-2026-chiusure-strade.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

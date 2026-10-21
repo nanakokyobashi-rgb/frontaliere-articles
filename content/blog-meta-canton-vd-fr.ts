@@ -63,6 +63,9 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.fisco-vaud-indennita-abuso-imposte.title': 'Fisc vaudois : impôts sur une indemnité pour abus, recours en vue',
     'blog.article.fisco-vaud-indennita-abuso-imposte.excerpt': 'À Pully : abus au Collège de Champittet à la fin des années 70 Indemnité de l\'Église : CHF 220\'000, divisée en deux parties Après l\'opposition : CHF 120\'000',
     'blog.article.fisco-vaud-indennita-abuso-imposte.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lausanne-marathon-2026-chiusure-strade.title': 'Lausanne Marathon 2026 : routes fermées le 25 octobre',
+    'blog.article.lausanne-marathon-2026-chiusure-strade.excerpt': 'Dimanche 25 octobre 2026 a lieu le Lausanne Marathon Routes cantonales concernées : 777-B-P et 780-B-P Fermetures totales ou partielles approximativement',
+    'blog.article.lausanne-marathon-2026-chiusure-strade.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonVdFr;
