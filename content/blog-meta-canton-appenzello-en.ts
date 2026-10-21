@@ -36,6 +36,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.proporz-gran-consiglio-appenzello.title': 'Appenzell Innerrhoden: proportional representation rejected by the Grand Council',
     'blog.article.proporz-gran-consiglio-appenzello.excerpt': 'On October 19, the Innerrhoden Grand Council had a lengthy agenda; the complete revision of the law on public establishments required discussion.',
     'blog.article.proporz-gran-consiglio-appenzello.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.driessen-oncologia-herisau-2026.title': 'Driessen strengthens oncology and hematology in Herisau as of October 1, 2026',
+    'blog.article.driessen-oncologia-herisau-2026.excerpt': 'As of October 1, 2026, the professor.',
+    'blog.article.driessen-oncologia-herisau-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;

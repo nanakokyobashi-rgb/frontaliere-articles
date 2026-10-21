@@ -108168,6 +108168,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-piano-berna-civilisti-cantoni': {
+    title: 'Protezione civile: Berna prevede l\'impiego dei civilisti',
+    description: 'Da gennaio i civilisti potranno operare nella protezione civile Il Consiglio federale modifica le ordinanze applicative Al 1° gennaio 2025 la PC',
+    keywords: 'frontalieri, ticino, svizzera, italia, protezione, civile, berna, prevede',
+    ogTitle: 'Protezione civile: Berna prevede l\'impiego dei civilisti',
+    ogDescription: 'Da gennaio i civilisti potranno operare nella protezione civile Il Consiglio federale modifica le ordinanze applicative Al 1° gennaio 2025 la PC contava 57\'000',
+    canonicalPath: '/articoli-svizzera/piano-berna-civilisti-cantoni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Protezione civile: Berna prevede l'impiego dei civilisti",
+      "description": "Da gennaio i civilisti potranno operare nella protezione civile Il Consiglio federale modifica le ordinanze applicative Al 1° gennaio 2025 la PC",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-piano-berna-civilisti-cantoni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T11:26:40+00:00",
+      "dateModified": "2026-10-21T11:26:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/piano-berna-civilisti-cantoni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

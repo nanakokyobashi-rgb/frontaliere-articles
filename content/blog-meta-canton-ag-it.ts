@@ -51,6 +51,9 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.maja-riniker-eletta-governo-argovia.title': 'Maja Riniker eletta in Consiglio di Stato argoviese con 70.137 voti',
     'blog.article.maja-riniker-eletta-governo-argovia.excerpt': 'La deputata FDP di Suhr ottiene il seggio di Stephan Attiger; partecipazione al 21,01% nei 196 comuni.',
     'blog.article.maja-riniker-eletta-governo-argovia.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.dashboard-mobilita-aarau.title': 'Aarau crea un dashboard sulla mobilità condivisa',
+    'blog.article.dashboard-mobilita-aarau.excerpt': 'Aarau riunisce in un dashboard circa 300 veicoli condivisi di cinque operatori: nell\'ultimo anno 27.000 viaggi, il 38% in più.',
+    'blog.article.dashboard-mobilita-aarau.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAgIt;

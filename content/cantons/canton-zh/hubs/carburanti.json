@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T11:15:27.437Z",
-  "contentHash": "df4a6232d99002c0501248cbf0998806c53c951622a63b7c96589f7558dc8335",
+  "updatedAt": "2026-10-21T11:59:48.129Z",
+  "contentHash": "9275fe71513824b1b2578f914cf339615ee6fd43a40fe41bca6f9832ec6e9415",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zurigo: incentivi per l'acquisto di E-Cargovelo per le imprese",
+          "url": "/articoli-zurigo/zurigo-incentivi-e-cargo-velo/",
+          "excerpt": "La Città di Zurigo mette a disposizione centinaia di migliaia di franchi per sostenere l'acquisto di E-Cargovelo e offre corsi di guida a metà prezzo.",
+          "date": "2026-10-21T11:52:46.899Z"
+        },
+        {
+          "title": "Budget 2027 di Zurigo: 640 posti in più in amministrazione",
+          "url": "/articoli-zurigo/organico-comunale-zurigo/",
+          "excerpt": "Il bilancio 2027 della città di Zurigo prevede altri 640 posti nell'amministrazione.",
+          "date": "2026-10-21T11:30:34.419Z"
+        },
+        {
           "title": "Zurigo: niente iniziativa congedo parentale, sinistra e centro divisi",
           "url": "/articoli-zurigo/zurigo-niente-iniziativa-congedo-parentale/",
           "excerpt": "Il Canton Zurigo non presenterà la Standesinitiative sul congedo parentale: sinistra e partiti di centro, inizialmente favorevoli, non hanno trovato un accordo.",
@@ -88,18 +100,6 @@
           "url": "/articoli-zurigo/crisi-resilienza-zurigo/",
           "excerpt": "Le settimane della resilienza di Zurigo affrontano due scenari: informazioni senza elettricità e internet e 9 litri d'acqua per tre giorni.",
           "date": "2026-10-12T01:35:59.572Z"
-        },
-        {
-          "title": "Bank-now: 300 dipendenti si spostano a Zurigo",
-          "url": "/articoli-zurigo/bank-now-dipendenti-zurigo/",
-          "excerpt": "Bank-now lascia Horgen: 300 dipendenti si spostano a Zurigo.",
-          "date": "2026-10-12T01:21:37.476Z"
-        },
-        {
-          "title": "VBZ: fino a 300 problemi al giorno in centrale",
-          "url": "/articoli-zurigo/vbz-centrale-problemi-quotidiani/",
-          "excerpt": "Nella centrale VBZ il personale affronta fino a 300 problemi al giorno legati a tram e bus.",
-          "date": "2026-10-11T01:13:16.512Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T11:15:27.437Z"
+      "updatedAt": "2026-10-21T11:59:48.129Z"
     },
     "en": {
       "canton": "ZH",
@@ -171,6 +171,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zurich: incentives for businesses to purchase E-Cargovelo",
+          "url": "/en/zurich-articles/zurich-incentives-e-cargo-bike/",
+          "excerpt": "The City of Zurich is making hundreds of thousands of francs available to support the purchase of E-Cargovelo and offers driving courses at half price.",
+          "date": "2026-10-21T11:52:46.899Z"
+        },
+        {
+          "title": "Zurich's 2027 budget: 640 additional positions in administration",
+          "url": "/en/zurich-articles/zurich-city-staff-budget-2027/",
+          "excerpt": "The 2027 budget of the city of Zurich provides for another 640 positions in the administration.",
+          "date": "2026-10-21T11:30:34.419Z"
+        },
+        {
           "title": "Zurich: no parental leave initiative, left and center divided",
           "url": "/en/zurich-articles/zurich-no-parental-leave-initiative/",
           "excerpt": "The Canton of Zurich will not submit the cantonal initiative on parental leave: left-wing and centrist parties, initially in favor, failed to reach an agreement.",
@@ -187,18 +199,6 @@
           "url": "/en/zurich-articles/zurich-crisis-resilience/",
           "excerpt": "Zurich's resilience weeks address two scenarios: information without electricity and internet and 9 liters of water for three days.",
           "date": "2026-10-12T01:35:59.572Z"
-        },
-        {
-          "title": "Bank-now: 300 employees move to Zurich",
-          "url": "/en/zurich-articles/bank-now-employees-zurich/",
-          "excerpt": "Bank-now leaves Horgen: 300 employees move to Zurich.",
-          "date": "2026-10-12T01:21:37.476Z"
-        },
-        {
-          "title": "VBZ: up to 300 problems a day at headquarters",
-          "url": "/en/zurich-articles/vbz-control-centre-daily-issues/",
-          "excerpt": "At the VBZ control center, staff deal with up to 300 problems a day related to trams and buses.",
-          "date": "2026-10-11T01:13:16.512Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T11:15:27.437Z"
+      "updatedAt": "2026-10-21T11:59:48.129Z"
     },
     "de": {
       "canton": "ZH",
@@ -270,6 +270,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zürich: Förderungen für den Kauf von E-Cargovelo für Unternehmen",
+          "url": "/de/zurich-artikel/zuerich-incentive-e-cargo-velo/",
+          "excerpt": "Die Stadt Zürich stellt Hunderttausende Franken zur Verfügung, um den Kauf von E-Cargovelo zu unterstützen, und bietet Fahrkurse zum halben Preis an.",
+          "date": "2026-10-21T11:52:46.899Z"
+        },
+        {
+          "title": "Budget 2027 der Stadt Zürich: 640 zusätzliche Stellen in der Verwaltung",
+          "url": "/de/zurich-artikel/zuerich-stadtpersonal-budget-2027/",
+          "excerpt": "Das Budget 2027 der Stadt Zürich sieht 640 weitere Stellen in der Verwaltung vor.",
+          "date": "2026-10-21T11:30:34.419Z"
+        },
+        {
           "title": "Zürich: Keine Initiative zum Elternurlaub, Linke und Mitte gespalten",
           "url": "/de/zurich-artikel/zuerich-keine-elternzeit-initiative/",
           "excerpt": "Der Kanton Zürich wird die Standesinitiative zum Elternurlaub nicht einreichen: Die Linke und die Parteien der Mitte, die zunächst dafür waren, haben keine Einigung gefunden.",
@@ -286,18 +298,6 @@
           "url": "/de/zurich-artikel/zuerich-krisenresilienz/",
           "excerpt": "Die Zürcher Resilienzwochen befassen sich mit zwei Szenarien: Informationen ohne Strom und Internet sowie 9 Liter Wasser für drei Tage.",
           "date": "2026-10-12T01:35:59.572Z"
-        },
-        {
-          "title": "Bank-now: 300 Mitarbeiter wechseln nach Zürich",
-          "url": "/de/zurich-artikel/bank-now-mitarbeitende-zuerich/",
-          "excerpt": "Bank-now verlässt Horgen: 300 Mitarbeiter wechseln nach Zürich.",
-          "date": "2026-10-12T01:21:37.476Z"
-        },
-        {
-          "title": "VBZ: bis zu 300 Probleme pro Tag in der Leitstelle",
-          "url": "/de/zurich-artikel/vbz-leitstelle-taegliche-probleme/",
-          "excerpt": "In der VBZ-Leitstelle bewältigt das Personal bis zu 300 Probleme pro Tag im Zusammenhang mit Trams und Bussen.",
-          "date": "2026-10-11T01:13:16.512Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T11:15:27.437Z"
+      "updatedAt": "2026-10-21T11:59:48.129Z"
     },
     "fr": {
       "canton": "ZH",
@@ -369,6 +369,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zurich : incitations à l'achat d'E-Cargovelo pour les entreprises",
+          "url": "/fr/articles-zurich/zurich-incitations-e-cargo-bike/",
+          "excerpt": "La Ville de Zurich met à disposition des centaines de milliers de francs pour soutenir l'achat d'E-Cargovelo et propose des cours de conduite à moitié prix.",
+          "date": "2026-10-21T11:52:46.899Z"
+        },
+        {
+          "title": "Budget 2027 de Zurich : 640 postes supplémentaires dans l’administration",
+          "url": "/fr/articles-zurich/budget-zurich-personnel-ville-2027/",
+          "excerpt": "Le budget 2027 de la ville de Zurich prévoit 640 postes supplémentaires dans l’administration.",
+          "date": "2026-10-21T11:30:34.419Z"
+        },
+        {
           "title": "Zurich : pas d’initiative sur le congé parental, gauche et centre divisés",
           "url": "/fr/articles-zurich/zurich-pas-initiative-conge-parental/",
           "excerpt": "Le canton de Zurich ne présentera pas l’initiative cantonale sur le congé parental : la gauche et les partis du centre, initialement favorables, ne sont pas parvenus à un accord.",
@@ -385,18 +397,6 @@
           "url": "/fr/articles-zurich/zurich-resilience-crises/",
           "excerpt": "Les semaines de la résilience de Zurich abordent deux scénarios : des informations sans électricité ni internet et 9 litres d’eau pour trois jours.",
           "date": "2026-10-12T01:35:59.572Z"
-        },
-        {
-          "title": "Bank-now : 300 employés déménagent à Zurich",
-          "url": "/fr/articles-zurich/bank-now-employes-zurich/",
-          "excerpt": "Bank-now quitte Horgen : 300 employés déménagent à Zurich.",
-          "date": "2026-10-12T01:21:37.476Z"
-        },
-        {
-          "title": "VBZ : jusqu’à 300 problèmes par jour au centre de contrôle",
-          "url": "/fr/articles-zurich/vbz-centre-controle-problemes/",
-          "excerpt": "Dans le centre de contrôle de VBZ, le personnel fait face à jusqu’à 300 problèmes par jour liés aux tramways et aux bus.",
-          "date": "2026-10-11T01:13:16.512Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T11:15:27.437Z"
+      "updatedAt": "2026-10-21T11:59:48.129Z"
     }
   }
 }

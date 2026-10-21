@@ -36,6 +36,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.lucerna-riduce-imposte.title': 'Kanton Luzern senkt die Steuern: endgültige Entscheidung',
     'blog.article.lucerna-riduce-imposte.excerpt': 'Die Quelle Zentralplus stellt die Steuersenkung im Kanton Luzern als endgültig dar; der Steuerdatensatz 2026 weist Belastungen für Jahreseinkommen und A0-Werte aus.',
     'blog.article.lucerna-riduce-imposte.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lucerna-stop-riscaldamenti-fossili-2050.title': 'Luzern: Aus für Öl- und Gasheizungen bis 2050',
+    'blog.article.lucerna-stop-riscaldamenti-fossili-2050.excerpt': 'Der Kantonsrat hat die Revision des Energiegesetzes verabschiedet: Verbot neuer fossiler Anlagen und eine endgültige Frist für alle bis 2050.',
+    'blog.article.lucerna-stop-riscaldamenti-fossili-2050.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;

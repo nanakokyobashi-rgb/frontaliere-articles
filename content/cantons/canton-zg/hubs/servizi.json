@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "servizi",
-  "updatedAt": "2026-10-21T04:08:52.546Z",
-  "contentHash": "8da31deae4f638bdbed5aa1711d2e0498ff68f44562e1845daaa993d71545e2f",
+  "updatedAt": "2026-10-21T12:43:43.682Z",
+  "contentHash": "0c67cce34314a853250b7d69c665ca3b5161174707662af1d71640eafb7edfa8",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-20T23:17:38.181Z",
+      "updatedAt": "2026-10-21T05:04:28.498Z",
       "keyFacts": 0
     },
     {
@@ -61,11 +61,11 @@
             {
               "label": "Zug",
               "value": "11 °C",
-              "detail": "oggi da 10 a 10 °C"
+              "detail": "oggi da 8 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-20T23:17:38.181Z"
+          "updatedAt": "2026-10-21T05:04:28.498Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -183,7 +183,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T12:43:43.682Z"
     },
     "en": {
       "canton": "ZG",
@@ -222,11 +222,11 @@
             {
               "label": "Zug",
               "value": "11 °C",
-              "detail": "today from 10 to 10 °C"
+              "detail": "today from 8 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-20T23:17:38.181Z"
+          "updatedAt": "2026-10-21T05:04:28.498Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -340,7 +340,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T12:43:43.682Z"
     },
     "de": {
       "canton": "ZG",
@@ -379,11 +379,11 @@
             {
               "label": "Zug",
               "value": "11 °C",
-              "detail": "heute 10 bis 10 °C"
+              "detail": "heute 8 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-20T23:17:38.181Z"
+          "updatedAt": "2026-10-21T05:04:28.498Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -497,7 +497,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T12:43:43.682Z"
     },
     "fr": {
       "canton": "ZG",
@@ -536,11 +536,11 @@
             {
               "label": "Zug",
               "value": "11 °C",
-              "detail": "aujourd’hui de 10 à 10 °C"
+              "detail": "aujourd’hui de 8 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-20T23:17:38.181Z"
+          "updatedAt": "2026-10-21T05:04:28.498Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -650,7 +650,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T12:43:43.682Z"
     }
   }
 }

@@ -8561,6 +8561,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.pacchetto-imprese-sgravi.title': 'Competitiveness package: over 90% implemented or underway',
     'blog.article.pacchetto-imprese-sgravi.excerpt': 'More than 90% of the 60 measures have been implemented or are being implemented.',
     'blog.article.pacchetto-imprese-sgravi.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.piano-berna-civilisti-cantoni.title': 'Civil protection: Bern plans to deploy civilian service personnel',
+    'blog.article.piano-berna-civilisti-cantoni.excerpt': 'From January, civil service personnel will be able to work in civil protection The Federal Council amends the implementing ordinances As of January 1, 2025, civil protection had 57\'000',
+    'blog.article.piano-berna-civilisti-cantoni.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

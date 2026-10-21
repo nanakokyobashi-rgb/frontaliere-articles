@@ -621,6 +621,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-dashboard-mobilita-aarau': {
+    title: 'Aarau crea un dashboard sulla mobilità condivisa',
+    description: 'Il nuovo dashboard di Aarau raccoglie circa 300 auto, bici, e-bike ed e-cargobike condivise: 27.000 viaggi nell\'ultimo anno, +38%.',
+    keywords: 'frontalieri, ticino, svizzera, italia, aarau, crea, dashboard, sulla',
+    ogTitle: 'Aarau: dashboard per la mobilità condivisa',
+    ogDescription: 'Ad Aarau il dashboard «Shared Mobility» raccoglie circa 300 veicoli condivisi di cinque operatori, presenti in più sedi. Nell\'ultimo anno sono stati effettuati circa 27.000 viaggi, il 38% in più rispetto all\'anno precedente.',
+    canonicalPath: '/articoli-argovia/dashboard-mobilita-aarau/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aarau crea un dashboard sulla mobilità condivisa",
+      "description": "Il nuovo dashboard di Aarau raccoglie circa 300 auto, bici, e-bike ed e-cargobike condivise: 27.000 viaggi nell'ultimo anno, +38%.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-dashboard-mobilita-aarau.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T12:23:52+00:00",
+      "dateModified": "2026-10-21T12:23:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/dashboard-mobilita-aarau/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

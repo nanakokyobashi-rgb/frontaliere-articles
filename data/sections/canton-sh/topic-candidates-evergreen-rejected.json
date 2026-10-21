@@ -59,6 +59,18 @@
     "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-21/lorraine-frega-ist-die-neue-praesidentin-von-gf-building": {
       "section": "canton-sh",
       "ts": 1792504847706
+    },
+    "canton-sh::https://www.radiomunot.ch/p/das-baubewilligungsverfahren-unter-der-lupe-2nosxkzv2p1ylic5xekjg0": {
+      "section": "canton-sh",
+      "ts": 1792584747972
+    },
+    "canton-sh::https://sh.ch/webseite/kanton-schaffhausen/beh-rde/regierung/staatskanzlei/medienmitteilungen-24148150-de.html": {
+      "section": "canton-sh",
+      "ts": 1792585088844
+    },
+    "canton-sh::https://sh.ch/webseite/kanton-schaffhausen/beh-rde/regierung/staatskanzlei/medienmitteilungen-24148367-de.html": {
+      "section": "canton-sh",
+      "ts": 1792585330115
     }
   }
 }

@@ -4,22 +4,22 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T17:48:42.935Z",
-  "contentHash": "7b9e491c2107de6d80b689e42ff0fe875742edeb91531ed3731bf7b6ecce02e8",
+  "updatedAt": "2026-10-21T12:52:40.658Z",
+  "contentHash": "e3394f6500fb573d8e9ae9cd3a3010d7e54afc3166572e8a283a9665febb2bbd",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-19T23:59:59.000Z",
+      "updatedAt": "2026-10-20T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T12:16:17.109Z",
+      "updatedAt": "2026-10-21T05:23:11.896Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T10:27:43.943Z",
+      "updatedAt": "2026-10-20T20:55:38.574Z",
       "keyFacts": 0
     }
   ],
@@ -33,19 +33,19 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), settimana conclusa: 19 ottobre 2026"
+          "note": "Boncourt-Delle (A16), settimana conclusa: 20 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 20 ottobre 2026"
+          "note": "segnalazioni aggiornate: 21 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 13 ottobre 2026 – 19 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 14 ottobre 2026 – 20 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -68,7 +68,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-19T23:59:59.000Z"
+          "updatedAt": "2026-10-20T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -80,10 +80,15 @@
               "value": "Chiusura",
               "detail": "fine prevista: 29 ottobre 2026",
               "date": "2026-10-01T14:41:00.000Z"
+            },
+            {
+              "label": "A16 Boncourt -> Delémont tra Svincolo autostradale Porrentruy Est E Svincolo autostradale St-Ursanne Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-21T03:39:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-21T05:23:11.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -101,11 +106,17 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Giura: Governo propone revisioni su formazione postobbligatoria e finanziamento",
+          "url": "/articoli-giura/giura-formazione-postobbligatoria-2026/",
+          "excerpt": "Due progetti di revisione trasmessi al Parlamento Quattro ambiti: formazione, ristoranti scolastici, lingue, ammissioni La misura n.",
+          "date": "2026-10-21T12:36:10.998Z"
+        },
         {
           "title": "Le casse pensioni svizzere migliorano Q3 2026",
           "url": "/articoli-giura/casse-pensioni-migliorano-terzo-trimestre/",
@@ -155,7 +166,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T12:52:40.658Z"
     },
     "en": {
       "canton": "JU",
@@ -166,19 +177,19 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), week ending 19 October 2026"
+          "note": "Boncourt-Delle (A16), week ending 20 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "1",
-          "note": "reports as of 20 October 2026"
+          "note": "reports as of 21 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 13 October 2026 to 19 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 14 October 2026 to 20 October 2026, fastest first.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -201,7 +212,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-19T23:59:59.000Z"
+          "updatedAt": "2026-10-20T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -213,10 +224,15 @@
               "value": "Closure",
               "detail": "until 29 October 2026",
               "date": "2026-10-01T14:41:00.000Z"
+            },
+            {
+              "label": "A16 Boncourt -> Delémont tra Svincolo autostradale Porrentruy Est E Svincolo autostradale St-Ursanne Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-21T03:39:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-21T05:23:11.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -234,11 +250,17 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Jura: Government proposes revisions to post-compulsory education and funding",
+          "url": "/en/jura-articles/jura-post-compulsory-education-2026/",
+          "excerpt": "Two revision projects submitted to Parliament Four areas: education, school restaurants, languages, admissions Measure No.",
+          "date": "2026-10-21T12:36:10.998Z"
+        },
         {
           "title": "Swiss pension funds improve Q3 2026",
           "url": "/en/jura-articles/swiss-pension-funds-improve-q3-2026/",
@@ -287,7 +309,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T12:52:40.658Z"
     },
     "de": {
       "canton": "JU",
@@ -298,19 +320,19 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Boncourt-Delle (A16), Woche bis 19. Oktober 2026"
+          "note": "Boncourt-Delle (A16), Woche bis 20. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "1",
-          "note": "Meldungen vom 20. Oktober 2026"
+          "note": "Meldungen vom 21. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 13. Oktober 2026 bis 19. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 14. Oktober 2026 bis 20. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -333,7 +355,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-19T23:59:59.000Z"
+          "updatedAt": "2026-10-20T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -345,10 +367,15 @@
               "value": "Sperrung",
               "detail": "bis 29. Oktober 2026",
               "date": "2026-10-01T14:41:00.000Z"
+            },
+            {
+              "label": "A16 Boncourt -> Delsberg zwischen Anschluss Porrentruy-Ost und Anschluss St-Ursanne Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-21T03:39:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-21T05:23:11.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -366,11 +393,17 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Jura: Regierung schlägt Revisionen zur nachobligatorischen Ausbildung und Finanzierung vor",
+          "url": "/de/jura-artikel/jura-nachobligatorische-bildung-2026/",
+          "excerpt": "Zwei Revisionsvorlagen an das Parlament übermittelt Vier Bereiche: Ausbildung, Schulrestaurants, Sprachen, Zulassungen Die Maßnahme Nr.",
+          "date": "2026-10-21T12:36:10.998Z"
+        },
         {
           "title": "Schweizer Pensionskassen verbessern Q3 2026",
           "url": "/de/jura-artikel/schweizer-pensionskassen-verbessern-q3-2026/",
@@ -419,7 +452,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T12:52:40.658Z"
     },
     "fr": {
       "canton": "JU",
@@ -430,19 +463,19 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), semaine jusqu’au 19 octobre 2026"
+          "note": "Boncourt-Delle (A16), semaine jusqu’au 20 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "1",
-          "note": "signalements au 20 octobre 2026"
+          "note": "signalements au 21 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 13 octobre 2026 au 19 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 14 octobre 2026 au 20 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -465,7 +498,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-19T23:59:59.000Z"
+          "updatedAt": "2026-10-20T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -477,10 +510,15 @@
               "value": "Fermeture",
               "detail": "jusqu’au 29 octobre 2026",
               "date": "2026-10-01T14:41:00.000Z"
+            },
+            {
+              "label": "A16 Boncourt -> Delémont entre Jonction autoroutière Porrentruy-Est et Jonction autoroutière St-Ursanne Situation: trafic en accordéon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-21T03:39:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T12:16:17.109Z"
+          "updatedAt": "2026-10-21T05:23:11.896Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -498,11 +536,17 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Jura : le Gouvernement propose des révisions concernant la formation postobligatoire et le financement",
+          "url": "/fr/articles-jura/jura-formation-postobligatoire-2026/",
+          "excerpt": "Deux projets de révision transmis au Parlement Quatre domaines : formation, restaurants scolaires, langues, admissions La mesure n° 506 figure dans le Plan",
+          "date": "2026-10-21T12:36:10.998Z"
+        },
         {
           "title": "Les caisses de pension suisses améliorent Q3 2026",
           "url": "/fr/articles-jura/les-caisses-de-pension-suisses-ameliorent-q3-2026/",
@@ -552,7 +596,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T12:52:40.658Z"
     }
   }
 }

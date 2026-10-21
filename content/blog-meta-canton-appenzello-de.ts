@@ -36,6 +36,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.proporz-gran-consiglio-appenzello.title': 'Appenzell Innerrhoden: Der Proporz kommt im Grossen Rat nicht durch',
     'blog.article.proporz-gran-consiglio-appenzello.excerpt': 'Am 19. Oktober hatte der Innerrhoder Grosse Rat eine lange Traktandenliste; die Totalrevision des Gastgewerbegesetzes erforderte Diskussionen.',
     'blog.article.proporz-gran-consiglio-appenzello.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.driessen-oncologia-herisau-2026.title': 'Driessen stärkt die Onkologie und Hämatologie in Herisau ab dem 1. Oktober 2026',
+    'blog.article.driessen-oncologia-herisau-2026.excerpt': 'Ab dem 1. Oktober 2026 der Prof.',
+    'blog.article.driessen-oncologia-herisau-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

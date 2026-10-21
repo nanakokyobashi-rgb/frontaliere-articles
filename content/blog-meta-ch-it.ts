@@ -8561,6 +8561,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.pacchetto-imprese-sgravi.title': 'Pacchetto competitività: oltre il 90% attuato o in corso',
     'blog.article.pacchetto-imprese-sgravi.excerpt': 'Oltre il 90% delle 60 misure è attuato o in attuazione.',
     'blog.article.pacchetto-imprese-sgravi.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.piano-berna-civilisti-cantoni.title': 'Protezione civile: Berna prevede l\'impiego dei civilisti',
+    'blog.article.piano-berna-civilisti-cantoni.excerpt': 'Da gennaio i civilisti potranno operare nella protezione civile Il Consiglio federale modifica le ordinanze applicative Al 1° gennaio 2025 la PC contava 57\'000',
+    'blog.article.piano-berna-civilisti-cantoni.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

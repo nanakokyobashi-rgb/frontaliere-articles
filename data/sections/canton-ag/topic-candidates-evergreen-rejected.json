@@ -4,13 +4,17 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ag::https://www.fricktal.info/news/ueberregionales/maessige-waldbrandgefahr-im-kanton-aargau.html": {
-      "section": "canton-ag",
-      "ts": 1792404693932
-    },
     "canton-ag::https://www.fricktal.info/news/ueberregionales/maja-riniker-fdp-als-kuenftige-aargauer-regierungsraetin-gewaehlt.html": {
       "section": "canton-ag",
       "ts": 1792501892759
+    },
+    "canton-ag::https://www.fricktal.info/news/ueberregionales/maessige-waldbrandgefahr-im-kanton-aargau.html": {
+      "section": "canton-ag",
+      "ts": 1792588100682
+    },
+    "canton-ag::https://www.baden.ch/de/home/wirtschaft/baden-40/wirtschafts-news-baden-40.html/3258/news/19646": {
+      "section": "canton-ag",
+      "ts": 1792588106413
     }
   }
 }

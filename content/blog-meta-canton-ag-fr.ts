@@ -51,6 +51,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.maja-riniker-eletta-governo-argovia.title': 'Maja Riniker élue au Conseil d\'État argovien avec 70.137 voix',
     'blog.article.maja-riniker-eletta-governo-argovia.excerpt': 'La députée du PLR de Suhr obtient le siège de Stephan Attiger ; participation au 21,01% dans les 196 communes.',
     'blog.article.maja-riniker-eletta-governo-argovia.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.dashboard-mobilita-aarau.title': 'Aarau crée un tableau de bord sur la mobilité partagée',
+    'blog.article.dashboard-mobilita-aarau.excerpt': 'Aarau regroupe dans un tableau de bord environ 300 véhicules partagés de cinq opérateurs : au cours de la dernière année, 27.000 trajets, soit 38% de plus.',
+    'blog.article.dashboard-mobilita-aarau.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAgFr;

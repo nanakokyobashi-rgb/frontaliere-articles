@@ -8561,6 +8561,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.pacchetto-imprese-sgravi.title': 'Wettbewerbsfähigkeitspaket: über 90% umgesetzt oder in Umsetzung',
     'blog.article.pacchetto-imprese-sgravi.excerpt': 'Über 90% der 60 Maßnahmen sind umgesetzt oder in Umsetzung.',
     'blog.article.pacchetto-imprese-sgravi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.piano-berna-civilisti-cantoni.title': 'Zivilschutz: Bern plant den Einsatz von Zivildienstleistenden',
+    'blog.article.piano-berna-civilisti-cantoni.excerpt': 'Ab Januar können Zivildienstleistende im Zivilschutz eingesetzt werden Der Bundesrat ändert die Ausführungsverordnungen Am 1.',
+    'blog.article.piano-berna-civilisti-cantoni.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

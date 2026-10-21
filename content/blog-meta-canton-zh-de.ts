@@ -39,6 +39,12 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.title': 'Zürich: Keine Initiative zum Elternurlaub, Linke und Mitte gespalten',
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.excerpt': 'Der Kanton Zürich wird die Standesinitiative zum Elternurlaub nicht einreichen: Die Linke und die Parteien der Mitte, die zunächst dafür waren, haben keine Einigung gefunden.',
     'blog.article.zurigo-niente-iniziativa-congedo-parentale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.organico-comunale-zurigo.title': 'Budget 2027 der Stadt Zürich: 640 zusätzliche Stellen in der Verwaltung',
+    'blog.article.organico-comunale-zurigo.excerpt': 'Das Budget 2027 der Stadt Zürich sieht 640 weitere Stellen in der Verwaltung vor.',
+    'blog.article.organico-comunale-zurigo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.zurigo-incentivi-e-cargo-velo.title': 'Zürich: Förderungen für den Kauf von E-Cargovelo für Unternehmen',
+    'blog.article.zurigo-incentivi-e-cargo-velo.excerpt': 'Die Stadt Zürich stellt Hunderttausende Franken zur Verfügung, um den Kauf von E-Cargovelo zu unterstützen, und bietet Fahrkurse zum halben Preis an.',
+    'blog.article.zurigo-incentivi-e-cargo-velo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZhDe;

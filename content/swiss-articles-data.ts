@@ -28608,6 +28608,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'piano-berna-civilisti-cantoni',
+    category: 'novita',
+    date: '2026-10-21T11:26:40.028Z',
+    image: '/images/blog/article-piano-berna-civilisti-cantoni.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

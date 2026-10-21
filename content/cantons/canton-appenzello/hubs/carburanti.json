@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-20T17:48:42.935Z",
-  "contentHash": "3a7dd6831fa2c350bb5587466624d296986702ad5563c072e38d6901c953c8f1",
+  "updatedAt": "2026-10-21T12:49:20.224Z",
+  "contentHash": "572e1803f56354aa240cb217be5f366854b18c42a91d859449b83e69a0e50069",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Driessen rafforza oncologia ed ematologia a Herisau dal 1° ottobre 2026",
+          "url": "/articoli-appenzello/driessen-oncologia-herisau-2026/",
+          "excerpt": "Dal 1° ottobre 2026 il prof.",
+          "date": "2026-10-21T12:25:13.122Z"
+        },
+        {
           "title": "Appenzello Interno: il Proporz non passa al Gran Consiglio",
           "url": "/articoli-appenzello/proporz-gran-consiglio-appenzello/",
           "excerpt": "Il 19 ottobre il Gran Consiglio innerrhodese ha avuto un'agenda lunga; la revisione totale della legge sugli esercizi pubblici ha richiesto discussioni.",
@@ -94,12 +100,6 @@
           "url": "/articoli-appenzello/gais-alterszentrum-rotewies-rette-aumento/",
           "excerpt": "Il centro per anziani Rotenwies di Gais aumenterà le rette di pensione e assistenza a causa di un deficit finanziario protratto da anni e dei costi in crescita.",
           "date": "2026-10-19T14:39:09.729Z"
-        },
-        {
-          "title": "Nuova area nell'Appenzeller Hinterland: due responsabili",
-          "url": "/articoli-appenzello/raiba-nuova-area-previdenza/",
-          "excerpt": "La Raiffeisenbank Appenzeller Hinterland riunisce previdenza, successioni, analisi di copertura e assicurazioni.",
-          "date": "2026-10-18T05:22:07.781Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T12:49:20.224Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Driessen strengthens oncology and hematology in Herisau as of October 1, 2026",
+          "url": "/en/appenzell-articles/driessen-oncology-herisau-2026/",
+          "excerpt": "As of October 1, 2026, the professor.",
+          "date": "2026-10-21T12:25:13.122Z"
+        },
+        {
           "title": "Appenzell Innerrhoden: proportional representation rejected by the Grand Council",
           "url": "/en/appenzell-articles/proporz-appenzell-grand-council/",
           "excerpt": "On October 19, the Innerrhoden Grand Council had a lengthy agenda; the complete revision of the law on public establishments required discussion.",
@@ -193,12 +199,6 @@
           "url": "/en/appenzell-articles/gais-alterszentrum-rotewies-fee-increase/",
           "excerpt": "The Rotenwies senior center in Gais will increase its accommodation and care fees due to a financial deficit that has persisted for years and rising costs.",
           "date": "2026-10-19T14:39:09.729Z"
-        },
-        {
-          "title": "New area in the Appenzeller Hinterland: two managers",
-          "url": "/en/appenzell-articles/raiba-new-pension-area/",
-          "excerpt": "Raiffeisenbank Appenzeller Hinterland brings together retirement planning, succession planning, coverage analysis and insurance.",
-          "date": "2026-10-18T05:22:07.781Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T12:49:20.224Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Driessen stärkt die Onkologie und Hämatologie in Herisau ab dem 1. Oktober 2026",
+          "url": "/de/appenzell-artikel/driessen-onkologie-herisau-2026/",
+          "excerpt": "Ab dem 1. Oktober 2026 der Prof.",
+          "date": "2026-10-21T12:25:13.122Z"
+        },
+        {
           "title": "Appenzell Innerrhoden: Der Proporz kommt im Grossen Rat nicht durch",
           "url": "/de/appenzell-artikel/proporz-im-grossen-rat/",
           "excerpt": "Am 19. Oktober hatte der Innerrhoder Grosse Rat eine lange Traktandenliste; die Totalrevision des Gastgewerbegesetzes erforderte Diskussionen.",
@@ -292,12 +298,6 @@
           "url": "/de/appenzell-artikel/gais-alterszentrum-rotewies-gebuhren-erhoehung/",
           "excerpt": "Das Alterszentrum Rotenwies in Gais wird die Pensions- und Betreuungstaxen aufgrund eines seit Jahren anhaltenden Finanzdefizits und der steigenden Kosten erhöhen.",
           "date": "2026-10-19T14:39:09.729Z"
-        },
-        {
-          "title": "Neuer Bereich im Appenzeller Hinterland: zwei Verantwortliche",
-          "url": "/de/appenzell-artikel/raiba-neuer-vorsorgebereich/",
-          "excerpt": "Die Raiffeisenbank Appenzeller Hinterland vereint Vorsorge, Nachfolge, Deckungsanalyse und Versicherungen.",
-          "date": "2026-10-18T05:22:07.781Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T12:49:20.224Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Driessen renforce oncologie et hématologie à Herisau",
+          "url": "/fr/articles-appenzell/driessen-oncologie-herisau-2026/",
+          "excerpt": "À partir du 1er octobre 2026, le prof.",
+          "date": "2026-10-21T12:25:13.122Z"
+        },
+        {
           "title": "Appenzell Rhodes-Intérieures : le Proporz ne passe pas au Grand Conseil",
           "url": "/fr/articles-appenzell/proporz-grand-conseil-appenzell/",
           "excerpt": "Le 19 octobre, le Grand Conseil d'Appenzell Rhodes-Intérieures a eu un ordre du jour chargé ; la révision totale de la loi sur les établissements publics a nécessité des discussions.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-appenzell/gais-centre-rotewies-augmentation-frais/",
           "excerpt": "Le centre pour personnes âgées Rotenwies di Gais augmentera les tarifs de pension et d'assistance en raison d'un déficit financier qui se prolonge depuis des années et de la hausse des coûts.",
           "date": "2026-10-19T14:39:09.729Z"
-        },
-        {
-          "title": "Nouvelle unité dans l’Appenzeller Hinterland : deux responsables",
-          "url": "/fr/articles-appenzell/raiba-nouveau-domaine-prevoyance/",
-          "excerpt": "La Raiffeisenbank Appenzeller Hinterland réunit la prévoyance, les successions, l’analyse de couverture et les assurances.",
-          "date": "2026-10-18T05:22:07.781Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T12:49:20.224Z"
     }
   }
 }

@@ -7,6 +7,10 @@
     "canton-sg::https://www.sg.ch/news/sgch_kantonspolizei/2026/10/niederuzwil--verkehrsunfall--wer-hatte-gruen----zeugenaufruf.html": {
       "section": "canton-sg",
       "ts": 1792521215445
+    },
+    "canton-sg::https://www.unisg.ch/de/newsroom/warum-neue-technologien-in-manchen-regionen-schneller-fuss-fassen": {
+      "section": "canton-sg",
+      "ts": 1792585394764
     }
   }
 }

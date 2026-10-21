@@ -51,6 +51,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.maja-riniker-eletta-governo-argovia.title': 'Maja Riniker mit 70.137 Stimmen in den Aargauer Regierungsrat gewählt',
     'blog.article.maja-riniker-eletta-governo-argovia.excerpt': 'Die FDP-Grossrätin aus Suhr erhält den Sitz von Stephan Attiger; Wahlbeteiligung von 21,01% in den 196 Gemeinden.',
     'blog.article.maja-riniker-eletta-governo-argovia.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.dashboard-mobilita-aarau.title': 'Aarau erstellt ein Dashboard zur geteilten Mobilität',
+    'blog.article.dashboard-mobilita-aarau.excerpt': 'Aarau fasst in einem Dashboard rund 300 gemeinsam genutzte Fahrzeuge von fünf Anbietern zusammen: Im letzten Jahr gab es 27.000 Fahrten, 38% mehr.',
+    'blog.article.dashboard-mobilita-aarau.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAgDe;

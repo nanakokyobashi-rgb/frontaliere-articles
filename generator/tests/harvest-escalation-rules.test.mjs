@@ -159,7 +159,11 @@ const HARVESTER_DECISION = Object.freeze({
   // Blocco ambientale diagnosticato correttamente: non è una regola agentica
   // che una modifica alla documentazione possa prevenire.
   'blocked-secrets': 'carved-out',
-  'blocked-admin-settings': 'escalatable',
+  // Stessa classe di blocco esterno/lato mirror: il fixer ha trovato la causa,
+  // ma il diff applicabile appartiene a un'impostazione amministrativa o al
+  // repository proprietario. Il volume resta osservabile, non è una violazione
+  // prevenibile dalla prosa dell'agente (#3046).
+  'blocked-admin-settings': 'carved-out',
   // Il nuovo harvester lo tratta come contesto, non come driver di escalation.
   'revenue-tracker-manual': 'carved-out',
 });

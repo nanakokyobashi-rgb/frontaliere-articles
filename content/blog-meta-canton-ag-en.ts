@@ -51,6 +51,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.maja-riniker-eletta-governo-argovia.title': 'Maja Riniker elected to the Aargau State Council with 70.137 votes',
     'blog.article.maja-riniker-eletta-governo-argovia.excerpt': 'The FDP member of parliament from Suhr secures Stephan Attiger’s seat; turnout at 21,01% in the 196 municipalities.',
     'blog.article.maja-riniker-eletta-governo-argovia.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.dashboard-mobilita-aarau.title': 'Aarau creates a dashboard on shared mobility',
+    'blog.article.dashboard-mobilita-aarau.excerpt': 'Aarau brings together around 300 shared vehicles from five operators in a dashboard: 27.000 trips in the last year, 38% more.',
+    'blog.article.dashboard-mobilita-aarau.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAgEn;

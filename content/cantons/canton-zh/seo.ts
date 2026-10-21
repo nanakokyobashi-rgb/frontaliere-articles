@@ -465,6 +465,84 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-organico-comunale-zurigo': {
+    title: 'Budget 2027 di Zurigo: 640 posti in più in amministrazione',
+    description: 'Il budget 2027 della città di Zurigo prevede 640 posti in più nell\'amministrazione. Il personale cresce il doppio della popolazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, budget, zurigo, posti, amministrazione',
+    ogTitle: 'Budget 2027 Zurigo: 640 posti in più',
+    ogDescription: 'La città di Zurigo prepara il bilancio 2027 con altri 640 posti nell\'amministrazione. Il titolo del Tages-Anzeiger segnala una crescita del personale doppia rispetto a quella della popolazione e dubbi anche nella SP.',
+    canonicalPath: '/articoli-zurigo/organico-comunale-zurigo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Budget 2027 di Zurigo: 640 posti in più in amministrazione",
+      "description": "Il budget 2027 della città di Zurigo prevede 640 posti in più nell'amministrazione. Il personale cresce il doppio della popolazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-organico-comunale-zurigo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T11:30:34+00:00",
+      "dateModified": "2026-10-21T11:30:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/organico-comunale-zurigo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-zurigo-incentivi-e-cargo-velo': {
+    title: 'Zurigo: incentivi per l\'acquisto di E-Cargovelo per le imprese',
+    description: 'La Città di Zurigo finanzia l\'acquisto di E-Cargovelo per le aziende con centinaia di migliaia di franchi e corsi di guida a metà prezzo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, zurigo, incentivi, acquisto, e-cargovelo',
+    ogTitle: 'Zurigo: incentivi per l\'acquisto di E-Cargovelo',
+    ogDescription: 'La Città di Zurigo sostiene l\'acquisto di E-Cargovelo per le imprese con un fondo di centinaia di migliaia di franchi e sconti del 50% sui corsi di guida.',
+    canonicalPath: '/articoli-zurigo/zurigo-incentivi-e-cargo-velo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Zurigo: incentivi per l'acquisto di E-Cargovelo per le imprese",
+      "description": "La Città di Zurigo finanzia l'acquisto di E-Cargovelo per le aziende con centinaia di migliaia di franchi e corsi di guida a metà prezzo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-zurigo-incentivi-e-cargo-velo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T11:52:46+00:00",
+      "dateModified": "2026-10-21T11:52:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/zurigo-incentivi-e-cargo-velo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
