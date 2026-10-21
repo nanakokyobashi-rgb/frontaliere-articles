@@ -36,6 +36,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.proporz-gran-consiglio-appenzello.title': 'Appenzell Rhodes-Intérieures : le Proporz ne passe pas au Grand Conseil',
     'blog.article.proporz-gran-consiglio-appenzello.excerpt': 'Le 19 octobre, le Grand Conseil d\'Appenzell Rhodes-Intérieures a eu un ordre du jour chargé ; la révision totale de la loi sur les établissements publics a nécessité des discussions.',
     'blog.article.proporz-gran-consiglio-appenzello.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.driessen-oncologia-herisau-2026.title': 'Driessen renforce oncologie et hématologie à Herisau',
+    'blog.article.driessen-oncologia-herisau-2026.excerpt': 'À partir du 1er octobre 2026, le prof.',
+    'blog.article.driessen-oncologia-herisau-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAppenzelloFr;

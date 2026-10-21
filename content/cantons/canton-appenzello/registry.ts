@@ -127,4 +127,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'driessen-oncologia-herisau-2026',
+ category: 'novita',
+ date: '2026-10-21T12:25:13.122Z',
+ image: '/images/blog/article-driessen-oncologia-herisau-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
