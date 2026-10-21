@@ -8567,6 +8567,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.cofinanziamento-tox-info-suisse.title': 'Tox Info Suisse: cofinanziamento obbligatorio per industria',
     'blog.article.cofinanziamento-tox-info-suisse.excerpt': 'Il Consiglio federale vuole imporre il cofinanziamento di Tox Info Suisse Coinvolte l\'industria chimica e quella farmaceutica Consultazione prevista fino a metà',
     'blog.article.cofinanziamento-tox-info-suisse.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.consiglio-poverta-prima-conferenza.title': 'Consiglio nazionale sulla povertà: si presenta il 9 novembre',
+    'blog.article.consiglio-poverta-prima-conferenza.excerpt': 'Struttura nazionale approvata dal Consiglio federale nel 2024 Prima conferenza stampa: 9 novembre 2026, ore 10.00-11.00 Il Consiglio rappresenta chi ha',
+    'blog.article.consiglio-poverta-prima-conferenza.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

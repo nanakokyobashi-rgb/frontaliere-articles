@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "e9fa53f6019691db8d98af35fe02522002eea2870dee72a9f8354d80457fbd22",
+  "updatedAt": "2026-10-21T18:26:36.351Z",
+  "contentHash": "9cb9601bc2e24c1b225cf0f7260c158c8205dda893864512ea2150f36ae32f84",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Feuerschaukommission Appenzell fissa le remunerazioni 2027",
+          "url": "/articoli-appenzello/appenzell-remunerazioni-energia-2027/",
+          "excerpt": "La Feuerschaukommission di Appenzell lega l'energia immessa al prezzo di borsa orario e prevede un premio minimo per impianti fino a 150 kW.",
+          "date": "2026-10-21T18:16:59.022Z"
+        },
+        {
           "title": "Driessen rafforza oncologia ed ematologia a Herisau dal 1° ottobre 2026",
           "url": "/articoli-appenzello/driessen-oncologia-herisau-2026/",
           "excerpt": "Dal 1° ottobre 2026 il prof.",
@@ -94,12 +100,6 @@
           "url": "/articoli-appenzello/teufen-budget-deficit-2027/",
           "excerpt": "Il Comune di Teufen prevede per il 2027 entrate fiscali di 38,9 milioni di franchi, in aumento del 2,2% rispetto al preventivo precedente.",
           "date": "2026-10-19T15:18:22.893Z"
-        },
-        {
-          "title": "Rotenwies di Gais alza le rette di pensione e assistenza",
-          "url": "/articoli-appenzello/gais-alterszentrum-rotewies-rette-aumento/",
-          "excerpt": "Il centro per anziani Rotenwies di Gais aumenterà le rette di pensione e assistenza a causa di un deficit finanziario protratto da anni e dei costi in crescita.",
-          "date": "2026-10-19T14:39:09.729Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T18:26:36.351Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Feuerschaukommission Appenzell sets remuneration for 2027",
+          "url": "/en/appenzell-articles/appenzell-energy-remuneration-2027/",
+          "excerpt": "The Feuerschaukommission of Appenzell links the energy fed into the grid to the hourly exchange price and provides for a minimum premium for installations of up to 150 kW.",
+          "date": "2026-10-21T18:16:59.022Z"
+        },
+        {
           "title": "Driessen strengthens oncology and hematology in Herisau as of October 1, 2026",
           "url": "/en/appenzell-articles/driessen-oncology-herisau-2026/",
           "excerpt": "As of October 1, 2026, the professor.",
@@ -193,12 +199,6 @@
           "url": "/en/appenzell-articles/teufen-2027-budget-deficit/",
           "excerpt": "The Municipality of Teufen expects tax revenues of 38,9 million francs in 2027, an increase of 2,2% compared with the previous budget.",
           "date": "2026-10-19T15:18:22.893Z"
-        },
-        {
-          "title": "Rotenwies in Gais raises its residential and care fees",
-          "url": "/en/appenzell-articles/gais-alterszentrum-rotewies-fee-increase/",
-          "excerpt": "The Rotenwies senior center in Gais will increase its accommodation and care fees due to a financial deficit that has persisted for years and rising costs.",
-          "date": "2026-10-19T14:39:09.729Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T18:26:36.351Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Feuerschaukommission Appenzell legt die Vergütungen für 2027 fest",
+          "url": "/de/appenzell-artikel/appenzell-ruecklieferverguetung-2027/",
+          "excerpt": "Die Feuerschaukommission Appenzell koppelt die eingespeiste Energie an den stündlichen Börsenpreis und sieht für Anlagen bis 150 kW eine Mindestprämie vor.",
+          "date": "2026-10-21T18:16:59.022Z"
+        },
+        {
           "title": "Driessen stärkt die Onkologie und Hämatologie in Herisau ab dem 1. Oktober 2026",
           "url": "/de/appenzell-artikel/driessen-onkologie-herisau-2026/",
           "excerpt": "Ab dem 1. Oktober 2026 der Prof.",
@@ -292,12 +298,6 @@
           "url": "/de/appenzell-artikel/teufen-voranschlag-defizit-2027/",
           "excerpt": "Die Gemeinde Teufen erwartet für 2027 Steuereinnahmen von 38,9 Millionen Franken, was einem Anstieg von 2,2% gegenüber dem vorherigen Budget entspricht.",
           "date": "2026-10-19T15:18:22.893Z"
-        },
-        {
-          "title": "Rotenwies in Gais erhöht die Pensions- und Betreuungstaxen",
-          "url": "/de/appenzell-artikel/gais-alterszentrum-rotewies-gebuhren-erhoehung/",
-          "excerpt": "Das Alterszentrum Rotenwies in Gais wird die Pensions- und Betreuungstaxen aufgrund eines seit Jahren anhaltenden Finanzdefizits und der steigenden Kosten erhöhen.",
-          "date": "2026-10-19T14:39:09.729Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T18:26:36.351Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "La Feuerschaukommission Appenzell fixe les rémunérations pour 2027",
+          "url": "/fr/articles-appenzell/appenzell-remuneration-energie-2027/",
+          "excerpt": "La Feuerschaukommission d’Appenzell lie l’énergie injectée au prix de marché horaire et prévoit une prime minimale pour les installations allant jusqu’à 150 kW.",
+          "date": "2026-10-21T18:16:59.022Z"
+        },
+        {
           "title": "Driessen renforce oncologie et hématologie à Herisau",
           "url": "/fr/articles-appenzell/driessen-oncologie-herisau-2026/",
           "excerpt": "À partir du 1er octobre 2026, le prof.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-appenzell/teufen-budget-2027-pour-reduire-le-deficit-operationnel/",
           "excerpt": "La commune de Teufen prévoit pour 2027 des recettes fiscales de 38,9 millions de francs, en hausse de 2,2% par rapport au budget précédent.",
           "date": "2026-10-19T15:18:22.893Z"
-        },
-        {
-          "title": "Rotenwies di Gais augmente les tarifs de pension et d'assistance",
-          "url": "/fr/articles-appenzell/gais-centre-rotewies-augmentation-frais/",
-          "excerpt": "Le centre pour personnes âgées Rotenwies di Gais augmentera les tarifs de pension et d'assistance en raison d'un déficit financier qui se prolonge depuis des années et de la hausse des coûts.",
-          "date": "2026-10-19T14:39:09.729Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T18:26:36.351Z"
     }
   }
 }

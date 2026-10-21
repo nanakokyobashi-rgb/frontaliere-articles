@@ -39,6 +39,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.driessen-oncologia-herisau-2026.title': 'Driessen strengthens oncology and hematology in Herisau as of October 1, 2026',
     'blog.article.driessen-oncologia-herisau-2026.excerpt': 'As of October 1, 2026, the professor.',
     'blog.article.driessen-oncologia-herisau-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.appenzell-remunerazioni-energia-2027.title': 'Feuerschaukommission Appenzell sets remuneration for 2027',
+    'blog.article.appenzell-remunerazioni-energia-2027.excerpt': 'The Feuerschaukommission of Appenzell links the energy fed into the grid to the hourly exchange price and provides for a minimum premium for installations of up to 150 kW.',
+    'blog.article.appenzell-remunerazioni-energia-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;
