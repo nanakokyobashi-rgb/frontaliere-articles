@@ -1,0 +1,9 @@
+{
+  "name": "@frontaliere/article-source-runtime",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Isolated TypeScript compiler runtime for static article source readers",
+  "dependencies": {
+    "typescript": "5.8.3"
+  }
+}

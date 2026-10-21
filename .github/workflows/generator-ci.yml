@@ -17,6 +17,10 @@ on:
     branches: [engine-lockstep-auto]
     paths:
       - 'generator/**'
+      - '.github/actions/setup-article-source-runtime/**'
+      - 'scripts/ci/article-source-runtime/**'
+      - 'scripts/ci/check-article-source-runtime.mjs'
+      - 'scripts/ci/loop-sync-manifest.json'
       - '.github/workflows/generator-ci.yml'
       # engine/ and host/ are two halves of one contract and must be tested
       # together. engine/ is mirrored down from the site (which owns it) and
@@ -37,6 +41,10 @@ on:
   pull_request:
     paths:
       - 'generator/**'
+      - '.github/actions/setup-article-source-runtime/**'
+      - 'scripts/ci/article-source-runtime/**'
+      - 'scripts/ci/check-article-source-runtime.mjs'
+      - 'scripts/ci/loop-sync-manifest.json'
       - '.github/workflows/generator-ci.yml'
       - 'package.json'
       - 'package-lock.json'
@@ -87,6 +95,9 @@ jobs:
 
       # The glob is not decoration. `node --test <dir>` collapses the directory
       # into ONE failing test on Node 22 instead of discovering the files.
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
+
       - name: Unit + closure gates
         run: node --test 'generator/tests/*.test.mjs'
 
@@ -237,6 +248,9 @@ jobs:
       # graph runs through jsdom / sharp / playwright / firebase-admin. Without
       # them every script fails identically on a missing package and the check
       # proves nothing.
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
+
       - name: Install generator dependencies
         run: bash scripts/lib/npm-ci-retry.sh --no-audit --no-fund
 

@@ -3620,12 +3620,14 @@
     {
       "path": "generator/scripts/lib/meta-field-regex.mjs",
       "sitePath": "scripts/lib/meta-field-regex.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Il wrapper CORPUS vive in `generator/scripts/lib/` e il gemello SITE in `scripts/lib/`; quando entrambi useranno il parser engine locale, gli import relativi saranno `../../../engine/shared/staticArticleSource.mjs` e `../../packages/articles/engine/shared/staticArticleSource.mjs`. Questa voce protegge tale adattamento topologico prima delle modifiche staged; l’API RegExp resta disponibile finché i caller non sono migrati.",
       "baseline": {
         "site": "782afafe9c39e70f",
         "corpus": "782afafe9c39e70f",
-        "alignedAt": "2026-08-14"
-      }
+        "alignedAt": "2026-10-21"
+      },
+      "adaptationIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/14418"
     },
     {
       "path": "generator/scripts/lib/unescape-ts-string.mjs",
@@ -6448,6 +6450,46 @@
       "baseline": {
         "site": null,
         "corpus": "e8dcd6f4d358e7ab",
+        "alignedAt": "2026-10-21"
+      }
+    },
+    {
+      "path": "scripts/ci/article-source-runtime/README.md",
+      "mode": "corpus-only",
+      "reason": "Istruzioni locali per il runtime TypeScript isolato dei lettori statici del corpus; il sito mantiene setup e dipendenze nel proprio package manager.",
+      "baseline": {
+        "site": null,
+        "corpus": "23662d66c817eb38",
+        "alignedAt": "2026-10-21"
+      }
+    },
+    {
+      "path": "scripts/ci/article-source-runtime/package-lock.json",
+      "mode": "corpus-only",
+      "reason": "Lockfile dedicato all’installazione isolata del compilatore TypeScript usato dai job del corpus; non modifica le dipendenze npm di produzione del corpus o del sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "d8742810631cb7c4",
+        "alignedAt": "2026-10-21"
+      }
+    },
+    {
+      "path": "scripts/ci/article-source-runtime/package.json",
+      "mode": "corpus-only",
+      "reason": "Manifest dedicato al runtime TypeScript isolato dei job corpus che leggono sorgenti statici; il sito ha un setup distinto nel proprio repository.",
+      "baseline": {
+        "site": null,
+        "corpus": "e0167279ff94a32d",
+        "alignedAt": "2026-10-21"
+      }
+    },
+    {
+      "path": "scripts/ci/check-article-source-runtime.mjs",
+      "mode": "corpus-only",
+      "reason": "Smoke check del runtime TypeScript isolato nei job del corpus; il sito ha i propri entrypoint e non esegue questo checker.",
+      "baseline": {
+        "site": null,
+        "corpus": "5266ac18972026d9",
         "alignedAt": "2026-10-21"
       }
     }

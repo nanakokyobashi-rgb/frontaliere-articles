@@ -57,6 +57,9 @@ jobs:
       # Il loader legge soltanto i secret già amministrati in Remote Config.
       # Questo workflow non modifica Remote Config, repository variables o
       # repository secrets.
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
+
       - name: Prepare Firebase credentials
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}

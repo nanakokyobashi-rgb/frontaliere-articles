@@ -182,6 +182,14 @@ jobs:
           sparse-checkout-cone-mode: false
           persist-credentials: false
 
+      - name: Set up Node (resolve)
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
+
       - name: Fetch push base (resolve)
         if: github.event_name == 'push'
         env:
@@ -465,6 +473,10 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
+
+      - name: Setup isolated article source runtime
+        if: needs.resolve.outputs.skip != 'true'
+        uses: ./.github/actions/setup-article-source-runtime
 
       - name: Install dependencies
         if: needs.resolve.outputs.skip != 'true'

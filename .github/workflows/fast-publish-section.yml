@@ -241,10 +241,22 @@ jobs:
           ref: ${{ github.sha }}
           path: .replay-dispatcher-source
           fetch-depth: 1
-          sparse-checkout:
+          sparse-checkout: |
+            .github/actions/setup-article-source-runtime/action.yml
+            scripts/ci/article-source-runtime/package.json
+            scripts/ci/article-source-runtime/package-lock.json
+            scripts/ci/check-article-source-runtime.mjs
             scripts/ci/dispatch-fast-publish-replay.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
+
+      - name: Set up Node (resolve)
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Setup isolated article source runtime
+        uses: ./.replay-dispatcher-source/.github/actions/setup-article-source-runtime
 
       - name: Resolve originating push range
         id: push_range
@@ -904,7 +916,11 @@ jobs:
           ref: ${{ github.sha }}
           path: .replay-dispatcher-source
           fetch-depth: 1
-          sparse-checkout:
+          sparse-checkout: |
+            .github/actions/setup-article-source-runtime/action.yml
+            scripts/ci/article-source-runtime/package.json
+            scripts/ci/article-source-runtime/package-lock.json
+            scripts/ci/check-article-source-runtime.mjs
             scripts/ci/dispatch-fast-publish-replay.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
@@ -1083,6 +1099,10 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
+
+      - name: Setup isolated article source runtime
+        if: steps.replay_freshness.outputs.fresh == 'true'
+        uses: ./.replay-dispatcher-source/.github/actions/setup-article-source-runtime
 
       - name: Install dependencies
         if: steps.replay_freshness.outputs.fresh == 'true'

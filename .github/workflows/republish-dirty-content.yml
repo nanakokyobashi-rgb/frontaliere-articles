@@ -104,6 +104,9 @@ jobs:
       # + i moduli del repo (scripts/lib/sanitize-control-chars.mjs,
       # scripts/reconcile-article-shards.mjs), zero dipendenze npm.
 
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
+
       - name: Detect dirty ids (C0 nel corpus E ancora sulla pagina live)
         id: detect
         run: |

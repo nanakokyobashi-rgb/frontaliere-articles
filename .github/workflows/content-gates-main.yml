@@ -80,6 +80,9 @@ jobs:
       # classifica subito e il drainer la promuove al fixer. Senza PAT il
       # degrado e' morbido, non silenzioso — stessa scelta di
       # `workflow-failure-issues.yml`.
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
+
       - name: Prepare Firebase credentials
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
