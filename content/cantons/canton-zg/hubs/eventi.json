@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-10-20T00:06:33.415Z",
-  "contentHash": "1f2bd73e7bbd509e02fae51ab5279899c54ae9fb36675dba37627e984110a256",
+  "updatedAt": "2026-10-21T00:56:25.671Z",
+  "contentHash": "cb1c7b58c3b758a69d16768b080558a34e1b994b260666444074801fbc6318d2",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-19T15:42:28.810Z",
+      "updatedAt": "2026-10-20T17:28:37.181Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "29",
+          "value": "27",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,46 +33,34 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Fiirabig-Singe",
+              "detail": "Katholische Pfarrkirche Heilig Geist, Hünenberg",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/huenenberg/fiirabig-singe_AKHfed3"
+            },
+            {
               "label": "Gemeinsam sprechen und lernen",
-              "detail": "Zug",
-              "date": "2026-10-20",
+              "detail": "Zug — in corso, ultimo giorno: 10 novembre 2026",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
-            },
-            {
-              "label": "Schmerzen verstehen – Leichtigkeit finden",
-              "detail": "Bibliothek Zug, Zug",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/schmerzen-verstehen-leichtigkeit-finden_AnQK2e9"
-            },
-            {
-              "label": "Lesung mit Blanca Imboden",
-              "detail": "Bücher Balmer, Zug",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesung-mit-blanca-imboden/"
             },
             {
               "label": "Klangbad in Steinhausen",
               "detail": "Praxis anderscht GmbH, Steinhausen — in corso, ultimo giorno: 22 ottobre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.guidle.com/it/events/music/steinhausen/klangbad-in-steinhausen_Ady2NYs"
             },
             {
               "label": "Metzgete Hütten Zug",
               "detail": "aigu Restaurant & Bar, Zug — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
             },
             {
               "label": "Klangmeditation in Steinhausen",
               "detail": "Steinhausen — in corso, ultimo giorno: 22 ottobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
-            },
-            {
-              "label": "Fiirabig-Singe",
-              "detail": "Katholische Pfarrkirche Heilig Geist, Hünenberg",
               "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/huenenberg/fiirabig-singe_AKHfed3"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
             },
             {
               "label": "ALLI KENNED DE JOZO & DE JOZO KENNT NÜT",
@@ -91,11 +79,23 @@
               "detail": "Bibliothek Zug, Zug",
               "date": "2026-10-24",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/timeless-cabinet_A6PwHuk"
+            },
+            {
+              "label": "Öffentliche Führung Trinkwasserversorgung Zug",
+              "detail": "Baar",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-trinkwasserversorgung-zug/"
+            },
+            {
+              "label": "Konzert der ENGADINER KANTOREI",
+              "detail": "Zug",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-der-engadiner-kantorei/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "en": {
       "canton": "ZG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "29",
+          "value": "27",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,46 +138,34 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Fiirabig-Singe",
+              "detail": "Katholische Pfarrkirche Heilig Geist, Hünenberg",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/huenenberg/fiirabig-singe_AKHfed3"
+            },
+            {
               "label": "Gemeinsam sprechen und lernen",
-              "detail": "Zug",
-              "date": "2026-10-20",
+              "detail": "Zug — ongoing, last day: 10 November 2026",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
-            },
-            {
-              "label": "Schmerzen verstehen-Leichtigkeit finden",
-              "detail": "Bibliothek Zug, Zug",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/schmerzen-verstehen-leichtigkeit-finden_AnQK2e9"
-            },
-            {
-              "label": "Lesung mit Blanca Imboden",
-              "detail": "Bücher Balmer, Zug",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesung-mit-blanca-imboden/"
             },
             {
               "label": "Klangbad in Steinhausen",
               "detail": "Praxis anderscht GmbH, Steinhausen — ongoing, last day: 22 October 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.guidle.com/it/events/music/steinhausen/klangbad-in-steinhausen_Ady2NYs"
             },
             {
               "label": "Metzgete Hütten Zug",
               "detail": "aigu Restaurant & Bar, Zug — ongoing, last day: 29 October 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
             },
             {
               "label": "Klangmeditation in Steinhausen",
               "detail": "Steinhausen — ongoing, last day: 22 October 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
-            },
-            {
-              "label": "Fiirabig-Singe",
-              "detail": "Katholische Pfarrkirche Heilig Geist, Hünenberg",
               "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/huenenberg/fiirabig-singe_AKHfed3"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
             },
             {
               "label": "ALLI KENNED DE JOZO & DE JOZO KENNT NÜT",
@@ -196,11 +184,23 @@
               "detail": "Bibliothek Zug, Zug",
               "date": "2026-10-24",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/timeless-cabinet_A6PwHuk"
+            },
+            {
+              "label": "Öffentliche Führung Trinkwasserversorgung Zug",
+              "detail": "Baar",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-trinkwasserversorgung-zug/"
+            },
+            {
+              "label": "Konzert der ENGADINER KANTOREI",
+              "detail": "Zug",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-der-engadiner-kantorei/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "de": {
       "canton": "ZG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "29",
+          "value": "27",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,46 +243,34 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Fiirabig-Singe",
+              "detail": "Katholische Pfarrkirche Heilig Geist, Hünenberg",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/huenenberg/fiirabig-singe_AKHfed3"
+            },
+            {
               "label": "Gemeinsam sprechen und lernen",
-              "detail": "Zug",
-              "date": "2026-10-20",
+              "detail": "Zug — läuft, letzter Tag: 10. November 2026",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
-            },
-            {
-              "label": "Schmerzen verstehen-Leichtkeit finden",
-              "detail": "Bibliothek Zug, Zug",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/schmerzen-verstehen-leichtigkeit-finden_AnQK2e9"
-            },
-            {
-              "label": "Lesung mit Blanca Imboden",
-              "detail": "Bücher Balmer, Zug",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesung-mit-blanca-imboden/"
             },
             {
               "label": "Klangbad in Steinhausen",
               "detail": "Praxis anderscht GmbH, Steinhausen — läuft, letzter Tag: 22. Oktober 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.guidle.com/it/events/music/steinhausen/klangbad-in-steinhausen_Ady2NYs"
             },
             {
               "label": "Metzgete Hütten Zug",
               "detail": "aigu Restaurant & Bar, Zug — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
             },
             {
               "label": "Klangmeditation in Steinhausen",
               "detail": "Steinhausen — läuft, letzter Tag: 22. Oktober 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
-            },
-            {
-              "label": "Fiirabig-Singe",
-              "detail": "Katholische Pfarrkirche Heilig Geist, Hünenberg",
               "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/huenenberg/fiirabig-singe_AKHfed3"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
             },
             {
               "label": "ALLI KENNED DE JOZO & DE JOZO KENNT NÜT",
@@ -301,11 +289,23 @@
               "detail": "Bibliothek Zug, Zug",
               "date": "2026-10-24",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/timeless-cabinet_A6PwHuk"
+            },
+            {
+              "label": "Öffentliche Führung Trinkwasserversorgung Zug",
+              "detail": "Baar",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-trinkwasserversorgung-zug/"
+            },
+            {
+              "label": "Konzert der ENGADINER KANTOREI",
+              "detail": "Zug",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-der-engadiner-kantorei/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "fr": {
       "canton": "ZG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "29",
+          "value": "27",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,46 +348,34 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Fiirabig-Singe",
+              "detail": "Katholische Pfarrkirche Heilig Geist, Hünenberg",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/huenenberg/fiirabig-singe_AKHfed3"
+            },
+            {
               "label": "Gemeinsam sprechen und lernen",
-              "detail": "Zug",
-              "date": "2026-10-20",
+              "detail": "Zug — en cours, dernier jour : 10 novembre 2026",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/gemeinsam-sprechen-und-lernen/"
-            },
-            {
-              "label": "Schmerzen verstehen-Les marques de commerce trouvées",
-              "detail": "Bibliothek Zug, Zug",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zug/schmerzen-verstehen-leichtigkeit-finden_AnQK2e9"
-            },
-            {
-              "label": "Lesung mit Blanca Imboden",
-              "detail": "Bücher Balmer, Zug",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/lesung-mit-blanca-imboden/"
             },
             {
               "label": "Klangbad in Steinhausen",
               "detail": "Praxis anderscht GmbH, Steinhausen — en cours, dernier jour : 22 octobre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.guidle.com/it/events/music/steinhausen/klangbad-in-steinhausen_Ady2NYs"
             },
             {
               "label": "Cabanes de boucherie à Zoug",
               "detail": "aigu Restaurant & Bar, Zug — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/metzgete-huetten-zug/"
             },
             {
               "label": "Klangmeditation in Steinhausen",
               "detail": "Steinhausen — en cours, dernier jour : 22 octobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
-            },
-            {
-              "label": "Fiirabig-Singe",
-              "detail": "Katholische Pfarrkirche Heilig Geist, Hünenberg",
               "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/huenenberg/fiirabig-singe_AKHfed3"
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangmeditation-in-steinhausen/"
             },
             {
               "label": "ALLI KENNED DE JOZO & DE JOZO KENNT NÜT",
@@ -406,11 +394,23 @@
               "detail": "Bibliothek Zug, Zug",
               "date": "2026-10-24",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zug/timeless-cabinet_A6PwHuk"
+            },
+            {
+              "label": "Öffentliche Führung Trinkwasserversorgung Zug",
+              "detail": "Baar",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-trinkwasserversorgung-zug/"
+            },
+            {
+              "label": "Konzert der ENGADINER KANTOREI",
+              "detail": "Zug",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-der-engadiner-kantorei/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     }
   }
 }

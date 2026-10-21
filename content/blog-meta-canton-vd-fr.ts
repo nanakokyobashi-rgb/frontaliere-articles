@@ -57,6 +57,12 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.cdhr-contributo-differenziale-2025.title': 'CDHR 2025 : seuils 250.000/500.000 € pour les travailleurs frontaliers en France',
     'blog.article.cdhr-contributo-differenziale-2025.excerpt': 'La contribution différentielle sur les hauts revenus vise un prélèvement minimum de 20%.',
     'blog.article.cdhr-contributo-differenziale-2025.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.chuv-ostetriche-salari-classi.title': 'CHUV: sages-femmes demandent salaires équitables, classe 10',
+    'blog.article.chuv-ostetriche-salari-classi.excerpt': 'CHUV : classe 9 ou 10 pour le même travail Seul un tiers des sages-femmes est en classe 10 Écart moyen : CHF 8\'000 par an La demande remonte à 2018 Où → CHUV',
+    'blog.article.chuv-ostetriche-salari-classi.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.fisco-vaud-indennita-abuso-imposte.title': 'Fisc vaudois : impôts sur une indemnité pour abus, recours en vue',
+    'blog.article.fisco-vaud-indennita-abuso-imposte.excerpt': 'À Pully : abus au Collège de Champittet à la fin des années 70 Indemnité de l\'Église : CHF 220\'000, divisée en deux parties Après l\'opposition : CHF 120\'000',
+    'blog.article.fisco-vaud-indennita-abuso-imposte.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonVdFr;

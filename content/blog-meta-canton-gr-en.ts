@@ -30,6 +30,12 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.acqua-domleschg-feldis-scheid.title': 'Domleschg: water tanker truck for Feldis and Scheid',
     'blog.article.acqua-domleschg-feldis-scheid.excerpt': 'Domleschg intends to bring drinking water to Feldis and Scheid.',
     'blog.article.acqua-domleschg-feldis-scheid.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sconti-vereina-locali-ospiti.title': 'Vereina: Parliament asks that discounts be considered',
+    'blog.article.sconti-vereina-locali-ospiti.excerpt': 'The cantonal parliament of Graubünden tasks the government with examining discounts for Vereina car transport: who will benefit and when they will take effect remain open.',
+    'blog.article.sconti-vereina-locali-ospiti.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.a13-code-grigioni-vacanze-zurighesi.title': 'A13: queues between Rothenbrunnen and Reichenau due to Zurich holiday traffic',
+    'blog.article.a13-code-grigioni-vacanze-zurighesi.excerpt': 'Traffic on the A13 built up every day of the weekend between Rothenbrunnen and Reichenau, with the Isla-Bella tunnel identified as a bottleneck, in connection with the end of the Zurich holidays.',
+    'blog.article.a13-code-grigioni-vacanze-zurighesi.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGrEn;

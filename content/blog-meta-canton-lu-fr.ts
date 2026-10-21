@@ -33,6 +33,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.lucerna-finanze-sessione-ottobre.title': 'Lucerne : cinq heures de débat sur les finances cantonales',
     'blog.article.lucerna-finanze-sessione-ottobre.excerpt': 'Le Conseil cantonal de Lucerne a débattu de l\'AFP 2027–2030 pendant plus de cinq heures ; la proposition fait passer le taux 2027 de 1,45 à 1,40 unité, avec un vote le 20 octobre.',
     'blog.article.lucerna-finanze-sessione-ottobre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lucerna-riduce-imposte.title': 'Le canton de Lucerne réduit les impôts : décision définitive',
+    'blog.article.lucerna-riduce-imposte.excerpt': 'La source Zentralplus présente la réduction des impôts dans le canton de Lucerne comme définitive ; le jeu de données fiscales 2026 indique des charges sur les revenus annuels et des valeurs A0.',
+    'blog.article.lucerna-riduce-imposte.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

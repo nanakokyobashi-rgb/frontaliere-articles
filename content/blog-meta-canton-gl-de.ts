@@ -24,6 +24,9 @@ const blogMetaCantonGlDe: Record<string, string> = {
     'blog.article.kloentalerstrasse-cantiere-2026.title': 'Klöntalerstrasse: vorübergehende Sperrung Staldengarten–Bützi',
     'blog.article.kloentalerstrasse-cantiere-2026.excerpt': 'An der Klöntalerstrasse sind vom 21.',
     'blog.article.kloentalerstrasse-cantiere-2026.imageAlt': 'Bauarbeiten an der Klöntalerstrasse zwischen Staldengarten und Bützi',
+    'blog.article.glarona-mercato-immobiliare-2026.title': 'Immobilienmarkt in Glarus: steigende Preise im Jahr 2026',
+    'blog.article.glarona-mercato-immobiliare-2026.excerpt': 'Die Nachfrage nach Immobilien bleibt im Kanton Glarus hoch Das begrenzte Angebot stützt den Preisanstieg Eigentumswohnungen +4,4% zwischen dem 2.',
+    'blog.article.glarona-mercato-immobiliare-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGlDe;

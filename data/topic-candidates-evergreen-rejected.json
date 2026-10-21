@@ -2352,6 +2352,282 @@
       "firstSeenAt": "2026-10-20T22:34:12.217Z",
       "lastValidatedAt": "2026-10-20T22:34:12.217Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere progettista elettrico ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T00:36:37.234Z",
+      "lastValidatedAt": "2026-10-21T00:36:37.234Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere saldatore ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T01:13:39.781Z",
+      "lastValidatedAt": "2026-10-21T01:13:39.781Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere contabile ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T01:16:01.469Z",
+      "lastValidatedAt": "2026-10-21T01:16:01.469Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere segretaria ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T01:16:01.659Z",
+      "lastValidatedAt": "2026-10-21T01:16:01.659Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere risorse umane ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T01:16:01.851Z",
+      "lastValidatedAt": "2026-10-21T01:16:01.851Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere assistente sociale ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T02:11:26.260Z",
+      "lastValidatedAt": "2026-10-21T02:11:26.260Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere docente ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T02:11:26.439Z",
+      "lastValidatedAt": "2026-10-21T02:11:26.439Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere receptionist ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T02:11:26.614Z",
+      "lastValidatedAt": "2026-10-21T02:11:26.614Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere idraulico ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T02:11:26.726Z",
+      "lastValidatedAt": "2026-10-21T02:11:26.726Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere falegname ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T02:11:26.741Z",
+      "lastValidatedAt": "2026-10-21T02:11:26.741Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere carpentiere ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T02:11:26.922Z",
+      "lastValidatedAt": "2026-10-21T02:11:26.922Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere pittore ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T02:11:27.038Z",
+      "lastValidatedAt": "2026-10-21T02:11:27.038Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere giardiniere ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T02:13:55.324Z",
+      "lastValidatedAt": "2026-10-21T02:13:55.324Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere piastrellista ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T02:20:56.584Z",
+      "lastValidatedAt": "2026-10-21T02:20:56.584Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere gessatore ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T02:20:56.603Z",
+      "lastValidatedAt": "2026-10-21T02:20:56.603Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere montatore ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T02:20:56.778Z",
+      "lastValidatedAt": "2026-10-21T02:20:56.778Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere magazziniere ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T02:20:56.793Z",
+      "lastValidatedAt": "2026-10-21T02:20:56.793Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere corriere ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T02:20:56.905Z",
+      "lastValidatedAt": "2026-10-21T02:20:56.905Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere gruista ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T02:20:56.920Z",
+      "lastValidatedAt": "2026-10-21T02:20:56.920Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere venditore ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T02:20:57.031Z",
+      "lastValidatedAt": "2026-10-21T02:20:57.031Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere fiduciario ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T03:26:29.813Z",
+      "lastValidatedAt": "2026-10-21T03:26:29.813Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere consulente alla clientela ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T03:27:08.740Z",
+      "lastValidatedAt": "2026-10-21T03:27:08.740Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere lattoniere ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T03:27:40.410Z",
+      "lastValidatedAt": "2026-10-21T03:27:40.410Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -10749,134 +11025,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.tio.ch/svizzera/attualita/1957270/favore-giovani-svizzera-ricerca-progetto": {
-      "section": "svizzera",
-      "ts": 1792306051428
-    },
-    "svizzera::https://www.rsi.ch/info/salute/cervello-e-memoria-il-mistero-dell%e2%80%99amnesia--4163491.html": {
-      "section": "svizzera",
-      "ts": 1792306065219
-    },
-    "frontaliere::https://www.tio.ch/sport/tennis/1957170/federer-tennis-roger-mercato-partner": {
-      "section": "frontaliere",
-      "ts": 1792307483274
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/il-capitale-spirituale-cio-che-il-bilancio-non-sa-raccontare/2711275": {
-      "section": "frontaliere",
-      "ts": 1792307508006
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/milano-riscopre-luciano-fabro-con-una-grande-retrospettiva-allhangar-bicocca/2711239": {
-      "section": "frontaliere",
-      "ts": 1792307531847
-    },
-    "frontaliere::https://www.ocst.ch/il-sindacato/organi-statutari": {
-      "section": "frontaliere",
-      "ts": 1792308084325
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1957516/atomics-reattori-zugo-copenhagen-svizzera": {
-      "section": "frontaliere",
-      "ts": 1792316221024
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/16/leggi-notizia/argomenti/salute-3/articolo/gallarate-ablazione-cardiaca-senza-raggi-x-per-una-paziente-di-18-anni-la-nuova-frontiera-delle-1.html": {
-      "section": "frontaliere",
-      "ts": 1792319498999
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/alcune-domande-sul-nuovo-dosso-alla-dogana-di-gaggiolo/2711563": {
-      "section": "frontaliere",
-      "ts": 1792322108974
-    },
-    "frontaliere::https://www.tio.ch/svizzera/attualita/1957532/ffs-estate-binari-casi-dilatazione": {
-      "section": "frontaliere",
-      "ts": 1792322136695
-    },
-    "frontaliere::https://www.vconews.it/2026/10/18/leggi-notizia/argomenti/economia-e-lavoro-9/articolo/affitti-nel-vco-a-cannobio-per-una-casa-se-ne-va-quasi-meta-del-reddito-medio.html": {
-      "section": "frontaliere",
-      "ts": 1792322344671
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/mattia-bellucci-festa-in-cina-conquista-il-titolo-nel-torneo-di-jinan/2711557": {
-      "section": "frontaliere",
-      "ts": 1792322682832
-    },
-    "svizzera::https://www.tio.ch/svizzera/economia/1957516/atomics-reattori-zugo-copenhagen-svizzera": {
-      "section": "svizzera",
-      "ts": 1792333276263
-    },
-    "svizzera::https://www.tio.ch/svizzera/cronaca/1957552/polizia-oggetti-manifestazione-notte-berna": {
-      "section": "svizzera",
-      "ts": 1792333286452
-    },
-    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1957553/bilancio-francia-ministro-rimasti-fermi": {
-      "section": "svizzera",
-      "ts": 1792333299016
-    },
-    "svizzera::https://www.tio.ch/sport/calcio/1957523/martinez-testa-league-barella-campo-ospedale-scontro-tornero": {
-      "section": "svizzera",
-      "ts": 1792333333509
-    },
-    "svizzera::https://www.tio.ch/dal-mondo/cronaca/1957546/recinzione-aeroporto-sfondata-lipsia-polizia": {
-      "section": "svizzera",
-      "ts": 1792333343276
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/cinquina-varese-nel-ricordo-di-lele-andena-arconatese-battuta-5-1/2711380": {
-      "section": "frontaliere",
-      "ts": 1792337556381
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/i-voti-del-varese-cinque-gol-dautore-malinverno-piantoni-beretta-la-mediana-perfetta/2711386": {
-      "section": "frontaliere",
-      "ts": 1792340561459
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/la-varesina-non-sfonda-con-la-pro-sesto-arriva-un-altro-pareggio/2711776": {
-      "section": "frontaliere",
-      "ts": 1792343069004
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/ps%3a-s%c3%ac-a-tre-iniziative-e-a-documento-per-lavoro-pi%c3%b9-dignitoso/92235291": {
-      "section": "frontaliere",
-      "ts": 1792343085897
-    },
-    "svizzera::https://www.tio.ch/ticino/cronaca/1957584/esce-di-strada-e-si-ribalta-nel-bosco-due-persone-in-ospedale": {
-      "section": "svizzera",
-      "ts": 1792349830385
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1957586/mancato-accesso-agli-aiuti-sociali-il-tema-torna-in-parlamento": {
-      "section": "frontaliere",
-      "ts": 1792356677058
-    },
-    "frontaliere::https://comozero.it/attualita/il-futuro-nasce-a-como-ecco-il-primo-computer-quantistico-di-nuova-generazione-butti-nuova-frontiera": {
-      "section": "frontaliere",
-      "ts": 1792356939946
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/imprese-storiche-oltre-663mila-euro-per-41-attivita-della-provincia-di-varese/2711815": {
-      "section": "frontaliere",
-      "ts": 1792356952518
-    },
-    "frontaliere::https://comozero.it/sport/pagelle-como-liberali-capolavoro-da-7-5-nico-paz-versione-marziano-merita-8": {
-      "section": "frontaliere",
-      "ts": 1792357319513
-    },
-    "svizzera::https://www.tio.ch/ticino/politica/1957606/manifestazioni-non-autorizzate-a-lugano-l-udc-la-legge-vale-per-tutti": {
-      "section": "svizzera",
-      "ts": 1792358107747
-    },
-    "svizzera::https://www.tio.ch/sport/calcio/1957599/la-lazio-sbanca-torino-e-resta-incollata-all-inter": {
-      "section": "svizzera",
-      "ts": 1792358122896
-    },
-    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1957426/biasca-toglie-il-velo-al-nuovo-nodo-di-interscambio": {
-      "section": "frontaliere",
-      "ts": 1792378641571
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/la-castellanzese-vola-al-terzo-posto-2-0-alla-correggese-con-castelletto-e-chessa/2711791": {
-      "section": "frontaliere",
-      "ts": 1792382099597
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/openjobmetis-il-campo-di-trento-e-maledetto-a-hale-non-riesce-lultimo-miracolo/2711371": {
-      "section": "frontaliere",
-      "ts": 1792382132337
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/ioannis-kastritis-sconfitta-dura-figlia-di-troppi-errori/2711839": {
-      "section": "frontaliere",
-      "ts": 1792382134199
-    },
     "frontaliere::https://www.tio.ch/svizzera/cronaca/1957641/dipendenti-lavoro-svizzera-legge-securitas": {
       "section": "frontaliere",
       "ts": 1792387996935
@@ -11012,6 +11160,10 @@
     "frontaliere::https://www.tio.ch/newsblog/verita-immobiliari/1957681/il-ticino-non-e-il-tuo-bancomat": {
       "section": "frontaliere",
       "ts": 1792478098551
+    },
+    "svizzera::https://www.laregione.ch/economia/economia/1958033/corsa-al-cobalto-e-al-nichel-il-lato-grigio-della-svolta-verde": {
+      "section": "svizzera",
+      "ts": 1792557074853
     }
   }
 }

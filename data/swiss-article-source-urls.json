@@ -1,19 +1,4 @@
 {
-  "https://www.seco.admin.ch/it/newnsb/sb5uskla-j19": {
-    "articleId": "helene-budliger-artieda-dimissioni-seco",
-    "ts": "2026-09-17T02:17:39.073Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/0zqf4ypmu5my": {
-    "articleId": "mercato-alloggio-svizzera-2025-2026",
-    "ts": "2026-09-17T02:27:37.460Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/tbrqnj30sw2p": {
-    "articleId": "sorveglianza-digitale-sanita-guida",
-    "ts": "2026-09-17T02:36:27.154Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/cn-approva-accordo-col-mercosur-e-aiuti-all%27agricoltura/92069687": {
     "articleId": "accordo-mercosur-agricoltura-svizzera",
     "ts": "2026-09-17T02:46:34.341Z",
@@ -2497,6 +2482,21 @@
   "https://www.tio.ch/svizzera/economia/1957908/settembre-orologi-esportazioni-franchi-vendite": {
     "articleId": "orologi-svizzeri-export-a-2-2-miliardi-a-settembre-11-7",
     "ts": "2026-10-20T23:39:40.658Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1957721/voloder-molestie-carriera-imprese-vittima": {
+    "articleId": "molestie-lavoro-pmi-svizzere",
+    "ts": "2026-10-21T01:06:01.883Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/economia/1957927/bitcoin-investimenti-etf-primo-finma": {
+    "articleId": "finma-etf-bitcoin-primo-fondo",
+    "ts": "2026-10-21T03:02:49.687Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1957991/zurigo-skyguide-aereo-capacita-guasto-spazio": {
+    "articleId": "guasto-sistemi-skyguide-scali",
+    "ts": "2026-10-21T05:09:47.480Z",
     "keyForm": 2
   }
 }

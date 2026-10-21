@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "servizi",
-  "updatedAt": "2026-10-20T22:08:32.508Z",
-  "contentHash": "8ecb9b15e47522b86ef7dab3249bbf42607e647aa3288e2c9109299466e92a90",
+  "updatedAt": "2026-10-21T04:08:52.546Z",
+  "contentHash": "c37f718c7b9650ada8a4c494cb2df42df033e4fd6b9e2b969da7fa51cea9d5bb",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,22 +14,22 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-20T15:18:19.173Z",
+      "updatedAt": "2026-10-20T19:21:31.737Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-20T17:03:18.684Z",
+      "updatedAt": "2026-10-20T21:38:20.661Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-20T13:43:04.913Z",
+      "updatedAt": "2026-10-20T23:17:38.181Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T15:53:28.523Z",
+      "updatedAt": "2026-10-20T20:55:38.574Z",
       "keyFacts": 0
     }
   ],
@@ -49,7 +49,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "6",
-          "note": "offerta mediana 960 CHF"
+          "note": "offerta mediana 1050 CHF"
         }
       ],
       "dataBlocks": [
@@ -91,7 +91,7 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-20T15:18:19.173Z"
+          "updatedAt": "2026-10-20T19:21:31.737Z"
         },
         {
           "id": "aste-targhe",
@@ -122,7 +122,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction",
-          "updatedAt": "2026-10-20T17:03:18.684Z"
+          "updatedAt": "2026-10-20T21:38:20.661Z"
         },
         {
           "id": "meteo",
@@ -131,12 +131,12 @@
           "items": [
             {
               "label": "Solothurn",
-              "value": "15 °C",
-              "detail": "oggi da 10 a 15 °C"
+              "value": "12 °C",
+              "detail": "oggi da 12 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-20T13:43:04.913Z"
+          "updatedAt": "2026-10-20T23:17:38.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -164,7 +164,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -244,7 +244,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "en": {
       "canton": "SO",
@@ -261,7 +261,7 @@
         {
           "label": "Plate auctions running",
           "value": "6",
-          "note": "typical bid 960 CHF"
+          "note": "typical bid 1,050 CHF"
         }
       ],
       "dataBlocks": [
@@ -303,7 +303,7 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-20T15:18:19.173Z"
+          "updatedAt": "2026-10-20T19:21:31.737Z"
         },
         {
           "id": "aste-targhe",
@@ -334,7 +334,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction",
-          "updatedAt": "2026-10-20T17:03:18.684Z"
+          "updatedAt": "2026-10-20T21:38:20.661Z"
         },
         {
           "id": "meteo",
@@ -343,12 +343,12 @@
           "items": [
             {
               "label": "Solothurn",
-              "value": "15 °C",
-              "detail": "today from 10 to 15 °C"
+              "value": "12 °C",
+              "detail": "today from 12 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-20T13:43:04.913Z"
+          "updatedAt": "2026-10-20T23:17:38.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -376,7 +376,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -452,7 +452,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "de": {
       "canton": "SO",
@@ -469,7 +469,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "6",
-          "note": "mittleres Gebot 960 CHF"
+          "note": "mittleres Gebot 1’050 CHF"
         }
       ],
       "dataBlocks": [
@@ -511,7 +511,7 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-20T15:18:19.173Z"
+          "updatedAt": "2026-10-20T19:21:31.737Z"
         },
         {
           "id": "aste-targhe",
@@ -542,7 +542,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction",
-          "updatedAt": "2026-10-20T17:03:18.684Z"
+          "updatedAt": "2026-10-20T21:38:20.661Z"
         },
         {
           "id": "meteo",
@@ -551,12 +551,12 @@
           "items": [
             {
               "label": "Solothurn",
-              "value": "15 °C",
-              "detail": "heute 10 bis 15 °C"
+              "value": "12 °C",
+              "detail": "heute 12 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-20T13:43:04.913Z"
+          "updatedAt": "2026-10-20T23:17:38.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -584,7 +584,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -660,7 +660,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "fr": {
       "canton": "SO",
@@ -677,7 +677,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "6",
-          "note": "offre centrale 960 CHF"
+          "note": "offre centrale 1 050 CHF"
         }
       ],
       "dataBlocks": [
@@ -719,7 +719,7 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://avso.ch/notfalldienst-apotheken/",
-          "updatedAt": "2026-10-20T15:18:19.173Z"
+          "updatedAt": "2026-10-20T19:21:31.737Z"
         },
         {
           "id": "aste-targhe",
@@ -750,7 +750,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.so.ch/ecari-auction",
-          "updatedAt": "2026-10-20T17:03:18.684Z"
+          "updatedAt": "2026-10-20T21:38:20.661Z"
         },
         {
           "id": "meteo",
@@ -759,12 +759,12 @@
           "items": [
             {
               "label": "Solothurn",
-              "value": "15 °C",
-              "detail": "aujourd’hui de 10 à 15 °C"
+              "value": "12 °C",
+              "detail": "aujourd’hui de 12 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-20T13:43:04.913Z"
+          "updatedAt": "2026-10-20T23:17:38.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -792,7 +792,7 @@
               "url": "https://so.ch/verwaltung/volkswirtschaftsdepartement/amt-fuer-wirtschaft-und-arbeit/aktuell/aktuell/news/die-arbeitslosenquote-sank-im-juni-auf-30-prozent-1/"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -864,7 +864,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     }
   }
 }

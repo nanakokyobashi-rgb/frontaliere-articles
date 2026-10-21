@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T22:08:32.508Z",
-  "contentHash": "5cc966b29fa45e395bfa406131ece7fa84f997192a15343bc148fef427efc6b0",
+  "updatedAt": "2026-10-21T04:08:52.546Z",
+  "contentHash": "8a26e0b4e386c4ad7185c62e1719dc7f9ab4dabe7d24e37a4bcf44697e75ebcd",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T17:37:05.348Z",
+      "updatedAt": "2026-10-20T21:56:57.353Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T15:53:28.523Z",
+      "updatedAt": "2026-10-20T20:55:38.574Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "34",
+          "value": "32",
           "note": "segnalazioni aggiornate: 20 ottobre 2026"
         }
       ],
@@ -147,13 +147,14 @@
               "date": "2026-10-20T18:00:00.000Z"
             },
             {
-              "label": "Revocato: A1 Zürich -> Bern tra Svincolo autostradale Spreitenbach E Galleria Galleria Baregg, al chilometro 101.1 Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-20T13:51:00.000Z"
+              "label": "Langenthal <-> Zofingen tra Luogo Strengelbach E Luogo St. Urban Situazione: pericolo Causa: lavori di costruzione",
+              "value": "Cantiere",
+              "detail": "fine prevista: 30 aprile 2027",
+              "date": "2025-04-07T09:38:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T17:37:05.348Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -191,7 +192,7 @@
               "url": "https://www.baden.ch/de/home/politik-verwaltung/medien/aktuelle-meldungen.html/901/news/19603"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -239,7 +240,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "en": {
       "canton": "AG",
@@ -259,7 +260,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "34",
+          "value": "32",
           "note": "reports as of 20 October 2026"
         }
       ],
@@ -364,13 +365,14 @@
               "date": "2026-10-20T18:00:00.000Z"
             },
             {
-              "label": "Revocato: A1 Zürich -> Bern tra Svincolo autostradale Spreitenbach E Galleria Galleria Baregg, al chilometro 101.1 Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-20T13:51:00.000Z"
+              "label": "Langenthal <-> Zofingen tra Luogo Strengelbach E Luogo St. Urban Situazione: pericolo Causa: lavori di costruzione",
+              "value": "Roadworks",
+              "detail": "until 30 April 2027",
+              "date": "2025-04-07T09:38:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T17:37:05.348Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -408,7 +410,7 @@
               "url": "https://www.baden.ch/de/home/politik-verwaltung/medien/aktuelle-meldungen.html/901/news/19603"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +458,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "de": {
       "canton": "AG",
@@ -476,7 +478,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "34",
+          "value": "32",
           "note": "Meldungen vom 20. Oktober 2026"
         }
       ],
@@ -581,13 +583,14 @@
               "date": "2026-10-20T18:00:00.000Z"
             },
             {
-              "label": "Aufgehoben: A1 Zürich -> Bern zwischen Anschluss Spreitenbach und Tunnel Baregg-Tunnel, bei Kilometer 101.1 Sachlage: Stau Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-20T13:51:00.000Z"
+              "label": "Langenthal <-> Zofingen zwischen Ortschaft Strengelbach und Ortschaft St. Urban Sachlage: Gefahr Ursache: Bauarbeiten",
+              "value": "Baustelle",
+              "detail": "bis 30. April 2027",
+              "date": "2025-04-07T09:38:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T17:37:05.348Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -625,7 +628,7 @@
               "url": "https://www.baden.ch/de/home/politik-verwaltung/medien/aktuelle-meldungen.html/901/news/19603"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -673,7 +676,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "fr": {
       "canton": "AG",
@@ -693,7 +696,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "34",
+          "value": "32",
           "note": "signalements au 20 octobre 2026"
         }
       ],
@@ -798,13 +801,14 @@
               "date": "2026-10-20T18:00:00.000Z"
             },
             {
-              "label": "Révoqué: A1 Zurich -> Berne entre Jonction autoroutière Spreitenbach et Tunnel Tunnel du Baregg, au kilomètre 101.1 Situation: bouchon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-20T13:51:00.000Z"
+              "label": "Langenthal <-> Zofingen entre Localité Strengelbach et Localité St. Urban Situation: danger Raison: travaux de construction",
+              "value": "Chantier",
+              "detail": "jusqu’au 30 avril 2027",
+              "date": "2025-04-07T09:38:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T17:37:05.348Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -842,7 +846,7 @@
               "url": "https://www.baden.ch/de/home/politik-verwaltung/medien/aktuelle-meldungen.html/901/news/19603"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -890,7 +894,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     }
   }
 }

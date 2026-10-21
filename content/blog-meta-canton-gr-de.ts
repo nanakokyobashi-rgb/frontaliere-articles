@@ -30,6 +30,12 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.acqua-domleschg-feldis-scheid.title': 'Domleschg: Wassertankwagen für Feldis und Scheid',
     'blog.article.acqua-domleschg-feldis-scheid.excerpt': 'Domleschg beabsichtigt, Trinkwasser nach Feldis und Scheid zu bringen.',
     'blog.article.acqua-domleschg-feldis-scheid.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sconti-vereina-locali-ospiti.title': 'Vereina: Parlament fordert Prüfung von Rabatten',
+    'blog.article.sconti-vereina-locali-ospiti.excerpt': 'Das Kantonsparlament Graubündens beauftragt die Regierung, Vergünstigungen für den Autoverlad Vereina zu prüfen: Begünstigte und Gültigkeitsbeginn bleiben offen.',
+    'blog.article.sconti-vereina-locali-ospiti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.a13-code-grigioni-vacanze-zurighesi.title': 'A13: Staus zwischen Rothenbrunnen und Reichenau wegen Zürcher Ferien',
+    'blog.article.a13-code-grigioni-vacanze-zurighesi.excerpt': 'Der Verkehr auf der A13 staute sich an jedem Tag des Wochenendes zwischen Rothenbrunnen und Reichenau, wobei der Tunnel Isla-Bella als Engpass identifiziert wurde, im Hinblick auf das Ende der Zürcher Ferien.',
+    'blog.article.a13-code-grigioni-vacanze-zurighesi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGrDe;

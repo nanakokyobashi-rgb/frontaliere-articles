@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "fisco",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "fba0a93ea2b5ece75287303e01fa0ca4b943cbc023d62e8106b60a19de9dfbb9",
+  "updatedAt": "2026-10-21T04:27:11.417Z",
+  "contentHash": "293d97be82e2078e3efbdde3ec91ecd82edb0426cc4dec774c10cbccb6010658",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-20T20:55:38.574Z",
       "keyFacts": 0
     }
   ],
@@ -115,10 +115,16 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Fisco Vaud: imposte su indennità abusi, ricorso in vista",
+          "url": "/articoli-vaud/fisco-vaud-indennita-abuso-imposte/",
+          "excerpt": "A Pully: abusi al Collège de Champittet alla fine degli anni '70 Indennità della Chiesa: CHF 220'000, divisa in due parti Dopo l'opposizione: CHF 120'000 ancora",
+          "date": "2026-10-21T04:19:30.522Z"
+        },
         {
           "title": "Losanna: deficit di 77,7 milioni nel budget 2027",
           "url": "/articoli-vaud/losanna-budget-deficit-2027/",
@@ -160,12 +166,6 @@
           "url": "/articoli-svizzera/imposte-cantonali-vaud-aliquote/",
           "excerpt": "Sistema fiscale a 3 livelli, aliquote progressive per scaglioni di reddito, deduzioni ammesse e portale ufficiale del canton Vaud per le dichiarazioni.",
           "date": "2026-09-04T03:23:19.992Z"
-        },
-        {
-          "title": "Imposta successione e donazione nel Cantone di Vaud",
-          "url": "/articoli-svizzera/imposta-successione-donazione-vaud/",
-          "excerpt": "Guida alle aliquote e alle esenzioni per eredi e donatari nel sistema fiscale del Cantone di Vaud, con focus sui rapporti di parentela.",
-          "date": "2026-09-05T09:40:27.337Z"
         }
       ],
       "latestCantonArticles": [],
@@ -195,7 +195,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-21T04:27:11.417Z"
     },
     "en": {
       "canton": "VD",
@@ -288,10 +288,16 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Vaud tax authorities: tax on abuse compensation, appeal in sight",
+          "url": "/en/vaud-articles/vaud-tax-abuse-compensation-taxes/",
+          "excerpt": "In Pully: abuses at Collège de Champittet in the late 1970s Compensation from the Church: CHF 220'000, divided into two parts After the objection: CHF 120'000",
+          "date": "2026-10-21T04:19:30.522Z"
+        },
         {
           "title": "Lausanne: deficit of 77,7 million in the 2027 budget",
           "url": "/en/vaud-articles/lausanne-budget-deficit-2027/",
@@ -332,12 +338,6 @@
           "url": "/en/swiss-articles/canton-vaud-cantonal-tax-rates/",
           "excerpt": "3-tier tax system, progressive rates for income brackets, allowable deductions and official portal of the canton of Vaud for declarations.",
           "date": "2026-09-04T03:23:19.992Z"
-        },
-        {
-          "title": "Tax succession and donation in the Canton of Vaud",
-          "url": "/en/swiss-articles/inheritance-gift-tax-vaud-canton/",
-          "excerpt": "Guide to rates and exemptions for heirs and donors in the tax system of the Canton of Vaud, with a focus on kinship relationships.",
-          "date": "2026-09-05T09:40:27.337Z"
         }
       ],
       "latestCantonArticles": [],
@@ -367,7 +367,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-21T04:27:11.417Z"
     },
     "de": {
       "canton": "VD",
@@ -460,10 +460,16 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Waadt: Steuern auf Missbrauchs-Entschädigung, Rekurs",
+          "url": "/de/waadt-artikel/waadt-steuer-missbrauchsentschadigung-steuern/",
+          "excerpt": "In Pully: Missbrauch am Collège de Champittet Ende der 70er-Jahre Entschädigung der Kirche: CHF 220'000, in zwei Teile aufgeteilt Nach der Einsprache: CHF",
+          "date": "2026-10-21T04:19:30.522Z"
+        },
         {
           "title": "Lausanne: Defizit von 77,7 Millionen im Budget 2027",
           "url": "/de/waadt-artikel/lausanne-budget-defizit-2027/",
@@ -504,12 +510,6 @@
           "url": "/de/schweiz-artikel/kanton-waadt-kantonssteuer-saetze/",
           "excerpt": "3-stufiges Steuersystem, progressive Steuersätze für Einkommensstufen, zulässige Abzüge und offizielles Portal des Kantons Waadt für Erklärungen.",
           "date": "2026-09-04T03:23:19.992Z"
-        },
-        {
-          "title": "Erbschafts- und Schenkungssteuer im Kanton Waadt",
-          "url": "/de/schweiz-artikel/erbschaft-schenkungssteuer-kanton-waadt/",
-          "excerpt": "Leitfaden zu den Steuersätzen und Befreiungen für Erben und Schenkende im Steuersystem des Kantons Waadt mit Schwerpunkt auf Verwandtschaftsverhältnissen.",
-          "date": "2026-09-05T09:40:27.337Z"
         }
       ],
       "latestCantonArticles": [],
@@ -539,7 +539,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-21T04:27:11.417Z"
     },
     "fr": {
       "canton": "VD",
@@ -632,10 +632,16 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26555-le-peuple-se-prononcera-sur-linitiative-populaire-baisse-dimpots-pour-tous"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Fisc vaudois : impôts sur une indemnité pour abus, recours en vue",
+          "url": "/fr/articles-vaud/fisc-vaud-indemnite-abus-impots/",
+          "excerpt": "À Pully : abus au Collège de Champittet à la fin des années 70 Indemnité de l'Église : CHF 220'000, divisée en deux parties Après l'opposition : CHF 120'000",
+          "date": "2026-10-21T04:19:30.522Z"
+        },
         {
           "title": "Lausanne : déficit de 77,7 millions dans le budget 2027",
           "url": "/fr/articles-vaud/budget-lausanne-deficit-2027/",
@@ -677,12 +683,6 @@
           "url": "/fr/articles-suisse/impots-cantonaux-vaud-taux/",
           "excerpt": "Système fiscal à 3 niveaux, taux progressifs par tranches de revenus, déductions admises et portail officiel du canton de Vaud pour les déclarations.",
           "date": "2026-09-04T03:23:19.992Z"
-        },
-        {
-          "title": "Impôt succession et donation dans le canton de Vaud",
-          "url": "/fr/articles-suisse/impot-succession-donation-canton-vaud/",
-          "excerpt": "Guide des taux et des exonérations pour les héritiers et les donataires dans le système fiscal du canton de Vaud, en mettant l'accent sur les relations de parenté.",
-          "date": "2026-09-05T09:40:27.337Z"
         }
       ],
       "latestCantonArticles": [],
@@ -712,7 +712,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-21T04:27:11.417Z"
     }
   }
 }

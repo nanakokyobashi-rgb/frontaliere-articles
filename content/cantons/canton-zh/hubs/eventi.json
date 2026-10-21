@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-20T00:06:33.415Z",
-  "contentHash": "db4488b22d470a8e075aada7d9a066c60f9775bead0a0845c1ece26fdedd26b7",
+  "updatedAt": "2026-10-21T00:56:25.671Z",
+  "contentHash": "63de09ad72e91f1c422db8ab6b4f39ca94b517a860d357f4c402683f3c0c1949",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-19T15:42:28.810Z",
+      "updatedAt": "2026-10-20T17:28:37.181Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "374",
+          "value": "373",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Alternative Investments Forum 2026",
-              "detail": "Zürich Marriott Hotel, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/alternative-investments-forum-2026_AA6KDtr"
+              "label": "Bildvortrag \"Ostalpen\"",
+              "detail": "Effretikon",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bildvortrag-ostalpen/"
             },
             {
-              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
-              "detail": "Urdorf",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-23/"
+              "label": "Bilderbuchgeschichten auf Französisch mit Nil",
+              "detail": "Gemeindebibliothek Urdorf, Urdorf",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bilderbuchgeschichten-auf-franzoesisch-mit-nil-1/"
             },
             {
-              "label": "Jahrgängerverein Dübendorf, Erste Hilfe Kurs (BLS/AED)",
-              "detail": "Dübendorf",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/jahrgaengerverein-duebendorf-erste-hilfe-kurs-blsaed/"
+              "label": "Familien-Filmnachmittag",
+              "detail": "Kloten",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familien-filmnachmittag/"
             },
             {
-              "label": "Nordic Walking",
-              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-29/"
+              "label": "KINDERFÜHRUNG",
+              "detail": "Ritterhaus Bubikon, Bubikon",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinderfuehrung-4/"
             },
             {
-              "label": "Bilder-Vortrag: Biber",
-              "detail": "Kulturpark Zürich, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/bilder-vortrag-biber_AFFARkw"
+              "label": "Il castello Hegi e la famiglia Hegi - Visita guidata e cena",
+              "detail": "Winterthur",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/il-castello-hegi-e-la-famiglia-hegi-visita-guidata-e-cena/"
             },
             {
-              "label": "Nachhall",
+              "label": "Fokusveranstaltung – Das Potenzial von Mitarbeitenden 45+ nutzen",
+              "detail": "Technopark Zürich, Zürich",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fokusveranstaltung-das-potenzial-von-mitarbeitenden-45-nutzen/"
+            },
+            {
+              "label": "Zürich liest: \"The Thingy\" (auf Englisch)",
+              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/zuerich-liest-the-thingy-auf-englisch_Adb3Bmn"
+            },
+            {
+              "label": "Against Erasure: Reading and Talk with Sahar Tavakoli",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachhall/"
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/against-erasure-reading-and-talk-with-sahar-tavakoli/"
             },
             {
-              "label": "Offenes Singen „KRAFT der LIEDER“ | StimmVolk",
-              "detail": "Loorensiedlung, Affoltern am Albis",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/affoltern-am-albis/offenes-singen-kraft-der-lieder-stimmvolk_AEW2YxX"
+              "label": "Dance for Mental Health – kostenloses Tanzprojekt für 14–20-Jährige",
+              "detail": "the ground Tanzschule, Dietikon",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/dance-for-mental-health-kostenloses-tanzprojekt-fuer-1420-jaehrige_A3jsfgY"
             },
             {
-              "label": "Jugend Sinfonieorchester Zürich",
-              "detail": "Tonhalle, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jugend-sinfonieorchester-zuerich/"
-            },
-            {
-              "label": "Stimme der Farben – Chor: neuer Kurs ab 20.10.26",
-              "detail": "Galotti",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/stimme-der-farben-chor-neuer-kurs-ab-201026_A6PRiGe"
-            },
-            {
-              "label": "Teresa Vittucci & Sophía Rodríguez: Anger Angels (ETERNAL LETDOWN)",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/teresa-vittucci-sophia-rodriguez-anger-angels-eternal-letdown/"
+              "label": "Mit Laserlicht und Röntgenstrahl",
+              "detail": "Affoltern am Albis",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mit-laserlicht-und-roentgenstrahl/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         }
       ],
       "curatedArticles": [
@@ -129,7 +129,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "en": {
       "canton": "ZH",
@@ -139,7 +139,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "374",
+          "value": "373",
           "note": "from the site’s events calendar"
         }
       ],
@@ -150,69 +150,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Alternative Investments Forum 2026",
-              "detail": "Zürich Marriott Hotel, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/alternative-investments-forum-2026_AA6KDtr"
+              "label": "Bildvortrag \"Ostalpen\"",
+              "detail": "Effretikon",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bildvortrag-ostalpen/"
             },
             {
-              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
-              "detail": "Urdorf",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-23/"
+              "label": "Bilderbuchgeschichten auf Französisch mit Nil",
+              "detail": "Gemeindebibliothek Urdorf, Urdorf",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bilderbuchgeschichten-auf-franzoesisch-mit-nil-1/"
             },
             {
-              "label": "Jahrgängerverein Dübendorf, Erste Hilfe Kurs (BLS/AED)",
-              "detail": "Dübendorf",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/jahrgaengerverein-duebendorf-erste-hilfe-kurs-blsaed/"
+              "label": "Familien-Filmnachmittag",
+              "detail": "Kloten",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familien-filmnachmittag/"
             },
             {
-              "label": "Nordic Walking",
-              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-29/"
+              "label": "KINDERFÜHRUNG",
+              "detail": "Ritterhaus Bubikon, Bubikon",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinderfuehrung-4/"
             },
             {
-              "label": "Bilder-Vortrag: Biber",
-              "detail": "Kulturpark Zürich, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/bilder-vortrag-biber_AFFARkw"
+              "label": "The Hegi Castle and Hegi Family - Guided Tour and Dinner",
+              "detail": "Winterthur",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/il-castello-hegi-e-la-famiglia-hegi-visita-guidata-e-cena/"
             },
             {
-              "label": "Nachhall",
+              "label": "Fokusveranstaltung – Das Potenzial von Mitarbeitenden 45+ nutzen",
+              "detail": "Technopark Zürich, Zürich",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fokusveranstaltung-das-potenzial-von-mitarbeitenden-45-nutzen/"
+            },
+            {
+              "label": "Zürich liest: \"The Thingy\" (auf Englisch)",
+              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/zuerich-liest-the-thingy-auf-englisch_Adb3Bmn"
+            },
+            {
+              "label": "Against Erasure: Reading and Talk with Sahar Tavakoli",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachhall/"
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/against-erasure-reading-and-talk-with-sahar-tavakoli/"
             },
             {
-              "label": "Offenes Singen „KRAFT der LIEDER“",
-              "detail": "Loorensiedlung, Affoltern am Albis",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/affoltern-am-albis/offenes-singen-kraft-der-lieder-stimmvolk_AEW2YxX"
+              "label": "Dance for Mental Health – kostenloses Tanzprojekt für 14–20-Jährige",
+              "detail": "the ground Tanzschule, Dietikon",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/dance-for-mental-health-kostenloses-tanzprojekt-fuer-1420-jaehrige_A3jsfgY"
             },
             {
-              "label": "Jugend Sinfonieorchester Zürich",
-              "detail": "Tonhalle, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jugend-sinfonieorchester-zuerich/"
-            },
-            {
-              "label": "Voices of Colors – Choir: New Course Starting October 20, 2026",
-              "detail": "Galotti",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/stimme-der-farben-chor-neuer-kurs-ab-201026_A6PRiGe"
-            },
-            {
-              "label": "Teresa Vittucci & Sophía Rodríguez: Anger Angels (ETERNAL LETDOWN)",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/teresa-vittucci-sophia-rodriguez-anger-angels-eternal-letdown/"
+              "label": "Mit Laserlicht und Röntgenstrahl",
+              "detail": "Affoltern am Albis",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mit-laserlicht-und-roentgenstrahl/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         }
       ],
       "curatedArticles": [
@@ -246,7 +246,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "de": {
       "canton": "ZH",
@@ -256,7 +256,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "374",
+          "value": "373",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -267,69 +267,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Alternative Investments Forum 2026",
-              "detail": "Zürich Marriott Hotel, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/alternative-investments-forum-2026_AA6KDtr"
+              "label": "Bildvortrag \"Ostalpen\"",
+              "detail": "Effretikon",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bildvortrag-ostalpen/"
             },
             {
-              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
-              "detail": "Urdorf",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-23/"
+              "label": "Bilderbuchgeschichten auf Französisch mit Nil",
+              "detail": "Gemeindebibliothek Urdorf, Urdorf",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bilderbuchgeschichten-auf-franzoesisch-mit-nil-1/"
             },
             {
-              "label": "Jahrgängerverein Dübendorf, Erste Hilfe Kurs (BLS/AED)",
-              "detail": "Dübendorf",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/jahrgaengerverein-duebendorf-erste-hilfe-kurs-blsaed/"
+              "label": "Familien-Filmnachmittag",
+              "detail": "Kloten",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familien-filmnachmittag/"
             },
             {
-              "label": "Nordic Walking",
-              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-29/"
+              "label": "KINDERFÜHRUNG",
+              "detail": "Ritterhaus Bubikon, Bubikon",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinderfuehrung-4/"
             },
             {
-              "label": "Bilder-Vortrag: Biber",
-              "detail": "Kulturpark Zürich, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/bilder-vortrag-biber_AFFARkw"
+              "label": "The Hegi Castle and Hegi Family - Guided Tour and Dinner",
+              "detail": "Winterthur",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/il-castello-hegi-e-la-famiglia-hegi-visita-guidata-e-cena/"
             },
             {
-              "label": "Nachhall",
+              "label": "Fokusveranstaltung – Das Potenzial von Mitarbeitenden 45+ nutzen",
+              "detail": "Technopark Zürich, Zürich",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fokusveranstaltung-das-potenzial-von-mitarbeitenden-45-nutzen/"
+            },
+            {
+              "label": "Zürich liest: \"The Thingy\" (auf Englisch)",
+              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/zuerich-liest-the-thingy-auf-englisch_Adb3Bmn"
+            },
+            {
+              "label": "Against Erasure: Reading and Talk with Sahar Tavakoli",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachhall/"
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/against-erasure-reading-and-talk-with-sahar-tavakoli/"
             },
             {
-              "label": "Offenes Singen „KRAFT der LIEDER“",
-              "detail": "Loorensiedlung, Affoltern am Albis",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/affoltern-am-albis/offenes-singen-kraft-der-lieder-stimmvolk_AEW2YxX"
+              "label": "Dance for Mental Health – kostenloses Tanzprojekt für 14–20-Jährige",
+              "detail": "the ground Tanzschule, Dietikon",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/dance-for-mental-health-kostenloses-tanzprojekt-fuer-1420-jaehrige_A3jsfgY"
             },
             {
-              "label": "Jugend Sinfonieorchester Zürich",
-              "detail": "Tonhalle, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jugend-sinfonieorchester-zuerich/"
-            },
-            {
-              "label": "Stimme der Farben – Chor: neuer Kurs ab dem 20.10.26",
-              "detail": "Galotti",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/stimme-der-farben-chor-neuer-kurs-ab-201026_A6PRiGe"
-            },
-            {
-              "label": "Teresa Vittucci & Sophía Rodríguez: anger angels (ETERNAL LETDOWN)",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/teresa-vittucci-sophia-rodriguez-anger-angels-eternal-letdown/"
+              "label": "Mit Laserlicht und Röntgenstrahl",
+              "detail": "Affoltern am Albis",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mit-laserlicht-und-roentgenstrahl/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         }
       ],
       "curatedArticles": [
@@ -363,7 +363,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "fr": {
       "canton": "ZH",
@@ -373,7 +373,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "374",
+          "value": "373",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -384,69 +384,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Alternative Investments Forum 2026",
-              "detail": "Zürich Marriott Hotel, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/alternative-investments-forum-2026_AA6KDtr"
+              "label": "Bildvortrag \"Ostalpen\"",
+              "detail": "Effretikon",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bildvortrag-ostalpen/"
             },
             {
-              "label": "Gymnastik für Seniorinnen/Senioren / Organisiert vom Frauenverein",
-              "detail": "Urdorf",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gymnastik-fuer-seniorinnensenioren-organisiert-vom-frauenverein-23/"
+              "label": "Bilderbuchgeschichten auf Französisch mit Nil",
+              "detail": "Gemeindebibliothek Urdorf, Urdorf",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bilderbuchgeschichten-auf-franzoesisch-mit-nil-1/"
             },
             {
-              "label": "Jahrgängerverein Dübendorf, Erste Hilfe Kurs (BLS/AED)",
-              "detail": "Dübendorf",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/jahrgaengerverein-duebendorf-erste-hilfe-kurs-blsaed/"
+              "label": "Familien-Filmnachmittag",
+              "detail": "Kloten",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familien-filmnachmittag/"
             },
             {
-              "label": "Nordic Walking",
-              "detail": "Treffpunkt: Mehrzweckplatz Zwischenb&auml;chen, Urdorf",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/nordic-walking-29/"
+              "label": "KINDERFÜHRUNG",
+              "detail": "Ritterhaus Bubikon, Bubikon",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinderfuehrung-4/"
             },
             {
-              "label": "Bilder-Vortrag: Biber",
-              "detail": "Kulturpark Zürich, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/zuerich/bilder-vortrag-biber_AFFARkw"
+              "label": "Le château Hegi et la famille Hegi - Visite guidée et dîner",
+              "detail": "Winterthur",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/il-castello-hegi-e-la-famiglia-hegi-visita-guidata-e-cena/"
             },
             {
-              "label": "Nachhall",
+              "label": "Fokusveranstaltung – Das Potenzial von Mitarbeitenden 45+ nutzen",
+              "detail": "Technopark Zürich, Zürich",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fokusveranstaltung-das-potenzial-von-mitarbeitenden-45-nutzen/"
+            },
+            {
+              "label": "Zürich liest: \"The Thingy\" (auf Englisch)",
+              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/zuerich-liest-the-thingy-auf-englisch_Adb3Bmn"
+            },
+            {
+              "label": "Against Erasure: Reading and Talk with Sahar Tavakoli",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachhall/"
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/against-erasure-reading-and-talk-with-sahar-tavakoli/"
             },
             {
-              "label": "Offenes Singen „KRAFT der LIEDER“",
-              "detail": "Loorensiedlung, Affoltern am Albis",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/affoltern-am-albis/offenes-singen-kraft-der-lieder-stimmvolk_AEW2YxX"
+              "label": "Dance for Mental Health – kostenloses Tanzprojekt für 14–20-Jährige",
+              "detail": "the ground Tanzschule, Dietikon",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/dance-for-mental-health-kostenloses-tanzprojekt-fuer-1420-jaehrige_A3jsfgY"
             },
             {
-              "label": "Jugend Sinfonieorchester Zürich",
-              "detail": "Tonhalle, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jugend-sinfonieorchester-zuerich/"
-            },
-            {
-              "label": "Stimme der Farben – Chor : nouveau cours à partir du 20 octobre 2026",
-              "detail": "Galotti",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/stimme-der-farben-chor-neuer-kurs-ab-201026_A6PRiGe"
-            },
-            {
-              "label": "Teresa Vittucci & Sophía Rodríguez: Anger Angels (ETERNAL LETDOWN)",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/teresa-vittucci-sophia-rodriguez-anger-angels-eternal-letdown/"
+              "label": "Mit Laserlicht und Röntgenstrahl",
+              "detail": "Affoltern am Albis",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mit-laserlicht-und-roentgenstrahl/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         }
       ],
       "curatedArticles": [
@@ -480,7 +480,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     }
   }
 }

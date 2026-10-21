@@ -699,6 +699,84 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-chuv-ostetriche-salari-classi': {
+    title: 'CHUV: ostetriche chiedono salari equi, classe 10 per tutte',
+    description: 'CHUV: classe 9 o 10 per lo stesso lavoro Solo un terzo delle ostetriche è in classe 10 Scarto medio: CHF 8\'000 l\'anno La richiesta risale al 2018',
+    keywords: 'frontalieri, ticino, svizzera, italia, chuv, ostetriche, chiedono, salari',
+    ogTitle: 'CHUV: ostetriche in lotta per salari equi – Classe 10 per tutte',
+    ogDescription: 'CHUV: classe 9 o 10 per lo stesso lavoro Solo un terzo delle ostetriche è in classe 10 Scarto medio: CHF 8\'000 l\'anno La richiesta risale al 2018 Dove → CHUV',
+    canonicalPath: '/articoli-vaud/chuv-ostetriche-salari-classi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "CHUV: ostetriche chiedono salari equi, classe 10 per tutte",
+      "description": "CHUV: classe 9 o 10 per lo stesso lavoro Solo un terzo delle ostetriche è in classe 10 Scarto medio: CHF 8'000 l'anno La richiesta risale al 2018",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-chuv-ostetriche-salari-classi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T03:32:51+00:00",
+      "dateModified": "2026-10-21T03:32:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/chuv-ostetriche-salari-classi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-fisco-vaud-indennita-abuso-imposte': {
+    title: 'Fisco Vaud: imposte su indennità abusi, ricorso in vista',
+    description: 'A Pully: abusi al Collège de Champittet alla fine degli anni \'70 Indennità della Chiesa: CHF 220\'000, divisa in due parti Dopo l\'opposizione: CHF',
+    keywords: 'frontalieri, ticino, svizzera, italia, fisco, vaud, imposte, indennità',
+    ogTitle: 'Fisco Vaud: imposte su indennità per abusi, ricorso in vista',
+    ogDescription: 'A Pully: abusi al Collège de Champittet alla fine degli anni \'70 Indennità della Chiesa: CHF 220\'000, divisa in due parti Dopo l\'opposizione: CHF 120\'000 ancora',
+    canonicalPath: '/articoli-vaud/fisco-vaud-indennita-abuso-imposte/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fisco Vaud: imposte su indennità abusi, ricorso in vista",
+      "description": "A Pully: abusi al Collège de Champittet alla fine degli anni '70 Indennità della Chiesa: CHF 220'000, divisa in due parti Dopo l'opposizione: CHF",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-fisco-vaud-indennita-abuso-imposte.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T04:19:30+00:00",
+      "dateModified": "2026-10-21T04:19:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/fisco-vaud-indennita-abuso-imposte/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

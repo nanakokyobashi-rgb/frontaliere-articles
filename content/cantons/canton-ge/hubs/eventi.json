@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-20T22:08:32.508Z",
-  "contentHash": "7934791ef42bc6ee5605d95097832df977ae1f311627499d22d95582b21c45b3",
+  "updatedAt": "2026-10-21T00:56:25.671Z",
+  "contentHash": "f7d97ba2cfe6145a87cca2f32b2d668b7c0e0da700cec6bb7bfae0422e335211",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "322",
+          "value": "319",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Annulé - RYAN ADAMS",
+              "label": "Atelier chocolat pour les enfants - Chocolate monster",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/ryan-adams"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-0"
             },
             {
-              "label": "Atelier Créez Votre Chocolat Halloween",
+              "label": "Atelier de création pour enfants autour du portrait",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-0"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/atelier-creation-enfants-autour-portrait"
             },
             {
-              "label": "Atelier Créez Votre Chocolat Halloween",
+              "label": "Atelier Initiation à la Chocolaterie - Tempérage du chocolat",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-3"
-            },
-            {
-              "label": "Atelier de fabrication d'un film en Stop Motion à la Bibliothèque de la Cité",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/atelier-fabrication-film-stop-motion-bibliotheque-cite"
-            },
-            {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
-            },
-            {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/atelier-initiation-chocolaterie-temperage-chocolat"
             },
             {
               "label": "Au fil des pas et des pages",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/pages"
-            },
-            {
-              "label": "Avishai Cohen",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/avishai-cohen"
-            },
-            {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/pages-0"
             },
             {
               "label": "C'est MAHgique!",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/mahgique"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/mahgique-0"
+            },
+            {
+              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi-4"
+            },
+            {
+              "label": "Complet - Les secrets du monde fongique : à la découverte des champignons du Jardin Botanique de Genève",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve"
+            },
+            {
+              "label": "Complet - Les secrets du monde fongique : à la découverte des champignons du Jardin Botanique de Genève - En anglais",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve-anglais"
+            },
+            {
+              "label": "Complet - Un objet, un son, une histoire : découvre l'arbre de Sobo",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/objet-histoire-decouvre-arbre-sobo"
+            },
+            {
+              "label": "Escape Game en extérieur dans le parc des Bastions",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/escape-game-exterieur-parc-bastions"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -135,7 +135,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "en": {
       "canton": "GE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "322",
+          "value": "319",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,64 +156,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Annulé - RYAN ADAMS",
+              "label": "Atelier chocolat pour les enfants - Chocolate monster",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/ryan-adams"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-0"
             },
             {
-              "label": "Atelier Créez Votre Chocolat Halloween",
+              "label": "Atelier de création pour enfants autour du portrait",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-0"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/atelier-creation-enfants-autour-portrait"
             },
             {
-              "label": "Atelier Créez Votre Chocolat Halloween",
+              "label": "Atelier Initiation à la Chocolaterie - Tempérage du chocolat",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-3"
-            },
-            {
-              "label": "Atelier de fabrication d'un film en Stop Motion à la Bibliothèque de la Cité",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/atelier-fabrication-film-stop-motion-bibliotheque-cite"
-            },
-            {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
-            },
-            {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/atelier-initiation-chocolaterie-temperage-chocolat"
             },
             {
               "label": "Au fil des pas et des pages",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/pages"
-            },
-            {
-              "label": "Avishai Cohen",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/avishai-cohen"
-            },
-            {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/pages-0"
             },
             {
               "label": "C'est MAHgique!",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/mahgique"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/mahgique-0"
+            },
+            {
+              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi-4"
+            },
+            {
+              "label": "Complet - Les secrets du monde fongique : à la découverte des champignons du Jardin Botanique de Genève",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve"
+            },
+            {
+              "label": "Complet - Les secrets du monde fongique : à la découverte des champignons du Jardin Botanique de Genève - En anglais",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve-anglais"
+            },
+            {
+              "label": "Complet - Un objet, un son, une histoire : découvre l'arbre de Sobo",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/objet-histoire-decouvre-arbre-sobo"
+            },
+            {
+              "label": "Escape Game en extérieur dans le parc des Bastions",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/escape-game-exterieur-parc-bastions"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -253,7 +253,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "de": {
       "canton": "GE",
@@ -263,7 +263,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "322",
+          "value": "319",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -274,64 +274,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Annulé - RYAN ADAMS",
+              "label": "Atelier chocolat pour les enfants - Chocolate monster",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/ryan-adams"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-0"
             },
             {
-              "label": "Atelier Créez Votre Chocolat Halloween",
+              "label": "Atelier de création pour enfants autour du portrait",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-0"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/atelier-creation-enfants-autour-portrait"
             },
             {
-              "label": "Atelier Créez Votre Chocolat Halloween",
+              "label": "Atelier Initiation à la Chocolaterie - Tempérage du chocolat",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-3"
-            },
-            {
-              "label": "Atelier de fabrication d'un film en Stop Motion à la Bibliothèque de la Cité",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/atelier-fabrication-film-stop-motion-bibliotheque-cite"
-            },
-            {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
-            },
-            {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/atelier-initiation-chocolaterie-temperage-chocolat"
             },
             {
               "label": "Au fil des pas et des pages",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/pages"
-            },
-            {
-              "label": "Avishai Cohen",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/avishai-cohen"
-            },
-            {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/pages-0"
             },
             {
               "label": "C'est MAHgique!",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/mahgique"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/mahgique-0"
+            },
+            {
+              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi-4"
+            },
+            {
+              "label": "Complet - Les secrets du monde fongique : à la découverte des champignons du Jardin Botanique de Genève",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve"
+            },
+            {
+              "label": "Complet - Les secrets du monde fongique : à la découverte des champignons du Jardin Botanique de Genève - En anglais",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve-anglais"
+            },
+            {
+              "label": "Complet - Un objet, un son, une histoire : découvre l'arbre de Sobo",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/objet-histoire-decouvre-arbre-sobo"
+            },
+            {
+              "label": "Escape Game en extérieur dans le parc des Bastions",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/escape-game-exterieur-parc-bastions"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -371,7 +371,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "fr": {
       "canton": "GE",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "322",
+          "value": "319",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -392,64 +392,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Annulé - RYAN ADAMS",
+              "label": "Atelier chocolat pour les enfants - Chocolate monster",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/ryan-adams"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-0"
             },
             {
-              "label": "Atelier Créez Votre Chocolat Halloween",
+              "label": "Atelier de création pour enfants autour du portrait",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-0"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/atelier-creation-enfants-autour-portrait"
             },
             {
-              "label": "Atelier Créez Votre Chocolat Halloween",
+              "label": "Atelier Initiation à la Chocolaterie - Tempérage du chocolat",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-chocolat-halloween-3"
-            },
-            {
-              "label": "Atelier de fabrication d'un film en Stop Motion à la Bibliothèque de la Cité",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/atelier-fabrication-film-stop-motion-bibliotheque-cite"
-            },
-            {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
-            },
-            {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/atelier-initiation-chocolaterie-temperage-chocolat"
             },
             {
               "label": "Au fil des pas et des pages",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/pages"
-            },
-            {
-              "label": "Avishai Cohen",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/avishai-cohen"
-            },
-            {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
-              "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/pages-0"
             },
             {
               "label": "C'est MAHgique!",
               "detail": "Genève",
-              "date": "2026-10-20",
-              "url": "https://www.geneve.ch/agenda/mahgique"
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/mahgique-0"
+            },
+            {
+              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi-4"
+            },
+            {
+              "label": "Complet - Les secrets du monde fongique : à la découverte des champignons du Jardin Botanique de Genève",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve"
+            },
+            {
+              "label": "Complet - Les secrets du monde fongique : à la découverte des champignons du Jardin Botanique de Genève - En anglais",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve-anglais"
+            },
+            {
+              "label": "Complet - Un objet, un son, une histoire : découvre l'arbre de Sobo",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/objet-histoire-decouvre-arbre-sobo"
+            },
+            {
+              "label": "Escape Game en extérieur dans le parc des Bastions",
+              "detail": "Genève",
+              "date": "2026-10-21",
+              "url": "https://www.geneve.ch/agenda/escape-game-exterieur-parc-bastions"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -489,7 +489,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     }
   }
 }

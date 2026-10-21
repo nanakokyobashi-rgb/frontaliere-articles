@@ -42,6 +42,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.weissenbach-incidente-quattro-auto.title': 'Weissenbach: fünf Verletzte bei einem Zusammenstoß zwischen vier Autos',
     'blog.article.weissenbach-incidente-quattro-auto.excerpt': 'Der Unfall ereignete sich am 19.',
     'blog.article.weissenbach-incidente-quattro-auto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.berna-stato-pagina-non-disponibile.title': 'Status der Seite der Berner Verwaltung',
+    'blog.article.berna-stato-pagina-non-disponibile.excerpt': 'Der Inhalt der angegebenen Seite ist nicht verfügbar.',
+    'blog.article.berna-stato-pagina-non-disponibile.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;

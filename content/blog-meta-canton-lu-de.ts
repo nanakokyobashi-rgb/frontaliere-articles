@@ -33,6 +33,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.lucerna-finanze-sessione-ottobre.title': 'Luzern: fünf Stunden Debatte über die kantonalen Finanzen',
     'blog.article.lucerna-finanze-sessione-ottobre.excerpt': 'Der Luzerner Kantonsrat hat über fünf Stunden über den AFP 2027–2030 diskutiert; der Vorschlag sieht vor, den Steuerfuss 2027 von 1,45 auf 1,40 Einheiten zu senken; die Abstimmung findet am 20.',
     'blog.article.lucerna-finanze-sessione-ottobre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lucerna-riduce-imposte.title': 'Kanton Luzern senkt die Steuern: endgültige Entscheidung',
+    'blog.article.lucerna-riduce-imposte.excerpt': 'Die Quelle Zentralplus stellt die Steuersenkung im Kanton Luzern als endgültig dar; der Steuerdatensatz 2026 weist Belastungen für Jahreseinkommen und A0-Werte aus.',
+    'blog.article.lucerna-riduce-imposte.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;

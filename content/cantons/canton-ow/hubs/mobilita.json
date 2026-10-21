@@ -4,17 +4,17 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T09:50:40.544Z",
-  "contentHash": "5ee6a918bf0ef671859f140088f54504b13cc7e5783d091b161fac9ab466b190",
+  "updatedAt": "2026-10-21T03:09:34.669Z",
+  "contentHash": "27e56f43ec9d6e7a42105eedc7dd23e8dd591ffe9853710563c798eaf481132c",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T00:43:33.013Z",
+      "updatedAt": "2026-10-20T17:37:05.348Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T17:49:38.738Z",
+      "updatedAt": "2026-10-20T15:53:28.523Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "4",
+          "value": "2",
           "note": "segnalazioni aggiornate: 20 ottobre 2026"
         },
         {
@@ -49,18 +49,6 @@
               "date": "2026-09-21T06:33:00.000Z"
             },
             {
-              "label": "A8 Sarnen -> Stans Nord tra Galleria Galleria Lopper E Galleria Gallerie Kirchenwald Situazione: chiusa cantiere, lunghezza [km] 0.3",
-              "value": "Chiusura",
-              "detail": "fine prevista: 21 ottobre 2026",
-              "date": "2026-10-13T05:22:00.000Z"
-            },
-            {
-              "label": "A8 Sarnen -> Hergiswil Galleria Galleria Lopper Situazione: tunnel chiuso cantiere, lunghezza [km] 2.0",
-              "value": "Chiusura",
-              "detail": "fine prevista: 21 ottobre 2026",
-              "date": "2026-10-13T05:22:00.000Z"
-            },
-            {
               "label": "A8 Brienz -> Sarnen Galleria Galleria Lungern Situazione: chiusa cantiere, lunghezza [km] 3.6",
               "value": "Chiusura",
               "detail": "fine prevista: 6 novembre 2026",
@@ -74,7 +62,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -97,7 +85,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -131,7 +119,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-21T03:09:34.669Z"
     },
     "en": {
       "canton": "OW",
@@ -141,7 +129,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "4",
+          "value": "2",
           "note": "reports as of 20 October 2026"
         },
         {
@@ -163,18 +151,6 @@
               "date": "2026-09-21T06:33:00.000Z"
             },
             {
-              "label": "A8 Sarnen -> Stans Nord tra Galleria Galleria Lopper E Galleria Gallerie Kirchenwald Situazione: chiusa cantiere, lunghezza [km] 0.3",
-              "value": "Closure",
-              "detail": "until 21 October 2026",
-              "date": "2026-10-13T05:22:00.000Z"
-            },
-            {
-              "label": "A8 Sarnen -> Hergiswil Galleria Galleria Lopper Situazione: tunnel chiuso cantiere, lunghezza [km] 2.0",
-              "value": "Closure",
-              "detail": "until 21 October 2026",
-              "date": "2026-10-13T05:22:00.000Z"
-            },
-            {
               "label": "A8 Brienz -> Sarnen Galleria Galleria Lungern Situazione: chiusa cantiere, lunghezza [km] 3.6",
               "value": "Closure",
               "detail": "until 6 November 2026",
@@ -188,7 +164,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -211,7 +187,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -245,7 +221,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-21T03:09:34.669Z"
     },
     "de": {
       "canton": "OW",
@@ -255,7 +231,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "4",
+          "value": "2",
           "note": "Meldungen vom 20. Oktober 2026"
         },
         {
@@ -277,18 +253,6 @@
               "date": "2026-09-21T06:33:00.000Z"
             },
             {
-              "label": "A8 Sarnen -> Stans Nord zwischen Tunnel Lopper-Tunnel und Tunnel Kirchenwald-Tunnel Sachlage: Strecke gesperrt Baustelle, Länge [km] 0.3",
-              "value": "Sperrung",
-              "detail": "bis 21. Oktober 2026",
-              "date": "2026-10-13T05:22:00.000Z"
-            },
-            {
-              "label": "A8 Sarnen -> Hergiswil Tunnel Lopper-Tunnel Sachlage: Tunnel gesperrt Baustelle, Länge [km] 2.0",
-              "value": "Sperrung",
-              "detail": "bis 21. Oktober 2026",
-              "date": "2026-10-13T05:22:00.000Z"
-            },
-            {
               "label": "A8 Brienz -> Sarnen Tunnel Lungern-Tunnel Sachlage: Strecke gesperrt Baustelle, Länge [km] 3.6",
               "value": "Sperrung",
               "detail": "bis 6. November 2026",
@@ -302,7 +266,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -325,7 +289,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -359,7 +323,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-21T03:09:34.669Z"
     },
     "fr": {
       "canton": "OW",
@@ -369,7 +333,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "4",
+          "value": "2",
           "note": "signalements au 20 octobre 2026"
         },
         {
@@ -391,18 +355,6 @@
               "date": "2026-09-21T06:33:00.000Z"
             },
             {
-              "label": "A8 Sarnen -> Stans Nord entre Tunnel Tunnel du Lopper et Tunnel Tunnel de Kirchenwald Situation: fermé travaux, longueur [km] 0.3",
-              "value": "Fermeture",
-              "detail": "jusqu’au 21 octobre 2026",
-              "date": "2026-10-13T05:22:00.000Z"
-            },
-            {
-              "label": "A8 Sarnen -> Hergiswil Tunnel Tunnel du Lopper Situation: tunnel fermé travaux, longueur [km] 2.0",
-              "value": "Fermeture",
-              "detail": "jusqu’au 21 octobre 2026",
-              "date": "2026-10-13T05:22:00.000Z"
-            },
-            {
               "label": "A8 Brienz -> Sarnen Tunnel Tunnel Lungern Situation: fermé travaux, longueur [km] 3.6",
               "value": "Fermeture",
               "detail": "jusqu’au 6 novembre 2026",
@@ -416,7 +368,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T00:43:33.013Z"
+          "updatedAt": "2026-10-20T17:37:05.348Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -439,7 +391,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -473,7 +425,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-20T09:50:40.544Z"
+      "updatedAt": "2026-10-21T03:09:34.669Z"
     }
   }
 }

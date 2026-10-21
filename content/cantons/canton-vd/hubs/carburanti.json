@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "carburanti",
-  "updatedAt": "2026-10-20T17:48:42.935Z",
-  "contentHash": "a17a652a387380f7be3b97b0b2c3e3fe09744b0dbac9e423b31da6e01623ea3b",
+  "updatedAt": "2026-10-21T04:27:11.417Z",
+  "contentHash": "549efc9bb6e81be1448a51e45ac05b726992267cc74eff30658329bd304a2513",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fisco Vaud: imposte su indennità abusi, ricorso in vista",
+          "url": "/articoli-vaud/fisco-vaud-indennita-abuso-imposte/",
+          "excerpt": "A Pully: abusi al Collège de Champittet alla fine degli anni '70 Indennità della Chiesa: CHF 220'000, divisa in due parti Dopo l'opposizione: CHF 120'000 ancora",
+          "date": "2026-10-21T04:19:30.522Z"
+        },
+        {
+          "title": "CHUV: ostetriche chiedono salari equi, classe 10 per tutte",
+          "url": "/articoli-vaud/chuv-ostetriche-salari-classi/",
+          "excerpt": "CHUV: classe 9 o 10 per lo stesso lavoro Solo un terzo delle ostetriche è in classe 10 Scarto medio: CHF 8'000 l'anno La richiesta risale al 2018 Dove → CHUV",
+          "date": "2026-10-21T03:32:51.220Z"
+        },
+        {
           "title": "CDHR 2025: soglie 250.000/500.000 € per frontalieri in Francia",
           "url": "/articoli-vaud/cdhr-contributo-differenziale-2025/",
           "excerpt": "La contribution différentielle sur les hauts revenus mira a un prelievo minimo del 20%.",
@@ -88,18 +100,6 @@
           "url": "/articoli-vaud/truffe-falsi-banchieri-lausanna/",
           "excerpt": "Oltre cento persone interpellate nel Vaud dall'inizio del 2026 Sedici persone interpellate dall'inizio di ottobre Coinvolte polizia cantonale, Lausanne",
           "date": "2026-10-18T07:14:52.238Z"
-        },
-        {
-          "title": "Losanna: Hôpital des Nounours al CHUV il 14 e 15 novembre",
-          "url": "/articoli-vaud/hopital-nounours-chuv-lausanne/",
-          "excerpt": "Nuova edizione al CHUV il 14 e 15 novembre Iscrizioni dal 24 ottobre alle 8 Partecipazione gratuita su iscrizione Attività per bambini nella zona degli auditori",
-          "date": "2026-10-18T06:56:42.455Z"
-        },
-        {
-          "title": "Eventi del weekend nel Canton Vaud: cosa fare sabato e domenica",
-          "url": "/articoli-vaud/eventi-weekend-vaud/",
-          "excerpt": "Eventi nel Canton Vaud ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
-          "date": "2026-10-17T11:32:57.082Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T04:27:11.417Z"
     },
     "en": {
       "canton": "VD",
@@ -171,6 +171,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Vaud tax authorities: tax on abuse compensation, appeal in sight",
+          "url": "/en/vaud-articles/vaud-tax-abuse-compensation-taxes/",
+          "excerpt": "In Pully: abuses at Collège de Champittet in the late 1970s Compensation from the Church: CHF 220'000, divided into two parts After the objection: CHF 120'000",
+          "date": "2026-10-21T04:19:30.522Z"
+        },
+        {
+          "title": "CHUV: midwives demand fair salaries, grade 10 for all",
+          "url": "/en/vaud-articles/chuv-midwives-salary-classes/",
+          "excerpt": "CHUV: class 9 or 10 for the same work Only one third of the midwives are in class 10 Average difference: CHF 8'000 per year The request dates back to 2018",
+          "date": "2026-10-21T03:32:51.220Z"
+        },
+        {
           "title": "CDHR 2025: 250.000/500.000 € thresholds for cross-border workers in France",
           "url": "/en/vaud-articles/cdhr-differential-contribution-2025/",
           "excerpt": "The differential contribution on high incomes aims for a minimum levy of 20%.",
@@ -187,18 +199,6 @@
           "url": "/en/vaud-articles/fake-police-bankers-vaud/",
           "excerpt": "More than one hundred people questioned in Vaud since the beginning of 2026 Sixteen people questioned since the beginning of October Cantonal police, Lausanne",
           "date": "2026-10-18T07:14:52.238Z"
-        },
-        {
-          "title": "Lausanne: Hôpital des Nounours at CHUV on 14 and 15 November",
-          "url": "/en/vaud-articles/lausanne-teddy-bear-hospital-chuv/",
-          "excerpt": "New edition at CHUV on 14 and 15 November Registration opens on 24 October at 8 Free participation upon registration Activities for children in the auditorium",
-          "date": "2026-10-18T06:56:42.455Z"
-        },
-        {
-          "title": "Weekend events in the canton of Vaud: what to do Saturday & Sunday",
-          "url": "/en/vaud-articles/weekend-events-vaud/",
-          "excerpt": "Events in the canton of Vaud every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
-          "date": "2026-10-17T11:32:57.082Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T04:27:11.417Z"
     },
     "de": {
       "canton": "VD",
@@ -270,6 +270,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Waadt: Steuern auf Missbrauchs-Entschädigung, Rekurs",
+          "url": "/de/waadt-artikel/waadt-steuer-missbrauchsentschadigung-steuern/",
+          "excerpt": "In Pully: Missbrauch am Collège de Champittet Ende der 70er-Jahre Entschädigung der Kirche: CHF 220'000, in zwei Teile aufgeteilt Nach der Einsprache: CHF",
+          "date": "2026-10-21T04:19:30.522Z"
+        },
+        {
+          "title": "CHUV: Hebammen fordern faire Löhne, Klasse 10 für alle",
+          "url": "/de/waadt-artikel/chuv-hebammen-gehaelter-klassen/",
+          "excerpt": "CHUV: Klasse 9 oder 10 für dieselbe Arbeit Nur ein Drittel der Hebammen ist in Klasse 10 Durchschnittlicher Unterschied: CHF 8'000 pro Jahr Die Forderung geht",
+          "date": "2026-10-21T03:32:51.220Z"
+        },
+        {
           "title": "CDHR 2025: Schwellenwerte von 250.000/500.000 € für Grenzgänger in Frankreich",
           "url": "/de/waadt-artikel/cdhr-differenzbeitrag-2025/",
           "excerpt": "Die Differenzabgabe auf hohe Einkommen zielt auf eine Mindestbesteuerung von 20% ab.",
@@ -286,18 +298,6 @@
           "url": "/de/waadt-artikel/falsche-polizisten-banker-waadt/",
           "excerpt": "Über hundert Personen im Kanton Waadt seit Anfang 2026 befragt Sechzehn Personen seit Anfang Oktober befragt Beteiligt sind die Kantonspolizei, Lausanne",
           "date": "2026-10-18T07:14:52.238Z"
-        },
-        {
-          "title": "Lausanne: Hôpital des Nounours am CHUV am 14. und 15. November",
-          "url": "/de/waadt-artikel/lausanne-kuscheltier-spital-chuv/",
-          "excerpt": "Neue Ausgabe am CHUV am 14.",
-          "date": "2026-10-18T06:56:42.455Z"
-        },
-        {
-          "title": "Veranstaltungen am Wochenende in der Waadt: was tun Sa & So",
-          "url": "/de/waadt-artikel/wochenend-veranstaltungen-waadt/",
-          "excerpt": "Veranstaltungen in der Waadt an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
-          "date": "2026-10-17T11:32:57.082Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T04:27:11.417Z"
     },
     "fr": {
       "canton": "VD",
@@ -369,6 +369,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Fisc vaudois : impôts sur une indemnité pour abus, recours en vue",
+          "url": "/fr/articles-vaud/fisc-vaud-indemnite-abus-impots/",
+          "excerpt": "À Pully : abus au Collège de Champittet à la fin des années 70 Indemnité de l'Église : CHF 220'000, divisée en deux parties Après l'opposition : CHF 120'000",
+          "date": "2026-10-21T04:19:30.522Z"
+        },
+        {
+          "title": "CHUV: sages-femmes demandent salaires équitables, classe 10",
+          "url": "/fr/articles-vaud/chuv-sages-femmes-salaires-classes/",
+          "excerpt": "CHUV : classe 9 ou 10 pour le même travail Seul un tiers des sages-femmes est en classe 10 Écart moyen : CHF 8'000 par an La demande remonte à 2018 Où → CHUV",
+          "date": "2026-10-21T03:32:51.220Z"
+        },
+        {
           "title": "CDHR 2025 : seuils 250.000/500.000 € pour les travailleurs frontaliers en France",
           "url": "/fr/articles-vaud/cdhr-contribution-differentielle-2025/",
           "excerpt": "La contribution différentielle sur les hauts revenus vise un prélèvement minimum de 20%.",
@@ -385,18 +397,6 @@
           "url": "/fr/articles-vaud/faux-policiers-banquiers-vaud/",
           "excerpt": "Plus de cent personnes interpellées dans le canton de Vaud depuis le début de 2026 Seize personnes interpellées depuis le début du mois d’octobre Police",
           "date": "2026-10-18T07:14:52.238Z"
-        },
-        {
-          "title": "Lausanne : Hôpital des Nounours au CHUV les 14 et 15 novembre",
-          "url": "/fr/articles-vaud/lausanne-hopital-des-nounours-au-chuv-les-14-et-15-novembre/",
-          "excerpt": "Nouvelle édition au CHUV les 14 et 15 novembre Inscriptions à partir du 24 octobre à 8 h Participation gratuite sur inscription Activités pour enfants",
-          "date": "2026-10-18T06:56:42.455Z"
-        },
-        {
-          "title": "Événements du week-end dans le canton de Vaud : que faire samedi & dimanche",
-          "url": "/fr/articles-vaud/evenements-week-end-vaud/",
-          "excerpt": "Événements dans le canton de Vaud chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
-          "date": "2026-10-17T11:32:57.082Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T04:27:11.417Z"
     }
   }
 }

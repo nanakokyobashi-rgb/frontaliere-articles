@@ -83,4 +83,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'glarona-mercato-immobiliare-2026',
+ category: 'novita',
+ date: '2026-10-21T01:34:50.414Z',
+ image: '/images/blog/article-glarona-mercato-immobiliare-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GL'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

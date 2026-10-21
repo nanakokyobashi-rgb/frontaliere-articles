@@ -57,6 +57,12 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.cdhr-contributo-differenziale-2025.title': 'CDHR 2025: 250.000/500.000 € thresholds for cross-border workers in France',
     'blog.article.cdhr-contributo-differenziale-2025.excerpt': 'The differential contribution on high incomes aims for a minimum levy of 20%.',
     'blog.article.cdhr-contributo-differenziale-2025.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.chuv-ostetriche-salari-classi.title': 'CHUV: midwives demand fair salaries, grade 10 for all',
+    'blog.article.chuv-ostetriche-salari-classi.excerpt': 'CHUV: class 9 or 10 for the same work Only one third of the midwives are in class 10 Average difference: CHF 8\'000 per year The request dates back to 2018',
+    'blog.article.chuv-ostetriche-salari-classi.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.fisco-vaud-indennita-abuso-imposte.title': 'Vaud tax authorities: tax on abuse compensation, appeal in sight',
+    'blog.article.fisco-vaud-indennita-abuso-imposte.excerpt': 'In Pully: abuses at Collège de Champittet in the late 1970s Compensation from the Church: CHF 220\'000, divided into two parts After the objection: CHF 120\'000',
+    'blog.article.fisco-vaud-indennita-abuso-imposte.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVdEn;

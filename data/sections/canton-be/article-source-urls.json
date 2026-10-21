@@ -63,5 +63,10 @@
     "articleId": "weissenbach-incidente-quattro-auto",
     "ts": "2026-10-20T22:21:08.317Z",
     "keyForm": 2
+  },
+  "https://www.api.news.apps.be.ch/api/atom/news/e087c104-7079-41d5-817b-5e28af70cbfa": {
+    "articleId": "berna-stato-pagina-non-disponibile",
+    "ts": "2026-10-21T02:11:38.999Z",
+    "keyForm": 2
   }
 }

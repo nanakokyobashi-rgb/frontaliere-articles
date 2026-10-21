@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T13:42:35.891Z",
-  "contentHash": "f058ed4a867dc7fd152f46b7ded4ee8eba9370c02a4f0b24df92a73a309cd519",
+  "updatedAt": "2026-10-21T04:08:52.546Z",
+  "contentHash": "da44a518fb626a8ef5b0d9433ce3849eb8224d9d0fd4cf6ae95cabf891f9c546",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T05:22:50.234Z",
+      "updatedAt": "2026-10-20T21:56:57.353Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T17:49:38.738Z",
+      "updatedAt": "2026-10-20T20:55:38.574Z",
       "keyFacts": 0
     }
   ],
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "13",
+          "value": "10",
           "note": "segnalazioni aggiornate: 20 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "15",
+          "value": "14",
           "note": "segnalazioni aggiornate: 20 ottobre 2026"
         }
       ],
@@ -123,18 +123,6 @@
               "date": "2026-08-04T03:00:00.000Z"
             },
             {
-              "label": "A13 S. Bernardino -> Bellinzona tra Svincolo autostradale Lostallo E Svincolo autostradale Roveredo Situazione: chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 21 ottobre 2026",
-              "date": "2026-09-17T10:44:00.000Z"
-            },
-            {
-              "label": "A13 S. Bernardino -> Bellinzona Svincolo autostradale Grono Situazione: raccordo autostradale chiuso in entrata cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Chiusura",
-              "detail": "fine prevista: 21 ottobre 2026",
-              "date": "2026-09-17T10:45:00.000Z"
-            },
-            {
               "label": "A13 S. Bernardino <-> Chur tra Svincolo autostradale Bonaduz E Svincolo autostradale Reichenau Situazione: chiusa cantiere",
               "value": "Chiusura",
               "detail": "fine prevista: 13 novembre 2026",
@@ -157,10 +145,22 @@
               "value": "Chiusura",
               "detail": "fine prevista: 19 novembre 2026",
               "date": "2026-09-17T20:00:00.000Z"
+            },
+            {
+              "label": "A13 Bellinzona -> S. Bernardino tra Svincolo autostradale Roveredo E Svincolo autostradale Lostallo Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
+              "value": "Chiusura",
+              "detail": "fine prevista: 17 novembre 2026",
+              "date": "2026-09-17T20:00:00.000Z"
+            },
+            {
+              "label": "A13 Bellinzona -> S. Bernardino Svincolo autostradale Grono Situazione: uscita chiusa cantiere Limitazione del traffico: corsia chiusa",
+              "value": "Chiusura",
+              "detail": "fine prevista: 17 novembre 2026",
+              "date": "2026-09-17T20:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T05:22:50.234Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -198,10 +198,16 @@
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/spatenstich-bahnhofgebaeude-schiers/"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "A13: code tra Rothenbrunnen e Reichenau per vacanze zurighesi",
+          "url": "/articoli-grigioni/a13-code-grigioni-vacanze-zurighesi/",
+          "excerpt": "Il traffico sulla A13 si è accumulato ogni giorno del fine settimana tra Rothenbrunnen e Reichenau, con il tunnel Isla-Bella identificato come collo di bottiglia, in riferimento alla fine delle vacanze zurighesi.",
+          "date": "2026-10-21T04:02:54.005Z"
+        },
         {
           "title": "Fläsch chiude strada, sentieri e area d'arrampicata",
           "url": "/articoli-grigioni/flaesch-strada-sentieri-chiusi/",
@@ -243,12 +249,6 @@
           "url": "/articoli-svizzera/grigioni-traffico-sviamento-udc/",
           "excerpt": "L'UDC grigionese propone il modello di Birsfelden per contrastare il traffico di sviamento sulla A13. Il Governo chiede chiarezza giuridica prima di procedere.",
           "date": "2026-07-21T16:56:20.835Z"
-        },
-        {
-          "title": "TRIP: sviluppo mobilità tra Lombardia e Grigioni",
-          "url": "/articoli-frontaliere/trip-progetto-treni-retici-in-progress/",
-          "excerpt": "Il progetto TRIP collega Lombardia e Grigioni: obiettivi, rete ferroviaria e prospettive della mobilità transfrontaliera.",
-          "date": "2026-07-24T16:10:28.808Z"
         }
       ],
       "latestCantonArticles": [],
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "en": {
       "canton": "GR",
@@ -305,12 +305,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "13",
+          "value": "10",
           "note": "reports as of 20 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "15",
+          "value": "14",
           "note": "reports as of 20 October 2026"
         }
       ],
@@ -391,18 +391,6 @@
               "date": "2026-08-04T03:00:00.000Z"
             },
             {
-              "label": "A13 S. Bernardino -> Bellinzona tra Svincolo autostradale Lostallo E Svincolo autostradale Roveredo Situazione: chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 21 October 2026",
-              "date": "2026-09-17T10:44:00.000Z"
-            },
-            {
-              "label": "A13 S. Bernardino -> Bellinzona Svincolo autostradale Grono Situazione: raccordo autostradale chiuso in entrata cantiere Limitazione del traffico: corsia chiusa",
-              "value": "Closure",
-              "detail": "until 21 October 2026",
-              "date": "2026-09-17T10:45:00.000Z"
-            },
-            {
               "label": "A13 S. Bernardino <-> Chur tra Svincolo autostradale Bonaduz E Svincolo autostradale Reichenau Situazione: chiusa cantiere",
               "value": "Closure",
               "detail": "until 13 November 2026",
@@ -425,10 +413,22 @@
               "value": "Closure",
               "detail": "until 19 November 2026",
               "date": "2026-09-17T20:00:00.000Z"
+            },
+            {
+              "label": "A13 Bellinzona -> S. Bernardino tra Svincolo autostradale Roveredo E Svincolo autostradale Lostallo Situazione: chiusa cantiere Limitazione del traffico: corsia chiusa",
+              "value": "Closure",
+              "detail": "until 17 November 2026",
+              "date": "2026-09-17T20:00:00.000Z"
+            },
+            {
+              "label": "A13 Bellinzona -> S. Bernardino Svincolo autostradale Grono Situazione: uscita chiusa cantiere Limitazione del traffico: corsia chiusa",
+              "value": "Closure",
+              "detail": "until 17 November 2026",
+              "date": "2026-09-17T20:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T05:22:50.234Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -466,10 +466,16 @@
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/spatenstich-bahnhofgebaeude-schiers/"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "A13: queues between Rothenbrunnen and Reichenau due to Zurich holiday traffic",
+          "url": "/en/graubunden-articles/a13-traffic-graubuenden-zurich-holidays/",
+          "excerpt": "Traffic on the A13 built up every day of the weekend between Rothenbrunnen and Reichenau, with the Isla-Bella tunnel identified as a bottleneck, in connection with the end of the Zurich holidays.",
+          "date": "2026-10-21T04:02:54.005Z"
+        },
         {
           "title": "Fläsch closes road, trails and climbing area",
           "url": "/en/graubunden-articles/flaesch-road-trails-closed/",
@@ -510,12 +516,6 @@
           "url": "/en/swiss-articles/graubunden-diversion-traffic-udc/",
           "excerpt": "The greyish CDU proposes the Birsfelden model to counteract diversion traffic on the A13. The Government asks for legal clarity before proceeding.",
           "date": "2026-07-21T16:56:20.835Z"
-        },
-        {
-          "title": "TRIP: mobility development between Lombardy and Graubünden",
-          "url": "/en/cross-border-articles/trip-project-trains-retici-progress/",
-          "excerpt": "The TRIP project aims to develop mobility between Lombardy and Graubünden.",
-          "date": "2026-07-24T16:10:28.808Z"
         }
       ],
       "latestCantonArticles": [],
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "de": {
       "canton": "GR",
@@ -572,12 +572,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "13",
+          "value": "10",
           "note": "Meldungen vom 20. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "15",
+          "value": "14",
           "note": "Meldungen vom 20. Oktober 2026"
         }
       ],
@@ -658,18 +658,6 @@
               "date": "2026-08-04T03:00:00.000Z"
             },
             {
-              "label": "A13 S. Bernardino -> Bellinzona zwischen Anschluss Lostallo und Anschluss Roveredo Sachlage: Strecke gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 21. Oktober 2026",
-              "date": "2026-09-17T10:44:00.000Z"
-            },
-            {
-              "label": "A13 S. Bernardino -> Bellinzona Anschluss Grono Sachlage: Einfahrt gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
-              "value": "Sperrung",
-              "detail": "bis 21. Oktober 2026",
-              "date": "2026-09-17T10:45:00.000Z"
-            },
-            {
               "label": "A13 S. Bernardino <-> Chur zwischen Anschluss Bonaduz und Anschluss Reichenau Sachlage: Strecke gesperrt Baustelle",
               "value": "Sperrung",
               "detail": "bis 13. November 2026",
@@ -692,10 +680,22 @@
               "value": "Sperrung",
               "detail": "bis 19. November 2026",
               "date": "2026-09-17T20:00:00.000Z"
+            },
+            {
+              "label": "A13 Bellinzona -> S. Bernardino zwischen Anschluss Roveredo und Anschluss Lostallo Sachlage: Strecke gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 17. November 2026",
+              "date": "2026-09-17T20:00:00.000Z"
+            },
+            {
+              "label": "A13 Bellinzona -> S. Bernardino Anschluss Grono Sachlage: Ausfahrt gesperrt Baustelle Verkehrsführung: Fahrstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 17. November 2026",
+              "date": "2026-09-17T20:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T05:22:50.234Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -733,10 +733,16 @@
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/spatenstich-bahnhofgebaeude-schiers/"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "A13: Staus zwischen Rothenbrunnen und Reichenau wegen Zürcher Ferien",
+          "url": "/de/graubunden-artikel/a13-stau-graubuenden-zuercher-ferien/",
+          "excerpt": "Der Verkehr auf der A13 staute sich an jedem Tag des Wochenendes zwischen Rothenbrunnen und Reichenau, wobei der Tunnel Isla-Bella als Engpass identifiziert wurde, im Hinblick auf das Ende der Zürcher Ferien.",
+          "date": "2026-10-21T04:02:54.005Z"
+        },
         {
           "title": "Fläsch sperrt Straße, Wanderwege und Klettergarten",
           "url": "/de/graubunden-artikel/flaesch-strasse-wanderwege-gesperrt/",
@@ -778,12 +784,6 @@
           "url": "/de/schweiz-artikel/graubuenden-ausweichverkehr-svp/",
           "excerpt": "Die Bündner SVP schlägt das Birsfelden-Modell vor, um dem Umleitungsverkehr auf der A13 entgegenzuwirken. Die Regierung verlangt rechtliche Klarheit, bevor sie fortfährt.",
           "date": "2026-07-21T16:56:20.835Z"
-        },
-        {
-          "title": "TRIP: Mobilitätsentwicklung zwischen Lombardei und Graubünden",
-          "url": "/de/grenzgaenger-artikel/trip-projekt-zuege-retici-fortschritt/",
-          "excerpt": "Das TRIP-Projekt zielt darauf ab, die Mobilität zwischen der Lombardei und Graubünden zu entwickeln.",
-          "date": "2026-07-24T16:10:28.808Z"
         }
       ],
       "latestCantonArticles": [],
@@ -825,7 +825,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "fr": {
       "canton": "GR",
@@ -840,12 +840,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "13",
+          "value": "10",
           "note": "signalements au 20 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "15",
+          "value": "14",
           "note": "signalements au 20 octobre 2026"
         }
       ],
@@ -926,18 +926,6 @@
               "date": "2026-08-04T03:00:00.000Z"
             },
             {
-              "label": "A13 S. Bernardino -> Bellinzone entre Jonction autoroutière Lostallo et Jonction autoroutière Roveredo Situation: fermé travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 21 octobre 2026",
-              "date": "2026-09-17T10:44:00.000Z"
-            },
-            {
-              "label": "A13 S. Bernardino -> Bellinzone Jonction autoroutière Grono Situation: entrée fermée travaux Gestion du trafic: voie fermée",
-              "value": "Fermeture",
-              "detail": "jusqu’au 21 octobre 2026",
-              "date": "2026-09-17T10:45:00.000Z"
-            },
-            {
               "label": "A13 S. Bernardino <-> Coire entre Jonction autoroutière Bonaduz et Jonction autoroutière Reichenau Situation: fermé travaux",
               "value": "Fermeture",
               "detail": "jusqu’au 13 novembre 2026",
@@ -960,10 +948,22 @@
               "value": "Fermeture",
               "detail": "jusqu’au 19 novembre 2026",
               "date": "2026-09-17T20:00:00.000Z"
+            },
+            {
+              "label": "A13 Bellinzone -> S. Bernardino entre Jonction autoroutière Roveredo et Jonction autoroutière Lostallo Situation: fermé travaux Gestion du trafic: voie fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 17 novembre 2026",
+              "date": "2026-09-17T20:00:00.000Z"
+            },
+            {
+              "label": "A13 Bellinzone -> S. Bernardino Jonction autoroutière Grono Situation: sortie fermée travaux Gestion du trafic: voie fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 17 novembre 2026",
+              "date": "2026-09-17T20:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T05:22:50.234Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1001,10 +1001,16 @@
               "url": "https://www.rhb.ch/de/medien/medienmitteilungen/spatenstich-bahnhofgebaeude-schiers/"
             }
           ],
-          "updatedAt": "2026-10-19T17:49:38.738Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "A13 : queues entre Rothenbrunnen et Reichenau pour les vacances zurichoises",
+          "url": "/fr/articles-grisons/a13-bouchons-grisons-vacances-zurichoises/",
+          "excerpt": "Le trafic sur l'A13 s'est accumulé tous les jours du week-end entre Rothenbrunnen et Reichenau, avec le tunnel Isla-Bella identifié comme un goulot d'étranglement, en référence à la fin des vacances zurichoises.",
+          "date": "2026-10-21T04:02:54.005Z"
+        },
         {
           "title": "Fläsch ferme la route, les sentiers et le site d’escalade",
           "url": "/fr/articles-grisons/flaesch-route-sentiers-fermes/",
@@ -1046,12 +1052,6 @@
           "url": "/fr/articles-suisse/grisons-trafic-evitement-udc/",
           "excerpt": "L'UDC grisonne propose le modèle de Birsfelden pour contrer le trafic de détournement sur l'A13. Le Gouvernement demande des éclaircissements juridiques avant de procéder.",
           "date": "2026-07-21T16:56:20.835Z"
-        },
-        {
-          "title": "TRIP : développement de la mobilité entre la Lombardie et les Grisons",
-          "url": "/fr/articles-frontalier/trip-projet-trains-retici-progres/",
-          "excerpt": "Le projet TRIP vise à développer la mobilité entre la Lombardie et les Grisons.",
-          "date": "2026-07-24T16:10:28.808Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1093,7 +1093,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-20T13:42:35.891Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     }
   }
 }

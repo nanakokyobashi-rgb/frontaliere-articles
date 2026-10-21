@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-10-20T00:06:33.415Z",
-  "contentHash": "b3ec3225b548c186cfad778d1079c56f23a7c0088749ecb9e8605326bc86cb98",
+  "updatedAt": "2026-10-21T00:56:25.671Z",
+  "contentHash": "a492f6e980bed7ade3c07a99387ad55575773a3ca555a8f4b7fa8f62197eaa93",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-19T15:42:28.810Z",
+      "updatedAt": "2026-10-20T17:28:37.181Z",
       "keyFacts": 1
     }
   ],
@@ -32,12 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Digitale Medienangebote",
-              "detail": "Altdorf",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/digitale-medienangebote/"
-            },
             {
               "label": "FOKUS DRAMA, Staffel 6",
               "detail": "theater(uri)",
@@ -91,11 +85,17 @@
               "detail": "Rüttihof, Schattdorf",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/sitzdampfbad-yonisteaming/"
+            },
+            {
+              "label": "The Bash: Part II – Heicho (“Coming home”)",
+              "detail": "Andermatt",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-ii-heicho-coming-home/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "en": {
       "canton": "UR",
@@ -137,12 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Digitale Medienangebote",
-              "detail": "Altdorf",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/digitale-medienangebote/"
-            },
             {
               "label": "FOKUS DRAMA, Staffel 6",
               "detail": "theater(uri)",
@@ -196,11 +190,17 @@
               "detail": "Rüttihof, Schattdorf",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/sitzdampfbad-yonisteaming/"
+            },
+            {
+              "label": "The Bash: Part II – Heicho (“Coming home”)",
+              "detail": "Andermatt",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-ii-heicho-coming-home/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "de": {
       "canton": "UR",
@@ -242,12 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Digitale Medienangebote",
-              "detail": "Altdorf",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/digitale-medienangebote/"
-            },
             {
               "label": "FOKUS DRAMA, Staffel 6",
               "detail": "theater(uri)",
@@ -301,11 +295,17 @@
               "detail": "Rüttihof, Schattdorf",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/sitzdampfbad-yonisteaming/"
+            },
+            {
+              "label": "The Bash: Teil II – «Heicho»",
+              "detail": "Andermatt",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-ii-heicho-coming-home/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "fr": {
       "canton": "UR",
@@ -347,12 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Digitale Medienangebote",
-              "detail": "Altdorf",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/digitale-medienangebote/"
-            },
             {
               "label": "FOKUS DRAMA, Staffel 6",
               "detail": "theater(uri)",
@@ -406,11 +400,17 @@
               "detail": "Rüttihof, Schattdorf",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/sitzdampfbad-yonisteaming/"
+            },
+            {
+              "label": "The Bash: Part II – Heicho (“Coming home”)",
+              "detail": "Andermatt",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-ii-heicho-coming-home/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     }
   }
 }

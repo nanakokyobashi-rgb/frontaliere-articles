@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-20T22:08:32.508Z",
-  "contentHash": "1ff0aefb252b1bd7312ac8f9d6a3c6dcc54f32c1e924d930321aeb04d89cf5da",
+  "updatedAt": "2026-10-21T04:08:52.546Z",
+  "contentHash": "515a0d67ce674a51ab948713bc6b47f623223f221009b9f35f5b86323c35cc83",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-20T17:37:05.348Z",
+      "updatedAt": "2026-10-20T21:56:57.353Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T15:53:28.523Z",
+      "updatedAt": "2026-10-20T20:55:38.574Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "38",
+          "value": "36",
           "note": "segnalazioni aggiornate: 20 ottobre 2026"
         }
       ],
@@ -141,23 +141,26 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "Revocato: 394 Mendrisio -> Gaggiolo tra Svincolo autostradale Stabio E Dogana Gaggiolo Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-20T13:40:00.000Z"
+              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
+              "value": "Cantiere",
+              "detail": "fine prevista: 29 dicembre 2028",
+              "date": "2021-06-25T03:00:00.000Z"
             },
             {
-              "label": "Revocato: A24 Mendrisio -> Stabio tra Raccordo autostradale Diramazione Mendrisio E Svincolo autostradale Stabio Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-20T13:56:00.000Z"
+              "label": "A2 Chiasso -> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 29 dicembre 2028",
+              "date": "2022-04-20T03:00:00.000Z"
             },
             {
-              "label": "Revocato: 406 Cadenazzo -> Riazzino tra Luogo Cadenazzo E Svincolo autostradale Aeroporto di Locarno Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-20T14:07:00.000Z"
+              "label": "A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Airolo E Svincolo autostradale Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Causa: lavori stradali sulla banchina",
+              "value": "Cantiere",
+              "detail": "fine prevista: 28 giugno 2028",
+              "date": "2024-11-14T15:24:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-20T17:37:05.348Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -195,7 +198,7 @@
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -291,7 +294,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "en": {
       "canton": "TI",
@@ -311,7 +314,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "38",
+          "value": "36",
           "note": "reports as of 20 October 2026"
         }
       ],
@@ -410,23 +413,26 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "Revocato: 394 Mendrisio -> Gaggiolo tra Svincolo autostradale Stabio E Dogana Gaggiolo Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-20T13:40:00.000Z"
+              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
+              "value": "Roadworks",
+              "detail": "until 29 December 2028",
+              "date": "2021-06-25T03:00:00.000Z"
             },
             {
-              "label": "Revocato: A24 Mendrisio -> Stabio tra Raccordo autostradale Diramazione Mendrisio E Svincolo autostradale Stabio Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-20T13:56:00.000Z"
+              "label": "A2 Chiasso -> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
+              "value": "Roadworks",
+              "detail": "until 29 December 2028",
+              "date": "2022-04-20T03:00:00.000Z"
             },
             {
-              "label": "Revocato: 406 Cadenazzo -> Riazzino tra Luogo Cadenazzo E Svincolo autostradale Aeroporto di Locarno Situazione: colonna Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-20T14:07:00.000Z"
+              "label": "A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Airolo E Svincolo autostradale Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Causa: lavori stradali sulla banchina",
+              "value": "Roadworks",
+              "detail": "until 28 June 2028",
+              "date": "2024-11-14T15:24:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-20T17:37:05.348Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -464,7 +470,7 @@
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -559,7 +565,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "de": {
       "canton": "TI",
@@ -579,7 +585,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "38",
+          "value": "36",
           "note": "Meldungen vom 20. Oktober 2026"
         }
       ],
@@ -678,23 +684,26 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "Aufgehoben: 394 Mendrisio -> Gaggiolo zwischen Anschluss Stabio und Zollstation Gaggiolo Sachlage: Stau Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-20T13:40:00.000Z"
+              "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
+              "value": "Baustelle",
+              "detail": "bis 29. Dezember 2028",
+              "date": "2021-06-25T03:00:00.000Z"
             },
             {
-              "label": "Aufgehoben: A24 Mendrisio -> Stabio zwischen Autobahndreieck Verzweigung Mendrisio und Anschluss Stabio Sachlage: Stau Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-20T13:56:00.000Z"
+              "label": "A2 Chiasso -> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
+              "value": "Baustelle",
+              "detail": "bis 29. Dezember 2028",
+              "date": "2022-04-20T03:00:00.000Z"
             },
             {
-              "label": "Aufgehoben: 406 Cadenazzo -> Riazzino zwischen Ortschaft Cadenazzo und Anschluss Flughafen Locarno Sachlage: Stau Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-20T14:07:00.000Z"
+              "label": "A2 Gotthard -> Chiasso zwischen Parkplatz Dosierstelle Airolo und Anschluss Airolo Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Ursache: Arbeiten am Pannenstreifen",
+              "value": "Baustelle",
+              "detail": "bis 28. Juni 2028",
+              "date": "2024-11-14T15:24:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-20T17:37:05.348Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -732,7 +741,7 @@
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -827,7 +836,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     },
     "fr": {
       "canton": "TI",
@@ -847,7 +856,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "38",
+          "value": "36",
           "note": "signalements au 20 octobre 2026"
         }
       ],
@@ -946,23 +955,26 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "Révoqué: 394 Mendrisio -> Gaggiolo entre Jonction autoroutière Stabio et Poste de douane Gaggiolo Situation: bouchon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-20T13:40:00.000Z"
+              "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
+              "value": "Chantier",
+              "detail": "jusqu’au 29 décembre 2028",
+              "date": "2021-06-25T03:00:00.000Z"
             },
             {
-              "label": "Révoqué: A24 Mendrisio -> Stabio entre Echangeur Echangeur de Mendrisio et Jonction autoroutière Stabio Situation: bouchon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-20T13:56:00.000Z"
+              "label": "A2 Chiasso -> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de…",
+              "value": "Chantier",
+              "detail": "jusqu’au 29 décembre 2028",
+              "date": "2022-04-20T03:00:00.000Z"
             },
             {
-              "label": "Révoqué: 406 Cadenazzo -> Riazzino entre Localité Cadenazzo et Jonction autoroutière Aeroprt de Locarno Situation: bouchon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-20T14:07:00.000Z"
+              "label": "A2 St-Gothard -> Chiasso entre Parking Aire de dosage Airolo et Jonction autoroutière Airolo Situation: trafic perturbé travaux, longueur [km] 0.1 Raison: travaux sur la bande d'arrêt d'urgence",
+              "value": "Chantier",
+              "detail": "jusqu’au 28 juin 2028",
+              "date": "2024-11-14T15:24:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-20T17:37:05.348Z"
+          "updatedAt": "2026-10-20T21:56:57.353Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1000,7 +1012,7 @@
               "url": "https://www.tilo.ch/avvisi/260930_NSIF-Castione-Cluster-ottobre.html"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -1096,7 +1108,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-20T22:08:32.508Z"
+      "updatedAt": "2026-10-21T04:08:52.546Z"
     }
   }
 }

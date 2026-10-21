@@ -43,6 +43,10 @@
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261020-les-exportations-horlogeres-continuent-a-la-hausse-en-septembre.html": {
       "section": "canton-ne",
       "ts": 1792540351996
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261020-legere-reprise-des-exportations-helvetiques-en-septembre.html": {
+      "section": "canton-ne",
+      "ts": 1792549022117
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-10-20T17:48:42.935Z",
-  "contentHash": "72475ceddeca064119d14f3af941cf3fb0df6c6285dbce04d7690c12c6635d06",
+  "updatedAt": "2026-10-21T00:56:25.671Z",
+  "contentHash": "433d1e342ef5217fad4f149b3e8aa1fb85dbd140674f8f6c7af67b5149d3bf92",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-20T11:02:10.927Z",
+      "updatedAt": "2026-10-20T17:28:37.181Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Corporate Newsroom Summit 2026",
+              "detail": "Bern",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/corporate-newsroom-summit-2026/"
+            },
+            {
+              "label": "Gschichtefahrt: Fay und Finn",
+              "detail": "Niesenbahn",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gschichtefahrt-fay-und-finn/"
+            },
+            {
+              "label": "Tanznachmittag in Spiez",
+              "detail": "Lötschbergzentrum, Spiez",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/tanznachmittag-in-spiez_AGWGUF3"
+            },
+            {
+              "label": "Kinderlotto",
+              "detail": "Gasthaus Riedboden, Beatenberg",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kinderlotto/"
+            },
+            {
+              "label": "Family Literacy Persisch - برای من یک قصه بگو -",
+              "detail": "Stadtbibliothek Biel /",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/family-literacy-persan/"
+            },
+            {
+              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
+              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
+            },
+            {
               "label": "JUDITH OWEN & THE GENTLEMEN CALLERS",
-              "detail": "Marians Jazzroom",
-              "date": "2026-10-20",
+              "detail": "Marians Jazzroom — in corso, ultimo giorno: 24 ottobre 2026",
+              "date": "2026-10-21",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/judith-owen-und-the-gentlemen-callers_AJdnaAQ"
-            },
-            {
-              "label": "Vortrag mit Robert Betz: Endlich glücklich leben!",
-              "detail": "BERNEXPO",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/bern/vortrag-mit-robert-betz-endlich-gluecklich-leben_Af4CuSH"
-            },
-            {
-              "label": "Vortrag über die Wechseljahre",
-              "detail": "Iseltwald",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortrag-ueber-die-wechseljahre/"
-            },
-            {
-              "label": "Drink the Sea",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/drink-the-sea_AuDBfh3"
-            },
-            {
-              "label": "ABBA SYMPHONIC CELEBRATION",
-              "detail": "Palais des Congrès / Kongresshaus Biel",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/biel-bienne/abba-symphonic-celebration_AeE5b3Q"
             },
             {
               "label": "Zaubermärchen im Tipi",
               "detail": "Bolligen — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
             },
             {
               "label": "Lake Thun Breakfast Special",
               "detail": "Thunersee, Thun — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
             },
             {
               "label": "Pflegeeinsatz Auried",
               "detail": "Auried Naturschutzgebiet, Laupen — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflegeeinsatz-auried/"
-            },
-            {
-              "label": "Pub Quiz Thunersee",
-              "detail": "Schiffstation Thun-Bahnhof, Thun — in corso, ultimo giorno: 23 ottobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/pub-quiz-thunersee_AX2SVnF"
-            },
-            {
-              "label": "Aggression «Wohin mit all der Wut?»",
-              "detail": "Oey-Diemtigen, Diemtigen — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aggression-wohin-mit-all-der-wut/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-10-20T11:02:10.927Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "en": {
       "canton": "BE",
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Corporate Newsroom Summit 2026",
+              "detail": "Bern",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/corporate-newsroom-summit-2026/"
+            },
+            {
+              "label": "Gschichtefahrt: Fay und Finn",
+              "detail": "Niesenbahn",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gschichtefahrt-fay-und-finn/"
+            },
+            {
+              "label": "Tanznachmittag in Spiez",
+              "detail": "Lötschbergzentrum, Spiez",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/tanznachmittag-in-spiez_AGWGUF3"
+            },
+            {
+              "label": "Kinderlotto",
+              "detail": "Gasthaus Riedboden, Beatenberg",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kinderlotto/"
+            },
+            {
+              "label": "Family Literacy Persisch - برای من یک قصه بگو -",
+              "detail": "Stadtbibliothek Biel /",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/family-literacy-persan/"
+            },
+            {
+              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
+              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
+            },
+            {
               "label": "JUDITH OWEN & THE GENTLEMEN CALLERS",
-              "detail": "Marians Jazzroom",
-              "date": "2026-10-20",
+              "detail": "Marians Jazzroom — ongoing, last day: 24 October 2026",
+              "date": "2026-10-21",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/judith-owen-und-the-gentlemen-callers_AJdnaAQ"
-            },
-            {
-              "label": "Vortrag mit Robert Betz: Endlich glücklich leben!",
-              "detail": "BERNEXPO",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/bern/vortrag-mit-robert-betz-endlich-gluecklich-leben_Af4CuSH"
-            },
-            {
-              "label": "Lecture on the menopause",
-              "detail": "Iseltwald",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortrag-ueber-die-wechseljahre/"
-            },
-            {
-              "label": "Drink the Sea",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/drink-the-sea_AuDBfh3"
-            },
-            {
-              "label": "ABBA SPH",
-              "detail": "Palais des Congrès / Kongresshaus Biel",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/biel-bienne/abba-symphonic-celebration_AeE5b3Q"
             },
             {
               "label": "Zaubermärchen im Tipi",
               "detail": "Bolligen — ongoing, last day: 15 November 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
             },
             {
               "label": "Lake Thun Breakfast Special",
               "detail": "Thunersee, Thun — ongoing, last day: 14 November 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
             },
             {
               "label": "Pflegeeinsatz Auried",
               "detail": "Auried Naturschutzgebiet, Laupen — ongoing, last day: 14 November 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflegeeinsatz-auried/"
-            },
-            {
-              "label": "Pub Quiz Thunersee",
-              "detail": "Schiffstation Thun-Bahnhof, Thun — ongoing, last day: 23 October 2026",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/pub-quiz-thunersee_AX2SVnF"
-            },
-            {
-              "label": "Aggression «Wohin mit all der Wut?»",
-              "detail": "Oey-Diemtigen, Diemtigen — ongoing, last day: 24 October 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aggression-wohin-mit-all-der-wut/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-10-20T11:02:10.927Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "de": {
       "canton": "BE",
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Corporate Newsroom Summit 2026",
+              "detail": "Bern",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/corporate-newsroom-summit-2026/"
+            },
+            {
+              "label": "Gschichtefahrt: Fay und Finn",
+              "detail": "Niesenbahn",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gschichtefahrt-fay-und-finn/"
+            },
+            {
+              "label": "Tanznachmittag in Spiez",
+              "detail": "Lötschbergzentrum, Spiez",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/tanznachmittag-in-spiez_AGWGUF3"
+            },
+            {
+              "label": "Kinderlotto",
+              "detail": "Gasthaus Riedboden, Beatenberg",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kinderlotto/"
+            },
+            {
+              "label": "Family Literacy Persisch - برای من یک قصه بگو -",
+              "detail": "Stadtbibliothek Biel /",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/family-literacy-persan/"
+            },
+            {
+              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
+              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
+            },
+            {
               "label": "JUDITH OWEN & THE GENTLEMEN CALLERS",
-              "detail": "Marians Jazzroom",
-              "date": "2026-10-20",
+              "detail": "Marians Jazzroom — läuft, letzter Tag: 24. Oktober 2026",
+              "date": "2026-10-21",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/judith-owen-und-the-gentlemen-callers_AJdnaAQ"
-            },
-            {
-              "label": "Vortrag mit Robert Betz: Endlich glücklich leben!",
-              "detail": "BERNEXPO",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/bern/vortrag-mit-robert-betz-endlich-gluecklich-leben_Af4CuSH"
-            },
-            {
-              "label": "Vortrag zucchber die Zucchechsel Zucchahre",
-              "detail": "Iseltwald",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortrag-ueber-die-wechseljahre/"
-            },
-            {
-              "label": "Drink the Sea",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/drink-the-sea_AuDBfh3"
-            },
-            {
-              "label": "ABBA-SYMPHONISCHE FEIER",
-              "detail": "Palais des Congrès / Kongresshaus Biel",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/biel-bienne/abba-symphonic-celebration_AeE5b3Q"
             },
             {
               "label": "Zaubermärchen im Tipi",
               "detail": "Bolligen — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
             },
             {
               "label": "Frühstücksspezial Thunersee",
               "detail": "Thunersee, Thun — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
             },
             {
               "label": "Pflegeeinsatz Auried",
               "detail": "Auried Naturschutzgebiet, Laupen — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflegeeinsatz-auried/"
-            },
-            {
-              "label": "Pub Quiz Thunersee",
-              "detail": "Schiffstation Thun-Bahnhof, Thun — läuft, letzter Tag: 23. Oktober 2026",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/pub-quiz-thunersee_AX2SVnF"
-            },
-            {
-              "label": "Aggression «Wohin mit all der Wut?»",
-              "detail": "Oey-Diemtigen, Diemtigen — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aggression-wohin-mit-all-der-wut/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-10-20T11:02:10.927Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "fr": {
       "canton": "BE",
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Corporate Newsroom Summit 2026",
+              "detail": "Bern",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/corporate-newsroom-summit-2026/"
+            },
+            {
+              "label": "Gschichtefahrt: Fay und Finn",
+              "detail": "Niesenbahn",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gschichtefahrt-fay-und-finn/"
+            },
+            {
+              "label": "Tanznachmittag in Spiez",
+              "detail": "Lötschbergzentrum, Spiez",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/tanznachmittag-in-spiez_AGWGUF3"
+            },
+            {
+              "label": "Kinderlotto",
+              "detail": "Gasthaus Riedboden, Beatenberg",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kinderlotto/"
+            },
+            {
+              "label": "Family Literacy Persan - برای من یک قصه بگو -",
+              "detail": "Stadtbibliothek Biel /",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/family-literacy-persan/"
+            },
+            {
+              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
+              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
+            },
+            {
               "label": "JUDITH OWEN & THE GENTLEMEN CALLERS",
-              "detail": "Marians Jazzroom",
-              "date": "2026-10-20",
+              "detail": "Marians Jazzroom — en cours, dernier jour : 24 octobre 2026",
+              "date": "2026-10-21",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/judith-owen-und-the-gentlemen-callers_AJdnaAQ"
-            },
-            {
-              "label": "Vortrag mit Robert Betz: Endlich glücklich leben!",
-              "detail": "BERNEXPO",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/bern/vortrag-mit-robert-betz-endlich-gluecklich-leben_Af4CuSH"
-            },
-            {
-              "label": "Conférence sur la ménopause",
-              "detail": "Iseltwald",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vortrag-ueber-die-wechseljahre/"
-            },
-            {
-              "label": "Drink the Sea",
-              "detail": "Mühle Hunziken, Rubigen",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/drink-the-sea_AuDBfh3"
-            },
-            {
-              "label": "CÉLÉBRATION SYMPHONIQUE D’ABBA",
-              "detail": "Palais des Congrès / Kongresshaus Biel",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/biel-bienne/abba-symphonic-celebration_AeE5b3Q"
             },
             {
               "label": "Zaubermärchen im Tipi",
               "detail": "Bolligen — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
             },
             {
               "label": "Spécial petit-déjeuner du lac de Thoune",
               "detail": "Thunersee, Thun — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehstuecksspezial-thunersee/"
             },
             {
               "label": "Pflegeeinsatz Auried",
               "detail": "Auried Naturschutzgebiet, Laupen — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/pflegeeinsatz-auried/"
-            },
-            {
-              "label": "Pub Quiz Thunersee",
-              "detail": "Schiffstation Thun-Bahnhof, Thun — en cours, dernier jour : 23 octobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/thun/pub-quiz-thunersee_AX2SVnF"
-            },
-            {
-              "label": "Aggression «Wohin mit all der Wut?»",
-              "detail": "Oey-Diemtigen, Diemtigen — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aggression-wohin-mit-all-der-wut/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-10-20T11:02:10.927Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     }
   }
 }

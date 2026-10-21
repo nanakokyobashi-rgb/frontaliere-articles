@@ -4,17 +4,17 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-10-20T00:06:33.415Z",
-  "contentHash": "8b3314e2f41f28728062fc024f0cbe68bd57c71444eeed33bc0a76861a313fa4",
+  "updatedAt": "2026-10-21T00:56:25.671Z",
+  "contentHash": "3dd0338eb19dc4c21b6870f8006680eade0910b72bbaf51f73221a6ce497e61a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-19T15:42:28.810Z",
+      "updatedAt": "2026-10-20T17:28:37.181Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-20T15:53:28.523Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "98",
+          "value": "96",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Crafts Workshop",
-              "detail": "Bougy-Villars",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crafts-workshop/"
+              "label": "A Life, a Story: How Can We Share Our Story?",
+              "detail": "Montreux",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/a-life-a-story-how-can-we-share-our-story/"
             },
             {
-              "label": "The Biblio in your neighborhood!",
-              "detail": "Foyer de la Providence EVAM, Vevey",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/the-biblio-in-your-neighborhood-5/"
+              "label": "Cycle Couvreu I",
+              "detail": "Salle du Conseil communal, Vevey",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/fr/events/knowledge/vevey/httpswwwvibiscumchaccueil_AjP7VDs"
+            },
+            {
+              "label": "https://www.vibiscum.ch/accueil/",
+              "detail": "Salle du Conseil communal, Vevey",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cycle-couvreu-i/"
+            },
+            {
+              "label": "Midweek Jazz Jam avec Prune Karlen",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/lausanne/midweek-jazz-jam-avec-prune-karlen_AqXsLCm"
+            },
+            {
+              "label": "VIFFF - Vevey International Funny Film Festival",
+              "detail": "Vevey",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vifff-vevey-international-funny-film-festival/"
+            },
+            {
+              "label": "Croc' the Rock Festival 2026",
+              "detail": "Croc' the Rock Festival - Etagnières, Etagnières",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/events/alternative/etagnieres/croc-the-rock-festival-2026_Ay5uUbV"
             },
             {
               "label": "Reflections",
-              "detail": "Vevey",
-              "date": "2026-10-20",
+              "detail": "Vevey — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
-            {
-              "label": "Améliorez votre allemand au musée",
-              "detail": "Prangins",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ameliorez-votre-allemand-au-musee-1/"
-            },
-            {
-              "label": "EHC Kloten - Lausanne HC",
-              "detail": "SWISS Arena, Lausanne",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ehc-kloten-lausanne-hc/"
             },
             {
               "label": "Pop Art Party: explore sparkling art",
               "detail": "Musée de Montreux, Montreux — in corso, ultimo giorno: 23 ottobre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/pop-art-party-explore-sparkling-art/"
             },
             {
               "label": "Tokyo-Ga",
               "detail": "Cinémathèque suisse, Lausanne — in corso, ultimo giorno: 30 ottobre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
             },
             {
               "label": "Cooking Together − Fall Delights",
               "detail": "Alimentarium, Musée de l'alimentation, Vevey — in corso, ultimo giorno: 21 ottobre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-en-cuisine-delices-dautomne/"
-            },
-            {
-              "label": "Château de Mathod & Truffles",
-              "detail": "Château de Mathod, Mathod — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chateau-de-mathod-truffles/"
-            },
-            {
-              "label": "Before Midnight",
-              "detail": "Cinémathèque suisse, Lausanne — in corso, ultimo giorno: 29 ottobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/vaud/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "en": {
       "canton": "VD",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "98",
+          "value": "96",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,69 +161,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Crafts Workshop",
-              "detail": "Bougy-Villars",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crafts-workshop/"
+              "label": "A Life, a Story: How Can We Share Our Story?",
+              "detail": "Montreux",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/a-life-a-story-how-can-we-share-our-story/"
             },
             {
-              "label": "The Biblio in your neighborhood!",
-              "detail": "Foyer de la Providence EVAM, Vevey",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/the-biblio-in-your-neighborhood-5/"
+              "label": "Cycle Couvreu I",
+              "detail": "Salle du Conseil communal, Vevey",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/fr/events/knowledge/vevey/httpswwwvibiscumchaccueil_AjP7VDs"
+            },
+            {
+              "label": "https://www.vibiscum.ch/accueil/",
+              "detail": "Salle du Conseil communal, Vevey",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cycle-couvreu-i/"
+            },
+            {
+              "label": "Midweek Jazz Jam avec Prune Karlen",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/lausanne/midweek-jazz-jam-avec-prune-karlen_AqXsLCm"
+            },
+            {
+              "label": "VIFFF - Vevey International Funny Film Festival",
+              "detail": "Vevey",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vifff-vevey-international-funny-film-festival/"
+            },
+            {
+              "label": "Croc' the Rock Festival 2026",
+              "detail": "Croc' the Rock Festival - Etagnières, Etagnières",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/events/alternative/etagnieres/croc-the-rock-festival-2026_Ay5uUbV"
             },
             {
               "label": "Reflections",
-              "detail": "Vevey",
-              "date": "2026-10-20",
+              "detail": "Vevey — ongoing, last day: 15 November 2026",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
-            {
-              "label": "Améliorez votre allemand au musée",
-              "detail": "Prangins",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ameliorez-votre-allemand-au-musee-1/"
-            },
-            {
-              "label": "EHC Kloten - Lausanne HC",
-              "detail": "SWISS Arena, Lausanne",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ehc-kloten-lausanne-hc/"
             },
             {
               "label": "Pop Art Party: explore sparkling art",
               "detail": "Musée de Montreux, Montreux — ongoing, last day: 23 October 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/pop-art-party-explore-sparkling-art/"
             },
             {
               "label": "Tokyo-Ga",
               "detail": "Cinémathèque suisse, Lausanne — ongoing, last day: 30 October 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
             },
             {
               "label": "Cooking Together − Fall Delights",
               "detail": "Alimentarium, Musée de l'alimentation, Vevey — ongoing, last day: 21 October 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-en-cuisine-delices-dautomne/"
-            },
-            {
-              "label": "Château de Mathod & Truffles",
-              "detail": "Château de Mathod, Mathod — ongoing, last day: 24 October 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chateau-de-mathod-truffles/"
-            },
-            {
-              "label": "Before Midnight",
-              "detail": "Cinémathèque suisse, Lausanne — ongoing, last day: 29 October 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/vaud/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -241,7 +241,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "de": {
       "canton": "VD",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "98",
+          "value": "96",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,69 +284,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Bastelwerkstatt",
-              "detail": "Bougy-Villars",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crafts-workshop/"
+              "label": "Ein Leben – eine Geschichte: Wie kann man seine Geschichte weitergeben?",
+              "detail": "Montreux",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/a-life-a-story-how-can-we-share-our-story/"
             },
             {
-              "label": "Die Biblio in deinem Viertel!",
-              "detail": "Foyer de la Providence EVAM, Vevey",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/the-biblio-in-your-neighborhood-5/"
+              "label": "Cycle Couvreu I",
+              "detail": "Salle du Conseil communal, Vevey",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/fr/events/knowledge/vevey/httpswwwvibiscumchaccueil_AjP7VDs"
+            },
+            {
+              "label": "https://www.vibiscum.ch/accueil/",
+              "detail": "Salle du Conseil communal, Vevey",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cycle-couvreu-i/"
+            },
+            {
+              "label": "Midweek Jazz Jam avec Prune Karlen",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/lausanne/midweek-jazz-jam-avec-prune-karlen_AqXsLCm"
+            },
+            {
+              "label": "VIFFF – Vevey International Funny Film Festival",
+              "detail": "Vevey",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vifff-vevey-international-funny-film-festival/"
+            },
+            {
+              "label": "Croc' the Rock Festival 2026",
+              "detail": "Croc' the Rock Festival - Etagnières, Etagnières",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/events/alternative/etagnieres/croc-the-rock-festival-2026_Ay5uUbV"
             },
             {
               "label": "Reflexionen",
-              "detail": "Vevey",
-              "date": "2026-10-20",
+              "detail": "Vevey — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
-            {
-              "label": "Améliorez votre allemand au musée",
-              "detail": "Prangins",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ameliorez-votre-allemand-au-musee-1/"
-            },
-            {
-              "label": "EHC Kloten - Lausanne HC",
-              "detail": "SWISS Arena, Lausanne",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ehc-kloten-lausanne-hc/"
             },
             {
               "label": "Pop Art Party: Erforsche eine Kunst, die sprudelt",
               "detail": "Musée de Montreux, Montreux — läuft, letzter Tag: 23. Oktober 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/pop-art-party-explore-sparkling-art/"
             },
             {
               "label": "Tokyo-Ga",
               "detail": "Cinémathèque suisse, Lausanne — läuft, letzter Tag: 30. Oktober 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
             },
             {
               "label": "Gemeinsam in der Küche – Herbstliche Köstlichkeiten",
               "detail": "Alimentarium, Musée de l'alimentation, Vevey — läuft, letzter Tag: 21. Oktober 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-en-cuisine-delices-dautomne/"
-            },
-            {
-              "label": "Château de Mathod & Trüffel",
-              "detail": "Château de Mathod, Mathod — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chateau-de-mathod-truffles/"
-            },
-            {
-              "label": "Before Midnight",
-              "detail": "Cinémathèque suisse, Lausanne — läuft, letzter Tag: 29. Oktober 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/waadt/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -364,7 +364,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     },
     "fr": {
       "canton": "VD",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "98",
+          "value": "96",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,69 +407,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Atelier Bricolages",
-              "detail": "Bougy-Villars",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/crafts-workshop/"
+              "label": "Une vie-une histoire: Comment transmettre son histoire?",
+              "detail": "Montreux",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/a-life-a-story-how-can-we-share-our-story/"
             },
             {
-              "label": "La Biblio dans ton quartier !",
-              "detail": "Foyer de la Providence EVAM, Vevey",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/the-biblio-in-your-neighborhood-5/"
+              "label": "Cycle Couvreu I",
+              "detail": "Salle du Conseil communal, Vevey",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/fr/events/knowledge/vevey/httpswwwvibiscumchaccueil_AjP7VDs"
+            },
+            {
+              "label": "Cycle Couvreu I",
+              "detail": "Salle du Conseil communal, Vevey",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/cycle-couvreu-i/"
+            },
+            {
+              "label": "Midweek Jazz Jam avec Prune Karlen",
+              "detail": "Jumeaux Jazz Club",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/lausanne/midweek-jazz-jam-avec-prune-karlen_AqXsLCm"
+            },
+            {
+              "label": "VIFFF - Vevey International Funny Film Festival",
+              "detail": "Vevey",
+              "date": "2026-10-21",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vifff-vevey-international-funny-film-festival/"
+            },
+            {
+              "label": "Croc' the Rock Festival 2026",
+              "detail": "Croc' the Rock Festival - Etagnières, Etagnières",
+              "date": "2026-10-21",
+              "url": "https://www.guidle.com/it/events/alternative/etagnieres/croc-the-rock-festival-2026_Ay5uUbV"
             },
             {
               "label": "Reflets",
-              "detail": "Vevey",
-              "date": "2026-10-20",
+              "detail": "Vevey — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
-            },
-            {
-              "label": "Améliorez votre allemand au musée",
-              "detail": "Prangins",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ameliorez-votre-allemand-au-musee-1/"
-            },
-            {
-              "label": "EHC Kloten - Lausanne HC",
-              "detail": "SWISS Arena, Lausanne",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ehc-kloten-lausanne-hc/"
             },
             {
               "label": "Ateliers d'automne au Musée de Montreux",
               "detail": "Musée de Montreux, Montreux — en cours, dernier jour : 23 octobre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/pop-art-party-explore-sparkling-art/"
             },
             {
               "label": "Tokyo-Ga",
               "detail": "Cinémathèque suisse, Lausanne — en cours, dernier jour : 30 octobre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
             },
             {
               "label": "Ensemble en cuisine - Trésors de la Bénichon",
               "detail": "Alimentarium, Musée de l'alimentation, Vevey — en cours, dernier jour : 21 octobre 2026",
-              "date": "2026-10-20",
+              "date": "2026-10-21",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/ensemble-en-cuisine-delices-dautomne/"
-            },
-            {
-              "label": "Mathod & Truffe : Visite de la Truffière, cavage et apéritif truffé",
-              "detail": "Château de Mathod, Mathod — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/chateau-de-mathod-truffles/"
-            },
-            {
-              "label": "Before Midnight",
-              "detail": "Cinémathèque suisse, Lausanne — en cours, dernier jour : 29 octobre 2026",
-              "date": "2026-10-20",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/vaud/",
-          "updatedAt": "2026-10-19T15:42:28.810Z"
+          "updatedAt": "2026-10-20T17:28:37.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +487,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-20T00:06:33.415Z"
+      "updatedAt": "2026-10-21T00:56:25.671Z"
     }
   }
 }
