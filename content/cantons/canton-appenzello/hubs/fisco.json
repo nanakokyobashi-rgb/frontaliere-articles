@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "fisco",
-  "updatedAt": "2026-10-19T18:33:18.720Z",
-  "contentHash": "912159d3fdb76c44d51dfa968cb63767c30f743fbc491502ba62cd9a4d93422a",
+  "updatedAt": "2026-10-21T19:14:55.654Z",
+  "contentHash": "e63d61ae3d40d80c94c5981cb57981024fd1a7e788301cf112477b0bc0439c49",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -142,6 +142,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Hundwil vuole ridurre le imposte nel preventivo 2027",
+          "url": "/articoli-appenzello/hundwil-imposte-preventivo/",
+          "excerpt": "Hundwil prevede nel 2027 un avanzo di CHF 111'200, con entrate per CHF 6'421'000 e spese per CHF 6'309'800, insieme alla riduzione delle imposte.",
+          "date": "2026-10-21T19:06:08.539Z"
+        },
+        {
           "title": "Teufen: preventivo 2027 per ridurre il deficit operativo",
           "url": "/articoli-appenzello/teufen-budget-deficit-2027/",
           "excerpt": "Il Comune di Teufen prevede per il 2027 entrate fiscali di 38,9 milioni di franchi, in aumento del 2,2% rispetto al preventivo precedente.",
@@ -182,12 +188,6 @@
           "url": "/articoli-svizzera/imposta-successione-appenzello/",
           "excerpt": "Imposta di successione a Appenzello: competenza cantonale, aliquote per parentela, esenzioni per coniuge. Dichiarazione entro 30-90 giorni. Procedura in 6 fasi.",
           "date": "2026-08-27T04:36:47.376Z"
-        },
-        {
-          "title": "Imposte cantonali Appenzello Esterno: aliquote e deduzioni",
-          "url": "/articoli-svizzera/imposte-appenzello-esterno-aliquote/",
-          "excerpt": "Guida completa alle imposte cantonali e comunali in Appenzello Esterno: struttura a 3 livelli, aliquote, deduzioni ammesse, scadenze dichiarative e procedura online.",
-          "date": "2026-08-25T03:40:05.091Z"
         }
       ],
       "latestCantonArticles": [],
@@ -213,7 +213,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-21T19:14:55.654Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -338,6 +338,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Hundwil wants to reduce taxes in the 2027 budget",
+          "url": "/en/appenzell-articles/hundwil-tax-budget/",
+          "excerpt": "Hundwil expects a surplus of CHF 111'200 in 2027, with revenue of CHF 6'421'000 and expenses of CHF 6'309'800, along with a reduction in taxes.",
+          "date": "2026-10-21T19:06:08.539Z"
+        },
+        {
           "title": "Teufen: 2027 budget proposal to reduce the operating deficit",
           "url": "/en/appenzell-articles/teufen-2027-budget-deficit/",
           "excerpt": "The Municipality of Teufen expects tax revenues of 38,9 million francs in 2027, an increase of 2,2% compared with the previous budget.",
@@ -378,12 +384,6 @@
           "url": "/en/swiss-articles/inheritance-tax-appenzell/",
           "excerpt": "Inheritance tax in Appenzell: cantonal jurisdiction, rates for kinship, exemptions for spouse. Declaration within 30-90 days. 6-step procedure.",
           "date": "2026-08-27T04:36:47.376Z"
-        },
-        {
-          "title": "Cantonal taxes External Appenzell: rates and deductions",
-          "url": "/en/swiss-articles/canton-appenzell-ausserrhoden-cantonal-taxes-rates/",
-          "excerpt": "Complete guide to cantonal and municipal taxes in Appenzell Ausserrhoden: 3-level structure, rates, allowable deductions, declaratory deadlines and online procedure.",
-          "date": "2026-08-25T03:40:05.091Z"
         }
       ],
       "latestCantonArticles": [],
@@ -409,7 +409,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-21T19:14:55.654Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -534,6 +534,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Hundwil will die Steuern im Voranschlag 2027 senken",
+          "url": "/de/appenzell-artikel/hundwil-steuern-budget/",
+          "excerpt": "Für 2027 rechnet Hundwil mit einem Überschuss von CHF 111'200, Einnahmen von CHF 6'421'000 und Ausgaben von CHF 6'309'800 sowie einer Senkung der Steuern.",
+          "date": "2026-10-21T19:06:08.539Z"
+        },
+        {
           "title": "Teufen: Budget 2027 zur Verringerung des operativen Defizits",
           "url": "/de/appenzell-artikel/teufen-voranschlag-defizit-2027/",
           "excerpt": "Die Gemeinde Teufen erwartet für 2027 Steuereinnahmen von 38,9 Millionen Franken, was einem Anstieg von 2,2% gegenüber dem vorherigen Budget entspricht.",
@@ -574,12 +580,6 @@
           "url": "/de/schweiz-artikel/erbschaftsteuer-appenzell/",
           "excerpt": "Erbschaftssteuer in Appenzell: kantonale Zuständigkeit, Verwandtschaftssätze, Freistellungen für Ehegatten. Erklärung innerhalb von 30-90 Tagen. 6-stufiges Verfahren.",
           "date": "2026-08-27T04:36:47.376Z"
-        },
-        {
-          "title": "Kantonssteuern Appenzell Ausserrhoden: Steuersätze und Abzüge",
-          "url": "/de/schweiz-artikel/kanton-appenzell-ausserrhoden-kantonale-steuern-saetze/",
-          "excerpt": "Vollständiger Leitfaden zu den Kantons- und Gemeindesteuern in Appenzell Ausserrhoden: 3-stufige Struktur, Steuersätze, zulässige Abzüge, Deklarationsfristen und Online-Verfahren.",
-          "date": "2026-08-25T03:40:05.091Z"
         }
       ],
       "latestCantonArticles": [],
@@ -605,7 +605,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-21T19:14:55.654Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -730,6 +730,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Hundwil veut réduire les impôts dans le budget 2027",
+          "url": "/fr/articles-appenzell/hundwil-impots-budget/",
+          "excerpt": "Hundwil prévoit en 2027 un excédent de CHF 111'200, avec des recettes de CHF 6'421'000 et des dépenses de CHF 6'309'800, ainsi qu'une réduction des impôts.",
+          "date": "2026-10-21T19:06:08.539Z"
+        },
+        {
           "title": "Teufen : budget 2027 pour réduire le déficit opérationnel",
           "url": "/fr/articles-appenzell/teufen-budget-2027-pour-reduire-le-deficit-operationnel/",
           "excerpt": "La commune de Teufen prévoit pour 2027 des recettes fiscales de 38,9 millions de francs, en hausse de 2,2% par rapport au budget précédent.",
@@ -770,12 +776,6 @@
           "url": "/fr/articles-suisse/impot-succession-appenzelle/",
           "excerpt": "Droit de succession à Appenzell : compétence cantonale, taux de parenté, exonérations pour conjoint. Déclaration dans les 30-90 jours. Procédure en 6 étapes.",
           "date": "2026-08-27T04:36:47.376Z"
-        },
-        {
-          "title": "Impôts cantonaux Appenzell Extérieur : taux et déductions",
-          "url": "/fr/articles-suisse/canton-appenzell-rhodes-exterieures-impots-cantonaux-taux/",
-          "excerpt": "Guide complet des impôts cantonaux et communaux à Appenzell Extérieur : structure à 3 niveaux, taux, déductions admises, délais déclaratifs et procédure en ligne.",
-          "date": "2026-08-25T03:40:05.091Z"
         }
       ],
       "latestCantonArticles": [],
@@ -801,7 +801,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-19T18:33:18.720Z"
+      "updatedAt": "2026-10-21T19:14:55.654Z"
     }
   }
 }
