@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-collegio-longueville-cantiere-colombier.webp",
+      "sha256": "06037b53ef2e139441a06cbfaa4771a0af5b82c0453c96bb349d71d9daf03b14"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-collegio-longueville-cantiere-colombier-480w.webp",
+      "sha256": "62218aef19902750b0ef9372323efb4884b313efcb327b7f46363e7330002808"
+    }
+  ]
 }
