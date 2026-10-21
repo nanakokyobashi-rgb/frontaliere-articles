@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-tg::https://awa.tg.ch/public/upload/assets/34935/infoblatt_was_tun_bei_ausstehendem_lohn.pdf?fp=1": {
-      "section": "canton-tg",
-      "ts": 1792388979430
-    },
-    "canton-tg::https://schalter.tg.ch": {
-      "section": "canton-tg",
-      "ts": 1792406204638
-    },
     "canton-tg::https://www.frauenfeld.ch/wohnen-mobilitaet/wohnen/bauen-und-umwelt/oeffentliche-auflagen.html/1009/news/12567": {
       "section": "canton-tg",
       "ts": 1792548390998
@@ -19,6 +11,10 @@
     "canton-tg::https://www.frauenfeld.ch/wohnen-mobilitaet/wohnen/bauen-und-umwelt/oeffentliche-auflagen.html/1009/news/12568": {
       "section": "canton-tg",
       "ts": 1792548392444
+    },
+    "canton-tg::https://awa.tg.ch/public/upload/assets/34935/infoblatt_was_tun_bei_ausstehendem_lohn.pdf?fp=1": {
+      "section": "canton-tg",
+      "ts": 1792584627555
     }
   }
 }
