@@ -4,17 +4,12 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "servizi",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "fe65916fac0b85c84e51089e3ae2541a31d17344f848909b228177c3aa0a5287",
+  "updatedAt": "2026-10-21T20:29:53.737Z",
+  "contentHash": "0243360222712f2dbcb18ca118c8744a1f70cb50bfe42e596bd9652f3f443eef",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-18T08:53:01.888Z",
-      "keyFacts": 1
-    },
-    {
-      "id": "aste-targhe",
-      "updatedAt": "2026-10-21T11:47:42.573Z",
       "keyFacts": 1
     }
   ],
@@ -30,11 +25,6 @@
           "value": "597,40 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        },
-        {
-          "label": "Aste di targhe in corso",
-          "value": "35",
-          "note": "offerta mediana 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -57,37 +47,6 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Aste delle targhe",
-          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
-          "items": [
-            {
-              "label": "SH1721",
-              "value": "1250 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-21T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69631"
-            },
-            {
-              "label": "SH3402",
-              "value": "1050 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-21T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69629"
-            },
-            {
-              "label": "SH4408",
-              "value": "1000 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-21T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69628"
-            }
-          ],
-          "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-21T11:47:42.573Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +114,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T20:29:53.737Z"
     },
     "en": {
       "canton": "SH",
@@ -168,11 +127,6 @@
           "value": "597.40 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
-        },
-        {
-          "label": "Plate auctions running",
-          "value": "35",
-          "note": "typical bid 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -195,37 +149,6 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Number plate auctions",
-          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
-          "items": [
-            {
-              "label": "SH1721",
-              "value": "1,250 CHF",
-              "detail": "current bid",
-              "date": "2026-10-21T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69631"
-            },
-            {
-              "label": "SH3402",
-              "value": "1,050 CHF",
-              "detail": "current bid",
-              "date": "2026-10-21T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69629"
-            },
-            {
-              "label": "SH4408",
-              "value": "1,000 CHF",
-              "detail": "current bid",
-              "date": "2026-10-21T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69628"
-            }
-          ],
-          "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-21T11:47:42.573Z"
         }
       ],
       "curatedArticles": [
@@ -289,7 +212,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T20:29:53.737Z"
     },
     "de": {
       "canton": "SH",
@@ -302,11 +225,6 @@
           "value": "597.40 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
-        },
-        {
-          "label": "Laufende Kontrollschild-Auktionen",
-          "value": "35",
-          "note": "mittleres Gebot 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -329,37 +247,6 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Kontrollschild-Auktionen",
-          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
-          "items": [
-            {
-              "label": "SH1721",
-              "value": "1’250 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-21T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69631"
-            },
-            {
-              "label": "SH3402",
-              "value": "1’050 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-21T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69629"
-            },
-            {
-              "label": "SH4408",
-              "value": "1’000 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-21T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69628"
-            }
-          ],
-          "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-21T11:47:42.573Z"
         }
       ],
       "curatedArticles": [
@@ -423,7 +310,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T20:29:53.737Z"
     },
     "fr": {
       "canton": "SH",
@@ -436,11 +323,6 @@
           "value": "597,40 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
-        },
-        {
-          "label": "Enchères de plaques en cours",
-          "value": "35",
-          "note": "offre centrale 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -463,37 +345,6 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Enchères de plaques",
-          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
-          "items": [
-            {
-              "label": "SH1721",
-              "value": "1 250 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-21T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69631"
-            },
-            {
-              "label": "SH3402",
-              "value": "1 050 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-21T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69629"
-            },
-            {
-              "label": "SH4408",
-              "value": "1 000 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-21T20:00:00.000Z",
-              "url": "https://www.auktion-stva.sh.ch/de/auction/69628"
-            }
-          ],
-          "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://www.auktion-stva.sh.ch/",
-          "updatedAt": "2026-10-21T11:47:42.573Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +404,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T20:29:53.737Z"
     }
   }
 }
