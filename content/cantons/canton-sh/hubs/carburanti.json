@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "9e7d1b926f216999754497e3bcf2a8673f71d4268e246c74e947eb104424534d",
+  "updatedAt": "2026-10-21T20:52:32.399Z",
+  "contentHash": "c2d5ee07a9dd8950cbdced7818d6eb43b01eeb31fc33c5d02f1e7a78e42d3da4",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Sciaffusa e Zurigo installano il sistema parcheggi al Reno",
+          "url": "/articoli-sciaffusa/parcheggi-cascate-reno/",
+          "excerpt": "Nuovo sistema tra Sciaffusa e Zurigo per i parcheggi liberi alle Cascate del Reno; avvio nell'estate 2027, costo circa CHF 400'000.",
+          "date": "2026-10-21T20:45:07.801Z"
+        },
+        {
           "title": "Incidente scooter a Schleitheim: donna ferita, Hohbrugg chiusa",
           "url": "/articoli-sciaffusa/schleitheim-scooter-incidente-2026/",
           "excerpt": "Domenica 18 ottobre 2026, una 61enne cade dallo scooter sulla Hohbrugg: proiezione di 12 metri nel pendio, elicottero per il trasporto in ospedale, strada chiusa oltre un'ora.",
@@ -94,12 +100,6 @@
           "url": "/articoli-sciaffusa/pulizie-tunnel-sciaffusa/",
           "excerpt": "Fäsenstaub, Cholfirst e Galgenbuck chiusi ogni notte dal 19 al 23 ottobre, dalle 20 alle 5, per lavori di pulizia.",
           "date": "2026-10-19T12:03:42.288Z"
-        },
-        {
-          "title": "SBB e DB pianificano riserve tra Zurigo e Stoccarda",
-          "url": "/articoli-sciaffusa/treni-zurigo-stoccarda/",
-          "excerpt": "SBB e DB pianificano riserve di percorrenza aggiuntive tra Zurigo e Stoccarda.",
-          "date": "2026-10-18T06:56:55.996Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T20:52:32.399Z"
     },
     "en": {
       "canton": "SH",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Schaffhausen and Zurich install the parking system on the Rhine",
+          "url": "/en/schaffhausen-articles/rhine-falls-parking-system/",
+          "excerpt": "New system between Schaffhausen and Zurich for available parking spaces at the Rhine Falls; launch in summer 2027, cost approximately CHF 400'000.",
+          "date": "2026-10-21T20:45:07.801Z"
+        },
+        {
           "title": "Scooter accident in Schleitheim: woman injured, Hohbrugg closed",
           "url": "/en/schaffhausen-articles/schleitheim-scooter-accident-2026/",
           "excerpt": "Sunday, October 18, 2026, a 61-year-old woman falls from her scooter on Hohbrugg: thrown 12 meters down the slope, helicopter transport to hospital, road closed for over an hour.",
@@ -193,12 +199,6 @@
           "url": "/en/schaffhausen-articles/schaffhausen-tunnel-cleaning/",
           "excerpt": "Fäsenstaub, Cholfirst and Galgenbuck closed every night from October 19 to 23, from 8 p.m.",
           "date": "2026-10-19T12:03:42.288Z"
-        },
-        {
-          "title": "SBB and DB plan reserve services between Zurich and Stuttgart",
-          "url": "/en/schaffhausen-articles/zurich-stuttgart-trains/",
-          "excerpt": "SBB and DB plan additional running-time reserves between Zurich and Stuttgart.",
-          "date": "2026-10-18T06:56:55.996Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T20:52:32.399Z"
     },
     "de": {
       "canton": "SH",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Schaffhausen und Zürich installieren das Parkleitsystem am Rhein",
+          "url": "/de/schaffhausen-artikel/parkleitsystem-rheinfall/",
+          "excerpt": "Neues System zwischen Schaffhausen und Zürich für freie Parkplätze am Rheinfall; Start im Sommer 2027, Kosten etwa CHF 400'000.",
+          "date": "2026-10-21T20:45:07.801Z"
+        },
+        {
           "title": "Scooterunfall in Schleitheim: Frau verletzt, Hohbrugg gesperrt",
           "url": "/de/schaffhausen-artikel/schleitheim-roller-unfall-2026/",
           "excerpt": "Am Sonntag, 18.",
@@ -292,12 +298,6 @@
           "url": "/de/schaffhausen-artikel/naechtliche-tunnelreinigung-schaffhausen/",
           "excerpt": "Fäsenstaub, Cholfirst und Galgenbuck jede Nacht vom 19.",
           "date": "2026-10-19T12:03:42.288Z"
-        },
-        {
-          "title": "SBB und DB planen Reserven zwischen Zürich und Stuttgart",
-          "url": "/de/schaffhausen-artikel/zuerich-stuttgart-zuege/",
-          "excerpt": "SBB und DB planen zusätzliche Fahrzeitreserven zwischen Zürich und Stuttgart.",
-          "date": "2026-10-18T06:56:55.996Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T20:52:32.399Z"
     },
     "fr": {
       "canton": "SH",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Schaffhouse et Zurich installent le système de stationnement au bord du Rhin",
+          "url": "/fr/articles-schaffhouse/systeme-parking-chutes-rhin/",
+          "excerpt": "Nouveau système entre Schaffhouse et Zurich pour les places de parking libres aux chutes du Rhin ; lancement à l'été 2027, coût d'environ CHF 400'000.",
+          "date": "2026-10-21T20:45:07.801Z"
+        },
+        {
           "title": "Accident de scooter à Schleitheim : une femme blessée, Hohbrugg fermée",
           "url": "/fr/articles-schaffhouse/schleitheim-accident-scooter-2026/",
           "excerpt": "Dimanche 18 octobre 2026, une femme de 61 ans chute de son scooter sur la Hohbrugg : elle est projetée à 12 mètres dans la pente, un hélicoptère est utilisé pour son transport à l’hôpital, route fermée pendant plus…",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-schaffhouse/nettoyage-tunnels-schaffhouse/",
           "excerpt": "Fäsenstaub, Cholfirst et Galgenbuck fermés chaque nuit du 19 au 23 octobre, de 20 heures à 5 heures, pour des travaux de nettoyage.",
           "date": "2026-10-19T12:03:42.288Z"
-        },
-        {
-          "title": "SBB et DB planifient des réserves entre Zurich et Stuttgart",
-          "url": "/fr/articles-schaffhouse/trains-zurich-stuttgart/",
-          "excerpt": "SBB et DB planifient des réserves de temps de parcours supplémentaires entre Zurich et Stuttgart.",
-          "date": "2026-10-18T06:56:55.996Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T20:52:32.399Z"
     }
   }
 }
