@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/economia/1950237/offerta-franchi-appartamenti-affitto-calo-comuni-svizzera-affitti-rispetto-ticino": {
-    "articleId": "affitti-ticino-calo-2026",
-    "ts": "2026-09-16T00:14:04.716Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/dal-mondo/attualita/1950407/ue-svizzera-lavoro-mobilita-lavoratori": {
     "articleId": "passaporto-digitale-sicurezza-sociale-ue",
     "ts": "2026-09-16T00:24:56.447Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/info/mondo/problemi-di-funzionamento-di-revolut-toccata-anche-la-svizzera--4178758.html": {
     "articleId": "revolut-servizi-interrotti",
     "ts": "2026-10-21T14:40:20.829Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/hackeraggio-casse-pensioni-centinaia-di-ticinesi-a-rischio-445085": {
+    "articleId": "hackeraggio-ipct-casse-pensioni-ticino",
+    "ts": "2026-10-21T17:53:57.085Z",
     "keyForm": 2
   }
 }

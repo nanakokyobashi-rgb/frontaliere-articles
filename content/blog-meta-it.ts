@@ -13561,6 +13561,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.revolut-servizi-interrotti.title': 'Banca digitale, disservizi in Svizzera per pagamenti e cambi',
     'blog.article.revolut-servizi-interrotti.excerpt': 'Problemi su pagamenti, versamenti e cambio di valute Disagi iniziati poco dopo le 8:00 in Svizzera Google indica un ritorno graduale dei servizi Revolut: denaro',
     'blog.article.revolut-servizi-interrotti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.hackeraggio-ipct-casse-pensioni-ticino.title': 'Attacco hacker a PK Softech: 27.000 affiliati IPCT a rischio',
+    'blog.article.hackeraggio-ipct-casse-pensioni-ticino.excerpt': '27\'000 affiliati IPCT potrebbero essere vittime Attacco a PK Softech a fine settembre Dati di alcune centinaia in una cartella IPCT IPCT prepara una lettera',
+    'blog.article.hackeraggio-ipct-casse-pensioni-ticino.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

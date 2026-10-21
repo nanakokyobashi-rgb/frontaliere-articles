@@ -13560,6 +13560,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.revolut-servizi-interrotti.title': 'Digital banking disruptions affect Swiss payments and FX',
     'blog.article.revolut-servizi-interrotti.excerpt': 'Problems with payments, deposits, and currency exchange Disruptions began shortly after 8:00 in Switzerland Google indicates a gradual return of Revolut services: money',
     'blog.article.revolut-servizi-interrotti.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.hackeraggio-ipct-casse-pensioni-ticino.title': 'Hacker attack on PK Softech: 27.000 IPCT members at risk',
+    'blog.article.hackeraggio-ipct-casse-pensioni-ticino.excerpt': '27\'000 IPCT members could be victims Attack on PK Softech at the end of September Data of several hundred in an IPCT folder IPCT is preparing a letter',
+    'blog.article.hackeraggio-ipct-casse-pensioni-ticino.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;
