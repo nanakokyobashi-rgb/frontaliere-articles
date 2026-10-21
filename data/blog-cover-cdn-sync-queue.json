@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-dashboard-mobilita-aarau.webp",
+      "sha256": "eb1f910e5a3486e63e4561cae4eb5d3a7c954058f9b7552533f108c623025ff8"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-dashboard-mobilita-aarau-480w.webp",
+      "sha256": "ed0ad7767a6bb297c9a598e81c5d107e672fc79bcd6c9dd9ec7d25091417d6ab"
+    }
+  ]
 }
