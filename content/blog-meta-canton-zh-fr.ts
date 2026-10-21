@@ -33,6 +33,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.crisi-resilienza-zurigo.title': 'Zurich prépare ses habitants aux crises : 9 litres d’eau',
     'blog.article.crisi-resilienza-zurigo.excerpt': 'Les semaines de la résilience de Zurich abordent deux scénarios : des informations sans électricité ni internet et 9 litres d’eau pour trois jours.',
     'blog.article.crisi-resilienza-zurigo.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.vbz-tram-50-51-cambio.title': 'Dès le 13 décembre, suppression des tramways 50 et 51',
+    'blog.article.vbz-tram-50-51-cambio.excerpt': 'Dès le 13 décembre, les lignes 50 et 51 disparaissent Les tramways 4, 11, 13, 14 et 17 reprennent leur parcours sur le Bahnhofquai La ligne 83 circule tous',
+    'blog.article.vbz-tram-50-51-cambio.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZhFr;

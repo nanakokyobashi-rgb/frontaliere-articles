@@ -33,6 +33,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.crisi-resilienza-zurigo.title': 'Zurigo prepara i residenti alle crisi: 9 litri d\'acqua',
     'blog.article.crisi-resilienza-zurigo.excerpt': 'Le settimane della resilienza di Zurigo affrontano due scenari: informazioni senza elettricità e internet e 9 litri d\'acqua per tre giorni.',
     'blog.article.crisi-resilienza-zurigo.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.vbz-tram-50-51-cambio.title': 'Dal 13 dicembre soppressi i tram 50 e 51',
+    'blog.article.vbz-tram-50-51-cambio.excerpt': 'Dal 13 dicembre spariscono le linee 50 e 51 I tram 4, 11, 13, 14 e 17 tornano sul Bahnhofquai La linea 83 viaggia ogni giorno fino alle 22 La linea notturna N8',
+    'blog.article.vbz-tram-50-51-cambio.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZhIt;

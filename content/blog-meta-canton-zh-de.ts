@@ -33,6 +33,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.crisi-resilienza-zurigo.title': 'Zürich bereitet die Einwohner auf Krisen vor: 9 Liter Wasser',
     'blog.article.crisi-resilienza-zurigo.excerpt': 'Die Zürcher Resilienzwochen befassen sich mit zwei Szenarien: Informationen ohne Strom und Internet sowie 9 Liter Wasser für drei Tage.',
     'blog.article.crisi-resilienza-zurigo.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.vbz-tram-50-51-cambio.title': 'Ab dem 13. Dezember entfallen die Trams 50 und 51',
+    'blog.article.vbz-tram-50-51-cambio.excerpt': 'Ab dem 13. Dezember entfallen die Linien 50 und 51 Die Trams 4, 11, 13, 14 und 17 fahren wieder über den Bahnhofquai Die Linie 83 fährt täglich bis 22 Uhr',
+    'blog.article.vbz-tram-50-51-cambio.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZhDe;

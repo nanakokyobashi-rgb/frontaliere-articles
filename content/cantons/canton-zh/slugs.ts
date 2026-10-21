@@ -13,6 +13,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'vbz-centrale-problemi-quotidiani': { it: 'vbz-centrale-problemi-quotidiani', en: 'vbz-control-centre-daily-issues', de: 'vbz-leitstelle-taegliche-probleme', fr: 'vbz-centre-controle-problemes' },
  'bank-now-dipendenti-zurigo': { it: 'bank-now-dipendenti-zurigo', en: 'bank-now-employees-zurich', de: 'bank-now-mitarbeitende-zuerich', fr: 'bank-now-employes-zurich' },
  'crisi-resilienza-zurigo': { it: 'crisi-resilienza-zurigo', en: 'zurich-crisis-resilience', de: 'zuerich-krisenresilienz', fr: 'zurich-resilience-crises' },
+ 'vbz-tram-50-51-cambio': { it: 'vbz-tram-50-51-cambio', en: 'vbz-tram-50-51-timetable-change', de: 'vbz-tram-50-51-fahrplanwechsel', fr: 'vbz-tram-50-51-changement-horaire' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

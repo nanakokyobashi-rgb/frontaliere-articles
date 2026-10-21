@@ -33,6 +33,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.crisi-resilienza-zurigo.title': 'Zurich prepares residents for crises: 9 liters of water',
     'blog.article.crisi-resilienza-zurigo.excerpt': 'Zurich\'s resilience weeks address two scenarios: information without electricity and internet and 9 liters of water for three days.',
     'blog.article.crisi-resilienza-zurigo.imageAlt': 'Illustration generated for this article',
+    'blog.article.vbz-tram-50-51-cambio.title': 'Trams 50 and 51 discontinued from December 13',
+    'blog.article.vbz-tram-50-51-cambio.excerpt': 'From December 13, lines 50 and 51 will disappear Trams 4, 11, 13, 14 and 17 return to Bahnhofquai Line 83 runs every day until 22 Night line N8 becomes N80 Date',
+    'blog.article.vbz-tram-50-51-cambio.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZhEn;
