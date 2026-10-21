@@ -73,7 +73,7 @@ import { readArticleRegistry } from './lib/registry-image-reader.mjs';
 // blog-index-frontaliere-it-full.json carried five of them.
 import { sanitizeDeep, assertNoControlChars } from './lib/sanitize-control-chars.mjs';
 import { reportStrippedControlCharsDeep } from '../generator/scripts/lib/control-char-write-report.mjs';
-import { unescapeTsValue } from '../generator/scripts/lib/meta-field-regex.mjs';
+import { readStaticObjectEntries } from './lib/ts-literals.mjs';
 import { parsePositiveNum } from './lib/parse-positive-num.mjs';
 // Il pavimento anti-troncamento, derivato dal corpus invece che scritto a mano:
 // stessa sorgente unica che usa il gate di pubblicazione (scripts/ci/verify-api-floors.mjs).
@@ -279,11 +279,10 @@ function readMeta(metaPrefix, locale) {
   const out = new Map();
   if (!fs.existsSync(abs)) return out;
   const src = fs.readFileSync(abs, 'utf-8');
-  const rx = /'blog\.article\.([^']+?)\.(title|excerpt)':\s*'((?:[^'\\]|\\.)*)'/g;
-  let m;
-  while ((m = rx.exec(src)) !== null) {
-    const [, id, field, raw] = m;
-    const value = unescapeTsValue(raw);
+  for (const { key, value } of readStaticObjectEntries(src, abs, { errorLabel: 'blog-index' })) {
+    const m = /^blog\.article\.([^.]+?)\.(title|excerpt)$/u.exec(key);
+    if (!m) continue;
+    const [, id, field] = m;
     if (!out.has(id)) out.set(id, {});
     out.get(id)[field] = value;
   }
