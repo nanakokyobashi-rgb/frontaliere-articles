@@ -11061,22 +11061,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/svizzera/cronaca/1957641/dipendenti-lavoro-svizzera-legge-securitas": {
-      "section": "frontaliere",
-      "ts": 1792387996935
-    },
-    "frontaliere::https://unia.ch/it/professioni-rami/parrucchiere/sondaggio-rivendicazioni-ccl": {
-      "section": "frontaliere",
-      "ts": 1792392209850
-    },
-    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1957292/il-centro-d-asilo-di-chiasso-a-gennaio-non-riaprira-imbucate-le-lettere-di-licenziamento": {
-      "section": "frontaliere",
-      "ts": 1792411423643
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/securitas%3a-segnalate-migliaia-di-violazioni-del-diritto-del-lavoro/92237590": {
-      "section": "frontaliere",
-      "ts": 1792415321690
-    },
     "frontaliere::https://www.tio.ch/ticino/economia/1957675/competenze-imprese-valore-crescita-processi": {
       "section": "frontaliere",
       "ts": 1792416972530
@@ -11200,6 +11184,10 @@
     "svizzera::https://www.laregione.ch/economia/economia/1958033/corsa-al-cobalto-e-al-nichel-il-lato-grigio-della-svolta-verde": {
       "section": "svizzera",
       "ts": 1792557074853
+    },
+    "frontaliere::https://comozero.it/attualita/como-e-la-maxi-beffa-della-tangenziale-mai-finita-ora-scade-pure-lo-sconto-diventi-subito-gratis": {
+      "section": "frontaliere",
+      "ts": 1792588536969
     }
   }
 }
