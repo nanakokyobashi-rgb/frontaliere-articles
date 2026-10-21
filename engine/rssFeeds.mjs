@@ -391,6 +391,13 @@ function skipTemplateExpression(source, startIndex, sourcePath) {
       canStartRegex = false;
       continue;
     }
+    if ((char === '+' && source[cursor + 1] === '+') || (char === '-' && source[cursor + 1] === '-')) {
+      // Consume update operators as one token. Preserving the current context
+      // keeps postfix updates after an operand from turning the following `/`
+      // into a regex start, while prefix updates remain valid before an operand.
+      cursor += 2;
+      continue;
+    }
     if (char === '/' && canStartRegex) {
       cursor = skipRegularExpressionLiteral(source, cursor, sourcePath);
       canStartRegex = false;
