@@ -45703,6 +45703,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'hackeraggio-ipct-casse-pensioni-ticino',
+ category: 'pensione',
+ date: '2026-10-21T17:53:56.319Z',
+ image: '/images/blog/article-hackeraggio-ipct-casse-pensioni-ticino.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
