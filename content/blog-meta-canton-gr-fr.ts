@@ -33,6 +33,9 @@ const blogMetaCantonGrFr: Record<string, string> = {
     'blog.article.sconti-vereina-locali-ospiti.title': 'Vereina : le parlement demande d’examiner des réductions',
     'blog.article.sconti-vereina-locali-ospiti.excerpt': 'Le parlement cantonal des Grisons charge le gouvernement d’examiner des réductions pour le transport de voitures Vereina : les bénéficiaires et la date d’entrée en vigueur restent à définir.',
     'blog.article.sconti-vereina-locali-ospiti.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.a13-code-grigioni-vacanze-zurighesi.title': 'A13 : queues entre Rothenbrunnen et Reichenau pour les vacances zurichoises',
+    'blog.article.a13-code-grigioni-vacanze-zurighesi.excerpt': 'Le trafic sur l\'A13 s\'est accumulé tous les jours du week-end entre Rothenbrunnen et Reichenau, avec le tunnel Isla-Bella identifié comme un goulot d\'étranglement, en référence à la fin des vacances zurichoises.',
+    'blog.article.a13-code-grigioni-vacanze-zurighesi.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGrFr;

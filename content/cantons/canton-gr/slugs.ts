@@ -13,6 +13,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'lido-grono-estate-2027': { it: 'lido-grono-estate-2027', en: 'grono-pool-opening-2027', de: 'grono-schwimmbad-2027', fr: 'piscine-grono-ete-2027' },
  'acqua-domleschg-feldis-scheid': { it: 'acqua-domleschg-feldis-scheid', en: 'domleschg-water-shortage-feldis-scheid', de: 'domleschg-wasserknappheit-feldis-scheid', fr: 'domleschg-penurie-eau-feldis-scheid' },
  'sconti-vereina-locali-ospiti': { it: 'sconti-vereina-locali-ospiti', en: 'vereina-discounts-locals-guests', de: 'vereina-rabatte-einheimische-gaeste', fr: 'vereina-reductions-locaux-visiteurs' },
+ 'a13-code-grigioni-vacanze-zurighesi': { it: 'a13-code-grigioni-vacanze-zurighesi', en: 'a13-traffic-graubuenden-zurich-holidays', de: 'a13-stau-graubuenden-zuercher-ferien', fr: 'a13-bouchons-grisons-vacances-zurichoises' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

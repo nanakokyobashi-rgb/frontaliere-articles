@@ -33,6 +33,9 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.sconti-vereina-locali-ospiti.title': 'Vereina: il parlamento chiede di valutare sconti',
     'blog.article.sconti-vereina-locali-ospiti.excerpt': 'Il parlamento cantonale dei Grigioni incarica il governo di esaminare riduzioni per il trasporto auto Vereina: beneficiari e decorrenza restano aperti.',
     'blog.article.sconti-vereina-locali-ospiti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.a13-code-grigioni-vacanze-zurighesi.title': 'A13: code tra Rothenbrunnen e Reichenau per vacanze zurighesi',
+    'blog.article.a13-code-grigioni-vacanze-zurighesi.excerpt': 'Il traffico sulla A13 si è accumulato ogni giorno del fine settimana tra Rothenbrunnen e Reichenau, con il tunnel Isla-Bella identificato come collo di bottiglia, in riferimento alla fine delle vacanze zurighesi.',
+    'blog.article.a13-code-grigioni-vacanze-zurighesi.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGrIt;

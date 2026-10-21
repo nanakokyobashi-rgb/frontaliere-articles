@@ -116,4 +116,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'a13-code-grigioni-vacanze-zurighesi',
+ category: 'novita',
+ date: '2026-10-21T04:02:54.005Z',
+ image: '/images/blog/article-a13-code-grigioni-vacanze-zurighesi.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GR', 'ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

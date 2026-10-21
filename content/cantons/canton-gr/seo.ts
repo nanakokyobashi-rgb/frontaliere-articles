@@ -392,6 +392,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-a13-code-grigioni-vacanze-zurighesi': {
+    title: 'A13: code tra Rothenbrunnen e Reichenau per vacanze zurighesi',
+    description: 'Il traffico sulla A13 in Grigioni ha visto code quotidiane tra Rothenbrunnen e Reichenau, con il tunnel Isla-Bella come collo di bottiglia',
+    keywords: 'frontalieri, ticino, svizzera, italia, code, rothenbrunnen, reichenau, vacanze',
+    ogTitle: 'A13 Grigioni: code tra Rothenbrunnen e Reichenau, Isla-Bella',
+    ogDescription: 'Il fine settimana ha registrato un significativo accumulo di traffico sulla A13 in Grigioni, con code quotidiane tra Rothenbrunnen e Reichenau. Il tunnel Isla-Bella è stato identificato come il principale collo di bottiglia, un fenomeno legato',
+    canonicalPath: '/articoli-grigioni/a13-code-grigioni-vacanze-zurighesi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "A13: code tra Rothenbrunnen e Reichenau per vacanze zurighesi",
+      "description": "Il traffico sulla A13 in Grigioni ha visto code quotidiane tra Rothenbrunnen e Reichenau, con il tunnel Isla-Bella come collo di bottiglia",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-a13-code-grigioni-vacanze-zurighesi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T04:02:54+00:00",
+      "dateModified": "2026-10-21T04:02:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-grigioni/a13-code-grigioni-vacanze-zurighesi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
