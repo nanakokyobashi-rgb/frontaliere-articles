@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T10:28:31.671Z",
-  "contentHash": "2d7875c136e08d4bdac72cb675830bf938c06ebd438d7055bd49bb0bc1e90b5e",
+  "updatedAt": "2026-10-21T11:15:27.437Z",
+  "contentHash": "df4a6232d99002c0501248cbf0998806c53c951622a63b7c96589f7558dc8335",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zurigo: niente iniziativa congedo parentale, sinistra e centro divisi",
+          "url": "/articoli-zurigo/zurigo-niente-iniziativa-congedo-parentale/",
+          "excerpt": "Il Canton Zurigo non presenterà la Standesinitiative sul congedo parentale: sinistra e partiti di centro, inizialmente favorevoli, non hanno trovato un accordo.",
+          "date": "2026-10-21T11:09:26.023Z"
+        },
+        {
           "title": "Dal 13 dicembre soppressi i tram 50 e 51",
           "url": "/articoli-zurigo/vbz-tram-50-51-cambio/",
           "excerpt": "Dal 13 dicembre spariscono le linee 50 e 51 I tram 4, 11, 13, 14 e 17 tornano sul Bahnhofquai La linea 83 viaggia ogni giorno fino alle 22 La linea notturna N8",
@@ -94,12 +100,6 @@
           "url": "/articoli-zurigo/vbz-centrale-problemi-quotidiani/",
           "excerpt": "Nella centrale VBZ il personale affronta fino a 300 problemi al giorno legati a tram e bus.",
           "date": "2026-10-11T01:13:16.512Z"
-        },
-        {
-          "title": "Carmen Walker Späh: meno vincoli di capitale per UBS",
-          "url": "/articoli-zurigo/lex-ubs-zurigo-capitale/",
-          "excerpt": "Walker Späh e Filippo Leutenegger cercano a Berna sostegno FDP per regole di capitale meno severe per UBS.",
-          "date": "2026-10-11T00:57:18.753Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T10:28:31.671Z"
+      "updatedAt": "2026-10-21T11:15:27.437Z"
     },
     "en": {
       "canton": "ZH",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zurich: no parental leave initiative, left and center divided",
+          "url": "/en/zurich-articles/zurich-no-parental-leave-initiative/",
+          "excerpt": "The Canton of Zurich will not submit the cantonal initiative on parental leave: left-wing and centrist parties, initially in favor, failed to reach an agreement.",
+          "date": "2026-10-21T11:09:26.023Z"
+        },
+        {
           "title": "Trams 50 and 51 discontinued from December 13",
           "url": "/en/zurich-articles/vbz-tram-50-51-timetable-change/",
           "excerpt": "From December 13, lines 50 and 51 will disappear Trams 4, 11, 13, 14 and 17 return to Bahnhofquai Line 83 runs every day until 22 Night line N8 becomes N80 Date",
@@ -193,12 +199,6 @@
           "url": "/en/zurich-articles/vbz-control-centre-daily-issues/",
           "excerpt": "At the VBZ control center, staff deal with up to 300 problems a day related to trams and buses.",
           "date": "2026-10-11T01:13:16.512Z"
-        },
-        {
-          "title": "Carmen Walker Späh: fewer capital constraints for UBS",
-          "url": "/en/zurich-articles/zurich-ubs-capital-rules/",
-          "excerpt": "Walker Späh and Filippo Leutenegger seek FDP support in Bern for less stringent capital rules for UBS.",
-          "date": "2026-10-11T00:57:18.753Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T10:28:31.671Z"
+      "updatedAt": "2026-10-21T11:15:27.437Z"
     },
     "de": {
       "canton": "ZH",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zürich: Keine Initiative zum Elternurlaub, Linke und Mitte gespalten",
+          "url": "/de/zurich-artikel/zuerich-keine-elternzeit-initiative/",
+          "excerpt": "Der Kanton Zürich wird die Standesinitiative zum Elternurlaub nicht einreichen: Die Linke und die Parteien der Mitte, die zunächst dafür waren, haben keine Einigung gefunden.",
+          "date": "2026-10-21T11:09:26.023Z"
+        },
+        {
           "title": "Ab dem 13. Dezember entfallen die Trams 50 und 51",
           "url": "/de/zurich-artikel/vbz-tram-50-51-fahrplanwechsel/",
           "excerpt": "Ab dem 13. Dezember entfallen die Linien 50 und 51 Die Trams 4, 11, 13, 14 und 17 fahren wieder über den Bahnhofquai Die Linie 83 fährt täglich bis 22 Uhr",
@@ -292,12 +298,6 @@
           "url": "/de/zurich-artikel/vbz-leitstelle-taegliche-probleme/",
           "excerpt": "In der VBZ-Leitstelle bewältigt das Personal bis zu 300 Probleme pro Tag im Zusammenhang mit Trams und Bussen.",
           "date": "2026-10-11T01:13:16.512Z"
-        },
-        {
-          "title": "Carmen Walker Späh: Weniger Kapitalzwänge für UBS",
-          "url": "/de/zurich-artikel/zuerich-ubs-kapitalregeln/",
-          "excerpt": "Walker Späh und Filippo Leutenegger suchen in Bern FDP-Unterstützung für weniger strenge Kapitalregeln für UBS.",
-          "date": "2026-10-11T00:57:18.753Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T10:28:31.671Z"
+      "updatedAt": "2026-10-21T11:15:27.437Z"
     },
     "fr": {
       "canton": "ZH",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zurich : pas d’initiative sur le congé parental, gauche et centre divisés",
+          "url": "/fr/articles-zurich/zurich-pas-initiative-conge-parental/",
+          "excerpt": "Le canton de Zurich ne présentera pas l’initiative cantonale sur le congé parental : la gauche et les partis du centre, initialement favorables, ne sont pas parvenus à un accord.",
+          "date": "2026-10-21T11:09:26.023Z"
+        },
+        {
           "title": "Dès le 13 décembre, suppression des tramways 50 et 51",
           "url": "/fr/articles-zurich/vbz-tram-50-51-changement-horaire/",
           "excerpt": "Dès le 13 décembre, les lignes 50 et 51 disparaissent Les tramways 4, 11, 13, 14 et 17 reprennent leur parcours sur le Bahnhofquai La ligne 83 circule tous",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-zurich/vbz-centre-controle-problemes/",
           "excerpt": "Dans le centre de contrôle de VBZ, le personnel fait face à jusqu’à 300 problèmes par jour liés aux tramways et aux bus.",
           "date": "2026-10-11T01:13:16.512Z"
-        },
-        {
-          "title": "Carmen Walker Späh : moins de contraintes de fonds propres pour UBS",
-          "url": "/fr/articles-zurich/zurich-ubs-regles-capital/",
-          "excerpt": "Walker Späh et Filippo Leutenegger cherchent à Berne le soutien du FDP en faveur de règles de fonds propres moins strictes pour UBS.",
-          "date": "2026-10-11T00:57:18.753Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T10:28:31.671Z"
+      "updatedAt": "2026-10-21T11:15:27.437Z"
     }
   }
 }
