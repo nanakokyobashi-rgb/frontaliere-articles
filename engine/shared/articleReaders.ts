@@ -65,7 +65,7 @@ export function readArticleSlugs(
     return out;
   }
   const seen = new Set<string>();
-  for (const { key, value } of readStaticObjectEntries(src, file, { errorLabel: 'seo-hubs' })) {
+  for (const { key, value } of readStaticObjectEntries(src, file, { errorLabel: 'seo-hubs', newlineAs: ' ' })) {
     const match = /^blog\.article\.(.+)\.(title|excerpt)$/u.exec(key);
     if (!match || match[2] !== 'title' || seen.has(match[1])) continue;
     seen.add(match[1]);
@@ -139,7 +139,7 @@ export function readArticleExcerpts(
     console.warn(`[seo-hubs] failed to read excerpts from ${metaPrefix}-${locale}.ts`, err);
     return out;
   }
-  for (const { key, value } of readStaticObjectEntries(src, file, { errorLabel: 'seo-hubs' })) {
+  for (const { key, value } of readStaticObjectEntries(src, file, { errorLabel: 'seo-hubs', newlineAs: ' ' })) {
     const match = /^blog\.article\.(.+)\.(title|excerpt)$/u.exec(key);
     if (match?.[2] === 'excerpt') out.set(match[1], value);
   }

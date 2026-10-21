@@ -17,8 +17,9 @@ import { readStaticObjectEntries } from '../../../engine/shared/ts-literals.mjs'
 import { unescapeTsString } from './unescape-ts-string.mjs';
 
 function makeMatch(source, entry, index) {
-  const full = `'${entry.rawKey}': '${entry.rawValue}'`;
-  const match = [full, entry.key.slice('blog.article.'.length, -1 - entry.key.split('.').at(-1).length), entry.rawValue];
+  const full = source.slice(index, entry.end);
+  const lastDot = entry.key.lastIndexOf('.');
+  const match = [full, entry.key.slice('blog.article.'.length, lastDot), entry.rawValue];
   match.index = index;
   match.input = source;
   return match;
