@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-chuv-ostetriche-salari-classi.webp",
-      "sha256": "aa7e232b9c10a1c49993b5b928cffbe4f35e3afcb0d8aa451dec55b6c2de63bf"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-chuv-ostetriche-salari-classi-480w.webp",
-      "sha256": "54e78a1c956d9cb15f098731d4efad401d1ebbf4cf71ca29451d5b40a85893f0"
-    }
-  ]
+  "items": []
 }
