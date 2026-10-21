@@ -475,6 +475,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-parcheggi-cascate-reno': {
+    title: 'Sciaffusa e Zurigo installano il sistema parcheggi al Reno',
+    description: 'Nuovo sistema tra Sciaffusa e Zurigo per i parcheggi liberi alle Cascate del Reno; avvio nell\'estate 2027, costo circa CHF 400\'000.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sciaffusa, zurigo, installano, sistema',
+    ogTitle: 'Cascate del Reno: nuovo sistema per i parcheggi',
+    ogDescription: 'Alle Cascate del Reno, due grandi pannelli sull\'autostrada saranno il fulcro del sistema inter-cantonale. Le indicazioni sull\'occupazione dei parcheggi guideranno i visitatori verso il lato con posti liberi. L\'avvio è previsto nell\'estate 2027.',
+    canonicalPath: '/articoli-sciaffusa/parcheggi-cascate-reno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sciaffusa e Zurigo installano il sistema parcheggi al Reno",
+      "description": "Nuovo sistema tra Sciaffusa e Zurigo per i parcheggi liberi alle Cascate del Reno; avvio nell'estate 2027, costo circa CHF 400'000.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-parcheggi-cascate-reno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T20:45:07+00:00",
+      "dateModified": "2026-10-21T20:45:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/parcheggi-cascate-reno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
