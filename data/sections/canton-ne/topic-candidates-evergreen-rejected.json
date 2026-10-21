@@ -4,50 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://www.ne.ch/communiques-de-presse/pour-sa-30eme-edition-le-prix-interculturel-salut-letranger-recompense-le-centre-portugais-de-neuchatel-et-madame-carmen-diaz-pumarejo": {
-      "section": "canton-ne",
-      "ts": 1792323251760
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-panzani-veut-fusionner-avec-le-portugais-cerealis.html": {
-      "section": "canton-ne",
-      "ts": 1792326321135
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-des-drones-pour-observer-les-chauffards-st-gall-suit-la-thurgovie.html": {
-      "section": "canton-ne",
-      "ts": 1792326329040
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-tx-group-goldbach-cede-a-nouveau-une-filiale-allemande.html": {
-      "section": "canton-ne",
-      "ts": 1792344813377
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261018-il-y-a-50-ans-mcdonald-s-ouvrait-sa-premiere-succursale-suisse.html": {
-      "section": "canton-ne",
-      "ts": 1792344830542
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261018-ukraine-nouvelles-frappes-croisees-sur-le-systeme-energetique.html": {
-      "section": "canton-ne",
-      "ts": 1792344849379
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261017-l-exemption-des-sanctions-contre-la-russie-par-trump-est-historique.html": {
-      "section": "canton-ne",
-      "ts": 1792344861609
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261017-le-president-americain-donald-trump-encore-invite-au-wef-en-2027.html": {
-      "section": "canton-ne",
-      "ts": 1792344878223
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-zelensky-reclame-a-l-ue-70-milliards-d-euros-en-plus-en-2027.html": {
-      "section": "canton-ne",
-      "ts": 1792348925479
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261017-le-cabriolet-volant-de-tesla-n-est-pas-un-aeronef-affirme-la-faa.html": {
-      "section": "canton-ne",
-      "ts": 1792349103604
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261016-trump-limoge-sa-porte-parole-apres-seulement-une-semaine.html": {
-      "section": "canton-ne",
-      "ts": 1792349110392
-    },
     "canton-ne::https://www.ne.ch/communiques-de-presse/les-benefices-de-la-loterie-romande-ont-permis-de-distribuer-plus-de-155-millions-de-francs-dans-le-canton-de-neuchatel": {
       "section": "canton-ne",
       "ts": 1792411802436
@@ -83,6 +39,10 @@
     "canton-ne::https://france3-regions.franceinfo.fr/bourgogne-franche-comte/doubs/une-idee-de-taxe-sur-l-embauche-des-etrangers-en-suisse-pourrait-elle-menacer-l-emploi-des-frontaliers-francais-3435600.html": {
       "section": "canton-ne",
       "ts": 1792483582220
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261020-les-exportations-horlogeres-continuent-a-la-hausse-en-septembre.html": {
+      "section": "canton-ne",
+      "ts": 1792540351996
     }
   }
 }
