@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/ticino/economia/1950666/sul-digitale-non-dovrebbe-esserci-una-strategia-di-destra-di-centro-o-di-sinistra": {
-    "articleId": "atted-digitale-ticino-cyber-security",
-    "ts": "2026-09-17T02:56:11.239Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1950840/barometro-previsione-risparmiano-vecchiaia-condizioni": {
     "articleId": "barometro-previdenza-raiffeisen-zhaw",
     "ts": "2026-09-17T10:27:05.962Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/economia/1957983/zurigo-dipendenti-svizzera-tamedia-licenziamenti-ia": {
     "articleId": "tamedia-zurigo-protesta-licenziamenti-ia",
     "ts": "2026-10-21T07:32:05.353Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/cf%3a-pacchetto-competitivit%c3%a0-economia%2c-bilancio-positivo/92249999": {
+    "articleId": "pacchetto-imprese-sgravi",
+    "ts": "2026-10-21T10:00:03.991Z",
     "keyForm": 2
   }
 }
