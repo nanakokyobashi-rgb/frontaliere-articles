@@ -204,4 +204,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'chuv-ostetriche-salari-classi',
+ category: 'novita',
+ date: '2026-10-21T03:32:51.220Z',
+ image: '/images/blog/article-chuv-ostetriche-salari-classi.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

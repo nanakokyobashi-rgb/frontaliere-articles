@@ -57,6 +57,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.cdhr-contributo-differenziale-2025.title': 'CDHR 2025: Schwellenwerte von 250.000/500.000 € für Grenzgänger in Frankreich',
     'blog.article.cdhr-contributo-differenziale-2025.excerpt': 'Die Differenzabgabe auf hohe Einkommen zielt auf eine Mindestbesteuerung von 20% ab.',
     'blog.article.cdhr-contributo-differenziale-2025.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.chuv-ostetriche-salari-classi.title': 'CHUV: Hebammen fordern faire Löhne, Klasse 10 für alle',
+    'blog.article.chuv-ostetriche-salari-classi.excerpt': 'CHUV: Klasse 9 oder 10 für dieselbe Arbeit Nur ein Drittel der Hebammen ist in Klasse 10 Durchschnittlicher Unterschied: CHF 8\'000 pro Jahr Die Forderung geht',
+    'blog.article.chuv-ostetriche-salari-classi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVdDe;
