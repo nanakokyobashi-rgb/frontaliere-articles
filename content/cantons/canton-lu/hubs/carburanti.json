@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-20T01:04:15.659Z",
-  "contentHash": "beff8daadcc0b4a067bdb24efaef3ac9f9d1c54735c1d8c734530a5d1b9a19d7",
+  "updatedAt": "2026-10-21T01:41:58.731Z",
+  "contentHash": "e6349d86046b48c81844cfa1de65c669be547705d30517906039fa539a19f8b4",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-19T13:56:07.476Z",
+      "updatedAt": "2026-10-20T12:04:15.773Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-19T13:56:07.476Z"
+          "updatedAt": "2026-10-20T12:04:15.773Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Canton Lucerna riduce le imposte: decisione definitiva",
+          "url": "/articoli-lucerna/lucerna-riduce-imposte/",
+          "excerpt": "La fonte Zentralplus presenta come definitiva la riduzione delle imposte nel Canton Lucerna; il dataset fiscale 2026 riporta oneri sui redditi annui e valori A0.",
+          "date": "2026-10-21T01:30:31.409Z"
+        },
         {
           "title": "Lucerna: cinque ore di dibattito sulle finanze cantonali",
           "url": "/articoli-lucerna/lucerna-finanze-sessione-ottobre/",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/prioswiss-ricorso-luks/",
           "excerpt": "L’associazione contesta il mandato per le operazioni all’esofago al Luzerner Kantonsspital, sostenendo che non ha raggiunto i casi minimi e che dieci altri centri coprono già il fabbisogno.",
           "date": "2026-10-19T14:58:13.207Z"
-        },
-        {
-          "title": "Juso Lucerna: Valentin Humbel candidato al governo",
-          "url": "/articoli-lucerna/juso-lucerna-humbel-governo/",
-          "excerpt": "Valentin Humbel è il candidato Juso al governo lucernese.",
-          "date": "2026-10-10T23:52:13.512Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-20T01:04:15.659Z"
+      "updatedAt": "2026-10-21T01:41:58.731Z"
     },
     "en": {
       "canton": "LU",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-19T13:56:07.476Z"
+          "updatedAt": "2026-10-20T12:04:15.773Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Canton Lucerne cuts taxes: final decision",
+          "url": "/en/lucerne-articles/lucerne-canton-cuts-taxes/",
+          "excerpt": "The Zentralplus source presents the tax reduction in the Canton of Lucerne as definitive; the 2026 tax dataset reports tax burdens on annual incomes and A0 values.",
+          "date": "2026-10-21T01:30:31.409Z"
+        },
         {
           "title": "Lucerne: five hours of debate on cantonal finances",
           "url": "/en/lucerne-articles/lucerne-cantonal-finances-october/",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/prioswiss-appeal-luks/",
           "excerpt": "The association challenges the mandate for esophageal surgeries at the Luzerner Kantonsspital, arguing that it has not reached the minimum number of cases and that ten other centers already cover the need.",
           "date": "2026-10-19T14:58:13.207Z"
-        },
-        {
-          "title": "Juso Lucerne: Valentin Humbel candidate for government",
-          "url": "/en/lucerne-articles/juso-lucerne-humbel-government/",
-          "excerpt": "Valentin Humbel is the Juso candidate for the Lucerne cantonal government.",
-          "date": "2026-10-10T23:52:13.512Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-20T01:04:15.659Z"
+      "updatedAt": "2026-10-21T01:41:58.731Z"
     },
     "de": {
       "canton": "LU",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-19T13:56:07.476Z"
+          "updatedAt": "2026-10-20T12:04:15.773Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Kanton Luzern senkt die Steuern: endgültige Entscheidung",
+          "url": "/de/luzern-artikel/luzern-senkt-steuern/",
+          "excerpt": "Die Quelle Zentralplus stellt die Steuersenkung im Kanton Luzern als endgültig dar; der Steuerdatensatz 2026 weist Belastungen für Jahreseinkommen und A0-Werte aus.",
+          "date": "2026-10-21T01:30:31.409Z"
+        },
         {
           "title": "Luzern: fünf Stunden Debatte über die kantonalen Finanzen",
           "url": "/de/luzern-artikel/luzerner-kantonsfinanzen-oktober/",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/prioswiss-berufung-luks/",
           "excerpt": "Der Verband ficht den Leistungsauftrag für Speiseröhrenoperationen am Luzerner Kantonsspital an und macht geltend, dass die Mindestfallzahl nicht erreicht wurde und zehn weitere Zentren den Bedarf bereits abdecken.",
           "date": "2026-10-19T14:58:13.207Z"
-        },
-        {
-          "title": "Juso Luzern: Valentin Humbel kandidiert für den Regierungsrat",
-          "url": "/de/luzern-artikel/juso-luzern-humbel-regierungsrat/",
-          "excerpt": "Valentin Humbel ist der Juso-Kandidat für den Luzerner Regierungsrat.",
-          "date": "2026-10-10T23:52:13.512Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-20T01:04:15.659Z"
+      "updatedAt": "2026-10-21T01:41:58.731Z"
     },
     "fr": {
       "canton": "LU",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-19T13:56:07.476Z"
+          "updatedAt": "2026-10-20T12:04:15.773Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Le canton de Lucerne réduit les impôts : décision définitive",
+          "url": "/fr/articles-lucerne/lucerne-baisse-impots/",
+          "excerpt": "La source Zentralplus présente la réduction des impôts dans le canton de Lucerne comme définitive ; le jeu de données fiscales 2026 indique des charges sur les revenus annuels et des valeurs A0.",
+          "date": "2026-10-21T01:30:31.409Z"
+        },
         {
           "title": "Lucerne : cinq heures de débat sur les finances cantonales",
           "url": "/fr/articles-lucerne/finances-cantonales-lucerne-octobre/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/prioswiss-recours-luks/",
           "excerpt": "L’association conteste le mandat pour les opérations à l’œsophage au Luzerner Kantonsspital, soutenant qu’il n’a pas atteint le nombre minimal de cas et que dix autres centres couvrent déjà les besoins.",
           "date": "2026-10-19T14:58:13.207Z"
-        },
-        {
-          "title": "Juso Lucerne : Valentin Humbel candidat au gouvernement",
-          "url": "/fr/articles-lucerne/juso-lucerne-humbel-gouvernement/",
-          "excerpt": "Valentin Humbel est le candidat de Juso au gouvernement lucernois.",
-          "date": "2026-10-10T23:52:13.512Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-20T01:04:15.659Z"
+      "updatedAt": "2026-10-21T01:41:58.731Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "fisco",
-  "updatedAt": "2026-10-20T00:32:46.463Z",
-  "contentHash": "387b871b8ac628b8c1c32d67f52bf14425451baba5d136ef67d5c502f5aba12c",
+  "updatedAt": "2026-10-21T01:41:58.731Z",
+  "contentHash": "277ab94eb2bcce5091cb11d55cd0a0c6ee8b6912433618f6b0d4244317334e41",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-19T11:18:25.537Z",
+      "updatedAt": "2026-10-20T15:53:28.523Z",
       "keyFacts": 0
     }
   ],
@@ -115,10 +115,16 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Canton Lucerna riduce le imposte: decisione definitiva",
+          "url": "/articoli-lucerna/lucerna-riduce-imposte/",
+          "excerpt": "La fonte Zentralplus presenta come definitiva la riduzione delle imposte nel Canton Lucerna; il dataset fiscale 2026 riporta oneri sui redditi annui e valori A0.",
+          "date": "2026-10-21T01:30:31.409Z"
+        },
         {
           "title": "Kriens torna in rosso dopo surplus milionari",
           "url": "/articoli-lucerna/kriens-torna-in-deficit/",
@@ -136,12 +142,6 @@
           "url": "/articoli-svizzera/fisco-lucerna-tre-livelli-2026/",
           "excerpt": "Tre livelli fiscali e moltiplicatore comunale: il confronto 2026 parte dalla struttura nazionale e applica il metodo al canton Lucerna.",
           "date": "2026-10-01T03:47:26.930Z"
-        },
-        {
-          "title": "Comprare casa a Lucerna: mutuo ipotecario e imposte",
-          "url": "/articoli-svizzera/comprare-casa-lucerna-ipoteca-pratica/",
-          "excerpt": "Acquistare una proprietà nel Canton Lucerna richiede competenze fiscal-finanziarie: imposte sui trapassi, mutuo sostenibile, spese notarili. Guida operativa 2026.",
-          "date": "2026-09-03T18:19:14.547Z"
         },
         {
           "title": "Imposta di successione e donazione Canton Lucerna: aliquote",
@@ -191,7 +191,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-20T00:32:46.463Z"
+      "updatedAt": "2026-10-21T01:41:58.731Z"
     },
     "en": {
       "canton": "LU",
@@ -284,10 +284,16 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Canton Lucerne cuts taxes: final decision",
+          "url": "/en/lucerne-articles/lucerne-canton-cuts-taxes/",
+          "excerpt": "The Zentralplus source presents the tax reduction in the Canton of Lucerne as definitive; the 2026 tax dataset reports tax burdens on annual incomes and A0 values.",
+          "date": "2026-10-21T01:30:31.409Z"
+        },
         {
           "title": "Kriens back in the red after million-dollar surpluses",
           "url": "/en/lucerne-articles/kriens-returns-to-deficit/",
@@ -305,12 +311,6 @@
           "url": "/en/swiss-articles/lucerne-tax-three-levels-2026/",
           "excerpt": "Three tax tiers and the municipal multiplier: The 2026 comparison begins with the national structure and applies the method to the canton of Lucerne.",
           "date": "2026-10-01T03:47:26.930Z"
-        },
-        {
-          "title": "Buying a house in Lucerne: mortgage and taxes",
-          "url": "/en/swiss-articles/buy-home-lucerne-mortgage-guide/",
-          "excerpt": "Buying a property in the Canton of Lucerne requires fiscal-financial skills: transfer taxes, sustainable mortgage, notary fees. Operating Guide 2026.",
-          "date": "2026-09-03T18:19:14.547Z"
         },
         {
           "title": "Inheritance and gift tax Canton Lucerne: rates",
@@ -360,7 +360,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-20T00:32:46.463Z"
+      "updatedAt": "2026-10-21T01:41:58.731Z"
     },
     "de": {
       "canton": "LU",
@@ -453,10 +453,16 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Kanton Luzern senkt die Steuern: endgültige Entscheidung",
+          "url": "/de/luzern-artikel/luzern-senkt-steuern/",
+          "excerpt": "Die Quelle Zentralplus stellt die Steuersenkung im Kanton Luzern als endgültig dar; der Steuerdatensatz 2026 weist Belastungen für Jahreseinkommen und A0-Werte aus.",
+          "date": "2026-10-21T01:30:31.409Z"
+        },
         {
           "title": "Kriens schreibt nach Überschüssen in Millionenhöhe wieder rote Zahlen",
           "url": "/de/luzern-artikel/kriens-rutscht-wieder-ins-minus/",
@@ -474,12 +480,6 @@
           "url": "/de/schweiz-artikel/steuern-luzern-drei-ebenen-2026/",
           "excerpt": "Drei Steuerstufen und kommunaler Multiplikator: Der Vergleich für 2026 geht von der nationalen Struktur aus und wendet die Methode auf den Kanton Luzern an.",
           "date": "2026-10-01T03:47:26.930Z"
-        },
-        {
-          "title": "Haus kaufen in Luzern: Hypothekendarlehen und Steuern",
-          "url": "/de/schweiz-artikel/haus-kaufen-luzern-hypothek-anleitung/",
-          "excerpt": "Der Kauf einer Immobilie im Kanton Luzern erfordert steuerliche und finanzielle Kompetenzen: Abgeltungssteuern, nachhaltiges Darlehen, Notarkosten. Betriebsanleitung 2026.",
-          "date": "2026-09-03T18:19:14.547Z"
         },
         {
           "title": "Erbschafts- und Schenkungssteuer Kanton Luzern: Steuersätze",
@@ -529,7 +529,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-20T00:32:46.463Z"
+      "updatedAt": "2026-10-21T01:41:58.731Z"
     },
     "fr": {
       "canton": "LU",
@@ -622,10 +622,16 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-19T11:18:25.537Z"
+          "updatedAt": "2026-10-20T15:53:28.523Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Le canton de Lucerne réduit les impôts : décision définitive",
+          "url": "/fr/articles-lucerne/lucerne-baisse-impots/",
+          "excerpt": "La source Zentralplus présente la réduction des impôts dans le canton de Lucerne comme définitive ; le jeu de données fiscales 2026 indique des charges sur les revenus annuels et des valeurs A0.",
+          "date": "2026-10-21T01:30:31.409Z"
+        },
         {
           "title": "Kriens repasse dans le rouge après des excédents de plusieurs millions",
           "url": "/fr/articles-lucerne/kriens-repasse-dans-le-rouge/",
@@ -643,12 +649,6 @@
           "url": "/fr/articles-suisse/impots-lucerne-trois-niveaux-2026/",
           "excerpt": "Trois niveaux d’imposition et multiplicateur municipal : la comparaison 2026 part de la structure nationale et applique la méthode au canton de Lucerne.",
           "date": "2026-10-01T03:47:26.930Z"
-        },
-        {
-          "title": "Acheter une maison à Lucerne : hypothèque et impôts",
-          "url": "/fr/articles-suisse/acheter-maison-lucerne-hypotheque-guide/",
-          "excerpt": "L'achat d'une propriété dans le canton de Lucerne nécessite des compétences fiscales et financières : taxes de passage, hypothèque durable, frais de notaire. Guide opérationnel 2026.",
-          "date": "2026-09-03T18:19:14.547Z"
         },
         {
           "title": "Droits de succession et de donation Canton de Lucerne : taux",
@@ -698,7 +698,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-20T00:32:46.463Z"
+      "updatedAt": "2026-10-21T01:41:58.731Z"
     }
   }
 }
