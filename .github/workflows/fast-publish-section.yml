@@ -403,6 +403,7 @@ jobs:
           reconcile_edge_matrix() {
             local expected_commit="${1:-}"
             local fallback_commit="${2:-}"
+            local source_dir="${3:-$PWD}"
             local deadline=$(( SECONDS + 8 * 60 ))
             local attempt=0
             local matrix=''
@@ -424,8 +425,11 @@ jobs:
               if [ "$candidate_timeout" -le 0 ]; then
                 return 124
               fi
-              timeout --signal=TERM --kill-after=1s "${candidate_timeout}s" \
-                node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$candidate" \
+              (
+                cd "$source_dir"
+                timeout --signal=TERM --kill-after=1s "${candidate_timeout}s" \
+                  node scripts/ci/fast-publish-section.mjs r2-reconcile-plan "$candidate"
+              ) \
                 | jq -c 'map(. + {bootstrap: (.bootstrap // false)})'
             }
             while (( SECONDS < deadline )); do
@@ -463,6 +467,25 @@ jobs:
             echo "::error::registro edge non coerente dopo $attempt tentativi; nessun replay verra' accodato" >&2
             return 1
           }
+          if [ "$EVENT_NAME" = 'push' ] || { [ "$EVENT_NAME" = 'workflow_run' ] && [ "$WORKFLOW_RUN_EVENT" = 'push' ]; }; then
+            cover_drain_message="${COVER_DRAIN_COMMIT_MESSAGE:-}"
+            if [ "$EVENT_NAME" = 'workflow_run' ]; then
+              cover_drain_message="${WORKFLOW_RUN_COVER_DRAIN_COMMIT_MESSAGE:-}"
+            fi
+            export COVER_DRAIN_COMMIT_MESSAGE="$cover_drain_message"
+            cover_drain_marker="$(node scripts/ci/cover-drain-commit.mjs is-cover-drain)"
+            if [ "$cover_drain_marker" = 'true' ]; then
+              echo 'cover-drain push is handled by the explicit publisher outbox dispatch; skipping automatic section publishing'
+              {
+                echo 'matrix=[]'
+                echo 'any=false'
+                echo 'dry=false'
+                echo 'replay_api_after_publish=false'
+                echo 'allow_deferred_live_release=false'
+              } >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
           pinned_source=''
           if [ "$EVENT_NAME" = 'workflow_run' ]; then
             pinned_source="${WORKFLOW_RUN_HEAD_SHA:-}"
@@ -564,7 +587,42 @@ jobs:
                 if [ -n "$replay_before" ]; then
                   replay_after="$current_main"
                 fi
-                replay_matrix="$(reconcile_edge_matrix "$pinned_source" "$current_main")"
+                # The edge candidate may be pinned to the stale run, but the
+                # matrix shape must come from current main so new or activated
+                # sections are included in the replay.
+                current_main_source="$RUNNER_TEMP/fast-publish-section-current-main-${GITHUB_RUN_ID}"
+                cleanup_current_main_source() {
+                  if [ -e "$current_main_source" ]; then
+                    rm -rf -- "$current_main_source"
+                  fi
+                }
+                trap cleanup_current_main_source EXIT
+                if [ -e "$current_main_source" ]; then
+                  echo "::error::snapshot temporaneo gia' esistente: $current_main_source"
+                  exit 1
+                fi
+                if ! git fetch --no-tags --depth=1 origin \
+                  "refs/heads/main:refs/remotes/origin/fast-publish-current-main"; then
+                  echo "::error::impossibile scaricare la HEAD corrente di main per il piano stale"
+                  exit 1
+                fi
+                fetched_current_main="$(git rev-parse refs/remotes/origin/fast-publish-current-main)"
+                if [ "$fetched_current_main" != "$current_main" ]; then
+                  echo "::error::main e' avanzata durante la preparazione del piano stale ($current_main -> $fetched_current_main)"
+                  exit 1
+                fi
+                if ! mkdir "$current_main_source"; then
+                  echo "::error::impossibile preparare lo snapshot della HEAD corrente per il piano stale"
+                  exit 1
+                fi
+                if ! git archive --format=tar "$current_main" -- \
+                  engine host generator/data/canton-sections.json generator/scripts/lib \
+                  scripts/ci/fast-publish-section.mjs scripts/lib \
+                  | tar -x -C "$current_main_source"; then
+                  echo "::error::impossibile materializzare il codice della HEAD corrente per il piano stale"
+                  exit 1
+                fi
+                replay_matrix="$(reconcile_edge_matrix "$pinned_source" "$current_main" "$current_main_source")"
                 dispatched=0
                 while IFS=$'\t' read -r section article_ids bootstrap remove_stale; do
                   [ -n "$section" ] || continue
@@ -581,25 +639,6 @@ jobs:
                 echo 'any=false'
                 echo 'dry=false'
                 echo 'bootstrap=false'
-                echo 'replay_api_after_publish=false'
-                echo 'allow_deferred_live_release=false'
-              } >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
-          fi
-          if [ "$EVENT_NAME" = 'push' ] || { [ "$EVENT_NAME" = 'workflow_run' ] && [ "$WORKFLOW_RUN_EVENT" = 'push' ]; }; then
-            cover_drain_message="${COVER_DRAIN_COMMIT_MESSAGE:-}"
-            if [ "$EVENT_NAME" = 'workflow_run' ]; then
-              cover_drain_message="${WORKFLOW_RUN_COVER_DRAIN_COMMIT_MESSAGE:-}"
-            fi
-            export COVER_DRAIN_COMMIT_MESSAGE="$cover_drain_message"
-            cover_drain_marker="$(node scripts/ci/cover-drain-commit.mjs is-cover-drain)"
-            if [ "$cover_drain_marker" = 'true' ]; then
-              echo 'cover-drain push is handled by the explicit publisher outbox dispatch; skipping automatic section publishing'
-              {
-                echo 'matrix=[]'
-                echo 'any=false'
-                echo 'dry=false'
                 echo 'replay_api_after_publish=false'
                 echo 'allow_deferred_live_release=false'
               } >> "$GITHUB_OUTPUT"

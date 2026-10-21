@@ -3132,17 +3132,25 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     /pinned_source="\$\{SOURCE_MAIN_COMMIT_INPUT:-\$SOURCE_COMMIT_INPUT\}[\s\S]*replay stantio saltato nel resolve/,
     'il resolve deve saltare un bounded replay quando main e\u0027 avanzata',
   );
+  const coverDrainGuardStart = wf.indexOf("if [ \"$EVENT_NAME\" = 'push' ] || { [ \"$EVENT_NAME\" = 'workflow_run' ] && [ \"$WORKFLOW_RUN_EVENT\" = 'push' ]; }; then");
+  const staleResolveStart = wf.indexOf('if [ "$current_main" != "$pinned_source" ]');
+  assert.ok(coverDrainGuardStart >= 0 && coverDrainGuardStart < staleResolveStart, 'il cover-drain guard deve precedere il recovery stale');
   const staleResolve = wf.slice(
-    wf.indexOf('if [ "$current_main" != "$pinned_source" ]'),
-    wf.indexOf("if [ \"$EVENT_NAME\" = 'push' ]"),
+    staleResolveStart,
+    wf.indexOf('\n          before="${PUSH_BEFORE:-}"', staleResolveStart),
   );
   assert.match(staleResolve, /FIREBASE_SERVICE_ACCOUNT_JSON assente/);
   assert.match(staleResolve, /gh workflow run fast-publish-section\.yml --repo "\$REPO" --ref main/);
   assert.match(staleResolve, /-f source_commit="\$current_main"/);
   assert.match(staleResolve, /-f dispatch_nonce="\$dispatch_nonce"/);
+  assert.match(staleResolve, /-f push_after="\$replay_after"/);
   assert.match(staleResolve, /"\$replay_after" \\\n\s+"\$\{DISPATCH_NONCE_INPUT:-\}"/);
   assert.match(staleResolve, /replay_after="\$current_main"/);
   assert.doesNotMatch(staleResolve, /replay_after="\$\{DISPATCH_PUSH_AFTER:-\}"/);
+  assert.match(staleResolve, /git fetch --no-tags --depth=1 origin[\s\S]*refs\/heads\/main:refs\/remotes\/origin\/fast-publish-current-main/);
+  assert.match(staleResolve, /git archive --format=tar "\$current_main"[\s\S]*generator\/data\/canton-sections\.json[\s\S]*scripts\/lib/);
+  assert.match(staleResolve, /tar -x -C "\$current_main_source"/);
+  assert.match(staleResolve, /replay_matrix="\$\(reconcile_edge_matrix "\$pinned_source" "\$current_main" "\$current_main_source"\)"/);
   assert.ok(
     staleResolve.indexOf('gh workflow run fast-publish-section.yml') < staleResolve.indexOf("echo 'matrix=[]'"),
     'il resolve deve redispatchare un replay stale prima di produrre una matrix vuota',
@@ -3218,6 +3226,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   const reconcileStart = wf.indexOf('          reconcile_edge_matrix() {');
   const reconcileEnd = wf.indexOf('          pinned_source=', reconcileStart);
   const reconcile = wf.slice(reconcileStart, reconcileEnd);
+  assert.match(reconcile, /local source_dir="\$\{3:-\$PWD\}"/);
+  assert.match(reconcile, /cd "\$source_dir"/);
   assert.match(reconcile, /if ! command -v timeout >\/dev\/null 2>&1/);
   assert.match(reconcile, /local deadline=\$\(\( SECONDS \+ 8 \* 60 \)\)/);
   assert.match(reconcile, /remaining=\$\(\( deadline - SECONDS \)\)/);
@@ -3227,7 +3237,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /registro edge in transizione; ritento il piano di riconciliazione tra \$\{delay\} secondi/);
   assert.match(staleResolve, /replay_before="\$\{PUSH_BEFORE:-\}"/);
   assert.doesNotMatch(staleResolve, /replay_before="\$\{DISPATCH_PUSH_BEFORE:-\}"/);
-  assert.match(wf, /replay_matrix="\$\(reconcile_edge_matrix "\$pinned_source" "\$current_main"\)"/);
+  assert.match(wf, /replay_matrix="\$\(reconcile_edge_matrix "\$pinned_source" "\$current_main" "\$current_main_source"\)"/);
   assert.match(wf, /edge_matrix="\$\(reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"\)"/);
   assert.match(wf, /replay bounded stantio: ricalcolo la release API sulla HEAD/);
   assert.match(wf, /git rev-parse --is-shallow-repository/);
