@@ -212,13 +212,13 @@ export function jaccardSimilarity(a, b) {
 // was supposed to prevent (gscOrphans.mjs's extractItTitles already used the
 // escape-aware form). A truncated title here silently weakens topic
 // dedup/similarity checks against every existing title with an apostrophe.
-const TITLE_RE = /'blog\.article\.[^.]+\.title':\s*'((?:[^'\\]|\\.)*)'/g;
+const TITLE_RE = /'blog\.article\.(.+?)\.title':\s*'((?:[^'\\]|\\.)*)'/g;
 
 export function extractItTitlesFromMeta(metaSrc) {
   if (!metaSrc) return [];
   const out = [];
   for (const m of metaSrc.matchAll(TITLE_RE)) {
-    out.push(unescapeTsValue(m[1]));
+    out.push(unescapeTsValue(m[2]));
   }
   return out;
 }

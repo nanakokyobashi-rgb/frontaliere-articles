@@ -37,7 +37,8 @@ import {
   SITE_RENDERED_ARTICLE_SECTIONS,
 } from './shared/articleSectionCore.mjs';
 import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
-import { decodeTsStringEscapes, repairLegacyDoubleEscapedBreaks } from './shared/tsStringEscapes.ts';
+import { repairLegacyDoubleEscapedBreaks } from './shared/tsStringEscapes.ts';
+import { readStaticObjectEntries } from './shared/ts-literals.mjs';
 import { findAllSeoEntryMatches } from './shared/seo-entry.mjs';
 import { createImageCreditReader, mediaRssCreditXml, renderImageCreditHtml } from './shared/imageCredits.mjs';
 import { articleSectionEntry } from './shared/articleSectionCore.mjs';
@@ -322,115 +323,24 @@ function parseBlogSlugs(fs, path, rootDir, slugFile, slugConst) {
   return new Map(Object.entries(parseArticleUrlSlugs(src, slugConst)));
 }
 
+const BLOG_BODY_KEY = /^blog\.article\.(.+)\.(body\d+)$/u;
+
 function parseLocalizedField(fs, path, rootDir, localesDir, metaFileName, field) {
   const filePath = path.join(rootDir, localesDir, metaFileName);
   if (!fs.existsSync(filePath)) return new Map();
   const src = fs.readFileSync(filePath, 'utf-8');
 
   const out = new Map(); // articleId → value
-  // Handle escaped single quotes (e.g. dell\'Italia) by matching \\' as part of the value
-  const re = new RegExp(`'blog\\.article\\.([^']+)\\.${field}':\\s*'((?:[^'\\\\]|\\\\.)*)'`, 'g');
-  let match;
-  while ((match = re.exec(src)) !== null) {
+  for (const { key, value } of readStaticObjectEntries(src, filePath, { errorLabel: 'rss' })) {
+    const match = /^blog\.article\.(.+?)\.(title|excerpt)$/u.exec(key);
+    if (!match || match[2] !== field) continue;
     // The shared helper, not a lone `\\'` replace: the writer also escapes
     // backslashes and newlines, so a partial unescape leaves literal `\\n` in
     // 16 excerpts. This is the field that WINS over article.excerpt in
     // renderFeed, so it is the primary path, not the fallback.
-    out.set(match[1], unescapeQuoted(match[2], "'"));
+    out.set(match[1], value);
   }
   return out;
-}
-
-const BODY_LITERAL_QUOTES = new Set(['"', "'", String.fromCharCode(96)]);
-const BLOG_BODY_KEY = /^blog\.article\.(.+)\.(body\d+)$/u;
-
-function skipBodyLineComment(source, startIndex) {
-  let cursor = startIndex + 2;
-  while (cursor < source.length && source[cursor] !== '\n' && source[cursor] !== '\r') cursor += 1;
-  return cursor;
-}
-
-function skipBodyTrivia(source, startIndex, sourcePath) {
-  let cursor = startIndex;
-  while (cursor < source.length) {
-    if (/\s/u.test(source[cursor])) {
-      cursor += 1;
-      continue;
-    }
-    if (source.startsWith('//', cursor)) {
-      cursor = skipBodyLineComment(source, cursor);
-      continue;
-    }
-    if (source.startsWith('/*', cursor)) {
-      const close = source.indexOf('*/', cursor + 2);
-      if (close === -1) throw new Error('[rss] Unterminated comment in ' + sourcePath);
-      cursor = close + 2;
-      continue;
-    }
-    break;
-  }
-  return cursor;
-}
-
-function readBodyStringLiteral(source, startIndex, sourcePath) {
-  const quote = source[startIndex];
-  if (!BODY_LITERAL_QUOTES.has(quote)) return null;
-
-  let cursor = startIndex + 1;
-  while (cursor < source.length) {
-    const char = source[cursor];
-    if (char === '\\') {
-      cursor += source[cursor + 1] === '\r' && source[cursor + 2] === '\n' ? 3 : 2;
-      continue;
-    }
-    if (quote === String.fromCharCode(96) && char === '$' && source[cursor + 1] === '{') {
-      throw new Error('[rss] Interpolated template literal is not supported in static article body source: ' + sourcePath);
-    }
-    if (quote !== String.fromCharCode(96) && (char === '\n' || char === '\r')) return null;
-    if (char === quote) {
-      return {
-        quote,
-        value: source.slice(startIndex + 1, cursor),
-        end: cursor + 1,
-      };
-    }
-    cursor += 1;
-  }
-  return null;
-}
-
-function decodeBodyStringLiteral(raw, quote) {
-  let value = '';
-  for (let cursor = 0; cursor < raw.length;) {
-    if (raw[cursor] !== '\\') {
-      value += raw[cursor];
-      cursor += 1;
-      continue;
-    }
-
-    const escaped = raw[cursor + 1];
-    if (escaped === undefined) {
-      value += '\\';
-      cursor += 1;
-      continue;
-    }
-    if (escaped === '\r' || escaped === '\n' || escaped === '\u2028' || escaped === '\u2029') {
-      cursor += escaped === '\r' && raw[cursor + 2] === '\n' ? 3 : 2;
-      continue;
-    }
-    if (quote === String.fromCharCode(96) && (escaped === String.fromCharCode(96) || escaped === '$')) {
-      value += escaped;
-      cursor += 2;
-      continue;
-    }
-
-    const escapeLength = escaped === 'u' && /^[0-9a-fA-F]{4}$/u.test(raw.slice(cursor + 2, cursor + 6))
-      ? 6
-      : 2;
-    value += decodeTsStringEscapes(raw.slice(cursor, cursor + escapeLength), { newlineAs: '\n' });
-    cursor += escapeLength;
-  }
-  return value;
 }
 
 /** Concatenate the per-locale body chunks of every article in a body dir. */
@@ -461,44 +371,16 @@ function parseBlogBodies(fs, path, rootDir, localesDir, bodyDir, locale, bodyFie
         articleParts.get(id).set(field, value);
       }
     } else {
-      // Standalone callers retain the engine's lexical scanner. The corpus
-      // publisher supplies bodyFieldParser so bracket keys and API parser
-      // errors share the same fail-closed path as the article body API.
-      let cursor = 0;
-      while (cursor < src.length) {
-        cursor = skipBodyTrivia(src, cursor, filePath);
-        if (cursor >= src.length) break;
-        if (!BODY_LITERAL_QUOTES.has(src[cursor])) {
-          cursor += 1;
-          continue;
-        }
-
-        const keyLiteral = readBodyStringLiteral(src, cursor, filePath);
-        if (!keyLiteral) throw new Error('[rss] Unterminated string literal in ' + filePath);
-        const afterKey = skipBodyTrivia(src, keyLiteral.end, filePath);
-        const key = decodeBodyStringLiteral(keyLiteral.value, keyLiteral.quote);
+      // The mirrored engine uses the shared fail-closed reader by default;
+      // the corpus adapter may inject the API scanner to keep both publisher
+      // paths on one parser contract.
+      const entries = readStaticObjectEntries(src, filePath, { errorLabel: 'rss' });
+      for (const { key, value } of entries) {
         const keyMatch = BLOG_BODY_KEY.exec(key);
-        if (!keyMatch || src[afterKey] !== ':') {
-          cursor = keyLiteral.end;
-          continue;
-        }
-
-        const valueStart = skipBodyTrivia(src, afterKey + 1, filePath);
-        if (!BODY_LITERAL_QUOTES.has(src[valueStart])) {
-          throw new Error('[rss] Body property ' + key + ' must have a static string literal value in ' + filePath);
-        }
-        const valueLiteral = readBodyStringLiteral(src, valueStart, filePath);
-        if (!valueLiteral) throw new Error('[rss] Unterminated body value for ' + key + ' in ' + filePath);
-        const afterValue = skipBodyTrivia(src, valueLiteral.end, filePath);
-        if (src[afterValue] !== ',' && src[afterValue] !== '}') {
-          throw new Error('[rss] Body property ' + key + ' must end with a comma or closing brace in ' + filePath);
-        }
-
-        const [, id, field] = keyMatch;
+        if (!keyMatch) continue;
+        const [, id, part] = keyMatch;
         if (!articleParts.has(id)) articleParts.set(id, new Map());
-        const decoded = decodeBodyStringLiteral(valueLiteral.value, valueLiteral.quote);
-        articleParts.get(id).set(field, repairLegacyDoubleEscapedBreaks(decoded));
-        cursor = valueLiteral.end;
+        articleParts.get(id).set(part, repairLegacyDoubleEscapedBreaks(value));
       }
     }
 

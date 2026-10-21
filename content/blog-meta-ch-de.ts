@@ -8567,6 +8567,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.cofinanziamento-tox-info-suisse.title': 'Tox Info Suisse: obligatorische Mitfinanzierung für die Industrie',
     'blog.article.cofinanziamento-tox-info-suisse.excerpt': 'Der Bundesrat will die Mitfinanzierung von Tox Info Suisse vorschreiben Betroffen sind die chemische und die pharmazeutische Industrie Vernehmlassung bis Mitte vorgesehen',
     'blog.article.cofinanziamento-tox-info-suisse.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.consiglio-poverta-prima-conferenza.title': 'Nationaler Rat für Armutsfragen: Vorstellung am 9. November',
+    'blog.article.consiglio-poverta-prima-conferenza.excerpt': 'Nationale Struktur, die 2024 vom Bundesrat genehmigt wurde Erste Pressekonferenz: 9.',
+    'blog.article.consiglio-poverta-prima-conferenza.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

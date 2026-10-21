@@ -2652,6 +2652,18 @@
       "firstSeenAt": "2026-10-21T10:56:51.441Z",
       "lastValidatedAt": "2026-10-21T10:56:51.441Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere pasticcere ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T19:02:09.412Z",
+      "lastValidatedAt": "2026-10-21T19:02:09.412Z",
+      "expiresAt": null
     }
   ],
   "strikes": [

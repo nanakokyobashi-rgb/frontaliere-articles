@@ -185,7 +185,7 @@ test('build-blog-index valida tutte le sezioni prima di scrivere qualsiasi shard
     );
     writeFileSync(
       join(root, 'content/blog-meta-it.ts'),
-      "'blog.article.one.title': 'Uno',\n'blog.article.one.excerpt': 'Estratto'\n",
+      "export const blogMetaIt = {\n'blog.article.one.title': 'Uno',\n'blog.article.one.excerpt': 'Estratto',\n};\n",
     );
 
     const out = join(root, 'out');

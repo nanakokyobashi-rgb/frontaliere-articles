@@ -39,6 +39,15 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.driessen-oncologia-herisau-2026.title': 'Driessen stärkt die Onkologie und Hämatologie in Herisau ab dem 1. Oktober 2026',
     'blog.article.driessen-oncologia-herisau-2026.excerpt': 'Ab dem 1. Oktober 2026 der Prof.',
     'blog.article.driessen-oncologia-herisau-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.appenzell-remunerazioni-energia-2027.title': 'Feuerschaukommission Appenzell legt die Vergütungen für 2027 fest',
+    'blog.article.appenzell-remunerazioni-energia-2027.excerpt': 'Die Feuerschaukommission Appenzell koppelt die eingespeiste Energie an den stündlichen Börsenpreis und sieht für Anlagen bis 150 kW eine Mindestprämie vor.',
+    'blog.article.appenzell-remunerazioni-energia-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.hundwil-imposte-preventivo.title': 'Hundwil will die Steuern im Voranschlag 2027 senken',
+    'blog.article.hundwil-imposte-preventivo.excerpt': 'Für 2027 rechnet Hundwil mit einem Überschuss von CHF 111\'200, Einnahmen von CHF 6\'421\'000 und Ausgaben von CHF 6\'309\'800 sowie einer Senkung der Steuern.',
+    'blog.article.hundwil-imposte-preventivo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.heiden-risparmi-preventivo-2027.title': 'Heiden setzt die Sparbemühungen fort: Defizit von CHF 204\'200 im Jahr 2027',
+    'blog.article.heiden-risparmi-preventivo-2027.excerpt': 'Der Voranschlag 2027 von Heiden weist Einnahmen von CHF 35,308 Millionen, Ausgaben von CHF 35,512 Millionen und ein Defizit von CHF 204\'200 aus.',
+    'blog.article.heiden-risparmi-preventivo-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

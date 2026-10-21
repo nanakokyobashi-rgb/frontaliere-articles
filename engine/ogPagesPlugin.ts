@@ -25,6 +25,7 @@ import { hasArticleBodyPromptPlaceholder } from './shared/articleBodyQuality';
 import { readImageIntrinsicSize } from './shared/imageIntrinsicSize';
 import { decodeTsStringEscapes, repairLegacyDoubleEscapedBreaks } from './shared/tsStringEscapes';
 import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
+import { readStaticObjectEntries } from './shared/ts-literals.mjs';
 import { createImageCreditReader, imageObjectCreditFields, renderImageCreditHtml } from './shared/imageCredits.mjs';
 import { computeSectionTopicAssignment } from './articleHubPagesPlugin';
 import { TOPIC_CLUSTERS, TOPIC_HUB_SEGMENT, type TopicLocale } from './topicTaxonomy';
@@ -354,6 +355,12 @@ export function parseStaticBlogBodySource(source: string, sourcePath: string): R
   const valueDelimiter = skipStaticTsTrivia(source, valueToken.end, sourcePath);
   if (source[valueDelimiter] !== ',' && source[valueDelimiter] !== '}') {
    throw new Error(`[og-pages] Article body property ${key} must have a static string literal value in ${sourcePath}`);
+  }
+  if (source[valueDelimiter] === ',') {
+   const nextToken = skipStaticTsTrivia(source, valueDelimiter + 1, sourcePath);
+   if (nextToken >= source.length) {
+    throw new Error(`[og-pages] Article body property ${key} has a dangling comma in ${sourcePath}`);
+   }
   }
   const decoded = decodeStaticTsStringLiteral(valueToken.raw, valueToken.quote);
   const field = match[2];
@@ -1049,10 +1056,6 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
 
  // Meta fields flatten line breaks to spaces; body/FAQ literals keep them for
  // Markdown and JSON structure.
- const unescapeTsString = (value: string): string =>
- decodeTsStringEscapes(value, { newlineAs: ' ' });
-
-
  const parseBlogMetaLocale = (locale: 'it' | 'en' | 'de' | 'fr') => {
  const out: Record<string, { title?: string; excerpt?: string; imageAlt?: string }> = {};
  const p = np.resolve(rootDir, `services/locales/${SECTION.metaPrefix}-${locale}.ts`);
@@ -1063,12 +1066,11 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  if (isMissingPathError(err)) return out;
  throw err;
  }
- const rx = /'blog\.article\.([^']+)\.(title|excerpt|imageAlt)'\s*:\s*'((?:[^'\\]|\\.)*)'/g;
- let m: RegExpExecArray | null;
- while ((m = rx.exec(src)) !== null) {
+ for (const { key, value } of readStaticObjectEntries(src, p, { errorLabel: 'og-meta', newlineAs: ' ' })) {
+ const m = /^blog\.article\.(.+)\.(title|excerpt|imageAlt)$/u.exec(key);
+ if (!m) continue;
  const articleId = m[1];
  const field = m[2] as 'title' | 'excerpt' | 'imageAlt';
- const value = unescapeTsString(m[3]);
  if (!out[articleId]) out[articleId] = {};
  out[articleId][field] = value;
  }

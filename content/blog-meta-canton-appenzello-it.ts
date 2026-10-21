@@ -39,6 +39,15 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.driessen-oncologia-herisau-2026.title': 'Driessen rafforza oncologia ed ematologia a Herisau dal 1° ottobre 2026',
     'blog.article.driessen-oncologia-herisau-2026.excerpt': 'Dal 1° ottobre 2026 il prof.',
     'blog.article.driessen-oncologia-herisau-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.appenzell-remunerazioni-energia-2027.title': 'Feuerschaukommission Appenzell fissa le remunerazioni 2027',
+    'blog.article.appenzell-remunerazioni-energia-2027.excerpt': 'La Feuerschaukommission di Appenzell lega l\'energia immessa al prezzo di borsa orario e prevede un premio minimo per impianti fino a 150 kW.',
+    'blog.article.appenzell-remunerazioni-energia-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.hundwil-imposte-preventivo.title': 'Hundwil vuole ridurre le imposte nel preventivo 2027',
+    'blog.article.hundwil-imposte-preventivo.excerpt': 'Hundwil prevede nel 2027 un avanzo di CHF 111\'200, con entrate per CHF 6\'421\'000 e spese per CHF 6\'309\'800, insieme alla riduzione delle imposte.',
+    'blog.article.hundwil-imposte-preventivo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.heiden-risparmi-preventivo-2027.title': 'Heiden prosegue i risparmi: deficit di CHF 204\'200 nel 2027',
+    'blog.article.heiden-risparmi-preventivo-2027.excerpt': 'Il preventivo 2027 di Heiden indica entrate per CHF 35,308 milioni, uscite per CHF 35,512 milioni e un deficit di CHF 204\'200.',
+    'blog.article.heiden-risparmi-preventivo-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

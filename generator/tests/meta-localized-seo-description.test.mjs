@@ -70,7 +70,11 @@ import {
   META_CORE_FIELDS,
   META_SEO_FIELDS,
 } from '../scripts/lib/article-meta-block.mjs';
-import { metaFieldRegex, unescapeTsValue } from '../scripts/lib/meta-field-regex.mjs';
+import {
+  metaFieldRegex,
+  metaFieldRegexFragment,
+  unescapeTsValue,
+} from '../scripts/lib/meta-field-regex.mjs';
 import { buildDailyBriefArticle } from '../scripts/lib/daily-brief-content.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -143,7 +147,7 @@ test('emettitore: le righe emesse sono rileggibili dal parser del repo', () => {
   };
   const block = buildMetaBlock(articleWith(withQuote), 'en');
   for (const field of META_SEO_FIELDS) {
-    const rx = metaFieldRegex(field);
+    const rx = metaFieldRegexFragment(field);
     const m = rx.exec(block);
     assert.ok(m, `${field}: la riga emessa non e' estraibile da metaFieldRegex('${field}')`);
     assert.equal(m[1], 'demo-articolo');
@@ -238,7 +242,7 @@ test('edizione datata: il blocco meta porta i due campi in tutte e quattro le lo
     const block = buildMetaBlock(data, locale);
     const values = {};
     for (const field of META_SEO_FIELDS) {
-      const m = metaFieldRegex(field).exec(block);
+      const m = metaFieldRegexFragment(field).exec(block);
       assert.ok(m, `${locale}: \`${field}\` non emesso per ${article.id}`);
       values[field] = unescapeTsValue(m[2]);
       const { min, max } = BUDGET[field];
@@ -247,7 +251,7 @@ test('edizione datata: il blocco meta porta i due campi in tutte e quattro le lo
         `${locale}.${field}: ${values[field].length} caratteri, fuori da ${min}-${max}`,
       );
     }
-    const excerpt = unescapeTsValue(metaFieldRegex('excerpt').exec(block)[2]);
+    const excerpt = unescapeTsValue(metaFieldRegexFragment('excerpt').exec(block)[2]);
     assert.notEqual(values.seoDescription, excerpt, `${locale}: la SERP e' di nuovo l'excerpt`);
     assert.ok(
       excerpt.length > values.seoDescription.length,

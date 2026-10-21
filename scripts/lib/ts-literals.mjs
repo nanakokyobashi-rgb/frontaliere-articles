@@ -30,7 +30,50 @@
  */
 
 /** `apertura → chiusura`, per `matchingDelimiter`. */
+import {
+  decodeStaticStringLiteral as decodeStaticStringLiteralShared,
+  readStaticObjectEntries as readStaticObjectEntriesShared,
+  readStaticStringLiteral as readStaticStringLiteralShared,
+  skipStaticTrivia as skipStaticTriviaShared,
+} from '../../engine/shared/ts-literals.mjs';
+
 const CLOSING = { '{': '}', '[': ']', '(': ')' };
+
+/**
+ * Read one JavaScript/TypeScript string literal without searching through raw
+ * source text.  A template interpolation is deliberately rejected: these
+ * readers publish data from source files and must never publish a partial
+ * value obtained by stopping at the first quote they happen to see.
+ *
+ * @param {string} source
+ * @param {number} startIdx
+ * @param {string} sourcePath
+ * @param {string} errorLabel
+ * @returns {{ quote: '"' | "'" | '`', value: string, end: number } | null}
+ */
+export function readStaticStringLiteral(source, startIdx, sourcePath = 'source', errorLabel = 'static-literal') {
+  return readStaticStringLiteralShared(source, startIdx, sourcePath, errorLabel);
+}
+
+/** Decode a static literal using the same escape contract as the TS readers. */
+export function decodeStaticStringLiteral(raw, quote = "'") {
+  return decodeStaticStringLiteralShared(raw, quote);
+}
+
+/** Skip whitespace and comments before the next static object token. */
+export function skipStaticTrivia(source, startIdx, sourcePath = 'source', errorLabel = 'static-literal') {
+  return skipStaticTriviaShared(source, startIdx, sourcePath, errorLabel);
+}
+
+/**
+ * Read object properties whose keys and values are static string literals.
+ * The scanner starts at every code token, so a key-looking phrase in a
+ * comment, prose string, or an unterminated value cannot become an entry.
+ * Every literal property is also required to end at a real object delimiter.
+ */
+export function readStaticObjectEntries(source, sourcePath = 'source', options = {}) {
+  return readStaticObjectEntriesShared(source, sourcePath, options);
+}
 
 const escapeRegex = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
