@@ -475,6 +475,20 @@ test('il gate fallisce chiuso sulle chiavi body computed e riporta l’espressio
     "const body = { [bodyKey]: '[x](bare-target)' };\n",
     "const body = { [`blog.article.${id}.${field}`]: '[x](bare-target)' };\n",
     "const body = { [/(?:\\])/.source]: '[x](bare-target)' };\n",
+    "const body = { [value.return / /]/]: '[x](bare-target)' };\n",
+    "const body = { [(() => { if (enabled) {} /foo\\]/.test(value); return 'id'; })()]: '[x](bare-target)' };\n",
+    "const body = { [(() => { {} /foo\\]/.test(value); return 'id'; })()]: '[x](bare-target)' };\n",
+    "const body = { [(() => { function check() {} /foo\\]/.test(value); return 'id'; })()]: '[x](bare-target)' };\n",
+    "const body = { [(() => { class Check {} /foo\\]/.test(value); return 'id'; })()]: '[x](bare-target)' };\n",
+    "const body = { [function check() {} / /foo\\]/.test(value)]: '[x](bare-target)' };\n",
+    "const body = { [class Check {} / /foo\\]/.test(value)]: '[x](bare-target)' };\n",
+    "const body = { [(() => { async function checkAsync() {} /foo\\]/.test(value); return 'id'; })()]: '[x](bare-target)' };\n",
+    "const body = { [(() => { function check(): (x: unknown) => unknown { return x => x; } /foo\\]/.test(value); return 'id'; })()]: '[x](bare-target)' };\n",
+    "const body = { [(() => { function typed(): { value: { nested: unknown } } | null { {} /foo\\]/.test(value); return null; } return 'id'; })()]: '[x](bare-target)' };\n",
+    "const body = { [(() => { class Check<T extends { value: unknown }> {} /foo\\]/.test(value); return 'id'; })()]: '[x](bare-target)' };\n",
+    "const body = { [(() => { class Check extends mixin({}) {} /foo\\]/.test(value); return 'id'; })()]: '[x](bare-target)' };\n",
+    "const body = { [(() => { class Outer extends mixin(class Inner {}) {} /foo\\]/.test(value); return 'id'; })()]: '[x](bare-target)' };\n",
+    "const body = { [(() => { async () => { function nested() {} /foo\\]/.test(value); }; return 'id'; })()]: '[x](bare-target)' };\n",
   ];
   try {
     for (const [index, source] of sources.entries()) {
@@ -488,8 +502,84 @@ test('il gate fallisce chiuso sulle chiavi body computed e riporta l’espressio
         'bodyKey',
         'blog.article.${id}.${field}',
         '/(?:\\])/.source',
+        'value.return / /]',
+        "if (enabled) {} /foo\\]/.test(value)",
+        "{} /foo\\]/.test(value)",
+        "function check() {} /foo\\]/.test(value)",
+        "class Check {} /foo\\]/.test(value)",
+        "function check() {} / /foo\\]/.test(value)",
+        "class Check {} / /foo\\]/.test(value)",
+        "async function checkAsync() {} /foo\\]/.test(value)",
+        "function check(): (x: unknown) => unknown { return x => x; } /foo\\]/.test(value)",
+        "function typed(): { value: { nested: unknown } } | null { {} /foo\\]/.test(value); return null; }",
+        "class Check<T extends { value: unknown }> {} /foo\\]/.test(value)",
+        "class Check extends mixin({}) {} /foo\\]/.test(value)",
+        "class Outer extends mixin(class Inner {}) {} /foo\\]/.test(value)",
+        "async () => { function nested() {} /foo\\]/.test(value); }",
       ][index]));
     }
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('il gate continua a controllare i body dopo regex di controllo e divisione con non-null assertion', () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'article-body-link-regex-context-'));
+  const relative = `${BLOG_BODY_ROOTS[0]}/it/dynamic-regex-context.ts`;
+  const file = path.join(fixtureRoot, relative);
+  mkdirSync(path.dirname(file), { recursive: true });
+  writeFileSync(file, [
+    'const helper = `prefix ${(() => { if (enabled) {} /}/.test(value); {} /}/.test(value); function check() {} /}/.test(value); async function checkAsync() {} /}/.test(value); class Check {} /}/.test(value); function typed(): (x: unknown) => unknown { return x => x; } /}/.test(value); return [function expression() {} / /}/.test(value), class Expression {} / /}/.test(value), value! / divisor]; })()}`;',
+    "const body = { 'blog.article.fixture.body1': '[x](bare-target)' };",
+    '',
+  ].join('\n'), 'utf8');
+  try {
+    const result = scanBlogBodyLinks(fixtureRoot);
+    assert.equal(result.errors.length, 0);
+    assert.equal(result.offenders.length, 1);
+    assert.match(result.offenders[0].markdown, /bare-target/u);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('il gate conserva il confine delle template expression con tipi TypeScript strutturali', () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'article-body-link-typescript-context-'));
+  const relative = `${BLOG_BODY_ROOTS[0]}/it/dynamic-typescript-context.ts`;
+  const file = path.join(fixtureRoot, relative);
+  mkdirSync(path.dirname(file), { recursive: true });
+  writeFileSync(file, [
+    'const helper = `prefix ${(() => {',
+    'function typed(): { value: { nested: unknown } } | null { {} /}/.test(value); return null; }',
+    'class Constrained<T extends { value: unknown }> {} /}/.test(value);',
+    'class Heritage extends mixin({}) {} /}/.test(value);',
+    'async () => { function nested() {} /}/.test(value); };',
+    'return true;',
+    '})()}`;',
+    "const body = { 'blog.article.fixture.body1': '[x](bare-target)' };",
+    '',
+  ].join('\n'), 'utf8');
+  try {
+    const result = scanBlogBodyLinks(fixtureRoot);
+    assert.equal(result.errors.length, 0);
+    assert.equal(result.offenders.length, 1);
+    assert.match(result.offenders[0].markdown, /bare-target/u);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('il gate non tronca una template expression su una graffa dentro una regex', () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'article-body-link-regex-template-'));
+  const relative = `${BLOG_BODY_ROOTS[0]}/it/dynamic-regex-template.ts`;
+  const file = path.join(fixtureRoot, relative);
+  mkdirSync(path.dirname(file), { recursive: true });
+  writeFileSync(file, "const body = { 'blog.article.fixture.body1': `prefix ${/}/.test(value) ? `[fake](/bare-target)` : ''} suffix` };\n", 'utf8');
+  try {
+    const result = scanBlogBodyLinks(fixtureRoot);
+    assert.deepEqual(result.offenders, []);
+    assert.equal(result.errors.length, 1);
+    assert.match(result.errors[0].message, /template TypeScript dinamico non verificabile/u);
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }

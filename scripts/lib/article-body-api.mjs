@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { repairLegacyDoubleEscapedBreaks, tsStringEscapesWithNewlineAs } from '../../generator/scripts/lib/unescape-ts-string.mjs';
+import { skipTemplateExpression } from './typescript-expression-scanner.mjs';
 
 export const ARTICLE_BODY_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 export const MAX_ARTICLE_BODY_FIELDS = 20;

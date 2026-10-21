@@ -234,6 +234,57 @@ test('interpolated templates fail the whole source before or after static body f
   }
 });
 
+test('a brace inside a regex does not truncate a dynamic template literal', () => {
+  const source = [
+    'const body = {',
+    "  'blog.article.example-article.body1': `prefix ${/}/.test(value) ? `blog.article.fake.body2: 'leaked'` : ''} suffix`,",
+    "  'blog.article.example-article.body2': 'Second body',",
+    '};',
+  ].join('\n');
+
+  assert.deepEqual(
+    extractArticleBodyFields(source).map(({ id, field, value, error }) => ({ id, field, value, error })),
+    [
+      { id: 'example-article', field: 'body1', value: null, error: 'dynamic-template' },
+      { id: 'example-article', field: 'body2', value: 'Second body', error: null },
+    ],
+  );
+});
+
+test('regexes after control conditions and division after a non-null assertion preserve later fields', () => {
+  const source = [
+    'const helper = `prefix ${(() => { if (enabled) {} /}/.test(value); {} /}/.test(value); function check() {} /}/.test(value); async function checkAsync() {} /}/.test(value); class Check {} /}/.test(value); function typed(): (x: unknown) => unknown { return x => x; } /}/.test(value); return [function expression() {} / /}/.test(value), class Expression {} / /}/.test(value), value! / divisor]; })()}`;',
+    'const body = {',
+    "  'blog.article.example-article.body1': 'Body remains visible',",
+    '};',
+  ].join('\n');
+
+  assert.deepEqual(
+    extractArticleBodyFields(source).map(({ id, field, value, error }) => ({ id, field, value, error })),
+    [{ id: 'example-article', field: 'body1', value: 'Body remains visible', error: null }],
+  );
+});
+
+test('TypeScript type braces and async arrows preserve template expression boundaries', () => {
+  const source = [
+    'const helper = `prefix ${(() => {',
+    'function typed(): { value: { nested: unknown } } | null { {} /}/.test(value); return null; }',
+    'class Constrained<T extends { value: unknown }> {} /}/.test(value);',
+    'class Heritage extends mixin({}) {} /}/.test(value);',
+    'async () => { function nested() {} /}/.test(value); };',
+    'return true;',
+    '})()}`;',
+    'const body = {',
+    "  'blog.article.example-article.body1': 'Body remains visible',",
+    '};',
+  ].join('\n');
+
+  assert.deepEqual(
+    extractArticleBodyFields(source).map(({ id, field, value, error }) => ({ id, field, value, error })),
+    [{ id: 'example-article', field: 'body1', value: 'Body remains visible', error: null }],
+  );
+});
+
 test('payload revisions cover identity, localized metadata, and translations', () => {
   const payload = buildArticleBodyPayload({
     section: 'frontaliere',
