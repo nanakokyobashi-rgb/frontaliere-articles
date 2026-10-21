@@ -11061,14 +11061,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.varesenews.it/2026/10/mobilita-elettrica-la-lombardia-investe-150-milioni-tra-auto-green-e-colonnine/2712505": {
-      "section": "frontaliere",
-      "ts": 1792420234094
-    },
-    "frontaliere::https://www.tio.ch/ticino/politica/1957677/quali-mendrisio-aziende-municipio-imprese": {
-      "section": "frontaliere",
-      "ts": 1792420407423
-    },
     "frontaliere::https://www.vconews.it/2026/10/19/leggi-notizia/argomenti/politica-28/articolo/sanita-avs-e-pd-allattacco-sul-nuovo-cup-progetto-bloccato-dai-ricorsi-lia-resta-sulla-ca-2.html": {
       "section": "frontaliere",
       "ts": 1792424935533
@@ -11192,6 +11184,10 @@
     "frontaliere::https://www.varesenews.it/2026/10/presidio-dei-lavoratori-beko-a-varese-per-il-futuro-del-sito-di-cassinetta/2714413": {
       "section": "frontaliere",
       "ts": 1792593017387
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/maxi-operazione-della-guardia-di-finanza-tra-italia-svizzera-e-spagna-30-indagati-sequestri-per-oltre-21-milioni/2714272": {
+      "section": "frontaliere",
+      "ts": 1792596109509
     }
   }
 }
