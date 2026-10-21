@@ -21,6 +21,7 @@ import {
 } from '../lib/corpus-sections.mjs';
 import { decodeTypeScriptString } from '../../generator/scripts/lib/article-meta-block.mjs';
 import {
+  isTypeScriptObjectLiteralMemberStart,
   unsupportedObjectMemberAt,
   skipTypeScriptQuotedToken as skipQuotedToken,
 } from '../lib/typescript-expression-scanner.mjs';
@@ -142,7 +143,6 @@ function skipTriviaAndComments(source, start) {
 function extractArticleBodyValues(source) {
   const values = [];
   let cursor = 0;
-  let previousToken = '';
   while (cursor < source.length) {
     const char = source[cursor];
     const next = source[cursor + 1];
@@ -173,7 +173,7 @@ function extractArticleBodyValues(source) {
     if (char === "'" || char === '"' || char === TEMPLATE_QUOTE) {
       const tokenStart = cursor;
       const tokenEnd = skipQuotedToken(source, tokenStart);
-      if (previousToken === '{' || previousToken === ',') {
+      if (isTypeScriptObjectLiteralMemberStart(source, tokenStart)) {
         const keyLiteral = readQuotedValue(source, tokenStart, char);
         const dynamicKeyExpression = source.slice(tokenStart, tokenEnd);
         if (
@@ -187,7 +187,10 @@ function extractArticleBodyValues(source) {
           const propertyKey = decodeBodyValue(keyLiteral.raw, char);
           const keyMatch = /^blog\.article\.(.+)\.(body\d+|faq)$/.exec(propertyKey);
           const afterKey = skipTriviaAndComments(source, tokenEnd);
-          if (keyMatch && source[afterKey] === ':') {
+          if (keyMatch && source[afterKey] !== ':') {
+            throw new Error('proprietà blog.article non letterale non verificabile: ' + propertyKey);
+          }
+          if (keyMatch) {
             const valueStart = skipTriviaAndComments(source, afterKey + 1);
             const valueQuote = source[valueStart];
             if (!["'", '"', TEMPLATE_QUOTE].includes(valueQuote)) {
@@ -214,16 +217,13 @@ function extractArticleBodyValues(source) {
               index: tokenStart,
             });
             cursor = literal.end;
-            previousToken = 'string';
             continue;
           }
         }
       }
       cursor = tokenEnd;
-      previousToken = 'string';
       continue;
     }
-    previousToken = char;
     cursor += 1;
   }
   return values;
