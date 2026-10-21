@@ -2364,6 +2364,54 @@
       "firstSeenAt": "2026-10-21T00:36:37.234Z",
       "lastValidatedAt": "2026-10-21T00:36:37.234Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere saldatore ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T01:13:39.781Z",
+      "lastValidatedAt": "2026-10-21T01:13:39.781Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere contabile ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T01:16:01.469Z",
+      "lastValidatedAt": "2026-10-21T01:16:01.469Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere segretaria ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T01:16:01.659Z",
+      "lastValidatedAt": "2026-10-21T01:16:01.659Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere risorse umane ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T01:16:01.851Z",
+      "lastValidatedAt": "2026-10-21T01:16:01.851Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
