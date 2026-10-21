@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/297505/betr%c3%bcger-erbeuten-im-kanton-freiburg-fast-800000-franken": {
-      "section": "canton-fr",
-      "ts": 1792388895505
-    },
     "canton-fr::https://www.freiburger-nachrichten.ch/story/297644/filmfestivals-als-wirtschaftsmotoren": {
       "section": "canton-fr",
       "ts": 1792406258921
@@ -99,6 +95,10 @@
     "canton-fr::https://www.lagruyere.ch/articles/canton/ensemble-plus-ou-moins-1467219": {
       "section": "canton-fr",
       "ts": 1792547916617
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/298676/bessere-arbeitsbedingungen-in-der-pflege-k%c3%b6nnten-sich-auch-finanziell-lohnen": {
+      "section": "canton-fr",
+      "ts": 1792566433986
     }
   }
 }
