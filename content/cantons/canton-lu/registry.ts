@@ -138,4 +138,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lucerna-tassi-fiscali-zero-2027',
+ category: 'fiscale',
+ date: '2026-10-21T13:53:04.510Z',
+ image: '/images/blog/article-lucerna-tassi-fiscali-zero-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

@@ -475,6 +475,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lucerna-tassi-fiscali-zero-2027': {
+    title: 'Lucerna: interessi fiscali 2027 restano allo 0%',
+    description: 'A Lucerna i tassi fiscali 2027 restano allo 0,00%, la mora al 4,00%; 125 posti a Seetalplatz e multe per littering più alte dal 1° agosto 2026.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lucerna, interessi, fiscali, restano',
+    ogTitle: 'Lucerna 2027: tassi fiscali invariati',
+    ogDescription: 'Il Governo cantonale di Lucerna conferma per il 2027 lo 0,00% sui tassi di compensazione delle imposte cantonali e comunali. La mora resta al 4,00%; a Seetalplatz sono previsti 125 parcheggi e dal 1° agosto 2026 le multe per littering aumentano.',
+    canonicalPath: '/articoli-lucerna/lucerna-tassi-fiscali-zero-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lucerna: interessi fiscali 2027 restano allo 0%",
+      "description": "A Lucerna i tassi fiscali 2027 restano allo 0,00%, la mora al 4,00%; 125 posti a Seetalplatz e multe per littering più alte dal 1° agosto 2026.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lucerna-tassi-fiscali-zero-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T13:53:04+00:00",
+      "dateModified": "2026-10-21T13:53:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/lucerna-tassi-fiscali-zero-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
