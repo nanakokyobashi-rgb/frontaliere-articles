@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-molestie-lavoro-pmi-svizzere.webp",
+      "sha256": "af60c0e40951d02c531e69a6ff48f07069c6a642da46ebba74ca6ba33b0e3b9c"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-molestie-lavoro-pmi-svizzere-480w.webp",
+      "sha256": "177feb5a0f0066fa8cf8db66a6816ef3a2bda1c82f747dc2e493b54635f3790c"
+    }
+  ]
 }
