@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-10-21T14:03:21.791Z",
-  "contentHash": "e206fc7aa9d0a817dbb796d5fee5f88372fae1094643fef565230bb8741d20ec",
+  "updatedAt": "2026-10-21T21:02:11.427Z",
+  "contentHash": "53670da8945b942d0b76b5d3502e7250dc6807af4860e97942ec43f13a3d0a75",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-21T05:23:11.896Z",
+      "updatedAt": "2026-10-21T12:30:01.132Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T20:55:38.574Z",
+      "updatedAt": "2026-10-21T10:37:42.748Z",
       "keyFacts": 0
     }
   ],
@@ -148,7 +148,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -181,7 +181,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -196,6 +196,12 @@
           "url": "/articoli-vaud/morges-mobilita-consultazione-2045/",
           "excerpt": "Morges interviene nella consultazione federale «Transports ’45»",
           "date": "2026-10-08T11:29:50.102Z"
+        },
+        {
+          "title": "Lausanne Marathon 2026: chiusure strade cantonali e vie cittadine il 25 ottobre",
+          "url": "/articoli-vaud/lausanne-marathon-2026-chiusure-strade/",
+          "excerpt": "Domenica 25 ottobre 2026 si corre il Lausanne Marathon Strade cantonali interessate: 777-B-P e 780-B-P Chiusure totali o parziali circa dalle 07:30 alle 17:30",
+          "date": "2026-10-21T20:50:06.586Z"
         },
         {
           "title": "Traffico Yverdon-Losanna: treni di nuovo regolari",
@@ -226,12 +232,6 @@
           "url": "/articoli-svizzera/migros-ecublens-57-posti/",
           "excerpt": "Migros valuta la chiusura della Centrale Traiteur A rischio 57 impieghi a Écublens La consultazione con il personale è in corso Nessuna decisione finale è stata",
           "date": "2026-10-13T21:00:56.385Z"
-        },
-        {
-          "title": "Sistema scolastico Canton Vaud: iscrizioni e cicli",
-          "url": "/articoli-svizzera/scuola-canton-vaud-iscrizioni-cicli/",
-          "excerpt": "Guida completa alla scuola dell'obbligo nel Canton Vaud: cicli di studio, età di iscrizione, lingue e passaggio alle medie superiori.",
-          "date": "2026-09-19T04:14:39.399Z"
         }
       ],
       "latestCantonArticles": [],
@@ -265,7 +265,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-21T14:03:21.791Z"
+      "updatedAt": "2026-10-21T21:02:11.427Z"
     },
     "en": {
       "canton": "VD",
@@ -391,7 +391,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -424,7 +424,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -438,6 +438,12 @@
           "title": "Morges: mobility requirements for 2045",
           "url": "/en/vaud-articles/morges-mobility-consultation-2045/",
           "date": "2026-10-08T11:29:50.102Z"
+        },
+        {
+          "title": "Lausanne Marathon 2026: road and street closures Oct 25",
+          "url": "/en/vaud-articles/lausanne-marathon-2026-road-closures/",
+          "excerpt": "On Sunday, October 25, 2026, the Lausanne Marathon will be held Affected cantonal roads: 777-B-P and 780-B-P Full or partial closures from approximately 07:30",
+          "date": "2026-10-21T20:50:06.586Z"
         },
         {
           "title": "Yverdon-Lausanne traffic: trains running regularly again",
@@ -468,12 +474,6 @@
           "url": "/en/swiss-articles/migros-ecublens-57-jobs/",
           "excerpt": "Migros assesses the closure of the Traiteur At-Risk Plant 57 jobs in Écublens Consultation with staff is ongoing No final decision has been",
           "date": "2026-10-13T21:00:56.385Z"
-        },
-        {
-          "title": "Canton Vaud school system: enrolments and cycles",
-          "url": "/en/swiss-articles/vaud-school-system-enrollment-cycles/",
-          "excerpt": "Complete guide to compulsory education in the Canton of Vaud: study cycles, age of enrollment, languages and transition to high school.",
-          "date": "2026-09-19T04:14:39.399Z"
         }
       ],
       "latestCantonArticles": [],
@@ -507,7 +507,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-21T14:03:21.791Z"
+      "updatedAt": "2026-10-21T21:02:11.427Z"
     },
     "de": {
       "canton": "VD",
@@ -633,7 +633,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -666,7 +666,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -680,6 +680,12 @@
           "title": "Morges: Forderungen zur Mobilität für 2045",
           "url": "/de/waadt-artikel/morges-mobilitat-konsultation-2045/",
           "date": "2026-10-08T11:29:50.102Z"
+        },
+        {
+          "title": "Lausanne Marathon 2026: Strassensperren am 25. Oktober",
+          "url": "/de/waadt-artikel/lausanne-marathon-2026-strassensperrungen/",
+          "excerpt": "Am Sonntag, dem 25.",
+          "date": "2026-10-21T20:50:06.586Z"
         },
         {
           "title": "Zugverkehr Yverdon-Lausanne: Züge wieder regulär",
@@ -710,12 +716,6 @@
           "url": "/de/schweiz-artikel/migros-ecublens-57-stellen/",
           "excerpt": "Migros prüft Schließung der Zentrale Traiteur A Risk 57 Stellen in Écublens Konsultation des Personals läuft Keine abschließende Entscheidung getroffen",
           "date": "2026-10-13T21:00:56.385Z"
-        },
-        {
-          "title": "Schulsystem Kanton Waadt: Einschreibungen und Zyklen",
-          "url": "/de/schweiz-artikel/schulsystem-kanton-waadt-anmeldung/",
-          "excerpt": "Vollständiger Leitfaden zur obligatorischen Schule im Kanton Waadt: Studiengänge, Einschreibungsalter, Sprachen und Übergang in die Sekundarstufe II",
-          "date": "2026-09-19T04:14:39.399Z"
         }
       ],
       "latestCantonArticles": [],
@@ -749,7 +749,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-21T14:03:21.791Z"
+      "updatedAt": "2026-10-21T21:02:11.427Z"
     },
     "fr": {
       "canton": "VD",
@@ -875,7 +875,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-21T12:30:01.132Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -908,7 +908,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -923,6 +923,12 @@
           "url": "/fr/articles-vaud/morges-mobilite-consultation-2045/",
           "excerpt": "Morges intervient dans la consultation fédérale « Transports ’45 »",
           "date": "2026-10-08T11:29:50.102Z"
+        },
+        {
+          "title": "Lausanne Marathon 2026 : routes fermées le 25 octobre",
+          "url": "/fr/articles-vaud/marathon-lausanne-2026-fermetures-routes/",
+          "excerpt": "Dimanche 25 octobre 2026 a lieu le Lausanne Marathon Routes cantonales concernées : 777-B-P et 780-B-P Fermetures totales ou partielles approximativement",
+          "date": "2026-10-21T20:50:06.586Z"
         },
         {
           "title": "Trafic Yverdon-Lausanne : trains à nouveau réguliers",
@@ -953,12 +959,6 @@
           "url": "/fr/articles-suisse/migros-ecublens-57-emplois/",
           "excerpt": "Migros évalue la fermeture de la Centrale Traiteur À risque 57 emplois à Écublens La consultation avec le personnel est en cours Aucune décision finale n'a été",
           "date": "2026-10-13T21:00:56.385Z"
-        },
-        {
-          "title": "Système scolaire canton de Vaud : inscriptions et cycles",
-          "url": "/fr/articles-suisse/systeme-scolaire-canton-vaud-inscription/",
-          "excerpt": "Guide complet de l'école obligatoire dans le canton de Vaud : filières d'études, âge d'inscription, langues et passage au lycée.",
-          "date": "2026-09-19T04:14:39.399Z"
         }
       ],
       "latestCantonArticles": [],
@@ -992,7 +992,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-21T14:03:21.791Z"
+      "updatedAt": "2026-10-21T21:02:11.427Z"
     }
   }
 }

@@ -139,6 +139,10 @@ on:
       # build-api.mjs exports the verified article-body JSON API through this
       # helper; changing its schema or revision logic must republish it.
       - 'scripts/lib/article-body-api.mjs'
+      # The shared TypeScript scanner bounds expressions in article-body
+      # extraction; changing it can change the published API payload.
+      - 'scripts/lib/typescript-expression-scanner.mjs'
+      - 'scripts/lib/rss-feed-body-adapter.mjs'
       # build-blog-index.mjs also emits the cover credits
       # (data/image-credits-<section>.json and data/image-credits-blog.json)
       # through this module; the records
@@ -431,13 +435,17 @@ jobs:
               engine/shared/articleSectionCore.mjs
               engine/shared/cantonArticleSectionCore.generated.mjs
               engine/shared/normalizeArticleMarkdown.ts
+              engine/shared/ts-literals.mjs
               generator/data/canton-url-slugs.json
               generator/data/canton-sections.json
               generator/scripts/lib/corpus-paths.mjs
               host/cantonSectionsBootstrap.mjs
               scripts/ci/check-blog-body-links.mjs
               scripts/lib/article-link-contract.mjs
+              scripts/lib/typescript-expression-scanner.mjs
+              scripts/lib/rss-feed-body-adapter.mjs
               scripts/lib/corpus-sections.mjs
+              scripts/lib/ts-literals.mjs
               generator/scripts/lib/article-meta-block.mjs
               generator/scripts/lib/article-excerpt.mjs
             )

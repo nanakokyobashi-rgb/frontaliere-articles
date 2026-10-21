@@ -39,6 +39,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.schleitheim-scooter-incidente-2026.title': 'Scooter accident in Schleitheim: woman injured, Hohbrugg closed',
     'blog.article.schleitheim-scooter-incidente-2026.excerpt': 'Sunday, October 18, 2026, a 61-year-old woman falls from her scooter on Hohbrugg: thrown 12 meters down the slope, helicopter transport to hospital, road closed for over an hour.',
     'blog.article.schleitheim-scooter-incidente-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.parcheggi-cascate-reno.title': 'Schaffhausen and Zurich install the parking system on the Rhine',
+    'blog.article.parcheggi-cascate-reno.excerpt': 'New system between Schaffhausen and Zurich for available parking spaces at the Rhine Falls; launch in summer 2027, cost approximately CHF 400\'000.',
+    'blog.article.parcheggi-cascate-reno.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

@@ -36,6 +36,9 @@ const blogMetaCantonZgIt: Record<string, string> = {
     'blog.article.zugo-assegnazione-mandato-2030.title': 'Zugo: assegnate le direzioni per il periodo 2027-2030',
     'blog.article.zugo-assegnazione-mandato-2030.excerpt': 'Il Consiglio di Stato di Zugo ha assegnato le direzioni per il periodo 2027-2030 e regolato le supplenze dal 1° gennaio 2027.',
     'blog.article.zugo-assegnazione-mandato-2030.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.zugo-agenda-consiglio-29-ottobre.title': 'Zugo rende disponibile l\'agenda del Consiglio cantonale',
+    'blog.article.zugo-agenda-consiglio-29-ottobre.excerpt': 'L\'ordine del giorno della seduta del Consiglio cantonale di Zugo del 29 ottobre 2026 è disponibile, ma il testo non elenca le trattande.',
+    'blog.article.zugo-agenda-consiglio-29-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZgIt;

@@ -138,4 +138,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'parcheggi-cascate-reno',
+ category: 'novita',
+ date: '2026-10-21T20:45:07.801Z',
+ image: '/images/blog/article-parcheggi-cascate-reno.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH', 'ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

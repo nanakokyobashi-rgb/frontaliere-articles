@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T18:26:36.351Z",
-  "contentHash": "9cb9601bc2e24c1b225cf0f7260c158c8205dda893864512ea2150f36ae32f84",
+  "updatedAt": "2026-10-21T19:37:12.484Z",
+  "contentHash": "8f36a2fef8cf60d91ed42b24ff3b2335534b669719ee6b610573fad3410eb64d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Heiden prosegue i risparmi: deficit di CHF 204'200 nel 2027",
+          "url": "/articoli-appenzello/heiden-risparmi-preventivo-2027/",
+          "excerpt": "Il preventivo 2027 di Heiden indica entrate per CHF 35,308 milioni, uscite per CHF 35,512 milioni e un deficit di CHF 204'200.",
+          "date": "2026-10-21T19:28:07.751Z"
+        },
+        {
+          "title": "Hundwil vuole ridurre le imposte nel preventivo 2027",
+          "url": "/articoli-appenzello/hundwil-imposte-preventivo/",
+          "excerpt": "Hundwil prevede nel 2027 un avanzo di CHF 111'200, con entrate per CHF 6'421'000 e spese per CHF 6'309'800, insieme alla riduzione delle imposte.",
+          "date": "2026-10-21T19:06:08.539Z"
+        },
+        {
           "title": "Feuerschaukommission Appenzell fissa le remunerazioni 2027",
           "url": "/articoli-appenzello/appenzell-remunerazioni-energia-2027/",
           "excerpt": "La Feuerschaukommission di Appenzell lega l'energia immessa al prezzo di borsa orario e prevede un premio minimo per impianti fino a 150 kW.",
@@ -88,18 +100,6 @@
           "url": "/articoli-appenzello/proporz-gran-consiglio-appenzello/",
           "excerpt": "Il 19 ottobre il Gran Consiglio innerrhodese ha avuto un'agenda lunga; la revisione totale della legge sugli esercizi pubblici ha richiesto discussioni.",
           "date": "2026-10-19T18:26:19.436Z"
-        },
-        {
-          "title": "Appenzell: Walzthöny non è più direttrice dell'Oberstufe",
-          "url": "/articoli-appenzello/cambio-dirigenza-scuola-appenzell/",
-          "excerpt": "Isabella Walzthöny iniziò il 1° febbraio 2023 alla Schulgemeinde Appenzell, dopo la designazione come successora di Thomas Mainberger.",
-          "date": "2026-10-19T16:21:04.781Z"
-        },
-        {
-          "title": "Teufen: preventivo 2027 per ridurre il deficit operativo",
-          "url": "/articoli-appenzello/teufen-budget-deficit-2027/",
-          "excerpt": "Il Comune di Teufen prevede per il 2027 entrate fiscali di 38,9 milioni di franchi, in aumento del 2,2% rispetto al preventivo precedente.",
-          "date": "2026-10-19T15:18:22.893Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T18:26:36.351Z"
+      "updatedAt": "2026-10-21T19:37:12.484Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -171,6 +171,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Heiden continues its savings measures: deficit of CHF 204'200 in 2027",
+          "url": "/en/appenzell-articles/heiden-savings-budget-2027/",
+          "excerpt": "Heiden's 2027 budget projects revenues of CHF 35,308 million, expenditures of CHF 35,512 million, and a deficit of CHF 204'200.",
+          "date": "2026-10-21T19:28:07.751Z"
+        },
+        {
+          "title": "Hundwil wants to reduce taxes in the 2027 budget",
+          "url": "/en/appenzell-articles/hundwil-tax-budget/",
+          "excerpt": "Hundwil expects a surplus of CHF 111'200 in 2027, with revenue of CHF 6'421'000 and expenses of CHF 6'309'800, along with a reduction in taxes.",
+          "date": "2026-10-21T19:06:08.539Z"
+        },
+        {
           "title": "Feuerschaukommission Appenzell sets remuneration for 2027",
           "url": "/en/appenzell-articles/appenzell-energy-remuneration-2027/",
           "excerpt": "The Feuerschaukommission of Appenzell links the energy fed into the grid to the hourly exchange price and provides for a minimum premium for installations of up to 150 kW.",
@@ -187,18 +199,6 @@
           "url": "/en/appenzell-articles/proporz-appenzell-grand-council/",
           "excerpt": "On October 19, the Innerrhoden Grand Council had a lengthy agenda; the complete revision of the law on public establishments required discussion.",
           "date": "2026-10-19T18:26:19.436Z"
-        },
-        {
-          "title": "Appenzell: Walzthöny is no longer head of the Oberstufe",
-          "url": "/en/appenzell-articles/appenzell-school-leadership-change/",
-          "excerpt": "Isabella Walzthöny began at Schulgemeinde Appenzell on February 1, 2023, after being appointed as Thomas Mainberger’s successor.",
-          "date": "2026-10-19T16:21:04.781Z"
-        },
-        {
-          "title": "Teufen: 2027 budget proposal to reduce the operating deficit",
-          "url": "/en/appenzell-articles/teufen-2027-budget-deficit/",
-          "excerpt": "The Municipality of Teufen expects tax revenues of 38,9 million francs in 2027, an increase of 2,2% compared with the previous budget.",
-          "date": "2026-10-19T15:18:22.893Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T18:26:36.351Z"
+      "updatedAt": "2026-10-21T19:37:12.484Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -270,6 +270,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Heiden setzt die Sparbemühungen fort: Defizit von CHF 204'200 im Jahr 2027",
+          "url": "/de/appenzell-artikel/heiden-sparbemuehungen-budget-2027/",
+          "excerpt": "Der Voranschlag 2027 von Heiden weist Einnahmen von CHF 35,308 Millionen, Ausgaben von CHF 35,512 Millionen und ein Defizit von CHF 204'200 aus.",
+          "date": "2026-10-21T19:28:07.751Z"
+        },
+        {
+          "title": "Hundwil will die Steuern im Voranschlag 2027 senken",
+          "url": "/de/appenzell-artikel/hundwil-steuern-budget/",
+          "excerpt": "Für 2027 rechnet Hundwil mit einem Überschuss von CHF 111'200, Einnahmen von CHF 6'421'000 und Ausgaben von CHF 6'309'800 sowie einer Senkung der Steuern.",
+          "date": "2026-10-21T19:06:08.539Z"
+        },
+        {
           "title": "Feuerschaukommission Appenzell legt die Vergütungen für 2027 fest",
           "url": "/de/appenzell-artikel/appenzell-ruecklieferverguetung-2027/",
           "excerpt": "Die Feuerschaukommission Appenzell koppelt die eingespeiste Energie an den stündlichen Börsenpreis und sieht für Anlagen bis 150 kW eine Mindestprämie vor.",
@@ -286,18 +298,6 @@
           "url": "/de/appenzell-artikel/proporz-im-grossen-rat/",
           "excerpt": "Am 19. Oktober hatte der Innerrhoder Grosse Rat eine lange Traktandenliste; die Totalrevision des Gastgewerbegesetzes erforderte Diskussionen.",
           "date": "2026-10-19T18:26:19.436Z"
-        },
-        {
-          "title": "Appenzell: Walzthöny ist nicht mehr Leiterin der Oberstufe",
-          "url": "/de/appenzell-artikel/appenzell-schulleitung-wechsel/",
-          "excerpt": "Isabella Walzthöny begann am 1.",
-          "date": "2026-10-19T16:21:04.781Z"
-        },
-        {
-          "title": "Teufen: Budget 2027 zur Verringerung des operativen Defizits",
-          "url": "/de/appenzell-artikel/teufen-voranschlag-defizit-2027/",
-          "excerpt": "Die Gemeinde Teufen erwartet für 2027 Steuereinnahmen von 38,9 Millionen Franken, was einem Anstieg von 2,2% gegenüber dem vorherigen Budget entspricht.",
-          "date": "2026-10-19T15:18:22.893Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T18:26:36.351Z"
+      "updatedAt": "2026-10-21T19:37:12.484Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -369,6 +369,18 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Heiden poursuit ses efforts d’économies : déficit de CHF 204'200 en 2027",
+          "url": "/fr/articles-appenzell/heiden-economies-budget-2027/",
+          "excerpt": "Le budget 2027 de Heiden prévoit des recettes de CHF 35,308 millions, des dépenses de CHF 35,512 millions et un déficit de CHF 204'200.",
+          "date": "2026-10-21T19:28:07.751Z"
+        },
+        {
+          "title": "Hundwil veut réduire les impôts dans le budget 2027",
+          "url": "/fr/articles-appenzell/hundwil-impots-budget/",
+          "excerpt": "Hundwil prévoit en 2027 un excédent de CHF 111'200, avec des recettes de CHF 6'421'000 et des dépenses de CHF 6'309'800, ainsi qu'une réduction des impôts.",
+          "date": "2026-10-21T19:06:08.539Z"
+        },
+        {
           "title": "La Feuerschaukommission Appenzell fixe les rémunérations pour 2027",
           "url": "/fr/articles-appenzell/appenzell-remuneration-energie-2027/",
           "excerpt": "La Feuerschaukommission d’Appenzell lie l’énergie injectée au prix de marché horaire et prévoit une prime minimale pour les installations allant jusqu’à 150 kW.",
@@ -385,18 +397,6 @@
           "url": "/fr/articles-appenzell/proporz-grand-conseil-appenzell/",
           "excerpt": "Le 19 octobre, le Grand Conseil d'Appenzell Rhodes-Intérieures a eu un ordre du jour chargé ; la révision totale de la loi sur les établissements publics a nécessité des discussions.",
           "date": "2026-10-19T18:26:19.436Z"
-        },
-        {
-          "title": "Appenzell : Walzthöny n'est plus directrice de l'Oberstufe",
-          "url": "/fr/articles-appenzell/appenzell-changement-direction-ecole/",
-          "excerpt": "Isabella Walzthöny a pris ses fonctions le 1er février 2023 à la Schulgemeinde Appenzell, après avoir été désignée comme successeure de Thomas Mainberger.",
-          "date": "2026-10-19T16:21:04.781Z"
-        },
-        {
-          "title": "Teufen : budget 2027 pour réduire le déficit opérationnel",
-          "url": "/fr/articles-appenzell/teufen-budget-2027-pour-reduire-le-deficit-operationnel/",
-          "excerpt": "La commune de Teufen prévoit pour 2027 des recettes fiscales de 38,9 millions de francs, en hausse de 2,2% par rapport au budget précédent.",
-          "date": "2026-10-19T15:18:22.893Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T18:26:36.351Z"
+      "updatedAt": "2026-10-21T19:37:12.484Z"
     }
   }
 }

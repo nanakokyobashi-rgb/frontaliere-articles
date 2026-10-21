@@ -83,5 +83,15 @@
     "articleId": "fisco-vaud-indennita-abuso-imposte",
     "ts": "2026-10-21T04:19:30.576Z",
     "keyForm": 2
+  },
+  "https://www.vd.ch/actualites/actualite/news/26711-lausanne-marathon-2026-perturbations-routieres": {
+    "articleId": "lausanne-marathon-2026-chiusure-strade",
+    "ts": "2026-10-21T20:50:06.632Z",
+    "keyForm": 2
+  },
+  "https://www.rts.ch/info/regions/vaud/2026/article/impetigo-hausse-des-cas-dans-le-canton-de-vaud-les-pediatres-rassurent-29390153.html?rts_source=rss_t": {
+    "articleId": "impetigine-casi-vaud",
+    "ts": "2026-10-21T21:39:24.336Z",
+    "keyForm": 2
   }
 }

@@ -2652,6 +2652,18 @@
       "firstSeenAt": "2026-10-21T10:56:51.441Z",
       "lastValidatedAt": "2026-10-21T10:56:51.441Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere pasticcere ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T19:02:09.412Z",
+      "lastValidatedAt": "2026-10-21T19:02:09.412Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
@@ -11061,14 +11073,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.vconews.it/2026/10/19/leggi-notizia/argomenti/politica-28/articolo/sanita-avs-e-pd-allattacco-sul-nuovo-cup-progetto-bloccato-dai-ricorsi-lia-resta-sulla-ca-2.html": {
-      "section": "frontaliere",
-      "ts": 1792424935533
-    },
-    "frontaliere::http://www.cd-ocst.ch": {
-      "section": "frontaliere",
-      "ts": 1792435928184
-    },
     "svizzera::https://www.admin.ch/it/newnsb/e9jr6pxxz25m": {
       "section": "svizzera",
       "ts": 1792450313611
@@ -11188,6 +11192,14 @@
     "frontaliere::https://www.varesenews.it/2026/10/maxi-operazione-della-guardia-di-finanza-tra-italia-svizzera-e-spagna-30-indagati-sequestri-per-oltre-21-milioni/2714272": {
       "section": "frontaliere",
       "ts": 1792596109509
+    },
+    "frontaliere::https://www.varesenews.it/2026/10/strade-ferrovie-e-trasporto-pubblico-la-lombardia-ridisegna-la-mobilita-fino-al-2036/2715067": {
+      "section": "frontaliere",
+      "ts": 1792612035305
+    },
+    "frontaliere::https://www.varesenoi.it/2026/10/21/leggi-notizia/argomenti/politica-20/articolo/malpensa-ferrovie-collegamenti-con-la-svizzera-il-nuovo-piano-regionale-rafforza-le-infrastrutt-1.html": {
+      "section": "frontaliere",
+      "ts": 1792613392974
     }
   }
 }

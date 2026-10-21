@@ -1,6 +1,12 @@
 import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
+import {
+  hasUnclosedTypeScriptDelimiter,
+  isTypeScriptObjectLiteralMemberStart,
+  isPotentialTypeScriptObjectMemberStart,
+  unsupportedObjectMemberAt,
+} from './typescript-expression-scanner.mjs';
 import { repairLegacyDoubleEscapedBreaks, tsStringEscapesWithNewlineAs } from '../../generator/scripts/lib/unescape-ts-string.mjs';
 
 export const ARTICLE_BODY_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
@@ -12,7 +18,6 @@ const ARTICLE_KEY_RE = /^blog\.article\.([^'"\r\n]+)\.(body\d+|faq)$/u;
 const ARTICLE_SECTION_RE = /^[a-z0-9-]+$/u;
 const PAYLOAD_KEYS = Object.freeze(['schemaVersion', 'section', 'locale', 'id', 'revision', 'meta', 'translations']);
 const META_KEYS = Object.freeze(['title', 'excerpt', 'imageAlt']);
-
 function skipTrivia(source, offset) {
   let index = offset;
   while (index < source.length) {
@@ -22,13 +27,17 @@ function skipTrivia(source, offset) {
     }
     if (source[index] !== '/' || index + 1 >= source.length) break;
     if (source[index + 1] === '/') {
-      const newline = source.indexOf('\n', index + 2);
-      index = newline < 0 ? source.length : newline + 1;
+      index += 2;
+      while (index < source.length && !/[\r\n\u2028\u2029]/u.test(source[index])) index += 1;
+      if (index < source.length) {
+        index += source[index] === '\r' && source[index + 1] === '\n' ? 2 : 1;
+      }
       continue;
     }
     if (source[index + 1] === '*') {
       const close = source.indexOf('*/', index + 2);
-      index = close < 0 ? source.length : close + 2;
+      if (close < 0) throw new Error('Unterminated block comment in static article body source');
+      index = close + 2;
       continue;
     }
     break;
@@ -115,6 +124,9 @@ function readQuotedToken(source, offset) {
  */
 export function extractArticleBodyFields(source, { allowEndOfInput = false, validateDelimiter = true } = {}) {
   const text = String(source ?? '');
+  if (validateDelimiter && !allowEndOfInput && hasUnclosedTypeScriptDelimiter(text)) {
+    throw new Error('Unterminated delimiter in static article body source');
+  }
   const entries = [];
   for (let index = 0; index < text.length;) {
     const afterTrivia = skipTrivia(text, index);
@@ -122,13 +134,28 @@ export function extractArticleBodyFields(source, { allowEndOfInput = false, vali
       index = afterTrivia;
       continue;
     }
+    const unsupportedObjectMember = isPotentialTypeScriptObjectMemberStart(text, index)
+      ? unsupportedObjectMemberAt(text, index)
+      : null;
+    if (unsupportedObjectMember) {
+      if (unsupportedObjectMember.kind === 'computed') {
+        throw new Error('Computed article body properties are not supported in static source');
+      }
+      throw new Error('Dynamic article body object members are not supported in static source');
+    }
     const keyToken = readQuotedToken(text, index);
     if (!keyToken) {
       index += 1;
       continue;
     }
+    if (keyToken.error) {
+      throw new Error('Malformed string token in static article body source: ' + keyToken.error);
+    }
     const key = ARTICLE_KEY_RE.exec(keyToken.value ?? '');
     const colon = skipTrivia(text, keyToken.end);
+    if (key && text[colon] !== ':' && isTypeScriptObjectLiteralMemberStart(text, index)) {
+      throw new Error('Article body properties must use a static key/value property in object literals');
+    }
     if (!key || keyToken.error || text[colon] !== ':') {
       index = keyToken.end;
       continue;

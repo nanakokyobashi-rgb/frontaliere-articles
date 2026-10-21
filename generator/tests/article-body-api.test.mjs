@@ -169,6 +169,71 @@ without escape',`);
   assert.equal(invalid[0].error, 'newline-in-quoted-string');
 });
 
+test('the body parser fails closed on truncated trivia and strings after valid fields', () => {
+  const truncatedComment = [
+    "'blog.article.example-article.body1': 'valid before failure',",
+    '/* unfinished',
+  ].join('\n');
+  assert.throws(
+    () => extractArticleBodyFields(truncatedComment),
+    /Unterminated block comment in static article body source/u,
+  );
+
+  const truncatedString = [
+    "'blog.article.example-article.body1': 'valid before failure',",
+    "'not-an-article-key",
+  ].join('\n');
+  assert.throws(
+    () => extractArticleBodyFields(truncatedString),
+    /Malformed string token in static article body source: unterminated-string/u,
+  );
+
+  const truncatedObject = [
+    'const body = {',
+    "  'blog.article.example-article.body1': 'one',",
+    "  'blog.article.example-article.body2': 'two',",
+    "  'blog.article.example-article.body3': 'three',",
+  ].join('\n');
+  assert.throws(
+    () => extractArticleBodyFields(truncatedObject),
+    /Unterminated delimiter in static article body source/u,
+  );
+});
+
+test('the body parser rejects dynamic members in logical object expressions', () => {
+  for (const operator of ['&&', '||']) {
+    const source = [
+      `const body = enabled ${operator} { [dynamicKey]: 'value' };`,
+      sourceFor(),
+    ].join('\n');
+    assert.throws(
+      () => extractArticleBodyFields(source),
+      /Computed article body properties are not supported/u,
+      operator,
+    );
+  }
+});
+
+test('the body parser resumes after every TypeScript line terminator in comments', () => {
+  for (const terminator of ['\r', '\u2028', '\u2029']) {
+    const source = [
+      'const body = {',
+      `  'blog.article.example-article.body1': 'one', // comment${terminator}  'blog.article.example-article.body2': 'two',`,
+      "  'blog.article.example-article.body3': 'three',",
+      '};',
+    ].join('\n');
+    assert.deepEqual(
+      extractArticleBodyFields(source).map(({ field, value }) => ({ field, value })),
+      [
+        { field: 'body1', value: 'one' },
+        { field: 'body2', value: 'two' },
+        { field: 'body3', value: 'three' },
+      ],
+      terminator.charCodeAt(0).toString(16),
+    );
+  }
+});
+
 test('the producer accepts real body and localized metadata for the 24 educator pages', () => {
   const ids = [
     'frontaliere-educatore-ticino-stipendio-requisiti',
@@ -210,12 +275,78 @@ test('interpolated templates fail the whole source before or after static body f
   assert.throws(() => extractArticleBodyFields(dynamicAfter), /Interpolated template literal/u);
   assert.throws(
     () => extractArticleBodyFields("const body = { [`blog.article.example-article.${field}.body1`]: 'value' };"),
-    /Interpolated template literal/u,
+    /Computed article body properties are not supported/u,
   );
   const sourceWithDynamic = `${sourceFor()}\nconst unrelated = ` + '`prefix ${compute()} suffix`;';
   assert.throws(() => buildArticleBodyPayload({
     section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source: sourceWithDynamic,
   }), /Interpolated template literal/u);
+
+  const sourceWithComputedGetter = [
+    `const bodyKey = 'blog.article.${articleId}.body4';`,
+    sourceFor().replace(
+      `  'blog.article.${articleId}.faq':`,
+      [
+        `  get [bodyKey]() { return 'Optional body'; },`,
+        `  'blog.article.${articleId}.faq':`,
+      ].join('\n'),
+    ),
+  ].join('\n');
+  assert.throws(() => buildArticleBodyPayload({
+    section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source: sourceWithComputedGetter,
+  }), /Computed article body properties are not supported/u);
+
+  const sourceWithComputedGenerator = [
+    `const bodyKey = 'blog.article.${articleId}.body4';`,
+    sourceFor().replace(
+      `  'blog.article.${articleId}.faq':`,
+      [
+        `  *[bodyKey]() { return 'Optional body'; },`,
+        `  'blog.article.${articleId}.faq':`,
+      ].join('\n'),
+    ),
+  ].join('\n');
+  assert.throws(() => buildArticleBodyPayload({
+    section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source: sourceWithComputedGenerator,
+  }), /Computed article body properties are not supported/u);
+
+  for (const [label, source] of [
+    ['spread member', [
+      `const extraFields = { 'blog.article.${articleId}.body4': 'Optional body' };`,
+      sourceFor().replace(
+        `  'blog.article.${articleId}.body2':`,
+        `  ...extraFields,\n  'blog.article.${articleId}.body2':`,
+      ),
+    ].join('\n')],
+    ['shorthand member', [
+      `const extraFields = { 'blog.article.${articleId}.body4': 'Optional body' };`,
+      sourceFor().replace(
+        `  'blog.article.${articleId}.body2':`,
+        `  extraFields,\n  'blog.article.${articleId}.body2':`,
+      ),
+    ].join('\n')],
+  ]) {
+    assert.throws(() => buildArticleBodyPayload({
+      section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source,
+    }), /Dynamic article body object members are not supported/u, label);
+  }
+
+  const sourceWithArrayDestructuringHelper = `const split = (head, [tail]) => tail;\n${sourceFor()}`;
+  assert.doesNotThrow(() => buildArticleBodyPayload({
+    section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source: sourceWithArrayDestructuringHelper,
+  }));
+  const sourceWithTypedArrayDestructuringHelper = `const split = (head: string, [tail]: string[]) => tail;\n${sourceFor()}`;
+  assert.doesNotThrow(() => buildArticleBodyPayload({
+    section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source: sourceWithTypedArrayDestructuringHelper,
+  }));
+  const sourceWithObjectDestructuringHelper = [
+    'const pick = ({ extraFields }) => extraFields;',
+    'const rest = ({ ...extraFields }) => extraFields;',
+    sourceFor(),
+  ].join('\n');
+  assert.doesNotThrow(() => buildArticleBodyPayload({
+    section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source: sourceWithObjectDestructuringHelper,
+  }));
 
   const deceptiveNestedExpression = [
     'const body = { "blog.article.example-article.body1": "valid before failure" };',

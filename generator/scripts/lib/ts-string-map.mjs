@@ -60,6 +60,9 @@ export function readTsStringLiteral(src, i) {
       j += 2;
       continue;
     }
+    if (quote === '`' && c === '$' && src[j + 1] === '{') {
+      throw new Error('Interpolated template literal is not supported in static article string source');
+    }
     if (c === quote) return { value: out, end: j + 1 };
     if (quote === '`' && c === '$' && src[j + 1] === '{') {
       throw new Error('Interpolated template literal is not supported in static article fields');

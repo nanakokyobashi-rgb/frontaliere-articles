@@ -39,6 +39,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.schleitheim-scooter-incidente-2026.title': 'Accident de scooter à Schleitheim : une femme blessée, Hohbrugg fermée',
     'blog.article.schleitheim-scooter-incidente-2026.excerpt': 'Dimanche 18 octobre 2026, une femme de 61 ans chute de son scooter sur la Hohbrugg : elle est projetée à 12 mètres dans la pente, un hélicoptère est utilisé pour son transport à l’hôpital, route fermée pendant plus d’une heure.',
     'blog.article.schleitheim-scooter-incidente-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.parcheggi-cascate-reno.title': 'Schaffhouse et Zurich installent le système de stationnement au bord du Rhin',
+    'blog.article.parcheggi-cascate-reno.excerpt': 'Nouveau système entre Schaffhouse et Zurich pour les places de parking libres aux chutes du Rhin ; lancement à l\'été 2027, coût d\'environ CHF 400\'000.',
+    'blog.article.parcheggi-cascate-reno.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

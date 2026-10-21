@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "3924056b28cca3dfb233ce541a7cac17ba960a47c88cd2d3a229b16cc8113549",
+  "updatedAt": "2026-10-21T21:02:11.427Z",
+  "contentHash": "6c60bb43a89ea14403d97bc4af2bdbc86833b9a4969823999f54d9c8424f5826",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -108,6 +108,16 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
+              "date": "2026-10-21T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7729408"
+            },
+            {
+              "label": "Kunstausstellung Arts Crossroad",
+              "date": "2026-10-21T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840403"
+            },
+            {
               "label": "Winter Qi Gong Inseli",
               "date": "2026-10-19T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
@@ -126,16 +136,6 @@
               "label": "Ausstellung NachtLeben",
               "date": "2026-10-16T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
-            },
-            {
-              "label": "Pilzexkursion",
-              "date": "2026-10-16T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626880"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-10-15T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
             }
           ],
           "updatedAt": "2026-10-21T10:37:42.748Z"
@@ -172,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T21:02:11.427Z"
     },
     "en": {
       "canton": "LU",
@@ -263,6 +263,16 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
+              "date": "2026-10-21T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7729408"
+            },
+            {
+              "label": "Kunstausstellung Arts Crossroad",
+              "date": "2026-10-21T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840403"
+            },
+            {
               "label": "Winter Qi Gong Inseli",
               "date": "2026-10-19T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
@@ -281,16 +291,6 @@
               "label": "Ausstellung NachtLeben",
               "date": "2026-10-16T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
-            },
-            {
-              "label": "Pilzexkursion",
-              "date": "2026-10-16T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626880"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-10-15T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
             }
           ],
           "updatedAt": "2026-10-21T10:37:42.748Z"
@@ -327,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T21:02:11.427Z"
     },
     "de": {
       "canton": "LU",
@@ -418,6 +418,16 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
+              "date": "2026-10-21T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7729408"
+            },
+            {
+              "label": "Kunstausstellung Arts Crossroad",
+              "date": "2026-10-21T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840403"
+            },
+            {
               "label": "Winter Qi Gong Inseli",
               "date": "2026-10-19T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
@@ -436,16 +446,6 @@
               "label": "Ausstellung NachtLeben",
               "date": "2026-10-16T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
-            },
-            {
-              "label": "Pilzexkursion",
-              "date": "2026-10-16T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626880"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-10-15T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
             }
           ],
           "updatedAt": "2026-10-21T10:37:42.748Z"
@@ -482,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T21:02:11.427Z"
     },
     "fr": {
       "canton": "LU",
@@ -573,6 +573,16 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
+              "date": "2026-10-21T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7729408"
+            },
+            {
+              "label": "Kunstausstellung Arts Crossroad",
+              "date": "2026-10-21T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840403"
+            },
+            {
               "label": "Winter Qi Gong Inseli",
               "date": "2026-10-19T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
@@ -591,16 +601,6 @@
               "label": "Ausstellung NachtLeben",
               "date": "2026-10-16T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
-            },
-            {
-              "label": "Pilzexkursion",
-              "date": "2026-10-16T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626880"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-10-15T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694293"
             }
           ],
           "updatedAt": "2026-10-21T10:37:42.748Z"
@@ -637,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-21T21:02:11.427Z"
     }
   }
 }

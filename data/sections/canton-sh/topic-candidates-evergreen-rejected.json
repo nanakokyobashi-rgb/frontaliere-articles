@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sh::https://www.schaffhausen24.ch/articles/413387-natalie-rickli-nein-zu-bern-ja-zu-zuerich": {
-      "section": "canton-sh",
-      "ts": 1792434414992
-    },
-    "canton-sh::https://www.schaffhausen24.ch/articles/413207-bunte-vielfalt-im-koffer-der-17-schaffhauser-koffermarkt-laedt-ein": {
-      "section": "canton-sh",
-      "ts": 1792435686025
-    },
-    "canton-sh::https://www.schaffhausen24.ch/articles/413407-wo-genuss-kultur-und-die-region-zusammenkommen": {
-      "section": "canton-sh",
-      "ts": 1792436063872
-    },
     "canton-sh::https://www.radiomunot.ch/p/neue-gemeindeprasidenten-ziehen-zwischenbilanz-5pwvhifcyo2pp8i6qohcjf": {
       "section": "canton-sh",
       "ts": 1792479035792
@@ -32,10 +20,6 @@
       "section": "canton-sh",
       "ts": 1792504847706
     },
-    "canton-sh::https://www.radiomunot.ch/p/das-baubewilligungsverfahren-unter-der-lupe-2nosxkzv2p1ylic5xekjg0": {
-      "section": "canton-sh",
-      "ts": 1792584747972
-    },
     "canton-sh::https://sh.ch/webseite/kanton-schaffhausen/beh-rde/regierung/staatskanzlei/medienmitteilungen-24148150-de.html": {
       "section": "canton-sh",
       "ts": 1792585088844
@@ -47,6 +31,10 @@
     "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-01/gf-verkauft-luft-und-raumfahrt-sowie-industriegasturbinen": {
       "section": "canton-sh",
       "ts": 1792595368376
+    },
+    "canton-sh::https://www.radiomunot.ch/p/das-baubewilligungsverfahren-unter-der-lupe-2nosxkzv2p1ylic5xekjg0": {
+      "section": "canton-sh",
+      "ts": 1792616852679
     }
   }
 }

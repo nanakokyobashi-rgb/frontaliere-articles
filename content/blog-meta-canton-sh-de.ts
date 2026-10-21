@@ -39,6 +39,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.schleitheim-scooter-incidente-2026.title': 'Scooterunfall in Schleitheim: Frau verletzt, Hohbrugg gesperrt',
     'blog.article.schleitheim-scooter-incidente-2026.excerpt': 'Am Sonntag, 18.',
     'blog.article.schleitheim-scooter-incidente-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.parcheggi-cascate-reno.title': 'Schaffhausen und Zürich installieren das Parkleitsystem am Rhein',
+    'blog.article.parcheggi-cascate-reno.excerpt': 'Neues System zwischen Schaffhausen und Zürich für freie Parkplätze am Rheinfall; Start im Sommer 2027, Kosten etwa CHF 400\'000.',
+    'blog.article.parcheggi-cascate-reno.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

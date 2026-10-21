@@ -23,6 +23,8 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'cdhr-contributo-differenziale-2025': { it: 'cdhr-contributo-differenziale-2025', en: 'cdhr-differential-contribution-2025', de: 'cdhr-differenzbeitrag-2025', fr: 'cdhr-contribution-differentielle-2025' },
  'chuv-ostetriche-salari-classi': { it: 'chuv-ostetriche-salari-classi', en: 'chuv-midwives-salary-classes', de: 'chuv-hebammen-gehaelter-klassen', fr: 'chuv-sages-femmes-salaires-classes' },
  'fisco-vaud-indennita-abuso-imposte': { it: 'fisco-vaud-indennita-abuso-imposte', en: 'vaud-tax-abuse-compensation-taxes', de: 'waadt-steuer-missbrauchsentschadigung-steuern', fr: 'fisc-vaud-indemnite-abus-impots' },
+ 'lausanne-marathon-2026-chiusure-strade': { it: 'lausanne-marathon-2026-chiusure-strade', en: 'lausanne-marathon-2026-road-closures', de: 'lausanne-marathon-2026-strassensperrungen', fr: 'marathon-lausanne-2026-fermetures-routes' },
+ 'impetigine-casi-vaud': { it: 'impetigine-casi-vaud', en: 'impetigo-cases-vaud', de: 'impetigo-faelle-waadt', fr: 'cas-impetigo-vaud' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

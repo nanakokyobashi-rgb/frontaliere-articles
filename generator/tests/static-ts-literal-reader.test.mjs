@@ -7,7 +7,7 @@ import {
   readStaticObjectEntries,
   readStaticStringLiteral,
 } from '../../scripts/lib/ts-literals.mjs';
-import { metaFieldRegex } from '../scripts/lib/meta-field-regex.mjs';
+import { metaFieldRegex, metaFieldRegexFragment } from '../scripts/lib/meta-field-regex.mjs';
 
 const ROOT = resolve(new URL('../..', import.meta.url).pathname);
 
@@ -92,6 +92,23 @@ test('il reader richiede la chiusura dell oggetto completo e può appiattire i m
   assert.equal(entries[0].value, 'prima seconda');
 });
 
+test('il reader fallisce chiuso su commenti e stringhe troncati dopo entry valide', () => {
+  assert.throws(
+    () => readStaticObjectEntries(
+      "const meta = { 'blog.article.reale.title': 'valido', /* troncato",
+      'truncated-comment.ts',
+    ),
+    /Unterminated comment/u,
+  );
+  assert.throws(
+    () => readStaticObjectEntries(
+      "const meta = { 'blog.article.reale.title': 'valido', 'blog.article.alt.title",
+      'truncated-string.ts',
+    ),
+    /Unterminated string literal/u,
+  );
+});
+
 test('metaFieldRegex conserva la superficie RegExp senza scansionare commenti e prosa', () => {
   const source = [
     "// 'blog.article.fake.title': 'commento'",
@@ -102,6 +119,20 @@ test('metaFieldRegex conserva la superficie RegExp senza scansionare commenti e 
   assert.equal(matches.length, 1);
   assert.equal(matches[0][1], 'reale');
   assert.equal(matches[0][2], "L\\'incontro");
+});
+
+test('metaFieldRegex rifiuta una mappa troncata mentre l adapter accetta solo il frammento esplicito', () => {
+  const fragment = "'blog.article.reale.title': 'L\\'incontro',";
+  assert.throws(
+    () => [...fragment.matchAll(metaFieldRegex('title'))],
+    /not closed|dangling comma/u,
+  );
+  assert.equal([...fragment.matchAll(metaFieldRegexFragment('title'))][0][1], 'reale');
+});
+
+test('metaFieldRegex tratta una sezione metadata assente come zero match', () => {
+  assert.deepEqual([...''.matchAll(metaFieldRegex('title'))], []);
+  assert.equal(metaFieldRegex('title').exec(''), null);
 });
 
 test('metaFieldRegex conserva gli offset raw e gli id che contengono punti', () => {

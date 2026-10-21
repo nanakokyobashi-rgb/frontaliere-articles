@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/dal-mondo/attualita/1950407/ue-svizzera-lavoro-mobilita-lavoratori": {
-    "articleId": "passaporto-digitale-sicurezza-sociale-ue",
-    "ts": "2026-09-16T00:24:56.447Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/info/ticino-grigioni-e-insubria/salute-mentale-e-lavoro-crescono-le-assenze--4086184.html": {
     "articleId": "salute-mentale-lavoro-ticino",
     "ts": "2026-09-16T01:00:47.875Z",
@@ -2497,6 +2492,11 @@
   "https://www.ticinonews.ch/ticino/hackeraggio-casse-pensioni-centinaia-di-ticinesi-a-rischio-445085": {
     "articleId": "hackeraggio-ipct-casse-pensioni-ticino",
     "ts": "2026-10-21T17:53:57.085Z",
+    "keyForm": 2
+  },
+  "https://www.varesenoi.it/2026/10/21/leggi-notizia/argomenti/politica-20/articolo/trasporti-impegni-per-varese-al-centro-peduncolo-di-vedano-e-ferrovie-1.html": {
+    "articleId": "trasporti-varese-peduncolo-vedano-gallarate-luino",
+    "ts": "2026-10-21T20:21:53.820Z",
     "keyForm": 2
   }
 }

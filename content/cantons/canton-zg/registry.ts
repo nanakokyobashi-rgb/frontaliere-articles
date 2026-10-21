@@ -127,4 +127,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'zugo-agenda-consiglio-29-ottobre',
+ category: 'novita',
+ date: '2026-10-21T21:24:59.776Z',
+ image: '/images/blog/article-zugo-agenda-consiglio-29-ottobre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
