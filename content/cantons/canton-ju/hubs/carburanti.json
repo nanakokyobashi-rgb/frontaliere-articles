@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-20T17:48:42.935Z",
-  "contentHash": "c81f15829dcc4b078c349da4007610d1d185c648af231d3a4b19abc42d5c56ff",
+  "updatedAt": "2026-10-21T12:49:20.224Z",
+  "contentHash": "05d6f4397cf3ee549dd15810ded00fceac751e099a8b5fe221b1fafb6e00cea0",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Giura: Governo propone revisioni su formazione postobbligatoria e finanziamento",
+          "url": "/articoli-giura/giura-formazione-postobbligatoria-2026/",
+          "excerpt": "Due progetti di revisione trasmessi al Parlamento Quattro ambiti: formazione, ristoranti scolastici, lingue, ammissioni La misura n.",
+          "date": "2026-10-21T12:36:10.998Z"
+        },
+        {
           "title": "Le casse pensioni svizzere migliorano Q3 2026",
           "url": "/articoli-giura/casse-pensioni-migliorano-terzo-trimestre/",
           "excerpt": "L'indice WTW sale da 130,2% a 131,9% Il tasso di attualizzazione arriva all'1,65% Gli impegni pensionistici scendono del 6,5% Gli attivi dei piani calano",
@@ -100,7 +106,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T12:49:20.224Z"
     },
     "en": {
       "canton": "JU",
@@ -159,6 +165,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Jura: Government proposes revisions to post-compulsory education and funding",
+          "url": "/en/jura-articles/jura-post-compulsory-education-2026/",
+          "excerpt": "Two revision projects submitted to Parliament Four areas: education, school restaurants, languages, admissions Measure No.",
+          "date": "2026-10-21T12:36:10.998Z"
+        },
+        {
           "title": "Swiss pension funds improve Q3 2026",
           "url": "/en/jura-articles/swiss-pension-funds-improve-q3-2026/",
           "excerpt": "WTW index rises from 130.2% to 131.9% The discount rate reaches 1.65% Pension commitments fall by 6.5% Plan assets fall by 0.6% Who → Willis Towers Watson (WTW)",
@@ -186,7 +198,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T12:49:20.224Z"
     },
     "de": {
       "canton": "JU",
@@ -245,6 +257,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Jura: Regierung schlägt Revisionen zur nachobligatorischen Ausbildung und Finanzierung vor",
+          "url": "/de/jura-artikel/jura-nachobligatorische-bildung-2026/",
+          "excerpt": "Zwei Revisionsvorlagen an das Parlament übermittelt Vier Bereiche: Ausbildung, Schulrestaurants, Sprachen, Zulassungen Die Maßnahme Nr.",
+          "date": "2026-10-21T12:36:10.998Z"
+        },
+        {
           "title": "Schweizer Pensionskassen verbessern Q3 2026",
           "url": "/de/jura-artikel/schweizer-pensionskassen-verbessern-q3-2026/",
           "excerpt": "Der WTW-Index steigt von 130,2% auf 131,9% Der Abzinsungssatz beträgt bis zu 1,65% Pensionsverpflichtungen sinken um 6,5% Die Aktiva der Stockwerke sinken um",
@@ -272,7 +290,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T12:49:20.224Z"
     },
     "fr": {
       "canton": "JU",
@@ -331,6 +349,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Jura : le Gouvernement propose des révisions concernant la formation postobligatoire et le financement",
+          "url": "/fr/articles-jura/jura-formation-postobligatoire-2026/",
+          "excerpt": "Deux projets de révision transmis au Parlement Quatre domaines : formation, restaurants scolaires, langues, admissions La mesure n° 506 figure dans le Plan",
+          "date": "2026-10-21T12:36:10.998Z"
+        },
+        {
           "title": "Les caisses de pension suisses améliorent Q3 2026",
           "url": "/fr/articles-jura/les-caisses-de-pension-suisses-ameliorent-q3-2026/",
           "excerpt": "L'indice WTW passe de 130,2 % à 131,9 % Le taux d'actualisation atteint 1,65 % Les engagements de retraite baissent de 6,5 % Les actifs des plans baissent",
@@ -359,7 +383,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-21T12:49:20.224Z"
     }
   }
 }
