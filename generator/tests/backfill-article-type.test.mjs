@@ -288,6 +288,23 @@ test('il lettore TS decodifica il body3 italiano con apostrofi ed escape', () =>
   assert.equal(readTsStringMap(source).get('blog.article.demo.body3'), "L'articolo\n\nFonte");
 });
 
+test('il lettore TS rifiuta template interpolati senza perdere le voci successive', () => {
+  const source = [
+    'const m = {',
+    "  'blog.article.dynamic.body1': `prima ${condition ? `interno` : 'altro'} dopo`,",
+    "  'blog.article.escaped.body1': `letterale \\${notCode}`,",
+    "  'blog.article.static.body1': 'valore statico',",
+    '};',
+  ].join('\n');
+
+  for (const reader of [backfillType.readTsStringMap, backfillCantons.readTsStringMap]) {
+    const map = reader(source);
+    assert.equal(map.has('blog.article.dynamic.body1'), false);
+    assert.equal(map.get('blog.article.escaped.body1'), 'letterale ${notCode}');
+    assert.equal(map.get('blog.article.static.body1'), 'valore statico');
+  }
+});
+
 describe('ledger di lettura e piano di backfill', () => {
   test('il ledger reale copre i 210 stale con forma e conteggi attesi', () => {
     const rows = backfillType.readArticleTypeReadings();

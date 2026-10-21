@@ -22,7 +22,11 @@ function hexCodePoint(raw) {
   return value <= 0x10FFFF ? value : null;
 }
 
-/** Decodifica il letterale TS che comincia a `i` (apice singolo, doppio o backtick). */
+/**
+ * Decodifica il letterale TS che comincia a `i` (apice singolo, doppio o
+ * backtick). I template interpolati non sono valori statici: vengono rifiutati
+ * prima che un backtick annidato possa far restituire un testo parziale.
+ */
 export function readTsStringLiteral(src, i) {
   const quote = src[i];
   if (quote !== "'" && quote !== '"' && quote !== '`') return null;
@@ -60,6 +64,7 @@ export function readTsStringLiteral(src, i) {
       j += 2;
       continue;
     }
+    if (quote === '`' && c === '$' && src[j + 1] === '{') return null;
     if (c === quote) return { value: out, end: j + 1 };
     out += c;
     j += 1;
