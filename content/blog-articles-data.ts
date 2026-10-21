@@ -45687,7 +45687,7 @@ const RAW_ARTICLES = [
  id: 'bollettino-frontaliere-2026-10-21',
  category: 'novita',
  date: '2026-10-21T10:06:04.418Z',
- image: '/images/blog/article-bollettino-frontaliere-2026-10-21.webp',
+ image: '/images/blog/bollettino-frontaliere-2026-10-18.webp',
  hasCalculator: false,
  articleType: 'news',
  authorSlug: 'samuele-valente',
