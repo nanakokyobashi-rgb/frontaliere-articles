@@ -3226,6 +3226,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(staleResolve, /-f source_commit="\$current_main"/);
   assert.match(staleResolve, /-f dispatch_nonce="\$dispatch_nonce"/);
   assert.match(staleResolve, /max_parallel_dispatches=16/);
+  assert.match(staleResolve, /REPLAY_RUN_LIST_CACHE_FILE="\$replay_run_list_cache"/);
+  assert.match(staleResolve, /export REPLAY_RUN_LIST_CACHE_FILE/);
   assert.match(staleResolve, /\(\s*if dispatch_stale_replay[\s\S]*\) &/);
   assert.match(staleResolve, /wait_for_dispatch_wave/);
   assert.match(staleResolve, /failed_sections\+\=\("\$\{dispatch_sections\[dispatch_index\]\}"\)/);
@@ -3319,6 +3321,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /^run-name:.*inputs\.dry_run/m);
   assert.match(wf, /replay richiesto con dry_run=false ma il publisher è disarmato/);
   assert.match(replayDispatcher, /--json databaseId,displayTitle,status,conclusion/);
+  assert.match(replayDispatcher, /REPLAY_RUN_LIST_CACHE_FILE/);
+  assert.match(replayDispatcher, /flock/);
+  assert.match(replayDispatcher, /stat -c %Y/);
+  assert.match(replayDispatcher, /cache_fresh=true/);
   assert.match(replayDispatcher, /startswith\(\$title \+ " \/ dry="\)/);
   assert.match(replayDispatcher, /endswith\(" \/ dry=false"\)/);
   assert.match(replayDispatcher, /endswith\(" \/ dry=true"\)/);

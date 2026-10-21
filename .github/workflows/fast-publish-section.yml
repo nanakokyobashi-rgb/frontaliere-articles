@@ -549,6 +549,12 @@ jobs:
                 exit 1
               fi
               export GH_TOKEN="$runtime_pat"
+              # The stale plan dispatches one helper per section in parallel.
+              # Share its short-lived run snapshot so the workers do not turn
+              # their visibility polls into a GitHub API rate-limit storm.
+              replay_run_list_cache="$RUNNER_TEMP/fast-publish-section-replay-runs-${GITHUB_RUN_ID}.json"
+              : > "$replay_run_list_cache"
+              export REPLAY_RUN_LIST_CACHE_FILE="$replay_run_list_cache"
               dispatch_stale_replay() {
                 local section="${1:-}"
                 local article_ids="${2:-[]}"
