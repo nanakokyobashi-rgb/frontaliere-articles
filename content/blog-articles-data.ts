@@ -45662,6 +45662,17 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'negozio-ticino-fisco-frontiere',
+ category: 'fiscale',
+ date: '2026-10-21T06:15:30.155Z',
+ image: '/images/blog/article-negozio-ticino-fisco-frontiere.webp',
+ hasCalculator: true,
+ articleType: 'evergreen',
+ canton: ['TI'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
