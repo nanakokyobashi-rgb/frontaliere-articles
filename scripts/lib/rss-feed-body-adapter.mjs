@@ -3,6 +3,7 @@
  * adapter injects the corpus article-body scanner without making engine code
  * depend on corpus-only scripts.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import {
   buildSectionFeeds as buildMirroredSectionFeeds,
   RSS_SECTIONS,

@@ -142,6 +142,7 @@ on:
       # The shared TypeScript scanner bounds expressions in article-body
       # extraction; changing it can change the published API payload.
       - 'scripts/lib/typescript-expression-scanner.mjs'
+      - 'scripts/lib/rss-feed-body-adapter.mjs'
       # build-blog-index.mjs also emits the cover credits
       # (data/image-credits-<section>.json and data/image-credits-blog.json)
       # through this module; the records
@@ -442,6 +443,7 @@ jobs:
               scripts/ci/check-blog-body-links.mjs
               scripts/lib/article-link-contract.mjs
               scripts/lib/typescript-expression-scanner.mjs
+              scripts/lib/rss-feed-body-adapter.mjs
               scripts/lib/corpus-sections.mjs
               scripts/lib/ts-literals.mjs
               generator/scripts/lib/article-meta-block.mjs
