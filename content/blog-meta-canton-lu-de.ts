@@ -39,6 +39,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.lucerna-stop-riscaldamenti-fossili-2050.title': 'Luzern: Aus für Öl- und Gasheizungen bis 2050',
     'blog.article.lucerna-stop-riscaldamenti-fossili-2050.excerpt': 'Der Kantonsrat hat die Revision des Energiegesetzes verabschiedet: Verbot neuer fossiler Anlagen und eine endgültige Frist für alle bis 2050.',
     'blog.article.lucerna-stop-riscaldamenti-fossili-2050.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lucerna-tassi-fiscali-zero-2027.title': 'Luzern: Steuerzinsen 2027 bleiben bei 0%',
+    'blog.article.lucerna-tassi-fiscali-zero-2027.excerpt': 'Im Jahr 2027 behält Luzern die Steuersätze bei 0,00%; der Verzug bleibt bei 4,00%.',
+    'blog.article.lucerna-tassi-fiscali-zero-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;

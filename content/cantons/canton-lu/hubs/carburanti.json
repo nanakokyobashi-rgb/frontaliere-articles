@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T12:52:40.658Z",
-  "contentHash": "5e579c5e36e25fb244fb26bcd08efd019cec958dc9d8523ec081a05da6d074dd",
+  "updatedAt": "2026-10-21T14:03:21.791Z",
+  "contentHash": "9ca6d7739b961fee41cf368d79e35634ac66611d11e9b13ca42ff003ec48b551",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lucerna: interessi fiscali 2027 restano allo 0%",
+          "url": "/articoli-lucerna/lucerna-tassi-fiscali-zero-2027/",
+          "excerpt": "Nel 2027 Lucerna mantiene allo 0,00% i tassi fiscali; la mora resta al 4,00%.",
+          "date": "2026-10-21T13:53:04.510Z"
+        },
+        {
           "title": "Lucerna: stop ai riscaldamenti a olio e gas entro il 2050",
           "url": "/articoli-lucerna/lucerna-stop-riscaldamenti-fossili-2050/",
           "excerpt": "Il Consiglio cantonale ha approvato la revisione della legge sull'energia: divieto di nuovi impianti fossili e scadenza finale per tutti entro il 2050.",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/lucerna-bilancio-budget-2027/",
           "excerpt": "Il Consiglio cantonale di Lucerna approva il riferimento al BIP per la crescita delle spese.",
           "date": "2026-10-20T00:16:43.132Z"
-        },
-        {
-          "title": "Lucerna: Forensic Nurses contro la violenza domestica",
-          "url": "/articoli-lucerna/lucerna-forensic-nurses-violenza/",
-          "excerpt": "Il Canton Lucerna prevede per l'estate 2027 un progetto pilota con Forensic Nurses e annuncia nuovi servizi medici e di polizia.",
-          "date": "2026-10-19T23:59:14.540Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T12:52:40.658Z"
+      "updatedAt": "2026-10-21T14:03:21.791Z"
     },
     "en": {
       "canton": "LU",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lucerne: tax interest 2027 remains at 0%",
+          "url": "/en/lucerne-articles/lucerne-tax-interest-zero-2027/",
+          "excerpt": "In 2027 Lucerne maintains tax rates at 0.00%; the default remains at 4.00%.",
+          "date": "2026-10-21T13:53:04.510Z"
+        },
+        {
           "title": "Lucerne: phase out oil and gas heating by 2050",
           "url": "/en/lucerne-articles/lucerne-ban-fossil-heating-2050/",
           "excerpt": "The Cantonal Council approved the revision of the Energy Act: a ban on new fossil fuel installations and a final deadline for all by 2050.",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/lucerne-budget-2027-plan/",
           "excerpt": "The Cantonal Council of Lucerne approves the use of GDP as a reference for expenditure growth.",
           "date": "2026-10-20T00:16:43.132Z"
-        },
-        {
-          "title": "Lucerne: Forensic Nurses against domestic violence",
-          "url": "/en/lucerne-articles/lucerne-forensic-nurses-domestic-violence/",
-          "excerpt": "The Canton of Lucerne is planning a pilot project with Forensic Nurses for summer 2027 and announces new medical and police services.",
-          "date": "2026-10-19T23:59:14.540Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T12:52:40.658Z"
+      "updatedAt": "2026-10-21T14:03:21.791Z"
     },
     "de": {
       "canton": "LU",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Luzern: Steuerzinsen 2027 bleiben bei 0%",
+          "url": "/de/luzern-artikel/luzern-steuerzinsen-null-2027/",
+          "excerpt": "Im Jahr 2027 behält Luzern die Steuersätze bei 0,00%; der Verzug bleibt bei 4,00%.",
+          "date": "2026-10-21T13:53:04.510Z"
+        },
+        {
           "title": "Luzern: Aus für Öl- und Gasheizungen bis 2050",
           "url": "/de/luzern-artikel/luzern-ausstieg-oelgasheizungen-2050/",
           "excerpt": "Der Kantonsrat hat die Revision des Energiegesetzes verabschiedet: Verbot neuer fossiler Anlagen und eine endgültige Frist für alle bis 2050.",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/luzern-budget-2027-planung/",
           "excerpt": "Der Luzerner Kantonsrat genehmigt die Bezugnahme auf das BIP für das Ausgabenwachstum.",
           "date": "2026-10-20T00:16:43.132Z"
-        },
-        {
-          "title": "Luzern: Forensic Nurses gegen häusliche Gewalt",
-          "url": "/de/luzern-artikel/luzern-forensic-nurses-haeusliche-gewalt/",
-          "excerpt": "Der Kanton Luzern plant für den Sommer 2027 ein Pilotprojekt mit Forensic Nurses und kündigt neue medizinische und polizeiliche Angebote an.",
-          "date": "2026-10-19T23:59:14.540Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T12:52:40.658Z"
+      "updatedAt": "2026-10-21T14:03:21.791Z"
     },
     "fr": {
       "canton": "LU",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lucerne : les intérêts fiscaux 2027 restent à 0%",
+          "url": "/fr/articles-lucerne/lucerne-interets-fiscaux-zero-2027/",
+          "excerpt": "En 2027, Lucerne maintient les taux d'imposition à 0,00 % ; les arriérés restent à 4,00 %.",
+          "date": "2026-10-21T13:53:04.510Z"
+        },
+        {
           "title": "Lucerne : fin des chauffages au mazout et au gaz d’ici 2050",
           "url": "/fr/articles-lucerne/lucerne-fin-chauffage-fossile-2050/",
           "excerpt": "Le Conseil cantonal a approuvé la révision de la loi sur l’énergie : interdiction des nouvelles installations fossiles et échéance finale pour tous d’ici 2050.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/lucerne-budget-2027-planification/",
           "excerpt": "Le Conseil cantonal de Lucerne approuve la référence au PIB pour la croissance des dépenses.",
           "date": "2026-10-20T00:16:43.132Z"
-        },
-        {
-          "title": "Lucerne : Forensic Nurses contre la violence domestique",
-          "url": "/fr/articles-lucerne/lucerne-infirmiers-medico-legaux-violence-domestique/",
-          "excerpt": "Le canton de Lucerne prévoit pour l’été 2027 un projet pilote avec Forensic Nurses et annonce de nouveaux services médicaux et de police.",
-          "date": "2026-10-19T23:59:14.540Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T12:52:40.658Z"
+      "updatedAt": "2026-10-21T14:03:21.791Z"
     }
   }
 }

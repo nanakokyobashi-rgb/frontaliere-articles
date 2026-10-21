@@ -300,8 +300,8 @@ jobs:
                     content/blog-meta-fr.ts \
                     content/seo/seo-blog-*.ts
             EDITION_FILES=(content/blog-body/*/bollettino-frontaliere-*.ts \
-                           public/images/blog/bollettino-frontaliere-*.webp \
-                           public/images/blog/thumbnails/bollettino-frontaliere-*-480w.webp)
+                           public/images/blog/article-bollettino-frontaliere-*.webp \
+                           public/images/blog/thumbnails/article-bollettino-frontaliere-*-480w.webp)
             if [ "${#EDITION_FILES[@]}" -gt 0 ]; then
               git add "${EDITION_FILES[@]}"
             fi
@@ -563,14 +563,15 @@ jobs:
           if-no-files-found: ignore
 
       # Best-effort CDN warm (upload-cdn-file.sh always exits 0 by design):
-      # the static og:image URL is cdn.frontaliereticino.ch/images/blog/<id>.webp
-      # and Discover fetches exactly that. Purge afterwards in case a 404 for
+      # the static og:image URL is the canonical governed article hero at
+      # cdn.frontaliereticino.ch/images/blog/article-<id>.webp and Discover
+      # fetches exactly that. Purge afterwards in case a 404 for
       # the not-yet-uploaded key was already cached at the edge.
       - name: Push hero + thumbnail to the CDN
         if: steps.mode.outputs.dry != 'true' && steps.commit.outputs.pushed == 'true'
         run: |
           set -euo pipefail
-          ID="bollettino-frontaliere-$(date -u +%F)"
+          ID="article-bollettino-frontaliere-$(date -u +%F)"
           HERO="public/images/blog/$ID.webp"
           THUMB="public/images/blog/thumbnails/$ID-480w.webp"
           if [ ! -f "$HERO" ]; then
@@ -609,8 +610,8 @@ jobs:
       # E nemmeno subito dopo il commit: `Push hero + thumbnail to the CDN` non
       # ha nessuna status function nel suo `if:`, quindi eredita un `success()`
       # implicito e un `exit 1` prima di lui lo salta. L'hero
-      # `bollettino-frontaliere-<data>.webp` e' l'og:image esatto che Discover
-      # fetcha: saltarlo lascia un 404 all'edge che `cf-purge-cache.mjs` non
+      # `article-bollettino-frontaliere-<data>.webp` e' l'og:image esatto che
+      # Discover fetcha: saltarlo lascia un 404 all'edge che `cf-purge-cache.mjs` non
       # ripulisce e che nessuna run successiva ripara, perche' quello step
       # lavora solo sull'ID del giorno corrente e da domani `degradation_crossed`
       # e' false per sempre. Il rosso costerebbe un pezzo dell'edizione su cui

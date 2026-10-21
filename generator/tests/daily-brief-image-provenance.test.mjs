@@ -115,6 +115,28 @@ test('the daily producer makes a fresh governed hero before either first registr
   assert.match(source, /imageAlt: data\.imageAlt\?\.\[locale\]/);
 });
 
+test('the daily workflow stages and warms the governed article hero path', () => {
+  const workflow = fs.readFileSync(path.join(ROOT, '.github/workflows/generate-daily-brief.yml'), 'utf8');
+  const assetPrefix = `${articleImageAssetId('bollettino-frontaliere-')}-`;
+  const heroGlob = `public/images/blog/${assetPrefix}*.webp`;
+  const thumbnailGlob = `public/images/blog/thumbnails/${assetPrefix}*-480w.webp`;
+  const commitStep = workflow.slice(
+    workflow.indexOf('- name: Commit and push'),
+    workflow.indexOf('- name: Preserve the unpushed article'),
+  );
+  const cdnStep = workflow.slice(
+    workflow.indexOf('- name: Push hero + thumbnail to the CDN'),
+    workflow.indexOf('- name: Summary'),
+  );
+
+  assert.ok(commitStep.includes(heroGlob), `workflow must stage ${heroGlob}`);
+  assert.ok(commitStep.includes(thumbnailGlob), `workflow must stage ${thumbnailGlob}`);
+  assert.doesNotMatch(commitStep, /public\/images\/blog\/bollettino-frontaliere-\*\.webp/);
+  assert.ok(cdnStep.includes(`ID="${assetPrefix}$(date -u +%F)"`), 'CDN warm must use the same canonical asset prefix');
+  assert.match(cdnStep, /upload-cdn-file\.sh "\$HERO" "images\/blog\/\$ID\.webp"/);
+  assert.doesNotMatch(cdnStep, /ID="bollettino-frontaliere-/);
+});
+
 test('the daily cover scene follows the headline kind without embedding its numbers', () => {
   const cases = [
     [{ kind: 'jobsTrend', weeklyChange: -247, weeklyChangePct: -18.4 }, /contemporary workplace/i],

@@ -39,6 +39,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.lucerna-stop-riscaldamenti-fossili-2050.title': 'Lucerne: phase out oil and gas heating by 2050',
     'blog.article.lucerna-stop-riscaldamenti-fossili-2050.excerpt': 'The Cantonal Council approved the revision of the Energy Act: a ban on new fossil fuel installations and a final deadline for all by 2050.',
     'blog.article.lucerna-stop-riscaldamenti-fossili-2050.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lucerna-tassi-fiscali-zero-2027.title': 'Lucerne: tax interest 2027 remains at 0%',
+    'blog.article.lucerna-tassi-fiscali-zero-2027.excerpt': 'In 2027 Lucerne maintains tax rates at 0.00%; the default remains at 4.00%.',
+    'blog.article.lucerna-tassi-fiscali-zero-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;

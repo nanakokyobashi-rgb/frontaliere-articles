@@ -13559,6 +13559,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-21.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.bollettino-frontaliere-2026-10-21.seoDescription': 'Bulletin frontalier 21 octobre 2026 : attentes aux douanes, prix du carburant, taux CHF/EUR et offres d\'emploi actives en Suisse.',
     'blog.article.bollettino-frontaliere-2026-10-21.ogDescription': 'Les chiffres du 21 octobre 2026 pour les frontaliers : attentes aux douanes, communes où le carburant coûte le moins cher, dernier taux CHF/EUR et offres d\'emploi actives sur notre job board suisse au quotidien.',
+    'blog.article.revolut-servizi-interrotti.title': 'Banque numérique : paiements et changes perturbés en Suisse',
+    'blog.article.revolut-servizi-interrotti.excerpt': 'Problèmes concernant les paiements, les versements et le change de devises Perturbations commencées peu après 8:00 en Suisse Google indique un retour progressif des services Revolut : argent',
+    'blog.article.revolut-servizi-interrotti.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;

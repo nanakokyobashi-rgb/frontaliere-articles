@@ -13556,6 +13556,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-21.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.bollettino-frontaliere-2026-10-21.seoDescription': 'Grenzgänger-Bulletin am 21. Oktober 2026: aktuelle Wartezeiten, Benzinpreise, CHF/EUR-Kurs und offene Stellen in der Schweiz.',
     'blog.article.bollettino-frontaliere-2026-10-21.ogDescription': 'Die Zahlen vom 21. Oktober 2026 für Grenzgänger: wie lange man an jedem Übergang wartet, wo das Benzin am günstigsten ist, der aktuelle Franken-Euro-Kurs und die Zahl aktiver Stellenanzeigen auf unserem Job-Board in der Schweiz.',
+    'blog.article.revolut-servizi-interrotti.title': 'Digitalbank, Störungen in der Schweiz bei Zahlungen und Währungsumtausch',
+    'blog.article.revolut-servizi-interrotti.excerpt': 'Probleme bei Zahlungen, Einzahlungen und beim Währungsumtausch Beeinträchtigungen begannen in der Schweiz kurz nach 8:00 Google weist auf eine schrittweise Wiederaufnahme der Dienste hin Revolut: Geld',
+    'blog.article.revolut-servizi-interrotti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

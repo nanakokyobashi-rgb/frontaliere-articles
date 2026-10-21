@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "fisco",
-  "updatedAt": "2026-10-21T01:41:58.731Z",
-  "contentHash": "277ab94eb2bcce5091cb11d55cd0a0c6ee8b6912433618f6b0d4244317334e41",
+  "updatedAt": "2026-10-21T14:03:21.791Z",
+  "contentHash": "b56a7c13609d1ac4c5d19ee2efc8501f51866c016882b40e32051983b0705010",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T15:53:28.523Z",
+      "updatedAt": "2026-10-20T20:55:38.574Z",
       "keyFacts": 0
     }
   ],
@@ -115,7 +115,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -124,6 +124,12 @@
           "url": "/articoli-lucerna/lucerna-riduce-imposte/",
           "excerpt": "La fonte Zentralplus presenta come definitiva la riduzione delle imposte nel Canton Lucerna; il dataset fiscale 2026 riporta oneri sui redditi annui e valori A0.",
           "date": "2026-10-21T01:30:31.409Z"
+        },
+        {
+          "title": "Lucerna: interessi fiscali 2027 restano allo 0%",
+          "url": "/articoli-lucerna/lucerna-tassi-fiscali-zero-2027/",
+          "excerpt": "Nel 2027 Lucerna mantiene allo 0,00% i tassi fiscali; la mora resta al 4,00%.",
+          "date": "2026-10-21T13:53:04.510Z"
         },
         {
           "title": "Kriens torna in rosso dopo surplus milionari",
@@ -160,12 +166,6 @@
           "url": "/articoli-svizzera/imposta-di-succesione-e-donazione-canton-lucerna/",
           "excerpt": "Sono previste aliquote diverse in base al grado di parentela tra i beneficiari e i donanti.",
           "date": "2026-08-15T22:49:24.474Z"
-        },
-        {
-          "title": "Lucerna supera Zugo: nuovo paradiso fiscale per le imprese",
-          "url": "/articoli-frontaliere/lucerna-paradiso-fiscale-frontalieri/",
-          "excerpt": "Lucerna riduce l'imposta sugli utili al 11,66%, superando Zugo. Impatto sui frontalieri e confronto con l'UE.",
-          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "latestCantonArticles": [],
@@ -191,7 +191,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-21T01:41:58.731Z"
+      "updatedAt": "2026-10-21T14:03:21.791Z"
     },
     "en": {
       "canton": "LU",
@@ -284,7 +284,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -293,6 +293,12 @@
           "url": "/en/lucerne-articles/lucerne-canton-cuts-taxes/",
           "excerpt": "The Zentralplus source presents the tax reduction in the Canton of Lucerne as definitive; the 2026 tax dataset reports tax burdens on annual incomes and A0 values.",
           "date": "2026-10-21T01:30:31.409Z"
+        },
+        {
+          "title": "Lucerne: tax interest 2027 remains at 0%",
+          "url": "/en/lucerne-articles/lucerne-tax-interest-zero-2027/",
+          "excerpt": "In 2027 Lucerne maintains tax rates at 0.00%; the default remains at 4.00%.",
+          "date": "2026-10-21T13:53:04.510Z"
         },
         {
           "title": "Kriens back in the red after million-dollar surpluses",
@@ -329,12 +335,6 @@
           "url": "/en/swiss-articles/imposta-di-succesione-e-donazione-canton-lucerne-en/",
           "excerpt": "Different rates are provided according to the degree of kinship between beneficiaries and donors.",
           "date": "2026-08-15T22:49:24.474Z"
-        },
-        {
-          "title": "Lucerne overtakes Zug: new tax haven for businesses",
-          "url": "/en/cross-border-articles/lucerne-new-swiss-tax-haven/",
-          "excerpt": "Lucerne reduces corporate tax to 11.66%, surpassing Zug. Impact on cross-border workers and comparison with the EU.",
-          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "latestCantonArticles": [],
@@ -360,7 +360,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-21T01:41:58.731Z"
+      "updatedAt": "2026-10-21T14:03:21.791Z"
     },
     "de": {
       "canton": "LU",
@@ -453,7 +453,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -462,6 +462,12 @@
           "url": "/de/luzern-artikel/luzern-senkt-steuern/",
           "excerpt": "Die Quelle Zentralplus stellt die Steuersenkung im Kanton Luzern als endgültig dar; der Steuerdatensatz 2026 weist Belastungen für Jahreseinkommen und A0-Werte aus.",
           "date": "2026-10-21T01:30:31.409Z"
+        },
+        {
+          "title": "Luzern: Steuerzinsen 2027 bleiben bei 0%",
+          "url": "/de/luzern-artikel/luzern-steuerzinsen-null-2027/",
+          "excerpt": "Im Jahr 2027 behält Luzern die Steuersätze bei 0,00%; der Verzug bleibt bei 4,00%.",
+          "date": "2026-10-21T13:53:04.510Z"
         },
         {
           "title": "Kriens schreibt nach Überschüssen in Millionenhöhe wieder rote Zahlen",
@@ -498,12 +504,6 @@
           "url": "/de/schweiz-artikel/imposta-di-succesione-e-donazione-canton-luzern-de/",
           "excerpt": "Je nach Verwandtschaftsgrad zwischen den Begünstigten und den Spendern gibt es unterschiedliche Sätze.",
           "date": "2026-08-15T22:49:24.474Z"
-        },
-        {
-          "title": "Luzern überholt Zug: Neuer Steuerparadies für Unternehmen",
-          "url": "/de/grenzgaenger-artikel/luzern-neuer-steuerparadies-schweiz/",
-          "excerpt": "Luzern senkt die Gewinnsteuer auf 11,66%, überholt Zug. Auswirkungen auf Grenzgänger und Vergleich mit der EU.",
-          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "latestCantonArticles": [],
@@ -529,7 +529,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-21T01:41:58.731Z"
+      "updatedAt": "2026-10-21T14:03:21.791Z"
     },
     "fr": {
       "canton": "LU",
@@ -622,7 +622,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-20T20:55:38.574Z"
         }
       ],
       "curatedArticles": [
@@ -631,6 +631,12 @@
           "url": "/fr/articles-lucerne/lucerne-baisse-impots/",
           "excerpt": "La source Zentralplus présente la réduction des impôts dans le canton de Lucerne comme définitive ; le jeu de données fiscales 2026 indique des charges sur les revenus annuels et des valeurs A0.",
           "date": "2026-10-21T01:30:31.409Z"
+        },
+        {
+          "title": "Lucerne : les intérêts fiscaux 2027 restent à 0%",
+          "url": "/fr/articles-lucerne/lucerne-interets-fiscaux-zero-2027/",
+          "excerpt": "En 2027, Lucerne maintient les taux d'imposition à 0,00 % ; les arriérés restent à 4,00 %.",
+          "date": "2026-10-21T13:53:04.510Z"
         },
         {
           "title": "Kriens repasse dans le rouge après des excédents de plusieurs millions",
@@ -667,12 +673,6 @@
           "url": "/fr/articles-suisse/imposta-di-succesione-e-donazione-canton-lucerne-fr/",
           "excerpt": "Des taux différents sont prévus en fonction du degré de parenté entre les bénéficiaires et les donneurs.",
           "date": "2026-08-15T22:49:24.474Z"
-        },
-        {
-          "title": "Lucerne dépasse Zoug: nouveau paradis fiscal pour les entreprises",
-          "url": "/fr/articles-frontalier/lucerne-nouveau-paradis-fiscal-suisse/",
-          "excerpt": "Lucerne réduit l'impôt sur les bénéfices à 11,66%, dépassant Zoug. Impact sur les frontaliers et comparaison avec l'UE.",
-          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "latestCantonArticles": [],
@@ -698,7 +698,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-21T01:41:58.731Z"
+      "updatedAt": "2026-10-21T14:03:21.791Z"
     }
   }
 }

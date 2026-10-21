@@ -549,6 +549,16 @@ jobs:
                 exit 1
               fi
               export GH_TOKEN="$runtime_pat"
+              # The stale plan dispatches one helper per section in parallel.
+              # Share one short-lived run snapshot across that fan-out so each
+              # worker reuses the same visibility result within the TTL window.
+              # Controlled harness evidence (16 workers, empty run list, two
+              # attempts × ten polls): 352 `gh run list` calls without the
+              # snapshot, 2 with it. This is a request-count measurement, not
+              # production telemetry.
+              replay_run_list_cache="$RUNNER_TEMP/fast-publish-section-replay-runs-${GITHUB_RUN_ID}.json"
+              : > "$replay_run_list_cache"
+              export REPLAY_RUN_LIST_CACHE_FILE="$replay_run_list_cache"
               dispatch_stale_replay() {
                 local section="${1:-}"
                 local article_ids="${2:-[]}"

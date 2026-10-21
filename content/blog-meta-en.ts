@@ -13557,6 +13557,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-21.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.bollettino-frontaliere-2026-10-21.seoDescription': 'Cross-border daily brief for workers, October 21, 2026: latest waits, fuel prices, CHF/EUR rate and active jobs in Switzerland.',
     'blog.article.bollettino-frontaliere-2026-10-21.ogDescription': 'Daily figures for cross-border commuters, October 21, 2026: measured waits at each crossing, where fuel costs least, the latest franc-euro rate and active Swiss job listings on our board, with links to live pages.',
+    'blog.article.revolut-servizi-interrotti.title': 'Digital banking disruptions affect Swiss payments and FX',
+    'blog.article.revolut-servizi-interrotti.excerpt': 'Problems with payments, deposits, and currency exchange Disruptions began shortly after 8:00 in Switzerland Google indicates a gradual return of Revolut services: money',
+    'blog.article.revolut-servizi-interrotti.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

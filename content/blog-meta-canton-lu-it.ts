@@ -39,6 +39,9 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.lucerna-stop-riscaldamenti-fossili-2050.title': 'Lucerna: stop ai riscaldamenti a olio e gas entro il 2050',
     'blog.article.lucerna-stop-riscaldamenti-fossili-2050.excerpt': 'Il Consiglio cantonale ha approvato la revisione della legge sull\'energia: divieto di nuovi impianti fossili e scadenza finale per tutti entro il 2050.',
     'blog.article.lucerna-stop-riscaldamenti-fossili-2050.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lucerna-tassi-fiscali-zero-2027.title': 'Lucerna: interessi fiscali 2027 restano allo 0%',
+    'blog.article.lucerna-tassi-fiscali-zero-2027.excerpt': 'Nel 2027 Lucerna mantiene allo 0,00% i tassi fiscali; la mora resta al 4,00%.',
+    'blog.article.lucerna-tassi-fiscali-zero-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonLuIt;

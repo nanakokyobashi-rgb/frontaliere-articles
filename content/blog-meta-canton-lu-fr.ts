@@ -39,6 +39,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.lucerna-stop-riscaldamenti-fossili-2050.title': 'Lucerne : fin des chauffages au mazout et au gaz d’ici 2050',
     'blog.article.lucerna-stop-riscaldamenti-fossili-2050.excerpt': 'Le Conseil cantonal a approuvé la révision de la loi sur l’énergie : interdiction des nouvelles installations fossiles et échéance finale pour tous d’ici 2050.',
     'blog.article.lucerna-stop-riscaldamenti-fossili-2050.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lucerna-tassi-fiscali-zero-2027.title': 'Lucerne : les intérêts fiscaux 2027 restent à 0%',
+    'blog.article.lucerna-tassi-fiscali-zero-2027.excerpt': 'En 2027, Lucerne maintient les taux d\'imposition à 0,00 % ; les arriérés restent à 4,00 %.',
+    'blog.article.lucerna-tassi-fiscali-zero-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

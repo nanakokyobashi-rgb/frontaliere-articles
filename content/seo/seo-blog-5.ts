@@ -112762,6 +112762,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-revolut-servizi-interrotti': {
+    title: 'Banca digitale, disservizi in Svizzera per pagamenti e cambi',
+    description: 'Problemi su pagamenti, versamenti e cambio di valute Disagi iniziati poco dopo le 8:00 in Svizzera Google indica un ritorno graduale dei servizi',
+    keywords: 'frontalieri, ticino, svizzera, italia, banca, digitale, disservizi, pagamenti',
+    ogTitle: 'Revolut, guasto ai servizi: colpita anche la Svizzera',
+    ogDescription: 'Problemi su pagamenti, versamenti e cambio di valute Disagi iniziati poco dopo le 8:00 in Svizzera Google indica un ritorno graduale dei servizi Revolut: denaro',
+    canonicalPath: '/articoli-frontaliere/revolut-servizi-interrotti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Banca digitale, disservizi in Svizzera per pagamenti e cambi",
+      "description": "Problemi su pagamenti, versamenti e cambio di valute Disagi iniziati poco dopo le 8:00 in Svizzera Google indica un ritorno graduale dei servizi",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-revolut-servizi-interrotti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T14:40:20+00:00",
+      "dateModified": "2026-10-21T14:40:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/revolut-servizi-interrotti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
