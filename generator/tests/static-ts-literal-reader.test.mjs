@@ -7,7 +7,7 @@ import {
   readStaticObjectEntries,
   readStaticStringLiteral,
 } from '../../scripts/lib/ts-literals.mjs';
-import { metaFieldRegex } from '../scripts/lib/meta-field-regex.mjs';
+import { metaFieldRegex, metaFieldRegexFragment } from '../scripts/lib/meta-field-regex.mjs';
 
 const ROOT = resolve(new URL('../..', import.meta.url).pathname);
 
@@ -102,6 +102,15 @@ test('metaFieldRegex conserva la superficie RegExp senza scansionare commenti e 
   assert.equal(matches.length, 1);
   assert.equal(matches[0][1], 'reale');
   assert.equal(matches[0][2], "L\\'incontro");
+});
+
+test('metaFieldRegex rifiuta una mappa troncata mentre l adapter accetta solo il frammento esplicito', () => {
+  const fragment = "'blog.article.reale.title': 'L\\'incontro',";
+  assert.throws(
+    () => [...fragment.matchAll(metaFieldRegex('title'))],
+    /not closed|dangling comma/u,
+  );
+  assert.equal([...fragment.matchAll(metaFieldRegexFragment('title'))][0][1], 'reale');
 });
 
 test('metaFieldRegex conserva gli offset raw e gli id che contengono punti', () => {

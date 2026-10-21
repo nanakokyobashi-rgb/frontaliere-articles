@@ -35,6 +35,19 @@ function makeMatch(source, entry, index) {
  * exposes only the small RegExp-compatible surface used by this repository.
  */
 export function metaFieldRegex(field) {
+  return createMetaFieldMatcher(field);
+}
+
+/**
+ * Explicit adapter for the append-only metadata block emitted before it is
+ * wrapped in the complete object file. Full metadata readers must use
+ * `metaFieldRegex`, which rejects a truncated object at EOF.
+ */
+export function metaFieldRegexFragment(field) {
+  return createMetaFieldMatcher(field, { allowTerminalFragment: true });
+}
+
+function createMetaFieldMatcher(field, { allowTerminalFragment = false } = {}) {
   if (!/^[A-Za-z][A-Za-z0-9]*$/u.test(field)) {
     throw new TypeError(`invalid meta field: ${field}`);
   }
@@ -44,7 +57,11 @@ export function metaFieldRegex(field) {
   const collect = (source) => {
     if (sourceRef === source) return;
     sourceRef = source;
-    matches = readStaticObjectEntries(source, 'blog-meta.ts', { allowTerminalFragment: true })
+    matches = readStaticObjectEntries(
+      source,
+      'blog-meta.ts',
+      allowTerminalFragment ? { allowTerminalFragment: true } : {},
+    )
       .filter(({ key }) => {
         const suffix = `.${field}`;
         return key.startsWith('blog.article.') && key.endsWith(suffix);
