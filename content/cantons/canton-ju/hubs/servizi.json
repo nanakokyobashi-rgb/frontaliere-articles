@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-10-21T04:08:52.546Z",
-  "contentHash": "c6d7f60dd0403af0ec59f201dc55ea761d36d5993d03e95a807a1882e5050ff9",
+  "updatedAt": "2026-10-21T06:24:31.963Z",
+  "contentHash": "edc59340ce14260c67102366224a4a65a6257397e813ff1c452c20a8b73e14a5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -76,11 +76,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-20T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-21T16:30:00.000Z"
             },
             {
@@ -92,6 +87,11 @@
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
               "date": "2026-10-23T16:30:00.000Z"
+            },
+            {
+              "label": "Amavita Pré Guillaume",
+              "detail": "Delémont, Delémont",
+              "date": "2026-10-24T06:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
@@ -178,7 +178,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T06:24:31.963Z"
     },
     "en": {
       "canton": "JU",
@@ -227,11 +227,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-20T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-21T16:30:00.000Z"
             },
             {
@@ -243,6 +238,11 @@
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
               "date": "2026-10-23T16:30:00.000Z"
+            },
+            {
+              "label": "Amavita Pré Guillaume",
+              "detail": "Delémont, Delémont",
+              "date": "2026-10-24T06:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
@@ -325,7 +325,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T06:24:31.963Z"
     },
     "de": {
       "canton": "JU",
@@ -374,11 +374,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-20T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-21T16:30:00.000Z"
             },
             {
@@ -390,6 +385,11 @@
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
               "date": "2026-10-23T16:30:00.000Z"
+            },
+            {
+              "label": "Amavita Pré Guillaume",
+              "detail": "Delémont, Delémont",
+              "date": "2026-10-24T06:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
@@ -472,7 +472,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T06:24:31.963Z"
     },
     "fr": {
       "canton": "JU",
@@ -521,11 +521,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-20T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-21T16:30:00.000Z"
             },
             {
@@ -537,6 +532,11 @@
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
               "date": "2026-10-23T16:30:00.000Z"
+            },
+            {
+              "label": "Amavita Pré Guillaume",
+              "detail": "Delémont, Delémont",
+              "date": "2026-10-24T06:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
@@ -615,7 +615,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T06:24:31.963Z"
     }
   }
 }
