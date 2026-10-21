@@ -30,6 +30,9 @@ const blogMetaCantonGrFr: Record<string, string> = {
     'blog.article.acqua-domleschg-feldis-scheid.title': 'Domleschg : camion-citerne pour l\'eau à Feldis et Scheid',
     'blog.article.acqua-domleschg-feldis-scheid.excerpt': 'Domleschg prévoit d\'acheminer de l\'eau potable à Feldis et Scheid.',
     'blog.article.acqua-domleschg-feldis-scheid.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sconti-vereina-locali-ospiti.title': 'Vereina : le parlement demande d’examiner des réductions',
+    'blog.article.sconti-vereina-locali-ospiti.excerpt': 'Le parlement cantonal des Grisons charge le gouvernement d’examiner des réductions pour le transport de voitures Vereina : les bénéficiaires et la date d’entrée en vigueur restent à définir.',
+    'blog.article.sconti-vereina-locali-ospiti.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGrFr;

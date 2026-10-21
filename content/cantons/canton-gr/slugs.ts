@@ -12,6 +12,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'parco-solare-nalps-tujetsch': { it: 'parco-solare-nalps-tujetsch', en: 'nalps-alpine-solar-park-tujetsch', de: 'alpin-solarpark-nalps-tujetsch', fr: 'parc-solaire-alpin-nalps-tujetsch' },
  'lido-grono-estate-2027': { it: 'lido-grono-estate-2027', en: 'grono-pool-opening-2027', de: 'grono-schwimmbad-2027', fr: 'piscine-grono-ete-2027' },
  'acqua-domleschg-feldis-scheid': { it: 'acqua-domleschg-feldis-scheid', en: 'domleschg-water-shortage-feldis-scheid', de: 'domleschg-wasserknappheit-feldis-scheid', fr: 'domleschg-penurie-eau-feldis-scheid' },
+ 'sconti-vereina-locali-ospiti': { it: 'sconti-vereina-locali-ospiti', en: 'vereina-discounts-locals-guests', de: 'vereina-rabatte-einheimische-gaeste', fr: 'vereina-reductions-locaux-visiteurs' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
