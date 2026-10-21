@@ -60,6 +60,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.chuv-ostetriche-salari-classi.title': 'CHUV: ostetriche chiedono salari equi, classe 10 per tutte',
     'blog.article.chuv-ostetriche-salari-classi.excerpt': 'CHUV: classe 9 o 10 per lo stesso lavoro Solo un terzo delle ostetriche è in classe 10 Scarto medio: CHF 8\'000 l\'anno La richiesta risale al 2018 Dove → CHUV',
     'blog.article.chuv-ostetriche-salari-classi.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.fisco-vaud-indennita-abuso-imposte.title': 'Fisco Vaud: imposte su indennità abusi, ricorso in vista',
+    'blog.article.fisco-vaud-indennita-abuso-imposte.excerpt': 'A Pully: abusi al Collège de Champittet alla fine degli anni \'70 Indennità della Chiesa: CHF 220\'000, divisa in due parti Dopo l\'opposizione: CHF 120\'000 ancora',
+    'blog.article.fisco-vaud-indennita-abuso-imposte.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVdIt;

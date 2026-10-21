@@ -60,6 +60,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.chuv-ostetriche-salari-classi.title': 'CHUV: Hebammen fordern faire Löhne, Klasse 10 für alle',
     'blog.article.chuv-ostetriche-salari-classi.excerpt': 'CHUV: Klasse 9 oder 10 für dieselbe Arbeit Nur ein Drittel der Hebammen ist in Klasse 10 Durchschnittlicher Unterschied: CHF 8\'000 pro Jahr Die Forderung geht',
     'blog.article.chuv-ostetriche-salari-classi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.fisco-vaud-indennita-abuso-imposte.title': 'Waadt: Steuern auf Missbrauchs-Entschädigung, Rekurs',
+    'blog.article.fisco-vaud-indennita-abuso-imposte.excerpt': 'In Pully: Missbrauch am Collège de Champittet Ende der 70er-Jahre Entschädigung der Kirche: CHF 220\'000, in zwei Teile aufgeteilt Nach der Einsprache: CHF',
+    'blog.article.fisco-vaud-indennita-abuso-imposte.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVdDe;

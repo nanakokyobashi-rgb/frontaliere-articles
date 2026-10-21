@@ -22,6 +22,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'truffa-falsi-poliziotti-vaud': { it: 'truffa-falsi-poliziotti-vaud', en: 'seven-million-defrauded-in-vaud-by-fake-agents', de: 'sieben-millionen-im-kanton-waadt-von-falschen-agenten-ergaunert', fr: 'sept-millions-escroques-dans-le-canton-de-vaud-par-de-faux-agents' },
  'cdhr-contributo-differenziale-2025': { it: 'cdhr-contributo-differenziale-2025', en: 'cdhr-differential-contribution-2025', de: 'cdhr-differenzbeitrag-2025', fr: 'cdhr-contribution-differentielle-2025' },
  'chuv-ostetriche-salari-classi': { it: 'chuv-ostetriche-salari-classi', en: 'chuv-midwives-salary-classes', de: 'chuv-hebammen-gehaelter-klassen', fr: 'chuv-sages-femmes-salaires-classes' },
+ 'fisco-vaud-indennita-abuso-imposte': { it: 'fisco-vaud-indennita-abuso-imposte', en: 'vaud-tax-abuse-compensation-taxes', de: 'waadt-steuer-missbrauchsentschadigung-steuern', fr: 'fisc-vaud-indemnite-abus-impots' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

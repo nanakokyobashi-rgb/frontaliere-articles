@@ -215,4 +215,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'fisco-vaud-indennita-abuso-imposte',
+ category: 'fiscale',
+ date: '2026-10-21T04:19:30.522Z',
+ image: '/images/blog/article-fisco-vaud-indennita-abuso-imposte.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
