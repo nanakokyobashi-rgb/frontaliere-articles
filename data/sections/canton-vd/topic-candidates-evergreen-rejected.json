@@ -4,37 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vd::https://www.ledauphine.com/economie/2026/10/17/ce-troncon-n-est-pas-simple-il-faut-etre-vigilant": {
-      "section": "canton-vd",
-      "ts": 1792293451483
-    },
-    "canton-vd::https://www.ledauphine.com/economie/2026/10/16/a-geneve-les-femmes-gagnent-27-de-moins-que-les-hommes": {
-      "section": "canton-vd",
-      "ts": 1792293460330
-    },
-    "canton-vd::https://www.ledauphine.com/economie/2026/10/17/un-batiment-de-la-zac-etoile-recompense-au-trophee-beton-pro-2026": {
-      "section": "canton-vd",
-      "ts": 1792293582701
-    },
-    "canton-vd::https://www.estrepublicain.fr/economie/2026/10/18/frontaliers-ca-tangue-pour-les-marques-horlogeres-du-groupe-de-luxe-lvmh": {
-      "section": "canton-vd",
-      "ts": 1792307001876
-    },
-    "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-155?s=5": {
-      "section": "canton-vd",
-      "ts": 1792307024558
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/pret-immobilier-chf-tournant-juridique": {
-      "section": "canton-vd",
-      "ts": 1792397740508
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/declaration-dris-tou-couple-frontalier": {
-      "section": "canton-vd",
-      "ts": 1792397748240
-    },
     "canton-vd::https://www.guidedufrontalier.com/actualites/hebdo-du-frontalier": {
       "section": "canton-vd",
       "ts": 1792460878455
+    },
+    "canton-vd::https://www.guidedufrontalier.com/actualites/pret-immobilier-chf-tournant-juridique": {
+      "section": "canton-vd",
+      "ts": 1792578201316
     }
   }
 }
