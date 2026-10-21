@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {
   isTypeScriptObjectLiteralMemberStart,
+  isPotentialTypeScriptObjectMemberStart,
   unsupportedObjectMemberAt,
 } from './typescript-expression-scanner.mjs';
 import { repairLegacyDoubleEscapedBreaks, tsStringEscapesWithNewlineAs } from '../../generator/scripts/lib/unescape-ts-string.mjs';
@@ -126,7 +127,9 @@ export function extractArticleBodyFields(source, { allowEndOfInput = false, vali
       index = afterTrivia;
       continue;
     }
-    const unsupportedObjectMember = unsupportedObjectMemberAt(text, index);
+    const unsupportedObjectMember = isPotentialTypeScriptObjectMemberStart(text, index)
+      ? unsupportedObjectMemberAt(text, index)
+      : null;
     if (unsupportedObjectMember) {
       if (unsupportedObjectMember.kind === 'computed') {
         throw new Error('Computed article body properties are not supported in static source');
@@ -143,7 +146,7 @@ export function extractArticleBodyFields(source, { allowEndOfInput = false, vali
     }
     const key = ARTICLE_KEY_RE.exec(keyToken.value ?? '');
     const colon = skipTrivia(text, keyToken.end);
-    if (key && isTypeScriptObjectLiteralMemberStart(text, index) && text[colon] !== ':') {
+    if (key && text[colon] !== ':' && isTypeScriptObjectLiteralMemberStart(text, index)) {
       throw new Error('Article body properties must use a static key/value property in object literals');
     }
     if (!key || keyToken.error || text[colon] !== ':') {

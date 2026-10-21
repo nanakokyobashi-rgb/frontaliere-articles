@@ -22,6 +22,7 @@ import {
 import { decodeTypeScriptString } from '../../generator/scripts/lib/article-meta-block.mjs';
 import {
   isTypeScriptObjectLiteralMemberStart,
+  isPotentialTypeScriptObjectMemberStart,
   unsupportedObjectMemberAt,
   skipTypeScriptQuotedToken as skipQuotedToken,
 } from '../lib/typescript-expression-scanner.mjs';
@@ -158,7 +159,9 @@ function extractArticleBodyValues(source) {
       cursor = skipBlockComment(source, cursor);
       continue;
     }
-    const unsupportedObjectMember = unsupportedObjectMemberAt(source, cursor);
+    const unsupportedObjectMember = isPotentialTypeScriptObjectMemberStart(source, cursor)
+      ? unsupportedObjectMemberAt(source, cursor)
+      : null;
     if (unsupportedObjectMember?.kind === 'computed') {
       const { keyEnd } = unsupportedObjectMember;
       const expressionEnd = keyEnd >= 0 ? keyEnd - 1 : source.length;
@@ -173,52 +176,52 @@ function extractArticleBodyValues(source) {
     if (char === "'" || char === '"' || char === TEMPLATE_QUOTE) {
       const tokenStart = cursor;
       const tokenEnd = skipQuotedToken(source, tokenStart);
-      if (isTypeScriptObjectLiteralMemberStart(source, tokenStart)) {
-        const keyLiteral = readQuotedValue(source, tokenStart, char);
-        const dynamicKeyExpression = source.slice(tokenStart, tokenEnd);
-        if (
-          keyLiteral?.dynamic &&
-          /^`blog\.article\.[\s\S]*`$/u.test(dynamicKeyExpression)
-        ) {
-          throw new Error('chiave TypeScript dinamica non verificabile per blog.article: '
-            + dynamicKeyExpression);
-        }
-        if (keyLiteral && !keyLiteral.dynamic) {
-          const propertyKey = decodeBodyValue(keyLiteral.raw, char);
-          const keyMatch = /^blog\.article\.(.+)\.(body\d+|faq)$/.exec(propertyKey);
+      const keyLiteral = readQuotedValue(source, tokenStart, char);
+      const dynamicKeyExpression = source.slice(tokenStart, tokenEnd);
+      if (
+        keyLiteral?.dynamic
+        && /^`blog\.article\.[\s\S]*`$/u.test(dynamicKeyExpression)
+        && isTypeScriptObjectLiteralMemberStart(source, tokenStart)
+      ) {
+        throw new Error('chiave TypeScript dinamica non verificabile per blog.article: '
+          + dynamicKeyExpression);
+      }
+      if (keyLiteral && !keyLiteral.dynamic && /^[b\\]/u.test(keyLiteral.raw)
+        && isTypeScriptObjectLiteralMemberStart(source, tokenStart)) {
+        const propertyKey = decodeBodyValue(keyLiteral.raw, char);
+        const keyMatch = /^blog\.article\.(.+)\.(body\d+|faq)$/.exec(propertyKey);
+        if (keyMatch) {
           const afterKey = skipTriviaAndComments(source, tokenEnd);
-          if (keyMatch && source[afterKey] !== ':') {
+          if (source[afterKey] !== ':') {
             throw new Error('proprietà blog.article non letterale non verificabile: ' + propertyKey);
           }
-          if (keyMatch) {
-            const valueStart = skipTriviaAndComments(source, afterKey + 1);
-            const valueQuote = source[valueStart];
-            if (!["'", '"', TEMPLATE_QUOTE].includes(valueQuote)) {
-              throw new Error('valore TypeScript non letterale per blog.article.'
-                + keyMatch[1] + '.' + keyMatch[2]);
-            }
-            const literal = readQuotedValue(source, valueStart, valueQuote);
-            if (!literal) {
-              throw new Error('stringa TypeScript non terminata per blog.article.'
-                + keyMatch[1] + '.' + keyMatch[2]);
-            }
-            if (literal.dynamic) {
-              throw new Error('template TypeScript dinamico non verificabile per blog.article.'
-                + keyMatch[1] + '.' + keyMatch[2]);
-            }
-            const valueEnd = skipTriviaAndComments(source, literal.end);
-            if (![',', '}'].includes(source[valueEnd])) {
-              throw new Error('espressione TypeScript non letterale non verificabile per blog.article.'
-                + keyMatch[1] + '.' + keyMatch[2]);
-            }
-            values.push({
-              field: 'blog.article.' + keyMatch[1] + '.' + keyMatch[2],
-              markdown: decodeBodyValue(literal.raw, valueQuote),
-              index: tokenStart,
-            });
-            cursor = literal.end;
-            continue;
+          const valueStart = skipTriviaAndComments(source, afterKey + 1);
+          const valueQuote = source[valueStart];
+          if (!["'", '"', TEMPLATE_QUOTE].includes(valueQuote)) {
+            throw new Error('valore TypeScript non letterale per blog.article.'
+              + keyMatch[1] + '.' + keyMatch[2]);
           }
+          const literal = readQuotedValue(source, valueStart, valueQuote);
+          if (!literal) {
+            throw new Error('stringa TypeScript non terminata per blog.article.'
+              + keyMatch[1] + '.' + keyMatch[2]);
+          }
+          if (literal.dynamic) {
+            throw new Error('template TypeScript dinamico non verificabile per blog.article.'
+              + keyMatch[1] + '.' + keyMatch[2]);
+          }
+          const valueEnd = skipTriviaAndComments(source, literal.end);
+          if (![',', '}'].includes(source[valueEnd])) {
+            throw new Error('espressione TypeScript non letterale non verificabile per blog.article.'
+              + keyMatch[1] + '.' + keyMatch[2]);
+          }
+          values.push({
+            field: 'blog.article.' + keyMatch[1] + '.' + keyMatch[2],
+            markdown: decodeBodyValue(literal.raw, valueQuote),
+            index: tokenStart,
+          });
+          cursor = literal.end;
+          continue;
         }
       }
       cursor = tokenEnd;

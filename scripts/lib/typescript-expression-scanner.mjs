@@ -71,6 +71,10 @@ const REGEX_PREFIX_PUNCTUATION = new Set([
   '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>', '=>',
 ]);
 const OBJECT_LITERAL_PREFIX_TOKENS = new Set(['=', ':', 'return', 'default', '(', '[', ',', '?']);
+const TYPE_ASSERTION_PREFIX_TOKENS = new Set([
+  ...OBJECT_LITERAL_PREFIX_TOKENS,
+  '=>', 'await', 'delete', 'throw', 'typeof', 'void', 'yield', '!', '~', '+', '-',
+]);
 const OBJECT_MEMBER_PREFIX_MODIFIERS = new Set(['get', 'set', 'async', '*']);
 const TS_TRIVIA_PATTERN = String.raw`(?:\s|\/\*[\s\S]*?\*\/|\/\/[^\r\n]*(?:\r?\n|$))*`;
 const COMPUTED_PROPERTY_PREFIX_RE = new RegExp(
@@ -120,7 +124,7 @@ function typeAliasHeaderEqualsOffset(source, offset) {
   return -1;
 }
 
-function isTypeAssertionBeforeExpression(source, offset) {
+function typeAssertionExpressionStart(source, offset) {
   let cursor = offset;
   let depth = 0;
   while (cursor < source.length) {
@@ -139,7 +143,7 @@ function isTypeAssertionBeforeExpression(source, offset) {
       depth -= 1;
       if (depth === 0) {
         cursor = skipTrivia(source, cursor + 1);
-        return source[cursor] === '{'
+        const startsExpression = source[cursor] === '{'
           || source[cursor] === '('
           || source[cursor] === '['
           || ['"', "'", '`', '/'].includes(source[cursor])
@@ -147,11 +151,16 @@ function isTypeAssertionBeforeExpression(source, offset) {
           || /[0-9]/u.test(source[cursor] || '')
           || source[cursor] === '.' && /[0-9]/u.test(source[cursor + 1] || '')
           || /[$_\p{ID_Start}]/u.test(source[cursor] || '');
+        return startsExpression ? cursor : -1;
       }
     }
     cursor += 1;
   }
-  return false;
+  return -1;
+}
+
+function isTypeAssertionBeforeExpression(source, offset) {
+  return typeAssertionExpressionStart(source, offset) >= 0;
 }
 
 /**
@@ -179,6 +188,7 @@ function delimiterContextAt(source, offset) {
   let variableNamePending = false;
   let variableTypePending = false;
   let pendingVariableTypeObject = false;
+  let angleAssertedObjectOffset = -1;
   const markToken = (token, closesFunctionParameters = false) => {
     if (delimiters.length) delimiters.at(-1).lastToken = token;
     previousToken = token;
@@ -218,6 +228,12 @@ function delimiterContextAt(source, offset) {
       : /[$_\p{ID_Start}]/u.test(ch)
       ? /^[\w$]+/u.exec(source.slice(index, offset))?.[0]
       : ch;
+    if (ch === '<' && TYPE_ASSERTION_PREFIX_TOKENS.has(previousToken)) {
+      const expressionStart = typeAssertionExpressionStart(source, index);
+      if (expressionStart >= 0 && source[expressionStart] === '{') {
+        angleAssertedObjectOffset = expressionStart;
+      }
+    }
     if (typeAliasDepth >= 0 && typeAliasHasRhsToken && delimiters.length === typeAliasDepth
       && /[\r\n\u2028\u2029]/u.test(source.slice(previousSignificantEnd, index))
       && !['&', '|', '?', '[', ':', ',', '>', '=>', 'extends'].includes(token)
@@ -258,8 +274,9 @@ function delimiterContextAt(source, offset) {
         variableNamePending && delimiters.length === variableDeclarationDepth
         || delimiters.at(-1)?.functionParameters === true
       );
+      const angleAssertedObject = ch === '{' && index === angleAssertedObjectOffset;
       const objectLiteral = ch === '{' && !typeLiteral && !bindingPattern
-        && OBJECT_LITERAL_PREFIX_TOKENS.has(previousToken)
+        && (OBJECT_LITERAL_PREFIX_TOKENS.has(previousToken) || angleAssertedObject)
         && !(previousToken === '('
           && /(?:=|return|yield)\s*\(\s*$/u.test(source.slice(0, index))
           && isArrowObjectPattern(source, index));
@@ -411,6 +428,70 @@ function hasObjectMemberPrefix(source, offset) {
   return isTypeScriptObjectLiteralMemberStart(source, offset);
 }
 
+function skipObjectMemberTriviaBackward(source, offset) {
+  let cursor = offset;
+  while (cursor > 0) {
+    while (cursor > 0 && /\s/u.test(source[cursor - 1])) cursor -= 1;
+    if (cursor >= 2 && source.slice(cursor - 2, cursor) === '*/') {
+      const commentStart = source.lastIndexOf('/*', cursor - 2);
+      if (commentStart < 0) return { offset: cursor, uncertain: true };
+      cursor = commentStart;
+      continue;
+    }
+
+    const lineStart = Math.max(
+      source.lastIndexOf('\n', cursor - 1),
+      source.lastIndexOf('\r', cursor - 1),
+      source.lastIndexOf('\u2028', cursor - 1),
+      source.lastIndexOf('\u2029', cursor - 1),
+    ) + 1;
+    const lineComment = source.lastIndexOf('//', cursor - 1);
+    if (lineComment >= lineStart) return { offset: cursor, uncertain: true };
+    return { offset: cursor, uncertain: false };
+  }
+  return { offset: cursor, uncertain: false };
+}
+
+/**
+ * Fast lexical prefilter for the expensive delimiter-context walk. The full
+ * walk is only needed at a possible object member boundary; ordinary tokens
+ * inside each body source must stay linear in the source length.
+ */
+export function isPotentialTypeScriptObjectMemberStart(source, offset) {
+  const character = source[offset];
+  const isIdentifierStart = /[$_\p{ID_Start}]/u.test(character || '');
+  if (character === '.') {
+    if (!source.startsWith('...', offset)) return false;
+  } else if (character !== '[' && !isIdentifierStart) {
+    return false;
+  }
+  if (isIdentifierStart && offset > 0
+    && /[$_\u200c\u200d\p{ID_Continue}]/u.test(source[offset - 1])) return false;
+
+  let cursor = offset;
+  for (;;) {
+    const previous = skipObjectMemberTriviaBackward(source, cursor);
+    if (previous.uncertain) return true;
+    cursor = previous.offset;
+    if (cursor === 0) return false;
+    const previousCharacter = source[cursor - 1];
+    if (previousCharacter === '{' || previousCharacter === ',') return true;
+    if (previousCharacter === '*') {
+      cursor -= 1;
+      continue;
+    }
+    let tokenStart = cursor;
+    while (tokenStart > 0
+      && /[$_\u200c\u200d\p{ID_Continue}]/u.test(source[tokenStart - 1])) tokenStart -= 1;
+    if (tokenStart < cursor
+      && OBJECT_MEMBER_PREFIX_MODIFIERS.has(source.slice(tokenStart, cursor))) {
+      cursor = tokenStart;
+      continue;
+    }
+    return false;
+  }
+}
+
 /**
  * Return a dynamic object member that a static article-body consumer cannot
  * resolve. Both body extraction and the publication gate must reject the same
@@ -419,16 +500,17 @@ function hasObjectMemberPrefix(source, offset) {
  */
 export function unsupportedObjectMemberAt(source, offset) {
   const character = source[offset];
+  if (!isPotentialTypeScriptObjectMemberStart(source, offset)) return null;
   if (character === '['
-    && isTypeScriptObjectLiteralMemberStart(source, offset)
-    && hasComputedPropertyPrefix(source, offset)) {
+    && isTypeScriptObjectLiteralMemberStart(source, offset)) {
     const keyEnd = computedPropertyKeyEnd(source, offset);
     if (!isTypeScriptIndexSignature(source, offset, keyEnd)
       && !isTypeScriptMappedTypeMember(source, offset, keyEnd)) {
       return { kind: 'computed', keyEnd };
     }
   }
-  if (character !== '.' && !/[$_\p{ID_Start}]/u.test(character || '')) return null;
+  if (character === '.' && !source.startsWith('...', offset)) return null;
+  if (!/[$_\p{ID_Start}]/u.test(character || '') && character !== '.') return null;
   if (!hasObjectMemberPrefix(source, offset)) return null;
   if (character === '.' && source.startsWith('...', offset)) return { kind: 'spread', end: offset + 3 };
   if (character === '.') return null;
