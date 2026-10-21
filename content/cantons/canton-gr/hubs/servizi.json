@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "servizi",
-  "updatedAt": "2026-10-21T04:08:52.546Z",
-  "contentHash": "40f735288a5aca01a83c1f9471cdffa8d9127c7267d6ee397dc6ed47e7d37485",
+  "updatedAt": "2026-10-21T11:36:06.478Z",
+  "contentHash": "50f2b96227d106155ef8b610a94710696f8b0d03ba96e919c4c14c7a903bb77d",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,11 +16,6 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-20T21:38:20.661Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-20T23:17:38.181Z",
-      "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
@@ -103,20 +98,6 @@
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.gr.ch/",
           "updatedAt": "2026-10-20T21:38:20.661Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Chur",
-              "value": "13 °C",
-              "detail": "oggi da 12 a 12 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-20T23:17:38.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -229,7 +210,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T11:36:06.478Z"
     },
     "en": {
       "canton": "GR",
@@ -305,20 +286,6 @@
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.gr.ch/",
           "updatedAt": "2026-10-20T21:38:20.661Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Chur",
-              "value": "13 °C",
-              "detail": "today from 12 to 12 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-20T23:17:38.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -427,7 +394,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T11:36:06.478Z"
     },
     "de": {
       "canton": "GR",
@@ -503,20 +470,6 @@
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.gr.ch/",
           "updatedAt": "2026-10-20T21:38:20.661Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Chur",
-              "value": "13 °C",
-              "detail": "heute 12 bis 12 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-20T23:17:38.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -625,7 +578,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T11:36:06.478Z"
     },
     "fr": {
       "canton": "GR",
@@ -701,20 +654,6 @@
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.gr.ch/",
           "updatedAt": "2026-10-20T21:38:20.661Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Chur",
-              "value": "13 °C",
-              "detail": "aujourd’hui de 12 à 12 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-20T23:17:38.181Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -819,7 +758,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-21T04:08:52.546Z"
+      "updatedAt": "2026-10-21T11:36:06.478Z"
     }
   }
 }
