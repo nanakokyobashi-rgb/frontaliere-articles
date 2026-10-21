@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-20T23:51:34.303Z",
-  "contentHash": "ed8892dbe347cf3f80158be1aa23868ee7d09e1a0da1363242c43d346c7d5416",
+  "updatedAt": "2026-10-21T21:34:40.808Z",
+  "contentHash": "13113a4ef8a9f7689bc9ad60d7370ad77f097389864c68a3bcc799ec79b097ba",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-20T12:04:15.773Z",
+      "updatedAt": "2026-10-21T12:19:56.872Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-20T12:04:15.773Z"
+          "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zugo rende disponibile l'agenda del Consiglio cantonale",
+          "url": "/articoli-zugo/zugo-agenda-consiglio-29-ottobre/",
+          "excerpt": "L'ordine del giorno della seduta del Consiglio cantonale di Zugo del 29 ottobre 2026 è disponibile, ma il testo non elenca le trattande.",
+          "date": "2026-10-21T21:24:59.776Z"
+        },
         {
           "title": "Zugo: assegnate le direzioni per il periodo 2027-2030",
           "url": "/articoli-zugo/zugo-assegnazione-mandato-2030/",
@@ -82,12 +88,6 @@
           "url": "/articoli-zugo/eventi-weekend-zugo/",
           "excerpt": "Eventi nel Canton Zugo ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
           "date": "2026-10-17T11:34:12.899Z"
-        },
-        {
-          "title": "Piano direttore 26/1: Zugo avvia la partecipazione",
-          "url": "/articoli-zugo/zugo-piano-direttore-26-1/",
-          "excerpt": "La modifica 26/1 prepara le «zone bianche», coordina il Piano direttore con la revisione del PBG e attua RPG 2.",
-          "date": "2026-10-17T01:28:47.924Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-20T23:51:34.303Z"
+      "updatedAt": "2026-10-21T21:34:40.808Z"
     },
     "en": {
       "canton": "ZG",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-20T12:04:15.773Z"
+          "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zug makes available the agenda of the Cantonal Council",
+          "url": "/en/zug-articles/zug-cantonal-council-agenda-october-29-2026/",
+          "excerpt": "The agenda of the meeting of the Cantonal Council of Zug on 29 October 2026 is available, but the text does not list the issues.",
+          "date": "2026-10-21T21:24:59.776Z"
+        },
         {
           "title": "Zug: departments assigned for the 2027–2030 period",
           "url": "/en/zug-articles/zug-directorates-term-2030/",
@@ -169,12 +175,6 @@
           "url": "/en/zug-articles/weekend-events-zug/",
           "excerpt": "Events in the canton of Zug every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
           "date": "2026-10-17T11:34:12.899Z"
-        },
-        {
-          "title": "Master plan January 26: Zug launches participation",
-          "url": "/en/zug-articles/zug-structure-plan-26-1/",
-          "excerpt": "The 1/26 amendment prepares the “white zones,” coordinates the master plan with the revision of the PBG, and implements RPG 2.",
-          "date": "2026-10-17T01:28:47.924Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-20T23:51:34.303Z"
+      "updatedAt": "2026-10-21T21:34:40.808Z"
     },
     "de": {
       "canton": "ZG",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-20T12:04:15.773Z"
+          "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zug stellt die Tagesordnung des Kantonsrates zur Verfügung",
+          "url": "/de/zug-artikel/zug-kantonsrat-traktanden-29-oktober-2026/",
+          "excerpt": "Die Tagesordnung der Sitzung des Kantonsrates Zug vom 29.",
+          "date": "2026-10-21T21:24:59.776Z"
+        },
         {
           "title": "Zug: Direktionen für den Zeitraum 2027-2030 zugewiesen",
           "url": "/de/zug-artikel/zug-direktionen-amtsperiode-2030/",
@@ -256,12 +262,6 @@
           "url": "/de/zug-artikel/wochenend-veranstaltungen-zug/",
           "excerpt": "Veranstaltungen im Kanton Zug an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
           "date": "2026-10-17T11:34:12.899Z"
-        },
-        {
-          "title": "Richtplan 26/1: Zug eröffnet die Mitwirkung",
-          "url": "/de/zug-artikel/zug-richtplan-26-1/",
-          "excerpt": "Die Änderung 26/1 bereitet die «weissen Zonen» vor, stimmt den Richtplan auf die Revision des PBG ab und setzt RPG 2 um.",
-          "date": "2026-10-17T01:28:47.924Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-20T23:51:34.303Z"
+      "updatedAt": "2026-10-21T21:34:40.808Z"
     },
     "fr": {
       "canton": "ZG",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-20T12:04:15.773Z"
+          "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zoug rend disponible l'agenda du Conseil cantonal",
+          "url": "/fr/articles-zoug/zoug-conseil-cantonal-ordre-jour-29-octobre-2026/",
+          "excerpt": "L'ordre du jour de la séance du Conseil cantonal de Zoug du 29 octobre 2026 est disponible, mais le texte n'en dresse pas la liste.",
+          "date": "2026-10-21T21:24:59.776Z"
+        },
         {
           "title": "Zoug : attributions des directions pour la période 2027-2030",
           "url": "/fr/articles-zoug/zoug-directions-mandat-2030/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-zoug/evenements-week-end-zoug/",
           "excerpt": "Événements dans le canton de Zoug chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
           "date": "2026-10-17T11:34:12.899Z"
-        },
-        {
-          "title": "Plan directeur 26/1 : Zoug lance la participation",
-          "url": "/fr/articles-zoug/plan-directeur-zoug-26-1/",
-          "excerpt": "La modification 26/1 prépare les « zones blanches », coordonne le Plan directeur avec la révision du PBG et met en œuvre RPG 2.",
-          "date": "2026-10-17T01:28:47.924Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-20T23:51:34.303Z"
+      "updatedAt": "2026-10-21T21:34:40.808Z"
     }
   }
 }
