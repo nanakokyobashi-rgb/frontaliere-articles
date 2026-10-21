@@ -30,7 +30,8 @@
  *                          delle sezioni R2 da ripubblicare
  *   r2-reconcile-plan <sha> legge il registro edge effettivo della release
  *                          attesa e stampa la matrice delle sezioni cantonali
- *                          R2 live, piu' il cleanup RSS delle non-live
+ *                          R2 live, il cleanup RSS delle non-live e la pulizia
+ *                          delle sezioni disattivate ancora note al Worker
  *   section-of <path>      la sezione che possiede quel corpo (esce 1 se nessuna)
  *   shard-of <section>     lo shard Pages della sezione. Una sezione con
  *                          `shardKey: null` (le cantonali) e' servita da R2 +
@@ -46,6 +47,7 @@ import { fileURLToPath } from 'node:url';
 
 import { activeCorpusCoreEntries, activeSourceSections, sectionForBodyPath, sectionSourceSurfaces } from '../lib/corpus-sections.mjs';
 import { articleRegistryObjectBodies, articleRegistryObjectFields } from '../../engine/shared/articleRegistryObjectBodies.mjs';
+import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { EDGE_SECTION_REGISTRY_URL, validateEdgeSectionRegistry } from '../lib/section-registry.mjs';
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -207,12 +209,18 @@ export function liveRegistryTransitionSections(previousRegistry, nextRegistry, c
 /**
  * Piano bounded per una release API avviata da schedule/manuale. Non usa il
  * registro committato ne' il diff Git: il registro edge e' la superficie che
- * il Worker serve davvero, ma deve appartenere alla release attesa; le
- * cantonali R2 live vengono riconciliate e quelle non-live ricevono un
- * cleanup RSS idempotente, cosi' una demozione o un kill-switch non lascia
- * oggetti della release precedente sulla superficie edge.
+ * il Worker serve davvero, ma deve appartenere alla release attesa. Le
+ * cantonali attive vengono riconciliate; le non-live ricevono il cleanup RSS.
+ * Se una sezione e' stata disattivata nel core ma il registro edge la dichiara
+ * ancora live o retired, invia una pulizia della superficie: il publisher
+ * rimuove pagine e feed senza riattivare/renderizzare la sezione.
  */
-export function liveR2ReconciliationPlan(registry, coreList = activeCorpusCoreEntries(), expectedCommit) {
+export function liveR2ReconciliationPlan(
+  registry,
+  coreList = activeCorpusCoreEntries(),
+  expectedCommit,
+  allCore = ARTICLE_SECTION_CORE_ALL,
+) {
   if (!validateEdgeSectionRegistry(registry)) {
     throw new Error('registro edge effettivo non valido');
   }
@@ -226,11 +234,28 @@ export function liveR2ReconciliationPlan(registry, coreList = activeCorpusCoreEn
       .filter(([, entry]) => entry?.status === 'live')
       .map(([section]) => section),
   );
-  return coreList
+  const activeCantonSections = coreList
+    .filter((section) => section.kind === 'canton' && !section.shardKey)
+    .map((section) => section.section);
+  const active = new Set(activeCantonSections);
+  const plan = coreList
     .filter((section) => section.kind === 'canton' && !section.shardKey)
     .map((section) => live.has(section.section)
       ? { section: section.section, ids: [], bootstrap: true }
       : { section: section.section, ids: [], bootstrap: false, removeStaleCantonRssFeeds: true });
+  for (const section of Object.values(allCore)) {
+    if (section.kind !== 'canton' || section.shardKey || active.has(section.section)) continue;
+    const status = registry.sections[section.section]?.status;
+    if (status !== 'live' && status !== 'retired') continue;
+    plan.push({
+      section: section.section,
+      ids: [],
+      bootstrap: false,
+      removeStaleCantonRssFeeds: true,
+      cleanupInactiveSurface: true,
+    });
+  }
+  return plan;
 }
 
 /**
@@ -245,8 +270,22 @@ export function r2ApiPushPlan(diffPlan, edgePlan, coreList = activeCorpusCoreEnt
     throw new Error('r2 API push plan: diff ed edge devono essere matrici');
   }
   const sections = activeSourceSections(coreList).filter((section) => !section.shardKey);
+  const active = new Set(sections.map(({ section }) => section));
+  const inactiveCleanupSections = Object.values(ARTICLE_SECTION_CORE_ALL)
+    .filter((section) => section.kind === 'canton' && !section.shardKey && !active.has(section.section));
+  const orderedSections = [...sections, ...inactiveCleanupSections];
   const bySection = new Map();
-  const assertSection = (section) => {
+  const assertSection = (section, { cleanupInactiveSurface = false } = {}) => {
+    if (cleanupInactiveSurface) {
+      const known = ARTICLE_SECTION_CORE_ALL[section];
+      if (!known || known.kind !== 'canton' || known.shardKey) {
+        throw new Error(`r2 API push plan cleanup-only per sezione R2 sconosciuta: ${section}`);
+      }
+      if (active.has(section)) {
+        throw new Error(`r2 API push plan cleanup-only non consentito per sezione attiva: ${section}`);
+      }
+      return;
+    }
     if (!sections.some((entry) => entry.section === section && entry.kind === 'canton')) {
       throw new Error(`r2 API push plan per sezione R2 non attiva: ${section}`);
     }
@@ -261,7 +300,17 @@ export function r2ApiPushPlan(diffPlan, edgePlan, coreList = activeCorpusCoreEnt
     });
   }
   for (const target of edgePlan) {
-    assertSection(target?.section);
+    assertSection(target?.section, { cleanupInactiveSurface: target?.cleanupInactiveSurface === true });
+    if (target?.cleanupInactiveSurface === true) {
+      bySection.set(target.section, {
+        section: target.section,
+        ids: [],
+        bootstrap: false,
+        removeStaleCantonRssFeeds: true,
+        cleanupInactiveSurface: true,
+      });
+      continue;
+    }
     const current = bySection.get(target.section);
     if (target.removeStaleCantonRssFeeds === true) {
       bySection.set(target.section, {
@@ -272,7 +321,7 @@ export function r2ApiPushPlan(diffPlan, edgePlan, coreList = activeCorpusCoreEnt
       bySection.set(target.section, { section: target.section, ids: [], bootstrap: false });
     }
   }
-  return sections.filter(({ section }) => bySection.has(section)).map(({ section }) => bySection.get(section));
+  return orderedSections.filter(({ section }) => bySection.has(section)).map(({ section }) => bySection.get(section));
 }
 
 /**

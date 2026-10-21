@@ -229,6 +229,16 @@
       }
     },
     {
+      "path": "scripts/ci/dispatch-fast-publish-replay.sh",
+      "mode": "corpus-only",
+      "reason": "Deduplica e riaccoda i replay stale dei workflow fast-publish di sezione dopo aver verificato lo stato reale della run. Il sito non ha il publisher per-corpus né questo helper di dispatch, quindi il path resta specifico del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "ca37c2446467fcec",
+        "alignedAt": "2026-10-21"
+      }
+    },
+    {
       "path": "scripts/ci/fetch-push-base-if-missing.sh",
       "mode": "corpus-only",
       "reason": "Helper dei resolver dei fast publisher del corpus: dopo un checkout shallow verifica se `github.event.before` e' gia' presente e scarica solo quel commit quando manca, cosi' i publisher possono calcolare il delta senza un fetch incondizionato. Esiste solo qui perche' i fast publisher e il loro checkout appartengono al corpus; il sito non possiede un publisher equivalente.",
