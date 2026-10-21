@@ -6463,7 +6463,7 @@
       "reason": "Il corpus passa al builder mirrorato il parser statico dell'API attraverso scripts/lib/rss-feed-body-adapter.mjs, cosi' RSS rifiuta chiavi computate e sorgenti troncati senza importare moduli corpus-only dentro engine/. Il sito mantiene il proprio scanner lessicale mirrorabile; l'adattamento riguarda solo l'input parser e non duplica l'emissione RSS.",
       "baseline": {
         "site": "c7ac2c23986e6768",
-        "corpus": "bcf8436d6220572a",
+        "corpus": "2085f39e8eb2bc3a",
         "alignedAt": "2026-10-21"
       }
     },
