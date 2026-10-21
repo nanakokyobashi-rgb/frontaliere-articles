@@ -3201,6 +3201,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(staleResolve, /bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh "\$REPO" "\$dispatch_title" --ref main/);
   assert.match(staleResolve, /-f source_commit="\$current_main"/);
   assert.match(staleResolve, /-f dispatch_nonce="\$dispatch_nonce"/);
+  assert.match(staleResolve, /max_parallel_dispatches=16/);
+  assert.match(staleResolve, /\(\s*if dispatch_stale_replay[\s\S]*\) &/);
+  assert.match(staleResolve, /wait_for_dispatch_wave/);
+  assert.match(staleResolve, /failed_sections\+\=\("\$\{dispatch_sections\[dispatch_index\]\}"\)/);
   assert.match(staleResolve, /-f push_after="\$replay_after"/);
   assert.match(staleResolve, /-f cleanup_inactive_surface="\$cleanup_inactive_surface"/);
   assert.match(staleResolve, /replay_after="\$current_main"/);
@@ -3332,6 +3336,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /replay workflow_run redispatchato prima degli upload/);
   assert.match(wf, /elif \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ -n "\$\{SOURCE_COMMIT:-\}" \]; then\n\s+pinned_replay_main="\$SOURCE_MAIN_COMMIT"/);
   assert.match(wf, /replay bounded redispatchato prima degli upload/);
+  const lateGuardNonceStart = wf.indexOf('dispatch_nonce="${DISPATCH_NONCE:-}"');
+  const lateGuardTitleStart = wf.indexOf('dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"', lateGuardNonceStart);
+  const lateGuardNonce = wf.slice(lateGuardNonceStart, lateGuardTitleStart);
+  assert.match(lateGuardNonce, /nonce_hash="\$\(printf '%s\\0%s\\0%s' "\$nonce_seed" "\$current_main" "\$SECTION" \| sha256sum \| cut -c1-16\)"/);
+  assert.match(lateGuardNonce, /dispatch_nonce="stale-late-\$\{current_main:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/);
   assert.match(wf, /id: push_range[\s\S]*resolve-workflow-run-push-range\.mjs/);
   assert.doesNotMatch(wf, /commits\/\$WORKFLOW_RUN_HEAD_SHA\/events/);
   const pushRangeResolver = read('scripts/ci/resolve-workflow-run-push-range.mjs');
