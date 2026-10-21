@@ -69,7 +69,7 @@ import path from 'node:path';
 import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 import { createRawFetcher } from './lib/cross-repo-raw-fetch.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
-import { unescapeTsValue } from '../generator/scripts/lib/meta-field-regex.mjs';
+import { readStaticObjectEntries } from './lib/ts-literals.mjs';
 import { readCanonicalPath } from './lib/seo-canonical-path.mjs';
 import { CORPUS_SECTIONS } from './lib/corpus-sections.mjs';
 import { patchHubLandingMetadata } from './lib/hub-landing-meta.mjs';
@@ -259,11 +259,10 @@ function readMeta(metaPrefix, locale) {
   const out = new Map();
   if (!fs.existsSync(abs)) return out;
   const src = fs.readFileSync(abs, 'utf-8');
-  const rx = /'blog\.article\.([^']+?)\.(title|excerpt)':\s*'((?:[^'\\]|\\.)*)'/g;
-  let m;
-  while ((m = rx.exec(src)) !== null) {
-    const [, id, field, raw] = m;
-    const value = unescapeTsValue(raw);
+  for (const { key, value } of readStaticObjectEntries(src, abs, { errorLabel: 'hub-landing' })) {
+    const m = /^blog\.article\.([^.]+?)\.(title|excerpt)$/u.exec(key);
+    if (!m) continue;
+    const [, id, field] = m;
     const entry = out.get(id) ?? { title: '', desc: '' };
     if (field === 'title') entry.title = value;
     else entry.desc = value;
