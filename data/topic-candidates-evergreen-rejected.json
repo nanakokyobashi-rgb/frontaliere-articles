@@ -2352,6 +2352,18 @@
       "firstSeenAt": "2026-10-20T22:34:12.217Z",
       "lastValidatedAt": "2026-10-20T22:34:12.217Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "frontaliere progettista elettrico ticino stipendio requisiti",
+      "section": "frontaliere",
+      "pool": "evergreen",
+      "poolEpoch": "frontaliere:evergreen:61783a2287bb7f84",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-21T00:36:37.234Z",
+      "lastValidatedAt": "2026-10-21T00:36:37.234Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
