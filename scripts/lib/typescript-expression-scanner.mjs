@@ -83,7 +83,7 @@ function scanTypeScriptExpression(source, offset, terminator) {
   const braceBlockStack = [];
   let statementBoundary = false;
   let awaitingFunctionParams = false;
-  let functionGenericDepth = 0;
+  let functionTypeParameterDepth = 0;
   let awaitingFunctionDeclaration = false;
   let awaitingAsyncFunction = false;
   let asyncFunctionDeclaration = false;
@@ -214,13 +214,14 @@ function scanTypeScriptExpression(source, offset, terminator) {
     if (ch === '(') {
       controlParenStack.push(awaitingControlParen
         ? { kind: 'control' }
-        : awaitingFunctionParams
+        : awaitingFunctionParams && functionTypeParameterDepth === 0
           ? { kind: 'function', endsStatement: awaitingFunctionDeclaration }
           : { kind: 'paren' });
       awaitingControlParen = false;
-      awaitingFunctionParams = false;
-      functionGenericDepth = 0;
-      awaitingFunctionDeclaration = false;
+      if (functionTypeParameterDepth === 0) {
+        awaitingFunctionParams = false;
+        awaitingFunctionDeclaration = false;
+      }
       canStartRegex = true;
       afterMemberAccess = false;
       awaitingBlock = false;
@@ -272,7 +273,7 @@ function scanTypeScriptExpression(source, offset, terminator) {
         asyncFunctionDeclaration = statementBoundary;
       } else if (!memberProperty && word === 'function') {
         awaitingFunctionParams = true;
-        functionGenericDepth = 0;
+        functionTypeParameterDepth = 0;
         awaitingFunctionDeclaration = awaitingAsyncFunction ? asyncFunctionDeclaration : statementBoundary;
         awaitingAsyncFunction = false;
       } else {
@@ -346,10 +347,11 @@ function scanTypeScriptExpression(source, offset, terminator) {
       awaitingControlParen = false;
       awaitingBlock = false;
       statementBoundary = ch === ';' && braceBlockStack.some((frame) => frame.isBlock);
-      const insideFunctionGenerics = awaitingFunctionParams && functionGenericDepth > 0;
-      if (awaitingFunctionParams && ch === '<') functionGenericDepth += 1;
-      else if (awaitingFunctionParams && ch === '>' && functionGenericDepth > 0) functionGenericDepth -= 1;
-      else if (!['*', '<', '>'].includes(ch) && !insideFunctionGenerics) awaitingFunctionParams = false;
+      if (awaitingFunctionParams) {
+        if (ch === '<') functionTypeParameterDepth += 1;
+        else if (ch === '>' && functionTypeParameterDepth > 0) functionTypeParameterDepth -= 1;
+        else if (functionTypeParameterDepth === 0 && ch !== '*') awaitingFunctionParams = false;
+      }
       if (ch === '[') {
         bracketDepth += 1;
         if (!templateTerminator) depth += 1;

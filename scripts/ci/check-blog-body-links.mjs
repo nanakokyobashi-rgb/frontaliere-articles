@@ -160,8 +160,12 @@ function extractArticleBodyValues(source) {
     }
     if (char === '[' && (previousToken === '{' || previousToken === ',')) {
       const keyEnd = computedPropertyKeyEnd(source, cursor);
-      if (keyEnd >= 0 && source[skipTriviaAndComments(source, keyEnd)] === ':') {
-        const expression = source.slice(cursor + 1, keyEnd - 1).trim();
+      if (keyEnd < 0 || source[skipTriviaAndComments(source, keyEnd)] === ':') {
+        // A complete bracketed expression followed by a non-colon can be an
+        // array or destructuring pattern after a call/array comma. Reject an
+        // actual computed property, and fail closed when its end is unknown.
+        const expressionEnd = keyEnd >= 0 ? keyEnd - 1 : source.length;
+        const expression = source.slice(cursor + 1, expressionEnd).trim();
         const reported = expression.length > 160 ? expression.slice(0, 157) + '...' : expression;
         throw new Error('chiave TypeScript computata non verificabile per blog.article: ['
           + reported + ']');
