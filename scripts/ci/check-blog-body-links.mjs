@@ -83,7 +83,7 @@ function localeForFile(bodyRoot, file) {
 }
 
 function lineOf(source, index) {
-  return source.slice(0, index).split('\n').length;
+  return source.slice(0, index).split(/\r\n|[\r\n\u2028\u2029]/u).length;
 }
 
 function readQuotedValue(source, start, quote) {
@@ -116,8 +116,10 @@ function decodeBodyValue(raw, quote) {
 const TEMPLATE_QUOTE = String.fromCharCode(96);
 
 function skipLineComment(source, start) {
-  const end = source.indexOf('\n', start + 2);
-  return end < 0 ? source.length : end + 1;
+  let end = start + 2;
+  while (end < source.length && !/[\r\n\u2028\u2029]/u.test(source[end])) end += 1;
+  if (end >= source.length) return source.length;
+  return end + (source[end] === '\r' && source[end + 1] === '\n' ? 2 : 1);
 }
 
 function skipBlockComment(source, start) {

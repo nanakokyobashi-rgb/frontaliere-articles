@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import {
+  hasUnclosedTypeScriptDelimiter,
   isTypeScriptObjectLiteralMemberStart,
   isPotentialTypeScriptObjectMemberStart,
   unsupportedObjectMemberAt,
@@ -26,8 +27,11 @@ function skipTrivia(source, offset) {
     }
     if (source[index] !== '/' || index + 1 >= source.length) break;
     if (source[index + 1] === '/') {
-      const newline = source.indexOf('\n', index + 2);
-      index = newline < 0 ? source.length : newline + 1;
+      index += 2;
+      while (index < source.length && !/[\r\n\u2028\u2029]/u.test(source[index])) index += 1;
+      if (index < source.length) {
+        index += source[index] === '\r' && source[index + 1] === '\n' ? 2 : 1;
+      }
       continue;
     }
     if (source[index + 1] === '*') {
@@ -120,6 +124,9 @@ function readQuotedToken(source, offset) {
  */
 export function extractArticleBodyFields(source, { allowEndOfInput = false, validateDelimiter = true } = {}) {
   const text = String(source ?? '');
+  if (validateDelimiter && !allowEndOfInput && hasUnclosedTypeScriptDelimiter(text)) {
+    throw new Error('Unterminated delimiter in static article body source');
+  }
   const entries = [];
   for (let index = 0; index < text.length;) {
     const afterTrivia = skipTrivia(text, index);

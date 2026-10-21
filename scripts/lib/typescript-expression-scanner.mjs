@@ -1,3 +1,7 @@
+function isLineTerminator(character) {
+  return character === '\n' || character === '\r' || character === '\u2028' || character === '\u2029';
+}
+
 export function skipTypeScriptQuotedToken(source, offset) {
   const quote = source[offset];
   let index = offset + 1;
@@ -12,7 +16,7 @@ export function skipTypeScriptQuotedToken(source, offset) {
       continue;
     }
     if (ch === quote) return index + 1;
-    if (quote !== '`' && (ch === '\n' || ch === '\r')) return source.length;
+    if (quote !== '`' && isLineTerminator(ch)) return source.length;
     index += 1;
   }
   return source.length;
@@ -27,8 +31,11 @@ function skipTrivia(source, offset) {
     }
     if (source[index] !== '/' || index + 1 >= source.length) break;
     if (source[index + 1] === '/') {
-      const newline = source.indexOf('\n', index + 2);
-      index = newline < 0 ? source.length : newline + 1;
+      index += 2;
+      while (index < source.length && !isLineTerminator(source[index])) index += 1;
+      if (index < source.length) {
+        index += source[index] === '\r' && source[index + 1] === '\n' ? 2 : 1;
+      }
       continue;
     }
     if (source[index + 1] === '*') {
@@ -50,7 +57,7 @@ function skipRegexLiteral(source, offset) {
       index += 2;
       continue;
     }
-    if (ch === '\n' || ch === '\r') return -1;
+    if (isLineTerminator(ch)) return -1;
     if (ch === '[') inCharacterClass = true;
     else if (ch === ']' && inCharacterClass) inCharacterClass = false;
     else if (ch === '/' && !inCharacterClass) {
@@ -70,13 +77,15 @@ const REGEX_PREFIX_KEYWORDS = new Set([
 const REGEX_PREFIX_PUNCTUATION = new Set([
   '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>', '=>',
 ]);
-const OBJECT_LITERAL_PREFIX_TOKENS = new Set(['=', ':', 'return', 'default', '(', '[', ',', '?']);
+const OBJECT_LITERAL_PREFIX_TOKENS = new Set([
+  '=', ':', 'return', 'default', '(', '[', ',', '?', '&&', '||', '??',
+]);
 const TYPE_ASSERTION_PREFIX_TOKENS = new Set([
   ...OBJECT_LITERAL_PREFIX_TOKENS,
   '=>', 'await', 'delete', 'throw', 'typeof', 'void', 'yield', '!', '~', '+', '-',
 ]);
 const OBJECT_MEMBER_PREFIX_MODIFIERS = new Set(['get', 'set', 'async', '*']);
-const TS_TRIVIA_PATTERN = String.raw`(?:\s|\/\*[\s\S]*?\*\/|\/\/[^\r\n]*(?:\r?\n|$))*`;
+const TS_TRIVIA_PATTERN = String.raw`(?:\s|\/\*[\s\S]*?\*\/|\/\/[^\r\n\u2028\u2029]*(?:\r\n|[\r\n\u2028\u2029]|$))*`;
 const COMPUTED_PROPERTY_PREFIX_RE = new RegExp(
   `(?:^|[,{])${TS_TRIVIA_PATTERN}(?:(?:get|set|async|\\*)${TS_TRIVIA_PATTERN})*$`,
   'u',
@@ -225,6 +234,8 @@ function delimiterContextAt(source, offset) {
     }
     const token = source.startsWith('=>', index)
       ? '=>'
+      : source.startsWith('&&', index) || source.startsWith('||', index) || source.startsWith('??', index)
+      ? source.slice(index, index + 2)
       : /[$_\p{ID_Start}]/u.test(ch)
       ? /^[\w$]+/u.exec(source.slice(index, offset))?.[0]
       : ch;
@@ -236,9 +247,9 @@ function delimiterContextAt(source, offset) {
     }
     if (typeAliasDepth >= 0 && typeAliasHasRhsToken && delimiters.length === typeAliasDepth
       && /[\r\n\u2028\u2029]/u.test(source.slice(previousSignificantEnd, index))
-      && !['&', '|', '?', '[', ':', ',', '>', '=>', 'extends'].includes(token)
+      && !['&', '|', '&&', '||', '??', '?', '[', ':', ',', '>', '=>', 'extends'].includes(token)
       && !(token === '<' && !isTypeAssertionBeforeExpression(source, index))
-      && !['=', '&', '|', '?', ':', ',', '<', '=>', 'extends'].includes(previousToken)
+      && !['=', '&', '|', '&&', '||', '??', '?', ':', ',', '<', '=>', 'extends'].includes(previousToken)
       && !(previousToken === '>' && typeAliasAngleDepth > 0)) {
       typeAliasDepth = -1;
       typeAliasHasRhsToken = false;
@@ -362,6 +373,12 @@ function delimiterContextAt(source, offset) {
       previousSignificantEnd = index;
       continue;
     }
+    if (token === '&&' || token === '||' || token === '??') {
+      index += 2;
+      markToken(token);
+      previousSignificantEnd = index;
+      continue;
+    }
     if (ch === ':') {
       pendingFunctionReturnObjectType = lastClosedFunctionParameters;
       pendingVariableTypeObject = variableTypePending
@@ -402,6 +419,11 @@ function delimiterContextAt(source, offset) {
   }
 
   return delimiters;
+}
+
+export function hasUnclosedTypeScriptDelimiter(source) {
+  const text = String(source ?? '');
+  return delimiterContextAt(text, text.length).length > 0;
 }
 
 export function isParenthesizedCommaContext(source, offset) {

@@ -187,6 +187,51 @@ test('the body parser fails closed on truncated trivia and strings after valid f
     () => extractArticleBodyFields(truncatedString),
     /Malformed string token in static article body source: unterminated-string/u,
   );
+
+  const truncatedObject = [
+    'const body = {',
+    "  'blog.article.example-article.body1': 'one',",
+    "  'blog.article.example-article.body2': 'two',",
+    "  'blog.article.example-article.body3': 'three',",
+  ].join('\n');
+  assert.throws(
+    () => extractArticleBodyFields(truncatedObject),
+    /Unterminated delimiter in static article body source/u,
+  );
+});
+
+test('the body parser rejects dynamic members in logical object expressions', () => {
+  for (const operator of ['&&', '||']) {
+    const source = [
+      `const body = enabled ${operator} { [dynamicKey]: 'value' };`,
+      sourceFor(),
+    ].join('\n');
+    assert.throws(
+      () => extractArticleBodyFields(source),
+      /Computed article body properties are not supported/u,
+      operator,
+    );
+  }
+});
+
+test('the body parser resumes after every TypeScript line terminator in comments', () => {
+  for (const terminator of ['\r', '\u2028', '\u2029']) {
+    const source = [
+      'const body = {',
+      `  'blog.article.example-article.body1': 'one', // comment${terminator}  'blog.article.example-article.body2': 'two',`,
+      "  'blog.article.example-article.body3': 'three',",
+      '};',
+    ].join('\n');
+    assert.deepEqual(
+      extractArticleBodyFields(source).map(({ field, value }) => ({ field, value })),
+      [
+        { field: 'body1', value: 'one' },
+        { field: 'body2', value: 'two' },
+        { field: 'body3', value: 'three' },
+      ],
+      terminator.charCodeAt(0).toString(16),
+    );
+  }
 });
 
 test('the producer accepts real body and localized metadata for the 24 educator pages', () => {
