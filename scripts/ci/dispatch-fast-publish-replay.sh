@@ -10,9 +10,84 @@ fi
 shift 2
 
 current_run_id="${GITHUB_RUN_ID:-}"
+
+# A stale resolve can fan out one dispatcher per section.  The callers share a
+# short-lived snapshot so those workers do not each spend an API request on the
+# same `gh run list` poll.  The cache is opt-in because callers outside that
+# fan-out are sequential and should keep the original fail-closed observation.
+run_state_cache_file="${REPLAY_RUN_LIST_CACHE_FILE:-}"
+run_state_cache_lock="${REPLAY_RUN_LIST_CACHE_LOCK:-${run_state_cache_file}.lock}"
+run_state_cache_ttl_seconds="${REPLAY_RUN_LIST_CACHE_TTL_SECONDS:-2}"
+
+read_run_list() {
+  local runs
+  if [ -z "$run_state_cache_file" ]; then
+    gh run list --repo "$repository" --workflow fast-publish-section.yml --branch main --event workflow_dispatch --limit 100 --json databaseId,displayTitle,status,conclusion
+    return
+  fi
+
+  if ! [[ "$run_state_cache_ttl_seconds" =~ ^[0-9]+$ ]]; then
+    echo "::error::REPLAY_RUN_LIST_CACHE_TTL_SECONDS non valido" >&2
+    return 1
+  fi
+  if ! command -v flock >/dev/null 2>&1; then
+    echo "::error::flock non disponibile: impossibile condividere lo stato delle run" >&2
+    return 1
+  fi
+
+  local cache_fd
+  if ! exec {cache_fd}>"$run_state_cache_lock"; then
+    echo "::error::impossibile aprire il lock dello stato delle run" >&2
+    return 1
+  fi
+  if ! flock "$cache_fd"; then
+    eval "exec ${cache_fd}>&-"
+    echo "::error::impossibile acquisire il lock dello stato delle run" >&2
+    return 1
+  fi
+
+  local cache_fresh=false
+  local cache_mtime=0
+  local now_epoch=0
+  if [ -s "$run_state_cache_file" ] && jq -e 'type == "array"' "$run_state_cache_file" >/dev/null 2>&1; then
+    cache_mtime="$(stat -c %Y -- "$run_state_cache_file" 2>/dev/null || printf '0')"
+    now_epoch="$(date +%s)"
+    if [[ "$cache_mtime" =~ ^[0-9]+$ ]] && [[ "$now_epoch" =~ ^[0-9]+$ ]] \
+      && (( now_epoch - cache_mtime < run_state_cache_ttl_seconds )); then
+      cache_fresh=true
+    fi
+  fi
+
+  if [ "$cache_fresh" = true ]; then
+    runs="$(<"$run_state_cache_file")"
+  else
+    if ! runs="$(gh run list --repo "$repository" --workflow fast-publish-section.yml --branch main --event workflow_dispatch --limit 100 --json databaseId,displayTitle,status,conclusion)"; then
+      flock -u "$cache_fd" || true
+      eval "exec ${cache_fd}>&-"
+      return 1
+    fi
+    if ! jq -e 'type == "array"' <<< "$runs" >/dev/null 2>&1; then
+      echo "::error::gh run list ha restituito uno stato non valido" >&2
+      flock -u "$cache_fd" || true
+      eval "exec ${cache_fd}>&-"
+      return 1
+    fi
+    if ! printf '%s\n' "$runs" > "$run_state_cache_file"; then
+      echo "::error::impossibile aggiornare lo snapshot dello stato delle run" >&2
+      flock -u "$cache_fd" || true
+      eval "exec ${cache_fd}>&-"
+      return 1
+    fi
+  fi
+
+  flock -u "$cache_fd" || true
+  eval "exec ${cache_fd}>&-"
+  printf '%s\n' "$runs"
+}
+
 list_matching_runs() {
   local runs
-  runs="$(gh run list --repo "$repository" --workflow fast-publish-section.yml --branch main --event workflow_dispatch --limit 100 --json databaseId,displayTitle,status,conclusion)" || return 1
+  runs="$(read_run_list)" || return 1
   jq -c --arg title "$display_title" --arg current "$current_run_id" '
     [.[] | select(
       ((.displayTitle // "") == $title or ((.displayTitle // "") | startswith($title + " / dry=")))
