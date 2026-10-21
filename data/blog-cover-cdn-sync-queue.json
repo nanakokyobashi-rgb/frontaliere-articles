@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-pacchetto-imprese-sgravi.webp",
-      "sha256": "9c5c8a3c4a730418665e4d46c8e1dc6b78c35525cc2f997af13eeffdba331b52"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-pacchetto-imprese-sgravi-480w.webp",
-      "sha256": "f2643aca1267ea8a1161bd5534bc768a89de31a8698ef3a70b58570d03256c43"
-    }
-  ]
+  "items": []
 }
