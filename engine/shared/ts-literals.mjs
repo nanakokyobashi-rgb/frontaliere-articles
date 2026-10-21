@@ -35,10 +35,10 @@ export function readStaticStringLiteral(source, startIdx, sourcePath = 'source',
 }
 
 /** Decode a static literal using the same escape contract as the TS readers. */
-export function decodeStaticStringLiteral(raw, quote = "'") {
+export function decodeStaticStringLiteral(raw, quote = "'", { newlineAs = '\n' } = {}) {
   return raw.replace(TS_ESCAPE_RX, (whole, escape) => {
     switch (escape[0]) {
-      case 'n': return '\n';
+      case 'n': return newlineAs;
       case 'r': return '';
       case '\n': return '';
       case '\r': return '';
@@ -94,13 +94,35 @@ export function skipStaticTrivia(source, startIdx, sourcePath = 'source', errorL
 export function readStaticObjectEntries(
   source,
   sourcePath = 'source',
-  { errorLabel = 'static-literal', allowTerminalFragment = false } = {},
+  {
+    errorLabel = 'static-literal',
+    allowTerminalFragment = false,
+    newlineAs = '\n',
+    requireObjectClosure = !allowTerminalFragment,
+  } = {},
 ) {
   const entries = [];
   let cursor = 0;
+  let braceDepth = 0;
+  let sawObjectOpen = false;
+  let closedObject = false;
   while (cursor < source.length) {
     cursor = skipStaticTrivia(source, cursor, sourcePath, errorLabel);
     if (cursor >= source.length) break;
+    if (source[cursor] === '{') {
+      braceDepth += 1;
+      sawObjectOpen = true;
+      cursor += 1;
+      continue;
+    }
+    if (source[cursor] === '}') {
+      if (braceDepth > 0) {
+        braceDepth -= 1;
+        if (braceDepth === 0) closedObject = true;
+      }
+      cursor += 1;
+      continue;
+    }
     if (!STATIC_LITERAL_QUOTES.has(source[cursor])) {
       cursor += 1;
       continue;
@@ -135,7 +157,7 @@ export function readStaticObjectEntries(
 
     const entry = {
       key: decodeStaticStringLiteral(keyLiteral.value, keyLiteral.quote),
-      value: decodeStaticStringLiteral(valueLiteral.value, valueLiteral.quote),
+      value: decodeStaticStringLiteral(valueLiteral.value, valueLiteral.quote, { newlineAs }),
       keyQuote: keyLiteral.quote,
       valueQuote: valueLiteral.quote,
     };
@@ -146,9 +168,13 @@ export function readStaticObjectEntries(
       rawKey: { value: keyLiteral.value },
       rawValue: { value: valueLiteral.value },
       start: { value: cursor },
+      end: { value: valueLiteral.end },
     });
     entries.push(entry);
     cursor = valueLiteral.end;
+  }
+  if (requireObjectClosure && (!sawObjectOpen || braceDepth !== 0 || !closedObject)) {
+    throw new Error(`[${errorLabel}] Static object is not closed in ${sourcePath}`);
   }
   return entries;
 }

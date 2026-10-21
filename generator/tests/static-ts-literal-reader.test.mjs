@@ -69,7 +69,7 @@ test('il reader richiede il delimitatore dopo il valore e rifiuta interpolazioni
 
 test('il reader gestisce commenti CR-only e continuazioni CRLF', () => {
   const source = "// 'blog.article.fake.title': 'commento'\r'blog.article.reale.title': 'prima\\\r\nsecond' }";
-  assert.deepEqual(readStaticObjectEntries(source, 'fixture.ts'), [
+  assert.deepEqual(readStaticObjectEntries(source, 'fixture.ts', { allowTerminalFragment: true }), [
     {
       key: 'blog.article.reale.title',
       value: 'primasecond',
@@ -77,6 +77,19 @@ test('il reader gestisce commenti CR-only e continuazioni CRLF', () => {
       valueQuote: "'",
     },
   ]);
+});
+
+test('il reader richiede la chiusura dell oggetto completo e può appiattire i metadata', () => {
+  assert.throws(
+    () => readStaticObjectEntries("const meta = { 'blog.article.reale.title': 'titolo',", 'truncated.ts'),
+    /not closed|dangling comma/u,
+  );
+  const entries = readStaticObjectEntries(
+    "const meta = { 'blog.article.reale.title': 'prima\\nseconda' };",
+    'meta.ts',
+    { newlineAs: ' ' },
+  );
+  assert.equal(entries[0].value, 'prima seconda');
 });
 
 test('metaFieldRegex conserva la superficie RegExp senza scansionare commenti e prosa', () => {
@@ -89,6 +102,16 @@ test('metaFieldRegex conserva la superficie RegExp senza scansionare commenti e 
   assert.equal(matches.length, 1);
   assert.equal(matches[0][1], 'reale');
   assert.equal(matches[0][2], "L\\'incontro");
+});
+
+test('metaFieldRegex conserva gli offset raw e gli id che contengono punti', () => {
+  const source = "const meta = {\n  \"blog.article.id.con.punti.title\" : \"Titolo\\nraw\",\n};";
+  const match = [...source.matchAll(metaFieldRegex('title'))][0];
+  assert.equal(match[1], 'id.con.punti');
+  assert.equal(match[2], 'Titolo\\nraw');
+  assert.equal(match[0], source.slice(match.index, match.index + match[0].length));
+  assert.ok(match[0].includes('"blog.article.id.con.punti.title"'));
+  assert.ok(match[0].includes('Titolo\\nraw'));
 });
 
 test('il decoder conserva Unicode e newline senza ri-scansionare il risultato', () => {

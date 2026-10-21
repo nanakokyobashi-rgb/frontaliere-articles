@@ -1066,7 +1066,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  if (isMissingPathError(err)) return out;
  throw err;
  }
- for (const { key, value } of readStaticObjectEntries(src, p, { errorLabel: 'og-meta' })) {
+ for (const { key, value } of readStaticObjectEntries(src, p, { errorLabel: 'og-meta', newlineAs: ' ' })) {
  const m = /^blog\.article\.(.+)\.(title|excerpt|imageAlt)$/u.exec(key);
  if (!m) continue;
  const articleId = m[1];

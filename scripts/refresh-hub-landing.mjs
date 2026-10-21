@@ -260,7 +260,7 @@ function readMeta(metaPrefix, locale) {
   if (!fs.existsSync(abs)) return out;
   const src = fs.readFileSync(abs, 'utf-8');
   for (const { key, value } of readStaticObjectEntries(src, abs, { errorLabel: 'hub-landing' })) {
-    const m = /^blog\.article\.([^.]+?)\.(title|excerpt)$/u.exec(key);
+    const m = /^blog\.article\.(.+?)\.(title|excerpt)$/u.exec(key);
     if (!m) continue;
     const [, id, field] = m;
     const entry = out.get(id) ?? { title: '', desc: '' };
