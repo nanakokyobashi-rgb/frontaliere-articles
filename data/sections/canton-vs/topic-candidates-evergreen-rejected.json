@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/815611/ein-immobilienprojekt-von-christian-constantin-sorgt-im-tessin-f%c3%bcr-kontroversen": {
-      "section": "canton-vs",
-      "ts": 1792432081947
-    },
     "canton-vs::https://www.pomona.ch/story/814440/energie-sparen-im-alltag-einfache-tipps-f%c3%bcr-tiefere-stromkosten": {
       "section": "canton-vs",
       "ts": 1792492383459
@@ -75,6 +71,10 @@
     "canton-vs::https://www.pomona.ch/story/809392/die-kaufkraftillusion-wie-krankenkassen-und-benzin-das-walliser-budget-fressen": {
       "section": "canton-vs",
       "ts": 1792602134894
+    },
+    "canton-vs::https://www.pomona.ch/story/817453/ballon-dor-zieht-fans-mit-absurder-abstimmung-das-geld-aus-der-tasche": {
+      "section": "canton-vs",
+      "ts": 1792616826930
     }
   }
 }
