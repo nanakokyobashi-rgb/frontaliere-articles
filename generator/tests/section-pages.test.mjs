@@ -3228,6 +3228,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(staleResolve, /max_parallel_dispatches=16/);
   assert.match(staleResolve, /REPLAY_RUN_LIST_CACHE_FILE="\$replay_run_list_cache"/);
   assert.match(staleResolve, /export REPLAY_RUN_LIST_CACHE_FILE/);
+  assert.match(
+    staleResolve,
+    /Controlled harness evidence \(16 workers, empty run list, two[\s\S]*352 `gh run list` calls without the[\s\S]*snapshot, 2 with it\./,
+    'il cablaggio conserva la misura before/after del costo di lettura dello snapshot',
+  );
   assert.match(staleResolve, /\(\s*if dispatch_stale_replay[\s\S]*\) &/);
   assert.match(staleResolve, /wait_for_dispatch_wave/);
   assert.match(staleResolve, /failed_sections\+\=\("\$\{dispatch_sections\[dispatch_index\]\}"\)/);
