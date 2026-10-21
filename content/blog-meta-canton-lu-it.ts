@@ -33,6 +33,9 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.lucerna-finanze-sessione-ottobre.title': 'Lucerna: cinque ore di dibattito sulle finanze cantonali',
     'blog.article.lucerna-finanze-sessione-ottobre.excerpt': 'Il Consiglio cantonale di Lucerna ha discusso oltre cinque ore l\'AFP 2027–2030; la proposta porta l\'aliquota 2027 da 1,45 a 1,40 unità, con voto il 20 ottobre.',
     'blog.article.lucerna-finanze-sessione-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lucerna-riduce-imposte.title': 'Canton Lucerna riduce le imposte: decisione definitiva',
+    'blog.article.lucerna-riduce-imposte.excerpt': 'La fonte Zentralplus presenta come definitiva la riduzione delle imposte nel Canton Lucerna; il dataset fiscale 2026 riporta oneri sui redditi annui e valori A0.',
+    'blog.article.lucerna-riduce-imposte.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonLuIt;

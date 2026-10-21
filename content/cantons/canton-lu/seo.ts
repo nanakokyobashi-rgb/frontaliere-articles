@@ -397,6 +397,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lucerna-riduce-imposte': {
+    title: 'Canton Lucerna riduce le imposte: decisione definitiva',
+    description: 'Zentralplus riferisce una riduzione definitiva delle imposte nel Canton Lucerna; il dataset fiscale 2026 riporta oneri sui redditi e valori A0.',
+    keywords: 'frontalieri, ticino, svizzera, italia, canton, lucerna, riduce, imposte',
+    ogTitle: 'Canton Lucerna riduce le imposte: decisione definitiva',
+    ogDescription: 'La fonte presenta come definitiva la riduzione delle imposte nel Canton Lucerna. Il riferimento fiscale 2026 distingue l\'onere sui redditi annui dai valori A0 dell\'imposta alla fonte, con scenari standardizzati per reddito, salario e comune.',
+    canonicalPath: '/articoli-lucerna/lucerna-riduce-imposte/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Canton Lucerna riduce le imposte: decisione definitiva",
+      "description": "Zentralplus riferisce una riduzione definitiva delle imposte nel Canton Lucerna; il dataset fiscale 2026 riporta oneri sui redditi e valori A0.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lucerna-riduce-imposte.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T01:30:31+00:00",
+      "dateModified": "2026-10-21T01:30:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/lucerna-riduce-imposte/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
