@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "fisco",
-  "updatedAt": "2026-10-21T19:14:55.654Z",
-  "contentHash": "e63d61ae3d40d80c94c5981cb57981024fd1a7e788301cf112477b0bc0439c49",
+  "updatedAt": "2026-10-21T19:37:12.484Z",
+  "contentHash": "98230584aa7ce873abe27f54564c014f5009b5b5defcea64650d5fdeadd60c29",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -154,6 +154,12 @@
           "date": "2026-10-19T15:18:22.893Z"
         },
         {
+          "title": "Heiden prosegue i risparmi: deficit di CHF 204'200 nel 2027",
+          "url": "/articoli-appenzello/heiden-risparmi-preventivo-2027/",
+          "excerpt": "Il preventivo 2027 di Heiden indica entrate per CHF 35,308 milioni, uscite per CHF 35,512 milioni e un deficit di CHF 204'200.",
+          "date": "2026-10-21T19:28:07.751Z"
+        },
+        {
           "title": "Appenzello: tasso fiscale previsto a 3,90 unità",
           "url": "/articoli-appenzello/appenzello-tasso-fiscale-390/",
           "excerpt": "Il preventivo 2027 prevede un disavanzo di CHF 323'670: il tasso fiscale dovrebbe salire a 3,90 unità.",
@@ -182,12 +188,6 @@
           "url": "/articoli-svizzera/imposta-successione-donazione-appenzello-interno/",
           "excerpt": "Tassazione di successioni e donazioni nel cantone Appenzello Interno: aliquote per grado di parentela, esenzioni per coniuge e discendenti, procedure di dichiarazione e termini cantonali.",
           "date": "2026-09-03T20:00:36.821Z"
-        },
-        {
-          "title": "Imposte di successione Appenzello: aliquote e procedure",
-          "url": "/articoli-svizzera/imposta-successione-appenzello/",
-          "excerpt": "Imposta di successione a Appenzello: competenza cantonale, aliquote per parentela, esenzioni per coniuge. Dichiarazione entro 30-90 giorni. Procedura in 6 fasi.",
-          "date": "2026-08-27T04:36:47.376Z"
         }
       ],
       "latestCantonArticles": [],
@@ -213,7 +213,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-21T19:14:55.654Z"
+      "updatedAt": "2026-10-21T19:37:12.484Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -350,6 +350,12 @@
           "date": "2026-10-19T15:18:22.893Z"
         },
         {
+          "title": "Heiden continues its savings measures: deficit of CHF 204'200 in 2027",
+          "url": "/en/appenzell-articles/heiden-savings-budget-2027/",
+          "excerpt": "Heiden's 2027 budget projects revenues of CHF 35,308 million, expenditures of CHF 35,512 million, and a deficit of CHF 204'200.",
+          "date": "2026-10-21T19:28:07.751Z"
+        },
+        {
           "title": "Appenzell: projected tax rate at 3,90 units",
           "url": "/en/appenzell-articles/appenzell-tax-rate-390/",
           "excerpt": "The 2027 budget forecasts a deficit of CHF 323'670: the tax rate should rise to 3,90 units.",
@@ -378,12 +384,6 @@
           "url": "/en/swiss-articles/estate-tax-inheritance-appenzell-interno/",
           "excerpt": "Inheritance and gift taxation in the canton of Appenzell Innerrhoden: rates by degree of kinship, exemptions for spouses and descendants, declaration procedures and cantonal deadlines.",
           "date": "2026-09-03T20:00:36.821Z"
-        },
-        {
-          "title": "Appenzell inheritance taxes: rates and procedures",
-          "url": "/en/swiss-articles/inheritance-tax-appenzell/",
-          "excerpt": "Inheritance tax in Appenzell: cantonal jurisdiction, rates for kinship, exemptions for spouse. Declaration within 30-90 days. 6-step procedure.",
-          "date": "2026-08-27T04:36:47.376Z"
         }
       ],
       "latestCantonArticles": [],
@@ -409,7 +409,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-21T19:14:55.654Z"
+      "updatedAt": "2026-10-21T19:37:12.484Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -546,6 +546,12 @@
           "date": "2026-10-19T15:18:22.893Z"
         },
         {
+          "title": "Heiden setzt die Sparbemühungen fort: Defizit von CHF 204'200 im Jahr 2027",
+          "url": "/de/appenzell-artikel/heiden-sparbemuehungen-budget-2027/",
+          "excerpt": "Der Voranschlag 2027 von Heiden weist Einnahmen von CHF 35,308 Millionen, Ausgaben von CHF 35,512 Millionen und ein Defizit von CHF 204'200 aus.",
+          "date": "2026-10-21T19:28:07.751Z"
+        },
+        {
           "title": "Appenzell: Voraussichtlicher Steuerfuss bei 3,90 Einheiten",
           "url": "/de/appenzell-artikel/appenzell-steuerfuss-390/",
           "excerpt": "Der Voranschlag 2027 sieht ein Defizit von CHF 323'670 vor: Der Steuerfuss soll auf 3,90 Einheiten steigen.",
@@ -574,12 +580,6 @@
           "url": "/de/schweiz-artikel/erbschaftsteuer-donationen-appenzell-innerrhoden/",
           "excerpt": "Erbschafts- und Schenkungssteuer im Kanton Appenzell Innerrhoden: Steuersätze nach Verwandtschaftsgrad, Befreiungen für Ehepartner und Nachkommen, Erklärungsverfahren und kantonale Fristen.",
           "date": "2026-09-03T20:00:36.821Z"
-        },
-        {
-          "title": "Erbschaftssteuern Appenzell: Sätze und Verfahren",
-          "url": "/de/schweiz-artikel/erbschaftsteuer-appenzell/",
-          "excerpt": "Erbschaftssteuer in Appenzell: kantonale Zuständigkeit, Verwandtschaftssätze, Freistellungen für Ehegatten. Erklärung innerhalb von 30-90 Tagen. 6-stufiges Verfahren.",
-          "date": "2026-08-27T04:36:47.376Z"
         }
       ],
       "latestCantonArticles": [],
@@ -605,7 +605,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-21T19:14:55.654Z"
+      "updatedAt": "2026-10-21T19:37:12.484Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -742,6 +742,12 @@
           "date": "2026-10-19T15:18:22.893Z"
         },
         {
+          "title": "Heiden poursuit ses efforts d’économies : déficit de CHF 204'200 en 2027",
+          "url": "/fr/articles-appenzell/heiden-economies-budget-2027/",
+          "excerpt": "Le budget 2027 de Heiden prévoit des recettes de CHF 35,308 millions, des dépenses de CHF 35,512 millions et un déficit de CHF 204'200.",
+          "date": "2026-10-21T19:28:07.751Z"
+        },
+        {
           "title": "Appenzell : taux d'imposition prévu à 3,90 unités",
           "url": "/fr/articles-appenzell/appenzell-taux-fiscal-390/",
           "excerpt": "Le budget 2027 prévoit un déficit de CHF 323'670 : le taux d'imposition devrait passer à 3,90 unités.",
@@ -770,12 +776,6 @@
           "url": "/fr/articles-suisse/impot-succession-appenzell-rhodes-interieures/",
           "excerpt": "Imposition des successions et des donations dans le canton d'Appenzell en Inerrhoden : taux selon le degré de parenté, exemptions pour les époux et descendants, procédures de déclaration et délais cantonaux.",
           "date": "2026-09-03T20:00:36.821Z"
-        },
-        {
-          "title": "Impôts de succession Appenzell : taux et procédures",
-          "url": "/fr/articles-suisse/impot-succession-appenzelle/",
-          "excerpt": "Droit de succession à Appenzell : compétence cantonale, taux de parenté, exonérations pour conjoint. Déclaration dans les 30-90 jours. Procédure en 6 étapes.",
-          "date": "2026-08-27T04:36:47.376Z"
         }
       ],
       "latestCantonArticles": [],
@@ -801,7 +801,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-21T19:14:55.654Z"
+      "updatedAt": "2026-10-21T19:37:12.484Z"
     }
   }
 }
