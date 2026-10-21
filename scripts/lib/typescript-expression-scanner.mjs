@@ -75,6 +75,7 @@ const COMPUTED_PROPERTY_PREFIX_RE = new RegExp(
   `(?:^|[,{])${TS_TRIVIA_PATTERN}(?:(?:get|set|async|\\*)${TS_TRIVIA_PATTERN})*$`,
   'u',
 );
+const OBJECT_MEMBER_PREFIX_RE = new RegExp(`(?:^|[,{])${TS_TRIVIA_PATTERN}$`, 'u');
 function typeAliasHeaderEqualsOffset(source, offset) {
   let cursor = skipTrivia(source, offset);
   if (!/[$_\p{ID_Start}]/u.test(source[cursor] || '')) return -1;
@@ -375,6 +376,39 @@ export function isParenthesizedCommaContext(source, offset) {
 export function hasComputedPropertyPrefix(source, offset) {
   const prefix = source.slice(0, offset);
   return COMPUTED_PROPERTY_PREFIX_RE.test(prefix) && !isParenthesizedCommaContext(source, offset);
+}
+
+function hasObjectMemberPrefix(source, offset) {
+  if (!OBJECT_MEMBER_PREFIX_RE.test(source.slice(0, offset))) return false;
+  const current = delimiterContextAt(source, offset).at(-1);
+  return !current || current.delimiter === '{';
+}
+
+/**
+ * Return a dynamic object member that a static article-body consumer cannot
+ * resolve. Both body extraction and the publication gate must reject the same
+ * spread, shorthand, and computed-member forms so they cannot disagree about
+ * which fields are going to be published.
+ */
+export function unsupportedObjectMemberAt(source, offset) {
+  const character = source[offset];
+  if (character === '[' && hasComputedPropertyPrefix(source, offset)) {
+    const keyEnd = computedPropertyKeyEnd(source, offset);
+    if (!isTypeScriptIndexSignature(source, offset, keyEnd)
+      && !isTypeScriptMappedTypeMember(source, offset, keyEnd)) {
+      return { kind: 'computed', keyEnd };
+    }
+  }
+  if (character !== '.' && !/[$_\p{ID_Start}]/u.test(character || '')) return null;
+  if (!hasObjectMemberPrefix(source, offset)) return null;
+  if (character === '.' && source.startsWith('...', offset)) return { kind: 'spread', end: offset + 3 };
+  if (character === '.') return null;
+  const shorthand = /^[$_\p{ID_Start}][$_\u200c\u200d\p{ID_Continue}]*/u.exec(source.slice(offset));
+  if (!shorthand) return null;
+  const end = offset + shorthand[0].length;
+  const after = skipTrivia(source, end);
+  if (source[after] === ',' || source[after] === '}') return { kind: 'shorthand', end };
+  return null;
 }
 
 /**

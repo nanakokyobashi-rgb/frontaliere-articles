@@ -265,6 +265,27 @@ test('interpolated templates fail the whole source before or after static body f
     section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source: sourceWithComputedGenerator,
   }), /Computed article body properties are not supported/u);
 
+  for (const [label, source] of [
+    ['spread member', [
+      `const extraFields = { 'blog.article.${articleId}.body4': 'Optional body' };`,
+      sourceFor().replace(
+        `  'blog.article.${articleId}.body2':`,
+        `  ...extraFields,\n  'blog.article.${articleId}.body2':`,
+      ),
+    ].join('\n')],
+    ['shorthand member', [
+      `const extraFields = { 'blog.article.${articleId}.body4': 'Optional body' };`,
+      sourceFor().replace(
+        `  'blog.article.${articleId}.body2':`,
+        `  extraFields,\n  'blog.article.${articleId}.body2':`,
+      ),
+    ].join('\n')],
+  ]) {
+    assert.throws(() => buildArticleBodyPayload({
+      section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source,
+    }), /Dynamic article body object members are not supported/u, label);
+  }
+
   const sourceWithArrayDestructuringHelper = `const split = (head, [tail]) => tail;\n${sourceFor()}`;
   assert.doesNotThrow(() => buildArticleBodyPayload({
     section: 'frontaliere', locale: 'it', id: articleId, meta: metaFor(), source: sourceWithArrayDestructuringHelper,

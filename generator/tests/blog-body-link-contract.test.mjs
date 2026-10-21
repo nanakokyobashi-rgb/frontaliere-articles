@@ -561,6 +561,34 @@ test('il gate fallisce chiuso sulle chiavi body computed e riporta l’espressio
   }
 });
 
+test('il gate fallisce chiuso su spread e shorthand object dinamici', () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'article-body-link-dynamic-member-'));
+  const relative = `${BLOG_BODY_ROOTS[0]}/it/dynamic-member.ts`;
+  const file = path.join(fixtureRoot, relative);
+  mkdirSync(path.dirname(file), { recursive: true });
+  const sources = [
+    [
+      "const extraFields = { 'blog.article.fixture.body2': '[x](bare-target)' };",
+      "const body = { 'blog.article.fixture.body1': 'safe', ...extraFields };",
+    ].join('\n'),
+    [
+      "const extraFields = { 'blog.article.fixture.body2': '[x](bare-target)' };",
+      "const body = { 'blog.article.fixture.body1': 'safe', extraFields };",
+    ].join('\n'),
+  ];
+  try {
+    for (const source of sources) {
+      writeFileSync(file, source + '\n', 'utf8');
+      const result = scanBlogBodyLinks(fixtureRoot);
+      assert.deepEqual(result.offenders, []);
+      assert.equal(result.errors.length, 1);
+      assert.match(result.errors[0].message, /membro object dinamico non verificabile/u);
+    }
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
 test('il gate continua a controllare i body dopo regex di controllo e divisione con non-null assertion', () => {
   const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'article-body-link-regex-context-'));
   const relative = `${BLOG_BODY_ROOTS[0]}/it/dynamic-regex-context.ts`;

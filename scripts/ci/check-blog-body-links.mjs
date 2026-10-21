@@ -21,10 +21,7 @@ import {
 } from '../lib/corpus-sections.mjs';
 import { decodeTypeScriptString } from '../../generator/scripts/lib/article-meta-block.mjs';
 import {
-  computedPropertyKeyEnd,
-  hasComputedPropertyPrefix,
-  isTypeScriptIndexSignature,
-  isTypeScriptMappedTypeMember,
+  unsupportedObjectMemberAt,
   skipTypeScriptQuotedToken as skipQuotedToken,
 } from '../lib/typescript-expression-scanner.mjs';
 
@@ -161,18 +158,17 @@ function extractArticleBodyValues(source) {
       cursor = skipBlockComment(source, cursor);
       continue;
     }
-    if (char === '[' && hasComputedPropertyPrefix(source, cursor)) {
-      const keyEnd = computedPropertyKeyEnd(source, cursor);
-      const afterKey = keyEnd < 0 ? source.length : skipTriviaAndComments(source, keyEnd);
-      if (!isTypeScriptIndexSignature(source, cursor, keyEnd)
-        && !isTypeScriptMappedTypeMember(source, cursor, keyEnd)
-        && (keyEnd < 0 || source[afterKey] === ':' || source[afterKey] === '(')) {
-        const expressionEnd = keyEnd >= 0 ? keyEnd - 1 : source.length;
-        const expression = source.slice(cursor + 1, expressionEnd).trim();
-        const reported = expression.length > 160 ? expression.slice(0, 157) + '...' : expression;
-        throw new Error('chiave TypeScript computata non verificabile per blog.article: ['
-          + reported + ']');
-      }
+    const unsupportedObjectMember = unsupportedObjectMemberAt(source, cursor);
+    if (unsupportedObjectMember?.kind === 'computed') {
+      const { keyEnd } = unsupportedObjectMember;
+      const expressionEnd = keyEnd >= 0 ? keyEnd - 1 : source.length;
+      const expression = source.slice(cursor + 1, expressionEnd).trim();
+      const reported = expression.length > 160 ? expression.slice(0, 157) + '...' : expression;
+      throw new Error('chiave TypeScript computata non verificabile per blog.article: ['
+        + reported + ']');
+    }
+    if (unsupportedObjectMember) {
+      throw new Error('membro object dinamico non verificabile per blog.article');
     }
     if (char === "'" || char === '"' || char === TEMPLATE_QUOTE) {
       const tokenStart = cursor;

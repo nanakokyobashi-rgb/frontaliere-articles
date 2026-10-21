@@ -2,10 +2,7 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import {
-  computedPropertyKeyEnd,
-  hasComputedPropertyPrefix,
-  isTypeScriptIndexSignature,
-  isTypeScriptMappedTypeMember,
+  unsupportedObjectMemberAt,
 } from './typescript-expression-scanner.mjs';
 import { repairLegacyDoubleEscapedBreaks, tsStringEscapesWithNewlineAs } from '../../generator/scripts/lib/unescape-ts-string.mjs';
 
@@ -40,15 +37,6 @@ function skipTrivia(source, offset) {
     break;
   }
   return index;
-}
-
-function computedPropertyDelimiter(source, offset) {
-  if (!hasComputedPropertyPrefix(source, offset)) return null;
-  const keyEnd = computedPropertyKeyEnd(source, offset);
-  if (keyEnd < 0) return { keyEnd, delimiter: null };
-  const delimiterOffset = skipTrivia(source, keyEnd);
-  const delimiter = source[delimiterOffset];
-  return { keyEnd, delimiter };
 }
 
 function decodeTsLiteral(raw, quote) {
@@ -137,16 +125,12 @@ export function extractArticleBodyFields(source, { allowEndOfInput = false, vali
       index = afterTrivia;
       continue;
     }
-    if (text[index] === '[') {
-      const computedProperty = computedPropertyDelimiter(text, index);
-      if (computedProperty
-        && !isTypeScriptIndexSignature(text, index, computedProperty.keyEnd)
-        && !isTypeScriptMappedTypeMember(text, index, computedProperty.keyEnd)
-        && (
-        computedProperty.keyEnd < 0 || computedProperty.delimiter === ':' || computedProperty.delimiter === '('
-      )) {
+    const unsupportedObjectMember = unsupportedObjectMemberAt(text, index);
+    if (unsupportedObjectMember) {
+      if (unsupportedObjectMember.kind === 'computed') {
         throw new Error('Computed article body properties are not supported in static source');
       }
+      throw new Error('Dynamic article body object members are not supported in static source');
     }
     const keyToken = readQuotedToken(text, index);
     if (!keyToken) {
