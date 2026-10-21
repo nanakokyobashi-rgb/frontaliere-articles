@@ -292,6 +292,28 @@ describe('lettore TS condiviso', () => {
     ]);
   });
 
+  test('ignora regex literal con virgolette e classi che sembrano dati o chiavi computate', () => {
+    const source = [
+      String.raw`const keyLikePattern = /["']blog\.article\.fake\.title["']:\s*["']fake["']/u;`,
+      "'blog.article.real.title': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.title', 'actual'],
+    ]);
+  });
+
+  test('ignora slash escaped che altrimenti sembrano commenti dentro un regex literal', () => {
+    const source = [
+      String.raw`const trailingSlash = /https?:\/\/example\.ch\//u;`,
+      "'blog.article.real.title': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.title', 'actual'],
+    ]);
+  });
+
   test('conta le barre prima di una interpolazione escaped', () => {
     const genuinelyInterpolated = "'blog.article.demo.body1': `literal \\\\${value}`,";
     assert.throws(

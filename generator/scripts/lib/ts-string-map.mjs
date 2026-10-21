@@ -75,13 +75,55 @@ export function readTsStringLiteral(src, i) {
 
 /**
  * Tokenizza il sottoinsieme lessicale usato dai moduli dati del corpus. I commenti
- * non producono token; ogni letterale resta un singolo token. Un'interpolazione
- * in qualunque template del file rende il sorgente non statico, quindi si rifiuta
+ * non producono token; ogni letterale resta un singolo token. Anche i regex
+ * literal sono un token unico: virgolette, parentesi quadre e slash nel pattern
+ * non devono diventare codice o commenti del modulo. Un'interpolazione in
+ * qualunque template del file rende il sorgente non statico, quindi si rifiuta
  * il file intero prima di estrarre qualsiasi chiave.
  */
+const REGEX_PREFIX_KEYWORDS = new Set([
+  'await', 'case', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return',
+  'throw', 'typeof', 'void', 'yield',
+]);
+const REGEX_PREFIX_PUNCTUATION = new Set([
+  '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>',
+]);
+
+function isRegexLineTerminator(character) {
+  return character === '\n' || character === '\r' || character === '\u2028' || character === '\u2029';
+}
+
+/** Salta un regex literal completo, incluse classi carattere ed escape. */
+function skipRegexLiteral(src, offset) {
+  let inCharacterClass = false;
+  let i = offset + 1;
+
+  while (i < src.length) {
+    const character = src[i];
+    if (character === '\\') {
+      i += 2;
+      continue;
+    }
+    if (isRegexLineTerminator(character)) return -1;
+    if (character === '[') {
+      inCharacterClass = true;
+    } else if (character === ']' && inCharacterClass) {
+      inCharacterClass = false;
+    } else if (character === '/' && !inCharacterClass) {
+      i += 1;
+      while (/[A-Za-z]/u.test(src[i] || '')) i += 1;
+      return i;
+    }
+    i += 1;
+  }
+
+  return -1;
+}
+
 function staticSourceTokens(src) {
   const tokens = [];
   let i = 0;
+  let canStartRegex = true;
 
   while (i < src.length) {
     const c = src[i];
@@ -107,6 +149,27 @@ function staticSourceTokens(src) {
       if (!literal) throw new Error('Unterminated string literal in static article source');
       tokens.push({ type: 'string', value: literal.value });
       i = literal.end;
+      canStartRegex = false;
+      continue;
+    }
+
+    if (/[A-Za-z_$]/u.test(c)) {
+      let end = i + 1;
+      while (/[A-Za-z0-9_$]/u.test(src[end] || '')) end += 1;
+      for (let position = i; position < end; position += 1) {
+        tokens.push({ type: 'punctuation', value: src[position] });
+      }
+      canStartRegex = REGEX_PREFIX_KEYWORDS.has(src.slice(i, end));
+      i = end;
+      continue;
+    }
+
+    if (c === '/' && canStartRegex) {
+      const end = skipRegexLiteral(src, i);
+      if (end < 0) throw new Error('Unterminated regex literal in static article source');
+      tokens.push({ type: 'regex' });
+      i = end;
+      canStartRegex = false;
       continue;
     }
 
@@ -114,6 +177,7 @@ function staticSourceTokens(src) {
     // adjacent `string : string` property, not text spanning intervening code.
     tokens.push({ type: 'punctuation', value: c });
     i += 1;
+    canStartRegex = c === '/' || REGEX_PREFIX_PUNCTUATION.has(c);
   }
 
   return tokens;
