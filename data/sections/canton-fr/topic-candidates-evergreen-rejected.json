@@ -91,6 +91,14 @@
     "canton-fr::https://www.freiburger-nachrichten.ch/story/298416/die-welt-wird-staunen-iran-bereitet-sich-auf-n%c3%a4chsten-krieg-vor": {
       "section": "canton-fr",
       "ts": 1792508575449
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/298194/verkehrsbehinderungen-in-plaffeien-am-samstag": {
+      "section": "canton-fr",
+      "ts": 1792547193275
+    },
+    "canton-fr::https://www.lagruyere.ch/articles/canton/ensemble-plus-ou-moins-1467219": {
+      "section": "canton-fr",
+      "ts": 1792547916617
     }
   }
 }
