@@ -38,13 +38,19 @@ test('il reader statico ignora commenti e prosa che imitano una chiave meta', ()
 
 test('il reader richiede il delimitatore dopo il valore e rifiuta interpolazioni', () => {
   assert.deepEqual(
-    readStaticObjectEntries("'blog.article.tail.title': 'ultimo'\n", 'fragment.ts'),
+    readStaticObjectEntries("'blog.article.tail.title': 'ultimo'\n", 'fragment.ts', {
+      allowTerminalFragment: true,
+    }),
     [{
       key: 'blog.article.tail.title',
       value: 'ultimo',
       keyQuote: "'",
       valueQuote: "'",
     }],
+  );
+  assert.throws(
+    () => readStaticObjectEntries("'blog.article.tail.title': 'ultimo'\n", 'full-map.ts'),
+    /must end with/u,
   );
   assert.throws(
     () => readStaticObjectEntries("const x = { 'blog.article.fake.title': 'valore' + suffix };", 'fixture.ts'),
