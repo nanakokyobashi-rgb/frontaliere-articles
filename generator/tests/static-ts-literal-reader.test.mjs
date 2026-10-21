@@ -130,4 +130,3 @@ test('gli emitter usano il reader condiviso e non una regex raw duplicata', () =
     assert.doesNotMatch(source, /blog\\\.article\\\.\(\[\^'\]\+\?\\\)/u, `${file}: regex raw ancora presente`);
   }
 });
-

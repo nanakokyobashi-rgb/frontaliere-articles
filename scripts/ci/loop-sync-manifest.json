@@ -3629,8 +3629,7 @@
         "site": "782afafe9c39e70f",
         "corpus": "782afafe9c39e70f",
         "alignedAt": "2026-10-21"
-      },
-      "adaptationIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/14418"
+      }
     },
     {
       "path": "generator/scripts/lib/unescape-ts-string.mjs",
