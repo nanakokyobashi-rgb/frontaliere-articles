@@ -275,6 +275,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-glarona-mercato-immobiliare-2026': {
+    title: 'Mercato immobiliare a Glarona: prezzi in crescita nel 2026',
+    description: 'La domanda immobiliare resta alta nel Canton Glarona L\'offerta limitata sostiene l\'aumento dei prezzi Condomini +4,4% tra il 2° trimestre 2025 e il 2°',
+    keywords: 'frontalieri, ticino, svizzera, italia, mercato, immobiliare, glarona, prezzi',
+    ogTitle: 'Mercato immobiliare nel Canton Glarona: i dati del 2026',
+    ogDescription: 'La domanda immobiliare resta alta nel Canton Glarona L\'offerta limitata sostiene l\'aumento dei prezzi Condomini +4,4% tra il 2° trimestre 2025 e il 2° 2026',
+    canonicalPath: '/articoli-glarona/glarona-mercato-immobiliare-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mercato immobiliare a Glarona: prezzi in crescita nel 2026",
+      "description": "La domanda immobiliare resta alta nel Canton Glarona L'offerta limitata sostiene l'aumento dei prezzi Condomini +4,4% tra il 2° trimestre 2025 e il 2°",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-glarona-mercato-immobiliare-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-21T01:34:50+00:00",
+      "dateModified": "2026-10-21T01:34:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-glarona/glarona-mercato-immobiliare-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

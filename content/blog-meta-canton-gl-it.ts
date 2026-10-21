@@ -24,6 +24,9 @@ const blogMetaCantonGlIt: Record<string, string> = {
     'blog.article.kloentalerstrasse-cantiere-2026.title': 'Klöntalerstrasse: chiusura temporanea Staldengarten–Bützi',
     'blog.article.kloentalerstrasse-cantiere-2026.excerpt': 'Sono previsti lavori sulla Klöntalerstrasse dal 21 ottobre al 4 dicembre 2026: attese brevi, chiusura per l\'asfalto e deviazione via Sackberg.',
     'blog.article.kloentalerstrasse-cantiere-2026.imageAlt': 'Lavori sulla Klöntalerstrasse tra Staldengarten e Bützi nel Canton Glarona',
+    'blog.article.glarona-mercato-immobiliare-2026.title': 'Mercato immobiliare a Glarona: prezzi in crescita nel 2026',
+    'blog.article.glarona-mercato-immobiliare-2026.excerpt': 'La domanda immobiliare resta alta nel Canton Glarona L\'offerta limitata sostiene l\'aumento dei prezzi Condomini +4,4% tra il 2° trimestre 2025 e il 2° 2026',
+    'blog.article.glarona-mercato-immobiliare-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGlIt;

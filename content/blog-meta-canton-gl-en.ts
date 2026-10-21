@@ -24,6 +24,9 @@ const blogMetaCantonGlEn: Record<string, string> = {
     'blog.article.kloentalerstrasse-cantiere-2026.title': 'Klöntalerstrasse: temporary closure of Staldengarten–Bützi',
     'blog.article.kloentalerstrasse-cantiere-2026.excerpt': 'Construction work is planned on Klöntalerstrasse from October 21 to December 4, 2026: brief waits, closure for asphalting, and a detour via Sackberg.',
     'blog.article.kloentalerstrasse-cantiere-2026.imageAlt': 'Roadworks on Klöntalerstrasse between Staldengarten and Bützi in Glarus',
+    'blog.article.glarona-mercato-immobiliare-2026.title': 'Real estate market in Glarus: prices rising in 2026',
+    'blog.article.glarona-mercato-immobiliare-2026.excerpt': 'Housing demand remains high in the Canton of Glarus Limited supply supports rising prices Condominiums +4,4% between the 2nd quarter of 2025 and the 2nd quarter',
+    'blog.article.glarona-mercato-immobiliare-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGlEn;

@@ -24,6 +24,9 @@ const blogMetaCantonGlFr: Record<string, string> = {
     'blog.article.kloentalerstrasse-cantiere-2026.title': 'Klöntalerstrasse : fermeture temporaire Staldengarten–Bützi',
     'blog.article.kloentalerstrasse-cantiere-2026.excerpt': 'Des travaux sont prévus sur la Klöntalerstrasse du 21 octobre au 4 décembre 2026 : courtes attentes, fermeture pour l’asphaltage et déviation via Sackberg.',
     'blog.article.kloentalerstrasse-cantiere-2026.imageAlt': 'Travaux sur la Klöntalerstrasse entre Staldengarten et Bützi à Glaris',
+    'blog.article.glarona-mercato-immobiliare-2026.title': 'Marché immobilier à Glaris : les prix en hausse en 2026',
+    'blog.article.glarona-mercato-immobiliare-2026.excerpt': 'La demande immobilière reste élevée dans le canton de Glaris L\'offre limitée soutient la hausse des prix Appartements en copropriété +4,4% entre le 2e trimestre',
+    'blog.article.glarona-mercato-immobiliare-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGlFr;
