@@ -48,6 +48,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.lucerna-controlli-percorsi-scolastici.title': 'Luzern: Polizei registriert 480 Geschwindigkeitsüberschreitungen auf Schulwegen',
     'blog.article.lucerna-controlli-percorsi-scolastici.excerpt': 'Nach den Herbstferien hat die Luzerner Polizei an einem Tag 480 Geschwindigkeitsüberschreitungen registriert: Acht Lenker werden der Staatsanwaltschaft gemeldet.',
     'blog.article.lucerna-controlli-percorsi-scolastici.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.fdp-lucerna-due-liste.title': 'FDP Luzern: zwei Listen für die kantonale Wahl 2027',
+    'blog.article.fdp-lucerna-due-liste.excerpt': 'Die FDP Luzern nominiert 32 Kandidatinnen und Kandidaten für die kantonale Wahl am 21.',
+    'blog.article.fdp-lucerna-due-liste.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;

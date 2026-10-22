@@ -48,6 +48,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.lucerna-controlli-percorsi-scolastici.title': 'Lucerne : la police relève 480 excès de vitesse sur les trajets scolaires',
     'blog.article.lucerna-controlli-percorsi-scolastici.excerpt': 'Après les vacances d’automne, la police lucernoise a enregistré 480 infractions de vitesse en une journée : huit conducteurs seront signalés au Ministère public.',
     'blog.article.lucerna-controlli-percorsi-scolastici.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.fdp-lucerna-due-liste.title': 'PLR Lucerne : deux listes pour les élections cantonales de 2027',
+    'blog.article.fdp-lucerna-due-liste.excerpt': 'Le PLR de Lucerne désigne 32 candidats pour les élections cantonales du 21 mars 2027 et mise sur deux listes et une alliance bourgeoise.',
+    'blog.article.fdp-lucerna-due-liste.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

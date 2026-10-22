@@ -592,6 +592,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fdp-lucerna-due-liste': {
+    title: 'FDP Lucerna: due liste per il voto cantonale 2027',
+    description: 'La FDP di Lucerna nomina 32 candidati per il voto cantonale del 21 marzo 2027 e punta a due liste e a un\'alleanza borghese.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lucerna, liste, voto, cantonale',
+    ogTitle: 'FDP Lucerna: 32 candidati e due liste nel 2027',
+    ogDescription: 'La sezione cittadina della FDP.Die Liberalen ha approvato all\'unanimità 32 candidature per il collegio Lucerna-Città. La direzione cercherà un\'intesa con glp, Die Mitte e SVP per rafforzare il fronte borghese.',
+    canonicalPath: '/articoli-lucerna/fdp-lucerna-due-liste/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "FDP Lucerna: due liste per il voto cantonale 2027",
+      "description": "La FDP di Lucerna nomina 32 candidati per il voto cantonale del 21 marzo 2027 e punta a due liste e a un'alleanza borghese.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-fdp-lucerna-due-liste.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T14:25:24+00:00",
+      "dateModified": "2026-10-22T14:25:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/fdp-lucerna-due-liste/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

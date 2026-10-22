@@ -48,6 +48,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.lucerna-controlli-percorsi-scolastici.title': 'Lucerne: police detect 480 speeding violations on school routes',
     'blog.article.lucerna-controlli-percorsi-scolastici.excerpt': 'After the autumn holidays, Lucerne police recorded 480 speeding violations in one day: eight drivers will be reported to the public prosecutor’s office.',
     'blog.article.lucerna-controlli-percorsi-scolastici.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.fdp-lucerna-due-liste.title': 'FDP Lucerne: two lists for the 2027 cantonal election',
+    'blog.article.fdp-lucerna-due-liste.excerpt': 'Lucerne FDP nominates 32 candidates for the cantonal vote on March 21, 2027, and is aiming for two lists and a bourgeois alliance.',
+    'blog.article.fdp-lucerna-due-liste.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;

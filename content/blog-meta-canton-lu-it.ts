@@ -48,6 +48,9 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.lucerna-controlli-percorsi-scolastici.title': 'Lucerna: polizia rileva 480 eccessi sui percorsi scolastici',
     'blog.article.lucerna-controlli-percorsi-scolastici.excerpt': 'Dopo le vacanze autunnali, la Polizia lucernese ha registrato 480 infrazioni di velocità in un giorno: otto conducenti saranno segnalati alla Staatsanwaltschaft.',
     'blog.article.lucerna-controlli-percorsi-scolastici.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.fdp-lucerna-due-liste.title': 'FDP Lucerna: due liste per il voto cantonale 2027',
+    'blog.article.fdp-lucerna-due-liste.excerpt': 'La FDP di Lucerna nomina 32 candidati per il voto cantonale del 21 marzo 2027 e punta a due liste e a un\'alleanza borghese.',
+    'blog.article.fdp-lucerna-due-liste.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonLuIt;
