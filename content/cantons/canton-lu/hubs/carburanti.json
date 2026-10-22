@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-22T08:37:55.302Z",
-  "contentHash": "c98052f4baff25c7ae2fb3adda5a41b406f09b6fb8ba010854ba9b72a5e3bd95",
+  "updatedAt": "2026-10-22T14:34:20.216Z",
+  "contentHash": "f0ed363fb8692dcff1e65484114cf5a58d40e985799887b86ef87d48f75ddf1d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "FDP Lucerna: due liste per il voto cantonale 2027",
+          "url": "/articoli-lucerna/fdp-lucerna-due-liste/",
+          "excerpt": "La FDP di Lucerna nomina 32 candidati per il voto cantonale del 21 marzo 2027 e punta a due liste e a un'alleanza borghese.",
+          "date": "2026-10-22T14:25:24.967Z"
+        },
+        {
           "title": "Lucerna: polizia rileva 480 eccessi sui percorsi scolastici",
           "url": "/articoli-lucerna/lucerna-controlli-percorsi-scolastici/",
           "excerpt": "Dopo le vacanze autunnali, la Polizia lucernese ha registrato 480 infrazioni di velocità in un giorno: otto conducenti saranno segnalati alla Staatsanwaltschaft.",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/lucerna-stop-riscaldamenti-fossili-2050/",
           "excerpt": "Il Consiglio cantonale ha approvato la revisione della legge sull'energia: divieto di nuovi impianti fossili e scadenza finale per tutti entro il 2050.",
           "date": "2026-10-21T12:47:58.727Z"
-        },
-        {
-          "title": "Canton Lucerna riduce le imposte: decisione definitiva",
-          "url": "/articoli-lucerna/lucerna-riduce-imposte/",
-          "excerpt": "La fonte Zentralplus presenta come definitiva la riduzione delle imposte nel Canton Lucerna; il dataset fiscale 2026 riporta oneri sui redditi annui e valori A0.",
-          "date": "2026-10-21T01:30:31.409Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-22T08:37:55.302Z"
+      "updatedAt": "2026-10-22T14:34:20.216Z"
     },
     "en": {
       "canton": "LU",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "FDP Lucerne: two lists for the 2027 cantonal election",
+          "url": "/en/lucerne-articles/fdp-lucerne-two-lists/",
+          "excerpt": "Lucerne FDP nominates 32 candidates for the cantonal vote on March 21, 2027, and is aiming for two lists and a bourgeois alliance.",
+          "date": "2026-10-22T14:25:24.967Z"
+        },
+        {
           "title": "Lucerne: police detect 480 speeding violations on school routes",
           "url": "/en/lucerne-articles/lucerne-school-route-speed-checks/",
           "excerpt": "After the autumn holidays, Lucerne police recorded 480 speeding violations in one day: eight drivers will be reported to the public prosecutor’s office.",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/lucerne-ban-fossil-heating-2050/",
           "excerpt": "The Cantonal Council approved the revision of the Energy Act: a ban on new fossil fuel installations and a final deadline for all by 2050.",
           "date": "2026-10-21T12:47:58.727Z"
-        },
-        {
-          "title": "Canton Lucerne cuts taxes: final decision",
-          "url": "/en/lucerne-articles/lucerne-canton-cuts-taxes/",
-          "excerpt": "The Zentralplus source presents the tax reduction in the Canton of Lucerne as definitive; the 2026 tax dataset reports tax burdens on annual incomes and A0 values.",
-          "date": "2026-10-21T01:30:31.409Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-22T08:37:55.302Z"
+      "updatedAt": "2026-10-22T14:34:20.216Z"
     },
     "de": {
       "canton": "LU",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "FDP Luzern: zwei Listen für die kantonale Wahl 2027",
+          "url": "/de/luzern-artikel/fdp-luzern-zwei-listen/",
+          "excerpt": "Die FDP Luzern nominiert 32 Kandidatinnen und Kandidaten für die kantonale Wahl am 21.",
+          "date": "2026-10-22T14:25:24.967Z"
+        },
+        {
           "title": "Luzern: Polizei registriert 480 Geschwindigkeitsüberschreitungen auf Schulwegen",
           "url": "/de/luzern-artikel/luzern-geschwindigkeitskontrollen-schulwege/",
           "excerpt": "Nach den Herbstferien hat die Luzerner Polizei an einem Tag 480 Geschwindigkeitsüberschreitungen registriert: Acht Lenker werden der Staatsanwaltschaft gemeldet.",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/luzern-ausstieg-oelgasheizungen-2050/",
           "excerpt": "Der Kantonsrat hat die Revision des Energiegesetzes verabschiedet: Verbot neuer fossiler Anlagen und eine endgültige Frist für alle bis 2050.",
           "date": "2026-10-21T12:47:58.727Z"
-        },
-        {
-          "title": "Kanton Luzern senkt die Steuern: endgültige Entscheidung",
-          "url": "/de/luzern-artikel/luzern-senkt-steuern/",
-          "excerpt": "Die Quelle Zentralplus stellt die Steuersenkung im Kanton Luzern als endgültig dar; der Steuerdatensatz 2026 weist Belastungen für Jahreseinkommen und A0-Werte aus.",
-          "date": "2026-10-21T01:30:31.409Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-22T08:37:55.302Z"
+      "updatedAt": "2026-10-22T14:34:20.216Z"
     },
     "fr": {
       "canton": "LU",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "PLR Lucerne : deux listes pour les élections cantonales de 2027",
+          "url": "/fr/articles-lucerne/fdp-lucerne-deux-listes/",
+          "excerpt": "Le PLR de Lucerne désigne 32 candidats pour les élections cantonales du 21 mars 2027 et mise sur deux listes et une alliance bourgeoise.",
+          "date": "2026-10-22T14:25:24.967Z"
+        },
+        {
           "title": "Lucerne : la police relève 480 excès de vitesse sur les trajets scolaires",
           "url": "/fr/articles-lucerne/lucerne-controles-vitesse-trajets-scolaires/",
           "excerpt": "Après les vacances d’automne, la police lucernoise a enregistré 480 infractions de vitesse en une journée : huit conducteurs seront signalés au Ministère public.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/lucerne-fin-chauffage-fossile-2050/",
           "excerpt": "Le Conseil cantonal a approuvé la révision de la loi sur l’énergie : interdiction des nouvelles installations fossiles et échéance finale pour tous d’ici 2050.",
           "date": "2026-10-21T12:47:58.727Z"
-        },
-        {
-          "title": "Le canton de Lucerne réduit les impôts : décision définitive",
-          "url": "/fr/articles-lucerne/lucerne-baisse-impots/",
-          "excerpt": "La source Zentralplus présente la réduction des impôts dans le canton de Lucerne comme définitive ; le jeu de données fiscales 2026 indique des charges sur les revenus annuels et des valeurs A0.",
-          "date": "2026-10-21T01:30:31.409Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-22T08:37:55.302Z"
+      "updatedAt": "2026-10-22T14:34:20.216Z"
     }
   }
 }
