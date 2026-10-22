@@ -1,9 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/tre-eventi-nel-mendrisiotto-diverse-strade-chiuse-al-traffico-nel-fine-settimana-442620": {
-    "articleId": "mendrisiotto-strade-chiuse-weekend",
-    "ts": "2026-09-16T01:17:21.978Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/info/dialogo/perch%c3%a9-sviluppare-nuovi-farmaci-costa-sempre-di-pi%c3%b9--4071262.html": {
     "articleId": "costi-sviluppo-farmaci-2024",
     "ts": "2026-09-16T01:35:52.682Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4180718": {
     "articleId": "arresto-ticino-banca-occulta",
     "ts": "2026-10-21T23:28:09.294Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/bellinzonese/1957946/bellinzona-pedala-verso-una-mobilita-piu-sicura": {
+    "articleId": "bellinzona-nuova-strada-ciclabile",
+    "ts": "2026-10-22T00:55:35.806Z",
     "keyForm": 2
   }
 }

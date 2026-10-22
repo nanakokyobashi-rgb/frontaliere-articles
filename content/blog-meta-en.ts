@@ -13572,6 +13572,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.industria-ticino-strategie-personale.title': 'Ticino industry: 15 collective layoffs in 18 months, -900 cross-border commuters',
     'blog.article.industria-ticino-strategie-personale.excerpt': 'In the last 18 months, numerous collective layoffs in Ticino 15 collective layoffs followed over a year and a half Approximately 900 fewer cross-border commuters in two',
     'blog.article.industria-ticino-strategie-personale.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.bellinzona-nuova-strada-ciclabile.title': 'Bellinzona inaugurates the first cycle path',
+    'blog.article.bellinzona-nuova-strada-ciclabile.excerpt': 'Bellinzona inaugurates its first cycle path The route is three kilometers long The route runs from Giubiasco to Bellinzona Bicycles and motorized traffic',
+    'blog.article.bellinzona-nuova-strada-ciclabile.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

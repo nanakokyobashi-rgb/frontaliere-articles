@@ -282,6 +282,17 @@
       "failureCount": 0,
       "requestedAt": "2026-10-21T23:28:09.292Z",
       "lastFailureAt": "2026-10-21T23:28:09.292Z"
+    },
+    {
+      "articleId": "bellinzona-nuova-strada-ciclabile",
+      "title": "Bellinzona inaugura la prima strada ciclabile",
+      "fallbackImage": "/images/blog/article-fully-strada-ciclabile.webp",
+      "reason": "All image providers failed for article-bellinzona-nuova-strada-ciclabile: openai-codex (vision gate rejected image: Relevant bicycle-path scene, but it contains traffic signage and",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-22T00:55:35.804Z",
+      "lastFailureAt": "2026-10-22T00:55:35.804Z",
+      "retryHint": "no-text"
     }
   ]
 }

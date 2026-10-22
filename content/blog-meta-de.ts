@@ -13571,6 +13571,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.industria-ticino-strategie-personale.title': 'Industrie im Tessin: 15 Massenentlassungen in 18 Monaten, -900 Grenzgänger',
     'blog.article.industria-ticino-strategie-personale.excerpt': 'In den letzten 18 Monaten zahlreiche Massenentlassungen im Tessin 15 Massenentlassungen in eineinhalb Jahren verfolgt Rund 900 Grenzgänger weniger in zwei',
     'blog.article.industria-ticino-strategie-personale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.bellinzona-nuova-strada-ciclabile.title': 'Bellinzona eröffnet seine erste Fahrradstraße',
+    'blog.article.bellinzona-nuova-strada-ciclabile.excerpt': 'Bellinzona eröffnet seine erste Fahrradstraße Die Strecke ist drei Kilometer lang Die Route führt von Giubiasco nach Bellinzona Fahrräder und motorisierter Verkehr',
+    'blog.article.bellinzona-nuova-strada-ciclabile.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;
