@@ -192,7 +192,7 @@ const NOSCRIPT_RAW_TEXT_TOKEN_RE = /<!--[\s\S]*?(?:-->|$)|<(script|style|textare
 const NOSCRIPT_RECOVERABLE_TAIL_RE = /^<(p|h2|h3|h4|li|blockquote)\b[^>]*>/i;
 const NOSCRIPT_END_TAG_RE = /^<\/noscript\s*>/i;
 const NOSCRIPT_REGEX_PREFIX_KEYWORDS = new Set([
-  'await', 'break', 'case', 'continue', 'debugger', 'default', 'delete', 'do', 'else', 'extends', 'in', 'instanceof',
+  'await', 'case', 'delete', 'do', 'else', 'extends', 'in', 'instanceof',
   'new', 'of', 'return', 'throw', 'typeof', 'void', 'yield',
 ]);
 const NOSCRIPT_CONTROL_FLOW_KEYWORDS = new Set(['catch', 'for', 'if', 'switch', 'while', 'with']);
@@ -232,8 +232,6 @@ function findNoscriptEndTagOutsideLexicalState(markup, contentStart) {
   let canStartRegex = true;
   let pendingControlFlowParen = false;
   const parenContexts = [];
-  let previousToken = null;
-  const markToken = (token) => { previousToken = token; };
   for (let index = contentStart; index < markup.length; index += 1) {
     const char = markup[index];
     const next = markup[index + 1];
@@ -251,7 +249,6 @@ function findNoscriptEndTagOutsideLexicalState(markup, contentStart) {
         || (state === 'double-quote' && char === '"')) {
         state = 'code';
         canStartRegex = false;
-        markToken('literal');
       }
       continue;
     }
@@ -279,7 +276,6 @@ function findNoscriptEndTagOutsideLexicalState(markup, contentStart) {
       } else if (state === 'regex-literal' && char === '/') {
         state = 'code';
         canStartRegex = false;
-        markToken('literal');
       }
       continue;
     }
@@ -333,20 +329,16 @@ function findNoscriptEndTagOutsideLexicalState(markup, contentStart) {
       let end = index + 1;
       while (end < markup.length && JS_IDENTIFIER_PART_RE.test(markup[end])) end += 1;
       const word = markup.slice(index, end);
-      const memberProperty = previousToken === '.' || previousToken === '?.';
-      canStartRegex = !memberProperty && NOSCRIPT_REGEX_PREFIX_KEYWORDS.has(word);
-      markToken(word);
+      canStartRegex = NOSCRIPT_REGEX_PREFIX_KEYWORDS.has(word);
       pendingControlFlowParen = NOSCRIPT_CONTROL_FLOW_KEYWORDS.has(word);
       index = end - 1;
     } else if (/[0-9]/u.test(char)) {
       canStartRegex = false;
       pendingControlFlowParen = false;
-      markToken('literal');
     } else if ('([{'.includes(char)) {
       if (char === '(') parenContexts.push(pendingControlFlowParen);
       pendingControlFlowParen = false;
       canStartRegex = true;
-      markToken(char);
     } else if (')]}'.includes(char)) {
       if (char === ')' && parenContexts.length > 0) {
         canStartRegex = parenContexts.pop();
@@ -354,23 +346,15 @@ function findNoscriptEndTagOutsideLexicalState(markup, contentStart) {
         canStartRegex = false;
       }
       pendingControlFlowParen = false;
-      markToken(char);
     } else if ((char === '+' || char === '-') && next === char) {
       // Both prefix and postfix ++/-- produce a value before a following
       // slash, so treating the pair as an expression keeps division safe.
       canStartRegex = false;
       pendingControlFlowParen = false;
-      markToken('postfix');
       index += 1;
-    } else if (char === '?' && next === '.') {
-      canStartRegex = false;
-      pendingControlFlowParen = false;
-      markToken('?.');
-      index += 1;
-    } else if (',;:=!.~*%&|^<>'.includes(char)) {
+    } else if (',;:?=!.~*%&|^<>'.includes(char)) {
       canStartRegex = true;
       pendingControlFlowParen = false;
-      markToken(char);
     }
   }
   return -1;

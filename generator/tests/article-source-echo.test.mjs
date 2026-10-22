@@ -680,15 +680,6 @@ describe('isolateMainSourceHtml — la pagina si riduce al pezzo', () => {
     assert.equal(activated.includes('<main><noscript>'), false);
   });
 
-  it('non tratta default dopo un accesso membro come apertura di regex nel noscript', () => {
-    const page = '<html><body><noscript><script>'
-      + 'const value = obj. /* commento */ default / rhs;'
-      + '</script><article>' + ARTICLE_PROSE + '</article></noscript></body></html>';
-    const activated = sourceActivateBodyNoscript(page);
-    assert.ok(activated.includes('</script><article>'));
-    assert.ok(activated.includes('Paragrafo 7 del pezzo vero'));
-  });
-
   it('mantiene inattivo il noscript nell’head implicito e chiude l’head esplicito sul testo', () => {
     const headFallback = '<html><noscript>'
       + `<article><p>${'CONTENUTO_HEAD_STALE '.repeat(20)}</p></article>`
