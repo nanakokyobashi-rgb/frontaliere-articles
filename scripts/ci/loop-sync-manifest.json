@@ -4765,8 +4765,8 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "58b58fe5843541c7",
-        "corpus": "58b58fe5843541c7",
+        "site": "b4786949d57cf0ff",
+        "corpus": "b4786949d57cf0ff",
         "alignedAt": "2026-10-22"
       }
     },
@@ -4776,8 +4776,8 @@
       "mode": "identical",
       "reason": "La baseline del 2026-10-22 registra lo stesso digest SHA-256 raw sui due lati (2dfb65f5c90634dc); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "fce9f64c140e3ab5",
-        "corpus": "fce9f64c140e3ab5",
+        "site": "2f1f74490ea8726f",
+        "corpus": "2f1f74490ea8726f",
         "alignedAt": "2026-10-22"
       }
     },
@@ -4786,9 +4786,9 @@
       "sitePath": ".github/corpus-workflows/observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "a8310d9435712886",
-        "corpus": "a8310d9435712886",
-        "alignedAt": "2026-09-30"
+        "site": "f173a2ea52ffbef9",
+        "corpus": "f173a2ea52ffbef9",
+        "alignedAt": "2026-10-22"
       },
       "couplingSnapshot": [
         {
