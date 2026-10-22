@@ -4,17 +4,17 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-21T12:43:43.682Z",
-  "contentHash": "3973ec88d38840ccd3341c6b665f08ba891ed865b3a748ef6c22ce945f7ec676",
+  "updatedAt": "2026-10-22T13:56:44.136Z",
+  "contentHash": "8dfb1b14c0a725879dde24ddedc71dd846680c5640dd080148f814560958e7fd",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-21T05:23:11.896Z",
+      "updatedAt": "2026-10-22T05:28:12.116Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T20:55:38.574Z",
+      "updatedAt": "2026-10-21T20:56:46.769Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "6",
-          "note": "segnalazioni aggiornate: 21 ottobre 2026"
+          "note": "segnalazioni aggiornate: 22 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 21 ottobre 2026"
+          "note": "segnalazioni aggiornate: 22 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -92,7 +92,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-22T05:28:12.116Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +130,7 @@
               "url": "https://www.buochs.ch/_rte/information/3007873"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -158,7 +158,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-22T13:56:44.136Z"
     },
     "en": {
       "canton": "NW",
@@ -169,12 +169,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "6",
-          "note": "reports as of 21 October 2026"
+          "note": "reports as of 22 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "4",
-          "note": "reports as of 21 October 2026"
+          "note": "reports as of 22 October 2026"
         }
       ],
       "dataBlocks": [
@@ -233,7 +233,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-22T05:28:12.116Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -271,7 +271,7 @@
               "url": "https://www.buochs.ch/_rte/information/3007873"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -299,7 +299,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-22T13:56:44.136Z"
     },
     "de": {
       "canton": "NW",
@@ -310,12 +310,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "6",
-          "note": "Meldungen vom 21. Oktober 2026"
+          "note": "Meldungen vom 22. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "4",
-          "note": "Meldungen vom 21. Oktober 2026"
+          "note": "Meldungen vom 22. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -374,7 +374,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-22T05:28:12.116Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -412,7 +412,7 @@
               "url": "https://www.buochs.ch/_rte/information/3007873"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -440,7 +440,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-22T13:56:44.136Z"
     },
     "fr": {
       "canton": "NW",
@@ -451,12 +451,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "6",
-          "note": "signalements au 21 octobre 2026"
+          "note": "signalements au 22 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "4",
-          "note": "signalements au 21 octobre 2026"
+          "note": "signalements au 22 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -515,7 +515,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-22T05:28:12.116Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -553,7 +553,7 @@
               "url": "https://www.buochs.ch/_rte/information/3007873"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -581,7 +581,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-22T13:56:44.136Z"
     }
   }
 }

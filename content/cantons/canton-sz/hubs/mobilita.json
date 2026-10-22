@@ -4,17 +4,17 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "mobilita",
-  "updatedAt": "2026-10-21T12:43:43.682Z",
-  "contentHash": "4bdafebbb879abed9fd920d82d2820e6ae1831a4a0d0e76494043df564f4f4b3",
+  "updatedAt": "2026-10-22T13:56:44.136Z",
+  "contentHash": "e0d09ee2954a4d8ffed64408061c8cf6772e6d0ef724204c2232db456e41c845",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-21T05:23:11.896Z",
+      "updatedAt": "2026-10-22T05:28:12.116Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T20:55:38.574Z",
+      "updatedAt": "2026-10-21T20:56:46.769Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "2",
-          "note": "segnalazioni aggiornate: 21 ottobre 2026"
+          "note": "segnalazioni aggiornate: 22 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "4",
-          "note": "segnalazioni aggiornate: 21 ottobre 2026"
+          "value": "3",
+          "note": "segnalazioni aggiornate: 22 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -55,12 +55,6 @@
               "date": "2026-10-13T12:02:00.000Z"
             },
             {
-              "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 1.0 Limitazione del traffico: corsie…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 22 ottobre 2026",
-              "date": "2026-10-02T08:09:00.000Z"
-            },
-            {
               "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Limitazione del traffico: corsie…",
               "value": "Cantiere",
               "detail": "fine prevista: 23 ottobre 2026",
@@ -80,7 +74,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-22T05:28:12.116Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +107,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -147,7 +141,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-22T13:56:44.136Z"
     },
     "en": {
       "canton": "SZ",
@@ -158,12 +152,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "2",
-          "note": "reports as of 21 October 2026"
+          "note": "reports as of 22 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "4",
-          "note": "reports as of 21 October 2026"
+          "value": "3",
+          "note": "reports as of 22 October 2026"
         }
       ],
       "dataBlocks": [
@@ -185,12 +179,6 @@
               "date": "2026-10-13T12:02:00.000Z"
             },
             {
-              "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 1.0 Limitazione del traffico: corsie…",
-              "value": "Roadworks",
-              "detail": "until 22 October 2026",
-              "date": "2026-10-02T08:09:00.000Z"
-            },
-            {
               "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Limitazione del traffico: corsie…",
               "value": "Roadworks",
               "detail": "until 23 October 2026",
@@ -210,7 +198,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-22T05:28:12.116Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -243,7 +231,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -277,7 +265,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-22T13:56:44.136Z"
     },
     "de": {
       "canton": "SZ",
@@ -288,12 +276,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "2",
-          "note": "Meldungen vom 21. Oktober 2026"
+          "note": "Meldungen vom 22. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "4",
-          "note": "Meldungen vom 21. Oktober 2026"
+          "value": "3",
+          "note": "Meldungen vom 22. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -315,12 +303,6 @@
               "date": "2026-10-13T12:02:00.000Z"
             },
             {
-              "label": "A3 Chur -> Zürich zwischen Autobahndreieck Verzweigung Reichenburg und Anschluss Lachen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.0 Verkehrsführung: Fahrbahnverengung auf einen…",
-              "value": "Baustelle",
-              "detail": "bis 22. Oktober 2026",
-              "date": "2026-10-02T08:09:00.000Z"
-            },
-            {
               "label": "A3 Chur -> Zürich zwischen Autobahndreieck Verzweigung Reichenburg und Anschluss Lachen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.6 Verkehrsführung: Fahrbahnverengung auf einen…",
               "value": "Baustelle",
               "detail": "bis 23. Oktober 2026",
@@ -340,7 +322,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-22T05:28:12.116Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -373,7 +355,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -407,7 +389,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-22T13:56:44.136Z"
     },
     "fr": {
       "canton": "SZ",
@@ -418,12 +400,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "2",
-          "note": "signalements au 21 octobre 2026"
+          "note": "signalements au 22 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "4",
-          "note": "signalements au 21 octobre 2026"
+          "value": "3",
+          "note": "signalements au 22 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -445,12 +427,6 @@
               "date": "2026-10-13T12:02:00.000Z"
             },
             {
-              "label": "A3 Coire -> Zurich entre Echangeur Echangeur de Reichenburg et Jonction autoroutière Lachen Situation: trafic perturbé travaux, longueur [km] 1.0 Gestion du trafic: rétrécissement des voies sur une…",
-              "value": "Chantier",
-              "detail": "jusqu’au 22 octobre 2026",
-              "date": "2026-10-02T08:09:00.000Z"
-            },
-            {
               "label": "A3 Coire -> Zurich entre Echangeur Echangeur de Reichenburg et Jonction autoroutière Lachen Situation: trafic perturbé travaux, longueur [km] 0.6 Gestion du trafic: rétrécissement des voies sur une…",
               "value": "Chantier",
               "detail": "jusqu’au 23 octobre 2026",
@@ -470,7 +446,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-21T05:23:11.896Z"
+          "updatedAt": "2026-10-22T05:28:12.116Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -503,7 +479,7 @@
               "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -537,7 +513,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-21T12:43:43.682Z"
+      "updatedAt": "2026-10-22T13:56:44.136Z"
     }
   }
 }

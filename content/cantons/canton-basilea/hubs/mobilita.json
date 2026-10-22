@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "mobilita",
-  "updatedAt": "2026-10-22T09:28:01.507Z",
-  "contentHash": "bd24487e901610d9e75a3f7e821d5cd9152212fb170e51aad26f699ac3c95973",
+  "updatedAt": "2026-10-22T13:56:44.136Z",
+  "contentHash": "0fb4db2cf78e02d869ac5d29de0c81081986c030943437bf830bdf55bbe3fd83",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-21T22:01:50.900Z",
+      "updatedAt": "2026-10-22T05:28:12.116Z",
       "keyFacts": 2
     },
     {
@@ -38,12 +38,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "18",
-          "note": "segnalazioni aggiornate: 21 ottobre 2026"
+          "note": "segnalazioni aggiornate: 22 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "37",
-          "note": "segnalazioni aggiornate: 21 ottobre 2026"
+          "note": "segnalazioni aggiornate: 22 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -154,7 +154,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-21T22:01:50.900Z"
+          "updatedAt": "2026-10-22T05:28:12.116Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -276,7 +276,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T13:56:44.136Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -292,12 +292,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "18",
-          "note": "reports as of 21 October 2026"
+          "note": "reports as of 22 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "37",
-          "note": "reports as of 21 October 2026"
+          "note": "reports as of 22 October 2026"
         }
       ],
       "dataBlocks": [
@@ -408,7 +408,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-21T22:01:50.900Z"
+          "updatedAt": "2026-10-22T05:28:12.116Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -530,7 +530,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T13:56:44.136Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -546,12 +546,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "18",
-          "note": "Meldungen vom 21. Oktober 2026"
+          "note": "Meldungen vom 22. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "37",
-          "note": "Meldungen vom 21. Oktober 2026"
+          "note": "Meldungen vom 22. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -662,7 +662,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-21T22:01:50.900Z"
+          "updatedAt": "2026-10-22T05:28:12.116Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -784,7 +784,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T13:56:44.136Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -800,12 +800,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "18",
-          "note": "signalements au 21 octobre 2026"
+          "note": "signalements au 22 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "37",
-          "note": "signalements au 21 octobre 2026"
+          "note": "signalements au 22 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -916,7 +916,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-21T22:01:50.900Z"
+          "updatedAt": "2026-10-22T05:28:12.116Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1038,7 +1038,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T13:56:44.136Z"
     }
   }
 }
