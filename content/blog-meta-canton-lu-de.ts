@@ -42,6 +42,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.lucerna-tassi-fiscali-zero-2027.title': 'Luzern: Steuerzinsen 2027 bleiben bei 0%',
     'blog.article.lucerna-tassi-fiscali-zero-2027.excerpt': 'Im Jahr 2027 behält Luzern die Steuersätze bei 0,00%; der Verzug bleibt bei 4,00%.',
     'blog.article.lucerna-tassi-fiscali-zero-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lucerna-governo-risposta-sp.title': 'Luzern: Die Regierung antwortet auf die SP-Initiative',
+    'blog.article.lucerna-governo-risposta-sp.excerpt': 'Im Jahr 2024 waren im Kanton Luzern nur 15% der Mietwohnungen bezahlbar.',
+    'blog.article.lucerna-governo-risposta-sp.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;

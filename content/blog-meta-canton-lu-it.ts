@@ -42,6 +42,9 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.lucerna-tassi-fiscali-zero-2027.title': 'Lucerna: interessi fiscali 2027 restano allo 0%',
     'blog.article.lucerna-tassi-fiscali-zero-2027.excerpt': 'Nel 2027 Lucerna mantiene allo 0,00% i tassi fiscali; la mora resta al 4,00%.',
     'blog.article.lucerna-tassi-fiscali-zero-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lucerna-governo-risposta-sp.title': 'Lucerna: il Governo risponde all\'iniziativa SP',
+    'blog.article.lucerna-governo-risposta-sp.excerpt': 'Nel 2024 solo il 15% delle abitazioni in affitto nel Canton Lucerna era a prezzi accessibili.',
+    'blog.article.lucerna-governo-risposta-sp.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonLuIt;

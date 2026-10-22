@@ -16,6 +16,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'lucerna-riduce-imposte': { it: 'lucerna-riduce-imposte', en: 'lucerne-canton-cuts-taxes', de: 'luzern-senkt-steuern', fr: 'lucerne-baisse-impots' },
  'lucerna-stop-riscaldamenti-fossili-2050': { it: 'lucerna-stop-riscaldamenti-fossili-2050', en: 'lucerne-ban-fossil-heating-2050', de: 'luzern-ausstieg-oelgasheizungen-2050', fr: 'lucerne-fin-chauffage-fossile-2050' },
  'lucerna-tassi-fiscali-zero-2027': { it: 'lucerna-tassi-fiscali-zero-2027', en: 'lucerne-tax-interest-zero-2027', de: 'luzern-steuerzinsen-null-2027', fr: 'lucerne-interets-fiscaux-zero-2027' },
+ 'lucerna-governo-risposta-sp': { it: 'lucerna-governo-risposta-sp', en: 'lucerne-government-sp-response', de: 'luzern-regierung-sp-antwort', fr: 'lucerne-gouvernement-reponse-sp' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

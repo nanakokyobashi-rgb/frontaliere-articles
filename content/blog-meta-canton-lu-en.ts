@@ -42,6 +42,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.lucerna-tassi-fiscali-zero-2027.title': 'Lucerne: tax interest 2027 remains at 0%',
     'blog.article.lucerna-tassi-fiscali-zero-2027.excerpt': 'In 2027 Lucerne maintains tax rates at 0.00%; the default remains at 4.00%.',
     'blog.article.lucerna-tassi-fiscali-zero-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lucerna-governo-risposta-sp.title': 'Lucerne: the Government responds to the SP initiative',
+    'blog.article.lucerna-governo-risposta-sp.excerpt': 'In 2024, only 15% of rental housing in the Canton of Lucerne was affordable.',
+    'blog.article.lucerna-governo-risposta-sp.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;

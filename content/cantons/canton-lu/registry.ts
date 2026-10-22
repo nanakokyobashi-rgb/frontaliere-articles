@@ -149,4 +149,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'lucerna-governo-risposta-sp',
+ category: 'novita',
+ date: '2026-10-22T07:56:30.871Z',
+ image: '/images/blog/article-lucerna-governo-risposta-sp.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

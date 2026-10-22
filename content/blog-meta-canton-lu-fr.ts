@@ -42,6 +42,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.lucerna-tassi-fiscali-zero-2027.title': 'Lucerne : les intérêts fiscaux 2027 restent à 0%',
     'blog.article.lucerna-tassi-fiscali-zero-2027.excerpt': 'En 2027, Lucerne maintient les taux d\'imposition à 0,00 % ; les arriérés restent à 4,00 %.',
     'blog.article.lucerna-tassi-fiscali-zero-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lucerna-governo-risposta-sp.title': 'Lucerne : le gouvernement répond à l’initiative SP',
+    'blog.article.lucerna-governo-risposta-sp.excerpt': 'En 2024, seuls 15 % des logements locatifs du canton de Lucerne étaient abordables.',
+    'blog.article.lucerna-governo-risposta-sp.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;
