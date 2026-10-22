@@ -51,6 +51,8 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
 const GATE = path.join(ROOT, 'scripts/ci/check-blog-body-syntax.mjs');
 const WORKFLOW = path.join(ROOT, '.github/workflows/publish-api.yml');
+const FAST_ARTICLE_WORKFLOW = path.join(ROOT, '.github/workflows/fast-publish-article.yml');
+const FAST_SECTION_WORKFLOW = path.join(ROOT, '.github/workflows/fast-publish-section.yml');
 const GENERATOR_WORKFLOW = path.join(ROOT, '.github/workflows/generator-ci.yml');
 const CONTENT_GATES_WORKFLOW = path.join(ROOT, '.github/workflows/content-gates-main.yml');
 const TESTS_WORKFLOW = path.join(ROOT, '.github/workflows/tests.yml');
@@ -738,6 +740,18 @@ test('publish-api.yml esegue il gate, e gli passa la directory del parser', () =
 test('publish-api.yml scopa il preflight ai corpi toccati, con fallback esplicito', () => {
   const src = fs.readFileSync(WORKFLOW, 'utf8');
 
+  for (const dependency of [
+    'scripts/lib/corpus-floors.mjs',
+    'scripts/lib/seo-entry.mjs',
+    'scripts/lib/article-registry-reader.mjs',
+    'generator/scripts/lib/daily-brief-content.mjs',
+    'engine/shared/articleReaderSource.mjs',
+    'engine/shared/articleArchiveConfig.mjs',
+  ]) {
+    assert.match(src, new RegExp(dependency.replaceAll('.', '\\.'), 'u'),
+      `publish-api.yml deve osservare la chiusura di corpus-floors: ${dependency}`);
+  }
+
   assert.match(
     src,
     /fetch-depth:\s*0/,
@@ -787,6 +801,63 @@ test('publish-api.yml scopa il preflight ai corpi toccati, con fallback esplicit
   const iDetermine = src.indexOf('Determine which article bodies this push touched');
   const iGate = src.indexOf('node scripts/ci/check-blog-body-syntax.mjs');
   assert.ok(iDetermine > 0 && iGate > 0 && iDetermine < iGate, 'il diff va calcolato prima di invocare il gate');
+});
+
+test('i publisher rapidi eseguono il syntax gate con lo stesso fallback full', () => {
+  const publishApi = fs.readFileSync(WORKFLOW, 'utf8');
+  assert.match(publishApi, /ESBUILD_PIN:\s*esbuild@\d+\.\d+\.\d+/);
+
+  for (const workflowPath of [FAST_ARTICLE_WORKFLOW, FAST_SECTION_WORKFLOW]) {
+    const src = fs.readFileSync(workflowPath, 'utf8');
+    const syntaxAt = src.indexOf('node scripts/ci/check-blog-body-syntax.mjs');
+    const linksAt = src.indexOf('node scripts/ci/check-blog-body-links.mjs');
+    const parserAt = src.indexOf('Install isolated blog-body syntax parser (esbuild)');
+    assert.ok(parserAt >= 0, `${path.basename(workflowPath)} deve installare esbuild prima del gate`);
+    assert.ok(syntaxAt > parserAt, `${path.basename(workflowPath)} deve eseguire il syntax gate dopo l'installazione`);
+    assert.ok(syntaxAt > 0 && linksAt > syntaxAt, `${path.basename(workflowPath)} deve eseguire syntax prima dei link`);
+    assert.match(src, /ESBUILD_PIN="\$\(sed -n .*publish-api\.yml/);
+    assert.match(src, /PREFLIGHT_ESBUILD_DIR=\"?\$RUNNER_TEMP\/preflight/);
+    assert.match(src, /PREFLIGHT_SCAN_MODE=\"?\$scan_mode/);
+    assert.match(src, /PREFLIGHT_CHANGED_FILES_FILE=\"?\$changed_files/);
+    assert.match(src, /scan_mode=full/);
+    assert.match(src, /git diff --quiet "\$BEFORE" "\$AFTER"/);
+    for (const dependency of [
+      'scripts/lib/corpus-floors.mjs',
+      'scripts/lib/seo-entry.mjs',
+      'scripts/lib/article-registry-reader.mjs',
+      'generator/scripts/lib/daily-brief-content.mjs',
+      'engine/shared/articleReaderSource.mjs',
+      'engine/shared/articleArchiveConfig.mjs',
+    ]) {
+      assert.match(src, new RegExp(dependency.replaceAll('.', '\\.'), 'u'),
+        `${path.basename(workflowPath)} deve osservare la chiusura di corpus-floors: ${dependency}`);
+    }
+  }
+  const sectionSrc = fs.readFileSync(FAST_SECTION_WORKFLOW, 'utf8');
+  assert.match(
+    sectionSrc,
+    /PREFLIGHT_BASE_REVISION=\$BEFORE/u,
+    'fast-publish-section deve costruire la base reale della push anche nei replay workflow_run',
+  );
+  assert.doesNotMatch(
+    sectionSrc,
+    /^\s+PREFLIGHT_BASE_REVISION:/mu,
+    'la base non deve essere esportata come env vuoto nei workflow_dispatch',
+  );
+  assert.match(
+    sectionSrc,
+    /if \[ -n "\$\{BEFORE:-\}" \][\s\S]*PREFLIGHT_BASE_REVISION=\$BEFORE/u,
+    'il gate deve ricevere PREFLIGHT_BASE_REVISION solo quando BEFORE non e\' vuoto',
+  );
+});
+
+test('publish-api forza la scansione completa dopo un publish-api fallito', () => {
+  const src = fs.readFileSync(WORKFLOW, 'utf8');
+  assert.match(src, /gh run list[\s\S]*--workflow publish-api\.yml/);
+  assert.match(src, /--json databaseId,status,conclusion/);
+  assert.match(src, /last_publish_conclusion/);
+  assert.match(src, /last_publish_conclusion.*failure/);
+  assert.match(src, /scan_reason=.*last-publish-failed/);
 });
 
 test('il job di pubblicazione ha un tetto di tempo', () => {

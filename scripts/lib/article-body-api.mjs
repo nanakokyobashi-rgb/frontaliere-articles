@@ -12,12 +12,32 @@ import { repairLegacyDoubleEscapedBreaks, tsStringEscapesWithNewlineAs } from '.
 export const ARTICLE_BODY_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 export const MAX_ARTICLE_BODY_FIELDS = 20;
 export const REQUIRED_ARTICLE_BODY_FIELDS = Object.freeze(['body1', 'body2', 'body3']);
+export const MAX_ARTICLE_BODY_QUARANTINES = 3;
 
 const BODY_FIELD_RE = /^body(?:[1-9]|1[0-9]|20)$/u;
 const ARTICLE_KEY_RE = /^blog\.article\.([^'"\r\n]+)\.(body\d+|faq)$/u;
 const ARTICLE_SECTION_RE = /^[a-z0-9-]+$/u;
 const PAYLOAD_KEYS = Object.freeze(['schemaVersion', 'section', 'locale', 'id', 'revision', 'meta', 'translations']);
 const META_KEYS = Object.freeze(['title', 'excerpt', 'imageAlt']);
+
+class ArticleBodySourceValidationError extends Error {
+  constructor(message, cause) {
+    super(message);
+    this.name = 'ArticleBodySourceValidationError';
+    this.code = 'ARTICLE_BODY_SOURCE_INVALID';
+    if (cause) this.cause = cause;
+  }
+}
+
+function sourceValidationError(error) {
+  if (error instanceof ArticleBodySourceValidationError) return error;
+  return new ArticleBodySourceValidationError(error?.message || String(error), error);
+}
+
+function isArticleBodySourceValidationError(error) {
+  return error instanceof ArticleBodySourceValidationError;
+}
+
 function skipTrivia(source, offset) {
   let index = offset;
   while (index < source.length) {
@@ -282,26 +302,36 @@ export function buildArticleBodyPayload({ section, locale, id, meta, source }) {
   assertValidId(id);
   assertValidSection(section);
   assertValidLocale(locale);
-  const articleMeta = assertMeta(meta, id, locale);
-  const entries = extractArticleBodyFields(source);
+  let articleMeta;
+  try {
+    articleMeta = assertMeta(meta, id, locale);
+  } catch (error) {
+    throw sourceValidationError(error);
+  }
+  let entries;
+  try {
+    entries = extractArticleBodyFields(source);
+  } catch (error) {
+    throw sourceValidationError(error);
+  }
   const translations = {};
   for (const entry of entries) {
-    if (entry.id !== id) throw new Error(`${section}/${locale}/${id}: chiave body per id ${entry.id}`);
-    if (entry.error) throw new Error(`${section}/${locale}/${id}.${entry.field}: ${entry.error}`);
+    if (entry.id !== id) throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}: chiave body per id ${entry.id}`);
+    if (entry.error) throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}.${entry.field}: ${entry.error}`);
     if (!BODY_FIELD_RE.test(entry.field) && entry.field !== 'faq') {
-      throw new Error(`${section}/${locale}/${id}: campo non supportato ${entry.field}`);
+      throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}: campo non supportato ${entry.field}`);
     }
     if (Object.prototype.hasOwnProperty.call(translations, entry.field)) {
-      throw new Error(`${section}/${locale}/${id}: campo duplicato ${entry.field}`);
+      throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}: campo duplicato ${entry.field}`);
     }
     if (typeof entry.value !== 'string' || !entry.value.trim()) {
-      throw new Error(`${section}/${locale}/${id}.${entry.field}: valore vuoto`);
+      throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}.${entry.field}: valore vuoto`);
     }
     translations[entry.field] = entry.value;
   }
   for (const field of REQUIRED_ARTICLE_BODY_FIELDS) {
     if (!Object.prototype.hasOwnProperty.call(translations, field)) {
-      throw new Error(`${section}/${locale}/${id}: campo obbligatorio mancante ${field}`);
+      throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}: campo obbligatorio mancante ${field}`);
     }
   }
   if (Object.prototype.hasOwnProperty.call(translations, 'faq')) {
@@ -309,9 +339,9 @@ export function buildArticleBodyPayload({ section, locale, id, meta, source }) {
     try {
       parsedFaq = JSON.parse(translations.faq);
     } catch (error) {
-      throw new Error(`${section}/${locale}/${id}.faq: JSON non valido (${error.message})`);
+      throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}.faq: JSON non valido (${error.message})`, error);
     }
-    if (!Array.isArray(parsedFaq)) throw new Error(`${section}/${locale}/${id}.faq: atteso array JSON`);
+    if (!Array.isArray(parsedFaq)) throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}.faq: atteso array JSON`);
   }
   const payload = {
     schemaVersion: 1,
@@ -373,9 +403,43 @@ function readJson(filePath, description) {
   }
 }
 
+function quarantineReason(error) {
+  const message = error?.message || String(error);
+  return message.replace(/\s+/gu, ' ').trim().slice(0, 400) || 'errore non specificato';
+}
+
+export function assertArticleBodyQuarantineBudget(totals, limit = MAX_ARTICLE_BODY_QUARANTINES) {
+  const quarantined = Number(totals?.quarantined);
+  if (!Number.isInteger(quarantined) || quarantined < 0) {
+    throw new Error(`article body API: conteggio quarantena non valido: ${String(totals?.quarantined)}`);
+  }
+  if (quarantined > limit) {
+    throw new Error(
+      `article body API: soglia quarantena superata (${quarantined} > ${limit}); `
+        + 'rifiuto la superficie invece di pubblicare un set troppo incompleto',
+    );
+  }
+}
+
+export function appendArticleBodyQuarantineSummary(quarantined, summaryPath = process.env.GITHUB_STEP_SUMMARY) {
+  if (!summaryPath || !Array.isArray(quarantined) || quarantined.length === 0) return;
+  const lines = [
+    '## Article body quarantine',
+    '',
+    `Articoli esclusi dalla superficie: **${quarantined.length}**. Soglia fail-closed: **${MAX_ARTICLE_BODY_QUARANTINES}**.`,
+    '',
+    '| Sorgente | Motivo |',
+    '| --- | --- |',
+    ...quarantined.map(({ source, reason }) => `| \`${source}\` | ${reason.replace(/\|/gu, '\\|')} |`),
+    '',
+  ];
+  fs.appendFileSync(summaryPath, `${lines.join('\n')}\n`, 'utf8');
+}
+
 /**
  * Emit section/locale indexes and payloads. A missing source file gets an explicit
- * index row; a present but invalid file stops the build.
+ * index row; a present but unparseable/invalid body is quarantined and excluded
+ * from payload output so one bad source cannot discard the whole surface.
  */
 export function emitArticleBodyApi({
   root,
@@ -398,7 +462,8 @@ export function emitArticleBodyApi({
     idsBySection.set(section.section, validatedRegistryIds(section.section, registry));
   }
   const capabilitySections = {};
-  const totals = { expected: 0, available: 0, missing: 0 };
+  const totals = { expected: 0, available: 0, missing: 0, quarantined: 0 };
+  const quarantined = [];
   for (const section of sections) {
     const isPublic = publicSet.has(section.section);
     const ids = idsBySection.get(section.section);
@@ -408,6 +473,7 @@ export function emitArticleBodyApi({
       const entries = {};
       let availableCount = 0;
       let missingCount = 0;
+      let quarantinedCount = 0;
       if (isPublic && ids.length > 0) {
         const sourceLocaleDir = path.join(root, section.bodyDir, locale);
         if (!fs.existsSync(sourceLocaleDir)) {
@@ -424,13 +490,40 @@ export function emitArticleBodyApi({
           continue;
         }
         const meta = metaBySectionLocale?.[section.section]?.[locale];
-        const rawPayload = buildArticleBodyPayload({
-          section: section.section,
-          locale,
-          id,
-          meta,
-          source: fs.readFileSync(sourcePath, 'utf8'),
-        });
+        const source = fs.readFileSync(sourcePath, 'utf8');
+        let rawPayload;
+        try {
+          rawPayload = buildArticleBodyPayload({
+            section: section.section,
+            locale,
+            id,
+            meta,
+            source,
+          });
+        } catch (error) {
+          if (!isArticleBodySourceValidationError(error)) throw error;
+          const reason = quarantineReason(error);
+          const quarantine = {
+            section: section.section,
+            locale,
+            id,
+            source: relativeSource,
+            reason,
+          };
+          quarantined.push(quarantine);
+          // The v1 count is a partition: a quarantined body is unavailable to
+          // the HTTP reader, so it belongs to `missingCount` as well as the
+          // additive quarantine counter.
+          missingCount += 1;
+          quarantinedCount += 1;
+          // The v1 HTTP reader only understands available/missing. Keep this
+          // entry missing and include it in missingCount so legacy consumers
+          // see the complete unavailable set; the reason is carried by the additive
+          // index.quarantined detail and the job summary.
+          entries[id] = { status: 'missing' };
+          console.warn(`::warning::article body quarantined: ${relativeSource} — ${reason}`);
+          continue;
+        }
         const cleanPayloadInput = sanitize({
           schemaVersion: rawPayload.schemaVersion,
           section: rawPayload.section,
@@ -462,6 +555,14 @@ export function emitArticleBodyApi({
         expectedCount,
         availableCount,
         missingCount,
+        quarantinedCount,
+        // Keep the v1 entry contract: a quarantined article is a missing
+        // payload to existing HTTP consumers, never an unfamiliar status that
+        // they might treat as available. The detail is additive and is used
+        // by the disk gate and the build summary, not by the v1 reader.
+        quarantined: quarantined
+          .filter((item) => item.section === section.section && item.locale === locale)
+          .map(({ id, reason }) => ({ id, reason })),
         entries,
       };
       const indexPath = `bodies/${section.section}/${locale}/index.json`;
@@ -473,10 +574,12 @@ export function emitArticleBodyApi({
         expected: expectedCount,
         available: availableCount,
         missing: missingCount,
+        quarantined: quarantinedCount,
       };
       totals.expected += expectedCount;
       totals.available += availableCount;
       totals.missing += missingCount;
+      totals.quarantined += quarantinedCount;
     }
   }
   return {
@@ -496,6 +599,7 @@ export function emitArticleBodyApi({
       sections: capabilitySections,
     },
     totals,
+    quarantined,
   };
 }
 
@@ -504,7 +608,7 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
   const publicSet = publicSections instanceof Set ? publicSections : new Set(publicSections);
   const expectedPayloadPaths = new Set();
   const expectedIndexPaths = new Set();
-  const totals = { expected: 0, available: 0, missing: 0 };
+  const totals = { expected: 0, available: 0, missing: 0, quarantined: 0 };
   const diskSections = {};
 
   for (const section of sections) {
@@ -526,6 +630,18 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
       if (index.expectedCount !== expectedCount || !index.entries || typeof index.entries !== 'object' || Array.isArray(index.entries)) {
         throw new Error(`${indexPath}: expectedCount o entries non valido`);
       }
+      if (!Array.isArray(index.quarantined)) {
+        throw new Error(`${indexPath}: quarantined non valido`);
+      }
+      const quarantinedById = new Map();
+      for (const item of index.quarantined) {
+        if (!item || typeof item !== 'object' || !ids.includes(item.id)
+          || typeof item.reason !== 'string' || !item.reason.trim()
+          || quarantinedById.has(item.id)) {
+          throw new Error(`${indexPath}: dettaglio quarantena non valido`);
+        }
+        quarantinedById.set(item.id, item.reason);
+      }
       const indexIds = Object.keys(index.entries);
       const missingIds = ids.filter((id) => !Object.prototype.hasOwnProperty.call(index.entries, id));
       const extraIds = indexIds.filter((id) => !ids.includes(id));
@@ -534,13 +650,16 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
       }
       let availableCount = 0;
       let missingCount = 0;
+      let quarantinedCount = 0;
       for (const id of ids) {
         const entry = index.entries[id];
         if (entry?.status === 'missing') {
           if (Object.keys(entry).length !== 1) throw new Error(`${indexPath}: missing entry contiene dati extra per ${id}`);
           missingCount += 1;
+          if (quarantinedById.has(id)) quarantinedCount += 1;
           continue;
         }
+        if (quarantinedById.has(id)) throw new Error(`${indexPath}: quarantined ${id} non e' missing`);
         if (entry?.status !== 'available' || entry.path !== articleBodyDocumentPath(section.section, locale, id)
           || typeof entry.expectedHash !== 'string' || !/^[a-f0-9]{64}$/u.test(entry.expectedHash)) {
           throw new Error(`${indexPath}: entry non valida per ${id}`);
@@ -552,6 +671,8 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
         availableCount += 1;
       }
       if (index.availableCount !== availableCount || index.missingCount !== missingCount
+        || index.quarantinedCount !== quarantinedCount
+        || index.quarantined.length !== quarantinedCount
         || availableCount + missingCount !== expectedCount) {
         throw new Error(`${indexPath}: counts non corrispondono alle entries su disco`);
       }
@@ -560,10 +681,12 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
         expected: expectedCount,
         available: availableCount,
         missing: missingCount,
+        quarantined: quarantinedCount,
       };
       totals.expected += expectedCount;
       totals.available += availableCount;
       totals.missing += missingCount;
+      totals.quarantined += quarantinedCount;
     }
   }
 

@@ -7,9 +7,12 @@ import path from 'node:path';
 import {
   articleBodyRevision,
   articleBodyDocumentPath,
+  appendArticleBodyQuarantineSummary,
+  assertArticleBodyQuarantineBudget,
   buildArticleBodyPayload,
   emitArticleBodyApi,
   extractArticleBodyFields,
+  MAX_ARTICLE_BODY_QUARANTINES,
   verifyArticleBodyApiOnDisk,
 } from '../../scripts/lib/article-body-api.mjs';
 import { findNonCanonicalArticleLinks } from '../../scripts/lib/article-link-contract.mjs';
@@ -529,7 +532,7 @@ test('section/locale indexes explicitly represent missing sources and inactive s
     publicSections: new Set(['frontaliere']),
     metaBySectionLocale,
   });
-  assert.deepEqual(emitted.totals, { expected: 4, available: 2, missing: 2 });
+  assert.deepEqual(emitted.totals, { expected: 4, available: 2, missing: 2, quarantined: 0 });
   const itIndex = JSON.parse(fs.readFileSync(path.join(outDir, 'bodies/frontaliere/it/index.json'), 'utf8'));
   assert.equal(itIndex.entries[articleId].status, 'available');
   assert.equal(itIndex.entries['missing-article'].status, 'missing');
@@ -548,6 +551,88 @@ test('section/locale indexes explicitly represent missing sources and inactive s
     locales,
   });
   assert.deepEqual(verified.totals, emitted.totals);
+});
+
+test('un body non parsabile viene messo in quarantena, escluso dall output e ri-verificato dal disco', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-invalid-source-'));
+  const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-invalid-output-'));
+  const sourceDir = path.join(root, 'content/frontaliere/it');
+  fs.mkdirSync(sourceDir, { recursive: true });
+  const malformed = sourceFor('example-article', `broken${String.fromCharCode(0x2028)}body`);
+  fs.writeFileSync(path.join(sourceDir, `${articleId}.ts`), malformed);
+  const sections = [{ section: 'frontaliere', bodyDir: 'content/frontaliere' }];
+  const registries = { frontaliere: [{ id: articleId }] };
+  const emitted = emitArticleBodyApi({
+    root,
+    outDir,
+    locales: ['it'],
+    sections,
+    registries,
+    publicSections: new Set(['frontaliere']),
+    metaBySectionLocale: { frontaliere: { it: metaFor() } },
+  });
+
+  assert.deepEqual(emitted.totals, { expected: 1, available: 0, missing: 1, quarantined: 1 });
+  assert.equal(emitted.quarantined.length, 1);
+  assert.equal(emitted.quarantined[0].source, `content/frontaliere/it/${articleId}.ts`);
+  assert.match(emitted.quarantined[0].reason, /Unterminated delimiter/u);
+
+  const index = JSON.parse(fs.readFileSync(path.join(outDir, 'bodies/frontaliere/it/index.json'), 'utf8'));
+  assert.equal(index.quarantinedCount, 1);
+  assert.equal(index.missingCount, 1, 'la quarantena resta inclusa nel conteggio v1 dei payload assenti');
+  assert.equal(emitted.capability.sections.frontaliere.locales.it.missing, 1);
+  assert.equal(index.entries[articleId].status, 'missing', 'il contratto v1 espone la quarantena come payload assente');
+  assert.deepEqual(index.quarantined, [{ id: articleId, reason: emitted.quarantined[0].reason }]);
+  assert.equal(fs.existsSync(path.join(outDir, `bodies/frontaliere/it/${articleId}.json`)), false);
+  const summaryPath = path.join(outDir, 'summary.md');
+  appendArticleBodyQuarantineSummary(emitted.quarantined, summaryPath);
+  assert.match(fs.readFileSync(summaryPath, 'utf8'), /example-article\.ts/u);
+  assert.match(fs.readFileSync(summaryPath, 'utf8'), /Unterminated delimiter/u);
+
+  const verified = verifyArticleBodyApiOnDisk({
+    outDir,
+    capability: emitted.capability,
+    sections,
+    registries,
+    publicSections: new Set(['frontaliere']),
+    locales: ['it'],
+  });
+  assert.deepEqual(verified.totals, emitted.totals);
+});
+
+test('un errore interno di sanitizzazione non viene convertito in quarantena', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-internal-error-source-'));
+  const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-internal-error-output-'));
+  try {
+    const sourceDir = path.join(root, 'content/frontaliere/it');
+    fs.mkdirSync(sourceDir, { recursive: true });
+    fs.writeFileSync(path.join(sourceDir, `${articleId}.ts`), sourceFor());
+    assert.throws(
+      () => emitArticleBodyApi({
+        root,
+        outDir,
+        locales: ['it'],
+        sections: [{ section: 'frontaliere', bodyDir: 'content/frontaliere' }],
+        registries: { frontaliere: [{ id: articleId }] },
+        publicSections: new Set(['frontaliere']),
+        metaBySectionLocale: { frontaliere: { it: metaFor() } },
+        sanitize: () => { throw new Error('internal sanitize failure'); },
+      }),
+      /internal sanitize failure/u,
+    );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+    fs.rmSync(outDir, { recursive: true, force: true });
+  }
+});
+
+test('la soglia di quarantena e esplicita e fail-closed', () => {
+  assert.equal(MAX_ARTICLE_BODY_QUARANTINES, 3);
+  assert.doesNotThrow(() => assertArticleBodyQuarantineBudget({ quarantined: 3 }));
+  assert.throws(
+    () => assertArticleBodyQuarantineBudget({ quarantined: 4 }),
+    /soglia quarantena superata \(4 > 3\)/u,
+  );
 });
 
 test('the disk gate rejects tampered payloads and body documents absent from their index', () => {

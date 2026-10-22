@@ -52,6 +52,7 @@ on:
       # The article-body preflight is part of the publication chain. Changes
       # to its implementation or parser helpers must rerun this publisher.
       - 'scripts/ci/check-blog-body-links.mjs'
+      - 'scripts/ci/check-blog-body-syntax.mjs'
       - 'scripts/lib/article-link-contract.mjs'
       - 'scripts/lib/typescript-expression-scanner.mjs'
       - 'scripts/lib/rss-feed-body-adapter.mjs'
@@ -80,6 +81,13 @@ on:
       - 'scripts/lib/delete-cdn-file.sh'
       - 'scripts/lib/corpus-floors.mjs'
       - 'scripts/lib/corpus-sections.mjs'
+      - 'scripts/lib/seo-entry.mjs'
+      - 'scripts/lib/article-registry-reader.mjs'
+      - 'scripts/lib/ts-literals.mjs'
+      - 'generator/scripts/lib/daily-brief-content.mjs'
+      - 'generator/scripts/lib/daily-brief-data.mjs'
+      - 'generator/scripts/lib/daily-brief-insights.mjs'
+      - 'generator/scripts/lib/localized-toponyms.mjs'
       - 'scripts/lib/engine-corpus-view.mjs'
       - 'scripts/lib/sanitize-control-chars.mjs'
       - 'scripts/lib/section-registry.mjs'
@@ -836,11 +844,34 @@ jobs:
         if: steps.plan.outputs.any == 'true'
         uses: ./.replay-dispatcher-source/.github/actions/setup-article-source-runtime
 
+      - name: Install isolated blog-body syntax parser (esbuild)
+        if: steps.plan.outputs.any == 'true'
+        run: |
+          set -euo pipefail
+          preflight_dir="$RUNNER_TEMP/preflight"
+          # publish-api.yml is the single source for the parser pin used by
+          # this gate; a fast publisher must not drift to another esbuild.
+          ESBUILD_PIN="$(sed -n 's/^[[:space:]]*ESBUILD_PIN:[[:space:]]*//p' .github/workflows/publish-api.yml | head -n 1)"
+          if [[ ! "$ESBUILD_PIN" =~ ^esbuild@[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::publish-api.yml does not expose a valid ESBUILD_PIN"
+            exit 1
+          fi
+          mkdir -p "$preflight_dir"
+          printf '{"name":"preflight-parser","private":true}\n' > "$preflight_dir/package.json"
+          (
+            cd "$preflight_dir"
+            bash "$GITHUB_WORKSPACE/scripts/ci/retry-cmd.sh" \
+              npm install --no-save --no-audit --no-fund --prefer-offline --loglevel=error "$ESBUILD_PIN"
+          )
+          test -f "$preflight_dir/node_modules/esbuild/lib/main.js"
+
       - name: Preflight — i link Markdown devono avere una destinazione canonica
         if: steps.plan.outputs.any == 'true'
         env:
           BEFORE: ${{ steps.push_range.outputs.before }}
           AFTER: ${{ steps.push_range.outputs.after }}
+          PREFLIGHT_EVENT_NAME: ${{ github.event_name }}
+          PREFLIGHT_PUSH_BASE_REVISION: ${{ steps.push_range.outputs.before }}
           ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
           SECTION_INPUT: ${{ inputs.section }}
         run: |
@@ -859,19 +890,30 @@ jobs:
             engine/shared/articleSectionCore.mjs
             engine/shared/cantonArticleSectionCore.generated.mjs
             engine/shared/normalizeArticleMarkdown.ts
+            engine/shared/articleReaderSource.mjs
+            engine/shared/articleArchiveConfig.mjs
+            engine/shared/seo-entry.mjs
             engine/shared/ts-literals.mjs
             generator/data/canton-url-slugs.json
             generator/data/canton-sections.json
             generator/scripts/lib/corpus-paths.mjs
             host/cantonSectionsBootstrap.mjs
             scripts/ci/check-blog-body-links.mjs
+            scripts/ci/check-blog-body-syntax.mjs
             scripts/lib/article-link-contract.mjs
             scripts/lib/typescript-expression-scanner.mjs
             scripts/lib/rss-feed-body-adapter.mjs
+            scripts/lib/corpus-floors.mjs
             scripts/lib/corpus-sections.mjs
+            scripts/lib/seo-entry.mjs
+            scripts/lib/article-registry-reader.mjs
             scripts/lib/ts-literals.mjs
             generator/scripts/lib/article-meta-block.mjs
             generator/scripts/lib/article-excerpt.mjs
+            generator/scripts/lib/daily-brief-content.mjs
+            generator/scripts/lib/daily-brief-data.mjs
+            generator/scripts/lib/daily-brief-insights.mjs
+            generator/scripts/lib/localized-toponyms.mjs
           )
           if [[ "${BEFORE:-}" =~ ^[a-f0-9]{40}$ ]] \
             && [[ "${AFTER:-}" =~ ^[a-f0-9]{40}$ ]] \
@@ -883,6 +925,15 @@ jobs:
               if [ -s "$changed_files" ]; then scan_mode=changed; fi
             fi
           fi
+          preflight_env=(
+            "PREFLIGHT_ESBUILD_DIR=$RUNNER_TEMP/preflight"
+            "PREFLIGHT_SCAN_MODE=$scan_mode"
+            "PREFLIGHT_CHANGED_FILES_FILE=$changed_files"
+          )
+          if [ -n "${BEFORE:-}" ]; then
+            preflight_env+=("PREFLIGHT_BASE_REVISION=$BEFORE")
+          fi
+          env "${preflight_env[@]}" node scripts/ci/check-blog-body-syntax.mjs
           PREFLIGHT_SCAN_MODE="$scan_mode" \
             PREFLIGHT_ARTICLE_IDS="${ARTICLE_IDS_INPUT:-}" \
             PREFLIGHT_SECTION="${SECTION_INPUT:-}" \

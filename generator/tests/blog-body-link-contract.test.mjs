@@ -808,12 +808,15 @@ test('i publisher rapidi eseguono il link gate prima di ogni pubblicazione', () 
   for (const file of ['fast-publish-article.yml', 'fast-publish-section.yml']) {
     const workflow = readFileSync(path.join(ROOT, '.github/workflows', file), 'utf8');
     const linkGate = workflow.indexOf('node scripts/ci/check-blog-body-links.mjs');
+    const syntaxGate = workflow.indexOf('node scripts/ci/check-blog-body-syntax.mjs');
     const publishJob = workflow.indexOf('\n  publish:');
     const pushPaths = workflow.slice(workflow.indexOf('on:'), workflow.indexOf('permissions:'));
     assert.ok(linkGate > 0, `${file} non invoca il link gate`);
+    assert.ok(syntaxGate > 0 && linkGate > syntaxGate, `${file} deve eseguire syntax prima dei link`);
     assert.ok(publishJob > linkGate, `${file} deve terminare il gate prima del job di pubblicazione`);
     for (const dependency of [
       'scripts/ci/check-blog-body-links.mjs',
+      'scripts/ci/check-blog-body-syntax.mjs',
       'scripts/lib/article-link-contract.mjs',
       'scripts/lib/typescript-expression-scanner.mjs',
       'generator/scripts/lib/article-meta-block.mjs',

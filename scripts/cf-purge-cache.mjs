@@ -282,11 +282,12 @@ try {
       : [{ label: 'purge_everything', purge_everything: true }];
 
     for (const { label, ...purgeBody } of purgeVariants) {
-      const { json } = await cf('POST', `/zones/${zoneId}/purge_cache`, purgeBody);
+      const { status, json } = await cf('POST', `/zones/${zoneId}/purge_cache`, purgeBody);
       if (!json?.success) {
-        console.error(`❌ ${purgeLabel} [${label}] failed: ${JSON.stringify(json?.errors)}`);
+        const httpStatus = Number.isInteger(status) ? `HTTP ${status}` : 'HTTP status sconosciuto';
+        console.error(`❌ ${purgeLabel} [${label}] ${httpStatus} failed: ${JSON.stringify(json?.errors)}`);
         warnStaleEdge(
-          `${purgeLabel} [${label}] API call failed: ${JSON.stringify(json?.errors)}`,
+          `${purgeLabel} [${label}] ${httpStatus} API call failed: ${JSON.stringify(json?.errors)}`,
           batch ? `until the next successful purge of these URLs` : undefined,
         );
         // Fatal on the first failing batch: a partial purge is exactly the

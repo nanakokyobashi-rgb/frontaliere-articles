@@ -54,6 +54,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { truncateToClause } from '../../host/shared/clauseTail.mjs';
 import { findAllSeoEntryMatches } from '../../scripts/lib/seo-entry.mjs';
+import {
+  escapeForSingleQuoteTS,
+  unescapeForSingleQuoteTS,
+} from './lib/article-meta-block.mjs';
 import { writeFileAtomic } from './lib/atomic-write-file.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { assertSeoDescriptionMinimum } from './lib/seo-description-contract.mjs';
@@ -79,9 +83,6 @@ const EXCERPT_MAX = 160;
 // Escape / unescape, e la prova che il round-trip e' esatto
 // ─────────────────────────────────────────────────────────────────────────────
 
-/** L'inverso ESATTO di `escapeForSingleQuoteTS` (article-meta-block.mjs). */
-const unescapeTs = (s) => s.replace(/\\(.)/gs, (_, c) => (c === 'n' ? '\n' : c === 'r' ? '\r' : c));
-const escapeTs = (s) => String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n').replace(/\r/g, '');
 /** Gemelli per le stringhe JSON dentro `structuredData`. */
 const unescapeJson = (s) => JSON.parse(`"${s}"`);
 const escapeJson = (s) => JSON.stringify(String(s)).slice(1, -1);
@@ -123,7 +124,7 @@ for (const f of metaFiles) {
   const src = fs.readFileSync(path.join(ROOT, 'content', f), 'utf-8');
   const re = /'blog\.article\.([^.']+)\.title'\s*:\s*'((?:\\'|[^'])*)'/g;
   let m;
-  while ((m = re.exec(src)) !== null) titles[locale].set(m[1], unescapeTs(m[2]));
+  while ((m = re.exec(src)) !== null) titles[locale].set(m[1], unescapeForSingleQuoteTS(m[2]));
 }
 
 function bodyFileFor(id, locale) {
@@ -141,7 +142,7 @@ function cleanBody1(id, locale) {
   const src = fs.readFileSync(p, 'utf-8');
   const m = new RegExp(`'blog\\.article\\.${escapeRegExpLiteral(String(id))}\\.body1'\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'`).exec(src);
   if (!m) return '';
-  const text = unescapeTs(m[1]);
+  const text = unescapeForSingleQuoteTS(m[1]);
   return findPromptPlaceholders(text).length ? '' : text;
 }
 
@@ -288,8 +289,8 @@ let total = 0;
 for (const f of metaFiles) {
   const locale = f.match(/-(it|en|de|fr)\.ts$/)[1];
   total += sweep(path.join('content', f), /('blog\.article\.(?:[^.']+)\.(?:title|excerpt|imageAlt)'\s*:\s*')((?:\\'|[^'])*)(')/g, {
-    unescape: unescapeTs,
-    escape: escapeTs,
+    unescape: unescapeForSingleQuoteTS,
+    escape: escapeForSingleQuoteTS,
     contextOf: (match) => {
       const m = /'blog\.article\.([^.']+)\.(title|excerpt|imageAlt)'/.exec(match);
       return { id: m[1], field: m[2], locale };
@@ -317,8 +318,8 @@ for (const abs of [...walkBodies(path.join(ROOT, 'content', 'blog-body')), ...wa
   const rel = path.relative(ROOT, abs);
   const locale = path.basename(path.dirname(abs));
   total += sweep(rel, /('blog\.article\.(?:[^']+)\.(?:body\d+|faq)'\s*:\s*')((?:[^'\\]|\\.)*)(')/g, {
-    unescape: unescapeTs,
-    escape: escapeTs,
+    unescape: unescapeForSingleQuoteTS,
+    escape: escapeForSingleQuoteTS,
     contextOf: (match) => {
       const m = /'blog\.article\.([^']+)\.(body\d+|faq)'/.exec(match);
       return { id: m[1], field: m[2], locale };
@@ -506,8 +507,8 @@ for (const f of fs.readdirSync(seoDir).filter((x) => /^seo-blog.*\.ts$/.test(x))
   // repair; comments, strings and templates cannot claim an article id.
   let seoEntries = findAllSeoEntryMatches(fs.readFileSync(path.join(ROOT, rel), 'utf-8'), rel);
   total += sweep(rel, new RegExp(`(\\n\\s*(?:${SEO_TS_FIELDS.join('|')}):\\s*')((?:\\\\'|[^'])*)(')`, 'g'), {
-    unescape: unescapeTs,
-    escape: escapeTs,
+    unescape: unescapeForSingleQuoteTS,
+    escape: escapeForSingleQuoteTS,
     contextOf: (match) => ({ id: '', field: /\n\s*(\w+):/.exec(match)[1], locale: 'it' }),
     repair: ({ field, value, label }) => {
       // `keywords` e' una tag-list ('frontalieri, ticino, ...'), non prosa: non

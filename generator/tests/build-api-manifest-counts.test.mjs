@@ -115,6 +115,7 @@ test('article body API publishes compact indexes and derives body counts from di
     "articleBodyRecordsExpected: articleBodyApi.totals.expected",
     "articleBodyRecordsAvailable: articleBodyApi.totals.available",
     "articleBodyRecordsMissing: articleBodyApi.totals.missing",
+    "articleBodyRecordsQuarantined: articleBodyApi.totals.quarantined",
     "capabilities: {\n    articleBodies: articleBodyApi.capability",
   ]) assert.ok(SRC.includes(literal), `build-api deve dichiarare ${literal}`);
   assert.ok(SRC.includes('const articleBodyDisk = verifyArticleBodyApiOnDisk({'));
@@ -123,7 +124,11 @@ test('article body API publishes compact indexes and derives body counts from di
     'articleBodyRecordsExpected: articleBodyDisk.totals.expected',
     'articleBodyRecordsAvailable: articleBodyDisk.totals.available',
     'articleBodyRecordsMissing: articleBodyDisk.totals.missing',
+    'articleBodyRecordsQuarantined: articleBodyDisk.totals.quarantined',
   ]) assert.ok(gate.includes(literal), `il gate deve rileggere dal disco ${literal}`);
+  assert.doesNotMatch(BODY_API_SRC, /status: 'quarantined'/u, 'v1 ammette solo available/missing negli indici');
+  assert.match(SRC, /appendArticleBodyQuarantineSummary\(articleBodyApi\.quarantined\)/u);
+  assert.match(SRC, /assertArticleBodyQuarantineBudget\(articleBodyApi\.totals\)/u);
   assert.match(BODY_API_SRC, /bodies\/\$\{section\.section\}\/\$\{locale\}\/index\.json/);
   assert.match(SRC, /Individual payloads stay out of manifest\.files/);
   assert.match(SRC, /globalArticleOwners = new Map\(\)/);

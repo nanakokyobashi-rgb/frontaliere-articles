@@ -75,6 +75,15 @@ set -euo pipefail
 ATTEMPTS="${RETRY_CMD_ATTEMPTS:-3}"
 BACKOFF_STEP="${RETRY_CMD_BACKOFF:-10}"
 
+# Solo errori con una firma esplicitamente transitoria possono pagare un altro
+# tentativo. In particolare, un errore di parsing/validazione del comando non
+# contiene nessuno di questi marker e deve fermare subito il job.
+is_transient_failure() {
+  grep -Eiq \
+    'ETIMEDOUT|ECONNRESET|EAI_AGAIN|ENETUNREACH|EHOSTUNREACH|ECONNREFUSED|ECONNABORTED|EPIPE|socket hang up|fetch failed|temporary failure|could not resolve host|connection timed out|TLS handshake timeout|rate limit|HTTP(/[0-9.]+)?[[:space:]]+(429|5[0-9][0-9])([^0-9]|$)|(^|[[:space:]])(429|5[0-9][0-9])([[:space:]]+(Too Many Requests|Internal Server Error|Not Implemented|Bad Gateway|Service Unavailable|Gateway Timeout|HTTP Version Not Supported|Variant Also Negotiates|Insufficient Storage|Loop Detected|Not Extended|Network Authentication Required)|[[:space:]]*$)|(status[[:space:]]+code|status|response[[:space:]]+code)[=:[:space:]]+(429|5[0-9][0-9])([^0-9]|$)' \
+    "$1"
+}
+
 # Un wrapper senza comando eseguirebbe `"$@"` vuoto, che in bash e' un no-op con
 # stato 0: il modo piu' economico di scrivere un falso verde. Una `run:` con una
 # variabile non espansa arriverebbe esattamente cosi'.
@@ -83,17 +92,38 @@ if [ "$#" -eq 0 ]; then
   exit 2
 fi
 
+attempt_log="$(mktemp)"
+trap 'rm -f "$attempt_log"' EXIT
+
 attempt=1
 while true; do
-  if "$@"; then
+  : > "$attempt_log"
+  set +e
+  "$@" 2>&1 | tee "$attempt_log"
+  pipe_status=("${PIPESTATUS[@]}")
+  command_status=${pipe_status[0]}
+  tee_status=${pipe_status[1]}
+  set -e
+
+  if [ "$command_status" -eq 0 ] && [ "$tee_status" -eq 0 ]; then
     if [ "$attempt" -gt 1 ]; then
       echo "retry-cmd: '$1' riuscito al tentativo $attempt/$ATTEMPTS"
     fi
     exit 0
   fi
 
+  if [ "$tee_status" -ne 0 ]; then
+    echo "::error::retry-cmd: impossibile catturare l'output del comando '$1' (tee exit $tee_status); nessun retry sicuro." >&2
+    exit 1
+  fi
+
+  if ! is_transient_failure "$attempt_log"; then
+    echo "::error::retry-cmd: '$*' ha prodotto un errore non transitorio; nessun retry." >&2
+    exit 1
+  fi
+
   if [ "$attempt" -ge "$ATTEMPTS" ]; then
-    echo "::error::retry-cmd: '$*' fallito dopo $ATTEMPTS tentativi. Se il log mostra ETIMEDOUT/ENETUNREACH verso il registro npm e' un blip di rete e un re-run di solito basta; se mostra un errore del comando, il retry ha solo confermato che e' deterministico."
+    echo "::error::retry-cmd: '$*' fallito dopo $ATTEMPTS tentativi transitori."
     exit 1
   fi
 
