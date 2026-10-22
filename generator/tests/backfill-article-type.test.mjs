@@ -292,6 +292,90 @@ describe('lettore TS condiviso', () => {
     ]);
   });
 
+  test('ignora regex literal con virgolette e classi che sembrano dati o chiavi computate', () => {
+    const source = [
+      String.raw`const keyLikePattern = /["']blog\.article\.fake\.title["']:\s*["']fake["']/u;`,
+      "'blog.article.real.title': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.title', 'actual'],
+    ]);
+  });
+
+  test('ignora slash escaped che altrimenti sembrano commenti dentro un regex literal', () => {
+    const source = [
+      String.raw`const trailingSlash = /https?:\/\/example\.ch\//u;`,
+      "'blog.article.real.title': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.title', 'actual'],
+    ]);
+  });
+
+  test('non tratta la divisione dopo ++, -- o ! postfix come l apertura di un regex', () => {
+    const source = [
+      "let n = 1; n++ / /'blog.article.fake.increment': 'fake',/ / /x/;",
+      "n-- / /'blog.article.fake.decrement': 'fake',/ / /x/;",
+      "const value = n! / /'blog.article.fake.nonnull': 'fake',/ / /x/;",
+      "'blog.article.real.title': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.title', 'actual'],
+    ]);
+  });
+
+  test('ignora regex usati come corpo dopo le parentesi di controllo', () => {
+    const source = [
+      String.raw`if (condition) /["']blog\.article\.fake\.if["']:\s*["']fake["']/u;`,
+      String.raw`while (condition) /["']blog\.article\.fake\.while["']:\s*["']fake["']/u;`,
+      "'blog.article.real.title': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.title', 'actual'],
+    ]);
+  });
+
+  test('non apre regex per keyword usate come membri e riconosce default', () => {
+    const source = [
+      "const member = obj.return / /'blog.article.fake.member': 'fake',/ / /x/;",
+      "export default /'blog.article.fake.default': 'fake'/;",
+      "'blog.article.real.title': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.title', 'actual'],
+    ]);
+  });
+
+  test('ignora regex dopo la chiusura di un blocco senza confonderla con divisione', () => {
+    const source = [
+      "if (condition) {} /'blog.article.fake.block': 'fake',/;",
+      "'blog.article.real.title': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.title', 'actual'],
+    ]);
+  });
+
+  test('ignora regex dopo break, continue, debugger e catch senza binding', () => {
+    const source = [
+      "break\n/'blog.article.fake.break': 'fake',/u;",
+      "continue\n/'blog.article.fake.continue': 'fake',/u;",
+      "debugger\n/'blog.article.fake.debugger': 'fake',/u;",
+      "try {} catch {} /'blog.article.fake.catch': 'fake',/u;",
+      "'blog.article.real.title': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.title', 'actual'],
+    ]);
+  });
+
   test('conta le barre prima di una interpolazione escaped', () => {
     const genuinelyInterpolated = "'blog.article.demo.body1': `literal \\\\${value}`,";
     assert.throws(
