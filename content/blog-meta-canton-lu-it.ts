@@ -45,6 +45,9 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.lucerna-governo-risposta-sp.title': 'Lucerna: il Governo risponde all\'iniziativa SP',
     'blog.article.lucerna-governo-risposta-sp.excerpt': 'Nel 2024 solo il 15% delle abitazioni in affitto nel Canton Lucerna era a prezzi accessibili.',
     'blog.article.lucerna-governo-risposta-sp.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lucerna-controlli-percorsi-scolastici.title': 'Lucerna: polizia rileva 480 eccessi sui percorsi scolastici',
+    'blog.article.lucerna-controlli-percorsi-scolastici.excerpt': 'Dopo le vacanze autunnali, la Polizia lucernese ha registrato 480 infrazioni di velocità in un giorno: otto conducenti saranno segnalati alla Staatsanwaltschaft.',
+    'blog.article.lucerna-controlli-percorsi-scolastici.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonLuIt;

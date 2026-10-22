@@ -45,6 +45,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.lucerna-governo-risposta-sp.title': 'Luzern: Die Regierung antwortet auf die SP-Initiative',
     'blog.article.lucerna-governo-risposta-sp.excerpt': 'Im Jahr 2024 waren im Kanton Luzern nur 15% der Mietwohnungen bezahlbar.',
     'blog.article.lucerna-governo-risposta-sp.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lucerna-controlli-percorsi-scolastici.title': 'Luzern: Polizei registriert 480 Geschwindigkeitsüberschreitungen auf Schulwegen',
+    'blog.article.lucerna-controlli-percorsi-scolastici.excerpt': 'Nach den Herbstferien hat die Luzerner Polizei an einem Tag 480 Geschwindigkeitsüberschreitungen registriert: Acht Lenker werden der Staatsanwaltschaft gemeldet.',
+    'blog.article.lucerna-controlli-percorsi-scolastici.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;

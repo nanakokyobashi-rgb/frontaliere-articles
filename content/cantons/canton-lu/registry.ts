@@ -160,4 +160,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lucerna-controlli-percorsi-scolastici',
+ category: 'pratico',
+ date: '2026-10-22T08:28:15.641Z',
+ image: '/images/blog/article-lucerna-controlli-percorsi-scolastici.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

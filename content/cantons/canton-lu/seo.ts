@@ -553,6 +553,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lucerna-controlli-percorsi-scolastici': {
+    title: 'Lucerna: polizia rileva 480 eccessi sui percorsi scolastici',
+    description: 'Lucerna: 480 eccessi di velocità il 15 ottobre, circa 20.000 veicoli controllati e otto conducenti segnalati alla Staatsanwaltschaft.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lucerna, polizia, rileva, eccessi',
+    ogTitle: 'Lucerna: 480 eccessi di velocità sui percorsi scolastici',
+    ogDescription: 'Dopo le vacanze autunnali, la Polizia lucernese ha rafforzato la presenza sui percorsi scolastici: circa 20.000 veicoli controllati, 480 eccessi di velocità e otto conducenti segnalati alla Staatsanwaltschaft.',
+    canonicalPath: '/articoli-lucerna/lucerna-controlli-percorsi-scolastici/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lucerna: polizia rileva 480 eccessi sui percorsi scolastici",
+      "description": "Lucerna: 480 eccessi di velocità il 15 ottobre, circa 20.000 veicoli controllati e otto conducenti segnalati alla Staatsanwaltschaft.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lucerna-controlli-percorsi-scolastici.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T08:28:15+00:00",
+      "dateModified": "2026-10-22T08:28:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/lucerna-controlli-percorsi-scolastici/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

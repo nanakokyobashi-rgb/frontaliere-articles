@@ -45,6 +45,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.lucerna-governo-risposta-sp.title': 'Lucerne: the Government responds to the SP initiative',
     'blog.article.lucerna-governo-risposta-sp.excerpt': 'In 2024, only 15% of rental housing in the Canton of Lucerne was affordable.',
     'blog.article.lucerna-governo-risposta-sp.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lucerna-controlli-percorsi-scolastici.title': 'Lucerne: police detect 480 speeding violations on school routes',
+    'blog.article.lucerna-controlli-percorsi-scolastici.excerpt': 'After the autumn holidays, Lucerne police recorded 480 speeding violations in one day: eight drivers will be reported to the public prosecutor’s office.',
+    'blog.article.lucerna-controlli-percorsi-scolastici.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;
