@@ -171,6 +171,38 @@
     "canton-be::https://www.nau.ch/politik/bundeshaus/nationalratskommission-sendet-erste-signale-fur-bilaterale-iii-aus-67191376": {
       "section": "canton-be",
       "ts": 1792645517872
+    },
+    "canton-be::https://ajour.ch/story/703145/region-thun-sucht-nach-variante-f%c3%bcr-neuen-umfahrungstunnel": {
+      "section": "canton-be",
+      "ts": 1792671486874
+    },
+    "canton-be::https://ajour.ch/story/703073/strasse-zwischen-diesse-und-prles-bleibt-l%c3%a4nger-gesperrt": {
+      "section": "canton-be",
+      "ts": 1792671493803
+    },
+    "canton-be::https://ajour.ch/story/703099/berner-apothekenkonzern-steigert-umsatz-in-ersten-neun-monaten": {
+      "section": "canton-be",
+      "ts": 1792671547304
+    },
+    "canton-be::https://www.lejdj.ch/articles/a-tramelan-le-6e-forum-darc-horloger-mettra-le-patrimoine-vivant-a-lhonneur-au-dela-des-frontieres-franco-suisses-104688": {
+      "section": "canton-be",
+      "ts": 1792671563206
+    },
+    "canton-be::https://www.nau.ch/news/wirtschaft/valiant-ernennt-kathrin-wehrli-zur-chefin-ab-mai-2027-67191952": {
+      "section": "canton-be",
+      "ts": 1792671848024
+    },
+    "canton-be::https://ajour.ch/story/703055/un-suisse-sur-six-consacre-plus-du-tiers-de-ses-revenus-au-logement": {
+      "section": "canton-be",
+      "ts": 1792671856118
+    },
+    "canton-be::https://ajour.ch/story/703052/lia-ne-permettra-pas-de-compenser-les-dparts-la-retraite-ces-dix-prochaines-annes": {
+      "section": "canton-be",
+      "ts": 1792671871233
+    },
+    "canton-be::https://ajour.ch/story/703160/feuerwehr%c3%bcbung-f%c3%bchrt-zu-strassensperrung": {
+      "section": "canton-be",
+      "ts": 1792671885798
     }
   }
 }
