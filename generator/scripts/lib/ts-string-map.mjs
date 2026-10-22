@@ -90,7 +90,7 @@ export function readTsStringLiteral(src, i) {
  * il file intero prima di estrarre qualsiasi chiave.
  */
 const REGEX_PREFIX_KEYWORDS = new Set([
-  'await', 'case', 'default', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return',
+  'await', 'break', 'case', 'continue', 'debugger', 'default', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return',
   'throw', 'typeof', 'void', 'yield',
 ]);
 const REGEX_PREFIX_PUNCTUATION = new Set([
