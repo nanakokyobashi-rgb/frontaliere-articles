@@ -127,4 +127,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'stazione-le-locle-accessibilita',
+ category: 'novita',
+ date: '2026-10-22T14:27:21.584Z',
+ image: '/images/blog/article-stazione-le-locle-accessibilita.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

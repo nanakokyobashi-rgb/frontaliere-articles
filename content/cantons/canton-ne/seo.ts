@@ -426,6 +426,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-stazione-le-locle-accessibilita': {
+    title: 'Stazione di Le Locle: lavori di accessibilità per 8 milioni',
+    description: 'Cantiere alla stazione di Le Locle: 8 milioni di franchi La banchina 1 concentra quasi il 90% del traffico passeggeri Primi treni svizzeri',
+    keywords: 'frontalieri, ticino, svizzera, italia, stazione, locle, lavori, accessibilità',
+    ogTitle: 'Stazione di Le Locle: modernizzazione e accessibilità',
+    ogDescription: 'Cantiere alla stazione di Le Locle: 8 milioni di franchi La banchina 1 concentra quasi il 90% del traffico passeggeri Primi treni svizzeri sulla banchina 1',
+    canonicalPath: '/articoli-neuchatel/stazione-le-locle-accessibilita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Stazione di Le Locle: lavori di accessibilità per 8 milioni",
+      "description": "Cantiere alla stazione di Le Locle: 8 milioni di franchi La banchina 1 concentra quasi il 90% del traffico passeggeri Primi treni svizzeri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-stazione-le-locle-accessibilita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T14:27:21+00:00",
+      "dateModified": "2026-10-22T14:27:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/stazione-le-locle-accessibilita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

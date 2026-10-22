@@ -36,6 +36,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.collegio-longueville-cantiere-colombier.title': 'Nuovo edificio e ristrutturazioni al collegio di Longueville',
     'blog.article.collegio-longueville-cantiere-colombier.excerpt': 'A Colombier, nuovo stabile scolastico entro il 2028 con 24 aule; nel frattempo sono già operative la piscina e la palestra rinnovate.',
     'blog.article.collegio-longueville-cantiere-colombier.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.stazione-le-locle-accessibilita.title': 'Stazione di Le Locle: lavori di accessibilità per 8 milioni',
+    'blog.article.stazione-le-locle-accessibilita.excerpt': 'Cantiere alla stazione di Le Locle: 8 milioni di franchi La banchina 1 concentra quasi il 90% del traffico passeggeri Primi treni svizzeri sulla banchina 1',
+    'blog.article.stazione-le-locle-accessibilita.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonNeIt;

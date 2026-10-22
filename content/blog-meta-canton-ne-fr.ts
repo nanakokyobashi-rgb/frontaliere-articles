@@ -36,6 +36,9 @@ const blogMetaCantonNeFr: Record<string, string> = {
     'blog.article.collegio-longueville-cantiere-colombier.title': 'Nouveau bâtiment et rénovations au collège de Longueville',
     'blog.article.collegio-longueville-cantiere-colombier.excerpt': 'À Colombier, nouveau bâtiment scolaire d\'ici 2028 avec 24 salles de classe ; entre-temps, la piscine et la salle de sport rénovées sont déjà opérationnelles.',
     'blog.article.collegio-longueville-cantiere-colombier.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.stazione-le-locle-accessibilita.title': 'Gare du Locle : travaux d\'accessibilité pour 8 millions',
+    'blog.article.stazione-le-locle-accessibilita.excerpt': 'Chantier à la gare du Locle : 8 millions de francs Le quai 1 concentre près de 90 % du trafic voyageurs Les premiers trains suisses doivent revenir sur le quai',
+    'blog.article.stazione-le-locle-accessibilita.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonNeFr;

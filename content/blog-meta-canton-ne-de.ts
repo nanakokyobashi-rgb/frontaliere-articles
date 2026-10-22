@@ -36,6 +36,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.collegio-longueville-cantiere-colombier.title': 'Neubau und Renovierung des Kollegiums von Longueville',
     'blog.article.collegio-longueville-cantiere-colombier.excerpt': 'In Colombier, einem neuen Schulgebäude bis 2028 mit 24 Klassenzimmern; in der Zwischenzeit sind das renovierte Schwimmbad und das Fitnessstudio bereits in Betrieb.',
     'blog.article.collegio-longueville-cantiere-colombier.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.stazione-le-locle-accessibilita.title': 'Bahnhof Le Locle: Arbeiten zur Barrierefreiheit für 8 Millionen',
+    'blog.article.stazione-le-locle-accessibilita.excerpt': 'Baustelle am Bahnhof Le Locle: 8 Millionen Franken Auf Bahnsteig 1 entfallen fast 90% des Personenverkehrs Erste Schweizer Züge auf Bahnsteig 1 ab dem 29.',
+    'blog.article.stazione-le-locle-accessibilita.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNeDe;

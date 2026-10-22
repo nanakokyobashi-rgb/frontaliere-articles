@@ -36,6 +36,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.collegio-longueville-cantiere-colombier.title': 'New building and renovations at Longueville College',
     'blog.article.collegio-longueville-cantiere-colombier.excerpt': 'In Colombier, a new school building with 24 classrooms by 2028; in the meantime, the renovated pool and gym are already operational.',
     'blog.article.collegio-longueville-cantiere-colombier.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.stazione-le-locle-accessibilita.title': 'Le Locle station: accessibility works costing 8 million',
+    'blog.article.stazione-le-locle-accessibilita.excerpt': 'Construction work at Le Locle station: 8 million francs Platform 1 accounts for almost 90% of passenger traffic First Swiss trains on platform 1 from October',
+    'blog.article.stazione-le-locle-accessibilita.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNeEn;
