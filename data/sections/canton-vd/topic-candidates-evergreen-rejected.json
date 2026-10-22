@@ -67,6 +67,14 @@
     "canton-vd::https://www.ledauphine.com/culture-loisirs/2026/10/22/l-ecole-de-coupy-en-1895": {
       "section": "canton-vd",
       "ts": 1792684508366
+    },
+    "canton-vd::https://www.ledauphine.com/faits-divers-justice/2026/10/22/a412-la-procureure-d-annecy-demande-la-suspension-des-travaux-lemc": {
+      "section": "canton-vd",
+      "ts": 1792703112601
+    },
+    "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-159?s=4": {
+      "section": "canton-vd",
+      "ts": 1792703125216
     }
   }
 }
