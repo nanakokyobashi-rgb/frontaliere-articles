@@ -191,6 +191,64 @@ test('una canonical override cambiata risveglia solo l articolo che possiede lo 
   assert.deepEqual(plan, [{ section: 'frontaliere', ids: ['alpha'], bootstrap: false }]);
 });
 
+test('uno slug winner cambiato risveglia i dipendenti shadowed e valida la chiave rinominata', () => {
+  const registered = new Set(['winner', 'shadow']);
+  const registry = "export const ARTICLES = [{ id: 'winner' }, { id: 'shadow' }];\n";
+  const previousSlugs = `export const BLOG_SLUGS = {
+  'winner': { it: 'winner-old-it', en: 'winner-old-en', de: 'winner-old-de', fr: 'winner-old-fr' },
+  'shadow': { it: 'shadow-old-it', en: 'shadow-old-en', de: 'shadow-old-de', fr: 'shadow-old-fr' },
+};\n`;
+  const currentSlugs = previousSlugs
+    .replaceAll('winner-old', 'winner-new')
+    .replaceAll('shadow-old', 'shadow-new');
+  const previousOverrides = JSON.stringify({ overrides: {
+    'shadow-old-it': 'https://frontaliereticino.ch/articoli-frontaliere/winner-old-it/',
+  } });
+  const currentOverrides = JSON.stringify({ overrides: {
+    'shadow-new-it': 'https://frontaliereticino.ch/articoli-frontaliere/winner-new-it/',
+  } });
+  const previous = new Map([
+    ['content/blog-articles-data.ts', registry],
+    ['content/routerBlogData.ts', previousSlugs],
+    ['engine/shared/frontaliere-article-canonical-overrides.json', previousOverrides],
+  ]);
+  const current = new Map([
+    ['content/blog-articles-data.ts', registry],
+    ['content/routerBlogData.ts', currentSlugs],
+    ['engine/shared/frontaliere-article-canonical-overrides.json', currentOverrides],
+  ]);
+  const plan = articlePublishPlan([
+    'content/routerBlogData.ts',
+    'engine/shared/frontaliere-article-canonical-overrides.json',
+  ], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => current.get(rel) ?? null,
+  });
+
+  assert.deepEqual(plan, [{
+    section: 'frontaliere',
+    ids: ['shadow', 'winner'],
+    bootstrap: false,
+  }]);
+
+  const staleCurrent = new Map(current);
+  staleCurrent.set(
+    'engine/shared/frontaliere-article-canonical-overrides.json',
+    previousOverrides,
+  );
+  assert.throws(
+    () => articlePublishPlan(['content/routerBlogData.ts'], ARTICLE_SECTION_CORE_LIST, {
+      served: 'shard',
+      articleIdsForSection: () => registered,
+      readPreviousSource: (rel) => previous.get(rel) ?? null,
+      readCurrentSource: (rel) => staleCurrent.get(rel) ?? null,
+    }),
+    /canonical override corrente: chiave slug shadow-old-it non presente/,
+  );
+});
+
 test('il resolver article non rifà il fetch del parent già presente nel checkout', () => {
   const resolveFetchStep = stepText('Fetch push base (resolve)');
   assert.match(resolveFetchStep, /bash scripts\/ci\/fetch-push-base-if-missing\.sh/);

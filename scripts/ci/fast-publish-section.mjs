@@ -394,6 +394,94 @@ function canonicalOverrideRecords(source) {
   return records;
 }
 
+function decodedSlugRecord(record) {
+  try {
+    const value = JSON.parse(record);
+    return value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+  } catch {
+    return {};
+  }
+}
+
+function slugRecordOwners(slug, slugRecordMaps, candidateIds) {
+  const owners = new Set();
+  for (const slugRecords of slugRecordMaps) {
+    for (const [id, record] of slugRecords) {
+      if (!candidateIds.has(id)) continue;
+      if (Object.values(decodedSlugRecord(record)).includes(slug)) owners.add(id);
+    }
+  }
+  return owners;
+}
+
+function canonicalTargetSlug(record) {
+  let value;
+  try {
+    value = JSON.parse(record);
+  } catch {
+    return null;
+  }
+  if (typeof value !== 'string') return null;
+  try {
+    const pathname = new URL(value).pathname.replace(/\/+$/, '');
+    return pathname.split('/').pop() || null;
+  } catch {
+    return null;
+  }
+}
+
+function validateCanonicalOverrideRecords(records, slugRecordMaps, candidateIds, label) {
+  const knownSlugs = new Set();
+  for (const slugRecords of slugRecordMaps) {
+    for (const id of candidateIds) {
+      for (const slug of Object.values(decodedSlugRecord(slugRecords.get(id)))) {
+        if (typeof slug === 'string') knownSlugs.add(slug);
+      }
+    }
+  }
+  for (const [shadowedSlug, record] of records) {
+    if (slugRecordOwners(shadowedSlug, slugRecordMaps, candidateIds).size === 0) {
+      throw new Error(`canonical override ${label}: chiave slug ${shadowedSlug} non presente nella mappa slug`);
+    }
+    const targetSlug = canonicalTargetSlug(record);
+    // Keep the planner compatible with older test fixtures and hand-written
+    // maps whose URL has no article path segment; when a path segment exists,
+    // it must resolve to a current slug so a renamed winner cannot leave a
+    // shadowed page pointing at a dead URL.
+    if (targetSlug && !knownSlugs.has(targetSlug)) {
+      throw new Error(`canonical override ${label}: target ${targetSlug} non presente nella mappa slug`);
+    }
+  }
+}
+
+function canonicalOverrideDependentsForSlugChanges(
+  changedIds,
+  previousSlugRecords,
+  nextSlugRecords,
+  previousOverrides,
+  nextOverrides,
+  candidateIds,
+) {
+  const changedWinnerSlugs = new Set();
+  for (const id of changedIds) {
+    for (const slugRecords of [previousSlugRecords, nextSlugRecords]) {
+      for (const slug of Object.values(decodedSlugRecord(slugRecords.get(id)))) {
+        if (typeof slug === 'string') changedWinnerSlugs.add(slug);
+      }
+    }
+  }
+  const dependents = new Set();
+  for (const overrides of [previousOverrides, nextOverrides]) {
+    for (const [shadowedSlug, record] of overrides) {
+      if (!changedWinnerSlugs.has(canonicalTargetSlug(record))) continue;
+      for (const id of slugRecordOwners(shadowedSlug, [previousSlugRecords, nextSlugRecords], candidateIds)) {
+        dependents.add(id);
+      }
+    }
+  }
+  return [...dependents];
+}
+
 function canonicalIdsForSlugs(slugs, slugRecordMaps, candidateIds) {
   const out = new Set();
   for (const id of candidateIds) {
@@ -411,6 +499,8 @@ function canonicalIdsForSlugs(slugs, slugRecordMaps, candidateIds) {
 
 function canonicalOverrideChangedIds(previous, next, previousSlugRecords, nextSlugRecords, candidateIds) {
   const changedSlugs = changedRecordIds(previous, next);
+  validateCanonicalOverrideRecords(previous, [previousSlugRecords], candidateIds, 'precedente');
+  validateCanonicalOverrideRecords(next, [nextSlugRecords], candidateIds, 'corrente');
   return canonicalIdsForSlugs(changedSlugs, [previousSlugRecords, nextSlugRecords], candidateIds);
 }
 
@@ -580,13 +670,37 @@ export function articlePublishPlan(
     } else if (kind === 'slug') {
       const registryBefore = registryRecords(registryBeforeSource);
       const registryAfter = registryRecords(registryAfterSource);
+      const candidateIds = registryRecordIds(registryBefore, registryAfter);
       const slug = slugRecords(
         previous,
         next,
-        registryRecordIds(registryBefore, registryAfter),
+        candidateIds,
         section.slugExport,
       );
       changedIds = changedRecordIds(slug.previous, slug.next);
+      if (section.canonicalOverrides) {
+        const previousOverrides = canonicalOverrideRecords(
+          sourceText(readPreviousSource, section.canonicalOverrides),
+        );
+        const nextOverrides = canonicalOverrideRecords(
+          sourceText(readCurrentSource, section.canonicalOverrides),
+        );
+        validateCanonicalOverrideRecords(previousOverrides, [slug.previous], candidateIds, 'precedente');
+        validateCanonicalOverrideRecords(nextOverrides, [slug.next], candidateIds, 'corrente');
+        changedIds = [
+          ...new Set([
+            ...changedIds,
+            ...canonicalOverrideDependentsForSlugChanges(
+              changedIds,
+              slug.previous,
+              slug.next,
+              previousOverrides,
+              nextOverrides,
+              candidateIds,
+            ),
+          ]),
+        ];
+      }
     } else if (kind === 'canonical') {
       const registryBefore = registryRecords(registryBeforeSource);
       const registryAfter = registryRecords(registryAfterSource);
