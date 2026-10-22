@@ -338,7 +338,12 @@ export function scanRedirectSource(source) {
     }
 
     const valueLiteral = readQuotedLiteral(text, index);
-    if (!valueLiteral) return failClosed();
+    if (!valueLiteral) {
+      if (text[index] === "'" || text[index] === '"') return failClosed();
+      unsupported.push(keyLiteral.value);
+      index += 1;
+      continue;
+    }
     if (!valueLiteral.value.startsWith('/')) {
       unsupported.push(keyLiteral.value);
       index = valueLiteral.end;
