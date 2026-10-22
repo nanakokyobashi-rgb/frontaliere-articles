@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T21:47:30.093Z",
-  "contentHash": "996c859b3a4559b026dcdd605f3eee4dc9e40ae27cd723f84c2af9754b3e1e96",
+  "updatedAt": "2026-10-22T11:00:37.119Z",
+  "contentHash": "2c5246f29359b30fe32788782c7613f160a68e07cd6817188723208c9bcbedd6",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -69,39 +69,15 @@
           "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Impetigine in aumento nel Vaud: pediatri rassicurano",
-          "url": "/articoli-vaud/impetigine-casi-vaud/",
-          "excerpt": "Nel Canton Vaud l'impetigine cresce quest'autunno: colpisce soprattutto i bambini dai due anni, ma i pediatri escludono un'epidemia.",
-          "date": "2026-10-21T21:39:24.296Z"
-        },
-        {
-          "title": "Lausanne Marathon 2026: chiusure strade cantonali e vie cittadine il 25 ottobre",
-          "url": "/articoli-vaud/lausanne-marathon-2026-chiusure-strade/",
-          "excerpt": "Domenica 25 ottobre 2026 si corre il Lausanne Marathon Strade cantonali interessate: 777-B-P e 780-B-P Chiusure totali o parziali circa dalle 07:30 alle 17:30",
-          "date": "2026-10-21T20:50:06.586Z"
-        },
-        {
-          "title": "Fisco Vaud: imposte su indennità abusi, ricorso in vista",
-          "url": "/articoli-vaud/fisco-vaud-indennita-abuso-imposte/",
-          "excerpt": "A Pully: abusi al Collège de Champittet alla fine degli anni '70 Indennità della Chiesa: CHF 220'000, divisa in due parti Dopo l'opposizione: CHF 120'000 ancora",
-          "date": "2026-10-21T04:19:30.522Z"
-        },
-        {
-          "title": "CHUV: ostetriche chiedono salari equi, classe 10 per tutte",
-          "url": "/articoli-vaud/chuv-ostetriche-salari-classi/",
-          "excerpt": "CHUV: classe 9 o 10 per lo stesso lavoro Solo un terzo delle ostetriche è in classe 10 Scarto medio: CHF 8'000 l'anno La richiesta risale al 2018 Dove → CHUV",
-          "date": "2026-10-21T03:32:51.220Z"
-        },
-        {
-          "title": "CDHR 2025: soglie 250.000/500.000 € per frontalieri in Francia",
-          "url": "/articoli-vaud/cdhr-contributo-differenziale-2025/",
-          "excerpt": "La contribution différentielle sur les hauts revenus mira a un prelievo minimo del 20%.",
-          "date": "2026-10-20T02:03:43.122Z"
+          "title": "Morges ottiene il label Cité de l'energia Gold per cinque anni",
+          "url": "/articoli-vaud/morges-label-energia-gold-2026/",
+          "excerpt": "Morges ottiene il label Gold per cinque anni Il punteggio della valutazione è dell'80,5% Il riconoscimento copre sei ambiti delle politiche comunali Il Plan",
+          "date": "2026-10-22T10:54:11.908Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -112,7 +88,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T21:47:30.093Z"
+      "updatedAt": "2026-10-22T11:00:37.119Z"
     },
     "en": {
       "canton": "VD",
@@ -168,39 +144,15 @@
           "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Impetigo on the rise in Vaud: pediatricians reassure",
-          "url": "/en/vaud-articles/impetigo-cases-vaud/",
-          "excerpt": "In the Canton of Vaud, impetigo is on the rise this autumn: it mainly affects children aged two and over, but pediatricians rule out an epidemic.",
-          "date": "2026-10-21T21:39:24.296Z"
-        },
-        {
-          "title": "Lausanne Marathon 2026: road and street closures Oct 25",
-          "url": "/en/vaud-articles/lausanne-marathon-2026-road-closures/",
-          "excerpt": "On Sunday, October 25, 2026, the Lausanne Marathon will be held Affected cantonal roads: 777-B-P and 780-B-P Full or partial closures from approximately 07:30",
-          "date": "2026-10-21T20:50:06.586Z"
-        },
-        {
-          "title": "Vaud tax authorities: tax on abuse compensation, appeal in sight",
-          "url": "/en/vaud-articles/vaud-tax-abuse-compensation-taxes/",
-          "excerpt": "In Pully: abuses at Collège de Champittet in the late 1970s Compensation from the Church: CHF 220'000, divided into two parts After the objection: CHF 120'000",
-          "date": "2026-10-21T04:19:30.522Z"
-        },
-        {
-          "title": "CHUV: midwives demand fair salaries, grade 10 for all",
-          "url": "/en/vaud-articles/chuv-midwives-salary-classes/",
-          "excerpt": "CHUV: class 9 or 10 for the same work Only one third of the midwives are in class 10 Average difference: CHF 8'000 per year The request dates back to 2018",
-          "date": "2026-10-21T03:32:51.220Z"
-        },
-        {
-          "title": "CDHR 2025: 250.000/500.000 € thresholds for cross-border workers in France",
-          "url": "/en/vaud-articles/cdhr-differential-contribution-2025/",
-          "excerpt": "The differential contribution on high incomes aims for a minimum levy of 20%.",
-          "date": "2026-10-20T02:03:43.122Z"
+          "title": "Morges receives the Cité de l'energia Gold label for five years",
+          "url": "/en/vaud-articles/morges-energy-city-gold-label-2026/",
+          "excerpt": "Morges receives the Gold label for five years The assessment score is 80,5% The recognition covers six areas of municipal policies The Plan climat brings",
+          "date": "2026-10-22T10:54:11.908Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -211,7 +163,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T21:47:30.093Z"
+      "updatedAt": "2026-10-22T11:00:37.119Z"
     },
     "de": {
       "canton": "VD",
@@ -267,39 +219,15 @@
           "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Impetigo im Kanton Waadt nimmt zu: Kinderärzte geben Entwarnung",
-          "url": "/de/waadt-artikel/impetigo-faelle-waadt/",
-          "excerpt": "Im Kanton Waadt nimmt die Impetigo diesen Herbst zu: Betroffen sind vor allem Kinder ab zwei Jahren, aber die Kinderärzte schließen eine Epidemie aus.",
-          "date": "2026-10-21T21:39:24.296Z"
-        },
-        {
-          "title": "Lausanne Marathon 2026: Strassensperren am 25. Oktober",
-          "url": "/de/waadt-artikel/lausanne-marathon-2026-strassensperrungen/",
-          "excerpt": "Am Sonntag, dem 25.",
-          "date": "2026-10-21T20:50:06.586Z"
-        },
-        {
-          "title": "Waadt: Steuern auf Missbrauchs-Entschädigung, Rekurs",
-          "url": "/de/waadt-artikel/waadt-steuer-missbrauchsentschadigung-steuern/",
-          "excerpt": "In Pully: Missbrauch am Collège de Champittet Ende der 70er-Jahre Entschädigung der Kirche: CHF 220'000, in zwei Teile aufgeteilt Nach der Einsprache: CHF",
-          "date": "2026-10-21T04:19:30.522Z"
-        },
-        {
-          "title": "CHUV: Hebammen fordern faire Löhne, Klasse 10 für alle",
-          "url": "/de/waadt-artikel/chuv-hebammen-gehaelter-klassen/",
-          "excerpt": "CHUV: Klasse 9 oder 10 für dieselbe Arbeit Nur ein Drittel der Hebammen ist in Klasse 10 Durchschnittlicher Unterschied: CHF 8'000 pro Jahr Die Forderung geht",
-          "date": "2026-10-21T03:32:51.220Z"
-        },
-        {
-          "title": "CDHR 2025: Schwellenwerte von 250.000/500.000 € für Grenzgänger in Frankreich",
-          "url": "/de/waadt-artikel/cdhr-differenzbeitrag-2025/",
-          "excerpt": "Die Differenzabgabe auf hohe Einkommen zielt auf eine Mindestbesteuerung von 20% ab.",
-          "date": "2026-10-20T02:03:43.122Z"
+          "title": "Morges erhält das Label Cité de l'energia Gold für fünf Jahre",
+          "url": "/de/waadt-artikel/morges-energiestadt-gold-label-2026/",
+          "excerpt": "Morges erhält das Label Gold für fünf Jahre Die Punktzahl der Bewertung beträgt 80,5% Die Auszeichnung umfasst sechs Bereiche der kommunalen Politik Der Plan",
+          "date": "2026-10-22T10:54:11.908Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -310,7 +238,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T21:47:30.093Z"
+      "updatedAt": "2026-10-22T11:00:37.119Z"
     },
     "fr": {
       "canton": "VD",
@@ -366,39 +294,15 @@
           "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "L’impétigo en hausse dans le canton de Vaud : les pédiatres rassurent",
-          "url": "/fr/articles-vaud/cas-impetigo-vaud/",
-          "excerpt": "Dans le canton de Vaud, l’impétigo augmente cet automne : il touche surtout les enfants dès l’âge de deux ans, mais les pédiatres excluent une épidémie.",
-          "date": "2026-10-21T21:39:24.296Z"
-        },
-        {
-          "title": "Lausanne Marathon 2026 : routes fermées le 25 octobre",
-          "url": "/fr/articles-vaud/marathon-lausanne-2026-fermetures-routes/",
-          "excerpt": "Dimanche 25 octobre 2026 a lieu le Lausanne Marathon Routes cantonales concernées : 777-B-P et 780-B-P Fermetures totales ou partielles approximativement",
-          "date": "2026-10-21T20:50:06.586Z"
-        },
-        {
-          "title": "Fisc vaudois : impôts sur une indemnité pour abus, recours en vue",
-          "url": "/fr/articles-vaud/fisc-vaud-indemnite-abus-impots/",
-          "excerpt": "À Pully : abus au Collège de Champittet à la fin des années 70 Indemnité de l'Église : CHF 220'000, divisée en deux parties Après l'opposition : CHF 120'000",
-          "date": "2026-10-21T04:19:30.522Z"
-        },
-        {
-          "title": "CHUV: sages-femmes demandent salaires équitables, classe 10",
-          "url": "/fr/articles-vaud/chuv-sages-femmes-salaires-classes/",
-          "excerpt": "CHUV : classe 9 ou 10 pour le même travail Seul un tiers des sages-femmes est en classe 10 Écart moyen : CHF 8'000 par an La demande remonte à 2018 Où → CHUV",
-          "date": "2026-10-21T03:32:51.220Z"
-        },
-        {
-          "title": "CDHR 2025 : seuils 250.000/500.000 € pour les travailleurs frontaliers en France",
-          "url": "/fr/articles-vaud/cdhr-contribution-differentielle-2025/",
-          "excerpt": "La contribution différentielle sur les hauts revenus vise un prélèvement minimum de 20%.",
-          "date": "2026-10-20T02:03:43.122Z"
+          "title": "Morges obtient le label Cité de l'énergie Gold pour cinq ans",
+          "url": "/fr/articles-vaud/morges-cite-energie-gold-2026/",
+          "excerpt": "Morges obtient le label Gold pour cinq ans Le score de l'évaluation est de 80,5% La distinction couvre six domaines des politiques communales Le Plan climat",
+          "date": "2026-10-22T10:54:11.908Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -409,7 +313,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T21:47:30.093Z"
+      "updatedAt": "2026-10-22T11:00:37.119Z"
     }
   }
 }
