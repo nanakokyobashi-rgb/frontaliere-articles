@@ -499,7 +499,6 @@ export function emitArticleBodyApi({
           // additive quarantine counter.
           missingCount += 1;
           quarantinedCount += 1;
-          missingCount += 1;
           // The v1 HTTP reader only understands available/missing. Keep this
           // entry missing and include it in missingCount so legacy consumers
           // see the complete unavailable set; the reason is carried by the additive
