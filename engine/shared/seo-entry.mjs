@@ -21,6 +21,44 @@ const BLOCK_BRACE_KEYWORDS = new Set([
   'catch', 'class', 'do', 'else', 'enum', 'finally', 'function', 'interface', 'module', 'namespace',
   'static', 'try',
 ]);
+const ASI_EXPRESSION_ENDS = new Set([
+  'close-block', 'close-object', 'close-paren', 'close-bracket', 'identifier', 'literal', 'postfix',
+]);
+
+function isLineTerminator(character) {
+  return character === '\n' || character === '\r' || character === '\u2028' || character === '\u2029';
+}
+
+function lineTerminatorIndex(source, start) {
+  for (let index = start; index < source.length; index += 1) {
+    if (isLineTerminator(source[index])) return index;
+  }
+  return -1;
+}
+
+function nextNonTriviaIndex(source, start) {
+  let index = start;
+  while (index < source.length) {
+    if (/\s/u.test(source[index])) {
+      index += 1;
+      continue;
+    }
+    if (source.startsWith('//', index)) {
+      const end = lineTerminatorIndex(source, index + 2);
+      if (end < 0) return source.length;
+      index = end + 1;
+      continue;
+    }
+    if (source.startsWith('/*', index)) {
+      const end = source.indexOf('*/', index + 2);
+      if (end < 0) return source.length;
+      index = end + 2;
+      continue;
+    }
+    break;
+  }
+  return index;
+}
 
 /**
  * Find the closing delimiter for the one at `openIdx`, ignoring strings,
@@ -45,7 +83,7 @@ function matchingDelimiter(src, openIdx) {
     let inClass = false;
     for (let i = start + 1; i < src.length; i += 1) {
       if (src[i] === '\\') { i += 1; continue; }
-      if (src[i] === '\n' || src[i] === '\r') return start;
+      if (isLineTerminator(src[i])) return start;
       if (src[i] === '[') { inClass = true; continue; }
       if (src[i] === ']' && inClass) { inClass = false; continue; }
       if (src[i] === '/' && !inClass) {
@@ -68,7 +106,7 @@ function matchingDelimiter(src, openIdx) {
       continue;
     }
     if (ch === '/' && src[i + 1] === '/') {
-      const nl = src.indexOf('\n', i);
+      const nl = lineTerminatorIndex(src, i);
       if (nl === -1) return -1;
       statementStart = caseLabelPending || ASI_EXPRESSION_ENDS.has(lastSignificant);
       if (statementStart) canStartRegex = true;
@@ -82,7 +120,10 @@ function matchingDelimiter(src, openIdx) {
       continue;
     }
     if (/\s/.test(ch)) {
-      if (ch === '\n' || ch === '\r') statementStart = true;
+      if (isLineTerminator(ch)) {
+        statementStart = caseLabelPending || ASI_EXPRESSION_ENDS.has(lastSignificant);
+        if (statementStart) canStartRegex = true;
+      }
       continue;
     }
     if (ch === '`') {
@@ -138,7 +179,10 @@ function matchingDelimiter(src, openIdx) {
       canStartRegex = !member && REGEX_PREFIX_KEYWORDS.has(word);
       lastIdentifier = { value: word, member };
       lastSignificant = 'identifier';
-      if (!member && (word === 'case' || word === 'default')) caseLabelPending = true;
+      const nextToken = nextNonTriviaIndex(src, end);
+      if (!member && (word === 'case' || word === 'default') && src[nextToken] !== ':') {
+        caseLabelPending = true;
+      }
       statementStart = false;
       i = end - 1;
       continue;
@@ -169,6 +213,14 @@ function matchingDelimiter(src, openIdx) {
     if (ch === '!' && !canStartRegex) {
       canStartRegex = false;
       lastSignificant = 'postfix';
+      lastIdentifier = null;
+      statementStart = false;
+      continue;
+    }
+    if (src.startsWith('=>', i)) {
+      i += 1;
+      canStartRegex = true;
+      lastSignificant = 'arrow';
       lastIdentifier = null;
       statementStart = false;
       continue;
@@ -260,6 +312,7 @@ function matchingDelimiter(src, openIdx) {
       lastSignificant = 'colon';
       lastIdentifier = null;
       if (caseLabelPending) statementStart = true;
+      caseLabelPending = false;
       continue;
     }
     if (ch === ';') {
@@ -270,7 +323,7 @@ function matchingDelimiter(src, openIdx) {
       continue;
     }
     canStartRegex = REGEX_PREFIX_PUNCTUATION.has(ch);
-    lastSignificant = 'punctuation';
+    lastSignificant = ch;
     lastIdentifier = null;
     statementStart = false;
   }
@@ -282,7 +335,7 @@ function quotedEnd(src, start, quote) {
   for (let i = start + 1; i < src.length; i += 1) {
     if (src[i] === '\\') { i += 1; continue; }
     if (src[i] === quote) return i;
-    if (src[i] === '\n' || src[i] === '\r') return -1;
+    if (isLineTerminator(src[i])) return -1;
   }
   return -1;
 }
@@ -314,7 +367,7 @@ function templateEnd(src, start) {
         continue;
       }
       if (ch === '/' && src[i + 1] === '/') {
-        const end = src.indexOf('\n', i + 2);
+        const end = lineTerminatorIndex(src, i + 2);
         if (end === -1) return -1;
         i = end;
         continue;
@@ -335,7 +388,7 @@ function templateEnd(src, start) {
 
 function isRealSeoKey(src, start, end) {
   let lineStart = start;
-  while (lineStart > 0 && src[lineStart - 1] !== '\n' && src[lineStart - 1] !== '\r') {
+  while (lineStart > 0 && !isLineTerminator(src[lineStart - 1])) {
     lineStart -= 1;
   }
   if (!/^[\t ]*$/.test(src.slice(lineStart, start))) return false;
@@ -353,13 +406,13 @@ export function maskSeoSource(source, file = 'SEO source') {
   const src = String(source);
   const masked = new Array(src.length);
   for (let i = 0; i < src.length; i += 1) {
-    masked[i] = src[i] === '\n' || src[i] === '\r' ? src[i] : ' ';
+    masked[i] = isLineTerminator(src[i]) ? src[i] : ' ';
   }
 
   for (let i = 0; i < src.length; i += 1) {
     const ch = src[i];
     if (ch === '/' && src[i + 1] === '/') {
-      const end = src.indexOf('\n', i + 2);
+      const end = lineTerminatorIndex(src, i + 2);
       i = end === -1 ? src.length - 1 : end - 1;
       continue;
     }
