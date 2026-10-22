@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-22T12:14:01.253Z",
-  "contentHash": "8dfbee16c9cd16841265842cc142e3783d721635b58f2366622615d27ed4b264",
+  "updatedAt": "2026-10-22T12:50:23.771Z",
+  "contentHash": "169bd12819167ce83f9cd4a4575b8dbf29c018451cd461e04232049fdde8e541",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Gruppo radiofonico: annunciati fino a 15 tagli in Svizzera",
+          "url": "/articoli-berna/energy-tagli-radio-svizzera/",
+          "excerpt": "Energy annuncia fino a 15 tagli: il numero sarà deciso dopo la consultazione, mentre i ricavi pubblicitari restano sotto pressione.",
+          "date": "2026-10-22T12:35:58.385Z"
+        },
+        {
           "title": "Primo adeguamento LPP superstiti e invalidità: 2,1%, 1%, 1,2%",
           "url": "/articoli-berna/primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2/",
           "excerpt": "Aumento 2,1% per rendite dal 2023, 1% per prima rivalutazione 2026, 1,2% per ultima modifica 2025.",
@@ -82,12 +88,6 @@
           "url": "/articoli-berna/weissenbach-incidente-quattro-auto/",
           "excerpt": "L'incidente è avvenuto il 19 ottobre 2026 sulla strada principale di Weissenbach, nel Comune di Boltigen: cinque feriti e strada chiusa per quasi due ore.",
           "date": "2026-10-20T22:21:08.267Z"
-        },
-        {
-          "title": "Commissione Berna: voto comunale facoltativo per stranieri",
-          "url": "/articoli-berna/voto-comunale-stranieri-berna/",
-          "excerpt": "La SAK sostiene il voto comunale volontario per stranieri con permesso di domicilio, 10 anni in Svizzera, 5 nel Cantone, 3 mesi nel comune.",
-          "date": "2026-10-20T22:00:47.607Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-22T12:14:01.253Z"
+      "updatedAt": "2026-10-22T12:50:23.771Z"
     },
     "en": {
       "canton": "BE",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Radio group: up to 15 cuts announced in Switzerland",
+          "url": "/en/bern-articles/energy-radio-cuts-switzerland/",
+          "excerpt": "Energy announces up to 15 cuts: the number will be decided after the consultation, while advertising revenues remain under pressure.",
+          "date": "2026-10-22T12:35:58.385Z"
+        },
+        {
           "title": "First LPP adjustment for survivors and disability: 2.1%, 1%, 1.2%",
           "url": "/en/bern-articles/first-lpp-adjustment-for-survivors-and-disability-2-1-1-1-2/",
           "excerpt": "Increase 2,1% for annuities from 2023, 1% for first revaluation 2026, 1,2% for latest modification 2025.",
@@ -169,12 +175,6 @@
           "url": "/en/bern-articles/weissenbach-four-car-crash/",
           "excerpt": "The accident occurred on October 19, 2026, on the main road in Weissenbach, in the municipality of Boltigen: five people injured and the road closed for almost two hours.",
           "date": "2026-10-20T22:21:08.267Z"
-        },
-        {
-          "title": "Bern Commission: optional municipal voting rights for foreigners",
-          "url": "/en/bern-articles/municipal-voting-foreigners-bern/",
-          "excerpt": "SAK supports voluntary municipal voting for foreigners with a settlement permit, 10 years in Switzerland, 5 in the canton, 3 months in the municipality.",
-          "date": "2026-10-20T22:00:47.607Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-22T12:14:01.253Z"
+      "updatedAt": "2026-10-22T12:50:23.771Z"
     },
     "de": {
       "canton": "BE",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Radiogruppe: Bis zu 15 Stellen in der Schweiz angekündigt",
+          "url": "/de/bern-artikel/energy-radio-stellenabbau-schweiz/",
+          "excerpt": "Energy kündigt bis zu 15 Stellenstreichungen an: Die Zahl wird nach der Konsultation festgelegt, während die Werbeeinnahmen unter Druck bleiben.",
+          "date": "2026-10-22T12:35:58.385Z"
+        },
+        {
           "title": "Erste Anpassung der BVG-Hinterlassenen- und Invalidenrenten: 2,1%, 1%, 1,2%",
           "url": "/de/bern-artikel/erste-anpassung-der-bvg-hinterlassenen-und-invalidenrenten-2-1-1-1-2/",
           "excerpt": "Erhöhung um 2,1% für Renten ab 2023, 1% für die erste Anpassung 2026, 1,2% für die letzte Änderung 2025.",
@@ -256,12 +262,6 @@
           "url": "/de/bern-artikel/weissenbach-unfall-vier-autos/",
           "excerpt": "Der Unfall ereignete sich am 19.",
           "date": "2026-10-20T22:21:08.267Z"
-        },
-        {
-          "title": "Kommission Bern: freiwilliges kommunales Stimmrecht für Ausländer",
-          "url": "/de/bern-artikel/kommunales-wahlrecht-auslaender-bern/",
-          "excerpt": "Die SAK unterstützt das freiwillige kommunale Stimmrecht für Ausländer mit Niederlassungsbewilligung, 10 Jahren Aufenthalt in der Schweiz, 5 Jahren im Kanton und 3 Monaten in der Gemeinde.",
-          "date": "2026-10-20T22:00:47.607Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-22T12:14:01.253Z"
+      "updatedAt": "2026-10-22T12:50:23.771Z"
     },
     "fr": {
       "canton": "BE",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Groupe radiophonique : jusqu’à 15 suppressions de postes annoncées en Suisse",
+          "url": "/fr/articles-berne/energy-radio-suppressions-suisse/",
+          "excerpt": "Energy annonce jusqu’à 15 suppressions de postes : le nombre sera décidé après la consultation, tandis que les recettes publicitaires restent sous pression.",
+          "date": "2026-10-22T12:35:58.385Z"
+        },
+        {
           "title": "Première adaptation LPP pour survivants et invalidité : 2,1 %, 1 %, 1,2 %",
           "url": "/fr/articles-berne/premiere-adaptation-lpp-pour-survivants-et-invalidite-2-1-1-1-2/",
           "excerpt": "Augmentation de 2,1 % pour les rentes à partir de 2023, de 1 % pour la première revalorisation en 2026, de 1,2 % pour la dernière modification en 2025.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-berne/weissenbach-accident-quatre-voitures/",
           "excerpt": "L’accident a eu lieu le 19 octobre 2026 sur la route principale de Weissenbach, dans la commune de Boltigen : cinq blessés et route fermée pendant près de deux heures.",
           "date": "2026-10-20T22:21:08.267Z"
-        },
-        {
-          "title": "Commission de Berne : droit de vote communal facultatif pour les étrangers",
-          "url": "/fr/articles-berne/vote-communal-etrangers-berne/",
-          "excerpt": "La SAK soutient le droit de vote communal facultatif pour les étrangers titulaires d’un permis d’établissement, ayant vécu 10 ans en Suisse, 5 ans dans le canton et 3 mois dans la commune.",
-          "date": "2026-10-20T22:00:47.607Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-22T12:14:01.253Z"
+      "updatedAt": "2026-10-22T12:50:23.771Z"
     }
   }
 }
