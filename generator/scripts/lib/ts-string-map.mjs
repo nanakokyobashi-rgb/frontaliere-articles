@@ -89,6 +89,7 @@ export function readTsStringLiteral(src, i) {
  * qualunque template del file rende il sorgente non statico, quindi si rifiuta
  * il file intero prima di estrarre qualsiasi chiave.
  */
+const STATIC_LITERAL_QUOTES = new Set(['"', "'", '`']);
 const REGEX_PREFIX_KEYWORDS = new Set([
   'await', 'break', 'case', 'continue', 'debugger', 'default', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return',
   'throw', 'typeof', 'void', 'yield',
@@ -189,7 +190,16 @@ function looksLikeGenericStart(src, offset) {
         while (/\s/u.test(src[next] || '')) next += 1;
         const nextWord = /^[A-Za-z_$][A-Za-z0-9_$]*/u.exec(src.slice(next))?.[0];
         const angleContent = src.slice(offset + 1, cursor).trim();
-        const typeAssertion = Boolean(nextWord && /^[{[(]/u.test(angleContent));
+        const typeAssertionOperand = Boolean(
+          nextWord
+          || src[next] === '{'
+          || src[next] === '['
+          || src[next] === '('
+          || STATIC_LITERAL_QUOTES.has(src[next])
+          || /[0-9]/u.test(src[next] || '')
+          || ['!', '+', '-', '~', '/'].includes(src[next]),
+        );
+        const typeAssertion = Boolean(/^[{[(]/u.test(angleContent) && typeAssertionOperand);
         return src[next] === '(' || src.startsWith('=>', next) || src[next] === ';'
           || src[next] === ',' || src[next] === ')' || src[next] === '.' || src[next] === '|'
           || src[next] === '&' || src[next] === '=' || src[next] === '[' || src[next] === '!'
@@ -305,6 +315,12 @@ function staticSourceTokens(src) {
         statementStart = true;
         moduleSourcePending = false;
         moduleStatementKind = null;
+        typeAliasPending = false;
+        typeAliasActive = false;
+        typeAssertionActive = false;
+        typeAnnotationPending = false;
+        parameterTypeActive = false;
+        returnTypeActive = false;
       } else {
         canStartRegex = false;
         statementStart = false;
@@ -367,10 +383,12 @@ function staticSourceTokens(src) {
         && (returnTypeActive || parameterTypeActive || typeAliasActive || typeAssertionActive)) {
         typeAnnotationPending = true;
       }
-      if (!member && word === 'type' && (wasStatementStart || hadDeclarationPrefix)) {
+      const moduleTypeSpecifier = moduleNamedActive
+        && (moduleStatementKind === 'import' || moduleStatementKind === 'export');
+      if (!member && word === 'type' && (wasStatementStart || hadDeclarationPrefix) && !moduleTypeSpecifier) {
         typeAliasPending = true;
         typeAliasActive = false;
-      } else if (!member && hadTypeAliasPending) {
+      } else if (!member && hadTypeAliasPending && !moduleTypeSpecifier) {
         typeAliasPending = true;
       }
       const switchDefault = word === 'default' && wasStatementStart
@@ -629,7 +647,7 @@ function staticSourceTokens(src) {
       typeAliasPending = false;
       typeAliasActive = true;
     }
-    if (c === '<' && (blockBracePending || typeAliasPending || typeAliasActive
+    if (c === '<' && (typeAliasPending || typeAliasActive
       || looksLikeGenericStart(src, i - 1))) genericAngleDepth += 1;
     if (c === '>' && genericAngleDepth > 0) genericAngleDepth -= 1;
     const atCaseOrigin = caseLabelPending && caseLabelOrigin
@@ -727,6 +745,9 @@ function staticSourceTokens(src) {
           moduleStatementKind = null;
           moduleNamedActive = false;
           moduleSourcePending = false;
+          if (genericAngleDepth > 0 && parenContexts.length === 0 && bracketDepth === 0) {
+            genericAngleDepth = 0;
+          }
         }
       }
       if (startsTypeAlias) {

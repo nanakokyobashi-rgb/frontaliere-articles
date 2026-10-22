@@ -105,7 +105,16 @@ function looksLikeGenericStart(source, offset) {
         while (/\s/u.test(source[next] || '')) next += 1;
         const nextWord = /^[A-Za-z_$][A-Za-z0-9_$]*/u.exec(source.slice(next))?.[0];
         const angleContent = source.slice(offset + 1, cursor).trim();
-        const typeAssertion = Boolean(nextWord && /^[{[(]/u.test(angleContent));
+        const typeAssertionOperand = Boolean(
+          nextWord
+          || source[next] === '{'
+          || source[next] === '['
+          || source[next] === '('
+          || STATIC_LITERAL_QUOTES.has(source[next])
+          || /[0-9]/u.test(source[next] || '')
+          || ['!', '+', '-', '~', '/'].includes(source[next]),
+        );
+        const typeAssertion = Boolean(/^[{[(]/u.test(angleContent) && typeAssertionOperand);
         return source[next] === '(' || source.startsWith('=>', next) || source[next] === ';'
           || source[next] === ',' || source[next] === ')' || source[next] === '.' || source[next] === '|'
           || source[next] === '&' || source[next] === '=' || source[next] === '[' || source[next] === '!'
@@ -301,6 +310,12 @@ export function readStaticObjectEntries(
           statementStart = true;
           moduleSourcePending = false;
           moduleStatementKind = null;
+          typeAliasPending = false;
+          typeAliasActive = false;
+          typeAssertionActive = false;
+          typeAnnotationPending = false;
+          parameterTypeActive = false;
+          returnTypeActive = false;
         } else {
           canStartRegex = false;
           statementStart = false;
@@ -405,10 +420,12 @@ export function readStaticObjectEntries(
         && (returnTypeActive || parameterTypeActive || typeAliasActive || typeAssertionActive)) {
         typeAnnotationPending = true;
       }
-      if (!member && word === 'type' && (wasStatementStart || hadDeclarationPrefix)) {
+      const moduleTypeSpecifier = moduleNamedActive
+        && (moduleStatementKind === 'import' || moduleStatementKind === 'export');
+      if (!member && word === 'type' && (wasStatementStart || hadDeclarationPrefix) && !moduleTypeSpecifier) {
         typeAliasPending = true;
         typeAliasActive = false;
-      } else if (!member && hadTypeAliasPending) {
+      } else if (!member && hadTypeAliasPending && !moduleTypeSpecifier) {
         typeAliasPending = true;
       }
       const switchDefault = word === 'default' && wasStatementStart
@@ -665,7 +682,7 @@ export function readStaticObjectEntries(
       typeAliasPending = false;
       typeAliasActive = true;
     }
-    if (character === '<' && (blockBracePending || typeAliasPending || typeAliasActive
+    if (character === '<' && (typeAliasPending || typeAliasActive
       || looksLikeGenericStart(source, cursor - 1))) genericAngleDepth += 1;
     if (character === '>' && genericAngleDepth > 0) genericAngleDepth -= 1;
     const atCaseOrigin = caseLabelPending && caseLabelOrigin
@@ -768,6 +785,9 @@ export function readStaticObjectEntries(
           moduleStatementKind = null;
           moduleNamedActive = false;
           moduleSourcePending = false;
+          if (genericAngleDepth > 0 && parenContexts.length === 0 && bracketDepth === 0) {
+            genericAngleDepth = 0;
+          }
         }
       }
       if (startsTypeAlias) {

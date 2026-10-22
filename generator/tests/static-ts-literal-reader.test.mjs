@@ -188,6 +188,23 @@ test('il reader non estrae chiavi da annotazioni, asserzioni, generics o blocchi
   );
 });
 
+test('il reader distingue confronti, type specifier dei moduli e asserzioni angolari', () => {
+  const source = [
+    "const comparison = (left) < right;",
+    "import { type Foo } from 'module'",
+    "const angle = <{ 'blog.article.fake.angle.type': string }>{ 'blog.article.reale.angle': 'attuale' };",
+    "const meta = { 'blog.article.reale.title': 'attuale' };",
+  ].join('\n');
+
+  assert.deepEqual(
+    readStaticObjectEntries(source, 'fixture.ts').map(({ key, value }) => [key, value]),
+    [
+      ['blog.article.reale.angle', 'attuale'],
+      ['blog.article.reale.title', 'attuale'],
+    ],
+  );
+});
+
 test('newlineAs non reintroduce una continuazione CRLF rimossa', () => {
   const source = "const meta = { 'blog.article.reale.title': 'prima\\\r\nseconda' };";
   assert.equal(

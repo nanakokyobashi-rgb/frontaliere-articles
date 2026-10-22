@@ -430,6 +430,20 @@ describe('lettore TS condiviso', () => {
     ]);
   });
 
+  test('distingue confronti, type specifier dei moduli e asserzioni angolari', () => {
+    const source = [
+      "const comparison = (left) < right;",
+      "import { type Foo } from 'module'",
+      "const angle = <{ 'blog.article.fake.angle.type': string }>{ 'blog.article.real.angle': 'actual' };",
+      "'blog.article.real.title': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.angle', 'actual'],
+      ['blog.article.real.title', 'actual'],
+    ]);
+  });
+
   test('rimuove le continuazioni di riga CRLF dal valore decodificato', () => {
     assert.equal(tsStringMap.readTsStringLiteral("'prima\\\r\nseconda'", 0).value, 'primaseconda');
   });
