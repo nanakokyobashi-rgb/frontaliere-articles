@@ -112918,6 +112918,84 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-industria-ticino-strategie-personale': {
+    title: 'Industria Ticino: 15 licenziamenti collettivi in 18 mesi, -900 frontalieri',
+    description: 'Negli ultimi 18 mesi, numerosi licenziamenti collettivi in Ticino 15 licenziamenti collettivi seguiti in un anno e mezzo Circa 900 frontalieri in meno',
+    keywords: 'frontalieri, ticino, svizzera, italia, industria, licenziamenti, collettivi, mesi',
+    ogTitle: 'Industria Ticino: licenziamenti e calo frontalieri, il punto di Modenini',
+    ogDescription: 'Negli ultimi 18 mesi, numerosi licenziamenti collettivi in Ticino 15 licenziamenti collettivi seguiti in un anno e mezzo Circa 900 frontalieri in meno in due',
+    canonicalPath: '/articoli-frontaliere/industria-ticino-strategie-personale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Industria Ticino: 15 licenziamenti collettivi in 18 mesi, -900 frontalieri",
+      "description": "Negli ultimi 18 mesi, numerosi licenziamenti collettivi in Ticino 15 licenziamenti collettivi seguiti in un anno e mezzo Circa 900 frontalieri in meno",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-industria-ticino-strategie-personale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T00:06:32+00:00",
+      "dateModified": "2026-10-22T00:06:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/industria-ticino-strategie-personale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bellinzona-nuova-strada-ciclabile': {
+    title: 'Bellinzona inaugura la prima strada ciclabile | Frontaliere Ticino',
+    description: 'Bellinzona inaugura la sua prima strada ciclabile Il tracciato misura tre chilometri Il percorso va da Giubiasco a Bellinzona Bici e traffico',
+    keywords: 'frontalieri, ticino, svizzera, italia, bellinzona, inaugura, prima, strada',
+    ogTitle: 'Bellinzona inaugura la prima strada ciclabile',
+    ogDescription: 'Bellinzona inaugura la sua prima strada ciclabile Il tracciato misura tre chilometri Il percorso va da Giubiasco a Bellinzona Bici e traffico motorizzato',
+    canonicalPath: '/articoli-frontaliere/bellinzona-nuova-strada-ciclabile/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bellinzona inaugura la prima strada ciclabile",
+      "description": "Bellinzona inaugura la sua prima strada ciclabile Il tracciato misura tre chilometri Il percorso va da Giubiasco a Bellinzona Bici e traffico",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-fully-strada-ciclabile.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T00:55:35+00:00",
+      "dateModified": "2026-10-22T00:55:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bellinzona-nuova-strada-ciclabile/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

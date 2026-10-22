@@ -13570,6 +13570,12 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.arresto-ticino-banca-occulta.title': 'Arresto in Ticino nell\'operazione antimafia internazionale',
     'blog.article.arresto-ticino-banca-occulta.excerpt': 'Arrestata una persona in Ticino mercoledì.',
     'blog.article.arresto-ticino-banca-occulta.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.industria-ticino-strategie-personale.title': 'Industria Ticino: 15 licenziamenti collettivi in 18 mesi, -900 frontalieri',
+    'blog.article.industria-ticino-strategie-personale.excerpt': 'Negli ultimi 18 mesi, numerosi licenziamenti collettivi in Ticino 15 licenziamenti collettivi seguiti in un anno e mezzo Circa 900 frontalieri in meno in due',
+    'blog.article.industria-ticino-strategie-personale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.bellinzona-nuova-strada-ciclabile.title': 'Bellinzona inaugura la prima strada ciclabile',
+    'blog.article.bellinzona-nuova-strada-ciclabile.excerpt': 'Bellinzona inaugura la sua prima strada ciclabile Il tracciato misura tre chilometri Il percorso va da Giubiasco a Bellinzona Bici e traffico motorizzato',
+    'blog.article.bellinzona-nuova-strada-ciclabile.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

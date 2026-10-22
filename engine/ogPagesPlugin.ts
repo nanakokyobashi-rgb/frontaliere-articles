@@ -15,6 +15,7 @@ import type { Plugin } from 'vite';
 import { getSiteShell, type ArticleAuthor, type SiteShellContract } from './siteShell';
 import { buildArticleSeoSections, cleanupArticleBodySections, articleBodySectionLabel, renderArticleDerivedSectionsHtml, renderArticleInlineMarkup } from './articleSeoFallback';
 import { loadSwissArticleCanonicalOverrides, resolveSwissArticleCanonicalUrl, resolveShadowedArticleWinnerSlug } from './shared/swissArticleCanonicalOverrides';
+import { loadArticleRouteRedirects, resolveArticleRouteHref } from './shared/articleRouteOwnership.mjs';
 import { loadArticleReviewOverrides, resolveArticleReviewerSlug } from './shared/articleReviewOverrides';
 import { normalizeArticleExcerptPlain, stripMarkdownPlain } from './shared/stripMarkdownPlain';
 import { isFaqQuestionHeading } from './shared/faqQuestionPrefixes';
@@ -23,9 +24,9 @@ import { ARTICLE_SECTION_DESCRIPTORS, SITE_RENDERED_ARTICLE_SECTION_DESCRIPTORS,
 import { ARTICLE_ROBOTS_INDEX_ENHANCED } from './shared/robotsDirective';
 import { hasArticleBodyPromptPlaceholder } from './shared/articleBodyQuality';
 import { readImageIntrinsicSize } from './shared/imageIntrinsicSize';
-import { decodeTsStringEscapes, repairLegacyDoubleEscapedBreaks } from './shared/tsStringEscapes';
+import { parseStaticArticleTranslationSource, parseStaticBlogBodySource } from './shared/articleStaticSource.mjs';
+export { parseStaticBlogBodySource };
 import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
-import { readStaticObjectEntries } from './shared/ts-literals.mjs';
 import { createImageCreditReader, imageObjectCreditFields, renderImageCreditHtml } from './shared/imageCredits.mjs';
 import { computeSectionTopicAssignment } from './articleHubPagesPlugin';
 import { TOPIC_CLUSTERS, TOPIC_HUB_SEGMENT, type TopicLocale } from './topicTaxonomy';
@@ -190,191 +191,6 @@ const HERO_FALLBACK_HEIGHT = 675;
 
 function isMissingPathError(error: unknown): boolean {
   return (error as NodeJS.ErrnoException).code === 'ENOENT';
-}
-
-interface StaticTsStringLiteral {
- quote: string;
- raw: string;
- end: number;
-}
-
-/**
- * Read one static TypeScript string literal without evaluating source code.
- * Locale files are data modules, so interpolated template literals are not a
- * supported representation: accepting one as a partial string would silently
- * emit a body different from the module's runtime value.
- */
-function readStaticTsStringLiteral(source: string, start: number, sourcePath: string): StaticTsStringLiteral {
- const quote = source[start];
- if (quote !== "'" && quote !== '"' && quote !== '`') {
-  throw new Error(`[og-pages] Expected a quoted literal in ${sourcePath}`);
- }
-
- let cursor = start + 1;
- while (cursor < source.length) {
-  const char = source[cursor];
-  if (char === '\\') {
-   // A backslash consumes the next code unit. Keep CRLF together so a TS line
-   // continuation is not mistaken for the end of an ordinary string.
-   if (source[cursor + 1] === '\r' && source[cursor + 2] === '\n') {
-    cursor += 3;
-   } else {
-    cursor += 2;
-   }
-   continue;
-  }
-  if (quote === '`' && char === '$' && source[cursor + 1] === '{') {
-   throw new Error(`[og-pages] Interpolated template literal is not static article data: ${sourcePath}`);
-  }
-  // esbuild accepts U+2028/U+2029 inside generated corpus literals and
-  // preserves them as string data. Treat those separators like other body
-  // content so this source scanner stays aligned with the TS loader; raw LF
-  // and CR remain invalid in ordinary quoted literals.
-  if (quote !== '`' && (char === '\n' || char === '\r')) {
-   throw new Error(`[og-pages] Unterminated string literal in ${sourcePath}`);
-  }
-  if (char === quote) {
-   return { quote, raw: source.slice(start + 1, cursor), end: cursor + 1 };
-  }
-  cursor += 1;
- }
-
- throw new Error(`[og-pages] Unterminated string literal in ${sourcePath}`);
-}
-
-function skipStaticTsTrivia(source: string, start: number, sourcePath: string): number {
- let cursor = start;
- while (cursor < source.length) {
-  if (/\s/.test(source[cursor])) {
-   cursor += 1;
-   continue;
-  }
-  if (source.startsWith('//', cursor)) {
-   cursor += 2;
-   while (cursor < source.length && source[cursor] !== '\n' && source[cursor] !== '\r') cursor += 1;
-   continue;
-  }
-  if (source.startsWith('/*', cursor)) {
-   const close = source.indexOf('*/', cursor + 2);
-   if (close === -1) throw new Error(`[og-pages] Unterminated comment in ${sourcePath}`);
-   cursor = close + 2;
-   continue;
-  }
-  break;
- }
- return cursor;
-}
-
-/**
- * Match TypeScript's static literal escapes while retaining the historical
- * body decoder's handling of newlines, tabs, and malformed JSON escapes.
- */
-function decodeStaticTsStringLiteral(raw: string, quote: string): string {
- let value = '';
- for (let cursor = 0; cursor < raw.length;) {
-  if (raw[cursor] !== '\\') {
-   value += raw[cursor];
-   cursor += 1;
-   continue;
-  }
-
-  const escaped = raw[cursor + 1];
-  if (escaped === undefined) {
-   value += '\\';
-   cursor += 1;
-   continue;
-  }
-
-  // A line continuation consumes exactly one backslash. Runs are handled
-  // left-to-right, so `\\` plus a physical newline keeps both the literal
-  // backslash and newline in a template value.
-  if (escaped === '\r' || escaped === '\n' || escaped === '\u2028' || escaped === '\u2029') {
-   cursor += escaped === '\r' && raw[cursor + 2] === '\n' ? 3 : 2;
-   continue;
-  }
-
-  if (quote === '`' && (escaped === '`' || escaped === '$')) {
-   // Escaped delimiters are template syntax, and must be consumed before
-   // output is appended so a produced backslash is never reinterpreted.
-   value += escaped;
-   cursor += 2;
-   continue;
-  }
-
-  // Decode one source escape at a time. This keeps the shared decoder's
-  // established escape policy without allowing output from one escape to be
-  // parsed again by a later template-specific replace pass.
-  const escapeLength = escaped === 'u' && /^[0-9a-fA-F]{4}$/.test(raw.slice(cursor + 2, cursor + 6)) ? 6 : 2;
-  value += decodeTsStringEscapes(raw.slice(cursor, cursor + escapeLength), { newlineAs: '\n' });
-  cursor += escapeLength;
- }
- return value;
-}
-
-/**
- * Extract body/FAQ properties from a static TypeScript record. Unlike the
- * former quote-specific regex, this scans source tokens so keys inside comments
- * or body values cannot be mistaken for record properties.
- */
-export function parseStaticBlogBodySource(source: string, sourcePath: string): Record<string, Record<string, string>> {
- const out: Record<string, Record<string, string>> = {};
- const expectedArticleId = path.basename(sourcePath, '.ts');
- let bodyFieldCount = 0;
- let cursor = 0;
-
- while (cursor < source.length) {
-  cursor = skipStaticTsTrivia(source, cursor, sourcePath);
-  if (cursor >= source.length) break;
-  const char = source[cursor];
-  if (char !== "'" && char !== '"' && char !== '`') {
-   cursor += 1;
-   continue;
-  }
-
-  const keyToken = readStaticTsStringLiteral(source, cursor, sourcePath);
-  const key = decodeStaticTsStringLiteral(keyToken.raw, keyToken.quote);
-  const match = /^blog\.article\.(.+)\.(body\d+|faq)$/.exec(key);
-  if (!match) {
-   cursor = keyToken.end;
-   continue;
-  }
-  if (match[1] !== expectedArticleId) {
-   throw new Error(`[og-pages] Article body key ${match[1]} does not match file ${sourcePath}`);
-  }
-
-  const colonIndex = skipStaticTsTrivia(source, keyToken.end, sourcePath);
-  if (source[colonIndex] !== ':') {
-   throw new Error(`[og-pages] Malformed article body property ${key} in ${sourcePath}`);
-  }
-  const valueIndex = skipStaticTsTrivia(source, colonIndex + 1, sourcePath);
-  const valueQuote = source[valueIndex];
-  if (valueQuote !== "'" && valueQuote !== '"' && valueQuote !== '`') {
-   throw new Error(`[og-pages] Article body property ${key} is not a static string in ${sourcePath}`);
-  }
-  const valueToken = readStaticTsStringLiteral(source, valueIndex, sourcePath);
-  const valueDelimiter = skipStaticTsTrivia(source, valueToken.end, sourcePath);
-  if (source[valueDelimiter] !== ',' && source[valueDelimiter] !== '}') {
-   throw new Error(`[og-pages] Article body property ${key} must have a static string literal value in ${sourcePath}`);
-  }
-  if (source[valueDelimiter] === ',') {
-   const nextToken = skipStaticTsTrivia(source, valueDelimiter + 1, sourcePath);
-   if (nextToken >= source.length) {
-    throw new Error(`[og-pages] Article body property ${key} has a dangling comma in ${sourcePath}`);
-   }
-  }
-  const decoded = decodeStaticTsStringLiteral(valueToken.raw, valueToken.quote);
-  const field = match[2];
-  const value = field === 'faq' ? decoded : repairLegacyDoubleEscapedBreaks(decoded);
-  if (!out[match[1]]) out[match[1]] = {};
-  out[match[1]][field] = value;
-  if (field !== 'faq') bodyFieldCount += 1;
-  cursor = valueToken.end;
- }
-
- if (bodyFieldCount === 0) {
-  throw new Error(`[og-pages] Existing article body file has no static body fields: ${sourcePath}`);
- }
- return out;
 }
 
 /**
@@ -631,6 +447,26 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  fs,
  SECTION.canonicalOverrides.map((p) => np.resolve(rootDir, p)),
  );
+ const articleLinkCanonicalOverrides: Record<string, string> = {};
+ for (const descriptor of SITE_RENDERED_ARTICLE_SECTION_DESCRIPTORS) {
+  Object.assign(
+   articleLinkCanonicalOverrides,
+   loadSwissArticleCanonicalOverrides(
+    fs,
+    descriptor.canonicalOverrides.map((p) => np.resolve(rootDir, p)),
+   ),
+  );
+ }
+ const articleRedirects = loadArticleRouteRedirects(
+  fs,
+  np.resolve(rootDir, 'data/article-redirects.json'),
+  np.resolve(rootDir, 'build-plugins/legacyRedirectsPlugin.ts'),
+ );
+ const articleRouteMaps = {
+  redirects: articleRedirects,
+  canonicalOverrides: articleLinkCanonicalOverrides,
+ };
+ const resolveArticleHref = (href: string): string => resolveArticleRouteHref(href, articleRouteMaps);
 
  // Issue #6337: articleId -> reviewerAuthorSlug map for the `reviewedBy`
  // JSON-LD signal (E-E-A-T on fiscal/legal YMYL content). Section-agnostic,
@@ -1055,7 +891,9 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const blogIndexSlug: Record<string, string> = SHELL_INDEX_SLUGS_BY_KIND[SECTION.kind](shell, SECTION);
 
  // Meta fields flatten line breaks to spaces; body/FAQ literals keep them for
- // Markdown and JSON structure.
+ // Markdown and JSON structure. Values from the AST are already decoded, so
+ // flatten only the presentation whitespace without unescaping a second time.
+ const flattenMetaValue = (value: string): string => value.replace(/[\r\n]+/gu, ' ');
  const parseBlogMetaLocale = (locale: 'it' | 'en' | 'de' | 'fr') => {
  const out: Record<string, { title?: string; excerpt?: string; imageAlt?: string }> = {};
  const p = np.resolve(rootDir, `services/locales/${SECTION.metaPrefix}-${locale}.ts`);
@@ -1066,13 +904,14 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  if (isMissingPathError(err)) return out;
  throw err;
  }
- for (const { key, value } of readStaticObjectEntries(src, p, { errorLabel: 'og-meta', newlineAs: ' ' })) {
- const m = /^blog\.article\.(.+)\.(title|excerpt|imageAlt)$/u.exec(key);
- if (!m) continue;
- const articleId = m[1];
- const field = m[2] as 'title' | 'excerpt' | 'imageAlt';
- if (!out[articleId]) out[articleId] = {};
- out[articleId][field] = value;
+ const translations = parseStaticArticleTranslationSource(src, p);
+ for (const [articleId, fields] of translations) {
+  const meta: { title?: string; excerpt?: string; imageAlt?: string } = {};
+  for (const field of ['title', 'excerpt', 'imageAlt'] as const) {
+   const value = fields.get(field);
+   if (value !== undefined) meta[field] = flattenMetaValue(value);
+  }
+  out[articleId] = meta;
  }
  return out;
  };
@@ -1352,7 +1191,10 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const items = hubItem + picks.map(art => {
  const slug = blogSlugs[art.articleId]?.[locale] ?? art.articleId;
  const indexSlug = blogIndexSlug[locale] ?? SECTION.indexSlug[locale as 'it' | 'en' | 'de' | 'fr'] ?? SECTION.indexSlug.it;
- const href = `${localizedArticleSectionPath(indexSlug, locale)}/${slug}/`;
+ const href = resolveArticleRouteHref(
+  `${localizedArticleSectionPath(indexSlug, locale)}/${slug}/`,
+  articleRouteMaps,
+ );
  const title = art.ogT.replace(/\s*\|\s*Frontaliere Ticino\s*$/i, '');
  return `<li class="s-65FRzB"><a class="s-ty-PxH" href="${esc(href)}">${esc(title)}</a></li>`;
  }).join('');
@@ -1529,7 +1371,10 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const nb = parseInt(b.replace('body', ''), 10);
  return na - nb;
  }) : [];
- const bodySections = cleanupArticleBodySections(allBodyKeys.map(k => ({ key: k, text: localizedBody?.[k] })));
+ const bodySections = cleanupArticleBodySections(
+  allBodyKeys.map(k => ({ key: k, text: localizedBody?.[k] })),
+  { resolveHref: resolveArticleHref },
+ );
  const canonicalPath = withTrailingSlash(urlPath);
  const full = `${BASE_URL}${canonicalPath}`;
  // Issue #3010 item 1: shadowed near-duplicate variants (see
@@ -1901,7 +1746,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  : 'Domande frequenti';
  visibleFaqHtml = `<details class="s-lfB4Bo"><summary class="s-qAjSfB">${faqLabel}</summary><dl class="s-4vhLHi">` +
  useFaqPairs.slice(0, 10).map(pair =>
- `<dt class="s-fG2BFJ">${esc(pair.question)}</dt><dd class="s-nrPIRx">${renderArticleInlineMarkup(pair.answer)}</dd>`
+ `<dt class="s-fG2BFJ">${esc(pair.question)}</dt><dd class="s-nrPIRx">${renderArticleInlineMarkup(pair.answer, { resolveHref: resolveArticleHref })}</dd>`
  ).join('') +
  `</dl></details>`;
  }

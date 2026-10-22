@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "e9a2d53a68e381e8f5f2c4dd07ef2927ff7ad1fa017b6bda904fda92ca592803",
+  "updatedAt": "2026-10-22T00:12:28.308Z",
+  "contentHash": "fcca73c5b70ed1247fc79dd494bc01003020e2b1e0f37535ea3ae02509d4785c",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Atelier chocolat pour les enfants - Chocolate monster",
+              "label": "Atelier Créez votre création d'Halloween en chocolat",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-0"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-1"
             },
             {
-              "label": "Atelier de création pour enfants autour du portrait",
+              "label": "Atelier Théâtre : du livre à la scène avec Clémentine Le Bas, comédienne, à la Bibliothèque de la Cité",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/atelier-creation-enfants-autour-portrait"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/atelier-theatre-livre-scene-clementine-comedienne-bibliotheque-cite"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "label": "BIG BAND DES EAUX-VIVES : Echoes of the Messengers",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/band-eaux-vives-echoes-messengers"
             },
             {
-              "label": "Atelier Initiation à la Chocolaterie - Tempérage du chocolat",
+              "label": "Café quartier : La Sportive, un lieu incontournable du quartier",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/atelier-initiation-chocolaterie-temperage-chocolat"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/cafe-quartier-sportive-lieu-incontournable-quartier"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Cindy Van Acker / Cie Greffe, Les Impromptus",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/cindy-acker-greffe-impromptus"
             },
             {
-              "label": "Au fil des pas et des pages",
+              "label": "Cours de Tango Argentin - Niveau débutant",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/pages-0"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-5"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "label": "De(s)possession(s) de Vanessa Riera",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera"
             },
             {
-              "label": "C'est MAHgique!",
+              "label": "FRENCH MON AMOUR S10E3",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/mahgique-0"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/french-amour-s10e3"
             },
             {
-              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
+              "label": "Histoires gravées dans la pierre",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi-4"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/histoires-gravees-pierre"
             },
             {
-              "label": "Complet - Les secrets du monde fongique : à la découverte des champignons du Jardin Botanique de Genève",
+              "label": "Histoires gravées dans la pierre COMPLET",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/histoires-gravees-pierre-complet"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -135,7 +135,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "en": {
       "canton": "GE",
@@ -156,64 +156,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Atelier chocolat pour les enfants - Chocolate monster",
+              "label": "Atelier Créez votre création d'Halloween en chocolat",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-0"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-1"
             },
             {
-              "label": "Atelier de création pour enfants autour du portrait",
+              "label": "Atelier Théâtre : du livre à la scène avec Clémentine Le Bas, comédienne, à la Bibliothèque de la Cité",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/atelier-creation-enfants-autour-portrait"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/atelier-theatre-livre-scene-clementine-comedienne-bibliotheque-cite"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "label": "BIG BAND DES EAUX-VIVES : Echoes of the Messengers",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/band-eaux-vives-echoes-messengers"
             },
             {
-              "label": "Atelier Initiation à la Chocolaterie - Tempérage du chocolat",
+              "label": "Café quartier : La Sportive, un lieu incontournable du quartier",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/atelier-initiation-chocolaterie-temperage-chocolat"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/cafe-quartier-sportive-lieu-incontournable-quartier"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Cindy Van Acker / Cie Greffe, Les Impromptus",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/cindy-acker-greffe-impromptus"
             },
             {
-              "label": "Au fil des pas et des pages",
+              "label": "Cours de Tango Argentin - Niveau débutant",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/pages-0"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-5"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "label": "De(s)possession(s) de Vanessa Riera",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera"
             },
             {
-              "label": "C'est MAHgique!",
+              "label": "FRENCH MON AMOUR S10E3",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/mahgique-0"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/french-amour-s10e3"
             },
             {
-              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
+              "label": "Histoires gravées dans la pierre",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi-4"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/histoires-gravees-pierre"
             },
             {
-              "label": "Complet - Les secrets du monde fongique : à la découverte des champignons du Jardin Botanique de Genève",
+              "label": "Histoires gravées dans la pierre COMPLET",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/histoires-gravees-pierre-complet"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -253,7 +253,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "de": {
       "canton": "GE",
@@ -274,64 +274,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Atelier chocolat pour les enfants - Chocolate monster",
+              "label": "Atelier Créez votre création d'Halloween en chocolat",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-0"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-1"
             },
             {
-              "label": "Atelier de création pour enfants autour du portrait",
+              "label": "Atelier Théâtre : du livre à la scène avec Clémentine Le Bas, comédienne, à la Bibliothèque de la Cité",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/atelier-creation-enfants-autour-portrait"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/atelier-theatre-livre-scene-clementine-comedienne-bibliotheque-cite"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "label": "BIG BAND DES EAUX-VIVES : Echoes of the Messengers",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/band-eaux-vives-echoes-messengers"
             },
             {
-              "label": "Atelier Initiation à la Chocolaterie - Tempérage du chocolat",
+              "label": "Café quartier : La Sportive, un lieu incontournable du quartier",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/atelier-initiation-chocolaterie-temperage-chocolat"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/cafe-quartier-sportive-lieu-incontournable-quartier"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Cindy Van Acker / Cie Greffe, Les Impromptus",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/cindy-acker-greffe-impromptus"
             },
             {
-              "label": "Au fil des pas et des pages",
+              "label": "Cours de Tango Argentin - Niveau débutant",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/pages-0"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-5"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "label": "De(s)possession(s) de Vanessa Riera",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera"
             },
             {
-              "label": "C'est MAHgique!",
+              "label": "FRENCH MON AMOUR S10E3",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/mahgique-0"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/french-amour-s10e3"
             },
             {
-              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
+              "label": "Histoires gravées dans la pierre",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi-4"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/histoires-gravees-pierre"
             },
             {
-              "label": "Complet - Les secrets du monde fongique : à la découverte des champignons du Jardin Botanique de Genève",
+              "label": "Histoires gravées dans la pierre COMPLET",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/histoires-gravees-pierre-complet"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -371,7 +371,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "fr": {
       "canton": "GE",
@@ -392,64 +392,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Atelier chocolat pour les enfants - Chocolate monster",
+              "label": "Atelier Créez votre création d'Halloween en chocolat",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-0"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-1"
             },
             {
-              "label": "Atelier de création pour enfants autour du portrait",
+              "label": "Atelier Théâtre : du livre à la scène avec Clémentine Le Bas, comédienne, à la Bibliothèque de la Cité",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/atelier-creation-enfants-autour-portrait"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/atelier-theatre-livre-scene-clementine-comedienne-bibliotheque-cite"
             },
             {
-              "label": "Atelier découverte de la nature pour enfants - Explore, goûte et apprends sur la châtaigne !",
+              "label": "BIG BAND DES EAUX-VIVES : Echoes of the Messengers",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-nature-enfants-explore-goute-apprends-chataigne"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/band-eaux-vives-echoes-messengers"
             },
             {
-              "label": "Atelier Initiation à la Chocolaterie - Tempérage du chocolat",
+              "label": "Café quartier : La Sportive, un lieu incontournable du quartier",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/atelier-initiation-chocolaterie-temperage-chocolat"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/cafe-quartier-sportive-lieu-incontournable-quartier"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Cindy Van Acker / Cie Greffe, Les Impromptus",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/cindy-acker-greffe-impromptus"
             },
             {
-              "label": "Au fil des pas et des pages",
+              "label": "Cours de Tango Argentin - Niveau débutant",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/pages-0"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-5"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "label": "De(s)possession(s) de Vanessa Riera",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera"
             },
             {
-              "label": "C'est MAHgique!",
+              "label": "FRENCH MON AMOUR S10E3",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/mahgique-0"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/french-amour-s10e3"
             },
             {
-              "label": "Complet - Éveil sensoriel. Le futur, c’est quoi ?",
+              "label": "Histoires gravées dans la pierre",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/eveil-sensoriel-futur-quoi-4"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/histoires-gravees-pierre"
             },
             {
-              "label": "Complet - Les secrets du monde fongique : à la découverte des champignons du Jardin Botanique de Genève",
+              "label": "Histoires gravées dans la pierre COMPLET",
               "detail": "Genève",
-              "date": "2026-10-21",
-              "url": "https://www.geneve.ch/agenda/secrets-monde-fongique-decouverte-champignons-jardin-botanique-geneve"
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/histoires-gravees-pierre-complet"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -489,7 +489,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     }
   }
 }

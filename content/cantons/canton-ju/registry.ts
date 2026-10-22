@@ -50,4 +50,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'stockmar-ritardo-cantiere-2027',
+ category: 'novita',
+ date: '2026-10-22T00:17:44.643Z',
+ image: '/images/blog/article-stockmar-ritardo-cantiere-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['JU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

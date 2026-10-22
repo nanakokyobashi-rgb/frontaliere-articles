@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-21T21:02:11.427Z",
-  "contentHash": "6c60bb43a89ea14403d97bc4af2bdbc86833b9a4969823999f54d9c8424f5826",
+  "updatedAt": "2026-10-22T00:12:28.308Z",
+  "contentHash": "6c54a5dcfd5e671e808e5e24f35e7d4da9940783e306680612e5749e1aa7d638",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "76",
+          "value": "74",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Spoken Word Festival woerdz 2026: Dead or Alive Slam",
-              "detail": "Kriens",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spoken-word-festival-woerdz-2026-dead-or-alive-slam/"
+              "label": "Kunstausstellung Arts Crossroad",
+              "detail": "Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840403"
             },
             {
-              "label": "Konzert \"In Dur und Moll\"",
-              "detail": "Lucerne",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-in-dur-und-moll/"
+              "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
+              "detail": "Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7729408"
             },
             {
-              "label": "Das Schicksal der Kronjuwelen",
-              "detail": "Fach- und Wirtschafts-Mittelschulzentrum, Luzern",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/das-schicksal-der-kronjuwelen/"
+              "label": "Contemporary Art Fair Luzern",
+              "detail": "Kornschütte, Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/contemporary-art-fair-luzern-2026/"
             },
             {
-              "label": "Finojet",
+              "label": "Wild & Wine «Goldenits»",
+              "detail": "Gasthof Tell, Gisikon",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wild-wine-goldenits/"
+            },
+            {
+              "label": "Spoken Word Festival woerdz 2026: Die Spoken Word Werkschau",
+              "detail": "Südpol / Musik Tanz Theater, Kriens",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spoken-word-festival-woerdz-2026-die-spoken-word-werkschau-1/"
+            },
+            {
+              "label": "Vortrag mit Robert Betz: Der Frieden in der Welt beginnt in uns",
+              "detail": "Verkehrshaus der Schweiz",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/vortrag-mit-robert-betz-der-frieden-in-der-welt-beginnt-in-uns_A5HiSaM"
+            },
+            {
+              "label": "Vortrag mit Robert Betz: Der Frieden in der Welt beginnt in uns",
+              "detail": "Verkehrshaus der Schweiz, Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vortrag-mit-robert-betz-der-frieden-in-der-welt-beginnt-in-uns/"
+            },
+            {
+              "label": "Marc Amacher",
               "detail": "Schüür",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/luzern/finojet_AYajCJF"
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/marc-amacher_ALpZdM9"
             },
             {
-              "label": "Estelle Revaz & Dana Ciocarlie - DER HERBST 26",
+              "label": "BEETHOVEN (ON THE) ROCKS & CLUBNACHT IM NEUBAD",
+              "detail": "Netzwerk Neubad, Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/beethoven-on-the-rocks-clubnacht-im-neubad-1/"
+            },
+            {
+              "label": "Les Fils Canouche - DER HERBST 26",
               "detail": "Kultur Kulinarik Vitznau, Vitznau",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/estelle-revaz-dana-ciocarlie-der-herbst-26/"
-            },
-            {
-              "label": "Ausstellung NachtLeben",
-              "detail": "Luzern — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — in corso, ultimo giorno: 12 novembre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
-            {
-              "label": "Pilzkontrolle",
-              "detail": "Museum Luzern, Luzern — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
-            },
-            {
-              "label": "Sunset cruises Brienzer Rothorn with 3-course menu",
-              "detail": "Gipfel-Restaurant Rothorn — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
-            },
-            {
-              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
-              "detail": "Museum Luzern, Luzern — in corso, ultimo giorno: 23 ottobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/les-fils-canouche-der-herbst-26/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -172,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T21:02:11.427Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "en": {
       "canton": "LU",
@@ -182,7 +182,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "76",
+          "value": "74",
           "note": "from the site’s events calendar"
         }
       ],
@@ -193,64 +193,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Spoken Word Festival woerdz 2026: Dead or Alive Slam",
-              "detail": "Kriens",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spoken-word-festival-woerdz-2026-dead-or-alive-slam/"
+              "label": "Kunstausstellung Arts Crossroad",
+              "detail": "Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840403"
             },
             {
-              "label": "Konzert \"In Dur und Moll\"",
-              "detail": "Lucerne",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-in-dur-und-moll/"
+              "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
+              "detail": "Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7729408"
             },
             {
-              "label": "Das Schicksal der Kronjuwelen",
-              "detail": "Fach- und Wirtschafts-Mittelschulzentrum, Luzern",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/das-schicksal-der-kronjuwelen/"
+              "label": "Contemporary Art Fair Luzern",
+              "detail": "Kornschütte, Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/contemporary-art-fair-luzern-2026/"
             },
             {
-              "label": "Finojet",
+              "label": "Wild & Wine «Goldenits»",
+              "detail": "Gasthof Tell, Gisikon",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wild-wine-goldenits/"
+            },
+            {
+              "label": "Spoken Word Festival woerdz 2026: Die Spoken Word Werkschau",
+              "detail": "Südpol / Musik Tanz Theater, Kriens",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spoken-word-festival-woerdz-2026-die-spoken-word-werkschau-1/"
+            },
+            {
+              "label": "Vortrag mit Robert Betz: Der Frieden in der Welt beginnt in uns",
+              "detail": "Verkehrshaus der Schweiz",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/vortrag-mit-robert-betz-der-frieden-in-der-welt-beginnt-in-uns_A5HiSaM"
+            },
+            {
+              "label": "Vortrag mit Robert Betz: Der Frieden in der Welt beginnt in uns",
+              "detail": "Verkehrshaus der Schweiz, Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vortrag-mit-robert-betz-der-frieden-in-der-welt-beginnt-in-uns/"
+            },
+            {
+              "label": "Marc Amacher",
               "detail": "Schüür",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/luzern/finojet_AYajCJF"
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/marc-amacher_ALpZdM9"
             },
             {
-              "label": "Estelle Revaz & Dana Ciocarlie - DER HERBST 26",
+              "label": "BEETHOVEN (ON THE) ROCKS & CLUBNACHT IM NEUBAD",
+              "detail": "Netzwerk Neubad, Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/beethoven-on-the-rocks-clubnacht-im-neubad-1/"
+            },
+            {
+              "label": "Les Fils Canouche - DER HERBST 26",
               "detail": "Kultur Kulinarik Vitznau, Vitznau",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/estelle-revaz-dana-ciocarlie-der-herbst-26/"
-            },
-            {
-              "label": "Ausstellung NachtLeben",
-              "detail": "Luzern — ongoing, last day: 25 October 2026",
-              "date": "2026-10-21",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — ongoing, last day: 12 November 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
-            {
-              "label": "Pilzkontrolle",
-              "detail": "Museum Luzern, Luzern — ongoing, last day: 26 October 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
-            },
-            {
-              "label": "Sunset cruises Brienzer Rothorn with 3-course menu",
-              "detail": "Gipfel-Restaurant Rothorn — ongoing, last day: 25 October 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
-            },
-            {
-              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
-              "detail": "Museum Luzern, Luzern — ongoing, last day: 23 October 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/les-fils-canouche-der-herbst-26/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -327,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T21:02:11.427Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "de": {
       "canton": "LU",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "76",
+          "value": "74",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -348,64 +348,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Spoken Word Festival woerdz 2026: Dead or Alive Slam",
-              "detail": "Kriens",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spoken-word-festival-woerdz-2026-dead-or-alive-slam/"
+              "label": "Kunstausstellung Arts Crossroad",
+              "detail": "Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840403"
             },
             {
-              "label": "Konzert \"In Dur und Moll\"",
-              "detail": "Lucerne",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-in-dur-und-moll/"
+              "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
+              "detail": "Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7729408"
             },
             {
-              "label": "Das Schicksal der Kronjuwelen",
-              "detail": "Fach- und Wirtschafts-Mittelschulzentrum, Luzern",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/das-schicksal-der-kronjuwelen/"
+              "label": "Kunstmesse Luzern 2026",
+              "detail": "Kornschütte, Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/contemporary-art-fair-luzern-2026/"
             },
             {
-              "label": "Finojet",
+              "label": "Wild & Wine «Goldenits»",
+              "detail": "Gasthof Tell, Gisikon",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wild-wine-goldenits/"
+            },
+            {
+              "label": "Spoken Word Festival woerdz 2026: Die Spoken Word Werkschau",
+              "detail": "Südpol / Musik Tanz Theater, Kriens",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spoken-word-festival-woerdz-2026-die-spoken-word-werkschau-1/"
+            },
+            {
+              "label": "Vortrag mit Robert Betz: Der Frieden in der Welt beginnt in uns",
+              "detail": "Verkehrshaus der Schweiz",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/vortrag-mit-robert-betz-der-frieden-in-der-welt-beginnt-in-uns_A5HiSaM"
+            },
+            {
+              "label": "Vortrag mit Robert Betz: Der Frieden in der Welt beginnt in uns",
+              "detail": "Verkehrshaus der Schweiz, Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vortrag-mit-robert-betz-der-frieden-in-der-welt-beginnt-in-uns/"
+            },
+            {
+              "label": "Marc Amacher",
               "detail": "Schüür",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/luzern/finojet_AYajCJF"
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/marc-amacher_ALpZdM9"
             },
             {
-              "label": "Estelle Revaz & Dana Ciocarlie - DER HERBST 26",
+              "label": "BEETHOVEN (ON THE) ROCKS & CLUBNACHT IM NEUBAD",
+              "detail": "Netzwerk Neubad, Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/beethoven-on-the-rocks-clubnacht-im-neubad-1/"
+            },
+            {
+              "label": "Les Fils Canouche - DER HERBST 26",
               "detail": "Kultur Kulinarik Vitznau, Vitznau",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/estelle-revaz-dana-ciocarlie-der-herbst-26/"
-            },
-            {
-              "label": "Ausstellung NachtLeben",
-              "detail": "Luzern — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-21",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — läuft, letzter Tag: 12. November 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
-            {
-              "label": "Pilzkontrolle",
-              "detail": "Museum Luzern, Luzern — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
-            },
-            {
-              "label": "Sonnenuntergangsfahrten Brienzer Rothorn mit 3-Gänge-Menü",
-              "detail": "Gipfel-Restaurant Rothorn — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
-            },
-            {
-              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
-              "detail": "Museum Luzern, Luzern — läuft, letzter Tag: 23. Oktober 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/les-fils-canouche-der-herbst-26/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -482,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-21T21:02:11.427Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "fr": {
       "canton": "LU",
@@ -492,7 +492,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "76",
+          "value": "74",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -503,64 +503,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Spoken Word Festival woerdz 2026: Dead or Alive Slam",
-              "detail": "Kriens",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spoken-word-festival-woerdz-2026-dead-or-alive-slam/"
+              "label": "Kunstausstellung Arts Crossroad",
+              "detail": "Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840403"
             },
             {
-              "label": "Konzert \"In Dur und Moll\"",
-              "detail": "Lucerne",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-in-dur-und-moll/"
+              "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
+              "detail": "Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7729408"
             },
             {
-              "label": "Das Schicksal der Kronjuwelen",
-              "detail": "Fach- und Wirtschafts-Mittelschulzentrum, Luzern",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/das-schicksal-der-kronjuwelen/"
+              "label": "Contemporary Art Fair Luzern",
+              "detail": "Kornschütte, Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/contemporary-art-fair-luzern-2026/"
             },
             {
-              "label": "Finojet",
+              "label": "Wild & Wine «Goldenits»",
+              "detail": "Gasthof Tell, Gisikon",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wild-wine-goldenits/"
+            },
+            {
+              "label": "Spoken Word Festival woerdz 2026: Die Spoken Word Werkschau",
+              "detail": "Südpol / Musik Tanz Theater, Kriens",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spoken-word-festival-woerdz-2026-die-spoken-word-werkschau-1/"
+            },
+            {
+              "label": "Vortrag mit Robert Betz: Der Frieden in der Welt beginnt in uns",
+              "detail": "Verkehrshaus der Schweiz",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/vortrag-mit-robert-betz-der-frieden-in-der-welt-beginnt-in-uns_A5HiSaM"
+            },
+            {
+              "label": "Vortrag mit Robert Betz: Der Frieden in der Welt beginnt in uns",
+              "detail": "Verkehrshaus der Schweiz, Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vortrag-mit-robert-betz-der-frieden-in-der-welt-beginnt-in-uns/"
+            },
+            {
+              "label": "Marc Amacher",
               "detail": "Schüür",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/luzern/finojet_AYajCJF"
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/marc-amacher_ALpZdM9"
             },
             {
-              "label": "Estelle Revaz & Dana Ciocarlie - DER HERBST 26",
+              "label": "BEETHOVEN (ON THE) ROCKS & CLUBNACHT IM NEUBAD",
+              "detail": "Netzwerk Neubad, Luzern",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/beethoven-on-the-rocks-clubnacht-im-neubad-1/"
+            },
+            {
+              "label": "Les Fils Canouche - DER HERBST 26",
               "detail": "Kultur Kulinarik Vitznau, Vitznau",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/estelle-revaz-dana-ciocarlie-der-herbst-26/"
-            },
-            {
-              "label": "Ausstellung NachtLeben",
-              "detail": "Luzern — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
-            },
-            {
-              "label": "360° Mitsingen",
-              "detail": "Bourbaki Panorama — en cours, dernier jour : 12 novembre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
-            },
-            {
-              "label": "Pilzkontrolle",
-              "detail": "Museum Luzern, Luzern — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
-            },
-            {
-              "label": "Croisières au coucher du soleil au Rothorn de Brienz avec menu à 3 plats",
-              "detail": "Gipfel-Restaurant Rothorn — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sunset-cruises-brienzer-rothorn-with-3-course-menu/"
-            },
-            {
-              "label": "Theatertour: Glanz und Güsel – Willkommen im Sauberland Schweiz!",
-              "detail": "Museum Luzern, Luzern — en cours, dernier jour : 23 octobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/theatertour-glanz-und-guesel-willkommen-im-sauberland-schweiz_AiAdKXr"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/les-fils-canouche-der-herbst-26/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -637,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-21T21:02:11.427Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     }
   }
 }

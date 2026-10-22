@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "eventi",
-  "updatedAt": "2026-10-21T00:56:25.671Z",
-  "contentHash": "12bc2210f892ab085383525c4296af8dea371c46afb86f5d3f6a58750d0f2a9f",
+  "updatedAt": "2026-10-22T00:12:28.308Z",
+  "contentHash": "83e78a32281aee3b07970893c5716bbc001a1bbee2daf48490d0c580b32a0a76",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-20T17:28:37.181Z",
+      "updatedAt": "2026-10-21T12:38:14.154Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "61",
+          "value": "57",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,48 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "FMG Messe Oeltrotte",
-              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/86065"
-            },
-            {
-              "label": "Queer-Stamm Stans",
-              "detail": "Steiböckli, Stans, Stans",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/91150"
-            },
-            {
-              "label": "begegnen und bewegen",
-              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/89779"
-            },
-            {
-              "label": "Informationsveranstaltung «Aktuelles aus Ennetbürgen»",
-              "detail": "Mehrzweckhalle, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/82603"
-            },
-            {
-              "label": "Stiftung Lebensraum Gebirge: Archäologie in Stansstad",
-              "detail": "Herrenhaus Grafenort, Stansstad",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/events/knowledge/grafenort/stiftung-lebensraum-gebirge-archaeologie-in-stansstad_AeZL7cX"
-            },
-            {
-              "label": "Lasertraining Rütlischiessen",
-              "detail": "MZA Steini, Dallenwil, Dallenwil — in corso, ultimo giorno: 27 ottobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/93010"
-            },
-            {
-              "label": "Pilze am Wegrand",
-              "detail": "Culinarium Alpinum, Stans — in corso, ultimo giorno: 23 ottobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
-            },
             {
               "label": "Fondue-Abend auf dem Stanserhorn",
               "detail": "Drehrestaurant Stanserhorn, Stans, Stans",
@@ -87,15 +45,57 @@
               "url": "https://www.nw.ch/_rte/anlass/90616"
             },
             {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — in corso, ultimo giorno: 27 ottobre 2026",
+              "date": "2026-10-22",
+              "url": "https://www.nw.ch/_rte/anlass/93010"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans — in corso, ultimo giorno: 23 ottobre 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
+            },
+            {
               "label": "Öffentliche Führung: Culinarium Alpinum",
               "detail": "Culinarium Alpinum, Stans, Stans",
               "date": "2026-10-23",
               "url": "https://www.nw.ch/_rte/anlass/92146"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans, Stans",
+              "date": "2026-10-23",
+              "url": "https://www.nw.ch/_rte/anlass/89423"
+            },
+            {
+              "label": "Zyklus-Show",
+              "detail": "Pfarreiheim, Stans, Stans",
+              "date": "2026-10-23",
+              "url": "https://www.nw.ch/_rte/anlass/88337"
+            },
+            {
+              "label": "Gemeinde-Apéro",
+              "detail": "Mehrzweckhalle, Emmetten, Emmetten",
+              "date": "2026-10-23",
+              "url": "https://www.nw.ch/_rte/anlass/83182"
+            },
+            {
+              "label": "Alteisensammlung",
+              "detail": "Sammelstelle Eimatt, Ennetmoos, Ennetmoos",
+              "date": "2026-10-24",
+              "url": "https://www.nw.ch/_rte/anlass/89048"
+            },
+            {
+              "label": "Café Zwischenhalt",
+              "detail": "Hinter-Rotzberg 1, Ennetmoos, Ennetmoos",
+              "date": "2026-10-24",
+              "url": "https://www.nw.ch/_rte/anlass/94231"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/nidvaldo/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/nidvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "en": {
       "canton": "NW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "61",
+          "value": "57",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,48 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "FMG Messe Oeltrotte",
-              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/86065"
-            },
-            {
-              "label": "Queer-Stamm Stans",
-              "detail": "Steiböckli, Stans, Stans",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/91150"
-            },
-            {
-              "label": "begegnen und bewegen",
-              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/89779"
-            },
-            {
-              "label": "Informationsveranstaltung «Aktuelles aus Ennetbürgen»",
-              "detail": "Mehrzweckhalle, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/82603"
-            },
-            {
-              "label": "Stiftung Lebensraum Gebirge: Archäologie in Stansstad",
-              "detail": "Herrenhaus Grafenort, Stansstad",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/events/knowledge/grafenort/stiftung-lebensraum-gebirge-archaeologie-in-stansstad_AeZL7cX"
-            },
-            {
-              "label": "Lasertraining Rütlischiessen",
-              "detail": "MZA Steini, Dallenwil, Dallenwil — ongoing, last day: 27 October 2026",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/93010"
-            },
-            {
-              "label": "Pilze am Wegrand",
-              "detail": "Culinarium Alpinum, Stans — ongoing, last day: 23 October 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
-            },
             {
               "label": "Fondue-Abend auf dem Stanserhorn",
               "detail": "Drehrestaurant Stanserhorn, Stans, Stans",
@@ -192,15 +150,57 @@
               "url": "https://www.nw.ch/_rte/anlass/90616"
             },
             {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — ongoing, last day: 27 October 2026",
+              "date": "2026-10-22",
+              "url": "https://www.nw.ch/_rte/anlass/93010"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans — ongoing, last day: 23 October 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
+            },
+            {
               "label": "Öffentliche Führung: Culinarium Alpinum",
               "detail": "Culinarium Alpinum, Stans, Stans",
               "date": "2026-10-23",
               "url": "https://www.nw.ch/_rte/anlass/92146"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans, Stans",
+              "date": "2026-10-23",
+              "url": "https://www.nw.ch/_rte/anlass/89423"
+            },
+            {
+              "label": "Zyklus-Show",
+              "detail": "Pfarreiheim, Stans, Stans",
+              "date": "2026-10-23",
+              "url": "https://www.nw.ch/_rte/anlass/88337"
+            },
+            {
+              "label": "Gemeinde-Apéro",
+              "detail": "Mehrzweckhalle, Emmetten, Emmetten",
+              "date": "2026-10-23",
+              "url": "https://www.nw.ch/_rte/anlass/83182"
+            },
+            {
+              "label": "Alteisensammlung",
+              "detail": "Sammelstelle Eimatt, Ennetmoos, Ennetmoos",
+              "date": "2026-10-24",
+              "url": "https://www.nw.ch/_rte/anlass/89048"
+            },
+            {
+              "label": "Café Zwischenhalt",
+              "detail": "Hinter-Rotzberg 1, Ennetmoos, Ennetmoos",
+              "date": "2026-10-24",
+              "url": "https://www.nw.ch/_rte/anlass/94231"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/nidwalden/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/nidwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "de": {
       "canton": "NW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "61",
+          "value": "57",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,48 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "FMG Messe Oeltrotte",
-              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/86065"
-            },
-            {
-              "label": "Queer-Stamm Stans",
-              "detail": "Steiböckli, Stans, Stans",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/91150"
-            },
-            {
-              "label": "begegnen und bewegen",
-              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/89779"
-            },
-            {
-              "label": "Informationsveranstaltung «Aktuelles aus Ennetbürgen»",
-              "detail": "Mehrzweckhalle, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/82603"
-            },
-            {
-              "label": "Stiftung Lebensraum Gebirge: Archäologie in Stansstad",
-              "detail": "Herrenhaus Grafenort, Stansstad",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/events/knowledge/grafenort/stiftung-lebensraum-gebirge-archaeologie-in-stansstad_AeZL7cX"
-            },
-            {
-              "label": "Lasertraining Rütlischiessen",
-              "detail": "MZA Steini, Dallenwil, Dallenwil — läuft, letzter Tag: 27. Oktober 2026",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/93010"
-            },
-            {
-              "label": "Pilze am Wegrand",
-              "detail": "Culinarium Alpinum, Stans — läuft, letzter Tag: 23. Oktober 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
-            },
             {
               "label": "Fondue-Abend auf dem Stanserhorn",
               "detail": "Drehrestaurant Stanserhorn, Stans, Stans",
@@ -297,15 +255,57 @@
               "url": "https://www.nw.ch/_rte/anlass/90616"
             },
             {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — läuft, letzter Tag: 27. Oktober 2026",
+              "date": "2026-10-22",
+              "url": "https://www.nw.ch/_rte/anlass/93010"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans — läuft, letzter Tag: 23. Oktober 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
+            },
+            {
               "label": "Öffentliche Führung: Culinarium Alpinum",
               "detail": "Culinarium Alpinum, Stans, Stans",
               "date": "2026-10-23",
               "url": "https://www.nw.ch/_rte/anlass/92146"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans, Stans",
+              "date": "2026-10-23",
+              "url": "https://www.nw.ch/_rte/anlass/89423"
+            },
+            {
+              "label": "Zyklus-Show",
+              "detail": "Pfarreiheim, Stans, Stans",
+              "date": "2026-10-23",
+              "url": "https://www.nw.ch/_rte/anlass/88337"
+            },
+            {
+              "label": "Gemeinde-Apéro",
+              "detail": "Mehrzweckhalle, Emmetten, Emmetten",
+              "date": "2026-10-23",
+              "url": "https://www.nw.ch/_rte/anlass/83182"
+            },
+            {
+              "label": "Alteisensammlung",
+              "detail": "Sammelstelle Eimatt, Ennetmoos, Ennetmoos",
+              "date": "2026-10-24",
+              "url": "https://www.nw.ch/_rte/anlass/89048"
+            },
+            {
+              "label": "Café Zwischenhalt",
+              "detail": "Hinter-Rotzberg 1, Ennetmoos, Ennetmoos",
+              "date": "2026-10-24",
+              "url": "https://www.nw.ch/_rte/anlass/94231"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/nidwalden/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "fr": {
       "canton": "NW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "61",
+          "value": "57",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,48 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "FMG Messe Oeltrotte",
-              "detail": "Alterszentrum Oeltrotte, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/86065"
-            },
-            {
-              "label": "Queer-Stamm Stans",
-              "detail": "Steiböckli, Stans, Stans",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/91150"
-            },
-            {
-              "label": "begegnen und bewegen",
-              "detail": "Treffpunkt vor Muttergotteskapelle, Stans, Stans",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/89779"
-            },
-            {
-              "label": "Informationsveranstaltung «Aktuelles aus Ennetbürgen»",
-              "detail": "Mehrzweckhalle, Ennetbürgen, Ennetbürgen",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/82603"
-            },
-            {
-              "label": "Stiftung Lebensraum Gebirge: Archäologie in Stansstad",
-              "detail": "Herrenhaus Grafenort, Stansstad",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/events/knowledge/grafenort/stiftung-lebensraum-gebirge-archaeologie-in-stansstad_AeZL7cX"
-            },
-            {
-              "label": "Lasertraining Rütlischiessen",
-              "detail": "MZA Steini, Dallenwil, Dallenwil — en cours, dernier jour : 27 octobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.nw.ch/_rte/anlass/93010"
-            },
-            {
-              "label": "Pilze am Wegrand",
-              "detail": "Culinarium Alpinum, Stans — en cours, dernier jour : 23 octobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
-            },
             {
               "label": "Fondue-Abend auf dem Stanserhorn",
               "detail": "Drehrestaurant Stanserhorn, Stans, Stans",
@@ -402,15 +360,57 @@
               "url": "https://www.nw.ch/_rte/anlass/90616"
             },
             {
+              "label": "Lasertraining Rütlischiessen",
+              "detail": "MZA Steini, Dallenwil, Dallenwil — en cours, dernier jour : 27 octobre 2026",
+              "date": "2026-10-22",
+              "url": "https://www.nw.ch/_rte/anlass/93010"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans — en cours, dernier jour : 23 octobre 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/pilze-am-wegrand/"
+            },
+            {
               "label": "Öffentliche Führung: Culinarium Alpinum",
               "detail": "Culinarium Alpinum, Stans, Stans",
               "date": "2026-10-23",
               "url": "https://www.nw.ch/_rte/anlass/92146"
+            },
+            {
+              "label": "Pilze am Wegrand",
+              "detail": "Culinarium Alpinum, Stans, Stans",
+              "date": "2026-10-23",
+              "url": "https://www.nw.ch/_rte/anlass/89423"
+            },
+            {
+              "label": "Zyklus-Show",
+              "detail": "Pfarreiheim, Stans, Stans",
+              "date": "2026-10-23",
+              "url": "https://www.nw.ch/_rte/anlass/88337"
+            },
+            {
+              "label": "Gemeinde-Apéro",
+              "detail": "Mehrzweckhalle, Emmetten, Emmetten",
+              "date": "2026-10-23",
+              "url": "https://www.nw.ch/_rte/anlass/83182"
+            },
+            {
+              "label": "Alteisensammlung",
+              "detail": "Sammelstelle Eimatt, Ennetmoos, Ennetmoos",
+              "date": "2026-10-24",
+              "url": "https://www.nw.ch/_rte/anlass/89048"
+            },
+            {
+              "label": "Café Zwischenhalt",
+              "detail": "Hinter-Rotzberg 1, Ennetmoos, Ennetmoos",
+              "date": "2026-10-24",
+              "url": "https://www.nw.ch/_rte/anlass/94231"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/nidwald/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/nidwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     }
   }
 }

@@ -15,6 +15,9 @@ const blogMetaCantonJuFr: Record<string, string> = {
     'blog.article.giura-formazione-postobbligatoria-2026.title': 'Jura : le Gouvernement propose des révisions concernant la formation postobligatoire et le financement',
     'blog.article.giura-formazione-postobbligatoria-2026.excerpt': 'Deux projets de révision transmis au Parlement Quatre domaines : formation, restaurants scolaires, langues, admissions La mesure n° 506 figure dans le Plan',
     'blog.article.giura-formazione-postobbligatoria-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.stockmar-ritardo-cantiere-2027.title': 'Retard chantier Stockmar : rentrée des élèves en janvier 2028',
+    'blog.article.stockmar-ritardo-cantiere-2027.excerpt': 'Le retour des élèves est prévu en janvier 2028 Le chantier accumule quatre mois de retard Les travaux seront achevés en décembre 2027 Le budget global reste',
+    'blog.article.stockmar-ritardo-cantiere-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonJuFr;

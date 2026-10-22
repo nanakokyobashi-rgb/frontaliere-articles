@@ -15,6 +15,9 @@ const blogMetaCantonJuEn: Record<string, string> = {
     'blog.article.giura-formazione-postobbligatoria-2026.title': 'Jura: Government proposes revisions to post-compulsory education and funding',
     'blog.article.giura-formazione-postobbligatoria-2026.excerpt': 'Two revision projects submitted to Parliament Four areas: education, school restaurants, languages, admissions Measure No.',
     'blog.article.giura-formazione-postobbligatoria-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.stockmar-ritardo-cantiere-2027.title': 'Stockmar site delay: return of students in January 2028',
+    'blog.article.stockmar-ritardo-cantiere-2027.excerpt': 'Students are expected to return in January 2028 The construction site is four months late The works will be completed in December 2027 Global budget remains CHF',
+    'blog.article.stockmar-ritardo-cantiere-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonJuEn;
