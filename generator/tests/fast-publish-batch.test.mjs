@@ -46,6 +46,7 @@ test('il trigger push conserva tutti gli ID dei body cambiati', () => {
   assert.doesNotMatch(resolveStep, /one commit changes both article sections/);
   assert.match(resolveStep, /EVENT_NAME.*workflow_dispatch.*section.*body_section/);
   assert.match(resolveStep, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);
+  assert.match(resolveStep, /engine\/shared\/\*-article-canonical-overrides\.json/);
   assert.match(resolveStep, /if \[ "\$\{#ids\[@\]\}" -eq 0 \]; then[\s\S]*git diff --name-only "\$before" HEAD/);
   assert.doesNotMatch(resolveStep, /head\s+-1/);
 });
@@ -81,10 +82,42 @@ test('le superfici articolo oltre il body producono solo gli ID realmente cambia
   assert.deepEqual(plan, [{ section: 'frontaliere', ids: ['alpha', 'beta'], bootstrap: false }]);
 });
 
+test('la pianificazione slug legge solo la mappa nominata, non i motivi di fallback', () => {
+  const registered = new Set(['alpha']);
+  const previous = new Map([
+    ['content/blog-articles-data.ts', "export const ARTICLES = [{ id: 'alpha' }];\n"],
+    ['content/routerBlogData.ts', `export const BLOG_SLUGS = {
+  alpha: { it: 'alpha-it', en: 'alpha-en', de: 'alpha-de', fr: 'alpha-fr' },
+};
+export const BLOG_SLUG_FALLBACK_REASONS = {
+  alpha: { reason: 'old' },
+};
+`],
+  ]);
+  const current = new Map([
+    ['content/blog-articles-data.ts', "export const ARTICLES = [{ id: 'alpha' }];\n"],
+    ['content/routerBlogData.ts', `export const BLOG_SLUGS = {
+  alpha: { it: 'alpha-it', en: 'alpha-en', de: 'alpha-de', fr: 'alpha-fr' },
+};
+export const BLOG_SLUG_FALLBACK_REASONS = {
+  alpha: { reason: 'new' },
+};
+`],
+  ]);
+  const plan = articlePublishPlan(['content/routerBlogData.ts'], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => current.get(rel) ?? null,
+  });
+
+  assert.deepEqual(plan, []);
+});
+
 test('una canonical override cambiata risveglia solo l articolo che possiede lo slug', () => {
   const registered = new Set(['alpha', 'beta']);
   const registry = "export const ARTICLES = [{ id: 'alpha' }, { id: 'beta' }];\n";
-  const slugs = "export const BLOG_SLUGS = {\n  'alpha': { it: 'alpha-it', en: 'alpha-en' },\n  'beta': { it: 'beta-it', en: 'beta-en' },\n};\n";
+  const slugs = "export const BLOG_SLUGS = {\n  'alpha': { it: 'alpha-it', en: 'alpha-en', de: 'alpha-de', fr: 'alpha-fr' },\n  'beta': { it: 'beta-it', en: 'beta-en', de: 'beta-de', fr: 'beta-fr' },\n};\n";
   const previous = new Map([
     ['content/blog-articles-data.ts', registry],
     ['content/routerBlogData.ts', slugs],
@@ -196,7 +229,11 @@ test('il publisher rifiuta ID non risolti e riunisce tutte le pagine nel summary
   assert.match(publisher, /bridgeIds = entries\.filter\(\(entry\) => entry\.flatPaths\[locale\]\)/);
   assert.match(publisher, /articlePaths = entries\.map/);
   assert.match(publisher, /bridgePaths = entries\.map/);
-  assert.match(publisher, /paths: \[\.\.\.articlePaths, \.\.\.bridgePaths, \.\.\.hubPaths\]/);
+  assert.match(publisher, /writeLegacySlugRedirects/);
+  assert.match(publisher, /PUBLISH_BEFORE/);
+  assert.match(publisher, /buildFlatBridgeFromSibling/);
+  assert.match(publisher, /redirectPaths = legacySlugRedirects\[locale\]/);
+  assert.match(publisher, /paths: \[\.\.\.articlePaths, \.\.\.bridgePaths, \.\.\.redirectPaths, \.\.\.hubPaths\]/);
   assert.match(publisher, /url: urls\[0\],[\s\S]*urls,/);
   assert.match(publisher, /imagePostcondition/);
   assert.match(pipeline, /filterEntriesByImagePostcondition/);

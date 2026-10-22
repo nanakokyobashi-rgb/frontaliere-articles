@@ -132,11 +132,15 @@ import { fileURLToPath } from 'node:url';
 // BreadcrumbList `name` — structured data served to crawlers, not to a browser
 // that would swallow them.
 import { heroCdnUploads, renderSectionArticlePipeline } from './lib/article-render-pipeline.mjs';
+import { sectionSourceSurfaces } from './lib/corpus-sections.mjs';
+import { parseArticleUrlSlugs } from '../engine/shared/articleReaderSource.mjs';
+import { buildFlatBridgeFromSibling } from '../engine/flatHtmlRedirect.ts';
 // Sezioni valide e shard Pages vengono dal core (lista ATTIVA), come in
 // fast-publish-article.yml: niente coppia frontaliere/svizzera scritta a mano.
 import { shardOf } from './ci/fast-publish-section.mjs';
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const ARTICLE_LOCALES = ['it', 'en', 'de', 'fr'];
 
 function corpusContentRevision() {
   const epoch = execFileSync('git', ['show', '-s', '--format=%ct', 'HEAD'], { cwd: ROOT_DIR, encoding: 'utf8' }).trim();
@@ -150,6 +154,121 @@ function readPersistentGenericFallbacks(file) {
   const released = Array.isArray(payload) ? payload : payload?.releasedArticles;
   if (!Array.isArray(released)) throw new Error(`${file} has no releasedArticles array`);
   return released;
+}
+
+function gitSourceAtRevision(revision, rel) {
+  try {
+    return execFileSync('git', ['show', `${revision}:${rel}`], {
+      cwd: ROOT_DIR,
+      encoding: 'utf8',
+      maxBuffer: 64 * 1024 * 1024,
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+  } catch (error) {
+    const diagnostic = String(error?.stderr ?? '');
+    if (error?.status === 128 && /does not exist in|exists on disk, but not in/.test(diagnostic)) return null;
+    throw new Error(`git show ${revision}:${rel} failed: ${diagnostic.trim() || error?.message || error}`);
+  }
+}
+
+function currentCorpusSource(rel) {
+  try {
+    return fs.readFileSync(path.join(ROOT_DIR, rel), 'utf8');
+  } catch (error) {
+    if (error?.code !== 'ENOENT') throw error;
+    // The resolve job deliberately uses a sparse checkout. The publisher can
+    // still read the committed source blob when the slug module was omitted
+    // from the working tree.
+    return gitSourceAtRevision('HEAD', rel);
+  }
+}
+
+function slugMapAtRevision(section, revision) {
+  const surfaces = sectionSourceSurfaces(section);
+  const source = revision === 'HEAD'
+    ? currentCorpusSource(surfaces.slugFile)
+    : gitSourceAtRevision(revision, surfaces.slugFile);
+  if (source === null) return null;
+  return parseArticleUrlSlugs(source, surfaces.slugExport);
+}
+
+function assertSlugPathSegment(slug, label) {
+  if (typeof slug !== 'string' || !slug || slug === '.' || slug === '..' || /[/\\\0]/.test(slug)) {
+    throw new Error(`slug redirect ${label}: valore non valido per un segmento URL`);
+  }
+}
+
+/**
+ * Keep a changed article's old localized paths alive as noindex redirects to
+ * the new canonical page. The incremental shard push is intentionally
+ * append/replace-only, so merely rendering the new slug leaves the old HTML
+ * live forever. This reads the push base only for push events; manual dispatch
+ * has no trusted previous revision and therefore emits no redirect guess.
+ */
+function writeLegacySlugRedirects({ section, entries, hubResult, distDir }) {
+  const before = String(process.env.PUBLISH_BEFORE ?? '').trim();
+  const empty = Object.fromEntries(ARTICLE_LOCALES.map((locale) => [locale, []]));
+  if (!before || /^0+$/.test(before)) return empty;
+
+  const previous = slugMapAtRevision(section, before);
+  if (previous === null) return empty;
+  const current = slugMapAtRevision(section, 'HEAD');
+  if (current === null) throw new Error(`slug redirect: mappa corrente assente per ${section}`);
+
+  const occupied = new Set();
+  for (const entry of entries) {
+    for (const rel of [...Object.values(entry.paths || {}), ...Object.values(entry.flatPaths || {})]) {
+      if (rel) occupied.add(rel);
+    }
+  }
+  for (const rel of Object.values(hubResult?.pathsByLocale || {}).flat()) {
+    if (rel) occupied.add(rel);
+  }
+
+  const written = Object.fromEntries(ARTICLE_LOCALES.map((locale) => [locale, []]));
+  const seen = new Set();
+  for (const entry of entries) {
+    const oldSlugs = previous[entry.articleId];
+    const newSlugs = current[entry.articleId];
+    if (!oldSlugs || !newSlugs) continue;
+    for (const locale of ARTICLE_LOCALES) {
+      const oldSlug = oldSlugs[locale];
+      const newSlug = newSlugs[locale];
+      if (!oldSlug || !newSlug || oldSlug === newSlug) continue;
+      assertSlugPathSegment(oldSlug, `${entry.articleId}/${locale}/old`);
+      assertSlugPathSegment(newSlug, `${entry.articleId}/${locale}/new`);
+
+      const currentIndexPath = entry.paths?.[locale];
+      if (!currentIndexPath) continue;
+      const currentSuffix = `/${newSlug}/index.html`;
+      if (!currentIndexPath.endsWith(currentSuffix)) {
+        throw new Error(`slug redirect: il path corrente di ${entry.articleId}/${locale} non corrisponde allo slug corrente`);
+      }
+      const prefix = currentIndexPath.slice(0, -currentSuffix.length);
+      const oldIndexPath = `${prefix}/${oldSlug}/index.html`;
+      const oldFlatPath = `${prefix}/${oldSlug}.html`;
+      for (const rel of [oldIndexPath, oldFlatPath]) {
+        if (occupied.has(rel)) {
+          throw new Error(`slug redirect collisione: ${rel} è già occupato da una pagina corrente`);
+        }
+        if (seen.has(rel)) continue;
+        seen.add(rel);
+        const currentHtmlPath = path.join(distDir, currentIndexPath);
+        if (!fs.existsSync(currentHtmlPath)) {
+          throw new Error(`slug redirect: pagina corrente mancante ${currentIndexPath}`);
+        }
+        const redirectHtml = buildFlatBridgeFromSibling(
+          fs.readFileSync(currentHtmlPath, 'utf8'),
+          entry.urls[locale],
+        );
+        const destination = path.join(distDir, rel);
+        fs.mkdirSync(path.dirname(destination), { recursive: true });
+        fs.writeFileSync(destination, redirectHtml, 'utf8');
+        written[locale].push(rel);
+      }
+    }
+  }
+  return written;
 }
 
 function parseArgs(argv) {
@@ -238,6 +357,12 @@ async function main() {
     aggregatePagesAllowed,
   } = pipeline;
   const publishedIds = [...new Set(entries.map((entry) => entry.articleId))];
+  const legacySlugRedirects = writeLegacySlugRedirects({
+    section: args.section,
+    entries,
+    hubResult,
+    distDir,
+  });
 
   // ── Summary JSON for stream B (shard push) / stream C (workflow) ──
   const sectionShardKey = args.shardKey;
@@ -258,6 +383,7 @@ async function main() {
     const bridgeIds = entries.filter((entry) => entry.flatPaths[locale]).map((entry) => entry.articleId);
     const articlePaths = entries.map((entry) => entry.paths[locale]).filter(Boolean);
     const bridgePaths = entries.map((entry) => entry.flatPaths[locale]).filter(Boolean);
+    const redirectPaths = legacySlugRedirects[locale] ?? [];
     const hubPaths = hubResult.pathsByLocale[locale] ?? [];
     const urls = entries.map((entry) => entry.urls[locale]).filter(Boolean);
     return {
@@ -267,8 +393,9 @@ async function main() {
       bridgeIds,
       articlePaths,
       bridgePaths,
+      redirectPaths,
       hubPaths,
-      paths: [...articlePaths, ...bridgePaths, ...hubPaths],
+      paths: [...articlePaths, ...bridgePaths, ...redirectPaths, ...hubPaths],
       url: urls[0],
       urls,
     };

@@ -52,6 +52,7 @@ import { fileURLToPath } from 'node:url';
 
 import { activeCorpusCoreEntries, activeSourceSections, sectionForBodyPath, sectionSourceSurfaces } from '../lib/corpus-sections.mjs';
 import { articleRegistryObjectBodies, articleRegistryObjectFields } from '../../engine/shared/articleRegistryObjectBodies.mjs';
+import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { EDGE_SECTION_REGISTRY_URL, validateEdgeSectionRegistry } from '../lib/section-registry.mjs';
 import { findAllSeoEntryMatches } from '../lib/seo-entry.mjs';
@@ -171,28 +172,24 @@ function metaRecords(source) {
   return records;
 }
 
-function slugRecordMap(source, ids) {
+function slugRecordMap(source, ids, slugExport) {
   const records = new Map();
   if (source === null) return records;
-  // The generated slug map keeps one article object per line. Collect all
-  // entry starts once, then slice to the next start; probing the whole file
-  // once per article would turn a 4k-entry map into an avoidable O(n²) scan.
-  const entryRe = /^[\t ]*(['"])([^'"]+)\1\s*:\s*\{/gm;
-  const matches = [...source.matchAll(entryRe)];
-  for (let index = 0; index < matches.length; index += 1) {
-    const match = matches[index];
-    const id = match[2];
-    if (!ids.has(id)) continue;
-    const end = matches[index + 1]?.index ?? source.length;
-    records.set(id, source.slice(match.index, end));
+  // Read only the named slug export. The same source file also carries
+  // BLOG_SLUG_FALLBACK_REASONS/SWISS_SLUG_FALLBACK_REASONS; scanning every
+  // object-shaped entry lets a fallback-reason record overwrite the real slug
+  // record for the same article id and can wake the wrong publisher target.
+  const slugMap = parseArticleUrlSlugs(source, slugExport);
+  for (const [id, locales] of Object.entries(slugMap)) {
+    if (ids.has(id)) records.set(id, JSON.stringify(locales));
   }
   return records;
 }
 
-function slugRecords(previousSource, nextSource, ids) {
+function slugRecords(previousSource, nextSource, ids, slugExport) {
   return {
-    previous: slugRecordMap(previousSource, ids),
-    next: slugRecordMap(nextSource, ids),
+    previous: slugRecordMap(previousSource, ids, slugExport),
+    next: slugRecordMap(nextSource, ids, slugExport),
   };
 }
 
@@ -379,7 +376,12 @@ export function articlePublishPlan(
     } else if (kind === 'slug') {
       const registryBefore = registryRecords(sourceText(readPreviousSource, section.registryFile));
       const registryAfter = registryRecords(sourceText(readCurrentSource, section.registryFile));
-      const slug = slugRecords(previous, next, new Set([...registryBefore.keys(), ...registryAfter.keys()]));
+      const slug = slugRecords(
+        previous,
+        next,
+        new Set([...registryBefore.keys(), ...registryAfter.keys()]),
+        section.slugExport,
+      );
       changedIds = changedRecordIds(slug.previous, slug.next);
     } else if (kind === 'canonical') {
       const registryBefore = registryRecords(sourceText(readPreviousSource, section.registryFile));
@@ -389,6 +391,7 @@ export function articlePublishPlan(
         sourceText(readPreviousSource, section.slugFile),
         sourceText(readCurrentSource, section.slugFile),
         candidateIds,
+        section.slugExport,
       );
       changedIds = [...canonicalOverrideChangedIds(
         canonicalOverrideRecords(previous),

@@ -272,7 +272,7 @@ jobs:
             has_content=false
             while IFS= read -r changed_path; do
               case "$changed_path" in
-                content/*|public/images/*) has_content=true; break ;;
+                content/*|public/images/*|engine/shared/*-article-canonical-overrides.json) has_content=true; break ;;
               esac
             done <<< "$changed"
             if [ "$has_content" != true ]; then
@@ -644,6 +644,7 @@ jobs:
         if: needs.resolve.outputs.skip != 'true'
         env:
           ARTICLE_IDS_JSON: ${{ toJSON(matrix.target.ids) }}
+          PUBLISH_BEFORE: ${{ github.event.before }}
         run: |
           set -euo pipefail
           revision="$(git show -s --format=%ct HEAD).$(git rev-parse --short=12 HEAD)"
