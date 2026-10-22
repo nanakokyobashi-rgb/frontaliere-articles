@@ -3626,9 +3626,9 @@
       "adaptationIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/14418",
       "reason": "Il wrapper CORPUS vive in `generator/scripts/lib/` e il gemello SITE in `scripts/lib/`, quindi i due import del parser condiviso hanno radici diverse: `../../../engine/shared/articleStaticSource.mjs` qui e `../../packages/articles/engine/shared/articleStaticSource.mjs` nel sito. Le API `readStaticMetaFields` e `readStaticMetaFieldEntries` leggono moduli completi tramite il parser AST canonico, preservando l’ordine dei moduli e delle proprietà. Le API RegExp e fragment restano per gli attuali writer a source-span; i caller value-only vengono migrati separatamente. Il helper arriva tramite il mirror standard del SITE.",
       "baseline": {
-        "site": "782afafe9c39e70f",
-        "corpus": "782afafe9c39e70f",
-        "alignedAt": "2026-10-21"
+        "site": "b30f8e1ed976177e",
+        "corpus": "8ec82086fb7062ae",
+        "alignedAt": "2026-10-22"
       }
     },
     {
