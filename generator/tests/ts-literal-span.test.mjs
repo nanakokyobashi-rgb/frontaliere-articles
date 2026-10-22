@@ -188,6 +188,17 @@ test('matchingDelimiter non tratta le parole membro come prefissi regex', () => 
   }
 });
 
+test('matchingDelimiter conserva il prefisso regex dopo commenti complessi', () => {
+  for (const keyword of ['break', 'continue', 'debugger', 'default']) {
+    const source = `{ value: ${keyword} /* marker /* interno */ /}/u, after: 'resta' }`;
+    assert.equal(
+      matchingDelimiter(source, 0),
+      source.lastIndexOf('}'),
+      `${keyword}: la graffa nel regex non deve chiudere l oggetto`,
+    );
+  }
+});
+
 test('commenti e stringhe che imitano dichiarazioni non contano come duplicati', () => {
   const src = [
     '// export const IDS: string[] = [\'commento\'];',

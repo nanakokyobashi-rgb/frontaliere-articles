@@ -103,70 +103,23 @@ export function matchingDelimiter(src, openIdx) {
   if (!close) throw new Error(`matchingDelimiter: '${open}' non è un delimitatore di apertura`);
   let depth = 0;
   let quote = null;
-
-  const lineCommentStart = (lineStart, end) => {
-    let stringQuote = null;
-    for (let i = lineStart; i < end; i += 1) {
-      const ch = src[i];
-      if (stringQuote !== null) {
-        if (ch === '\\') { i += 1; continue; }
-        if (ch === stringQuote) stringQuote = null;
-        continue;
-      }
-      if (ch === "'" || ch === '"' || ch === '`') {
-        stringQuote = ch;
-        continue;
-      }
-      if (ch === '/' && src[i + 1] === '*') {
-        const close = src.indexOf('*/', i + 2);
-        if (close < 0 || close >= end) return -1;
-        i = close + 1;
-        continue;
-      }
-      if (ch === '/' && src[i + 1] === '/') return i;
-    }
-    return -1;
+  let previousToken = null;
+  let previousTokenWasMemberProperty = false;
+  const regexPrefixKeywords = new Set([
+    'return', 'throw', 'case', 'break', 'continue', 'debugger', 'default', 'delete', 'void',
+    'typeof', 'instanceof', 'in', 'of', 'yield', 'await', 'else', 'do',
+  ]);
+  const regexPrefixPunctuation = new Set([
+    '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>',
+  ]);
+  const markToken = (token, memberProperty = false) => {
+    previousToken = token;
+    previousTokenWasMemberProperty = memberProperty;
   };
-
-  const skipTriviaBackward = (from) => {
-    let cursor = from + 1;
-    while (cursor > openIdx) {
-      while (cursor > openIdx && /\s/.test(src[cursor - 1])) cursor -= 1;
-      if (cursor >= openIdx + 2 && src.slice(cursor - 2, cursor) === '*/') {
-        const commentStart = src.lastIndexOf('/*', cursor - 2);
-        if (commentStart < openIdx) return cursor;
-        cursor = commentStart;
-        continue;
-      }
-      const lineStart = Math.max(
-        openIdx,
-        src.lastIndexOf('\n', cursor - 1) + 1,
-        src.lastIndexOf('\r', cursor - 1) + 1,
-        src.lastIndexOf('\u2028', cursor - 1) + 1,
-        src.lastIndexOf('\u2029', cursor - 1) + 1,
-      );
-      const commentStart = lineCommentStart(lineStart, cursor);
-      if (commentStart >= lineStart) {
-        cursor = commentStart;
-        continue;
-      }
-      return cursor;
-    }
-    return cursor;
-  };
-
-  const canStartRegex = (idx) => {
-    let j = idx - 1;
-    while (j >= openIdx && /\s/.test(src[j])) j -= 1;
-    if (j < openIdx) return true;
-    const previous = src[j];
-    if ('([{=,:;!?&|+\-*%^~<>'.includes(previous)) return true;
-    let end = j;
-    while (j >= openIdx && /[A-Za-z_$]/.test(src[j])) j -= 1;
-    if (end === j) return false;
-    const memberPrefixEnd = skipTriviaBackward(j);
-    if (memberPrefixEnd > openIdx && src[memberPrefixEnd - 1] === '.') return false;
-    return /^(?:return|throw|case|break|continue|debugger|default|delete|void|typeof|instanceof|in|of|yield|await|else|do)$/.test(src.slice(j + 1, end + 1));
+  const canStartRegex = () => {
+    if (previousToken === null) return true;
+    if (previousTokenWasMemberProperty) return false;
+    return regexPrefixPunctuation.has(previousToken) || regexPrefixKeywords.has(previousToken);
   };
 
   const skipRegex = (start) => {
@@ -192,7 +145,10 @@ export function matchingDelimiter(src, openIdx) {
     const ch = src[i];
     if (quote !== null) {
       if (ch === '\\') { i += 1; continue; }
-      if (ch === quote) quote = null;
+      if (ch === quote) {
+        quote = null;
+        markToken('literal');
+      }
       continue;
     }
     if (ch === '/' && src[i + 1] === '/') {
@@ -207,13 +163,34 @@ export function matchingDelimiter(src, openIdx) {
       i = end + 1;
       continue;
     }
-    if (ch === '/' && canStartRegex(i)) {
+    if (ch === '/' && canStartRegex()) {
       const end = skipRegex(i);
       if (end === -1) return -1;
+      markToken('literal');
       i = end;
       continue;
     }
     if (ch === "'" || ch === '"' || ch === '`') { quote = ch; continue; }
+    if (/\s/.test(ch)) continue;
+    if (/[A-Za-z_$]/.test(ch)) {
+      const word = /^[A-Za-z_$][\w$]*/.exec(src.slice(i))[0];
+      markToken(word, previousToken === '.' || previousToken === '?.');
+      i += word.length - 1;
+      continue;
+    }
+    if (/[0-9]/.test(ch)) {
+      let end = i + 1;
+      while (/[A-Za-z0-9_$]/.test(src[end] || '')) end += 1;
+      markToken('literal');
+      i = end - 1;
+      continue;
+    }
+    if (ch === '?' && src[i + 1] === '.') {
+      markToken('?.');
+      i += 1;
+      continue;
+    }
+    markToken(ch);
     if (ch === open) depth += 1;
     else if (ch === close) {
       depth -= 1;

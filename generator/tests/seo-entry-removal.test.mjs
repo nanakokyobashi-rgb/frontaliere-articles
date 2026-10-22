@@ -151,6 +151,20 @@ test('il resolver SEO non tratta le parole membro come prefissi regex', () => {
   }
 });
 
+test('il resolver SEO conserva il prefisso regex dopo commenti complessi', () => {
+  for (const keyword of ['break', 'continue', 'debugger', 'default']) {
+    const source = [
+      'export const SEO = {',
+      `  'blog-regex-${keyword}': { value: ${keyword} /* marker /* interno */ /}/u, after: 'resta' },`,
+      '};',
+    ].join('\n');
+    const [match] = findSeoEntryMatches(source, `regex-${keyword}`, 'fixture.ts');
+    assert.ok(match, `${keyword}: entry non trovata`);
+    assert.match(source.slice(match.index, match.closeIdx + 1), /after: 'resta'/u, keyword);
+    assert.equal(source[match.closeIdx], '}', keyword);
+  }
+});
+
 test('la scansione fallisce esplicitamente su stringa, template e commento non chiusi', () => {
   const quoteSource = [
     'export const SEO = {',
