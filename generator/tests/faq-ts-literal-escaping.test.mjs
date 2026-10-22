@@ -284,3 +284,11 @@ test('escapeForSingleQuoteTS e unescapeForSingleQuoteTS sono inversi', () => {
     assert.equal(unescapeForSingleQuoteTS(escapeForSingleQuoteTS(s)), expected, `round-trip rotto su: ${s}`);
   }
 });
+
+test('escapeForSingleQuoteTS protegge i separatori Unicode di riga del TypeScript', () => {
+  const source = `prima${String.fromCharCode(0x2028)}mezzo${String.fromCharCode(0x2029)}dopo`;
+  const escaped = escapeForSingleQuoteTS(source);
+  assert.match(escaped, /\\u2028/);
+  assert.match(escaped, /\\u2029/);
+  assert.equal(unescapeForSingleQuoteTS(escaped), source);
+});

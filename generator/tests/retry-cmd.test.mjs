@@ -29,7 +29,14 @@ const WORKFLOWS = path.resolve(ROOT, '.github/workflows');
  * Esegue il wrapper su un comando `flaky` stubbato, che fallisce le prime
  * `failTimes` chiamate e registra gli argomenti di ognuna.
  */
-function runWith({ failTimes, args = ['flaky'], attempts = 3, cmdArgs = [] }) {
+function runWith({
+  failTimes,
+  args = ['flaky'],
+  attempts = 3,
+  cmdArgs = [],
+  failureMessage = 'flaky: ETIMEDOUT',
+  failureCode = 7,
+}) {
   const dir = mkdtempSync(path.join(tmpdir(), 'retry-cmd-'));
   const counter = path.join(dir, 'calls');
   const argsLog = path.join(dir, 'args');
@@ -44,8 +51,8 @@ n=$((n + 1))
 echo "$n" > "${counter}"
 echo "$@" >> "${argsLog}"
 if [ "$n" -le ${failTimes} ]; then
-  echo "flaky: ETIMEDOUT" >&2
-  exit 7
+  printf '%s\\n' ${JSON.stringify(failureMessage)} >&2
+  exit ${failureCode}
 fi
 exit 0
 `,
@@ -97,6 +104,36 @@ test('un guasto persistente fallisce davvero, esaurite le attempt', () => {
   assert.equal(code, 1, 'un guasto genuino non deve essere ingoiato');
   assert.equal(calls, 3, 'deve fermarsi al numero di tentativi configurato');
   assert.match(out, /fallito dopo 3 tentativi/);
+});
+
+test('un errore deterministico di parsing non viene ritentato', () => {
+  const { code, calls, out } = runWith({
+    failTimes: 99,
+    attempts: 3,
+    failureMessage: 'Error: Unterminated delimiter in static article body source',
+  });
+  assert.notEqual(code, 0);
+  assert.equal(calls, 1, 'un errore di parsing deve fermarsi al primo tentativo');
+  assert.doesNotMatch(out, /riprovo/);
+  assert.match(out, /non transitorio/);
+});
+
+test('un HTTP 503 resta ritentabile', () => {
+  const { code, calls, out } = runWith({
+    failTimes: 1,
+    failureMessage: 'HTTP 503 Service Unavailable',
+  });
+  assert.equal(code, 0, `il 503 doveva essere ritentato, invece:\n${out}`);
+  assert.equal(calls, 2);
+});
+
+test('un HTTP 429 resta ritentabile', () => {
+  const { code, calls, out } = runWith({
+    failTimes: 1,
+    failureMessage: 'HTTP 429 Too Many Requests',
+  });
+  assert.equal(code, 0, `il 429 doveva essere ritentato, invece:\n${out}`);
+  assert.equal(calls, 2);
 });
 
 test('ogni argomento e ogni flag arrivano al comando, a ogni tentativo', () => {

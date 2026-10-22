@@ -52,6 +52,7 @@ on:
       # The article-body preflight is part of the publication chain. Changes
       # to its implementation or parser helpers must rerun this publisher.
       - 'scripts/ci/check-blog-body-links.mjs'
+      - 'scripts/ci/check-blog-body-syntax.mjs'
       - 'scripts/lib/article-link-contract.mjs'
       - 'scripts/lib/typescript-expression-scanner.mjs'
       - 'scripts/lib/rss-feed-body-adapter.mjs'
@@ -865,6 +866,7 @@ jobs:
             generator/scripts/lib/corpus-paths.mjs
             host/cantonSectionsBootstrap.mjs
             scripts/ci/check-blog-body-links.mjs
+            scripts/ci/check-blog-body-syntax.mjs
             scripts/lib/article-link-contract.mjs
             scripts/lib/typescript-expression-scanner.mjs
             scripts/lib/rss-feed-body-adapter.mjs

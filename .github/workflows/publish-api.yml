@@ -142,6 +142,7 @@ on:
       # The shared TypeScript scanner bounds expressions in article-body
       # extraction; changing it can change the published API payload.
       - 'scripts/lib/typescript-expression-scanner.mjs'
+      - 'scripts/ci/check-blog-body-syntax.mjs'
       - 'scripts/lib/rss-feed-body-adapter.mjs'
       # build-blog-index.mjs also emits the cover credits
       # (data/image-credits-<section>.json and data/image-credits-blog.json)
@@ -181,6 +182,7 @@ concurrency:
 
 permissions:
   contents: write
+  actions: read
   pages: write
   id-token: write
   # `issues: write` is the GITHUB_TOKEN fallback for the "Alert on shadowed
@@ -411,6 +413,7 @@ jobs:
         env:
           BEFORE: ${{ github.event.before }}
           EVENT_NAME: ${{ github.event_name }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -uo pipefail
           scan_mode="full"
@@ -441,6 +444,7 @@ jobs:
               generator/scripts/lib/corpus-paths.mjs
               host/cantonSectionsBootstrap.mjs
               scripts/ci/check-blog-body-links.mjs
+              scripts/ci/check-blog-body-syntax.mjs
               scripts/lib/article-link-contract.mjs
               scripts/lib/typescript-expression-scanner.mjs
               scripts/lib/rss-feed-body-adapter.mjs
@@ -455,7 +459,35 @@ jobs:
               fi
             fi
           fi
+          # A failed publisher may have left a malformed body outside this
+          # push's diff. Only a confirmed green completed run makes the cheap
+          # changed-files optimization safe.
+          if [ "$scan_mode" = "changed" ]; then
+            scan_reason="changed-push"
+          else
+            scan_reason="diff-unavailable"
+          fi
+          last_publish_conclusion=""
+          if ! last_publish_conclusion=$(gh run list \
+            --workflow publish-api.yml \
+            --branch main \
+            --limit 20 \
+            --json databaseId,status,conclusion \
+            --jq "[.[] | select(.databaseId != ${GITHUB_RUN_ID} and .status == \"completed\")][0].conclusion" 2>/dev/null); then
+            last_publish_conclusion="unavailable"
+          fi
+          if [ "$last_publish_conclusion" != "success" ]; then
+            scan_mode="full"
+            if [ "$last_publish_conclusion" = "failure" ]; then
+              scan_reason="last-publish-failed"
+              echo "::warning::l'ultima run completata di publish-api su main è fallita: preflight completo del corpus"
+            else
+              scan_reason="last-publish-status-unavailable"
+              echo "::warning::non posso confermare una run publish-api verde precedente (conclusione: $last_publish_conclusion): preflight completo del corpus"
+            fi
+          fi
           echo "scan-mode=$scan_mode" >> "$GITHUB_OUTPUT"
+          echo "scan-reason=$scan_reason" >> "$GITHUB_OUTPUT"
           echo "changed-files-path=$changed_files_path" >> "$GITHUB_OUTPUT"
 
       - name: Preflight — i corpi articolo devono parsare come TypeScript

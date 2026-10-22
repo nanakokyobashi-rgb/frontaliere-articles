@@ -12,6 +12,7 @@ import { repairLegacyDoubleEscapedBreaks, tsStringEscapesWithNewlineAs } from '.
 export const ARTICLE_BODY_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 export const MAX_ARTICLE_BODY_FIELDS = 20;
 export const REQUIRED_ARTICLE_BODY_FIELDS = Object.freeze(['body1', 'body2', 'body3']);
+export const MAX_ARTICLE_BODY_QUARANTINES = 3;
 
 const BODY_FIELD_RE = /^body(?:[1-9]|1[0-9]|20)$/u;
 const ARTICLE_KEY_RE = /^blog\.article\.([^'"\r\n]+)\.(body\d+|faq)$/u;
@@ -373,9 +374,43 @@ function readJson(filePath, description) {
   }
 }
 
+function quarantineReason(error) {
+  const message = error?.message || String(error);
+  return message.replace(/\s+/gu, ' ').trim().slice(0, 400) || 'errore non specificato';
+}
+
+export function assertArticleBodyQuarantineBudget(totals, limit = MAX_ARTICLE_BODY_QUARANTINES) {
+  const quarantined = Number(totals?.quarantined);
+  if (!Number.isInteger(quarantined) || quarantined < 0) {
+    throw new Error(`article body API: conteggio quarantena non valido: ${String(totals?.quarantined)}`);
+  }
+  if (quarantined > limit) {
+    throw new Error(
+      `article body API: soglia quarantena superata (${quarantined} > ${limit}); ` +
+        'rifiuto la superficie invece di pubblicare un set troppo incompleto',
+    );
+  }
+}
+
+export function appendArticleBodyQuarantineSummary(quarantined, summaryPath = process.env.GITHUB_STEP_SUMMARY) {
+  if (!summaryPath || !Array.isArray(quarantined) || quarantined.length === 0) return;
+  const lines = [
+    '## Article body quarantine',
+    '',
+    `Articoli esclusi dalla superficie: **${quarantined.length}**. Soglia fail-closed: **${MAX_ARTICLE_BODY_QUARANTINES}**.`,
+    '',
+    '| Sorgente | Motivo |',
+    '| --- | --- |',
+    ...quarantined.map(({ source, reason }) => `| \`${source}\` | ${reason.replace(/\|/gu, '\\|')} |`),
+    '',
+  ];
+  fs.appendFileSync(summaryPath, `${lines.join('\n')}\n`, 'utf8');
+}
+
 /**
  * Emit section/locale indexes and payloads. A missing source file gets an explicit
- * index row; a present but invalid file stops the build.
+ * index row; a present but unparseable/invalid body is quarantined and excluded
+ * from payload output so one bad source cannot discard the whole surface.
  */
 export function emitArticleBodyApi({
   root,
@@ -398,7 +433,8 @@ export function emitArticleBodyApi({
     idsBySection.set(section.section, validatedRegistryIds(section.section, registry));
   }
   const capabilitySections = {};
-  const totals = { expected: 0, available: 0, missing: 0 };
+  const totals = { expected: 0, available: 0, missing: 0, quarantined: 0 };
+  const quarantined = [];
   for (const section of sections) {
     const isPublic = publicSet.has(section.section);
     const ids = idsBySection.get(section.section);
@@ -408,6 +444,7 @@ export function emitArticleBodyApi({
       const entries = {};
       let availableCount = 0;
       let missingCount = 0;
+      let quarantinedCount = 0;
       if (isPublic && ids.length > 0) {
         const sourceLocaleDir = path.join(root, section.bodyDir, locale);
         if (!fs.existsSync(sourceLocaleDir)) {
@@ -424,26 +461,44 @@ export function emitArticleBodyApi({
           continue;
         }
         const meta = metaBySectionLocale?.[section.section]?.[locale];
-        const rawPayload = buildArticleBodyPayload({
-          section: section.section,
-          locale,
-          id,
-          meta,
-          source: fs.readFileSync(sourcePath, 'utf8'),
-        });
-        const cleanPayloadInput = sanitize({
-          schemaVersion: rawPayload.schemaVersion,
-          section: rawPayload.section,
-          locale: rawPayload.locale,
-          id: rawPayload.id,
-          meta: rawPayload.meta,
-          translations: rawPayload.translations,
-        }, articleBodyDocumentPath(section.section, locale, id));
-        const normalizedPayloadInput = typeof cleanPayloadInput.meta?.imageAlt === 'string'
-          && cleanPayloadInput.meta.imageAlt.trim() === ''
-          ? { ...cleanPayloadInput, meta: { ...cleanPayloadInput.meta, imageAlt: null } }
-          : cleanPayloadInput;
-        const payload = { ...normalizedPayloadInput, revision: articleBodyRevision(normalizedPayloadInput) };
+        const source = fs.readFileSync(sourcePath, 'utf8');
+        let payload;
+        try {
+          const rawPayload = buildArticleBodyPayload({
+            section: section.section,
+            locale,
+            id,
+            meta,
+            source,
+          });
+          const cleanPayloadInput = sanitize({
+            schemaVersion: rawPayload.schemaVersion,
+            section: rawPayload.section,
+            locale: rawPayload.locale,
+            id: rawPayload.id,
+            meta: rawPayload.meta,
+            translations: rawPayload.translations,
+          }, articleBodyDocumentPath(section.section, locale, id));
+          const normalizedPayloadInput = typeof cleanPayloadInput.meta?.imageAlt === 'string'
+            && cleanPayloadInput.meta.imageAlt.trim() === ''
+            ? { ...cleanPayloadInput, meta: { ...cleanPayloadInput.meta, imageAlt: null } }
+            : cleanPayloadInput;
+          payload = { ...normalizedPayloadInput, revision: articleBodyRevision(normalizedPayloadInput) };
+        } catch (error) {
+          const reason = quarantineReason(error);
+          const quarantine = {
+            section: section.section,
+            locale,
+            id,
+            source: relativeSource,
+            reason,
+          };
+          quarantined.push(quarantine);
+          quarantinedCount += 1;
+          entries[id] = { status: 'quarantined', reason };
+          console.warn(`::warning::article body quarantined: ${relativeSource} — ${reason}`);
+          continue;
+        }
         const relativeOutput = articleBodyDocumentPath(section.section, locale, id);
         const outputPath = path.join(outDir, relativeOutput);
         fs.mkdirSync(path.dirname(outputPath), { recursive: true });
@@ -462,6 +517,7 @@ export function emitArticleBodyApi({
         expectedCount,
         availableCount,
         missingCount,
+        quarantinedCount,
         entries,
       };
       const indexPath = `bodies/${section.section}/${locale}/index.json`;
@@ -473,10 +529,12 @@ export function emitArticleBodyApi({
         expected: expectedCount,
         available: availableCount,
         missing: missingCount,
+        quarantined: quarantinedCount,
       };
       totals.expected += expectedCount;
       totals.available += availableCount;
       totals.missing += missingCount;
+      totals.quarantined += quarantinedCount;
     }
   }
   return {
@@ -496,6 +554,7 @@ export function emitArticleBodyApi({
       sections: capabilitySections,
     },
     totals,
+    quarantined,
   };
 }
 
@@ -504,7 +563,7 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
   const publicSet = publicSections instanceof Set ? publicSections : new Set(publicSections);
   const expectedPayloadPaths = new Set();
   const expectedIndexPaths = new Set();
-  const totals = { expected: 0, available: 0, missing: 0 };
+  const totals = { expected: 0, available: 0, missing: 0, quarantined: 0 };
   const diskSections = {};
 
   for (const section of sections) {
@@ -534,11 +593,19 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
       }
       let availableCount = 0;
       let missingCount = 0;
+      let quarantinedCount = 0;
       for (const id of ids) {
         const entry = index.entries[id];
         if (entry?.status === 'missing') {
           if (Object.keys(entry).length !== 1) throw new Error(`${indexPath}: missing entry contiene dati extra per ${id}`);
           missingCount += 1;
+          continue;
+        }
+        if (entry?.status === 'quarantined') {
+          if (Object.keys(entry).length !== 2 || typeof entry.reason !== 'string' || !entry.reason.trim()) {
+            throw new Error(`${indexPath}: quarantined entry non valida per ${id}`);
+          }
+          quarantinedCount += 1;
           continue;
         }
         if (entry?.status !== 'available' || entry.path !== articleBodyDocumentPath(section.section, locale, id)
@@ -552,7 +619,8 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
         availableCount += 1;
       }
       if (index.availableCount !== availableCount || index.missingCount !== missingCount
-        || availableCount + missingCount !== expectedCount) {
+        || index.quarantinedCount !== quarantinedCount
+        || availableCount + missingCount + quarantinedCount !== expectedCount) {
         throw new Error(`${indexPath}: counts non corrispondono alle entries su disco`);
       }
       diskSections[section.section].locales[locale] = {
@@ -560,10 +628,12 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
         expected: expectedCount,
         available: availableCount,
         missing: missingCount,
+        quarantined: quarantinedCount,
       };
       totals.expected += expectedCount;
       totals.available += availableCount;
       totals.missing += missingCount;
+      totals.quarantined += quarantinedCount;
     }
   }
 

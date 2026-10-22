@@ -789,6 +789,15 @@ test('publish-api.yml scopa il preflight ai corpi toccati, con fallback esplicit
   assert.ok(iDetermine > 0 && iGate > 0 && iDetermine < iGate, 'il diff va calcolato prima di invocare il gate');
 });
 
+test('publish-api forza la scansione completa dopo un publish-api fallito', () => {
+  const src = fs.readFileSync(WORKFLOW, 'utf8');
+  assert.match(src, /gh run list[\s\S]*--workflow publish-api\.yml/);
+  assert.match(src, /--json databaseId,status,conclusion/);
+  assert.match(src, /last_publish_conclusion/);
+  assert.match(src, /last_publish_conclusion.*failure/);
+  assert.match(src, /scan_reason=.*last-publish-failed/);
+});
+
 test('il job di pubblicazione ha un tetto di tempo', () => {
   // La concurrency `publish-api` non cancella (`cancel-in-progress: false`):
   // senza tetto un job appeso non fallisce, mette in coda ogni pubblicazione
