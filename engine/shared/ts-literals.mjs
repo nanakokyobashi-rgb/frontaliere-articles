@@ -64,10 +64,11 @@ function skipStaticRegexLiteral(source, offset) {
  * comparisons start after an expression. Use that distinction when the
  * assertion's type begins with a named or composed type (`<Foo & {...}>`).
  */
-function looksLikeTypeAssertionPosition(source, offset) {
+function looksLikeTypeAssertionPosition(source, offset, statementStart) {
   let cursor = offset - 1;
   while (cursor >= 0 && /\s/u.test(source[cursor])) cursor -= 1;
   if (cursor < 0) return true;
+  if (source[cursor] === '}' && statementStart) return true;
   if ('([{,;:=!?&|+-*/%^~>'.includes(source[cursor])) return true;
   const wordEnd = cursor + 1;
   while (cursor >= 0 && /[A-Za-z0-9_$]/u.test(source[cursor])) cursor -= 1;
@@ -76,7 +77,7 @@ function looksLikeTypeAssertionPosition(source, offset) {
 }
 
 /** Detect a generic type argument list without treating an ordinary `<` comparison as one. */
-function looksLikeGenericStart(source, offset) {
+function looksLikeGenericStart(source, offset, statementStart = false) {
   let angleDepth = 1;
   let braceDepth = 0;
   let bracketDepth = 0;
@@ -131,7 +132,7 @@ function looksLikeGenericStart(source, offset) {
           || ['!', '+', '-', '~', '/'].includes(source[next]),
         );
         const typeAssertion = Boolean(
-          typeAssertionOperand && looksLikeTypeAssertionPosition(source, offset),
+          typeAssertionOperand && looksLikeTypeAssertionPosition(source, offset, statementStart),
         );
         return source[next] === '(' || source.startsWith('=>', next) || source[next] === ';'
           || source[next] === ',' || source[next] === ')' || source[next] === '.' || source[next] === '|'
@@ -701,7 +702,7 @@ export function readStaticObjectEntries(
       typeAliasActive = true;
     }
     if (character === '<' && (typeAliasPending || typeAliasActive
-      || looksLikeGenericStart(source, cursor - 1))) genericAngleDepth += 1;
+      || looksLikeGenericStart(source, cursor - 1, statementStart))) genericAngleDepth += 1;
     if (character === '>' && genericAngleDepth > 0) genericAngleDepth -= 1;
     const atCaseOrigin = caseLabelPending && caseLabelOrigin
       && parenContexts.length === caseLabelOrigin.paren

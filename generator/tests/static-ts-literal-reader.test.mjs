@@ -196,6 +196,8 @@ test('il reader distingue confronti, type specifier dei moduli e asserzioni ango
     "const namedAngle = <Foo & { 'blog.article.fake.angle.named': string }>input;",
     "const unionAngle = <Foo | { 'blog.article.fake.angle.union': string }>input;",
     "const nestedAngle = <Array<{ 'blog.article.fake.angle.nested': string }>>input;",
+      "function done() {}",
+      "<Foo & { 'blog.article.fake.angle.after-block': string }>input;",
     "const meta = { 'blog.article.reale.title': 'attuale' };",
   ].join('\n');
 

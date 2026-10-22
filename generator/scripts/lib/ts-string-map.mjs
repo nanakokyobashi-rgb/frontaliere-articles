@@ -149,10 +149,11 @@ function skipRegexLiteral(src, offset) {
  * comparisons start after an expression. Use that distinction when the
  * assertion's type begins with a named or composed type (`<Foo & {...}>`).
  */
-function looksLikeTypeAssertionPosition(src, offset) {
+function looksLikeTypeAssertionPosition(src, offset, statementStart) {
   let cursor = offset - 1;
   while (cursor >= 0 && /\s/u.test(src[cursor])) cursor -= 1;
   if (cursor < 0) return true;
+  if (src[cursor] === '}' && statementStart) return true;
   if ('([{,;:=!?&|+-*/%^~>'.includes(src[cursor])) return true;
   const wordEnd = cursor + 1;
   while (cursor >= 0 && /[A-Za-z0-9_$]/u.test(src[cursor])) cursor -= 1;
@@ -161,7 +162,7 @@ function looksLikeTypeAssertionPosition(src, offset) {
 }
 
 /** Detect a generic type argument list without treating an ordinary `<` comparison as one. */
-function looksLikeGenericStart(src, offset) {
+function looksLikeGenericStart(src, offset, statementStart = false) {
   let angleDepth = 1;
   let braceDepth = 0;
   let bracketDepth = 0;
@@ -216,7 +217,7 @@ function looksLikeGenericStart(src, offset) {
           || ['!', '+', '-', '~', '/'].includes(src[next]),
         );
         const typeAssertion = Boolean(
-          typeAssertionOperand && looksLikeTypeAssertionPosition(src, offset),
+          typeAssertionOperand && looksLikeTypeAssertionPosition(src, offset, statementStart),
         );
         return src[next] === '(' || src.startsWith('=>', next) || src[next] === ';'
           || src[next] === ',' || src[next] === ')' || src[next] === '.' || src[next] === '|'
@@ -666,7 +667,7 @@ function staticSourceTokens(src) {
       typeAliasActive = true;
     }
     if (c === '<' && (typeAliasPending || typeAliasActive
-      || looksLikeGenericStart(src, i - 1))) genericAngleDepth += 1;
+      || looksLikeGenericStart(src, i - 1, statementStart))) genericAngleDepth += 1;
     if (c === '>' && genericAngleDepth > 0) genericAngleDepth -= 1;
     const atCaseOrigin = caseLabelPending && caseLabelOrigin
       && parenContexts.length === caseLabelOrigin.paren

@@ -438,6 +438,8 @@ describe('lettore TS condiviso', () => {
       "const namedAngle = <Foo & { 'blog.article.fake.angle.named': string }>input;",
       "const unionAngle = <Foo | { 'blog.article.fake.angle.union': string }>input;",
       "const nestedAngle = <Array<{ 'blog.article.fake.angle.nested': string }>>input;",
+      "function done() {}",
+      "<Foo & { 'blog.article.fake.angle.after-block': string }>input;",
       "'blog.article.real.title': 'actual',",
     ].join('\n');
 
