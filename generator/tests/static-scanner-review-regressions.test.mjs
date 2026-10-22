@@ -44,3 +44,10 @@ test('lo scanner mantiene il contesto TypeScript nei mapped type annidati', () =
     assert.equal(unsupportedObjectMemberAt(source, offset), null, source);
   }
 });
+
+test('lo scanner chiude il contesto di tipo prima di un initializer di parametro', () => {
+  const source = 'function f(options: any = () => ({ [key in runtime]: 1 })) {}';
+  const offset = source.indexOf('[', source.indexOf('{'));
+  assert.equal(unsupportedObjectMemberAt(source, offset)?.kind, 'computed');
+  assert.equal(unsupportedObjectMemberAt(source, offset)?.keyEnd, computedPropertyKeyEnd(source, offset));
+});

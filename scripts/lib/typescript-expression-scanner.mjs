@@ -466,6 +466,13 @@ function delimiterContextAt(source, offset) {
       pendingFunctionReturnObjectType = false;
       pendingVariableTypeObject = false;
     }
+    if (ch === '=' && delimiters.at(-1)?.functionParameters === true) {
+      // A parameter annotation ends at its default initializer. Without this
+      // boundary, a runtime arrow/object initializer inherits the parameter's
+      // TypeScript context and a computed key such as `[key in runtime]` is
+      // mistaken for a mapped type member.
+      delimiters.at(-1).typeContext = false;
+    }
     if ((ch === '=' || ch === ';') && delimiters.length === variableDeclarationDepth) {
       variableDeclarationDepth = -1;
       variableNamePending = false;
