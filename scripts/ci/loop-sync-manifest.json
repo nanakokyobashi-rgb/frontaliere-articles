@@ -1813,8 +1813,8 @@
       "reason": "Conformita' A5 dei titoli (lunghezza, parole, clickbait): unit + drift guard su create-article.mjs + integrazione su TUTTI i titoli pubblicati. Adattamenti: node:test + expect-shim, path content/, copertura di blog-meta-it.ts e blog-meta-ch-it.ts, asserzione ATTIVA e STRICT senza baseline di tolleranza (issue #58). Il reader usa il decoder single-pass condiviso generator/scripts/lib/unescape-ts-string.mjs, portando il fix del sito #5797 senza ricreare la catena di replace. Non si porta invece #9335: il sito esclude i test live-data dal gate PR, mentre il corpus pubblicatore esegue questo controllo sul checkout completo e la sanity >3000 impedisce un verde vacuo negli sparse worktree. Nota di metodo: il drift check confronta HASH, quindi ogni decisione futura va riportata qui prima del riallineamento della baseline.",
       "baseline": {
         "site": "3e348f14062393f4",
-        "corpus": "960eab60ce073d4c",
-        "alignedAt": "2026-08-09"
+        "corpus": "64b4f7b5d5e622bf",
+        "alignedAt": "2026-10-22"
       }
     },
     {
@@ -3634,10 +3634,11 @@
     {
       "path": "generator/scripts/lib/unescape-ts-string.mjs",
       "sitePath": "scripts/lib/unescape-ts-string.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Adattamento corpus della fix del sito #14559: la copia SITE importa `packages/articles/engine/shared/tsStringEscapes.ts`, mentre il generatore corpus viene caricato da `node --test` e dal runtime senza il loader TypeScript; copiare quell'import introdurrebbe `ERR_UNKNOWN_FILE_EXTENSION`/`ERR_MODULE_NOT_FOUND` nella topologia `generator/`. Qui il decoder resta autonomo ma segue lo stesso contratto per `\\xNN`, `\\u{...}` e `\\uXXXX`, così la correzione non dipende dal trasporto dell'engine e non duplica un percorso importabile solo sul sito.",
       "baseline": {
         "site": "45aff25183945f06",
-        "corpus": "45aff25183945f06",
+        "corpus": "51c3631ccca96ed5",
         "alignedAt": "2026-10-22"
       }
     },
@@ -6451,8 +6452,8 @@
       "reason": "Producer della superficie HTTP article bodies: estrae i sorgenti del corpus, pubblica namespace completi con revisione e verifica indici/payload. Il sito consuma il contratto JSON via HTTP e non importa questo modulo.",
       "baseline": {
         "site": null,
-        "corpus": "e8dcd6f4d358e7ab",
-        "alignedAt": "2026-10-21"
+        "corpus": "cf4f63f7f3d8f6c4",
+        "alignedAt": "2026-10-22"
       }
     },
     {

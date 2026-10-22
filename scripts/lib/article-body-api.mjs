@@ -7,7 +7,11 @@ import {
   isPotentialTypeScriptObjectMemberStart,
   unsupportedObjectMemberAt,
 } from './typescript-expression-scanner.mjs';
-import { repairLegacyDoubleEscapedBreaks, tsStringEscapesWithNewlineAs } from '../../generator/scripts/lib/unescape-ts-string.mjs';
+import {
+  repairLegacyDoubleEscapedBreaks,
+  tsStringEscapesWithNewlineAs,
+  unescapeTsString,
+} from '../../generator/scripts/lib/unescape-ts-string.mjs';
 
 export const ARTICLE_BODY_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 export const MAX_ARTICLE_BODY_FIELDS = 20;
@@ -66,40 +70,12 @@ function skipTrivia(source, offset) {
 }
 
 function decodeTsLiteral(raw, quote) {
-  let decoded = '';
   const escapes = {
     ...tsStringEscapesWithNewlineAs('\n'),
     ...(quote === '`' ? { '`': '`', '$': '$' } : {}),
   };
-  for (let index = 0; index < raw.length;) {
-    const ch = raw[index];
-    if (ch !== '\\') {
-      decoded += quote === '`' && ch === '\r' && raw[index + 1] === '\n' ? '\n' : ch;
-      index += quote === '`' && ch === '\r' && raw[index + 1] === '\n' ? 2 : 1;
-      continue;
-    }
-    if (index + 1 >= raw.length) {
-      decoded += ch;
-      index += 1;
-      continue;
-    }
-    const next = raw[index + 1];
-    if (next === '\n' || next === '\r') {
-      index += next === '\r' && raw[index + 2] === '\n' ? 3 : 2;
-      continue;
-    }
-    if (next === 'u') {
-      const match = /^u([\da-fA-F]{4})/u.exec(raw.slice(index + 1));
-      if (match) {
-        decoded += String.fromCharCode(Number.parseInt(match[1], 16));
-        index += match[0].length + 1;
-        continue;
-      }
-    }
-    decoded += Object.prototype.hasOwnProperty.call(escapes, next) ? escapes[next] : ch + next;
-    index += 2;
-  }
-  return decoded;
+  const decoded = unescapeTsString(raw, escapes, { decodeUnicode: true });
+  return quote === '`' ? decoded.replace(/\r\n/gu, '\n') : decoded;
 }
 
 function readQuotedToken(source, offset) {

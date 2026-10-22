@@ -155,7 +155,7 @@ test('RSS decodifica i separatori Unicode nelle descrizioni SEO', () => {
       'export default {',
       "  'blog-" + articleId + "': {",
       '    "headline": "Titolo",',
-      "    ogDescription: 'Prima\\u2028seconda\\u2029terza',",
+      "    ogDescription: 'Prima\\u2028seconda\\u2029terza \\x43 \\u{1F30D}',",
       '    "datePublished": "2026-08-01T00:00:00.000Z",',
       '    "articleSection": "Notizie",',
       '  },',
@@ -182,5 +182,5 @@ test('RSS decodifica i separatori Unicode nelle descrizioni SEO', () => {
   });
   const xml = new Map(feeds).get(IT_FEED);
   const description = xml.match(/<description><!\[CDATA\[([\s\S]*?)\]\]><\/description>/u)?.[1];
-  assert.equal(description, 'Prima\u2028seconda\u2029terza');
+  assert.equal(description, 'Prima\u2028seconda\u2029terza C 🌍');
 });
