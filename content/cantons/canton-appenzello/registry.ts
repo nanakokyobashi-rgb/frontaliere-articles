@@ -171,4 +171,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'investimenti-tetto-fotovoltaico-2027',
+ category: 'novita',
+ date: '2026-10-22T22:14:01.184Z',
+ image: '/images/blog/article-investimenti-tetto-fotovoltaico-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
