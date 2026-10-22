@@ -21,6 +21,57 @@ function matchingDelimiter(src, openIdx) {
   let depth = 0;
   let quote = null;
 
+  const lineCommentStart = (lineStart, end) => {
+    let stringQuote = null;
+    for (let i = lineStart; i < end; i += 1) {
+      const ch = src[i];
+      if (stringQuote !== null) {
+        if (ch === '\\') { i += 1; continue; }
+        if (ch === stringQuote) stringQuote = null;
+        continue;
+      }
+      if (ch === "'" || ch === '"' || ch === '`') {
+        stringQuote = ch;
+        continue;
+      }
+      if (ch === '/' && src[i + 1] === '*') {
+        const close = src.indexOf('*/', i + 2);
+        if (close < 0 || close >= end) return -1;
+        i = close + 1;
+        continue;
+      }
+      if (ch === '/' && src[i + 1] === '/') return i;
+    }
+    return -1;
+  };
+
+  const skipTriviaBackward = (from) => {
+    let cursor = from + 1;
+    while (cursor > openIdx) {
+      while (cursor > openIdx && /\s/.test(src[cursor - 1])) cursor -= 1;
+      if (cursor >= openIdx + 2 && src.slice(cursor - 2, cursor) === '*/') {
+        const commentStart = src.lastIndexOf('/*', cursor - 2);
+        if (commentStart < openIdx) return cursor;
+        cursor = commentStart;
+        continue;
+      }
+      const lineStart = Math.max(
+        openIdx,
+        src.lastIndexOf('\n', cursor - 1) + 1,
+        src.lastIndexOf('\r', cursor - 1) + 1,
+        src.lastIndexOf('\u2028', cursor - 1) + 1,
+        src.lastIndexOf('\u2029', cursor - 1) + 1,
+      );
+      const commentStart = lineCommentStart(lineStart, cursor);
+      if (commentStart >= lineStart) {
+        cursor = commentStart;
+        continue;
+      }
+      return cursor;
+    }
+    return cursor;
+  };
+
   const canStartRegex = (idx) => {
     let j = idx - 1;
     while (j >= openIdx && /\s/.test(src[j])) j -= 1;
@@ -30,7 +81,8 @@ function matchingDelimiter(src, openIdx) {
     let end = j;
     while (j >= openIdx && /[A-Za-z_$]/.test(src[j])) j -= 1;
     if (end === j) return false;
-    if (src[j] === '.') return false;
+    const memberPrefixEnd = skipTriviaBackward(j);
+    if (memberPrefixEnd > openIdx && src[memberPrefixEnd - 1] === '.') return false;
     return /^(?:return|throw|case|break|continue|debugger|default|delete|void|typeof|instanceof|in|of|yield|await|else|do)$/.test(src.slice(j + 1, end + 1));
   };
 

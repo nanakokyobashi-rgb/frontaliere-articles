@@ -171,7 +171,13 @@ test('matchingDelimiter riconosce i quattro prefissi regex aggiunti al lexer', (
 
 test('matchingDelimiter non tratta le parole membro come prefissi regex', () => {
   for (const keyword of ['break', 'continue', 'debugger', 'default']) {
-    for (const access of [`obj.${keyword}`, `obj?.${keyword}`]) {
+    for (const access of [
+      `obj.${keyword}`,
+      `obj?.${keyword}`,
+      `obj. /* commento */ ${keyword}`,
+      `obj?. /* commento */ ${keyword}`,
+      `obj. // commento\n${keyword}`,
+    ]) {
       const src = `{ value: ${access} / 2, after: 'resta' }`;
       assert.equal(
         matchingDelimiter(src, 0),
