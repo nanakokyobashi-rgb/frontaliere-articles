@@ -143,13 +143,13 @@ export function parseLiteralRedirectMap(source) {
   let literalCount = 0;
   let dynamicCount = 0;
   const unsupported = [];
-  for (const match of String(source ?? '').matchAll(/^[ \t]*(['"])(\/[^'"\n]*)\1\s*:\s*(?:(['"])(\/[^'"\n]*)\3|(`)|(\S))/gm)) {
-    if (match[4] !== undefined) {
+  for (const match of String(source ?? '').matchAll(/^[ \t]*(['"])(\/[^'"\n]*)\1\s*:\s*(?:'(\/[^'\n]*)'|(`)|(\S))/gm)) {
+    if (match[3] !== undefined) {
       const from = match[2].endsWith('/') ? match[2] : `${match[2]}/`;
-      const to = match[4].endsWith('/') ? match[4] : `${match[4]}/`;
+      const to = match[3].endsWith('/') ? match[3] : `${match[3]}/`;
       entries[from] = to;
       literalCount += 1;
-    } else if (match[5] !== undefined) {
+    } else if (match[4] !== undefined) {
       dynamicCount += 1;
     } else {
       unsupported.push(match[2]);
