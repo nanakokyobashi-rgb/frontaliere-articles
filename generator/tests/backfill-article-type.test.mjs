@@ -435,6 +435,9 @@ describe('lettore TS condiviso', () => {
       "const comparison = (left) < right;",
       "import { type Foo } from 'module'",
       "const angle = <{ 'blog.article.fake.angle.type': string }>{ 'blog.article.real.angle': 'actual' };",
+      "const namedAngle = <Foo & { 'blog.article.fake.angle.named': string }>input;",
+      "const unionAngle = <Foo | { 'blog.article.fake.angle.union': string }>input;",
+      "const nestedAngle = <Array<{ 'blog.article.fake.angle.nested': string }>>input;",
       "'blog.article.real.title': 'actual',",
     ].join('\n');
 

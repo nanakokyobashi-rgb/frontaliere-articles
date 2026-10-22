@@ -106,6 +106,7 @@ const DECLARATION_PREFIX_KEYWORDS = new Set(['abstract', 'async', 'declare', 'de
 const AMBIENT_BLOCK_KEYWORDS = new Set(['global']);
 const TYPE_BODY_KEYWORDS = new Set(['class', 'enum', 'global', 'interface', 'module', 'namespace']);
 const TYPE_CONTEXT_WORDS = new Set(['asserts', 'extends', 'infer', 'is', 'keyof', 'readonly', 'typeof', 'unique']);
+const TYPE_ASSERTION_PREFIX_WORDS = new Set(['await', 'case', 'else', 'return', 'throw', 'yield']);
 const ASI_EXPRESSION_ENDS = new Set([
   'close-block', 'close-expression-block', 'close-object', 'close-paren', 'close-type-alias',
   'close-type-declaration', 'identifier', 'literal', 'postfix',
@@ -141,6 +142,22 @@ function skipRegexLiteral(src, offset) {
   }
 
   return -1;
+}
+
+/**
+ * TypeScript's angle assertions start an expression, while relational
+ * comparisons start after an expression. Use that distinction when the
+ * assertion's type begins with a named or composed type (`<Foo & {...}>`).
+ */
+function looksLikeTypeAssertionPosition(src, offset) {
+  let cursor = offset - 1;
+  while (cursor >= 0 && /\s/u.test(src[cursor])) cursor -= 1;
+  if (cursor < 0) return true;
+  if ('([{,;:=!?&|+-*/%^~>'.includes(src[cursor])) return true;
+  const wordEnd = cursor + 1;
+  while (cursor >= 0 && /[A-Za-z0-9_$]/u.test(src[cursor])) cursor -= 1;
+  const previousWord = src.slice(cursor + 1, wordEnd);
+  return TYPE_ASSERTION_PREFIX_WORDS.has(previousWord);
 }
 
 /** Detect a generic type argument list without treating an ordinary `<` comparison as one. */
@@ -189,7 +206,6 @@ function looksLikeGenericStart(src, offset) {
         let next = cursor + 1;
         while (/\s/u.test(src[next] || '')) next += 1;
         const nextWord = /^[A-Za-z_$][A-Za-z0-9_$]*/u.exec(src.slice(next))?.[0];
-        const angleContent = src.slice(offset + 1, cursor).trim();
         const typeAssertionOperand = Boolean(
           nextWord
           || src[next] === '{'
@@ -199,7 +215,9 @@ function looksLikeGenericStart(src, offset) {
           || /[0-9]/u.test(src[next] || '')
           || ['!', '+', '-', '~', '/'].includes(src[next]),
         );
-        const typeAssertion = Boolean(/^[{[(]/u.test(angleContent) && typeAssertionOperand);
+        const typeAssertion = Boolean(
+          typeAssertionOperand && looksLikeTypeAssertionPosition(src, offset),
+        );
         return src[next] === '(' || src.startsWith('=>', next) || src[next] === ';'
           || src[next] === ',' || src[next] === ')' || src[next] === '.' || src[next] === '|'
           || src[next] === '&' || src[next] === '=' || src[next] === '[' || src[next] === '!'
