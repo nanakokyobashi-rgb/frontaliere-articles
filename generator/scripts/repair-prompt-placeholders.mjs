@@ -54,6 +54,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { truncateToClause } from '../../host/shared/clauseTail.mjs';
 import { findAllSeoEntryMatches } from '../../scripts/lib/seo-entry.mjs';
+import {
+  escapeForSingleQuoteTS,
+  unescapeForSingleQuoteTS,
+} from './lib/article-meta-block.mjs';
 import { writeFileAtomic } from './lib/atomic-write-file.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { assertSeoDescriptionMinimum } from './lib/seo-description-contract.mjs';
@@ -80,8 +84,8 @@ const EXCERPT_MAX = 160;
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** L'inverso ESATTO di `escapeForSingleQuoteTS` (article-meta-block.mjs). */
-const unescapeTs = (s) => s.replace(/\\(.)/gs, (_, c) => (c === 'n' ? '\n' : c === 'r' ? '\r' : c));
-const escapeTs = (s) => String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n').replace(/\r/g, '');
+const unescapeTs = unescapeForSingleQuoteTS;
+const escapeTs = escapeForSingleQuoteTS;
 /** Gemelli per le stringhe JSON dentro `structuredData`. */
 const unescapeJson = (s) => JSON.parse(`"${s}"`);
 const escapeJson = (s) => JSON.stringify(String(s)).slice(1, -1);

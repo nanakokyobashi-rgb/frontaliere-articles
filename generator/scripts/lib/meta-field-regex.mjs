@@ -15,7 +15,7 @@
 
 import { readStaticObjectEntries } from '../../../engine/shared/ts-literals.mjs';
 import { parseStaticArticleTranslationEntries } from '../../../engine/shared/articleStaticSource.mjs';
-import { unescapeTsString } from './unescape-ts-string.mjs';
+import { decodeTypeScriptString } from './article-meta-block.mjs';
 
 /**
  * Read requested fields from one or more complete static metadata modules.
@@ -149,12 +149,10 @@ function createMetaFieldMatcher(field, { allowTerminalFragment = false } = {}) {
 
 /**
  * Unescapes a TS single-quoted string body captured by `metaFieldRegex`.
- * Only quotes and a literal backslash are decoded here — title/excerpt
- * fields are single-line, so `\n`/`\r`/`\t` were never part of this
- * function's scope and stay untouched (see unescape-ts-string.mjs for why
- * that matters and for the shared decoder this now runs through, fixed for
- * #5632).
+ * Decode the complete single-quoted TypeScript literal, including Unicode
+ * escapes such as `\u2028`/`\u2029`. The shared decoder keeps this reader in
+ * lockstep with the writer and avoids treating an emitted escape as text.
  */
 export function unescapeTsValue(s) {
-  return unescapeTsString(s, { "'": "'", '"': '"', '\\': '\\' });
+  return decodeTypeScriptString(s, "'");
 }

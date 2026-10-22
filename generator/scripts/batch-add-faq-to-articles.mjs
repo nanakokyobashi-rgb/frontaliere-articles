@@ -247,7 +247,13 @@ function write(filePath, content) {
 
 /** Same escaping as create-article.mjs buildBodyFile() */
 function escapeForSingleQuoteTS(s) {
-  return String(s || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n').replace(/\r/g, '');
+  return String(s || '')
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'")
+    .replace(/\n/g, '\\n')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029')
+    .replace(/\r/g, '');
 }
 
 /**
