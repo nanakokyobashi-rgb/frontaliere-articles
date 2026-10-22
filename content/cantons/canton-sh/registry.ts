@@ -149,4 +149,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sciaffusa-banche-riforma-federale',
+ category: 'novita',
+ date: '2026-10-22T01:01:24.569Z',
+ image: '/images/blog/article-sciaffusa-banche-riforma-federale.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

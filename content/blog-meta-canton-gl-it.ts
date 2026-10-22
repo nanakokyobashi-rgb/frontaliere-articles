@@ -27,6 +27,9 @@ const blogMetaCantonGlIt: Record<string, string> = {
     'blog.article.glarona-mercato-immobiliare-2026.title': 'Mercato immobiliare a Glarona: prezzi in crescita nel 2026',
     'blog.article.glarona-mercato-immobiliare-2026.excerpt': 'La domanda immobiliare resta alta nel Canton Glarona L\'offerta limitata sostiene l\'aumento dei prezzi Condomini +4,4% tra il 2° trimestre 2025 e il 2° 2026',
     'blog.article.glarona-mercato-immobiliare-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.landrat-ottobre-glarona-2026.title': 'Landrat Glarona: 4 milioni per la perequazione, idro a Rüti',
+    'blog.article.landrat-ottobre-glarona-2026.excerpt': 'Il 21 ottobre 2026 il Landrat ha approvato CHF 4 milioni per la perequazione tra Cantone e comuni, respinto due proposte sulla concessione idroelettrica di Rüti e stanziato un credito sportivo di 3 milioni per il 2027-2030.',
+    'blog.article.landrat-ottobre-glarona-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGlIt;

@@ -94,4 +94,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'landrat-ottobre-glarona-2026',
+ category: 'novita',
+ date: '2026-10-22T01:24:23.964Z',
+ image: '/images/blog/article-landrat-ottobre-glarona-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GL', 'ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

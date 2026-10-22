@@ -514,6 +514,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sciaffusa-banche-riforma-federale': {
+    title: 'Banche Sciaffusa: Governo respinge regole federali',
+    description: 'Il Governo di Sciaffusa critica la riforma bancaria federale, chiedendo regole mirate per evitare oneri sproporzionati agli istituti locali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, banche, sciaffusa, governo, respinge',
+    ogTitle: 'Banche Sciaffusa: Governo respinge regole federali',
+    ogDescription: 'Dopo la crisi di Credit Suisse, il Consiglio federale propone nuove regole. Il Governo di Sciaffusa respinge la forma attuale per oneri sproporzionati, chiedendo criteri misurabili e basati sul rischio per gli istituti locali.',
+    canonicalPath: '/articoli-sciaffusa/sciaffusa-banche-riforma-federale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Banche Sciaffusa: Governo respinge regole federali",
+      "description": "Il Governo di Sciaffusa critica la riforma bancaria federale, chiedendo regole mirate per evitare oneri sproporzionati agli istituti locali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sciaffusa-banche-riforma-federale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T01:01:24+00:00",
+      "dateModified": "2026-10-22T01:01:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/sciaffusa-banche-riforma-federale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

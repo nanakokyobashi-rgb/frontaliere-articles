@@ -42,6 +42,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.parcheggi-cascate-reno.title': 'Sciaffusa e Zurigo installano il sistema parcheggi al Reno',
     'blog.article.parcheggi-cascate-reno.excerpt': 'Nuovo sistema tra Sciaffusa e Zurigo per i parcheggi liberi alle Cascate del Reno; avvio nell\'estate 2027, costo circa CHF 400\'000.',
     'blog.article.parcheggi-cascate-reno.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.sciaffusa-banche-riforma-federale.title': 'Banche Sciaffusa: Governo respinge regole federali',
+    'blog.article.sciaffusa-banche-riforma-federale.excerpt': 'Il Governo di Sciaffusa critica la proposta federale di riforma bancaria, temendo oneri sproporzionati per gli istituti locali.',
+    'blog.article.sciaffusa-banche-riforma-federale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

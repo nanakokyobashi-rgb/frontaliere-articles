@@ -42,6 +42,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.parcheggi-cascate-reno.title': 'Schaffhouse et Zurich installent le système de stationnement au bord du Rhin',
     'blog.article.parcheggi-cascate-reno.excerpt': 'Nouveau système entre Schaffhouse et Zurich pour les places de parking libres aux chutes du Rhin ; lancement à l\'été 2027, coût d\'environ CHF 400\'000.',
     'blog.article.parcheggi-cascate-reno.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sciaffusa-banche-riforma-federale.title': 'Banques de Schaffhouse : le gouvernement rejette les règles fédérales',
+    'blog.article.sciaffusa-banche-riforma-federale.excerpt': 'Le gouvernement de Schaffhouse critique la proposition fédérale de réforme bancaire, craignant des charges disproportionnées pour les établissements locaux.',
+    'blog.article.sciaffusa-banche-riforma-federale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

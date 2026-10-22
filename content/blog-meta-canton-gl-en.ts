@@ -27,6 +27,9 @@ const blogMetaCantonGlEn: Record<string, string> = {
     'blog.article.glarona-mercato-immobiliare-2026.title': 'Real estate market in Glarus: prices rising in 2026',
     'blog.article.glarona-mercato-immobiliare-2026.excerpt': 'Housing demand remains high in the Canton of Glarus Limited supply supports rising prices Condominiums +4,4% between the 2nd quarter of 2025 and the 2nd quarter',
     'blog.article.glarona-mercato-immobiliare-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.landrat-ottobre-glarona-2026.title': 'Glarus Landrat: 4 million for equalization, water in Rüti',
+    'blog.article.landrat-ottobre-glarona-2026.excerpt': 'On October 21, 2026, the Landrat approved CHF 4 million for the equalization between Canton and municipalities, rejected two proposals on the Rüti hydroelectric concession and allocated a sports credit of 3 million for 2027-2030.',
+    'blog.article.landrat-ottobre-glarona-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGlEn;
