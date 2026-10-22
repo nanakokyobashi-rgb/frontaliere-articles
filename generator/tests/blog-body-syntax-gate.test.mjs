@@ -740,6 +740,18 @@ test('publish-api.yml esegue il gate, e gli passa la directory del parser', () =
 test('publish-api.yml scopa il preflight ai corpi toccati, con fallback esplicito', () => {
   const src = fs.readFileSync(WORKFLOW, 'utf8');
 
+  for (const dependency of [
+    'scripts/lib/corpus-floors.mjs',
+    'scripts/lib/seo-entry.mjs',
+    'scripts/lib/article-registry-reader.mjs',
+    'generator/scripts/lib/daily-brief-content.mjs',
+    'engine/shared/articleReaderSource.mjs',
+    'engine/shared/articleArchiveConfig.mjs',
+  ]) {
+    assert.match(src, new RegExp(dependency.replaceAll('.', '\\.'), 'u'),
+      `publish-api.yml deve osservare la chiusura di corpus-floors: ${dependency}`);
+  }
+
   assert.match(
     src,
     /fetch-depth:\s*0/,
@@ -809,6 +821,17 @@ test('i publisher rapidi eseguono il syntax gate con lo stesso fallback full', (
     assert.match(src, /PREFLIGHT_CHANGED_FILES_FILE="\$changed_files"/);
     assert.match(src, /scan_mode=full/);
     assert.match(src, /git diff --quiet "\$BEFORE" "\$AFTER"/);
+    for (const dependency of [
+      'scripts/lib/corpus-floors.mjs',
+      'scripts/lib/seo-entry.mjs',
+      'scripts/lib/article-registry-reader.mjs',
+      'generator/scripts/lib/daily-brief-content.mjs',
+      'engine/shared/articleReaderSource.mjs',
+      'engine/shared/articleArchiveConfig.mjs',
+    ]) {
+      assert.match(src, new RegExp(dependency.replaceAll('.', '\\.'), 'u'),
+        `${path.basename(workflowPath)} deve osservare la chiusura di corpus-floors: ${dependency}`);
+    }
   }
 });
 

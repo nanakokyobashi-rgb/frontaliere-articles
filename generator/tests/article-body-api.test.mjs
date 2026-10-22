@@ -572,7 +572,7 @@ test('un body non parsabile viene messo in quarantena, escluso dall output e ri-
     metaBySectionLocale: { frontaliere: { it: metaFor() } },
   });
 
-  assert.deepEqual(emitted.totals, { expected: 1, available: 0, missing: 0, quarantined: 1 });
+  assert.deepEqual(emitted.totals, { expected: 1, available: 0, missing: 1, quarantined: 1 });
   assert.equal(emitted.quarantined.length, 1);
   assert.equal(emitted.quarantined[0].source, `content/frontaliere/it/${articleId}.ts`);
   assert.match(emitted.quarantined[0].reason, /Unterminated delimiter/u);

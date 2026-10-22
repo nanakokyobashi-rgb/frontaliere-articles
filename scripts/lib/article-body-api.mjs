@@ -494,6 +494,10 @@ export function emitArticleBodyApi({
             reason,
           };
           quarantined.push(quarantine);
+          // The v1 count is a partition: a quarantined body is unavailable to
+          // the HTTP reader, so it belongs to `missingCount` as well as the
+          // additive quarantine counter.
+          missingCount += 1;
           quarantinedCount += 1;
           // The v1 HTTP reader only understands available/missing. Keep this
           // entry missing so no legacy consumer can mistake an unknown status
@@ -621,8 +625,8 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
         const entry = index.entries[id];
         if (entry?.status === 'missing') {
           if (Object.keys(entry).length !== 1) throw new Error(`${indexPath}: missing entry contiene dati extra per ${id}`);
+          missingCount += 1;
           if (quarantinedById.has(id)) quarantinedCount += 1;
-          else missingCount += 1;
           continue;
         }
         if (quarantinedById.has(id)) throw new Error(`${indexPath}: quarantined ${id} non e' missing`);
@@ -639,7 +643,7 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
       if (index.availableCount !== availableCount || index.missingCount !== missingCount
         || index.quarantinedCount !== quarantinedCount
         || index.quarantined.length !== quarantinedCount
-        || availableCount + missingCount + quarantinedCount !== expectedCount) {
+        || availableCount + missingCount !== expectedCount) {
         throw new Error(`${indexPath}: counts non corrispondono alle entries su disco`);
       }
       diskSections[section.section].locales[locale] = {

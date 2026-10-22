@@ -438,6 +438,9 @@ jobs:
               engine/shared/articleSectionCore.mjs
               engine/shared/cantonArticleSectionCore.generated.mjs
               engine/shared/normalizeArticleMarkdown.ts
+              engine/shared/articleReaderSource.mjs
+              engine/shared/articleArchiveConfig.mjs
+              engine/shared/seo-entry.mjs
               engine/shared/ts-literals.mjs
               generator/data/canton-url-slugs.json
               generator/data/canton-sections.json
@@ -448,10 +451,17 @@ jobs:
               scripts/lib/article-link-contract.mjs
               scripts/lib/typescript-expression-scanner.mjs
               scripts/lib/rss-feed-body-adapter.mjs
+              scripts/lib/corpus-floors.mjs
               scripts/lib/corpus-sections.mjs
+              scripts/lib/seo-entry.mjs
+              scripts/lib/article-registry-reader.mjs
               scripts/lib/ts-literals.mjs
               generator/scripts/lib/article-meta-block.mjs
               generator/scripts/lib/article-excerpt.mjs
+              generator/scripts/lib/daily-brief-content.mjs
+              generator/scripts/lib/daily-brief-data.mjs
+              generator/scripts/lib/daily-brief-insights.mjs
+              generator/scripts/lib/localized-toponyms.mjs
             )
             if git diff --quiet "$BEFORE" HEAD -- "${gate_input_paths[@]}" 2>/dev/null; then
               if git diff --name-only "$BEFORE" HEAD -- "${body_dir_list[@]}" > "$changed_files_path" 2>/dev/null; then
