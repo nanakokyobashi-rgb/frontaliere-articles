@@ -229,10 +229,13 @@ jobs:
           # a source commit: resolve the live dispatch ref. workflow_run,
           # bounded replays, and bootstrap keep their exact source revision.
           ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || (github.event_name == 'workflow_dispatch' && inputs.bootstrap != true && github.ref) || github.sha }}
-          fetch-depth: 2
+          # Il preflight dei body confronta il registro corrente con l'high-water
+          # della revisione precedente. Un checkout shallow rende quella storia
+          # non verificabile e blocca ogni replay prima del render.
+          fetch-depth: 0
           # The resolve gate reads the source corpus and publisher code, but
           # never generated `data/`, `dist/`, or `public/`. Keep those large
-          # trees out of the shallow fetch so an intermittent GitHub transfer
+          # trees out of the sparse checkout so an intermittent GitHub transfer
           # cannot consume the whole resolve budget before the gate starts.
           filter: blob:none
           sparse-checkout: |
@@ -944,8 +947,9 @@ jobs:
     needs: resolve
     if: needs.resolve.outputs.any == 'true'
     runs-on: ubuntu-latest
-    # Budget: fino a 55 min per il gate bootstrap, 3 checkout main x 2 tentativi
-    # di render da 45 min, più margine operativo; il limite del job resta 6h.
+    # Il job conserva il budget esteso per i retry del render; il gate bootstrap
+    # del publisher API ha invece una finestra bounded breve e lascia il recupero
+    # al replay gia' previsto quando il fast-publish e' ancora in coda.
     timeout-minutes: 360
     strategy:
       fail-fast: false

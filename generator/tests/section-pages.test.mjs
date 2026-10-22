@@ -3418,6 +3418,12 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(read('scripts/publish-section-pages.mjs'), /EXPECTED_MAIN_HEAD non contiene una SHA completa/);
   const publishCheckout = wf.slice(wf.indexOf('      - name: Checkout\n', wf.indexOf('\n  publish:\n')));
   assert.match(publishCheckout, /fetch-depth: 0/);
+  const resolveCheckout = wf.slice(
+    wf.indexOf('      - name: Checkout (resolve)\n'),
+    wf.indexOf('      - name: Checkout replay dispatcher from workflow revision\n'),
+  );
+  assert.match(resolveCheckout, /fetch-depth: 0/, 'il resolve deve conservare la storia per il preflight high-water');
+  assert.doesNotMatch(resolveCheckout, /fetch-depth: 2/, 'il preflight non puo\' usare un checkout shallow');
   const liveRetryLoop = wf.slice(
     wf.indexOf('          for publish_attempt in 1 2 3; do'),
     wf.indexOf('      - name: Release bootstrap R2 gate'),
