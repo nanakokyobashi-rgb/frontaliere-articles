@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-adeguamento-rendite-superstiti-invalidita-2027.webp",
-      "sha256": "0c5c063cb275165271f0584737f395e4dc4ec892d78abe01d5da2d2b4d34bf85"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-adeguamento-rendite-superstiti-invalidita-2027-480w.webp",
-      "sha256": "5200b704e8acb69ef2a91f6005083207ad5f66b7bd22418b7d72986ecd740a31"
-    }
-  ]
+  "items": []
 }
