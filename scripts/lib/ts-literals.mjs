@@ -112,19 +112,22 @@ export function matchingDelimiter(src, openIdx) {
     previousToken = { kind, value };
   };
 
+  const isRegexPrefixPunctuation = token => token?.kind === 'punct'
+    && '([{=,:;!?&|+\-*%^~<>/'.includes(token.value);
+  const isRegexPrefixKeyword = token => token?.kind === 'word'
+    && /^(?:return|throw|case|break|continue|debugger|default|delete|void|typeof|instanceof|in|of|yield|await|else|do|new)$/.test(token.value)
+    && !['.', '#'].includes(tokenBeforePrevious?.value);
+
   const canStartRegex = () => {
     if (previousToken === null) return true;
-    if (previousToken.kind === 'punct' && '([{=,:;!?&|+\-*%^~<>/'.includes(previousToken.value)) return true;
-    return previousToken.kind === 'word'
-      && /^(?:return|throw|case|break|continue|debugger|default|delete|void|typeof|instanceof|in|of|yield|await|else|do|new)$/.test(previousToken.value)
-      && tokenBeforePrevious?.value !== '.';
+    return isRegexPrefixPunctuation(previousToken) || isRegexPrefixKeyword(previousToken);
   };
 
   const skipRegex = (start) => {
     let inClass = false;
     for (let i = start + 1; i < src.length; i += 1) {
       if (src[i] === '\\') { i += 1; continue; }
-      if (src[i] === '\n' || src[i] === '\r') return start;
+      if ('\n\r\u2028\u2029'.includes(src[i])) return start;
       if (src[i] === '[') { inClass = true; continue; }
       if (src[i] === ']' && inClass) { inClass = false; continue; }
       if (src[i] === '/' && !inClass) {
@@ -168,6 +171,13 @@ export function matchingDelimiter(src, openIdx) {
       }
       rememberToken('literal', 'regex');
       i = end;
+      continue;
+    }
+    if (ch === '!' && src[i + 1] !== '=') {
+      // A postfix non-null assertion ends an expression; a prefix bang starts
+      // one. Keep the distinction so a following slash is classified safely.
+      rememberToken(isRegexPrefixPunctuation(previousToken) || isRegexPrefixKeyword(previousToken)
+        ? 'punct' : 'postfix', '!');
       continue;
     }
     if (ch === "'" || ch === '"' || ch === '`') {
