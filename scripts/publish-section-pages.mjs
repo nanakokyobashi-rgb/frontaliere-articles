@@ -86,17 +86,9 @@ import {
   pageManifestUrl,
 } from './lib/section-page-manifest.mjs';
 import {
-  acquireImageNamespaceLeases,
-  imageNamespaceForKey,
-  releaseImageNamespaceLeases,
-  releaseImageNamespaceLeasesWithDeadline as releaseImageLeasesWithDeadline,
-  serializeImageLeaseContext,
   IMAGE_LEASE_CONTEXT_ENV,
-  IMAGE_LEASE_RELEASE_TIMEOUT_MS,
 } from './lib/r2-image-namespace-lock.mjs';
 import { purgeChunks } from './publish-section-edge.mjs';
-
-export { IMAGE_LEASE_RELEASE_TIMEOUT_MS, releaseImageLeasesWithDeadline };
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const LOG = 'publish-section-pages';
@@ -2530,10 +2522,6 @@ export async function main(
     publisherCommitImpl = () => execFileSync('git', ['-C', ROOT_DIR, 'rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
     fetchImpl = fetch,
     runImpl = run,
-    acquireImageNamespaceLeasesImpl = acquireImageNamespaceLeases,
-    releaseImageNamespaceLeasesImpl = releaseImageNamespaceLeases,
-    serializeImageLeaseContextImpl = serializeImageLeaseContext,
-    imageNamespaceForKeyImpl = imageNamespaceForKey,
   } = {},
 ) {
   const t0 = Date.now();
@@ -3013,167 +3001,31 @@ export async function main(
       return 1;
     }
   }
-  const imageNamespaces = [...new Set(
-    cdnUploads
-      .map(({ key }) => imageNamespaceForKeyImpl(key))
-      .filter(Boolean),
-  )];
-  let imageLeases = [];
-  let imageLeaseContext = null;
-  let imageLeaseReleaseAttempted = false;
-  let imageLeaseSignalExitStatus = 0;
-  let imageLeaseSecondSignalExitStatus = 0;
-  const imageLeaseAbortController = new AbortController();
-  const effectiveImageLeaseExitStatus = () => imageLeaseSecondSignalExitStatus || imageLeaseSignalExitStatus;
-  const recordImageLeaseSignal = (exitStatus) => {
-    if (imageLeaseSignalExitStatus !== 0) {
-      imageLeaseSecondSignalExitStatus ||= exitStatus;
-      console.error(`::warning::[${LOG}] second signal received; deferring exit ${exitStatus} until image lease cleanup completes`);
-      imageLeaseAbortController.abort();
-      return;
-    }
-    imageLeaseSignalExitStatus = exitStatus;
-    imageLeaseAbortController.abort();
-  };
-  const onImageLeaseSigint = () => recordImageLeaseSignal(130);
-  const onImageLeaseSigterm = () => recordImageLeaseSignal(143);
-  const imageLeaseSignalHandlersInstalled = publishing && imageNamespaces.length > 0;
-  if (imageLeaseSignalHandlersInstalled) {
-    process.on('SIGINT', onImageLeaseSigint);
-    process.on('SIGTERM', onImageLeaseSigterm);
-  }
-  const removeImageLeaseSignalHandlers = () => {
-    if (!imageLeaseSignalHandlersInstalled) return;
-    process.removeListener('SIGINT', onImageLeaseSigint);
-    process.removeListener('SIGTERM', onImageLeaseSigterm);
-  };
-  const imageLeaseSignalError = (cause) => {
-    const exitStatus = effectiveImageLeaseExitStatus();
-    const signalName = exitStatus === 130 ? 'SIGINT' : 'SIGTERM';
-    const causeMessage = cause instanceof Error ? `: ${cause.message}` : '';
-    const error = new Error(`[${LOG}] publish interrupted by ${signalName}${causeMessage}`);
-    if (cause !== undefined) error.cause = cause;
-    error.exitCode = exitStatus;
-    return error;
-  };
-  const releaseImageLeases = async () => {
-    if (imageLeaseReleaseAttempted || imageLeases.length === 0) return null;
-    imageLeaseReleaseAttempted = true;
-    const result = await releaseImageLeasesWithDeadline(imageLeases, {
-      // Ogni namespace riceve l'intero budget in parallelo: il rollback di
-      // `blog` non può consumare il tempo prima che `places` venga tentato.
-      perLease: true,
-      releaseImpl: async (leases, releaseOptions) => {
-        const released = await releaseImageNamespaceLeasesImpl(leases, releaseOptions);
-        const releasedSet = new Set(released);
-        if (releasedSet.size !== leases.length
-            || leases.some(({ namespace }) => !releasedSet.has(namespace))) {
-          throw new Error(`lease immagini non completamente rilasciata: attese ${leases.map(({ namespace }) => namespace).join(', ')}, ricevute ${released.join(', ')}`);
-        }
-        return released;
-      },
-    });
-    if (result.timedOut) {
-      console.error(`::error::[${LOG}] cleanup lease immagini timeout dopo ${IMAGE_LEASE_RELEASE_TIMEOUT_MS}ms`);
-    }
-    if (result.status !== 'released') {
-      return result.error ?? new Error(`[${LOG}] rilascio lease immagini fallito senza un errore descrivibile`);
-    }
-    return null;
-  };
-  try {
-    if (publishing && imageNamespaces.length > 0) {
-      imageLeases = await acquireImageNamespaceLeasesImpl(imageNamespaces, {
-        signal: imageLeaseAbortController.signal,
-      });
-      if (imageLeaseSignalExitStatus !== 0) throw imageLeaseSignalError();
-      imageLeaseContext = serializeImageLeaseContextImpl(imageLeases);
-    }
-  } catch (error) {
-    const releaseError = await releaseImageLeases();
-    removeImageLeaseSignalHandlers();
-    if (imageLeaseSignalExitStatus !== 0) {
-      const interrupted = imageLeaseSignalError(error);
-      if (releaseError) {
-        const aggregate = new AggregateError(
-          [interrupted, releaseError],
-          `publish interrotto e rollback della lease immagini non riuscito: ${interrupted.message}; ${releaseError?.message ?? releaseError}`,
-          { cause: interrupted },
-        );
-        aggregate.exitCode = effectiveImageLeaseExitStatus();
-        throw aggregate;
-      }
-      throw interrupted;
-    }
-    if (releaseError) {
-      throw new AggregateError(
-        [error, releaseError],
-        `acquisizione lease immagini fallita e rollback non riuscito: ${error?.message ?? error}; ${releaseError?.message ?? releaseError}`,
-        { cause: error },
-      );
-    }
-    throw error;
-  }
-  try {
-    if (imageLeaseSignalExitStatus !== 0) throw imageLeaseSignalError();
-    summary.published = await publishImpl({
-      pages: pagesForPublish,
-      cdnUploads,
-      cantonRssFeeds,
-      removeStaleCantonRssFeeds,
-      // Keep the previous page manifest until the API flip is live: otherwise a
-      // bootstrap retry would lose the inventory needed to delete old slugs.
-      obsoletePages: obsoletePagesForPublish,
-      distDir,
-      section,
-      releaseCommit,
-      publishCantonRssFeedsImpl,
-      snapshotPagesBeforeUpload: deferredLiveRelease,
-      immutablePages: immutableLivePages,
-      requiredPagePaths: [...confirmedMissingPagePaths],
-      assertMainFreshImpl,
-      runImpl,
-      imageLeaseContext,
-      signal: imageLeaseAbortController.signal,
-    });
-  } catch (error) {
-    const releaseError = await releaseImageLeases();
-    removeImageLeaseSignalHandlers();
-    if (releaseError) {
-      console.error(`::error::[${LOG}] rilascio lease immagini fallito dopo errore di pubblicazione: ${releaseError?.message ?? releaseError}`);
-    }
-    if (imageLeaseSignalExitStatus !== 0) {
-      const interrupted = imageLeaseSignalError(error);
-      if (releaseError) {
-        const aggregate = new AggregateError(
-          [interrupted, releaseError],
-          `publish interrotto e rilascio della lease immagini non riuscito: ${interrupted.message}; ${releaseError?.message ?? releaseError}`,
-          { cause: interrupted },
-        );
-        aggregate.exitCode = effectiveImageLeaseExitStatus();
-        throw aggregate;
-      }
-      throw interrupted;
-    }
-    throw error;
-  }
-  const imageLeaseReleaseError = await releaseImageLeases();
-  removeImageLeaseSignalHandlers();
-  const imageLeaseExitStatus = effectiveImageLeaseExitStatus();
-  if (imageLeaseExitStatus !== 0) {
-    summary.published.failures = Math.max(1, Number.isSafeInteger(summary.published.failures) ? summary.published.failures : 0);
-    summary.published.interruptedBy = imageLeaseExitStatus === 130 ? 'SIGINT' : 'SIGTERM';
-  }
-  if (imageLeaseReleaseError) {
-    summary.published.failures = (Number.isSafeInteger(summary.published.failures) ? summary.published.failures : 0) + 1;
-    console.error(`::error::[${LOG}] rilascio lease immagini fallito: ${imageLeaseReleaseError?.message ?? imageLeaseReleaseError}`);
-    writeSummary();
-    return imageLeaseExitStatus || 1;
-  }
-  if (imageLeaseExitStatus !== 0) {
-    writeSummary();
-    return imageLeaseExitStatus;
-  }
+  // Each image PUT acquires and releases its own namespace lease in
+  // upload-cdn-file.sh. Do not hold a namespace lease around the whole
+  // section transaction: the matrix runs independent sections concurrently,
+  // and a section-wide `blog` lease makes every other publisher wait for the
+  // 15-minute acquisition timeout. The held-asset checks above still prevent
+  // a page from being uploaded while one of its referenced assets is
+  // unverified.
+  summary.published = await publishImpl({
+    pages: pagesForPublish,
+    cdnUploads,
+    cantonRssFeeds,
+    removeStaleCantonRssFeeds,
+    // Keep the previous page manifest until the API flip is live: otherwise a
+    // bootstrap retry would lose the inventory needed to delete old slugs.
+    obsoletePages: obsoletePagesForPublish,
+    distDir,
+    section,
+    releaseCommit,
+    publishCantonRssFeedsImpl,
+    snapshotPagesBeforeUpload: deferredLiveRelease,
+    immutablePages: immutableLivePages,
+    requiredPagePaths: [...confirmedMissingPagePaths],
+    assertMainFreshImpl,
+    runImpl,
+  });
   if (summary.published.failures === 0 && deferredLiveRelease) {
     summary.published.manifestDeferred = true;
     if (!args.bootstrap) {
