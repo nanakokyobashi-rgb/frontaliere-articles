@@ -12,6 +12,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'kloentalerstrasse-cantiere-2026': { it: 'kloentalerstrasse-cantiere-2026', en: 'kloentalerstrasse-roadworks-2026', de: 'kloentalerstrasse-bauarbeiten-2026', fr: 'kloentalerstrasse-travaux-2026' },
  'glarona-mercato-immobiliare-2026': { it: 'glarona-mercato-immobiliare-2026', en: 'glarus-real-estate-market-2026', de: 'glarner-immobilienmarkt-2026', fr: 'marche-immobilier-glaris-2026' },
  'landrat-ottobre-glarona-2026': { it: 'landrat-ottobre-glarona-2026', en: 'glarus-council-october-2026', de: 'glarner-landrat-oktober-2026', fr: 'conseil-glaris-octobre-2026' },
+ 'braunwald-progetto-80-milioni': { it: 'braunwald-progetto-80-milioni', en: 'braunwald-project-80-million', de: 'braunwald-projekt-80-millionen', fr: 'braunwald-projet-80-millions' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

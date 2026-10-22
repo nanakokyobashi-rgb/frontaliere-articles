@@ -105,4 +105,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'braunwald-progetto-80-milioni',
+ category: 'novita',
+ date: '2026-10-22T02:24:47.943Z',
+ image: '/images/blog/article-braunwald-progetto-80-milioni.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GL'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

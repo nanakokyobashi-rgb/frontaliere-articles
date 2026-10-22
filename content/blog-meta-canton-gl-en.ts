@@ -30,6 +30,9 @@ const blogMetaCantonGlEn: Record<string, string> = {
     'blog.article.landrat-ottobre-glarona-2026.title': 'Glarus Landrat: 4 million for equalization, water in Rüti',
     'blog.article.landrat-ottobre-glarona-2026.excerpt': 'On October 21, 2026, the Landrat approved CHF 4 million for the equalization between Canton and municipalities, rejected two proposals on the Rüti hydroelectric concession and allocated a sports credit of 3 million for 2027-2030.',
     'blog.article.landrat-ottobre-glarona-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.braunwald-progetto-80-milioni.title': 'Braunwald: a project gets underway, 80 million for 266 inhabitants',
+    'blog.article.braunwald-progetto-80-milioni.excerpt': 'The source indicates 80 million francs for 266 residents in Braunwald and announces the launch of a major project against natural hazards.',
+    'blog.article.braunwald-progetto-80-milioni.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGlEn;
