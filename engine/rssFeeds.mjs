@@ -10,9 +10,8 @@
  * It is MOVED here rather than reimplemented there. A second copy of this
  * parse/emit logic would drift silently — a feed is not diffed by anyone once
  * it is served, so an emitter that quietly stopped matching would go unnoticed
- * until an aggregator dropped the channel. The corpus adapter injects its
- * article body parser at call time because that parser depends on corpus-only
- * scripts; no script dependency enters this mirrored engine.
+ * until an aggregator dropped the channel. AGENTS.md #6: one module, two
+ * callers, drift impossible by construction.
  *
  * The only site-shaped inputs are hoisted into `layout`:
  *   - `seoDir`     where `seo-blog*.ts` live               (site: services/seo)
@@ -37,8 +36,7 @@ import {
   SITE_RENDERED_ARTICLE_SECTIONS,
 } from './shared/articleSectionCore.mjs';
 import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
-import { repairLegacyDoubleEscapedBreaks } from './shared/tsStringEscapes.ts';
-import { readStaticObjectEntries } from './shared/ts-literals.mjs';
+import { parseStaticArticleTranslationSource, parseStaticBlogBodySource } from './shared/articleStaticSource.mjs';
 import { findAllSeoEntryMatches } from './shared/seo-entry.mjs';
 import { createImageCreditReader, mediaRssCreditXml, renderImageCreditHtml } from './shared/imageCredits.mjs';
 import { articleSectionEntry } from './shared/articleSectionCore.mjs';
@@ -323,76 +321,41 @@ function parseBlogSlugs(fs, path, rootDir, slugFile, slugConst) {
   return new Map(Object.entries(parseArticleUrlSlugs(src, slugConst)));
 }
 
-const BLOG_BODY_KEY = /^blog\.article\.(.+)\.(body\d+)$/u;
-
-function parseLocalizedField(fs, path, rootDir, localesDir, metaFileName, field) {
+function parseLocalizedFields(fs, path, rootDir, localesDir, metaFileName) {
   const filePath = path.join(rootDir, localesDir, metaFileName);
-  if (!fs.existsSync(filePath)) return new Map();
+  const titles = new Map();
+  const excerpts = new Map();
+  if (!fs.existsSync(filePath)) return { titles, excerpts };
   const src = fs.readFileSync(filePath, 'utf-8');
 
-  const out = new Map(); // articleId → value
-  for (const { key, value } of readStaticObjectEntries(src, filePath, { errorLabel: 'rss' })) {
-    const match = /^blog\.article\.(.+?)\.(title|excerpt)$/u.exec(key);
-    if (!match || match[2] !== field) continue;
-    // The shared helper, not a lone `\\'` replace: the writer also escapes
-    // backslashes and newlines, so a partial unescape leaves literal `\\n` in
-    // 16 excerpts. This is the field that WINS over article.excerpt in
-    // renderFeed, so it is the primary path, not the fallback.
-    out.set(match[1], value);
+  for (const [articleId, fields] of parseStaticArticleTranslationSource(src, filePath)) {
+    const title = fields.get('title');
+    if (title !== undefined) titles.set(articleId, title);
+    const excerpt = fields.get('excerpt');
+    if (excerpt !== undefined) excerpts.set(articleId, excerpt);
   }
-  return out;
+  return { titles, excerpts };
 }
 
 /** Concatenate the per-locale body chunks of every article in a body dir. */
-function parseBlogBodies(fs, path, rootDir, localesDir, bodyDir, locale, bodyFieldParser) {
+function parseBlogBodies(fs, path, rootDir, localesDir, bodyDir, locale) {
   const bodies = new Map();
   const dir = path.join(rootDir, localesDir, bodyDir, locale);
   if (!fs.existsSync(dir)) return bodies;
 
-  const files = fs.readdirSync(dir).filter((f) => f.endsWith('.ts'));
-
+  const files = fs.readdirSync(dir).filter((file) => file.endsWith('.ts'));
   for (const file of files) {
     const filePath = path.join(dir, file);
     const src = fs.readFileSync(filePath, 'utf-8');
-    const articleParts = new Map(); // articleId → { body1: '...', body2: '...' }
-    if (bodyFieldParser) {
-      if (typeof bodyFieldParser !== 'function') {
-        throw new TypeError('[rss] bodyFieldParser must be a function');
-      }
-      for (const { id, field, value, error } of bodyFieldParser(src)) {
-        if (!/^body\d+$/u.test(field)) continue;
-        if (error || typeof value !== 'string') {
-          throw new Error(
-            '[rss] Body property ' + id + '.' + field +
-              ' is not a static string literal in ' + filePath + ': ' + (error || 'no value'),
-          );
-        }
-        if (!articleParts.has(id)) articleParts.set(id, new Map());
-        articleParts.get(id).set(field, value);
-      }
-    } else {
-      // The mirrored engine uses the shared fail-closed reader by default;
-      // the corpus adapter may inject the API scanner to keep both publisher
-      // paths on one parser contract.
-      const entries = readStaticObjectEntries(src, filePath, { errorLabel: 'rss' });
-      for (const { key, value } of entries) {
-        const keyMatch = BLOG_BODY_KEY.exec(key);
-        if (!keyMatch) continue;
-        const [, id, part] = keyMatch;
-        if (!articleParts.has(id)) articleParts.set(id, new Map());
-        articleParts.get(id).set(part, repairLegacyDoubleEscapedBreaks(value));
-      }
-    }
+    const parsed = parseStaticBlogBodySource(src, filePath);
 
-    for (const [id, parts] of articleParts) {
-      // Sort body1, body2, body3... and concatenate
-      const sorted = [...parts.entries()]
+    for (const [id, fields] of Object.entries(parsed)) {
+      const body = Object.entries(fields)
+        .filter(([field]) => /^body\d+$/.test(field))
         .sort((a, b) => a[0].localeCompare(b[0]))
-        .map(([, v]) => v)
+        .map(([, value]) => value)
         .join('\n');
-      if (sorted.length > 50) {
-        bodies.set(id, sorted);
-      }
+      if (body.length > 50) bodies.set(id, body);
     }
   }
 
@@ -571,19 +534,8 @@ ${itemsXml}
  * `registry` is the section's article array; `id` and `image` are read to
  * resolve `media:content` without touching the filesystem, and `date === ''`
  * (publication date unknown) keeps that article out of the feed.
- * The corpus adapter may inject bodyFieldParser so its API and RSS use the
- * same static body-field extraction rules.
  */
-export function buildSectionFeeds({
-  fs,
-  path,
-  rootDir,
-  section,
-  registry = [],
-  layout = {},
-  repairSerpSnippet,
-  bodyFieldParser,
-}) {
+export function buildSectionFeeds({ fs, path, rootDir, section, registry = [], layout = {}, repairSerpSnippet }) {
   // NON opzionale, e senza fallback identita'. Il produttore reale dei feed e'
   // `scripts/build-api.mjs` del repo corpus (qui dentro l'unico altro chiamante
   // e' tests/rss-feeds-module.test.ts), quindi un default silenzioso renderebbe
@@ -649,9 +601,8 @@ export function buildSectionFeeds({
   const feeds = [];
   for (const locale of RSS_LOCALES) {
     const metaFileName = section.metaFile(locale);
-    const titles = parseLocalizedField(fs, path, rootDir, localesDir, metaFileName, 'title');
-    const excerpts = parseLocalizedField(fs, path, rootDir, localesDir, metaFileName, 'excerpt');
-    const bodies = parseBlogBodies(fs, path, rootDir, localesDir, section.bodyDir, locale, bodyFieldParser);
+    const { titles, excerpts } = parseLocalizedFields(fs, path, rootDir, localesDir, metaFileName);
+    const bodies = parseBlogBodies(fs, path, rootDir, localesDir, section.bodyDir, locale);
 
     const xml = renderFeed(section, locale, feedArticles, slugs, titles, excerpts, bodies, images, credits, repairSerpSnippet);
     if (!xml) continue;
@@ -670,16 +621,7 @@ export function buildSectionFeeds({
  * Defaults to the active publisher table for the corpus/R2 caller; a site
  * emitter must pass `SITE_RSS_SECTIONS` explicitly.
  */
-export function buildAllRssFeeds({
-  fs,
-  path,
-  rootDir,
-  registries = {},
-  layout = {},
-  repairSerpSnippet,
-  bodyFieldParser,
-  sections = RSS_SECTIONS,
-}) {
+export function buildAllRssFeeds({ fs, path, rootDir, registries = {}, layout = {}, repairSerpSnippet, sections = RSS_SECTIONS }) {
   return sections.map((section) =>
     buildSectionFeeds({
       fs,
@@ -689,7 +631,6 @@ export function buildAllRssFeeds({
       registry: registries[section.id] ?? [],
       layout,
       repairSerpSnippet,
-      bodyFieldParser,
     }),
   );
 }

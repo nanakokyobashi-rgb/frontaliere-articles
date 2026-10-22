@@ -8573,6 +8573,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.furto-dati-publica-100mila-dipendenti.title': 'Des hackers d’Akira dérobent les données de 100.000 employés fédéraux de Publica',
     'blog.article.furto-dati-publica-100mila-dipendenti.excerpt': 'Plus de 100’000 employés fédéraux concernés Données également relatives aux partenaires et aux enfants L’attaque contre un prestataire externe remonte à fin septembre Akira menace',
     'blog.article.furto-dati-publica-100mila-dipendenti.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.ora-solare-ritorno-ottobre-svizzera.title': 'Retour à l\'heure d\'hiver : les aiguilles reculent le 25 octobre',
+    'blog.article.ora-solare-ritorno-ottobre-svizzera.excerpt': 'Entre le 24 et le 25 octobre revient l\'heure d\'hiver À 3 heures les aiguilles reculent d\'une heure 71% des personnes interrogées par Forsa veulent abolir le changement Sommeil',
+    'blog.article.ora-solare-ritorno-ottobre-svizzera.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

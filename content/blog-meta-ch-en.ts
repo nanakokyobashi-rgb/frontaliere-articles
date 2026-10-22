@@ -8573,6 +8573,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.furto-dati-publica-100mila-dipendenti.title': 'Akira hackers steal data of 100.000 federal employees from Publica',
     'blog.article.furto-dati-publica-100mila-dipendenti.excerpt': 'Over 100,000 federal employees affected Data also relating to partners and children The attack on an external provider dates back to late September Akira threatens',
     'blog.article.furto-dati-publica-100mila-dipendenti.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.ora-solare-ritorno-ottobre-svizzera.title': 'Return to standard time: clocks go back on October 25',
+    'blog.article.ora-solare-ritorno-ottobre-svizzera.excerpt': 'Between October 24 and 25 standard time returns At 3 the hands turn back one hour 71% of Forsa respondents want to abolish the change Sleep',
+    'blog.article.ora-solare-ritorno-ottobre-svizzera.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

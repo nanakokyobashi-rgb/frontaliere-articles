@@ -11,7 +11,13 @@ const ENTRYPOINT = path.join(ROOT, 'scripts/ci/content-gates-main.mjs');
 const OFFLINE_ENV = {
   PATH: '/usr/bin:/bin',
   TMPDIR: os.tmpdir(),
-  ARTICLE_SOURCE_TYPESCRIPT: process.env.ARTICLE_SOURCE_TYPESCRIPT,
+  // The entrypoint now reaches the mirrored AST reader during module import.
+  // Keep the child offline while passing only the isolated compiler selected by
+  // setup-article-source-runtime; without this absolute path the stripped env
+  // makes the test fail before it can exercise the gate itself.
+  ...(process.env.ARTICLE_SOURCE_TYPESCRIPT
+    ? { ARTICLE_SOURCE_TYPESCRIPT: process.env.ARTICLE_SOURCE_TYPESCRIPT }
+    : {}),
 };
 test('content-gates-main si importa senza eseguire il ramo CLI', () => {
   const result = spawnSync(process.execPath, [

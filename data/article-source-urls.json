@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/info/ticino-grigioni-e-insubria/salute-mentale-e-lavoro-crescono-le-assenze--4086184.html": {
-    "articleId": "salute-mentale-lavoro-ticino",
-    "ts": "2026-09-16T01:00:47.875Z",
-    "keyForm": 2
-  },
   "https://www.ticinonews.ch/ticino/tre-eventi-nel-mendrisiotto-diverse-strade-chiuse-al-traffico-nel-fine-settimana-442620": {
     "articleId": "mendrisiotto-strade-chiuse-weekend",
     "ts": "2026-09-16T01:17:21.978Z",
@@ -2250,8 +2245,8 @@
     "keyForm": 2
   },
   "https://www.ocst.ch/il-lavoro/548-approfondimenti/2618-industria-il-futuro-del-settore-sta-nelle-persone": {
-    "articleId": "industria-ticino-futuro-lavoro",
-    "ts": "2026-10-16T20:29:57.939Z",
+    "articleId": "industria-ticino-strategie-personale",
+    "ts": "2026-10-22T00:06:32.401Z",
     "keyForm": 2
   },
   "https://www.rsi.ch/la1/programmi/informazione/patti-chiari/cadenazzo-si-accendono-semafori%e2%80%a6-e-proteste--4160668.html": {
@@ -2497,6 +2492,11 @@
   "https://www.varesenoi.it/2026/10/21/leggi-notizia/argomenti/politica-20/articolo/trasporti-impegni-per-varese-al-centro-peduncolo-di-vedano-e-ferrovie-1.html": {
     "articleId": "trasporti-varese-peduncolo-vedano-gallarate-luino",
     "ts": "2026-10-21T20:21:53.820Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/s/4180718": {
+    "articleId": "arresto-ticino-banca-occulta",
+    "ts": "2026-10-21T23:28:09.294Z",
     "keyForm": 2
   }
 }

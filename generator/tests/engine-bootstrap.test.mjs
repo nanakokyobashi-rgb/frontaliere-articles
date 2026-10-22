@@ -15,6 +15,9 @@ const CLOSED_SET_HELPERS = new Set([
   // The metadata matcher only imports the static-literal reader; it never
   // consumes the active canton set and is an adapter, not an engine entrypoint.
   'generator/scripts/lib/meta-field-regex.mjs',
+  // This test imports the engine only to parse route literals; it is not a
+  // runtime entrypoint that renders corpus pages.
+  'generator/tests/article-route-ownership.test.mjs',
   'scripts/lib/ts-literals.mjs',
   'scripts/lib/corpus-sections.mjs',
 ]);

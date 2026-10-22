@@ -56,8 +56,8 @@ export function readStaticStringLiteral(source, startIdx, sourcePath = 'source',
 }
 
 /** Decode a static literal using the same escape contract as the TS readers. */
-export function decodeStaticStringLiteral(raw, quote = "'") {
-  return decodeStaticStringLiteralShared(raw, quote);
+export function decodeStaticStringLiteral(raw, quote = "'", options = {}) {
+  return decodeStaticStringLiteralShared(raw, quote, options);
 }
 
 /** Skip whitespace and comments before the next static object token. */

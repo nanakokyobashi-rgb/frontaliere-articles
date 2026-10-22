@@ -2880,6 +2880,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'cofinanziamento-tox-info-suisse': { it: 'cofinanziamento-tox-info-suisse', en: 'cofinancing-tox-info-suisse', de: 'cofinanzierung-tox-info-suisse', fr: 'cofinancement-tox-info-suisse' },
  'consiglio-poverta-prima-conferenza': { it: 'consiglio-poverta-prima-conferenza', en: 'national-poverty-council-first-conference', de: 'nationaler-armutsrat-erste-konferenz', fr: 'conseil-national-pauvrete-premiere-conference' },
  'furto-dati-publica-100mila-dipendenti': { it: 'furto-dati-publica-100mila-dipendenti', en: 'akira-hack-publica-federal-employee-data', de: 'akira-hack-publica-bundesangestellten-daten', fr: 'piratage-akira-publica-donnees-employes-federaux' },
+ 'ora-solare-ritorno-ottobre-svizzera': { it: 'ora-solare-ritorno-ottobre-svizzera', en: 'standard-time-return-october-switzerland', de: 'winterzeit-rueckkehr-oktober-schweiz', fr: 'retour-heure-hiver-octobre-suisse' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
