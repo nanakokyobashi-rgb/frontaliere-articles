@@ -52,6 +52,7 @@ import {
   selectFaqIssuesForProcessing,
   wrongLocalePair,
 } from './fix-faq-locales.mjs';
+import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { assertLocalizedToponymPair, extractArticleProjectionText } from './lib/localized-toponyms.mjs';
@@ -243,17 +244,6 @@ function write(filePath, content) {
     try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
     throw err;
   }
-}
-
-/** Same escaping as the canonical TS writer, including Unicode line separators. */
-function escapeForSingleQuoteTS(s) {
-  return String(s || '')
-    .replace(/\\/g, '\\\\')
-    .replace(/'/g, "\\'")
-    .replace(/\n/g, '\\n')
-    .replace(/\u2028/g, '\\u2028')
-    .replace(/\u2029/g, '\\u2029')
-    .replace(/\r/g, '');
 }
 
 /**

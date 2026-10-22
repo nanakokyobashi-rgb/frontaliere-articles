@@ -39,6 +39,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import * as batch from '../scripts/batch-add-faq-to-articles.mjs';
+import { buildMetaBlock } from '../scripts/lib/article-meta-block.mjs';
+import { parseFaqLiteral, serializeFaqLiteral } from '../scripts/fix-faq-locales.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
 const SCRIPT = path.join(QUI, '..', 'scripts', 'batch-add-faq-to-articles.mjs');
@@ -322,6 +324,33 @@ test('#3102 il writer batch usa gli escape TS canonici per U+2028/U+2029', (t) =
   ));
   assert.equal(batch.replaceFaqInBodyFile(replaced, FAQ_WITH_UNICODE_LINE_TERMINATORS, ALPHA), true);
   assertWrittenSafely(replaced);
+});
+
+test('#3102 il writer condiviso dei meta blocca i separatori Unicode raw', () => {
+  const separator2028 = String.fromCharCode(0x2028);
+  const separator2029 = String.fromCharCode(0x2029);
+  const block = buildMetaBlock({
+    id: ALPHA,
+    content: {
+      it: {
+        title: `Titolo${separator2028}`,
+        excerpt: 'Excerpt valido per il writer condiviso.',
+        imageAlt: `Alt${separator2029}`,
+      },
+    },
+  }, 'it');
+
+  assert.match(block, /\\u2028/, 'il writer meta deve serializzare U+2028 come escape TS');
+  assert.match(block, /\\u2029/, 'il writer meta deve serializzare U+2029 come escape TS');
+  assert.doesNotMatch(block, /[\u2028\u2029]/u, 'nessun separatore Unicode raw deve entrare nel meta literal');
+});
+
+test('#3102 il writer FAQ condiviso conserva i separatori nel round-trip del fixer', () => {
+  const literal = serializeFaqLiteral(FAQ_WITH_UNICODE_LINE_TERMINATORS);
+  const parsed = parseFaqLiteral(literal);
+
+  assert.equal(parsed.legacy, false);
+  assert.deepEqual(parsed.pairs, FAQ_WITH_UNICODE_LINE_TERMINATORS);
 });
 
 test('#394 i file scritti dallo scrittore LEGACY restano leggibili', () => {
