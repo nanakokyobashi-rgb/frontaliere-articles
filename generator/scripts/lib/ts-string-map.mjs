@@ -88,6 +88,7 @@ const REGEX_PREFIX_KEYWORDS = new Set([
 const REGEX_PREFIX_PUNCTUATION = new Set([
   '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>',
 ]);
+const CONTROL_PAREN_KEYWORDS = new Set(['catch', 'for', 'if', 'switch', 'while', 'with']);
 
 function isRegexLineTerminator(character) {
   return character === '\n' || character === '\r' || character === '\u2028' || character === '\u2029';
@@ -124,6 +125,9 @@ function staticSourceTokens(src) {
   const tokens = [];
   let i = 0;
   let canStartRegex = true;
+  let lastSignificant = null;
+  let lastIdentifier = null;
+  const parenContexts = [];
 
   while (i < src.length) {
     const c = src[i];
@@ -150,16 +154,21 @@ function staticSourceTokens(src) {
       tokens.push({ type: 'string', value: literal.value });
       i = literal.end;
       canStartRegex = false;
+      lastSignificant = 'literal';
+      lastIdentifier = null;
       continue;
     }
 
     if (/[A-Za-z_$]/u.test(c)) {
       let end = i + 1;
       while (/[A-Za-z0-9_$]/u.test(src[end] || '')) end += 1;
+      const word = src.slice(i, end);
       for (let position = i; position < end; position += 1) {
         tokens.push({ type: 'punctuation', value: src[position] });
       }
-      canStartRegex = REGEX_PREFIX_KEYWORDS.has(src.slice(i, end));
+      canStartRegex = REGEX_PREFIX_KEYWORDS.has(word);
+      lastIdentifier = { value: word, member: lastSignificant === 'dot' };
+      lastSignificant = 'identifier';
       i = end;
       continue;
     }
@@ -170,6 +179,42 @@ function staticSourceTokens(src) {
       tokens.push({ type: 'regex' });
       i = end;
       canStartRegex = false;
+      lastSignificant = 'literal';
+      lastIdentifier = null;
+      continue;
+    }
+
+    // A division slash consumes the expression on its left. Its right-hand
+    // operand may start with a regex literal, so keep that transition explicit
+    // instead of deriving it one punctuation character at a time.
+    if (c === '/' && !canStartRegex) {
+      tokens.push({ type: 'punctuation', value: c });
+      i += 1;
+      canStartRegex = true;
+      lastSignificant = 'division';
+      lastIdentifier = null;
+      continue;
+    }
+
+    if (c === '(') {
+      tokens.push({ type: 'punctuation', value: c });
+      parenContexts.push(Boolean(
+        lastIdentifier && !lastIdentifier.member && CONTROL_PAREN_KEYWORDS.has(lastIdentifier.value),
+      ));
+      i += 1;
+      canStartRegex = true;
+      lastSignificant = 'open-paren';
+      lastIdentifier = null;
+      continue;
+    }
+
+    if (c === ')') {
+      tokens.push({ type: 'punctuation', value: c });
+      const controlParen = parenContexts.pop() === true;
+      i += 1;
+      canStartRegex = controlParen;
+      lastSignificant = 'close-paren';
+      lastIdentifier = null;
       continue;
     }
 
@@ -180,6 +225,8 @@ function staticSourceTokens(src) {
       tokens.push({ type: 'punctuation', value: c }, { type: 'punctuation', value: next });
       i += 2;
       canStartRegex = false;
+      lastSignificant = 'postfix';
+      lastIdentifier = null;
       continue;
     }
 
@@ -189,6 +236,8 @@ function staticSourceTokens(src) {
       tokens.push({ type: 'punctuation', value: c });
       i += 1;
       canStartRegex = false;
+      lastSignificant = 'postfix';
+      lastIdentifier = null;
       continue;
     }
 
@@ -196,7 +245,9 @@ function staticSourceTokens(src) {
     // adjacent `string : string` property, not text spanning intervening code.
     tokens.push({ type: 'punctuation', value: c });
     i += 1;
-    canStartRegex = c === '/' || REGEX_PREFIX_PUNCTUATION.has(c);
+    canStartRegex = REGEX_PREFIX_PUNCTUATION.has(c);
+    lastSignificant = c === '.' ? 'dot' : 'punctuation';
+    lastIdentifier = null;
   }
 
   return tokens;

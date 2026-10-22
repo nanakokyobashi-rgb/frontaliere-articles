@@ -9,6 +9,41 @@
 
 const STATIC_LITERAL_QUOTES = new Set(['"', "'", '`']);
 const TS_ESCAPE_RX = /\\(u[0-9a-fA-F]{4}|\r\n|[\s\S])/g;
+const REGEX_PREFIX_KEYWORDS = new Set([
+  'await', 'case', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return',
+  'throw', 'typeof', 'void', 'yield',
+]);
+const REGEX_PREFIX_PUNCTUATION = new Set([
+  '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>',
+]);
+const CONTROL_PAREN_KEYWORDS = new Set(['catch', 'for', 'if', 'switch', 'while', 'with']);
+
+function isRegexLineTerminator(character) {
+  return character === '\n' || character === '\r' || character === '\u2028' || character === '\u2029';
+}
+
+/** Skip a regex literal while keeping its quoted-looking body opaque. */
+function skipStaticRegexLiteral(source, offset) {
+  let inCharacterClass = false;
+  let cursor = offset + 1;
+  while (cursor < source.length) {
+    const character = source[cursor];
+    if (character === '\\') {
+      cursor += 2;
+      continue;
+    }
+    if (isRegexLineTerminator(character)) return -1;
+    if (character === '[') inCharacterClass = true;
+    else if (character === ']' && inCharacterClass) inCharacterClass = false;
+    else if (character === '/' && !inCharacterClass) {
+      cursor += 1;
+      while (/[A-Za-z]/u.test(source[cursor] || '')) cursor += 1;
+      return cursor;
+    }
+    cursor += 1;
+  }
+  return -1;
+}
 
 /** Read one static JavaScript/TypeScript string literal. */
 export function readStaticStringLiteral(source, startIdx, sourcePath = 'source', errorLabel = 'static-literal') {
@@ -106,13 +141,146 @@ export function readStaticObjectEntries(
   let braceDepth = 0;
   let sawObjectOpen = false;
   let closedObject = false;
+  let canStartRegex = true;
+  let lastSignificant = null;
+  let lastIdentifier = null;
+  const parenContexts = [];
   while (cursor < source.length) {
     cursor = skipStaticTrivia(source, cursor, sourcePath, errorLabel);
     if (cursor >= source.length) break;
+    const character = source[cursor];
+    const nextCharacter = source[cursor + 1];
+
+    if (character === "'" || character === '"' || character === '`') {
+      const literal = readStaticStringLiteral(source, cursor, sourcePath, errorLabel);
+      if (!literal) throw new Error(`[${errorLabel}] Unterminated string literal in ${sourcePath}`);
+      const afterLiteral = skipStaticTrivia(source, literal.end, sourcePath, errorLabel);
+      if (source[afterLiteral] !== ':') {
+        cursor = literal.end;
+        canStartRegex = false;
+        lastSignificant = 'literal';
+        lastIdentifier = null;
+        continue;
+      }
+
+      const afterKey = afterLiteral;
+      const valueStart = skipStaticTrivia(source, afterKey + 1, sourcePath, errorLabel);
+      if (!STATIC_LITERAL_QUOTES.has(source[valueStart])) {
+        throw new Error(`[${errorLabel}] Property ${decodeStaticStringLiteral(literal.value, literal.quote)} must have a static string value in ${sourcePath}`);
+      }
+      const valueLiteral = readStaticStringLiteral(source, valueStart, sourcePath, errorLabel);
+      if (!valueLiteral) throw new Error(`[${errorLabel}] Unterminated value in ${sourcePath}`);
+      const afterValue = skipStaticTrivia(source, valueLiteral.end, sourcePath, errorLabel);
+      const terminal = afterValue >= source.length;
+      if ((!terminal || !allowTerminalFragment)
+        && source[afterValue] !== ',' && source[afterValue] !== '}') {
+        throw new Error(`[${errorLabel}] Static property must end with ',' or '}' in ${sourcePath}`);
+      }
+      if (source[afterValue] === ',') {
+        const nextToken = skipStaticTrivia(source, afterValue + 1, sourcePath, errorLabel);
+        if (nextToken >= source.length && !allowTerminalFragment) {
+          throw new Error(`[${errorLabel}] Static property cannot end with a dangling comma in ${sourcePath}`);
+        }
+      }
+
+      const entry = {
+        key: decodeStaticStringLiteral(literal.value, literal.quote),
+        value: decodeStaticStringLiteral(valueLiteral.value, valueLiteral.quote, { newlineAs }),
+        keyQuote: literal.quote,
+        valueQuote: valueLiteral.quote,
+      };
+      Object.defineProperties(entry, {
+        rawKey: { value: literal.value },
+        rawValue: { value: valueLiteral.value },
+        start: { value: cursor },
+        end: { value: valueLiteral.end },
+      });
+      entries.push(entry);
+      cursor = valueLiteral.end;
+      canStartRegex = false;
+      lastSignificant = 'literal';
+      lastIdentifier = null;
+      continue;
+    }
+
+    if (/[A-Za-z_$]/u.test(character)) {
+      let end = cursor + 1;
+      while (/[A-Za-z0-9_$]/u.test(source[end] || '')) end += 1;
+      const word = source.slice(cursor, end);
+      canStartRegex = REGEX_PREFIX_KEYWORDS.has(word);
+      lastIdentifier = { value: word, member: lastSignificant === 'dot' };
+      lastSignificant = 'identifier';
+      cursor = end;
+      continue;
+    }
+
+    // Postfix increment/decrement and TypeScript's postfix non-null
+    // assertion terminate the expression on their left. Consume them as a
+    // unit so the following division slash cannot be mistaken for a regex.
+    if ((character === '+' && nextCharacter === '+')
+      || (character === '-' && nextCharacter === '-')) {
+      cursor += 2;
+      canStartRegex = false;
+      lastSignificant = 'postfix';
+      lastIdentifier = null;
+      continue;
+    }
+    if (character === '!' && !canStartRegex) {
+      cursor += 1;
+      canStartRegex = false;
+      lastSignificant = 'postfix';
+      lastIdentifier = null;
+      continue;
+    }
+
+    if (character === '/' && canStartRegex) {
+      const end = skipStaticRegexLiteral(source, cursor);
+      if (end < 0) throw new Error(`[${errorLabel}] Unterminated regex literal in ${sourcePath}`);
+      cursor = end;
+      canStartRegex = false;
+      lastSignificant = 'literal';
+      lastIdentifier = null;
+      continue;
+    }
+
+    // A division slash leaves its right-hand operand in a regex-capable
+    // context; keep this transition explicit rather than treating slash as a
+    // prefix operator one character at a time.
+    if (character === '/' && !canStartRegex) {
+      cursor += 1;
+      canStartRegex = true;
+      lastSignificant = 'division';
+      lastIdentifier = null;
+      continue;
+    }
+
+    if (character === '(') {
+      parenContexts.push(Boolean(
+        lastIdentifier && !lastIdentifier.member && CONTROL_PAREN_KEYWORDS.has(lastIdentifier.value),
+      ));
+      cursor += 1;
+      canStartRegex = true;
+      lastSignificant = 'open-paren';
+      lastIdentifier = null;
+      continue;
+    }
+
+    if (character === ')') {
+      const controlParen = parenContexts.pop() === true;
+      cursor += 1;
+      canStartRegex = controlParen;
+      lastSignificant = 'close-paren';
+      lastIdentifier = null;
+      continue;
+    }
+
     if (source[cursor] === '{') {
       braceDepth += 1;
       sawObjectOpen = true;
       cursor += 1;
+      canStartRegex = true;
+      lastSignificant = 'punctuation';
+      lastIdentifier = null;
       continue;
     }
     if (source[cursor] === '}') {
@@ -121,57 +289,15 @@ export function readStaticObjectEntries(
         if (braceDepth === 0) closedObject = true;
       }
       cursor += 1;
+      canStartRegex = false;
+      lastSignificant = 'punctuation';
+      lastIdentifier = null;
       continue;
     }
-    if (!STATIC_LITERAL_QUOTES.has(source[cursor])) {
-      cursor += 1;
-      continue;
-    }
-
-    const keyLiteral = readStaticStringLiteral(source, cursor, sourcePath, errorLabel);
-    if (!keyLiteral) throw new Error(`[${errorLabel}] Unterminated string literal in ${sourcePath}`);
-    const afterKey = skipStaticTrivia(source, keyLiteral.end, sourcePath, errorLabel);
-    if (source[afterKey] !== ':') {
-      cursor = keyLiteral.end;
-      continue;
-    }
-
-    const valueStart = skipStaticTrivia(source, afterKey + 1, sourcePath, errorLabel);
-    if (!STATIC_LITERAL_QUOTES.has(source[valueStart])) {
-      throw new Error(`[${errorLabel}] Property ${decodeStaticStringLiteral(keyLiteral.value, keyLiteral.quote)} must have a static string value in ${sourcePath}`);
-    }
-    const valueLiteral = readStaticStringLiteral(source, valueStart, sourcePath, errorLabel);
-    if (!valueLiteral) throw new Error(`[${errorLabel}] Unterminated value in ${sourcePath}`);
-    const afterValue = skipStaticTrivia(source, valueLiteral.end, sourcePath, errorLabel);
-    const terminal = afterValue >= source.length;
-    if ((!terminal || !allowTerminalFragment)
-      && source[afterValue] !== ',' && source[afterValue] !== '}') {
-      throw new Error(`[${errorLabel}] Static property must end with ',' or '}' in ${sourcePath}`);
-    }
-    if (source[afterValue] === ',') {
-      const nextToken = skipStaticTrivia(source, afterValue + 1, sourcePath, errorLabel);
-      if (nextToken >= source.length && !allowTerminalFragment) {
-        throw new Error(`[${errorLabel}] Static property cannot end with a dangling comma in ${sourcePath}`);
-      }
-    }
-
-    const entry = {
-      key: decodeStaticStringLiteral(keyLiteral.value, keyLiteral.quote),
-      value: decodeStaticStringLiteral(valueLiteral.value, valueLiteral.quote, { newlineAs }),
-      keyQuote: keyLiteral.quote,
-      valueQuote: valueLiteral.quote,
-    };
-    // Keep source spelling and offsets available to compatibility adapters
-    // without changing the enumerable reader contract used by deep equality
-    // tests and existing consumers.
-    Object.defineProperties(entry, {
-      rawKey: { value: keyLiteral.value },
-      rawValue: { value: valueLiteral.value },
-      start: { value: cursor },
-      end: { value: valueLiteral.end },
-    });
-    entries.push(entry);
-    cursor = valueLiteral.end;
+    cursor += 1;
+    canStartRegex = REGEX_PREFIX_PUNCTUATION.has(character);
+    lastSignificant = character === '.' ? 'dot' : 'punctuation';
+    lastIdentifier = null;
   }
   if (requireObjectClosure && (!sawObjectOpen || braceDepth !== 0 || !closedObject)) {
     throw new Error(`[${errorLabel}] Static object is not closed in ${sourcePath}`);

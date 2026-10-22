@@ -79,6 +79,20 @@ test('il reader gestisce commenti CR-only e continuazioni CRLF', () => {
   ]);
 });
 
+test('il reader ignora regex literal anche dopo divisioni e parentesi di controllo', () => {
+  const source = [
+    String.raw`const pattern = /["']blog\.article\.fake\.literal["']:\s*["']fake["']/u;`,
+    String.raw`if (condition) /["']blog\.article\.fake\.body["']:\s*["']fake["']/u;`,
+    "let n = 1; n++ / /'blog.article.fake.postfix': 'fake',/ / /x/;",
+    "const meta = { 'blog.article.reale.title': 'attuale' };",
+  ].join('\n');
+
+  assert.deepEqual(
+    readStaticObjectEntries(source, 'fixture.ts').map(({ key, value }) => [key, value]),
+    [['blog.article.reale.title', 'attuale']],
+  );
+});
+
 test('il reader richiede la chiusura dell oggetto completo e può appiattire i metadata', () => {
   assert.throws(
     () => readStaticObjectEntries("const meta = { 'blog.article.reale.title': 'titolo',", 'truncated.ts'),

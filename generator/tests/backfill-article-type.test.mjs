@@ -327,6 +327,18 @@ describe('lettore TS condiviso', () => {
     ]);
   });
 
+  test('ignora regex usati come corpo dopo le parentesi di controllo', () => {
+    const source = [
+      String.raw`if (condition) /["']blog\.article\.fake\.if["']:\s*["']fake["']/u;`,
+      String.raw`while (condition) /["']blog\.article\.fake\.while["']:\s*["']fake["']/u;`,
+      "'blog.article.real.title': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.title', 'actual'],
+    ]);
+  });
+
   test('conta le barre prima di una interpolazione escaped', () => {
     const genuinelyInterpolated = "'blog.article.demo.body1': `literal \\\\${value}`,";
     assert.throws(
