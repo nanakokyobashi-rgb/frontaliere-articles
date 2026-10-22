@@ -10,13 +10,17 @@
 const STATIC_LITERAL_QUOTES = new Set(['"', "'", '`']);
 const TS_ESCAPE_RX = /\\(u[0-9a-fA-F]{4}|\r\n|[\s\S])/g;
 const REGEX_PREFIX_KEYWORDS = new Set([
-  'await', 'case', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return',
+  'await', 'case', 'default', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return',
   'throw', 'typeof', 'void', 'yield',
 ]);
 const REGEX_PREFIX_PUNCTUATION = new Set([
   '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>',
 ]);
 const CONTROL_PAREN_KEYWORDS = new Set(['catch', 'for', 'if', 'switch', 'while', 'with']);
+const BLOCK_BRACE_KEYWORDS = new Set([
+  'class', 'do', 'else', 'enum', 'finally', 'interface', 'module', 'namespace', 'static', 'try',
+]);
+const BLOCK_BRACE_PENDING_RESET = new Set(['(', ')', '[', ']', ',', ':', ';', '=']);
 
 function isRegexLineTerminator(character) {
   return character === '\n' || character === '\r' || character === '\u2028' || character === '\u2029';
@@ -80,7 +84,9 @@ export function decodeStaticStringLiteral(raw, quote = "'", options = {}) {
   return raw.replace(TS_ESCAPE_RX, (whole, escape) => {
     switch (escape[0]) {
       case 'n': return '\n';
-      case 'r': return newlineAs === undefined ? '' : '\r';
+      // A backslash followed by CRLF (or the escaped `\r` form) is a source
+      // continuation, not content. `newlineAs` applies only to decoded `\n`.
+      case 'r': return '';
       case '\n': return '';
       case '\r': return '';
       case '\u2028': return '';
@@ -161,6 +167,8 @@ export function readStaticObjectEntries(
   let lastSignificant = null;
   let lastIdentifier = null;
   const parenContexts = [];
+  const braceContexts = [];
+  let blockBracePending = false;
   while (cursor < source.length) {
     cursor = skipStaticTrivia(source, cursor, sourcePath, errorLabel);
     if (cursor >= source.length) break;
@@ -176,6 +184,7 @@ export function readStaticObjectEntries(
         canStartRegex = false;
         lastSignificant = 'literal';
         lastIdentifier = null;
+        blockBracePending = false;
         continue;
       }
 
@@ -228,9 +237,11 @@ export function readStaticObjectEntries(
       let end = cursor + 1;
       while (/[A-Za-z0-9_$]/u.test(source[end] || '')) end += 1;
       const word = source.slice(cursor, end);
-      canStartRegex = REGEX_PREFIX_KEYWORDS.has(word);
-      lastIdentifier = { value: word, member: lastSignificant === 'dot' };
+      const member = lastSignificant === 'dot';
+      canStartRegex = !member && REGEX_PREFIX_KEYWORDS.has(word);
+      lastIdentifier = { value: word, member };
       lastSignificant = 'identifier';
+      if (!member && BLOCK_BRACE_KEYWORDS.has(word)) blockBracePending = true;
       cursor = end;
       continue;
     }
@@ -244,6 +255,7 @@ export function readStaticObjectEntries(
       canStartRegex = false;
       lastSignificant = 'postfix';
       lastIdentifier = null;
+      blockBracePending = false;
       continue;
     }
     if (character === '!' && !canStartRegex) {
@@ -251,6 +263,7 @@ export function readStaticObjectEntries(
       canStartRegex = false;
       lastSignificant = 'postfix';
       lastIdentifier = null;
+      blockBracePending = false;
       continue;
     }
 
@@ -261,6 +274,7 @@ export function readStaticObjectEntries(
       canStartRegex = false;
       lastSignificant = 'literal';
       lastIdentifier = null;
+      blockBracePending = false;
       continue;
     }
 
@@ -272,6 +286,7 @@ export function readStaticObjectEntries(
       canStartRegex = true;
       lastSignificant = 'division';
       lastIdentifier = null;
+      blockBracePending = false;
       continue;
     }
 
@@ -283,6 +298,7 @@ export function readStaticObjectEntries(
       canStartRegex = true;
       lastSignificant = 'open-paren';
       lastIdentifier = null;
+      blockBracePending = false;
       continue;
     }
 
@@ -292,37 +308,61 @@ export function readStaticObjectEntries(
       canStartRegex = controlParen;
       lastSignificant = 'close-paren';
       lastIdentifier = null;
+      blockBracePending = false;
+      continue;
+    }
+
+    if (character === '=' && nextCharacter === '>') {
+      cursor += 2;
+      canStartRegex = true;
+      lastSignificant = 'arrow';
+      lastIdentifier = null;
+      blockBracePending = false;
       continue;
     }
 
     if (source[cursor] === '{') {
-      braceDepth += 1;
-      sawObjectOpen = true;
+      const isBlockBrace = lastSignificant === 'close-paren'
+        || lastSignificant === 'arrow'
+        || blockBracePending
+        || (lastSignificant === 'identifier'
+          && lastIdentifier
+          && !lastIdentifier.member
+          && BLOCK_BRACE_KEYWORDS.has(lastIdentifier.value));
+      braceContexts.push(isBlockBrace ? 'block' : 'object');
+      if (!isBlockBrace) {
+        braceDepth += 1;
+        sawObjectOpen = true;
+      }
       cursor += 1;
       canStartRegex = true;
-      lastSignificant = 'punctuation';
+      lastSignificant = isBlockBrace ? 'open-block' : 'open-object';
       lastIdentifier = null;
+      blockBracePending = false;
       continue;
     }
     if (source[cursor] === '}') {
-      if (braceDepth > 0) {
+      const braceContext = braceContexts.pop();
+      if (braceContext === 'object' && braceDepth > 0) {
         braceDepth -= 1;
         if (braceDepth === 0) closedObject = true;
-      } else if (!sawObjectOpen) {
+      } else if (!braceContext && !sawObjectOpen) {
         // Compatibility fragments commonly start at the first property and
         // retain the generated object's closing brace.
         closedObject = true;
       }
       cursor += 1;
-      canStartRegex = false;
-      lastSignificant = 'punctuation';
+      canStartRegex = braceContext === 'block';
+      lastSignificant = braceContext === 'block' ? 'close-block' : 'close-object';
       lastIdentifier = null;
+      blockBracePending = false;
       continue;
     }
     cursor += 1;
     canStartRegex = REGEX_PREFIX_PUNCTUATION.has(character);
     lastSignificant = character === '.' ? 'dot' : 'punctuation';
     lastIdentifier = null;
+    if (BLOCK_BRACE_PENDING_RESET.has(character)) blockBracePending = false;
   }
   if (requireObjectClosure && (
     (!sawObjectOpen && !closedObject)

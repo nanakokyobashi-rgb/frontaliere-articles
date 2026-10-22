@@ -82,13 +82,17 @@ export function readTsStringLiteral(src, i) {
  * il file intero prima di estrarre qualsiasi chiave.
  */
 const REGEX_PREFIX_KEYWORDS = new Set([
-  'await', 'case', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return',
+  'await', 'case', 'default', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return',
   'throw', 'typeof', 'void', 'yield',
 ]);
 const REGEX_PREFIX_PUNCTUATION = new Set([
   '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>',
 ]);
 const CONTROL_PAREN_KEYWORDS = new Set(['catch', 'for', 'if', 'switch', 'while', 'with']);
+const BLOCK_BRACE_KEYWORDS = new Set([
+  'class', 'do', 'else', 'enum', 'finally', 'interface', 'module', 'namespace', 'static', 'try',
+]);
+const BLOCK_BRACE_PENDING_RESET = new Set(['(', ')', '[', ']', ',', ':', ';', '=']);
 
 function isRegexLineTerminator(character) {
   return character === '\n' || character === '\r' || character === '\u2028' || character === '\u2029';
@@ -128,6 +132,8 @@ function staticSourceTokens(src) {
   let lastSignificant = null;
   let lastIdentifier = null;
   const parenContexts = [];
+  const braceContexts = [];
+  let blockBracePending = false;
 
   while (i < src.length) {
     const c = src[i];
@@ -156,6 +162,7 @@ function staticSourceTokens(src) {
       canStartRegex = false;
       lastSignificant = 'literal';
       lastIdentifier = null;
+      blockBracePending = false;
       continue;
     }
 
@@ -163,12 +170,14 @@ function staticSourceTokens(src) {
       let end = i + 1;
       while (/[A-Za-z0-9_$]/u.test(src[end] || '')) end += 1;
       const word = src.slice(i, end);
+      const member = lastSignificant === 'dot';
       for (let position = i; position < end; position += 1) {
         tokens.push({ type: 'punctuation', value: src[position] });
       }
-      canStartRegex = REGEX_PREFIX_KEYWORDS.has(word);
-      lastIdentifier = { value: word, member: lastSignificant === 'dot' };
+      canStartRegex = !member && REGEX_PREFIX_KEYWORDS.has(word);
+      lastIdentifier = { value: word, member };
       lastSignificant = 'identifier';
+      if (!member && BLOCK_BRACE_KEYWORDS.has(word)) blockBracePending = true;
       i = end;
       continue;
     }
@@ -181,6 +190,7 @@ function staticSourceTokens(src) {
       canStartRegex = false;
       lastSignificant = 'literal';
       lastIdentifier = null;
+      blockBracePending = false;
       continue;
     }
 
@@ -193,6 +203,7 @@ function staticSourceTokens(src) {
       canStartRegex = true;
       lastSignificant = 'division';
       lastIdentifier = null;
+      blockBracePending = false;
       continue;
     }
 
@@ -205,6 +216,7 @@ function staticSourceTokens(src) {
       canStartRegex = true;
       lastSignificant = 'open-paren';
       lastIdentifier = null;
+      blockBracePending = false;
       continue;
     }
 
@@ -215,6 +227,17 @@ function staticSourceTokens(src) {
       canStartRegex = controlParen;
       lastSignificant = 'close-paren';
       lastIdentifier = null;
+      blockBracePending = false;
+      continue;
+    }
+
+    if (c === '=' && next === '>') {
+      tokens.push({ type: 'punctuation', value: c }, { type: 'punctuation', value: next });
+      i += 2;
+      canStartRegex = true;
+      lastSignificant = 'arrow';
+      lastIdentifier = null;
+      blockBracePending = false;
       continue;
     }
 
@@ -227,6 +250,7 @@ function staticSourceTokens(src) {
       canStartRegex = false;
       lastSignificant = 'postfix';
       lastIdentifier = null;
+      blockBracePending = false;
       continue;
     }
 
@@ -238,6 +262,36 @@ function staticSourceTokens(src) {
       canStartRegex = false;
       lastSignificant = 'postfix';
       lastIdentifier = null;
+      blockBracePending = false;
+      continue;
+    }
+
+    if (c === '{') {
+      const isBlockBrace = lastSignificant === 'close-paren'
+        || lastSignificant === 'arrow'
+        || blockBracePending
+        || (lastSignificant === 'identifier'
+          && lastIdentifier
+          && !lastIdentifier.member
+          && BLOCK_BRACE_KEYWORDS.has(lastIdentifier.value));
+      tokens.push({ type: 'punctuation', value: c });
+      braceContexts.push(isBlockBrace ? 'block' : 'object');
+      i += 1;
+      canStartRegex = true;
+      lastSignificant = isBlockBrace ? 'open-block' : 'open-object';
+      lastIdentifier = null;
+      blockBracePending = false;
+      continue;
+    }
+
+    if (c === '}') {
+      const braceContext = braceContexts.pop();
+      tokens.push({ type: 'punctuation', value: c });
+      i += 1;
+      canStartRegex = braceContext === 'block';
+      lastSignificant = braceContext === 'block' ? 'close-block' : 'close-object';
+      lastIdentifier = null;
+      blockBracePending = false;
       continue;
     }
 
@@ -248,6 +302,7 @@ function staticSourceTokens(src) {
     canStartRegex = REGEX_PREFIX_PUNCTUATION.has(c);
     lastSignificant = c === '.' ? 'dot' : 'punctuation';
     lastIdentifier = null;
+    if (BLOCK_BRACE_PENDING_RESET.has(c)) blockBracePending = false;
   }
 
   return tokens;

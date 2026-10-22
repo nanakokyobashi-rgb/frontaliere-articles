@@ -339,6 +339,29 @@ describe('lettore TS condiviso', () => {
     ]);
   });
 
+  test('non apre regex per keyword usate come membri e riconosce default', () => {
+    const source = [
+      "const member = obj.return / /'blog.article.fake.member': 'fake',/ / /x/;",
+      "export default /'blog.article.fake.default': 'fake'/;",
+      "'blog.article.real.title': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.title', 'actual'],
+    ]);
+  });
+
+  test('ignora regex dopo la chiusura di un blocco senza confonderla con divisione', () => {
+    const source = [
+      "if (condition) {} /'blog.article.fake.block': 'fake',/;",
+      "'blog.article.real.title': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.title', 'actual'],
+    ]);
+  });
+
   test('conta le barre prima di una interpolazione escaped', () => {
     const genuinelyInterpolated = "'blog.article.demo.body1': `literal \\\\${value}`,";
     assert.throws(

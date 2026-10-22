@@ -93,6 +93,39 @@ test('il reader ignora regex literal anche dopo divisioni e parentesi di control
   );
 });
 
+test('il reader distingue keyword membro e default prima di un regex literal', () => {
+  const source = [
+    "const member = obj.return / /'blog.article.fake.member': 'fake',/ / /x/;",
+    "export default /'blog.article.fake.default': 'fake'/;",
+    "const meta = { 'blog.article.reale.title': 'attuale' };",
+  ].join('\n');
+
+  assert.deepEqual(
+    readStaticObjectEntries(source, 'fixture.ts').map(({ key, value }) => [key, value]),
+    [['blog.article.reale.title', 'attuale']],
+  );
+});
+
+test('il reader ignora regex dopo la chiusura di un blocco', () => {
+  const source = [
+    "if (condition) {} /'blog.article.fake.block': 'fake',/;",
+    "const meta = { 'blog.article.reale.title': 'attuale' };",
+  ].join('\n');
+
+  assert.deepEqual(
+    readStaticObjectEntries(source, 'fixture.ts').map(({ key, value }) => [key, value]),
+    [['blog.article.reale.title', 'attuale']],
+  );
+});
+
+test('newlineAs non reintroduce una continuazione CRLF rimossa', () => {
+  const source = "const meta = { 'blog.article.reale.title': 'prima\\\r\nseconda' };";
+  assert.equal(
+    readStaticObjectEntries(source, 'fixture.ts', { newlineAs: ' ' })[0].value,
+    'primaseconda',
+  );
+});
+
 test('il reader richiede la chiusura dell oggetto completo e può appiattire i metadata', () => {
   assert.throws(
     () => readStaticObjectEntries("const meta = { 'blog.article.reale.title': 'titolo',", 'truncated.ts'),
