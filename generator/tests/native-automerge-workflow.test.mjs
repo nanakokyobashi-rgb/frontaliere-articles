@@ -123,6 +123,19 @@ test('#1604: il bootstrap ritenta solo letture GitHub transitorie e resta fail-c
   assert.match(source, /download_and_check \\\n\s+'scripts\/ci\/lib\/constants\.mjs' "\$helper_dir\/lib\/constants\.mjs"/);
 });
 
+test('#1604: la ricerca della PR tollera pagine nulle senza iterare un payload nullo', () => {
+  const start = source.indexOf('pr_number=$(GH_TOKEN=');
+  const end = source.indexOf('\n          fi', start);
+  assert.ok(start >= 0 && end > start, 'risoluzione della PR non trovata');
+  const resolver = source.slice(start, end);
+  assert.match(resolver, /if type != "array" then/);
+  assert.match(resolver, /any\(\.\[\]; type != "array" and type != "null"\)/);
+  assert.match(resolver, /map\(select\(type == "array"\)\)/);
+  assert.match(resolver, /add \/\/ \[\]/);
+  assert.match(resolver, /select\(type == "object"\)/);
+  assert.doesNotMatch(resolver, /\[add\[\]/);
+});
+
 test('il gate corrente usa il selettore tri-state condiviso come dipendenza hard', () => {
   assert.match(gateSource, VITEST_IMPORT_RE);
   assert.match(source, /gate_requires_vitest=unknown/);
