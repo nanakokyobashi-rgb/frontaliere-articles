@@ -450,7 +450,10 @@ import {
 // dal classificatore deterministico (nessun LLM, nessun gate).
 import { registryCantonsForArticle } from './lib/canton-classifier.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
-import { findIdListLiteralSpan } from '../../scripts/lib/ts-literals.mjs';
+import {
+  decodeStaticStringLiteral,
+  findIdListLiteralSpan,
+} from '../../scripts/lib/ts-literals.mjs';
 import { readTopLevelString, scanTopLevelArticleRecords } from '../../scripts/lib/article-registry-reader.mjs';
 import {
   assertSeoEntryAbsent,
@@ -16811,7 +16814,8 @@ function validateStructuredData(data) {
   // Match single-quoted strings (same logic as ogPagesPlugin matchStr)
   const matchStr = (key) => {
     const rx = new RegExp(`${key}:\\s*'((?:[^'\\\\]|\\\\.)*)'`, 'm');
-    return block.match(rx)?.[1]?.replace(/\\(.)/g, (_, c) => c === 'n' ? ' ' : c === 'r' ? '' : c === 't' ? ' ' : c) ?? '';
+    const match = block.match(rx);
+    return match ? decodeStaticStringLiteral(match[1], "'", { newlineAs: ' ' }) : '';
   };
   const title = matchStr('title');
   const desc = matchStr('description');

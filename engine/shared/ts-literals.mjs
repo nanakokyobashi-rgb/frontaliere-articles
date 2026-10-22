@@ -191,7 +191,7 @@ export function decodeStaticStringLiteral(raw, quote = "'", options = {}) {
   const { newlineAs } = options;
   return raw.replace(TS_ESCAPE_RX, (whole, escape) => {
     switch (escape[0]) {
-      case 'n': return '\n';
+      case 'n': return newlineAs ?? '\n';
       // A backslash followed by CRLF (or the escaped `\r` form) is a source
       // continuation, not content. `newlineAs` applies only to decoded `\n`.
       case 'r': return '';

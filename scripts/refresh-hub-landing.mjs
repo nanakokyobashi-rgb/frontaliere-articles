@@ -69,7 +69,7 @@ import path from 'node:path';
 import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 import { createRawFetcher } from './lib/cross-repo-raw-fetch.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
-import { readStaticObjectEntries } from './lib/ts-literals.mjs';
+import { decodeStaticStringLiteral, readStaticObjectEntries } from './lib/ts-literals.mjs';
 import { readCanonicalPath } from './lib/seo-canonical-path.mjs';
 import { CORPUS_SECTIONS } from './lib/corpus-sections.mjs';
 import { patchHubLandingMetadata } from './lib/hub-landing-meta.mjs';
@@ -261,8 +261,10 @@ function readSeoMap() {
   const matchStr = (block, key) => {
     const rxSingle = new RegExp(`${key}:\\s*'((?:[^'\\\\]|\\\\.)*)'`);
     const rxDouble = new RegExp(`${key}:\\s*"((?:[^"\\\\]|\\\\.)*)"`);
-    const m = block.match(rxSingle) || block.match(rxDouble);
-    return m?.[1]?.replace(/\\(.)/g, (_, c) => (c === 'n' ? ' ' : c === 'r' ? '' : c === 't' ? ' ' : c)) ?? '';
+    const single = block.match(rxSingle);
+    const m = single || block.match(rxDouble);
+    if (!m) return '';
+    return decodeStaticStringLiteral(m[1], single ? "'" : '"', { newlineAs: ' ' });
   };
 
   for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.ts'))) {
