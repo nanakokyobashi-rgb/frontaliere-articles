@@ -53,6 +53,7 @@ import {
   wrongLocalePair,
 } from './fix-faq-locales.mjs';
 import { unescapeTsString } from './lib/unescape-ts-string.mjs';
+import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { assertLocalizedToponymPair, extractArticleProjectionText } from './lib/localized-toponyms.mjs';
 import { sanitizeArticleFaqMarkdown } from '../../scripts/lib/article-link-contract.mjs';
@@ -243,11 +244,6 @@ function write(filePath, content) {
     try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
     throw err;
   }
-}
-
-/** Same escaping as create-article.mjs buildBodyFile() */
-function escapeForSingleQuoteTS(s) {
-  return String(s || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n').replace(/\r/g, '');
 }
 
 /**

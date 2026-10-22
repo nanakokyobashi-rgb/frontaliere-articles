@@ -136,6 +136,17 @@ test('un HTTP 429 resta ritentabile', () => {
   assert.equal(calls, 2);
 });
 
+test('gli status numerici nudi e status code: 500 restano ritentabili', () => {
+  for (const failureMessage of ['429 Too Many Requests', '500 Internal Server Error', 'status code: 500']) {
+    const { code, calls, out } = runWith({
+      failTimes: 1,
+      failureMessage,
+    });
+    assert.equal(code, 0, `${failureMessage} doveva essere ritentato, invece:\n${out}`);
+    assert.equal(calls, 2, `${failureMessage}: numero tentativi`);
+  }
+});
+
 test('ogni argomento e ogni flag arrivano al comando, a ogni tentativo', () => {
   const { code, argLines } = runWith({
     failTimes: 1,

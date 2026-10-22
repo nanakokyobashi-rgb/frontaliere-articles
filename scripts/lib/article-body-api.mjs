@@ -495,7 +495,11 @@ export function emitArticleBodyApi({
           };
           quarantined.push(quarantine);
           quarantinedCount += 1;
-          entries[id] = { status: 'quarantined', reason };
+          // The v1 HTTP reader only understands available/missing. Keep this
+          // entry missing so no legacy consumer can mistake an unknown status
+          // for a payload it may fetch; the reason is carried by the additive
+          // index.quarantined detail and the job summary.
+          entries[id] = { status: 'missing' };
           console.warn(`::warning::article body quarantined: ${relativeSource} — ${reason}`);
           continue;
         }
@@ -518,6 +522,13 @@ export function emitArticleBodyApi({
         availableCount,
         missingCount,
         quarantinedCount,
+        // Keep the v1 entry contract: a quarantined article is a missing
+        // payload to existing HTTP consumers, never an unfamiliar status that
+        // they might treat as available. The detail is additive and is used
+        // by the disk gate and the build summary, not by the v1 reader.
+        quarantined: quarantined
+          .filter((item) => item.section === section.section && item.locale === locale)
+          .map(({ id, reason }) => ({ id, reason })),
         entries,
       };
       const indexPath = `bodies/${section.section}/${locale}/index.json`;
@@ -585,6 +596,18 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
       if (index.expectedCount !== expectedCount || !index.entries || typeof index.entries !== 'object' || Array.isArray(index.entries)) {
         throw new Error(`${indexPath}: expectedCount o entries non valido`);
       }
+      if (!Array.isArray(index.quarantined)) {
+        throw new Error(`${indexPath}: quarantined non valido`);
+      }
+      const quarantinedById = new Map();
+      for (const item of index.quarantined) {
+        if (!item || typeof item !== 'object' || !ids.includes(item.id)
+          || typeof item.reason !== 'string' || !item.reason.trim()
+          || quarantinedById.has(item.id)) {
+          throw new Error(`${indexPath}: dettaglio quarantena non valido`);
+        }
+        quarantinedById.set(item.id, item.reason);
+      }
       const indexIds = Object.keys(index.entries);
       const missingIds = ids.filter((id) => !Object.prototype.hasOwnProperty.call(index.entries, id));
       const extraIds = indexIds.filter((id) => !ids.includes(id));
@@ -598,16 +621,11 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
         const entry = index.entries[id];
         if (entry?.status === 'missing') {
           if (Object.keys(entry).length !== 1) throw new Error(`${indexPath}: missing entry contiene dati extra per ${id}`);
-          missingCount += 1;
+          if (quarantinedById.has(id)) quarantinedCount += 1;
+          else missingCount += 1;
           continue;
         }
-        if (entry?.status === 'quarantined') {
-          if (Object.keys(entry).length !== 2 || typeof entry.reason !== 'string' || !entry.reason.trim()) {
-            throw new Error(`${indexPath}: quarantined entry non valida per ${id}`);
-          }
-          quarantinedCount += 1;
-          continue;
-        }
+        if (quarantinedById.has(id)) throw new Error(`${indexPath}: quarantined ${id} non e' missing`);
         if (entry?.status !== 'available' || entry.path !== articleBodyDocumentPath(section.section, locale, id)
           || typeof entry.expectedHash !== 'string' || !/^[a-f0-9]{64}$/u.test(entry.expectedHash)) {
           throw new Error(`${indexPath}: entry non valida per ${id}`);
@@ -620,6 +638,7 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
       }
       if (index.availableCount !== availableCount || index.missingCount !== missingCount
         || index.quarantinedCount !== quarantinedCount
+        || index.quarantined.length !== quarantinedCount
         || availableCount + missingCount + quarantinedCount !== expectedCount) {
         throw new Error(`${indexPath}: counts non corrispondono alle entries su disco`);
       }

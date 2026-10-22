@@ -890,6 +890,11 @@ jobs:
             PREFLIGHT_SECTION="${SECTION_INPUT:-}" \
             PREFLIGHT_CHANGED_FILES_FILE="$changed_files" \
             node scripts/ci/check-blog-body-links.mjs
+          PREFLIGHT_SCAN_MODE="$scan_mode" \
+            PREFLIGHT_ARTICLE_IDS="${ARTICLE_IDS_INPUT:-}" \
+            PREFLIGHT_SECTION="${SECTION_INPUT:-}" \
+            PREFLIGHT_CHANGED_FILES_FILE="$changed_files" \
+            node scripts/ci/check-blog-body-syntax.mjs
 
   publish:
     needs: resolve

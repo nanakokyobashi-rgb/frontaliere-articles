@@ -232,6 +232,14 @@ test('nessuno scrittore di .faq escapa il solo apostrofo', () => {
   );
 });
 
+test('i writer TypeScript riusano la coppia canonica di escape', () => {
+  for (const file of ['batch-add-faq-to-articles.mjs', 'repair-prompt-placeholders.mjs']) {
+    const src = fs.readFileSync(path.join(SCRIPTS, file), 'utf8');
+    assert.match(src, /import \{[^}]*escapeForSingleQuoteTS[^}]*\} from ['"]\.\/lib\/article-meta-block\.mjs['"]/u, file);
+    assert.doesNotMatch(src, /(?:function|const)\s+(?:escapeForSingleQuoteTS|escapeTs)\s*[=(]/u, `${file}: copia locale dello writer`);
+  }
+});
+
 // ─────────────────────────────────────────────────────────────────────────────
 // 6. `--help` e `DRY_RUN=1` non toccano il corpus
 //

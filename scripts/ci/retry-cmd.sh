@@ -80,7 +80,7 @@ BACKOFF_STEP="${RETRY_CMD_BACKOFF:-10}"
 # contiene nessuno di questi marker e deve fermare subito il job.
 is_transient_failure() {
   grep -Eiq \
-    'ETIMEDOUT|ECONNRESET|EAI_AGAIN|ENETUNREACH|EHOSTUNREACH|ECONNREFUSED|ECONNABORTED|EPIPE|socket hang up|fetch failed|temporary failure|could not resolve host|connection timed out|TLS handshake timeout|rate limit|HTTP(/[0-9.]+)?[[:space:]]+(429|5[0-9][0-9])([^0-9]|$)|(status|response code)(code)?[=:[:space:]]+(429|5[0-9][0-9])([^0-9]|$)' \
+    'ETIMEDOUT|ECONNRESET|EAI_AGAIN|ENETUNREACH|EHOSTUNREACH|ECONNREFUSED|ECONNABORTED|EPIPE|socket hang up|fetch failed|temporary failure|could not resolve host|connection timed out|TLS handshake timeout|rate limit|HTTP(/[0-9.]+)?[[:space:]]+(429|5[0-9][0-9])([^0-9]|$)|(^|[^0-9])(429|5[0-9][0-9])[[:space:]]+(Too Many Requests|Internal Server Error|Bad Gateway|Service Unavailable|Gateway Timeout)([^[:alpha:]]|$)|(status|response[[:space:]]+code)([[:space:]]+code)?[[:space:]]*(=|:|[[:space:]])+[[:space:]]*(429|5[0-9][0-9])([^0-9]|$)' \
     "$1"
 }
 
