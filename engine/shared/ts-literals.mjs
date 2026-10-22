@@ -7,10 +7,23 @@
  * reach outside the mirrored subtree at runtime.
  */
 
-import { decodeTypeScriptCodePointEscape } from './tsStringEscapes.ts';
-
 const STATIC_LITERAL_QUOTES = new Set(['"', "'", '`']);
 const TS_ESCAPE_RX = /\\(u\{[0-9a-fA-F]+\}|u[0-9a-fA-F]{4}|x[0-9a-fA-F]{2}|\r\n|[\s\S])/g;
+const TS_CODE_POINT_ESCAPE_RX = /^(x[0-9a-fA-F]{2}|u\{[0-9a-fA-F]+\})/u;
+
+/** Decode a TypeScript code-point escape without re-scanning decoded output. */
+function decodeTypeScriptCodePointEscape(escape) {
+  const match = TS_CODE_POINT_ESCAPE_RX.exec(escape);
+  if (!match) return undefined;
+
+  const token = match[1];
+  const digits = token[0] === 'x' ? token.slice(1) : token.slice(2, -1);
+  const codePoint = Number.parseInt(digits, 16);
+  if (!Number.isSafeInteger(codePoint) || codePoint > 0x10ffff) return undefined;
+
+  return String.fromCodePoint(codePoint);
+}
+
 const REGEX_PREFIX_KEYWORDS = new Set([
   'await', 'break', 'case', 'continue', 'debugger', 'default', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return',
   'throw', 'typeof', 'void', 'yield',
@@ -193,7 +206,7 @@ export function decodeStaticStringLiteral(raw, quote = "'", options = {}) {
   const { newlineAs } = options;
   return raw.replace(TS_ESCAPE_RX, (whole, escape) => {
     const codePoint = decodeTypeScriptCodePointEscape(escape);
-    if (codePoint) return codePoint.value;
+    if (codePoint !== undefined) return codePoint;
 
     switch (escape[0]) {
       case 'n': return newlineAs ?? '\n';
