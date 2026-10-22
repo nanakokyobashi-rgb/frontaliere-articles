@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Fetch a push base only when the checkout does not already contain it.
 #
-# The resolve jobs use actions/checkout with fetch-depth: 2, which normally
-# includes the direct parent of an ordinary push. Keep a guarded fallback for
-# shallow or non-linear histories where the requested base is not present.
+# Resolve jobs use a full-history checkout for corpus high-water checks. Keep a
+# guarded fallback for other callers, older queued checkouts, or non-linear
+# histories where the requested base is not present.
 set -euo pipefail
 
 if [ -z "${PUSH_BEFORE:-}" ] || [[ "$PUSH_BEFORE" =~ ^0+$ ]]; then
