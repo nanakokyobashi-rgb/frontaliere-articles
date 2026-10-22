@@ -31,9 +31,9 @@ function matchingDelimiter(src, openIdx) {
 
   const canStartRegex = () => {
     if (previousToken === null) return true;
-    if (previousToken.kind === 'punct' && '([{=,:;!?&|+\-*%^~<>'.includes(previousToken.value)) return true;
+    if (previousToken.kind === 'punct' && '([{=,:;!?&|+\-*%^~<>/'.includes(previousToken.value)) return true;
     return previousToken.kind === 'word'
-      && /^(?:return|throw|case|break|continue|debugger|default|delete|void|typeof|instanceof|in|of|yield|await|else|do)$/.test(previousToken.value)
+      && /^(?:return|throw|case|break|continue|debugger|default|delete|void|typeof|instanceof|in|of|yield|await|else|do|new)$/.test(previousToken.value)
       && tokenBeforePrevious?.value !== '.';
   };
 

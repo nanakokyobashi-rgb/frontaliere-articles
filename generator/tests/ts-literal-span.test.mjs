@@ -158,8 +158,8 @@ test('matchingDelimiter va fail-closed se una regex contiene una seconda slash',
   assert.throws(() => findIdListLiteralSpan(src, 'IDS'), /non si chiude/);
 });
 
-test('matchingDelimiter riconosce i quattro prefissi regex aggiunti al lexer', () => {
-  for (const keyword of ['break', 'continue', 'debugger', 'default']) {
+test('matchingDelimiter riconosce i prefissi regex aggiunti al lexer', () => {
+  for (const keyword of ['break', 'continue', 'debugger', 'default', 'new']) {
     const src = `{ ${keyword} /}/u, value: 'resta' }`;
     assert.equal(
       matchingDelimiter(src, 0),
@@ -169,8 +169,13 @@ test('matchingDelimiter riconosce i quattro prefissi regex aggiunti al lexer', (
   }
 });
 
+test('matchingDelimiter conserva la transizione divisione → regex', () => {
+  const src = "{ value: a / /[}]/u, after: 'resta' }";
+  assert.equal(matchingDelimiter(src, 0), src.lastIndexOf('}'));
+});
+
 test('matchingDelimiter non tratta le parole membro come prefissi regex', () => {
-  for (const keyword of ['break', 'continue', 'debugger', 'default']) {
+  for (const keyword of ['break', 'continue', 'debugger', 'default', 'new']) {
     for (const access of [
       `obj.${keyword}`,
       `obj?.${keyword}`,
@@ -193,7 +198,7 @@ test('matchingDelimiter non tratta le parole membro come prefissi regex', () => 
 });
 
 test('matchingDelimiter conserva il prefisso regex dopo commenti complessi', () => {
-  for (const keyword of ['break', 'continue', 'debugger', 'default']) {
+  for (const keyword of ['break', 'continue', 'debugger', 'default', 'new']) {
     const source = `{ value: ${keyword} /* marker /* interno */ /}/u, after: 'resta' }`;
     assert.equal(
       matchingDelimiter(source, 0),
