@@ -572,13 +572,15 @@ test('un body non parsabile viene messo in quarantena, escluso dall output e ri-
     metaBySectionLocale: { frontaliere: { it: metaFor() } },
   });
 
-  assert.deepEqual(emitted.totals, { expected: 1, available: 0, missing: 0, quarantined: 1 });
+  assert.deepEqual(emitted.totals, { expected: 1, available: 0, missing: 1, quarantined: 1 });
   assert.equal(emitted.quarantined.length, 1);
   assert.equal(emitted.quarantined[0].source, `content/frontaliere/it/${articleId}.ts`);
   assert.match(emitted.quarantined[0].reason, /Unterminated delimiter/u);
 
   const index = JSON.parse(fs.readFileSync(path.join(outDir, 'bodies/frontaliere/it/index.json'), 'utf8'));
   assert.equal(index.quarantinedCount, 1);
+  assert.equal(index.missingCount, 1, 'la quarantena resta inclusa nel conteggio v1 dei payload assenti');
+  assert.equal(emitted.capability.sections.frontaliere.locales.it.missing, 1);
   assert.equal(index.entries[articleId].status, 'missing', 'il contratto v1 espone la quarantena come payload assente');
   assert.deepEqual(index.quarantined, [{ id: articleId, reason: emitted.quarantined[0].reason }]);
   assert.equal(fs.existsSync(path.join(outDir, `bodies/frontaliere/it/${articleId}.json`)), false);
