@@ -190,7 +190,7 @@ function looksLikeGenericStart(src, offset, statementStart = false) {
     }
     if (character === '/' && src[cursor + 1] === '/') {
       cursor += 2;
-      while (cursor < src.length && src[cursor] !== '\n' && src[cursor] !== '\r') cursor += 1;
+      while (cursor < src.length && !isLineTerminator(src[cursor])) cursor += 1;
       continue;
     }
     if (character === '/' && src[cursor + 1] === '*') {
@@ -255,7 +255,7 @@ function skipParserTrivia(src, start) {
     }
     if (src.startsWith('//', cursor)) {
       cursor += 2;
-      while (cursor < src.length && src[cursor] !== '\n' && src[cursor] !== '\r') cursor += 1;
+      while (cursor < src.length && !isLineTerminator(src[cursor])) cursor += 1;
       continue;
     }
     if (src.startsWith('/*', cursor)) {
