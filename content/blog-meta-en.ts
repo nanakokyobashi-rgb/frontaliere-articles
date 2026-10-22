@@ -13569,6 +13569,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.arresto-ticino-banca-occulta.title': 'Arrest in Ticino in international anti-mafia operation',
     'blog.article.arresto-ticino-banca-occulta.excerpt': 'A person was arrested in Ticino on Wednesday.',
     'blog.article.arresto-ticino-banca-occulta.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.industria-ticino-strategie-personale.title': 'Ticino industry: 15 collective layoffs in 18 months, -900 cross-border commuters',
+    'blog.article.industria-ticino-strategie-personale.excerpt': 'In the last 18 months, numerous collective layoffs in Ticino 15 collective layoffs followed over a year and a half Approximately 900 fewer cross-border commuters in two',
+    'blog.article.industria-ticino-strategie-personale.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

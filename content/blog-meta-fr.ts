@@ -13571,6 +13571,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.arresto-ticino-banca-occulta.title': 'Arrestation au Tessin dans l\'opération antimafia internationale',
     'blog.article.arresto-ticino-banca-occulta.excerpt': 'Une personne a été arrêtée au Tessin mercredi.',
     'blog.article.arresto-ticino-banca-occulta.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.industria-ticino-strategie-personale.title': 'Industrie tessinoise : 15 licenciements collectifs en 18 mois, -900 frontaliers',
+    'blog.article.industria-ticino-strategie-personale.excerpt': 'Au cours des 18 derniers mois, de nombreux licenciements collectifs au Tessin 15 licenciements collectifs suivis en un an et demi Environ 900 frontaliers en moins en deux',
+    'blog.article.industria-ticino-strategie-personale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;

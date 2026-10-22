@@ -13568,6 +13568,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.arresto-ticino-banca-occulta.title': 'Festnahme im Tessin im Rahmen einer internationalen Anti-Mafia-Operation',
     'blog.article.arresto-ticino-banca-occulta.excerpt': 'Am Mittwoch wurde im Tessin eine Person festgenommen.',
     'blog.article.arresto-ticino-banca-occulta.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.industria-ticino-strategie-personale.title': 'Industrie im Tessin: 15 Massenentlassungen in 18 Monaten, -900 Grenzgänger',
+    'blog.article.industria-ticino-strategie-personale.excerpt': 'In den letzten 18 Monaten zahlreiche Massenentlassungen im Tessin 15 Massenentlassungen in eineinhalb Jahren verfolgt Rund 900 Grenzgänger weniger in zwei',
+    'blog.article.industria-ticino-strategie-personale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;
