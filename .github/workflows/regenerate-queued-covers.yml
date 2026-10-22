@@ -195,11 +195,10 @@ jobs:
     # Budget: 45m job timeout; the first step starts a 40m internal deadline,
     # so the 5m tail remains for ack, summary and cleanup even when checkout,
     # npm and Remote Config consume time. Each cover reserves 120s and the
-    # final publisher phase reserves 15m. When an outbox already exists, no new
-    # generation is safe until it is acknowledged, so the pre-generation
-    # publisher may use the remaining internal budget; if it finishes late,
-    # the generation budget calculation below skips new covers rather than
-    # stealing time from the final publisher phase.
+    # final publisher phase reserves 15m; the pre-generation publisher phase is
+    # capped at 15m as well. If an existing outbox cannot be acknowledged in
+    # that window, it stays durable and the next hourly run retries it instead
+    # of allowing a stuck publisher/API call to consume the whole job.
     timeout-minutes: 45
     steps:
       - name: Start cover drain clock before checkout
@@ -258,19 +257,15 @@ jobs:
           now_ms="$(node -e 'process.stdout.write(String(Date.now()))')"
           deadline_ms=$((job_started_ms + 40 * 60 * 1000))
           prepublish_deadline_ms=$((now_ms + 15 * 60 * 1000))
+          final_publisher_start_ms=$((deadline_ms - 15 * 60 * 1000))
+          if [ "$prepublish_deadline_ms" -gt "$final_publisher_start_ms" ]; then
+            prepublish_deadline_ms="$final_publisher_start_ms"
+          fi
           printf '%s\n' "$deadline_ms" > "$DEADLINE_FILE"
           if [ -s "$OUTBOX_FILE" ] && jq -e '.schema == 1 and ((.items | type) == "array") and (.items | length > 0)' "$OUTBOX_FILE" >/dev/null; then
             echo 'initial_outbox=true' >> "$GITHUB_OUTPUT"
-            # A pending outbox blocks generation, so let its publisher wait
-            # through API/edge replay. Keep only the operational tail for ack
-            # and summary; generation itself will skip when no time remains.
-            prepublish_deadline_ms=$((deadline_ms - 5 * 60 * 1000))
           else
             echo 'initial_outbox=false' >> "$GITHUB_OUTPUT"
-            final_publisher_start_ms=$((deadline_ms - 15 * 60 * 1000))
-            if [ "$prepublish_deadline_ms" -gt "$final_publisher_start_ms" ]; then
-              prepublish_deadline_ms="$final_publisher_start_ms"
-            fi
           fi
           printf '%s\n' "$prepublish_deadline_ms" > "$PREPUBLISH_DEADLINE_FILE"
 
