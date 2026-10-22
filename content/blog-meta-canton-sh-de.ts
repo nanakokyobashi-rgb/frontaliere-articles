@@ -42,6 +42,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.parcheggi-cascate-reno.title': 'Schaffhausen und Zürich installieren das Parkleitsystem am Rhein',
     'blog.article.parcheggi-cascate-reno.excerpt': 'Neues System zwischen Schaffhausen und Zürich für freie Parkplätze am Rheinfall; Start im Sommer 2027, Kosten etwa CHF 400\'000.',
     'blog.article.parcheggi-cascate-reno.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sciaffusa-banche-riforma-federale.title': 'Schaffhauser Banken: Regierung lehnt Bundesregeln ab',
+    'blog.article.sciaffusa-banche-riforma-federale.excerpt': 'Die Schaffhauser Regierung kritisiert den eidgenössischen Vorschlag zur Bankenreform und befürchtet unverhältnismäßige Belastungen für lokale Institute.',
+    'blog.article.sciaffusa-banche-riforma-federale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

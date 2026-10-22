@@ -42,6 +42,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.parcheggi-cascate-reno.title': 'Schaffhausen and Zurich install the parking system on the Rhine',
     'blog.article.parcheggi-cascate-reno.excerpt': 'New system between Schaffhausen and Zurich for available parking spaces at the Rhine Falls; launch in summer 2027, cost approximately CHF 400\'000.',
     'blog.article.parcheggi-cascate-reno.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sciaffusa-banche-riforma-federale.title': 'Schaffhausen banks: Government rejects federal rules',
+    'blog.article.sciaffusa-banche-riforma-federale.excerpt': 'The Government of Schaffhausen criticizes the federal banking reform proposal, fearing disproportionate burdens for local institutions.',
+    'blog.article.sciaffusa-banche-riforma-federale.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

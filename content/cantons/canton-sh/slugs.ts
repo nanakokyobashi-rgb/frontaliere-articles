@@ -16,6 +16,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'beringen-vbsh-fermate-chiuse': { it: 'beringen-vbsh-fermate-chiuse', en: 'beringen-vbsh-stops-closed', de: 'beringen-vbsh-haltestellen-gesperrt', fr: 'beringen-vbsh-arrets-fermes' },
  'schleitheim-scooter-incidente-2026': { it: 'schleitheim-scooter-incidente-2026', en: 'schleitheim-scooter-accident-2026', de: 'schleitheim-roller-unfall-2026', fr: 'schleitheim-accident-scooter-2026' },
  'parcheggi-cascate-reno': { it: 'parcheggi-cascate-reno', en: 'rhine-falls-parking-system', de: 'parkleitsystem-rheinfall', fr: 'systeme-parking-chutes-rhin' },
+ 'sciaffusa-banche-riforma-federale': { it: 'sciaffusa-banche-riforma-federale', en: 'schaffhausen-bank-reform-federal', de: 'schaffhausen-bankengesetz-reform', fr: 'schaffhouse-reforme-bancaire-federale' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
