@@ -54,6 +54,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.dashboard-mobilita-aarau.title': 'Aarau erstellt ein Dashboard zur geteilten Mobilität',
     'blog.article.dashboard-mobilita-aarau.excerpt': 'Aarau fasst in einem Dashboard rund 300 gemeinsam genutzte Fahrzeuge von fünf Anbietern zusammen: Im letzten Jahr gab es 27.000 Fahrten, 38% mehr.',
     'blog.article.dashboard-mobilita-aarau.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sbb-chiude-reisezentrum-doettingen.title': 'SBB schließen in Döttingen: letztes Reisezentrum des Bezirks',
+    'blog.article.sbb-chiude-reisezentrum-doettingen.excerpt': 'Die SBB schließen in Döttingen das letzte Reisezentrum des Bezirks.',
+    'blog.article.sbb-chiude-reisezentrum-doettingen.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAgDe;

@@ -660,6 +660,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sbb-chiude-reisezentrum-doettingen': {
+    title: 'SBB chiudono a Döttingen: ultimo centro viaggi del distretto',
+    description: 'SBB chiudono l\'ultimo Reisezentrum del distretto a Döttingen. Andreas Meier, Nationalrat di Klingnau, dice di essere frustrato e deluso.',
+    keywords: 'frontalieri, ticino, svizzera, italia, chiudono, döttingen, ultimo, centro',
+    ogTitle: 'Döttingen, SBB chiudono l\'ultimo centro viaggi',
+    ogDescription: 'Il titolo porta a Berna la chiusura dell\'ultimo Reisezentrum del distretto a Döttingen: Andreas Meier, Nationalrat di Klingnau, critica la riduzione del servizio. La parte pubblica non chiarisce data, motivazione o possibili servizi sostitutivi.',
+    canonicalPath: '/articoli-argovia/sbb-chiude-reisezentrum-doettingen/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "SBB chiudono a Döttingen: ultimo centro viaggi del distretto",
+      "description": "SBB chiudono l'ultimo Reisezentrum del distretto a Döttingen. Andreas Meier, Nationalrat di Klingnau, dice di essere frustrato e deluso.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sbb-chiude-reisezentrum-doettingen.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T23:32:53+00:00",
+      "dateModified": "2026-10-22T23:32:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/sbb-chiude-reisezentrum-doettingen/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

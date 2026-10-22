@@ -20,6 +20,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'murales-pediatria-ksb-baden': { it: 'murales-pediatria-ksb-baden', en: 'murals-ksb-baden-pediatrics', de: 'wandbilder-ksb-kinderabteilung', fr: 'murales-ksb-pediatrie-baden' },
  'maja-riniker-eletta-governo-argovia': { it: 'maja-riniker-eletta-governo-argovia', en: 'maja-riniker-elected-aargau-government', de: 'maja-riniker-gewaehlt-aargau-regierung', fr: 'maja-riniker-elue-gouvernement-argovie' },
  'dashboard-mobilita-aarau': { it: 'dashboard-mobilita-aarau', en: 'aarau-shared-mobility-dashboard', de: 'aarau-dashboard-geteilte-mobilitaet', fr: 'aarau-tableau-mobilite-partagee' },
+ 'sbb-chiude-reisezentrum-doettingen': { it: 'sbb-chiude-reisezentrum-doettingen', en: 'sbb-closes-doettingen-travel-centre', de: 'sbb-schliesst-reisezentrum-doettingen', fr: 'sbb-ferme-centre-voyage-doettingen' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

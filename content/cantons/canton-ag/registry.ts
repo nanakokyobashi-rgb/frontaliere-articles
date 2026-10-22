@@ -193,4 +193,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sbb-chiude-reisezentrum-doettingen',
+ category: 'novita',
+ date: '2026-10-22T23:32:53.543Z',
+ image: '/images/blog/article-sbb-chiude-reisezentrum-doettingen.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
