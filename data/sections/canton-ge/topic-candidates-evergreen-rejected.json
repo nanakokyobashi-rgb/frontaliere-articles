@@ -15,6 +15,10 @@
     "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/tel/publications/2026/analyses/communications/an-cs-2026-79.pdf": {
       "section": "canton-ge",
       "ts": 1792674433581
+    },
+    "canton-ge::https://lecourrier.ch/2026/10/22/frontieres-vivantes": {
+      "section": "canton-ge",
+      "ts": 1792677909825
     }
   }
 }
