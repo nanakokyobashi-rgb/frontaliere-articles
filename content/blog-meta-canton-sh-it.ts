@@ -48,6 +48,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.neunkirch-supervisore-cantonale.title': 'Neunkirch accetta il supervisore cantonale',
     'blog.article.neunkirch-supervisore-cantonale.excerpt': 'Il Cantone invia Stephan Rawyler a Neunkirch: potrà impartire istruzioni al Consiglio comunale e partecipare alle sue sedute.',
     'blog.article.neunkirch-supervisore-cantonale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.nuova-app-schaffhauser-nachrichten-2026.title': 'Schaffhauser Nachrichten: lanciata la nuova app nel 2026',
+    'blog.article.nuova-app-schaffhauser-nachrichten-2026.excerpt': 'Il 21 ottobre 2026 è avvenuto il rollout della nuova app SN con contenuti estesi e notifiche push tematiche, disponibile su App Store e Google Play Store.',
+    'blog.article.nuova-app-schaffhauser-nachrichten-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

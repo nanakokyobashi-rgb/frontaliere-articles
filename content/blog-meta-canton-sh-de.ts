@@ -48,6 +48,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.neunkirch-supervisore-cantonale.title': 'Neunkirch akzeptiert den kantonalen Vorgesetzten',
     'blog.article.neunkirch-supervisore-cantonale.excerpt': 'Der Kanton schickt Stephan Rawyler nach Neunkirch: Er kann dem Gemeinderat Weisungen erteilen und an dessen Sitzungen teilnehmen.',
     'blog.article.neunkirch-supervisore-cantonale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.nuova-app-schaffhauser-nachrichten-2026.title': 'Schaffhauser Nachrichten: Neue App im Jahr 2026 gestartet',
+    'blog.article.nuova-app-schaffhauser-nachrichten-2026.excerpt': 'Am 21. Oktober 2026 erfolgte der Rollout der neuen SN-App mit erweiterten Inhalten und thematischen Push-Benachrichtigungen, die im App Store und Google Play Store verfügbar sind.',
+    'blog.article.nuova-app-schaffhauser-nachrichten-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

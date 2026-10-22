@@ -18,6 +18,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'parcheggi-cascate-reno': { it: 'parcheggi-cascate-reno', en: 'rhine-falls-parking-system', de: 'parkleitsystem-rheinfall', fr: 'systeme-parking-chutes-rhin' },
  'sciaffusa-banche-riforma-federale': { it: 'sciaffusa-banche-riforma-federale', en: 'schaffhausen-bank-reform-federal', de: 'schaffhausen-bankengesetz-reform', fr: 'schaffhouse-reforme-bancaire-federale' },
  'neunkirch-supervisore-cantonale': { it: 'neunkirch-supervisore-cantonale', en: 'neunkirch-cantonal-supervisor', de: 'neunkirch-kantonaler-aufpasser', fr: 'neunkirch-superviseur-cantonal' },
+ 'nuova-app-schaffhauser-nachrichten-2026': { it: 'nuova-app-schaffhauser-nachrichten-2026', en: 'new-schaffhauser-nachrichten-app-2026', de: 'neue-schaffhauser-nachrichten-app-2026', fr: 'nouvelle-app-schaffhauser-nachrichten-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -592,6 +592,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-nuova-app-schaffhauser-nachrichten-2026': {
+    title: 'Schaffhauser Nachrichten: lanciata la nuova app nel 2026',
+    description: 'Scopra le novità della nuova app Schaffhauser Nachrichten lanciata il 21 ottobre 2026: più contenuti, notifiche tematiche e aggiornamento automatico.',
+    keywords: 'frontalieri, ticino, svizzera, italia, schaffhauser, nachrichten, lanciata, nuova',
+    ogTitle: 'Schaffhauser Nachrichten: rollout della nuova app 2026',
+    ogDescription: 'Il 21 ottobre 2026 è stata lanciata la nuova app delle Schaffhauser Nachrichten. Scopri come gestire le notifiche push per temi e l\'aggiornamento automatico per restare informati sui fatti del Canton Sciaffusa.',
+    canonicalPath: '/articoli-sciaffusa/nuova-app-schaffhauser-nachrichten-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Schaffhauser Nachrichten: lanciata la nuova app nel 2026",
+      "description": "Scopra le novità della nuova app Schaffhauser Nachrichten lanciata il 21 ottobre 2026: più contenuti, notifiche tematiche e aggiornamento automatico.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-nuova-app-schaffhauser-nachrichten-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T03:16:50+00:00",
+      "dateModified": "2026-10-22T03:16:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/nuova-app-schaffhauser-nachrichten-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

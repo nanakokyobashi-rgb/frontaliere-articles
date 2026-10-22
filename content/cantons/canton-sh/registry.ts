@@ -171,4 +171,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'nuova-app-schaffhauser-nachrichten-2026',
+ category: 'novita',
+ date: '2026-10-22T03:16:50.869Z',
+ image: '/images/blog/article-nuova-app-schaffhauser-nachrichten-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
