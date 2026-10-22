@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "86576c3cee7315390723be4fde6fe58e3b3e588f3b7eae1107081c7c5ffb1c4c",
+  "updatedAt": "2026-10-22T23:39:39.353Z",
+  "contentHash": "09515185a966aeeae15fe00e5b52804f9d6578ec16087887377e308e3f70c675",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "SBB chiudono a Döttingen: ultimo centro viaggi del distretto",
+          "url": "/articoli-argovia/sbb-chiude-reisezentrum-doettingen/",
+          "excerpt": "Le SBB chiudono a Döttingen l'ultimo Reisezentrum del distretto.",
+          "date": "2026-10-22T23:32:53.543Z"
+        },
+        {
           "title": "Aarau crea un dashboard sulla mobilità condivisa",
           "url": "/articoli-argovia/dashboard-mobilita-aarau/",
           "excerpt": "Aarau riunisce in un dashboard circa 300 veicoli condivisi di cinque operatori: nell'ultimo anno 27.000 viaggi, il 38% in più.",
@@ -94,12 +100,6 @@
           "url": "/articoli-argovia/sezione-medicina-nucleare/",
           "excerpt": "Il Nuklearforum Schweiz crea una nuova sezione Assemblea costitutiva il 12 ottobre a Olten KSB, PSI e Molecular Partners tra i fondatori Focus su radionuclidi",
           "date": "2026-10-20T12:05:23.812Z"
-        },
-        {
-          "title": "Argovia: iniziativa per rafforzare la parità salariale",
-          "url": "/articoli-argovia/iniziativa-parita-salariale-ag/",
-          "excerpt": "ArbeitAargau e un'alleanza di organizzazioni femminili e partiti chiedono analisi salariali da 50 dipendenti, sanzioni e il ripristino della Fachstelle.",
-          "date": "2026-10-18T17:13:03.661Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T23:39:39.353Z"
     },
     "en": {
       "canton": "AG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "SBB close in Döttingen: the district’s last travel center",
+          "url": "/en/aargau-articles/sbb-closes-doettingen-travel-centre/",
+          "excerpt": "SBB are closing the district’s last travel centre in Döttingen.",
+          "date": "2026-10-22T23:32:53.543Z"
+        },
+        {
           "title": "Aarau creates a dashboard on shared mobility",
           "url": "/en/aargau-articles/aarau-shared-mobility-dashboard/",
           "excerpt": "Aarau brings together around 300 shared vehicles from five operators in a dashboard: 27.000 trips in the last year, 38% more.",
@@ -193,12 +199,6 @@
           "url": "/en/aargau-articles/swiss-nuclear-medicine-section/",
           "excerpt": "Nuklearforum Schweiz creates a new section Founding assembly on October 12 in Olten KSB, PSI and Molecular Partners among the founders Focus on radionuclides",
           "date": "2026-10-20T12:05:23.812Z"
-        },
-        {
-          "title": "Aargau: initiative to strengthen pay equality",
-          "url": "/en/aargau-articles/aargau-pay-equality-initiative/",
-          "excerpt": "ArbeitAargau and an alliance of women’s organizations and political parties are calling for pay analyses for companies with 50 or more employees, sanctions, and the restoration of the Fachstelle.",
-          "date": "2026-10-18T17:13:03.661Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T23:39:39.353Z"
     },
     "de": {
       "canton": "AG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "SBB schließen in Döttingen: letztes Reisezentrum des Bezirks",
+          "url": "/de/aargau-artikel/sbb-schliesst-reisezentrum-doettingen/",
+          "excerpt": "Die SBB schließen in Döttingen das letzte Reisezentrum des Bezirks.",
+          "date": "2026-10-22T23:32:53.543Z"
+        },
+        {
           "title": "Aarau erstellt ein Dashboard zur geteilten Mobilität",
           "url": "/de/aargau-artikel/aarau-dashboard-geteilte-mobilitaet/",
           "excerpt": "Aarau fasst in einem Dashboard rund 300 gemeinsam genutzte Fahrzeuge von fünf Anbietern zusammen: Im letzten Jahr gab es 27.000 Fahrten, 38% mehr.",
@@ -292,12 +298,6 @@
           "url": "/de/aargau-artikel/sektion-nuklearmedizin-schweiz/",
           "excerpt": "Das Nuklearforum Schweiz gründet eine neue Sektion Gründungsversammlung am 12.",
           "date": "2026-10-20T12:05:23.812Z"
-        },
-        {
-          "title": "Aargau: Initiative zur Stärkung der Lohngleichheit",
-          "url": "/de/aargau-artikel/aargau-lohngleichheitsinitiative/",
-          "excerpt": "ArbeitAargau und ein Bündnis von Frauenorganisationen und Parteien fordern Lohnanalysen ab 50 Beschäftigten, Sanktionen und die Wiederherstellung der Fachstelle.",
-          "date": "2026-10-18T17:13:03.661Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T23:39:39.353Z"
     },
     "fr": {
       "canton": "AG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Les SBB ferment à Döttingen : dernier centre de voyages du district",
+          "url": "/fr/articles-argovie/sbb-ferme-centre-voyage-doettingen/",
+          "excerpt": "Les SBB ferment à Döttingen le dernier centre de voyages du district.",
+          "date": "2026-10-22T23:32:53.543Z"
+        },
+        {
           "title": "Aarau crée un tableau de bord sur la mobilité partagée",
           "url": "/fr/articles-argovie/aarau-tableau-mobilite-partagee/",
           "excerpt": "Aarau regroupe dans un tableau de bord environ 300 véhicules partagés de cinq opérateurs : au cours de la dernière année, 27.000 trajets, soit 38% de plus.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-argovie/section-medecine-nucleaire/",
           "excerpt": "Le Nuklearforum Schweiz crée une nouvelle section Assemblée constitutive le 12 octobre à Olten KSB, PSI et Molecular Partners parmi les fondateurs Focus",
           "date": "2026-10-20T12:05:23.812Z"
-        },
-        {
-          "title": "Argovie : initiative visant à renforcer l’égalité salariale",
-          "url": "/fr/articles-argovie/initiative-egalite-salariale-argovie/",
-          "excerpt": "ArbeitAargau et une alliance d’organisations féminines et de partis demandent des analyses salariales à partir de 50 employés, des sanctions et le rétablissement de la Fachstelle.",
-          "date": "2026-10-18T17:13:03.661Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T23:39:39.353Z"
     }
   }
 }
