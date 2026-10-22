@@ -541,6 +541,16 @@ jobs:
           # workflow anyway.
           persist-credentials: false
 
+      # The render step emits redirects for a renamed slug by reading the
+      # push base. Resolve has its own checkout, so its guarded base fetch does
+      # not make the object available in this publish job. A depth-two checkout
+      # is insufficient when one push contains multiple commits.
+      - name: Fetch push base (publish)
+        if: github.event_name == 'push'
+        env:
+          PUSH_BEFORE: ${{ github.event.before }}
+        run: bash scripts/ci/fetch-push-base-if-missing.sh
+
       - name: Verify shard assignment against publish checkout
         if: needs.resolve.outputs.skip != 'true'
         env:
