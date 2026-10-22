@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/816603/die-welt-wird-staunen-iran-bereitet-sich-auf-n%c3%a4chsten-krieg-vor": {
-      "section": "canton-vs",
-      "ts": 1792512098538
-    },
     "canton-vs::https://www.pomona.ch/story/817103/bessere-arbeitsbedingungen-in-der-pflege-k%c3%b6nnten-sich-auch-finanziell-lohnen": {
       "section": "canton-vs",
       "ts": 1792579074798
@@ -75,6 +71,10 @@
     "canton-vs::https://www.pomona.ch/story/816189/maturaball-ist-geschichte-rektor-borter-sagt-das-wirft-ein-schlechtes-licht-auf-unsere-schule": {
       "section": "canton-vs",
       "ts": 1792677813388
+    },
+    "canton-vs::https://www.pomona.ch/story/816603/die-welt-wird-staunen-iran-bereitet-sich-auf-n%c3%a4chsten-krieg-vor": {
+      "section": "canton-vs",
+      "ts": 1792685064740
     }
   }
 }
