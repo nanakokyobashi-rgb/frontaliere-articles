@@ -292,7 +292,11 @@ export function scanRedirectSource(source) {
     if (index >= text.length) break;
 
     if (text[index] === '`') {
-      index = skipTemplateLiteral(text, index) ?? text.length;
+      const templateEnd = skipTemplateLiteral(text, index);
+      if (templateEnd === null) {
+        throw new Error('Unterminated template literal in legacy redirect source');
+      }
+      index = templateEnd;
       continue;
     }
     if (text[index] !== "'" && text[index] !== '"') {
@@ -302,8 +306,7 @@ export function scanRedirectSource(source) {
 
     const keyLiteral = readQuotedLiteral(text, index);
     if (!keyLiteral) {
-      index += 1;
-      continue;
+      throw new Error('Unterminated string literal in legacy redirect source');
     }
     index = keyLiteral.end;
     if (!keyLiteral.value.startsWith('/')) continue;

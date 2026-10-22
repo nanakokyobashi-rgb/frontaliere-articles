@@ -70,6 +70,8 @@ function matchingDelimiter(src, openIdx) {
     if (ch === '/' && src[i + 1] === '/') {
       const nl = src.indexOf('\n', i);
       if (nl === -1) return -1;
+      statementStart = caseLabelPending || ASI_EXPRESSION_ENDS.has(lastSignificant);
+      if (statementStart) canStartRegex = true;
       i = nl;
       continue;
     }
