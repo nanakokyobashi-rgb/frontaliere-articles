@@ -1,11 +1,59 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
+import {
+  loadArticleRouteRedirects,
+  scanRedirectSource,
+} from '../../engine/shared/articleRouteOwnership.mjs';
+import {
+  findAllSeoEntryMatches,
+} from '../../engine/shared/seo-entry.mjs';
+import {
+  decodeStaticStringLiteral,
+} from '../../engine/shared/ts-literals.mjs';
 import { readTsStringMap } from '../scripts/lib/ts-string-map.mjs';
 import {
   computedPropertyKeyEnd,
   unsupportedObjectMemberAt,
 } from '../../scripts/lib/typescript-expression-scanner.mjs';
+
+test('articleRouteOwnership scarta la mappa legacy dopo un commento troncato', () => {
+  const files = new Map([
+    ['data.json', JSON.stringify({ '/data/': '/target/' })],
+    ['legacy.ts', "const redirects = { '/legacy/': '/target-legacy/' /* troncato"],
+  ]);
+  const fs = { readFileSync: file => files.get(file) };
+
+  assert.deepEqual(loadArticleRouteRedirects(fs, 'data.json', 'legacy.ts'), {
+    '/data/': '/target/',
+  });
+  assert.deepEqual(scanRedirectSource(files.get('legacy.ts')).entries, {});
+});
+
+test('seo-entry riconosce tutti i terminatori di riga nei commenti lineari', () => {
+  for (const lineTerminator of ['\r', '\u2028', '\u2029']) {
+    const source = `// voce ignorata${lineTerminator}'blog-live': { value: 1 }`;
+    assert.deepEqual(
+      findAllSeoEntryMatches(source, `seo-${JSON.stringify(lineTerminator)}`).map(({ id }) => id),
+      ['live'],
+      JSON.stringify(lineTerminator),
+    );
+  }
+});
+
+test('seo-entry tratta il bang dopo ASI come prefisso regex', () => {
+  const source = "'blog-live': { value!\n!/foo}/\n}";
+  const [match] = findAllSeoEntryMatches(source, 'seo-asi');
+  assert.ok(match);
+  assert.equal(match.closeIdx, source.lastIndexOf('}'));
+});
+
+test('il decoder TS rimuove anche la continuazione \u005cr con newlineAs', () => {
+  assert.equal(
+    decodeStaticStringLiteral('prima\\rseconda', "'", { newlineAs: ' ' }),
+    'primaseconda',
+  );
+});
 
 test('ts-string-map riconosce U+2028 e U+2029 prima del corpo successivo', () => {
   for (const lineTerminator of ['\u2028', '\u2029']) {

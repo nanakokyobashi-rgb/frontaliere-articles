@@ -14,6 +14,14 @@
  */
 
 const SITE_ORIGIN = 'https://frontaliereticino.ch';
+const LINE_TERMINATORS = '\n\r\u2028\u2029';
+
+function lineTerminatorIndex(text, offset) {
+  for (let index = offset; index < text.length; index += 1) {
+    if (LINE_TERMINATORS.includes(text[index])) return index;
+  }
+  return -1;
+}
 
 /** @param {unknown} value */
 function normalizedPath(value) {
@@ -148,7 +156,7 @@ function skipTrivia(text, offset) {
       continue;
     }
     if (text.startsWith('//', index)) {
-      const lineEnd = text.indexOf('\n', index + 2);
+      const lineEnd = lineTerminatorIndex(text, index + 2);
       index = lineEnd < 0 ? text.length : lineEnd + 1;
       continue;
     }
@@ -185,7 +193,7 @@ function readQuotedLiteral(text, offset) {
     if (char === quote) {
       return { value: text.slice(offset + 1, index), end: index + 1 };
     }
-    if (char === '\n' || char === '\r') return null;
+    if (LINE_TERMINATORS.includes(char)) return null;
     index += 1;
   }
   return null;
@@ -218,7 +226,7 @@ function skipTemplateExpression(text, offset) {
       continue;
     }
     if (text.startsWith('//', index)) {
-      const lineEnd = text.indexOf('\n', index + 2);
+      const lineEnd = lineTerminatorIndex(text, index + 2);
       index = lineEnd < 0 ? text.length : lineEnd + 1;
       continue;
     }
@@ -282,17 +290,20 @@ export function scanRedirectSource(source) {
   let literalCount = 0;
   let dynamicCount = 0;
   const unsupported = [];
+  const failClosed = () => ({ entries: {}, literalCount: 0, dynamicCount: 0, unsupported: [] });
   const text = String(source ?? '');
   let index = 0;
 
   while (index < text.length) {
     const trivia = skipTrivia(text, index);
-    if (!trivia.closed) break;
+    if (!trivia.closed) return failClosed();
     index = trivia.index;
     if (index >= text.length) break;
 
     if (text[index] === '`') {
-      index = skipTemplateLiteral(text, index) ?? text.length;
+      const templateEnd = skipTemplateLiteral(text, index);
+      if (templateEnd === null) return failClosed();
+      index = templateEnd;
       continue;
     }
     if (text[index] !== "'" && text[index] !== '"') {
@@ -301,32 +312,25 @@ export function scanRedirectSource(source) {
     }
 
     const keyLiteral = readQuotedLiteral(text, index);
-    if (!keyLiteral) {
-      index += 1;
-      continue;
-    }
+    if (!keyLiteral) return failClosed();
     index = keyLiteral.end;
     if (!keyLiteral.value.startsWith('/')) continue;
 
     const colon = skipTrivia(text, index);
-    if (!colon.closed) break;
+    if (!colon.closed) return failClosed();
     if (text[colon.index] !== ':') {
       index = colon.index;
       continue;
     }
 
     const valueStart = skipTrivia(text, colon.index + 1);
-    if (!valueStart.closed) {
-      unsupported.push(keyLiteral.value);
-      break;
-    }
+    if (!valueStart.closed) return failClosed();
     index = valueStart.index;
 
     if (text[index] === '`') {
       const templateEnd = skipTemplateLiteral(text, index);
       if (templateEnd === null) {
-        unsupported.push(keyLiteral.value);
-        break;
+        return failClosed();
       }
       dynamicCount += 1;
       index = templateEnd;
@@ -334,14 +338,16 @@ export function scanRedirectSource(source) {
     }
 
     const valueLiteral = readQuotedLiteral(text, index);
-    if (!valueLiteral || !valueLiteral.value.startsWith('/')) {
+    if (!valueLiteral) return failClosed();
+    if (!valueLiteral.value.startsWith('/')) {
       unsupported.push(keyLiteral.value);
-      index = valueLiteral?.end ?? index + 1;
+      index = valueLiteral.end;
       continue;
     }
 
     const tail = skipTrivia(text, valueLiteral.end);
-    if (!tail.closed || (text[tail.index] !== ',' && text[tail.index] !== '}' && tail.index < text.length)) {
+    if (!tail.closed) return failClosed();
+    if ((text[tail.index] !== ',' && text[tail.index] !== '}' && tail.index < text.length)) {
       unsupported.push(keyLiteral.value);
       index = valueLiteral.end;
       continue;

@@ -101,7 +101,7 @@ function looksLikeGenericStart(source, offset, statementStart = false) {
     }
     if (character === '/' && source[cursor + 1] === '/') {
       cursor += 2;
-      while (cursor < source.length && source[cursor] !== '\n' && source[cursor] !== '\r') cursor += 1;
+      while (cursor < source.length && !isRegexLineTerminator(source[cursor])) cursor += 1;
       continue;
     }
     if (character === '/' && source[cursor + 1] === '*') {
@@ -172,7 +172,7 @@ export function readStaticStringLiteral(source, startIdx, sourcePath = 'source',
     if (quote === '`' && char === '$' && source[cursor + 1] === '{') {
       throw new Error(`[${errorLabel}] Interpolated template literal is not supported in static source: ${sourcePath}`);
     }
-    if (quote !== '`' && (char === '\n' || char === '\r')) return null;
+    if (quote !== '`' && isRegexLineTerminator(char)) return null;
     if (char === quote) {
       return { quote, value: source.slice(startIdx + 1, cursor), end: cursor + 1 };
     }
@@ -194,7 +194,7 @@ export function decodeStaticStringLiteral(raw, quote = "'", options = {}) {
       case 'n': return '\n';
       // A backslash followed by CRLF (or the escaped `\r` form) is a source
       // continuation, not content. `newlineAs` applies only to decoded `\n`.
-      case 'r': return newlineAs === undefined ? '' : '\r';
+      case 'r': return '';
       case '\n': return '';
       case '\r': return '';
       case '\u2028': return '';
