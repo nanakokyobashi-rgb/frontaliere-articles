@@ -4,17 +4,17 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-22T02:46:43.877Z",
-  "contentHash": "53df6283a5383ca4ed9225b4036d8438535b3b13ebe60fd2c3c59ab08741b326",
+  "updatedAt": "2026-10-22T11:37:38.369Z",
+  "contentHash": "7c716ca69260fddc02fbed34bf87ebd1536c9f786ae2e4c4475f63b75c139094",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-21T12:30:01.132Z",
+      "updatedAt": "2026-10-21T22:01:50.900Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T10:37:42.748Z",
+      "updatedAt": "2026-10-21T20:56:46.769Z",
       "keyFacts": 0
     }
   ],
@@ -86,7 +86,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-21T12:30:01.132Z"
+          "updatedAt": "2026-10-21T22:01:50.900Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -114,10 +114,16 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Zugo: multa di CHF 900 per mancata dichiarazione fiscale",
+          "url": "/articoli-zugo/zugo-multa-mancata-dichiarazione-fiscale/",
+          "excerpt": "Tribunale di Zugo: multa di CHF 900 Cancellata l'imposta effettiva di CHF 41.15 Restano CHF 105 di spese per ritardo La dichiarazione 2023 non è stata",
+          "date": "2026-10-22T11:31:01.636Z"
+        },
         {
           "title": "Zugo: assegnate le direzioni per il periodo 2027-2030",
           "url": "/articoli-zugo/zugo-assegnazione-mandato-2030/",
@@ -159,12 +165,6 @@
           "url": "/articoli-svizzera/attivita-zugo-iscrizione-contributi-obblighi/",
           "excerpt": "Iscrivere attività a Zugo: forme giuridiche, iscrizione registro commercio, obblighi previdenziali (AVS/AI, LPP) e assicurazioni. Guida federale e cantonale.",
           "date": "2026-08-23T19:50:57.418Z"
-        },
-        {
-          "title": "Apprendistato e formazione professionale nel Canton Zugo",
-          "url": "/articoli-svizzera/apprendistato-zugo/",
-          "excerpt": "Impostazioni e procedure per l'assunzione di un apprendista nel Canton Zugo, con riferimento alle leggi cantonali e federali.",
-          "date": "2026-08-17T13:36:28.291Z"
         }
       ],
       "latestCantonArticles": [],
@@ -178,7 +178,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-22T02:46:43.877Z"
+      "updatedAt": "2026-10-22T11:37:38.369Z"
     },
     "en": {
       "canton": "ZG",
@@ -247,7 +247,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-21T12:30:01.132Z"
+          "updatedAt": "2026-10-21T22:01:50.900Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -275,10 +275,16 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Zug: CHF 900 fine for failure to file a tax return",
+          "url": "/en/zug-articles/zug-tax-fine-missing-return/",
+          "excerpt": "Zug Court: CHF 900 fine Actual tax of CHF 41.15 cancelled CHF 105 in late fees remain The 2023 tax return was not filed Authority → Administrative Court of Zug",
+          "date": "2026-10-22T11:31:01.636Z"
+        },
         {
           "title": "Zug: departments assigned for the 2027–2030 period",
           "url": "/en/zug-articles/zug-directorates-term-2030/",
@@ -320,12 +326,6 @@
           "url": "/en/swiss-articles/activity-zug-registration-contributions-obligations/",
           "excerpt": "Register activities in Zug: legal forms, trade register registration, social security obligations (AVS/AI, LPP) and insurance. Federal and cantonal guidance.",
           "date": "2026-08-23T19:50:57.418Z"
-        },
-        {
-          "title": "Apprenticeship and vocational training in the Canton of Zug",
-          "url": "/en/swiss-articles/apprenticeship-zug/",
-          "excerpt": "Settings and procedures for hiring an apprentice in the Canton of Zug, with reference to cantonal and federal laws.",
-          "date": "2026-08-17T13:36:28.291Z"
         }
       ],
       "latestCantonArticles": [],
@@ -339,7 +339,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-22T02:46:43.877Z"
+      "updatedAt": "2026-10-22T11:37:38.369Z"
     },
     "de": {
       "canton": "ZG",
@@ -408,7 +408,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-21T12:30:01.132Z"
+          "updatedAt": "2026-10-21T22:01:50.900Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -436,10 +436,16 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Zug: Busse von CHF 900 wegen Nichtabgabe der Steuererklärung",
+          "url": "/de/zug-artikel/zug-steuerstrafe-fehlende-erklarung/",
+          "excerpt": "Gericht Zug: Busse von 900 CHF Effektive Steuer von 41,15 CHF gestrichen 105 CHF Verzugskosten bleiben bestehen Die Steuererklärung 2023 wurde nicht eingereicht",
+          "date": "2026-10-22T11:31:01.636Z"
+        },
         {
           "title": "Zug: Direktionen für den Zeitraum 2027-2030 zugewiesen",
           "url": "/de/zug-artikel/zug-direktionen-amtsperiode-2030/",
@@ -481,12 +487,6 @@
           "url": "/de/schweiz-artikel/aktivitaet-zug-anmeldung-beitraege-pflichten/",
           "excerpt": "Aktivitäten in Zug eintragen: Rechtsformen, Handelsregistereintrag, Vorsorgepflichten (AHV/IV, BVG) und Versicherungen. Eidgenössischer und kantonaler Führer.",
           "date": "2026-08-23T19:50:57.418Z"
-        },
-        {
-          "title": "Lehre und Berufsausbildung im Kanton Zug",
-          "url": "/de/schweiz-artikel/berufsausbildung-zug/",
-          "excerpt": "Einstellungen und Verfahren für die Anstellung eines Lehrlings im Kanton Zug unter Bezugnahme auf die kantonalen und bundesstaatlichen Gesetze.",
-          "date": "2026-08-17T13:36:28.291Z"
         }
       ],
       "latestCantonArticles": [],
@@ -500,7 +500,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-22T02:46:43.877Z"
+      "updatedAt": "2026-10-22T11:37:38.369Z"
     },
     "fr": {
       "canton": "ZG",
@@ -569,7 +569,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-21T12:30:01.132Z"
+          "updatedAt": "2026-10-21T22:01:50.900Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -597,10 +597,16 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Zoug : amende de CHF 900 pour non-déclaration fiscale",
+          "url": "/fr/articles-zoug/zoug-amende-declaration-fiscale-manquante/",
+          "excerpt": "Tribunal de Zoug : amende de 900 CHF Impôt effectif de 41,15 CHF annulé Frais de retard de 105 CHF restant La déclaration 2023 n'a pas été déposée Autorité →",
+          "date": "2026-10-22T11:31:01.636Z"
+        },
         {
           "title": "Zoug : attributions des directions pour la période 2027-2030",
           "url": "/fr/articles-zoug/zoug-directions-mandat-2030/",
@@ -642,12 +648,6 @@
           "url": "/fr/articles-suisse/activite-zoug-inscription-cotisations-obligations/",
           "excerpt": "Enregistrer des activités à Zoug : formes juridiques, inscription au registre du commerce, obligations de sécurité sociale (AVS/AI, LPP) et assurances. Guide fédéral et cantonal.",
           "date": "2026-08-23T19:50:57.418Z"
-        },
-        {
-          "title": "Apprentissage et formation professionnelle dans le canton de Zoug",
-          "url": "/fr/articles-suisse/apprentissage-zoug/",
-          "excerpt": "Paramètres et procédures pour l'embauche d'un apprenti dans le canton de Zoug, en référence aux lois cantonales et fédérales.",
-          "date": "2026-08-17T13:36:28.291Z"
         }
       ],
       "latestCantonArticles": [],
@@ -661,7 +661,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-22T02:46:43.877Z"
+      "updatedAt": "2026-10-22T11:37:38.369Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "fisco",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "4811c3b9a21c6ca8eac439f9a7952a45ac530aaf5c5cd1dbd949c21b07c80fe0",
+  "updatedAt": "2026-10-22T11:37:38.369Z",
+  "contentHash": "98b5226e3fa5b2711a5764cc047f4f09b62eb34b115b70cd3851e1db2c7a3c55",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Zugo: multa di CHF 900 per mancata dichiarazione fiscale",
+          "url": "/articoli-zugo/zugo-multa-mancata-dichiarazione-fiscale/",
+          "excerpt": "Tribunale di Zugo: multa di CHF 900 Cancellata l'imposta effettiva di CHF 41.15 Restano CHF 105 di spese per ritardo La dichiarazione 2023 non è stata",
+          "date": "2026-10-22T11:31:01.636Z"
+        },
+        {
           "title": "Zugo prevede avanzo 15,6 milioni nel 2027 con tasso al 52%",
           "url": "/articoli-zugo/zugo-bilancio-2027-avanzzo-15-6-milioni-tasso-52/",
           "excerpt": "Il preventivo 2027 indica un avanzo di CHF 15,6 milioni, entrate CHF 446,6 milioni e uscite CHF 431,1 milioni, con tasso fiscale richiesto al 52%.",
@@ -167,7 +173,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-22T11:37:38.369Z"
     },
     "en": {
       "canton": "ZG",
@@ -252,6 +258,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Zug: CHF 900 fine for failure to file a tax return",
+          "url": "/en/zug-articles/zug-tax-fine-missing-return/",
+          "excerpt": "Zug Court: CHF 900 fine Actual tax of CHF 41.15 cancelled CHF 105 in late fees remain The 2023 tax return was not filed Authority → Administrative Court of Zug",
+          "date": "2026-10-22T11:31:01.636Z"
+        },
+        {
           "title": "Zug forecasts a surplus of 15,6 million in 2027 with the tax rate at 52%",
           "url": "/en/zug-articles/zug-forecasts-a-surplus-of-15-6-million-in-2027-with-the-tax-rate-at-52/",
           "excerpt": "The 2027 budget indicates a surplus of CHF 15,6 million, revenue of CHF 446,6 million and expenditure of CHF 431,1 million, with the requested tax rate at 52%.",
@@ -317,7 +329,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-22T11:37:38.369Z"
     },
     "de": {
       "canton": "ZG",
@@ -402,6 +414,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Zug: Busse von CHF 900 wegen Nichtabgabe der Steuererklärung",
+          "url": "/de/zug-artikel/zug-steuerstrafe-fehlende-erklarung/",
+          "excerpt": "Gericht Zug: Busse von 900 CHF Effektive Steuer von 41,15 CHF gestrichen 105 CHF Verzugskosten bleiben bestehen Die Steuererklärung 2023 wurde nicht eingereicht",
+          "date": "2026-10-22T11:31:01.636Z"
+        },
+        {
           "title": "Zug erwartet 2027 bei einem Steuerfuss von 52% einen Überschuss von 15,6 Millionen",
           "url": "/de/zug-artikel/zug-erwartet-2027-bei-einem-steuerfuss-von-52-einen-uberschuss-von-15-6/",
           "excerpt": "Der Voranschlag 2027 weist einen Überschuss von CHF 15,6 Millionen, Einnahmen von CHF 446,6 Millionen und Ausgaben von CHF 431,1 Millionen aus, bei einem beantragten Steuerfuss von 52%.",
@@ -467,7 +485,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-22T11:37:38.369Z"
     },
     "fr": {
       "canton": "ZG",
@@ -552,6 +570,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Zoug : amende de CHF 900 pour non-déclaration fiscale",
+          "url": "/fr/articles-zoug/zoug-amende-declaration-fiscale-manquante/",
+          "excerpt": "Tribunal de Zoug : amende de 900 CHF Impôt effectif de 41,15 CHF annulé Frais de retard de 105 CHF restant La déclaration 2023 n'a pas été déposée Autorité →",
+          "date": "2026-10-22T11:31:01.636Z"
+        },
+        {
           "title": "Zoug prévoit un excédent de 15,6 millions en 2027 avec un taux à 52 %",
           "url": "/fr/articles-zoug/zoug-prevoit-un-excedent-de-15-6-millions-en-2027-avec-un-taux-a-52/",
           "excerpt": "Le budget 2027 prévoit un excédent de CHF 15,6 millions, des recettes de CHF 446,6 millions et des dépenses de CHF 431,1 millions, avec un taux fiscal requis de 52 %.",
@@ -617,7 +641,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-22T11:37:38.369Z"
     }
   }
 }
