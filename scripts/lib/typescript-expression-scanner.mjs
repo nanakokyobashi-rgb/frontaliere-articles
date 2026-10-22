@@ -91,6 +91,27 @@ const COMPUTED_PROPERTY_PREFIX_RE = new RegExp(
   'u',
 );
 
+const CONTROL_PAREN_KEYWORDS = new Set(['if', 'for', 'while', 'switch', 'catch', 'with']);
+
+/**
+ * A parenthesized parameter list is also used by arrow functions, class
+ * methods, and function-type annotations. Looking at the token after the
+ * matching close avoids treating control-flow parentheses as a function
+ * context while allowing the type-literal state to cross the parameter list.
+ */
+function isFunctionParameterList(source, openingOffset) {
+  const closingOffset = scanTypeScriptExpression(source, openingOffset + 1, ')');
+  if (closingOffset < 0) return false;
+  const after = skipTrivia(source, closingOffset);
+  const next = source[after];
+  if (source.startsWith('=>', after)) return true;
+  if (next !== ':' && next !== '{') return false;
+
+  const before = source.slice(0, openingOffset).trimEnd();
+  const previousWord = /[$_\p{ID_Start}][$_\u200c\u200d\p{ID_Continue}]*$/u.exec(before)?.[0];
+  return !CONTROL_PAREN_KEYWORDS.has(previousWord);
+}
+
 function isArrowObjectPattern(source, openingOffset) {
   const objectEnd = scanTypeScriptExpression(source, openingOffset + 1, '}');
   if (objectEnd >= source.length) return false;
@@ -277,10 +298,12 @@ function delimiterContextAt(source, offset) {
       const typeLiteral = interfaceBody
         || ch === '{' && previousToken === ':'
         && (delimiters.some(({ typeLiteral: parentIsTypeLiteral }) => parentIsTypeLiteral)
+          || delimiters.at(-1)?.functionParameters === true
           || pendingFunctionReturnObjectType || pendingVariableTypeObject)
         || ch === '{' && typeAliasDepth >= 0;
-      const functionParameters = ch === '(' && awaitingFunctionParametersDepth === delimiters.length
-        && functionTypeParameterDepth === 0;
+      const functionParameters = ch === '(' && functionTypeParameterDepth === 0
+        && (awaitingFunctionParametersDepth === delimiters.length
+          || isFunctionParameterList(source, index));
       const bindingPattern = ch === '{' && (
         variableNamePending && delimiters.length === variableDeclarationDepth
         || delimiters.at(-1)?.functionParameters === true
@@ -559,6 +582,11 @@ export function isTypeScriptIndexSignature(source, start, end) {
   return source[cursor] === ':';
 }
 
+/** Whether the mapped member is inside a verified TypeScript type literal. */
+export function mappedTypeContext(source, start) {
+  return delimiterContextAt(source, start).at(-1)?.typeLiteral === true;
+}
+
 /**
  * A mapped type member is written `[Key in Constraint]: Value` directly inside
  * a type literal. `in keyof T` is also an unambiguous type-only constraint when
@@ -573,7 +601,7 @@ export function isTypeScriptMappedTypeMember(source, start, end) {
   cursor = skipTrivia(source, cursor);
   if (source.slice(cursor, cursor + 2) !== 'in'
     || /[$_\u200c\u200d\p{ID_Continue}]/u.test(source[cursor + 2] || '')) return false;
-  return delimiterContextAt(source, start).at(-1)?.typeLiteral === true;
+  return mappedTypeContext(source, start);
 }
 
 /**
@@ -764,6 +792,9 @@ function scanTypeScriptExpression(source, offset, terminator) {
       afterMemberAccess = false;
       statementBoundary = false;
       index += 1;
+      if (!templateTerminator && terminator === ')' && controlParenStack.length === 0) {
+        return index;
+      }
       continue;
     }
     if (/\s/u.test(ch)) {
