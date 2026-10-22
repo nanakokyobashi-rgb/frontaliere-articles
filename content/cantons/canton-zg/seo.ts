@@ -465,6 +465,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-adeguamento-piano-direttore-zone-bianche-2026': {
+    title: 'Adeguamento piano direttore 26/1: «zone bianche» per l\'edilizia a Zugo',
+    description: 'Canton Zugo: adeguamento piano direttore 26/1 introduce zone bianche per l\'edilizia e strategia di stabilizzazione. Partecipazione fino al 16 novembre',
+    keywords: 'frontalieri, ticino, svizzera, italia, adeguamento, piano, direttore, zone',
+    ogTitle: 'Adeguamento piano direttore Zugo: cosa cambia con le zone bianche',
+    ogDescription: 'Il Canton Zugo adegua il piano direttore con «zone bianche» per l\'edilizia e una strategia di stabilizzazione. Partecipazione pubblica fino al 16 novembre 2026 prima del passaggio al Gran Consiglio.',
+    canonicalPath: '/articoli-zugo/adeguamento-piano-direttore-zone-bianche-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Adeguamento piano direttore 26/1: «zone bianche» per l'edilizia a Zugo",
+      "description": "Canton Zugo: adeguamento piano direttore 26/1 introduce zone bianche per l'edilizia e strategia di stabilizzazione. Partecipazione fino al 16 novembre",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-adeguamento-piano-direttore-zone-bianche-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T02:39:48+00:00",
+      "dateModified": "2026-10-22T02:39:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zugo/adeguamento-piano-direttore-zone-bianche-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

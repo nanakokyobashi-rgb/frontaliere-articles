@@ -39,6 +39,9 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.zugo-agenda-consiglio-29-ottobre.title': 'Zug stellt die Tagesordnung des Kantonsrates zur Verfügung',
     'blog.article.zugo-agenda-consiglio-29-ottobre.excerpt': 'Die Tagesordnung der Sitzung des Kantonsrates Zug vom 29.',
     'blog.article.zugo-agenda-consiglio-29-ottobre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.adeguamento-piano-direttore-zone-bianche-2026.title': 'Anpassung des Richtplans 26/1: «weiße Zonen» für das Bauen in Zug',
+    'blog.article.adeguamento-piano-direttore-zone-bianche-2026.excerpt': 'Die Anpassung 26/1 des kantonalen Richtplans wurde veröffentlicht: «weiße Zonen» für den Wohnungsbau und eine Stabilisierungsstrategie.',
+    'blog.article.adeguamento-piano-direttore-zone-bianche-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZgDe;

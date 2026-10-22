@@ -39,6 +39,9 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.zugo-agenda-consiglio-29-ottobre.title': 'Zoug rend disponible l\'agenda du Conseil cantonal',
     'blog.article.zugo-agenda-consiglio-29-ottobre.excerpt': 'L\'ordre du jour de la séance du Conseil cantonal de Zoug du 29 octobre 2026 est disponible, mais le texte n\'en dresse pas la liste.',
     'blog.article.zugo-agenda-consiglio-29-ottobre.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.adeguamento-piano-direttore-zone-bianche-2026.title': '«Zones blanches» pour construire à Zoug Plan 26/1 adapté',
+    'blog.article.adeguamento-piano-direttore-zone-bianche-2026.excerpt': 'L’adaptation 26/1 du plan directeur cantonal est publiée : des « zones blanches » pour la construction de logements et une stratégie de stabilisation.',
+    'blog.article.adeguamento-piano-direttore-zone-bianche-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZgFr;

@@ -138,4 +138,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'adeguamento-piano-direttore-zone-bianche-2026',
+ category: 'novita',
+ date: '2026-10-22T02:39:48.543Z',
+ image: '/images/blog/article-adeguamento-piano-direttore-zone-bianche-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -15,6 +15,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'zugo-governo-direzioni-2027': { it: 'zugo-governo-direzioni-2027', en: 'zug-government-directorates-2027', de: 'zug-regierung-direktionen-2027', fr: 'zoug-gouvernement-directions-2027' },
  'zugo-assegnazione-mandato-2030': { it: 'zugo-assegnazione-mandato-2030', en: 'zug-directorates-term-2030', de: 'zug-direktionen-amtsperiode-2030', fr: 'zoug-directions-mandat-2030' },
  'zugo-agenda-consiglio-29-ottobre': { it: 'zugo-agenda-consiglio-29-ottobre', en: 'zug-cantonal-council-agenda-october-29-2026', de: 'zug-kantonsrat-traktanden-29-oktober-2026', fr: 'zoug-conseil-cantonal-ordre-jour-29-octobre-2026' },
+ 'adeguamento-piano-direttore-zone-bianche-2026': { it: 'adeguamento-piano-direttore-zone-bianche-2026', en: 'zug-director-plan-adjustment-white-zones-2026', de: 'zug-richtplan-anpassung-weisse-zonen-2026', fr: 'zoug-plan-directeur-ajustement-zones-blanches-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -39,6 +39,9 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.zugo-agenda-consiglio-29-ottobre.title': 'Zug makes available the agenda of the Cantonal Council',
     'blog.article.zugo-agenda-consiglio-29-ottobre.excerpt': 'The agenda of the meeting of the Cantonal Council of Zug on 29 October 2026 is available, but the text does not list the issues.',
     'blog.article.zugo-agenda-consiglio-29-ottobre.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.adeguamento-piano-direttore-zone-bianche-2026.title': 'Amendment to structure plan 26/1: “white zones” for construction in Zug',
+    'blog.article.adeguamento-piano-direttore-zone-bianche-2026.excerpt': 'Published: adjustment 26/1 to the cantonal structure plan: “white zones” for residential construction and a stabilization strategy.',
+    'blog.article.adeguamento-piano-direttore-zone-bianche-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZgEn;

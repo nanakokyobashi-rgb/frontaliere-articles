@@ -39,6 +39,9 @@ const blogMetaCantonZgIt: Record<string, string> = {
     'blog.article.zugo-agenda-consiglio-29-ottobre.title': 'Zugo rende disponibile l\'agenda del Consiglio cantonale',
     'blog.article.zugo-agenda-consiglio-29-ottobre.excerpt': 'L\'ordine del giorno della seduta del Consiglio cantonale di Zugo del 29 ottobre 2026 è disponibile, ma il testo non elenca le trattande.',
     'blog.article.zugo-agenda-consiglio-29-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.adeguamento-piano-direttore-zone-bianche-2026.title': 'Adeguamento piano direttore 26/1: «zone bianche» per l\'edilizia a Zugo',
+    'blog.article.adeguamento-piano-direttore-zone-bianche-2026.excerpt': 'Pubblicato l\'adeguamento 26/1 del piano direttore cantonale: «zone bianche» per l\'edilizia abitativa e strategia di stabilizzazione.',
+    'blog.article.adeguamento-piano-direttore-zone-bianche-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZgIt;
