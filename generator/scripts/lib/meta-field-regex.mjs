@@ -14,7 +14,56 @@
  */
 
 import { readStaticObjectEntries } from '../../../engine/shared/ts-literals.mjs';
+import { parseStaticArticleTranslationEntries } from '../../../engine/shared/articleStaticSource.mjs';
 import { unescapeTsString } from './unescape-ts-string.mjs';
+
+/**
+ * Read requested fields from one or more complete static metadata modules.
+ * Each module is validated independently before its entries are appended, so
+ * input-module order and property order remain observable to callers that
+ * apply their existing first/last-wins policy. Callers decide which missing
+ * files to omit; a present malformed module rejects the entire operation.
+ *
+ * This API is additive. The RegExp-compatible exports below remain available
+ * for consumers that edit source spans rather than read field values.
+ *
+ * @param {{source: string, sourcePath: string}|Array<{source: string, sourcePath: string}>} modules
+ * @param {string[]} fields
+ * @returns {Record<string, Array<{id: string, value: string}>>}
+ */
+export function readStaticMetaFields(modules, fields) {
+  if (!Array.isArray(fields) || fields.length === 0) {
+    throw new TypeError('[meta-fields] fields must be a non-empty array');
+  }
+  for (const field of fields) {
+    if (typeof field !== 'string' || !/^[A-Za-z][A-Za-z0-9]*$/u.test(field)) {
+      throw new TypeError('[meta-fields] each field must be a simple identifier');
+    }
+  }
+  if (new Set(fields).size !== fields.length) {
+    throw new TypeError('[meta-fields] fields must not contain duplicates');
+  }
+
+  const requestedFields = new Set(fields);
+  const inputs = Array.isArray(modules) ? modules : [modules];
+  const entriesByField = Object.fromEntries(fields.map((field) => [field, []]));
+  for (const module of inputs) {
+    if (!module || typeof module.source !== 'string' || typeof module.sourcePath !== 'string' || module.sourcePath.trim() === '') {
+      throw new TypeError('[meta-fields] each module must include source text and a non-empty sourcePath');
+    }
+    for (const entry of parseStaticArticleTranslationEntries(module.source, module.sourcePath)) {
+      if (requestedFields.has(entry.field)) {
+        entriesByField[entry.field].push({ id: entry.articleId, value: entry.value });
+      }
+    }
+  }
+  return entriesByField;
+}
+
+/** @returns {Array<{id: string, value: string}>} */
+export function readStaticMetaFieldEntries(modules, field) {
+  return readStaticMetaFields(modules, [field])[field];
+}
 
 function makeMatch(source, entry, index) {
   const full = source.slice(index, entry.end);
