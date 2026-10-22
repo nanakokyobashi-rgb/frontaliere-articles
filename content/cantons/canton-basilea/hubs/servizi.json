@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "servizi",
-  "updatedAt": "2026-10-21T23:07:40.565Z",
-  "contentHash": "9e5c5eb9227fe0d78b9afeb9c23fb5553883b683dc6c63d23701154529eb0898",
+  "updatedAt": "2026-10-22T00:12:28.308Z",
+  "contentHash": "69f1a0efb4d886756d0645ce85eed795201e4972abf341df0496eda6b1d6c49c",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -166,12 +166,6 @@
           "date": "2026-10-02T02:44:00.678Z"
         },
         {
-          "title": "Sistema scolastico Basilea Campagna: iscrizione e cicli",
-          "url": "/articoli-svizzera/cicli-basilea-campagna/",
-          "excerpt": "Guida alla scuola dell'obbligo a Basilea Campagna: iscrizione, cicli, calendario, lingue di insegnamento e passaggio alle scuole medie superiori.",
-          "date": "2026-10-02T03:08:58.952Z"
-        },
-        {
           "title": "Scuola dell'obbligo Basilea Campagna: cicli e iscrizione",
           "url": "/articoli-svizzera/basilea-campagna-scuola-iscrizione/",
           "excerpt": "La scuola dell'obbligo svizzera dura 9 anni, inizia a 6 anni e si divide in primaria e secondaria. Procedura di iscrizione e transizioni scolastiche secondo le norme federali.",
@@ -182,6 +176,12 @@
           "url": "/articoli-svizzera/durata-validita-permesso-l-basilea-campagna/",
           "excerpt": "Permesso L di breve durata a Basilea Campagna: validità fino a 1 anno, rinnovo, vincoli datore di lavoro e transizione al permesso B di dimora.",
           "date": "2026-09-02T05:04:54.377Z"
+        },
+        {
+          "title": "Sistema scolastico Basilea Campagna: iscrizione e cicli",
+          "url": "/articoli-svizzera/cicli-basilea-campagna/",
+          "excerpt": "Guida alla scuola dell'obbligo a Basilea Campagna: iscrizione, cicli, calendario, lingue di insegnamento e passaggio alle scuole medie superiori.",
+          "date": "2026-10-02T03:08:58.952Z"
         },
         {
           "title": "Permesso di dimora B Basilea Campagna: requisiti e rinnovo",
@@ -225,7 +225,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-21T23:07:40.565Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -369,12 +369,6 @@
           "date": "2026-10-02T02:44:00.678Z"
         },
         {
-          "title": "Basel-Landschaft school system: enrolment and cycles",
-          "url": "/en/swiss-articles/basel-campagna-school-cycles/",
-          "excerpt": "Guide to compulsory schooling in Basel-Landschaft: enrolment, cycles, calendar, languages of instruction and transition to secondary school.",
-          "date": "2026-10-02T03:08:58.952Z"
-        },
-        {
           "title": "Compulsory school Basel Countryside: cycles and enrolment",
           "url": "/en/swiss-articles/basel-countryside-school-enrollment-cycles/",
           "excerpt": "The Swiss compulsory school lasts 9 years, starts at 6 years and is divided into primary and secondary. Enrollment procedure and school transitions according to federal regulations.",
@@ -385,6 +379,12 @@
           "url": "/en/swiss-articles/duration-validity-permit-l-basel-landschaft/",
           "excerpt": "Short-term permit L in Basel Countryside: validity up to 1 year, renewal, employer restrictions and transition to residence permit B.",
           "date": "2026-09-02T05:04:54.377Z"
+        },
+        {
+          "title": "Basel-Landschaft school system: enrolment and cycles",
+          "url": "/en/swiss-articles/basel-campagna-school-cycles/",
+          "excerpt": "Guide to compulsory schooling in Basel-Landschaft: enrolment, cycles, calendar, languages of instruction and transition to secondary school.",
+          "date": "2026-10-02T03:08:58.952Z"
         },
         {
           "title": "Residence Permit B Basel Countryside: Requirements and Renewal",
@@ -420,7 +420,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-21T23:07:40.565Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -564,12 +564,6 @@
           "date": "2026-10-02T02:44:00.678Z"
         },
         {
-          "title": "Schulsystem Basel-Landschaft: Einschreibung und Zyklen",
-          "url": "/de/schweiz-artikel/schule-basel-landschaft-zyklen/",
-          "excerpt": "Leitfaden zur Schulpflicht in Basel-Landschaft: Einschreibung, Zyklen, Kalender, Unterrichtssprachen und Übergang zur weiterführenden Schule.",
-          "date": "2026-10-02T03:08:58.952Z"
-        },
-        {
           "title": "Obligatorische Schule Basel-Landschaft: Zyklen und Einschreibung",
           "url": "/de/schweiz-artikel/basel-landschaft-grundschule-einschulung/",
           "excerpt": "Die Schweizerische Pflichtschule dauert 9 Jahre, beginnt mit 6 Jahren und gliedert sich in Primar- und Sekundarschule. Immatrikulationsverfahren und Schulübergänge nach Bundesvorschriften.",
@@ -580,6 +574,12 @@
           "url": "/de/schweiz-artikel/gueltigkeitsdauer-permit-l-basellandschaft/",
           "excerpt": "Kurzaufenthaltsbewilligung L in Basel-Landschaft: Gültigkeit bis zu 1 Jahr, Verlängerung, Verpflichtungen des Arbeitgebers und Übergang zur Aufenthaltsbewilligung B.",
           "date": "2026-09-02T05:04:54.377Z"
+        },
+        {
+          "title": "Schulsystem Basel-Landschaft: Einschreibung und Zyklen",
+          "url": "/de/schweiz-artikel/schule-basel-landschaft-zyklen/",
+          "excerpt": "Leitfaden zur Schulpflicht in Basel-Landschaft: Einschreibung, Zyklen, Kalender, Unterrichtssprachen und Übergang zur weiterführenden Schule.",
+          "date": "2026-10-02T03:08:58.952Z"
         },
         {
           "title": "Aufenthaltsbewilligung B Basel-Landschaft: Voraussetzungen und Verlängerung",
@@ -615,7 +615,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-21T23:07:40.565Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -759,12 +759,6 @@
           "date": "2026-10-02T02:44:00.678Z"
         },
         {
-          "title": "Système scolaire de Bâle-Landschaft : effectifs et cycles",
-          "url": "/fr/articles-suisse/ecole-bale-campagne-cycles/",
-          "excerpt": "Guide de la scolarité obligatoire à Bâle-Landschaft : inscription, cycles, calendrier, langues d’enseignement et transition vers le secondaire.",
-          "date": "2026-10-02T03:08:58.952Z"
-        },
-        {
           "title": "École obligatoire Bâle-Campagne : cycles et inscription",
           "url": "/fr/articles-suisse/bale-campagne-ecole-inscription-cycles/",
           "excerpt": "L'école obligatoire suisse dure 9 ans, commence à 6 ans et se divise en primaire et secondaire. Procédure d'inscription et transitions scolaires selon les normes fédérales.",
@@ -775,6 +769,12 @@
           "url": "/fr/articles-suisse/duree-validite-permis-l-bale-campagne/",
           "excerpt": "Permis L de courte durée à Bâle-Campagne : validité jusqu'à 1 an, renouvellement, contraintes de l'employeur et transition vers le permis B de séjour.",
           "date": "2026-09-02T05:04:54.377Z"
+        },
+        {
+          "title": "Système scolaire de Bâle-Landschaft : effectifs et cycles",
+          "url": "/fr/articles-suisse/ecole-bale-campagne-cycles/",
+          "excerpt": "Guide de la scolarité obligatoire à Bâle-Landschaft : inscription, cycles, calendrier, langues d’enseignement et transition vers le secondaire.",
+          "date": "2026-10-02T03:08:58.952Z"
         },
         {
           "title": "Permis de séjour B Bâle-Campagne : exigences et renouvellement",
@@ -802,7 +802,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-21T23:07:40.565Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     }
   }
 }

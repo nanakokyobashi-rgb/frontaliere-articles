@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "5ef1e38640694d7a7314067eb6b0ba3055688ffe67ad8668dcc77fc6e5113c9e",
+  "updatedAt": "2026-10-22T00:12:28.308Z",
+  "contentHash": "5b5b152063339d60c1c6a8054baebf8376552f7845999791df062696dd427406",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "103",
+          "value": "107",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "LEHRplätz Bremgarten",
-              "detail": "Bremgarten",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lehrplaetz-bremgarten/"
+              "label": "PALETTENMESSE Bremgarten",
+              "detail": "Casino Bremgarten",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/palettenmesse-bremgarten/"
             },
             {
-              "label": "Corso di Jass per principianti (parte 1) a Baden (de Karten)",
+              "label": "Afterwork Live Musik - Mark Slate & Rotosphere",
+              "detail": "Henry's Live Music & Sport Bar, Baden",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/afterwork-live-musik-mark-slate-und-rotosphere_A5xUjEM"
+            },
+            {
+              "label": "Sport Forum Aargau 2026",
+              "detail": "Tägi AG, Wettingen",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sport-forum-aargau-2026/"
+            },
+            {
+              "label": "CONVIVIO - Wein mal anders",
               "detail": "Baden",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/corso-di-jass-per-principianti-parte-1-a-baden-de-karten/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/convivio-wein-mal-anders/"
             },
             {
-              "label": "Panflötenkonzert mit Duo Pantastico",
-              "detail": "Röm.-kath. Kirche St. Nikolaus, Waltenschwil",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/waltenschwil/panfloetenkonzert-mit-duo-pantastico_ATWFSmp"
+              "label": "Science Jam – Forschung auf der Bühne",
+              "detail": "Bühne Aarau, Aarau",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/science-jam-forschung-auf-der-buehne/"
             },
             {
-              "label": "Ref. Frauenverein Muri Sins: Vortrag: Indische Malerei - ferne Kunst ganz nah",
-              "detail": "Muri AG, Sins",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ref-frauenverein-muri-sins-vortrag-indische-malerei-ferne-kunst-ganz-nah/"
-            },
-            {
-              "label": "Tribute to Johnny Cash",
-              "detail": "Saalbau Reinach",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-ag/tribute-to-johnny-cash_A7rvQrK"
-            },
-            {
-              "label": "EIN.ANDER - SAISONAUFTAKT ENDLICH MITTWOCH!",
-              "detail": "Baden",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eroeffnung-endlich-mittwoch-21102026/"
+              "label": "Lesung und Gespräch mit Beatrix Gerstberger",
+              "detail": "Aarau",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-und-gespraech-mit-beatrix-gerstberger/"
             },
             {
               "label": "Die Habsburger – 800 Jahre europäische Geschichte",
               "detail": "Laufenburg — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
             },
             {
               "label": "Oktoberfest Baden 2026",
               "detail": "Brown Boveri Platz, Baden — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
             },
             {
               "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
               "detail": "Untersiggenthal — in corso, ultimo giorno: 30 ottobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
             },
             {
-              "label": "PALETTENMESSE Bremgarten",
-              "detail": "Casino Bremgarten",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/palettenmesse-bremgarten/"
+              "label": "in&out - La piattaforma dedicata al design svizzero",
+              "detail": "AHA Aeschbachhalle Aarau, Aarau",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "en": {
       "canton": "AG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "103",
+          "value": "107",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,64 +138,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "LEHRplätz Bremgarten",
-              "detail": "Bremgarten",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lehrplaetz-bremgarten/"
+              "label": "PALETTENMESSE Bremgarten",
+              "detail": "Casino Bremgarten",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/palettenmesse-bremgarten/"
             },
             {
-              "label": "Jass course for beginners (part 1) in Baden (de Karten)",
+              "label": "Afterwork Live Musik - Mark Slate & Rotosphere",
+              "detail": "Henry's Live Music & Sport Bar, Baden",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/afterwork-live-musik-mark-slate-und-rotosphere_A5xUjEM"
+            },
+            {
+              "label": "Sport Forum Aargau 2026",
+              "detail": "Tägi AG, Wettingen",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sport-forum-aargau-2026/"
+            },
+            {
+              "label": "CONVIVIO - Wein mal anders",
               "detail": "Baden",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/corso-di-jass-per-principianti-parte-1-a-baden-de-karten/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/convivio-wein-mal-anders/"
             },
             {
-              "label": "Pan flute concert with Duo Pantastico",
-              "detail": "Röm.-kath. Kirche St. Nikolaus, Waltenschwil",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/waltenschwil/panfloetenkonzert-mit-duo-pantastico_ATWFSmp"
+              "label": "Science Jam - Research on stage",
+              "detail": "Bühne Aarau, Aarau",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/science-jam-forschung-auf-der-buehne/"
             },
             {
-              "label": "Ref. Frauenverein Muri Sins: Vortrag: Indische Malerei - ferne Kunst ganz nah",
-              "detail": "Muri AG, Sins",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ref-frauenverein-muri-sins-vortrag-indische-malerei-ferne-kunst-ganz-nah/"
-            },
-            {
-              "label": "Tribute to Johnny Cash",
-              "detail": "Saalbau Reinach",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-ag/tribute-to-johnny-cash_A7rvQrK"
-            },
-            {
-              "label": "EIN.ANDER - SAISONAUFTAKT ENDLICH MITTWOCH!",
-              "detail": "Baden",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eroeffnung-endlich-mittwoch-21102026/"
+              "label": "Lesung und Gespräch mit Beatrix Gerstberger",
+              "detail": "Aarau",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-und-gespraech-mit-beatrix-gerstberger/"
             },
             {
               "label": "Die Habsburger – 800 Jahre europäische Geschichte",
               "detail": "Laufenburg — ongoing, last day: 1 November 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
             },
             {
               "label": "Oktoberfest Baden 2026",
               "detail": "Brown Boveri Platz, Baden — ongoing, last day: 31 October 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
             },
             {
               "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
               "detail": "Untersiggenthal — ongoing, last day: 30 October 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
             },
             {
-              "label": "PALETTENMESSE Bremgarten",
-              "detail": "Casino Bremgarten",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/palettenmesse-bremgarten/"
+              "label": "in&out - The Platform for Swiss Design",
+              "detail": "AHA Aeschbachhalle Aarau, Aarau",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "de": {
       "canton": "AG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "103",
+          "value": "107",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,64 +243,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "LEHRplätz Bremgarten",
-              "detail": "Bremgarten",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lehrplaetz-bremgarten/"
+              "label": "PALETTENMESSE Bremgarten",
+              "detail": "Casino Bremgarten",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/palettenmesse-bremgarten/"
             },
             {
-              "label": "Jasskurs für Anfänger (Teil 1) in Baden (de Karten)",
+              "label": "Afterwork Live Musik - Mark Slate & Rotosphere",
+              "detail": "Henry's Live Music & Sport Bar, Baden",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/afterwork-live-musik-mark-slate-und-rotosphere_A5xUjEM"
+            },
+            {
+              "label": "Sport Forum Aargau 2026",
+              "detail": "Tägi AG, Wettingen",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sport-forum-aargau-2026/"
+            },
+            {
+              "label": "CONVIVIO - Wein mal anders",
               "detail": "Baden",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/corso-di-jass-per-principianti-parte-1-a-baden-de-karten/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/convivio-wein-mal-anders/"
             },
             {
-              "label": "Panflötenkonzert mit Pantastischem Duo",
-              "detail": "Röm.-kath. Kirche St. Nikolaus, Waltenschwil",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/waltenschwil/panfloetenkonzert-mit-duo-pantastico_ATWFSmp"
+              "label": "Scienzimmam-Forschung auf der B Graffhne",
+              "detail": "Bühne Aarau, Aarau",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/science-jam-forschung-auf-der-buehne/"
             },
             {
-              "label": "Ref. Frauenverein Muri Sins: Vortrag: Indische Malerei - ferne Kunst ganz nah",
-              "detail": "Muri AG, Sins",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ref-frauenverein-muri-sins-vortrag-indische-malerei-ferne-kunst-ganz-nah/"
-            },
-            {
-              "label": "Tribute to Johnny Cash",
-              "detail": "Saalbau Reinach",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-ag/tribute-to-johnny-cash_A7rvQrK"
-            },
-            {
-              "label": "EIN.ANDER - SAISONAUFTAKT ENDLICH MITTWOCH!",
-              "detail": "Baden",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eroeffnung-endlich-mittwoch-21102026/"
+              "label": "Lesung und Gespräch mit Beatrix Gerstberger",
+              "detail": "Aarau",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-und-gespraech-mit-beatrix-gerstberger/"
             },
             {
               "label": "Die Habsburger – 800 Jahre europäische Geschichte",
               "detail": "Laufenburg — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
             },
             {
               "label": "Oktoberfest Baden 2026",
               "detail": "Brown Boveri Platz, Baden — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
             },
             {
               "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
               "detail": "Untersiggenthal — läuft, letzter Tag: 30. Oktober 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
             },
             {
-              "label": "PALETTENMESSE Bremgarten",
-              "detail": "Casino Bremgarten",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/palettenmesse-bremgarten/"
+              "label": "Illumio am in&out - Die Plattform für Schweizer Design",
+              "detail": "AHA Aeschbachhalle Aarau, Aarau",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "fr": {
       "canton": "AG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "103",
+          "value": "107",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,64 +348,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "LEHRplätz Bremgarten",
-              "detail": "Bremgarten",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lehrplaetz-bremgarten/"
+              "label": "PALETTENMESSE Bremgarten",
+              "detail": "Casino Bremgarten",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/palettenmesse-bremgarten/"
             },
             {
-              "label": "Cours de jass pour débutants (partie 1) à Baden (de cartes)",
+              "label": "Afterwork Live Musik - Mark Slate & Rotosphere",
+              "detail": "Henry's Live Music & Sport Bar, Baden",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/afterwork-live-musik-mark-slate-und-rotosphere_A5xUjEM"
+            },
+            {
+              "label": "Sport Forum Aargau 2026",
+              "detail": "Tägi AG, Wettingen",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sport-forum-aargau-2026/"
+            },
+            {
+              "label": "CONVIVIO - Wein mal anders",
               "detail": "Baden",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/corso-di-jass-per-principianti-parte-1-a-baden-de-karten/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/convivio-wein-mal-anders/"
             },
             {
-              "label": "Panflötenkonzert mit Duo Fantastique",
-              "detail": "Röm.-kath. Kirche St. Nikolaus, Waltenschwil",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/waltenschwil/panfloetenkonzert-mit-duo-pantastico_ATWFSmp"
+              "label": "Science Jam - La recherche sur scène",
+              "detail": "Bühne Aarau, Aarau",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/science-jam-forschung-auf-der-buehne/"
             },
             {
-              "label": "Ref. Frauenverein Muri Sins: Vortrag: Indische Malerei - ferne Kunst ganz nah",
-              "detail": "Muri AG, Sins",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ref-frauenverein-muri-sins-vortrag-indische-malerei-ferne-kunst-ganz-nah/"
-            },
-            {
-              "label": "Tribute to Johnny Cash",
-              "detail": "Saalbau Reinach",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/reinach-ag/tribute-to-johnny-cash_A7rvQrK"
-            },
-            {
-              "label": "EIN.ANDER - SAISONAUFTAKT ENDLICH MITTWOCH!",
-              "detail": "Baden",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/eroeffnung-endlich-mittwoch-21102026/"
+              "label": "Lesung und Gespräch mit Beatrix Gerstberger",
+              "detail": "Aarau",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-und-gespraech-mit-beatrix-gerstberger/"
             },
             {
               "label": "Die Habsburger – 800 Jahre europäische Geschichte",
               "detail": "Laufenburg — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
             },
             {
               "label": "Oktoberfest Baden 2026",
               "detail": "Brown Boveri Platz, Baden — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
             },
             {
               "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
               "detail": "Untersiggenthal — en cours, dernier jour : 30 octobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
             },
             {
-              "label": "PALETTENMESSE Bremgarten",
-              "detail": "Casino Bremgarten",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/palettenmesse-bremgarten/"
+              "label": "in&out - La plateforme dédiée au design suisse",
+              "detail": "AHA Aeschbachhalle Aarau, Aarau",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     }
   }
 }

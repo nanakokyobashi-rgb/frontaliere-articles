@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "eventi",
-  "updatedAt": "2026-10-21T00:56:25.671Z",
-  "contentHash": "b2bf0b3c674e78b7218c06db22a6f16c2b8e3b2b49153d6930aaa20284548cc3",
+  "updatedAt": "2026-10-22T00:12:28.308Z",
+  "contentHash": "53b9aa02a576cfb037fc447c2ba4ecafddf739848341bfd7b42ad2eb0ed4c351",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-20T17:28:37.181Z",
+      "updatedAt": "2026-10-21T12:38:14.154Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "63",
+          "value": "64",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "BreastLove - Know Your Boobs @ Solothurn",
-              "detail": "Kargo68, Solothurn",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/breastlove-know-your-boobs-solothurn/"
-            },
-            {
-              "label": "Senf selber herstellen",
-              "detail": "Kienberg",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/senf-selber-herstellen-1/"
-            },
-            {
-              "label": "Open Mic",
+              "label": "«l'après-midi» Kino für Geniesser",
               "detail": "Solothurn",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/open-mic/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lapresmidi-kino-fuer-geniesser-2/"
             },
             {
-              "label": "Figuren und Formen",
-              "detail": "Olten",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/figuren-und-formen/"
+              "label": "Krummturm Führung mit Apéro",
+              "detail": "Soletta",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/krummturm-fuehrung-mit-apero/"
             },
             {
-              "label": "Buchvernissage und Gespräch mit Marc du Buisson",
+              "label": "Aquarellmalerei",
               "detail": "Solothurn",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchvernissage-und-gespraech-mit-marc-du-buisson/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aquarellmalerei-1/"
+            },
+            {
+              "label": "Faszien Training",
+              "detail": "Solothurn",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/faszien-training-1/"
             },
             {
               "label": "Computer Grundlagen",
               "detail": "Volkshochschule Solothurn, Solothurn — in corso, ultimo giorno: 10 novembre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
             },
             {
               "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
               "detail": "Hauslimattschulhaus, Balsthal — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
             },
             {
               "label": "Herbstaromen à la carte",
               "detail": "Genussfabrik Solothurn, Solothurn — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
             },
             {
               "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
               "detail": "Car Parking — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
             },
             {
-              "label": "«l'après-midi» Kino für Geniesser",
-              "detail": "Solothurn",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lapresmidi-kino-fuer-geniesser-2/"
+              "label": "Oktoberfest",
+              "detail": "Rythalle Soledurn, Solothurn",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
+            },
+            {
+              "label": "Dorfjass",
+              "detail": "Lüterkofen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dorfjass/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/soletta/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/soletta/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "en": {
       "canton": "SO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "63",
+          "value": "64",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "BreastLove - Know Your Boobs @ Solothurn",
-              "detail": "Kargo68, Solothurn",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/breastlove-know-your-boobs-solothurn/"
-            },
-            {
-              "label": "Senf selber herstellen",
-              "detail": "Kienberg",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/senf-selber-herstellen-1/"
-            },
-            {
-              "label": "Open Mic",
+              "label": "«l'après-midi» Kino für Geniesser",
               "detail": "Solothurn",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/open-mic/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lapresmidi-kino-fuer-geniesser-2/"
             },
             {
-              "label": "Figuren und Formen",
-              "detail": "Olten",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/figuren-und-formen/"
+              "label": "Krummturm Führung mit Apéro",
+              "detail": "Soletta",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/krummturm-fuehrung-mit-apero/"
             },
             {
-              "label": "Buchvernissage und Gespräch mit Marc du Buisson",
+              "label": "Aquarellmalerei",
               "detail": "Solothurn",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchvernissage-und-gespraech-mit-marc-du-buisson/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aquarellmalerei-1/"
+            },
+            {
+              "label": "Faszien Training",
+              "detail": "Solothurn",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/faszien-training-1/"
             },
             {
               "label": "Computer Grundlagen",
               "detail": "Volkshochschule Solothurn, Solothurn — ongoing, last day: 10 November 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
             },
             {
               "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
               "detail": "Hauslimattschulhaus, Balsthal — ongoing, last day: 31 October 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
             },
             {
               "label": "Herbstaromen à la carte",
               "detail": "Genussfabrik Solothurn, Solothurn — ongoing, last day: 31 October 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
             },
             {
               "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
               "detail": "Car Parking — ongoing, last day: 25 October 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
             },
             {
-              "label": "«l'après-midi» Kino für Geniesser",
-              "detail": "Solothurn",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lapresmidi-kino-fuer-geniesser-2/"
+              "label": "Oktoberfest",
+              "detail": "Rythalle Soledurn, Solothurn",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
+            },
+            {
+              "label": "Dorfjass",
+              "detail": "Lüterkofen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dorfjass/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/solothurn/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/solothurn/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "de": {
       "canton": "SO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "63",
+          "value": "64",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "BreastLove - Know Your Boobs @ Solothurn",
-              "detail": "Kargo68, Solothurn",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/breastlove-know-your-boobs-solothurn/"
-            },
-            {
-              "label": "Senf selber herstellen",
-              "detail": "Kienberg",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/senf-selber-herstellen-1/"
-            },
-            {
-              "label": "Open Mic",
+              "label": "«l'après-midi» Kino für Geniesser",
               "detail": "Solothurn",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/open-mic/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lapresmidi-kino-fuer-geniesser-2/"
             },
             {
-              "label": "Figuren und Formen",
-              "detail": "Olten",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/figuren-und-formen/"
+              "label": "Krummturm Führung mit Apéro",
+              "detail": "Soletta",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/krummturm-fuehrung-mit-apero/"
             },
             {
-              "label": "Buchvernissage und Gespräch mit Marc du Buisson",
+              "label": "Aquarellmalerei",
               "detail": "Solothurn",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchvernissage-und-gespraech-mit-marc-du-buisson/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aquarellmalerei-1/"
+            },
+            {
+              "label": "Faszien Training",
+              "detail": "Solothurn",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/faszien-training-1/"
             },
             {
               "label": "Computer Grundlagen",
               "detail": "Volkshochschule Solothurn, Solothurn — läuft, letzter Tag: 10. November 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
             },
             {
               "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
               "detail": "Hauslimattschulhaus, Balsthal — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
             },
             {
               "label": "Herbstaromen à la carte",
               "detail": "Genussfabrik Solothurn, Solothurn — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
             },
             {
               "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
               "detail": "Car Parking — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
             },
             {
-              "label": "«l'après-midi» Kino für Geniesser",
-              "detail": "Solothurn",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lapresmidi-kino-fuer-geniesser-2/"
+              "label": "Oktoberfest",
+              "detail": "Rythalle Soledurn, Solothurn",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
+            },
+            {
+              "label": "Dorfjass",
+              "detail": "Lüterkofen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dorfjass/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/solothurn/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/solothurn/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "fr": {
       "canton": "SO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "63",
+          "value": "64",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "BreastLove - Know Your Boobs @ Solothurn",
-              "detail": "Kargo68, Solothurn",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/breastlove-know-your-boobs-solothurn/"
-            },
-            {
-              "label": "Senf selber herstellen",
-              "detail": "Kienberg",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/senf-selber-herstellen-1/"
-            },
-            {
-              "label": "Open Mic",
+              "label": "«l'après-midi» Kino für Geniesser",
               "detail": "Solothurn",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/open-mic/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lapresmidi-kino-fuer-geniesser-2/"
             },
             {
-              "label": "Figuren und Formen",
-              "detail": "Olten",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/figuren-und-formen/"
+              "label": "Krummturm Führung mit Apéro",
+              "detail": "Soletta",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/krummturm-fuehrung-mit-apero/"
             },
             {
-              "label": "Buchvernissage und Gespräch mit Marc du Buisson",
+              "label": "Aquarellmalerei",
               "detail": "Solothurn",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/buchvernissage-und-gespraech-mit-marc-du-buisson/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/aquarellmalerei-1/"
+            },
+            {
+              "label": "Faszien Training",
+              "detail": "Solothurn",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/faszien-training-1/"
             },
             {
               "label": "Computer Grundlagen",
               "detail": "Volkshochschule Solothurn, Solothurn — en cours, dernier jour : 10 novembre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
             },
             {
               "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
               "detail": "Hauslimattschulhaus, Balsthal — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
             },
             {
               "label": "Herbstaromen à la carte",
               "detail": "Genussfabrik Solothurn, Solothurn — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
             },
             {
               "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
               "detail": "Car Parking — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
             },
             {
-              "label": "«l'après-midi» Kino für Geniesser",
-              "detail": "Solothurn",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lapresmidi-kino-fuer-geniesser-2/"
+              "label": "Oktoberfest",
+              "detail": "Rythalle Soledurn, Solothurn",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
+            },
+            {
+              "label": "Dorfjass",
+              "detail": "Lüterkofen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dorfjass/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/soleure/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/soleure/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     }
   }
 }

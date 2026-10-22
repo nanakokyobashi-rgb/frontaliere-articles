@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-21T00:56:25.671Z",
-  "contentHash": "0e6c059edd0e846f6b4e9d5b3aa73ac887bfcb0686c1ae678ead15a9429c4339",
+  "updatedAt": "2026-10-22T00:12:28.308Z",
+  "contentHash": "23477822be3445fa6efc107de1c1078d974bb5aa2c2fe5a00213e0368f9a6878",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-20T17:28:37.181Z",
+      "updatedAt": "2026-10-21T12:38:14.154Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "93",
+          "value": "95",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,24 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Komponist, Münsterorganist und Pädagoge in Basel",
-              "detail": "Basel",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/komponist-muensterorganist-und-paedagoge-in-basel/"
-            },
-            {
-              "label": "Flook - präsentiert von Celtic Carrousel Tours",
-              "detail": "Barakuba",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/flook-praesentiert-von-celtic-carrousel-tours_ASxKt5g"
-            },
-            {
-              "label": "Daniel Migliosi Quintet",
-              "detail": "the bird's eye jazz club — in corso, ultimo giorno: 21 ottobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/daniel-migliosi-quintet_AC3pN6i"
-            },
             {
               "label": "Nat Su/Jean-Paul Brodbeck Duo",
               "detail": "the bird's eye jazz club",
@@ -91,11 +73,29 @@
               "detail": "Basel Schifflände, Basel",
               "date": "2026-10-23",
               "url": "https://www.guidle.com/it/museums/children/events/basel/line-dance-cruise-on-the-river-rhine_A5yXACG"
+            },
+            {
+              "label": "Sunset Beats su Rhy - Les Acteurs",
+              "detail": "MS Christoph Merian",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/eventi/musica/basilea/sunset-beats-su-rhy-les-acteurs_ApGsaa1"
+            },
+            {
+              "label": "Manga Workshop in der Bibliothek Dorf",
+              "detail": "Riehen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manga-workshop-in-der-bibliothek-dorf/"
+            },
+            {
+              "label": "Spuren einer Tradition",
+              "detail": "Allschwil",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spuren-einer-tradition/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "93",
+          "value": "95",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,24 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Komponist, Münsterorganist und Pädagoge in Basel",
-              "detail": "Basel",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/komponist-muensterorganist-und-paedagoge-in-basel/"
-            },
-            {
-              "label": "Flook - präsentiert von Celtic Carrousel Tours",
-              "detail": "Barakuba",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/flook-praesentiert-von-celtic-carrousel-tours_ASxKt5g"
-            },
-            {
-              "label": "Daniel Migliosi Quintet",
-              "detail": "the bird's eye jazz club — ongoing, last day: 21 October 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/daniel-migliosi-quintet_AC3pN6i"
-            },
             {
               "label": "Nat Su/Jean-Paul Brodbeck Duo",
               "detail": "the bird's eye jazz club",
@@ -196,11 +178,29 @@
               "detail": "Basel Schifflände, Basel",
               "date": "2026-10-23",
               "url": "https://www.guidle.com/it/museums/children/events/basel/line-dance-cruise-on-the-river-rhine_A5yXACG"
+            },
+            {
+              "label": "Sunset Beats on the Rhine - Les Acteurs",
+              "detail": "MS Christoph Merian",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/eventi/musica/basilea/sunset-beats-su-rhy-les-acteurs_ApGsaa1"
+            },
+            {
+              "label": "Manga Workshop in der Bibliothek Dorf",
+              "detail": "Riehen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manga-workshop-in-der-bibliothek-dorf/"
+            },
+            {
+              "label": "Spuren einer Tradition",
+              "detail": "Allschwil",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spuren-einer-tradition/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "93",
+          "value": "95",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,24 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Komponist, Münsterorganist und Pädagoge in Basel",
-              "detail": "Basel",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/komponist-muensterorganist-und-paedagoge-in-basel/"
-            },
-            {
-              "label": "Flook - präsentiert von Celtic Carrousel Tours",
-              "detail": "Barakuba",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/flook-praesentiert-von-celtic-carrousel-tours_ASxKt5g"
-            },
-            {
-              "label": "Daniel Migliosi Quintet",
-              "detail": "the bird's eye jazz club — läuft, letzter Tag: 21. Oktober 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/daniel-migliosi-quintet_AC3pN6i"
-            },
             {
               "label": "Nat Su/Jean-Paul Brodbeck Duo",
               "detail": "the bird's eye jazz club",
@@ -301,11 +283,29 @@
               "detail": "Basel Schifflände, Basel",
               "date": "2026-10-23",
               "url": "https://www.guidle.com/it/museums/children/events/basel/line-dance-cruise-on-the-river-rhine_A5yXACG"
+            },
+            {
+              "label": "Sunset Beats uff em Rhy - Les Acteurs",
+              "detail": "MS Christoph Merian",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/eventi/musica/basilea/sunset-beats-su-rhy-les-acteurs_ApGsaa1"
+            },
+            {
+              "label": "Manga Workshop in der Bibliothek Dorf",
+              "detail": "Riehen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manga-workshop-in-der-bibliothek-dorf/"
+            },
+            {
+              "label": "Spuren einer Tradition",
+              "detail": "Allschwil",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spuren-einer-tradition/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "93",
+          "value": "95",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,24 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Komponist, Münsterorganist und Pädagoge in Basel",
-              "detail": "Basel",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/komponist-muensterorganist-und-paedagoge-in-basel/"
-            },
-            {
-              "label": "Flook - präsentiert von Celtic Carrousel Tours",
-              "detail": "Barakuba",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/flook-praesentiert-von-celtic-carrousel-tours_ASxKt5g"
-            },
-            {
-              "label": "Daniel Migliosi Quintet",
-              "detail": "the bird's eye jazz club — en cours, dernier jour : 21 octobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/daniel-migliosi-quintet_AC3pN6i"
-            },
             {
               "label": "Nat Su/Jean-Paul Brodbeck Duo",
               "detail": "the bird's eye jazz club",
@@ -406,11 +388,29 @@
               "detail": "Basel Schifflände, Basel",
               "date": "2026-10-23",
               "url": "https://www.guidle.com/it/museums/children/events/basel/line-dance-cruise-on-the-river-rhine_A5yXACG"
+            },
+            {
+              "label": "Sunset Beats uff em Rhy - Les Acteurs",
+              "detail": "MS Christoph Merian",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/eventi/musica/basilea/sunset-beats-su-rhy-les-acteurs_ApGsaa1"
+            },
+            {
+              "label": "Manga Workshop in der Bibliothek Dorf",
+              "detail": "Riehen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manga-workshop-in-der-bibliothek-dorf/"
+            },
+            {
+              "label": "Spuren einer Tradition",
+              "detail": "Allschwil",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spuren-einer-tradition/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     }
   }
 }

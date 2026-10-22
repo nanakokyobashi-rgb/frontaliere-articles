@@ -4,12 +4,12 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "eventi",
-  "updatedAt": "2026-10-21T00:56:25.671Z",
-  "contentHash": "e082f68d5580dfdfadbf09d2934548de4c8717fe557fc4f7fec13a369b5baf41",
+  "updatedAt": "2026-10-22T00:12:28.308Z",
+  "contentHash": "d58997eb12471384ae70c957615db3193fd0b8cbf14912a850dcbd419b4d935f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-20T17:28:37.181Z",
+      "updatedAt": "2026-10-21T12:38:14.154Z",
       "keyFacts": 1
     }
   ],
@@ -33,12 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Babyschwimmen Kinderschwimmen Schwimmschule",
-              "detail": "Aquazenter Kerns, Kerns, Kerns",
-              "date": "2026-10-21",
-              "url": "https://www.ow.ch/_rte/anlass/94702"
-            },
-            {
               "label": "Besichtigung Heizzentrale Chalchofen",
               "detail": "Heizzentrale Chalchofen, Flüeli-Ranft",
               "date": "2026-10-22",
@@ -91,11 +85,17 @@
               "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
               "date": "2026-10-23",
               "url": "https://www.ow.ch/_rte/anlass/93850"
+            },
+            {
+              "label": "Pensionierungsseminar",
+              "detail": "Hotel Paxmontana, Flüeli-Ranft",
+              "date": "2026-10-23",
+              "url": "https://www.ow.ch/_rte/anlass/94237"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/obvaldo/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/obvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "en": {
       "canton": "OW",
@@ -137,12 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Babyschwimmen Kinderschwimmen Schwimmschule",
-              "detail": "Aquazenter Kerns, Kerns, Kerns",
-              "date": "2026-10-21",
-              "url": "https://www.ow.ch/_rte/anlass/94702"
-            },
             {
               "label": "Besichtigung Heizzentrale Chalchofen",
               "detail": "Heizzentrale Chalchofen, Flüeli-Ranft",
@@ -196,11 +190,17 @@
               "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
               "date": "2026-10-23",
               "url": "https://www.ow.ch/_rte/anlass/93850"
+            },
+            {
+              "label": "Pensionierungsseminar",
+              "detail": "Hotel Paxmontana, Flüeli-Ranft",
+              "date": "2026-10-23",
+              "url": "https://www.ow.ch/_rte/anlass/94237"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/obwalden/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/obwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "de": {
       "canton": "OW",
@@ -242,12 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Babyschwimmen Kinderschwimmen Schwimmschule",
-              "detail": "Aquazenter Kerns, Kerns, Kerns",
-              "date": "2026-10-21",
-              "url": "https://www.ow.ch/_rte/anlass/94702"
-            },
             {
               "label": "Besichtigung Heizzentrale Chalchofen",
               "detail": "Heizzentrale Chalchofen, Flüeli-Ranft",
@@ -301,11 +295,17 @@
               "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
               "date": "2026-10-23",
               "url": "https://www.ow.ch/_rte/anlass/93850"
+            },
+            {
+              "label": "Pensionierungsseminar",
+              "detail": "Hotel Paxmontana, Flüeli-Ranft",
+              "date": "2026-10-23",
+              "url": "https://www.ow.ch/_rte/anlass/94237"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/obwalden/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/obwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "fr": {
       "canton": "OW",
@@ -347,12 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Babyschwimmen Kinderschwimmen Schwimmschule",
-              "detail": "Aquazenter Kerns, Kerns, Kerns",
-              "date": "2026-10-21",
-              "url": "https://www.ow.ch/_rte/anlass/94702"
-            },
             {
               "label": "Besichtigung Heizzentrale Chalchofen",
               "detail": "Heizzentrale Chalchofen, Flüeli-Ranft",
@@ -406,11 +400,17 @@
               "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
               "date": "2026-10-23",
               "url": "https://www.ow.ch/_rte/anlass/93850"
+            },
+            {
+              "label": "Pensionierungsseminar",
+              "detail": "Hotel Paxmontana, Flüeli-Ranft",
+              "date": "2026-10-23",
+              "url": "https://www.ow.ch/_rte/anlass/94237"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/obwald/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/obwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     }
   }
 }

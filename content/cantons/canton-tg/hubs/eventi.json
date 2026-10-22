@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-10-21T00:56:25.671Z",
-  "contentHash": "b26fcd2473d11b77d0bf5f884f7edb58f35819bda069a8f00addba152580d184",
+  "updatedAt": "2026-10-22T00:12:28.308Z",
+  "contentHash": "481df9015a1780eac4622b156575204140e62b9c965849ef8ecd6328e0bd0a9a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-20T17:28:37.181Z",
+      "updatedAt": "2026-10-21T12:38:14.154Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T15:53:28.523Z",
+      "updatedAt": "2026-10-21T10:37:42.748Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "58",
+          "value": "60",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,40 +38,34 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Ursus & Nadeschkin - Prspktvnwchsl",
-              "detail": "Dreispitz Sport- und Kulturzentrum, Kreuzlingen",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ursus-nadeschkin-prspktvnwchsl-1/"
+              "label": "Krimi-Theater \"Frau Hase und die Giftspritze\"",
+              "detail": "Brauhaus Sternen, Frauenfeld",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/frauenfeld/krimi-theater-frau-hase-und-die-giftspritze-im-brauhaus-frauenfeld_ADrPetD"
             },
             {
-              "label": "Känzig/Zisman: Tango meets Jazz",
-              "detail": "Eisenwerk, Frauenfeld",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/kaenzigzisman-tango-meets-jazz_A8RxMat"
+              "label": "Ursus & Nadeschkin - Prspktvnwchsl",
+              "detail": "Dreispitz Sport- und Kulturzentrum, Kreuzlingen — in corso, ultimo giorno: 22 ottobre 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ursus-nadeschkin-prspktvnwchsl-1/"
             },
             {
               "label": "Gruppen Kunstausstellung",
               "detail": "Tierpark Lange Erlen, Erlen — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
             },
             {
               "label": "Ziegentrekking",
               "detail": "geissgada, Hohentannen — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
             },
             {
               "label": "Mission Erde",
               "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
-            },
-            {
-              "label": "Krimi-Theater \"Frau Hase und die Giftspritze\"",
-              "detail": "Brauhaus Sternen, Frauenfeld",
               "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/frauenfeld/krimi-theater-frau-hase-und-die-giftspritze-im-brauhaus-frauenfeld_ADrPetD"
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
             },
             {
               "label": "Oktoberfest Schiff im Hafen Ermatingen am Bodensee",
@@ -96,11 +90,17 @@
               "detail": "Weinfelden",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spielabend-fuer-erwachsene/"
+            },
+            {
+              "label": "Big-Band-Jazz trifft auf Breakdance!",
+              "detail": "Kulturhaus APOLLO, Kreuzlingen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/big-band-jazz-trifft-auf-breakdance_AjrEHmw"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,7 +118,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -146,7 +146,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "en": {
       "canton": "TG",
@@ -156,7 +156,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "58",
+          "value": "60",
           "note": "from the site’s events calendar"
         }
       ],
@@ -167,40 +167,34 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Ursus & Nadeschkin - Prspktvnwchsl",
-              "detail": "Dreispitz Sport- und Kulturzentrum, Kreuzlingen",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ursus-nadeschkin-prspktvnwchsl-1/"
+              "label": "Thriller theater \"Mrs. Rabbit and the poison syringe\"",
+              "detail": "Brauhaus Sternen, Frauenfeld",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/frauenfeld/krimi-theater-frau-hase-und-die-giftspritze-im-brauhaus-frauenfeld_ADrPetD"
             },
             {
-              "label": "Känzig/Zisman: Tango meets Jazz",
-              "detail": "Eisenwerk, Frauenfeld",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/kaenzigzisman-tango-meets-jazz_A8RxMat"
+              "label": "Ursus & Nadeschkin - Prspktvnwchsl",
+              "detail": "Dreispitz Sport- und Kulturzentrum, Kreuzlingen — ongoing, last day: 22 October 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ursus-nadeschkin-prspktvnwchsl-1/"
             },
             {
               "label": "Gruppen Kunstausstellung",
               "detail": "Tierpark Lange Erlen, Erlen — ongoing, last day: 25 October 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
             },
             {
               "label": "Ziegentrekking",
               "detail": "geissgada, Hohentannen — ongoing, last day: 31 October 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
             },
             {
               "label": "Mission Erde",
               "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — ongoing, last day: 25 October 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
-            },
-            {
-              "label": "Thriller theater \"Mrs. Rabbit and the poison syringe\"",
-              "detail": "Brauhaus Sternen, Frauenfeld",
               "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/frauenfeld/krimi-theater-frau-hase-und-die-giftspritze-im-brauhaus-frauenfeld_ADrPetD"
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
             },
             {
               "label": "Oktoberfest Schiff im Hafen Ermatingen am Bodensee",
@@ -225,11 +219,17 @@
               "detail": "Weinfelden",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spielabend-fuer-erwachsene/"
+            },
+            {
+              "label": "Big-Band-Jazz trifft auf Breakdance!",
+              "detail": "Kulturhaus APOLLO, Kreuzlingen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/big-band-jazz-trifft-auf-breakdance_AjrEHmw"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -247,7 +247,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -275,7 +275,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "de": {
       "canton": "TG",
@@ -285,7 +285,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "58",
+          "value": "60",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -296,40 +296,34 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Ursus & Nadeschkin - Prspktvnwchsl",
-              "detail": "Dreispitz Sport- und Kulturzentrum, Kreuzlingen",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ursus-nadeschkin-prspktvnwchsl-1/"
+              "label": "Krimi-Theater „Frau Hase und die Giftspritze“",
+              "detail": "Brauhaus Sternen, Frauenfeld",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/frauenfeld/krimi-theater-frau-hase-und-die-giftspritze-im-brauhaus-frauenfeld_ADrPetD"
             },
             {
-              "label": "Känzig/Zisman: Tango meets Jazz",
-              "detail": "Eisenwerk, Frauenfeld",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/kaenzigzisman-tango-meets-jazz_A8RxMat"
+              "label": "Ursus & Nadeschkin - Prspktvnwchsl",
+              "detail": "Dreispitz Sport- und Kulturzentrum, Kreuzlingen — läuft, letzter Tag: 22. Oktober 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ursus-nadeschkin-prspktvnwchsl-1/"
             },
             {
               "label": "Gruppen Kunstausstellung",
               "detail": "Tierpark Lange Erlen, Erlen — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
             },
             {
               "label": "Ziegentrekking",
               "detail": "geissgada, Hohentannen — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
             },
             {
               "label": "Mission Erde",
               "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
-            },
-            {
-              "label": "Krimi-Theater „Frau Hase und die Giftspritze“",
-              "detail": "Brauhaus Sternen, Frauenfeld",
               "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/frauenfeld/krimi-theater-frau-hase-und-die-giftspritze-im-brauhaus-frauenfeld_ADrPetD"
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
             },
             {
               "label": "Oktoberfest Schiff im Hafen Ermatingen am Bodensee",
@@ -354,11 +348,17 @@
               "detail": "Weinfelden",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spielabend-fuer-erwachsene/"
+            },
+            {
+              "label": "Big-Band-Jazz trifft auf Breakdance!",
+              "detail": "Kulturhaus APOLLO, Kreuzlingen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/big-band-jazz-trifft-auf-breakdance_AjrEHmw"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -376,7 +376,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -404,7 +404,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "fr": {
       "canton": "TG",
@@ -414,7 +414,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "58",
+          "value": "60",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -425,40 +425,34 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Ursus & Nadeschkin - Prspktvnwchsl",
-              "detail": "Dreispitz Sport- und Kulturzentrum, Kreuzlingen",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ursus-nadeschkin-prspktvnwchsl-1/"
+              "label": "Krimi-Theater « Frau Hase und die Giftspritze »",
+              "detail": "Brauhaus Sternen, Frauenfeld",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/frauenfeld/krimi-theater-frau-hase-und-die-giftspritze-im-brauhaus-frauenfeld_ADrPetD"
             },
             {
-              "label": "Känzig/Zisman: Tango meets Jazz",
-              "detail": "Eisenwerk, Frauenfeld",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/kaenzigzisman-tango-meets-jazz_A8RxMat"
+              "label": "Ursus & Nadeschkin - Prspktvnwchsl",
+              "detail": "Dreispitz Sport- und Kulturzentrum, Kreuzlingen — en cours, dernier jour : 22 octobre 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ursus-nadeschkin-prspktvnwchsl-1/"
             },
             {
               "label": "Gruppen Kunstausstellung",
               "detail": "Tierpark Lange Erlen, Erlen — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
             },
             {
               "label": "Ziegentrekking",
               "detail": "geissgada, Hohentannen — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
             },
             {
               "label": "Mission Erde",
               "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
-            },
-            {
-              "label": "Krimi-Theater « Frau Hase und die Giftspritze »",
-              "detail": "Brauhaus Sternen, Frauenfeld",
               "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/frauenfeld/krimi-theater-frau-hase-und-die-giftspritze-im-brauhaus-frauenfeld_ADrPetD"
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
             },
             {
               "label": "Oktoberfest Schiff im Hafen Ermatingen am Bodensee",
@@ -483,11 +477,17 @@
               "detail": "Weinfelden",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spielabend-fuer-erwachsene/"
+            },
+            {
+              "label": "Big-Band-Jazz trifft auf Breakdance!",
+              "detail": "Kulturhaus APOLLO, Kreuzlingen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/big-band-jazz-trifft-auf-breakdance_AjrEHmw"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -505,7 +505,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -533,7 +533,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     }
   }
 }

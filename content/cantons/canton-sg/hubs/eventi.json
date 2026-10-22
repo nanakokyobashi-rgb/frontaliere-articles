@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-10-21T00:56:25.671Z",
-  "contentHash": "1d6b4969ff6c25c15f8f0be4b96e26575a1a5f515c3bb36b62cf0680f7ad3cb4",
+  "updatedAt": "2026-10-22T00:12:28.308Z",
+  "contentHash": "c0621173ed65aead8c1ef5ae1304b263963ebd6d5af5e642ff4f39917203a65d",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-20T17:28:37.181Z",
+      "updatedAt": "2026-10-21T12:38:14.154Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "92",
+          "value": "88",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,36 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Siegfried & George – Berliner Schlager aus den 20er und 30er Jahren",
-              "detail": "DenkBar",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/siegfried-und-george-berliner-schlager-aus-den-20er-und-30er-jahren_Ab1sKDh"
-            },
-            {
-              "label": "BluesClubBodensee Konzert mit Blues and more Band",
-              "detail": "Hopp",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/au-sg/bluesclubbodensee-konzert-mit-blues-and-more-band_AijvWMa"
-            },
-            {
-              "label": "ISABEL MEILI - ZEITGEFÜHL",
-              "detail": "Grabenhalle",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/st-gallen/isabel-meili-zeitgefuehl_AvDVKY7"
-            },
-            {
-              "label": "Büchertipp live!",
-              "detail": "St. Gallen — in corso, ultimo giorno: 21 ottobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/buechertipp-live/"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — in corso, ultimo giorno: 2 novembre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
             {
               "label": "Claudia Valer, Werkschau",
               "detail": "Pflegeheim Heiligkreuz, St. Gallen",
@@ -91,11 +61,41 @@
               "detail": "Switzerland Innovation Park Ost",
               "date": "2026-10-22",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
+            },
+            {
+              "label": "GEROLD SPÄTH - Schreiben und Gestalten im Zusammenspiel",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gerold-spaeth-schreiben-und-gestalten-im-zusammenspiel/"
+            },
+            {
+              "label": "Pepe Lienhard Orchester",
+              "detail": "Dömli, Ebnat-Kappel",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/pepe-lienhard-orchester_APMfbnM"
+            },
+            {
+              "label": "Voices on Stage",
+              "detail": "Gallus Pub",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/voices-on-stage_A5HYakK"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — in corso, ultimo giorno: 2 novembre 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
+            },
+            {
+              "label": "GEROLD SPÄTH - Künstlerbücher",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "92",
+          "value": "88",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,36 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Siegfried & George – Berlin Hits from the 1920s and 1930s",
-              "detail": "DenkBar",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/siegfried-und-george-berliner-schlager-aus-den-20er-und-30er-jahren_Ab1sKDh"
-            },
-            {
-              "label": "BluesClubBodensee Konzert mit Blues and more Band",
-              "detail": "Hopp",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/au-sg/bluesclubbodensee-konzert-mit-blues-and-more-band_AijvWMa"
-            },
-            {
-              "label": "ISABEL MEILI - ZEITGEFÜHL",
-              "detail": "Grabenhalle",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/st-gallen/isabel-meili-zeitgefuehl_AvDVKY7"
-            },
-            {
-              "label": "Büchertipp live!",
-              "detail": "St. Gallen — ongoing, last day: 21 October 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/buechertipp-live/"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — ongoing, last day: 2 November 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
             {
               "label": "Claudia Valer, Werkschau",
               "detail": "Pflegeheim Heiligkreuz, St. Gallen",
@@ -196,11 +166,41 @@
               "detail": "Switzerland Innovation Park Ost",
               "date": "2026-10-22",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
+            },
+            {
+              "label": "GEROLD SPÄTH - Schreiben und Gestalten im Zusammenspiel",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gerold-spaeth-schreiben-und-gestalten-im-zusammenspiel/"
+            },
+            {
+              "label": "Pepe Lienhard Orchester",
+              "detail": "Dömli, Ebnat-Kappel",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/pepe-lienhard-orchester_APMfbnM"
+            },
+            {
+              "label": "Voices on Stage",
+              "detail": "Gallus Pub",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/voices-on-stage_A5HYakK"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — ongoing, last day: 2 November 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
+            },
+            {
+              "label": "GEROLD SPÄTH - Künstlerbücher",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "92",
+          "value": "88",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,36 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Siegfried & George – Berliner Schlager aus den 20er und 30er ⑤ahren",
-              "detail": "DenkBar",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/siegfried-und-george-berliner-schlager-aus-den-20er-und-30er-jahren_Ab1sKDh"
-            },
-            {
-              "label": "BluesClubBodensee Konzert mit Blues and more Band",
-              "detail": "Hopp",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/au-sg/bluesclubbodensee-konzert-mit-blues-and-more-band_AijvWMa"
-            },
-            {
-              "label": "ISABEL MEILI - ZEITGEFÜHL",
-              "detail": "Grabenhalle",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/st-gallen/isabel-meili-zeitgefuehl_AvDVKY7"
-            },
-            {
-              "label": "Büchertipp live!",
-              "detail": "St. Gallen — läuft, letzter Tag: 21. Oktober 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/buechertipp-live/"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — läuft, letzter Tag: 2. November 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
             {
               "label": "Claudia Valer, Werkschau",
               "detail": "Pflegeheim Heiligkreuz, St. Gallen",
@@ -301,11 +271,41 @@
               "detail": "Switzerland Innovation Park Ost",
               "date": "2026-10-22",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
+            },
+            {
+              "label": "GEROLD SPÄTH - Schreiben und Gestalten im Zusammenspiel",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gerold-spaeth-schreiben-und-gestalten-im-zusammenspiel/"
+            },
+            {
+              "label": "Pepe Lienhard Orchester",
+              "detail": "Dömli, Ebnat-Kappel",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/pepe-lienhard-orchester_APMfbnM"
+            },
+            {
+              "label": "Stimmen auf der Bühne",
+              "detail": "Gallus Pub",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/voices-on-stage_A5HYakK"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — läuft, letzter Tag: 2. November 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
+            },
+            {
+              "label": "GEROLD SPÄTH - Künstlerbücher",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "92",
+          "value": "88",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,36 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Siegfried & George – Chansons populaires berlinoises des années 20 et 30",
-              "detail": "DenkBar",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/siegfried-und-george-berliner-schlager-aus-den-20er-und-30er-jahren_Ab1sKDh"
-            },
-            {
-              "label": "BluesClubBodensee Konzert mit Blues and more Band",
-              "detail": "Hopp",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/au-sg/bluesclubbodensee-konzert-mit-blues-and-more-band_AijvWMa"
-            },
-            {
-              "label": "ISABEL MEILI - ZEITGEFÜHL",
-              "detail": "Grabenhalle",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/populaer/st-gallen/isabel-meili-zeitgefuehl_AvDVKY7"
-            },
-            {
-              "label": "Büchertipp live!",
-              "detail": "St. Gallen — en cours, dernier jour : 21 octobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/buechertipp-live/"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — en cours, dernier jour : 2 novembre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
             {
               "label": "Claudia Valer, Werkschau",
               "detail": "Pflegeheim Heiligkreuz, St. Gallen",
@@ -406,11 +376,41 @@
               "detail": "Switzerland Innovation Park Ost",
               "date": "2026-10-22",
               "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
+            },
+            {
+              "label": "GEROLD SPÄTH - Schreiben und Gestalten im Zusammenspiel",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gerold-spaeth-schreiben-und-gestalten-im-zusammenspiel/"
+            },
+            {
+              "label": "Pepe Lienhard Orchester",
+              "detail": "Dömli, Ebnat-Kappel",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/pepe-lienhard-orchester_APMfbnM"
+            },
+            {
+              "label": "Voix sur scène",
+              "detail": "Gallus Pub",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/voices-on-stage_A5HYakK"
+            },
+            {
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — en cours, dernier jour : 2 novembre 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
+            },
+            {
+              "label": "GEROLD SPÄTH - Künstlerbücher",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     }
   }
 }

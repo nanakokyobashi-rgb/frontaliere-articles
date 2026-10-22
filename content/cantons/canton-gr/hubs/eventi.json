@@ -4,12 +4,12 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "eventi",
-  "updatedAt": "2026-10-21T00:56:25.671Z",
-  "contentHash": "f56181c5d1979131542766ba8fdaf2dbae45fa9b5c7afb78c04aaf323898d463",
+  "updatedAt": "2026-10-22T00:12:28.308Z",
+  "contentHash": "2e1928c9a577ffc25e88dba707f260d2f9991ecf699a48574d79d6ed5c5257cd",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-20T17:28:37.181Z",
+      "updatedAt": "2026-10-21T12:38:14.154Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "73",
+          "value": "72",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Rendez-vous am Mittag: Führung durch die Sonderausstellung \"Spuren\"",
-              "detail": "Chur",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rendez-vous-am-mittag-fuehrung-durch-die-sonderausstellung-spuren/"
-            },
-            {
-              "label": "Film: \"Herbstfeuer\" Der Film über den Brand des Hotel Waldhaus in Vulpera",
-              "detail": "Scuol",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/film-herbstfeuer-der-film-ueber-den-brand-des-hotel-waldhaus-in-vulpera/"
-            },
-            {
-              "label": "Kraft der Stille - Sitzen im Schweigen",
-              "detail": "Felsberg",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kraft-der-stille-sitzen-im-schweigen-6/"
-            },
-            {
-              "label": "POP-UP CINEMA: HERBSTFEUER - Fire at the Grandhotel Waldhaus Vulpera-Tarasp",
-              "detail": "Scuol",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pop-up-cinema-herbstfeuer-fire-at-the-grandhotel-waldhaus-vulpera-tarasp/"
+              "label": "Lesekreis",
+              "detail": "Davos",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-9/"
             },
             {
               "label": "Children's tours 2025 at the Mirasteilas Observatory",
               "detail": "Sternwarte Mirasteilas, Falera — in corso, ultimo giorno: 22 ottobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/childrens-tours-2025-at-the-mirasteilas-observatory/"
             },
             {
               "label": "Waldbaden Alpin",
               "detail": "Scuol — in corso, ultimo giorno: 6 novembre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
-            },
-            {
-              "label": "Mushroom half-days in the afternoon",
-              "detail": "Treffpunkt: Talstation Rothorn — in corso, ultimo giorno: 21 ottobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mushroom-half-days-in-the-afternoon/"
             },
             {
               "label": "Caffè Rumantsch ad Ardez",
               "detail": "Ardez, Scuol — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
               "label": "Workshop:Ätherische Öle & natürliche Alltagsprodukte erleben",
               "detail": "Val Surses Savognin Bivio, Surses — in corso, ultimo giorno: 28 ottobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshopaetherische-oele-natuerliche-alltagsprodukte-erleben/"
             },
             {
               "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
               "detail": "Ardez, Scuol — in corso, ultimo giorno: 7 novembre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
+              "label": "Fondue Plausch am Abig uf de Ochsenalp",
+              "detail": "Bergbeizli Ochsenalp, Arosa — in corso, ultimo giorno: 24 ottobre 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-plausch-am-abig-uf-de-ochsenalp/"
+            },
+            {
+              "label": "Gianter in cumpagnia - Mittagstisch",
+              "detail": "Pfarrhaussaal, S-chanf — in corso, ultimo giorno: 28 ottobre 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gianter-in-cumpagnia-mittagstisch/"
+            },
+            {
+              "label": "\"Plai a mi\": Seifen-Atelier in Brigels",
+              "detail": "Brigels / Breil, Breil/Brigels — in corso, ultimo giorno: 23 ottobre 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/plai-a-mi-seifen-atelier-in-brigels/"
+            },
+            {
+              "label": "Engadiner Dampf-Erlebniszug",
+              "detail": "Bahnhof Samedan, Samedan — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/engadiner-dampf-erlebniszug/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/grigioni/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -147,7 +147,7 @@
           "url": "/eventi/grigioni/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "en": {
       "canton": "GR",
@@ -157,7 +157,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "73",
+          "value": "72",
           "note": "from the site’s events calendar"
         }
       ],
@@ -168,69 +168,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Rendez-vous am Mittag: Führung durch die Sonderausstellung \"Spuren\"",
-              "detail": "Chur",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rendez-vous-am-mittag-fuehrung-durch-die-sonderausstellung-spuren/"
-            },
-            {
-              "label": "Film: \"Herbstfeuer\" Der Film über den Brand des Hotel Waldhaus in Vulpera",
-              "detail": "Scuol",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/film-herbstfeuer-der-film-ueber-den-brand-des-hotel-waldhaus-in-vulpera/"
-            },
-            {
-              "label": "Kraft der Stille - Sitzen im Schweigen",
-              "detail": "Felsberg",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kraft-der-stille-sitzen-im-schweigen-6/"
-            },
-            {
-              "label": "POP-UP CINEMA: HERBSTFEUER - Fire at the Grandhotel Waldhaus Vulpera-Tarasp",
-              "detail": "Scuol",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pop-up-cinema-herbstfeuer-fire-at-the-grandhotel-waldhaus-vulpera-tarasp/"
+              "label": "Lesekreis",
+              "detail": "Davos",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-9/"
             },
             {
               "label": "Children's tours 2025 at the Mirasteilas Observatory",
               "detail": "Sternwarte Mirasteilas, Falera — ongoing, last day: 22 October 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/childrens-tours-2025-at-the-mirasteilas-observatory/"
             },
             {
               "label": "Forest Bathing Alpin",
               "detail": "Scuol — ongoing, last day: 6 November 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
-            },
-            {
-              "label": "Mushroom half-days in the afternoon",
-              "detail": "Treffpunkt: Talstation Rothorn — ongoing, last day: 21 October 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mushroom-half-days-in-the-afternoon/"
             },
             {
               "label": "Café Rumantsch ad Ardez",
               "detail": "Ardez, Scuol — ongoing, last day: 11 November 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
               "label": "Workshop:Ätherische Öle & natürliche Alltagsprodukte erleben",
               "detail": "Val Surses Savognin Bivio, Surses — ongoing, last day: 28 October 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshopaetherische-oele-natuerliche-alltagsprodukte-erleben/"
             },
             {
               "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
               "detail": "Ardez, Scuol — ongoing, last day: 7 November 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
+              "label": "Fondue Plausch am Abig uf de Ochsenalp",
+              "detail": "Bergbeizli Ochsenalp, Arosa — ongoing, last day: 24 October 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-plausch-am-abig-uf-de-ochsenalp/"
+            },
+            {
+              "label": "Gianter in cumpagnia - Mittagstisch",
+              "detail": "Pfarrhaussaal, S-chanf — ongoing, last day: 28 October 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gianter-in-cumpagnia-mittagstisch/"
+            },
+            {
+              "label": "\"Plai a mi\": Seifen-Atelier in Brigels",
+              "detail": "Brigels / Breil, Breil/Brigels — ongoing, last day: 23 October 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/plai-a-mi-seifen-atelier-in-brigels/"
+            },
+            {
+              "label": "Engadiner Dampf-Erlebniszug",
+              "detail": "Bahnhof Samedan, Samedan — ongoing, last day: 25 October 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/engadiner-dampf-erlebniszug/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/graubunden/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -282,7 +282,7 @@
           "url": "/en/events/graubunden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "de": {
       "canton": "GR",
@@ -292,7 +292,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "73",
+          "value": "72",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -303,69 +303,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Rendez-vous am Mittag: Führung durch die Sonderausstellung \"Spuren\"",
-              "detail": "Chur",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rendez-vous-am-mittag-fuehrung-durch-die-sonderausstellung-spuren/"
-            },
-            {
-              "label": "Film: \"Herbstfeuer\" Der Film über den Brand des Hotel Waldhaus in Vulpera",
-              "detail": "Scuol",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/film-herbstfeuer-der-film-ueber-den-brand-des-hotel-waldhaus-in-vulpera/"
-            },
-            {
-              "label": "Kraft der Stille - Sitzen im Schweigen",
-              "detail": "Felsberg",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kraft-der-stille-sitzen-im-schweigen-6/"
-            },
-            {
-              "label": "POP-UP KINO: HERBSTFEUER - Brandfall Grandhotel Waldhaus Vulpera-Tarasp",
-              "detail": "Scuol",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pop-up-cinema-herbstfeuer-fire-at-the-grandhotel-waldhaus-vulpera-tarasp/"
+              "label": "Lesekreis",
+              "detail": "Davos",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-9/"
             },
             {
               "label": "Kinderführungen 2026 auf der Sternwarte Mirasteilas",
               "detail": "Sternwarte Mirasteilas, Falera — läuft, letzter Tag: 22. Oktober 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/childrens-tours-2025-at-the-mirasteilas-observatory/"
             },
             {
               "label": "Waldbaden Alpin",
               "detail": "Scuol — läuft, letzter Tag: 6. November 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
-            },
-            {
-              "label": "Pilze sammeln am Nachmittag",
-              "detail": "Treffpunkt: Talstation Rothorn — läuft, letzter Tag: 21. Oktober 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mushroom-half-days-in-the-afternoon/"
             },
             {
               "label": "Cafè Rumantsch ad Ardez",
               "detail": "Ardez, Scuol — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
               "label": "Workshop:Ätherische Öle & natürliche Alltagsprodukte erleben",
               "detail": "Val Surses Savognin Bivio, Surses — läuft, letzter Tag: 28. Oktober 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshopaetherische-oele-natuerliche-alltagsprodukte-erleben/"
             },
             {
               "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
               "detail": "Ardez, Scuol — läuft, letzter Tag: 7. November 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
+              "label": "Fondue Plausch am Abig uf de Ochsenalp",
+              "detail": "Bergbeizli Ochsenalp, Arosa — läuft, letzter Tag: 24. Oktober 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-plausch-am-abig-uf-de-ochsenalp/"
+            },
+            {
+              "label": "Gianter in cumpagnia - Mittagstisch",
+              "detail": "Pfarrhaussaal, S-chanf — läuft, letzter Tag: 28. Oktober 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gianter-in-cumpagnia-mittagstisch/"
+            },
+            {
+              "label": "\"Plai a mi\": Seifen-Atelier in Brigels",
+              "detail": "Brigels / Breil, Breil/Brigels — läuft, letzter Tag: 23. Oktober 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/plai-a-mi-seifen-atelier-in-brigels/"
+            },
+            {
+              "label": "Engadiner Dampf-Erlebniszug",
+              "detail": "Bahnhof Samedan, Samedan — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/engadiner-dampf-erlebniszug/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/graubunden/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/de/veranstaltungen/graubunden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "fr": {
       "canton": "GR",
@@ -427,7 +427,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "73",
+          "value": "72",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -438,69 +438,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Rendez-vous am Mittag: Führung durch die Sonderausstellung \"Spuren\"",
-              "detail": "Chur",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rendez-vous-am-mittag-fuehrung-durch-die-sonderausstellung-spuren/"
-            },
-            {
-              "label": "Film: \"Herbstfeuer\" Der Film über den Brand des Hotel Waldhaus in Vulpera",
-              "detail": "Scuol",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/film-herbstfeuer-der-film-ueber-den-brand-des-hotel-waldhaus-in-vulpera/"
-            },
-            {
-              "label": "Kraft der Stille - Sitzen im Schweigen",
-              "detail": "Felsberg",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kraft-der-stille-sitzen-im-schweigen-6/"
-            },
-            {
-              "label": "POP-UP CINEMA: HERBSTFEUER - Fire at the Grandhotel Waldhaus Vulpera-Tarasp",
-              "detail": "Scuol",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/pop-up-cinema-herbstfeuer-fire-at-the-grandhotel-waldhaus-vulpera-tarasp/"
+              "label": "Lesekreis",
+              "detail": "Davos",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/lesekreis-9/"
             },
             {
               "label": "Children's tours 2025 at the Mirasteilas Observatory",
               "detail": "Sternwarte Mirasteilas, Falera — en cours, dernier jour : 22 octobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/childrens-tours-2025-at-the-mirasteilas-observatory/"
             },
             {
               "label": "Waldbaden Alpin",
               "detail": "Scuol — en cours, dernier jour : 6 novembre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/waldbaden-alpin/"
-            },
-            {
-              "label": "Mushroom half-days in the afternoon",
-              "detail": "Treffpunkt: Talstation Rothorn — en cours, dernier jour : 21 octobre 2026",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/mushroom-half-days-in-the-afternoon/"
             },
             {
               "label": "Café Rumantsch ad Ardez",
               "detail": "Ardez, Scuol — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-rumantsch-3/"
             },
             {
               "label": "Workshop:Ätherische Öle & natürliche Alltagsprodukte erleben",
               "detail": "Val Surses Savognin Bivio, Surses — en cours, dernier jour : 28 octobre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/workshopaetherische-oele-natuerliche-alltagsprodukte-erleben/"
             },
             {
               "label": "Japanischer Miso Kurs & Lunch. Miso x Herbstgemüse",
               "detail": "Ardez, Scuol — en cours, dernier jour : 7 novembre 2026",
-              "date": "2026-10-21",
+              "date": "2026-10-22",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/japanischer-miso-kurs-lunch-miso-x-herbstgemuese/"
+            },
+            {
+              "label": "Fondue Plausch am Abig uf de Ochsenalp",
+              "detail": "Bergbeizli Ochsenalp, Arosa — en cours, dernier jour : 24 octobre 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-plausch-am-abig-uf-de-ochsenalp/"
+            },
+            {
+              "label": "Gianter in cumpagnia - Mittagstisch",
+              "detail": "Pfarrhaussaal, S-chanf — en cours, dernier jour : 28 octobre 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/gianter-in-cumpagnia-mittagstisch/"
+            },
+            {
+              "label": "\"Plai a mi\": Seifen-Atelier in Brigels",
+              "detail": "Brigels / Breil, Breil/Brigels — en cours, dernier jour : 23 octobre 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/plai-a-mi-seifen-atelier-in-brigels/"
+            },
+            {
+              "label": "Engadiner Dampf-Erlebniszug",
+              "detail": "Bahnhof Samedan, Samedan — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/engadiner-dampf-erlebniszug/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/grisons/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -552,7 +552,7 @@
           "url": "/fr/evenements/grisons/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     }
   }
 }

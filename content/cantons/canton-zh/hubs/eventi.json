@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-21T00:56:25.671Z",
-  "contentHash": "63de09ad72e91f1c422db8ab6b4f39ca94b517a860d357f4c402683f3c0c1949",
+  "updatedAt": "2026-10-22T00:12:28.308Z",
+  "contentHash": "df361d284b2e71b11deee0614474e58727c2245f0fa2ff7ef3775a6cc09d885a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-20T17:28:37.181Z",
+      "updatedAt": "2026-10-21T12:38:14.154Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "373",
+          "value": "367",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Bildvortrag \"Ostalpen\"",
-              "detail": "Effretikon",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bildvortrag-ostalpen/"
+              "label": "Negotiation Conference",
+              "detail": "Kunsthaus Zürich, Zürich",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/n-conference-zurich-failure-is-not-an-option/"
             },
             {
-              "label": "Bilderbuchgeschichten auf Französisch mit Nil",
-              "detail": "Gemeindebibliothek Urdorf, Urdorf",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bilderbuchgeschichten-auf-franzoesisch-mit-nil-1/"
+              "label": "Body: & Soul: Fit mit Baby Q4 2026",
+              "detail": "Uitikon-Waldegg, Uitikon",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/body-soul-fit-mit-baby-q-2026/"
             },
             {
-              "label": "Familien-Filmnachmittag",
-              "detail": "Kloten",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familien-filmnachmittag/"
+              "label": "N-Conference Zurich: Failure is not an option",
+              "detail": "Kunsthaus Zürich, Zürich",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/events/knowledge/zurich/negotiation-conference_AtkK4GW"
             },
             {
-              "label": "KINDERFÜHRUNG",
-              "detail": "Ritterhaus Bubikon, Bubikon",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinderfuehrung-4/"
-            },
-            {
-              "label": "Il castello Hegi e la famiglia Hegi - Visita guidata e cena",
-              "detail": "Winterthur",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/il-castello-hegi-e-la-famiglia-hegi-visita-guidata-e-cena/"
-            },
-            {
-              "label": "Fokusveranstaltung – Das Potenzial von Mitarbeitenden 45+ nutzen",
-              "detail": "Technopark Zürich, Zürich",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fokusveranstaltung-das-potenzial-von-mitarbeitenden-45-nutzen/"
-            },
-            {
-              "label": "Zürich liest: \"The Thingy\" (auf Englisch)",
-              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/zuerich-liest-the-thingy-auf-englisch_Adb3Bmn"
-            },
-            {
-              "label": "Against Erasure: Reading and Talk with Sahar Tavakoli",
+              "label": "Kammermusik-Lunchkonzert",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/against-erasure-reading-and-talk-with-sahar-tavakoli/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kammermusik-lunchkonzert/"
             },
             {
-              "label": "Dance for Mental Health – kostenloses Tanzprojekt für 14–20-Jährige",
-              "detail": "the ground Tanzschule, Dietikon",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/dance-for-mental-health-kostenloses-tanzprojekt-fuer-1420-jaehrige_A3jsfgY"
+              "label": "Pranzo",
+              "detail": "Dietikon",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pranzo/"
             },
             {
-              "label": "Mit Laserlicht und Röntgenstrahl",
-              "detail": "Affoltern am Albis",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mit-laserlicht-und-roentgenstrahl/"
+              "label": "Anonyms (auf Englisch)",
+              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/anonyms-auf-englisch_AXDwi1Q"
+            },
+            {
+              "label": "Der Reporter - Lesung mit Hanspeter Bäni",
+              "detail": "Stadthaussaal Effretikon",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-reporter-lesung-mit-hanspeter-baeni/"
+            },
+            {
+              "label": "Wasser-Gymnastik 60+ / Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wassergymnastik-60-organisiert-vom-frauenverein-22/"
+            },
+            {
+              "label": "ABGESAGT: Schreiben ist Kunst",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abgesagt-schreiben-ist-kunst/"
+            },
+            {
+              "label": "Offenes Schauspieltraining",
+              "detail": "Schauspielhaus Pfauen",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/offenes-schauspieltraining_AMeFXFb"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -129,7 +129,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "en": {
       "canton": "ZH",
@@ -139,7 +139,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "373",
+          "value": "367",
           "note": "from the site’s events calendar"
         }
       ],
@@ -150,69 +150,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Bildvortrag \"Ostalpen\"",
-              "detail": "Effretikon",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bildvortrag-ostalpen/"
+              "label": "Negotiation Conference",
+              "detail": "Kunsthaus Zürich, Zürich",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/n-conference-zurich-failure-is-not-an-option/"
             },
             {
-              "label": "Bilderbuchgeschichten auf Französisch mit Nil",
-              "detail": "Gemeindebibliothek Urdorf, Urdorf",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bilderbuchgeschichten-auf-franzoesisch-mit-nil-1/"
+              "label": "Body: & Soul: Fit mit Baby Q4 2026",
+              "detail": "Uitikon-Waldegg, Uitikon",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/body-soul-fit-mit-baby-q-2026/"
             },
             {
-              "label": "Familien-Filmnachmittag",
-              "detail": "Kloten",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familien-filmnachmittag/"
+              "label": "Negotiation Conference",
+              "detail": "Kunsthaus Zürich, Zürich",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/events/knowledge/zurich/negotiation-conference_AtkK4GW"
             },
             {
-              "label": "KINDERFÜHRUNG",
-              "detail": "Ritterhaus Bubikon, Bubikon",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinderfuehrung-4/"
-            },
-            {
-              "label": "The Hegi Castle and Hegi Family - Guided Tour and Dinner",
-              "detail": "Winterthur",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/il-castello-hegi-e-la-famiglia-hegi-visita-guidata-e-cena/"
-            },
-            {
-              "label": "Fokusveranstaltung – Das Potenzial von Mitarbeitenden 45+ nutzen",
-              "detail": "Technopark Zürich, Zürich",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fokusveranstaltung-das-potenzial-von-mitarbeitenden-45-nutzen/"
-            },
-            {
-              "label": "Zürich liest: \"The Thingy\" (auf Englisch)",
-              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/zuerich-liest-the-thingy-auf-englisch_Adb3Bmn"
-            },
-            {
-              "label": "Against Erasure: Reading and Talk with Sahar Tavakoli",
+              "label": "Kammermusik-Lunchkonzert",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/against-erasure-reading-and-talk-with-sahar-tavakoli/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kammermusik-lunchkonzert/"
             },
             {
-              "label": "Dance for Mental Health – kostenloses Tanzprojekt für 14–20-Jährige",
-              "detail": "the ground Tanzschule, Dietikon",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/dance-for-mental-health-kostenloses-tanzprojekt-fuer-1420-jaehrige_A3jsfgY"
+              "label": "Lunch tour",
+              "detail": "Dietikon",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pranzo/"
             },
             {
-              "label": "Mit Laserlicht und Röntgenstrahl",
-              "detail": "Affoltern am Albis",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mit-laserlicht-und-roentgenstrahl/"
+              "label": "Anonyms (auf Englisch)",
+              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/anonyms-auf-englisch_AXDwi1Q"
+            },
+            {
+              "label": "Der Reporter - Lesung mit Hanspeter Bäni",
+              "detail": "Stadthaussaal Effretikon",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-reporter-lesung-mit-hanspeter-baeni/"
+            },
+            {
+              "label": "Wasser-Gymnastik 60+ / Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wassergymnastik-60-organisiert-vom-frauenverein-22/"
+            },
+            {
+              "label": "ABGESAGT: Schreiben ist Kunst",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abgesagt-schreiben-ist-kunst/"
+            },
+            {
+              "label": "Offenes Schauspieltraining",
+              "detail": "Schauspielhaus Pfauen",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/offenes-schauspieltraining_AMeFXFb"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -246,7 +246,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "de": {
       "canton": "ZH",
@@ -256,7 +256,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "373",
+          "value": "367",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -267,69 +267,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Bildvortrag \"Ostalpen\"",
-              "detail": "Effretikon",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bildvortrag-ostalpen/"
+              "label": "N-Conference Zurich: Failure is not an option",
+              "detail": "Kunsthaus Zürich, Zürich",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/n-conference-zurich-failure-is-not-an-option/"
             },
             {
-              "label": "Bilderbuchgeschichten auf Französisch mit Nil",
-              "detail": "Gemeindebibliothek Urdorf, Urdorf",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bilderbuchgeschichten-auf-franzoesisch-mit-nil-1/"
+              "label": "Body: & Soul: Fit mit Baby Q4 2026",
+              "detail": "Uitikon-Waldegg, Uitikon",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/body-soul-fit-mit-baby-q-2026/"
             },
             {
-              "label": "Familien-Filmnachmittag",
-              "detail": "Kloten",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familien-filmnachmittag/"
+              "label": "N-Conference Zurich: Failure is not an option",
+              "detail": "Kunsthaus Zürich, Zürich",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/events/knowledge/zurich/negotiation-conference_AtkK4GW"
             },
             {
-              "label": "KINDERFÜHRUNG",
-              "detail": "Ritterhaus Bubikon, Bubikon",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinderfuehrung-4/"
-            },
-            {
-              "label": "The Hegi Castle and Hegi Family - Guided Tour and Dinner",
-              "detail": "Winterthur",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/il-castello-hegi-e-la-famiglia-hegi-visita-guidata-e-cena/"
-            },
-            {
-              "label": "Fokusveranstaltung – Das Potenzial von Mitarbeitenden 45+ nutzen",
-              "detail": "Technopark Zürich, Zürich",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fokusveranstaltung-das-potenzial-von-mitarbeitenden-45-nutzen/"
-            },
-            {
-              "label": "Zürich liest: \"The Thingy\" (auf Englisch)",
-              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/zuerich-liest-the-thingy-auf-englisch_Adb3Bmn"
-            },
-            {
-              "label": "Against Erasure: Reading and Talk with Sahar Tavakoli",
+              "label": "Kammermusik-Lunchkonzert",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/against-erasure-reading-and-talk-with-sahar-tavakoli/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kammermusik-lunchkonzert/"
             },
             {
-              "label": "Dance for Mental Health – kostenloses Tanzprojekt für 14–20-Jährige",
-              "detail": "the ground Tanzschule, Dietikon",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/dance-for-mental-health-kostenloses-tanzprojekt-fuer-1420-jaehrige_A3jsfgY"
+              "label": "Lunchführung",
+              "detail": "Dietikon",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pranzo/"
             },
             {
-              "label": "Mit Laserlicht und Röntgenstrahl",
-              "detail": "Affoltern am Albis",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mit-laserlicht-und-roentgenstrahl/"
+              "label": "Anonyms (auf Englisch)",
+              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/anonyms-auf-englisch_AXDwi1Q"
+            },
+            {
+              "label": "Der Reporter - Lesung mit Hanspeter Bäni",
+              "detail": "Stadthaussaal Effretikon",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-reporter-lesung-mit-hanspeter-baeni/"
+            },
+            {
+              "label": "Wasser-Gymnastik 60+ / Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wassergymnastik-60-organisiert-vom-frauenverein-22/"
+            },
+            {
+              "label": "ABGESAGT: Schreiben ist Kunst",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abgesagt-schreiben-ist-kunst/"
+            },
+            {
+              "label": "Offenes Schauspieltraining",
+              "detail": "Schauspielhaus Pfauen",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/offenes-schauspieltraining_AMeFXFb"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -363,7 +363,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     },
     "fr": {
       "canton": "ZH",
@@ -373,7 +373,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "373",
+          "value": "367",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -384,69 +384,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Bildvortrag \"Ostalpen\"",
-              "detail": "Effretikon",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bildvortrag-ostalpen/"
+              "label": "Negotiation Conference",
+              "detail": "Kunsthaus Zürich, Zürich",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/n-conference-zurich-failure-is-not-an-option/"
             },
             {
-              "label": "Bilderbuchgeschichten auf Französisch mit Nil",
-              "detail": "Gemeindebibliothek Urdorf, Urdorf",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bilderbuchgeschichten-auf-franzoesisch-mit-nil-1/"
+              "label": "Body: & Soul: Fit mit Baby Q4 2026",
+              "detail": "Uitikon-Waldegg, Uitikon",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/body-soul-fit-mit-baby-q-2026/"
             },
             {
-              "label": "Familien-Filmnachmittag",
-              "detail": "Kloten",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familien-filmnachmittag/"
+              "label": "N-Conference Zurich: Failure is not an option",
+              "detail": "Kunsthaus Zürich, Zürich",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/events/knowledge/zurich/negotiation-conference_AtkK4GW"
             },
             {
-              "label": "KINDERFÜHRUNG",
-              "detail": "Ritterhaus Bubikon, Bubikon",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinderfuehrung-4/"
-            },
-            {
-              "label": "Le château Hegi et la famille Hegi - Visite guidée et dîner",
-              "detail": "Winterthur",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/il-castello-hegi-e-la-famiglia-hegi-visita-guidata-e-cena/"
-            },
-            {
-              "label": "Fokusveranstaltung – Das Potenzial von Mitarbeitenden 45+ nutzen",
-              "detail": "Technopark Zürich, Zürich",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fokusveranstaltung-das-potenzial-von-mitarbeitenden-45-nutzen/"
-            },
-            {
-              "label": "Zürich liest: \"The Thingy\" (auf Englisch)",
-              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/zuerich-liest-the-thingy-auf-englisch_Adb3Bmn"
-            },
-            {
-              "label": "Against Erasure: Reading and Talk with Sahar Tavakoli",
+              "label": "Kammermusik-Lunchkonzert",
               "detail": "Zurich, Zürich",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/against-erasure-reading-and-talk-with-sahar-tavakoli/"
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kammermusik-lunchkonzert/"
             },
             {
-              "label": "Dance for Mental Health – kostenloses Tanzprojekt für 14–20-Jährige",
-              "detail": "the ground Tanzschule, Dietikon",
-              "date": "2026-10-21",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/dietikon/dance-for-mental-health-kostenloses-tanzprojekt-fuer-1420-jaehrige_A3jsfgY"
+              "label": "Visite guidée du déjeuner",
+              "detail": "Dietikon",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pranzo/"
             },
             {
-              "label": "Mit Laserlicht und Röntgenstrahl",
-              "detail": "Affoltern am Albis",
-              "date": "2026-10-21",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mit-laserlicht-und-roentgenstrahl/"
+              "label": "Anonyms (auf Englisch)",
+              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/anonyms-auf-englisch_AXDwi1Q"
+            },
+            {
+              "label": "Der Reporter - Lesung mit Hanspeter Bäni",
+              "detail": "Stadthaussaal Effretikon",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-reporter-lesung-mit-hanspeter-baeni/"
+            },
+            {
+              "label": "Wasser-Gymnastik 60+ / Organisiert vom Frauenverein",
+              "detail": "Urdorf",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wassergymnastik-60-organisiert-vom-frauenverein-22/"
+            },
+            {
+              "label": "ABGESAGT: Schreiben ist Kunst",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-22",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abgesagt-schreiben-ist-kunst/"
+            },
+            {
+              "label": "Offenes Schauspieltraining",
+              "detail": "Schauspielhaus Pfauen",
+              "date": "2026-10-22",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/offenes-schauspieltraining_AMeFXFb"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-20T17:28:37.181Z"
+          "updatedAt": "2026-10-21T12:38:14.154Z"
         }
       ],
       "curatedArticles": [
@@ -480,7 +480,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-21T00:56:25.671Z"
+      "updatedAt": "2026-10-22T00:12:28.308Z"
     }
   }
 }
