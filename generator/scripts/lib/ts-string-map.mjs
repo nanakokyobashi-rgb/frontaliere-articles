@@ -173,6 +173,25 @@ function staticSourceTokens(src) {
       continue;
     }
 
+    // Postfix increment/decrement terminate an expression. Treating either
+    // character as a prefix operator would make the following division slash
+    // look like the start of a regex literal and expose its body as source.
+    if ((c === '+' && next === '+') || (c === '-' && next === '-')) {
+      tokens.push({ type: 'punctuation', value: c }, { type: 'punctuation', value: next });
+      i += 2;
+      canStartRegex = false;
+      continue;
+    }
+
+    // TypeScript's postfix non-null assertion has the same expression-ending
+    // effect. A leading `!` remains a prefix context through the generic path.
+    if (c === '!' && !canStartRegex) {
+      tokens.push({ type: 'punctuation', value: c });
+      i += 1;
+      canStartRegex = false;
+      continue;
+    }
+
     // Keep every significant source character so a key only matches an actual
     // adjacent `string : string` property, not text spanning intervening code.
     tokens.push({ type: 'punctuation', value: c });

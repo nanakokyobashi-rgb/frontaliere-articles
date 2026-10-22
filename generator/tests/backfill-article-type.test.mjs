@@ -314,6 +314,19 @@ describe('lettore TS condiviso', () => {
     ]);
   });
 
+  test('non tratta la divisione dopo ++, -- o ! postfix come l apertura di un regex', () => {
+    const source = [
+      "let n = 1; n++ / /'blog.article.fake.increment': 'fake',/ / /x/;",
+      "n-- / /'blog.article.fake.decrement': 'fake',/ / /x/;",
+      "const value = n! / /'blog.article.fake.nonnull': 'fake',/ / /x/;",
+      "'blog.article.real.title': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.title', 'actual'],
+    ]);
+  });
+
   test('conta le barre prima di una interpolazione escaped', () => {
     const genuinelyInterpolated = "'blog.article.demo.body1': `literal \\\\${value}`,";
     assert.throws(
