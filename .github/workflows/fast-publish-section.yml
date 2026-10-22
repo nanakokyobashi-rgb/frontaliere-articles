@@ -872,7 +872,6 @@ jobs:
           AFTER: ${{ steps.push_range.outputs.after }}
           PREFLIGHT_EVENT_NAME: ${{ github.event_name }}
           PREFLIGHT_PUSH_BASE_REVISION: ${{ steps.push_range.outputs.before }}
-          PREFLIGHT_BASE_REVISION: ${{ steps.push_range.outputs.before }}
           ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
           SECTION_INPUT: ${{ inputs.section }}
         run: |
@@ -926,10 +925,15 @@ jobs:
               if [ -s "$changed_files" ]; then scan_mode=changed; fi
             fi
           fi
-          PREFLIGHT_ESBUILD_DIR="$RUNNER_TEMP/preflight" \
-            PREFLIGHT_SCAN_MODE="$scan_mode" \
-            PREFLIGHT_CHANGED_FILES_FILE="$changed_files" \
-            node scripts/ci/check-blog-body-syntax.mjs
+          preflight_env=(
+            "PREFLIGHT_ESBUILD_DIR=$RUNNER_TEMP/preflight"
+            "PREFLIGHT_SCAN_MODE=$scan_mode"
+            "PREFLIGHT_CHANGED_FILES_FILE=$changed_files"
+          )
+          if [ -n "${BEFORE:-}" ]; then
+            preflight_env+=("PREFLIGHT_BASE_REVISION=$BEFORE")
+          fi
+          env "${preflight_env[@]}" node scripts/ci/check-blog-body-syntax.mjs
           PREFLIGHT_SCAN_MODE="$scan_mode" \
             PREFLIGHT_ARTICLE_IDS="${ARTICLE_IDS_INPUT:-}" \
             PREFLIGHT_SECTION="${SECTION_INPUT:-}" \
