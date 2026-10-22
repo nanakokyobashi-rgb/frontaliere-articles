@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "fc95e28f8646e696c2462ab7ca92a55e144b3b904a64cd6b28b1325aff4a28af",
+  "updatedAt": "2026-10-22T00:23:22.901Z",
+  "contentHash": "3cf5aba20e6a8be7f85670cbc6b2b1a973df1017b83230c8499c7b39339911b6",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -104,33 +104,15 @@
           "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Giura: Governo propone revisioni su formazione postobbligatoria e finanziamento",
-          "url": "/articoli-giura/giura-formazione-postobbligatoria-2026/",
-          "excerpt": "Due progetti di revisione trasmessi al Parlamento Quattro ambiti: formazione, ristoranti scolastici, lingue, ammissioni La misura n.",
-          "date": "2026-10-21T12:36:10.998Z"
-        },
-        {
-          "title": "Le casse pensioni svizzere migliorano Q3 2026",
-          "url": "/articoli-giura/casse-pensioni-migliorano-terzo-trimestre/",
-          "excerpt": "L'indice WTW sale da 130,2% a 131,9% Il tasso di attualizzazione arriva all'1,65% Gli impegni pensionistici scendono del 6,5% Gli attivi dei piani calano",
-          "date": "2026-10-08T15:48:11.331Z"
-        },
-        {
-          "title": "Giura, fondo clima da 6,7 milioni annui dal 2028",
-          "url": "/articoli-giura/fondo-clima-giura-2028/",
-          "excerpt": "CHF 6,7 milioni annui dal 2028",
-          "date": "2026-10-08T10:13:59.862Z"
-        },
-        {
-          "title": "Disoccupazione in Giura scende al 4,2% a settembre 2026",
-          "url": "/articoli-giura/disoccupazione-giura-settembre-2026/",
-          "excerpt": "A fine settembre 2026 il Giura registra 2.573 iscritti all'ORP, di cui 1.663 disoccupati e 910 richiedenti non disoccupati; tasso al 4,2%, in calo di 0,1 punti su agosto e 0,9 su anno.",
-          "date": "2026-10-07T08:42:08.212Z"
+          "title": "Ritardo cantiere Stockmar: rientro alunni a gennaio 2028",
+          "url": "/articoli-giura/stockmar-ritardo-cantiere-2027/",
+          "excerpt": "Il rientro degli alunni è previsto a gennaio 2028 Il cantiere accumula quattro mesi di ritardo I lavori saranno conclusi nel dicembre 2027 Il budget globale",
+          "date": "2026-10-22T00:17:44.643Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attese ai valichi verso Francia",
@@ -161,7 +143,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T00:23:22.901Z"
     },
     "en": {
       "canton": "JU",
@@ -243,32 +225,15 @@
           "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Jura: Government proposes revisions to post-compulsory education and funding",
-          "url": "/en/jura-articles/jura-post-compulsory-education-2026/",
-          "excerpt": "Two revision projects submitted to Parliament Four areas: education, school restaurants, languages, admissions Measure No.",
-          "date": "2026-10-21T12:36:10.998Z"
-        },
-        {
-          "title": "Swiss pension funds improve Q3 2026",
-          "url": "/en/jura-articles/swiss-pension-funds-improve-q3-2026/",
-          "excerpt": "WTW index rises from 130.2% to 131.9% The discount rate reaches 1.65% Pension commitments fall by 6.5% Plan assets fall by 0.6% Who → Willis Towers Watson (WTW)",
-          "date": "2026-10-08T15:48:11.331Z"
-        },
-        {
-          "title": "Jura, climate fund of 6,7 million annually from 2028",
-          "url": "/en/jura-articles/jura-climate-fund-2028/",
-          "date": "2026-10-08T10:13:59.862Z"
-        },
-        {
-          "title": "Unemployment in Jura falls to 4,2% in September 2026",
-          "url": "/en/jura-articles/unemployment-in-jura-falls-to-4-2-in-september-2026/",
-          "excerpt": "At the end of September 2026, the Jura recorded 2.573 people registered with the ORP, including 1.663 unemployed and 910 non-unemployed job seekers; rate at 4,2%, down 0,1 points from August and 0,9 year-on-year.",
-          "date": "2026-10-07T08:42:08.212Z"
+          "title": "Stockmar site delay: return of students in January 2028",
+          "url": "/en/jura-articles/stockmar-construction-delay-2027/",
+          "excerpt": "Students are expected to return in January 2028 The construction site is four months late The works will be completed in December 2027 Global budget remains CHF",
+          "date": "2026-10-22T00:17:44.643Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Border waits towards France",
@@ -299,7 +264,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T00:23:22.901Z"
     },
     "de": {
       "canton": "JU",
@@ -381,32 +346,15 @@
           "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Jura: Regierung schlägt Revisionen zur nachobligatorischen Ausbildung und Finanzierung vor",
-          "url": "/de/jura-artikel/jura-nachobligatorische-bildung-2026/",
-          "excerpt": "Zwei Revisionsvorlagen an das Parlament übermittelt Vier Bereiche: Ausbildung, Schulrestaurants, Sprachen, Zulassungen Die Maßnahme Nr.",
-          "date": "2026-10-21T12:36:10.998Z"
-        },
-        {
-          "title": "Schweizer Pensionskassen verbessern Q3 2026",
-          "url": "/de/jura-artikel/schweizer-pensionskassen-verbessern-q3-2026/",
-          "excerpt": "Der WTW-Index steigt von 130,2% auf 131,9% Der Abzinsungssatz beträgt bis zu 1,65% Pensionsverpflichtungen sinken um 6,5% Die Aktiva der Stockwerke sinken um",
-          "date": "2026-10-08T15:48:11.331Z"
-        },
-        {
-          "title": "Jura, Klimafonds von 6,7 Millionen jährlich ab 2028",
-          "url": "/de/jura-artikel/jura-klimafonds-2028/",
-          "date": "2026-10-08T10:13:59.862Z"
-        },
-        {
-          "title": "Arbeitslosigkeit im Jura sinkt im September 2026 auf 4,2%",
-          "url": "/de/jura-artikel/arbeitslosigkeit-im-jura-sinkt-im-september-2026-auf-4-2/",
-          "excerpt": "Ende September 2026 verzeichnet der Jura 2.573 beim ORP registrierte Personen, davon 1.663 Arbeitslose und 910 nicht arbeitslose Stellensuchende; die Quote liegt bei 4,2% und ist gegenüber August um 0,1 Punkte sowie…",
-          "date": "2026-10-07T08:42:08.212Z"
+          "title": "Baustellenverzögerung Stockmar: Rückkehr der Schüler im Januar 2028",
+          "url": "/de/jura-artikel/stockmar-bauverzoegerung-2027/",
+          "excerpt": "Die Rückkehr der Schüler ist für Januar 2028 geplant Baustelle hat vier Monate Verspätung Die Arbeiten werden im Dezember 2027 abgeschlossen Das Gesamtbudget",
+          "date": "2026-10-22T00:17:44.643Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Wartezeiten an der Grenze Richtung Frankreich",
@@ -437,7 +385,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T00:23:22.901Z"
     },
     "fr": {
       "canton": "JU",
@@ -519,33 +467,15 @@
           "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Jura : le Gouvernement propose des révisions concernant la formation postobligatoire et le financement",
-          "url": "/fr/articles-jura/jura-formation-postobligatoire-2026/",
-          "excerpt": "Deux projets de révision transmis au Parlement Quatre domaines : formation, restaurants scolaires, langues, admissions La mesure n° 506 figure dans le Plan",
-          "date": "2026-10-21T12:36:10.998Z"
-        },
-        {
-          "title": "Les caisses de pension suisses améliorent Q3 2026",
-          "url": "/fr/articles-jura/les-caisses-de-pension-suisses-ameliorent-q3-2026/",
-          "excerpt": "L'indice WTW passe de 130,2 % à 131,9 % Le taux d'actualisation atteint 1,65 % Les engagements de retraite baissent de 6,5 % Les actifs des plans baissent",
-          "date": "2026-10-08T15:48:11.331Z"
-        },
-        {
-          "title": "Jura, fonds climatique de 6,7 millions par an dès 2028",
-          "url": "/fr/articles-jura/fonds-climat-jura-2028/",
-          "excerpt": "CHF 6,7 millions par an dès 2028",
-          "date": "2026-10-08T10:13:59.862Z"
-        },
-        {
-          "title": "Le chômage dans le Jura baisse à 4,2% en septembre 2026",
-          "url": "/fr/articles-jura/le-chomage-dans-le-jura-baisse-a-4-2-en-septembre-2026/",
-          "excerpt": "Fin septembre 2026, le Jura compte 2.573 inscrits à l'ORP, dont 1.663 chômeurs et 910 demandeurs non chômeurs ; taux à 4,2%, en baisse de 0,1 point par rapport à août et de 0,9 sur un an.",
-          "date": "2026-10-07T08:42:08.212Z"
+          "title": "Retard chantier Stockmar : rentrée des élèves en janvier 2028",
+          "url": "/fr/articles-jura/stockmar-retard-chantier-2027/",
+          "excerpt": "Le retour des élèves est prévu en janvier 2028 Le chantier accumule quatre mois de retard Les travaux seront achevés en décembre 2027 Le budget global reste",
+          "date": "2026-10-22T00:17:44.643Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Attente aux frontières vers France",
@@ -576,7 +506,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T00:23:22.901Z"
     }
   }
 }
