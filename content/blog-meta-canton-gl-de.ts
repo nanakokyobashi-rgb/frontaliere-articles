@@ -27,6 +27,9 @@ const blogMetaCantonGlDe: Record<string, string> = {
     'blog.article.glarona-mercato-immobiliare-2026.title': 'Immobilienmarkt in Glarus: steigende Preise im Jahr 2026',
     'blog.article.glarona-mercato-immobiliare-2026.excerpt': 'Die Nachfrage nach Immobilien bleibt im Kanton Glarus hoch Das begrenzte Angebot stützt den Preisanstieg Eigentumswohnungen +4,4% zwischen dem 2.',
     'blog.article.glarona-mercato-immobiliare-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.landrat-ottobre-glarona-2026.title': 'Landrat Glarus: 4 Millionen für den Ausgleich, Hydro in Rüti',
+    'blog.article.landrat-ottobre-glarona-2026.excerpt': 'Am 21. Oktober 2026 genehmigte der Landrat CHF 4 Mio. für den Ausgleich zwischen Kanton und Gemeinden, lehnte zwei Vorschläge zur Wasserkraftkonzession Rüti ab und bewilligte einen Sportkredit von 3 Mio. für den Zeitraum 2027-2030.',
+    'blog.article.landrat-ottobre-glarona-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGlDe;

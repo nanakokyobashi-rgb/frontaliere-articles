@@ -314,6 +314,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-landrat-ottobre-glarona-2026': {
+    title: 'Landrat Glarona: 4 milioni per la perequazione, idro a Rüti',
+    description: 'Il 21 ottobre 2026 il Landrat ha approvato 4 milioni per la perequazione e stanziato 3 milioni per impianti sportivi 2027-2030.',
+    keywords: 'frontalieri, ticino, svizzera, italia, landrat, glarona, milioni, perequazione',
+    ogTitle: 'Landrat Glarona: 4M perequazione e concessione idro Rüti',
+    ogDescription: 'Seduta del 21 ottobre 2026: approvati 4 milioni per la perequazione tra Cantone e comuni, respinte due proposte sulla concessione idroelettrica di Rüti, stanziati 3 milioni per impianti sportivi 2027-2030.',
+    canonicalPath: '/articoli-glarona/landrat-ottobre-glarona-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Landrat Glarona: 4 milioni per la perequazione, idro a Rüti",
+      "description": "Il 21 ottobre 2026 il Landrat ha approvato 4 milioni per la perequazione e stanziato 3 milioni per impianti sportivi 2027-2030.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-landrat-ottobre-glarona-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T01:24:23+00:00",
+      "dateModified": "2026-10-22T01:24:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-glarona/landrat-ottobre-glarona-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

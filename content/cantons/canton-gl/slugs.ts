@@ -11,6 +11,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'muehlehorn-strada-chiusa-ottobre': { it: 'muehlehorn-strada-chiusa-ottobre', en: 'muehlehorn-road-closure-october', de: 'muehlehorn-strassensperrung-oktober', fr: 'muehlehorn-route-fermee-octobre' },
  'kloentalerstrasse-cantiere-2026': { it: 'kloentalerstrasse-cantiere-2026', en: 'kloentalerstrasse-roadworks-2026', de: 'kloentalerstrasse-bauarbeiten-2026', fr: 'kloentalerstrasse-travaux-2026' },
  'glarona-mercato-immobiliare-2026': { it: 'glarona-mercato-immobiliare-2026', en: 'glarus-real-estate-market-2026', de: 'glarner-immobilienmarkt-2026', fr: 'marche-immobilier-glaris-2026' },
+ 'landrat-ottobre-glarona-2026': { it: 'landrat-ottobre-glarona-2026', en: 'glarus-council-october-2026', de: 'glarner-landrat-oktober-2026', fr: 'conseil-glaris-octobre-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

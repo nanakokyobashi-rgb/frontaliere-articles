@@ -27,6 +27,9 @@ const blogMetaCantonGlFr: Record<string, string> = {
     'blog.article.glarona-mercato-immobiliare-2026.title': 'Marché immobilier à Glaris : les prix en hausse en 2026',
     'blog.article.glarona-mercato-immobiliare-2026.excerpt': 'La demande immobilière reste élevée dans le canton de Glaris L\'offre limitée soutient la hausse des prix Appartements en copropriété +4,4% entre le 2e trimestre',
     'blog.article.glarona-mercato-immobiliare-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.landrat-ottobre-glarona-2026.title': 'Landrat Glaris : 4 millions pour la péréquation, hydro à Rüti',
+    'blog.article.landrat-ottobre-glarona-2026.excerpt': 'Le 21 octobre 2026, le Landrat a approuvé CHF 4 millions pour la péréquation entre le canton et les communes, rejeté deux propositions sur la concession hydroélectrique de Rüti et alloué un crédit sportif de 3 millions pour 2027-2030.',
+    'blog.article.landrat-ottobre-glarona-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGlFr;
