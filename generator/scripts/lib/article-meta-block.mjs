@@ -96,8 +96,6 @@ export function escapeForSingleQuoteTS(s) {
     .replace(/\\/g, '\\\\')
     .replace(/'/g, "\\'")
     .replace(/\n/g, '\\n')
-    .replace(/\u2028/g, '\\u2028')
-    .replace(/\u2029/g, '\\u2029')
     .replace(/\r/g, '');
 }
 
@@ -120,10 +118,7 @@ export function escapeForSingleQuoteTS(s) {
  * forma di difetto che questo modulo esiste per non ripetere.
  */
 export function unescapeForSingleQuoteTS(s) {
-  return String(s ?? '').replace(/\\u([\da-fA-F]{4})|\\([\s\S])/gu, (_, unicode, escaped) => {
-    if (unicode !== undefined) return String.fromCharCode(Number.parseInt(unicode, 16));
-    return escaped === 'n' ? '\n' : escaped === 'r' ? '\r' : escaped;
-  });
+  return String(s ?? '').replace(/\\([\s\S])/g, (_, c) => (c === 'n' ? '\n' : c === 'r' ? '\r' : c));
 }
 
 /** Decode the source value of a TypeScript string or no-substitution template literal. */

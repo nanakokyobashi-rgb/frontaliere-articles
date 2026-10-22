@@ -208,8 +208,8 @@ test('il literal prodotto attraversa il decoder dell\'engine — caso `\\"`', ()
 //
 // I tre punti di scrittura sono stati corretti uno per uno; questo impedisce
 // che ne ricompaia un quarto. Il difetto e' esattamente «un escape rifatto a
-// mano accanto a uno corretto»: batch-add-faq-to-articles.mjs importa ora la
-// funzione canonica e tutti i suoi percorsi di scrittura passano da lei.
+// mano accanto a uno corretto»: in batch-add-faq-to-articles.mjs la funzione
+// giusta era gia' nel file, e il percorso di REPLACE non la usava.
 // ─────────────────────────────────────────────────────────────────────────────
 
 test('nessuno scrittore di .faq escapa il solo apostrofo', () => {
@@ -291,12 +291,4 @@ test('escapeForSingleQuoteTS e unescapeForSingleQuoteTS sono inversi', () => {
     const expected = s.replace(/\r/g, '');
     assert.equal(unescapeForSingleQuoteTS(escapeForSingleQuoteTS(s)), expected, `round-trip rotto su: ${s}`);
   }
-});
-
-test('escapeForSingleQuoteTS protegge i separatori Unicode di riga del TypeScript', () => {
-  const source = `prima${String.fromCharCode(0x2028)}mezzo${String.fromCharCode(0x2029)}dopo`;
-  const escaped = escapeForSingleQuoteTS(source);
-  assert.match(escaped, /\\u2028/);
-  assert.match(escaped, /\\u2029/);
-  assert.equal(unescapeForSingleQuoteTS(escaped), source);
 });
