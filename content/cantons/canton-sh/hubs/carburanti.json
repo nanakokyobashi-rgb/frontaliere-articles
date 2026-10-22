@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-22T02:37:56.742Z",
-  "contentHash": "c627758e47c54fc6cfd1b27c6814bb7f41c308d8275eed906802065646e2b8dc",
+  "updatedAt": "2026-10-22T03:24:56.278Z",
+  "contentHash": "f46188e5f00093e3941cd5fc2768d34d730cd79a7f613c8e07d6ab543ceee3f8",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Schaffhauser Nachrichten: lanciata la nuova app nel 2026",
+          "url": "/articoli-sciaffusa/nuova-app-schaffhauser-nachrichten-2026/",
+          "excerpt": "Il 21 ottobre 2026 è avvenuto il rollout della nuova app SN con contenuti estesi e notifiche push tematiche, disponibile su App Store e Google Play Store.",
+          "date": "2026-10-22T03:16:50.869Z"
+        },
+        {
           "title": "Neunkirch accetta il supervisore cantonale",
           "url": "/articoli-sciaffusa/neunkirch-supervisore-cantonale/",
           "excerpt": "Il Cantone invia Stephan Rawyler a Neunkirch: potrà impartire istruzioni al Consiglio comunale e partecipare alle sue sedute.",
@@ -94,12 +100,6 @@
           "url": "/articoli-sciaffusa/schleitheim-scooter-incidente-2026/",
           "excerpt": "Domenica 18 ottobre 2026, una 61enne cade dallo scooter sulla Hohbrugg: proiezione di 12 metri nel pendio, elicottero per il trasporto in ospedale, strada chiusa oltre un'ora.",
           "date": "2026-10-20T07:10:47.167Z"
-        },
-        {
-          "title": "Bancomat esploso a Beringen: tre fermate VBSH non servite",
-          "url": "/articoli-sciaffusa/beringen-vbsh-fermate-chiuse/",
-          "excerpt": "Dopo le esplosioni della mattina a Enge, VBSH non serve Enge, Hägli e Sonne fino alle 13:30.",
-          "date": "2026-10-20T06:41:00.427Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-22T02:37:56.742Z"
+      "updatedAt": "2026-10-22T03:24:56.278Z"
     },
     "en": {
       "canton": "SH",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Schaffhauser Nachrichten: new app launched in 2026",
+          "url": "/en/schaffhausen-articles/new-schaffhauser-nachrichten-app-2026/",
+          "excerpt": "On October 21, 2026, the rollout of the new SN app with extensive content and thematic push notifications took place, available on the App Store and Google Play Store.",
+          "date": "2026-10-22T03:16:50.869Z"
+        },
+        {
           "title": "Neunkirch accepts cantonal supervisor",
           "url": "/en/schaffhausen-articles/neunkirch-cantonal-supervisor/",
           "excerpt": "The Canton sends Stephan Rawyler to Neunkirch: he will be able to give instructions to the City Council and participate in its sessions.",
@@ -193,12 +199,6 @@
           "url": "/en/schaffhausen-articles/schleitheim-scooter-accident-2026/",
           "excerpt": "Sunday, October 18, 2026, a 61-year-old woman falls from her scooter on Hohbrugg: thrown 12 meters down the slope, helicopter transport to hospital, road closed for over an hour.",
           "date": "2026-10-20T07:10:47.167Z"
-        },
-        {
-          "title": "ATM exploded in Beringen: three VBSH stops not served",
-          "url": "/en/schaffhausen-articles/beringen-vbsh-stops-closed/",
-          "excerpt": "After the explosions this morning at Enge, VBSH is not serving Enge, Hägli and Sonne until 13:30.",
-          "date": "2026-10-20T06:41:00.427Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-22T02:37:56.742Z"
+      "updatedAt": "2026-10-22T03:24:56.278Z"
     },
     "de": {
       "canton": "SH",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Schaffhauser Nachrichten: Neue App im Jahr 2026 gestartet",
+          "url": "/de/schaffhausen-artikel/neue-schaffhauser-nachrichten-app-2026/",
+          "excerpt": "Am 21. Oktober 2026 erfolgte der Rollout der neuen SN-App mit erweiterten Inhalten und thematischen Push-Benachrichtigungen, die im App Store und Google Play Store verfügbar sind.",
+          "date": "2026-10-22T03:16:50.869Z"
+        },
+        {
           "title": "Neunkirch akzeptiert den kantonalen Vorgesetzten",
           "url": "/de/schaffhausen-artikel/neunkirch-kantonaler-aufpasser/",
           "excerpt": "Der Kanton schickt Stephan Rawyler nach Neunkirch: Er kann dem Gemeinderat Weisungen erteilen und an dessen Sitzungen teilnehmen.",
@@ -292,12 +298,6 @@
           "url": "/de/schaffhausen-artikel/schleitheim-roller-unfall-2026/",
           "excerpt": "Am Sonntag, 18.",
           "date": "2026-10-20T07:10:47.167Z"
-        },
-        {
-          "title": "Bancomat in Beringen explodiert: drei VBSH-Haltestellen nicht bedient",
-          "url": "/de/schaffhausen-artikel/beringen-vbsh-haltestellen-gesperrt/",
-          "excerpt": "Nach den Explosionen am Morgen in Enge werden die Haltestellen Enge, Hägli und Sonne von VBSH bis 13:30 Uhr nicht bedient.",
-          "date": "2026-10-20T06:41:00.427Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-22T02:37:56.742Z"
+      "updatedAt": "2026-10-22T03:24:56.278Z"
     },
     "fr": {
       "canton": "SH",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Schaffhauser Nachrichten : lancement de la nouvelle application en 2026",
+          "url": "/fr/articles-schaffhouse/nouvelle-app-schaffhauser-nachrichten-2026/",
+          "excerpt": "Le 21 octobre 2026 a eu lieu le lancement de la nouvelle application SN avec un contenu étendu et des notifications push thématiques, disponible sur l'App Store et le Google Play Store.",
+          "date": "2026-10-22T03:16:50.869Z"
+        },
+        {
           "title": "Neunkirch accepte le superviseur cantonal",
           "url": "/fr/articles-schaffhouse/neunkirch-superviseur-cantonal/",
           "excerpt": "Le canton envoie Stephan Rawyler à Neunkirch : il pourra donner des instructions au conseil municipal et participer à ses séances.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-schaffhouse/schleitheim-accident-scooter-2026/",
           "excerpt": "Dimanche 18 octobre 2026, une femme de 61 ans chute de son scooter sur la Hohbrugg : elle est projetée à 12 mètres dans la pente, un hélicoptère est utilisé pour son transport à l’hôpital, route fermée pendant plus…",
           "date": "2026-10-20T07:10:47.167Z"
-        },
-        {
-          "title": "Distributeur automatique de billets explosé à Beringen : trois arrêts VBSH non desservis",
-          "url": "/fr/articles-schaffhouse/beringen-vbsh-arrets-fermes/",
-          "excerpt": "Après les explosions de la matinée à Enge, VBSH ne dessert pas Enge, Hägli et Sonne jusqu’à 13:30.",
-          "date": "2026-10-20T06:41:00.427Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-22T02:37:56.742Z"
+      "updatedAt": "2026-10-22T03:24:56.278Z"
     }
   }
 }
