@@ -33,14 +33,12 @@
 # precedenti — questi ultimi verificati a mano, pagina per pagina, prima di
 # fidarsene.
 #
-# «NIENTE npm» NON VUOL DIRE «NIENTE RETE». Il vincolo resta quello di prima —
-# nessun `npm ci` sul percorso di detection, per restare immune alla stessa
-# classe di guasto (ETIMEDOUT su npm) che ha lasciato scoperto il caso gemello
-# in reconcile-article-shards.yml — e il passo 2 lo rispetta: `fetch` e' builtin
-# di Node 22, non passa dal registro npm e non installa niente. E' esattamente
-# la posizione di reconcile-article-shards.yml, che fa rete (API pubblicata +
-# git) senza `npm ci` per la stessa ragione. Costo misurato: 116 richieste,
-# ~4 secondi.
+# «Niente dipendenze del progetto» NON VUOL DIRE «niente runtime». Il detector
+# importa la riconciliazione condivisa, che legge anche sorgenti statiche con il
+# compilatore TypeScript isolato pin-nato. L'action sotto installa solo quello,
+# con retry e fuori dalla superficie npm del repository; `fetch` resta builtin
+# di Node 22 e il passo 2 non passa dal registro npm per le 116 richieste live
+# (~4 secondi misurati).
 #
 # In dubbio si tiene: un fetch che fallisce non vale «pulita», l'id resta
 # candidato. Un falso positivo costa una ripubblicazione idempotente; un falso
@@ -100,9 +98,10 @@ jobs:
         with:
           node-version: '22'
 
-      # NIENTE `npm ci`: la detection usa solo builtin Node (`fetch` compreso)
-      # + i moduli del repo (scripts/lib/sanitize-control-chars.mjs,
-      # scripts/reconcile-article-shards.mjs), zero dipendenze npm.
+      # Il detector importa la riconciliazione condivisa e quindi il lettore
+      # AST: prepara il solo compilatore pin-nato, non le dipendenze del repo.
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
 
       - name: Detect dirty ids (C0 nel corpus E ancora sulla pagina live)
         id: detect

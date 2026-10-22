@@ -103,9 +103,12 @@ jobs:
         with:
           node-version: '22'
 
-      # NIENTE `npm ci`, deliberatamente: la detection usa solo builtin. Il
-      # run 31245282583 è morto proprio su npm — il meccanismo che recupera
-      # quel fallimento non deve poter fallire nello stesso modo.
+      # La detection usa anche il lettore AST delle sorgenti statiche, che
+      # richiede il compilatore TypeScript isolato e pin-nato. Non installiamo
+      # le dipendenze del progetto: il runtime minimo ha retry propri e vive
+      # sotto RUNNER_TEMP, fuori dalla superficie npm del repository.
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
 
       - name: Detect ghosts (slug annunciati senza pagina sullo shard)
         id: detect
