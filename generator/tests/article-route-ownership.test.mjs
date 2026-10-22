@@ -41,3 +41,16 @@ test('parseLiteralRedirectMap skips nested members in an unsupported expression'
   assert.equal(result.dynamicCount, 0);
   assert.deepEqual(result.unsupported, ['/dynamic']);
 });
+
+test('parseLiteralRedirectMap conserva le divisioni dopo gli operatori postfix dinamici', () => {
+  for (const operator of ['++', '--']) {
+    const result = parseLiteralRedirectMap(
+      `const redirects = { '/dynamic': counter${operator} / divisor, '/valid': '/target-valid' }`,
+    );
+
+    assert.deepEqual(result.entries, {
+      '/valid/': '/target-valid/',
+    }, operator);
+    assert.deepEqual(result.unsupported, ['/dynamic'], operator);
+  }
+});

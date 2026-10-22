@@ -372,6 +372,12 @@ function skipUnsupportedExpression(text, offset) {
       canStartRegex = true;
       continue;
     }
+    if ((char === '+' && text[index + 1] === '+') || (char === '-' && text[index + 1] === '-')) {
+      const postfix = !canStartRegex;
+      index += 2;
+      canStartRegex = !postfix;
+      continue;
+    }
     if (char === '(') {
       parenDepth += 1;
       index += 1;
