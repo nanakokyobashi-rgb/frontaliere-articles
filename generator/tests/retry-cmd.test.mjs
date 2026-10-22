@@ -127,13 +127,22 @@ test('un HTTP 503 resta ritentabile', () => {
   assert.equal(calls, 2);
 });
 
-test('un HTTP 429 resta ritentabile', () => {
+test('gli status HTTP numerici e la forma status code restano ritentabili', () => {
+  for (const failureMessage of ['429 Too Many Requests', '500 Internal Server Error', 'status code: 500']) {
+    const { code, calls, out } = runWith({ failTimes: 1, failureMessage });
+    assert.equal(code, 0, `${failureMessage} doveva essere ritentato, invece:\n${out}`);
+    assert.equal(calls, 2, `${failureMessage} deve consumare due tentativi`);
+  }
+});
+
+test('un numero in un errore deterministico non abilita il retry', () => {
   const { code, calls, out } = runWith({
-    failTimes: 1,
-    failureMessage: 'HTTP 429 Too Many Requests',
+    failTimes: 99,
+    failureMessage: 'validation failed: expected 500 records',
   });
-  assert.equal(code, 0, `il 429 doveva essere ritentato, invece:\n${out}`);
-  assert.equal(calls, 2);
+  assert.notEqual(code, 0);
+  assert.equal(calls, 1);
+  assert.match(out, /non transitorio/);
 });
 
 test('ogni argomento e ogni flag arrivano al comando, a ogni tentativo', () => {

@@ -173,8 +173,6 @@ import {
 } from './lib/announced-surface.mjs';
 
 import {
-  appendArticleBodyQuarantineSummary,
-  assertArticleBodyQuarantineBudget,
   emitArticleBodyApi,
   verifyArticleBodyApiOnDisk,
 } from './lib/article-body-api.mjs';
@@ -494,8 +492,6 @@ const articleBodyApi = emitArticleBodyApi({
     return clean;
   },
 });
-appendArticleBodyQuarantineSummary(articleBodyApi.quarantined);
-assertArticleBodyQuarantineBudget(articleBodyApi.totals);
 for (const section of PUBLISHED_API_SECTIONS) {
   for (const loc of LOCALES) {
     const indexPath = `bodies/${section.section}/${loc}/index.json`;
@@ -505,8 +501,7 @@ for (const section of PUBLISHED_API_SECTIONS) {
 }
 console.log(
   `[build-api] article bodies: ${articleBodyApi.totals.available}/${articleBodyApi.totals.expected} available, `
-    + `${articleBodyApi.totals.missing} explicitly missing, `
-    + `${articleBodyApi.totals.quarantined} quarantined`,
+    + `${articleBodyApi.totals.missing} explicitly missing`,
 );
 
 /** Il modulo della mappa slug di ogni sezione: mappa, inversa e provenienza dei fallback. */
@@ -1530,7 +1525,6 @@ write('manifest.json', {
     articleBodyRecordsExpected: articleBodyApi.totals.expected,
     articleBodyRecordsAvailable: articleBodyApi.totals.available,
     articleBodyRecordsMissing: articleBodyApi.totals.missing,
-    articleBodyRecordsQuarantined: articleBodyApi.totals.quarantined,
     // Le sezioni del catalogo e le sitemap elencate dall'indice (0 = indice
     // non emesso). Quante sezioni sono LIVE non e' un contatore del manifest:
     // lo stato servito lo dice solo il registro su R2.
@@ -1564,8 +1558,6 @@ const articleBodyDisk = verifyArticleBodyApiOnDisk({
   publicSections: new Set(PUBLIC_API_SECTIONS.map((section) => section.section)),
   locales: LOCALES,
 });
-assertArticleBodyQuarantineBudget(articleBodyDisk.totals);
-
 console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`);
 
 // ── Final gate: no control character leaves this process ──────────────────
@@ -1765,7 +1757,6 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
     articleBodyRecordsExpected: articleBodyDisk.totals.expected,
     articleBodyRecordsAvailable: articleBodyDisk.totals.available,
     articleBodyRecordsMissing: articleBodyDisk.totals.missing,
-    articleBodyRecordsQuarantined: articleBodyDisk.totals.quarantined,
     sections: derivedAlways(SECTIONS_CATALOG_FILE, () => jsonOut(SECTIONS_CATALOG_FILE).sections.length),
     // L'indice e' opzionale per costruzione, e la sua assenza e' legittima
     // solo se il registro edge emesso non ha sezioni live (o non e' stato

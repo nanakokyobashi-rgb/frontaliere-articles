@@ -7,12 +7,9 @@ import path from 'node:path';
 import {
   articleBodyRevision,
   articleBodyDocumentPath,
-  appendArticleBodyQuarantineSummary,
-  assertArticleBodyQuarantineBudget,
   buildArticleBodyPayload,
   emitArticleBodyApi,
   extractArticleBodyFields,
-  MAX_ARTICLE_BODY_QUARANTINES,
   verifyArticleBodyApiOnDisk,
 } from '../../scripts/lib/article-body-api.mjs';
 import { findNonCanonicalArticleLinks } from '../../scripts/lib/article-link-contract.mjs';
@@ -532,7 +529,7 @@ test('section/locale indexes explicitly represent missing sources and inactive s
     publicSections: new Set(['frontaliere']),
     metaBySectionLocale,
   });
-  assert.deepEqual(emitted.totals, { expected: 4, available: 2, missing: 2, quarantined: 0 });
+  assert.deepEqual(emitted.totals, { expected: 4, available: 2, missing: 2 });
   const itIndex = JSON.parse(fs.readFileSync(path.join(outDir, 'bodies/frontaliere/it/index.json'), 'utf8'));
   assert.equal(itIndex.entries[articleId].status, 'available');
   assert.equal(itIndex.entries['missing-article'].status, 'missing');
@@ -553,16 +550,16 @@ test('section/locale indexes explicitly represent missing sources and inactive s
   assert.deepEqual(verified.totals, emitted.totals);
 });
 
-test('un body non parsabile viene messo in quarantena, escluso dall output e ri-verificato dal disco', () => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-quarantine-source-'));
-  const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-quarantine-output-'));
+test('un body non parsabile rifiuta la build prima di emettere un indice v1', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-invalid-source-'));
+  const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-invalid-output-'));
   const sourceDir = path.join(root, 'content/frontaliere/it');
   fs.mkdirSync(sourceDir, { recursive: true });
   const malformed = sourceFor('example-article', `broken${String.fromCharCode(0x2028)}body`);
   fs.writeFileSync(path.join(sourceDir, `${articleId}.ts`), malformed);
   const sections = [{ section: 'frontaliere', bodyDir: 'content/frontaliere' }];
   const registries = { frontaliere: [{ id: articleId }] };
-  const emitted = emitArticleBodyApi({
+  assert.throws(() => emitArticleBodyApi({
     root,
     outDir,
     locales: ['it'],
@@ -570,43 +567,10 @@ test('un body non parsabile viene messo in quarantena, escluso dall output e ri-
     registries,
     publicSections: new Set(['frontaliere']),
     metaBySectionLocale: { frontaliere: { it: metaFor() } },
-  });
+  }), /article body non emettibile:[\s\S]*Unterminated delimiter/u);
 
-  assert.deepEqual(emitted.totals, { expected: 1, available: 0, missing: 0, quarantined: 1 });
-  assert.equal(emitted.quarantined.length, 1);
-  assert.equal(emitted.quarantined[0].source, `content/frontaliere/it/${articleId}.ts`);
-  assert.match(emitted.quarantined[0].reason, /Unterminated delimiter/u);
-
-  const index = JSON.parse(fs.readFileSync(path.join(outDir, 'bodies/frontaliere/it/index.json'), 'utf8'));
-  assert.equal(index.quarantinedCount, 1);
-  assert.equal(index.entries[articleId].status, 'quarantined');
-  assert.match(index.entries[articleId].reason, /Unterminated delimiter/u);
+  assert.equal(fs.existsSync(path.join(outDir, 'bodies/frontaliere/it/index.json')), false);
   assert.equal(fs.existsSync(path.join(outDir, `bodies/frontaliere/it/${articleId}.json`)), false);
-
-  const summaryPath = path.join(outDir, 'summary.md');
-  fs.writeFileSync(summaryPath, '');
-  appendArticleBodyQuarantineSummary(emitted.quarantined, summaryPath);
-  assert.match(fs.readFileSync(summaryPath, 'utf8'), /example-article\.ts/u);
-  assert.match(fs.readFileSync(summaryPath, 'utf8'), /Unterminated delimiter/u);
-
-  const verified = verifyArticleBodyApiOnDisk({
-    outDir,
-    capability: emitted.capability,
-    sections,
-    registries,
-    publicSections: new Set(['frontaliere']),
-    locales: ['it'],
-  });
-  assert.deepEqual(verified.totals, emitted.totals);
-});
-
-test('la soglia di quarantena e esplicita e fail-closed', () => {
-  assert.equal(MAX_ARTICLE_BODY_QUARANTINES, 3);
-  assert.doesNotThrow(() => assertArticleBodyQuarantineBudget({ quarantined: MAX_ARTICLE_BODY_QUARANTINES }));
-  assert.throws(
-    () => assertArticleBodyQuarantineBudget({ quarantined: MAX_ARTICLE_BODY_QUARANTINES + 1 }),
-    /soglia quarantena/u,
-  );
 });
 
 test('the disk gate rejects tampered payloads and body documents absent from their index', () => {

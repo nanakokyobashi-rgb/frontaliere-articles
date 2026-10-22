@@ -367,12 +367,35 @@ jobs:
         if: steps.mode.outputs.skip != 'true'
         uses: ./.github/actions/setup-article-source-runtime
 
+      - name: Install isolated blog-body syntax parser (esbuild)
+        if: steps.mode.outputs.skip != 'true'
+        run: |
+          set -euo pipefail
+          preflight_dir="$RUNNER_TEMP/preflight"
+          # publish-api.yml is the single source for the parser pin used by
+          # this gate; a fast publisher must not drift to another esbuild.
+          ESBUILD_PIN="$(sed -n 's/^[[:space:]]*ESBUILD_PIN:[[:space:]]*//p' .github/workflows/publish-api.yml | head -n 1)"
+          if [[ ! "$ESBUILD_PIN" =~ ^esbuild@[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::publish-api.yml does not expose a valid ESBUILD_PIN"
+            exit 1
+          fi
+          mkdir -p "$preflight_dir"
+          printf '{"name":"preflight-parser","private":true}\n' > "$preflight_dir/package.json"
+          (
+            cd "$preflight_dir"
+            bash "$GITHUB_WORKSPACE/scripts/ci/retry-cmd.sh" \
+              npm install --no-save --no-audit --no-fund --prefer-offline --loglevel=error "$ESBUILD_PIN"
+          )
+          test -f "$preflight_dir/node_modules/esbuild/lib/main.js"
+
       - name: Preflight — i link Markdown devono avere una destinazione canonica
         if: steps.mode.outputs.skip != 'true'
         env:
           BEFORE: ${{ github.event.before }}
           AFTER: ${{ github.sha }}
           EVENT_NAME: ${{ github.event_name }}
+          PREFLIGHT_EVENT_NAME: ${{ github.event_name }}
+          PREFLIGHT_PUSH_BASE_REVISION: ${{ github.event.before }}
           ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
           ARTICLE_ID_INPUT: ${{ inputs.article_id }}
           SECTION_INPUT: ${{ inputs.section }}
@@ -426,6 +449,10 @@ jobs:
               if [ -s "$changed_files" ]; then scan_mode=changed; fi
             fi
           fi
+          PREFLIGHT_ESBUILD_DIR="$RUNNER_TEMP/preflight" \
+            PREFLIGHT_SCAN_MODE="$scan_mode" \
+            PREFLIGHT_CHANGED_FILES_FILE="$changed_files" \
+            node scripts/ci/check-blog-body-syntax.mjs
           PREFLIGHT_SCAN_MODE="$scan_mode" \
             PREFLIGHT_ARTICLE_IDS="$preflight_article_ids" \
             PREFLIGHT_SECTION="${SECTION_INPUT:-frontaliere}" \
