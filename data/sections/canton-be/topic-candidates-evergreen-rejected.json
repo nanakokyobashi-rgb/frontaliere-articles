@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/702511/spitalneubau-br%c3%bcgg-der-kanton-erh%c3%b6ht-den-druck-auf-biel-bei-der-planung-des-spitalareals": {
-      "section": "canton-be",
-      "ts": 1792509742058
-    },
     "canton-be::https://ajour.ch/story/702647/berner-gesundheitsdirektor-ein-solch-hoher-betrag-vom-kanton-kommt-nicht-allen-spit%c3%a4lern-zugute": {
       "section": "canton-be",
       "ts": 1792534408338
@@ -203,6 +199,10 @@
     "canton-be::https://ajour.ch/story/702470/budget-2027-sieht-ertrags%c3%bcberschuss-vor": {
       "section": "canton-be",
       "ts": 1792678100877
+    },
+    "canton-be::https://ajour.ch/story/702511/spitalneubau-br%c3%bcgg-der-kanton-erh%c3%b6ht-den-druck-auf-biel-bei-der-planung-des-spitalareals": {
+      "section": "canton-be",
+      "ts": 1792690384800
     }
   }
 }
