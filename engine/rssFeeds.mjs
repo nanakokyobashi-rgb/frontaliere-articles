@@ -39,7 +39,6 @@ import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
 import { parseStaticArticleTranslationSource, parseStaticBlogBodySource } from './shared/articleStaticSource.mjs';
 import { findAllSeoEntryMatches } from './shared/seo-entry.mjs';
 import { createImageCreditReader, mediaRssCreditXml, renderImageCreditHtml } from './shared/imageCredits.mjs';
-import { decodeStaticStringLiteral } from './shared/ts-literals.mjs';
 import { articleSectionEntry } from './shared/articleSectionCore.mjs';
 import { cantonRssChannel } from './shared/cantonSectionCopy.mjs';
 
@@ -220,17 +219,25 @@ function resolveSlugFile(path, slugFile, slugDir) {
 
 /** Parse seo-blog*.ts chunks for per-article SEO metadata. */
 /**
- * Decode the quoted value using the producer shared literal contract.
- * The local adapter keeps the RSS regex parser small while the shared
- * decoder preserves escaped quotes, backslashes, and Unicode separators.
+ * Undo the escaping create-article applies when it writes a value into a
+ * quoted TS/JSON literal. Matching the escape in the regex keeps the value from
+ * being truncated; this is what turns the matched text back into what the
+ * article actually says, so `dell\'Italia` reads `dell'Italia`.
  *
  * @param {string | undefined} value
- * @param {string} quote
+ * @param {'"' | "'" | '`'} quote
  * @returns {string | undefined}
  */
 function unescapeQuoted(value, quote) {
   if (value === undefined) return undefined;
-  return decodeStaticStringLiteral(value, quote);
+  return value.split('\\\\').join('\u0000')
+    .split(`\\${quote}`).join(quote)
+    // The article writer escapes apostrophes even when the enclosing literal
+    // uses backticks, so decode that writer escape independently of the
+    // literal delimiter.
+    .split("\\'").join("'")
+    .split('\\n').join('\n')
+    .split('\u0000').join('\\');
 }
 
 function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
@@ -391,6 +398,17 @@ export function sanitizeFeedBody(body) {
     .replace(/\bnav:[a-z0-9-]+\b/gi, '');
 }
 
+/**
+ * Normalize line endings before article text enters RSS CDATA.
+ *
+ * Static TypeScript literals can preserve a source body's literal CRLF, while
+ * the feed's runtime contract uses LF. Normalize both CRLF and lone CR so a
+ * platform-written body cannot leak a second line-ending representation.
+ */
+export function normalizeFeedLineEndings(value) {
+  return String(value ?? '').replace(/\r\n?/g, '\n');
+}
+
 function toRfc822(isoDate) {
   try {
     return new Date(isoDate).toUTCString();
@@ -474,8 +492,9 @@ function renderFeed(section, locale, articles, slugs, titles, excerpts, bodies, 
       // media:content. An uncredited cover keeps the self-closing element.
       const creditHtml = item.imageCredit ? renderImageCreditHtml(item.imageCredit, locale) : '';
       const encoded = body && creditHtml ? `${body}\n\n${creditHtml}` : body;
-      const contentEncoded = encoded
-        ? `\n      <content:encoded><![CDATA[${escapeCData(encoded)}]]></content:encoded>`
+      const normalizedEncoded = normalizeFeedLineEndings(encoded);
+      const contentEncoded = normalizedEncoded
+        ? `\n      <content:encoded><![CDATA[${escapeCData(normalizedEncoded)}]]></content:encoded>`
         : '';
       const mediaContent = item.imageCredit
         ? `<media:content url="${escapeXml(item.imageUrl)}" medium="image">${mediaRssCreditXml(item.imageCredit, locale)}</media:content>`
