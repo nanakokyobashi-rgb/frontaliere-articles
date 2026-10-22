@@ -621,6 +621,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-energy-tagli-radio-svizzera': {
+    title: 'Gruppo radiofonico: annunciati fino a 15 tagli in Svizzera',
+    description: 'Energy annuncia fino a 15 tagli in Svizzera: il numero sarà deciso dopo la consultazione, mentre programma e organizzazione saranno adeguati.',
+    keywords: 'frontalieri, ticino, svizzera, italia, gruppo, radiofonico, annunciati, fino',
+    ogTitle: 'Energy: fino a 15 tagli, decisione dopo la consultazione',
+    ogDescription: 'Energy, con sedi a Basilea, Berna e Zurigo, ha annunciato fino a 15 tagli. La consultazione è in corso: il numero definitivo dipenderà dalle proposte dei dipendenti. Il gruppo segnala ricavi pubblicitari sotto pressione nonostante ascolti elevati',
+    canonicalPath: '/articoli-berna/energy-tagli-radio-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Gruppo radiofonico: annunciati fino a 15 tagli in Svizzera",
+      "description": "Energy annuncia fino a 15 tagli in Svizzera: il numero sarà deciso dopo la consultazione, mentre programma e organizzazione saranno adeguati.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-energy-tagli-radio-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T12:35:58+00:00",
+      "dateModified": "2026-10-22T12:35:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/energy-tagli-radio-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

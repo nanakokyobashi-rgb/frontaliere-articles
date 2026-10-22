@@ -182,4 +182,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'energy-tagli-radio-svizzera',
+ category: 'novita',
+ date: '2026-10-22T12:35:58.385Z',
+ image: '/images/blog/article-energy-tagli-radio-svizzera.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -51,6 +51,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.title': 'Première adaptation LPP pour survivants et invalidité : 2,1 %, 1 %, 1,2 %',
     'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.excerpt': 'Augmentation de 2,1 % pour les rentes à partir de 2023, de 1 % pour la première revalorisation en 2026, de 1,2 % pour la dernière modification en 2025.',
     'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.energy-tagli-radio-svizzera.title': 'Groupe radiophonique : jusqu’à 15 suppressions de postes annoncées en Suisse',
+    'blog.article.energy-tagli-radio-svizzera.excerpt': 'Energy annonce jusqu’à 15 suppressions de postes : le nombre sera décidé après la consultation, tandis que les recettes publicitaires restent sous pression.',
+    'blog.article.energy-tagli-radio-svizzera.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBeFr;

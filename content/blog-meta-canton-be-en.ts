@@ -51,6 +51,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.title': 'First LPP adjustment for survivors and disability: 2.1%, 1%, 1.2%',
     'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.excerpt': 'Increase 2,1% for annuities from 2023, 1% for first revaluation 2026, 1,2% for latest modification 2025.',
     'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.energy-tagli-radio-svizzera.title': 'Radio group: up to 15 cuts announced in Switzerland',
+    'blog.article.energy-tagli-radio-svizzera.excerpt': 'Energy announces up to 15 cuts: the number will be decided after the consultation, while advertising revenues remain under pressure.',
+    'blog.article.energy-tagli-radio-svizzera.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBeEn;

@@ -51,6 +51,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.title': 'Primo adeguamento LPP superstiti e invalidità: 2,1%, 1%, 1,2%',
     'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.excerpt': 'Aumento 2,1% per rendite dal 2023, 1% per prima rivalutazione 2026, 1,2% per ultima modifica 2025.',
     'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.energy-tagli-radio-svizzera.title': 'Gruppo radiofonico: annunciati fino a 15 tagli in Svizzera',
+    'blog.article.energy-tagli-radio-svizzera.excerpt': 'Energy annuncia fino a 15 tagli: il numero sarà deciso dopo la consultazione, mentre i ricavi pubblicitari restano sotto pressione.',
+    'blog.article.energy-tagli-radio-svizzera.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBeIt;

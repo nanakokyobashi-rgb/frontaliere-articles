@@ -51,6 +51,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.title': 'Erste Anpassung der BVG-Hinterlassenen- und Invalidenrenten: 2,1%, 1%, 1,2%',
     'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.excerpt': 'Erhöhung um 2,1% für Renten ab 2023, 1% für die erste Anpassung 2026, 1,2% für die letzte Änderung 2025.',
     'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.energy-tagli-radio-svizzera.title': 'Radiogruppe: Bis zu 15 Stellen in der Schweiz angekündigt',
+    'blog.article.energy-tagli-radio-svizzera.excerpt': 'Energy kündigt bis zu 15 Stellenstreichungen an: Die Zahl wird nach der Konsultation festgelegt, während die Werbeeinnahmen unter Druck bleiben.',
+    'blog.article.energy-tagli-radio-svizzera.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;
