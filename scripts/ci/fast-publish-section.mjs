@@ -48,6 +48,7 @@
 import '../../host/cantonSectionsBootstrap.mjs';
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, realpathSync } from 'node:fs';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { activeCorpusCoreEntries, activeSourceSections, sectionForBodyPath, sectionSourceSurfaces, SECTION_LOCALES } from '../lib/corpus-sections.mjs';
@@ -135,14 +136,111 @@ function changedRecordIds(previous, next) {
   return [...ids].filter((id) => previous.get(id) !== next.get(id));
 }
 
+const REGISTRY_SOURCE_KEY = '\u0000registry-source';
+
+/**
+ * Return top-level object spans without treating braces in a literal or
+ * comment as syntax. Registry entries are the only object spans with a
+ * plain `id` field; other top-level objects remain in the file context so a
+ * transform added outside an entry invalidates the complete registry.
+ */
+function registryObjectSpans(source) {
+  const spans = [];
+  let objectStart = -1;
+  let depth = 0;
+  let quote;
+  let escaped = false;
+
+  for (let i = 0; i < source.length; i += 1) {
+    const char = source[i];
+    if (quote !== undefined) {
+      if (escaped) escaped = false;
+      else if (char === '\\') escaped = true;
+      else if (char === quote) quote = undefined;
+      continue;
+    }
+
+    if (char === '/' && source[i + 1] === '/') {
+      const newline = source.indexOf('\n', i + 2);
+      i = newline === -1 ? source.length : newline;
+    } else if (char === '/' && source[i + 1] === '*') {
+      const close = source.indexOf('*/', i + 2);
+      i = close === -1 ? source.length : close + 1;
+    } else if (char === "'" || char === '"' || char === '`') {
+      quote = char;
+    } else if (char === '{') {
+      if (depth === 0) objectStart = i;
+      depth += 1;
+    } else if (char === '}' && depth > 0) {
+      depth -= 1;
+      if (depth === 0 && objectStart >= 0) {
+        spans.push({ start: objectStart, end: i + 1, body: source.slice(objectStart + 1, i) });
+        objectStart = -1;
+      }
+    }
+  }
+  return spans;
+}
+
+function registrySourceContext(source) {
+  if (source === null) return '';
+  let cursor = 0;
+  const chunks = [];
+  for (const span of registryObjectSpans(source)) {
+    if (!articleRegistryObjectFields(span.body).has('id')) continue;
+    chunks.push(source.slice(cursor, span.start), '{}');
+    cursor = span.end;
+  }
+  chunks.push(source.slice(cursor));
+  return chunks.join('');
+}
+
 function registryRecords(source) {
   const records = new Map();
+  records.set(REGISTRY_SOURCE_KEY, registrySourceContext(source));
   if (source === null) return records;
   for (const body of articleRegistryObjectBodies(source)) {
     const id = articleRegistryObjectFields(body).get('id');
     if (id) mapRecord(records, id, body);
   }
   return records;
+}
+
+function registryRecordIds(...records) {
+  return new Set(records.flatMap((record) => [...record.keys()]).filter((id) => id !== REGISTRY_SOURCE_KEY));
+}
+
+function registryChangedIds(previous, next) {
+  const changed = changedRecordIds(previous, next);
+  if (!changed.includes(REGISTRY_SOURCE_KEY)) return changed;
+  return [...registryRecordIds(previous, next)];
+}
+
+const STATIC_MODULE_SPECIFIER_RE = /^\s*(?:import(?:\s+[^;\n]*?\s+from)?|export\s+[^;\n]*?\s+from)\s*["']([^"']+)["']\s*;?\s*$/gmu;
+const STATIC_MODULE_EXTENSIONS = Object.freeze(['', '.ts', '.tsx', '.js', '.mjs', '.json']);
+
+function staticModuleSpecifiers(source) {
+  if (source === null) return [];
+  return [...source.matchAll(STATIC_MODULE_SPECIFIER_RE)].map((match) => match[1]);
+}
+
+function registryImportMatches(rel, registryFile, source) {
+  const normalizedRel = rel.replaceAll('\\', '/');
+  const baseDir = path.posix.dirname(registryFile.replaceAll('\\', '/'));
+  for (const specifier of staticModuleSpecifiers(source)) {
+    if (!specifier.startsWith('.')) continue;
+    const base = path.posix.normalize(path.posix.join(baseDir, specifier));
+    const candidates = new Set();
+    for (const extension of STATIC_MODULE_EXTENSIONS) candidates.add(`${base}${extension}`);
+    for (const extension of STATIC_MODULE_EXTENSIONS.slice(1)) candidates.add(`${base}/index${extension}`);
+    if (candidates.has(normalizedRel)) return true;
+  }
+  return false;
+}
+
+function registryDependencyChanged(rel, registryFile, previous, next) {
+  return registryImportMatches(rel, registryFile, previous)
+    || registryImportMatches(rel, registryFile, next);
 }
 
 function seoRecords(source, rel) {
@@ -449,6 +547,19 @@ export function articlePublishPlan(
   const targets = new Map(sections.map((section) => [section.section, new Set()]));
 
   for (const { rel } of changedFileRecords(files)) {
+    const dependencyOwners = sectionBySurface.filter(({ section }) => (
+      !articleSurfaceKind(rel, section)
+      && registryDependencyChanged(
+        rel,
+        section.registryFile,
+        sourceText(readPreviousSource, section.registryFile),
+        sourceText(readCurrentSource, section.registryFile),
+      )
+    ));
+    for (const { section } of dependencyOwners) {
+      for (const id of registeredBySection.get(section.section)) targets.get(section.section).add(id);
+    }
+
     const owner = sectionBySurface.find(({ section }) => articleSurfaceKind(rel, section));
     if (!owner) continue;
 
@@ -456,28 +567,30 @@ export function articlePublishPlan(
     const kind = articleSurfaceKind(rel, section);
     const previous = sourceText(readPreviousSource, rel);
     const next = sourceText(readCurrentSource, rel);
+    const registryBeforeSource = sourceText(readPreviousSource, section.registryFile);
+    const registryAfterSource = sourceText(readCurrentSource, section.registryFile);
     let changedIds;
 
     if (kind === 'registry') {
-      changedIds = changedRecordIds(registryRecords(previous), registryRecords(next));
+      changedIds = registryChangedIds(registryRecords(previous), registryRecords(next));
     } else if (kind === 'seo') {
       changedIds = changedRecordIds(seoRecords(previous, rel), seoRecords(next, rel));
     } else if (kind === 'meta') {
       changedIds = changedRecordIds(metaRecords(previous), metaRecords(next));
     } else if (kind === 'slug') {
-      const registryBefore = registryRecords(sourceText(readPreviousSource, section.registryFile));
-      const registryAfter = registryRecords(sourceText(readCurrentSource, section.registryFile));
+      const registryBefore = registryRecords(registryBeforeSource);
+      const registryAfter = registryRecords(registryAfterSource);
       const slug = slugRecords(
         previous,
         next,
-        new Set([...registryBefore.keys(), ...registryAfter.keys()]),
+        registryRecordIds(registryBefore, registryAfter),
         section.slugExport,
       );
       changedIds = changedRecordIds(slug.previous, slug.next);
     } else if (kind === 'canonical') {
-      const registryBefore = registryRecords(sourceText(readPreviousSource, section.registryFile));
-      const registryAfter = registryRecords(sourceText(readCurrentSource, section.registryFile));
-      const candidateIds = new Set([...registryBefore.keys(), ...registryAfter.keys()]);
+      const registryBefore = registryRecords(registryBeforeSource);
+      const registryAfter = registryRecords(registryAfterSource);
+      const candidateIds = registryRecordIds(registryBefore, registryAfter);
       const slug = slugRecords(
         sourceText(readPreviousSource, section.slugFile),
         sourceText(readCurrentSource, section.slugFile),

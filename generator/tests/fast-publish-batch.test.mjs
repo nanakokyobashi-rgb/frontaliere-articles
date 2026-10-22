@@ -83,6 +83,52 @@ test('le superfici articolo oltre il body producono solo gli ID realmente cambia
     ids: ['alpha', 'beta'],
     bootstrap: false,
   }]);
+
+});
+
+test('una dipendenza importata dal registry invalida tutti gli articoli registrati', () => {
+  const registered = new Set(['alpha', 'beta']);
+  const previousRegistry = `import { cdnBlogImage } from './blogImageCdnMirror';
+
+const RAW_ARTICLES = [
+  { id: 'alpha', image: '/images/blog/alpha.webp' },
+  { id: 'beta', image: '/images/blog/beta.webp' },
+];
+export const ARTICLES = RAW_ARTICLES.map((article) => ({ ...article, image: cdnBlogImage(article.image) }));
+`;
+  const currentRegistry = previousRegistry.replace('blogImageCdnMirror', 'blogImageCdnMirrorV2');
+  const previous = new Map([['content/blog-articles-data.ts', previousRegistry]]);
+  const current = new Map([['content/blog-articles-data.ts', currentRegistry]]);
+
+  const plan = articlePublishPlan(['content/blogImageCdnMirror.ts'], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => current.get(rel) ?? null,
+  });
+
+  assert.deepEqual(plan, [{
+    section: 'frontaliere',
+    ids: ['alpha', 'beta'],
+    bootstrap: false,
+  }]);
+
+  const transformedRegistry = previousRegistry.replace(
+    'cdnBlogImage(article.image)',
+    'cdnBlogImageV2(article.image)',
+  );
+  const transformedPlan = articlePublishPlan(['content/blog-articles-data.ts'], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => rel === 'content/blog-articles-data.ts' ? transformedRegistry : null,
+  });
+
+  assert.deepEqual(transformedPlan, [{
+    section: 'frontaliere',
+    ids: ['alpha', 'beta'],
+    bootstrap: false,
+  }]);
 });
 
 test('la mappa slug ignora l oggetto fallback omonimo e rileva lo slug cambiato', () => {
