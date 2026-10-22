@@ -91,6 +91,58 @@ const COMPUTED_PROPERTY_PREFIX_RE = new RegExp(
   'u',
 );
 
+const CONTROL_PAREN_KEYWORDS = new Set(['if', 'for', 'while', 'switch', 'catch', 'with']);
+
+/**
+ * Return the last identifier token before `offset`, crossing trivia without
+ * treating words inside comments or quoted literals as syntax. Looking only at
+ * the raw suffix makes `if` followed by a block comment and `(` look like an ordinary function
+ * parameter list and lets a computed member escape the fail-closed scanner.
+ */
+function previousSignificantWord(source, offset) {
+  let cursor = 0;
+  let previousWord = null;
+  while (cursor < offset) {
+    cursor = skipTrivia(source, cursor);
+    if (cursor >= offset) break;
+    const character = source[cursor];
+    if (character === '"' || character === "'" || character === '`') {
+      cursor = skipTypeScriptQuotedToken(source, cursor);
+      continue;
+    }
+    const identifier = /^[$_\p{ID_Start}][$_\u200c\u200d\p{ID_Continue}]*/u.exec(
+      source.slice(cursor, offset),
+    );
+    if (identifier) {
+      previousWord = identifier[0];
+      cursor += identifier[0].length;
+      continue;
+    }
+    cursor += 1;
+  }
+  return previousWord;
+}
+
+/**
+ * A parenthesized parameter list is also used by arrow functions, class
+ * methods, and function-type annotations. Looking at the token after the
+ * matching close avoids treating control-flow parentheses as a function
+ * context while allowing the type-literal state to cross the parameter list.
+ */
+function isFunctionParameterList(source, openingOffset) {
+  // Include the opening delimiter so nested parenthesized type expressions do
+  // not look like the end of the function parameter list.
+  const closingOffset = scanTypeScriptExpression(source, openingOffset, ')');
+  if (closingOffset < 0) return false;
+  const after = skipTrivia(source, closingOffset);
+  const next = source[after];
+  if (source.startsWith('=>', after)) return true;
+  if (next !== ':' && next !== '{') return false;
+
+  const previousWord = previousSignificantWord(source, openingOffset);
+  return !CONTROL_PAREN_KEYWORDS.has(previousWord);
+}
+
 function isArrowObjectPattern(source, openingOffset) {
   const objectEnd = scanTypeScriptExpression(source, openingOffset + 1, '}');
   if (objectEnd >= source.length) return false;
@@ -198,6 +250,7 @@ function delimiterContextAt(source, offset) {
   let variableTypePending = false;
   let pendingVariableTypeObject = false;
   let angleAssertedObjectOffset = -1;
+  let rootTypeContext = false;
   const markToken = (token, closesFunctionParameters = false) => {
     if (delimiters.length) delimiters.at(-1).lastToken = token;
     previousToken = token;
@@ -274,16 +327,22 @@ function delimiterContextAt(source, offset) {
     if (ch === '(' || ch === '[' || ch === '{') {
       const interfaceBody = ch === '{' && awaitingInterfaceBodyDepth === delimiters.length
         && interfaceTypeParameterDepth === 0;
+      const inheritedTypeContext = rootTypeContext || delimiters.some(({ typeLiteral, typeContext }) =>
+        typeLiteral || typeContext);
+      const parameterDefault = delimiters.at(-1)?.parameterDefault === true;
       const typeLiteral = interfaceBody
         || ch === '{' && previousToken === ':'
-        && (delimiters.some(({ typeLiteral: parentIsTypeLiteral }) => parentIsTypeLiteral)
+        && (inheritedTypeContext
+          || delimiters.at(-1)?.functionParameters === true && !parameterDefault
           || pendingFunctionReturnObjectType || pendingVariableTypeObject)
+        || ch === '{' && inheritedTypeContext && ['?', '|', '('].includes(previousToken)
         || ch === '{' && typeAliasDepth >= 0;
-      const functionParameters = ch === '(' && awaitingFunctionParametersDepth === delimiters.length
-        && functionTypeParameterDepth === 0;
+      const functionParameters = ch === '(' && functionTypeParameterDepth === 0
+        && (awaitingFunctionParametersDepth === delimiters.length
+          || isFunctionParameterList(source, index));
       const bindingPattern = ch === '{' && (
         variableNamePending && delimiters.length === variableDeclarationDepth
-        || delimiters.at(-1)?.functionParameters === true
+        || delimiters.at(-1)?.functionParameters === true && !parameterDefault
       );
       const angleAssertedObject = ch === '{' && index === angleAssertedObjectOffset;
       const objectLiteral = ch === '{' && !typeLiteral && !bindingPattern
@@ -300,7 +359,16 @@ function delimiterContextAt(source, offset) {
         interfaceTypeParameterDepth = 0;
       }
       markToken(ch);
-      delimiters.push({ delimiter: ch, offset: index, lastToken: null, typeLiteral, functionParameters, objectLiteral });
+      delimiters.push({
+        delimiter: ch,
+        offset: index,
+        lastToken: null,
+        typeLiteral,
+        typeContext: inheritedTypeContext && (ch === '(' || ch === '[' || typeLiteral),
+        functionParameters,
+        parameterDefault: false,
+        objectLiteral,
+      });
       pendingFunctionReturnObjectType = false;
       pendingVariableTypeObject = false;
       index += 1;
@@ -368,6 +436,7 @@ function delimiterContextAt(source, offset) {
       continue;
     }
     if (ch === '=' && next === '>') {
+      rootTypeContext = false;
       index += 2;
       markToken('=>');
       previousSignificantEnd = index;
@@ -380,6 +449,17 @@ function delimiterContextAt(source, offset) {
       continue;
     }
     if (ch === ':') {
+      const current = delimiters.at(-1);
+      const startsTypeContext = rootTypeContext || typeAliasDepth >= 0
+        || current?.typeLiteral === true
+        || current?.typeContext === true
+        || current?.functionParameters === true && current?.parameterDefault !== true
+        || lastClosedFunctionParameters
+        || variableTypePending;
+      if (startsTypeContext) {
+        if (current) current.typeContext = true;
+        else rootTypeContext = true;
+      }
       pendingFunctionReturnObjectType = lastClosedFunctionParameters;
       pendingVariableTypeObject = variableTypePending
         && delimiters.length === variableDeclarationDepth;
@@ -388,6 +468,17 @@ function delimiterContextAt(source, offset) {
       pendingFunctionReturnObjectType = false;
       pendingVariableTypeObject = false;
     }
+    if (ch === ',' && delimiters.at(-1)?.functionParameters === true) {
+      delimiters.at(-1).parameterDefault = false;
+    }
+    if (ch === '=' && delimiters.at(-1)?.functionParameters === true) {
+      // A parameter annotation ends at its default initializer. Without this
+      // boundary, a runtime arrow/object initializer inherits the parameter's
+      // TypeScript context and a computed key such as `[key in runtime]` is
+      // mistaken for a mapped type member.
+      delimiters.at(-1).parameterDefault = true;
+      delimiters.at(-1).typeContext = false;
+    }
     if ((ch === '=' || ch === ';') && delimiters.length === variableDeclarationDepth) {
       variableDeclarationDepth = -1;
       variableNamePending = false;
@@ -395,6 +486,7 @@ function delimiterContextAt(source, offset) {
     }
     markToken(ch);
     index += 1;
+    if (ch === '=' || ch === ';') rootTypeContext = false;
     if (ch === ';' && delimiters.length === typeAliasDepth) {
       typeAliasDepth = -1;
       typeAliasHasRhsToken = false;
@@ -559,6 +651,11 @@ export function isTypeScriptIndexSignature(source, start, end) {
   return source[cursor] === ':';
 }
 
+/** Whether the mapped member is inside a verified TypeScript type literal. */
+export function mappedTypeContext(source, start) {
+  return delimiterContextAt(source, start).at(-1)?.typeLiteral === true;
+}
+
 /**
  * A mapped type member is written `[Key in Constraint]: Value` directly inside
  * a type literal. `in keyof T` is also an unambiguous type-only constraint when
@@ -573,7 +670,7 @@ export function isTypeScriptMappedTypeMember(source, start, end) {
   cursor = skipTrivia(source, cursor);
   if (source.slice(cursor, cursor + 2) !== 'in'
     || /[$_\u200c\u200d\p{ID_Continue}]/u.test(source[cursor + 2] || '')) return false;
-  return delimiterContextAt(source, start).at(-1)?.typeLiteral === true;
+  return mappedTypeContext(source, start);
 }
 
 /**
@@ -764,6 +861,9 @@ function scanTypeScriptExpression(source, offset, terminator) {
       afterMemberAccess = false;
       statementBoundary = false;
       index += 1;
+      if (!templateTerminator && terminator === ')' && controlParenStack.length === 0) {
+        return index;
+      }
       continue;
     }
     if (/\s/u.test(ch)) {

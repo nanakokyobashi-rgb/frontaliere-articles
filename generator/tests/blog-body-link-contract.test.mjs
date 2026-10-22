@@ -9,6 +9,7 @@ import {
   sanitizeArticleFaqMarkdown,
   sanitizeArticleMarkdownLinks,
 } from '../../scripts/lib/article-link-contract.mjs';
+import { findItalianNavLinkLabels } from '../../scripts/lib/nav-link-labels.mjs';
 import {
   BLOG_BODY_ROOTS,
   ROOT,
@@ -682,6 +683,40 @@ test('il gate conserva il confine delle template expression con tipi TypeScript 
     assert.equal(result.offenders[0].target, 'bare-target');
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('il gate riconosce mapped type nei parametri e nei return type senza trattarlo come chiave runtime', () => {
+  const fixtureRoot = mkdtempSync(path.join(tmpdir(), 'article-body-link-mapped-type-context-'));
+  const relative = `${BLOG_BODY_ROOTS[0]}/it/mapped-type-context.ts`;
+  const file = path.join(fixtureRoot, relative);
+  mkdirSync(path.dirname(file), { recursive: true });
+  writeFileSync(file, [
+    'type Alias = { [Key in keyof Source]: string };',
+    'function typed(input: { [Key in keyof Source]: string }): { [Key in keyof Source]: string } { return input; }',
+    'const arrow = (input: string): { [Key in keyof Source]: string } => input as never;',
+    'class Example { method(input: { [Key in keyof Source]: string }): { [Key in keyof Source]: string } { return input; } }',
+    "const body = { 'blog.article.fixture.body1': '[ok](https://example.com)' };",
+    '',
+  ].join('\n'), 'utf8');
+  try {
+    const result = scanBlogBodyLinks(fixtureRoot);
+    assert.deepEqual(result.errors, []);
+    assert.deepEqual(result.offenders, []);
+  } finally {
+    rmSync(fixtureRoot, { recursive: true, force: true });
+  }
+});
+
+test('i tre body del follow-up 3083 non reintroducono label nav italiane', () => {
+  const fixtures = [
+    ['content/blog-body/en/pizzautobus-varese-inclusione.ts', 'en'],
+    ['content/blog-body-ch/fr/premi-lamal-san-gallo-riduzione.ts', 'fr'],
+    ['content/blog-body-ch/fr/yumo-piattaforma-giovani-finanza.ts', 'fr'],
+  ];
+  for (const [relative, locale] of fixtures) {
+    const findings = findItalianNavLinkLabels(readFileSync(path.join(ROOT, relative), 'utf8'), locale);
+    assert.deepEqual(findings, [], relative);
   }
 });
 

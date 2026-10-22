@@ -462,6 +462,19 @@ describe('lettore TS condiviso', () => {
     assert.equal(tsStringMap.readTsStringLiteral("'prima\\\r\nseconda'", 0).value, 'primaseconda');
   });
 
+  test('riprende la mappa dopo i terminatori Unicode dei commenti di riga', () => {
+    const source = [
+      "// 'blog.article.comment.body1': 'fake',\u2028",
+      "'blog.article.demo.body1': 'u2028',// commento\u2029",
+      "'blog.article.demo.body2': 'u2029',",
+    ].join('');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.demo.body1', 'u2028'],
+      ['blog.article.demo.body2', 'u2029'],
+    ]);
+  });
+
   test('conta le barre prima di una interpolazione escaped', () => {
     const genuinelyInterpolated = "'blog.article.demo.body1': `literal \\\\${value}`,";
     assert.throws(
