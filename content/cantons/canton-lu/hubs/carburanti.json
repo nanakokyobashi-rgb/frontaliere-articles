@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T14:03:21.791Z",
-  "contentHash": "9ca6d7739b961fee41cf368d79e35634ac66611d11e9b13ca42ff003ec48b551",
+  "updatedAt": "2026-10-22T08:03:53.366Z",
+  "contentHash": "00057a4a771b3e41dbfc4cd83edd28a2e19af1704446c2b8b3cc69ff24cf3402",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-20T12:04:15.773Z",
+      "updatedAt": "2026-10-21T12:19:56.872Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-20T12:04:15.773Z"
+          "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Lucerna: il Governo risponde all'iniziativa SP",
+          "url": "/articoli-lucerna/lucerna-governo-risposta-sp/",
+          "excerpt": "Nel 2024 solo il 15% delle abitazioni in affitto nel Canton Lucerna era a prezzi accessibili.",
+          "date": "2026-10-22T07:56:30.871Z"
+        },
         {
           "title": "Lucerna: interessi fiscali 2027 restano allo 0%",
           "url": "/articoli-lucerna/lucerna-tassi-fiscali-zero-2027/",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/lucerna-finanze-sessione-ottobre/",
           "excerpt": "Il Consiglio cantonale di Lucerna ha discusso oltre cinque ore l'AFP 2027–2030; la proposta porta l'aliquota 2027 da 1,45 a 1,40 unità, con voto il 20 ottobre.",
           "date": "2026-10-20T00:56:42.893Z"
-        },
-        {
-          "title": "Lucerna: Parlamento conferma il BIP per il budget 2027",
-          "url": "/articoli-lucerna/lucerna-bilancio-budget-2027/",
-          "excerpt": "Il Consiglio cantonale di Lucerna approva il riferimento al BIP per la crescita delle spese.",
-          "date": "2026-10-20T00:16:43.132Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T14:03:21.791Z"
+      "updatedAt": "2026-10-22T08:03:53.366Z"
     },
     "en": {
       "canton": "LU",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-20T12:04:15.773Z"
+          "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Lucerne: the Government responds to the SP initiative",
+          "url": "/en/lucerne-articles/lucerne-government-sp-response/",
+          "excerpt": "In 2024, only 15% of rental housing in the Canton of Lucerne was affordable.",
+          "date": "2026-10-22T07:56:30.871Z"
+        },
         {
           "title": "Lucerne: tax interest 2027 remains at 0%",
           "url": "/en/lucerne-articles/lucerne-tax-interest-zero-2027/",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/lucerne-cantonal-finances-october/",
           "excerpt": "Lucerne’s Cantonal Council discussed the AFP 2027–2030 for more than five hours; the proposal sets the 2027 tax rate at 1,40 units instead of 1,45, with a vote on October 20.",
           "date": "2026-10-20T00:56:42.893Z"
-        },
-        {
-          "title": "Lucerne: Parliament confirms BIP for the 2027 budget",
-          "url": "/en/lucerne-articles/lucerne-budget-2027-plan/",
-          "excerpt": "The Cantonal Council of Lucerne approves the use of GDP as a reference for expenditure growth.",
-          "date": "2026-10-20T00:16:43.132Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T14:03:21.791Z"
+      "updatedAt": "2026-10-22T08:03:53.366Z"
     },
     "de": {
       "canton": "LU",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-20T12:04:15.773Z"
+          "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Luzern: Die Regierung antwortet auf die SP-Initiative",
+          "url": "/de/luzern-artikel/luzern-regierung-sp-antwort/",
+          "excerpt": "Im Jahr 2024 waren im Kanton Luzern nur 15% der Mietwohnungen bezahlbar.",
+          "date": "2026-10-22T07:56:30.871Z"
+        },
         {
           "title": "Luzern: Steuerzinsen 2027 bleiben bei 0%",
           "url": "/de/luzern-artikel/luzern-steuerzinsen-null-2027/",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/luzerner-kantonsfinanzen-oktober/",
           "excerpt": "Der Luzerner Kantonsrat hat über fünf Stunden über den AFP 2027–2030 diskutiert; der Vorschlag sieht vor, den Steuerfuss 2027 von 1,45 auf 1,40 Einheiten zu senken; die Abstimmung findet am 20.",
           "date": "2026-10-20T00:56:42.893Z"
-        },
-        {
-          "title": "Luzern: Parlament bestätigt das BIP als Referenz für das Budget 2027",
-          "url": "/de/luzern-artikel/luzern-budget-2027-planung/",
-          "excerpt": "Der Luzerner Kantonsrat genehmigt die Bezugnahme auf das BIP für das Ausgabenwachstum.",
-          "date": "2026-10-20T00:16:43.132Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T14:03:21.791Z"
+      "updatedAt": "2026-10-22T08:03:53.366Z"
     },
     "fr": {
       "canton": "LU",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-20T12:04:15.773Z"
+          "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Lucerne : le gouvernement répond à l’initiative SP",
+          "url": "/fr/articles-lucerne/lucerne-gouvernement-reponse-sp/",
+          "excerpt": "En 2024, seuls 15 % des logements locatifs du canton de Lucerne étaient abordables.",
+          "date": "2026-10-22T07:56:30.871Z"
+        },
         {
           "title": "Lucerne : les intérêts fiscaux 2027 restent à 0%",
           "url": "/fr/articles-lucerne/lucerne-interets-fiscaux-zero-2027/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/finances-cantonales-lucerne-octobre/",
           "excerpt": "Le Conseil cantonal de Lucerne a débattu de l'AFP 2027–2030 pendant plus de cinq heures ; la proposition fait passer le taux 2027 de 1,45 à 1,40 unité, avec un vote le 20 octobre.",
           "date": "2026-10-20T00:56:42.893Z"
-        },
-        {
-          "title": "Lucerne : le Parlement confirme le PIB pour le budget 2027",
-          "url": "/fr/articles-lucerne/lucerne-budget-2027-planification/",
-          "excerpt": "Le Conseil cantonal de Lucerne approuve la référence au PIB pour la croissance des dépenses.",
-          "date": "2026-10-20T00:16:43.132Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T14:03:21.791Z"
+      "updatedAt": "2026-10-22T08:03:53.366Z"
     }
   }
 }
