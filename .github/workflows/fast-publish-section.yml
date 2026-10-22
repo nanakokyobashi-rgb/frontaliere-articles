@@ -229,10 +229,13 @@ jobs:
           # a source commit: resolve the live dispatch ref. workflow_run,
           # bounded replays, and bootstrap keep their exact source revision.
           ref: ${{ github.event.workflow_run.head_sha || inputs.source_commit || (github.event_name == 'workflow_dispatch' && inputs.bootstrap != true && github.ref) || github.sha }}
-          fetch-depth: 2
+          # Il preflight dei body confronta il registro corrente con l'high-water
+          # della revisione precedente. Un checkout shallow rende quella storia
+          # non verificabile e blocca ogni replay prima del render.
+          fetch-depth: 0
           # The resolve gate reads the source corpus and publisher code, but
           # never generated `data/`, `dist/`, or `public/`. Keep those large
-          # trees out of the shallow fetch so an intermittent GitHub transfer
+          # trees out of the sparse checkout so an intermittent GitHub transfer
           # cannot consume the whole resolve budget before the gate starts.
           filter: blob:none
           sparse-checkout: |
@@ -830,6 +833,16 @@ jobs:
           if [ "$(printf '%s' "$matrix" | jq 'any(.[]; .bootstrap == true)')" = "true" ]; then
             bootstrap=true
           fi
+          # Un push puo' vincere la gara con publish-api prima che le pagine
+          # siano su R2. Il render staged resta fail-closed sugli errori reali,
+          # ma se la matrice ha completato con successo il replay API e' parte
+          # obbligatoria del percorso normale, non un'opzione riservata al
+          # bootstrap. Cosi' il timeout bounded dell'API non lascia uno staged
+          # parziale senza redispatch.
+          if [ "$EVENT_NAME" = 'push' ] && [ "$any" = 'true' ] && [ "$dry" != 'true' ]; then
+            replay_api_after_publish=true
+            allow_deferred_live_release=true
+          fi
           {
             echo "matrix=$matrix"
             echo "any=$any"
@@ -944,8 +957,9 @@ jobs:
     needs: resolve
     if: needs.resolve.outputs.any == 'true'
     runs-on: ubuntu-latest
-    # Budget: fino a 55 min per il gate bootstrap, 3 checkout main x 2 tentativi
-    # di render da 45 min, più margine operativo; il limite del job resta 6h.
+    # Il job conserva il budget esteso per i retry del render; il gate bootstrap
+    # del publisher API ha invece una finestra bounded breve e lascia il recupero
+    # al replay gia' previsto quando il fast-publish e' ancora in coda.
     timeout-minutes: 360
     strategy:
       fail-fast: false
@@ -1517,10 +1531,10 @@ jobs:
           jq -r '"sezione \(.section) (\(.declaredStatus // "?")): pagine \(.counts | tostring), hub mancanti \(.hubsMissing | tostring), difetti \(.defects | length), pubblicato \(.published | tostring)"' "$s"
 
   # A push can start the API publisher before the section runner has uploaded
-  # its HTML. After a successful bootstrap or explicitly armed staged
-  # backfill, replay the API so an earlier fail-closed readiness check cannot
-  # strand the registry on the previous release. API-triggered replays are
-  # excluded to prevent a workflow_run loop.
+  # its HTML. After a successful staged section publish, every non-dry push
+  # arms the API replay so an earlier fail-closed readiness check cannot strand
+  # the registry on the previous release. API-triggered replays are excluded
+  # to prevent a workflow_run loop; genuine render errors still block replay.
   replay-api-after-staged-release:
     needs: [resolve, publish]
     if: >-
