@@ -405,12 +405,13 @@ export function requiredPageKeys(section, { sitemapXml, previousSitemapXml = nul
 
 /**
  * Quanto il publisher puo' attendere il bootstrap e ogni quanto ritenta.
- * La finestra e' intenzionalmente bounded: il fast-publish puo' essere ancora
- * in coda o venire riallineato a una HEAD piu' nuova, ma il replay gia' previsto
- * riprova la release dopo che le pagine sono state caricate. Un'attesa lunga qui
- * trattiene il lock di concurrency di publish-api e accoda/cancella le run.
+ * La finestra e' intenzionalmente bounded al massimo documentato del producer:
+ * fast-publish-section puo' impiegare fino a 100 minuti per renderizzare e
+ * caricare una sezione bootstrap. Una finestra piu' corta del producer fa
+ * fallire publish-api mentre il lock protegge ancora pagine in costruzione;
+ * il publisher resta comunque sotto il proprio timeout di 180 minuti.
  */
-export const BOOTSTRAP_WAIT_MS = 10 * 60 * 1000;
+export const BOOTSTRAP_WAIT_MS = 100 * 60 * 1000;
 export const BOOTSTRAP_RETRY_MS = 20 * 1000;
 /** Un tombstone transitorio non deve lasciare un lease attivo fino al TTL. */
 export const BOOTSTRAP_RELEASE_ATTEMPTS = 3;
