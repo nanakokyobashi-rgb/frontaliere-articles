@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "fdb75e85c52c88dbc7e83e26471578951f9d74b608bf85b31bbf63b9532253cc",
+  "updatedAt": "2026-10-22T06:44:03.971Z",
+  "contentHash": "392b2fded3ec8423c86ab906cc409d6ac096a004c4ed865b60cb10c14baeebd8",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -71,11 +71,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-21T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-22T16:30:00.000Z"
             },
             {
@@ -86,6 +81,11 @@
             {
               "label": "Amavita Pré Guillaume",
               "detail": "Delémont, Delémont",
+              "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Benu Porrentruy",
+              "detail": "Porrentruy, Ajoie",
               "date": "2026-10-24T06:00:00.000Z"
             }
           ],
@@ -159,7 +159,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T06:44:03.971Z"
     },
     "en": {
       "canton": "JU",
@@ -208,11 +208,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-21T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-22T16:30:00.000Z"
             },
             {
@@ -223,6 +218,11 @@
             {
               "label": "Amavita Pré Guillaume",
               "detail": "Delémont, Delémont",
+              "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Benu Porrentruy",
+              "detail": "Porrentruy, Ajoie",
               "date": "2026-10-24T06:00:00.000Z"
             }
           ],
@@ -292,7 +292,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T06:44:03.971Z"
     },
     "de": {
       "canton": "JU",
@@ -341,11 +341,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-21T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-22T16:30:00.000Z"
             },
             {
@@ -356,6 +351,11 @@
             {
               "label": "Amavita Pré Guillaume",
               "detail": "Delémont, Delémont",
+              "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Benu Porrentruy",
+              "detail": "Porrentruy, Ajoie",
               "date": "2026-10-24T06:00:00.000Z"
             }
           ],
@@ -425,7 +425,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T06:44:03.971Z"
     },
     "fr": {
       "canton": "JU",
@@ -474,11 +474,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-21T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-22T16:30:00.000Z"
             },
             {
@@ -489,6 +484,11 @@
             {
               "label": "Amavita Pré Guillaume",
               "detail": "Delémont, Delémont",
+              "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Benu Porrentruy",
+              "detail": "Porrentruy, Ajoie",
               "date": "2026-10-24T06:00:00.000Z"
             }
           ],
@@ -554,7 +554,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T06:44:03.971Z"
     }
   }
 }

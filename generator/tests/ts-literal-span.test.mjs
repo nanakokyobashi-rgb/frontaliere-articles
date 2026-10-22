@@ -158,6 +158,61 @@ test('matchingDelimiter va fail-closed se una regex contiene una seconda slash',
   assert.throws(() => findIdListLiteralSpan(src, 'IDS'), /non si chiude/);
 });
 
+test('matchingDelimiter riconosce i prefissi regex aggiunti al lexer', () => {
+  for (const keyword of ['break', 'continue', 'debugger', 'default', 'new']) {
+    const src = `{ ${keyword} /}/u, value: 'resta' }`;
+    assert.equal(
+      matchingDelimiter(src, 0),
+      src.lastIndexOf('}'),
+      `${keyword}: la graffa nel regex non deve chiudere l oggetto`,
+    );
+  }
+});
+
+test('matchingDelimiter conserva la transizione divisione → regex', () => {
+  const src = "{ value: a / /[}]/u, after: 'resta' }";
+  assert.equal(matchingDelimiter(src, 0), src.lastIndexOf('}'));
+});
+
+test('matchingDelimiter non tratta le parole membro come prefissi regex', () => {
+  for (const keyword of ['break', 'continue', 'debugger', 'default', 'new']) {
+    for (const access of [
+      `obj.${keyword}`,
+      `obj?.${keyword}`,
+      `obj. /* commento */ ${keyword}`,
+      `obj?. /* commento */ ${keyword}`,
+      `obj. /* marker /* */ ${keyword}`,
+      `obj?. /* marker /* */ ${keyword}`,
+      `obj. // commento\n${keyword}`,
+      `obj. // commento\u2028${keyword}`,
+      `obj. // commento\u2029${keyword}`,
+    ]) {
+      const src = `{ value: ${access} / 2, after: 'resta' }`;
+      assert.equal(
+        matchingDelimiter(src, 0),
+        src.lastIndexOf('}'),
+        `${access}: la divisione dopo un accesso membro non deve aprire una regex`,
+      );
+    }
+  }
+});
+
+test('matchingDelimiter conserva il prefisso regex dopo commenti complessi', () => {
+  for (const keyword of ['break', 'continue', 'debugger', 'default', 'new']) {
+    const source = `{ value: ${keyword} /* marker /* interno */ /}/u, after: 'resta' }`;
+    assert.equal(
+      matchingDelimiter(source, 0),
+      source.lastIndexOf('}'),
+      `${keyword}: la graffa nel regex non deve chiudere l oggetto`,
+    );
+  }
+});
+
+test('matchingDelimiter ignora marker di commento dentro una regex prima di un accesso membro', () => {
+  const src = "{ value: /[/*//]/.default / 2, after: 'resta' }";
+  assert.equal(matchingDelimiter(src, 0), src.lastIndexOf('}'));
+});
+
 test('commenti e stringhe che imitano dichiarazioni non contano come duplicati', () => {
   const src = [
     '// export const IDS: string[] = [\'commento\'];',
