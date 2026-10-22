@@ -499,9 +499,10 @@ export function emitArticleBodyApi({
           // additive quarantine counter.
           missingCount += 1;
           quarantinedCount += 1;
+          missingCount += 1;
           // The v1 HTTP reader only understands available/missing. Keep this
-          // entry missing so no legacy consumer can mistake an unknown status
-          // for a payload it may fetch; the reason is carried by the additive
+          // entry missing and include it in missingCount so legacy consumers
+          // see the complete unavailable set; the reason is carried by the additive
           // index.quarantined detail and the job summary.
           entries[id] = { status: 'missing' };
           console.warn(`::warning::article body quarantined: ${relativeSource} — ${reason}`);

@@ -579,6 +579,8 @@ test('un body non parsabile viene messo in quarantena, escluso dall output e ri-
 
   const index = JSON.parse(fs.readFileSync(path.join(outDir, 'bodies/frontaliere/it/index.json'), 'utf8'));
   assert.equal(index.quarantinedCount, 1);
+  assert.equal(index.missingCount, 1, 'la quarantena resta inclusa nel conteggio v1 dei payload assenti');
+  assert.equal(emitted.capability.sections.frontaliere.locales.it.missing, 1);
   assert.equal(index.entries[articleId].status, 'missing', 'il contratto v1 espone la quarantena come payload assente');
   assert.deepEqual(index.quarantined, [{ id: articleId, reason: emitted.quarantined[0].reason }]);
   assert.equal(fs.existsSync(path.join(outDir, `bodies/frontaliere/it/${articleId}.json`)), false);
