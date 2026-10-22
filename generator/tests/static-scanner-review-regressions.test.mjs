@@ -42,14 +42,21 @@ test('seo-entry riconosce tutti i terminatori di riga nei commenti lineari', () 
       ['live'],
       JSON.stringify(lineTerminator),
     );
+
+    const entrySource = `'blog-live': { value: 1, // voce ignorata${lineTerminator}}`;
+    const [match] = findAllSeoEntryMatches(entrySource, `seo-entry-${JSON.stringify(lineTerminator)}`);
+    assert.ok(match, JSON.stringify(lineTerminator));
+    assert.equal(match.closeIdx, entrySource.lastIndexOf('}'), JSON.stringify(lineTerminator));
   }
 });
 
 test('seo-entry tratta il bang dopo ASI come prefisso regex', () => {
-  const source = "'blog-live': { value!\n!/foo}/\n}";
-  const [match] = findAllSeoEntryMatches(source, 'seo-asi');
-  assert.ok(match);
-  assert.equal(match.closeIdx, source.lastIndexOf('}'));
+  for (const lineTerminator of ['\n', '\r', '\u2028', '\u2029']) {
+    const source = `'blog-live': { value!${lineTerminator}!/foo}/${lineTerminator}}`;
+    const [match] = findAllSeoEntryMatches(source, `seo-asi-${JSON.stringify(lineTerminator)}`);
+    assert.ok(match, JSON.stringify(lineTerminator));
+    assert.equal(match.closeIdx, source.lastIndexOf('}'), JSON.stringify(lineTerminator));
+  }
 });
 
 test('seo-entry mantiene il corpo block delle arrow nello stack dei delimitatori', () => {
