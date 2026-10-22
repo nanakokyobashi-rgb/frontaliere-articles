@@ -42,6 +42,9 @@ const blogMetaCantonZgIt: Record<string, string> = {
     'blog.article.adeguamento-piano-direttore-zone-bianche-2026.title': 'Adeguamento piano direttore 26/1: «zone bianche» per l\'edilizia a Zugo',
     'blog.article.adeguamento-piano-direttore-zone-bianche-2026.excerpt': 'Pubblicato l\'adeguamento 26/1 del piano direttore cantonale: «zone bianche» per l\'edilizia abitativa e strategia di stabilizzazione.',
     'blog.article.adeguamento-piano-direttore-zone-bianche-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.revisione-pbg-zugo-2026.title': 'Zugo: revisione della legge edilizia dal 17 settembre 2026',
+    'blog.article.revisione-pbg-zugo-2026.excerpt': 'Il Canton Zugo avvia la consultazione sulla revisione del PBG: nuove regole per alloggi a prezzo contenuto, zone bianche e semplificazioni procedurali.',
+    'blog.article.revisione-pbg-zugo-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZgIt;

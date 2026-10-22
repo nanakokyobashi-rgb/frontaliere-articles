@@ -42,6 +42,9 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.adeguamento-piano-direttore-zone-bianche-2026.title': 'Amendment to structure plan 26/1: “white zones” for construction in Zug',
     'blog.article.adeguamento-piano-direttore-zone-bianche-2026.excerpt': 'Published: adjustment 26/1 to the cantonal structure plan: “white zones” for residential construction and a stabilization strategy.',
     'blog.article.adeguamento-piano-direttore-zone-bianche-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.revisione-pbg-zugo-2026.title': 'Zug: revision of the building law from September 17, 2026',
+    'blog.article.revisione-pbg-zugo-2026.excerpt': 'The Canton of Zug launches consultation on the revision of the PBG: new rules for affordable housing, white zones and procedural simplifications.',
+    'blog.article.revisione-pbg-zugo-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZgEn;

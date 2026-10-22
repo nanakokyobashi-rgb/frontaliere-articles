@@ -42,6 +42,9 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.adeguamento-piano-direttore-zone-bianche-2026.title': '«Zones blanches» pour construire à Zoug Plan 26/1 adapté',
     'blog.article.adeguamento-piano-direttore-zone-bianche-2026.excerpt': 'L’adaptation 26/1 du plan directeur cantonal est publiée : des « zones blanches » pour la construction de logements et une stratégie de stabilisation.',
     'blog.article.adeguamento-piano-direttore-zone-bianche-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.revisione-pbg-zugo-2026.title': 'Zoug : révision de la loi sur la construction à partir du 17 septembre 2026',
+    'blog.article.revisione-pbg-zugo-2026.excerpt': 'Le canton de Zoug lance la consultation sur la révision du PBG : nouvelles règles pour les logements à prix modéré, les zones blanches et les simplifications procédurales.',
+    'blog.article.revisione-pbg-zugo-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZgFr;

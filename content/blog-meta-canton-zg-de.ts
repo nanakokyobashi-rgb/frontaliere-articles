@@ -42,6 +42,9 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.adeguamento-piano-direttore-zone-bianche-2026.title': 'Anpassung des Richtplans 26/1: «weiße Zonen» für das Bauen in Zug',
     'blog.article.adeguamento-piano-direttore-zone-bianche-2026.excerpt': 'Die Anpassung 26/1 des kantonalen Richtplans wurde veröffentlicht: «weiße Zonen» für den Wohnungsbau und eine Stabilisierungsstrategie.',
     'blog.article.adeguamento-piano-direttore-zone-bianche-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.revisione-pbg-zugo-2026.title': 'Zug: Revision des Baugesetzes ab dem 17. September 2026',
+    'blog.article.revisione-pbg-zugo-2026.excerpt': 'Der Kanton Zug eröffnet die Vernehmlassung zur Revision des PBG: neue Regeln für preisgünstigen Wohnraum, weisse Zonen und Verfahrensvereinfachungen.',
+    'blog.article.revisione-pbg-zugo-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZgDe;
