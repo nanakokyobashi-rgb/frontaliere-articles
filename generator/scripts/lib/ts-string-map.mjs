@@ -22,6 +22,10 @@ function hexCodePoint(raw) {
   return value <= 0x10FFFF ? value : null;
 }
 
+function isLineTerminator(character) {
+  return character === '\n' || character === '\r' || character === '\u2028' || character === '\u2029';
+}
+
 /** Decodifica un letterale TS statico che comincia a `i` (apice singolo, doppio o backtick). */
 export function readTsStringLiteral(src, i) {
   const quote = src[i];
@@ -186,7 +190,7 @@ function looksLikeGenericStart(src, offset, statementStart = false) {
     }
     if (character === '/' && src[cursor + 1] === '/') {
       cursor += 2;
-      while (cursor < src.length && src[cursor] !== '\n' && src[cursor] !== '\r') cursor += 1;
+      while (cursor < src.length && !isLineTerminator(src[cursor])) cursor += 1;
       continue;
     }
     if (character === '/' && src[cursor + 1] === '*') {
@@ -251,7 +255,7 @@ function skipParserTrivia(src, start) {
     }
     if (src.startsWith('//', cursor)) {
       cursor += 2;
-      while (cursor < src.length && src[cursor] !== '\n' && src[cursor] !== '\r') cursor += 1;
+      while (cursor < src.length && !isLineTerminator(src[cursor])) cursor += 1;
       continue;
     }
     if (src.startsWith('/*', cursor)) {
@@ -305,7 +309,7 @@ function staticSourceTokens(src) {
     }
     if (c === '/' && next === '/') {
       i += 2;
-      while (i < src.length && src[i] !== '\n' && src[i] !== '\r') i += 1;
+      while (i < src.length && !isLineTerminator(src[i])) i += 1;
       continue;
     }
     if (c === '/' && next === '*') {

@@ -4,30 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://www.be.ch/de/start.html?newsid=0e523c57-f03b-4650-8f67-68125ac0ae47": {
-      "section": "canton-be",
-      "ts": 1792438515092
-    },
-    "canton-be::https://ajour.ch/story/702236/lintelligence-artificielle-une-solution-pour-lemploi-cibl-des-pesticides-selon-agroscope": {
-      "section": "canton-be",
-      "ts": 1792438525362
-    },
-    "canton-be::https://ajour.ch/story/702209/sbbmanager-kaufte-sich-lamborghini-mit-steuergeldern-so-lief-der-millionenbetrug-ab": {
-      "section": "canton-be",
-      "ts": 1792438531557
-    },
-    "canton-be::https://ajour.ch/story/662005/die-besten-immobilienspezialisten-aus-der-region-auf-einen-blick": {
-      "section": "canton-be",
-      "ts": 1792438536788
-    },
-    "canton-be::https://www.nau.ch/news/schweiz/ausgerechnet-jetzt-sbb-wirbt-fur-paris-und-erntet-spott-67190274": {
-      "section": "canton-be",
-      "ts": 1792438548768
-    },
-    "canton-be::https://www.lejdj.ch/articles/le-canton-de-berne-offre-plusieurs-bouffees-doxygene-aux-proches-aidants-104587": {
-      "section": "canton-be",
-      "ts": 1792439218729
-    },
     "canton-be::https://ajour.ch/story/702540/kanton-die-frist-f%c3%bcr-die-steuererkl%c3%a4rung-verl%c3%a4ngert-sich-automatisch": {
       "section": "canton-be",
       "ts": 1792504733958
@@ -183,6 +159,18 @@
     "canton-be::https://ajour.ch/story/702983/tous-les-hpitaux-ne-bnficient-pas-dune-aide-aussi-leve-affirme-le-directeur-de-la-sant": {
       "section": "canton-be",
       "ts": 1792596442744
+    },
+    "canton-be::https://www.lejdj.ch/articles/droit-de-vote-des-etrangers-une-nouvelle-tentative-dans-le-canton-de-berne-104704": {
+      "section": "canton-be",
+      "ts": 1792645137744
+    },
+    "canton-be::https://ajour.ch/story/702892/wie-kamen-die-55-millionen-f%c3%bcr-das-spitalareal-zustande": {
+      "section": "canton-be",
+      "ts": 1792645273264
+    },
+    "canton-be::https://www.nau.ch/politik/bundeshaus/nationalratskommission-sendet-erste-signale-fur-bilaterale-iii-aus-67191376": {
+      "section": "canton-be",
+      "ts": 1792645517872
     }
   }
 }
