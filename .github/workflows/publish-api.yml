@@ -442,6 +442,7 @@ jobs:
               engine/shared/articleArchiveConfig.mjs
               engine/shared/seo-entry.mjs
               engine/shared/ts-literals.mjs
+              engine/shared/tsStringEscapes.ts
               generator/data/canton-url-slugs.json
               generator/data/canton-sections.json
               generator/scripts/lib/corpus-paths.mjs

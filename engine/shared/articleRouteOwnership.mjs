@@ -503,7 +503,7 @@ export function scanRedirectSource(source) {
       const templateEnd = skipTemplateLiteral(text, index);
       if (templateEnd === null) {
         unsupported.push(keyLiteral.value);
-        break;
+        throw new Error('Unterminated template literal in legacy redirect source');
       }
       dynamicCount += 1;
       index = templateEnd;

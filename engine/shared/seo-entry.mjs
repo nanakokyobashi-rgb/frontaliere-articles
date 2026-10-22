@@ -9,6 +9,16 @@
 
 const CLOSING = { '{': '}', '[': ']', '(': ')' };
 const escapeRegex = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const LINE_TERMINATORS = '\n\r\u2028\u2029';
+const isLineTerminator = character => LINE_TERMINATORS.includes(character);
+
+function lineTerminatorIndex(source, offset) {
+  for (let index = offset; index < source.length; index += 1) {
+    if (isLineTerminator(source[index])) return index;
+  }
+  return -1;
+}
+
 const REGEX_PREFIX_KEYWORDS = new Set([
   'await', 'break', 'case', 'continue', 'debugger', 'default', 'delete', 'do', 'else', 'in',
   'instanceof', 'new', 'of', 'return', 'throw', 'typeof', 'void', 'yield',
@@ -21,44 +31,6 @@ const BLOCK_BRACE_KEYWORDS = new Set([
   'catch', 'class', 'do', 'else', 'enum', 'finally', 'function', 'interface', 'module', 'namespace',
   'static', 'try',
 ]);
-const ASI_EXPRESSION_ENDS = new Set([
-  'close-block', 'close-object', 'close-paren', 'close-bracket', 'identifier', 'literal', 'postfix',
-]);
-
-function isLineTerminator(character) {
-  return character === '\n' || character === '\r' || character === '\u2028' || character === '\u2029';
-}
-
-function lineTerminatorIndex(source, start) {
-  for (let index = start; index < source.length; index += 1) {
-    if (isLineTerminator(source[index])) return index;
-  }
-  return -1;
-}
-
-function nextNonTriviaIndex(source, start) {
-  let index = start;
-  while (index < source.length) {
-    if (/\s/u.test(source[index])) {
-      index += 1;
-      continue;
-    }
-    if (source.startsWith('//', index)) {
-      const end = lineTerminatorIndex(source, index + 2);
-      if (end < 0) return source.length;
-      index = end + 1;
-      continue;
-    }
-    if (source.startsWith('/*', index)) {
-      const end = source.indexOf('*/', index + 2);
-      if (end < 0) return source.length;
-      index = end + 2;
-      continue;
-    }
-    break;
-  }
-  return index;
-}
 
 /**
  * Find the closing delimiter for the one at `openIdx`, ignoring strings,
@@ -74,10 +46,22 @@ function matchingDelimiter(src, openIdx) {
   let lastSignificant = null;
   let lastIdentifier = null;
   let statementStart = true;
+  let lineBreakSinceToken = false;
   let caseLabelPending = false;
+  let lastClosedParenControl = null;
   const parenContexts = [];
   const bracketContexts = [];
   const braceContexts = [];
+  const statementEndingTokens = new Set([
+    'identifier', 'literal', 'postfix', 'close-paren', 'close-bracket', 'close-object', 'close-block',
+  ]);
+  const recordLineBreak = () => {
+    lineBreakSinceToken = true;
+    if (parenContexts.length === 0 && bracketContexts.length === 0
+      && statementEndingTokens.has(lastSignificant)) {
+      statementStart = true;
+    }
+  };
 
   const skipRegex = (start) => {
     let inClass = false;
@@ -106,26 +90,31 @@ function matchingDelimiter(src, openIdx) {
       continue;
     }
     if (ch === '/' && src[i + 1] === '/') {
-      const nl = lineTerminatorIndex(src, i);
-      if (nl === -1) return -1;
-      statementStart = caseLabelPending || ASI_EXPRESSION_ENDS.has(lastSignificant);
-      if (statementStart) canStartRegex = true;
-      i = nl;
+      const lineEnd = lineTerminatorIndex(src, i + 2);
+      if (lineEnd === -1) return -1;
+      recordLineBreak();
+      i = lineEnd;
       continue;
     }
     if (ch === '/' && src[i + 1] === '*') {
       const end = src.indexOf('*/', i + 2);
       if (end === -1) return -1;
+      if (/\n|\r|\u2028|\u2029/u.test(src.slice(i, end + 2))) {
+        recordLineBreak();
+      }
       i = end + 1;
       continue;
     }
     if (/\s/.test(ch)) {
       if (isLineTerminator(ch)) {
-        statementStart = caseLabelPending || ASI_EXPRESSION_ENDS.has(lastSignificant);
-        if (statementStart) canStartRegex = true;
+        recordLineBreak();
       }
       continue;
     }
+    const lineBreakBeforeToken = lineBreakSinceToken;
+    lineBreakSinceToken = false;
+    const controlKeywordBeforeToken = lastSignificant === 'close-paren' ? lastClosedParenControl : null;
+    lastClosedParenControl = null;
     if (ch === '`') {
       const end = templateEnd(src, i);
       if (end === -1) return -1;
@@ -176,11 +165,12 @@ function matchingDelimiter(src, openIdx) {
       while (/[A-Za-z0-9_$]/.test(src[end] || '')) end += 1;
       const word = src.slice(i, end);
       const member = lastSignificant === 'dot' || lastSignificant === 'private-prefix';
+      const identifierAtStatementStart = statementStart;
       canStartRegex = !member && REGEX_PREFIX_KEYWORDS.has(word);
-      lastIdentifier = { value: word, member };
+      lastIdentifier = { value: word, member, statementStart: identifierAtStatementStart };
       lastSignificant = 'identifier';
-      const nextToken = nextNonTriviaIndex(src, end);
-      if (!member && (word === 'case' || word === 'default') && src[nextToken] !== ':') {
+      if (!member && identifierAtStatementStart && braceContexts.some(context => context.isSwitch)
+        && (word === 'case' || word === 'default')) {
         caseLabelPending = true;
       }
       statementStart = false;
@@ -210,14 +200,20 @@ function matchingDelimiter(src, openIdx) {
       statementStart = false;
       continue;
     }
-    if (ch === '!' && !canStartRegex) {
-      canStartRegex = false;
-      lastSignificant = 'postfix';
+    if (ch === '!' && src[i + 1] !== '=') {
+      const postfix = !lineBreakBeforeToken && !canStartRegex;
+      if (postfix) {
+        canStartRegex = false;
+        lastSignificant = 'postfix';
+      } else {
+        canStartRegex = true;
+        lastSignificant = 'punctuation';
+      }
       lastIdentifier = null;
       statementStart = false;
       continue;
     }
-    if (src.startsWith('=>', i)) {
+    if (ch === '=' && src[i + 1] === '>') {
       i += 1;
       canStartRegex = true;
       lastSignificant = 'arrow';
@@ -227,10 +223,14 @@ function matchingDelimiter(src, openIdx) {
     }
     if (ch === '(') {
       const isTarget = open === '(' && i === openIdx;
+      const controlKeyword = lastIdentifier && !lastIdentifier.member
+        && CONTROL_PAREN_KEYWORDS.has(lastIdentifier.value)
+        ? lastIdentifier.value
+        : null;
       parenContexts.push({
         isTarget,
-        control: Boolean(lastIdentifier && !lastIdentifier.member
-          && CONTROL_PAREN_KEYWORDS.has(lastIdentifier.value)),
+        control: controlKeyword !== null,
+        controlKeyword,
       });
       if (isTarget) depth += 1;
       canStartRegex = true;
@@ -241,6 +241,7 @@ function matchingDelimiter(src, openIdx) {
     }
     if (ch === ')') {
       const context = parenContexts.pop();
+      lastClosedParenControl = context?.controlKeyword ?? null;
       if (context?.isTarget) {
         depth -= 1;
         if (depth === 0) return i;
@@ -282,10 +283,15 @@ function matchingDelimiter(src, openIdx) {
         || lastSignificant === 'close-block'
         || statementStart
         || (lastSignificant === 'identifier' && lastIdentifier
+          && lastIdentifier.statementStart
           && !lastIdentifier.member && BLOCK_BRACE_KEYWORDS.has(lastIdentifier.value))
         || caseLabelPending
       );
-      braceContexts.push({ isTarget, isBlock: Boolean(isBlock) });
+      braceContexts.push({
+        isTarget,
+        isBlock: Boolean(isBlock),
+        isSwitch: Boolean(isBlock && controlKeywordBeforeToken === 'switch'),
+      });
       if (isTarget) depth += 1;
       canStartRegex = true;
       lastSignificant = isBlock ? 'open-block' : 'open-object';
@@ -312,7 +318,6 @@ function matchingDelimiter(src, openIdx) {
       lastSignificant = 'colon';
       lastIdentifier = null;
       if (caseLabelPending) statementStart = true;
-      caseLabelPending = false;
       continue;
     }
     if (ch === ';') {
@@ -323,7 +328,7 @@ function matchingDelimiter(src, openIdx) {
       continue;
     }
     canStartRegex = REGEX_PREFIX_PUNCTUATION.has(ch);
-    lastSignificant = ch;
+    lastSignificant = 'punctuation';
     lastIdentifier = null;
     statementStart = false;
   }
@@ -393,7 +398,7 @@ function isRealSeoKey(src, start, end) {
   }
   if (!/^[\t ]*$/.test(src.slice(lineStart, start))) return false;
   const key = src.slice(start + 1, end);
-  return /^blog-[^'\\\r\n]+$/.test(key) && /^\s*:\s*\{/.test(src.slice(end + 1));
+  return /^blog-[^'\\\r\n\u2028\u2029]+$/u.test(key) && /^\s*:\s*\{/.test(src.slice(end + 1));
 }
 
 /**
@@ -495,8 +500,8 @@ export function removeSeoEntriesFromSource(source, id, file = 'SEO source') {
     const { lineStart, closeIdx } = matches[i];
     let end = closeIdx + 1;
     if (src[end] === ',') end += 1;
-    if (src[end] === '\r') end += 1;
-    if (src[end] === '\n') end += 1;
+    if (src[end] === '\r' && src[end + 1] === '\n') end += 2;
+    else if (isLineTerminator(src[end])) end += 1;
     src = src.slice(0, lineStart) + src.slice(end);
   }
 
