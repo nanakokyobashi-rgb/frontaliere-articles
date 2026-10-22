@@ -554,8 +554,8 @@ test('section/locale indexes explicitly represent missing sources and inactive s
 });
 
 test('un body non parsabile viene messo in quarantena, escluso dall output e ri-verificato dal disco', () => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-quarantine-source-'));
-  const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-quarantine-output-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-invalid-source-'));
+  const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-invalid-output-'));
   const sourceDir = path.join(root, 'content/frontaliere/it');
   fs.mkdirSync(sourceDir, { recursive: true });
   const malformed = sourceFor('example-article', `broken${String.fromCharCode(0x2028)}body`);
@@ -582,9 +582,7 @@ test('un body non parsabile viene messo in quarantena, escluso dall output e ri-
   assert.equal(index.entries[articleId].status, 'missing', 'il contratto v1 espone la quarantena come payload assente');
   assert.deepEqual(index.quarantined, [{ id: articleId, reason: emitted.quarantined[0].reason }]);
   assert.equal(fs.existsSync(path.join(outDir, `bodies/frontaliere/it/${articleId}.json`)), false);
-
   const summaryPath = path.join(outDir, 'summary.md');
-  fs.writeFileSync(summaryPath, '');
   appendArticleBodyQuarantineSummary(emitted.quarantined, summaryPath);
   assert.match(fs.readFileSync(summaryPath, 'utf8'), /example-article\.ts/u);
   assert.match(fs.readFileSync(summaryPath, 'utf8'), /Unterminated delimiter/u);
@@ -602,10 +600,10 @@ test('un body non parsabile viene messo in quarantena, escluso dall output e ri-
 
 test('la soglia di quarantena e esplicita e fail-closed', () => {
   assert.equal(MAX_ARTICLE_BODY_QUARANTINES, 3);
-  assert.doesNotThrow(() => assertArticleBodyQuarantineBudget({ quarantined: MAX_ARTICLE_BODY_QUARANTINES }));
+  assert.doesNotThrow(() => assertArticleBodyQuarantineBudget({ quarantined: 3 }));
   assert.throws(
-    () => assertArticleBodyQuarantineBudget({ quarantined: MAX_ARTICLE_BODY_QUARANTINES + 1 }),
-    /soglia quarantena/u,
+    () => assertArticleBodyQuarantineBudget({ quarantined: 4 }),
+    /soglia quarantena superata \(4 > 3\)/u,
   );
 });
 

@@ -386,8 +386,8 @@ export function assertArticleBodyQuarantineBudget(totals, limit = MAX_ARTICLE_BO
   }
   if (quarantined > limit) {
     throw new Error(
-      `article body API: soglia quarantena superata (${quarantined} > ${limit}); ` +
-        'rifiuto la superficie invece di pubblicare un set troppo incompleto',
+      `article body API: soglia quarantena superata (${quarantined} > ${limit}); `
+        + 'rifiuto la superficie invece di pubblicare un set troppo incompleto',
     );
   }
 }

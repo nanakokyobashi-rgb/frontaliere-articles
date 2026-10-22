@@ -54,10 +54,13 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { truncateToClause } from '../../host/shared/clauseTail.mjs';
 import { findAllSeoEntryMatches } from '../../scripts/lib/seo-entry.mjs';
+import {
+  escapeForSingleQuoteTS,
+  unescapeForSingleQuoteTS,
+} from './lib/article-meta-block.mjs';
 import { writeFileAtomic } from './lib/atomic-write-file.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { assertSeoDescriptionMinimum } from './lib/seo-description-contract.mjs';
-import { escapeForSingleQuoteTS, unescapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 import {
   findPromptPlaceholders,
   stripFaqNumberedLabels,

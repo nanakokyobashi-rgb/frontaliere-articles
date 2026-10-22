@@ -1565,7 +1565,6 @@ const articleBodyDisk = verifyArticleBodyApiOnDisk({
   locales: LOCALES,
 });
 assertArticleBodyQuarantineBudget(articleBodyDisk.totals);
-
 console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`);
 
 // ── Final gate: no control character leaves this process ──────────────────
