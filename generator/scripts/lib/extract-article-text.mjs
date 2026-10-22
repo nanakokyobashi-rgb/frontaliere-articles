@@ -268,7 +268,10 @@ function findNoscriptEndTagOutsideLexicalState(markup, contentStart) {
     }
 
     if (state === 'block-comment') {
-      if (isNoscriptLineTerminator(char)) lineBreakSinceToken = true;
+      if (isNoscriptLineTerminator(char)) {
+        lineBreakSinceToken = true;
+        breakContinueState = null;
+      }
       if (char === '*' && next === '/') {
         state = 'code';
         index += 1;
@@ -291,7 +294,10 @@ function findNoscriptEndTagOutsideLexicalState(markup, contentStart) {
     }
 
     if (state === 'html-comment') {
-      if (isNoscriptLineTerminator(char)) lineBreakSinceToken = true;
+      if (isNoscriptLineTerminator(char)) {
+        lineBreakSinceToken = true;
+        breakContinueState = null;
+      }
       if (markup.startsWith('-->', index)) {
         state = 'code';
         canStartRegex = true;

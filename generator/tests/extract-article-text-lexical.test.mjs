@@ -29,3 +29,17 @@ test('break e continue senza semicolon non fanno ereditare un label attraverso }
     );
   }
 });
+
+test('un line terminator dentro un commento chiude il contesto di break/continue', () => {
+  for (const keyword of ['break', 'continue']) {
+    for (const comment of ['/*\n*/', '<!--\n-->']) {
+      const markup = `while (x) { ${keyword} ${comment}foo\n/ 2 </noscript>`;
+      const expectedEnd = markup.indexOf('</noscript>') + '</noscript>'.length;
+      assert.equal(
+        findNoscriptEndTagOutsideLexicalState(markup, 0),
+        expectedEnd,
+        `${keyword} con ${comment}: il line terminator nel commento deve chiudere il contesto`,
+      );
+    }
+  }
+});
