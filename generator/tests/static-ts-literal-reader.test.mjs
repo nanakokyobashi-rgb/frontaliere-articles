@@ -136,7 +136,7 @@ test('il reader ignora regex dopo break, continue, debugger e catch senza bindin
 });
 
 test('lo scanner ignora le parentesi dentro regex dopo keyword prefix', () => {
-  for (const keyword of ['default', 'break', 'continue', 'debugger']) {
+  for (const keyword of ['default', 'break', 'continue', 'debugger', 'new']) {
     const source = `[${keyword} /foo]/u]`;
     assert.equal(
       computedPropertyKeyEnd(source, 0),
