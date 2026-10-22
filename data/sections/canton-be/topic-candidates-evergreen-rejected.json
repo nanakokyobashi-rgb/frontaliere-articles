@@ -207,6 +207,10 @@
     "canton-be::https://ajour.ch/story/703152/bei-radio-energy-drohen-bis-zu-15-entlassungen": {
       "section": "canton-be",
       "ts": 1792672190203
+    },
+    "canton-be::https://www.be.ch/de/start.html?newsid=9a6f112d-d379-4f84-916e-a5cf20f37b85": {
+      "section": "canton-be",
+      "ts": 1792674336053
     }
   }
 }
