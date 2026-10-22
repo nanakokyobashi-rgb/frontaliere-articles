@@ -39,6 +39,7 @@ import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
 import { parseStaticArticleTranslationSource, parseStaticBlogBodySource } from './shared/articleStaticSource.mjs';
 import { findAllSeoEntryMatches } from './shared/seo-entry.mjs';
 import { createImageCreditReader, mediaRssCreditXml, renderImageCreditHtml } from './shared/imageCredits.mjs';
+import { decodeStaticStringLiteral } from './shared/ts-literals.mjs';
 import { articleSectionEntry } from './shared/articleSectionCore.mjs';
 import { cantonRssChannel } from './shared/cantonSectionCopy.mjs';
 
@@ -219,25 +220,17 @@ function resolveSlugFile(path, slugFile, slugDir) {
 
 /** Parse seo-blog*.ts chunks for per-article SEO metadata. */
 /**
- * Undo the escaping create-article applies when it writes a value into a
- * quoted TS/JSON literal. Matching the escape in the regex keeps the value from
- * being truncated; this is what turns the matched text back into what the
- * article actually says, so `dell\'Italia` reads `dell'Italia`.
+ * Decode the quoted value using the producer shared literal contract.
+ * The local adapter keeps the RSS regex parser small while the shared
+ * decoder preserves escaped quotes, backslashes, and Unicode separators.
  *
  * @param {string | undefined} value
- * @param {'"' | "'" | '`'} quote
+ * @param {string} quote
  * @returns {string | undefined}
  */
 function unescapeQuoted(value, quote) {
   if (value === undefined) return undefined;
-  return value.split('\\\\').join('\u0000')
-    .split(`\\${quote}`).join(quote)
-    // The article writer escapes apostrophes even when the enclosing literal
-    // uses backticks, so decode that writer escape independently of the
-    // literal delimiter.
-    .split("\\'").join("'")
-    .split('\\n').join('\n')
-    .split('\u0000').join('\\');
+  return decodeStaticStringLiteral(value, quote);
 }
 
 function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {

@@ -34,6 +34,7 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { findAllSeoEntryMatches } from './seo-entry.mjs';
 import { scanTopLevelArticleRecords } from './article-registry-reader.mjs';
+import { decodeStaticStringLiteral } from './ts-literals.mjs';
 import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
 import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
 import { ARTICLES_PAGE_SIZE } from '../../engine/shared/articleArchiveConfig.mjs';
@@ -815,20 +816,13 @@ export const SEO_CHUNK_DIR = path.join('content', 'seo');
  * che e' gia' andata alla deriva una volta.
  */
 /**
- * Decode the quoted value used by the TypeScript SEO literals.
- *
- * The source string is read before TypeScript evaluates it, so an escaped
- * quote and an escaped backslash must be decoded in the same order as the
- * producer. The placeholder keeps a literal pair of backslashes from being
- * mistaken for the beginning of another escape.
+ * Decode the quoted value using the producer shared literal contract.
+ * This keeps escaped quotes, backslashes, and Unicode separators aligned
+ * with every other static TypeScript reader.
  */
 export function unescapeQuoted(value, quote = "'") {
   if (value === undefined) return undefined;
-  return String(value)
-    .split('\\\\').join('\u0000')
-    .split(`\\${quote}`).join(quote)
-    .split('\\n').join('\n')
-    .split('\u0000').join('\\');
+  return decodeStaticStringLiteral(String(value), quote);
 }
 
 function collectSeoEntryMetadataInternal(src, into, feedOnly) {

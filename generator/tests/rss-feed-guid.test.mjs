@@ -147,3 +147,40 @@ test('RSS keeps localized slugs when the registry has spacing before colon and c
     );
   }
 });
+
+test('RSS decodifica i separatori Unicode nelle descrizioni SEO', () => {
+  const articleId = 'unicode-description';
+  const files = new Map([
+    [SEO_FILE, [
+      'export default {',
+      "  'blog-" + articleId + "': {",
+      '    "headline": "Titolo",',
+      "    ogDescription: 'Prima\\u2028seconda\\u2029terza',",
+      '    "datePublished": "2026-08-01T00:00:00.000Z",',
+      '    "articleSection": "Notizie",',
+      '  },',
+      '};',
+    ].join('\n') + '\n'],
+    [SLUG_FILE, slugSource(articleId, 'unicode-description')],
+  ]);
+  const fakeFs = {
+    existsSync: (p) => files.has(p),
+    readFileSync: (p) => {
+      if (!files.has(p)) throw new Error(`ENOENT: ${p}`);
+      return files.get(p);
+    },
+    readdirSync: () => [],
+  };
+
+  const { feeds } = buildSectionFeeds({
+    fs: fakeFs,
+    path,
+    rootDir: '',
+    section: SECTION,
+    registry: [],
+    repairSerpSnippet: (s) => s,
+  });
+  const xml = new Map(feeds).get(IT_FEED);
+  const description = xml.match(/<description><!\[CDATA\[([\s\S]*?)\]\]><\/description>/u)?.[1];
+  assert.equal(description, 'Prima\u2028seconda\u2029terza');
+});
