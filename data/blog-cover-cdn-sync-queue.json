@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-bns-cambi-energia.webp",
+      "sha256": "ae45a96c6360f2f347746af5c69c599e8b97316e13346400d34a4f49b44c50e6"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-bns-cambi-energia-480w.webp",
+      "sha256": "f3dc62b232c392635f2d5650c3298a8fa91a2183f66405a82baae21833188f59"
+    }
+  ]
 }
