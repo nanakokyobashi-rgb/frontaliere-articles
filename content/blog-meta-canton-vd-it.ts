@@ -69,6 +69,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.impetigine-casi-vaud.title': 'Impetigine in aumento nel Vaud: pediatri rassicurano',
     'blog.article.impetigine-casi-vaud.excerpt': 'Nel Canton Vaud l\'impetigine cresce quest\'autunno: colpisce soprattutto i bambini dai due anni, ma i pediatri escludono un\'epidemia.',
     'blog.article.impetigine-casi-vaud.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.morges-label-energia-gold-2026.title': 'Morges ottiene il label Cité de l\'energia Gold per cinque anni',
+    'blog.article.morges-label-energia-gold-2026.excerpt': 'Morges ottiene il label Gold per cinque anni Il punteggio della valutazione è dell\'80,5% Il riconoscimento copre sei ambiti delle politiche comunali Il Plan',
+    'blog.article.morges-label-energia-gold-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVdIt;

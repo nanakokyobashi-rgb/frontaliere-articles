@@ -69,6 +69,9 @@ const blogMetaCantonVdFr: Record<string, string> = {
     'blog.article.impetigine-casi-vaud.title': 'L’impétigo en hausse dans le canton de Vaud : les pédiatres rassurent',
     'blog.article.impetigine-casi-vaud.excerpt': 'Dans le canton de Vaud, l’impétigo augmente cet automne : il touche surtout les enfants dès l’âge de deux ans, mais les pédiatres excluent une épidémie.',
     'blog.article.impetigine-casi-vaud.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.morges-label-energia-gold-2026.title': 'Morges obtient le label Cité de l\'énergie Gold pour cinq ans',
+    'blog.article.morges-label-energia-gold-2026.excerpt': 'Morges obtient le label Gold pour cinq ans Le score de l\'évaluation est de 80,5% La distinction couvre six domaines des politiques communales Le Plan climat',
+    'blog.article.morges-label-energia-gold-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonVdFr;

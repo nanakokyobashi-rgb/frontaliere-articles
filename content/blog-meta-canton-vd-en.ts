@@ -69,6 +69,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.impetigine-casi-vaud.title': 'Impetigo on the rise in Vaud: pediatricians reassure',
     'blog.article.impetigine-casi-vaud.excerpt': 'In the Canton of Vaud, impetigo is on the rise this autumn: it mainly affects children aged two and over, but pediatricians rule out an epidemic.',
     'blog.article.impetigine-casi-vaud.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.morges-label-energia-gold-2026.title': 'Morges receives the Cité de l\'energia Gold label for five years',
+    'blog.article.morges-label-energia-gold-2026.excerpt': 'Morges receives the Gold label for five years The assessment score is 80,5% The recognition covers six areas of municipal policies The Plan climat brings',
+    'blog.article.morges-label-energia-gold-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVdEn;

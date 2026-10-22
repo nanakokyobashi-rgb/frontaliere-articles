@@ -855,6 +855,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-morges-label-energia-gold-2026': {
+    title: 'Morges ottiene il label Cité de l\'energia Gold per cinque anni',
+    description: 'Morges ottiene il label Gold per cinque anni Il punteggio della valutazione è dell\'80,5% Il riconoscimento copre sei ambiti delle politiche comunali',
+    keywords: 'frontalieri, ticino, svizzera, italia, morges, ottiene, label, cité',
+    ogTitle: 'Morges ottiene il label Cité de l\'energia Gold per cinque anni',
+    ogDescription: 'Morges ottiene il label Gold per cinque anni Il punteggio della valutazione è dell\'80,5% Il riconoscimento copre sei ambiti delle politiche comunali Il Plan',
+    canonicalPath: '/articoli-vaud/morges-label-energia-gold-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Morges ottiene il label Cité de l'energia Gold per cinque anni",
+      "description": "Morges ottiene il label Gold per cinque anni Il punteggio della valutazione è dell'80,5% Il riconoscimento copre sei ambiti delle politiche comunali",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-morges-label-energia-gold-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T10:54:11+00:00",
+      "dateModified": "2026-10-22T10:54:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/morges-label-energia-gold-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -69,6 +69,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.impetigine-casi-vaud.title': 'Impetigo im Kanton Waadt nimmt zu: Kinderärzte geben Entwarnung',
     'blog.article.impetigine-casi-vaud.excerpt': 'Im Kanton Waadt nimmt die Impetigo diesen Herbst zu: Betroffen sind vor allem Kinder ab zwei Jahren, aber die Kinderärzte schließen eine Epidemie aus.',
     'blog.article.impetigine-casi-vaud.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.morges-label-energia-gold-2026.title': 'Morges erhält das Label Cité de l\'energia Gold für fünf Jahre',
+    'blog.article.morges-label-energia-gold-2026.excerpt': 'Morges erhält das Label Gold für fünf Jahre Die Punktzahl der Bewertung beträgt 80,5% Die Auszeichnung umfasst sechs Bereiche der kommunalen Politik Der Plan',
+    'blog.article.morges-label-energia-gold-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVdDe;
