@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "a923bc104e8f6d5edee1184a4a9dbe5e5a25fa102ef45e31b9f7cd928fd19dac",
+  "updatedAt": "2026-10-22T02:46:43.877Z",
+  "contentHash": "53df6283a5383ca4ed9225b4036d8438535b3b13ebe60fd2c3c59ab08741b326",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -125,6 +125,12 @@
           "date": "2026-10-20T23:44:17.371Z"
         },
         {
+          "title": "Adeguamento piano direttore 26/1: «zone bianche» per l'edilizia a Zugo",
+          "url": "/articoli-zugo/adeguamento-piano-direttore-zone-bianche-2026/",
+          "excerpt": "Pubblicato l'adeguamento 26/1 del piano direttore cantonale: «zone bianche» per l'edilizia abitativa e strategia di stabilizzazione.",
+          "date": "2026-10-22T02:39:48.543Z"
+        },
+        {
           "title": "Abbonamenti trasporti pubblici Canton Zugo zone e tariffe",
           "url": "/articoli-svizzera/trasporti-pubblici-zugo-abbonamenti/",
           "excerpt": "I principali dati sull'abbonamento dei trasporti pubblici nel Cantone di Zurigo",
@@ -159,12 +165,6 @@
           "url": "/articoli-svizzera/apprendistato-zugo/",
           "excerpt": "Impostazioni e procedure per l'assunzione di un apprendista nel Canton Zugo, con riferimento alle leggi cantonali e federali.",
           "date": "2026-08-17T13:36:28.291Z"
-        },
-        {
-          "title": "Lucerna supera Zugo: nuovo paradiso fiscale per le imprese",
-          "url": "/articoli-frontaliere/lucerna-paradiso-fiscale-frontalieri/",
-          "excerpt": "Lucerna riduce l'imposta sugli utili al 11,66%, superando Zugo. Impatto sui frontalieri e confronto con l'UE.",
-          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "latestCantonArticles": [],
@@ -178,7 +178,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T02:46:43.877Z"
     },
     "en": {
       "canton": "ZG",
@@ -286,6 +286,12 @@
           "date": "2026-10-20T23:44:17.371Z"
         },
         {
+          "title": "Amendment to structure plan 26/1: “white zones” for construction in Zug",
+          "url": "/en/zug-articles/zug-director-plan-adjustment-white-zones-2026/",
+          "excerpt": "Published: adjustment 26/1 to the cantonal structure plan: “white zones” for residential construction and a stabilization strategy.",
+          "date": "2026-10-22T02:39:48.543Z"
+        },
+        {
           "title": "Public transport passes Canton Zug zones and fares",
           "url": "/en/swiss-articles/public-transport-zug-subscriptions/",
           "excerpt": "The main data on public transport subscription in the Canton of Zurich",
@@ -320,12 +326,6 @@
           "url": "/en/swiss-articles/apprenticeship-zug/",
           "excerpt": "Settings and procedures for hiring an apprentice in the Canton of Zug, with reference to cantonal and federal laws.",
           "date": "2026-08-17T13:36:28.291Z"
-        },
-        {
-          "title": "Lucerne overtakes Zug: new tax haven for businesses",
-          "url": "/en/cross-border-articles/lucerne-new-swiss-tax-haven/",
-          "excerpt": "Lucerne reduces corporate tax to 11.66%, surpassing Zug. Impact on cross-border workers and comparison with the EU.",
-          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "latestCantonArticles": [],
@@ -339,7 +339,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T02:46:43.877Z"
     },
     "de": {
       "canton": "ZG",
@@ -447,6 +447,12 @@
           "date": "2026-10-20T23:44:17.371Z"
         },
         {
+          "title": "Anpassung des Richtplans 26/1: «weiße Zonen» für das Bauen in Zug",
+          "url": "/de/zug-artikel/zug-richtplan-anpassung-weisse-zonen-2026/",
+          "excerpt": "Die Anpassung 26/1 des kantonalen Richtplans wurde veröffentlicht: «weiße Zonen» für den Wohnungsbau und eine Stabilisierungsstrategie.",
+          "date": "2026-10-22T02:39:48.543Z"
+        },
+        {
           "title": "Fahrkarten für öffentliche Verkehrsmittel Kanton Zug Zonen und Tarife",
           "url": "/de/schweiz-artikel/offentliche-verkehrsmittel-zug-abos/",
           "excerpt": "Die wichtigsten Fakten zum ÖV-Abo im Kanton Zürich",
@@ -481,12 +487,6 @@
           "url": "/de/schweiz-artikel/berufsausbildung-zug/",
           "excerpt": "Einstellungen und Verfahren für die Anstellung eines Lehrlings im Kanton Zug unter Bezugnahme auf die kantonalen und bundesstaatlichen Gesetze.",
           "date": "2026-08-17T13:36:28.291Z"
-        },
-        {
-          "title": "Luzern überholt Zug: Neuer Steuerparadies für Unternehmen",
-          "url": "/de/grenzgaenger-artikel/luzern-neuer-steuerparadies-schweiz/",
-          "excerpt": "Luzern senkt die Gewinnsteuer auf 11,66%, überholt Zug. Auswirkungen auf Grenzgänger und Vergleich mit der EU.",
-          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "latestCantonArticles": [],
@@ -500,7 +500,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T02:46:43.877Z"
     },
     "fr": {
       "canton": "ZG",
@@ -608,6 +608,12 @@
           "date": "2026-10-20T23:44:17.371Z"
         },
         {
+          "title": "«Zones blanches» pour construire à Zoug Plan 26/1 adapté",
+          "url": "/fr/articles-zoug/zoug-plan-directeur-ajustement-zones-blanches-2026/",
+          "excerpt": "L’adaptation 26/1 du plan directeur cantonal est publiée : des « zones blanches » pour la construction de logements et une stratégie de stabilisation.",
+          "date": "2026-10-22T02:39:48.543Z"
+        },
+        {
           "title": "Abonnements transports publics Canton Zoug zones et tarifs",
           "url": "/fr/articles-suisse/transports-publics-zoug-abonnements/",
           "excerpt": "Les principales données sur l'abonnement aux transports publics dans le canton de Zurich",
@@ -642,12 +648,6 @@
           "url": "/fr/articles-suisse/apprentissage-zoug/",
           "excerpt": "Paramètres et procédures pour l'embauche d'un apprenti dans le canton de Zoug, en référence aux lois cantonales et fédérales.",
           "date": "2026-08-17T13:36:28.291Z"
-        },
-        {
-          "title": "Lucerne dépasse Zoug: nouveau paradis fiscal pour les entreprises",
-          "url": "/fr/articles-frontalier/lucerne-nouveau-paradis-fiscal-suisse/",
-          "excerpt": "Lucerne réduit l'impôt sur les bénéfices à 11,66%, dépassant Zoug. Impact sur les frontaliers et comparaison avec l'UE.",
-          "date": "2026-05-07T09:05:42.794Z"
         }
       ],
       "latestCantonArticles": [],
@@ -661,7 +661,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T02:46:43.877Z"
     }
   }
 }

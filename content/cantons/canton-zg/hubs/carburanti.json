@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T21:34:40.808Z",
-  "contentHash": "13113a4ef8a9f7689bc9ad60d7370ad77f097389864c68a3bcc799ec79b097ba",
+  "updatedAt": "2026-10-22T02:46:43.877Z",
+  "contentHash": "6a30950c68ca95e41ac001e494696eaa2eb7a23401626f9ee8ad4d34e545ae9f",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Adeguamento piano direttore 26/1: «zone bianche» per l'edilizia a Zugo",
+          "url": "/articoli-zugo/adeguamento-piano-direttore-zone-bianche-2026/",
+          "excerpt": "Pubblicato l'adeguamento 26/1 del piano direttore cantonale: «zone bianche» per l'edilizia abitativa e strategia di stabilizzazione.",
+          "date": "2026-10-22T02:39:48.543Z"
+        },
+        {
           "title": "Zugo rende disponibile l'agenda del Consiglio cantonale",
           "url": "/articoli-zugo/zugo-agenda-consiglio-29-ottobre/",
           "excerpt": "L'ordine del giorno della seduta del Consiglio cantonale di Zugo del 29 ottobre 2026 è disponibile, ma il testo non elenca le trattande.",
@@ -82,12 +88,6 @@
           "url": "/articoli-zugo/ricorso-federale-espulsione-zugo/",
           "excerpt": "Maggio 2026: Zugo non rinnova il permesso breve.",
           "date": "2026-10-20T02:44:35.163Z"
-        },
-        {
-          "title": "Eventi del weekend nel Canton Zugo: cosa fare sabato e domenica",
-          "url": "/articoli-zugo/eventi-weekend-zugo/",
-          "excerpt": "Eventi nel Canton Zugo ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
-          "date": "2026-10-17T11:34:12.899Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T21:34:40.808Z"
+      "updatedAt": "2026-10-22T02:46:43.877Z"
     },
     "en": {
       "canton": "ZG",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Amendment to structure plan 26/1: “white zones” for construction in Zug",
+          "url": "/en/zug-articles/zug-director-plan-adjustment-white-zones-2026/",
+          "excerpt": "Published: adjustment 26/1 to the cantonal structure plan: “white zones” for residential construction and a stabilization strategy.",
+          "date": "2026-10-22T02:39:48.543Z"
+        },
+        {
           "title": "Zug makes available the agenda of the Cantonal Council",
           "url": "/en/zug-articles/zug-cantonal-council-agenda-october-29-2026/",
           "excerpt": "The agenda of the meeting of the Cantonal Council of Zug on 29 October 2026 is available, but the text does not list the issues.",
@@ -169,12 +175,6 @@
           "url": "/en/zug-articles/federal-appeal-expulsion-zug/",
           "excerpt": "May 2026: Zug does not renew the short-term permit.",
           "date": "2026-10-20T02:44:35.163Z"
-        },
-        {
-          "title": "Weekend events in the canton of Zug: what to do Saturday & Sunday",
-          "url": "/en/zug-articles/weekend-events-zug/",
-          "excerpt": "Events in the canton of Zug every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
-          "date": "2026-10-17T11:34:12.899Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T21:34:40.808Z"
+      "updatedAt": "2026-10-22T02:46:43.877Z"
     },
     "de": {
       "canton": "ZG",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Anpassung des Richtplans 26/1: «weiße Zonen» für das Bauen in Zug",
+          "url": "/de/zug-artikel/zug-richtplan-anpassung-weisse-zonen-2026/",
+          "excerpt": "Die Anpassung 26/1 des kantonalen Richtplans wurde veröffentlicht: «weiße Zonen» für den Wohnungsbau und eine Stabilisierungsstrategie.",
+          "date": "2026-10-22T02:39:48.543Z"
+        },
+        {
           "title": "Zug stellt die Tagesordnung des Kantonsrates zur Verfügung",
           "url": "/de/zug-artikel/zug-kantonsrat-traktanden-29-oktober-2026/",
           "excerpt": "Die Tagesordnung der Sitzung des Kantonsrates Zug vom 29.",
@@ -256,12 +262,6 @@
           "url": "/de/zug-artikel/bundesgerichtliche-beschwerde-ausweisung-zug/",
           "excerpt": "Mai 2026: Der Kanton Zug verlängert die Kurzaufenthaltsbewilligung nicht.",
           "date": "2026-10-20T02:44:35.163Z"
-        },
-        {
-          "title": "Veranstaltungen am Wochenende im Kanton Zug: was tun Sa & So",
-          "url": "/de/zug-artikel/wochenend-veranstaltungen-zug/",
-          "excerpt": "Veranstaltungen im Kanton Zug an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
-          "date": "2026-10-17T11:34:12.899Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T21:34:40.808Z"
+      "updatedAt": "2026-10-22T02:46:43.877Z"
     },
     "fr": {
       "canton": "ZG",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "«Zones blanches» pour construire à Zoug Plan 26/1 adapté",
+          "url": "/fr/articles-zoug/zoug-plan-directeur-ajustement-zones-blanches-2026/",
+          "excerpt": "L’adaptation 26/1 du plan directeur cantonal est publiée : des « zones blanches » pour la construction de logements et une stratégie de stabilisation.",
+          "date": "2026-10-22T02:39:48.543Z"
+        },
+        {
           "title": "Zoug rend disponible l'agenda du Conseil cantonal",
           "url": "/fr/articles-zoug/zoug-conseil-cantonal-ordre-jour-29-octobre-2026/",
           "excerpt": "L'ordre du jour de la séance du Conseil cantonal de Zoug du 29 octobre 2026 est disponible, mais le texte n'en dresse pas la liste.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-zoug/recours-federal-expulsion-zoug/",
           "excerpt": "Mai 2026 : Zoug ne renouvelle pas le permis de courte durée.",
           "date": "2026-10-20T02:44:35.163Z"
-        },
-        {
-          "title": "Événements du week-end dans le canton de Zoug : que faire samedi & dimanche",
-          "url": "/fr/articles-zoug/evenements-week-end-zoug/",
-          "excerpt": "Événements dans le canton de Zoug chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
-          "date": "2026-10-17T11:34:12.899Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T21:34:40.808Z"
+      "updatedAt": "2026-10-22T02:46:43.877Z"
     }
   }
 }
