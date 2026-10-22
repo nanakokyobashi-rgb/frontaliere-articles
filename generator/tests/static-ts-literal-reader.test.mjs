@@ -7,6 +7,7 @@ import {
   readStaticObjectEntries,
   readStaticStringLiteral,
 } from '../../scripts/lib/ts-literals.mjs';
+import { computedPropertyKeyEnd } from '../../scripts/lib/typescript-expression-scanner.mjs';
 import { metaFieldRegex, metaFieldRegexFragment } from '../scripts/lib/meta-field-regex.mjs';
 
 const ROOT = resolve(new URL('../..', import.meta.url).pathname);
@@ -96,6 +97,7 @@ test('il reader ignora regex literal anche dopo divisioni e parentesi di control
 test('il reader distingue keyword membro e default prima di un regex literal', () => {
   const source = [
     "const member = obj.return / /'blog.article.fake.member': 'fake',/ / /x/;",
+    "const memberDefault = obj.default / /'blog.article.fake.member-default': 'fake',/ / /x/;",
     "export default /'blog.article.fake.default': 'fake'/;",
     "const meta = { 'blog.article.reale.title': 'attuale' };",
   ].join('\n');
@@ -131,6 +133,27 @@ test('il reader ignora regex dopo break, continue, debugger e catch senza bindin
     readStaticObjectEntries(source, 'fixture.ts').map(({ key, value }) => [key, value]),
     [['blog.article.reale.title', 'attuale']],
   );
+});
+
+test('lo scanner ignora le parentesi dentro regex dopo keyword prefix', () => {
+  for (const keyword of ['default', 'break', 'continue', 'debugger', 'new']) {
+    const source = `[${keyword} /foo]/u]`;
+    assert.equal(
+      computedPropertyKeyEnd(source, 0),
+      source.length,
+      `${keyword}: la regex non deve chiudere la computed property`,
+    );
+  }
+});
+
+test('lo scanner conserva la transizione divisione → regex', () => {
+  const source = '[value / /[}]/u, other: value]';
+  assert.equal(computedPropertyKeyEnd(source, 0), source.length);
+});
+
+test('lo scanner tratta i private name come proprietà membro prima di una divisione', () => {
+  const source = '[this.#default / /\\]/.test(value), [key]: value]';
+  assert.equal(computedPropertyKeyEnd(source, 0), source.length);
 });
 
 test('il reader conserva blocchi, espressioni e case con tipi annidati', () => {
