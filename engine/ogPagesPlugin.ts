@@ -869,6 +869,25 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const articleTitleCollisions: Record<'it' | 'en' | 'de' | 'fr', Map<string, number>> = {
   it: new Map(), en: new Map(), de: new Map(), fr: new Map(),
  };
+ const escapeHtml = (value: string): string => value
+  .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+ const escapedTitleLength = (value: string): number => escapeHtml(value).length;
+ // Collision keys must describe the exact no-disambiguator title that this
+ // emitter would write. In particular, the shared title helper measures the
+ // escaped HTML budget, and long WebPage/Event titles take the measured
+ // truncation fallback before they reach <title>.
+ const boundedTitleWithoutDisambiguator = (headline: string): string => {
+  const branded = buildTitleWithBrand(
+   headline,
+   TITLE_BRAND_SUFFIX,
+   TITLE_MAX_CHARS,
+   escapedTitleLength,
+  );
+  return escapedTitleLength(branded) <= TITLE_MAX_CHARS
+   ? branded
+   : truncateHeadlineToMeasuredBudget(headline, TITLE_MAX_CHARS, escapedTitleLength);
+ };
  // NewsArticle headlines stay verbatim; WebPage/Event head titles are bounded
  // at the emission point below without mutating their schema headline.
 
@@ -991,7 +1010,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  for (const locale of ['it', 'en', 'de', 'fr'] as const) {
   articleTitleCollisions[locale] = countArticlesByTitleKey(
    entries,
-   (article) => buildTitleWithBrand(articleTitleFor[locale](article)),
+   (article) => escapeHtml(boundedTitleWithoutDisambiguator(articleTitleFor[locale](article))),
   );
  }
 
@@ -1075,9 +1094,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  };
 
  /* ── 3. Write OG landing pages ──────────────────────────────── */
- const esc = (s: string) =>
- s.replace(/&/g, '&amp;').replace(/</g, '&lt;')
- .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+ const esc = escapeHtml;
 
  const LOC_TAG: Record<string, string> = { it: 'it_CH', en: 'en_US', de: 'de_CH', fr: 'fr_CH' };
 
@@ -1326,11 +1343,10 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  // must converge inside the shared cap, including after HTML escaping.
  const isEvent = en.sdType === 'Event';
  const isNewsArticle = !isEvent && Boolean(en.datePub);
- const baseTitleProbe = buildTitleWithBrand(localizedTitle);
+ const baseTitleProbe = escapeHtml(boundedTitleWithoutDisambiguator(localizedTitle));
  const collidesInLocale = (articleTitleCollisions[articleLocale].get(baseTitleProbe) || 0) > 1;
  const articleSlugForLocale = String(urlPath || '').split('/').filter(Boolean).pop() || en.articleId;
  const disamb = collidesInLocale ? articleHashFromSlug(articleSlugForLocale, localizedTitle) : '';
- const escapedTitleLength = (value: string): number => esc(value).length;
  let htmlPageTitle: string;
  if (isNewsArticle) {
   // NewsArticle has a stricter invariant than the generic SERP title cap:
@@ -1343,15 +1359,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
   // word-aware fallback for an overlong WebPage/Event headline. The helper's
   // default deliberately returns long headlines verbatim, so the fallback is
   // required here to satisfy this emitter's hard Bing title contract.
-  const brandedTitle = buildTitleWithBrand(
-   localizedTitle,
-   TITLE_BRAND_SUFFIX,
-   TITLE_MAX_CHARS,
-   escapedTitleLength,
-  );
-  htmlPageTitle = escapedTitleLength(brandedTitle) <= TITLE_MAX_CHARS
-   ? brandedTitle
-   : truncateHeadlineToMeasuredBudget(localizedTitle, TITLE_MAX_CHARS, escapedTitleLength);
+  htmlPageTitle = boundedTitleWithoutDisambiguator(localizedTitle);
  } else {
   // Disambiguator MUST survive (collision-resolution for title-uniqueness).
   // Try brand+disamb first; if it doesn't fit, drop brand and keep disamb;
