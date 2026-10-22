@@ -8576,6 +8576,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.ora-solare-ritorno-ottobre-svizzera.title': 'Retour à l\'heure d\'hiver : les aiguilles reculent le 25 octobre',
     'blog.article.ora-solare-ritorno-ottobre-svizzera.excerpt': 'Entre le 24 et le 25 octobre revient l\'heure d\'hiver À 3 heures les aiguilles reculent d\'une heure 71% des personnes interrogées par Forsa veulent abolir le changement Sommeil',
     'blog.article.ora-solare-ritorno-ottobre-svizzera.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.revisione-serv-consultazione-2026.title': 'Révision partielle de la SERV : consultation ouverte',
+    'blog.article.revisione-serv-consultazione-2026.excerpt': 'Révision partielle de la SERV annoncée le 21 octobre 2026 Objectif : faciliter l’accès aux prestations de la SERV Réduction des charges et simplification',
+    'blog.article.revisione-serv-consultazione-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

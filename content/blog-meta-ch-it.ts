@@ -8576,6 +8576,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ora-solare-ritorno-ottobre-svizzera.title': 'Ritorno all\'ora solare: lancette indietro il 25 ottobre',
     'blog.article.ora-solare-ritorno-ottobre-svizzera.excerpt': 'Tra il 24 e il 25 ottobre torna l\'ora solare Alle 3 le lancette tornano indietro di un\'ora Il 71% degli intervistati Forsa vuole abolire il cambio Sonno',
     'blog.article.ora-solare-ritorno-ottobre-svizzera.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.revisione-serv-consultazione-2026.title': 'Apertura consultazione su revisione parziale SERV: gli obiettivi',
+    'blog.article.revisione-serv-consultazione-2026.excerpt': 'Revisione parziale della SERV indicata il 21 ottobre 2026 Obiettivo: facilitare l’accesso alle prestazioni della SERV Riduzione degli oneri e semplificazione',
+    'blog.article.revisione-serv-consultazione-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

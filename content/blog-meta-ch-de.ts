@@ -8576,6 +8576,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ora-solare-ritorno-ottobre-svizzera.title': 'Rückkehr zur Normalzeit: Am 25. Oktober werden die Zeiger zurückgestellt',
     'blog.article.ora-solare-ritorno-ottobre-svizzera.excerpt': 'Zwischen dem 24.',
     'blog.article.ora-solare-ritorno-ottobre-svizzera.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.revisione-serv-consultazione-2026.title': 'Eröffnung der Konsultation zur Teilrevision der SERV: die Ziele',
+    'blog.article.revisione-serv-consultazione-2026.excerpt': 'Teilrevision der SERV, die am 21.',
+    'blog.article.revisione-serv-consultazione-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

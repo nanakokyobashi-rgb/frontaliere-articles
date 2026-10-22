@@ -8576,6 +8576,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ora-solare-ritorno-ottobre-svizzera.title': 'Return to standard time: clocks go back on October 25',
     'blog.article.ora-solare-ritorno-ottobre-svizzera.excerpt': 'Between October 24 and 25 standard time returns At 3 the hands turn back one hour 71% of Forsa respondents want to abolish the change Sleep',
     'blog.article.ora-solare-ritorno-ottobre-svizzera.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.revisione-serv-consultazione-2026.title': 'Opening of consultation on partial revision of SERV: the objectives',
+    'blog.article.revisione-serv-consultazione-2026.excerpt': 'Partial review of the SERV indicated on October 21, 2026 Objective: facilitate access to SERV benefits Reduction of burdens and simplification',
+    'blog.article.revisione-serv-consultazione-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

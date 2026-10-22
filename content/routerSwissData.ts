@@ -2881,6 +2881,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'consiglio-poverta-prima-conferenza': { it: 'consiglio-poverta-prima-conferenza', en: 'national-poverty-council-first-conference', de: 'nationaler-armutsrat-erste-konferenz', fr: 'conseil-national-pauvrete-premiere-conference' },
  'furto-dati-publica-100mila-dipendenti': { it: 'furto-dati-publica-100mila-dipendenti', en: 'akira-hack-publica-federal-employee-data', de: 'akira-hack-publica-bundesangestellten-daten', fr: 'piratage-akira-publica-donnees-employes-federaux' },
  'ora-solare-ritorno-ottobre-svizzera': { it: 'ora-solare-ritorno-ottobre-svizzera', en: 'standard-time-return-october-switzerland', de: 'winterzeit-rueckkehr-oktober-schweiz', fr: 'retour-heure-hiver-octobre-suisse' },
+ 'revisione-serv-consultazione-2026': { it: 'revisione-serv-consultazione-2026', en: 'serv-partial-revision-consultation-2026', de: 'serv-teilrevision-anhorung-2026', fr: 'revision-partielle-serv-consultation-2026' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
