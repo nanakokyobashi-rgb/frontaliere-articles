@@ -181,6 +181,7 @@ function isTypeAssertionBeforeExpression(source, offset) {
 function delimiterContextAt(source, offset) {
   const delimiters = [];
   let previousToken = null;
+  let previousTokenWasMemberProperty = false;
   let previousSignificantEnd = 0;
   let pendingTypeAliasEquals = -1;
   let pendingTypeAliasDepth = -1;
@@ -198,9 +199,10 @@ function delimiterContextAt(source, offset) {
   let variableTypePending = false;
   let pendingVariableTypeObject = false;
   let angleAssertedObjectOffset = -1;
-  const markToken = (token, closesFunctionParameters = false) => {
+  const markToken = (token, closesFunctionParameters = false, memberProperty = false) => {
     if (delimiters.length) delimiters.at(-1).lastToken = token;
     previousToken = token;
+    previousTokenWasMemberProperty = memberProperty;
     lastClosedFunctionParameters = closesFunctionParameters;
     if (typeAliasDepth >= 0 && delimiters.length === typeAliasDepth) typeAliasHasRhsToken = true;
   };
@@ -263,7 +265,7 @@ function delimiterContextAt(source, offset) {
     }
     if (ch === '/' && (previousToken === null
       || REGEX_PREFIX_PUNCTUATION.has(previousToken)
-      || REGEX_PREFIX_KEYWORDS.has(previousToken))) {
+      || (!previousTokenWasMemberProperty && REGEX_PREFIX_KEYWORDS.has(previousToken)))) {
       const regexEnd = skipRegexLiteral(source, index);
       if (regexEnd >= 0) {
         index = regexEnd;
@@ -328,6 +330,7 @@ function delimiterContextAt(source, offset) {
     }
     if (/[A-Za-z_$]/u.test(ch)) {
       const identifier = /^[A-Za-z_$][\w$]*/u.exec(source.slice(index, offset))[0];
+      const memberProperty = previousToken === '.';
       if (['const', 'let', 'var'].includes(identifier)) {
         variableDeclarationDepth = delimiters.length;
         variableNamePending = true;
@@ -357,7 +360,7 @@ function delimiterContextAt(source, offset) {
         }
       }
       index += identifier.length;
-      markToken(identifier);
+      markToken(identifier, false, memberProperty);
       previousSignificantEnd = index;
       continue;
     }

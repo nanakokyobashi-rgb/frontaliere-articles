@@ -97,6 +97,7 @@ test('il reader ignora regex literal anche dopo divisioni e parentesi di control
 test('il reader distingue keyword membro e default prima di un regex literal', () => {
   const source = [
     "const member = obj.return / /'blog.article.fake.member': 'fake',/ / /x/;",
+    "const memberDefault = obj.default / /'blog.article.fake.member-default': 'fake',/ / /x/;",
     "export default /'blog.article.fake.default': 'fake'/;",
     "const meta = { 'blog.article.reale.title': 'attuale' };",
   ].join('\n');
