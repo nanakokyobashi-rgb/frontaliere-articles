@@ -51,6 +51,16 @@ function matchingDelimiter(src, openIdx) {
   const parenContexts = [];
   const bracketContexts = [];
   const braceContexts = [];
+  const statementEndingTokens = new Set([
+    'identifier', 'literal', 'postfix', 'close-paren', 'close-bracket', 'close-object', 'close-block',
+  ]);
+  const recordLineBreak = () => {
+    lineBreakSinceToken = true;
+    if (parenContexts.length === 0 && bracketContexts.length === 0
+      && statementEndingTokens.has(lastSignificant)) {
+      statementStart = true;
+    }
+  };
 
   const skipRegex = (start) => {
     let inClass = false;
@@ -81,8 +91,7 @@ function matchingDelimiter(src, openIdx) {
     if (ch === '/' && src[i + 1] === '/') {
       const lineEnd = lineTerminatorIndex(src, i + 2);
       if (lineEnd === -1) return -1;
-      lineBreakSinceToken = true;
-      statementStart = true;
+      recordLineBreak();
       i = lineEnd;
       continue;
     }
@@ -90,16 +99,14 @@ function matchingDelimiter(src, openIdx) {
       const end = src.indexOf('*/', i + 2);
       if (end === -1) return -1;
       if (/\n|\r|\u2028|\u2029/u.test(src.slice(i, end + 2))) {
-        lineBreakSinceToken = true;
-        statementStart = true;
+        recordLineBreak();
       }
       i = end + 1;
       continue;
     }
     if (/\s/.test(ch)) {
       if (isLineTerminator(ch)) {
-        lineBreakSinceToken = true;
-        statementStart = true;
+        recordLineBreak();
       }
       continue;
     }
@@ -155,10 +162,14 @@ function matchingDelimiter(src, openIdx) {
       while (/[A-Za-z0-9_$]/.test(src[end] || '')) end += 1;
       const word = src.slice(i, end);
       const member = lastSignificant === 'dot' || lastSignificant === 'private-prefix';
+      const identifierAtStatementStart = statementStart;
       canStartRegex = !member && REGEX_PREFIX_KEYWORDS.has(word);
-      lastIdentifier = { value: word, member };
+      lastIdentifier = { value: word, member, statementStart: identifierAtStatementStart };
       lastSignificant = 'identifier';
-      if (!member && (word === 'case' || word === 'default')) caseLabelPending = true;
+      if (!member && identifierAtStatementStart && braceContexts.some(context => context.isBlock)
+        && (word === 'case' || word === 'default')) {
+        caseLabelPending = true;
+      }
       statementStart = false;
       i = end - 1;
       continue;
@@ -188,8 +199,13 @@ function matchingDelimiter(src, openIdx) {
     }
     if (ch === '!' && src[i + 1] !== '=') {
       const postfix = !lineBreakBeforeToken && !canStartRegex;
-      canStartRegex = !postfix;
-      lastSignificant = postfix ? 'postfix' : 'punctuation';
+      if (postfix) {
+        canStartRegex = false;
+        lastSignificant = 'postfix';
+      } else {
+        canStartRegex = true;
+        lastSignificant = 'punctuation';
+      }
       lastIdentifier = null;
       statementStart = false;
       continue;
@@ -259,6 +275,7 @@ function matchingDelimiter(src, openIdx) {
         || lastSignificant === 'close-block'
         || statementStart
         || (lastSignificant === 'identifier' && lastIdentifier
+          && lastIdentifier.statementStart
           && !lastIdentifier.member && BLOCK_BRACE_KEYWORDS.has(lastIdentifier.value))
         || caseLabelPending
       );

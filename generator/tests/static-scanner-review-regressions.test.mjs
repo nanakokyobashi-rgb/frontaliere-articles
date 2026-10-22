@@ -28,7 +28,10 @@ test('articleRouteOwnership scarta la mappa legacy dopo un commento troncato', (
   assert.deepEqual(loadArticleRouteRedirects(fs, 'data.json', 'legacy.ts'), {
     '/data/': '/target/',
   });
-  assert.deepEqual(scanRedirectSource(files.get('legacy.ts')).entries, {});
+  assert.throws(
+    () => scanRedirectSource(files.get('legacy.ts')),
+    /Unterminated block comment/u,
+  );
 });
 
 test('seo-entry riconosce tutti i terminatori di riga nei commenti lineari', () => {
@@ -54,6 +57,29 @@ test('seo-entry mantiene il corpo block delle arrow nello stack dei delimitatori
   const [match] = findAllSeoEntryMatches(source, 'seo-arrow');
   assert.ok(match);
   assert.equal(match.closeIdx, source.lastIndexOf('}'));
+});
+
+test('seo-entry conserva la divisione dopo un bang postfix TypeScript', () => {
+  const source = "'blog-postfix': { value! / divisor, after: 1 }";
+  const [match] = findAllSeoEntryMatches(source, 'seo-postfix');
+  assert.ok(match);
+  assert.equal(match.closeIdx, source.lastIndexOf('}'));
+});
+
+test('seo-entry non promuove a block un object literal dopo una line break espressiva', () => {
+  const source = "'blog-newline-object': { value =\n{ nested: 1 } / divisor, after: 1 }";
+  const [match] = findAllSeoEntryMatches(source, 'seo-newline-object');
+  assert.ok(match);
+  assert.equal(match.closeIdx, source.lastIndexOf('}'));
+});
+
+test('seo-entry non tratta i nomi di proprietà come label o keyword di block', () => {
+  for (const keyword of ['case', 'default', 'function', 'class', 'static']) {
+    const source = `'blog-property-${keyword}': { ${keyword}: { nested: 1 } / divisor, after: 1 }`;
+    const [match] = findAllSeoEntryMatches(source, `seo-property-${keyword}`);
+    assert.ok(match, keyword);
+    assert.equal(match.closeIdx, source.lastIndexOf('}'), keyword);
+  }
 });
 
 test('il decoder TS rimuove anche la continuazione \u005cr con newlineAs', () => {

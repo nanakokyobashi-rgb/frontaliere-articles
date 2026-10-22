@@ -137,7 +137,7 @@ export function resolveArticleRouteHref(href, maps = {}) {
   return isAbsolute ? `${SITE_ORIGIN}${path}${suffix}` : `${path}${suffix}`;
 }
 
-/** @typedef {{ index: number, closed: boolean }} TriviaResult */
+/** @typedef {{ index: number, closed: boolean, error?: string }} TriviaResult */
 
 /**
  * Skip whitespace and comments without ever interpreting their contents as
@@ -162,7 +162,13 @@ function skipTrivia(text, offset) {
     }
     if (text.startsWith('/*', index)) {
       const commentEnd = text.indexOf('*/', index + 2);
-      if (commentEnd < 0) return { index: text.length, closed: false };
+      if (commentEnd < 0) {
+        return {
+          index: text.length,
+          closed: false,
+          error: 'Unterminated block comment',
+        };
+      }
       index = commentEnd + 2;
       continue;
     }
@@ -290,19 +296,21 @@ export function scanRedirectSource(source) {
   let literalCount = 0;
   let dynamicCount = 0;
   const unsupported = [];
-  const failClosed = () => ({ entries: {}, literalCount: 0, dynamicCount: 0, unsupported: [] });
+  const failClosed = (reason) => {
+    throw new SyntaxError(`article redirect source: ${reason}`);
+  };
   const text = String(source ?? '');
   let index = 0;
 
   while (index < text.length) {
     const trivia = skipTrivia(text, index);
-    if (!trivia.closed) return failClosed();
+    if (!trivia.closed) return failClosed(trivia.error ?? 'Unterminated trivia');
     index = trivia.index;
     if (index >= text.length) break;
 
     if (text[index] === '`') {
       const templateEnd = skipTemplateLiteral(text, index);
-      if (templateEnd === null) return failClosed();
+      if (templateEnd === null) return failClosed('Unterminated template literal');
       index = templateEnd;
       continue;
     }
@@ -312,25 +320,25 @@ export function scanRedirectSource(source) {
     }
 
     const keyLiteral = readQuotedLiteral(text, index);
-    if (!keyLiteral) return failClosed();
+    if (!keyLiteral) return failClosed('Unterminated string literal');
     index = keyLiteral.end;
     if (!keyLiteral.value.startsWith('/')) continue;
 
     const colon = skipTrivia(text, index);
-    if (!colon.closed) return failClosed();
+    if (!colon.closed) return failClosed(colon.error ?? 'Unterminated trivia');
     if (text[colon.index] !== ':') {
       index = colon.index;
       continue;
     }
 
     const valueStart = skipTrivia(text, colon.index + 1);
-    if (!valueStart.closed) return failClosed();
+    if (!valueStart.closed) return failClosed(valueStart.error ?? 'Unterminated trivia');
     index = valueStart.index;
 
     if (text[index] === '`') {
       const templateEnd = skipTemplateLiteral(text, index);
       if (templateEnd === null) {
-        return failClosed();
+        return failClosed('Unterminated template literal');
       }
       dynamicCount += 1;
       index = templateEnd;
@@ -339,7 +347,9 @@ export function scanRedirectSource(source) {
 
     const valueLiteral = readQuotedLiteral(text, index);
     if (!valueLiteral) {
-      if (text[index] === "'" || text[index] === '"') return failClosed();
+      if (text[index] === "'" || text[index] === '"') {
+        return failClosed('Unterminated string literal');
+      }
       unsupported.push(keyLiteral.value);
       index += 1;
       continue;
@@ -351,7 +361,7 @@ export function scanRedirectSource(source) {
     }
 
     const tail = skipTrivia(text, valueLiteral.end);
-    if (!tail.closed) return failClosed();
+    if (!tail.closed) return failClosed(tail.error ?? 'Unterminated trivia');
     if ((text[tail.index] !== ',' && text[tail.index] !== '}' && tail.index < text.length)) {
       unsupported.push(keyLiteral.value);
       index = valueLiteral.end;
