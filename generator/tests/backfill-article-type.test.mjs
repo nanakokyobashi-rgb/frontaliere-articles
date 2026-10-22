@@ -362,6 +362,20 @@ describe('lettore TS condiviso', () => {
     ]);
   });
 
+  test('ignora regex dopo break, continue, debugger e catch senza binding', () => {
+    const source = [
+      "break\n/'blog.article.fake.break': 'fake',/u;",
+      "continue\n/'blog.article.fake.continue': 'fake',/u;",
+      "debugger\n/'blog.article.fake.debugger': 'fake',/u;",
+      "try {} catch {} /'blog.article.fake.catch': 'fake',/u;",
+      "'blog.article.real.title': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.title', 'actual'],
+    ]);
+  });
+
   test('conta le barre prima di una interpolazione escaped', () => {
     const genuinelyInterpolated = "'blog.article.demo.body1': `literal \\\\${value}`,";
     assert.throws(

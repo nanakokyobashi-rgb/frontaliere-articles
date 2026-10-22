@@ -118,6 +118,21 @@ test('il reader ignora regex dopo la chiusura di un blocco', () => {
   );
 });
 
+test('il reader ignora regex dopo break, continue, debugger e catch senza binding', () => {
+  const source = [
+    "break\n/'blog.article.fake.break': 'fake',/u;",
+    "continue\n/'blog.article.fake.continue': 'fake',/u;",
+    "debugger\n/'blog.article.fake.debugger': 'fake',/u;",
+    "try {} catch {} /'blog.article.fake.catch': 'fake',/u;",
+    "const meta = { 'blog.article.reale.title': 'attuale' };",
+  ].join('\n');
+
+  assert.deepEqual(
+    readStaticObjectEntries(source, 'fixture.ts').map(({ key, value }) => [key, value]),
+    [['blog.article.reale.title', 'attuale']],
+  );
+});
+
 test('newlineAs non reintroduce una continuazione CRLF rimossa', () => {
   const source = "const meta = { 'blog.article.reale.title': 'prima\\\r\nseconda' };";
   assert.equal(

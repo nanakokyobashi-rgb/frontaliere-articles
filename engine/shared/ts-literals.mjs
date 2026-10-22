@@ -10,15 +10,16 @@
 const STATIC_LITERAL_QUOTES = new Set(['"', "'", '`']);
 const TS_ESCAPE_RX = /\\(u[0-9a-fA-F]{4}|\r\n|[\s\S])/g;
 const REGEX_PREFIX_KEYWORDS = new Set([
-  'await', 'case', 'default', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return',
-  'throw', 'typeof', 'void', 'yield',
+  'await', 'break', 'case', 'continue', 'debugger', 'default', 'delete', 'do', 'else', 'in',
+  'instanceof', 'new', 'of', 'return', 'throw', 'typeof', 'void', 'yield',
 ]);
 const REGEX_PREFIX_PUNCTUATION = new Set([
   '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>',
 ]);
 const CONTROL_PAREN_KEYWORDS = new Set(['catch', 'for', 'if', 'switch', 'while', 'with']);
 const BLOCK_BRACE_KEYWORDS = new Set([
-  'class', 'do', 'else', 'enum', 'finally', 'interface', 'module', 'namespace', 'static', 'try',
+  'catch', 'class', 'do', 'else', 'enum', 'finally', 'interface', 'module', 'namespace', 'static',
+  'try',
 ]);
 const BLOCK_BRACE_PENDING_RESET = new Set(['(', ')', '[', ']', ',', ':', ';', '=']);
 
