@@ -880,6 +880,11 @@ test('i publisher rapidi eseguono il syntax gate con lo stesso fallback full', (
     /if \[ -n "\$\{BEFORE:-\}" \][\s\S]*PREFLIGHT_BASE_REVISION=\$BEFORE/u,
     'il gate deve ricevere PREFLIGHT_BASE_REVISION solo quando BEFORE non e\' vuoto',
   );
+  assert.match(
+    sectionSrc,
+    /if \[ "\$EVENT_NAME" = 'push' \] \\\n\s+&& \[\[ "\$\{BEFORE:-\}" =~/u,
+    'fast-publish-section deve calcolare lo scope changed solo per una push, non per una dispatch bounded',
+  );
 });
 
 test('publish-api forza la scansione completa dopo un publish-api fallito', () => {

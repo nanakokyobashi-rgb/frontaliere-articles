@@ -929,7 +929,11 @@ jobs:
             generator/scripts/lib/daily-brief-insights.mjs
             generator/scripts/lib/localized-toponyms.mjs
           )
-          if [[ "${BEFORE:-}" =~ ^[a-f0-9]{40}$ ]] \
+          # A bounded workflow_dispatch can carry an explicit article scope
+          # together with a push range; only push events may derive changed
+          # mode so dispatch targets remain in both preflight gates.
+          if [ "$EVENT_NAME" = 'push' ] \
+            && [[ "${BEFORE:-}" =~ ^[a-f0-9]{40}$ ]] \
             && [[ "${AFTER:-}" =~ ^[a-f0-9]{40}$ ]] \
             && [ "$BEFORE" != '0000000000000000000000000000000000000000' ] \
             && git cat-file -e "${BEFORE}^{commit}" 2>/dev/null \
