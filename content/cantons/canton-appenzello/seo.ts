@@ -587,6 +587,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-investimenti-tetto-fotovoltaico-2027': {
+    title: 'Spese nette 2027: CHF 802\'767; eccedenza quasi CHF 580\'000',
+    description: 'Per il 2027 sono pianificate spese nette di CHF 802\'767 per infrastrutture comunali; previsto il risanamento del tetto della palestra',
+    keywords: 'frontalieri, ticino, svizzera, italia, spese, nette, eccedenza, quasi',
+    ogTitle: 'Spese nette 2027: CHF 802\'767; eccedenza quasi CHF 580\'000',
+    ogDescription: 'L\'estratto pubblico indica quasi CHF 580\'000 di eccedenza delle spese e un programma 2027 da CHF 802\'767. Tra gli interventi previsti, il risanamento del tetto della palestra con installazione simultanea di un impianto fotovoltaico.',
+    canonicalPath: '/articoli-appenzello/investimenti-tetto-fotovoltaico-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Spese nette 2027: CHF 802'767; eccedenza quasi CHF 580'000",
+      "description": "Per il 2027 sono pianificate spese nette di CHF 802'767 per infrastrutture comunali; previsto il risanamento del tetto della palestra",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-investimenti-tetto-fotovoltaico-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T22:14:01+00:00",
+      "dateModified": "2026-10-22T22:14:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/investimenti-tetto-fotovoltaico-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

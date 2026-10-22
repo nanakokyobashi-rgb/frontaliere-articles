@@ -17,11 +17,26 @@ function validBefore(value) {
   return value === ZERO_SHA || isFullSha(value);
 }
 
+const PUSH_RANGE_RUN_TITLE_RE = /\/ range=(none|[a-f0-9]{40})\.\.([a-f0-9]{40})$/u;
+
+/**
+ * Read the exact push boundary persisted by publish-api.yml in its run title.
+ * workflow_run carries the head SHA but not github.event.before; the marker
+ * is emitted only for that workflow's own push event and is therefore more
+ * authoritative than guessing from an older Actions run.
+ */
+export function parsePushRangeRunTitle(value) {
+  const match = PUSH_RANGE_RUN_TITLE_RE.exec(String(value ?? ''));
+  if (!match || match[1] === 'none' || !validBefore(match[1])) return null;
+  return { before: match[1], after: match[2] };
+}
+
 /**
  * Resolve the push range for a completed API workflow without using the
- * non-existent `commits/<sha>/events` endpoint. If GitHub omits a bot push
- * from the public event feed, the preceding API workflow run identifies the
- * exact previous main head; histories that cannot prove that boundary remain
+ * non-existent commits/<sha>/events endpoint. The API run title carries the
+ * exact event boundary; if an older run has no marker, the preceding API
+ * workflow run is only a candidate and its direct-parent relationship must be
+ * proved before use. Histories that cannot prove that boundary remain
  * fail-closed.
  */
 export function resolvePushRange({
@@ -52,6 +67,15 @@ export function resolvePushRange({
   const currentRun = (Array.isArray(workflowRuns) ? workflowRuns : []).find(
     (run) => String(run?.id ?? '') === String(workflowRunId ?? ''),
   );
+  if (currentRun?.event === 'push') {
+    const markedRange = parsePushRangeRunTitle(currentRun.display_title);
+    if (markedRange?.after === headSha) {
+      return {
+        ...markedRange,
+        source: 'workflow-run-title',
+      };
+    }
+  }
   if (currentRun) {
     const currentCreatedAt = Date.parse(currentRun.created_at ?? '');
     const currentId = Number(currentRun.id);
@@ -145,7 +169,7 @@ function main() {
       workflowRuns,
       workflowRunId,
     });
-    if (range) {
+    if (range && range.source !== 'workflow-run-title') {
       const comparison = readApiJson(
         `repos/${repo}/compare/${range.before}...${range.after}`,
         '{status, ahead_by, behind_by, total_commits, merge_base_commit: .merge_base_commit.sha}',

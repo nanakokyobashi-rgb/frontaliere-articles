@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T00:12:28.308Z",
-  "contentHash": "6c54a5dcfd5e671e808e5e24f35e7d4da9940783e306680612e5749e1aa7d638",
+  "updatedAt": "2026-10-22T22:21:57.960Z",
+  "contentHash": "1b59da1ecb0d5f57ff473ec27cd3c5c2f6d7fa39010fae4fca12af6f53409aaa",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-21T12:38:14.154Z",
+      "updatedAt": "2026-10-22T11:13:26.127Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T10:37:42.748Z",
+      "updatedAt": "2026-10-22T10:40:36.644Z",
       "keyFacts": 0
     }
   ],
@@ -100,13 +100,28 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T11:13:26.127Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Salonkonzert",
+              "date": "2026-10-22T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
+            },
+            {
+              "label": "Wissen am Mittag",
+              "date": "2026-10-22T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "date": "2026-10-22T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694296"
+            },
             {
               "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
               "date": "2026-10-21T22:00:00.000Z",
@@ -121,24 +136,9 @@
               "label": "Winter Qi Gong Inseli",
               "date": "2026-10-19T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-18T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648405"
-            },
-            {
-              "label": "Tag der offenen Tür und Gespräch",
-              "date": "2026-10-17T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7686649"
-            },
-            {
-              "label": "Ausstellung NachtLeben",
-              "date": "2026-10-16T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -172,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "en": {
       "canton": "LU",
@@ -255,13 +255,28 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T11:13:26.127Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Salonkonzert",
+              "date": "2026-10-22T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
+            },
+            {
+              "label": "Wissen am Mittag",
+              "date": "2026-10-22T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "date": "2026-10-22T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694296"
+            },
             {
               "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
               "date": "2026-10-21T22:00:00.000Z",
@@ -276,24 +291,9 @@
               "label": "Winter Qi Gong Inseli",
               "date": "2026-10-19T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-18T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648405"
-            },
-            {
-              "label": "Tag der offenen Tür und Gespräch",
-              "date": "2026-10-17T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7686649"
-            },
-            {
-              "label": "Ausstellung NachtLeben",
-              "date": "2026-10-16T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "de": {
       "canton": "LU",
@@ -410,13 +410,28 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T11:13:26.127Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Salonkonzert",
+              "date": "2026-10-22T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
+            },
+            {
+              "label": "Wissen am Mittag",
+              "date": "2026-10-22T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "date": "2026-10-22T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694296"
+            },
             {
               "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
               "date": "2026-10-21T22:00:00.000Z",
@@ -431,24 +446,9 @@
               "label": "Winter Qi Gong Inseli",
               "date": "2026-10-19T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-18T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648405"
-            },
-            {
-              "label": "Tag der offenen Tür und Gespräch",
-              "date": "2026-10-17T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7686649"
-            },
-            {
-              "label": "Ausstellung NachtLeben",
-              "date": "2026-10-16T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -482,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "fr": {
       "canton": "LU",
@@ -565,13 +565,28 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T11:13:26.127Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Salonkonzert",
+              "date": "2026-10-22T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
+            },
+            {
+              "label": "Wissen am Mittag",
+              "date": "2026-10-22T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "date": "2026-10-22T22:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694296"
+            },
             {
               "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
               "date": "2026-10-21T22:00:00.000Z",
@@ -586,24 +601,9 @@
               "label": "Winter Qi Gong Inseli",
               "date": "2026-10-19T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
-            },
-            {
-              "label": "Bewegung und Begegnung - Feldenkrais",
-              "date": "2026-10-18T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7648405"
-            },
-            {
-              "label": "Tag der offenen Tür und Gespräch",
-              "date": "2026-10-17T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7686649"
-            },
-            {
-              "label": "Ausstellung NachtLeben",
-              "date": "2026-10-16T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7626901"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -637,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     }
   }
 }

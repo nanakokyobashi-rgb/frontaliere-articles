@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "servizi",
-  "updatedAt": "2026-10-22T09:28:01.507Z",
-  "contentHash": "1b695b459b496b45a631a916e5cabd65f794b8ebc6708530d62238fdca28aa2b",
+  "updatedAt": "2026-10-22T22:21:57.960Z",
+  "contentHash": "55834ceb32fc41878a4f646da8ad70a85665046b73b2cc22656b1639c990c78f",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-22T04:42:53.367Z",
+      "updatedAt": "2026-10-22T11:50:08.473Z",
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-22T05:05:39.050Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T20:56:46.769Z",
+      "updatedAt": "2026-10-22T10:40:36.644Z",
       "keyFacts": 0
     }
   ],
@@ -102,21 +97,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-22T04:42:53.367Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Chur",
-              "value": "3 °C",
-              "detail": "oggi da 3 a 11 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-22T05:05:39.050Z"
+          "updatedAt": "2026-10-22T11:50:08.473Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -149,7 +130,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -229,7 +210,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "en": {
       "canton": "GR",
@@ -304,21 +285,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-22T04:42:53.367Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Chur",
-              "value": "3 °C",
-              "detail": "today from 3 to 11 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-22T05:05:39.050Z"
+          "updatedAt": "2026-10-22T11:50:08.473Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -351,7 +318,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -427,7 +394,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "de": {
       "canton": "GR",
@@ -502,21 +469,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-22T04:42:53.367Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Chur",
-              "value": "3 °C",
-              "detail": "heute 3 bis 11 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-22T05:05:39.050Z"
+          "updatedAt": "2026-10-22T11:50:08.473Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -549,7 +502,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -625,7 +578,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "fr": {
       "canton": "GR",
@@ -700,21 +653,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.gr.ch/",
-          "updatedAt": "2026-10-22T04:42:53.367Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Chur",
-              "value": "3 °C",
-              "detail": "aujourd’hui de 3 à 11 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-22T05:05:39.050Z"
+          "updatedAt": "2026-10-22T11:50:08.473Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -747,7 +686,7 @@
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090701.aspx"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -819,7 +758,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     }
   }
 }

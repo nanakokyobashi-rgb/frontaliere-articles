@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "78316837e2cf03381c8debdc25a21b9176eddbd733dcf1bd4f2d2f2317e8f620",
+  "updatedAt": "2026-10-22T23:04:40.581Z",
+  "contentHash": "f9b9e02d9e8de8276c57c36b3c3de4fecf82cd89485e0a8531e663d310667d38",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "A1 Wangen–Luterbach: lavori notturni fino a metà dicembre",
+          "url": "/articoli-soletta/a1-lavori-notturni-luterbach/",
+          "excerpt": "Dal 25 ottobre 2026, lavori notturni estesi sull'A1 tra Wangen an der Aare e Luterbach: la gestione del traffico sarà modificata fino a metà dicembre.",
+          "date": "2026-10-22T22:55:43.751Z"
+        },
+        {
           "title": "Soletta: 15 risposte a iniziative parlamentari e progetto diritti voto",
           "url": "/articoli-soletta/soletta-regierungsrat-attiparlamentari-2026/",
           "excerpt": "Il 20 ottobre 2026 il Regierungsrat ha pubblicato i documenti della 34ª seduta: 15 iniziative evase, 5 urgenti sulla soH e messaggio per abolire l'esclusione dal voto (RG 0270/2026).",
@@ -94,12 +100,6 @@
           "url": "/articoli-soletta/furti-raggiro-soletta/",
           "excerpt": "La Polizia cantonale di Soletta segnala circa dieci furti con raggiro negli ultimi giorni: autrici e autori usano gioielli economici per distrarre le vittime.",
           "date": "2026-10-09T23:07:09.213Z"
-        },
-        {
-          "title": "Soletta: uccisi 930 suini per polmonite enzootica",
-          "url": "/articoli-soletta/solothurn-pneumonia-suini/",
-          "excerpt": "Il Servizio veterinario del Canton Soletta ha sgomberato due allevamenti: 80 scrofe e 50 giovani macellati, 930 suini uccisi e 1200 giovani esportati vivi.",
-          "date": "2026-10-09T14:03:47.492Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T23:04:40.581Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "A1 Wangen–Luterbach: night work until mid-December",
+          "url": "/en/solothurn-articles/a1-night-work-luterbach/",
+          "excerpt": "From October 25, 2026, extended nighttime work on the A1 between Wangen an der Aare and Luterbach: traffic management will be modified until mid-December.",
+          "date": "2026-10-22T22:55:43.751Z"
+        },
+        {
           "title": "Solothurn: 15 responses to parliamentary initiatives and voting rights project",
           "url": "/en/solothurn-articles/solothurn-regierungsrat-parliamentary-items-october-2026/",
           "excerpt": "On October 20, 2026, the Regierungsrat published the documents from the 34th session: 15 initiatives processed, 5 urgent matters concerning the soH, and a message to abolish exclusion from voting (RG 0270/2026).",
@@ -193,12 +199,6 @@
           "url": "/en/solothurn-articles/solothurn-trick-thefts-warning/",
           "excerpt": "The Solothurn cantonal police report around ten thefts involving deception in recent days: perpetrators use inexpensive jewelry to distract their victims.",
           "date": "2026-10-09T23:07:09.213Z"
-        },
-        {
-          "title": "Solothurn: 930 pigs killed due to enzootic pneumonia",
-          "url": "/en/solothurn-articles/solothurn-pig-pneumonia-cull/",
-          "excerpt": "The Veterinary Service of the Canton of Solothurn has cleared out two farms: 80 sows and 50 young pigs slaughtered, 930 pigs killed and 1200 young pigs exported alive.",
-          "date": "2026-10-09T14:03:47.492Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T23:04:40.581Z"
     },
     "de": {
       "canton": "SO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "A1 Wangen–Luterbach: Nachtarbeiten bis Mitte Dezember",
+          "url": "/de/solothurn-artikel/a1-nachtarbeiten-luterbach/",
+          "excerpt": "Ab dem 25. Oktober 2026 finden auf der A1 zwischen Wangen an der Aare und Luterbach umfangreiche Nachtarbeiten statt: Die Verkehrsführung wird bis Mitte Dezember angepasst.",
+          "date": "2026-10-22T22:55:43.751Z"
+        },
+        {
           "title": "Solothurn: 15 Antworten und Entwurf zu Stimmrechten",
           "url": "/de/solothurn-artikel/solothurn-regierungsrat-geschaefte-oktober-2026/",
           "excerpt": "Am 20. Oktober 2026 hat der Regierungsrat die Unterlagen der 34. Sitzung veröffentlicht: 15 erledigte Vorstösse, 5 dringende zur soH und eine Botschaft zur Aufhebung des Ausschlusses vom Stimmrecht (RG 0270/2026).",
@@ -292,12 +298,6 @@
           "url": "/de/solothurn-artikel/solothurn-warnung-trickdiebstahle/",
           "excerpt": "Die Kantonspolizei Solothurn meldet rund zehn Trickdiebstähle in den letzten Tagen: Täterinnen und Täter verwenden günstigen Schmuck, um die Opfer abzulenken.",
           "date": "2026-10-09T23:07:09.213Z"
-        },
-        {
-          "title": "Solothurn: 930 Schweine wegen enzootischer Pneumonie getötet",
-          "url": "/de/solothurn-artikel/solothurn-schweinepneumonie-keulung/",
-          "excerpt": "Der Veterinärdienst des Kantons Solothurn hat zwei Betriebe geräumt: 80 Sauen und 50 Jungtiere geschlachtet, 930 Schweine getötet und 1200 Jungtiere lebend exportiert.",
-          "date": "2026-10-09T14:03:47.492Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T23:04:40.581Z"
     },
     "fr": {
       "canton": "SO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "A1 Wangen–Luterbach : travaux de nuit jusqu'à la mi-décembre",
+          "url": "/fr/articles-soleure/a1-travaux-nocturnes-luterbach/",
+          "excerpt": "À partir du 25 octobre 2026, travaux de nuit étendus sur l'A1 entre Wangen an der Aare et Luterbach : la gestion du trafic sera modifiée jusqu'à la mi-décembre.",
+          "date": "2026-10-22T22:55:43.751Z"
+        },
+        {
           "title": "Soleure : 15 réponses sur initiatives et droits de vote",
           "url": "/fr/articles-soleure/soleure-conseil-executif-objets-parlementaires-octobre-2026/",
           "excerpt": "Le 20 octobre 2026, le Regierungsrat a publié les documents de la 34e séance : 15 initiatives traitées, 5 urgentes concernant la soH et un message visant à abolir l’exclusion du droit de vote (RG 0270/2026).",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-soleure/soleure-alerte-vols-par-ruse/",
           "excerpt": "La Police cantonale de Soleure signale une dizaine de vols par ruse ces derniers jours : les autrices et auteurs utilisent des bijoux bon marché pour distraire les victimes.",
           "date": "2026-10-09T23:07:09.213Z"
-        },
-        {
-          "title": "Soleure : 930 porcs tués en raison d'une pneumonie enzootique",
-          "url": "/fr/articles-soleure/soleure-pneumonie-porcine-abattage/",
-          "excerpt": "Le Service vétérinaire du canton de Soleure a fait évacuer deux élevages : 80 truies et 50 jeunes porcs abattus, 930 porcs tués et 1200 jeunes porcs exportés vivants.",
-          "date": "2026-10-09T14:03:47.492Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T23:04:40.581Z"
     }
   }
 }

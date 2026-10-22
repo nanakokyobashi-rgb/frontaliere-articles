@@ -1,5 +1,8 @@
 name: Publish article data API
-run-name: Publish article data API (${{ inputs.bing_seo_nonce || 'automatic' }})
+# A workflow_run event exposes the push head but not its before SHA. Keep the
+# exact event boundary in the run title so downstream publishers can recover a
+# multi-commit push even when GitHub omits the bot push from repository events.
+run-name: Publish article data API (${{ inputs.bing_seo_nonce || 'automatic' }}) / range=${{ github.event.before || 'none' }}..${{ github.event.after || github.sha }}
 
 # This repository owns the article corpus. The site that renders it lives in a
 # separate repository and consumes this data as plain JSON over HTTP — it must

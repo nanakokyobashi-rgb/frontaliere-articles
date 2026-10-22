@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-22T13:56:44.136Z",
-  "contentHash": "ef7cb9f3c2f45c2ee7a3f34fe5446042b25f9b3a0b5eff32046ae81af2071e87",
+  "updatedAt": "2026-10-22T22:21:57.960Z",
+  "contentHash": "7f34ad956db771604a95b70cfe6ed17547b0ea64d84491b59e3ac8a020db24cf",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T20:56:46.769Z",
+      "updatedAt": "2026-10-22T10:40:36.644Z",
       "keyFacts": 0
     }
   ],
@@ -168,6 +168,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Portraits croisés",
+              "date": "2026-10-21T07:00:31.000Z",
+              "url": "https://www.lemanexpress.com/2026/10/21/portraits-croises/"
+            },
+            {
               "label": "NUIT DU 24 AU 25 OCTOBRE : PASSAGE A L’HEURE HIVER",
               "date": "2026-10-20T04:54:57.000Z",
               "url": "https://www.lemanexpress.com/2026/10/20/nuit-du-24-au-25-octobre-passage-a-lheure-hiver/"
@@ -191,14 +196,9 @@
               "label": "Plan localisé de quartier Communaux d'Ambilly - Quartier Belle-Terre, Pièce A1 (Thônex)",
               "date": "2026-10-16",
               "url": "https://www.ge.ch/node/38845"
-            },
-            {
-              "label": "Travaux avenue de l’Europe / route de Bonneville (Vétraz-Monthoux)",
-              "date": "2026-10-15",
-              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/travaux-avenue-de-leurope-route-de-bonneville-vetraz-monthoux"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "en": {
       "canton": "GE",
@@ -404,6 +404,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Portraits croisés",
+              "date": "2026-10-21T07:00:31.000Z",
+              "url": "https://www.lemanexpress.com/2026/10/21/portraits-croises/"
+            },
+            {
               "label": "NUIT DU 24 AU 25 OCTOBRE : PASSAGE A L’HEURE HIVER",
               "date": "2026-10-20T04:54:57.000Z",
               "url": "https://www.lemanexpress.com/2026/10/20/nuit-du-24-au-25-octobre-passage-a-lheure-hiver/"
@@ -427,14 +432,9 @@
               "label": "Plan localisé de quartier Communaux d'Ambilly - Quartier Belle-Terre, Pièce A1 (Thônex)",
               "date": "2026-10-16",
               "url": "https://www.ge.ch/node/38845"
-            },
-            {
-              "label": "Travaux avenue de l’Europe / route de Bonneville (Vétraz-Monthoux)",
-              "date": "2026-10-15",
-              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/travaux-avenue-de-leurope-route-de-bonneville-vetraz-monthoux"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -494,7 +494,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "de": {
       "canton": "GE",
@@ -640,6 +640,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Portraits croisés",
+              "date": "2026-10-21T07:00:31.000Z",
+              "url": "https://www.lemanexpress.com/2026/10/21/portraits-croises/"
+            },
+            {
               "label": "NUIT DU 24 AU 25 OCTOBRE : PASSAGE A L’HEURE HIVER",
               "date": "2026-10-20T04:54:57.000Z",
               "url": "https://www.lemanexpress.com/2026/10/20/nuit-du-24-au-25-octobre-passage-a-lheure-hiver/"
@@ -663,14 +668,9 @@
               "label": "Plan localisé de quartier Communaux d'Ambilly - Quartier Belle-Terre, Pièce A1 (Thônex)",
               "date": "2026-10-16",
               "url": "https://www.ge.ch/node/38845"
-            },
-            {
-              "label": "Travaux avenue de l’Europe / route de Bonneville (Vétraz-Monthoux)",
-              "date": "2026-10-15",
-              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/travaux-avenue-de-leurope-route-de-bonneville-vetraz-monthoux"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -730,7 +730,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "fr": {
       "canton": "GE",
@@ -876,6 +876,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Portraits croisés",
+              "date": "2026-10-21T07:00:31.000Z",
+              "url": "https://www.lemanexpress.com/2026/10/21/portraits-croises/"
+            },
+            {
               "label": "NUIT DU 24 AU 25 OCTOBRE : PASSAGE A L’HEURE HIVER",
               "date": "2026-10-20T04:54:57.000Z",
               "url": "https://www.lemanexpress.com/2026/10/20/nuit-du-24-au-25-octobre-passage-a-lheure-hiver/"
@@ -899,14 +904,9 @@
               "label": "Plan localisé de quartier Communaux d'Ambilly - Quartier Belle-Terre, Pièce A1 (Thônex)",
               "date": "2026-10-16",
               "url": "https://www.ge.ch/node/38845"
-            },
-            {
-              "label": "Travaux avenue de l’Europe / route de Bonneville (Vétraz-Monthoux)",
-              "date": "2026-10-15",
-              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/travaux-avenue-de-leurope-route-de-bonneville-vetraz-monthoux"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -966,7 +966,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     }
   }
 }

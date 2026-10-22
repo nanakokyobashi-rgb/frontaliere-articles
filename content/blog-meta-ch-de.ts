@@ -8588,6 +8588,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.adeguamento-rendite-superstiti-invalidita-2027.title': 'Anpassung der Hinterlassenen- und Invalidenrenten nach BVG ab 1. Januar 2027',
     'blog.article.adeguamento-rendite-superstiti-invalidita-2027.excerpt': 'Ab 1. Januar 2027 werden die Renten an die Preisentwicklung angepasst.',
     'blog.article.adeguamento-rendite-superstiti-invalidita-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.bns-cambi-energia.title': 'BNS: Leitzins unverändert und moderate Inflation',
+    'blog.article.bns-cambi-energia.excerpt': 'Die BNS hält den Leitzins bei 0 Prozent Im September verzichtet die BNS auf die Formulierung zu den Wechselkursen Der Inflationsdruck nimmt nur leicht zu Die KI kann',
+    'blog.article.bns-cambi-energia.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

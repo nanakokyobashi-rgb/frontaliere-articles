@@ -48,6 +48,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.heiden-risparmi-preventivo-2027.title': 'Heiden setzt die Sparbemühungen fort: Defizit von CHF 204\'200 im Jahr 2027',
     'blog.article.heiden-risparmi-preventivo-2027.excerpt': 'Der Voranschlag 2027 von Heiden weist Einnahmen von CHF 35,308 Millionen, Ausgaben von CHF 35,512 Millionen und ein Defizit von CHF 204\'200 aus.',
     'blog.article.heiden-risparmi-preventivo-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.investimenti-tetto-fotovoltaico-2027.title': 'Nettoausgaben 2027: CHF 802\'767; Ausgabenüberschuss von fast CHF 580\'000',
+    'blog.article.investimenti-tetto-fotovoltaico-2027.excerpt': 'Für 2027 sind Nettoausgaben von CHF 802\'767 geplant; vorgesehen ist die Sanierung des Dachs der Sporthalle mit Photovoltaik.',
+    'blog.article.investimenti-tetto-fotovoltaico-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

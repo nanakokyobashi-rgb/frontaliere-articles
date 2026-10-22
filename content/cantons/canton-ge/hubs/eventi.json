@@ -4,17 +4,17 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T09:28:01.507Z",
-  "contentHash": "195771a919822426c2424b1f13dbcc51178014ca504b59e5d6dfa2c9a7673445",
+  "updatedAt": "2026-10-22T22:21:57.960Z",
+  "contentHash": "676d9811b79a4df8dc03d8976b71f391b22e1ffed0fb5313eef8bfcb4e11d3f3",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T04:14:38.839Z",
+      "updatedAt": "2026-10-22T11:13:26.127Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T20:56:46.769Z",
+      "updatedAt": "2026-10-22T10:40:36.644Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "320",
+          "value": "325",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -50,6 +50,18 @@
               "url": "https://www.geneve.ch/agenda/atelier-theatre-livre-scene-clementine-comedienne-bibliotheque-cite"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+            },
+            {
               "label": "BIG BAND DES EAUX-VIVES : Echoes of the Messengers",
               "detail": "Genève",
               "date": "2026-10-22",
@@ -80,27 +92,15 @@
               "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera"
             },
             {
-              "label": "FRENCH MON AMOUR S10E3",
+              "label": "De(s)possession(s) de Vanessa Riera * COMPLET *",
               "detail": "Genève",
               "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/french-amour-s10e3"
-            },
-            {
-              "label": "Histoires gravées dans la pierre",
-              "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/histoires-gravees-pierre"
-            },
-            {
-              "label": "Histoires gravées dans la pierre COMPLET",
-              "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/histoires-gravees-pierre-complet"
+              "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera-complet"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-10-22T04:14:38.839Z"
+          "updatedAt": "2026-10-22T11:13:26.127Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "en": {
       "canton": "GE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "320",
+          "value": "325",
           "note": "from the site’s events calendar"
         }
       ],
@@ -168,6 +168,18 @@
               "url": "https://www.geneve.ch/agenda/atelier-theatre-livre-scene-clementine-comedienne-bibliotheque-cite"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+            },
+            {
               "label": "BIG BAND DES EAUX-VIVES : Echoes of the Messengers",
               "detail": "Genève",
               "date": "2026-10-22",
@@ -198,27 +210,15 @@
               "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera"
             },
             {
-              "label": "FRENCH MON AMOUR S10E3",
+              "label": "De(s)possession(s) de Vanessa Riera * COMPLET *",
               "detail": "Genève",
               "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/french-amour-s10e3"
-            },
-            {
-              "label": "Histoires gravées dans la pierre",
-              "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/histoires-gravees-pierre"
-            },
-            {
-              "label": "Histoires gravées dans la pierre COMPLET",
-              "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/histoires-gravees-pierre-complet"
+              "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera-complet"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-10-22T04:14:38.839Z"
+          "updatedAt": "2026-10-22T11:13:26.127Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -231,7 +231,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +253,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "de": {
       "canton": "GE",
@@ -263,7 +263,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "320",
+          "value": "325",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -286,6 +286,18 @@
               "url": "https://www.geneve.ch/agenda/atelier-theatre-livre-scene-clementine-comedienne-bibliotheque-cite"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+            },
+            {
               "label": "BIG BAND DES EAUX-VIVES : Echoes of the Messengers",
               "detail": "Genève",
               "date": "2026-10-22",
@@ -316,27 +328,15 @@
               "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera"
             },
             {
-              "label": "FRENCH MON AMOUR S10E3",
+              "label": "De(s)possession(s) de Vanessa Riera * COMPLET *",
               "detail": "Genève",
               "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/french-amour-s10e3"
-            },
-            {
-              "label": "Histoires gravées dans la pierre",
-              "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/histoires-gravees-pierre"
-            },
-            {
-              "label": "Histoires gravées dans la pierre COMPLET",
-              "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/histoires-gravees-pierre-complet"
+              "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera-complet"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-10-22T04:14:38.839Z"
+          "updatedAt": "2026-10-22T11:13:26.127Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -349,7 +349,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "fr": {
       "canton": "GE",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "320",
+          "value": "325",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -404,6 +404,18 @@
               "url": "https://www.geneve.ch/agenda/atelier-theatre-livre-scene-clementine-comedienne-bibliotheque-cite"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-22",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+            },
+            {
               "label": "BIG BAND DES EAUX-VIVES : Echoes of the Messengers",
               "detail": "Genève",
               "date": "2026-10-22",
@@ -434,27 +446,15 @@
               "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera"
             },
             {
-              "label": "FRENCH MON AMOUR S10E3",
+              "label": "De(s)possession(s) de Vanessa Riera * COMPLET *",
               "detail": "Genève",
               "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/french-amour-s10e3"
-            },
-            {
-              "label": "Histoires gravées dans la pierre",
-              "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/histoires-gravees-pierre"
-            },
-            {
-              "label": "Histoires gravées dans la pierre COMPLET",
-              "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/histoires-gravees-pierre-complet"
+              "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera-complet"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-10-22T04:14:38.839Z"
+          "updatedAt": "2026-10-22T11:13:26.127Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -467,7 +467,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     }
   }
 }

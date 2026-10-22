@@ -12,6 +12,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'soletta-parlamento-budget-2027-inchiesta-soh': { it: 'soletta-parlamento-budget-2027-inchiesta-soh', en: 'solothurn-parliament-budget-2027-soh-investigation', de: 'solothurn-parlament-budget-2027-untersuchung-soh', fr: 'soleure-parlement-budget-2027-enquete-soh' },
  'governo-soletta-ottobre-2026': { it: 'governo-soletta-ottobre-2026', en: 'solothurn-government-october-2026', de: 'solothurn-regierungsrat-oktober-2026', fr: 'gouvernement-soleure-octobre-2026' },
  'soletta-regierungsrat-attiparlamentari-2026': { it: 'soletta-regierungsrat-attiparlamentari-2026', en: 'solothurn-regierungsrat-parliamentary-items-october-2026', de: 'solothurn-regierungsrat-geschaefte-oktober-2026', fr: 'soleure-conseil-executif-objets-parlementaires-octobre-2026' },
+ 'a1-lavori-notturni-luterbach': { it: 'a1-lavori-notturni-luterbach', en: 'a1-night-work-luterbach', de: 'a1-nachtarbeiten-luterbach', fr: 'a1-travaux-nocturnes-luterbach' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

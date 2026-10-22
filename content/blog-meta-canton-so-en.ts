@@ -30,6 +30,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.soletta-regierungsrat-attiparlamentari-2026.title': 'Solothurn: 15 responses to parliamentary initiatives and voting rights project',
     'blog.article.soletta-regierungsrat-attiparlamentari-2026.excerpt': 'On October 20, 2026, the Regierungsrat published the documents from the 34th session: 15 initiatives processed, 5 urgent matters concerning the soH, and a message to abolish exclusion from voting (RG 0270/2026).',
     'blog.article.soletta-regierungsrat-attiparlamentari-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.a1-lavori-notturni-luterbach.title': 'A1 Wangen–Luterbach: night work until mid-December',
+    'blog.article.a1-lavori-notturni-luterbach.excerpt': 'From October 25, 2026, extended nighttime work on the A1 between Wangen an der Aare and Luterbach: traffic management will be modified until mid-December.',
+    'blog.article.a1-lavori-notturni-luterbach.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-10-22T09:28:01.507Z",
-  "contentHash": "62b552b36fb325f6aaf9fa53fd9a2a615435419898f9cb1cfa5e4bcb16ac35a0",
+  "updatedAt": "2026-10-22T22:21:57.960Z",
+  "contentHash": "5cdb394e2b2220ec08d60128eb40bbd9e5f2838ccd26a9cd0f7965eb3034c972",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-22T04:42:53.367Z",
+      "updatedAt": "2026-10-22T11:50:08.473Z",
       "keyFacts": 1
     },
     {
-      "id": "meteo",
-      "updatedAt": "2026-10-22T05:05:39.050Z",
-      "keyFacts": 0
-    },
-    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T20:56:46.769Z",
+      "updatedAt": "2026-10-22T10:40:36.644Z",
       "keyFacts": 0
     }
   ],
@@ -92,21 +87,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-22T04:42:53.367Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Schwyz",
-              "value": "4 °C",
-              "detail": "oggi da 4 a 12 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-22T05:05:39.050Z"
+          "updatedAt": "2026-10-22T11:50:08.473Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -114,37 +95,37 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
-              "label": "Zustimmung der vorberatenden Kommission zur Erhöhung einer Ausgabenbewilligung",
-              "date": "2026-10-21",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26338"
-            },
-            {
               "label": "Depression stärker ins öffentliche Bewusstsein rücken",
               "date": "2026-10-07",
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/depression-staerker-ins-oeffentliche-bewusstsein-ruecken/"
             },
             {
-              "label": "Empfehlungen der vorberatenden Kommission zu zwei Ausgabenbewilligungen",
-              "date": "2026-09-30",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26211"
-            },
-            {
-              "label": "Ungedeckte Notfallkosten sollen bei den Gemeinden bleiben",
-              "date": "2026-09-25",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26127"
-            },
-            {
-              "label": "Über 17 Millionen Franken zusätzlich an Prämienverbilligung vorgesehen",
-              "date": "2026-09-24",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26162"
-            },
-            {
               "label": "Rettungsdienst Schwyz AG:",
               "date": "2026-07-27",
               "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
+            },
+            {
+              "label": "Stärkung des Adipositaszentrums mit neuer Leitung",
+              "date": "2026-07-02",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
+            },
+            {
+              "label": "7. Parlamentarischer Abend der AMEOS Gruppe",
+              "date": "2026-06-29",
+              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/7-parlamentarischer-abend-der-ameos-gruppe-1/"
+            },
+            {
+              "label": "40 Jahre EPPENDORFER",
+              "date": "2026-06-26",
+              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/40-jahre-eppendorfer/"
+            },
+            {
+              "label": "Generalversammlung 2026: Gemeinsam Verantwortung für die Gesundheitsversorgung",
+              "date": "2026-06-25",
+              "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/generalversammlung-2026.html"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -224,7 +205,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "en": {
       "canton": "SZ",
@@ -289,21 +270,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-22T04:42:53.367Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Schwyz",
-              "value": "4 °C",
-              "detail": "today from 4 to 12 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-22T05:05:39.050Z"
+          "updatedAt": "2026-10-22T11:50:08.473Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -311,37 +278,37 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
-              "label": "Zustimmung der vorberatenden Kommission zur Erhöhung einer Ausgabenbewilligung",
-              "date": "2026-10-21",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26338"
-            },
-            {
               "label": "Depression stärker ins öffentliche Bewusstsein rücken",
               "date": "2026-10-07",
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/depression-staerker-ins-oeffentliche-bewusstsein-ruecken/"
             },
             {
-              "label": "Empfehlungen der vorberatenden Kommission zu zwei Ausgabenbewilligungen",
-              "date": "2026-09-30",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26211"
-            },
-            {
-              "label": "Ungedeckte Notfallkosten sollen bei den Gemeinden bleiben",
-              "date": "2026-09-25",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26127"
-            },
-            {
-              "label": "Über 17 Millionen Franken zusätzlich an Prämienverbilligung vorgesehen",
-              "date": "2026-09-24",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26162"
-            },
-            {
               "label": "Rettungsdienst Schwyz AG:",
               "date": "2026-07-27",
               "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
+            },
+            {
+              "label": "Stärkung des Adipositaszentrums mit neuer Leitung",
+              "date": "2026-07-02",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
+            },
+            {
+              "label": "7. Parlamentarischer Abend der AMEOS Gruppe",
+              "date": "2026-06-29",
+              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/7-parlamentarischer-abend-der-ameos-gruppe-1/"
+            },
+            {
+              "label": "40 Jahre EPPENDORFER",
+              "date": "2026-06-26",
+              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/40-jahre-eppendorfer/"
+            },
+            {
+              "label": "Generalversammlung 2026: Gemeinsam Verantwortung für die Gesundheitsversorgung",
+              "date": "2026-06-25",
+              "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/generalversammlung-2026.html"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +384,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "de": {
       "canton": "SZ",
@@ -482,21 +449,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-22T04:42:53.367Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Schwyz",
-              "value": "4 °C",
-              "detail": "heute 4 bis 12 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-22T05:05:39.050Z"
+          "updatedAt": "2026-10-22T11:50:08.473Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -504,37 +457,37 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
-              "label": "Zustimmung der vorberatenden Kommission zur Erhöhung einer Ausgabenbewilligung",
-              "date": "2026-10-21",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26338"
-            },
-            {
               "label": "Depression stärker ins öffentliche Bewusstsein rücken",
               "date": "2026-10-07",
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/depression-staerker-ins-oeffentliche-bewusstsein-ruecken/"
             },
             {
-              "label": "Empfehlungen der vorberatenden Kommission zu zwei Ausgabenbewilligungen",
-              "date": "2026-09-30",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26211"
-            },
-            {
-              "label": "Ungedeckte Notfallkosten sollen bei den Gemeinden bleiben",
-              "date": "2026-09-25",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26127"
-            },
-            {
-              "label": "Über 17 Millionen Franken zusätzlich an Prämienverbilligung vorgesehen",
-              "date": "2026-09-24",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26162"
-            },
-            {
               "label": "Rettungsdienst Schwyz AG:",
               "date": "2026-07-27",
               "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
+            },
+            {
+              "label": "Stärkung des Adipositaszentrums mit neuer Leitung",
+              "date": "2026-07-02",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
+            },
+            {
+              "label": "7. Parlamentarischer Abend der AMEOS Gruppe",
+              "date": "2026-06-29",
+              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/7-parlamentarischer-abend-der-ameos-gruppe-1/"
+            },
+            {
+              "label": "40 Jahre EPPENDORFER",
+              "date": "2026-06-26",
+              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/40-jahre-eppendorfer/"
+            },
+            {
+              "label": "Generalversammlung 2026: Gemeinsam Verantwortung für die Gesundheitsversorgung",
+              "date": "2026-06-25",
+              "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/generalversammlung-2026.html"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -610,7 +563,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "fr": {
       "canton": "SZ",
@@ -675,21 +628,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-22T04:42:53.367Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Schwyz",
-              "value": "4 °C",
-              "detail": "aujourd’hui de 4 à 12 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-22T05:05:39.050Z"
+          "updatedAt": "2026-10-22T11:50:08.473Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -697,37 +636,37 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
-              "label": "Zustimmung der vorberatenden Kommission zur Erhöhung einer Ausgabenbewilligung",
-              "date": "2026-10-21",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26338"
-            },
-            {
               "label": "Depression stärker ins öffentliche Bewusstsein rücken",
               "date": "2026-10-07",
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/depression-staerker-ins-oeffentliche-bewusstsein-ruecken/"
             },
             {
-              "label": "Empfehlungen der vorberatenden Kommission zu zwei Ausgabenbewilligungen",
-              "date": "2026-09-30",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26211"
-            },
-            {
-              "label": "Ungedeckte Notfallkosten sollen bei den Gemeinden bleiben",
-              "date": "2026-09-25",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26127"
-            },
-            {
-              "label": "Über 17 Millionen Franken zusätzlich an Prämienverbilligung vorgesehen",
-              "date": "2026-09-24",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26162"
-            },
-            {
               "label": "Rettungsdienst Schwyz AG:",
               "date": "2026-07-27",
               "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/zusammenarbeit-rettungsdienst-schwyz.html"
+            },
+            {
+              "label": "Stärkung des Adipositaszentrums mit neuer Leitung",
+              "date": "2026-07-02",
+              "url": "https://spital-lachen.ch/ueber-uns/aktuelles/staerkung-des-adipositaszentrums-mit-neuer-leitung/"
+            },
+            {
+              "label": "7. Parlamentarischer Abend der AMEOS Gruppe",
+              "date": "2026-06-29",
+              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/7-parlamentarischer-abend-der-ameos-gruppe-1/"
+            },
+            {
+              "label": "40 Jahre EPPENDORFER",
+              "date": "2026-06-26",
+              "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/40-jahre-eppendorfer/"
+            },
+            {
+              "label": "Generalversammlung 2026: Gemeinsam Verantwortung für die Gesundheitsversorgung",
+              "date": "2026-06-25",
+              "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/generalversammlung-2026.html"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -799,7 +738,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     }
   }
 }

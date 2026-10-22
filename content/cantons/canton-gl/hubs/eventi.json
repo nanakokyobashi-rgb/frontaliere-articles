@@ -4,18 +4,13 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T00:12:28.308Z",
-  "contentHash": "b48f27f99e8a954bd8d10b2d1f2ee2dd7590ee9cd5830d288e2dd047826a1be9",
+  "updatedAt": "2026-10-22T22:21:57.960Z",
+  "contentHash": "7598876234b23b333346b940f7099965b718cd87e55eb13f789650f65376adc7",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-21T12:38:14.154Z",
+      "updatedAt": "2026-10-22T11:13:26.127Z",
       "keyFacts": 1
-    },
-    {
-      "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T10:37:42.748Z",
-      "keyFacts": 0
     }
   ],
   "locales": {
@@ -100,20 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Avvisi ufficiali",
-          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
-          "items": [
-            {
-              "label": "Gelungener Anlass «Glarus begrüsst alle»",
-              "date": "2026-09-21",
-              "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
-            }
-          ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-22T11:13:26.127Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +117,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "en": {
       "canton": "GL",
@@ -218,20 +200,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Official notices",
-          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
-          "items": [
-            {
-              "label": "Gelungener Anlass «Glarus begrüsst alle»",
-              "date": "2026-09-21",
-              "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
-            }
-          ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-22T11:13:26.127Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +222,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "de": {
       "canton": "GL",
@@ -336,20 +305,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Amtliche Mitteilungen",
-          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
-          "items": [
-            {
-              "label": "Gelungener Anlass «Glarus begrüsst alle»",
-              "date": "2026-09-21",
-              "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
-            }
-          ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-22T11:13:26.127Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +327,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "fr": {
       "canton": "GL",
@@ -454,20 +410,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Avis officiels",
-          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
-          "items": [
-            {
-              "label": "Gelungener Anlass «Glarus begrüsst alle»",
-              "date": "2026-09-21",
-              "url": "https://www.glarus.ch/services/mediennewsletter/mitteilungen.html/3523/news/30223"
-            }
-          ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-22T11:13:26.127Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +432,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     }
   }
 }

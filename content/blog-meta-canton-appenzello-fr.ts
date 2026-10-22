@@ -48,6 +48,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.heiden-risparmi-preventivo-2027.title': 'Heiden poursuit ses efforts d’économies : déficit de CHF 204\'200 en 2027',
     'blog.article.heiden-risparmi-preventivo-2027.excerpt': 'Le budget 2027 de Heiden prévoit des recettes de CHF 35,308 millions, des dépenses de CHF 35,512 millions et un déficit de CHF 204\'200.',
     'blog.article.heiden-risparmi-preventivo-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.investimenti-tetto-fotovoltaico-2027.title': 'Dépenses nettes 2027 : CHF 802\'767 ; excédent de dépenses de près de CHF 580\'000',
+    'blog.article.investimenti-tetto-fotovoltaico-2027.excerpt': 'En 2027, des dépenses nettes de CHF 802\'767 sont prévues ; l’assainissement du toit de la salle de sport avec une installation photovoltaïque est prévu.',
+    'blog.article.investimenti-tetto-fotovoltaico-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAppenzelloFr;

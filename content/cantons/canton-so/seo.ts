@@ -353,6 +353,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-a1-lavori-notturni-luterbach': {
+    title: 'A1 Wangen–Luterbach: lavori notturni fino a metà dicembre',
+    description: 'Lavori notturni sull\'A1 tra Wangen an der Aare e Luterbach dal 25 ottobre 2026: traffico modificato fino a metà dicembre.',
+    keywords: 'frontalieri, ticino, svizzera, italia, wangen, luterbach, lavori, notturni',
+    ogTitle: 'Lavori notturni sull\'A1 tra Wangen e Luterbach',
+    ogDescription: 'Dal 25 ottobre 2026 l\'A1 tra Wangen an der Aare e Luterbach sarà interessata da lavori notturni estesi. Fino a metà dicembre cambierà la gestione del traffico e il cantiere sarà preparato per l\'inverno.',
+    canonicalPath: '/articoli-soletta/a1-lavori-notturni-luterbach/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "A1 Wangen–Luterbach: lavori notturni fino a metà dicembre",
+      "description": "Lavori notturni sull'A1 tra Wangen an der Aare e Luterbach dal 25 ottobre 2026: traffico modificato fino a metà dicembre.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-a1-lavori-notturni-luterbach.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T22:55:43+00:00",
+      "dateModified": "2026-10-22T22:55:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/a1-lavori-notturni-luterbach/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

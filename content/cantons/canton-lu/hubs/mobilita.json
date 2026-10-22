@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-22T13:56:44.136Z",
-  "contentHash": "20fe83f2fb62d704b92f32949e9a2c4b4aec4de70eee717ed2921bbf3145ac22",
+  "updatedAt": "2026-10-22T22:21:57.960Z",
+  "contentHash": "c999dd47aaa428c506d682701e8b264380a3d25f4fdd16739fbbccb6685885dd",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T20:56:46.769Z",
+      "updatedAt": "2026-10-22T10:40:36.644Z",
       "keyFacts": 0
     }
   ],
@@ -27,12 +27,12 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "2",
+          "value": "1",
           "note": "segnalazioni aggiornate: 22 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "26",
+          "value": "25",
           "note": "segnalazioni aggiornate: 22 ottobre 2026"
         }
       ],
@@ -47,12 +47,6 @@
               "value": "Chiusura",
               "detail": "fine prevista: 5 novembre 2026",
               "date": "2026-10-13T05:24:00.000Z"
-            },
-            {
-              "label": "A2 S. Gottardo -> Luzern Svincolo autostradale Luzern-Horw Situazione: raccordo autostradale chiuso in entrata cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 22 ottobre 2026",
-              "date": "2026-10-14T19:00:00.000Z"
             },
             {
               "label": "A2 Basel -> Luzern tra Svincolo autostradale Rothenburg E Raccordo autostradale Diramazione Rotsee Situazione: traffico fortemente rallentato Causa: traffico congestionato",
@@ -87,6 +81,12 @@
               "value": "Cantiere",
               "detail": "fine prevista: 11 dicembre 2026",
               "date": "2025-12-04T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna -> Basilea Parcheggio Eggberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.4",
+              "value": "Cantiere",
+              "detail": "fine prevista: 12 novembre 2026",
+              "date": "2026-02-02T07:02:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -108,7 +108,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -154,7 +154,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "en": {
       "canton": "LU",
@@ -164,12 +164,12 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "2",
+          "value": "1",
           "note": "reports as of 22 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "26",
+          "value": "25",
           "note": "reports as of 22 October 2026"
         }
       ],
@@ -184,12 +184,6 @@
               "value": "Closure",
               "detail": "until 5 November 2026",
               "date": "2026-10-13T05:24:00.000Z"
-            },
-            {
-              "label": "A2 S. Gottardo -> Luzern Svincolo autostradale Luzern-Horw Situazione: raccordo autostradale chiuso in entrata cantiere",
-              "value": "Closure",
-              "detail": "until 22 October 2026",
-              "date": "2026-10-14T19:00:00.000Z"
             },
             {
               "label": "A2 Basel -> Luzern tra Svincolo autostradale Rothenburg E Raccordo autostradale Diramazione Rotsee Situazione: traffico fortemente rallentato Causa: traffico congestionato",
@@ -224,6 +218,12 @@
               "value": "Roadworks",
               "detail": "until 11 December 2026",
               "date": "2025-12-04T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerna -> Basilea Parcheggio Eggberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.4",
+              "value": "Roadworks",
+              "detail": "until 12 November 2026",
+              "date": "2026-02-02T07:02:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -245,7 +245,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -289,7 +289,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "de": {
       "canton": "LU",
@@ -299,12 +299,12 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "2",
+          "value": "1",
           "note": "Meldungen vom 22. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "26",
+          "value": "25",
           "note": "Meldungen vom 22. Oktober 2026"
         }
       ],
@@ -319,12 +319,6 @@
               "value": "Sperrung",
               "detail": "bis 5. November 2026",
               "date": "2026-10-13T05:24:00.000Z"
-            },
-            {
-              "label": "A2 Gotthard -> Luzern Anschluss Luzern-Horw Sachlage: Einfahrt gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 22. Oktober 2026",
-              "date": "2026-10-14T19:00:00.000Z"
             },
             {
               "label": "A2 Basel -> Luzern zwischen Anschluss Rothenburg und Autobahndreieck Verzweigung Rotsee Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
@@ -359,6 +353,12 @@
               "value": "Baustelle",
               "detail": "bis 11. Dezember 2026",
               "date": "2025-12-04T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Luzern -> Basel Parkplatz Eggberg Sachlage: Parkplatz geschlossen Baustelle, Länge [km] 0.4",
+              "value": "Baustelle",
+              "detail": "bis 12. November 2026",
+              "date": "2026-02-02T07:02:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -380,7 +380,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -424,7 +424,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "fr": {
       "canton": "LU",
@@ -434,12 +434,12 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "2",
+          "value": "1",
           "note": "signalements au 22 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "26",
+          "value": "25",
           "note": "signalements au 22 octobre 2026"
         }
       ],
@@ -454,12 +454,6 @@
               "value": "Fermeture",
               "detail": "jusqu’au 5 novembre 2026",
               "date": "2026-10-13T05:24:00.000Z"
-            },
-            {
-              "label": "A2 St-Gothard -> Lucerne Jonction autoroutière Lucerne-Horw Situation: entrée fermée travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 22 octobre 2026",
-              "date": "2026-10-14T19:00:00.000Z"
             },
             {
               "label": "A2 Bâle -> Lucerne entre Jonction autoroutière Rothenburg et Echangeur Echangeur du Rotsee Situation: trafic en accordéon Raison: surcharge de trafic",
@@ -494,6 +488,12 @@
               "value": "Chantier",
               "detail": "jusqu’au 11 décembre 2026",
               "date": "2025-12-04T19:00:00.000Z"
+            },
+            {
+              "label": "A2 Lucerne -> Bâle Parking Eggberg Situation: parking fermé travaux, longueur [km] 0.4",
+              "value": "Chantier",
+              "detail": "jusqu’au 12 novembre 2026",
+              "date": "2026-02-02T07:02:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -515,7 +515,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -561,7 +561,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     }
   }
 }
