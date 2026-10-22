@@ -208,8 +208,8 @@ test('il literal prodotto attraversa il decoder dell\'engine — caso `\\"`', ()
 //
 // I tre punti di scrittura sono stati corretti uno per uno; questo impedisce
 // che ne ricompaia un quarto. Il difetto e' esattamente «un escape rifatto a
-// mano accanto a uno corretto»: in batch-add-faq-to-articles.mjs la funzione
-// giusta era gia' nel file, e il percorso di REPLACE non la usava.
+// mano accanto a uno corretto»: batch-add-faq-to-articles.mjs importa ora la
+// funzione canonica e tutti i suoi percorsi di scrittura passano da lei.
 // ─────────────────────────────────────────────────────────────────────────────
 
 test('nessuno scrittore di .faq escapa il solo apostrofo', () => {
