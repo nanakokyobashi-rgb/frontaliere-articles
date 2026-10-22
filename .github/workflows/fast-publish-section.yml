@@ -906,7 +906,10 @@ jobs:
             engine/shared/normalizeArticleMarkdown.ts
             engine/shared/articleReaderSource.mjs
             engine/shared/articleArchiveConfig.mjs
+            engine/shared/articleRouteOwnership.mjs
+            engine/shared/articleStaticSource.mjs
             engine/shared/seo-entry.mjs
+            engine/shared/staticSourceAst.mjs
             engine/shared/ts-literals.mjs
             engine/shared/tsStringEscapes.ts
             generator/data/canton-url-slugs.json
