@@ -8588,6 +8588,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.adeguamento-rendite-superstiti-invalidita-2027.title': 'Adjustment of LPP survivors’ and disability pensions from 1 January 2027',
     'blog.article.adeguamento-rendite-superstiti-invalidita-2027.excerpt': 'From January 1, 2027, annuities will be adjusted to prices.',
     'blog.article.adeguamento-rendite-superstiti-invalidita-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.bns-cambi-energia.title': 'BNS: policy rate unchanged and moderate inflation',
+    'blog.article.bns-cambi-energia.excerpt': 'The SNB keeps its policy rate at 0 percent In September, the SNB abandons the exchange-rate formula Inflationary pressure is increasing only slightly AI can',
+    'blog.article.bns-cambi-energia.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

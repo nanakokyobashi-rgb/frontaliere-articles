@@ -28698,6 +28698,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'bns-cambi-energia',
+    category: 'novita',
+    date: '2026-10-22T23:00:19.139Z',
+    image: '/images/blog/article-bns-cambi-energia.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -8588,6 +8588,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.adeguamento-rendite-superstiti-invalidita-2027.title': 'Rentes LPP de survivants et d’invalidité: adaptation 2027',
     'blog.article.adeguamento-rendite-superstiti-invalidita-2027.excerpt': 'À partir du 1er janvier 2027, les rentes seront adaptées aux prix.',
     'blog.article.adeguamento-rendite-superstiti-invalidita-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.bns-cambi-energia.title': 'BNS : taux directeur inchangé et inflation modérée',
+    'blog.article.bns-cambi-energia.excerpt': 'La BNS maintient le taux directeur à 0 pour cent En septembre, la BNS renonce à la formule sur les changes La pression inflationniste n\'augmente que légèrement L\'IA peut',
+    'blog.article.bns-cambi-energia.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;
