@@ -8579,6 +8579,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.revisione-serv-consultazione-2026.title': 'Révision partielle de la SERV : consultation ouverte',
     'blog.article.revisione-serv-consultazione-2026.excerpt': 'Révision partielle de la SERV annoncée le 21 octobre 2026 Objectif : faciliter l’accès aux prestations de la SERV Réduction des charges et simplification',
     'blog.article.revisione-serv-consultazione-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.stop-emergenza-centrale-nucleare-gosgen.title': 'Arrêt d’urgence à la centrale nucléaire de Gösgen, aucun danger',
+    'blog.article.stop-emergenza-centrale-nucleare-gosgen.excerpt': 'Mardi, vers 6 h 40, Gösgen s’est arrêtée.',
+    'blog.article.stop-emergenza-centrale-nucleare-gosgen.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

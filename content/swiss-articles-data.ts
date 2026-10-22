@@ -28668,6 +28668,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'stop-emergenza-centrale-nucleare-gosgen',
+    category: 'novita',
+    date: '2026-10-22T02:15:54.166Z',
+    image: '/images/blog/article-stop-emergenza-centrale-nucleare-gosgen.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

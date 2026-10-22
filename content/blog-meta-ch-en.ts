@@ -8579,6 +8579,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.revisione-serv-consultazione-2026.title': 'Opening of consultation on partial revision of SERV: the objectives',
     'blog.article.revisione-serv-consultazione-2026.excerpt': 'Partial review of the SERV indicated on October 21, 2026 Objective: facilitate access to SERV benefits Reduction of burdens and simplification',
     'blog.article.revisione-serv-consultazione-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.stop-emergenza-centrale-nucleare-gosgen.title': 'Emergency shutdown at the Gösgen nuclear power plant, no danger',
+    'blog.article.stop-emergenza-centrale-nucleare-gosgen.excerpt': 'Tuesday, around 6:40, Gösgen shut down.',
+    'blog.article.stop-emergenza-centrale-nucleare-gosgen.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

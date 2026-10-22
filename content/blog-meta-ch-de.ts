@@ -8579,6 +8579,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.revisione-serv-consultazione-2026.title': 'Eröffnung der Konsultation zur Teilrevision der SERV: die Ziele',
     'blog.article.revisione-serv-consultazione-2026.excerpt': 'Teilrevision der SERV, die am 21.',
     'blog.article.revisione-serv-consultazione-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.stop-emergenza-centrale-nucleare-gosgen.title': 'Notabschaltung im Kernkraftwerk Gösgen, keine Gefahr',
+    'blog.article.stop-emergenza-centrale-nucleare-gosgen.excerpt': 'Am Dienstag gegen 6.40 Uhr hat sich das Kernkraftwerk Gösgen abgeschaltet.',
+    'blog.article.stop-emergenza-centrale-nucleare-gosgen.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

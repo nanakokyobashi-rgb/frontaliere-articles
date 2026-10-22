@@ -11073,34 +11073,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.admin.ch/it/newnsb/e9jr6pxxz25m": {
-      "section": "svizzera",
-      "ts": 1792450313611
-    },
-    "frontaliere::https://cassa-disoccupazione.unia.ch": {
-      "section": "frontaliere",
-      "ts": 1792455234584
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/casciago-cantieri-aqst-per-il-lago-di-varese-in-dirittura-darrivo-gli-ultimi-interventi-e-le-modifiche-alla-viabilita/2712265": {
-      "section": "frontaliere",
-      "ts": 1792455419642
-    },
-    "frontaliere::https://www.laregione.ch/cantone/luganese/1957734/via-industria-a-caslano-e-ricorso-al-consiglio-di-stato": {
-      "section": "frontaliere",
-      "ts": 1792456042027
-    },
-    "frontaliere::https://www.tio.ch/ticino/attualita/1957694/niente-banchi-si-sale-a-bordo-a-lugano-la-scuola-viaggia-in-elettrico": {
-      "section": "frontaliere",
-      "ts": 1792456062620
-    },
-    "frontaliere::https://www.tio.ch/ticino/politica/1957849/si-all-ex-lati-per-i-pompieri-ma-si-profila-il-referendum": {
-      "section": "frontaliere",
-      "ts": 1792456226355
-    },
-    "frontaliere::https://www.rsi.ch/info/ticino-grigioni-e-insubria/scuol-per-il-sindacato-si-dovr%c3%a0-andare-al-secondo-turno--4176388.html": {
-      "section": "frontaliere",
-      "ts": 1792456260265
-    },
     "frontaliere::https://www.tio.ch/sport/calcio/1957833/ronaldo-nazionale-sospensione-euro-multa": {
       "section": "frontaliere",
       "ts": 1792461600726
@@ -11200,6 +11172,14 @@
     "frontaliere::https://www.varesenoi.it/2026/10/21/leggi-notizia/argomenti/politica-20/articolo/malpensa-ferrovie-collegamenti-con-la-svizzera-il-nuovo-piano-regionale-rafforza-le-infrastrutt-1.html": {
       "section": "frontaliere",
       "ts": 1792613392974
+    },
+    "frontaliere::http://www.cd-ocst.ch": {
+      "section": "frontaliere",
+      "ts": 1792633665950
+    },
+    "frontaliere::https://www.laregione.ch/cantone/ticino/1958286/anche-in-ticino-sempre-piu-giovani-si-perdono-vogliamo-riportarli-sulla-strada-di-formazione-e-lavoro": {
+      "section": "frontaliere",
+      "ts": 1792633715295
     }
   }
 }
