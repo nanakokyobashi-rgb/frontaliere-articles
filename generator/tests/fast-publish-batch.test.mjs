@@ -81,6 +81,32 @@ test('le superfici articolo oltre il body producono solo gli ID realmente cambia
   assert.deepEqual(plan, [{ section: 'frontaliere', ids: ['alpha', 'beta'], bootstrap: false }]);
 });
 
+test('una canonical override cambiata risveglia solo l articolo che possiede lo slug', () => {
+  const registered = new Set(['alpha', 'beta']);
+  const registry = "export const ARTICLES = [{ id: 'alpha' }, { id: 'beta' }];\n";
+  const slugs = "export const BLOG_SLUGS = {\n  'alpha': { it: 'alpha-it', en: 'alpha-en' },\n  'beta': { it: 'beta-it', en: 'beta-en' },\n};\n";
+  const previous = new Map([
+    ['content/blog-articles-data.ts', registry],
+    ['content/routerBlogData.ts', slugs],
+    ['engine/shared/frontaliere-article-canonical-overrides.json', JSON.stringify({ overrides: { 'alpha-it': 'https://old.example/' } })],
+  ]);
+  const current = new Map([
+    ['content/blog-articles-data.ts', registry],
+    ['content/routerBlogData.ts', slugs],
+    ['engine/shared/frontaliere-article-canonical-overrides.json', JSON.stringify({ overrides: { 'alpha-it': 'https://new.example/' } })],
+  ]);
+  const plan = articlePublishPlan([
+    'engine/shared/frontaliere-article-canonical-overrides.json',
+  ], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => current.get(rel) ?? null,
+  });
+
+  assert.deepEqual(plan, [{ section: 'frontaliere', ids: ['alpha'], bootstrap: false }]);
+});
+
 test('il resolver article non rifà il fetch del parent già presente nel checkout', () => {
   const resolveFetchStep = stepText('Fetch push base (resolve)');
   assert.match(resolveFetchStep, /bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
