@@ -142,7 +142,7 @@ export function resolveArticleRouteHref(href, maps = {}) {
   return isAbsolute ? `${SITE_ORIGIN}${path}${suffix}` : `${path}${suffix}`;
 }
 
-/** @typedef {{ index: number, closed: boolean }} TriviaResult */
+/** @typedef {{ index: number, closed: boolean, error?: string }} TriviaResult */
 
 /**
  * Skip whitespace and comments without ever interpreting their contents as
@@ -167,7 +167,13 @@ function skipTrivia(text, offset) {
     }
     if (text.startsWith('/*', index)) {
       const commentEnd = text.indexOf('*/', index + 2);
-      if (commentEnd < 0) return { index: text.length, closed: false };
+      if (commentEnd < 0) {
+        return {
+          index: text.length,
+          closed: false,
+          error: 'Unterminated block comment in legacy redirect source',
+        };
+      }
       index = commentEnd + 2;
       continue;
     }
@@ -455,7 +461,7 @@ export function scanRedirectSource(source) {
 
   while (index < text.length) {
     const trivia = skipTrivia(text, index);
-    if (!trivia.closed) break;
+    if (!trivia.closed) throw new Error(trivia.error);
     index = trivia.index;
     if (index >= text.length) break;
 
@@ -480,7 +486,7 @@ export function scanRedirectSource(source) {
     if (!keyLiteral.value.startsWith('/')) continue;
 
     const colon = skipTrivia(text, index);
-    if (!colon.closed) break;
+    if (!colon.closed) throw new Error(colon.error);
     if (text[colon.index] !== ':') {
       index = colon.index;
       continue;
@@ -489,7 +495,7 @@ export function scanRedirectSource(source) {
     const valueStart = skipTrivia(text, colon.index + 1);
     if (!valueStart.closed) {
       unsupported.push(keyLiteral.value);
-      break;
+      throw new Error(valueStart.error);
     }
     index = valueStart.index;
 
@@ -525,7 +531,8 @@ export function scanRedirectSource(source) {
     }
 
     const tail = skipTrivia(text, valueLiteral.end);
-    if (!tail.closed || (text[tail.index] !== ',' && text[tail.index] !== '}' && tail.index < text.length)) {
+    if (!tail.closed) throw new Error(tail.error);
+    if (text[tail.index] !== ',' && text[tail.index] !== '}' && tail.index < text.length) {
       unsupported.push(keyLiteral.value);
       index = valueLiteral.end;
       continue;
