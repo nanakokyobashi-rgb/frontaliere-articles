@@ -8582,6 +8582,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.stop-emergenza-centrale-nucleare-gosgen.title': 'Notabschaltung im Kernkraftwerk Gösgen, keine Gefahr',
     'blog.article.stop-emergenza-centrale-nucleare-gosgen.excerpt': 'Am Dienstag gegen 6.40 Uhr hat sich das Kernkraftwerk Gösgen abgeschaltet.',
     'blog.article.stop-emergenza-centrale-nucleare-gosgen.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.regole-usato-mercatini-svizzera.title': 'Gebrauchtkäufe in der Schweiz: Garantie und Regeln',
+    'blog.article.regole-usato-mercatini-svizzera.excerpt': 'Garantie von einem Jahr, sofern nicht ausdrücklich ausgeschlossen Öffentlicher Grund: Kostenlose Gegenstände sind oft verboten Fälschungen über die Grenze: mögliche Beschlagnahmung und Gebühr von etwa',
+    'blog.article.regole-usato-mercatini-svizzera.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

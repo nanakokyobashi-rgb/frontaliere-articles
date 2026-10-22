@@ -8582,6 +8582,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.stop-emergenza-centrale-nucleare-gosgen.title': 'Stop d’emergenza alla centrale nucleare di Gösgen, nessun pericolo',
     'blog.article.stop-emergenza-centrale-nucleare-gosgen.excerpt': 'Martedì, verso le 6.40, Gösgen si è disattivata.',
     'blog.article.stop-emergenza-centrale-nucleare-gosgen.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.regole-usato-mercatini-svizzera.title': 'Acquisti di usato in Svizzera: garanzia e regole',
+    'blog.article.regole-usato-mercatini-svizzera.excerpt': 'Garanzia di un anno, salvo esclusione esplicita Suolo pubblico: gli oggetti gratis sono spesso vietati Falsi oltreconfine: possibile sequestro e tassa di circa',
+    'blog.article.regole-usato-mercatini-svizzera.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

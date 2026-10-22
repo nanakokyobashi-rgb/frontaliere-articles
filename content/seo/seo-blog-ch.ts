@@ -108441,6 +108441,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-regole-usato-mercatini-svizzera': {
+    title: 'Acquisti di usato in Svizzera: garanzia e regole',
+    description: 'Garanzia di un anno, salvo esclusione esplicita Suolo pubblico: gli oggetti gratis sono spesso vietati Falsi oltreconfine: possibile sequestro e tassa',
+    keywords: 'frontalieri, ticino, svizzera, italia, acquisti, usato, garanzia, regole',
+    ogTitle: 'Acquisti di usato in Svizzera: garanzia e regole',
+    ogDescription: 'Garanzia di un anno, salvo esclusione esplicita Suolo pubblico: gli oggetti gratis sono spesso vietati Falsi oltreconfine: possibile sequestro e tassa di circa',
+    canonicalPath: '/articoli-svizzera/regole-usato-mercatini-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Acquisti di usato in Svizzera: garanzia e regole",
+      "description": "Garanzia di un anno, salvo esclusione esplicita Suolo pubblico: gli oggetti gratis sono spesso vietati Falsi oltreconfine: possibile sequestro e tassa",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-regole-usato-mercatini-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T03:59:33+00:00",
+      "dateModified": "2026-10-22T03:59:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/regole-usato-mercatini-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

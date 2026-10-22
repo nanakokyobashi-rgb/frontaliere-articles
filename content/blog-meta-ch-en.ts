@@ -8582,6 +8582,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.stop-emergenza-centrale-nucleare-gosgen.title': 'Emergency shutdown at the Gösgen nuclear power plant, no danger',
     'blog.article.stop-emergenza-centrale-nucleare-gosgen.excerpt': 'Tuesday, around 6:40, Gösgen shut down.',
     'blog.article.stop-emergenza-centrale-nucleare-gosgen.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.regole-usato-mercatini-svizzera.title': 'Buying used goods in Switzerland: warranty and rules',
+    'blog.article.regole-usato-mercatini-svizzera.excerpt': 'One-year warranty, unless explicitly excluded Public land: free items are often prohibited Counterfeits across borders: possible seizure and a fee of approximately',
+    'blog.article.regole-usato-mercatini-svizzera.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;
