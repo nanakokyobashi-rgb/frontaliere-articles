@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T01:44:55.473Z",
-  "contentHash": "b750f8766a76e1990b9afbd30ed7c81f10d901998fb6fbacfe378e2e1b5d2323",
+  "updatedAt": "2026-10-22T01:38:31.900Z",
+  "contentHash": "b4a9f8ce794bc55bbdcd3738cbebf06681dab6781b7b25ea67b1ef1bf1621c54",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-20T12:04:15.773Z",
+      "updatedAt": "2026-10-21T12:19:56.872Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-20T12:04:15.773Z"
+          "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Landrat Glarona: 4 milioni per la perequazione, idro a Rüti",
+          "url": "/articoli-glarona/landrat-ottobre-glarona-2026/",
+          "excerpt": "Il 21 ottobre 2026 il Landrat ha approvato CHF 4 milioni per la perequazione tra Cantone e comuni, respinto due proposte sulla concessione idroelettrica di Rüti e stanziato un credito sportivo di 3 milioni per il…",
+          "date": "2026-10-22T01:24:23.964Z"
+        },
         {
           "title": "Mercato immobiliare a Glarona: prezzi in crescita nel 2026",
           "url": "/articoli-glarona/glarona-mercato-immobiliare-2026/",
@@ -82,12 +88,6 @@
           "url": "/articoli-glarona/eventi-weekend-glarona/",
           "excerpt": "Eventi nel Canton Glarona ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
           "date": "2026-10-17T11:27:55.911Z"
-        },
-        {
-          "title": "Klöntalerstrasse: limitazione staldengarten–bützi",
-          "url": "/articoli-glarona/klontalstrasse-staldengarten-butzi/",
-          "excerpt": "Una limitazione al traffico riguarda la Klöntalerstrasse nel tratto Staldengarten–Bützi, nel Canton Glarona.",
-          "date": "2026-10-17T00:33:53.716Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T01:44:55.473Z"
+      "updatedAt": "2026-10-22T01:38:31.900Z"
     },
     "en": {
       "canton": "GL",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-20T12:04:15.773Z"
+          "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Glarus Landrat: 4 million for equalization, water in Rüti",
+          "url": "/en/glarus-articles/glarus-council-october-2026/",
+          "excerpt": "On October 21, 2026, the Landrat approved CHF 4 million for the equalization between Canton and municipalities, rejected two proposals on the Rüti hydroelectric concession and allocated a sports credit of 3 million for…",
+          "date": "2026-10-22T01:24:23.964Z"
+        },
         {
           "title": "Real estate market in Glarus: prices rising in 2026",
           "url": "/en/glarus-articles/glarus-real-estate-market-2026/",
@@ -169,12 +175,6 @@
           "url": "/en/glarus-articles/weekend-events-glarus/",
           "excerpt": "Events in the canton of Glarus every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
           "date": "2026-10-17T11:27:55.911Z"
-        },
-        {
-          "title": "Klöntalerstrasse: restriction staldengarten–bützi",
-          "url": "/en/glarus-articles/klontalstrasse-traffic-restriction/",
-          "excerpt": "A traffic restriction affects Klöntalerstrasse on the Staldengarten–Bützi section, in the Canton of Glarus.",
-          "date": "2026-10-17T00:33:53.716Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T01:44:55.473Z"
+      "updatedAt": "2026-10-22T01:38:31.900Z"
     },
     "de": {
       "canton": "GL",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-20T12:04:15.773Z"
+          "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Landrat Glarus: 4 Millionen für den Ausgleich, Hydro in Rüti",
+          "url": "/de/glarus-artikel/glarner-landrat-oktober-2026/",
+          "excerpt": "Am 21. Oktober 2026 genehmigte der Landrat CHF 4 Mio. für den Ausgleich zwischen Kanton und Gemeinden, lehnte zwei Vorschläge zur Wasserkraftkonzession Rüti ab und bewilligte einen Sportkredit von 3 Mio. für den…",
+          "date": "2026-10-22T01:24:23.964Z"
+        },
         {
           "title": "Immobilienmarkt in Glarus: steigende Preise im Jahr 2026",
           "url": "/de/glarus-artikel/glarner-immobilienmarkt-2026/",
@@ -256,12 +262,6 @@
           "url": "/de/glarus-artikel/wochenend-veranstaltungen-glarus/",
           "excerpt": "Veranstaltungen im Glarnerland an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
           "date": "2026-10-17T11:27:55.911Z"
-        },
-        {
-          "title": "Klöntalerstrasse: Verkehrsbeschränkung Staldengarten–Bützi",
-          "url": "/de/glarus-artikel/verkehrseinschraenkung-kloentalerstrasse/",
-          "excerpt": "Eine Verkehrsbeschränkung betrifft die Klöntalerstrasse im Abschnitt Staldengarten–Bützi im Kanton Glarus.",
-          "date": "2026-10-17T00:33:53.716Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T01:44:55.473Z"
+      "updatedAt": "2026-10-22T01:38:31.900Z"
     },
     "fr": {
       "canton": "GL",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-20T12:04:15.773Z"
+          "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Landrat Glaris : 4 millions pour la péréquation, hydro à Rüti",
+          "url": "/fr/articles-glaris/conseil-glaris-octobre-2026/",
+          "excerpt": "Le 21 octobre 2026, le Landrat a approuvé CHF 4 millions pour la péréquation entre le canton et les communes, rejeté deux propositions sur la concession hydroélectrique de Rüti et alloué un crédit sportif de 3 millions…",
+          "date": "2026-10-22T01:24:23.964Z"
+        },
         {
           "title": "Marché immobilier à Glaris : les prix en hausse en 2026",
           "url": "/fr/articles-glaris/marche-immobilier-glaris-2026/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-glaris/evenements-week-end-glaris/",
           "excerpt": "Événements dans le canton de Glaris chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
           "date": "2026-10-17T11:27:55.911Z"
-        },
-        {
-          "title": "Klöntalerstrasse : restriction Staldengarten–Bützi",
-          "url": "/fr/articles-glaris/restriction-trafic-kloentalerstrasse/",
-          "excerpt": "Une restriction de circulation concerne la Klöntalerstrasse sur le tronçon Staldengarten–Bützi, dans le canton de Glaris.",
-          "date": "2026-10-17T00:33:53.716Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T01:44:55.473Z"
+      "updatedAt": "2026-10-22T01:38:31.900Z"
     }
   }
 }
