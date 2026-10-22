@@ -25,7 +25,6 @@ import {
   APEX,
   apiInputChangedInRange,
   CANTON_RSS_PREFIX,
-  IMAGE_LEASE_RELEASE_TIMEOUT_MS,
   PAGE_CACHE_CONTROL,
   UPLOAD_ORDER,
   addCantonRssFeedLink,
@@ -60,7 +59,6 @@ import {
   publish,
   publishApiTriggerPaths,
   publishCantonRssFeeds,
-  releaseImageLeasesWithDeadline,
   removeCantonRssFeedLinks,
   resolveStaleReplayApiReleaseCommit,
   resolvePublishedReleaseCommit,
@@ -73,7 +71,11 @@ import { assertHubLocaleSlug } from '../../scripts/lib/assert-hub-locale-slug.mj
 import { assertHubTopicEntries } from '../../scripts/lib/assert-hub-locale-slug.mjs';
 import { familySectionPages } from '../../scripts/lib/build-sitemap.mjs';
 import { createR2Request } from '../../scripts/lib/r2-section-lock.mjs';
-import { acquireImageNamespaceLeases } from '../../scripts/lib/r2-image-namespace-lock.mjs';
+import {
+  acquireImageNamespaceLeases,
+  releaseImageNamespaceLeasesWithDeadline as releaseImageLeasesWithDeadline,
+  IMAGE_LEASE_RELEASE_TIMEOUT_MS,
+} from '../../scripts/lib/r2-image-namespace-lock.mjs';
 import {
   fetchPageManifest,
   mergePageManifests,
@@ -126,29 +128,24 @@ test('publisher R2 propaga immagini recuperate e verdetto aggregati dalla pipeli
   for (const match of publisher.matchAll(/\bcurrentManifest\b/g)) {
     assert.ok(match.index >= manifestDeclaration, 'currentManifest non deve essere letto prima della dichiarazione');
   }
-  const imageLeaseAcquire = publisher.search(
-    /imageLeases = await acquireImageNamespaceLeasesImpl\(imageNamespaces,\s*\{\s*signal:\s*imageLeaseAbortController\.signal,\s*\}\)/,
-  );
   const publishImplCall = publisher.indexOf('summary.published = await publishImpl({');
-  const imageLeaseRelease = publisher.indexOf('const imageLeaseReleaseError = await releaseImageLeases();');
-  assert.ok(imageLeaseAcquire >= 0 && imageLeaseAcquire < publishImplCall, 'le lease immagini devono essere acquisite prima della transazione di publish');
-  assert.ok(publishImplCall < imageLeaseRelease, 'le lease immagini devono restare attive fino alla fine della transazione');
-  assert.match(publisher.slice(publishImplCall, imageLeaseRelease), /imageLeaseContext,/);
+  const publishEnd = publisher.indexOf('if (summary.published.failures === 0 && deferredLiveRelease)', publishImplCall);
+  assert.ok(publishImplCall >= 0 && publishEnd > publishImplCall, 'transazione publish non trovata');
+  assert.doesNotMatch(
+    publisher.slice(publishImplCall, publishEnd),
+    /imageLeaseContext/,
+    'la matrice non deve mantenere una lease globale per tutta la transazione',
+  );
+  assert.match(
+    publisher,
+    /Each image PUT acquires and releases its own namespace lease in\s+\/\/ upload-cdn-file\.sh/,
+    'gli upload immagine devono delegare la lease al lock per singolo file',
+  );
+  const mainSource = publisher.slice(publisher.indexOf('export async function main('));
+  assert.doesNotMatch(mainSource, /acquireImageNamespaceLeasesImpl|serializeImageLeaseContextImpl|imageNamespaceForKeyImpl/);
 });
 
-test('publisher: un secondo segnale attende il cleanup bounded delle lease immagini', () => {
-  const publisher = read('scripts/publish-section-pages.mjs');
-  const start = publisher.indexOf('const recordImageLeaseSignal =');
-  const end = publisher.indexOf('const onImageLeaseSigint =', start);
-  assert.ok(start >= 0 && end > start, 'handler dei segnali non trovato');
-  const handler = publisher.slice(start, end);
-  assert.match(handler, /imageLeaseSecondSignalExitStatus/);
-  assert.match(handler, /deferring exit/);
-  assert.doesNotMatch(handler, /process\.exit/);
-  assert.match(publisher, /releaseImageLeasesWithDeadline\(imageLeases/);
-});
-
-test('publisher: il cleanup lease restituisce un timeout osservabile se R2 resta pendente', async () => {
+test('image lease: il cleanup restituisce un timeout osservabile se R2 resta pendente', async () => {
   const result = await releaseImageLeasesWithDeadline(
     [{ namespace: 'blog' }],
     { releaseImpl: () => new Promise(() => {}), timeoutMs: 20 },
@@ -161,7 +158,7 @@ test('publisher: il cleanup lease restituisce un timeout osservabile se R2 resta
   assert.equal(IMAGE_LEASE_RELEASE_TIMEOUT_MS, 30_000);
 });
 
-test('publisher: il cleanup bounded tenta ogni namespace entro lo stesso budget', async () => {
+test('image lease: il cleanup bounded tenta ogni namespace entro lo stesso budget', async () => {
   const started = [];
   const result = await releaseImageLeasesWithDeadline(
     [{ namespace: 'blog' }, { namespace: 'places' }],
