@@ -131,6 +131,30 @@ export const ARTICLES = RAW_ARTICLES.map((article) => ({ ...article, image: cdnB
   }]);
 });
 
+test('un cambiamento fuori dalle entry SEO invalida gli articoli registrati', () => {
+  const registered = new Set(['alpha', 'beta']);
+  const previousSeo = `const SEO_BASE_URL = 'https://old.example';
+const SEO = {
+  'blog-alpha': { title: 'same alpha' },
+  'blog-beta': { title: 'same beta' },
+};\n`;
+  const currentSeo = previousSeo.replace('https://old.example', 'https://new.example');
+  const previous = new Map([['content/seo/seo-blog-5.ts', previousSeo]]);
+  const current = new Map([['content/seo/seo-blog-5.ts', currentSeo]]);
+  const plan = articlePublishPlan(['content/seo/seo-blog-5.ts'], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => current.get(rel) ?? null,
+  });
+
+  assert.deepEqual(plan, [{
+    section: 'frontaliere',
+    ids: ['alpha', 'beta'],
+    bootstrap: false,
+  }]);
+});
+
 test('la mappa slug ignora l oggetto fallback omonimo e rileva lo slug cambiato', () => {
   const registered = new Set(['alpha', 'beta']);
   const registry = "export const ARTICLES = [{ id: 'alpha' }, { id: 'beta' }];\n";

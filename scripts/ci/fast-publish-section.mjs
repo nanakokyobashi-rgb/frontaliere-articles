@@ -246,10 +246,25 @@ function registryDependencyChanged(rel, registryFile, previous, next) {
 function seoRecords(source, rel) {
   const records = new Map();
   if (source === null) return records;
-  for (const match of findAllSeoEntryMatches(source, rel)) {
+  const matches = findAllSeoEntryMatches(source, rel);
+  let cursor = 0;
+  const context = [];
+  for (const match of matches) {
+    context.push(source.slice(cursor, match.lineStart), '{}');
+    cursor = match.closeIdx + 1;
+  }
+  context.push(source.slice(cursor));
+  records.set('\u0000seo-source', context.join(''));
+  for (const match of matches) {
     mapRecord(records, match.id, source.slice(match.index, match.closeIdx + 1));
   }
   return records;
+}
+
+function seoChangedIds(previous, next, registered) {
+  const changed = changedRecordIds(previous, next);
+  if (!changed.includes('\u0000seo-source')) return changed;
+  return [...registered];
 }
 
 /**
@@ -664,7 +679,11 @@ export function articlePublishPlan(
     if (kind === 'registry') {
       changedIds = registryChangedIds(registryRecords(previous), registryRecords(next));
     } else if (kind === 'seo') {
-      changedIds = changedRecordIds(seoRecords(previous, rel), seoRecords(next, rel));
+      changedIds = seoChangedIds(
+        seoRecords(previous, rel),
+        seoRecords(next, rel),
+        registeredBySection.get(section.section),
+      );
     } else if (kind === 'meta') {
       changedIds = changedRecordIds(metaRecords(previous), metaRecords(next));
     } else if (kind === 'slug') {
