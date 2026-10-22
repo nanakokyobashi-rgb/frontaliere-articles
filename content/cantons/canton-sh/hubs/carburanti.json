@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-22T01:09:44.927Z",
-  "contentHash": "4ce6bbef08f223b215d410f0872451857c430ff448093d2bfad2c3b2d2f5c146",
+  "updatedAt": "2026-10-22T02:37:56.742Z",
+  "contentHash": "c627758e47c54fc6cfd1b27c6814bb7f41c308d8275eed906802065646e2b8dc",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Neunkirch accetta il supervisore cantonale",
+          "url": "/articoli-sciaffusa/neunkirch-supervisore-cantonale/",
+          "excerpt": "Il Cantone invia Stephan Rawyler a Neunkirch: potrà impartire istruzioni al Consiglio comunale e partecipare alle sue sedute.",
+          "date": "2026-10-22T02:31:34.951Z"
+        },
+        {
           "title": "Banche Sciaffusa: Governo respinge regole federali",
           "url": "/articoli-sciaffusa/sciaffusa-banche-riforma-federale/",
           "excerpt": "Il Governo di Sciaffusa critica la proposta federale di riforma bancaria, temendo oneri sproporzionati per gli istituti locali.",
@@ -94,12 +100,6 @@
           "url": "/articoli-sciaffusa/beringen-vbsh-fermate-chiuse/",
           "excerpt": "Dopo le esplosioni della mattina a Enge, VBSH non serve Enge, Hägli e Sonne fino alle 13:30.",
           "date": "2026-10-20T06:41:00.427Z"
-        },
-        {
-          "title": "SVP Sciaffusa definisce candidati per le elezioni 2027",
-          "url": "/articoli-sciaffusa/svp-sciaffusa-candidati-2027/",
-          "excerpt": "L'assemblea dei delegati a Oberhallau ha scelto Andreas Gnädinger per il Consiglio degli Stati e Thomas Hurter e Thomas Müller per il Nazionale.",
-          "date": "2026-10-20T06:05:14.822Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-22T01:09:44.927Z"
+      "updatedAt": "2026-10-22T02:37:56.742Z"
     },
     "en": {
       "canton": "SH",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Neunkirch accepts cantonal supervisor",
+          "url": "/en/schaffhausen-articles/neunkirch-cantonal-supervisor/",
+          "excerpt": "The Canton sends Stephan Rawyler to Neunkirch: he will be able to give instructions to the City Council and participate in its sessions.",
+          "date": "2026-10-22T02:31:34.951Z"
+        },
+        {
           "title": "Schaffhausen banks: Government rejects federal rules",
           "url": "/en/schaffhausen-articles/schaffhausen-bank-reform-federal/",
           "excerpt": "The Government of Schaffhausen criticizes the federal banking reform proposal, fearing disproportionate burdens for local institutions.",
@@ -193,12 +199,6 @@
           "url": "/en/schaffhausen-articles/beringen-vbsh-stops-closed/",
           "excerpt": "After the explosions this morning at Enge, VBSH is not serving Enge, Hägli and Sonne until 13:30.",
           "date": "2026-10-20T06:41:00.427Z"
-        },
-        {
-          "title": "SVP Schaffhausen selects candidates for the 2027 elections",
-          "url": "/en/schaffhausen-articles/svp-schaffhausen-candidates-2027/",
-          "excerpt": "The delegates’ assembly in Oberhallau chose Andreas Gnädinger for the Council of States and Thomas Hurter and Thomas Müller for the National Council.",
-          "date": "2026-10-20T06:05:14.822Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-22T01:09:44.927Z"
+      "updatedAt": "2026-10-22T02:37:56.742Z"
     },
     "de": {
       "canton": "SH",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Neunkirch akzeptiert den kantonalen Vorgesetzten",
+          "url": "/de/schaffhausen-artikel/neunkirch-kantonaler-aufpasser/",
+          "excerpt": "Der Kanton schickt Stephan Rawyler nach Neunkirch: Er kann dem Gemeinderat Weisungen erteilen und an dessen Sitzungen teilnehmen.",
+          "date": "2026-10-22T02:31:34.951Z"
+        },
+        {
           "title": "Schaffhauser Banken: Regierung lehnt Bundesregeln ab",
           "url": "/de/schaffhausen-artikel/schaffhausen-bankengesetz-reform/",
           "excerpt": "Die Schaffhauser Regierung kritisiert den eidgenössischen Vorschlag zur Bankenreform und befürchtet unverhältnismäßige Belastungen für lokale Institute.",
@@ -292,12 +298,6 @@
           "url": "/de/schaffhausen-artikel/beringen-vbsh-haltestellen-gesperrt/",
           "excerpt": "Nach den Explosionen am Morgen in Enge werden die Haltestellen Enge, Hägli und Sonne von VBSH bis 13:30 Uhr nicht bedient.",
           "date": "2026-10-20T06:41:00.427Z"
-        },
-        {
-          "title": "SVP Schaffhausen bestimmt Kandidaten für die Wahlen 2027",
-          "url": "/de/schaffhausen-artikel/svp-schaffhausen-kandidaturen-2027/",
-          "excerpt": "Die Delegiertenversammlung in Oberhallau hat Andreas Gnädinger für den Ständerat sowie Thomas Hurter und Thomas Müller für den Nationalrat gewählt.",
-          "date": "2026-10-20T06:05:14.822Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-22T01:09:44.927Z"
+      "updatedAt": "2026-10-22T02:37:56.742Z"
     },
     "fr": {
       "canton": "SH",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Neunkirch accepte le superviseur cantonal",
+          "url": "/fr/articles-schaffhouse/neunkirch-superviseur-cantonal/",
+          "excerpt": "Le canton envoie Stephan Rawyler à Neunkirch : il pourra donner des instructions au conseil municipal et participer à ses séances.",
+          "date": "2026-10-22T02:31:34.951Z"
+        },
+        {
           "title": "Banques de Schaffhouse : le gouvernement rejette les règles fédérales",
           "url": "/fr/articles-schaffhouse/schaffhouse-reforme-bancaire-federale/",
           "excerpt": "Le gouvernement de Schaffhouse critique la proposition fédérale de réforme bancaire, craignant des charges disproportionnées pour les établissements locaux.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-schaffhouse/beringen-vbsh-arrets-fermes/",
           "excerpt": "Après les explosions de la matinée à Enge, VBSH ne dessert pas Enge, Hägli et Sonne jusqu’à 13:30.",
           "date": "2026-10-20T06:41:00.427Z"
-        },
-        {
-          "title": "L'UDC de Schaffhouse désigne ses candidats pour les élections de 2027",
-          "url": "/fr/articles-schaffhouse/svp-schaffhouse-candidatures-2027/",
-          "excerpt": "L'assemblée des délégués à Oberhallau a choisi Andreas Gnädinger pour le Conseil des États et Thomas Hurter et Thomas Müller pour le Conseil national.",
-          "date": "2026-10-20T06:05:14.822Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-22T01:09:44.927Z"
+      "updatedAt": "2026-10-22T02:37:56.742Z"
     }
   }
 }
