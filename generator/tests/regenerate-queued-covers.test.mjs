@@ -1642,7 +1642,8 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(workflow, /queued-cover-job-start-ms/);
   assert.match(workflow, /deadline_ms=\$\(\(job_started_ms \+ 40 \* 60 \* 1000\)\)/);
   assert.match(workflow, /40m internal deadline/);
-  assert.match(workflow, /prepublish_deadline_ms=\$\(\(deadline_ms - 5 \* 60 \* 1000\)\)/);
+  assert.match(workflow, /prepublish_deadline_ms=\$\(\(now_ms \+ 15 \* 60 \* 1000\)\)/);
+  assert.match(workflow, /final_publisher_start_ms=\$\(\(deadline_ms - 15 \* 60 \* 1000\)\)/);
   assert.match(workflow, /publisher_reserve_ms=\$\(\(15 \* 60 \* 1000\)\)/);
   assert.match(workflow, /generation_overhead_ms=\$\(\(5 \* 60 \* 1000\)\)/);
   assert.match(workflow, /skippedBeforeDrain:true/);
