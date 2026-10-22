@@ -59,6 +59,15 @@ test('seo-entry tratta il bang dopo ASI come prefisso regex', () => {
   }
 });
 
+test('seo-entry registra ASI dopo un commento lineare', () => {
+  for (const lineTerminator of ['\n', '\r', '\u2028', '\u2029']) {
+    const source = `'blog-comment-asi': { value!${lineTerminator}// commento${lineTerminator}!/foo}/${lineTerminator}}`;
+    const [match] = findAllSeoEntryMatches(source, `seo-comment-asi-${JSON.stringify(lineTerminator)}`);
+    assert.ok(match, JSON.stringify(lineTerminator));
+    assert.equal(match.closeIdx, source.lastIndexOf('}'), JSON.stringify(lineTerminator));
+  }
+});
+
 test('seo-entry mantiene il corpo block delle arrow nello stack dei delimitatori', () => {
   const source = "'blog-arrow': { value: () => { return 1; } /foo}/ }";
   const [match] = findAllSeoEntryMatches(source, 'seo-arrow');

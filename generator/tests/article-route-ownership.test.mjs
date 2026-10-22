@@ -42,6 +42,17 @@ test('parseLiteralRedirectMap skips nested members in an unsupported expression'
   assert.deepEqual(result.unsupported, ['/dynamic']);
 });
 
+test('parseLiteralRedirectMap fails closed on a truncated key or template', () => {
+  assert.throws(
+    () => parseLiteralRedirectMap("const redirects = { '/valid': '/target-valid', '/truncated"),
+    /Unterminated string literal/u,
+  );
+  assert.throws(
+    () => parseLiteralRedirectMap("const redirects = { '/valid': '/target-valid', `truncated"),
+    /Unterminated template literal/u,
+  );
+});
+
 test('parseLiteralRedirectMap conserva le divisioni dopo gli operatori postfix dinamici', () => {
   for (const operator of ['++', '--']) {
     const result = parseLiteralRedirectMap(

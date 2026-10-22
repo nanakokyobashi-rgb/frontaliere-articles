@@ -11,17 +11,20 @@ const STATIC_LITERAL_QUOTES = new Set(['"', "'", '`']);
 const TS_ESCAPE_RX = /\\(u\{[0-9a-fA-F]+\}|u[0-9a-fA-F]{4}|x[0-9a-fA-F]{2}|\r\n|[\s\S])/g;
 const TS_CODE_POINT_ESCAPE_RX = /^(x[0-9a-fA-F]{2}|u\{[0-9a-fA-F]+\})/u;
 
-/** Decode a TypeScript code-point escape without re-scanning decoded output. */
-function decodeTypeScriptCodePointEscape(escape) {
+/** Decode one TypeScript code-point escape without re-scanning its output. */
+export function decodeTypeScriptCodePointEscape(escape) {
   const match = TS_CODE_POINT_ESCAPE_RX.exec(escape);
   if (!match) return undefined;
-
   const token = match[1];
   const digits = token[0] === 'x' ? token.slice(1) : token.slice(2, -1);
   const codePoint = Number.parseInt(digits, 16);
   if (!Number.isSafeInteger(codePoint) || codePoint > 0x10ffff) return undefined;
+  return { value: String.fromCodePoint(codePoint), length: token.length };
+}
 
-  return String.fromCodePoint(codePoint);
+/** Repair legacy double-escaped body line breaks without touching FAQ JSON. */
+export function repairLegacyDoubleEscapedBreaks(value) {
+  return String(value).replace(/\\+n/g, '\n');
 }
 
 const REGEX_PREFIX_KEYWORDS = new Set([
@@ -206,7 +209,7 @@ export function decodeStaticStringLiteral(raw, quote = "'", options = {}) {
   const { newlineAs } = options;
   return raw.replace(TS_ESCAPE_RX, (whole, escape) => {
     const codePoint = decodeTypeScriptCodePointEscape(escape);
-    if (codePoint !== undefined) return codePoint;
+    if (codePoint) return codePoint.value;
 
     switch (escape[0]) {
       case 'n': return newlineAs ?? '\n';

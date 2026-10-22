@@ -171,7 +171,7 @@ function skipTrivia(text, offset) {
         return {
           index: text.length,
           closed: false,
-          error: 'Unterminated block comment',
+          error: 'Unterminated block comment in legacy redirect source',
         };
       }
       index = commentEnd + 2;
@@ -456,21 +456,20 @@ export function scanRedirectSource(source) {
   let literalCount = 0;
   let dynamicCount = 0;
   const unsupported = [];
-  const failClosed = (reason) => {
-    throw new SyntaxError(`article redirect source: ${reason}`);
-  };
   const text = String(source ?? '');
   let index = 0;
 
   while (index < text.length) {
     const trivia = skipTrivia(text, index);
-    if (!trivia.closed) return failClosed(trivia.error ?? 'Unterminated trivia');
+    if (!trivia.closed) throw new Error(trivia.error);
     index = trivia.index;
     if (index >= text.length) break;
 
     if (text[index] === '`') {
       const templateEnd = skipTemplateLiteral(text, index);
-      if (templateEnd === null) return failClosed('Unterminated template literal');
+      if (templateEnd === null) {
+        throw new Error('Unterminated template literal in legacy redirect source');
+      }
       index = templateEnd;
       continue;
     }
@@ -480,25 +479,31 @@ export function scanRedirectSource(source) {
     }
 
     const keyLiteral = readQuotedLiteral(text, index);
-    if (!keyLiteral) return failClosed('Unterminated string literal');
+    if (!keyLiteral) {
+      throw new Error('Unterminated string literal in legacy redirect source');
+    }
     index = keyLiteral.end;
     if (!keyLiteral.value.startsWith('/')) continue;
 
     const colon = skipTrivia(text, index);
-    if (!colon.closed) return failClosed(colon.error ?? 'Unterminated trivia');
+    if (!colon.closed) throw new Error(colon.error);
     if (text[colon.index] !== ':') {
       index = colon.index;
       continue;
     }
 
     const valueStart = skipTrivia(text, colon.index + 1);
-    if (!valueStart.closed) return failClosed(valueStart.error ?? 'Unterminated trivia');
+    if (!valueStart.closed) {
+      unsupported.push(keyLiteral.value);
+      throw new Error(valueStart.error);
+    }
     index = valueStart.index;
 
     if (text[index] === '`') {
       const templateEnd = skipTemplateLiteral(text, index);
       if (templateEnd === null) {
-        return failClosed('Unterminated template literal');
+        unsupported.push(keyLiteral.value);
+        throw new Error('Unterminated template literal in legacy redirect source');
       }
       dynamicCount += 1;
       index = templateEnd;
@@ -508,11 +513,14 @@ export function scanRedirectSource(source) {
     const valueLiteral = readQuotedLiteral(text, index);
     if (!valueLiteral) {
       if (text[index] === "'" || text[index] === '"') {
-        return failClosed('Unterminated string literal');
+        unsupported.push(keyLiteral.value);
+        throw new Error('Unterminated string literal in legacy redirect source');
       }
       unsupported.push(keyLiteral.value);
       const unsupportedEnd = skipUnsupportedExpression(text, index);
-      if (unsupportedEnd === null) return failClosed('Unterminated unsupported redirect expression');
+      if (unsupportedEnd === null) {
+        throw new Error('Unterminated unsupported redirect expression in legacy redirect source');
+      }
       index = unsupportedEnd > index ? unsupportedEnd : index + 1;
       continue;
     }
@@ -523,8 +531,8 @@ export function scanRedirectSource(source) {
     }
 
     const tail = skipTrivia(text, valueLiteral.end);
-    if (!tail.closed) return failClosed(tail.error ?? 'Unterminated trivia');
-    if ((text[tail.index] !== ',' && text[tail.index] !== '}' && tail.index < text.length)) {
+    if (!tail.closed) throw new Error(tail.error);
+    if (text[tail.index] !== ',' && text[tail.index] !== '}' && tail.index < text.length) {
       unsupported.push(keyLiteral.value);
       index = valueLiteral.end;
       continue;
