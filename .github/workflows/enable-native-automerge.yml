@@ -270,8 +270,21 @@ jobs:
                   (
                     map(select(type == "array"))
                     | add // []
-                    | map(select(type == "object") | select(.state == "open" and .base.ref == "main") | .number)
-                    | .[0] // empty
+                    | if any(.[]; type != "object") then
+                        error("paginated pull request item is not an object")
+                      elif any(.[];
+                        if (.number | type) != "number" or (.state | type) != "string" then
+                          true
+                        elif (.base | type) != "object" then
+                          true
+                        else
+                          (.base.ref | type) != "string"
+                        end
+                      ) then
+                        error("paginated pull request item has an invalid shape")
+                      else
+                        (map(select(.state == "open" and .base.ref == "main") | .number) | .[0] // empty)
+                      end
                   )
                 end')
           fi

@@ -132,7 +132,12 @@ test('#1604: la ricerca della PR tollera pagine nulle senza iterare un payload n
   assert.match(resolver, /any\(\.\[\]; type != "array" and type != "null"\)/);
   assert.match(resolver, /map\(select\(type == "array"\)\)/);
   assert.match(resolver, /add \/\/ \[\]/);
-  assert.match(resolver, /select\(type == "object"\)/);
+  assert.match(resolver, /any\(\.\[\]; type != "object"\)/);
+  assert.match(resolver, /\.number \| type/);
+  assert.match(resolver, /\.state \| type/);
+  assert.match(resolver, /\.base \| type/);
+  assert.match(resolver, /\.base\.ref \| type/);
+  assert.doesNotMatch(resolver, /select\(type == "object"\)/);
   assert.doesNotMatch(resolver, /\[add\[\]/);
 });
 
