@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "ec2da2660d7a4d3bed0f08e513bbe976ec579acd190f4a28fda7fbe6bdc89592",
+  "updatedAt": "2026-10-22T03:13:53.159Z",
+  "contentHash": "63a3c67be2ffbc032b25d39354ba2e4cefc697ff6290057e7fb2e67a67163d8f",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,12 +37,12 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "11",
+          "value": "9",
           "note": "segnalazioni aggiornate: 21 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "18",
+          "value": "17",
           "note": "segnalazioni aggiornate: 21 ottobre 2026"
         }
       ],
@@ -153,10 +153,10 @@
               "date": "2026-09-15T12:47:00.000Z"
             },
             {
-              "label": "A23 Diramazione Meggenhus -> Widenhorn Svincolo autostradale Rorschach Situazione: uscita chiusa cantiere",
+              "label": "A1 St. Gallen -> Zürich tra Svincolo autostradale Gossau E Svincolo autostradale Uzwil Situazione: chiusa cantiere",
               "value": "Chiusura",
-              "detail": "fine prevista: 22 ottobre 2026",
-              "date": "2026-10-01T06:30:00.000Z"
+              "detail": "fine prevista: 4 novembre 2026",
+              "date": "2026-10-02T11:01:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -262,7 +262,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T03:13:53.159Z"
     },
     "en": {
       "canton": "SG",
@@ -277,12 +277,12 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "11",
+          "value": "9",
           "note": "reports as of 21 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "18",
+          "value": "17",
           "note": "reports as of 21 October 2026"
         }
       ],
@@ -393,10 +393,10 @@
               "date": "2026-09-15T12:47:00.000Z"
             },
             {
-              "label": "A23 Diramazione Meggenhus -> Widenhorn Svincolo autostradale Rorschach Situazione: uscita chiusa cantiere",
+              "label": "A1 St. Gallen -> Zürich tra Svincolo autostradale Gossau E Svincolo autostradale Uzwil Situazione: chiusa cantiere",
               "value": "Closure",
-              "detail": "until 22 October 2026",
-              "date": "2026-10-01T06:30:00.000Z"
+              "detail": "until 4 November 2026",
+              "date": "2026-10-02T11:01:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -501,7 +501,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T03:13:53.159Z"
     },
     "de": {
       "canton": "SG",
@@ -516,12 +516,12 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "11",
+          "value": "9",
           "note": "Meldungen vom 21. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "18",
+          "value": "17",
           "note": "Meldungen vom 21. Oktober 2026"
         }
       ],
@@ -632,10 +632,10 @@
               "date": "2026-09-15T12:47:00.000Z"
             },
             {
-              "label": "A23 Verzweigung Meggenhus -> Widenhorn Anschluss Rorschach Sachlage: Ausfahrt gesperrt Baustelle",
+              "label": "A1 St. Gallen -> Zürich zwischen Anschluss Gossau und Anschluss Uzwil Sachlage: Strecke gesperrt Baustelle",
               "value": "Sperrung",
-              "detail": "bis 22. Oktober 2026",
-              "date": "2026-10-01T06:30:00.000Z"
+              "detail": "bis 4. November 2026",
+              "date": "2026-10-02T11:01:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -740,7 +740,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T03:13:53.159Z"
     },
     "fr": {
       "canton": "SG",
@@ -755,12 +755,12 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "11",
+          "value": "9",
           "note": "signalements au 21 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "18",
+          "value": "17",
           "note": "signalements au 21 octobre 2026"
         }
       ],
@@ -871,10 +871,10 @@
               "date": "2026-09-15T12:47:00.000Z"
             },
             {
-              "label": "A23 Echangeur de Meggenhus -> Widenhorn Jonction autoroutière Rorschach Situation: sortie fermée travaux",
+              "label": "A1 St-Gall -> Zurich entre Jonction autoroutière Gossau et Jonction autoroutière Uzwil Situation: fermé travaux",
               "value": "Fermeture",
-              "detail": "jusqu’au 22 octobre 2026",
-              "date": "2026-10-01T06:30:00.000Z"
+              "detail": "jusqu’au 4 novembre 2026",
+              "date": "2026-10-02T11:01:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -980,7 +980,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T03:13:53.159Z"
     }
   }
 }

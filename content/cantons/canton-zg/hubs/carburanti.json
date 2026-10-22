@@ -4,8 +4,8 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-22T02:46:43.877Z",
-  "contentHash": "6a30950c68ca95e41ac001e494696eaa2eb7a23401626f9ee8ad4d34e545ae9f",
+  "updatedAt": "2026-10-22T03:13:53.159Z",
+  "contentHash": "d607a2c4c892d20bec6a92d63e100ed64cae7d1f08cc3df8a26077563dc5cad0",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zugo: revisione della legge edilizia dal 17 settembre 2026",
+          "url": "/articoli-zugo/revisione-pbg-zugo-2026/",
+          "excerpt": "Il Canton Zugo avvia la consultazione sulla revisione del PBG: nuove regole per alloggi a prezzo contenuto, zone bianche e semplificazioni procedurali.",
+          "date": "2026-10-22T03:09:05.531Z"
+        },
+        {
           "title": "Adeguamento piano direttore 26/1: «zone bianche» per l'edilizia a Zugo",
           "url": "/articoli-zugo/adeguamento-piano-direttore-zone-bianche-2026/",
           "excerpt": "Pubblicato l'adeguamento 26/1 del piano direttore cantonale: «zone bianche» per l'edilizia abitativa e strategia di stabilizzazione.",
@@ -82,12 +88,6 @@
           "url": "/articoli-zugo/zugo-governo-direzioni-2027/",
           "excerpt": "Per il mandato dal 2027, tutti i membri del Governo di Zugo manterranno le direzioni attuali, ha comunicato martedì la Cancelleria dello Stato.",
           "date": "2026-10-20T23:12:46.533Z"
-        },
-        {
-          "title": "Zugo: ricorso espulsione respinto dal Tribunale federale",
-          "url": "/articoli-zugo/ricorso-federale-espulsione-zugo/",
-          "excerpt": "Maggio 2026: Zugo non rinnova il permesso breve.",
-          "date": "2026-10-20T02:44:35.163Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-22T02:46:43.877Z"
+      "updatedAt": "2026-10-22T03:13:53.159Z"
     },
     "en": {
       "canton": "ZG",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zug: revision of the building law from September 17, 2026",
+          "url": "/en/zug-articles/zug-pbg-revision-2026/",
+          "excerpt": "The Canton of Zug launches consultation on the revision of the PBG: new rules for affordable housing, white zones and procedural simplifications.",
+          "date": "2026-10-22T03:09:05.531Z"
+        },
+        {
           "title": "Amendment to structure plan 26/1: “white zones” for construction in Zug",
           "url": "/en/zug-articles/zug-director-plan-adjustment-white-zones-2026/",
           "excerpt": "Published: adjustment 26/1 to the cantonal structure plan: “white zones” for residential construction and a stabilization strategy.",
@@ -169,12 +175,6 @@
           "url": "/en/zug-articles/zug-government-directorates-2027/",
           "excerpt": "For the mandate from 2027, all members of the Zug Government will maintain their current leaderships, the State Chancellery said on Tuesday.",
           "date": "2026-10-20T23:12:46.533Z"
-        },
-        {
-          "title": "Zug: appeal against expulsion rejected by the Federal Supreme Court",
-          "url": "/en/zug-articles/federal-appeal-expulsion-zug/",
-          "excerpt": "May 2026: Zug does not renew the short-term permit.",
-          "date": "2026-10-20T02:44:35.163Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-22T02:46:43.877Z"
+      "updatedAt": "2026-10-22T03:13:53.159Z"
     },
     "de": {
       "canton": "ZG",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zug: Revision des Baugesetzes ab dem 17. September 2026",
+          "url": "/de/zug-artikel/zug-pbg-revision-2026/",
+          "excerpt": "Der Kanton Zug eröffnet die Vernehmlassung zur Revision des PBG: neue Regeln für preisgünstigen Wohnraum, weisse Zonen und Verfahrensvereinfachungen.",
+          "date": "2026-10-22T03:09:05.531Z"
+        },
+        {
           "title": "Anpassung des Richtplans 26/1: «weiße Zonen» für das Bauen in Zug",
           "url": "/de/zug-artikel/zug-richtplan-anpassung-weisse-zonen-2026/",
           "excerpt": "Die Anpassung 26/1 des kantonalen Richtplans wurde veröffentlicht: «weiße Zonen» für den Wohnungsbau und eine Stabilisierungsstrategie.",
@@ -256,12 +262,6 @@
           "url": "/de/zug-artikel/zug-regierung-direktionen-2027/",
           "excerpt": "Für die Amtszeit ab 2027 werden alle Mitglieder der Regierung in Zug die aktuellen Leitungen beibehalten, teilte die Staatskanzlei am Dienstag mit.",
           "date": "2026-10-20T23:12:46.533Z"
-        },
-        {
-          "title": "Zug: Beschwerde gegen die Ausweisung vom Bundesgericht abgewiesen",
-          "url": "/de/zug-artikel/bundesgerichtliche-beschwerde-ausweisung-zug/",
-          "excerpt": "Mai 2026: Der Kanton Zug verlängert die Kurzaufenthaltsbewilligung nicht.",
-          "date": "2026-10-20T02:44:35.163Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-22T02:46:43.877Z"
+      "updatedAt": "2026-10-22T03:13:53.159Z"
     },
     "fr": {
       "canton": "ZG",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zoug : révision de la loi sur la construction à partir du 17 septembre 2026",
+          "url": "/fr/articles-zoug/revision-pbg-zoug-2026/",
+          "excerpt": "Le canton de Zoug lance la consultation sur la révision du PBG : nouvelles règles pour les logements à prix modéré, les zones blanches et les simplifications procédurales.",
+          "date": "2026-10-22T03:09:05.531Z"
+        },
+        {
           "title": "«Zones blanches» pour construire à Zoug Plan 26/1 adapté",
           "url": "/fr/articles-zoug/zoug-plan-directeur-ajustement-zones-blanches-2026/",
           "excerpt": "L’adaptation 26/1 du plan directeur cantonal est publiée : des « zones blanches » pour la construction de logements et une stratégie de stabilisation.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-zoug/zoug-gouvernement-directions-2027/",
           "excerpt": "Pour le mandat à partir de 2027, tous les membres du Gouvernement de Zoug maintiendront les directions actuelles, a communiqué mardi la Chancellerie de l'État.",
           "date": "2026-10-20T23:12:46.533Z"
-        },
-        {
-          "title": "Zoug : recours contre l’expulsion rejeté par le Tribunal fédéral",
-          "url": "/fr/articles-zoug/recours-federal-expulsion-zoug/",
-          "excerpt": "Mai 2026 : Zoug ne renouvelle pas le permis de courte durée.",
-          "date": "2026-10-20T02:44:35.163Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-22T02:46:43.877Z"
+      "updatedAt": "2026-10-22T03:13:53.159Z"
     }
   }
 }
