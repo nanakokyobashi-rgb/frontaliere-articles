@@ -312,16 +312,30 @@ jobs:
             echo 'outbox_pending=true' >> "$GITHUB_OUTPUT"
             exit 1
           fi
+          expected_sections="$(jq -c '[.items[] | .section] | unique | sort' "$OUTBOX_FILE")"
+          if ! jq -e --argjson expected_sections "$expected_sections" '
+            (.sections | type) == "array"
+            and (.sections | length > 0)
+            and ([.sections[] | .section] | sort == $expected_sections)
+            and all(.sections[];
+              type == "object"
+              and (.section | type == "string")
+              and (.status | type == "string")
+              and (.status == "success"
+                or .status == "failed"
+                or .status == "in-progress"
+                or .status == "not-started")
+            )
+          ' "$STATUS_FILE" >/dev/null; then
+            echo "::error::pre-generation publisher status has empty, unexpected, or invalid sections; keeping the outbox and refusing to continue"
+            echo 'outbox_pending=true' >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
           export GH_TOKEN="${GITHUB_PAT_NANAKO:-}"
           node scripts/ci/cover-publisher-drain.mjs \
             --mode ack \
             --outbox "$OUTBOX_FILE" \
             --status "$STATUS_FILE"
-          if ! jq -e '(.sections | type) == "array"' "$STATUS_FILE" >/dev/null; then
-            echo "::error::pre-generation publisher status has no sections array; keeping the outbox and refusing to continue"
-            echo 'outbox_pending=true' >> "$GITHUB_OUTPUT"
-            exit 1
-          fi
           publisher_complete='true'
           if ! jq -e '(.sections | type) == "array" and all(.sections[]; .status == "success")' "$STATUS_FILE" >/dev/null; then
             publisher_complete='false'

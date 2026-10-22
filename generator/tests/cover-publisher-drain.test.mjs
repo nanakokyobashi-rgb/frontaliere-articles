@@ -7,6 +7,7 @@ import {
   groupPublisherOutbox,
   publisherStatusIsComplete,
   selectNewRunId,
+  validatePublisherStatus,
   watchPublisherRun,
 } from '../../scripts/ci/cover-publisher-drain.mjs';
 
@@ -112,6 +113,32 @@ test('un esito parziale resta non riuscito per il codice del drain, anche con ac
   assert.equal(publisherStatusIsComplete({ sections: [{ section: 'canton-ag', status: 'success' }] }), true);
   assert.equal(publisherStatusIsComplete({ sections: [{ section: 'canton-ag', status: 'in-progress' }] }), false);
   assert.equal(publisherStatusIsComplete({ sections: [{ section: 'canton-ag', status: 'failed' }] }), false);
+  assert.equal(publisherStatusIsComplete({ sections: [] }), false);
+});
+
+test('il contratto dello status rifiuta sezioni vuote, inattese, duplicate o con stato sconosciuto', () => {
+  const pending = outbox([
+    { articleId: 'ag-1', section: 'canton-ag' },
+    { articleId: 'front-1', section: 'frontaliere' },
+  ]);
+  const valid = {
+    sections: [
+      { section: 'canton-ag', status: 'in-progress' },
+      { section: 'frontaliere', status: 'not-started' },
+    ],
+  };
+
+  assert.equal(validatePublisherStatus(pending, valid), valid);
+  for (const status of [
+    { sections: [] },
+    { sections: [{ section: 'canton-ag', status: 'success' }] },
+    { sections: [{ section: 'canton-ag', status: 'success' }, { section: 'other', status: 'success' }] },
+    { sections: [{ section: 'canton-ag', status: 'success' }, { section: 'canton-ag', status: 'success' }] },
+    { sections: [{ section: 'canton-ag', status: 'unknown' }, { section: 'frontaliere', status: 'success' }] },
+    { sections: [{ section: 'canton-ag' }, { section: 'frontaliere', status: 'success' }] },
+  ]) {
+    assert.throws(() => validatePublisherStatus(pending, status));
+  }
 });
 
 test('il watcher ritenta una lettura transitoria prima di classificare la run', async () => {
