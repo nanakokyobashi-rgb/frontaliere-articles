@@ -3189,7 +3189,14 @@ test('fast-publish verso gli shard ignora i corpi cantonali, quello R2 ignora le
   assert.equal(bodyRegex(HISTORICAL_CORE_LIST, { served: 'r2' }), '^$', 'nessuna sezione R2 attiva: non combacia con niente');
   assert.ok(!new RegExp(bodyRegex(HISTORICAL_CORE_LIST, { served: 'r2' })).test('content/blog-body/it/x.ts'));
   assert.throws(() => bodyRegex(WITH_TI, { served: 'pages' }), /sconosciuto/);
-  assert.match(read('.github/workflows/fast-publish-article.yml'), /fast-publish-section\.mjs body-plan shard\)/);
+  const articleWf = read('.github/workflows/fast-publish-article.yml');
+  assert.match(articleWf, /fast-publish-section\.mjs body-plan shard\)/);
+  const articleResolveCheckout = articleWf.slice(
+    articleWf.indexOf('      - name: Checkout (resolve)\n'),
+    articleWf.indexOf('      - name: Set up Node (resolve)\n'),
+  );
+  assert.match(articleResolveCheckout, /fetch-depth: 0/, 'il resolve articoli deve conservare la storia per il preflight high-water');
+  assert.doesNotMatch(articleResolveCheckout, /fetch-depth: 2/, 'il preflight articoli non puo\' usare un checkout shallow');
 });
 
 test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenziali obbligatorie', () => {
@@ -3289,6 +3296,16 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /source_main_commit:/);
   assert.match(wf, /replay_api_after_publish:/);
   assert.match(wf, /allow_deferred_live_release:/);
+  assert.match(
+    wf,
+    /if \[ "\$EVENT_NAME" = 'push' \] && \[ "\$any" = 'true' \] && \[ "\$dry" != 'true' \]; then[\s\S]*replay_api_after_publish=true[\s\S]*allow_deferred_live_release=true/,
+    'un push normale con staged riuscito deve armare il replay API',
+  );
+  assert.match(
+    wf,
+    /needs\.publish\.result == 'success'[\s\S]*needs\.resolve\.outputs\.bootstrap == 'true' \|\| needs\.resolve\.outputs\.replay_api_after_publish == 'true'/,
+    'un errore reale di render deve restare fail-closed e non redispatchare l API',
+  );
   assert.match(wf, /missing_page_paths:/);
   assert.match(wf, /known_missing_page_paths:/);
   assert.match(wf, /MISSING_PAGE_PATHS_JSON: \$\{\{ toJSON\(matrix\.target\.missingPagePaths \|\| fromJSON\('\[\]'\)\) \}\}/);

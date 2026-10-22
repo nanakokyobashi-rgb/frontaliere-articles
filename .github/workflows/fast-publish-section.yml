@@ -833,6 +833,16 @@ jobs:
           if [ "$(printf '%s' "$matrix" | jq 'any(.[]; .bootstrap == true)')" = "true" ]; then
             bootstrap=true
           fi
+          # Un push puo' vincere la gara con publish-api prima che le pagine
+          # siano su R2. Il render staged resta fail-closed sugli errori reali,
+          # ma se la matrice ha completato con successo il replay API e' parte
+          # obbligatoria del percorso normale, non un'opzione riservata al
+          # bootstrap. Cosi' il timeout bounded dell'API non lascia uno staged
+          # parziale senza redispatch.
+          if [ "$EVENT_NAME" = 'push' ] && [ "$any" = 'true' ] && [ "$dry" != 'true' ]; then
+            replay_api_after_publish=true
+            allow_deferred_live_release=true
+          fi
           {
             echo "matrix=$matrix"
             echo "any=$any"
@@ -1521,10 +1531,10 @@ jobs:
           jq -r '"sezione \(.section) (\(.declaredStatus // "?")): pagine \(.counts | tostring), hub mancanti \(.hubsMissing | tostring), difetti \(.defects | length), pubblicato \(.published | tostring)"' "$s"
 
   # A push can start the API publisher before the section runner has uploaded
-  # its HTML. After a successful bootstrap or explicitly armed staged
-  # backfill, replay the API so an earlier fail-closed readiness check cannot
-  # strand the registry on the previous release. API-triggered replays are
-  # excluded to prevent a workflow_run loop.
+  # its HTML. After a successful staged section publish, every non-dry push
+  # arms the API replay so an earlier fail-closed readiness check cannot strand
+  # the registry on the previous release. API-triggered replays are excluded
+  # to prevent a workflow_run loop; genuine render errors still block replay.
   replay-api-after-staged-release:
     needs: [resolve, publish]
     if: >-
