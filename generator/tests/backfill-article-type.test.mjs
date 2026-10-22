@@ -433,7 +433,11 @@ describe('lettore TS condiviso', () => {
   test('distingue confronti, type specifier dei moduli e asserzioni angolari', () => {
     const source = [
       "const comparison = (left) < right;",
+      "const comparisonRegex = value < /x>/",
+      "const regexMeta = { 'blog.article.real.regex': 'actual' };",
       "import { type Foo } from 'module'",
+      "export type { Foo }",
+      "const exportTypeMeta = { 'blog.article.real.export-type': 'actual' };",
       "const angle = <{ 'blog.article.fake.angle.type': string }>{ 'blog.article.real.angle': 'actual' };",
       "const namedAngle = <Foo & { 'blog.article.fake.angle.named': string }>input;",
       "const unionAngle = <Foo | { 'blog.article.fake.angle.union': string }>input;",
@@ -448,6 +452,8 @@ describe('lettore TS condiviso', () => {
 
     assert.deepEqual([...readTsStringMap(source)], [
       ['blog.article.real.angle', 'actual'],
+      ['blog.article.real.regex', 'actual'],
+      ['blog.article.real.export-type', 'actual'],
       ['blog.article.real.title', 'actual'],
     ]);
   });

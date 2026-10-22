@@ -110,6 +110,13 @@ function looksLikeGenericStart(source, offset, statementStart = false) {
       cursor = close + 1;
       continue;
     }
+    if (character === '/') {
+      const regexEnd = skipStaticRegexLiteral(source, cursor);
+      if (regexEnd >= 0) {
+        cursor = regexEnd - 1;
+        continue;
+      }
+    }
     if (character === '{') braceDepth += 1;
     else if (character === '}' && braceDepth > 0) braceDepth -= 1;
     else if (character === '[') bracketDepth += 1;
@@ -664,6 +671,10 @@ export function readStaticObjectEntries(
       if (moduleBlock) {
         moduleNamedActive = false;
         moduleSourcePending = true;
+        if (moduleStatementKind === 'export' && typeAliasPending) {
+          typeAliasPending = false;
+          typeAliasActive = false;
+        }
         statementStart = true;
       }
       if (braceContext === 'type-alias-object' && !braceContexts.includes('type-alias-object')) {

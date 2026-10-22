@@ -191,16 +191,20 @@ test('il reader non estrae chiavi da annotazioni, asserzioni, generics o blocchi
 test('il reader distingue confronti, type specifier dei moduli e asserzioni angolari', () => {
   const source = [
     "const comparison = (left) < right;",
+    "const comparisonRegex = value < /x>/",
+    "const regexMeta = { 'blog.article.reale.regex': 'attuale' };",
     "import { type Foo } from 'module'",
+    "export type { Foo }",
+    "const exportTypeMeta = { 'blog.article.reale.export-type': 'attuale' };",
     "const angle = <{ 'blog.article.fake.angle.type': string }>{ 'blog.article.reale.angle': 'attuale' };",
     "const namedAngle = <Foo & { 'blog.article.fake.angle.named': string }>input;",
     "const unionAngle = <Foo | { 'blog.article.fake.angle.union': string }>input;",
     "const nestedAngle = <Array<{ 'blog.article.fake.angle.nested': string }>>input;",
-      "function done() {}",
-      "<Foo & { 'blog.article.fake.angle.after-block': string }>input;",
-      "const typeofAngle = typeof <Foo & { 'blog.article.fake.angle.typeof': string }>input;",
-      "const voidAngle = void <Foo & { 'blog.article.fake.angle.void': string }>input;",
-      "const deleteAngle = delete <Foo & { 'blog.article.fake.angle.delete': string }>input;",
+    "function done() {}",
+    "<Foo & { 'blog.article.fake.angle.after-block': string }>input;",
+    "const typeofAngle = typeof <Foo & { 'blog.article.fake.angle.typeof': string }>input;",
+    "const voidAngle = void <Foo & { 'blog.article.fake.angle.void': string }>input;",
+    "const deleteAngle = delete <Foo & { 'blog.article.fake.angle.delete': string }>input;",
     "const meta = { 'blog.article.reale.title': 'attuale' };",
   ].join('\n');
 
@@ -208,6 +212,8 @@ test('il reader distingue confronti, type specifier dei moduli e asserzioni ango
     readStaticObjectEntries(source, 'fixture.ts').map(({ key, value }) => [key, value]),
     [
       ['blog.article.reale.angle', 'attuale'],
+      ['blog.article.reale.regex', 'attuale'],
+      ['blog.article.reale.export-type', 'attuale'],
       ['blog.article.reale.title', 'attuale'],
     ],
   );
