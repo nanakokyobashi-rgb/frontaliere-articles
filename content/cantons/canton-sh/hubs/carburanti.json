@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T20:52:32.399Z",
-  "contentHash": "c2d5ee07a9dd8950cbdced7818d6eb43b01eeb31fc33c5d02f1e7a78e42d3da4",
+  "updatedAt": "2026-10-22T01:09:44.927Z",
+  "contentHash": "4ce6bbef08f223b215d410f0872451857c430ff448093d2bfad2c3b2d2f5c146",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Banche Sciaffusa: Governo respinge regole federali",
+          "url": "/articoli-sciaffusa/sciaffusa-banche-riforma-federale/",
+          "excerpt": "Il Governo di Sciaffusa critica la proposta federale di riforma bancaria, temendo oneri sproporzionati per gli istituti locali.",
+          "date": "2026-10-22T01:01:24.569Z"
+        },
+        {
           "title": "Sciaffusa e Zurigo installano il sistema parcheggi al Reno",
           "url": "/articoli-sciaffusa/parcheggi-cascate-reno/",
           "excerpt": "Nuovo sistema tra Sciaffusa e Zurigo per i parcheggi liberi alle Cascate del Reno; avvio nell'estate 2027, costo circa CHF 400'000.",
@@ -94,12 +100,6 @@
           "url": "/articoli-sciaffusa/svp-sciaffusa-candidati-2027/",
           "excerpt": "L'assemblea dei delegati a Oberhallau ha scelto Andreas Gnädinger per il Consiglio degli Stati e Thomas Hurter e Thomas Müller per il Nazionale.",
           "date": "2026-10-20T06:05:14.822Z"
-        },
-        {
-          "title": "Bundesamt für Strassen chiuderà tre tunnel di notte",
-          "url": "/articoli-sciaffusa/pulizie-tunnel-sciaffusa/",
-          "excerpt": "Fäsenstaub, Cholfirst e Galgenbuck chiusi ogni notte dal 19 al 23 ottobre, dalle 20 alle 5, per lavori di pulizia.",
-          "date": "2026-10-19T12:03:42.288Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T20:52:32.399Z"
+      "updatedAt": "2026-10-22T01:09:44.927Z"
     },
     "en": {
       "canton": "SH",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Schaffhausen banks: Government rejects federal rules",
+          "url": "/en/schaffhausen-articles/schaffhausen-bank-reform-federal/",
+          "excerpt": "The Government of Schaffhausen criticizes the federal banking reform proposal, fearing disproportionate burdens for local institutions.",
+          "date": "2026-10-22T01:01:24.569Z"
+        },
+        {
           "title": "Schaffhausen and Zurich install the parking system on the Rhine",
           "url": "/en/schaffhausen-articles/rhine-falls-parking-system/",
           "excerpt": "New system between Schaffhausen and Zurich for available parking spaces at the Rhine Falls; launch in summer 2027, cost approximately CHF 400'000.",
@@ -193,12 +199,6 @@
           "url": "/en/schaffhausen-articles/svp-schaffhausen-candidates-2027/",
           "excerpt": "The delegates’ assembly in Oberhallau chose Andreas Gnädinger for the Council of States and Thomas Hurter and Thomas Müller for the National Council.",
           "date": "2026-10-20T06:05:14.822Z"
-        },
-        {
-          "title": "Bundesamt für Strassen will close three tunnels at night",
-          "url": "/en/schaffhausen-articles/schaffhausen-tunnel-cleaning/",
-          "excerpt": "Fäsenstaub, Cholfirst and Galgenbuck closed every night from October 19 to 23, from 8 p.m.",
-          "date": "2026-10-19T12:03:42.288Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T20:52:32.399Z"
+      "updatedAt": "2026-10-22T01:09:44.927Z"
     },
     "de": {
       "canton": "SH",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Schaffhauser Banken: Regierung lehnt Bundesregeln ab",
+          "url": "/de/schaffhausen-artikel/schaffhausen-bankengesetz-reform/",
+          "excerpt": "Die Schaffhauser Regierung kritisiert den eidgenössischen Vorschlag zur Bankenreform und befürchtet unverhältnismäßige Belastungen für lokale Institute.",
+          "date": "2026-10-22T01:01:24.569Z"
+        },
+        {
           "title": "Schaffhausen und Zürich installieren das Parkleitsystem am Rhein",
           "url": "/de/schaffhausen-artikel/parkleitsystem-rheinfall/",
           "excerpt": "Neues System zwischen Schaffhausen und Zürich für freie Parkplätze am Rheinfall; Start im Sommer 2027, Kosten etwa CHF 400'000.",
@@ -292,12 +298,6 @@
           "url": "/de/schaffhausen-artikel/svp-schaffhausen-kandidaturen-2027/",
           "excerpt": "Die Delegiertenversammlung in Oberhallau hat Andreas Gnädinger für den Ständerat sowie Thomas Hurter und Thomas Müller für den Nationalrat gewählt.",
           "date": "2026-10-20T06:05:14.822Z"
-        },
-        {
-          "title": "Bundesamt für Strassen wird nachts drei Tunnel schließen",
-          "url": "/de/schaffhausen-artikel/naechtliche-tunnelreinigung-schaffhausen/",
-          "excerpt": "Fäsenstaub, Cholfirst und Galgenbuck jede Nacht vom 19.",
-          "date": "2026-10-19T12:03:42.288Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T20:52:32.399Z"
+      "updatedAt": "2026-10-22T01:09:44.927Z"
     },
     "fr": {
       "canton": "SH",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Banques de Schaffhouse : le gouvernement rejette les règles fédérales",
+          "url": "/fr/articles-schaffhouse/schaffhouse-reforme-bancaire-federale/",
+          "excerpt": "Le gouvernement de Schaffhouse critique la proposition fédérale de réforme bancaire, craignant des charges disproportionnées pour les établissements locaux.",
+          "date": "2026-10-22T01:01:24.569Z"
+        },
+        {
           "title": "Schaffhouse et Zurich installent le système de stationnement au bord du Rhin",
           "url": "/fr/articles-schaffhouse/systeme-parking-chutes-rhin/",
           "excerpt": "Nouveau système entre Schaffhouse et Zurich pour les places de parking libres aux chutes du Rhin ; lancement à l'été 2027, coût d'environ CHF 400'000.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-schaffhouse/svp-schaffhouse-candidatures-2027/",
           "excerpt": "L'assemblée des délégués à Oberhallau a choisi Andreas Gnädinger pour le Conseil des États et Thomas Hurter et Thomas Müller pour le Conseil national.",
           "date": "2026-10-20T06:05:14.822Z"
-        },
-        {
-          "title": "Bundesamt für Strassen fermera trois tunnels la nuit",
-          "url": "/fr/articles-schaffhouse/nettoyage-tunnels-schaffhouse/",
-          "excerpt": "Fäsenstaub, Cholfirst et Galgenbuck fermés chaque nuit du 19 au 23 octobre, de 20 heures à 5 heures, pour des travaux de nettoyage.",
-          "date": "2026-10-19T12:03:42.288Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T20:52:32.399Z"
+      "updatedAt": "2026-10-22T01:09:44.927Z"
     }
   }
 }
