@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ju::https://www.h-ju.ch/fr/a-propos/medias-presse/communiques-de-presse/la-sante-mentale-au-coeur-de-la-27eme-journee-scientifique-interjurassienne-de-la-sante.html": {
-      "section": "canton-ju",
-      "ts": 1792455865196
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261019-plr-et-gauche-montent-au-creneau-contre-l-initiative-du-centre.html": {
-      "section": "canton-ju",
-      "ts": 1792456089624
-    },
     "canton-ju::https://france3-regions.franceinfo.fr/bourgogne-franche-comte/doubs/une-idee-de-taxe-sur-l-embauche-des-etrangers-en-suisse-pourrait-elle-menacer-l-emploi-des-frontaliers-francais-3435600.html": {
       "section": "canton-ju",
       "ts": 1792475807365
@@ -27,6 +19,22 @@
     "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261020-legere-reprise-des-exportations-helvetiques-en-septembre.html": {
       "section": "canton-ju",
       "ts": 1792571737944
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261021-sika-reprend-la-division-adhesifs-de-resonac.html": {
+      "section": "canton-ju",
+      "ts": 1792633103465
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261021-bureau-veritas-en-forme-au-3e-trimestre.html": {
+      "section": "canton-ju",
+      "ts": 1792633116881
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261021-interparfums-renoue-avec-la-croissance-des-ventes-au-3e-trimestre.html": {
+      "section": "canton-ju",
+      "ts": 1792633129393
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261021-changements-a-la-direction-de-flughafen-zuerich.html": {
+      "section": "canton-ju",
+      "ts": 1792633141453
     }
   }
 }
