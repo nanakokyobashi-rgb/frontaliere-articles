@@ -90,6 +90,8 @@ export const META_FIELDS = Object.freeze([...META_CORE_FIELDS, ...META_SEO_FIELD
  * `.ts` che non compila, e il test che pinna il campo deve poter verificare
  * ANCHE l'escape. Stessa ragione per cui `metaFieldRegex` (il lettore) e' un
  * modulo suo: la coppia scrittore/lettore va tenuta sotto lo stesso sguardo.
+ * I separatori Unicode U+2028/U+2029 sono escapati perche' un literal TS non
+ * deve contenere quei caratteri raw.
  */
 export function escapeForSingleQuoteTS(s) {
   return String(s || '')
@@ -120,9 +122,10 @@ export function escapeForSingleQuoteTS(s) {
  * forma di difetto che questo modulo esiste per non ripetere.
  */
 export function unescapeForSingleQuoteTS(s) {
-  return String(s ?? '').replace(/\\u([\da-fA-F]{4})|\\([\s\S])/gu, (_, unicode, escaped) => {
-    if (unicode !== undefined) return String.fromCharCode(Number.parseInt(unicode, 16));
-    return escaped === 'n' ? '\n' : escaped === 'r' ? '\r' : escaped;
+  return String(s ?? '').replace(/\\(u2028|u2029|[\s\S])/g, (_, escape) => {
+    if (escape === 'u2028') return '\u2028';
+    if (escape === 'u2029') return '\u2029';
+    return escape === 'n' ? '\n' : escape === 'r' ? '\r' : escape;
   });
 }
 

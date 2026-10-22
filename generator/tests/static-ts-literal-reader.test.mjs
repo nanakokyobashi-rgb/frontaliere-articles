@@ -318,6 +318,10 @@ test('metaFieldRegex conserva gli offset raw e gli id che contengono punti', () 
 
 test('il decoder conserva Unicode e newline senza ri-scansionare il risultato', () => {
   assert.equal(decodeStaticStringLiteral('line\\n\\u00e8 \\\\n', "'"), 'line\nè \\n');
+  assert.equal(
+    decodeStaticStringLiteral('line\\n\\u2028mezzo\\u2029fine', "'", { newlineAs: ' ' }),
+    'line \u2028mezzo\u2029fine',
+  );
   assert.deepEqual(readStaticStringLiteral('`Use \\`code\\``', 0, 'fixture.ts'), {
     quote: '`',
     value: 'Use \\`code\\`',
@@ -331,4 +335,15 @@ test('gli emitter usano il reader condiviso e non una regex raw duplicata', () =
     assert.match(source, /readStaticObjectEntries/u, `${file}: reader condiviso assente`);
     assert.doesNotMatch(source, /blog\\\.article\\\.\(\[\^'\]\+\?\\\)/u, `${file}: regex raw ancora presente`);
   }
+});
+
+test('i reader SEO decodificano i separatori Unicode con il decoder condiviso', () => {
+  for (const file of ['generator/scripts/create-article.mjs', 'scripts/refresh-hub-landing.mjs', 'scripts/ci/scan-generation-health.mjs']) {
+    const source = readFileSync(resolve(ROOT, file), 'utf8');
+    assert.match(source, /decodeStaticStringLiteral/u, `${file}: decoder condiviso assente`);
+    assert.doesNotMatch(source, /replace\(\/\\\\\(\.\)/u, `${file}: decoder a un carattere ancora presente`);
+  }
+  const ogSource = readFileSync(resolve(ROOT, 'engine/ogPagesPlugin.ts'), 'utf8');
+  assert.match(ogSource, /decodeTsStringEscapes/u, 'OG reader: decoder condiviso assente');
+  assert.doesNotMatch(ogSource, /replace\(\/\\\\\(\.\)/u, 'OG reader: decoder a un carattere ancora presente');
 });

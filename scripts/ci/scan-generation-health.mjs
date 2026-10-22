@@ -168,6 +168,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readTopLevelString, scanTopLevelArticleRecords } from '../lib/article-registry-reader.mjs';
+import { decodeStaticStringLiteral } from '../lib/ts-literals.mjs';
 import { createGithubIssue, resolveGithubIssue } from '../lib/github-issue-creator.mjs';
 import { MAX_PREFLIGHT_REQUEST_TOKENS } from '../../generator/scripts/lib/ai-models.mjs';
 import {
@@ -2547,8 +2548,8 @@ export function collectCorpus(repoRoot = REPO_ROOT, now = Date.now()) {
   const titleRe = /'blog\.article\.([^.']+)\.title':\s*'((?:[^'\\]|\\.)*)'/g;
 
   const titles = new Map([
-    ...readMap('blog-meta-it.ts', titleRe, (m) => m[2].replace(/\\'/g, "'")),
-    ...readMap('blog-meta-ch-it.ts', titleRe, (m) => m[2].replace(/\\'/g, "'")),
+    ...readMap('blog-meta-it.ts', titleRe, (m) => decodeStaticStringLiteral(m[2], "'", { newlineAs: ' ' })),
+    ...readMap('blog-meta-ch-it.ts', titleRe, (m) => decodeStaticStringLiteral(m[2], "'", { newlineAs: ' ' })),
   ]);
   const dates = new Map([
     ...readRegistryDates('blog-articles-data.ts'),

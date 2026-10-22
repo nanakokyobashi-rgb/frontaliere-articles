@@ -39,6 +39,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import * as batch from '../scripts/batch-add-faq-to-articles.mjs';
+import { buildMetaBlock } from '../scripts/lib/article-meta-block.mjs';
+import { parseFaqLiteral, serializeFaqLiteral } from '../scripts/fix-faq-locales.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
 const SCRIPT = path.join(QUI, '..', 'scripts', 'batch-add-faq-to-articles.mjs');
@@ -280,6 +282,11 @@ const FAQ_OSTILE = [
   { q: 'La risposta puo andare a capo?', a: 'Si\':\nprima riga\nseconda riga, e un tab\tin mezzo.' },
 ];
 
+const FAQ_WITH_UNICODE_LINE_TERMINATORS = [
+  { q: `Quale testo contiene un separatore?${String.fromCharCode(0x2028)}`, a: `Risposta con un separatore di riga Unicode.${String.fromCharCode(0x2029)}` },
+  { q: 'La serializzazione resta valida?', a: 'Si, il valore riletto deve restare identico.' },
+];
+
 test('#394 round-trip: cio che insertFaqIntoBodyFile scrive, extractFaqFromContent rilegge', (t) => {
   const p = fileTemporaneo(t, `${ALPHA}.ts`, bodyFile(bodyLine(ALPHA, 1, 'Corpo di alpha.')));
   assert.equal(batch.insertFaqIntoBodyFile(p, ALPHA, FAQ_OSTILE), true);
@@ -296,6 +303,54 @@ test('#394 round-trip anche sul percorso di REPLACE', (t) => {
   const p = fileTemporaneo(t, `${ALPHA}.ts`, bodyFile(bodyLine(ALPHA, 1, 'Corpo.'), faqLine(ALPHA, primo)));
   assert.equal(batch.replaceFaqInBodyFile(p, FAQ_OSTILE, ALPHA), true);
   assert.deepEqual(batch.extractFaqFromContent(fs.readFileSync(p, 'utf-8'), ALPHA), FAQ_OSTILE);
+});
+
+test('#3102 il writer batch usa gli escape TS canonici per U+2028/U+2029', (t) => {
+  const assertWrittenSafely = (p) => {
+    const dopo = fs.readFileSync(p, 'utf-8');
+    assert.match(dopo, /\\u2028/, 'U+2028 deve essere serializzato come escape TS');
+    assert.match(dopo, /\\u2029/, 'U+2029 deve essere serializzato come escape TS');
+    assert.doesNotMatch(dopo, /[\u2028\u2029]/u, 'nessun separatore Unicode raw deve entrare nel literal TS');
+    assert.deepEqual(batch.extractFaqFromContent(dopo, ALPHA), FAQ_WITH_UNICODE_LINE_TERMINATORS);
+  };
+
+  const inserted = fileTemporaneo(t, `${ALPHA}-insert.ts`, bodyFile(bodyLine(ALPHA, 1, 'Corpo.')));
+  assert.equal(batch.insertFaqIntoBodyFile(inserted, ALPHA, FAQ_WITH_UNICODE_LINE_TERMINATORS), true);
+  assertWrittenSafely(inserted);
+
+  const replaced = fileTemporaneo(t, `${ALPHA}-replace.ts`, bodyFile(
+    bodyLine(ALPHA, 1, 'Corpo.'),
+    faqLine(ALPHA, [{ q: 'FAQ precedente?', a: 'Risposta precedente abbastanza lunga.' }]),
+  ));
+  assert.equal(batch.replaceFaqInBodyFile(replaced, FAQ_WITH_UNICODE_LINE_TERMINATORS, ALPHA), true);
+  assertWrittenSafely(replaced);
+});
+
+test('#3102 il writer condiviso dei meta blocca i separatori Unicode raw', () => {
+  const separator2028 = String.fromCharCode(0x2028);
+  const separator2029 = String.fromCharCode(0x2029);
+  const block = buildMetaBlock({
+    id: ALPHA,
+    content: {
+      it: {
+        title: `Titolo${separator2028}`,
+        excerpt: 'Excerpt valido per il writer condiviso.',
+        imageAlt: `Alt${separator2029}`,
+      },
+    },
+  }, 'it');
+
+  assert.match(block, /\\u2028/, 'il writer meta deve serializzare U+2028 come escape TS');
+  assert.match(block, /\\u2029/, 'il writer meta deve serializzare U+2029 come escape TS');
+  assert.doesNotMatch(block, /[\u2028\u2029]/u, 'nessun separatore Unicode raw deve entrare nel meta literal');
+});
+
+test('#3102 il writer FAQ condiviso conserva i separatori nel round-trip del fixer', () => {
+  const literal = serializeFaqLiteral(FAQ_WITH_UNICODE_LINE_TERMINATORS);
+  const parsed = parseFaqLiteral(literal);
+
+  assert.equal(parsed.legacy, false);
+  assert.deepEqual(parsed.pairs, FAQ_WITH_UNICODE_LINE_TERMINATORS);
 });
 
 test('#394 i file scritti dallo scrittore LEGACY restano leggibili', () => {
