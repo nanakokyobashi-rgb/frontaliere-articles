@@ -38,6 +38,13 @@ import {
 } from '../../engine/shared/ts-literals.mjs';
 
 const CLOSING = { '{': '}', '[': ']', '(': ')' };
+const REGEX_PREFIX_KEYWORDS = new Set([
+  'await', 'break', 'case', 'continue', 'debugger', 'default', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return',
+  'throw', 'typeof', 'void', 'yield',
+]);
+const REGEX_PREFIX_PUNCTUATION = new Set([
+  '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>', '/', '&&', '||', '??', '=>',
+]);
 
 /**
  * Read one JavaScript/TypeScript string literal without searching through raw
@@ -103,18 +110,8 @@ export function matchingDelimiter(src, openIdx) {
   if (!close) throw new Error(`matchingDelimiter: '${open}' non è un delimitatore di apertura`);
   let depth = 0;
   let quote = null;
-
-  const canStartRegex = (idx) => {
-    let j = idx - 1;
-    while (j >= openIdx && /\s/.test(src[j])) j -= 1;
-    if (j < openIdx) return true;
-    const previous = src[j];
-    if ('([{=,:;!?&|+\-*%^~<>'.includes(previous)) return true;
-    let end = j;
-    while (j >= openIdx && /[A-Za-z_$]/.test(src[j])) j -= 1;
-    if (end === j) return false;
-    return /^(?:return|throw|case|delete|void|typeof|instanceof|in|of|yield|await|else|do)$/.test(src.slice(j + 1, end + 1));
-  };
+  let canStartRegex = true;
+  let afterMemberAccess = false;
 
   const skipRegex = (start) => {
     let inClass = false;
@@ -154,17 +151,75 @@ export function matchingDelimiter(src, openIdx) {
       i = end + 1;
       continue;
     }
-    if (ch === '/' && canStartRegex(i)) {
-      const end = skipRegex(i);
-      if (end === -1) return -1;
-      i = end;
+    if (ch === '/') {
+      if (canStartRegex) {
+        const end = skipRegex(i);
+        if (end === -1) return -1;
+        i = end;
+        canStartRegex = false;
+      } else {
+        // Division consumes a value and leaves an expression position for the
+        // next token (which may itself be a regular-expression literal).
+        canStartRegex = true;
+      }
+      afterMemberAccess = false;
       continue;
     }
-    if (ch === "'" || ch === '"' || ch === '`') { quote = ch; continue; }
-    if (ch === open) depth += 1;
-    else if (ch === close) {
+    if (ch === "'" || ch === '"' || ch === '`') {
+      quote = ch;
+      canStartRegex = false;
+      afterMemberAccess = false;
+      continue;
+    }
+    if (/[A-Za-z_$]/.test(ch)) {
+      let end = i + 1;
+      while (/[A-Za-z0-9_$]/.test(src[end] || '')) end += 1;
+      const word = src.slice(i, end);
+      canStartRegex = !afterMemberAccess && REGEX_PREFIX_KEYWORDS.has(word);
+      afterMemberAccess = false;
+      i = end - 1;
+      continue;
+    }
+    if (src.startsWith('&&', i) || src.startsWith('||', i) || src.startsWith('??', i)) {
+      const token = src.slice(i, i + 2);
+      canStartRegex = REGEX_PREFIX_PUNCTUATION.has(token);
+      afterMemberAccess = false;
+      i += 1;
+      continue;
+    }
+    if (ch === '.' || ch === '#') {
+      canStartRegex = false;
+      afterMemberAccess = true;
+      continue;
+    }
+    if (ch === '!') {
+      if (src[i + 1] === '=') {
+        i += src[i + 2] === '=' ? 2 : 1;
+        canStartRegex = true;
+      }
+      // A bare `!` is prefix when an expression can start and a TypeScript
+      // non-null assertion when it follows a value; preserve that context.
+      afterMemberAccess = false;
+      continue;
+    }
+    if (ch === open) {
+      depth += 1;
+      canStartRegex = true;
+      afterMemberAccess = false;
+    } else if (ch === close) {
       depth -= 1;
       if (depth === 0) return i;
+      canStartRegex = false;
+      afterMemberAccess = false;
+    } else if (REGEX_PREFIX_PUNCTUATION.has(ch)) {
+      canStartRegex = true;
+      afterMemberAccess = false;
+    } else if (/[0-9]/.test(ch)) {
+      canStartRegex = false;
+      afterMemberAccess = false;
+    } else {
+      canStartRegex = false;
+      afterMemberAccess = false;
     }
   }
   return -1;
