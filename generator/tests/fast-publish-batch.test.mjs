@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import { ARTICLE_SECTION_CORE_LIST } from '../../engine/shared/articleSectionCore.mjs';
-import { bodyPublishPlan, bodyRegex } from '../../scripts/ci/fast-publish-section.mjs';
+import { articlePublishPlan, bodyPublishPlan, bodyRegex } from '../../scripts/ci/fast-publish-section.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const workflow = readFileSync(resolve(here, '../../.github/workflows/fast-publish-article.yml'), 'utf8');
@@ -32,6 +32,9 @@ test('il trigger push conserva tutti gli ID dei body cambiati', () => {
   // Solo le sezioni servite da uno shard: un corpo cantonale (R2) lo pubblica
   // fast-publish-section.yml, e qui farebbe fallire `shard-of`.
   assert.match(resolveStep, /fast-publish-section\.mjs body-plan shard/);
+  assert.match(resolveStep, /fast-publish-section\.mjs article-plan shard/);
+  assert.match(resolveStep, /surface_section=/);
+  assert.match(resolveStep, /surface_ids_json=/);
   assert.match(resolveStep, /body_section=.*\.section/);
   assert.match(resolveStep, /body_ids_json=.*\.ids/);
   assert.match(resolveStep, /skipped_ids_json=.*\.skippedIds/);
@@ -45,6 +48,35 @@ test('il trigger push conserva tutti gli ID dei body cambiati', () => {
   assert.match(resolveStep, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);
   assert.match(resolveStep, /if \[ "\$\{#ids\[@\]\}" -eq 0 \]; then[\s\S]*git diff --name-only "\$before" HEAD/);
   assert.doesNotMatch(resolveStep, /head\s+-1/);
+});
+
+test('le superfici articolo oltre il body producono solo gli ID realmente cambiati', () => {
+  const registry = new Map([
+    ['frontaliere', new Set(['alpha', 'beta'])],
+    ['svizzera', new Set()],
+  ]);
+  const previous = new Map([
+    ['content/seo/seo-blog-5.ts', "const SEO = {\n  'blog-alpha': { title: 'old' },\n  'blog-beta': { title: 'same' },\n};\n"],
+    ['content/blog-meta-it.ts', "const META = {\n  'blog.article.alpha.title': 'A',\n  'blog.article.beta.title': 'old beta',\n};\n"],
+    ['content/routerBlogData.ts', "const BLOG_SLUGS = {\n  'alpha': { it: 'alpha-it', en: 'alpha-en', de: 'alpha-de', fr: 'alpha-fr' },\n  'beta': { it: 'beta-it', en: 'beta-en', de: 'beta-de', fr: 'beta-fr' },\n};\n"],
+  ]);
+  const current = new Map([
+    ['content/seo/seo-blog-5.ts', "const SEO = {\n  'blog-alpha': { title: 'new alpha' },\n  'blog-beta': { title: 'same' },\n};\n"],
+    ['content/blog-meta-it.ts', "const META = {\n  'blog.article.alpha.title': 'A',\n  'blog.article.beta.title': 'new beta',\n};\n"],
+    ['content/routerBlogData.ts', "const BLOG_SLUGS = {\n  'alpha': { it: 'alpha-it', en: 'alpha-en', de: 'alpha-de', fr: 'alpha-fr' },\n  'beta': { it: 'beta-new-it', en: 'beta-en', de: 'beta-de', fr: 'beta-fr' },\n};\n"],
+  ]);
+  const plan = articlePublishPlan([
+    'content/seo/seo-blog-5.ts',
+    'content/blog-meta-it.ts',
+    'content/routerBlogData.ts',
+  ], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: (section) => registry.get(section.section) ?? new Set(),
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => current.get(rel) ?? null,
+  });
+
+  assert.deepEqual(plan, [{ section: 'frontaliere', ids: ['alpha', 'beta'], bootstrap: false }]);
 });
 
 test('il resolver article non rifà il fetch del parent già presente nel checkout', () => {

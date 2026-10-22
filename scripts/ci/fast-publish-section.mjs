@@ -49,6 +49,7 @@ import { activeCorpusCoreEntries, activeSourceSections, sectionForBodyPath, sect
 import { articleRegistryObjectBodies, articleRegistryObjectFields } from '../../engine/shared/articleRegistryObjectBodies.mjs';
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { EDGE_SECTION_REGISTRY_URL, validateEdgeSectionRegistry } from '../lib/section-registry.mjs';
+import { findAllSeoEntryMatches } from '../lib/seo-entry.mjs';
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -112,6 +113,153 @@ function changedFileRecords(files) {
   return changedFiles;
 }
 
+function sourceText(readSource, rel) {
+  if (typeof readSource !== 'function') return null;
+  const source = readSource(rel);
+  return source === undefined || source === null ? null : String(source);
+}
+
+function mapRecord(map, id, value) {
+  const previous = map.get(id);
+  map.set(id, previous === undefined ? value : `${previous}\n${value}`);
+}
+
+function changedRecordIds(previous, next) {
+  const ids = new Set([...previous.keys(), ...next.keys()]);
+  return [...ids].filter((id) => previous.get(id) !== next.get(id));
+}
+
+function registryRecords(source) {
+  const records = new Map();
+  if (source === null) return records;
+  for (const body of articleRegistryObjectBodies(source)) {
+    const id = articleRegistryObjectFields(body).get('id');
+    if (id) mapRecord(records, id, body);
+  }
+  return records;
+}
+
+function seoRecords(source, rel) {
+  const records = new Map();
+  if (source === null) return records;
+  for (const match of findAllSeoEntryMatches(source, rel)) {
+    mapRecord(records, match.id, source.slice(match.index, match.closeIdx + 1));
+  }
+  return records;
+}
+
+/**
+ * Meta chunks are flat string maps, but a field value can contain commas and
+ * newlines. Group from one article key to the next instead of splitting on a
+ * comma: the planner compares the complete per-article source record.
+ */
+function metaRecords(source) {
+  const records = new Map();
+  if (source === null) return records;
+  const keyRe = /^[\t ]*(['"])blog\.article\.([^'"]+)\.[A-Za-z][A-Za-z0-9]*\1\s*:/gm;
+  const matches = [...source.matchAll(keyRe)];
+  for (let index = 0; index < matches.length; index += 1) {
+    const match = matches[index];
+    const end = matches[index + 1]?.index ?? source.length;
+    mapRecord(records, match[2], source.slice(match.index, end));
+  }
+  return records;
+}
+
+function slugRecordMap(source, ids) {
+  const records = new Map();
+  if (source === null) return records;
+  // The generated slug map keeps one article object per line. Collect all
+  // entry starts once, then slice to the next start; probing the whole file
+  // once per article would turn a 4k-entry map into an avoidable O(n²) scan.
+  const entryRe = /^[\t ]*(['"])([^'"]+)\1\s*:\s*\{/gm;
+  const matches = [...source.matchAll(entryRe)];
+  for (let index = 0; index < matches.length; index += 1) {
+    const match = matches[index];
+    const id = match[2];
+    if (!ids.has(id)) continue;
+    const end = matches[index + 1]?.index ?? source.length;
+    records.set(id, source.slice(match.index, end));
+  }
+  return records;
+}
+
+function slugRecords(previousSource, nextSource, ids) {
+  return {
+    previous: slugRecordMap(previousSource, ids),
+    next: slugRecordMap(nextSource, ids),
+  };
+}
+
+function canonicalOverrideRecords(source) {
+  const records = new Map();
+  if (source === null) return records;
+  const document = JSON.parse(source);
+  const overrides = document?.overrides;
+  if (!overrides || typeof overrides !== 'object' || Array.isArray(overrides)) {
+    throw new Error('canonical override map: manca overrides');
+  }
+  for (const [slug, canonical] of Object.entries(overrides)) records.set(slug, JSON.stringify(canonical));
+  return records;
+}
+
+function canonicalIdsForSlugs(slugs, slugRecordMaps, candidateIds) {
+  const out = new Set();
+  for (const id of candidateIds) {
+    const records = slugRecordMaps.map((records) => records.get(id)).filter(Boolean);
+    for (const slug of slugs) {
+      const literal = new RegExp(`['"]${escapeRe(slug)}['"]`);
+      if (records.some((record) => literal.test(record))) {
+        out.add(id);
+        break;
+      }
+    }
+  }
+  return out;
+}
+
+function canonicalOverrideChangedIds(previous, next, previousSlugRecords, nextSlugRecords, candidateIds) {
+  const changedSlugs = changedRecordIds(previous, next);
+  return canonicalIdsForSlugs(changedSlugs, [previousSlugRecords, nextSlugRecords], candidateIds);
+}
+
+function articleSurfaceKind(rel, section) {
+  const surfaces = sectionSourceSurfaces(section.section);
+  if (rel === surfaces.registryFile) return 'registry';
+  if (rel === surfaces.slugFile) return 'slug';
+  if (surfaces.canonicalOverrides && rel === surfaces.canonicalOverrides) return 'canonical';
+  const metaPrefix = `${surfaces.metaPrefix}-`;
+  if (rel.startsWith(metaPrefix) && /^[a-z]{2}\.ts$/.test(rel.slice(metaPrefix.length))) return 'meta';
+  if (section.kind === 'frontaliere' && /^content\/seo\/seo-blog(?:-\d+)?\.ts$/.test(rel)) return 'seo';
+  if (section.kind === 'national' && rel === 'content/seo/seo-blog-ch.ts') return 'seo';
+  return null;
+}
+
+function repoPathAtRevision(rel) {
+  try {
+    const resolved = realpathSync(rel).replaceAll('\\', '/');
+    const root = process.cwd().replaceAll('\\', '/').replace(/\/$/, '');
+    if (resolved.startsWith(`${root}/`)) return resolved.slice(root.length + 1);
+  } catch {
+    // A deleted path has no realpath; the original repo-relative path is the
+    // right lookup for a normal file and the caller will treat a missing blob
+    // as a deleted source.
+  }
+  return rel;
+}
+
+function gitSourceAtRevision(revision, rel) {
+  if (!revision) return null;
+  try {
+    return execFileSync('git', ['show', `${revision}:${repoPathAtRevision(rel)}`], {
+      encoding: 'utf8',
+      maxBuffer: 64 * 1024 * 1024,
+    });
+  } catch {
+    return null;
+  }
+}
+
 function imageKeyFromPublicPath(rel) {
   const raw = String(rel ?? '').replaceAll('\\', '/').split(/[?#]/, 1)[0];
   if (!raw.startsWith('public/images/')) return null;
@@ -169,6 +317,93 @@ export function imagePublishPlan(files, coreList = activeCorpusCoreEntries(), { 
   return activeSourceSections(coreList)
     .filter((s) => sections.has(s.section) && owners.has(s.section))
     .map((s) => ({ section: s.section, ids: [...owners.get(s.section)].sort(), bootstrap: false }));
+}
+
+/**
+ * Article-facing source changes must wake the article renderer even when no
+ * body or public image changed. In particular, an SEO-only correction used to
+ * produce a green resolver with an empty matrix: the corpus was fixed, but
+ * the already-served HTML (and its og:image) stayed stale on the site.
+ *
+ * Compare keyed records between the push base and the checkout so a change in
+ * one large generated chunk wakes only its article ids. The registry remains
+ * the admission list: removed/orphaned ids never reach the renderer.
+ */
+export function articlePublishPlan(
+  files,
+  coreList = activeCorpusCoreEntries(),
+  {
+    served,
+    readCurrentSource = (rel) => (existsSync(rel) ? readFileSync(rel, 'utf8') : null),
+    readPreviousSource = () => null,
+    articleIdsForSection = registryArticleIds,
+  } = {},
+) {
+  if (served !== undefined && served !== 'shard' && served !== 'r2') {
+    throw new Error(`article-plan: tipo "${served}" sconosciuto (shard | r2)`);
+  }
+  const sections = activeSourceSections(coreList)
+    .filter((section) => served === undefined || (served === 'shard') === Boolean(section.shardKey));
+  const sectionBySurface = sections.flatMap((section) => [{ section, kind: section }]);
+  const registeredBySection = new Map(
+    sections.map((section) => [section.section, new Set(articleIdsForSection(section))]),
+  );
+  const targets = new Map(sections.map((section) => [section.section, new Set()]));
+
+  for (const { rel } of changedFileRecords(files)) {
+    const owner = sectionBySurface.find(({ section }) => articleSurfaceKind(rel, section));
+    if (!owner) continue;
+
+    const { section } = owner;
+    const kind = articleSurfaceKind(rel, section);
+    const previous = sourceText(readPreviousSource, rel);
+    const next = sourceText(readCurrentSource, rel);
+    let changedIds;
+
+    if (kind === 'registry') {
+      changedIds = changedRecordIds(registryRecords(previous), registryRecords(next));
+    } else if (kind === 'seo') {
+      changedIds = changedRecordIds(seoRecords(previous, rel), seoRecords(next, rel));
+    } else if (kind === 'meta') {
+      changedIds = changedRecordIds(metaRecords(previous), metaRecords(next));
+    } else if (kind === 'slug') {
+      const registryBefore = registryRecords(sourceText(readPreviousSource, section.registryFile));
+      const registryAfter = registryRecords(sourceText(readCurrentSource, section.registryFile));
+      const slug = slugRecords(previous, next, new Set([...registryBefore.keys(), ...registryAfter.keys()]));
+      changedIds = changedRecordIds(slug.previous, slug.next);
+    } else if (kind === 'canonical') {
+      const registryBefore = registryRecords(sourceText(readPreviousSource, section.registryFile));
+      const registryAfter = registryRecords(sourceText(readCurrentSource, section.registryFile));
+      const candidateIds = new Set([...registryBefore.keys(), ...registryAfter.keys()]);
+      const slug = slugRecords(
+        sourceText(readPreviousSource, section.slugFile),
+        sourceText(readCurrentSource, section.slugFile),
+        candidateIds,
+      );
+      changedIds = [...canonicalOverrideChangedIds(
+        canonicalOverrideRecords(previous),
+        canonicalOverrideRecords(next),
+        slug.previous,
+        slug.next,
+        candidateIds,
+      )];
+    } else {
+      changedIds = [];
+    }
+
+    const registered = registeredBySection.get(section.section);
+    for (const id of changedIds) {
+      if (registered.has(id)) targets.get(section.section).add(id);
+    }
+  }
+
+  return sections
+    .filter((section) => targets.get(section.section).size > 0)
+    .map((section) => ({
+      section: section.section,
+      ids: [...targets.get(section.section)].sort(),
+      bootstrap: false,
+    }));
 }
 
 /** Promozioni e demozioni cantonali R2 fra due versioni del registro. */
@@ -529,6 +764,18 @@ if (isMain()) {
   const run = async () => {
     if (cmd === 'body-regex') console.log(bodyRegex(activeCorpusCoreEntries(), { served: arg }));
     else if (cmd === 'body-plan') console.log(JSON.stringify(bodyPublishPlan(readFileSync(0, 'utf8').split('\n'), activeCorpusCoreEntries(), { served: arg })));
+    else if (cmd === 'article-plan') {
+      let before = process.env.PUSH_BEFORE ?? '';
+      if (!before || /^0+$/.test(before)) before = 'HEAD~1';
+      if (!/^[a-f0-9]{40,64}$/i.test(before) && before !== 'HEAD~1') {
+        throw new Error('PUSH_BEFORE non disponibile per confrontare le superfici articolo');
+      }
+      console.log(JSON.stringify(articlePublishPlan(
+        readFileSync(0, 'utf8').split('\n'),
+        activeCorpusCoreEntries(),
+        { served: arg, readPreviousSource: (rel) => gitSourceAtRevision(before, rel) },
+      )));
+    }
     else if (cmd === 'r2-plan') {
       const files = readFileSync(0, 'utf8').split('\n');
       let registryRefreshSections = [];
@@ -565,7 +812,7 @@ if (isMain()) {
     else if (cmd === 'image-plan') console.log(JSON.stringify(imagePublishPlan(readFileSync(0, 'utf8').split('\n'), activeCorpusCoreEntries(), { served: arg })));
     else if (cmd === 'section-of' && arg) console.log(sectionOf(arg));
     else if (cmd === 'shard-of' && arg) console.log(shardOf(arg));
-    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | body-plan [shard|r2] < files | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files | r2-reconcile-plan <commit> | r2-api-push-plan < diff.json edge.json');
+    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | body-plan [shard|r2] < files | article-plan [shard|r2] < files | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files | r2-reconcile-plan <commit> | r2-api-push-plan < diff.json edge.json');
   };
   run().catch((error) => {
     console.error(`::error::fast-publish-section: ${error?.message ?? error}`);

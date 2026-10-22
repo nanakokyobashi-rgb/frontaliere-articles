@@ -311,6 +311,21 @@ jobs:
               [ "$(printf '%s' "$body_ids_json" | jq 'length')" -gt 0 ] || continue
               groups="$(jq -c --arg s "$body_section" --argjson ids "$body_ids_json" '.[$s] = ((.[$s] // []) + $ids | unique | sort)' <<<"$groups")"
             done < <(printf '%s' "$body_plan" | jq -c '.[]')
+
+            # Body and image diffs are not the whole article surface. A
+            # metadata/SEO/slug/registry correction must republish the same
+            # article id, otherwise the resolver can be green with an empty
+            # matrix and leave stale HTML (including og:image) live.
+            if [ "$EVENT_NAME" = 'push' ]; then
+              article_plan="$(printf '%s\n' "$changed" | PUSH_BEFORE="$before" node scripts/ci/fast-publish-section.mjs article-plan shard)"
+              while IFS= read -r surface_target; do
+                [ -n "$surface_target" ] || continue
+                surface_section="$(printf '%s' "$surface_target" | jq -r '.section')"
+                surface_ids_json="$(printf '%s' "$surface_target" | jq -c '.ids | unique | sort')"
+                [ "$(printf '%s' "$surface_ids_json" | jq 'length')" -gt 0 ] || continue
+                groups="$(jq -c --arg s "$surface_section" --argjson ids "$surface_ids_json" '.[$s] = ((.[$s] // []) + $ids | unique | sort)' <<<"$groups")"
+              done < <(printf '%s' "$article_plan" | jq -c '.[]')
+            fi
           fi
 
           # Explicit dispatch ids form one target; body and image changes are
