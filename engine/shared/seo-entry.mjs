@@ -30,7 +30,7 @@ function matchingDelimiter(src, openIdx) {
     let end = j;
     while (j >= openIdx && /[A-Za-z_$]/.test(src[j])) j -= 1;
     if (end === j) return false;
-    return /^(?:return|throw|case|delete|void|typeof|instanceof|in|of|yield|await|else|do)$/.test(src.slice(j + 1, end + 1));
+    return /^(?:return|throw|case|break|continue|debugger|default|delete|void|typeof|instanceof|in|of|yield|await|else|do)$/.test(src.slice(j + 1, end + 1));
   };
 
   const skipRegex = (start) => {

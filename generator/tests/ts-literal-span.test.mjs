@@ -158,6 +158,17 @@ test('matchingDelimiter va fail-closed se una regex contiene una seconda slash',
   assert.throws(() => findIdListLiteralSpan(src, 'IDS'), /non si chiude/);
 });
 
+test('matchingDelimiter riconosce i quattro prefissi regex aggiunti al lexer', () => {
+  for (const keyword of ['break', 'continue', 'debugger', 'default']) {
+    const src = `{ ${keyword} /}/u, value: 'resta' }`;
+    assert.equal(
+      matchingDelimiter(src, 0),
+      src.lastIndexOf('}'),
+      `${keyword}: la graffa nel regex non deve chiudere l oggetto`,
+    );
+  }
+});
+
 test('commenti e stringhe che imitano dichiarazioni non contano come duplicati', () => {
   const src = [
     '// export const IDS: string[] = [\'commento\'];',

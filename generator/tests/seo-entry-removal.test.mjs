@@ -113,6 +113,21 @@ test('la scansione ignora entry-like nei commenti multilinea e nei template lite
   assert.equal(findSeoEntryMatches(result.src, id, 'fixture.ts').length, 0);
 });
 
+test('il resolver SEO tratta break, continue, debugger e default come prefissi regex', () => {
+  for (const keyword of ['break', 'continue', 'debugger', 'default']) {
+    const id = `regex-${keyword}`;
+    const source = [
+      'export const SEO = {',
+      `  'blog-${id}': { value: ${keyword} /}/u, after: 'resta' },`,
+      '};',
+    ].join('\n');
+    const [match] = findSeoEntryMatches(source, id, 'fixture.ts');
+    assert.ok(match, `${keyword}: entry non trovata`);
+    assert.match(source.slice(match.index, match.closeIdx + 1), /after: 'resta'/u, keyword);
+    assert.equal(source[match.closeIdx], '}', keyword);
+  }
+});
+
 test('la scansione fallisce esplicitamente su stringa, template e commento non chiusi', () => {
   const quoteSource = [
     'export const SEO = {',
