@@ -4,22 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/702540/kanton-die-frist-f%c3%bcr-die-steuererkl%c3%a4rung-verl%c3%a4ngert-sich-automatisch": {
-      "section": "canton-be",
-      "ts": 1792504733958
-    },
-    "canton-be::https://ajour.ch/story/702388/kantonsstrasse-durch-schwarzenburg-ist-bald-nur-noch-einspurig-befahrbar": {
-      "section": "canton-be",
-      "ts": 1792504741094
-    },
-    "canton-be::https://ajour.ch/story/702470/budget-2027-sieht-ertrags%c3%bcberschuss-vor": {
-      "section": "canton-be",
-      "ts": 1792504757309
-    },
-    "canton-be::https://ajour.ch/story/702686/grossratskommission-unterst%c3%bctzt-ausl%c3%a4nderstimmrecht-im-kanton-bern": {
-      "section": "canton-be",
-      "ts": 1792504779693
-    },
     "canton-be::https://ajour.ch/story/702511/spitalneubau-br%c3%bcgg-der-kanton-erh%c3%b6ht-den-druck-auf-biel-bei-der-planung-des-spitalareals": {
       "section": "canton-be",
       "ts": 1792509742058
@@ -211,6 +195,14 @@
     "canton-be::https://www.be.ch/de/start.html?newsid=9a6f112d-d379-4f84-916e-a5cf20f37b85": {
       "section": "canton-be",
       "ts": 1792674336053
+    },
+    "canton-be::https://ajour.ch/story/702540/kanton-die-frist-f%c3%bcr-die-steuererkl%c3%a4rung-verl%c3%a4ngert-sich-automatisch": {
+      "section": "canton-be",
+      "ts": 1792678093333
+    },
+    "canton-be::https://ajour.ch/story/702470/budget-2027-sieht-ertrags%c3%bcberschuss-vor": {
+      "section": "canton-be",
+      "ts": 1792678100877
     }
   }
 }
