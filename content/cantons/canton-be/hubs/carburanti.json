@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T15:40:17.008Z",
-  "contentHash": "dea1ddebb2188c4fdfe98bbdc395b028bc16a75a57419255f6ea541c1ae1ec8d",
+  "updatedAt": "2026-10-22T12:14:01.253Z",
+  "contentHash": "8dfbee16c9cd16841265842cc142e3783d721635b58f2366622615d27ed4b264",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-20T12:04:15.773Z",
+      "updatedAt": "2026-10-21T12:19:56.872Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-20T12:04:15.773Z"
+          "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Primo adeguamento LPP superstiti e invalidità: 2,1%, 1%, 1,2%",
+          "url": "/articoli-berna/primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2/",
+          "excerpt": "Aumento 2,1% per rendite dal 2023, 1% per prima rivalutazione 2026, 1,2% per ultima modifica 2025.",
+          "date": "2026-10-22T12:06:19.622Z"
+        },
         {
           "title": "Consiglio federale: Kurzarbeit verso il regime ordinario",
           "url": "/articoli-berna/kurzarbeit-regole-ordinarie/",
@@ -82,12 +88,6 @@
           "url": "/articoli-berna/voto-comunale-stranieri-berna/",
           "excerpt": "La SAK sostiene il voto comunale volontario per stranieri con permesso di domicilio, 10 anni in Svizzera, 5 nel Cantone, 3 mesi nel comune.",
           "date": "2026-10-20T22:00:47.607Z"
-        },
-        {
-          "title": "Swissgrid pianifica una linea aerea tra Berna e Lucerna",
-          "url": "/articoli-berna/corridoio-linea-wynigen/",
-          "excerpt": "Swissgrid propone una linea aerea tra Bickigen BE e Mettlen LU per sostituire quella quasi centenaria.",
-          "date": "2026-10-20T02:20:36.757Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T15:40:17.008Z"
+      "updatedAt": "2026-10-22T12:14:01.253Z"
     },
     "en": {
       "canton": "BE",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-20T12:04:15.773Z"
+          "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "First LPP adjustment for survivors and disability: 2.1%, 1%, 1.2%",
+          "url": "/en/bern-articles/first-lpp-adjustment-for-survivors-and-disability-2-1-1-1-2/",
+          "excerpt": "Increase 2,1% for annuities from 2023, 1% for first revaluation 2026, 1,2% for latest modification 2025.",
+          "date": "2026-10-22T12:06:19.622Z"
+        },
         {
           "title": "Federal Council: short-time work towards the ordinary regime",
           "url": "/en/bern-articles/short-time-work-normal-rules/",
@@ -169,12 +175,6 @@
           "url": "/en/bern-articles/municipal-voting-foreigners-bern/",
           "excerpt": "SAK supports voluntary municipal voting for foreigners with a settlement permit, 10 years in Switzerland, 5 in the canton, 3 months in the municipality.",
           "date": "2026-10-20T22:00:47.607Z"
-        },
-        {
-          "title": "Swissgrid is planning an overhead line between Bern and Lucerne",
-          "url": "/en/bern-articles/wynigen-grid-corridor/",
-          "excerpt": "Swissgrid proposes an overhead line between Bickigen BE and Mettlen LU to replace the nearly century-old one.",
-          "date": "2026-10-20T02:20:36.757Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T15:40:17.008Z"
+      "updatedAt": "2026-10-22T12:14:01.253Z"
     },
     "de": {
       "canton": "BE",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-20T12:04:15.773Z"
+          "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Erste Anpassung der BVG-Hinterlassenen- und Invalidenrenten: 2,1%, 1%, 1,2%",
+          "url": "/de/bern-artikel/erste-anpassung-der-bvg-hinterlassenen-und-invalidenrenten-2-1-1-1-2/",
+          "excerpt": "Erhöhung um 2,1% für Renten ab 2023, 1% für die erste Anpassung 2026, 1,2% für die letzte Änderung 2025.",
+          "date": "2026-10-22T12:06:19.622Z"
+        },
         {
           "title": "Bundesrat: Kurzarbeit auf dem Weg zur ordentlichen Regelung",
           "url": "/de/bern-artikel/kurzarbeit-ordentliche-regeln/",
@@ -256,12 +262,6 @@
           "url": "/de/bern-artikel/kommunales-wahlrecht-auslaender-bern/",
           "excerpt": "Die SAK unterstützt das freiwillige kommunale Stimmrecht für Ausländer mit Niederlassungsbewilligung, 10 Jahren Aufenthalt in der Schweiz, 5 Jahren im Kanton und 3 Monaten in der Gemeinde.",
           "date": "2026-10-20T22:00:47.607Z"
-        },
-        {
-          "title": "Swissgrid plant eine Freileitung zwischen Bern und Luzern",
-          "url": "/de/bern-artikel/wynigen-netzkorridor/",
-          "excerpt": "Swissgrid schlägt eine Freileitung zwischen Bickigen BE und Mettlen LU vor, um die fast hundert Jahre alte Leitung zu ersetzen.",
-          "date": "2026-10-20T02:20:36.757Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T15:40:17.008Z"
+      "updatedAt": "2026-10-22T12:14:01.253Z"
     },
     "fr": {
       "canton": "BE",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-20T12:04:15.773Z"
+          "updatedAt": "2026-10-21T12:19:56.872Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Première adaptation LPP pour survivants et invalidité : 2,1 %, 1 %, 1,2 %",
+          "url": "/fr/articles-berne/premiere-adaptation-lpp-pour-survivants-et-invalidite-2-1-1-1-2/",
+          "excerpt": "Augmentation de 2,1 % pour les rentes à partir de 2023, de 1 % pour la première revalorisation en 2026, de 1,2 % pour la dernière modification en 2025.",
+          "date": "2026-10-22T12:06:19.622Z"
+        },
         {
           "title": "Conseil fédéral : le chômage partiel vers le régime ordinaire",
           "url": "/fr/articles-berne/chomage-partiel-regles-ordinaires/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-berne/vote-communal-etrangers-berne/",
           "excerpt": "La SAK soutient le droit de vote communal facultatif pour les étrangers titulaires d’un permis d’établissement, ayant vécu 10 ans en Suisse, 5 ans dans le canton et 3 mois dans la commune.",
           "date": "2026-10-20T22:00:47.607Z"
-        },
-        {
-          "title": "Swissgrid planifie une ligne aérienne entre Berne et Lucerne",
-          "url": "/fr/articles-berne/corridor-reseau-wynigen/",
-          "excerpt": "Swissgrid propose une ligne aérienne entre Bickigen BE et Mettlen LU pour remplacer celle qui est presque centenaire.",
-          "date": "2026-10-20T02:20:36.757Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T15:40:17.008Z"
+      "updatedAt": "2026-10-22T12:14:01.253Z"
     }
   }
 }

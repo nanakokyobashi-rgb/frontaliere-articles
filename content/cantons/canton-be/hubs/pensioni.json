@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-16T14:33:38.367Z",
-  "contentHash": "553767605f7f4713bf7f6c933cf7326d526a8c533500525e9a1038dbc202aa7b",
+  "updatedAt": "2026-10-22T12:14:01.253Z",
+  "contentHash": "c0e8c0bed8a6a7905029ca0cf473af36fd765edef73696b5b8e1c775219bb271",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T10:09:31.602Z",
+      "updatedAt": "2026-10-21T20:56:46.769Z",
       "keyFacts": 0
     }
   ],
@@ -141,7 +141,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -156,6 +156,12 @@
           "url": "/articoli-svizzera/integrazione-lingua-berna-contributi/",
           "excerpt": "Nel Cantone di Berna i programmi di integrazione e i contributi alla formazione continua dipendono dal livello cantonale, comunale o istituzionale; requisiti, scadenze e importi devono essere verificati sulla fonte…",
           "date": "2026-10-15T04:28:17.925Z"
+        },
+        {
+          "title": "Formazione continua nel Canton Berna: requisiti e contributi",
+          "url": "/articoli-svizzera/contributi-formazione-berna-requisiti/",
+          "excerpt": "Nel Canton Berna requisiti, termini e importi dei contributi alla formazione continua seguono regole cantonali e vanno verificati sulla fonte ufficiale.",
+          "date": "2026-10-08T00:53:16.011Z"
         },
         {
           "title": "AVS e prestazioni complementari nel Canton Berna",
@@ -180,12 +186,6 @@
           "url": "/articoli-svizzera/avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione/",
           "excerpt": "La cassa di compensazione del Cantone Berna influenza le prestazioni complementari dell'AVS, ma la fonte non fornisce informazioni specifiche.",
           "date": "2026-08-13T16:04:43.335Z"
-        },
-        {
-          "title": "Formazione continua nel Canton Berna: requisiti e contributi",
-          "url": "/articoli-svizzera/contributi-formazione-berna-requisiti/",
-          "excerpt": "Nel Canton Berna requisiti, termini e importi dei contributi alla formazione continua seguono regole cantonali e vanno verificati sulla fonte ufficiale.",
-          "date": "2026-10-08T00:53:16.011Z"
         },
         {
           "title": "Mercato del lavoro Berna: salari, formazione e previdenza",
@@ -213,7 +213,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-22T12:14:01.253Z"
     },
     "en": {
       "canton": "BE",
@@ -327,7 +327,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -342,6 +342,12 @@
           "url": "/en/swiss-articles/language-courses-in-bern-integration-subsidies-and-requirements/",
           "excerpt": "In the Canton of Bern, integration programs and continuing education contributions depend on the cantonal, municipal or institutional level; requirements, deadlines and amounts must be verified using the official source.",
           "date": "2026-10-15T04:28:17.925Z"
+        },
+        {
+          "title": "Continuing education in the Canton of Bern: requirements and contributions",
+          "url": "/en/swiss-articles/bern-continuing-education-grants-requirements/",
+          "excerpt": "In the Canton of Bern, requirements, deadlines and amounts of continuing education contributions follow cantonal rules and must be verified against the official source.",
+          "date": "2026-10-08T00:53:16.011Z"
         },
         {
           "title": "AVS and complementary services in Canton Bern",
@@ -366,12 +372,6 @@
           "url": "/en/swiss-articles/avs-and-complementary-benefits-cantone-bern-compensation-fund/",
           "excerpt": "The Canton Bern Compensation Fund affects the supplementary performance of the AVS, but the source does not provide specific information.",
           "date": "2026-08-13T16:04:43.335Z"
-        },
-        {
-          "title": "Continuing education in the Canton of Bern: requirements and contributions",
-          "url": "/en/swiss-articles/bern-continuing-education-grants-requirements/",
-          "excerpt": "In the Canton of Bern, requirements, deadlines and amounts of continuing education contributions follow cantonal rules and must be verified against the official source.",
-          "date": "2026-10-08T00:53:16.011Z"
         },
         {
           "title": "Labour market Bern: wages, training and social security",
@@ -399,7 +399,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-22T12:14:01.253Z"
     },
     "de": {
       "canton": "BE",
@@ -513,7 +513,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -528,6 +528,12 @@
           "url": "/de/schweiz-artikel/sprachkurse-bern-integration-beitrage-und-voraussetzungen/",
           "excerpt": "Im Kanton Bern hängen Integrationsprogramme und Beiträge zur Weiterbildung von der kantonalen, kommunalen oder institutionellen Ebene ab; Voraussetzungen, Fristen und Beträge müssen anhand der offiziellen Quelle…",
           "date": "2026-10-15T04:28:17.925Z"
+        },
+        {
+          "title": "Weiterbildung im Kanton Bern: Voraussetzungen und Beiträge",
+          "url": "/de/schweiz-artikel/bern-weiterbildung-beitrage-voraussetzungen/",
+          "excerpt": "Im Kanton Bern richten sich die Voraussetzungen, Fristen und Beträge der Beiträge zur Weiterbildung nach kantonalen Regeln und müssen anhand der offiziellen Quelle überprüft werden.",
+          "date": "2026-10-08T00:53:16.011Z"
         },
         {
           "title": "AHV und Ergänzungsleistungen im Kanton Bern",
@@ -552,12 +558,6 @@
           "url": "/de/schweiz-artikel/avs-und-zusatzleistungen-cantone-bern-entschadigungsfonds/",
           "excerpt": "Die Ausgleichskasse des Kantons Bern beeinflusst die Ergänzungsleistungen der AHV, die Quelle liefert jedoch keine konkreten Angaben.",
           "date": "2026-08-13T16:04:43.335Z"
-        },
-        {
-          "title": "Weiterbildung im Kanton Bern: Voraussetzungen und Beiträge",
-          "url": "/de/schweiz-artikel/bern-weiterbildung-beitrage-voraussetzungen/",
-          "excerpt": "Im Kanton Bern richten sich die Voraussetzungen, Fristen und Beträge der Beiträge zur Weiterbildung nach kantonalen Regeln und müssen anhand der offiziellen Quelle überprüft werden.",
-          "date": "2026-10-08T00:53:16.011Z"
         },
         {
           "title": "Arbeitsmarkt Bern: Löhne, Ausbildung und Vorsorge",
@@ -585,7 +585,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-22T12:14:01.253Z"
     },
     "fr": {
       "canton": "BE",
@@ -699,7 +699,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
             }
           ],
-          "updatedAt": "2026-10-16T10:09:31.602Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -714,6 +714,12 @@
           "url": "/fr/articles-suisse/cours-de-langue-berne-integration-cotisations-et-exigences/",
           "excerpt": "Dans le canton de Berne, les programmes d'intégration et les contributions à la formation continue dépendent du niveau cantonal, communal ou institutionnel ; les exigences, les délais et les montants doivent être…",
           "date": "2026-10-15T04:28:17.925Z"
+        },
+        {
+          "title": "Formation continue dans le canton de Berne : exigences et contributions",
+          "url": "/fr/articles-suisse/berne-formation-continue-aides-conditions/",
+          "excerpt": "Dans le canton de Berne, les exigences, les délais et les montants des contributions à la formation continue suivent les règles cantonales et doivent être vérifiés dans la source officielle.",
+          "date": "2026-10-08T00:53:16.011Z"
         },
         {
           "title": "AVS et prestations complémentaires dans le canton de Berne",
@@ -738,12 +744,6 @@
           "url": "/fr/articles-suisse/avs-et-benefices-complementaires-cantone-berne-fonds-de-compensation/",
           "excerpt": "La caisse de compensation du canton de Berne influe sur les prestations complémentaires de l'AVS, mais la source ne fournit pas d'informations spécifiques.",
           "date": "2026-08-13T16:04:43.335Z"
-        },
-        {
-          "title": "Formation continue dans le canton de Berne : exigences et contributions",
-          "url": "/fr/articles-suisse/berne-formation-continue-aides-conditions/",
-          "excerpt": "Dans le canton de Berne, les exigences, les délais et les montants des contributions à la formation continue suivent les règles cantonales et doivent être vérifiés dans la source officielle.",
-          "date": "2026-10-08T00:53:16.011Z"
         },
         {
           "title": "Marché du travail Berne : salaires, formation et prévoyance",
@@ -771,7 +771,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-16T14:33:38.367Z"
+      "updatedAt": "2026-10-22T12:14:01.253Z"
     }
   }
 }
