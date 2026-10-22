@@ -48,6 +48,9 @@ const blogMetaCantonBeEn: Record<string, string> = {
     'blog.article.kurzarbeit-regole-ordinarie.title': 'Federal Council: short-time work towards the ordinary regime',
     'blog.article.kurzarbeit-regole-ordinarie.excerpt': 'The Federal Council envisages a gradual return: short-time work from 24 to 12 months and the waiting period from 1 day to a maximum of three days.',
     'blog.article.kurzarbeit-regole-ordinarie.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.title': 'First LPP adjustment for survivors and disability: 2.1%, 1%, 1.2%',
+    'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.excerpt': 'Increase 2,1% for annuities from 2023, 1% for first revaluation 2026, 1,2% for latest modification 2025.',
+    'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBeEn;

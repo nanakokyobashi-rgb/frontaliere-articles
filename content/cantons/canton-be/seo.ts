@@ -582,6 +582,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2': {
+    title: 'Primo adeguamento LPP superstiti e invalidità: 2,1%, 1%, 1,2%',
+    description: 'Aumento 2,1% per rendite dal 2023, 1% per prima rivalutazione 2026, 1,2% per ultima modifica 2025.',
+    keywords: 'frontalieri, ticino, svizzera, italia, primo, adeguamento, superstiti, invalidità',
+    ogTitle: 'Primo adeguamento LPP superstiti e invalidità: 2,1%, 1%',
+    ogDescription: 'Aumento 2,1% per rendite dal 2023, 1% per prima rivalutazione 2026, 1,2% per ultima modifica 2025.',
+    canonicalPath: '/articoli-berna/primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Primo adeguamento LPP superstiti e invalidità: 2,1%, 1%, 1,2%",
+      "description": "Aumento 2,1% per rendite dal 2023, 1% per prima rivalutazione 2026, 1,2% per ultima modifica 2025.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T12:06:19+00:00",
+      "dateModified": "2026-10-22T12:06:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

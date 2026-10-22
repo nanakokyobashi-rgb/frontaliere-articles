@@ -171,4 +171,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2',
+ category: 'novita',
+ date: '2026-10-22T12:06:19.622Z',
+ image: '/images/blog/article-primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.webp',
+ hasCalculator: false,
+ articleType: 'news',
+ canton: ['BE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

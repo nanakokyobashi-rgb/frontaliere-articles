@@ -48,6 +48,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.kurzarbeit-regole-ordinarie.title': 'Bundesrat: Kurzarbeit auf dem Weg zur ordentlichen Regelung',
     'blog.article.kurzarbeit-regole-ordinarie.excerpt': 'Der Bundesrat stellt eine schrittweise Rückkehr in Aussicht: Kurzarbeit von 24 auf 12 Monate und Karenzzeit von 1 Tag auf höchstens drei Tage.',
     'blog.article.kurzarbeit-regole-ordinarie.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.title': 'Erste Anpassung der BVG-Hinterlassenen- und Invalidenrenten: 2,1%, 1%, 1,2%',
+    'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.excerpt': 'Erhöhung um 2,1% für Renten ab 2023, 1% für die erste Anpassung 2026, 1,2% für die letzte Änderung 2025.',
+    'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;

@@ -48,6 +48,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.kurzarbeit-regole-ordinarie.title': 'Conseil fédéral : le chômage partiel vers le régime ordinaire',
     'blog.article.kurzarbeit-regole-ordinarie.excerpt': 'Le Conseil fédéral envisage un retour progressif : le chômage partiel de 24 à 12 mois et le délai d’attente de 1 jour à un maximum de trois jours.',
     'blog.article.kurzarbeit-regole-ordinarie.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.title': 'Première adaptation LPP pour survivants et invalidité : 2,1 %, 1 %, 1,2 %',
+    'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.excerpt': 'Augmentation de 2,1 % pour les rentes à partir de 2023, de 1 % pour la première revalorisation en 2026, de 1,2 % pour la dernière modification en 2025.',
+    'blog.article.primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBeFr;

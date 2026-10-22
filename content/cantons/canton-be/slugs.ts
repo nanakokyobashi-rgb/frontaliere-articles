@@ -18,6 +18,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'weissenbach-incidente-quattro-auto': { it: 'weissenbach-incidente-quattro-auto', en: 'weissenbach-four-car-crash', de: 'weissenbach-unfall-vier-autos', fr: 'weissenbach-accident-quatre-voitures' },
  'berna-stato-pagina-non-disponibile': { it: 'berna-stato-pagina-non-disponibile', en: 'bern-page-status-unavailable', de: 'bern-seitenstatus-nicht-verfuegbar', fr: 'berne-statut-page-indisponible' },
  'kurzarbeit-regole-ordinarie': { it: 'kurzarbeit-regole-ordinarie', en: 'short-time-work-normal-rules', de: 'kurzarbeit-ordentliche-regeln', fr: 'chomage-partiel-regles-ordinaires' },
+ 'primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2': { it: 'primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2', en: 'first-lpp-adjustment-for-survivors-and-disability-2-1-1-1-2', de: 'erste-anpassung-der-bvg-hinterlassenen-und-invalidenrenten-2-1-1-1-2', fr: 'premiere-adaptation-lpp-pour-survivants-et-invalidite-2-1-1-1-2' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
