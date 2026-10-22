@@ -71,11 +71,11 @@ function skipRegexLiteral(source, offset) {
 }
 
 const REGEX_PREFIX_KEYWORDS = new Set([
-  'await', 'case', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return', 'throw',
+  'await', 'break', 'case', 'continue', 'debugger', 'default', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return', 'throw',
   'typeof', 'void', 'yield',
 ]);
 const REGEX_PREFIX_PUNCTUATION = new Set([
-  '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>', '=>',
+  '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>', '/', '=>',
 ]);
 const OBJECT_LITERAL_PREFIX_TOKENS = new Set([
   '=', ':', 'return', 'default', '(', '[', ',', '?', '&&', '||', '??',
@@ -233,6 +233,7 @@ function isTypeAssertionBeforeExpression(source, offset) {
 function delimiterContextAt(source, offset) {
   const delimiters = [];
   let previousToken = null;
+  let previousTokenWasMemberProperty = false;
   let previousSignificantEnd = 0;
   let pendingTypeAliasEquals = -1;
   let pendingTypeAliasDepth = -1;
@@ -251,9 +252,10 @@ function delimiterContextAt(source, offset) {
   let pendingVariableTypeObject = false;
   let angleAssertedObjectOffset = -1;
   let rootTypeContext = false;
-  const markToken = (token, closesFunctionParameters = false) => {
+  const markToken = (token, closesFunctionParameters = false, memberProperty = false) => {
     if (delimiters.length) delimiters.at(-1).lastToken = token;
     previousToken = token;
+    previousTokenWasMemberProperty = memberProperty;
     lastClosedFunctionParameters = closesFunctionParameters;
     if (typeAliasDepth >= 0 && delimiters.length === typeAliasDepth) typeAliasHasRhsToken = true;
   };
@@ -316,7 +318,7 @@ function delimiterContextAt(source, offset) {
     }
     if (ch === '/' && (previousToken === null
       || REGEX_PREFIX_PUNCTUATION.has(previousToken)
-      || REGEX_PREFIX_KEYWORDS.has(previousToken))) {
+      || (!previousTokenWasMemberProperty && REGEX_PREFIX_KEYWORDS.has(previousToken)))) {
       const regexEnd = skipRegexLiteral(source, index);
       if (regexEnd >= 0) {
         index = regexEnd;
@@ -396,6 +398,7 @@ function delimiterContextAt(source, offset) {
     }
     if (/[A-Za-z_$]/u.test(ch)) {
       const identifier = /^[A-Za-z_$][\w$]*/u.exec(source.slice(index, offset))[0];
+      const memberProperty = previousToken === '.' || previousToken === '#';
       if (['const', 'let', 'var'].includes(identifier)) {
         variableDeclarationDepth = delimiters.length;
         variableNamePending = true;
@@ -425,7 +428,7 @@ function delimiterContextAt(source, offset) {
         }
       }
       index += identifier.length;
-      markToken(identifier);
+      markToken(identifier, false, memberProperty);
       previousSignificantEnd = index;
       continue;
     }
@@ -875,8 +878,7 @@ function scanTypeScriptExpression(source, offset, terminator) {
       while (/[A-Za-z0-9_$]/u.test(source[end] || '')) end += 1;
       const word = source.slice(index, end);
       const memberProperty = afterMemberAccess;
-      canStartRegex = !memberProperty
-        && /^(?:case|delete|do|else|in|instanceof|new|of|return|throw|typeof|void|yield|await)$/u.test(word);
+      canStartRegex = !memberProperty && REGEX_PREFIX_KEYWORDS.has(word);
       awaitingControlParen = (!memberProperty && /^(?:catch|for|if|switch|while|with)$/u.test(word))
         || (awaitingControlParen && word === 'await');
       awaitingBlock = !memberProperty && /^(?:catch|do|else|finally|try)$/u.test(word);
@@ -1008,7 +1010,7 @@ function scanTypeScriptExpression(source, offset, terminator) {
       index += 1;
       continue;
     }
-    if (ch === '.') {
+    if (ch === '.' || ch === '#') {
       canStartRegex = false;
       afterMemberAccess = true;
       awaitingControlParen = false;
