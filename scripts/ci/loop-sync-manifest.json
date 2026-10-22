@@ -3349,9 +3349,9 @@
       "sitePath": "scripts/lib/extract-article-text.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "24f32d759f736e41",
-        "corpus": "24f32d759f736e41",
-        "alignedAt": "2026-10-19"
+        "site": "e11ab7d09620aadd",
+        "corpus": "e11ab7d09620aadd",
+        "alignedAt": "2026-10-22"
       }
     },
     {
@@ -3636,9 +3636,9 @@
       "sitePath": "scripts/lib/unescape-ts-string.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "69c49af9f353918b",
-        "corpus": "69c49af9f353918b",
-        "alignedAt": "2026-08-14"
+        "site": "45aff25183945f06",
+        "corpus": "45aff25183945f06",
+        "alignedAt": "2026-10-22"
       }
     },
     {
