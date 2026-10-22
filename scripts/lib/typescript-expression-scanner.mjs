@@ -71,7 +71,7 @@ function skipRegexLiteral(source, offset) {
 }
 
 const REGEX_PREFIX_KEYWORDS = new Set([
-  'await', 'case', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return', 'throw',
+  'await', 'break', 'case', 'continue', 'debugger', 'default', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return', 'throw',
   'typeof', 'void', 'yield',
 ]);
 const REGEX_PREFIX_PUNCTUATION = new Set([
@@ -775,8 +775,7 @@ function scanTypeScriptExpression(source, offset, terminator) {
       while (/[A-Za-z0-9_$]/u.test(source[end] || '')) end += 1;
       const word = source.slice(index, end);
       const memberProperty = afterMemberAccess;
-      canStartRegex = !memberProperty
-        && /^(?:case|delete|do|else|in|instanceof|new|of|return|throw|typeof|void|yield|await)$/u.test(word);
+      canStartRegex = !memberProperty && REGEX_PREFIX_KEYWORDS.has(word);
       awaitingControlParen = (!memberProperty && /^(?:catch|for|if|switch|while|with)$/u.test(word))
         || (awaitingControlParen && word === 'await');
       awaitingBlock = !memberProperty && /^(?:catch|do|else|finally|try)$/u.test(word);

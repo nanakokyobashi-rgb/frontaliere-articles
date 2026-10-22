@@ -7,6 +7,7 @@ import {
   readStaticObjectEntries,
   readStaticStringLiteral,
 } from '../../scripts/lib/ts-literals.mjs';
+import { computedPropertyKeyEnd } from '../../scripts/lib/typescript-expression-scanner.mjs';
 import { metaFieldRegex, metaFieldRegexFragment } from '../scripts/lib/meta-field-regex.mjs';
 
 const ROOT = resolve(new URL('../..', import.meta.url).pathname);
@@ -131,6 +132,17 @@ test('il reader ignora regex dopo break, continue, debugger e catch senza bindin
     readStaticObjectEntries(source, 'fixture.ts').map(({ key, value }) => [key, value]),
     [['blog.article.reale.title', 'attuale']],
   );
+});
+
+test('lo scanner ignora le parentesi dentro regex dopo keyword prefix', () => {
+  for (const keyword of ['default', 'break', 'continue', 'debugger']) {
+    const source = `[${keyword} /foo]/u]`;
+    assert.equal(
+      computedPropertyKeyEnd(source, 0),
+      source.length,
+      `${keyword}: la regex non deve chiudere la computed property`,
+    );
+  }
 });
 
 test('il reader conserva blocchi, espressioni e case con tipi annidati', () => {
