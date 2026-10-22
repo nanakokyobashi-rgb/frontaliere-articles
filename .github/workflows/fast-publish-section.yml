@@ -883,6 +883,7 @@ jobs:
         env:
           BEFORE: ${{ steps.push_range.outputs.before }}
           AFTER: ${{ steps.push_range.outputs.after }}
+          EVENT_NAME: ${{ github.event_name }}
           PREFLIGHT_EVENT_NAME: ${{ github.event_name }}
           PREFLIGHT_PUSH_BASE_REVISION: ${{ steps.push_range.outputs.before }}
           ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
@@ -928,7 +929,11 @@ jobs:
             generator/scripts/lib/daily-brief-insights.mjs
             generator/scripts/lib/localized-toponyms.mjs
           )
-          if [[ "${BEFORE:-}" =~ ^[a-f0-9]{40}$ ]] \
+          # A bounded workflow_dispatch can carry an explicit article scope
+          # together with a push range; only push events may derive changed
+          # mode so dispatch targets remain in both preflight gates.
+          if [ "$EVENT_NAME" = 'push' ] \
+            && [[ "${BEFORE:-}" =~ ^[a-f0-9]{40}$ ]] \
             && [[ "${AFTER:-}" =~ ^[a-f0-9]{40}$ ]] \
             && [ "$BEFORE" != '0000000000000000000000000000000000000000' ] \
             && git cat-file -e "${BEFORE}^{commit}" 2>/dev/null \
@@ -945,6 +950,10 @@ jobs:
           )
           if [ -n "${BEFORE:-}" ]; then
             preflight_env+=("PREFLIGHT_BASE_REVISION=$BEFORE")
+          fi
+          if [ "$EVENT_NAME" = 'workflow_dispatch' ]; then
+            preflight_env+=("PREFLIGHT_ARTICLE_IDS=${ARTICLE_IDS_INPUT:-}")
+            preflight_env+=("PREFLIGHT_SECTION=${SECTION_INPUT:-}")
           fi
           env "${preflight_env[@]}" node scripts/ci/check-blog-body-syntax.mjs
           PREFLIGHT_SCAN_MODE="$scan_mode" \

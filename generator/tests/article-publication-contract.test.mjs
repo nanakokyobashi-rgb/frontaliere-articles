@@ -10,6 +10,7 @@ const COVER = '/images/blog/article-cantello-teatro-dialettale-ottobre-2026.webp
 const MCDONALDS_COVER = '/images/blog/article-mcdonalds-pulizia-malnate-2026.webp';
 const FESTIVAL_COVER = '/images/blog/article-festival-racconto-varese-ottobre.webp';
 const BERNA_TRAINING_COVER = '/images/blog/article-contributi-formazione-berna-requisiti.webp';
+const DAILY_BRIEF_COVER = '/images/blog/bollettino-frontaliere-2026-10-18.webp';
 
 function filesBelow(directory) {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
@@ -95,4 +96,17 @@ test('Bern continuing education registry, SEO metadata and public asset use the 
   assert.ok(metadata, 'Bern continuing education SEO metadata is missing');
   assert.ok(metadata.includes('${BASE_URL}' + BERNA_TRAINING_COVER));
   assert.equal(crypto.createHash('sha256').update(asset).digest('hex'), 'a06ebb2026a70ff9d90e0919094c3ac1e5b3f29d5aedde2a8f23d43223918960');
+});
+
+test('the 21 October daily brief keeps its restored registry and SEO cover paired', () => {
+  const registry = fs.readFileSync(path.join(ROOT, 'content/blog-articles-data.ts'), 'utf8');
+  const seo = fs.readFileSync(path.join(ROOT, 'content/seo/seo-blog-5.ts'), 'utf8');
+  const article = registry.match(/id: 'bollettino-frontaliere-2026-10-21',[\s\S]*?\n\s*\},?/u)?.[0];
+  const metadata = seo.match(/'blog-bollettino-frontaliere-2026-10-21': \{[\s\S]*?\n\s*\},\n\n/u)?.[0];
+
+  assert.ok(article, 'daily brief registry record is missing');
+  assert.match(article, new RegExp(`image: '${DAILY_BRIEF_COVER.replaceAll('/', '\\/')}'`));
+  assert.ok(metadata, 'daily brief SEO metadata is missing');
+  assert.ok(metadata.includes('${BASE_URL}' + DAILY_BRIEF_COVER));
+  assert.ok(fs.existsSync(path.join(ROOT, `public${DAILY_BRIEF_COVER}`)), 'restored daily brief cover blob is missing');
 });
