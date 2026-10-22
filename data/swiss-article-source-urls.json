@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/votazioni/votazioni-del-27-settembre-liniziativa-sulla-neutralit%c3%a0-potrebbe-subire-una-sconfitta-pesante/92062979": {
-    "articleId": "votazioni-federali-neutralita-sondaggio",
-    "ts": "2026-09-18T02:22:10.003Z",
-    "keyForm": 2
-  },
   "https://www.rsi.ch/s/4090330": {
     "articleId": "crescita-pil-seco-esportazioni",
     "ts": "2026-09-18T02:42:09.862Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4177624": {
     "articleId": "stop-emergenza-centrale-nucleare-gosgen",
     "ts": "2026-10-22T02:15:55.147Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/pw3jvim6zzcy": {
+    "articleId": "adeguamento-rendite-superstiti-invalidita-2027",
+    "ts": "2026-10-22T11:46:55.190Z",
     "keyForm": 2
   }
 }

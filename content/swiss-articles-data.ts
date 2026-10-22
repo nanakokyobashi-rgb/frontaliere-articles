@@ -28688,6 +28688,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'adeguamento-rendite-superstiti-invalidita-2027',
+    category: 'pensione',
+    date: '2026-10-22T11:46:54.259Z',
+    image: '/images/blog/article-adeguamento-rendite-superstiti-invalidita-2027.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
