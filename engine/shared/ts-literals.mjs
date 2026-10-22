@@ -25,7 +25,9 @@ const DECLARATION_PREFIX_KEYWORDS = new Set(['abstract', 'async', 'declare', 'de
 const AMBIENT_BLOCK_KEYWORDS = new Set(['global']);
 const TYPE_BODY_KEYWORDS = new Set(['class', 'enum', 'global', 'interface', 'module', 'namespace']);
 const TYPE_CONTEXT_WORDS = new Set(['asserts', 'extends', 'infer', 'is', 'keyof', 'readonly', 'typeof', 'unique']);
-const TYPE_ASSERTION_PREFIX_WORDS = new Set(['await', 'case', 'else', 'return', 'throw', 'yield']);
+const TYPE_ASSERTION_PREFIX_WORDS = new Set([
+  'await', 'case', 'delete', 'else', 'return', 'throw', 'typeof', 'void', 'yield',
+]);
 const ASI_EXPRESSION_ENDS = new Set([
   'close-block', 'close-expression-block', 'close-object', 'close-paren', 'close-type-alias',
   'close-type-declaration', 'identifier', 'literal', 'postfix',

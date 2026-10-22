@@ -440,6 +440,9 @@ describe('lettore TS condiviso', () => {
       "const nestedAngle = <Array<{ 'blog.article.fake.angle.nested': string }>>input;",
       "function done() {}",
       "<Foo & { 'blog.article.fake.angle.after-block': string }>input;",
+      "const typeofAngle = typeof <Foo & { 'blog.article.fake.angle.typeof': string }>input;",
+      "const voidAngle = void <Foo & { 'blog.article.fake.angle.void': string }>input;",
+      "const deleteAngle = delete <Foo & { 'blog.article.fake.angle.delete': string }>input;",
       "'blog.article.real.title': 'actual',",
     ].join('\n');
 
