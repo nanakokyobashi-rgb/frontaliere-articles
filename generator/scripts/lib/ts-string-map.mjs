@@ -32,6 +32,14 @@ export function readTsStringLiteral(src, i) {
     const c = src[j];
     if (c === '\\') {
       const n = src[j + 1];
+      if (n === '\r' && src[j + 2] === '\n') {
+        j += 3;
+        continue;
+      }
+      if (n === '\n' || n === '\r' || n === '\u2028' || n === '\u2029') {
+        j += 2;
+        continue;
+      }
       if (n === 'n') out += '\n';
       else if (n === 't') out += '\t';
       else if (n === 'r') out += '';
@@ -82,16 +90,24 @@ export function readTsStringLiteral(src, i) {
  * il file intero prima di estrarre qualsiasi chiave.
  */
 const REGEX_PREFIX_KEYWORDS = new Set([
-  'await', 'break', 'case', 'continue', 'debugger', 'default', 'delete', 'do', 'else', 'in',
-  'instanceof', 'new', 'of', 'return', 'throw', 'typeof', 'void', 'yield',
+  'await', 'case', 'default', 'delete', 'do', 'else', 'in', 'instanceof', 'new', 'of', 'return',
+  'throw', 'typeof', 'void', 'yield',
 ]);
 const REGEX_PREFIX_PUNCTUATION = new Set([
   '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>',
 ]);
 const CONTROL_PAREN_KEYWORDS = new Set(['catch', 'for', 'if', 'switch', 'while', 'with']);
 const BLOCK_BRACE_KEYWORDS = new Set([
-  'catch', 'class', 'do', 'else', 'enum', 'finally', 'interface', 'module', 'namespace', 'static',
-  'try',
+  'catch', 'class', 'do', 'else', 'enum', 'finally', 'function', 'interface', 'module', 'namespace', 'static', 'try',
+]);
+const DECLARATION_BRACE_KEYWORDS = new Set(['class', 'enum', 'function', 'interface', 'module', 'namespace']);
+const DECLARATION_PREFIX_KEYWORDS = new Set(['abstract', 'async', 'declare', 'default', 'export']);
+const AMBIENT_BLOCK_KEYWORDS = new Set(['global']);
+const TYPE_BODY_KEYWORDS = new Set(['class', 'enum', 'global', 'interface', 'module', 'namespace']);
+const TYPE_CONTEXT_WORDS = new Set(['asserts', 'extends', 'infer', 'is', 'keyof', 'readonly', 'typeof', 'unique']);
+const ASI_EXPRESSION_ENDS = new Set([
+  'close-block', 'close-expression-block', 'close-object', 'close-paren', 'close-type-alias',
+  'close-type-declaration', 'identifier', 'literal', 'postfix',
 ]);
 const BLOCK_BRACE_PENDING_RESET = new Set(['(', ')', '[', ']', ',', ':', ';', '=']);
 
@@ -126,6 +142,91 @@ function skipRegexLiteral(src, offset) {
   return -1;
 }
 
+/** Detect a generic type argument list without treating an ordinary `<` comparison as one. */
+function looksLikeGenericStart(src, offset) {
+  let angleDepth = 1;
+  let braceDepth = 0;
+  let bracketDepth = 0;
+  let parenDepth = 0;
+  for (let cursor = offset + 1; cursor < src.length; cursor += 1) {
+    const character = src[cursor];
+    if (character === "'" || character === '"' || character === '`') {
+      const quote = character;
+      cursor += 1;
+      while (cursor < src.length) {
+        if (src[cursor] === '\\') {
+          cursor += 1;
+        } else if (src[cursor] === quote) {
+          break;
+        }
+        cursor += 1;
+      }
+      continue;
+    }
+    if (character === '/' && src[cursor + 1] === '/') {
+      cursor += 2;
+      while (cursor < src.length && src[cursor] !== '\n' && src[cursor] !== '\r') cursor += 1;
+      continue;
+    }
+    if (character === '/' && src[cursor + 1] === '*') {
+      const close = src.indexOf('*/', cursor + 2);
+      if (close < 0) return false;
+      cursor = close + 1;
+      continue;
+    }
+    if (character === '{') braceDepth += 1;
+    else if (character === '}' && braceDepth > 0) braceDepth -= 1;
+    else if (character === '[') bracketDepth += 1;
+    else if (character === ']' && bracketDepth > 0) bracketDepth -= 1;
+    else if (character === '(') parenDepth += 1;
+    else if (character === ')' && parenDepth > 0) parenDepth -= 1;
+    else if (character === '<') angleDepth += 1;
+    else if (character === '>' && src[cursor - 1] !== '=' && braceDepth === 0
+      && bracketDepth === 0 && parenDepth === 0) {
+      angleDepth -= 1;
+      if (angleDepth === 0) {
+        let next = cursor + 1;
+        while (/\s/u.test(src[next] || '')) next += 1;
+        const nextWord = /^[A-Za-z_$][A-Za-z0-9_$]*/u.exec(src.slice(next))?.[0];
+        const angleContent = src.slice(offset + 1, cursor).trim();
+        const typeAssertion = Boolean(nextWord && /^[{[(]/u.test(angleContent));
+        return src[next] === '(' || src.startsWith('=>', next) || src[next] === ';'
+          || src[next] === ',' || src[next] === ')' || src[next] === '.' || src[next] === '|'
+          || src[next] === '&' || src[next] === '=' || src[next] === '[' || src[next] === '!'
+          || src.startsWith('?.', next) || src.startsWith('??', next) || src.startsWith('&&', next)
+          || src.startsWith('||', next) || src[next] === '+' || src[next] === '-'
+          || src[next] === '*' || src[next] === '/' || src[next] === '%' || src[next] === '?'
+          || nextWord === 'as' || nextWord === 'satisfies' || nextWord === 'instanceof'
+          || nextWord === 'in' || typeAssertion;
+      }
+    }
+  }
+  return false;
+}
+
+function skipParserTrivia(src, start) {
+  let cursor = start;
+  while (cursor < src.length) {
+    if (/\s/u.test(src[cursor])) {
+      cursor += 1;
+      continue;
+    }
+    if (src.startsWith('//', cursor)) {
+      cursor += 2;
+      while (cursor < src.length && src[cursor] !== '\n' && src[cursor] !== '\r') cursor += 1;
+      continue;
+    }
+    if (src.startsWith('/*', cursor)) {
+      const close = src.indexOf('*/', cursor + 2);
+      if (close < 0) return src.length;
+      cursor = close + 2;
+      continue;
+    }
+    break;
+  }
+  return cursor;
+}
+
 function staticSourceTokens(src) {
   const tokens = [];
   let i = 0;
@@ -134,13 +235,33 @@ function staticSourceTokens(src) {
   let lastIdentifier = null;
   const parenContexts = [];
   const braceContexts = [];
-  let blockBracePending = false;
+  let blockBracePending = null;
+  let statementStart = true;
+  let labelCandidate = false;
+  let caseLabelPending = false;
+  let caseLabelOrigin = null;
+  const conditionalOrigins = [];
+  let bracketDepth = 0;
+  let genericAngleDepth = 0;
+  let typeAnnotationPending = false;
+  let returnTypeActive = false;
+  let parameterTypeActive = false;
+  let typeAssertionActive = false;
+  let typeAliasPending = false;
+  let typeAliasActive = false;
+  let typeBodyPending = false;
+  let declarationPrefix = false;
+  let moduleStatementKind = null;
+  let moduleNamedActive = false;
+  let moduleSourcePending = false;
+  let lineTerminatorPending = false;
 
   while (i < src.length) {
     const c = src[i];
     const next = src[i + 1];
 
     if (/\s/u.test(c)) {
+      if (isRegexLineTerminator(c)) lineTerminatorPending = true;
       i += 1;
       continue;
     }
@@ -152,18 +273,47 @@ function staticSourceTokens(src) {
     if (c === '/' && next === '*') {
       const end = src.indexOf('*/', i + 2);
       if (end === -1) throw new Error('Unterminated comment in static article source');
+      if (/[\n\r\u2028\u2029]/u.test(src.slice(i + 2, end))) lineTerminatorPending = true;
       i = end + 2;
       continue;
+    }
+    if (lineTerminatorPending) {
+      if (parenContexts.length === 0 && bracketDepth === 0 && !braceContexts.includes('object')
+        && ASI_EXPRESSION_ENDS.has(lastSignificant)) {
+        statementStart = true;
+        if (lastSignificant === 'close-expression-block' || typeAnnotationPending
+          || parameterTypeActive || returnTypeActive || typeAliasActive || typeAssertionActive) {
+          canStartRegex = true;
+        }
+      }
+      lineTerminatorPending = false;
     }
     if (c === "'" || c === '"' || c === '`') {
       const literal = readTsStringLiteral(src, i);
       if (!literal) throw new Error('Unterminated string literal in static article source');
-      tokens.push({ type: 'string', value: literal.value });
+      tokens.push({
+        type: braceContexts.includes('type-object') || braceContexts.includes('type-alias-object')
+          || braceContexts.includes('type-declaration') || moduleNamedActive
+          || moduleSourcePending || braceContexts.includes('block') || braceContexts.includes('expression')
+          || conditionalOrigins.length > 0
+          ? 'expression-string' : 'string',
+        value: literal.value,
+      });
       i = literal.end;
-      canStartRegex = false;
+      if (moduleSourcePending) {
+        canStartRegex = true;
+        statementStart = true;
+        moduleSourcePending = false;
+        moduleStatementKind = null;
+      } else {
+        canStartRegex = false;
+        statementStart = false;
+      }
       lastSignificant = 'literal';
       lastIdentifier = null;
-      blockBracePending = false;
+      labelCandidate = false;
+      declarationPrefix = false;
+      typeAnnotationPending = false;
       continue;
     }
 
@@ -171,14 +321,70 @@ function staticSourceTokens(src) {
       let end = i + 1;
       while (/[A-Za-z0-9_$]/u.test(src[end] || '')) end += 1;
       const word = src.slice(i, end);
-      const member = lastSignificant === 'dot';
+      const previousSignificant = lastSignificant;
+      const wasStatementStart = statementStart;
+      const hadDeclarationPrefix = declarationPrefix;
+      const hadTypeAliasPending = typeAliasPending;
+      const hadModuleStatementKind = moduleStatementKind;
+      const member = previousSignificant === 'dot' || previousSignificant === 'private-prefix';
+      typeAnnotationPending = false;
       for (let position = i; position < end; position += 1) {
         tokens.push({ type: 'punctuation', value: src[position] });
       }
       canStartRegex = !member && REGEX_PREFIX_KEYWORDS.has(word);
       lastIdentifier = { value: word, member };
       lastSignificant = 'identifier';
-      if (!member && BLOCK_BRACE_KEYWORDS.has(word)) blockBracePending = true;
+      if (!member && BLOCK_BRACE_KEYWORDS.has(word)) {
+        const declarationInExpression = DECLARATION_BRACE_KEYWORDS.has(word)
+          && !(wasStatementStart || hadDeclarationPrefix);
+        blockBracePending = declarationInExpression ? 'expression' : 'block';
+        declarationPrefix = false;
+        typeBodyPending = TYPE_BODY_KEYWORDS.has(word);
+      } else if (!member && hadDeclarationPrefix && AMBIENT_BLOCK_KEYWORDS.has(word)) {
+        blockBracePending = 'block';
+        declarationPrefix = false;
+        typeBodyPending = true;
+      } else if (!member && DECLARATION_PREFIX_KEYWORDS.has(word)) {
+        declarationPrefix = wasStatementStart || hadDeclarationPrefix;
+      } else if (!member) {
+        declarationPrefix = false;
+      }
+      if (!member && wasStatementStart && (word === 'import' || word === 'export')) {
+        moduleStatementKind = word;
+        moduleSourcePending = word === 'import';
+      } else if (!moduleNamedActive && moduleStatementKind && word === 'from') {
+        moduleSourcePending = true;
+      } else if (!moduleNamedActive && moduleStatementKind
+        && ['const', 'let', 'var', 'function', 'class', 'interface', 'namespace', 'enum', 'default'].includes(word)) {
+        moduleStatementKind = null;
+        moduleSourcePending = false;
+      }
+      if (!member && !moduleNamedActive && (word === 'as' || word === 'satisfies')) {
+        typeAssertionActive = true;
+        typeAnnotationPending = true;
+      }
+      if (!member && TYPE_CONTEXT_WORDS.has(word)
+        && (returnTypeActive || parameterTypeActive || typeAliasActive || typeAssertionActive)) {
+        typeAnnotationPending = true;
+      }
+      if (!member && word === 'type' && (wasStatementStart || hadDeclarationPrefix)) {
+        typeAliasPending = true;
+        typeAliasActive = false;
+      } else if (!member && hadTypeAliasPending) {
+        typeAliasPending = true;
+      }
+      const switchDefault = word === 'default' && wasStatementStart
+        && braceContexts[braceContexts.length - 1] === 'block' && !hadModuleStatementKind;
+      if (!member && ((word === 'case' && wasStatementStart) || switchDefault)) {
+        caseLabelPending = true;
+        caseLabelOrigin = {
+          paren: parenContexts.length,
+          brace: braceContexts.length,
+          bracket: bracketDepth,
+        };
+      }
+      labelCandidate = !member && wasStatementStart;
+      statementStart = false;
       i = end;
       continue;
     }
@@ -191,7 +397,10 @@ function staticSourceTokens(src) {
       canStartRegex = false;
       lastSignificant = 'literal';
       lastIdentifier = null;
-      blockBracePending = false;
+      blockBracePending = null;
+      statementStart = false;
+      labelCandidate = false;
+      declarationPrefix = false;
       continue;
     }
 
@@ -204,31 +413,62 @@ function staticSourceTokens(src) {
       canStartRegex = true;
       lastSignificant = 'division';
       lastIdentifier = null;
-      blockBracePending = false;
+      blockBracePending = null;
+      statementStart = false;
+      labelCandidate = false;
+      declarationPrefix = false;
       continue;
     }
 
     if (c === '(') {
       tokens.push({ type: 'punctuation', value: c });
-      parenContexts.push(Boolean(
+      const controlParen = Boolean(
         lastIdentifier && !lastIdentifier.member && CONTROL_PAREN_KEYWORDS.has(lastIdentifier.value),
-      ));
+      );
+      const surroundingBrace = braceContexts[braceContexts.length - 1];
+      const methodCandidate = !controlParen
+        && !blockBracePending
+        && lastSignificant === 'identifier'
+        && lastIdentifier
+        && !lastIdentifier.member
+        && (surroundingBrace === 'object' || surroundingBrace === 'block'
+          || surroundingBrace === 'type-declaration');
+      parenContexts.push({
+        control: controlParen,
+        blockKind: methodCandidate ? 'block' : blockBracePending,
+        typeContext: typeAnnotationPending,
+      });
       i += 1;
       canStartRegex = true;
       lastSignificant = 'open-paren';
       lastIdentifier = null;
-      blockBracePending = false;
+      if (!blockBracePending) blockBracePending = null;
+      statementStart = false;
+      labelCandidate = false;
       continue;
     }
 
     if (c === ')') {
       tokens.push({ type: 'punctuation', value: c });
-      const controlParen = parenContexts.pop() === true;
+      const parenContext = parenContexts.pop() || {};
+      while (conditionalOrigins.length > 0) {
+        const origin = conditionalOrigins[conditionalOrigins.length - 1];
+        if (origin.phase !== 'after-colon' || parenContexts.length !== origin.paren
+          || braceContexts.length !== origin.brace || bracketDepth !== origin.bracket) break;
+        conditionalOrigins.pop();
+      }
+      const controlParen = parenContext.control === true;
+      const typeParen = parenContext.typeContext === true;
       i += 1;
       canStartRegex = controlParen;
       lastSignificant = 'close-paren';
       lastIdentifier = null;
-      blockBracePending = false;
+      blockBracePending = controlParen ? 'block' : (parenContext.blockKind || 'expression');
+      statementStart = controlParen;
+      labelCandidate = false;
+      const typeArrow = typeParen && /^\s*=>/u.test(src.slice(i));
+      if (!typeArrow) typeAnnotationPending = false;
+      if (!typeParen) parameterTypeActive = false;
       continue;
     }
 
@@ -238,7 +478,10 @@ function staticSourceTokens(src) {
       canStartRegex = true;
       lastSignificant = 'arrow';
       lastIdentifier = null;
-      blockBracePending = false;
+      if (!typeAnnotationPending) blockBracePending = 'expression';
+      statementStart = false;
+      labelCandidate = false;
+      declarationPrefix = false;
       continue;
     }
 
@@ -251,7 +494,10 @@ function staticSourceTokens(src) {
       canStartRegex = false;
       lastSignificant = 'postfix';
       lastIdentifier = null;
-      blockBracePending = false;
+      blockBracePending = null;
+      statementStart = false;
+      labelCandidate = false;
+      declarationPrefix = false;
       continue;
     }
 
@@ -263,36 +509,105 @@ function staticSourceTokens(src) {
       canStartRegex = false;
       lastSignificant = 'postfix';
       lastIdentifier = null;
-      blockBracePending = false;
+      blockBracePending = null;
+      statementStart = false;
+      labelCandidate = false;
+      declarationPrefix = false;
       continue;
     }
 
     if (c === '{') {
-      const isBlockBrace = lastSignificant === 'close-paren'
-        || lastSignificant === 'arrow'
-        || blockBracePending
-        || (lastSignificant === 'identifier'
-          && lastIdentifier
-          && !lastIdentifier.member
-          && BLOCK_BRACE_KEYWORDS.has(lastIdentifier.value));
+      const pendingBraceKind = blockBracePending;
+      const moduleBrace = Boolean(moduleStatementKind && !moduleNamedActive && (
+        lastIdentifier?.value === 'import' || lastIdentifier?.value === 'export'
+          || lastIdentifier?.value === 'type' || lastSignificant === 'comma'
+      ));
+      const typeDeclarationBrace = typeBodyPending && pendingBraceKind;
+      const typeBrace = genericAngleDepth > 0 || typeAnnotationPending || typeDeclarationBrace;
+      const typeAliasBrace = typeAliasActive
+        && !braceContexts.includes('type-alias-object')
+        && typeBrace;
+      const implicitBlock = statementStart;
+      const braceKind = moduleBrace || typeDeclarationBrace ? 'block' : typeBrace ? null : pendingBraceKind
+        || (lastSignificant === 'close-paren' ? 'expression' : null)
+        || (lastSignificant === 'arrow' ? 'expression' : null)
+        || (lastSignificant === 'open-block' && statementStart ? 'block' : null)
+        || (lastSignificant === 'semicolon' || lastSignificant === 'close-block' ? 'block' : null)
+        || (implicitBlock ? 'block' : null);
+      const isBlockBrace = Boolean(braceKind);
       tokens.push({ type: 'punctuation', value: c });
-      braceContexts.push(isBlockBrace ? 'block' : 'object');
+      braceContexts.push(moduleBrace ? 'block'
+        : typeDeclarationBrace ? 'type-declaration'
+          : typeAliasBrace ? 'type-alias-object'
+            : typeBrace ? 'type-object' : isBlockBrace ? braceKind : 'object');
       i += 1;
       canStartRegex = true;
       lastSignificant = isBlockBrace ? 'open-block' : 'open-object';
       lastIdentifier = null;
-      blockBracePending = false;
+      blockBracePending = isBlockBrace ? null : typeBrace ? pendingBraceKind : null;
+      if (moduleBrace) {
+        moduleNamedActive = true;
+        moduleSourcePending = false;
+      }
+      if (typeDeclarationBrace) typeBodyPending = false;
+      statementStart = isBlockBrace;
+      labelCandidate = false;
+      if (!isBlockBrace && !typeDeclarationBrace) typeAnnotationPending = false;
+      if (!typeBrace) returnTypeActive = false;
       continue;
     }
 
     if (c === '}') {
       const braceContext = braceContexts.pop();
+      while (conditionalOrigins.length > 0) {
+        const origin = conditionalOrigins[conditionalOrigins.length - 1];
+        if (origin.phase !== 'after-colon' || parenContexts.length !== origin.paren
+          || braceContexts.length !== origin.brace || bracketDepth !== origin.bracket) break;
+        conditionalOrigins.pop();
+      }
       tokens.push({ type: 'punctuation', value: c });
       i += 1;
-      canStartRegex = braceContext === 'block';
-      lastSignificant = braceContext === 'block' ? 'close-block' : 'close-object';
+      const nextAfterBrace = skipParserTrivia(src, i);
+      const returnTypeBodyFollows = braceContext === 'type-object'
+        && returnTypeActive
+        && !braceContexts.includes('type-object')
+        && !braceContexts.includes('type-alias-object')
+        && (src[nextAfterBrace] === '{' || src.startsWith('=>', nextAfterBrace));
+      if (returnTypeBodyFollows) {
+        returnTypeActive = false;
+        typeAnnotationPending = false;
+      }
+      const moduleBlock = moduleNamedActive && braceContext === 'block';
+      canStartRegex = braceContext === 'block' || braceContext === 'type-declaration';
+      lastSignificant = braceContext === 'block' ? 'close-block'
+        : braceContext === 'type-declaration' ? 'close-type-declaration'
+        : braceContext === 'expression' ? 'close-expression-block' : 'close-object';
       lastIdentifier = null;
-      blockBracePending = false;
+      if (moduleBlock) {
+        moduleNamedActive = false;
+        moduleSourcePending = true;
+        statementStart = true;
+      }
+      if (braceContext === 'type-alias-object' && !braceContexts.includes('type-alias-object')) {
+        canStartRegex = true;
+        lastSignificant = 'close-type-alias';
+        statementStart = true;
+        blockBracePending = null;
+        typeAnnotationPending = typeAliasActive || typeAssertionActive || parameterTypeActive || returnTypeActive;
+      } else if (braceContext === 'type-object') {
+        typeAnnotationPending = typeAliasActive || typeAssertionActive || parameterTypeActive || returnTypeActive;
+      } else if (braceContext !== 'type-object' && braceContext !== 'type-alias-object'
+        && braceContext !== 'type-declaration'
+        && !braceContexts.includes('type-object') && !braceContexts.includes('type-alias-object')) {
+        blockBracePending = null;
+      }
+      statementStart = moduleBlock || braceContext === 'block' || braceContext === 'type-declaration'
+        || (braceContext === 'type-alias-object' && !braceContexts.includes('type-alias-object'));
+      labelCandidate = false;
+      if (braceContext === 'block') {
+        caseLabelPending = false;
+        caseLabelOrigin = null;
+      }
       continue;
     }
 
@@ -301,9 +616,142 @@ function staticSourceTokens(src) {
     tokens.push({ type: 'punctuation', value: c });
     i += 1;
     canStartRegex = REGEX_PREFIX_PUNCTUATION.has(c);
-    lastSignificant = c === '.' ? 'dot' : 'punctuation';
+    const inObject = braceContexts[braceContexts.length - 1] === 'object'
+      && !braceContexts.includes('type-object')
+      && !braceContexts.includes('type-alias-object')
+      && !braceContexts.includes('type-declaration');
+    const insideTypeObject = braceContexts.includes('type-object')
+      || braceContexts.includes('type-alias-object') || braceContexts.includes('type-declaration');
+    if (c === '[') bracketDepth += 1;
+    if (c === ']' && bracketDepth > 0) bracketDepth -= 1;
+    const startsTypeAlias = c === '=' && typeAliasPending;
+    if (startsTypeAlias) {
+      typeAliasPending = false;
+      typeAliasActive = true;
+    }
+    if (c === '<' && (blockBracePending || typeAliasPending || typeAliasActive
+      || looksLikeGenericStart(src, i - 1))) genericAngleDepth += 1;
+    if (c === '>' && genericAngleDepth > 0) genericAngleDepth -= 1;
+    const atCaseOrigin = caseLabelPending && caseLabelOrigin
+      && parenContexts.length === caseLabelOrigin.paren
+      && braceContexts.length === caseLabelOrigin.brace
+      && bracketDepth === caseLabelOrigin.bracket;
+    const previousCharacter = src[i - 2];
+    const optionalParameterMarker = c === '?' && next === ':'
+      && parenContexts.length > 0 && lastSignificant === 'identifier';
+    const isConditional = c === '?'
+      && previousCharacter !== '?' && next !== '.' && next !== '?'
+      && !optionalParameterMarker;
+    if (c === ':' && conditionalOrigins.length > 0) {
+      const completed = conditionalOrigins[conditionalOrigins.length - 1];
+      if (completed.phase === 'after-colon'
+        && parenContexts.length === completed.paren
+        && braceContexts.length === completed.brace
+        && bracketDepth === completed.bracket) {
+        conditionalOrigins.pop();
+      }
+    }
+    const conditionalOrigin = conditionalOrigins[conditionalOrigins.length - 1];
+    const closesCaseConditional = c === ':' && conditionalOrigin
+      && conditionalOrigin.phase === 'pending'
+      && parenContexts.length === conditionalOrigin.paren
+      && braceContexts.length === conditionalOrigin.brace
+      && bracketDepth === conditionalOrigin.bracket;
+    if (isConditional) {
+      conditionalOrigins.push({
+        paren: parenContexts.length,
+        brace: braceContexts.length,
+        bracket: bracketDepth,
+        phase: 'pending',
+      });
+    }
+    const returnTypeStart = c === ':'
+      && (blockBracePending === 'block' || blockBracePending === 'expression')
+      && lastSignificant === 'close-paren'
+      && !caseLabelPending
+      && !atCaseOrigin;
+    const parameterTypeColon = c === ':'
+      && !inObject
+      && !insideTypeObject
+      && lastSignificant === 'identifier'
+      && !closesCaseConditional
+      && !conditionalOrigin
+      && !labelCandidate;
+    const optionalTypeColon = c === ':'
+      && !inObject
+      && !insideTypeObject
+      && previousCharacter === '?'
+      && !closesCaseConditional
+      && !conditionalOrigin
+      && !labelCandidate;
+    const annotationColon = parameterTypeColon || optionalTypeColon;
+    const opensLabeledBlock = c === ':' && !inObject
+      && !closesCaseConditional
+      && (labelCandidate || atCaseOrigin);
+    lastSignificant = c === '.' ? 'dot'
+      : c === ';' ? 'semicolon'
+        : c === ',' ? 'comma'
+          : c === '#' ? 'private-prefix' : 'punctuation';
     lastIdentifier = null;
-    if (BLOCK_BRACE_PENDING_RESET.has(c)) blockBracePending = false;
+    if (c === ':') {
+      if (closesCaseConditional) {
+        conditionalOrigin.phase = 'after-colon';
+      } else if (opensLabeledBlock) {
+        blockBracePending = 'block';
+      } else if (!returnTypeStart && !insideTypeObject) {
+        blockBracePending = null;
+      }
+      statementStart = opensLabeledBlock;
+      typeAnnotationPending = returnTypeStart || annotationColon;
+      if (returnTypeStart) returnTypeActive = true;
+      else if (!insideTypeObject) returnTypeActive = false;
+      if (annotationColon) parameterTypeActive = true;
+      else if (!insideTypeObject) parameterTypeActive = false;
+      if (opensLabeledBlock) {
+        caseLabelPending = false;
+        caseLabelOrigin = null;
+      }
+    } else {
+      if (BLOCK_BRACE_PENDING_RESET.has(c) && !insideTypeObject) blockBracePending = null;
+      statementStart = c === ';';
+      labelCandidate = false;
+      if (c === ';') {
+        caseLabelPending = false;
+        caseLabelOrigin = null;
+        conditionalOrigins.length = 0;
+        if (!insideTypeObject) {
+          typeAliasPending = false;
+          typeAliasActive = false;
+          typeAssertionActive = false;
+          typeBodyPending = false;
+          moduleStatementKind = null;
+          moduleNamedActive = false;
+          moduleSourcePending = false;
+        }
+      }
+      if (startsTypeAlias) {
+        typeAnnotationPending = true;
+      } else if ((returnTypeActive || parameterTypeActive || typeAliasActive || typeAssertionActive)
+        && ['|', '&', '(', '[', '?'].includes(c)) {
+        typeAnnotationPending = true;
+      } else if (c === '>' && genericAngleDepth === 0) {
+        typeAnnotationPending = false;
+      } else if (c === ']') {
+        typeAnnotationPending = false;
+      } else if (c !== '<' && c !== '>' && c !== '[') {
+        typeAnnotationPending = false;
+      }
+      if (c !== '<' && c !== '>') declarationPrefix = false;
+    }
+    if (c === ',' && conditionalOrigins.length > 0) {
+      const completed = conditionalOrigins[conditionalOrigins.length - 1];
+      if (completed.phase === 'after-colon'
+        && parenContexts.length === completed.paren
+        && braceContexts.length === completed.brace
+        && bracketDepth === completed.bracket) {
+        conditionalOrigins.pop();
+      }
+    }
   }
 
   return tokens;
