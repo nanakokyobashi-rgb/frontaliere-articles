@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ge::https://lecourrier.ch/2026/10/20/les-employe%c2%b7es-de-tamedia-protestent-a-zurich-contre-les-licenciements": {
-      "section": "canton-ge",
-      "ts": 1792522784651
-    },
     "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/actualites/welcome.asp?actu=6062": {
       "section": "canton-ge",
       "ts": 1792674278399
@@ -23,6 +19,10 @@
     "canton-ge::https://lecourrier.ch/2026/10/22/une-procureure-reclame-larret-du-chantier-de-la412": {
       "section": "canton-ge",
       "ts": 1792692741159
+    },
+    "canton-ge::https://www.ge.ch/node/45273": {
+      "section": "canton-ge",
+      "ts": 1792710421111
     }
   }
 }
