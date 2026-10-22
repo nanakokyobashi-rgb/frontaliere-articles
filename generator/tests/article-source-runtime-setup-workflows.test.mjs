@@ -41,11 +41,11 @@ const PARSER_JOBS = {
   '.github/workflows/generator-ci.yml': ['test', 'dry-run'],
   '.github/workflows/publish-api.yml': ['publish'],
   '.github/workflows/publish-journalist-articles.yml': ['publish'],
-  '.github/workflows/reconcile-article-shards.yml': [],
+  '.github/workflows/reconcile-article-shards.yml': ['reconcile'],
   '.github/workflows/refresh-canton-hubs.yml': ['refresh'],
   '.github/workflows/refresh-events-digest.yml': ['refresh'],
   '.github/workflows/regenerate-queued-covers.yml': ['drain'],
-  '.github/workflows/republish-dirty-content.yml': [],
+  '.github/workflows/republish-dirty-content.yml': ['republish'],
   '.github/workflows/tests.yml': ['tests'],
 };
 const RUNTIME_ACTION_PATHS = {
@@ -137,9 +137,9 @@ test('article-source runtime is isolated, pinned, retried, and limited to parser
     ['.github/workflows/republish-dirty-content.yml', 'republish', 'node scripts/find-dirty-content-ids.mjs'],
   ]) {
     const job = getJobBlock(read(workflowPath), jobName);
-    assert.ok(job.includes(detectCommand), `${workflowPath}/${jobName}: expected builtin-only detection`);
-    assert.doesNotMatch(job, /setup-article-source-runtime/,
-      `${workflowPath}/${jobName}: detection must not depend on npm or the TypeScript parser`);
+    assert.ok(job.includes(detectCommand), `${workflowPath}/${jobName}: expected detection command`);
+    assert.match(job, /Setup isolated article source runtime/,
+      `${workflowPath}/${jobName}: detection must initialize the shared parser runtime`);
   }
 
   for (const jobName of ['resolve', 'publish']) {
