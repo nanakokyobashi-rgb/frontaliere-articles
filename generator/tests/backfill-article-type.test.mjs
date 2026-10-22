@@ -451,9 +451,9 @@ describe('lettore TS condiviso', () => {
     ].join('\n');
 
     assert.deepEqual([...readTsStringMap(source)], [
-      ['blog.article.real.angle', 'actual'],
       ['blog.article.real.regex', 'actual'],
       ['blog.article.real.export-type', 'actual'],
+      ['blog.article.real.angle', 'actual'],
       ['blog.article.real.title', 'actual'],
     ]);
   });

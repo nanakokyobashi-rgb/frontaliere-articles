@@ -211,9 +211,9 @@ test('il reader distingue confronti, type specifier dei moduli e asserzioni ango
   assert.deepEqual(
     readStaticObjectEntries(source, 'fixture.ts').map(({ key, value }) => [key, value]),
     [
-      ['blog.article.reale.angle', 'attuale'],
       ['blog.article.reale.regex', 'attuale'],
       ['blog.article.reale.export-type', 'attuale'],
+      ['blog.article.reale.angle', 'attuale'],
       ['blog.article.reale.title', 'attuale'],
     ],
   );
