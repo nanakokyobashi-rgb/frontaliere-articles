@@ -24,6 +24,11 @@
  *                          dal registry restano in `skippedIds`: non possono
  *                          essere renderizzati e non devono bloccare gli ID
  *                          validi dello stesso commit.
+ *   article-plan [shard|r2]
+ *                          confronta il push base con il checkout sulle
+ *                          superfici SEO/meta/slug/registry e stampa gli ID
+ *                          articolo realmente cambiati. Serve a riattivare il
+ *                          renderer anche quando il body non è toccato.
  *   r2-plan                legge da stdin i file cambiati (uno per riga; accetta
  *                          anche `git diff --name-status`) e stampa la matrice
  *                          JSON `[{section, ids, bootstrap, removeStaleCantonRssFeeds?}]`
@@ -43,12 +48,15 @@
 import '../../host/cantonSectionsBootstrap.mjs';
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, realpathSync } from 'node:fs';
+import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { activeCorpusCoreEntries, activeSourceSections, sectionForBodyPath, sectionSourceSurfaces } from '../lib/corpus-sections.mjs';
+import { activeCorpusCoreEntries, activeSourceSections, sectionForBodyPath, sectionSourceSurfaces, SECTION_LOCALES } from '../lib/corpus-sections.mjs';
 import { articleRegistryObjectBodies, articleRegistryObjectFields } from '../../engine/shared/articleRegistryObjectBodies.mjs';
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { EDGE_SECTION_REGISTRY_URL, validateEdgeSectionRegistry } from '../lib/section-registry.mjs';
+import { findAllSeoEntryMatches } from '../lib/seo-entry.mjs';
+import { decodeStaticStringLiteral, matchingDelimiter, readStaticStringLiteral, skipStaticTrivia } from '../lib/ts-literals.mjs';
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -112,6 +120,447 @@ function changedFileRecords(files) {
   return changedFiles;
 }
 
+function sourceText(readSource, rel) {
+  if (typeof readSource !== 'function') return null;
+  const source = readSource(rel);
+  return source === undefined || source === null ? null : String(source);
+}
+
+function mapRecord(map, id, value) {
+  const previous = map.get(id);
+  map.set(id, previous === undefined ? value : `${previous}\n${value}`);
+}
+
+function changedRecordIds(previous, next) {
+  const ids = new Set([...previous.keys(), ...next.keys()]);
+  return [...ids].filter((id) => previous.get(id) !== next.get(id));
+}
+
+const REGISTRY_SOURCE_KEY = '\u0000registry-source';
+
+/**
+ * Return top-level object spans without treating braces in a literal or
+ * comment as syntax. Registry entries are the only object spans with a
+ * plain `id` field; other top-level objects remain in the file context so a
+ * transform added outside an entry invalidates the complete registry.
+ */
+function registryObjectSpans(source) {
+  const spans = [];
+  let objectStart = -1;
+  let depth = 0;
+  let quote;
+  let escaped = false;
+
+  for (let i = 0; i < source.length; i += 1) {
+    const char = source[i];
+    if (quote !== undefined) {
+      if (escaped) escaped = false;
+      else if (char === '\\') escaped = true;
+      else if (char === quote) quote = undefined;
+      continue;
+    }
+
+    if (char === '/' && source[i + 1] === '/') {
+      const newline = source.indexOf('\n', i + 2);
+      i = newline === -1 ? source.length : newline;
+    } else if (char === '/' && source[i + 1] === '*') {
+      const close = source.indexOf('*/', i + 2);
+      i = close === -1 ? source.length : close + 1;
+    } else if (char === "'" || char === '"' || char === '`') {
+      quote = char;
+    } else if (char === '{') {
+      if (depth === 0) objectStart = i;
+      depth += 1;
+    } else if (char === '}' && depth > 0) {
+      depth -= 1;
+      if (depth === 0 && objectStart >= 0) {
+        spans.push({ start: objectStart, end: i + 1, body: source.slice(objectStart + 1, i) });
+        objectStart = -1;
+      }
+    }
+  }
+  return spans;
+}
+
+function registrySourceContext(source) {
+  if (source === null) return '';
+  let cursor = 0;
+  const chunks = [];
+  for (const span of registryObjectSpans(source)) {
+    if (!articleRegistryObjectFields(span.body).has('id')) continue;
+    chunks.push(source.slice(cursor, span.start), '{}');
+    cursor = span.end;
+  }
+  chunks.push(source.slice(cursor));
+  return chunks.join('');
+}
+
+function registryRecords(source) {
+  const records = new Map();
+  records.set(REGISTRY_SOURCE_KEY, registrySourceContext(source));
+  if (source === null) return records;
+  for (const body of articleRegistryObjectBodies(source)) {
+    const id = articleRegistryObjectFields(body).get('id');
+    if (id) mapRecord(records, id, body);
+  }
+  return records;
+}
+
+function registryRecordIds(...records) {
+  return new Set(records.flatMap((record) => [...record.keys()]).filter((id) => id !== REGISTRY_SOURCE_KEY));
+}
+
+function registryChangedIds(previous, next) {
+  const changed = changedRecordIds(previous, next);
+  if (!changed.includes(REGISTRY_SOURCE_KEY)) return changed;
+  return [...registryRecordIds(previous, next)];
+}
+
+const STATIC_MODULE_SPECIFIER_RE = /^\s*(?:import(?:\s+[^;\n]*?\s+from)?|export\s+[^;\n]*?\s+from)\s*["']([^"']+)["']\s*;?\s*$/gmu;
+const STATIC_MODULE_EXTENSIONS = Object.freeze(['', '.ts', '.tsx', '.js', '.mjs', '.json']);
+
+function staticModuleSpecifiers(source) {
+  if (source === null) return [];
+  return [...source.matchAll(STATIC_MODULE_SPECIFIER_RE)].map((match) => match[1]);
+}
+
+function registryImportMatches(rel, registryFile, source) {
+  const normalizedRel = rel.replaceAll('\\', '/');
+  const baseDir = path.posix.dirname(registryFile.replaceAll('\\', '/'));
+  for (const specifier of staticModuleSpecifiers(source)) {
+    if (!specifier.startsWith('.')) continue;
+    const base = path.posix.normalize(path.posix.join(baseDir, specifier));
+    const candidates = new Set();
+    for (const extension of STATIC_MODULE_EXTENSIONS) candidates.add(`${base}${extension}`);
+    for (const extension of STATIC_MODULE_EXTENSIONS.slice(1)) candidates.add(`${base}/index${extension}`);
+    if (candidates.has(normalizedRel)) return true;
+  }
+  return false;
+}
+
+function registryDependencyChanged(rel, registryFile, previous, next) {
+  return registryImportMatches(rel, registryFile, previous)
+    || registryImportMatches(rel, registryFile, next);
+}
+
+function seoRecords(source, rel) {
+  const records = new Map();
+  if (source === null) return records;
+  const matches = findAllSeoEntryMatches(source, rel);
+  let cursor = 0;
+  const context = [];
+  for (const match of matches) {
+    context.push(source.slice(cursor, match.lineStart), '{}');
+    cursor = match.closeIdx + 1;
+  }
+  context.push(source.slice(cursor));
+  records.set('\u0000seo-source', context.join(''));
+  for (const match of matches) {
+    mapRecord(records, match.id, source.slice(match.index, match.closeIdx + 1));
+  }
+  return records;
+}
+
+function seoChangedIds(previous, next, registered) {
+  const changed = changedRecordIds(previous, next);
+  if (!changed.includes('\u0000seo-source')) return changed;
+  return [...registered];
+}
+
+/**
+ * Meta chunks are flat string maps, but a field value can contain commas and
+ * newlines. Group from one article key to the next instead of splitting on a
+ * comma: the planner compares the complete per-article source record.
+ */
+function metaRecords(source) {
+  const records = new Map();
+  if (source === null) return records;
+  const keyRe = /^[\t ]*(['"])blog\.article\.([^'"]+)\.[A-Za-z][A-Za-z0-9]*\1\s*:/gm;
+  const matches = [...source.matchAll(keyRe)];
+  for (let index = 0; index < matches.length; index += 1) {
+    const match = matches[index];
+    const end = matches[index + 1]?.index ?? source.length;
+    mapRecord(records, match[2], source.slice(match.index, end));
+  }
+  return records;
+}
+
+/** Locate the selected named object before scanning any quoted entry keys. */
+function slugObjectSpan(source, slugConst) {
+  const declarationRe = new RegExp(
+    `(?:^|\\n)[\\t ]*(?:export[\\t ]+)?(?:const|let|var)[\\t ]+${escapeRe(slugConst)}\\b[^=\\n]*=[\\t ]*\\{`,
+    'g',
+  );
+  const matches = [...source.matchAll(declarationRe)];
+  if (matches.length !== 1) {
+    throw new Error(`slug map ${slugConst}: attese una sola dichiarazione, trovate ${matches.length}`);
+  }
+  const match = matches[0];
+  const openIdx = match.index + match[0].lastIndexOf('{');
+  const closeIdx = matchingDelimiter(source, openIdx);
+  if (closeIdx < 0) throw new Error(`slug map ${slugConst}: oggetto non bilanciato`);
+  return { openIdx, closeIdx };
+}
+
+function staticPropertyKey(source, startIdx, label) {
+  const start = skipStaticTrivia(source, startIdx, label);
+  const quote = source[start];
+  if (quote === "'" || quote === '"' || quote === '`') {
+    const literal = readStaticStringLiteral(source, start, label);
+    if (!literal) throw new Error(`slug map ${label}: chiave non statica`);
+    return {
+      key: decodeStaticStringLiteral(literal.value, literal.quote),
+      end: literal.end,
+    };
+  }
+  const identifier = /^[A-Za-z_$][A-Za-z0-9_$]*/u.exec(source.slice(start));
+  if (!identifier) throw new Error(`slug map ${label}: chiave non supportata`);
+  return { key: identifier[0], end: start + identifier[0].length };
+}
+
+function slugEntryValues(entrySource, slugConst, id) {
+  const fields = new Map();
+  let cursor = skipStaticTrivia(entrySource, 1, `${slugConst}/${id}`);
+  while (cursor < entrySource.length - 1) {
+    if (entrySource[cursor] === '}') break;
+    const property = staticPropertyKey(entrySource, cursor, `${slugConst}/${id}`);
+    cursor = skipStaticTrivia(entrySource, property.end, `${slugConst}/${id}`);
+    if (entrySource[cursor] !== ':') throw new Error(`slug map ${slugConst}: manca ':' per ${id}/${property.key}`);
+    const valueStart = skipStaticTrivia(entrySource, cursor + 1, `${slugConst}/${id}`);
+    const literal = readStaticStringLiteral(entrySource, valueStart, `${slugConst}/${id}`);
+    if (!literal) throw new Error(`slug map ${slugConst}: locale ${property.key} non statica per ${id}`);
+    const value = decodeStaticStringLiteral(literal.value, literal.quote);
+    if (!value.trim()) throw new Error(`slug map ${slugConst}: locale ${property.key} vuota per ${id}`);
+    if (SECTION_LOCALES.includes(property.key)) {
+      if (fields.has(property.key)) throw new Error(`slug map ${slugConst}: duplicate locale ${property.key} for ${id}`);
+      fields.set(property.key, value);
+    } else {
+      throw new Error(`slug map ${slugConst}: locale ${property.key} sconosciuta per ${id}`);
+    }
+    cursor = skipStaticTrivia(entrySource, literal.end, `${slugConst}/${id}`);
+    if (entrySource[cursor] === ',') {
+      cursor = skipStaticTrivia(entrySource, cursor + 1, `${slugConst}/${id}`);
+      continue;
+    }
+    if (entrySource[cursor] === '}') break;
+    throw new Error(`slug map ${slugConst}: separatore mancante per ${id}/${property.key}`);
+  }
+  const missing = SECTION_LOCALES.filter((locale) => !fields.has(locale));
+  if (missing.length > 0) throw new Error(`slug map ${slugConst}: ${id} senza ${missing.join(', ')}`);
+  return Object.fromEntries(SECTION_LOCALES.map((locale) => [locale, fields.get(locale)]));
+}
+
+/** Read only the selected slug object; fallback-reason objects stay out of scope. */
+function slugValues(source, slugConst) {
+  if (source === null) return new Map();
+  const { openIdx, closeIdx } = slugObjectSpan(source, slugConst);
+  const values = new Map();
+  let cursor = skipStaticTrivia(source, openIdx + 1, slugConst);
+  while (cursor < closeIdx) {
+    if (source[cursor] === '}') break;
+    const property = staticPropertyKey(source, cursor, slugConst);
+    const id = property.key;
+    if (values.has(id)) throw new Error(`slug map ${slugConst}: duplicate article id ${id}`);
+    cursor = skipStaticTrivia(source, property.end, slugConst);
+    if (source[cursor] !== ':') throw new Error(`slug map ${slugConst}: manca ':' per ${id}`);
+    const entryOpen = skipStaticTrivia(source, cursor + 1, slugConst);
+    if (source[entryOpen] !== '{') throw new Error(`slug map ${slugConst}: entry ${id} non e' un oggetto`);
+    const entryClose = matchingDelimiter(source, entryOpen);
+    if (entryClose < 0 || entryClose > closeIdx) throw new Error(`slug map ${slugConst}: entry ${id} non bilanciata`);
+    values.set(id, slugEntryValues(source.slice(entryOpen, entryClose + 1), slugConst, id));
+    cursor = skipStaticTrivia(source, entryClose + 1, slugConst);
+    if (source[cursor] === ',') {
+      cursor = skipStaticTrivia(source, cursor + 1, slugConst);
+      continue;
+    }
+    if (source[cursor] === '}') break;
+    throw new Error(`slug map ${slugConst}: separatore mancante dopo ${id}`);
+  }
+  if (values.size === 0) throw new Error(`slug map ${slugConst}: nessuna entry`);
+  return values;
+}
+
+function slugRecordMap(slugs, ids) {
+  const records = new Map();
+  for (const [id, value] of slugs) {
+    if (ids.has(id)) records.set(id, JSON.stringify(value));
+  }
+  return records;
+}
+
+function slugRecords(previousSource, nextSource, ids, slugConst) {
+  const previousSlugs = slugValues(previousSource, slugConst);
+  const nextSlugs = slugValues(nextSource, slugConst);
+  return {
+    previous: slugRecordMap(previousSlugs, ids),
+    next: slugRecordMap(nextSlugs, ids),
+  };
+}
+
+function canonicalOverrideRecords(source) {
+  const records = new Map();
+  if (source === null) return records;
+  const document = JSON.parse(source);
+  const overrides = document?.overrides;
+  if (!overrides || typeof overrides !== 'object' || Array.isArray(overrides)) {
+    throw new Error('canonical override map: manca overrides');
+  }
+  for (const [slug, canonical] of Object.entries(overrides)) records.set(slug, JSON.stringify(canonical));
+  return records;
+}
+
+function decodedSlugRecord(record) {
+  try {
+    const value = JSON.parse(record);
+    return value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+  } catch {
+    return {};
+  }
+}
+
+function slugRecordOwners(slug, slugRecordMaps, candidateIds) {
+  const owners = new Set();
+  for (const slugRecords of slugRecordMaps) {
+    for (const [id, record] of slugRecords) {
+      if (!candidateIds.has(id)) continue;
+      if (Object.values(decodedSlugRecord(record)).includes(slug)) owners.add(id);
+    }
+  }
+  return owners;
+}
+
+function canonicalTargetSlug(record) {
+  let value;
+  try {
+    value = JSON.parse(record);
+  } catch {
+    return null;
+  }
+  if (typeof value !== 'string') return null;
+  try {
+    const pathname = new URL(value).pathname.replace(/\/+$/, '');
+    return pathname.split('/').pop() || null;
+  } catch {
+    return null;
+  }
+}
+
+function validateCanonicalOverrideRecords(records, slugRecordMaps, candidateIds, label) {
+  const knownSlugs = new Set();
+  for (const slugRecords of slugRecordMaps) {
+    for (const id of candidateIds) {
+      for (const slug of Object.values(decodedSlugRecord(slugRecords.get(id)))) {
+        if (typeof slug === 'string') knownSlugs.add(slug);
+      }
+    }
+  }
+  for (const [shadowedSlug, record] of records) {
+    if (slugRecordOwners(shadowedSlug, slugRecordMaps, candidateIds).size === 0) {
+      throw new Error(`canonical override ${label}: chiave slug ${shadowedSlug} non presente nella mappa slug`);
+    }
+    const targetSlug = canonicalTargetSlug(record);
+    // Keep the planner compatible with older test fixtures and hand-written
+    // maps whose URL has no article path segment; when a path segment exists,
+    // it must resolve to a current slug so a renamed winner cannot leave a
+    // shadowed page pointing at a dead URL.
+    if (targetSlug && !knownSlugs.has(targetSlug)) {
+      throw new Error(`canonical override ${label}: target ${targetSlug} non presente nella mappa slug`);
+    }
+  }
+}
+
+function canonicalOverrideDependentsForSlugChanges(
+  changedIds,
+  previousSlugRecords,
+  nextSlugRecords,
+  previousOverrides,
+  nextOverrides,
+  candidateIds,
+) {
+  const changedWinnerSlugs = new Set();
+  for (const id of changedIds) {
+    for (const slugRecords of [previousSlugRecords, nextSlugRecords]) {
+      for (const slug of Object.values(decodedSlugRecord(slugRecords.get(id)))) {
+        if (typeof slug === 'string') changedWinnerSlugs.add(slug);
+      }
+    }
+  }
+  const dependents = new Set();
+  for (const overrides of [previousOverrides, nextOverrides]) {
+    for (const [shadowedSlug, record] of overrides) {
+      if (!changedWinnerSlugs.has(canonicalTargetSlug(record))) continue;
+      for (const id of slugRecordOwners(shadowedSlug, [previousSlugRecords, nextSlugRecords], candidateIds)) {
+        dependents.add(id);
+      }
+    }
+  }
+  return [...dependents];
+}
+
+function canonicalIdsForSlugs(slugs, slugRecordMaps, candidateIds) {
+  const out = new Set();
+  for (const id of candidateIds) {
+    const records = slugRecordMaps.map((records) => records.get(id)).filter(Boolean);
+    for (const slug of slugs) {
+      const literal = new RegExp(`['"]${escapeRe(slug)}['"]`);
+      if (records.some((record) => literal.test(record))) {
+        out.add(id);
+        break;
+      }
+    }
+  }
+  return out;
+}
+
+function canonicalOverrideChangedIds(previous, next, previousSlugRecords, nextSlugRecords, candidateIds) {
+  const changedSlugs = changedRecordIds(previous, next);
+  validateCanonicalOverrideRecords(previous, [previousSlugRecords], candidateIds, 'precedente');
+  validateCanonicalOverrideRecords(next, [nextSlugRecords], candidateIds, 'corrente');
+  return canonicalIdsForSlugs(changedSlugs, [previousSlugRecords, nextSlugRecords], candidateIds);
+}
+
+function articleSurfaceKind(rel, section) {
+  const surfaces = sectionSourceSurfaces(section.section);
+  if (rel === surfaces.registryFile) return 'registry';
+  if (rel === surfaces.slugFile) return 'slug';
+  if (surfaces.canonicalOverrides && rel === surfaces.canonicalOverrides) return 'canonical';
+  const metaPrefix = `${surfaces.metaPrefix}-`;
+  if (rel.startsWith(metaPrefix) && /^[a-z]{2}\.ts$/.test(rel.slice(metaPrefix.length))) return 'meta';
+  if (section.kind === 'frontaliere' && /^content\/seo\/seo-blog(?:-\d+)?\.ts$/.test(rel)) return 'seo';
+  if (section.kind === 'national' && rel === 'content/seo/seo-blog-ch.ts') return 'seo';
+  return null;
+}
+
+function repoPathAtRevision(rel) {
+  try {
+    const resolved = realpathSync(rel).replaceAll('\\', '/');
+    const root = process.cwd().replaceAll('\\', '/').replace(/\/$/, '');
+    if (resolved.startsWith(`${root}/`)) return resolved.slice(root.length + 1);
+  } catch {
+    // A deleted path has no realpath; the original repo-relative path is the
+    // right lookup for a normal file and the caller will treat a missing blob
+    // as a deleted source.
+  }
+  return rel;
+}
+
+function gitSourceAtRevision(revision, rel) {
+  if (!revision) return null;
+  try {
+    return execFileSync('git', ['show', `${revision}:${repoPathAtRevision(rel)}`], {
+      encoding: 'utf8',
+      maxBuffer: 64 * 1024 * 1024,
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+  } catch (error) {
+    const diagnostic = String(error?.stderr ?? '');
+    // A file added by this push has no base blob. Any other git failure is a
+    // broken comparison input and must stop the resolver, not widen the plan.
+    if (error?.status === 128 && /does not exist in|exists on disk, but not in/.test(diagnostic)) return null;
+    throw new Error(`git show ${revision}:${repoPathAtRevision(rel)} failed: ${diagnostic.trim() || error?.message || error}`);
+  }
+}
+
 function imageKeyFromPublicPath(rel) {
   const raw = String(rel ?? '').replaceAll('\\', '/').split(/[?#]/, 1)[0];
   if (!raw.startsWith('public/images/')) return null;
@@ -169,6 +618,142 @@ export function imagePublishPlan(files, coreList = activeCorpusCoreEntries(), { 
   return activeSourceSections(coreList)
     .filter((s) => sections.has(s.section) && owners.has(s.section))
     .map((s) => ({ section: s.section, ids: [...owners.get(s.section)].sort(), bootstrap: false }));
+}
+
+/**
+ * Article-facing source changes must wake the article renderer even when no
+ * body or public image changed. In particular, an SEO-only correction used to
+ * produce a green resolver with an empty matrix: the corpus was fixed, but
+ * the already-served HTML (and its og:image) stayed stale on the site.
+ *
+ * Compare keyed records between the push base and the checkout so a change in
+ * one large generated chunk wakes only its article ids. The registry remains
+ * the admission list: removed/orphaned ids never reach the renderer.
+ */
+export function articlePublishPlan(
+  files,
+  coreList = activeCorpusCoreEntries(),
+  {
+    served,
+    readCurrentSource = (rel) => (existsSync(rel) ? readFileSync(rel, 'utf8') : null),
+    readPreviousSource = () => null,
+    articleIdsForSection = registryArticleIds,
+  } = {},
+) {
+  if (served !== undefined && served !== 'shard' && served !== 'r2') {
+    throw new Error(`article-plan: tipo "${served}" sconosciuto (shard | r2)`);
+  }
+  const sections = activeSourceSections(coreList)
+    .filter((section) => served === undefined || (served === 'shard') === Boolean(section.shardKey));
+  const sectionBySurface = sections.flatMap((section) => [{ section, kind: section }]);
+  const registeredBySection = new Map(
+    sections.map((section) => [section.section, new Set(articleIdsForSection(section))]),
+  );
+  const targets = new Map(sections.map((section) => [section.section, new Set()]));
+
+  for (const { rel } of changedFileRecords(files)) {
+    const dependencyOwners = sectionBySurface.filter(({ section }) => (
+      !articleSurfaceKind(rel, section)
+      && registryDependencyChanged(
+        rel,
+        section.registryFile,
+        sourceText(readPreviousSource, section.registryFile),
+        sourceText(readCurrentSource, section.registryFile),
+      )
+    ));
+    for (const { section } of dependencyOwners) {
+      for (const id of registeredBySection.get(section.section)) targets.get(section.section).add(id);
+    }
+
+    const owner = sectionBySurface.find(({ section }) => articleSurfaceKind(rel, section));
+    if (!owner) continue;
+
+    const { section } = owner;
+    const kind = articleSurfaceKind(rel, section);
+    const previous = sourceText(readPreviousSource, rel);
+    const next = sourceText(readCurrentSource, rel);
+    const registryBeforeSource = sourceText(readPreviousSource, section.registryFile);
+    const registryAfterSource = sourceText(readCurrentSource, section.registryFile);
+    let changedIds;
+
+    if (kind === 'registry') {
+      changedIds = registryChangedIds(registryRecords(previous), registryRecords(next));
+    } else if (kind === 'seo') {
+      changedIds = seoChangedIds(
+        seoRecords(previous, rel),
+        seoRecords(next, rel),
+        registeredBySection.get(section.section),
+      );
+    } else if (kind === 'meta') {
+      changedIds = changedRecordIds(metaRecords(previous), metaRecords(next));
+    } else if (kind === 'slug') {
+      const registryBefore = registryRecords(registryBeforeSource);
+      const registryAfter = registryRecords(registryAfterSource);
+      const candidateIds = registryRecordIds(registryBefore, registryAfter);
+      const slug = slugRecords(
+        previous,
+        next,
+        candidateIds,
+        section.slugExport,
+      );
+      changedIds = changedRecordIds(slug.previous, slug.next);
+      if (section.canonicalOverrides) {
+        const previousOverrides = canonicalOverrideRecords(
+          sourceText(readPreviousSource, section.canonicalOverrides),
+        );
+        const nextOverrides = canonicalOverrideRecords(
+          sourceText(readCurrentSource, section.canonicalOverrides),
+        );
+        validateCanonicalOverrideRecords(previousOverrides, [slug.previous], candidateIds, 'precedente');
+        validateCanonicalOverrideRecords(nextOverrides, [slug.next], candidateIds, 'corrente');
+        changedIds = [
+          ...new Set([
+            ...changedIds,
+            ...canonicalOverrideDependentsForSlugChanges(
+              changedIds,
+              slug.previous,
+              slug.next,
+              previousOverrides,
+              nextOverrides,
+              candidateIds,
+            ),
+          ]),
+        ];
+      }
+    } else if (kind === 'canonical') {
+      const registryBefore = registryRecords(registryBeforeSource);
+      const registryAfter = registryRecords(registryAfterSource);
+      const candidateIds = registryRecordIds(registryBefore, registryAfter);
+      const slug = slugRecords(
+        sourceText(readPreviousSource, section.slugFile),
+        sourceText(readCurrentSource, section.slugFile),
+        candidateIds,
+        section.slugExport,
+      );
+      changedIds = [...canonicalOverrideChangedIds(
+        canonicalOverrideRecords(previous),
+        canonicalOverrideRecords(next),
+        slug.previous,
+        slug.next,
+        candidateIds,
+      )];
+    } else {
+      changedIds = [];
+    }
+
+    const registered = registeredBySection.get(section.section);
+    for (const id of changedIds) {
+      if (registered.has(id)) targets.get(section.section).add(id);
+    }
+  }
+
+  return sections
+    .filter((section) => targets.get(section.section).size > 0)
+    .map((section) => ({
+      section: section.section,
+      ids: [...targets.get(section.section)].sort(),
+      bootstrap: false,
+    }));
 }
 
 /** Promozioni e demozioni cantonali R2 fra due versioni del registro. */
@@ -529,6 +1114,18 @@ if (isMain()) {
   const run = async () => {
     if (cmd === 'body-regex') console.log(bodyRegex(activeCorpusCoreEntries(), { served: arg }));
     else if (cmd === 'body-plan') console.log(JSON.stringify(bodyPublishPlan(readFileSync(0, 'utf8').split('\n'), activeCorpusCoreEntries(), { served: arg })));
+    else if (cmd === 'article-plan') {
+      let before = process.env.PUSH_BEFORE ?? '';
+      if (!before || /^0+$/.test(before)) before = 'HEAD~1';
+      if (!/^[a-f0-9]{40,64}$/i.test(before) && before !== 'HEAD~1') {
+        throw new Error('PUSH_BEFORE non disponibile per confrontare le superfici articolo');
+      }
+      console.log(JSON.stringify(articlePublishPlan(
+        readFileSync(0, 'utf8').split('\n'),
+        activeCorpusCoreEntries(),
+        { served: arg, readPreviousSource: (rel) => gitSourceAtRevision(before, rel) },
+      )));
+    }
     else if (cmd === 'r2-plan') {
       const files = readFileSync(0, 'utf8').split('\n');
       let registryRefreshSections = [];
@@ -565,7 +1162,7 @@ if (isMain()) {
     else if (cmd === 'image-plan') console.log(JSON.stringify(imagePublishPlan(readFileSync(0, 'utf8').split('\n'), activeCorpusCoreEntries(), { served: arg })));
     else if (cmd === 'section-of' && arg) console.log(sectionOf(arg));
     else if (cmd === 'shard-of' && arg) console.log(shardOf(arg));
-    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | body-plan [shard|r2] < files | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files | r2-reconcile-plan <commit> | r2-api-push-plan < diff.json edge.json');
+    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | body-plan [shard|r2] < files | article-plan [shard|r2] < files | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files | r2-reconcile-plan <commit> | r2-api-push-plan < diff.json edge.json');
   };
   run().catch((error) => {
     console.error(`::error::fast-publish-section: ${error?.message ?? error}`);

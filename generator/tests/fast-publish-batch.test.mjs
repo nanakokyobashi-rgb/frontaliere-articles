@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import { ARTICLE_SECTION_CORE_LIST } from '../../engine/shared/articleSectionCore.mjs';
-import { bodyPublishPlan, bodyRegex } from '../../scripts/ci/fast-publish-section.mjs';
+import { articlePublishPlan, bodyPublishPlan, bodyRegex } from '../../scripts/ci/fast-publish-section.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const workflow = readFileSync(resolve(here, '../../.github/workflows/fast-publish-article.yml'), 'utf8');
@@ -32,6 +32,9 @@ test('il trigger push conserva tutti gli ID dei body cambiati', () => {
   // Solo le sezioni servite da uno shard: un corpo cantonale (R2) lo pubblica
   // fast-publish-section.yml, e qui farebbe fallire `shard-of`.
   assert.match(resolveStep, /fast-publish-section\.mjs body-plan shard/);
+  assert.match(resolveStep, /fast-publish-section\.mjs article-plan shard/);
+  assert.match(resolveStep, /surface_section=/);
+  assert.match(resolveStep, /surface_ids_json=/);
   assert.match(resolveStep, /body_section=.*\.section/);
   assert.match(resolveStep, /body_ids_json=.*\.ids/);
   assert.match(resolveStep, /skipped_ids_json=.*\.skippedIds/);
@@ -47,11 +50,244 @@ test('il trigger push conserva tutti gli ID dei body cambiati', () => {
   assert.doesNotMatch(resolveStep, /head\s+-1/);
 });
 
+test('le superfici articolo oltre il body producono solo gli ID realmente cambiati', () => {
+  const registry = new Map([
+    ['frontaliere', new Set(['alpha', 'beta'])],
+    ['svizzera', new Set()],
+  ]);
+  const previous = new Map([
+    ['content/blog-articles-data.ts', "export const ARTICLES = [{ id: 'alpha', category: 'news', date: '2026-01-01', image: '/images/blog/alpha.webp' }, { id: 'beta', category: 'news', date: '2026-01-01', image: '/images/blog/beta.webp' }];\n"],
+    ['content/seo/seo-blog-5.ts', "const SEO = {\n  'blog-alpha': { title: 'old' },\n  'blog-beta': { title: 'same' },\n};\n"],
+    ['content/blog-meta-it.ts', "const META = {\n  'blog.article.alpha.title': 'A',\n  'blog.article.beta.title': 'old beta',\n};\n"],
+    ['content/routerBlogData.ts', "const BLOG_SLUGS = {\n  'alpha': { it: 'alpha-it', en: 'alpha-en', de: 'alpha-de', fr: 'alpha-fr' },\n  'beta': { it: 'beta-it', en: 'beta-en', de: 'beta-de', fr: 'beta-fr' },\n};\n"],
+  ]);
+  const current = new Map([
+    ['content/blog-articles-data.ts', "export const ARTICLES = [{ id: 'alpha', category: 'news', date: '2026-01-01', image: '/images/blog/alpha.webp' }, { id: 'beta', category: 'news', date: '2026-01-01', image: '/images/blog/beta.webp' }];\n"],
+    ['content/seo/seo-blog-5.ts', "const SEO = {\n  'blog-alpha': { title: 'new alpha' },\n  'blog-beta': { title: 'same' },\n};\n"],
+    ['content/blog-meta-it.ts', "const META = {\n  'blog.article.alpha.title': 'A',\n  'blog.article.beta.title': 'new beta',\n};\n"],
+    ['content/routerBlogData.ts', "const BLOG_SLUGS = {\n  'alpha': { it: 'alpha-it', en: 'alpha-en', de: 'alpha-de', fr: 'alpha-fr' },\n  'beta': { it: 'beta-new-it', en: 'beta-en', de: 'beta-de', fr: 'beta-fr' },\n};\n"],
+  ]);
+  const plan = articlePublishPlan([
+    'content/seo/seo-blog-5.ts',
+    'content/blog-meta-it.ts',
+    'content/routerBlogData.ts',
+  ], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: (section) => registry.get(section.section) ?? new Set(),
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => current.get(rel) ?? null,
+  });
+
+  assert.deepEqual(plan, [{
+    section: 'frontaliere',
+    ids: ['alpha', 'beta'],
+    bootstrap: false,
+  }]);
+
+});
+
+test('una dipendenza importata dal registry invalida tutti gli articoli registrati', () => {
+  const registered = new Set(['alpha', 'beta']);
+  const previousRegistry = `import { cdnBlogImage } from './blogImageCdnMirror';
+
+const RAW_ARTICLES = [
+  { id: 'alpha', image: '/images/blog/alpha.webp' },
+  { id: 'beta', image: '/images/blog/beta.webp' },
+];
+export const ARTICLES = RAW_ARTICLES.map((article) => ({ ...article, image: cdnBlogImage(article.image) }));
+`;
+  const currentRegistry = previousRegistry.replace('blogImageCdnMirror', 'blogImageCdnMirrorV2');
+  const previous = new Map([['content/blog-articles-data.ts', previousRegistry]]);
+  const current = new Map([['content/blog-articles-data.ts', currentRegistry]]);
+
+  const plan = articlePublishPlan(['content/blogImageCdnMirror.ts'], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => current.get(rel) ?? null,
+  });
+
+  assert.deepEqual(plan, [{
+    section: 'frontaliere',
+    ids: ['alpha', 'beta'],
+    bootstrap: false,
+  }]);
+
+  const transformedRegistry = previousRegistry.replace(
+    'cdnBlogImage(article.image)',
+    'cdnBlogImageV2(article.image)',
+  );
+  const transformedPlan = articlePublishPlan(['content/blog-articles-data.ts'], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => rel === 'content/blog-articles-data.ts' ? transformedRegistry : null,
+  });
+
+  assert.deepEqual(transformedPlan, [{
+    section: 'frontaliere',
+    ids: ['alpha', 'beta'],
+    bootstrap: false,
+  }]);
+});
+
+test('un cambiamento fuori dalle entry SEO invalida gli articoli registrati', () => {
+  const registered = new Set(['alpha', 'beta']);
+  const previousSeo = `const SEO_BASE_URL = 'https://old.example';
+const SEO = {
+  'blog-alpha': { title: 'same alpha' },
+  'blog-beta': { title: 'same beta' },
+};\n`;
+  const currentSeo = previousSeo.replace('https://old.example', 'https://new.example');
+  const previous = new Map([['content/seo/seo-blog-5.ts', previousSeo]]);
+  const current = new Map([['content/seo/seo-blog-5.ts', currentSeo]]);
+  const plan = articlePublishPlan(['content/seo/seo-blog-5.ts'], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => current.get(rel) ?? null,
+  });
+
+  assert.deepEqual(plan, [{
+    section: 'frontaliere',
+    ids: ['alpha', 'beta'],
+    bootstrap: false,
+  }]);
+});
+
+test('la mappa slug ignora l oggetto fallback omonimo e rileva lo slug cambiato', () => {
+  const registered = new Set(['alpha', 'beta']);
+  const registry = "export const ARTICLES = [{ id: 'alpha' }, { id: 'beta' }];\n";
+  const previousSlugs = `const BLOG_SLUGS = {
+  'alpha': { it: 'alpha-it', en: 'alpha-en', de: 'alpha-de', fr: 'alpha-fr' },
+  'beta': { it: 'beta-old-it', en: 'beta-en', de: 'beta-de', fr: 'beta-fr' },
+};
+const BLOG_SLUG_FALLBACK_REASONS = {
+  'beta': { it: 'legacy-reason', en: 'legacy-reason', de: 'legacy-reason', fr: 'legacy-reason' },
+};
+`;
+  const currentSlugs = previousSlugs.replace('beta-old-it', 'beta-new-it');
+  const previous = new Map([
+    ['content/blog-articles-data.ts', registry],
+    ['content/routerBlogData.ts', previousSlugs],
+  ]);
+  const current = new Map([
+    ['content/blog-articles-data.ts', registry],
+    ['content/routerBlogData.ts', currentSlugs],
+  ]);
+  const plan = articlePublishPlan(['content/routerBlogData.ts'], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => current.get(rel) ?? null,
+  });
+
+  assert.deepEqual(plan, [{
+    section: 'frontaliere',
+    ids: ['beta'],
+    bootstrap: false,
+  }]);
+});
+
+test('una canonical override cambiata risveglia solo l articolo che possiede lo slug', () => {
+  const registered = new Set(['alpha', 'beta']);
+  const registry = "export const ARTICLES = [{ id: 'alpha' }, { id: 'beta' }];\n";
+  const slugs = "export const BLOG_SLUGS = {\n  'alpha': { it: 'alpha-it', en: 'alpha-en', de: 'alpha-de', fr: 'alpha-fr' },\n  'beta': { it: 'beta-it', en: 'beta-en', de: 'beta-de', fr: 'beta-fr' },\n};\n";
+  const previous = new Map([
+    ['content/blog-articles-data.ts', registry],
+    ['content/routerBlogData.ts', slugs],
+    ['engine/shared/frontaliere-article-canonical-overrides.json', JSON.stringify({ overrides: { 'alpha-it': 'https://old.example/' } })],
+  ]);
+  const current = new Map([
+    ['content/blog-articles-data.ts', registry],
+    ['content/routerBlogData.ts', slugs],
+    ['engine/shared/frontaliere-article-canonical-overrides.json', JSON.stringify({ overrides: { 'alpha-it': 'https://new.example/' } })],
+  ]);
+  const plan = articlePublishPlan([
+    'engine/shared/frontaliere-article-canonical-overrides.json',
+  ], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => current.get(rel) ?? null,
+  });
+
+  assert.deepEqual(plan, [{ section: 'frontaliere', ids: ['alpha'], bootstrap: false }]);
+});
+
+test('uno slug winner cambiato risveglia i dipendenti shadowed e valida la chiave rinominata', () => {
+  const registered = new Set(['winner', 'shadow']);
+  const registry = "export const ARTICLES = [{ id: 'winner' }, { id: 'shadow' }];\n";
+  const previousSlugs = `export const BLOG_SLUGS = {
+  'winner': { it: 'winner-old-it', en: 'winner-old-en', de: 'winner-old-de', fr: 'winner-old-fr' },
+  'shadow': { it: 'shadow-old-it', en: 'shadow-old-en', de: 'shadow-old-de', fr: 'shadow-old-fr' },
+};\n`;
+  const currentSlugs = previousSlugs
+    .replaceAll('winner-old', 'winner-new')
+    .replaceAll('shadow-old', 'shadow-new');
+  const previousOverrides = JSON.stringify({ overrides: {
+    'shadow-old-it': 'https://frontaliereticino.ch/articoli-frontaliere/winner-old-it/',
+  } });
+  const currentOverrides = JSON.stringify({ overrides: {
+    'shadow-new-it': 'https://frontaliereticino.ch/articoli-frontaliere/winner-new-it/',
+  } });
+  const previous = new Map([
+    ['content/blog-articles-data.ts', registry],
+    ['content/routerBlogData.ts', previousSlugs],
+    ['engine/shared/frontaliere-article-canonical-overrides.json', previousOverrides],
+  ]);
+  const current = new Map([
+    ['content/blog-articles-data.ts', registry],
+    ['content/routerBlogData.ts', currentSlugs],
+    ['engine/shared/frontaliere-article-canonical-overrides.json', currentOverrides],
+  ]);
+  const plan = articlePublishPlan([
+    'content/routerBlogData.ts',
+    'engine/shared/frontaliere-article-canonical-overrides.json',
+  ], ARTICLE_SECTION_CORE_LIST, {
+    served: 'shard',
+    articleIdsForSection: () => registered,
+    readPreviousSource: (rel) => previous.get(rel) ?? null,
+    readCurrentSource: (rel) => current.get(rel) ?? null,
+  });
+
+  assert.deepEqual(plan, [{
+    section: 'frontaliere',
+    ids: ['shadow', 'winner'],
+    bootstrap: false,
+  }]);
+
+  const staleCurrent = new Map(current);
+  staleCurrent.set(
+    'engine/shared/frontaliere-article-canonical-overrides.json',
+    previousOverrides,
+  );
+  assert.throws(
+    () => articlePublishPlan(['content/routerBlogData.ts'], ARTICLE_SECTION_CORE_LIST, {
+      served: 'shard',
+      articleIdsForSection: () => registered,
+      readPreviousSource: (rel) => previous.get(rel) ?? null,
+      readCurrentSource: (rel) => staleCurrent.get(rel) ?? null,
+    }),
+    /canonical override corrente: chiave slug shadow-old-it non presente/,
+  );
+});
+
 test('il resolver article non rifà il fetch del parent già presente nel checkout', () => {
   const resolveFetchStep = stepText('Fetch push base (resolve)');
   assert.match(resolveFetchStep, /bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
   assert.match(pushBaseGuard, /git cat-file -e "\$\{PUSH_BEFORE\}\^\{commit\}"/);
   assert.match(pushBaseGuard, /git fetch --no-tags --depth=1 origin "\$PUSH_BEFORE"/);
+});
+
+test('il dry gate usa il piano delle superfici e il publisher porta i redirect di slug', () => {
+  const resolveStep = stepText('Resolve mode, article ids and section');
+  assert.match(resolveStep, /article_plan=.*fast-publish-section\.mjs article-plan shard/);
+  assert.match(resolveStep, /printf '%s' "\$article_plan" \| jq 'length'/);
+  assert.doesNotMatch(resolveStep, /engine\/shared\/\*-article-canonical-overrides\.json/);
+  assert.match(workflow, /PUBLISH_BEFORE: \$\{\{ github\.event\.before \}\}/);
+  assert.match(publisher, /redirectPaths/);
+  assert.match(publisher, /writeLegacySlugRedirects/);
 });
 
 test('i body orfani non bloccano gli articoli registrati dello stesso push', () => {
@@ -136,7 +372,11 @@ test('il publisher rifiuta ID non risolti e riunisce tutte le pagine nel summary
   assert.match(publisher, /bridgeIds = entries\.filter\(\(entry\) => entry\.flatPaths\[locale\]\)/);
   assert.match(publisher, /articlePaths = entries\.map/);
   assert.match(publisher, /bridgePaths = entries\.map/);
-  assert.match(publisher, /paths: \[\.\.\.articlePaths, \.\.\.bridgePaths, \.\.\.hubPaths\]/);
+  assert.match(publisher, /writeLegacySlugRedirects/);
+  assert.match(publisher, /PUBLISH_BEFORE/);
+  assert.match(publisher, /buildFlatBridgeFromSibling/);
+  assert.match(publisher, /redirectPaths = legacySlugRedirects\[locale\]/);
+  assert.match(publisher, /paths: \[\.\.\.articlePaths, \.\.\.bridgePaths, \.\.\.redirectPaths, \.\.\.hubPaths\]/);
   assert.match(publisher, /url: urls\[0\],[\s\S]*urls,/);
   assert.match(publisher, /imagePostcondition/);
   assert.match(pipeline, /filterEntriesByImagePostcondition/);
