@@ -56,11 +56,13 @@ test('le superfici articolo oltre il body producono solo gli ID realmente cambia
     ['svizzera', new Set()],
   ]);
   const previous = new Map([
+    ['content/blog-articles-data.ts', "export const ARTICLES = [{ id: 'alpha', category: 'news', date: '2026-01-01', image: '/images/blog/alpha.webp' }, { id: 'beta', category: 'news', date: '2026-01-01', image: '/images/blog/beta.webp' }];\n"],
     ['content/seo/seo-blog-5.ts', "const SEO = {\n  'blog-alpha': { title: 'old' },\n  'blog-beta': { title: 'same' },\n};\n"],
     ['content/blog-meta-it.ts', "const META = {\n  'blog.article.alpha.title': 'A',\n  'blog.article.beta.title': 'old beta',\n};\n"],
     ['content/routerBlogData.ts', "const BLOG_SLUGS = {\n  'alpha': { it: 'alpha-it', en: 'alpha-en', de: 'alpha-de', fr: 'alpha-fr' },\n  'beta': { it: 'beta-it', en: 'beta-en', de: 'beta-de', fr: 'beta-fr' },\n};\n"],
   ]);
   const current = new Map([
+    ['content/blog-articles-data.ts', "export const ARTICLES = [{ id: 'alpha', category: 'news', date: '2026-01-01', image: '/images/blog/alpha.webp' }, { id: 'beta', category: 'news', date: '2026-01-01', image: '/images/blog/beta.webp' }];\n"],
     ['content/seo/seo-blog-5.ts', "const SEO = {\n  'blog-alpha': { title: 'new alpha' },\n  'blog-beta': { title: 'same' },\n};\n"],
     ['content/blog-meta-it.ts', "const META = {\n  'blog.article.alpha.title': 'A',\n  'blog.article.beta.title': 'new beta',\n};\n"],
     ['content/routerBlogData.ts', "const BLOG_SLUGS = {\n  'alpha': { it: 'alpha-it', en: 'alpha-en', de: 'alpha-de', fr: 'alpha-fr' },\n  'beta': { it: 'beta-new-it', en: 'beta-en', de: 'beta-de', fr: 'beta-fr' },\n};\n"],
