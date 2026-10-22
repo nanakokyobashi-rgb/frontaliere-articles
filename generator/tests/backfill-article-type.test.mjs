@@ -362,6 +362,62 @@ describe('lettore TS condiviso', () => {
     ]);
   });
 
+  test('preserva il contesto fra dichiarazioni, tipi e case annidati', () => {
+    const source = [
+      "try {} catch {} /'blog.article.fake.catch': 'fake',/ / /x/;",
+      "switch (value) { case value ? { nested: true } : other: {} /'blog.article.fake.case': 'fake',/ / /x/; }",
+      "switch (value) { case maybe ?? fallback: {} /'blog.article.fake.nullish': 'fake',/ / /x/; }",
+      "const fn = async function<T extends {}>(): Promise<{ value: string }> {} / /'blog.article.fake.expression': 'fake',/ / /x/;",
+      "function declared<T extends {}>(): () => void {} /'blog.article.fake.declaration': 'fake',/ / /x/;",
+      "label: {} /'blog.article.fake.label': 'fake',/ / /x/;",
+      "'blog.article.real.title': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.title', 'actual'],
+    ]);
+  });
+
+  test('non estrae chiavi da annotazioni, asserzioni, generics o blocchi non runtime', () => {
+    const source = [
+      "function typed(x?: { 'blog.article.fake.parameter': 'fake', }) {}",
+      "const typed: { 'blog.article.fake.variable': 'fake', } = {};",
+      "const compound: { 'blog.article.fake.compound.a': 'fake', } & { 'blog.article.fake.compound.b': 'fake', } = {};",
+      "const asserted = value as { 'blog.article.fake.assertion': 'fake', };",
+      "const compoundAssertion = value as { 'blog.article.fake.assertion.a': 'fake', } & { 'blog.article.fake.assertion.b': 'fake', };",
+      "type Key = keyof { 'blog.article.fake.keyof': 'fake', };",
+      "type Match<T> = T extends { 'blog.article.fake.extends': 'fake', } ? true : false;",
+      "const readonlyAssertion = value as readonly { 'blog.article.fake.readonly': 'fake', };",
+      "type SemicolonType = { foo: string; } & { 'blog.article.fake.semicolon.type': 'fake' };",
+      "const semicolonAssertion = value as { foo: string; } & { 'blog.article.fake.semicolon.assertion': 'fake' };",
+      "const satisfied = value satisfies { 'blog.article.fake.satisfies': 'fake', };",
+      "const branch = condition ? value : { 'blog.article.fake.ternary.second': 'fake' };",
+      "const generic = <T extends { 'blog.article.fake.generic': 'fake', }>() => {};",
+      "call<{ 'blog.article.fake.call': 'fake', }>();",
+      "call</* > */ { 'blog.article.fake.call-comment': 'fake', }>();",
+      "call<// comment\r { 'blog.article.fake.call-cr-comment': 'fake', }>();",
+      "interface Contract { 'blog.article.fake.interface': 'fake'; }",
+      "declare global { interface Ambient { 'blog.article.fake.global': 'fake'; } }",
+      "{}\n/'blog.article.fake.empty': 'fake',/ / /x/;",
+      "{ foo() {} }\n/'blog.article.fake.method': 'fake',/ / /x/;",
+      "import {} from 'module'\n/'blog.article.fake.import': 'fake',/ / /x/;",
+      "export {} from 'module'\n/'blog.article.fake.export': 'fake',/ / /x/;",
+      "function empty(): {} {}\n/'blog.article.fake.return': 'fake',/ / /x/;",
+      "const emptyArrow = (): {} => {}\n/'blog.article.fake.arrow-return': 'fake',/ / /x/;",
+      "const previous = {}\ntype Asi = { 'blog.article.fake.asi': 'fake' };",
+      "const previousArrow = () => {}\ntype AsiArrow = { 'blog.article.fake.asi-arrow': 'fake' };",
+      "'blog.article.real.title': 'actual',",
+    ].join('\n');
+
+    assert.deepEqual([...readTsStringMap(source)], [
+      ['blog.article.real.title', 'actual'],
+    ]);
+  });
+
+  test('rimuove le continuazioni di riga CRLF dal valore decodificato', () => {
+    assert.equal(tsStringMap.readTsStringLiteral("'prima\\\r\nseconda'", 0).value, 'primaseconda');
+  });
+
   test('conta le barre prima di una interpolazione escaped', () => {
     const genuinelyInterpolated = "'blog.article.demo.body1': `literal \\\\${value}`,";
     assert.throws(
