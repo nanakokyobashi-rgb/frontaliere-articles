@@ -23,6 +23,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
 const SCRIPT = path.resolve(ROOT, 'scripts/ci/retry-cmd.sh');
 const NPM_CI_RETRY = path.resolve(ROOT, 'scripts/lib/npm-ci-retry.sh');
+const CF_PURGE = path.resolve(ROOT, 'scripts/cf-purge-cache.mjs');
 const WORKFLOWS = path.resolve(ROOT, '.github/workflows');
 
 /**
@@ -133,6 +134,13 @@ test('gli status HTTP numerici e la forma status code restano ritentabili', () =
     assert.equal(code, 0, `${failureMessage} doveva essere ritentato, invece:\n${out}`);
     assert.equal(calls, 2, `${failureMessage} deve consumare due tentativi`);
   }
+});
+
+test('il purge Cloudflare conserva lo status HTTP per il wrapper di retry', () => {
+  const src = readFileSync(CF_PURGE, 'utf8');
+  assert.match(src, /const \{ status, json \} = await cf\(/u);
+  assert.match(src, /const httpStatus = .*`HTTP \$\{status\}`/u);
+  assert.match(src, /\$\{httpStatus\} API call failed/u);
 });
 
 test('un numero in un errore deterministico non abilita il retry', () => {

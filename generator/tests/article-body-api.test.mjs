@@ -600,6 +600,32 @@ test('un body non parsabile viene messo in quarantena, escluso dall output e ri-
   assert.deepEqual(verified.totals, emitted.totals);
 });
 
+test('un errore interno di sanitizzazione non viene convertito in quarantena', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-internal-error-source-'));
+  const outDir = fs.mkdtempSync(path.join(os.tmpdir(), 'article-body-api-internal-error-output-'));
+  try {
+    const sourceDir = path.join(root, 'content/frontaliere/it');
+    fs.mkdirSync(sourceDir, { recursive: true });
+    fs.writeFileSync(path.join(sourceDir, `${articleId}.ts`), sourceFor());
+    assert.throws(
+      () => emitArticleBodyApi({
+        root,
+        outDir,
+        locales: ['it'],
+        sections: [{ section: 'frontaliere', bodyDir: 'content/frontaliere' }],
+        registries: { frontaliere: [{ id: articleId }] },
+        publicSections: new Set(['frontaliere']),
+        metaBySectionLocale: { frontaliere: { it: metaFor() } },
+        sanitize: () => { throw new Error('internal sanitize failure'); },
+      }),
+      /internal sanitize failure/u,
+    );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+    fs.rmSync(outDir, { recursive: true, force: true });
+  }
+});
+
 test('la soglia di quarantena e esplicita e fail-closed', () => {
   assert.equal(MAX_ARTICLE_BODY_QUARANTINES, 3);
   assert.doesNotThrow(() => assertArticleBodyQuarantineBudget({ quarantined: 3 }));

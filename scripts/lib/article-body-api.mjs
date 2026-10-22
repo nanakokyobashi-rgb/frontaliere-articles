@@ -19,6 +19,25 @@ const ARTICLE_KEY_RE = /^blog\.article\.([^'"\r\n]+)\.(body\d+|faq)$/u;
 const ARTICLE_SECTION_RE = /^[a-z0-9-]+$/u;
 const PAYLOAD_KEYS = Object.freeze(['schemaVersion', 'section', 'locale', 'id', 'revision', 'meta', 'translations']);
 const META_KEYS = Object.freeze(['title', 'excerpt', 'imageAlt']);
+
+class ArticleBodySourceValidationError extends Error {
+  constructor(message, cause) {
+    super(message);
+    this.name = 'ArticleBodySourceValidationError';
+    this.code = 'ARTICLE_BODY_SOURCE_INVALID';
+    if (cause) this.cause = cause;
+  }
+}
+
+function sourceValidationError(error) {
+  if (error instanceof ArticleBodySourceValidationError) return error;
+  return new ArticleBodySourceValidationError(error?.message || String(error), error);
+}
+
+function isArticleBodySourceValidationError(error) {
+  return error instanceof ArticleBodySourceValidationError;
+}
+
 function skipTrivia(source, offset) {
   let index = offset;
   while (index < source.length) {
@@ -283,26 +302,36 @@ export function buildArticleBodyPayload({ section, locale, id, meta, source }) {
   assertValidId(id);
   assertValidSection(section);
   assertValidLocale(locale);
-  const articleMeta = assertMeta(meta, id, locale);
-  const entries = extractArticleBodyFields(source);
+  let articleMeta;
+  try {
+    articleMeta = assertMeta(meta, id, locale);
+  } catch (error) {
+    throw sourceValidationError(error);
+  }
+  let entries;
+  try {
+    entries = extractArticleBodyFields(source);
+  } catch (error) {
+    throw sourceValidationError(error);
+  }
   const translations = {};
   for (const entry of entries) {
-    if (entry.id !== id) throw new Error(`${section}/${locale}/${id}: chiave body per id ${entry.id}`);
-    if (entry.error) throw new Error(`${section}/${locale}/${id}.${entry.field}: ${entry.error}`);
+    if (entry.id !== id) throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}: chiave body per id ${entry.id}`);
+    if (entry.error) throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}.${entry.field}: ${entry.error}`);
     if (!BODY_FIELD_RE.test(entry.field) && entry.field !== 'faq') {
-      throw new Error(`${section}/${locale}/${id}: campo non supportato ${entry.field}`);
+      throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}: campo non supportato ${entry.field}`);
     }
     if (Object.prototype.hasOwnProperty.call(translations, entry.field)) {
-      throw new Error(`${section}/${locale}/${id}: campo duplicato ${entry.field}`);
+      throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}: campo duplicato ${entry.field}`);
     }
     if (typeof entry.value !== 'string' || !entry.value.trim()) {
-      throw new Error(`${section}/${locale}/${id}.${entry.field}: valore vuoto`);
+      throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}.${entry.field}: valore vuoto`);
     }
     translations[entry.field] = entry.value;
   }
   for (const field of REQUIRED_ARTICLE_BODY_FIELDS) {
     if (!Object.prototype.hasOwnProperty.call(translations, field)) {
-      throw new Error(`${section}/${locale}/${id}: campo obbligatorio mancante ${field}`);
+      throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}: campo obbligatorio mancante ${field}`);
     }
   }
   if (Object.prototype.hasOwnProperty.call(translations, 'faq')) {
@@ -310,9 +339,9 @@ export function buildArticleBodyPayload({ section, locale, id, meta, source }) {
     try {
       parsedFaq = JSON.parse(translations.faq);
     } catch (error) {
-      throw new Error(`${section}/${locale}/${id}.faq: JSON non valido (${error.message})`);
+      throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}.faq: JSON non valido (${error.message})`, error);
     }
-    if (!Array.isArray(parsedFaq)) throw new Error(`${section}/${locale}/${id}.faq: atteso array JSON`);
+    if (!Array.isArray(parsedFaq)) throw new ArticleBodySourceValidationError(`${section}/${locale}/${id}.faq: atteso array JSON`);
   }
   const payload = {
     schemaVersion: 1,
@@ -462,29 +491,17 @@ export function emitArticleBodyApi({
         }
         const meta = metaBySectionLocale?.[section.section]?.[locale];
         const source = fs.readFileSync(sourcePath, 'utf8');
-        let payload;
+        let rawPayload;
         try {
-          const rawPayload = buildArticleBodyPayload({
+          rawPayload = buildArticleBodyPayload({
             section: section.section,
             locale,
             id,
             meta,
             source,
           });
-          const cleanPayloadInput = sanitize({
-            schemaVersion: rawPayload.schemaVersion,
-            section: rawPayload.section,
-            locale: rawPayload.locale,
-            id: rawPayload.id,
-            meta: rawPayload.meta,
-            translations: rawPayload.translations,
-          }, articleBodyDocumentPath(section.section, locale, id));
-          const normalizedPayloadInput = typeof cleanPayloadInput.meta?.imageAlt === 'string'
-            && cleanPayloadInput.meta.imageAlt.trim() === ''
-            ? { ...cleanPayloadInput, meta: { ...cleanPayloadInput.meta, imageAlt: null } }
-            : cleanPayloadInput;
-          payload = { ...normalizedPayloadInput, revision: articleBodyRevision(normalizedPayloadInput) };
         } catch (error) {
+          if (!isArticleBodySourceValidationError(error)) throw error;
           const reason = quarantineReason(error);
           const quarantine = {
             section: section.section,
@@ -507,6 +524,19 @@ export function emitArticleBodyApi({
           console.warn(`::warning::article body quarantined: ${relativeSource} — ${reason}`);
           continue;
         }
+        const cleanPayloadInput = sanitize({
+          schemaVersion: rawPayload.schemaVersion,
+          section: rawPayload.section,
+          locale: rawPayload.locale,
+          id: rawPayload.id,
+          meta: rawPayload.meta,
+          translations: rawPayload.translations,
+        }, articleBodyDocumentPath(section.section, locale, id));
+        const normalizedPayloadInput = typeof cleanPayloadInput.meta?.imageAlt === 'string'
+          && cleanPayloadInput.meta.imageAlt.trim() === ''
+          ? { ...cleanPayloadInput, meta: { ...cleanPayloadInput.meta, imageAlt: null } }
+          : cleanPayloadInput;
+        const payload = { ...normalizedPayloadInput, revision: articleBodyRevision(normalizedPayloadInput) };
         const relativeOutput = articleBodyDocumentPath(section.section, locale, id);
         const outputPath = path.join(outDir, relativeOutput);
         fs.mkdirSync(path.dirname(outputPath), { recursive: true });

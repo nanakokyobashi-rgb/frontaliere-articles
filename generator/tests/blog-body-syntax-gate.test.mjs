@@ -833,6 +833,12 @@ test('i publisher rapidi eseguono il syntax gate con lo stesso fallback full', (
         `${path.basename(workflowPath)} deve osservare la chiusura di corpus-floors: ${dependency}`);
     }
   }
+  const sectionSrc = fs.readFileSync(FAST_SECTION_WORKFLOW, 'utf8');
+  assert.match(
+    sectionSrc,
+    /PREFLIGHT_BASE_REVISION:\s*\$\{\{\s*steps\.push_range\.outputs\.before\s*\}\}/u,
+    'fast-publish-section deve passare al gate la base reale della push anche nei replay workflow_run',
+  );
 });
 
 test('publish-api forza la scansione completa dopo un publish-api fallito', () => {

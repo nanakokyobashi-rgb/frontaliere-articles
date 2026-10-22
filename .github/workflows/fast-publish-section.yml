@@ -872,6 +872,7 @@ jobs:
           AFTER: ${{ steps.push_range.outputs.after }}
           PREFLIGHT_EVENT_NAME: ${{ github.event_name }}
           PREFLIGHT_PUSH_BASE_REVISION: ${{ steps.push_range.outputs.before }}
+          PREFLIGHT_BASE_REVISION: ${{ steps.push_range.outputs.before }}
           ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}
           SECTION_INPUT: ${{ inputs.section }}
         run: |
