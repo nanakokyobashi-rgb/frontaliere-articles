@@ -832,11 +832,13 @@ test('il collector completo conserva keyword e SEO incompleto della sitemap, que
   assert.equal(metadata.get('keep').datePublished, '2026-01-03T00:00:00Z');
 });
 
-test('il collector SEO decodifica apostrofi e backslash nelle keyword', () => {
-  const source = String.raw`'blog-escaped': { keywords: 'l\'estate\\2026', "headline": "Escaped", "datePublished": "2026-01-04T00:00:00Z" },`;
+test('il collector SEO decodifica apostrofi, backslash e separatori Unicode nelle keyword', () => {
+  const source = [
+    "'blog-escaped': { keywords: 'l\\'estate\\\\2026\\u2028pensione\\u2029', \"headline\": \"Escaped\", \"datePublished\": \"2026-01-04T00:00:00Z\" },",
+  ].join('\n');
   const metadata = collectSeoEntryMetadata(source).get('escaped');
-  assert.equal(metadata.keywords, "l'estate\\2026");
-  assert.equal(unescapeQuoted(String.raw`l\'estate\\2026`), "l'estate\\2026");
+  assert.equal(metadata.keywords, "l'estate\\2026\u2028pensione\u2029");
+  assert.equal(unescapeQuoted("l\\'estate\\\\2026\\u2028pensione\\u2029"), "l'estate\\2026\u2028pensione\u2029");
 });
 
 test('collectSeoEntryIds non perde una voce valida prima di un duplicato invalido', () => {
