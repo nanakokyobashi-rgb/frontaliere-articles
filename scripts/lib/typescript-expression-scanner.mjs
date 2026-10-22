@@ -75,7 +75,7 @@ const REGEX_PREFIX_KEYWORDS = new Set([
   'typeof', 'void', 'yield',
 ]);
 const REGEX_PREFIX_PUNCTUATION = new Set([
-  '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>', '=>',
+  '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>', '/', '=>',
 ]);
 const OBJECT_LITERAL_PREFIX_TOKENS = new Set([
   '=', ':', 'return', 'default', '(', '[', ',', '?', '&&', '||', '??',

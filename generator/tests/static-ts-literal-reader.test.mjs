@@ -146,6 +146,11 @@ test('lo scanner ignora le parentesi dentro regex dopo keyword prefix', () => {
   }
 });
 
+test('lo scanner conserva la transizione divisione → regex', () => {
+  const source = '[value / /[}]/u, other: value]';
+  assert.equal(computedPropertyKeyEnd(source, 0), source.length);
+});
+
 test('lo scanner tratta i private name come proprietà membro prima di una divisione', () => {
   const source = '[this.#default / /\\]/.test(value), [key]: value]';
   assert.equal(computedPropertyKeyEnd(source, 0), source.length);
