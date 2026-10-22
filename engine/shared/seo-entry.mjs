@@ -118,7 +118,8 @@ function matchingDelimiter(src, openIdx) {
         open: ch,
         control: ch === '('
           && previousToken?.kind === 'word'
-          && controlParenthesisKeywords.has(previousToken.value),
+          && controlParenthesisKeywords.has(previousToken.value)
+          && !['.', '#'].includes(tokenBeforePrevious?.value),
       });
       rememberToken('punct', ch);
       if (ch === open) depth += 1;
