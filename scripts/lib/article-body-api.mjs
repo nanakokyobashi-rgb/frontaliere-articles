@@ -496,8 +496,8 @@ export function emitArticleBodyApi({
           quarantined.push(quarantine);
           quarantinedCount += 1;
           // The v1 HTTP reader only understands available/missing. Keep this
-          // entry missing so no legacy consumer can mistake an unknown status
-          // for a payload it may fetch; the reason is carried by the additive
+          // entry missing and include it in missingCount so legacy consumers
+          // see the complete unavailable set; the reason is carried by the additive
           // index.quarantined detail and the job summary.
           entries[id] = { status: 'missing' };
           console.warn(`::warning::article body quarantined: ${relativeSource} — ${reason}`);
@@ -621,8 +621,8 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
         const entry = index.entries[id];
         if (entry?.status === 'missing') {
           if (Object.keys(entry).length !== 1) throw new Error(`${indexPath}: missing entry contiene dati extra per ${id}`);
+          missingCount += 1;
           if (quarantinedById.has(id)) quarantinedCount += 1;
-          else missingCount += 1;
           continue;
         }
         if (quarantinedById.has(id)) throw new Error(`${indexPath}: quarantined ${id} non e' missing`);
@@ -639,7 +639,7 @@ export function verifyArticleBodyApiOnDisk({ outDir, capability, sections, regis
       if (index.availableCount !== availableCount || index.missingCount !== missingCount
         || index.quarantinedCount !== quarantinedCount
         || index.quarantined.length !== quarantinedCount
-        || availableCount + missingCount + quarantinedCount !== expectedCount) {
+        || availableCount + missingCount !== expectedCount) {
         throw new Error(`${indexPath}: counts non corrispondono alle entries su disco`);
       }
       diskSections[section.section].locales[locale] = {
