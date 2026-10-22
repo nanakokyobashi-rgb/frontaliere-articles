@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "fisco",
-  "updatedAt": "2026-10-21T01:44:55.473Z",
-  "contentHash": "0309f5f4cb15eedd980994b8be45d7e3112c24b7a07972a031457fe43d640e00",
+  "updatedAt": "2026-10-22T02:32:07.612Z",
+  "contentHash": "4d7be38e1d9acedf8c449c2e01a6e068d959defb4045f78183862a4ee4e6dbb8",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T15:53:28.523Z",
+      "updatedAt": "2026-10-21T10:37:42.748Z",
       "keyFacts": 0
     }
   ],
@@ -135,7 +135,7 @@
               "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -158,12 +158,6 @@
           "date": "2026-09-04T19:35:32.255Z"
         },
         {
-          "title": "Comprare casa in Glarona: mutuo e imposte",
-          "url": "/articoli-svizzera/comprare-casa-glarona-mutuo/",
-          "excerpt": "Guida all'acquisto immobiliare in Glarona: fondi propri, mutuo ipotecario, imposte federali e cantonali, imposta sui trapassi e spese notarili.",
-          "date": "2026-08-23T13:55:09.396Z"
-        },
-        {
           "title": "Imposte cantonali nel Cantone Glarona: aliquote e deduzioni",
           "url": "/articoli-svizzera/imposte-cantonal-glarona-aliquote-deduzioni/",
           "excerpt": "Le imposte cantonali nel Cantone Glarona: aliquote, scaglioni, deduzioni ammesse, scadenze di consegna e portale online dell'amministrazione fiscale cantonale.",
@@ -180,6 +174,12 @@
           "url": "/articoli-frontaliere/landsgemeinde-glarona-2026-finanze-alloggi/",
           "excerpt": "La Landsgemeinde del canton Glarona ha votato su temi finanziari e abitativi. Aliquota fiscale confermata al 58%, nuove detrazioni per pendolari e sussidi per cassa malati.",
           "date": "2026-05-03T16:15:24.619Z"
+        },
+        {
+          "title": "Comprare casa in Glarona: mutuo e imposte",
+          "url": "/articoli-svizzera/comprare-casa-glarona-mutuo/",
+          "excerpt": "Guida all'acquisto immobiliare in Glarona: fondi propri, mutuo ipotecario, imposte federali e cantonali, imposta sui trapassi e spese notarili.",
+          "date": "2026-08-23T13:55:09.396Z"
         },
         {
           "title": "LAMal Glarona: franchigie, sussidio e scelta modello",
@@ -211,7 +211,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-21T01:44:55.473Z"
+      "updatedAt": "2026-10-22T02:32:07.612Z"
     },
     "en": {
       "canton": "GL",
@@ -324,7 +324,7 @@
               "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -347,12 +347,6 @@
           "date": "2026-09-04T19:35:32.255Z"
         },
         {
-          "title": "Buying a house in Glarus: mortgage and taxes",
-          "url": "/en/swiss-articles/buy-house-glarus-mortgage/",
-          "excerpt": "Guide to buying real estate in Glarus: own funds, mortgage, federal and cantonal taxes, transfer tax and notary fees.",
-          "date": "2026-08-23T13:55:09.396Z"
-        },
-        {
           "title": "Cantonal taxes in the canton of Glarus: rates and deductions",
           "url": "/en/swiss-articles/canton-glarus-cantonal-taxes-rates-and-deductions/",
           "excerpt": "Cantonal taxes in the Canton of Glarus: rates, brackets, allowable deductions, delivery deadlines and online portal of the cantonal tax administration.",
@@ -369,6 +363,12 @@
           "url": "/en/cross-border-articles/glarus-landsgemeinde-2026-finances-housing/",
           "excerpt": "The Glarus Landsgemeinde voted on financial and housing issues. Tax rate confirmed at 58%, new deductions for commuters and health insurance subsidies.",
           "date": "2026-05-03T16:15:24.619Z"
+        },
+        {
+          "title": "Buying a house in Glarus: mortgage and taxes",
+          "url": "/en/swiss-articles/buy-house-glarus-mortgage/",
+          "excerpt": "Guide to buying real estate in Glarus: own funds, mortgage, federal and cantonal taxes, transfer tax and notary fees.",
+          "date": "2026-08-23T13:55:09.396Z"
         },
         {
           "title": "LAMal Glarus: deductibles, subsidy and model choice",
@@ -400,7 +400,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-21T01:44:55.473Z"
+      "updatedAt": "2026-10-22T02:32:07.612Z"
     },
     "de": {
       "canton": "GL",
@@ -513,7 +513,7 @@
               "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -536,12 +536,6 @@
           "date": "2026-09-04T19:35:32.255Z"
         },
         {
-          "title": "Haus kaufen in Glarus: Hypothek und Steuern",
-          "url": "/de/schweiz-artikel/haus-kaufen-glarus-hypothek/",
-          "excerpt": "Leitfaden zum Immobilienkauf in Glarus: Eigenmittel, Hypothekendarlehen, eidgenössische und kantonale Steuern, Abgeltungssteuer und Notargebühren.",
-          "date": "2026-08-23T13:55:09.396Z"
-        },
-        {
           "title": "Kantonale Steuern im Kanton Glarus: Steuersätze und Abzüge",
           "url": "/de/schweiz-artikel/kanton-glarus-kantonal-steuern-satze-und-abzuge/",
           "excerpt": "Die kantonalen Steuern im Kanton Glarus: Sätze, Stufen, zulässige Abzüge, Liefertermine und Online-Portal der kantonalen Steuerverwaltung.",
@@ -558,6 +552,12 @@
           "url": "/de/grenzgaenger-artikel/landsgemeinde-glarus-2026-finanzen-wohnung/",
           "excerpt": "Die Landsgemeinde des Kantons Glarus hat über finanzielle und wohnungsbezogene Themen abgestimmt. Der Steuersatz bleibt bei 58%, es gibt neue Abzüge für Pendler und Subventionen für die Krankenkasse.",
           "date": "2026-05-03T16:15:24.619Z"
+        },
+        {
+          "title": "Haus kaufen in Glarus: Hypothek und Steuern",
+          "url": "/de/schweiz-artikel/haus-kaufen-glarus-hypothek/",
+          "excerpt": "Leitfaden zum Immobilienkauf in Glarus: Eigenmittel, Hypothekendarlehen, eidgenössische und kantonale Steuern, Abgeltungssteuer und Notargebühren.",
+          "date": "2026-08-23T13:55:09.396Z"
         },
         {
           "title": "KVG Glarus: Selbstbehalte, Beitrag und Modellwahl",
@@ -589,7 +589,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-21T01:44:55.473Z"
+      "updatedAt": "2026-10-22T02:32:07.612Z"
     },
     "fr": {
       "canton": "GL",
@@ -702,7 +702,7 @@
               "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
             }
           ],
-          "updatedAt": "2026-10-20T15:53:28.523Z"
+          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -725,12 +725,6 @@
           "date": "2026-09-04T19:35:32.255Z"
         },
         {
-          "title": "Acheter une maison à Glaris : hypothèque et impôts",
-          "url": "/fr/articles-suisse/acheter-maison-glaris-hypotheque/",
-          "excerpt": "Guide d'achat immobilier à Glaris : fonds propres, hypothèque, impôts fédéraux et cantonaux, taxe de passage et frais de notaire.",
-          "date": "2026-08-23T13:55:09.396Z"
-        },
-        {
           "title": "Impôts cantonaux dans le canton de Glaris : taux et déductions",
           "url": "/fr/articles-suisse/canton-de-glaris-imposition-cantonaux-taux-et-deductions/",
           "excerpt": "Taxes cantonales dans le canton de Glare : taxes, tranches, déductions, délais de livraison et portail en ligne de l'administration fiscale cantonale.",
@@ -747,6 +741,12 @@
           "url": "/fr/articles-frontalier/landsgemeinde-glaris-2026-finances-logement/",
           "excerpt": "La Landsgemeinde du canton de Glaris a voté sur des thèmes financiers et immobiliers. Taux d'imposition confirmé à 58 %, nouvelles déductions pour les frontaliers et subventions pour l'assurance maladie.",
           "date": "2026-05-03T16:15:24.619Z"
+        },
+        {
+          "title": "Acheter une maison à Glaris : hypothèque et impôts",
+          "url": "/fr/articles-suisse/acheter-maison-glaris-hypotheque/",
+          "excerpt": "Guide d'achat immobilier à Glaris : fonds propres, hypothèque, impôts fédéraux et cantonaux, taxe de passage et frais de notaire.",
+          "date": "2026-08-23T13:55:09.396Z"
         },
         {
           "title": "LAMal Glaris : franchises, subvention et choix modèle",
@@ -778,7 +778,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-21T01:44:55.473Z"
+      "updatedAt": "2026-10-22T02:32:07.612Z"
     }
   }
 }

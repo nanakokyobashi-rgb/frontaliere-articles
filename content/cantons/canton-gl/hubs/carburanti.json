@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "carburanti",
-  "updatedAt": "2026-10-22T01:38:31.900Z",
-  "contentHash": "b4a9f8ce794bc55bbdcd3738cbebf06681dab6781b7b25ea67b1ef1bf1621c54",
+  "updatedAt": "2026-10-22T02:32:07.612Z",
+  "contentHash": "10b933029eeb96776b55f525c274ec4e7d45982ef68541cd51b0d70e517f2c3d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Braunwald: al via un progetto, 80 milioni per 266 abitanti",
+          "url": "/articoli-glarona/braunwald-progetto-80-milioni/",
+          "excerpt": "La fonte indica 80 milioni di franchi per 266 abitanti a Braunwald e annuncia l'avvio di un grande progetto contro i pericoli naturali.",
+          "date": "2026-10-22T02:24:47.943Z"
+        },
+        {
           "title": "Landrat Glarona: 4 milioni per la perequazione, idro a Rüti",
           "url": "/articoli-glarona/landrat-ottobre-glarona-2026/",
           "excerpt": "Il 21 ottobre 2026 il Landrat ha approvato CHF 4 milioni per la perequazione tra Cantone e comuni, respinto due proposte sulla concessione idroelettrica di Rüti e stanziato un credito sportivo di 3 milioni per il…",
@@ -82,12 +88,6 @@
           "url": "/articoli-glarona/muehlehorn-strada-chiusa-ottobre/",
           "excerpt": "Mühlehorn: chiusura totale di Alte Kerenzerstrasse tra Hanenchilchli e Rüteggli fino al 23 ottobre 2026, ore 17.00.",
           "date": "2026-10-18T03:25:08.301Z"
-        },
-        {
-          "title": "Eventi del weekend nel Canton Glarona: cosa fare sabato e domenica",
-          "url": "/articoli-glarona/eventi-weekend-glarona/",
-          "excerpt": "Eventi nel Canton Glarona ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
-          "date": "2026-10-17T11:27:55.911Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-22T01:38:31.900Z"
+      "updatedAt": "2026-10-22T02:32:07.612Z"
     },
     "en": {
       "canton": "GL",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Braunwald: a project gets underway, 80 million for 266 inhabitants",
+          "url": "/en/glarus-articles/braunwald-project-80-million/",
+          "excerpt": "The source indicates 80 million francs for 266 residents in Braunwald and announces the launch of a major project against natural hazards.",
+          "date": "2026-10-22T02:24:47.943Z"
+        },
+        {
           "title": "Glarus Landrat: 4 million for equalization, water in Rüti",
           "url": "/en/glarus-articles/glarus-council-october-2026/",
           "excerpt": "On October 21, 2026, the Landrat approved CHF 4 million for the equalization between Canton and municipalities, rejected two proposals on the Rüti hydroelectric concession and allocated a sports credit of 3 million for…",
@@ -169,12 +175,6 @@
           "url": "/en/glarus-articles/muehlehorn-road-closure-october/",
           "excerpt": "Mühlehorn: full closure of Alte Kerenzerstrasse between Hanenchilchli and Rüteggli until October 23, 2026, at 5:00 p.m.",
           "date": "2026-10-18T03:25:08.301Z"
-        },
-        {
-          "title": "Weekend events in the canton of Glarus: what to do Saturday & Sunday",
-          "url": "/en/glarus-articles/weekend-events-glarus/",
-          "excerpt": "Events in the canton of Glarus every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
-          "date": "2026-10-17T11:27:55.911Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-22T01:38:31.900Z"
+      "updatedAt": "2026-10-22T02:32:07.612Z"
     },
     "de": {
       "canton": "GL",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Braunwald: Start eines Projekts, 80 Millionen für 266 Einwohner",
+          "url": "/de/glarus-artikel/braunwald-projekt-80-millionen/",
+          "excerpt": "Die Quelle nennt 80 Millionen Franken für 266 Einwohner in Braunwald und kündigt den Beginn eines großen Projekts gegen Naturgefahren an.",
+          "date": "2026-10-22T02:24:47.943Z"
+        },
+        {
           "title": "Landrat Glarus: 4 Millionen für den Ausgleich, Hydro in Rüti",
           "url": "/de/glarus-artikel/glarner-landrat-oktober-2026/",
           "excerpt": "Am 21. Oktober 2026 genehmigte der Landrat CHF 4 Mio. für den Ausgleich zwischen Kanton und Gemeinden, lehnte zwei Vorschläge zur Wasserkraftkonzession Rüti ab und bewilligte einen Sportkredit von 3 Mio. für den…",
@@ -256,12 +262,6 @@
           "url": "/de/glarus-artikel/muehlehorn-strassensperrung-oktober/",
           "excerpt": "Mühlehorn: Vollsperrung der Strasse Alte Kerenzerstrasse zwischen Hanenchilchli und Rüteggli bis zum 23.",
           "date": "2026-10-18T03:25:08.301Z"
-        },
-        {
-          "title": "Veranstaltungen am Wochenende im Glarnerland: was tun Sa & So",
-          "url": "/de/glarus-artikel/wochenend-veranstaltungen-glarus/",
-          "excerpt": "Veranstaltungen im Glarnerland an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
-          "date": "2026-10-17T11:27:55.911Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-22T01:38:31.900Z"
+      "updatedAt": "2026-10-22T02:32:07.612Z"
     },
     "fr": {
       "canton": "GL",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Braunwald : un projet démarre, 80 millions pour 266 habitants",
+          "url": "/fr/articles-glaris/braunwald-projet-80-millions/",
+          "excerpt": "La source indique 80 millions de francs pour 266 habitants à Braunwald et annonce le lancement d'un grand projet contre les dangers naturels.",
+          "date": "2026-10-22T02:24:47.943Z"
+        },
+        {
           "title": "Landrat Glaris : 4 millions pour la péréquation, hydro à Rüti",
           "url": "/fr/articles-glaris/conseil-glaris-octobre-2026/",
           "excerpt": "Le 21 octobre 2026, le Landrat a approuvé CHF 4 millions pour la péréquation entre le canton et les communes, rejeté deux propositions sur la concession hydroélectrique de Rüti et alloué un crédit sportif de 3 millions…",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-glaris/muehlehorn-route-fermee-octobre/",
           "excerpt": "Mühlehorn : fermeture totale de Alte Kerenzerstrasse entre Hanenchilchli et Rüteggli jusqu’au 23 octobre 2026, à 17.00.",
           "date": "2026-10-18T03:25:08.301Z"
-        },
-        {
-          "title": "Événements du week-end dans le canton de Glaris : que faire samedi & dimanche",
-          "url": "/fr/articles-glaris/evenements-week-end-glaris/",
-          "excerpt": "Événements dans le canton de Glaris chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
-          "date": "2026-10-17T11:27:55.911Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-22T01:38:31.900Z"
+      "updatedAt": "2026-10-22T02:32:07.612Z"
     }
   }
 }
