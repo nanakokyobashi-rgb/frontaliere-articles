@@ -194,6 +194,14 @@ function matchingDelimiter(src, openIdx) {
       statementStart = false;
       continue;
     }
+    if (ch === '=' && src[i + 1] === '>') {
+      i += 1;
+      canStartRegex = true;
+      lastSignificant = 'arrow';
+      lastIdentifier = null;
+      statementStart = false;
+      continue;
+    }
     if (ch === '(') {
       const isTarget = open === '(' && i === openIdx;
       parenContexts.push({

@@ -49,6 +49,13 @@ test('seo-entry tratta il bang dopo ASI come prefisso regex', () => {
   assert.equal(match.closeIdx, source.lastIndexOf('}'));
 });
 
+test('seo-entry mantiene il corpo block delle arrow nello stack dei delimitatori', () => {
+  const source = "'blog-arrow': { value: () => { return 1; } /foo}/ }";
+  const [match] = findAllSeoEntryMatches(source, 'seo-arrow');
+  assert.ok(match);
+  assert.equal(match.closeIdx, source.lastIndexOf('}'));
+});
+
 test('il decoder TS rimuove anche la continuazione \u005cr con newlineAs', () => {
   assert.equal(
     decodeStaticStringLiteral('prima\\rseconda', "'", { newlineAs: ' ' }),
