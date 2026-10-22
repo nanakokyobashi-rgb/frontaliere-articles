@@ -158,6 +158,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-stockmar-ritardo-cantiere-2027': {
+    title: 'Ritardo cantiere Stockmar: rientro alunni a gennaio 2028',
+    description: 'Il rientro degli alunni è previsto a gennaio 2028 Il cantiere accumula quattro mesi di ritardo I lavori saranno conclusi nel dicembre 2027 Il budget',
+    keywords: 'frontalieri, ticino, svizzera, italia, ritardo, cantiere, stockmar, rientro',
+    ogTitle: 'Stockmar: cantiere in ritardo, alunni rientrano a gennaio 2028',
+    ogDescription: 'Il rientro degli alunni è previsto a gennaio 2028 Il cantiere accumula quattro mesi di ritardo I lavori saranno conclusi nel dicembre 2027 Il budget globale',
+    canonicalPath: '/articoli-giura/stockmar-ritardo-cantiere-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ritardo cantiere Stockmar: rientro alunni a gennaio 2028",
+      "description": "Il rientro degli alunni è previsto a gennaio 2028 Il cantiere accumula quattro mesi di ritardo I lavori saranno conclusi nel dicembre 2027 Il budget",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-stockmar-ritardo-cantiere-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T00:17:44+00:00",
+      "dateModified": "2026-10-22T00:17:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-giura/stockmar-ritardo-cantiere-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

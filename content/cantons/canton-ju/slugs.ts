@@ -7,6 +7,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'fondo-clima-giura-2028': { it: 'fondo-clima-giura-2028', en: 'jura-climate-fund-2028', de: 'jura-klimafonds-2028', fr: 'fonds-climat-jura-2028' },
  'casse-pensioni-migliorano-terzo-trimestre': { it: 'casse-pensioni-migliorano-terzo-trimestre', en: 'swiss-pension-funds-improve-q3-2026', de: 'schweizer-pensionskassen-verbessern-q3-2026', fr: 'les-caisses-de-pension-suisses-ameliorent-q3-2026' },
  'giura-formazione-postobbligatoria-2026': { it: 'giura-formazione-postobbligatoria-2026', en: 'jura-post-compulsory-education-2026', de: 'jura-nachobligatorische-bildung-2026', fr: 'jura-formation-postobligatoire-2026' },
+ 'stockmar-ritardo-cantiere-2027': { it: 'stockmar-ritardo-cantiere-2027', en: 'stockmar-construction-delay-2027', de: 'stockmar-bauverzoegerung-2027', fr: 'stockmar-retard-chantier-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -15,6 +15,9 @@ const blogMetaCantonJuDe: Record<string, string> = {
     'blog.article.giura-formazione-postobbligatoria-2026.title': 'Jura: Regierung schlägt Revisionen zur nachobligatorischen Ausbildung und Finanzierung vor',
     'blog.article.giura-formazione-postobbligatoria-2026.excerpt': 'Zwei Revisionsvorlagen an das Parlament übermittelt Vier Bereiche: Ausbildung, Schulrestaurants, Sprachen, Zulassungen Die Maßnahme Nr.',
     'blog.article.giura-formazione-postobbligatoria-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.stockmar-ritardo-cantiere-2027.title': 'Baustellenverzögerung Stockmar: Rückkehr der Schüler im Januar 2028',
+    'blog.article.stockmar-ritardo-cantiere-2027.excerpt': 'Die Rückkehr der Schüler ist für Januar 2028 geplant Baustelle hat vier Monate Verspätung Die Arbeiten werden im Dezember 2027 abgeschlossen Das Gesamtbudget',
+    'blog.article.stockmar-ritardo-cantiere-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonJuDe;
