@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-22T08:03:53.366Z",
-  "contentHash": "00057a4a771b3e41dbfc4cd83edd28a2e19af1704446c2b8b3cc69ff24cf3402",
+  "updatedAt": "2026-10-22T08:37:55.302Z",
+  "contentHash": "c98052f4baff25c7ae2fb3adda5a41b406f09b6fb8ba010854ba9b72a5e3bd95",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -60,6 +60,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lucerna: polizia rileva 480 eccessi sui percorsi scolastici",
+          "url": "/articoli-lucerna/lucerna-controlli-percorsi-scolastici/",
+          "excerpt": "Dopo le vacanze autunnali, la Polizia lucernese ha registrato 480 infrazioni di velocità in un giorno: otto conducenti saranno segnalati alla Staatsanwaltschaft.",
+          "date": "2026-10-22T08:28:15.641Z"
+        },
+        {
           "title": "Lucerna: il Governo risponde all'iniziativa SP",
           "url": "/articoli-lucerna/lucerna-governo-risposta-sp/",
           "excerpt": "Nel 2024 solo il 15% delle abitazioni in affitto nel Canton Lucerna era a prezzi accessibili.",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/lucerna-riduce-imposte/",
           "excerpt": "La fonte Zentralplus presenta come definitiva la riduzione delle imposte nel Canton Lucerna; il dataset fiscale 2026 riporta oneri sui redditi annui e valori A0.",
           "date": "2026-10-21T01:30:31.409Z"
-        },
-        {
-          "title": "Lucerna: cinque ore di dibattito sulle finanze cantonali",
-          "url": "/articoli-lucerna/lucerna-finanze-sessione-ottobre/",
-          "excerpt": "Il Consiglio cantonale di Lucerna ha discusso oltre cinque ore l'AFP 2027–2030; la proposta porta l'aliquota 2027 da 1,45 a 1,40 unità, con voto il 20 ottobre.",
-          "date": "2026-10-20T00:56:42.893Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-22T08:03:53.366Z"
+      "updatedAt": "2026-10-22T08:37:55.302Z"
     },
     "en": {
       "canton": "LU",
@@ -147,6 +147,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lucerne: police detect 480 speeding violations on school routes",
+          "url": "/en/lucerne-articles/lucerne-school-route-speed-checks/",
+          "excerpt": "After the autumn holidays, Lucerne police recorded 480 speeding violations in one day: eight drivers will be reported to the public prosecutor’s office.",
+          "date": "2026-10-22T08:28:15.641Z"
+        },
+        {
           "title": "Lucerne: the Government responds to the SP initiative",
           "url": "/en/lucerne-articles/lucerne-government-sp-response/",
           "excerpt": "In 2024, only 15% of rental housing in the Canton of Lucerne was affordable.",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/lucerne-canton-cuts-taxes/",
           "excerpt": "The Zentralplus source presents the tax reduction in the Canton of Lucerne as definitive; the 2026 tax dataset reports tax burdens on annual incomes and A0 values.",
           "date": "2026-10-21T01:30:31.409Z"
-        },
-        {
-          "title": "Lucerne: five hours of debate on cantonal finances",
-          "url": "/en/lucerne-articles/lucerne-cantonal-finances-october/",
-          "excerpt": "Lucerne’s Cantonal Council discussed the AFP 2027–2030 for more than five hours; the proposal sets the 2027 tax rate at 1,40 units instead of 1,45, with a vote on October 20.",
-          "date": "2026-10-20T00:56:42.893Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-22T08:03:53.366Z"
+      "updatedAt": "2026-10-22T08:37:55.302Z"
     },
     "de": {
       "canton": "LU",
@@ -234,6 +234,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Luzern: Polizei registriert 480 Geschwindigkeitsüberschreitungen auf Schulwegen",
+          "url": "/de/luzern-artikel/luzern-geschwindigkeitskontrollen-schulwege/",
+          "excerpt": "Nach den Herbstferien hat die Luzerner Polizei an einem Tag 480 Geschwindigkeitsüberschreitungen registriert: Acht Lenker werden der Staatsanwaltschaft gemeldet.",
+          "date": "2026-10-22T08:28:15.641Z"
+        },
+        {
           "title": "Luzern: Die Regierung antwortet auf die SP-Initiative",
           "url": "/de/luzern-artikel/luzern-regierung-sp-antwort/",
           "excerpt": "Im Jahr 2024 waren im Kanton Luzern nur 15% der Mietwohnungen bezahlbar.",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/luzern-senkt-steuern/",
           "excerpt": "Die Quelle Zentralplus stellt die Steuersenkung im Kanton Luzern als endgültig dar; der Steuerdatensatz 2026 weist Belastungen für Jahreseinkommen und A0-Werte aus.",
           "date": "2026-10-21T01:30:31.409Z"
-        },
-        {
-          "title": "Luzern: fünf Stunden Debatte über die kantonalen Finanzen",
-          "url": "/de/luzern-artikel/luzerner-kantonsfinanzen-oktober/",
-          "excerpt": "Der Luzerner Kantonsrat hat über fünf Stunden über den AFP 2027–2030 diskutiert; der Vorschlag sieht vor, den Steuerfuss 2027 von 1,45 auf 1,40 Einheiten zu senken; die Abstimmung findet am 20.",
-          "date": "2026-10-20T00:56:42.893Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-22T08:03:53.366Z"
+      "updatedAt": "2026-10-22T08:37:55.302Z"
     },
     "fr": {
       "canton": "LU",
@@ -321,6 +321,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Lucerne : la police relève 480 excès de vitesse sur les trajets scolaires",
+          "url": "/fr/articles-lucerne/lucerne-controles-vitesse-trajets-scolaires/",
+          "excerpt": "Après les vacances d’automne, la police lucernoise a enregistré 480 infractions de vitesse en une journée : huit conducteurs seront signalés au Ministère public.",
+          "date": "2026-10-22T08:28:15.641Z"
+        },
+        {
           "title": "Lucerne : le gouvernement répond à l’initiative SP",
           "url": "/fr/articles-lucerne/lucerne-gouvernement-reponse-sp/",
           "excerpt": "En 2024, seuls 15 % des logements locatifs du canton de Lucerne étaient abordables.",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/lucerne-baisse-impots/",
           "excerpt": "La source Zentralplus présente la réduction des impôts dans le canton de Lucerne comme définitive ; le jeu de données fiscales 2026 indique des charges sur les revenus annuels et des valeurs A0.",
           "date": "2026-10-21T01:30:31.409Z"
-        },
-        {
-          "title": "Lucerne : cinq heures de débat sur les finances cantonales",
-          "url": "/fr/articles-lucerne/finances-cantonales-lucerne-octobre/",
-          "excerpt": "Le Conseil cantonal de Lucerne a débattu de l'AFP 2027–2030 pendant plus de cinq heures ; la proposition fait passer le taux 2027 de 1,45 à 1,40 unité, avec un vote le 20 octobre.",
-          "date": "2026-10-20T00:56:42.893Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-22T08:03:53.366Z"
+      "updatedAt": "2026-10-22T08:37:55.302Z"
     }
   }
 }
