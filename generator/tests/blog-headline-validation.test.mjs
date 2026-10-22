@@ -220,6 +220,11 @@ describe('validateHeadline — drift guard', () => {
     expect(src).toContain('title: unescapeTsString(m[2],');
     expect(src).not.toMatch(/m\[2\]\.replace\(\/\\\\'\/g/);
   });
+
+  it('decodes TypeScript code-point escapes in the corpus-side adapted twin', () => {
+    expect(unescapeTsString('\\x43\\u{1F30D} \\u0041', {}, { decodeUnicode: true }))
+      .toBe('C🌍 A');
+  });
 });
 
 // ──────────────────────────────────────────────────────────────────────────
