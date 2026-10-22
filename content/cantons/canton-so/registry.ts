@@ -105,4 +105,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'a1-lavori-notturni-luterbach',
+ category: 'pratico',
+ date: '2026-10-22T22:55:43.751Z',
+ image: '/images/blog/article-a1-lavori-notturni-luterbach.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

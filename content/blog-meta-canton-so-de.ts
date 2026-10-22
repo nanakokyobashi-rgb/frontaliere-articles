@@ -30,6 +30,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.soletta-regierungsrat-attiparlamentari-2026.title': 'Solothurn: 15 Antworten und Entwurf zu Stimmrechten',
     'blog.article.soletta-regierungsrat-attiparlamentari-2026.excerpt': 'Am 20. Oktober 2026 hat der Regierungsrat die Unterlagen der 34. Sitzung veröffentlicht: 15 erledigte Vorstösse, 5 dringende zur soH und eine Botschaft zur Aufhebung des Ausschlusses vom Stimmrecht (RG 0270/2026).',
     'blog.article.soletta-regierungsrat-attiparlamentari-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.a1-lavori-notturni-luterbach.title': 'A1 Wangen–Luterbach: Nachtarbeiten bis Mitte Dezember',
+    'blog.article.a1-lavori-notturni-luterbach.excerpt': 'Ab dem 25. Oktober 2026 finden auf der A1 zwischen Wangen an der Aare und Luterbach umfangreiche Nachtarbeiten statt: Die Verkehrsführung wird bis Mitte Dezember angepasst.',
+    'blog.article.a1-lavori-notturni-luterbach.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;
