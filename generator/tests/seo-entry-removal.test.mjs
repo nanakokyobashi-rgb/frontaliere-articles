@@ -113,6 +113,86 @@ test('la scansione ignora entry-like nei commenti multilinea e nei template lite
   assert.equal(findSeoEntryMatches(result.src, id, 'fixture.ts').length, 0);
 });
 
+test('il resolver SEO tratta i prefissi regex aggiunti al lexer', () => {
+  for (const keyword of ['break', 'continue', 'debugger', 'default', 'new']) {
+    const id = `regex-${keyword}`;
+    const source = [
+      'export const SEO = {',
+      `  'blog-${id}': { value: ${keyword} /}/u, after: 'resta' },`,
+      '};',
+    ].join('\n');
+    const [match] = findSeoEntryMatches(source, id, 'fixture.ts');
+    assert.ok(match, `${keyword}: entry non trovata`);
+    assert.match(source.slice(match.index, match.closeIdx + 1), /after: 'resta'/u, keyword);
+    assert.equal(source[match.closeIdx], '}', keyword);
+  }
+});
+
+test('il resolver SEO conserva la transizione divisione → regex', () => {
+  const source = [
+    'export const SEO = {',
+    "  'blog-division-regex': { value: a / /[}]/u, after: 'resta' },",
+    '};',
+  ].join('\n');
+  const [match] = findSeoEntryMatches(source, 'division-regex', 'fixture.ts');
+  assert.ok(match);
+  assert.equal(source[match.closeIdx], '}');
+  assert.match(source.slice(match.index, match.closeIdx + 1), /after: 'resta'/u);
+});
+
+test('il resolver SEO non tratta le parole membro come prefissi regex', () => {
+  for (const keyword of ['break', 'continue', 'debugger', 'default', 'new']) {
+    for (const access of [
+      `obj.${keyword}`,
+      `obj?.${keyword}`,
+      `obj. /* commento */ ${keyword}`,
+      `obj?. /* commento */ ${keyword}`,
+      `obj. /* marker /* */ ${keyword}`,
+      `obj?. /* marker /* */ ${keyword}`,
+      `obj. // commento\n${keyword}`,
+      `obj. // commento\u2028${keyword}`,
+      `obj. // commento\u2029${keyword}`,
+    ]) {
+      const id = `member-${keyword}-${access.includes('?.') ? 'optional' : 'dot'}`;
+      const source = [
+        'export const SEO = {',
+        `  'blog-${id}': { value: ${access} / 2, after: 'resta' },`,
+        '};',
+      ].join('\n');
+      const [match] = findSeoEntryMatches(source, id, 'fixture.ts');
+      assert.ok(match, `${access}: entry non trovata`);
+      assert.equal(source[match.closeIdx], '}', access);
+      assert.match(source.slice(match.index, match.closeIdx + 1), /after: 'resta'/u, access);
+    }
+  }
+});
+
+test('il resolver SEO conserva il prefisso regex dopo commenti complessi', () => {
+  for (const keyword of ['break', 'continue', 'debugger', 'default', 'new']) {
+    const source = [
+      'export const SEO = {',
+      `  'blog-regex-${keyword}': { value: ${keyword} /* marker /* interno */ /}/u, after: 'resta' },`,
+      '};',
+    ].join('\n');
+    const [match] = findSeoEntryMatches(source, `regex-${keyword}`, 'fixture.ts');
+    assert.ok(match, `${keyword}: entry non trovata`);
+    assert.match(source.slice(match.index, match.closeIdx + 1), /after: 'resta'/u, keyword);
+    assert.equal(source[match.closeIdx], '}', keyword);
+  }
+});
+
+test('il resolver SEO ignora marker di commento dentro una regex prima di un accesso membro', () => {
+  const source = [
+    'export const SEO = {',
+    "  'blog-regex-member': { value: /[\\/\\*\\/\\/]/.default / 2, after: 'resta' },",
+    '};',
+  ].join('\n');
+  const [match] = findSeoEntryMatches(source, 'regex-member', 'fixture.ts');
+  assert.ok(match);
+  assert.equal(source[match.closeIdx], '}');
+  assert.match(source.slice(match.index, match.closeIdx + 1), /after: 'resta'/u);
+});
+
 test('la scansione fallisce esplicitamente su stringa, template e commento non chiusi', () => {
   const quoteSource = [
     'export const SEO = {',

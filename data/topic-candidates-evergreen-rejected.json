@@ -11073,10 +11073,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/newsblog/verita-immobiliari/1957681/il-ticino-non-e-il-tuo-bancomat": {
-      "section": "frontaliere",
-      "ts": 1792478098551
-    },
     "svizzera::https://www.laregione.ch/economia/economia/1958033/corsa-al-cobalto-e-al-nichel-il-lato-grigio-della-svolta-verde": {
       "section": "svizzera",
       "ts": 1792557074853
@@ -11124,6 +11120,14 @@
     "frontaliere::https://cassa-disoccupazione.unia.ch": {
       "section": "frontaliere",
       "ts": 1792646596276
+    },
+    "frontaliere::https://www.tio.ch/ticino/cronaca/1958302/lugano-62enne-banca-permesso-societa": {
+      "section": "frontaliere",
+      "ts": 1792652690423
+    },
+    "frontaliere::https://www.tio.ch/svizzera/economia/1958380/ia-svizzera-carenza-attivita-deloitte": {
+      "section": "frontaliere",
+      "ts": 1792653859689
     }
   }
 }
