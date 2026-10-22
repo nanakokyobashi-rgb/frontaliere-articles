@@ -66,3 +66,19 @@ test('lo scanner riattiva le annotazioni dopo il separatore del parametro', () =
   assert.equal(unsupportedObjectMemberAt(source, runtimeOffset)?.kind, 'computed');
   assert.equal(unsupportedObjectMemberAt(source, mappedOffset), null);
 });
+
+test('lo scanner ignora le parentesi dentro regex dopo keyword prefix', () => {
+  for (const keyword of ['default', 'break', 'continue', 'debugger']) {
+    const source = `[${keyword} /foo]/u]`;
+    assert.equal(
+      computedPropertyKeyEnd(source, 0),
+      source.length,
+      `${keyword}: la regex non deve chiudere la computed property`,
+    );
+  }
+});
+
+test('lo scanner tratta i private name come proprietà membro prima di una divisione', () => {
+  const source = '[this.#default / /\\]/.test(value), [key]: value]';
+  assert.equal(computedPropertyKeyEnd(source, 0), source.length);
+});
