@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-22T13:56:44.136Z",
-  "contentHash": "0aa542ade2d361329a8cb77638637c26e0557f1fc94d60be935d4a0f2c0fbbd1",
+  "updatedAt": "2026-10-22T14:37:10.594Z",
+  "contentHash": "e91efa44675ac6ce6611e87816544a86253a8d3526b36f94ffda9159b50924d2",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -152,6 +152,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Stazione di Le Locle: lavori di accessibilità per 8 milioni",
+          "url": "/articoli-neuchatel/stazione-le-locle-accessibilita/",
+          "excerpt": "Cantiere alla stazione di Le Locle: 8 milioni di franchi La banchina 1 concentra quasi il 90% del traffico passeggeri Primi treni svizzeri sulla banchina 1",
+          "date": "2026-10-22T14:27:21.584Z"
+        },
+        {
           "title": "Abbonamenti trasporti Neuchâtel: zone e tariffe",
           "url": "/articoli-svizzera/abbonamenti-trasporti-neuchatel-zone/",
           "excerpt": "Scopri come funzionano gli abbonamenti per i trasporti pubblici nel Cantone di Neuchâtel: zone tariffarie, metà-prezzo, GA e sconti per studenti e apprendisti.",
@@ -189,7 +195,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T14:37:10.594Z"
     },
     "en": {
       "canton": "NE",
@@ -319,6 +325,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Le Locle station: accessibility works costing 8 million",
+          "url": "/en/neuchatel-articles/le-locle-station-accessibility/",
+          "excerpt": "Construction work at Le Locle station: 8 million francs Platform 1 accounts for almost 90% of passenger traffic First Swiss trains on platform 1 from October",
+          "date": "2026-10-22T14:27:21.584Z"
+        },
+        {
           "title": "Neuchâtel transport subscriptions: zones and fares",
           "url": "/en/swiss-articles/public-transport-passes-neuchatel-zones/",
           "excerpt": "Find out how public transport passes work in the Canton of Neuchâtel: fare zones, half-price, GA and discounts for students and apprentices.",
@@ -356,7 +368,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T14:37:10.594Z"
     },
     "de": {
       "canton": "NE",
@@ -486,6 +498,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Bahnhof Le Locle: Arbeiten zur Barrierefreiheit für 8 Millionen",
+          "url": "/de/neuenburg-artikel/bahnhof-le-locle-barrierefreiheit/",
+          "excerpt": "Baustelle am Bahnhof Le Locle: 8 Millionen Franken Auf Bahnsteig 1 entfallen fast 90% des Personenverkehrs Erste Schweizer Züge auf Bahnsteig 1 ab dem 29.",
+          "date": "2026-10-22T14:27:21.584Z"
+        },
+        {
           "title": "Verkehrstickets Neuenburg: Zonen und Tarife",
           "url": "/de/schweiz-artikel/oepnv-abos-neuenburg-zonen/",
           "excerpt": "Erfahren Sie, wie die Abos für den öffentlichen Verkehr im Kanton Neuenburg funktionieren: Tarifzonen, Halbtax, GA sowie Studenten- und Lehrlingsrabatte.",
@@ -523,7 +541,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T14:37:10.594Z"
     },
     "fr": {
       "canton": "NE",
@@ -653,6 +671,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Gare du Locle : travaux d'accessibilité pour 8 millions",
+          "url": "/fr/articles-neuchatel/gare-le-locle-accessibilite/",
+          "excerpt": "Chantier à la gare du Locle : 8 millions de francs Le quai 1 concentre près de 90 % du trafic voyageurs Les premiers trains suisses doivent revenir sur le quai",
+          "date": "2026-10-22T14:27:21.584Z"
+        },
+        {
           "title": "Abonnements transports Neuchâtel : zones et tarifs",
           "url": "/fr/articles-suisse/abonnements-transports-neuchatel-zones/",
           "excerpt": "Découvrez comment fonctionnent les abonnements aux transports en commun dans le canton de Neuchâtel : zones tarifaires, demi-tarif, GA et réductions pour étudiants et apprentis.",
@@ -690,7 +714,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T14:37:10.594Z"
     }
   }
 }
