@@ -50,12 +50,12 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, realpathSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-import { activeCorpusCoreEntries, activeSourceSections, sectionForBodyPath, sectionSourceSurfaces } from '../lib/corpus-sections.mjs';
+import { activeCorpusCoreEntries, activeSourceSections, sectionForBodyPath, sectionSourceSurfaces, SECTION_LOCALES } from '../lib/corpus-sections.mjs';
 import { articleRegistryObjectBodies, articleRegistryObjectFields } from '../../engine/shared/articleRegistryObjectBodies.mjs';
-import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
 import { ARTICLE_SECTION_CORE_ALL } from '../../engine/shared/articleSectionCore.mjs';
 import { EDGE_SECTION_REGISTRY_URL, validateEdgeSectionRegistry } from '../lib/section-registry.mjs';
 import { findAllSeoEntryMatches } from '../lib/seo-entry.mjs';
+import { decodeStaticStringLiteral, matchingDelimiter, readStaticStringLiteral, skipStaticTrivia } from '../lib/ts-literals.mjs';
 
 const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
@@ -172,24 +172,115 @@ function metaRecords(source) {
   return records;
 }
 
-function slugRecordMap(source, ids, slugExport) {
+/** Locate the selected named object before scanning any quoted entry keys. */
+function slugObjectSpan(source, slugConst) {
+  const declarationRe = new RegExp(
+    `(?:^|\\n)[\\t ]*(?:export[\\t ]+)?(?:const|let|var)[\\t ]+${escapeRe(slugConst)}\\b[^=\\n]*=[\\t ]*\\{`,
+    'g',
+  );
+  const matches = [...source.matchAll(declarationRe)];
+  if (matches.length !== 1) {
+    throw new Error(`slug map ${slugConst}: attese una sola dichiarazione, trovate ${matches.length}`);
+  }
+  const match = matches[0];
+  const openIdx = match.index + match[0].lastIndexOf('{');
+  const closeIdx = matchingDelimiter(source, openIdx);
+  if (closeIdx < 0) throw new Error(`slug map ${slugConst}: oggetto non bilanciato`);
+  return { openIdx, closeIdx };
+}
+
+function staticPropertyKey(source, startIdx, label) {
+  const start = skipStaticTrivia(source, startIdx, label);
+  const quote = source[start];
+  if (quote === "'" || quote === '"' || quote === '`') {
+    const literal = readStaticStringLiteral(source, start, label);
+    if (!literal) throw new Error(`slug map ${label}: chiave non statica`);
+    return {
+      key: decodeStaticStringLiteral(literal.value, literal.quote),
+      end: literal.end,
+    };
+  }
+  const identifier = /^[A-Za-z_$][A-Za-z0-9_$]*/u.exec(source.slice(start));
+  if (!identifier) throw new Error(`slug map ${label}: chiave non supportata`);
+  return { key: identifier[0], end: start + identifier[0].length };
+}
+
+function slugEntryValues(entrySource, slugConst, id) {
+  const fields = new Map();
+  let cursor = skipStaticTrivia(entrySource, 1, `${slugConst}/${id}`);
+  while (cursor < entrySource.length - 1) {
+    if (entrySource[cursor] === '}') break;
+    const property = staticPropertyKey(entrySource, cursor, `${slugConst}/${id}`);
+    cursor = skipStaticTrivia(entrySource, property.end, `${slugConst}/${id}`);
+    if (entrySource[cursor] !== ':') throw new Error(`slug map ${slugConst}: manca ':' per ${id}/${property.key}`);
+    const valueStart = skipStaticTrivia(entrySource, cursor + 1, `${slugConst}/${id}`);
+    const literal = readStaticStringLiteral(entrySource, valueStart, `${slugConst}/${id}`);
+    if (!literal) throw new Error(`slug map ${slugConst}: locale ${property.key} non statica per ${id}`);
+    const value = decodeStaticStringLiteral(literal.value, literal.quote);
+    if (!value.trim()) throw new Error(`slug map ${slugConst}: locale ${property.key} vuota per ${id}`);
+    if (SECTION_LOCALES.includes(property.key)) {
+      if (fields.has(property.key)) throw new Error(`slug map ${slugConst}: duplicate locale ${property.key} for ${id}`);
+      fields.set(property.key, value);
+    } else {
+      throw new Error(`slug map ${slugConst}: locale ${property.key} sconosciuta per ${id}`);
+    }
+    cursor = skipStaticTrivia(entrySource, literal.end, `${slugConst}/${id}`);
+    if (entrySource[cursor] === ',') {
+      cursor = skipStaticTrivia(entrySource, cursor + 1, `${slugConst}/${id}`);
+      continue;
+    }
+    if (entrySource[cursor] === '}') break;
+    throw new Error(`slug map ${slugConst}: separatore mancante per ${id}/${property.key}`);
+  }
+  const missing = SECTION_LOCALES.filter((locale) => !fields.has(locale));
+  if (missing.length > 0) throw new Error(`slug map ${slugConst}: ${id} senza ${missing.join(', ')}`);
+  return Object.fromEntries(SECTION_LOCALES.map((locale) => [locale, fields.get(locale)]));
+}
+
+/** Read only the selected slug object; fallback-reason objects stay out of scope. */
+function slugValues(source, slugConst) {
+  if (source === null) return new Map();
+  const { openIdx, closeIdx } = slugObjectSpan(source, slugConst);
+  const values = new Map();
+  let cursor = skipStaticTrivia(source, openIdx + 1, slugConst);
+  while (cursor < closeIdx) {
+    if (source[cursor] === '}') break;
+    const property = staticPropertyKey(source, cursor, slugConst);
+    const id = property.key;
+    if (values.has(id)) throw new Error(`slug map ${slugConst}: duplicate article id ${id}`);
+    cursor = skipStaticTrivia(source, property.end, slugConst);
+    if (source[cursor] !== ':') throw new Error(`slug map ${slugConst}: manca ':' per ${id}`);
+    const entryOpen = skipStaticTrivia(source, cursor + 1, slugConst);
+    if (source[entryOpen] !== '{') throw new Error(`slug map ${slugConst}: entry ${id} non e' un oggetto`);
+    const entryClose = matchingDelimiter(source, entryOpen);
+    if (entryClose < 0 || entryClose > closeIdx) throw new Error(`slug map ${slugConst}: entry ${id} non bilanciata`);
+    values.set(id, slugEntryValues(source.slice(entryOpen, entryClose + 1), slugConst, id));
+    cursor = skipStaticTrivia(source, entryClose + 1, slugConst);
+    if (source[cursor] === ',') {
+      cursor = skipStaticTrivia(source, cursor + 1, slugConst);
+      continue;
+    }
+    if (source[cursor] === '}') break;
+    throw new Error(`slug map ${slugConst}: separatore mancante dopo ${id}`);
+  }
+  if (values.size === 0) throw new Error(`slug map ${slugConst}: nessuna entry`);
+  return values;
+}
+
+function slugRecordMap(slugs, ids) {
   const records = new Map();
-  if (source === null) return records;
-  // Read only the named slug export. The same source file also carries
-  // BLOG_SLUG_FALLBACK_REASONS/SWISS_SLUG_FALLBACK_REASONS; scanning every
-  // object-shaped entry lets a fallback-reason record overwrite the real slug
-  // record for the same article id and can wake the wrong publisher target.
-  const slugMap = parseArticleUrlSlugs(source, slugExport);
-  for (const [id, locales] of Object.entries(slugMap)) {
-    if (ids.has(id)) records.set(id, JSON.stringify(locales));
+  for (const [id, value] of slugs) {
+    if (ids.has(id)) records.set(id, JSON.stringify(value));
   }
   return records;
 }
 
-function slugRecords(previousSource, nextSource, ids, slugExport) {
+function slugRecords(previousSource, nextSource, ids, slugConst) {
+  const previousSlugs = slugValues(previousSource, slugConst);
+  const nextSlugs = slugValues(nextSource, slugConst);
   return {
-    previous: slugRecordMap(previousSource, ids, slugExport),
-    next: slugRecordMap(nextSource, ids, slugExport),
+    previous: slugRecordMap(previousSlugs, ids),
+    next: slugRecordMap(nextSlugs, ids),
   };
 }
 

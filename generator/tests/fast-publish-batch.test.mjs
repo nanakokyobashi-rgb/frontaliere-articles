@@ -46,7 +46,6 @@ test('il trigger push conserva tutti gli ID dei body cambiati', () => {
   assert.doesNotMatch(resolveStep, /one commit changes both article sections/);
   assert.match(resolveStep, /EVENT_NAME.*workflow_dispatch.*section.*body_section/);
   assert.match(resolveStep, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);
-  assert.match(resolveStep, /engine\/shared\/\*-article-canonical-overrides\.json/);
   assert.match(resolveStep, /if \[ "\$\{#ids\[@\]\}" -eq 0 \]; then[\s\S]*git diff --name-only "\$before" HEAD/);
   assert.doesNotMatch(resolveStep, /head\s+-1/);
 });
@@ -79,30 +78,32 @@ test('le superfici articolo oltre il body producono solo gli ID realmente cambia
     readCurrentSource: (rel) => current.get(rel) ?? null,
   });
 
-  assert.deepEqual(plan, [{ section: 'frontaliere', ids: ['alpha', 'beta'], bootstrap: false }]);
+  assert.deepEqual(plan, [{
+    section: 'frontaliere',
+    ids: ['alpha', 'beta'],
+    bootstrap: false,
+  }]);
 });
 
-test('la pianificazione slug legge solo la mappa nominata, non i motivi di fallback', () => {
-  const registered = new Set(['alpha']);
+test('la mappa slug ignora l oggetto fallback omonimo e rileva lo slug cambiato', () => {
+  const registered = new Set(['alpha', 'beta']);
+  const registry = "export const ARTICLES = [{ id: 'alpha' }, { id: 'beta' }];\n";
+  const previousSlugs = `const BLOG_SLUGS = {
+  'alpha': { it: 'alpha-it', en: 'alpha-en', de: 'alpha-de', fr: 'alpha-fr' },
+  'beta': { it: 'beta-old-it', en: 'beta-en', de: 'beta-de', fr: 'beta-fr' },
+};
+const BLOG_SLUG_FALLBACK_REASONS = {
+  'beta': { it: 'legacy-reason', en: 'legacy-reason', de: 'legacy-reason', fr: 'legacy-reason' },
+};
+`;
+  const currentSlugs = previousSlugs.replace('beta-old-it', 'beta-new-it');
   const previous = new Map([
-    ['content/blog-articles-data.ts', "export const ARTICLES = [{ id: 'alpha' }];\n"],
-    ['content/routerBlogData.ts', `export const BLOG_SLUGS = {
-  alpha: { it: 'alpha-it', en: 'alpha-en', de: 'alpha-de', fr: 'alpha-fr' },
-};
-export const BLOG_SLUG_FALLBACK_REASONS = {
-  alpha: { reason: 'old' },
-};
-`],
+    ['content/blog-articles-data.ts', registry],
+    ['content/routerBlogData.ts', previousSlugs],
   ]);
   const current = new Map([
-    ['content/blog-articles-data.ts', "export const ARTICLES = [{ id: 'alpha' }];\n"],
-    ['content/routerBlogData.ts', `export const BLOG_SLUGS = {
-  alpha: { it: 'alpha-it', en: 'alpha-en', de: 'alpha-de', fr: 'alpha-fr' },
-};
-export const BLOG_SLUG_FALLBACK_REASONS = {
-  alpha: { reason: 'new' },
-};
-`],
+    ['content/blog-articles-data.ts', registry],
+    ['content/routerBlogData.ts', currentSlugs],
   ]);
   const plan = articlePublishPlan(['content/routerBlogData.ts'], ARTICLE_SECTION_CORE_LIST, {
     served: 'shard',
@@ -111,7 +112,11 @@ export const BLOG_SLUG_FALLBACK_REASONS = {
     readCurrentSource: (rel) => current.get(rel) ?? null,
   });
 
-  assert.deepEqual(plan, []);
+  assert.deepEqual(plan, [{
+    section: 'frontaliere',
+    ids: ['beta'],
+    bootstrap: false,
+  }]);
 });
 
 test('una canonical override cambiata risveglia solo l articolo che possiede lo slug', () => {
@@ -145,6 +150,16 @@ test('il resolver article non rifà il fetch del parent già presente nel checko
   assert.match(resolveFetchStep, /bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
   assert.match(pushBaseGuard, /git cat-file -e "\$\{PUSH_BEFORE\}\^\{commit\}"/);
   assert.match(pushBaseGuard, /git fetch --no-tags --depth=1 origin "\$PUSH_BEFORE"/);
+});
+
+test('il dry gate usa il piano delle superfici e il publisher porta i redirect di slug', () => {
+  const resolveStep = stepText('Resolve mode, article ids and section');
+  assert.match(resolveStep, /article_plan=.*fast-publish-section\.mjs article-plan shard/);
+  assert.match(resolveStep, /printf '%s' "\$article_plan" \| jq 'length'/);
+  assert.doesNotMatch(resolveStep, /engine\/shared\/\*-article-canonical-overrides\.json/);
+  assert.match(workflow, /PUBLISH_BEFORE: \$\{\{ github\.event\.before \}\}/);
+  assert.match(publisher, /redirectPaths/);
+  assert.match(publisher, /writeLegacySlugRedirects/);
 });
 
 test('i body orfani non bloccano gli articoli registrati dello stesso push', () => {

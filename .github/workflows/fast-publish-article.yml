@@ -223,6 +223,7 @@ jobs:
           set -euo pipefail
           ids=()
           groups='{}'
+          article_plan='[]'
           write_output() { printf '%s\n' "$1" >> "$GITHUB_OUTPUT"; }
           if [ "$EVENT_NAME" = 'push' ]; then
             cover_drain_marker="$(node scripts/ci/cover-drain-commit.mjs is-cover-drain)"
@@ -270,9 +271,17 @@ jobs:
             fi
             changed="$(git diff --name-only "$before" HEAD 2>/dev/null || true)"
             has_content=false
+            # The planner owns the article-surface list, including engine-local
+            # canonical overrides. Its non-empty result is also the publishable
+            # signal for the dry gate; the YAML must not grow a second list of
+            # paths that can drift from articleSurfaceKind().
+            article_plan="$(printf '%s\n' "$changed" | PUSH_BEFORE="$before" node scripts/ci/fast-publish-section.mjs article-plan shard)"
+            if [ "$(printf '%s' "$article_plan" | jq 'length')" -gt 0 ]; then
+              has_content=true
+            fi
             while IFS= read -r changed_path; do
               case "$changed_path" in
-                content/*|public/images/*|engine/shared/*-article-canonical-overrides.json) has_content=true; break ;;
+                content/*|public/images/*) has_content=true; break ;;
               esac
             done <<< "$changed"
             if [ "$has_content" != true ]; then
@@ -317,7 +326,6 @@ jobs:
             # article id, otherwise the resolver can be green with an empty
             # matrix and leave stale HTML (including og:image) live.
             if [ "$EVENT_NAME" = 'push' ]; then
-              article_plan="$(printf '%s\n' "$changed" | PUSH_BEFORE="$before" node scripts/ci/fast-publish-section.mjs article-plan shard)"
               while IFS= read -r surface_target; do
                 [ -n "$surface_target" ] || continue
                 surface_section="$(printf '%s' "$surface_target" | jq -r '.section')"
