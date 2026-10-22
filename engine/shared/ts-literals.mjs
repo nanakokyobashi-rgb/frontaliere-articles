@@ -101,7 +101,7 @@ function looksLikeGenericStart(source, offset, statementStart = false) {
     }
     if (character === '/' && source[cursor + 1] === '/') {
       cursor += 2;
-      while (cursor < source.length && source[cursor] !== '\n' && source[cursor] !== '\r') cursor += 1;
+      while (cursor < source.length && !isRegexLineTerminator(source[cursor])) cursor += 1;
       continue;
     }
     if (character === '/' && source[cursor + 1] === '*') {
@@ -172,7 +172,7 @@ export function readStaticStringLiteral(source, startIdx, sourcePath = 'source',
     if (quote === '`' && char === '$' && source[cursor + 1] === '{') {
       throw new Error(`[${errorLabel}] Interpolated template literal is not supported in static source: ${sourcePath}`);
     }
-    if (quote !== '`' && (char === '\n' || char === '\r')) return null;
+    if (quote !== '`' && isRegexLineTerminator(char)) return null;
     if (char === quote) {
       return { quote, value: source.slice(startIdx + 1, cursor), end: cursor + 1 };
     }
@@ -224,7 +224,7 @@ export function skipStaticTrivia(source, startIdx, sourcePath = 'source', errorL
     }
     if (source.startsWith('//', cursor)) {
       let newline = cursor + 2;
-      while (newline < source.length && source[newline] !== '\n' && source[newline] !== '\r') {
+      while (newline < source.length && !isRegexLineTerminator(source[newline])) {
         newline += 1;
       }
       cursor = newline;
@@ -520,6 +520,18 @@ export function readStaticObjectEntries(
       cursor += 1;
       canStartRegex = true;
       lastSignificant = 'division';
+      lastIdentifier = null;
+      blockBracePending = null;
+      statementStart = false;
+      labelCandidate = false;
+      declarationPrefix = false;
+      continue;
+    }
+
+    if (source.startsWith('...', cursor)) {
+      cursor += 3;
+      canStartRegex = true;
+      lastSignificant = 'spread';
       lastIdentifier = null;
       blockBracePending = null;
       statementStart = false;

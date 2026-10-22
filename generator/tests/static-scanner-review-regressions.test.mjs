@@ -1,11 +1,100 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
+import '../../host/cantonSectionsBootstrap.mjs';
+import {
+  loadArticleRouteRedirects,
+  scanRedirectSource,
+} from '../../engine/shared/articleRouteOwnership.mjs';
+import {
+  findAllSeoEntryMatches,
+} from '../../engine/shared/seo-entry.mjs';
+import {
+  decodeStaticStringLiteral,
+} from '../../engine/shared/ts-literals.mjs';
 import { readTsStringMap } from '../scripts/lib/ts-string-map.mjs';
 import {
   computedPropertyKeyEnd,
   unsupportedObjectMemberAt,
 } from '../../scripts/lib/typescript-expression-scanner.mjs';
+
+test('articleRouteOwnership scarta la mappa legacy dopo un commento troncato', () => {
+  const files = new Map([
+    ['data.json', JSON.stringify({ '/data/': '/target/' })],
+    ['legacy.ts', "const redirects = { '/legacy/': '/target-legacy/' /* troncato"],
+  ]);
+  const fs = { readFileSync: file => files.get(file) };
+
+  assert.deepEqual(loadArticleRouteRedirects(fs, 'data.json', 'legacy.ts'), {
+    '/data/': '/target/',
+  });
+  assert.throws(
+    () => scanRedirectSource(files.get('legacy.ts')),
+    /Unterminated block comment/u,
+  );
+});
+
+test('seo-entry riconosce tutti i terminatori di riga nei commenti lineari', () => {
+  for (const lineTerminator of ['\r', '\u2028', '\u2029']) {
+    const source = `// voce ignorata${lineTerminator}'blog-live': { value: 1 }`;
+    assert.deepEqual(
+      findAllSeoEntryMatches(source, `seo-${JSON.stringify(lineTerminator)}`).map(({ id }) => id),
+      ['live'],
+      JSON.stringify(lineTerminator),
+    );
+
+    const entrySource = `'blog-live': { value: 1, // voce ignorata${lineTerminator}}`;
+    const [match] = findAllSeoEntryMatches(entrySource, `seo-entry-${JSON.stringify(lineTerminator)}`);
+    assert.ok(match, JSON.stringify(lineTerminator));
+    assert.equal(match.closeIdx, entrySource.lastIndexOf('}'), JSON.stringify(lineTerminator));
+  }
+});
+
+test('seo-entry tratta il bang dopo ASI come prefisso regex', () => {
+  for (const lineTerminator of ['\n', '\r', '\u2028', '\u2029']) {
+    const source = `'blog-live': { value!${lineTerminator}!/foo}/${lineTerminator}}`;
+    const [match] = findAllSeoEntryMatches(source, `seo-asi-${JSON.stringify(lineTerminator)}`);
+    assert.ok(match, JSON.stringify(lineTerminator));
+    assert.equal(match.closeIdx, source.lastIndexOf('}'), JSON.stringify(lineTerminator));
+  }
+});
+
+test('seo-entry mantiene il corpo block delle arrow nello stack dei delimitatori', () => {
+  const source = "'blog-arrow': { value: () => { return 1; } /foo}/ }";
+  const [match] = findAllSeoEntryMatches(source, 'seo-arrow');
+  assert.ok(match);
+  assert.equal(match.closeIdx, source.lastIndexOf('}'));
+});
+
+test('seo-entry conserva la divisione dopo un bang postfix TypeScript', () => {
+  const source = "'blog-postfix': { value! / divisor, after: 1 }";
+  const [match] = findAllSeoEntryMatches(source, 'seo-postfix');
+  assert.ok(match);
+  assert.equal(match.closeIdx, source.lastIndexOf('}'));
+});
+
+test('seo-entry non promuove a block un object literal dopo una line break espressiva', () => {
+  const source = "'blog-newline-object': { value =\n{ nested: 1 } / divisor, after: 1 }";
+  const [match] = findAllSeoEntryMatches(source, 'seo-newline-object');
+  assert.ok(match);
+  assert.equal(match.closeIdx, source.lastIndexOf('}'));
+});
+
+test('seo-entry non tratta i nomi di proprietà come label o keyword di block', () => {
+  for (const keyword of ['case', 'default', 'function', 'class', 'static']) {
+    const source = `'blog-property-${keyword}': { ${keyword}: { nested: 1 } / divisor, after: 1 }`;
+    const [match] = findAllSeoEntryMatches(source, `seo-property-${keyword}`);
+    assert.ok(match, keyword);
+    assert.equal(match.closeIdx, source.lastIndexOf('}'), keyword);
+  }
+});
+
+test('il decoder TS rimuove anche la continuazione \u005cr con newlineAs', () => {
+  assert.equal(
+    decodeStaticStringLiteral('prima\\rseconda', "'", { newlineAs: ' ' }),
+    'primaseconda',
+  );
+});
 
 test('ts-string-map riconosce U+2028 e U+2029 prima del corpo successivo', () => {
   for (const lineTerminator of ['\u2028', '\u2029']) {

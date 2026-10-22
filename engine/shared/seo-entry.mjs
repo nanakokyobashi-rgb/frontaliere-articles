@@ -9,6 +9,28 @@
 
 const CLOSING = { '{': '}', '[': ']', '(': ')' };
 const escapeRegex = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const LINE_TERMINATORS = '\n\r\u2028\u2029';
+const isLineTerminator = character => LINE_TERMINATORS.includes(character);
+
+function lineTerminatorIndex(source, offset) {
+  for (let index = offset; index < source.length; index += 1) {
+    if (isLineTerminator(source[index])) return index;
+  }
+  return -1;
+}
+
+const REGEX_PREFIX_KEYWORDS = new Set([
+  'await', 'break', 'case', 'continue', 'debugger', 'default', 'delete', 'do', 'else', 'in',
+  'instanceof', 'new', 'of', 'return', 'throw', 'typeof', 'void', 'yield',
+]);
+const REGEX_PREFIX_PUNCTUATION = new Set([
+  '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>',
+]);
+const CONTROL_PAREN_KEYWORDS = new Set(['catch', 'for', 'if', 'switch', 'while', 'with']);
+const BLOCK_BRACE_KEYWORDS = new Set([
+  'catch', 'class', 'do', 'else', 'enum', 'finally', 'function', 'interface', 'module', 'namespace',
+  'static', 'try',
+]);
 
 /**
  * Find the closing delimiter for the one at `openIdx`, ignoring strings,
@@ -20,36 +42,32 @@ function matchingDelimiter(src, openIdx) {
   if (!close) throw new Error(`matchingDelimiter: '${open}' non è un delimitatore di apertura`);
   let depth = 0;
   let quote = null;
-  // Track code tokens in the forward scan. A backward search cannot tell a
-  // nested `/*` marker from the start of the block comment it is inside.
-  let previousToken = null;
-  let tokenBeforePrevious = null;
+  let canStartRegex = true;
+  let lastSignificant = null;
+  let lastIdentifier = null;
+  let statementStart = true;
   let lineBreakSinceToken = false;
-  const delimiterStack = [];
-  const controlParenthesisKeywords = new Set(['if', 'while', 'for', 'with', 'switch', 'catch']);
-  const rememberToken = (kind, value) => {
-    tokenBeforePrevious = previousToken;
-    previousToken = { kind, value };
-  };
-
-  const isRegexPrefixPunctuation = token => token?.kind === 'punct'
-    && '([{=,:;!?&|+\-*%^~<>/'.includes(token.value);
-  const isRegexPrefixBoundary = token => token?.kind === 'control-close'
-    || isRegexPrefixPunctuation(token);
-  const isRegexPrefixKeyword = token => token?.kind === 'word'
-    && /^(?:return|throw|case|break|continue|debugger|default|delete|void|typeof|instanceof|in|of|yield|await|else|do|new)$/.test(token.value)
-    && !['.', '#'].includes(tokenBeforePrevious?.value);
-
-  const canStartRegex = () => {
-    if (previousToken === null) return true;
-    return isRegexPrefixBoundary(previousToken) || isRegexPrefixKeyword(previousToken);
+  let caseLabelPending = false;
+  let lastClosedParenControl = null;
+  const parenContexts = [];
+  const bracketContexts = [];
+  const braceContexts = [];
+  const statementEndingTokens = new Set([
+    'identifier', 'literal', 'postfix', 'close-paren', 'close-bracket', 'close-object', 'close-block',
+  ]);
+  const recordLineBreak = () => {
+    lineBreakSinceToken = true;
+    if (parenContexts.length === 0 && bracketContexts.length === 0
+      && statementEndingTokens.has(lastSignificant)) {
+      statementStart = true;
+    }
   };
 
   const skipRegex = (start) => {
     let inClass = false;
     for (let i = start + 1; i < src.length; i += 1) {
       if (src[i] === '\\') { i += 1; continue; }
-      if ('\n\r\u2028\u2029'.includes(src[i])) return start;
+      if (isLineTerminator(src[i])) return start;
       if (src[i] === '[') { inClass = true; continue; }
       if (src[i] === ']' && inClass) { inClass = false; continue; }
       if (src[i] === '/' && !inClass) {
@@ -72,76 +90,247 @@ function matchingDelimiter(src, openIdx) {
       continue;
     }
     if (ch === '/' && src[i + 1] === '/') {
-      let end = i + 2;
-      while (end < src.length && !'\n\r\u2028\u2029'.includes(src[end])) end += 1;
-      i = end - 1;
+      const lineEnd = lineTerminatorIndex(src, i + 2);
+      if (lineEnd === -1) return -1;
+      recordLineBreak();
+      i = lineEnd;
       continue;
     }
     if (ch === '/' && src[i + 1] === '*') {
       const end = src.indexOf('*/', i + 2);
       if (end === -1) return -1;
-      if (/[\n\r\u2028\u2029]/u.test(src.slice(i, end + 2))) lineBreakSinceToken = true;
+      if (/\n|\r|\u2028|\u2029/u.test(src.slice(i, end + 2))) {
+        recordLineBreak();
+      }
       i = end + 1;
       continue;
     }
     if (/\s/.test(ch)) {
-      if ('\n\r\u2028\u2029'.includes(ch)) lineBreakSinceToken = true;
+      if (isLineTerminator(ch)) {
+        recordLineBreak();
+      }
       continue;
     }
     const lineBreakBeforeToken = lineBreakSinceToken;
     lineBreakSinceToken = false;
-    if (ch === '/' && canStartRegex()) {
+    const controlKeywordBeforeToken = lastSignificant === 'close-paren' ? lastClosedParenControl : null;
+    lastClosedParenControl = null;
+    if (ch === '`') {
+      const end = templateEnd(src, i);
+      if (end === -1) return -1;
+      i = end;
+      canStartRegex = false;
+      lastSignificant = 'literal';
+      lastIdentifier = null;
+      statementStart = false;
+      continue;
+    }
+    if (ch === "'" || ch === '"') {
+      const end = quotedEnd(src, i, ch);
+      if (end === -1) return -1;
+      i = end;
+      canStartRegex = false;
+      lastSignificant = 'literal';
+      lastIdentifier = null;
+      statementStart = false;
+      continue;
+    }
+    if (ch === '/' && canStartRegex) {
       const end = skipRegex(i);
       if (end === -1) return -1;
-      if (end === i) {
-        rememberToken('punct', '/');
-        continue;
-      }
-      rememberToken('literal', 'regex');
       i = end;
+      canStartRegex = false;
+      lastSignificant = 'literal';
+      lastIdentifier = null;
+      statementStart = false;
       continue;
     }
-    if (ch === '!' && src[i + 1] !== '=') {
-      // A postfix non-null assertion ends an expression; a prefix bang starts
-      // one. Keep the distinction so a following slash is classified safely.
-      rememberToken(lineBreakBeforeToken || isRegexPrefixBoundary(previousToken) || isRegexPrefixKeyword(previousToken)
-        ? 'punct' : 'postfix', '!');
+    if (src.startsWith('...', i)) {
+      i += 2;
+      canStartRegex = true;
+      lastSignificant = 'spread';
+      lastIdentifier = null;
+      statementStart = false;
       continue;
     }
-    if (ch === "'" || ch === '"' || ch === '`') {
-      rememberToken('literal', ch);
-      quote = ch;
+    if (ch === '/') {
+      canStartRegex = true;
+      lastSignificant = 'division';
+      lastIdentifier = null;
+      statementStart = false;
       continue;
     }
     if (/[A-Za-z_$]/.test(ch)) {
       let end = i + 1;
-      while (end < src.length && /[A-Za-z0-9_$]/.test(src[end])) end += 1;
-      rememberToken('word', src.slice(i, end));
+      while (/[A-Za-z0-9_$]/.test(src[end] || '')) end += 1;
+      const word = src.slice(i, end);
+      const member = lastSignificant === 'dot' || lastSignificant === 'private-prefix';
+      const identifierAtStatementStart = statementStart;
+      canStartRegex = !member && REGEX_PREFIX_KEYWORDS.has(word);
+      lastIdentifier = { value: word, member, statementStart: identifierAtStatementStart };
+      lastSignificant = 'identifier';
+      if (!member && identifierAtStatementStart && braceContexts.some(context => context.isSwitch)
+        && (word === 'case' || word === 'default')) {
+        caseLabelPending = true;
+      }
+      statementStart = false;
       i = end - 1;
       continue;
     }
-    if (ch === '(' || ch === '[' || ch === '{') {
-      delimiterStack.push({
-        open: ch,
-        control: ch === '('
-          && previousToken?.kind === 'word'
-          && controlParenthesisKeywords.has(previousToken.value)
-          && !['.', '#'].includes(tokenBeforePrevious?.value),
+    if (ch === '?' && src[i + 1] === '.') {
+      i += 1;
+      canStartRegex = false;
+      lastSignificant = 'dot';
+      lastIdentifier = null;
+      statementStart = false;
+      continue;
+    }
+    if (ch === '.' || ch === '#') {
+      canStartRegex = false;
+      lastSignificant = ch === '.' ? 'dot' : 'private-prefix';
+      lastIdentifier = null;
+      statementStart = false;
+      continue;
+    }
+    if ((ch === '+' && src[i + 1] === '+') || (ch === '-' && src[i + 1] === '-')) {
+      i += 1;
+      canStartRegex = false;
+      lastSignificant = 'postfix';
+      lastIdentifier = null;
+      statementStart = false;
+      continue;
+    }
+    if (ch === '!' && src[i + 1] !== '=') {
+      const postfix = !lineBreakBeforeToken && !canStartRegex;
+      if (postfix) {
+        canStartRegex = false;
+        lastSignificant = 'postfix';
+      } else {
+        canStartRegex = true;
+        lastSignificant = 'punctuation';
+      }
+      lastIdentifier = null;
+      statementStart = false;
+      continue;
+    }
+    if (ch === '=' && src[i + 1] === '>') {
+      i += 1;
+      canStartRegex = true;
+      lastSignificant = 'arrow';
+      lastIdentifier = null;
+      statementStart = false;
+      continue;
+    }
+    if (ch === '(') {
+      const isTarget = open === '(' && i === openIdx;
+      const controlKeyword = lastIdentifier && !lastIdentifier.member
+        && CONTROL_PAREN_KEYWORDS.has(lastIdentifier.value)
+        ? lastIdentifier.value
+        : null;
+      parenContexts.push({
+        isTarget,
+        control: controlKeyword !== null,
+        controlKeyword,
       });
-      rememberToken('punct', ch);
-      if (ch === open) depth += 1;
+      if (isTarget) depth += 1;
+      canStartRegex = true;
+      lastSignificant = 'open-paren';
+      lastIdentifier = null;
+      statementStart = false;
       continue;
     }
-    if (ch === ')' || ch === ']' || ch === '}') {
-      const entry = delimiterStack[delimiterStack.length - 1];
-      if (entry && { '(': ')', '[': ']', '{': '}' }[entry.open] === ch) delimiterStack.pop();
-      rememberToken(ch === ')' && entry?.control ? 'control-close' : 'punct', ch);
-      if (ch !== close) continue;
-      depth -= 1;
-      if (depth === 0) return i;
+    if (ch === ')') {
+      const context = parenContexts.pop();
+      lastClosedParenControl = context?.controlKeyword ?? null;
+      if (context?.isTarget) {
+        depth -= 1;
+        if (depth === 0) return i;
+      }
+      canStartRegex = context?.control === true;
+      lastSignificant = 'close-paren';
+      lastIdentifier = null;
+      statementStart = Boolean(context?.control);
       continue;
     }
-    rememberToken('punct', ch);
+    if (ch === '[') {
+      const isTarget = open === '[' && i === openIdx;
+      bracketContexts.push(isTarget);
+      if (isTarget) depth += 1;
+      canStartRegex = true;
+      lastSignificant = 'open-bracket';
+      lastIdentifier = null;
+      statementStart = false;
+      continue;
+    }
+    if (ch === ']') {
+      const isTarget = bracketContexts.pop();
+      if (isTarget) {
+        depth -= 1;
+        if (depth === 0) return i;
+      }
+      canStartRegex = false;
+      lastSignificant = 'close-bracket';
+      lastIdentifier = null;
+      statementStart = false;
+      continue;
+    }
+    if (ch === '{') {
+      const isTarget = open === '{' && i === openIdx;
+      const isBlock = !isTarget && (
+        lastSignificant === 'close-paren'
+        || lastSignificant === 'arrow'
+        || lastSignificant === 'semicolon'
+        || lastSignificant === 'close-block'
+        || statementStart
+        || (lastSignificant === 'identifier' && lastIdentifier
+          && lastIdentifier.statementStart
+          && !lastIdentifier.member && BLOCK_BRACE_KEYWORDS.has(lastIdentifier.value))
+        || caseLabelPending
+      );
+      braceContexts.push({
+        isTarget,
+        isBlock: Boolean(isBlock),
+        isSwitch: Boolean(isBlock && controlKeywordBeforeToken === 'switch'),
+      });
+      if (isTarget) depth += 1;
+      canStartRegex = true;
+      lastSignificant = isBlock ? 'open-block' : 'open-object';
+      lastIdentifier = null;
+      statementStart = Boolean(isBlock);
+      caseLabelPending = false;
+      continue;
+    }
+    if (ch === '}') {
+      const context = braceContexts.pop();
+      if (context?.isTarget) {
+        depth -= 1;
+        if (depth === 0) return i;
+      }
+      canStartRegex = context?.isBlock === true;
+      lastSignificant = context?.isBlock ? 'close-block' : 'close-object';
+      lastIdentifier = null;
+      statementStart = context?.isBlock === true;
+      caseLabelPending = false;
+      continue;
+    }
+    if (ch === ':') {
+      canStartRegex = true;
+      lastSignificant = 'colon';
+      lastIdentifier = null;
+      if (caseLabelPending) statementStart = true;
+      continue;
+    }
+    if (ch === ';') {
+      canStartRegex = true;
+      lastSignificant = 'semicolon';
+      lastIdentifier = null;
+      statementStart = true;
+      continue;
+    }
+    canStartRegex = REGEX_PREFIX_PUNCTUATION.has(ch);
+    lastSignificant = 'punctuation';
+    lastIdentifier = null;
+    statementStart = false;
   }
   return -1;
 }
@@ -151,7 +340,7 @@ function quotedEnd(src, start, quote) {
   for (let i = start + 1; i < src.length; i += 1) {
     if (src[i] === '\\') { i += 1; continue; }
     if (src[i] === quote) return i;
-    if (src[i] === '\n' || src[i] === '\r') return -1;
+    if (isLineTerminator(src[i])) return -1;
   }
   return -1;
 }
@@ -183,7 +372,7 @@ function templateEnd(src, start) {
         continue;
       }
       if (ch === '/' && src[i + 1] === '/') {
-        const end = src.indexOf('\n', i + 2);
+        const end = lineTerminatorIndex(src, i + 2);
         if (end === -1) return -1;
         i = end;
         continue;
@@ -204,12 +393,12 @@ function templateEnd(src, start) {
 
 function isRealSeoKey(src, start, end) {
   let lineStart = start;
-  while (lineStart > 0 && src[lineStart - 1] !== '\n' && src[lineStart - 1] !== '\r') {
+  while (lineStart > 0 && !isLineTerminator(src[lineStart - 1])) {
     lineStart -= 1;
   }
   if (!/^[\t ]*$/.test(src.slice(lineStart, start))) return false;
   const key = src.slice(start + 1, end);
-  return /^blog-[^'\\\r\n]+$/.test(key) && /^\s*:\s*\{/.test(src.slice(end + 1));
+  return /^blog-[^'\\\r\n\u2028\u2029]+$/u.test(key) && /^\s*:\s*\{/.test(src.slice(end + 1));
 }
 
 /**
@@ -222,13 +411,13 @@ export function maskSeoSource(source, file = 'SEO source') {
   const src = String(source);
   const masked = new Array(src.length);
   for (let i = 0; i < src.length; i += 1) {
-    masked[i] = src[i] === '\n' || src[i] === '\r' ? src[i] : ' ';
+    masked[i] = isLineTerminator(src[i]) ? src[i] : ' ';
   }
 
   for (let i = 0; i < src.length; i += 1) {
     const ch = src[i];
     if (ch === '/' && src[i + 1] === '/') {
-      const end = src.indexOf('\n', i + 2);
+      const end = lineTerminatorIndex(src, i + 2);
       i = end === -1 ? src.length - 1 : end - 1;
       continue;
     }
@@ -311,8 +500,8 @@ export function removeSeoEntriesFromSource(source, id, file = 'SEO source') {
     const { lineStart, closeIdx } = matches[i];
     let end = closeIdx + 1;
     if (src[end] === ',') end += 1;
-    if (src[end] === '\r') end += 1;
-    if (src[end] === '\n') end += 1;
+    if (src[end] === '\r' && src[end + 1] === '\n') end += 2;
+    else if (isLineTerminator(src[end])) end += 1;
     src = src.slice(0, lineStart) + src.slice(end);
   }
 

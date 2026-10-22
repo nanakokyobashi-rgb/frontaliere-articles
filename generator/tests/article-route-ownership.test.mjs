@@ -28,3 +28,29 @@ test('parseLiteralRedirectMap reports dynamic and unsupported targets without gu
   assert.equal(result.dynamicCount, 1);
   assert.deepEqual(result.unsupported, ['/articoli-ticino/dynamic']);
 });
+
+test('parseLiteralRedirectMap skips nested members in an unsupported expression', () => {
+  const result = parseLiteralRedirectMap(
+    "const redirects = { '/dynamic': condition ? { '/fake': '/target-fake' } : targetPath, '/valid': '/target-valid' }",
+  );
+
+  assert.deepEqual(result.entries, {
+    '/valid/': '/target-valid/',
+  });
+  assert.equal(result.literalCount, 1);
+  assert.equal(result.dynamicCount, 0);
+  assert.deepEqual(result.unsupported, ['/dynamic']);
+});
+
+test('parseLiteralRedirectMap conserva le divisioni dopo gli operatori postfix dinamici', () => {
+  for (const operator of ['++', '--']) {
+    const result = parseLiteralRedirectMap(
+      `const redirects = { '/dynamic': counter${operator} / divisor, '/valid': '/target-valid' }`,
+    );
+
+    assert.deepEqual(result.entries, {
+      '/valid/': '/target-valid/',
+    }, operator);
+    assert.deepEqual(result.unsupported, ['/dynamic'], operator);
+  }
+});
