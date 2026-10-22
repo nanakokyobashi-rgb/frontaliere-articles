@@ -329,10 +329,11 @@ function delimiterContextAt(source, offset) {
         && interfaceTypeParameterDepth === 0;
       const inheritedTypeContext = rootTypeContext || delimiters.some(({ typeLiteral, typeContext }) =>
         typeLiteral || typeContext);
+      const parameterDefault = delimiters.at(-1)?.parameterDefault === true;
       const typeLiteral = interfaceBody
         || ch === '{' && previousToken === ':'
         && (inheritedTypeContext
-          || delimiters.at(-1)?.functionParameters === true
+          || delimiters.at(-1)?.functionParameters === true && !parameterDefault
           || pendingFunctionReturnObjectType || pendingVariableTypeObject)
         || ch === '{' && inheritedTypeContext && ['?', '|', '('].includes(previousToken)
         || ch === '{' && typeAliasDepth >= 0;
@@ -341,7 +342,7 @@ function delimiterContextAt(source, offset) {
           || isFunctionParameterList(source, index));
       const bindingPattern = ch === '{' && (
         variableNamePending && delimiters.length === variableDeclarationDepth
-        || delimiters.at(-1)?.functionParameters === true
+        || delimiters.at(-1)?.functionParameters === true && !parameterDefault
       );
       const angleAssertedObject = ch === '{' && index === angleAssertedObjectOffset;
       const objectLiteral = ch === '{' && !typeLiteral && !bindingPattern
@@ -365,6 +366,7 @@ function delimiterContextAt(source, offset) {
         typeLiteral,
         typeContext: inheritedTypeContext && (ch === '(' || ch === '[' || typeLiteral),
         functionParameters,
+        parameterDefault: false,
         objectLiteral,
       });
       pendingFunctionReturnObjectType = false;
@@ -451,7 +453,7 @@ function delimiterContextAt(source, offset) {
       const startsTypeContext = rootTypeContext || typeAliasDepth >= 0
         || current?.typeLiteral === true
         || current?.typeContext === true
-        || current?.functionParameters === true
+        || current?.functionParameters === true && current?.parameterDefault !== true
         || lastClosedFunctionParameters
         || variableTypePending;
       if (startsTypeContext) {
@@ -466,11 +468,15 @@ function delimiterContextAt(source, offset) {
       pendingFunctionReturnObjectType = false;
       pendingVariableTypeObject = false;
     }
+    if (ch === ',' && delimiters.at(-1)?.functionParameters === true) {
+      delimiters.at(-1).parameterDefault = false;
+    }
     if (ch === '=' && delimiters.at(-1)?.functionParameters === true) {
       // A parameter annotation ends at its default initializer. Without this
       // boundary, a runtime arrow/object initializer inherits the parameter's
       // TypeScript context and a computed key such as `[key in runtime]` is
       // mistaken for a mapped type member.
+      delimiters.at(-1).parameterDefault = true;
       delimiters.at(-1).typeContext = false;
     }
     if ((ch === '=' || ch === ';') && delimiters.length === variableDeclarationDepth) {

@@ -51,3 +51,18 @@ test('lo scanner chiude il contesto di tipo prima di un initializer di parametro
   assert.equal(unsupportedObjectMemberAt(source, offset)?.kind, 'computed');
   assert.equal(unsupportedObjectMemberAt(source, offset)?.keyEnd, computedPropertyKeyEnd(source, offset));
 });
+
+test('lo scanner mantiene runtime gli object literal condizionali nei default dei parametri', () => {
+  const source = 'function f(options: any = condition ? value : { [key in runtime]: 1 }) {}';
+  const offset = source.indexOf('[', source.indexOf('{'));
+  assert.equal(unsupportedObjectMemberAt(source, offset)?.kind, 'computed');
+  assert.equal(unsupportedObjectMemberAt(source, offset)?.keyEnd, computedPropertyKeyEnd(source, offset));
+});
+
+test('lo scanner riattiva le annotazioni dopo il separatore del parametro', () => {
+  const source = 'function f(first: any = { [key in runtime]: 1 }, second: { [key in keyof T]: V }) {}';
+  const runtimeOffset = source.indexOf('[', source.indexOf('{'));
+  const mappedOffset = source.indexOf('[', runtimeOffset + 1);
+  assert.equal(unsupportedObjectMemberAt(source, runtimeOffset)?.kind, 'computed');
+  assert.equal(unsupportedObjectMemberAt(source, mappedOffset), null);
+});
