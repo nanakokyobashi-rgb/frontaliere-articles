@@ -53,7 +53,7 @@
 // without the tsx loader, so importing that `.ts` file here would turn the
 // mirror into ERR_UNKNOWN_FILE_EXTENSION. Keep the tiny decoder local while
 // preserving the site's observable escape semantics.
-const TS_ESCAPE_RX = /\\(u\{[0-9a-fA-F]+\}|u[0-9a-fA-F]{4}|x[0-9a-fA-F]{2}|[\s\S])/g;
+const TS_ESCAPE_RX = /\\(u\{[0-9a-fA-F]+\}|u[0-9a-fA-F]{4}|x[0-9a-fA-F]{2}|\r\n|[\s\S])/g;
 const TS_CODE_POINT_ESCAPE_RX = /^(x[0-9a-fA-F]{2}|u\{[0-9a-fA-F]+\})/u;
 
 function decodeTypeScriptCodePointEscape(escape) {
@@ -88,6 +88,7 @@ export function unescapeTsString(value, escapes, { decodeUnicode = false } = {})
   return value.replace(TS_ESCAPE_RX, (whole, escape) => {
     const codePoint = decodeTypeScriptCodePointEscape(escape);
     if (codePoint) return codePoint.value;
+    if (/^(?:\r\n|[\n\r\u2028\u2029])$/u.test(escape)) return '';
     if (decodeUnicode && /^u[0-9a-fA-F]{4}$/u.test(escape)) {
       return String.fromCharCode(Number.parseInt(escape.slice(1), 16));
     }

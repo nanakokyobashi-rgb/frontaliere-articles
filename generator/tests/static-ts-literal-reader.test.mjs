@@ -318,6 +318,7 @@ test('metaFieldRegex conserva gli offset raw e gli id che contengono punti', () 
 
 test('il decoder conserva Unicode e newline senza ri-scansionare il risultato', () => {
   assert.equal(decodeStaticStringLiteral('line\\n\\u00e8 \\\\n', "'"), 'line\nè \\n');
+  assert.equal(decodeStaticStringLiteral('\\x43 \\u{1F30D} \\u0041', "'"), 'C 🌍 A');
   assert.equal(
     decodeStaticStringLiteral('line\\n\\u2028mezzo\\u2029fine', "'", { newlineAs: ' ' }),
     'line \u2028mezzo\u2029fine',

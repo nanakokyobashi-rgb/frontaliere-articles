@@ -3638,7 +3638,7 @@
       "reason": "Adattamento corpus della fix del sito #14559: la copia SITE importa `packages/articles/engine/shared/tsStringEscapes.ts`, mentre il generatore corpus viene caricato da `node --test` e dal runtime senza il loader TypeScript; copiare quell'import introdurrebbe `ERR_UNKNOWN_FILE_EXTENSION`/`ERR_MODULE_NOT_FOUND` nella topologia `generator/`. Qui il decoder resta autonomo ma segue lo stesso contratto per `\\xNN`, `\\u{...}` e `\\uXXXX`, così la correzione non dipende dal trasporto dell'engine e non duplica un percorso importabile solo sul sito.",
       "baseline": {
         "site": "45aff25183945f06",
-        "corpus": "7c644c01ef243b2d",
+        "corpus": "51c3631ccca96ed5",
         "alignedAt": "2026-10-22"
       }
     },
@@ -6452,8 +6452,8 @@
       "reason": "Producer della superficie HTTP article bodies: estrae i sorgenti del corpus, pubblica namespace completi con revisione e verifica indici/payload. Il sito consuma il contratto JSON via HTTP e non importa questo modulo.",
       "baseline": {
         "site": null,
-        "corpus": "e8dcd6f4d358e7ab",
-        "alignedAt": "2026-10-21"
+        "corpus": "88c9b4db29ff2807",
+        "alignedAt": "2026-10-22"
       }
     },
     {

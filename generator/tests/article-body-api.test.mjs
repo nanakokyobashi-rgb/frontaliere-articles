@@ -154,6 +154,12 @@ test('Unicode escapes are decoded once, preserving backslashes for body text and
   assert.equal(JSON.parse(payload.translations.faq)[0].a, 'First\nSecond');
 });
 
+test('TypeScript hexadecimal and code-point escapes are decoded in body output', () => {
+  const source = sourceFor(articleId, String.raw`C\x43 \u{1F30D} \u0041`);
+  const fields = extractArticleBodyFields(source);
+  assert.equal(fields.find(({ field }) => field === 'body1')?.value, 'CC 🌍 A');
+});
+
 test('single- and double-quoted literals accept escaped physical line continuations', () => {
   const slash = String.fromCharCode(92);
   const source = [
