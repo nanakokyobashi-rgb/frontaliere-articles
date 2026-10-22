@@ -11120,6 +11120,10 @@
     "svizzera::https://www.laregione.ch/economia/economia/1957280/il-riarmo-ci-distrae-dalla-vera-sfida-del-nostro-tempo": {
       "section": "svizzera",
       "ts": 1792644374894
+    },
+    "frontaliere::https://cassa-disoccupazione.unia.ch": {
+      "section": "frontaliere",
+      "ts": 1792646596276
     }
   }
 }
