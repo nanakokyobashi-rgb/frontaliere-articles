@@ -322,6 +322,11 @@ export const RC_TO_ENV = {
   JOB_EMAIL_RANKING_MIN_IMPRESSIONS: ['JOB_EMAIL_RANKING_MIN_IMPRESSIONS'],
   JOB_EMAIL_RANKING_NEW_JOB_BOOST:   ['JOB_EMAIL_RANKING_NEW_JOB_BOOST'],
   JOB_EMAIL_RANKING_MAX_CONSECUTIVE_EXPOSURES: ['JOB_EMAIL_RANKING_MAX_CONSECUTIVE_EXPOSURES'],
+  // Daily job-alert subject experiment. All controls are required by the
+  // sender, so a partial Remote Config edit cannot activate traffic.
+  JOB_ALERT_SUBJECT_AB_ENABLED:   ['JOB_ALERT_SUBJECT_AB_ENABLED'],
+  JOB_ALERT_SUBJECT_AB_ROLLOUT:   ['JOB_ALERT_SUBJECT_AB_ROLLOUT'],
+  JOB_ALERT_SUBJECT_AB_VARIANTS:  ['JOB_ALERT_SUBJECT_AB_VARIANTS'],
   // Per-user send-time personalization kill switch (issue #3798). Unset in RC
   // by default — send-schedule.mjs treats absent as 'on'. Set to 'off' in RC
   // to roll back to immediate sends without touching code or workflows (env
