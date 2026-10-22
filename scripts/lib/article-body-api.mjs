@@ -74,7 +74,8 @@ function decodeTsLiteral(raw, quote) {
     ...tsStringEscapesWithNewlineAs('\n'),
     ...(quote === '`' ? { '`': '`', '$': '$' } : {}),
   };
-  return unescapeTsString(raw, escapes, { decodeUnicode: true });
+  const decoded = unescapeTsString(raw, escapes, { decodeUnicode: true });
+  return quote === '`' ? decoded.replace(/\r\n/gu, '\n') : decoded;
 }
 
 function readQuotedToken(source, offset) {

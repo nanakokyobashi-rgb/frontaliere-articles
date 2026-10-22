@@ -160,6 +160,16 @@ test('TypeScript hexadecimal and code-point escapes are decoded in body output',
   assert.equal(fields.find(({ field }) => field === 'body1')?.value, 'CC 🌍 A');
 });
 
+test('template literals normalize raw CRLF line endings to LF', () => {
+  const source = [
+    'const body = {',
+    "  'blog.article.example-article.body1': `prima\r\nseconda`,",
+    '};',
+  ].join('\r\n');
+  const fields = extractArticleBodyFields(source);
+  assert.equal(fields.find(({ field }) => field === 'body1')?.value, 'prima\nseconda');
+});
+
 test('single- and double-quoted literals accept escaped physical line continuations', () => {
   const slash = String.fromCharCode(92);
   const source = [
