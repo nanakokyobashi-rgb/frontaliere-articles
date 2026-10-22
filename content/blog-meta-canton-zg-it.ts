@@ -45,6 +45,9 @@ const blogMetaCantonZgIt: Record<string, string> = {
     'blog.article.revisione-pbg-zugo-2026.title': 'Zugo: revisione della legge edilizia dal 17 settembre 2026',
     'blog.article.revisione-pbg-zugo-2026.excerpt': 'Il Canton Zugo avvia la consultazione sulla revisione del PBG: nuove regole per alloggi a prezzo contenuto, zone bianche e semplificazioni procedurali.',
     'blog.article.revisione-pbg-zugo-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.zugo-multa-mancata-dichiarazione-fiscale.title': 'Zugo: multa di CHF 900 per mancata dichiarazione fiscale',
+    'blog.article.zugo-multa-mancata-dichiarazione-fiscale.excerpt': 'Tribunale di Zugo: multa di CHF 900 Cancellata l\'imposta effettiva di CHF 41.15 Restano CHF 105 di spese per ritardo La dichiarazione 2023 non è stata',
+    'blog.article.zugo-multa-mancata-dichiarazione-fiscale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZgIt;

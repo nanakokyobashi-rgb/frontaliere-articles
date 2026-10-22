@@ -160,4 +160,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'zugo-multa-mancata-dichiarazione-fiscale',
+ category: 'fiscale',
+ date: '2026-10-22T11:31:01.636Z',
+ image: '/images/blog/article-zugo-multa-mancata-dichiarazione-fiscale.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZG'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

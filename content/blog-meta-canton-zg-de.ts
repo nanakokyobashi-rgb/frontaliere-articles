@@ -45,6 +45,9 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.revisione-pbg-zugo-2026.title': 'Zug: Revision des Baugesetzes ab dem 17. September 2026',
     'blog.article.revisione-pbg-zugo-2026.excerpt': 'Der Kanton Zug eröffnet die Vernehmlassung zur Revision des PBG: neue Regeln für preisgünstigen Wohnraum, weisse Zonen und Verfahrensvereinfachungen.',
     'blog.article.revisione-pbg-zugo-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.zugo-multa-mancata-dichiarazione-fiscale.title': 'Zug: Busse von CHF 900 wegen Nichtabgabe der Steuererklärung',
+    'blog.article.zugo-multa-mancata-dichiarazione-fiscale.excerpt': 'Gericht Zug: Busse von 900 CHF Effektive Steuer von 41,15 CHF gestrichen 105 CHF Verzugskosten bleiben bestehen Die Steuererklärung 2023 wurde nicht eingereicht',
+    'blog.article.zugo-multa-mancata-dichiarazione-fiscale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZgDe;

@@ -45,6 +45,9 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.revisione-pbg-zugo-2026.title': 'Zug: revision of the building law from September 17, 2026',
     'blog.article.revisione-pbg-zugo-2026.excerpt': 'The Canton of Zug launches consultation on the revision of the PBG: new rules for affordable housing, white zones and procedural simplifications.',
     'blog.article.revisione-pbg-zugo-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.zugo-multa-mancata-dichiarazione-fiscale.title': 'Zug: CHF 900 fine for failure to file a tax return',
+    'blog.article.zugo-multa-mancata-dichiarazione-fiscale.excerpt': 'Zug Court: CHF 900 fine Actual tax of CHF 41.15 cancelled CHF 105 in late fees remain The 2023 tax return was not filed Authority → Administrative Court of Zug',
+    'blog.article.zugo-multa-mancata-dichiarazione-fiscale.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZgEn;

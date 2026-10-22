@@ -45,6 +45,9 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.revisione-pbg-zugo-2026.title': 'Zoug : révision de la loi sur la construction à partir du 17 septembre 2026',
     'blog.article.revisione-pbg-zugo-2026.excerpt': 'Le canton de Zoug lance la consultation sur la révision du PBG : nouvelles règles pour les logements à prix modéré, les zones blanches et les simplifications procédurales.',
     'blog.article.revisione-pbg-zugo-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.zugo-multa-mancata-dichiarazione-fiscale.title': 'Zoug : amende de CHF 900 pour non-déclaration fiscale',
+    'blog.article.zugo-multa-mancata-dichiarazione-fiscale.excerpt': 'Tribunal de Zoug : amende de 900 CHF Impôt effectif de 41,15 CHF annulé Frais de retard de 105 CHF restant La déclaration 2023 n\'a pas été déposée Autorité →',
+    'blog.article.zugo-multa-mancata-dichiarazione-fiscale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZgFr;
