@@ -128,6 +128,23 @@ test('il resolver SEO tratta break, continue, debugger e default come prefissi r
   }
 });
 
+test('il resolver SEO non tratta le parole membro come prefissi regex', () => {
+  for (const keyword of ['break', 'continue', 'debugger', 'default']) {
+    for (const access of [`obj.${keyword}`, `obj?.${keyword}`]) {
+      const id = `member-${keyword}-${access.includes('?.') ? 'optional' : 'dot'}`;
+      const source = [
+        'export const SEO = {',
+        `  'blog-${id}': { value: ${access} / 2, after: 'resta' },`,
+        '};',
+      ].join('\n');
+      const [match] = findSeoEntryMatches(source, id, 'fixture.ts');
+      assert.ok(match, `${access}: entry non trovata`);
+      assert.equal(source[match.closeIdx], '}', access);
+      assert.match(source.slice(match.index, match.closeIdx + 1), /after: 'resta'/u, access);
+    }
+  }
+});
+
 test('la scansione fallisce esplicitamente su stringa, template e commento non chiusi', () => {
   const quoteSource = [
     'export const SEO = {',

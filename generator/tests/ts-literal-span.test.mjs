@@ -169,6 +169,19 @@ test('matchingDelimiter riconosce i quattro prefissi regex aggiunti al lexer', (
   }
 });
 
+test('matchingDelimiter non tratta le parole membro come prefissi regex', () => {
+  for (const keyword of ['break', 'continue', 'debugger', 'default']) {
+    for (const access of [`obj.${keyword}`, `obj?.${keyword}`]) {
+      const src = `{ value: ${access} / 2, after: 'resta' }`;
+      assert.equal(
+        matchingDelimiter(src, 0),
+        src.lastIndexOf('}'),
+        `${access}: la divisione dopo un accesso membro non deve aprire una regex`,
+      );
+    }
+  }
+});
+
 test('commenti e stringhe che imitano dichiarazioni non contano come duplicati', () => {
   const src = [
     '// export const IDS: string[] = [\'commento\'];',
