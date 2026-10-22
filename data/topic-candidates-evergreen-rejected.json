@@ -11073,70 +11073,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.tio.ch/sport/calcio/1957833/ronaldo-nazionale-sospensione-euro-multa": {
-      "section": "frontaliere",
-      "ts": 1792461600726
-    },
-    "frontaliere::https://www.tio.ch/svizzera/economia/1957558/oro-e-tornato-il-momento-di-acquistarlo": {
-      "section": "frontaliere",
-      "ts": 1792461608637
-    },
-    "frontaliere::https://www.rsi.ch/s/4176388": {
-      "section": "frontaliere",
-      "ts": 1792461616291
-    },
-    "frontaliere::https://www.rsi.ch/s/4176097": {
-      "section": "frontaliere",
-      "ts": 1792461630413
-    },
-    "frontaliere::https://www.rsi.ch/s/4171186": {
-      "section": "frontaliere",
-      "ts": 1792461634297
-    },
-    "frontaliere::https://www.rsi.ch/s/4171162": {
-      "section": "frontaliere",
-      "ts": 1792461885707
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1957803/salari-che-crescono-meno-della-media-svizzera-e-potere-d-acquisto-che-si-riduce": {
-      "section": "frontaliere",
-      "ts": 1792463017375
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1957822/vent-anni-di-scuola-inoltre-un-tassello-essenziale-di-risocializzazione": {
-      "section": "frontaliere",
-      "ts": 1792463069371
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/btp-valore-il-risparmio-torna-al-tesoro-i-titoli-di-stato-restano-un-porto-sicuro-per-i-risparmiatori/2713021": {
-      "section": "frontaliere",
-      "ts": 1792464011562
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/chiusa-per-una-notte-luscita-della-stazione-di-castelletto-ticino-sulla-diramazione-gallarate-gattico/2712598": {
-      "section": "frontaliere",
-      "ts": 1792464037489
-    },
-    "frontaliere::https://www.laregione.ch/cantone/bellinzonese/1957809/pompieri-all-ex-lati-si-tirato-ma-decidera-il-referendum": {
-      "section": "frontaliere",
-      "ts": 1792464068113
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/agricoltura-coldiretti-varese-otto-aziende-su-dieci-pronte-a-investire-nellinnovazione-tecnologica/2712787": {
-      "section": "frontaliere",
-      "ts": 1792464091379
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/19/leggi-notizia/argomenti/economia-13/articolo/coldiretti-varese-otto-aziende-agricole-su-dieci-pronte-a-investire-nellinnovazione.html": {
-      "section": "frontaliere",
-      "ts": 1792464118843
-    },
-    "frontaliere::https://comozero.it/attualita/leterno-cantiere-dei-nuovi-giardini-lago-di-como-nuova-proroga-sui-tempi-ecco-quando-apriranno": {
-      "section": "frontaliere",
-      "ts": 1792466723548
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1957763/mondo-economico-e-politica-capiscano-cosa-e-possibile-e-cosa-non-lo-e": {
-      "section": "frontaliere",
-      "ts": 1792468128351
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/19/leggi-notizia/argomenti/territorio/articolo/lavori-a-tutela-del-lago-di-varese-in-dirittura-darrivo-a-casciago.html": {
-      "section": "frontaliere",
-      "ts": 1792470043375
-    },
     "frontaliere::https://www.tio.ch/newsblog/verita-immobiliari/1957681/il-ticino-non-e-il-tuo-bancomat": {
       "section": "frontaliere",
       "ts": 1792478098551
@@ -11180,6 +11116,14 @@
     "frontaliere::https://www.laregione.ch/cantone/ticino/1958286/anche-in-ticino-sempre-piu-giovani-si-perdono-vogliamo-riportarli-sulla-strada-di-formazione-e-lavoro": {
       "section": "frontaliere",
       "ts": 1792633715295
+    },
+    "svizzera::https://www.laregione.ch/economia/economia/1957280/il-riarmo-ci-distrae-dalla-vera-sfida-del-nostro-tempo": {
+      "section": "svizzera",
+      "ts": 1792644374894
+    },
+    "frontaliere::https://cassa-disoccupazione.unia.ch": {
+      "section": "frontaliere",
+      "ts": 1792646596276
     }
   }
 }
