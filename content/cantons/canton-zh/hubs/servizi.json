@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-21T23:07:40.565Z",
-  "contentHash": "98d018b35402d54bfe74b00c904a6b89d2d9b24164499bbc72bb5761bb3ed3ab",
+  "updatedAt": "2026-10-22T09:28:01.507Z",
+  "contentHash": "de58b6888c53dc4c94e6a0e58ffeeb83c11e2c5a68f719eb401b9a4ef6531238",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-21T11:14:39.213Z",
+      "updatedAt": "2026-10-21T16:03:03.013Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-22T05:05:39.050Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T10:37:42.748Z",
+      "updatedAt": "2026-10-21T20:56:46.769Z",
       "keyFacts": 0
     }
   ],
@@ -101,13 +106,32 @@
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-21T11:14:39.213Z"
+          "updatedAt": "2026-10-21T16:03:03.013Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "6 °C",
+              "detail": "oggi da 6 a 13 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-22T05:05:39.050Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Unabhängige Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
+              "date": "2026-10-21T17:00:23.000Z",
+              "url": "https://www.usz.ch/unabhaengige-administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
+            },
             {
               "label": "Städtische Beiträge für Beratung des Vereins Sexuelle Gesundheit",
               "date": "2026-10-21T10:00:00.000Z",
@@ -132,14 +156,9 @@
               "label": "Auszeichnung an Dr. med. Christian Hübner – Basic Science Best Poster Award (OTA 2026)",
               "date": "2026-10-15T11:46:37.000Z",
               "url": "https://www.usz.ch/auszeichnung-an-dr-med-christian-huebner-basic-science-best-poster-award-ota-2026/"
-            },
-            {
-              "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
-              "date": "2026-10-14T13:11:34.000Z",
-              "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -219,7 +238,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-21T23:07:40.565Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "en": {
       "canton": "ZH",
@@ -298,13 +317,32 @@
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-21T11:14:39.213Z"
+          "updatedAt": "2026-10-21T16:03:03.013Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "6 °C",
+              "detail": "today from 6 to 13 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-22T05:05:39.050Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Unabhängige Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
+              "date": "2026-10-21T17:00:23.000Z",
+              "url": "https://www.usz.ch/unabhaengige-administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
+            },
             {
               "label": "Städtische Beiträge für Beratung des Vereins Sexuelle Gesundheit",
               "date": "2026-10-21T10:00:00.000Z",
@@ -329,14 +367,9 @@
               "label": "Auszeichnung an Dr. med. Christian Hübner – Basic Science Best Poster Award (OTA 2026)",
               "date": "2026-10-15T11:46:37.000Z",
               "url": "https://www.usz.ch/auszeichnung-an-dr-med-christian-huebner-basic-science-best-poster-award-ota-2026/"
-            },
-            {
-              "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
-              "date": "2026-10-14T13:11:34.000Z",
-              "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -412,7 +445,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-21T23:07:40.565Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "de": {
       "canton": "ZH",
@@ -491,13 +524,32 @@
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-21T11:14:39.213Z"
+          "updatedAt": "2026-10-21T16:03:03.013Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "6 °C",
+              "detail": "heute 6 bis 13 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-22T05:05:39.050Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Unabhängige Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
+              "date": "2026-10-21T17:00:23.000Z",
+              "url": "https://www.usz.ch/unabhaengige-administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
+            },
             {
               "label": "Städtische Beiträge für Beratung des Vereins Sexuelle Gesundheit",
               "date": "2026-10-21T10:00:00.000Z",
@@ -522,14 +574,9 @@
               "label": "Auszeichnung an Dr. med. Christian Hübner – Basic Science Best Poster Award (OTA 2026)",
               "date": "2026-10-15T11:46:37.000Z",
               "url": "https://www.usz.ch/auszeichnung-an-dr-med-christian-huebner-basic-science-best-poster-award-ota-2026/"
-            },
-            {
-              "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
-              "date": "2026-10-14T13:11:34.000Z",
-              "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -605,7 +652,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-21T23:07:40.565Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "fr": {
       "canton": "ZH",
@@ -684,13 +731,32 @@
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-21T11:14:39.213Z"
+          "updatedAt": "2026-10-21T16:03:03.013Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 6 à 13 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-22T05:05:39.050Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Unabhängige Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
+              "date": "2026-10-21T17:00:23.000Z",
+              "url": "https://www.usz.ch/unabhaengige-administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
+            },
             {
               "label": "Städtische Beiträge für Beratung des Vereins Sexuelle Gesundheit",
               "date": "2026-10-21T10:00:00.000Z",
@@ -715,14 +781,9 @@
               "label": "Auszeichnung an Dr. med. Christian Hübner – Basic Science Best Poster Award (OTA 2026)",
               "date": "2026-10-15T11:46:37.000Z",
               "url": "https://www.usz.ch/auszeichnung-an-dr-med-christian-huebner-basic-science-best-poster-award-ota-2026/"
-            },
-            {
-              "label": "Höchste Ehrung aus den USA: Matthias Guckenberger wird ACR Honorary Fellow",
-              "date": "2026-10-14T13:11:34.000Z",
-              "url": "https://www.usz.ch/matthias-guckenberger-wird-acr-honorary-fellow/"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -794,7 +855,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-21T23:07:40.565Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     }
   }
 }

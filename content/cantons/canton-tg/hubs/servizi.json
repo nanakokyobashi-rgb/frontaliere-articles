@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "servizi",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "e31aee7a9f8ddf0f77ca18054a4b55d8c56c2ed4165851b0a94b6ec7e00070c5",
+  "updatedAt": "2026-10-22T09:28:01.507Z",
+  "contentHash": "b5424f598e0f04a08f9737d12595d12408dd2e52fbc734c4f8addfe2e518be9c",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-21T11:47:42.573Z",
+      "updatedAt": "2026-10-22T04:42:53.367Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-22T05:05:39.050Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T10:37:42.748Z",
+      "updatedAt": "2026-10-21T20:56:46.769Z",
       "keyFacts": 0
     }
   ],
@@ -86,14 +91,33 @@
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-21T11:47:42.573Z"
+          "sourceUrl": "https://auktion.tg.ch/de/",
+          "updatedAt": "2026-10-22T04:42:53.367Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "6 °C",
+              "detail": "oggi da 4 a 12 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-22T05:05:39.050Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "𝗭𝘂𝗿ü𝗰𝗸 𝘇𝘂𝗿 𝗡𝗼𝗿𝗺: 𝗕𝘂𝗻𝗱𝗲𝘀𝗿𝗮𝘁 𝗳ä𝗵𝗿𝘁 𝗞𝘂𝗿𝘇𝗮𝗿𝗯𝗲𝗶𝘁 𝗮𝗯 𝟮𝟬𝟮𝟳 𝘀𝗰𝗵𝗿𝗶𝘁𝘁𝘄𝗲𝗶𝘀𝗲 𝘇𝘂𝗿ü𝗰𝗸",
+              "date": "2026-10-21",
+              "url": "https://awa.tg.ch/im-fokus.html/3696/news/80463"
+            },
             {
               "label": "SchmerzDialogThurgau 2026: Neue Wege in der modernen Schmerzmedizin",
               "date": "2026-10-14",
@@ -118,14 +142,9 @@
               "label": "Thurgauer Arbeitsmarkt zeigt sich stabil – Konjunkturaussichten hellen sich auf",
               "date": "2026-09-07",
               "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
-            },
-            {
-              "label": "thurmed sichert sich Option auf Mehrheitsbeteiligung am GZO Spital Wetzikon",
-              "date": "2026-09-02",
-              "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -205,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "en": {
       "canton": "TG",
@@ -269,14 +288,33 @@
             }
           ],
           "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-21T11:47:42.573Z"
+          "sourceUrl": "https://auktion.tg.ch/de/",
+          "updatedAt": "2026-10-22T04:42:53.367Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "6 °C",
+              "detail": "today from 4 to 12 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-22T05:05:39.050Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "𝗭𝘂𝗿ü𝗰𝗸 𝘇𝘂𝗿 𝗡𝗼𝗿𝗺: 𝗕𝘂𝗻𝗱𝗲𝘀𝗿𝗮𝘁 𝗳ä𝗵𝗿𝘁 𝗞𝘂𝗿𝘇𝗮𝗿𝗯𝗲𝗶𝘁 𝗮𝗯 𝟮𝟬𝟮𝟳 𝘀𝗰𝗵𝗿𝗶𝘁𝘁𝘄𝗲𝗶𝘀𝗲 𝘇𝘂𝗿ü𝗰𝗸",
+              "date": "2026-10-21",
+              "url": "https://awa.tg.ch/im-fokus.html/3696/news/80463"
+            },
             {
               "label": "SchmerzDialogThurgau 2026: Neue Wege in der modernen Schmerzmedizin",
               "date": "2026-10-14",
@@ -301,14 +339,9 @@
               "label": "Thurgauer Arbeitsmarkt zeigt sich stabil – Konjunkturaussichten hellen sich auf",
               "date": "2026-09-07",
               "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
-            },
-            {
-              "label": "thurmed sichert sich Option auf Mehrheitsbeteiligung am GZO Spital Wetzikon",
-              "date": "2026-09-02",
-              "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -384,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "de": {
       "canton": "TG",
@@ -448,14 +481,33 @@
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-21T11:47:42.573Z"
+          "sourceUrl": "https://auktion.tg.ch/de/",
+          "updatedAt": "2026-10-22T04:42:53.367Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "6 °C",
+              "detail": "heute 4 bis 12 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-22T05:05:39.050Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "𝗭𝘂𝗿ü𝗰𝗸 𝘇𝘂𝗿 𝗡𝗼𝗿𝗺: 𝗕𝘂𝗻𝗱𝗲𝘀𝗿𝗮𝘁 𝗳ä𝗵𝗿𝘁 𝗞𝘂𝗿𝘇𝗮𝗿𝗯𝗲𝗶𝘁 𝗮𝗯 𝟮𝟬𝟮𝟳 𝘀𝗰𝗵𝗿𝗶𝘁𝘁𝘄𝗲𝗶𝘀𝗲 𝘇𝘂𝗿ü𝗰𝗸",
+              "date": "2026-10-21",
+              "url": "https://awa.tg.ch/im-fokus.html/3696/news/80463"
+            },
             {
               "label": "SchmerzDialogThurgau 2026: Neue Wege in der modernen Schmerzmedizin",
               "date": "2026-10-14",
@@ -480,14 +532,9 @@
               "label": "Thurgauer Arbeitsmarkt zeigt sich stabil – Konjunkturaussichten hellen sich auf",
               "date": "2026-09-07",
               "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
-            },
-            {
-              "label": "thurmed sichert sich Option auf Mehrheitsbeteiligung am GZO Spital Wetzikon",
-              "date": "2026-09-02",
-              "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -563,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "fr": {
       "canton": "TG",
@@ -627,14 +674,33 @@
             }
           ],
           "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://www.auktion.tg.ch/de/",
-          "updatedAt": "2026-10-21T11:47:42.573Z"
+          "sourceUrl": "https://auktion.tg.ch/de/",
+          "updatedAt": "2026-10-22T04:42:53.367Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Frauenfeld",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 4 à 12 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-22T05:05:39.050Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "𝗭𝘂𝗿ü𝗰𝗸 𝘇𝘂𝗿 𝗡𝗼𝗿𝗺: 𝗕𝘂𝗻𝗱𝗲𝘀𝗿𝗮𝘁 𝗳ä𝗵𝗿𝘁 𝗞𝘂𝗿𝘇𝗮𝗿𝗯𝗲𝗶𝘁 𝗮𝗯 𝟮𝟬𝟮𝟳 𝘀𝗰𝗵𝗿𝗶𝘁𝘁𝘄𝗲𝗶𝘀𝗲 𝘇𝘂𝗿ü𝗰𝗸",
+              "date": "2026-10-21",
+              "url": "https://awa.tg.ch/im-fokus.html/3696/news/80463"
+            },
             {
               "label": "SchmerzDialogThurgau 2026: Neue Wege in der modernen Schmerzmedizin",
               "date": "2026-10-14",
@@ -659,14 +725,9 @@
               "label": "Thurgauer Arbeitsmarkt zeigt sich stabil – Konjunkturaussichten hellen sich auf",
               "date": "2026-09-07",
               "url": "https://awa.tg.ch/im-fokus.html/3696/news/79974"
-            },
-            {
-              "label": "thurmed sichert sich Option auf Mehrheitsbeteiligung am GZO Spital Wetzikon",
-              "date": "2026-09-02",
-              "url": "https://www.stgag.ch/news/detail/2026/09/02/newstext/"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -738,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "9047de3d671c20fc4c43024d3c0bbccad4fccf89d3015f139ab6708cd92c158d",
+  "updatedAt": "2026-10-22T09:28:01.507Z",
+  "contentHash": "3f5a8d226ae689b54891fc53cd0ca98084b7a16650e8733158f7cfd6782366c7",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-21T11:47:42.573Z",
+      "updatedAt": "2026-10-22T04:42:53.367Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-22T05:05:39.050Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T10:37:42.748Z",
+      "updatedAt": "2026-10-21T20:56:46.769Z",
       "keyFacts": 0
     }
   ],
@@ -92,7 +97,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-21T11:47:42.573Z"
+          "updatedAt": "2026-10-22T04:42:53.367Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "6 °C",
+              "detail": "oggi da 4 a 12 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-22T05:05:39.050Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -103,6 +122,11 @@
               "label": "Demandes de permis de construire et de démolir",
               "date": "2026-10-21T07:24:32.000Z",
               "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-271"
+            },
+            {
+              "label": "20’000 BD « Boule à Zéro » offertes aux enfants hospitalisés en dix ans !",
+              "date": "2026-10-21",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/20000-bd-boule-zero-offertes-aux-enfants-hospitalises-en-dix-ans"
             },
             {
               "label": "Demandes de permis de construire et de démolir",
@@ -123,14 +147,9 @@
               "label": "Fin juin 2026, 2140 frontaliers étrangers travaillent dans le canton de Fribourg",
               "date": "2026-10-09T07:04:27.000Z",
               "url": "https://www.fr.ch/deef/ssd/actualites/fin-juin-2026-2140-frontaliers-etrangers-travaillent-dans-le-canton-de-fribourg"
-            },
-            {
-              "label": "Ende Juni 2026 arbeiteten 2140 ausländische Grenzgängerinnen und Grenzgänger im Kanton Freiburg",
-              "date": "2026-10-09T07:04:27.000Z",
-              "url": "https://www.fr.ch/de/vwbd/sda/news/ende-juni-2026-arbeiteten-2140-auslaendische-grenzgaengerinnen-und-grenzgaenger-im-kanton-freiburg"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -210,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "en": {
       "canton": "FR",
@@ -280,7 +299,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-21T11:47:42.573Z"
+          "updatedAt": "2026-10-22T04:42:53.367Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "6 °C",
+              "detail": "today from 4 to 12 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-22T05:05:39.050Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -291,6 +324,11 @@
               "label": "Demandes de permis de construire et de démolir",
               "date": "2026-10-21T07:24:32.000Z",
               "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-271"
+            },
+            {
+              "label": "20’000 BD « Boule à Zéro » offertes aux enfants hospitalisés en dix ans !",
+              "date": "2026-10-21",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/20000-bd-boule-zero-offertes-aux-enfants-hospitalises-en-dix-ans"
             },
             {
               "label": "Demandes de permis de construire et de démolir",
@@ -311,14 +349,9 @@
               "label": "Fin juin 2026, 2140 frontaliers étrangers travaillent dans le canton de Fribourg",
               "date": "2026-10-09T07:04:27.000Z",
               "url": "https://www.fr.ch/deef/ssd/actualites/fin-juin-2026-2140-frontaliers-etrangers-travaillent-dans-le-canton-de-fribourg"
-            },
-            {
-              "label": "Ende Juni 2026 arbeiteten 2140 ausländische Grenzgängerinnen und Grenzgänger im Kanton Freiburg",
-              "date": "2026-10-09T07:04:27.000Z",
-              "url": "https://www.fr.ch/de/vwbd/sda/news/ende-juni-2026-arbeiteten-2140-auslaendische-grenzgaengerinnen-und-grenzgaenger-im-kanton-freiburg"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -394,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "de": {
       "canton": "FR",
@@ -464,7 +497,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-21T11:47:42.573Z"
+          "updatedAt": "2026-10-22T04:42:53.367Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "6 °C",
+              "detail": "heute 4 bis 12 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-22T05:05:39.050Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -475,6 +522,11 @@
               "label": "Demandes de permis de construire et de démolir",
               "date": "2026-10-21T07:24:32.000Z",
               "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-271"
+            },
+            {
+              "label": "20’000 BD « Boule à Zéro » offertes aux enfants hospitalisés en dix ans !",
+              "date": "2026-10-21",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/20000-bd-boule-zero-offertes-aux-enfants-hospitalises-en-dix-ans"
             },
             {
               "label": "Demandes de permis de construire et de démolir",
@@ -495,14 +547,9 @@
               "label": "Fin juin 2026, 2140 frontaliers étrangers travaillent dans le canton de Fribourg",
               "date": "2026-10-09T07:04:27.000Z",
               "url": "https://www.fr.ch/deef/ssd/actualites/fin-juin-2026-2140-frontaliers-etrangers-travaillent-dans-le-canton-de-fribourg"
-            },
-            {
-              "label": "Ende Juni 2026 arbeiteten 2140 ausländische Grenzgängerinnen und Grenzgänger im Kanton Freiburg",
-              "date": "2026-10-09T07:04:27.000Z",
-              "url": "https://www.fr.ch/de/vwbd/sda/news/ende-juni-2026-arbeiteten-2140-auslaendische-grenzgaengerinnen-und-grenzgaenger-im-kanton-freiburg"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -578,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "fr": {
       "canton": "FR",
@@ -648,7 +695,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-21T11:47:42.573Z"
+          "updatedAt": "2026-10-22T04:42:53.367Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Fribourg",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 4 à 12 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-22T05:05:39.050Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -659,6 +720,11 @@
               "label": "Demandes de permis de construire et de démolir",
               "date": "2026-10-21T07:24:32.000Z",
               "url": "https://www.ville-fribourg.ch/actualites/demandes-de-permis-de-construire-et-de-demolir-271"
+            },
+            {
+              "label": "20’000 BD « Boule à Zéro » offertes aux enfants hospitalisés en dix ans !",
+              "date": "2026-10-21",
+              "url": "https://www.h-fr.ch/newsroom/communiques-de-presse/20000-bd-boule-zero-offertes-aux-enfants-hospitalises-en-dix-ans"
             },
             {
               "label": "Demandes de permis de construire et de démolir",
@@ -679,14 +745,9 @@
               "label": "Fin juin 2026, 2140 frontaliers étrangers travaillent dans le canton de Fribourg",
               "date": "2026-10-09T07:04:27.000Z",
               "url": "https://www.fr.ch/deef/ssd/actualites/fin-juin-2026-2140-frontaliers-etrangers-travaillent-dans-le-canton-de-fribourg"
-            },
-            {
-              "label": "Ende Juni 2026 arbeiteten 2140 ausländische Grenzgängerinnen und Grenzgänger im Kanton Freiburg",
-              "date": "2026-10-09T07:04:27.000Z",
-              "url": "https://www.fr.ch/de/vwbd/sda/news/ende-juni-2026-arbeiteten-2140-auslaendische-grenzgaengerinnen-und-grenzgaenger-im-kanton-freiburg"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -758,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     }
   }
 }

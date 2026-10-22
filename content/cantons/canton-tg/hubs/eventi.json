@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T00:12:28.308Z",
-  "contentHash": "481df9015a1780eac4622b156575204140e62b9c965849ef8ecd6328e0bd0a9a",
+  "updatedAt": "2026-10-22T09:28:01.507Z",
+  "contentHash": "8fbdf51729b8cc2010adb9a3373da6d0f97781d2641674eafefd6d24eff6470a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-21T12:38:14.154Z",
+      "updatedAt": "2026-10-22T04:14:38.839Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T10:37:42.748Z",
+      "updatedAt": "2026-10-21T20:56:46.769Z",
       "keyFacts": 0
     }
   ],
@@ -100,13 +100,18 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T04:14:38.839Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "«Der Jahrmarkt liegt den Kreuzlingern am Herzen»",
+              "date": "2026-10-21T16:02:38.000Z",
+              "url": "https://www.kreuzlingen.ch/aktuelles/der-jahrmarkt-liegt-den-kreuzlingern-am-herzen"
+            },
             {
               "label": "Geschichten dieser Welt. Unterhaltsamer Icon-Poet mit Ausstellungsobjekten",
               "date": "2026-10-14",
@@ -118,7 +123,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -146,7 +151,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "en": {
       "canton": "TG",
@@ -229,13 +234,18 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T04:14:38.839Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "«Der Jahrmarkt liegt den Kreuzlingern am Herzen»",
+              "date": "2026-10-21T16:02:38.000Z",
+              "url": "https://www.kreuzlingen.ch/aktuelles/der-jahrmarkt-liegt-den-kreuzlingern-am-herzen"
+            },
             {
               "label": "Geschichten dieser Welt. Unterhaltsamer Icon-Poet mit Ausstellungsobjekten",
               "date": "2026-10-14",
@@ -247,7 +257,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -275,7 +285,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "de": {
       "canton": "TG",
@@ -358,13 +368,18 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T04:14:38.839Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "«Der Jahrmarkt liegt den Kreuzlingern am Herzen»",
+              "date": "2026-10-21T16:02:38.000Z",
+              "url": "https://www.kreuzlingen.ch/aktuelles/der-jahrmarkt-liegt-den-kreuzlingern-am-herzen"
+            },
             {
               "label": "Geschichten dieser Welt. Unterhaltsamer Icon-Poet mit Ausstellungsobjekten",
               "date": "2026-10-14",
@@ -376,7 +391,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -404,7 +419,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "fr": {
       "canton": "TG",
@@ -487,13 +502,18 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T04:14:38.839Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "«Der Jahrmarkt liegt den Kreuzlingern am Herzen»",
+              "date": "2026-10-21T16:02:38.000Z",
+              "url": "https://www.kreuzlingen.ch/aktuelles/der-jahrmarkt-liegt-den-kreuzlingern-am-herzen"
+            },
             {
               "label": "Geschichten dieser Welt. Unterhaltsamer Icon-Poet mit Ausstellungsobjekten",
               "date": "2026-10-14",
@@ -505,7 +525,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -533,7 +553,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     }
   }
 }

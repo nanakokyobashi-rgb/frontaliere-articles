@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "pensioni",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "69756d70b8aae5581fd675a9f9c0ddd8a2c68b8e2a9ec1475edb48f0375f3877",
+  "updatedAt": "2026-10-22T09:28:01.507Z",
+  "contentHash": "d69313b1153955525912f1ea16f797f01150d9b052ec35d429c9c36a1a5605c4",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-21T20:56:46.769Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Wartungsarbeiten auf der Webseite aufgrund Sicherheitsupdates",
+              "date": "2026-10-21",
+              "url": "https://www.svasg.ch/news/meldungen/wartungsarbeiten.php"
+            },
+            {
               "label": "Voller Lastenausgleich der Familienausgleichskassen",
               "date": "2026-09-18",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/09/voller-lastenausgleich-der-familienausgleichskassen.html"
@@ -156,7 +161,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -204,7 +209,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "en": {
       "canton": "SG",
@@ -313,6 +318,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Wartungsarbeiten auf der Webseite aufgrund Sicherheitsupdates",
+              "date": "2026-10-21",
+              "url": "https://www.svasg.ch/news/meldungen/wartungsarbeiten.php"
+            },
+            {
               "label": "Voller Lastenausgleich der Familienausgleichskassen",
               "date": "2026-09-18",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/09/voller-lastenausgleich-der-familienausgleichskassen.html"
@@ -333,7 +343,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +391,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "de": {
       "canton": "SG",
@@ -490,6 +500,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Wartungsarbeiten auf der Webseite aufgrund Sicherheitsupdates",
+              "date": "2026-10-21",
+              "url": "https://www.svasg.ch/news/meldungen/wartungsarbeiten.php"
+            },
+            {
               "label": "Voller Lastenausgleich der Familienausgleichskassen",
               "date": "2026-09-18",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/09/voller-lastenausgleich-der-familienausgleichskassen.html"
@@ -510,7 +525,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -558,7 +573,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "fr": {
       "canton": "SG",
@@ -667,6 +682,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Wartungsarbeiten auf der Webseite aufgrund Sicherheitsupdates",
+              "date": "2026-10-21",
+              "url": "https://www.svasg.ch/news/meldungen/wartungsarbeiten.php"
+            },
+            {
               "label": "Voller Lastenausgleich der Familienausgleichskassen",
               "date": "2026-09-18",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/09/voller-lastenausgleich-der-familienausgleichskassen.html"
@@ -687,7 +707,7 @@
               "url": "https://www.svasg.ch/news/meldungen/20260817_anmeldung-famz-ahveasy.php"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -735,7 +755,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     }
   }
 }

@@ -4,22 +4,22 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "b886873dab8a56965c6195427199f3c0dc9d97b43884ac2e74339d996336381c",
+  "updatedAt": "2026-10-22T09:28:01.507Z",
+  "contentHash": "093528d9614916be6fabb3fe21c73ba1306ac672fba2714a21ceaa5461b2e8eb",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-20T23:59:59.000Z",
+      "updatedAt": "2026-10-21T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-21T12:30:01.132Z",
+      "updatedAt": "2026-10-21T22:01:50.900Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T10:37:42.748Z",
+      "updatedAt": "2026-10-21T20:56:46.769Z",
       "keyFacts": 0
     }
   ],
@@ -33,7 +33,7 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 20 ottobre 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, settimana conclusa: 21 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
@@ -45,7 +45,7 @@
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 14 ottobre 2026 – 20 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 15 ottobre 2026 – 21 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -74,7 +74,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-20T23:59:59.000Z"
+          "updatedAt": "2026-10-21T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -107,7 +107,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-21T12:30:01.132Z"
+          "updatedAt": "2026-10-21T22:01:50.900Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -115,14 +115,14 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
+              "date": "2026-10-21T16:00:00.000Z",
+              "url": "https://www.kreuzlingen.ch/aktuelles/jahrmarkt-zentrum-fuer-durchgangsverkehr-gesperrt"
+            },
+            {
               "label": "Kantonsstrasse in Felben-Wellhausen wird saniert",
               "date": "2026-10-16",
               "url": "https://www.tg.ch/news.html/485/news/80433"
-            },
-            {
-              "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
-              "date": "2026-10-14T07:02:32.000Z",
-              "url": "https://www.kreuzlingen.ch/aktuelles/jahrmarkt-zentrum-fuer-durchgangsverkehr-gesperrt"
             },
             {
               "label": "Neue Werkleitungen für die Nationalstrasse",
@@ -145,7 +145,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80332"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -205,7 +205,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "en": {
       "canton": "TG",
@@ -216,7 +216,7 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, week ending 20 October 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, week ending 21 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
@@ -228,7 +228,7 @@
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 14 October 2026 to 20 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 15 October 2026 to 21 October 2026, fastest first.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -257,7 +257,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-20T23:59:59.000Z"
+          "updatedAt": "2026-10-21T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -290,7 +290,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-21T12:30:01.132Z"
+          "updatedAt": "2026-10-21T22:01:50.900Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -298,14 +298,14 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
+              "date": "2026-10-21T16:00:00.000Z",
+              "url": "https://www.kreuzlingen.ch/aktuelles/jahrmarkt-zentrum-fuer-durchgangsverkehr-gesperrt"
+            },
+            {
               "label": "Kantonsstrasse in Felben-Wellhausen wird saniert",
               "date": "2026-10-16",
               "url": "https://www.tg.ch/news.html/485/news/80433"
-            },
-            {
-              "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
-              "date": "2026-10-14T07:02:32.000Z",
-              "url": "https://www.kreuzlingen.ch/aktuelles/jahrmarkt-zentrum-fuer-durchgangsverkehr-gesperrt"
             },
             {
               "label": "Neue Werkleitungen für die Nationalstrasse",
@@ -328,7 +328,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80332"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -388,7 +388,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "de": {
       "canton": "TG",
@@ -399,7 +399,7 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 20. Oktober 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, Woche bis 21. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
@@ -411,7 +411,7 @@
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 14. Oktober 2026 bis 20. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 15. Oktober 2026 bis 21. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -440,7 +440,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-20T23:59:59.000Z"
+          "updatedAt": "2026-10-21T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -473,7 +473,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-21T12:30:01.132Z"
+          "updatedAt": "2026-10-21T22:01:50.900Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -481,14 +481,14 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
+              "date": "2026-10-21T16:00:00.000Z",
+              "url": "https://www.kreuzlingen.ch/aktuelles/jahrmarkt-zentrum-fuer-durchgangsverkehr-gesperrt"
+            },
+            {
               "label": "Kantonsstrasse in Felben-Wellhausen wird saniert",
               "date": "2026-10-16",
               "url": "https://www.tg.ch/news.html/485/news/80433"
-            },
-            {
-              "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
-              "date": "2026-10-14T07:02:32.000Z",
-              "url": "https://www.kreuzlingen.ch/aktuelles/jahrmarkt-zentrum-fuer-durchgangsverkehr-gesperrt"
             },
             {
               "label": "Neue Werkleitungen für die Nationalstrasse",
@@ -511,7 +511,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80332"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -571,7 +571,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "fr": {
       "canton": "TG",
@@ -582,7 +582,7 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 20 octobre 2026"
+          "note": "Diessenhofen – Gailingen am Hochrhein, semaine jusqu’au 21 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
@@ -594,7 +594,7 @@
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 14 octobre 2026 au 20 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 15 octobre 2026 au 21 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Diessenhofen – Gailingen am Hochrhein",
@@ -623,7 +623,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-20T23:59:59.000Z"
+          "updatedAt": "2026-10-21T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -656,7 +656,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-21T12:30:01.132Z"
+          "updatedAt": "2026-10-21T22:01:50.900Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -664,14 +664,14 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
+              "date": "2026-10-21T16:00:00.000Z",
+              "url": "https://www.kreuzlingen.ch/aktuelles/jahrmarkt-zentrum-fuer-durchgangsverkehr-gesperrt"
+            },
+            {
               "label": "Kantonsstrasse in Felben-Wellhausen wird saniert",
               "date": "2026-10-16",
               "url": "https://www.tg.ch/news.html/485/news/80433"
-            },
-            {
-              "label": "Jahrmarkt: Zentrum für Durchgangsverkehr gesperrt",
-              "date": "2026-10-14T07:02:32.000Z",
-              "url": "https://www.kreuzlingen.ch/aktuelles/jahrmarkt-zentrum-fuer-durchgangsverkehr-gesperrt"
             },
             {
               "label": "Neue Werkleitungen für die Nationalstrasse",
@@ -694,7 +694,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80332"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -754,7 +754,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     }
   }
 }

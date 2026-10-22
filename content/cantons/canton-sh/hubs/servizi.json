@@ -4,13 +4,23 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "servizi",
-  "updatedAt": "2026-10-21T20:29:53.737Z",
-  "contentHash": "0243360222712f2dbcb18ca118c8744a1f70cb50bfe42e596bd9652f3f443eef",
+  "updatedAt": "2026-10-22T09:28:01.507Z",
+  "contentHash": "2785feb11ebf0044b15d8bfc7f00cf8e30c03d77a6d90008864955134880477d",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-18T08:53:01.888Z",
       "keyFacts": 1
+    },
+    {
+      "id": "aste-targhe",
+      "updatedAt": "2026-10-22T04:42:53.367Z",
+      "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-22T05:05:39.050Z",
+      "keyFacts": 0
     }
   ],
   "locales": {
@@ -25,6 +35,11 @@
           "value": "597,40 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
+        },
+        {
+          "label": "Aste di targhe in corso",
+          "value": "34",
+          "note": "offerta mediana 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -47,6 +62,51 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Aste delle targhe",
+          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
+          "items": [
+            {
+              "label": "SH3139",
+              "value": "1000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-28T21:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69666"
+            },
+            {
+              "label": "SH4189",
+              "value": "1000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-28T21:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69664"
+            },
+            {
+              "label": "SH4761",
+              "value": "1000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-28T21:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69665"
+            }
+          ],
+          "sourceName": "Ufficio cantonale della circolazione",
+          "sourceUrl": "https://www.auktion-stva.sh.ch/de/",
+          "updatedAt": "2026-10-22T04:42:53.367Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "5 °C",
+              "detail": "oggi da 5 a 12 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-22T05:05:39.050Z"
         }
       ],
       "curatedArticles": [
@@ -114,7 +174,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-21T20:29:53.737Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "en": {
       "canton": "SH",
@@ -127,6 +187,11 @@
           "value": "597.40 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
+        },
+        {
+          "label": "Plate auctions running",
+          "value": "34",
+          "note": "typical bid 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -149,6 +214,51 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Number plate auctions",
+          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
+          "items": [
+            {
+              "label": "SH3139",
+              "value": "1,000 CHF",
+              "detail": "current bid",
+              "date": "2026-10-28T21:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69666"
+            },
+            {
+              "label": "SH4189",
+              "value": "1,000 CHF",
+              "detail": "current bid",
+              "date": "2026-10-28T21:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69664"
+            },
+            {
+              "label": "SH4761",
+              "value": "1,000 CHF",
+              "detail": "current bid",
+              "date": "2026-10-28T21:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69665"
+            }
+          ],
+          "sourceName": "Cantonal road traffic office",
+          "sourceUrl": "https://www.auktion-stva.sh.ch/de/",
+          "updatedAt": "2026-10-22T04:42:53.367Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "5 °C",
+              "detail": "today from 5 to 12 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-22T05:05:39.050Z"
         }
       ],
       "curatedArticles": [
@@ -212,7 +322,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-21T20:29:53.737Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "de": {
       "canton": "SH",
@@ -225,6 +335,11 @@
           "value": "597.40 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
+        },
+        {
+          "label": "Laufende Kontrollschild-Auktionen",
+          "value": "34",
+          "note": "mittleres Gebot 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -247,6 +362,51 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Kontrollschild-Auktionen",
+          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
+          "items": [
+            {
+              "label": "SH3139",
+              "value": "1’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-28T21:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69666"
+            },
+            {
+              "label": "SH4189",
+              "value": "1’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-28T21:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69664"
+            },
+            {
+              "label": "SH4761",
+              "value": "1’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-28T21:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69665"
+            }
+          ],
+          "sourceName": "Kantonales Strassenverkehrsamt",
+          "sourceUrl": "https://www.auktion-stva.sh.ch/de/",
+          "updatedAt": "2026-10-22T04:42:53.367Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "5 °C",
+              "detail": "heute 5 bis 12 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-22T05:05:39.050Z"
         }
       ],
       "curatedArticles": [
@@ -310,7 +470,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-21T20:29:53.737Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     },
     "fr": {
       "canton": "SH",
@@ -323,6 +483,11 @@
           "value": "597,40 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
+        },
+        {
+          "label": "Enchères de plaques en cours",
+          "value": "34",
+          "note": "offre centrale 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -345,6 +510,51 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
+        },
+        {
+          "id": "aste-targhe",
+          "title": "Enchères de plaques",
+          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
+          "items": [
+            {
+              "label": "SH3139",
+              "value": "1 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-28T21:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69666"
+            },
+            {
+              "label": "SH4189",
+              "value": "1 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-28T21:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69664"
+            },
+            {
+              "label": "SH4761",
+              "value": "1 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-28T21:00:00.000Z",
+              "url": "https://www.auktion-stva.sh.ch/de/auction/69665"
+            }
+          ],
+          "sourceName": "Office cantonal de la circulation",
+          "sourceUrl": "https://www.auktion-stva.sh.ch/de/",
+          "updatedAt": "2026-10-22T04:42:53.367Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "5 °C",
+              "detail": "aujourd’hui de 5 à 12 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-22T05:05:39.050Z"
         }
       ],
       "curatedArticles": [
@@ -404,7 +614,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-21T20:29:53.737Z"
+      "updatedAt": "2026-10-22T09:28:01.507Z"
     }
   }
 }
