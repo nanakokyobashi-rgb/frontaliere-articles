@@ -4,17 +4,17 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-gr::https://www.suedostschweiz.ch/graubuenden/gesetz-gegen-haeusliche-gewalt-warum-die-rechte-nicht-dahintersteht-2195285#ft-item=b96fba7211e5": {
-      "section": "canton-gr",
-      "ts": 1792476441643
-    },
-    "canton-gr::https://ilmoesano.ch/notizie/politica/avs-e-pilastro-3a-le-novita-per-il-2026-e-il-2027": {
-      "section": "canton-gr",
-      "ts": 1792492122987
-    },
     "canton-gr::https://primalavaltellina.it/attualita/frontalieri-cambiano-i-bisogni-oltre-il-salario-tempo-e-benessere": {
       "section": "canton-gr",
       "ts": 1792546196438
+    },
+    "canton-gr::https://www.ilgiorno.it/sondrio/cronaca/frontalieri-scontenti-nelle-buste-paga-a94e21cf": {
+      "section": "canton-gr",
+      "ts": 1792678546810
+    },
+    "canton-gr::https://www.suedostschweiz.ch/graubuenden/nachbarn-unterliegen-buendner-obergericht-gibt-gruenes-licht-fuer-laaxer-erstwohnungsbau-2204247#ft-item=3feddaa5bce8": {
+      "section": "canton-gr",
+      "ts": 1792678805819
     }
   }
 }
