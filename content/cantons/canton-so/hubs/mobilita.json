@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-22T13:56:44.136Z",
-  "contentHash": "f9beb360701cb03d27db3743dd3f57c487e188f7cdcea4c06e9049a3282fc991",
+  "updatedAt": "2026-10-22T22:21:57.960Z",
+  "contentHash": "642ba48be92da153b7cc21fc60f696f5e5160ce92988b18c6ee065c6dea975a0",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T20:56:46.769Z",
+      "updatedAt": "2026-10-22T10:40:36.644Z",
       "keyFacts": 0
     }
   ],
@@ -97,6 +97,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Mehr Wildunfälle auf Strassen aufgrund der Zeitumstellung",
+              "date": "2026-10-22",
+              "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/mehr-wildunfaelle-auf-strassen-aufgrund-der-zeitumstellung-3/"
+            },
+            {
               "label": "Bielstrasse Solothurn: Platz wird saniert und Baumbestand erneuert",
               "date": "2026-10-01",
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/bielstrasse-solothurn-platz-wird-saniert-und-baumbestand-erneuert/"
@@ -107,7 +112,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -147,7 +152,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "en": {
       "canton": "SO",
@@ -227,6 +232,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Mehr Wildunfälle auf Strassen aufgrund der Zeitumstellung",
+              "date": "2026-10-22",
+              "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/mehr-wildunfaelle-auf-strassen-aufgrund-der-zeitumstellung-3/"
+            },
+            {
               "label": "Bielstrasse Solothurn: Platz wird saniert und Baumbestand erneuert",
               "date": "2026-10-01",
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/bielstrasse-solothurn-platz-wird-saniert-und-baumbestand-erneuert/"
@@ -237,7 +247,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -276,7 +286,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "de": {
       "canton": "SO",
@@ -356,6 +366,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Mehr Wildunfälle auf Strassen aufgrund der Zeitumstellung",
+              "date": "2026-10-22",
+              "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/mehr-wildunfaelle-auf-strassen-aufgrund-der-zeitumstellung-3/"
+            },
+            {
               "label": "Bielstrasse Solothurn: Platz wird saniert und Baumbestand erneuert",
               "date": "2026-10-01",
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/bielstrasse-solothurn-platz-wird-saniert-und-baumbestand-erneuert/"
@@ -366,7 +381,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -405,7 +420,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "fr": {
       "canton": "SO",
@@ -485,6 +500,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Mehr Wildunfälle auf Strassen aufgrund der Zeitumstellung",
+              "date": "2026-10-22",
+              "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/mehr-wildunfaelle-auf-strassen-aufgrund-der-zeitumstellung-3/"
+            },
+            {
               "label": "Bielstrasse Solothurn: Platz wird saniert und Baumbestand erneuert",
               "date": "2026-10-01",
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/bielstrasse-solothurn-platz-wird-saniert-und-baumbestand-erneuert/"
@@ -495,7 +515,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -535,7 +555,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     }
   }
 }

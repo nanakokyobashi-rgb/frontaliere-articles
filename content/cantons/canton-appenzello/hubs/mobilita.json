@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-22T13:56:44.136Z",
-  "contentHash": "402c86d58fc80ffdcf6994918761d43c8349a1b544a25fb8b1dc5ee4bdead943",
+  "updatedAt": "2026-10-22T22:21:57.960Z",
+  "contentHash": "95d54eccf565238c015e81876a144fb9d7bca2a687166b40c3cb9b88fefeed16",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T20:56:46.769Z",
+      "updatedAt": "2026-10-22T10:40:36.644Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "2",
+          "value": "1",
           "note": "segnalazioni aggiornate: 22 ottobre 2026"
         }
       ],
@@ -54,12 +54,6 @@
               "value": "Cantiere",
               "detail": "fine prevista: 13 novembre 2026",
               "date": "2026-10-05T06:20:00.000Z"
-            },
-            {
-              "label": "459 Waldstatt <-> Appenzell tra Luogo Waldstatt E Luogo Hundwil Situazione: problemi di traffico cantiere, lunghezza [km] 0.18 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 22 ottobre 2026",
-              "date": "2026-10-13T07:56:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -101,7 +95,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -129,7 +123,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -139,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Roadworks active or imminent",
-          "value": "2",
+          "value": "1",
           "note": "reports as of 22 October 2026"
         }
       ],
@@ -166,12 +160,6 @@
               "value": "Roadworks",
               "detail": "until 13 November 2026",
               "date": "2026-10-05T06:20:00.000Z"
-            },
-            {
-              "label": "459 Waldstatt <-> Appenzell tra Luogo Waldstatt E Luogo Hundwil Situazione: problemi di traffico cantiere, lunghezza [km] 0.18 Limitazione del traffico: circolazione a corsie alternate Aggiunta 1…",
-              "value": "Roadworks",
-              "detail": "until 22 October 2026",
-              "date": "2026-10-13T07:56:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -213,7 +201,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -241,7 +229,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -251,7 +239,7 @@
       "keyFacts": [
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "2",
+          "value": "1",
           "note": "Meldungen vom 22. Oktober 2026"
         }
       ],
@@ -278,12 +266,6 @@
               "value": "Baustelle",
               "detail": "bis 13. November 2026",
               "date": "2026-10-05T06:20:00.000Z"
-            },
-            {
-              "label": "459 Waldstatt <-> Appenzell zwischen Ortschaft Waldstatt und Ortschaft Hundwil Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.18 Verkehrsführung: wechselseitige Verkehrsführung Zusatz 1…",
-              "value": "Baustelle",
-              "detail": "bis 22. Oktober 2026",
-              "date": "2026-10-13T07:56:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -325,7 +307,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -353,7 +335,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -363,7 +345,7 @@
       "keyFacts": [
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "2",
+          "value": "1",
           "note": "signalements au 22 octobre 2026"
         }
       ],
@@ -390,12 +372,6 @@
               "value": "Chantier",
               "detail": "jusqu’au 13 novembre 2026",
               "date": "2026-10-05T06:20:00.000Z"
-            },
-            {
-              "label": "459 Waldstatt <-> Appenzell entre Localité Waldstatt et Localité Hundwil Situation: trafic perturbé travaux, longueur [km] 0.18 Gestion du trafic: circulation alternée à une voie Complément 1…",
-              "value": "Chantier",
-              "detail": "jusqu’au 22 octobre 2026",
-              "date": "2026-10-13T07:56:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -437,7 +413,7 @@
               "url": "https://ar.ch/verwaltung/departement-bau-und-volkswirtschaft/news-aus-dem-departement/detail/news/instandsetzung-der-oberen-bruderbachbruecke/"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T10:40:36.644Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +441,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     }
   }
 }

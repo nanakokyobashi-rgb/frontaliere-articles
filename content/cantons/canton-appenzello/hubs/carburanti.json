@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T19:37:12.484Z",
-  "contentHash": "8f36a2fef8cf60d91ed42b24ff3b2335534b669719ee6b610573fad3410eb64d",
+  "updatedAt": "2026-10-22T22:21:57.960Z",
+  "contentHash": "b60aba8839ca9879c3ee9802a2d3c6863caf25db9a3e91df46fcd731f4489f76",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Spese nette 2027: CHF 802'767; eccedenza quasi CHF 580'000",
+          "url": "/articoli-appenzello/investimenti-tetto-fotovoltaico-2027/",
+          "excerpt": "Nel 2027 sono pianificate spese nette di CHF 802'767; previsto il risanamento del tetto della palestra con fotovoltaico.",
+          "date": "2026-10-22T22:14:01.184Z"
+        },
+        {
           "title": "Heiden prosegue i risparmi: deficit di CHF 204'200 nel 2027",
           "url": "/articoli-appenzello/heiden-risparmi-preventivo-2027/",
           "excerpt": "Il preventivo 2027 di Heiden indica entrate per CHF 35,308 milioni, uscite per CHF 35,512 milioni e un deficit di CHF 204'200.",
@@ -94,12 +100,6 @@
           "url": "/articoli-appenzello/driessen-oncologia-herisau-2026/",
           "excerpt": "Dal 1° ottobre 2026 il prof.",
           "date": "2026-10-21T12:25:13.122Z"
-        },
-        {
-          "title": "Appenzello Interno: il Proporz non passa al Gran Consiglio",
-          "url": "/articoli-appenzello/proporz-gran-consiglio-appenzello/",
-          "excerpt": "Il 19 ottobre il Gran Consiglio innerrhodese ha avuto un'agenda lunga; la revisione totale della legge sugli esercizi pubblici ha richiesto discussioni.",
-          "date": "2026-10-19T18:26:19.436Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T19:37:12.484Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Net expenditures 2027: CHF 802'767; surplus of almost CHF 580'000",
+          "url": "/en/appenzell-articles/roof-solar-investment-2027/",
+          "excerpt": "In 2027, net expenditure of CHF 802'767 is planned; renovation of the gymnasium roof with photovoltaics is planned.",
+          "date": "2026-10-22T22:14:01.184Z"
+        },
+        {
           "title": "Heiden continues its savings measures: deficit of CHF 204'200 in 2027",
           "url": "/en/appenzell-articles/heiden-savings-budget-2027/",
           "excerpt": "Heiden's 2027 budget projects revenues of CHF 35,308 million, expenditures of CHF 35,512 million, and a deficit of CHF 204'200.",
@@ -193,12 +199,6 @@
           "url": "/en/appenzell-articles/driessen-oncology-herisau-2026/",
           "excerpt": "As of October 1, 2026, the professor.",
           "date": "2026-10-21T12:25:13.122Z"
-        },
-        {
-          "title": "Appenzell Innerrhoden: proportional representation rejected by the Grand Council",
-          "url": "/en/appenzell-articles/proporz-appenzell-grand-council/",
-          "excerpt": "On October 19, the Innerrhoden Grand Council had a lengthy agenda; the complete revision of the law on public establishments required discussion.",
-          "date": "2026-10-19T18:26:19.436Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T19:37:12.484Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Nettoausgaben 2027: CHF 802'767; Ausgabenüberschuss von fast CHF 580'000",
+          "url": "/de/appenzell-artikel/dachsanierung-photovoltaik-investition-2027/",
+          "excerpt": "Für 2027 sind Nettoausgaben von CHF 802'767 geplant; vorgesehen ist die Sanierung des Dachs der Sporthalle mit Photovoltaik.",
+          "date": "2026-10-22T22:14:01.184Z"
+        },
+        {
           "title": "Heiden setzt die Sparbemühungen fort: Defizit von CHF 204'200 im Jahr 2027",
           "url": "/de/appenzell-artikel/heiden-sparbemuehungen-budget-2027/",
           "excerpt": "Der Voranschlag 2027 von Heiden weist Einnahmen von CHF 35,308 Millionen, Ausgaben von CHF 35,512 Millionen und ein Defizit von CHF 204'200 aus.",
@@ -292,12 +298,6 @@
           "url": "/de/appenzell-artikel/driessen-onkologie-herisau-2026/",
           "excerpt": "Ab dem 1. Oktober 2026 der Prof.",
           "date": "2026-10-21T12:25:13.122Z"
-        },
-        {
-          "title": "Appenzell Innerrhoden: Der Proporz kommt im Grossen Rat nicht durch",
-          "url": "/de/appenzell-artikel/proporz-im-grossen-rat/",
-          "excerpt": "Am 19. Oktober hatte der Innerrhoder Grosse Rat eine lange Traktandenliste; die Totalrevision des Gastgewerbegesetzes erforderte Diskussionen.",
-          "date": "2026-10-19T18:26:19.436Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T19:37:12.484Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Dépenses nettes 2027 : CHF 802'767 ; excédent de dépenses de près de CHF 580'000",
+          "url": "/fr/articles-appenzell/toit-photovoltaique-investissement-2027/",
+          "excerpt": "En 2027, des dépenses nettes de CHF 802'767 sont prévues ; l’assainissement du toit de la salle de sport avec une installation photovoltaïque est prévu.",
+          "date": "2026-10-22T22:14:01.184Z"
+        },
+        {
           "title": "Heiden poursuit ses efforts d’économies : déficit de CHF 204'200 en 2027",
           "url": "/fr/articles-appenzell/heiden-economies-budget-2027/",
           "excerpt": "Le budget 2027 de Heiden prévoit des recettes de CHF 35,308 millions, des dépenses de CHF 35,512 millions et un déficit de CHF 204'200.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-appenzell/driessen-oncologie-herisau-2026/",
           "excerpt": "À partir du 1er octobre 2026, le prof.",
           "date": "2026-10-21T12:25:13.122Z"
-        },
-        {
-          "title": "Appenzell Rhodes-Intérieures : le Proporz ne passe pas au Grand Conseil",
-          "url": "/fr/articles-appenzell/proporz-grand-conseil-appenzell/",
-          "excerpt": "Le 19 octobre, le Grand Conseil d'Appenzell Rhodes-Intérieures a eu un ordre du jour chargé ; la révision totale de la loi sur les établissements publics a nécessité des discussions.",
-          "date": "2026-10-19T18:26:19.436Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T19:37:12.484Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     }
   }
 }

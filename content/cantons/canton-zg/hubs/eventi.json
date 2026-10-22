@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T00:12:28.308Z",
-  "contentHash": "85e79901c5ac0b52ae2604ee8265a9a7ec5d9f38267938ea7e8e7cc0208438e2",
+  "updatedAt": "2026-10-22T22:21:57.960Z",
+  "contentHash": "55dc5e2dd1e9c99086541bf38817831c7306c4f9cab963269ec7666825f970af",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-21T12:38:14.154Z",
+      "updatedAt": "2026-10-22T11:13:26.127Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "26",
+          "value": "27",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -81,21 +81,21 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-trinkwasserversorgung-zug/"
             },
             {
+              "label": "10th Zuger Filmtage: Academy | Sabotage Collective: Producing Films Yourself?",
+              "detail": "Zug",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/10th-zuger-filmtage-academy-sabotage-collective-producing-films-yourself/"
+            },
+            {
               "label": "Konzert der ENGADINER KANTOREI",
               "detail": "Zug",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-der-engadiner-kantorei/"
-            },
-            {
-              "label": "Baby and Child First Aid Course in English – Zug",
-              "detail": "Zug",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/baby-and-child-first-aid-course-in-english-zug/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zugo/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T11:13:26.127Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/zugo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "en": {
       "canton": "ZG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "26",
+          "value": "27",
           "note": "from the site’s events calendar"
         }
       ],
@@ -186,21 +186,21 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-trinkwasserversorgung-zug/"
             },
             {
+              "label": "10th Zuger Filmtage: Academy | Sabotage Collective: Producing Films Yourself?",
+              "detail": "Zug",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/10th-zuger-filmtage-academy-sabotage-collective-producing-films-yourself/"
+            },
+            {
               "label": "Konzert der ENGADINER KANTOREI",
               "detail": "Zug",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-der-engadiner-kantorei/"
-            },
-            {
-              "label": "Baby and Child First Aid Course in English – Zug",
-              "detail": "Zug",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/baby-and-child-first-aid-course-in-english-zug/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zug/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T11:13:26.127Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/zug/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "de": {
       "canton": "ZG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "26",
+          "value": "27",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -291,21 +291,21 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-trinkwasserversorgung-zug/"
             },
             {
+              "label": "10. Zuger Filmtage: Academy | Sabotage Kollektiv: Filme selbst produzieren?",
+              "detail": "Zug",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/10th-zuger-filmtage-academy-sabotage-collective-producing-films-yourself/"
+            },
+            {
               "label": "Konzert der ENGADINER KANTOREI",
               "detail": "Zug",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-der-engadiner-kantorei/"
-            },
-            {
-              "label": "Erste Hilfe bei Babys und Kindern (Kurs auf Englisch)",
-              "detail": "Zug",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/baby-and-child-first-aid-course-in-english-zug/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zug/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T11:13:26.127Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/zug/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "fr": {
       "canton": "ZG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "26",
+          "value": "27",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -396,21 +396,21 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-fuehrung-trinkwasserversorgung-zug/"
             },
             {
+              "label": "10th Zuger Filmtage: Academy | Sabotage Collective: Producing Films Yourself?",
+              "detail": "Zug",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/10th-zuger-filmtage-academy-sabotage-collective-producing-films-yourself/"
+            },
+            {
               "label": "Konzert der ENGADINER KANTOREI",
               "detail": "Zug",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-der-engadiner-kantorei/"
-            },
-            {
-              "label": "Baby and Child First Aid Course in English – Zug",
-              "detail": "Zug",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/baby-and-child-first-aid-course-in-english-zug/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zoug/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T11:13:26.127Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/zoug/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     }
   }
 }

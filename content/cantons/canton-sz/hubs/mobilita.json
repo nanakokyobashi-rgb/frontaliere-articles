@@ -4,18 +4,13 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "mobilita",
-  "updatedAt": "2026-10-22T13:56:44.136Z",
-  "contentHash": "e0d09ee2954a4d8ffed64408061c8cf6772e6d0ef724204c2232db456e41c845",
+  "updatedAt": "2026-10-22T22:21:57.960Z",
+  "contentHash": "10e6bef2428398e728f86c1a40182f0487b26a987d93b7310f5a4ffb8ec4a331",
   "blocks": [
     {
       "id": "chiusure-cantieri",
       "updatedAt": "2026-10-22T05:28:12.116Z",
       "keyFacts": 2
-    },
-    {
-      "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T20:56:46.769Z",
-      "keyFacts": 0
     }
   ],
   "locales": {
@@ -27,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "2",
+          "value": "1",
           "note": "segnalazioni aggiornate: 22 ottobre 2026"
         },
         {
@@ -47,12 +42,6 @@
               "value": "Chiusura",
               "detail": "fine prevista: 6 novembre 2026",
               "date": "2026-09-21T06:53:00.000Z"
-            },
-            {
-              "label": "A4 Zürich -> Brunnen Svincolo autostradale Arth Situazione: uscita chiusa cantiere",
-              "value": "Chiusura",
-              "detail": "fine prevista: 22 ottobre 2026",
-              "date": "2026-10-13T12:02:00.000Z"
             },
             {
               "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Limitazione del traffico: corsie…",
@@ -75,39 +64,6 @@
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
           "updatedAt": "2026-10-22T05:28:12.116Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Avvisi ufficiali",
-          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
-          "items": [
-            {
-              "label": "Einbau einer Hilfsbrücke bei Biberbrugg",
-              "date": "2026-10-16",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26289"
-            },
-            {
-              "label": "Bahnhof Pfäffikon: Reduktion von P+R-Parkplätzen von 2028 bis 2035 für Installationsplatz",
-              "date": "2026-10-12",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26283"
-            },
-            {
-              "label": "Neubau der Bushaltestelle Zürichstrasse Nord in Einsiedeln",
-              "date": "2026-10-01",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26212"
-            },
-            {
-              "label": "Sanierung und Ausbau der Hauptstrasse Nr. 390, Holeneich – Lägeten, Tuggen",
-              "date": "2026-09-24",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26123"
-            },
-            {
-              "label": "Neubau der Busdrehscheibe Brunnen Bahnhof",
-              "date": "2026-09-24",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
-            }
-          ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -141,7 +97,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "en": {
       "canton": "SZ",
@@ -151,7 +107,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "2",
+          "value": "1",
           "note": "reports as of 22 October 2026"
         },
         {
@@ -171,12 +127,6 @@
               "value": "Closure",
               "detail": "until 6 November 2026",
               "date": "2026-09-21T06:53:00.000Z"
-            },
-            {
-              "label": "A4 Zürich -> Brunnen Svincolo autostradale Arth Situazione: uscita chiusa cantiere",
-              "value": "Closure",
-              "detail": "until 22 October 2026",
-              "date": "2026-10-13T12:02:00.000Z"
             },
             {
               "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Limitazione del traffico: corsie…",
@@ -199,39 +149,6 @@
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
           "updatedAt": "2026-10-22T05:28:12.116Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Official notices",
-          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
-          "items": [
-            {
-              "label": "Einbau einer Hilfsbrücke bei Biberbrugg",
-              "date": "2026-10-16",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26289"
-            },
-            {
-              "label": "Bahnhof Pfäffikon: Reduktion von P+R-Parkplätzen von 2028 bis 2035 für Installationsplatz",
-              "date": "2026-10-12",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26283"
-            },
-            {
-              "label": "Neubau der Bushaltestelle Zürichstrasse Nord in Einsiedeln",
-              "date": "2026-10-01",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26212"
-            },
-            {
-              "label": "Sanierung und Ausbau der Hauptstrasse Nr. 390, Holeneich – Lägeten, Tuggen",
-              "date": "2026-09-24",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26123"
-            },
-            {
-              "label": "Neubau der Busdrehscheibe Brunnen Bahnhof",
-              "date": "2026-09-24",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
-            }
-          ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -265,7 +182,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "de": {
       "canton": "SZ",
@@ -275,7 +192,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "2",
+          "value": "1",
           "note": "Meldungen vom 22. Oktober 2026"
         },
         {
@@ -295,12 +212,6 @@
               "value": "Sperrung",
               "detail": "bis 6. November 2026",
               "date": "2026-09-21T06:53:00.000Z"
-            },
-            {
-              "label": "A4 Zürich -> Brunnen Anschluss Arth Sachlage: Ausfahrt gesperrt Baustelle",
-              "value": "Sperrung",
-              "detail": "bis 22. Oktober 2026",
-              "date": "2026-10-13T12:02:00.000Z"
             },
             {
               "label": "A3 Chur -> Zürich zwischen Autobahndreieck Verzweigung Reichenburg und Anschluss Lachen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.6 Verkehrsführung: Fahrbahnverengung auf einen…",
@@ -323,39 +234,6 @@
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
           "updatedAt": "2026-10-22T05:28:12.116Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Amtliche Mitteilungen",
-          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
-          "items": [
-            {
-              "label": "Einbau einer Hilfsbrücke bei Biberbrugg",
-              "date": "2026-10-16",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26289"
-            },
-            {
-              "label": "Bahnhof Pfäffikon: Reduktion von P+R-Parkplätzen von 2028 bis 2035 für Installationsplatz",
-              "date": "2026-10-12",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26283"
-            },
-            {
-              "label": "Neubau der Bushaltestelle Zürichstrasse Nord in Einsiedeln",
-              "date": "2026-10-01",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26212"
-            },
-            {
-              "label": "Sanierung und Ausbau der Hauptstrasse Nr. 390, Holeneich – Lägeten, Tuggen",
-              "date": "2026-09-24",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26123"
-            },
-            {
-              "label": "Neubau der Busdrehscheibe Brunnen Bahnhof",
-              "date": "2026-09-24",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
-            }
-          ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -389,7 +267,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "fr": {
       "canton": "SZ",
@@ -399,7 +277,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "2",
+          "value": "1",
           "note": "signalements au 22 octobre 2026"
         },
         {
@@ -419,12 +297,6 @@
               "value": "Fermeture",
               "detail": "jusqu’au 6 novembre 2026",
               "date": "2026-09-21T06:53:00.000Z"
-            },
-            {
-              "label": "A4 Zurich -> Brunnen Jonction autoroutière Arth Situation: sortie fermée travaux",
-              "value": "Fermeture",
-              "detail": "jusqu’au 22 octobre 2026",
-              "date": "2026-10-13T12:02:00.000Z"
             },
             {
               "label": "A3 Coire -> Zurich entre Echangeur Echangeur de Reichenburg et Jonction autoroutière Lachen Situation: trafic perturbé travaux, longueur [km] 0.6 Gestion du trafic: rétrécissement des voies sur une…",
@@ -447,39 +319,6 @@
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
           "updatedAt": "2026-10-22T05:28:12.116Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Avis officiels",
-          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
-          "items": [
-            {
-              "label": "Einbau einer Hilfsbrücke bei Biberbrugg",
-              "date": "2026-10-16",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26289"
-            },
-            {
-              "label": "Bahnhof Pfäffikon: Reduktion von P+R-Parkplätzen von 2028 bis 2035 für Installationsplatz",
-              "date": "2026-10-12",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26283"
-            },
-            {
-              "label": "Neubau der Bushaltestelle Zürichstrasse Nord in Einsiedeln",
-              "date": "2026-10-01",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26212"
-            },
-            {
-              "label": "Sanierung und Ausbau der Hauptstrasse Nr. 390, Holeneich – Lägeten, Tuggen",
-              "date": "2026-09-24",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26123"
-            },
-            {
-              "label": "Neubau der Busdrehscheibe Brunnen Bahnhof",
-              "date": "2026-09-24",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26134"
-            }
-          ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -513,7 +352,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     }
   }
 }

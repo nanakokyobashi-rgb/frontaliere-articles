@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "fisco",
-  "updatedAt": "2026-10-18T07:06:50.545Z",
-  "contentHash": "086ad897b5bd40712f2e68e754fb236f47897158c6ef377466c18fe547a31a4e",
+  "updatedAt": "2026-10-22T22:21:57.960Z",
+  "contentHash": "c2a134c06ea4e986d84ced33b1e5d8ebbaff07637e0c80232cd5953142f4d1d1",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -16,11 +16,6 @@
       "id": "imposta-alla-fonte",
       "updatedAt": "2026-10-05T07:54:42.677Z",
       "keyFacts": 1
-    },
-    {
-      "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-17T19:45:28.268Z",
-      "keyFacts": 0
     }
   ],
   "locales": {
@@ -103,19 +98,6 @@
           "sourceName": "Autorità fiscale cantonale",
           "sourceUrl": "https://www.sz.ch/behoerden/verwaltung/finanzdepartement/steuerverwaltung/quellensteuer.html/8756-8758-8802-10332-10354-10449",
           "updatedAt": "2026-10-05T07:54:42.677Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Avvisi ufficiali",
-          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
-          "items": [
-            {
-              "label": "Regierungsrat sieht keinen steuerlichen Anpassungsbedarf bei Forschungs- und Entwicklungsabzug",
-              "date": "2026-09-25",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26125"
-            }
-          ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -173,7 +155,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-18T07:06:50.545Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "en": {
       "canton": "SZ",
@@ -254,19 +236,6 @@
           "sourceName": "Cantonal tax authority",
           "sourceUrl": "https://www.sz.ch/behoerden/verwaltung/finanzdepartement/steuerverwaltung/quellensteuer.html/8756-8758-8802-10332-10354-10449",
           "updatedAt": "2026-10-05T07:54:42.677Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Official notices",
-          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
-          "items": [
-            {
-              "label": "Regierungsrat sieht keinen steuerlichen Anpassungsbedarf bei Forschungs- und Entwicklungsabzug",
-              "date": "2026-09-25",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26125"
-            }
-          ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -324,7 +293,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-18T07:06:50.545Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "de": {
       "canton": "SZ",
@@ -405,19 +374,6 @@
           "sourceName": "Kantonale Steuerbehörde",
           "sourceUrl": "https://www.sz.ch/behoerden/verwaltung/finanzdepartement/steuerverwaltung/quellensteuer.html/8756-8758-8802-10332-10354-10449",
           "updatedAt": "2026-10-05T07:54:42.677Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Amtliche Mitteilungen",
-          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
-          "items": [
-            {
-              "label": "Regierungsrat sieht keinen steuerlichen Anpassungsbedarf bei Forschungs- und Entwicklungsabzug",
-              "date": "2026-09-25",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26125"
-            }
-          ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -475,7 +431,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-18T07:06:50.545Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "fr": {
       "canton": "SZ",
@@ -556,19 +512,6 @@
           "sourceName": "Autorité fiscale cantonale",
           "sourceUrl": "https://www.sz.ch/behoerden/verwaltung/finanzdepartement/steuerverwaltung/quellensteuer.html/8756-8758-8802-10332-10354-10449",
           "updatedAt": "2026-10-05T07:54:42.677Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Avis officiels",
-          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
-          "items": [
-            {
-              "label": "Regierungsrat sieht keinen steuerlichen Anpassungsbedarf bei Forschungs- und Entwicklungsabzug",
-              "date": "2026-09-25",
-              "url": "https://www.sz.ch/kanton/medien-und-datenschutz/medienmitteilungen/detailseite.html/10392/news/26125"
-            }
-          ],
-          "updatedAt": "2026-10-17T19:45:28.268Z"
         }
       ],
       "curatedArticles": [
@@ -626,7 +569,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-18T07:06:50.545Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     }
   }
 }

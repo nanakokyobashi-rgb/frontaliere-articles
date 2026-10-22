@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "fisco",
-  "updatedAt": "2026-10-21T19:37:12.484Z",
-  "contentHash": "98230584aa7ce873abe27f54564c014f5009b5b5defcea64650d5fdeadd60c29",
+  "updatedAt": "2026-10-22T22:21:57.960Z",
+  "contentHash": "5599dd33efc699556f274c45518c77fd073b62dc36d209d81fa50cddf32e0c94",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -172,6 +172,12 @@
           "date": "2026-10-12T06:43:23.669Z"
         },
         {
+          "title": "Spese nette 2027: CHF 802'767; eccedenza quasi CHF 580'000",
+          "url": "/articoli-appenzello/investimenti-tetto-fotovoltaico-2027/",
+          "excerpt": "Nel 2027 sono pianificate spese nette di CHF 802'767; previsto il risanamento del tetto della palestra con fotovoltaico.",
+          "date": "2026-10-22T22:14:01.184Z"
+        },
+        {
           "title": "Heiden aumenta la tassa base sui rifiuti",
           "url": "/articoli-appenzello/heiden-tassa-base-rifiuti/",
           "excerpt": "A Heiden la tassa base sui rifiuti passa da 24 a 31,20 franchi l'anno per nucleo familiare e impresa.",
@@ -182,12 +188,6 @@
           "url": "/articoli-svizzera/imposta-successione-appenzello-interno-aliquote/",
           "excerpt": "Guida alla tassazione successoria in Appenzello Interno: come funzionano aliquote per grado di parentela, esenzioni coniuge e figli, procedura dichiarazione.",
           "date": "2026-09-09T04:27:23.212Z"
-        },
-        {
-          "title": "Imposta di successione Appenzello interno",
-          "url": "/articoli-svizzera/imposta-successione-donazione-appenzello-interno/",
-          "excerpt": "Tassazione di successioni e donazioni nel cantone Appenzello Interno: aliquote per grado di parentela, esenzioni per coniuge e discendenti, procedure di dichiarazione e termini cantonali.",
-          "date": "2026-09-03T20:00:36.821Z"
         }
       ],
       "latestCantonArticles": [],
@@ -213,7 +213,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-21T19:37:12.484Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -368,6 +368,12 @@
           "date": "2026-10-12T06:43:23.669Z"
         },
         {
+          "title": "Net expenditures 2027: CHF 802'767; surplus of almost CHF 580'000",
+          "url": "/en/appenzell-articles/roof-solar-investment-2027/",
+          "excerpt": "In 2027, net expenditure of CHF 802'767 is planned; renovation of the gymnasium roof with photovoltaics is planned.",
+          "date": "2026-10-22T22:14:01.184Z"
+        },
+        {
           "title": "Heiden increases the basic waste fee",
           "url": "/en/appenzell-articles/heiden-base-waste-fee/",
           "excerpt": "In Heiden, the basic waste fee is increasing from 24 to 31,20 francs per year per household and business.",
@@ -378,12 +384,6 @@
           "url": "/en/swiss-articles/inheritance-tax-appenzell-innerrhoden-rates/",
           "excerpt": "Guide to inheritance taxation in Inner Appenzell: how rates work by degree of kinship, spouse and children exemptions, declaration procedure.",
           "date": "2026-09-09T04:27:23.212Z"
-        },
-        {
-          "title": "Appenzell Innerrhoden inheritance tax",
-          "url": "/en/swiss-articles/estate-tax-inheritance-appenzell-interno/",
-          "excerpt": "Inheritance and gift taxation in the canton of Appenzell Innerrhoden: rates by degree of kinship, exemptions for spouses and descendants, declaration procedures and cantonal deadlines.",
-          "date": "2026-09-03T20:00:36.821Z"
         }
       ],
       "latestCantonArticles": [],
@@ -409,7 +409,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-21T19:37:12.484Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -564,6 +564,12 @@
           "date": "2026-10-12T06:43:23.669Z"
         },
         {
+          "title": "Nettoausgaben 2027: CHF 802'767; Ausgabenüberschuss von fast CHF 580'000",
+          "url": "/de/appenzell-artikel/dachsanierung-photovoltaik-investition-2027/",
+          "excerpt": "Für 2027 sind Nettoausgaben von CHF 802'767 geplant; vorgesehen ist die Sanierung des Dachs der Sporthalle mit Photovoltaik.",
+          "date": "2026-10-22T22:14:01.184Z"
+        },
+        {
           "title": "Heiden erhöht die Kehrichtgrundgebühr",
           "url": "/de/appenzell-artikel/heiden-kehrichtgrundgebuehr/",
           "excerpt": "In Heiden steigt die Kehrichtgrundgebühr von 24 auf 31,20 Franken pro Jahr für jeden Haushalt und jedes Unternehmen.",
@@ -574,12 +580,6 @@
           "url": "/de/schweiz-artikel/erbschaftsteuer-appenzell-innerrhoden-saetze/",
           "excerpt": "Leitfaden zur Erbschaftsbesteuerung in Appenzell Innerrhoden: Wie funktionieren Verwandtschaftssätze, Ehepartner- und Kinderbefreiungen, Erklärungsverfahren?",
           "date": "2026-09-09T04:27:23.212Z"
-        },
-        {
-          "title": "Appenzell Innerrhoden Erbschaftssteuer",
-          "url": "/de/schweiz-artikel/erbschaftsteuer-donationen-appenzell-innerrhoden/",
-          "excerpt": "Erbschafts- und Schenkungssteuer im Kanton Appenzell Innerrhoden: Steuersätze nach Verwandtschaftsgrad, Befreiungen für Ehepartner und Nachkommen, Erklärungsverfahren und kantonale Fristen.",
-          "date": "2026-09-03T20:00:36.821Z"
         }
       ],
       "latestCantonArticles": [],
@@ -605,7 +605,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-21T19:37:12.484Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -760,6 +760,12 @@
           "date": "2026-10-12T06:43:23.669Z"
         },
         {
+          "title": "Dépenses nettes 2027 : CHF 802'767 ; excédent de dépenses de près de CHF 580'000",
+          "url": "/fr/articles-appenzell/toit-photovoltaique-investissement-2027/",
+          "excerpt": "En 2027, des dépenses nettes de CHF 802'767 sont prévues ; l’assainissement du toit de la salle de sport avec une installation photovoltaïque est prévu.",
+          "date": "2026-10-22T22:14:01.184Z"
+        },
+        {
           "title": "Heiden augmente la taxe de base sur les déchets",
           "url": "/fr/articles-appenzell/heiden-taxe-base-dechets/",
           "excerpt": "À Heiden, la taxe de base sur les déchets passe de 24 à 31,20 francs par an pour chaque ménage et entreprise.",
@@ -770,12 +776,6 @@
           "url": "/fr/articles-suisse/impot-succession-appenzell-rhodes-interieures-taux/",
           "excerpt": "Guide de la fiscalité successorale à Appenzell Interne : comment fonctionnent les taux par degré de parenté, les exemptions du conjoint et des enfants, la procédure de déclaration.",
           "date": "2026-09-09T04:27:23.212Z"
-        },
-        {
-          "title": "Impôt de succession d'Appenzell en Inhérnodes",
-          "url": "/fr/articles-suisse/impot-succession-appenzell-rhodes-interieures/",
-          "excerpt": "Imposition des successions et des donations dans le canton d'Appenzell en Inerrhoden : taux selon le degré de parenté, exemptions pour les époux et descendants, procédures de déclaration et délais cantonaux.",
-          "date": "2026-09-03T20:00:36.821Z"
         }
       ],
       "latestCantonArticles": [],
@@ -801,7 +801,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-21T19:37:12.484Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "fisco",
-  "updatedAt": "2026-10-22T02:32:07.612Z",
-  "contentHash": "4d7be38e1d9acedf8c449c2e01a6e068d959defb4045f78183862a4ee4e6dbb8",
+  "updatedAt": "2026-10-22T22:21:57.960Z",
+  "contentHash": "bb06fbee7979eefa711f03910df68f78437164be55f22226d3a709f52ef6dfd5",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -16,11 +16,6 @@
       "id": "imposta-alla-fonte",
       "updatedAt": "2026-10-05T07:54:42.677Z",
       "keyFacts": 1
-    },
-    {
-      "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T10:37:42.748Z",
-      "keyFacts": 0
     }
   ],
   "locales": {
@@ -103,39 +98,6 @@
           "sourceName": "Autorità fiscale cantonale",
           "sourceUrl": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/online-schalter.html/511",
           "updatedAt": "2026-10-05T07:54:42.677Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Avvisi ufficiali",
-          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
-          "items": [
-            {
-              "label": "Regierungsrat verabschiedet Änderung des Steuergesetzes",
-              "date": "2026-10-06",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16025/title/regierungsrat-verabschiedet-%C3%A4nderung-des-steuergesetzes"
-            },
-            {
-              "label": "Regierungsrat beantragt Überweisung der Motion zur Liegenschaftssteuer auf Zweitwohnungen",
-              "date": "2026-10-01",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16047/title/regierungsrat-beantragt-%C3%BCberweisung-der-motion-zur-liegenschaftssteuer-auf-zweitwohnungen"
-            },
-            {
-              "label": "Regierungsrat beantragt Ablehnung einer allgemeinen Grundsteuer",
-              "date": "2026-10-01",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16045/title/regierungsrat-beantragt-ablehnung-einer-allgemeinen-grundsteuer"
-            },
-            {
-              "label": "Vorsicht vor gefälschten Steuerrechnungen und Mahnungen",
-              "date": "2026-09-22",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15981/title/vorsicht-vor-gef%C3%A4lschten-steuerrechnungen-und-mahnungen"
-            },
-            {
-              "label": "eQst.GL – Online Abrechnung Quellensteuer",
-              "date": "2026-08-21",
-              "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
-            }
-          ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -211,7 +173,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-22T02:32:07.612Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "en": {
       "canton": "GL",
@@ -292,39 +254,6 @@
           "sourceName": "Cantonal tax authority",
           "sourceUrl": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/online-schalter.html/511",
           "updatedAt": "2026-10-05T07:54:42.677Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Official notices",
-          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
-          "items": [
-            {
-              "label": "Regierungsrat verabschiedet Änderung des Steuergesetzes",
-              "date": "2026-10-06",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16025/title/regierungsrat-verabschiedet-%C3%A4nderung-des-steuergesetzes"
-            },
-            {
-              "label": "Regierungsrat beantragt Überweisung der Motion zur Liegenschaftssteuer auf Zweitwohnungen",
-              "date": "2026-10-01",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16047/title/regierungsrat-beantragt-%C3%BCberweisung-der-motion-zur-liegenschaftssteuer-auf-zweitwohnungen"
-            },
-            {
-              "label": "Regierungsrat beantragt Ablehnung einer allgemeinen Grundsteuer",
-              "date": "2026-10-01",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16045/title/regierungsrat-beantragt-ablehnung-einer-allgemeinen-grundsteuer"
-            },
-            {
-              "label": "Vorsicht vor gefälschten Steuerrechnungen und Mahnungen",
-              "date": "2026-09-22",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15981/title/vorsicht-vor-gef%C3%A4lschten-steuerrechnungen-und-mahnungen"
-            },
-            {
-              "label": "eQst.GL – Online Abrechnung Quellensteuer",
-              "date": "2026-08-21",
-              "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
-            }
-          ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -400,7 +329,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-22T02:32:07.612Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "de": {
       "canton": "GL",
@@ -481,39 +410,6 @@
           "sourceName": "Kantonale Steuerbehörde",
           "sourceUrl": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/online-schalter.html/511",
           "updatedAt": "2026-10-05T07:54:42.677Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Amtliche Mitteilungen",
-          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
-          "items": [
-            {
-              "label": "Regierungsrat verabschiedet Änderung des Steuergesetzes",
-              "date": "2026-10-06",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16025/title/regierungsrat-verabschiedet-%C3%A4nderung-des-steuergesetzes"
-            },
-            {
-              "label": "Regierungsrat beantragt Überweisung der Motion zur Liegenschaftssteuer auf Zweitwohnungen",
-              "date": "2026-10-01",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16047/title/regierungsrat-beantragt-%C3%BCberweisung-der-motion-zur-liegenschaftssteuer-auf-zweitwohnungen"
-            },
-            {
-              "label": "Regierungsrat beantragt Ablehnung einer allgemeinen Grundsteuer",
-              "date": "2026-10-01",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16045/title/regierungsrat-beantragt-ablehnung-einer-allgemeinen-grundsteuer"
-            },
-            {
-              "label": "Vorsicht vor gefälschten Steuerrechnungen und Mahnungen",
-              "date": "2026-09-22",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15981/title/vorsicht-vor-gef%C3%A4lschten-steuerrechnungen-und-mahnungen"
-            },
-            {
-              "label": "eQst.GL – Online Abrechnung Quellensteuer",
-              "date": "2026-08-21",
-              "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
-            }
-          ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -589,7 +485,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-22T02:32:07.612Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "fr": {
       "canton": "GL",
@@ -670,39 +566,6 @@
           "sourceName": "Autorité fiscale cantonale",
           "sourceUrl": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/online-schalter.html/511",
           "updatedAt": "2026-10-05T07:54:42.677Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Avis officiels",
-          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
-          "items": [
-            {
-              "label": "Regierungsrat verabschiedet Änderung des Steuergesetzes",
-              "date": "2026-10-06",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16025/title/regierungsrat-verabschiedet-%C3%A4nderung-des-steuergesetzes"
-            },
-            {
-              "label": "Regierungsrat beantragt Überweisung der Motion zur Liegenschaftssteuer auf Zweitwohnungen",
-              "date": "2026-10-01",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16047/title/regierungsrat-beantragt-%C3%BCberweisung-der-motion-zur-liegenschaftssteuer-auf-zweitwohnungen"
-            },
-            {
-              "label": "Regierungsrat beantragt Ablehnung einer allgemeinen Grundsteuer",
-              "date": "2026-10-01",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16045/title/regierungsrat-beantragt-ablehnung-einer-allgemeinen-grundsteuer"
-            },
-            {
-              "label": "Vorsicht vor gefälschten Steuerrechnungen und Mahnungen",
-              "date": "2026-09-22",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15981/title/vorsicht-vor-gef%C3%A4lschten-steuerrechnungen-und-mahnungen"
-            },
-            {
-              "label": "eQst.GL – Online Abrechnung Quellensteuer",
-              "date": "2026-08-21",
-              "url": "https://www.gl.ch/verwaltung/finanzen-und-gesundheit/steuern/news-details.html/1682/news/30165"
-            }
-          ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
         }
       ],
       "curatedArticles": [
@@ -778,7 +641,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-22T02:32:07.612Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     }
   }
 }

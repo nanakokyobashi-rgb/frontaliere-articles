@@ -4,23 +4,13 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "servizi",
-  "updatedAt": "2026-10-22T09:28:01.507Z",
-  "contentHash": "082250812b775a2d00bea437281542b244b1af3adeaf9613af1fd317a5ace4a1",
+  "updatedAt": "2026-10-22T22:21:57.960Z",
+  "contentHash": "5d52d26e43898d0327e5bbcb55a0d8f82f864c7f38147a01140b24a174f9e006",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-18T08:53:01.888Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-22T05:05:39.050Z",
-      "keyFacts": 0
-    },
-    {
-      "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T20:56:46.769Z",
-      "keyFacts": 0
     }
   ],
   "locales": {
@@ -52,53 +42,6 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Glarus",
-              "value": "4 °C",
-              "detail": "oggi da 3 a 11 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-22T05:05:39.050Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Avvisi ufficiali",
-          "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
-          "items": [
-            {
-              "label": "Neue Identitätskarte mit Chip ab November 2026: Kanton Glarus bündelt Ausweisgeschäfte beim Passbüro",
-              "date": "2026-10-19",
-              "url": "https://www.glarus-sued.ch/services/aktuelles/details.html/3780/news/30272"
-            },
-            {
-              "label": "Glarner Spitalliste Psychiatrie wird angepasst",
-              "date": "2026-10-05",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16035/title/glarner-spitalliste-psychiatrie-wird-angepasst"
-            },
-            {
-              "label": "Interpellation zur Strategie 2030 des Kantonsspitals Glarus beantwortet",
-              "date": "2026-09-23",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15938/title/interpellation-zur-strategie-des-kantonsspitals-glarus-beantwortet"
-            },
-            {
-              "label": "Wärmeverbund erhält energierechtliche Bewilligung",
-              "date": "2026-09-22",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15965/title/w%C3%A4rmeverbund-erh%C3%A4lt-energierechtliche-bewilligung"
-            },
-            {
-              "label": "Kantonsspital: Regierungsrat überarbeitet Eignerstrategie",
-              "date": "2026-09-17",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
-            }
-          ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -178,7 +121,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "en": {
       "canton": "GL",
@@ -208,53 +151,6 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Glarus",
-              "value": "4 °C",
-              "detail": "today from 3 to 11 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-22T05:05:39.050Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Official notices",
-          "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
-          "items": [
-            {
-              "label": "Neue Identitätskarte mit Chip ab November 2026: Kanton Glarus bündelt Ausweisgeschäfte beim Passbüro",
-              "date": "2026-10-19",
-              "url": "https://www.glarus-sued.ch/services/aktuelles/details.html/3780/news/30272"
-            },
-            {
-              "label": "Glarner Spitalliste Psychiatrie wird angepasst",
-              "date": "2026-10-05",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16035/title/glarner-spitalliste-psychiatrie-wird-angepasst"
-            },
-            {
-              "label": "Interpellation zur Strategie 2030 des Kantonsspitals Glarus beantwortet",
-              "date": "2026-09-23",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15938/title/interpellation-zur-strategie-des-kantonsspitals-glarus-beantwortet"
-            },
-            {
-              "label": "Wärmeverbund erhält energierechtliche Bewilligung",
-              "date": "2026-09-22",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15965/title/w%C3%A4rmeverbund-erh%C3%A4lt-energierechtliche-bewilligung"
-            },
-            {
-              "label": "Kantonsspital: Regierungsrat überarbeitet Eignerstrategie",
-              "date": "2026-09-17",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
-            }
-          ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -330,7 +226,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "de": {
       "canton": "GL",
@@ -360,53 +256,6 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Glarus",
-              "value": "4 °C",
-              "detail": "heute 3 bis 11 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-22T05:05:39.050Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Amtliche Mitteilungen",
-          "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
-          "items": [
-            {
-              "label": "Neue Identitätskarte mit Chip ab November 2026: Kanton Glarus bündelt Ausweisgeschäfte beim Passbüro",
-              "date": "2026-10-19",
-              "url": "https://www.glarus-sued.ch/services/aktuelles/details.html/3780/news/30272"
-            },
-            {
-              "label": "Glarner Spitalliste Psychiatrie wird angepasst",
-              "date": "2026-10-05",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16035/title/glarner-spitalliste-psychiatrie-wird-angepasst"
-            },
-            {
-              "label": "Interpellation zur Strategie 2030 des Kantonsspitals Glarus beantwortet",
-              "date": "2026-09-23",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15938/title/interpellation-zur-strategie-des-kantonsspitals-glarus-beantwortet"
-            },
-            {
-              "label": "Wärmeverbund erhält energierechtliche Bewilligung",
-              "date": "2026-09-22",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15965/title/w%C3%A4rmeverbund-erh%C3%A4lt-energierechtliche-bewilligung"
-            },
-            {
-              "label": "Kantonsspital: Regierungsrat überarbeitet Eignerstrategie",
-              "date": "2026-09-17",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
-            }
-          ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -482,7 +331,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     },
     "fr": {
       "canton": "GL",
@@ -512,53 +361,6 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Glarus",
-              "value": "4 °C",
-              "detail": "aujourd’hui de 3 à 11 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-22T05:05:39.050Z"
-        },
-        {
-          "id": "avvisi-ufficiali",
-          "title": "Avis officiels",
-          "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
-          "items": [
-            {
-              "label": "Neue Identitätskarte mit Chip ab November 2026: Kanton Glarus bündelt Ausweisgeschäfte beim Passbüro",
-              "date": "2026-10-19",
-              "url": "https://www.glarus-sued.ch/services/aktuelles/details.html/3780/news/30272"
-            },
-            {
-              "label": "Glarner Spitalliste Psychiatrie wird angepasst",
-              "date": "2026-10-05",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/16035/title/glarner-spitalliste-psychiatrie-wird-angepasst"
-            },
-            {
-              "label": "Interpellation zur Strategie 2030 des Kantonsspitals Glarus beantwortet",
-              "date": "2026-09-23",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15938/title/interpellation-zur-strategie-des-kantonsspitals-glarus-beantwortet"
-            },
-            {
-              "label": "Wärmeverbund erhält energierechtliche Bewilligung",
-              "date": "2026-09-22",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15965/title/w%C3%A4rmeverbund-erh%C3%A4lt-energierechtliche-bewilligung"
-            },
-            {
-              "label": "Kantonsspital: Regierungsrat überarbeitet Eignerstrategie",
-              "date": "2026-09-17",
-              "url": "https://www.gl.ch/public-newsroom.html/31/newsroomnews/15908/title/kantonsspital-regierungsrat-%C3%BCberarbeitet-eignerstrategie"
-            }
-          ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
         }
       ],
       "curatedArticles": [
@@ -630,7 +432,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-22T09:28:01.507Z"
+      "updatedAt": "2026-10-22T22:21:57.960Z"
     }
   }
 }
