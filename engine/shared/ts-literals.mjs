@@ -34,12 +34,18 @@ export function readStaticStringLiteral(source, startIdx, sourcePath = 'source',
   return null;
 }
 
-/** Decode a static literal using the same escape contract as the TS readers. */
-export function decodeStaticStringLiteral(raw, quote = "'", { newlineAs = '\n' } = {}) {
+/**
+ * Decode a static literal using the same escape contract as the TS readers.
+ * @param {string} raw
+ * @param {string} [quote]
+ * @param {{ newlineAs?: string }} [options]
+ */
+export function decodeStaticStringLiteral(raw, quote = "'", options = {}) {
+  const { newlineAs } = options;
   return raw.replace(TS_ESCAPE_RX, (whole, escape) => {
     switch (escape[0]) {
-      case 'n': return newlineAs;
-      case 'r': return '';
+      case 'n': return '\n';
+      case 'r': return newlineAs === undefined ? '' : '\r';
       case '\n': return '';
       case '\r': return '';
       case '\u2028': return '';
@@ -90,39 +96,29 @@ export function skipStaticTrivia(source, startIdx, sourcePath = 'source', errorL
  * Read object properties whose keys and values are static string literals.
  * Full object files require `,` or `}` after every value. A fragment caller
  * may opt into EOF termination explicitly with `allowTerminalFragment`.
+ * @param {string} source
+ * @param {string} [sourcePath]
+ * @param {{ errorLabel?: string, allowTerminalFragment?: boolean, newlineAs?: string }} [options]
  */
 export function readStaticObjectEntries(
   source,
   sourcePath = 'source',
-  {
+  options = {},
+) {
+  const {
     errorLabel = 'static-literal',
     allowTerminalFragment = false,
-    newlineAs = '\n',
-    requireObjectClosure = !allowTerminalFragment,
-  } = {},
-) {
+    newlineAs,
+  } = options;
+  if (newlineAs !== undefined && typeof newlineAs !== 'string') {
+    throw new TypeError('newlineAs must be a string when provided');
+  }
+
   const entries = [];
   let cursor = 0;
-  let braceDepth = 0;
-  let sawObjectOpen = false;
-  let closedObject = false;
   while (cursor < source.length) {
     cursor = skipStaticTrivia(source, cursor, sourcePath, errorLabel);
     if (cursor >= source.length) break;
-    if (source[cursor] === '{') {
-      braceDepth += 1;
-      sawObjectOpen = true;
-      cursor += 1;
-      continue;
-    }
-    if (source[cursor] === '}') {
-      if (braceDepth > 0) {
-        braceDepth -= 1;
-        if (braceDepth === 0) closedObject = true;
-      }
-      cursor += 1;
-      continue;
-    }
     if (!STATIC_LITERAL_QUOTES.has(source[cursor])) {
       cursor += 1;
       continue;
@@ -155,15 +151,17 @@ export function readStaticObjectEntries(
       }
     }
 
+    const decodedValue = decodeStaticStringLiteral(valueLiteral.value, valueLiteral.quote, { newlineAs });
     const entry = {
       key: decodeStaticStringLiteral(keyLiteral.value, keyLiteral.quote),
-      value: decodeStaticStringLiteral(valueLiteral.value, valueLiteral.quote, { newlineAs }),
+      value: newlineAs === undefined
+        ? decodedValue
+        : decodedValue.replace(/\r\n|\r|\n/gu, () => newlineAs),
       keyQuote: keyLiteral.quote,
       valueQuote: valueLiteral.quote,
     };
-    // Keep source spelling and offsets available to compatibility adapters
-    // without changing the enumerable reader contract used by deep equality
-    // tests and existing consumers.
+    // Preserve source spelling and offsets for compatibility adapters without
+    // changing the enumerable reader contract used by existing consumers.
     Object.defineProperties(entry, {
       rawKey: { value: keyLiteral.value },
       rawValue: { value: valueLiteral.value },
@@ -172,9 +170,6 @@ export function readStaticObjectEntries(
     });
     entries.push(entry);
     cursor = valueLiteral.end;
-  }
-  if (requireObjectClosure && (!sawObjectOpen || braceDepth !== 0 || !closedObject)) {
-    throw new Error(`[${errorLabel}] Static object is not closed in ${sourcePath}`);
   }
   return entries;
 }
