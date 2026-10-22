@@ -217,8 +217,8 @@ jobs:
       any: ${{ steps.plan.outputs.any }}
       dry: ${{ steps.plan.outputs.dry }}
       bootstrap: ${{ steps.plan.outputs.bootstrap }}
-      replay_api_after_publish: ${{ steps.plan.outputs.replay_api_after_publish }}
-      allow_deferred_live_release: ${{ steps.plan.outputs.allow_deferred_live_release }}
+      replay_api_after_publish: ${{ steps.replay_mode.outputs.replay_api_after_publish }}
+      allow_deferred_live_release: ${{ steps.replay_mode.outputs.allow_deferred_live_release }}
       push_before: ${{ steps.push_range.outputs.before }}
       push_after: ${{ steps.push_range.outputs.after }}
     steps:
@@ -833,16 +833,6 @@ jobs:
           if [ "$(printf '%s' "$matrix" | jq 'any(.[]; .bootstrap == true)')" = "true" ]; then
             bootstrap=true
           fi
-          # Un push puo' vincere la gara con publish-api prima che le pagine
-          # siano su R2. Il render staged resta fail-closed sugli errori reali,
-          # ma se la matrice ha completato con successo il replay API e' parte
-          # obbligatoria del percorso normale, non un'opzione riservata al
-          # bootstrap. Cosi' il timeout bounded dell'API non lascia uno staged
-          # parziale senza redispatch.
-          if [ "$EVENT_NAME" = 'push' ] && [ "$any" = 'true' ] && [ "$dry" != 'true' ]; then
-            replay_api_after_publish=true
-            allow_deferred_live_release=true
-          fi
           {
             echo "matrix=$matrix"
             echo "any=$any"
@@ -852,6 +842,34 @@ jobs:
             echo "allow_deferred_live_release=$allow_deferred_live_release"
           } >> "$GITHUB_OUTPUT"
           echo "resolved matrix=$matrix dry=$dry"
+
+      # Tieni l'arming del replay fuori dal run monolitico di resolve: GitHub
+      # rifiuta workflow con espressioni oltre 21.000 caratteri. I valori
+      # calcolati da plan restano la base per dispatch, bootstrap e replay.
+      - name: Arm normal push staged replay
+        id: replay_mode
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          ANY: ${{ steps.plan.outputs.any }}
+          DRY: ${{ steps.plan.outputs.dry }}
+          PLAN_REPLAY_API_AFTER_PUBLISH: ${{ steps.plan.outputs.replay_api_after_publish }}
+          PLAN_ALLOW_DEFERRED_LIVE_RELEASE: ${{ steps.plan.outputs.allow_deferred_live_release }}
+        run: |
+          set -euo pipefail
+          replay_api_after_publish="${PLAN_REPLAY_API_AFTER_PUBLISH:-false}"
+          allow_deferred_live_release="${PLAN_ALLOW_DEFERRED_LIVE_RELEASE:-false}"
+          # Un push puo' vincere la gara con publish-api prima che le pagine
+          # siano su R2. Il render staged resta fail-closed sugli errori reali,
+          # ma se la matrice ha completato con successo il replay API e' parte
+          # obbligatoria del percorso normale, non un'opzione riservata al
+          # bootstrap. Cosi' il timeout bounded dell'API non lascia uno staged
+          # parziale senza redispatch.
+          if [ "$EVENT_NAME" = 'push' ] && [ "$ANY" = 'true' ] && [ "$DRY" != 'true' ]; then
+            replay_api_after_publish=true
+            allow_deferred_live_release=true
+          fi
+          echo "replay_api_after_publish=$replay_api_after_publish" >> "$GITHUB_OUTPUT"
+          echo "allow_deferred_live_release=$allow_deferred_live_release" >> "$GITHUB_OUTPUT"
 
       - name: Setup isolated article source runtime
         if: steps.plan.outputs.any == 'true'

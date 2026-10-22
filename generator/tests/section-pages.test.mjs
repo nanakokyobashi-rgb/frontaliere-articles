@@ -3298,8 +3298,26 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /allow_deferred_live_release:/);
   assert.match(
     wf,
-    /if \[ "\$EVENT_NAME" = 'push' \] && \[ "\$any" = 'true' \] && \[ "\$dry" != 'true' \]; then[\s\S]*replay_api_after_publish=true[\s\S]*allow_deferred_live_release=true/,
+    /- name: Arm normal push staged replay[\s\S]*id: replay_mode[\s\S]*PLAN_REPLAY_API_AFTER_PUBLISH: \$\{\{ steps\.plan\.outputs\.replay_api_after_publish \}\}[\s\S]*PLAN_ALLOW_DEFERRED_LIVE_RELEASE: \$\{\{ steps\.plan\.outputs\.allow_deferred_live_release \}\}[\s\S]*if \[ "\$EVENT_NAME" = 'push' \] && \[ "\$ANY" = 'true' \] && \[ "\$DRY" != 'true' \]; then[\s\S]*replay_api_after_publish=true[\s\S]*allow_deferred_live_release=true/,
     'un push normale con staged riuscito deve armare il replay API',
+  );
+  assert.match(
+    wf,
+    /replay_api_after_publish: \$\{\{ steps\.replay_mode\.outputs\.replay_api_after_publish \}\}/,
+    'il job deve esportare il flag dal passo separato per restare sotto il limite delle espressioni',
+  );
+  assert.match(
+    wf,
+    /allow_deferred_live_release: \$\{\{ steps\.replay_mode\.outputs\.allow_deferred_live_release \}\}/,
+    'il job deve esportare il differimento dal passo separato per restare sotto il limite delle espressioni',
+  );
+  const resolveStart = wf.indexOf('      - name: Resolve sections and article ids');
+  const replayModeStart = wf.indexOf('      - name: Arm normal push staged replay');
+  assert.ok(resolveStart >= 0 && replayModeStart > resolveStart, 'resolve e replay_mode devono essere passi distinti');
+  assert.doesNotMatch(
+    wf.slice(resolveStart, replayModeStart),
+    /if \[ "\$EVENT_NAME" = 'push' \] && \[ "\$any" = 'true' \] && \[ "\$dry" != 'true' \]/,
+    'il run monolitico di resolve non deve contenere l arming del replay push',
   );
   assert.match(
     wf,
