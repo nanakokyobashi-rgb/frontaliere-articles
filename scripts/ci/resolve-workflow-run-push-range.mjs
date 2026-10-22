@@ -33,9 +33,10 @@ export function parsePushRangeRunTitle(value) {
 
 /**
  * Resolve the push range for a completed API workflow without using the
- * non-existent `commits/<sha>/events` endpoint. If GitHub omits a bot push
- * from the public event feed, the preceding API workflow run identifies the
- * exact previous main head; histories that cannot prove that boundary remain
+ * non-existent commits/<sha>/events endpoint. The API run title carries the
+ * exact event boundary; if an older run has no marker, the preceding API
+ * workflow run is only a candidate and its direct-parent relationship must be
+ * proved before use. Histories that cannot prove that boundary remain
  * fail-closed.
  */
 export function resolvePushRange({

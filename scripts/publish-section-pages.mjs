@@ -3005,8 +3005,9 @@ export async function main(
   // upload-cdn-file.sh. Do not hold a namespace lease around the whole
   // section transaction: the matrix runs independent sections concurrently,
   // and a section-wide `blog` lease makes every other publisher wait for the
-  // 15-minute acquisition timeout. The held-asset checks above still protect
-  // pages that would otherwise reference an unverified image.
+  // 15-minute acquisition timeout. The held-asset checks above still prevent
+  // a page from being uploaded while one of its referenced assets is
+  // unverified.
   summary.published = await publishImpl({
     pages: pagesForPublish,
     cdnUploads,
