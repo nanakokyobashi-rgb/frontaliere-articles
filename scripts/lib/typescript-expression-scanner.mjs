@@ -75,7 +75,7 @@ const REGEX_PREFIX_KEYWORDS = new Set([
   'typeof', 'void', 'yield',
 ]);
 const REGEX_PREFIX_PUNCTUATION = new Set([
-  '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>', '/', '=>',
+  '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>', '/', '&&', '||', '??', '=>',
 ]);
 const OBJECT_LITERAL_PREFIX_TOKENS = new Set([
   '=', ':', 'return', 'default', '(', '[', ',', '?', '&&', '||', '??',
@@ -442,6 +442,20 @@ function delimiterContextAt(source, offset) {
       rootTypeContext = false;
       index += 2;
       markToken('=>');
+      previousSignificantEnd = index;
+      continue;
+    }
+    if (ch === '!' && next !== '=') {
+      // TypeScript's postfix non-null assertion preserves expression-ending
+      // context. In particular, `obj.in! / /pattern/` is division followed
+      // by a regex, while a prefix `!` still admits a regex operand.
+      const postfix = previousTokenWasMemberProperty
+        || previousToken !== null
+          && !REGEX_PREFIX_PUNCTUATION.has(previousToken)
+          && !REGEX_PREFIX_KEYWORDS.has(previousToken)
+          && previousToken !== '=>';
+      markToken(postfix ? 'postfix' : '!');
+      index += 1;
       previousSignificantEnd = index;
       continue;
     }

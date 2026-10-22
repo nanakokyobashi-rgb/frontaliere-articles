@@ -107,24 +107,32 @@ export function matchingDelimiter(src, openIdx) {
   // nested `/*` marker from the start of the block comment it is inside.
   let previousToken = null;
   let tokenBeforePrevious = null;
+  let lineBreakSinceToken = false;
+  const delimiterStack = [];
+  const controlParenthesisKeywords = new Set(['if', 'while', 'for', 'with', 'switch', 'catch']);
   const rememberToken = (kind, value) => {
     tokenBeforePrevious = previousToken;
     previousToken = { kind, value };
   };
 
+  const isRegexPrefixPunctuation = token => token?.kind === 'punct'
+    && '([{=,:;!?&|+\-*%^~<>/'.includes(token.value);
+  const isRegexPrefixBoundary = token => token?.kind === 'control-close'
+    || isRegexPrefixPunctuation(token);
+  const isRegexPrefixKeyword = token => token?.kind === 'word'
+    && /^(?:return|throw|case|break|continue|debugger|default|delete|void|typeof|instanceof|in|of|yield|await|else|do|new)$/.test(token.value)
+    && !['.', '#'].includes(tokenBeforePrevious?.value);
+
   const canStartRegex = () => {
     if (previousToken === null) return true;
-    if (previousToken.kind === 'punct' && '([{=,:;!?&|+\-*%^~<>/'.includes(previousToken.value)) return true;
-    return previousToken.kind === 'word'
-      && /^(?:return|throw|case|break|continue|debugger|default|delete|void|typeof|instanceof|in|of|yield|await|else|do|new)$/.test(previousToken.value)
-      && tokenBeforePrevious?.value !== '.';
+    return isRegexPrefixBoundary(previousToken) || isRegexPrefixKeyword(previousToken);
   };
 
   const skipRegex = (start) => {
     let inClass = false;
     for (let i = start + 1; i < src.length; i += 1) {
       if (src[i] === '\\') { i += 1; continue; }
-      if (src[i] === '\n' || src[i] === '\r') return start;
+      if ('\n\r\u2028\u2029'.includes(src[i])) return start;
       if (src[i] === '[') { inClass = true; continue; }
       if (src[i] === ']' && inClass) { inClass = false; continue; }
       if (src[i] === '/' && !inClass) {
@@ -155,10 +163,16 @@ export function matchingDelimiter(src, openIdx) {
     if (ch === '/' && src[i + 1] === '*') {
       const end = src.indexOf('*/', i + 2);
       if (end === -1) return -1;
+      if (/[\n\r\u2028\u2029]/u.test(src.slice(i, end + 2))) lineBreakSinceToken = true;
       i = end + 1;
       continue;
     }
-    if (/\s/.test(ch)) continue;
+    if (/\s/.test(ch)) {
+      if ('\n\r\u2028\u2029'.includes(ch)) lineBreakSinceToken = true;
+      continue;
+    }
+    const lineBreakBeforeToken = lineBreakSinceToken;
+    lineBreakSinceToken = false;
     if (ch === '/' && canStartRegex()) {
       const end = skipRegex(i);
       if (end === -1) return -1;
@@ -168,6 +182,13 @@ export function matchingDelimiter(src, openIdx) {
       }
       rememberToken('literal', 'regex');
       i = end;
+      continue;
+    }
+    if (ch === '!' && src[i + 1] !== '=') {
+      // A postfix non-null assertion ends an expression; a prefix bang starts
+      // one. Keep the distinction so a following slash is classified safely.
+      rememberToken(lineBreakBeforeToken || isRegexPrefixBoundary(previousToken) || isRegexPrefixKeyword(previousToken)
+        ? 'punct' : 'postfix', '!');
       continue;
     }
     if (ch === "'" || ch === '"' || ch === '`') {
@@ -182,12 +203,28 @@ export function matchingDelimiter(src, openIdx) {
       i = end - 1;
       continue;
     }
-    rememberToken('punct', ch);
-    if (ch === open) depth += 1;
-    else if (ch === close) {
+    if (ch === '(' || ch === '[' || ch === '{') {
+      delimiterStack.push({
+        open: ch,
+        control: ch === '('
+          && previousToken?.kind === 'word'
+          && controlParenthesisKeywords.has(previousToken.value)
+          && !['.', '#'].includes(tokenBeforePrevious?.value),
+      });
+      rememberToken('punct', ch);
+      if (ch === open) depth += 1;
+      continue;
+    }
+    if (ch === ')' || ch === ']' || ch === '}') {
+      const entry = delimiterStack[delimiterStack.length - 1];
+      if (entry && { '(': ')', '[': ']', '{': '}' }[entry.open] === ch) delimiterStack.pop();
+      rememberToken(ch === ')' && entry?.control ? 'control-close' : 'punct', ch);
+      if (ch !== close) continue;
       depth -= 1;
       if (depth === 0) return i;
+      continue;
     }
+    rememberToken('punct', ch);
   }
   return -1;
 }
