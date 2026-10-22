@@ -946,6 +946,10 @@ jobs:
           if [ -n "${BEFORE:-}" ]; then
             preflight_env+=("PREFLIGHT_BASE_REVISION=$BEFORE")
           fi
+          if [ "$EVENT_NAME" = 'workflow_dispatch' ]; then
+            preflight_env+=("PREFLIGHT_ARTICLE_IDS=${ARTICLE_IDS_INPUT:-}")
+            preflight_env+=("PREFLIGHT_SECTION=${SECTION_INPUT:-}")
+          fi
           env "${preflight_env[@]}" node scripts/ci/check-blog-body-syntax.mjs
           PREFLIGHT_SCAN_MODE="$scan_mode" \
             PREFLIGHT_ARTICLE_IDS="${ARTICLE_IDS_INPUT:-}" \

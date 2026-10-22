@@ -622,6 +622,29 @@ test('filesToScan: "changed" con lista vuota e\' un push legittimo che non tocca
   assert.deepEqual(filesToScan(perRoot, { scanMode: 'changed', changedFiles: [] }), []);
 });
 
+test('filesToScan: una dispatch esplicita limita i transform ai target dichiarati', () => {
+  const a = path.join(ROOT, 'content/blog-body/it/a.ts');
+  const b = path.join(ROOT, 'content/blog-body/en/b.ts');
+  const unrelated = path.join(ROOT, 'content/blog-body-ch/fr/unrelated.ts');
+  const perRoot = [
+    { rel: 'content/blog-body', files: [a, b] },
+    { rel: 'content/blog-body-ch', files: [unrelated] },
+  ];
+
+  assert.deepEqual(
+    filesToScan(perRoot, {
+      scanMode: 'full',
+      targetFiles: ['content/blog-body/en/b.ts'],
+    }),
+    [b],
+  );
+  assert.deepEqual(
+    filesToScan(perRoot, { scanMode: 'full', targetFiles: null }),
+    [a, b, unrelated],
+    'null conserva la scansione piena della dispatch senza ID',
+  );
+});
+
 // ── Il parser: assente = errore, MAI skip ───────────────────────────────────
 
 test('senza esbuild il gate LANCIA, invece di dichiararsi saltato', () => {
@@ -819,6 +842,9 @@ test('i publisher rapidi eseguono il syntax gate con lo stesso fallback full', (
     assert.match(src, /PREFLIGHT_ESBUILD_DIR=\"?\$RUNNER_TEMP\/preflight/);
     assert.match(src, /PREFLIGHT_SCAN_MODE=\"?\$scan_mode/);
     assert.match(src, /PREFLIGHT_CHANGED_FILES_FILE=\"?\$changed_files/);
+    const syntaxInputs = src.slice(Math.max(0, syntaxAt - 4000), syntaxAt);
+    assert.match(syntaxInputs, /PREFLIGHT_ARTICLE_IDS/, `${path.basename(workflowPath)} deve passare gli ID espliciti anche al syntax gate`);
+    assert.match(syntaxInputs, /PREFLIGHT_SECTION/, `${path.basename(workflowPath)} deve passare la sezione esplicita anche al syntax gate`);
     assert.match(src, /scan_mode=full/);
     assert.match(src, /git diff --quiet "\$BEFORE" "\$AFTER"/);
     for (const dependency of [

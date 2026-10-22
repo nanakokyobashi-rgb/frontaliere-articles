@@ -97,6 +97,12 @@
  * diff contro `github.event.before` non e' calcolabile (workflow_dispatch,
  * `before` assente o irraggiungibile per force-push) — MAI su una lista
  * vuota, che farebbe passare inosservato un corpo nuovo rotto.
+ *
+ * Una dispatch esplicita dei publisher rapidi puo' invece passare
+ * `PREFLIGHT_ARTICLE_IDS` (array JSON) e `PREFLIGHT_SECTION`: i pavimenti
+ * restano globali, ma i transform sono limitati ai quattro corpi del target
+ * che il publisher renderizzera'. Un array vuoto non definisce uno scope e
+ * conserva la scansione piena della sezione.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -111,6 +117,7 @@ import {
   missingCorpusMessage,
 } from '../lib/corpus-floors.mjs';
 import { CORPUS_SECTIONS } from '../lib/corpus-sections.mjs';
+import { bodyFilesForArticleIds } from './check-blog-body-links.mjs';
 
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -291,6 +298,11 @@ export function readChangedFiles(env = process.env) {
  * Decide quali file passare a esbuild. Pura: non tocca il filesystem, prende
  * in input cio' che `run()` ha gia' raccolto con `collectTypeScriptFiles`.
  *
+ * `targetFiles !== null` e' lo scope pre-calcolato di una dispatch esplicita:
+ * vale solo per quella invocazione e non indebolisce i pavimenti. Il chiamante
+ * deve usare `null` per un array di ID vuoto, cosi' la dispatch di sezione
+ * conserva la scansione piena.
+ *
  * `scanMode !== 'changed'` (assente, `'full'`, o qualunque altra cosa) e'
  * SEMPRE scansione piena — il default sicuro. Solo `scanMode === 'changed'`
  * scopa ai `changedFiles`, e un push che non tocca nessun corpo produce
@@ -298,8 +310,12 @@ export function readChangedFiles(env = process.env) {
  * rotto passato inosservato: quello e' il caso "diff non calcolabile", che il
  * chiamante deve mappare su scansione piena PRIMA di arrivare qui).
  */
-export function filesToScan(perRoot, { scanMode, changedFiles = [] } = {}) {
+export function filesToScan(perRoot, { scanMode, changedFiles = [], targetFiles = null } = {}) {
   const allFiles = perRoot.flatMap((r) => r.files);
+  if (targetFiles !== null) {
+    const targetSet = new Set(targetFiles);
+    return allFiles.filter((file) => targetSet.has(path.relative(ROOT, file)));
+  }
   if (scanMode !== 'changed') return allFiles;
   const changedSet = new Set(changedFiles);
   return allFiles.filter((f) => changedSet.has(path.relative(ROOT, f)));
@@ -390,6 +406,19 @@ export async function run({
   }
 
   const scanMode = env.PREFLIGHT_SCAN_MODE === 'changed' ? 'changed' : 'full';
+  let targetFiles = null;
+  const explicitTargetIds = String(env.PREFLIGHT_ARTICLE_IDS || '').trim();
+  if (explicitTargetIds) {
+    try {
+      const articleIds = JSON.parse(explicitTargetIds);
+      if (!Array.isArray(articleIds)) throw new Error('deve essere un array JSON');
+      const requestedFiles = bodyFilesForArticleIds(env.PREFLIGHT_SECTION, articleIds);
+      if (requestedFiles.length > 0) targetFiles = requestedFiles;
+    } catch (parseError) {
+      error(`::error::preflight blog-body — PREFLIGHT_ARTICLE_IDS non valido: ${parseError?.message || parseError}`);
+      return 1;
+    }
+  }
   let changedFiles = [];
   if (scanMode === 'changed') {
     try {
@@ -399,7 +428,23 @@ export async function run({
       return 1;
     }
   }
-  const files = filesToScan(perRoot, { scanMode, changedFiles });
+  // A calculable push diff always wins over an accidental target env: the
+  // explicit-id scope belongs only to workflow_dispatch publishers.
+  const effectiveTargetFiles = scanMode === 'changed' ? null : targetFiles;
+  const files = filesToScan(perRoot, { scanMode, changedFiles, targetFiles: effectiveTargetFiles });
+
+  if (effectiveTargetFiles !== null) {
+    const present = new Set(files.map((file) => path.relative(ROOT, file)));
+    const missing = effectiveTargetFiles.filter((file) => !present.has(file));
+    if (missing.length > 0) {
+      error(
+        '::error::preflight blog-body — target esplicito non trovato nel checkout: ' +
+          missing.join(', '),
+      );
+      return 1;
+    }
+    log(`preflight blog-body: dispatch esplicita, ${files.length} corpo/i target analizzati`);
+  }
 
   if (scanMode === 'changed') {
     const total = perRoot.reduce((sum, r) => sum + r.count, 0);
