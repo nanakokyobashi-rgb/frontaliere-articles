@@ -24,6 +24,11 @@
  *                          dal registry restano in `skippedIds`: non possono
  *                          essere renderizzati e non devono bloccare gli ID
  *                          validi dello stesso commit.
+ *   article-plan [shard|r2]
+ *                          confronta il push base con il checkout sulle
+ *                          superfici SEO/meta/slug/registry e stampa gli ID
+ *                          articolo realmente cambiati. Serve a riattivare il
+ *                          renderer anche quando il body non è toccato.
  *   r2-plan                legge da stdin i file cambiati (uno per riga; accetta
  *                          anche `git diff --name-status`) e stampa la matrice
  *                          JSON `[{section, ids, bootstrap, removeStaleCantonRssFeeds?}]`
@@ -254,9 +259,14 @@ function gitSourceAtRevision(revision, rel) {
     return execFileSync('git', ['show', `${revision}:${repoPathAtRevision(rel)}`], {
       encoding: 'utf8',
       maxBuffer: 64 * 1024 * 1024,
+      stdio: ['ignore', 'pipe', 'pipe'],
     });
-  } catch {
-    return null;
+  } catch (error) {
+    const diagnostic = String(error?.stderr ?? '');
+    // A file added by this push has no base blob. Any other git failure is a
+    // broken comparison input and must stop the resolver, not widen the plan.
+    if (error?.status === 128 && /does not exist in|exists on disk, but not in/.test(diagnostic)) return null;
+    throw new Error(`git show ${revision}:${repoPathAtRevision(rel)} failed: ${diagnostic.trim() || error?.message || error}`);
   }
 }
 
