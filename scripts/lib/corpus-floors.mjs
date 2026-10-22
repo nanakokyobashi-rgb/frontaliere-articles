@@ -25,8 +25,9 @@ import '../../host/cantonSectionsBootstrap.mjs';
  * all'artefatto — i file sorgente del corpus — quindi scala da solo per sempre
  * e non ha una taratura da rivedere.
  *
- * Solo builtin Node, per la regola di `scripts/ci/**`: eseguibile senza
- * `npm ci`.
+ * L'I/O resta su builtin Node, ma il lettore AST delle sorgenti statiche
+ * richiede il compilatore TypeScript 5.8.3. I workflow leggeri installano il
+ * runtime pin-nato in isolamento, senza installare le dipendenze del progetto.
  */
 import fs from 'node:fs';
 import path from 'node:path';

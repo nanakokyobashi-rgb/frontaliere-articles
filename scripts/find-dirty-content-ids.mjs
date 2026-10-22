@@ -92,15 +92,12 @@
 // path che usa il publisher (`expectedShardPath`, condivisa con
 // reconcile-article-shards.mjs).
 //
-// «NIENTE npm» NON VUOL DIRE «NIENTE RETE». Il vincolo dichiarato nel workflow
-// chiamante e' che la detection non dipenda da `npm ci`, per restare immune
-// agli ETIMEDOUT del registro npm che hanno gia' causato incidenti (vedi
-// l'intestazione di reconcile-article-shards.yml). `fetch` e' builtin di Node
-// 22: nessuna installazione, nessun registro, quindi il vincolo resta
-// soddisfatto anche ora che questo file fa rete. Costo misurato: ~116
-// richieste (29 candidati × 4 locali), sotto il minuto con concorrenza 8.
-// reconcile-article-shards.mjs, che il workflow gemello lancia allo stesso
-// modo, fa rete per lo stesso motivo e con lo stesso vincolo.
+// «Niente dipendenze del progetto» NON VUOL DIRE «niente runtime»: questo file
+// importa `reconcile-article-shards.mjs`, che attraversa il lettore AST delle
+// sorgenti statiche. Il workflow prepara quindi il solo compilatore TypeScript
+// pin-nato in una directory isolata; `fetch` resta builtin di Node 22 e non
+// passa dal registro npm per le ~116 richieste live (costo misurato: sotto il
+// minuto con concorrenza 8).
 //
 // IN DUBBIO SI TIENE. Un fetch che fallisce (rete, timeout, 5xx) NON e'
 // «pulita»: l'id resta candidato. Un falso positivo costa una ripubblicazione

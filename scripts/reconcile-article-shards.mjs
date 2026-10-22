@@ -45,9 +45,10 @@
 // La logica di riconciliazione è esportata come funzioni pure (nessun accesso
 // a rete/fs/git dentro di esse) e testata da
 // generator/tests/reconcile-article-shards.test.mjs con `node --test`.
-// Solo builtin Node (fetch globale di Node 22, child_process per git):
-// il chiamante NON fa `npm ci`, quindi la detection è immune alla stessa
-// classe di guasto (ETIMEDOUT su npm) che deve riparare.
+// I/O e rete usano solo builtin Node (fetch globale di Node 22, child_process
+// per git). Il conteggio sorgente passa dal lettore AST condiviso e richiede
+// `ARTICLE_SOURCE_TYPESCRIPT`: il workflow installa solo quel compilatore
+// pin-nato, fuori dalle dipendenze del progetto e con retry dedicati.
 //
 // CLI:
 //   node scripts/reconcile-article-shards.mjs --out <reportJsonPath> [--cap N]

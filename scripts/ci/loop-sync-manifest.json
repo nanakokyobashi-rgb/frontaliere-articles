@@ -1943,7 +1943,7 @@
     {
       "path": "scripts/reconcile-article-shards.mjs",
       "mode": "corpus-only",
-      "reason": "La detection della riconciliazione: diff slug annunciati (API pubblicata) vs pagine reali (ls-tree dei clone blob:none degli 8 shard), esclusi gli id svizzeri shadowed, con ordinamento dal piu' recente e cap anti-tempesta. Builtin-only apposta: il chiamante non fa npm ci, cosi' la detection non puo' fallire nello stesso modo del run che ripara.",
+      "reason": "La detection della riconciliazione: diff slug annunciati (API pubblicata) vs pagine reali (ls-tree dei clone blob:none degli 8 shard), esclusi gli id svizzeri shadowed, con ordinamento dal piu' recente e cap anti-tempesta. I/O e rete restano builtin Node; il conteggio sorgente usa il lettore AST condiviso e il workflow prepara il solo compilatore TypeScript pin-nato in isolamento, senza installare le dipendenze del progetto.",
       "baseline": {
         "site": null,
         "corpus": "ea7f649e2dde0dde",
