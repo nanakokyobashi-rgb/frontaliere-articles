@@ -883,6 +883,7 @@ jobs:
         env:
           BEFORE: ${{ steps.push_range.outputs.before }}
           AFTER: ${{ steps.push_range.outputs.after }}
+          EVENT_NAME: ${{ github.event_name }}
           PREFLIGHT_EVENT_NAME: ${{ github.event_name }}
           PREFLIGHT_PUSH_BASE_REVISION: ${{ steps.push_range.outputs.before }}
           ARTICLE_IDS_INPUT: ${{ inputs.article_ids }}

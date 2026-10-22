@@ -862,6 +862,11 @@ test('i publisher rapidi eseguono il syntax gate con lo stesso fallback full', (
   const sectionSrc = fs.readFileSync(FAST_SECTION_WORKFLOW, 'utf8');
   assert.match(
     sectionSrc,
+    /^\s+EVENT_NAME:\s*\$\{\{\s*github\.event_name\s*\}\}/mu,
+    'fast-publish-section deve esportare EVENT_NAME allo shell preflight',
+  );
+  assert.match(
+    sectionSrc,
     /PREFLIGHT_BASE_REVISION=\$BEFORE/u,
     'fast-publish-section deve costruire la base reale della push anche nei replay workflow_run',
   );
