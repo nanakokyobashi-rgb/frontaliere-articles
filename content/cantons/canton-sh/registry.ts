@@ -160,4 +160,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'neunkirch-supervisore-cantonale',
+ category: 'novita',
+ date: '2026-10-22T02:31:34.951Z',
+ image: '/images/blog/article-neunkirch-supervisore-cantonale.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

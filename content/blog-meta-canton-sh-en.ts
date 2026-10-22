@@ -45,6 +45,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.sciaffusa-banche-riforma-federale.title': 'Schaffhausen banks: Government rejects federal rules',
     'blog.article.sciaffusa-banche-riforma-federale.excerpt': 'The Government of Schaffhausen criticizes the federal banking reform proposal, fearing disproportionate burdens for local institutions.',
     'blog.article.sciaffusa-banche-riforma-federale.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.neunkirch-supervisore-cantonale.title': 'Neunkirch accepts cantonal supervisor',
+    'blog.article.neunkirch-supervisore-cantonale.excerpt': 'The Canton sends Stephan Rawyler to Neunkirch: he will be able to give instructions to the City Council and participate in its sessions.',
+    'blog.article.neunkirch-supervisore-cantonale.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

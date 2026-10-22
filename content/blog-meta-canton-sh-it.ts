@@ -45,6 +45,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.sciaffusa-banche-riforma-federale.title': 'Banche Sciaffusa: Governo respinge regole federali',
     'blog.article.sciaffusa-banche-riforma-federale.excerpt': 'Il Governo di Sciaffusa critica la proposta federale di riforma bancaria, temendo oneri sproporzionati per gli istituti locali.',
     'blog.article.sciaffusa-banche-riforma-federale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.neunkirch-supervisore-cantonale.title': 'Neunkirch accetta il supervisore cantonale',
+    'blog.article.neunkirch-supervisore-cantonale.excerpt': 'Il Cantone invia Stephan Rawyler a Neunkirch: potrà impartire istruzioni al Consiglio comunale e partecipare alle sue sedute.',
+    'blog.article.neunkirch-supervisore-cantonale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;
