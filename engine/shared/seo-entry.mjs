@@ -48,6 +48,7 @@ function matchingDelimiter(src, openIdx) {
   let statementStart = true;
   let lineBreakSinceToken = false;
   let caseLabelPending = false;
+  let lastClosedParenControl = null;
   const parenContexts = [];
   const bracketContexts = [];
   const braceContexts = [];
@@ -112,6 +113,8 @@ function matchingDelimiter(src, openIdx) {
     }
     const lineBreakBeforeToken = lineBreakSinceToken;
     lineBreakSinceToken = false;
+    const controlKeywordBeforeToken = lastSignificant === 'close-paren' ? lastClosedParenControl : null;
+    lastClosedParenControl = null;
     if (ch === '`') {
       const end = templateEnd(src, i);
       if (end === -1) return -1;
@@ -166,7 +169,7 @@ function matchingDelimiter(src, openIdx) {
       canStartRegex = !member && REGEX_PREFIX_KEYWORDS.has(word);
       lastIdentifier = { value: word, member, statementStart: identifierAtStatementStart };
       lastSignificant = 'identifier';
-      if (!member && identifierAtStatementStart && braceContexts.some(context => context.isBlock)
+      if (!member && identifierAtStatementStart && braceContexts.some(context => context.isSwitch)
         && (word === 'case' || word === 'default')) {
         caseLabelPending = true;
       }
@@ -220,10 +223,14 @@ function matchingDelimiter(src, openIdx) {
     }
     if (ch === '(') {
       const isTarget = open === '(' && i === openIdx;
+      const controlKeyword = lastIdentifier && !lastIdentifier.member
+        && CONTROL_PAREN_KEYWORDS.has(lastIdentifier.value)
+        ? lastIdentifier.value
+        : null;
       parenContexts.push({
         isTarget,
-        control: Boolean(lastIdentifier && !lastIdentifier.member
-          && CONTROL_PAREN_KEYWORDS.has(lastIdentifier.value)),
+        control: controlKeyword !== null,
+        controlKeyword,
       });
       if (isTarget) depth += 1;
       canStartRegex = true;
@@ -234,6 +241,7 @@ function matchingDelimiter(src, openIdx) {
     }
     if (ch === ')') {
       const context = parenContexts.pop();
+      lastClosedParenControl = context?.controlKeyword ?? null;
       if (context?.isTarget) {
         depth -= 1;
         if (depth === 0) return i;
@@ -279,7 +287,11 @@ function matchingDelimiter(src, openIdx) {
           && !lastIdentifier.member && BLOCK_BRACE_KEYWORDS.has(lastIdentifier.value))
         || caseLabelPending
       );
-      braceContexts.push({ isTarget, isBlock: Boolean(isBlock) });
+      braceContexts.push({
+        isTarget,
+        isBlock: Boolean(isBlock),
+        isSwitch: Boolean(isBlock && controlKeywordBeforeToken === 'switch'),
+      });
       if (isTarget) depth += 1;
       canStartRegex = true;
       lastSignificant = isBlock ? 'open-block' : 'open-object';
