@@ -15,6 +15,38 @@
     "canton-vd::https://www.guidedufrontalier.com/actualites/retraite-frontalier-polypensionne": {
       "section": "canton-vd",
       "ts": 1792665566582
+    },
+    "canton-vd::https://www.ledauphine.com/faits-divers-justice/2026/10/22/a412-la-procureure-d-annecy-demande-la-suspension-des-travaux": {
+      "section": "canton-vd",
+      "ts": 1792667481021
+    },
+    "canton-vd::https://www.ledauphine.com/economie/2026/10/21/centre-de-sante-1-000-personnes-ont-trouve-un-medecin-d-autres-attendent": {
+      "section": "canton-vd",
+      "ts": 1792667496023
+    },
+    "canton-vd::https://www.ledauphine.com/sante/2026/10/21/on-sait-que-la-distance-est-un-frein-dans-le-depistage-apres-l-albanais-un-nouveau-mammographe-dans-le-chablais-ou-la-vallee-de-l-arve": {
+      "section": "canton-vd",
+      "ts": 1792667510030
+    },
+    "canton-vd::https://www.guidedufrontalier.com/actualites/hebdo-du-frontalier": {
+      "section": "canton-vd",
+      "ts": 1792667531347
+    },
+    "canton-vd::https://www.ledauphine.com/faits-divers-justice/2026/10/22/contre-sens-sur-l-a40-trois-personnes-en-urgence-absolue-evacuees-a-l-hopital-d-annecy": {
+      "section": "canton-vd",
+      "ts": 1792667548777
+    },
+    "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-158?s=2": {
+      "section": "canton-vd",
+      "ts": 1792667562107
+    },
+    "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-157?s=6": {
+      "section": "canton-vd",
+      "ts": 1792667573137
+    },
+    "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-157?s=4": {
+      "section": "canton-vd",
+      "ts": 1792667584119
     }
   }
 }
