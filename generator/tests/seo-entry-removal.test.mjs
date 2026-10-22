@@ -135,7 +135,11 @@ test('il resolver SEO non tratta le parole membro come prefissi regex', () => {
       `obj?.${keyword}`,
       `obj. /* commento */ ${keyword}`,
       `obj?. /* commento */ ${keyword}`,
+      `obj. /* marker /* */ ${keyword}`,
+      `obj?. /* marker /* */ ${keyword}`,
       `obj. // commento\n${keyword}`,
+      `obj. // commento\u2028${keyword}`,
+      `obj. // commento\u2029${keyword}`,
     ]) {
       const id = `member-${keyword}-${access.includes('?.') ? 'optional' : 'dot'}`;
       const source = [
@@ -163,6 +167,18 @@ test('il resolver SEO conserva il prefisso regex dopo commenti complessi', () =>
     assert.match(source.slice(match.index, match.closeIdx + 1), /after: 'resta'/u, keyword);
     assert.equal(source[match.closeIdx], '}', keyword);
   }
+});
+
+test('il resolver SEO ignora marker di commento dentro una regex prima di un accesso membro', () => {
+  const source = [
+    'export const SEO = {',
+    "  'blog-regex-member': { value: /[\\/\\*\\/\\/]/.default / 2, after: 'resta' },",
+    '};',
+  ].join('\n');
+  const [match] = findSeoEntryMatches(source, 'regex-member', 'fixture.ts');
+  assert.ok(match);
+  assert.equal(source[match.closeIdx], '}');
+  assert.match(source.slice(match.index, match.closeIdx + 1), /after: 'resta'/u);
 });
 
 test('la scansione fallisce esplicitamente su stringa, template e commento non chiusi', () => {

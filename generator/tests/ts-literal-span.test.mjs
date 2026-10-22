@@ -176,7 +176,11 @@ test('matchingDelimiter non tratta le parole membro come prefissi regex', () => 
       `obj?.${keyword}`,
       `obj. /* commento */ ${keyword}`,
       `obj?. /* commento */ ${keyword}`,
+      `obj. /* marker /* */ ${keyword}`,
+      `obj?. /* marker /* */ ${keyword}`,
       `obj. // commento\n${keyword}`,
+      `obj. // commento\u2028${keyword}`,
+      `obj. // commento\u2029${keyword}`,
     ]) {
       const src = `{ value: ${access} / 2, after: 'resta' }`;
       assert.equal(
@@ -197,6 +201,11 @@ test('matchingDelimiter conserva il prefisso regex dopo commenti complessi', () 
       `${keyword}: la graffa nel regex non deve chiudere l oggetto`,
     );
   }
+});
+
+test('matchingDelimiter ignora marker di commento dentro una regex prima di un accesso membro', () => {
+  const src = "{ value: /[/*//]/.default / 2, after: 'resta' }";
+  assert.equal(matchingDelimiter(src, 0), src.lastIndexOf('}'));
 });
 
 test('commenti e stringhe che imitano dichiarazioni non contano come duplicati', () => {

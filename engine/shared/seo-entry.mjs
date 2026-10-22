@@ -20,23 +20,21 @@ function matchingDelimiter(src, openIdx) {
   if (!close) throw new Error(`matchingDelimiter: '${open}' non è un delimitatore di apertura`);
   let depth = 0;
   let quote = null;
+  // Track code tokens in the forward scan. A backward search cannot tell a
+  // nested `/*` marker from the start of the block comment it is inside.
   let previousToken = null;
-  let previousTokenWasMemberProperty = false;
-  const regexPrefixKeywords = new Set([
-    'return', 'throw', 'case', 'break', 'continue', 'debugger', 'default', 'delete', 'void',
-    'typeof', 'instanceof', 'in', 'of', 'yield', 'await', 'else', 'do',
-  ]);
-  const regexPrefixPunctuation = new Set([
-    '(', '[', '{', ',', ':', ';', '=', '!', '?', '+', '-', '*', '%', '&', '|', '^', '~', '<', '>',
-  ]);
-  const markToken = (token, memberProperty = false) => {
-    previousToken = token;
-    previousTokenWasMemberProperty = memberProperty;
+  let tokenBeforePrevious = null;
+  const rememberToken = (kind, value) => {
+    tokenBeforePrevious = previousToken;
+    previousToken = { kind, value };
   };
+
   const canStartRegex = () => {
     if (previousToken === null) return true;
-    if (previousTokenWasMemberProperty) return false;
-    return regexPrefixPunctuation.has(previousToken) || regexPrefixKeywords.has(previousToken);
+    if (previousToken.kind === 'punct' && '([{=,:;!?&|+\-*%^~<>'.includes(previousToken.value)) return true;
+    return previousToken.kind === 'word'
+      && /^(?:return|throw|case|break|continue|debugger|default|delete|void|typeof|instanceof|in|of|yield|await|else|do)$/.test(previousToken.value)
+      && tokenBeforePrevious?.value !== '.';
   };
 
   const skipRegex = (start) => {
@@ -62,16 +60,13 @@ function matchingDelimiter(src, openIdx) {
     const ch = src[i];
     if (quote !== null) {
       if (ch === '\\') { i += 1; continue; }
-      if (ch === quote) {
-        quote = null;
-        markToken('literal');
-      }
+      if (ch === quote) quote = null;
       continue;
     }
     if (ch === '/' && src[i + 1] === '/') {
-      const nl = src.indexOf('\n', i);
-      if (nl === -1) return -1;
-      i = nl;
+      let end = i + 2;
+      while (end < src.length && !'\n\r\u2028\u2029'.includes(src[end])) end += 1;
+      i = end - 1;
       continue;
     }
     if (ch === '/' && src[i + 1] === '*') {
@@ -80,34 +75,31 @@ function matchingDelimiter(src, openIdx) {
       i = end + 1;
       continue;
     }
+    if (/\s/.test(ch)) continue;
     if (ch === '/' && canStartRegex()) {
       const end = skipRegex(i);
       if (end === -1) return -1;
-      markToken('literal');
+      if (end === i) {
+        rememberToken('punct', '/');
+        continue;
+      }
+      rememberToken('literal', 'regex');
       i = end;
       continue;
     }
-    if (ch === "'" || ch === '"' || ch === '`') { quote = ch; continue; }
-    if (/\s/.test(ch)) continue;
-    if (/[A-Za-z_$]/.test(ch)) {
-      const word = /^[A-Za-z_$][\w$]*/.exec(src.slice(i))[0];
-      markToken(word, previousToken === '.' || previousToken === '?.');
-      i += word.length - 1;
+    if (ch === "'" || ch === '"' || ch === '`') {
+      rememberToken('literal', ch);
+      quote = ch;
       continue;
     }
-    if (/[0-9]/.test(ch)) {
+    if (/[A-Za-z_$]/.test(ch)) {
       let end = i + 1;
-      while (/[A-Za-z0-9_$]/.test(src[end] || '')) end += 1;
-      markToken('literal');
+      while (end < src.length && /[A-Za-z0-9_$]/.test(src[end])) end += 1;
+      rememberToken('word', src.slice(i, end));
       i = end - 1;
       continue;
     }
-    if (ch === '?' && src[i + 1] === '.') {
-      markToken('?.');
-      i += 1;
-      continue;
-    }
-    markToken(ch);
+    rememberToken('punct', ch);
     if (ch === open) depth += 1;
     else if (ch === close) {
       depth -= 1;
