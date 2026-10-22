@@ -3198,6 +3198,7 @@ test('fast-publish verso gli shard ignora i corpi cantonali, quello R2 ignora le
 
 test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenziali obbligatorie', () => {
   const wf = read('.github/workflows/fast-publish-section.yml');
+  const resolver = read('scripts/ci/fast-publish-section-resolve.sh');
   assert.match(wf, /workflow_run:\n\s+workflows: \['Publish article data API'\]\n\s+types: \[completed\]\n\s+branches: \[main\]/);
   assert.match(wf, /github\.event\.workflow_run\.conclusion == 'success'/);
   assert.match(wf, /github\.event\.workflow_run\.event == 'push'[\s\S]*github\.event\.workflow_run\.event == 'schedule'[\s\S]*github\.event\.workflow_run\.event == 'workflow_dispatch'/);
@@ -3218,12 +3219,12 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     /pinned_source="\$\{SOURCE_MAIN_COMMIT_INPUT:-\$SOURCE_COMMIT_INPUT\}[\s\S]*replay stantio saltato nel resolve/,
     'il resolve deve saltare un bounded replay quando main e\u0027 avanzata',
   );
-  const coverDrainGuardStart = wf.indexOf("if [ \"$EVENT_NAME\" = 'push' ] || { [ \"$EVENT_NAME\" = 'workflow_run' ] && [ \"$WORKFLOW_RUN_EVENT\" = 'push' ]; }; then");
-  const staleResolveStart = wf.indexOf('if [ "$current_main" != "$pinned_source" ]');
+  const coverDrainGuardStart = resolver.indexOf("if [ \"$EVENT_NAME\" = 'push' ] || { [ \"$EVENT_NAME\" = 'workflow_run' ] && [ \"$WORKFLOW_RUN_EVENT\" = 'push' ]; }; then");
+  const staleResolveStart = resolver.indexOf('if [ "$current_main" != "$pinned_source" ]');
   assert.ok(coverDrainGuardStart >= 0 && coverDrainGuardStart < staleResolveStart, 'il cover-drain guard deve precedere il recovery stale');
-  const staleResolve = wf.slice(
+  const staleResolve = resolver.slice(
     staleResolveStart,
-    wf.indexOf('\n          before="${PUSH_BEFORE:-}"', staleResolveStart),
+    resolver.indexOf('\nbefore="${PUSH_BEFORE:-}"', staleResolveStart),
   );
   assert.match(staleResolve, /FIREBASE_SERVICE_ACCOUNT_JSON assente/);
   assert.match(staleResolve, /bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh "\$REPO" "\$dispatch_title" --ref main/);
@@ -3275,7 +3276,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /-f source_commit="\$current_main"/);
   assert.equal(
-    (wf.match(/-f dispatch_nonce="\$dispatch_nonce"/g) ?? []).length,
+    ((wf.match(/-f dispatch_nonce="\$dispatch_nonce"/g) ?? []).length
+      + (resolver.match(/-f dispatch_nonce="\$dispatch_nonce"/g) ?? []).length),
     4,
     'ogni redispatch stale deve conservare il nonce della run originaria o generarne un fallback per sezione',
   );
