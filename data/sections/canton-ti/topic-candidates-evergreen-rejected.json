@@ -4,9 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ti::https://www.laregione.ch/estero/confine/1954732/euro-ponte-interno-stata-bagagli": {
+    "canton-ti::https://www.mattinonline.ch/it/article/60592/auto-di-lusso-e-casa-in-florida-il-buco-milionario-alle-ffs-e-i-controlli": {
       "section": "canton-ti",
-      "ts": 1792466792077
+      "ts": 1792710995948
+    },
+    "canton-ti::https://www.laprovinciadivarese.it/cade-da-unimpalcatura-in-canton-ticino-muore-un-architetto-italiano-412740": {
+      "section": "canton-ti",
+      "ts": 1792711008963
     }
   }
 }
