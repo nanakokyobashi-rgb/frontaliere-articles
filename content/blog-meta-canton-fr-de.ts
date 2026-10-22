@@ -45,6 +45,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.julmy-corsa-consiglio-stato.title': 'Markus Julmy, Kandidat der Mitte für den Staatsrat',
     'blog.article.julmy-corsa-consiglio-stato.excerpt': 'Markus Julmy ist einer von zwei Kandidaten der Mitte auf der Liste des rechtsgerichteten Bündnisses: Der Abgeordnete aus dem Sensebezirk hebt sein unternehmerisches Profil hervor.',
     'blog.article.julmy-corsa-consiglio-stato.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.bulle-friburgo-linea-diretta.title': 'Freiburg verzichtet auf die Direktverbindung Bulle-Freiburg',
+    'blog.article.bulle-friburgo-linea-diretta.excerpt': 'Der Freiburger Staatsrat gibt das Direktprojekt auf: Heute dauert die Verbindung Bulle-Freiburg etwa 37 Minuten; das Ziel über Romont liegt bis 2050 bei 25 Minuten.',
+    'blog.article.bulle-friburgo-linea-diretta.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonFrDe;

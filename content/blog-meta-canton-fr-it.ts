@@ -45,6 +45,9 @@ const blogMetaCantonFrIt: Record<string, string> = {
     'blog.article.julmy-corsa-consiglio-stato.title': 'Markus Julmy candidato del Centro al Consiglio di Stato',
     'blog.article.julmy-corsa-consiglio-stato.excerpt': 'Markus Julmy è uno dei due candidati del Centro nella lista dell\'Intesa di destra: il deputato singinese mette in evidenza il suo profilo imprenditoriale.',
     'blog.article.julmy-corsa-consiglio-stato.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.bulle-friburgo-linea-diretta.title': 'Friburgo rinuncia alla linea diretta Bulle-Friburgo',
+    'blog.article.bulle-friburgo-linea-diretta.excerpt': 'Il Consiglio di Stato friburghese abbandona il progetto diretto: oggi Bulle-Friburgo richiede circa 37 minuti; l\'obiettivo via Romont è 25 minuti entro il 2050.',
+    'blog.article.bulle-friburgo-linea-diretta.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonFrIt;

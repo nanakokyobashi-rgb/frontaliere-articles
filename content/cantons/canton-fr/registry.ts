@@ -160,4 +160,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'bulle-friburgo-linea-diretta',
+ category: 'novita',
+ date: '2026-10-22T14:10:19.534Z',
+ image: '/images/blog/article-bulle-friburgo-linea-diretta.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['FR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

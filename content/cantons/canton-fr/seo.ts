@@ -543,6 +543,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bulle-friburgo-linea-diretta': {
+    title: 'Friburgo rinuncia alla linea diretta Bulle-Friburgo',
+    description: 'Il Consiglio di Stato friburghese abbandona la linea diretta: oggi Bulle-Friburgo dura circa 37 minuti, obiettivo 25 entro il 2050 via Romont.',
+    keywords: 'frontalieri, ticino, svizzera, italia, friburgo, rinuncia, alla, linea',
+    ogTitle: 'Bulle-Friburgo: abbandonato il progetto diretto',
+    ogDescription: 'Il progetto di un collegamento diretto Bulle-Friburgo è stato abbandonato per i costi elevati, le difficoltà tecniche e l\'impatto sul paesaggio. L\'alternativa punta a modernizzare la linea via Romont, con un obiettivo di circa 25 minuti entro',
+    canonicalPath: '/articoli-friburgo/bulle-friburgo-linea-diretta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Friburgo rinuncia alla linea diretta Bulle-Friburgo",
+      "description": "Il Consiglio di Stato friburghese abbandona la linea diretta: oggi Bulle-Friburgo dura circa 37 minuti, obiettivo 25 entro il 2050 via Romont.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-bulle-friburgo-linea-diretta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-22T14:10:19+00:00",
+      "dateModified": "2026-10-22T14:10:19+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-friburgo/bulle-friburgo-linea-diretta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
