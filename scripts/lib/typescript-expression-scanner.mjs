@@ -398,7 +398,7 @@ function delimiterContextAt(source, offset) {
     }
     if (/[A-Za-z_$]/u.test(ch)) {
       const identifier = /^[A-Za-z_$][\w$]*/u.exec(source.slice(index, offset))[0];
-      const memberProperty = previousToken === '.';
+      const memberProperty = previousToken === '.' || previousToken === '#';
       if (['const', 'let', 'var'].includes(identifier)) {
         variableDeclarationDepth = delimiters.length;
         variableNamePending = true;
@@ -1010,7 +1010,7 @@ function scanTypeScriptExpression(source, offset, terminator) {
       index += 1;
       continue;
     }
-    if (ch === '.') {
+    if (ch === '.' || ch === '#') {
       canStartRegex = false;
       afterMemberAccess = true;
       awaitingControlParen = false;

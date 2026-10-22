@@ -146,6 +146,11 @@ test('lo scanner ignora le parentesi dentro regex dopo keyword prefix', () => {
   }
 });
 
+test('lo scanner tratta i private name come proprietà membro prima di una divisione', () => {
+  const source = '[this.#default / /\\]/.test(value), [key]: value]';
+  assert.equal(computedPropertyKeyEnd(source, 0), source.length);
+});
+
 test('il reader conserva blocchi, espressioni e case con tipi annidati', () => {
   const source = [
     "try {} catch {} /'blog.article.fake.catch': 'fake',/ / /x/;",
