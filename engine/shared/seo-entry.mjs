@@ -24,6 +24,7 @@ function matchingDelimiter(src, openIdx) {
   // nested `/*` marker from the start of the block comment it is inside.
   let previousToken = null;
   let tokenBeforePrevious = null;
+  let lineBreakSinceToken = false;
   const delimiterStack = [];
   const controlParenthesisKeywords = new Set(['if', 'while', 'for', 'with', 'switch', 'catch']);
   const rememberToken = (kind, value) => {
@@ -79,10 +80,16 @@ function matchingDelimiter(src, openIdx) {
     if (ch === '/' && src[i + 1] === '*') {
       const end = src.indexOf('*/', i + 2);
       if (end === -1) return -1;
+      if (/[\n\r\u2028\u2029]/u.test(src.slice(i, end + 2))) lineBreakSinceToken = true;
       i = end + 1;
       continue;
     }
-    if (/\s/.test(ch)) continue;
+    if (/\s/.test(ch)) {
+      if ('\n\r\u2028\u2029'.includes(ch)) lineBreakSinceToken = true;
+      continue;
+    }
+    const lineBreakBeforeToken = lineBreakSinceToken;
+    lineBreakSinceToken = false;
     if (ch === '/' && canStartRegex()) {
       const end = skipRegex(i);
       if (end === -1) return -1;
@@ -97,7 +104,7 @@ function matchingDelimiter(src, openIdx) {
     if (ch === '!' && src[i + 1] !== '=') {
       // A postfix non-null assertion ends an expression; a prefix bang starts
       // one. Keep the distinction so a following slash is classified safely.
-      rememberToken(isRegexPrefixBoundary(previousToken) || isRegexPrefixKeyword(previousToken)
+      rememberToken(lineBreakBeforeToken || isRegexPrefixBoundary(previousToken) || isRegexPrefixKeyword(previousToken)
         ? 'punct' : 'postfix', '!');
       continue;
     }
