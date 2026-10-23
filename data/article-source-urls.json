@@ -1,9 +1,4 @@
 {
-  "https://www.rsi.ch/info/dialogo/perch%c3%a9-sviluppare-nuovi-farmaci-costa-sempre-di-pi%c3%b9--4071262.html": {
-    "articleId": "costi-sviluppo-farmaci-2024",
-    "ts": "2026-09-16T01:35:52.682Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/goldbach-group-si-riorganizza%2c-fino-a-35-licenziamenti/92061588": {
     "articleId": "goldbach-group-ristrutturazione-licenziamenti",
     "ts": "2026-09-16T01:45:04.033Z",
@@ -2497,6 +2492,11 @@
   "https://www.laregione.ch/cantone/bellinzonese/1957946/bellinzona-pedala-verso-una-mobilita-piu-sicura": {
     "articleId": "bellinzona-nuova-strada-ciclabile",
     "ts": "2026-10-22T00:55:35.806Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/svizzera/svizzera/1958226/la-13esima-avs-in-attesa-del-suo-finanziamento": {
+    "articleId": "voto-iva-2028-pensione",
+    "ts": "2026-10-23T03:49:51.583Z",
     "keyForm": 2
   }
 }

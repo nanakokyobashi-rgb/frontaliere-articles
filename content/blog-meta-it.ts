@@ -13576,6 +13576,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bellinzona-nuova-strada-ciclabile.title': 'Bellinzona inaugura la prima strada ciclabile',
     'blog.article.bellinzona-nuova-strada-ciclabile.excerpt': 'Bellinzona inaugura la sua prima strada ciclabile Il tracciato misura tre chilometri Il percorso va da Giubiasco a Bellinzona Bici e traffico motorizzato',
     'blog.article.bellinzona-nuova-strada-ciclabile.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.voto-iva-2028-pensione.title': '13esima AVS: voto sull\'Iva, ipotesi all\'8,5% dal 2028',
+    'blog.article.voto-iva-2028-pensione.excerpt': 'L\'aliquota normale Iva passerebbe dall\'8,1 all\'8,5%.',
+    'blog.article.voto-iva-2028-pensione.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

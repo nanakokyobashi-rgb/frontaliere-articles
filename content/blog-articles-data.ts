@@ -45756,6 +45756,16 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'voto-iva-2028-pensione',
+ category: 'pensione',
+ date: '2026-10-23T03:49:50.323Z',
+ image: '/images/blog/article-voto-iva-2028-pensione.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
