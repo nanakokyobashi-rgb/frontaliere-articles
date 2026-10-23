@@ -323,3 +323,18 @@ describe('il timeout locale cresce dentro l\'allowance residua (stesso pattern d
     );
   });
 });
+
+describe('deadlineMs entra nei provider come numero finito', () => {
+  it('normalizza una volta sola alle due porte pubbliche', () => {
+    assert.match(
+      SRC,
+      /function _normalizeDeadlineMs\(value\) \{\n\s+return typeof value === 'number' && Number\.isFinite\(value\) \? value : undefined;\n\}/,
+      'la deadline deve essere sanificata prima dell\'arithmetic provider-specifica',
+    );
+    assert.equal(
+      (SRC.match(/o\.deadlineMs = _normalizeDeadlineMs\(o\.deadlineMs\);/g) || []).length,
+      2,
+      'callLLM e callSingleModel devono applicare la stessa normalizzazione all\'ingresso',
+    );
+  });
+});

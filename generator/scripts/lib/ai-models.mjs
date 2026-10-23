@@ -2285,6 +2285,15 @@ export function coerceRecordScore(value) {
 }
 
 /**
+ * Keep the optional absolute deadline numeric before it reaches any provider.
+ * A malformed deadline means "no deadline"; it must never become `NaN` in
+ * provider-specific timeout arithmetic (`setTimeout(..., NaN)` is ~1ms).
+ */
+function _normalizeDeadlineMs(value) {
+  return typeof value === 'number' && Number.isFinite(value) ? value : undefined;
+}
+
+/**
  * Unica lettura del flag dentro il modulo. I gate la usano invece di ripetere
  * il confronto: le opzioni arrivano gia' normalizzate dalle due porte pubbliche
  * (`callLLM` / `callSingleModel`), ma la coercizione e' idempotente e copre
@@ -9254,8 +9263,10 @@ async function _callModelWithCodexTransportRetry(model, messages, opts) {
  */
 export async function callSingleModel(messages, opts = {}) {
   const o = { ...DEFAULT_OPTS, ...opts };
-  // Normalizzato una volta sola, qui: da questo punto in giu' `o.recordScore`
-  // e' un booleano, per i gate come per chiunque legga le opzioni.
+  // Normalizzati una volta sola, qui: da questo punto in giu' `o.deadlineMs`
+  // e' numerico o assente e `o.recordScore` e' un booleano, per i gate come
+  // per chiunque legga le opzioni.
+  o.deadlineMs = _normalizeDeadlineMs(o.deadlineMs);
   o.recordScore = coerceRecordScore(o.recordScore);
   o._resolverContext = _newResolverContext();
   const model = o.model || AI_MODELS.GPT4O;
@@ -9352,6 +9363,7 @@ export async function callLLM(messages, opts = {}) {
   }
 
   const o = { ...DEFAULT_OPTS, ...opts };
+  o.deadlineMs = _normalizeDeadlineMs(o.deadlineMs);
   o.recordScore = coerceRecordScore(o.recordScore);
   o._resolverContext = _newResolverContext();
 
