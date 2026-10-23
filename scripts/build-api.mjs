@@ -57,15 +57,23 @@ import {
   assertSeoDescriptionMinimum,
   assertHistoricalSeoDescriptionsMigrated,
 } from '../generator/scripts/lib/seo-description-contract.mjs';
-const RSS_SERP_DESCRIPTION_MAX_CHARS = SEO_DESCRIPTION_MAX;
-const repairSerpSnippet = (text) => {
+const RSS_DESCRIPTION_MAX_CHARS = SEO_DESCRIPTION_MAX;
+const repairRssSnippet = (text) => {
   const repaired = repairSerpSnippetBase(text);
-  const bounded = truncateToClause(repaired, RSS_SERP_DESCRIPTION_MAX_CHARS);
+  const bounded = truncateToClause(repaired, RSS_DESCRIPTION_MAX_CHARS);
   if (!bounded) {
     throw new Error(
-      `build-api: refusing to publish an RSS item without a safe non-empty description within ${RSS_SERP_DESCRIPTION_MAX_CHARS} characters.`,
+      `build-api: refusing to publish an RSS item without a safe non-empty description within ${RSS_DESCRIPTION_MAX_CHARS} characters.`,
     );
   }
+  return bounded;
+};
+// RSS summaries are a separate syndication surface: the editorial excerpt may
+// be shorter than the SERP meta-description floor while still being valid RSS.
+// Keep the 80-character contract on actual SEO descriptions, not on every
+// localized summary the feed carries.
+const repairSerpSnippet = (text) => {
+  const bounded = repairRssSnippet(text);
   return assertSeoDescriptionMinimum(bounded, {
     sourceDescriptionLength: typeof text === 'string' ? text.length : undefined,
   });
@@ -199,9 +207,9 @@ import {
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const siteTitleSuffix = fs.readFileSync(path.join(ROOT, 'host', 'shared', 'titleSuffix.ts'), 'utf8');
 const siteDescriptionBudget = siteTitleSuffix.match(/export const META_DESCRIPTION_MAX_CHARS = (\d+);/);
-if (!siteDescriptionBudget || Number(siteDescriptionBudget[1]) !== RSS_SERP_DESCRIPTION_MAX_CHARS) {
+if (!siteDescriptionBudget || Number(siteDescriptionBudget[1]) !== RSS_DESCRIPTION_MAX_CHARS) {
   throw new Error(
-    `build-api: RSS description cap ${RSS_SERP_DESCRIPTION_MAX_CHARS} must match ` +
+    `build-api: RSS description cap ${RSS_DESCRIPTION_MAX_CHARS} must match ` +
       'META_DESCRIPTION_MAX_CHARS in host/shared/titleSuffix.ts.',
   );
 }
@@ -971,7 +979,7 @@ try {
       // dai test. Se questa riga manca, la riparazione della coda resta inerte
       // in produzione dietro una CI verde del sito — la stessa forma
       // dell'incidente SiteShellContract.
-      repairSerpSnippet,
+      repairSerpSnippet: repairRssSnippet,
     });
   });
 } finally {
