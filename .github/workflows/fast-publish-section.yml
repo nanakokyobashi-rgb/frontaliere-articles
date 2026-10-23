@@ -223,6 +223,7 @@ jobs:
       allow_deferred_live_release: ${{ steps.replay_mode.outputs.allow_deferred_live_release }}
       push_before: ${{ steps.push_range.outputs.before }}
       push_after: ${{ steps.push_range.outputs.after }}
+      preflight_head: ${{ steps.record_preflight_head.outputs.sha }}
     steps:
       - name: Checkout (resolve)
         uses: actions/checkout@v7
@@ -559,6 +560,10 @@ jobs:
             PREFLIGHT_CHANGED_FILES_FILE="$changed_files" \
             node scripts/ci/check-blog-body-links.mjs
 
+      - name: Record preflight revision
+        id: record_preflight_head
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
   publish:
     needs: resolve
     if: needs.resolve.outputs.any == 'true'
@@ -892,6 +897,7 @@ jobs:
           DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
           REF: ${{ github.ref }}
           WORKFLOW_RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          PREFLIGHT_HEAD: ${{ needs.resolve.outputs.preflight_head }}
           EXPECTED_MAIN_HEAD: ${{ github.event.workflow_run.head_sha || inputs.source_main_commit || github.event.after || github.sha }}
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
@@ -1039,8 +1045,11 @@ jobs:
             fi
           }
           build_publish_args "$DRY"
-          source_head="$(git rev-parse HEAD)"
-          validated_head="$source_head"
+          validated_head="${PREFLIGHT_HEAD:-}"
+          if ! [[ "$validated_head" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::revisione preflightata dal resolve non valida: $validated_head"
+            exit 1
+          fi
           refresh_live_plan_and_preflight() {
             local plan_before="${PUSH_BEFORE:-}"
             local live_matrix=''
@@ -1113,8 +1122,7 @@ jobs:
           normal_dispatch='false'
           if { [ "$EVENT_NAME" = 'push' ] || [ "$EVENT_NAME" = 'workflow_dispatch' ]; } \
             && [ "$REF" = 'refs/heads/main' ] \
-            && [ -z "${SOURCE_COMMIT:-}" ] \
-            && [ "$BOOTSTRAP" != 'true' ]; then
+            && [ -z "${SOURCE_COMMIT:-}" ]; then
             normal_dispatch='true'
           fi
           dynamic_bootstrap_lock='false'
@@ -1293,6 +1301,8 @@ jobs:
     timeout-minutes: 10
     outputs:
       rendered_head: ${{ steps.collect.outputs.rendered_head }}
+      retry_required: ${{ steps.collect.outputs.retry_required }}
+      retry_source: ${{ steps.collect.outputs.retry_source }}
     steps:
       - name: Download matrix publish results
         uses: actions/download-artifact@v7
@@ -1305,6 +1315,7 @@ jobs:
         id: collect
         env:
           EXPECTED_MATRIX: ${{ needs.resolve.outputs.matrix }}
+          PREFLIGHT_HEAD: ${{ needs.resolve.outputs.preflight_head }}
         run: |
           set -euo pipefail
           results_dir="$RUNNER_TEMP/fast-publish-results"
@@ -1330,8 +1341,14 @@ jobs:
           fi
           rendered_head="$(jq -r 'map(.rendered_head) | unique | if length == 1 then .[0] else empty end' <<<"$actual")"
           if [ -z "$rendered_head" ]; then
-            echo "::error::la matrix publish ha prodotto HEAD diverse: $actual"
-            exit 1
+            if ! [[ "${PREFLIGHT_HEAD:-}" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::error::la matrix publish ha prodotto HEAD diverse e la revisione preflightata non è valida: $actual"
+              exit 1
+            fi
+            echo "::warning::la matrix publish ha prodotto HEAD diverse; il recovery redispatchera' tutte le sezioni sulla HEAD corrente"
+            echo 'retry_required=true' >> "$GITHUB_OUTPUT"
+            echo "retry_source=$PREFLIGHT_HEAD" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
           echo "rendered_head=$rendered_head" >> "$GITHUB_OUTPUT"
 
@@ -1348,7 +1365,7 @@ jobs:
       needs.resolve.result == 'success' &&
       needs.publish.result == 'success' &&
       needs.publish_release_head.result == 'success' &&
-      needs.publish_release_head.outputs.rendered_head != '' &&
+      (needs.publish_release_head.outputs.rendered_head != '' || needs.publish_release_head.outputs.retry_required == 'true') &&
       (needs.resolve.outputs.bootstrap == 'true' || needs.resolve.outputs.replay_api_after_publish == 'true') &&
       needs.resolve.outputs.dry != 'true' &&
       github.event_name != 'workflow_run'
@@ -1361,7 +1378,7 @@ jobs:
           # publisher ha renderizzato e caricato le pagine. `main` puo' essere
           # avanzata durante il render; il guard sotto in quel caso lascia il
           # lavoro al run generato dal nuovo push.
-          ref: ${{ needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
+          ref: ${{ needs.publish_release_head.outputs.rendered_head || needs.publish_release_head.outputs.retry_source || inputs.source_commit || github.sha }}
           fetch-depth: 1
           persist-credentials: false
 
@@ -1393,7 +1410,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
-          SOURCE_COMMIT: ${{ needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
+          SOURCE_COMMIT: ${{ needs.publish_release_head.outputs.rendered_head || needs.publish_release_head.outputs.retry_source || inputs.source_commit || github.sha }}
         run: |
           set -euo pipefail
           if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
@@ -1511,7 +1528,7 @@ jobs:
         if: steps.replay_freshness.outputs.fresh == 'true'
         env:
           REPOSITORY: ${{ github.repository }}
-          SOURCE_COMMIT: ${{ needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
+          SOURCE_COMMIT: ${{ needs.publish_release_head.outputs.rendered_head || needs.publish_release_head.outputs.retry_source || inputs.source_commit || github.sha }}
         run: |
           set -euo pipefail
           if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]] \

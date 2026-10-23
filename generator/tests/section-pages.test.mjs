@@ -3464,10 +3464,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /map\(\{section, rendered_head, fresh\}\)/);
   assert.match(wf, /map\(\.rendered_head\) \| unique \| if length == 1/);
   assert.match(wf, /all\(\.\[\]; \(\.rendered_head == "" and \.fresh == "false"\)\)/);
-  assert.match(stagedReplay, /SOURCE_COMMIT: \$\{\{ needs\.publish_release_head\.outputs\.rendered_head \|\| inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(stagedReplay, /SOURCE_COMMIT: \$\{\{ needs\.publish_release_head\.outputs\.rendered_head \|\| needs\.publish_release_head\.outputs\.retry_source \|\| inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(wf, /main e' avanzata da \$SOURCE_COMMIT a \$current_main/);
   assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
-  assert.match(stagedReplay, /ref: \$\{\{ needs\.publish_release_head\.outputs\.rendered_head \|\| inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(stagedReplay, /ref: \$\{\{ needs\.publish_release_head\.outputs\.rendered_head \|\| needs\.publish_release_head\.outputs\.retry_source \|\| inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(wf, /replay workflow_run redispatchato prima degli upload/);
   assert.match(wf, /elif \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ -n "\$\{SOURCE_COMMIT:-\}" \]; then\n\s+pinned_replay_main="\$SOURCE_MAIN_COMMIT"/);
   assert.match(wf, /replay bounded redispatchato prima degli upload/);
