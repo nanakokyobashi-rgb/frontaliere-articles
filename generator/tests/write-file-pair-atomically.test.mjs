@@ -211,6 +211,33 @@ test('una collisione dello staging conserva il file dell’altra operazione', ()
   }
 });
 
+test('transazioni successive ricevono staging pair distinti anche nello stesso processo', () => {
+  const root = fixture();
+  try {
+    const first = path.join(root, 'first.txt');
+    fs.writeFileSync(first, 'before');
+    const stagingFiles = [];
+    const fsImpl = {
+      ...fs,
+      writeFileSync(file, ...args) {
+        if (typeof file === 'string' && file.endsWith('.pair.tmp')) stagingFiles.push(file);
+        return fs.writeFileSync(file, ...args);
+      },
+    };
+
+    writeFilePairAtomically([{ file: first, before: 'before', after: 'first-after' }], { fsImpl });
+    writeFilePairAtomically([{ file: first, before: 'first-after', after: 'second-after' }], { fsImpl });
+
+    assert.equal(stagingFiles.length, 2);
+    assert.notEqual(stagingFiles[0], stagingFiles[1]);
+    assert.match(path.basename(stagingFiles[0]), /^first\.txt\.[0-9a-f-]+\.pair\.tmp$/u);
+    assert.match(path.basename(stagingFiles[1]), /^first\.txt\.[0-9a-f-]+\.pair\.tmp$/u);
+    assert.equal(fs.readFileSync(first, 'utf8'), 'second-after');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('writer concorrenti non pubblicano una coppia mista mentre il primo commit è in corso', async () => {
   const root = fixture();
   let firstWriterResult;
