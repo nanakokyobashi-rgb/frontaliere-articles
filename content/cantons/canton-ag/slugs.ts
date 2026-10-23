@@ -21,6 +21,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'maja-riniker-eletta-governo-argovia': { it: 'maja-riniker-eletta-governo-argovia', en: 'maja-riniker-elected-aargau-government', de: 'maja-riniker-gewaehlt-aargau-regierung', fr: 'maja-riniker-elue-gouvernement-argovie' },
  'dashboard-mobilita-aarau': { it: 'dashboard-mobilita-aarau', en: 'aarau-shared-mobility-dashboard', de: 'aarau-dashboard-geteilte-mobilitaet', fr: 'aarau-tableau-mobilite-partagee' },
  'sbb-chiude-reisezentrum-doettingen': { it: 'sbb-chiude-reisezentrum-doettingen', en: 'sbb-closes-doettingen-travel-centre', de: 'sbb-schliesst-reisezentrum-doettingen', fr: 'sbb-ferme-centre-voyage-doettingen' },
+ 'fislisbach-steuerfuss-109': { it: 'fislisbach-steuerfuss-109', en: 'tax-rate-of-109-proposed-in-fislisbach-for-the-2027-budget', de: 'fur-fislisbach-wird-fur-das-budget-2027-ein-steuerfuss-von-109-vorgeschlagen', fr: 'taux-d-imposition-a-109-propose-a-fislisbach-pour-le-budget-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
