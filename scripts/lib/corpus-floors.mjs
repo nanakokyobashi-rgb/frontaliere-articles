@@ -853,7 +853,8 @@ function readSeoStringLiteralField(block, field) {
     while (cursor < block.length && block[cursor] !== ',' && block[cursor] !== '}') cursor += 1;
     return cursor;
   };
-  let cursor = 0;
+  const objectOpen = block.indexOf('{');
+  let cursor = objectOpen >= 0 ? objectOpen + 1 : block.length;
   while (cursor < block.length) {
     cursor = skipStaticTrivia(block, cursor, 'SEO entry', 'seo-field');
     if (cursor >= block.length) break;
