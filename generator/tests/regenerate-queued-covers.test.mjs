@@ -1637,6 +1637,19 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.ok(acknowledge > dispatch);
   assert.match(workflow, /cover-publisher-drain\.mjs[\s\S]*--mode run/u);
   assert.match(workflow, /cover-publisher-drain\.mjs[\s\S]*--mode ack/u);
+  assert.match(
+    workflow,
+    /name: Dispatch pending cover publishers before generation[\s\S]*?id: pre_republish[\s\S]*?continue-on-error: true/u,
+  );
+  assert.match(workflow, /expected_sections="\$\(jq -c '\[\.items\[\] \| \.section\] \| unique \| sort'/u);
+  assert.match(workflow, /\(\.sections \| length > 0\)/u);
+  assert.match(workflow, /\[\.sections\[\] \| \.section\] \| sort == \$expected_sections/u);
+  assert.match(workflow, /\.status == "not-started"/u);
+  assert.match(workflow, /empty, unexpected, or invalid sections; keeping the outbox/u);
+  assert.match(workflow, /publisher_failed='false'/u);
+  assert.match(workflow, /any\(\.sections\[\]; \.status == "failed"\)/u);
+  assert.match(workflow, /pre-generation publishers are still in progress; keeping the outbox/u);
+  assert.match(workflow, /pre-generation publisher failed; keeping the outbox/u);
   assert.doesNotMatch(workflow, /gh run watch/u);
   assert.match(workflow, /queued-cover-deadline-ms/);
   assert.match(workflow, /queued-cover-job-start-ms/);
