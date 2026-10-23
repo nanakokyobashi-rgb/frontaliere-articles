@@ -3454,10 +3454,15 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /API_RELEASE_COMMIT: \$\{\{ inputs\.api_release_commit \}\}/);
   assert.match(wf, /GITHUB_PAT_NANAKO assente/);
   assert.match(wf, /Verify staged release revision is still main/);
-  assert.match(wf, /SOURCE_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  // Il replay staged deve usare la revisione realmente renderizzata dal job
+  // publish; il fallback all'input vale solo quando quel job non ha prodotto
+  // un output. Tieni le asserzioni ancorate a questo job, non al workflow
+  // intero, che contiene anche il SOURCE_COMMIT vuoto del render live.
+  const stagedReplay = wf.slice(wf.indexOf('  replay-api-after-staged-release:'));
+  assert.match(stagedReplay, /SOURCE_COMMIT: \$\{\{ needs\.publish\.outputs\.rendered_head \|\| inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(wf, /main e' avanzata da \$SOURCE_COMMIT a \$current_main/);
   assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
-  assert.match(wf, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(stagedReplay, /ref: \$\{\{ needs\.publish\.outputs\.rendered_head \|\| inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(wf, /replay workflow_run redispatchato prima degli upload/);
   assert.match(wf, /elif \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ -n "\$\{SOURCE_COMMIT:-\}" \]; then\n\s+pinned_replay_main="\$SOURCE_MAIN_COMMIT"/);
   assert.match(wf, /replay bounded redispatchato prima degli upload/);
@@ -3529,10 +3534,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(liveRetryLoop, /if RETRY_CMD_ATTEMPTS=2 bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/);
   assert.match(wf, /PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
   assert.match(wf, /PUSH_AFTER: \$\{\{ needs\.resolve\.outputs\.push_after \}\}/);
-  const stagedReplay = wf.slice(wf.indexOf('  replay-api-after-staged-release:'));
   assert.match(stagedReplay, /needs\.publish\.outputs\.rendered_head != ''/);
-  assert.match(stagedReplay, /ref: \$\{\{ needs\.publish\.outputs\.rendered_head \|\| inputs\.source_commit \|\| github\.sha \}\}/);
-  assert.match(stagedReplay, /SOURCE_COMMIT: \$\{\{ needs\.publish\.outputs\.rendered_head \|\| inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(stagedReplay, /Redispatch staged backfill on current main after stale replay/);
   assert.match(stagedReplay, /TARGET_MATRIX: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/);
   assert.match(stagedReplay, /-f missing_page_paths="\$missing_page_paths"/);
