@@ -1,9 +1,4 @@
 {
-  "https://www.swissinfo.ch/ita/goldbach-group-si-riorganizza%2c-fino-a-35-licenziamenti/92061588": {
-    "articleId": "goldbach-group-ristrutturazione-licenziamenti",
-    "ts": "2026-09-16T01:45:04.033Z",
-    "keyForm": 2
-  },
   "https://www.laregione.ch/cantone/mendrisiotto/1950028/tagli-di-ffs-cargo-berna-non-si-esprime-sono-scelte-aziendali": {
     "articleId": "ffs-cargo-tagli-ticino-berna",
     "ts": "2026-09-16T02:10:01.956Z",
@@ -2497,6 +2492,11 @@
   "https://www.laregione.ch/svizzera/svizzera/1958226/la-13esima-avs-in-attesa-del-suo-finanziamento": {
     "articleId": "voto-iva-2028-pensione",
     "ts": "2026-10-23T03:49:51.583Z",
+    "keyForm": 2
+  },
+  "https://comozero.it/attualita/questionario-per-i-frontalieri-si-supera-il-confine-per-lo-stipendio-ma-si-passa-troppo-tempo-in-auto": {
+    "articleId": "questionario-frontalieri-ticino-condizioni-lavoro",
+    "ts": "2026-10-23T09:28:27.274Z",
     "keyForm": 2
   }
 }
