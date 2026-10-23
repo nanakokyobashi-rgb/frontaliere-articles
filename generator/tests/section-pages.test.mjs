@@ -3571,6 +3571,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /refresh_live_plan_and_preflight\(\) \{[\s\S]*fast-publish-section\.mjs r2-plan/);
   assert.match(wf, /refresh_live_plan_and_preflight\(\) \{[\s\S]*check-blog-body-syntax\.mjs/);
   assert.match(wf, /refresh_live_plan_and_preflight\(\) \{[\s\S]*check-blog-body-links\.mjs/);
+  assert.match(wf, /dynamic_bootstrap_lock='false'/);
+  assert.match(wf, /acquire_dynamic_bootstrap_lock\(\) \{[\s\S]*section-bootstrap-lock\.mjs acquire[\s\S]*dynamic_bootstrap_lock=true/);
+  assert.match(liveRetryLoop, /if \[ "\$attempt_dry" != 'true' \]; then\n\s+acquire_dynamic_bootstrap_lock/);
   assert.match(liveRetryLoop, /rendered_head=\$EXPECTED_MAIN_HEAD/);
   assert.doesNotMatch(liveRetryLoop, /sleep 30/);
   assert.doesNotMatch(liveRetryLoop, /deferred_retry/);
@@ -3655,7 +3658,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /- name: Acquire bootstrap R2 gate\n\s+id: acquire_bootstrap/);
   assert.match(wf, /section-bootstrap-lock\.mjs acquire --section "\$SECTION".*--wait-ms "\$LOCK_WAIT_MS"/);
   assert.match(wf, /Release bootstrap R2 gate/);
-  assert.match(wf, /if: always\(\).*steps\.acquire_bootstrap\.outcome == 'success'.*matrix\.target\.bootstrap == true/);
+  assert.match(wf, /if: always\(\).*matrix\.target\.bootstrap == true && steps\.acquire_bootstrap\.outcome == 'success'.*steps\.render\.outputs\.dynamic_bootstrap_lock == 'true'/);
   assert.doesNotMatch(wf, /matrix\.target\.bootstrap == true.*SECTION_BOOTSTRAP_LOCK_HELD == 'true'/);
   assert.match(read('scripts/publish-section-edge.mjs'), /waitForBootstrapLocks\(release\.live, io/);
 });

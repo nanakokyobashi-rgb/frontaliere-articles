@@ -1118,6 +1118,20 @@ jobs:
             && [ "$BOOTSTRAP" != 'true' ]; then
             normal_dispatch='true'
           fi
+          dynamic_bootstrap_lock='false'
+          acquire_dynamic_bootstrap_lock() {
+            if [ "$BOOTSTRAP" != 'true' ] || [ "${{ matrix.target.bootstrap }}" = 'true' ] || [ "$dynamic_bootstrap_lock" = 'true' ]; then
+              return 0
+            fi
+            echo "::notice::il piano live è passato a bootstrap; acquisisco il lock R2 prima del render"
+            node scripts/ci/section-bootstrap-lock.mjs acquire \
+              --section "$SECTION" \
+              --commit "$(git rev-parse HEAD)" \
+              --wait-ms 3300000 \
+              --retry-ms 20000
+            dynamic_bootstrap_lock='true'
+            echo "dynamic_bootstrap_lock=true" >> "$GITHUB_OUTPUT"
+          }
           if [ "$normal_dispatch" != 'true' ]; then
             # Attraverso il wrapper di retry (issue #98): `npx -y` scarica tsx
             # dal registro a ogni run. Ritentare l'intero comando e' sicuro:
@@ -1161,6 +1175,9 @@ jobs:
               elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "false" ]; then
                 echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
                 attempt_dry=true
+              fi
+              if [ "$attempt_dry" != 'true' ]; then
+                acquire_dynamic_bootstrap_lock
               fi
               build_publish_args "$attempt_dry"
 
@@ -1208,7 +1225,7 @@ jobs:
         # base affidabile per la valutazione dell'espressione `if` del passo.
         # L'outcome dell'acquire è il fatto durevole: se ha acquisito il lease,
         # il release deve partire anche quando il render fallisce.
-        if: always() && steps.acquire_bootstrap.outcome == 'success' && steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true' && matrix.target.bootstrap == true
+        if: always() && steps.replay_freshness.outputs.fresh == 'true' && needs.resolve.outputs.dry != 'true' && ((matrix.target.bootstrap == true && steps.acquire_bootstrap.outcome == 'success') || steps.render.outputs.dynamic_bootstrap_lock == 'true')
         env:
           SECTION: ${{ matrix.target.section }}
         run: node scripts/ci/section-bootstrap-lock.mjs release --section "$SECTION"
