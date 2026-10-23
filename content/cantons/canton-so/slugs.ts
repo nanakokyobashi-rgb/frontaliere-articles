@@ -15,6 +15,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'a1-lavori-notturni-luterbach': { it: 'a1-lavori-notturni-luterbach', en: 'a1-night-work-luterbach', de: 'a1-nachtarbeiten-luterbach', fr: 'a1-travaux-nocturnes-luterbach' },
  'cambio-ora-incidenti-stradali-soletta': { it: 'cambio-ora-incidenti-stradali-soletta', en: 'time-change-road-accidents-solothurn', de: 'zeitumstellung-strassenunfaelle-solothurn', fr: 'changement-heure-accidents-route-soleure' },
  'polizia-soletta-comunicazione-media-droni': { it: 'polizia-soletta-comunicazione-media-droni', en: 'solothurn-police-communication-media-drones', de: 'polizei-solothurn-kommunikation-medien-drohnen', fr: 'police-soleure-communication-medias-drones' },
+ 'finanzkommission-k-rzt-kredit-digitalisierung': { it: 'finanzkommission-k-rzt-kredit-digitalisierung', en: 'financial-commission-cuts-digitalization-credit', de: 'finanzkommission-kurzt-kredit-digitalisierung', fr: 'commission-financiere-coupe-credit-digitalisation' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

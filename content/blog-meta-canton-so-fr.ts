@@ -39,6 +39,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.polizia-soletta-comunicazione-media-droni.title': 'Police de Soleure : communication 365 jours et interdiction des drones à 300 m',
     'blog.article.polizia-soletta-comunicazione-media-droni.excerpt': 'Le service médias fonctionne 365 jours par an L’équipe gère X, Facebook et Instagram Lors des grands événements, un membre est présent sur place L’interdiction',
     'blog.article.polizia-soletta-comunicazione-media-droni.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.title': 'La commission réduit le crédit de numérisation à Soleure',
+    'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.excerpt': 'La commission des finances du Conseil cantonal de Soleure demande de réduire le crédit d’engagement pour la transformation numérique de CHF 21,4 à CHF 21,2 millions.',
+    'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;
