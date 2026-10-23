@@ -8597,6 +8597,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.lavoro-ridotto-normalizzazione-2027.title': 'Kurzarbeit: Der Bundesrat sieht eine schrittweise Rückkehr zur Normalität vor',
     'blog.article.lavoro-ridotto-normalizzazione-2027.excerpt': 'Der Bundesrat beabsichtigt, die KAE schrittweise zu normalisieren Maximale Dauer: 24 Monate bis zum 31.',
     'blog.article.lavoro-ridotto-normalizzazione-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sondaggio-votazioni-novembre-svizzera.title': 'Abstimmung vom 29. November: AVS und Kriegsmaterial ungewiss',
+    'blog.article.sondaggio-votazioni-novembre-svizzera.excerpt': 'Die Abstimmung vom 29.',
+    'blog.article.sondaggio-votazioni-novembre-svizzera.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

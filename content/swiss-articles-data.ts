@@ -28728,6 +28728,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'sondaggio-votazioni-novembre-svizzera',
+    category: 'novita',
+    date: '2026-10-23T05:43:55.776Z',
+    image: '/images/blog/article-sondaggio-votazioni-novembre-svizzera.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

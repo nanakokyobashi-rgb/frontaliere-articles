@@ -8597,6 +8597,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.lavoro-ridotto-normalizzazione-2027.title': 'Travail réduit : le Conseil fédéral prévoit un retour',
     'blog.article.lavoro-ridotto-normalizzazione-2027.excerpt': 'Le Conseil fédéral entend normaliser progressivement l’ILR Durée maximale : 24 mois jusqu’au 31 janvier 2027 Croissance prévue : 1,7 % en 2026 et 1,6 % en 2027',
     'blog.article.lavoro-ridotto-normalizzazione-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sondaggio-votazioni-novembre-svizzera.title': 'Vote du 29 novembre : incertitude concernant l’AVS et le matériel de guerre',
+    'blog.article.sondaggio-votazioni-novembre-svizzera.excerpt': 'Le vote du 29 novembre reste incertain concernant l’AVS et le matériel de guerre La TVA pour la 13e rente : 46 % oui, 49 % non Matériel de guerre : 49 % opposés, 41 % favorables',
+    'blog.article.sondaggio-votazioni-novembre-svizzera.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;
