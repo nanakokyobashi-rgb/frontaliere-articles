@@ -7,6 +7,14 @@
     "canton-basilea::https://www.nau.ch/news/wirtschaft/coop-erhoht-2027-die-lohne-um-11-prozent-67192702": {
       "section": "canton-basilea",
       "ts": 1792758263164
+    },
+    "canton-basilea::https://www.lalsace.fr/economie/2026/10/23/cet-hiver-89-vols-depuis-l-euroairport-notamment-vers-la-pologne-la-bulgarie-et-l-armenie": {
+      "section": "canton-basilea",
+      "ts": 1792776448872
+    },
+    "canton-basilea::https://www.bs.ch/news/2026-neue-schraegluftbilder-fuer-basel-stadt": {
+      "section": "canton-basilea",
+      "ts": 1792777234107
     }
   }
 }
