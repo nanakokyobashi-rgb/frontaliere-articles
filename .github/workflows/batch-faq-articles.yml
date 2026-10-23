@@ -61,10 +61,14 @@ on:
   push:
     paths:
       - '.github/workflows/batch-faq-articles.yml'
+      - '.github/actions/setup-article-source-runtime/**'
       - 'generator/scripts/batch-add-faq-to-articles.mjs'
       - 'generator/scripts/lib/fetch-with-ref-timeout.mjs'
       - 'generator/scripts/fix-faq-locales.mjs'
       - 'generator/scripts/load-rc-env.mjs'
+      - 'scripts/ci/article-source-runtime/**'
+      - 'scripts/ci/check-article-source-runtime.mjs'
+      - 'scripts/lib/npm-ci-retry.sh'
   workflow_dispatch:
     inputs:
       limit:

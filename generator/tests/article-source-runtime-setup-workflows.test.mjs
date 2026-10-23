@@ -163,6 +163,20 @@ test('article-source runtime is isolated, pinned, retried, and limited to parser
   assert.match(getJobBlock(read('.github/workflows/fast-publish-article.yml'), 'publish'), /Setup isolated article source runtime\n        if: needs\.resolve\.outputs\.skip != 'true'/);
   assert.match(getJobBlock(read('.github/workflows/fast-publish-section.yml'), 'publish'), /Setup isolated article source runtime\n        if: steps\.replay_freshness\.outputs\.fresh == 'true'/);
 
+  const batchFaqWorkflow = read('.github/workflows/batch-faq-articles.yml');
+  const batchFaqPushPaths = batchFaqWorkflow.slice(batchFaqWorkflow.indexOf('on:'), batchFaqWorkflow.indexOf('permissions:'));
+  for (const pattern of [
+    "'.github/actions/setup-article-source-runtime/**'",
+    "'scripts/ci/article-source-runtime/**'",
+    "'scripts/ci/check-article-source-runtime.mjs'",
+    "'scripts/lib/npm-ci-retry.sh'",
+  ]) {
+    assert.ok(batchFaqPushPaths.includes(pattern), `batch-faq-articles: changing ${pattern} must rerun its self-test`);
+  }
+
+  const bingSeoWorkflow = read('.github/workflows/bing-seo-loop.yml');
+  assert.match(bingSeoWorkflow, /sparse-checkout:\s*\|[\s\S]*\.github\/actions\/setup-article-source-runtime\/action\.yml/);
+
   const generatorCi = read('.github/workflows/generator-ci.yml');
   for (const pattern of [
     "'.github/actions/setup-article-source-runtime/**'",
