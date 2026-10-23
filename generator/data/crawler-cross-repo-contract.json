@@ -762,7 +762,7 @@
       "file": "crawler-group-04.yml",
       "sourceLogic": "crawler-group-04-logic.yml",
       "sourceSha256": "b2d88ef6580eb17086da3f219d1092b258d1fdfa03e2de9335d1adeaf063f990",
-      "artifactSha256": "a6f38378661d9b9558a58222e6241dd0555606f02ad6fe6ca33dfc5596084911",
+      "artifactSha256": "97968ae6e0926447a0d6243705b206257b8ccabb10e0e8f7b8664c7b56f792cc",
       "generatorSha256": "80fd05f57fbc6f57f2c82af84e632b0b193d738c9bf01ed36fc72921c690f9cb",
       "members": [
         "spital-limmattal",
