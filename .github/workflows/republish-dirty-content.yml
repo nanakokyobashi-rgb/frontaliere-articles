@@ -169,10 +169,81 @@ jobs:
           HARD_DEADLINE=2700 # niente attese oltre i 45 min (timeout job: 50)
           elapsed() { echo $(( $(date +%s) - START_TS )); }
 
-          active_runs() {
-            gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=100" \
-              | jq '[.workflow_runs[] | select(.status=="queued" or .status=="in_progress")] | length' \
-              || echo 999
+          # La concurrency del publisher è PER SHARD, non globale. Contare le
+          # run del workflow senza guardare i job faceva attendere un backfill
+          # frontaliere anche per un publish svizzero ancora in verifica (e il
+          # budget scadeva con `unprocessed`). Le run con una fase non
+          # terminale o senza job leggibili restano un blocco conservativo;
+          # dopo il resolve si guarda solo il job publish che termina con lo
+          # shard target.
+          active_runs_for_shard() {
+            local section="$1"
+            local shard="$2"
+            local dispatch_section
+            local runs_pages_json
+            local runs_json
+            if ! runs_pages_json="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=100")"; then
+              echo 999
+              return
+            fi
+            if ! runs_json="$(jq -c '
+              . as $pages
+              | if (type == "array" and length > 0)
+                  and all(.[];
+                    type == "object"
+                    and (.workflow_runs | type) == "array"
+                    and (.total_count | type) == "number"
+                    and (.total_count >= 0)
+                    and ((.total_count | floor) == .total_count))
+                  and (($pages | map(.total_count) | unique | length) == 1)
+                  and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
+                then
+                  {workflow_runs: [$pages[].workflow_runs[]]}
+                else
+                  error("workflow run listing incomplete")
+                end
+            ' <<<"$runs_pages_json")"; then
+              echo 999
+              return
+            fi
+            while IFS=$'\t' read -r run_id run_event run_name; do
+              [ -n "$run_id" ] || continue
+              local jobs_json
+              if ! jobs_json="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/jobs?per_page=100")"; then
+                echo 999
+                return
+              fi
+              if [ "$(jq '.jobs | length' <<<"$jobs_json")" -eq 0 ]; then
+                # Una run dispatchata in coda espone la sezione richiesta nel
+                # nome solo quando l'input è esplicito. `auto` (o un nome
+                # malformato) non identifica lo shard in modo affidabile, quindi
+                # resta occupata; si salta solo una sezione esplicitamente diversa.
+                if [ "$run_event" = "workflow_dispatch" ]; then
+                  dispatch_section=""
+                  if [[ "$run_name" =~ ^cover-publish-article[[:space:]]/[[:space:]]([^/[:space:]]+)[[:space:]]/[[:space:]]nonce= ]]; then
+                    dispatch_section="${BASH_REMATCH[1]}"
+                    if [ "$dispatch_section" != "auto" ] && [ "$dispatch_section" != "$section" ]; then
+                      continue
+                    fi
+                  fi
+                fi
+                echo 1
+                return
+              fi
+              if jq -e --arg shard "$shard" '
+                any(.jobs[]?;
+                  (.status != "completed")
+                  and (.name == "resolve" or (.name | endswith(", " + $shard + ")"))))
+              ' <<<"$jobs_json" >/dev/null; then
+                echo 1
+                return
+              fi
+            done < <(
+              jq -r '.workflow_runs[]
+                | select(.status != "completed")
+                | [.id, .event, (.name // .display_title // "")] | @tsv' <<<"$runs_json"
+            )
+            echo 0
           }
 
           # Tetto assoluto: quanti dispatch di fast-publish nell'ultima ora,
@@ -196,8 +267,9 @@ jobs:
               break
             fi
 
+            target_shard="$(node scripts/ci/fast-publish-section.mjs shard-of "$section")"
             waited=0
-            while [ "$(active_runs)" -gt 0 ]; do
+            while [ "$(active_runs_for_shard "$section" "$target_shard")" -gt 0 ]; do
               if [ "$waited" -ge 900 ] || [ "$(elapsed)" -ge "$HARD_DEADLINE" ]; then
                 echo "::warning::fast-publish occupato da troppo — mi fermo qui; il resto lo riprende un prossimo giro manuale"
                 break 2
@@ -205,20 +277,30 @@ jobs:
               sleep 30; waited=$((waited + 30))
             done
 
-            before="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            echo "── dispatch republish: $section/$id"
+            dispatch_nonce="dirty-content-${GITHUB_RUN_ID}-${section}-${id}-$(date +%s%N)"
+            echo "── dispatch republish: $section/$id (nonce=$dispatch_nonce)"
             gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/dispatches" \
               -f ref=main \
               -f "inputs[article_id]=$id" \
               -f "inputs[section]=$section" \
-              -f "inputs[dry_run]=false"
+              -f "inputs[dry_run]=false" \
+              -f "inputs[dispatch_nonce]=$dispatch_nonce"
 
             run_id=""
             for i in $(seq 1 12); do
               echo "dispatch lookup attempt $i/12"
               sleep 10
-              run_id="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=10" \
-                | jq -r --arg t "$before" '[.workflow_runs[] | select(.created_at >= $t)] | sort_by(.created_at) | last | .id // empty' || true)"
+              run_id="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=100" \
+                | jq -r --arg nonce "$dispatch_nonce" '
+                  [.workflow_runs[]
+                    | select(
+                        ((.name // "") | contains("nonce=" + $nonce))
+                        or ((.display_title // "") | contains("nonce=" + $nonce))
+                      )]
+                  | sort_by(.created_at)
+                  | last
+                  | .id // empty
+                ' || true)"
               [ -n "$run_id" ] && break
             done
             if [ -z "$run_id" ]; then
