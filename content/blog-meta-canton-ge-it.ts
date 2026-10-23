@@ -33,6 +33,9 @@ const blogMetaCantonGeIt: Record<string, string> = {
     'blog.article.skyguide-ginevra-capacita-ottobre.title': 'Guasto tecnico dimezza la capacità a Ginevra e Zurigo',
     'blog.article.skyguide-ginevra-capacita-ottobre.excerpt': 'Skyguide ha ridotto del 50% la capacità dello spazio aereo svizzero.',
     'blog.article.skyguide-ginevra-capacita-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.hug-primo-ospedale-svizzero-2027.title': 'HUG primo ospedale svizzero nel ranking Smart Hospitals 2027',
+    'blog.article.hug-primo-ospedale-svizzero-2027.excerpt': 'Gli HUG sono 31° al mondo nel 2027 Primo ospedale svizzero della graduatoria 37 posizioni guadagnate rispetto al 2026 410 ospedali in 33 Paesi Classifica →',
+    'blog.article.hug-primo-ospedale-svizzero-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGeIt;

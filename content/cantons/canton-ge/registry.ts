@@ -116,4 +116,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'hug-primo-ospedale-svizzero-2027',
+ category: 'novita',
+ date: '2026-10-23T22:19:10.680Z',
+ image: '/images/blog/article-hug-primo-ospedale-svizzero-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
