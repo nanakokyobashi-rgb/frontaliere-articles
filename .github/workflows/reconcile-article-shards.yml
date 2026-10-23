@@ -206,10 +206,51 @@ jobs:
           # rosso il meccanismo di recupero. per_page=100 (il massimo): con la
           # pagina corta il conteggio del tetto si troncherebbe proprio nei
           # giorni ad alto traffico, cioè quando serve.
-          active_runs() {
-            gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=100" \
-              | jq '[.workflow_runs[] | select(.status=="queued" or .status=="in_progress")] | length' \
-              || echo 999
+          #
+          # La concurrency del publisher è PER SHARD, non globale. Contare le
+          # run del workflow senza guardare i job faceva attendere un backfill
+          # svizzero anche per un publish frontaliere ancora in verifica (e il
+          # budget scadeva con `attempted=0`). Le run ancora in `resolve` o
+          # senza job leggibili restano un blocco conservativo; dopo il resolve
+          # si guarda solo il job publish che termina con lo shard target.
+          active_runs_for_shard() {
+            local section="$1"
+            local shard="$2"
+            local runs_json
+            if ! runs_json="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=100")"; then
+              echo 999
+              return
+            fi
+            while IFS=$'\t' read -r run_id run_event run_name; do
+              [ -n "$run_id" ] || continue
+              local jobs_json
+              if ! jobs_json="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/jobs?per_page=100")"; then
+                echo 999
+                return
+              fi
+              if [ "$(jq '.jobs | length' <<<"$jobs_json")" -eq 0 ]; then
+                # A queued workflow_dispatch exposes the requested section in
+                # its run name; a queued push does not, so fail closed for it.
+                if [ "$run_event" = "workflow_dispatch" ] && [[ "$run_name" != *" / $section / "* ]]; then
+                  continue
+                fi
+                echo 1
+                return
+              fi
+              if jq -e --arg shard "$shard" '
+                any(.jobs[]?;
+                  (.status == "queued" or .status == "in_progress")
+                  and (.name == "resolve" or (.name | endswith(", " + $shard + ")")))
+              ' <<<"$jobs_json" >/dev/null; then
+                echo 1
+                return
+              fi
+            done < <(
+              jq -r '.workflow_runs[]
+                | select(.status == "queued" or .status == "in_progress")
+                | [.id, .event, (.name // .display_title // "")] | @tsv' <<<"$runs_json"
+            )
+            echo 0
           }
 
           # Tetto assoluto: quanti dispatch di fast-publish nell'ultima ora.
@@ -224,7 +265,7 @@ jobs:
 
           failed=0
           if [ "$deferred" = "false" ]; then
-          while IFS=$'\t' read -r id section; do
+          while IFS=$'\t' read -r id section target_shard; do
             [ -n "$id" ] || continue
 
             if [ "$(elapsed)" -ge "$SOFT_BUDGET" ]; then
@@ -235,9 +276,9 @@ jobs:
             # La concurrency di fast-publish tiene UNA sola run pending per
             # gruppo: dispatchare mentre il gruppo è occupato farebbe
             # cancellare i pending più vecchi. Quindi: aspetta il gruppo
-            # libero, poi dispatcha, poi aspetta l'esito.
+            # dello shard target libero, poi dispatcha, poi aspetta l'esito.
             waited=0
-            while [ "$(active_runs)" -gt 0 ]; do
+            while [ "$(active_runs_for_shard "$section" "$target_shard")" -gt 0 ]; do
               if [ "$waited" -ge 900 ] || [ "$(elapsed)" -ge "$HARD_DEADLINE" ]; then
                 echo "::warning::fast-publish occupato da troppo — mi fermo qui; il resto lo conta unprocessed e lo riprende il cron"
                 break 2
@@ -293,7 +334,7 @@ jobs:
             echo "   run $run_id → ${conclusion:-timeout}"
             printf '%s\t%s\t%s\n' "$id" "$section" "${conclusion:-timeout}" >> "$results"
             if [ "${conclusion:-}" != "success" ]; then failed=$((failed + 1)); fi
-          done < <(jq -r '.selected[] | [.id, .section] | @tsv' "$RUNNER_TEMP/reconcile.json")
+          done < <(jq -r '.selected[] | [.id, .section, .shard] | @tsv' "$RUNNER_TEMP/reconcile.json")
           fi
 
           # NIENTE USCITE SILENZIOSE: qualunque strada abbia portato qui
