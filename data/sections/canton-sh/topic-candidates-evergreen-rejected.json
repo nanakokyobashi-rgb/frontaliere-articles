@@ -4,22 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sh::https://www.radiomunot.ch/p/neue-gemeindeprasidenten-ziehen-zwischenbilanz-5pwvhifcyo2pp8i6qohcjf": {
-      "section": "canton-sh",
-      "ts": 1792479035792
-    },
-    "canton-sh::https://www.radiomunot.ch/p/regionalnachrichten-vom-19-oktober-2026-1630-uhr-28kdshpsn7gbitdjm5cqe8": {
-      "section": "canton-sh",
-      "ts": 1792479656863
-    },
-    "canton-sh::https://www.radiomunot.ch/p/zurcher-svp-wird-kandidatin-oder-kandidat-fur-bundesratswahlen-stellen-1aanvamj0fa9yj6ybmraej": {
-      "section": "canton-sh",
-      "ts": 1792479669278
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-21/lorraine-frega-ist-die-neue-praesidentin-von-gf-building": {
-      "section": "canton-sh",
-      "ts": 1792504847706
-    },
     "canton-sh::https://sh.ch/webseite/kanton-schaffhausen/beh-rde/regierung/staatskanzlei/medienmitteilungen-24148150-de.html": {
       "section": "canton-sh",
       "ts": 1792585088844
@@ -47,6 +31,14 @@
     "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-02/bei-der-wefa-in-thayngen-kommt-es-zu-einem-wechsel": {
       "section": "canton-sh",
       "ts": 1792638641812
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-30/ist-orange-das-neue-schwarz-wie-sich-weidmueller-im-ki": {
+      "section": "canton-sh",
+      "ts": 1792729952825
+    },
+    "canton-sh::https://www.schaffhausen24.ch/articles/414161-schaffhauser-vorschlag-holt-ibk-foerderpreis": {
+      "section": "canton-sh",
+      "ts": 1792730369616
     }
   }
 }
