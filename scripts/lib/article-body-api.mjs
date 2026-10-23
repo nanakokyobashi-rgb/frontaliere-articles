@@ -69,16 +69,16 @@ function skipTrivia(source, offset) {
   return index;
 }
 
-function decodeTsLiteral(raw, quote) {
+function decodeTsLiteral(raw, quote, { decodeControlEscapes = false } = {}) {
   const escapes = {
     ...tsStringEscapesWithNewlineAs('\n'),
     ...(quote === '`' ? { '`': '`', '$': '$' } : {}),
   };
-  const decoded = unescapeTsString(raw, escapes, { decodeUnicode: true });
+  const decoded = unescapeTsString(raw, escapes, { decodeUnicode: true, decodeControlEscapes });
   return quote === '`' ? decoded.replace(/\r\n/gu, '\n') : decoded;
 }
 
-function readQuotedToken(source, offset) {
+function readQuotedToken(source, offset, options = {}) {
   const quote = source[offset];
   if (quote !== "'" && quote !== '"' && quote !== '`') return null;
   const start = offset + 1;
@@ -100,7 +100,7 @@ function readQuotedToken(source, offset) {
         return { value: null, raw, quote, end: index + 1, error: 'newline-in-quoted-string' };
       }
       return {
-        value: decodeTsLiteral(raw, quote),
+        value: decodeTsLiteral(raw, quote, options),
         raw,
         quote,
         end: index + 1,
@@ -158,7 +158,7 @@ export function extractArticleBodyFields(source, { allowEndOfInput = false, vali
     }
 
     const valueStart = skipTrivia(text, colon + 1);
-    const valueToken = readQuotedToken(text, valueStart);
+    const valueToken = readQuotedToken(text, valueStart, { decodeControlEscapes: key[2] !== 'faq' });
     let error = valueToken?.error ?? null;
     let value = valueToken?.value ?? null;
     let end = valueToken?.end ?? valueStart;
