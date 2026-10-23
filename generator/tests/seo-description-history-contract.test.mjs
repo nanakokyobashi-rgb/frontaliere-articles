@@ -38,6 +38,13 @@ test('historical SEO policy fails closed when an over-budget value has no bounde
     () => assertHistoricalSeoDescriptionsMigrated([{ id: 'unbounded', description }]),
     /unbounded\.description stores/,
   );
+  assert.throws(
+    () => assertHistoricalSeoDescriptionsMigrated(
+      [{ id: 'too-short', description }],
+      { projectDescription: () => 'Core' },
+    ),
+    /too-short\.description stores .*\(min 80/,
+  );
 });
 
 test('historical SEO policy ignores absent optional fields and rejects malformed values', () => {

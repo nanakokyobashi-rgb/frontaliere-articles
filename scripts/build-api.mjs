@@ -1171,6 +1171,16 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
     for (const file of files) {
       const fp = path.join(ROOT, seoDir, file);
       if (!fs.existsSync(fp)) {
+        const published = PUBLISHED_BY_SECTION[section.id];
+        // Una famiglia appena attivata senza registro non ha ancora chunk SEO:
+        // e' una superficie vuota valida. Se il registro esiste, invece, il
+        // chunk mancante e' una sezione parziale e deve restare fail-closed.
+        if (
+          published &&
+          published.api.family !== null &&
+          isNewFamilySection(published) &&
+          familyFileMissing(published, path.join(seoDir, file))
+        ) continue;
         throw new Error(`build-api: SEO source missing for ${section.id}: ${path.join(seoDir, file)}`);
       }
       const src = fs.readFileSync(fp, 'utf-8');

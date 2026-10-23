@@ -300,6 +300,15 @@ test('build-api: RSS di famiglia rifiuta ogni sezione con articoli e zero item, 
   assert.doesNotMatch(build, /familyRssRows\.every\(/);
 });
 
+test('build-api: un chunk SEO mancante vale vuoto solo per una famiglia nuova', () => {
+  const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
+  assert.match(
+    build,
+    /published &&[\s\S]*?published\.api\.family !== null[\s\S]*?isNewFamilySection\(published\)[\s\S]*?familyFileMissing\(published/,
+  );
+  assert.match(build, /build-api: SEO source missing for/);
+});
+
 test('locale completeness: una radice di famiglia nuova non scatta i pavimenti assoluti, una svuotata si', () => {
   const root = mkdtempSync(path.join(tmpdir(), 'core-locale-'));
   const ti = { rel: 'content/blog-body-canton-ti', name: 'canton-ti', floorPolicy: 'family',

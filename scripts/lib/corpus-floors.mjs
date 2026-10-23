@@ -34,7 +34,11 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { findAllSeoEntryMatches } from './seo-entry.mjs';
 import { scanTopLevelArticleRecords } from './article-registry-reader.mjs';
-import { decodeStaticStringLiteral } from './ts-literals.mjs';
+import {
+  decodeStaticStringLiteral,
+  readStaticStringLiteral,
+  skipStaticTrivia,
+} from './ts-literals.mjs';
 import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
 import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
 import { ARTICLES_PAGE_SIZE } from '../../engine/shared/articleArchiveConfig.mjs';
@@ -826,15 +830,38 @@ export function unescapeQuoted(value, quote = "'") {
 }
 
 function readSeoStringLiteralField(block, field) {
-  const escapedField = field.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  for (const [quote, body] of [
-    ["'", `(?:[^'\\\\]|\\\\.)*`],
-    ['"', `(?:[^"\\\\]|\\\\.)*`],
-  ]) {
-    const match = block.match(new RegExp(
-      `(?:["']?${escapedField}["']?)\\s*:\\s*${quote}(${body})${quote}`,
-    ));
-    if (match) return unescapeQuoted(match[1], quote);
+  let cursor = 0;
+  while (cursor < block.length) {
+    cursor = skipStaticTrivia(block, cursor, 'SEO entry', 'seo-field');
+    if (cursor >= block.length) break;
+
+    let key;
+    let keyEnd = cursor;
+    const first = block[cursor];
+    if (first === "'" || first === '"' || first === '`') {
+      const literal = readStaticStringLiteral(block, cursor, 'SEO entry', 'seo-field');
+      key = decodeStaticStringLiteral(literal.value, literal.quote);
+      keyEnd = literal.end;
+    } else if (/[A-Za-z_$]/u.test(first)) {
+      keyEnd += 1;
+      while (/[A-Za-z0-9_$]/u.test(block[keyEnd] || '')) keyEnd += 1;
+      key = block.slice(cursor, keyEnd);
+    } else {
+      cursor += 1;
+      continue;
+    }
+
+    const colon = skipStaticTrivia(block, keyEnd, 'SEO entry', 'seo-field');
+    if (block[colon] !== ':') {
+      cursor = keyEnd;
+      continue;
+    }
+    const valueStart = skipStaticTrivia(block, colon + 1, 'SEO entry', 'seo-field');
+    if (key === field && ["'", '"', '`'].includes(block[valueStart])) {
+      const value = readStaticStringLiteral(block, valueStart, 'SEO entry', 'seo-field');
+      return decodeStaticStringLiteral(value.value, value.quote);
+    }
+    cursor = keyEnd;
   }
   return undefined;
 }

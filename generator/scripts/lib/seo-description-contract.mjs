@@ -66,10 +66,13 @@ export function assertHistoricalSeoDescriptionsMigrated(records, {
         violations.push(`${id}.${field} projector failed: ${error?.message ?? error}`);
         continue;
       }
-      if (typeof projected !== 'string' || projected.trim().length === 0 || projected.length > max) {
+      const projectedLength = typeof projected === 'string' ? projected.trim().length : 0;
+      const tooShort = field === 'description' && projectedLength < SEO_DESCRIPTION_MIN;
+      if (typeof projected !== 'string' || projectedLength === 0 || projected.length > max || tooShort) {
         violations.push(
           `${id}.${field} stores ${stored.length} chars but its public projection is ` +
-            `${typeof projected === 'string' ? projected.length : 'not a string'} chars (max ${max})`,
+            `${typeof projected === 'string' ? projected.length : 'not a string'} chars ` +
+            `(min ${field === 'description' ? SEO_DESCRIPTION_MIN : 0}, max ${max})`,
         );
       }
     }
