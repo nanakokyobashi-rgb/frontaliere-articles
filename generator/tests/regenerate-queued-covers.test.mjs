@@ -1723,13 +1723,15 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(sectionPublisher, /REF: \$\{\{ github\.ref \}\}/u);
   assert.match(
     sectionPublisher,
-    /if \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ "\$REF" = 'refs\/heads\/main' \] && \[ -z "\$\{SOURCE_COMMIT:-\}" \] && \[ "\$BOOTSTRAP" != 'true' \]; then/u,
-    'il retry live del publisher sezione e\u0027 consentito solo per dispatch dalla main',
+    /if \{ \[ "\$EVENT_NAME" = 'push' \] \|\| \[ "\$EVENT_NAME" = 'workflow_dispatch' \]; \} \\\n\s+&& \[ "\$REF" = 'refs\/heads\/main' \] \\\n\s+&& \[ -z "\$\{SOURCE_COMMIT:-\}" \] \\\n\s+&& \[ "\$BOOTSTRAP" != 'true' \]; then/u,
+    'il retry live del publisher sezione e\u0027 consentito per push e dispatch dalla main',
   );
   assert.match(sectionPublisher, /\[ "\$BOOTSTRAP" != 'true' \]/u);
   assert.match(sectionPublisher, /for publish_attempt in 1 2 3/u);
   assert.match(sectionPublisher, /git fetch --no-tags origin main/u);
   assert.match(sectionPublisher, /git checkout --detach FETCH_HEAD/u);
+  assert.match(sectionPublisher, /export PUSH_AFTER="\$EXPECTED_MAIN_HEAD"/u);
+  assert.match(sectionPublisher, /previous_revision="\$\(git rev-parse HEAD\^\)"/u);
   assert.doesNotMatch(sectionPublisher, /git checkout --detach origin\/main/u);
   assert.match(sectionPublisher, /main avanzata durante il render/u);
   const sectionLiveLoop = sectionPublisher.slice(sectionPublisher.indexOf('for publish_attempt in 1 2 3'));

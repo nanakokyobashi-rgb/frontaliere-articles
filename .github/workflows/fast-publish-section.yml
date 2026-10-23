@@ -1011,17 +1011,23 @@ jobs:
             fi
           }
           build_publish_args "$DRY"
-          # A normal cover-drain dispatch from main has no immutable source
-          # commit. It must rebase onto the live main between attempts when
-          # the freshness guard reports that main advanced during the render.
-          # The same dispatch can safely retry a staged live release while the
-          # API/edge pointer is still catching up: publish-section-pages writes
-          # a summary proving that only the deferred, non-destructive phase
-          # remains. Every other error stays fail-closed. workflow_run and
-          # bounded replays are redispatched if their pinned source goes stale
-          # before render, preserving the source/API freshness invariant.
+          # A normal push or cover-drain dispatch from main has no immutable
+          # source snapshot. It must rebase onto the live main between attempts
+          # when the freshness guard reports that main advanced during the
+          # render. The original push range remains the publication scope, but
+          # the retry updates its head so API-release resolution covers the
+          # revision actually rendered. The same dispatch can safely retry a
+          # staged live release while the API/edge pointer is still catching
+          # up: publish-section-pages writes a summary proving that only the
+          # deferred, non-destructive phase remains. Every other error stays
+          # fail-closed. workflow_run and bounded replays are redispatched if
+          # their pinned source goes stale before render, preserving the
+          # source/API freshness invariant.
           normal_dispatch='false'
-          if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ "$REF" = 'refs/heads/main' ] && [ -z "${SOURCE_COMMIT:-}" ] && [ "$BOOTSTRAP" != 'true' ]; then
+          if { [ "$EVENT_NAME" = 'push' ] || [ "$EVENT_NAME" = 'workflow_dispatch' ]; } \
+            && [ "$REF" = 'refs/heads/main' ] \
+            && [ -z "${SOURCE_COMMIT:-}" ] \
+            && [ "$BOOTSTRAP" != 'true' ]; then
             normal_dispatch='true'
           fi
           if [ "$normal_dispatch" != 'true' ]; then
@@ -1044,6 +1050,8 @@ jobs:
               # altrimenti tre tentativi ripetono la stessa vecchia revisione.
               git checkout --detach FETCH_HEAD
               export EXPECTED_MAIN_HEAD="$(git rev-parse HEAD)"
+              export PUSH_AFTER="$EXPECTED_MAIN_HEAD"
+              previous_revision="$(git rev-parse HEAD^)"
               echo "::notice::normal cover dispatch on main $EXPECTED_MAIN_HEAD (freshness attempt $publish_attempt/3)"
 
               # main puo' essere avanzata dopo resolve. Rileggi il kill switch
