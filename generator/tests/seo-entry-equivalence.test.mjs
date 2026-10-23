@@ -46,11 +46,11 @@ function decodeRegistryString(value) {
 
 test('il decoder corpus applica lo stesso contratto TypeScript per gli escape di controllo', () => {
   assert.equal(
-    unescapeTsString('A\\bB\\fC\\vD\\0E', tsStringEscapesWithNewlineAs(' ')),
+    unescapeTsString('A\\bB\\fC\\vD\\0E', tsStringEscapesWithNewlineAs(' '), { decodeControlEscapes: true }),
     `A\bB\fC\vD\0E`,
   );
   assert.equal(
-    unescapeTsString(String.raw`A\01E`, tsStringEscapesWithNewlineAs(' ')),
+    unescapeTsString(String.raw`A\01E`, tsStringEscapesWithNewlineAs(' '), { decodeControlEscapes: true }),
     String.raw`A\01E`,
   );
 });

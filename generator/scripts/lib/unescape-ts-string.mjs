@@ -109,7 +109,10 @@ export function unescapeTsString(
     const ch = escape[0];
     if (Object.prototype.hasOwnProperty.call(TS_CONTROL_ESCAPES, ch)) {
       if (ch === '0' && /[0-9]/u.test(source[offset + 2] ?? '')) {
-        throw new Error('escape ottale TypeScript non supportato');
+        // `\01`–`\07` are legacy octal tokens, not NUL followed by a
+        // digit. The engine preserves the raw token so every reader remains
+        // byte-stable and the downstream parser can decide how to handle it.
+        return whole;
       }
       return decodeControlEscapes ? TS_CONTROL_ESCAPES[ch] : whole;
     }
