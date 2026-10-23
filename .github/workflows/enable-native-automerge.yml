@@ -261,7 +261,32 @@ jobs:
           if [ -z "$pr_number" ] && [ -n "${WORKFLOW_HEAD_SHA:-}" ]; then
             pr_number=$(GH_TOKEN="$GITHUB_PAT_NANAKO" gh api \
               "repos/$REPOSITORY/commits/$WORKFLOW_HEAD_SHA/pulls" --paginate --slurp \
-              | jq -r '[add[] | select(.state == "open" and .base.ref == "main") | .number] | .[0] // empty')
+              | jq -r '
+                if type != "array" then
+                  error("paginated pull request payload is not an array")
+                elif any(.[]; type != "array" and type != "null") then
+                  error("paginated pull request page is not an array")
+                else
+                  (
+                    map(select(type == "array"))
+                    | add // []
+                    | if any(.[]; type != "object") then
+                        error("paginated pull request item is not an object")
+                      elif any(.[];
+                        if (.number | type) != "number" or (.state | type) != "string" then
+                          true
+                        elif (.base | type) != "object" then
+                          true
+                        else
+                          (.base.ref | type) != "string"
+                        end
+                      ) then
+                        error("paginated pull request item has an invalid shape")
+                      else
+                        (map(select(.state == "open" and .base.ref == "main") | .number) | .[0] // empty)
+                      end
+                  )
+                end')
           fi
           if [ -z "$pr_number" ]; then
             echo 'Native auto-merge guard: no open main PR found for this event; no merge.'
