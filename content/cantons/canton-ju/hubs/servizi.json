@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-10-23T05:52:42.601Z",
-  "contentHash": "9807015696162e57ac10826efe47713b90560831879ac8becf8fd1a0bea567d7",
+  "updatedAt": "2026-10-23T09:15:58.489Z",
+  "contentHash": "fd8e9e1defb8ed392bb0e0aed1c8423a4084acb3c952f1e8eac521fb997bd158",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -76,11 +76,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-22T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-23T16:30:00.000Z"
             },
             {
@@ -92,6 +87,11 @@
               "label": "Benu Porrentruy",
               "detail": "Porrentruy, Ajoie",
               "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-24T16:30:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
@@ -178,7 +178,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T09:15:58.489Z"
     },
     "en": {
       "canton": "JU",
@@ -227,11 +227,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-22T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-23T16:30:00.000Z"
             },
             {
@@ -243,6 +238,11 @@
               "label": "Benu Porrentruy",
               "detail": "Porrentruy, Ajoie",
               "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-24T16:30:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
@@ -325,7 +325,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T09:15:58.489Z"
     },
     "de": {
       "canton": "JU",
@@ -374,11 +374,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-22T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-23T16:30:00.000Z"
             },
             {
@@ -390,6 +385,11 @@
               "label": "Benu Porrentruy",
               "detail": "Porrentruy, Ajoie",
               "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-24T16:30:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
@@ -472,7 +472,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T09:15:58.489Z"
     },
     "fr": {
       "canton": "JU",
@@ -521,11 +521,6 @@
             {
               "label": "Centre Migros",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-22T16:30:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
               "date": "2026-10-23T16:30:00.000Z"
             },
             {
@@ -537,6 +532,11 @@
               "label": "Benu Porrentruy",
               "detail": "Porrentruy, Ajoie",
               "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-24T16:30:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
@@ -615,7 +615,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T09:15:58.489Z"
     }
   }
 }
