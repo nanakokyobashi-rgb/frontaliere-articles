@@ -4,13 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-appenzello::https://appenzell24.ch/news/geschaeftsfuehrerin-weg-spitex-ueberbrueckt": {
-      "section": "canton-appenzello",
-      "ts": 1792535684778
-    },
     "canton-appenzello::https://spitalverbund.ch/2026/10/21/regelschmerzen-wenn-die-schmerzen-zur-regel-werden-oeffentlicher-vortrag-am-28-oktober-2026-im-spital-herisau": {
       "section": "canton-appenzello",
       "ts": 1792608626446
+    },
+    "canton-appenzello::https://appenzell24.ch/news/grundkompetenzen-im-betrieb-sollen-gezielt-gestaerkt-werden": {
+      "section": "canton-appenzello",
+      "ts": 1792734041643
     }
   }
 }
