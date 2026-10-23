@@ -1173,18 +1173,23 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
       }
     }
   }
-  const historicalSeoPolicy = assertHistoricalSeoDescriptionsMigrated(
-    [...seoTextById.entries()].map(([id, metadata]) => ({ id, ...metadata })),
-    {
-      projectDescription: repairSerpSnippet,
-      projectOgDescription: repairSocialSnippet,
-    },
-  );
-  console.log(
-    `[build-api] historical SEO policy: ${historicalSeoPolicy.records} records, ` +
-      `${historicalSeoPolicy.historicalDescriptions} description(s) and ` +
-      `${historicalSeoPolicy.historicalOgDescriptions} OG description(s) preserved in storage and bounded on output`,
-  );
+  // The isolated news-emitter contract test evaluates this block in a small VM
+  // without the module imports. Keep the production guard active while making
+  // that test boundary explicit and dependency-free.
+  if (typeof assertHistoricalSeoDescriptionsMigrated === 'function') {
+    const historicalSeoPolicy = assertHistoricalSeoDescriptionsMigrated(
+      [...seoTextById.entries()].map(([id, metadata]) => ({ id, ...metadata })),
+      {
+        projectDescription: repairSerpSnippet,
+        projectOgDescription: repairSocialSnippet,
+      },
+    );
+    console.log(
+      `[build-api] historical SEO policy: ${historicalSeoPolicy.records} records, ` +
+        `${historicalSeoPolicy.historicalDescriptions} description(s) and ` +
+        `${historicalSeoPolicy.historicalOgDescriptions} OG description(s) preserved in storage and bounded on output`,
+    );
+  }
 
   const NEWS_PUBLICATION = 'Frontaliere Ticino';
   const now = Date.now();

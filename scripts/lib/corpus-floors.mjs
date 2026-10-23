@@ -840,9 +840,11 @@ function collectSeoEntryMetadataInternal(src, into, feedOnly) {
       keywords: unescapeQuoted(keywordMatch?.[1]),
       headline: block.match(/"headline":\s*"((?:[^"\\]|\\.)*)"/)?.[1],
       datePublished: block.match(/"datePublished":\s*"([^"]+)"/)?.[1],
-      description: unescapeQuoted(block.match(/description:\s*'((?:[^'\\]|\\.)*)'/)?.[1]),
-      ogDescription: unescapeQuoted(block.match(/ogDescription:\s*'((?:[^'\\]|\\.)*)'/)?.[1]),
     };
+    const description = unescapeQuoted(block.match(/description:\s*'((?:[^'\\]|\\.)*)'/)?.[1]);
+    const ogDescription = unescapeQuoted(block.match(/ogDescription:\s*'((?:[^'\\]|\\.)*)'/)?.[1]);
+    if (description !== undefined) metadata.description = description;
+    if (ogDescription !== undefined) metadata.ogDescription = ogDescription;
     // Solo il percorso RSS applica la validita' del producer prima del dedupe;
     // il collector completo deve conservare anche i campi opzionali per la
     // sitemap news.
