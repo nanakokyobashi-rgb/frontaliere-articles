@@ -1731,7 +1731,10 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(sectionPublisher, /git fetch --no-tags origin main/u);
   assert.match(sectionPublisher, /git checkout --detach FETCH_HEAD/u);
   assert.match(sectionPublisher, /export PUSH_AFTER="\$EXPECTED_MAIN_HEAD"/u);
-  assert.match(sectionPublisher, /previous_revision="\$\(git rev-parse HEAD\^\)"/u);
+  assert.match(
+    sectionPublisher,
+    /if \[ -z "\$\{PUSH_BEFORE:-\}" \] \|\| \[\[ "\$PUSH_BEFORE" =~ \^0\+\$ \]\]; then[\s\S]*previous_revision="\$\(git rev-parse HEAD\^\)"[\s\S]*else[\s\S]*previous_revision="\$PUSH_BEFORE"/u,
+  );
   assert.doesNotMatch(sectionPublisher, /git checkout --detach origin\/main/u);
   assert.match(sectionPublisher, /main avanzata durante il render/u);
   const sectionLiveLoop = sectionPublisher.slice(sectionPublisher.indexOf('for publish_attempt in 1 2 3'));
@@ -1741,9 +1744,14 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(sectionLiveLoop, /rm -f "\$RUNNER_TEMP\/section-summary\.json"/u);
   assert.match(sectionLiveLoop, /if RETRY_CMD_ATTEMPTS=2 bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/u);
   assert.match(sectionLiveLoop, /deferredLiveRelease == true and \.published\.deferredReason != null/u);
-  assert.match(sectionPublisher, /deferred_replay_deadline_ms=\$\(\( \$\(date \+%s%3N\) \+ 30 \* 60 \* 1000 \)\)/u);
-  assert.match(sectionLiveLoop, /staging live completata ma API\/edge non ancora pronta/u);
-  assert.match(sectionLiveLoop, /if \[ "\$deferred_retry" = 'true' \]; then[\s\S]*continue/u);
+  assert.match(sectionLiveLoop, /refresh_live_plan_and_preflight/u);
+  assert.match(sectionPublisher, /refresh_live_plan_and_preflight\(\) \{[\s\S]*fast-publish-section\.mjs r2-plan/u);
+  assert.match(sectionPublisher, /refresh_live_plan_and_preflight\(\) \{[\s\S]*check-blog-body-syntax\.mjs/u);
+  assert.match(sectionPublisher, /refresh_live_plan_and_preflight\(\) \{[\s\S]*check-blog-body-links\.mjs/u);
+  assert.match(sectionLiveLoop, /rendered_head=\$EXPECTED_MAIN_HEAD/u);
+  assert.match(sectionLiveLoop, /staging live completata sulla HEAD \$EXPECTED_MAIN_HEAD/u);
+  assert.doesNotMatch(sectionLiveLoop, /sleep 30/u);
+  assert.doesNotMatch(sectionLiveLoop, /deferred_retry/u);
   for (const [publisher, contract] of [
     [articlePublisher, articlePublisher],
     [sectionPublisher, `${sectionPublisher}\n${sectionResolver}`],

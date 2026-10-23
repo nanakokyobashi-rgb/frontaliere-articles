@@ -3530,8 +3530,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
   assert.match(wf, /PUSH_AFTER: \$\{\{ needs\.resolve\.outputs\.push_after \}\}/);
   const stagedReplay = wf.slice(wf.indexOf('  replay-api-after-staged-release:'));
-  assert.match(stagedReplay, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
-  assert.match(stagedReplay, /SOURCE_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(stagedReplay, /needs\.publish\.outputs\.rendered_head != ''/);
+  assert.match(stagedReplay, /ref: \$\{\{ needs\.publish\.outputs\.rendered_head \|\| inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(stagedReplay, /SOURCE_COMMIT: \$\{\{ needs\.publish\.outputs\.rendered_head \|\| inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(stagedReplay, /Redispatch staged backfill on current main after stale replay/);
   assert.match(stagedReplay, /TARGET_MATRIX: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/);
   assert.match(stagedReplay, /-f missing_page_paths="\$missing_page_paths"/);
@@ -3561,9 +3562,16 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /push_after:/);
   assert.match(
     liveRetryLoop,
-    /previous_revision="\$\(git rev-parse HEAD\^\)"/,
-    'il retry live conserva la revisione precedente per delimitare il push range',
+    /if \[ -z "\$\{PUSH_BEFORE:-\}" \] \|\| \[\[ "\$PUSH_BEFORE" =~ \^0\+\$ \]\]; then[\s\S]*previous_revision="\$\(git rev-parse HEAD\^\)"[\s\S]*else[\s\S]*previous_revision="\$PUSH_BEFORE"/,
+    'il retry live conserva PUSH_BEFORE per le push e usa HEAD^ solo per un dispatch senza base',
   );
+  assert.match(liveRetryLoop, /refresh_live_plan_and_preflight/);
+  assert.match(wf, /refresh_live_plan_and_preflight\(\) \{[\s\S]*fast-publish-section\.mjs r2-plan/);
+  assert.match(wf, /refresh_live_plan_and_preflight\(\) \{[\s\S]*check-blog-body-syntax\.mjs/);
+  assert.match(wf, /refresh_live_plan_and_preflight\(\) \{[\s\S]*check-blog-body-links\.mjs/);
+  assert.match(liveRetryLoop, /rendered_head=\$EXPECTED_MAIN_HEAD/);
+  assert.doesNotMatch(liveRetryLoop, /sleep 30/);
+  assert.doesNotMatch(liveRetryLoop, /deferred_retry/);
   assert.match(wf, /group: fast-publish-\$\{\{ matrix\.target\.section \}\}\n\s+cancel-in-progress: false/);
   assert.match(wf, /fail-fast: false/);
   for (const p of ["'content/cantons/**'", "'content/blog-body-canton-*/**'", "'content/blog-meta-canton-*'", "'sections/registry.json'"]) {
