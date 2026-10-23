@@ -39,6 +39,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.voto-rete-gas-wil-2026.title': 'Wil : vote le 29 novembre 2026 sur le réseau de gaz',
     'blog.article.voto-rete-gas-wil-2026.excerpt': 'Vote sur le fonds : 29 novembre 2026.',
     'blog.article.voto-rete-gas-wil-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sbb-sportelli-st-margrethen-uznach.title': 'Les SBB ferment les guichets à St.Margrethen et Uznach',
+    'blog.article.sbb-sportelli-st-margrethen-uznach.excerpt': 'À partir du début de 2027, les SBB misent sur le libre-service à St.Margrethen et Uznach : 3% des billets sont encore vendus au guichet.',
+    'blog.article.sbb-sportelli-st-margrethen-uznach.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSgFr;

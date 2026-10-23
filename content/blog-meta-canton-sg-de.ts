@@ -39,6 +39,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.voto-rete-gas-wil-2026.title': 'Wil: Abstimmung am 29. November 2026 über das Gasnetz',
     'blog.article.voto-rete-gas-wil-2026.excerpt': 'Abstimmung über den Fonds: 29.',
     'blog.article.voto-rete-gas-wil-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sbb-sportelli-st-margrethen-uznach.title': 'SBB schließen Schalter in St.Margrethen und Uznach',
+    'blog.article.sbb-sportelli-st-margrethen-uznach.excerpt': 'Ab Anfang 2027 setzen die SBB in St.Margrethen und Uznach auf Selbstbedienung: 3% der Tickets werden noch am Schalter verkauft.',
+    'blog.article.sbb-sportelli-st-margrethen-uznach.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;

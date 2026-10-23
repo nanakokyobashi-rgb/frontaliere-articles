@@ -138,4 +138,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sbb-sportelli-st-margrethen-uznach',
+ category: 'pratico',
+ date: '2026-10-23T00:23:33.274Z',
+ image: '/images/blog/article-sbb-sportelli-st-margrethen-uznach.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
