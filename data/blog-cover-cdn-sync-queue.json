@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-consultazione-abitazioni-lucerna.webp",
-      "sha256": "836540740082b6d8794b6caec6f97ac477c3e3bb3e7461971b6be614dc405cf8"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-consultazione-abitazioni-lucerna-480w.webp",
-      "sha256": "e56d3967b7d259e028274d02e1d73afb2c88bbe12124d9cbde53d60d216a14fe"
-    }
-  ]
+  "items": []
 }
