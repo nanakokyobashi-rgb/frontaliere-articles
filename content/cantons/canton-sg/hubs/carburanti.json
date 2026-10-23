@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T00:54:27.534Z",
-  "contentHash": "7350bb2fabae9a83ec7722eb2a47240d33e0dad349c50f44d1da543d97b52069",
+  "updatedAt": "2026-10-23T03:27:15.275Z",
+  "contentHash": "acc8016c3b8b85088265ff53a1d232560f0e53634072a2e7580bdf3b5298b468",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "San Gallo rafforza protezione infrastrutture critiche",
+          "url": "/articoli-san-gallo/san-gallo-protezione-infrastrutture-critiche/",
+          "excerpt": "Il Governo di San Gallo rafforza la protezione delle infrastrutture critiche La strategia copre infrastrutture, processi e servizi La resilienza include",
+          "date": "2026-10-23T03:10:46.389Z"
+        },
+        {
           "title": "SBB chiudono gli sportelli a St.Margrethen e Uznach",
           "url": "/articoli-san-gallo/sbb-sportelli-st-margrethen-uznach/",
           "excerpt": "Dall'inizio del 2027 le SBB puntano sul self-service a St.Margrethen e Uznach: il 3% dei biglietti è ancora venduto allo sportello.",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/voto-bahnhofplatz-wil-2026/",
           "excerpt": "Il 29 novembre 2026 i cittadini di Wil voteranno sul progetto per il nuovo terminale bus, la velostazione e la riqualificazione della stazione.",
           "date": "2026-10-19T12:16:44.327Z"
-        },
-        {
-          "title": "St.Gallen avvia il sondaggio per le imprese",
-          "url": "/articoli-san-gallo/sondaggio-imprese-st-gallen-2026/",
-          "excerpt": "La città di St.Gallen lancia un sondaggio rivolto alle imprese per valutare la piazza economica.",
-          "date": "2026-10-19T10:59:29.088Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T00:54:27.534Z"
+      "updatedAt": "2026-10-23T03:27:15.275Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "St. Gallen strengthens protection of critical infrastructure",
+          "url": "/en/st-gallen-articles/st-gallen-critical-infrastructure-protection/",
+          "excerpt": "The Government of St.",
+          "date": "2026-10-23T03:10:46.389Z"
+        },
+        {
           "title": "SBB close the ticket offices in St.Margrethen and Uznach",
           "url": "/en/st-gallen-articles/sbb-ticket-counters-st-margrethen-uznach/",
           "excerpt": "From the beginning of 2027, SBB are focusing on self-service in St.Margrethen and Uznach: 3% of tickets are still sold at the counter.",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/wil-bahnhofplatz-vote-2026/",
           "excerpt": "On November 29, 2026, the citizens of Wil will vote on the project for the new bus terminal, bicycle station, and redevelopment of the station.",
           "date": "2026-10-19T12:16:44.327Z"
-        },
-        {
-          "title": "St.Gallen launches the business survey",
-          "url": "/en/st-gallen-articles/st-gallen-business-survey-2026/",
-          "excerpt": "The city of St.Gallen is launching a survey aimed at businesses to assess the business location.",
-          "date": "2026-10-19T10:59:29.088Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T00:54:27.534Z"
+      "updatedAt": "2026-10-23T03:27:15.275Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "St. Gallen stärkt den Schutz kritischer Infrastrukturen",
+          "url": "/de/st-gallen-artikel/st-gallen-schutz-kritischer-infrastrukturen/",
+          "excerpt": "Die Regierung von St.",
+          "date": "2026-10-23T03:10:46.389Z"
+        },
+        {
           "title": "SBB schließen Schalter in St.Margrethen und Uznach",
           "url": "/de/st-gallen-artikel/sbb-schalter-st-margrethen-uznach/",
           "excerpt": "Ab Anfang 2027 setzen die SBB in St.Margrethen und Uznach auf Selbstbedienung: 3% der Tickets werden noch am Schalter verkauft.",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/abstimmung-bahnhofplatz-wil-2026/",
           "excerpt": "Am 29. November 2026 stimmen die Bürgerinnen und Bürger von Wil über das Projekt für den neuen Busterminal, die Velostation und die Neugestaltung des Bahnhofs ab.",
           "date": "2026-10-19T12:16:44.327Z"
-        },
-        {
-          "title": "St.Gallen startet die Unternehmensumfrage",
-          "url": "/de/st-gallen-artikel/st-gallen-unternehmensbefragung-2026/",
-          "excerpt": "Die Stadt St.Gallen startet eine Umfrage unter Unternehmen, um den Wirtschaftsstandort zu bewerten.",
-          "date": "2026-10-19T10:59:29.088Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T00:54:27.534Z"
+      "updatedAt": "2026-10-23T03:27:15.275Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Saint-Gall renforce la protection des infrastructures critiques",
+          "url": "/fr/articles-saint-gall/saint-gall-protection-infrastructures-critiques/",
+          "excerpt": "Le Gouvernement de Saint-Gall renforce la protection des infrastructures critiques La stratégie couvre les infrastructures, les processus et les services",
+          "date": "2026-10-23T03:10:46.389Z"
+        },
+        {
           "title": "Les SBB ferment les guichets à St.Margrethen et Uznach",
           "url": "/fr/articles-saint-gall/guichets-sbb-st-margrethen-uznach/",
           "excerpt": "À partir du début de 2027, les SBB misent sur le libre-service à St.Margrethen et Uznach : 3% des billets sont encore vendus au guichet.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/vote-bahnhofplatz-wil-2026/",
           "excerpt": "Le 29 novembre 2026, les citoyens de Wil voteront sur le projet du nouveau terminal de bus, de la vélostation et de la requalification de la gare.",
           "date": "2026-10-19T12:16:44.327Z"
-        },
-        {
-          "title": "St.Gallen lance l’enquête auprès des entreprises",
-          "url": "/fr/articles-saint-gall/enquete-entreprises-saint-gall-2026/",
-          "excerpt": "La ville de St.Gallen lance une enquête auprès des entreprises afin d’évaluer la place économique.",
-          "date": "2026-10-19T10:59:29.088Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T00:54:27.534Z"
+      "updatedAt": "2026-10-23T03:27:15.275Z"
     }
   }
 }
