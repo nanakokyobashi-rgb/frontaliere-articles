@@ -15,6 +15,10 @@
     "canton-sz::https://www.einsiedeln.ch/verwaltung/mitteilungen/aktuelle-mitteilungen?m=4563": {
       "section": "canton-sz",
       "ts": 1792717171590
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/buergenstockstrasse-tieferes-tempolimit-gefordert-art-1728183": {
+      "section": "canton-sz",
+      "ts": 1792767285192
     }
   }
 }
