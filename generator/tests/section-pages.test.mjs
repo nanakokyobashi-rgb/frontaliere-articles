@@ -3532,7 +3532,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   for (const p of ["'content/cantons/**'", "'content/blog-body-canton-*/**'", "'content/blog-meta-canton-*'", "'sections/registry.json'"]) {
     assert.ok(wf.includes(`      - ${p}\n`), p);
   }
-  assert.match(wf, /node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
+  assert.match(wf, /bash scripts\/ci\/fast-publish-section-resolve\.sh/);
+  assert.match(resolver, /node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
   assert.match(wf, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);
   assert.match(wf, /git diff --name-status "\$before" HEAD/);
   assert.match(wf, /Fetch fallback corpus revision for manifest migration/);
