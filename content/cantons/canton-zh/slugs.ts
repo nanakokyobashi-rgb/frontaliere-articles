@@ -19,6 +19,8 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'zurigo-incentivi-e-cargo-velo': { it: 'zurigo-incentivi-e-cargo-velo', en: 'zurich-incentives-e-cargo-bike', de: 'zuerich-incentive-e-cargo-velo', fr: 'zurich-incitations-e-cargo-bike' },
  'controlli-distrazione-zurigo': { it: 'controlli-distrazione-zurigo', en: 'zurich-distraction-checks', de: 'zuerich-kontrolle-ablenkung', fr: 'controles-distraction-zurich' },
  'zurigo-budget-sans-papiers': { it: 'zurigo-budget-sans-papiers', en: 'zurich-sans-papers-budget', de: 'zuerich-sans-papiers-budget', fr: 'zurich-budget-sans-papiers' },
+ 'winterthur-voto-energia': { it: 'winterthur-voto-energia', en: 'winterthur-energy-contracting-vote', de: 'winterthur-abstimmung-energie-contracting', fr: 'winterthur-vote-energie-contracting' },
+ 'wetzikon-binzacher-kempten-info': { it: 'wetzikon-binzacher-kempten-info', en: 'wetzikon-binzacher-kempten-briefing', de: 'wetzikon-binzacher-kempten-infoabend', fr: 'wetzikon-binzacher-kempten-reunion' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

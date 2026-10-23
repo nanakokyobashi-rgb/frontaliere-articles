@@ -51,6 +51,12 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.zurigo-budget-sans-papiers.title': 'Zürich genehmigt 260.000 Franken für Sans-Papiers',
     'blog.article.zurigo-budget-sans-papiers.excerpt': 'Der Zürcher Gemeinderat genehmigt mehr Mittel und erhöht das Budget der Anlaufstelle per Sans-Papiers auf 260.000 Franken.',
     'blog.article.zurigo-budget-sans-papiers.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.winterthur-voto-energia.title': 'Winterthur: Abstimmung über 100 Millionen für das Energie-Contracting',
+    'blog.article.winterthur-voto-energia.excerpt': 'In Winterthur Abstimmung im Februar 2027 über 100 Millionen für das Energie-Contracting.',
+    'blog.article.winterthur-voto-energia.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.wetzikon-binzacher-kempten-info.title': 'Wetzikon: öffentliche Veranstaltung zu Binzacher und Kempten',
+    'blog.article.wetzikon-binzacher-kempten-info.excerpt': 'Am 29. Oktober 2026 um 19.00 Uhr informieren die Stadt Wetzikon und SBB in der Alten Turnhalle über das weitere Vorgehen bei der Parkierungsanlage Binzacher und beim Bahnhof Kempten.',
+    'blog.article.wetzikon-binzacher-kempten-info.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZhDe;
