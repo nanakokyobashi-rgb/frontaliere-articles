@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import {
+  classifyReleaseOutcome,
   releaseImageNamespaceLock,
   releaseNotOwnedIsFatal,
 } from '../../scripts/lib/r2-image-namespace-lock.mjs';
@@ -36,4 +37,11 @@ test('candidate fencing treats a lease owned by another writer as benign', async
   assert.equal(result, false);
   assert.equal(releaseNotOwnedIsFatal({ fenceMissingCandidate: true }), false);
   assert.equal(releaseNotOwnedIsFatal({ fenceMissingCandidate: false }), true);
+});
+
+test('release deadline classification is deterministic at and after the boundary', () => {
+  assert.equal(classifyReleaseOutcome({ completedAt: 1_000, deadline: 1_000 }), 'released');
+  assert.equal(classifyReleaseOutcome({ completedAt: 1_001, deadline: 1_000 }), 'timeout');
+  assert.equal(classifyReleaseOutcome({ timedOut: true, completedAt: 1_000, deadline: 1_000 }), 'timeout');
+  assert.equal(classifyReleaseOutcome({ completedAt: 1_000 }), 'timeout');
 });

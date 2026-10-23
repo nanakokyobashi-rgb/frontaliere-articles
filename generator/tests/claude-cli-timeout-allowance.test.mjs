@@ -261,6 +261,15 @@ describe('il timeout del CLI claude cresce dentro l\'allowance residua', () => {
       5_000,
       'un cap con deadline non deve aggiungere 60s alla finestra residua: altrimenti il kill esterno puo\' arrivare per primo',
     );
+    assert.ok(
+      Number.isFinite(hardCallCapMs('model', { timeout: 30_000, maxRetriesPerModel: 1, deadlineMs: 'invalid' })),
+      'una deadline non numerica non deve trasformare il cap in NaN e in un timer immediato',
+    );
+    assert.match(
+      block,
+      /if \(Number\.isFinite\(opts\?\.deadlineMs\)\)/,
+      'il clamp del cap deve accettare solo deadline numeriche finite',
+    );
   });
 });
 

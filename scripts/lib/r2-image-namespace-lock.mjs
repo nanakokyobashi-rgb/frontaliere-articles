@@ -719,6 +719,18 @@ function containsReleaseTimeout(error, seen = new Set()) {
 }
 
 /**
+ * Classify the timer/work race from the observable completion timestamp.
+ * A release that settled at the deadline is still a completed release; a
+ * release that settled after it is a timeout even when the timer callback was
+ * delayed by event-loop pressure.
+ */
+export function classifyReleaseOutcome({ timedOut = false, completedAt, deadline } = {}) {
+  if (timedOut) return 'timeout';
+  if (!Number.isFinite(completedAt) || !Number.isFinite(deadline)) return 'timeout';
+  return completedAt <= deadline ? 'released' : 'timeout';
+}
+
+/**
  * Release image leases within one absolute budget. `perLease` starts each
  * namespace independently so a slow lease cannot prevent the others starting.
  */
@@ -747,10 +759,10 @@ export async function releaseImageNamespaceLeasesWithDeadline(
   const work = Promise.allSettled(groups.map((group) => {
     if (Date.now() >= deadline) return Promise.reject(timeoutError);
     return Promise.resolve().then(() => releaseImpl(group, { ...options, deadline }));
-  })).then((results) => ({ timedOut: false, results }));
+  })).then((results) => ({ timedOut: false, completedAt: Date.now(), results }));
   const outcome = await Promise.race([work, timeout]);
   clearTimeout(timeoutId);
-  if (outcome.timedOut || Date.now() >= deadline) {
+  if (classifyReleaseOutcome({ ...outcome, deadline }) === 'timeout') {
     return { status: 'timeout', timedOut: true, released: null, error: timeoutError };
   }
 

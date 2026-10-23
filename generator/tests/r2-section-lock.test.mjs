@@ -54,3 +54,32 @@ test('R2 writes retain caller-provided encoding headers', async () => {
 
   assert.equal(Object.fromEntries(Object.entries(read().init.headers))['accept-encoding'], 'gzip');
 });
+
+test('R2 requests normalize method casing before signing and sending', async () => {
+  const { request, read } = captureRequest();
+
+  await request({
+    method: 'get',
+    key: 'internal/ci/article-chunk-locks/frontaliere.json',
+  });
+
+  assert.equal(read().init.method, 'GET');
+  assert.equal(Object.fromEntries(Object.entries(read().init.headers))['accept-encoding'], 'identity');
+});
+
+test('R2 transport enumerates Web Headers before signing', async () => {
+  const { request, read } = captureRequest();
+
+  await request({
+    method: 'GET',
+    key: 'internal/ci/article-chunk-locks/frontaliere.json',
+    headers: new Headers([
+      ['Accept-Encoding', 'gzip'],
+      ['X-Test-Header', 'preserved'],
+    ]),
+  });
+
+  const headers = Object.fromEntries(Object.entries(read().init.headers));
+  assert.equal(headers['accept-encoding'], 'identity');
+  assert.equal(headers['x-test-header'], 'preserved');
+});

@@ -9039,7 +9039,7 @@ function _hardCallCapMs(model, opts) {
   else if (provider === PROVIDER.CODEX_CLI) base = Math.max(base, CODEX_CLI_MAX_TIMEOUT_MS);
   const attempts = Math.max(1, opts?.maxRetriesPerModel || 1);
   let cap = attempts * (base + MAX_RETRY_AFTER_MS) * 2 + HARD_CALL_CAP_GRACE_MS;
-  if (opts?.deadlineMs) {
+  if (Number.isFinite(opts?.deadlineMs)) {
     const remaining = opts.deadlineMs - Date.now();
     // An absolute caller deadline is a hard boundary. The grace above is only
     // for calls without one: adding it here lets an in-flight provider survive
