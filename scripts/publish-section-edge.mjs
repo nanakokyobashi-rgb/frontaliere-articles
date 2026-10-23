@@ -405,11 +405,11 @@ export function requiredPageKeys(section, { sitemapXml, previousSitemapXml = nul
 
 /**
  * Quanto il publisher puo' attendere il bootstrap e ogni quanto ritenta.
- * La finestra e' intenzionalmente bounded al massimo documentato del producer:
- * fast-publish-section puo' impiegare fino a 100 minuti per renderizzare e
- * caricare una sezione bootstrap. Una finestra piu' corta del producer fa
- * fallire publish-api mentre il lock protegge ancora pagine in costruzione;
- * il publisher resta comunque sotto il proprio timeout di 180 minuti.
+ * La finestra del publisher e' bounded a 100 minuti per lasciare spazio al
+ * replay quando il producer e' ancora in coda. Il lease condiviso in
+ * section-bootstrap-lock.mjs copre invece l'intero timeout di 360 minuti del
+ * producer, con margine di cleanup: dopo il wait il publisher fallisce chiuso
+ * finche' il marker resta attivo, senza fare flip su pagine in costruzione.
  */
 export const BOOTSTRAP_WAIT_MS = 100 * 60 * 1000;
 export const BOOTSTRAP_RETRY_MS = 20 * 1000;
