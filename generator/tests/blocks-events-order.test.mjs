@@ -230,6 +230,34 @@ test('eventi: tra URL equivalenti pubblica il deep link con fragment', () => {
   assert.equal(block.render('it').items.find((item) => item.url)?.url, detailUrl);
 });
 
+test('eventi: URL equivalenti con query riordinata collassano nello stesso anchor', () => {
+  const tomorrow = new Date(NOW + DAY_MS).toISOString().slice(0, 10);
+  const event = (label, extra = {}) => ({
+    title: 'Evento condiviso',
+    titleByLocale: { it: label },
+    startDate: tomorrow,
+    startTime: '10:00',
+    canton: 'TI',
+    ...extra,
+  });
+  const firstUrl = 'https://events.example.org/programma?utm_source=calendar&giorno=2026-10-06';
+  const reorderedUrl = 'https://events.example.org/programma?giorno=2026-10-06&utm_source=calendar';
+  const dataset = {
+    generatedAt: new Date(NOW - 60 * 60 * 1000).toISOString(),
+    events: [
+      event('first-query-order', { url: firstUrl }),
+      event('reordered-query', { url: reorderedUrl }),
+      event('unrelated-a'),
+      event('unrelated-b'),
+    ],
+  };
+
+  const block = shapeEventsBlock(dataset, { canton: 'TI', members: ['TI'], nowMs: NOW });
+
+  assert.equal(block.render('it').keyFacts[0].value, '3');
+  assert.equal(block.render('it').items.find((item) => item.url)?.url, firstUrl);
+});
+
 test('eventi: un URL con percent-encoding malformato resta un anchor distinto', () => {
   const tomorrow = new Date(NOW + DAY_MS).toISOString().slice(0, 10);
   const event = (label, url, extra = {}) => ({
