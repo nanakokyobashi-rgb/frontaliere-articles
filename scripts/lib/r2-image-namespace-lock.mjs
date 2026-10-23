@@ -9,6 +9,7 @@ export const IMAGE_LOCK_KEY_PREFIX = 'internal/ci/image-namespace-locks';
 export const IMAGE_LOCK_LEASE_MS = 7 * 60 * 60 * 1000;
 export const IMAGE_LOCK_ACQUIRE_TIMEOUT_MS = 15 * 60 * 1000;
 export const IMAGE_LEASE_RELEASE_TIMEOUT_MS = 30_000;
+export const IMAGE_LOCK_RELEASE_RETRY_MS = 1_000;
 export const IMAGE_LOCK_POLL_MS = 5_000;
 export const IMAGE_LEASE_CONTEXT_ENV = 'FRONTALIERE_R2_IMAGE_LEASE_CONTEXT';
 
@@ -35,19 +36,6 @@ function positiveDuration(value, name) {
     throw new Error(`[r2-image-namespace-lock] ${name} must be a positive duration`);
   }
   return value;
-}
-
-/** Resolve the optional CLI timestamp without admitting empty/non-positive input. */
-export function resolveRequestedLeaseTimestamp(value, now = Date.now()) {
-  if (!Number.isFinite(now) || now < 1) {
-    throw new Error('[r2-image-namespace-lock] fallback lease timestamp must be positive');
-  }
-  const requested = typeof value === 'number'
-    ? value
-    : typeof value === 'string' && value.trim().length > 0
-      ? Number(value)
-      : Number.NaN;
-  return Number.isFinite(requested) && requested >= 1 ? requested : now;
 }
 
 export function parseImageNamespaces(value) {
@@ -562,6 +550,7 @@ export async function releaseImageNamespaceLock(
     deadline,
     fenceMissingCandidate = false,
     staleWriteConditions = [],
+    sleep = delay,
   } = {},
 ) {
   const parsedLease = parseLeaseContext({ version: CONTEXT_VERSION, leases: [lease] }).leases[0];
@@ -579,12 +568,21 @@ export async function releaseImageNamespaceLock(
   const candidateTombstone = tombstonePayload(normalized, now);
   let lastAttempt = null;
   let lastError = null;
+  const retryLeaseRead = async (readError, attempt) => {
+    if (attempt + 1 >= IMAGE_LOCK_CLEANUP_ATTEMPTS) throw readError;
+    const remaining = Number.isFinite(deadline)
+      ? deadline - Date.now()
+      : IMAGE_LOCK_RELEASE_RETRY_MS;
+    if (remaining <= 0) throw readError;
+    await sleep(Math.min(IMAGE_LOCK_RELEASE_RETRY_MS, remaining));
+  };
 
   for (let attempt = 0; attempt < IMAGE_LOCK_CLEANUP_ATTEMPTS; attempt += 1) {
     let current;
     try {
       current = await readCurrentLease(releaseRequest, namespace);
     } catch (readError) {
+      let usedFallbackCondition = false;
       if (!lastAttempt) {
         const staleCondition = staleWriteConditions.find(({ payload }) => payload.expiresAt <= now());
         if (staleCondition) {
@@ -593,14 +591,26 @@ export async function releaseImageNamespaceLock(
             condition: { name: 'if-match', value: staleCondition.etag },
             staleWriteCondition: true,
           };
+          usedFallbackCondition = true;
         } else if (fenceMissingCandidate) {
           lastAttempt = {
             payload: candidateTombstone,
             condition: { name: 'if-none-match', value: '*' },
           };
+          usedFallbackCondition = true;
         } else {
-          throw readError;
+          // A transient GET leaves no safe current ETag to act on. Retry the
+          // read before issuing any conditional write; exhaustion stays
+          // fail-closed and propagates the original read error.
+          await retryLeaseRead(readError, attempt);
+          continue;
         }
+      }
+      if (!usedFallbackCondition && !fenceMissingCandidate) {
+        // The previous conditional write may have failed, but a failed read
+        // still cannot safely reuse its stale payload without reconciling it.
+        await retryLeaseRead(readError, attempt);
+        continue;
       }
       lastError = lastError ? new AggregateError(
         [lastError, readError],
@@ -732,17 +742,6 @@ function containsReleaseTimeout(error, seen = new Set()) {
 }
 
 /**
- * Classify the result of a bounded release at one deterministic deadline.
- * A timer winning the race or work completing at the boundary is a timeout;
- * only work that completed strictly before the deadline is released.
- */
-export function classifyReleaseOutcome({ outcome, now = Date.now(), deadline } = {}) {
-  if (!Number.isFinite(deadline)) throw new Error('release deadline must be finite');
-  if (!Number.isFinite(now)) throw new Error('release clock must be finite');
-  return outcome?.timedOut === true || now >= deadline ? 'timeout' : 'released';
-}
-
-/**
  * Release image leases within one absolute budget. `perLease` starts each
  * namespace independently so a slow lease cannot prevent the others starting.
  */
@@ -774,7 +773,7 @@ export async function releaseImageNamespaceLeasesWithDeadline(
   })).then((results) => ({ timedOut: false, results }));
   const outcome = await Promise.race([work, timeout]);
   clearTimeout(timeoutId);
-  if (classifyReleaseOutcome({ outcome, now: Date.now(), deadline }) === 'timeout') {
+  if (outcome.timedOut || Date.now() >= deadline) {
     return { status: 'timeout', timedOut: true, released: null, error: timeoutError };
   }
 
@@ -839,7 +838,10 @@ async function acquireFromCli(namespaces, request, env = process.env) {
   const controller = new AbortController();
   const owner = env.FRONTALIERE_R2_IMAGE_LEASE_OWNER ?? randomUUID();
   const leaseId = env.FRONTALIERE_R2_IMAGE_LEASE_ID ?? randomUUID();
-  const pendingAcquiredAt = resolveRequestedLeaseTimestamp(env.FRONTALIERE_R2_IMAGE_LEASE_ACQUIRED_AT);
+  const requestedAcquiredAt = Number(env.FRONTALIERE_R2_IMAGE_LEASE_ACQUIRED_AT);
+  const pendingAcquiredAt = Number.isFinite(requestedAcquiredAt) && requestedAcquiredAt >= 1
+    ? requestedAcquiredAt
+    : Date.now();
   const pendingLeases = namespaces.map((namespace) => ({
     namespace,
     owner,
