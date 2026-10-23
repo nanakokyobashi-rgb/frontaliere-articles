@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T00:12:28.308Z",
-  "contentHash": "c0621173ed65aead8c1ef5ae1304b263963ebd6d5af5e642ff4f39917203a65d",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "f873ec7da3bb20e5298705bdf855eb4a1630a3cfa4582e7030f3e57ee782ee91",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-21T12:38:14.154Z",
+      "updatedAt": "2026-10-22T19:30:03.925Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "88",
+          "value": "87",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Claudia Valer, Werkschau",
-              "detail": "Pflegeheim Heiligkreuz, St. Gallen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
-            },
-            {
-              "label": "Kurs: Homöopathische Notfallapotheke",
-              "detail": "St. Gallen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-homoeopathische-notfallapotheke/"
-            },
-            {
-              "label": "Eliane, Konzert und Dinner",
-              "detail": "Restaurant Rössli",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/eliane-konzert-und-dinner/"
-            },
-            {
-              "label": "Der Besuch der alten Dame",
-              "detail": "Theater St. Gallen, St. Gallen",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/der-besuch-der-alten-dame_AWMSP9s"
-            },
-            {
-              "label": "Fokusmodul – Meisner-Workout",
-              "detail": "Switzerland Innovation Park Ost",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
-            },
-            {
-              "label": "GEROLD SPÄTH - Schreiben und Gestalten im Zusammenspiel",
-              "detail": "Rapperswil-Jona",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gerold-spaeth-schreiben-und-gestalten-im-zusammenspiel/"
-            },
-            {
-              "label": "Pepe Lienhard Orchester",
-              "detail": "Dömli, Ebnat-Kappel",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/pepe-lienhard-orchester_APMfbnM"
-            },
-            {
-              "label": "Voices on Stage",
-              "detail": "Gallus Pub",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/voices-on-stage_A5HYakK"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — in corso, ultimo giorno: 2 novembre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
-            {
               "label": "GEROLD SPÄTH - Künstlerbücher",
               "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
+            },
+            {
+              "label": "Kinderwaren Börse",
+              "detail": "Röm.-kath. Kirchgemeindehaus Rapperswil-Jona, Rapperswil-Jona",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinderwaren-boerse/"
+            },
+            {
+              "label": "David Becomes King",
+              "detail": "Röm.-kath. Pfarreiheim St. Martin-Bruggen, St. Gallen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/david-becomes-king/"
+            },
+            {
+              "label": "Oktoberfest Bronschhofen",
+              "detail": "Bronschhofen, Wil (SG)",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oktoberfest-bronschhofen/"
+            },
+            {
+              "label": "Country Night",
+              "detail": "Hotel Restaurant Sternen Unterwasser",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/alt-st-johann/country-night_AeETki1"
+            },
+            {
+              "label": "Zu Gast - Grenzenlos Alpin",
+              "detail": "Wildhaus",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zu-gast-grenzenlos-alpin/"
+            },
+            {
+              "label": "Blues Max String Trio « Öpis isch immer»",
+              "detail": "Chällertheater im Baronenhaus",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/blues-max-string-trio-oepis-isch-immer_AbTax14"
+            },
+            {
+              "label": "Giora Feidman - For a Better World",
+              "detail": "St. Laurenzen Kirche St.Gallen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/giora-feidman-for-a-better-world_ACcGtBd"
+            },
+            {
+              "label": "Helga Schneider - Ich weiss",
+              "detail": "Wil SG",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-schneider-ich-weiss-13/"
+            },
+            {
+              "label": "Nicole Bernegger",
+              "detail": "ZAK Zentrum Aktueller Kultur",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/jona/nicole-bernegger_AvX8NbX"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "88",
+          "value": "87",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Claudia Valer, Werkschau",
-              "detail": "Pflegeheim Heiligkreuz, St. Gallen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
-            },
-            {
-              "label": "Kurs: Homöopathische Notfallapotheke",
-              "detail": "St. Gallen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-homoeopathische-notfallapotheke/"
-            },
-            {
-              "label": "Eliane, Konzert und Dinner",
-              "detail": "Restaurant Rössli",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/eliane-konzert-und-dinner/"
-            },
-            {
-              "label": "Der Besuch der alten Dame",
-              "detail": "Theater St. Gallen, St. Gallen",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/der-besuch-der-alten-dame_AWMSP9s"
-            },
-            {
-              "label": "Fokusmodul-Meisner -ork",
-              "detail": "Switzerland Innovation Park Ost",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
-            },
-            {
-              "label": "GEROLD SPÄTH - Schreiben und Gestalten im Zusammenspiel",
-              "detail": "Rapperswil-Jona",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gerold-spaeth-schreiben-und-gestalten-im-zusammenspiel/"
-            },
-            {
-              "label": "Pepe Lienhard Orchester",
-              "detail": "Dömli, Ebnat-Kappel",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/pepe-lienhard-orchester_APMfbnM"
-            },
-            {
-              "label": "Voices on Stage",
-              "detail": "Gallus Pub",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/voices-on-stage_A5HYakK"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — ongoing, last day: 2 November 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
-            {
               "label": "GEROLD SPÄTH - Künstlerbücher",
               "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
+            },
+            {
+              "label": "Kinderwaren Börse",
+              "detail": "Röm.-kath. Kirchgemeindehaus Rapperswil-Jona, Rapperswil-Jona",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinderwaren-boerse/"
+            },
+            {
+              "label": "David Becomes King",
+              "detail": "Röm.-kath. Pfarreiheim St. Martin-Bruggen, St. Gallen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/david-becomes-king/"
+            },
+            {
+              "label": "Oktoberfest Bronschhofen",
+              "detail": "Bronschhofen, Wil (SG)",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oktoberfest-bronschhofen/"
+            },
+            {
+              "label": "Countr Night",
+              "detail": "Hotel Restaurant Sternen Unterwasser",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/alt-st-johann/country-night_AeETki1"
+            },
+            {
+              "label": "Zu Gast - Grenzenlos Alpin",
+              "detail": "Wildhaus",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zu-gast-grenzenlos-alpin/"
+            },
+            {
+              "label": "Blues Max String Trio « Öpis isch immer»",
+              "detail": "Chällertheater im Baronenhaus",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/blues-max-string-trio-oepis-isch-immer_AbTax14"
+            },
+            {
+              "label": "Giora Feidman - For a Better World",
+              "detail": "St. Laurenzen Kirche St.Gallen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/giora-feidman-for-a-better-world_ACcGtBd"
+            },
+            {
+              "label": "Helga Schneider - Ich weiss",
+              "detail": "Wil SG",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-schneider-ich-weiss-13/"
+            },
+            {
+              "label": "Nicole Bernegger",
+              "detail": "ZAK Zentrum Aktueller Kultur",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/jona/nicole-bernegger_AvX8NbX"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "88",
+          "value": "87",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Claudia Valer, Werkschau",
-              "detail": "Pflegeheim Heiligkreuz, St. Gallen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
-            },
-            {
-              "label": "Kurs: Homöopathische Notfallapotheke",
-              "detail": "St. Gallen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-homoeopathische-notfallapotheke/"
-            },
-            {
-              "label": "Eliane, Konzert und Dinner",
-              "detail": "Restaurant Rössli",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/eliane-konzert-und-dinner/"
-            },
-            {
-              "label": "Der Besuch der alten Dame",
-              "detail": "Theater St. Gallen, St. Gallen",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/der-besuch-der-alten-dame_AWMSP9s"
-            },
-            {
-              "label": "Fokusmodul-Meisner-Grafforkout",
-              "detail": "Switzerland Innovation Park Ost",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
-            },
-            {
-              "label": "GEROLD SPÄTH - Schreiben und Gestalten im Zusammenspiel",
-              "detail": "Rapperswil-Jona",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gerold-spaeth-schreiben-und-gestalten-im-zusammenspiel/"
-            },
-            {
-              "label": "Pepe Lienhard Orchester",
-              "detail": "Dömli, Ebnat-Kappel",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/pepe-lienhard-orchester_APMfbnM"
-            },
-            {
-              "label": "Stimmen auf der Bühne",
-              "detail": "Gallus Pub",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/voices-on-stage_A5HYakK"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — läuft, letzter Tag: 2. November 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
-            {
               "label": "GEROLD SPÄTH - Künstlerbücher",
               "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
+            },
+            {
+              "label": "Kinderwaren Börse",
+              "detail": "Röm.-kath. Kirchgemeindehaus Rapperswil-Jona, Rapperswil-Jona",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinderwaren-boerse/"
+            },
+            {
+              "label": "David wird König",
+              "detail": "Röm.-kath. Pfarreiheim St. Martin-Bruggen, St. Gallen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/david-becomes-king/"
+            },
+            {
+              "label": "Oktoberfest Bronschhofen",
+              "detail": "Bronschhofen, Wil (SG)",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oktoberfest-bronschhofen/"
+            },
+            {
+              "label": "Landnacht",
+              "detail": "Hotel Restaurant Sternen Unterwasser",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/alt-st-johann/country-night_AeETki1"
+            },
+            {
+              "label": "Zu Gast - Grenzenlos Alpin",
+              "detail": "Wildhaus",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zu-gast-grenzenlos-alpin/"
+            },
+            {
+              "label": "Blues Max String Trio « Öpis isch immer»",
+              "detail": "Chällertheater im Baronenhaus",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/blues-max-string-trio-oepis-isch-immer_AbTax14"
+            },
+            {
+              "label": "Giora Feidman - For a Better World",
+              "detail": "St. Laurenzen Kirche St.Gallen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/giora-feidman-for-a-better-world_ACcGtBd"
+            },
+            {
+              "label": "Helga Schneider - Ich weiss",
+              "detail": "Wil SG",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-schneider-ich-weiss-13/"
+            },
+            {
+              "label": "Nicole Bernegger",
+              "detail": "ZAK Zentrum Aktueller Kultur",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/jona/nicole-bernegger_AvX8NbX"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "88",
+          "value": "87",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Claudia Valer, Werkschau",
-              "detail": "Pflegeheim Heiligkreuz, St. Gallen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
-            },
-            {
-              "label": "Kurs: Homöopathische Notfallapotheke",
-              "detail": "St. Gallen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-homoeopathische-notfallapotheke/"
-            },
-            {
-              "label": "Eliane, Konzert und Dinner",
-              "detail": "Restaurant Rössli",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/eliane-konzert-und-dinner/"
-            },
-            {
-              "label": "Der Besuch der alten Dame",
-              "detail": "Theater St. Gallen, St. Gallen",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/der-besuch-der-alten-dame_AWMSP9s"
-            },
-            {
-              "label": "Module d'alimentation-Meisner-ork",
-              "detail": "Switzerland Innovation Park Ost",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
-            },
-            {
-              "label": "GEROLD SPÄTH - Schreiben und Gestalten im Zusammenspiel",
-              "detail": "Rapperswil-Jona",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gerold-spaeth-schreiben-und-gestalten-im-zusammenspiel/"
-            },
-            {
-              "label": "Pepe Lienhard Orchester",
-              "detail": "Dömli, Ebnat-Kappel",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/ebnat-kappel/pepe-lienhard-orchester_APMfbnM"
-            },
-            {
-              "label": "Voix sur scène",
-              "detail": "Gallus Pub",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/voices-on-stage_A5HYakK"
-            },
-            {
-              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
-              "detail": "Verein Klangwald, Kirchberg (SG) — en cours, dernier jour : 2 novembre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
-            },
-            {
               "label": "GEROLD SPÄTH - Künstlerbücher",
               "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
+            },
+            {
+              "label": "Kinderwaren Börse",
+              "detail": "Röm.-kath. Kirchgemeindehaus Rapperswil-Jona, Rapperswil-Jona",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinderwaren-boerse/"
+            },
+            {
+              "label": "David devient roi",
+              "detail": "Röm.-kath. Pfarreiheim St. Martin-Bruggen, St. Gallen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/david-becomes-king/"
+            },
+            {
+              "label": "Oktoberfest Bronschhofen",
+              "detail": "Bronschhofen, Wil (SG)",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oktoberfest-bronschhofen/"
+            },
+            {
+              "label": "Soirée campagnarde",
+              "detail": "Hotel Restaurant Sternen Unterwasser",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/alt-st-johann/country-night_AeETki1"
+            },
+            {
+              "label": "Zu Gast - Grenzenlos Alpin",
+              "detail": "Wildhaus",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zu-gast-grenzenlos-alpin/"
+            },
+            {
+              "label": "Blues Max String Trio « Öpis isch immer»",
+              "detail": "Chällertheater im Baronenhaus",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/blues-max-string-trio-oepis-isch-immer_AbTax14"
+            },
+            {
+              "label": "Giora Feidman - For a Better World",
+              "detail": "St. Laurenzen Kirche St.Gallen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/giora-feidman-for-a-better-world_ACcGtBd"
+            },
+            {
+              "label": "Helga Schneider - Ich weiss",
+              "detail": "Wil SG",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-schneider-ich-weiss-13/"
+            },
+            {
+              "label": "Nicole Bernegger",
+              "detail": "ZAK Zentrum Aktueller Kultur",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/jona/nicole-bernegger_AvX8NbX"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

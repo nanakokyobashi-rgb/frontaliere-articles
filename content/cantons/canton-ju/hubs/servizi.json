@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-10-22T22:21:57.960Z",
-  "contentHash": "392b2fded3ec8423c86ab906cc409d6ac096a004c4ed865b60cb10c14baeebd8",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "f7c361539faf9deadc35801d657fc7f886fb59c82a2c1750c5a6854c81ef6ae7",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -18,8 +18,13 @@
       "keyFacts": 0
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-22T20:15:47.598Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T10:40:36.644Z",
+      "updatedAt": "2026-10-22T16:03:41.824Z",
       "keyFacts": 0
     }
   ],
@@ -94,6 +99,20 @@
           "updatedAt": "2026-10-21T16:03:03.013Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "6 °C",
+              "detail": "oggi da 5 a 9 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-22T20:15:47.598Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -109,7 +128,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -159,7 +178,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "JU",
@@ -231,6 +250,20 @@
           "updatedAt": "2026-10-21T16:03:03.013Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "6 °C",
+              "detail": "today from 5 to 9 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-22T20:15:47.598Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -246,7 +279,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -292,7 +325,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "JU",
@@ -364,6 +397,20 @@
           "updatedAt": "2026-10-21T16:03:03.013Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "6 °C",
+              "detail": "heute 5 bis 9 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-22T20:15:47.598Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -379,7 +426,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -425,7 +472,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "JU",
@@ -497,6 +544,20 @@
           "updatedAt": "2026-10-21T16:03:03.013Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Delémont",
+              "value": "6 °C",
+              "detail": "aujourd’hui de 5 à 9 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-22T20:15:47.598Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -512,7 +573,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -554,7 +615,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

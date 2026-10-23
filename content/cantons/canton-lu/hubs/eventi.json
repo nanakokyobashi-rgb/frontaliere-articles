@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T22:21:57.960Z",
-  "contentHash": "1b59da1ecb0d5f57ff473ec27cd3c5c2f6d7fa39010fae4fca12af6f53409aaa",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "20973b8c13609ec784adcdae7ac4f33fe57879549a5b8044fc702c2f61de0017",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T11:13:26.127Z",
+      "updatedAt": "2026-10-22T19:30:03.925Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T10:40:36.644Z",
+      "updatedAt": "2026-10-22T16:03:41.824Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "74",
+          "value": "69",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Kunstausstellung Arts Crossroad",
+              "label": "Jahreskonzert 2026",
+              "detail": "Willisau",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jahreskonzert-2026/"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-10-23",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694296"
+            },
+            {
+              "label": "Wissen am Mittag",
               "detail": "Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/6840403"
+              "date": "2026-10-23",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
             },
             {
-              "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
+              "label": "Salonkonzert",
               "detail": "Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7729408"
+              "date": "2026-10-23",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
             },
             {
-              "label": "Contemporary Art Fair Luzern",
-              "detail": "Kornschütte, Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/contemporary-art-fair-luzern-2026/"
+              "label": "Metzgete in der Skihütte und Alphotel Schwand",
+              "detail": "Sörenberg, Flühli",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-in-der-skihuette-und-alphotel-schwand/"
             },
             {
-              "label": "Wild & Wine «Goldenits»",
-              "detail": "Gasthof Tell, Gisikon",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wild-wine-goldenits/"
+              "label": "Abel Selaocoe: Cello grenzenlos",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/jakub-jozef-orliski-stabat-mater/"
             },
             {
-              "label": "Spoken Word Festival woerdz 2026: Die Spoken Word Werkschau",
-              "detail": "Südpol / Musik Tanz Theater, Kriens",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spoken-word-festival-woerdz-2026-die-spoken-word-werkschau-1/"
+              "label": "Spieleabend für Erwachsene in der Ludothek",
+              "detail": "Willisau",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spieleabend-fuer-erwachsene-in-der-ludothek-2/"
             },
             {
-              "label": "Vortrag mit Robert Betz: Der Frieden in der Welt beginnt in uns",
-              "detail": "Verkehrshaus der Schweiz",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/vortrag-mit-robert-betz-der-frieden-in-der-welt-beginnt-in-uns_A5HiSaM"
-            },
-            {
-              "label": "Vortrag mit Robert Betz: Der Frieden in der Welt beginnt in uns",
-              "detail": "Verkehrshaus der Schweiz, Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vortrag-mit-robert-betz-der-frieden-in-der-welt-beginnt-in-uns/"
-            },
-            {
-              "label": "Marc Amacher",
+              "label": "Basement Saints",
               "detail": "Schüür",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/marc-amacher_ALpZdM9"
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/basement-saints_A4QBrut"
             },
             {
-              "label": "BEETHOVEN (ON THE) ROCKS & CLUBNACHT IM NEUBAD",
-              "detail": "Netzwerk Neubad, Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/beethoven-on-the-rocks-clubnacht-im-neubad-1/"
+              "label": "Shownight Burlesque",
+              "detail": "Lucerne",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/shownight-burlesque/"
             },
             {
-              "label": "Les Fils Canouche - DER HERBST 26",
-              "detail": "Kultur Kulinarik Vitznau, Vitznau",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/les-fils-canouche-der-herbst-26/"
+              "label": "Kunstausstellung Arts Crossroad",
+              "detail": "Luzern — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-23",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840403"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -138,7 +138,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -172,7 +172,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "LU",
@@ -182,7 +182,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "74",
+          "value": "69",
           "note": "from the site’s events calendar"
         }
       ],
@@ -193,69 +193,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Kunstausstellung Arts Crossroad",
+              "label": "Jahreskonzert 2026",
+              "detail": "Willisau",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jahreskonzert-2026/"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-10-23",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694296"
+            },
+            {
+              "label": "Wissen am Mittag",
               "detail": "Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/6840403"
+              "date": "2026-10-23",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
             },
             {
-              "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
+              "label": "Salonkonzert",
               "detail": "Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7729408"
+              "date": "2026-10-23",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
             },
             {
-              "label": "Contemporary Art Fair Luzern",
-              "detail": "Kornschütte, Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/contemporary-art-fair-luzern-2026/"
+              "label": "Metzgete in der Skihütte und Alphotel Schwand",
+              "detail": "Sörenberg, Flühli",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-in-der-skihuette-und-alphotel-schwand/"
             },
             {
-              "label": "Wild & Wine «Goldenits»",
-              "detail": "Gasthof Tell, Gisikon",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wild-wine-goldenits/"
+              "label": "Abel Selaocoe: Cello grenzenlos",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/jakub-jozef-orliski-stabat-mater/"
             },
             {
-              "label": "Spoken Word Festival woerdz 2026: Die Spoken Word Werkschau",
-              "detail": "Südpol / Musik Tanz Theater, Kriens",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spoken-word-festival-woerdz-2026-die-spoken-word-werkschau-1/"
+              "label": "Spieleabend für Erwachsene in der Ludothek",
+              "detail": "Willisau",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spieleabend-fuer-erwachsene-in-der-ludothek-2/"
             },
             {
-              "label": "Vortrag mit Robert Betz: Der Frieden in der Welt beginnt in uns",
-              "detail": "Verkehrshaus der Schweiz",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/vortrag-mit-robert-betz-der-frieden-in-der-welt-beginnt-in-uns_A5HiSaM"
-            },
-            {
-              "label": "Vortrag mit Robert Betz: Der Frieden in der Welt beginnt in uns",
-              "detail": "Verkehrshaus der Schweiz, Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vortrag-mit-robert-betz-der-frieden-in-der-welt-beginnt-in-uns/"
-            },
-            {
-              "label": "Marc Amacher",
+              "label": "Basement Saints",
               "detail": "Schüür",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/marc-amacher_ALpZdM9"
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/basement-saints_A4QBrut"
             },
             {
-              "label": "BEETHOVEN (ON THE) ROCKS & CLUBNACHT IM NEUBAD",
-              "detail": "Netzwerk Neubad, Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/beethoven-on-the-rocks-clubnacht-im-neubad-1/"
+              "label": "Shownight Burlesque",
+              "detail": "Lucerne",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/shownight-burlesque/"
             },
             {
-              "label": "Les Fils Canouche - DER HERBST 26",
-              "detail": "Kultur Kulinarik Vitznau, Vitznau",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/les-fils-canouche-der-herbst-26/"
+              "label": "Kunstausstellung Arts Crossroad",
+              "detail": "Luzern — ongoing, last day: 25 October 2026",
+              "date": "2026-10-23",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840403"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -293,7 +293,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "LU",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "74",
+          "value": "69",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Kunstausstellung Arts Crossroad",
+              "label": "Jahreskonzert 2026",
+              "detail": "Willisau",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jahreskonzert-2026/"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-10-23",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694296"
+            },
+            {
+              "label": "Wissen am Mittag",
               "detail": "Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/6840403"
+              "date": "2026-10-23",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
             },
             {
-              "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
+              "label": "Salonkonzert",
               "detail": "Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7729408"
+              "date": "2026-10-23",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
             },
             {
-              "label": "Kunstmesse Luzern 2026",
-              "detail": "Kornschütte, Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/contemporary-art-fair-luzern-2026/"
+              "label": "Metzgete in der Skihütte und Alphotel Schwand",
+              "detail": "Sörenberg, Flühli",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-in-der-skihuette-und-alphotel-schwand/"
             },
             {
-              "label": "Wild & Wine «Goldenits»",
-              "detail": "Gasthof Tell, Gisikon",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wild-wine-goldenits/"
+              "label": "Abel Selaocoe: Cello grenzenlos",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/jakub-jozef-orliski-stabat-mater/"
             },
             {
-              "label": "Spoken Word Festival woerdz 2026: Die Spoken Word Werkschau",
-              "detail": "Südpol / Musik Tanz Theater, Kriens",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spoken-word-festival-woerdz-2026-die-spoken-word-werkschau-1/"
+              "label": "Spieleabend für Erwachsene in der Ludothek",
+              "detail": "Willisau",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spieleabend-fuer-erwachsene-in-der-ludothek-2/"
             },
             {
-              "label": "Vortrag mit Robert Betz: Der Frieden in der Welt beginnt in uns",
-              "detail": "Verkehrshaus der Schweiz",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/vortrag-mit-robert-betz-der-frieden-in-der-welt-beginnt-in-uns_A5HiSaM"
-            },
-            {
-              "label": "Vortrag mit Robert Betz: Der Frieden in der Welt beginnt in uns",
-              "detail": "Verkehrshaus der Schweiz, Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vortrag-mit-robert-betz-der-frieden-in-der-welt-beginnt-in-uns/"
-            },
-            {
-              "label": "Marc Amacher",
+              "label": "Basement Saints",
               "detail": "Schüür",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/marc-amacher_ALpZdM9"
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/basement-saints_A4QBrut"
             },
             {
-              "label": "BEETHOVEN (ON THE) ROCKS & CLUBNACHT IM NEUBAD",
-              "detail": "Netzwerk Neubad, Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/beethoven-on-the-rocks-clubnacht-im-neubad-1/"
+              "label": "Shownight Burlesque",
+              "detail": "Lucerne",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/shownight-burlesque/"
             },
             {
-              "label": "Les Fils Canouche - DER HERBST 26",
-              "detail": "Kultur Kulinarik Vitznau, Vitznau",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/les-fils-canouche-der-herbst-26/"
+              "label": "Kunstausstellung Arts Crossroad",
+              "detail": "Luzern — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-23",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840403"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -448,7 +448,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -482,7 +482,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "LU",
@@ -492,7 +492,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "74",
+          "value": "69",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -503,69 +503,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Kunstausstellung Arts Crossroad",
+              "label": "Jahreskonzert 2026",
+              "detail": "Willisau",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jahreskonzert-2026/"
+            },
+            {
+              "label": "Winter Qi Gong Waldfriedhof Staffeln",
+              "detail": "Sursee",
+              "date": "2026-10-23",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694296"
+            },
+            {
+              "label": "Wissen am Mittag",
               "detail": "Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/6840403"
+              "date": "2026-10-23",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
             },
             {
-              "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
+              "label": "Salonkonzert",
               "detail": "Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7729408"
+              "date": "2026-10-23",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
             },
             {
-              "label": "Contemporary Art Fair Luzern",
-              "detail": "Kornschütte, Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/contemporary-art-fair-luzern-2026/"
+              "label": "Metzgete in der Skihütte und Alphotel Schwand",
+              "detail": "Sörenberg, Flühli",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/metzgete-in-der-skihuette-und-alphotel-schwand/"
             },
             {
-              "label": "Wild & Wine «Goldenits»",
-              "detail": "Gasthof Tell, Gisikon",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wild-wine-goldenits/"
+              "label": "Abel Selaocoe: Cello grenzenlos",
+              "detail": "KKL Luzern, Luzern",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/jakub-jozef-orliski-stabat-mater/"
             },
             {
-              "label": "Spoken Word Festival woerdz 2026: Die Spoken Word Werkschau",
-              "detail": "Südpol / Musik Tanz Theater, Kriens",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spoken-word-festival-woerdz-2026-die-spoken-word-werkschau-1/"
+              "label": "Spieleabend für Erwachsene in der Ludothek",
+              "detail": "Willisau",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spieleabend-fuer-erwachsene-in-der-ludothek-2/"
             },
             {
-              "label": "Vortrag mit Robert Betz: Der Frieden in der Welt beginnt in uns",
-              "detail": "Verkehrshaus der Schweiz",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/vortrag-mit-robert-betz-der-frieden-in-der-welt-beginnt-in-uns_A5HiSaM"
-            },
-            {
-              "label": "Vortrag mit Robert Betz: Der Frieden in der Welt beginnt in uns",
-              "detail": "Verkehrshaus der Schweiz, Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vortrag-mit-robert-betz-der-frieden-in-der-welt-beginnt-in-uns/"
-            },
-            {
-              "label": "Marc Amacher",
+              "label": "Basement Saints",
               "detail": "Schüür",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/marc-amacher_ALpZdM9"
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/basement-saints_A4QBrut"
             },
             {
-              "label": "BEETHOVEN (ON THE) ROCKS & CLUBNACHT IM NEUBAD",
-              "detail": "Netzwerk Neubad, Luzern",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/beethoven-on-the-rocks-clubnacht-im-neubad-1/"
+              "label": "Shownight Burlesque",
+              "detail": "Lucerne",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/shownight-burlesque/"
             },
             {
-              "label": "Les Fils Canouche - DER HERBST 26",
-              "detail": "Kultur Kulinarik Vitznau, Vitznau",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/les-fils-canouche-der-herbst-26/"
+              "label": "Kunstausstellung Arts Crossroad",
+              "detail": "Luzern — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-23",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/6840403"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -603,7 +603,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7694107"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -637,7 +637,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

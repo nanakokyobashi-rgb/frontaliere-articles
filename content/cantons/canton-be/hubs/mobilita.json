@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-22T14:18:45.300Z",
-  "contentHash": "6dbec098cf1a41be0bd102886bad055de582dd08ae3506ad3ca2d6466bd8e94a",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "362856194078806ba0fac217205adfc9c7f05a64e2d56c400ad94694e9fd5b2f",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-22T05:28:12.116Z",
+      "updatedAt": "2026-10-22T17:41:22.283Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T20:56:46.769Z",
+      "updatedAt": "2026-10-22T16:03:41.824Z",
       "keyFacts": 0
     }
   ],
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T17:41:22.283Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -102,6 +102,11 @@
               "label": "Grundstein für neue BLS-Werkstätte gelegt",
               "date": "2026-10-21",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/mm-grundsteinlegung-werkstaette-oberburg"
+            },
+            {
+              "label": "Grundstein für neue BLS-Werkstätte gelegt",
+              "date": "2026-10-21",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-21-mm-grundsteinlegung-werkstaette-oberburg"
             },
             {
               "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
@@ -122,14 +127,9 @@
               "label": "Sanierungsarbeiten an der Brunnadernstrasse",
               "date": "2026-10-12T10:30:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/sanierungsarbeiten-an-der-brunnadernstrasse"
-            },
-            {
-              "label": "29.08.-11.10.26: Bauarbeiten untere Thunstrasse",
-              "date": "2026-10-11",
-              "url": "https://www.bernmobil.ch/de/2908-111026-bauarbeiten-untere-thunstrasse"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -175,7 +175,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-22T14:18:45.300Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "BE",
@@ -249,7 +249,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T17:41:22.283Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -260,6 +260,11 @@
               "label": "Grundstein für neue BLS-Werkstätte gelegt",
               "date": "2026-10-21",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/mm-grundsteinlegung-werkstaette-oberburg"
+            },
+            {
+              "label": "Grundstein für neue BLS-Werkstätte gelegt",
+              "date": "2026-10-21",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-21-mm-grundsteinlegung-werkstaette-oberburg"
             },
             {
               "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
@@ -280,14 +285,9 @@
               "label": "Sanierungsarbeiten an der Brunnadernstrasse",
               "date": "2026-10-12T10:30:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/sanierungsarbeiten-an-der-brunnadernstrasse"
-            },
-            {
-              "label": "29.08.-11.10.26: Bauarbeiten untere Thunstrasse",
-              "date": "2026-10-11",
-              "url": "https://www.bernmobil.ch/de/2908-111026-bauarbeiten-untere-thunstrasse"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -333,7 +333,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-22T14:18:45.300Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "BE",
@@ -407,7 +407,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T17:41:22.283Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -418,6 +418,11 @@
               "label": "Grundstein für neue BLS-Werkstätte gelegt",
               "date": "2026-10-21",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/mm-grundsteinlegung-werkstaette-oberburg"
+            },
+            {
+              "label": "Grundstein für neue BLS-Werkstätte gelegt",
+              "date": "2026-10-21",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-21-mm-grundsteinlegung-werkstaette-oberburg"
             },
             {
               "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
@@ -438,14 +443,9 @@
               "label": "Sanierungsarbeiten an der Brunnadernstrasse",
               "date": "2026-10-12T10:30:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/sanierungsarbeiten-an-der-brunnadernstrasse"
-            },
-            {
-              "label": "29.08.-11.10.26: Bauarbeiten untere Thunstrasse",
-              "date": "2026-10-11",
-              "url": "https://www.bernmobil.ch/de/2908-111026-bauarbeiten-untere-thunstrasse"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -491,7 +491,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-22T14:18:45.300Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "BE",
@@ -565,7 +565,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T17:41:22.283Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -576,6 +576,11 @@
               "label": "Grundstein für neue BLS-Werkstätte gelegt",
               "date": "2026-10-21",
               "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/mm-grundsteinlegung-werkstaette-oberburg"
+            },
+            {
+              "label": "Grundstein für neue BLS-Werkstätte gelegt",
+              "date": "2026-10-21",
+              "url": "https://www.bls.ch/de/unternehmen/medien/medienmitteilungen/2026/10-21-mm-grundsteinlegung-werkstaette-oberburg"
             },
             {
               "label": "BLS hat Bauarbeiten am Bahnhof Kandersteg abgeschlossen",
@@ -596,14 +601,9 @@
               "label": "Sanierungsarbeiten an der Brunnadernstrasse",
               "date": "2026-10-12T10:30:00.000Z",
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/sanierungsarbeiten-an-der-brunnadernstrasse"
-            },
-            {
-              "label": "29.08.-11.10.26: Bauarbeiten untere Thunstrasse",
-              "date": "2026-10-11",
-              "url": "https://www.bernmobil.ch/de/2908-111026-bauarbeiten-untere-thunstrasse"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -649,7 +649,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-22T14:18:45.300Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

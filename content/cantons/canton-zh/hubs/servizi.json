@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-22T22:21:57.960Z",
-  "contentHash": "705401bc74b7983ba3f4f25d97c85f3097ad1d01fa76ae0a250c18bc4adf1a43",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "4f4deb710735df66b076e5d0640c4264a2ce4ceed4224a075d20bc5b8522f933",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -19,12 +19,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-22T11:50:08.473Z",
+      "updatedAt": "2026-10-22T17:10:37.703Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-22T20:15:47.598Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T10:40:36.644Z",
+      "updatedAt": "2026-10-22T16:03:41.824Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +49,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "31",
-          "note": "offerta mediana 220 CHF"
+          "note": "offerta mediana 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -120,21 +125,21 @@
           "items": [
             {
               "label": "ZH674",
-              "value": "4800 CHF",
+              "value": "10.400 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-28T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43659"
             },
             {
               "label": "ZH8914",
-              "value": "2200 CHF",
+              "value": "5200 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-28T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43660"
             },
             {
               "label": "ZH10304",
-              "value": "600 CHF",
+              "value": "2550 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-28T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43663"
@@ -142,13 +147,32 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-22T11:50:08.473Z"
+          "updatedAt": "2026-10-22T17:10:37.703Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "8 °C",
+              "detail": "oggi da 6 a 11 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-22T20:15:47.598Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
+              "date": "2026-10-22T12:40:30.000Z",
+              "url": "https://www.usz.ch/administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
+            },
             {
               "label": "Unabhängige Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
               "date": "2026-10-21T17:00:23.000Z",
@@ -173,14 +197,9 @@
               "label": "Brustkrebs Zelle für Zelle verstehen",
               "date": "2026-10-19T08:34:22.000Z",
               "url": "https://www.usz.ch/brustkrebs-zelle-fuer-zelle-verstehen/"
-            },
-            {
-              "label": "Auszeichnung an Dr. med. Christian Hübner – Basic Science Best Poster Award (OTA 2026)",
-              "date": "2026-10-15T11:46:37.000Z",
-              "url": "https://www.usz.ch/auszeichnung-an-dr-med-christian-huebner-basic-science-best-poster-award-ota-2026/"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -260,7 +279,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "ZH",
@@ -277,7 +296,7 @@
         {
           "label": "Plate auctions running",
           "value": "31",
-          "note": "typical bid 220 CHF"
+          "note": "typical bid 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -353,21 +372,21 @@
           "items": [
             {
               "label": "ZH674",
-              "value": "4,800 CHF",
+              "value": "10,400 CHF",
               "detail": "current bid",
               "date": "2026-10-28T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43659"
             },
             {
               "label": "ZH8914",
-              "value": "2,200 CHF",
+              "value": "5,200 CHF",
               "detail": "current bid",
               "date": "2026-10-28T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43660"
             },
             {
               "label": "ZH10304",
-              "value": "600 CHF",
+              "value": "2,550 CHF",
               "detail": "current bid",
               "date": "2026-10-28T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43663"
@@ -375,13 +394,32 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-22T11:50:08.473Z"
+          "updatedAt": "2026-10-22T17:10:37.703Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "8 °C",
+              "detail": "today from 6 to 11 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-22T20:15:47.598Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
+              "date": "2026-10-22T12:40:30.000Z",
+              "url": "https://www.usz.ch/administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
+            },
             {
               "label": "Unabhängige Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
               "date": "2026-10-21T17:00:23.000Z",
@@ -406,14 +444,9 @@
               "label": "Brustkrebs Zelle für Zelle verstehen",
               "date": "2026-10-19T08:34:22.000Z",
               "url": "https://www.usz.ch/brustkrebs-zelle-fuer-zelle-verstehen/"
-            },
-            {
-              "label": "Auszeichnung an Dr. med. Christian Hübner – Basic Science Best Poster Award (OTA 2026)",
-              "date": "2026-10-15T11:46:37.000Z",
-              "url": "https://www.usz.ch/auszeichnung-an-dr-med-christian-huebner-basic-science-best-poster-award-ota-2026/"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +522,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "ZH",
@@ -506,7 +539,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "31",
-          "note": "mittleres Gebot 220 CHF"
+          "note": "mittleres Gebot 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -582,21 +615,21 @@
           "items": [
             {
               "label": "ZH674",
-              "value": "4’800 CHF",
+              "value": "10’400 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-28T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43659"
             },
             {
               "label": "ZH8914",
-              "value": "2’200 CHF",
+              "value": "5’200 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-28T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43660"
             },
             {
               "label": "ZH10304",
-              "value": "600 CHF",
+              "value": "2’550 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-28T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43663"
@@ -604,13 +637,32 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-22T11:50:08.473Z"
+          "updatedAt": "2026-10-22T17:10:37.703Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "8 °C",
+              "detail": "heute 6 bis 11 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-22T20:15:47.598Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
+              "date": "2026-10-22T12:40:30.000Z",
+              "url": "https://www.usz.ch/administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
+            },
             {
               "label": "Unabhängige Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
               "date": "2026-10-21T17:00:23.000Z",
@@ -635,14 +687,9 @@
               "label": "Brustkrebs Zelle für Zelle verstehen",
               "date": "2026-10-19T08:34:22.000Z",
               "url": "https://www.usz.ch/brustkrebs-zelle-fuer-zelle-verstehen/"
-            },
-            {
-              "label": "Auszeichnung an Dr. med. Christian Hübner – Basic Science Best Poster Award (OTA 2026)",
-              "date": "2026-10-15T11:46:37.000Z",
-              "url": "https://www.usz.ch/auszeichnung-an-dr-med-christian-huebner-basic-science-best-poster-award-ota-2026/"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -718,7 +765,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "ZH",
@@ -735,7 +782,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "31",
-          "note": "offre centrale 220 CHF"
+          "note": "offre centrale 300 CHF"
         }
       ],
       "dataBlocks": [
@@ -811,21 +858,21 @@
           "items": [
             {
               "label": "ZH674",
-              "value": "4 800 CHF",
+              "value": "10 400 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-28T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43659"
             },
             {
               "label": "ZH8914",
-              "value": "2 200 CHF",
+              "value": "5 200 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-28T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43660"
             },
             {
               "label": "ZH10304",
-              "value": "600 CHF",
+              "value": "2 550 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-28T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43663"
@@ -833,13 +880,32 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-22T11:50:08.473Z"
+          "updatedAt": "2026-10-22T17:10:37.703Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "8 °C",
+              "detail": "aujourd’hui de 6 à 11 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-22T20:15:47.598Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
+              "date": "2026-10-22T12:40:30.000Z",
+              "url": "https://www.usz.ch/administrativuntersuchung-in-der-klinik-fuer-urologie-abgeschlossen/"
+            },
             {
               "label": "Unabhängige Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
               "date": "2026-10-21T17:00:23.000Z",
@@ -864,14 +930,9 @@
               "label": "Brustkrebs Zelle für Zelle verstehen",
               "date": "2026-10-19T08:34:22.000Z",
               "url": "https://www.usz.ch/brustkrebs-zelle-fuer-zelle-verstehen/"
-            },
-            {
-              "label": "Auszeichnung an Dr. med. Christian Hübner – Basic Science Best Poster Award (OTA 2026)",
-              "date": "2026-10-15T11:46:37.000Z",
-              "url": "https://www.usz.ch/auszeichnung-an-dr-med-christian-huebner-basic-science-best-poster-award-ota-2026/"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -943,7 +1004,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

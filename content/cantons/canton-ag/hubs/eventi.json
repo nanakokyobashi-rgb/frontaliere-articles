@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T00:12:28.308Z",
-  "contentHash": "5b5b152063339d60c1c6a8054baebf8376552f7845999791df062696dd427406",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "c232e3a99e79a82babb4ddb18a5400ef6ff1420b47eaf469d4f4504d66b289d5",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-21T12:38:14.154Z",
+      "updatedAt": "2026-10-22T19:30:03.925Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "107",
+          "value": "108",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "PALETTENMESSE Bremgarten",
-              "detail": "Casino Bremgarten",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/palettenmesse-bremgarten/"
-            },
-            {
-              "label": "Afterwork Live Musik - Mark Slate & Rotosphere",
-              "detail": "Henry's Live Music & Sport Bar, Baden",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/afterwork-live-musik-mark-slate-und-rotosphere_A5xUjEM"
-            },
-            {
-              "label": "Sport Forum Aargau 2026",
-              "detail": "Tägi AG, Wettingen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sport-forum-aargau-2026/"
-            },
-            {
-              "label": "CONVIVIO - Wein mal anders",
-              "detail": "Baden",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/convivio-wein-mal-anders/"
-            },
-            {
-              "label": "Science Jam – Forschung auf der Bühne",
-              "detail": "Bühne Aarau, Aarau",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/science-jam-forschung-auf-der-buehne/"
-            },
-            {
-              "label": "Lesung und Gespräch mit Beatrix Gerstberger",
-              "detail": "Aarau",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-und-gespraech-mit-beatrix-gerstberger/"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — in corso, ultimo giorno: 30 ottobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
-            {
               "label": "in&out - La piattaforma dedicata al design svizzero",
               "detail": "AHA Aeschbachhalle Aarau, Aarau",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
+            },
+            {
+              "label": "Wallbacher Wiesn",
+              "detail": "Wallbach",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wallbacher-wiesn/"
+            },
+            {
+              "label": "Rum Tasting",
+              "detail": "Baden",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rum-tasting/"
+            },
+            {
+              "label": "A Fine Romance, eine humoristische Swing-Revue à deux",
+              "detail": "Oberstufenzentrum Hüslerberg, Niederrohrdorf",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/niederrohrdorf/a-fine-romance-eine-humoristische-swing-revue-a-deux_Am8eTw2"
+            },
+            {
+              "label": "Chris Hopkins Quartet feat. Simon Wyrsch | Ja-ZZ",
+              "detail": "Hotel Schützen, Rheinfelden",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/chris-hopkins-quartet-feat-simon-wyrsch-ja-zz_Ae9mSUD"
+            },
+            {
+              "label": "Comedy im AUREA - Reena Krasnaraya - Kurkuma",
+              "detail": "Rheinfelden",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comedy-im-aurea-reena-krasnaraya-kurkuma/"
+            },
+            {
+              "label": "Konzert | Kaiserschmarrn und Gassenhauer",
+              "detail": "St. Josefskirche Rheinfelden, Rheinfelden",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rheinfelden/konzert-kaiserschmarrn-und-gassenhauer_AcCsjkX"
+            },
+            {
+              "label": "Mattiu",
+              "detail": "Konservi, Seon",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/mattiu_AZGG5NA"
+            },
+            {
+              "label": "Marcoca (DE)",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/marcoca-de_ARGUvbe"
+            },
+            {
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "AG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "107",
+          "value": "108",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "PALETTENMESSE Bremgarten",
-              "detail": "Casino Bremgarten",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/palettenmesse-bremgarten/"
-            },
-            {
-              "label": "Afterwork Live Musik - Mark Slate & Rotosphere",
-              "detail": "Henry's Live Music & Sport Bar, Baden",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/afterwork-live-musik-mark-slate-und-rotosphere_A5xUjEM"
-            },
-            {
-              "label": "Sport Forum Aargau 2026",
-              "detail": "Tägi AG, Wettingen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sport-forum-aargau-2026/"
-            },
-            {
-              "label": "CONVIVIO - Wein mal anders",
-              "detail": "Baden",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/convivio-wein-mal-anders/"
-            },
-            {
-              "label": "Science Jam - Research on stage",
-              "detail": "Bühne Aarau, Aarau",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/science-jam-forschung-auf-der-buehne/"
-            },
-            {
-              "label": "Lesung und Gespräch mit Beatrix Gerstberger",
-              "detail": "Aarau",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-und-gespraech-mit-beatrix-gerstberger/"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — ongoing, last day: 1 November 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — ongoing, last day: 31 October 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — ongoing, last day: 30 October 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
-            {
               "label": "in&out - The Platform for Swiss Design",
               "detail": "AHA Aeschbachhalle Aarau, Aarau",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
+            },
+            {
+              "label": "Wallbacher Wiesn",
+              "detail": "Wallbach",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wallbacher-wiesn/"
+            },
+            {
+              "label": "Rum Tasting",
+              "detail": "Baden",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rum-tasting/"
+            },
+            {
+              "label": "A Fine Romance, eine humoristische Swing-Revue à deux",
+              "detail": "Oberstufenzentrum Hüslerberg, Niederrohrdorf",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/niederrohrdorf/a-fine-romance-eine-humoristische-swing-revue-a-deux_Am8eTw2"
+            },
+            {
+              "label": "Chris Hopkins Quartet feat. Simon Wyrsch | Ja-ZZ",
+              "detail": "Hotel Schützen, Rheinfelden",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/chris-hopkins-quartet-feat-simon-wyrsch-ja-zz_Ae9mSUD"
+            },
+            {
+              "label": "Comedy im AUREA - Reena Krasnaraya - Kurkuma",
+              "detail": "Rheinfelden",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comedy-im-aurea-reena-krasnaraya-kurkuma/"
+            },
+            {
+              "label": "Konzert | Kaiserschmarrn und Gassenhauer",
+              "detail": "St. Josefskirche Rheinfelden, Rheinfelden",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rheinfelden/konzert-kaiserschmarrn-und-gassenhauer_AcCsjkX"
+            },
+            {
+              "label": "Mattiu",
+              "detail": "Konservi, Seon",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/mattiu_AZGG5NA"
+            },
+            {
+              "label": "Marcoca (DE)",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/marcoca-de_ARGUvbe"
+            },
+            {
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg — ongoing, last day: 1 November 2026",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "AG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "107",
+          "value": "108",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "PALETTENMESSE Bremgarten",
-              "detail": "Casino Bremgarten",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/palettenmesse-bremgarten/"
-            },
-            {
-              "label": "Afterwork Live Musik - Mark Slate & Rotosphere",
-              "detail": "Henry's Live Music & Sport Bar, Baden",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/afterwork-live-musik-mark-slate-und-rotosphere_A5xUjEM"
-            },
-            {
-              "label": "Sport Forum Aargau 2026",
-              "detail": "Tägi AG, Wettingen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sport-forum-aargau-2026/"
-            },
-            {
-              "label": "CONVIVIO - Wein mal anders",
-              "detail": "Baden",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/convivio-wein-mal-anders/"
-            },
-            {
-              "label": "Scienzimmam-Forschung auf der B Graffhne",
-              "detail": "Bühne Aarau, Aarau",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/science-jam-forschung-auf-der-buehne/"
-            },
-            {
-              "label": "Lesung und Gespräch mit Beatrix Gerstberger",
-              "detail": "Aarau",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-und-gespraech-mit-beatrix-gerstberger/"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — läuft, letzter Tag: 30. Oktober 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
-            {
               "label": "Illumio am in&out - Die Plattform für Schweizer Design",
               "detail": "AHA Aeschbachhalle Aarau, Aarau",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
+            },
+            {
+              "label": "Wallbacher Wiesn",
+              "detail": "Wallbach",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wallbacher-wiesn/"
+            },
+            {
+              "label": "Rum Tasting",
+              "detail": "Baden",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rum-tasting/"
+            },
+            {
+              "label": "A Fine Romance, eine humoristische Swing-Revue à deux",
+              "detail": "Oberstufenzentrum Hüslerberg, Niederrohrdorf",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/niederrohrdorf/a-fine-romance-eine-humoristische-swing-revue-a-deux_Am8eTw2"
+            },
+            {
+              "label": "Chris Hopkins Quartet feat. Simon Wyrsch | Ja-ZZ",
+              "detail": "Hotel Schützen, Rheinfelden",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/chris-hopkins-quartet-feat-simon-wyrsch-ja-zz_Ae9mSUD"
+            },
+            {
+              "label": "Comedy im AUREA - Reena Krasnaraya - Kurkuma",
+              "detail": "Rheinfelden",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comedy-im-aurea-reena-krasnaraya-kurkuma/"
+            },
+            {
+              "label": "Konzert | Kaiserschmarrn und Gassenhauer",
+              "detail": "St. Josefskirche Rheinfelden, Rheinfelden",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rheinfelden/konzert-kaiserschmarrn-und-gassenhauer_AcCsjkX"
+            },
+            {
+              "label": "Mattiu",
+              "detail": "Konservi, Seon",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/mattiu_AZGG5NA"
+            },
+            {
+              "label": "Marcoca (DE)",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/marcoca-de_ARGUvbe"
+            },
+            {
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "AG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "107",
+          "value": "108",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "PALETTENMESSE Bremgarten",
-              "detail": "Casino Bremgarten",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/palettenmesse-bremgarten/"
-            },
-            {
-              "label": "Afterwork Live Musik - Mark Slate & Rotosphere",
-              "detail": "Henry's Live Music & Sport Bar, Baden",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/afterwork-live-musik-mark-slate-und-rotosphere_A5xUjEM"
-            },
-            {
-              "label": "Sport Forum Aargau 2026",
-              "detail": "Tägi AG, Wettingen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sport-forum-aargau-2026/"
-            },
-            {
-              "label": "CONVIVIO - Wein mal anders",
-              "detail": "Baden",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/convivio-wein-mal-anders/"
-            },
-            {
-              "label": "Science Jam - La recherche sur scène",
-              "detail": "Bühne Aarau, Aarau",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/science-jam-forschung-auf-der-buehne/"
-            },
-            {
-              "label": "Lesung und Gespräch mit Beatrix Gerstberger",
-              "detail": "Aarau",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesung-und-gespraech-mit-beatrix-gerstberger/"
-            },
-            {
-              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
-              "detail": "Laufenburg — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
-            },
-            {
-              "label": "Oktoberfest Baden 2026",
-              "detail": "Brown Boveri Platz, Baden — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
-            },
-            {
-              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
-              "detail": "Untersiggenthal — en cours, dernier jour : 30 octobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
-            },
-            {
               "label": "in&out - La plateforme dédiée au design suisse",
               "detail": "AHA Aeschbachhalle Aarau, Aarau",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
+            },
+            {
+              "label": "Wallbacher Wiesn",
+              "detail": "Wallbach",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wallbacher-wiesn/"
+            },
+            {
+              "label": "Rum Tasting",
+              "detail": "Baden",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rum-tasting/"
+            },
+            {
+              "label": "A Fine Romance, eine humoristische Swing-Revue à deux",
+              "detail": "Oberstufenzentrum Hüslerberg, Niederrohrdorf",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/niederrohrdorf/a-fine-romance-eine-humoristische-swing-revue-a-deux_Am8eTw2"
+            },
+            {
+              "label": "Chris Hopkins Quartet feat. Simon Wyrsch | Ja-ZZ",
+              "detail": "Hotel Schützen, Rheinfelden",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/chris-hopkins-quartet-feat-simon-wyrsch-ja-zz_Ae9mSUD"
+            },
+            {
+              "label": "Comedy im AUREA - Reena Krasnaraya - Kurkuma",
+              "detail": "Rheinfelden",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comedy-im-aurea-reena-krasnaraya-kurkuma/"
+            },
+            {
+              "label": "Konzert | Kaiserschmarrn und Gassenhauer",
+              "detail": "St. Josefskirche Rheinfelden, Rheinfelden",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rheinfelden/konzert-kaiserschmarrn-und-gassenhauer_AcCsjkX"
+            },
+            {
+              "label": "Mattiu",
+              "detail": "Konservi, Seon",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/mattiu_AZGG5NA"
+            },
+            {
+              "label": "Marcoca (DE)",
+              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/marcoca-de_ARGUvbe"
+            },
+            {
+              "label": "Die Habsburger – 800 Jahre europäische Geschichte",
+              "detail": "Laufenburg — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

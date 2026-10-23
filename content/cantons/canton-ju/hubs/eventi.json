@@ -4,12 +4,12 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T00:12:28.308Z",
-  "contentHash": "e2ec5654e6f32b124690ff4def1061ed719ac48d4dc37b371f21836f77cb4fe7",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "c35e8fa9e5c59704183a2ae68f67875a714e331385880435675d6a939a0fc8e4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-21T12:38:14.154Z",
+      "updatedAt": "2026-10-22T19:30:03.925Z",
       "keyFacts": 1
     }
   ],
@@ -35,7 +35,7 @@
             {
               "label": "Foire du Jura",
               "detail": "Halle des Exposition, Delémont — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
             },
             {
@@ -65,7 +65,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/giura/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -93,7 +93,7 @@
           "url": "/eventi/giura/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "JU",
@@ -116,7 +116,7 @@
             {
               "label": "Foire du Jura",
               "detail": "Halle des Exposition, Delémont — ongoing, last day: 25 October 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
             },
             {
@@ -146,7 +146,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/jura/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -174,7 +174,7 @@
           "url": "/en/events/jura/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "JU",
@@ -197,7 +197,7 @@
             {
               "label": "Foire du Jura",
               "detail": "Halle des Exposition, Delémont — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
             },
             {
@@ -227,7 +227,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/jura/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -255,7 +255,7 @@
           "url": "/de/veranstaltungen/jura/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "JU",
@@ -278,7 +278,7 @@
             {
               "label": "Foire du Jura",
               "detail": "Halle des Exposition, Delémont — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
             },
             {
@@ -308,7 +308,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/jura/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -336,7 +336,7 @@
           "url": "/fr/evenements/jura/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

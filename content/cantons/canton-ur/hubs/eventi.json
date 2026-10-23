@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T00:12:28.308Z",
-  "contentHash": "dd60b199ecc78c2a91104e06e3ea95120846448e8af849646b8d205df1562118",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "d91235b9ffb62bf1351ea383630c3c2ddac953ac71153c37dc50095d828c929d",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-21T12:38:14.154Z",
+      "updatedAt": "2026-10-22T19:30:03.925Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "22",
+          "value": "20",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,24 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Altdorfer Warenmarkt",
-              "detail": "Unterlehn",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/warenmarkt-2/"
-            },
-            {
-              "label": "BLUE BOX: Kind of a Mate & Namay Kush",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-kind-of-a-mate-namay-kush/"
-            },
-            {
-              "label": "KI – ein Einblick in neue Möglichkeiten/Chancen von von ChatGPT, CoPilot und Co.",
-              "detail": "Altdorf",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ki-ein-einblick-in-neue-moeglichkeitenchancen-von-von-chatgpt-copilot-und-co/"
-            },
             {
               "label": "The Bash: Part I – Ufbruch (“Setting out”)",
               "detail": "Andermatt",
@@ -91,11 +73,29 @@
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-valentino-vivace/"
+            },
+            {
+              "label": "Chilbisonntag: Kirchweihe St. Peter und Paul",
+              "detail": "Andermatt",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbisonntag-kirchweihe-st-peter-und-pual/"
+            },
+            {
+              "label": "Chilbikonzert",
+              "detail": "Kulturkommission Andermatt, Andermatt",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/chilbikonzert/"
+            },
+            {
+              "label": "TriffAltdorf Mittagstreff: Bistro&Lounge Baggenstos",
+              "detail": "Bistro & Lounge Baggenstos",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/triffaltdorf-mittagstreff-bistrolounge-baggenstos/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "UR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "22",
+          "value": "20",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,24 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Altdorfer Warenmarkt",
-              "detail": "Unterlehn",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/warenmarkt-2/"
-            },
-            {
-              "label": "BLUE BOX: Kind of a Mate & Namay Kush",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-kind-of-a-mate-namay-kush/"
-            },
-            {
-              "label": "KI – ein Einblick in neue Möglichkeiten/Chancen von von ChatGPT, CoPilot und Co.",
-              "detail": "Altdorf",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ki-ein-einblick-in-neue-moeglichkeitenchancen-von-von-chatgpt-copilot-und-co/"
-            },
             {
               "label": "The Bash: Part I – Ufbruch (“Setting out”)",
               "detail": "Andermatt",
@@ -196,11 +178,29 @@
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-valentino-vivace/"
+            },
+            {
+              "label": "Chilbisonntag: Kirchweihe St. Peter und Paul",
+              "detail": "Andermatt",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbisonntag-kirchweihe-st-peter-und-pual/"
+            },
+            {
+              "label": "Chilbikonzert",
+              "detail": "Kulturkommission Andermatt, Andermatt",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/chilbikonzert/"
+            },
+            {
+              "label": "TriffAltdorf Mittagstreff: Bistro&Lounge Baggenstos",
+              "detail": "Bistro & Lounge Baggenstos",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/triffaltdorf-mittagstreff-bistrolounge-baggenstos/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "UR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "22",
+          "value": "20",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,24 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Altdorfer Warenmarkt",
-              "detail": "Unterlehn",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/warenmarkt-2/"
-            },
-            {
-              "label": "BLUE BOX: Kind of a Mate & Namay Kush",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-kind-of-a-mate-namay-kush/"
-            },
-            {
-              "label": "KI – ein Einblick in neue Möglichkeiten/Chancen von von ChatGPT, CoPilot und Co.",
-              "detail": "Altdorf",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ki-ein-einblick-in-neue-moeglichkeitenchancen-von-von-chatgpt-copilot-und-co/"
-            },
             {
               "label": "The Bash: Teil I – «Ufbruch»",
               "detail": "Andermatt",
@@ -301,11 +283,29 @@
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-valentino-vivace/"
+            },
+            {
+              "label": "Chilbisonntag: Kirchweihe St. Peter und Paul",
+              "detail": "Andermatt",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbisonntag-kirchweihe-st-peter-und-pual/"
+            },
+            {
+              "label": "Chilbikonzert",
+              "detail": "Kulturkommission Andermatt, Andermatt",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/chilbikonzert/"
+            },
+            {
+              "label": "TriffAltdorf Mittagstreff: Bistro&Lounge Baggenstos",
+              "detail": "Bistro & Lounge Baggenstos",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/triffaltdorf-mittagstreff-bistrolounge-baggenstos/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "UR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "22",
+          "value": "20",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,24 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Warenmarkt",
-              "detail": "Unterlehn",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/warenmarkt-2/"
-            },
-            {
-              "label": "BLUE BOX: Kind of a Mate & Namay Kush",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-kind-of-a-mate-namay-kush/"
-            },
-            {
-              "label": "KI – ein Einblick in neue Möglichkeiten/Chancen von von ChatGPT, CoPilot und Co.",
-              "detail": "Altdorf",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ki-ein-einblick-in-neue-moeglichkeitenchancen-von-von-chatgpt-copilot-und-co/"
-            },
             {
               "label": "The Bash: Part I – Ufbruch (“Setting out”)",
               "detail": "Andermatt",
@@ -406,11 +388,29 @@
               "detail": "Altdorf, Altdorf (UR)",
               "date": "2026-10-24",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-valentino-vivace/"
+            },
+            {
+              "label": "Chilbisonntag: Kirchweihe St. Peter und Paul",
+              "detail": "Andermatt",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbisonntag-kirchweihe-st-peter-und-pual/"
+            },
+            {
+              "label": "Chilbikonzert",
+              "detail": "Kulturkommission Andermatt, Andermatt",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/chilbikonzert/"
+            },
+            {
+              "label": "TriffAltdorf Mittagstreff: Bistro&Lounge Baggenstos",
+              "detail": "Bistro & Lounge Baggenstos",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/triffaltdorf-mittagstreff-bistrolounge-baggenstos/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

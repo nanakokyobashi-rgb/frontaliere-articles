@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T00:12:28.308Z",
-  "contentHash": "bc3cc7c87d32614862ff82fa5c9c0ad44747c9b7a442744c32c8eb1e7f682326",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "f38cc149b952f0a5832fa1565719fbc742bbf42770fbaf620d2b9f84619d144a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-21T12:38:14.154Z",
+      "updatedAt": "2026-10-22T19:30:03.925Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "15",
+          "value": "14",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,18 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Visione sistemica della relazione padre-figlia - con Annemieke van der Mooren",
-              "detail": "Hotel Rigi Klösterli - Zum Goldenen Hirschen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/systemic-view-of-the-father-daughter-relationship-with-annemieke-van-der-mooren/"
-            },
-            {
-              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
-              "detail": "Einsiedeln — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
-            },
             {
               "label": "Frölein Da Capo - Halbzeit Show",
               "detail": "Küssnacht am Rigi",
@@ -55,6 +43,12 @@
               "detail": "Hirschen Schwyz GmbH, Schwyz",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bex-marshall-gb-der-herbst-26/"
+            },
+            {
+              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
+              "detail": "Einsiedeln — in corso, ultimo giorno: 24 ottobre 2026",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
             },
             {
               "label": "30. Muotitaler Alpchäsmärcht",
@@ -91,11 +85,17 @@
               "detail": "Lachen SZ, Lachen",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/serata-italiana-tavolata-live-music/"
+            },
+            {
+              "label": "Venus and Adonis",
+              "detail": "Theatersaal, Einsiedeln",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/venus-and-adonis-3/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "SZ",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "15",
+          "value": "14",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,18 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Systemic view of the father-daughter relationship - with Annemieke van der Mooren",
-              "detail": "Hotel Rigi Klösterli - Zum Goldenen Hirschen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/systemic-view-of-the-father-daughter-relationship-with-annemieke-van-der-mooren/"
-            },
-            {
-              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
-              "detail": "Einsiedeln — ongoing, last day: 24 October 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
-            },
             {
               "label": "Frölein Da Capo - Halbzeit Show",
               "detail": "Küssnacht am Rigi",
@@ -160,6 +148,12 @@
               "detail": "Hirschen Schwyz GmbH, Schwyz",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bex-marshall-gb-der-herbst-26/"
+            },
+            {
+              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
+              "detail": "Einsiedeln — ongoing, last day: 24 October 2026",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
             },
             {
               "label": "30th Muotitaler Alpine Cheese Market",
@@ -196,11 +190,17 @@
               "detail": "Lachen SZ, Lachen",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/serata-italiana-tavolata-live-music/"
+            },
+            {
+              "label": "Venus and Adonis",
+              "detail": "Theatersaal, Einsiedeln",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/venus-and-adonis-3/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "SZ",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "15",
+          "value": "14",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,18 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Systemische Sicht auf die Vater-Tochter-Beziehung – mit Annemieke van der Mooren",
-              "detail": "Hotel Rigi Klösterli - Zum Goldenen Hirschen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/systemic-view-of-the-father-daughter-relationship-with-annemieke-van-der-mooren/"
-            },
-            {
-              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
-              "detail": "Einsiedeln — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
-            },
             {
               "label": "Frölein Da Capo - Halbzeit Show",
               "detail": "Küssnacht am Rigi",
@@ -265,6 +253,12 @@
               "detail": "Hirschen Schwyz GmbH, Schwyz",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bex-marshall-gb-der-herbst-26/"
+            },
+            {
+              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
+              "detail": "Einsiedeln — läuft, letzter Tag: 24. Oktober 2026",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
             },
             {
               "label": "30. Muotitaler Alpchäsmärcht",
@@ -301,11 +295,17 @@
               "detail": "Lachen SZ, Lachen",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/serata-italiana-tavolata-live-music/"
+            },
+            {
+              "label": "Venus and Adonis",
+              "detail": "Theatersaal, Einsiedeln",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/venus-and-adonis-3/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "SZ",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "15",
+          "value": "14",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,18 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Point de vue systémique sur la relation père-fille - avec Annemieke van der Mooren",
-              "detail": "Hotel Rigi Klösterli - Zum Goldenen Hirschen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/systemic-view-of-the-father-daughter-relationship-with-annemieke-van-der-mooren/"
-            },
-            {
-              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
-              "detail": "Einsiedeln — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
-            },
             {
               "label": "Frölein Da Capo - Halbzeit Show",
               "detail": "Küssnacht am Rigi",
@@ -370,6 +358,12 @@
               "detail": "Hirschen Schwyz GmbH, Schwyz",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bex-marshall-gb-der-herbst-26/"
+            },
+            {
+              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
+              "detail": "Einsiedeln — en cours, dernier jour : 24 octobre 2026",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
             },
             {
               "label": "30. Muotitaler Alpchäsmärcht",
@@ -406,11 +400,17 @@
               "detail": "Lachen SZ, Lachen",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/serata-italiana-tavolata-live-music/"
+            },
+            {
+              "label": "Venus and Adonis",
+              "detail": "Theatersaal, Einsiedeln",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/venus-and-adonis-3/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

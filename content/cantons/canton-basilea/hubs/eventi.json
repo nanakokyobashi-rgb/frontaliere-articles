@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T22:21:57.960Z",
-  "contentHash": "a9d70f6916141b92b57202bd8e6bfbc91e99b5cb051b0a77a93286534b095b7a",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "1df93a65d897814b4db033f066e4bd91876eaf65306bc30cb1fe85263e3ce5ef",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T11:13:26.127Z",
+      "updatedAt": "2026-10-22T19:30:03.925Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "96",
+          "value": "97",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,30 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Nat Su/Jean-Paul Brodbeck Duo",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/nat-sujean-paul-brodbeck-duo_Aj4BVF7"
-            },
-            {
-              "label": "Quiz Abend in der Bibliothek Dorf",
-              "detail": "Riehen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/quiz-abend-in-der-bibliothek-dorf/"
-            },
-            {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Stadtcasino Basel, Basel",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/vivaldi-die-vier-jahreszeiten_Ar6DnuC"
-            },
-            {
-              "label": "Berni Wagner: «Monster»",
-              "detail": "Der Teufelhof Basel, Basel",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/berni-wagner-monster/"
-            },
             {
               "label": "ANDY MIDDLETON QUARTET",
               "detail": "the bird's eye jazz club",
@@ -91,11 +67,35 @@
               "detail": "Allschwil",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spuren-einer-tradition/"
+            },
+            {
+              "label": "«Mit Linggs», Pedro Lenz und Simon Ho",
+              "detail": "Revue Langenbruck, Langenbruck",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mit-linggs-pedro-lenz-und-simon-ho/"
+            },
+            {
+              "label": "Barbara Hutzenlaub – Sprechstunde",
+              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/barbara-hutzenlaub-sprechstunde_AF9kJ4d"
+            },
+            {
+              "label": "Massimo Rocchi - Live - 50 Jahre Bühnenpräsenz",
+              "detail": "Basel",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/massimo-rocchi-live-50-jahre-buehnenpraesenz/"
+            },
+            {
+              "label": "siJamais - Blackout – eine göttliche Komödie",
+              "detail": "Theater im Teufelhof",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sijamais-blackout-eine-goettliche-komoedie_AEqPg1j"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "96",
+          "value": "97",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,30 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Nat Su/Jean-Paul Brodbeck Duo",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/nat-sujean-paul-brodbeck-duo_Aj4BVF7"
-            },
-            {
-              "label": "Quiz Abend in der Bibliothek Dorf",
-              "detail": "Riehen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/quiz-abend-in-der-bibliothek-dorf/"
-            },
-            {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Stadtcasino Basel, Basel",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/vivaldi-die-vier-jahreszeiten_Ar6DnuC"
-            },
-            {
-              "label": "Berni Wagner: «Monster»",
-              "detail": "Der Teufelhof Basel, Basel",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/berni-wagner-monster/"
-            },
             {
               "label": "ANDY MIDDLETON QUARTET",
               "detail": "the bird's eye jazz club",
@@ -196,11 +172,35 @@
               "detail": "Allschwil",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spuren-einer-tradition/"
+            },
+            {
+              "label": "«Mit Linggs», Pedro Lenz und Simon Ho",
+              "detail": "Revue Langenbruck, Langenbruck",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mit-linggs-pedro-lenz-und-simon-ho/"
+            },
+            {
+              "label": "Barbara Hutzenlaub – Sprechstunde",
+              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/barbara-hutzenlaub-sprechstunde_AF9kJ4d"
+            },
+            {
+              "label": "Massimo Rocchi - Live - 50 Jahre Bühnenpräsenz",
+              "detail": "Basel",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/massimo-rocchi-live-50-jahre-buehnenpraesenz/"
+            },
+            {
+              "label": "siJamais - Blackout – eine göttliche Komödie",
+              "detail": "Theater im Teufelhof",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sijamais-blackout-eine-goettliche-komoedie_AEqPg1j"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "96",
+          "value": "97",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,30 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Nat Su/Jean-Paul Brodbeck Duo",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/nat-sujean-paul-brodbeck-duo_Aj4BVF7"
-            },
-            {
-              "label": "Quiz Abend in der Bibliothek Dorf",
-              "detail": "Riehen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/quiz-abend-in-der-bibliothek-dorf/"
-            },
-            {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Stadtcasino Basel, Basel",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/vivaldi-die-vier-jahreszeiten_Ar6DnuC"
-            },
-            {
-              "label": "Berni Wagner: «Monster»",
-              "detail": "Der Teufelhof Basel, Basel",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/berni-wagner-monster/"
-            },
             {
               "label": "ANDY MIDDLETON QUARTET",
               "detail": "the bird's eye jazz club",
@@ -301,11 +277,35 @@
               "detail": "Allschwil",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spuren-einer-tradition/"
+            },
+            {
+              "label": "«Mit Linggs», Pedro Lenz und Simon Ho",
+              "detail": "Revue Langenbruck, Langenbruck",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mit-linggs-pedro-lenz-und-simon-ho/"
+            },
+            {
+              "label": "Barbara Hutzenlaub – Sprechstunde",
+              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/barbara-hutzenlaub-sprechstunde_AF9kJ4d"
+            },
+            {
+              "label": "Massimo Rocchi - Live - 50 Jahre Bühnenpräsenz",
+              "detail": "Basel",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/massimo-rocchi-live-50-jahre-buehnenpraesenz/"
+            },
+            {
+              "label": "siJamais - Blackout – eine göttliche Komödie",
+              "detail": "Theater im Teufelhof",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sijamais-blackout-eine-goettliche-komoedie_AEqPg1j"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "96",
+          "value": "97",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,30 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Nat Su/Jean-Paul Brodbeck Duo",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/nat-sujean-paul-brodbeck-duo_Aj4BVF7"
-            },
-            {
-              "label": "Quiz Abend in der Bibliothek Dorf",
-              "detail": "Riehen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/quiz-abend-in-der-bibliothek-dorf/"
-            },
-            {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Stadtcasino Basel, Basel",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/basel/vivaldi-die-vier-jahreszeiten_Ar6DnuC"
-            },
-            {
-              "label": "Berni Wagner: «Monster»",
-              "detail": "Der Teufelhof Basel, Basel",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/berni-wagner-monster/"
-            },
             {
               "label": "ANDY MIDDLETON QUARTET",
               "detail": "the bird's eye jazz club",
@@ -406,11 +382,35 @@
               "detail": "Allschwil",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spuren-einer-tradition/"
+            },
+            {
+              "label": "«Mit Linggs», Pedro Lenz und Simon Ho",
+              "detail": "Revue Langenbruck, Langenbruck",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mit-linggs-pedro-lenz-und-simon-ho/"
+            },
+            {
+              "label": "Barbara Hutzenlaub – Sprechstunde",
+              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/barbara-hutzenlaub-sprechstunde_AF9kJ4d"
+            },
+            {
+              "label": "Massimo Rocchi - Live - 50 Jahre Bühnenpräsenz",
+              "detail": "Basel",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/massimo-rocchi-live-50-jahre-buehnenpraesenz/"
+            },
+            {
+              "label": "siJamais - Blackout – eine göttliche Komödie",
+              "detail": "Theater im Teufelhof",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sijamais-blackout-eine-goettliche-komoedie_AEqPg1j"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

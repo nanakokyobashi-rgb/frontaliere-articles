@@ -4,14 +4,14 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "ac76bb12aa97a35c5067599e656d1a68703ad6312fa9a5e250ff37af9b899b9b",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "cd8afc1dc14885191d992b0a4f2ece6261a2eaf1b961d4ff2afeb0e6d6fdc874",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-21T12:19:56.872Z",
+      "updatedAt": "2026-10-22T12:21:38.892Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-28T12:19:56.872Z"
+      "carryUntilAt": "2026-10-29T12:21:38.892Z"
     }
   ],
   "locales": {
@@ -54,19 +54,19 @@
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "2,236 EUR/l",
-              "detail": "media regionale: minimo 2,229 EUR/l, 3 stazioni rilevate",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2,226 EUR/l",
+              "detail": "media regionale: minimo 2,219 EUR/l, 3 stazioni rilevate",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,426 EUR/l",
-              "detail": "media regionale: minimo 2,419 EUR/l, 3 stazioni rilevate",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2,336 EUR/l",
+              "detail": "media regionale: minimo 2,329 EUR/l, 3 stazioni rilevate",
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "TG",
@@ -153,19 +153,19 @@
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "2.236 EUR/l",
-              "detail": "regional average: lowest 2.229 EUR/l, 3 stations surveyed",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2.226 EUR/l",
+              "detail": "regional average: lowest 2.219 EUR/l, 3 stations surveyed",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.426 EUR/l",
-              "detail": "regional average: lowest 2.419 EUR/l, 3 stations surveyed",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2.336 EUR/l",
+              "detail": "regional average: lowest 2.329 EUR/l, 3 stations surveyed",
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "TG",
@@ -252,19 +252,19 @@
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "2.236 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.229 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2.226 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.219 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.426 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.419 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2.336 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.329 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "TG",
@@ -351,19 +351,19 @@
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "2,236 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,229 EUR/l, 3 stations relevées",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2,226 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,219 EUR/l, 3 stations relevées",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,426 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,419 EUR/l, 3 stations relevées",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2,336 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,329 EUR/l, 3 stations relevées",
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }
