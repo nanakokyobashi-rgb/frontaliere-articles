@@ -8,7 +8,7 @@ import {
 } from '../../scripts/lib/r2-image-namespace-lock.mjs';
 
 test('acquisition timestamps accept only positive finite overrides', () => {
-  for (const value of ['', '0', '-1', 'not-a-timestamp', 'Infinity']) {
+  for (const value of ['', '0', '-1', 'not-a-timestamp', 'Infinity', null, true, false, {}]) {
     assert.equal(resolveRequestedLeaseTimestamp(value, 5_000), 5_000, value);
   }
   assert.equal(resolveRequestedLeaseTimestamp('1700000000', 5_000), 1_700_000_000);
