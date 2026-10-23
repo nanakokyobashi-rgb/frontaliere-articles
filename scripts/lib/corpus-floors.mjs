@@ -36,6 +36,7 @@ import { findAllSeoEntryMatches } from './seo-entry.mjs';
 import { scanTopLevelArticleRecords } from './article-registry-reader.mjs';
 import {
   decodeStaticStringLiteral,
+  matchingDelimiter,
   readStaticStringLiteral,
   skipStaticTrivia,
 } from './ts-literals.mjs';
@@ -830,6 +831,28 @@ export function unescapeQuoted(value, quote = "'") {
 }
 
 function readSeoStringLiteralField(block, field) {
+  const skipQuotedValue = (start) => {
+    const quote = block[start];
+    for (let cursor = start + 1; cursor < block.length; cursor += 1) {
+      if (block[cursor] === '\\') {
+        cursor += 1;
+        continue;
+      }
+      if (block[cursor] === quote) return cursor + 1;
+    }
+    return block.length;
+  };
+  const skipValue = (start) => {
+    const first = block[start];
+    if (first === "'" || first === '"' || first === '`') return skipQuotedValue(start);
+    if (first === '{' || first === '[' || first === '(') {
+      const close = matchingDelimiter(block, start);
+      return close < 0 ? block.length : close + 1;
+    }
+    let cursor = start;
+    while (cursor < block.length && block[cursor] !== ',' && block[cursor] !== '}') cursor += 1;
+    return cursor;
+  };
   let cursor = 0;
   while (cursor < block.length) {
     cursor = skipStaticTrivia(block, cursor, 'SEO entry', 'seo-field');
@@ -861,7 +884,10 @@ function readSeoStringLiteralField(block, field) {
       const value = readStaticStringLiteral(block, valueStart, 'SEO entry', 'seo-field');
       return decodeStaticStringLiteral(value.value, value.quote);
     }
-    cursor = keyEnd;
+    // Move over the complete value. A structuredData object contains dynamic
+    // template URLs; scanning one byte at a time would mistake their backtick
+    // for a property key and reject an otherwise valid SEO entry.
+    cursor = skipValue(valueStart);
   }
   return undefined;
 }
