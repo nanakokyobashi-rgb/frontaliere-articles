@@ -8,6 +8,14 @@
     {
       "path": "public/images/blog/article-sostenibilita-abitativa-svizzera.webp",
       "sha256": "91861aca3d90495a2466abf1da32c6b5e1853ba33500951fa2704d72a25788c3"
+    },
+    {
+      "path": "public/images/blog/article-wetzikon-binzacher-kempten-info.webp",
+      "sha256": "0db35dee6ffd1df199f4eb042bfd0a0669e7dc0970a9d420511854f4bf5ae783"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-wetzikon-binzacher-kempten-info-480w.webp",
+      "sha256": "9da3dbfa18407ed683f2012387e7ca9934eaaf50454c2548b1bdafee61b70e54"
     }
   ]
 }
