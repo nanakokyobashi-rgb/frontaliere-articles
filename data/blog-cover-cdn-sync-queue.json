@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-domande-edilizie-solo-digitale-2027.webp",
-      "sha256": "bb5e13d5bca8d57760b19bc772ff36f743ae4e9447d9acddebf4ebeb840f9b08"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-domande-edilizie-solo-digitale-2027-480w.webp",
-      "sha256": "a7536c93e0a6519c8117ae6496401497b0b19cdbee5306c76488a3f741945b6b"
-    }
-  ]
+  "items": []
 }
