@@ -92,3 +92,18 @@ test('rejects non-decimal date output before creating recovery JSON', () => {
     rmSync(fixture.dir, { recursive: true, force: true });
   }
 });
+
+test('rejects a zero date output before creating recovery JSON', () => {
+  const fixture = setup('0');
+  try {
+    const output = execFileSync('bash', [uploader, fixture.localFile, 'images/blog/article/hero.webp'], {
+      encoding: 'utf8',
+      env: fixture.env,
+    });
+
+    assert.match(output, /recovery timestamp.*not a positive decimal/u);
+    assert.deepEqual(events(fixture), []);
+  } finally {
+    rmSync(fixture.dir, { recursive: true, force: true });
+  }
+});
