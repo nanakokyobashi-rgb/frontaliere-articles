@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "b3d861658f1062f510b01cd21601f19155db8d5d9b06c40a796105b85e38bd87",
+  "updatedAt": "2026-10-23T12:35:50.316Z",
+  "contentHash": "33d5bf0806ba2cdcf29dd4116f179ad9c356e6fcf767826d50c640e6372161dc",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zurigo, oltre 100 infrazioni nei controlli anti-distrazione",
+          "url": "/articoli-zurigo/controlli-distrazione-zurigo/",
+          "excerpt": "La Polizia cantonale di Zurigo ha rilevato oltre 100 infrazioni il 20 ottobre 2026: 50 riguardavano l'uso vietato del cellulare alla guida.",
+          "date": "2026-10-23T12:21:12.761Z"
+        },
+        {
           "title": "Zurigo: incentivi per l'acquisto di E-Cargovelo per le imprese",
           "url": "/articoli-zurigo/zurigo-incentivi-e-cargo-velo/",
           "excerpt": "La Città di Zurigo mette a disposizione centinaia di migliaia di franchi per sostenere l'acquisto di E-Cargovelo e offre corsi di guida a metà prezzo.",
@@ -94,12 +100,6 @@
           "url": "/articoli-zurigo/vbz-tram-50-51-cambio/",
           "excerpt": "Dal 13 dicembre spariscono le linee 50 e 51 I tram 4, 11, 13, 14 e 17 tornano sul Bahnhofquai La linea 83 viaggia ogni giorno fino alle 22 La linea notturna N8",
           "date": "2026-10-21T10:20:51.886Z"
-        },
-        {
-          "title": "Zurigo prepara i residenti alle crisi: 9 litri d'acqua",
-          "url": "/articoli-zurigo/crisi-resilienza-zurigo/",
-          "excerpt": "Le settimane della resilienza di Zurigo affrontano due scenari: informazioni senza elettricità e internet e 9 litri d'acqua per tre giorni.",
-          "date": "2026-10-12T01:35:59.572Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T12:35:50.316Z"
     },
     "en": {
       "canton": "ZH",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zurich, over 100 violations in anti-distraction checks",
+          "url": "/en/zurich-articles/zurich-distraction-checks/",
+          "excerpt": "The Zurich Cantonal Police recorded more than 100 violations on October 20, 2026: 50 involved the prohibited use of a mobile phone while driving.",
+          "date": "2026-10-23T12:21:12.761Z"
+        },
+        {
           "title": "Zurich: incentives for businesses to purchase E-Cargovelo",
           "url": "/en/zurich-articles/zurich-incentives-e-cargo-bike/",
           "excerpt": "The City of Zurich is making hundreds of thousands of francs available to support the purchase of E-Cargovelo and offers driving courses at half price.",
@@ -193,12 +199,6 @@
           "url": "/en/zurich-articles/vbz-tram-50-51-timetable-change/",
           "excerpt": "From December 13, lines 50 and 51 will disappear Trams 4, 11, 13, 14 and 17 return to Bahnhofquai Line 83 runs every day until 22 Night line N8 becomes N80 Date",
           "date": "2026-10-21T10:20:51.886Z"
-        },
-        {
-          "title": "Zurich prepares residents for crises: 9 liters of water",
-          "url": "/en/zurich-articles/zurich-crisis-resilience/",
-          "excerpt": "Zurich's resilience weeks address two scenarios: information without electricity and internet and 9 liters of water for three days.",
-          "date": "2026-10-12T01:35:59.572Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T12:35:50.316Z"
     },
     "de": {
       "canton": "ZH",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zürich, über 100 Verstösse bei Ablenkungskontrollen",
+          "url": "/de/zurich-artikel/zuerich-kontrolle-ablenkung/",
+          "excerpt": "Die Kantonspolizei Zürich stellte am 20.",
+          "date": "2026-10-23T12:21:12.761Z"
+        },
+        {
           "title": "Zürich: Förderungen für den Kauf von E-Cargovelo für Unternehmen",
           "url": "/de/zurich-artikel/zuerich-incentive-e-cargo-velo/",
           "excerpt": "Die Stadt Zürich stellt Hunderttausende Franken zur Verfügung, um den Kauf von E-Cargovelo zu unterstützen, und bietet Fahrkurse zum halben Preis an.",
@@ -292,12 +298,6 @@
           "url": "/de/zurich-artikel/vbz-tram-50-51-fahrplanwechsel/",
           "excerpt": "Ab dem 13. Dezember entfallen die Linien 50 und 51 Die Trams 4, 11, 13, 14 und 17 fahren wieder über den Bahnhofquai Die Linie 83 fährt täglich bis 22 Uhr",
           "date": "2026-10-21T10:20:51.886Z"
-        },
-        {
-          "title": "Zürich bereitet die Einwohner auf Krisen vor: 9 Liter Wasser",
-          "url": "/de/zurich-artikel/zuerich-krisenresilienz/",
-          "excerpt": "Die Zürcher Resilienzwochen befassen sich mit zwei Szenarien: Informationen ohne Strom und Internet sowie 9 Liter Wasser für drei Tage.",
-          "date": "2026-10-12T01:35:59.572Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T12:35:50.316Z"
     },
     "fr": {
       "canton": "ZH",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zurich : plus de 100 infractions lors de contrôles anti-distraction",
+          "url": "/fr/articles-zurich/controles-distraction-zurich/",
+          "excerpt": "La police cantonale de Zurich a relevé plus de 100 infractions le 20 octobre 2026 : 50 concernaient l’utilisation interdite du téléphone portable au volant.",
+          "date": "2026-10-23T12:21:12.761Z"
+        },
+        {
           "title": "Zurich : incitations à l'achat d'E-Cargovelo pour les entreprises",
           "url": "/fr/articles-zurich/zurich-incitations-e-cargo-bike/",
           "excerpt": "La Ville de Zurich met à disposition des centaines de milliers de francs pour soutenir l'achat d'E-Cargovelo et propose des cours de conduite à moitié prix.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-zurich/vbz-tram-50-51-changement-horaire/",
           "excerpt": "Dès le 13 décembre, les lignes 50 et 51 disparaissent Les tramways 4, 11, 13, 14 et 17 reprennent leur parcours sur le Bahnhofquai La ligne 83 circule tous",
           "date": "2026-10-21T10:20:51.886Z"
-        },
-        {
-          "title": "Zurich prépare ses habitants aux crises : 9 litres d’eau",
-          "url": "/fr/articles-zurich/zurich-resilience-crises/",
-          "excerpt": "Les semaines de la résilience de Zurich abordent deux scénarios : des informations sans électricité ni internet et 9 litres d’eau pour trois jours.",
-          "date": "2026-10-12T01:35:59.572Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T12:35:50.316Z"
     }
   }
 }

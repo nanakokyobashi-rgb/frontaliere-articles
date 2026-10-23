@@ -54,6 +54,9 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.appenzello-cooperazione-strategica-2024.title': 'Cooperazione strategica: Appenzello e San Gallo in linea',
     'blog.article.appenzello-cooperazione-strategica-2024.excerpt': 'I governi dei due Appenzello, San Gallo e Turgovia proseguono la collaborazione decisa nel 2024.',
     'blog.article.appenzello-cooperazione-strategica-2024.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.rbh-herisau-piu-risorse.title': 'Herisau, più risorse per la RBH Hinterland',
+    'blog.article.rbh-herisau-piu-risorse.excerpt': 'Il Comune di Herisau segnala casi in aumento e maggiore complessità nella gestione della RBH Hinterland; negli anni scorsi sono cresciute anche le posizioni.',
+    'blog.article.rbh-herisau-piu-risorse.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

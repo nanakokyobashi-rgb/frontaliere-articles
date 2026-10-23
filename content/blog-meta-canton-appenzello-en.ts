@@ -54,6 +54,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.appenzello-cooperazione-strategica-2024.title': 'Strategic cooperation: Appenzell and St. Gallen aligned',
     'blog.article.appenzello-cooperazione-strategica-2024.excerpt': 'The governments of the two Appenzells, St.',
     'blog.article.appenzello-cooperazione-strategica-2024.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.rbh-herisau-piu-risorse.title': 'Herisau, more resources for RBH Hinterland',
+    'blog.article.rbh-herisau-piu-risorse.excerpt': 'The Municipality of Herisau reports an increase in cases and greater complexity in managing RBH Hinterland; positions have also increased in recent years.',
+    'blog.article.rbh-herisau-piu-risorse.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;

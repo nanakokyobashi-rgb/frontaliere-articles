@@ -36,6 +36,9 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.a13-code-grigioni-vacanze-zurighesi.title': 'A13: Staus zwischen Rothenbrunnen und Reichenau wegen Zürcher Ferien',
     'blog.article.a13-code-grigioni-vacanze-zurighesi.excerpt': 'Der Verkehr auf der A13 staute sich an jedem Tag des Wochenendes zwischen Rothenbrunnen und Reichenau, wobei der Tunnel Isla-Bella als Engpass identifiziert wurde, im Hinblick auf das Ende der Zürcher Ferien.',
     'blog.article.a13-code-grigioni-vacanze-zurighesi.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.rhb-albula-chiusura-thusis-preda.title': 'RhB sperrt die Albula-Linie zwischen Thusis und Preda',
+    'blog.article.rhb-albula-chiusura-thusis-preda.excerpt': 'Die Rhätische Bahn unterbricht den Zugverkehr auf der Albula-Linie zwischen Thusis und Preda vom 29.',
+    'blog.article.rhb-albula-chiusura-thusis-preda.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGrDe;

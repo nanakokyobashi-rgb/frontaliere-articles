@@ -54,6 +54,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.appenzello-cooperazione-strategica-2024.title': 'Strategische Zusammenarbeit: Appenzell und St. Gallen auf Kurs',
     'blog.article.appenzello-cooperazione-strategica-2024.excerpt': 'Die Regierungen der beiden Appenzell sowie der Kantone St.',
     'blog.article.appenzello-cooperazione-strategica-2024.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.rbh-herisau-piu-risorse.title': 'Herisau, mehr Ressourcen für die RBH Hinterland',
+    'blog.article.rbh-herisau-piu-risorse.excerpt': 'Die Gemeinde Herisau weist auf zunehmende Fallzahlen und eine grössere Komplexität bei der Bearbeitung der RBH Hinterland hin; in den vergangenen Jahren ist auch die Zahl der Stellen gestiegen.',
+    'blog.article.rbh-herisau-piu-risorse.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;

@@ -1,34 +1,12 @@
 {
-  "keywords": [],
-  "strikes": {},
+  "schemaVersion": 2,
+  "bans": [],
+  "strikes": [],
+  "legacy": [],
   "topicGateUrls": {
-    "canton-basilea::https://www.bazonline.ch/muttenz-19-jaehriger-flieht-vor-polizei-auf-a18-387048928807": {
+    "canton-basilea::https://www.nau.ch/news/wirtschaft/coop-erhoht-2027-die-lohne-um-11-prozent-67192702": {
       "section": "canton-basilea",
-      "ts": 1791676572892
-    },
-    "canton-basilea::https://www.20min.ch/story/tauben-am-bahnhof-basel-sbb-blut-und-patronenhuelse-schockieren-passanten-103644646": {
-      "section": "canton-basilea",
-      "ts": 1791786225563
-    },
-    "canton-basilea::https://www.20min.ch/story/abstimmungsticker-sterbehilfe-anti-chaoten-darueber-stimmen-die-kantone-ab-103634937": {
-      "section": "canton-basilea",
-      "ts": 1791786243479
-    },
-    "canton-basilea::https://www.schwarzwaelder-bote.de/lokales/loerrach/fuehrerschein-abgenommen-26-jaehriger-unter-alkoholeinfluss-verursacht-unfall-bei-pratteln-79557756.html": {
-      "section": "canton-basilea",
-      "ts": 1791786252528
-    },
-    "canton-basilea::https://www.nau.ch/news/wirtschaft/roche-jubelt-mit-neuen-daten-zu-augenmittel-67187305": {
-      "section": "canton-basilea",
-      "ts": 1791786263633
-    },
-    "canton-basilea::https://www.20min.ch/story/illegale-peptide-baselbieter-staatsanwaltschaft-eroeffnet-strafuntersuchung-103645804": {
-      "section": "canton-basilea",
-      "ts": 1791786271560
-    },
-    "canton-basilea::https://www.bazonline.ch/schlaegerei-in-reinach-fuenf-festnahmen-nach-pruegelei-610496376646": {
-      "section": "canton-basilea",
-      "ts": 1791786281181
+      "ts": 1792758263164
     }
   }
 }

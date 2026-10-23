@@ -275,6 +275,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bristenstrasse-regimi-traffico-2026': {
+    title: 'Bristenstrasse: chiusure e orari fino a novembre 2026',
+    description: 'Tra Amsteg e St. Antoni il regime C prevede chiusure feriali; dopo il 6 novembre è atteso il regime B fino alla fine dei lavori.',
+    keywords: 'frontalieri, ticino, svizzera, italia, bristenstrasse, chiusure, orari, fino',
+    ogTitle: 'Bristenstrasse: due regimi fino a novembre',
+    ogDescription: 'I lavori alle reti di protezione modificano la circolazione sulla Bristenstrasse: dal 26 ottobre al 6 novembre 2026 il regime C prevede chiusure feriali e passaggi coordinati con il bus 407. In seguito è previsto il regime B fino a fine novembre.',
+    canonicalPath: '/articoli-uri/bristenstrasse-regimi-traffico-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bristenstrasse: chiusure e orari fino a novembre 2026",
+      "description": "Tra Amsteg e St. Antoni il regime C prevede chiusure feriali; dopo il 6 novembre è atteso il regime B fino alla fine dei lavori.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-bristenstrasse-regimi-traffico-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T12:29:59+00:00",
+      "dateModified": "2026-10-23T12:29:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-uri/bristenstrasse-regimi-traffico-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

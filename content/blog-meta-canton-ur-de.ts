@@ -24,6 +24,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.axenstrasse-chiusa-quattro-notti.title': 'Axenstrasse vom 2. bis 6. November vier Nächte lang gesperrt',
     'blog.article.axenstrasse-chiusa-quattro-notti.excerpt': 'Die Axenstrasse wird vom 2.',
     'blog.article.axenstrasse-chiusa-quattro-notti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.bristenstrasse-regimi-traffico-2026.title': 'Bristenstrasse: Sperrungen und Zeitfenster bis November 2026',
+    'blog.article.bristenstrasse-regimi-traffico-2026.excerpt': 'Zwischen Amsteg und St.',
+    'blog.article.bristenstrasse-regimi-traffico-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonUrDe;

@@ -21,6 +21,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'nuova-app-schaffhauser-nachrichten-2026': { it: 'nuova-app-schaffhauser-nachrichten-2026', en: 'new-schaffhauser-nachrichten-app-2026', de: 'neue-schaffhauser-nachrichten-app-2026', fr: 'nouvelle-app-schaffhauser-nachrichten-2026' },
  'sciaffusa-regole-datencenter-beringen': { it: 'sciaffusa-regole-datencenter-beringen', en: 'schaffhausen-datacenter-rules-beringen', de: 'schaffhausen-rechenzentrum-regeln-beringen', fr: 'schaffhouse-regles-centre-donnees-beringen' },
  'sciaffusa-regole-datacenter': { it: 'sciaffusa-regole-datacenter', en: 'schaffhausen-data-centres', de: 'schaffhausen-rechenzentren-regeln', fr: 'schaffhouse-centres-donnees' },
+ 'coop-aumento-salari-2027': { it: 'coop-aumento-salari-2027', en: 'coop-salary-increase-2027', de: 'coop-lohnerhoehung-2027', fr: 'coop-augmentation-salaires-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

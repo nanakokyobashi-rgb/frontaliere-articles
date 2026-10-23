@@ -20,6 +20,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'heiden-risparmi-preventivo-2027': { it: 'heiden-risparmi-preventivo-2027', en: 'heiden-savings-budget-2027', de: 'heiden-sparbemuehungen-budget-2027', fr: 'heiden-economies-budget-2027' },
  'investimenti-tetto-fotovoltaico-2027': { it: 'investimenti-tetto-fotovoltaico-2027', en: 'roof-solar-investment-2027', de: 'dachsanierung-photovoltaik-investition-2027', fr: 'toit-photovoltaique-investissement-2027' },
  'appenzello-cooperazione-strategica-2024': { it: 'appenzello-cooperazione-strategica-2024', en: 'appenzell-strategic-cooperation-2024', de: 'appenzell-strategische-zusammenarbeit', fr: 'appenzell-cooperation-strategique-2024' },
+ 'rbh-herisau-piu-risorse': { it: 'rbh-herisau-piu-risorse', en: 'herisau-rbh-more-resources', de: 'herisau-rbh-mehr-ressourcen', fr: 'herisau-rbh-plus-ressources' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

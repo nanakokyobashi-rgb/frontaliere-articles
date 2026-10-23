@@ -127,4 +127,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'rhb-albula-chiusura-thusis-preda',
+ category: 'pratico',
+ date: '2026-10-23T12:26:06.032Z',
+ image: '/images/blog/article-rhb-albula-chiusura-thusis-preda.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

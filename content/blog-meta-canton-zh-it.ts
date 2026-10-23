@@ -45,6 +45,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.zurigo-incentivi-e-cargo-velo.title': 'Zurigo: incentivi per l\'acquisto di E-Cargovelo per le imprese',
     'blog.article.zurigo-incentivi-e-cargo-velo.excerpt': 'La Città di Zurigo mette a disposizione centinaia di migliaia di franchi per sostenere l\'acquisto di E-Cargovelo e offre corsi di guida a metà prezzo.',
     'blog.article.zurigo-incentivi-e-cargo-velo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.controlli-distrazione-zurigo.title': 'Zurigo, oltre 100 infrazioni nei controlli anti-distrazione',
+    'blog.article.controlli-distrazione-zurigo.excerpt': 'La Polizia cantonale di Zurigo ha rilevato oltre 100 infrazioni il 20 ottobre 2026: 50 riguardavano l\'uso vietato del cellulare alla guida.',
+    'blog.article.controlli-distrazione-zurigo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZhIt;

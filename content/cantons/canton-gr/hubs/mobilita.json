@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-23T10:42:39.932Z",
-  "contentHash": "1e899b94f2cefb6678934e40936df6f5a4dbd73b377394a9ec2aeca1fe4cecc7",
+  "updatedAt": "2026-10-23T12:39:21.184Z",
+  "contentHash": "5ff2f156f37a1918c20fc2b9046e896c20d4cc8d79a687d5298204069276e2d4",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -203,6 +203,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "RhB chiude la linea dell'Albula tra Thusis e Preda",
+          "url": "/articoli-grigioni/rhb-albula-chiusura-thusis-preda/",
+          "excerpt": "La Rhätische Bahn interrompe il traffico ferroviario sulla linea dell'Albula tra Thusis e Preda dal 29 ottobre al 13 novembre per lavori di costruzione.",
+          "date": "2026-10-23T12:26:06.032Z"
+        },
+        {
           "title": "A13: code tra Rothenbrunnen e Reichenau per vacanze zurighesi",
           "url": "/articoli-grigioni/a13-code-grigioni-vacanze-zurighesi/",
           "excerpt": "Il traffico sulla A13 si è accumulato ogni giorno del fine settimana tra Rothenbrunnen e Reichenau, con il tunnel Isla-Bella identificato come collo di bottiglia, in riferimento alla fine delle vacanze zurighesi.",
@@ -243,12 +249,6 @@
           "url": "/articoli-frontaliere/castasegna-vecchia-dogana-in-vendita/",
           "excerpt": "La Confederazione ha messo in vendita la vecchia dogana di Castasegna. Il Comune di Bregaglia si attiva con Coira per evitare la perdita della presenza federale.",
           "date": "2026-08-09T00:40:13.497Z"
-        },
-        {
-          "title": "Grigioni: traffico di sviamento, UDC critica il Governo",
-          "url": "/articoli-svizzera/grigioni-traffico-sviamento-udc/",
-          "excerpt": "L'UDC grigionese propone il modello di Birsfelden per contrastare il traffico di sviamento sulla A13. Il Governo chiede chiarezza giuridica prima di procedere.",
-          "date": "2026-07-21T16:56:20.835Z"
         }
       ],
       "latestCantonArticles": [],
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-23T12:39:21.184Z"
     },
     "en": {
       "canton": "GR",
@@ -471,6 +471,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "RhB closes the Albula line between Thusis and Preda",
+          "url": "/en/graubunden-articles/rhb-albula-line-closure-thusis-preda/",
+          "excerpt": "The Rhätische Bahn is suspending rail traffic on the Albula line between Thusis and Preda from October 29 to November 13 for construction work.",
+          "date": "2026-10-23T12:26:06.032Z"
+        },
+        {
           "title": "A13: queues between Rothenbrunnen and Reichenau due to Zurich holiday traffic",
           "url": "/en/graubunden-articles/a13-traffic-graubuenden-zurich-holidays/",
           "excerpt": "Traffic on the A13 built up every day of the weekend between Rothenbrunnen and Reichenau, with the Isla-Bella tunnel identified as a bottleneck, in connection with the end of the Zurich holidays.",
@@ -510,12 +516,6 @@
           "url": "/en/cross-border-articles/castasegna-old-customs-house-for-sale/",
           "excerpt": "The Confederation has put the old Castasegna customs house up for sale. The Municipality of Bregaglia activates with Chur to avoid the loss of federal presence.",
           "date": "2026-08-09T00:40:13.497Z"
-        },
-        {
-          "title": "Graubünden: diversion traffic, UDC criticizes the Government",
-          "url": "/en/swiss-articles/graubunden-diversion-traffic-udc/",
-          "excerpt": "The greyish CDU proposes the Birsfelden model to counteract diversion traffic on the A13. The Government asks for legal clarity before proceeding.",
-          "date": "2026-07-21T16:56:20.835Z"
         }
       ],
       "latestCantonArticles": [],
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-23T12:39:21.184Z"
     },
     "de": {
       "canton": "GR",
@@ -738,6 +738,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "RhB sperrt die Albula-Linie zwischen Thusis und Preda",
+          "url": "/de/graubunden-artikel/rhb-albulalinie-sperre-thusis-preda/",
+          "excerpt": "Die Rhätische Bahn unterbricht den Zugverkehr auf der Albula-Linie zwischen Thusis und Preda vom 29.",
+          "date": "2026-10-23T12:26:06.032Z"
+        },
+        {
           "title": "A13: Staus zwischen Rothenbrunnen und Reichenau wegen Zürcher Ferien",
           "url": "/de/graubunden-artikel/a13-stau-graubuenden-zuercher-ferien/",
           "excerpt": "Der Verkehr auf der A13 staute sich an jedem Tag des Wochenendes zwischen Rothenbrunnen und Reichenau, wobei der Tunnel Isla-Bella als Engpass identifiziert wurde, im Hinblick auf das Ende der Zürcher Ferien.",
@@ -778,12 +784,6 @@
           "url": "/de/grenzgaenger-artikel/castasegna-alter-zollposten-zu-verkaufen/",
           "excerpt": "Der Bund hat den alten Zoll von Castasegna zum Verkauf angeboten. Die Gemeinde Bergell setzt sich mit Chur dafür ein, den Verlust der eidgenössischen Präsenz zu vermeiden.",
           "date": "2026-08-09T00:40:13.497Z"
-        },
-        {
-          "title": "Graubünden: Umleitungsverkehr, SVP kritisiert Regierung",
-          "url": "/de/schweiz-artikel/graubuenden-ausweichverkehr-svp/",
-          "excerpt": "Die Bündner SVP schlägt das Birsfelden-Modell vor, um dem Umleitungsverkehr auf der A13 entgegenzuwirken. Die Regierung verlangt rechtliche Klarheit, bevor sie fortfährt.",
-          "date": "2026-07-21T16:56:20.835Z"
         }
       ],
       "latestCantonArticles": [],
@@ -825,7 +825,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-23T12:39:21.184Z"
     },
     "fr": {
       "canton": "GR",
@@ -1006,6 +1006,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "La RhB ferme la ligne de l'Albula entre Thusis et Preda",
+          "url": "/fr/articles-grisons/rhb-fermeture-ligne-albula-thusis-preda/",
+          "excerpt": "La Rhätische Bahn interrompt le trafic ferroviaire sur la ligne de l'Albula entre Thusis et Preda du 29 octobre au 13 novembre pour des travaux de construction.",
+          "date": "2026-10-23T12:26:06.032Z"
+        },
+        {
           "title": "A13 : queues entre Rothenbrunnen et Reichenau pour les vacances zurichoises",
           "url": "/fr/articles-grisons/a13-bouchons-grisons-vacances-zurichoises/",
           "excerpt": "Le trafic sur l'A13 s'est accumulé tous les jours du week-end entre Rothenbrunnen et Reichenau, avec le tunnel Isla-Bella identifié comme un goulot d'étranglement, en référence à la fin des vacances zurichoises.",
@@ -1046,12 +1052,6 @@
           "url": "/fr/articles-frontalier/castasegna-ancienne-douane-a-vendre/",
           "excerpt": "La Confédération a mis en vente l'ancienne douane de Castasegna. La commune de Bregaglia s'active avec Coire pour éviter la perte de la présence fédérale.",
           "date": "2026-08-09T00:40:13.497Z"
-        },
-        {
-          "title": "Grisons : trafic de détournement, UDC critique le gouvernement",
-          "url": "/fr/articles-suisse/grisons-trafic-evitement-udc/",
-          "excerpt": "L'UDC grisonne propose le modèle de Birsfelden pour contrer le trafic de détournement sur l'A13. Le Gouvernement demande des éclaircissements juridiques avant de procéder.",
-          "date": "2026-07-21T16:56:20.835Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1093,7 +1093,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-23T12:39:21.184Z"
     }
   }
 }

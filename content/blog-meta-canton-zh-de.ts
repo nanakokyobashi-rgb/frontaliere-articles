@@ -45,6 +45,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.zurigo-incentivi-e-cargo-velo.title': 'Zürich: Förderungen für den Kauf von E-Cargovelo für Unternehmen',
     'blog.article.zurigo-incentivi-e-cargo-velo.excerpt': 'Die Stadt Zürich stellt Hunderttausende Franken zur Verfügung, um den Kauf von E-Cargovelo zu unterstützen, und bietet Fahrkurse zum halben Preis an.',
     'blog.article.zurigo-incentivi-e-cargo-velo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.controlli-distrazione-zurigo.title': 'Zürich, über 100 Verstösse bei Ablenkungskontrollen',
+    'blog.article.controlli-distrazione-zurigo.excerpt': 'Die Kantonspolizei Zürich stellte am 20.',
+    'blog.article.controlli-distrazione-zurigo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZhDe;

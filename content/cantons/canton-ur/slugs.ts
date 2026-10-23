@@ -10,6 +10,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'eventi-weekend-uri': { it: 'eventi-weekend-uri', en: 'weekend-events-uri', de: 'wochenend-veranstaltungen-uri', fr: 'evenements-week-end-uri' },
  'silenen-muri-secco': { it: 'silenen-muri-secco', en: 'silenen-dry-stone-walls', de: 'silenen-trockenmauern-sanierung', fr: 'silenen-murs-pierre-seche' },
  'axenstrasse-chiusa-quattro-notti': { it: 'axenstrasse-chiusa-quattro-notti', en: 'axenstrasse-closed-four-nights', de: 'axenstrasse-vier-naechte-gesperrt', fr: 'axenstrasse-fermee-quatre-nuits' },
+ 'bristenstrasse-regimi-traffico-2026': { it: 'bristenstrasse-regimi-traffico-2026', en: 'bristenstrasse-traffic-rules-2026', de: 'bristenstrasse-verkehrsregime-2026', fr: 'bristenstrasse-regimes-circulation-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

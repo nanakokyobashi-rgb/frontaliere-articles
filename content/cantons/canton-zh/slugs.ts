@@ -17,6 +17,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'zurigo-niente-iniziativa-congedo-parentale': { it: 'zurigo-niente-iniziativa-congedo-parentale', en: 'zurich-no-parental-leave-initiative', de: 'zuerich-keine-elternzeit-initiative', fr: 'zurich-pas-initiative-conge-parental' },
  'organico-comunale-zurigo': { it: 'organico-comunale-zurigo', en: 'zurich-city-staff-budget-2027', de: 'zuerich-stadtpersonal-budget-2027', fr: 'budget-zurich-personnel-ville-2027' },
  'zurigo-incentivi-e-cargo-velo': { it: 'zurigo-incentivi-e-cargo-velo', en: 'zurich-incentives-e-cargo-bike', de: 'zuerich-incentive-e-cargo-velo', fr: 'zurich-incitations-e-cargo-bike' },
+ 'controlli-distrazione-zurigo': { it: 'controlli-distrazione-zurigo', en: 'zurich-distraction-checks', de: 'zuerich-kontrolle-ablenkung', fr: 'controles-distraction-zurich' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -1315,6 +1315,30 @@ test('publisher: argomenti', () => {
   );
 });
 
+test('publisher: legge gli array grandi da file senza ricostruirli in argv', () => {
+  const fixture = mkdtempSync(path.join(tmpdir(), 'section-pages-args-'));
+  const idsFile = path.join(fixture, 'ids.json');
+  const missingFile = path.join(fixture, 'missing.json');
+  const knownMissingFile = path.join(fixture, 'known-missing.json');
+  writeFileSync(idsFile, '["article-a","article-b"]');
+  writeFileSync(missingFile, '["/articoli-ticino/a/"]');
+  writeFileSync(knownMissingFile, '["/articoli-ticino/b/"]');
+  try {
+    const parsed = parseArgs([
+      '--section', 'canton-ti',
+      '--ids-file', idsFile,
+      '--missing-pages-file', missingFile,
+      '--known-missing-pages-file', knownMissingFile,
+      '--out', 'o', '--summary', 's',
+    ], { active: ACTIVE_WITH_TI });
+    assert.deepEqual(parsed.ids, ['article-a', 'article-b']);
+    assert.deepEqual(parsed.missingPages, ['/articoli-ticino/a/']);
+    assert.deepEqual(parsed.knownMissingPages, ['/articoli-ticino/b/']);
+  } finally {
+    rmSync(fixture, { recursive: true, force: true });
+  }
+});
+
 test('publisher: tutti i 404 noti escono dall inventario immutabile staged, ma solo i selezionati si caricano', () => {
   const missing = pageEntry('canton-ti', 'articoli-ticino/missing/index.html', 'article');
   const leftover = pageEntry('canton-ti', 'articoli-ticino/leftover/index.html', 'article');
@@ -3340,8 +3364,12 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /known_missing_page_paths:/);
   assert.match(wf, /MISSING_PAGE_PATHS_JSON: \$\{\{ toJSON\(matrix\.target\.missingPagePaths \|\| fromJSON\('\[\]'\)\) \}\}/);
   assert.match(wf, /KNOWN_MISSING_PAGE_PATHS_JSON: \$\{\{ toJSON\(matrix\.target\.knownMissingPagePaths \|\| fromJSON\('\[\]'\)\) \}\}/);
-  assert.match(wf, /args\+=\(--missing-pages "\$\(printf '%s' "\$MISSING_PAGE_PATHS_JSON" \| jq -c \.\)"\)/);
-  assert.match(wf, /args\+=\(--known-missing-pages "\$\(printf '%s' "\$KNOWN_MISSING_PAGE_PATHS_JSON" \| jq -c \.\)"\)/);
+  assert.match(wf, /article_ids_file="\$RUNNER_TEMP\/fast-section-article-ids\.json"/);
+  assert.match(wf, /printf '%s' "\$ARTICLE_IDS_JSON" > "\$article_ids_file"/);
+  assert.match(wf, /args\+=\(--ids-file "\$article_ids_file"\)/);
+  assert.match(wf, /args\+=\(--missing-pages-file "\$missing_page_paths_file"\)/);
+  assert.match(wf, /args\+=\(--known-missing-pages-file "\$known_missing_page_paths_file"\)/);
+  assert.doesNotMatch(wf, /args\+=\(--ids "\$\(printf '%s' "\$ARTICLE_IDS_JSON"/);
   assert.match(wf, /ALLOW_DEFERRED_LIVE_RELEASE: \$\{\{ needs\.resolve\.outputs\.allow_deferred_live_release \}\}/);
   assert.match(wf, /EXPECTED_MAIN_HEAD: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_main_commit \|\| github\.event\.after \|\| github\.sha \}\}/);
   assert.match(wf, /-f source_main_commit="\$CURRENT_MAIN"/);

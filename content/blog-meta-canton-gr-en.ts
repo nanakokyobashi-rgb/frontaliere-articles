@@ -36,6 +36,9 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.a13-code-grigioni-vacanze-zurighesi.title': 'A13: queues between Rothenbrunnen and Reichenau due to Zurich holiday traffic',
     'blog.article.a13-code-grigioni-vacanze-zurighesi.excerpt': 'Traffic on the A13 built up every day of the weekend between Rothenbrunnen and Reichenau, with the Isla-Bella tunnel identified as a bottleneck, in connection with the end of the Zurich holidays.',
     'blog.article.a13-code-grigioni-vacanze-zurighesi.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.rhb-albula-chiusura-thusis-preda.title': 'RhB closes the Albula line between Thusis and Preda',
+    'blog.article.rhb-albula-chiusura-thusis-preda.excerpt': 'The Rhätische Bahn is suspending rail traffic on the Albula line between Thusis and Preda from October 29 to November 13 for construction work.',
+    'blog.article.rhb-albula-chiusura-thusis-preda.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGrEn;

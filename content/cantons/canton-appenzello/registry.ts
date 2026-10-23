@@ -193,4 +193,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'rbh-herisau-piu-risorse',
+ category: 'novita',
+ date: '2026-10-23T12:58:04.345Z',
+ image: '/images/blog/article-rbh-herisau-piu-risorse.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

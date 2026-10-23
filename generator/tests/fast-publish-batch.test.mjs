@@ -42,12 +42,24 @@ test('il trigger push conserva tutti gli ID dei body cambiati', () => {
   assert.match(resolveStep, /target_shard="\$\(node scripts\/ci\/fast-publish-section\.mjs shard-of "\$target_section"\)"/);
   assert.match(resolveStep, /echo "matrix=\$matrix_with_shards"/);
   assert.doesNotMatch(resolveStep, /body_section=svizzera/);
-  assert.match(resolveStep, /groups=.*body_section.*body_ids_json/);
+  assert.match(resolveStep, /merge_group_ids "\$body_section" "\$body_ids_json"/);
   assert.doesNotMatch(resolveStep, /one commit changes both article sections/);
   assert.match(resolveStep, /EVENT_NAME.*workflow_dispatch.*section.*body_section/);
   assert.match(resolveStep, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);
   assert.match(resolveStep, /if \[ "\$\{#ids\[@\]\}" -eq 0 \]; then[\s\S]*git diff --name-only "\$before" HEAD/);
   assert.doesNotMatch(resolveStep, /head\s+-1/);
+});
+
+test('i JSON di batch non passano a jq come argomenti di dimensione illimitata', () => {
+  const resolveStep = stepText('Resolve mode, article ids and section');
+
+  // A dependency change can select the whole registry. `--argjson` would put
+  // that array in one argv string and fail before jq starts at MAX_ARG_STRLEN.
+  assert.match(resolveStep, /merge_group_ids\(\)/);
+  assert.match(resolveStep, /printf '%s\\n%s\\n' "\$groups" "\$merge_ids_json"[\s\S]*jq -cs/);
+  assert.match(resolveStep, /append_matrix_target\(\)/);
+  assert.match(resolveStep, /printf '%s\\n%s\\n' "\$matrix_with_shards" "\$matrix_target"[\s\S]*jq -cs/);
+  assert.doesNotMatch(resolveStep, /--argjson\s+(?:ids|target)\s+"/u);
 });
 
 test('le superfici articolo oltre il body producono solo gli ID realmente cambiati', () => {
@@ -323,7 +335,7 @@ test('body e immagini multi-sezione diventano target matrix separati', () => {
   const imagePlan = resolveStep.slice(resolveStep.indexOf('image_plan='));
   assert.match(imagePlan, /image_section=/);
   assert.match(imagePlan, /image_ids_json=/);
-  assert.match(imagePlan, /groups=.*image_section/);
+  assert.match(imagePlan, /merge_group_ids "\$image_section" "\$image_ids_json"/);
   assert.doesNotMatch(imagePlan, /one commit changes both article sections/);
   assert.match(workflow, /matrix:\s*\n\s+target: \$\{\{ fromJSON\(needs\.resolve\.outputs\.matrix\) \}\}/);
   assert.match(workflow, /group: fast-publish-article-\$\{\{ matrix\.target\.shard \}\}/);
@@ -350,7 +362,11 @@ test('i fallback persistenti entrano in archivio e landing, e il dispatch identi
 test('il dispatch accetta una lista JSON e il workflow la passa al renderer batch', () => {
   assert.match(workflow, /article_ids:\s*\n\s+description: 'JSON array of article ids/);
   assert.match(workflow, /ARTICLE_IDS_INPUT: \$\{\{ inputs\.article_ids \}\}/);
-  assert.match(workflow, /--ids "\$ARTICLE_IDS_JSON"/);
+  assert.match(workflow, /article_ids_file="\$RUNNER_TEMP\/fast-article-ids\.json"/);
+  assert.match(workflow, /printf '%s' "\$ARTICLE_IDS_JSON" > "\$article_ids_file"/);
+  assert.match(workflow, /--ids-file "\$article_ids_file"/);
+  assert.doesNotMatch(workflow, /--ids "\$ARTICLE_IDS_JSON"/);
+  assert.match(publisher, /--ids-file/);
   assert.match(publisher, /renderSectionArticlePipeline\(\{[\s\S]*?ids: args\.ids,/);
   assert.match(pipeline, /onlyArticleIds: ids \}\)/);
 });
