@@ -132,8 +132,8 @@ function publishedMainHead() {
     throw new Error('GITHUB_REPOSITORY non disponibile per il guard di freschezza');
   }
   const current = execFileSync(
-    'gh',
-    ['api', `repos/${repository}/git/ref/heads/main`, '--jq', '.object.sha'],
+    'bash',
+    [path.join(ROOT_DIR, 'scripts/ci/read-main-head.sh')],
     { encoding: 'utf8' },
   ).trim();
   if (!FULL_GIT_SHA_RE.test(current)) throw new Error('revisione corrente di main non valida');

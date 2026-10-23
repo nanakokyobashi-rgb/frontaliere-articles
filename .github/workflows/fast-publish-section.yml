@@ -67,6 +67,7 @@ on:
       - 'scripts/lib/conditional-cdn-put.sh'
       - 'scripts/ci/fast-publish-section.mjs'
       - 'scripts/ci/dispatch-fast-publish-replay.sh'
+      - 'scripts/ci/read-main-head.sh'
       - 'scripts/ci/resolve-workflow-run-push-range.mjs'
       - 'scripts/ci/retry-cmd.sh'
       - 'scripts/ci/fetch-push-base-if-missing.sh'
@@ -262,6 +263,7 @@ jobs:
             scripts/ci/check-article-source-runtime.mjs
             scripts/lib/npm-ci-retry.sh
             scripts/ci/dispatch-fast-publish-replay.sh
+            scripts/ci/read-main-head.sh
             scripts/ci/fast-publish-section-resolve.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
@@ -271,8 +273,14 @@ jobs:
           set -euo pipefail
           resolver_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-resolve.sh'
           resolver_target='scripts/ci/fast-publish-section-resolve.sh'
+          main_head_source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
+          main_head_target='scripts/ci/read-main-head.sh'
           if [ ! -f "$resolver_source" ]; then
             echo "::error::resolver non presente nel checkout della revisione del workflow"
+            exit 1
+          fi
+          if [ ! -f "$main_head_source" ]; then
+            echo "::error::helper della punta di main non presente nel checkout della revisione del workflow"
             exit 1
           fi
           # workflow_run puo' aver effettuato il checkout del corpus a una
@@ -280,6 +288,7 @@ jobs:
           # resolver deve pero' sempre provenire dalla revisione che contiene
           # il workflow; le sorgenti e i dati restano quelli del run pinnato.
           install -m 0755 "$resolver_source" "$resolver_target"
+          install -m 0755 "$main_head_source" "$main_head_target"
 
       - name: Set up Node (resolve)
         uses: actions/setup-node@v7
@@ -594,8 +603,20 @@ jobs:
             scripts/ci/check-article-source-runtime.mjs
             scripts/lib/npm-ci-retry.sh
             scripts/ci/dispatch-fast-publish-replay.sh
+            scripts/ci/read-main-head.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
+
+      - name: Materialize freshness helper from workflow revision
+        run: |
+          set -euo pipefail
+          source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
+          target='scripts/ci/read-main-head.sh'
+          if [ ! -f "$source" ]; then
+            echo "::error::helper della punta di main non presente nel checkout della revisione del workflow"
+            exit 1
+          fi
+          install -m 0755 "$source" "$target"
 
       - name: Guard pinned replay freshness
         id: replay_freshness
@@ -621,7 +642,7 @@ jobs:
             echo "::error::revisione pinned non valida per il guard di freschezza"
             exit 1
           fi
-          if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
+          if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
             echo "::error::impossibile verificare la revisione corrente di main prima del replay"
             exit 1
           fi
@@ -900,7 +921,7 @@ jobs:
             pinned_replay_main="$SOURCE_MAIN_COMMIT"
           fi
           if [ -n "$pinned_replay_main" ]; then
-            if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
+            if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
               echo "::error::impossibile verificare la revisione corrente di main prima degli upload"
               exit 1
             fi
@@ -1100,7 +1121,7 @@ jobs:
                 deferred_retry='true'
                 break
               fi
-              if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
+              if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
                 echo "::error::impossibile rileggere la revisione corrente di main dopo un render fallito"
                 exit 1
               fi
@@ -1170,8 +1191,20 @@ jobs:
           fetch-depth: 1
           sparse-checkout:
             scripts/ci/dispatch-fast-publish-replay.sh
+            scripts/ci/read-main-head.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
+
+      - name: Materialize freshness helper from workflow revision
+        run: |
+          set -euo pipefail
+          source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
+          target='scripts/ci/read-main-head.sh'
+          if [ ! -f "$source" ]; then
+            echo "::error::helper della punta di main non presente nel checkout della revisione del workflow"
+            exit 1
+          fi
+          install -m 0755 "$source" "$target"
 
       - name: Verify staged release revision is still main
         id: replay_freshness
@@ -1185,7 +1218,7 @@ jobs:
             echo "::error::source commit non e' una SHA completa per il replay staged"
             exit 1
           fi
-          if ! current_main="$(gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
+          if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
             echo "::error::impossibile verificare main prima del replay API"
             exit 1
           fi

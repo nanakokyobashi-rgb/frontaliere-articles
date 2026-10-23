@@ -108,7 +108,7 @@ elif [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ -n "${SOURCE_COMMIT_INPUT:-}" 
   pinned_source="${SOURCE_MAIN_COMMIT_INPUT:-$SOURCE_COMMIT_INPUT}"
 fi
 if [ -n "$pinned_source" ]; then
-  if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
+  if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
     echo "::error::impossibile verificare la revisione corrente di main prima del piano"
     exit 1
   fi
@@ -458,4 +458,3 @@ echo "resolved matrix=$matrix dry=$dry"
       # Tieni l'arming del replay fuori dal run monolitico di resolve: GitHub
       # rifiuta workflow con espressioni oltre 21.000 caratteri. I valori
       # calcolati da plan restano la base per dispatch, bootstrap e replay.
-
