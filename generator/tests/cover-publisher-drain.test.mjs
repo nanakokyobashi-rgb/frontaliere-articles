@@ -6,8 +6,11 @@ import {
   drainCoverPublishers,
   groupPublisherOutbox,
   publisherStatusIsComplete,
+  normalizeWorkflowRunPages,
+  selectActivePublisherRun,
   selectNewRunId,
   validatePublisherStatus,
+  workflowRunListArguments,
   watchPublisherRun,
 } from '../../scripts/ci/cover-publisher-drain.mjs';
 
@@ -215,4 +218,85 @@ test('correla la run nuova con il nonce, ignorando una dispatch concorrente dell
   });
 
   assert.equal(selected?.databaseId, 42);
+});
+
+test('appiattisce tutte le pagine delle run e riusa anche una cover attiva piu vecchia', () => {
+  const pages = [
+    { workflow_runs: Array.from({ length: 100 }, (_, index) => ({
+      id: index + 1,
+      created_at: '2026-10-23T10:00:00Z',
+      display_title: 'cover-publish-article / frontaliere / nonce=completed',
+      status: 'completed',
+    })) },
+    { workflow_runs: [{
+      id: 101,
+      created_at: '2026-10-22T05:00:00Z',
+      display_title: 'cover-publish-article / frontaliere / nonce=cover-frontaliere-old',
+      status: 'in_progress',
+    }] },
+  ];
+
+  const selected = selectActivePublisherRun(
+    normalizeWorkflowRunPages(pages),
+    { workflow: 'fast-publish-article.yml', section: 'frontaliere' },
+  );
+  assert.equal(selected?.databaseId, 101);
+});
+
+test('la ricerca delle run usa GET anche quando filtra con -f', () => {
+  const args = workflowRunListArguments({
+    repo: 'nanakokyobashi-rgb/frontaliere-articles',
+    workflow: 'fast-publish-section.yml',
+  });
+
+  assert.deepEqual(args, [
+    'api', '--paginate', '--slurp',
+    '--method', 'GET',
+    'repos/nanakokyobashi-rgb/frontaliere-articles/actions/workflows/fast-publish-section.yml/runs',
+    '-f', 'event=workflow_dispatch',
+    '-f', 'branch=main',
+    '-f', 'per_page=100',
+  ]);
+});
+
+test('riusa la run cover attiva e non seleziona publisher manuali o conclusi', () => {
+  const selected = selectActivePublisherRun([
+    {
+      databaseId: 40,
+      createdAt: '2026-10-08T05:00:01Z',
+      displayTitle: 'cover-publish-article / frontaliere / nonce=cover-frontaliere-old',
+      status: 'queued',
+    },
+    {
+      databaseId: 41,
+      createdAt: '2026-10-08T05:00:03Z',
+      displayTitle: 'cover-publish-article / frontaliere / nonce=manual-replay',
+      status: 'in_progress',
+    },
+    {
+      databaseId: 42,
+      createdAt: '2026-10-08T05:00:02Z',
+      displayTitle: 'cover-publish-article / frontaliere / nonce=cover-frontaliere-current',
+      status: 'in_progress',
+    },
+    {
+      databaseId: 43,
+      createdAt: '2026-10-08T05:00:04Z',
+      displayTitle: 'cover-publish-article / frontaliere / nonce=cover-frontaliere-done',
+      status: 'completed',
+    },
+  ], { workflow: 'fast-publish-article.yml', section: 'frontaliere' });
+
+  assert.equal(selected?.databaseId, 42);
+  assert.equal(
+    selectActivePublisherRun([
+      {
+        databaseId: 44,
+        createdAt: '2026-10-08T05:00:05Z',
+        displayTitle: 'cover-publish-section / canton-ag / nonce=cover-canton-ag-current',
+        status: 'in_progress',
+      },
+    ], { workflow: 'fast-publish-article.yml', section: 'frontaliere' }),
+    null,
+  );
 });
