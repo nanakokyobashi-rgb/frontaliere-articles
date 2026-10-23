@@ -598,6 +598,43 @@ test('un dispatch senza run id lascia il candidato pending e quindi riconciliabi
   }
 });
 
+test('un ritardo stale già osservato ridispatcha la pagina leggibile al fast publisher', async () => {
+  const rootDir = observerRoot();
+  fs.appendFileSync(
+    path.join(rootDir, 'content/blog-articles-data.ts'),
+    "\n{ id: 'lagging', updatedAt: '2026-10-07', date: '2026-09-01', image: '/images/blog/lagging.webp' },\n",
+  );
+  fs.appendFileSync(path.join(rootDir, 'content/routerBlogData.ts'), "\n'lagging': { it: 'lagging' },\n");
+  const github = issueClient();
+  const log = `commit ${'a'.repeat(40)} 1791321600\ncontent/blog-body/it/lagging.ts\n`;
+  try {
+    const result = await runObserver({
+      rootDir,
+      nowMs: Date.parse('2026-10-08T00:00:00Z'),
+      gitLogImpl: () => log,
+      githubClient: github.client,
+      minIntervalMs: 0,
+      fetchImpl: async () => ({
+        ok: true,
+        status: 200,
+        text: async () => ownPage('/images/blog/lagging.webp').replace('2026-09-02', '2026-10-06'),
+      }),
+    });
+    assert.equal(result.lagging.length, 1);
+    assert.deepEqual(result.dispatched, [{
+      section: 'frontaliere',
+      ids: ['lagging'],
+      runId: 'run-1',
+    }]);
+    assert.deepEqual(
+      github.calls.filter((call) => call.type === 'dispatch').map((call) => call.args),
+      [{ section: 'frontaliere', ids: ['lagging'], issueNumber: 9001 }],
+    );
+  } finally {
+    fs.rmSync(rootDir, { recursive: true, force: true });
+  }
+});
+
 test('immagine ancora assente: il degrado entra nel ledger ma non parte alcun dispatch', async () => {
   const rootDir = observerRoot();
   const github = issueClient();

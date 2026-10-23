@@ -10,8 +10,9 @@
  * image. The network loop is deliberately sequential and rate-limited because
  * this is a courtesy check, not a crawler. Degraded articles are kept in the
  * observer issue body until a live read is sane; at most three proven image
- * repairs are dispatched per run. Unpreparable targets are kept as durable
- * coverage blockers in the same stable issue until they can be observed.
+ * repairs and three stale-but-readable page retries are dispatched per run.
+ * Unpreparable targets are kept as durable coverage blockers in the same stable
+ * issue until they can be observed.
  */
 
 import fs from 'node:fs';
@@ -25,7 +26,6 @@ import { fetchDeclaredImage } from '../lib/declared-image-fetch.mjs';
 import {
   DEFAULT_REPAIR_CAP,
   applyDispatchOutcomes,
-  groupRepairCandidates,
   ledgerKey,
   markDispatched,
   markLedgerItemsAbsent,
@@ -814,6 +814,23 @@ function saneLiveImage(entry) {
     && !entry.page.genericOgImage;
 }
 
+function groupPublicationRepairs(items = []) {
+  const groups = new Map();
+  for (const item of items) {
+    const section = String(item?.section ?? '').trim();
+    const articleId = String(item?.articleId ?? '').trim();
+    if (!section || !articleId) continue;
+    let group = groups.get(section);
+    if (!group) {
+      group = { section, ids: [], ledgerItems: [] };
+      groups.set(section, group);
+    }
+    if (!group.ids.includes(articleId)) group.ids.push(articleId);
+    if (item.repairKind === 'image') group.ledgerItems.push(item);
+  }
+  return [...groups.values()];
+}
+
 async function persistLedger(issue, items, github) {
   const body = upsertDegradationLedger(issue.body || '', items);
   if (body !== issue.body) {
@@ -847,6 +864,7 @@ export async function runObserver({
   fetchDeclaredImageImpl = fetchDeclaredImage,
   githubClient = null,
   repairCap = DEFAULT_REPAIR_CAP,
+  lagRepairCap = repairCap,
   maxPages = DEFAULT_MAX_PAGES,
   minIntervalMs = DEFAULT_MIN_INTERVAL_MS,
   fetchTimeoutMs = DEFAULT_FETCH_TIMEOUT_MS,
@@ -953,11 +971,24 @@ export async function runObserver({
     excludeKeys: reconciled.handledKeys,
     cap: repairCap,
   });
+  // A lagging page is already a live, actionable publication failure. Retry
+  // only readable stale pages: HTTP failures describe an unavailable origin,
+  // not evidence that another publish would repair the article. Keep this
+  // bounded independently from the image-repair cap so a large stale window
+  // cannot starve the durable image ledger (or vice versa).
+  const laggingRepairs = report.lagging
+    .filter((entry) => entry.page?.status === 200)
+    .slice(0, Math.max(0, lagRepairCap))
+    .map((entry) => ({ ...entry.target, repairKind: 'lagging' }));
+  const repairItems = [
+    ...laggingRepairs,
+    ...candidates.map((item) => ({ ...item, repairKind: 'image' })),
+  ];
   const dispatched = [];
-  if (issue && candidates.length > 0) {
-    for (const group of groupRepairCandidates(candidates)) {
+  if (issue && repairItems.length > 0) {
+    for (const group of groupPublicationRepairs(repairItems)) {
       const result = await github.dispatch({ section: group.section, ids: group.ids, issueNumber: issue.number });
-      ledger = markDispatched(ledger, group.items.map((item) => ({
+      ledger = markDispatched(ledger, group.ledgerItems.map((item) => ({
         key: ledgerKey(item),
         runId: result?.runId ?? null,
         dispatchedAt: result?.dispatchedAt,
