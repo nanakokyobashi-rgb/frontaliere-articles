@@ -51,6 +51,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.nuova-app-schaffhauser-nachrichten-2026.title': 'Schaffhauser Nachrichten: new app launched in 2026',
     'blog.article.nuova-app-schaffhauser-nachrichten-2026.excerpt': 'On October 21, 2026, the rollout of the new SN app with extensive content and thematic push notifications took place, available on the App Store and Google Play Store.',
     'blog.article.nuova-app-schaffhauser-nachrichten-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sciaffusa-regole-datencenter-beringen.title': 'Schaffhausen tightens data center rules',
+    'blog.article.sciaffusa-regole-datencenter-beringen.excerpt': 'The Canton of Schaffhausen plans stricter rules for data centers.',
+    'blog.article.sciaffusa-regole-datencenter-beringen.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

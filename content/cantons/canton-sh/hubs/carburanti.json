@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "fc9040200850e27c7b2578c3d08dfa29bf0ed0f6fd379d3fa51d30a1ffac1832",
+  "updatedAt": "2026-10-23T02:02:48.008Z",
+  "contentHash": "621fd0abc1a3ef1e1944287dfa757283c0ef6414e7fa5e5562489deef4d198c7",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Sciaffusa inasprisce regole datacenter",
+          "url": "/articoli-sciaffusa/sciaffusa-regole-datencenter-beringen/",
+          "excerpt": "Il Canton Sciaffusa prevede regole più severe per i datacenter.",
+          "date": "2026-10-23T01:48:34.863Z"
+        },
+        {
           "title": "Schaffhauser Nachrichten: lanciata la nuova app nel 2026",
           "url": "/articoli-sciaffusa/nuova-app-schaffhauser-nachrichten-2026/",
           "excerpt": "Il 21 ottobre 2026 è avvenuto il rollout della nuova app SN con contenuti estesi e notifiche push tematiche, disponibile su App Store e Google Play Store.",
@@ -94,12 +100,6 @@
           "url": "/articoli-sciaffusa/parcheggi-cascate-reno/",
           "excerpt": "Nuovo sistema tra Sciaffusa e Zurigo per i parcheggi liberi alle Cascate del Reno; avvio nell'estate 2027, costo circa CHF 400'000.",
           "date": "2026-10-21T20:45:07.801Z"
-        },
-        {
-          "title": "Incidente scooter a Schleitheim: donna ferita, Hohbrugg chiusa",
-          "url": "/articoli-sciaffusa/schleitheim-scooter-incidente-2026/",
-          "excerpt": "Domenica 18 ottobre 2026, una 61enne cade dallo scooter sulla Hohbrugg: proiezione di 12 metri nel pendio, elicottero per il trasporto in ospedale, strada chiusa oltre un'ora.",
-          "date": "2026-10-20T07:10:47.167Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T02:02:48.008Z"
     },
     "en": {
       "canton": "SH",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Schaffhausen tightens data center rules",
+          "url": "/en/schaffhausen-articles/schaffhausen-datacenter-rules-beringen/",
+          "excerpt": "The Canton of Schaffhausen plans stricter rules for data centers.",
+          "date": "2026-10-23T01:48:34.863Z"
+        },
+        {
           "title": "Schaffhauser Nachrichten: new app launched in 2026",
           "url": "/en/schaffhausen-articles/new-schaffhauser-nachrichten-app-2026/",
           "excerpt": "On October 21, 2026, the rollout of the new SN app with extensive content and thematic push notifications took place, available on the App Store and Google Play Store.",
@@ -193,12 +199,6 @@
           "url": "/en/schaffhausen-articles/rhine-falls-parking-system/",
           "excerpt": "New system between Schaffhausen and Zurich for available parking spaces at the Rhine Falls; launch in summer 2027, cost approximately CHF 400'000.",
           "date": "2026-10-21T20:45:07.801Z"
-        },
-        {
-          "title": "Scooter accident in Schleitheim: woman injured, Hohbrugg closed",
-          "url": "/en/schaffhausen-articles/schleitheim-scooter-accident-2026/",
-          "excerpt": "Sunday, October 18, 2026, a 61-year-old woman falls from her scooter on Hohbrugg: thrown 12 meters down the slope, helicopter transport to hospital, road closed for over an hour.",
-          "date": "2026-10-20T07:10:47.167Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T02:02:48.008Z"
     },
     "de": {
       "canton": "SH",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Schaffhausen verschärft Regeln für Rechenzentren",
+          "url": "/de/schaffhausen-artikel/schaffhausen-rechenzentrum-regeln-beringen/",
+          "excerpt": "Der Kanton Schaffhausen sieht strengere Regeln für Rechenzentren vor.",
+          "date": "2026-10-23T01:48:34.863Z"
+        },
+        {
           "title": "Schaffhauser Nachrichten: Neue App im Jahr 2026 gestartet",
           "url": "/de/schaffhausen-artikel/neue-schaffhauser-nachrichten-app-2026/",
           "excerpt": "Am 21. Oktober 2026 erfolgte der Rollout der neuen SN-App mit erweiterten Inhalten und thematischen Push-Benachrichtigungen, die im App Store und Google Play Store verfügbar sind.",
@@ -292,12 +298,6 @@
           "url": "/de/schaffhausen-artikel/parkleitsystem-rheinfall/",
           "excerpt": "Neues System zwischen Schaffhausen und Zürich für freie Parkplätze am Rheinfall; Start im Sommer 2027, Kosten etwa CHF 400'000.",
           "date": "2026-10-21T20:45:07.801Z"
-        },
-        {
-          "title": "Scooterunfall in Schleitheim: Frau verletzt, Hohbrugg gesperrt",
-          "url": "/de/schaffhausen-artikel/schleitheim-roller-unfall-2026/",
-          "excerpt": "Am Sonntag, 18.",
-          "date": "2026-10-20T07:10:47.167Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T02:02:48.008Z"
     },
     "fr": {
       "canton": "SH",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Schaffhouse durcit les règles applicables aux centres de données",
+          "url": "/fr/articles-schaffhouse/schaffhouse-regles-centre-donnees-beringen/",
+          "excerpt": "Le canton de Schaffhouse prévoit des règles plus strictes pour les centres de données.",
+          "date": "2026-10-23T01:48:34.863Z"
+        },
+        {
           "title": "Schaffhauser Nachrichten : lancement de la nouvelle application en 2026",
           "url": "/fr/articles-schaffhouse/nouvelle-app-schaffhauser-nachrichten-2026/",
           "excerpt": "Le 21 octobre 2026 a eu lieu le lancement de la nouvelle application SN avec un contenu étendu et des notifications push thématiques, disponible sur l'App Store et le Google Play Store.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-schaffhouse/systeme-parking-chutes-rhin/",
           "excerpt": "Nouveau système entre Schaffhouse et Zurich pour les places de parking libres aux chutes du Rhin ; lancement à l'été 2027, coût d'environ CHF 400'000.",
           "date": "2026-10-21T20:45:07.801Z"
-        },
-        {
-          "title": "Accident de scooter à Schleitheim : une femme blessée, Hohbrugg fermée",
-          "url": "/fr/articles-schaffhouse/schleitheim-accident-scooter-2026/",
-          "excerpt": "Dimanche 18 octobre 2026, une femme de 61 ans chute de son scooter sur la Hohbrugg : elle est projetée à 12 mètres dans la pente, un hélicoptère est utilisé pour son transport à l’hôpital, route fermée pendant plus…",
-          "date": "2026-10-20T07:10:47.167Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T02:02:48.008Z"
     }
   }
 }

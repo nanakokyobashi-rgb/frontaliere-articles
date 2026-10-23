@@ -48,6 +48,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.turgovia-servizi-datori-lavoro.title': 'Thurgau: personnel search and lari protection services',
     'blog.article.turgovia-servizi-datori-lavoro.excerpt': 'The Canton of Thurgau makes the RAV offices in Amriswil, Frauenfeld and Kreuzlingen and the arbeit.swiss portal available to employers for vacancy vacancy',
     'blog.article.turgovia-servizi-datori-lavoro.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.pbv-rpg2-turgovia-2026.title': 'Thurgau: revised PBV approved for RPG2',
+    'blog.article.pbv-rpg2-turgovia-2026.excerpt': 'The Government approved the revised PBV RPG2 concerns construction outside building zones The objective is to limit growth to a maximum of 2% The PBV brings',
+    'blog.article.pbv-rpg2-turgovia-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTgEn;

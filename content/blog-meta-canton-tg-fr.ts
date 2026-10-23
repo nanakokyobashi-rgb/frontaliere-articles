@@ -48,6 +48,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.turgovia-servizi-datori-lavoro.title': 'Thurgovie : services de recherche de personnel et protection lari',
     'blog.article.turgovia-servizi-datori-lavoro.excerpt': 'Le canton de Thurgovie met à la disposition des employeurs les sites RAV d’Amriswil, Frauenfeld et Kreuzlingen ainsi que le portail arbeit.swiss pour les postes vacants postes vacants',
     'blog.article.turgovia-servizi-datori-lavoro.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.pbv-rpg2-turgovia-2026.title': 'Thurgovie : PBV révisée approuvée pour RPG2',
+    'blog.article.pbv-rpg2-turgovia-2026.excerpt': 'Le Gouvernement a approuvé la PBV révisée RPG2 concerne les constructions hors des zones à bâtir L’objectif est de limiter la croissance à un maximum de 2%',
+    'blog.article.pbv-rpg2-turgovia-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTgFr;

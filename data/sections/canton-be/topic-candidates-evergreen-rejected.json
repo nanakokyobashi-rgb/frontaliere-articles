@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/702522/gouvernement-bernois-oppos-la-gratuit-pour-les-crches": {
-      "section": "canton-be",
-      "ts": 1792546063352
-    },
-    "canton-be::https://ajour.ch/story/702513/berner-regierungsrat-lehnt-kostenlose-kitas-ab": {
-      "section": "canton-be",
-      "ts": 1792546064516
-    },
     "canton-be::https://ajour.ch/story/702744/le-gouvernement-du-premier-ministre-socialiste-pedro-snchez-approuve-une-srie-de-mesures-sociales": {
       "section": "canton-be",
       "ts": 1792552622246
@@ -151,6 +143,18 @@
     "canton-be::https://ajour.ch/story/702703/energie-wasser-bern-reicht-baugesuch-f%c3%bcr-energiespeicher-ein": {
       "section": "canton-be",
       "ts": 1792709711081
+    },
+    "canton-be::https://ajour.ch/story/702686/grossratskommission-unterst%c3%bctzt-ausl%c3%a4nderstimmrecht-im-kanton-bern": {
+      "section": "canton-be",
+      "ts": 1792719414850
+    },
+    "canton-be::https://www.api.news.apps.be.ch/api/atom/news/800a98c8-943a-4f05-9895-cdba893de3cb": {
+      "section": "canton-be",
+      "ts": 1792721242796
+    },
+    "canton-be::https://ajour.ch/story/703224/just-eat-k%c3%bcndigt-massenentlassung-an-700-kuriere-bangen-um-ihren-job": {
+      "section": "canton-be",
+      "ts": 1792721244311
     }
   }
 }
