@@ -644,10 +644,10 @@ export function extractBodyContent(fileContent, articleId) {
     let content = m[2];
     if (quoteChar === "'") {
       // Single-quoted TS string: unescape \' \n \\
-      content = unescapeTsString(content, { "'": "'", n: '\n', '\\': '\\' });
+      content = unescapeTsString(content, { "'": "'", n: '\n', '\\': '\\' }, { decodeControlEscapes: true });
     } else {
       // Backtick (template literal): unescape \` \$ \\
-      content = unescapeTsString(content, { '`': '`', $: '$', '\\': '\\' });
+      content = unescapeTsString(content, { '`': '`', $: '$', '\\': '\\' }, { decodeControlEscapes: true });
     }
     bodies.push(content);
   }
