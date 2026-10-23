@@ -875,6 +875,12 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
+          article_ids_file="$RUNNER_TEMP/fast-section-article-ids.json"
+          missing_page_paths_file="$RUNNER_TEMP/fast-section-missing-page-paths.json"
+          known_missing_page_paths_file="$RUNNER_TEMP/fast-section-known-missing-page-paths.json"
+          printf '%s' "$ARTICLE_IDS_JSON" > "$article_ids_file"
+          printf '%s' "$MISSING_PAGE_PATHS_JSON" > "$missing_page_paths_file"
+          printf '%s' "$KNOWN_MISSING_PAGE_PATHS_JSON" > "$known_missing_page_paths_file"
           if [ -n "${SOURCE_COMMIT:-}" ]; then
             if [ -z "${SOURCE_MAIN_COMMIT:-}" ] || ! [[ "$SOURCE_MAIN_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
               echo "::error::source_main_commit e' obbligatorio e richiede una SHA completa quando source_commit e' valorizzato"
@@ -994,10 +1000,10 @@ jobs:
             if [ "$BOOTSTRAP" = "true" ]; then
               args+=(--bootstrap)
             else
-              args+=(--ids "$(printf '%s' "$ARTICLE_IDS_JSON" | jq -c .)")
+              args+=(--ids-file "$article_ids_file")
             fi
-            args+=(--missing-pages "$(printf '%s' "$MISSING_PAGE_PATHS_JSON" | jq -c .)")
-            args+=(--known-missing-pages "$(printf '%s' "$KNOWN_MISSING_PAGE_PATHS_JSON" | jq -c .)")
+            args+=(--missing-pages-file "$missing_page_paths_file")
+            args+=(--known-missing-pages-file "$known_missing_page_paths_file")
             if [ "$REMOVE_STALE_CANTON_RSS_FEEDS" = "true" ]; then
               args+=(--remove-stale-canton-rss-feeds)
             fi

@@ -362,7 +362,11 @@ test('i fallback persistenti entrano in archivio e landing, e il dispatch identi
 test('il dispatch accetta una lista JSON e il workflow la passa al renderer batch', () => {
   assert.match(workflow, /article_ids:\s*\n\s+description: 'JSON array of article ids/);
   assert.match(workflow, /ARTICLE_IDS_INPUT: \$\{\{ inputs\.article_ids \}\}/);
-  assert.match(workflow, /--ids "\$ARTICLE_IDS_JSON"/);
+  assert.match(workflow, /article_ids_file="\$RUNNER_TEMP\/fast-article-ids\.json"/);
+  assert.match(workflow, /printf '%s' "\$ARTICLE_IDS_JSON" > "\$article_ids_file"/);
+  assert.match(workflow, /--ids-file "\$article_ids_file"/);
+  assert.doesNotMatch(workflow, /--ids "\$ARTICLE_IDS_JSON"/);
+  assert.match(publisher, /--ids-file/);
   assert.match(publisher, /renderSectionArticlePipeline\(\{[\s\S]*?ids: args\.ids,/);
   assert.match(pipeline, /onlyArticleIds: ids \}\)/);
 });

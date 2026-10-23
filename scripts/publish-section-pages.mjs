@@ -38,7 +38,7 @@
  *
  * Uso:
  *   npx -y tsx scripts/publish-section-pages.mjs --section canton-ti \
- *     (--bootstrap | --ids '["id1","id2"]' | --id <id> …) \
+ *     (--bootstrap | --ids '["id1","id2"]' | --ids-file <jsonPath> | --id <id> …) \
  *     --out <scratchDir> --summary <summary.json> [--publish | --dry-run]
  *   Senza id e senza --bootstrap rende solo landing, archivio e hub (un giro
  *   di rinfresco: un hub aggiornato, un articolo ritirato). Senza --publish
@@ -174,18 +174,29 @@ export function parseArgs(argv, { all = ARTICLE_SECTION_CORE_ALL, active = activ
     if (a === '--section') out.section = value();
     else if (a === '--previous-revision') out.previousRevision = value();
     else if (a === '--id') out.ids.push(value());
-    else if (a === '--ids') {
+    else if (a === '--ids' || a === '--ids-file') {
       let ids;
       try {
-        ids = JSON.parse(value());
+        const source = value();
+        ids = JSON.parse(a === '--ids-file' ? fs.readFileSync(source, 'utf8') : source);
       } catch (error) {
-        throw new Error(`--ids deve essere un array JSON di id: ${error.message}`);
+        throw new Error(`${a} deve contenere un array JSON di id: ${error.message}`);
       }
-      if (!Array.isArray(ids) || ids.some((id) => typeof id !== 'string' || !id)) throw new Error('--ids deve essere un array JSON di id non vuoti');
+      if (!Array.isArray(ids) || ids.some((id) => typeof id !== 'string' || !id)) throw new Error(`${a} deve contenere un array JSON di id non vuoti`);
       out.ids.push(...ids);
-    } else if (a === '--missing-pages' || a === '--known-missing-pages') {
-      const pages = parseCanonicalPagePaths(value(), a);
-      if (a === '--missing-pages') out.missingPages.push(...pages);
+    } else if (a === '--missing-pages' || a === '--known-missing-pages' || a === '--missing-pages-file' || a === '--known-missing-pages-file') {
+      const source = value();
+      let pagesSource = source;
+      if (a.endsWith('-file')) {
+        try {
+          pagesSource = fs.readFileSync(source, 'utf8');
+        } catch (error) {
+          throw new Error(`${a} non leggibile: ${error.message}`);
+        }
+      }
+      const pagesFlag = a.endsWith('-file') ? a.slice(0, -5) : a;
+      const pages = parseCanonicalPagePaths(pagesSource, pagesFlag);
+      if (pagesFlag === '--missing-pages') out.missingPages.push(...pages);
       else out.knownMissingPages.push(...pages);
     } else if (a === '--bootstrap') out.bootstrap = true;
     else if (a === '--remove-stale-canton-rss-feeds') out.removeStaleCantonRssFeeds = true;
