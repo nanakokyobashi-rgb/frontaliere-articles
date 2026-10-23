@@ -8594,6 +8594,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.sostenibilita-abitativa-svizzera.title': 'Vivre en Suisse : une personne sur 6 dépense plus d’un tiers de son revenu',
     'blog.article.sostenibilita-abitativa-svizzera.excerpt': 'Les 16% dépassent un tiers du revenu brut du ménage Les 22% des locataires dépassent le seuil de logement Les 7% des propriétaires dépassent la même limite Les 36%',
     'blog.article.sostenibilita-abitativa-svizzera.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lavoro-ridotto-normalizzazione-2027.title': 'Travail réduit : le Conseil fédéral prévoit un retour',
+    'blog.article.lavoro-ridotto-normalizzazione-2027.excerpt': 'Le Conseil fédéral entend normaliser progressivement l’ILR Durée maximale : 24 mois jusqu’au 31 janvier 2027 Croissance prévue : 1,7 % en 2026 et 1,6 % en 2027',
+    'blog.article.lavoro-ridotto-normalizzazione-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

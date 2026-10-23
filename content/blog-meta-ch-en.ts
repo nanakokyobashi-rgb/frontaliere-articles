@@ -8594,6 +8594,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.sostenibilita-abitativa-svizzera.title': 'Living in Switzerland: one in 6 spends more than a third of their income',
     'blog.article.sostenibilita-abitativa-svizzera.excerpt': 'The 16% exceeds one third of gross household income The 22% of tenants exceeds the housing threshold The 7% of homeowners exceeds the same limit The 36%',
     'blog.article.sostenibilita-abitativa-svizzera.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lavoro-ridotto-normalizzazione-2027.title': 'Short-time work: the Federal Council envisages a gradual return to normality',
+    'blog.article.lavoro-ridotto-normalizzazione-2027.excerpt': 'The Federal Council intends to gradually normalize the ILR Maximum duration: 24 months until January 31, 2027 Expected growth: 1,7% in 2026 and 1,6% in 2027',
+    'blog.article.lavoro-ridotto-normalizzazione-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

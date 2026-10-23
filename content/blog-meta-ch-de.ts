@@ -8594,6 +8594,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.sostenibilita-abitativa-svizzera.title': 'Wohnen in der Schweiz: 1 von 6 gibt über ein Drittel aus',
     'blog.article.sostenibilita-abitativa-svizzera.excerpt': '16% überschreiten ein Drittel des Bruttoeinkommens des Haushalts 22% der Mieter überschreiten die Wohnkostenschwelle 7% der Eigentümer überschreiten dieselbe Grenze 36%',
     'blog.article.sostenibilita-abitativa-svizzera.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lavoro-ridotto-normalizzazione-2027.title': 'Kurzarbeit: Der Bundesrat sieht eine schrittweise Rückkehr zur Normalität vor',
+    'blog.article.lavoro-ridotto-normalizzazione-2027.excerpt': 'Der Bundesrat beabsichtigt, die KAE schrittweise zu normalisieren Maximale Dauer: 24 Monate bis zum 31.',
+    'blog.article.lavoro-ridotto-normalizzazione-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

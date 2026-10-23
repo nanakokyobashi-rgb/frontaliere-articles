@@ -108597,6 +108597,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-lavoro-ridotto-normalizzazione-2027': {
+    title: 'Lavoro ridotto: il Consiglio federale prevede un graduale ritorno alla normalità',
+    description: 'Il Consiglio federale intende normalizzare gradualmente l’ILR Durata massima: 24 mesi fino al 31 gennaio 2027 Crescita prevista: 1,7% nel 2026 e 1,6%',
+    keywords: 'frontalieri, ticino, svizzera, italia, lavoro, ridotto, consiglio, federale',
+    ogTitle: 'Lavoro ridotto: normalizzazione ILR e scadenze 2027-2028',
+    ogDescription: 'Il Consiglio federale intende normalizzare gradualmente l’ILR Durata massima: 24 mesi fino al 31 gennaio 2027 Crescita prevista: 1,7% nel 2026 e 1,6% nel 2027',
+    canonicalPath: '/articoli-svizzera/lavoro-ridotto-normalizzazione-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lavoro ridotto: il Consiglio federale prevede un graduale ritorno alla normalità",
+      "description": "Il Consiglio federale intende normalizzare gradualmente l’ILR Durata massima: 24 mesi fino al 31 gennaio 2027 Crescita prevista: 1,7% nel 2026 e 1,6%",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-lavoro-ridotto-normalizzazione-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T01:06:23+00:00",
+      "dateModified": "2026-10-23T01:06:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/lavoro-ridotto-normalizzazione-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

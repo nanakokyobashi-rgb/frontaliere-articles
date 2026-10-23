@@ -2887,6 +2887,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'adeguamento-rendite-superstiti-invalidita-2027': { it: 'adeguamento-rendite-superstiti-invalidita-2027', en: 'adjustment-survivor-disability-pensions-2027', de: 'anpassung-hinterbliebenen-invalidenrenten-2027', fr: 'ajustement-rentes-survivants-invalides-2027' },
  'bns-cambi-energia': { it: 'bns-cambi-energia', en: 'snb-policy-rate-inflation', de: 'schweizer-nationalbank-inflation', fr: 'bns-taux-directeur-inflation' },
  'sostenibilita-abitativa-svizzera': { it: 'sostenibilita-abitativa-svizzera', en: 'housing-affordability-switzerland', de: 'wohnbaukosten-schweiz', fr: 'cout-logement-suisse' },
+ 'lavoro-ridotto-normalizzazione-2027': { it: 'lavoro-ridotto-normalizzazione-2027', en: 'short-time-work-normalization-2027', de: 'kurzarbeit-normalisierung-2027', fr: 'travail-reduit-normalisation-2027' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

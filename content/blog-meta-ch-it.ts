@@ -8594,6 +8594,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.sostenibilita-abitativa-svizzera.title': 'Abitare in Svizzera: uno su 6 spende oltre un terzo del reddito',
     'blog.article.sostenibilita-abitativa-svizzera.excerpt': 'Il 16% supera un terzo del reddito lordo familiare Il 22% degli inquilini supera la soglia abitativa Il 7% dei proprietari supera lo stesso limite Il 36%',
     'blog.article.sostenibilita-abitativa-svizzera.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lavoro-ridotto-normalizzazione-2027.title': 'Lavoro ridotto: il Consiglio federale prevede un graduale ritorno alla normalità',
+    'blog.article.lavoro-ridotto-normalizzazione-2027.excerpt': 'Il Consiglio federale intende normalizzare gradualmente l’ILR Durata massima: 24 mesi fino al 31 gennaio 2027 Crescita prevista: 1,7% nel 2026 e 1,6% nel 2027',
+    'blog.article.lavoro-ridotto-normalizzazione-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;
