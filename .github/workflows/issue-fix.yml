@@ -232,6 +232,16 @@ jobs:
         run: |
           set -uo pipefail
           write_output() { printf '%s\n' "$1" >> "$GITHUB_OUTPUT"; }
+          runtime_pat="${GITHUB_PAT_NANAKO:-}"
+          if [ -z "$runtime_pat" ]; then
+            echo "::warning::GITHUB_PAT_NANAKO non disponibile: set identical trusted non verificabile, retryable."
+            write_output "available=false"
+            exit 0
+          fi
+          # The installation token exhausted the shared REST bucket in #1881.
+          # Use the operational PAT loaded from Remote Config for this read and
+          # never silently fall back to GITHUB_TOKEN when the PAT is absent.
+          export GH_TOKEN="$runtime_pat"
           if ! trusted_sha=$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha') \
             || ! printf '%s' "$trusted_sha" | grep -qE '^[a-f0-9]{40}$'; then
             echo "::warning::Manifest/helper identical non leggibili da main: nessun agente in questo run, retryable."

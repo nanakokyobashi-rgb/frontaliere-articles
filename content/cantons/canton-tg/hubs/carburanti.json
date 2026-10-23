@@ -4,14 +4,14 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "ac76bb12aa97a35c5067599e656d1a68703ad6312fa9a5e250ff37af9b899b9b",
+  "updatedAt": "2026-10-23T03:39:45.076Z",
+  "contentHash": "a2b8a66e996e408bcf7f3f548609f592963dae7be63b8d5e779705c11f5444db",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-21T12:19:56.872Z",
+      "updatedAt": "2026-10-22T12:21:38.892Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-28T12:19:56.872Z"
+      "carryUntilAt": "2026-10-29T12:21:38.892Z"
     }
   ],
   "locales": {
@@ -54,23 +54,35 @@
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "2,236 EUR/l",
-              "detail": "media regionale: minimo 2,229 EUR/l, 3 stazioni rilevate",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2,226 EUR/l",
+              "detail": "media regionale: minimo 2,219 EUR/l, 3 stazioni rilevate",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,426 EUR/l",
-              "detail": "media regionale: minimo 2,419 EUR/l, 3 stazioni rilevate",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2,336 EUR/l",
+              "detail": "media regionale: minimo 2,329 EUR/l, 3 stazioni rilevate",
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Turgovia: modifica piano direttore per sedi economiche",
+          "url": "/articoli-turgovia/turgovia-modifica-piano-direttore-2027/",
+          "excerpt": "Il Canton Turgovia avvia la consultazione sulla revisione del piano direttore per lo sviluppo di commercio e industria.",
+          "date": "2026-10-23T03:27:25.835Z"
+        },
+        {
+          "title": "Turgovia: approvata PBV revisionata per RPG2",
+          "url": "/articoli-turgovia/pbv-rpg2-turgovia-2026/",
+          "excerpt": "Il Governo ha approvato la PBV revisionata RPG2 riguarda le costruzioni fuori dalle zone edificabili L'obiettivo è limitare la crescita a un massimo del 2%",
+          "date": "2026-10-23T01:44:38.536Z"
+        },
         {
           "title": "Turgovia: servizi di ricerca personale e tutela lari",
           "url": "/articoli-turgovia/turgovia-servizi-datori-lavoro/",
@@ -88,18 +100,6 @@
           "url": "/articoli-turgovia/felben-wellhausen-cantiere/",
           "excerpt": "Dal 19 ottobre 2026 a metà luglio 2027, la Hauptstrasse di Felben-Wellhausen sarà risanata: Römerstrasse chiusa a tratti, Römerhof spostata o soppressa.",
           "date": "2026-10-18T03:25:32.644Z"
-        },
-        {
-          "title": "Eventi del weekend in Turgovia: cosa fare sabato e domenica",
-          "url": "/articoli-turgovia/eventi-weekend-turgovia/",
-          "excerpt": "Eventi in Turgovia ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
-          "date": "2026-10-17T11:31:41.357Z"
-        },
-        {
-          "title": "13ª rendita AVS pagata con la pensione di dicembre 2026",
-          "url": "/articoli-turgovia/tredicesima-rendita-avs-2026/",
-          "excerpt": "La 13ª rendita AVS arriva con la rendita di dicembre 2026 Non serve presentare domande o svolgere pratiche Spetta a chi riceve una rendita AVS di vecchiaia",
-          "date": "2026-10-17T09:16:03.959Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-23T03:39:45.076Z"
     },
     "en": {
       "canton": "TG",
@@ -153,23 +153,35 @@
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "2.236 EUR/l",
-              "detail": "regional average: lowest 2.229 EUR/l, 3 stations surveyed",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2.226 EUR/l",
+              "detail": "regional average: lowest 2.219 EUR/l, 3 stations surveyed",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.426 EUR/l",
-              "detail": "regional average: lowest 2.419 EUR/l, 3 stations surveyed",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2.336 EUR/l",
+              "detail": "regional average: lowest 2.329 EUR/l, 3 stations surveyed",
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Thurgau: amendment to the structure plan for business locations",
+          "url": "/en/thurgau-articles/thurgau-master-plan-revision-2027/",
+          "excerpt": "The Canton of Thurgau launches the consultation on the revision of the structure plan for the development of commerce and industry.",
+          "date": "2026-10-23T03:27:25.835Z"
+        },
+        {
+          "title": "Thurgau: revised PBV approved for RPG2",
+          "url": "/en/thurgau-articles/pbv-rpg2-thurgau-2026/",
+          "excerpt": "The Government approved the revised PBV RPG2 concerns construction outside building zones The objective is to limit growth to a maximum of 2% The PBV brings",
+          "date": "2026-10-23T01:44:38.536Z"
+        },
         {
           "title": "Thurgau: personnel search and lari protection services",
           "url": "/en/thurgau-articles/thurgau-services-employers/",
@@ -187,18 +199,6 @@
           "url": "/en/thurgau-articles/felben-wellhausen-road-works/",
           "excerpt": "From October 19, 2026 to mid-July 2027, Felben-Wellhausen’s Hauptstrasse will be renovated: Römerstrasse closed in sections, Römerhof relocated or discontinued.",
           "date": "2026-10-18T03:25:32.644Z"
-        },
-        {
-          "title": "Weekend events in Thurgau: what to do Saturday & Sunday",
-          "url": "/en/thurgau-articles/weekend-events-thurgau/",
-          "excerpt": "Events in Thurgau every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
-          "date": "2026-10-17T11:31:41.357Z"
-        },
-        {
-          "title": "13th AVS pension paid with the December 2026 pension",
-          "url": "/en/thurgau-articles/thirteenth-ahv-pension-2026/",
-          "excerpt": "The 13th AHV pension is paid with the December 2026 pension No applications or formalities are required It is due to anyone receiving an AHV old-age pension",
-          "date": "2026-10-17T09:16:03.959Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-23T03:39:45.076Z"
     },
     "de": {
       "canton": "TG",
@@ -252,23 +252,35 @@
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "2.236 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.229 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2.226 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.219 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.426 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.419 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2.336 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.329 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Thurgau: Änderung des Richtplans für Wirtschaftsstandorte",
+          "url": "/de/thurgau-artikel/thurgau-richtplan-aenderung-2027/",
+          "excerpt": "Der Kanton Thurgau eröffnet die Vernehmlassung zur Überarbeitung des Richtplans für die Entwicklung von Handel und Industrie.",
+          "date": "2026-10-23T03:27:25.835Z"
+        },
+        {
+          "title": "Thurgau: Revidierte PBV für RPG2 genehmigt",
+          "url": "/de/thurgau-artikel/pbv-rpg2-thurgau-2026/",
+          "excerpt": "Die Regierung hat die revidierte PBV genehmigt RPG2 betrifft Bauten ausserhalb der Bauzonen Ziel ist, das Wachstum auf maximal 2 % zu begrenzen Die PBV fasst",
+          "date": "2026-10-23T01:44:38.536Z"
+        },
         {
           "title": "Thurgau: Dienstleistungen für die Personalsuche und Schutz lari",
           "url": "/de/thurgau-artikel/thurgau-dienstleistungen-arbeitgeber/",
@@ -286,18 +298,6 @@
           "url": "/de/thurgau-artikel/felben-wellhausen-hauptstrasse-sanierung/",
           "excerpt": "Vom 19. Oktober 2026 bis Mitte Juli 2027 wird die Hauptstrasse in Felben-Wellhausen saniert: Die Römerstrasse wird abschnittsweise gesperrt, die Haltestelle Römerhof verlegt oder aufgehoben.",
           "date": "2026-10-18T03:25:32.644Z"
-        },
-        {
-          "title": "Veranstaltungen am Wochenende im Thurgau: was tun Sa & So",
-          "url": "/de/thurgau-artikel/wochenend-veranstaltungen-thurgau/",
-          "excerpt": "Veranstaltungen im Thurgau an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
-          "date": "2026-10-17T11:31:41.357Z"
-        },
-        {
-          "title": "13 ① AHV-Rente mit Rente vom Dezember 2026 bezahlt",
-          "url": "/de/thurgau-artikel/dreizehnte-ahv-rente-2026/",
-          "excerpt": "Die 13. AHV-Rente wird zusammen mit der Dezemberrente 2026 ausbezahlt Es ist nicht nötig, einen Antrag zu stellen oder Formalitäten zu erledigen Begünstigt sind",
-          "date": "2026-10-17T09:16:03.959Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-23T03:39:45.076Z"
     },
     "fr": {
       "canton": "TG",
@@ -351,23 +351,35 @@
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "2,236 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,229 EUR/l, 3 stations relevées",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2,226 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,219 EUR/l, 3 stations relevées",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,426 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,419 EUR/l, 3 stations relevées",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2,336 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,329 EUR/l, 3 stations relevées",
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Thurgovie : modification du plan directeur pour des sites économiques",
+          "url": "/fr/articles-thurgovie/thurgovie-revision-plan-directeur-2027/",
+          "excerpt": "Le canton de Thurgovie lance la consultation sur la révision du plan directeur pour le développement du commerce et de l’industrie.",
+          "date": "2026-10-23T03:27:25.835Z"
+        },
+        {
+          "title": "Thurgovie : PBV révisée approuvée pour RPG2",
+          "url": "/fr/articles-thurgovie/pbv-rpg2-thurgovie-2026/",
+          "excerpt": "Le Gouvernement a approuvé la PBV révisée RPG2 concerne les constructions hors des zones à bâtir L’objectif est de limiter la croissance à un maximum de 2%",
+          "date": "2026-10-23T01:44:38.536Z"
+        },
         {
           "title": "Thurgovie : services de recherche de personnel et protection lari",
           "url": "/fr/articles-thurgovie/thurgovie-services-employeurs/",
@@ -385,18 +397,6 @@
           "url": "/fr/articles-thurgovie/felben-wellhausen-travaux-route/",
           "excerpt": "Du 19 octobre 2026 à la mi-juillet 2027, la Hauptstrasse de Felben-Wellhausen sera assainie : Römerstrasse fermée par tronçons, Römerhof déplacé ou supprimé.",
           "date": "2026-10-18T03:25:32.644Z"
-        },
-        {
-          "title": "Événements du week-end en Thurgovie : que faire samedi & dimanche",
-          "url": "/fr/articles-thurgovie/evenements-week-end-thurgovie/",
-          "excerpt": "Événements en Thurgovie chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
-          "date": "2026-10-17T11:31:41.357Z"
-        },
-        {
-          "title": "13e rente AVS versée avec la rente de décembre 2026",
-          "url": "/fr/articles-thurgovie/treizieme-rente-avs-2026/",
-          "excerpt": "La 13e rente AVS est versée avec la rente de décembre 2026 Il n’est pas nécessaire de présenter une demande ou d’effectuer des démarches Elle est due",
-          "date": "2026-10-17T09:16:03.959Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-23T03:39:45.076Z"
     }
   }
 }

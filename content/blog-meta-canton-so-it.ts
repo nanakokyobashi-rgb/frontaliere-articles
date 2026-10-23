@@ -33,6 +33,12 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.a1-lavori-notturni-luterbach.title': 'A1 Wangen–Luterbach: lavori notturni fino a metà dicembre',
     'blog.article.a1-lavori-notturni-luterbach.excerpt': 'Dal 25 ottobre 2026, lavori notturni estesi sull\'A1 tra Wangen an der Aare e Luterbach: la gestione del traffico sarà modificata fino a metà dicembre.',
     'blog.article.a1-lavori-notturni-luterbach.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.cambio-ora-incidenti-stradali-soletta.title': 'Cambio d\'ora e rischio incidenti stradali nel Canton Soletta',
+    'blog.article.cambio-ora-incidenti-stradali-soletta.excerpt': '24-25 ottobre 2026: orologi indietro di un\'ora Il traffico del mattino coincide con il crepuscolo Caprioli, cervi nobili e cinghiali sono attivi presto',
+    'blog.article.cambio-ora-incidenti-stradali-soletta.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.polizia-soletta-comunicazione-media-droni.title': 'Polizia Soletta: comunicazione 365 giorni e divieto droni 300 m',
+    'blog.article.polizia-soletta-comunicazione-media-droni.excerpt': 'Il servizio media opera 365 giorni all\'anno Il team gestisce X, Facebook e Instagram Nei grandi eventi un membro è presente sul posto Il divieto di droni vale',
+    'blog.article.polizia-soletta-comunicazione-media-droni.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;

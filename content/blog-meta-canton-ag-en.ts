@@ -54,6 +54,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.dashboard-mobilita-aarau.title': 'Aarau creates a dashboard on shared mobility',
     'blog.article.dashboard-mobilita-aarau.excerpt': 'Aarau brings together around 300 shared vehicles from five operators in a dashboard: 27.000 trips in the last year, 38% more.',
     'blog.article.dashboard-mobilita-aarau.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sbb-chiude-reisezentrum-doettingen.title': 'SBB close in Döttingen: the district’s last travel center',
+    'blog.article.sbb-chiude-reisezentrum-doettingen.excerpt': 'SBB are closing the district’s last travel centre in Döttingen.',
+    'blog.article.sbb-chiude-reisezentrum-doettingen.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAgEn;

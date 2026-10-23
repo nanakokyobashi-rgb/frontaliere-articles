@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T22:21:57.960Z",
-  "contentHash": "a93c7c1195200db3c6e09e8a7848c3ca1f2124c63afd540adb99e834c11f8223",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "39fa180ce543779c02a43a5126c69979f8c3a348d8068fd6ea6078ebc2d38ebd",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T11:13:26.127Z",
+      "updatedAt": "2026-10-22T19:30:03.925Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "216",
+          "value": "207",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Carlo Agostino Meletta - pittore",
-              "detail": "Museo Onsernonese, Locarno",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/63364"
+              "label": "Buffalo Kids",
+              "detail": "Cinema GranRex, Locarno",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64395"
             },
             {
-              "label": "Corpi in prestito",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/58243"
+              "label": "Mattia Polli - Vent'anni di scultura",
+              "detail": "Galleria Vecchia Posta, Brusino Arsizio",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64143"
             },
             {
-              "label": "Fra Roberto tra le mura",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/61525"
+              "label": "Mirabiblia",
+              "detail": "Biblioteca cantonale, Bellinzona",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/63536"
             },
             {
-              "label": "Fuori di Zucca, il villaggio delle zucche",
-              "detail": "Fuori di Zucca, Savosa",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/64302"
+              "label": "Lugano's Plan ₿ Forum 2026",
+              "detail": "Lugano Convention & Exhibition, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/luganos-plan-forum-2026/"
             },
             {
-              "label": "Gyotaku - Tracce di pesci",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/61721"
+              "label": "Nervape CAMP @ Lugano's Plan ₿ Forum",
+              "detail": "Villa Ciani, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64569"
             },
             {
-              "label": "Impressioni - Mostra di pittura di Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/64414"
+              "label": "L'épistolière",
+              "detail": "Centro Elisarion, Minusio",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/63970"
             },
             {
-              "label": "Ivo Soldini - Progetto Castel Grande",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/62822"
+              "label": "Reloved PopUp",
+              "detail": "Hotel Splendide Royal, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64661"
             },
             {
-              "label": "Jannis Kounellis: Io sono un pittore",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/63037"
+              "label": "BLA Biennale - Le latitudini dell'arte",
+              "detail": "Villa Santa Lucia, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/63945"
             },
             {
-              "label": "Mona Caron - La resilienza della vita",
-              "detail": "Museo Centovalli e Pedemonte, Centovalli",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/63363"
+              "label": "Ticino. Sguardi laterali",
+              "detail": "SpazioReale, Bellinzona",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64633"
             },
             {
-              "label": "Pierrette Bloch. Il gesto di scrivere",
-              "detail": "Museo Villa dei Cedri, Bellinzona",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/64342"
+              "label": "Boolean Mereology",
+              "detail": "Aula Multiuso, Facoltà di Teologia di Lugano, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64332"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "216",
+          "value": "207",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,69 +184,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Carlo Agostino Meletta - painter",
-              "detail": "Museo Onsernonese, Locarno",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/63364"
+              "label": "Buffalo Kids",
+              "detail": "Cinema GranRex, Locarno",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64395"
             },
             {
-              "label": "Borrowed bodies",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/58243"
+              "label": "Mattia Polli - Twentyyears of sculpture",
+              "detail": "Galleria Vecchia Posta, Brusino Arsizio",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64143"
             },
             {
-              "label": "Fra Roberto fra le mura",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/61525"
+              "label": "Mirabiblia",
+              "detail": "Biblioteca cantonale, Bellinzona",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/63536"
             },
             {
-              "label": "Outside of Zucca, the village of pumpkins",
-              "detail": "Fuori di Zucca, Savosa",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/64302"
+              "label": "Lugano's Plan ₿ Forum 2026",
+              "detail": "Lugano Convention & Exhibition, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/luganos-plan-forum-2026/"
             },
             {
-              "label": "Gyotaku - Fish Trails",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/61721"
+              "label": "Nervape CAMP @ Lugano's Plan ₿",
+              "detail": "Villa Ciani, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64569"
             },
             {
-              "label": "Impressions - Painting exhibition by Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/64414"
+              "label": "L 'épistolière",
+              "detail": "Centro Elisarion, Minusio",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/63970"
             },
             {
-              "label": "Ivo Soldini - Castel Grande Project",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/62822"
+              "label": "Reloved PopUp",
+              "detail": "Hotel Splendide Royal, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64661"
             },
             {
-              "label": "Jannis Kounellis: I am a painter",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/63037"
+              "label": "BLA Biennale - The latitudes of art",
+              "detail": "Villa Santa Lucia, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/63945"
             },
             {
-              "label": "Mona Caron - The Resilience of Life",
-              "detail": "Museo Centovalli e Pedemonte, Centovalli",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/63363"
+              "label": "Ticino. Side glances",
+              "detail": "SpazioReale, Bellinzona",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64633"
             },
             {
-              "label": "Pierrette Bloch. The gesture of writing",
-              "detail": "Museo Villa dei Cedri, Bellinzona",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/64342"
+              "label": "Boolean Mereology",
+              "detail": "Aula Multiuso, Facoltà di Teologia di Lugano, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64332"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "216",
+          "value": "207",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,69 +335,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Carlo Agostino Meletta - Maler",
-              "detail": "Museo Onsernonese, Locarno",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/63364"
+              "label": "Büffel-Kinder",
+              "detail": "Cinema GranRex, Locarno",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64395"
             },
             {
-              "label": "Leihkörper",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/58243"
+              "label": "Mattia Polli - 20Jahre Bildhauerei",
+              "detail": "Galleria Vecchia Posta, Brusino Arsizio",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64143"
             },
             {
-              "label": "Fra Roberto zwischen den Mauern",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/61525"
+              "label": "Mirabiblia",
+              "detail": "Biblioteca cantonale, Bellinzona",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/63536"
             },
             {
-              "label": "Außerhalb von Zucca, dem Dorf der Kürbisse",
-              "detail": "Fuori di Zucca, Savosa",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/64302"
+              "label": "Lugano's Plan ₿ Forum 2026",
+              "detail": "Lugano Convention & Exhibition, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/luganos-plan-forum-2026/"
             },
             {
-              "label": "Gyotaku - Spuren von Fischen",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/61721"
+              "label": "Nervape CAMP @ Luganos Plan ₿ Forum",
+              "detail": "Villa Ciani, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64569"
             },
             {
-              "label": "Impressionen - Gemäldeausstellung von Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/64414"
+              "label": "L 'épistolière",
+              "detail": "Centro Elisarion, Minusio",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/63970"
             },
             {
-              "label": "Ivo Soldini - Projekt Castel Grande",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/62822"
+              "label": "Wiedergeliebtes PopUp",
+              "detail": "Hotel Splendide Royal, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64661"
             },
             {
-              "label": "Jannis Kounellis: Ich bin Maler",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/63037"
+              "label": "BLA Biennale - Die Breitengrade der Kunst",
+              "detail": "Villa Santa Lucia, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/63945"
             },
             {
-              "label": "Mona Caron - Die Belastbarkeit des Lebens",
-              "detail": "Museo Centovalli e Pedemonte, Centovalli",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/63363"
+              "label": "Tessin. Seitliche Blicke",
+              "detail": "SpazioReale, Bellinzona",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64633"
             },
             {
-              "label": "Pierrette Bloch. Die Geste des Schreibens",
-              "detail": "Museo Villa dei Cedri, Bellinzona",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/64342"
+              "label": "Boolesche Mereologie",
+              "detail": "Aula Multiuso, Facoltà di Teologia di Lugano, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64332"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "216",
+          "value": "207",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,69 +486,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Carlo Agostino Meletta - peintre",
-              "detail": "Museo Onsernonese, Locarno",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/63364"
+              "label": "Enfants de buffle",
+              "detail": "Cinema GranRex, Locarno",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64395"
             },
             {
-              "label": "Corps prêtés",
-              "detail": "Associazione per l’assistenza e la cura a domicilio Maggio, Lugano",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/58243"
+              "label": "Mattia Polli - Vingtans de sculpture",
+              "detail": "Galleria Vecchia Posta, Brusino Arsizio",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64143"
             },
             {
-              "label": "Frère Roberto entre les murs",
-              "detail": "Sasso Corbaro, Bellinzona",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/61525"
+              "label": "Mirabiblia",
+              "detail": "Biblioteca cantonale, Bellinzona",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/63536"
             },
             {
-              "label": "En dehors de Zucca, le village des citrouilles",
-              "detail": "Fuori di Zucca, Savosa",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/64302"
+              "label": "Lugano's Plan ₿ Forum 2026",
+              "detail": "Lugano Convention & Exhibition, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/luganos-plan-forum-2026/"
             },
             {
-              "label": "Gyotaku - Traces de poissons",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/61721"
+              "label": "Nervape CAMP @ Le plan de Lugano ₿ Forum",
+              "detail": "Villa Ciani, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64569"
             },
             {
-              "label": "Impressions - Exposition de peinture de Sisko Naerhi",
-              "detail": "Residenza Rivabella, Magliaso",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/64414"
+              "label": "L’épistolière",
+              "detail": "Centro Elisarion, Minusio",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/63970"
             },
             {
-              "label": "Ivo Soldini - Projet Castel Grande",
-              "detail": "Castel Grande, Bellinzona",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/62822"
+              "label": "PopUp readoré",
+              "detail": "Hotel Splendide Royal, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64661"
             },
             {
-              "label": "Jannis Kounellis : Je suis un peintre",
-              "detail": "Collezione Giancarlo e Danna Olgiati, Lugano",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/63037"
+              "label": "BLA Biennale - Les latitudes de l'art",
+              "detail": "Villa Santa Lucia, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/63945"
             },
             {
-              "label": "Mona Caron - La résilience de la vie",
-              "detail": "Museo Centovalli e Pedemonte, Centovalli",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/63363"
+              "label": "Tessin. Regards latéraux",
+              "detail": "SpazioReale, Bellinzona",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64633"
             },
             {
-              "label": "Pierrette Bloch. Le geste d'écrire",
-              "detail": "Museo Villa dei Cedri, Bellinzona",
-              "date": "2026-10-22",
-              "url": "https://www.tio.ch/agenda/day/20261022/64342"
+              "label": "Mérologie booléenne",
+              "detail": "Aula Multiuso, Facoltà di Teologia di Lugano, Lugano",
+              "date": "2026-10-23",
+              "url": "https://www.tio.ch/agenda/day/20261023/64332"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

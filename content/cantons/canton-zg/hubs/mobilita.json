@@ -4,17 +4,17 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-22T13:56:44.136Z",
-  "contentHash": "793d9cc895ac85aad036bc836056720354d3c3082dfaebe5e963d683f6bc9871",
+  "updatedAt": "2026-10-23T05:52:42.601Z",
+  "contentHash": "4b35ee998703e300ccb2e4cc38e067b88b77f7e47afc4b951cc11b6f22772882",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-22T05:28:12.116Z",
+      "updatedAt": "2026-10-22T21:58:34.031Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T20:56:46.769Z",
+      "updatedAt": "2026-10-22T20:51:18.236Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "4",
+          "value": "5",
           "note": "segnalazioni aggiornate: 22 ottobre 2026"
         }
       ],
@@ -83,10 +83,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 11 novembre 2026",
               "date": "2026-10-21T11:45:00.000Z"
+            },
+            {
+              "label": "A4 Brunnen <-> Zürich tra Svincolo autostradale Cham E Svincolo autostradale Rotkreuz Situazione: problemi di traffico cantiere, lunghezza [km] 1.3",
+              "value": "Cantiere",
+              "detail": "fine prevista: 29 ottobre 2026",
+              "date": "2026-10-22T07:40:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -114,7 +120,7 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -178,7 +184,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "en": {
       "canton": "ZG",
@@ -193,7 +199,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "4",
+          "value": "5",
           "note": "reports as of 22 October 2026"
         }
       ],
@@ -244,10 +250,16 @@
               "value": "Roadworks",
               "detail": "until 11 November 2026",
               "date": "2026-10-21T11:45:00.000Z"
+            },
+            {
+              "label": "A4 Brunnen <-> Zürich tra Svincolo autostradale Cham E Svincolo autostradale Rotkreuz Situazione: problemi di traffico cantiere, lunghezza [km] 1.3",
+              "value": "Roadworks",
+              "detail": "until 29 October 2026",
+              "date": "2026-10-22T07:40:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -275,7 +287,7 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -339,7 +351,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "de": {
       "canton": "ZG",
@@ -354,7 +366,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "4",
+          "value": "5",
           "note": "Meldungen vom 22. Oktober 2026"
         }
       ],
@@ -405,10 +417,16 @@
               "value": "Baustelle",
               "detail": "bis 11. November 2026",
               "date": "2026-10-21T11:45:00.000Z"
+            },
+            {
+              "label": "A4 Brunnen <-> Zürich zwischen Anschluss Cham und Anschluss Rotkreuz Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.3",
+              "value": "Baustelle",
+              "detail": "bis 29. Oktober 2026",
+              "date": "2026-10-22T07:40:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -436,7 +454,7 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -500,7 +518,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "fr": {
       "canton": "ZG",
@@ -515,7 +533,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "4",
+          "value": "5",
           "note": "signalements au 22 octobre 2026"
         }
       ],
@@ -566,10 +584,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 11 novembre 2026",
               "date": "2026-10-21T11:45:00.000Z"
+            },
+            {
+              "label": "A4 Brunnen <-> Zurich entre Jonction autoroutière Cham et Jonction autoroutière Rotkreuz Situation: trafic perturbé travaux, longueur [km] 1.3",
+              "value": "Chantier",
+              "detail": "jusqu’au 29 octobre 2026",
+              "date": "2026-10-22T07:40:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -597,7 +621,7 @@
               "url": "https://www.zvb.ch/unternehmen/zvb-news/detail/zvb-schlaegt-ein-neues-kapitel-auf-spatenstich-zum-bauprojekt-areal-an-der-aa/"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -661,7 +685,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     }
   }
 }

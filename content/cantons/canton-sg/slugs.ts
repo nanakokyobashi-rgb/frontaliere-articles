@@ -15,6 +15,9 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'voto-bahnhofplatz-wil-2026': { it: 'voto-bahnhofplatz-wil-2026', en: 'wil-bahnhofplatz-vote-2026', de: 'abstimmung-bahnhofplatz-wil-2026', fr: 'vote-bahnhofplatz-wil-2026' },
  'status-s-san-gallo-assistenza': { it: 'status-s-san-gallo-assistenza', en: 'status-s-st-gallen-assistance', de: 'status-s-st-gallen-unterstuetzung', fr: 'statut-s-saint-gall-assistance' },
  'voto-rete-gas-wil-2026': { it: 'voto-rete-gas-wil-2026', en: 'gas-network-vote-wil-2026', de: 'gasnetz-abstimmung-wil-2026', fr: 'vote-reseau-gaz-wil-2026' },
+ 'sbb-sportelli-st-margrethen-uznach': { it: 'sbb-sportelli-st-margrethen-uznach', en: 'sbb-ticket-counters-st-margrethen-uznach', de: 'sbb-schalter-st-margrethen-uznach', fr: 'guichets-sbb-st-margrethen-uznach' },
+ 'san-gallo-protezione-infrastrutture-critiche': { it: 'san-gallo-protezione-infrastrutture-critiche', en: 'st-gallen-critical-infrastructure-protection', de: 'st-gallen-schutz-kritischer-infrastrukturen', fr: 'saint-gall-protection-infrastructures-critiques' },
+ 'san-gallo-autostrada-rosenberg-terza-canna': { it: 'san-gallo-autostrada-rosenberg-terza-canna', en: 'st-gallen-highway-rosenberg-third-tube', de: 'st-gallen-autobahn-rosenberg-dritte-roehre', fr: 'saint-gall-autoroute-rosenberg-troisieme-tube' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

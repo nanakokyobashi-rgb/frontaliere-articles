@@ -150,6 +150,14 @@ export const CDN_ASSET_CHECK_TIMEOUT_MS = 8_000;
 export const CDN_ASSET_CHECK_BUDGET_MS = 30_000;
 
 /**
+ * Un 5xx dal CDN e' una risposta transitoria dell'infrastruttura, non una
+ * prova che l'oggetto manchi. Ritenta con un backoff bounded prima di lasciare
+ * il risultato `unknown`; il budget del singolo asset resta il limite duro.
+ */
+export const CDN_ASSET_CHECK_MAX_ATTEMPTS = 5;
+export const CDN_ASSET_CHECK_RETRY_DELAY_MS = 500;
+
+/**
  * Millisecondi concessi alla PROSSIMA richiesta, o 0 se non ne restano.
  *
  * Pura e esportata perche' e' l'invariante che la issue #1219 chiedeva: nessuna
@@ -182,6 +190,8 @@ export function nextRequestTimeoutMs({ budgetRemainingMs, urlRemainingMs }) {
  * @param {number} [a.timeoutMs]        timeout per ASSET (condiviso da HEAD e fallback GET)
  * @param {number} [a.maxUrls]          tetto sul numero di URL verificati
  * @param {number} [a.budgetMs]         tetto sul tempo complessivo della verifica
+ * @param {number} [a.maxAttempts]      tentativi per risposta HTTP 5xx
+ * @param {number} [a.retryDelayMs]      base del backoff esponenziale sui 5xx
  * @param {() => number} [a.now]        orologio iniettabile per i test
  * @param {(ms: number) => AbortSignal} [a.makeSignal] fabbrica del signal, iniettabile per i test
  * @returns {Promise<Array<{url: string, state: 'present'|'missing'|'unknown'|'skipped', status: number|null, error: string|null}>>}
@@ -192,12 +202,16 @@ export async function verifyCdnAssetRefs({
   timeoutMs = CDN_ASSET_CHECK_TIMEOUT_MS,
   maxUrls = CDN_ASSET_CHECK_MAX_URLS,
   budgetMs = CDN_ASSET_CHECK_BUDGET_MS,
+  maxAttempts = CDN_ASSET_CHECK_MAX_ATTEMPTS,
+  retryDelayMs = CDN_ASSET_CHECK_RETRY_DELAY_MS,
   now = Date.now,
   makeSignal = (ms) => AbortSignal.timeout(ms),
 }) {
   const results = [];
   const startedAt = now();
   const budgetLeft = () => budgetMs - (now() - startedAt);
+  const attemptsLimit = Number.isFinite(maxAttempts) ? Math.max(1, Math.floor(maxAttempts)) : 1;
+  const retryDelayBaseMs = Number.isFinite(retryDelayMs) ? Math.max(0, retryDelayMs) : 0;
   let checked = 0;
   for (const url of urls) {
     if (checked >= maxUrls) {
@@ -220,52 +234,69 @@ export async function verifyCdnAssetRefs({
       });
     let res = null;
     try {
-      const headTimeout = nextTimeout();
-      if (headTimeout === 0) {
-        results.push({
-          url,
-          state: 'skipped',
-          status: null,
-          error: `nessun millisecondo intero residuo per la HEAD ` +
-            `(budget di ${budgetMs}ms, timeout di ${timeoutMs}ms per asset)`,
-        });
-        continue;
-      }
-      res = await fetchWithRefTimeout(
-        url,
-        { method: 'HEAD', redirect: 'follow', signal: makeSignal(headTimeout) },
-        headTimeout,
-        fetchImpl,
-      );
-      // Alcune origin non implementano HEAD (405/501): la domanda è
-      // sull'esistenza dell'oggetto, non sul metodo, quindi si ripiega su GET
-      // invece di registrare un falso `missing`.
-      if (res.status === 405 || res.status === 501) {
-        const headStatus = res.status;
-        // HEAD is status-only. Release its referenced deadline and body before
-        // starting the fallback so the shared asset budget covers both hops.
-        releaseFetchWithRefTimeout(res);
-        res = null;
-        const getTimeout = nextTimeout();
-        if (getTimeout === 0) {
-          // Senza il GET l'esistenza resta indecisa: dirlo `unknown` la
-          // farebbe leggere come rumore di rete, ed e' invece tempo finito.
+      let skipped = false;
+      for (let attemptNumber = 1; attemptNumber <= attemptsLimit; attemptNumber += 1) {
+        const headTimeout = nextTimeout();
+        if (headTimeout === 0) {
           results.push({
             url,
             state: 'skipped',
-            status: headStatus,
-            error: `HEAD ${headStatus} e nessun tempo residuo per il fallback GET ` +
+            status: null,
+            error: `nessun millisecondo intero residuo per la HEAD ` +
               `(budget di ${budgetMs}ms, timeout di ${timeoutMs}ms per asset)`,
           });
-          continue;
+          res = null;
+          skipped = true;
+          break;
         }
         res = await fetchWithRefTimeout(
           url,
-          { method: 'GET', redirect: 'follow', signal: makeSignal(getTimeout) },
-          getTimeout,
+          { method: 'HEAD', redirect: 'follow', signal: makeSignal(headTimeout) },
+          headTimeout,
           fetchImpl,
         );
+        // Alcune origin non implementano HEAD (405/501): la domanda è
+        // sull'esistenza dell'oggetto, non sul metodo, quindi si ripiega su GET
+        // invece di registrare un falso `missing`.
+        if (res.status === 405 || res.status === 501) {
+          const headStatus = res.status;
+          // HEAD is status-only. Release its referenced deadline and body before
+          // starting the fallback so the shared asset budget covers both hops.
+          releaseFetchWithRefTimeout(res);
+          res = null;
+          const getTimeout = nextTimeout();
+          if (getTimeout === 0) {
+            // Senza il GET l'esistenza resta indecisa: dirlo `unknown` la
+            // farebbe leggere come rumore di rete, ed e' invece tempo finito.
+            results.push({
+              url,
+              state: 'skipped',
+              status: headStatus,
+              error: `HEAD ${headStatus} e nessun tempo residuo per il fallback GET ` +
+                `(budget di ${budgetMs}ms, timeout di ${timeoutMs}ms per asset)`,
+            });
+            skipped = true;
+            break;
+          }
+          res = await fetchWithRefTimeout(
+            url,
+            { method: 'GET', redirect: 'follow', signal: makeSignal(getTimeout) },
+            getTimeout,
+            fetchImpl,
+          );
+        }
+
+        // Un 5xx descrive l'edge, non l'oggetto. Una nuova richiesta idempotente
+        // puo' recuperare il transitorio, ma non puo' oltrepassare il budget.
+        if (res.status < 500 || res.status > 599 || attemptNumber >= attemptsLimit) break;
+        const remainingMs = nextTimeout();
+        const backoffMs = Math.min(retryDelayBaseMs * (2 ** (attemptNumber - 1)), remainingMs);
+        if (remainingMs <= 0 || backoffMs >= remainingMs) break;
+        releaseFetchWithRefTimeout(res);
+        res = null;
+        if (backoffMs > 0) await new Promise((resolve) => setTimeout(resolve, backoffMs));
       }
+      if (skipped) continue;
       if (res.ok) {
         results.push({ url, state: 'present', status: res.status, error: null });
       } else if (res.status >= 400 && res.status < 500) {

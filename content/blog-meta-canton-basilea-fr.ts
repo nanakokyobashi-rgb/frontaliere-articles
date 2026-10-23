@@ -27,6 +27,9 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.claraplatz-basel-cantieri.title': 'Bâle, travaux à Claraplatz : commerces en difficulté',
     'blog.article.claraplatz-basel-cantieri.excerpt': 'À Claraplatz, les travaux touchent les commerces et le kiosque perd 40% de son chiffre d’affaires.',
     'blog.article.claraplatz-basel-cantieri.imageAlt': 'Illustration générée pour cet article',
+    'blog.article.basilea-cantieri-alle-sei.title': 'Parlement de Bâle : motion pour commencer les chantiers à 6 heures',
+    'blog.article.basilea-cantieri-alle-sei.excerpt': 'Le Grand Conseil de Bâle a transmis une motion visant à autoriser les travaux de construction à 6 heures de juin à août ; les travaux bruyants resteraient à partir de 7 heures.',
+    'blog.article.basilea-cantieri-alle-sei.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBasileaFr;

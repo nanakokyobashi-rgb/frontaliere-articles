@@ -182,4 +182,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'appenzello-cooperazione-strategica-2024',
+ category: 'novita',
+ date: '2026-10-23T02:03:33.169Z',
+ image: '/images/blog/article-appenzello-cooperazione-strategica-2024.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO', 'SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

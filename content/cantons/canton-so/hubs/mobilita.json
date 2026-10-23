@@ -4,17 +4,17 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-22T22:21:57.960Z",
-  "contentHash": "642ba48be92da153b7cc21fc60f696f5e5160ce92988b18c6ee065c6dea975a0",
+  "updatedAt": "2026-10-23T05:52:42.601Z",
+  "contentHash": "8d2437846b35efde53945ab67f47c22d1ea1f1fdf0ace70427cef592a45427e7",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-22T05:28:12.116Z",
+      "updatedAt": "2026-10-22T21:58:34.031Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T10:40:36.644Z",
+      "updatedAt": "2026-10-22T20:51:18.236Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "5",
+          "value": "7",
           "note": "segnalazioni aggiornate: 22 ottobre 2026"
         },
         {
@@ -73,23 +73,26 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A1 Zürich -> Bern tra Raccordo autostradale Diramazione Härkingen E Raccordo autostradale Diramazione Luterbach Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-22T04:16:00.000Z"
+              "label": "A2 Basel -> Luzern tra Parcheggio Teufengraben E Svincolo autostradale Egerkingen Situazione: problemi di traffico cantiere, lunghezza [km] 1.4 Limitazione del traffico: corsia d'emergenza chiusa",
+              "value": "Chiusura",
+              "detail": "fine prevista: 19 novembre 2026",
+              "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A2 Basel -> Luzern tra Svincolo autostradale Egerkingen E Raccordo autostradale Diramazione Härkingen Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-22T04:55:00.000Z"
+              "label": "A1 Bern <-> Zürich tra Raccordo autostradale Diramazione Luterbach E Svincolo autostradale Kirchberg Situazione: problemi di traffico cantiere, lunghezza [km] 6.0 Limitazione del traffico: corsia…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 19 novembre 2026",
+              "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A5 Solothurn -> Bienne tra Raccordo autostradale Diramazione Brüggmoos E Incrocio Bernstrasse Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-22T05:00:00.000Z"
+              "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
+              "value": "Cantiere",
+              "detail": "fine prevista: 31 dicembre 2028",
+              "date": "2024-12-30T04:49:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -112,7 +115,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -121,6 +124,12 @@
           "url": "/articoli-soletta/soletta-progetti-trasporto-governo/",
           "excerpt": "Soletta sostiene «Verkehr ’45» e chiede correzioni.",
           "date": "2026-10-08T11:40:05.556Z"
+        },
+        {
+          "title": "Cambio d'ora e rischio incidenti stradali nel Canton Soletta",
+          "url": "/articoli-soletta/cambio-ora-incidenti-stradali-soletta/",
+          "excerpt": "24-25 ottobre 2026: orologi indietro di un'ora Il traffico del mattino coincide con il crepuscolo Caprioli, cervi nobili e cinghiali sono attivi presto",
+          "date": "2026-10-23T00:45:27.261Z"
         },
         {
           "title": "A5 a Luterbach: quattro rampe chiuse a ottobre",
@@ -152,7 +161,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "en": {
       "canton": "SO",
@@ -162,7 +171,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "5",
+          "value": "7",
           "note": "reports as of 22 October 2026"
         },
         {
@@ -208,23 +217,26 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A1 Zürich -> Bern tra Raccordo autostradale Diramazione Härkingen E Raccordo autostradale Diramazione Luterbach Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-22T04:16:00.000Z"
+              "label": "A2 Basel -> Luzern tra Parcheggio Teufengraben E Svincolo autostradale Egerkingen Situazione: problemi di traffico cantiere, lunghezza [km] 1.4 Limitazione del traffico: corsia d'emergenza chiusa",
+              "value": "Closure",
+              "detail": "until 19 November 2026",
+              "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A2 Basel -> Luzern tra Svincolo autostradale Egerkingen E Raccordo autostradale Diramazione Härkingen Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-22T04:55:00.000Z"
+              "label": "A1 Bern <-> Zürich tra Raccordo autostradale Diramazione Luterbach E Svincolo autostradale Kirchberg Situazione: problemi di traffico cantiere, lunghezza [km] 6.0 Limitazione del traffico: corsia…",
+              "value": "Closure",
+              "detail": "until 19 November 2026",
+              "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A5 Solothurn -> Bienne tra Raccordo autostradale Diramazione Brüggmoos E Incrocio Bernstrasse Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-22T05:00:00.000Z"
+              "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
+              "value": "Roadworks",
+              "detail": "until 31 December 2028",
+              "date": "2024-12-30T04:49:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -247,7 +259,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -255,6 +267,12 @@
           "title": "Solothurn: Government calls for corrections to transport projects",
           "url": "/en/solothurn-articles/solothurn-transport-projects-government/",
           "date": "2026-10-08T11:40:05.556Z"
+        },
+        {
+          "title": "Time change and risk of road accidents in the Canton of Solothurn",
+          "url": "/en/solothurn-articles/time-change-road-accidents-solothurn/",
+          "excerpt": "October 24–25, 2026: clocks go back by one hour Morning traffic coincides with twilight Roe deer, red deer and wild boar are active early Caution",
+          "date": "2026-10-23T00:45:27.261Z"
         },
         {
           "title": "A5 at Luterbach: four ramps closed in October",
@@ -286,7 +304,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "de": {
       "canton": "SO",
@@ -296,7 +314,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "5",
+          "value": "7",
           "note": "Meldungen vom 22. Oktober 2026"
         },
         {
@@ -342,23 +360,26 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A1 Zürich -> Bern zwischen Autobahndreieck Verzweigung Härkingen und Autobahndreieck Verzweigung Luterbach Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-22T04:16:00.000Z"
+              "label": "A2 Basel -> Luzern zwischen Parkplatz Teufengraben und Anschluss Egerkingen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.4 Verkehrsführung: Pannenstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 19. November 2026",
+              "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A2 Basel -> Luzern zwischen Anschluss Egerkingen und Autobahndreieck Verzweigung Härkingen Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-22T04:55:00.000Z"
+              "label": "A1 Bern <-> Zürich zwischen Autobahndreieck Verzweigung Luterbach und Anschluss Kirchberg Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 6.0 Verkehrsführung: Pannenstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 19. November 2026",
+              "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A5 Solothurn -> Biel zwischen Autobahndreieck Verzweigung Brüggmoos und Kreuzung Bernstrasse Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-22T05:00:00.000Z"
+              "label": "Balsthal <-> Laufen zwischen Ortschaft Oberbeinwil und Pass Passwang Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung",
+              "value": "Baustelle",
+              "detail": "bis 31. Dezember 2028",
+              "date": "2024-12-30T04:49:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -381,7 +402,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -389,6 +410,12 @@
           "title": "Solothurn: Regierung fordert Korrekturen bei Verkehrsprojekten",
           "url": "/de/solothurn-artikel/solothurn-verkehrsprojekte-regierung/",
           "date": "2026-10-08T11:40:05.556Z"
+        },
+        {
+          "title": "Zeitumstellung und Verkehrsunfallrisiko im Kanton Solothurn",
+          "url": "/de/solothurn-artikel/zeitumstellung-strassenunfaelle-solothurn/",
+          "excerpt": "24.–25. Oktober 2026: Uhren um eine Stunde zurückgestellt Der morgendliche Verkehr fällt mit der Dämmerung zusammen Rehe, Rothirsche und Wildschweine sind früh",
+          "date": "2026-10-23T00:45:27.261Z"
         },
         {
           "title": "A5 bei Luterbach: vier Rampen im Oktober gesperrt",
@@ -420,7 +447,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "fr": {
       "canton": "SO",
@@ -430,7 +457,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "5",
+          "value": "7",
           "note": "signalements au 22 octobre 2026"
         },
         {
@@ -476,23 +503,26 @@
               "date": "2026-10-14T09:30:00.000Z"
             },
             {
-              "label": "A1 Zurich -> Berne entre Echangeur Echangeur de Härkingen et Echangeur Echangeur de Luterbach Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-22T04:16:00.000Z"
+              "label": "A2 Bâle -> Lucerne entre Parking Teufengraben et Jonction autoroutière Egerkingen Situation: trafic perturbé travaux, longueur [km] 1.4 Gestion du trafic: bande d'arrêt d'urgence fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 19 novembre 2026",
+              "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A2 Bâle -> Lucerne entre Jonction autoroutière Egerkingen et Echangeur Echangeur de Härkingen Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-22T04:55:00.000Z"
+              "label": "A1 Berne <-> Zurich entre Echangeur Echangeur de Luterbach et Jonction autoroutière Kirchberg Situation: trafic perturbé travaux, longueur [km] 6.0 Gestion du trafic: bande d'arrêt d'urgence fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 19 novembre 2026",
+              "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "A5 Soleure -> Bienne entre Echangeur Echangeur de Brüggmoos et Carrefour Bernstrasse Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-22T05:00:00.000Z"
+              "label": "Balsthal <-> Laufon entre Localité Oberbeinwil et Col Passwang Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies",
+              "value": "Chantier",
+              "detail": "jusqu’au 31 décembre 2028",
+              "date": "2024-12-30T04:49:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -515,7 +545,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -524,6 +554,12 @@
           "url": "/fr/articles-soleure/soleure-projets-transport-gouvernement/",
           "excerpt": "Soleure soutient « Verkehr ’45 » et demande des corrections.",
           "date": "2026-10-08T11:40:05.556Z"
+        },
+        {
+          "title": "Changement d’heure et risque d’accidents de la route dans le canton de Soleure",
+          "url": "/fr/articles-soleure/changement-heure-accidents-route-soleure/",
+          "excerpt": "24-25 octobre 2026 : horloges reculées d’une heure La circulation matinale coïncide avec le crépuscule Les chevreuils, les cerfs élaphes et les sangliers sont",
+          "date": "2026-10-23T00:45:27.261Z"
         },
         {
           "title": "A5 à Luterbach : quatre bretelles fermées en octobre",
@@ -555,7 +591,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     }
   }
 }

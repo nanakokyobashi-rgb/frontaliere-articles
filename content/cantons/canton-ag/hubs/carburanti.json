@@ -4,14 +4,14 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "86576c3cee7315390723be4fde6fe58e3b3e588f3b7eae1107081c7c5ffb1c4c",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "bc47f816f316d41927291aaa476ff532e580a68339fa26898defbbcb2f8b4302",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-21T12:19:56.872Z",
+      "updatedAt": "2026-10-22T12:21:38.892Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-28T12:19:56.872Z"
+      "carryUntilAt": "2026-10-29T12:21:38.892Z"
     }
   ],
   "locales": {
@@ -54,23 +54,29 @@
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "2,079 EUR/l",
-              "detail": "media regionale: minimo 2,049 EUR/l, 5 stazioni rilevate",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2,057 EUR/l",
+              "detail": "media regionale: minimo 2,029 EUR/l, 5 stazioni rilevate",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,225 EUR/l",
+              "value": "2,221 EUR/l",
               "detail": "media regionale: minimo 2,189 EUR/l, 5 stazioni rilevate",
-              "date": "2026-10-21T12:19:56.872Z"
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "SBB chiudono a Döttingen: ultimo centro viaggi del distretto",
+          "url": "/articoli-argovia/sbb-chiude-reisezentrum-doettingen/",
+          "excerpt": "Le SBB chiudono a Döttingen l'ultimo Reisezentrum del distretto.",
+          "date": "2026-10-22T23:32:53.543Z"
+        },
         {
           "title": "Aarau crea un dashboard sulla mobilità condivisa",
           "url": "/articoli-argovia/dashboard-mobilita-aarau/",
@@ -94,12 +100,6 @@
           "url": "/articoli-argovia/sezione-medicina-nucleare/",
           "excerpt": "Il Nuklearforum Schweiz crea una nuova sezione Assemblea costitutiva il 12 ottobre a Olten KSB, PSI e Molecular Partners tra i fondatori Focus su radionuclidi",
           "date": "2026-10-20T12:05:23.812Z"
-        },
-        {
-          "title": "Argovia: iniziativa per rafforzare la parità salariale",
-          "url": "/articoli-argovia/iniziativa-parita-salariale-ag/",
-          "excerpt": "ArbeitAargau e un'alleanza di organizzazioni femminili e partiti chiedono analisi salariali da 50 dipendenti, sanzioni e il ripristino della Fachstelle.",
-          "date": "2026-10-18T17:13:03.661Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "AG",
@@ -153,23 +153,29 @@
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "2.079 EUR/l",
-              "detail": "regional average: lowest 2.049 EUR/l, 5 stations surveyed",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2.057 EUR/l",
+              "detail": "regional average: lowest 2.029 EUR/l, 5 stations surveyed",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.225 EUR/l",
+              "value": "2.221 EUR/l",
               "detail": "regional average: lowest 2.189 EUR/l, 5 stations surveyed",
-              "date": "2026-10-21T12:19:56.872Z"
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "SBB close in Döttingen: the district’s last travel center",
+          "url": "/en/aargau-articles/sbb-closes-doettingen-travel-centre/",
+          "excerpt": "SBB are closing the district’s last travel centre in Döttingen.",
+          "date": "2026-10-22T23:32:53.543Z"
+        },
         {
           "title": "Aarau creates a dashboard on shared mobility",
           "url": "/en/aargau-articles/aarau-shared-mobility-dashboard/",
@@ -193,12 +199,6 @@
           "url": "/en/aargau-articles/swiss-nuclear-medicine-section/",
           "excerpt": "Nuklearforum Schweiz creates a new section Founding assembly on October 12 in Olten KSB, PSI and Molecular Partners among the founders Focus on radionuclides",
           "date": "2026-10-20T12:05:23.812Z"
-        },
-        {
-          "title": "Aargau: initiative to strengthen pay equality",
-          "url": "/en/aargau-articles/aargau-pay-equality-initiative/",
-          "excerpt": "ArbeitAargau and an alliance of women’s organizations and political parties are calling for pay analyses for companies with 50 or more employees, sanctions, and the restoration of the Fachstelle.",
-          "date": "2026-10-18T17:13:03.661Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "AG",
@@ -252,23 +252,29 @@
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "2.079 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.049 EUR/l, 5 erfasste Tankstellen",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2.057 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.029 EUR/l, 5 erfasste Tankstellen",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.225 EUR/l",
+              "value": "2.221 EUR/l",
               "detail": "regionaler Durchschnitt: tiefster Preis 2.189 EUR/l, 5 erfasste Tankstellen",
-              "date": "2026-10-21T12:19:56.872Z"
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "SBB schließen in Döttingen: letztes Reisezentrum des Bezirks",
+          "url": "/de/aargau-artikel/sbb-schliesst-reisezentrum-doettingen/",
+          "excerpt": "Die SBB schließen in Döttingen das letzte Reisezentrum des Bezirks.",
+          "date": "2026-10-22T23:32:53.543Z"
+        },
         {
           "title": "Aarau erstellt ein Dashboard zur geteilten Mobilität",
           "url": "/de/aargau-artikel/aarau-dashboard-geteilte-mobilitaet/",
@@ -292,12 +298,6 @@
           "url": "/de/aargau-artikel/sektion-nuklearmedizin-schweiz/",
           "excerpt": "Das Nuklearforum Schweiz gründet eine neue Sektion Gründungsversammlung am 12.",
           "date": "2026-10-20T12:05:23.812Z"
-        },
-        {
-          "title": "Aargau: Initiative zur Stärkung der Lohngleichheit",
-          "url": "/de/aargau-artikel/aargau-lohngleichheitsinitiative/",
-          "excerpt": "ArbeitAargau und ein Bündnis von Frauenorganisationen und Parteien fordern Lohnanalysen ab 50 Beschäftigten, Sanktionen und die Wiederherstellung der Fachstelle.",
-          "date": "2026-10-18T17:13:03.661Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "AG",
@@ -351,23 +351,29 @@
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "2,079 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,049 EUR/l, 5 stations relevées",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2,057 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,029 EUR/l, 5 stations relevées",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,225 EUR/l",
+              "value": "2,221 EUR/l",
               "detail": "moyenne régionale : prix le plus bas 2,189 EUR/l, 5 stations relevées",
-              "date": "2026-10-21T12:19:56.872Z"
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Les SBB ferment à Döttingen : dernier centre de voyages du district",
+          "url": "/fr/articles-argovie/sbb-ferme-centre-voyage-doettingen/",
+          "excerpt": "Les SBB ferment à Döttingen le dernier centre de voyages du district.",
+          "date": "2026-10-22T23:32:53.543Z"
+        },
         {
           "title": "Aarau crée un tableau de bord sur la mobilité partagée",
           "url": "/fr/articles-argovie/aarau-tableau-mobilite-partagee/",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-argovie/section-medecine-nucleaire/",
           "excerpt": "Le Nuklearforum Schweiz crée une nouvelle section Assemblée constitutive le 12 octobre à Olten KSB, PSI et Molecular Partners parmi les fondateurs Focus",
           "date": "2026-10-20T12:05:23.812Z"
-        },
-        {
-          "title": "Argovie : initiative visant à renforcer l’égalité salariale",
-          "url": "/fr/articles-argovie/initiative-egalite-salariale-argovie/",
-          "excerpt": "ArbeitAargau et une alliance d’organisations féminines et de partis demandent des analyses salariales à partir de 50 employés, des sanctions et le rétablissement de la Fachstelle.",
-          "date": "2026-10-18T17:13:03.661Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-10-22T22:21:57.960Z",
-  "contentHash": "5cdb394e2b2220ec08d60128eb40bbd9e5f2838ccd26a9cd0f7965eb3034c972",
+  "updatedAt": "2026-10-23T05:52:42.601Z",
+  "contentHash": "aa2d9c055d43a279d7225ac1c1124f9a028a39481effc2b933f9c493c383b443",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-22T11:50:08.473Z",
+      "updatedAt": "2026-10-22T21:36:37.991Z",
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-22T23:30:28.996Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T10:40:36.644Z",
+      "updatedAt": "2026-10-22T20:51:18.236Z",
       "keyFacts": 0
     }
   ],
@@ -87,7 +92,21 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-22T11:50:08.473Z"
+          "updatedAt": "2026-10-22T21:36:37.991Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "5 °C",
+              "detail": "oggi da 5 a 5 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-22T23:30:28.996Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -118,14 +137,9 @@
               "label": "40 Jahre EPPENDORFER",
               "date": "2026-06-26",
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/40-jahre-eppendorfer/"
-            },
-            {
-              "label": "Generalversammlung 2026: Gemeinsam Verantwortung für die Gesundheitsversorgung",
-              "date": "2026-06-25",
-              "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/generalversammlung-2026.html"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -205,7 +219,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "en": {
       "canton": "SZ",
@@ -270,7 +284,21 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-22T11:50:08.473Z"
+          "updatedAt": "2026-10-22T21:36:37.991Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "5 °C",
+              "detail": "today from 5 to 5 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-22T23:30:28.996Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -301,14 +329,9 @@
               "label": "40 Jahre EPPENDORFER",
               "date": "2026-06-26",
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/40-jahre-eppendorfer/"
-            },
-            {
-              "label": "Generalversammlung 2026: Gemeinsam Verantwortung für die Gesundheitsversorgung",
-              "date": "2026-06-25",
-              "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/generalversammlung-2026.html"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -384,7 +407,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "de": {
       "canton": "SZ",
@@ -449,7 +472,21 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-22T11:50:08.473Z"
+          "updatedAt": "2026-10-22T21:36:37.991Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "5 °C",
+              "detail": "heute 5 bis 5 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-22T23:30:28.996Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -480,14 +517,9 @@
               "label": "40 Jahre EPPENDORFER",
               "date": "2026-06-26",
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/40-jahre-eppendorfer/"
-            },
-            {
-              "label": "Generalversammlung 2026: Gemeinsam Verantwortung für die Gesundheitsversorgung",
-              "date": "2026-06-25",
-              "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/generalversammlung-2026.html"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -563,7 +595,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "fr": {
       "canton": "SZ",
@@ -628,7 +660,21 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://cariegov.sz.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-22T11:50:08.473Z"
+          "updatedAt": "2026-10-22T21:36:37.991Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "5 °C",
+              "detail": "aujourd’hui de 5 à 5 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-22T23:30:28.996Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -659,14 +705,9 @@
               "label": "40 Jahre EPPENDORFER",
               "date": "2026-06-26",
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/40-jahre-eppendorfer/"
-            },
-            {
-              "label": "Generalversammlung 2026: Gemeinsam Verantwortung für die Gesundheitsversorgung",
-              "date": "2026-06-25",
-              "url": "https://www.spital-schwyz.ch/de/ueber-uns/aktuelles/news/generalversammlung-2026.html"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -738,7 +779,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-22T13:56:44.136Z",
-  "contentHash": "43ff0dfb87e26db0d754c951daba9351ec626d78f811fe74ef67627ff177b6c5",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "e2465ef6ada7433eb8a6699b48f4129faf373bca46d45f2f54c8410561a2d199",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-22T05:28:12.116Z",
+      "updatedAt": "2026-10-22T17:41:22.283Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T20:56:46.769Z",
+      "updatedAt": "2026-10-22T16:03:41.824Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "19",
+          "value": "20",
           "note": "segnalazioni aggiornate: 22 ottobre 2026"
         },
         {
@@ -92,13 +92,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T17:41:22.283Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Villars-sur-Glâne : début des travaux d’amélioration du marquage et de la signalisation du giratoire de Belle-Croix",
+              "date": "2026-10-22T14:05:19.000Z",
+              "url": "https://www.fr.ch/dime/actualites/villars-sur-glane-debut-des-travaux-damelioration-du-marquage-et-de-la-signalisation-du-giratoire-de-belle-croix"
+            },
             {
               "label": "Restrictions de circulation dues aux manifestations",
               "date": "2026-10-14T00:21:00.000Z",
@@ -123,14 +128,9 @@
               "label": "Fahrzeug nach Geisterfahrt auf der A1 bei Domdidier gestoppt",
               "date": "2026-10-04T10:28:53.000Z",
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
-            },
-            {
-              "label": "Öffentliche Auflage des Projekts für die Umfahrungsstrasse Kerzers",
-              "date": "2026-10-01T14:19:43.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/oeffentliche-auflage-des-projekts-fuer-die-umfahrungsstrasse-kerzers"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -188,7 +188,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "FR",
@@ -198,7 +198,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "19",
+          "value": "20",
           "note": "reports as of 22 October 2026"
         },
         {
@@ -263,13 +263,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T17:41:22.283Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Villars-sur-Glâne : début des travaux d’amélioration du marquage et de la signalisation du giratoire de Belle-Croix",
+              "date": "2026-10-22T14:05:19.000Z",
+              "url": "https://www.fr.ch/dime/actualites/villars-sur-glane-debut-des-travaux-damelioration-du-marquage-et-de-la-signalisation-du-giratoire-de-belle-croix"
+            },
             {
               "label": "Restrictions de circulation dues aux manifestations",
               "date": "2026-10-14T00:21:00.000Z",
@@ -294,14 +299,9 @@
               "label": "Fahrzeug nach Geisterfahrt auf der A1 bei Domdidier gestoppt",
               "date": "2026-10-04T10:28:53.000Z",
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
-            },
-            {
-              "label": "Öffentliche Auflage des Projekts für die Umfahrungsstrasse Kerzers",
-              "date": "2026-10-01T14:19:43.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/oeffentliche-auflage-des-projekts-fuer-die-umfahrungsstrasse-kerzers"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -359,7 +359,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "FR",
@@ -369,7 +369,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "19",
+          "value": "20",
           "note": "Meldungen vom 22. Oktober 2026"
         },
         {
@@ -434,13 +434,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T17:41:22.283Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Villars-sur-Glâne : début des travaux d’amélioration du marquage et de la signalisation du giratoire de Belle-Croix",
+              "date": "2026-10-22T14:05:19.000Z",
+              "url": "https://www.fr.ch/dime/actualites/villars-sur-glane-debut-des-travaux-damelioration-du-marquage-et-de-la-signalisation-du-giratoire-de-belle-croix"
+            },
             {
               "label": "Restrictions de circulation dues aux manifestations",
               "date": "2026-10-14T00:21:00.000Z",
@@ -465,14 +470,9 @@
               "label": "Fahrzeug nach Geisterfahrt auf der A1 bei Domdidier gestoppt",
               "date": "2026-10-04T10:28:53.000Z",
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
-            },
-            {
-              "label": "Öffentliche Auflage des Projekts für die Umfahrungsstrasse Kerzers",
-              "date": "2026-10-01T14:19:43.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/oeffentliche-auflage-des-projekts-fuer-die-umfahrungsstrasse-kerzers"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -530,7 +530,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "FR",
@@ -540,7 +540,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "19",
+          "value": "20",
           "note": "signalements au 22 octobre 2026"
         },
         {
@@ -605,13 +605,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T17:41:22.283Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Villars-sur-Glâne : début des travaux d’amélioration du marquage et de la signalisation du giratoire de Belle-Croix",
+              "date": "2026-10-22T14:05:19.000Z",
+              "url": "https://www.fr.ch/dime/actualites/villars-sur-glane-debut-des-travaux-damelioration-du-marquage-et-de-la-signalisation-du-giratoire-de-belle-croix"
+            },
             {
               "label": "Restrictions de circulation dues aux manifestations",
               "date": "2026-10-14T00:21:00.000Z",
@@ -636,14 +641,9 @@
               "label": "Fahrzeug nach Geisterfahrt auf der A1 bei Domdidier gestoppt",
               "date": "2026-10-04T10:28:53.000Z",
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
-            },
-            {
-              "label": "Öffentliche Auflage des Projekts für die Umfahrungsstrasse Kerzers",
-              "date": "2026-10-01T14:19:43.000Z",
-              "url": "https://www.fr.ch/de/rimu/news/oeffentliche-auflage-des-projekts-fuer-die-umfahrungsstrasse-kerzers"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -701,7 +701,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

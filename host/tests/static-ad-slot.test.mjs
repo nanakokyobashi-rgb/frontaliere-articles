@@ -86,3 +86,10 @@ test('runtime ad slot validation works when the target lacks Object.hasOwn', () 
   assert.equal(inheritedSlot, false);
   assert.equal(invalidMarkup, '');
 });
+
+test('runtime ad slot guard rejects names inherited from a registry prototype', () => {
+  const inheritedSlot = Object.create({ 'canton-hub-top': true });
+
+  assert.equal(isStaticAdSlotKey(inheritedSlot), false);
+  assert.equal(staticAdSlotHtml(inheritedSlot), '');
+});

@@ -11,6 +11,19 @@ shift 2
 
 current_run_id="${GITHUB_RUN_ID:-}"
 
+# Stale recovery callers already have a unique nonce and have just proved that
+# no matching replay is running.  GitHub's workflow-dispatch endpoint returns
+# success before the new run becomes visible to `gh run list`; waiting for that
+# read-after-write makes a valid dispatch look ambiguous (#2422) and, when a
+# matrix is replayed serially, consumes the whole recovery job timeout (#3035).
+# Treat the successful dispatch response as the acceptance boundary for these
+# nonce-scoped recoveries.  Normal callers keep the stricter visibility poll.
+async_stale_dispatch=false
+if [ "${REPLAY_DISPATCH_ASYNC:-false}" = 'true' ] \
+  || [[ "$display_title" == *" / nonce=stale-"* ]]; then
+  async_stale_dispatch=true
+fi
+
 # A stale resolve can fan out one dispatcher per section.  The callers share a
 # short-lived snapshot so those workers do not each spend an API request on the
 # same `gh run list` poll.  The cache is opt-in because callers outside that
@@ -176,6 +189,10 @@ for attempt in 1 2; do
 
   if gh workflow run fast-publish-section.yml --repo "$repository" "$@"; then
     echo "::notice::dispatch del replay accettata; attendo la visibilita' della run: $display_title"
+    if [ "$async_stale_dispatch" = true ]; then
+      echo "::notice::replay stale accettato dall'API; la run verra' osservata dal workflow figlio: $display_title"
+      exit 0
+    fi
   else
     echo "::warning::gh workflow run ha segnalato un errore; verifico se GitHub ha accettato il replay: $display_title"
   fi

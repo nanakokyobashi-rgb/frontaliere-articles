@@ -51,6 +51,12 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.nuova-app-schaffhauser-nachrichten-2026.title': 'Schaffhauser Nachrichten: Neue App im Jahr 2026 gestartet',
     'blog.article.nuova-app-schaffhauser-nachrichten-2026.excerpt': 'Am 21. Oktober 2026 erfolgte der Rollout der neuen SN-App mit erweiterten Inhalten und thematischen Push-Benachrichtigungen, die im App Store und Google Play Store verfügbar sind.',
     'blog.article.nuova-app-schaffhauser-nachrichten-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sciaffusa-regole-datencenter-beringen.title': 'Schaffhausen verschärft Regeln für Rechenzentren',
+    'blog.article.sciaffusa-regole-datencenter-beringen.excerpt': 'Der Kanton Schaffhausen sieht strengere Regeln für Rechenzentren vor.',
+    'blog.article.sciaffusa-regole-datencenter-beringen.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sciaffusa-regole-datacenter.title': 'Schaffhausen: Vorschlag zu Strom, Wasser und Rechenzentren',
+    'blog.article.sciaffusa-regole-datacenter.excerpt': 'Die Kommission des Kantonsrates schlägt Abgaben auf Strom und Wasser vor; die Regierung unterstützt die Änderung.',
+    'blog.article.sciaffusa-regole-datacenter.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

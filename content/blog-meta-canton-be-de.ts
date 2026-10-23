@@ -54,6 +54,9 @@ const blogMetaCantonBeDe: Record<string, string> = {
     'blog.article.energy-tagli-radio-svizzera.title': 'Radiogruppe: Bis zu 15 Stellen in der Schweiz angekündigt',
     'blog.article.energy-tagli-radio-svizzera.excerpt': 'Energy kündigt bis zu 15 Stellenstreichungen an: Die Zahl wird nach der Konsultation festgelegt, während die Werbeeinnahmen unter Druck bleiben.',
     'blog.article.energy-tagli-radio-svizzera.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.contributi-rotbach-saanen.title': 'Bern genehmigt Beiträge für Rotbach und Saanen',
+    'blog.article.contributi-rotbach-saanen.excerpt': 'Die Kantonsregierung genehmigt rund CHF 590\'000 für den Rotbach und CHF 720\'000 für den Hochwasserschutz in Saanen im Kanton Bern.',
+    'blog.article.contributi-rotbach-saanen.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBeDe;

@@ -4,12 +4,12 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T00:12:28.308Z",
-  "contentHash": "d58997eb12471384ae70c957615db3193fd0b8cbf14912a850dcbd419b4d935f",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "d7a5d9c5737af18861edc5378e356d5bea0099e647ad1d81a676a71c986a72f8",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-21T12:38:14.154Z",
+      "updatedAt": "2026-10-22T19:30:03.925Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "27",
+          "value": "24",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,54 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Besichtigung Heizzentrale Chalchofen",
-              "detail": "Heizzentrale Chalchofen, Flüeli-Ranft",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/92164"
-            },
-            {
-              "label": "Engelberger Dialoge «Netzwerk: über- oder unterschätzte Notwendigkeit?»",
-              "detail": "Kursaal, Engelberg, Engelberg",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/93208"
-            },
-            {
-              "label": "Feuerwehr Giswil Pikettübung, Pikettzug 1",
-              "detail": "Feuerwehrlokal, Giswil, Giswil",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/88115"
-            },
-            {
-              "label": "Jass- und Spielnachmittag",
-              "detail": "Restaurant Bahnhof",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/85792"
-            },
-            {
-              "label": "NIklaus und Dorothee in den Schweizer Medien",
-              "detail": "Pfarreiheim Sachseln, Sachseln, Sachseln",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/93802"
-            },
-            {
-              "label": "vitaswiss Vortrag: Bunte Pillen für die Gesundheit- wann machen Nahrungsergänzungsmittel Sinn?",
-              "detail": "Residenz Am Schärme, Sarnen, Sarnen",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/93226"
-            },
-            {
-              "label": "Engelberger Dialoge 2026 (22. + 23.10.2026)",
-              "detail": "Kursaal Engelberg, Engelberg",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/engelberg/engelberger-dialoge-2026-22-23102026_AL9KJuJ"
-            },
-            {
-              "label": "vitaswiss: wann machen Narungsergänzungsmittel Sinn?",
-              "detail": "Sarnen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vitaswiss-wann-machen-narungsergaenzungsmittel-sinn/"
-            },
             {
               "label": "Die «verfreundeten» Zwillinge",
               "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
@@ -91,11 +43,59 @@
               "detail": "Hotel Paxmontana, Flüeli-Ranft",
               "date": "2026-10-23",
               "url": "https://www.ow.ch/_rte/anlass/94237"
+            },
+            {
+              "label": "Spielabend",
+              "detail": "Pfarreiheim, Sachseln, Sachseln",
+              "date": "2026-10-23",
+              "url": "https://www.ow.ch/_rte/anlass/90865"
+            },
+            {
+              "label": "Engelberger Dialoge «Netzwerk: über- oder unterschätzte Notwendigkeit?»",
+              "detail": "Kursaal, Engelberg, Engelberg — in corso, ultimo giorno: 23 ottobre 2026",
+              "date": "2026-10-23",
+              "url": "https://www.ow.ch/_rte/anlass/93208"
+            },
+            {
+              "label": "Engelberger Dialoge 2026 (22. + 23.10.2026)",
+              "detail": "Kursaal Engelberg, Engelberg — in corso, ultimo giorno: 23 ottobre 2026",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/engelberg/engelberger-dialoge-2026-22-23102026_AL9KJuJ"
+            },
+            {
+              "label": "Yoga & Breathwork",
+              "detail": "Engelberg",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/yoga-package/"
+            },
+            {
+              "label": "Sofagespräch mit Ruth Dillier und Urs Sibler",
+              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
+              "date": "2026-10-25",
+              "url": "https://www.ow.ch/_rte/anlass/93847"
+            },
+            {
+              "label": "Obwaldner Huismuisig mit Organistin Silvia Wagner",
+              "detail": "Pfarrkirche Lungern, Lungern",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/lungern/obwaldner-huismuisig-mit-organistin-silvia-wagner_AxGqtTk"
+            },
+            {
+              "label": "Comedy im Hirschen – Cenk",
+              "detail": "Hirschen Sarnen, Sarnen, Sarnen",
+              "date": "2026-10-28",
+              "url": "https://www.ow.ch/_rte/anlass/93775"
+            },
+            {
+              "label": "Vietnamesisch Kochkurs",
+              "detail": "Schulküche Schulhaus 1957, Giswil, Giswil",
+              "date": "2026-10-28",
+              "url": "https://www.ow.ch/_rte/anlass/88256"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/obvaldo/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/obvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "OW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "27",
+          "value": "24",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,54 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Besichtigung Heizzentrale Chalchofen",
-              "detail": "Heizzentrale Chalchofen, Flüeli-Ranft",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/92164"
-            },
-            {
-              "label": "Engelberger Dialoge «Netzwerk: über- oder unterschätzte Notwendigkeit?»",
-              "detail": "Kursaal, Engelberg, Engelberg",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/93208"
-            },
-            {
-              "label": "Feuerwehr Giswil Pikettübung, Pikettzug 1",
-              "detail": "Feuerwehrlokal, Giswil, Giswil",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/88115"
-            },
-            {
-              "label": "Jass- und Spielnachmittag",
-              "detail": "Restaurant Bahnhof",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/85792"
-            },
-            {
-              "label": "NIklaus und Dorothee in den Schweizer Medien",
-              "detail": "Pfarreiheim Sachseln, Sachseln, Sachseln",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/93802"
-            },
-            {
-              "label": "vitaswiss Vortrag: Bunte Pillen für die Gesundheit- wann machen Nahrungsergänzungsmittel Sinn?",
-              "detail": "Residenz Am Schärme, Sarnen, Sarnen",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/93226"
-            },
-            {
-              "label": "Engelberger Dialoge 2026 (22. + 23.10.2026)",
-              "detail": "Kursaal Engelberg, Engelberg",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/engelberg/engelberger-dialoge-2026-22-23102026_AL9KJuJ"
-            },
-            {
-              "label": "vitaswiss: wann machen Narungsergänzungsmittel Sinn?",
-              "detail": "Sarnen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vitaswiss-wann-machen-narungsergaenzungsmittel-sinn/"
-            },
             {
               "label": "Die «verfreundeten» Zwillinge",
               "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
@@ -196,11 +148,59 @@
               "detail": "Hotel Paxmontana, Flüeli-Ranft",
               "date": "2026-10-23",
               "url": "https://www.ow.ch/_rte/anlass/94237"
+            },
+            {
+              "label": "Spielabend",
+              "detail": "Pfarreiheim, Sachseln, Sachseln",
+              "date": "2026-10-23",
+              "url": "https://www.ow.ch/_rte/anlass/90865"
+            },
+            {
+              "label": "Engelberger Dialoge «Netzwerk: über- oder unterschätzte Notwendigkeit?»",
+              "detail": "Kursaal, Engelberg, Engelberg — ongoing, last day: 23 October 2026",
+              "date": "2026-10-23",
+              "url": "https://www.ow.ch/_rte/anlass/93208"
+            },
+            {
+              "label": "Engelberger Dialoge 2026 (22. + 23.10.2026)",
+              "detail": "Kursaal Engelberg, Engelberg — ongoing, last day: 23 October 2026",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/engelberg/engelberger-dialoge-2026-22-23102026_AL9KJuJ"
+            },
+            {
+              "label": "Yoga & Breathwork",
+              "detail": "Engelberg",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/yoga-package/"
+            },
+            {
+              "label": "Sofagespräch mit Ruth Dillier und Urs Sibler",
+              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
+              "date": "2026-10-25",
+              "url": "https://www.ow.ch/_rte/anlass/93847"
+            },
+            {
+              "label": "Obwaldner Huismuisig mit Organistin Silvia Wagner",
+              "detail": "Pfarrkirche Lungern, Lungern",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/lungern/obwaldner-huismuisig-mit-organistin-silvia-wagner_AxGqtTk"
+            },
+            {
+              "label": "Comedy im Hirschen – Cenk",
+              "detail": "Hirschen Sarnen, Sarnen, Sarnen",
+              "date": "2026-10-28",
+              "url": "https://www.ow.ch/_rte/anlass/93775"
+            },
+            {
+              "label": "Vietnamesisch Kochkurs",
+              "detail": "Schulküche Schulhaus 1957, Giswil, Giswil",
+              "date": "2026-10-28",
+              "url": "https://www.ow.ch/_rte/anlass/88256"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/obwalden/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/obwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "OW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "27",
+          "value": "24",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,54 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Besichtigung Heizzentrale Chalchofen",
-              "detail": "Heizzentrale Chalchofen, Flüeli-Ranft",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/92164"
-            },
-            {
-              "label": "Engelberger Dialoge «Netzwerk: über- oder unterschätzte Notwendigkeit?»",
-              "detail": "Kursaal, Engelberg, Engelberg",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/93208"
-            },
-            {
-              "label": "Feuerwehr Giswil Pikettübung, Pikettzug 1",
-              "detail": "Feuerwehrlokal, Giswil, Giswil",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/88115"
-            },
-            {
-              "label": "Jass- und Spielnachmittag",
-              "detail": "Restaurant Bahnhof",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/85792"
-            },
-            {
-              "label": "NIklaus und Dorothee in den Schweizer Medien",
-              "detail": "Pfarreiheim Sachseln, Sachseln, Sachseln",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/93802"
-            },
-            {
-              "label": "vitaswiss Vortrag: Bunte Pillen für die Gesundheit- wann machen Nahrungsergänzungsmittel Sinn?",
-              "detail": "Residenz Am Schärme, Sarnen, Sarnen",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/93226"
-            },
-            {
-              "label": "Engelberger Dialoge 2026 (22. + 23.10.2026)",
-              "detail": "Kursaal Engelberg, Engelberg",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/engelberg/engelberger-dialoge-2026-22-23102026_AL9KJuJ"
-            },
-            {
-              "label": "vitaswiss: wann machen Narungsergänzungsmittel Sinn?",
-              "detail": "Sarnen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vitaswiss-wann-machen-narungsergaenzungsmittel-sinn/"
-            },
             {
               "label": "Die «verfreundeten» Zwillinge",
               "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
@@ -301,11 +253,59 @@
               "detail": "Hotel Paxmontana, Flüeli-Ranft",
               "date": "2026-10-23",
               "url": "https://www.ow.ch/_rte/anlass/94237"
+            },
+            {
+              "label": "Spielabend",
+              "detail": "Pfarreiheim, Sachseln, Sachseln",
+              "date": "2026-10-23",
+              "url": "https://www.ow.ch/_rte/anlass/90865"
+            },
+            {
+              "label": "Engelberger Dialoge «Netzwerk: über- oder unterschätzte Notwendigkeit?»",
+              "detail": "Kursaal, Engelberg, Engelberg — läuft, letzter Tag: 23. Oktober 2026",
+              "date": "2026-10-23",
+              "url": "https://www.ow.ch/_rte/anlass/93208"
+            },
+            {
+              "label": "Engelberger Dialoge 2026 (22. + 23.10.2026)",
+              "detail": "Kursaal Engelberg, Engelberg — läuft, letzter Tag: 23. Oktober 2026",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/engelberg/engelberger-dialoge-2026-22-23102026_AL9KJuJ"
+            },
+            {
+              "label": "Yoga & Breathwork",
+              "detail": "Engelberg",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/yoga-package/"
+            },
+            {
+              "label": "Sofagespräch mit Ruth Dillier und Urs Sibler",
+              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
+              "date": "2026-10-25",
+              "url": "https://www.ow.ch/_rte/anlass/93847"
+            },
+            {
+              "label": "Obwaldner Huismuisig mit Organistin Silvia Wagner",
+              "detail": "Pfarrkirche Lungern, Lungern",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/lungern/obwaldner-huismuisig-mit-organistin-silvia-wagner_AxGqtTk"
+            },
+            {
+              "label": "Comedy im Hirschen – Cenk",
+              "detail": "Hirschen Sarnen, Sarnen, Sarnen",
+              "date": "2026-10-28",
+              "url": "https://www.ow.ch/_rte/anlass/93775"
+            },
+            {
+              "label": "Vietnamesisch Kochkurs",
+              "detail": "Schulküche Schulhaus 1957, Giswil, Giswil",
+              "date": "2026-10-28",
+              "url": "https://www.ow.ch/_rte/anlass/88256"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/obwalden/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/obwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "OW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "27",
+          "value": "24",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,54 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Besichtigung Heizzentrale Chalchofen",
-              "detail": "Heizzentrale Chalchofen, Flüeli-Ranft",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/92164"
-            },
-            {
-              "label": "Engelberger Dialoge «Netzwerk: über- oder unterschätzte Notwendigkeit?»",
-              "detail": "Kursaal, Engelberg, Engelberg",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/93208"
-            },
-            {
-              "label": "Feuerwehr Giswil Pikettübung, Pikettzug 1",
-              "detail": "Feuerwehrlokal, Giswil, Giswil",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/88115"
-            },
-            {
-              "label": "Jass- und Spielnachmittag",
-              "detail": "Restaurant Bahnhof",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/85792"
-            },
-            {
-              "label": "NIklaus und Dorothee in den Schweizer Medien",
-              "detail": "Pfarreiheim Sachseln, Sachseln, Sachseln",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/93802"
-            },
-            {
-              "label": "vitaswiss Vortrag: Bunte Pillen für die Gesundheit- wann machen Nahrungsergänzungsmittel Sinn?",
-              "detail": "Residenz Am Schärme, Sarnen, Sarnen",
-              "date": "2026-10-22",
-              "url": "https://www.ow.ch/_rte/anlass/93226"
-            },
-            {
-              "label": "Engelberger Dialoge 2026 (22. + 23.10.2026)",
-              "detail": "Kursaal Engelberg, Engelberg",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/engelberg/engelberger-dialoge-2026-22-23102026_AL9KJuJ"
-            },
-            {
-              "label": "vitaswiss: wann machen Narungsergänzungsmittel Sinn?",
-              "detail": "Sarnen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vitaswiss-wann-machen-narungsergaenzungsmittel-sinn/"
-            },
             {
               "label": "Die «verfreundeten» Zwillinge",
               "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
@@ -406,11 +358,59 @@
               "detail": "Hotel Paxmontana, Flüeli-Ranft",
               "date": "2026-10-23",
               "url": "https://www.ow.ch/_rte/anlass/94237"
+            },
+            {
+              "label": "Spielabend",
+              "detail": "Pfarreiheim, Sachseln, Sachseln",
+              "date": "2026-10-23",
+              "url": "https://www.ow.ch/_rte/anlass/90865"
+            },
+            {
+              "label": "Engelberger Dialoge «Netzwerk: über- oder unterschätzte Notwendigkeit?»",
+              "detail": "Kursaal, Engelberg, Engelberg — en cours, dernier jour : 23 octobre 2026",
+              "date": "2026-10-23",
+              "url": "https://www.ow.ch/_rte/anlass/93208"
+            },
+            {
+              "label": "Engelberger Dialoge 2026 (22. + 23.10.2026)",
+              "detail": "Kursaal Engelberg, Engelberg — en cours, dernier jour : 23 octobre 2026",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/engelberg/engelberger-dialoge-2026-22-23102026_AL9KJuJ"
+            },
+            {
+              "label": "Yoga & Breathwork",
+              "detail": "Engelberg",
+              "date": "2026-10-24",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/yoga-package/"
+            },
+            {
+              "label": "Sofagespräch mit Ruth Dillier und Urs Sibler",
+              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
+              "date": "2026-10-25",
+              "url": "https://www.ow.ch/_rte/anlass/93847"
+            },
+            {
+              "label": "Obwaldner Huismuisig mit Organistin Silvia Wagner",
+              "detail": "Pfarrkirche Lungern, Lungern",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/lungern/obwaldner-huismuisig-mit-organistin-silvia-wagner_AxGqtTk"
+            },
+            {
+              "label": "Comedy im Hirschen – Cenk",
+              "detail": "Hirschen Sarnen, Sarnen, Sarnen",
+              "date": "2026-10-28",
+              "url": "https://www.ow.ch/_rte/anlass/93775"
+            },
+            {
+              "label": "Vietnamesisch Kochkurs",
+              "detail": "Schulküche Schulhaus 1957, Giswil, Giswil",
+              "date": "2026-10-28",
+              "url": "https://www.ow.ch/_rte/anlass/88256"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/obwald/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/obwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

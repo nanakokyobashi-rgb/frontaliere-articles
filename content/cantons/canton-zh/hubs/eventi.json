@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T00:12:28.308Z",
-  "contentHash": "df361d284b2e71b11deee0614474e58727c2245f0fa2ff7ef3775a6cc09d885a",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "59c027fcda86ace5bd205353ede882d52341a059eaa62ae3b7761ad93d453227",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-21T12:38:14.154Z",
+      "updatedAt": "2026-10-22T19:30:03.925Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "367",
+          "value": "373",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Negotiation Conference",
-              "detail": "Kunsthaus Zürich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/n-conference-zurich-failure-is-not-an-option/"
+              "label": "Halloween-Disco",
+              "detail": "Weiningen ZH",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-disco/"
             },
             {
-              "label": "Body: & Soul: Fit mit Baby Q4 2026",
+              "label": "Autobiografisches Schreiben – Grundkurs",
+              "detail": "Kappel am Albis",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/autobiografisches-schreiben-grundkurs/"
+            },
+            {
+              "label": "Tagesausflug nach Solothurn",
+              "detail": "Winterthur",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tagesausflug-nach-solothurn/"
+            },
+            {
+              "label": "Wanderung entlang des Sempachersees",
               "detail": "Uitikon-Waldegg, Uitikon",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/body-soul-fit-mit-baby-q-2026/"
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wanderung-entlang-des-sempachersees/"
             },
             {
-              "label": "N-Conference Zurich: Failure is not an option",
-              "detail": "Kunsthaus Zürich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/events/knowledge/zurich/negotiation-conference_AtkK4GW"
+              "label": "Kurs Atem & Entspannung (4 Wochen)",
+              "detail": "Wetzikon",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-atem-entspannung-4-wochen/"
             },
             {
-              "label": "Kammermusik-Lunchkonzert",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kammermusik-lunchkonzert/"
+              "label": "Masterclass Klavier Yulianna Avdeeva",
+              "detail": "Stadthaus, Winterthur",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/masterclass-klavier-yulianna-avdeeva/"
             },
             {
-              "label": "Pranzo",
-              "detail": "Dietikon",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pranzo/"
+              "label": "Grundkenntnistest",
+              "detail": "Dübendorf",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/grundkenntnistest-11/"
             },
             {
-              "label": "Anonyms (auf Englisch)",
-              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/anonyms-auf-englisch_AXDwi1Q"
+              "label": "Kantonaler Deutschtest für die Einbürgerung",
+              "detail": "Dübendorf",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kantonaler-deutschtest-fuer-die-einbuergerung-8/"
             },
             {
-              "label": "Der Reporter - Lesung mit Hanspeter Bäni",
-              "detail": "Stadthaussaal Effretikon",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-reporter-lesung-mit-hanspeter-baeni/"
+              "label": "Tanke dein Gesundheitskonto auf - Achtsamkeit in der Natur erfahren",
+              "detail": "Richterswil",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanke-dein-gesundheitskonto-auf-achtsamkeit-in-der-natur-erfahren/"
             },
             {
-              "label": "Wasser-Gymnastik 60+ / Organisiert vom Frauenverein",
+              "label": "Clown Gili",
               "detail": "Urdorf",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wassergymnastik-60-organisiert-vom-frauenverein-22/"
-            },
-            {
-              "label": "ABGESAGT: Schreiben ist Kunst",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abgesagt-schreiben-ist-kunst/"
-            },
-            {
-              "label": "Offenes Schauspieltraining",
-              "detail": "Schauspielhaus Pfauen",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/offenes-schauspieltraining_AMeFXFb"
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/clown-gili/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -129,7 +129,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "ZH",
@@ -139,7 +139,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "367",
+          "value": "373",
           "note": "from the site’s events calendar"
         }
       ],
@@ -150,69 +150,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Negotiation Conference",
-              "detail": "Kunsthaus Zürich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/n-conference-zurich-failure-is-not-an-option/"
+              "label": "Halloween-Disco",
+              "detail": "Weiningen ZH",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-disco/"
             },
             {
-              "label": "Body: & Soul: Fit mit Baby Q4 2026",
+              "label": "Autobiografisches Schreiben – Grundkurs",
+              "detail": "Kappel am Albis",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/autobiografisches-schreiben-grundkurs/"
+            },
+            {
+              "label": "Tagesausflug nach Solothurn",
+              "detail": "Winterthur",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tagesausflug-nach-solothurn/"
+            },
+            {
+              "label": "Wanderung entlang des Sempachersees",
               "detail": "Uitikon-Waldegg, Uitikon",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/body-soul-fit-mit-baby-q-2026/"
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wanderung-entlang-des-sempachersees/"
             },
             {
-              "label": "Negotiation Conference",
-              "detail": "Kunsthaus Zürich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/events/knowledge/zurich/negotiation-conference_AtkK4GW"
+              "label": "Kurs Atem & Entspannung (4 Wochen)",
+              "detail": "Wetzikon",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-atem-entspannung-4-wochen/"
             },
             {
-              "label": "Kammermusik-Lunchkonzert",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kammermusik-lunchkonzert/"
+              "label": "Masterclass Klavier Yulianna Avdeeva",
+              "detail": "Stadthaus, Winterthur",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/masterclass-klavier-yulianna-avdeeva/"
             },
             {
-              "label": "Lunch tour",
-              "detail": "Dietikon",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pranzo/"
+              "label": "Grundkenntnistest",
+              "detail": "Dübendorf",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/grundkenntnistest-11/"
             },
             {
-              "label": "Anonyms (auf Englisch)",
-              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/anonyms-auf-englisch_AXDwi1Q"
+              "label": "Kantonaler Deutschtest für die Einbürgerung",
+              "detail": "Dübendorf",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kantonaler-deutschtest-fuer-die-einbuergerung-8/"
             },
             {
-              "label": "Der Reporter - Lesung mit Hanspeter Bäni",
-              "detail": "Stadthaussaal Effretikon",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-reporter-lesung-mit-hanspeter-baeni/"
+              "label": "Tanke dein Gesundheitskonto auf - Achtsamkeit in der Natur erfahren",
+              "detail": "Richterswil",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanke-dein-gesundheitskonto-auf-achtsamkeit-in-der-natur-erfahren/"
             },
             {
-              "label": "Wasser-Gymnastik 60+ / Organisiert vom Frauenverein",
+              "label": "Clown Gili",
               "detail": "Urdorf",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wassergymnastik-60-organisiert-vom-frauenverein-22/"
-            },
-            {
-              "label": "ABGESAGT: Schreiben ist Kunst",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abgesagt-schreiben-ist-kunst/"
-            },
-            {
-              "label": "Offenes Schauspieltraining",
-              "detail": "Schauspielhaus Pfauen",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/offenes-schauspieltraining_AMeFXFb"
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/clown-gili/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -246,7 +246,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "ZH",
@@ -256,7 +256,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "367",
+          "value": "373",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -267,69 +267,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "N-Conference Zurich: Failure is not an option",
-              "detail": "Kunsthaus Zürich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/n-conference-zurich-failure-is-not-an-option/"
+              "label": "Halloween-Disco",
+              "detail": "Weiningen ZH",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-disco/"
             },
             {
-              "label": "Body: & Soul: Fit mit Baby Q4 2026",
+              "label": "Autobiografisches Schreiben – Grundkurs",
+              "detail": "Kappel am Albis",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/autobiografisches-schreiben-grundkurs/"
+            },
+            {
+              "label": "Tagesausflug nach Solothurn",
+              "detail": "Winterthur",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tagesausflug-nach-solothurn/"
+            },
+            {
+              "label": "Wanderung entlang des Sempachersees",
               "detail": "Uitikon-Waldegg, Uitikon",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/body-soul-fit-mit-baby-q-2026/"
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wanderung-entlang-des-sempachersees/"
             },
             {
-              "label": "N-Conference Zurich: Failure is not an option",
-              "detail": "Kunsthaus Zürich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/events/knowledge/zurich/negotiation-conference_AtkK4GW"
+              "label": "Kurs Atem & Entspannung (4 Wochen)",
+              "detail": "Wetzikon",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-atem-entspannung-4-wochen/"
             },
             {
-              "label": "Kammermusik-Lunchkonzert",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kammermusik-lunchkonzert/"
+              "label": "Masterclass Klavier Yulianna Avdeeva",
+              "detail": "Stadthaus, Winterthur",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/masterclass-klavier-yulianna-avdeeva/"
             },
             {
-              "label": "Lunchführung",
-              "detail": "Dietikon",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pranzo/"
+              "label": "Grundkenntnistest",
+              "detail": "Dübendorf",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/grundkenntnistest-11/"
             },
             {
-              "label": "Anonyms (auf Englisch)",
-              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/anonyms-auf-englisch_AXDwi1Q"
+              "label": "Kantonaler Deutschtest für die Einbürgerung",
+              "detail": "Dübendorf",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kantonaler-deutschtest-fuer-die-einbuergerung-8/"
             },
             {
-              "label": "Der Reporter - Lesung mit Hanspeter Bäni",
-              "detail": "Stadthaussaal Effretikon",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-reporter-lesung-mit-hanspeter-baeni/"
+              "label": "Tanke dein Gesundheitskonto auf - Achtsamkeit in der Natur erfahren",
+              "detail": "Richterswil",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanke-dein-gesundheitskonto-auf-achtsamkeit-in-der-natur-erfahren/"
             },
             {
-              "label": "Wasser-Gymnastik 60+ / Organisiert vom Frauenverein",
+              "label": "Clown Gili",
               "detail": "Urdorf",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wassergymnastik-60-organisiert-vom-frauenverein-22/"
-            },
-            {
-              "label": "ABGESAGT: Schreiben ist Kunst",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abgesagt-schreiben-ist-kunst/"
-            },
-            {
-              "label": "Offenes Schauspieltraining",
-              "detail": "Schauspielhaus Pfauen",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/offenes-schauspieltraining_AMeFXFb"
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/clown-gili/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -363,7 +363,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "ZH",
@@ -373,7 +373,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "367",
+          "value": "373",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -384,69 +384,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Negotiation Conference",
-              "detail": "Kunsthaus Zürich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/n-conference-zurich-failure-is-not-an-option/"
+              "label": "Halloween-Disco",
+              "detail": "Weiningen ZH",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-disco/"
             },
             {
-              "label": "Body: & Soul: Fit mit Baby Q4 2026",
+              "label": "Autobiografisches Schreiben – Grundkurs",
+              "detail": "Kappel am Albis",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/autobiografisches-schreiben-grundkurs/"
+            },
+            {
+              "label": "Tagesausflug nach Solothurn",
+              "detail": "Winterthur",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tagesausflug-nach-solothurn/"
+            },
+            {
+              "label": "Wanderung entlang des Sempachersees",
               "detail": "Uitikon-Waldegg, Uitikon",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/body-soul-fit-mit-baby-q-2026/"
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wanderung-entlang-des-sempachersees/"
             },
             {
-              "label": "N-Conference Zurich: Failure is not an option",
-              "detail": "Kunsthaus Zürich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/events/knowledge/zurich/negotiation-conference_AtkK4GW"
+              "label": "Kurs Atem & Entspannung (4 Wochen)",
+              "detail": "Wetzikon",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-atem-entspannung-4-wochen/"
             },
             {
-              "label": "Kammermusik-Lunchkonzert",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kammermusik-lunchkonzert/"
+              "label": "Masterclass Klavier Yulianna Avdeeva",
+              "detail": "Stadthaus, Winterthur",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/masterclass-klavier-yulianna-avdeeva/"
             },
             {
-              "label": "Visite guidée du déjeuner",
-              "detail": "Dietikon",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/pranzo/"
+              "label": "Grundkenntnistest",
+              "detail": "Dübendorf",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/grundkenntnistest-11/"
             },
             {
-              "label": "Anonyms (auf Englisch)",
-              "detail": "Völkerkundemuseum der Universität Zürich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/anonyms-auf-englisch_AXDwi1Q"
+              "label": "Kantonaler Deutschtest für die Einbürgerung",
+              "detail": "Dübendorf",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kantonaler-deutschtest-fuer-die-einbuergerung-8/"
             },
             {
-              "label": "Der Reporter - Lesung mit Hanspeter Bäni",
-              "detail": "Stadthaussaal Effretikon",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-reporter-lesung-mit-hanspeter-baeni/"
+              "label": "Tanke dein Gesundheitskonto auf - Achtsamkeit in der Natur erfahren",
+              "detail": "Richterswil",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanke-dein-gesundheitskonto-auf-achtsamkeit-in-der-natur-erfahren/"
             },
             {
-              "label": "Wasser-Gymnastik 60+ / Organisiert vom Frauenverein",
+              "label": "Clown Gili",
               "detail": "Urdorf",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wassergymnastik-60-organisiert-vom-frauenverein-22/"
-            },
-            {
-              "label": "ABGESAGT: Schreiben ist Kunst",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abgesagt-schreiben-ist-kunst/"
-            },
-            {
-              "label": "Offenes Schauspieltraining",
-              "detail": "Schauspielhaus Pfauen",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/zuerich/offenes-schauspieltraining_AMeFXFb"
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/clown-gili/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -480,7 +480,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

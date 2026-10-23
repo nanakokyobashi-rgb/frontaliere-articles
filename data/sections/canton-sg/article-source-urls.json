@@ -58,5 +58,20 @@
     "articleId": "voto-rete-gas-wil-2026",
     "ts": "2026-10-19T13:03:39.397Z",
     "keyForm": 2
+  },
+  "https://www.stgallen24.ch/articles/414153-sbb-schliessen-schalter-in-st-margrethen-und-uznach": {
+    "articleId": "sbb-sportelli-st-margrethen-uznach",
+    "ts": "2026-10-23T00:23:33.327Z",
+    "keyForm": 2
+  },
+  "https://www.sg.ch/news/sgch_allgemein/2026/10/koordinierter-schutz-fuer-kritische-infrastrukturen.html": {
+    "articleId": "san-gallo-protezione-infrastrutture-critiche",
+    "ts": "2026-10-23T03:10:46.425Z",
+    "keyForm": 2
+  },
+  "https://www.saiten.ch/dubiose-zahlen-zum-autobahnausbau": {
+    "articleId": "san-gallo-autostrada-rosenberg-terza-canna",
+    "ts": "2026-10-23T04:27:56.081Z",
+    "keyForm": 2
   }
 }

@@ -1,19 +1,4 @@
 {
-  "https://www.seco.admin.ch/it/newnsb/juhthgdqzukb": {
-    "articleId": "seco-previsioni-crescita-2026",
-    "ts": "2026-09-18T02:51:08.988Z",
-    "keyForm": 2
-  },
-  "https://www.admin.ch/it/newnsb/juhthgdqzukb": {
-    "articleId": "pil-svizzero-crescita-2026",
-    "ts": "2026-09-18T02:59:50.093Z",
-    "keyForm": 2
-  },
-  "https://www.seco.admin.ch/it/newnsb/zmsyjbttr33fguq8ra_t6": {
-    "articleId": "consiglio-federale-contributo-fmi",
-    "ts": "2026-09-18T03:06:02.479Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/abitazioni%3a-penuria-potrebbe-attenuarsi%2c-ma-non-prima-del-2027/92077041": {
     "articleId": "penuria-alloggi-svizzera-2027",
     "ts": "2026-09-18T03:19:46.917Z",
@@ -2497,6 +2482,21 @@
   "https://www.tio.ch/svizzera/economia/1958417/bns-prontezza-vede-necessita-svizzera": {
     "articleId": "bns-cambi-energia",
     "ts": "2026-10-22T23:00:20.238Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/abitare-%c3%a8-caro%2c-uno-svizzero-su-6-spende-oltre-un-terzo-del-reddito/92260026": {
+    "articleId": "sostenibilita-abitativa-svizzera",
+    "ts": "2026-10-23T00:22:46.773Z",
+    "keyForm": 2
+  },
+  "https://www.seco.admin.ch/it/newnsb/uslzdezpnqyf": {
+    "articleId": "lavoro-ridotto-normalizzazione-2027",
+    "ts": "2026-10-23T01:06:23.987Z",
+    "keyForm": 2
+  },
+  "https://www.swissinfo.ch/ita/sondaggio%3a-materiale-bellico-e-finanziamento-avs-ancora-incerti/92260772": {
+    "articleId": "sondaggio-votazioni-novembre-svizzera",
+    "ts": "2026-10-23T05:43:56.869Z",
     "keyForm": 2
   }
 }

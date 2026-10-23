@@ -631,6 +631,84 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sciaffusa-regole-datencenter-beringen': {
+    title: 'Sciaffusa inasprisce regole datacenter | Frontaliere Ticino',
+    description: 'Il Canton Sciaffusa inasprisce le normative per i datacenter. Citato il progetto di Stack a Beringen e la gestione del calore residuo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sciaffusa, inasprisce, regole, datacenter',
+    ogTitle: 'Sciaffusa: inasprimento regole datacenter',
+    ogDescription: 'Il Canton Sciaffusa pianifica regole più severe per i datacenter. Il nuovo impianto di Stack a Beringen è al centro della notizia, con focus sulla produzione di calore residuo.',
+    canonicalPath: '/articoli-sciaffusa/sciaffusa-regole-datencenter-beringen/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sciaffusa inasprisce regole datacenter",
+      "description": "Il Canton Sciaffusa inasprisce le normative per i datacenter. Citato il progetto di Stack a Beringen e la gestione del calore residuo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sciaffusa-regole-datencenter-beringen.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T01:48:34+00:00",
+      "dateModified": "2026-10-23T01:48:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/sciaffusa-regole-datencenter-beringen/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sciaffusa-regole-datacenter': {
+    title: 'Sciaffusa: proposta su elettricità, acqua e data center',
+    description: 'A Sciaffusa una proposta prevede prelievi su elettricità e acqua per le imprese ad alto consumo; il Governo cantonale la sostiene.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sciaffusa, proposta, elettricità, acqua',
+    ogTitle: 'Sciaffusa: regole su acqua ed elettricità per data center',
+    ogDescription: 'Sciaffusa propone prelievi sui consumi di elettricità e acqua: il primo alimenterebbe il fondo energia e clima, il secondo si aggiungerebbe oltre una certa misura. Il Governo ha deciso requisiti più severi per i data center pianificati.',
+    canonicalPath: '/articoli-sciaffusa/sciaffusa-regole-datacenter/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sciaffusa: proposta su elettricità, acqua e data center",
+      "description": "A Sciaffusa una proposta prevede prelievi su elettricità e acqua per le imprese ad alto consumo; il Governo cantonale la sostiene.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sciaffusa-regole-datacenter.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T03:48:32+00:00",
+      "dateModified": "2026-10-23T03:48:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-sciaffusa/sciaffusa-regole-datacenter/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

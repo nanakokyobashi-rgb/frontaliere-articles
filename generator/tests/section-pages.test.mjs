@@ -73,6 +73,7 @@ import { familySectionPages } from '../../scripts/lib/build-sitemap.mjs';
 import { createR2Request } from '../../scripts/lib/r2-section-lock.mjs';
 import {
   acquireImageNamespaceLeases,
+  classifyReleaseOutcome,
   releaseImageNamespaceLeasesWithDeadline as releaseImageLeasesWithDeadline,
   IMAGE_LEASE_RELEASE_TIMEOUT_MS,
 } from '../../scripts/lib/r2-image-namespace-lock.mjs';
@@ -156,6 +157,22 @@ test('image lease: il cleanup restituisce un timeout osservabile se R2 resta pen
   assert.equal(result.error?.code, 'IMAGE_LEASE_RELEASE_TIMEOUT');
   assert.equal(result.error?.timeoutMs, 20);
   assert.equal(IMAGE_LEASE_RELEASE_TIMEOUT_MS, 30_000);
+});
+
+test('image lease: la classificazione del rilascio è deterministica alla deadline', () => {
+  const deadline = 1_000;
+  assert.equal(
+    classifyReleaseOutcome({ outcome: { timedOut: false, results: [] }, now: 999, deadline }),
+    'released',
+  );
+  assert.equal(
+    classifyReleaseOutcome({ outcome: { timedOut: false, results: [] }, now: deadline, deadline }),
+    'timeout',
+  );
+  assert.equal(
+    classifyReleaseOutcome({ outcome: { timedOut: true }, now: 0, deadline }),
+    'timeout',
+  );
 });
 
 test('image lease: il cleanup bounded tenta ogni namespace entro lo stesso budget', async () => {
@@ -3198,12 +3215,13 @@ test('fast-publish verso gli shard ignora i corpi cantonali, quello R2 ignora le
 
 test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenziali obbligatorie', () => {
   const wf = read('.github/workflows/fast-publish-section.yml');
+  const resolver = read('scripts/ci/fast-publish-section-resolve.sh');
   assert.match(wf, /workflow_run:\n\s+workflows: \['Publish article data API'\]\n\s+types: \[completed\]\n\s+branches: \[main\]/);
   assert.match(wf, /github\.event\.workflow_run\.conclusion == 'success'/);
   assert.match(wf, /github\.event\.workflow_run\.event == 'push'[\s\S]*github\.event\.workflow_run\.event == 'schedule'[\s\S]*github\.event\.workflow_run\.event == 'workflow_dispatch'/);
   assert.match(wf, /COVER_DRAIN_COMMIT_MESSAGE: \$\{\{ github\.event\.head_commit\.message \}\}/);
   assert.match(wf, /WORKFLOW_RUN_COVER_DRAIN_COMMIT_MESSAGE: \$\{\{ github\.event\.workflow_run\.head_commit\.message \}\}/);
-  assert.match(wf, /if \[ "\$EVENT_NAME" = 'push' \] \|\| \{ \[ "\$EVENT_NAME" = 'workflow_run' \] && \[ "\$WORKFLOW_RUN_EVENT" = 'push' \]; \}; then/);
+  assert.match(resolver, /if \[ "\$EVENT_NAME" = 'push' \] \|\| \{ \[ "\$EVENT_NAME" = 'workflow_run' \] && \[ "\$WORKFLOW_RUN_EVENT" = 'push' \]; \}; then/);
   assert.equal(
     (wf.match(/ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_commit \|\| \(github\.event_name == 'workflow_dispatch' && inputs\.bootstrap != true && github\.ref\) \|\| github\.sha \}\}/g) ?? []).length,
     2,
@@ -3214,16 +3232,16 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /SOURCE_MAIN_COMMIT_INPUT: \$\{\{ inputs\.source_main_commit \}\}/);
   assert.match(wf, /DISPATCH_NONCE_INPUT: \$\{\{ inputs\.dispatch_nonce \}\}/);
   assert.match(
-    wf,
+    resolver,
     /pinned_source="\$\{SOURCE_MAIN_COMMIT_INPUT:-\$SOURCE_COMMIT_INPUT\}[\s\S]*replay stantio saltato nel resolve/,
     'il resolve deve saltare un bounded replay quando main e\u0027 avanzata',
   );
-  const coverDrainGuardStart = wf.indexOf("if [ \"$EVENT_NAME\" = 'push' ] || { [ \"$EVENT_NAME\" = 'workflow_run' ] && [ \"$WORKFLOW_RUN_EVENT\" = 'push' ]; }; then");
-  const staleResolveStart = wf.indexOf('if [ "$current_main" != "$pinned_source" ]');
+  const coverDrainGuardStart = resolver.indexOf("if [ \"$EVENT_NAME\" = 'push' ] || { [ \"$EVENT_NAME\" = 'workflow_run' ] && [ \"$WORKFLOW_RUN_EVENT\" = 'push' ]; }; then");
+  const staleResolveStart = resolver.indexOf('if [ "$current_main" != "$pinned_source" ]');
   assert.ok(coverDrainGuardStart >= 0 && coverDrainGuardStart < staleResolveStart, 'il cover-drain guard deve precedere il recovery stale');
-  const staleResolve = wf.slice(
+  const staleResolve = resolver.slice(
     staleResolveStart,
-    wf.indexOf('\n          before="${PUSH_BEFORE:-}"', staleResolveStart),
+    resolver.indexOf('\nbefore="${PUSH_BEFORE:-}"', staleResolveStart),
   );
   assert.match(staleResolve, /FIREBASE_SERVICE_ACCOUNT_JSON assente/);
   assert.match(staleResolve, /bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh "\$REPO" "\$dispatch_title" --ref main/);
@@ -3258,24 +3276,33 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /EVENT_NAME[\s\S]*workflow_dispatch[\s\S]*PINNED_SOURCE_COMMIT/);
   assert.match(wf, /if: steps\.replay_freshness\.outputs\.fresh == 'true'/);
   assert.match(wf, /Dispatch bounded replay with current corpus checkout/);
-  const dispatchPlanStart = wf.indexOf('if [ "${{ github.event_name }}" = "workflow_dispatch" ]');
-  const dispatchPlanEnd = wf.indexOf('any=false', dispatchPlanStart);
-  const dispatchPlan = wf.slice(dispatchPlanStart, dispatchPlanEnd);
+  const dispatchPlanStart = resolver.indexOf('if [ "$EVENT_NAME" = "workflow_dispatch" ]; then');
+  const dispatchPlanEnd = resolver.indexOf('any=false', dispatchPlanStart);
+  const dispatchPlan = resolver.slice(dispatchPlanStart, dispatchPlanEnd);
   assert.match(dispatchPlan, /FAST_PUBLISH_DISABLED/);
   assert.match(dispatchPlan, /FAST_PUBLISH_ARMED/);
   assert.equal((wf.match(/-f dry_run="\$DRY"/g) ?? []).length, 3, 'tutti i redispatch propagano il dry-run calcolato');
   assert.doesNotMatch(wf, /-f dry_run=false/);
-  assert.equal((wf.match(/bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh/g) ?? []).length, 4);
+  assert.equal(
+    ((wf.match(/bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh/g) ?? []).length
+      + (resolver.match(/bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh/g) ?? []).length),
+    4,
+  );
   assert.equal((wf.match(/name: Checkout replay dispatcher from workflow revision/g) ?? []).length, 3);
   assert.equal((wf.match(/ref: \$\{\{ github\.sha \}\}\n\s+path: \.replay-dispatcher-source/g) ?? []).length, 3);
   assert.match(wf, /sparse-checkout:\n\s+scripts\/ci\/dispatch-fast-publish-replay\.sh/);
-  assert.equal((wf.match(/-f cleanup_inactive_surface="\$[A-Za-z_]+"/g) ?? []).length, 4);
+  assert.equal(
+    ((wf.match(/-f cleanup_inactive_surface="\$[A-Za-z_]+"/g) ?? []).length
+      + (resolver.match(/-f cleanup_inactive_surface="\$[A-Za-z_]+"/g) ?? []).length),
+    4,
+  );
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE_INPUT: \$\{\{ inputs\.cleanup_inactive_surface \}\}/);
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE: \$\{\{ matrix\.target\.cleanupInactiveSurface \|\| false \}\}/);
   assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /-f source_commit="\$current_main"/);
   assert.equal(
-    (wf.match(/-f dispatch_nonce="\$dispatch_nonce"/g) ?? []).length,
+    ((wf.match(/-f dispatch_nonce="\$dispatch_nonce"/g) ?? []).length
+      + (resolver.match(/-f dispatch_nonce="\$dispatch_nonce"/g) ?? []).length),
     4,
     'ogni redispatch stale deve conservare il nonce della run originaria o generarne un fallback per sezione',
   );
@@ -3356,7 +3383,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   const replayDispatcher = read('scripts/ci/dispatch-fast-publish-replay.sh');
   assert.match(wf, /^run-name:.*inputs\.dry_run/m);
-  assert.match(wf, /replay richiesto con dry_run=false ma il publisher è disarmato/);
+  assert.match(resolver, /replay richiesto con dry_run=false ma il publisher è disarmato/);
   assert.match(replayDispatcher, /--json databaseId,displayTitle,status,conclusion/);
   assert.match(replayDispatcher, /REPLAY_RUN_LIST_CACHE_FILE/);
   assert.match(replayDispatcher, /flock/);
@@ -3376,9 +3403,12 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(replayDispatcher, /non invio un dispatch duplicato/);
   assert.match(replayDispatcher, /for poll in \{1\.\.10\}; do/);
   assert.match(replayDispatcher, /ultimo replay fallito; riaccodo/);
-  const reconcileStart = wf.indexOf('          reconcile_edge_matrix() {');
-  const reconcileEnd = wf.indexOf('          pinned_source=', reconcileStart);
-  const reconcile = wf.slice(reconcileStart, reconcileEnd);
+  assert.match(replayDispatcher, /async_stale_dispatch=false/);
+  assert.match(replayDispatcher, /nonce=stale-/);
+  assert.match(replayDispatcher, /replay stale accettato dall'API/);
+  const reconcileStart = resolver.indexOf('reconcile_edge_matrix() {');
+  const reconcileEnd = resolver.indexOf('pinned_source=', reconcileStart);
+  const reconcile = resolver.slice(reconcileStart, reconcileEnd);
   assert.match(reconcile, /local source_dir="\$\{3:-\$PWD\}"/);
   assert.match(reconcile, /cd "\$source_dir"/);
   assert.match(reconcile, /if ! command -v timeout >\/dev\/null 2>&1/);
@@ -3387,11 +3417,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(reconcile, /timeout --signal=TERM --kill-after=1s "\$\{candidate_timeout\}s"/);
   assert.match(reconcile, /reconcile_edge_attempt "\$expected_commit" "\$attempt_timeout"/);
   assert.match(reconcile, /reconcile_edge_attempt "\$fallback_commit" "\$attempt_timeout"/);
-  assert.match(wf, /registro edge in transizione; ritento il piano di riconciliazione tra \$\{delay\} secondi/);
+  assert.match(resolver, /registro edge in transizione; ritento il piano di riconciliazione tra \$\{delay\} secondi/);
   assert.match(staleResolve, /replay_before="\$\{PUSH_BEFORE:-\}"/);
   assert.doesNotMatch(staleResolve, /replay_before="\$\{DISPATCH_PUSH_BEFORE:-\}"/);
-  assert.match(wf, /replay_matrix="\$\(reconcile_edge_matrix "\$pinned_source" "\$current_main" "\$current_main_source"\)"/);
-  assert.match(wf, /edge_matrix="\$\(reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"\)"/);
+  assert.match(resolver, /replay_matrix="\$\(reconcile_edge_matrix "\$pinned_source" "\$current_main" "\$current_main_source"\)"/);
+  assert.match(resolver, /edge_matrix="\$\(reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"\)"/);
   assert.match(wf, /cleanupInactiveSurface/);
   const fastPublishSection = read('scripts/ci/fast-publish-section.mjs');
   assert.match(fastPublishSection, /allCore = ARTICLE_SECTION_CORE_ALL/);
@@ -3436,13 +3466,13 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   assert.match(wf, /name: Fetch push base \(resolve\)[\s\S]*?bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
   assert.doesNotMatch(wf, /diff_args=\(\)[\s\S]*sections\/registry\.json/);
-  assert.match(wf, /PUSH_BEFORE="\$before" node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
-  assert.match(wf, /reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"/);
-  assert.match(wf, /edge_matrix="\$\(reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"\)"/);
+  assert.match(resolver, /PUSH_BEFORE="\$before" node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
+  assert.match(resolver, /reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"/);
+  assert.match(resolver, /edge_matrix="\$\(reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"\)"/);
   assert.match(wf, /if \[ "\$WORKFLOW_RUN_EVENT" = 'push' \]/);
-  assert.match(wf, /r2-api-push-plan/);
-  assert.match(wf, /landing\/archive\/hub\/RSS/);
-  assert.match(wf, /Il replay della push API deve riprodurre il piano dei\s+contenuti/);
+  assert.match(resolver, /r2-api-push-plan/);
+  assert.match(resolver, /landing\/archive\/hub\/RSS/);
+  assert.match(resolver, /Il replay della push API deve riprodurre il piano dei\s+contenuti/);
   assert.match(
     read('scripts/publish-section-pages.mjs'),
     /await assertMainFreshImpl\(\);\n  await publishSignalBoundary\(signal\);\n  for \(const \{ local, key \} of cdnUploads\)/,
@@ -3519,9 +3549,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   for (const p of ["'content/cantons/**'", "'content/blog-body-canton-*/**'", "'content/blog-meta-canton-*'", "'sections/registry.json'"]) {
     assert.ok(wf.includes(`      - ${p}\n`), p);
   }
-  assert.match(wf, /node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
+  assert.match(wf, /bash scripts\/ci\/fast-publish-section-resolve\.sh/);
+  assert.match(resolver, /node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
   assert.match(wf, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);
-  assert.match(wf, /git diff --name-status "\$before" HEAD/);
+  assert.match(resolver, /git diff --name-status "\$before" HEAD/);
   assert.match(wf, /Fetch fallback corpus revision for manifest migration/);
   assert.match(wf, /--previous-revision/);
   const fallbackFetchStart = wf.indexOf('name: Fetch fallback corpus revision for manifest migration');
@@ -3530,7 +3561,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(fallbackFetch, /if \[ "\$EVENT_NAME" = 'workflow_run' \]/);
   assert.match(fallbackFetch, /bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
   assert.doesNotMatch(fallbackFetch, /git fetch --no-tags --depth=1 origin/);
-  assert.match(wf, /bootstrap: \(\.bootstrap \/\/ false\)/);
+  assert.match(resolver, /bootstrap: \(\.bootstrap \/\/ false\)/);
   for (const p of [
     'generator/scripts/lib/corpus-paths.mjs',
     'generator/scripts/lib/control-char-write-report.mjs',

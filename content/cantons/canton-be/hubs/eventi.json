@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T22:21:57.960Z",
-  "contentHash": "36d8e8939233b47842a981f00119038f99aeb0fb04957167b50fc27247c76b67",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "4600b9638d3d43865033aa238687334f2dd8e2576bd6174681f66fca19f417e3",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T11:13:26.127Z",
+      "updatedAt": "2026-10-22T19:30:03.925Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "222",
+          "value": "226",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "3. Talentbühne „Niesenlicht“",
-              "detail": "Berghaus Niesen Kulm",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muelenen/3-talentbuehne-niesenlicht_ABvCKxp"
+              "label": "Live Musik - Brooke Law",
+              "detail": "Gemmi Taverne, Kandersteg",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/events/music/kandersteg/live-music-brooke-law_AucHv7T"
             },
             {
-              "label": "Loube-Café Diemtigen",
-              "detail": "Oey-Diemtigen, Diemtigen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/loube-cafe-diemtigen/"
+              "label": "Trüelete - vintage festival",
+              "detail": "Bielersee Tourismus",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/trueelete/"
             },
             {
-              "label": "Visite sandwich",
-              "detail": "La Neuveville",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-sandwich/"
+              "label": "Besuchstag Militärflugplatz Meiringen",
+              "detail": "3857 Unterbach BE, Meiringen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/besuchstag-militaerflugplatz-meiringen/"
             },
             {
-              "label": "Selbstplanerkurs PV-Anlage e-wende",
-              "detail": "Bern",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
+              "label": "21th Homemade Metzgete",
+              "detail": "Saanenmöser",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/21th-homemade-metzgete/"
             },
             {
-              "label": "Rafael Scholten \"wunderbare Kuriositäten\"",
-              "detail": "Oberhofen, Oberhofen am Thunersee",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rafael-scholten-wunderbare-kuriositaeten/"
+              "label": "Albert Mountain Award und UIAA-Awards",
+              "detail": "ALPS Alpines Museum der Schweiz",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/bern/albert-mountain-award-und-uiaa-awards_AhFvWG6"
             },
             {
-              "label": "ABBA SYMPHONIC CELEBRATION",
-              "detail": "National Bern, Bern",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/abba-symphonic-celebration_A4St1kD"
+              "label": "Wildabend im Restaurant Aebi",
+              "detail": "Restaurant Aebi, Adelboden",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wildabend-im-restaurant-aebi/"
             },
             {
-              "label": "Alwa Alibi Release Show",
-              "detail": "ISC",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/alwa-alibi-release-show_AhFkZZs"
+              "label": "Der Weg Einer Freiheit (DE)",
+              "detail": "Le Port Franc, Port",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-weg-einer-freiheit-de/"
             },
             {
-              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
-              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — in corso, ultimo giorno: 21 novembre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
+              "label": "Rolf Marti & Lisa Catena – «Mys Käthi schmöckt nach Schoggola»",
+              "detail": "KulturKapelle 9, Spiez",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/rolf-marti-und-lisa-catena-mys-kaethi-schmoeckt-nach-schoggola_Ad277Ru"
             },
             {
-              "label": "JUDITH OWEN & THE GENTLEMEN CALLERS",
-              "detail": "Marians Jazzroom — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/judith-owen-und-the-gentlemen-callers_AJdnaAQ"
+              "label": "Super ABBA",
+              "detail": "Stadttheater Langenthal, Langenthal",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/super-abba_AUTtsbP"
             },
             {
-              "label": "Zaubermärchen im Tipi",
-              "detail": "Bolligen — in corso, ultimo giorno: 15 novembre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
+              "label": "David Howald",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/david-howald/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "222",
+          "value": "226",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "3. Talentbühne „Niesenlicht“",
-              "detail": "Berghaus Niesen Kulm",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muelenen/3-talentbuehne-niesenlicht_ABvCKxp"
+              "label": "Live music - Brooke Law",
+              "detail": "Gemmi Taverne, Kandersteg",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/events/music/kandersteg/live-music-brooke-law_AucHv7T"
             },
             {
-              "label": "Loube-Café Diemtigen",
-              "detail": "Oey-Diemtigen, Diemtigen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/loube-cafe-diemtigen/"
+              "label": "Trüelete - vintage festival",
+              "detail": "Bielersee Tourismus",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/trueelete/"
             },
             {
-              "label": "Visite sandwich",
-              "detail": "La Neuveville",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-sandwich/"
+              "label": "Besuchstag Militärflugplatz Meiringen",
+              "detail": "3857 Unterbach BE, Meiringen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/besuchstag-militaerflugplatz-meiringen/"
             },
             {
-              "label": "Selbstplanerkurs PV-Anlage e-wende",
-              "detail": "Bern",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
+              "label": "21th Homemade Metzgete",
+              "detail": "Saanenmöser",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/21th-homemade-metzgete/"
             },
             {
-              "label": "Rafael Scholten \"wunderbare Kuriositäten\"",
-              "detail": "Oberhofen, Oberhofen am Thunersee",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rafael-scholten-wunderbare-kuriositaeten/"
+              "label": "Albert Mountain Award und UIAA-Awards",
+              "detail": "ALPS Alpines Museum der Schweiz",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/bern/albert-mountain-award-und-uiaa-awards_AhFvWG6"
             },
             {
-              "label": "ABBA SYMPHONIC CELEBRATION",
-              "detail": "National Bern, Bern",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/abba-symphonic-celebration_A4St1kD"
+              "label": "Wildabend im Restaurant Aebi",
+              "detail": "Restaurant Aebi, Adelboden",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wildabend-im-restaurant-aebi/"
             },
             {
-              "label": "Alwa Alibi Release Show",
-              "detail": "ISC",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/alwa-alibi-release-show_AhFkZZs"
+              "label": "Der Weg Einer Freiheit (DE)",
+              "detail": "Le Port Franc, Port",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-weg-einer-freiheit-de/"
             },
             {
-              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
-              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — ongoing, last day: 21 November 2026",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
+              "label": "Rolf Marti & Lisa Catena – «Mys Käthi schmöckt nach Schoggola»",
+              "detail": "KulturKapelle 9, Spiez",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/rolf-marti-und-lisa-catena-mys-kaethi-schmoeckt-nach-schoggola_Ad277Ru"
             },
             {
-              "label": "JUDITH OWEN & THE GENTLEMEN CALLERS",
-              "detail": "Marians Jazzroom — ongoing, last day: 24 October 2026",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/judith-owen-und-the-gentlemen-callers_AJdnaAQ"
+              "label": "Super ABBA",
+              "detail": "Stadttheater Langenthal, Langenthal",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/super-abba_AUTtsbP"
             },
             {
-              "label": "Zaubermärchen im Tipi",
-              "detail": "Bolligen — ongoing, last day: 15 November 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
+              "label": "David Howald",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/david-howald/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "222",
+          "value": "226",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "3. Talentbühne „Niesenlicht“",
-              "detail": "Berghaus Niesen Kulm",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muelenen/3-talentbuehne-niesenlicht_ABvCKxp"
+              "label": "Live Musik - Brooke Law",
+              "detail": "Gemmi Taverne, Kandersteg",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/events/music/kandersteg/live-music-brooke-law_AucHv7T"
             },
             {
-              "label": "Loube-Café Diemtigen",
-              "detail": "Oey-Diemtigen, Diemtigen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/loube-cafe-diemtigen/"
+              "label": "Trüelete",
+              "detail": "Bielersee Tourismus",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/trueelete/"
             },
             {
-              "label": "Visite sandwich",
-              "detail": "La Neuveville",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-sandwich/"
+              "label": "Besuchstag Militärflugplatz Meiringen",
+              "detail": "3857 Unterbach BE, Meiringen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/besuchstag-militaerflugplatz-meiringen/"
             },
             {
-              "label": "Selbstplanerkurs PV-Anlage e-wende",
-              "detail": "Bern",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
+              "label": "21. Hausgemachte Metzgete",
+              "detail": "Saanenmöser",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/21th-homemade-metzgete/"
             },
             {
-              "label": "Rafael Scholten \"wunderbare Kuriositäten\"",
-              "detail": "Oberhofen, Oberhofen am Thunersee",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rafael-scholten-wunderbare-kuriositaeten/"
+              "label": "Albert Mountain Award und UIAA-Awards",
+              "detail": "ALPS Alpines Museum der Schweiz",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/bern/albert-mountain-award-und-uiaa-awards_AhFvWG6"
             },
             {
-              "label": "ABBA SYMPHONIC CELEBRATION",
-              "detail": "National Bern, Bern",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/abba-symphonic-celebration_A4St1kD"
+              "label": "Wildabend im Restaurant Aebi",
+              "detail": "Restaurant Aebi, Adelboden",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wildabend-im-restaurant-aebi/"
             },
             {
-              "label": "Alwa Alibi Release Show",
-              "detail": "ISC",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/alwa-alibi-release-show_AhFkZZs"
+              "label": "Der Weg Einer Freiheit (DE)",
+              "detail": "Le Port Franc, Port",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-weg-einer-freiheit-de/"
             },
             {
-              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
-              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — läuft, letzter Tag: 21. November 2026",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
+              "label": "Rolf Marti & Lisa Catena – «Mys Käthi schmöckt nach Schoggola»",
+              "detail": "KulturKapelle 9, Spiez",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/rolf-marti-und-lisa-catena-mys-kaethi-schmoeckt-nach-schoggola_Ad277Ru"
             },
             {
-              "label": "JUDITH OWEN & THE GENTLEMEN CALLERS",
-              "detail": "Marians Jazzroom — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/judith-owen-und-the-gentlemen-callers_AJdnaAQ"
+              "label": "Super ABBA",
+              "detail": "Stadttheater Langenthal, Langenthal",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/super-abba_AUTtsbP"
             },
             {
-              "label": "Zaubermärchen im Tipi",
-              "detail": "Bolligen — läuft, letzter Tag: 15. November 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
+              "label": "David Howald",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/david-howald/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "222",
+          "value": "226",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "3. Talentbühne „Niesenlicht“",
-              "detail": "Berghaus Niesen Kulm",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muelenen/3-talentbuehne-niesenlicht_ABvCKxp"
+              "label": "Musique en direct - Brooke Law",
+              "detail": "Gemmi Taverne, Kandersteg",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/events/music/kandersteg/live-music-brooke-law_AucHv7T"
             },
             {
-              "label": "Loube-Café Diemtigen",
-              "detail": "Oey-Diemtigen, Diemtigen",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/loube-cafe-diemtigen/"
+              "label": "Trüelete",
+              "detail": "Bielersee Tourismus",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/trueelete/"
             },
             {
-              "label": "Visite sandwich",
-              "detail": "La Neuveville",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/visite-sandwich/"
+              "label": "Besuchstag Militärflugplatz Meiringen",
+              "detail": "3857 Unterbach BE, Meiringen",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/besuchstag-militaerflugplatz-meiringen/"
             },
             {
-              "label": "Selbstplanerkurs PV-Anlage e-wende",
-              "detail": "Bern",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
+              "label": "21e Cochonaille fait maison",
+              "detail": "Saanenmöser",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/21th-homemade-metzgete/"
             },
             {
-              "label": "Rafael Scholten \"wunderbare Kuriositäten\"",
-              "detail": "Oberhofen, Oberhofen am Thunersee",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rafael-scholten-wunderbare-kuriositaeten/"
+              "label": "Albert Mountain Award und UIAA-Awards",
+              "detail": "ALPS Alpines Museum der Schweiz",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/bern/albert-mountain-award-und-uiaa-awards_AhFvWG6"
             },
             {
-              "label": "ABBA SYMPHONIC CELEBRATION",
-              "detail": "National Bern, Bern",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/bern/abba-symphonic-celebration_A4St1kD"
+              "label": "Wildabend im Restaurant Aebi",
+              "detail": "Restaurant Aebi, Adelboden",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wildabend-im-restaurant-aebi/"
             },
             {
-              "label": "Alwa Alibi Release Show",
-              "detail": "ISC",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/alwa-alibi-release-show_AhFkZZs"
+              "label": "Der Weg Einer Freiheit (DE)",
+              "detail": "Le Port Franc, Port",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-weg-einer-freiheit-de/"
             },
             {
-              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
-              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — en cours, dernier jour : 21 novembre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
+              "label": "Rolf Marti & Lisa Catena – «Mys Käthi schmöckt nach Schoggola»",
+              "detail": "KulturKapelle 9, Spiez",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/rolf-marti-und-lisa-catena-mys-kaethi-schmoeckt-nach-schoggola_Ad277Ru"
             },
             {
-              "label": "JUDITH OWEN & THE GENTLEMEN CALLERS",
-              "detail": "Marians Jazzroom — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/judith-owen-und-the-gentlemen-callers_AJdnaAQ"
+              "label": "Super ABBA",
+              "detail": "Stadttheater Langenthal, Langenthal",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/super-abba_AUTtsbP"
             },
             {
-              "label": "Zaubermärchen im Tipi",
-              "detail": "Bolligen — en cours, dernier jour : 15 novembre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zaubermaerchen-im-tipi/"
+              "label": "David Howald",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/david-howald/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

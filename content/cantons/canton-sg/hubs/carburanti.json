@@ -4,14 +4,14 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-21T17:12:16.125Z",
-  "contentHash": "230a8f7419937464280385c40b0f3080783432d32cd4346df04dae0e556118b6",
+  "updatedAt": "2026-10-23T04:35:27.849Z",
+  "contentHash": "a8ebfee02146b29a57568b801ac23ec78c9d4bacd4bee4ee5cef2bb07ae8ceb3",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-21T12:19:56.872Z",
+      "updatedAt": "2026-10-22T12:21:38.892Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-28T12:19:56.872Z"
+      "carryUntilAt": "2026-10-29T12:21:38.892Z"
     }
   ],
   "locales": {
@@ -54,35 +54,53 @@
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "2,236 EUR/l",
-              "detail": "media regionale: minimo 2,229 EUR/l, 3 stazioni rilevate",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2,219 EUR/l",
+              "detail": "media regionale: minimo 2,219 EUR/l, 3 stazioni rilevate",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,379 EUR/l",
-              "detail": "media regionale: minimo 2,359 EUR/l, 3 stazioni rilevate",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2,322 EUR/l",
+              "detail": "media regionale: minimo 2,319 EUR/l, 3 stazioni rilevate",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Benzina 95 — Austria",
-              "value": "1,812 EUR/l",
-              "detail": "media regionale: minimo 1,808 EUR/l, 13 stazioni rilevate",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "1,794 EUR/l",
+              "detail": "media regionale: minimo 1,789 EUR/l, 11 stazioni rilevate",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2,145 EUR/l",
+              "value": "2,159 EUR/l",
               "detail": "media regionale: minimo 2,100 EUR/l, 10 stazioni rilevate",
-              "date": "2026-10-21T12:19:56.872Z"
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "San Gallo: terza canna Rosenberg e cifre contestate",
+          "url": "/articoli-san-gallo/san-gallo-autostrada-rosenberg-terza-canna/",
+          "excerpt": "Sostenitori chiedono ampliamento autostradale; pianificatore Hug-Di Lena definisce discutibili le basi numeriche.",
+          "date": "2026-10-23T04:27:56.026Z"
+        },
+        {
+          "title": "San Gallo rafforza protezione infrastrutture critiche",
+          "url": "/articoli-san-gallo/san-gallo-protezione-infrastrutture-critiche/",
+          "excerpt": "Il Governo di San Gallo rafforza la protezione delle infrastrutture critiche La strategia copre infrastrutture, processi e servizi La resilienza include",
+          "date": "2026-10-23T03:10:46.389Z"
+        },
+        {
+          "title": "SBB chiudono gli sportelli a St.Margrethen e Uznach",
+          "url": "/articoli-san-gallo/sbb-sportelli-st-margrethen-uznach/",
+          "excerpt": "Dall'inizio del 2027 le SBB puntano sul self-service a St.Margrethen e Uznach: il 3% dei biglietti è ancora venduto allo sportello.",
+          "date": "2026-10-23T00:23:33.274Z"
+        },
         {
           "title": "Wil: voto il 29 novembre 2026 sulla rete del gas",
           "url": "/articoli-san-gallo/voto-rete-gas-wil-2026/",
@@ -94,24 +112,6 @@
           "url": "/articoli-san-gallo/status-s-san-gallo-assistenza/",
           "excerpt": "La commissione propone assistenza ridotta anche dopo il permesso.",
           "date": "2026-10-19T12:49:37.837Z"
-        },
-        {
-          "title": "Voto sul Bahnhofplatz Wil: credito di 63,66 milioni",
-          "url": "/articoli-san-gallo/voto-bahnhofplatz-wil-2026/",
-          "excerpt": "Il 29 novembre 2026 i cittadini di Wil voteranno sul progetto per il nuovo terminale bus, la velostazione e la riqualificazione della stazione.",
-          "date": "2026-10-19T12:16:44.327Z"
-        },
-        {
-          "title": "St.Gallen avvia il sondaggio per le imprese",
-          "url": "/articoli-san-gallo/sondaggio-imprese-st-gallen-2026/",
-          "excerpt": "La città di St.Gallen lancia un sondaggio rivolto alle imprese per valutare la piazza economica.",
-          "date": "2026-10-19T10:59:29.088Z"
-        },
-        {
-          "title": "HSG guida studio UE sulla riduzione dell'orario di lavoro",
-          "url": "/articoli-san-gallo/hsg-optime-orario-lavoro/",
-          "excerpt": "L'Università di San Gallo coordina OPTIME, progetto UE finanziato da Horizon Europe con circa 3,37 milioni di euro.",
-          "date": "2026-10-19T09:46:11.999Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-23T04:35:27.849Z"
     },
     "en": {
       "canton": "SG",
@@ -165,35 +165,53 @@
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "2.236 EUR/l",
-              "detail": "regional average: lowest 2.229 EUR/l, 3 stations surveyed",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2.219 EUR/l",
+              "detail": "regional average: lowest 2.219 EUR/l, 3 stations surveyed",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.379 EUR/l",
-              "detail": "regional average: lowest 2.359 EUR/l, 3 stations surveyed",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2.322 EUR/l",
+              "detail": "regional average: lowest 2.319 EUR/l, 3 stations surveyed",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Petrol 95 — Austria",
-              "value": "1.812 EUR/l",
-              "detail": "regional average: lowest 1.808 EUR/l, 13 stations surveyed",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "1.794 EUR/l",
+              "detail": "regional average: lowest 1.789 EUR/l, 11 stations surveyed",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2.145 EUR/l",
+              "value": "2.159 EUR/l",
               "detail": "regional average: lowest 2.100 EUR/l, 10 stations surveyed",
-              "date": "2026-10-21T12:19:56.872Z"
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "St. Gallen: third Rosenberg tube and disputed figures",
+          "url": "/en/st-gallen-articles/st-gallen-highway-rosenberg-third-tube/",
+          "excerpt": "Supporters call for highway expansion; planner Hug-Di Lena deems the numerical bases questionable.",
+          "date": "2026-10-23T04:27:56.026Z"
+        },
+        {
+          "title": "St. Gallen strengthens protection of critical infrastructure",
+          "url": "/en/st-gallen-articles/st-gallen-critical-infrastructure-protection/",
+          "excerpt": "The Government of St.",
+          "date": "2026-10-23T03:10:46.389Z"
+        },
+        {
+          "title": "SBB close the ticket offices in St.Margrethen and Uznach",
+          "url": "/en/st-gallen-articles/sbb-ticket-counters-st-margrethen-uznach/",
+          "excerpt": "From the beginning of 2027, SBB are focusing on self-service in St.Margrethen and Uznach: 3% of tickets are still sold at the counter.",
+          "date": "2026-10-23T00:23:33.274Z"
+        },
         {
           "title": "Wil: vote on the gas network on November 29, 2026",
           "url": "/en/st-gallen-articles/gas-network-vote-wil-2026/",
@@ -205,24 +223,6 @@
           "url": "/en/st-gallen-articles/status-s-st-gallen-assistance/",
           "excerpt": "The commission proposes reduced assistance even after the permit.",
           "date": "2026-10-19T12:49:37.837Z"
-        },
-        {
-          "title": "Vote on Bahnhofplatz Wil: credit of 63,66 million",
-          "url": "/en/st-gallen-articles/wil-bahnhofplatz-vote-2026/",
-          "excerpt": "On November 29, 2026, the citizens of Wil will vote on the project for the new bus terminal, bicycle station, and redevelopment of the station.",
-          "date": "2026-10-19T12:16:44.327Z"
-        },
-        {
-          "title": "St.Gallen launches the business survey",
-          "url": "/en/st-gallen-articles/st-gallen-business-survey-2026/",
-          "excerpt": "The city of St.Gallen is launching a survey aimed at businesses to assess the business location.",
-          "date": "2026-10-19T10:59:29.088Z"
-        },
-        {
-          "title": "HSG leads EU study on reducing working hours",
-          "url": "/en/st-gallen-articles/hsg-optime-working-time/",
-          "excerpt": "The University of St.",
-          "date": "2026-10-19T09:46:11.999Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-23T04:35:27.849Z"
     },
     "de": {
       "canton": "SG",
@@ -276,35 +276,53 @@
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "2.236 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.229 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2.219 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.219 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.379 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.359 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2.322 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.319 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Benzin 95 — Österreich",
-              "value": "1.812 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.808 EUR/l, 13 erfasste Tankstellen",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "1.794 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.789 EUR/l, 11 erfasste Tankstellen",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Österreich",
-              "value": "2.145 EUR/l",
+              "value": "2.159 EUR/l",
               "detail": "regionaler Durchschnitt: tiefster Preis 2.100 EUR/l, 10 erfasste Tankstellen",
-              "date": "2026-10-21T12:19:56.872Z"
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "St. Gallen: dritte Röhre am Rosenberg und umstrittene Zahlen",
+          "url": "/de/st-gallen-artikel/st-gallen-autobahn-rosenberg-dritte-roehre/",
+          "excerpt": "Befürworter fordern Autobahnausbau; der Planer Hug-Di Lena bezeichnet die Zahlengrundlage als fragwürdig.",
+          "date": "2026-10-23T04:27:56.026Z"
+        },
+        {
+          "title": "St. Gallen stärkt den Schutz kritischer Infrastrukturen",
+          "url": "/de/st-gallen-artikel/st-gallen-schutz-kritischer-infrastrukturen/",
+          "excerpt": "Die Regierung von St.",
+          "date": "2026-10-23T03:10:46.389Z"
+        },
+        {
+          "title": "SBB schließen Schalter in St.Margrethen und Uznach",
+          "url": "/de/st-gallen-artikel/sbb-schalter-st-margrethen-uznach/",
+          "excerpt": "Ab Anfang 2027 setzen die SBB in St.Margrethen und Uznach auf Selbstbedienung: 3% der Tickets werden noch am Schalter verkauft.",
+          "date": "2026-10-23T00:23:33.274Z"
+        },
         {
           "title": "Wil: Abstimmung am 29. November 2026 über das Gasnetz",
           "url": "/de/st-gallen-artikel/gasnetz-abstimmung-wil-2026/",
@@ -316,24 +334,6 @@
           "url": "/de/st-gallen-artikel/status-s-st-gallen-unterstuetzung/",
           "excerpt": "Die Kommission schlägt vor, auch nach der Erteilung der Aufenthaltsbewilligung reduzierte Unterstützung zu gewähren.",
           "date": "2026-10-19T12:49:37.837Z"
-        },
-        {
-          "title": "Abstimmung über den Bahnhofplatz Wil: Kredit von 63,66 Millionen",
-          "url": "/de/st-gallen-artikel/abstimmung-bahnhofplatz-wil-2026/",
-          "excerpt": "Am 29. November 2026 stimmen die Bürgerinnen und Bürger von Wil über das Projekt für den neuen Busterminal, die Velostation und die Neugestaltung des Bahnhofs ab.",
-          "date": "2026-10-19T12:16:44.327Z"
-        },
-        {
-          "title": "St.Gallen startet die Unternehmensumfrage",
-          "url": "/de/st-gallen-artikel/st-gallen-unternehmensbefragung-2026/",
-          "excerpt": "Die Stadt St.Gallen startet eine Umfrage unter Unternehmen, um den Wirtschaftsstandort zu bewerten.",
-          "date": "2026-10-19T10:59:29.088Z"
-        },
-        {
-          "title": "HSG leitet EU-Studie zur Arbeitszeitverkürzung",
-          "url": "/de/st-gallen-artikel/hsg-optime-arbeitszeit/",
-          "excerpt": "Die Universität St.",
-          "date": "2026-10-19T09:46:11.999Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-23T04:35:27.849Z"
     },
     "fr": {
       "canton": "SG",
@@ -387,35 +387,53 @@
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "2,236 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,229 EUR/l, 3 stations relevées",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2,219 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,219 EUR/l, 3 stations relevées",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,379 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,359 EUR/l, 3 stations relevées",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2,322 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,319 EUR/l, 3 stations relevées",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Essence 95 — Autriche",
-              "value": "1,812 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,808 EUR/l, 13 stations relevées",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "1,794 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,789 EUR/l, 11 stations relevées",
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Autriche",
-              "value": "2,145 EUR/l",
+              "value": "2,159 EUR/l",
               "detail": "moyenne régionale : prix le plus bas 2,100 EUR/l, 10 stations relevées",
-              "date": "2026-10-21T12:19:56.872Z"
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Saint-Gall : troisième tube du Rosenberg et chiffres contestés",
+          "url": "/fr/articles-saint-gall/saint-gall-autoroute-rosenberg-troisieme-tube/",
+          "excerpt": "Les partisans demandent un élargissement de l’autoroute ; le planificateur Hug-Di Lena juge les bases chiffrées discutables.",
+          "date": "2026-10-23T04:27:56.026Z"
+        },
+        {
+          "title": "Saint-Gall renforce la protection des infrastructures critiques",
+          "url": "/fr/articles-saint-gall/saint-gall-protection-infrastructures-critiques/",
+          "excerpt": "Le Gouvernement de Saint-Gall renforce la protection des infrastructures critiques La stratégie couvre les infrastructures, les processus et les services",
+          "date": "2026-10-23T03:10:46.389Z"
+        },
+        {
+          "title": "Les SBB ferment les guichets à St.Margrethen et Uznach",
+          "url": "/fr/articles-saint-gall/guichets-sbb-st-margrethen-uznach/",
+          "excerpt": "À partir du début de 2027, les SBB misent sur le libre-service à St.Margrethen et Uznach : 3% des billets sont encore vendus au guichet.",
+          "date": "2026-10-23T00:23:33.274Z"
+        },
         {
           "title": "Wil : vote le 29 novembre 2026 sur le réseau de gaz",
           "url": "/fr/articles-saint-gall/vote-reseau-gaz-wil-2026/",
@@ -427,24 +445,6 @@
           "url": "/fr/articles-saint-gall/statut-s-saint-gall-assistance/",
           "excerpt": "La commission propose une aide réduite même après le permis.",
           "date": "2026-10-19T12:49:37.837Z"
-        },
-        {
-          "title": "Vote sur le Bahnhofplatz Wil : crédit de 63,66 millions",
-          "url": "/fr/articles-saint-gall/vote-bahnhofplatz-wil-2026/",
-          "excerpt": "Le 29 novembre 2026, les citoyens de Wil voteront sur le projet du nouveau terminal de bus, de la vélostation et de la requalification de la gare.",
-          "date": "2026-10-19T12:16:44.327Z"
-        },
-        {
-          "title": "St.Gallen lance l’enquête auprès des entreprises",
-          "url": "/fr/articles-saint-gall/enquete-entreprises-saint-gall-2026/",
-          "excerpt": "La ville de St.Gallen lance une enquête auprès des entreprises afin d’évaluer la place économique.",
-          "date": "2026-10-19T10:59:29.088Z"
-        },
-        {
-          "title": "HSG dirige une étude de l’UE sur la réduction du temps de travail",
-          "url": "/fr/articles-saint-gall/hsg-optime-temps-travail/",
-          "excerpt": "L’Université de Saint-Gall coordonne OPTIME, un projet de l’UE financé par Horizon Europe à hauteur d’environ 3,37 millions d’euros.",
-          "date": "2026-10-19T09:46:11.999Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-21T17:12:16.125Z"
+      "updatedAt": "2026-10-23T04:35:27.849Z"
     }
   }
 }

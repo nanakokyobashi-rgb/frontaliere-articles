@@ -4,7 +4,7 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "mobilita",
-  "updatedAt": "2026-10-22T22:21:57.960Z",
+  "updatedAt": "2026-10-23T05:52:42.601Z",
   "contentHash": "e0ef8d532fdcc43a0e2ff10f52861f4a9b505debd17fcca7d9501804ecc32be0",
   "blocks": [],
   "locales": {
@@ -64,7 +64,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "en": {
       "canton": "GL",
@@ -122,7 +122,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "de": {
       "canton": "GL",
@@ -180,7 +180,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "fr": {
       "canton": "GL",
@@ -238,7 +238,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     }
   }
 }

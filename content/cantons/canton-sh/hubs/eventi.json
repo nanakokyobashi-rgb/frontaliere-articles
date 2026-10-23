@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T00:12:28.308Z",
-  "contentHash": "d16925b67ccafa90ad07c463ca0c0c45c36275a362c9503d7204a75d622c2acb",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "cbb0ed69d02483744ad24a78f7ce8935f17666e7bec91baa047d462bde86804f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-21T12:38:14.154Z",
+      "updatedAt": "2026-10-22T19:30:03.925Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T10:37:42.748Z",
+      "updatedAt": "2026-10-22T16:03:41.824Z",
       "keyFacts": 0
     }
   ],
@@ -38,24 +38,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Flook",
-              "detail": "Haberhaus Bühne",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/flook_Amua7L5"
-            },
-            {
-              "label": "Riscoprire Sciaffusa - Un viaggio archeologico e storico nel tempo",
-              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
-            {
-              "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
-            {
               "label": "Ice Park Season Opener",
               "detail": "KSS Sport- und Freizeitpark Schaffhausen, Schaffhausen",
               "date": "2026-10-23",
@@ -66,6 +48,18 @@
               "detail": "Schaffhausen",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/opening-reception-ursula-palla-petri-saarikko-mara-roellin/"
+            },
+            {
+              "label": "Riscoprire Sciaffusa - Un viaggio archeologico e storico nel tempo",
+              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — in corso, ultimo giorno: 26 ottobre 2026",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
+            },
+            {
+              "label": "Wine mobile",
+              "detail": "Bringolf Weinbau, Hallau — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "In 80 Tagen um die Welt",
@@ -96,17 +90,28 @@
               "detail": "Schaffhausen",
               "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhauser-herbstmesse/"
+            },
+            {
+              "label": "Lesung: Nikoletta Kiss – Rückkehr nach Budapest",
+              "detail": "Kulturhaus Obere Stube, Stein am Rhein",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lesung-nikoletta-kiss-rueckkehr-nach-budapest-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Familienführung im Rahmen der Ausstellung „Lebensfreude und Rausch. Der Tanz in der Kunst“",
+              "date": "2026-10-22T15:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/familienfuehrung+im+rahmen+der+ausstellung+_lebensfreude+und+rausch_+der+tanz+in+der+kunst_"
+            },
             {
               "label": "2. Philharmonisches Konzert: Unter dem Titel „Skandalös“ stellt die Bodensee Philharmonie am 21. und 23. Oktober im Konzil Konstanz drei Werke nebeneinander, die Erwartungen auf unterschiedliche…",
               "date": "2026-10-20T13:12:35.000Z",
@@ -123,7 +128,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -145,7 +150,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "SH",
@@ -166,24 +171,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Flook",
-              "detail": "Haberhaus Bühne",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/flook_Amua7L5"
-            },
-            {
-              "label": "Rediscover Schaffhausen - An archaeological-historical journey through time",
-              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — ongoing, last day: 26 October 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
-            {
-              "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau — ongoing, last day: 25 October 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
-            {
               "label": "Ice Park Season Opener",
               "detail": "KSS Sport- und Freizeitpark Schaffhausen, Schaffhausen",
               "date": "2026-10-23",
@@ -194,6 +181,18 @@
               "detail": "Schaffhausen",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/opening-reception-ursula-palla-petri-saarikko-mara-roellin/"
+            },
+            {
+              "label": "Rediscover Schaffhausen - An archaeological-historical journey through time",
+              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — ongoing, last day: 26 October 2026",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
+            },
+            {
+              "label": "Wine mobile",
+              "detail": "Bringolf Weinbau, Hallau — ongoing, last day: 25 October 2026",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "In 80 Tagen um die Welt",
@@ -224,17 +223,28 @@
               "detail": "Schaffhausen",
               "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhauser-herbstmesse/"
+            },
+            {
+              "label": "Lesung: Nikoletta Kiss – Rückkehr nach Budapest",
+              "detail": "Kulturhaus Obere Stube, Stein am Rhein",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lesung-nikoletta-kiss-rueckkehr-nach-budapest-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Familienführung im Rahmen der Ausstellung „Lebensfreude und Rausch. Der Tanz in der Kunst“",
+              "date": "2026-10-22T15:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/familienfuehrung+im+rahmen+der+ausstellung+_lebensfreude+und+rausch_+der+tanz+in+der+kunst_"
+            },
             {
               "label": "2. Philharmonisches Konzert: Unter dem Titel „Skandalös“ stellt die Bodensee Philharmonie am 21. und 23. Oktober im Konzil Konstanz drei Werke nebeneinander, die Erwartungen auf unterschiedliche…",
               "date": "2026-10-20T13:12:35.000Z",
@@ -251,7 +261,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -273,7 +283,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "SH",
@@ -294,24 +304,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Flook",
-              "detail": "Haberhaus Bühne",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/flook_Amua7L5"
-            },
-            {
-              "label": "Schaffhausen neu entdecken ̶ Eine archäologisch-historische Zeitreise",
-              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
-            {
-              "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
-            {
               "label": "Saisonstart Eispark",
               "detail": "KSS Sport- und Freizeitpark Schaffhausen, Schaffhausen",
               "date": "2026-10-23",
@@ -322,6 +314,18 @@
               "detail": "Schaffhausen",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/opening-reception-ursula-palla-petri-saarikko-mara-roellin/"
+            },
+            {
+              "label": "Schaffhausen neu entdecken ̶ Eine archäologisch-historische Zeitreise",
+              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — läuft, letzter Tag: 26. Oktober 2026",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
+            },
+            {
+              "label": "Weinmobil",
+              "detail": "Bringolf Weinbau, Hallau — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "In 80 Tagen um die Welt",
@@ -352,17 +356,28 @@
               "detail": "Schaffhausen",
               "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhauser-herbstmesse/"
+            },
+            {
+              "label": "Lesung: Nikoletta Kiss – Rückkehr nach Budapest",
+              "detail": "Kulturhaus Obere Stube, Stein am Rhein",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lesung-nikoletta-kiss-rueckkehr-nach-budapest-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Familienführung im Rahmen der Ausstellung „Lebensfreude und Rausch. Der Tanz in der Kunst“",
+              "date": "2026-10-22T15:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/familienfuehrung+im+rahmen+der+ausstellung+_lebensfreude+und+rausch_+der+tanz+in+der+kunst_"
+            },
             {
               "label": "2. Philharmonisches Konzert: Unter dem Titel „Skandalös“ stellt die Bodensee Philharmonie am 21. und 23. Oktober im Konzil Konstanz drei Werke nebeneinander, die Erwartungen auf unterschiedliche…",
               "date": "2026-10-20T13:12:35.000Z",
@@ -379,7 +394,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -401,7 +416,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "SH",
@@ -422,24 +437,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Flook",
-              "detail": "Haberhaus Bühne",
-              "date": "2026-10-22",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/flook_Amua7L5"
-            },
-            {
-              "label": "Redécouvrir Schaffhouse ̶ Un voyage dans le temps archéologique et historique",
-              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
-            {
-              "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
-            {
               "label": "Ouverture de la saison à l'Eispark",
               "detail": "KSS Sport- und Freizeitpark Schaffhausen, Schaffhausen",
               "date": "2026-10-23",
@@ -450,6 +447,18 @@
               "detail": "Schaffhausen",
               "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/opening-reception-ursula-palla-petri-saarikko-mara-roellin/"
+            },
+            {
+              "label": "Redécouvrir Schaffhouse ̶ Un voyage dans le temps archéologique et historique",
+              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — en cours, dernier jour : 26 octobre 2026",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
+            },
+            {
+              "label": "Weinmobil",
+              "detail": "Bringolf Weinbau, Hallau — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-23",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "In 80 Tagen um die Welt",
@@ -480,17 +489,28 @@
               "detail": "Schaffhausen",
               "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhauser-herbstmesse/"
+            },
+            {
+              "label": "Lesung: Nikoletta Kiss – Rückkehr nach Budapest",
+              "detail": "Kulturhaus Obere Stube, Stein am Rhein",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lesung-nikoletta-kiss-rueckkehr-nach-budapest-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Familienführung im Rahmen der Ausstellung „Lebensfreude und Rausch. Der Tanz in der Kunst“",
+              "date": "2026-10-22T15:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/familienfuehrung+im+rahmen+der+ausstellung+_lebensfreude+und+rausch_+der+tanz+in+der+kunst_"
+            },
             {
               "label": "2. Philharmonisches Konzert: Unter dem Titel „Skandalös“ stellt die Bodensee Philharmonie am 21. und 23. Oktober im Konzil Konstanz drei Werke nebeneinander, die Erwartungen auf unterschiedliche…",
               "date": "2026-10-20T13:12:35.000Z",
@@ -507,7 +527,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-21T10:37:42.748Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -529,7 +549,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

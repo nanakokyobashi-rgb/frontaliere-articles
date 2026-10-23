@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-22T14:18:45.300Z",
-  "contentHash": "f0a979d7411f544951cd2f3b9899c98d286264552c1d46337cacdc568732115e",
+  "updatedAt": "2026-10-23T05:52:42.601Z",
+  "contentHash": "2b1e8f3f800b9793c8d609f8994ad93091d9b02e6b0ff745c3b760f74d5f9da4",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-22T05:28:12.116Z",
+      "updatedAt": "2026-10-22T21:58:34.031Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T20:56:46.769Z",
+      "updatedAt": "2026-10-22T20:51:18.236Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "30",
+          "value": "32",
           "note": "segnalazioni aggiornate: 22 ottobre 2026"
         }
       ],
@@ -135,24 +135,26 @@
               "date": "2026-10-01T13:52:00.000Z"
             },
             {
-              "label": "A14 Luzern <-> Zug tra Galleria Galleria Rathausen E Raccordo autostradale Diramazione Rütihof Situazione: problemi di traffico cantiere, lunghezza [km] 13.0 Limitazione del traffico: corsia…",
+              "label": "A1 Zürich -> Bern tra Svincolo autostradale Mägenwil E Svincolo autostradale Lenzburg Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: corsia d'emergenza chiusa",
               "value": "Chiusura",
-              "detail": "fine prevista: 23 ottobre 2026",
-              "date": "2026-10-14T16:00:00.000Z"
+              "detail": "fine prevista: 29 ottobre 2026",
+              "date": "2026-10-22T14:15:00.000Z"
             },
             {
-              "label": "Revocato: A1 Bern -> Zürich tra Svincolo autostradale Aarau Ost E Raccordo autostradale Diramazione Birrfeld Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-22T04:03:00.000Z"
+              "label": "Langenthal <-> Zofingen tra Luogo Strengelbach E Luogo St. Urban Situazione: pericolo Causa: lavori di costruzione",
+              "value": "Cantiere",
+              "detail": "fine prevista: 30 aprile 2027",
+              "date": "2025-04-07T09:38:00.000Z"
             },
             {
-              "label": "Revocato: A3 Basel -> Zürich tra Svincolo autostradale Brugg E Raccordo autostradale Diramazione Birrfeld Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffico",
-              "date": "2026-10-22T04:18:00.000Z"
+              "label": "H24 Aarau <-> Frick Luogo Rombach Situazione: problemi di traffico cantiere Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
+              "value": "Cantiere",
+              "detail": "fine prevista: 1 luglio 2027",
+              "date": "2025-09-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -190,7 +192,7 @@
               "url": "https://www.aargauverkehr.ch/aktuell/meldungen/wsb-ersatzverkehr-und-bauarbeiten-zwischen-aarau-und-schoeftland"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -205,6 +207,12 @@
           "url": "/articoli-argovia/dashboard-mobilita-aarau/",
           "excerpt": "Aarau riunisce in un dashboard circa 300 veicoli condivisi di cinque operatori: nell'ultimo anno 27.000 viaggi, il 38% in più.",
           "date": "2026-10-21T12:23:52.110Z"
+        },
+        {
+          "title": "SBB chiudono a Döttingen: ultimo centro viaggi del distretto",
+          "url": "/articoli-argovia/sbb-chiude-reisezentrum-doettingen/",
+          "excerpt": "Le SBB chiudono a Döttingen l'ultimo Reisezentrum del distretto.",
+          "date": "2026-10-22T23:32:53.543Z"
         },
         {
           "title": "Obermumpf: lavori sulla K491 fino all'autunno 2027",
@@ -244,7 +252,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-22T14:18:45.300Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "en": {
       "canton": "AG",
@@ -264,7 +272,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "30",
+          "value": "32",
           "note": "reports as of 22 October 2026"
         }
       ],
@@ -357,24 +365,26 @@
               "date": "2026-10-01T13:52:00.000Z"
             },
             {
-              "label": "A14 Luzern <-> Zug tra Galleria Galleria Rathausen E Raccordo autostradale Diramazione Rütihof Situazione: problemi di traffico cantiere, lunghezza [km] 13.0 Limitazione del traffico: corsia…",
+              "label": "A1 Zürich -> Bern tra Svincolo autostradale Mägenwil E Svincolo autostradale Lenzburg Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: corsia d'emergenza chiusa",
               "value": "Closure",
-              "detail": "until 23 October 2026",
-              "date": "2026-10-14T16:00:00.000Z"
+              "detail": "until 29 October 2026",
+              "date": "2026-10-22T14:15:00.000Z"
             },
             {
-              "label": "Revocato: A1 Bern -> Zürich tra Svincolo autostradale Aarau Ost E Raccordo autostradale Diramazione Birrfeld Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-22T04:03:00.000Z"
+              "label": "Langenthal <-> Zofingen tra Luogo Strengelbach E Luogo St. Urban Situazione: pericolo Causa: lavori di costruzione",
+              "value": "Roadworks",
+              "detail": "until 30 April 2027",
+              "date": "2025-04-07T09:38:00.000Z"
             },
             {
-              "label": "Revocato: A3 Basel -> Zürich tra Svincolo autostradale Brugg E Raccordo autostradale Diramazione Birrfeld Situazione: traffico fortemente rallentato Causa: traffico congestionato",
-              "value": "Traffic",
-              "date": "2026-10-22T04:18:00.000Z"
+              "label": "H24 Aarau <-> Frick Luogo Rombach Situazione: problemi di traffico cantiere Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
+              "value": "Roadworks",
+              "detail": "until 1 July 2027",
+              "date": "2025-09-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -412,7 +422,7 @@
               "url": "https://www.aargauverkehr.ch/aktuell/meldungen/wsb-ersatzverkehr-und-bauarbeiten-zwischen-aarau-und-schoeftland"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -427,6 +437,12 @@
           "url": "/en/aargau-articles/aarau-shared-mobility-dashboard/",
           "excerpt": "Aarau brings together around 300 shared vehicles from five operators in a dashboard: 27.000 trips in the last year, 38% more.",
           "date": "2026-10-21T12:23:52.110Z"
+        },
+        {
+          "title": "SBB close in Döttingen: the district’s last travel center",
+          "url": "/en/aargau-articles/sbb-closes-doettingen-travel-centre/",
+          "excerpt": "SBB are closing the district’s last travel centre in Döttingen.",
+          "date": "2026-10-22T23:32:53.543Z"
         },
         {
           "title": "Obermumpf: construction work on the K491 until autumn 2027",
@@ -466,7 +482,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-22T14:18:45.300Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "de": {
       "canton": "AG",
@@ -486,7 +502,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "30",
+          "value": "32",
           "note": "Meldungen vom 22. Oktober 2026"
         }
       ],
@@ -579,24 +595,26 @@
               "date": "2026-10-01T13:52:00.000Z"
             },
             {
-              "label": "A14 Luzern <-> Zug zwischen Tunnel Rathausen-Tunnel und Autobahndreieck Verzweigung Rütihof Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 13.0 Verkehrsführung: Pannenstreifen gesperrt",
+              "label": "A1 Zürich -> Bern zwischen Anschluss Mägenwil und Anschluss Lenzburg Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Verkehrsführung: Pannenstreifen gesperrt",
               "value": "Sperrung",
-              "detail": "bis 23. Oktober 2026",
-              "date": "2026-10-14T16:00:00.000Z"
+              "detail": "bis 29. Oktober 2026",
+              "date": "2026-10-22T14:15:00.000Z"
             },
             {
-              "label": "Aufgehoben: A1 Bern -> Zürich zwischen Anschluss Aarau-Ost und Autobahndreieck Verzweigung Birrfeld Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-22T04:03:00.000Z"
+              "label": "Langenthal <-> Zofingen zwischen Ortschaft Strengelbach und Ortschaft St. Urban Sachlage: Gefahr Ursache: Bauarbeiten",
+              "value": "Baustelle",
+              "detail": "bis 30. April 2027",
+              "date": "2025-04-07T09:38:00.000Z"
             },
             {
-              "label": "Aufgehoben: A3 Basel -> Zürich zwischen Anschluss Brugg und Autobahndreieck Verzweigung Birrfeld Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-22T04:18:00.000Z"
+              "label": "H24 Aarau <-> Frick Ortschaft Rombach Sachlage: Verkehrsbehinderung Baustelle Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
+              "value": "Baustelle",
+              "detail": "bis 1. Juli 2027",
+              "date": "2025-09-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -634,7 +652,7 @@
               "url": "https://www.aargauverkehr.ch/aktuell/meldungen/wsb-ersatzverkehr-und-bauarbeiten-zwischen-aarau-und-schoeftland"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -649,6 +667,12 @@
           "url": "/de/aargau-artikel/aarau-dashboard-geteilte-mobilitaet/",
           "excerpt": "Aarau fasst in einem Dashboard rund 300 gemeinsam genutzte Fahrzeuge von fünf Anbietern zusammen: Im letzten Jahr gab es 27.000 Fahrten, 38% mehr.",
           "date": "2026-10-21T12:23:52.110Z"
+        },
+        {
+          "title": "SBB schließen in Döttingen: letztes Reisezentrum des Bezirks",
+          "url": "/de/aargau-artikel/sbb-schliesst-reisezentrum-doettingen/",
+          "excerpt": "Die SBB schließen in Döttingen das letzte Reisezentrum des Bezirks.",
+          "date": "2026-10-22T23:32:53.543Z"
         },
         {
           "title": "Obermumpf: Bauarbeiten an der K491 bis Herbst 2027",
@@ -688,7 +712,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-22T14:18:45.300Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "fr": {
       "canton": "AG",
@@ -708,7 +732,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "30",
+          "value": "32",
           "note": "signalements au 22 octobre 2026"
         }
       ],
@@ -801,24 +825,26 @@
               "date": "2026-10-01T13:52:00.000Z"
             },
             {
-              "label": "A14 Lucerne <-> Zoug entre Tunnel Tunnel de Rathausen et Echangeur Echangeur de Rütihof Situation: trafic perturbé travaux, longueur [km] 13.0 Gestion du trafic: bande d'arrêt d'urgence fermée",
+              "label": "A1 Zurich -> Berne entre Jonction autoroutière Mägenwil et Jonction autoroutière Lenzburg Situation: trafic perturbé travaux, longueur [km] 0.3 Gestion du trafic: bande d'arrêt d'urgence fermée",
               "value": "Fermeture",
-              "detail": "jusqu’au 23 octobre 2026",
-              "date": "2026-10-14T16:00:00.000Z"
+              "detail": "jusqu’au 29 octobre 2026",
+              "date": "2026-10-22T14:15:00.000Z"
             },
             {
-              "label": "Révoqué: A1 Berne -> Zurich entre Jonction autoroutière Aarau-Est et Echangeur Echangeur de Birrfeld Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-22T04:03:00.000Z"
+              "label": "Langenthal <-> Zofingen entre Localité Strengelbach et Localité St. Urban Situation: danger Raison: travaux de construction",
+              "value": "Chantier",
+              "detail": "jusqu’au 30 avril 2027",
+              "date": "2025-04-07T09:38:00.000Z"
             },
             {
-              "label": "Révoqué: A3 Bâle -> Zurich entre Jonction autoroutière Brugg et Echangeur Echangeur de Birrfeld Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-22T04:18:00.000Z"
+              "label": "H24 Aarau <-> Frick Localité Rombach Situation: trafic perturbé travaux Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
+              "value": "Chantier",
+              "detail": "jusqu’au 1er juillet 2027",
+              "date": "2025-09-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -856,7 +882,7 @@
               "url": "https://www.aargauverkehr.ch/aktuell/meldungen/wsb-ersatzverkehr-und-bauarbeiten-zwischen-aarau-und-schoeftland"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -871,6 +897,12 @@
           "url": "/fr/articles-argovie/aarau-tableau-mobilite-partagee/",
           "excerpt": "Aarau regroupe dans un tableau de bord environ 300 véhicules partagés de cinq opérateurs : au cours de la dernière année, 27.000 trajets, soit 38% de plus.",
           "date": "2026-10-21T12:23:52.110Z"
+        },
+        {
+          "title": "Les SBB ferment à Döttingen : dernier centre de voyages du district",
+          "url": "/fr/articles-argovie/sbb-ferme-centre-voyage-doettingen/",
+          "excerpt": "Les SBB ferment à Döttingen le dernier centre de voyages du district.",
+          "date": "2026-10-22T23:32:53.543Z"
         },
         {
           "title": "Obermumpf : travaux sur la K491 jusqu'à l'automne 2027",
@@ -910,7 +942,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-22T14:18:45.300Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     }
   }
 }

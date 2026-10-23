@@ -51,14 +51,39 @@ import {
 } from '../host/shared/clauseTail.mjs';
 // This Node-only builder shares the metadata writers' budget and validates
 // that it remains aligned with the SiteShell contract.
-import { SEO_DESCRIPTION_MAX } from '../generator/scripts/lib/seo-description-contract.mjs';
-const RSS_SERP_DESCRIPTION_MAX_CHARS = SEO_DESCRIPTION_MAX;
-const repairSerpSnippet = (text) => {
+import {
+  SEO_DESCRIPTION_MAX,
+  SEO_OG_DESCRIPTION_MAX,
+  assertSeoDescriptionMinimum,
+  assertHistoricalSeoDescriptionsMigrated,
+} from '../generator/scripts/lib/seo-description-contract.mjs';
+const RSS_DESCRIPTION_MAX_CHARS = SEO_DESCRIPTION_MAX;
+const repairRssSnippet = (text) => {
   const repaired = repairSerpSnippetBase(text);
-  const bounded = truncateToClause(repaired, RSS_SERP_DESCRIPTION_MAX_CHARS);
+  const bounded = truncateToClause(repaired, RSS_DESCRIPTION_MAX_CHARS);
   if (!bounded) {
     throw new Error(
-      `build-api: refusing to publish an RSS item without a safe non-empty description within ${RSS_SERP_DESCRIPTION_MAX_CHARS} characters.`,
+      `build-api: refusing to publish an RSS item without a safe non-empty description within ${RSS_DESCRIPTION_MAX_CHARS} characters.`,
+    );
+  }
+  return bounded;
+};
+// RSS summaries are a separate syndication surface: the editorial excerpt may
+// be shorter than the SERP meta-description floor while still being valid RSS.
+// Keep the 80-character contract on actual SEO descriptions, not on every
+// localized summary the feed carries.
+const repairSerpSnippet = (text) => {
+  const bounded = repairRssSnippet(text);
+  return assertSeoDescriptionMinimum(bounded, {
+    sourceDescriptionLength: typeof text === 'string' ? text.length : undefined,
+  });
+};
+const repairSocialSnippet = (text) => {
+  const repaired = repairSerpSnippetBase(text);
+  const bounded = truncateToClause(repaired, SEO_OG_DESCRIPTION_MAX);
+  if (!bounded) {
+    throw new Error(
+      `build-api: refusing to publish an OG item without a safe non-empty description within ${SEO_OG_DESCRIPTION_MAX} characters.`,
     );
   }
   return bounded;
@@ -142,7 +167,7 @@ import {
 import { cantonHubCoverage, cantonHubTopics, readCantonHubDocument } from './lib/canton-hub-data.mjs';
 import { isReservedPublishedSlug } from './lib/published-slug-guard.mjs';
 // Il corpus nel layout dell'engine, per i feed delle sezioni di famiglia.
-import { createEngineCorpusView, engineViewRssLayout } from './lib/engine-corpus-view.mjs';
+import { createEngineCorpusView, engineViewRssLayout, seoChunkSources } from './lib/engine-corpus-view.mjs';
 // Allowlist dei campi pubblici di articles.json / swiss-articles.json.
 import { toPublicRegistryEntry } from './lib/registry-api-entry.mjs';
 // Detection (not filtering — see its header) for issue #166: surfaces a
@@ -182,9 +207,9 @@ import {
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const siteTitleSuffix = fs.readFileSync(path.join(ROOT, 'host', 'shared', 'titleSuffix.ts'), 'utf8');
 const siteDescriptionBudget = siteTitleSuffix.match(/export const META_DESCRIPTION_MAX_CHARS = (\d+);/);
-if (!siteDescriptionBudget || Number(siteDescriptionBudget[1]) !== RSS_SERP_DESCRIPTION_MAX_CHARS) {
+if (!siteDescriptionBudget || Number(siteDescriptionBudget[1]) !== RSS_DESCRIPTION_MAX_CHARS) {
   throw new Error(
-    `build-api: RSS description cap ${RSS_SERP_DESCRIPTION_MAX_CHARS} must match ` +
+    `build-api: RSS description cap ${RSS_DESCRIPTION_MAX_CHARS} must match ` +
       'META_DESCRIPTION_MAX_CHARS in host/shared/titleSuffix.ts.',
   );
 }
@@ -954,7 +979,7 @@ try {
       // dai test. Se questa riga manca, la riparazione della coda resta inerte
       // in produzione dietro una CI verde del sito — la stessa forma
       // dell'incidente SiteShellContract.
-      repairSerpSnippet,
+      repairSerpSnippet: repairRssSnippet,
     });
   });
 } finally {
@@ -1150,14 +1175,44 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
    */
   const seoTextById = new Map();
   for (const section of RSS_SECTIONS) {
-    for (const file of section.seoFiles) {
-      const fp = path.join(ROOT, 'content', 'seo', file);
-      if (!fs.existsSync(fp)) continue;
+    const { seoDir, files } = seoChunkSources(section);
+    for (const file of files) {
+      const fp = path.join(ROOT, seoDir, file);
+      if (!fs.existsSync(fp)) {
+        const published = PUBLISHED_BY_SECTION[section.id];
+        // Una famiglia appena attivata senza registro non ha ancora chunk SEO:
+        // e' una superficie vuota valida. Se il registro esiste, invece, il
+        // chunk mancante e' una sezione parziale e deve restare fail-closed.
+        if (
+          published &&
+          published.api.family !== null &&
+          isNewFamilySection(published) &&
+          familyFileMissing(published, path.join(seoDir, file))
+        ) continue;
+        throw new Error(`build-api: SEO source missing for ${section.id}: ${path.join(seoDir, file)}`);
+      }
       const src = fs.readFileSync(fp, 'utf-8');
       for (const [id, metadata] of collectSeoEntryMetadata(src)) {
         seoTextById.set(id, metadata);
       }
     }
+  }
+  // The isolated news-emitter contract test evaluates this block in a small VM
+  // without the module imports. Keep the production guard active while making
+  // that test boundary explicit and dependency-free.
+  if (typeof assertHistoricalSeoDescriptionsMigrated === 'function') {
+    const historicalSeoPolicy = assertHistoricalSeoDescriptionsMigrated(
+      [...seoTextById.entries()].map(([id, metadata]) => ({ id, ...metadata })),
+      {
+        projectDescription: repairSerpSnippet,
+        projectOgDescription: repairSocialSnippet,
+      },
+    );
+    console.log(
+      `[build-api] historical SEO policy: ${historicalSeoPolicy.records} records, ` +
+        `${historicalSeoPolicy.historicalDescriptions} description(s) and ` +
+        `${historicalSeoPolicy.historicalOgDescriptions} OG description(s) preserved in storage and bounded on output`,
+    );
   }
 
   const NEWS_PUBLICATION = 'Frontaliere Ticino';

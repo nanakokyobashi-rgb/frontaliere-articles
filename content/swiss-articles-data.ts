@@ -28708,6 +28708,36 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'sostenibilita-abitativa-svizzera',
+    category: 'pratico',
+    date: '2026-10-23T00:22:46.124Z',
+    image: '/images/blog/article-sostenibilita-abitativa-svizzera.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'lavoro-ridotto-normalizzazione-2027',
+    category: 'novita',
+    date: '2026-10-23T01:06:23.151Z',
+    image: '/images/blog/article-lavoro-ridotto-normalizzazione-2027.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'sondaggio-votazioni-novembre-svizzera',
+    category: 'novita',
+    date: '2026-10-23T05:43:55.776Z',
+    image: '/images/blog/article-sondaggio-votazioni-novembre-svizzera.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

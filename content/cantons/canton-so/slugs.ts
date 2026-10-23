@@ -13,6 +13,8 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'governo-soletta-ottobre-2026': { it: 'governo-soletta-ottobre-2026', en: 'solothurn-government-october-2026', de: 'solothurn-regierungsrat-oktober-2026', fr: 'gouvernement-soleure-octobre-2026' },
  'soletta-regierungsrat-attiparlamentari-2026': { it: 'soletta-regierungsrat-attiparlamentari-2026', en: 'solothurn-regierungsrat-parliamentary-items-october-2026', de: 'solothurn-regierungsrat-geschaefte-oktober-2026', fr: 'soleure-conseil-executif-objets-parlementaires-octobre-2026' },
  'a1-lavori-notturni-luterbach': { it: 'a1-lavori-notturni-luterbach', en: 'a1-night-work-luterbach', de: 'a1-nachtarbeiten-luterbach', fr: 'a1-travaux-nocturnes-luterbach' },
+ 'cambio-ora-incidenti-stradali-soletta': { it: 'cambio-ora-incidenti-stradali-soletta', en: 'time-change-road-accidents-solothurn', de: 'zeitumstellung-strassenunfaelle-solothurn', fr: 'changement-heure-accidents-route-soleure' },
+ 'polizia-soletta-comunicazione-media-droni': { it: 'polizia-soletta-comunicazione-media-droni', en: 'solothurn-police-communication-media-drones', de: 'polizei-solothurn-kommunikation-medien-drohnen', fr: 'police-soleure-communication-medias-drones' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

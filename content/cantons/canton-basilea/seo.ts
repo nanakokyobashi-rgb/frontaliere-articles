@@ -314,6 +314,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-basilea-cantieri-alle-sei': {
+    title: 'Parlamento di Basilea: mozione per iniziare i cantieri alle 6',
+    description: 'Il Gran Consiglio di Basilea ha trasmesso una mozione per consentire lavori edili alle 6 da giugno ad agosto; quelli rumorosi resterebbero dalle 7.',
+    keywords: 'frontalieri, ticino, svizzera, italia, parlamento, basilea, mozione, iniziare',
+    ogTitle: 'Basilea: mozione, cantieri alle 6, lavori rumorosi alle 7',
+    ogDescription: 'La mozione di Luca Urgese (FDP) è stata trasmessa con 84 voti contro 8 e 4 astensioni. Chiede di modificare l\'ordinanza sulla protezione dal rumore: lavori edili alle 6 nei giorni feriali da giugno ad agosto, attività rumorose dalle 7.',
+    canonicalPath: '/articoli-basilea/basilea-cantieri-alle-sei/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Parlamento di Basilea: mozione per iniziare i cantieri alle 6",
+      "description": "Il Gran Consiglio di Basilea ha trasmesso una mozione per consentire lavori edili alle 6 da giugno ad agosto; quelli rumorosi resterebbero dalle 7.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-basilea-cantieri-alle-sei.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T02:22:16+00:00",
+      "dateModified": "2026-10-23T02:22:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-basilea/basilea-cantieri-alle-sei/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

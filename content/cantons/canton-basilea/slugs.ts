@@ -11,6 +11,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'barfusserplatz-riqualificazione-urbana': { it: 'barfusserplatz-riqualificazione-urbana', en: 'basel-barfusserplatz-redesign', de: 'umbau-barfuesserplatz-basel', fr: 'reamenagement-barfusserplatz-bale' },
  'basilea-larvicida-quattro-settimane': { it: 'basilea-larvicida-quattro-settimane', en: 'basel-tiger-mosquito-four-weeks', de: 'basel-tigermuecke-vier-wochen', fr: 'bale-moustique-tigre-quatre-semaines' },
  'claraplatz-basel-cantieri': { it: 'claraplatz-basel-cantieri', en: 'claraplatz-basel-construction-sites', de: 'claraplatz-basel-baustellen', fr: 'claraplatz-bale-chantiers' },
+ 'basilea-cantieri-alle-sei': { it: 'basilea-cantieri-alle-sei', en: 'basel-construction-start-six', de: 'basel-baustart-um-sechs', fr: 'bale-chantier-six-heures' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

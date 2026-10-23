@@ -4,114 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/702647/berner-gesundheitsdirektor-ein-solch-hoher-betrag-vom-kanton-kommt-nicht-allen-spit%c3%a4lern-zugute": {
-      "section": "canton-be",
-      "ts": 1792534408338
-    },
-    "canton-be::https://ajour.ch/story/702703/energie-wasser-bern-reicht-baugesuch-f%c3%bcr-energiespeicher-ein": {
-      "section": "canton-be",
-      "ts": 1792534415607
-    },
-    "canton-be::https://ajour.ch/story/702763/araerweiterung-und-%c3%bcberbauung-bei-neuem-spital-kommen-vors-volk": {
-      "section": "canton-be",
-      "ts": 1792534426477
-    },
-    "canton-be::https://ajour.ch/story/702834/entlassungen-bei-tamedia-viele-haben-schlaflose-n%c3%a4chte": {
-      "section": "canton-be",
-      "ts": 1792534472329
-    },
-    "canton-be::https://ajour.ch/story/702720/studie-der-universit%c3%a4t-bern-l%c3%a4sst-aufhorchen-hitzewelle-h%c3%a4tte-extremer-ausfallen-k%c3%b6nnen": {
-      "section": "canton-be",
-      "ts": 1792534479463
-    },
-    "canton-be::https://ajour.ch/story/702586/wenn-es-denn-%c3%bcberhaupt-einen-gibt-gantner-zweifelt-am-nutzen-der-bilateralen": {
-      "section": "canton-be",
-      "ts": 1792534488286
-    },
-    "canton-be::https://ajour.ch/story/702658/les-exportations-horlogres-continuent-la-hausse-en-septembre": {
-      "section": "canton-be",
-      "ts": 1792534495749
-    },
-    "canton-be::https://ajour.ch/story/702432/katholische-kirche-zahlt-genugtuung%c2%a0-missbrauchsopfer-muss-darauf-steuern-entrichten": {
-      "section": "canton-be",
-      "ts": 1792536005630
-    },
-    "canton-be::https://ajour.ch/story/702690/firma-des-festivals-stars-of-sounds-ist-konkurs-doch-die-n%c3%a4chste-firma-ist-schon-da": {
-      "section": "canton-be",
-      "ts": 1792536016476
-    },
-    "canton-be::https://ajour.ch/story/702550/lyss-buspassagierin-verletzt-ins-spital-gebracht": {
-      "section": "canton-be",
-      "ts": 1792536023455
-    },
-    "canton-be::https://ajour.ch/story/702634/les-ventes-de-comet-senvolent-au-troisime-trimestre": {
-      "section": "canton-be",
-      "ts": 1792536034092
-    },
-    "canton-be::https://ajour.ch/story/702548/vier-jugendliche-schlagen-minderj%c3%a4hrigen-im-berner-jura-spitalreif": {
-      "section": "canton-be",
-      "ts": 1792536039758
-    },
-    "canton-be::https://ajour.ch/story/702785/enjeux-climatiques-neuchtel-innove-et-propose-un-festival": {
-      "section": "canton-be",
-      "ts": 1792536050198
-    },
-    "canton-be::https://ajour.ch/story/702473/22-und-55j%c3%a4hriger-fussballfan-nach-internetpranger-identifiziert": {
-      "section": "canton-be",
-      "ts": 1792536057259
-    },
-    "canton-be::https://ajour.ch/story/701200/ein-ehcjunior-bringt-energie-ins-fanionteam-und-bei-captain-haas-herrscht-gewissheit": {
-      "section": "canton-be",
-      "ts": 1792536071233
-    },
-    "canton-be::https://ajour.ch/story/702522/gouvernement-bernois-oppos-la-gratuit-pour-les-crches": {
-      "section": "canton-be",
-      "ts": 1792546063352
-    },
-    "canton-be::https://ajour.ch/story/702513/berner-regierungsrat-lehnt-kostenlose-kitas-ab": {
-      "section": "canton-be",
-      "ts": 1792546064516
-    },
-    "canton-be::https://ajour.ch/story/702744/le-gouvernement-du-premier-ministre-socialiste-pedro-snchez-approuve-une-srie-de-mesures-sociales": {
-      "section": "canton-be",
-      "ts": 1792552622246
-    },
-    "canton-be::https://ajour.ch/story/702617/serbiens-studenten-greifen-nach-der-macht-werden-zeigen-dass-demokratie-m%c3%b6glich-ist": {
-      "section": "canton-be",
-      "ts": 1792552628174
-    },
-    "canton-be::https://ajour.ch/story/702347/israelische-siedler-pr%c3%bcgeln-usreporterin-spitalreif-druck-auf-netanyahu-w%c3%a4chst": {
-      "section": "canton-be",
-      "ts": 1792552633682
-    },
-    "canton-be::https://www.nau.ch/lifestyle/gesellschaft/kommunikation-wann-sich-die-gerateversicherung-wirklich-lohnt-67175715": {
-      "section": "canton-be",
-      "ts": 1792557879423
-    },
-    "canton-be::https://www.nau.ch/politik/bundeshaus/ausser-beim-kriegsmaterial-zeigen-sich-klare-abstimmungstendenzen-67191036": {
-      "section": "canton-be",
-      "ts": 1792558040990
-    },
-    "canton-be::https://ajour.ch/story/702690/firma-des-festivals-hat-konkurs-gemacht-doch-die-n%c3%a4chste-ist-schon-da": {
-      "section": "canton-be",
-      "ts": 1792558055426
-    },
-    "canton-be::https://ajour.ch/story/702516/frankreich-verst%c3%a4rkt-vor-neuen-protesten-die-sicherheitsmassnahmen-pinkpantherdemonstrant-ist-ki": {
-      "section": "canton-be",
-      "ts": 1792558062725
-    },
-    "canton-be::https://ajour.ch/story/702745/alternative-f%c3%bcr-deutschland-a-indiqu-mardi-avoir-t-la-cible-dune-cyberattaque": {
-      "section": "canton-be",
-      "ts": 1792558070002
-    },
-    "canton-be::https://ajour.ch/story/702645/die-welt-wird-staunen-iran-bereitet-sich-auf-n%c3%a4chsten-krieg-vor": {
-      "section": "canton-be",
-      "ts": 1792558077816
-    },
-    "canton-be::https://ajour.ch/story/702484/des-inconnus-font-sauter-un-bancomat-beringen-dans-le-canton-de-schaffhouse": {
-      "section": "canton-be",
-      "ts": 1792558082507
-    },
     "canton-be::https://ajour.ch/story/702851/bessere-arbeitsbedingungen-in-der-pflege-k%c3%b6nnten-sich-auch-finanziell-lohnen": {
       "section": "canton-be",
       "ts": 1792559280846
@@ -203,6 +95,42 @@
     "canton-be::https://ajour.ch/story/702511/spitalneubau-br%c3%bcgg-der-kanton-erh%c3%b6ht-den-druck-auf-biel-bei-der-planung-des-spitalareals": {
       "section": "canton-be",
       "ts": 1792690384800
+    },
+    "canton-be::https://ajour.ch/story/702647/berner-gesundheitsdirektor-ein-solch-hoher-betrag-vom-kanton-kommt-nicht-allen-spit%c3%a4lern-zugute": {
+      "section": "canton-be",
+      "ts": 1792709693210
+    },
+    "canton-be::https://ajour.ch/story/702703/energie-wasser-bern-reicht-baugesuch-f%c3%bcr-energiespeicher-ein": {
+      "section": "canton-be",
+      "ts": 1792709711081
+    },
+    "canton-be::https://ajour.ch/story/702686/grossratskommission-unterst%c3%bctzt-ausl%c3%a4nderstimmrecht-im-kanton-bern": {
+      "section": "canton-be",
+      "ts": 1792719414850
+    },
+    "canton-be::https://www.api.news.apps.be.ch/api/atom/news/800a98c8-943a-4f05-9895-cdba893de3cb": {
+      "section": "canton-be",
+      "ts": 1792721242796
+    },
+    "canton-be::https://ajour.ch/story/703224/just-eat-k%c3%bcndigt-massenentlassung-an-700-kuriere-bangen-um-ihren-job": {
+      "section": "canton-be",
+      "ts": 1792721244311
+    },
+    "canton-be::https://www.be.ch/de/start.html?newsid=0c0dba57-92ee-401c-b7cc-21d7bfb7a7b0": {
+      "section": "canton-be",
+      "ts": 1792730176809
+    },
+    "canton-be::https://www.api.news.apps.be.ch/api/atom/news/2b5d929d-74fa-498c-b199-22dc5cbf7f86": {
+      "section": "canton-be",
+      "ts": 1792731129019
+    },
+    "canton-be::https://ajour.ch/story/702763/araerweiterung-und-%c3%bcberbauung-bei-neuem-spital-kommen-vors-volk": {
+      "section": "canton-be",
+      "ts": 1792731150952
+    },
+    "canton-be::https://ajour.ch/story/703031/die-vollsperrung-ist-sehr-belastend": {
+      "section": "canton-be",
+      "ts": 1792731161252
     }
   }
 }

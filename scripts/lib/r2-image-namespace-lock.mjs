@@ -37,6 +37,19 @@ function positiveDuration(value, name) {
   return value;
 }
 
+/** Resolve the optional CLI timestamp without admitting empty/non-positive input. */
+export function resolveRequestedLeaseTimestamp(value, now = Date.now()) {
+  if (!Number.isFinite(now) || now < 1) {
+    throw new Error('[r2-image-namespace-lock] fallback lease timestamp must be positive');
+  }
+  const requested = typeof value === 'number'
+    ? value
+    : typeof value === 'string' && value.trim().length > 0
+      ? Number(value)
+      : Number.NaN;
+  return Number.isFinite(requested) && requested >= 1 ? requested : now;
+}
+
 export function parseImageNamespaces(value) {
   const raw = Array.isArray(value) ? value : requiredString(value, '--namespace').split(',');
   const requested = [...new Set(raw.map((namespace) => String(namespace).trim()).filter(Boolean))];
@@ -719,6 +732,17 @@ function containsReleaseTimeout(error, seen = new Set()) {
 }
 
 /**
+ * Classify the result of a bounded release at one deterministic deadline.
+ * A timer winning the race or work completing at the boundary is a timeout;
+ * only work that completed strictly before the deadline is released.
+ */
+export function classifyReleaseOutcome({ outcome, now = Date.now(), deadline } = {}) {
+  if (!Number.isFinite(deadline)) throw new Error('release deadline must be finite');
+  if (!Number.isFinite(now)) throw new Error('release clock must be finite');
+  return outcome?.timedOut === true || now >= deadline ? 'timeout' : 'released';
+}
+
+/**
  * Release image leases within one absolute budget. `perLease` starts each
  * namespace independently so a slow lease cannot prevent the others starting.
  */
@@ -750,7 +774,7 @@ export async function releaseImageNamespaceLeasesWithDeadline(
   })).then((results) => ({ timedOut: false, results }));
   const outcome = await Promise.race([work, timeout]);
   clearTimeout(timeoutId);
-  if (outcome.timedOut || Date.now() >= deadline) {
+  if (classifyReleaseOutcome({ outcome, now: Date.now(), deadline }) === 'timeout') {
     return { status: 'timeout', timedOut: true, released: null, error: timeoutError };
   }
 
@@ -776,6 +800,10 @@ export async function releaseImageNamespaceLeasesWithDeadline(
     };
   }
   return { status: 'released', timedOut: false, released: released.filter(Boolean) };
+}
+
+export function releaseNotOwnedIsFatal({ fenceMissingCandidate = false, ignoreNotOwned = false } = {}) {
+  return !fenceMissingCandidate && !ignoreNotOwned;
 }
 
 function parseCommandOptions(command, args) {
@@ -811,10 +839,7 @@ async function acquireFromCli(namespaces, request, env = process.env) {
   const controller = new AbortController();
   const owner = env.FRONTALIERE_R2_IMAGE_LEASE_OWNER ?? randomUUID();
   const leaseId = env.FRONTALIERE_R2_IMAGE_LEASE_ID ?? randomUUID();
-  const requestedAcquiredAt = Number(env.FRONTALIERE_R2_IMAGE_LEASE_ACQUIRED_AT);
-  const pendingAcquiredAt = Number.isFinite(requestedAcquiredAt) && requestedAcquiredAt >= 1
-    ? requestedAcquiredAt
-    : Date.now();
+  const pendingAcquiredAt = resolveRequestedLeaseTimestamp(env.FRONTALIERE_R2_IMAGE_LEASE_ACQUIRED_AT);
   const pendingLeases = namespaces.map((namespace) => ({
     namespace,
     owner,
@@ -922,7 +947,7 @@ async function main(args = process.argv.slice(2), env = process.env) {
     }
     const released = await releaseImageNamespaceLeases(context.leases, { request, fenceMissingCandidate });
     const notReleased = context.leases.map(({ namespace }) => namespace).filter((namespace) => !released.includes(namespace));
-    if (notReleased.length > 0 && !ignoreNotOwned) {
+    if (notReleased.length > 0 && releaseNotOwnedIsFatal({ fenceMissingCandidate, ignoreNotOwned })) {
       console.error(`[r2-image-namespace-lock] not released (lease no longer owned or present): ${notReleased.join(', ')}`);
       process.exitCode = 1;
     }

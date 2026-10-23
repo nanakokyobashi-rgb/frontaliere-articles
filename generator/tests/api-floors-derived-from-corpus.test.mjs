@@ -841,6 +841,45 @@ test('il collector SEO decodifica apostrofi, backslash e separatori Unicode nell
   assert.equal(unescapeQuoted("l\\'estate\\\\2026\\u2028pensione\\u2029"), "l'estate\\2026\u2028pensione\u2029");
 });
 
+test('il collector SEO legge description e ogDescription senza catturare stringhe o commenti', () => {
+  const source = [
+    "'blog-static-fields': {",
+    '  description: "Descrizione in doppie virgolette",',
+    "  'ogDescription': 'Card sociale in apici',",
+    '  note: "headline: \\\"falso\\\"",',
+    "  // description: 'falso nel commento'",
+    '  "structuredData": "{\\\"description\\\": \\\"falso nella stringa\\\"}",',
+    '},',
+  ].join('\n');
+  assert.deepEqual(collectSeoEntryMetadata(source).get('static-fields'), {
+    keywords: undefined,
+    headline: undefined,
+    datePublished: undefined,
+    description: 'Descrizione in doppie virgolette',
+    ogDescription: 'Card sociale in apici',
+  });
+});
+
+test('il collector SEO salta i blocchi annidati con URL template dinamici', () => {
+  const source = [
+    "'blog-nested-fields': {",
+    "  description: 'Descrizione pubblicata',",
+    '  structuredData: {',
+    '    url: `${BASE_URL}/images/blog/example.webp`,',
+    "    description: 'Descrizione annidata non pubblicata',",
+    '  },',
+    "  headline: 'Titolo',",
+    "  datePublished: '2026-01-05T00:00:00Z',",
+    '},',
+  ].join('\n');
+  assert.deepEqual(collectSeoEntryMetadata(source).get('nested-fields'), {
+    keywords: undefined,
+    headline: 'Titolo',
+    datePublished: '2026-01-05T00:00:00Z',
+    description: 'Descrizione pubblicata',
+  });
+});
+
 test('collectSeoEntryIds non perde una voce valida prima di un duplicato invalido', () => {
   const ids = collectSeoEntryIds(
     `'blog-keep': { "headline": "Keep", "datePublished": "2026-01-02T00:00:00Z" },\n` +

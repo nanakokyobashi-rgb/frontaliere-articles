@@ -34,7 +34,12 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { findAllSeoEntryMatches } from './seo-entry.mjs';
 import { scanTopLevelArticleRecords } from './article-registry-reader.mjs';
-import { decodeStaticStringLiteral } from './ts-literals.mjs';
+import {
+  decodeStaticStringLiteral,
+  matchingDelimiter,
+  readStaticStringLiteral,
+  skipStaticTrivia,
+} from './ts-literals.mjs';
 import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
 import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
 import { ARTICLES_PAGE_SIZE } from '../../engine/shared/articleArchiveConfig.mjs';
@@ -825,6 +830,84 @@ export function unescapeQuoted(value, quote = "'") {
   return decodeStaticStringLiteral(String(value), quote);
 }
 
+function readSeoStringLiteralField(block, field) {
+  const skipQuotedValue = (start) => {
+    const quote = block[start];
+    for (let cursor = start + 1; cursor < block.length; cursor += 1) {
+      if (block[cursor] === '\\') {
+        cursor += 1;
+        continue;
+      }
+      if (block[cursor] === quote) return cursor + 1;
+    }
+    return block.length;
+  };
+  const skipValue = (start) => {
+    const first = block[start];
+    if (first === "'" || first === '"' || first === '`') return skipQuotedValue(start);
+    if (first === '{' || first === '[' || first === '(') {
+      const close = matchingDelimiter(block, start);
+      return close < 0 ? block.length : close + 1;
+    }
+    let cursor = start;
+    while (cursor < block.length && block[cursor] !== ',' && block[cursor] !== '}') cursor += 1;
+    return cursor;
+  };
+  const objectOpen = block.indexOf('{');
+  let cursor = objectOpen >= 0 ? objectOpen + 1 : block.length;
+  while (cursor < block.length) {
+    cursor = skipStaticTrivia(block, cursor, 'SEO entry', 'seo-field');
+    if (cursor >= block.length) break;
+
+    let key;
+    let keyEnd = cursor;
+    const first = block[cursor];
+    if (first === "'" || first === '"' || first === '`') {
+      const literal = readStaticStringLiteral(block, cursor, 'SEO entry', 'seo-field');
+      key = decodeStaticStringLiteral(literal.value, literal.quote);
+      keyEnd = literal.end;
+    } else if (/[A-Za-z_$]/u.test(first)) {
+      keyEnd += 1;
+      while (/[A-Za-z0-9_$]/u.test(block[keyEnd] || '')) keyEnd += 1;
+      key = block.slice(cursor, keyEnd);
+    } else {
+      cursor += 1;
+      continue;
+    }
+
+    const colon = skipStaticTrivia(block, keyEnd, 'SEO entry', 'seo-field');
+    if (block[colon] !== ':') {
+      cursor = keyEnd;
+      continue;
+    }
+    const valueStart = skipStaticTrivia(block, colon + 1, 'SEO entry', 'seo-field');
+    if (key === field && ["'", '"', '`'].includes(block[valueStart])) {
+      const value = readStaticStringLiteral(block, valueStart, 'SEO entry', 'seo-field');
+      return decodeStaticStringLiteral(value.value, value.quote);
+    }
+    // `parseSeoBlogs` reads the publication headline and date from the
+    // structuredData object. Re-enter that one known object only for those
+    // fields; other nested values (notably dynamic template URLs) stay
+    // opaque, so a string inside a payload cannot become a false property.
+    if (
+      key === 'structuredData'
+      && (field === 'headline' || field === 'datePublished')
+      && block[valueStart] === '{'
+    ) {
+      const close = matchingDelimiter(block, valueStart);
+      if (close >= 0) {
+        const nested = readSeoStringLiteralField(block.slice(valueStart, close + 1), field);
+        if (nested !== undefined) return nested;
+      }
+    }
+    // Move over the complete value. A structuredData object contains dynamic
+    // template URLs; scanning one byte at a time would mistake their backtick
+    // for a property key and reject an otherwise valid SEO entry.
+    cursor = skipValue(valueStart);
+  }
+  return undefined;
+}
+
 function collectSeoEntryMetadataInternal(src, into, feedOnly) {
   const positions = findAllSeoEntryMatches(src).map(({ id, index, closeIdx }) => ({
     id,
@@ -835,12 +918,17 @@ function collectSeoEntryMetadataInternal(src, into, feedOnly) {
   for (let i = 0; i < positions.length; i += 1) {
     const { id, start, end } = positions[i];
     const block = src.slice(start, end);
-    const keywordMatch = block.match(/keywords:\s*'((?:[^'\\]|\\.)*)'/);
     const metadata = {
-      keywords: unescapeQuoted(keywordMatch?.[1]),
-      headline: block.match(/"headline":\s*"((?:[^"\\]|\\.)*)"/)?.[1],
-      datePublished: block.match(/"datePublished":\s*"([^"]+)"/)?.[1],
+      keywords: readSeoStringLiteralField(block, 'keywords'),
+      headline: readSeoStringLiteralField(block, 'headline'),
+      // An empty date is semantically absent: RSS eligibility and historical
+      // metadata consumers both use undefined for a missing publication date.
+      datePublished: readSeoStringLiteralField(block, 'datePublished') || undefined,
     };
+    const description = readSeoStringLiteralField(block, 'description');
+    const ogDescription = readSeoStringLiteralField(block, 'ogDescription');
+    if (description !== undefined) metadata.description = description;
+    if (ogDescription !== undefined) metadata.ogDescription = ogDescription;
     // Solo il percorso RSS applica la validita' del producer prima del dedupe;
     // il collector completo deve conservare anche i campi opzionali per la
     // sitemap news.

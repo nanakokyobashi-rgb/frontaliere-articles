@@ -10,6 +10,11 @@ export const PUBLISH_OUTBOX_SCHEMA = 1;
 export const RUN_LOOKUP_ATTEMPTS = 20;
 export const RUN_LOOKUP_INTERVAL_MS = 2_000;
 export const PUBLISHER_WATCH_INTERVAL_MS = 2_000;
+// Leave enough time for the watcher to serialize its in-progress status after
+// the final GitHub observation. Without this grace, a gh call started exactly
+// at the deadline can be killed before drainCoverPublishers writes the status
+// file, turning a durable deferral into a workflow failure.
+export const DEADLINE_SAFETY_MS = 5_000;
 
 const PUBLISH_WORKFLOW_FOR_SECTION = {
   frontaliere: 'fast-publish-article.yml',
@@ -294,7 +299,7 @@ export async function watchPublisherRun({
   intervalMs = PUBLISHER_WATCH_INTERVAL_MS,
 } = {}) {
   let lastError = null;
-  while (now() < deadlineAt) {
+  while (now() + DEADLINE_SAFETY_MS < deadlineAt) {
     try {
       const run = await readRun({ repo, runId, token, deadlineAt, now });
       if (run?.status === 'completed') {
@@ -313,8 +318,8 @@ export async function watchPublisherRun({
     }
 
     const remaining = deadlineAt - now();
-    if (remaining <= 0) break;
-    await sleepFor(Math.min(intervalMs, remaining));
+    if (remaining <= DEADLINE_SAFETY_MS) break;
+    await sleepFor(Math.min(intervalMs, remaining - DEADLINE_SAFETY_MS));
   }
 
   const detail = lastError ? `; last observation error: ${textError(lastError)}` : '';
@@ -337,7 +342,39 @@ function resultCounts(sections) {
 
 export function publisherStatusIsComplete(status) {
   return Array.isArray(status?.sections)
+    && status.sections.length > 0
     && status.sections.every((section) => section?.status === 'success');
+}
+
+const PUBLISHER_STATUSES = new Set(['success', 'failed', 'in-progress', 'not-started']);
+
+export function validatePublisherStatus(outbox, status) {
+  validateOutbox(outbox);
+  if (!status || !Array.isArray(status.sections) || status.sections.length === 0) {
+    throw new Error('publisher status must contain a non-empty sections array');
+  }
+
+  const expectedSections = new Set(groupPublisherOutbox(outbox).map((group) => group.section));
+  const actualSections = status.sections.map((section, index) => {
+    if (!section || typeof section !== 'object' || Array.isArray(section)) {
+      throw new Error(`publisher status sections[${index}] must be an object`);
+    }
+    if (typeof section.section !== 'string' || !section.section.trim()) {
+      throw new Error(`publisher status sections[${index}] must contain a section`);
+    }
+    if (!PUBLISHER_STATUSES.has(section.status)) {
+      throw new Error(`publisher status sections[${index}] has an invalid status`);
+    }
+    return section.section;
+  });
+
+  const actualUniqueSections = new Set(actualSections);
+  if (actualSections.length !== expectedSections.size
+    || actualUniqueSections.size !== actualSections.length
+    || actualSections.some((section) => !expectedSections.has(section))) {
+    throw new Error('publisher status sections do not match the pending outbox');
+  }
+  return status;
 }
 
 export async function drainCoverPublishers({
@@ -465,7 +502,7 @@ async function main() {
     }
     if (!fs.existsSync(options.status)) throw new Error(`publisher status is missing: ${options.status}`);
     const status = parseJsonFile(options.status, options.status);
-    if (!Array.isArray(status?.sections)) throw new Error(`publisher status is malformed: ${options.status}`);
+    validatePublisherStatus(outbox, status);
     const acknowledged = ackSuccessfulPublisherSections(outbox, status);
     if (acknowledged.outbox.items.length === 0) fs.rmSync(options.outbox, { force: true });
     else writeJson(options.outbox, acknowledged.outbox);

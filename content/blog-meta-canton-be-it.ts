@@ -54,6 +54,9 @@ const blogMetaCantonBeIt: Record<string, string> = {
     'blog.article.energy-tagli-radio-svizzera.title': 'Gruppo radiofonico: annunciati fino a 15 tagli in Svizzera',
     'blog.article.energy-tagli-radio-svizzera.excerpt': 'Energy annuncia fino a 15 tagli: il numero sarà deciso dopo la consultazione, mentre i ricavi pubblicitari restano sotto pressione.',
     'blog.article.energy-tagli-radio-svizzera.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.contributi-rotbach-saanen.title': 'Berna approva contributi per Rotbach e Saanen',
+    'blog.article.contributi-rotbach-saanen.excerpt': 'Il Governo cantonale approva circa CHF 590\'000 per il Rotbach e CHF 720\'000 per la protezione dalle piene a Saanen, nel Canton Berna.',
+    'blog.article.contributi-rotbach-saanen.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBeIt;

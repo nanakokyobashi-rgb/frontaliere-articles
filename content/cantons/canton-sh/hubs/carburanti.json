@@ -4,14 +4,14 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-22T03:24:56.278Z",
-  "contentHash": "f46188e5f00093e3941cd5fc2768d34d730cd79a7f613c8e07d6ab543ceee3f8",
+  "updatedAt": "2026-10-23T04:00:11.481Z",
+  "contentHash": "09efd600fac6de97ff5e721e52bc9d42bc96a46a624a0945ac4880bdfe27d423",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-21T12:19:56.872Z",
+      "updatedAt": "2026-10-22T12:21:38.892Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-28T12:19:56.872Z"
+      "carryUntilAt": "2026-10-29T12:21:38.892Z"
     }
   ],
   "locales": {
@@ -56,52 +56,28 @@
               "label": "Benzina 95 — Germania",
               "value": "2,076 EUR/l",
               "detail": "media regionale: minimo 2,049 EUR/l, 3 stazioni rilevate",
-              "date": "2026-10-21T12:19:56.872Z"
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,219 EUR/l",
-              "detail": "media regionale: minimo 2,209 EUR/l, 3 stazioni rilevate",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2,206 EUR/l",
+              "detail": "media regionale: minimo 2,189 EUR/l, 3 stazioni rilevate",
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Schaffhauser Nachrichten: lanciata la nuova app nel 2026",
-          "url": "/articoli-sciaffusa/nuova-app-schaffhauser-nachrichten-2026/",
-          "excerpt": "Il 21 ottobre 2026 è avvenuto il rollout della nuova app SN con contenuti estesi e notifiche push tematiche, disponibile su App Store e Google Play Store.",
-          "date": "2026-10-22T03:16:50.869Z"
-        },
-        {
-          "title": "Neunkirch accetta il supervisore cantonale",
-          "url": "/articoli-sciaffusa/neunkirch-supervisore-cantonale/",
-          "excerpt": "Il Cantone invia Stephan Rawyler a Neunkirch: potrà impartire istruzioni al Consiglio comunale e partecipare alle sue sedute.",
-          "date": "2026-10-22T02:31:34.951Z"
-        },
-        {
-          "title": "Banche Sciaffusa: Governo respinge regole federali",
-          "url": "/articoli-sciaffusa/sciaffusa-banche-riforma-federale/",
-          "excerpt": "Il Governo di Sciaffusa critica la proposta federale di riforma bancaria, temendo oneri sproporzionati per gli istituti locali.",
-          "date": "2026-10-22T01:01:24.569Z"
-        },
-        {
-          "title": "Sciaffusa e Zurigo installano il sistema parcheggi al Reno",
-          "url": "/articoli-sciaffusa/parcheggi-cascate-reno/",
-          "excerpt": "Nuovo sistema tra Sciaffusa e Zurigo per i parcheggi liberi alle Cascate del Reno; avvio nell'estate 2027, costo circa CHF 400'000.",
-          "date": "2026-10-21T20:45:07.801Z"
-        },
-        {
-          "title": "Incidente scooter a Schleitheim: donna ferita, Hohbrugg chiusa",
-          "url": "/articoli-sciaffusa/schleitheim-scooter-incidente-2026/",
-          "excerpt": "Domenica 18 ottobre 2026, una 61enne cade dallo scooter sulla Hohbrugg: proiezione di 12 metri nel pendio, elicottero per il trasporto in ospedale, strada chiusa oltre un'ora.",
-          "date": "2026-10-20T07:10:47.167Z"
+          "title": "Sciaffusa: proposta su elettricità, acqua e data center",
+          "url": "/articoli-sciaffusa/sciaffusa-regole-datacenter/",
+          "excerpt": "La commissione del Consiglio cantonale propone prelievi su elettricità e acqua; il Governo sostiene la modifica.",
+          "date": "2026-10-23T03:48:32.749Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -112,7 +88,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-22T03:24:56.278Z"
+      "updatedAt": "2026-10-23T04:00:11.481Z"
     },
     "en": {
       "canton": "SH",
@@ -155,52 +131,28 @@
               "label": "Petrol 95 — Germany",
               "value": "2.076 EUR/l",
               "detail": "regional average: lowest 2.049 EUR/l, 3 stations surveyed",
-              "date": "2026-10-21T12:19:56.872Z"
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.219 EUR/l",
-              "detail": "regional average: lowest 2.209 EUR/l, 3 stations surveyed",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2.206 EUR/l",
+              "detail": "regional average: lowest 2.189 EUR/l, 3 stations surveyed",
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Schaffhauser Nachrichten: new app launched in 2026",
-          "url": "/en/schaffhausen-articles/new-schaffhauser-nachrichten-app-2026/",
-          "excerpt": "On October 21, 2026, the rollout of the new SN app with extensive content and thematic push notifications took place, available on the App Store and Google Play Store.",
-          "date": "2026-10-22T03:16:50.869Z"
-        },
-        {
-          "title": "Neunkirch accepts cantonal supervisor",
-          "url": "/en/schaffhausen-articles/neunkirch-cantonal-supervisor/",
-          "excerpt": "The Canton sends Stephan Rawyler to Neunkirch: he will be able to give instructions to the City Council and participate in its sessions.",
-          "date": "2026-10-22T02:31:34.951Z"
-        },
-        {
-          "title": "Schaffhausen banks: Government rejects federal rules",
-          "url": "/en/schaffhausen-articles/schaffhausen-bank-reform-federal/",
-          "excerpt": "The Government of Schaffhausen criticizes the federal banking reform proposal, fearing disproportionate burdens for local institutions.",
-          "date": "2026-10-22T01:01:24.569Z"
-        },
-        {
-          "title": "Schaffhausen and Zurich install the parking system on the Rhine",
-          "url": "/en/schaffhausen-articles/rhine-falls-parking-system/",
-          "excerpt": "New system between Schaffhausen and Zurich for available parking spaces at the Rhine Falls; launch in summer 2027, cost approximately CHF 400'000.",
-          "date": "2026-10-21T20:45:07.801Z"
-        },
-        {
-          "title": "Scooter accident in Schleitheim: woman injured, Hohbrugg closed",
-          "url": "/en/schaffhausen-articles/schleitheim-scooter-accident-2026/",
-          "excerpt": "Sunday, October 18, 2026, a 61-year-old woman falls from her scooter on Hohbrugg: thrown 12 meters down the slope, helicopter transport to hospital, road closed for over an hour.",
-          "date": "2026-10-20T07:10:47.167Z"
+          "title": "Schaffhausen: electricity, water and data centre proposal",
+          "url": "/en/schaffhausen-articles/schaffhausen-data-centres/",
+          "excerpt": "The cantonal council commission proposes levies on electricity and water; the government supports the change.",
+          "date": "2026-10-23T03:48:32.749Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -211,7 +163,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-22T03:24:56.278Z"
+      "updatedAt": "2026-10-23T04:00:11.481Z"
     },
     "de": {
       "canton": "SH",
@@ -254,52 +206,28 @@
               "label": "Benzin 95 — Deutschland",
               "value": "2.076 EUR/l",
               "detail": "regionaler Durchschnitt: tiefster Preis 2.049 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-10-21T12:19:56.872Z"
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.219 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.209 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2.206 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.189 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Schaffhauser Nachrichten: Neue App im Jahr 2026 gestartet",
-          "url": "/de/schaffhausen-artikel/neue-schaffhauser-nachrichten-app-2026/",
-          "excerpt": "Am 21. Oktober 2026 erfolgte der Rollout der neuen SN-App mit erweiterten Inhalten und thematischen Push-Benachrichtigungen, die im App Store und Google Play Store verfügbar sind.",
-          "date": "2026-10-22T03:16:50.869Z"
-        },
-        {
-          "title": "Neunkirch akzeptiert den kantonalen Vorgesetzten",
-          "url": "/de/schaffhausen-artikel/neunkirch-kantonaler-aufpasser/",
-          "excerpt": "Der Kanton schickt Stephan Rawyler nach Neunkirch: Er kann dem Gemeinderat Weisungen erteilen und an dessen Sitzungen teilnehmen.",
-          "date": "2026-10-22T02:31:34.951Z"
-        },
-        {
-          "title": "Schaffhauser Banken: Regierung lehnt Bundesregeln ab",
-          "url": "/de/schaffhausen-artikel/schaffhausen-bankengesetz-reform/",
-          "excerpt": "Die Schaffhauser Regierung kritisiert den eidgenössischen Vorschlag zur Bankenreform und befürchtet unverhältnismäßige Belastungen für lokale Institute.",
-          "date": "2026-10-22T01:01:24.569Z"
-        },
-        {
-          "title": "Schaffhausen und Zürich installieren das Parkleitsystem am Rhein",
-          "url": "/de/schaffhausen-artikel/parkleitsystem-rheinfall/",
-          "excerpt": "Neues System zwischen Schaffhausen und Zürich für freie Parkplätze am Rheinfall; Start im Sommer 2027, Kosten etwa CHF 400'000.",
-          "date": "2026-10-21T20:45:07.801Z"
-        },
-        {
-          "title": "Scooterunfall in Schleitheim: Frau verletzt, Hohbrugg gesperrt",
-          "url": "/de/schaffhausen-artikel/schleitheim-roller-unfall-2026/",
-          "excerpt": "Am Sonntag, 18.",
-          "date": "2026-10-20T07:10:47.167Z"
+          "title": "Schaffhausen: Vorschlag zu Strom, Wasser und Rechenzentren",
+          "url": "/de/schaffhausen-artikel/schaffhausen-rechenzentren-regeln/",
+          "excerpt": "Die Kommission des Kantonsrates schlägt Abgaben auf Strom und Wasser vor; die Regierung unterstützt die Änderung.",
+          "date": "2026-10-23T03:48:32.749Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -310,7 +238,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-22T03:24:56.278Z"
+      "updatedAt": "2026-10-23T04:00:11.481Z"
     },
     "fr": {
       "canton": "SH",
@@ -353,52 +281,28 @@
               "label": "Essence 95 — Allemagne",
               "value": "2,076 EUR/l",
               "detail": "moyenne régionale : prix le plus bas 2,049 EUR/l, 3 stations relevées",
-              "date": "2026-10-21T12:19:56.872Z"
+              "date": "2026-10-22T12:21:38.892Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,219 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,209 EUR/l, 3 stations relevées",
-              "date": "2026-10-21T12:19:56.872Z"
+              "value": "2,206 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,189 EUR/l, 3 stations relevées",
+              "date": "2026-10-22T12:21:38.892Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Schaffhauser Nachrichten : lancement de la nouvelle application en 2026",
-          "url": "/fr/articles-schaffhouse/nouvelle-app-schaffhauser-nachrichten-2026/",
-          "excerpt": "Le 21 octobre 2026 a eu lieu le lancement de la nouvelle application SN avec un contenu étendu et des notifications push thématiques, disponible sur l'App Store et le Google Play Store.",
-          "date": "2026-10-22T03:16:50.869Z"
-        },
-        {
-          "title": "Neunkirch accepte le superviseur cantonal",
-          "url": "/fr/articles-schaffhouse/neunkirch-superviseur-cantonal/",
-          "excerpt": "Le canton envoie Stephan Rawyler à Neunkirch : il pourra donner des instructions au conseil municipal et participer à ses séances.",
-          "date": "2026-10-22T02:31:34.951Z"
-        },
-        {
-          "title": "Banques de Schaffhouse : le gouvernement rejette les règles fédérales",
-          "url": "/fr/articles-schaffhouse/schaffhouse-reforme-bancaire-federale/",
-          "excerpt": "Le gouvernement de Schaffhouse critique la proposition fédérale de réforme bancaire, craignant des charges disproportionnées pour les établissements locaux.",
-          "date": "2026-10-22T01:01:24.569Z"
-        },
-        {
-          "title": "Schaffhouse et Zurich installent le système de stationnement au bord du Rhin",
-          "url": "/fr/articles-schaffhouse/systeme-parking-chutes-rhin/",
-          "excerpt": "Nouveau système entre Schaffhouse et Zurich pour les places de parking libres aux chutes du Rhin ; lancement à l'été 2027, coût d'environ CHF 400'000.",
-          "date": "2026-10-21T20:45:07.801Z"
-        },
-        {
-          "title": "Accident de scooter à Schleitheim : une femme blessée, Hohbrugg fermée",
-          "url": "/fr/articles-schaffhouse/schleitheim-accident-scooter-2026/",
-          "excerpt": "Dimanche 18 octobre 2026, une femme de 61 ans chute de son scooter sur la Hohbrugg : elle est projetée à 12 mètres dans la pente, un hélicoptère est utilisé pour son transport à l’hôpital, route fermée pendant plus…",
-          "date": "2026-10-20T07:10:47.167Z"
+          "title": "Schaffhouse : proposition sur l'électricité, l'eau et les centres de données",
+          "url": "/fr/articles-schaffhouse/schaffhouse-centres-donnees/",
+          "excerpt": "La commission du Conseil cantonal propose des prélèvements sur l'électricité et l'eau ; le Gouvernement soutient la modification.",
+          "date": "2026-10-23T03:48:32.749Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -409,7 +313,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-22T03:24:56.278Z"
+      "updatedAt": "2026-10-23T04:00:11.481Z"
     }
   }
 }

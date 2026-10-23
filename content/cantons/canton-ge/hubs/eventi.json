@@ -4,17 +4,17 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T22:21:57.960Z",
-  "contentHash": "676d9811b79a4df8dc03d8976b71f391b22e1ffed0fb5313eef8bfcb4e11d3f3",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "0e5b2ab5403d31a20d4b6139fd2f8b43c0091c24f1c35be3f779ec9b7e4e6be3",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T11:13:26.127Z",
+      "updatedAt": "2026-10-22T19:30:03.925Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T10:40:36.644Z",
+      "updatedAt": "2026-10-22T16:03:41.824Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "325",
+          "value": "324",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Atelier Créez votre création d'Halloween en chocolat",
+              "label": "ARTHUR DONNOT en concert au Chat Noir",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-1"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/arthur-donnot-concert-chat-noir"
             },
             {
-              "label": "Atelier Théâtre : du livre à la scène avec Clémentine Le Bas, comédienne, à la Bibliothèque de la Cité",
+              "label": "Atelier chocolat pour les enfants - Chocolate monster",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/atelier-theatre-livre-scene-clementine-comedienne-bibliotheque-cite"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-1"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Atelier Découverte - L'École du Chocolat",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "label": "Atelier du Management Durable : Action Carbon, Scaling Impact et Genève, Capitale de l’Impact",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/atelier-management-durable-action-carbon-scaling-impact-geneve-capitale-impact"
             },
             {
-              "label": "BIG BAND DES EAUX-VIVES : Echoes of the Messengers",
+              "label": "Avant-première LE MYSTÈRE LUCY LOST",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/band-eaux-vives-echoes-messengers"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/premiere-mystere-lucy-lost-1"
             },
             {
-              "label": "Café quartier : La Sportive, un lieu incontournable du quartier",
+              "label": "Benjamin Epps + Sebb Bash + DJ Stresh",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/cafe-quartier-sportive-lieu-incontournable-quartier"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/benjamin-epps-sebb-bash-stresh"
             },
             {
-              "label": "Cindy Van Acker / Cie Greffe, Les Impromptus",
+              "label": "Concert événement PAOLO FRESU / DAVID LINX / GUSTAVO BEYTELMANN Moderne / Latino",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/cindy-acker-greffe-impromptus"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/concert-evenement-paolo-fresu-david-linx-gustavo-beytelmann-moderne-latino"
             },
             {
-              "label": "Cours de Tango Argentin - Niveau débutant",
+              "label": "DJ CHIVI · REGGAETON, SALSA, MERENGUE, BACHATA",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-5"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/chivi-reggaeton-salsa-merengue-bachata"
             },
             {
-              "label": "De(s)possession(s) de Vanessa Riera",
+              "label": "Ensemble Ensemble",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/ensemble-ensemble"
             },
             {
-              "label": "De(s)possession(s) de Vanessa Riera * COMPLET *",
+              "label": "Festival du Soir Présente GIMS et Triangle des Bermudes",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera-complet"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/festival-soir-presente-gims-triangle-bermudes"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "GE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "325",
+          "value": "324",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Atelier Créez votre création d'Halloween en chocolat",
+              "label": "ARTHUR DONNOT en concert au Chat Noir",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-1"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/arthur-donnot-concert-chat-noir"
             },
             {
-              "label": "Atelier Théâtre : du livre à la scène avec Clémentine Le Bas, comédienne, à la Bibliothèque de la Cité",
+              "label": "Atelier chocolat pour les enfants - Chocolate monster",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/atelier-theatre-livre-scene-clementine-comedienne-bibliotheque-cite"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-1"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Atelier Découverte - L'École du Chocolat",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "label": "Atelier du Management Durable : Action Carbon, Scaling Impact et Genève, Capitale de l’Impact",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/atelier-management-durable-action-carbon-scaling-impact-geneve-capitale-impact"
             },
             {
-              "label": "BIG BAND DES EAUX-VIVES : Echoes of the Messengers",
+              "label": "Avant-première LE MYSTÈRE LUCY LOST",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/band-eaux-vives-echoes-messengers"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/premiere-mystere-lucy-lost-1"
             },
             {
-              "label": "Café quartier : La Sportive, un lieu incontournable du quartier",
+              "label": "Benjamin Epps + Sebb Bash + DJ Stresh",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/cafe-quartier-sportive-lieu-incontournable-quartier"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/benjamin-epps-sebb-bash-stresh"
             },
             {
-              "label": "Cindy Van Acker / Cie Greffe, Les Impromptus",
+              "label": "Concert événement PAOLO FRESU / DAVID LINX / GUSTAVO BEYTELMANN Moderne / Latino",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/cindy-acker-greffe-impromptus"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/concert-evenement-paolo-fresu-david-linx-gustavo-beytelmann-moderne-latino"
             },
             {
-              "label": "Cours de Tango Argentin - Niveau débutant",
+              "label": "DJ CHIVI · REGGAETON, SALSA, MERENGUE, BACHATA",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-5"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/chivi-reggaeton-salsa-merengue-bachata"
             },
             {
-              "label": "De(s)possession(s) de Vanessa Riera",
+              "label": "Ensemble Ensemble",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/ensemble-ensemble"
             },
             {
-              "label": "De(s)possession(s) de Vanessa Riera * COMPLET *",
+              "label": "Festival du Soir Présente GIMS et Triangle des Bermudes",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera-complet"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/festival-soir-presente-gims-triangle-bermudes"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -231,7 +231,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +253,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "GE",
@@ -263,7 +263,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "325",
+          "value": "324",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -274,69 +274,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Atelier Créez votre création d'Halloween en chocolat",
+              "label": "ARTHUR DONNOT en concert au Chat Noir",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-1"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/arthur-donnot-concert-chat-noir"
             },
             {
-              "label": "Atelier Théâtre : du livre à la scène avec Clémentine Le Bas, comédienne, à la Bibliothèque de la Cité",
+              "label": "Atelier chocolat pour les enfants - Chocolate monster",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/atelier-theatre-livre-scene-clementine-comedienne-bibliotheque-cite"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-1"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Atelier Découverte - L'École du Chocolat",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "label": "Atelier du Management Durable : Action Carbon, Scaling Impact et Genève, Capitale de l’Impact",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/atelier-management-durable-action-carbon-scaling-impact-geneve-capitale-impact"
             },
             {
-              "label": "BIG BAND DES EAUX-VIVES : Echoes of the Messengers",
+              "label": "Avant-première LE MYSTÈRE LUCY LOST",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/band-eaux-vives-echoes-messengers"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/premiere-mystere-lucy-lost-1"
             },
             {
-              "label": "Café quartier : La Sportive, un lieu incontournable du quartier",
+              "label": "Benjamin Epps + Sebb Bash + DJ Stresh",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/cafe-quartier-sportive-lieu-incontournable-quartier"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/benjamin-epps-sebb-bash-stresh"
             },
             {
-              "label": "Cindy Van Acker / Cie Greffe, Les Impromptus",
+              "label": "Concert événement PAOLO FRESU / DAVID LINX / GUSTAVO BEYTELMANN Moderne / Latino",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/cindy-acker-greffe-impromptus"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/concert-evenement-paolo-fresu-david-linx-gustavo-beytelmann-moderne-latino"
             },
             {
-              "label": "Cours de Tango Argentin - Niveau débutant",
+              "label": "DJ CHIVI · REGGAETON, SALSA, MERENGUE, BACHATA",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-5"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/chivi-reggaeton-salsa-merengue-bachata"
             },
             {
-              "label": "De(s)possession(s) de Vanessa Riera",
+              "label": "Ensemble Ensemble",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/ensemble-ensemble"
             },
             {
-              "label": "De(s)possession(s) de Vanessa Riera * COMPLET *",
+              "label": "Festival du Soir Présente GIMS et Triangle des Bermudes",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera-complet"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/festival-soir-presente-gims-triangle-bermudes"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -349,7 +349,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "GE",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "325",
+          "value": "324",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -392,69 +392,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Atelier Créez votre création d'Halloween en chocolat",
+              "label": "ARTHUR DONNOT en concert au Chat Noir",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/atelier-creez-creation-halloween-chocolat-1"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/arthur-donnot-concert-chat-noir"
             },
             {
-              "label": "Atelier Théâtre : du livre à la scène avec Clémentine Le Bas, comédienne, à la Bibliothèque de la Cité",
+              "label": "Atelier chocolat pour les enfants - Chocolate monster",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/atelier-theatre-livre-scene-clementine-comedienne-bibliotheque-cite"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-1"
             },
             {
-              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "label": "Atelier Découverte - L'École du Chocolat",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat"
             },
             {
-              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "label": "Atelier du Management Durable : Action Carbon, Scaling Impact et Genève, Capitale de l’Impact",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/atelier-management-durable-action-carbon-scaling-impact-geneve-capitale-impact"
             },
             {
-              "label": "BIG BAND DES EAUX-VIVES : Echoes of the Messengers",
+              "label": "Avant-première LE MYSTÈRE LUCY LOST",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/band-eaux-vives-echoes-messengers"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/premiere-mystere-lucy-lost-1"
             },
             {
-              "label": "Café quartier : La Sportive, un lieu incontournable du quartier",
+              "label": "Benjamin Epps + Sebb Bash + DJ Stresh",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/cafe-quartier-sportive-lieu-incontournable-quartier"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/benjamin-epps-sebb-bash-stresh"
             },
             {
-              "label": "Cindy Van Acker / Cie Greffe, Les Impromptus",
+              "label": "Concert événement PAOLO FRESU / DAVID LINX / GUSTAVO BEYTELMANN Moderne / Latino",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/cindy-acker-greffe-impromptus"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/concert-evenement-paolo-fresu-david-linx-gustavo-beytelmann-moderne-latino"
             },
             {
-              "label": "Cours de Tango Argentin - Niveau débutant",
+              "label": "DJ CHIVI · REGGAETON, SALSA, MERENGUE, BACHATA",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/cours-tango-argentin-niveau-debutant-5"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/chivi-reggaeton-salsa-merengue-bachata"
             },
             {
-              "label": "De(s)possession(s) de Vanessa Riera",
+              "label": "Ensemble Ensemble",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/ensemble-ensemble"
             },
             {
-              "label": "De(s)possession(s) de Vanessa Riera * COMPLET *",
+              "label": "Festival du Soir Présente GIMS et Triangle des Bermudes",
               "detail": "Genève",
-              "date": "2026-10-22",
-              "url": "https://www.geneve.ch/agenda/despossessions-vanessa-riera-complet"
+              "date": "2026-10-23",
+              "url": "https://www.geneve.ch/agenda/festival-soir-presente-gims-triangle-bermudes"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-10-22T11:13:26.127Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -467,7 +467,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-22T10:40:36.644Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T22:21:57.960Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

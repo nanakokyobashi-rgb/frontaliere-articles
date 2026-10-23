@@ -405,12 +405,12 @@ export function requiredPageKeys(section, { sitemapXml, previousSitemapXml = nul
 
 /**
  * Quanto il publisher puo' attendere il bootstrap e ogni quanto ritenta.
- * La finestra e' intenzionalmente bounded: il fast-publish puo' essere ancora
- * in coda o venire riallineato a una HEAD piu' nuova, ma il replay gia' previsto
- * riprova la release dopo che le pagine sono state caricate. Un'attesa lunga qui
- * trattiene il lock di concurrency di publish-api e accoda/cancella le run.
+ * La finestra del publisher e' bounded a 100 minuti per lasciare spazio al
+ * replay quando il producer e' ancora in coda. Il lease del producer copre
+ * invece l'intero timeout di 360 minuti, con margine di cleanup; il ruolo
+ * edge-publisher usa un TTL separato e bounded al proprio job.
  */
-export const BOOTSTRAP_WAIT_MS = 10 * 60 * 1000;
+export const BOOTSTRAP_WAIT_MS = 100 * 60 * 1000;
 export const BOOTSTRAP_RETRY_MS = 20 * 1000;
 /** Un tombstone transitorio non deve lasciare un lease attivo fino al TTL. */
 export const BOOTSTRAP_RELEASE_ATTEMPTS = 3;
@@ -420,8 +420,9 @@ export const BOOTSTRAP_RELEASE_ATTEMPTS = 3;
  *
  * La verifica delle pagine resta necessaria, ma non basta: senza questo gate
  * il publisher API potrebbe leggere una release pronta e fare il flip mentre
- * fast-publish sta ancora sostituendo le chiavi. Il marker e' breve e ha una
- * scadenza: un runner morto non puo' bloccare per sempre il publisher.
+ * fast-publish sta ancora sostituendo le chiavi. Il marker ha una scadenza:
+ * un runner morto non puo' bloccare per sempre il publisher, e il TTL del
+ * ruolo edge-publisher non eredita quello del producer.
  */
 export async function waitForBootstrapLocks(
   sections,

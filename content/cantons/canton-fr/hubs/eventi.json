@@ -4,12 +4,12 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-10-22T00:12:28.308Z",
-  "contentHash": "88ddbea4a6163e2afc49f6f7350c0b25b1f809936a1ba8bfa330f7f4722d43fc",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "05e91646447b3ef494de5ca38f7f7ca0fde3036fcf503045c18c8c235473a906",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-21T12:38:14.154Z",
+      "updatedAt": "2026-10-22T19:30:03.925Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "37",
+          "value": "39",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,40 +33,40 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Krimi & Pop",
+              "detail": "Begegnungszentrum, Düdingen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/krimi-und-pop_ASJ9RiG"
+            },
+            {
               "label": "La Catillon ou le destin d’une femme au XVIIIe siècle",
               "detail": "Fribourg — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-catillon-ou-le-destin-dune-femme-au-xviiie-siecle/"
             },
             {
               "label": "Bénichon Menu at Café Tivoli in Châtel-St-Denis",
               "detail": "Café Tivoli, Châtel-Saint-Denis — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
             },
             {
               "label": "Regards affinés",
               "detail": "L'Atelier, Fribourg — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
             },
             {
               "label": "Halloween à Moléson",
               "detail": "Office du Tourisme de Moléson, Gruyères — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
             },
             {
               "label": "Automne à Charmey",
               "detail": "Case postale, Val-de-Charmey — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
-            },
-            {
-              "label": "Krimi & Pop",
-              "detail": "Begegnungszentrum, Düdingen",
               "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/krimi-und-pop_ASJ9RiG"
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
             },
             {
               "label": "Joie sauvage",
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/friburgo/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "FR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "37",
+          "value": "39",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,40 +138,40 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Krimi & Pop",
+              "detail": "Begegnungszentrum, Düdingen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/krimi-und-pop_ASJ9RiG"
+            },
+            {
               "label": "La Catillon ou le destin d’une femme au XVIIIe siècle",
               "detail": "Fribourg — ongoing, last day: 24 October 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-catillon-ou-le-destin-dune-femme-au-xviiie-siecle/"
             },
             {
               "label": "Bénichon Menu at Café Tivoli in Châtel-St-Denis",
               "detail": "Café Tivoli, Châtel-Saint-Denis — ongoing, last day: 25 October 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
             },
             {
               "label": "Regards affinés",
               "detail": "L'Atelier, Fribourg — ongoing, last day: 31 October 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
             },
             {
               "label": "Halloween à Moléson",
               "detail": "Office du Tourisme de Moléson, Gruyères — ongoing, last day: 1 November 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
             },
             {
               "label": "Automne à Charmey",
               "detail": "Case postale, Val-de-Charmey — ongoing, last day: 25 October 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
-            },
-            {
-              "label": "Krimi & Pop",
-              "detail": "Begegnungszentrum, Düdingen",
               "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/krimi-und-pop_ASJ9RiG"
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
             },
             {
               "label": "Joie sauvage",
@@ -200,7 +200,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/fribourg/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "FR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "37",
+          "value": "39",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,40 +243,40 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Krimi & Pop",
+              "detail": "Begegnungszentrum, Düdingen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/krimi-und-pop_ASJ9RiG"
+            },
+            {
               "label": "La Catillon ou le destin d’une femme au XVIIIe siècle",
               "detail": "Fribourg — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-catillon-ou-le-destin-dune-femme-au-xviiie-siecle/"
             },
             {
               "label": "Kilbi-Menu in Café Tivoli in Châtel-St-Denis",
               "detail": "Café Tivoli, Châtel-Saint-Denis — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
             },
             {
               "label": "Regards affinés",
               "detail": "L'Atelier, Fribourg — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
             },
             {
               "label": "Halloween à Moléson",
               "detail": "Office du Tourisme de Moléson, Gruyères — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
             },
             {
               "label": "Automne à Charmey",
               "detail": "Case postale, Val-de-Charmey — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
-            },
-            {
-              "label": "Krimi & Pop",
-              "detail": "Begegnungszentrum, Düdingen",
               "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/krimi-und-pop_ASJ9RiG"
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
             },
             {
               "label": "Joie sauvage",
@@ -305,7 +305,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/freiburg/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "FR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "37",
+          "value": "39",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,40 +348,40 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Krimi & Pop",
+              "detail": "Begegnungszentrum, Düdingen",
+              "date": "2026-10-23",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/krimi-und-pop_ASJ9RiG"
+            },
+            {
               "label": "La Catillon ou le destin d’une femme au XVIIIe siècle",
               "detail": "Fribourg — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/la-catillon-ou-le-destin-dune-femme-au-xviiie-siecle/"
             },
             {
               "label": "Menu de Bénichon au Café Tivoli à Châtel-St-Denis",
               "detail": "Café Tivoli, Châtel-Saint-Denis — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
             },
             {
               "label": "Regards affinés",
               "detail": "L'Atelier, Fribourg — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
             },
             {
               "label": "Halloween à Moléson",
               "detail": "Office du Tourisme de Moléson, Gruyères — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-22",
+              "date": "2026-10-23",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
             },
             {
               "label": "Automne à Charmey",
               "detail": "Case postale, Val-de-Charmey — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-22",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
-            },
-            {
-              "label": "Krimi & Pop",
-              "detail": "Begegnungszentrum, Düdingen",
               "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/duedingen/krimi-und-pop_ASJ9RiG"
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
             },
             {
               "label": "Joie sauvage",
@@ -410,7 +410,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/fribourg/",
-          "updatedAt": "2026-10-21T12:38:14.154Z"
+          "updatedAt": "2026-10-22T19:30:03.925Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-22T00:12:28.308Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

@@ -55,6 +55,12 @@
 // preserving the site's observable escape semantics.
 const TS_ESCAPE_RX = /\\(u\{[0-9a-fA-F]+\}|u[0-9a-fA-F]{4}|x[0-9a-fA-F]{2}|\r\n|[\s\S])/g;
 const TS_CODE_POINT_ESCAPE_RX = /^(x[0-9a-fA-F]{2}|u\{[0-9a-fA-F]+\})/u;
+const TS_CONTROL_ESCAPES = Object.freeze({
+  b: '\b',
+  f: '\f',
+  v: '\v',
+  0: '\0',
+});
 
 function decodeTypeScriptCodePointEscape(escape) {
   const match = TS_CODE_POINT_ESCAPE_RX.exec(escape);
@@ -82,10 +88,18 @@ function decodeTypeScriptCodePointEscape(escape) {
  *   TypeScript's `\xNN` and `\u{...}` code-point forms are decoded even when
  *   `decodeUnicode` is false; the option additionally enables fixed-width
  *   `\uXXXX` decoding for metadata callers.
+ * @param {{decodeUnicode?: boolean, decodeControlEscapes?: boolean}} [options]
+ *   Control escapes (`\b`, `\f`, `\v`, `\0`) are opt-in. The FAQ reader keeps
+ *   them escaped so that JSON.parse, rather than this TS reader, owns their
+ *   interpretation.
  * @returns {string} the decoded value.
  */
-export function unescapeTsString(value, escapes, { decodeUnicode = false } = {}) {
-  return value.replace(TS_ESCAPE_RX, (whole, escape) => {
+export function unescapeTsString(
+  value,
+  escapes = {},
+  { decodeUnicode = false, decodeControlEscapes = false } = {},
+) {
+  return String(value).replace(TS_ESCAPE_RX, (whole, escape, offset, source) => {
     const codePoint = decodeTypeScriptCodePointEscape(escape);
     if (codePoint) return codePoint.value;
     if (/^(?:\r\n|[\n\r\u2028\u2029])$/u.test(escape)) return '';
@@ -93,6 +107,12 @@ export function unescapeTsString(value, escapes, { decodeUnicode = false } = {})
       return String.fromCharCode(Number.parseInt(escape.slice(1), 16));
     }
     const ch = escape[0];
+    if (Object.prototype.hasOwnProperty.call(TS_CONTROL_ESCAPES, ch)) {
+      if (ch === '0' && /[0-9]/u.test(source[offset + 2] ?? '')) {
+        throw new Error('escape ottale TypeScript non supportato');
+      }
+      return decodeControlEscapes ? TS_CONTROL_ESCAPES[ch] : whole;
+    }
     return Object.prototype.hasOwnProperty.call(escapes, ch) ? escapes[ch] : whole;
   });
 }

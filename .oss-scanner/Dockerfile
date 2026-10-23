@@ -38,4 +38,6 @@ RUN set -eu; \
 
 RUN npm ci --no-audit --no-fund
 RUN npm install --global --no-audit --no-fund tsx@4.23.15
+RUN npm install --no-save --no-package-lock --no-audit --no-fund typescript@5.8.3
+ENV ARTICLE_SOURCE_TYPESCRIPT=/src/node_modules/typescript/lib/typescript.js
 RUN tsx scripts/build-api.mjs

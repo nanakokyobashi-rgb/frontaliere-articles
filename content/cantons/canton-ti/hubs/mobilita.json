@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-22T13:56:44.136Z",
-  "contentHash": "993e77fc4e18e88516ad4f62bd8af0223feb3c882b8b2f3b9863bbeeebd5f628",
+  "updatedAt": "2026-10-23T05:52:42.601Z",
+  "contentHash": "0ef3c1991b9af89043ad25599a5f91d9ca26fc8cbf5fc28eeeda161fa916b311",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-22T05:28:12.116Z",
+      "updatedAt": "2026-10-22T21:58:34.031Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T20:56:46.769Z",
+      "updatedAt": "2026-10-22T20:51:18.236Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "40",
+          "value": "38",
           "note": "segnalazioni aggiornate: 22 ottobre 2026"
         }
       ],
@@ -129,15 +129,14 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
-              "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
+              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Svincolo autostradale Quinto Situazione: chiusa Causa: incidente",
               "value": "Chiusura",
-              "detail": "fine prevista: 23 ottobre 2026",
-              "date": "2026-10-20T14:53:00.000Z"
+              "date": "2026-10-22T20:34:00.000Z"
             },
             {
-              "label": "Brissago in tutte le direzioni Situazione: chiusa Causa: incidente",
+              "label": "A2 Chiasso -> S. Gottardo Galleria Galleria Piumogna Situazione: chiusa Causa: incidente",
               "value": "Chiusura",
-              "date": "2026-10-22T05:25:00.000Z"
+              "date": "2026-10-22T20:36:00.000Z"
             },
             {
               "label": "A2 S. Gottardo -> Chiasso Svincolo autostradale Lugano Nord Situazione: raccordo autostradale chiuso in entrata cantiere",
@@ -151,13 +150,14 @@
               "date": "2026-10-22T03:08:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo tra Raccordo autostradale Diramazione Mendrisio E Svincolo autostradale Lugano Sud Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 15",
-              "value": "Traffico",
-              "date": "2026-10-22T04:14:00.000Z"
+              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
+              "value": "Cantiere",
+              "detail": "fine prevista: 29 dicembre 2028",
+              "date": "2021-06-25T03:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -195,7 +195,7 @@
               "url": "https://www.tilo.ch/avvisi/261005_Totale-Luino.html"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -291,7 +291,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "en": {
       "canton": "TI",
@@ -311,7 +311,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "40",
+          "value": "38",
           "note": "reports as of 22 October 2026"
         }
       ],
@@ -398,15 +398,14 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
-              "label": "A13 Bellinzona <-> Chur tra Svincolo autostradale San Bernardino E Svincolo autostradale Passo del San Bernardino Situazione: chiusa cantiere, lunghezza [km] 7.5",
+              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Faido E Svincolo autostradale Quinto Situazione: chiusa Causa: incidente",
               "value": "Closure",
-              "detail": "until 23 October 2026",
-              "date": "2026-10-20T14:53:00.000Z"
+              "date": "2026-10-22T20:34:00.000Z"
             },
             {
-              "label": "Brissago in tutte le direzioni Situazione: chiusa Causa: incidente",
+              "label": "A2 Chiasso -> S. Gottardo Galleria Galleria Piumogna Situazione: chiusa Causa: incidente",
               "value": "Closure",
-              "date": "2026-10-22T05:25:00.000Z"
+              "date": "2026-10-22T20:36:00.000Z"
             },
             {
               "label": "A2 S. Gottardo -> Chiasso Svincolo autostradale Lugano Nord Situazione: raccordo autostradale chiuso in entrata cantiere",
@@ -420,13 +419,14 @@
               "date": "2026-10-22T03:08:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo tra Raccordo autostradale Diramazione Mendrisio E Svincolo autostradale Lugano Sud Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 15",
-              "value": "Traffic",
-              "date": "2026-10-22T04:14:00.000Z"
+              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
+              "value": "Roadworks",
+              "detail": "until 29 December 2028",
+              "date": "2021-06-25T03:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -464,7 +464,7 @@
               "url": "https://www.tilo.ch/avvisi/261005_Totale-Luino.html"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -559,7 +559,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "de": {
       "canton": "TI",
@@ -579,7 +579,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "40",
+          "value": "38",
           "note": "Meldungen vom 22. Oktober 2026"
         }
       ],
@@ -666,15 +666,14 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
-              "label": "A13 Bellinzona <-> Chur zwischen Anschluss San Bernardino und Anschluss San Bernardino-Pass Sachlage: Strecke gesperrt Baustelle, Länge [km] 7.5",
+              "label": "A2 Chiasso -> Gotthard zwischen Anschluss Faido und Anschluss Quinto Sachlage: Strecke gesperrt Ursache: Unfall",
               "value": "Sperrung",
-              "detail": "bis 23. Oktober 2026",
-              "date": "2026-10-20T14:53:00.000Z"
+              "date": "2026-10-22T20:34:00.000Z"
             },
             {
-              "label": "Brissago in beide Richtungen Sachlage: Strecke gesperrt Ursache: Unfall",
+              "label": "A2 Chiasso -> Gotthard Tunnel Piumogna-Tunnel Sachlage: Strecke gesperrt Ursache: Unfall",
               "value": "Sperrung",
-              "date": "2026-10-22T05:25:00.000Z"
+              "date": "2026-10-22T20:36:00.000Z"
             },
             {
               "label": "A2 Gotthard -> Chiasso Anschluss Lugano-Nord Sachlage: Einfahrt gesperrt Baustelle",
@@ -688,13 +687,14 @@
               "date": "2026-10-22T03:08:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> Gotthard zwischen Autobahndreieck Verzweigung Mendrisio und Anschluss Lugano-Süd Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 15",
-              "value": "Verkehr",
-              "date": "2026-10-22T04:14:00.000Z"
+              "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
+              "value": "Baustelle",
+              "detail": "bis 29. Dezember 2028",
+              "date": "2021-06-25T03:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -732,7 +732,7 @@
               "url": "https://www.tilo.ch/avvisi/261005_Totale-Luino.html"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -827,7 +827,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "fr": {
       "canton": "TI",
@@ -847,7 +847,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "40",
+          "value": "38",
           "note": "signalements au 22 octobre 2026"
         }
       ],
@@ -934,15 +934,14 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
-              "label": "A13 Bellinzone <-> Coire entre Jonction autoroutière San Bernardino et Jonction autoroutière San Bernardino-Pass Situation: fermé travaux, longueur [km] 7.5",
+              "label": "A2 Chiasso -> St-Gothard entre Jonction autoroutière Faido et Jonction autoroutière Quinto Situation: fermé Raison: accident",
               "value": "Fermeture",
-              "detail": "jusqu’au 23 octobre 2026",
-              "date": "2026-10-20T14:53:00.000Z"
+              "date": "2026-10-22T20:34:00.000Z"
             },
             {
-              "label": "Brissago dans les deux sens Situation: fermé Raison: accident",
+              "label": "A2 Chiasso -> St-Gothard Tunnel Tunnel de Piumogna Situation: fermé Raison: accident",
               "value": "Fermeture",
-              "date": "2026-10-22T05:25:00.000Z"
+              "date": "2026-10-22T20:36:00.000Z"
             },
             {
               "label": "A2 St-Gothard -> Chiasso Jonction autoroutière Lugano-Nord Situation: entrée fermée travaux",
@@ -956,13 +955,14 @@
               "date": "2026-10-22T03:08:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> St-Gothard entre Echangeur Echangeur de Mendrisio et Jonction autoroutière Lugano-Sud Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 15",
-              "value": "Trafic",
-              "date": "2026-10-22T04:14:00.000Z"
+              "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
+              "value": "Chantier",
+              "detail": "jusqu’au 29 décembre 2028",
+              "date": "2021-06-25T03:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1000,7 +1000,7 @@
               "url": "https://www.tilo.ch/avvisi/261005_Totale-Luino.html"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -1096,7 +1096,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     }
   }
 }

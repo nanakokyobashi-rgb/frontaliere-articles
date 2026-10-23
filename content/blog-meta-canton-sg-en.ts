@@ -39,6 +39,15 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.voto-rete-gas-wil-2026.title': 'Wil: vote on the gas network on November 29, 2026',
     'blog.article.voto-rete-gas-wil-2026.excerpt': 'Vote on the fund: November 29, 2026.',
     'blog.article.voto-rete-gas-wil-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sbb-sportelli-st-margrethen-uznach.title': 'SBB close the ticket offices in St.Margrethen and Uznach',
+    'blog.article.sbb-sportelli-st-margrethen-uznach.excerpt': 'From the beginning of 2027, SBB are focusing on self-service in St.Margrethen and Uznach: 3% of tickets are still sold at the counter.',
+    'blog.article.sbb-sportelli-st-margrethen-uznach.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.san-gallo-protezione-infrastrutture-critiche.title': 'St. Gallen strengthens protection of critical infrastructure',
+    'blog.article.san-gallo-protezione-infrastrutture-critiche.excerpt': 'The Government of St.',
+    'blog.article.san-gallo-protezione-infrastrutture-critiche.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.san-gallo-autostrada-rosenberg-terza-canna.title': 'St. Gallen: third Rosenberg tube and disputed figures',
+    'blog.article.san-gallo-autostrada-rosenberg-terza-canna.excerpt': 'Supporters call for highway expansion; planner Hug-Di Lena deems the numerical bases questionable.',
+    'blog.article.san-gallo-autostrada-rosenberg-terza-canna.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

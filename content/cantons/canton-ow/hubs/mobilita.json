@@ -4,17 +4,17 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-22T13:56:44.136Z",
-  "contentHash": "31c8f7843e471d665a56ec9770b538b8d0388452c52039630be7fd3d7bffde7c",
+  "updatedAt": "2026-10-23T00:30:32.988Z",
+  "contentHash": "6c557b7e89714fc0fd545a845847a496606a4dfcc632bbdb814c7aa2e4e65f6b",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-22T05:28:12.116Z",
+      "updatedAt": "2026-10-22T17:41:22.283Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T20:56:46.769Z",
+      "updatedAt": "2026-10-22T16:03:41.824Z",
       "keyFacts": 0
     }
   ],
@@ -27,12 +27,12 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "2",
+          "value": "5",
           "note": "segnalazioni aggiornate: 22 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "1",
+          "value": "2",
           "note": "segnalazioni aggiornate: 22 ottobre 2026"
         }
       ],
@@ -49,6 +49,24 @@
               "date": "2026-09-21T06:33:00.000Z"
             },
             {
+              "label": "A8 Hergiswil -> Sarnen tra Svincolo autostradale Alpnach Nord E Svincolo autostradale Sarnen Nord Situazione: chiusa cantiere, lunghezza [km] 6.0 Limitazione del traffico: corsia chiusa Aggiunta 1…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 9 novembre 2026",
+              "date": "2026-10-22T05:47:00.000Z"
+            },
+            {
+              "label": "A8 Brienz <-> Sarnen Galleria Galleria Lungern Situazione: tunnel chiuso cantiere, lunghezza [km] 3.6",
+              "value": "Chiusura",
+              "detail": "fine prevista: 20 novembre 2026",
+              "date": "2026-10-22T06:16:00.000Z"
+            },
+            {
+              "label": "A8 Brienz -> Sarnen Galleria Galleria Lungern Situazione: tunnel chiuso cantiere, lunghezza [km] 3.6",
+              "value": "Chiusura",
+              "detail": "fine prevista: 13 novembre 2026",
+              "date": "2026-10-22T06:18:00.000Z"
+            },
+            {
               "label": "A8 Brienz -> Sarnen Galleria Galleria Lungern Situazione: chiusa cantiere, lunghezza [km] 3.6",
               "value": "Chiusura",
               "detail": "fine prevista: 6 novembre 2026",
@@ -59,10 +77,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 30 aprile 2027",
               "date": "2026-09-03T03:00:00.000Z"
+            },
+            {
+              "label": "A8 Brienz <-> Hergiswil tra Svincolo autostradale Alpnach Süd E Svincolo autostradale Sarnen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 2.5 Limitazione del traffico: corsie…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 27 ottobre 2026",
+              "date": "2026-10-22T10:24:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T17:41:22.283Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -85,7 +109,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -119,7 +143,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "en": {
       "canton": "OW",
@@ -129,12 +153,12 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "2",
+          "value": "5",
           "note": "reports as of 22 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "1",
+          "value": "2",
           "note": "reports as of 22 October 2026"
         }
       ],
@@ -151,6 +175,24 @@
               "date": "2026-09-21T06:33:00.000Z"
             },
             {
+              "label": "A8 Hergiswil -> Sarnen tra Svincolo autostradale Alpnach Nord E Svincolo autostradale Sarnen Nord Situazione: chiusa cantiere, lunghezza [km] 6.0 Limitazione del traffico: corsia chiusa Aggiunta 1…",
+              "value": "Closure",
+              "detail": "until 9 November 2026",
+              "date": "2026-10-22T05:47:00.000Z"
+            },
+            {
+              "label": "A8 Brienz <-> Sarnen Galleria Galleria Lungern Situazione: tunnel chiuso cantiere, lunghezza [km] 3.6",
+              "value": "Closure",
+              "detail": "until 20 November 2026",
+              "date": "2026-10-22T06:16:00.000Z"
+            },
+            {
+              "label": "A8 Brienz -> Sarnen Galleria Galleria Lungern Situazione: tunnel chiuso cantiere, lunghezza [km] 3.6",
+              "value": "Closure",
+              "detail": "until 13 November 2026",
+              "date": "2026-10-22T06:18:00.000Z"
+            },
+            {
               "label": "A8 Brienz -> Sarnen Galleria Galleria Lungern Situazione: chiusa cantiere, lunghezza [km] 3.6",
               "value": "Closure",
               "detail": "until 6 November 2026",
@@ -161,10 +203,16 @@
               "value": "Roadworks",
               "detail": "until 30 April 2027",
               "date": "2026-09-03T03:00:00.000Z"
+            },
+            {
+              "label": "A8 Brienz <-> Hergiswil tra Svincolo autostradale Alpnach Süd E Svincolo autostradale Sarnen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 2.5 Limitazione del traffico: corsie…",
+              "value": "Roadworks",
+              "detail": "until 27 October 2026",
+              "date": "2026-10-22T10:24:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T17:41:22.283Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -187,7 +235,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -221,7 +269,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "de": {
       "canton": "OW",
@@ -231,12 +279,12 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "2",
+          "value": "5",
           "note": "Meldungen vom 22. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "1",
+          "value": "2",
           "note": "Meldungen vom 22. Oktober 2026"
         }
       ],
@@ -253,6 +301,24 @@
               "date": "2026-09-21T06:33:00.000Z"
             },
             {
+              "label": "A8 Hergiswil -> Sarnen zwischen Anschluss Alpnach-Nord und Anschluss Sarnen-Nord Sachlage: Strecke gesperrt Baustelle, Länge [km] 6.0 Verkehrsführung: Fahrstreifen gesperrt Zusatz 1: vorübergehende…",
+              "value": "Sperrung",
+              "detail": "bis 9. November 2026",
+              "date": "2026-10-22T05:47:00.000Z"
+            },
+            {
+              "label": "A8 Brienz <-> Sarnen Tunnel Lungern-Tunnel Sachlage: Tunnel gesperrt Baustelle, Länge [km] 3.6",
+              "value": "Sperrung",
+              "detail": "bis 20. November 2026",
+              "date": "2026-10-22T06:16:00.000Z"
+            },
+            {
+              "label": "A8 Brienz -> Sarnen Tunnel Lungern-Tunnel Sachlage: Tunnel gesperrt Baustelle, Länge [km] 3.6",
+              "value": "Sperrung",
+              "detail": "bis 13. November 2026",
+              "date": "2026-10-22T06:18:00.000Z"
+            },
+            {
               "label": "A8 Brienz -> Sarnen Tunnel Lungern-Tunnel Sachlage: Strecke gesperrt Baustelle, Länge [km] 3.6",
               "value": "Sperrung",
               "detail": "bis 6. November 2026",
@@ -263,10 +329,16 @@
               "value": "Baustelle",
               "detail": "bis 30. April 2027",
               "date": "2026-09-03T03:00:00.000Z"
+            },
+            {
+              "label": "A8 Brienz <-> Hergiswil zwischen Anschluss Alpnach-Süd und Anschluss Sarnen-Süd Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.5 Verkehrsführung: Fahrbahnverengung auf einen Fahrstreifen…",
+              "value": "Baustelle",
+              "detail": "bis 27. Oktober 2026",
+              "date": "2026-10-22T10:24:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T17:41:22.283Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -289,7 +361,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -323,7 +395,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     },
     "fr": {
       "canton": "OW",
@@ -333,12 +405,12 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "2",
+          "value": "5",
           "note": "signalements au 22 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "1",
+          "value": "2",
           "note": "signalements au 22 octobre 2026"
         }
       ],
@@ -355,6 +427,24 @@
               "date": "2026-09-21T06:33:00.000Z"
             },
             {
+              "label": "A8 Hergiswil -> Sarnen entre Jonction autoroutière Alpnach-Nord et Jonction autoroutière Sarnen-Nord Situation: fermé travaux, longueur [km] 6.0 Gestion du trafic: voie fermée Complément 1…",
+              "value": "Fermeture",
+              "detail": "jusqu’au 9 novembre 2026",
+              "date": "2026-10-22T05:47:00.000Z"
+            },
+            {
+              "label": "A8 Brienz <-> Sarnen Tunnel Tunnel Lungern Situation: tunnel fermé travaux, longueur [km] 3.6",
+              "value": "Fermeture",
+              "detail": "jusqu’au 20 novembre 2026",
+              "date": "2026-10-22T06:16:00.000Z"
+            },
+            {
+              "label": "A8 Brienz -> Sarnen Tunnel Tunnel Lungern Situation: tunnel fermé travaux, longueur [km] 3.6",
+              "value": "Fermeture",
+              "detail": "jusqu’au 13 novembre 2026",
+              "date": "2026-10-22T06:18:00.000Z"
+            },
+            {
               "label": "A8 Brienz -> Sarnen Tunnel Tunnel Lungern Situation: fermé travaux, longueur [km] 3.6",
               "value": "Fermeture",
               "detail": "jusqu’au 6 novembre 2026",
@@ -365,10 +455,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 30 avril 2027",
               "date": "2026-09-03T03:00:00.000Z"
+            },
+            {
+              "label": "A8 Brienz <-> Hergiswil entre Jonction autoroutière Alpnach-Sud et Jonction autoroutière Sarnen-Sud Situation: trafic perturbé travaux, longueur [km] 2.5 Gestion du trafic: rétrécissement des voies…",
+              "value": "Chantier",
+              "detail": "jusqu’au 27 octobre 2026",
+              "date": "2026-10-22T10:24:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-22T05:28:12.116Z"
+          "updatedAt": "2026-10-22T17:41:22.283Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +487,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -425,7 +521,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-22T13:56:44.136Z"
+      "updatedAt": "2026-10-23T00:30:32.988Z"
     }
   }
 }

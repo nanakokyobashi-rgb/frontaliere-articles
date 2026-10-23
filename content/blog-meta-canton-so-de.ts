@@ -33,6 +33,12 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.a1-lavori-notturni-luterbach.title': 'A1 Wangen–Luterbach: Nachtarbeiten bis Mitte Dezember',
     'blog.article.a1-lavori-notturni-luterbach.excerpt': 'Ab dem 25. Oktober 2026 finden auf der A1 zwischen Wangen an der Aare und Luterbach umfangreiche Nachtarbeiten statt: Die Verkehrsführung wird bis Mitte Dezember angepasst.',
     'blog.article.a1-lavori-notturni-luterbach.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cambio-ora-incidenti-stradali-soletta.title': 'Zeitumstellung und Verkehrsunfallrisiko im Kanton Solothurn',
+    'blog.article.cambio-ora-incidenti-stradali-soletta.excerpt': '24.–25. Oktober 2026: Uhren um eine Stunde zurückgestellt Der morgendliche Verkehr fällt mit der Dämmerung zusammen Rehe, Rothirsche und Wildschweine sind früh',
+    'blog.article.cambio-ora-incidenti-stradali-soletta.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.polizia-soletta-comunicazione-media-droni.title': 'Polizei Solothurn: Kommunikation 365 Tage und Drohnenverbot 300 m',
+    'blog.article.polizia-soletta-comunicazione-media-droni.excerpt': 'Der Mediendienst ist 365 Tage im Jahr tätig Das Team betreut X, Facebook und Instagram Bei Grossanlässen ist ein Mitglied vor Ort Das Drohnenverbot gilt',
+    'blog.article.polizia-soletta-comunicazione-media-droni.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;
