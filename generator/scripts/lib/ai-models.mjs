@@ -7784,8 +7784,16 @@ async function _getLocalDispatcher(timeoutMs) {
   };
 }
 
+function _coerceFiniteDeadlineMs(value) {
+  if (value === undefined || value === null || (typeof value === 'string' && value.trim() === '')) {
+    return undefined;
+  }
+  const normalized = typeof value === 'string' ? Number(value) : value;
+  return Number.isFinite(normalized) ? normalized : undefined;
+}
+
 function _finiteDeadlineMs(opts) {
-  return Number.isFinite(opts?.deadlineMs) ? opts.deadlineMs : undefined;
+  return _coerceFiniteDeadlineMs(opts?.deadlineMs);
 }
 
 // Public callers may construct options from JSON or environment values. Keep a
@@ -7793,8 +7801,9 @@ function _finiteDeadlineMs(opts) {
 // a truthy non-number otherwise produces NaN and makes setTimeout fail open.
 function _normalizeDeadlineOptions(opts = {}) {
   const deadlineMs = opts?.deadlineMs;
-  if (deadlineMs === undefined || Number.isFinite(deadlineMs)) return opts;
-  return { ...opts, deadlineMs: undefined };
+  const normalized = _coerceFiniteDeadlineMs(deadlineMs);
+  if (normalized === deadlineMs) return opts;
+  return { ...opts, deadlineMs: normalized };
 }
 
 async function _callLocal(model, messages, opts) {
@@ -7960,7 +7969,7 @@ function _codexTransportError(message) {
 function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
   const socketPath = String(process.env.CODEX_AUTH_BROKER_SOCKET || '').trim();
   if (!socketPath) return Promise.reject(new Error('CODEX_AUTH_BROKER_SOCKET is not configured'));
-  const deadlineAt = Number.isFinite(deadlineMs) ? deadlineMs : undefined;
+  const deadlineAt = _coerceFiniteDeadlineMs(deadlineMs);
   const remaining = deadlineAt === undefined ? Infinity : deadlineAt - Date.now();
   if (remaining <= 0) return Promise.reject(new Error('Codex primary skipped: caller deadline already expired'));
   const requestTimeoutMs = Math.min(
@@ -9058,8 +9067,9 @@ function _hardCallCapMs(model, opts) {
   else if (provider === PROVIDER.CODEX_CLI) base = Math.max(base, CODEX_CLI_MAX_TIMEOUT_MS);
   const attempts = Math.max(1, opts?.maxRetriesPerModel || 1);
   let cap = attempts * (base + MAX_RETRY_AFTER_MS) * 2 + HARD_CALL_CAP_GRACE_MS;
-  if (Number.isFinite(opts?.deadlineMs)) {
-    const remaining = opts.deadlineMs - Date.now();
+  const deadlineMs = _finiteDeadlineMs(opts);
+  if (deadlineMs !== undefined) {
+    const remaining = deadlineMs - Date.now();
     // An absolute caller deadline is a hard boundary. The grace above is only
     // for calls without one: adding it here lets an in-flight provider survive
     // past the run deadline and leaves the external workflow kill to collect

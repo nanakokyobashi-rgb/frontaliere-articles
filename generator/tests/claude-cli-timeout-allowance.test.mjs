@@ -233,6 +233,10 @@ describe('il timeout del CLI claude cresce dentro l\'allowance residua', () => {
     const start = SRC.indexOf('function _hardCallCapMs(model, opts) {');
     const end = SRC.indexOf('\n}\n\n/**\n * Interval between in-flight heartbeat lines.', start);
     assert.ok(start >= 0 && end > start, 'blocco _hardCallCapMs non ritagliabile — aggiornare questo test');
+    const helperStart = SRC.indexOf('function _coerceFiniteDeadlineMs');
+    const helperEnd = SRC.indexOf('\n\n// Public callers', helperStart);
+    assert.ok(helperStart >= 0 && helperEnd > helperStart, 'helper deadline non ritagliabile — aggiornare questo test');
+    const helpers = SRC.slice(helperStart, helperEnd);
     const block = SRC.slice(start, end + 2);
     // eslint-disable-next-line no-new-func
     const hardCallCapMs = new Function(
@@ -244,7 +248,7 @@ describe('il timeout del CLI claude cresce dentro l\'allowance residua', () => {
       'MAX_RETRY_AFTER_MS',
       'HARD_CALL_CAP_GRACE_MS',
       'Date',
-      `${block}\nreturn _hardCallCapMs;`,
+      `${helpers}\n${block}\nreturn _hardCallCapMs;`,
     )(
       () => 'other',
       { LOCAL: 'local', CLAUDE_CLI: 'claude-cli', CODEX_CLI: 'codex-cli' },
@@ -267,6 +271,10 @@ describe('il timeout del CLI claude cresce dentro l\'allowance residua', () => {
     const start = SRC.indexOf('function _hardCallCapMs(model, opts) {');
     const end = SRC.indexOf('\n}\n\n/**\n * Interval between in-flight heartbeat lines.', start);
     assert.ok(start >= 0 && end > start, 'blocco _hardCallCapMs non ritagliabile — aggiornare questo test');
+    const helperStart = SRC.indexOf('function _coerceFiniteDeadlineMs');
+    const helperEnd = SRC.indexOf('\n\n// Public callers', helperStart);
+    assert.ok(helperStart >= 0 && helperEnd > helperStart, 'helper deadline non ritagliabile — aggiornare questo test');
+    const helpers = SRC.slice(helperStart, helperEnd);
     const block = SRC.slice(start, end + 2);
     // eslint-disable-next-line no-new-func
     const hardCallCapMs = new Function(
@@ -278,7 +286,7 @@ describe('il timeout del CLI claude cresce dentro l\'allowance residua', () => {
       'MAX_RETRY_AFTER_MS',
       'HARD_CALL_CAP_GRACE_MS',
       'Date',
-      `${block}\nreturn _hardCallCapMs;`,
+      `${helpers}\n${block}\nreturn _hardCallCapMs;`,
     )(
       () => 'other',
       { LOCAL: 'local', CLAUDE_CLI: 'claude-cli', CODEX_CLI: 'codex-cli' },
@@ -303,7 +311,7 @@ describe('il timeout del CLI claude cresce dentro l\'allowance residua', () => {
   it('normalizza la deadline prima dei consumer Claude e local', () => {
     assert.match(
       SRC,
-      /function _normalizeDeadlineOptions\(opts = \{\}\)[\s\S]*?Number\.isFinite\(deadlineMs\)/,
+      /function _coerceFiniteDeadlineMs[\s\S]*?Number\.isFinite\(normalized\)[\s\S]*?function _normalizeDeadlineOptions/,
       'le opzioni pubbliche devono neutralizzare una deadline non numerica prima del routing',
     );
     assert.match(
