@@ -172,9 +172,10 @@ jobs:
           # La concurrency del publisher è PER SHARD, non globale. Contare le
           # run del workflow senza guardare i job faceva attendere un backfill
           # frontaliere anche per un publish svizzero ancora in verifica (e il
-          # budget scadeva con `unprocessed`). Le run ancora in `resolve` o
-          # senza job leggibili restano un blocco conservativo; dopo il resolve
-          # si guarda solo il job publish che termina con lo shard target.
+          # budget scadeva con `unprocessed`). Le run con una fase non
+          # terminale o senza job leggibili restano un blocco conservativo;
+          # dopo il resolve si guarda solo il job publish che termina con lo
+          # shard target.
           active_runs_for_shard() {
             local section="$1"
             local shard="$2"
@@ -231,7 +232,7 @@ jobs:
               fi
               if jq -e --arg shard "$shard" '
                 any(.jobs[]?;
-                  (.status == "queued" or .status == "in_progress")
+                  (.status != "completed")
                   and (.name == "resolve" or (.name | endswith(", " + $shard + ")"))))
               ' <<<"$jobs_json" >/dev/null; then
                 echo 1
@@ -239,7 +240,7 @@ jobs:
               fi
             done < <(
               jq -r '.workflow_runs[]
-                | select(.status == "queued" or .status == "in_progress")
+                | select(.status != "completed")
                 | [.id, .event, (.name // .display_title // "")] | @tsv' <<<"$runs_json"
             )
             echo 0
@@ -276,20 +277,30 @@ jobs:
               sleep 30; waited=$((waited + 30))
             done
 
-            before="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-            echo "── dispatch republish: $section/$id"
+            dispatch_nonce="dirty-content-${GITHUB_RUN_ID}-${section}-${id}-$(date +%s%N)"
+            echo "── dispatch republish: $section/$id (nonce=$dispatch_nonce)"
             gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/dispatches" \
               -f ref=main \
               -f "inputs[article_id]=$id" \
               -f "inputs[section]=$section" \
-              -f "inputs[dry_run]=false"
+              -f "inputs[dry_run]=false" \
+              -f "inputs[dispatch_nonce]=$dispatch_nonce"
 
             run_id=""
             for i in $(seq 1 12); do
               echo "dispatch lookup attempt $i/12"
               sleep 10
-              run_id="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=10" \
-                | jq -r --arg t "$before" '[.workflow_runs[] | select(.created_at >= $t)] | sort_by(.created_at) | last | .id // empty' || true)"
+              run_id="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=100" \
+                | jq -r --arg nonce "$dispatch_nonce" '
+                  [.workflow_runs[]
+                    | select(
+                        ((.name // "") | contains("nonce=" + $nonce))
+                        or ((.display_title // "") | contains("nonce=" + $nonce))
+                      )]
+                  | sort_by(.created_at)
+                  | last
+                  | .id // empty
+                ' || true)"
               [ -n "$run_id" ] && break
             done
             if [ -z "$run_id" ]; then

@@ -27,6 +27,12 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(guard, /total_count/);
   assert.match(guard, /\.name == "resolve"/);
   assert.match(guard, /endswith\(", " \+ \$shard \+ "\)"\)/);
+  assert.equal(
+    guard.match(/\.status != "completed"/g)?.length,
+    2,
+    'run e job devono trattare ogni stato non terminale come occupato',
+  );
+  assert.doesNotMatch(guard, /\.status == "queued" or \.status == "in_progress"/);
   assert.match(guard, /run_event.*workflow_dispatch/);
   assert.match(guard, /cover-publish-article\[\[:space:\]\]/);
   assert.match(guard, /dispatch_section="\$\{BASH_REMATCH\[1\]\}"/);
@@ -39,5 +45,10 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
     workflow,
     /while \[ "\$\(active_runs_for_shard "\$section" "\$target_shard"\)" -gt 0 \]/,
   );
+  assert.match(workflow, /dispatch_nonce="dirty-content-\$\{GITHUB_RUN_ID\}-/);
+  assert.match(workflow, /-f "inputs\[dispatch_nonce\]=\$dispatch_nonce"/);
+  assert.match(workflow, /--arg nonce "\$dispatch_nonce"/);
+  assert.match(workflow, /contains\("nonce=" \+ \$nonce\)/);
+  assert.doesNotMatch(workflow, /created_at >= \$before/);
   assert.doesNotMatch(workflow, /active_runs\(\)/, 'il gate non deve tornare a contare il workflow globalmente');
 });
