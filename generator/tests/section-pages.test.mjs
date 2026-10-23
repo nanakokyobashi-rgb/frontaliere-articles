@@ -3199,6 +3199,7 @@ test('fast-publish verso gli shard ignora i corpi cantonali, quello R2 ignora le
 test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenziali obbligatorie', () => {
   const wf = read('.github/workflows/fast-publish-section.yml');
   const resolver = read('scripts/ci/fast-publish-section-resolve.sh');
+  const publisher = read('scripts/publish-section-pages.mjs');
   assert.match(wf, /workflow_run:\n\s+workflows: \['Publish article data API'\]\n\s+types: \[completed\]\n\s+branches: \[main\]/);
   assert.match(wf, /github\.event\.workflow_run\.conclusion == 'success'/);
   assert.match(wf, /github\.event\.workflow_run\.event == 'push'[\s\S]*github\.event\.workflow_run\.event == 'schedule'[\s\S]*github\.event\.workflow_run\.event == 'workflow_dispatch'/);
@@ -3210,7 +3211,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     2,
     'resolve e publish devono distinguere dispatch live, bootstrap e source_commit del replay',
   );
-  assert.match(wf, /id: replay_freshness[\s\S]*gh api "repos\/\$REPO\/git\/ref\/heads\/main"/);
+  assert.match(wf, /id: replay_freshness[\s\S]*bash scripts\/ci\/read-main-head\.sh/);
+  assert.doesNotMatch(wf, /gh api "repos\/\$(?:REPO|REPOSITORY)\/git\/ref\/heads\/main"/);
+  assert.match(resolver, /bash scripts\/ci\/read-main-head\.sh/);
+  assert.match(publisher, /execFileSync\(\s*'bash',[\s\S]*scripts\/ci\/read-main-head\.sh/);
+  assert.doesNotMatch(publisher, /git\/ref\/heads\/main/);
   assert.match(wf, /SOURCE_COMMIT_INPUT: \$\{\{ inputs\.source_commit \}\}/);
   assert.match(wf, /SOURCE_MAIN_COMMIT_INPUT: \$\{\{ inputs\.source_main_commit \}\}/);
   assert.match(wf, /DISPATCH_NONCE_INPUT: \$\{\{ inputs\.dispatch_nonce \}\}/);
@@ -3921,7 +3926,7 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   );
   assert.match(globalReplay, /if \.skip then "true" else "false" end/);
   assert.match(globalReplay, /\.pendingEdgeFlip \/\/ false/);
-  assert.match(wf, /current_main="\$\(gh api "repos\/\$REPOSITORY\/git\/ref\/heads\/main" --jq '\.object\.sha'\)"/);
+  assert.match(wf, /current_main="\$\(bash scripts\/ci\/read-main-head\.sh\)"/);
   assert.match(wf, /main e' avanzata dopo la detection \(\$SOURCE_COMMIT -> \$current_main\)/);
   assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
   assert.match(wf, /pending_edge_flip=\$\(jq -r '\.pendingEdgeFlip \/\/ false'/);
