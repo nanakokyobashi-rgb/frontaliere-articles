@@ -3454,10 +3454,39 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /API_RELEASE_COMMIT: \$\{\{ inputs\.api_release_commit \}\}/);
   assert.match(wf, /GITHUB_PAT_NANAKO assente/);
   assert.match(wf, /Verify staged release revision is still main/);
-  assert.match(wf, /SOURCE_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  // Il replay staged deve usare la revisione realmente renderizzata dalla
+  // barriera che confronta tutte le leg della matrix; il fallback all'input
+  // vale solo quando quel job non ha prodotto un output.
+  const stagedReplay = wf.slice(wf.indexOf('  replay-api-after-staged-release:'));
+  assert.match(wf, /publish_release_head:/);
+  assert.match(wf, /preflight_head: \$\{\{ steps\.preflight_head\.outputs\.head \}\}/);
+  assert.match(wf, /Record preflight revision/);
+  assert.match(wf, /PREFLIGHT_HEAD: \$\{\{ needs\.resolve\.outputs\.preflight_head \}\}/);
+  assert.match(wf, /validated_head="\$PREFLIGHT_HEAD"/);
+  assert.match(
+    wf,
+    /if \{ \[ "\$EVENT_NAME" = 'push' \] \\\n\s+\|\| \{ \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ "\$BOOTSTRAP" != 'true' \]; \}; \} \\\n\s+&& \[ "\$REF" = 'refs\/heads\/main' \] \\\n\s+&& \[ -z "\$\{SOURCE_COMMIT:-\}" \]; then/u,
+  );
+  assert.match(wf, /actions\/upload-artifact@v7/);
+  assert.match(wf, /actions\/download-artifact@v7/);
+  assert.match(wf, /map\(\{section, rendered_head, fresh\}\)/);
+  assert.match(wf, /map\(\.rendered_head\) \| unique \| if length == 1/);
+  assert.match(wf, /all\(\.\[\]; \(\.rendered_head == "" and \.fresh == "false"\)\)/);
+  assert.match(wf, /mixed_matrix: \$\{\{ steps\.collect\.outputs\.mixed_matrix \}\}/);
+  assert.match(wf, /echo 'mixed_matrix=false'/);
+  assert.ok(
+    wf.includes(
+      'any(.[]; ((.rendered_head // "") | test("^[a-f0-9]{40}$"))) and any(.[]; ((.fresh // "") != "true" or (.rendered_head // "") == ""))',
+    ),
+    'una leg stale accanto a una leg produttiva deve diventare mixed_matrix',
+  );
+  assert.match(wf, /HEAD diverse[\s\S]*mixed_matrix=true[\s\S]*exit 0/);
+  assert.match(wf, /MIXED_MATRIX: \$\{\{ needs\.publish_release_head\.outputs\.mixed_matrix \}\}/);
+  assert.match(wf, /matrix mista rilevata[\s\S]*read-main-head\.sh/);
+  assert.match(stagedReplay, /SOURCE_COMMIT: \$\{\{ needs\.publish_release_head\.outputs\.rendered_head \|\| inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(wf, /main e' avanzata da \$SOURCE_COMMIT a \$current_main/);
   assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
-  assert.match(wf, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
+  assert.match(stagedReplay, /ref: \$\{\{ needs\.publish_release_head\.outputs\.rendered_head \|\| inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(wf, /replay workflow_run redispatchato prima degli upload/);
   assert.match(wf, /elif \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ -n "\$\{SOURCE_COMMIT:-\}" \]; then\n\s+pinned_replay_main="\$SOURCE_MAIN_COMMIT"/);
   assert.match(wf, /replay bounded redispatchato prima degli upload/);
@@ -3529,11 +3558,13 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(liveRetryLoop, /if RETRY_CMD_ATTEMPTS=2 bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/);
   assert.match(wf, /PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
   assert.match(wf, /PUSH_AFTER: \$\{\{ needs\.resolve\.outputs\.push_after \}\}/);
-  const stagedReplay = wf.slice(wf.indexOf('  replay-api-after-staged-release:'));
-  assert.match(stagedReplay, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
-  assert.match(stagedReplay, /SOURCE_COMMIT: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
-  assert.match(stagedReplay, /Redispatch staged backfill on current main after stale replay/);
+  assert.match(stagedReplay, /needs\.publish_release_head\.outputs\.rendered_head != ''/);
+  assert.match(stagedReplay, /needs\.publish_release_head\.outputs\.mixed_matrix == 'true'/);
+  assert.match(stagedReplay, /needs\.publish_release_head\.result == 'success'/);
+  assert.match(stagedReplay, /Redispatch staged backfill on current main after stale replay or mixed matrix/);
   assert.match(stagedReplay, /TARGET_MATRIX: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/);
+  assert.match(stagedReplay, /ORIGINAL_PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
+  assert.match(stagedReplay, /MIXED_MATRIX: \$\{\{ needs\.publish_release_head\.outputs\.mixed_matrix \}\}/);
   assert.match(stagedReplay, /-f missing_page_paths="\$missing_page_paths"/);
   assert.match(stagedReplay, /-f known_missing_page_paths="\$known_missing_page_paths"/);
   const replayDispatchStep = stagedReplay.slice(
@@ -3549,17 +3580,36 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'il replay API deve richiedere main stabile e zero pagine 404 globali prima del dispatch',
   );
   assert.match(replayDispatchStep, /-f source_commit="\$SOURCE_COMMIT"/);
+  assert.match(replayDispatchStep, /max_readiness_attempts=3/);
+  assert.match(replayDispatchStep, /sleep "\$retry_delay"/);
+  assert.match(replayDispatchStep, /replay API bloccato:[\s\S]*exit 1/);
   const staleRecoveryStep = stagedReplay.slice(
-    stagedReplay.indexOf('- name: Redispatch staged backfill on current main after stale replay'),
+    stagedReplay.indexOf('- name: Redispatch staged backfill on current main after stale replay or mixed matrix'),
     stagedReplay.indexOf('- name: Replay publish-api after staged release'),
   );
-  assert.match(staleRecoveryStep, /if: steps\.replay_freshness\.outputs\.fresh == 'false'/);
+  assert.match(staleRecoveryStep, /if: >-[\s\S]*steps\.replay_freshness\.outputs\.fresh == 'false'[\s\S]*mixed_matrix == 'true'/);
   assert.match(staleRecoveryStep, /bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh "\$REPOSITORY" "\$dispatch_title" --ref main/);
   assert.match(staleRecoveryStep, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(staleRecoveryStep, /-f source_main_commit="\$CURRENT_MAIN"/);
+  assert.match(staleRecoveryStep, /target_matrix="\$TARGET_MATRIX"[\s\S]*MIXED_MATRIX:-false[\s\S]*fast-publish-section\.mjs r2-plan/);
+  assert.match(wf, /PREFLIGHT_BASE_REVISION="\$plan_before"/);
   assert.match(wf, /push_before:/);
   assert.match(wf, /push_after:/);
-  assert.doesNotMatch(wf, /git rev-parse HEAD\^/);
+  assert.match(
+    liveRetryLoop,
+    /if \[ -z "\$\{PUSH_BEFORE:-\}" \] \|\| \[\[ "\$PUSH_BEFORE" =~ \^0\+\$ \]\]; then[\s\S]*previous_revision="\$\(git rev-parse HEAD\^\)"[\s\S]*else[\s\S]*previous_revision="\$PUSH_BEFORE"/,
+    'il retry live conserva PUSH_BEFORE per le push e usa HEAD^ solo per un dispatch senza base',
+  );
+  assert.match(liveRetryLoop, /refresh_live_plan_and_preflight/);
+  assert.match(wf, /refresh_live_plan_and_preflight\(\) \{[\s\S]*fast-publish-section\.mjs r2-plan/);
+  assert.match(wf, /refresh_live_plan_and_preflight\(\) \{[\s\S]*check-blog-body-syntax\.mjs/);
+  assert.match(wf, /refresh_live_plan_and_preflight\(\) \{[\s\S]*check-blog-body-links\.mjs/);
+  assert.match(wf, /dynamic_bootstrap_lock='false'/);
+  assert.match(wf, /acquire_dynamic_bootstrap_lock\(\) \{[\s\S]*section-bootstrap-lock\.mjs acquire[\s\S]*dynamic_bootstrap_lock=true/);
+  assert.match(liveRetryLoop, /if \[ "\$attempt_dry" != 'true' \]; then\n\s+acquire_dynamic_bootstrap_lock/);
+  assert.match(liveRetryLoop, /rendered_head=\$EXPECTED_MAIN_HEAD/);
+  assert.doesNotMatch(liveRetryLoop, /sleep 30/);
+  assert.doesNotMatch(liveRetryLoop, /deferred_retry/);
   assert.match(wf, /group: fast-publish-\$\{\{ matrix\.target\.section \}\}\n\s+cancel-in-progress: false/);
   assert.match(wf, /fail-fast: false/);
   for (const p of ["'content/cantons/**'", "'content/blog-body-canton-*/**'", "'content/blog-meta-canton-*'", "'sections/registry.json'"]) {
@@ -3641,7 +3691,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /- name: Acquire bootstrap R2 gate\n\s+id: acquire_bootstrap/);
   assert.match(wf, /section-bootstrap-lock\.mjs acquire --section "\$SECTION".*--wait-ms "\$LOCK_WAIT_MS"/);
   assert.match(wf, /Release bootstrap R2 gate/);
-  assert.match(wf, /if: always\(\).*steps\.acquire_bootstrap\.outcome == 'success'.*matrix\.target\.bootstrap == true/);
+  assert.match(wf, /if: always\(\).*matrix\.target\.bootstrap == true && steps\.acquire_bootstrap\.outcome == 'success'.*steps\.render\.outputs\.dynamic_bootstrap_lock == 'true'/);
   assert.doesNotMatch(wf, /matrix\.target\.bootstrap == true.*SECTION_BOOTSTRAP_LOCK_HELD == 'true'/);
   assert.match(read('scripts/publish-section-edge.mjs'), /waitForBootstrapLocks\(release\.live, io/);
 });
