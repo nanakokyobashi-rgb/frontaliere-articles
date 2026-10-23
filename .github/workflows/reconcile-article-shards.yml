@@ -240,7 +240,7 @@ jobs:
               if jq -e --arg shard "$shard" '
                 any(.jobs[]?;
                   (.status == "queued" or .status == "in_progress")
-                  and (.name == "resolve" or (.name | endswith(", " + $shard + ")")))
+                  and (.name == "resolve" or (.name | endswith(", " + $shard + ")"))))
               ' <<<"$jobs_json" >/dev/null; then
                 echo 1
                 return
