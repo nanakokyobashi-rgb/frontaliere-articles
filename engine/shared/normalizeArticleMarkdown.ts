@@ -158,33 +158,76 @@ export function advanceMarkdownFence(
   return fence;
 }
 
+type MarkdownLineWithFenceState = { text: string; fenced: boolean };
+
+/**
+ * Split Markdown lines without treating U+2028/U+2029 inside a fenced block
+ * as structural line breaks. CR/LF remains a line boundary everywhere;
+ * Unicode separators are promoted only while outside a fence. A separator
+ * immediately before a closing fence is promoted as well so the closing fence
+ * gets its own logical line and downstream renderers can leave the fenced
+ * block before processing the following heading.
+ */
+export function normalizeMarkdownLinesWithFenceState(text: string): MarkdownLineWithFenceState[] {
+  const physicalLines = String(text ?? '').replace(/\r\n?/g, '\n').split('\n');
+  const lines: MarkdownLineWithFenceState[] = [];
+  let fence: MarkdownFence | null = null;
+
+  for (const physicalLine of physicalLines) {
+    let current = '';
+    let fenced = false;
+    const parts = physicalLine.split(/([\u2028\u2029])/u);
+    for (let index = 0; index < parts.length; index += 1) {
+      const part = parts[index];
+      if (part === '\u2028' || part === '\u2029') {
+        if (fence) {
+          const nextPart = parts[index + 1] ?? '';
+          if (markdownFenceCloses(nextPart, fence)) {
+            lines.push({ text: current, fenced: true });
+            current = '';
+            fenced = false;
+          } else {
+            current += part;
+            fenced = true;
+          }
+        } else {
+          lines.push({ text: current, fenced });
+          current = '';
+          fenced = false;
+        }
+        continue;
+      }
+
+      current += part;
+      if (fence) {
+        fenced = true;
+        if (markdownFenceCloses(part, fence)) fence = null;
+      } else {
+        const openingFence = markdownFenceFor(part);
+        if (openingFence) {
+          fence = openingFence;
+          fenced = true;
+        }
+      }
+    }
+    lines.push({ text: current, fenced });
+  }
+
+  return lines;
+}
+
 function isProtectedBlockLine(line: string): boolean {
  return TABLE_ROW_RE.test(line) || NON_HEADING_BLOCK_RE.test(line);
 }
 
 /** Normalize markdown bodies before either renderer or TOC extraction sees them. */
 export function normalizeArticleMarkdown(text: string): string {
- const lines = text
-  .replace(/\r\n?/g, '\n')
-  // Some translated corpus writers emit Unicode line separators instead of
-  // the escaped LF used by the normal TS literal writer. They are content
-  // line breaks, not paragraph text, and must reach the same block parser.
-  .replace(/[\u2028\u2029]/g, '\n')
-  .split('\n');
+ const lines = normalizeMarkdownLinesWithFenceState(text);
  const normalized: string[] = [];
- let fence: MarkdownFence | null = null;
 
- for (const line of lines) {
-  if (fence) {
+ for (const { text: line, fenced } of lines) {
+  if (fenced) {
    normalized.push(line);
-   if (markdownFenceCloses(line, fence)) fence = null;
-   continue;
-  }
-
-  const openingFence = markdownFenceFor(line);
-  if (openingFence) {
-   normalized.push(line);
-   fence = openingFence;
    continue;
   }
 
