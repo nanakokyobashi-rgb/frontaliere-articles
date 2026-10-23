@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-consiglio-stato-21-ottobre-2026.webp",
-      "sha256": "d90f6a18c5273dda1069bae46bc86230392609caaa6602261fd79f7ae4e29851"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-consiglio-stato-21-ottobre-2026-480w.webp",
-      "sha256": "f3f710e761fbcfafc2255047c0dff41d9703fdc6db7f329d94f0595cd326780b"
-    }
-  ]
+  "items": []
 }
