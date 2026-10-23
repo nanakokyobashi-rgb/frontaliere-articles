@@ -44,4 +44,3 @@ test('il reconciler delle failure usa il profilo sparse del corpus senza esclude
     'il profilo non deve escludere la chiusura transitiva del reconciler');
   assert.ok(!patterns.includes('!/docs/'), 'docs non deve essere riescluso dopo il delta #11533');
 });
-
