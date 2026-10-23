@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-23T03:27:15.275Z",
-  "contentHash": "8e7d3b26249fe3f8a1e868074b388cde16b4cb6d34a6d6998655441f91202663",
+  "updatedAt": "2026-10-23T05:52:42.601Z",
+  "contentHash": "0b8d638c4cbafb88c40086b68bfb768a6bf892ec8bd47ba8819234521142e13c",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-22T17:41:22.283Z",
+      "updatedAt": "2026-10-22T21:58:34.031Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T16:03:41.824Z",
+      "updatedAt": "2026-10-22T20:51:18.236Z",
       "keyFacts": 0
     }
   ],
@@ -147,19 +147,20 @@
               "date": "2026-10-02T11:01:00.000Z"
             },
             {
-              "label": "Revocato: A1 St. Margrethen -> Zürich tra Raccordo autostradale Diramazione Meggenhus E Svincolo autostradale St. Gallen-Kreuzbleiche Situazione: traffico fortemente rallentato Causa: traffico…",
-              "value": "Traffico",
-              "date": "2026-10-22T14:44:00.000Z"
-            },
-            {
               "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità…",
               "value": "Cantiere",
               "detail": "fine prevista: 13 novembre 2026",
               "date": "2026-04-10T06:30:00.000Z"
+            },
+            {
+              "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Causa: veicoli di manutenzione lenti…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 13 novembre 2026",
+              "date": "2026-04-10T08:24:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-22T17:41:22.283Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -197,7 +198,7 @@
               "url": "https://presse.vorarlberg.at/land/public/Rinder-TBC-Weitere-positive-PCR-Befunde-in-zwei-bereits-gesperrten-Betrieben"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -267,7 +268,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-23T03:27:15.275Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "en": {
       "canton": "SG",
@@ -392,19 +393,20 @@
               "date": "2026-10-02T11:01:00.000Z"
             },
             {
-              "label": "Revocato: A1 St. Margrethen -> Zürich tra Raccordo autostradale Diramazione Meggenhus E Svincolo autostradale St. Gallen-Kreuzbleiche Situazione: traffico fortemente rallentato Causa: traffico…",
-              "value": "Traffic",
-              "date": "2026-10-22T14:44:00.000Z"
-            },
-            {
               "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità…",
               "value": "Roadworks",
               "detail": "until 13 November 2026",
               "date": "2026-04-10T06:30:00.000Z"
+            },
+            {
+              "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Causa: veicoli di manutenzione lenti…",
+              "value": "Roadworks",
+              "detail": "until 13 November 2026",
+              "date": "2026-04-10T08:24:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-22T17:41:22.283Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -442,7 +444,7 @@
               "url": "https://presse.vorarlberg.at/land/public/Rinder-TBC-Weitere-positive-PCR-Befunde-in-zwei-bereits-gesperrten-Betrieben"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -511,7 +513,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-23T03:27:15.275Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "de": {
       "canton": "SG",
@@ -636,19 +638,20 @@
               "date": "2026-10-02T11:01:00.000Z"
             },
             {
-              "label": "Aufgehoben: A1 St. Margrethen -> Zürich zwischen Autobahndreieck Verzweigung Meggenhus und Anschluss St. Gallen-Kreuzbleiche Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
-              "value": "Verkehr",
-              "date": "2026-10-22T14:44:00.000Z"
-            },
-            {
               "label": "A13 Sargans <-> St. Margrethen zwischen Anschluss Oberriet und Anschluss Haag Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: veränderte Verkehrsführung Zusatz 1…",
               "value": "Baustelle",
               "detail": "bis 13. November 2026",
               "date": "2026-04-10T06:30:00.000Z"
+            },
+            {
+              "label": "A13 Sargans <-> St. Margrethen zwischen Anschluss Oberriet und Anschluss Haag Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Ursache: Wanderbaustelle Verkehrsführung: Fahrbahnverengung auf…",
+              "value": "Baustelle",
+              "detail": "bis 13. November 2026",
+              "date": "2026-04-10T08:24:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-22T17:41:22.283Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -686,7 +689,7 @@
               "url": "https://presse.vorarlberg.at/land/public/Rinder-TBC-Weitere-positive-PCR-Befunde-in-zwei-bereits-gesperrten-Betrieben"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -755,7 +758,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-23T03:27:15.275Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "fr": {
       "canton": "SG",
@@ -880,19 +883,20 @@
               "date": "2026-10-02T11:01:00.000Z"
             },
             {
-              "label": "Révoqué: A1 St. Margrethen -> Zurich entre Echangeur Echangeur de Meggenhus et Jonction autoroutière St. Gall-Kreuzbleiche Situation: trafic en accordéon Raison: surcharge de trafic",
-              "value": "Trafic",
-              "date": "2026-10-22T14:44:00.000Z"
-            },
-            {
               "label": "A13 Sargans <-> St. Margrethen entre Jonction autoroutière Oberriet et Jonction autoroutière Haag Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: nouveau plan de circulation…",
               "value": "Chantier",
               "detail": "jusqu’au 13 novembre 2026",
               "date": "2026-04-10T06:30:00.000Z"
+            },
+            {
+              "label": "A13 Sargans <-> St. Margrethen entre Jonction autoroutière Oberriet et Jonction autoroutière Haag Situation: trafic perturbé travaux, longueur [km] 2.0 Raison: véhicules de maintenance lents Gestion…",
+              "value": "Chantier",
+              "detail": "jusqu’au 13 novembre 2026",
+              "date": "2026-04-10T08:24:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-22T17:41:22.283Z"
+          "updatedAt": "2026-10-22T21:58:34.031Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -930,7 +934,7 @@
               "url": "https://presse.vorarlberg.at/land/public/Rinder-TBC-Weitere-positive-PCR-Befunde-in-zwei-bereits-gesperrten-Betrieben"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -1000,7 +1004,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-23T03:27:15.275Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     }
   }
 }

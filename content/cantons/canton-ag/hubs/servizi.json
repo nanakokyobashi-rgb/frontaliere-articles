@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "ec7f21b2a5dd3ed7de6d91ff6ae1e5a5bdaae5d4f460ec5eff8f07608538c00c",
+  "updatedAt": "2026-10-23T05:52:42.601Z",
+  "contentHash": "d955ef3c00e9dc43a57c6778f6bbdf23a7f8fffeef8fe590c2768dcbecfbbccc",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-22T17:10:37.703Z",
+      "updatedAt": "2026-10-22T21:36:37.991Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-22T20:15:47.598Z",
+      "updatedAt": "2026-10-22T23:30:28.996Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T16:03:41.824Z",
+      "updatedAt": "2026-10-22T20:51:18.236Z",
       "keyFacts": 0
     }
   ],
@@ -91,8 +91,8 @@
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-22T17:10:37.703Z"
+          "sourceUrl": "https://www.auktion-ag.ch/de/",
+          "updatedAt": "2026-10-22T21:36:37.991Z"
         },
         {
           "id": "meteo",
@@ -101,12 +101,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "6 °C",
-              "detail": "oggi da 4 a 10 °C"
+              "value": "4 °C",
+              "detail": "oggi da 4 a 4 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-22T20:15:47.598Z"
+          "updatedAt": "2026-10-22T23:30:28.996Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -144,7 +144,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/simon-staempfli-wird-neuer-chefarzt-kardiologie-am-ksb"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -224,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "en": {
       "canton": "AG",
@@ -288,8 +288,8 @@
             }
           ],
           "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-22T17:10:37.703Z"
+          "sourceUrl": "https://www.auktion-ag.ch/de/",
+          "updatedAt": "2026-10-22T21:36:37.991Z"
         },
         {
           "id": "meteo",
@@ -298,12 +298,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "6 °C",
-              "detail": "today from 4 to 10 °C"
+              "value": "4 °C",
+              "detail": "today from 4 to 4 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-22T20:15:47.598Z"
+          "updatedAt": "2026-10-22T23:30:28.996Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -341,7 +341,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/simon-staempfli-wird-neuer-chefarzt-kardiologie-am-ksb"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "de": {
       "canton": "AG",
@@ -481,8 +481,8 @@
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-22T17:10:37.703Z"
+          "sourceUrl": "https://www.auktion-ag.ch/de/",
+          "updatedAt": "2026-10-22T21:36:37.991Z"
         },
         {
           "id": "meteo",
@@ -491,12 +491,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "6 °C",
-              "detail": "heute 4 bis 10 °C"
+              "value": "4 °C",
+              "detail": "heute 4 bis 4 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-22T20:15:47.598Z"
+          "updatedAt": "2026-10-22T23:30:28.996Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -534,7 +534,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/simon-staempfli-wird-neuer-chefarzt-kardiologie-am-ksb"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -610,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "fr": {
       "canton": "AG",
@@ -674,8 +674,8 @@
             }
           ],
           "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://www.auktion-ag.ch/",
-          "updatedAt": "2026-10-22T17:10:37.703Z"
+          "sourceUrl": "https://www.auktion-ag.ch/de/",
+          "updatedAt": "2026-10-22T21:36:37.991Z"
         },
         {
           "id": "meteo",
@@ -684,12 +684,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "6 °C",
-              "detail": "aujourd’hui de 4 à 10 °C"
+              "value": "4 °C",
+              "detail": "aujourd’hui de 4 à 4 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-22T20:15:47.598Z"
+          "updatedAt": "2026-10-22T23:30:28.996Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -727,7 +727,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/simon-staempfli-wird-neuer-chefarzt-kardiologie-am-ksb"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -799,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     }
   }
 }

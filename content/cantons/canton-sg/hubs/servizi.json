@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-23T00:54:27.534Z",
-  "contentHash": "12299acaa05c1fc4da727b7ec7ff19c1c5490259cd9646d0c4fd4b4a9287e81b",
+  "updatedAt": "2026-10-23T05:52:42.601Z",
+  "contentHash": "97b07e582329dc6a7d9f25e495616af7c6f48813ceef2e8e634e4d0c3bee2b3a",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-22T17:10:37.703Z",
+      "updatedAt": "2026-10-22T21:36:37.991Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-22T20:15:47.598Z",
+      "updatedAt": "2026-10-22T23:30:28.996Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T16:03:41.824Z",
+      "updatedAt": "2026-10-22T20:51:18.236Z",
       "keyFacts": 0
     }
   ],
@@ -102,7 +102,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-22T17:10:37.703Z"
+          "updatedAt": "2026-10-22T21:36:37.991Z"
         },
         {
           "id": "meteo",
@@ -111,12 +111,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "4 °C",
-              "detail": "oggi da 3 a 7 °C"
+              "value": "3 °C",
+              "detail": "oggi da 4 a 4 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-22T20:15:47.598Z"
+          "updatedAt": "2026-10-22T23:30:28.996Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -154,7 +154,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-erhaelt-zwei-best-paper-awards-2026-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-23T00:54:27.534Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "en": {
       "canton": "SG",
@@ -309,7 +309,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-22T17:10:37.703Z"
+          "updatedAt": "2026-10-22T21:36:37.991Z"
         },
         {
           "id": "meteo",
@@ -318,12 +318,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "4 °C",
-              "detail": "today from 3 to 7 °C"
+              "value": "3 °C",
+              "detail": "today from 4 to 4 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-22T20:15:47.598Z"
+          "updatedAt": "2026-10-22T23:30:28.996Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -361,7 +361,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-erhaelt-zwei-best-paper-awards-2026-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -437,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-23T00:54:27.534Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "de": {
       "canton": "SG",
@@ -512,7 +512,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-22T17:10:37.703Z"
+          "updatedAt": "2026-10-22T21:36:37.991Z"
         },
         {
           "id": "meteo",
@@ -521,12 +521,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "4 °C",
-              "detail": "heute 3 bis 7 °C"
+              "value": "3 °C",
+              "detail": "heute 4 bis 4 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-22T20:15:47.598Z"
+          "updatedAt": "2026-10-22T23:30:28.996Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -564,7 +564,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-erhaelt-zwei-best-paper-awards-2026-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -640,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-23T00:54:27.534Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     },
     "fr": {
       "canton": "SG",
@@ -715,7 +715,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-22T17:10:37.703Z"
+          "updatedAt": "2026-10-22T21:36:37.991Z"
         },
         {
           "id": "meteo",
@@ -724,12 +724,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "4 °C",
-              "detail": "aujourd’hui de 3 à 7 °C"
+              "value": "3 °C",
+              "detail": "aujourd’hui de 4 à 4 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-22T20:15:47.598Z"
+          "updatedAt": "2026-10-22T23:30:28.996Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -767,7 +767,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/hoch-health-ostschweiz-erhaelt-zwei-best-paper-awards-2026-2026-10-12/"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -839,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-23T00:54:27.534Z"
+      "updatedAt": "2026-10-23T05:52:42.601Z"
     }
   }
 }
