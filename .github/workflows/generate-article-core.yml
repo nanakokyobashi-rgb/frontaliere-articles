@@ -1065,6 +1065,12 @@ jobs:
             echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push fires no workflow at all (anti-recursion), so the article would never reach the site via publish-api.yml AND the self-trigger chain would stop dead. Both depend on this push being PAT-authenticated."
             exit 1
           fi
+          RUN_REPORT="$RUNNER_TEMP/create-article-run-report.json"
+          if [ ! -s .tmp/create-article-run-report.json ]; then
+            echo "::error::create-article run report is missing before the push/rebase loop"
+            exit 1
+          fi
+          cp .tmp/create-article-run-report.json "$RUN_REPORT"
 
           if [ "${{ steps.generate.outputs.article }}" = "true" ]; then
             git commit -m "Generate blog article (${{ steps.generate.outputs.section }})"
@@ -1148,7 +1154,7 @@ jobs:
                 fi
               fi
               uniq_rc=0
-              node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD --run-report .tmp/create-article-run-report.json || uniq_rc=$?
+              node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD --run-report "$RUN_REPORT" || uniq_rc=$?
               if [ "$uniq_rc" -ne 0 ]; then
                 echo "::error::post-rebase uniqueness check exited $uniq_rc — not pushing (POST_REBASE_UNIQUENESS_VIOLATION: the article collides on id, source URL, topic, or content; POST_REBASE_UNIQUENESS_ERROR: the check could not run). See the lines above."
                 exit 1

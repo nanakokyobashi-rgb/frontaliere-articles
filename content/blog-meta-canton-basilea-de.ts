@@ -27,6 +27,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.claraplatz-basel-cantieri.title': 'Basel, Baustellen am Claraplatz: Geschäfte in Schwierigkeiten',
     'blog.article.claraplatz-basel-cantieri.excerpt': 'Am Claraplatz setzen die Bauarbeiten den Geschäften zu, und der Kiosk verliert 40% seines Umsatzes.',
     'blog.article.claraplatz-basel-cantieri.imageAlt': 'Für diesen Artikel erstellte Illustration',
+    'blog.article.basilea-cantieri-alle-sei.title': 'Basler Parlament: Motion für einen Baubeginn um 6 Uhr',
+    'blog.article.basilea-cantieri-alle-sei.excerpt': 'Der Grosse Rat von Basel hat eine Motion überwiesen, um Bauarbeiten von Juni bis August um 6 Uhr zu ermöglichen; lärmintensive Arbeiten würden weiterhin erst ab 7 Uhr stattfinden.',
+    'blog.article.basilea-cantieri-alle-sei.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBasileaDe;

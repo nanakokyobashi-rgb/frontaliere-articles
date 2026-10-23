@@ -51,6 +51,9 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.investimenti-tetto-fotovoltaico-2027.title': 'Spese nette 2027: CHF 802\'767; eccedenza quasi CHF 580\'000',
     'blog.article.investimenti-tetto-fotovoltaico-2027.excerpt': 'Nel 2027 sono pianificate spese nette di CHF 802\'767; previsto il risanamento del tetto della palestra con fotovoltaico.',
     'blog.article.investimenti-tetto-fotovoltaico-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.appenzello-cooperazione-strategica-2024.title': 'Cooperazione strategica: Appenzello e San Gallo in linea',
+    'blog.article.appenzello-cooperazione-strategica-2024.excerpt': 'I governi dei due Appenzello, San Gallo e Turgovia proseguono la collaborazione decisa nel 2024.',
+    'blog.article.appenzello-cooperazione-strategica-2024.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

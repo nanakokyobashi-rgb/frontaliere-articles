@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "e83bc03dd45a2bcae62166483458ed7704860110fde232d57f01700f910e0164",
+  "updatedAt": "2026-10-23T03:27:15.275Z",
+  "contentHash": "368ede9f3fc490bd0dda6678ce71f218b581dc3058216ede08fe193ee0043ded",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "17",
+          "value": "16",
           "note": "segnalazioni aggiornate: 22 ottobre 2026"
         },
         {
@@ -135,10 +135,10 @@
               "date": "2026-10-01T13:12:00.000Z"
             },
             {
-              "label": "A9 Sion -> Brig tra Svincolo autostradale Sion-Est E Svincolo autostradale Sierre-Est Situazione: chiusa cantiere",
+              "label": "Arbaz <-> Mayens d'Arbaz, Arbaz Situazione: chiusa Causa: lavori di manutenzione",
               "value": "Chiusura",
               "detail": "fine prevista: 23 ottobre 2026",
-              "date": "2026-10-05T15:25:00.000Z"
+              "date": "2026-10-09T16:30:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -250,7 +250,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T03:27:15.275Z"
     },
     "en": {
       "canton": "VS",
@@ -265,7 +265,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "17",
+          "value": "16",
           "note": "reports as of 22 October 2026"
         },
         {
@@ -363,10 +363,10 @@
               "date": "2026-10-01T13:12:00.000Z"
             },
             {
-              "label": "A9 Sion -> Brig tra Svincolo autostradale Sion-Est E Svincolo autostradale Sierre-Est Situazione: chiusa cantiere",
+              "label": "Arbaz <-> Mayens d'Arbaz, Arbaz Situazione: chiusa Causa: lavori di manutenzione",
               "value": "Closure",
               "detail": "until 23 October 2026",
-              "date": "2026-10-05T15:25:00.000Z"
+              "date": "2026-10-09T16:30:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -478,7 +478,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T03:27:15.275Z"
     },
     "de": {
       "canton": "VS",
@@ -493,7 +493,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "17",
+          "value": "16",
           "note": "Meldungen vom 22. Oktober 2026"
         },
         {
@@ -591,10 +591,10 @@
               "date": "2026-10-01T13:12:00.000Z"
             },
             {
-              "label": "A9 Sion -> Brig zwischen Anschluss Sion-Ost und Anschluss Sierre-Ost Sachlage: Strecke gesperrt Baustelle",
+              "label": "Arbaz <-> Mayens d'Arbaz, Arbaz Sachlage: Strecke gesperrt Ursache: Unterhaltsarbeiten",
               "value": "Sperrung",
               "detail": "bis 23. Oktober 2026",
-              "date": "2026-10-05T15:25:00.000Z"
+              "date": "2026-10-09T16:30:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -706,7 +706,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T03:27:15.275Z"
     },
     "fr": {
       "canton": "VS",
@@ -721,7 +721,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "17",
+          "value": "16",
           "note": "signalements au 22 octobre 2026"
         },
         {
@@ -819,10 +819,10 @@
               "date": "2026-10-01T13:12:00.000Z"
             },
             {
-              "label": "A9 Sion -> Brigue entre Jonction autoroutière Sion-Est et Jonction autoroutière Sierre-Est Situation: fermé travaux",
+              "label": "Arbaz <-> Mayens d'Arbaz, Arbaz Situation: fermé Raison: travaux de maintenance",
               "value": "Fermeture",
               "detail": "jusqu’au 23 octobre 2026",
-              "date": "2026-10-05T15:25:00.000Z"
+              "date": "2026-10-09T16:30:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -934,7 +934,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T03:27:15.275Z"
     }
   }
 }

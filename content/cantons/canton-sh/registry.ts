@@ -182,4 +182,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sciaffusa-regole-datencenter-beringen',
+ category: 'novita',
+ date: '2026-10-23T01:48:34.863Z',
+ image: '/images/blog/article-sciaffusa-regole-datencenter-beringen.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

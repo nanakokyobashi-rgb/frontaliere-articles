@@ -149,4 +149,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'san-gallo-protezione-infrastrutture-critiche',
+ category: 'novita',
+ date: '2026-10-23T03:10:46.389Z',
+ image: '/images/blog/article-san-gallo-protezione-infrastrutture-critiche.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -4,7 +4,16 @@ import assert from 'node:assert/strict';
 import {
   releaseImageNamespaceLock,
   releaseNotOwnedIsFatal,
+  resolveRequestedLeaseTimestamp,
 } from '../../scripts/lib/r2-image-namespace-lock.mjs';
+
+test('acquisition timestamps accept only positive finite overrides', () => {
+  for (const value of ['', '0', '-1', 'not-a-timestamp', 'Infinity']) {
+    assert.equal(resolveRequestedLeaseTimestamp(value, 5_000), 5_000, value);
+  }
+  assert.equal(resolveRequestedLeaseTimestamp('1700000000', 5_000), 1_700_000_000);
+  assert.equal(resolveRequestedLeaseTimestamp(42, 5_000), 42);
+});
 
 test('candidate fencing treats a lease owned by another writer as benign', async () => {
   const candidate = {

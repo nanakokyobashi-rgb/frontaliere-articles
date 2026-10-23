@@ -20,6 +20,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'kurzarbeit-regole-ordinarie': { it: 'kurzarbeit-regole-ordinarie', en: 'short-time-work-normal-rules', de: 'kurzarbeit-ordentliche-regeln', fr: 'chomage-partiel-regles-ordinaires' },
  'primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2': { it: 'primo-adeguamento-lpp-superstiti-e-invalidita-2-1-1-1-2', en: 'first-lpp-adjustment-for-survivors-and-disability-2-1-1-1-2', de: 'erste-anpassung-der-bvg-hinterlassenen-und-invalidenrenten-2-1-1-1-2', fr: 'premiere-adaptation-lpp-pour-survivants-et-invalidite-2-1-1-1-2' },
  'energy-tagli-radio-svizzera': { it: 'energy-tagli-radio-svizzera', en: 'energy-radio-cuts-switzerland', de: 'energy-radio-stellenabbau-schweiz', fr: 'energy-radio-suppressions-suisse' },
+ 'contributi-rotbach-saanen': { it: 'contributi-rotbach-saanen', en: 'bern-contributions-rotbach-saanen', de: 'bern-beitraege-rotbach-saanen', fr: 'berne-contributions-rotbach-saanen' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

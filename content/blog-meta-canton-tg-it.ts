@@ -48,6 +48,12 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.turgovia-servizi-datori-lavoro.title': 'Turgovia: servizi di ricerca personale e tutela lari',
     'blog.article.turgovia-servizi-datori-lavoro.excerpt': 'Il Canton Turgovia mette a disposizione dei datori di lavoro le sedi RAV di Amriswil, Frauenfeld e Kreuzlingen e il portale arbeit.swiss per vacancy vacancy',
     'blog.article.turgovia-servizi-datori-lavoro.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.pbv-rpg2-turgovia-2026.title': 'Turgovia: approvata PBV revisionata per RPG2',
+    'blog.article.pbv-rpg2-turgovia-2026.excerpt': 'Il Governo ha approvato la PBV revisionata RPG2 riguarda le costruzioni fuori dalle zone edificabili L\'obiettivo è limitare la crescita a un massimo del 2%',
+    'blog.article.pbv-rpg2-turgovia-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.turgovia-modifica-piano-direttore-2027.title': 'Turgovia: modifica piano direttore per sedi economiche',
+    'blog.article.turgovia-modifica-piano-direttore-2027.excerpt': 'Il Canton Turgovia avvia la consultazione sulla revisione del piano direttore per lo sviluppo di commercio e industria.',
+    'blog.article.turgovia-modifica-piano-direttore-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTgIt;

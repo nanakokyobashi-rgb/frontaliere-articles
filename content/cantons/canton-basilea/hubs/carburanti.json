@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "13d7f48e1ec88fce8edaed64168f371044f871bc0d57fb53707b9c6450d09d01",
+  "updatedAt": "2026-10-23T02:45:08.484Z",
+  "contentHash": "5ebbbc6e5244db9afd05b8fd30bfc2afb0667f439ed814aa053b37f5022d2919",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Parlamento di Basilea: mozione per iniziare i cantieri alle 6",
+          "url": "/articoli-basilea/basilea-cantieri-alle-sei/",
+          "excerpt": "Il Gran Consiglio di Basilea ha trasmesso una mozione per consentire lavori edili alle 6 da giugno ad agosto; quelli rumorosi resterebbero dalle 7.",
+          "date": "2026-10-23T02:22:16.813Z"
+        },
+        {
           "title": "Basilea, cantieri a Claraplatz: negozi in difficoltà",
           "url": "/articoli-basilea/claraplatz-basel-cantieri/",
           "excerpt": "A Claraplatz i cantieri colpiscono i negozi e il chiosco perde il 40% del fatturato.",
@@ -106,12 +112,6 @@
           "url": "/articoli-basilea/basel-klimpact-programma-2026/",
           "excerpt": "Basel-Stadt avvia Klimpact per ridurre le emissioni.",
           "date": "2026-10-09T21:07:09.540Z"
-        },
-        {
-          "title": "Tempo 30 a Birsfelden dal 12 ottobre 2026",
-          "url": "/articoli-basilea/tempo30-birsfelden-ottobre/",
-          "excerpt": "Nel Baselbiet Birsfelden introduce il Tempo 30 dal 12 ottobre 2026, mentre Münchenstein deve ancora attendere.",
-          "date": "2026-10-08T16:01:18.338Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T02:45:08.484Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Basel Parliament: motion to start construction work at 6",
+          "url": "/en/basel-articles/basel-construction-start-six/",
+          "excerpt": "The Grand Council of Basel has referred a motion to allow construction work from 6 a.m.",
+          "date": "2026-10-23T02:22:16.813Z"
+        },
+        {
           "title": "Basel, construction work at Claraplatz: shops struggling",
           "url": "/en/basel-articles/claraplatz-basel-construction-sites/",
           "excerpt": "At Claraplatz, construction sites hit the shops and the kiosk loses 40% of its turnover.",
@@ -217,12 +223,6 @@
           "url": "/en/basel-articles/basel-launches-klimpact-for-a-greener-everyday-life/",
           "excerpt": "Basel-Stadt launches Klimpact to reduce emissions.",
           "date": "2026-10-09T21:07:09.540Z"
-        },
-        {
-          "title": "30 km/h in Birsfelden from October 12, 2026",
-          "url": "/en/basel-articles/tempo30-birsfelden-october/",
-          "excerpt": "In Baselbiet, Birsfelden will introduce Tempo 30 on October 12, 2026, while Münchenstein still has to wait.",
-          "date": "2026-10-08T16:01:18.338Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T02:45:08.484Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Basler Parlament: Motion für einen Baubeginn um 6 Uhr",
+          "url": "/de/basel-artikel/basel-baustart-um-sechs/",
+          "excerpt": "Der Grosse Rat von Basel hat eine Motion überwiesen, um Bauarbeiten von Juni bis August um 6 Uhr zu ermöglichen; lärmintensive Arbeiten würden weiterhin erst ab 7 Uhr stattfinden.",
+          "date": "2026-10-23T02:22:16.813Z"
+        },
+        {
           "title": "Basel, Baustellen am Claraplatz: Geschäfte in Schwierigkeiten",
           "url": "/de/basel-artikel/claraplatz-basel-baustellen/",
           "excerpt": "Am Claraplatz setzen die Bauarbeiten den Geschäften zu, und der Kiosk verliert 40% seines Umsatzes.",
@@ -328,12 +334,6 @@
           "url": "/de/basel-artikel/basel-lanciert-klimpact-fur-einen-gruneren-alltag/",
           "excerpt": "Basel-Stadt startet Klimpact, um Emissionen zu reduzieren.",
           "date": "2026-10-09T21:07:09.540Z"
-        },
-        {
-          "title": "Tempo 30 in Birsfelden ab dem 12. Oktober 2026",
-          "url": "/de/basel-artikel/tempo30-birsfelden-oktober/",
-          "excerpt": "Im Baselbiet führt Birsfelden ab dem 12.",
-          "date": "2026-10-08T16:01:18.338Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T02:45:08.484Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Parlement de Bâle : motion pour commencer les chantiers à 6 heures",
+          "url": "/fr/articles-bale/bale-chantier-six-heures/",
+          "excerpt": "Le Grand Conseil de Bâle a transmis une motion visant à autoriser les travaux de construction à 6 heures de juin à août ; les travaux bruyants resteraient à partir de 7 heures.",
+          "date": "2026-10-23T02:22:16.813Z"
+        },
+        {
           "title": "Bâle, travaux à Claraplatz : commerces en difficulté",
           "url": "/fr/articles-bale/claraplatz-bale-chantiers/",
           "excerpt": "À Claraplatz, les travaux touchent les commerces et le kiosque perd 40% de son chiffre d’affaires.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-bale/bale-lance-klimpact-pour-un-quotidien-plus-vert/",
           "excerpt": "Bâle-Ville lance Klimpact pour réduire les émissions.",
           "date": "2026-10-09T21:07:09.540Z"
-        },
-        {
-          "title": "Tempo 30 à Birsfelden à partir du 12 octobre 2026",
-          "url": "/fr/articles-bale/tempo30-birsfelden-octobre/",
-          "excerpt": "Dans le Baselbiet, Birsfelden introduit le Tempo 30 à partir du 12 octobre 2026, tandis que Münchenstein doit encore attendre.",
-          "date": "2026-10-08T16:01:18.338Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T02:45:08.484Z"
     }
   }
 }

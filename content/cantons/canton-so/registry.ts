@@ -127,4 +127,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'polizia-soletta-comunicazione-media-droni',
+ category: 'novita',
+ date: '2026-10-23T03:30:32.771Z',
+ image: '/images/blog/article-polizia-soletta-comunicazione-media-droni.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
