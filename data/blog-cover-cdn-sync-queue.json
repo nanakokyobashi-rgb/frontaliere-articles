@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-fislisbach-steuerfuss-109.webp",
-      "sha256": "f7ba22164980c25cdd07deabce51a256e27a5284b7d235f8c55a5ca9f8d3fd1c"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-fislisbach-steuerfuss-109-480w.webp",
-      "sha256": "1422c368c280bdb99179b091105cd5232ad7b127206cca590a77286364c39595"
-    }
-  ]
+  "items": []
 }
