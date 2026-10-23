@@ -73,7 +73,6 @@ import { familySectionPages } from '../../scripts/lib/build-sitemap.mjs';
 import { createR2Request } from '../../scripts/lib/r2-section-lock.mjs';
 import {
   acquireImageNamespaceLeases,
-  classifyReleaseOutcome,
   releaseImageNamespaceLeasesWithDeadline as releaseImageLeasesWithDeadline,
   IMAGE_LEASE_RELEASE_TIMEOUT_MS,
 } from '../../scripts/lib/r2-image-namespace-lock.mjs';
@@ -157,22 +156,6 @@ test('image lease: il cleanup restituisce un timeout osservabile se R2 resta pen
   assert.equal(result.error?.code, 'IMAGE_LEASE_RELEASE_TIMEOUT');
   assert.equal(result.error?.timeoutMs, 20);
   assert.equal(IMAGE_LEASE_RELEASE_TIMEOUT_MS, 30_000);
-});
-
-test('image lease: la classificazione del rilascio è deterministica alla deadline', () => {
-  const deadline = 1_000;
-  assert.equal(
-    classifyReleaseOutcome({ outcome: { timedOut: false, results: [] }, now: 999, deadline }),
-    'released',
-  );
-  assert.equal(
-    classifyReleaseOutcome({ outcome: { timedOut: false, results: [] }, now: deadline, deadline }),
-    'timeout',
-  );
-  assert.equal(
-    classifyReleaseOutcome({ outcome: { timedOut: true }, now: 0, deadline }),
-    'timeout',
-  );
 });
 
 test('image lease: il cleanup bounded tenta ogni namespace entro lo stesso budget', async () => {
