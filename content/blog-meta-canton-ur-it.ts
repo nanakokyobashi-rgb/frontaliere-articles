@@ -24,6 +24,9 @@ const blogMetaCantonUrIt: Record<string, string> = {
     'blog.article.axenstrasse-chiusa-quattro-notti.title': 'Axenstrasse chiusa per quattro notti dal 2 al 6 novembre',
     'blog.article.axenstrasse-chiusa-quattro-notti.excerpt': 'La Axenstrasse sarà completamente chiusa dal 2 al 6 novembre, ogni notte dalle 22 alle 5, per lavori di manutenzione.',
     'blog.article.axenstrasse-chiusa-quattro-notti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.bristenstrasse-regimi-traffico-2026.title': 'Bristenstrasse: chiusure e orari fino a novembre 2026',
+    'blog.article.bristenstrasse-regimi-traffico-2026.excerpt': 'Tra Amsteg e St.',
+    'blog.article.bristenstrasse-regimi-traffico-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonUrIt;

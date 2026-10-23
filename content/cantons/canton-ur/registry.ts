@@ -83,4 +83,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'bristenstrasse-regimi-traffico-2026',
+ category: 'pratico',
+ date: '2026-10-23T12:29:59.834Z',
+ image: '/images/blog/article-bristenstrasse-regimi-traffico-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['UR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
