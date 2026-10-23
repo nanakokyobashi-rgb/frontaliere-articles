@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "a768707ecb8f1729b1bd2d31fd192acdd18528dffea445682aab28f0eb3ccaf8",
+  "updatedAt": "2026-10-23T00:54:27.534Z",
+  "contentHash": "7350bb2fabae9a83ec7722eb2a47240d33e0dad349c50f44d1da543d97b52069",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "SBB chiudono gli sportelli a St.Margrethen e Uznach",
+          "url": "/articoli-san-gallo/sbb-sportelli-st-margrethen-uznach/",
+          "excerpt": "Dall'inizio del 2027 le SBB puntano sul self-service a St.Margrethen e Uznach: il 3% dei biglietti è ancora venduto allo sportello.",
+          "date": "2026-10-23T00:23:33.274Z"
+        },
+        {
           "title": "Wil: voto il 29 novembre 2026 sulla rete del gas",
           "url": "/articoli-san-gallo/voto-rete-gas-wil-2026/",
           "excerpt": "Voto sul fondo: 29 novembre 2026.",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/sondaggio-imprese-st-gallen-2026/",
           "excerpt": "La città di St.Gallen lancia un sondaggio rivolto alle imprese per valutare la piazza economica.",
           "date": "2026-10-19T10:59:29.088Z"
-        },
-        {
-          "title": "HSG guida studio UE sulla riduzione dell'orario di lavoro",
-          "url": "/articoli-san-gallo/hsg-optime-orario-lavoro/",
-          "excerpt": "L'Università di San Gallo coordina OPTIME, progetto UE finanziato da Horizon Europe con circa 3,37 milioni di euro.",
-          "date": "2026-10-19T09:46:11.999Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T00:54:27.534Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "SBB close the ticket offices in St.Margrethen and Uznach",
+          "url": "/en/st-gallen-articles/sbb-ticket-counters-st-margrethen-uznach/",
+          "excerpt": "From the beginning of 2027, SBB are focusing on self-service in St.Margrethen and Uznach: 3% of tickets are still sold at the counter.",
+          "date": "2026-10-23T00:23:33.274Z"
+        },
+        {
           "title": "Wil: vote on the gas network on November 29, 2026",
           "url": "/en/st-gallen-articles/gas-network-vote-wil-2026/",
           "excerpt": "Vote on the fund: November 29, 2026.",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/st-gallen-business-survey-2026/",
           "excerpt": "The city of St.Gallen is launching a survey aimed at businesses to assess the business location.",
           "date": "2026-10-19T10:59:29.088Z"
-        },
-        {
-          "title": "HSG leads EU study on reducing working hours",
-          "url": "/en/st-gallen-articles/hsg-optime-working-time/",
-          "excerpt": "The University of St.",
-          "date": "2026-10-19T09:46:11.999Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T00:54:27.534Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "SBB schließen Schalter in St.Margrethen und Uznach",
+          "url": "/de/st-gallen-artikel/sbb-schalter-st-margrethen-uznach/",
+          "excerpt": "Ab Anfang 2027 setzen die SBB in St.Margrethen und Uznach auf Selbstbedienung: 3% der Tickets werden noch am Schalter verkauft.",
+          "date": "2026-10-23T00:23:33.274Z"
+        },
+        {
           "title": "Wil: Abstimmung am 29. November 2026 über das Gasnetz",
           "url": "/de/st-gallen-artikel/gasnetz-abstimmung-wil-2026/",
           "excerpt": "Abstimmung über den Fonds: 29.",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/st-gallen-unternehmensbefragung-2026/",
           "excerpt": "Die Stadt St.Gallen startet eine Umfrage unter Unternehmen, um den Wirtschaftsstandort zu bewerten.",
           "date": "2026-10-19T10:59:29.088Z"
-        },
-        {
-          "title": "HSG leitet EU-Studie zur Arbeitszeitverkürzung",
-          "url": "/de/st-gallen-artikel/hsg-optime-arbeitszeit/",
-          "excerpt": "Die Universität St.",
-          "date": "2026-10-19T09:46:11.999Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T00:54:27.534Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Les SBB ferment les guichets à St.Margrethen et Uznach",
+          "url": "/fr/articles-saint-gall/guichets-sbb-st-margrethen-uznach/",
+          "excerpt": "À partir du début de 2027, les SBB misent sur le libre-service à St.Margrethen et Uznach : 3% des billets sont encore vendus au guichet.",
+          "date": "2026-10-23T00:23:33.274Z"
+        },
+        {
           "title": "Wil : vote le 29 novembre 2026 sur le réseau de gaz",
           "url": "/fr/articles-saint-gall/vote-reseau-gaz-wil-2026/",
           "excerpt": "Vote sur le fonds : 29 novembre 2026.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/enquete-entreprises-saint-gall-2026/",
           "excerpt": "La ville de St.Gallen lance une enquête auprès des entreprises afin d’évaluer la place économique.",
           "date": "2026-10-19T10:59:29.088Z"
-        },
-        {
-          "title": "HSG dirige une étude de l’UE sur la réduction du temps de travail",
-          "url": "/fr/articles-saint-gall/hsg-optime-temps-travail/",
-          "excerpt": "L’Université de Saint-Gall coordonne OPTIME, un projet de l’UE financé par Horizon Europe à hauteur d’environ 3,37 millions d’euros.",
-          "date": "2026-10-19T09:46:11.999Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T00:54:27.534Z"
     }
   }
 }

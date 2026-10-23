@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "a1405a3c3d66936f41245caebfac60fa3ad7caa64ac8daa158e822ff959b3c90",
+  "updatedAt": "2026-10-23T00:54:27.534Z",
+  "contentHash": "97b0b9de3b647ee9a426a8077631ba1bf84f9eb8190fc129c630e90165e94fcf",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Cambio d'ora e rischio incidenti stradali nel Canton Soletta",
+          "url": "/articoli-soletta/cambio-ora-incidenti-stradali-soletta/",
+          "excerpt": "24-25 ottobre 2026: orologi indietro di un'ora Il traffico del mattino coincide con il crepuscolo Caprioli, cervi nobili e cinghiali sono attivi presto",
+          "date": "2026-10-23T00:45:27.261Z"
+        },
+        {
           "title": "A1 Wangen–Luterbach: lavori notturni fino a metà dicembre",
           "url": "/articoli-soletta/a1-lavori-notturni-luterbach/",
           "excerpt": "Dal 25 ottobre 2026, lavori notturni estesi sull'A1 tra Wangen an der Aare e Luterbach: la gestione del traffico sarà modificata fino a metà dicembre.",
@@ -94,12 +100,6 @@
           "url": "/articoli-soletta/soletta-parlamento-budget-2027-inchiesta-soh/",
           "excerpt": "Il Regierungsrat approva il Voranschlag 2027; Kantonsrat in sessione 1-9 settembre con 51 oggetti; GPK pubblica rapporto su irregolarità alla soH.",
           "date": "2026-10-20T06:13:06.286Z"
-        },
-        {
-          "title": "Furti con raggiro a Soletta: la polizia mette in guardia",
-          "url": "/articoli-soletta/furti-raggiro-soletta/",
-          "excerpt": "La Polizia cantonale di Soletta segnala circa dieci furti con raggiro negli ultimi giorni: autrici e autori usano gioielli economici per distrarre le vittime.",
-          "date": "2026-10-09T23:07:09.213Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T00:54:27.534Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Time change and risk of road accidents in the Canton of Solothurn",
+          "url": "/en/solothurn-articles/time-change-road-accidents-solothurn/",
+          "excerpt": "October 24–25, 2026: clocks go back by one hour Morning traffic coincides with twilight Roe deer, red deer and wild boar are active early Caution",
+          "date": "2026-10-23T00:45:27.261Z"
+        },
+        {
           "title": "A1 Wangen–Luterbach: night work until mid-December",
           "url": "/en/solothurn-articles/a1-night-work-luterbach/",
           "excerpt": "From October 25, 2026, extended nighttime work on the A1 between Wangen an der Aare and Luterbach: traffic management will be modified until mid-December.",
@@ -193,12 +199,6 @@
           "url": "/en/solothurn-articles/solothurn-parliament-budget-2027-soh-investigation/",
           "excerpt": "Regierungsrat approves Voranschlag 2027; Kantonsrat in session 1-9 September with 51 items; GPK publishes report on soH irregularities.",
           "date": "2026-10-20T06:13:06.286Z"
-        },
-        {
-          "title": "Thefts by deception in Solothurn: police issue warning",
-          "url": "/en/solothurn-articles/solothurn-trick-thefts-warning/",
-          "excerpt": "The Solothurn cantonal police report around ten thefts involving deception in recent days: perpetrators use inexpensive jewelry to distract their victims.",
-          "date": "2026-10-09T23:07:09.213Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T00:54:27.534Z"
     },
     "de": {
       "canton": "SO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Zeitumstellung und Verkehrsunfallrisiko im Kanton Solothurn",
+          "url": "/de/solothurn-artikel/zeitumstellung-strassenunfaelle-solothurn/",
+          "excerpt": "24.–25. Oktober 2026: Uhren um eine Stunde zurückgestellt Der morgendliche Verkehr fällt mit der Dämmerung zusammen Rehe, Rothirsche und Wildschweine sind früh",
+          "date": "2026-10-23T00:45:27.261Z"
+        },
+        {
           "title": "A1 Wangen–Luterbach: Nachtarbeiten bis Mitte Dezember",
           "url": "/de/solothurn-artikel/a1-nachtarbeiten-luterbach/",
           "excerpt": "Ab dem 25. Oktober 2026 finden auf der A1 zwischen Wangen an der Aare und Luterbach umfangreiche Nachtarbeiten statt: Die Verkehrsführung wird bis Mitte Dezember angepasst.",
@@ -292,12 +298,6 @@
           "url": "/de/solothurn-artikel/solothurn-parlament-budget-2027-untersuchung-soh/",
           "excerpt": "Der Regierungsrat genehmigt den Voranschlag 2027; Kantonsrat in der Sitzung vom 1.",
           "date": "2026-10-20T06:13:06.286Z"
-        },
-        {
-          "title": "Trickdiebstähle in Solothurn: Die Polizei warnt",
-          "url": "/de/solothurn-artikel/solothurn-warnung-trickdiebstahle/",
-          "excerpt": "Die Kantonspolizei Solothurn meldet rund zehn Trickdiebstähle in den letzten Tagen: Täterinnen und Täter verwenden günstigen Schmuck, um die Opfer abzulenken.",
-          "date": "2026-10-09T23:07:09.213Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T00:54:27.534Z"
     },
     "fr": {
       "canton": "SO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Changement d’heure et risque d’accidents de la route dans le canton de Soleure",
+          "url": "/fr/articles-soleure/changement-heure-accidents-route-soleure/",
+          "excerpt": "24-25 octobre 2026 : horloges reculées d’une heure La circulation matinale coïncide avec le crépuscule Les chevreuils, les cerfs élaphes et les sangliers sont",
+          "date": "2026-10-23T00:45:27.261Z"
+        },
+        {
           "title": "A1 Wangen–Luterbach : travaux de nuit jusqu'à la mi-décembre",
           "url": "/fr/articles-soleure/a1-travaux-nocturnes-luterbach/",
           "excerpt": "À partir du 25 octobre 2026, travaux de nuit étendus sur l'A1 entre Wangen an der Aare et Luterbach : la gestion du trafic sera modifiée jusqu'à la mi-décembre.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-soleure/soleure-parlement-budget-2027-enquete-soh/",
           "excerpt": "Le Regierungsrat approuve le Voranschlag 2027 ; Kantonsrat en session 1-9 septembre avec 51 objets ; GPK publie un rapport sur les irrégularités à la soH.",
           "date": "2026-10-20T06:13:06.286Z"
-        },
-        {
-          "title": "Vols par ruse à Soleure : la police met en garde",
-          "url": "/fr/articles-soleure/soleure-alerte-vols-par-ruse/",
-          "excerpt": "La Police cantonale de Soleure signale une dizaine de vols par ruse ces derniers jours : les autrices et auteurs utilisent des bijoux bon marché pour distraire les victimes.",
-          "date": "2026-10-09T23:07:09.213Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T00:54:27.534Z"
     }
   }
 }

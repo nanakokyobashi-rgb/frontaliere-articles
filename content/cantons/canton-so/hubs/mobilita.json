@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "2223a72545cb75deba4a0fdd226a749bd3bd49814ce9ba282ab4d9ca0aef0d1b",
+  "updatedAt": "2026-10-23T00:54:27.534Z",
+  "contentHash": "09eee7b9bf572fa5efe823dc63061c4ebe7272d41b089d2089e1b5b974555c73",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -125,6 +125,12 @@
           "date": "2026-10-08T11:40:05.556Z"
         },
         {
+          "title": "Cambio d'ora e rischio incidenti stradali nel Canton Soletta",
+          "url": "/articoli-soletta/cambio-ora-incidenti-stradali-soletta/",
+          "excerpt": "24-25 ottobre 2026: orologi indietro di un'ora Il traffico del mattino coincide con il crepuscolo Caprioli, cervi nobili e cinghiali sono attivi presto",
+          "date": "2026-10-23T00:45:27.261Z"
+        },
+        {
           "title": "A5 a Luterbach: quattro rampe chiuse a ottobre",
           "url": "/articoli-soletta/luterbach-a5-rampe-notte/",
           "excerpt": "A Luterbach, sulla A5, la viabilità cambia nell'ottobre 2026: quattro rampe saranno chiuse di notte tra il 12 e il 20 ottobre. Le deviazioni saranno segnalate.",
@@ -154,7 +160,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T00:54:27.534Z"
     },
     "en": {
       "canton": "SO",
@@ -261,6 +267,12 @@
           "date": "2026-10-08T11:40:05.556Z"
         },
         {
+          "title": "Time change and risk of road accidents in the Canton of Solothurn",
+          "url": "/en/solothurn-articles/time-change-road-accidents-solothurn/",
+          "excerpt": "October 24–25, 2026: clocks go back by one hour Morning traffic coincides with twilight Roe deer, red deer and wild boar are active early Caution",
+          "date": "2026-10-23T00:45:27.261Z"
+        },
+        {
           "title": "A5 at Luterbach: four ramps closed in October",
           "url": "/en/solothurn-articles/luterbach-a5-night-ramps/",
           "excerpt": "At Luterbach, on the A5, traffic patterns will change in October 2026: four ramps will be closed at night between October 12 and 20. Detours will be signposted.",
@@ -290,7 +302,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T00:54:27.534Z"
     },
     "de": {
       "canton": "SO",
@@ -397,6 +409,12 @@
           "date": "2026-10-08T11:40:05.556Z"
         },
         {
+          "title": "Zeitumstellung und Verkehrsunfallrisiko im Kanton Solothurn",
+          "url": "/de/solothurn-artikel/zeitumstellung-strassenunfaelle-solothurn/",
+          "excerpt": "24.–25. Oktober 2026: Uhren um eine Stunde zurückgestellt Der morgendliche Verkehr fällt mit der Dämmerung zusammen Rehe, Rothirsche und Wildschweine sind früh",
+          "date": "2026-10-23T00:45:27.261Z"
+        },
+        {
           "title": "A5 bei Luterbach: vier Rampen im Oktober gesperrt",
           "url": "/de/solothurn-artikel/luterbach-a5-nachtsperren/",
           "excerpt": "Bei Luterbach ändert sich auf der A5 im Oktober 2026 die Verkehrsführung: Vier Rampen werden zwischen dem 12. und 20. Oktober nachts gesperrt. Die Umleitungen werden ausgeschildert.",
@@ -426,7 +444,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T00:54:27.534Z"
     },
     "fr": {
       "canton": "SO",
@@ -534,6 +552,12 @@
           "date": "2026-10-08T11:40:05.556Z"
         },
         {
+          "title": "Changement d’heure et risque d’accidents de la route dans le canton de Soleure",
+          "url": "/fr/articles-soleure/changement-heure-accidents-route-soleure/",
+          "excerpt": "24-25 octobre 2026 : horloges reculées d’une heure La circulation matinale coïncide avec le crépuscule Les chevreuils, les cerfs élaphes et les sangliers sont",
+          "date": "2026-10-23T00:45:27.261Z"
+        },
+        {
           "title": "A5 à Luterbach : quatre bretelles fermées en octobre",
           "url": "/fr/articles-soleure/luterbach-a5-rampes-nuit/",
           "excerpt": "À Luterbach, sur l’A5, la circulation change en octobre 2026 : quatre bretelles seront fermées de nuit entre le 12 et le 20 octobre. Les déviations seront signalées.",
@@ -563,7 +587,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T00:54:27.534Z"
     }
   }
 }

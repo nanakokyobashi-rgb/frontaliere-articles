@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "a43690680a4d7613efe16c72b1aff84c0d608b7d8aef8dd47b98a988b3147c9e",
+  "updatedAt": "2026-10-23T00:54:27.534Z",
+  "contentHash": "12299acaa05c1fc4da727b7ec7ff19c1c5490259cd9646d0c4fd4b4a9287e81b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -159,6 +159,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "SBB chiudono gli sportelli a St.Margrethen e Uznach",
+          "url": "/articoli-san-gallo/sbb-sportelli-st-margrethen-uznach/",
+          "excerpt": "Dall'inizio del 2027 le SBB puntano sul self-service a St.Margrethen e Uznach: il 3% dei biglietti è ancora venduto allo sportello.",
+          "date": "2026-10-23T00:23:33.274Z"
+        },
+        {
           "title": "Casse malati: amministrazione varia da 103 a 445 franchi",
           "url": "/articoli-san-gallo/casse-malati-amministrazione-costi-2025/",
           "excerpt": "Nel 2025 i costi amministrativi medi delle casse malati svizzere sono stati 191,15 CHF per persona, con minimo 103,35 CHF e massimo 445,20 CHF.",
@@ -199,12 +205,6 @@
           "url": "/articoli-svizzera/permesso-l-canton-san-gallo-validita-proroga/",
           "excerpt": "Il permesso L di breve durata nel Canton San Gallo ha durata massima di 12 mesi, è legato al datore di lavoro e prevede la proroga solo in casi eccezionali. Ecco come funziona.",
           "date": "2026-08-30T01:38:51.813Z"
-        },
-        {
-          "title": "Premi cassa malati San Gallo: riduzione e modelli",
-          "url": "/articoli-svizzera/premi-lamal-san-gallo-riduzione/",
-          "excerpt": "LAMal obbligatoria in Svizzera: franchigie CHF 300–2500, modelli alternativi e procedura cantonale per il sussidio. Come richiedere la riduzione e scadenze.",
-          "date": "2026-09-09T22:37:47.464Z"
         }
       ],
       "latestCantonArticles": [],
@@ -234,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T00:54:27.534Z"
     },
     "en": {
       "canton": "SG",
@@ -366,6 +366,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "SBB close the ticket offices in St.Margrethen and Uznach",
+          "url": "/en/st-gallen-articles/sbb-ticket-counters-st-margrethen-uznach/",
+          "excerpt": "From the beginning of 2027, SBB are focusing on self-service in St.Margrethen and Uznach: 3% of tickets are still sold at the counter.",
+          "date": "2026-10-23T00:23:33.274Z"
+        },
+        {
           "title": "Health insurance funds: administration ranges from 103 to 445 francs",
           "url": "/en/st-gallen-articles/health-insurance-funds-administration-ranges-from-103-to-445-francs/",
           "excerpt": "In 2025, the average administrative costs of Swiss health insurers were 191,15 CHF per person, with a minimum of 103,35 CHF and a maximum of 445,20 CHF.",
@@ -406,12 +412,6 @@
           "url": "/en/swiss-articles/l-permit-canton-st-gallen-validity-renewal/",
           "excerpt": "The short-term L permit in the Canton of St. Gallen has a maximum duration of 12 months, is linked to the employer and provides for extension only in exceptional cases. Here's how it works.",
           "date": "2026-08-30T01:38:51.813Z"
-        },
-        {
-          "title": "St Gallen sick pay premiums: reduction and models",
-          "url": "/en/swiss-articles/health-insurance-premiums-st-gallen-reduction/",
-          "excerpt": "Mandatory LAMal in Switzerland: CHF 300–2500 deductibles, alternative models and cantonal procedure for the subsidy. How to request the reduction and deadlines.",
-          "date": "2026-09-09T22:37:47.464Z"
         }
       ],
       "latestCantonArticles": [],
@@ -437,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T00:54:27.534Z"
     },
     "de": {
       "canton": "SG",
@@ -569,6 +569,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "SBB schließen Schalter in St.Margrethen und Uznach",
+          "url": "/de/st-gallen-artikel/sbb-schalter-st-margrethen-uznach/",
+          "excerpt": "Ab Anfang 2027 setzen die SBB in St.Margrethen und Uznach auf Selbstbedienung: 3% der Tickets werden noch am Schalter verkauft.",
+          "date": "2026-10-23T00:23:33.274Z"
+        },
+        {
           "title": "Krankenkassen: Verwaltungskosten reichen von 103 bis 445 Franken",
           "url": "/de/st-gallen-artikel/krankenkassen-verwaltungskosten-reichen-von-103-bis-445-franken/",
           "excerpt": "Im Jahr 2025 betrugen die durchschnittlichen Verwaltungskosten der Schweizer Krankenkassen 191,15 CHF pro Person, mit einem Minimum von 103,35 CHF und einem Maximum von 445,20 CHF.",
@@ -609,12 +615,6 @@
           "url": "/de/schweiz-artikel/l-bewilligung-kanton-st-gallen-gueltigkeit-verlaengerung/",
           "excerpt": "Die Kurzzeitbewilligung L im Kanton St. Gallen hat eine Höchstdauer von 12 Monaten, ist an den Arbeitgeber gebunden und sieht eine Verlängerung nur in Ausnahmefällen vor. So funktioniert es.",
           "date": "2026-08-30T01:38:51.813Z"
-        },
-        {
-          "title": "Krankenkassenprämien St. Gallen: Reduktion und Modelle",
-          "url": "/de/schweiz-artikel/krankenversicherungspramien-st-gallen-reduktion/",
-          "excerpt": "Obligatorisches KVG in der Schweiz: Franchisen CHF 300–2500, alternative Modelle und kantonales Beitragsverfahren. So beantragen Sie die Kürzung und Fristen.",
-          "date": "2026-09-09T22:37:47.464Z"
         }
       ],
       "latestCantonArticles": [],
@@ -640,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T00:54:27.534Z"
     },
     "fr": {
       "canton": "SG",
@@ -772,6 +772,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Les SBB ferment les guichets à St.Margrethen et Uznach",
+          "url": "/fr/articles-saint-gall/guichets-sbb-st-margrethen-uznach/",
+          "excerpt": "À partir du début de 2027, les SBB misent sur le libre-service à St.Margrethen et Uznach : 3% des billets sont encore vendus au guichet.",
+          "date": "2026-10-23T00:23:33.274Z"
+        },
+        {
           "title": "Caisses-maladie : les coûts administratifs varient de 103 à 445 francs",
           "url": "/fr/articles-saint-gall/caisses-maladie-les-couts-administratifs-varient-de-103-a-445-francs/",
           "excerpt": "En 2025, les coûts administratifs moyens des caisses-maladie suisses se sont élevés à 191,15 CHF par personne, avec un minimum de 103,35 CHF et un maximum de 445,20 CHF.",
@@ -812,12 +818,6 @@
           "url": "/fr/articles-suisse/permis-l-canton-saint-gall-validite-prorogation/",
           "excerpt": "Le permis L de courte durée dans le canton de Saint-Gall a une durée maximale de 12 mois, est lié à l'employeur et ne peut être prolongé que dans des cas exceptionnels. Voici comment cela fonctionne.",
           "date": "2026-08-30T01:38:51.813Z"
-        },
-        {
-          "title": "Primes caisse maladie Saint-Gall : réduction et modèles",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-saint-gall-reduction/",
-          "excerpt": "LAMal obligatoire en Suisse : franchises CHF 300–2500, modèles alternatifs et procédure cantonale de subvention. Comment demander la réduction et les délais.",
-          "date": "2026-09-09T22:37:47.464Z"
         }
       ],
       "latestCantonArticles": [],
@@ -839,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T00:54:27.534Z"
     }
   }
 }
