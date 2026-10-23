@@ -51,7 +51,11 @@ import {
 } from '../host/shared/clauseTail.mjs';
 // This Node-only builder shares the metadata writers' budget and validates
 // that it remains aligned with the SiteShell contract.
-import { SEO_DESCRIPTION_MAX } from '../generator/scripts/lib/seo-description-contract.mjs';
+import {
+  SEO_DESCRIPTION_MAX,
+  SEO_OG_DESCRIPTION_MAX,
+  assertHistoricalSeoDescriptionsMigrated,
+} from '../generator/scripts/lib/seo-description-contract.mjs';
 const RSS_SERP_DESCRIPTION_MAX_CHARS = SEO_DESCRIPTION_MAX;
 const repairSerpSnippet = (text) => {
   const repaired = repairSerpSnippetBase(text);
@@ -59,6 +63,16 @@ const repairSerpSnippet = (text) => {
   if (!bounded) {
     throw new Error(
       `build-api: refusing to publish an RSS item without a safe non-empty description within ${RSS_SERP_DESCRIPTION_MAX_CHARS} characters.`,
+    );
+  }
+  return bounded;
+};
+const repairSocialSnippet = (text) => {
+  const repaired = repairSerpSnippetBase(text);
+  const bounded = truncateToClause(repaired, SEO_OG_DESCRIPTION_MAX);
+  if (!bounded) {
+    throw new Error(
+      `build-api: refusing to publish an OG item without a safe non-empty description within ${SEO_OG_DESCRIPTION_MAX} characters.`,
     );
   }
   return bounded;
@@ -1159,6 +1173,18 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
       }
     }
   }
+  const historicalSeoPolicy = assertHistoricalSeoDescriptionsMigrated(
+    [...seoTextById.entries()].map(([id, metadata]) => ({ id, ...metadata })),
+    {
+      projectDescription: repairSerpSnippet,
+      projectOgDescription: repairSocialSnippet,
+    },
+  );
+  console.log(
+    `[build-api] historical SEO policy: ${historicalSeoPolicy.records} records, ` +
+      `${historicalSeoPolicy.historicalDescriptions} description(s) and ` +
+      `${historicalSeoPolicy.historicalOgDescriptions} OG description(s) preserved in storage and bounded on output`,
+  );
 
   const NEWS_PUBLICATION = 'Frontaliere Ticino';
   const now = Date.now();
