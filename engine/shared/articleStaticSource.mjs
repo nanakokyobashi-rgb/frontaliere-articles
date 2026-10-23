@@ -34,19 +34,6 @@ function parseSourceFile(source, sourcePath) {
     throw new SyntaxError(`[article-source] TypeScript syntax error in ${sourcePath}${suffix}: ${message}`);
   }
 
-  // The published source files are static data modules. Reject real template
-  // expressions anywhere in the file so no partial result can be emitted and
-  // no nested expression can expose fake `blog.article.*` keys to extraction.
-  // Escaped `\${...}`, normal strings, and comments are not TemplateExpression
-  // nodes and remain ordinary literal content.
-  const rejectTemplateExpressions = (node) => {
-    if (ts.isTemplateExpression(node)) {
-      fail(sourcePath, 'Interpolated template literal is not supported in static article data', sourceFile, node);
-    }
-    ts.forEachChild(node, rejectTemplateExpressions);
-  };
-  rejectTemplateExpressions(sourceFile);
-
   return sourceFile;
 }
 
@@ -61,6 +48,35 @@ function staticPropertyName(name) {
     return name.text;
   }
   return null;
+}
+
+/**
+ * A translation record can carry unrelated helper text alongside article
+ * entries. It is not data the reader publishes, so an interpolated template
+ * there must not abort extraction of the article namespace. Article keys keep
+ * the strict static-literal check below.
+ */
+function isInterpolatedTemplateExpression(node) {
+  let current = node;
+  while (current) {
+    if (ts.isTemplateExpression(current)) return true;
+    if (
+      ts.isParenthesizedExpression(current)
+      || ts.isAsExpression(current)
+      || ts.isTypeAssertionExpression(current)
+      || ts.isNonNullExpression(current)
+      || (typeof ts.isSatisfiesExpression === 'function' && ts.isSatisfiesExpression(current))
+    ) {
+      current = current.expression;
+      continue;
+    }
+    break;
+  }
+  return false;
+}
+
+function skipNonArticleTemplateLiteral(property, key) {
+  return !key.startsWith(ARTICLE_KEY_PREFIX) && isInterpolatedTemplateExpression(property.initializer);
 }
 
 function findTranslationObject(sourceFile, sourcePath) {
@@ -110,7 +126,13 @@ function readStringLiteralValue(node, sourceFile, sourcePath, key) {
     // Translation modules historically preserve literal tabs in visible
     // titles. Keep that call-site contract while sharing all other literal
     // decoding rules with the AST readers.
-    return decodeStaticString(raw, quote, { tabAs: '\t' });
+    return decodeStaticString(raw, quote, {
+      tabAs: '\t',
+      // FAQ values are JSON text nested inside a TypeScript literal. Keep
+      // JSON's \b/\f/\v spelling intact until JSON.parse consumes it; body
+      // and metadata text still receive TypeScript control characters.
+      preserveJsonEscapes: key.endsWith('.faq'),
+    });
   }
   fail(sourcePath, `article translation ${key} must have a static string literal value`, sourceFile, node);
 }
@@ -143,6 +165,7 @@ export function parseStaticArticleTranslationEntries(source, sourcePath) {
     if (key === null) fail(sourcePath, 'translation record keys must be static strings', sourceFile, property.name);
     if (seenKeys.has(key)) fail(sourcePath, `duplicate translation key ${key}`, sourceFile, property.name);
     seenKeys.add(key);
+    if (skipNonArticleTemplateLiteral(property, key)) continue;
     const value = readStringLiteralValue(property.initializer, sourceFile, sourcePath, key);
     if (!key.startsWith(ARTICLE_KEY_PREFIX)) continue;
     const match = ARTICLE_TRANSLATION_KEY.exec(key);

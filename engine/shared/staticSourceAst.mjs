@@ -66,7 +66,7 @@ function createSourceFile(source, fileName) {
  * backticks must become valid string-literal escapes. Computed and interpolated
  * names remain unsupported and therefore fail closed.
  */
-function normalizeTemplatePropertyNames(source) {
+function templatePropertyNameReplacements(source) {
   const scanner = ts.createScanner(ts.ScriptTarget.Latest, true, ts.LanguageVariant.Standard, source);
   const tokens = [];
   let kind;
@@ -100,6 +100,11 @@ function normalizeTemplatePropertyNames(source) {
     replacements.push({ start: token.pos, end: token.end, value: replacement });
   }
 
+  return replacements;
+}
+
+function normalizeTemplatePropertyNames(source) {
+  const replacements = templatePropertyNameReplacements(source);
   if (replacements.length === 0) return source;
   let normalized = source;
   for (let index = replacements.length - 1; index >= 0; index -= 1) {
@@ -222,7 +227,7 @@ export function staticPropertyName(name) {
  *
  * @param {string} raw
  * @param {string} quote
- * @param {{ newlineAs?: string, tabAs?: string }} [options]
+ * @param {{ newlineAs?: string, tabAs?: string, preserveJsonEscapes?: boolean }} [options]
  */
 export function decodeStaticString(raw, quote, options = {}) {
   const newlineAs = options.newlineAs ?? '\n';
@@ -265,6 +270,12 @@ export function decodeStaticString(raw, quote, options = {}) {
       case 'n': value += newlineAs; break;
       case 'r': break;
       case 't': value += tabAs; break;
+      case 'b': value += options.preserveJsonEscapes ? token : '\b'; break;
+      case 'f': value += options.preserveJsonEscapes ? token : '\f'; break;
+      case 'v': value += options.preserveJsonEscapes ? token : '\v'; break;
+      // Legacy octal escapes (`\\01`..`\\07`) are not NUL plus a digit.
+      // Keep the source token intact rather than changing the published value.
+      case '0': value += /[0-9]/u.test(raw[cursor + 2] ?? '') ? token : '\0'; break;
       case '\\': value += '\\'; break;
       case "'": value += "'"; break;
       case '"': value += '"'; break;
