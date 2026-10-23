@@ -227,18 +227,37 @@ function dispatchArguments({ workflow, section, articleIds, repo, dispatchNonce 
   ];
 }
 
+export function normalizeWorkflowRunPages(pages) {
+  if (!Array.isArray(pages)) return [];
+  return pages
+    .flatMap((page) => Array.isArray(page?.workflow_runs) ? page.workflow_runs : [])
+    .map((run) => ({
+      databaseId: run?.id ?? run?.databaseId,
+      createdAt: run?.created_at ?? run?.createdAt,
+      displayTitle: run?.display_title ?? run?.displayTitle ?? '',
+      status: run?.status ?? '',
+    }))
+    .filter((run) => run.databaseId != null);
+}
+
 async function listRunIds({ repo, workflow, token, deadlineAt, now }) {
+  // `gh run list --limit 100` can hide an old queued publisher behind a busy
+  // completed-run history. Paginate the workflow-runs endpoint so an active
+  // cover publisher is reusable regardless of its age.
   const output = await runGh([
-    'run', 'list',
-    '--repo', repo,
-    '--workflow', workflow,
-    '--event', 'workflow_dispatch',
-    '--branch', 'main',
-    '--limit', '100',
-    '--json', 'databaseId,createdAt,displayTitle,status',
+    'api', '--paginate', '--slurp',
+    `repos/${repo}/actions/workflows/${workflow}/runs`,
+    '-f', 'event=workflow_dispatch',
+    '-f', 'branch=main',
+    '-f', 'per_page=100',
   ], { token, deadlineAt, now });
-  const runs = JSON.parse(output || '[]');
-  return Array.isArray(runs) ? runs : [];
+  let pages;
+  try {
+    pages = JSON.parse(output || '[]');
+  } catch (error) {
+    throw new Error(`workflow run list returned malformed JSON: ${textError(error)}`);
+  }
+  return normalizeWorkflowRunPages(pages);
 }
 
 /**

@@ -6,6 +6,7 @@ import {
   drainCoverPublishers,
   groupPublisherOutbox,
   publisherStatusIsComplete,
+  normalizeWorkflowRunPages,
   selectActivePublisherRun,
   selectNewRunId,
   validatePublisherStatus,
@@ -216,6 +217,29 @@ test('correla la run nuova con il nonce, ignorando una dispatch concorrente dell
   });
 
   assert.equal(selected?.databaseId, 42);
+});
+
+test('appiattisce tutte le pagine delle run e riusa anche una cover attiva piu vecchia', () => {
+  const pages = [
+    { workflow_runs: Array.from({ length: 100 }, (_, index) => ({
+      id: index + 1,
+      created_at: '2026-10-23T10:00:00Z',
+      display_title: 'cover-publish-article / frontaliere / nonce=completed',
+      status: 'completed',
+    })) },
+    { workflow_runs: [{
+      id: 101,
+      created_at: '2026-10-22T05:00:00Z',
+      display_title: 'cover-publish-article / frontaliere / nonce=cover-frontaliere-old',
+      status: 'in_progress',
+    }] },
+  ];
+
+  const selected = selectActivePublisherRun(
+    normalizeWorkflowRunPages(pages),
+    { workflow: 'fast-publish-article.yml', section: 'frontaliere' },
+  );
+  assert.equal(selected?.databaseId, 101);
 });
 
 test('riusa la run cover attiva e non seleziona publisher manuali o conclusi', () => {
