@@ -699,6 +699,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fislisbach-steuerfuss-109': {
+    title: 'Steuerfuss a 109% proposto a Fislisbach per il budget 2027',
+    description: 'Fislisbach propone di mantenere lo Steuerfuss al 109% per il budget 2027, nonostante un disavanzo di CHF 357\'310. Dettagli sulle spese sanitarie.',
+    keywords: 'frontalieri, ticino, svizzera, italia, steuerfuss, proposto, fislisbach, budget',
+    ogTitle: 'Steuerfuss 109% Fislisbach budget 2027',
+    ogDescription: 'Il Gemeinderat di Fislisbach chiede di approvare il budget 2027 con Steuerfuss al 109%, evidenziando un disavanzo di CHF 357\'310 e aumenti nei costi sanitari.',
+    canonicalPath: '/articoli-argovia/fislisbach-steuerfuss-109/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Steuerfuss a 109% proposto a Fislisbach per il budget 2027",
+      "description": "Fislisbach propone di mantenere lo Steuerfuss al 109% per il budget 2027, nonostante un disavanzo di CHF 357'310. Dettagli sulle spese sanitarie.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-fislisbach-steuerfuss-109.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T21:49:48+00:00",
+      "dateModified": "2026-10-23T21:49:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/fislisbach-steuerfuss-109/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

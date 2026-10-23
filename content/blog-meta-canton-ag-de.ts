@@ -57,6 +57,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.sbb-chiude-reisezentrum-doettingen.title': 'SBB schließen in Döttingen: letztes Reisezentrum des Bezirks',
     'blog.article.sbb-chiude-reisezentrum-doettingen.excerpt': 'Die SBB schließen in Döttingen das letzte Reisezentrum des Bezirks.',
     'blog.article.sbb-chiude-reisezentrum-doettingen.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.fislisbach-steuerfuss-109.title': 'Für Fislisbach wird für das Budget 2027 ein Steuerfuss von 109% vorgeschlagen',
+    'blog.article.fislisbach-steuerfuss-109.excerpt': 'Der Gemeinderat von Fislisbach beantragt die Genehmigung des Budgets 2027 mit unverändertem Steuerfuss von 109%, trotz eines Defizits von CHF 357\'310.',
+    'blog.article.fislisbach-steuerfuss-109.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAgDe;

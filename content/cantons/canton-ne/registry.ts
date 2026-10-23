@@ -138,4 +138,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'consiglio-stato-21-ottobre-2026',
+ category: 'novita',
+ date: '2026-10-23T19:35:52.889Z',
+ image: '/images/blog/article-consiglio-stato-21-ottobre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

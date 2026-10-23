@@ -15,6 +15,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'neuchatel-disoccupazione-maggio-2026': { it: 'neuchatel-disoccupazione-maggio-2026', en: 'neuchatel-unemployment-may-2026', de: 'neuenburg-arbeitslosigkeit-mai-2026', fr: 'neuchatel-chomage-mai-2026' },
  'collegio-longueville-cantiere-colombier': { it: 'collegio-longueville-cantiere-colombier', en: 'longueville-college-construction-colombier', de: 'longueville-kolleg-baustelle-colombier', fr: 'college-longueville-chantier-colombier' },
  'stazione-le-locle-accessibilita': { it: 'stazione-le-locle-accessibilita', en: 'le-locle-station-accessibility', de: 'bahnhof-le-locle-barrierefreiheit', fr: 'gare-le-locle-accessibilite' },
+ 'consiglio-stato-21-ottobre-2026': { it: 'consiglio-stato-21-ottobre-2026', en: 'council-state-october-21-2026', de: 'staatsrat-21-oktober-2026', fr: 'conseil-etat-21-octobre-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

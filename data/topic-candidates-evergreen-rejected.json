@@ -11073,38 +11073,6 @@
     }
   ],
   "topicGateUrls": {
-    "svizzera::https://www.laregione.ch/economia/economia/1958033/corsa-al-cobalto-e-al-nichel-il-lato-grigio-della-svolta-verde": {
-      "section": "svizzera",
-      "ts": 1792557074853
-    },
-    "frontaliere::https://comozero.it/attualita/como-e-la-maxi-beffa-della-tangenziale-mai-finita-ora-scade-pure-lo-sconto-diventi-subito-gratis": {
-      "section": "frontaliere",
-      "ts": 1792588536969
-    },
-    "frontaliere::https://www.ticinonews.ch/ticino/snl-i-sindacati-respingono-laccusa-di-complotto-ritirare-i-cinque-licenziamenti-e-lasciare-il-verbano-alle-fart-445061": {
-      "section": "frontaliere",
-      "ts": 1792592859130
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1958054/cyberattacco-anche-l-istituto-di-previdenza-del-cantone-ticino-si-rivolge-alla-procura-federale": {
-      "section": "frontaliere",
-      "ts": 1792592907592
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/presidio-dei-lavoratori-beko-a-varese-per-il-futuro-del-sito-di-cassinetta/2714413": {
-      "section": "frontaliere",
-      "ts": 1792593017387
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/maxi-operazione-della-guardia-di-finanza-tra-italia-svizzera-e-spagna-30-indagati-sequestri-per-oltre-21-milioni/2714272": {
-      "section": "frontaliere",
-      "ts": 1792596109509
-    },
-    "frontaliere::https://www.varesenews.it/2026/10/strade-ferrovie-e-trasporto-pubblico-la-lombardia-ridisegna-la-mobilita-fino-al-2036/2715067": {
-      "section": "frontaliere",
-      "ts": 1792612035305
-    },
-    "frontaliere::https://www.varesenoi.it/2026/10/21/leggi-notizia/argomenti/politica-20/articolo/malpensa-ferrovie-collegamenti-con-la-svizzera-il-nuovo-piano-regionale-rafforza-le-infrastrutt-1.html": {
-      "section": "frontaliere",
-      "ts": 1792613392974
-    },
     "frontaliere::http://www.cd-ocst.ch": {
       "section": "frontaliere",
       "ts": 1792633665950
@@ -11136,6 +11104,14 @@
     "frontaliere::https://www.swissinfo.ch/ita/bns%3a-non-vi-%c3%a8-necessit%c3%a0-di-rafforzare-gli-interventi-sul-mercato/92258054": {
       "section": "frontaliere",
       "ts": 1792680179691
+    },
+    "frontaliere::https://www.tio.ch/ticino/attualita/1958768/ticino-sos-costi-risultato-contributi-consiglio-finanziamenti-remunerazioni-stato-direzione": {
+      "section": "frontaliere",
+      "ts": 1792787044372
+    },
+    "frontaliere::https://www.tio.ch/ticino/economia/1958734/mezzo-miliardo-sul-tavolo-per-il-futuro-di-san-bernardino": {
+      "section": "frontaliere",
+      "ts": 1792787053369
     }
   }
 }

@@ -30,6 +30,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.basilea-cantieri-alle-sei.title': 'Parlamento di Basilea: mozione per iniziare i cantieri alle 6',
     'blog.article.basilea-cantieri-alle-sei.excerpt': 'Il Gran Consiglio di Basilea ha trasmesso una mozione per consentire lavori edili alle 6 da giugno ad agosto; quelli rumorosi resterebbero dalle 7.',
     'blog.article.basilea-cantieri-alle-sei.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.domande-edilizie-solo-digitale-2027.title': 'Domande edilizie solo digitali dal 1° gennaio 2027 nel Canton Basilea',
+    'blog.article.domande-edilizie-solo-digitale-2027.excerpt': 'Dal 1° gennaio 2027, le domande di autorizzazione edilizia devono essere presentate solo in formato digitale, come comunicato dal Bau- und Gastgewerbeinspektorat nel settembre 2026.',
+    'blog.article.domande-edilizie-solo-digitale-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBasileaIt;

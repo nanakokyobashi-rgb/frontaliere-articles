@@ -39,6 +39,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.stazione-le-locle-accessibilita.title': 'Le Locle station: accessibility works costing 8 million',
     'blog.article.stazione-le-locle-accessibilita.excerpt': 'Construction work at Le Locle station: 8 million francs Platform 1 accounts for almost 90% of passenger traffic First Swiss trains on platform 1 from October',
     'blog.article.stazione-le-locle-accessibilita.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.consiglio-stato-21-ottobre-2026.title': 'State Council responds to federal consultations in 2026',
+    'blog.article.consiglio-stato-21-ottobre-2026.excerpt': 'The Council of State has responded to two federal consultations Authorizations for heavy work in mountain zones II and III Cantonal vote scheduled for Sunday',
+    'blog.article.consiglio-stato-21-ottobre-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNeEn;

@@ -39,6 +39,9 @@ const blogMetaCantonNeFr: Record<string, string> = {
     'blog.article.stazione-le-locle-accessibilita.title': 'Gare du Locle : travaux d\'accessibilité pour 8 millions',
     'blog.article.stazione-le-locle-accessibilita.excerpt': 'Chantier à la gare du Locle : 8 millions de francs Le quai 1 concentre près de 90 % du trafic voyageurs Les premiers trains suisses doivent revenir sur le quai',
     'blog.article.stazione-le-locle-accessibilita.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.consiglio-stato-21-ottobre-2026.title': 'Le Conseil d\'État répond à des consultations fédérales en 2026',
+    'blog.article.consiglio-stato-21-ottobre-2026.excerpt': 'Le Conseil d\'État a répondu à deux consultations fédérales Autorisations pour des travaux lourds dans les zones montagneuses II et III Votation cantonale fixée',
+    'blog.article.consiglio-stato-21-ottobre-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonNeFr;

@@ -57,6 +57,9 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.sbb-chiude-reisezentrum-doettingen.title': 'SBB chiudono a Döttingen: ultimo centro viaggi del distretto',
     'blog.article.sbb-chiude-reisezentrum-doettingen.excerpt': 'Le SBB chiudono a Döttingen l\'ultimo Reisezentrum del distretto.',
     'blog.article.sbb-chiude-reisezentrum-doettingen.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.fislisbach-steuerfuss-109.title': 'Steuerfuss a 109% proposto a Fislisbach per il budget 2027',
+    'blog.article.fislisbach-steuerfuss-109.excerpt': 'Il Gemeinderat di Fislisbach chiede l\'approvazione del budget 2027 con Steuerfuss invariato al 109%, nonostante un disavanzo di CHF 357\'310.',
+    'blog.article.fislisbach-steuerfuss-109.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAgIt;

@@ -12,6 +12,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'basilea-larvicida-quattro-settimane': { it: 'basilea-larvicida-quattro-settimane', en: 'basel-tiger-mosquito-four-weeks', de: 'basel-tigermuecke-vier-wochen', fr: 'bale-moustique-tigre-quatre-semaines' },
  'claraplatz-basel-cantieri': { it: 'claraplatz-basel-cantieri', en: 'claraplatz-basel-construction-sites', de: 'claraplatz-basel-baustellen', fr: 'claraplatz-bale-chantiers' },
  'basilea-cantieri-alle-sei': { it: 'basilea-cantieri-alle-sei', en: 'basel-construction-start-six', de: 'basel-baustart-um-sechs', fr: 'bale-chantier-six-heures' },
+ 'domande-edilizie-solo-digitale-2027': { it: 'domande-edilizie-solo-digitale-2027', en: 'building-permits-only-digital-2027', de: 'baugesuche-nur-digital-2027', fr: 'demandes-permis-digital-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

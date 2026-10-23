@@ -4,21 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://france3-regions.franceinfo.fr/bourgogne-franche-comte/doubs/une-idee-de-taxe-sur-l-embauche-des-etrangers-en-suisse-pourrait-elle-menacer-l-emploi-des-frontaliers-francais-3435600.html": {
-      "section": "canton-ne",
-      "ts": 1792483582220
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261020-les-exportations-horlogeres-continuent-a-la-hausse-en-septembre.html": {
-      "section": "canton-ne",
-      "ts": 1792540351996
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261020-legere-reprise-des-exportations-helvetiques-en-septembre.html": {
-      "section": "canton-ne",
-      "ts": 1792549022117
-    },
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261021-une-faille-de-securite-grave-menace-les-sites-web-du-monde-entier.html": {
       "section": "canton-ne",
       "ts": 1792656203168
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-sunrise-edulcore-son-projet-de-restructuration-358-postes-biffes.html": {
+      "section": "canton-ne",
+      "ts": 1792786388499
     }
   }
 }

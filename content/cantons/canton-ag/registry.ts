@@ -204,4 +204,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'fislisbach-steuerfuss-109',
+ category: 'fiscale',
+ date: '2026-10-23T21:49:48.808Z',
+ image: '/images/blog/article-fislisbach-steuerfuss-109.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];
