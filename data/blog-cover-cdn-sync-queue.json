@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-hug-primo-ospedale-svizzero-2027.webp",
+      "sha256": "f552a3f0f5455696d959deb8202ffad1875fdb27debc1a81444d08c41be36edd"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-hug-primo-ospedale-svizzero-2027-480w.webp",
+      "sha256": "2b0c42305095da0d8b4b297c6a3516573af214ea2e6296f762ec58df54ecbd00"
+    }
+  ]
 }
