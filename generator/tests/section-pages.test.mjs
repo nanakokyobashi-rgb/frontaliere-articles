@@ -3376,6 +3376,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(replayDispatcher, /non invio un dispatch duplicato/);
   assert.match(replayDispatcher, /for poll in \{1\.\.10\}; do/);
   assert.match(replayDispatcher, /ultimo replay fallito; riaccodo/);
+  assert.match(replayDispatcher, /async_stale_dispatch=false/);
+  assert.match(replayDispatcher, /nonce=stale-/);
+  assert.match(replayDispatcher, /replay stale accettato dall'API/);
   const reconcileStart = wf.indexOf('          reconcile_edge_matrix() {');
   const reconcileEnd = wf.indexOf('          pinned_source=', reconcileStart);
   const reconcile = wf.slice(reconcileStart, reconcileEnd);
