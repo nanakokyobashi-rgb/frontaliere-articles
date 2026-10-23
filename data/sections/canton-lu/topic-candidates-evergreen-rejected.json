@@ -4,17 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-lu::https://www.zentralplus.ch/wirtschaft/emmen-center-gleich-drei-laeden-schliessen-2905630": {
+    "canton-lu::https://news.lu.ch/html_mail.jsp?email=news.lu.ch&id=0&mailref=000m5si0000ti000000000000ckirvvw": {
       "section": "canton-lu",
-      "ts": 1792425869088
-    },
-    "canton-lu::https://www.zentralplus.ch/politik/luzern-plant-steuersenkung-doch-es-gibt-widerstand-2905798": {
-      "section": "canton-lu",
-      "ts": 1792436466130
-    },
-    "canton-lu::https://www.zentralplus.ch/verkehr-mobilitaet/fdp-befuerchtet-verkehrschaos-rund-um-campus-horw-2906069": {
-      "section": "canton-lu",
-      "ts": 1792570409234
+      "ts": 1792780453595
     }
   }
 }

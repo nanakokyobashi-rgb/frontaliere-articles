@@ -51,6 +51,9 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.fdp-lucerna-due-liste.title': 'FDP Lucerna: due liste per il voto cantonale 2027',
     'blog.article.fdp-lucerna-due-liste.excerpt': 'La FDP di Lucerna nomina 32 candidati per il voto cantonale del 21 marzo 2027 e punta a due liste e a un\'alleanza borghese.',
     'blog.article.fdp-lucerna-due-liste.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.consultazione-abitazioni-lucerna.title': 'Consultazione controprogetto abitazioni accessibili nel Cantone Lucerna',
+    'blog.article.consultazione-abitazioni-lucerna.excerpt': 'La consultazione sul controprogetto all\'iniziativa «Per abitazioni accessibili» è aperta dal 21 ottobre 2026 fino al 22 gennaio 2027, con voto previsto per la primavera 2028.',
+    'blog.article.consultazione-abitazioni-lucerna.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonLuIt;
