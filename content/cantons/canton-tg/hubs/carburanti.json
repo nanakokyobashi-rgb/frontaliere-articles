@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "cd8afc1dc14885191d992b0a4f2ece6261a2eaf1b961d4ff2afeb0e6d6fdc874",
+  "updatedAt": "2026-10-23T01:54:17.232Z",
+  "contentHash": "b19c1bc53eef77c0e222c357f708b32b869e3426b8137b6b6ac6f179568e7f9e",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Turgovia: approvata PBV revisionata per RPG2",
+          "url": "/articoli-turgovia/pbv-rpg2-turgovia-2026/",
+          "excerpt": "Il Governo ha approvato la PBV revisionata RPG2 riguarda le costruzioni fuori dalle zone edificabili L'obiettivo è limitare la crescita a un massimo del 2%",
+          "date": "2026-10-23T01:44:38.536Z"
+        },
+        {
           "title": "Turgovia: servizi di ricerca personale e tutela lari",
           "url": "/articoli-turgovia/turgovia-servizi-datori-lavoro/",
           "excerpt": "Il Canton Turgovia mette a disposizione dei datori di lavoro le sedi RAV di Amriswil, Frauenfeld e Kreuzlingen e il portale arbeit.swiss per vacancy vacancy",
@@ -94,12 +100,6 @@
           "url": "/articoli-turgovia/eventi-weekend-turgovia/",
           "excerpt": "Eventi in Turgovia ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
           "date": "2026-10-17T11:31:41.357Z"
-        },
-        {
-          "title": "13ª rendita AVS pagata con la pensione di dicembre 2026",
-          "url": "/articoli-turgovia/tredicesima-rendita-avs-2026/",
-          "excerpt": "La 13ª rendita AVS arriva con la rendita di dicembre 2026 Non serve presentare domande o svolgere pratiche Spetta a chi riceve una rendita AVS di vecchiaia",
-          "date": "2026-10-17T09:16:03.959Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T01:54:17.232Z"
     },
     "en": {
       "canton": "TG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau: revised PBV approved for RPG2",
+          "url": "/en/thurgau-articles/pbv-rpg2-thurgau-2026/",
+          "excerpt": "The Government approved the revised PBV RPG2 concerns construction outside building zones The objective is to limit growth to a maximum of 2% The PBV brings",
+          "date": "2026-10-23T01:44:38.536Z"
+        },
+        {
           "title": "Thurgau: personnel search and lari protection services",
           "url": "/en/thurgau-articles/thurgau-services-employers/",
           "excerpt": "The Canton of Thurgau makes the RAV offices in Amriswil, Frauenfeld and Kreuzlingen and the arbeit.swiss portal available to employers for vacancy vacancy",
@@ -193,12 +199,6 @@
           "url": "/en/thurgau-articles/weekend-events-thurgau/",
           "excerpt": "Events in Thurgau every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
           "date": "2026-10-17T11:31:41.357Z"
-        },
-        {
-          "title": "13th AVS pension paid with the December 2026 pension",
-          "url": "/en/thurgau-articles/thirteenth-ahv-pension-2026/",
-          "excerpt": "The 13th AHV pension is paid with the December 2026 pension No applications or formalities are required It is due to anyone receiving an AHV old-age pension",
-          "date": "2026-10-17T09:16:03.959Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T01:54:17.232Z"
     },
     "de": {
       "canton": "TG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau: Revidierte PBV für RPG2 genehmigt",
+          "url": "/de/thurgau-artikel/pbv-rpg2-thurgau-2026/",
+          "excerpt": "Die Regierung hat die revidierte PBV genehmigt RPG2 betrifft Bauten ausserhalb der Bauzonen Ziel ist, das Wachstum auf maximal 2 % zu begrenzen Die PBV fasst",
+          "date": "2026-10-23T01:44:38.536Z"
+        },
+        {
           "title": "Thurgau: Dienstleistungen für die Personalsuche und Schutz lari",
           "url": "/de/thurgau-artikel/thurgau-dienstleistungen-arbeitgeber/",
           "excerpt": "Der Kanton Thurgau stellt Arbeitgebern die RAV-Standorte in Amriswil, Frauenfeld und Kreuzlingen sowie das Portal arbeit.swiss für offene Stellen offene Stellen zur Verfügung",
@@ -292,12 +298,6 @@
           "url": "/de/thurgau-artikel/wochenend-veranstaltungen-thurgau/",
           "excerpt": "Veranstaltungen im Thurgau an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
           "date": "2026-10-17T11:31:41.357Z"
-        },
-        {
-          "title": "13 ① AHV-Rente mit Rente vom Dezember 2026 bezahlt",
-          "url": "/de/thurgau-artikel/dreizehnte-ahv-rente-2026/",
-          "excerpt": "Die 13. AHV-Rente wird zusammen mit der Dezemberrente 2026 ausbezahlt Es ist nicht nötig, einen Antrag zu stellen oder Formalitäten zu erledigen Begünstigt sind",
-          "date": "2026-10-17T09:16:03.959Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T01:54:17.232Z"
     },
     "fr": {
       "canton": "TG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgovie : PBV révisée approuvée pour RPG2",
+          "url": "/fr/articles-thurgovie/pbv-rpg2-thurgovie-2026/",
+          "excerpt": "Le Gouvernement a approuvé la PBV révisée RPG2 concerne les constructions hors des zones à bâtir L’objectif est de limiter la croissance à un maximum de 2%",
+          "date": "2026-10-23T01:44:38.536Z"
+        },
+        {
           "title": "Thurgovie : services de recherche de personnel et protection lari",
           "url": "/fr/articles-thurgovie/thurgovie-services-employeurs/",
           "excerpt": "Le canton de Thurgovie met à la disposition des employeurs les sites RAV d’Amriswil, Frauenfeld et Kreuzlingen ainsi que le portail arbeit.swiss pour les postes vacants postes vacants",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-thurgovie/evenements-week-end-thurgovie/",
           "excerpt": "Événements en Thurgovie chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
           "date": "2026-10-17T11:31:41.357Z"
-        },
-        {
-          "title": "13e rente AVS versée avec la rente de décembre 2026",
-          "url": "/fr/articles-thurgovie/treizieme-rente-avs-2026/",
-          "excerpt": "La 13e rente AVS est versée avec la rente de décembre 2026 Il n’est pas nécessaire de présenter une demande ou d’effectuer des démarches Elle est due",
-          "date": "2026-10-17T09:16:03.959Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T01:54:17.232Z"
     }
   }
 }
