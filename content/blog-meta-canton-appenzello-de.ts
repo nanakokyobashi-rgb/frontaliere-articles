@@ -51,6 +51,9 @@ const blogMetaCantonAppenzelloDe: Record<string, string> = {
     'blog.article.investimenti-tetto-fotovoltaico-2027.title': 'Nettoausgaben 2027: CHF 802\'767; Ausgabenüberschuss von fast CHF 580\'000',
     'blog.article.investimenti-tetto-fotovoltaico-2027.excerpt': 'Für 2027 sind Nettoausgaben von CHF 802\'767 geplant; vorgesehen ist die Sanierung des Dachs der Sporthalle mit Photovoltaik.',
     'blog.article.investimenti-tetto-fotovoltaico-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.appenzello-cooperazione-strategica-2024.title': 'Strategische Zusammenarbeit: Appenzell und St. Gallen auf Kurs',
+    'blog.article.appenzello-cooperazione-strategica-2024.excerpt': 'Die Regierungen der beiden Appenzell sowie der Kantone St.',
+    'blog.article.appenzello-cooperazione-strategica-2024.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAppenzelloDe;
