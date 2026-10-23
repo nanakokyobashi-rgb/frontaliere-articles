@@ -293,6 +293,16 @@
       "requestedAt": "2026-10-22T00:55:35.804Z",
       "lastFailureAt": "2026-10-22T00:55:35.804Z",
       "retryHint": "no-text"
+    },
+    {
+      "articleId": "sanitari-italiani-fuga-svizzera",
+      "title": "Operatori sanitari frontalieri: Como boccheggia",
+      "fallbackImage": "/images/blog/article-confusione-tassa-salute-frontalieri.webp",
+      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial scene with no visible text or logos, b",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-23T15:23:52.650Z",
+      "lastFailureAt": "2026-10-23T15:23:52.650Z"
     }
   ]
 }
