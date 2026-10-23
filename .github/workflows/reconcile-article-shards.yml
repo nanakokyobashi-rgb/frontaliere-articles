@@ -203,9 +203,9 @@ jobs:
           # Ogni lettura dell'API tollera il transitorio degradando verso la
           # scelta PRUDENTE (occupato/tetto raggiunto → rimandare): un blip di
           # rete deve rimandare il backfill al giro dopo, non far diventare
-          # rosso il meccanismo di recupero. per_page=100 (il massimo): con la
-          # pagina corta il conteggio del tetto si troncherebbe proprio nei
-          # giorni ad alto traffico, cioè quando serve.
+          # rosso il meccanismo di recupero. La lista delle run viene paginata
+          # e validata contro total_count: una pagina corta non deve mai far
+          # credere libero un gruppo che potrebbe essere ancora occupato.
           #
           # La concurrency del publisher è PER SHARD, non globale. Contare le
           # run del workflow senza guardare i job faceva attendere un backfill
@@ -216,8 +216,30 @@ jobs:
           active_runs_for_shard() {
             local section="$1"
             local shard="$2"
+            local dispatch_section
+            local runs_pages_json
             local runs_json
-            if ! runs_json="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=100")"; then
+            if ! runs_pages_json="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=100")"; then
+              echo 999
+              return
+            fi
+            if ! runs_json="$(jq -c '
+              . as $pages
+              | if (type == "array" and length > 0)
+                  and all(.[];
+                    type == "object"
+                    and (.workflow_runs | type) == "array"
+                    and (.total_count | type) == "number"
+                    and (.total_count >= 0)
+                    and ((.total_count | floor) == .total_count))
+                  and (($pages | map(.total_count) | unique | length) == 1)
+                  and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
+                then
+                  {workflow_runs: [$pages[].workflow_runs[]]}
+                else
+                  error("workflow run listing incomplete")
+                end
+            ' <<<"$runs_pages_json")"; then
               echo 999
               return
             fi
@@ -230,9 +252,19 @@ jobs:
               fi
               if [ "$(jq '.jobs | length' <<<"$jobs_json")" -eq 0 ]; then
                 # A queued workflow_dispatch exposes the requested section in
-                # its run name; a queued push does not, so fail closed for it.
-                if [ "$run_event" = "workflow_dispatch" ] && [[ "$run_name" != *" / $section / "* ]]; then
-                  continue
+                # the fast-publish run name only when the optional input was
+                # explicit. `auto` (or a malformed/unrecognized name) has no
+                # trustworthy shard, so it remains occupied. Skip only a
+                # clearly different explicit section; a queued push remains a
+                # conservative block as well.
+                if [ "$run_event" = "workflow_dispatch" ]; then
+                  dispatch_section=""
+                  if [[ "$run_name" =~ ^cover-publish-article[[:space:]]/[[:space:]]([^/[:space:]]+)[[:space:]]/[[:space:]]nonce= ]]; then
+                    dispatch_section="${BASH_REMATCH[1]}"
+                    if [ "$dispatch_section" != "auto" ] && [ "$dispatch_section" != "$section" ]; then
+                      continue
+                    fi
+                  fi
                 fi
                 echo 1
                 return

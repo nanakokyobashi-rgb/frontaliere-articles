@@ -20,9 +20,18 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   const guard = workflow.slice(start, end);
 
   assert.match(guard, /actions\/runs\/\$run_id\/jobs\?per_page=100/);
+  assert.match(
+    guard,
+    /gh api --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/runs\?per_page=100"/,
+  );
+  assert.match(guard, /workflow_runs \| length/);
+  assert.match(guard, /total_count/);
   assert.match(guard, /\.name == "resolve"/);
   assert.match(guard, /endswith\(", " \+ \$shard \+ "\)"\)/);
   assert.match(guard, /run_event.*workflow_dispatch/);
+  assert.match(guard, /cover-publish-article\[\[:space:\]\]/);
+  assert.match(guard, /dispatch_section="\$\{BASH_REMATCH\[1\]\}"/);
+  assert.match(guard, /dispatch_section.*!= "auto"/);
   assert.match(
     workflow,
     /while \[ "\$\(active_runs_for_shard "\$section" "\$target_shard"\)" -gt 0 \]/,
