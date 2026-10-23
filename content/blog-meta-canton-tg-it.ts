@@ -51,6 +51,9 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.pbv-rpg2-turgovia-2026.title': 'Turgovia: approvata PBV revisionata per RPG2',
     'blog.article.pbv-rpg2-turgovia-2026.excerpt': 'Il Governo ha approvato la PBV revisionata RPG2 riguarda le costruzioni fuori dalle zone edificabili L\'obiettivo è limitare la crescita a un massimo del 2%',
     'blog.article.pbv-rpg2-turgovia-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.turgovia-modifica-piano-direttore-2027.title': 'Turgovia: modifica piano direttore per sedi economiche',
+    'blog.article.turgovia-modifica-piano-direttore-2027.excerpt': 'Il Canton Turgovia avvia la consultazione sulla revisione del piano direttore per lo sviluppo di commercio e industria.',
+    'blog.article.turgovia-modifica-piano-direttore-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTgIt;
