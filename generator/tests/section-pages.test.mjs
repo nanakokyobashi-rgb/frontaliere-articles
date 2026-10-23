@@ -3531,7 +3531,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(staleRecoveryStep, /-f source_main_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /push_before:/);
   assert.match(wf, /push_after:/);
-  assert.doesNotMatch(wf, /git rev-parse HEAD\^/);
+  assert.match(
+    wf,
+    /previous_revision="\$\(git rev-parse HEAD\^\)"/,
+    'il retry live conserva la revisione precedente per delimitare il push range',
+  );
   assert.match(wf, /group: fast-publish-\$\{\{ matrix\.target\.section \}\}\n\s+cancel-in-progress: false/);
   assert.match(wf, /fail-fast: false/);
   for (const p of ["'content/cantons/**'", "'content/blog-body-canton-*/**'", "'content/blog-meta-canton-*'", "'sections/registry.json'"]) {
