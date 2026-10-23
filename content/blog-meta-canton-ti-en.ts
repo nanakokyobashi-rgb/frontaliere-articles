@@ -60,6 +60,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.frontalieri-ticino-indagine-salari-2026.title': 'Ticino cross-border workers: 55.6% feel underpaid',
     'blog.article.frontalieri-ticino-indagine-salari-2026.excerpt': '1.542 workers responded to the survey in May 2026 55,6% feel they are paid less for the same duties From the provinces of Como and Varese: over 60 thousand',
     'blog.article.frontalieri-ticino-indagine-salari-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.rafforzamento-paghe-frontalieri.title': 'Stronger franc, higher salaries for cross-border workers',
+    'blog.article.rafforzamento-paghe-frontalieri.excerpt': 'The source notes the strengthening of the Swiss franc and higher salaries for cross-border workers, without specifying rates, dates, or amounts.',
+    'blog.article.rafforzamento-paghe-frontalieri.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTiEn;

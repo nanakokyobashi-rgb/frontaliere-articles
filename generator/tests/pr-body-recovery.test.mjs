@@ -389,13 +389,13 @@ test('sandbox prerequisites have bounded apt and AppArmor commands', () => {
   for (const option of [
     'Acquire::http::Timeout=15',
     'Acquire::https::Timeout=15',
-    'Acquire::Retries=1',
+    'Acquire::Retries=2',
     'DPkg::Lock::Timeout=10',
   ]) assert.match(setup, new RegExp(option.replaceAll(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   assert.match(setup, /run_retried 'apt-get update' 45/);
-  assert.match(setup, /run_retried 'apt-get install' 45/);
+  assert.match(setup, /run_retried 'apt-get install' 120/);
   assert.match(setup, /run_retried 'apparmor_parser' 10/);
-  assert.match(setup, /267s \(4m27s\), below five minutes/);
+  assert.match(setup, /417s \(6m57s\), below ten minutes/);
 
   const unboundedLines = [];
   let boundedCommand = false;

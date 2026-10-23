@@ -24,6 +24,12 @@ test('registry reader preserves boolean fields followed by inline comments', () 
   assert.equal(entry.fields.hasCalculator, true);
 });
 
+test('registry reader preserves octal-looking escapes instead of decoding NUL plus digit', () => {
+  const source = String.raw`[{ id: 'octal', image: '/cover.webp', note: 'bad\01' }]`;
+  const [entry] = readArticleRegistry(source, 'fixture.ts');
+  assert.equal(entry.fields.note, String.raw`bad\01`);
+});
+
 test('registry reader fails closed on accessors, dynamic images and duplicate image keys', () => {
   assert.throws(
     () => readArticleRegistry("[{ id: 'accessor', get image() { return '/live.webp'; } }]"),

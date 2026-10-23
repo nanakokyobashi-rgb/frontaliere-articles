@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-23T05:52:42.601Z",
-  "contentHash": "c930f04b253388d95f630701b5b1118123d49cb07b223bc9811841fa76d3e3fc",
+  "updatedAt": "2026-10-23T10:42:39.932Z",
+  "contentHash": "3c82ca7f63300dc9f17a9f4ce016fb52b7a46d9f6f6ef4eaa3f149a9ad5c8570",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -19,7 +19,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-22T23:30:28.996Z",
+      "updatedAt": "2026-10-23T05:06:32.759Z",
       "keyFacts": 0
     },
     {
@@ -100,31 +100,31 @@
             {
               "label": "Bellinzona",
               "value": "8 °C",
-              "detail": "oggi da 6 a 6 °C"
+              "detail": "oggi da 6 a 12 °C"
             },
             {
               "label": "Chiasso",
-              "value": "9 °C",
-              "detail": "oggi da 11 a 11 °C"
+              "value": "8 °C",
+              "detail": "oggi da 9 a 14 °C"
             },
             {
               "label": "Locarno",
               "value": "9 °C",
-              "detail": "oggi da 9 a 9 °C"
+              "detail": "oggi da 8 a 13 °C"
             },
             {
               "label": "Lugano",
-              "value": "8 °C",
-              "detail": "oggi da 11 a 11 °C"
+              "value": "9 °C",
+              "detail": "oggi da 8 a 13 °C"
             },
             {
               "label": "Mendrisio",
               "value": "9 °C",
-              "detail": "oggi da 11 a 11 °C"
+              "detail": "oggi da 8 a 13 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -250,7 +250,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "en": {
       "canton": "TI",
@@ -323,31 +323,31 @@
             {
               "label": "Bellinzona",
               "value": "8 °C",
-              "detail": "today from 6 to 6 °C"
+              "detail": "today from 6 to 12 °C"
             },
             {
               "label": "Chiasso",
-              "value": "9 °C",
-              "detail": "today from 11 to 11 °C"
+              "value": "8 °C",
+              "detail": "today from 9 to 14 °C"
             },
             {
               "label": "Locarno",
               "value": "9 °C",
-              "detail": "today from 9 to 9 °C"
+              "detail": "today from 8 to 13 °C"
             },
             {
               "label": "Lugano",
-              "value": "8 °C",
-              "detail": "today from 11 to 11 °C"
+              "value": "9 °C",
+              "detail": "today from 8 to 13 °C"
             },
             {
               "label": "Mendrisio",
               "value": "9 °C",
-              "detail": "today from 11 to 11 °C"
+              "detail": "today from 8 to 13 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -468,7 +468,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "de": {
       "canton": "TI",
@@ -541,31 +541,31 @@
             {
               "label": "Bellinzona",
               "value": "8 °C",
-              "detail": "heute 6 bis 6 °C"
+              "detail": "heute 6 bis 12 °C"
             },
             {
               "label": "Chiasso",
-              "value": "9 °C",
-              "detail": "heute 11 bis 11 °C"
+              "value": "8 °C",
+              "detail": "heute 9 bis 14 °C"
             },
             {
               "label": "Locarno",
               "value": "9 °C",
-              "detail": "heute 9 bis 9 °C"
+              "detail": "heute 8 bis 13 °C"
             },
             {
               "label": "Lugano",
-              "value": "8 °C",
-              "detail": "heute 11 bis 11 °C"
+              "value": "9 °C",
+              "detail": "heute 8 bis 13 °C"
             },
             {
               "label": "Mendrisio",
               "value": "9 °C",
-              "detail": "heute 11 bis 11 °C"
+              "detail": "heute 8 bis 13 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -686,7 +686,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "fr": {
       "canton": "TI",
@@ -759,31 +759,31 @@
             {
               "label": "Bellinzona",
               "value": "8 °C",
-              "detail": "aujourd’hui de 6 à 6 °C"
+              "detail": "aujourd’hui de 6 à 12 °C"
             },
             {
               "label": "Chiasso",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 11 à 11 °C"
+              "value": "8 °C",
+              "detail": "aujourd’hui de 9 à 14 °C"
             },
             {
               "label": "Locarno",
               "value": "9 °C",
-              "detail": "aujourd’hui de 9 à 9 °C"
+              "detail": "aujourd’hui de 8 à 13 °C"
             },
             {
               "label": "Lugano",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 11 à 11 °C"
+              "value": "9 °C",
+              "detail": "aujourd’hui de 8 à 13 °C"
             },
             {
               "label": "Mendrisio",
               "value": "9 °C",
-              "detail": "aujourd’hui de 11 à 11 °C"
+              "detail": "aujourd’hui de 8 à 13 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -901,7 +901,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     }
   }
 }
