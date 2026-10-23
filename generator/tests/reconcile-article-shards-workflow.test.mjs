@@ -25,7 +25,7 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(guard, /run_event.*workflow_dispatch/);
   assert.match(
     workflow,
-    /while \[ "\$\(active_runs_for_shard "\$section" "\$target_shard"\)" > 0 \]/,
+    /while \[ "\$\(active_runs_for_shard "\$section" "\$target_shard"\)" -gt 0 \]/,
   );
   assert.match(
     workflow,
