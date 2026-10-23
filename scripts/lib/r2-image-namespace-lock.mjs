@@ -37,6 +37,15 @@ function positiveDuration(value, name) {
   return value;
 }
 
+/** Resolve the optional CLI timestamp without admitting empty/non-positive input. */
+export function resolveRequestedLeaseTimestamp(value, now = Date.now()) {
+  if (!Number.isFinite(now) || now < 1) {
+    throw new Error('[r2-image-namespace-lock] fallback lease timestamp must be positive');
+  }
+  const requested = Number(value);
+  return Number.isFinite(requested) && requested >= 1 ? requested : now;
+}
+
 export function parseImageNamespaces(value) {
   const raw = Array.isArray(value) ? value : requiredString(value, '--namespace').split(',');
   const requested = [...new Set(raw.map((namespace) => String(namespace).trim()).filter(Boolean))];
@@ -815,10 +824,7 @@ async function acquireFromCli(namespaces, request, env = process.env) {
   const controller = new AbortController();
   const owner = env.FRONTALIERE_R2_IMAGE_LEASE_OWNER ?? randomUUID();
   const leaseId = env.FRONTALIERE_R2_IMAGE_LEASE_ID ?? randomUUID();
-  const requestedAcquiredAt = Number(env.FRONTALIERE_R2_IMAGE_LEASE_ACQUIRED_AT);
-  const pendingAcquiredAt = Number.isFinite(requestedAcquiredAt) && requestedAcquiredAt >= 1
-    ? requestedAcquiredAt
-    : Date.now();
+  const pendingAcquiredAt = resolveRequestedLeaseTimestamp(env.FRONTALIERE_R2_IMAGE_LEASE_ACQUIRED_AT);
   const pendingLeases = namespaces.map((namespace) => ({
     namespace,
     owner,
