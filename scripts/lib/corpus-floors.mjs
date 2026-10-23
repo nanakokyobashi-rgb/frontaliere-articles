@@ -825,6 +825,20 @@ export function unescapeQuoted(value, quote = "'") {
   return decodeStaticStringLiteral(String(value), quote);
 }
 
+function readSeoStringLiteralField(block, field) {
+  const escapedField = field.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  for (const [quote, body] of [
+    ["'", `(?:[^'\\\\]|\\\\.)*`],
+    ['"', `(?:[^"\\\\]|\\\\.)*`],
+  ]) {
+    const match = block.match(new RegExp(
+      `(?:["']?${escapedField}["']?)\\s*:\\s*${quote}(${body})${quote}`,
+    ));
+    if (match) return unescapeQuoted(match[1], quote);
+  }
+  return undefined;
+}
+
 function collectSeoEntryMetadataInternal(src, into, feedOnly) {
   const positions = findAllSeoEntryMatches(src).map(({ id, index, closeIdx }) => ({
     id,
@@ -835,14 +849,13 @@ function collectSeoEntryMetadataInternal(src, into, feedOnly) {
   for (let i = 0; i < positions.length; i += 1) {
     const { id, start, end } = positions[i];
     const block = src.slice(start, end);
-    const keywordMatch = block.match(/keywords:\s*'((?:[^'\\]|\\.)*)'/);
     const metadata = {
-      keywords: unescapeQuoted(keywordMatch?.[1]),
-      headline: block.match(/"headline":\s*"((?:[^"\\]|\\.)*)"/)?.[1],
-      datePublished: block.match(/"datePublished":\s*"([^"]+)"/)?.[1],
+      keywords: readSeoStringLiteralField(block, 'keywords'),
+      headline: readSeoStringLiteralField(block, 'headline'),
+      datePublished: readSeoStringLiteralField(block, 'datePublished'),
     };
-    const description = unescapeQuoted(block.match(/description:\s*'((?:[^'\\]|\\.)*)'/)?.[1]);
-    const ogDescription = unescapeQuoted(block.match(/ogDescription:\s*'((?:[^'\\]|\\.)*)'/)?.[1]);
+    const description = readSeoStringLiteralField(block, 'description');
+    const ogDescription = readSeoStringLiteralField(block, 'ogDescription');
     if (description !== undefined) metadata.description = description;
     if (ogDescription !== undefined) metadata.ogDescription = ogDescription;
     // Solo il percorso RSS applica la validita' del producer prima del dedupe;

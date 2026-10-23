@@ -54,6 +54,7 @@ import {
 import {
   SEO_DESCRIPTION_MAX,
   SEO_OG_DESCRIPTION_MAX,
+  assertSeoDescriptionMinimum,
   assertHistoricalSeoDescriptionsMigrated,
 } from '../generator/scripts/lib/seo-description-contract.mjs';
 const RSS_SERP_DESCRIPTION_MAX_CHARS = SEO_DESCRIPTION_MAX;
@@ -65,7 +66,9 @@ const repairSerpSnippet = (text) => {
       `build-api: refusing to publish an RSS item without a safe non-empty description within ${RSS_SERP_DESCRIPTION_MAX_CHARS} characters.`,
     );
   }
-  return bounded;
+  return assertSeoDescriptionMinimum(bounded, {
+    sourceDescriptionLength: typeof text === 'string' ? text.length : undefined,
+  });
 };
 const repairSocialSnippet = (text) => {
   const repaired = repairSerpSnippetBase(text);
@@ -156,7 +159,7 @@ import {
 import { cantonHubCoverage, cantonHubTopics, readCantonHubDocument } from './lib/canton-hub-data.mjs';
 import { isReservedPublishedSlug } from './lib/published-slug-guard.mjs';
 // Il corpus nel layout dell'engine, per i feed delle sezioni di famiglia.
-import { createEngineCorpusView, engineViewRssLayout } from './lib/engine-corpus-view.mjs';
+import { createEngineCorpusView, engineViewRssLayout, seoChunkSources } from './lib/engine-corpus-view.mjs';
 // Allowlist dei campi pubblici di articles.json / swiss-articles.json.
 import { toPublicRegistryEntry } from './lib/registry-api-entry.mjs';
 // Detection (not filtering — see its header) for issue #166: surfaces a
@@ -1164,9 +1167,12 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
    */
   const seoTextById = new Map();
   for (const section of RSS_SECTIONS) {
-    for (const file of section.seoFiles) {
-      const fp = path.join(ROOT, 'content', 'seo', file);
-      if (!fs.existsSync(fp)) continue;
+    const { seoDir, files } = seoChunkSources(section);
+    for (const file of files) {
+      const fp = path.join(ROOT, seoDir, file);
+      if (!fs.existsSync(fp)) {
+        throw new Error(`build-api: SEO source missing for ${section.id}: ${path.join(seoDir, file)}`);
+      }
       const src = fs.readFileSync(fp, 'utf-8');
       for (const [id, metadata] of collectSeoEntryMetadata(src)) {
         seoTextById.set(id, metadata);
