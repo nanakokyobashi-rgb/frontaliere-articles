@@ -738,6 +738,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rafforzamento-paghe-frontalieri': {
+    title: 'Franco più forte, stipendi dei frontalieri più pesanti',
+    description: 'La fonte segnala un franco svizzero più forte e stipendi dei frontalieri più pesanti, ma non indica cambio, date o importi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, franco, forte, stipendi, pesanti',
+    ogTitle: 'Franco più forte e stipendi frontalieri',
+    ogDescription: 'Il titolo della fonte collega il rafforzamento del franco svizzero a stipendi più pesanti per i frontalieri. I dati fiscali e previdenziali 2026 aiutano a separare cambio, imposte e contributi, senza quantificare l\'effetto individuale.',
+    canonicalPath: '/articoli-ticino/rafforzamento-paghe-frontalieri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Franco più forte, stipendi dei frontalieri più pesanti",
+      "description": "La fonte segnala un franco svizzero più forte e stipendi dei frontalieri più pesanti, ma non indica cambio, date o importi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-rafforzamento-paghe-frontalieri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T10:32:20+00:00",
+      "dateModified": "2026-10-23T10:32:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/rafforzamento-paghe-frontalieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

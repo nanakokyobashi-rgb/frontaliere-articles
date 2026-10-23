@@ -16477,9 +16477,12 @@ function buildBodyFile(data, locale) {
           }
         : item));
       const faqJson = JSON.stringify(normalizedFaq);
-      // Roundtrip: verify the escaped string produces valid JSON when parsed back
+      // Roundtrip: verify the escaped string produces valid JSON when parsed back.
+      // Decode the generated TS literal once, so JSON escapes such as `\\n`
+      // remain JSON escapes until JSON.parse instead of being re-scanned by a
+      // replace chain.
       const escaped = escapeForSingleQuoteTS(faqJson);
-      const unescaped = escaped.replace(/\\'/g, "'").replace(/\\\\/g, '\\').replace(/\\n/g, '\n');
+      const unescaped = decodeStaticStringLiteral(escaped, "'");
       JSON.parse(unescaped);
       faqLine = `\n    'blog.article.${id}.faq': '${escaped}',`;
     } catch (e) {

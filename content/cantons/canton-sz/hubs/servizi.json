@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-10-23T05:52:42.601Z",
-  "contentHash": "aa2d9c055d43a279d7225ac1c1124f9a028a39481effc2b933f9c493c383b443",
+  "updatedAt": "2026-10-23T10:42:39.932Z",
+  "contentHash": "38f414f4c9a93c20b3e6dbae75d1d01c687e2605743a3b1248153cdb1b0a93cf",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -19,7 +19,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-22T23:30:28.996Z",
+      "updatedAt": "2026-10-23T05:06:32.759Z",
       "keyFacts": 0
     },
     {
@@ -101,12 +101,12 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "5 °C",
-              "detail": "oggi da 5 a 5 °C"
+              "value": "8 °C",
+              "detail": "oggi da 5 a 13 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -219,7 +219,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "en": {
       "canton": "SZ",
@@ -293,12 +293,12 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "5 °C",
-              "detail": "today from 5 to 5 °C"
+              "value": "8 °C",
+              "detail": "today from 5 to 13 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -407,7 +407,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "de": {
       "canton": "SZ",
@@ -481,12 +481,12 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "5 °C",
-              "detail": "heute 5 bis 5 °C"
+              "value": "8 °C",
+              "detail": "heute 5 bis 13 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -595,7 +595,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "fr": {
       "canton": "SZ",
@@ -669,12 +669,12 @@
           "items": [
             {
               "label": "Schwyz",
-              "value": "5 °C",
-              "detail": "aujourd’hui de 5 à 5 °C"
+              "value": "8 °C",
+              "detail": "aujourd’hui de 5 à 13 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -779,7 +779,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     }
   }
 }

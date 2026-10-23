@@ -50,6 +50,7 @@ import {
 import { serializeFaqLiteral, parseFaqLiteral } from '../scripts/fix-faq-locales.mjs';
 
 const SCRIPTS = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'scripts');
+const CREATE_ARTICLE = path.join(SCRIPTS, 'create-article.mjs');
 
 /** Lo scrittore ROTTO, tenuto qui per provare che i casi sotto lo bocciano. */
 const brokenEscape = (faqArray) => JSON.stringify(faqArray).replace(/'/g, "\\'");
@@ -238,6 +239,12 @@ test('i writer TypeScript riusano la coppia canonica di escape', () => {
     assert.match(src, /import \{[^}]*escapeForSingleQuoteTS[^}]*\} from ['"]\.\/lib\/article-meta-block\.mjs['"]/u, file);
     assert.doesNotMatch(src, /(?:function|const)\s+(?:escapeForSingleQuoteTS|escapeTs)\s*[=(]/u, `${file}: copia locale dello writer`);
   }
+});
+
+test('create-article valida la FAQ con il decoder TS canonico, senza rieseguire gli escape JSON', () => {
+  const src = fs.readFileSync(CREATE_ARTICLE, 'utf8');
+  assert.match(src, /decodeStaticStringLiteral\(escaped, "'"\)/u);
+  assert.doesNotMatch(src, /escaped\.replace\(\/\\\\'/u);
 });
 
 // ─────────────────────────────────────────────────────────────────────────────

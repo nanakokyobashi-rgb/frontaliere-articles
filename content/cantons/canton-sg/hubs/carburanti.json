@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T04:35:27.849Z",
-  "contentHash": "a8ebfee02146b29a57568b801ac23ec78c9d4bacd4bee4ee5cef2bb07ae8ceb3",
+  "updatedAt": "2026-10-23T09:15:58.489Z",
+  "contentHash": "727e5c0f9a971668ac7078e82a4443dc9bd82a9a9b4d228ef6203578bc263510",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil: cancellate le sedute del 5 e 12 novembre 2026",
+          "url": "/articoli-san-gallo/wil-sedute-novembre-2026/",
+          "excerpt": "A Wil saltano le sedute del 5 e 12 novembre 2026.",
+          "date": "2026-10-23T08:59:08.998Z"
+        },
+        {
           "title": "San Gallo: terza canna Rosenberg e cifre contestate",
           "url": "/articoli-san-gallo/san-gallo-autostrada-rosenberg-terza-canna/",
           "excerpt": "Sostenitori chiedono ampliamento autostradale; pianificatore Hug-Di Lena definisce discutibili le basi numeriche.",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/voto-rete-gas-wil-2026/",
           "excerpt": "Voto sul fondo: 29 novembre 2026.",
           "date": "2026-10-19T13:03:39.354Z"
-        },
-        {
-          "title": "San Gallo: assistenza ridotta per titolari di Status S",
-          "url": "/articoli-san-gallo/status-s-san-gallo-assistenza/",
-          "excerpt": "La commissione propone assistenza ridotta anche dopo il permesso.",
-          "date": "2026-10-19T12:49:37.837Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T04:35:27.849Z"
+      "updatedAt": "2026-10-23T09:15:58.489Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil: cancel the sessions on November 5 and 12, 2026",
+          "url": "/en/st-gallen-articles/wil-parliament-sessions-cancelled/",
+          "excerpt": "In Wil, the sessions on November 5 and 12, 2026, are canceled.",
+          "date": "2026-10-23T08:59:08.998Z"
+        },
+        {
           "title": "St. Gallen: third Rosenberg tube and disputed figures",
           "url": "/en/st-gallen-articles/st-gallen-highway-rosenberg-third-tube/",
           "excerpt": "Supporters call for highway expansion; planner Hug-Di Lena deems the numerical bases questionable.",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/gas-network-vote-wil-2026/",
           "excerpt": "Vote on the fund: November 29, 2026.",
           "date": "2026-10-19T13:03:39.354Z"
-        },
-        {
-          "title": "St. Gallen: reduced assistance for Status S holders",
-          "url": "/en/st-gallen-articles/status-s-st-gallen-assistance/",
-          "excerpt": "The commission proposes reduced assistance even after the permit.",
-          "date": "2026-10-19T12:49:37.837Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T04:35:27.849Z"
+      "updatedAt": "2026-10-23T09:15:58.489Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil: Sitzungen am 5. und 12. November 2026 abgesagt",
+          "url": "/de/st-gallen-artikel/wil-parlament-sitzungen-abgesagt/",
+          "excerpt": "In Wil fallen die Sitzungen am 5.",
+          "date": "2026-10-23T08:59:08.998Z"
+        },
+        {
           "title": "St. Gallen: dritte Röhre am Rosenberg und umstrittene Zahlen",
           "url": "/de/st-gallen-artikel/st-gallen-autobahn-rosenberg-dritte-roehre/",
           "excerpt": "Befürworter fordern Autobahnausbau; der Planer Hug-Di Lena bezeichnet die Zahlengrundlage als fragwürdig.",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/gasnetz-abstimmung-wil-2026/",
           "excerpt": "Abstimmung über den Fonds: 29.",
           "date": "2026-10-19T13:03:39.354Z"
-        },
-        {
-          "title": "St. Gallen: reduzierte Unterstützung für Personen mit Status S",
-          "url": "/de/st-gallen-artikel/status-s-st-gallen-unterstuetzung/",
-          "excerpt": "Die Kommission schlägt vor, auch nach der Erteilung der Aufenthaltsbewilligung reduzierte Unterstützung zu gewähren.",
-          "date": "2026-10-19T12:49:37.837Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T04:35:27.849Z"
+      "updatedAt": "2026-10-23T09:15:58.489Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Wil : séances des 5 et 12 novembre 2026 annulées",
+          "url": "/fr/articles-saint-gall/wil-seances-parlement-novembre/",
+          "excerpt": "À Wil, les séances des 5 et 12 novembre 2026 sont annulées.",
+          "date": "2026-10-23T08:59:08.998Z"
+        },
+        {
           "title": "Saint-Gall : troisième tube du Rosenberg et chiffres contestés",
           "url": "/fr/articles-saint-gall/saint-gall-autoroute-rosenberg-troisieme-tube/",
           "excerpt": "Les partisans demandent un élargissement de l’autoroute ; le planificateur Hug-Di Lena juge les bases chiffrées discutables.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/vote-reseau-gaz-wil-2026/",
           "excerpt": "Vote sur le fonds : 29 novembre 2026.",
           "date": "2026-10-19T13:03:39.354Z"
-        },
-        {
-          "title": "Saint-Gall : aide réduite pour les titulaires du statut S",
-          "url": "/fr/articles-saint-gall/statut-s-saint-gall-assistance/",
-          "excerpt": "La commission propose une aide réduite même après le permis.",
-          "date": "2026-10-19T12:49:37.837Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T04:35:27.849Z"
+      "updatedAt": "2026-10-23T09:15:58.489Z"
     }
   }
 }

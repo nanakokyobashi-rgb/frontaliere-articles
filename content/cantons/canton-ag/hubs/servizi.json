@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-10-23T05:52:42.601Z",
-  "contentHash": "d955ef3c00e9dc43a57c6778f6bbdf23a7f8fffeef8fe590c2768dcbecfbbccc",
+  "updatedAt": "2026-10-23T10:42:39.932Z",
+  "contentHash": "fa98c393085b853afcf435ddefc11a0cc4071351a42a1f7d9a89296ef64a2559",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -19,7 +19,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-22T23:30:28.996Z",
+      "updatedAt": "2026-10-23T05:06:32.759Z",
       "keyFacts": 0
     },
     {
@@ -101,12 +101,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "4 °C",
-              "detail": "oggi da 4 a 4 °C"
+              "value": "5 °C",
+              "detail": "oggi da 4 a 13 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -224,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "en": {
       "canton": "AG",
@@ -298,12 +298,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "4 °C",
-              "detail": "today from 4 to 4 °C"
+              "value": "5 °C",
+              "detail": "today from 4 to 13 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -417,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "de": {
       "canton": "AG",
@@ -491,12 +491,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "4 °C",
-              "detail": "heute 4 bis 4 °C"
+              "value": "5 °C",
+              "detail": "heute 4 bis 13 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -610,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "fr": {
       "canton": "AG",
@@ -684,12 +684,12 @@
           "items": [
             {
               "label": "Aarau",
-              "value": "4 °C",
-              "detail": "aujourd’hui de 4 à 4 °C"
+              "value": "5 °C",
+              "detail": "aujourd’hui de 4 à 13 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -799,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     }
   }
 }
