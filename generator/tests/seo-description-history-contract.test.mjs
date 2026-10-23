@@ -1,5 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import {
   HISTORICAL_SEO_DESCRIPTION_POLICY,
@@ -7,6 +10,8 @@ import {
   SEO_OG_DESCRIPTION_MAX,
   assertHistoricalSeoDescriptionsMigrated,
 } from '../scripts/lib/seo-description-contract.mjs';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
 const repeat = (prefix, length) => `${prefix} ${'testo storico '.repeat(length)}`.slice(0, length);
 
@@ -56,4 +61,14 @@ test('historical SEO policy ignores absent optional fields and rejects malformed
     () => assertHistoricalSeoDescriptionsMigrated([{ id: 'bad', description: 42 }]),
     /bad\.description is not a string/,
   );
+});
+
+test('build-api keeps the RSS summary floor separate from the SERP description floor', () => {
+  const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
+
+  assert.match(build, /const repairRssSnippet = \(text\) => \{/);
+  assert.match(build, /RSS_DESCRIPTION_MAX_CHARS/);
+  assert.doesNotMatch(build, /RSS_SERP_DESCRIPTION_MAX_CHARS/);
+  assert.match(build, /repairSerpSnippet: repairRssSnippet,/);
+  assert.match(build, /projectDescription: repairSerpSnippet,/);
 });
