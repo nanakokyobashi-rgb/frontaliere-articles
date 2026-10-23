@@ -4775,8 +4775,8 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "d55200b0ad5af21e",
-        "corpus": "d55200b0ad5af21e",
+        "site": "5ca7685d06b79210",
+        "corpus": "5ca7685d06b79210",
         "alignedAt": "2026-10-23"
       }
     },
@@ -4784,10 +4784,10 @@
       "path": "generator/data/crawler-cross-repo-contract.json",
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
-      "reason": "La baseline del 2026-10-23 registra lo stesso digest SHA-256 raw sui due lati (342f32d9f579a3de); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
+      "reason": "La baseline del 2026-10-22 registra lo stesso digest SHA-256 raw sui due lati (2dfb65f5c90634dc); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "342f32d9f579a3de",
-        "corpus": "342f32d9f579a3de",
+        "site": "0fb1009dfc9eb220",
+        "corpus": "0fb1009dfc9eb220",
         "alignedAt": "2026-10-23"
       }
     },
@@ -4796,8 +4796,8 @@
       "sitePath": ".github/corpus-workflows/observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "d976afa064e8b72f",
-        "corpus": "d976afa064e8b72f",
+        "site": "382670e473ce7f7a",
+        "corpus": "382670e473ce7f7a",
         "alignedAt": "2026-10-23"
       },
       "couplingSnapshot": [
@@ -4893,7 +4893,7 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "200d78ad094ba783",
+        "corpus": "3a671abd559a6a41",
         "alignedAt": "2026-10-23"
       }
     },
