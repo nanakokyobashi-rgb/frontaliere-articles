@@ -25,10 +25,11 @@
  * coperti dal manifest (`files`, `scope.roots`, `scope.outOfScope`): il caso
  * di gran lunga piu' frequente, per esempio le PR di contenuto sotto
  * `content/`. Altrimenti una chiamata `git/trees?recursive=1` al sito, con il
- * token del job; se GitHub segnala `truncated`, il gate rileggerebbe il tree
- * non ricorsivo un sotto-albero alla volta. Lo sha del blob dei file aggiunti
- * si legge dall'albero di HEAD (`git ls-tree`), che il checkout `blob:none` ha
- * sempre: niente download.
+ * token del job; se GitHub segnala `truncated`, il gate legge il root senza
+ * ricorsione e chiede i sotto-alberi con `recursive=1`, spezzando solo quelli
+ * che risultano ancora troncati. Lo sha del blob dei file aggiunti si legge
+ * dall'albero di HEAD (`git ls-tree`), che il checkout `blob:none` ha sempre:
+ * niente download.
  *
  * ## Fail-closed
  *
@@ -193,30 +194,21 @@ function blobShasFromRecursiveTree(entries, { repo, treeSha }) {
  * Recupera tutti gli sha dei blob senza il limite dell'albero ricorsivo.
  *
  * GitHub non pagina `recursive=1`: quando quel payload e' `truncated`, la via
- * supportata e' leggere il root e ogni sotto-albero senza `recursive`, uno per
- * pagina. La coda evita la ricorsione JS e `seenTrees` impedisce richieste
- * duplicate se una risposta non valida riusa un tree SHA.
+ * supportata e' leggere il root senza `recursive` e poi chiedere i sotto-alberi
+ * con `recursive=1`. Solo un sotto-albero che risulta ancora troncato viene
+ * spezzato a sua volta. In questo modo un repository grande non trasforma il
+ * censimento in una richiesta REST per ogni directory. La coda evita la
+ * ricorsione JS e `seenTrees` impedisce richieste duplicate se più percorsi
+ * condividono un tree SHA.
  */
 export async function siteBlobShasPagination({ repo, ref, token, fetchImpl = fetch, attempts = 3, sleep = (ms) => new Promise((r) => setTimeout(r, ms)) }) {
   const headers = treeHeaders(token);
-  const pending = [ref];
+  const pending = [];
   let nextTree = 0;
   const seenTrees = new Set();
   const shas = new Set();
-  while (nextTree < pending.length) {
-    const treeSha = pending[nextTree++];
-    if (seenTrees.has(treeSha)) continue;
-    seenTrees.add(treeSha);
-    const body = await fetchTreePage({
-      url: treeUrl(repo, treeSha),
-      repo,
-      treeSha,
-      headers,
-      fetchImpl,
-      attempts,
-      sleep,
-    });
-    const entries = readableTreeEntries(body, { repo, treeSha });
+
+  const collectEntries = (entries, treeSha, enqueueTrees) => {
     for (const entry of entries) {
       if (!entry || !['blob', 'tree', 'commit'].includes(entry.type)) {
         throw new Error(`l'albero di ${repo}@${treeSha} contiene una voce con tipo illeggibile`);
@@ -230,9 +222,63 @@ export async function siteBlobShasPagination({ repo, ref, token, fetchImpl = fet
         if (typeof entry.sha !== 'string' || entry.sha.length === 0) {
           throw new Error(`l'albero di ${repo}@${treeSha} contiene un sotto-albero senza SHA leggibile`);
         }
-        pending.push(entry.sha);
+        if (enqueueTrees) pending.push(entry.sha);
       }
     }
+  };
+
+  // Il root e' sempre letto senza ricorsione: il suo payload e' una pagina
+  // completa e ci fornisce la coda dei soli sotto-alberi di primo livello.
+  const rootBody = await fetchTreePage({
+    url: treeUrl(repo, ref),
+    repo,
+    treeSha: ref,
+    headers,
+    fetchImpl,
+    attempts,
+    sleep,
+  });
+  collectEntries(readableTreeEntries(rootBody, { repo, treeSha: ref }), ref, true);
+
+  while (nextTree < pending.length) {
+    const treeSha = pending[nextTree++];
+    if (seenTrees.has(treeSha)) continue;
+    seenTrees.add(treeSha);
+
+    const body = await fetchTreePage({
+      url: treeUrl(repo, treeSha, true),
+      repo,
+      treeSha,
+      headers,
+      fetchImpl,
+      attempts,
+      sleep,
+    });
+
+    if (body?.truncated === false) {
+      // Una risposta ricorsiva completa contiene già tutti i discendenti: non
+      // serve aggiungerli alla coda, e si evita una chiamata per ogni directory.
+      collectEntries(readableTreeEntries(body, { repo, treeSha }), treeSha, false);
+      continue;
+    }
+
+    if (body?.truncated !== true) {
+      throw new Error(`l'albero di ${repo}@${treeSha} non espone un flag \`truncated\` leggibile`);
+    }
+
+    // Un sotto-albero molto grande può essere troncato anche con recursive=1:
+    // in quel solo caso si torna alla pagina non ricorsiva e si prosegue per
+    // i figli, mantenendo il gate fail-closed.
+    const page = await fetchTreePage({
+      url: treeUrl(repo, treeSha),
+      repo,
+      treeSha,
+      headers,
+      fetchImpl,
+      attempts,
+      sleep,
+    });
+    collectEntries(readableTreeEntries(page, { repo, treeSha }), treeSha, true);
   }
   return shas;
 }
