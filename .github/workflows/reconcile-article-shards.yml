@@ -203,13 +203,172 @@ jobs:
           # Ogni lettura dell'API tollera il transitorio degradando verso la
           # scelta PRUDENTE (occupato/tetto raggiunto → rimandare): un blip di
           # rete deve rimandare il backfill al giro dopo, non far diventare
-          # rosso il meccanismo di recupero. per_page=100 (il massimo): con la
-          # pagina corta il conteggio del tetto si troncherebbe proprio nei
-          # giorni ad alto traffico, cioè quando serve.
-          active_runs() {
-            gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=100" \
-              | jq '[.workflow_runs[] | select(.status=="queued" or .status=="in_progress")] | length' \
-              || echo 999
+          # rosso il meccanismo di recupero. La lista delle run viene paginata
+          # e validata contro total_count: una pagina corta non deve mai far
+          # credere libero un gruppo che potrebbe essere ancora occupato.
+          #
+          # La concurrency del publisher è PER SHARD, non globale. Contare le
+          # run del workflow senza guardare i job faceva attendere un backfill
+          # svizzero anche per un publish frontaliere ancora in verifica (e il
+          # budget scadeva con `attempted=0`). Le run ancora in `resolve` o
+          # senza job leggibili restano un blocco conservativo; dopo il resolve
+          # si guarda solo il job publish con il nome verificabile che termina
+          # con lo shard target. Gli stati sono una sorgente unica per il
+          # filtro delle run e dei job: uno stato Actions non riconosciuto è
+          # un payload non interpretabile e quindi resta fail-closed.
+          IN_FLIGHT_STATUSES='["queued","in_progress","requested","waiting","pending"]'
+          ACTION_TERMINAL_STATUS='completed'
+          active_runs_for_shard() {
+            local section="$1"
+            local shard="$2"
+            local dispatch_section
+            local runs_pages_json
+            local runs_json
+            if ! runs_pages_json="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=100")"; then
+              echo 999
+              return
+            fi
+            if ! runs_json="$(jq -c --argjson in_flight "$IN_FLIGHT_STATUSES" --arg terminal "$ACTION_TERMINAL_STATUS" '
+              . as $pages
+              | if (type == "array" and length > 0)
+                  and all(.[];
+                    type == "object"
+                    and (.workflow_runs | type) == "array"
+                    and (.total_count | type) == "number"
+                    and (.total_count >= 0)
+                    and ((.total_count | floor) == .total_count)
+                    and all(.workflow_runs[];
+                      type == "object"
+                      and (.id | type) == "number"
+                      and (.id >= 1)
+                      and ((.id | floor) == .id)
+                      and (.status | type) == "string"
+                      and (.status as $status
+                        | (($in_flight | index($status)) != null or $status == $terminal))
+                      and (.event | type) == "string"
+                      and (.event | length) > 0
+                      and (.name | type) == "string"
+                      and (.name | length) > 0
+                      and (.display_title | type) == "string"
+                      and (.display_title | length) > 0
+                    ))
+                  and (($pages | map(.total_count) | unique | length) == 1)
+                  and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
+                then
+                  {workflow_runs: [$pages[].workflow_runs[]]}
+                else
+                  error("workflow run listing incomplete")
+                end
+            ' <<<"$runs_pages_json")"; then
+              echo 999
+              return
+            fi
+            while IFS=$'\t' read -r run_id run_event run_name; do
+              if [ -z "$run_id" ] || [ -z "$run_event" ] || [ -z "$run_name" ]; then
+                echo 999
+                return
+              fi
+              local jobs_pages_json
+              local jobs_json
+              if ! jobs_pages_json="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/jobs?per_page=100")"; then
+                echo 999
+                return
+              fi
+              if ! jobs_json="$(jq -c --argjson in_flight "$IN_FLIGHT_STATUSES" --arg terminal "$ACTION_TERMINAL_STATUS" '
+                . as $pages
+                | if (type == "array" and length > 0)
+                    and all(.[];
+                      type == "object"
+                      and (.jobs | type) == "array"
+                      and (.total_count | type) == "number"
+                      and (.total_count >= 0)
+                      and ((.total_count | floor) == .total_count)
+                      and all(.jobs[];
+                        type == "object"
+                        and (.id | type) == "number"
+                        and (.id >= 1)
+                        and ((.id | floor) == .id)
+                        and (.status | type) == "string"
+                        and (.status as $status
+                          | (($in_flight | index($status)) != null or $status == $terminal))
+                        and (.name | type) == "string"
+                        and (.name | length) > 0
+                      )
+                    )
+                    and (($pages | map(.total_count) | unique | length) == 1)
+                    and (($pages | map(.jobs | length) | add) == $pages[0].total_count)
+                  then
+                    {jobs: [$pages[].jobs[]]}
+                  else
+                    error("workflow job listing incomplete")
+                  end
+              ' <<<"$jobs_pages_json")"; then
+                echo 999
+                return
+              fi
+              if [ "$(jq '.jobs | length' <<<"$jobs_json")" -eq 0 ]; then
+                # An in-flight workflow_dispatch exposes the requested section in
+                # the fast-publish run name only when the optional input was
+                # explicit. `auto` (or a malformed/unrecognized name) has no
+                # trustworthy shard, so it remains occupied. Skip only a
+                # clearly different explicit section; a queued push remains a
+                # conservative block as well.
+                if [ "$run_event" = "workflow_dispatch" ]; then
+                  dispatch_section=""
+                  if [[ "$run_name" =~ ^cover-publish-article[[:space:]]/[[:space:]]([^/[:space:]]+)[[:space:]]/[[:space:]]nonce= ]]; then
+                    dispatch_section="${BASH_REMATCH[1]}"
+                    if [ "$dispatch_section" != "auto" ] && [ "$dispatch_section" != "$section" ]; then
+                      continue
+                    fi
+                  fi
+                fi
+                echo 1
+                return
+              fi
+              local job_state
+              if ! job_state="$(jq -r --arg shard "$shard" --argjson in_flight "$IN_FLIGHT_STATUSES" '
+                [
+                  .jobs[]
+                  | .status as $status
+                  | select(($in_flight | index($status)) != null)
+                  | if .name == "resolve" then "resolve"
+                    elif (.name | test("^publish \\(shard, .+\\)$"))
+                      then (if .name == ("publish (shard, " + $shard + ")") then "publish-target" else "publish-other" end)
+                    else "unknown"
+                    end
+                ]
+                | if any(.[]; . == "unknown") then "unknown"
+                  elif any(.[]; . == "resolve" or . == "publish-target") then "occupied"
+                  elif any(.[]; . == "publish-other") then "free"
+                  else "no-active-job"
+                  end
+              ' <<<"$jobs_json")"; then
+                echo 999
+                return
+              fi
+              case "$job_state" in
+                occupied)
+                  echo 1
+                  return
+                  ;;
+                unknown|no-active-job)
+                  echo 999
+                  return
+                  ;;
+                free)
+                  ;;
+                *)
+                  echo 999
+                  return
+                  ;;
+              esac
+            done < <(
+              jq -r --argjson in_flight "$IN_FLIGHT_STATUSES" '.workflow_runs[]
+                | .status as $status
+                | select(($in_flight | index($status)) != null)
+                | [.id, .event, .display_title] | @tsv' <<<"$runs_json"
+            )
+            echo 0
           }
 
           # Tetto assoluto: quanti dispatch di fast-publish nell'ultima ora.
@@ -224,7 +383,7 @@ jobs:
 
           failed=0
           if [ "$deferred" = "false" ]; then
-          while IFS=$'\t' read -r id section; do
+          while IFS=$'\t' read -r id section target_shard; do
             [ -n "$id" ] || continue
 
             if [ "$(elapsed)" -ge "$SOFT_BUDGET" ]; then
@@ -235,9 +394,9 @@ jobs:
             # La concurrency di fast-publish tiene UNA sola run pending per
             # gruppo: dispatchare mentre il gruppo è occupato farebbe
             # cancellare i pending più vecchi. Quindi: aspetta il gruppo
-            # libero, poi dispatcha, poi aspetta l'esito.
+            # dello shard target libero, poi dispatcha, poi aspetta l'esito.
             waited=0
-            while [ "$(active_runs)" -gt 0 ]; do
+            while [ "$(active_runs_for_shard "$section" "$target_shard")" -gt 0 ]; do
               if [ "$waited" -ge 900 ] || [ "$(elapsed)" -ge "$HARD_DEADLINE" ]; then
                 echo "::warning::fast-publish occupato da troppo — mi fermo qui; il resto lo conta unprocessed e lo riprende il cron"
                 break 2
@@ -293,7 +452,7 @@ jobs:
             echo "   run $run_id → ${conclusion:-timeout}"
             printf '%s\t%s\t%s\n' "$id" "$section" "${conclusion:-timeout}" >> "$results"
             if [ "${conclusion:-}" != "success" ]; then failed=$((failed + 1)); fi
-          done < <(jq -r '.selected[] | [.id, .section] | @tsv' "$RUNNER_TEMP/reconcile.json")
+          done < <(jq -r '.selected[] | [.id, .section, .shard] | @tsv' "$RUNNER_TEMP/reconcile.json")
           fi
 
           # NIENTE USCITE SILENZIOSE: qualunque strada abbia portato qui
