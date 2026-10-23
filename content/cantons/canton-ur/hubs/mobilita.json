@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-23T10:42:39.932Z",
-  "contentHash": "e52dfdd66d7963b4d4712e71c446c3de5df9916b68a76e451748bd1835b92e6c",
+  "updatedAt": "2026-10-23T12:39:21.184Z",
+  "contentHash": "806c4f8dacd02ba09bd0060eb47a4a33f41de6fd36fe8cb2c50330e9023152fe",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -146,6 +146,12 @@
           "date": "2026-10-08T23:39:16.200Z"
         },
         {
+          "title": "Bristenstrasse: chiusure e orari fino a novembre 2026",
+          "url": "/articoli-uri/bristenstrasse-regimi-traffico-2026/",
+          "excerpt": "Tra Amsteg e St.",
+          "date": "2026-10-23T12:29:59.834Z"
+        },
+        {
           "title": "Trasporti pubblici nel Cantone Uri: zone e abbonamenti",
           "url": "/articoli-svizzera/abbonamenti-trasporti-uri-zone/",
           "excerpt": "Sistema Passepartout nel Cantone Uri: come funzionano le zone, gli abbonamenti annuali e mensili, la metà-prezzo e l'AG delle FFS.",
@@ -181,7 +187,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-23T12:39:21.184Z"
     },
     "en": {
       "canton": "UR",
@@ -310,6 +316,12 @@
           "date": "2026-10-08T23:39:16.200Z"
         },
         {
+          "title": "Bristenstrasse: closures and schedules through November 2026",
+          "url": "/en/uri-articles/bristenstrasse-traffic-rules-2026/",
+          "excerpt": "Between Amsteg and St.",
+          "date": "2026-10-23T12:29:59.834Z"
+        },
+        {
           "title": "Public transport in Canton Uri: zones and season tickets",
           "url": "/en/swiss-articles/uri-canton-transport-zones/",
           "excerpt": "Passepartout system in Canton Uri: how the SBB zones, annual and monthly subscriptions, half-price and AG work.",
@@ -345,7 +357,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-23T12:39:21.184Z"
     },
     "de": {
       "canton": "UR",
@@ -474,6 +486,12 @@
           "date": "2026-10-08T23:39:16.200Z"
         },
         {
+          "title": "Bristenstrasse: Sperrungen und Zeitfenster bis November 2026",
+          "url": "/de/uri-artikel/bristenstrasse-verkehrsregime-2026/",
+          "excerpt": "Zwischen Amsteg und St.",
+          "date": "2026-10-23T12:29:59.834Z"
+        },
+        {
           "title": "Öffentlicher Verkehr im Kanton Uri: Zonen und Abos",
           "url": "/de/schweiz-artikel/abos-nahverkehr-kanton-uri-zonen/",
           "excerpt": "Passepartout-System im Kanton Uri: Funktionsweise der Zonen, Jahres- und Monatsabos, Halbtax und GA der SBB.",
@@ -509,7 +527,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-23T12:39:21.184Z"
     },
     "fr": {
       "canton": "UR",
@@ -638,6 +656,12 @@
           "date": "2026-10-08T23:39:16.200Z"
         },
         {
+          "title": "Bristenstrasse : fermetures et horaires jusqu’en novembre 2026",
+          "url": "/fr/articles-uri/bristenstrasse-regimes-circulation-2026/",
+          "excerpt": "Entre Amsteg et St.",
+          "date": "2026-10-23T12:29:59.834Z"
+        },
+        {
           "title": "Transports publics dans le canton d'Uri : zones et abonnements",
           "url": "/fr/articles-suisse/abonnements-transports-uri-zones/",
           "excerpt": "Système Passepartout dans le canton d'Uri : fonctionnement des zones, abonnements annuels et mensuels, demi-tarif et AG des CFF.",
@@ -673,7 +697,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-23T12:39:21.184Z"
     }
   }
 }
