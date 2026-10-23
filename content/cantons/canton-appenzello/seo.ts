@@ -665,6 +665,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rbh-herisau-piu-risorse': {
+    title: 'Herisau, più risorse per la RBH Hinterland | Frontaliere Ticino',
+    description: 'La RBH Hinterland affronta più casi e una gestione più complessa: Herisau riferisce misure organizzative, strutturali e più posizioni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, herisau, risorse, hinterland, comune',
+    ogTitle: 'RBH Hinterland: più risorse a Herisau',
+    ogDescription: 'Il Consiglio comunale di Herisau descrive una RBH Hinterland alle prese da anni con numeri dei casi in aumento e maggiore complessità. La comunicazione richiama misure organizzative e strutturali, aumenti delle posizioni e un\'analisi esterna.',
+    canonicalPath: '/articoli-appenzello/rbh-herisau-piu-risorse/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Herisau, più risorse per la RBH Hinterland",
+      "description": "La RBH Hinterland affronta più casi e una gestione più complessa: Herisau riferisce misure organizzative, strutturali e più posizioni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-rbh-herisau-piu-risorse.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T12:58:04+00:00",
+      "dateModified": "2026-10-23T12:58:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-appenzello/rbh-herisau-piu-risorse/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
