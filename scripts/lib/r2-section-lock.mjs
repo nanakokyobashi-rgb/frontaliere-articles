@@ -298,7 +298,7 @@ export function createR2Request(env = process.env, { fetchImpl = globalThis.fetc
     try {
       const response = await Promise.race([responsePromise, timeout]);
       const responseNeedsBody = response?.body
-        && ((method === 'GET' || method === 'HEAD')
+        && ((normalizedMethod === 'GET' || normalizedMethod === 'HEAD')
           ? response.status !== 404
           : !(response.status >= 200 && response.status < 300)
             && response.status !== 409 && response.status !== 412);

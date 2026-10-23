@@ -68,3 +68,28 @@ test('R2 transport normalizes method casing and Web Headers before signing', asy
   assert.equal(read().init.headers['x-test-header'], 'preserved');
   assert.equal(read().init.headers['accept-encoding'], 'identity');
 });
+
+test('lowercase GET keeps a successful response body readable', async () => {
+  let cancelled = false;
+  let captured;
+  const request = createR2Request(env, {
+    now: () => new Date('2026-10-20T06:00:00.000Z'),
+    fetchImpl: async (url, init) => {
+      captured = { url, init };
+      return {
+        status: 200,
+        body: { cancel: () => { cancelled = true; } },
+        text: async () => '{"ok":true}',
+      };
+    },
+  });
+
+  const response = await request({
+    method: 'get',
+    key: 'internal/ci/article-chunk-locks/frontaliere.json',
+  });
+
+  assert.equal(captured.init.method, 'GET');
+  assert.equal(await response.text(), '{"ok":true}');
+  assert.equal(cancelled, false);
+});
