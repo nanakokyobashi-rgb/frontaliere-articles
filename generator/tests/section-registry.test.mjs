@@ -1220,7 +1220,12 @@ test('edge: il lease R2 copre il timeout bootstrap massimo e il tombstone resta 
     ?? publishApi.slice(publishApi.indexOf('\n  publish:\n'));
   const publishApiTimeoutMinutes = Number(publishApiJob.match(/^\s+timeout-minutes:\s+(\d+)\s*$/m)?.[1]);
   assert.ok(Number.isFinite(publishApiTimeoutMinutes) && publishApiTimeoutMinutes > 0, 'timeout job publish-api assente');
-  assert.ok(SECTION_BOOTSTRAP_LOCK_TTL_MS > Math.max(fastPublishTimeoutMinutes, publishApiTimeoutMinutes));
+  const longestWorkflowTimeoutMinutes = Math.max(fastPublishTimeoutMinutes, publishApiTimeoutMinutes);
+  const leaseSafetyMarginMinutes = 15;
+  assert.ok(
+    SECTION_BOOTSTRAP_LOCK_TTL_MS >= (longestWorkflowTimeoutMinutes + leaseSafetyMarginMinutes) * 60 * 1000,
+    'il lease R2 deve superare il timeout del producer con margine per il cleanup',
+  );
   assert.equal(BOOTSTRAP_WAIT_MS, 100 * 60 * 1000, 'il bootstrap API deve coprire il budget massimo del producer');
   assert.ok(BOOTSTRAP_WAIT_MS < SECTION_BOOTSTRAP_LOCK_TTL_MS, 'il publisher edge fallisce chiuso prima della scadenza del bootstrap attivo');
   const active = makeSectionBootstrapLock({ section: 'canton-ti', commit: COMMIT, owner: 'test/bootstrap' });
