@@ -47,6 +47,8 @@ test('fast-publish-section mantiene il contratto dispatch esplicito', () => {
 });
 
 test('fast-publish-section mantiene il resolver sotto il limite del parser GitHub', () => {
+  assert.match(workflow, /- name: Materialize resolver from workflow revision/u);
+  assert.match(workflow, /scripts\/ci\/fast-publish-section-resolve\.sh/u);
   const resolve = workflow.slice(
     workflow.indexOf('\n      - name: Resolve sections and article ids'),
     workflow.indexOf('\n      - name: Arm normal push staged replay'),

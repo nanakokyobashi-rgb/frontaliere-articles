@@ -262,8 +262,24 @@ jobs:
             scripts/ci/check-article-source-runtime.mjs
             scripts/lib/npm-ci-retry.sh
             scripts/ci/dispatch-fast-publish-replay.sh
+            scripts/ci/fast-publish-section-resolve.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
+
+      - name: Materialize resolver from workflow revision
+        run: |
+          set -euo pipefail
+          resolver_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-resolve.sh'
+          resolver_target='scripts/ci/fast-publish-section-resolve.sh'
+          if [ ! -f "$resolver_source" ]; then
+            echo "::error::resolver non presente nel checkout della revisione del workflow"
+            exit 1
+          fi
+          # workflow_run puo' aver effettuato il checkout del corpus a una
+          # revisione precedente all'estrazione del resolver. Il codice del
+          # resolver deve pero' sempre provenire dalla revisione che contiene
+          # il workflow; le sorgenti e i dati restano quelli del run pinnato.
+          install -m 0755 "$resolver_source" "$resolver_target"
 
       - name: Set up Node (resolve)
         uses: actions/setup-node@v7
