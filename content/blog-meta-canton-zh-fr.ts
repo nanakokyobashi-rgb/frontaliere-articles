@@ -54,6 +54,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.winterthur-voto-energia.title': 'Winterthur : vote sur 100 millions pour le contracting énergétique',
     'blog.article.winterthur-voto-energia.excerpt': 'À Winterthur, vote en février 2027 sur 100 millions pour le contracting énergétique.',
     'blog.article.winterthur-voto-energia.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.wetzikon-binzacher-kempten-info.title': 'Wetzikon : réunion publique sur Binzacher et Kempten',
+    'blog.article.wetzikon-binzacher-kempten-info.excerpt': 'Le 29 octobre 2026 à 19 h 00, la Ville de Wetzikon et SBB informeront à l\'Alte Turnhalle de la suite concernant l\'installation de stationnement de Binzacher et la gare de Kempten.',
+    'blog.article.wetzikon-binzacher-kempten-info.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZhFr;

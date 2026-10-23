@@ -193,4 +193,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'wetzikon-binzacher-kempten-info',
+ category: 'pratico',
+ date: '2026-10-23T13:48:03.003Z',
+ image: '/images/blog/article-wetzikon-binzacher-kempten-info.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

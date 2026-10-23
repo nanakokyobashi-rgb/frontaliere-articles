@@ -660,6 +660,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-wetzikon-binzacher-kempten-info': {
+    title: 'Wetzikon: incontro pubblico su Binzacher e Kempten',
+    description: 'Il 29 ottobre 2026 alle 19.00, Città di Wetzikon e SBB informano su Binzacher, Kempten, traffico e pianificazione territoriale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, wetzikon, incontro, pubblico, binzacher',
+    ogTitle: 'Wetzikon: incontro su Binzacher e Kempten',
+    ogDescription: 'La Città di Wetzikon e SBB informano il pubblico il 29 ottobre 2026 all\'Alte Turnhalle sul seguito dell\'impianto di sosta Binzacher e della stazione di Kempten con uso multiplo, tra traffico e pianificazione territoriale.',
+    canonicalPath: '/articoli-zurigo/wetzikon-binzacher-kempten-info/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Wetzikon: incontro pubblico su Binzacher e Kempten",
+      "description": "Il 29 ottobre 2026 alle 19.00, Città di Wetzikon e SBB informano su Binzacher, Kempten, traffico e pianificazione territoriale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-wetzikon-binzacher-kempten-info.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T13:48:03+00:00",
+      "dateModified": "2026-10-23T13:48:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/wetzikon-binzacher-kempten-info/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
