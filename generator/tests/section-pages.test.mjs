@@ -3557,6 +3557,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(stagedReplay, /needs\.publish_release_head\.result == 'success'/);
   assert.match(stagedReplay, /Redispatch staged backfill on current main after stale replay or mixed matrix/);
   assert.match(stagedReplay, /TARGET_MATRIX: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/);
+  assert.match(stagedReplay, /ORIGINAL_PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
+  assert.match(stagedReplay, /MIXED_MATRIX: \$\{\{ needs\.publish_release_head\.outputs\.mixed_matrix \}\}/);
   assert.match(stagedReplay, /-f missing_page_paths="\$missing_page_paths"/);
   assert.match(stagedReplay, /-f known_missing_page_paths="\$known_missing_page_paths"/);
   const replayDispatchStep = stagedReplay.slice(
@@ -3583,6 +3585,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(staleRecoveryStep, /bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh "\$REPOSITORY" "\$dispatch_title" --ref main/);
   assert.match(staleRecoveryStep, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(staleRecoveryStep, /-f source_main_commit="\$CURRENT_MAIN"/);
+  assert.match(staleRecoveryStep, /target_matrix="\$TARGET_MATRIX"[\s\S]*MIXED_MATRIX:-false[\s\S]*fast-publish-section\.mjs r2-plan/);
+  assert.match(wf, /PREFLIGHT_BASE_REVISION="\$plan_before"/);
   assert.match(wf, /push_before:/);
   assert.match(wf, /push_after:/);
   assert.match(

@@ -1102,6 +1102,7 @@ jobs:
             fi
             PREFLIGHT_ESBUILD_DIR="$live_preflight_dir" \
               PREFLIGHT_EVENT_NAME="$EVENT_NAME" \
+              PREFLIGHT_BASE_REVISION="$plan_before" \
               PREFLIGHT_PUSH_BASE_REVISION="$plan_before" \
               PREFLIGHT_SCAN_MODE=full \
               node scripts/ci/check-blog-body-syntax.mjs
@@ -1482,7 +1483,9 @@ jobs:
         env:
           REPOSITORY: ${{ github.repository }}
           TARGET_MATRIX: ${{ needs.resolve.outputs.matrix }}
+          ORIGINAL_PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
           CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
+          MIXED_MATRIX: ${{ needs.publish_release_head.outputs.mixed_matrix }}
           DRY: ${{ needs.resolve.outputs.dry }}
           REPLAY_API_AFTER_PUBLISH: ${{ needs.resolve.outputs.replay_api_after_publish }}
           ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
@@ -1499,6 +1502,34 @@ jobs:
             exit 1
           fi
           export GH_TOKEN="$runtime_pat"
+          target_matrix="$TARGET_MATRIX"
+          if [ "${MIXED_MATRIX:-false}" = 'true' ]; then
+            # Una matrice mista non può riusare il piano risolto prima che
+            # main avanzasse: ricostruisci il piano dalla revisione corrente
+            # e dalla base della push originaria prima di redispatchare.
+            if [ "$(git rev-parse --is-shallow-repository)" = 'true' ]; then
+              git fetch --no-tags --unshallow origin main
+            else
+              git fetch --no-tags origin main
+            fi
+            plan_before="${ORIGINAL_PUSH_BEFORE:-}"
+            if [ -z "$plan_before" ] || [[ "$plan_before" =~ ^0+$ ]]; then
+              plan_before="$(git rev-parse "${CURRENT_MAIN}^")"
+            fi
+            if ! [[ "$plan_before" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::error::base della push non valida per il piano mixed-matrix: $plan_before"
+              exit 1
+            fi
+            git checkout --detach "$CURRENT_MAIN"
+            target_matrix="$(git diff --name-status "$plan_before" "$CURRENT_MAIN" \
+              | PUSH_BEFORE="$plan_before" node scripts/ci/fast-publish-section.mjs r2-plan \
+              | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
+            if [ -z "$target_matrix" ] || [ "$target_matrix" = '[]' ]; then
+              echo "::error::il piano ricalcolato sulla HEAD corrente è vuoto"
+              exit 1
+            fi
+            echo "::notice::piano mixed-matrix ricalcolato sulla HEAD $CURRENT_MAIN dalla base $plan_before"
+          fi
           dispatch_nonce_input="${DISPATCH_NONCE:-}"
           dispatched=0
           failed_sections=()
@@ -1528,7 +1559,7 @@ jobs:
               echo "::error::recovery staged non accodato per $section sulla HEAD $CURRENT_MAIN"
               failed_sections+=("$section")
             fi
-          done < <(jq -r '.[] | [.section, ((.ids // []) | tojson), ((.missingPagePaths // []) | tojson), ((.knownMissingPagePaths // []) | tojson), (.bootstrap // false), (.removeStaleCantonRssFeeds // false), (.cleanupInactiveSurface // false)] | @tsv' <<<"$TARGET_MATRIX")
+          done < <(jq -r '.[] | [.section, ((.ids // []) | tojson), ((.missingPagePaths // []) | tojson), ((.knownMissingPagePaths // []) | tojson), (.bootstrap // false), (.removeStaleCantonRssFeeds // false), (.cleanupInactiveSurface // false)] | @tsv' <<<"$target_matrix")
           if (( ${#failed_sections[@]} > 0 )); then
             printf -v failed_sections_csv '%s, ' "${failed_sections[@]}"
             failed_sections_csv="${failed_sections_csv%, }"
