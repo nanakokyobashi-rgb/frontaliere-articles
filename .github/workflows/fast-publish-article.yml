@@ -515,9 +515,12 @@ jobs:
     if: needs.resolve.outputs.skip != 'true'
     runs-on: ubuntu-latest
     # A shard publish can spend ~20 minutes in the Pages/CDN push after the
-    # render has completed. Keep a bounded job, but leave enough headroom for
-    # the observed 30-minute timeout to finish its in-flight upload (#3115).
-    timeout-minutes: 45
+    # render has completed. The job then allows 12 minutes for Pages to serve
+    # the release and 10 minutes for the shared served-content verification,
+    # followed by the purge and re-purge. Keep the job bounded at 60 minutes,
+    # with room for those correctness gates after the observed 30-minute
+    # timeout exhausted its in-flight upload (#3115).
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       matrix:

@@ -17,6 +17,6 @@ function jobBlock(name) {
 
 test('fast-publish-article leaves upload headroom after the render', () => {
   const publish = jobBlock('publish');
-  assert.match(publish, /timeout-minutes: 45/u);
+  assert.match(publish, /timeout-minutes: 60/u);
   assert.match(publish, /Publish to shards and CDN/u);
 });
