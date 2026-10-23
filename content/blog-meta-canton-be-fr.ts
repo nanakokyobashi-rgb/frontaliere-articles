@@ -54,6 +54,9 @@ const blogMetaCantonBeFr: Record<string, string> = {
     'blog.article.energy-tagli-radio-svizzera.title': 'Groupe radiophonique : jusqu’à 15 suppressions de postes annoncées en Suisse',
     'blog.article.energy-tagli-radio-svizzera.excerpt': 'Energy annonce jusqu’à 15 suppressions de postes : le nombre sera décidé après la consultation, tandis que les recettes publicitaires restent sous pression.',
     'blog.article.energy-tagli-radio-svizzera.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.contributi-rotbach-saanen.title': 'Berne approuve des contributions pour Rotbach et Saanen',
+    'blog.article.contributi-rotbach-saanen.excerpt': 'Le gouvernement cantonal approuve environ CHF 590\'000 pour le Rotbach et CHF 720\'000 pour la protection contre les crues à Saanen, dans le canton de Berne.',
+    'blog.article.contributi-rotbach-saanen.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBeFr;

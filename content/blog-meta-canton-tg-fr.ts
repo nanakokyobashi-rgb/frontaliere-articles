@@ -51,6 +51,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.pbv-rpg2-turgovia-2026.title': 'Thurgovie : PBV révisée approuvée pour RPG2',
     'blog.article.pbv-rpg2-turgovia-2026.excerpt': 'Le Gouvernement a approuvé la PBV révisée RPG2 concerne les constructions hors des zones à bâtir L’objectif est de limiter la croissance à un maximum de 2%',
     'blog.article.pbv-rpg2-turgovia-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.turgovia-modifica-piano-direttore-2027.title': 'Thurgovie : modification du plan directeur pour des sites économiques',
+    'blog.article.turgovia-modifica-piano-direttore-2027.excerpt': 'Le canton de Thurgovie lance la consultation sur la révision du plan directeur pour le développement du commerce et de l’industrie.',
+    'blog.article.turgovia-modifica-piano-direttore-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTgFr;

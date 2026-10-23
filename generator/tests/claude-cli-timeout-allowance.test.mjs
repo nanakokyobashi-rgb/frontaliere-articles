@@ -233,6 +233,10 @@ describe('il timeout del CLI claude cresce dentro l\'allowance residua', () => {
     const start = SRC.indexOf('function _hardCallCapMs(model, opts) {');
     const end = SRC.indexOf('\n}\n\n/**\n * Interval between in-flight heartbeat lines.', start);
     assert.ok(start >= 0 && end > start, 'blocco _hardCallCapMs non ritagliabile — aggiornare questo test');
+    const helperStart = SRC.indexOf('function _coerceFiniteDeadlineMs');
+    const helperEnd = SRC.indexOf('\n\n// Public callers', helperStart);
+    assert.ok(helperStart >= 0 && helperEnd > helperStart, 'helper deadline non ritagliabile — aggiornare questo test');
+    const helpers = SRC.slice(helperStart, helperEnd);
     const block = SRC.slice(start, end + 2);
     // eslint-disable-next-line no-new-func
     const hardCallCapMs = new Function(
@@ -244,7 +248,7 @@ describe('il timeout del CLI claude cresce dentro l\'allowance residua', () => {
       'MAX_RETRY_AFTER_MS',
       'HARD_CALL_CAP_GRACE_MS',
       'Date',
-      `${block}\nreturn _hardCallCapMs;`,
+      `${helpers}\n${block}\nreturn _hardCallCapMs;`,
     )(
       () => 'other',
       { LOCAL: 'local', CLAUDE_CLI: 'claude-cli', CODEX_CLI: 'codex-cli' },
@@ -261,6 +265,66 @@ describe('il timeout del CLI claude cresce dentro l\'allowance residua', () => {
       5_000,
       'un cap con deadline non deve aggiungere 60s alla finestra residua: altrimenti il kill esterno puo\' arrivare per primo',
     );
+  });
+
+  it('ignora una deadline non numerica invece di produrre un cap NaN', () => {
+    const start = SRC.indexOf('function _hardCallCapMs(model, opts) {');
+    const end = SRC.indexOf('\n}\n\n/**\n * Interval between in-flight heartbeat lines.', start);
+    assert.ok(start >= 0 && end > start, 'blocco _hardCallCapMs non ritagliabile — aggiornare questo test');
+    const helperStart = SRC.indexOf('function _coerceFiniteDeadlineMs');
+    const helperEnd = SRC.indexOf('\n\n// Public callers', helperStart);
+    assert.ok(helperStart >= 0 && helperEnd > helperStart, 'helper deadline non ritagliabile — aggiornare questo test');
+    const helpers = SRC.slice(helperStart, helperEnd);
+    const block = SRC.slice(start, end + 2);
+    // eslint-disable-next-line no-new-func
+    const hardCallCapMs = new Function(
+      'getProvider',
+      'PROVIDER',
+      'LOCAL_LLM_MAX_TIMEOUT_MS',
+      'CLAUDE_CLI_MAX_TIMEOUT_MS',
+      'CODEX_CLI_MAX_TIMEOUT_MS',
+      'MAX_RETRY_AFTER_MS',
+      'HARD_CALL_CAP_GRACE_MS',
+      'Date',
+      `${helpers}\n${block}\nreturn _hardCallCapMs;`,
+    )(
+      () => 'other',
+      { LOCAL: 'local', CLAUDE_CLI: 'claude-cli', CODEX_CLI: 'codex-cli' },
+      3_000_000,
+      600_000,
+      600_000,
+      120_000,
+      60_000,
+      { now: () => 1_000_000 },
+    );
+
+    const cap = hardCallCapMs('model', {
+      timeout: 30_000,
+      maxRetriesPerModel: 1,
+      deadlineMs: 'not-a-number',
+    });
+
+    assert.equal(cap, hardCallCapMs('model', { timeout: 30_000, maxRetriesPerModel: 1 }));
+    assert.ok(Number.isFinite(cap), 'una deadline non numerica non deve armare setTimeout con NaN');
+  });
+
+  it('normalizza la deadline prima dei consumer Claude e local', () => {
+    assert.match(
+      SRC,
+      /function _coerceFiniteDeadlineMs[\s\S]*?Number\.isFinite\(normalized\)[\s\S]*?function _normalizeDeadlineOptions/,
+      'le opzioni pubbliche devono neutralizzare una deadline non numerica prima del routing',
+    );
+    assert.match(
+      SRC,
+      /const o = _normalizeDeadlineOptions\(\{ \.\.\.DEFAULT_OPTS, \.\.\.opts \}\);/g,
+      'callLLM e callSingleModel devono ricevere opzioni normalizzate',
+    );
+    const localStart = SRC.indexOf('async function _callLocal');
+    const localEnd = SRC.indexOf('\n}\n\n/**\n * Resolve the shared fallback marker', localStart);
+    const claudeStart = SRC.indexOf('async function _callClaudeCli');
+    const claudeEnd = SRC.indexOf('\n}\n// ── Model routing', claudeStart);
+    assert.match(SRC.slice(localStart, localEnd), /_finiteDeadlineMs\(opts\)/);
+    assert.match(SRC.slice(claudeStart, claudeEnd), /_finiteDeadlineMs\(opts\)/);
   });
 });
 

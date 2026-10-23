@@ -27,6 +27,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.claraplatz-basel-cantieri.title': 'Basel, construction work at Claraplatz: shops struggling',
     'blog.article.claraplatz-basel-cantieri.excerpt': 'At Claraplatz, construction sites hit the shops and the kiosk loses 40% of its turnover.',
     'blog.article.claraplatz-basel-cantieri.imageAlt': 'Illustration generated for this article',
+    'blog.article.basilea-cantieri-alle-sei.title': 'Basel Parliament: motion to start construction work at 6',
+    'blog.article.basilea-cantieri-alle-sei.excerpt': 'The Grand Council of Basel has referred a motion to allow construction work from 6 a.m.',
+    'blog.article.basilea-cantieri-alle-sei.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBasileaEn;

@@ -51,6 +51,18 @@
     "canton-ju::https://www.estrepublicain.fr/economie/2026/10/22/frontaliers-la-marque-horlogere-zenith-annonce-la-suppression-d-une-centaine-d-emplois-au-locle": {
       "section": "canton-ju",
       "ts": 1792713808580
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261022-hermes-publie-des-ventes-en-hausse-au-troisieme-partiel.html": {
+      "section": "canton-ju",
+      "ts": 1792722623478
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261022-galenica-confirme-ses-objectifs-annuels-apres-neuf-mois-solides.html": {
+      "section": "canton-ju",
+      "ts": 1792722630319
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261022-kuehne-nagel-releve-une-fois-de-plus-ses-objectifs-annuels.html": {
+      "section": "canton-ju",
+      "ts": 1792722637599
     }
   }
 }

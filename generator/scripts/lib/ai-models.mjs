@@ -6274,7 +6274,8 @@ export function resolverFlapAttemptBudget({
 
 function _flapRetryExhausted(e, attempt, opts) {
   if (!classifyTransientResolver(e)) return false;
-  const remainingMs = opts?.deadlineMs ? opts.deadlineMs - Date.now() : Infinity;
+  const deadlineMs = _finiteDeadlineMs(opts);
+  const remainingMs = deadlineMs === undefined ? Infinity : deadlineMs - Date.now();
   return attempt >= resolverFlapAttemptBudget({
     maxRetriesPerModel: opts.maxRetriesPerModel,
     backoffMs: opts.backoffMs,
@@ -7783,6 +7784,28 @@ async function _getLocalDispatcher(timeoutMs) {
   };
 }
 
+function _coerceFiniteDeadlineMs(value) {
+  if (value === undefined || value === null || (typeof value === 'string' && value.trim() === '')) {
+    return undefined;
+  }
+  const normalized = typeof value === 'string' ? Number(value) : value;
+  return Number.isFinite(normalized) ? normalized : undefined;
+}
+
+function _finiteDeadlineMs(opts) {
+  return _coerceFiniteDeadlineMs(opts?.deadlineMs);
+}
+
+// Public callers may construct options from JSON or environment values. Keep a
+// malformed deadline out of every downstream timeout consumer: arithmetic with
+// a truthy non-number otherwise produces NaN and makes setTimeout fail open.
+function _normalizeDeadlineOptions(opts = {}) {
+  const deadlineMs = opts?.deadlineMs;
+  const normalized = _coerceFiniteDeadlineMs(deadlineMs);
+  if (normalized === deadlineMs) return opts;
+  return { ...opts, deadlineMs: normalized };
+}
+
 async function _callLocal(model, messages, opts) {
   const apiModel = getApiModelId(model); // = getLocalLlmModelId()
   // Raise the timeout floor for slow CPU inference (caller's timeout may be ~60s).
@@ -7804,8 +7827,9 @@ async function _callLocal(model, messages, opts) {
   // l'allowance residua e' grande. clamp( max(baseTimeoutMs, min(remaining ×
   // SHARE, MAX)), 15s, remaining ).
   let timeout = baseTimeoutMs;
-  if (opts.deadlineMs) {
-    const remaining = opts.deadlineMs - Date.now();
+  const deadlineMs = _finiteDeadlineMs(opts);
+  if (deadlineMs !== undefined) {
+    const remaining = deadlineMs - Date.now();
     const quota = Math.min(Math.floor(remaining * LOCAL_LLM_ALLOWANCE_SHARE), LOCAL_LLM_MAX_TIMEOUT_MS);
     timeout = Math.max(15_000, Math.min(Math.max(baseTimeoutMs, quota), remaining));
   }
@@ -7840,8 +7864,9 @@ function _codexFallbackTimeoutMs(opts = {}) {
     Number.isFinite(raw) && raw > 0 ? raw : CODEX_CLI_MAX_TIMEOUT_MS,
     CODEX_CLI_MAX_TIMEOUT_MS,
   );
-  if (!opts.deadlineMs) return configured;
-  const remaining = opts.deadlineMs - Date.now();
+  const deadlineMs = _finiteDeadlineMs(opts);
+  if (deadlineMs === undefined) return configured;
+  const remaining = deadlineMs - Date.now();
   if (remaining <= 0) throw new Error('Codex primary skipped: caller deadline already expired');
   // The minimum is a useful default, never a reason to run past the caller's
   // absolute deadline. A near-expiry caller gets the short amount of time
@@ -7944,7 +7969,8 @@ function _codexTransportError(message) {
 function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
   const socketPath = String(process.env.CODEX_AUTH_BROKER_SOCKET || '').trim();
   if (!socketPath) return Promise.reject(new Error('CODEX_AUTH_BROKER_SOCKET is not configured'));
-  const remaining = Number(deadlineMs) > 0 ? Number(deadlineMs) - Date.now() : Infinity;
+  const deadlineAt = _coerceFiniteDeadlineMs(deadlineMs);
+  const remaining = deadlineAt === undefined ? Infinity : deadlineAt - Date.now();
   if (remaining <= 0) return Promise.reject(new Error('Codex primary skipped: caller deadline already expired'));
   const requestTimeoutMs = Math.min(
     Math.max(1, Number.isFinite(Number(timeoutMs)) ? Number(timeoutMs) : CODEX_CLI_MAX_TIMEOUT_MS),
@@ -7985,7 +8011,7 @@ function _requestCodexExecution({ prompt, timeoutMs, schema, deadlineMs }) {
     const queueWaitMs = _codexBrokerQueueWaitMs();
     const boundedByDeadline = (ms) => {
       if (!Number.isFinite(remaining)) return ms;
-      const left = Number(deadlineMs) - Date.now();
+      const left = deadlineAt - Date.now();
       return Math.max(1, Math.min(ms, left));
     };
     let started = false;
@@ -8162,9 +8188,10 @@ async function _callCodexCli(messages, opts = {}) {
     prompt: _codexPrompt(messages, { jsonOnly: jsonRequest.wantsJson }),
     timeoutMs,
     schema: jsonRequest.schema,
-    deadlineMs: opts.deadlineMs,
+    deadlineMs: _finiteDeadlineMs(opts),
   });
-  if (opts.deadlineMs && Date.now() >= opts.deadlineMs) {
+  const deadlineMs = _finiteDeadlineMs(opts);
+  if (deadlineMs !== undefined && Date.now() >= deadlineMs) {
     throw new Error('Codex primary skipped: caller deadline expired during execution');
   }
   return _validateCodexCliResult(result, {
@@ -8292,8 +8319,9 @@ async function _callClaudeCli(model, messages, opts) {
     // costruzione che una tempesta di timeout sfondi il budget di sezione,
     // qualunque valore prendano il minimo e la soglia del breaker.
     let timeoutMs = baseTimeoutMs;
-    if (opts.deadlineMs) {
-      const remaining = opts.deadlineMs - Date.now();
+    const deadlineMs = _finiteDeadlineMs(opts);
+    if (deadlineMs !== undefined) {
+      const remaining = deadlineMs - Date.now();
       const quota = Math.min(Math.floor(remaining * CLAUDE_CLI_ALLOWANCE_SHARE), CLAUDE_CLI_MAX_TIMEOUT_MS);
       timeoutMs = Math.max(15_000, Math.min(Math.max(baseTimeoutMs, quota), remaining));
     }
@@ -9039,8 +9067,9 @@ function _hardCallCapMs(model, opts) {
   else if (provider === PROVIDER.CODEX_CLI) base = Math.max(base, CODEX_CLI_MAX_TIMEOUT_MS);
   const attempts = Math.max(1, opts?.maxRetriesPerModel || 1);
   let cap = attempts * (base + MAX_RETRY_AFTER_MS) * 2 + HARD_CALL_CAP_GRACE_MS;
-  if (opts?.deadlineMs) {
-    const remaining = opts.deadlineMs - Date.now();
+  const deadlineMs = _finiteDeadlineMs(opts);
+  if (deadlineMs !== undefined) {
+    const remaining = deadlineMs - Date.now();
     // An absolute caller deadline is a hard boundary. The grace above is only
     // for calls without one: adding it here lets an in-flight provider survive
     // past the run deadline and leaves the external workflow kill to collect
@@ -9219,7 +9248,8 @@ async function _callModelWithCodexTransportRetry(model, messages, opts) {
         ? Math.min(backoffRaw, CODEX_TRANSLATION_TRANSPORT_BACKOFF_MS_MAX)
         : CODEX_TRANSLATION_TRANSPORT_BACKOFF_MS_DEFAULT;
       const waitMs = Math.min(backoffBase * (2 ** attempt), CODEX_TRANSLATION_TRANSPORT_BACKOFF_MS_MAX);
-      if (opts.deadlineMs && Date.now() + waitMs >= opts.deadlineMs) throw error;
+      const deadlineMs = _finiteDeadlineMs(opts);
+      if (deadlineMs !== undefined && Date.now() + waitMs >= deadlineMs) throw error;
       await sleep(waitMs);
       attempt += 1;
       // A caller that owns a stricter per-process ledger (the article
@@ -9227,7 +9257,7 @@ async function _callModelWithCodexTransportRetry(model, messages, opts) {
       // it is sent. Returning false keeps the original transport error and
       // lets callLLM continue with the next model in its chain.
       if (typeof opts.onCodexTransportRetry === 'function'
-        && opts.onCodexTransportRetry(opts.deadlineMs) === false) throw error;
+        && opts.onCodexTransportRetry(_finiteDeadlineMs(opts)) === false) throw error;
     }
   }
 }
@@ -9253,7 +9283,7 @@ async function _callModelWithCodexTransportRetry(model, messages, opts) {
  * @returns {Promise<string>} — Text content from the model
  */
 export async function callSingleModel(messages, opts = {}) {
-  const o = { ...DEFAULT_OPTS, ...opts };
+  const o = _normalizeDeadlineOptions({ ...DEFAULT_OPTS, ...opts });
   // Normalizzato una volta sola, qui: da questo punto in giu' `o.recordScore`
   // e' un booleano, per i gate come per chiunque legga le opzioni.
   o.recordScore = coerceRecordScore(o.recordScore);
@@ -9351,7 +9381,8 @@ export async function callLLM(messages, opts = {}) {
     await initScoreStore();
   }
 
-  const o = { ...DEFAULT_OPTS, ...opts };
+  const o = _normalizeDeadlineOptions({ ...DEFAULT_OPTS, ...opts });
+  const deadlineMs = _finiteDeadlineMs(o);
   o.recordScore = coerceRecordScore(o.recordScore);
   o._resolverContext = _newResolverContext();
 
@@ -9490,7 +9521,7 @@ export async function callLLM(messages, opts = {}) {
     // 28611052353: a single such walk alone consumed most of a 109min run
     // before any between-call check got a chance to run. No-op unless the
     // caller opts in via opts.deadlineMs.
-    if (o.deadlineMs && Date.now() > o.deadlineMs) {
+    if (deadlineMs !== undefined && Date.now() > deadlineMs) {
       // Wording matters: classifyExhaustionCause()'s transientRe (below) keys off
       // "timeout"/"aborted" to bucket a cascade's errors as transient (recoverable
       // next run) vs persistent (needs intervention). A budget-exhaustion skip is

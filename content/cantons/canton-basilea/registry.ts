@@ -94,4 +94,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'basilea-cantieri-alle-sei',
+ category: 'novita',
+ date: '2026-10-23T02:22:16.813Z',
+ image: '/images/blog/article-basilea-cantieri-alle-sei.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BASILEA'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

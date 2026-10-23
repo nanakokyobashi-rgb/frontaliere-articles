@@ -660,6 +660,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-contributi-rotbach-saanen': {
+    title: 'Berna approva contributi per Rotbach e Saanen | Frontaliere Ticino',
+    description: 'Il Governo bernese approva circa CHF 590\'000 per il Rotbach e CHF 720\'000 per la protezione dalle piene a Saanen, nel Canton Berna.',
+    keywords: 'frontalieri, ticino, svizzera, italia, berna, approva, contributi, rotbach',
+    ogTitle: 'Berna: contributi per Rotbach e Saanen',
+    ogDescription: 'Il Governo cantonale ha approvato circa CHF 590\'000 per la rivitalizzazione del Rotbach tra Dürrenroth e Walterswil e circa CHF 720\'000 per la protezione dalle piene di Louibach e Turpachbach a Saanen.',
+    canonicalPath: '/articoli-berna/contributi-rotbach-saanen/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Berna approva contributi per Rotbach e Saanen",
+      "description": "Il Governo bernese approva circa CHF 590'000 per il Rotbach e CHF 720'000 per la protezione dalle piene a Saanen, nel Canton Berna.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-contributi-rotbach-saanen.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T02:11:10+00:00",
+      "dateModified": "2026-10-23T02:11:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-berna/contributi-rotbach-saanen/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

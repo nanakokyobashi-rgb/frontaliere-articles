@@ -42,6 +42,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.sbb-sportelli-st-margrethen-uznach.title': 'SBB chiudono gli sportelli a St.Margrethen e Uznach',
     'blog.article.sbb-sportelli-st-margrethen-uznach.excerpt': 'Dall\'inizio del 2027 le SBB puntano sul self-service a St.Margrethen e Uznach: il 3% dei biglietti è ancora venduto allo sportello.',
     'blog.article.sbb-sportelli-st-margrethen-uznach.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.san-gallo-protezione-infrastrutture-critiche.title': 'San Gallo rafforza protezione infrastrutture critiche',
+    'blog.article.san-gallo-protezione-infrastrutture-critiche.excerpt': 'Il Governo di San Gallo rafforza la protezione delle infrastrutture critiche La strategia copre infrastrutture, processi e servizi La resilienza include',
+    'blog.article.san-gallo-protezione-infrastrutture-critiche.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

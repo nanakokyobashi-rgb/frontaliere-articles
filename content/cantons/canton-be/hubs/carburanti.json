@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-22T12:50:23.771Z",
-  "contentHash": "169bd12819167ce83f9cd4a4575b8dbf29c018451cd461e04232049fdde8e541",
+  "updatedAt": "2026-10-23T02:23:53.372Z",
+  "contentHash": "28874b2ffab25362802853129c8dc8baa0f875f6cb9de7163e2dbab94b63cce4",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-21T12:19:56.872Z",
+      "updatedAt": "2026-10-22T12:21:38.892Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Berna approva contributi per Rotbach e Saanen",
+          "url": "/articoli-berna/contributi-rotbach-saanen/",
+          "excerpt": "Il Governo cantonale approva circa CHF 590'000 per il Rotbach e CHF 720'000 per la protezione dalle piene a Saanen, nel Canton Berna.",
+          "date": "2026-10-23T02:11:10.079Z"
+        },
         {
           "title": "Gruppo radiofonico: annunciati fino a 15 tagli in Svizzera",
           "url": "/articoli-berna/energy-tagli-radio-svizzera/",
@@ -82,12 +88,6 @@
           "url": "/articoli-berna/berna-stato-pagina-non-disponibile/",
           "excerpt": "Il contenuto della pagina indicata non risulta disponibile.",
           "date": "2026-10-21T02:11:38.957Z"
-        },
-        {
-          "title": "Weissenbach: cinque feriti nello scontro tra quattro auto",
-          "url": "/articoli-berna/weissenbach-incidente-quattro-auto/",
-          "excerpt": "L'incidente è avvenuto il 19 ottobre 2026 sulla strada principale di Weissenbach, nel Comune di Boltigen: cinque feriti e strada chiusa per quasi due ore.",
-          "date": "2026-10-20T22:21:08.267Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-22T12:50:23.771Z"
+      "updatedAt": "2026-10-23T02:23:53.372Z"
     },
     "en": {
       "canton": "BE",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Bern approves contributions for Rotbach and Saanen",
+          "url": "/en/bern-articles/bern-contributions-rotbach-saanen/",
+          "excerpt": "The cantonal government approves approximately CHF 590'000 for the Rotbach and CHF 720'000 for flood protection in Saanen, in the Canton of Bern.",
+          "date": "2026-10-23T02:11:10.079Z"
+        },
         {
           "title": "Radio group: up to 15 cuts announced in Switzerland",
           "url": "/en/bern-articles/energy-radio-cuts-switzerland/",
@@ -169,12 +175,6 @@
           "url": "/en/bern-articles/bern-page-status-unavailable/",
           "excerpt": "The content of the indicated page is not available.",
           "date": "2026-10-21T02:11:38.957Z"
-        },
-        {
-          "title": "Weissenbach: five injured in collision involving four cars",
-          "url": "/en/bern-articles/weissenbach-four-car-crash/",
-          "excerpt": "The accident occurred on October 19, 2026, on the main road in Weissenbach, in the municipality of Boltigen: five people injured and the road closed for almost two hours.",
-          "date": "2026-10-20T22:21:08.267Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-22T12:50:23.771Z"
+      "updatedAt": "2026-10-23T02:23:53.372Z"
     },
     "de": {
       "canton": "BE",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Bern genehmigt Beiträge für Rotbach und Saanen",
+          "url": "/de/bern-artikel/bern-beitraege-rotbach-saanen/",
+          "excerpt": "Die Kantonsregierung genehmigt rund CHF 590'000 für den Rotbach und CHF 720'000 für den Hochwasserschutz in Saanen im Kanton Bern.",
+          "date": "2026-10-23T02:11:10.079Z"
+        },
         {
           "title": "Radiogruppe: Bis zu 15 Stellen in der Schweiz angekündigt",
           "url": "/de/bern-artikel/energy-radio-stellenabbau-schweiz/",
@@ -256,12 +262,6 @@
           "url": "/de/bern-artikel/bern-seitenstatus-nicht-verfuegbar/",
           "excerpt": "Der Inhalt der angegebenen Seite ist nicht verfügbar.",
           "date": "2026-10-21T02:11:38.957Z"
-        },
-        {
-          "title": "Weissenbach: fünf Verletzte bei einem Zusammenstoß zwischen vier Autos",
-          "url": "/de/bern-artikel/weissenbach-unfall-vier-autos/",
-          "excerpt": "Der Unfall ereignete sich am 19.",
-          "date": "2026-10-20T22:21:08.267Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-22T12:50:23.771Z"
+      "updatedAt": "2026-10-23T02:23:53.372Z"
     },
     "fr": {
       "canton": "BE",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-22T12:21:38.892Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Berne approuve des contributions pour Rotbach et Saanen",
+          "url": "/fr/articles-berne/berne-contributions-rotbach-saanen/",
+          "excerpt": "Le gouvernement cantonal approuve environ CHF 590'000 pour le Rotbach et CHF 720'000 pour la protection contre les crues à Saanen, dans le canton de Berne.",
+          "date": "2026-10-23T02:11:10.079Z"
+        },
         {
           "title": "Groupe radiophonique : jusqu’à 15 suppressions de postes annoncées en Suisse",
           "url": "/fr/articles-berne/energy-radio-suppressions-suisse/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-berne/berne-statut-page-indisponible/",
           "excerpt": "Le contenu de la page indiquée n'est pas disponible.",
           "date": "2026-10-21T02:11:38.957Z"
-        },
-        {
-          "title": "Weissenbach : cinq blessés dans une collision entre quatre voitures",
-          "url": "/fr/articles-berne/weissenbach-accident-quatre-voitures/",
-          "excerpt": "L’accident a eu lieu le 19 octobre 2026 sur la route principale de Weissenbach, dans la commune de Boltigen : cinq blessés et route fermée pendant près de deux heures.",
-          "date": "2026-10-20T22:21:08.267Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-22T12:50:23.771Z"
+      "updatedAt": "2026-10-23T02:23:53.372Z"
     }
   }
 }

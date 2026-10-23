@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T01:54:17.232Z",
-  "contentHash": "b19c1bc53eef77c0e222c357f708b32b869e3426b8137b6b6ac6f179568e7f9e",
+  "updatedAt": "2026-10-23T03:39:45.076Z",
+  "contentHash": "a2b8a66e996e408bcf7f3f548609f592963dae7be63b8d5e779705c11f5444db",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Turgovia: modifica piano direttore per sedi economiche",
+          "url": "/articoli-turgovia/turgovia-modifica-piano-direttore-2027/",
+          "excerpt": "Il Canton Turgovia avvia la consultazione sulla revisione del piano direttore per lo sviluppo di commercio e industria.",
+          "date": "2026-10-23T03:27:25.835Z"
+        },
+        {
           "title": "Turgovia: approvata PBV revisionata per RPG2",
           "url": "/articoli-turgovia/pbv-rpg2-turgovia-2026/",
           "excerpt": "Il Governo ha approvato la PBV revisionata RPG2 riguarda le costruzioni fuori dalle zone edificabili L'obiettivo è limitare la crescita a un massimo del 2%",
@@ -94,12 +100,6 @@
           "url": "/articoli-turgovia/felben-wellhausen-cantiere/",
           "excerpt": "Dal 19 ottobre 2026 a metà luglio 2027, la Hauptstrasse di Felben-Wellhausen sarà risanata: Römerstrasse chiusa a tratti, Römerhof spostata o soppressa.",
           "date": "2026-10-18T03:25:32.644Z"
-        },
-        {
-          "title": "Eventi del weekend in Turgovia: cosa fare sabato e domenica",
-          "url": "/articoli-turgovia/eventi-weekend-turgovia/",
-          "excerpt": "Eventi in Turgovia ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
-          "date": "2026-10-17T11:31:41.357Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T01:54:17.232Z"
+      "updatedAt": "2026-10-23T03:39:45.076Z"
     },
     "en": {
       "canton": "TG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau: amendment to the structure plan for business locations",
+          "url": "/en/thurgau-articles/thurgau-master-plan-revision-2027/",
+          "excerpt": "The Canton of Thurgau launches the consultation on the revision of the structure plan for the development of commerce and industry.",
+          "date": "2026-10-23T03:27:25.835Z"
+        },
+        {
           "title": "Thurgau: revised PBV approved for RPG2",
           "url": "/en/thurgau-articles/pbv-rpg2-thurgau-2026/",
           "excerpt": "The Government approved the revised PBV RPG2 concerns construction outside building zones The objective is to limit growth to a maximum of 2% The PBV brings",
@@ -193,12 +199,6 @@
           "url": "/en/thurgau-articles/felben-wellhausen-road-works/",
           "excerpt": "From October 19, 2026 to mid-July 2027, Felben-Wellhausen’s Hauptstrasse will be renovated: Römerstrasse closed in sections, Römerhof relocated or discontinued.",
           "date": "2026-10-18T03:25:32.644Z"
-        },
-        {
-          "title": "Weekend events in Thurgau: what to do Saturday & Sunday",
-          "url": "/en/thurgau-articles/weekend-events-thurgau/",
-          "excerpt": "Events in Thurgau every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
-          "date": "2026-10-17T11:31:41.357Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T01:54:17.232Z"
+      "updatedAt": "2026-10-23T03:39:45.076Z"
     },
     "de": {
       "canton": "TG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgau: Änderung des Richtplans für Wirtschaftsstandorte",
+          "url": "/de/thurgau-artikel/thurgau-richtplan-aenderung-2027/",
+          "excerpt": "Der Kanton Thurgau eröffnet die Vernehmlassung zur Überarbeitung des Richtplans für die Entwicklung von Handel und Industrie.",
+          "date": "2026-10-23T03:27:25.835Z"
+        },
+        {
           "title": "Thurgau: Revidierte PBV für RPG2 genehmigt",
           "url": "/de/thurgau-artikel/pbv-rpg2-thurgau-2026/",
           "excerpt": "Die Regierung hat die revidierte PBV genehmigt RPG2 betrifft Bauten ausserhalb der Bauzonen Ziel ist, das Wachstum auf maximal 2 % zu begrenzen Die PBV fasst",
@@ -292,12 +298,6 @@
           "url": "/de/thurgau-artikel/felben-wellhausen-hauptstrasse-sanierung/",
           "excerpt": "Vom 19. Oktober 2026 bis Mitte Juli 2027 wird die Hauptstrasse in Felben-Wellhausen saniert: Die Römerstrasse wird abschnittsweise gesperrt, die Haltestelle Römerhof verlegt oder aufgehoben.",
           "date": "2026-10-18T03:25:32.644Z"
-        },
-        {
-          "title": "Veranstaltungen am Wochenende im Thurgau: was tun Sa & So",
-          "url": "/de/thurgau-artikel/wochenend-veranstaltungen-thurgau/",
-          "excerpt": "Veranstaltungen im Thurgau an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
-          "date": "2026-10-17T11:31:41.357Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T01:54:17.232Z"
+      "updatedAt": "2026-10-23T03:39:45.076Z"
     },
     "fr": {
       "canton": "TG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Thurgovie : modification du plan directeur pour des sites économiques",
+          "url": "/fr/articles-thurgovie/thurgovie-revision-plan-directeur-2027/",
+          "excerpt": "Le canton de Thurgovie lance la consultation sur la révision du plan directeur pour le développement du commerce et de l’industrie.",
+          "date": "2026-10-23T03:27:25.835Z"
+        },
+        {
           "title": "Thurgovie : PBV révisée approuvée pour RPG2",
           "url": "/fr/articles-thurgovie/pbv-rpg2-thurgovie-2026/",
           "excerpt": "Le Gouvernement a approuvé la PBV révisée RPG2 concerne les constructions hors des zones à bâtir L’objectif est de limiter la croissance à un maximum de 2%",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-thurgovie/felben-wellhausen-travaux-route/",
           "excerpt": "Du 19 octobre 2026 à la mi-juillet 2027, la Hauptstrasse de Felben-Wellhausen sera assainie : Römerstrasse fermée par tronçons, Römerhof déplacé ou supprimé.",
           "date": "2026-10-18T03:25:32.644Z"
-        },
-        {
-          "title": "Événements du week-end en Thurgovie : que faire samedi & dimanche",
-          "url": "/fr/articles-thurgovie/evenements-week-end-thurgovie/",
-          "excerpt": "Événements en Thurgovie chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
-          "date": "2026-10-17T11:31:41.357Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T01:54:17.232Z"
+      "updatedAt": "2026-10-23T03:39:45.076Z"
     }
   }
 }

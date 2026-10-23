@@ -51,6 +51,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.pbv-rpg2-turgovia-2026.title': 'Thurgau: Revidierte PBV für RPG2 genehmigt',
     'blog.article.pbv-rpg2-turgovia-2026.excerpt': 'Die Regierung hat die revidierte PBV genehmigt RPG2 betrifft Bauten ausserhalb der Bauzonen Ziel ist, das Wachstum auf maximal 2 % zu begrenzen Die PBV fasst',
     'blog.article.pbv-rpg2-turgovia-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.turgovia-modifica-piano-direttore-2027.title': 'Thurgau: Änderung des Richtplans für Wirtschaftsstandorte',
+    'blog.article.turgovia-modifica-piano-direttore-2027.excerpt': 'Der Kanton Thurgau eröffnet die Vernehmlassung zur Überarbeitung des Richtplans für die Entwicklung von Handel und Industrie.',
+    'blog.article.turgovia-modifica-piano-direttore-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTgDe;

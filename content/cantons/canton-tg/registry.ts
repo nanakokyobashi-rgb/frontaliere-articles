@@ -182,4 +182,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'turgovia-modifica-piano-direttore-2027',
+ category: 'novita',
+ date: '2026-10-23T03:27:25.835Z',
+ image: '/images/blog/article-turgovia-modifica-piano-direttore-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

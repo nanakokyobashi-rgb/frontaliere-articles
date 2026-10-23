@@ -42,6 +42,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.sbb-sportelli-st-margrethen-uznach.title': 'Les SBB ferment les guichets à St.Margrethen et Uznach',
     'blog.article.sbb-sportelli-st-margrethen-uznach.excerpt': 'À partir du début de 2027, les SBB misent sur le libre-service à St.Margrethen et Uznach : 3% des billets sont encore vendus au guichet.',
     'blog.article.sbb-sportelli-st-margrethen-uznach.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.san-gallo-protezione-infrastrutture-critiche.title': 'Saint-Gall renforce la protection des infrastructures critiques',
+    'blog.article.san-gallo-protezione-infrastrutture-critiche.excerpt': 'Le Gouvernement de Saint-Gall renforce la protection des infrastructures critiques La stratégie couvre les infrastructures, les processus et les services',
+    'blog.article.san-gallo-protezione-infrastrutture-critiche.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSgFr;

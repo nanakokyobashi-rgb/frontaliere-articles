@@ -51,6 +51,9 @@ const blogMetaCantonAppenzelloFr: Record<string, string> = {
     'blog.article.investimenti-tetto-fotovoltaico-2027.title': 'Dépenses nettes 2027 : CHF 802\'767 ; excédent de dépenses de près de CHF 580\'000',
     'blog.article.investimenti-tetto-fotovoltaico-2027.excerpt': 'En 2027, des dépenses nettes de CHF 802\'767 sont prévues ; l’assainissement du toit de la salle de sport avec une installation photovoltaïque est prévu.',
     'blog.article.investimenti-tetto-fotovoltaico-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.appenzello-cooperazione-strategica-2024.title': 'Coopération stratégique : Appenzell et Saint-Gall sur la même longueur d’onde',
+    'blog.article.appenzello-cooperazione-strategica-2024.excerpt': 'Les gouvernements des deux Appenzell, de Saint-Gall et de Thurgovie poursuivent la collaboration décidée en 2024.',
+    'blog.article.appenzello-cooperazione-strategica-2024.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAppenzelloFr;

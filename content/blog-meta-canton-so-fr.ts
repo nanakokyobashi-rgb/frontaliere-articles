@@ -36,6 +36,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.cambio-ora-incidenti-stradali-soletta.title': 'Changement d’heure et risque d’accidents de la route dans le canton de Soleure',
     'blog.article.cambio-ora-incidenti-stradali-soletta.excerpt': '24-25 octobre 2026 : horloges reculées d’une heure La circulation matinale coïncide avec le crépuscule Les chevreuils, les cerfs élaphes et les sangliers sont',
     'blog.article.cambio-ora-incidenti-stradali-soletta.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.polizia-soletta-comunicazione-media-droni.title': 'Police de Soleure : communication 365 jours et interdiction des drones à 300 m',
+    'blog.article.polizia-soletta-comunicazione-media-droni.excerpt': 'Le service médias fonctionne 365 jours par an L’équipe gère X, Facebook et Instagram Lors des grands événements, un membre est présent sur place L’interdiction',
+    'blog.article.polizia-soletta-comunicazione-media-droni.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;

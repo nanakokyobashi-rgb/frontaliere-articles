@@ -431,6 +431,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-polizia-soletta-comunicazione-media-droni': {
+    title: 'Polizia Soletta: comunicazione 365 giorni e divieto droni 300 m',
+    description: 'Il servizio media opera 365 giorni all\'anno Il team gestisce X, Facebook e Instagram Nei grandi eventi un membro è presente sul posto Il divieto',
+    keywords: 'frontalieri, ticino, svizzera, italia, polizia, soletta, comunicazione, giorni',
+    ogTitle: 'Polizia Soletta: media 365 giorni, divieto droni 300 m e netiquette',
+    ogDescription: 'Il servizio media opera 365 giorni all\'anno Il team gestisce X, Facebook e Instagram Nei grandi eventi un membro è presente sul posto Il divieto di droni vale',
+    canonicalPath: '/articoli-soletta/polizia-soletta-comunicazione-media-droni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Polizia Soletta: comunicazione 365 giorni e divieto droni 300 m",
+      "description": "Il servizio media opera 365 giorni all'anno Il team gestisce X, Facebook e Instagram Nei grandi eventi un membro è presente sul posto Il divieto",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-polizia-soletta-comunicazione-media-droni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T03:30:32+00:00",
+      "dateModified": "2026-10-23T03:30:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/polizia-soletta-comunicazione-media-droni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

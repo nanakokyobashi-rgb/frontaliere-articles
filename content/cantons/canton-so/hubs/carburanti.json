@@ -4,8 +4,8 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T00:54:27.534Z",
-  "contentHash": "97b0b9de3b647ee9a426a8077631ba1bf84f9eb8190fc129c630e90165e94fcf",
+  "updatedAt": "2026-10-23T03:45:01.280Z",
+  "contentHash": "e13d0ea1ae02118c53e3c3347e31e5b5f93feb99e336d1ec6a57842431be9a49",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Polizia Soletta: comunicazione 365 giorni e divieto droni 300 m",
+          "url": "/articoli-soletta/polizia-soletta-comunicazione-media-droni/",
+          "excerpt": "Il servizio media opera 365 giorni all'anno Il team gestisce X, Facebook e Instagram Nei grandi eventi un membro è presente sul posto Il divieto di droni vale",
+          "date": "2026-10-23T03:30:32.771Z"
+        },
+        {
           "title": "Cambio d'ora e rischio incidenti stradali nel Canton Soletta",
           "url": "/articoli-soletta/cambio-ora-incidenti-stradali-soletta/",
           "excerpt": "24-25 ottobre 2026: orologi indietro di un'ora Il traffico del mattino coincide con il crepuscolo Caprioli, cervi nobili e cinghiali sono attivi presto",
@@ -94,12 +100,6 @@
           "url": "/articoli-soletta/governo-soletta-ottobre-2026/",
           "excerpt": "NEST, formazione dei docenti, FamEL, polizia a Lugano e dossier al Consiglio cantonale tra i punti della seduta del 20 ottobre 2026.",
           "date": "2026-10-20T15:04:51.328Z"
-        },
-        {
-          "title": "Soletta: Governo approva preventivo 2027, sessione settembre e inchiesta soH",
-          "url": "/articoli-soletta/soletta-parlamento-budget-2027-inchiesta-soh/",
-          "excerpt": "Il Regierungsrat approva il Voranschlag 2027; Kantonsrat in sessione 1-9 settembre con 51 oggetti; GPK pubblica rapporto su irregolarità alla soH.",
-          "date": "2026-10-20T06:13:06.286Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T00:54:27.534Z"
+      "updatedAt": "2026-10-23T03:45:01.280Z"
     },
     "en": {
       "canton": "SO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Solothurn Police: 365-day communication and 300 m drone ban",
+          "url": "/en/solothurn-articles/solothurn-police-communication-media-drones/",
+          "excerpt": "The media service operates 365 days a year The team manages X, Facebook and Instagram At major events, a team member is present on site The drone ban applies",
+          "date": "2026-10-23T03:30:32.771Z"
+        },
+        {
           "title": "Time change and risk of road accidents in the Canton of Solothurn",
           "url": "/en/solothurn-articles/time-change-road-accidents-solothurn/",
           "excerpt": "October 24–25, 2026: clocks go back by one hour Morning traffic coincides with twilight Roe deer, red deer and wild boar are active early Caution",
@@ -193,12 +199,6 @@
           "url": "/en/solothurn-articles/solothurn-government-october-2026/",
           "excerpt": "NEST, teacher training, FamEL, police in Lugano and dossiers before the Cantonal Council among the items on the agenda for the meeting of October 20, 2026.",
           "date": "2026-10-20T15:04:51.328Z"
-        },
-        {
-          "title": "Soleta: Government approves 2027 budget, September session and soH investigation",
-          "url": "/en/solothurn-articles/solothurn-parliament-budget-2027-soh-investigation/",
-          "excerpt": "Regierungsrat approves Voranschlag 2027; Kantonsrat in session 1-9 September with 51 items; GPK publishes report on soH irregularities.",
-          "date": "2026-10-20T06:13:06.286Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T00:54:27.534Z"
+      "updatedAt": "2026-10-23T03:45:01.280Z"
     },
     "de": {
       "canton": "SO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Polizei Solothurn: Kommunikation 365 Tage und Drohnenverbot 300 m",
+          "url": "/de/solothurn-artikel/polizei-solothurn-kommunikation-medien-drohnen/",
+          "excerpt": "Der Mediendienst ist 365 Tage im Jahr tätig Das Team betreut X, Facebook und Instagram Bei Grossanlässen ist ein Mitglied vor Ort Das Drohnenverbot gilt",
+          "date": "2026-10-23T03:30:32.771Z"
+        },
+        {
           "title": "Zeitumstellung und Verkehrsunfallrisiko im Kanton Solothurn",
           "url": "/de/solothurn-artikel/zeitumstellung-strassenunfaelle-solothurn/",
           "excerpt": "24.–25. Oktober 2026: Uhren um eine Stunde zurückgestellt Der morgendliche Verkehr fällt mit der Dämmerung zusammen Rehe, Rothirsche und Wildschweine sind früh",
@@ -292,12 +298,6 @@
           "url": "/de/solothurn-artikel/solothurn-regierungsrat-oktober-2026/",
           "excerpt": "NEST, die Ausbildung der Lehrpersonen, FamEL, die Polizei in Lugano und ein Dossier für den Kantonsrat gehören zu den Traktanden der Sitzung vom 20.",
           "date": "2026-10-20T15:04:51.328Z"
-        },
-        {
-          "title": "Solothurn genehmigt Budget 2027, SOH-Untersuchung",
-          "url": "/de/solothurn-artikel/solothurn-parlament-budget-2027-untersuchung-soh/",
-          "excerpt": "Der Regierungsrat genehmigt den Voranschlag 2027; Kantonsrat in der Sitzung vom 1.",
-          "date": "2026-10-20T06:13:06.286Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T00:54:27.534Z"
+      "updatedAt": "2026-10-23T03:45:01.280Z"
     },
     "fr": {
       "canton": "SO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Police de Soleure : communication 365 jours et interdiction des drones à 300 m",
+          "url": "/fr/articles-soleure/police-soleure-communication-medias-drones/",
+          "excerpt": "Le service médias fonctionne 365 jours par an L’équipe gère X, Facebook et Instagram Lors des grands événements, un membre est présent sur place L’interdiction",
+          "date": "2026-10-23T03:30:32.771Z"
+        },
+        {
           "title": "Changement d’heure et risque d’accidents de la route dans le canton de Soleure",
           "url": "/fr/articles-soleure/changement-heure-accidents-route-soleure/",
           "excerpt": "24-25 octobre 2026 : horloges reculées d’une heure La circulation matinale coïncide avec le crépuscule Les chevreuils, les cerfs élaphes et les sangliers sont",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-soleure/gouvernement-soleure-octobre-2026/",
           "excerpt": "NEST, formation des enseignants, Famel, police à Lugano et dossier au Conseil cantonal entre les points de la séance du 20 octobre 2026.",
           "date": "2026-10-20T15:04:51.328Z"
-        },
-        {
-          "title": "Soleure: le gouvernement approuve le devis 2027 et la session de septembre",
-          "url": "/fr/articles-soleure/soleure-parlement-budget-2027-enquete-soh/",
-          "excerpt": "Le Regierungsrat approuve le Voranschlag 2027 ; Kantonsrat en session 1-9 septembre avec 51 objets ; GPK publie un rapport sur les irrégularités à la soH.",
-          "date": "2026-10-20T06:13:06.286Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T00:54:27.534Z"
+      "updatedAt": "2026-10-23T03:45:01.280Z"
     }
   }
 }

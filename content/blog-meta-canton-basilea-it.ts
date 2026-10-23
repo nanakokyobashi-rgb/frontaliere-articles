@@ -27,6 +27,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.claraplatz-basel-cantieri.title': 'Basilea, cantieri a Claraplatz: negozi in difficoltà',
     'blog.article.claraplatz-basel-cantieri.excerpt': 'A Claraplatz i cantieri colpiscono i negozi e il chiosco perde il 40% del fatturato.',
     'blog.article.claraplatz-basel-cantieri.imageAlt': 'Illustrazione generata per questo articolo',
+    'blog.article.basilea-cantieri-alle-sei.title': 'Parlamento di Basilea: mozione per iniziare i cantieri alle 6',
+    'blog.article.basilea-cantieri-alle-sei.excerpt': 'Il Gran Consiglio di Basilea ha trasmesso una mozione per consentire lavori edili alle 6 da giugno ad agosto; quelli rumorosi resterebbero dalle 7.',
+    'blog.article.basilea-cantieri-alle-sei.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBasileaIt;

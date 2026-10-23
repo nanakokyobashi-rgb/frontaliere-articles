@@ -51,6 +51,9 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.pbv-rpg2-turgovia-2026.title': 'Thurgau: revised PBV approved for RPG2',
     'blog.article.pbv-rpg2-turgovia-2026.excerpt': 'The Government approved the revised PBV RPG2 concerns construction outside building zones The objective is to limit growth to a maximum of 2% The PBV brings',
     'blog.article.pbv-rpg2-turgovia-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.turgovia-modifica-piano-direttore-2027.title': 'Thurgau: amendment to the structure plan for business locations',
+    'blog.article.turgovia-modifica-piano-direttore-2027.excerpt': 'The Canton of Thurgau launches the consultation on the revision of the structure plan for the development of commerce and industry.',
+    'blog.article.turgovia-modifica-piano-direttore-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTgEn;
