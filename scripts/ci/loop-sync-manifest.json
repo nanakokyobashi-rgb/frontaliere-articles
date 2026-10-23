@@ -2048,9 +2048,9 @@
       "mode": "identical",
       "reason": "Riesporta tipizzata clauseTail.mjs e ospita repairSerpSnippet, che l'engine chiama a render time (SiteShellContract) per riparare le description gia' scritte. Stessa ragione di clauseTail.mjs — fuori dall'allowlist del mirror dell'engine — piu' una specifica: generator/tests/seo-clause-truncation.test.mjs lega il letterale della guardia «gia' completo» di repairSerpSnippet, perche' quel .ts non e' importabile da node:test. E' un contratto senza forma di import, la classe che loop-references-exist.test.mjs esiste per coprire. RICONCILIATO il 2026-08-14 insieme a clauseTail.mjs, stessa dinamica (both-moved apparente risolto in fast-forward): qui il delta e' la sola riesportazione tipizzata di `truncateToClauseNonEmpty`. Riallineato il 2026-10-20 alla policy condivisa di 150 caratteri.",
       "baseline": {
-        "site": "a6a7e780f58c78d4",
-        "corpus": "a6a7e780f58c78d4",
-        "alignedAt": "2026-10-20"
+        "site": "7329f1a727b065fe",
+        "corpus": "7329f1a727b065fe",
+        "alignedAt": "2026-10-23"
       }
     },
     {
@@ -2573,9 +2573,9 @@
       "path": "scripts/lib/upload-cdn-file.sh",
       "mode": "identical",
       "baseline": {
-        "site": "4ba724a93b9f7976",
-        "corpus": "4ba724a93b9f7976",
-        "alignedAt": "2026-10-20"
+        "site": "fab46bb05328115d",
+        "corpus": "fab46bb05328115d",
+        "alignedAt": "2026-10-23"
       }
     },
     {
@@ -2591,18 +2591,18 @@
       "path": "scripts/lib/r2-image-namespace-lock.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "1b3225e85d686a57",
-        "corpus": "1b3225e85d686a57",
-        "alignedAt": "2026-10-21"
+        "site": "10316872c6fe8db5",
+        "corpus": "10316872c6fe8db5",
+        "alignedAt": "2026-10-23"
       }
     },
     {
       "path": "scripts/lib/r2-section-lock.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "a1d2d2601321f96b",
-        "corpus": "a1d2d2601321f96b",
-        "alignedAt": "2026-10-20"
+        "site": "e4ec015f13b8b6fb",
+        "corpus": "e4ec015f13b8b6fb",
+        "alignedAt": "2026-10-23"
       }
     },
     {
@@ -3902,9 +3902,9 @@
       "sitePath": "build-plugins/batchWrite.ts",
       "mode": "identical",
       "baseline": {
-        "site": "bcc5a104a2dbbd49",
-        "corpus": "bcc5a104a2dbbd49",
-        "alignedAt": "2026-10-21"
+        "site": "926173cc037c2740",
+        "corpus": "926173cc037c2740",
+        "alignedAt": "2026-10-23"
       }
     },
     {
@@ -4160,9 +4160,9 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "e93c6a89dc08244e",
-        "corpus": "e93c6a89dc08244e",
-        "alignedAt": "2026-09-20"
+        "site": "90c50679a3de0cb8",
+        "corpus": "90c50679a3de0cb8",
+        "alignedAt": "2026-10-23"
       }
     },
     {
@@ -5694,9 +5694,9 @@
       "path": ".github/actions/setup-codex-sandbox/action.yml",
       "mode": "identical",
       "baseline": {
-        "site": "8a37d1030a32e4f4",
-        "corpus": "8a37d1030a32e4f4",
-        "alignedAt": "2026-10-07"
+        "site": "1c973f2ac01a4c57",
+        "corpus": "1c973f2ac01a4c57",
+        "alignedAt": "2026-10-23"
       }
     },
     {
