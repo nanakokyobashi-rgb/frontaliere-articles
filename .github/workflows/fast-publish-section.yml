@@ -562,8 +562,6 @@ jobs:
   publish:
     needs: resolve
     if: needs.resolve.outputs.any == 'true'
-    outputs:
-      rendered_head: ${{ steps.render.outputs.rendered_head }}
     runs-on: ubuntu-latest
     # Il job conserva il budget esteso per i retry del render; il gate bootstrap
     # del publisher API ha invece una finestra bounded breve e lascia il recupero
@@ -1106,8 +1104,9 @@ jobs:
           # snapshot. The original push range remains the publication scope,
           # but a retry that changes its head reruns the plan and both
           # publication preflight gates before rendering that revision. A
-          # staged live release exits successfully with its rendered SHA so
-          # the API replay can start; every other error stays fail-closed.
+          # productive staged live release records its rendered SHA so the
+          # matrix barrier can start the API replay; a dry attempt records no
+          # release and every other error stays fail-closed.
           # workflow_run and bounded replays are redispatched if their pinned
           # source goes stale before render, preserving the source/API
           # freshness invariant.
@@ -1137,8 +1136,23 @@ jobs:
             # dal registro a ogni run. Ritentare l'intero comando e' sicuro:
             # il render riscrive lo stesso scratch e gli upload R2 sono PUT
             # idempotenti sulle stesse chiavi.
+            attempt_dry="$DRY"
+            if [ "$attempt_dry" != 'true' ]; then
+              if [ -f .github/FAST_PUBLISH_DISABLED ]; then
+                echo "::warning::.github/FAST_PUBLISH_DISABLED present on checkout — running dry"
+                attempt_dry=true
+              elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "false" ]; then
+                echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
+                attempt_dry=true
+              fi
+            fi
+            build_publish_args "$attempt_dry"
             bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"
-            echo "rendered_head=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+            if [ "$attempt_dry" != 'true' ]; then
+              echo "rendered_head=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+            else
+              echo "::notice::render completato in dry-run: nessuna HEAD produttiva per il replay API"
+            fi
             exit 0
           fi
 
@@ -1200,7 +1214,11 @@ jobs:
               # HEAD, mentre ogni altro errore resta fail-closed.
               rm -f "$RUNNER_TEMP/section-summary.json"
               if RETRY_CMD_ATTEMPTS=2 bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs "${args[@]}"; then
-                echo "rendered_head=$EXPECTED_MAIN_HEAD" >> "$GITHUB_OUTPUT"
+                if [ "$attempt_dry" != 'true' ]; then
+                  echo "rendered_head=$EXPECTED_MAIN_HEAD" >> "$GITHUB_OUTPUT"
+                else
+                  echo "::notice::render completato in dry-run sulla HEAD $EXPECTED_MAIN_HEAD: nessuna HEAD produttiva per il replay API"
+                fi
                 if jq -e '.deferredLiveRelease == true and .published.deferredReason != null' "$RUNNER_TEMP/section-summary.json" >/dev/null 2>&1; then
                   echo "::notice::staging live completata sulla HEAD $EXPECTED_MAIN_HEAD; chiudo il job per attivare il replay API"
                 fi
@@ -1238,18 +1256,99 @@ jobs:
           [ -s "$s" ] || { echo "nessun summary: il render non e' arrivato in fondo"; exit 0; }
           jq -r '"sezione \(.section) (\(.declaredStatus // "?")): pagine \(.counts | tostring), hub mancanti \(.hubsMissing | tostring), difetti \(.defects | length), pubblicato \(.published | tostring)"' "$s"
 
-  # A push can start the API publisher before the section runner has uploaded
-  # its HTML. After a successful staged section publish, every non-dry push
-  # arms the API replay so an earlier fail-closed readiness check cannot strand
-  # the registry on the previous release. API-triggered replays are excluded
-  # to prevent a workflow_run loop; genuine render errors still block replay.
-  replay-api-after-staged-release:
+      - name: Record publish result
+        if: always()
+        env:
+          SECTION: ${{ matrix.target.section }}
+          RENDERED_HEAD: ${{ steps.render.outputs.rendered_head }}
+          FRESH: ${{ steps.replay_freshness.outputs.fresh }}
+        run: |
+          set -euo pipefail
+          jq -cn \
+            --arg section "$SECTION" \
+            --arg rendered_head "${RENDERED_HEAD:-}" \
+            --arg fresh "${FRESH:-}" \
+            '{section: $section, rendered_head: $rendered_head, fresh: $fresh}' \
+            > "$RUNNER_TEMP/fast-publish-result.json"
+
+      - name: Upload publish result
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: fast-publish-result-${{ matrix.target.section }}
+          path: ${{ runner.temp }}/fast-publish-result.json
+          if-no-files-found: error
+
+  # Matrix job outputs are scalar: GitHub keeps the value from whichever leg
+  # finishes last. Compare every leg's recorded productive HEAD before any
+  # API replay, so a release can never announce a mixed R2 surface.
+  publish_release_head:
     needs: [resolve, publish]
     if: >-
       always() &&
       needs.resolve.result == 'success' &&
       needs.publish.result == 'success' &&
-      needs.publish.outputs.rendered_head != '' &&
+      needs.resolve.outputs.dry != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      rendered_head: ${{ steps.collect.outputs.rendered_head }}
+    steps:
+      - name: Download matrix publish results
+        uses: actions/download-artifact@v7
+        with:
+          pattern: fast-publish-result-*
+          path: ${{ runner.temp }}/fast-publish-results
+          merge-multiple: false
+
+      - name: Verify one productive HEAD for the whole matrix
+        id: collect
+        env:
+          EXPECTED_MATRIX: ${{ needs.resolve.outputs.matrix }}
+        run: |
+          set -euo pipefail
+          results_dir="$RUNNER_TEMP/fast-publish-results"
+          mapfile -t result_files < <(find "$results_dir" -type f -name fast-publish-result.json -print)
+          if [ "${#result_files[@]}" -eq 0 ]; then
+            echo "::error::nessun risultato della matrix publish disponibile per il replay API"
+            exit 1
+          fi
+          actual="$(jq -s -c 'map({section, rendered_head, fresh})' "${result_files[@]}")"
+          expected_sections="$(jq -c '[.[].section] | sort' <<<"$EXPECTED_MATRIX")"
+          actual_sections="$(jq -c 'map(.section) | sort' <<<"$actual")"
+          if [ "$actual_sections" != "$expected_sections" ]; then
+            echo "::error::risultati publish incompleti o duplicati: attesi $expected_sections, ricevuti $actual_sections"
+            exit 1
+          fi
+          if jq -e 'all(.[]; (.rendered_head == "" and .fresh == "false"))' <<<"$actual" >/dev/null; then
+            echo "::notice::tutte le leg hanno rilevato un replay stantio; il recovery redispatchato proseguira' sulla HEAD corrente"
+            exit 0
+          fi
+          if ! jq -e 'all(.[]; ((.rendered_head // "") | test("^[a-f0-9]{40}$")))' <<<"$actual" >/dev/null; then
+            echo "::error::almeno una leg della matrix non ha prodotto una HEAD pubblicabile"
+            exit 1
+          fi
+          rendered_head="$(jq -r 'map(.rendered_head) | unique | if length == 1 then .[0] else empty end' <<<"$actual")"
+          if [ -z "$rendered_head" ]; then
+            echo "::error::la matrix publish ha prodotto HEAD diverse: $actual"
+            exit 1
+          fi
+          echo "rendered_head=$rendered_head" >> "$GITHUB_OUTPUT"
+
+  # A push can start the API publisher before the section runner has uploaded
+  # its HTML. After a successful staged section publish, every non-dry push
+  # arms the API replay so an earlier fail-closed readiness check cannot strand
+  # the registry on the previous release. API-triggered replays are excluded
+  # to prevent a workflow_run loop; genuine render errors or mixed matrix HEADs
+  # still block replay.
+  replay-api-after-staged-release:
+    needs: [resolve, publish, publish_release_head]
+    if: >-
+      always() &&
+      needs.resolve.result == 'success' &&
+      needs.publish.result == 'success' &&
+      needs.publish_release_head.result == 'success' &&
+      needs.publish_release_head.outputs.rendered_head != '' &&
       (needs.resolve.outputs.bootstrap == 'true' || needs.resolve.outputs.replay_api_after_publish == 'true') &&
       needs.resolve.outputs.dry != 'true' &&
       github.event_name != 'workflow_run'
@@ -1262,7 +1361,7 @@ jobs:
           # publisher ha renderizzato e caricato le pagine. `main` puo' essere
           # avanzata durante il render; il guard sotto in quel caso lascia il
           # lavoro al run generato dal nuovo push.
-          ref: ${{ needs.publish.outputs.rendered_head || inputs.source_commit || github.sha }}
+          ref: ${{ needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
           fetch-depth: 1
           persist-credentials: false
 
@@ -1294,7 +1393,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
-          SOURCE_COMMIT: ${{ needs.publish.outputs.rendered_head || inputs.source_commit || github.sha }}
+          SOURCE_COMMIT: ${{ needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
         run: |
           set -euo pipefail
           if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
@@ -1412,7 +1511,7 @@ jobs:
         if: steps.replay_freshness.outputs.fresh == 'true'
         env:
           REPOSITORY: ${{ github.repository }}
-          SOURCE_COMMIT: ${{ needs.publish.outputs.rendered_head || inputs.source_commit || github.sha }}
+          SOURCE_COMMIT: ${{ needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
         run: |
           set -euo pipefail
           if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]] \
@@ -1420,20 +1519,35 @@ jobs:
             echo "::error::checkout del replay non coincide con la revisione staged"
             exit 1
           fi
-          git fetch --no-tags --depth=1 origin main
-          current_main="$(git rev-parse FETCH_HEAD)"
-          if [ "$current_main" != "$SOURCE_COMMIT" ]; then
-            echo "::notice::main e' avanzata durante il backfill ($SOURCE_COMMIT -> $current_main); nessun replay stantio"
-            exit 0
-          fi
-          readiness="$RUNNER_TEMP/staged-replay-readiness.json"
-          node scripts/reconcile-section-pages.mjs --out "$readiness" --cap 1
-          if [ "$(jq -r 'if .skipped then "true" else "false" end' "$readiness")" = 'true' ] \
-            || [ "$(jq -r '.counts.missingPages' "$readiness")" != '0' ] \
-            || [ "$(jq -r '.counts.unknown' "$readiness")" != '0' ] \
-            || [ "$(jq -r '.counts.manifestUnknown' "$readiness")" != '0' ]; then
-            echo "::notice::replay API rimandato: la verifica globale rileva pagine mancanti o non verificabili"
-            exit 0
+          readiness_attempts=0
+          readiness_ready='false'
+          max_readiness_attempts=3
+          while (( readiness_attempts < max_readiness_attempts )); do
+            readiness_attempts=$((readiness_attempts + 1))
+            git fetch --no-tags --depth=1 origin main
+            current_main="$(git rev-parse FETCH_HEAD)"
+            if [ "$current_main" != "$SOURCE_COMMIT" ]; then
+              echo "::error::main e' avanzata durante il backfill ($SOURCE_COMMIT -> $current_main); replay API non accodato"
+              exit 1
+            fi
+            readiness="$RUNNER_TEMP/staged-replay-readiness.json"
+            node scripts/reconcile-section-pages.mjs --out "$readiness" --cap 1
+            if [ "$(jq -r 'if .skipped then "true" else "false" end' "$readiness")" != 'true' ] \
+              && [ "$(jq -r '.counts.missingPages' "$readiness")" = '0' ] \
+              && [ "$(jq -r '.counts.unknown' "$readiness")" = '0' ] \
+              && [ "$(jq -r '.counts.manifestUnknown' "$readiness")" = '0' ]; then
+              readiness_ready='true'
+              break
+            fi
+            if (( readiness_attempts < max_readiness_attempts )); then
+              retry_delay=$((readiness_attempts * 20))
+              echo "::notice::replay API non ancora dimostrato (tentativo $readiness_attempts/$max_readiness_attempts); ritento tra ${retry_delay}s"
+              sleep "$retry_delay"
+            fi
+          done
+          if [ "$readiness_ready" != 'true' ]; then
+            echo "::error::replay API bloccato: la readiness deferred non e' stata dimostrata dopo $max_readiness_attempts tentativi"
+            exit 1
           fi
           runtime_pat="${GITHUB_PAT_NANAKO:-}"
           if [ -z "$runtime_pat" ]; then
