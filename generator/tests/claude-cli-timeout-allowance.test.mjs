@@ -299,6 +299,25 @@ describe('il timeout del CLI claude cresce dentro l\'allowance residua', () => {
     assert.equal(cap, hardCallCapMs('model', { timeout: 30_000, maxRetriesPerModel: 1 }));
     assert.ok(Number.isFinite(cap), 'una deadline non numerica non deve armare setTimeout con NaN');
   });
+
+  it('normalizza la deadline prima dei consumer Claude e local', () => {
+    assert.match(
+      SRC,
+      /function _normalizeDeadlineOptions\(opts = \{\}\)[\s\S]*?Number\.isFinite\(deadlineMs\)/,
+      'le opzioni pubbliche devono neutralizzare una deadline non numerica prima del routing',
+    );
+    assert.match(
+      SRC,
+      /const o = _normalizeDeadlineOptions\(\{ \.\.\.DEFAULT_OPTS, \.\.\.opts \}\);/g,
+      'callLLM e callSingleModel devono ricevere opzioni normalizzate',
+    );
+    const localStart = SRC.indexOf('async function _callLocal');
+    const localEnd = SRC.indexOf('\n}\n\n/**\n * Resolve the shared fallback marker', localStart);
+    const claudeStart = SRC.indexOf('async function _callClaudeCli');
+    const claudeEnd = SRC.indexOf('\n}\n// ── Model routing', claudeStart);
+    assert.match(SRC.slice(localStart, localEnd), /_finiteDeadlineMs\(opts\)/);
+    assert.match(SRC.slice(claudeStart, claudeEnd), /_finiteDeadlineMs\(opts\)/);
+  });
 });
 
 /**
