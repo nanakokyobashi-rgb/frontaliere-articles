@@ -21,7 +21,7 @@ fi
 main_head=''
 for attempt in 1 2 3; do
   ls_remote_out=''
-  if ls_remote_out="$(timeout 60 git ls-remote --exit-code --refs "$remote" "$ref" 2>/dev/null)"; then
+  if ls_remote_out="$(timeout 60 git ls-remote --refs "$remote" "$ref" 2>/dev/null)"; then
     main_head="$(printf '%s\n' "$ls_remote_out" | awk -v wanted="$ref" '$2 == wanted { print $1; exit }')"
   fi
   if [[ "$main_head" =~ ^[a-f0-9]{40}$ ]]; then

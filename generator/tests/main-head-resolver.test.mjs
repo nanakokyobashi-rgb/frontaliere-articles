@@ -42,7 +42,7 @@ test('read-main-head usa git ls-remote e restituisce la SHA della ref richiesta'
   const { result, callLog } = runWithFakeGit();
   assert.equal(result.status, 0, result.stderr);
   assert.equal(result.stdout, `${MAIN_SHA}\n`);
-  assert.match(callLog, /ls-remote --exit-code --refs origin refs\/heads\/main/);
+  assert.match(callLog, /ls-remote --refs origin refs\/heads\/main/);
   assert.doesNotMatch(readFileSync(HELPER, 'utf8'), /gh api/);
 });
 
