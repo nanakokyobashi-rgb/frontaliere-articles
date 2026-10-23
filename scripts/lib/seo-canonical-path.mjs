@@ -42,6 +42,11 @@ export function readCanonicalPath(block) {
       return { kind: 'unresolved', expression };
     }
     const escaped = expression[cursor++];
+    if (escaped === '0' && /[0-9]/u.test(expression[cursor] || '')) {
+      // Octal-looking NUL escapes are not valid canonical URL text. Fail
+      // closed instead of serializing a control character into JSON-LD.
+      return { kind: 'unresolved', expression };
+    }
     if (Object.hasOwn(simpleEscapes, escaped)) {
       value += simpleEscapes[escaped];
     } else if (escaped === '\n') {
