@@ -67,6 +67,7 @@ on:
       - 'scripts/lib/conditional-cdn-put.sh'
       - 'scripts/ci/fast-publish-section.mjs'
       - 'scripts/ci/dispatch-fast-publish-replay.sh'
+      - 'scripts/ci/read-main-head.sh'
       - 'scripts/ci/resolve-workflow-run-push-range.mjs'
       - 'scripts/ci/retry-cmd.sh'
       - 'scripts/ci/fetch-push-base-if-missing.sh'
@@ -262,6 +263,7 @@ jobs:
             scripts/ci/check-article-source-runtime.mjs
             scripts/lib/npm-ci-retry.sh
             scripts/ci/dispatch-fast-publish-replay.sh
+            scripts/ci/read-main-head.sh
             scripts/ci/fast-publish-section-resolve.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
@@ -621,7 +623,7 @@ jobs:
             echo "::error::revisione pinned non valida per il guard di freschezza"
             exit 1
           fi
-          if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
+          if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
             echo "::error::impossibile verificare la revisione corrente di main prima del replay"
             exit 1
           fi
@@ -900,7 +902,7 @@ jobs:
             pinned_replay_main="$SOURCE_MAIN_COMMIT"
           fi
           if [ -n "$pinned_replay_main" ]; then
-            if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
+            if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
               echo "::error::impossibile verificare la revisione corrente di main prima degli upload"
               exit 1
             fi
@@ -1092,7 +1094,7 @@ jobs:
                 deferred_retry='true'
                 break
               fi
-              if ! current_main="$(gh api "repos/$REPO/git/ref/heads/main" --jq '.object.sha')"; then
+              if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
                 echo "::error::impossibile rileggere la revisione corrente di main dopo un render fallito"
                 exit 1
               fi
@@ -1177,7 +1179,7 @@ jobs:
             echo "::error::source commit non e' una SHA completa per il replay staged"
             exit 1
           fi
-          if ! current_main="$(gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
+          if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
             echo "::error::impossibile verificare main prima del replay API"
             exit 1
           fi

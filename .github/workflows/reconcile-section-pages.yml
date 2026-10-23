@@ -73,7 +73,7 @@ jobs:
           node scripts/reconcile-section-pages.mjs \
             --out "$RUNNER_TEMP/reconcile-sections.json" --cap "${CAP_INPUT:-3}"
           source_commit="$(git rev-parse HEAD)"
-          current_main="$(gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"
+          current_main="$(bash scripts/ci/read-main-head.sh)"
           if ! [[ "$source_commit" =~ ^[a-f0-9]{40}$ ]] || ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
             echo "::error::HEAD del reconcile o HEAD corrente di main non valida"
             exit 1
@@ -298,7 +298,7 @@ jobs:
             echo "::error::HEAD corrente non valida per il replay API bounded"
             exit 1
           fi
-          current_main="$(gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"
+          current_main="$(bash scripts/ci/read-main-head.sh)"
           if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
             echo "::error::HEAD corrente di main non valida per il replay API bounded"
             exit 1

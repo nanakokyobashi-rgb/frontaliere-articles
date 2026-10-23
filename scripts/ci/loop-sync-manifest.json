@@ -239,6 +239,16 @@
       }
     },
     {
+      "path": "scripts/ci/read-main-head.sh",
+      "mode": "corpus-only",
+      "reason": "Lettura fail-closed della punta remota di main via git ls-remote, senza consumare il bucket REST condiviso dai workflow, usata dai guard di freschezza dei publisher di sezione e del loro reconciler. Il sito non possiede questi publisher corpus-side, quindi il helper resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-23"
+      }
+    },
+    {
       "path": "scripts/ci/dispatch-fast-publish-replay.sh",
       "mode": "corpus-only",
       "reason": "Deduplica e riaccoda i replay stale dei workflow fast-publish di sezione dopo aver verificato lo stato reale della run. Il sito non ha il publisher per-corpus né questo helper di dispatch, quindi il path resta specifico del corpus.",
