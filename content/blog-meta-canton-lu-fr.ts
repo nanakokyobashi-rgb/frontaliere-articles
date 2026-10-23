@@ -51,6 +51,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.fdp-lucerna-due-liste.title': 'PLR Lucerne : deux listes pour les élections cantonales de 2027',
     'blog.article.fdp-lucerna-due-liste.excerpt': 'Le PLR de Lucerne désigne 32 candidats pour les élections cantonales du 21 mars 2027 et mise sur deux listes et une alliance bourgeoise.',
     'blog.article.fdp-lucerna-due-liste.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.consultazione-abitazioni-lucerna.title': 'Contre-projet logements abordables Lucerne : consultation',
+    'blog.article.consultazione-abitazioni-lucerna.excerpt': 'La consultation sur le contre-projet à l’initiative « Pour des logements abordables » est ouverte du 21 octobre 2026 au 22 janvier 2027, avec un vote prévu au printemps 2028.',
+    'blog.article.consultazione-abitazioni-lucerna.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

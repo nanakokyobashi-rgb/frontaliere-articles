@@ -182,4 +182,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'consultazione-abitazioni-lucerna',
+ category: 'novita',
+ date: '2026-10-23T18:56:47.091Z',
+ image: '/images/blog/article-consultazione-abitazioni-lucerna.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -51,6 +51,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.fdp-lucerna-due-liste.title': 'FDP Luzern: zwei Listen für die kantonale Wahl 2027',
     'blog.article.fdp-lucerna-due-liste.excerpt': 'Die FDP Luzern nominiert 32 Kandidatinnen und Kandidaten für die kantonale Wahl am 21.',
     'blog.article.fdp-lucerna-due-liste.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.consultazione-abitazioni-lucerna.title': 'Vernehmlassung zum Gegenvorschlag für bezahlbaren Wohnraum im Kanton Luzern',
+    'blog.article.consultazione-abitazioni-lucerna.excerpt': 'Die Vernehmlassung zum Gegenvorschlag zur Initiative «Für bezahlbaren Wohnraum» läuft vom 21.',
+    'blog.article.consultazione-abitazioni-lucerna.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;

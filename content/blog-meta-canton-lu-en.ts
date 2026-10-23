@@ -51,6 +51,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.fdp-lucerna-due-liste.title': 'FDP Lucerne: two lists for the 2027 cantonal election',
     'blog.article.fdp-lucerna-due-liste.excerpt': 'Lucerne FDP nominates 32 candidates for the cantonal vote on March 21, 2027, and is aiming for two lists and a bourgeois alliance.',
     'blog.article.fdp-lucerna-due-liste.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.consultazione-abitazioni-lucerna.title': 'Lucerne affordable housing counterproposal consultation',
+    'blog.article.consultazione-abitazioni-lucerna.excerpt': 'The consultation on the counterproposal to the “For affordable housing” initiative is open from October 21, 2026, until January 22, 2027, with a vote scheduled for spring 2028.',
+    'blog.article.consultazione-abitazioni-lucerna.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;

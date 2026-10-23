@@ -19,6 +19,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'lucerna-governo-risposta-sp': { it: 'lucerna-governo-risposta-sp', en: 'lucerne-government-sp-response', de: 'luzern-regierung-sp-antwort', fr: 'lucerne-gouvernement-reponse-sp' },
  'lucerna-controlli-percorsi-scolastici': { it: 'lucerna-controlli-percorsi-scolastici', en: 'lucerne-school-route-speed-checks', de: 'luzern-geschwindigkeitskontrollen-schulwege', fr: 'lucerne-controles-vitesse-trajets-scolaires' },
  'fdp-lucerna-due-liste': { it: 'fdp-lucerna-due-liste', en: 'fdp-lucerne-two-lists', de: 'fdp-luzern-zwei-listen', fr: 'fdp-lucerne-deux-listes' },
+ 'consultazione-abitazioni-lucerna': { it: 'consultazione-abitazioni-lucerna', en: 'lucerne-housing-consultation', de: 'wohnraum-konsultation-luzern', fr: 'consultation-logements-lucerne' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
