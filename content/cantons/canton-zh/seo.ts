@@ -582,6 +582,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-zurigo-budget-sans-papiers': {
+    title: 'Zurigo approva 260.000 franchi per i Sans-Papiers',
+    description: 'Il Consiglio comunale di Zurigo porta a 260.000 franchi il budget dell\'Anlaufstelle per Sans-Papiers: cifra precedente e data non sono indicate.',
+    keywords: 'frontalieri, ticino, svizzera, italia, zurigo, approva, franchi, sans-papiers',
+    ogTitle: 'Zurigo: 260.000 franchi per Sans-Papiers',
+    ogDescription: 'Il parlamento cittadino di Zurigo ha approvato più fondi per l\'Anlaufstelle per Sans-Papiers, fissando il budget a 260.000 franchi. Il titolo disponibile non riporta né la somma precedente né la data della decisione.',
+    canonicalPath: '/articoli-zurigo/zurigo-budget-sans-papiers/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Zurigo approva 260.000 franchi per i Sans-Papiers",
+      "description": "Il Consiglio comunale di Zurigo porta a 260.000 franchi il budget dell'Anlaufstelle per Sans-Papiers: cifra precedente e data non sono indicate.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-zurigo-budget-sans-papiers.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T13:07:18+00:00",
+      "dateModified": "2026-10-23T13:07:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/zurigo-budget-sans-papiers/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

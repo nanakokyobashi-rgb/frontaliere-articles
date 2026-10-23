@@ -48,6 +48,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.controlli-distrazione-zurigo.title': 'Zürich, über 100 Verstösse bei Ablenkungskontrollen',
     'blog.article.controlli-distrazione-zurigo.excerpt': 'Die Kantonspolizei Zürich stellte am 20.',
     'blog.article.controlli-distrazione-zurigo.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.zurigo-budget-sans-papiers.title': 'Zürich genehmigt 260.000 Franken für Sans-Papiers',
+    'blog.article.zurigo-budget-sans-papiers.excerpt': 'Der Zürcher Gemeinderat genehmigt mehr Mittel und erhöht das Budget der Anlaufstelle per Sans-Papiers auf 260.000 Franken.',
+    'blog.article.zurigo-budget-sans-papiers.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZhDe;

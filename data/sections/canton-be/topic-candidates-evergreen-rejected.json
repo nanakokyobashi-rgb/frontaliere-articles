@@ -4,30 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/702851/bessere-arbeitsbedingungen-in-der-pflege-k%c3%b6nnten-sich-auch-finanziell-lohnen": {
-      "section": "canton-be",
-      "ts": 1792559280846
-    },
-    "canton-be::https://ajour.ch/story/702849/man-muss-jagen-damit-man-nicht-gejagt-wird-er-hat-die-ahv-erh%c3%b6ht-nun-will-er-unsere-pks-retten": {
-      "section": "canton-be",
-      "ts": 1792559285986
-    },
-    "canton-be::https://www.nau.ch/politik/international/bundesrat-will-co2-grenzausgleich-bei-zementimporten-67191311": {
-      "section": "canton-be",
-      "ts": 1792584667294
-    },
-    "canton-be::https://www.nau.ch/politik/international/bundesrat-will-parlamentarisches-veto-bei-notkrediten-verhindern-67191312": {
-      "section": "canton-be",
-      "ts": 1792584845375
-    },
-    "canton-be::https://www.nau.ch/politik/international/bundesrat-beharrt-bei-tox-info-auf-mitfinanzierung-durch-industrie-67191310": {
-      "section": "canton-be",
-      "ts": 1792585047620
-    },
-    "canton-be::https://www.be.ch/de/start.html?newsid=0c7f020d-17c8-463d-9d39-a795814e9442": {
-      "section": "canton-be",
-      "ts": 1792585060152
-    },
     "canton-be::https://ajour.ch/story/702983/tous-les-hpitaux-ne-bnficient-pas-dune-aide-aussi-leve-affirme-le-directeur-de-la-sant": {
       "section": "canton-be",
       "ts": 1792596442744
@@ -131,6 +107,14 @@
     "canton-be::https://ajour.ch/story/703031/die-vollsperrung-ist-sehr-belastend": {
       "section": "canton-be",
       "ts": 1792731161252
+    },
+    "canton-be::https://ajour.ch/story/703283/sperrung-des-ligerztunnels-wegen-tests": {
+      "section": "canton-be",
+      "ts": 1792759379462
+    },
+    "canton-be::https://ajour.ch/story/703342/le-gant-coop-va-augmenter-les-salaires-de-ses-employs-de-11-lanne-prochaine": {
+      "section": "canton-be",
+      "ts": 1792760337350
     }
   }
 }

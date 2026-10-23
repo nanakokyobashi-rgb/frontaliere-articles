@@ -48,6 +48,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.controlli-distrazione-zurigo.title': 'Zurich, over 100 violations in anti-distraction checks',
     'blog.article.controlli-distrazione-zurigo.excerpt': 'The Zurich Cantonal Police recorded more than 100 violations on October 20, 2026: 50 involved the prohibited use of a mobile phone while driving.',
     'blog.article.controlli-distrazione-zurigo.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.zurigo-budget-sans-papiers.title': 'Zurich approves 260.000 francs for Sans-Papiers',
+    'blog.article.zurigo-budget-sans-papiers.excerpt': 'Zurich City Council approves additional funding and raises the budget for the Anlaufstelle for Sans-Papiers to 260.000 francs.',
+    'blog.article.zurigo-budget-sans-papiers.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZhEn;
