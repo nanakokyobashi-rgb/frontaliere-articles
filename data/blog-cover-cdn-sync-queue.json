@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-franco-euro-cambio-ottobre-2026.webp",
-      "sha256": "a6584e1d2ceb4a71c5884e52a58d88d9df02d5e797498dc685d84d8ed084f0a1"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-franco-euro-cambio-ottobre-2026-480w.webp",
-      "sha256": "827eb71ca0c7a1c214795cda28f643e5a862e4a149dc865af37c0c81a9ee2dc9"
-    }
-  ]
+  "items": []
 }
