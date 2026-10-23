@@ -852,7 +852,9 @@ function collectSeoEntryMetadataInternal(src, into, feedOnly) {
     const metadata = {
       keywords: readSeoStringLiteralField(block, 'keywords'),
       headline: readSeoStringLiteralField(block, 'headline'),
-      datePublished: readSeoStringLiteralField(block, 'datePublished'),
+      // An empty date is semantically absent: RSS eligibility and historical
+      // metadata consumers both use undefined for a missing publication date.
+      datePublished: readSeoStringLiteralField(block, 'datePublished') || undefined,
     };
     const description = readSeoStringLiteralField(block, 'description');
     const ogDescription = readSeoStringLiteralField(block, 'ogDescription');
