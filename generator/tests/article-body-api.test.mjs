@@ -160,6 +160,31 @@ test('TypeScript hexadecimal and code-point escapes are decoded in body output',
   assert.equal(fields.find(({ field }) => field === 'body1')?.value, 'CC 🌍 A');
 });
 
+test('TypeScript control escapes are decoded in body output', () => {
+  const source = sourceFor(articleId, String.raw`a\b\f\v\0z`);
+  const fields = extractArticleBodyFields(source);
+  assert.equal(fields.find(({ field }) => field === 'body1')?.value, `a\b\f\v\0z`);
+});
+
+test('FAQ control escapes remain JSON escapes until JSON.parse', () => {
+  const faq = String.raw`[{"q":"Question?","a":"First\bSecond\fThird"}]`;
+  const source = sourceFor().replace(
+    `'blog.article.example-article.faq': '[{"q":"Question?","a":"Answer."}]',`,
+    `'blog.article.example-article.faq': '${faq}',`,
+  );
+  const fields = extractArticleBodyFields(source);
+  const rawFaq = fields.find(({ field }) => field === 'faq')?.value;
+  assert.equal(rawFaq, faq);
+  assert.equal(JSON.parse(rawFaq)[0].a, 'First\bSecond\fThird');
+});
+
+test('TypeScript octal-looking control escapes are rejected', () => {
+  assert.throws(
+    () => extractArticleBodyFields(sourceFor(articleId, String.raw`bad\08`)),
+    /escape ottale TypeScript non supportato/u,
+  );
+});
+
 test('template literals normalize raw CRLF line endings to LF', () => {
   const source = [
     'const body = {',

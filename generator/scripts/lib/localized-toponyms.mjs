@@ -202,7 +202,9 @@ export function extractArticleProjectionText(fileContent, articleId, { excludeFa
       return match[0].startsWith(`${prefix}${field}'`);
     })
     .map((match) => normalizeLocalizedToponymText(
-      unescapeTsString(match[3], ARTICLE_PROJECTION_ESCAPES),
+      unescapeTsString(match[3], ARTICLE_PROJECTION_ESCAPES, {
+        decodeControlEscapes: match[1] !== 'faq',
+      }),
     ))
     .join('\n');
 }
