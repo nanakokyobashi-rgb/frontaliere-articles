@@ -1011,11 +1011,11 @@ jobs:
             fi
           }
           build_publish_args "$DRY"
-          # A normal push or cover-drain dispatch from main has no immutable
-          # source snapshot. It must rebase onto the live main between attempts
-          # when the freshness guard reports that main advanced during the
-          # render. The original push range remains the publication scope, but
-          # the retry updates its head so API-release resolution covers the
+          # A normal push or cover-drain dispatch from main is a live
+          # publication request. If main advances during the render, rebase
+          # onto the live head between attempts instead of retrying the stale
+          # snapshot. The original push range remains the publication scope,
+          # but the retry updates its head so API-release resolution covers the
           # revision actually rendered. The same dispatch can safely retry a
           # staged live release while the API/edge pointer is still catching
           # up: publish-section-pages writes a summary proving that only the
