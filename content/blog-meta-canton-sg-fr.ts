@@ -48,6 +48,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.san-gallo-autostrada-rosenberg-terza-canna.title': 'Saint-Gall : troisième tube du Rosenberg et chiffres contestés',
     'blog.article.san-gallo-autostrada-rosenberg-terza-canna.excerpt': 'Les partisans demandent un élargissement de l’autoroute ; le planificateur Hug-Di Lena juge les bases chiffrées discutables.',
     'blog.article.san-gallo-autostrada-rosenberg-terza-canna.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.wil-sedute-novembre-2026.title': 'Wil : séances des 5 et 12 novembre 2026 annulées',
+    'blog.article.wil-sedute-novembre-2026.excerpt': 'À Wil, les séances des 5 et 12 novembre 2026 sont annulées.',
+    'blog.article.wil-sedute-novembre-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSgFr;
