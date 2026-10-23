@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-iva-aumento-pensione-sondaggio.webp",
+      "sha256": "05b399c4fa8b772123358cff17fb98923b2ec686469de47493daf86f7f072901"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-iva-aumento-pensione-sondaggio-480w.webp",
+      "sha256": "a8acac846b308f99de6ea5776e64157b4f81629ae79bff0219be2f5e920cade0"
+    }
+  ]
 }
