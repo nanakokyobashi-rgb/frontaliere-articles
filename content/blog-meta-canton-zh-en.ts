@@ -45,6 +45,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.zurigo-incentivi-e-cargo-velo.title': 'Zurich: incentives for businesses to purchase E-Cargovelo',
     'blog.article.zurigo-incentivi-e-cargo-velo.excerpt': 'The City of Zurich is making hundreds of thousands of francs available to support the purchase of E-Cargovelo and offers driving courses at half price.',
     'blog.article.zurigo-incentivi-e-cargo-velo.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.controlli-distrazione-zurigo.title': 'Zurich, over 100 violations in anti-distraction checks',
+    'blog.article.controlli-distrazione-zurigo.excerpt': 'The Zurich Cantonal Police recorded more than 100 violations on October 20, 2026: 50 involved the prohibited use of a mobile phone while driving.',
+    'blog.article.controlli-distrazione-zurigo.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZhEn;

@@ -160,4 +160,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'controlli-distrazione-zurigo',
+ category: 'novita',
+ date: '2026-10-23T12:21:12.761Z',
+ image: '/images/blog/article-controlli-distrazione-zurigo.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
