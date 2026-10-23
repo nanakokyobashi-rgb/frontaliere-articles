@@ -2,8 +2,16 @@
   "schema": 1,
   "items": [
     {
+      "path": "public/images/blog/article-finanzkommission-k-rzt-kredit-digitalisierung.webp",
+      "sha256": "6aa715f41c74ba1c49d7bf5f48b1b4042f4627d3a30139bbdcad07f62bf12563"
+    },
+    {
       "path": "public/images/blog/article-sondaggio-votazioni-novembre-svizzera.webp",
       "sha256": "ddec8e956f9d3f1e66140589380ab135707bca02d5bbd7282c4cbcbe78b5a70a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-finanzkommission-k-rzt-kredit-digitalisierung-480w.webp",
+      "sha256": "2fe7ad5164cedd266f73a11d5c29bb44495f3565dd6de64d85110dd9619742d0"
     }
   ]
 }
