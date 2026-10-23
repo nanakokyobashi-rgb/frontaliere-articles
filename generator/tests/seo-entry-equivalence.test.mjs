@@ -44,6 +44,17 @@ function decodeRegistryString(value) {
   return unescapeTsString(value, tsStringEscapesWithNewlineAs(' '));
 }
 
+test('il decoder corpus applica lo stesso contratto TypeScript per gli escape di controllo', () => {
+  assert.equal(
+    unescapeTsString('A\\bB\\fC\\vD\\0E', tsStringEscapesWithNewlineAs(' ')),
+    `A\bB\fC\vD\0E`,
+  );
+  assert.equal(
+    unescapeTsString(String.raw`A\01E`, tsStringEscapesWithNewlineAs(' ')),
+    String.raw`A\01E`,
+  );
+});
+
 function parseRegistry() {
   const entries = new Map();
   for (const body of articleRegistryObjectBodies(read('content/blog-articles-data.ts'))) {
