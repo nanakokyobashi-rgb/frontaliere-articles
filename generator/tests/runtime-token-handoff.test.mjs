@@ -200,6 +200,21 @@ test('i consumer del lease usano il PAT runtime per il bucket REST separato', ()
   }
 });
 
+test('issue-fix legge il set identical trusted con il PAT runtime, senza fallback silenzioso', () => {
+  const yaml = source('issue-fix.yml');
+  const start = yaml.indexOf('      - name: Materialize trusted identical fixer set from main');
+  assert.ok(start >= 0, 'step trusted identical mancante');
+  const end = yaml.indexOf('\n      - name:', start + 1);
+  const step = yaml.slice(start, end < 0 ? yaml.length : end);
+  const exportAt = step.indexOf('export GH_TOKEN="$runtime_pat"');
+  const lookupAt = step.indexOf('trusted_sha=$(gh api');
+  assert.match(step, /runtime_pat="\$\{GITHUB_PAT_NANAKO:-\}"/);
+  assert.match(step, /if \[ -z "\$runtime_pat" \]; then[\s\S]*available=false/);
+  assert.ok(exportAt >= 0, 'il PAT operativo non viene esportato nel preflight trusted');
+  assert.ok(lookupAt > exportAt, 'la lettura del ref main deve avvenire dopo il passaggio al PAT');
+  assert.match(step, /never silently fall back to GITHUB_TOKEN/);
+});
+
 test('issue-fix passa la capability workflows dalla shell runtime al prompt', () => {
   const yaml = source('issue-fix.yml');
   assert.match(yaml, /echo "has_workflows_token=false" >> "\$GITHUB_OUTPUT"/);
