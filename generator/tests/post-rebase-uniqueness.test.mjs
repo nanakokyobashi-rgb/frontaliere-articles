@@ -800,13 +800,19 @@ function assertWorkflowRebaseGate(workflow) {
   const commitAt = active.lastIndexOf('git commit -m', producedAt);
   const loopAt = active.indexOf('for attempt in');
   const rebaseAt = active.indexOf('bash scripts/lib/rebase-onto-remote.sh', loopAt);
-  const checkAt = active.indexOf('node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD --run-report .tmp/create-article-run-report.json');
+  const reportPathAt = active.indexOf('RUN_REPORT="$RUNNER_TEMP/create-article-run-report.json"');
+  const reportCopyAt = active.indexOf('cp .tmp/create-article-run-report.json "$RUN_REPORT"');
+  const checkAt = active.indexOf('node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD --run-report "$RUN_REPORT"');
   const successGuardAt = active.lastIndexOf('if [ "$rebased" -eq 1 ]; then', checkAt);
   const doneMatch = /\n\s+done\n/.exec(active.slice(Math.max(0, checkAt)));
   const doneAt = doneMatch ? checkAt + doneMatch.index : -1;
 
   assert.ok(commitAt >= 0 && producedAt > commitAt && producedAt < loopAt,
     'PRODUCED va preso dopo il commit e PRIMA di ogni rebase: dopo, la voce del ledger del run puo\' essere sparita');
+  assert.ok(reportPathAt >= 0 && reportCopyAt > reportPathAt && reportCopyAt < loopAt,
+    'il report del run va copiato fuori dal checkout prima del primo rebase');
+  assert.match(active.slice(reportPathAt, loopAt), /if \[ ! -s \.tmp\/create-article-run-report\.json \]; then[\s\S]*?exit 1/,
+    'un report assente deve fermare il push prima del rebase');
   assert.ok(rebaseAt > loopAt && checkAt > rebaseAt && doneAt > checkAt,
     'il controllo sta nel loop, dopo il rebase e prima del prossimo push');
   const rebaseCall = active.slice(rebaseAt, checkAt);
