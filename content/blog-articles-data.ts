@@ -45766,6 +45766,16 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'questionario-frontalieri-ticino-condizioni-lavoro',
+ category: 'novita',
+ date: '2026-10-23T09:28:26.287Z',
+ image: '/images/blog/article-questionario-frontalieri-ticino-condizioni-lavoro.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

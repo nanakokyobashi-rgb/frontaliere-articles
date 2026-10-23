@@ -62,7 +62,7 @@ test('a malformed later module rejects the complete read instead of returning ea
   assert.throws(() => readStaticMetaFields([
     { source: valid, sourcePath: 'content/blog-meta-it.ts' },
     { source: malformed, sourcePath: 'content/blog-meta-en.ts' },
-  ], ['title']), /Interpolated template literal/u);
+  ], ['title']), /static string literal value/u);
 });
 
 test('static metadata reader validates field and module inputs', () => {

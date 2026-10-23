@@ -50,7 +50,12 @@ export function readTsStringLiteral(src, i) {
       else if (n === 'b') out += '\b';
       else if (n === 'f') out += '\f';
       else if (n === 'v') out += '\v';
-      else if (n === '0' && !/[0-9]/u.test(src[j + 2] || '')) out += '\0';
+      else if (n === '0') {
+        // `\\01` is an octal-looking token, not NUL followed by `1`.
+        // Preserve the source spelling so this reader cannot silently publish
+        // a value different from the TypeScript literal contract.
+        out += /[0-9]/u.test(src[j + 2] || '') ? src.slice(j, j + 2) : '\0';
+      }
       else if (n === 'x' && /^[0-9a-fA-F]{2}$/u.test(src.slice(j + 2, j + 4))) {
         out += String.fromCharCode(parseInt(src.slice(j + 2, j + 4), 16));
         j += 4;

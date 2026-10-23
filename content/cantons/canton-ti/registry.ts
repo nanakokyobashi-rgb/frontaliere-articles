@@ -215,4 +215,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'rafforzamento-paghe-frontalieri',
+ category: 'novita',
+ date: '2026-10-23T10:32:20.964Z',
+ image: '/images/blog/article-rafforzamento-paghe-frontalieri.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -21,6 +21,9 @@ const CLOSED_SET_HELPERS = new Set([
   // This test imports the engine only to exercise lexical delimiter handling;
   // it is not a runtime entrypoint that renders corpus pages.
   'generator/tests/reviewer-followup-lexer-contract.test.mjs',
+  // This test imports the engine only to verify the static-source parser
+  // contract; it is not a runtime entrypoint that renders corpus pages.
+  'generator/tests/static-article-source-mirror-contract.test.mjs',
   'scripts/lib/ts-literals.mjs',
   'scripts/lib/corpus-sections.mjs',
 ]);

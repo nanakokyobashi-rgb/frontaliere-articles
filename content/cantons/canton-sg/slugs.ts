@@ -18,6 +18,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'sbb-sportelli-st-margrethen-uznach': { it: 'sbb-sportelli-st-margrethen-uznach', en: 'sbb-ticket-counters-st-margrethen-uznach', de: 'sbb-schalter-st-margrethen-uznach', fr: 'guichets-sbb-st-margrethen-uznach' },
  'san-gallo-protezione-infrastrutture-critiche': { it: 'san-gallo-protezione-infrastrutture-critiche', en: 'st-gallen-critical-infrastructure-protection', de: 'st-gallen-schutz-kritischer-infrastrukturen', fr: 'saint-gall-protection-infrastructures-critiques' },
  'san-gallo-autostrada-rosenberg-terza-canna': { it: 'san-gallo-autostrada-rosenberg-terza-canna', en: 'st-gallen-highway-rosenberg-third-tube', de: 'st-gallen-autobahn-rosenberg-dritte-roehre', fr: 'saint-gall-autoroute-rosenberg-troisieme-tube' },
+ 'wil-sedute-novembre-2026': { it: 'wil-sedute-novembre-2026', en: 'wil-parliament-sessions-cancelled', de: 'wil-parlament-sitzungen-abgesagt', fr: 'wil-seances-parlement-novembre' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

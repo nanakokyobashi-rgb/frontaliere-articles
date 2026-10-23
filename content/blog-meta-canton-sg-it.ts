@@ -48,6 +48,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.san-gallo-autostrada-rosenberg-terza-canna.title': 'San Gallo: terza canna Rosenberg e cifre contestate',
     'blog.article.san-gallo-autostrada-rosenberg-terza-canna.excerpt': 'Sostenitori chiedono ampliamento autostradale; pianificatore Hug-Di Lena definisce discutibili le basi numeriche.',
     'blog.article.san-gallo-autostrada-rosenberg-terza-canna.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.wil-sedute-novembre-2026.title': 'Wil: cancellate le sedute del 5 e 12 novembre 2026',
+    'blog.article.wil-sedute-novembre-2026.excerpt': 'A Wil saltano le sedute del 5 e 12 novembre 2026.',
+    'blog.article.wil-sedute-novembre-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

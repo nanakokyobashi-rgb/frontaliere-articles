@@ -127,3 +127,13 @@ test('unsupported double-quoted canonicalPath is rejected before URL validation'
     /Cannot resolve canonicalPath expression/,
   );
 });
+
+test('canonicalPath rifiuta gli escape NUL octal-looking', () => {
+  const expression = "'" + String.raw`/articoli-frontaliere/\01/` + "'";
+  const entry = '{\n    canonicalPath: ' + expression + ',\n}';
+  assert.deepEqual(readCanonicalPath(entry), { kind: 'unresolved', expression });
+  assert.throws(
+    () => validateCanonicalExpression(expression),
+    /Cannot resolve canonicalPath expression/,
+  );
+});

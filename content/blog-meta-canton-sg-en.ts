@@ -48,6 +48,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.san-gallo-autostrada-rosenberg-terza-canna.title': 'St. Gallen: third Rosenberg tube and disputed figures',
     'blog.article.san-gallo-autostrada-rosenberg-terza-canna.excerpt': 'Supporters call for highway expansion; planner Hug-Di Lena deems the numerical bases questionable.',
     'blog.article.san-gallo-autostrada-rosenberg-terza-canna.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.wil-sedute-novembre-2026.title': 'Wil: cancel the sessions on November 5 and 12, 2026',
+    'blog.article.wil-sedute-novembre-2026.excerpt': 'In Wil, the sessions on November 5 and 12, 2026, are canceled.',
+    'blog.article.wil-sedute-novembre-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

@@ -122,6 +122,11 @@ test('ts-string-map attraversa un commento Unicode dentro un generics lookahead'
   assert.equal(readTsStringMap(source).get('blog.article.runtime'), 'runtime');
 });
 
+test('ts-string-map conserva il backslash degli escape octal-looking', () => {
+  const source = String.raw`const values = { 'blog.article.octal': 'bad\01' };`;
+  assert.equal(readTsStringMap(source).get('blog.article.octal'), String.raw`bad\01`);
+});
+
 test('lo scanner non tratta una parentesi di controllo preceduta da commento come parametri', () => {
   const source = 'if /* commento */ (condition ? 1 : { [key in value]: "x" })';
   const offset = source.indexOf('[', source.indexOf('{'));
