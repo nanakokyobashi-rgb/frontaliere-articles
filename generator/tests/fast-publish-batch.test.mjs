@@ -50,6 +50,18 @@ test('il trigger push conserva tutti gli ID dei body cambiati', () => {
   assert.doesNotMatch(resolveStep, /head\s+-1/);
 });
 
+test('i JSON di batch non passano a jq come argomenti di dimensione illimitata', () => {
+  const resolveStep = stepText('Resolve mode, article ids and section');
+
+  // A dependency change can select the whole registry. `--argjson` would put
+  // that array in one argv string and fail before jq starts at MAX_ARG_STRLEN.
+  assert.match(resolveStep, /merge_group_ids\(\)/);
+  assert.match(resolveStep, /printf '%s\\n%s\\n' "\$groups" "\$merge_ids_json"[\s\S]*jq -cs/);
+  assert.match(resolveStep, /append_matrix_target\(\)/);
+  assert.match(resolveStep, /printf '%s\\n%s\\n' "\$matrix_with_shards" "\$matrix_target"[\s\S]*jq -cs/);
+  assert.doesNotMatch(resolveStep, /--argjson\s+(?:ids|target)\s+"/u);
+});
+
 test('le superfici articolo oltre il body producono solo gli ID realmente cambiati', () => {
   const registry = new Map([
     ['frontaliere', new Set(['alpha', 'beta'])],
