@@ -3266,11 +3266,19 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(dispatchPlan, /FAST_PUBLISH_ARMED/);
   assert.equal((wf.match(/-f dry_run="\$DRY"/g) ?? []).length, 3, 'tutti i redispatch propagano il dry-run calcolato');
   assert.doesNotMatch(wf, /-f dry_run=false/);
-  assert.equal((wf.match(/bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh/g) ?? []).length, 4);
+  assert.equal(
+    ((wf.match(/bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh/g) ?? []).length
+      + (resolver.match(/bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh/g) ?? []).length),
+    4,
+  );
   assert.equal((wf.match(/name: Checkout replay dispatcher from workflow revision/g) ?? []).length, 3);
   assert.equal((wf.match(/ref: \$\{\{ github\.sha \}\}\n\s+path: \.replay-dispatcher-source/g) ?? []).length, 3);
   assert.match(wf, /sparse-checkout:\n\s+scripts\/ci\/dispatch-fast-publish-replay\.sh/);
-  assert.equal((wf.match(/-f cleanup_inactive_surface="\$[A-Za-z_]+"/g) ?? []).length, 4);
+  assert.equal(
+    ((wf.match(/-f cleanup_inactive_surface="\$[A-Za-z_]+"/g) ?? []).length
+      + (resolver.match(/-f cleanup_inactive_surface="\$[A-Za-z_]+"/g) ?? []).length),
+    4,
+  );
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE_INPUT: \$\{\{ inputs\.cleanup_inactive_surface \}\}/);
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE: \$\{\{ matrix\.target\.cleanupInactiveSurface \|\| false \}\}/);
   assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
@@ -3381,9 +3389,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(replayDispatcher, /async_stale_dispatch=false/);
   assert.match(replayDispatcher, /nonce=stale-/);
   assert.match(replayDispatcher, /replay stale accettato dall'API/);
-  const reconcileStart = wf.indexOf('          reconcile_edge_matrix() {');
-  const reconcileEnd = wf.indexOf('          pinned_source=', reconcileStart);
-  const reconcile = wf.slice(reconcileStart, reconcileEnd);
+  const reconcileStart = resolver.indexOf('reconcile_edge_matrix() {');
+  const reconcileEnd = resolver.indexOf('pinned_source=', reconcileStart);
+  const reconcile = resolver.slice(reconcileStart, reconcileEnd);
   assert.match(reconcile, /local source_dir="\$\{3:-\$PWD\}"/);
   assert.match(reconcile, /cd "\$source_dir"/);
   assert.match(reconcile, /if ! command -v timeout >\/dev\/null 2>&1/);
@@ -3392,11 +3400,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(reconcile, /timeout --signal=TERM --kill-after=1s "\$\{candidate_timeout\}s"/);
   assert.match(reconcile, /reconcile_edge_attempt "\$expected_commit" "\$attempt_timeout"/);
   assert.match(reconcile, /reconcile_edge_attempt "\$fallback_commit" "\$attempt_timeout"/);
-  assert.match(wf, /registro edge in transizione; ritento il piano di riconciliazione tra \$\{delay\} secondi/);
+  assert.match(resolver, /registro edge in transizione; ritento il piano di riconciliazione tra \$\{delay\} secondi/);
   assert.match(staleResolve, /replay_before="\$\{PUSH_BEFORE:-\}"/);
   assert.doesNotMatch(staleResolve, /replay_before="\$\{DISPATCH_PUSH_BEFORE:-\}"/);
-  assert.match(wf, /replay_matrix="\$\(reconcile_edge_matrix "\$pinned_source" "\$current_main" "\$current_main_source"\)"/);
-  assert.match(wf, /edge_matrix="\$\(reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"\)"/);
+  assert.match(resolver, /replay_matrix="\$\(reconcile_edge_matrix "\$pinned_source" "\$current_main" "\$current_main_source"\)"/);
+  assert.match(resolver, /edge_matrix="\$\(reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"\)"/);
   assert.match(wf, /cleanupInactiveSurface/);
   const fastPublishSection = read('scripts/ci/fast-publish-section.mjs');
   assert.match(fastPublishSection, /allCore = ARTICLE_SECTION_CORE_ALL/);
@@ -3441,13 +3449,13 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   assert.match(wf, /name: Fetch push base \(resolve\)[\s\S]*?bash scripts\/ci\/fetch-push-base-if-missing\.sh/);
   assert.doesNotMatch(wf, /diff_args=\(\)[\s\S]*sections\/registry\.json/);
-  assert.match(wf, /PUSH_BEFORE="\$before" node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
-  assert.match(wf, /reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"/);
-  assert.match(wf, /edge_matrix="\$\(reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"\)"/);
+  assert.match(resolver, /PUSH_BEFORE="\$before" node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
+  assert.match(resolver, /reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"/);
+  assert.match(resolver, /edge_matrix="\$\(reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"\)"/);
   assert.match(wf, /if \[ "\$WORKFLOW_RUN_EVENT" = 'push' \]/);
-  assert.match(wf, /r2-api-push-plan/);
-  assert.match(wf, /landing\/archive\/hub\/RSS/);
-  assert.match(wf, /Il replay della push API deve riprodurre il piano dei\s+contenuti/);
+  assert.match(resolver, /r2-api-push-plan/);
+  assert.match(resolver, /landing\/archive\/hub\/RSS/);
+  assert.match(resolver, /Il replay della push API deve riprodurre il piano dei\s+contenuti/);
   assert.match(
     read('scripts/publish-section-pages.mjs'),
     /await assertMainFreshImpl\(\);\n  await publishSignalBoundary\(signal\);\n  for \(const \{ local, key \} of cdnUploads\)/,
