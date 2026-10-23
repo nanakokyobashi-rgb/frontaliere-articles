@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-gr::https://primalavaltellina.it/attualita/frontalieri-cambiano-i-bisogni-oltre-il-salario-tempo-e-benessere": {
-      "section": "canton-gr",
-      "ts": 1792546196438
-    },
     "canton-gr::https://www.ilgiorno.it/sondrio/cronaca/frontalieri-scontenti-nelle-buste-paga-a94e21cf": {
       "section": "canton-gr",
       "ts": 1792678546810
@@ -15,6 +11,10 @@
     "canton-gr::https://www.suedostschweiz.ch/graubuenden/nachbarn-unterliegen-buendner-obergericht-gibt-gruenes-licht-fuer-laaxer-erstwohnungsbau-2204247#ft-item=3feddaa5bce8": {
       "section": "canton-gr",
       "ts": 1792678805819
+    },
+    "canton-gr::https://primalavaltellina.it/attualita/frontalieri-cambiano-i-bisogni-oltre-il-salario-tempo-e-benessere": {
+      "section": "canton-gr",
+      "ts": 1792722917206
     }
   }
 }

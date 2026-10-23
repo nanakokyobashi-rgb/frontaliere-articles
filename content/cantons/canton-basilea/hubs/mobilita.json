@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "mobilita",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "cc67cb28c391cb55e72bd94ef3c41ed890f90421ca593da6b534acae6f2996a3",
+  "updatedAt": "2026-10-23T02:45:08.484Z",
+  "contentHash": "9393ee0058df3953111a31845e872a45d41b516f971203ab943f8805350dc11d",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -197,6 +197,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Parlamento di Basilea: mozione per iniziare i cantieri alle 6",
+          "url": "/articoli-basilea/basilea-cantieri-alle-sei/",
+          "excerpt": "Il Gran Consiglio di Basilea ha trasmesso una mozione per consentire lavori edili alle 6 da giugno ad agosto; quelli rumorosi resterebbero dalle 7.",
+          "date": "2026-10-23T02:22:16.813Z"
+        },
+        {
           "title": "Basilea, cantieri a Claraplatz: negozi in difficoltà",
           "url": "/articoli-basilea/claraplatz-basel-cantieri/",
           "excerpt": "A Claraplatz i cantieri colpiscono i negozi e il chiosco perde il 40% del fatturato.",
@@ -237,12 +243,6 @@
           "url": "/articoli-svizzera/basilea-campagna-scuola-iscrizione/",
           "excerpt": "La scuola dell'obbligo svizzera dura 9 anni, inizia a 6 anni e si divide in primaria e secondaria. Procedura di iscrizione e transizioni scolastiche secondo le norme federali.",
           "date": "2026-09-02T05:19:50.994Z"
-        },
-        {
-          "title": "Sistema scolastico canton Basilea Città: iscrizione e cicli",
-          "url": "/articoli-svizzera/sistema-scolastico-canton-basilea-citta/",
-          "excerpt": "I cicli di scuola e le età di iscrizione nel Cantone di Basilea Città.",
-          "date": "2026-08-18T07:39:21.565Z"
         }
       ],
       "latestCantonArticles": [],
@@ -276,7 +276,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T02:45:08.484Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -451,6 +451,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Basel Parliament: motion to start construction work at 6",
+          "url": "/en/basel-articles/basel-construction-start-six/",
+          "excerpt": "The Grand Council of Basel has referred a motion to allow construction work from 6 a.m.",
+          "date": "2026-10-23T02:22:16.813Z"
+        },
+        {
           "title": "Basel, construction work at Claraplatz: shops struggling",
           "url": "/en/basel-articles/claraplatz-basel-construction-sites/",
           "excerpt": "At Claraplatz, construction sites hit the shops and the kiosk loses 40% of its turnover.",
@@ -491,12 +497,6 @@
           "url": "/en/swiss-articles/basel-countryside-school-enrollment-cycles/",
           "excerpt": "The Swiss compulsory school lasts 9 years, starts at 6 years and is divided into primary and secondary. Enrollment procedure and school transitions according to federal regulations.",
           "date": "2026-09-02T05:19:50.994Z"
-        },
-        {
-          "title": "Basel City Canton School System: Enrollment and Cycles",
-          "url": "/en/swiss-articles/school-system-canton-basel-city/",
-          "excerpt": "School cycles and ages of enrolment in the Canton of Basel-City.",
-          "date": "2026-08-18T07:39:21.565Z"
         }
       ],
       "latestCantonArticles": [],
@@ -530,7 +530,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T02:45:08.484Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -705,6 +705,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Basler Parlament: Motion für einen Baubeginn um 6 Uhr",
+          "url": "/de/basel-artikel/basel-baustart-um-sechs/",
+          "excerpt": "Der Grosse Rat von Basel hat eine Motion überwiesen, um Bauarbeiten von Juni bis August um 6 Uhr zu ermöglichen; lärmintensive Arbeiten würden weiterhin erst ab 7 Uhr stattfinden.",
+          "date": "2026-10-23T02:22:16.813Z"
+        },
+        {
           "title": "Basel, Baustellen am Claraplatz: Geschäfte in Schwierigkeiten",
           "url": "/de/basel-artikel/claraplatz-basel-baustellen/",
           "excerpt": "Am Claraplatz setzen die Bauarbeiten den Geschäften zu, und der Kiosk verliert 40% seines Umsatzes.",
@@ -745,12 +751,6 @@
           "url": "/de/schweiz-artikel/basel-landschaft-grundschule-einschulung/",
           "excerpt": "Die Schweizerische Pflichtschule dauert 9 Jahre, beginnt mit 6 Jahren und gliedert sich in Primar- und Sekundarschule. Immatrikulationsverfahren und Schulübergänge nach Bundesvorschriften.",
           "date": "2026-09-02T05:19:50.994Z"
-        },
-        {
-          "title": "Schulsystem Kanton Basel-Stadt: Einschreibung und Zyklen",
-          "url": "/de/schweiz-artikel/schoolestsystem-kanton-basel-stadt/",
-          "excerpt": "Die Schulzyklen und das Einschreibungsalter im Kanton Basel-Stadt.",
-          "date": "2026-08-18T07:39:21.565Z"
         }
       ],
       "latestCantonArticles": [],
@@ -784,7 +784,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T02:45:08.484Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -959,6 +959,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Parlement de Bâle : motion pour commencer les chantiers à 6 heures",
+          "url": "/fr/articles-bale/bale-chantier-six-heures/",
+          "excerpt": "Le Grand Conseil de Bâle a transmis une motion visant à autoriser les travaux de construction à 6 heures de juin à août ; les travaux bruyants resteraient à partir de 7 heures.",
+          "date": "2026-10-23T02:22:16.813Z"
+        },
+        {
           "title": "Bâle, travaux à Claraplatz : commerces en difficulté",
           "url": "/fr/articles-bale/claraplatz-bale-chantiers/",
           "excerpt": "À Claraplatz, les travaux touchent les commerces et le kiosque perd 40% de son chiffre d’affaires.",
@@ -999,12 +1005,6 @@
           "url": "/fr/articles-suisse/bale-campagne-ecole-inscription-cycles/",
           "excerpt": "L'école obligatoire suisse dure 9 ans, commence à 6 ans et se divise en primaire et secondaire. Procédure d'inscription et transitions scolaires selon les normes fédérales.",
           "date": "2026-09-02T05:19:50.994Z"
-        },
-        {
-          "title": "Système scolaire canton Bâle-Ville : inscription et cycles",
-          "url": "/fr/articles-suisse/systeme-educatif-canton-de-bale-ville/",
-          "excerpt": "Les cycles scolaires et les âges d'inscription dans le canton de Bâle-Ville.",
-          "date": "2026-08-18T07:39:21.565Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1038,7 +1038,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T02:45:08.484Z"
     }
   }
 }
