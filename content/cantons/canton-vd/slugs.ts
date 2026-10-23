@@ -26,6 +26,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'lausanne-marathon-2026-chiusure-strade': { it: 'lausanne-marathon-2026-chiusure-strade', en: 'lausanne-marathon-2026-road-closures', de: 'lausanne-marathon-2026-strassensperrungen', fr: 'marathon-lausanne-2026-fermetures-routes' },
  'impetigine-casi-vaud': { it: 'impetigine-casi-vaud', en: 'impetigo-cases-vaud', de: 'impetigo-faelle-waadt', fr: 'cas-impetigo-vaud' },
  'morges-label-energia-gold-2026': { it: 'morges-label-energia-gold-2026', en: 'morges-energy-city-gold-label-2026', de: 'morges-energiestadt-gold-label-2026', fr: 'morges-cite-energie-gold-2026' },
+ 'budget-2027-preavviso-consiglio': { it: 'budget-2027-preavviso-consiglio', en: 'budget-2027-preavis-council', de: 'budget-2027-vorab-rat', fr: 'budget-2027-preavis-conseil' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

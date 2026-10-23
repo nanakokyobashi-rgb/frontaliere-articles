@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vd::https://www.guidedufrontalier.com/actualites/pret-immobilier-chf-tournant-juridique": {
-      "section": "canton-vd",
-      "ts": 1792578201316
-    },
     "canton-vd::https://www.guidedufrontalier.com/actualites/declaration-dris-tou-couple-frontalier": {
       "section": "canton-vd",
       "ts": 1792616925037
@@ -79,6 +75,10 @@
     "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-159?s=3": {
       "section": "canton-vd",
       "ts": 1792719785969
+    },
+    "canton-vd::https://www.guidedufrontalier.com/actualites/hebdo-frontalier-23-au-30-octobre-2026": {
+      "section": "canton-vd",
+      "ts": 1792770910213
     }
   }
 }

@@ -72,6 +72,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.morges-label-energia-gold-2026.title': 'Morges receives the Cité de l\'energia Gold label for five years',
     'blog.article.morges-label-energia-gold-2026.excerpt': 'Morges receives the Gold label for five years The assessment score is 80,5% The recognition covers six areas of municipal policies The Plan climat brings',
     'blog.article.morges-label-energia-gold-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.budget-2027-preavviso-consiglio.title': '2027 budget and investments: advance notice to the City Council',
+    'blog.article.budget-2027-preavviso-consiglio.excerpt': 'The advance notice relating to the 2027 budget, identified as Préavis N°2026/75, was circulated to the Municipal Council on October 23, 2026.',
+    'blog.article.budget-2027-preavviso-consiglio.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVdEn;

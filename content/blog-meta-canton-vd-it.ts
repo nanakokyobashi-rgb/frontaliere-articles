@@ -72,6 +72,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.morges-label-energia-gold-2026.title': 'Morges ottiene il label Cité de l\'energia Gold per cinque anni',
     'blog.article.morges-label-energia-gold-2026.excerpt': 'Morges ottiene il label Gold per cinque anni Il punteggio della valutazione è dell\'80,5% Il riconoscimento copre sei ambiti delle politiche comunali Il Plan',
     'blog.article.morges-label-energia-gold-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.budget-2027-preavviso-consiglio.title': 'Budget esercizio 2027 e investimenti: preavviso al Consiglio comunale',
+    'blog.article.budget-2027-preavviso-consiglio.excerpt': 'Il preavviso relativo al budget 2027, identificato come Préavis N°2026/75, è stato diffuso al Consiglio comunale il 23 ottobre 2026.',
+    'blog.article.budget-2027-preavviso-consiglio.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVdIt;

@@ -259,4 +259,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'budget-2027-preavviso-consiglio',
+ category: 'novita',
+ date: '2026-10-23T16:03:30.868Z',
+ image: '/images/blog/article-budget-2027-preavviso-consiglio.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

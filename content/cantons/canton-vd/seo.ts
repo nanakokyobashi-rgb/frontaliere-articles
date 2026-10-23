@@ -894,6 +894,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-budget-2027-preavviso-consiglio': {
+    title: 'Budget esercizio 2027 e investimenti: preavviso al Consiglio comunale',
+    description: 'Il preavviso Préavis N°2026/75 per il budget 2027 è stato diffuso il 23.10.2026 al Consiglio comunale di Losanna.',
+    keywords: 'frontalieri, ticino, svizzera, italia, budget, esercizio, investimenti, preavviso',
+    ogTitle: 'Budget 2027 Losanna: Preavviso al Consiglio comunale',
+    ogDescription: 'La Municipalità di Losanna ha trasmesso al Consiglio comunale il preavviso relativo al budget 2027 (Préavis N°2026/75) il 23 ottobre 2026, con obiettivi su servizi e sfide climatiche.',
+    canonicalPath: '/articoli-vaud/budget-2027-preavviso-consiglio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Budget esercizio 2027 e investimenti: preavviso al Consiglio comunale",
+      "description": "Il preavviso Préavis N°2026/75 per il budget 2027 è stato diffuso il 23.10.2026 al Consiglio comunale di Losanna.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-budget-2027-preavviso-consiglio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T16:03:30+00:00",
+      "dateModified": "2026-10-23T16:03:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/budget-2027-preavviso-consiglio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
