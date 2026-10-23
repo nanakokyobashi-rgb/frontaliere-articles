@@ -229,6 +229,16 @@
       }
     },
     {
+      "path": "scripts/ci/fast-publish-section-resolve.sh",
+      "mode": "corpus-only",
+      "reason": "Resolver del piano fast-publish-section estratto dal run scalar del workflow per restare sotto il limite del parser GitHub Actions: calcola la matrice, gestisce cover-drain e replay stantii e redispatcha le sezioni con il contratto del publisher. Il sito non possiede il publisher corpus-side né questo helper, quindi il path resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-23"
+      }
+    },
+    {
       "path": "scripts/ci/dispatch-fast-publish-replay.sh",
       "mode": "corpus-only",
       "reason": "Deduplica e riaccoda i replay stale dei workflow fast-publish di sezione dopo aver verificato lo stato reale della run. Il sito non ha il publisher per-corpus né questo helper di dispatch, quindi il path resta specifico del corpus.",
