@@ -48,6 +48,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.controlli-distrazione-zurigo.title': 'Zurigo, oltre 100 infrazioni nei controlli anti-distrazione',
     'blog.article.controlli-distrazione-zurigo.excerpt': 'La Polizia cantonale di Zurigo ha rilevato oltre 100 infrazioni il 20 ottobre 2026: 50 riguardavano l\'uso vietato del cellulare alla guida.',
     'blog.article.controlli-distrazione-zurigo.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.zurigo-budget-sans-papiers.title': 'Zurigo approva 260.000 franchi per i Sans-Papiers',
+    'blog.article.zurigo-budget-sans-papiers.excerpt': 'Il Consiglio comunale di Zurigo approva più fondi e porta a 260.000 franchi il budget dell\'Anlaufstelle per Sans-Papiers.',
+    'blog.article.zurigo-budget-sans-papiers.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZhIt;
