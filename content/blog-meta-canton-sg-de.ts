@@ -42,6 +42,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.sbb-sportelli-st-margrethen-uznach.title': 'SBB schließen Schalter in St.Margrethen und Uznach',
     'blog.article.sbb-sportelli-st-margrethen-uznach.excerpt': 'Ab Anfang 2027 setzen die SBB in St.Margrethen und Uznach auf Selbstbedienung: 3% der Tickets werden noch am Schalter verkauft.',
     'blog.article.sbb-sportelli-st-margrethen-uznach.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.san-gallo-protezione-infrastrutture-critiche.title': 'St. Gallen stärkt den Schutz kritischer Infrastrukturen',
+    'blog.article.san-gallo-protezione-infrastrutture-critiche.excerpt': 'Die Regierung von St.',
+    'blog.article.san-gallo-protezione-infrastrutture-critiche.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;
