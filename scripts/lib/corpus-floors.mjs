@@ -885,6 +885,21 @@ function readSeoStringLiteralField(block, field) {
       const value = readStaticStringLiteral(block, valueStart, 'SEO entry', 'seo-field');
       return decodeStaticStringLiteral(value.value, value.quote);
     }
+    // `parseSeoBlogs` reads the publication headline and date from the
+    // structuredData object. Re-enter that one known object only for those
+    // fields; other nested values (notably dynamic template URLs) stay
+    // opaque, so a string inside a payload cannot become a false property.
+    if (
+      key === 'structuredData'
+      && (field === 'headline' || field === 'datePublished')
+      && block[valueStart] === '{'
+    ) {
+      const close = matchingDelimiter(block, valueStart);
+      if (close >= 0) {
+        const nested = readSeoStringLiteralField(block.slice(valueStart, close + 1), field);
+        if (nested !== undefined) return nested;
+      }
+    }
     // Move over the complete value. A structuredData object contains dynamic
     // template URLs; scanning one byte at a time would mistake their backtick
     // for a property key and reject an otherwise valid SEO entry.
