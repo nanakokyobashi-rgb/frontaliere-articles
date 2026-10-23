@@ -23,6 +23,8 @@ import { fileURLToPath } from 'node:url';
 import {
   collectCdnAssetRefs,
   CDN_ASSET_CHECK_BUDGET_MS,
+  CDN_ASSET_CHECK_MAX_ATTEMPTS,
+  CDN_ASSET_CHECK_RETRY_DELAY_MS,
   CDN_ASSET_CHECK_TIMEOUT_MS,
   hasSameOriginAssetRef,
   verifyCdnAssetRefs,
@@ -94,6 +96,7 @@ test('verifyCdnAssetRefs: 200 presente, 404 mancante, 5xx e rete restano unknown
   };
   const results = await verifyCdnAssetRefs({
     urls: [`${CDN}/assets/ok.js`, `${CDN}/assets/manca.js`, `${CDN}/assets/rotto.js`, `${CDN}/assets/giu.js`],
+    retryDelayMs: 0,
     fetchImpl: async (url) => {
       if (!answers[url]) throw new Error('ENOTFOUND');
       return answers[url];
@@ -108,6 +111,38 @@ test('verifyCdnAssetRefs: 200 presente, 404 mancante, 5xx e rete restano unknown
       [`${CDN}/assets/giu.js`, 'unknown', null],
     ],
   );
+});
+
+test('verifyCdnAssetRefs ritenta i 5xx transitori entro il budget bounded', async () => {
+  let calls = 0;
+  const results = await verifyCdnAssetRefs({
+    urls: [`${CDN}/assets/transitorio.js`],
+    retryDelayMs: 0,
+    fetchImpl: async () => {
+      calls += 1;
+      return calls < 5 ? { ok: false, status: 502 } : { ok: true, status: 200 };
+    },
+  });
+
+  assert.equal(CDN_ASSET_CHECK_MAX_ATTEMPTS, 5);
+  assert.equal(CDN_ASSET_CHECK_RETRY_DELAY_MS, 500);
+  assert.equal(calls, 5, 'un 502 transitorio dopo il terzo tentativo deve avere ulteriore headroom');
+  assert.deepEqual(results.map((result) => [result.state, result.status]), [['present', 200]]);
+});
+
+test('verifyCdnAssetRefs non ritenta oltre il limite e resta fail-open sui 5xx persistenti', async () => {
+  let calls = 0;
+  const results = await verifyCdnAssetRefs({
+    urls: [`${CDN}/assets/sempre-rotto.js`],
+    retryDelayMs: 0,
+    fetchImpl: async () => {
+      calls += 1;
+      return { ok: false, status: 503 };
+    },
+  });
+
+  assert.equal(calls, CDN_ASSET_CHECK_MAX_ATTEMPTS);
+  assert.deepEqual(results.map((result) => [result.state, result.status]), [['unknown', 503]]);
 });
 
 test('verifyCdnAssetRefs ripiega su GET quando HEAD non è implementata', async () => {
