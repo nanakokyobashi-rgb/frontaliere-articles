@@ -470,6 +470,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-finanzkommission-k-rzt-kredit-digitalisierung': {
+    title: 'Commissione finanziaria riduce credito per trasformazione digitale a Soletta',
+    description: 'La Commissione finanziaria del Canton Soletta chiede di ridurre il credito d\'impegno per la trasformazione digitale da CHF 21,4 a CHF 21,2 milioni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, commissione, finanziaria, riduce, credito',
+    ogTitle: 'Commissione Soletta riduce credito digitalizzazione',
+    ogDescription: 'La Commissione finanziaria del Canton Soletta chiede di ridurre il credito d\'impegno per la trasformazione digitale da CHF 21,4 a CHF 21,2 milioni, motivata dalla situazione finanziaria tesa del Cantone.',
+    canonicalPath: '/articoli-soletta/finanzkommission-k-rzt-kredit-digitalisierung/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Commissione finanziaria riduce credito per trasformazione digitale a Soletta",
+      "description": "La Commissione finanziaria del Canton Soletta chiede di ridurre il credito d'impegno per la trasformazione digitale da CHF 21,4 a CHF 21,2 milioni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-finanzkommission-k-rzt-kredit-digitalisierung.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T14:42:31+00:00",
+      "dateModified": "2026-10-23T14:42:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/finanzkommission-k-rzt-kredit-digitalisierung/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -39,6 +39,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.polizia-soletta-comunicazione-media-droni.title': 'Solothurn Police: 365-day communication and 300 m drone ban',
     'blog.article.polizia-soletta-comunicazione-media-droni.excerpt': 'The media service operates 365 days a year The team manages X, Facebook and Instagram At major events, a team member is present on site The drone ban applies',
     'blog.article.polizia-soletta-comunicazione-media-droni.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.title': 'Financial Committee reduces funding for digital transformation in Solothurn',
+    'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.excerpt': 'The Finance Committee of the Cantonal Council of Solothurn is requesting that the commitment credit for digital transformation be reduced from CHF 21,4 million to CHF 21,2 million.',
+    'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

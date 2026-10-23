@@ -39,6 +39,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.polizia-soletta-comunicazione-media-droni.title': 'Polizia Soletta: comunicazione 365 giorni e divieto droni 300 m',
     'blog.article.polizia-soletta-comunicazione-media-droni.excerpt': 'Il servizio media opera 365 giorni all\'anno Il team gestisce X, Facebook e Instagram Nei grandi eventi un membro è presente sul posto Il divieto di droni vale',
     'blog.article.polizia-soletta-comunicazione-media-droni.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.title': 'Commissione finanziaria riduce credito per trasformazione digitale a Soletta',
+    'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.excerpt': 'La Commissione finanziaria del Consiglio cantonale di Soletta chiede di ridurre il credito d\'impegno per la trasformazione digitale da CHF 21,4 a CHF 21,2 milioni.',
+    'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;
