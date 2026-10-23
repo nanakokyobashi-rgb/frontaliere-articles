@@ -27,6 +27,9 @@ const blogMetaCantonUrEn: Record<string, string> = {
     'blog.article.bristenstrasse-regimi-traffico-2026.title': 'Bristenstrasse: closures and schedules through November 2026',
     'blog.article.bristenstrasse-regimi-traffico-2026.excerpt': 'Between Amsteg and St.',
     'blog.article.bristenstrasse-regimi-traffico-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.andermatt-fisco-wyden.title': 'Andermatt cuts taxes: Wyden project postponed',
+    'blog.article.andermatt-fisco-wyden.excerpt': 'Andermatt reduces the tax multiplier by 5 points, to 94%; the municipal council postpones the controversial Wyden project for now.',
+    'blog.article.andermatt-fisco-wyden.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonUrEn;

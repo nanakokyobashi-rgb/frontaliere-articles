@@ -27,6 +27,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.bristenstrasse-regimi-traffico-2026.title': 'Bristenstrasse: Sperrungen und Zeitfenster bis November 2026',
     'blog.article.bristenstrasse-regimi-traffico-2026.excerpt': 'Zwischen Amsteg und St.',
     'blog.article.bristenstrasse-regimi-traffico-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.andermatt-fisco-wyden.title': 'Andermatt senkt die Steuern: Projekt Wyden verschoben',
+    'blog.article.andermatt-fisco-wyden.excerpt': 'Andermatt senkt den Steuerfuss um 5 Punkte auf 94 Prozent; der Gemeinderat verschiebt das umstrittene Projekt Wyden vorerst.',
+    'blog.article.andermatt-fisco-wyden.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonUrDe;

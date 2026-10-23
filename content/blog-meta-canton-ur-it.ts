@@ -27,6 +27,9 @@ const blogMetaCantonUrIt: Record<string, string> = {
     'blog.article.bristenstrasse-regimi-traffico-2026.title': 'Bristenstrasse: chiusure e orari fino a novembre 2026',
     'blog.article.bristenstrasse-regimi-traffico-2026.excerpt': 'Tra Amsteg e St.',
     'blog.article.bristenstrasse-regimi-traffico-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.andermatt-fisco-wyden.title': 'Andermatt abbassa le imposte: progetto Wyden rinviato',
+    'blog.article.andermatt-fisco-wyden.excerpt': 'Andermatt riduce il moltiplicatore fiscale di 5 punti, al 94%; il consiglio comunale rinvia per ora il contestato progetto Wyden.',
+    'blog.article.andermatt-fisco-wyden.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonUrIt;
