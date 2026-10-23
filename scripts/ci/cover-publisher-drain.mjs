@@ -21,6 +21,15 @@ const PUBLISH_WORKFLOW_FOR_SECTION = {
   svizzera: 'fast-publish-article.yml',
 };
 
+const COVER_PUBLISH_RUN_PREFIX_FOR_WORKFLOW = {
+  'fast-publish-article.yml': 'cover-publish-article',
+  'fast-publish-section.yml': 'cover-publish-section',
+};
+
+const ACTIVE_PUBLISHER_RUN_STATUSES = new Set([
+  'queued', 'in_progress', 'waiting', 'requested', 'pending',
+]);
+
 function workflowForSection(section) {
   return PUBLISH_WORKFLOW_FOR_SECTION[section] || 'fast-publish-section.yml';
 }
@@ -226,10 +235,27 @@ async function listRunIds({ repo, workflow, token, deadlineAt, now }) {
     '--event', 'workflow_dispatch',
     '--branch', 'main',
     '--limit', '100',
-    '--json', 'databaseId,createdAt,displayTitle',
+    '--json', 'databaseId,createdAt,displayTitle,status',
   ], { token, deadlineAt, now });
   const runs = JSON.parse(output || '[]');
   return Array.isArray(runs) ? runs : [];
+}
+
+/**
+ * Reuse an already active cover publisher instead of queueing another run for
+ * the same shard. The drain keeps the outbox while a publisher is in progress;
+ * dispatching a fresh nonce on every hourly retry only replaces the single
+ * pending slot behind the shard concurrency gate and can starve cover drain.
+ */
+export function selectActivePublisherRun(runs, { workflow, section } = {}) {
+  const prefix = COVER_PUBLISH_RUN_PREFIX_FOR_WORKFLOW[workflow];
+  if (!prefix || !String(section || '').trim()) return null;
+  const titlePrefix = `${prefix} / ${section} / nonce=cover-${section}-`;
+  return (runs || [])
+    .filter((run) => run?.databaseId != null)
+    .filter((run) => ACTIVE_PUBLISHER_RUN_STATUSES.has(String(run.status || '')))
+    .filter((run) => String(run.displayTitle || '').startsWith(titlePrefix))
+    .sort((left, right) => String(right.createdAt || '').localeCompare(String(left.createdAt || '')))[0] || null;
 }
 
 export function selectNewRunId(runs, { beforeIds, dispatchNonce }) {
@@ -256,8 +282,18 @@ async function findNewRunId({ repo, workflow, beforeIds, dispatchNonce, token, d
 }
 
 async function defaultDispatch({ repo, workflow, section, articleIds, token, deadlineAt, now = Date.now }) {
+  const existingRuns = await listRunIds({ repo, workflow, token, deadlineAt, now });
+  const activeRun = selectActivePublisherRun(existingRuns, { workflow, section });
+  if (activeRun) {
+    return {
+      runId: String(activeRun.databaseId),
+      dispatchAccepted: false,
+      reusedExisting: true,
+    };
+  }
+
   const dispatchNonce = `cover-${section}-${now()}-${randomUUID()}`;
-  const beforeIds = new Set((await listRunIds({ repo, workflow, token, deadlineAt, now })).map((run) => String(run.databaseId)));
+  const beforeIds = new Set(existingRuns.map((run) => String(run.databaseId)));
   await runGh(dispatchArguments({ workflow, section, articleIds, repo, dispatchNonce }), { token, deadlineAt, now });
   const runId = await findNewRunId({
     repo,

@@ -6,6 +6,7 @@ import {
   drainCoverPublishers,
   groupPublisherOutbox,
   publisherStatusIsComplete,
+  selectActivePublisherRun,
   selectNewRunId,
   validatePublisherStatus,
   watchPublisherRun,
@@ -215,4 +216,46 @@ test('correla la run nuova con il nonce, ignorando una dispatch concorrente dell
   });
 
   assert.equal(selected?.databaseId, 42);
+});
+
+test('riusa la run cover attiva e non seleziona publisher manuali o conclusi', () => {
+  const selected = selectActivePublisherRun([
+    {
+      databaseId: 40,
+      createdAt: '2026-10-08T05:00:01Z',
+      displayTitle: 'cover-publish-article / frontaliere / nonce=cover-frontaliere-old',
+      status: 'queued',
+    },
+    {
+      databaseId: 41,
+      createdAt: '2026-10-08T05:00:03Z',
+      displayTitle: 'cover-publish-article / frontaliere / nonce=manual-replay',
+      status: 'in_progress',
+    },
+    {
+      databaseId: 42,
+      createdAt: '2026-10-08T05:00:02Z',
+      displayTitle: 'cover-publish-article / frontaliere / nonce=cover-frontaliere-current',
+      status: 'in_progress',
+    },
+    {
+      databaseId: 43,
+      createdAt: '2026-10-08T05:00:04Z',
+      displayTitle: 'cover-publish-article / frontaliere / nonce=cover-frontaliere-done',
+      status: 'completed',
+    },
+  ], { workflow: 'fast-publish-article.yml', section: 'frontaliere' });
+
+  assert.equal(selected?.databaseId, 42);
+  assert.equal(
+    selectActivePublisherRun([
+      {
+        databaseId: 44,
+        createdAt: '2026-10-08T05:00:05Z',
+        displayTitle: 'cover-publish-section / canton-ag / nonce=cover-canton-ag-current',
+        status: 'in_progress',
+      },
+    ], { workflow: 'fast-publish-article.yml', section: 'frontaliere' }),
+    null,
+  );
 });
