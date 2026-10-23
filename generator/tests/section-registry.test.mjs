@@ -106,6 +106,7 @@ import {
   releaseDiffers,
 } from '../../scripts/publish-section-edge.mjs';
 import {
+  SECTION_EDGE_PUBLISHER_LOCK_TTL_MS,
   SECTION_BOOTSTRAP_LOCK_TTL_MS,
   makeReleasedSectionBootstrapLock,
   makeSectionBootstrapLock,
@@ -1230,6 +1231,21 @@ test('edge: il lease R2 copre il timeout bootstrap massimo e il tombstone resta 
   assert.ok(BOOTSTRAP_WAIT_MS < SECTION_BOOTSTRAP_LOCK_TTL_MS, 'il publisher edge fallisce chiuso prima della scadenza del bootstrap attivo');
   const active = makeSectionBootstrapLock({ section: 'canton-ti', commit: COMMIT, owner: 'test/bootstrap' });
   assert.equal(active.role, 'bootstrap');
+  assert.equal(
+    Date.parse(active.expiresAt) - Date.parse(active.createdAt),
+    SECTION_BOOTSTRAP_LOCK_TTL_MS,
+    'il producer deve usare il TTL che copre il timeout del workflow',
+  );
+  const edge = makeSectionBootstrapLock({ section: 'canton-ti', commit: COMMIT, owner: 'test/edge-publisher', role: 'edge-publisher' });
+  assert.equal(
+    Date.parse(edge.expiresAt) - Date.parse(edge.createdAt),
+    SECTION_EDGE_PUBLISHER_LOCK_TTL_MS,
+    'edge-publisher deve usare il TTL bounded al proprio job',
+  );
+  assert.ok(
+    SECTION_EDGE_PUBLISHER_LOCK_TTL_MS >= (publishApiTimeoutMinutes + leaseSafetyMarginMinutes) * 60 * 1000,
+    'il TTL edge deve superare il timeout di publish-api con margine di cleanup',
+  );
   const released = makeReleasedSectionBootstrapLock({ section: 'canton-ti', commit: COMMIT, owner: 'test/bootstrap' });
   assert.equal(released.role, 'released');
   assert.equal(parseSectionBootstrapLock(released, { section: 'canton-ti' }).state, 'expired');

@@ -13,12 +13,13 @@ import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../../generator
 
 export const SECTION_BOOTSTRAP_LOCK_PREFIX = 'edge/sections/_bootstrap-locks';
 export const SECTION_BOOTSTRAP_LOCK_SCHEMA = 1;
-// fast-publish-section.yml può durare al massimo 360m e publish-api 180m.
-// Lo stesso lease protegge anche il ruolo edge-publisher, quindi supera il
-// protocollo più lungo con 15m di margine: un marker non può scadere mentre
-// il producer sta ancora renderizzando o mentre publish-api è tra acquire,
-// flip e release dei lease.
+// fast-publish-section.yml può durare al massimo 360m: il producer ha quindi
+// 15m di margine per terminare prima che un runner morto diventi reclaimable.
 export const SECTION_BOOTSTRAP_LOCK_TTL_MS = 375 * 60 * 1000;
+// publish-api ha un timeout di 180m. Il publisher usa un TTL separato e
+// bounded al proprio job, con lo stesso margine di cleanup; un cancel non può
+// lasciare il gate edge bloccato per il resto del TTL del producer.
+export const SECTION_EDGE_PUBLISHER_LOCK_TTL_MS = 195 * 60 * 1000;
 export const SECTION_BOOTSTRAP_LOCK_CACHE_CONTROL = 'public,max-age=5';
 const SECTION_RE = /^canton-[a-z]+$/;
 const SHA_RE = /^[a-f0-9]{7,64}$/;
@@ -43,7 +44,14 @@ export function bootstrapLockOwner(env = process.env) {
   return `${repository}:${run}:${attempt}`;
 }
 
-export function makeSectionBootstrapLock({ section, commit, owner, role = 'bootstrap', now = Date.now(), ttlMs = SECTION_BOOTSTRAP_LOCK_TTL_MS }) {
+export function makeSectionBootstrapLock({
+  section,
+  commit,
+  owner,
+  role = 'bootstrap',
+  now = Date.now(),
+  ttlMs = role === 'edge-publisher' ? SECTION_EDGE_PUBLISHER_LOCK_TTL_MS : SECTION_BOOTSTRAP_LOCK_TTL_MS,
+}) {
   sectionBootstrapLockKey(section);
   if (typeof commit !== 'string' || !SHA_RE.test(commit)) throw new Error(`commit non valido per il bootstrap lock: ${commit}`);
   if (typeof owner !== 'string' || !owner.trim()) throw new Error('owner assente per il bootstrap lock');
