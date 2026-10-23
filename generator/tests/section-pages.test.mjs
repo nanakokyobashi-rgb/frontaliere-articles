@@ -3459,11 +3459,24 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   // vale solo quando quel job non ha prodotto un output.
   const stagedReplay = wf.slice(wf.indexOf('  replay-api-after-staged-release:'));
   assert.match(wf, /publish_release_head:/);
+  assert.match(wf, /preflight_head: \$\{\{ steps\.preflight_head\.outputs\.head \}\}/);
+  assert.match(wf, /Record preflight revision/);
+  assert.match(wf, /PREFLIGHT_HEAD: \$\{\{ needs\.resolve\.outputs\.preflight_head \}\}/);
+  assert.match(wf, /validated_head="\$PREFLIGHT_HEAD"/);
+  assert.match(
+    wf,
+    /if \{ \[ "\$EVENT_NAME" = 'push' \] \\\n\s+\|\| \{ \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ "\$BOOTSTRAP" != 'true' \]; \}; \} \\\n\s+&& \[ "\$REF" = 'refs\/heads\/main' \] \\\n\s+&& \[ -z "\$\{SOURCE_COMMIT:-\}" \]; then/u,
+  );
   assert.match(wf, /actions\/upload-artifact@v7/);
   assert.match(wf, /actions\/download-artifact@v7/);
   assert.match(wf, /map\(\{section, rendered_head, fresh\}\)/);
   assert.match(wf, /map\(\.rendered_head\) \| unique \| if length == 1/);
   assert.match(wf, /all\(\.\[\]; \(\.rendered_head == "" and \.fresh == "false"\)\)/);
+  assert.match(wf, /mixed_matrix: \$\{\{ steps\.collect\.outputs\.mixed_matrix \}\}/);
+  assert.match(wf, /echo 'mixed_matrix=false'/);
+  assert.match(wf, /HEAD diverse[\s\S]*mixed_matrix=true[\s\S]*exit 0/);
+  assert.match(wf, /MIXED_MATRIX: \$\{\{ needs\.publish_release_head\.outputs\.mixed_matrix \}\}/);
+  assert.match(wf, /matrix mista rilevata[\s\S]*read-main-head\.sh/);
   assert.match(stagedReplay, /SOURCE_COMMIT: \$\{\{ needs\.publish_release_head\.outputs\.rendered_head \|\| inputs\.source_commit \|\| github\.sha \}\}/);
   assert.match(wf, /main e' avanzata da \$SOURCE_COMMIT a \$current_main/);
   assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
@@ -3540,8 +3553,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
   assert.match(wf, /PUSH_AFTER: \$\{\{ needs\.resolve\.outputs\.push_after \}\}/);
   assert.match(stagedReplay, /needs\.publish_release_head\.outputs\.rendered_head != ''/);
+  assert.match(stagedReplay, /needs\.publish_release_head\.outputs\.mixed_matrix == 'true'/);
   assert.match(stagedReplay, /needs\.publish_release_head\.result == 'success'/);
-  assert.match(stagedReplay, /Redispatch staged backfill on current main after stale replay/);
+  assert.match(stagedReplay, /Redispatch staged backfill on current main after stale replay or mixed matrix/);
   assert.match(stagedReplay, /TARGET_MATRIX: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/);
   assert.match(stagedReplay, /-f missing_page_paths="\$missing_page_paths"/);
   assert.match(stagedReplay, /-f known_missing_page_paths="\$known_missing_page_paths"/);
@@ -3562,10 +3576,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(replayDispatchStep, /sleep "\$retry_delay"/);
   assert.match(replayDispatchStep, /replay API bloccato:[\s\S]*exit 1/);
   const staleRecoveryStep = stagedReplay.slice(
-    stagedReplay.indexOf('- name: Redispatch staged backfill on current main after stale replay'),
+    stagedReplay.indexOf('- name: Redispatch staged backfill on current main after stale replay or mixed matrix'),
     stagedReplay.indexOf('- name: Replay publish-api after staged release'),
   );
-  assert.match(staleRecoveryStep, /if: steps\.replay_freshness\.outputs\.fresh == 'false'/);
+  assert.match(staleRecoveryStep, /if: >-[\s\S]*steps\.replay_freshness\.outputs\.fresh == 'false'[\s\S]*mixed_matrix == 'true'/);
   assert.match(staleRecoveryStep, /bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh "\$REPOSITORY" "\$dispatch_title" --ref main/);
   assert.match(staleRecoveryStep, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(staleRecoveryStep, /-f source_main_commit="\$CURRENT_MAIN"/);

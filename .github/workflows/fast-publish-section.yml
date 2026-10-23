@@ -223,6 +223,7 @@ jobs:
       allow_deferred_live_release: ${{ steps.replay_mode.outputs.allow_deferred_live_release }}
       push_before: ${{ steps.push_range.outputs.before }}
       push_after: ${{ steps.push_range.outputs.after }}
+      preflight_head: ${{ steps.preflight_head.outputs.head }}
     steps:
       - name: Checkout (resolve)
         uses: actions/checkout@v7
@@ -559,6 +560,11 @@ jobs:
             PREFLIGHT_CHANGED_FILES_FILE="$changed_files" \
             node scripts/ci/check-blog-body-links.mjs
 
+      - name: Record preflight revision
+        id: preflight_head
+        if: steps.plan.outputs.any == 'true'
+        run: echo "head=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
   publish:
     needs: resolve
     if: needs.resolve.outputs.any == 'true'
@@ -882,6 +888,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
           PUSH_AFTER: ${{ needs.resolve.outputs.push_after }}
+          PREFLIGHT_HEAD: ${{ needs.resolve.outputs.preflight_head }}
           REMOVE_STALE_CANTON_RSS_FEEDS: ${{ matrix.target.removeStaleCantonRssFeeds || false }}
           CLEANUP_INACTIVE_SURFACE: ${{ matrix.target.cleanupInactiveSurface || false }}
           API_RELEASE_COMMIT: ${{ inputs.api_release_commit }}
@@ -1039,8 +1046,11 @@ jobs:
             fi
           }
           build_publish_args "$DRY"
-          source_head="$(git rev-parse HEAD)"
-          validated_head="$source_head"
+          if ! [[ "${PREFLIGHT_HEAD:-}" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::resolve non ha esportato una SHA preflightata valida"
+            exit 1
+          fi
+          validated_head="$PREFLIGHT_HEAD"
           refresh_live_plan_and_preflight() {
             local plan_before="${PUSH_BEFORE:-}"
             local live_matrix=''
@@ -1099,7 +1109,8 @@ jobs:
               node scripts/ci/check-blog-body-links.mjs
           }
           # A normal push or cover-drain dispatch from main is a live
-          # publication request. If main advances during the render, rebase
+          # publication request, including bootstrap pushes. If main advances
+          # during the render, rebase
           # onto the live head between attempts instead of retrying the stale
           # snapshot. The original push range remains the publication scope,
           # but a retry that changes its head reruns the plan and both
@@ -1111,10 +1122,10 @@ jobs:
           # source goes stale before render, preserving the source/API
           # freshness invariant.
           normal_dispatch='false'
-          if { [ "$EVENT_NAME" = 'push' ] || [ "$EVENT_NAME" = 'workflow_dispatch' ]; } \
+          if { [ "$EVENT_NAME" = 'push' ] \
+            || { [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ "$BOOTSTRAP" != 'true' ]; }; } \
             && [ "$REF" = 'refs/heads/main' ] \
-            && [ -z "${SOURCE_COMMIT:-}" ] \
-            && [ "$BOOTSTRAP" != 'true' ]; then
+            && [ -z "${SOURCE_COMMIT:-}" ]; then
             normal_dispatch='true'
           fi
           dynamic_bootstrap_lock='false'
@@ -1293,6 +1304,7 @@ jobs:
     timeout-minutes: 10
     outputs:
       rendered_head: ${{ steps.collect.outputs.rendered_head }}
+      mixed_matrix: ${{ steps.collect.outputs.mixed_matrix }}
     steps:
       - name: Download matrix publish results
         uses: actions/download-artifact@v7
@@ -1307,6 +1319,7 @@ jobs:
           EXPECTED_MATRIX: ${{ needs.resolve.outputs.matrix }}
         run: |
           set -euo pipefail
+          echo 'mixed_matrix=false' >> "$GITHUB_OUTPUT"
           results_dir="$RUNNER_TEMP/fast-publish-results"
           mapfile -t result_files < <(find "$results_dir" -type f -name fast-publish-result.json -print)
           if [ "${#result_files[@]}" -eq 0 ]; then
@@ -1330,8 +1343,9 @@ jobs:
           fi
           rendered_head="$(jq -r 'map(.rendered_head) | unique | if length == 1 then .[0] else empty end' <<<"$actual")"
           if [ -z "$rendered_head" ]; then
-            echo "::error::la matrix publish ha prodotto HEAD diverse: $actual"
-            exit 1
+            echo "::warning::la matrix publish ha prodotto HEAD diverse; accodo il recovery sulla HEAD corrente: $actual"
+            echo 'mixed_matrix=true' >> "$GITHUB_OUTPUT"
+            exit 0
           fi
           echo "rendered_head=$rendered_head" >> "$GITHUB_OUTPUT"
 
@@ -1339,8 +1353,8 @@ jobs:
   # its HTML. After a successful staged section publish, every non-dry push
   # arms the API replay so an earlier fail-closed readiness check cannot strand
   # the registry on the previous release. API-triggered replays are excluded
-  # to prevent a workflow_run loop; genuine render errors or mixed matrix HEADs
-  # still block replay.
+  # to prevent a workflow_run loop; genuine render errors still block replay,
+  # while mixed matrix HEADs are handed to the bounded recovery dispatch below.
   replay-api-after-staged-release:
     needs: [resolve, publish, publish_release_head]
     if: >-
@@ -1348,8 +1362,11 @@ jobs:
       needs.resolve.result == 'success' &&
       needs.publish.result == 'success' &&
       needs.publish_release_head.result == 'success' &&
-      needs.publish_release_head.outputs.rendered_head != '' &&
-      (needs.resolve.outputs.bootstrap == 'true' || needs.resolve.outputs.replay_api_after_publish == 'true') &&
+      (needs.publish_release_head.outputs.rendered_head != '' ||
+       needs.publish_release_head.outputs.mixed_matrix == 'true') &&
+      (needs.publish_release_head.outputs.mixed_matrix == 'true' ||
+       needs.resolve.outputs.bootstrap == 'true' ||
+       needs.resolve.outputs.replay_api_after_publish == 'true') &&
       needs.resolve.outputs.dry != 'true' &&
       github.event_name != 'workflow_run'
     runs-on: ubuntu-latest
@@ -1394,8 +1411,23 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
           SOURCE_COMMIT: ${{ needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
+          MIXED_MATRIX: ${{ needs.publish_release_head.outputs.mixed_matrix }}
         run: |
           set -euo pipefail
+          if [ "${MIXED_MATRIX:-}" = 'true' ]; then
+            if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
+              echo "::error::impossibile verificare main dopo una matrix mista"
+              exit 1
+            fi
+            if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::error::revisione corrente di main non valida dopo una matrix mista"
+              exit 1
+            fi
+            echo "current_main=$current_main" >> "$GITHUB_OUTPUT"
+            echo "::notice::matrix mista rilevata; il recovery ripartira' dalla HEAD corrente $current_main"
+            echo 'fresh=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
             echo "::error::source commit non e' una SHA completa per il replay staged"
             exit 1
@@ -1444,8 +1476,10 @@ jobs:
         if: steps.replay_freshness.outcome == 'success'
         run: node generator/scripts/load-rc-env.mjs
 
-      - name: Redispatch staged backfill on current main after stale replay
-        if: steps.replay_freshness.outputs.fresh == 'false'
+      - name: Redispatch staged backfill on current main after stale replay or mixed matrix
+        if: >-
+          steps.replay_freshness.outputs.fresh == 'false' ||
+          needs.publish_release_head.outputs.mixed_matrix == 'true'
         env:
           REPOSITORY: ${{ github.repository }}
           TARGET_MATRIX: ${{ needs.resolve.outputs.matrix }}
@@ -1508,7 +1542,9 @@ jobs:
           fi
 
       - name: Replay publish-api after staged release
-        if: steps.replay_freshness.outputs.fresh == 'true'
+        if: >-
+          steps.replay_freshness.outputs.fresh == 'true' &&
+          needs.publish_release_head.outputs.mixed_matrix != 'true'
         env:
           REPOSITORY: ${{ github.repository }}
           SOURCE_COMMIT: ${{ needs.publish_release_head.outputs.rendered_head || inputs.source_commit || github.sha }}
