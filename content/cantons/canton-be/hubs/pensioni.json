@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-22T12:14:01.253Z",
-  "contentHash": "c0e8c0bed8a6a7905029ca0cf473af36fd765edef73696b5b8e1c775219bb271",
+  "updatedAt": "2026-10-23T02:23:53.372Z",
+  "contentHash": "15068969f69fa59da5474d8548cefd24f1b5e522c98cabda332ca647f7115d77",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-21T20:56:46.769Z",
+      "updatedAt": "2026-10-22T16:03:41.824Z",
       "keyFacts": 0
     }
   ],
@@ -141,7 +141,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -152,16 +152,16 @@
           "date": "2026-10-09T23:26:36.398Z"
         },
         {
+          "title": "Berna approva contributi per Rotbach e Saanen",
+          "url": "/articoli-berna/contributi-rotbach-saanen/",
+          "excerpt": "Il Governo cantonale approva circa CHF 590'000 per il Rotbach e CHF 720'000 per la protezione dalle piene a Saanen, nel Canton Berna.",
+          "date": "2026-10-23T02:11:10.079Z"
+        },
+        {
           "title": "Corsi lingua Berna: integrazione, contributi e requisiti",
           "url": "/articoli-svizzera/integrazione-lingua-berna-contributi/",
           "excerpt": "Nel Cantone di Berna i programmi di integrazione e i contributi alla formazione continua dipendono dal livello cantonale, comunale o istituzionale; requisiti, scadenze e importi devono essere verificati sulla fonte…",
           "date": "2026-10-15T04:28:17.925Z"
-        },
-        {
-          "title": "Formazione continua nel Canton Berna: requisiti e contributi",
-          "url": "/articoli-svizzera/contributi-formazione-berna-requisiti/",
-          "excerpt": "Nel Canton Berna requisiti, termini e importi dei contributi alla formazione continua seguono regole cantonali e vanno verificati sulla fonte ufficiale.",
-          "date": "2026-10-08T00:53:16.011Z"
         },
         {
           "title": "AVS e prestazioni complementari nel Canton Berna",
@@ -188,10 +188,10 @@
           "date": "2026-08-13T16:04:43.335Z"
         },
         {
-          "title": "Mercato del lavoro Berna: salari, formazione e previdenza",
-          "url": "/articoli-svizzera/mercato-berna-salari-formazione/",
-          "excerpt": "Nessun salario minimo federale svizzero. Scopri orari, contributi AVS/LPP, livelli salariali per formazione e contratti collettivi nel Canton Berna.",
-          "date": "2026-08-22T04:38:04.511Z"
+          "title": "Formazione continua nel Canton Berna: requisiti e contributi",
+          "url": "/articoli-svizzera/contributi-formazione-berna-requisiti/",
+          "excerpt": "Nel Canton Berna requisiti, termini e importi dei contributi alla formazione continua seguono regole cantonali e vanno verificati sulla fonte ufficiale.",
+          "date": "2026-10-08T00:53:16.011Z"
         }
       ],
       "latestCantonArticles": [],
@@ -213,7 +213,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-22T12:14:01.253Z"
+      "updatedAt": "2026-10-23T02:23:53.372Z"
     },
     "en": {
       "canton": "BE",
@@ -327,7 +327,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -338,16 +338,16 @@
           "date": "2026-10-09T23:26:36.398Z"
         },
         {
+          "title": "Bern approves contributions for Rotbach and Saanen",
+          "url": "/en/bern-articles/bern-contributions-rotbach-saanen/",
+          "excerpt": "The cantonal government approves approximately CHF 590'000 for the Rotbach and CHF 720'000 for flood protection in Saanen, in the Canton of Bern.",
+          "date": "2026-10-23T02:11:10.079Z"
+        },
+        {
           "title": "Language courses in Bern: integration, subsidies and requirements",
           "url": "/en/swiss-articles/language-courses-in-bern-integration-subsidies-and-requirements/",
           "excerpt": "In the Canton of Bern, integration programs and continuing education contributions depend on the cantonal, municipal or institutional level; requirements, deadlines and amounts must be verified using the official source.",
           "date": "2026-10-15T04:28:17.925Z"
-        },
-        {
-          "title": "Continuing education in the Canton of Bern: requirements and contributions",
-          "url": "/en/swiss-articles/bern-continuing-education-grants-requirements/",
-          "excerpt": "In the Canton of Bern, requirements, deadlines and amounts of continuing education contributions follow cantonal rules and must be verified against the official source.",
-          "date": "2026-10-08T00:53:16.011Z"
         },
         {
           "title": "AVS and complementary services in Canton Bern",
@@ -374,10 +374,10 @@
           "date": "2026-08-13T16:04:43.335Z"
         },
         {
-          "title": "Labour market Bern: wages, training and social security",
-          "url": "/en/swiss-articles/bern-labour-market-salaries-training/",
-          "excerpt": "No Swiss federal minimum wage. Discover timetables, AVS/LPP contributions, salary levels for training and collective agreements in the Canton of Bern.",
-          "date": "2026-08-22T04:38:04.511Z"
+          "title": "Continuing education in the Canton of Bern: requirements and contributions",
+          "url": "/en/swiss-articles/bern-continuing-education-grants-requirements/",
+          "excerpt": "In the Canton of Bern, requirements, deadlines and amounts of continuing education contributions follow cantonal rules and must be verified against the official source.",
+          "date": "2026-10-08T00:53:16.011Z"
         }
       ],
       "latestCantonArticles": [],
@@ -399,7 +399,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-22T12:14:01.253Z"
+      "updatedAt": "2026-10-23T02:23:53.372Z"
     },
     "de": {
       "canton": "BE",
@@ -513,7 +513,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -524,16 +524,16 @@
           "date": "2026-10-09T23:26:36.398Z"
         },
         {
+          "title": "Bern genehmigt Beiträge für Rotbach und Saanen",
+          "url": "/de/bern-artikel/bern-beitraege-rotbach-saanen/",
+          "excerpt": "Die Kantonsregierung genehmigt rund CHF 590'000 für den Rotbach und CHF 720'000 für den Hochwasserschutz in Saanen im Kanton Bern.",
+          "date": "2026-10-23T02:11:10.079Z"
+        },
+        {
           "title": "Sprachkurse Bern: Integration, Beiträge und Voraussetzungen",
           "url": "/de/schweiz-artikel/sprachkurse-bern-integration-beitrage-und-voraussetzungen/",
           "excerpt": "Im Kanton Bern hängen Integrationsprogramme und Beiträge zur Weiterbildung von der kantonalen, kommunalen oder institutionellen Ebene ab; Voraussetzungen, Fristen und Beträge müssen anhand der offiziellen Quelle…",
           "date": "2026-10-15T04:28:17.925Z"
-        },
-        {
-          "title": "Weiterbildung im Kanton Bern: Voraussetzungen und Beiträge",
-          "url": "/de/schweiz-artikel/bern-weiterbildung-beitrage-voraussetzungen/",
-          "excerpt": "Im Kanton Bern richten sich die Voraussetzungen, Fristen und Beträge der Beiträge zur Weiterbildung nach kantonalen Regeln und müssen anhand der offiziellen Quelle überprüft werden.",
-          "date": "2026-10-08T00:53:16.011Z"
         },
         {
           "title": "AHV und Ergänzungsleistungen im Kanton Bern",
@@ -560,10 +560,10 @@
           "date": "2026-08-13T16:04:43.335Z"
         },
         {
-          "title": "Arbeitsmarkt Bern: Löhne, Ausbildung und Vorsorge",
-          "url": "/de/schweiz-artikel/arbeitsmarkt-bern-loehne-ausbildung/",
-          "excerpt": "Kein schweizerischer Bundesmindestlohn. Entdecken Sie Fahrpläne, AHV/BVG-Beiträge, Bildungslohnniveaus und Kollektivverträge im Kanton Bern.",
-          "date": "2026-08-22T04:38:04.511Z"
+          "title": "Weiterbildung im Kanton Bern: Voraussetzungen und Beiträge",
+          "url": "/de/schweiz-artikel/bern-weiterbildung-beitrage-voraussetzungen/",
+          "excerpt": "Im Kanton Bern richten sich die Voraussetzungen, Fristen und Beträge der Beiträge zur Weiterbildung nach kantonalen Regeln und müssen anhand der offiziellen Quelle überprüft werden.",
+          "date": "2026-10-08T00:53:16.011Z"
         }
       ],
       "latestCantonArticles": [],
@@ -585,7 +585,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-22T12:14:01.253Z"
+      "updatedAt": "2026-10-23T02:23:53.372Z"
     },
     "fr": {
       "canton": "BE",
@@ -699,7 +699,7 @@
               "url": "https://www.akbern.ch/de/Neuigkeiten/Vergleichsrechnungen-zur-13-Altersrente-bei-Witwen-und-Witwerrenten.html"
             }
           ],
-          "updatedAt": "2026-10-21T20:56:46.769Z"
+          "updatedAt": "2026-10-22T16:03:41.824Z"
         }
       ],
       "curatedArticles": [
@@ -710,16 +710,16 @@
           "date": "2026-10-09T23:26:36.398Z"
         },
         {
+          "title": "Berne approuve des contributions pour Rotbach et Saanen",
+          "url": "/fr/articles-berne/berne-contributions-rotbach-saanen/",
+          "excerpt": "Le gouvernement cantonal approuve environ CHF 590'000 pour le Rotbach et CHF 720'000 pour la protection contre les crues à Saanen, dans le canton de Berne.",
+          "date": "2026-10-23T02:11:10.079Z"
+        },
+        {
           "title": "Cours de langue Berne : intégration, cotisations et exigences",
           "url": "/fr/articles-suisse/cours-de-langue-berne-integration-cotisations-et-exigences/",
           "excerpt": "Dans le canton de Berne, les programmes d'intégration et les contributions à la formation continue dépendent du niveau cantonal, communal ou institutionnel ; les exigences, les délais et les montants doivent être…",
           "date": "2026-10-15T04:28:17.925Z"
-        },
-        {
-          "title": "Formation continue dans le canton de Berne : exigences et contributions",
-          "url": "/fr/articles-suisse/berne-formation-continue-aides-conditions/",
-          "excerpt": "Dans le canton de Berne, les exigences, les délais et les montants des contributions à la formation continue suivent les règles cantonales et doivent être vérifiés dans la source officielle.",
-          "date": "2026-10-08T00:53:16.011Z"
         },
         {
           "title": "AVS et prestations complémentaires dans le canton de Berne",
@@ -746,10 +746,10 @@
           "date": "2026-08-13T16:04:43.335Z"
         },
         {
-          "title": "Marché du travail Berne : salaires, formation et prévoyance",
-          "url": "/fr/articles-suisse/marche-travail-berne-salaires-formation/",
-          "excerpt": "Pas de salaire minimum fédéral suisse. Découvrez les horaires, les cotisations AVS/LPP, les niveaux de salaire pour la formation et les conventions collectives dans le canton de Berne.",
-          "date": "2026-08-22T04:38:04.511Z"
+          "title": "Formation continue dans le canton de Berne : exigences et contributions",
+          "url": "/fr/articles-suisse/berne-formation-continue-aides-conditions/",
+          "excerpt": "Dans le canton de Berne, les exigences, les délais et les montants des contributions à la formation continue suivent les règles cantonales et doivent être vérifiés dans la source officielle.",
+          "date": "2026-10-08T00:53:16.011Z"
         }
       ],
       "latestCantonArticles": [],
@@ -771,7 +771,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-22T12:14:01.253Z"
+      "updatedAt": "2026-10-23T02:23:53.372Z"
     }
   }
 }
