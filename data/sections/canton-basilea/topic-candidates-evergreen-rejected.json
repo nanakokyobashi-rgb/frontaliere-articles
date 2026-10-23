@@ -15,6 +15,10 @@
     "canton-basilea::https://www.bs.ch/news/2026-neue-schraegluftbilder-fuer-basel-stadt": {
       "section": "canton-basilea",
       "ts": 1792777234107
+    },
+    "canton-basilea::https://www.bazonline.ch/bevoelkerungsamt-basel-stadt-zieht-ins-rosental-954177294827": {
+      "section": "canton-basilea",
+      "ts": 1792793843806
     }
   }
 }
