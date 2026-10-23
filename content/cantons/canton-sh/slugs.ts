@@ -20,6 +20,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'neunkirch-supervisore-cantonale': { it: 'neunkirch-supervisore-cantonale', en: 'neunkirch-cantonal-supervisor', de: 'neunkirch-kantonaler-aufpasser', fr: 'neunkirch-superviseur-cantonal' },
  'nuova-app-schaffhauser-nachrichten-2026': { it: 'nuova-app-schaffhauser-nachrichten-2026', en: 'new-schaffhauser-nachrichten-app-2026', de: 'neue-schaffhauser-nachrichten-app-2026', fr: 'nouvelle-app-schaffhauser-nachrichten-2026' },
  'sciaffusa-regole-datencenter-beringen': { it: 'sciaffusa-regole-datencenter-beringen', en: 'schaffhausen-datacenter-rules-beringen', de: 'schaffhausen-rechenzentrum-regeln-beringen', fr: 'schaffhouse-regles-centre-donnees-beringen' },
+ 'sciaffusa-regole-datacenter': { it: 'sciaffusa-regole-datacenter', en: 'schaffhausen-data-centres', de: 'schaffhausen-rechenzentren-regeln', fr: 'schaffhouse-centres-donnees' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

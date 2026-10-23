@@ -54,6 +54,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.sciaffusa-regole-datencenter-beringen.title': 'Schaffhouse durcit les règles applicables aux centres de données',
     'blog.article.sciaffusa-regole-datencenter-beringen.excerpt': 'Le canton de Schaffhouse prévoit des règles plus strictes pour les centres de données.',
     'blog.article.sciaffusa-regole-datencenter-beringen.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sciaffusa-regole-datacenter.title': 'Schaffhouse : proposition sur l\'électricité, l\'eau et les centres de données',
+    'blog.article.sciaffusa-regole-datacenter.excerpt': 'La commission du Conseil cantonal propose des prélèvements sur l\'électricité et l\'eau ; le Gouvernement soutient la modification.',
+    'blog.article.sciaffusa-regole-datacenter.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

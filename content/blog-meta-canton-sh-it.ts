@@ -54,6 +54,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.sciaffusa-regole-datencenter-beringen.title': 'Sciaffusa inasprisce regole datacenter',
     'blog.article.sciaffusa-regole-datencenter-beringen.excerpt': 'Il Canton Sciaffusa prevede regole più severe per i datacenter.',
     'blog.article.sciaffusa-regole-datencenter-beringen.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.sciaffusa-regole-datacenter.title': 'Sciaffusa: proposta su elettricità, acqua e data center',
+    'blog.article.sciaffusa-regole-datacenter.excerpt': 'La commissione del Consiglio cantonale propone prelievi su elettricità e acqua; il Governo sostiene la modifica.',
+    'blog.article.sciaffusa-regole-datacenter.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

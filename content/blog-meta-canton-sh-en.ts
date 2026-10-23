@@ -54,6 +54,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.sciaffusa-regole-datencenter-beringen.title': 'Schaffhausen tightens data center rules',
     'blog.article.sciaffusa-regole-datencenter-beringen.excerpt': 'The Canton of Schaffhausen plans stricter rules for data centers.',
     'blog.article.sciaffusa-regole-datencenter-beringen.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sciaffusa-regole-datacenter.title': 'Schaffhausen: electricity, water and data centre proposal',
+    'blog.article.sciaffusa-regole-datacenter.excerpt': 'The cantonal council commission proposes levies on electricity and water; the government supports the change.',
+    'blog.article.sciaffusa-regole-datacenter.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

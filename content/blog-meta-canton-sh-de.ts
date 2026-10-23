@@ -54,6 +54,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.sciaffusa-regole-datencenter-beringen.title': 'Schaffhausen verschärft Regeln für Rechenzentren',
     'blog.article.sciaffusa-regole-datencenter-beringen.excerpt': 'Der Kanton Schaffhausen sieht strengere Regeln für Rechenzentren vor.',
     'blog.article.sciaffusa-regole-datencenter-beringen.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sciaffusa-regole-datacenter.title': 'Schaffhausen: Vorschlag zu Strom, Wasser und Rechenzentren',
+    'blog.article.sciaffusa-regole-datacenter.excerpt': 'Die Kommission des Kantonsrates schlägt Abgaben auf Strom und Wasser vor; die Regierung unterstützt die Änderung.',
+    'blog.article.sciaffusa-regole-datacenter.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;
