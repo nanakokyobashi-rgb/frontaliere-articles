@@ -55,6 +55,12 @@
 // preserving the site's observable escape semantics.
 const TS_ESCAPE_RX = /\\(u\{[0-9a-fA-F]+\}|u[0-9a-fA-F]{4}|x[0-9a-fA-F]{2}|\r\n|[\s\S])/g;
 const TS_CODE_POINT_ESCAPE_RX = /^(x[0-9a-fA-F]{2}|u\{[0-9a-fA-F]+\})/u;
+const TS_CONTROL_ESCAPES = Object.freeze({
+  b: '\b',
+  f: '\f',
+  v: '\v',
+  0: '\0',
+});
 
 function decodeTypeScriptCodePointEscape(escape) {
   const match = TS_CODE_POINT_ESCAPE_RX.exec(escape);
@@ -93,6 +99,7 @@ export function unescapeTsString(value, escapes, { decodeUnicode = false } = {})
       return String.fromCharCode(Number.parseInt(escape.slice(1), 16));
     }
     const ch = escape[0];
+    if (Object.prototype.hasOwnProperty.call(TS_CONTROL_ESCAPES, ch)) return TS_CONTROL_ESCAPES[ch];
     return Object.prototype.hasOwnProperty.call(escapes, ch) ? escapes[ch] : whole;
   });
 }
@@ -117,6 +124,7 @@ export function tsStringEscapesWithNewlineAs(newlineAs) {
     n: newlineAs,
     r: '',
     t: ' ',
+    ...TS_CONTROL_ESCAPES,
   };
 }
 

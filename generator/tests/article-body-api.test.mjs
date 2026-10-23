@@ -160,6 +160,12 @@ test('TypeScript hexadecimal and code-point escapes are decoded in body output',
   assert.equal(fields.find(({ field }) => field === 'body1')?.value, 'CC 🌍 A');
 });
 
+test('TypeScript control escapes are decoded in body output', () => {
+  const source = sourceFor(articleId, String.raw`a\b\f\v\0z`);
+  const fields = extractArticleBodyFields(source);
+  assert.equal(fields.find(({ field }) => field === 'body1')?.value, `a\b\f\v\0z`);
+});
+
 test('template literals normalize raw CRLF line endings to LF', () => {
   const source = [
     'const body = {',
