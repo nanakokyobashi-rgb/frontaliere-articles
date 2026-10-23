@@ -42,7 +42,7 @@ test('il trigger push conserva tutti gli ID dei body cambiati', () => {
   assert.match(resolveStep, /target_shard="\$\(node scripts\/ci\/fast-publish-section\.mjs shard-of "\$target_section"\)"/);
   assert.match(resolveStep, /echo "matrix=\$matrix_with_shards"/);
   assert.doesNotMatch(resolveStep, /body_section=svizzera/);
-  assert.match(resolveStep, /groups=.*body_section.*body_ids_json/);
+  assert.match(resolveStep, /merge_group_ids "\$body_section" "\$body_ids_json"/);
   assert.doesNotMatch(resolveStep, /one commit changes both article sections/);
   assert.match(resolveStep, /EVENT_NAME.*workflow_dispatch.*section.*body_section/);
   assert.match(resolveStep, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);
@@ -335,7 +335,7 @@ test('body e immagini multi-sezione diventano target matrix separati', () => {
   const imagePlan = resolveStep.slice(resolveStep.indexOf('image_plan='));
   assert.match(imagePlan, /image_section=/);
   assert.match(imagePlan, /image_ids_json=/);
-  assert.match(imagePlan, /groups=.*image_section/);
+  assert.match(imagePlan, /merge_group_ids "\$image_section" "\$image_ids_json"/);
   assert.doesNotMatch(imagePlan, /one commit changes both article sections/);
   assert.match(workflow, /matrix:\s*\n\s+target: \$\{\{ fromJSON\(needs\.resolve\.outputs\.matrix\) \}\}/);
   assert.match(workflow, /group: fast-publish-article-\$\{\{ matrix\.target\.shard \}\}/);
