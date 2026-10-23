@@ -45,6 +45,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.san-gallo-protezione-infrastrutture-critiche.title': 'St. Gallen stärkt den Schutz kritischer Infrastrukturen',
     'blog.article.san-gallo-protezione-infrastrutture-critiche.excerpt': 'Die Regierung von St.',
     'blog.article.san-gallo-protezione-infrastrutture-critiche.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.san-gallo-autostrada-rosenberg-terza-canna.title': 'St. Gallen: dritte Röhre am Rosenberg und umstrittene Zahlen',
+    'blog.article.san-gallo-autostrada-rosenberg-terza-canna.excerpt': 'Befürworter fordern Autobahnausbau; der Planer Hug-Di Lena bezeichnet die Zahlengrundlage als fragwürdig.',
+    'blog.article.san-gallo-autostrada-rosenberg-terza-canna.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;

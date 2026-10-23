@@ -45,6 +45,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.san-gallo-protezione-infrastrutture-critiche.title': 'San Gallo rafforza protezione infrastrutture critiche',
     'blog.article.san-gallo-protezione-infrastrutture-critiche.excerpt': 'Il Governo di San Gallo rafforza la protezione delle infrastrutture critiche La strategia copre infrastrutture, processi e servizi La resilienza include',
     'blog.article.san-gallo-protezione-infrastrutture-critiche.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.san-gallo-autostrada-rosenberg-terza-canna.title': 'San Gallo: terza canna Rosenberg e cifre contestate',
+    'blog.article.san-gallo-autostrada-rosenberg-terza-canna.excerpt': 'Sostenitori chiedono ampliamento autostradale; pianificatore Hug-Di Lena definisce discutibili le basi numeriche.',
+    'blog.article.san-gallo-autostrada-rosenberg-terza-canna.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

@@ -160,4 +160,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'san-gallo-autostrada-rosenberg-terza-canna',
+ category: 'novita',
+ date: '2026-10-23T04:27:56.026Z',
+ image: '/images/blog/article-san-gallo-autostrada-rosenberg-terza-canna.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

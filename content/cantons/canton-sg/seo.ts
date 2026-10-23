@@ -543,6 +543,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-san-gallo-autostrada-rosenberg-terza-canna': {
+    title: 'San Gallo: terza canna Rosenberg e cifre contestate',
+    description: 'Ampliamento autostradale a San Gallo: sostenitori chiedono terza canna sotto il Rosenberg e collegamento al Güterbahnhof. Pianificatore critica',
+    keywords: 'frontalieri, ticino, svizzera, italia, gallo, terza, canna, rosenberg',
+    ogTitle: 'San Gallo: terza canna autostradale Rosenberg e cifre discutibili',
+    ogDescription: 'A San Gallo i favorevoli chiedono una terza canna sotto il Rosenberg e un collegamento parziale alla stazione merci. Il pianificatore Thomas Hug-Di Lena giudica discutibili le cifre alla base della richiesta. La visualizzazione ufficiale mostra',
+    canonicalPath: '/articoli-san-gallo/san-gallo-autostrada-rosenberg-terza-canna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "San Gallo: terza canna Rosenberg e cifre contestate",
+      "description": "Ampliamento autostradale a San Gallo: sostenitori chiedono terza canna sotto il Rosenberg e collegamento al Güterbahnhof. Pianificatore critica",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-san-gallo-autostrada-rosenberg-terza-canna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T04:27:56+00:00",
+      "dateModified": "2026-10-23T04:27:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/san-gallo-autostrada-rosenberg-terza-canna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
