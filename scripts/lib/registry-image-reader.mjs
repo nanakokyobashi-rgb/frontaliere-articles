@@ -1,4 +1,4 @@
-import { matchingDelimiter } from './ts-literals.mjs';
+import { matchingDelimiter, decodeStaticStringLiteral } from './ts-literals.mjs';
 
 function skipTrivia(source, start, limit = source.length) {
   let i = start;
@@ -23,17 +23,17 @@ function skipTrivia(source, start, limit = source.length) {
 function readString(source, start, limit = source.length) {
   const quote = source[start];
   if (quote !== "'" && quote !== '"') return null;
-  let value = '';
   for (let i = start + 1; i < limit; i += 1) {
     const ch = source[i];
-    if (ch === quote) return { value, end: i + 1 };
+    if (ch === '\\') {
+      i += 1;
+      continue;
+    }
+    if (ch === quote) {
+      const raw = source.slice(start + 1, i);
+      return { value: decodeStaticStringLiteral(raw, quote), end: i + 1 };
+    }
     if (ch === '\n' || ch === '\r') throw new Error('stringa non chiusa nel registro');
-    if (ch !== '\\') { value += ch; continue; }
-    i += 1;
-    if (i >= limit) throw new Error('escape non chiuso nel registro');
-    const escaped = source[i];
-    const decoded = { n: '\n', r: '\r', t: '\t', b: '\b', f: '\f', v: '\v', '0': '\0' }[escaped];
-    value += decoded ?? escaped;
   }
   throw new Error('stringa non chiusa nel registro');
 }

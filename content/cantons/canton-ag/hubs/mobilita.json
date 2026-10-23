@@ -4,17 +4,17 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-23T05:52:42.601Z",
-  "contentHash": "2b1e8f3f800b9793c8d609f8994ad93091d9b02e6b0ff745c3b760f74d5f9da4",
+  "updatedAt": "2026-10-23T10:42:39.932Z",
+  "contentHash": "ad88c010eb88b3644db9402126b9b239932bf83973e149302ef91c49b0a3172b",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-21T23:59:59.000Z",
+      "updatedAt": "2026-10-22T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-22T21:58:34.031Z",
+      "updatedAt": "2026-10-23T05:26:03.621Z",
       "keyFacts": 2
     },
     {
@@ -33,71 +33,71 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Bad Säckingen – Stein AG, settimana conclusa: 21 ottobre 2026"
+          "note": "Bad Säckingen – Stein AG, settimana conclusa: 22 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "6",
-          "note": "segnalazioni aggiornate: 22 ottobre 2026"
+          "value": "8",
+          "note": "segnalazioni aggiornate: 23 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "32",
-          "note": "segnalazioni aggiornate: 22 ottobre 2026"
+          "note": "segnalazioni aggiornate: 23 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 15 ottobre 2026 – 21 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 16 ottobre 2026 – 22 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Bad Säckingen – Stein AG",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/bad-sackingen-stein-ag/oggi/"
             },
             {
               "label": "Hohentengen am Hochrhein – Kaiserstuhl AG",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/hohentengen-am-hochrhein-kaiserstuhl-ag/oggi/"
             },
             {
               "label": "Küssaberg – Bad Zurzach AG",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/kussaberg-bad-zurzach-ag/oggi/"
             },
             {
               "label": "Laufenburg (Baden) – Laufenburg AG",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/laufenburg-laufenburg-ag/oggi/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/rheinfelden-rheinfelden-ag-alte-rheinbrucke/oggi/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/rheinfelden-rheinfelden-ag-autostrada-a861-a3/oggi/"
             },
             {
               "label": "Waldshut-Tiengen – Koblenz AG",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/waldshut-tiengen-koblenz-ag/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-21T23:59:59.000Z"
+          "updatedAt": "2026-10-22T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -135,26 +135,26 @@
               "date": "2026-10-01T13:52:00.000Z"
             },
             {
+              "label": "A1 Bern <-> Zürich tra Svincolo autostradale Aarau Ost E Svincolo autostradale Rothrist Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia d'emergenza…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 20 novembre 2026",
+              "date": "2026-10-22T04:31:00.000Z"
+            },
+            {
+              "label": "A3 Zürich -> Basel tra Svincolo autostradale Eiken E Svincolo autostradale Rheinfelden Ost Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia d'emergenza…",
+              "value": "Chiusura",
+              "detail": "fine prevista: 10 novembre 2026",
+              "date": "2026-10-22T11:10:00.000Z"
+            },
+            {
               "label": "A1 Zürich -> Bern tra Svincolo autostradale Mägenwil E Svincolo autostradale Lenzburg Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: corsia d'emergenza chiusa",
               "value": "Chiusura",
               "detail": "fine prevista: 29 ottobre 2026",
               "date": "2026-10-22T14:15:00.000Z"
-            },
-            {
-              "label": "Langenthal <-> Zofingen tra Luogo Strengelbach E Luogo St. Urban Situazione: pericolo Causa: lavori di costruzione",
-              "value": "Cantiere",
-              "detail": "fine prevista: 30 aprile 2027",
-              "date": "2025-04-07T09:38:00.000Z"
-            },
-            {
-              "label": "H24 Aarau <-> Frick Luogo Rombach Situazione: problemi di traffico cantiere Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
-              "value": "Cantiere",
-              "detail": "fine prevista: 1 luglio 2027",
-              "date": "2025-09-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-22T21:58:34.031Z"
+          "updatedAt": "2026-10-23T05:26:03.621Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -252,7 +252,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "en": {
       "canton": "AG",
@@ -263,71 +263,71 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Bad Säckingen – Stein AG, week ending 21 October 2026"
+          "note": "Bad Säckingen – Stein AG, week ending 22 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "6",
-          "note": "reports as of 22 October 2026"
+          "value": "8",
+          "note": "reports as of 23 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "32",
-          "note": "reports as of 22 October 2026"
+          "note": "reports as of 23 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 15 October 2026 to 21 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 16 October 2026 to 22 October 2026, fastest first.",
           "items": [
             {
               "label": "Bad Säckingen – Stein AG",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/bad-sackingen-stein-ag/today/"
             },
             {
               "label": "Hohentengen am Hochrhein – Kaiserstuhl AG",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/hohentengen-am-hochrhein-kaiserstuhl-ag/today/"
             },
             {
               "label": "Küssaberg – Bad Zurzach AG",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/kussaberg-bad-zurzach-ag/today/"
             },
             {
               "label": "Laufenburg (Baden) – Laufenburg AG",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/laufenburg-laufenburg-ag/today/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/rheinfelden-rheinfelden-ag-alte-rheinbrucke/today/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/rheinfelden-rheinfelden-ag-autostrada-a861-a3/today/"
             },
             {
               "label": "Waldshut-Tiengen – Koblenz AG",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/waldshut-tiengen-koblenz-ag/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-21T23:59:59.000Z"
+          "updatedAt": "2026-10-22T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -365,26 +365,26 @@
               "date": "2026-10-01T13:52:00.000Z"
             },
             {
+              "label": "A1 Bern <-> Zürich tra Svincolo autostradale Aarau Ost E Svincolo autostradale Rothrist Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia d'emergenza…",
+              "value": "Closure",
+              "detail": "until 20 November 2026",
+              "date": "2026-10-22T04:31:00.000Z"
+            },
+            {
+              "label": "A3 Zürich -> Basel tra Svincolo autostradale Eiken E Svincolo autostradale Rheinfelden Ost Situazione: problemi di traffico cantiere, lunghezza [km] 0.2 Limitazione del traffico: corsia d'emergenza…",
+              "value": "Closure",
+              "detail": "until 10 November 2026",
+              "date": "2026-10-22T11:10:00.000Z"
+            },
+            {
               "label": "A1 Zürich -> Bern tra Svincolo autostradale Mägenwil E Svincolo autostradale Lenzburg Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: corsia d'emergenza chiusa",
               "value": "Closure",
               "detail": "until 29 October 2026",
               "date": "2026-10-22T14:15:00.000Z"
-            },
-            {
-              "label": "Langenthal <-> Zofingen tra Luogo Strengelbach E Luogo St. Urban Situazione: pericolo Causa: lavori di costruzione",
-              "value": "Roadworks",
-              "detail": "until 30 April 2027",
-              "date": "2025-04-07T09:38:00.000Z"
-            },
-            {
-              "label": "H24 Aarau <-> Frick Luogo Rombach Situazione: problemi di traffico cantiere Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
-              "value": "Roadworks",
-              "detail": "until 1 July 2027",
-              "date": "2025-09-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-22T21:58:34.031Z"
+          "updatedAt": "2026-10-23T05:26:03.621Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -482,7 +482,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "de": {
       "canton": "AG",
@@ -493,71 +493,71 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Bad Säckingen – Stein AG, Woche bis 21. Oktober 2026"
+          "note": "Bad Säckingen – Stein AG, Woche bis 22. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "6",
-          "note": "Meldungen vom 22. Oktober 2026"
+          "value": "8",
+          "note": "Meldungen vom 23. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "32",
-          "note": "Meldungen vom 22. Oktober 2026"
+          "note": "Meldungen vom 23. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 15. Oktober 2026 bis 21. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 16. Oktober 2026 bis 22. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Bad Säckingen – Stein AG",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/bad-sackingen-stein-ag/heute/"
             },
             {
               "label": "Hohentengen am Hochrhein – Kaiserstuhl AG",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/hohentengen-am-hochrhein-kaiserstuhl-ag/heute/"
             },
             {
               "label": "Küssaberg – Bad Zurzach AG",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/kussaberg-bad-zurzach-ag/heute/"
             },
             {
               "label": "Laufenburg (Baden) – Laufenburg AG",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/laufenburg-laufenburg-ag/heute/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/rheinfelden-rheinfelden-ag-alte-rheinbrucke/heute/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/rheinfelden-rheinfelden-ag-autostrada-a861-a3/heute/"
             },
             {
               "label": "Waldshut-Tiengen – Koblenz AG",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/waldshut-tiengen-koblenz-ag/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-21T23:59:59.000Z"
+          "updatedAt": "2026-10-22T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -595,26 +595,26 @@
               "date": "2026-10-01T13:52:00.000Z"
             },
             {
+              "label": "A1 Bern <-> Zürich zwischen Anschluss Aarau-Ost und Anschluss Rothrist Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: Pannenstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 20. November 2026",
+              "date": "2026-10-22T04:31:00.000Z"
+            },
+            {
+              "label": "A3 Zürich -> Basel zwischen Anschluss Eiken und Anschluss Rheinfelden-Ost Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.2 Verkehrsführung: Pannenstreifen gesperrt",
+              "value": "Sperrung",
+              "detail": "bis 10. November 2026",
+              "date": "2026-10-22T11:10:00.000Z"
+            },
+            {
               "label": "A1 Zürich -> Bern zwischen Anschluss Mägenwil und Anschluss Lenzburg Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Verkehrsführung: Pannenstreifen gesperrt",
               "value": "Sperrung",
               "detail": "bis 29. Oktober 2026",
               "date": "2026-10-22T14:15:00.000Z"
-            },
-            {
-              "label": "Langenthal <-> Zofingen zwischen Ortschaft Strengelbach und Ortschaft St. Urban Sachlage: Gefahr Ursache: Bauarbeiten",
-              "value": "Baustelle",
-              "detail": "bis 30. April 2027",
-              "date": "2025-04-07T09:38:00.000Z"
-            },
-            {
-              "label": "H24 Aarau <-> Frick Ortschaft Rombach Sachlage: Verkehrsbehinderung Baustelle Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
-              "value": "Baustelle",
-              "detail": "bis 1. Juli 2027",
-              "date": "2025-09-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-22T21:58:34.031Z"
+          "updatedAt": "2026-10-23T05:26:03.621Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -712,7 +712,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "fr": {
       "canton": "AG",
@@ -723,71 +723,71 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Bad Säckingen – Stein AG, semaine jusqu’au 21 octobre 2026"
+          "note": "Bad Säckingen – Stein AG, semaine jusqu’au 22 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "6",
-          "note": "signalements au 22 octobre 2026"
+          "value": "8",
+          "note": "signalements au 23 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "32",
-          "note": "signalements au 22 octobre 2026"
+          "note": "signalements au 23 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 15 octobre 2026 au 21 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 16 octobre 2026 au 22 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Bad Säckingen – Stein AG",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/bad-sackingen-stein-ag/aujourd-hui/"
             },
             {
               "label": "Hohentengen am Hochrhein – Kaiserstuhl AG",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/hohentengen-am-hochrhein-kaiserstuhl-ag/aujourd-hui/"
             },
             {
               "label": "Küssaberg – Bad Zurzach AG",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/kussaberg-bad-zurzach-ag/aujourd-hui/"
             },
             {
               "label": "Laufenburg (Baden) – Laufenburg AG",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/laufenburg-laufenburg-ag/aujourd-hui/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/rheinfelden-rheinfelden-ag-alte-rheinbrucke/aujourd-hui/"
             },
             {
               "label": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/rheinfelden-rheinfelden-ag-autostrada-a861-a3/aujourd-hui/"
             },
             {
               "label": "Waldshut-Tiengen – Koblenz AG",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/waldshut-tiengen-koblenz-ag/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-21T23:59:59.000Z"
+          "updatedAt": "2026-10-22T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -825,26 +825,26 @@
               "date": "2026-10-01T13:52:00.000Z"
             },
             {
+              "label": "A1 Berne <-> Zurich entre Jonction autoroutière Aarau-Est et Jonction autoroutière Rothrist Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: bande d'arrêt d'urgence fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 20 novembre 2026",
+              "date": "2026-10-22T04:31:00.000Z"
+            },
+            {
+              "label": "A3 Zurich -> Bâle entre Jonction autoroutière Eiken et Jonction autoroutière Rheinfelden-Est Situation: trafic perturbé travaux, longueur [km] 0.2 Gestion du trafic: bande d'arrêt d'urgence fermée",
+              "value": "Fermeture",
+              "detail": "jusqu’au 10 novembre 2026",
+              "date": "2026-10-22T11:10:00.000Z"
+            },
+            {
               "label": "A1 Zurich -> Berne entre Jonction autoroutière Mägenwil et Jonction autoroutière Lenzburg Situation: trafic perturbé travaux, longueur [km] 0.3 Gestion du trafic: bande d'arrêt d'urgence fermée",
               "value": "Fermeture",
               "detail": "jusqu’au 29 octobre 2026",
               "date": "2026-10-22T14:15:00.000Z"
-            },
-            {
-              "label": "Langenthal <-> Zofingen entre Localité Strengelbach et Localité St. Urban Situation: danger Raison: travaux de construction",
-              "value": "Chantier",
-              "detail": "jusqu’au 30 avril 2027",
-              "date": "2025-04-07T09:38:00.000Z"
-            },
-            {
-              "label": "H24 Aarau <-> Frick Localité Rombach Situation: trafic perturbé travaux Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
-              "value": "Chantier",
-              "detail": "jusqu’au 1er juillet 2027",
-              "date": "2025-09-21T22:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-22T21:58:34.031Z"
+          "updatedAt": "2026-10-23T05:26:03.621Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -942,7 +942,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     }
   }
 }

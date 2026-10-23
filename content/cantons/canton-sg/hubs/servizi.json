@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-23T05:52:42.601Z",
-  "contentHash": "97b07e582329dc6a7d9f25e495616af7c6f48813ceef2e8e634e4d0c3bee2b3a",
+  "updatedAt": "2026-10-23T10:42:39.932Z",
+  "contentHash": "3ce7df976e0c4c85915429dc8cdd5bd80f77144a3dfbba2f3695d1e2d692ada0",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -19,7 +19,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-22T23:30:28.996Z",
+      "updatedAt": "2026-10-23T05:06:32.759Z",
       "keyFacts": 0
     },
     {
@@ -111,12 +111,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "3 °C",
-              "detail": "oggi da 4 a 4 °C"
+              "value": "4 °C",
+              "detail": "oggi da 3 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -234,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "en": {
       "canton": "SG",
@@ -318,12 +318,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "3 °C",
-              "detail": "today from 4 to 4 °C"
+              "value": "4 °C",
+              "detail": "today from 3 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -437,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "de": {
       "canton": "SG",
@@ -521,12 +521,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "3 °C",
-              "detail": "heute 4 bis 4 °C"
+              "value": "4 °C",
+              "detail": "heute 3 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -640,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "fr": {
       "canton": "SG",
@@ -724,12 +724,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "3 °C",
-              "detail": "aujourd’hui de 4 à 4 °C"
+              "value": "4 °C",
+              "detail": "aujourd’hui de 3 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -839,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     }
   }
 }

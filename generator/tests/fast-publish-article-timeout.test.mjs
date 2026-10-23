@@ -15,8 +15,8 @@ function jobBlock(name) {
   return next < 0 ? rest : rest.slice(0, next);
 }
 
-test('fast-publish-article leaves upload headroom after the render', () => {
+test('fast-publish-article leaves bounded headroom for the measured upload', () => {
   const publish = jobBlock('publish');
-  assert.match(publish, /timeout-minutes: 60/u);
+  assert.match(publish, /timeout-minutes: 120/u);
   assert.match(publish, /Publish to shards and CDN/u);
 });

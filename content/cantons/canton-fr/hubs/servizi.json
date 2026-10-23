@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-10-23T05:52:42.601Z",
-  "contentHash": "602b7691b798106f968af99563d8371908fab0675ac6c09b944d81cc8474fc4a",
+  "updatedAt": "2026-10-23T10:42:39.932Z",
+  "contentHash": "d957d8b98f857c456286a3835b35ca1f812aa48659f92ee0d73bd8249c6f5ab9",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -19,7 +19,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-22T23:30:28.996Z",
+      "updatedAt": "2026-10-23T05:06:32.759Z",
       "keyFacts": 0
     },
     {
@@ -106,12 +106,12 @@
           "items": [
             {
               "label": "Fribourg",
-              "value": "4 °C",
-              "detail": "oggi da 6 a 6 °C"
+              "value": "6 °C",
+              "detail": "oggi da 4 a 13 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -229,7 +229,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "en": {
       "canton": "FR",
@@ -308,12 +308,12 @@
           "items": [
             {
               "label": "Fribourg",
-              "value": "4 °C",
-              "detail": "today from 6 to 6 °C"
+              "value": "6 °C",
+              "detail": "today from 4 to 13 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -427,7 +427,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "de": {
       "canton": "FR",
@@ -506,12 +506,12 @@
           "items": [
             {
               "label": "Fribourg",
-              "value": "4 °C",
-              "detail": "heute 6 bis 6 °C"
+              "value": "6 °C",
+              "detail": "heute 4 bis 13 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -625,7 +625,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "fr": {
       "canton": "FR",
@@ -704,12 +704,12 @@
           "items": [
             {
               "label": "Fribourg",
-              "value": "4 °C",
-              "detail": "aujourd’hui de 6 à 6 °C"
+              "value": "6 °C",
+              "detail": "aujourd’hui de 4 à 13 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -819,7 +819,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     }
   }
 }

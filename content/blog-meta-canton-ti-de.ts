@@ -60,6 +60,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.frontalieri-ticino-indagine-salari-2026.title': 'Tessin: 55,6% der Grenzgänger fühlen sich unterbezahlt',
     'blog.article.frontalieri-ticino-indagine-salari-2026.excerpt': '1.542 Beschäftigte haben im Mai 2026 an der Umfrage teilgenommen 55,6% fühlen sich bei gleicher Tätigkeit schlechter bezahlt Aus den Provinzen Como und Varese: über 60 Tausend',
     'blog.article.frontalieri-ticino-indagine-salari-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.rafforzamento-paghe-frontalieri.title': 'Stärkerer Franken, höhere Löhne der Grenzgänger',
+    'blog.article.rafforzamento-paghe-frontalieri.excerpt': 'Die Quelle weist auf die Aufwertung des Schweizer Frankens und höhere Löhne für Grenzgänger hin, ohne Sätze, Datumsangaben oder Beträge anzugeben.',
+    'blog.article.rafforzamento-paghe-frontalieri.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTiDe;

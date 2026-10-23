@@ -60,6 +60,9 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.frontalieri-ticino-indagine-salari-2026.title': 'Indagine frontalieri Ticino: 55,6% si sente pagato meno degli svizzeri',
     'blog.article.frontalieri-ticino-indagine-salari-2026.excerpt': '1.542 lavoratori hanno risposto all\'indagine nel maggio 2026 Il 55,6% si sente pagato meno a parità di mansioni Dalle province di Como e Varese: oltre 60mila',
     'blog.article.frontalieri-ticino-indagine-salari-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.rafforzamento-paghe-frontalieri.title': 'Franco più forte, stipendi dei frontalieri più pesanti',
+    'blog.article.rafforzamento-paghe-frontalieri.excerpt': 'La fonte segnala il rafforzamento del franco svizzero e stipendi più pesanti per i frontalieri, senza indicare tassi, date o importi.',
+    'blog.article.rafforzamento-paghe-frontalieri.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTiIt;
