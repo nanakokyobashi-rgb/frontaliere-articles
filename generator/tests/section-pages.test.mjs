@@ -3366,7 +3366,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   const replayDispatcher = read('scripts/ci/dispatch-fast-publish-replay.sh');
   assert.match(wf, /^run-name:.*inputs\.dry_run/m);
-  assert.match(wf, /replay richiesto con dry_run=false ma il publisher è disarmato/);
+  assert.match(resolver, /replay richiesto con dry_run=false ma il publisher è disarmato/);
   assert.match(replayDispatcher, /--json databaseId,displayTitle,status,conclusion/);
   assert.match(replayDispatcher, /REPLAY_RUN_LIST_CACHE_FILE/);
   assert.match(replayDispatcher, /flock/);
