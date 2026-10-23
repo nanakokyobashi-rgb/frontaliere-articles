@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-andermatt-fisco-wyden.webp",
+      "sha256": "7f9016200a9812bba6e5f4b117fcd3b51d86a1f48990b3f3218603476e3f9b7d"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-andermatt-fisco-wyden-480w.webp",
+      "sha256": "c5908f264ff438f6781b1bf3fcbebaa716f596f2991aa5d617a730bca819272a"
+    }
+  ]
 }
