@@ -4,42 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/817103/bessere-arbeitsbedingungen-in-der-pflege-k%c3%b6nnten-sich-auch-finanziell-lohnen": {
-      "section": "canton-vs",
-      "ts": 1792579074798
-    },
-    "canton-vs::https://www.pomona.ch/story/816595/parlamentarische-offensive-gegen-den-import-von-billigweinen-und-f%c3%b6rdermittelb%c3%bcrokratie": {
-      "section": "canton-vs",
-      "ts": 1792579079651
-    },
-    "canton-vs::https://www.pomona.ch/story/817108/erde-steuert-laut-un-auf-28-grad-erw%c3%a4rmung-zu": {
-      "section": "canton-vs",
-      "ts": 1792579084640
-    },
-    "canton-vs::https://www.pomona.ch/story/817290/proteste-in-italien-blockierte-autobahnen-und-leere-regale": {
-      "section": "canton-vs",
-      "ts": 1792586041134
-    },
-    "canton-vs::https://www.pomona.ch/story/814174/zwischen-klimawandel-und-overtourism-festival-beleuchtet-die-zukunft-der-berge": {
-      "section": "canton-vs",
-      "ts": 1792586048393
-    },
-    "canton-vs::https://www.pomona.ch/story/816089/immobilien-trump-macht-den%c2%a0-eigenheimtraum-noch-weniger-erschwinglich": {
-      "section": "canton-vs",
-      "ts": 1792586053076
-    },
-    "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
-      "section": "canton-vs",
-      "ts": 1792588987239
-    },
-    "canton-vs::https://www.pomona.ch/story/816089/immobilien-trump-macht-schweizer-eigenheimtraum-noch-unerreichbarer": {
-      "section": "canton-vs",
-      "ts": 1792589022307
-    },
-    "canton-vs::https://vework-public.vs.ch/app/publication/fr/27-09-2026/1": {
-      "section": "canton-vs",
-      "ts": 1792596575430
-    },
     "canton-vs::https://www.pomona.ch/story/809392/die-kaufkraftillusion-wie-krankenkassen-und-benzin-das-walliser-budget-fressen": {
       "section": "canton-vs",
       "ts": 1792602134894
@@ -87,6 +51,14 @@
     "canton-vs::https://www.pomona.ch/story/817791/finanzkommission-gibt-trotz-%c3%bcber-hundert-neuer-stellen-gr%c3%bcnes-licht": {
       "section": "canton-vs",
       "ts": 1792751199040
+    },
+    "canton-vs::https://www.pomona.ch/story/818120/vom-schalter-direkt-auf-den-bildschirm-wie-der-kanton-beh%c3%b6rdeng%c3%a4nge-digitalisiert": {
+      "section": "canton-vs",
+      "ts": 1792771189733
+    },
+    "canton-vs::https://www.pomona.ch/story/817103/bessere-arbeitsbedingungen-in-der-pflege-k%c3%b6nnten-sich-auch-finanziell-lohnen": {
+      "section": "canton-vs",
+      "ts": 1792771191209
     }
   }
 }
