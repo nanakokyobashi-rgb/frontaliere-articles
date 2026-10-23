@@ -4775,8 +4775,8 @@
       "sitePath": ".github/corpus-workflows/translate-pending.yml",
       "mode": "identical",
       "baseline": {
-        "site": "ea91791bad1d163b",
-        "corpus": "ea91791bad1d163b",
+        "site": "d55200b0ad5af21e",
+        "corpus": "d55200b0ad5af21e",
         "alignedAt": "2026-10-22"
       }
     },
@@ -4786,8 +4786,8 @@
       "mode": "identical",
       "reason": "La baseline del 2026-10-22 registra lo stesso digest SHA-256 raw sui due lati (2dfb65f5c90634dc); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "2dfb65f5c90634dc",
-        "corpus": "2dfb65f5c90634dc",
+        "site": "d5e80eace7be4fa9",
+        "corpus": "d5e80eace7be4fa9",
         "alignedAt": "2026-10-22"
       }
     },
@@ -4796,9 +4796,9 @@
       "sitePath": ".github/corpus-workflows/observers/generator/tests/crawler-cross-repo-artifacts.test.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "a8310d9435712886",
-        "corpus": "a8310d9435712886",
-        "alignedAt": "2026-09-30"
+        "site": "d976afa064e8b72f",
+        "corpus": "d976afa064e8b72f",
+        "alignedAt": "2026-10-22"
       },
       "couplingSnapshot": [
         {
@@ -4893,8 +4893,8 @@
       "reason": "Runtime zero-dependency corpus-only del watchdog translate: censisce la liveness corrente con query status complete, misura l'eta' del detentore dal job attivo (`jobs.started_at`) invece che dalla coda del workflow e quella di un rerun pending dall'attempt corrente (`run_started_at`, fail-closed se illeggibile o anteriore a `created_at`) invece che dalla prima creazione, rifiuta fail-closed (`future_timestamp`) ogni istante di misura oltre la tolleranza di skew `MAX_CLOCK_SKEW_SECONDS` invece di azzerarne l'eta', dichiara la copertura bounded della discovery storica ed emette soltanto JSON redatto GET-only con prova schedule verificata; la recovery resta blocked per policy, target dedupe e successor guard, mentre il pin del blob del workflow target resta fail-closed.",
       "baseline": {
         "site": null,
-        "corpus": "7afd70b4a9fc4b5b",
-        "alignedAt": "2026-10-07"
+        "corpus": "200d78ad094ba783",
+        "alignedAt": "2026-10-23"
       }
     },
     {
