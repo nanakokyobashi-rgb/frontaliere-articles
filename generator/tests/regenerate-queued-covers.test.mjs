@@ -1713,6 +1713,7 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   );
 
   const sectionPublisher = fs.readFileSync(new URL('../../.github/workflows/fast-publish-section.yml', import.meta.url), 'utf8');
+  const sectionResolver = fs.readFileSync(new URL('../../scripts/ci/fast-publish-section-resolve.sh', import.meta.url), 'utf8');
   assert.equal(
     sectionPublisher.match(/ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_commit \|\| \(github\.event_name == 'workflow_dispatch' && inputs\.bootstrap != true && github\.ref\) \|\| github\.sha \}\}/gu)?.length,
     2,
@@ -1741,12 +1742,15 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(sectionPublisher, /deferred_replay_deadline_ms=\$\(\( \$\(date \+%s%3N\) \+ 30 \* 60 \* 1000 \)\)/u);
   assert.match(sectionLiveLoop, /staging live completata ma API\/edge non ancora pronta/u);
   assert.match(sectionLiveLoop, /if \[ "\$deferred_retry" = 'true' \]; then[\s\S]*continue/u);
-  for (const publisher of [articlePublisher, sectionPublisher]) {
+  for (const [publisher, contract] of [
+    [articlePublisher, articlePublisher],
+    [sectionPublisher, `${sectionPublisher}\n${sectionResolver}`],
+  ]) {
     assert.match(publisher, /COVER_DRAIN_COMMIT_MESSAGE: \$\{\{ github\.event\.head_commit\.message \}\}/u);
-    assert.match(publisher, /cover_drain_marker="\$\(node scripts\/ci\/cover-drain-commit\.mjs is-cover-drain\)"/u);
-    assert.match(publisher, /if \[ "\$cover_drain_marker" = 'true' \]/u);
-    assert.doesNotMatch(publisher, /if \[ "\$\(node scripts\/ci\/cover-drain-commit\.mjs is-cover-drain\)" = 'true' \]/u);
-    assert.match(publisher, /cover-drain push is handled by the explicit publisher outbox dispatch/u);
+    assert.match(contract, /cover_drain_marker="\$\(node scripts\/ci\/cover-drain-commit\.mjs is-cover-drain\)"/u);
+    assert.match(contract, /if \[ "\$cover_drain_marker" = 'true' \]/u);
+    assert.doesNotMatch(contract, /if \[ "\$\(node scripts\/ci\/cover-drain-commit\.mjs is-cover-drain\)" = 'true' \]/u);
+    assert.match(contract, /cover-drain push is handled by the explicit publisher outbox dispatch/u);
   }
 
   const drainScript = fs.readFileSync(new URL('../../scripts/ci/cover-publisher-drain.mjs', import.meta.url), 'utf8');
