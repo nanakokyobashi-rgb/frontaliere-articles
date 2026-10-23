@@ -168,6 +168,27 @@ test('il watcher ritenta una lettura transitoria prima di classificare la run', 
   assert.deepEqual(sleeps, [2_000, 2_000]);
 });
 
+test('il watcher lascia una finestra di scrittura prima della deadline', async () => {
+  let observations = 0;
+  const result = await watchPublisherRun({
+    repo: 'nanakokyobashi-rgb/frontaliere-articles',
+    runId: '123',
+    deadlineAt: 4_000,
+    now: () => 0,
+    readRun: async () => {
+      observations += 1;
+      return { status: 'completed', conclusion: 'success' };
+    },
+    sleepFor: async () => assert.fail('non deve avviare una lettura senza margine'),
+  });
+
+  assert.equal(observations, 0);
+  assert.deepEqual(result, {
+    status: 'in-progress',
+    error: 'deadline reached while watching run 123',
+  });
+});
+
 test('il watcher segnala solo una conclusione terminale negativa come fallimento', async () => {
   const result = await watchPublisherRun({
     repo: 'nanakokyobashi-rgb/frontaliere-articles',
