@@ -6,6 +6,10 @@ const workflow = readFileSync(
   new URL('../../.github/workflows/fast-publish-section.yml', import.meta.url),
   'utf8',
 );
+const resolver = readFileSync(
+  new URL('../../scripts/ci/fast-publish-section-resolve.sh', import.meta.url),
+  'utf8',
+);
 
 function triggerBlock(name) {
   const start = workflow.indexOf(`\n  ${name}:`);
@@ -40,4 +44,19 @@ test('fast-publish-section mantiene il contratto dispatch esplicito', () => {
   assert.match(dispatch, /bootstrap:/u);
   assert.match(dispatch, /push_before:/u);
   assert.match(dispatch, /push_after:/u);
+});
+
+test('fast-publish-section mantiene il resolver sotto il limite del parser GitHub', () => {
+  assert.match(workflow, /- name: Materialize resolver from workflow revision/u);
+  assert.match(workflow, /scripts\/ci\/fast-publish-section-resolve\.sh/u);
+  const resolve = workflow.slice(
+    workflow.indexOf('\n      - name: Resolve sections and article ids'),
+    workflow.indexOf('\n      - name: Arm normal push staged replay'),
+  );
+  assert.match(resolve, /run: \|\n\s+bash scripts\/ci\/fast-publish-section-resolve\.sh/u);
+  assert.ok(resolver.length < 21_000, `resolver too large: ${resolver.length}`);
+  assert.match(resolver, /reconcile_edge_matrix\(\)/u);
+  assert.match(resolver, /GITHUB_OUTPUT/u);
+  assert.match(resolver, /FAST_PUBLISH_ARMED/u);
+  assert.doesNotMatch(resolver, /\$\{\{/u);
 });
