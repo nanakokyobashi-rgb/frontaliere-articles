@@ -3259,9 +3259,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /EVENT_NAME[\s\S]*workflow_dispatch[\s\S]*PINNED_SOURCE_COMMIT/);
   assert.match(wf, /if: steps\.replay_freshness\.outputs\.fresh == 'true'/);
   assert.match(wf, /Dispatch bounded replay with current corpus checkout/);
-  const dispatchPlanStart = wf.indexOf('if [ "${{ github.event_name }}" = "workflow_dispatch" ]');
-  const dispatchPlanEnd = wf.indexOf('any=false', dispatchPlanStart);
-  const dispatchPlan = wf.slice(dispatchPlanStart, dispatchPlanEnd);
+  const dispatchPlanStart = resolver.indexOf('if [ "$EVENT_NAME" = "workflow_dispatch" ]; then');
+  const dispatchPlanEnd = resolver.indexOf('any=false', dispatchPlanStart);
+  const dispatchPlan = resolver.slice(dispatchPlanStart, dispatchPlanEnd);
   assert.match(dispatchPlan, /FAST_PUBLISH_DISABLED/);
   assert.match(dispatchPlan, /FAST_PUBLISH_ARMED/);
   assert.equal((wf.match(/-f dry_run="\$DRY"/g) ?? []).length, 3, 'tutti i redispatch propagano il dry-run calcolato');
