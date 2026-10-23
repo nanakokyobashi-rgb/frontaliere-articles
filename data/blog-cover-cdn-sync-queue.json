@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-lavoro-ridotto-normalizzazione-2027.webp",
-      "sha256": "b08b1f56315a58c25bc4102110b8dd396b0c33c581a0c94cbd679cc57383ff23"
-    },
-    {
-      "path": "public/images/blog/article-sostenibilita-abitativa-svizzera.webp",
-      "sha256": "91861aca3d90495a2466abf1da32c6b5e1853ba33500951fa2704d72a25788c3"
-    }
-  ]
+  "items": []
 }
