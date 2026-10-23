@@ -621,6 +621,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-winterthur-voto-energia': {
+    title: 'Winterthur: voto su 100 milioni per l\'energia-contracting',
+    description: 'A Winterthur voto nel febbraio 2027 su 100 milioni per l\'energia-contracting. La data indicata per la proposta municipale è il 28 febbraio.',
+    keywords: 'frontalieri, ticino, svizzera, italia, winterthur, voto, milioni, energia-contracting',
+    ogTitle: 'Winterthur: voto su 100 milioni per energia-contracting',
+    ogDescription: 'Il titolo della notizia colloca nel febbraio 2027 il voto di Winterthur su 100 milioni per l\'energia-contracting. Una comunicazione collegata della città indica il 28 febbraio 2027 per la proposta municipale e la rielezione del Friedensrichteramt.',
+    canonicalPath: '/articoli-zurigo/winterthur-voto-energia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Winterthur: voto su 100 milioni per l'energia-contracting",
+      "description": "A Winterthur voto nel febbraio 2027 su 100 milioni per l'energia-contracting. La data indicata per la proposta municipale è il 28 febbraio.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-winterthur-voto-energia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T13:26:45+00:00",
+      "dateModified": "2026-10-23T13:26:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/winterthur-voto-energia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

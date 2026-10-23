@@ -51,6 +51,9 @@ const blogMetaCantonZhFr: Record<string, string> = {
     'blog.article.zurigo-budget-sans-papiers.title': 'Zurich approuve 260.000 francs pour les Sans-Papiers',
     'blog.article.zurigo-budget-sans-papiers.excerpt': 'Le Conseil municipal de Zurich approuve davantage de fonds et porte le budget de l\'Anlaufstelle per Sans-Papiers à 260.000 francs.',
     'blog.article.zurigo-budget-sans-papiers.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.winterthur-voto-energia.title': 'Winterthur : vote sur 100 millions pour le contracting énergétique',
+    'blog.article.winterthur-voto-energia.excerpt': 'À Winterthur, vote en février 2027 sur 100 millions pour le contracting énergétique.',
+    'blog.article.winterthur-voto-energia.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZhFr;

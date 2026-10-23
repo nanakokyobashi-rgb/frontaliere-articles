@@ -51,6 +51,9 @@ const blogMetaCantonZhIt: Record<string, string> = {
     'blog.article.zurigo-budget-sans-papiers.title': 'Zurigo approva 260.000 franchi per i Sans-Papiers',
     'blog.article.zurigo-budget-sans-papiers.excerpt': 'Il Consiglio comunale di Zurigo approva più fondi e porta a 260.000 franchi il budget dell\'Anlaufstelle per Sans-Papiers.',
     'blog.article.zurigo-budget-sans-papiers.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.winterthur-voto-energia.title': 'Winterthur: voto su 100 milioni per l\'energia-contracting',
+    'blog.article.winterthur-voto-energia.excerpt': 'A Winterthur voto nel febbraio 2027 su 100 milioni per l\'energia-contracting.',
+    'blog.article.winterthur-voto-energia.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZhIt;
