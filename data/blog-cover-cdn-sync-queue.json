@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-zenith-soppressione-locle.webp",
-      "sha256": "a97c3e3e9e9224fc1d3cb318bdb1467a161835709e0ede18a21097bccca60cd6"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-zenith-soppressione-locle-480w.webp",
-      "sha256": "ac2299af6901200de27a8299a22a0fe396e673bebdb72a111bd13845ae608fa8"
-    }
-  ]
+  "items": []
 }
