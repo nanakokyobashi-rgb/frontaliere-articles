@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261020-les-exportations-horlogeres-continuent-a-la-hausse-en-septembre.html": {
-      "section": "canton-ju",
-      "ts": 1792521495994
-    },
     "canton-ju::https://www.lejdj.ch/articles/de-novateur-a-emblematique-le-batiment-de-lhopital-de-moutier-celebre-son-demi-siecle-dexistence-104645": {
       "section": "canton-ju",
       "ts": 1792571720129
@@ -51,6 +47,10 @@
     "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261021-swiss-transporte-moins-de-passagers-durant-les-vacances-d-automne.html": {
       "section": "canton-ju",
       "ts": 1792653121674
+    },
+    "canton-ju::https://www.estrepublicain.fr/economie/2026/10/22/frontaliers-la-marque-horlogere-zenith-annonce-la-suppression-d-une-centaine-d-emplois-au-locle": {
+      "section": "canton-ju",
+      "ts": 1792713808580
     }
   }
 }
