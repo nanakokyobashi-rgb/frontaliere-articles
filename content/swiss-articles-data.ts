@@ -28708,6 +28708,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'sostenibilita-abitativa-svizzera',
+    category: 'pratico',
+    date: '2026-10-23T00:22:46.124Z',
+    image: '/images/blog/article-sostenibilita-abitativa-svizzera.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

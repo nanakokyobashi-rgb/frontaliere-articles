@@ -8591,6 +8591,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.bns-cambi-energia.title': 'BNS: tasso guida fermo e inflazione moderata',
     'blog.article.bns-cambi-energia.excerpt': 'La BNS mantiene il tasso guida allo 0 per cento A settembre la BNS rinuncia alla formula sui cambi La pressione inflazionistica cresce solo lievemente L\'IA può',
     'blog.article.bns-cambi-energia.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.sostenibilita-abitativa-svizzera.title': 'Abitare in Svizzera: uno su 6 spende oltre un terzo del reddito',
+    'blog.article.sostenibilita-abitativa-svizzera.excerpt': 'Il 16% supera un terzo del reddito lordo familiare Il 22% degli inquilini supera la soglia abitativa Il 7% dei proprietari supera lo stesso limite Il 36%',
+    'blog.article.sostenibilita-abitativa-svizzera.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

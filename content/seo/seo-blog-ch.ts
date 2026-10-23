@@ -108558,6 +108558,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sostenibilita-abitativa-svizzera': {
+    title: 'Abitare in Svizzera: uno su 6 spende oltre un terzo del reddito',
+    description: 'Il 16% supera un terzo del reddito lordo familiare Il 22% degli inquilini supera la soglia abitativa Il 7% dei proprietari supera lo stesso limite',
+    keywords: 'frontalieri, ticino, svizzera, italia, abitare, spende, oltre, terzo',
+    ogTitle: 'Abitare in Svizzera: uno su 6 spende oltre un terzo del reddito',
+    ogDescription: 'Il 16% supera un terzo del reddito lordo familiare Il 22% degli inquilini supera la soglia abitativa Il 7% dei proprietari supera lo stesso limite Il 36%',
+    canonicalPath: '/articoli-svizzera/sostenibilita-abitativa-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Abitare in Svizzera: uno su 6 spende oltre un terzo del reddito",
+      "description": "Il 16% supera un terzo del reddito lordo familiare Il 22% degli inquilini supera la soglia abitativa Il 7% dei proprietari supera lo stesso limite",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sostenibilita-abitativa-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T00:22:46+00:00",
+      "dateModified": "2026-10-23T00:22:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/sostenibilita-abitativa-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

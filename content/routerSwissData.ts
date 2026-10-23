@@ -2886,6 +2886,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'regole-usato-mercatini-svizzera': { it: 'regole-usato-mercatini-svizzera', en: 'second-hand-market-rules-switzerland', de: 'second-hand-markt-regeln-schweiz', fr: 'regles-marche-aux-puces-suisse' },
  'adeguamento-rendite-superstiti-invalidita-2027': { it: 'adeguamento-rendite-superstiti-invalidita-2027', en: 'adjustment-survivor-disability-pensions-2027', de: 'anpassung-hinterbliebenen-invalidenrenten-2027', fr: 'ajustement-rentes-survivants-invalides-2027' },
  'bns-cambi-energia': { it: 'bns-cambi-energia', en: 'snb-policy-rate-inflation', de: 'schweizer-nationalbank-inflation', fr: 'bns-taux-directeur-inflation' },
+ 'sostenibilita-abitativa-svizzera': { it: 'sostenibilita-abitativa-svizzera', en: 'housing-affordability-switzerland', de: 'wohnbaukosten-schweiz', fr: 'cout-logement-suisse' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */

@@ -8591,6 +8591,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.bns-cambi-energia.title': 'BNS: policy rate unchanged and moderate inflation',
     'blog.article.bns-cambi-energia.excerpt': 'The SNB keeps its policy rate at 0 percent In September, the SNB abandons the exchange-rate formula Inflationary pressure is increasing only slightly AI can',
     'blog.article.bns-cambi-energia.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sostenibilita-abitativa-svizzera.title': 'Living in Switzerland: one in 6 spends more than a third of their income',
+    'blog.article.sostenibilita-abitativa-svizzera.excerpt': 'The 16% exceeds one third of gross household income The 22% of tenants exceeds the housing threshold The 7% of homeowners exceeds the same limit The 36%',
+    'blog.article.sostenibilita-abitativa-svizzera.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

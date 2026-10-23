@@ -8591,6 +8591,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.bns-cambi-energia.title': 'BNS: Leitzins unverändert und moderate Inflation',
     'blog.article.bns-cambi-energia.excerpt': 'Die BNS hält den Leitzins bei 0 Prozent Im September verzichtet die BNS auf die Formulierung zu den Wechselkursen Der Inflationsdruck nimmt nur leicht zu Die KI kann',
     'blog.article.bns-cambi-energia.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sostenibilita-abitativa-svizzera.title': 'Wohnen in der Schweiz: 1 von 6 gibt über ein Drittel aus',
+    'blog.article.sostenibilita-abitativa-svizzera.excerpt': '16% überschreiten ein Drittel des Bruttoeinkommens des Haushalts 22% der Mieter überschreiten die Wohnkostenschwelle 7% der Eigentümer überschreiten dieselbe Grenze 36%',
+    'blog.article.sostenibilita-abitativa-svizzera.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;
