@@ -51,6 +51,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.nuova-app-schaffhauser-nachrichten-2026.title': 'Schaffhauser Nachrichten : lancement de la nouvelle application en 2026',
     'blog.article.nuova-app-schaffhauser-nachrichten-2026.excerpt': 'Le 21 octobre 2026 a eu lieu le lancement de la nouvelle application SN avec un contenu étendu et des notifications push thématiques, disponible sur l\'App Store et le Google Play Store.',
     'blog.article.nuova-app-schaffhauser-nachrichten-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sciaffusa-regole-datencenter-beringen.title': 'Schaffhouse durcit les règles applicables aux centres de données',
+    'blog.article.sciaffusa-regole-datencenter-beringen.excerpt': 'Le canton de Schaffhouse prévoit des règles plus strictes pour les centres de données.',
+    'blog.article.sciaffusa-regole-datencenter-beringen.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;
