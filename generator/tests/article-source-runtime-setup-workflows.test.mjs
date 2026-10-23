@@ -8,7 +8,9 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const read = (relativePath) => readFileSync(path.join(ROOT, relativePath), 'utf8');
 const WORKFLOW_PATHS = [
   '.github/workflows/auto-live-canton-sections.yml',
+  '.github/workflows/batch-faq-articles.yml',
   '.github/workflows/bonifica-blocking-bodies.yml',
+  '.github/workflows/bing-seo-loop.yml',
   '.github/workflows/content-gates-main.yml',
   '.github/workflows/fast-publish-article.yml',
   '.github/workflows/fast-publish-section.yml',
@@ -29,7 +31,9 @@ const WORKFLOW_PATHS = [
 ];
 const PARSER_JOBS = {
   '.github/workflows/auto-live-canton-sections.yml': ['reconcile'],
+  '.github/workflows/batch-faq-articles.yml': ['generate-faq'],
   '.github/workflows/bonifica-blocking-bodies.yml': ['bonifica'],
+  '.github/workflows/bing-seo-loop.yml': ['audit'],
   '.github/workflows/content-gates-main.yml': ['gates'],
   '.github/workflows/fast-publish-article.yml': ['resolve', 'publish'],
   '.github/workflows/fast-publish-section.yml': ['resolve', 'publish'],

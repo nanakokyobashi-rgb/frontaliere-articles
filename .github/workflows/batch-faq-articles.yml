@@ -140,6 +140,9 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
+
       - name: Install dependencies
         run: bash scripts/lib/npm-ci-retry.sh
 

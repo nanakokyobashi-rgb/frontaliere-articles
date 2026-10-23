@@ -44,6 +44,7 @@ jobs:
             AGENTS.md
             .github/workflows/bing-seo-loop.yml
             .github/workflows/publish-api.yml
+            .github/actions/setup-article-source-runtime/action.yml
             content/
             scripts/seo/
             generator/tests/bing-seo-loop.test.mjs
@@ -64,6 +65,9 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: '22'
+
+      - name: Setup isolated article source runtime
+        uses: ./.github/actions/setup-article-source-runtime
 
       - name: Prepare Firebase credentials
         env:
