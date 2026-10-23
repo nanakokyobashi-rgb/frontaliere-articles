@@ -3474,6 +3474,12 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /all\(\.\[\]; \(\.rendered_head == "" and \.fresh == "false"\)\)/);
   assert.match(wf, /mixed_matrix: \$\{\{ steps\.collect\.outputs\.mixed_matrix \}\}/);
   assert.match(wf, /echo 'mixed_matrix=false'/);
+  assert.ok(
+    wf.includes(
+      'any(.[]; ((.rendered_head // "") | test("^[a-f0-9]{40}$"))) and any(.[]; ((.fresh // "") != "true" or (.rendered_head // "") == ""))',
+    ),
+    'una leg stale accanto a una leg produttiva deve diventare mixed_matrix',
+  );
   assert.match(wf, /HEAD diverse[\s\S]*mixed_matrix=true[\s\S]*exit 0/);
   assert.match(wf, /MIXED_MATRIX: \$\{\{ needs\.publish_release_head\.outputs\.mixed_matrix \}\}/);
   assert.match(wf, /matrix mista rilevata[\s\S]*read-main-head\.sh/);

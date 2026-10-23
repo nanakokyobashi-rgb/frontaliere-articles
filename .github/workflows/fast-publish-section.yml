@@ -1338,6 +1338,11 @@ jobs:
             echo "::notice::tutte le leg hanno rilevato un replay stantio; il recovery redispatchato proseguira' sulla HEAD corrente"
             exit 0
           fi
+          if jq -e 'any(.[]; ((.rendered_head // "") | test("^[a-f0-9]{40}$"))) and any(.[]; ((.fresh // "") != "true" or (.rendered_head // "") == ""))' <<<"$actual" >/dev/null; then
+            echo "::warning::matrix mista: almeno una leg non e' fresca mentre un'altra ha prodotto una HEAD; accodo il recovery sulla HEAD corrente"
+            echo 'mixed_matrix=true' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
           if ! jq -e 'all(.[]; ((.rendered_head // "") | test("^[a-f0-9]{40}$")))' <<<"$actual" >/dev/null; then
             echo "::error::almeno una leg della matrix non ha prodotto una HEAD pubblicabile"
             exit 1
