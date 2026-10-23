@@ -63,6 +63,9 @@ const blogMetaCantonTiFr: Record<string, string> = {
     'blog.article.rafforzamento-paghe-frontalieri.title': 'Franc plus fort, salaires des travailleurs frontaliers plus élevés',
     'blog.article.rafforzamento-paghe-frontalieri.excerpt': 'La source signale le renforcement du franc suisse et des salaires plus élevés pour les travailleurs frontaliers, sans indiquer de taux, de dates ou de montants.',
     'blog.article.rafforzamento-paghe-frontalieri.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.frontalieri-rimborsi-lpp-svizzera.title': 'Frontaliers, deuxième pilier : non aux remboursements',
+    'blog.article.frontalieri-rimborsi-lpp-svizzera.excerpt': 'La source relie les frontaliers au deuxième pilier et signale un non aux remboursements ; la référence LPP 2026 indique les paramètres de prévoyance.',
+    'blog.article.frontalieri-rimborsi-lpp-svizzera.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTiFr;

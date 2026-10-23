@@ -63,6 +63,9 @@ const blogMetaCantonTiDe: Record<string, string> = {
     'blog.article.rafforzamento-paghe-frontalieri.title': 'Stärkerer Franken, höhere Löhne der Grenzgänger',
     'blog.article.rafforzamento-paghe-frontalieri.excerpt': 'Die Quelle weist auf die Aufwertung des Schweizer Frankens und höhere Löhne für Grenzgänger hin, ohne Sätze, Datumsangaben oder Beträge anzugeben.',
     'blog.article.rafforzamento-paghe-frontalieri.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.frontalieri-rimborsi-lpp-svizzera.title': 'Grenzgänger, zweite Säule: Nein zu Rückerstattungen',
+    'blog.article.frontalieri-rimborsi-lpp-svizzera.excerpt': 'Die Quelle bringt die Grenzgänger mit der zweiten Säule in Verbindung und berichtet von einem Nein zu Rückerstattungen; die BVG-Referenz 2026 führt die Vorsorgeparameter auf.',
+    'blog.article.frontalieri-rimborsi-lpp-svizzera.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTiDe;

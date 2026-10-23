@@ -23,6 +23,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'ustat-manutenzione-chiusura': { it: 'ustat-manutenzione-chiusura', en: 'ustat-maintenance-closure', de: 'ustat-wartung-schliessung', fr: 'ustat-maintenance-fermeture' },
  'frontalieri-ticino-indagine-salari-2026': { it: 'frontalieri-ticino-indagine-salari-2026', en: 'cross-border-workers-ticino-survey-wages-2026', de: 'grenzgaenger-tessin-umfrage-loehne-2026', fr: 'frontaliers-tessin-enquete-salaires-2026' },
  'rafforzamento-paghe-frontalieri': { it: 'rafforzamento-paghe-frontalieri', en: 'stronger-franc-cross-border-pay', de: 'starker-franken-loehne-grenzgaenger', fr: 'franc-fort-salaires-frontaliers' },
+ 'frontalieri-rimborsi-lpp-svizzera': { it: 'frontalieri-rimborsi-lpp-svizzera', en: 'cross-border-workers-pension-refunds', de: 'grenzgaenger-lpp-rueckerstattung', fr: 'frontaliers-lpp-remboursements' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

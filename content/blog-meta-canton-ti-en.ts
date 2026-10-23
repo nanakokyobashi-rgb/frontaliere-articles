@@ -63,6 +63,9 @@ const blogMetaCantonTiEn: Record<string, string> = {
     'blog.article.rafforzamento-paghe-frontalieri.title': 'Stronger franc, higher salaries for cross-border workers',
     'blog.article.rafforzamento-paghe-frontalieri.excerpt': 'The source notes the strengthening of the Swiss franc and higher salaries for cross-border workers, without specifying rates, dates, or amounts.',
     'blog.article.rafforzamento-paghe-frontalieri.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.frontalieri-rimborsi-lpp-svizzera.title': 'Cross-border workers, second pillar: no refunds',
+    'blog.article.frontalieri-rimborsi-lpp-svizzera.excerpt': 'The source links cross-border workers to the second pillar and reports a rejection of reimbursements; the LPP 2026 reference lists the pension parameters.',
+    'blog.article.frontalieri-rimborsi-lpp-svizzera.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTiEn;

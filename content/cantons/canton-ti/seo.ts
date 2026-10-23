@@ -777,6 +777,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frontalieri-rimborsi-lpp-svizzera': {
+    title: 'Frontalieri, secondo pilastro: no ai rimborsi | Frontaliere Ticino',
+    description: 'La fonte collega i frontalieri al secondo pilastro e riferisce un no ai rimborsi. I dati LPP 2026 riportano soglia, deduzione e salario massimo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, secondo, pilastro, rimborsi, fonte',
+    ogTitle: 'Frontalieri e secondo pilastro: no ai rimborsi',
+    ogDescription: 'Il titolo della fonte collega frontalieri e secondo pilastro a un no ai rimborsi. Il riferimento previdenziale 2026 riporta soglia LPP CHF 22\'680, deduzione CHF 26\'460 e salario massimo assicurato CHF 90\'720: dati tecnici separati dalla notizia.',
+    canonicalPath: '/articoli-ticino/frontalieri-rimborsi-lpp-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri, secondo pilastro: no ai rimborsi",
+      "description": "La fonte collega i frontalieri al secondo pilastro e riferisce un no ai rimborsi. I dati LPP 2026 riportano soglia, deduzione e salario massimo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-frontalieri-rimborsi-lpp-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-23T15:42:17+00:00",
+      "dateModified": "2026-10-23T15:42:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-ticino/frontalieri-rimborsi-lpp-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

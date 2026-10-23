@@ -226,4 +226,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'frontalieri-rimborsi-lpp-svizzera',
+ category: 'pensione',
+ date: '2026-10-23T15:42:17.176Z',
+ image: '/images/blog/article-frontalieri-rimborsi-lpp-svizzera.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ];

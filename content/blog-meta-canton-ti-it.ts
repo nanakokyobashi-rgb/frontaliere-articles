@@ -63,6 +63,9 @@ const blogMetaCantonTiIt: Record<string, string> = {
     'blog.article.rafforzamento-paghe-frontalieri.title': 'Franco più forte, stipendi dei frontalieri più pesanti',
     'blog.article.rafforzamento-paghe-frontalieri.excerpt': 'La fonte segnala il rafforzamento del franco svizzero e stipendi più pesanti per i frontalieri, senza indicare tassi, date o importi.',
     'blog.article.rafforzamento-paghe-frontalieri.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.frontalieri-rimborsi-lpp-svizzera.title': 'Frontalieri, secondo pilastro: no ai rimborsi',
+    'blog.article.frontalieri-rimborsi-lpp-svizzera.excerpt': 'La fonte collega i frontalieri al secondo pilastro e riferisce un no ai rimborsi; il riferimento LPP 2026 riporta i parametri previdenziali.',
+    'blog.article.frontalieri-rimborsi-lpp-svizzera.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTiIt;
