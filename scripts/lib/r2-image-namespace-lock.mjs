@@ -42,7 +42,11 @@ export function resolveRequestedLeaseTimestamp(value, now = Date.now()) {
   if (!Number.isFinite(now) || now < 1) {
     throw new Error('[r2-image-namespace-lock] fallback lease timestamp must be positive');
   }
-  const requested = Number(value);
+  const requested = typeof value === 'number'
+    ? value
+    : typeof value === 'string' && value.trim().length > 0
+      ? Number(value)
+      : Number.NaN;
   return Number.isFinite(requested) && requested >= 1 ? requested : now;
 }
 
