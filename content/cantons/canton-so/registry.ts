@@ -138,4 +138,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'finanzkommission-k-rzt-kredit-digitalisierung',
+ category: 'fiscale',
+ date: '2026-10-23T14:42:31.186Z',
+ image: '/images/blog/article-finanzkommission-k-rzt-kredit-digitalisierung.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

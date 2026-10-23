@@ -39,6 +39,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.polizia-soletta-comunicazione-media-droni.title': 'Polizei Solothurn: Kommunikation 365 Tage und Drohnenverbot 300 m',
     'blog.article.polizia-soletta-comunicazione-media-droni.excerpt': 'Der Mediendienst ist 365 Tage im Jahr tätig Das Team betreut X, Facebook und Instagram Bei Grossanlässen ist ein Mitglied vor Ort Das Drohnenverbot gilt',
     'blog.article.polizia-soletta-comunicazione-media-droni.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.title': 'Finanzkommission kürzt Kredit für die digitale Transformation in Solothurn',
+    'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.excerpt': 'Die Finanzkommission des Solothurner Kantonsrats beantragt, den Verpflichtungskredit für die digitale Transformation von CHF 21,4 auf CHF 21,2 Millionen zu kürzen.',
+    'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;

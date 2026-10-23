@@ -1365,8 +1365,7 @@ jobs:
       (needs.publish_release_head.outputs.rendered_head != '' ||
        needs.publish_release_head.outputs.mixed_matrix == 'true') &&
       (needs.publish_release_head.outputs.mixed_matrix == 'true' ||
-       needs.resolve.outputs.bootstrap == 'true' ||
-       needs.resolve.outputs.replay_api_after_publish == 'true') &&
+       needs.resolve.outputs.bootstrap == 'true' || needs.resolve.outputs.replay_api_after_publish == 'true') &&
       needs.resolve.outputs.dry != 'true' &&
       github.event_name != 'workflow_run'
     runs-on: ubuntu-latest
