@@ -7946,8 +7946,18 @@ jobs:
           failure_count=0
           missing_count=0
           systemic_count=0
+          alert_failure_count=0
           printf '%s\n' '### Crawler group 04 outcome' >> "$summary_file"
           printf '%s\n' '| Crawler | Outcome |' '| --- | --- |' >> "$summary_file"
+          reportCrawlerAlert() {
+            local slug="$1"
+            local description="$2"
+            if node scripts/lib/github-issue-creator.mjs --title "Crawler Failure: Run $slug" --description "$description" --log-excerpt-file "$state_dir/$slug.log" --priority 2 --label Bug --workflow "Run $slug"; then
+              return 0
+            fi
+            echo "::error::$slug: the crawler failure reporter did not persist an issue"
+            return 1
+          }
           aggregate_crawler_member() {
             slug="$1"
             crawler_id="${2:-$slug}"
@@ -7989,8 +7999,9 @@ jobs:
               watchdog_minutes="$(cat "$watchdog_file" 2>/dev/null || true)"
               echo "::error::$slug: the worker watchdog stopped the crawler after ${watchdog_minutes:-?} minutes, before its own failure reporter could run; filing the per-crawler issue from the aggregate"
               watchdog_description="$(printf '%s\n' '## Crawler fallito' "**Causa:** il watchdog del worker ha fermato il crawler dopo ${watchdog_minutes:-?} minuti (exit ${watchdog_status}), prima che potesse segnalare il fallimento." "**Run:** https://github.com/${GITHUB_REPOSITORY:-}/actions/runs/${GITHUB_RUN_ID:-}" "**Branch:** ${GITHUB_REF_NAME:-}" "**Trigger:** ${GITHUB_EVENT_NAME:-}")"
-              if ! node scripts/lib/github-issue-creator.mjs --title "Crawler Failure: Run $slug" --description "$watchdog_description" --log-excerpt-file "$state_dir/$slug.log" --priority 2 --label Bug --workflow "Run $slug"; then
-                echo "::warning::$slug: the watchdog-timeout issue could not be filed; the group verdict is unchanged"
+              if ! reportCrawlerAlert "$slug" "$watchdog_description"; then
+                alert_failure_count=$((alert_failure_count + 1))
+                printf '%s\n' "| $slug | alert reporter failed |" >> "$summary_file"
               fi
             fi
           }
@@ -8024,13 +8035,13 @@ jobs:
           aggregate_crawler_member 'hospice-general'
           aggregate_crawler_member 'pole-sante-pays-enhaut'
           aggregate_crawler_member 'medimeo'
-          printf '%s\n' "**Summary:** $success_count succeeded, $failure_count failed, $missing_count missing, $systemic_count systemic." >> "$summary_file"
-          if [ "$failure_count" -gt 0 ] || [ "$missing_count" -gt 0 ] || [ "$systemic_count" -gt 0 ]; then
+          printf '%s\n' "**Summary:** $success_count succeeded, $failure_count failed, $missing_count missing, $systemic_count systemic, $alert_failure_count alert reporter failures." >> "$summary_file"
+          if [ "$failure_count" -gt 0 ] || [ "$missing_count" -gt 0 ] || [ "$systemic_count" -gt 0 ] || [ "$alert_failure_count" -gt 0 ]; then
             wait_outcome=failure
           else
             wait_outcome=success
           fi
-          printf '%s\n' "success_count=$success_count" "failure_count=$failure_count" "missing_count=$missing_count" "systemic_count=$systemic_count" "wait_outcome=$wait_outcome" >> "$output_file"
+          printf '%s\n' "success_count=$success_count" "failure_count=$failure_count" "missing_count=$missing_count" "systemic_count=$systemic_count" "alert_failure_count=$alert_failure_count" "wait_outcome=$wait_outcome" >> "$output_file"
           exit 0
       - name: Commit crawler group data atomically
         if: always() && job.status == 'success' && steps.crawler_group_setup.outcome == 'success' && steps.crawler_aggregate.outcome == 'success'
@@ -8162,6 +8173,7 @@ jobs:
           CRAWLER_AGGREGATE_FAILURES: ${{ steps.crawler_aggregate.outputs.failure_count || 'invalid' }}
           CRAWLER_AGGREGATE_MISSING: ${{ steps.crawler_aggregate.outputs.missing_count || 'invalid' }}
           CRAWLER_AGGREGATE_SYSTEMIC: ${{ steps.crawler_aggregate.outputs.systemic_count || '0' }}
+          CRAWLER_ALERT_FAILURES: ${{ steps.crawler_aggregate.outputs.alert_failure_count || 'invalid' }}
         run: |-
           set -euo pipefail
           aggregate_outcome="${CRAWLER_AGGREGATE_OUTCOME:-failure}"
@@ -8173,12 +8185,17 @@ jobs:
             echo "::error::crawler aggregate step did not complete; group failed after preserving already-running siblings"
             exit 1
           fi
-          for count in "$success_count" "$failure_count" "$missing_count" "$systemic_count"; do
+          alert_failures="${CRAWLER_ALERT_FAILURES:-invalid}"
+          for count in "$success_count" "$failure_count" "$missing_count" "$systemic_count" "$alert_failures"; do
             if ! [[ "$count" =~ ^[0-9]+$ ]]; then
               echo "::error::crawler aggregate produced an invalid count: $count"
               exit 1
             fi
           done
+          if [ "$alert_failures" -gt 0 ]; then
+            echo "::error::crawler group could not persist $alert_failures failure alert(s); refusing a green group verdict"
+            exit 1
+          fi
           if [ "$failure_count" -gt 0 ] || [ "$missing_count" -gt 0 ]; then
             echo "::error::crawler group completed with $success_count succeeded, $failure_count failed, $missing_count missing, $systemic_count systemic; healthy siblings were preserved, but the group remains failed until incomplete crawlers are recovered"
             exit 1
