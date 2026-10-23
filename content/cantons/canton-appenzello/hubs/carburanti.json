@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "70cb67dce46a9ab3efda7b47fba0364ad5f0a1461bb29b2f6f649a3b02942348",
+  "updatedAt": "2026-10-23T02:18:36.856Z",
+  "contentHash": "f522e319d21481fcc23469ab974cc3ae116b56f531c790e3753b731e119617ad",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Cooperazione strategica: Appenzello e San Gallo in linea",
+          "url": "/articoli-appenzello/appenzello-cooperazione-strategica-2024/",
+          "excerpt": "I governi dei due Appenzello, San Gallo e Turgovia proseguono la collaborazione decisa nel 2024.",
+          "date": "2026-10-23T02:03:33.169Z"
+        },
+        {
           "title": "Spese nette 2027: CHF 802'767; eccedenza quasi CHF 580'000",
           "url": "/articoli-appenzello/investimenti-tetto-fotovoltaico-2027/",
           "excerpt": "Nel 2027 sono pianificate spese nette di CHF 802'767; previsto il risanamento del tetto della palestra con fotovoltaico.",
@@ -94,12 +100,6 @@
           "url": "/articoli-appenzello/appenzell-remunerazioni-energia-2027/",
           "excerpt": "La Feuerschaukommission di Appenzell lega l'energia immessa al prezzo di borsa orario e prevede un premio minimo per impianti fino a 150 kW.",
           "date": "2026-10-21T18:16:59.022Z"
-        },
-        {
-          "title": "Driessen rafforza oncologia ed ematologia a Herisau dal 1° ottobre 2026",
-          "url": "/articoli-appenzello/driessen-oncologia-herisau-2026/",
-          "excerpt": "Dal 1° ottobre 2026 il prof.",
-          "date": "2026-10-21T12:25:13.122Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T02:18:36.856Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Strategic cooperation: Appenzell and St. Gallen aligned",
+          "url": "/en/appenzell-articles/appenzell-strategic-cooperation-2024/",
+          "excerpt": "The governments of the two Appenzells, St.",
+          "date": "2026-10-23T02:03:33.169Z"
+        },
+        {
           "title": "Net expenditures 2027: CHF 802'767; surplus of almost CHF 580'000",
           "url": "/en/appenzell-articles/roof-solar-investment-2027/",
           "excerpt": "In 2027, net expenditure of CHF 802'767 is planned; renovation of the gymnasium roof with photovoltaics is planned.",
@@ -193,12 +199,6 @@
           "url": "/en/appenzell-articles/appenzell-energy-remuneration-2027/",
           "excerpt": "The Feuerschaukommission of Appenzell links the energy fed into the grid to the hourly exchange price and provides for a minimum premium for installations of up to 150 kW.",
           "date": "2026-10-21T18:16:59.022Z"
-        },
-        {
-          "title": "Driessen strengthens oncology and hematology in Herisau as of October 1, 2026",
-          "url": "/en/appenzell-articles/driessen-oncology-herisau-2026/",
-          "excerpt": "As of October 1, 2026, the professor.",
-          "date": "2026-10-21T12:25:13.122Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T02:18:36.856Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Strategische Zusammenarbeit: Appenzell und St. Gallen auf Kurs",
+          "url": "/de/appenzell-artikel/appenzell-strategische-zusammenarbeit/",
+          "excerpt": "Die Regierungen der beiden Appenzell sowie der Kantone St.",
+          "date": "2026-10-23T02:03:33.169Z"
+        },
+        {
           "title": "Nettoausgaben 2027: CHF 802'767; Ausgabenüberschuss von fast CHF 580'000",
           "url": "/de/appenzell-artikel/dachsanierung-photovoltaik-investition-2027/",
           "excerpt": "Für 2027 sind Nettoausgaben von CHF 802'767 geplant; vorgesehen ist die Sanierung des Dachs der Sporthalle mit Photovoltaik.",
@@ -292,12 +298,6 @@
           "url": "/de/appenzell-artikel/appenzell-ruecklieferverguetung-2027/",
           "excerpt": "Die Feuerschaukommission Appenzell koppelt die eingespeiste Energie an den stündlichen Börsenpreis und sieht für Anlagen bis 150 kW eine Mindestprämie vor.",
           "date": "2026-10-21T18:16:59.022Z"
-        },
-        {
-          "title": "Driessen stärkt die Onkologie und Hämatologie in Herisau ab dem 1. Oktober 2026",
-          "url": "/de/appenzell-artikel/driessen-onkologie-herisau-2026/",
-          "excerpt": "Ab dem 1. Oktober 2026 der Prof.",
-          "date": "2026-10-21T12:25:13.122Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T02:18:36.856Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Coopération stratégique : Appenzell et Saint-Gall sur la même longueur d’onde",
+          "url": "/fr/articles-appenzell/appenzell-cooperation-strategique-2024/",
+          "excerpt": "Les gouvernements des deux Appenzell, de Saint-Gall et de Thurgovie poursuivent la collaboration décidée en 2024.",
+          "date": "2026-10-23T02:03:33.169Z"
+        },
+        {
           "title": "Dépenses nettes 2027 : CHF 802'767 ; excédent de dépenses de près de CHF 580'000",
           "url": "/fr/articles-appenzell/toit-photovoltaique-investissement-2027/",
           "excerpt": "En 2027, des dépenses nettes de CHF 802'767 sont prévues ; l’assainissement du toit de la salle de sport avec une installation photovoltaïque est prévu.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-appenzell/appenzell-remuneration-energie-2027/",
           "excerpt": "La Feuerschaukommission d’Appenzell lie l’énergie injectée au prix de marché horaire et prévoit une prime minimale pour les installations allant jusqu’à 150 kW.",
           "date": "2026-10-21T18:16:59.022Z"
-        },
-        {
-          "title": "Driessen renforce oncologie et hématologie à Herisau",
-          "url": "/fr/articles-appenzell/driessen-oncologie-herisau-2026/",
-          "excerpt": "À partir du 1er octobre 2026, le prof.",
-          "date": "2026-10-21T12:25:13.122Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T02:18:36.856Z"
     }
   }
 }
