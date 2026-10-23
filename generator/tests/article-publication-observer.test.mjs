@@ -606,7 +606,7 @@ test('un ritardo stale già osservato ridispatcha la pagina leggibile al fast pu
   );
   fs.appendFileSync(path.join(rootDir, 'content/routerBlogData.ts'), "\n'lagging': { it: 'lagging' },\n");
   const github = issueClient();
-  const log = `commit ${'l'.repeat(40)} 1791321600\ncontent/blog-body/it/lagging.ts\n`;
+  const log = `commit ${'a'.repeat(40)} 1791321600\ncontent/blog-body/it/lagging.ts\n`;
   try {
     const result = await runObserver({
       rootDir,
