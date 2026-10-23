@@ -116,4 +116,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'cambio-ora-incidenti-stradali-soletta',
+ category: 'pratico',
+ date: '2026-10-23T00:45:27.261Z',
+ image: '/images/blog/article-cambio-ora-incidenti-stradali-soletta.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

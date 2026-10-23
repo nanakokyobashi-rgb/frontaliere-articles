@@ -33,6 +33,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.a1-lavori-notturni-luterbach.title': 'A1 Wangen–Luterbach: night work until mid-December',
     'blog.article.a1-lavori-notturni-luterbach.excerpt': 'From October 25, 2026, extended nighttime work on the A1 between Wangen an der Aare and Luterbach: traffic management will be modified until mid-December.',
     'blog.article.a1-lavori-notturni-luterbach.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.cambio-ora-incidenti-stradali-soletta.title': 'Time change and risk of road accidents in the Canton of Solothurn',
+    'blog.article.cambio-ora-incidenti-stradali-soletta.excerpt': 'October 24–25, 2026: clocks go back by one hour Morning traffic coincides with twilight Roe deer, red deer and wild boar are active early Caution',
+    'blog.article.cambio-ora-incidenti-stradali-soletta.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;
