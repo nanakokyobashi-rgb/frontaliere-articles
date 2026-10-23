@@ -126,13 +126,7 @@ function readStringLiteralValue(node, sourceFile, sourcePath, key) {
     // Translation modules historically preserve literal tabs in visible
     // titles. Keep that call-site contract while sharing all other literal
     // decoding rules with the AST readers.
-    return decodeStaticString(raw, quote, {
-      tabAs: '\t',
-      // FAQ values are JSON text nested inside a TypeScript literal. Keep
-      // JSON's \b/\f/\v spelling intact until JSON.parse consumes it; body
-      // and metadata text still receive TypeScript control characters.
-      preserveJsonEscapes: key.endsWith('.faq'),
-    });
+    return decodeStaticString(raw, quote, { tabAs: '\t' });
   }
   fail(sourcePath, `article translation ${key} must have a static string literal value`, sourceFile, node);
 }
