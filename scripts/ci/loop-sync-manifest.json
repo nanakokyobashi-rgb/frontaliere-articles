@@ -6541,8 +6541,8 @@
       "path": "SECURITY.md",
       "mode": "identical",
       "baseline": {
-        "site": "0e0aa91be02c1c2",
-        "corpus": "0e0aa91be02c1c2",
+        "site": "0e0aa91be02c1c2b",
+        "corpus": "0e0aa91be02c1c2b",
         "alignedAt": "2026-10-23"
       }
     }
