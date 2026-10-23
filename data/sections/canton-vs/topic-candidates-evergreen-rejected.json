@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/809392/die-kaufkraftillusion-wie-krankenkassen-und-benzin-das-walliser-budget-fressen": {
-      "section": "canton-vs",
-      "ts": 1792602134894
-    },
     "canton-vs::https://www.pomona.ch/story/817453/ballon-dor-zieht-fans-mit-absurder-abstimmung-das-geld-aus-der-tasche": {
       "section": "canton-vs",
       "ts": 1792616826930
@@ -59,6 +55,10 @@
     "canton-vs::https://www.pomona.ch/story/817103/bessere-arbeitsbedingungen-in-der-pflege-k%c3%b6nnten-sich-auch-finanziell-lohnen": {
       "section": "canton-vs",
       "ts": 1792771191209
+    },
+    "canton-vs::https://www.pomona.ch/story/809392/die-kaufkraftillusion-wie-krankenkassen-und-benzin-das-walliser-budget-fressen": {
+      "section": "canton-vs",
+      "ts": 1792788128173
     }
   }
 }
