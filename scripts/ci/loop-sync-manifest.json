@@ -4796,8 +4796,8 @@
       "mode": "identical",
       "reason": "La baseline del 2026-10-22 registra lo stesso digest SHA-256 raw sui due lati (2dfb65f5c90634dc); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "c0ff1d0b8ce8b32d",
-        "corpus": "c0ff1d0b8ce8b32d",
+        "site": "3266e71c60cce4ec",
+        "corpus": "3266e71c60cce4ec",
         "alignedAt": "2026-10-23"
       }
     },
