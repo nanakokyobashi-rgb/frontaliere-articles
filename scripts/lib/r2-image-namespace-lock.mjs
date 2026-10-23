@@ -719,6 +719,17 @@ function containsReleaseTimeout(error, seen = new Set()) {
 }
 
 /**
+ * Classify the result of a bounded release at one deterministic deadline.
+ * A timer winning the race or work completing at the boundary is a timeout;
+ * only work that completed strictly before the deadline is released.
+ */
+export function classifyReleaseOutcome({ outcome, now = Date.now(), deadline } = {}) {
+  if (!Number.isFinite(deadline)) throw new Error('release deadline must be finite');
+  if (!Number.isFinite(now)) throw new Error('release clock must be finite');
+  return outcome?.timedOut === true || now >= deadline ? 'timeout' : 'released';
+}
+
+/**
  * Release image leases within one absolute budget. `perLease` starts each
  * namespace independently so a slow lease cannot prevent the others starting.
  */
@@ -750,7 +761,7 @@ export async function releaseImageNamespaceLeasesWithDeadline(
   })).then((results) => ({ timedOut: false, results }));
   const outcome = await Promise.race([work, timeout]);
   clearTimeout(timeoutId);
-  if (outcome.timedOut || Date.now() >= deadline) {
+  if (classifyReleaseOutcome({ outcome, now: Date.now(), deadline }) === 'timeout') {
     return { status: 'timeout', timedOut: true, released: null, error: timeoutError };
   }
 
