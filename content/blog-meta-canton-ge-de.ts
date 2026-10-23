@@ -33,6 +33,9 @@ const blogMetaCantonGeDe: Record<string, string> = {
     'blog.article.skyguide-ginevra-capacita-ottobre.title': 'Technische Störung halbiert die Kapazität in Genf und Zürich',
     'blog.article.skyguide-ginevra-capacita-ottobre.excerpt': 'Skyguide hat die Kapazität des Schweizer Luftraums um 50% reduziert.',
     'blog.article.skyguide-ginevra-capacita-ottobre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.hug-primo-ospedale-svizzero-2027.title': 'HUG erstes Schweizer Spital im Ranking Smart Hospitals 2027',
+    'blog.article.hug-primo-ospedale-svizzero-2027.excerpt': 'Die HUG liegen 2027 weltweit auf Rang 31° Erstes Schweizer Spital der Rangliste Gegenüber 2026 um 37 Plätze verbessert 410 Spitäler in 33 Ländern Rangliste →',
+    'blog.article.hug-primo-ospedale-svizzero-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGeDe;
