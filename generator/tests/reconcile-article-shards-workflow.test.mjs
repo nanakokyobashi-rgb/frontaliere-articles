@@ -16,6 +16,18 @@ const publisherWorkflow = readFileSync(
   new URL('../../.github/workflows/fast-publish-article.yml', import.meta.url),
   'utf8',
 );
+const republishWorkflow = readFileSync(
+  new URL('../../.github/workflows/republish-dirty-content.yml', import.meta.url),
+  'utf8',
+);
+const generationWorkflow = readFileSync(
+  new URL('../../.github/workflows/generate-article.yml', import.meta.url),
+  'utf8',
+);
+const generationCoreWorkflow = readFileSync(
+  new URL('../../.github/workflows/generate-article-core.yml', import.meta.url),
+  'utf8',
+);
 
 test('il backfill aspetta solo il gruppo dello shard target', () => {
   const start = workflow.indexOf('          active_runs_for_shard() {');
@@ -62,4 +74,41 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
     /\.selected\[\].*\[\.id, \.section, \.shard\]/,
   );
   assert.doesNotMatch(workflow, /active_runs\(\)/, 'il gate non deve tornare a contare il workflow globalmente');
+});
+
+test('i gemelli del guard usano listing completi, stati completi e fail-closed', () => {
+  const start = republishWorkflow.indexOf('          active_runs_for_shard() {');
+  const end = republishWorkflow.indexOf('\n\n          # Tetto assoluto', start);
+  assert.ok(start >= 0 && end > start, 'il guard republish non è riconoscibile');
+  const republishGuard = republishWorkflow.slice(start, end);
+
+  assert.match(republishWorkflow, /IN_FLIGHT_STATUSES='\["queued","in_progress","requested","waiting","pending"\]'/);
+  assert.match(republishGuard, /gh api --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/runs\?per_page=100"/);
+  assert.match(republishGuard, /gh api --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/runs\/\$run_id\/jobs\?per_page=100"/);
+  assert.match(republishWorkflow, /total_count/);
+  assert.match(republishWorkflow, /validate_workflow_runs/);
+  assert.match(republishWorkflow, /validate_workflow_jobs/);
+  assert.match(republishGuard, /publish \(shard, " \+ \$shard \+ "\)/);
+  assert.match(republishWorkflow, /shard-of "\$section"/);
+  assert.doesNotMatch(republishWorkflow, /^\s*active_runs\(\)/m);
+
+  for (const [label, source] of [
+    ['generate-article', generationWorkflow],
+    ['generate-article-core', generationCoreWorkflow],
+  ]) {
+    assert.match(source, /gh api --paginate --slurp/,
+      `${label}: il listing delle run deve essere paginato`);
+    assert.match(source, /actions\/workflows\/(?:generate-article\.yml|\$CALLER_WORKFLOW)\/runs\?per_page=100/,
+      `${label}: endpoint del listing non riconoscibile`);
+    assert.match(source, /IN_FLIGHT_STATUSES='\["queued","in_progress","requested","waiting","pending"\]'/,
+      `${label}: stato in-flight mancante`);
+    assert.match(source, /total_count/,
+      `${label}: validazione total_count mancante`);
+    assert.match(source, /admit-run-list-unreadable/,
+      `${label}: il fallimento del listing deve chiudere l'ammissione`);
+    assert.match(source, /fromdateiso8601/,
+      `${label}: created_at non validato`);
+    assert.doesNotMatch(source, /\.status == "queued" or \.status == "in_progress"/,
+      `${label}: filtro status troncato trovato`);
+  }
 });
