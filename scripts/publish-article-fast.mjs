@@ -10,7 +10,7 @@
 // fast path and the full build apart.
 //
 // CLI:
-//   npx -y tsx scripts/publish-article-fast.mjs (--id <articleId> | --ids <jsonArray>) --section <active section with a Pages shard: frontaliere|svizzera today> --out <scratchDistDir> --summary <summaryJsonPath>
+//   npx -y tsx scripts/publish-article-fast.mjs (--id <articleId> | --ids <jsonArray> | --ids-file <jsonPath>) --section <active section with a Pages shard: frontaliere|svizzera today> --out <scratchDistDir> --summary <summaryJsonPath>
 //
 // Pipeline (mirrors postWalkCoordinatorPlugin.ts's real per-file order —
 // see build-plugins/postWalkWorker.mjs for the production analogue):
@@ -276,15 +276,16 @@ function parseArgs(argv) {
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === '--id') out.ids.push(argv[++i]);
-    else if (a === '--ids') {
+    else if (a === '--ids' || a === '--ids-file') {
       try {
-        const ids = JSON.parse(argv[++i]);
+        const value = argv[++i];
+        const ids = JSON.parse(a === '--ids-file' ? fs.readFileSync(value, 'utf8') : value);
         if (!Array.isArray(ids) || ids.some((id) => typeof id !== 'string' || !id)) {
           throw new Error('expected a non-empty-string array');
         }
         out.ids.push(...ids);
       } catch (err) {
-        console.error(`[publish-article-fast] --ids must be a JSON array of article ids: ${err.message}`);
+        console.error(`[publish-article-fast] ${a} must point to a JSON array of article ids: ${err.message}`);
         process.exit(1);
       }
     } else if (a === '--section') out.section = argv[++i];
@@ -303,7 +304,7 @@ function parseArgs(argv) {
   ];
   if (missing.length > 0) {
     console.error(`[publish-article-fast] missing required flag(s): ${missing.map((k) => `--${k}`).join(', ')}`);
-    console.error('Usage: npx -y tsx scripts/publish-article-fast.mjs (--id <articleId> | --ids <jsonArray>) --section <active section with a Pages shard> --out <scratchDistDir> --summary <summaryJsonPath> [--persistent-generic-fallbacks-file <json>]');
+    console.error('Usage: npx -y tsx scripts/publish-article-fast.mjs (--id <articleId> | --ids <jsonArray> | --ids-file <jsonPath>) --section <active section with a Pages shard> --out <scratchDistDir> --summary <summaryJsonPath> [--persistent-generic-fallbacks-file <json>]');
     process.exit(1);
   }
   // Prima di qualunque render: la sezione deve essere ATTIVA nel core e avere

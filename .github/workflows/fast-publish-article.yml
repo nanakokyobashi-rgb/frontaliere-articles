@@ -225,6 +225,33 @@ jobs:
           groups='{}'
           article_plan='[]'
           write_output() { printf '%s\n' "$1" >> "$GITHUB_OUTPUT"; }
+
+          # The article plan can contain every registered ID when a shared
+          # registry dependency changes. Keep corpus-sized JSON on stdin:
+          # Linux caps one argv string at 128 KiB, and jq cannot start when an
+          # `--argjson` value crosses that limit (issue #2977).
+          merge_group_ids() {
+            local merge_section="$1"
+            local merge_ids_json="$2"
+            groups="$(
+              printf '%s\n%s\n' "$groups" "$merge_ids_json" |
+                jq -cs --arg s "$merge_section" '
+                  .[0] as $current
+                  | .[1] as $ids
+                  | $current
+                  | .[$s] = ((.[$s] // []) + $ids | unique | sort)
+                '
+            )"
+          }
+
+          append_matrix_target() {
+            local matrix_target="$1"
+            matrix_with_shards="$(
+              printf '%s\n%s\n' "$matrix_with_shards" "$matrix_target" |
+                jq -cs '.[0] + [.[1]]'
+            )"
+          }
+
           if [ "$EVENT_NAME" = 'push' ]; then
             cover_drain_marker="$(node scripts/ci/cover-drain-commit.mjs is-cover-drain)"
             if [ "$cover_drain_marker" = 'true' ]; then
@@ -318,7 +345,7 @@ jobs:
                 exit 1
               fi
               [ "$(printf '%s' "$body_ids_json" | jq 'length')" -gt 0 ] || continue
-              groups="$(jq -c --arg s "$body_section" --argjson ids "$body_ids_json" '.[$s] = ((.[$s] // []) + $ids | unique | sort)' <<<"$groups")"
+              merge_group_ids "$body_section" "$body_ids_json"
             done < <(printf '%s' "$body_plan" | jq -c '.[]')
 
             # Body and image diffs are not the whole article surface. A
@@ -331,7 +358,7 @@ jobs:
                 surface_section="$(printf '%s' "$surface_target" | jq -r '.section')"
                 surface_ids_json="$(printf '%s' "$surface_target" | jq -c '.ids | unique | sort')"
                 [ "$(printf '%s' "$surface_ids_json" | jq 'length')" -gt 0 ] || continue
-                groups="$(jq -c --arg s "$surface_section" --argjson ids "$surface_ids_json" '.[$s] = ((.[$s] // []) + $ids | unique | sort)' <<<"$groups")"
+                merge_group_ids "$surface_section" "$surface_ids_json"
               done < <(printf '%s' "$article_plan" | jq -c '.[]')
             fi
           fi
@@ -343,7 +370,7 @@ jobs:
             if [ "${#ids[@]}" -gt 0 ]; then
               section="${section:-frontaliere}"
               ids_json="$(printf '%s\n' "${ids[@]}" | jq -R . | jq -cs 'unique')"
-              groups="$(jq -c --arg s "$section" --argjson ids "$ids_json" '.[$s] = ((.[$s] // []) + $ids | unique | sort)' <<<"$groups")"
+              merge_group_ids "$section" "$ids_json"
             fi
             if [ "${{ github.event_name }}" = "push" ]; then
               image_plan="$(printf '%s\n' "$changed" | node scripts/ci/fast-publish-section.mjs image-plan shard)"
@@ -351,7 +378,7 @@ jobs:
                 [ -n "$image_target" ] || continue
                 image_section="$(printf '%s' "$image_target" | jq -r '.section')"
                 image_ids_json="$(printf '%s' "$image_target" | jq -c '.ids | unique | sort')"
-                groups="$(jq -c --arg s "$image_section" --argjson ids "$image_ids_json" '.[$s] = ((.[$s] // []) + $ids | unique | sort)' <<<"$groups")"
+                merge_group_ids "$image_section" "$image_ids_json"
               done < <(printf '%s' "$image_plan" | jq -c '.[]')
             fi
           fi
@@ -388,7 +415,7 @@ jobs:
             target_section="$(printf '%s' "$target" | jq -r '.section')"
             target_shard="$(node scripts/ci/fast-publish-section.mjs shard-of "$target_section")"
             target="$(printf '%s' "$target" | jq -c --arg shard "$target_shard" '. + {shard: $shard}')"
-            matrix_with_shards="$(jq -c --argjson target "$target" '. + [$target]' <<<"$matrix_with_shards")"
+            append_matrix_target "$target"
           done < <(printf '%s' "$matrix" | jq -c '.[]')
           {
             echo "skip=false"
@@ -670,11 +697,13 @@ jobs:
           PUBLISH_BEFORE: ${{ github.event.before }}
         run: |
           set -euo pipefail
+          article_ids_file="$RUNNER_TEMP/fast-article-ids.json"
+          printf '%s' "$ARTICLE_IDS_JSON" > "$article_ids_file"
           revision="$(git show -s --format=%ct HEAD).$(git rev-parse --short=12 HEAD)"
           echo "ARTICLE_CONTENT_REVISION=$revision" >> "$GITHUB_ENV"
           export ARTICLE_CONTENT_REVISION="$revision"
           npx -y tsx@4.23.15 scripts/publish-article-fast.mjs \
-            --ids "$ARTICLE_IDS_JSON" \
+            --ids-file "$article_ids_file" \
             --section "${{ matrix.target.section }}" \
             --out "$RUNNER_TEMP/fast-dist" \
             --summary "$RUNNER_TEMP/fast-summary.json" \
