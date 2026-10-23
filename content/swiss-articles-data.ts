@@ -28748,6 +28748,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'iva-aumento-pensione-sondaggio',
+    category: 'pensione',
+    date: '2026-10-23T23:16:56.572Z',
+    image: '/images/blog/article-iva-aumento-pensione-sondaggio.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

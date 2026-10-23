@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1951116/franchi-esercito-miliardo-chiesto-osce": {
-    "articleId": "crediti-esercito-difesa-svizzera",
-    "ts": "2026-09-18T18:14:30.261Z",
-    "keyForm": 2
-  },
   "https://www.swissinfo.ch/ita/tasse-extra-per-i-commercianti-di-materie-prime%3f-%22non-ci-stiamo%22/92084098": {
     "articleId": "suissenegece-respinge-tasse-profitti",
     "ts": "2026-09-19T01:32:55.810Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/newsblog/valute-e-frontiere/1958771/franco-svizzero-euro-cambio-franchi-potrebbe-investitori-valuta-tassi-interesse": {
     "articleId": "franco-euro-cambio-ottobre-2026",
     "ts": "2026-10-23T16:48:58.050Z",
+    "keyForm": 2
+  },
+  "https://lenews.ch/2026/10/23/vat-rise-to-fund-extra-pension-narrowly-opposed-in-first-poll": {
+    "articleId": "iva-aumento-pensione-sondaggio",
+    "ts": "2026-10-23T23:16:57.478Z",
     "keyForm": 2
   }
 }
