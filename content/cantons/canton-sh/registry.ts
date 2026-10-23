@@ -204,4 +204,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'coop-aumento-salari-2027',
+ category: 'pratico',
+ date: '2026-10-23T12:36:39.649Z',
+ image: '/images/blog/article-coop-aumento-salari-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

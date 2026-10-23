@@ -57,6 +57,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.sciaffusa-regole-datacenter.title': 'Schaffhausen: electricity, water and data centre proposal',
     'blog.article.sciaffusa-regole-datacenter.excerpt': 'The cantonal council commission proposes levies on electricity and water; the government supports the change.',
     'blog.article.sciaffusa-regole-datacenter.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.coop-aumento-salari-2027.title': 'Coop: 2027 wage increase for employees earning under 4.900 francs',
+    'blog.article.coop-aumento-salari-2027.excerpt': 'Agreement between Coop and social partners: general increase of at least 1,1% for those earning up to 4.900 francs per month in 2027.',
+    'blog.article.coop-aumento-salari-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

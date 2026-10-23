@@ -57,6 +57,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.sciaffusa-regole-datacenter.title': 'Schaffhausen: Vorschlag zu Strom, Wasser und Rechenzentren',
     'blog.article.sciaffusa-regole-datacenter.excerpt': 'Die Kommission des Kantonsrates schlägt Abgaben auf Strom und Wasser vor; die Regierung unterstützt die Änderung.',
     'blog.article.sciaffusa-regole-datacenter.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.coop-aumento-salari-2027.title': 'Coop: Lohnerhöhung 2027 für Beschäftigte unter 4.900 Franken',
+    'blog.article.coop-aumento-salari-2027.excerpt': 'Vereinbarung zwischen Coop und den Sozialpartnern: allgemeine Erhöhung von mindestens 1,1% für alle, die im Jahr 2027 monatlich bis zu 4.900 Franken verdienen.',
+    'blog.article.coop-aumento-salari-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;
