@@ -1065,10 +1065,6 @@ jobs:
             echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push fires no workflow at all (anti-recursion), so the article would never reach the site via publish-api.yml AND the self-trigger chain would stop dead. Both depend on this push being PAT-authenticated."
             exit 1
           fi
-          # `.tmp` is inside the checkout and the rebase helper can remove or
-          # replace it while replaying the generated commit. Preserve the
-          # report before the first push attempt so the post-rebase gate still
-          # has the run's topic evidence after a remote race.
           RUN_REPORT="$RUNNER_TEMP/create-article-run-report.json"
           if [ ! -s .tmp/create-article-run-report.json ]; then
             echo "::error::create-article run report is missing before the push/rebase loop"
