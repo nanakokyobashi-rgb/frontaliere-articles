@@ -638,9 +638,10 @@ export function readBodyField(src, id, field) {
   }
   if (j >= src.length) return null;
   const raw = src.slice(start, j);
+  const decodeControlEscapes = field !== 'faq';
   return quote === "'"
-    ? unescapeTsString(raw, { "'": "'", n: '\n', '\\': '\\' })
-    : unescapeTsString(raw, { '`': '`', $: '$', '\\': '\\' });
+    ? unescapeTsString(raw, { "'": "'", n: '\n', '\\': '\\' }, { decodeControlEscapes })
+    : unescapeTsString(raw, { '`': '`', $: '$', '\\': '\\' }, { decodeControlEscapes });
 }
 
 // `escapeForSingleQuoteTS` NON si ridichiara qui: la copia canonica sta in
