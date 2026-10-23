@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-10-23T05:52:42.601Z",
-  "contentHash": "b0ee4322caf2cb80012ba936167a0122f15c373bf2625427f16fdbcad6761efe",
+  "updatedAt": "2026-10-23T10:42:39.932Z",
+  "contentHash": "a0afeefd1e23e0dc17be1425749ce727fdd4059eedc5e81f2480edb440edb0ce",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -19,7 +19,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-22T23:30:28.996Z",
+      "updatedAt": "2026-10-23T05:06:32.759Z",
       "keyFacts": 0
     },
     {
@@ -106,17 +106,17 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "3 °C",
-              "detail": "oggi da 4 a 4 °C"
+              "value": "4 °C",
+              "detail": "oggi da 3 a 12 °C"
             },
             {
               "label": "Herisau",
-              "value": "4 °C",
-              "detail": "oggi da 5 a 5 °C"
+              "value": "5 °C",
+              "detail": "oggi da 4 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -237,7 +237,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -316,17 +316,17 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "3 °C",
-              "detail": "today from 4 to 4 °C"
+              "value": "4 °C",
+              "detail": "today from 3 to 12 °C"
             },
             {
               "label": "Herisau",
-              "value": "4 °C",
-              "detail": "today from 5 to 5 °C"
+              "value": "5 °C",
+              "detail": "today from 4 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -439,7 +439,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -518,17 +518,17 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "3 °C",
-              "detail": "heute 4 bis 4 °C"
+              "value": "4 °C",
+              "detail": "heute 3 bis 12 °C"
             },
             {
               "label": "Herisau",
-              "value": "4 °C",
-              "detail": "heute 5 bis 5 °C"
+              "value": "5 °C",
+              "detail": "heute 4 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -641,7 +641,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -720,17 +720,17 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "3 °C",
-              "detail": "aujourd’hui de 4 à 4 °C"
+              "value": "4 °C",
+              "detail": "aujourd’hui de 3 à 12 °C"
             },
             {
               "label": "Herisau",
-              "value": "4 °C",
-              "detail": "aujourd’hui de 5 à 5 °C"
+              "value": "5 °C",
+              "detail": "aujourd’hui de 4 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-22T23:30:28.996Z"
+          "updatedAt": "2026-10-23T05:06:32.759Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -835,7 +835,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-23T05:52:42.601Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     }
   }
 }

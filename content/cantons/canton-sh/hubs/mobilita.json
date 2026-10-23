@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "4c8d05f3a8c2ad6a0817e4e673c6dc8ac8270a5120f78e5372baded93e4e1b64",
+  "updatedAt": "2026-10-23T10:42:39.932Z",
+  "contentHash": "c86f33ba13744919811060750ae85f45ff8c834e62794283d7e145d5eaf189ed",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-21T23:59:59.000Z",
+      "updatedAt": "2026-10-22T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T16:03:41.824Z",
+      "updatedAt": "2026-10-22T20:51:18.236Z",
       "keyFacts": 0
     }
   ],
@@ -28,67 +28,67 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, settimana conclusa: 21 ottobre 2026"
+          "note": "Bargen SH – Tengen, settimana conclusa: 22 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 15 ottobre 2026 – 21 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 16 ottobre 2026 – 22 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/bargen-sh-tengen/oggi/"
             },
             {
               "label": "Blumberg – Bargen SH, Alte Bargener Strasse",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/blumberg-bargen-sh-alte-bargener-strasse/oggi/"
             },
             {
               "label": "Blumberg – Bargen SH, Autostrasse H4",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/blumberg-bargen-sh-autostrasse-h4/oggi/"
             },
             {
               "label": "Blumberg – Beggingen",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/blumberg-beggingen/oggi/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, Büsingerstrasse",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/busingen-am-hochrhein-dorflingen-busingerstrasse/oggi/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, L202",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/busingen-am-hochrhein-dorflingen-l202/oggi/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, Siedlerstrasse",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/busingen-am-hochrhein-dorflingen-siedlerstrasse/oggi/"
             },
             {
               "label": "Büsingen am Hochrhein – Schaffhausen, Felsgasse",
               "value": "0 min",
-              "detail": "47 rilevazioni",
+              "detail": "48 rilevazioni",
               "url": "/traffico-dogane/busingen-am-hochrhein-schaffhausen-felsgasse/oggi/"
             }
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-21T23:59:59.000Z"
+          "updatedAt": "2026-10-22T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -126,7 +126,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/arbeiten+an+bruecke+im+faehrehafen"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -192,7 +192,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "en": {
       "canton": "SH",
@@ -203,67 +203,67 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, week ending 21 October 2026"
+          "note": "Bargen SH – Tengen, week ending 22 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 15 October 2026 to 21 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 16 October 2026 to 22 October 2026, fastest first.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/bargen-sh-tengen/today/"
             },
             {
               "label": "Blumberg – Bargen SH, Alte Bargener Strasse",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/blumberg-bargen-sh-alte-bargener-strasse/today/"
             },
             {
               "label": "Blumberg – Bargen SH, Autostrasse H4",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/blumberg-bargen-sh-autostrasse-h4/today/"
             },
             {
               "label": "Blumberg – Beggingen",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/blumberg-beggingen/today/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, Büsingerstrasse",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/busingen-am-hochrhein-dorflingen-busingerstrasse/today/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, L202",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/busingen-am-hochrhein-dorflingen-l202/today/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, Siedlerstrasse",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/busingen-am-hochrhein-dorflingen-siedlerstrasse/today/"
             },
             {
               "label": "Büsingen am Hochrhein – Schaffhausen, Felsgasse",
               "value": "0 min",
-              "detail": "47 readings",
+              "detail": "48 readings",
               "url": "/en/border-wait/busingen-am-hochrhein-schaffhausen-felsgasse/today/"
             }
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-21T23:59:59.000Z"
+          "updatedAt": "2026-10-22T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -301,7 +301,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/arbeiten+an+bruecke+im+faehrehafen"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -367,7 +367,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "de": {
       "canton": "SH",
@@ -378,67 +378,67 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Bargen SH – Tengen, Woche bis 21. Oktober 2026"
+          "note": "Bargen SH – Tengen, Woche bis 22. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 15. Oktober 2026 bis 21. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 16. Oktober 2026 bis 22. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/bargen-sh-tengen/heute/"
             },
             {
               "label": "Blumberg – Bargen SH, Alte Bargener Strasse",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/blumberg-bargen-sh-alte-bargener-strasse/heute/"
             },
             {
               "label": "Blumberg – Bargen SH, Autostrasse H4",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/blumberg-bargen-sh-autostrasse-h4/heute/"
             },
             {
               "label": "Blumberg – Beggingen",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/blumberg-beggingen/heute/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, Büsingerstrasse",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/busingen-am-hochrhein-dorflingen-busingerstrasse/heute/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, L202",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/busingen-am-hochrhein-dorflingen-l202/heute/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, Siedlerstrasse",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/busingen-am-hochrhein-dorflingen-siedlerstrasse/heute/"
             },
             {
               "label": "Büsingen am Hochrhein – Schaffhausen, Felsgasse",
               "value": "0 Min.",
-              "detail": "47 Messungen",
+              "detail": "48 Messungen",
               "url": "/de/wartezeit-grenze/busingen-am-hochrhein-schaffhausen-felsgasse/heute/"
             }
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-21T23:59:59.000Z"
+          "updatedAt": "2026-10-22T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -476,7 +476,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/arbeiten+an+bruecke+im+faehrehafen"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -542,7 +542,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     },
     "fr": {
       "canton": "SH",
@@ -553,67 +553,67 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, semaine jusqu’au 21 octobre 2026"
+          "note": "Bargen SH – Tengen, semaine jusqu’au 22 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 15 octobre 2026 au 21 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 16 octobre 2026 au 22 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/bargen-sh-tengen/aujourd-hui/"
             },
             {
               "label": "Blumberg – Bargen SH, Alte Bargener Strasse",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/blumberg-bargen-sh-alte-bargener-strasse/aujourd-hui/"
             },
             {
               "label": "Blumberg – Bargen SH, Autostrasse H4",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/blumberg-bargen-sh-autostrasse-h4/aujourd-hui/"
             },
             {
               "label": "Blumberg – Beggingen",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/blumberg-beggingen/aujourd-hui/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, Büsingerstrasse",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/busingen-am-hochrhein-dorflingen-busingerstrasse/aujourd-hui/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, L202",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/busingen-am-hochrhein-dorflingen-l202/aujourd-hui/"
             },
             {
               "label": "Büsingen am Hochrhein – Dörflingen, Siedlerstrasse",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/busingen-am-hochrhein-dorflingen-siedlerstrasse/aujourd-hui/"
             },
             {
               "label": "Büsingen am Hochrhein – Schaffhausen, Felsgasse",
               "value": "0 min",
-              "detail": "47 relevés",
+              "detail": "48 relevés",
               "url": "/fr/temps-attente-douane/busingen-am-hochrhein-schaffhausen-felsgasse/aujourd-hui/"
             }
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-21T23:59:59.000Z"
+          "updatedAt": "2026-10-22T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -651,7 +651,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/arbeiten+an+bruecke+im+faehrehafen"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-22T20:51:18.236Z"
         }
       ],
       "curatedArticles": [
@@ -717,7 +717,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-23T10:42:39.932Z"
     }
   }
 }
