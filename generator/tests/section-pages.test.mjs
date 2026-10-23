@@ -3532,7 +3532,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /push_before:/);
   assert.match(wf, /push_after:/);
   assert.match(
-    wf,
+    liveRetryLoop,
     /previous_revision="\$\(git rev-parse HEAD\^\)"/,
     'il retry live conserva la revisione precedente per delimitare il push range',
   );
