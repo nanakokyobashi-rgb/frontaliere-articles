@@ -178,11 +178,9 @@ test('FAQ control escapes remain JSON escapes until JSON.parse', () => {
   assert.equal(JSON.parse(rawFaq)[0].a, 'First\bSecond\fThird');
 });
 
-test('TypeScript octal-looking control escapes are rejected', () => {
-  assert.throws(
-    () => extractArticleBodyFields(sourceFor(articleId, String.raw`bad\08`)),
-    /escape ottale TypeScript non supportato/u,
-  );
+test('TypeScript octal-looking control escapes remain source-stable', () => {
+  const fields = extractArticleBodyFields(sourceFor(articleId, String.raw`bad\08`));
+  assert.equal(fields.find(({ field }) => field === 'body1')?.value, String.raw`bad\08`);
 });
 
 test('template literals normalize raw CRLF line endings to LF', () => {
