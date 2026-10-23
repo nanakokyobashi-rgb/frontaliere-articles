@@ -30,6 +30,9 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.basilea-cantieri-alle-sei.title': 'Parlement de Bâle : motion pour commencer les chantiers à 6 heures',
     'blog.article.basilea-cantieri-alle-sei.excerpt': 'Le Grand Conseil de Bâle a transmis une motion visant à autoriser les travaux de construction à 6 heures de juin à août ; les travaux bruyants resteraient à partir de 7 heures.',
     'blog.article.basilea-cantieri-alle-sei.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.domande-edilizie-solo-digitale-2027.title': 'Demandes de permis de construire numériques dès 2027 à Bâle',
+    'blog.article.domande-edilizie-solo-digitale-2027.excerpt': 'À partir du 1er janvier 2027, les demandes de permis de construire doivent être soumises uniquement sous forme numérique, comme l’a annoncé le Bau- und Gastgewerbeinspektorat en septembre 2026.',
+    'blog.article.domande-edilizie-solo-digitale-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBasileaFr;

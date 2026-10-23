@@ -30,6 +30,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.basilea-cantieri-alle-sei.title': 'Basel Parliament: motion to start construction work at 6',
     'blog.article.basilea-cantieri-alle-sei.excerpt': 'The Grand Council of Basel has referred a motion to allow construction work from 6 a.m.',
     'blog.article.basilea-cantieri-alle-sei.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.domande-edilizie-solo-digitale-2027.title': 'Building permit applications digital-only from 2027: Basel',
+    'blog.article.domande-edilizie-solo-digitale-2027.excerpt': 'From January 1, 2027, building permit applications must be submitted only in digital format, as announced by the Bau- und Gastgewerbeinspektorat in September 2026.',
+    'blog.article.domande-edilizie-solo-digitale-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBasileaEn;

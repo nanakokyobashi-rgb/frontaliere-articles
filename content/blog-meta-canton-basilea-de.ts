@@ -30,6 +30,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.basilea-cantieri-alle-sei.title': 'Basler Parlament: Motion für einen Baubeginn um 6 Uhr',
     'blog.article.basilea-cantieri-alle-sei.excerpt': 'Der Grosse Rat von Basel hat eine Motion überwiesen, um Bauarbeiten von Juni bis August um 6 Uhr zu ermöglichen; lärmintensive Arbeiten würden weiterhin erst ab 7 Uhr stattfinden.',
     'blog.article.basilea-cantieri-alle-sei.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.domande-edilizie-solo-digitale-2027.title': 'Baugesuche ab dem 1. Januar 2027 im Kanton Basel nur noch digital',
+    'blog.article.domande-edilizie-solo-digitale-2027.excerpt': 'Ab dem 1. Januar 2027 müssen Baugesuche, wie das Bau- und Gastgewerbeinspektorat im September 2026 mitteilte, nur noch digital eingereicht werden.',
+    'blog.article.domande-edilizie-solo-digitale-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBasileaDe;

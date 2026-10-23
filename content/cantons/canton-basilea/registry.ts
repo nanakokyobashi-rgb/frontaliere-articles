@@ -105,4 +105,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'domande-edilizie-solo-digitale-2027',
+ category: 'pratico',
+ date: '2026-10-23T21:50:50.738Z',
+ image: '/images/blog/article-domande-edilizie-solo-digitale-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BASILEA'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
