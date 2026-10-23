@@ -42,6 +42,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.consiglio-stato-21-ottobre-2026.title': 'Consiglio di Stato risponde a consultazioni federali nel 2026',
     'blog.article.consiglio-stato-21-ottobre-2026.excerpt': 'Il Consiglio di Stato ha risposto a due consultazioni federali Autorizzazioni per lavori pesanti nelle zone montane II e III Votazione cantonale fissata',
     'blog.article.consiglio-stato-21-ottobre-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.zenith-soppressione-locle.title': 'Zenith annuncia circa cento soppressioni al Locle',
+    'blog.article.zenith-soppressione-locle.excerpt': 'Zenith annuncia circa cento soppressioni al Locle La manifattura conta 196 collaboratori Aperta la consultazione per il licenziamento collettivo Annuncio',
+    'blog.article.zenith-soppressione-locle.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonNeIt;

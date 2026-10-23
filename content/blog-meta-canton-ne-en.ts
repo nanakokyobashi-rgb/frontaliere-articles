@@ -42,6 +42,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.consiglio-stato-21-ottobre-2026.title': 'State Council responds to federal consultations in 2026',
     'blog.article.consiglio-stato-21-ottobre-2026.excerpt': 'The Council of State has responded to two federal consultations Authorizations for heavy work in mountain zones II and III Cantonal vote scheduled for Sunday',
     'blog.article.consiglio-stato-21-ottobre-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.zenith-soppressione-locle.title': 'Zenith announces around one hundred job cuts in Le Locle',
+    'blog.article.zenith-soppressione-locle.excerpt': 'Zenith announces approximately one hundred job cuts at Locle The manufactory has 196 employees Consultation opened for collective dismissal Announcement',
+    'blog.article.zenith-soppressione-locle.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNeEn;

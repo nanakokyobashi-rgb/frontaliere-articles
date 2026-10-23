@@ -42,6 +42,9 @@ const blogMetaCantonNeFr: Record<string, string> = {
     'blog.article.consiglio-stato-21-ottobre-2026.title': 'Le Conseil d\'État répond à des consultations fédérales en 2026',
     'blog.article.consiglio-stato-21-ottobre-2026.excerpt': 'Le Conseil d\'État a répondu à deux consultations fédérales Autorisations pour des travaux lourds dans les zones montagneuses II et III Votation cantonale fixée',
     'blog.article.consiglio-stato-21-ottobre-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.zenith-soppressione-locle.title': 'Zenith annonce environ cent suppressions de postes au Locle',
+    'blog.article.zenith-soppressione-locle.excerpt': 'Zenith annonce environ cent suppressions de postes au Locle La manufacture compte 196 collaborateurs Consultation ouverte en vue d\'un licenciement collectif',
+    'blog.article.zenith-soppressione-locle.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonNeFr;
