@@ -3103,7 +3103,7 @@
       "baseline": {
         "site": null,
         "corpus": "0c8405ba7a0c5899",
-        "alignedAt": "2026-10-22"
+        "alignedAt": "2026-10-23"
       }
     },
     {
@@ -6535,6 +6535,15 @@
         "site": null,
         "corpus": "5266ac18972026d9",
         "alignedAt": "2026-10-21"
+      }
+    },
+    {
+      "path": "SECURITY.md",
+      "mode": "identical",
+      "baseline": {
+        "site": "0e0aa91be02c1c2b",
+        "corpus": "0e0aa91be02c1c2b",
+        "alignedAt": "2026-10-23"
       }
     }
   ]
