@@ -10,6 +10,7 @@ import {
   selectActivePublisherRun,
   selectNewRunId,
   validatePublisherStatus,
+  workflowRunListArguments,
   watchPublisherRun,
 } from '../../scripts/ci/cover-publisher-drain.mjs';
 
@@ -240,6 +241,22 @@ test('appiattisce tutte le pagine delle run e riusa anche una cover attiva piu v
     { workflow: 'fast-publish-article.yml', section: 'frontaliere' },
   );
   assert.equal(selected?.databaseId, 101);
+});
+
+test('la ricerca delle run usa GET anche quando filtra con -f', () => {
+  const args = workflowRunListArguments({
+    repo: 'nanakokyobashi-rgb/frontaliere-articles',
+    workflow: 'fast-publish-section.yml',
+  });
+
+  assert.deepEqual(args, [
+    'api', '--paginate', '--slurp',
+    '--method', 'GET',
+    'repos/nanakokyobashi-rgb/frontaliere-articles/actions/workflows/fast-publish-section.yml/runs',
+    '-f', 'event=workflow_dispatch',
+    '-f', 'branch=main',
+    '-f', 'per_page=100',
+  ]);
 });
 
 test('riusa la run cover attiva e non seleziona publisher manuali o conclusi', () => {

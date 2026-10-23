@@ -244,13 +244,9 @@ async function listRunIds({ repo, workflow, token, deadlineAt, now }) {
   // `gh run list --limit 100` can hide an old queued publisher behind a busy
   // completed-run history. Paginate the workflow-runs endpoint so an active
   // cover publisher is reusable regardless of its age.
-  const output = await runGh([
-    'api', '--paginate', '--slurp',
-    `repos/${repo}/actions/workflows/${workflow}/runs`,
-    '-f', 'event=workflow_dispatch',
-    '-f', 'branch=main',
-    '-f', 'per_page=100',
-  ], { token, deadlineAt, now });
+  const output = await runGh(workflowRunListArguments({ repo, workflow }), {
+    token, deadlineAt, now,
+  });
   let pages;
   try {
     pages = JSON.parse(output || '[]');
@@ -258,6 +254,17 @@ async function listRunIds({ repo, workflow, token, deadlineAt, now }) {
     throw new Error(`workflow run list returned malformed JSON: ${textError(error)}`);
   }
   return normalizeWorkflowRunPages(pages);
+}
+
+export function workflowRunListArguments({ repo, workflow }) {
+  return [
+    'api', '--paginate', '--slurp',
+    '--method', 'GET',
+    `repos/${repo}/actions/workflows/${workflow}/runs`,
+    '-f', 'event=workflow_dispatch',
+    '-f', 'branch=main',
+    '-f', 'per_page=100',
+  ];
 }
 
 /**
