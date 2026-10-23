@@ -208,14 +208,43 @@ test('siteBlobShas: un albero ricorsivo troncato recupera root e sotto-alberi pe
         tree: [{ type: 'blob', sha: 'a' }, { type: 'tree', sha: 'subtree-sha' }],
       });
     }
-    if (url.endsWith('/trees/subtree-sha')) return response(200, { truncated: false, tree: [{ type: 'blob', sha: 'b' }] });
+    if (url.endsWith('/trees/subtree-sha?recursive=1')) return response(200, { truncated: false, tree: [{ type: 'blob', sha: 'b' }] });
     throw new Error(`URL inatteso: ${url}`);
   };
   assert.deepEqual([...await siteBlobShas({ repo: 'o/r', ref: 'HEAD', fetchImpl: paged, sleep: noSleep })].sort(), ['a', 'b']);
   assert.deepEqual(calls, [
     'https://api.github.com/repos/o/r/git/trees/HEAD?recursive=1',
     'https://api.github.com/repos/o/r/git/trees/root-sha',
-    'https://api.github.com/repos/o/r/git/trees/subtree-sha',
+    'https://api.github.com/repos/o/r/git/trees/subtree-sha?recursive=1',
+  ]);
+});
+
+test('siteBlobShasPagination: una pagina ricorsiva completa non visita ogni discendente', async () => {
+  const calls = [];
+  const paged = async (url) => {
+    calls.push(url);
+    if (url.endsWith('/trees/root-sha')) {
+      return response(200, { truncated: false, tree: [{ type: 'tree', sha: 'subtree-sha' }] });
+    }
+    if (url.endsWith('/trees/subtree-sha?recursive=1')) {
+      return response(200, {
+        truncated: false,
+        tree: [
+          { type: 'blob', sha: 'a' },
+          { type: 'tree', sha: 'nested-sha' },
+          { type: 'blob', sha: 'b' },
+        ],
+      });
+    }
+    throw new Error(`URL inatteso: ${url}`);
+  };
+  assert.deepEqual(
+    [...await siteBlobShasPagination({ repo: 'o/r', ref: 'root-sha', fetchImpl: paged, sleep: noSleep })].sort(),
+    ['a', 'b'],
+  );
+  assert.deepEqual(calls, [
+    'https://api.github.com/repos/o/r/git/trees/root-sha',
+    'https://api.github.com/repos/o/r/git/trees/subtree-sha?recursive=1',
   ]);
 });
 
