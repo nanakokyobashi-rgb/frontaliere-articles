@@ -209,7 +209,12 @@ jobs:
                   and (([$pages[].workflow_runs[].id] | unique | length)
                     == ([$pages[].workflow_runs[]] | length))
                 then
-                  {workflow_runs: [$pages[].workflow_runs[]]}
+                  {workflow_runs: [
+                    $pages[].workflow_runs[]
+                    | . as $run
+                    | ($run.created_at | fromdateiso8601) as $created_at_epoch
+                    | $run + {created_at_epoch: $created_at_epoch}
+                  ]}
                 else
                   error("workflow run listing incomplete")
                 end
@@ -347,7 +352,7 @@ jobs:
           recent=999
           if recent_pages_json="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=100" 2>/dev/null)"; then
             if recent_runs_json="$(validate_workflow_runs <<<"$recent_pages_json")"; then
-              recent="$(jq -r --arg t "$hour_ago" '[.workflow_runs[] | select(.event == "workflow_dispatch" and (.created_at | fromdateiso8601) >= ($t | fromdateiso8601))] | length' <<<"$recent_runs_json" 2>/dev/null)" || recent=999
+              recent="$(jq -r --arg t "$hour_ago" '[.workflow_runs[] | select(.event == "workflow_dispatch" and .created_at_epoch >= ($t | fromdateiso8601))] | length' <<<"$recent_runs_json" 2>/dev/null)" || recent=999
             fi
           fi
           if [ "$recent" -ge 6 ]; then
