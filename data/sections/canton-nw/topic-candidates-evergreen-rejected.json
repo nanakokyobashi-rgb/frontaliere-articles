@@ -4,13 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-nw::https://www.hergiswil.ch/_rte/information/3014485": {
-      "section": "canton-nw",
-      "ts": 1792625461067
-    },
     "canton-nw::https://www.nw.ch/_rte/information/139015": {
       "section": "canton-nw",
-      "ts": 1792677202001
+      "ts": 1792863302896
     }
   }
 }
