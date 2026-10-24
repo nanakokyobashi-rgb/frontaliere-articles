@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-telecom-358-licenziamenti.webp",
-      "sha256": "0122b5ffd569291018fb62c09cd3615b49bb989ac97d5332c6601462c29ad3d5"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-telecom-358-licenziamenti-480w.webp",
-      "sha256": "1830ff04b54d08413e28958851ed9933aaac97a7aa954fdf5ad9b51a38a99df7"
-    }
-  ]
+  "items": []
 }
