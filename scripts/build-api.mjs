@@ -88,14 +88,12 @@ const repairSocialSnippet = (text) => {
   }
   return bounded;
 };
-// The vendored Google News whitelist (issue #4974 item 3, §5.3). Imported, not
-// re-copied: main pulls the eligibility decision from this repo and a third copy
-// of the token list is exactly the drift that module's header warns about. A
-// static import is also the point — the failure this replaced was a regex parse
-// that silently returned [], which `isArticleNewsEligible` would read as
-// allow-all. A missing module throws; an empty list does not.
+// The Google News window, from the vendored module (issue #4974 item 3, §5.3).
+// Since 2026-10-24 the news emitter applies ONLY the 48h window
+// (`isWithinNewsWindow`), not the topic whitelist the module also carries: see
+// the "Google News candidates" block below.
 import {
-  isArticleNewsEligible,
+  isWithinNewsWindow,
   NEWS_SITEMAP_WINDOW_HOURS,
 } from '../generator/data/news-sitemap-whitelist.mjs';
 // Sitemap retention for the dated daily editions (Bollettino del Frontaliere):
@@ -1147,9 +1145,13 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
 
 // ── Google News candidates (migration §7.2) ───────────────────────
 //
-// §3 picks option (a): THIS repo decides Google News eligibility once, from the
-// whitelist vendored into its own tree, and publishes the resulting <url> blocks
-// as candidates. The site never re-decides eligibility — it merges these over
+// §3 picks option (a): THIS repo decides Google News eligibility once and
+// publishes the resulting <url> blocks as candidates. Since 2026-10-24 the
+// decision is Google News' own rule and nothing else: every published locale
+// page (it/en/de/fr) of an article whose publication date is inside the 48h
+// window (`isWithinNewsWindow`). The vendored topic whitelist used to gate it
+// and had narrowed the live sitemap-news.xml to 7 Italian URLs on a corpus that
+// publishes in four languages every day. The site never re-decides eligibility — it merges these over
 // what it is serving and applies the mechanical 48h prune. Two independent
 // eligibility codepaths is the "two producers, last writer wins" failure that
 // create-article's own modifySitemap() comment warns about.
@@ -1166,12 +1168,10 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
 // emitting always is also what lets it run under --require-new.
 {
   /**
-   * Per-article SEO text the whitelist matches on. `keywords` lives only in the
-   * seo-blog*.ts chunks, so it has to be read from there; `articleSection` and
-   * `tags` are NOT persisted anywhere in this repo (create-article has them only
-   * in memory during generation), so the registry's `category` stands in for
-   * articleSection and tags are simply absent. That is the whole of what the
-   * corpus retains — not a sampling of it.
+   * Per-article SEO text from the seo-blog*.ts chunks. The news emitter no
+   * longer matches anything on it (the topic whitelist is gone, see above): it
+   * is read here for the historical SEO description policy guard below, which
+   * runs over every record of every chunk on each publish.
    */
   const seoTextById = new Map();
   for (const section of RSS_SECTIONS) {
@@ -1221,7 +1221,11 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
   const candidateBlocks = [];
   let considered = 0;
 
-  const collect = (entries, sectionId, slugMap, meta, shadowed = new Set(), fallbackReasons = {}) => {
+  let skippedNoTitle = 0;
+
+  // `metaByLocale` is the section's meta keyed by locale ({ it, en, de, fr }):
+  // each candidate carries the headline of its own language.
+  const collect = (entries, sectionId, slugMap, metaByLocale, shadowed = new Set(), fallbackReasons = {}) => {
     const paths = SECTION_PATHS[sectionId];
     for (const a of entries) {
       const slug = slugMap?.[a.id]?.it;
@@ -1238,29 +1242,7 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
       if (!publishedAt) continue;
       considered += 1;
 
-      const title = meta[`blog.article.${a.id}.title`] || '';
-      const seo = seoTextById.get(a.id) ?? {};
-      // headline and title are the same string for every generator-written
-      // article, but create-article's own gate reads BOTH — so both are fed in
-      // rather than assuming they agree. They go into the `title` slot because
-      // the vendored predicate is a byte-faithful mirror of main's, and adding a
-      // field to it here is precisely the divergence the vendoring forbids.
-      const titleText = [title, seo.headline].filter(Boolean).join(' ');
-
-      if (
-        !isArticleNewsEligible(
-          {
-            slug,
-            title: titleText,
-            articleSection: a.category,
-            keywords: seo.keywords,
-            publishedAt,
-          },
-          now,
-        )
-      ) {
-        continue;
-      }
+      if (!isWithinNewsWindow(publishedAt, now)) continue;
 
       const itLoc = `${SITE}${paths.it}${xmlEsc(slug)}/`;
       const img = a.image ? (a.image.startsWith('http') ? a.image : SITE + a.image) : null;
@@ -1268,38 +1250,51 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
       // Match the blog sitemap: initial publication is the first content change;
       // an editorial update supersedes it. Rebuilding is not a content change.
       const lastmod = a.updatedAt || publishedAt;
-      const parts = [`  <url>`, `    <loc>${itLoc}</loc>`, `    <lastmod>${xmlEsc(lastmod)}</lastmod>`];
-      for (const { locale, prefix, slug: localizedSlug } of localeRows) {
-        parts.push(
+      const alternates = localeRows.map(
+        ({ locale, prefix, slug: localizedSlug }) =>
           `    <xhtml:link rel="alternate" hreflang="${locale}" href="${SITE}${prefix}${xmlEsc(localizedSlug)}/" />`,
-        );
-      }
-      parts.push(
-        `    <xhtml:link rel="alternate" hreflang="x-default" href="${itLoc}" />`,
-        `    <news:news>`,
-        `      <news:publication>`,
-        `        <news:name>${NEWS_PUBLICATION}</news:name>`,
-        `        <news:language>it</news:language>`,
-        `      </news:publication>`,
-        // The consumer refuses a block without this field and prunes on it, so
-        // it carries the registry's own timestamp verbatim. Generator-written
-        // entries hold a full ISO instant; the handful of legacy day-only dates
-        // resolve to midnight UTC, which costs part of a window but never
-        // fabricates freshness.
-        `      <news:publication_date>${xmlEsc(publishedAt)}</news:publication_date>`,
-        `      <news:title>${xmlEsc(title)}</news:title>`,
-        `    </news:news>`,
       );
-      if (img) {
+      alternates.push(`    <xhtml:link rel="alternate" hreflang="x-default" href="${itLoc}" />`);
+
+      // One <url> per published locale page. Google News treats each language
+      // version as its own article: it needs its own <loc>, the language it is
+      // written in and the headline as that page shows it. A locale whose
+      // headline is missing is skipped rather than announced with an empty or
+      // foreign-language title.
+      for (const { locale, prefix, slug: localizedSlug } of localeRows) {
+        const title = metaByLocale?.[locale]?.[`blog.article.${a.id}.title`] || '';
+        if (!title) {
+          skippedNoTitle += 1;
+          continue;
+        }
+        const loc = `${SITE}${prefix}${xmlEsc(localizedSlug)}/`;
+        const parts = [`  <url>`, `    <loc>${loc}</loc>`, `    <lastmod>${xmlEsc(lastmod)}</lastmod>`, ...alternates];
         parts.push(
-          `    <image:image>`,
-          `      <image:loc>${xmlEsc(img)}</image:loc>`,
-          `      <image:title>${xmlEsc(title)}</image:title>`,
-          `    </image:image>`,
+          `    <news:news>`,
+          `      <news:publication>`,
+          `        <news:name>${NEWS_PUBLICATION}</news:name>`,
+          `        <news:language>${locale}</news:language>`,
+          `      </news:publication>`,
+          // The consumer refuses a block without this field and prunes on it, so
+          // it carries the registry's own timestamp verbatim. Generator-written
+          // entries hold a full ISO instant; the handful of legacy day-only dates
+          // resolve to midnight UTC, which costs part of a window but never
+          // fabricates freshness.
+          `      <news:publication_date>${xmlEsc(publishedAt)}</news:publication_date>`,
+          `      <news:title>${xmlEsc(title)}</news:title>`,
+          `    </news:news>`,
         );
+        if (img) {
+          parts.push(
+            `    <image:image>`,
+            `      <image:loc>${xmlEsc(img)}</image:loc>`,
+            `      <image:title>${xmlEsc(title)}</image:title>`,
+            `    </image:image>`,
+          );
+        }
+        parts.push(`  </url>`);
+        candidateBlocks.push(parts.join('\n'));
       }
-      parts.push(`  </url>`);
-      candidateBlocks.push(parts.join('\n'));
     }
   };
 
@@ -1316,7 +1311,7 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
       SECTION_REGISTRIES[section.section],
       section.section,
       slugMapOf(section.section),
-      SECTION_META_IT[section.section],
+      SECTION_META_BY_LOCALE[section.section],
       SECTION_SITEMAP_SHADOW[section.section],
       SECTION_SLUG_MODULES[section.section].fallbackReasons ?? {},
     );
@@ -1339,7 +1334,8 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
   newsCandidateCount = candidateBlocks.length;
   console.log(
     `[build-api] ${NEWS_CANDIDATES}: ${candidateBlocks.length} candidates from ` +
-      `${considered} dated articles (${NEWS_SITEMAP_WINDOW_HOURS}h window), ${byteSize(candidatesXml)} bytes`,
+      `${considered} dated articles (${NEWS_SITEMAP_WINDOW_HOURS}h window, all published locales; ` +
+      `${skippedNoTitle} locale page(s) skipped for a missing headline), ${byteSize(candidatesXml)} bytes`,
   );
 }
 
