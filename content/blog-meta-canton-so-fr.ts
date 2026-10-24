@@ -42,6 +42,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.title': 'La commission réduit le crédit de numérisation à Soleure',
     'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.excerpt': 'La commission des finances du Conseil cantonal de Soleure demande de réduire le crédit d’engagement pour la transformation numérique de CHF 21,4 à CHF 21,2 millions.',
     'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.cambio-ora-rischio-wildunfalli.title': 'Changement d\'heure : plus d\'accidents avec la faune',
+    'blog.article.cambio-ora-rischio-wildunfalli.excerpt': 'Dans la nuit du 24 au 25 octobre 2026, les horloges reculent d\'une heure, ce qui coïncide avec l\'activité des chevreuils, cerfs élaphes et sangliers.',
+    'blog.article.cambio-ora-rischio-wildunfalli.imageAlt': 'Risque de collision avec des animaux sauvages lors du changement d\'heure dans le Canton de Soleure.',
 };
 
 export default blogMetaCantonSoFr;

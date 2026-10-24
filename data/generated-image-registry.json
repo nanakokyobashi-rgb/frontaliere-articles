@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 903,
+  "assetCount": 904,
   "assets": [
     {
       "schema": 1,
@@ -36942,6 +36942,61 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Generic synthetic, photorealistic transit illustration with no readable text, logos, or people."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-cambio-ora-rischio-wildunfalli",
+      "kind": "photo",
+      "provider": "wikimedia",
+      "model": "Wikimedia Commons file mirror",
+      "executorModel": "Wikimedia Commons file mirror",
+      "license": "CC BY 2.0",
+      "licenseFamily": "cc-by",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+      "credit": "Thomas Depenbusch (Depi) from Cologne, Germany · CC BY 2.0",
+      "author": {
+        "name": "Thomas Depenbusch (Depi) from Cologne, Germany"
+      },
+      "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Kyrgyzstan_(6020481422).jpg",
+      "sourceImageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c0/Kyrgyzstan_%286020481422%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "sourceWidth": 1600,
+      "sourceHeight": 870,
+      "photoTitle": "File:Kyrgyzstan (6020481422).jpg",
+      "copyrightNotice": "© Thomas Depenbusch (Depi) from Cologne, Germany",
+      "acquireLicensePage": "https://commons.wikimedia.org/wiki/File:Kyrgyzstan_(6020481422).jpg",
+      "modifications": [
+        "cropped",
+        "resized",
+        "converted-to-webp"
+      ],
+      "sha256": "bc20f2579ee22410e5c9f3724ee8aaad6879ac4a365b91674baf2d5b319142dc",
+      "bytes": 87280,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-24T14:03:06.210Z",
+      "verifiedAt": "2026-10-24T14:03:16.050Z",
+      "restrictions": [
+        "licensed-source",
+        "no-recognizable-foreground-person",
+        "no-logo-brand-or-trademark"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-cambio-ora-rischio-wildunfalli.webp",
+      "area": "Swiss border region",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": true,
+        "is_topic_relevant": true,
+        "notes": "Photorealistic twilight landscape with a rural road; no people, logos, signage, or readable text."
       }
     }
   ]

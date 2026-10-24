@@ -42,6 +42,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.title': 'Commissione finanziaria riduce credito per trasformazione digitale a Soletta',
     'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.excerpt': 'La Commissione finanziaria del Consiglio cantonale di Soletta chiede di ridurre il credito d\'impegno per la trasformazione digitale da CHF 21,4 a CHF 21,2 milioni.',
     'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.cambio-ora-rischio-wildunfalli.title': 'Cambio d\'ora aumenta rischio incidenti con fauna nel Canton Soletta',
+    'blog.article.cambio-ora-rischio-wildunfalli.excerpt': 'La notte tra il 24 e il 25 ottobre 2026 gli orologi tornano indietro di un\'ora, coincidente con l\'attività di caprioli, cervi nobili e cinghiali.',
+    'blog.article.cambio-ora-rischio-wildunfalli.imageAlt': 'Rischio di collisioni con animali selvatici durante il cambio d\'ora nel Canton Soletta.',
 };
 
 export default blogMetaCantonSoIt;

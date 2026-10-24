@@ -42,6 +42,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.title': 'Financial Committee reduces funding for digital transformation in Solothurn',
     'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.excerpt': 'The Finance Committee of the Cantonal Council of Solothurn is requesting that the commitment credit for digital transformation be reduced from CHF 21,4 million to CHF 21,2 million.',
     'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.cambio-ora-rischio-wildunfalli.title': 'Clock changes raise wildlife accident risk in Solothurn',
+    'blog.article.cambio-ora-rischio-wildunfalli.excerpt': 'On the night between October 24 and 25, 2026, the clocks go back one hour, coinciding with the activity of roe deer, red deer and wild boars.',
+    'blog.article.cambio-ora-rischio-wildunfalli.imageAlt': 'Risk of collisions with wild animals during the time change in Canton Solothurn.',
 };
 
 export default blogMetaCantonSoEn;

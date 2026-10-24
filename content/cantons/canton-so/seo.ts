@@ -509,6 +509,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cambio-ora-rischio-wildunfalli': {
+    title: 'Cambio d\'ora aumenta rischio incidenti con fauna nel Canton Soletta',
+    description: 'Notizie sul Canton Soletta: il cambio d\'ora 24/25 ottobre 2026 anticipa il crepuscolo, aumentando il rischio di collisioni con caprioli e cervi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, cambio, aumenta, rischio, incidenti',
+    ogTitle: 'Cambio d\'ora rischio incidenti fauna Soletta',
+    ogDescription: 'La notte tra il 24 e il 25 ottobre 2026, il cambio d\'ora nel Canton Soletta coincide con l\'attività di fauna selvatica, richiedendo maggiore prudenza in guida.',
+    canonicalPath: '/articoli-soletta/cambio-ora-rischio-wildunfalli/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cambio d'ora aumenta rischio incidenti con fauna nel Canton Soletta",
+      "description": "Notizie sul Canton Soletta: il cambio d'ora 24/25 ottobre 2026 anticipa il crepuscolo, aumentando il rischio di collisioni con caprioli e cervi.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/article-cambio-ora-rischio-wildunfalli.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Rischio di collisioni con animali selvatici durante il cambio d'ora nel Canton Soletta."
+      },
+      "datePublished": "2026-10-24T14:03:16+00:00",
+      "dateModified": "2026-10-24T14:03:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/cambio-ora-rischio-wildunfalli/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

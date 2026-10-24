@@ -149,4 +149,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'cambio-ora-rischio-wildunfalli',
+ category: 'pratico',
+ date: '2026-10-24T14:03:16.134Z',
+ image: '/images/blog/article-cambio-ora-rischio-wildunfalli.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

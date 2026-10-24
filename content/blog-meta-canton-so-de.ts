@@ -42,6 +42,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.title': 'Finanzkommission kürzt Kredit für die digitale Transformation in Solothurn',
     'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.excerpt': 'Die Finanzkommission des Solothurner Kantonsrats beantragt, den Verpflichtungskredit für die digitale Transformation von CHF 21,4 auf CHF 21,2 Millionen zu kürzen.',
     'blog.article.finanzkommission-k-rzt-kredit-digitalisierung.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cambio-ora-rischio-wildunfalli.title': 'Zeitumstellung erhöht das Risiko von Wildtierunfällen im Kanton Solothurn',
+    'blog.article.cambio-ora-rischio-wildunfalli.excerpt': 'In der Nacht vom 24.',
+    'blog.article.cambio-ora-rischio-wildunfalli.imageAlt': 'Gefahr von Wildunfällen beim Zeitumstellung im Kanton Solothurn.',
 };
 
 export default blogMetaCantonSoDe;
