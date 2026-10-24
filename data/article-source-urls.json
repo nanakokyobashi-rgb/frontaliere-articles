@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/dalla-tuta-blu-dellalfa-romeo-alla-cgil-nazionale-la-lunga-strada-di-stefania-filetti/2679025": {
-    "articleId": "stefania-filetti-cgil-nazionale",
-    "ts": "2026-09-17T01:00:16.465Z",
-    "keyForm": 2
-  },
   "https://www.varesenoi.it/2026/09/16/leggi-notizia/argomenti/economia-13/articolo/leroy-merlin-nuove-opportunita-di-lavoro-nellarea-di-varese.html": {
     "articleId": "leroy-merlin-lavoro-varese",
     "ts": "2026-09-17T02:41:32.315Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/ticino/cronaca/1958888/cisl-ricerca-lavoratori-ritiene-figurano": {
     "articleId": "cisl-ricerca-lavoratori-ritiene",
     "ts": "2026-10-24T19:06:53.847Z",
+    "keyForm": 2
+  },
+  "https://www.varesenews.it/2026/10/anche-tra-i-frontalieri-ce-una-disparita-di-stipendi-tra-uomini-e-donne/2718043": {
+    "articleId": "disparita-stipendi-frontalieri",
+    "ts": "2026-10-24T21:09:53.026Z",
     "keyForm": 2
   }
 }

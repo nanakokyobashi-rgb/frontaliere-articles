@@ -45806,6 +45806,17 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'disparita-stipendi-frontalieri',
+ category: 'fiscale',
+ date: '2026-10-24T21:09:51.910Z',
+ image: '/images/blog/article-frontalieri-ticino-indagine-salari-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

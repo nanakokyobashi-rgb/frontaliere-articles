@@ -313,6 +313,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-24T19:06:53.846Z",
       "lastFailureAt": "2026-10-24T19:06:53.846Z"
+    },
+    {
+      "articleId": "disparita-stipendi-frontalieri",
+      "title": "Disparità stipendi uomini donne frontalieri in Ticino",
+      "fallbackImage": "/images/blog/article-frontalieri-ticino-indagine-salari-2026.webp",
+      "reason": "All image providers failed for article-disparita-stipendi-frontalieri: openai-codex (vision gate rejected image: Generic synthetic editorial street scene with commuters in a Ticino",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-24T21:09:52.981Z",
+      "lastFailureAt": "2026-10-24T21:09:52.981Z"
     }
   ]
 }
