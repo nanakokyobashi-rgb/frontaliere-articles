@@ -4,50 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ju::https://www.lejdj.ch/articles/de-novateur-a-emblematique-le-batiment-de-lhopital-de-moutier-celebre-son-demi-siecle-dexistence-104645": {
-      "section": "canton-ju",
-      "ts": 1792571720129
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261020-legere-reprise-des-exportations-helvetiques-en-septembre.html": {
-      "section": "canton-ju",
-      "ts": 1792571737944
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261021-sika-reprend-la-division-adhesifs-de-resonac.html": {
-      "section": "canton-ju",
-      "ts": 1792633103465
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261021-bureau-veritas-en-forme-au-3e-trimestre.html": {
-      "section": "canton-ju",
-      "ts": 1792633116881
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261021-interparfums-renoue-avec-la-croissance-des-ventes-au-3e-trimestre.html": {
-      "section": "canton-ju",
-      "ts": 1792633129393
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261021-changements-a-la-direction-de-flughafen-zuerich.html": {
-      "section": "canton-ju",
-      "ts": 1792633141453
-    },
-    "canton-ju::https://france3-regions.franceinfo.fr/bourgogne-franche-comte/doubs/une-idee-de-taxe-sur-l-embauche-des-etrangers-en-suisse-pourrait-elle-menacer-l-emploi-des-frontaliers-francais-3435600.html": {
-      "section": "canton-ju",
-      "ts": 1792651920856
-    },
-    "canton-ju::https://www.h-ju.ch/fr/a-propos/medias-presse/communiques-de-presse/la-sante-mentale-au-coeur-de-la-27eme-journee-scientifique-interjurassienne-de-la-sante.html": {
-      "section": "canton-ju",
-      "ts": 1792653077444
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261021-les-fabricants-de-medicaments-devront-financer-tox-info.html": {
-      "section": "canton-ju",
-      "ts": 1792653092401
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261021-une-faille-de-securite-grave-menace-les-sites-web-du-monde-entier.html": {
-      "section": "canton-ju",
-      "ts": 1792653109070
-    },
-    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261021-swiss-transporte-moins-de-passagers-durant-les-vacances-d-automne.html": {
-      "section": "canton-ju",
-      "ts": 1792653121674
-    },
     "canton-ju::https://www.estrepublicain.fr/economie/2026/10/22/frontaliers-la-marque-horlogere-zenith-annonce-la-suppression-d-une-centaine-d-emplois-au-locle": {
       "section": "canton-ju",
       "ts": 1792713808580
@@ -63,6 +19,10 @@
     "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261022-kuehne-nagel-releve-une-fois-de-plus-ses-objectifs-annuels.html": {
       "section": "canton-ju",
       "ts": 1792722637599
+    },
+    "canton-ju::https://www.rfj.ch/rfj/actualite/economie/20261023-sunrise-edulcore-son-projet-de-restructuration-358-postes-biffes.html": {
+      "section": "canton-ju",
+      "ts": 1792828921096
     }
   }
 }
