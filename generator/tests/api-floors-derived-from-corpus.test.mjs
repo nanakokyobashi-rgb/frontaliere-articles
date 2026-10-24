@@ -1364,6 +1364,10 @@ test('end-to-end: un rapporto eroso stampa ::warning:: ed esce 0', () => {
       counts: {
         articles: Math.round(source * 0.95),
         swissArticles: countSourceArticles(ROOT, 'svizzera'),
+        archiveHtmlPages: {
+          frontaliere: countSourceArchiveHtmlPages(ROOT, 'frontaliere'),
+          svizzera: countSourceArchiveHtmlPages(ROOT, 'svizzera'),
+        },
       },
     }),
   );
@@ -1393,6 +1397,10 @@ test('end-to-end: una run rossa conserva gli advisory degli altri rapporti', () 
       counts: {
         articles: 500,
         swissArticles: Math.round(sourceSvizzera * 0.95),
+        archiveHtmlPages: {
+          frontaliere: countSourceArchiveHtmlPages(ROOT, 'frontaliere'),
+          svizzera: countSourceArchiveHtmlPages(ROOT, 'svizzera'),
+        },
       },
     }),
   );

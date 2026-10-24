@@ -1859,10 +1859,14 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
   };
 
   // `tickerArticlesShadowed` conta cio' che e' stato ESCLUSO dal ticker:
-  // non ha una controparte fra i byte serviti, per costruzione. Va elencato
-  // qui e non semplicemente dimenticato, perche' il controllo di
-  // esaustivita' sotto e' la parte che protegge dal contatore FUTURO.
-  const NOT_ON_DISK = new Set(['tickerArticlesShadowed']);
+  // non ha una controparte fra i byte serviti, per costruzione. La catena
+  // HTML dell'archivio viene invece servita dal sito, non da un artefatto
+  // `dist/api/` del corpus: il gate dei conteggi non puo' ri-derivarne i byte.
+  // Il verifier di publish la confronta comunque, separatamente, con la
+  // cardinalita' sorgente e rifiuta una catena page-1..page-N divergente.
+  // Entrambi vanno elencati qui perche' il controllo di esaustivita' sotto e'
+  // la parte che protegge dal contatore FUTURO.
+  const NOT_ON_DISK = new Set(['tickerArticlesShadowed', 'archiveHtmlPages']);
   // `bySection` non e' un numero: e' la stessa cardinalita' dei contatori
   // storici, per sezione. Si ri-deriva dai byte serviti come gli altri e si
   // confronta per valore qui sotto, quindi NON sta in NOT_ON_DISK.
