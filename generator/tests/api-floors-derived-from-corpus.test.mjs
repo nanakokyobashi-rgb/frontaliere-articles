@@ -325,15 +325,28 @@ test('la sitemap archive viene misurata e ha un floor indipendente', () => {
 
 test('la catena HTML dell\'archivio ha una cardinalità separata dalla sitemap page-1-only', () => {
   const { measured, expected } = healthy();
-  const short = {
-    ...measured,
-    archiveHtmlPages: { ...measured.archiveHtmlPages, frontaliere: 37 },
+  const page1OnlyExpected = {
+    ...expected,
+    sourceArchiveSitemapUrls: { frontaliere: 4, svizzera: 4 },
   };
-  const violations = floorViolations(short, expected);
+  const page1OnlyMeasured = {
+    ...measured,
+    sitemaps: { ...measured.sitemaps, [ARCHIVE_SITEMAP]: 8 },
+  };
+  assert.deepEqual(
+    floorViolations(page1OnlyMeasured, page1OnlyExpected),
+    [],
+    'la sitemap page-1-only completa non deve essere confusa con la catena HTML',
+  );
+  const short = {
+    ...page1OnlyMeasured,
+    archiveHtmlPages: { ...page1OnlyMeasured.archiveHtmlPages, frontaliere: 37 },
+  };
+  const violations = floorViolations(short, page1OnlyExpected);
   assert.equal(violations.length, 1);
   assert.match(violations[0], /archive HTML frontaliere: 37 pagine contro 38/);
 
-  const missing = floorViolations({ ...measured, archiveHtmlPages: {} }, expected);
+  const missing = floorViolations({ ...page1OnlyMeasured, archiveHtmlPages: {} }, page1OnlyExpected);
   assert.equal(missing.length, 2);
   assert.match(missing.join('\n'), /archive HTML frontaliere: cardinalità page-1\.\.page-N assente/);
   assert.match(missing.join('\n'), /archive HTML svizzera: cardinalità page-1\.\.page-N assente/);
