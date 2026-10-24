@@ -6086,7 +6086,7 @@ ISTITUZIONI REALI:
 - BPS (SUISSE), UFAS/BSV, UFG, UDSC, Fedpol = istituzioni REALI
 
 NUMERI FRONTALIERI:
-- Frontalieri in Ticino: circa 79'000 (78'561 nel I trimestre 2026, USTAT Notiziario statistico 2026-18, fonte STAF/UST), in lieve calo negli ultimi due anni (-0,5% su base annua) — circa il 32% degli occupati del cantone (calcolo su 244'531 occupati)
+- Frontalieri in Ticino: circa 79'000 nel I trimestre 2026 (USTAT, 78'561), in lieve calo; circa il 32% degli occupati. Per altri periodi usa dato e periodo della fonte citata
 - Frontalieri totali CH: ~400'000
 - Quota ristorno fiscale ai comuni italiani: 40% dell'imposta alla fonte (vecchio accordo)
 
