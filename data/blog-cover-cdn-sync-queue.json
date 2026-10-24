@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-stadtfonds-steuerfuss-wil.webp",
-      "sha256": "a66f0319934f9ca3c3cd6471d6ad7c4f2d843822b896c6290752f3a2536579f6"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-stadtfonds-steuerfuss-wil-480w.webp",
-      "sha256": "ccca8ec825e848608c7436b5011323dd0e4e1e59e824782589f1ab395d8bc27b"
-    }
-  ]
+  "items": []
 }
