@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-zenith-rischio-posti-svizzera.webp",
+      "sha256": "8513eefdd42a1ab5e43cd13b8e6a5019c3b9795dea23f849c2af610983bdd1a5"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-zenith-rischio-posti-svizzera-480w.webp",
+      "sha256": "2747d036df19383e9fb184a64ef980a4ac448ab5cdddc039c30b394f91cdec7d"
+    }
+  ]
 }
