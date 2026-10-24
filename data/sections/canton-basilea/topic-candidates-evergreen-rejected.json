@@ -19,6 +19,14 @@
     "canton-basilea::https://www.bazonline.ch/bevoelkerungsamt-basel-stadt-zieht-ins-rosental-954177294827": {
       "section": "canton-basilea",
       "ts": 1792793843806
+    },
+    "canton-basilea::https://www.nau.ch/news/wirtschaft/schweizer-wirtschaftsreputation-steigt-im-dritten-quartal-67192204": {
+      "section": "canton-basilea",
+      "ts": 1792860150777
+    },
+    "canton-basilea::https://www.nau.ch/news/wirtschaft/bei-roche-lasst-der-wahrungsdruck-etwas-nach-67191949": {
+      "section": "canton-basilea",
+      "ts": 1792860926041
     }
   }
 }
