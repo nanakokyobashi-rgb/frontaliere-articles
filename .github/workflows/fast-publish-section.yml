@@ -1626,7 +1626,31 @@ jobs:
             exit 1
           fi
           export GH_TOKEN="$runtime_pat"
-          gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main -f source_commit="$SOURCE_COMMIT"
+          verifyMainHeadAtDispatch() {
+            local current_main=''
+            if ! current_main="$(bash scripts/ci/read-main-head.sh)"; then
+              echo "::error::impossibile verificare main immediatamente prima del dispatch publish-api"
+              return 1
+            fi
+            if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
+              echo "::error::HEAD di main non valida immediatamente prima del dispatch publish-api: $current_main"
+              return 1
+            fi
+            if [ "$current_main" != "$SOURCE_COMMIT" ]; then
+              echo "::notice::main e' avanzata dopo la readiness ($SOURCE_COMMIT -> $current_main); replay API interrotto"
+              return 2
+            fi
+          }
+          if verifyMainHeadAtDispatch; then
+            gh workflow run publish-api.yml --repo "$REPOSITORY" --ref main -f source_commit="$SOURCE_COMMIT"
+          else
+            verify_status=$?
+            if [ "$verify_status" -eq 2 ]; then
+              echo "::notice::nessun dispatch publish-api: la superficie verra' riallineata dal percorso sulla nuova HEAD"
+              exit 0
+            fi
+            exit "$verify_status"
+          fi
 
       - name: Cleanup Firebase credentials
         if: always()
