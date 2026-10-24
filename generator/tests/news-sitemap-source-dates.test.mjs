@@ -116,9 +116,9 @@ test('a locale without its own headline is skipped, never announced with an empt
 
 test('a raw i18n title key is skipped, never announced as a Google News headline', () => {
   const meta = titlesFor([{ id: 'one' }]);
-  meta.de['blog.article.one.title'] = 'blog.article.one.title';
+  meta.de['blog.article.one.title'] = '  blog.article.one.title  ';
   const xml = render([{ id: 'one', date: published }], '2026-10-02T18:00:00Z', { meta });
   assert.equal((xml.match(/<url>/g) || []).length, 3);
   assert.doesNotMatch(xml, /<news:language>de<\/news:language>/);
-  assert.doesNotMatch(xml, /<news:title>blog\.article\.one\.title<\/news:title>/);
+  assert.doesNotMatch(xml, /<news:title>\s*blog\.article\.one\.title\s*<\/news:title>/);
 });

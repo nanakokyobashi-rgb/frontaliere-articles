@@ -1226,8 +1226,11 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
   // `metaByLocale` is the section's meta keyed by locale ({ it, en, de, fr }):
   // each candidate carries the headline of its own language.
   const rawTitleKey = (articleId) => `blog.article.${articleId}.title`;
-  const hasUsableNewsTitle = (title, articleId) =>
-    typeof title === 'string' && title.trim() !== '' && title !== rawTitleKey(articleId);
+  const hasUsableNewsTitle = (title, articleId) => {
+    if (typeof title !== 'string') return false;
+    const normalized = title.trim();
+    return normalized !== '' && normalized !== rawTitleKey(articleId);
+  };
 
   const collect = (entries, sectionId, slugMap, metaByLocale, shadowed = new Set(), fallbackReasons = {}) => {
     const paths = SECTION_PATHS[sectionId];
@@ -1266,7 +1269,9 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
       // headline is missing is skipped rather than announced with an empty or
       // foreign-language title.
       for (const { locale, prefix, slug: localizedSlug } of localeRows) {
-        const title = metaByLocale?.[locale]?.[rawTitleKey(a.id)] || '';
+        const title = typeof metaByLocale?.[locale]?.[rawTitleKey(a.id)] === 'string'
+          ? metaByLocale[locale][rawTitleKey(a.id)].trim()
+          : '';
         if (!hasUsableNewsTitle(title, a.id)) {
           skippedNoTitle += 1;
           continue;
