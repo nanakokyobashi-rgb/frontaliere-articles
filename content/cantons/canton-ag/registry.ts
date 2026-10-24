@@ -215,4 +215,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'mobilita-aargovia-sistema-unico',
+ category: 'pratico',
+ date: '2026-10-24T11:27:50.606Z',
+ image: '/images/blog/article-mobilita-aargovia-sistema-unico.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

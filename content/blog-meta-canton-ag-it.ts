@@ -60,6 +60,9 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.fislisbach-steuerfuss-109.title': 'Steuerfuss a 109% proposto a Fislisbach per il budget 2027',
     'blog.article.fislisbach-steuerfuss-109.excerpt': 'Il Gemeinderat di Fislisbach chiede l\'approvazione del budget 2027 con Steuerfuss invariato al 109%, nonostante un disavanzo di CHF 357\'310.',
     'blog.article.fislisbach-steuerfuss-109.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.mobilita-aargovia-sistema-unico.title': 'Mobilità Argovia: sistema unico e potenziamento trasporti',
+    'blog.article.mobilita-aargovia-sistema-unico.excerpt': 'Cinque esperti hanno presentato la revisione di mobilitätAargau, puntando a frequenze bus ogni 30 minuti e ferrovia ogni 15 minuti da 2027.',
+    'blog.article.mobilita-aargovia-sistema-unico.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAgIt;

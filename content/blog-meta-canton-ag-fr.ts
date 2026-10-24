@@ -60,6 +60,9 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.fislisbach-steuerfuss-109.title': 'Taux d\'imposition à 109% proposé à Fislisbach pour le budget 2027',
     'blog.article.fislisbach-steuerfuss-109.excerpt': 'Le conseil communal de Fislisbach demande l\'approbation du budget 2027 avec un taux d\'imposition inchangé à 109%, malgré un déficit de CHF 357\'310.',
     'blog.article.fislisbach-steuerfuss-109.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.mobilita-aargovia-sistema-unico.title': 'Mobilité en Argovie : système unique et renforcement des transports',
+    'blog.article.mobilita-aargovia-sistema-unico.excerpt': 'Cinq experts ont présenté la révision de mobilitätAargau, visant une fréquence des bus toutes les 30 minutes et du rail toutes les 15 minutes à partir de 2027.',
+    'blog.article.mobilita-aargovia-sistema-unico.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonAgFr;

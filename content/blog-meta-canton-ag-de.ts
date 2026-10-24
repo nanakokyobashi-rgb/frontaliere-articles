@@ -60,6 +60,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.fislisbach-steuerfuss-109.title': 'Für Fislisbach wird für das Budget 2027 ein Steuerfuss von 109% vorgeschlagen',
     'blog.article.fislisbach-steuerfuss-109.excerpt': 'Der Gemeinderat von Fislisbach beantragt die Genehmigung des Budgets 2027 mit unverändertem Steuerfuss von 109%, trotz eines Defizits von CHF 357\'310.',
     'blog.article.fislisbach-steuerfuss-109.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.mobilita-aargovia-sistema-unico.title': 'Mobilität Aargau: einheitliches System und Ausbau des Verkehrs',
+    'blog.article.mobilita-aargovia-sistema-unico.excerpt': 'Fünf Experten haben die Überarbeitung von mobilitätAargau vorgestellt und dabei Busverbindungen alle 30 Minuten sowie Bahnverbindungen alle 15 Minuten ab 2027 angestrebt.',
+    'blog.article.mobilita-aargovia-sistema-unico.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAgDe;

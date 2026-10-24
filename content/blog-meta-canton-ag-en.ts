@@ -60,6 +60,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.fislisbach-steuerfuss-109.title': 'Tax rate of 109% proposed in Fislisbach for the 2027 budget',
     'blog.article.fislisbach-steuerfuss-109.excerpt': 'The Fislisbach municipal council is requesting approval of the 2027 budget with the tax rate unchanged at 109%, despite a deficit of CHF 357\'310.',
     'blog.article.fislisbach-steuerfuss-109.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.mobilita-aargovia-sistema-unico.title': 'Aargau Mobility: unified system and transport expansion',
+    'blog.article.mobilita-aargovia-sistema-unico.excerpt': 'Five experts presented the revision of mobilitätAargau, aiming for bus services every 30 minutes and rail services every 15 minutes starting in 2027.',
+    'blog.article.mobilita-aargovia-sistema-unico.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAgEn;
