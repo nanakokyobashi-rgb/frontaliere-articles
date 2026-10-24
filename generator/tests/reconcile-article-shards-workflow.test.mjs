@@ -36,12 +36,7 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(guard, /\.display_title \| type/);
   assert.match(guard, /echo 999/);
   assert.match(guard, /publish \(shard, " \+ \$shard \+ "\)/);
-  assert.match(guard, /publish-other"\) then "occupied"/);
-  assert.doesNotMatch(
-    guard,
-    /publish-other"\) then "free"/,
-    'un publish di un altro shard in-flight deve bloccare la matrice ancora incompleta',
-  );
+  assert.match(guard, /publish-other"\) then "free"/);
   assert.match(guard, /unknown\|no-active-job/);
   assert.match(guard, /run_event.*workflow_dispatch/);
   assert.match(guard, /cover-publish-article\[\[:space:\]\]/);

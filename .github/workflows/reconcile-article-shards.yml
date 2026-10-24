@@ -343,7 +343,7 @@ jobs:
                 ]
                 | if any(.[]; . == "unknown") then "unknown"
                   elif any(.[]; . == "resolve" or . == "publish-target") then "occupied"
-                  elif any(.[]; . == "publish-other") then "occupied"
+                  elif any(.[]; . == "publish-other") then "free"
                   else "no-active-job"
                   end
               ' <<<"$jobs_json")"; then
