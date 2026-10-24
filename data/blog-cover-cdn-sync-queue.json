@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-rolex-acquisisce-cpautomation.webp",
+      "sha256": "8cd1423f4c45a236737d2ca271183707998690032177dd331a3bda6f19745818"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-rolex-acquisisce-cpautomation-480w.webp",
+      "sha256": "510f5b48ed79ed6f3bc72820700e13a5f259910bfa19be93c32c94225f8ecba7"
+    }
+  ]
 }
