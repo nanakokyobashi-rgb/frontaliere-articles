@@ -538,6 +538,7 @@ jobs:
             node scripts/ci/check-blog-body-links.mjs
 
   publish:
+    name: publish (shard, ${{ matrix.target.shard }})
     needs: resolve
     if: needs.resolve.outputs.skip != 'true'
     runs-on: ubuntu-latest

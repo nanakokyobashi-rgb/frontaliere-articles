@@ -505,26 +505,60 @@ jobs:
             fi
           fi
 
-          # Una sola chiamata: le run non terminate sono per forza fra le più
-          # recenti, quindi si filtra client-side invece di fare una chiamata
-          # per stato. La stessa risposta serve al tetto orario qui sotto —
-          # ecco perché non si filtra per stato lato server.
-          runs=$(gh api \
+          fail_closed_admission() {
+            echo "::warning::impossibile validare l'elenco completo delle run di generazione — ammissione negata"
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            echo "GENERATION_OUTCOME kind=skipped reason=admit-run-list-unreadable section=unknown"
+            exit 0
+          }
+
+          # The Actions listing is paginated and checked against total_count.
+          # A short page, a changing count, a partial object, or a status we
+          # do not understand is not evidence that the concurrency group is
+          # free: the admission gate stays closed.
+          IN_FLIGHT_STATUSES='["queued","in_progress","requested","waiting","pending"]'
+          ACTION_TERMINAL_STATUS='completed'
+          runs_pages_json=""
+          if ! runs_pages_json="$(gh api --paginate --slurp \
             "repos/$REPO/actions/workflows/generate-article.yml/runs?per_page=100" \
-            --jq '[.workflow_runs[] | {id: .id, created_at: .created_at, status: .status}]' \
-            2>/dev/null || true)
-          if [ -z "${runs:-}" ]; then
-            echo "Impossibile leggere le run → si prosegue (fail-open)."
-            echo "proceed=true" >> "$GITHUB_OUTPUT"
-            exit 0
+            2>/dev/null)"; then
+            fail_closed_admission
           fi
-          inflight=$(printf '%s' "$runs" \
-            | jq -c '[.[] | select(.status == "queued" or .status == "in_progress" or .status == "waiting")]' \
-            2>/dev/null || true)
-          if [ -z "${inflight:-}" ]; then
-            echo "Impossibile filtrare le run in volo → si prosegue (fail-open)."
-            echo "proceed=true" >> "$GITHUB_OUTPUT"
-            exit 0
+          if ! runs="$(jq -c --argjson in_flight "$IN_FLIGHT_STATUSES" --arg terminal "$ACTION_TERMINAL_STATUS" '
+            . as $pages
+            | if (type == "array" and length > 0)
+                and all(.[];
+                  type == "object"
+                  and (.workflow_runs | type) == "array"
+                  and (.total_count | type) == "number"
+                  and (.total_count >= 0)
+                  and ((.total_count | floor) == .total_count)
+                  and all(.workflow_runs[];
+                    type == "object"
+                    and (.id | type) == "number"
+                    and (.id >= 1)
+                    and ((.id | floor) == .id)
+                    and (.created_at | type) == "string"
+                    and (.created_at | length) > 0
+                    and ((try (.created_at | fromdateiso8601) catch null) != null)
+                    and (.status | type) == "string"
+                    and (.status as $status
+                      | (($in_flight | index($status)) != null or $status == $terminal))
+                  ))
+                and (($pages | map(.total_count) | unique | length) == 1)
+                and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
+              then
+                [$pages[].workflow_runs[] | {id: .id, created_at: .created_at, status: .status}]
+              else
+                error("generation run listing incomplete")
+              end
+          ' <<<"$runs_pages_json")"; then
+            fail_closed_admission
+          fi
+          if ! inflight="$(printf '%s' "$runs" \
+            | jq -c --argjson in_flight "$IN_FLIGHT_STATUSES" '[.[] | .status as $status | select(($in_flight | index($status)) != null)]' \
+            2>/dev/null)"; then
+            fail_closed_admission
           fi
 
           # ── IL TETTO ORARIO, l'unica guardia che un contatore non aggira ────
@@ -543,8 +577,8 @@ jobs:
               ''|*[!0-9]*) cap=20 ;;
             esac
             last_hour=$(printf '%s' "$runs" \
-              | jq -r '[.[] | select((.created_at | fromdateiso8601) > (now - 3600))] | length' \
-              2>/dev/null || true)
+              | jq -er '[.[] | select((.created_at | fromdateiso8601) > (now - 3600))] | length' \
+              2>/dev/null) || fail_closed_admission
             case "${last_hour:-}" in
               ''|*[!0-9]*) last_hour=0 ;;
             esac
@@ -560,12 +594,22 @@ jobs:
           self_created=$(printf '%s' "$inflight" \
             | jq -r --argjson me "$SELF_ID" '.[] | select(.id == $me) | .created_at' 2>/dev/null | head -1)
           if [ -z "${self_created:-}" ]; then
-            self_created=$(gh api "repos/$REPO/actions/runs/$SELF_ID" --jq '.created_at' 2>/dev/null || true)
+            if ! self_run_json="$(gh api "repos/$REPO/actions/runs/$SELF_ID" 2>/dev/null)"; then
+              fail_closed_admission
+            fi
+            if ! self_created="$(jq -er '
+              if (.created_at | type) == "string"
+                and (.created_at | length) > 0
+                and ((try (.created_at | fromdateiso8601) catch null) != null)
+              then .created_at
+              else error("current generation run has no valid created_at")
+              end
+            ' <<<"$self_run_json")"; then
+              fail_closed_admission
+            fi
           fi
           if [ -z "${self_created:-}" ]; then
-            echo "Impossibile leggere il createdAt di questa run → si prosegue (fail-open)."
-            echo "proceed=true" >> "$GITHUB_OUTPUT"
-            exit 0
+            fail_closed_admission
           fi
 
           # Si cede solo a chi è PIÙ VECCHIO. Il confronto asimmetrico è ciò che
@@ -634,24 +678,25 @@ jobs:
           #
           # L'eta' si misura da `$self_created`, non da `now`: e' gia' letto,
           # rende il verdetto deterministico e non dipende dall'orologio del
-          # runner. Se una data non si lascia leggere, jq esce non-zero e il
-          # `|| true` porta a `older=0`, cioe' si prosegue: stesso fail-open
-          # della lettura di `$self_created` qui sopra.
+          # runner. Le date sono validate prima del confronto; se una lettura
+          # non e' interpretabile, `fail_closed_admission` nega l'ammissione.
           WEDGE_SECONDS=1800
 
-          older=$(printf '%s' "$inflight" \
+          if ! older="$(printf '%s' "$inflight" \
             | jq -r --argjson me "$SELF_ID" --arg mine "$self_created" --argjson dad "$parent_id" \
                    --argjson wedge "$WEDGE_SECONDS" \
                 '($mine | fromdateiso8601) as $t
                  | [ .[] | select(.id != $me) | select($dad == 0 or .id != $dad)
                         | select(.created_at < $mine or (.created_at == $mine and .id < $me))
                         | select($t - (.created_at | fromdateiso8601) < $wedge) ] | length' \
-              2>/dev/null || true)
+              2>/dev/null)"; then
+            fail_closed_admission
+          fi
 
           # Le vecchie OLTRE la soglia non bloccano piu', ma devono restare
           # VISIBILI: un'incastrata ignorata in silenzio e' esattamente il
           # guasto che non si nota finche' non si contano gli articoli mancanti.
-          stale=$(printf '%s' "$inflight" \
+          if ! stale="$(printf '%s' "$inflight" \
             | jq -r --argjson me "$SELF_ID" --arg mine "$self_created" --argjson dad "$parent_id" \
                    --argjson wedge "$WEDGE_SECONDS" \
                 '($mine | fromdateiso8601) as $t
@@ -660,7 +705,9 @@ jobs:
                         | select($t - (.created_at | fromdateiso8601) >= $wedge)
                         | "\(.id) (in volo da \((($t - (.created_at | fromdateiso8601)) / 60) | floor) min)" ]
                  | join(", ")' \
-              2>/dev/null || true)
+              2>/dev/null)"; then
+            fail_closed_admission
+          fi
           if [ -n "${stale:-}" ]; then
             echo "::warning title=Run in volo oltre la soglia::Run piu' vecchie in volo da oltre ${WEDGE_SECONDS}s, NON piu' bloccanti per l'ammissione: ${stale}. Di norma sono incastrate, ma lo 0,91% delle run sane supera questa soglia: in quel caso il successore aspetta in coda senza disturbarle."
           fi
