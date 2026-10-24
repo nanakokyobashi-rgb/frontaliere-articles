@@ -11073,10 +11073,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://cassa-disoccupazione.unia.ch": {
-      "section": "frontaliere",
-      "ts": 1792646596276
-    },
     "frontaliere::https://www.tio.ch/ticino/cronaca/1958302/lugano-62enne-banca-permesso-societa": {
       "section": "frontaliere",
       "ts": 1792652690423
@@ -11108,6 +11104,10 @@
     "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1958280/easy-work-l-ocst-incontrera-la-direzione-e-portera-le-istanze-del-personale": {
       "section": "frontaliere",
       "ts": 1792817178053
+    },
+    "frontaliere::https://www.rsi.ch/s/4175173": {
+      "section": "frontaliere",
+      "ts": 1792824907680
     }
   }
 }
