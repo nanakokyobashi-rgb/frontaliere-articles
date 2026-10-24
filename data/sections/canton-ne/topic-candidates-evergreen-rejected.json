@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261021-une-faille-de-securite-grave-menace-les-sites-web-du-monde-entier.html": {
-      "section": "canton-ne",
-      "ts": 1792656203168
-    },
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-sunrise-edulcore-son-projet-de-restructuration-358-postes-biffes.html": {
       "section": "canton-ne",
       "ts": 1792786388499
@@ -23,6 +19,14 @@
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-eni-benefice-triple-au-3e-trimestre.html": {
       "section": "canton-ne",
       "ts": 1792828993639
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-sgs-progresse-au-troisieme-trimestre.html": {
+      "section": "canton-ne",
+      "ts": 1792846919226
+    },
+    "canton-ne::https://www.ne.ch/communiques-de-presse/pour-sa-30eme-edition-le-prix-interculturel-salut-letranger-recompense-le-centre-portugais-de-neuchatel-et-madame-carmen-diaz-pumarejo": {
+      "section": "canton-ne",
+      "ts": 1792847070985
     }
   }
 }
