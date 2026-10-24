@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-mellingen-budget-2027.webp",
-      "sha256": "0b054cb36c5de0e227bfa44890bc575782d3674870d61b95f04d376f51268102"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-mellingen-budget-2027-480w.webp",
-      "sha256": "08999f395df34dae8f1970ecbe099ac30c24d318fd69e8044528e2da154a2b67"
-    }
-  ]
+  "items": []
 }
