@@ -63,6 +63,9 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.mobilita-aargovia-sistema-unico.title': 'Mobilität Aargau: einheitliches System und Ausbau des Verkehrs',
     'blog.article.mobilita-aargovia-sistema-unico.excerpt': 'Fünf Experten haben die Überarbeitung von mobilitätAargau vorgestellt und dabei Busverbindungen alle 30 Minuten sowie Bahnverbindungen alle 15 Minuten ab 2027 angestrebt.',
     'blog.article.mobilita-aargovia-sistema-unico.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.mellingen-budget-2027.title': 'Mellingen: Kostenvoranschlag 2027 mit einem Defizit von 3,54 Mio.',
+    'blog.article.mellingen-budget-2027.excerpt': 'Die Gemeinde Mellingen rechnet für 2027 mit einem Defizit von 3.546.810 Franken und bestätigt die Steuerquote von 110%.',
+    'blog.article.mellingen-budget-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonAgDe;

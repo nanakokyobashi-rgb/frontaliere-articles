@@ -63,6 +63,9 @@ const blogMetaCantonAgEn: Record<string, string> = {
     'blog.article.mobilita-aargovia-sistema-unico.title': 'Aargau Mobility: unified system and transport expansion',
     'blog.article.mobilita-aargovia-sistema-unico.excerpt': 'Five experts presented the revision of mobilitätAargau, aiming for bus services every 30 minutes and rail services every 15 minutes starting in 2027.',
     'blog.article.mobilita-aargovia-sistema-unico.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.mellingen-budget-2027.title': 'Mellingen: 2027 budget with a deficit of 3,54 million',
+    'blog.article.mellingen-budget-2027.excerpt': 'The municipality of Mellingen forecasts a deficit of CHF 3,546,810 for 2027 and confirms the tax coefficient at 110%.',
+    'blog.article.mellingen-budget-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAgEn;

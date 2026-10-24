@@ -63,6 +63,9 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.mobilita-aargovia-sistema-unico.title': 'Mobilità Argovia: sistema unico e potenziamento trasporti',
     'blog.article.mobilita-aargovia-sistema-unico.excerpt': 'Cinque esperti hanno presentato la revisione di mobilitätAargau, puntando a frequenze bus ogni 30 minuti e ferrovia ogni 15 minuti da 2027.',
     'blog.article.mobilita-aargovia-sistema-unico.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.mellingen-budget-2027.title': 'Mellingen: preventivo 2027 con un disavanzo di 3,54 milioni',
+    'blog.article.mellingen-budget-2027.excerpt': 'Il comune di Mellingen prevede per il 2027 un disavanzo di 3.546.810 franchi e conferma il coefficiente fiscale al 110%.',
+    'blog.article.mellingen-budget-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAgIt;
