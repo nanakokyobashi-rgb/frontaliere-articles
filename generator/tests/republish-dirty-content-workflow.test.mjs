@@ -24,8 +24,13 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
     guard,
     /gh api --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/runs\?per_page=100"/,
   );
-  assert.match(guard, /workflow_runs \| length/);
+  assert.match(workflow, /workflow_runs \| length/);
   assert.match(guard, /total_count/);
+  assert.match(workflow, /validate_workflow_runs\(\)/);
+  assert.match(workflow, /\.display_title \| type/);
+  assert.match(workflow, /\.created_at \| type/);
+  assert.match(workflow, /try \(\.created_at \| fromdateiso8601\)/);
+  assert.match(workflow, /\[\$pages\[\]\.workflow_runs\[\]\.id\] \| unique \| length/);
   assert.match(workflow, /IN_FLIGHT_STATUSES='\["queued","in_progress","requested","waiting","pending"\]'/);
   assert.match(guard, /\.name == "resolve"/);
   assert.ok(guard.includes('test("^publish \\\\(shard, .+\\\\)$")'));
@@ -52,5 +57,8 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(workflow, /--arg nonce "\$dispatch_nonce"/);
   assert.match(workflow, /contains\("nonce=" \+ \$nonce\)/);
   assert.doesNotMatch(workflow, /created_at >= \$before/);
+  assert.match(workflow, /recent_pages_json=.*gh api --paginate --slurp/);
+  assert.match(workflow, /recent_runs_json=.*validate_workflow_runs/);
+  assert.match(workflow, /\.created_at_epoch >= \(\$t \| fromdateiso8601\)/);
   assert.doesNotMatch(workflow, /active_runs\(\)/, 'il gate non deve tornare a contare il workflow globalmente');
 });

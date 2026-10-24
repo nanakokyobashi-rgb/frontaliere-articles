@@ -169,6 +169,52 @@ jobs:
           HARD_DEADLINE=2700 # niente attese oltre i 45 min (timeout job: 50)
           elapsed() { echo $(( $(date +%s) - START_TS )); }
           IN_FLIGHT_STATUSES='["queued","in_progress","requested","waiting","pending"]'
+          ACTION_TERMINAL_STATUS='completed'
+
+          validate_workflow_runs() {
+            jq -c --argjson in_flight "$IN_FLIGHT_STATUSES" --arg terminal "$ACTION_TERMINAL_STATUS" '
+              . as $pages
+              | if (type == "array" and length > 0)
+                  and all(.[];
+                    type == "object"
+                    and (.workflow_runs | type) == "array"
+                    and (.total_count | type) == "number"
+                    and (.total_count >= 0)
+                    and ((.total_count | floor) == .total_count)
+                    and all(.workflow_runs[];
+                      type == "object"
+                      and (.id | type) == "number"
+                      and (.id >= 1)
+                      and ((.id | floor) == .id)
+                      and (.status | type) == "string"
+                      and (.status as $status
+                        | (($in_flight | index($status)) != null or $status == $terminal))
+                      and (.event | type) == "string"
+                      and (.event | length) > 0
+                      and (.name | type) == "string"
+                      and (.name | length) > 0
+                      and (.display_title | type) == "string"
+                      and (.display_title | length) > 0
+                      and (.created_at | type) == "string"
+                      and (.created_at | length) > 0
+                      and ((try (.created_at | fromdateiso8601) catch null) != null)
+                    ))
+                  and (($pages | map(.total_count) | unique | length) == 1)
+                  and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
+                  and (([$pages[].workflow_runs[].id] | unique | length)
+                    == ([$pages[].workflow_runs[]] | length))
+                then
+                  {workflow_runs: [
+                    $pages[].workflow_runs[]
+                    | . as $run
+                    | ($run.created_at | fromdateiso8601) as $created_at_epoch
+                    | $run + {created_at_epoch: $created_at_epoch}
+                  ]}
+                else
+                  error("workflow run listing incomplete")
+                end
+            '
+          }
 
           # La concurrency del publisher è PER SHARD, non globale. Contare le
           # run del workflow senza guardare i job faceva attendere un backfill
@@ -187,23 +233,7 @@ jobs:
               echo 999
               return
             fi
-            if ! runs_json="$(jq -c '
-              . as $pages
-              | if (type == "array" and length > 0)
-                  and all(.[];
-                    type == "object"
-                    and (.workflow_runs | type) == "array"
-                    and (.total_count | type) == "number"
-                    and (.total_count >= 0)
-                    and ((.total_count | floor) == .total_count))
-                  and (($pages | map(.total_count) | unique | length) == 1)
-                  and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
-                then
-                  {workflow_runs: [$pages[].workflow_runs[]]}
-                else
-                  error("workflow run listing incomplete")
-                end
-            ' <<<"$runs_pages_json")"; then
+            if ! runs_json="$(validate_workflow_runs <<<"$runs_pages_json")"; then
               echo 999
               return
             fi
@@ -304,9 +334,10 @@ jobs:
                   ;;
               esac
             done < <(
-              jq -r '.workflow_runs[]
-                | select(.status != "completed")
-                | [.id, .event, (.name // .display_title // "")] | @tsv' <<<"$runs_json"
+              jq -r --argjson in_flight "$IN_FLIGHT_STATUSES" '.workflow_runs[]
+                | .status as $status
+                | select(($in_flight | index($status)) != null)
+                | [.id, .event, .display_title] | @tsv' <<<"$runs_json"
             )
             echo 0
           }
@@ -315,8 +346,12 @@ jobs:
           # CONDIVISO con reconcile-article-shards (stesso workflow a valle).
           deferred=false
           hour_ago="$(date -u -d '60 minutes ago' +%Y-%m-%dT%H:%M:%SZ)"
-          recent="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=100" \
-            | jq --arg t "$hour_ago" '[.workflow_runs[] | select(.created_at >= $t)] | length' || echo 999)"
+          recent=999
+          if recent_pages_json="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=100" 2>/dev/null)"; then
+            if recent_runs_json="$(validate_workflow_runs <<<"$recent_pages_json")"; then
+              recent="$(jq -r --arg t "$hour_ago" '[.workflow_runs[] | select(.event == "workflow_dispatch" and .created_at_epoch >= ($t | fromdateiso8601))] | length' <<<"$recent_runs_json" 2>/dev/null)" || recent=999
+            fi
+          fi
           if [ "$recent" -ge 6 ]; then
             echo "::warning::già $recent dispatch di fast-publish nell'ultima ora — rimando (tetto anti-tempesta)"
             deferred=true
