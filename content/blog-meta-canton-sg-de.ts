@@ -60,6 +60,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.lotteriefonds-89-progetti-cantone.title': '11,6 Millionen CHF für 89 Projekte des Kantons St. Gallen',
     'blog.article.lotteriefonds-89-progetti-cantone.excerpt': 'Die Regierung schlägt dem Kantonsrat 89 Projekte aus den Bereichen Kultur, Soziales und Umwelt für 11,6 Millionen CHF vor, wobei die Entscheidung für die Wintersession vorgesehen ist.',
     'blog.article.lotteriefonds-89-progetti-cantone.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.abstimmung-bahnhof-wil-allee.title': 'Abstimmung 29.11.2026: Bahnhof Wil, Allee – sicherer Umstieg',
+    'blog.article.abstimmung-bahnhof-wil-allee.excerpt': 'Der Bruttokredit beträgt 63,662 Millionen Franken; die Arbeiten sind von 2029 bis 2033 vorgesehen.',
+    'blog.article.abstimmung-bahnhof-wil-allee.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;

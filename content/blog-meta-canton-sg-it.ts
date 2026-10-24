@@ -60,6 +60,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.lotteriefonds-89-progetti-cantone.title': '11,6 milioni CHF per 89 progetti del Canton San Gallo',
     'blog.article.lotteriefonds-89-progetti-cantone.excerpt': 'Il Governo propone al Consiglio cantonale 89 progetti tra cultura, sociale e ambiente per 11,6 milioni di CHF, con decisione prevista in sessione invernale.',
     'blog.article.lotteriefonds-89-progetti-cantone.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.abstimmung-bahnhof-wil-allee.title': 'Voto 29 novembre 2026: Stazione Wil e Allee per un interscambio sicuro',
+    'blog.article.abstimmung-bahnhof-wil-allee.excerpt': 'Il credito lordo è di 63,662 milioni di franchi; i lavori sono previsti dal 2029 al 2033.',
+    'blog.article.abstimmung-bahnhof-wil-allee.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

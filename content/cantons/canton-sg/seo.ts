@@ -738,6 +738,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-abstimmung-bahnhof-wil-allee': {
+    title: 'Voto 29 novembre 2026: Stazione Wil e Allee per un interscambio sicuro',
+    description: 'Dettagli sul progetto di Wil: credito 63,662 milioni di franchi, 20 posti bus e velostazione sotterranea con oltre 1\'100 posti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, voto, novembre, stazione, allee',
+    ogTitle: 'Voto 29 nov 2026 Stazione Wil e Allee',
+    ogDescription: 'Scopri i dettagli del progetto di riqualificazione del piazzale stazione di Wil e Allee, inclusi i 20 posti del nuovo terminal bus e il credito lordo di 63,662 milioni di franchi.',
+    canonicalPath: '/articoli-san-gallo/abstimmung-bahnhof-wil-allee/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Voto 29 novembre 2026: Stazione Wil e Allee per un interscambio sicuro",
+      "description": "Dettagli sul progetto di Wil: credito 63,662 milioni di franchi, 20 posti bus e velostazione sotterranea con oltre 1'100 posti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-abstimmung-bahnhof-wil-allee.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-24T13:43:09+00:00",
+      "dateModified": "2026-10-24T13:43:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/abstimmung-bahnhof-wil-allee/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

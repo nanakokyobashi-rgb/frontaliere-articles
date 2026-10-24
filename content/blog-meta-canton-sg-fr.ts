@@ -60,6 +60,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.lotteriefonds-89-progetti-cantone.title': '11,6 millions CHF pour 89 projets du canton de Saint-Gall',
     'blog.article.lotteriefonds-89-progetti-cantone.excerpt': 'Le Gouvernement propose au Conseil cantonal 89 projets dans les domaines de la culture, du social et de l’environnement pour un montant de 11,6 millions de CHF, avec une décision prévue lors de la session d’hiver.',
     'blog.article.lotteriefonds-89-progetti-cantone.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.abstimmung-bahnhof-wil-allee.title': 'Vote du 29 novembre 2026 : Gare de Wil et Allee pour une correspondance sûre',
+    'blog.article.abstimmung-bahnhof-wil-allee.excerpt': 'Le crédit brut s’élève à 63,662 millions de francs ; les travaux sont prévus de 2029 à 2033.',
+    'blog.article.abstimmung-bahnhof-wil-allee.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSgFr;

@@ -215,4 +215,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'abstimmung-bahnhof-wil-allee',
+ category: 'pratico',
+ date: '2026-10-24T13:43:09.251Z',
+ image: '/images/blog/article-abstimmung-bahnhof-wil-allee.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
