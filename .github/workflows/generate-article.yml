@@ -547,6 +547,8 @@ jobs:
                   ))
                 and (($pages | map(.total_count) | unique | length) == 1)
                 and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
+                and (([$pages[].workflow_runs[].id] | unique | length)
+                  == ([$pages[].workflow_runs[]] | length))
               then
                 [$pages[].workflow_runs[] | {id: .id, created_at: .created_at, status: .status}]
               else
