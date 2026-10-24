@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-kolumbanstrasse-nuova-velostrasse.webp",
-      "sha256": "ba481d0b21620f2c2ca38671506c59a0473e6a125979928a9503cba544f99872"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-kolumbanstrasse-nuova-velostrasse-480w.webp",
-      "sha256": "9d1123a3b725c9cba1a6bb40ed45988bd8c3618cc7d1b76f5a64a3c13e0f049a"
-    }
-  ]
+  "items": []
 }
