@@ -4,22 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/702983/tous-les-hpitaux-ne-bnficient-pas-dune-aide-aussi-leve-affirme-le-directeur-de-la-sant": {
-      "section": "canton-be",
-      "ts": 1792596442744
-    },
-    "canton-be::https://www.lejdj.ch/articles/droit-de-vote-des-etrangers-une-nouvelle-tentative-dans-le-canton-de-berne-104704": {
-      "section": "canton-be",
-      "ts": 1792645137744
-    },
-    "canton-be::https://ajour.ch/story/702892/wie-kamen-die-55-millionen-f%c3%bcr-das-spitalareal-zustande": {
-      "section": "canton-be",
-      "ts": 1792645273264
-    },
-    "canton-be::https://www.nau.ch/politik/bundeshaus/nationalratskommission-sendet-erste-signale-fur-bilaterale-iii-aus-67191376": {
-      "section": "canton-be",
-      "ts": 1792645517872
-    },
     "canton-be::https://ajour.ch/story/703145/region-thun-sucht-nach-variante-f%c3%bcr-neuen-umfahrungstunnel": {
       "section": "canton-be",
       "ts": 1792671486874
@@ -115,6 +99,10 @@
     "canton-be::https://ajour.ch/story/703342/le-gant-coop-va-augmenter-les-salaires-de-ses-employs-de-11-lanne-prochaine": {
       "section": "canton-be",
       "ts": 1792760337350
+    },
+    "canton-be::https://ajour.ch/story/703360/berner-regierung-legt-neue-spielregeln-f%c3%bcr-zentrumslasten-vor": {
+      "section": "canton-be",
+      "ts": 1792840751798
     }
   }
 }
