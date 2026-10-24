@@ -212,10 +212,14 @@ jobs:
           # svizzero anche per un publish frontaliere ancora in verifica (e il
           # budget scadeva con `attempted=0`). Le run ancora in `resolve` o
           # senza job leggibili restano un blocco conservativo; dopo il resolve
-          # si guarda solo il job publish con il nome verificabile che termina
-          # con lo shard target. Gli stati sono una sorgente unica per il
-          # filtro delle run e dei job: uno stato Actions non riconosciuto è
-          # un payload non interpretabile e quindi resta fail-closed.
+          # si guardano i job publish con nomi verificabili. Un publish di un
+          # altro shard ancora in-flight significa che la matrice si sta
+          # materializzando: l'assenza momentanea del target non prova che il
+          # gruppo sia libero, quindi anche quel job resta un blocco fino a
+          # quando la run non è uscita dagli stati in-flight. Gli stati sono
+          # una sorgente unica per il filtro delle run e dei job: uno stato
+          # Actions non riconosciuto è un payload non interpretabile e quindi
+          # resta fail-closed.
           IN_FLIGHT_STATUSES='["queued","in_progress","requested","waiting","pending"]'
           ACTION_TERMINAL_STATUS='completed'
           active_runs_for_shard() {
@@ -339,7 +343,7 @@ jobs:
                 ]
                 | if any(.[]; . == "unknown") then "unknown"
                   elif any(.[]; . == "resolve" or . == "publish-target") then "occupied"
-                  elif any(.[]; . == "publish-other") then "free"
+                  elif any(.[]; . == "publish-other") then "occupied"
                   else "no-active-job"
                   end
               ' <<<"$jobs_json")"; then
