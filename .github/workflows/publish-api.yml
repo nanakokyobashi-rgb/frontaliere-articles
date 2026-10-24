@@ -820,10 +820,13 @@ jobs:
           fi
 
           # Ceiling, not a floor. The candidate set is the 48h slice of the corpus,
-          # which is single digits on a normal day; a few hundred would mean the
-          # window check broke and the whole 3.6k-article corpus is being offered
-          # as "news". That silently torches the news sitemap, so it stops here.
-          if [ "$cands" -gt 200 ]; then
+          # one <url> per published locale page (it/en/de/fr, since 2026-10-24):
+          # a few dozen on a normal day. The ceiling is the old 200-article bound
+          # times the four locales — still far below what a broken window offers
+          # (the whole ~3.6k-article corpus x 4) and below Google News' own
+          # 1000-URL-per-sitemap limit. A broken window silently torches the news
+          # sitemap, so it stops here.
+          if [ "$cands" -gt 800 ]; then
             echo "::error::$cands news candidates — the 48h window is not being applied; refusing"
             exit 1
           fi
