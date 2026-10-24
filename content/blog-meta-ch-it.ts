@@ -8615,6 +8615,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.telecom-358-licenziamenti.title': '358 licenziamenti confermati: prima ipotesi 450 impieghi',
     'blog.article.telecom-358-licenziamenti.excerpt': 'Sunrise annuncia 358 licenziamenti La prima ipotesi indicava 450 impieghi La consultazione con Syndicom è terminata Piano sociale e uscita volontaria per alcuni',
     'blog.article.telecom-358-licenziamenti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.assemblea-pvl-avs-finanziamento.title': 'PVL raccomanda sì a denti stretti per finanziamento AVS',
+    'blog.article.assemblea-pvl-avs-finanziamento.excerpt': 'Il PVL raccomanda il sì al finanziamento supplementare AVS Sì anche all’iniziativa sui fuochi d’artificio No alla proposta sulla discriminazione del matrimonio',
+    'blog.article.assemblea-pvl-avs-finanziamento.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

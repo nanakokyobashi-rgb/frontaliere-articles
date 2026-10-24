@@ -28788,6 +28788,16 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'assemblea-pvl-avs-finanziamento',
+    category: 'pensione',
+    date: '2026-10-24T21:42:24.111Z',
+    image: '/images/blog/article-assemblea-pvl-avs-finanziamento.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

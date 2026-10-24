@@ -8615,6 +8615,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.telecom-358-licenziamenti.title': '358 confirmed redundancies: first hypothesis 450 jobs',
     'blog.article.telecom-358-licenziamenti.excerpt': 'Sunrise announces 358 redundancies The first hypothesis indicated 450 jobs Consultation with Syndicom has ended Social plan and voluntary exit for some',
     'blog.article.telecom-358-licenziamenti.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.assemblea-pvl-avs-finanziamento.title': 'PVL reluctantly recommends a yes to AVS financing',
+    'blog.article.assemblea-pvl-avs-finanziamento.excerpt': 'PVL recommends a yes vote on supplementary AVS funding Yes also to the fireworks initiative No to the proposal on marriage discrimination',
+    'blog.article.assemblea-pvl-avs-finanziamento.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

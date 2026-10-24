@@ -108870,6 +108870,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-assemblea-pvl-avs-finanziamento': {
+    title: 'PVL raccomanda sì a denti stretti per finanziamento AVS',
+    description: 'Il PVL raccomanda il sì al finanziamento supplementare AVS Sì anche all’iniziativa sui fuochi d’artificio No alla proposta sulla discriminazione',
+    keywords: 'frontalieri, ticino, svizzera, italia, raccomanda, denti, stretti, finanziamento',
+    ogTitle: 'PVL: sì a denti stretti per finanziamento AVS',
+    ogDescription: 'Il PVL raccomanda il sì al finanziamento supplementare AVS Sì anche all’iniziativa sui fuochi d’artificio No alla proposta sulla discriminazione del matrimonio',
+    canonicalPath: '/articoli-svizzera/assemblea-pvl-avs-finanziamento/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PVL raccomanda sì a denti stretti per finanziamento AVS",
+      "description": "Il PVL raccomanda il sì al finanziamento supplementare AVS Sì anche all’iniziativa sui fuochi d’artificio No alla proposta sulla discriminazione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-assemblea-pvl-avs-finanziamento.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-24T21:42:24+00:00",
+      "dateModified": "2026-10-24T21:42:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assemblea-pvl-avs-finanziamento/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -8615,6 +8615,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.telecom-358-licenziamenti.title': '358 bestätigte Entlassungen: erste Annahme 450 Stellen',
     'blog.article.telecom-358-licenziamenti.excerpt': 'Sunrise kündigt 358 Entlassungen an Die erste Hypothese deutete auf 450 Arbeitsplätze hin Die Konsultation mit Syndicom wurde beendet Sozialplan und freiwilliger Austritt für einige',
     'blog.article.telecom-358-licenziamenti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.assemblea-pvl-avs-finanziamento.title': 'PVL empfiehlt zähneknirschend ein Ja zur AHV-Finanzierung',
+    'blog.article.assemblea-pvl-avs-finanziamento.excerpt': 'Die PVL empfiehlt ein Ja zur zusätzlichen AHV-Finanzierung Ja auch zur Feuerwerksinitiative Nein zur Vorlage zur Diskriminierung der Ehe',
+    'blog.article.assemblea-pvl-avs-finanziamento.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;
