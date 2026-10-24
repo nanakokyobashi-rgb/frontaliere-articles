@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-successione-parmelin-otto-nomi.webp",
-      "sha256": "77c8ad4bc6d70c19013c90624f77a2fb5bfa4b5582f0ee154d26b3cd0704b629"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-successione-parmelin-otto-nomi-480w.webp",
-      "sha256": "c4da29fdc8cb9a21504687e11a9ea9b3f193a1837071a620559342804e4fccf6"
-    }
-  ]
+  "items": []
 }
