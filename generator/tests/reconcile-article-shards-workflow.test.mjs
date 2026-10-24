@@ -34,9 +34,11 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(guard, /\.status \| type/);
   assert.match(guard, /\.name \| type/);
   assert.match(guard, /\.display_title \| type/);
+  assert.match(guard, /\[\$pages\[\]\.workflow_runs\[\]\.id\] \| unique \| length/);
+  assert.match(guard, /\[\$pages\[\]\.jobs\[\]\.id\] \| unique \| length/);
   assert.match(guard, /echo 999/);
   assert.match(guard, /publish \(shard, " \+ \$shard \+ "\)/);
-  assert.match(guard, /publish-other"\) then "free"/);
+  assert.match(guard, /publish-other"\) then "occupied"/);
   assert.match(guard, /unknown\|no-active-job/);
   assert.match(guard, /run_event.*workflow_dispatch/);
   assert.match(guard, /cover-publish-article\[\[:space:\]\]/);

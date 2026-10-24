@@ -35,7 +35,7 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(guard, /\.name == "resolve"/);
   assert.ok(guard.includes('test("^publish \\\\(shard, .+\\\\)$")'));
   assert.match(guard, /\.name == \("publish \(shard, " \+ \$shard \+ "\)"\)/);
-  assert.match(guard, /publish-other"\) then "free"/);
+  assert.match(guard, /publish-other"\) then "occupied"/);
   assert.doesNotMatch(guard, /endswith\(", " \+ \$shard/);
   assert.match(guard, /\[\$pages\[\]\.jobs\[\]\.id\] \| unique \| length/);
   assert.match(guard, /\$in_flight \| index\(\$status\)/);
