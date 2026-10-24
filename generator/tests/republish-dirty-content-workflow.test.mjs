@@ -16,6 +16,7 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   const start = workflow.indexOf('          active_runs_for_shard() {');
   const end = workflow.indexOf('\n\n          # Tetto assoluto', start);
   assert.ok(start >= 0 && end > start, 'il guard per-shard non è riconoscibile');
+  const validation = workflow.slice(0, start);
   const guard = workflow.slice(start, end);
 
   assert.match(guard, /actions\/runs\/\$run_id\/jobs\?per_page=100/);
@@ -23,15 +24,17 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
     guard,
     /gh api --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/runs\?per_page=100"/,
   );
-  assert.match(guard, /workflow_runs \| length/);
-  assert.match(guard, /total_count/);
+  assert.match(validation, /workflow_runs \| length/);
+  assert.match(validation, /total_count/);
+  assert.match(validation, /\.created_at \| type/);
+  assert.match(validation, /try \(\.created_at \| fromdateiso8601\)/);
   assert.match(guard, /\.name == "resolve"/);
-  assert.match(guard, /endswith\(", " \+ \$shard \+ "\)"\)/);
-  assert.equal(
-    guard.match(/\.status != "completed"/g)?.length,
-    2,
-    'run e job devono trattare ogni stato non terminale come occupato',
-  );
+  assert.match(validation, /IN_FLIGHT_STATUSES=/);
+  assert.match(validation, /validate_workflow_runs\(\)/);
+  assert.match(validation, /validate_workflow_jobs\(\)/);
+  assert.ok(guard.includes('test("^publish \\\\(shard, .+\\\\)$")'));
+  assert.match(guard, /\.name == \("publish \(shard, " \+ \$shard \+ "\)"\)/);
+  assert.match(guard, /\(\$in_flight \| index\(\$status\)\) != null/);
   assert.doesNotMatch(guard, /\.status == "queued" or \.status == "in_progress"/);
   assert.match(guard, /run_event.*workflow_dispatch/);
   assert.match(guard, /cover-publish-article\[\[:space:\]\]/);
@@ -39,7 +42,7 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(guard, /dispatch_section.*!= "auto"/);
   assert.match(
     workflow,
-    /target_shard="\$\(node scripts\/ci\/fast-publish-section\.mjs shard-of "\$section"\)"/,
+    /target_shard="\$\(node scripts\/ci\/fast-publish-section\.mjs shard-of "\$section"/,
   );
   assert.match(
     workflow,
@@ -49,6 +52,9 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(workflow, /-f "inputs\[dispatch_nonce\]=\$dispatch_nonce"/);
   assert.match(workflow, /--arg nonce "\$dispatch_nonce"/);
   assert.match(workflow, /contains\("nonce=" \+ \$nonce\)/);
+  assert.match(workflow, /recent_pages_json=.*gh api --paginate --slurp/);
+  assert.match(workflow, /recent_runs_json=.*validate_workflow_runs/);
+  assert.match(workflow, /\.created_at \| fromdateiso8601/);
   assert.doesNotMatch(workflow, /created_at >= \$before/);
   assert.doesNotMatch(workflow, /active_runs\(\)/, 'il gate non deve tornare a contare il workflow globalmente');
 });

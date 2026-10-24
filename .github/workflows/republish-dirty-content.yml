@@ -169,13 +169,91 @@ jobs:
           HARD_DEADLINE=2700 # niente attese oltre i 45 min (timeout job: 50)
           elapsed() { echo $(( $(date +%s) - START_TS )); }
 
-          # La concurrency del publisher è PER SHARD, non globale. Contare le
-          # run del workflow senza guardare i job faceva attendere un backfill
-          # frontaliere anche per un publish svizzero ancora in verifica (e il
-          # budget scadeva con `unprocessed`). Le run con una fase non
-          # terminale o senza job leggibili restano un blocco conservativo;
-          # dopo il resolve si guarda solo il job publish che termina con lo
-          # shard target.
+          # fast-publish has one concurrency group per Pages shard. Keep the
+          # guard here in lockstep with reconcile-article-shards.yml: a
+          # complete, validated listing is required before a shard can be
+          # declared free, and an unreadable payload blocks conservatively.
+          IN_FLIGHT_STATUSES='["queued","in_progress","requested","waiting","pending"]'
+          ACTION_TERMINAL_STATUS='completed'
+
+          validate_workflow_runs() {
+            jq -c --argjson in_flight "$IN_FLIGHT_STATUSES" --arg terminal "$ACTION_TERMINAL_STATUS" '
+              . as $pages
+              | if (type == "array" and length > 0)
+                  and all(.[];
+                    type == "object"
+                    and (.workflow_runs | type) == "array"
+                    and (.total_count | type) == "number"
+                    and (.total_count >= 0)
+                    and ((.total_count | floor) == .total_count)
+                    and all(.workflow_runs[];
+                      type == "object"
+                      and (.id | type) == "number"
+                      and (.id >= 1)
+                      and ((.id | floor) == .id)
+                      and (.status | type) == "string"
+                      and (.status as $status
+                        | (($in_flight | index($status)) != null or $status == $terminal))
+                      and (.event | type) == "string"
+                      and (.event | length) > 0
+                      and (.name | type) == "string"
+                      and (.name | length) > 0
+                      and (.display_title | type) == "string"
+                      and (.display_title | length) > 0
+                      and (.created_at | type) == "string"
+                      and (.created_at | length) > 0
+                      and ((try (.created_at | fromdateiso8601) catch null) != null)
+                    ))
+                  and (($pages | map(.total_count) | unique | length) == 1)
+                  and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
+                  and (([$pages[].workflow_runs[].id] | unique | length)
+                    == ([$pages[].workflow_runs[]] | length))
+                then
+                  {workflow_runs: [
+                    $pages[].workflow_runs[]
+                    | . as $run
+                    | ($run.created_at | fromdateiso8601) as $created_at_epoch
+                    | $run + {created_at_epoch: $created_at_epoch}
+                  ]}
+                else
+                  error("workflow run listing incomplete")
+                end
+            '
+          }
+
+          validate_workflow_jobs() {
+            jq -c --argjson in_flight "$IN_FLIGHT_STATUSES" --arg terminal "$ACTION_TERMINAL_STATUS" '
+              . as $pages
+              | if (type == "array" and length > 0)
+                  and all(.[];
+                    type == "object"
+                    and (.jobs | type) == "array"
+                    and (.total_count | type) == "number"
+                    and (.total_count >= 0)
+                    and ((.total_count | floor) == .total_count)
+                    and all(.jobs[];
+                      type == "object"
+                      and (.id | type) == "number"
+                      and (.id >= 1)
+                      and ((.id | floor) == .id)
+                      and (.status | type) == "string"
+                      and (.status as $status
+                        | (($in_flight | index($status)) != null or $status == $terminal))
+                      and (.name | type) == "string"
+                      and (.name | length) > 0
+                    )
+                  )
+                  and (($pages | map(.total_count) | unique | length) == 1)
+                  and (($pages | map(.jobs | length) | add) == $pages[0].total_count)
+                  and (([$pages[].jobs[].id] | unique | length)
+                    == ([$pages[].jobs[]] | length))
+                then
+                  {jobs: [$pages[].jobs[]]}
+                else
+                  error("workflow job listing incomplete")
+                end
+            '
+          }
           active_runs_for_shard() {
             local section="$1"
             local shard="$2"
@@ -186,38 +264,29 @@ jobs:
               echo 999
               return
             fi
-            if ! runs_json="$(jq -c '
-              . as $pages
-              | if (type == "array" and length > 0)
-                  and all(.[];
-                    type == "object"
-                    and (.workflow_runs | type) == "array"
-                    and (.total_count | type) == "number"
-                    and (.total_count >= 0)
-                    and ((.total_count | floor) == .total_count))
-                  and (($pages | map(.total_count) | unique | length) == 1)
-                  and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
-                then
-                  {workflow_runs: [$pages[].workflow_runs[]]}
-                else
-                  error("workflow run listing incomplete")
-                end
-            ' <<<"$runs_pages_json")"; then
+            if ! runs_json="$(validate_workflow_runs <<<"$runs_pages_json")"; then
               echo 999
               return
             fi
             while IFS=$'\t' read -r run_id run_event run_name; do
-              [ -n "$run_id" ] || continue
+              if [ -z "$run_id" ] || [ -z "$run_event" ] || [ -z "$run_name" ]; then
+                echo 999
+                return
+              fi
+              local jobs_pages_json
               local jobs_json
-              if ! jobs_json="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/jobs?per_page=100")"; then
+              if ! jobs_pages_json="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/jobs?per_page=100")"; then
+                echo 999
+                return
+              fi
+              if ! jobs_json="$(validate_workflow_jobs <<<"$jobs_pages_json")"; then
                 echo 999
                 return
               fi
               if [ "$(jq '.jobs | length' <<<"$jobs_json")" -eq 0 ]; then
-                # Una run dispatchata in coda espone la sezione richiesta nel
-                # nome solo quando l'input è esplicito. `auto` (o un nome
-                # malformato) non identifica lo shard in modo affidabile, quindi
-                # resta occupata; si salta solo una sezione esplicitamente diversa.
+                # A run with no readable job is occupied. Only a workflow
+                # dispatch explicitly naming another section is irrelevant;
+                # auto and unrecognized names remain conservative blocks.
                 if [ "$run_event" = "workflow_dispatch" ]; then
                   dispatch_section=""
                   if [[ "$run_name" =~ ^cover-publish-article[[:space:]]/[[:space:]]([^/[:space:]]+)[[:space:]]/[[:space:]]nonce= ]]; then
@@ -230,18 +299,48 @@ jobs:
                 echo 1
                 return
               fi
-              if jq -e --arg shard "$shard" '
-                any(.jobs[]?;
-                  (.status != "completed")
-                  and (.name == "resolve" or (.name | endswith(", " + $shard + ")"))))
-              ' <<<"$jobs_json" >/dev/null; then
-                echo 1
+              local job_state
+              if ! job_state="$(jq -r --arg shard "$shard" --argjson in_flight "$IN_FLIGHT_STATUSES" '
+                [
+                  .jobs[]
+                  | .status as $status
+                  | select(($in_flight | index($status)) != null)
+                  | if .name == "resolve" then "resolve"
+                    elif (.name | test("^publish \\(shard, .+\\)$"))
+                      then (if .name == ("publish (shard, " + $shard + ")") then "publish-target" else "publish-other" end)
+                    else "unknown"
+                    end
+                ]
+                | if any(.[]; . == "unknown") then "unknown"
+                  elif any(.[]; . == "resolve" or . == "publish-target") then "occupied"
+                  elif any(.[]; . == "publish-other") then "free"
+                  else "no-active-job"
+                  end
+              ' <<<"$jobs_json")"; then
+                echo 999
                 return
               fi
+              case "$job_state" in
+                occupied)
+                  echo 1
+                  return
+                  ;;
+                unknown|no-active-job)
+                  echo 999
+                  return
+                  ;;
+                free)
+                  ;;
+                *)
+                  echo 999
+                  return
+                  ;;
+              esac
             done < <(
-              jq -r '.workflow_runs[]
-                | select(.status != "completed")
-                | [.id, .event, (.name // .display_title // "")] | @tsv' <<<"$runs_json"
+              jq -r --argjson in_flight "$IN_FLIGHT_STATUSES" '.workflow_runs[]
+                | .status as $status
+                | select(($in_flight | index($status)) != null)
+                | [.id, .event, .display_title] | @tsv' <<<"$runs_json"
             )
             echo 0
           }
@@ -250,8 +349,12 @@ jobs:
           # CONDIVISO con reconcile-article-shards (stesso workflow a valle).
           deferred=false
           hour_ago="$(date -u -d '60 minutes ago' +%Y-%m-%dT%H:%M:%SZ)"
-          recent="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=100" \
-            | jq --arg t "$hour_ago" '[.workflow_runs[] | select(.created_at >= $t)] | length' || echo 999)"
+          recent=999
+          if recent_pages_json="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=100" 2>/dev/null)"; then
+            if recent_runs_json="$(validate_workflow_runs <<<"$recent_pages_json")"; then
+              recent="$(jq -r --arg t "$hour_ago" '[.workflow_runs[] | select(.event == "workflow_dispatch" and .created_at_epoch >= ($t | fromdateiso8601))] | length' <<<"$recent_runs_json" 2>/dev/null)" || recent=999
+            fi
+          fi
           if [ "$recent" -ge 6 ]; then
             echo "::warning::già $recent dispatch di fast-publish nell'ultima ora — rimando (tetto anti-tempesta)"
             deferred=true
@@ -262,12 +365,19 @@ jobs:
           while IFS=$'\t' read -r id section; do
             [ -n "$id" ] || continue
 
+            target_shard="$(node scripts/ci/fast-publish-section.mjs shard-of "$section" 2>/dev/null || true)"
+            if [ -z "$target_shard" ]; then
+              echo "::error::sezione '$section' senza shard Pages verificabile — backfill rimandato"
+              printf '%s\t%s\t%s\n' "$id" "$section" "invalid-shard" >> "$results"
+              failed=$((failed + 1))
+              continue
+            fi
+
             if [ "$(elapsed)" -ge "$SOFT_BUDGET" ]; then
               echo "::warning::budget interno esaurito ($(elapsed)s) — mi fermo qui; il resto lo riprende un prossimo giro manuale"
               break
             fi
 
-            target_shard="$(node scripts/ci/fast-publish-section.mjs shard-of "$section")"
             waited=0
             while [ "$(active_runs_for_shard "$section" "$target_shard")" -gt 0 ]; do
               if [ "$waited" -ge 900 ] || [ "$(elapsed)" -ge "$HARD_DEADLINE" ]; then
