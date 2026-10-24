@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-prezzi-pompa-non-calano-svizzera.webp",
-      "sha256": "b3f7808cf7f1d525fd0b6f0adad459fb43236c1fe5cb1dab8889c01c36b494be"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-prezzi-pompa-non-calano-svizzera-480w.webp",
-      "sha256": "153bd1d46fb0942d7813abd80419a7202aba329ef8a9d4ab990d03421012bd01"
-    }
-  ]
+  "items": []
 }
