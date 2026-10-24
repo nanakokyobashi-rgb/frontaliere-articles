@@ -4655,9 +4655,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-11.yml",
       "mode": "identical",
       "baseline": {
-        "site": "4ba97cca34bac17e",
-        "corpus": "4ba97cca34bac17e",
-        "alignedAt": "2026-10-23"
+        "site": "595f3fe69e0da415",
+        "corpus": "595f3fe69e0da415",
+        "alignedAt": "2026-10-24"
       }
     },
     {
@@ -4796,9 +4796,9 @@
       "mode": "identical",
       "reason": "La baseline del 2026-10-22 registra lo stesso digest SHA-256 raw sui due lati (2dfb65f5c90634dc); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "52ebb43a2b49b8ea",
-        "corpus": "52ebb43a2b49b8ea",
-        "alignedAt": "2026-10-23"
+        "site": "3cbf5c1b8ec643cd",
+        "corpus": "3cbf5c1b8ec643cd",
+        "alignedAt": "2026-10-24"
       }
     },
     {
