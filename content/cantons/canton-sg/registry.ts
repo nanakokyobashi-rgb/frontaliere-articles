@@ -182,4 +182,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'stadtfonds-steuerfuss-wil',
+ category: 'fiscale',
+ date: '2026-10-24T08:43:34.169Z',
+ image: '/images/blog/article-stadtfonds-steuerfuss-wil.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

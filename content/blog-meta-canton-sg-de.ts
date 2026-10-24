@@ -51,6 +51,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.wil-sedute-novembre-2026.title': 'Wil: Sitzungen am 5. und 12. November 2026 abgesagt',
     'blog.article.wil-sedute-novembre-2026.excerpt': 'In Wil fallen die Sitzungen am 5.',
     'blog.article.wil-sedute-novembre-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.stadtfonds-steuerfuss-wil.title': 'Aufhebung des Reglements Stadtfonds und Genehmigung des Steuerfusses 2026 in Wil',
+    'blog.article.stadtfonds-steuerfuss-wil.excerpt': 'Das Stadtparlament hat das Reglement Stadtfonds am 27.',
+    'blog.article.stadtfonds-steuerfuss-wil.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;

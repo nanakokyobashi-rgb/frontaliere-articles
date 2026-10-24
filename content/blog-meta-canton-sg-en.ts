@@ -51,6 +51,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.wil-sedute-novembre-2026.title': 'Wil: cancel the sessions on November 5 and 12, 2026',
     'blog.article.wil-sedute-novembre-2026.excerpt': 'In Wil, the sessions on November 5 and 12, 2026, are canceled.',
     'blog.article.wil-sedute-novembre-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.stadtfonds-steuerfuss-wil.title': 'Repeal of the Stadtfonds regulation and 2026 tax rate approved in Wil',
+    'blog.article.stadtfonds-steuerfuss-wil.excerpt': 'The city parliament repealed the Stadtfonds regulation on August 27, 2026; the 2026 Steuerfuss is set at 115 percent with participation of 48,34 percent.',
+    'blog.article.stadtfonds-steuerfuss-wil.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

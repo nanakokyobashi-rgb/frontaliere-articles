@@ -51,6 +51,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.wil-sedute-novembre-2026.title': 'Wil : séances des 5 et 12 novembre 2026 annulées',
     'blog.article.wil-sedute-novembre-2026.excerpt': 'À Wil, les séances des 5 et 12 novembre 2026 sont annulées.',
     'blog.article.wil-sedute-novembre-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.stadtfonds-steuerfuss-wil.title': 'Abrogation du règlement Stadtfonds et du Steuerfuss 2026 approuvé à Wil',
+    'blog.article.stadtfonds-steuerfuss-wil.excerpt': 'Le Parlement de la ville a abrogé le règlement Stadtfonds le 27 août 2026 ; le Steuerfuss 2026 est fixé à 115 pour cent avec une participation de 48,34 pour cent.',
+    'blog.article.stadtfonds-steuerfuss-wil.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSgFr;
