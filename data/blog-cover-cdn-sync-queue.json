@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-grand-conseil-27-ottobre.webp",
-      "sha256": "efdcde33446e476a526b09d24314039a0d4b454907c5d4a8a5ba836c94459e0d"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-grand-conseil-27-ottobre-480w.webp",
-      "sha256": "0044342e99cc4e757566ffffb171f347280eb19550a52f8a40a1b7ab8376e1c0"
-    }
-  ]
+  "items": []
 }
