@@ -25,13 +25,13 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   );
   assert.match(guard, /workflow_runs \| length/);
   assert.match(guard, /total_count/);
+  assert.match(workflow, /IN_FLIGHT_STATUSES='\["queued","in_progress","requested","waiting","pending"\]'/);
   assert.match(guard, /\.name == "resolve"/);
-  assert.match(guard, /endswith\(", " \+ \$shard \+ "\)"\)/);
-  assert.equal(
-    guard.match(/\.status != "completed"/g)?.length,
-    2,
-    'run e job devono trattare ogni stato non terminale come occupato',
-  );
+  assert.ok(guard.includes('test("^publish \\\\(shard, .+\\\\)$")'));
+  assert.match(guard, /\.name == \("publish \(shard, " \+ \$shard \+ "\)"\)/);
+  assert.match(guard, /publish-other"\) then "occupied"/);
+  assert.doesNotMatch(guard, /endswith\(", " \+ \$shard/);
+  assert.match(guard, /\$in_flight \| index\(\$status\)/);
   assert.doesNotMatch(guard, /\.status == "queued" or \.status == "in_progress"/);
   assert.match(guard, /run_event.*workflow_dispatch/);
   assert.match(guard, /cover-publish-article\[\[:space:\]\]/);

@@ -168,6 +168,7 @@ jobs:
           SOFT_BUDGET=2100   # niente item nuovi oltre i 35 min
           HARD_DEADLINE=2700 # niente attese oltre i 45 min (timeout job: 50)
           elapsed() { echo $(( $(date +%s) - START_TS )); }
+          IN_FLIGHT_STATUSES='["queued","in_progress","requested","waiting","pending"]'
 
           # La concurrency del publisher è PER SHARD, non globale. Contare le
           # run del workflow senza guardare i job faceva attendere un backfill
@@ -230,10 +231,23 @@ jobs:
                 echo 1
                 return
               fi
-              if jq -e --arg shard "$shard" '
-                any(.jobs[]?;
-                  (.status != "completed")
-                  and (.name == "resolve" or (.name | endswith(", " + $shard + ")"))))
+              if jq -e --arg shard "$shard" --argjson in_flight "$IN_FLIGHT_STATUSES" '
+                [
+                  .jobs[]
+                  | .status as $status
+                  | select(($in_flight | index($status)) != null)
+                  | if .name == "resolve" then "resolve"
+                    elif (.name | test("^publish \\(shard, .+\\)$"))
+                      then (if .name == ("publish (shard, " + $shard + ")") then "publish-target" else "publish-other" end)
+                    else "unknown"
+                    end
+                ]
+                | if any(.[]; . == "unknown") then "unknown"
+                  elif any(.[]; . == "resolve" or . == "publish-target") then "occupied"
+                  elif any(.[]; . == "publish-other") then "occupied"
+                  else "no-active-job"
+                  end
+                | . == "occupied"
               ' <<<"$jobs_json" >/dev/null; then
                 echo 1
                 return
