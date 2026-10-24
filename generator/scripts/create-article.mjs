@@ -6086,7 +6086,7 @@ ISTITUZIONI REALI:
 - BPS (SUISSE), UFAS/BSV, UFG, UDSC, Fedpol = istituzioni REALI
 
 NUMERI FRONTALIERI:
-- Frontalieri in Ticino: ~79'000 (USTAT, 2024) — circa 30% della forza lavoro cantonale
+- Frontalieri in Ticino: circa 79'000 nel I trimestre 2026 (USTAT, 78'561), in lieve calo; circa il 32% degli occupati. Per altri periodi usa dato e periodo della fonte citata
 - Frontalieri totali CH: ~400'000
 - Quota ristorno fiscale ai comuni italiani: 40% dell'imposta alla fonte (vecchio accordo)
 
@@ -6162,7 +6162,8 @@ const EVERGREEN_FACTS_BRIEF = `FATTI VERIFICATI (ground truth — il fact-checke
 - Aliquote/contributi svizzeri: AVS/AI/IPG 5.3% dipendente, AD/AC 1.1% (cap CHF 148'200), LAINF 0.7–1.5%, LPP 7–18% per fascia età (dal 25 anni). IRPEF italiana dal ${IRPEF_ANNO_CORRENTE}: ${irpefScaglioniTesto(IRPEF_ANNO_CORRENTE)} (${IRPEF_FONTE_CORRENTE}; redditi 2024–${IRPEF_ANNO_PRECEDENTE}: ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}).
 - Acronimi/enti VALIDI (non inventarne altri): SECO, SEM, USTAT, UFSP/BAG, SUVA, INPS, Agenzia delle Entrate, MEF, BFS (Ufficio Federale di Statistica), AFC/ESTV (Amministrazione Federale delle Contribuzioni).
 - Le aliquote fiscali (imposta alla fonte, aliquote federali/cantonali) sono stabilite da leggi federali/cantonali e amministrate da AFC/ESTV a livello federale e dalle amministrazioni cantonali delle contribuzioni — MAI da UFAS (previdenza sociale, AVS/AI) né da BFS (statistica: rileva dati, non fissa aliquote).
-- LAMal = assicurazione malattia (NON "tassa sulla salute"); frontalieri G hanno diritto d'opzione; franchige adulti CHF 300–2500.`;
+- LAMal = assicurazione malattia (NON "tassa sulla salute"); frontalieri G hanno diritto d'opzione; franchige adulti CHF 300–2500.
+- Frontalieri in Ticino: circa 79'000 nel I trimestre 2026 (USTAT, 78'561), in lieve calo; circa il 32% degli occupati. Per altri periodi usa dato e periodo della fonte citata.`;
 
 // ── Ground truth della sezione `svizzera` (issue #96) ───────────────────
 //
@@ -6439,7 +6440,7 @@ VERIFICA SISTEMATICA — controlla OGNI categoria:
 
 3. **ALIQUOTE E CIFRE FISCALI**: Confronta OGNI aliquota con i valori nei fatti verificati. AVS=5.3%, AC=1.1%, IRPEF ${irpefAliquoteBreve(IRPEF_ANNO_CORRENTE)} (2024-${IRPEF_ANNO_PRECEDENTE}: ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}). Se un'aliquota non corrisponde = critical.
 
-4. **STATISTICHE E PERCENTUALI**: Percentuali precise con decimali (es. "il 73,2% dei frontalieri") DEVONO provenire da studi reali citati per nome E ISTITUTO. Senza attribuzione precisa = probabile invenzione. ECCEZIONE: arrotondamenti a numeri interi da fonti note (es. "circa il 30% della forza lavoro" da USTAT) sono accettabili. ${isStatsAstra ? 'Per ASTRA, accetta anche una percentuale o variazione calcolata direttamente dai conteggi espliciti del dataset solo se numeratore, denominatore, unità e periodo sono coerenti e il calcolo è corretto; presentala come calcolo sui dati ASTRA, non come percentuale pubblicata dalla fonte. Il dataset non prova cause o percentuali non ricavabili dai valori forniti.' : ''} Non segnalare aliquote esplicitamente elencate nei fatti verificati (AVS=5.3%, AC=1.1%, IRPEF ${irpefAliquoteBreve(IRPEF_ANNO_CORRENTE)} o 2024-${IRPEF_ANNO_PRECEDENTE} ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}, franchigia 10.000 euro) come issue se sono riportate correttamente.
+4. **STATISTICHE E PERCENTUALI**: Percentuali precise con decimali (es. "il 73,2% dei frontalieri") DEVONO provenire da studi reali citati per nome E ISTITUTO. Senza attribuzione precisa = probabile invenzione. ECCEZIONE: arrotondamenti a numeri interi da fonti note (es. "circa il 32% degli occupati" da USTAT) sono accettabili. ${isStatsAstra ? 'Per ASTRA, accetta anche una percentuale o variazione calcolata direttamente dai conteggi espliciti del dataset solo se numeratore, denominatore, unità e periodo sono coerenti e il calcolo è corretto; presentala come calcolo sui dati ASTRA, non come percentuale pubblicata dalla fonte. Il dataset non prova cause o percentuali non ricavabili dai valori forniti.' : ''} Non segnalare aliquote esplicitamente elencate nei fatti verificati (AVS=5.3%, AC=1.1%, IRPEF ${irpefAliquoteBreve(IRPEF_ANNO_CORRENTE)} o 2024-${IRPEF_ANNO_PRECEDENTE} ${irpefAliquoteBreve(IRPEF_ANNO_PRECEDENTE)}, franchigia 10.000 euro) come issue se sono riportate correttamente.
 
 5. **DATE E EVENTI**: Confronta con le date verificate: Convenzione 9/3/1976, Nuovo Accordo 23/12/2020, vigenza dal 1/1/2024, Legge 83/2023. ${isEvergreenArticle ? '' : isStatsAstra ? 'Per ASTRA, periodo di misurazione e periodi del confronto devono corrispondere al dataset primario; verifica invece le date di leggi e accordi nei fatti di dominio verificati sopra. Non trattare una data normativa come sospetta perché manca dal dataset ASTRA.' : isStatsBfs ? 'Per il dato BFS, periodo e confronto devono corrispondere esattamente al dataset primario qui sopra.' : 'Date presenti nell\'articolo ma ASSENTI dalla fonte = altamente sospette.'}
 
