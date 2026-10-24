@@ -303,6 +303,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-23T15:23:52.650Z",
       "lastFailureAt": "2026-10-23T15:23:52.650Z"
+    },
+    {
+      "articleId": "cisl-ricerca-lavoratori-ritiene",
+      "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
+      "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic border-crossing illustration; the prominent fore",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-24T19:06:53.846Z",
+      "lastFailureAt": "2026-10-24T19:06:53.846Z"
     }
   ]
 }

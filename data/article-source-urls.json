@@ -1,9 +1,4 @@
 {
-  "https://www.varesenews.it/2026/09/settimana-europea-della-mobilita-lagenzia-tpl-presenta-il-bilancio-e-regala-una-giornata-in-funivia/2679634": {
-    "articleId": "tpl-como-lecco-varese-bilancio-2026",
-    "ts": "2026-09-16T02:21:42.262Z",
-    "keyForm": 2
-  },
   "https://www.varesenews.it/2026/09/dalla-tuta-blu-dellalfa-romeo-alla-cgil-nazionale-la-lunga-strada-di-stefania-filetti/2679025": {
     "articleId": "stefania-filetti-cgil-nazionale",
     "ts": "2026-09-17T01:00:16.465Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/s/4185242": {
     "articleId": "sanitari-italiani-fuga-svizzera",
     "ts": "2026-10-23T15:23:52.652Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/cronaca/1958888/cisl-ricerca-lavoratori-ritiene-figurano": {
+    "articleId": "cisl-ricerca-lavoratori-ritiene",
+    "ts": "2026-10-24T19:06:53.847Z",
     "keyForm": 2
   }
 }

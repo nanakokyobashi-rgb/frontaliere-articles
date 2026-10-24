@@ -45796,6 +45796,16 @@ const RAW_ARTICLES = [
  authorSlug: 'samuele-valente',
  authorName: 'Samuele Valente',
  },
+ {
+ id: 'cisl-ricerca-lavoratori-ritiene',
+ category: 'fiscale',
+ date: '2026-10-24T19:06:53.140Z',
+ image: '/images/blog/article-ricerca-cisl-frontalieri-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
