@@ -2369,9 +2369,9 @@
       "mode": "identical",
       "reason": "Postcondizione condivisa dai publisher articolo dei due repo: la dichiarazione del registro resta autorevole e una pagina ricaduta sull'immagine generica viene esclusa dal push. Il file e' riallineato byte per byte al gemello del sito, cosi' una modifica futura della stessa regola resta visibile al trasporto lockstep.",
       "baseline": {
-        "site": "8979d94a31cdef27",
-        "corpus": "8979d94a31cdef27",
-        "alignedAt": "2026-10-07"
+        "site": "433c7a0fdf348069",
+        "corpus": "433c7a0fdf348069",
+        "alignedAt": "2026-10-24"
       }
     },
     {
@@ -2601,9 +2601,9 @@
       "path": "scripts/lib/r2-image-namespace-lock.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "10316872c6fe8db5",
-        "corpus": "10316872c6fe8db5",
-        "alignedAt": "2026-10-23"
+        "site": "9e1d626684014965",
+        "corpus": "9e1d626684014965",
+        "alignedAt": "2026-10-24"
       }
     },
     {
@@ -4170,9 +4170,9 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "90c50679a3de0cb8",
-        "corpus": "90c50679a3de0cb8",
-        "alignedAt": "2026-10-23"
+        "site": "cb17c4e77aeaaaf5",
+        "corpus": "cb17c4e77aeaaaf5",
+        "alignedAt": "2026-10-24"
       }
     },
     {
