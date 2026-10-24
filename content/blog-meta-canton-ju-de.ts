@@ -18,6 +18,9 @@ const blogMetaCantonJuDe: Record<string, string> = {
     'blog.article.stockmar-ritardo-cantiere-2027.title': 'Baustellenverzögerung Stockmar: Rückkehr der Schüler im Januar 2028',
     'blog.article.stockmar-ritardo-cantiere-2027.excerpt': 'Die Rückkehr der Schüler ist für Januar 2028 geplant Baustelle hat vier Monate Verspätung Die Arbeiten werden im Dezember 2027 abgeschlossen Das Gesamtbudget',
     'blog.article.stockmar-ritardo-cantiere-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.giura-aumento-sussidi-famiglie.title': 'Jura erhöht die Zuschüsse für Familien mit niedrigem Einkommen',
+    'blog.article.giura-aumento-sussidi-famiglie.excerpt': 'Der Höchstbetrag des Zuschlags steigt für Familien mit einem RDU unter 18\'000 CHF ab 2027 von 300 auf 330 CHF pro Monat und Elternteil.',
+    'blog.article.giura-aumento-sussidi-famiglie.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonJuDe;

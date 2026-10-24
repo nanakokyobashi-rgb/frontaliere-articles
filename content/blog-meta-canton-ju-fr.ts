@@ -18,6 +18,9 @@ const blogMetaCantonJuFr: Record<string, string> = {
     'blog.article.stockmar-ritardo-cantiere-2027.title': 'Retard chantier Stockmar : rentrée des élèves en janvier 2028',
     'blog.article.stockmar-ritardo-cantiere-2027.excerpt': 'Le retour des élèves est prévu en janvier 2028 Le chantier accumule quatre mois de retard Les travaux seront achevés en décembre 2027 Le budget global reste',
     'blog.article.stockmar-ritardo-cantiere-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.giura-aumento-sussidi-famiglie.title': 'Le Jura augmente les aides pour les familles à faible revenu',
+    'blog.article.giura-aumento-sussidi-famiglie.excerpt': 'Le plafond du supplément passe de 300 à 330 CHF par mois et par parent pour les familles dont le RDU est inférieur à 18\'000 CHF, à compter de 2027.',
+    'blog.article.giura-aumento-sussidi-famiglie.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonJuFr;

@@ -18,6 +18,9 @@ const blogMetaCantonJuEn: Record<string, string> = {
     'blog.article.stockmar-ritardo-cantiere-2027.title': 'Stockmar site delay: return of students in January 2028',
     'blog.article.stockmar-ritardo-cantiere-2027.excerpt': 'Students are expected to return in January 2028 The construction site is four months late The works will be completed in December 2027 Global budget remains CHF',
     'blog.article.stockmar-ritardo-cantiere-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.giura-aumento-sussidi-famiglie.title': 'Jura increases subsidies for low-income families',
+    'blog.article.giura-aumento-sussidi-famiglie.excerpt': 'The maximum supplement increases from 300 to 330 CHF per month per parent for families with RDU below 18\'000 CHF, effective 2027.',
+    'blog.article.giura-aumento-sussidi-famiglie.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonJuEn;

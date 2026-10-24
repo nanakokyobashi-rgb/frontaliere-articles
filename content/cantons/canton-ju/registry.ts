@@ -61,4 +61,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'giura-aumento-sussidi-famiglie',
+ category: 'novita',
+ date: '2026-10-24T18:24:32.255Z',
+ image: '/images/blog/article-giura-aumento-sussidi-famiglie.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['JU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

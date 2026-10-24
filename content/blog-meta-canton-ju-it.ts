@@ -18,6 +18,9 @@ const blogMetaCantonJuIt: Record<string, string> = {
     'blog.article.stockmar-ritardo-cantiere-2027.title': 'Ritardo cantiere Stockmar: rientro alunni a gennaio 2028',
     'blog.article.stockmar-ritardo-cantiere-2027.excerpt': 'Il rientro degli alunni è previsto a gennaio 2028 Il cantiere accumula quattro mesi di ritardo I lavori saranno conclusi nel dicembre 2027 Il budget globale',
     'blog.article.stockmar-ritardo-cantiere-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.giura-aumento-sussidi-famiglie.title': 'Giura aumenta sussidi per famiglie a basso reddito',
+    'blog.article.giura-aumento-sussidi-famiglie.excerpt': 'Il massimale del supplemento passa da 300 a 330 CHF al mese per genitore per famiglie con RDU inferiore a 18\'000 CHF, decorrenza 2027.',
+    'blog.article.giura-aumento-sussidi-famiglie.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonJuIt;
