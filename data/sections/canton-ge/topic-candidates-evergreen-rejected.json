@@ -4,22 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/actualites/welcome.asp?actu=6062": {
-      "section": "canton-ge",
-      "ts": 1792674278399
-    },
-    "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/tel/publications/2026/analyses/communications/an-cs-2026-79.pdf": {
-      "section": "canton-ge",
-      "ts": 1792674433581
-    },
-    "canton-ge::https://lecourrier.ch/2026/10/22/frontieres-vivantes": {
-      "section": "canton-ge",
-      "ts": 1792677909825
-    },
-    "canton-ge::https://lecourrier.ch/2026/10/22/une-procureure-reclame-larret-du-chantier-de-la412": {
-      "section": "canton-ge",
-      "ts": 1792692741159
-    },
     "canton-ge::https://www.ge.ch/node/45273": {
       "section": "canton-ge",
       "ts": 1792710421111
@@ -27,6 +11,14 @@
     "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/actualites/welcome.asp?actu=6064": {
       "section": "canton-ge",
       "ts": 1792758790831
+    },
+    "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/tel/publications/2026/analyses/communications/an-cs-2026-79.pdf": {
+      "section": "canton-ge",
+      "ts": 1792878701489
+    },
+    "canton-ge::https://statistique.ge.ch/rss/affiche_article.asp?url=https://statistique.ge.ch/actualites/welcome.asp?actu=6062": {
+      "section": "canton-ge",
+      "ts": 1792878805137
     }
   }
 }
