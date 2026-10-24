@@ -31,6 +31,10 @@
  *
  * Filtered-out articles stay in `sitemap-blog.xml` and remain reachable — this
  * only reduces noise in the NEWS sitemap. Never noindex, never delete HTML.
+ *
+ * STATUS (2026-10-24): `scripts/build-api.mjs` no longer applies the topic list
+ * to sitemap-news-candidates.xml — only the 48h window (`isWithinNewsWindow`).
+ * The list stays here as the vendored copy of main's module.
  */
 
 /** Case-insensitive substring tokens, matched against slug + title + section + tags + keywords. */
@@ -161,25 +165,43 @@ function toLower(value) {
 }
 
 /**
+ * True iff `publishedAt` lies inside the last {@link NEWS_SITEMAP_WINDOW_HOURS}
+ * hours. A future date is malformed (a clock or timezone bug at the publisher,
+ * not an exceptionally fresh article) and an unparseable one is rejected rather
+ * than let through.
+ *
+ * This is the ONLY gate `scripts/build-api.mjs` applies to
+ * sitemap-news-candidates.xml since 2026-10-24: Google News' own rule is "articles
+ * published in the last two days", and the topic whitelist below had narrowed the
+ * live news sitemap to 7 Italian URLs out of a corpus that publishes in four
+ * languages every day.
+ *
+ * @param {string|Date|undefined|null} publishedAt
+ * @param {number} [now]
+ */
+export function isWithinNewsWindow(publishedAt, now = Date.now()) {
+  if (publishedAt === undefined || publishedAt === null || publishedAt === '') return false;
+  const ts = publishedAt instanceof Date ? publishedAt.getTime() : new Date(publishedAt).getTime();
+  if (Number.isNaN(ts)) return false;
+  const ageMs = now - ts;
+  if (ageMs < 0) return false; // future-dated = malformed, drop
+  return ageMs <= NEWS_SITEMAP_WINDOW_HOURS * 60 * 60 * 1000;
+}
+
+/**
  * True iff the article matches at least one whitelist token AND was published
  * within the last {@link NEWS_SITEMAP_WINDOW_HOURS} hours. Mirrors
  * `isArticleNewsEligible` in main's news-sitemap-whitelist.ts, including the
  * future-dated-is-malformed rule.
  *
+ * No longer used by the news-candidates emitter (see `isWithinNewsWindow`);
+ * kept, with the token list, as the vendored mirror of main's module.
+ *
  * @param {{slug?:string,title?:string,articleSection?:string,tags?:string[],keywords?:string,publishedAt?:string|Date}} article
  * @param {number} [now]
  */
 export function isArticleNewsEligible(article, now = Date.now()) {
-  if (article.publishedAt !== undefined) {
-    const ts =
-      article.publishedAt instanceof Date
-        ? article.publishedAt.getTime()
-        : new Date(article.publishedAt).getTime();
-    if (Number.isNaN(ts)) return false;
-    const ageMs = now - ts;
-    if (ageMs < 0) return false; // future-dated = malformed, drop
-    if (ageMs > NEWS_SITEMAP_WINDOW_HOURS * 60 * 60 * 1000) return false;
-  }
+  if (article.publishedAt !== undefined && !isWithinNewsWindow(article.publishedAt, now)) return false;
 
   const haystack = [
     toLower(article.slug),

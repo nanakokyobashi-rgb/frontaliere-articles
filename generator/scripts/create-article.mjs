@@ -16988,8 +16988,9 @@ function modifySitemap(data) {
   // repo as soon as it has republished, so sync-articles-sitemaps runs on the
   // push rather than waiting for its twice-daily schedule.
   //
-  // sitemap-news.xml is NOT affected — it is a Google News surface with its own
-  // whitelist gate, still owned here, and modifySitemapNews below still writes it.
+  // sitemap-news.xml is NOT affected — it is a Google News surface whose
+  // derived 48-hour window is owned by scripts/build-api.mjs; this no-op must
+  // stay out of the publisher to avoid a second producer.
   void data;
 }
 
