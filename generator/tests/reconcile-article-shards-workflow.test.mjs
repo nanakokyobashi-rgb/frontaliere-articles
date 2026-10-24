@@ -49,8 +49,7 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(workflow, /created_at_epoch/);
   assert.match(guard, /echo 999/);
   assert.match(guard, /publish \(shard, " \+ \$shard \+ "\)/);
-  assert.match(guard, /publish-other"\) then "occupied"/);
-  assert.doesNotMatch(guard, /publish-other"\) then "free"/);
+  assert.match(guard, /publish-other"\) then "free"/);
   assert.match(guard, /unknown\|no-active-job/);
   assert.match(
     guard,
@@ -103,8 +102,7 @@ test('i gemelli del guard usano listing completi, stati completi e fail-closed',
   assert.match(republishWorkflow, /\[\$pages\[\]\.workflow_runs\[\]\.id\] \| unique \| length/);
   assert.match(republishWorkflow, /\[\$pages\[\]\.jobs\[\]\.id\] \| unique \| length/);
   assert.match(republishGuard, /publish \(shard, " \+ \$shard \+ "\)/);
-  assert.match(republishGuard, /publish-other"\) then "occupied"/);
-  assert.doesNotMatch(republishGuard, /publish-other"\) then "free"/);
+  assert.match(republishGuard, /publish-other"\) then "free"/);
   assert.match(republishWorkflow, /shard-of "\$section"/);
   assert.doesNotMatch(republishWorkflow, /^\s*active_runs\(\)/m);
 
