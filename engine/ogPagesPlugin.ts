@@ -1180,9 +1180,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const buildArticleTransparencyAside = (locale: string, authorName: string | undefined, provenance: ArticleProvenance): string => {
   const dl = disclosureLocale(locale);
   const tr = ARTICLE_TRANSPARENCY[dl];
-  const statement = provenance.aiAssisted
-   ? tr.aiAssisted
-   : authorName ? tr.human(authorName) : tr.humanWithoutName;
+  const statement = !provenance.aiAssisted && authorName ? tr.human(authorName) : tr.aiAssisted;
   return `<aside class="article-transparency" role="note" aria-label="${esc(tr.label)}"><p><strong>${esc(tr.label)}:</strong> ${esc(statement)} ${esc(tr.sources)}</p><p><a href="${DISCLOSURE_ROUTE_CONTRACT[dl].methodology}">${esc(tr.methodology)}</a> · <a href="${DISCLOSURE_ROUTE_CONTRACT[dl].corrections}">${esc(tr.corrections)}</a></p></aside>`;
  };
 
