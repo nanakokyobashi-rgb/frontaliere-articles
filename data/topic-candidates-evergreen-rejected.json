@@ -11073,18 +11073,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::http://www.cd-ocst.ch": {
-      "section": "frontaliere",
-      "ts": 1792633665950
-    },
-    "frontaliere::https://www.laregione.ch/cantone/ticino/1958286/anche-in-ticino-sempre-piu-giovani-si-perdono-vogliamo-riportarli-sulla-strada-di-formazione-e-lavoro": {
-      "section": "frontaliere",
-      "ts": 1792633715295
-    },
-    "svizzera::https://www.laregione.ch/economia/economia/1957280/il-riarmo-ci-distrae-dalla-vera-sfida-del-nostro-tempo": {
-      "section": "svizzera",
-      "ts": 1792644374894
-    },
     "frontaliere::https://cassa-disoccupazione.unia.ch": {
       "section": "frontaliere",
       "ts": 1792646596276
@@ -11116,6 +11104,10 @@
     "frontaliere::https://www.tio.ch/ticino/attualita/1958742/dati-stati-cantone-istituto-ticino-attacco-pensioni-casse-previdenza": {
       "section": "frontaliere",
       "ts": 1792792913217
+    },
+    "frontaliere::https://www.laregione.ch/cantone/mendrisiotto/1958280/easy-work-l-ocst-incontrera-la-direzione-e-portera-le-istanze-del-personale": {
+      "section": "frontaliere",
+      "ts": 1792817178053
     }
   }
 }
