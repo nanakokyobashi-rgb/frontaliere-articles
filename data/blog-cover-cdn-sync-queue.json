@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-abstimmung-bahnhof-wil-allee.webp",
-      "sha256": "0e1708e2bcb6205f1adbeec1f05febf65dca7d3e9553503d92cee83795dbd73a"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-abstimmung-bahnhof-wil-allee-480w.webp",
-      "sha256": "2570c3e178188d93c4f922367cf7a125a6737c5fea25ad794a69b95b63d58e15"
-    }
-  ]
+  "items": []
 }
