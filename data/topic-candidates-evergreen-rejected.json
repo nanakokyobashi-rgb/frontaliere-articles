@@ -11073,14 +11073,6 @@
     }
   ],
   "topicGateUrls": {
-    "frontaliere::https://www.swissinfo.ch/ita/grigioni-e-frontalieri%2c-chiesta-una-maggiore-integrazione/92258874": {
-      "section": "frontaliere",
-      "ts": 1792679460003
-    },
-    "frontaliere::https://www.swissinfo.ch/ita/bns%3a-non-vi-%c3%a8-necessit%c3%a0-di-rafforzare-gli-interventi-sul-mercato/92258054": {
-      "section": "frontaliere",
-      "ts": 1792680179691
-    },
     "frontaliere::https://www.tio.ch/ticino/attualita/1958768/ticino-sos-costi-risultato-contributi-consiglio-finanziamenti-remunerazioni-stato-direzione": {
       "section": "frontaliere",
       "ts": 1792787044372
@@ -11104,6 +11096,10 @@
     "frontaliere::https://www.tio.ch/ticino/attualita/1956348/premi-sotto-la-media-per-il-ticino-sara-una-tregua-o-solo-una-pausa-prima-di-nuovi-rincari": {
       "section": "frontaliere",
       "ts": 1792837287457
+    },
+    "frontaliere::https://www.tio.ch/svizzera/politica/1958865/pvl-finanziamento-iniziativa-avs-denti-assemblea": {
+      "section": "frontaliere",
+      "ts": 1792866934452
     }
   }
 }
