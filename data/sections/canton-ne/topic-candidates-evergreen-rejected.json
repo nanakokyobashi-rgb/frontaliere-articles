@@ -15,6 +15,14 @@
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-coop-augmentera-les-salaires-en-2027.html": {
       "section": "canton-ne",
       "ts": 1792800603124
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-swiss-prolonge-la-suspension-de-ses-vols-vers-dubai.html": {
+      "section": "canton-ne",
+      "ts": 1792828986412
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-eni-benefice-triple-au-3e-trimestre.html": {
+      "section": "canton-ne",
+      "ts": 1792828993639
     }
   }
 }
