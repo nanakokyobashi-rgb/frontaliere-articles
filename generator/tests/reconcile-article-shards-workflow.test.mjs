@@ -41,7 +41,9 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(guard, /\.id \| type/);
   assert.match(guard, /\.status \| type/);
   assert.match(guard, /\.name \| type/);
-  assert.match(guard, /\.display_title \| type/);
+  assert.match(workflow, /\.display_title \| type/);
+  assert.match(workflow, /\.created_at \| type/);
+  assert.match(workflow, /try \(\.created_at \| fromdateiso8601\)/);
   assert.match(guard, /echo 999/);
   assert.match(guard, /publish \(shard, " \+ \$shard \+ "\)/);
   assert.match(guard, /unknown\|no-active-job/);
@@ -53,8 +55,9 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
     guard,
     /gh api --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/runs\/\$run_id\/jobs\?per_page=100"/,
   );
-  assert.match(guard, /workflow_runs \| length/);
+  assert.match(workflow, /workflow_runs \| length/);
   assert.match(guard, /total_count/);
+  assert.match(workflow, /validate_workflow_runs\(\)/);
   assert.match(guard, /\.name == "resolve"/);
   assert.doesNotMatch(guard, /\.status == "queued" or \.status == "in_progress"/);
   assert.match(guard, /run_event.*workflow_dispatch/);
@@ -74,6 +77,9 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
     /\.selected\[\].*\[\.id, \.section, \.shard\]/,
   );
   assert.doesNotMatch(workflow, /active_runs\(\)/, 'il gate non deve tornare a contare il workflow globalmente');
+  assert.match(workflow, /recent_pages_json=.*gh api --paginate --slurp/);
+  assert.match(workflow, /recent_runs_json=.*validate_workflow_runs/);
+  assert.match(workflow, /\.created_at \| fromdateiso8601/);
 });
 
 test('i gemelli del guard usano listing completi, stati completi e fail-closed', () => {

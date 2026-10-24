@@ -26,6 +26,8 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   );
   assert.match(validation, /workflow_runs \| length/);
   assert.match(validation, /total_count/);
+  assert.match(validation, /\.created_at \| type/);
+  assert.match(validation, /try \(\.created_at \| fromdateiso8601\)/);
   assert.match(guard, /\.name == "resolve"/);
   assert.match(validation, /IN_FLIGHT_STATUSES=/);
   assert.match(validation, /validate_workflow_runs\(\)/);
@@ -50,6 +52,9 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(workflow, /-f "inputs\[dispatch_nonce\]=\$dispatch_nonce"/);
   assert.match(workflow, /--arg nonce "\$dispatch_nonce"/);
   assert.match(workflow, /contains\("nonce=" \+ \$nonce\)/);
+  assert.match(workflow, /recent_pages_json=.*gh api --paginate --slurp/);
+  assert.match(workflow, /recent_runs_json=.*validate_workflow_runs/);
+  assert.match(workflow, /\.created_at \| fromdateiso8601/);
   assert.doesNotMatch(workflow, /created_at >= \$before/);
   assert.doesNotMatch(workflow, /active_runs\(\)/, 'il gate non deve tornare a contare il workflow globalmente');
 });

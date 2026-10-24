@@ -200,6 +200,9 @@ jobs:
                       and (.name | length) > 0
                       and (.display_title | type) == "string"
                       and (.display_title | length) > 0
+                      and (.created_at | type) == "string"
+                      and (.created_at | length) > 0
+                      and ((try (.created_at | fromdateiso8601) catch null) != null)
                     ))
                   and (($pages | map(.total_count) | unique | length) == 1)
                   and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
@@ -340,7 +343,7 @@ jobs:
           recent=999
           if recent_pages_json="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=100" 2>/dev/null)"; then
             if recent_runs_json="$(validate_workflow_runs <<<"$recent_pages_json")"; then
-              recent="$(jq -r --arg t "$hour_ago" '[.workflow_runs[] | select(.event == "workflow_dispatch" and .created_at >= $t)] | length' <<<"$recent_runs_json" 2>/dev/null)" || recent=999
+              recent="$(jq -r --arg t "$hour_ago" '[.workflow_runs[] | select(.event == "workflow_dispatch" and (.created_at | fromdateiso8601) >= ($t | fromdateiso8601))] | length' <<<"$recent_runs_json" 2>/dev/null)" || recent=999
             fi
           fi
           if [ "$recent" -ge 6 ]; then

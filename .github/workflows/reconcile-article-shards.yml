@@ -218,17 +218,9 @@ jobs:
           # un payload non interpretabile e quindi resta fail-closed.
           IN_FLIGHT_STATUSES='["queued","in_progress","requested","waiting","pending"]'
           ACTION_TERMINAL_STATUS='completed'
-          active_runs_for_shard() {
-            local section="$1"
-            local shard="$2"
-            local dispatch_section
-            local runs_pages_json
-            local runs_json
-            if ! runs_pages_json="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=100")"; then
-              echo 999
-              return
-            fi
-            if ! runs_json="$(jq -c --argjson in_flight "$IN_FLIGHT_STATUSES" --arg terminal "$ACTION_TERMINAL_STATUS" '
+
+          validate_workflow_runs() {
+            jq -c --argjson in_flight "$IN_FLIGHT_STATUSES" --arg terminal "$ACTION_TERMINAL_STATUS" '
               . as $pages
               | if (type == "array" and length > 0)
                   and all(.[];
@@ -236,7 +228,7 @@ jobs:
                     and (.workflow_runs | type) == "array"
                     and (.total_count | type) == "number"
                     and (.total_count >= 0)
-                    and ((.total_count | floor) == .total_count))
+                    and ((.total_count | floor) == .total_count)
                     and all(.workflow_runs[];
                       type == "object"
                       and (.id | type) == "number"
@@ -251,6 +243,9 @@ jobs:
                       and (.name | length) > 0
                       and (.display_title | type) == "string"
                       and (.display_title | length) > 0
+                      and (.created_at | type) == "string"
+                      and (.created_at | length) > 0
+                      and ((try (.created_at | fromdateiso8601) catch null) != null)
                     ))
                   and (($pages | map(.total_count) | unique | length) == 1)
                   and (($pages | map(.workflow_runs | length) | add) == $pages[0].total_count)
@@ -259,7 +254,20 @@ jobs:
                 else
                   error("workflow run listing incomplete")
                 end
-            ' <<<"$runs_pages_json")"; then
+            '
+          }
+
+          active_runs_for_shard() {
+            local section="$1"
+            local shard="$2"
+            local dispatch_section
+            local runs_pages_json
+            local runs_json
+            if ! runs_pages_json="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=100")"; then
+              echo 999
+              return
+            fi
+            if ! runs_json="$(validate_workflow_runs <<<"$runs_pages_json")"; then
               echo 999
               return
             fi
@@ -374,8 +382,12 @@ jobs:
           # Tetto assoluto: quanti dispatch di fast-publish nell'ultima ora.
           deferred=false
           hour_ago="$(date -u -d '60 minutes ago' +%Y-%m-%dT%H:%M:%SZ)"
-          recent="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=100" \
-            | jq --arg t "$hour_ago" '[.workflow_runs[] | select(.created_at >= $t)] | length' || echo 999)"
+          recent=999
+          if recent_pages_json="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=100" 2>/dev/null)"; then
+            if recent_runs_json="$(validate_workflow_runs <<<"$recent_pages_json")"; then
+              recent="$(jq -r --arg t "$hour_ago" '[.workflow_runs[] | select(.event == "workflow_dispatch" and (.created_at | fromdateiso8601) >= ($t | fromdateiso8601))] | length' <<<"$recent_runs_json" 2>/dev/null)" || recent=999
+            fi
+          fi
           if [ "$recent" -ge 6 ]; then
             echo "::warning::già $recent dispatch di fast-publish nell'ultima ora — rimando al prossimo giro (tetto anti-tempesta)"
             deferred=true
