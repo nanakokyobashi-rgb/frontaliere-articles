@@ -336,8 +336,8 @@ jobs:
                   | .status as $status
                   | select(($in_flight | index($status)) != null)
                   | if .name == "resolve" then "resolve"
-                    elif (.name | test("^publish \\(shard, .+\\)$"))
-                      then (if .name == ("publish (shard, " + $shard + ")") then "publish-target" else "publish-other" end)
+                    elif .name == ("publish (shard, " + $shard + ")") then "publish-target"
+                    elif (.name | test("^publish \\(shard, .+\\)$")) then "publish-other"
                     else "unknown"
                     end
                 ]
