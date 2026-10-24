@@ -8618,6 +8618,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.assemblea-pvl-avs-finanziamento.title': 'PVL recommande oui aux dents serrées pour le financement de l\'AVS',
     'blog.article.assemblea-pvl-avs-finanziamento.excerpt': 'Le PVL recommande le oui au financement supplémentaire AVS Oui aussi à l\'initiative sur les feux d’artifice Non à la proposition sur la discrimination du mariage',
     'blog.article.assemblea-pvl-avs-finanziamento.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.zenith-rischio-posti-svizzera.title': 'Zenith : environ 100 postes menacés à Le Locle et 100 autres à l’étranger',
+    'blog.article.zenith-rischio-posti-svizzera.excerpt': 'Environ 100 postes menacés à Le Locle 100 autres postes pourraient être supprimés à l’étranger Zenith consulte le personnel en vue d’un éventuel licenciement',
+    'blog.article.zenith-rischio-posti-svizzera.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

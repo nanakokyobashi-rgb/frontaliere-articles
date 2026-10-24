@@ -28798,6 +28798,17 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'zenith-rischio-posti-svizzera',
+    category: 'novita',
+    date: '2026-10-24T22:32:13.159Z',
+    image: '/images/blog/article-zenith-rischio-posti-svizzera.webp',
+    hasCalculator: true,
+    articleType: 'news',
+    canton: ['NE'],
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

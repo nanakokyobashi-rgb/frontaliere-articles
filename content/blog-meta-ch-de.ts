@@ -8618,6 +8618,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.assemblea-pvl-avs-finanziamento.title': 'PVL empfiehlt zähneknirschend ein Ja zur AHV-Finanzierung',
     'blog.article.assemblea-pvl-avs-finanziamento.excerpt': 'Die PVL empfiehlt ein Ja zur zusätzlichen AHV-Finanzierung Ja auch zur Feuerwerksinitiative Nein zur Vorlage zur Diskriminierung der Ehe',
     'blog.article.assemblea-pvl-avs-finanziamento.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.zenith-rischio-posti-svizzera.title': 'Zenith: Etwa 100 Arbeitsplätze in Le Locle und weitere 100 im Ausland gefährdet',
+    'blog.article.zenith-rischio-posti-svizzera.excerpt': 'Etwa 100 Arbeitsplätze in Le Locle gefährdet Weitere 100 Arbeitsplätze könnten im Ausland abgebaut werden Zenith konsultiert das Personal wegen einer möglichen Entlassung',
+    'blog.article.zenith-rischio-posti-svizzera.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;
