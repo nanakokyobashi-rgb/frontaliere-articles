@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-mobilita-aargovia-sistema-unico.webp",
-      "sha256": "b626f30e576c1bbdd737ecbb32caced03468d1177629cafa4f999c42b47cb87a"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-mobilita-aargovia-sistema-unico-480w.webp",
-      "sha256": "cc13d54e8d1223e5bbc7d1d6b5386410535847999d0a890bb8d1ed9f60d73c4b"
-    }
-  ]
+  "items": []
 }
