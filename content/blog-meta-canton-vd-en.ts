@@ -75,6 +75,9 @@ const blogMetaCantonVdEn: Record<string, string> = {
     'blog.article.budget-2027-preavviso-consiglio.title': '2027 budget and investments: advance notice to the City Council',
     'blog.article.budget-2027-preavviso-consiglio.excerpt': 'The advance notice relating to the 2027 budget, identified as Préavis N°2026/75, was circulated to the Municipal Council on October 23, 2026.',
     'blog.article.budget-2027-preavviso-consiglio.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.grand-conseil-27-ottobre.title': 'Grand Conseil agenda for 27 October on LRIPP and CHUV',
+    'blog.article.grand-conseil-27-ottobre.excerpt': 'Grand Council session scheduled for October 27 Item 8 concerns the reduction of cantonal income tax Item 7 concerns CHUV billing delays The agenda extends',
+    'blog.article.grand-conseil-27-ottobre.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonVdEn;

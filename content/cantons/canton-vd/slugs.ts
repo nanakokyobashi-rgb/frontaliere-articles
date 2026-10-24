@@ -27,6 +27,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'impetigine-casi-vaud': { it: 'impetigine-casi-vaud', en: 'impetigo-cases-vaud', de: 'impetigo-faelle-waadt', fr: 'cas-impetigo-vaud' },
  'morges-label-energia-gold-2026': { it: 'morges-label-energia-gold-2026', en: 'morges-energy-city-gold-label-2026', de: 'morges-energiestadt-gold-label-2026', fr: 'morges-cite-energie-gold-2026' },
  'budget-2027-preavviso-consiglio': { it: 'budget-2027-preavviso-consiglio', en: 'budget-2027-preavis-council', de: 'budget-2027-vorab-rat', fr: 'budget-2027-preavis-conseil' },
+ 'grand-conseil-27-ottobre': { it: 'grand-conseil-27-ottobre', en: 'grand-conseil-27-october', de: 'grosser-rat-27-oktober', fr: 'grand-conseil-27-octobre' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

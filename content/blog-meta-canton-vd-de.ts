@@ -75,6 +75,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.budget-2027-preavviso-consiglio.title': 'Budget für das Geschäftsjahr 2027 und Investitionen: Vorlage an den Gemeinderat',
     'blog.article.budget-2027-preavviso-consiglio.excerpt': 'Die als Préavis N°2026/75 bezeichnete Vorlage zum Budget 2027 wurde dem Gemeinderat am 23.',
     'blog.article.budget-2027-preavviso-consiglio.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.grand-conseil-27-ottobre.title': 'Tagesordnung des Grand Conseil vom 27. Oktober zu LRIPP und CHUV',
+    'blog.article.grand-conseil-27-ottobre.excerpt': 'Sitzung des Grand Conseil, die für den 27.',
+    'blog.article.grand-conseil-27-ottobre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVdDe;
