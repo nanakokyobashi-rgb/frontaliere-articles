@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-assemblea-pvl-avs-finanziamento.webp",
-      "sha256": "1e53735abf6891fe120b4320cb64ab3288880b7d5236044ffd6ff4291a3bd58f"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-assemblea-pvl-avs-finanziamento-480w.webp",
-      "sha256": "04e1f52bcf3ac806e8ba52154485eef47dcc10897f5da54d30c236244b38950d"
-    }
-  ]
+  "items": []
 }
