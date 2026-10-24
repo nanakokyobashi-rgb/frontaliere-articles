@@ -15,14 +15,16 @@
  *
  * COME
  * ────
- * `PUBLIC_REGISTRY_FIELDS` sono esattamente i campi che l'API esponeva prima
- * di quel cambio, misurati il 2026-10-04 su `articles.json` (4125 voci) e
- * `swiss-articles.json` (2552) pubblicati al commit 50e046f4e: `id`,
+ * `PUBLIC_REGISTRY_FIELDS` sono i campi pubblici del contratto HTTP: quelli
+ * misurati il 2026-10-04 su `articles.json` (4125 voci) e
+ * `swiss-articles.json` (2552) pubblicati al commit 50e046f4e — `id`,
  * `category`, `date`, `updatedAt` (solo dove presente), `image`,
- * `hasCalculator`, `authorSlug`, `authorName`, piu' il marker `commit` che
- * `build-api.mjs` aggiunge a ogni riga. Esporre un campo nuovo richiede di
+ * `hasCalculator`, `authorSlug`, `authorName` — piu' il campo esplicito
+ * `aiAssisted` introdotto dal contratto di provenienza e il marker `commit`
+ * che `build-api.mjs` aggiunge a ogni riga. Esporre un campo nuovo richiede di
  * modificare questa lista: e' il cambio di contratto esplicito, da fare
- * insieme ai consumatori del sito.
+ * insieme ai consumatori del sito. `aiAssisted` resta qui perche' il consumer
+ * site #15125 lo usa per mantenere la parita' fra statico e hydration.
  *
  * L'ordine delle chiavi segue la voce sorgente (come faceva lo spread), quindi
  * per i campi pubblici l'output resta byte-identico a prima; un campo assente
@@ -41,6 +43,7 @@ export const PUBLIC_REGISTRY_FIELDS = Object.freeze([
   'hasCalculator',
   'authorSlug',
   'authorName',
+  'aiAssisted',
 ]);
 
 const PUBLIC = new Set(PUBLIC_REGISTRY_FIELDS);
