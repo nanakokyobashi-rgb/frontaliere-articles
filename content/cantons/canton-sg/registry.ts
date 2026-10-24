@@ -204,4 +204,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'lotteriefonds-89-progetti-cantone',
+ category: 'novita',
+ date: '2026-10-24T10:01:50.012Z',
+ image: '/images/blog/article-lotteriefonds-89-progetti-cantone.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

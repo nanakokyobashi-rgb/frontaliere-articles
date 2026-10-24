@@ -57,6 +57,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.kolumbanstrasse-nuova-velostrasse.title': 'Kolumbanstrasse neu gestaltet: mehr Grün und barrierefreie Bushaltestellen',
     'blog.article.kolumbanstrasse-nuova-velostrasse.excerpt': 'Am 23. Oktober 2026 wurde die neue Gestaltung der Kolumbanstrasse fertiggestellt, die nun 700 Meter einer prioritären Veloroute umfasst.',
     'blog.article.kolumbanstrasse-nuova-velostrasse.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.lotteriefonds-89-progetti-cantone.title': '11,6 Millionen CHF für 89 Projekte des Kantons St. Gallen',
+    'blog.article.lotteriefonds-89-progetti-cantone.excerpt': 'Die Regierung schlägt dem Kantonsrat 89 Projekte aus den Bereichen Kultur, Soziales und Umwelt für 11,6 Millionen CHF vor, wobei die Entscheidung für die Wintersession vorgesehen ist.',
+    'blog.article.lotteriefonds-89-progetti-cantone.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;

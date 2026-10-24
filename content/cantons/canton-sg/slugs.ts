@@ -21,6 +21,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'wil-sedute-novembre-2026': { it: 'wil-sedute-novembre-2026', en: 'wil-parliament-sessions-cancelled', de: 'wil-parlament-sitzungen-abgesagt', fr: 'wil-seances-parlement-novembre' },
  'stadtfonds-steuerfuss-wil': { it: 'stadtfonds-steuerfuss-wil', en: 'repeal-of-the-stadtfonds-regulation-and-2026-tax-rate-approved-in-wil', de: 'aufhebung-des-reglements-stadtfonds-und-genehmigung-des-steuerfusses-2026-in-wil', fr: 'abrogation-du-reglement-stadtfonds-et-du-steuerfuss-2026-approuve-a-wil' },
  'kolumbanstrasse-nuova-velostrasse': { it: 'kolumbanstrasse-nuova-velostrasse', en: 'kolumbanstrasse-new-velostrasse', de: 'kolumbanstrasse-neue-velostrasse', fr: 'kolumbanstrasse-nouvelle-velostrasse' },
+ 'lotteriefonds-89-progetti-cantone': { it: 'lotteriefonds-89-progetti-cantone', en: 'lotteriefonds-89-projects-canton', de: 'lotteriefonds-89-projekte-kanton', fr: 'lotteriefonds-89-projets-canton' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -57,6 +57,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.kolumbanstrasse-nuova-velostrasse.title': 'Kolumbanstrasse ridisegnata: più verde e fermate bus senza barriere',
     'blog.article.kolumbanstrasse-nuova-velostrasse.excerpt': 'Il 23 ottobre 2026 è stata completata la nuova configurazione della Kolumbanstrasse, che ora include 700 metri di itinerario ciclabile prioritario.',
     'blog.article.kolumbanstrasse-nuova-velostrasse.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.lotteriefonds-89-progetti-cantone.title': '11,6 milioni CHF per 89 progetti del Canton San Gallo',
+    'blog.article.lotteriefonds-89-progetti-cantone.excerpt': 'Il Governo propone al Consiglio cantonale 89 progetti tra cultura, sociale e ambiente per 11,6 milioni di CHF, con decisione prevista in sessione invernale.',
+    'blog.article.lotteriefonds-89-progetti-cantone.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

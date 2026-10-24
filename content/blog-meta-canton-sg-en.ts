@@ -57,6 +57,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.kolumbanstrasse-nuova-velostrasse.title': 'Kolumbanstrasse redesigned: greener and barrier-free bus stops',
     'blog.article.kolumbanstrasse-nuova-velostrasse.excerpt': 'On October 23, 2026, the new configuration of Kolumbanstrasse was completed, which now includes 700 meters of priority cycling route.',
     'blog.article.kolumbanstrasse-nuova-velostrasse.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.lotteriefonds-89-progetti-cantone.title': '11.6 million CHF for 89 projects in the Canton of St. Gallen',
+    'blog.article.lotteriefonds-89-progetti-cantone.excerpt': 'The Government is proposing 89 projects in culture, social affairs and the environment to the Cantonal Council, for 11,6 million CHF, with a decision expected during the winter session.',
+    'blog.article.lotteriefonds-89-progetti-cantone.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

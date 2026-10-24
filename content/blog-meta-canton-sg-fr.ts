@@ -57,6 +57,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.kolumbanstrasse-nuova-velostrasse.title': 'Kolumbanstrasse réaménagée : plus de verdure et des arrêts de bus sans barrières',
     'blog.article.kolumbanstrasse-nuova-velostrasse.excerpt': 'Le 23 octobre 2026, la nouvelle configuration de la Kolumbanstrasse a été achevée, et elle comprend désormais 700 mètres d’itinéraire cyclable prioritaire.',
     'blog.article.kolumbanstrasse-nuova-velostrasse.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.lotteriefonds-89-progetti-cantone.title': '11,6 millions CHF pour 89 projets du canton de Saint-Gall',
+    'blog.article.lotteriefonds-89-progetti-cantone.excerpt': 'Le Gouvernement propose au Conseil cantonal 89 projets dans les domaines de la culture, du social et de l’environnement pour un montant de 11,6 millions de CHF, avec une décision prévue lors de la session d’hiver.',
+    'blog.article.lotteriefonds-89-progetti-cantone.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSgFr;
