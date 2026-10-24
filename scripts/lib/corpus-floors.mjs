@@ -722,6 +722,23 @@ export function countSourceSitemapEntries(root, section) {
 }
 
 /**
+ * Cardinalità della catena HTML dell'archivio, per locale.
+ *
+ * L'emitter HTML e il navigatore condividono l'unione meta/slugs e quindi
+ * devono continuare a produrre page-1..page-N anche quando la sitemap annuncia
+ * soltanto page-1. Questo numero è una misura distinta dal floor API: il
+ * primo sorveglia quattro URL canonici, il secondo protegge la raggiungibilità
+ * della coda HTML e rende visibile un archive troncato con registry intatto.
+ */
+export function countSourceArchiveHtmlPages(root, section) {
+  const metaRel = sourceOf(section).metaFile('it');
+  const metaIds = metadataArticleIds(readReference(root, metaRel, `${section} Italian metadata`));
+  const slugMap = readSlugMap(root, section);
+  const unionSize = new Set([...metaIds, ...Object.keys(slugMap)]).size;
+  return Math.max(1, Math.ceil(unionSize / ARTICLES_PAGE_SIZE));
+}
+
+/**
  * Cardinalità attesa dell'archive sitemap. Il writer può emettere tutte le
  * pagine HTML dell'archivio, ma la sitemap pubblica annuncia soltanto la
  * pagina canonica 1 per sezione e locale: le pagine 2+ sono noindex e restano
@@ -733,9 +750,7 @@ export function countSourceArchiveSitemapUrls(root, section) {
   // Keep the source reads as a fail-closed check: a missing metadata or slug
   // surface must still stop the floor calculation even though page 1 has a
   // fixed cardinality.
-  const metaRel = sourceOf(section).metaFile('it');
-  readReference(root, metaRel, `${section} Italian metadata`);
-  readSlugMap(root, section);
+  countSourceArchiveHtmlPages(root, section);
   return SECTION_META_LOCALES.length;
 }
 

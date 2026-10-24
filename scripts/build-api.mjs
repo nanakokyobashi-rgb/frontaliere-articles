@@ -186,6 +186,7 @@ import {
   ARCHIVE_SITEMAP,
   countSourceArticles,
   countSourceSitemapEntries,
+  countSourceArchiveHtmlPages,
   familyFloorVerdict,
   floorPolicyOf,
   sectionFloor,
@@ -827,6 +828,7 @@ function archiveBase(section, locale) {
 }
 
 const archiveSources = {};
+const archiveHtmlPages = {};
 function buildArchiveSitemap() {
   const urls = [];
   const familyRows = [];
@@ -844,6 +846,14 @@ function buildArchiveSitemap() {
       );
     }
     const pages = Math.max(1, Math.ceil(total / ARTICLES_PAGE_SIZE));
+    const sourceHtmlPages = countSourceArchiveHtmlPages(ROOT, section);
+    if (pages !== sourceHtmlPages) {
+      throw new Error(
+        `${section} archive HTML chain has ${pages} pages, but the corpus source requires ${sourceHtmlPages} ` +
+          '— refusing to publish a divergent archive navigator',
+      );
+    }
+    archiveHtmlPages[section] = pages;
     archiveSources[section] = { total, floor, pages };
     for (const locale of LOCALES) {
       for (let page = 1; page <= pages; page++) {
@@ -1580,6 +1590,10 @@ write('manifest.json', {
       [family.api.sitemapCounter, family.sections.reduce((n, section) => n + sitemapCounts[section.section], 0)],
     ])),
     sitemapArchiveUrls: sitemapCounts.archive,
+    // Distinct from sitemapArchiveUrls: page 2+ is deliberately noindex and
+    // omitted from the public XML, but every HTML page must remain reachable
+    // through the pager. The verifier checks this chain independently.
+    archiveHtmlPages,
     rssFeeds: rssFeedCount,
     rssItems: rssItemTotal,
     tickerArticles: tickerArticles.length,

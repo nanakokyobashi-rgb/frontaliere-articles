@@ -59,6 +59,7 @@ import {
   latestSeoPublication,
   listedFloor,
   countSourceSitemapEntries,
+  countSourceArchiveHtmlPages,
   countSourceArchiveSitemapUrls,
   ARCHIVE_SITEMAP,
   sectionFloor,
@@ -122,6 +123,7 @@ function healthy() {
     // file di corpo. Diverge dai corpi per costruzione — e' il punto.
     feedSources: { frontaliere: 3750, svizzera: 1936 },
     previousFeedSources: { frontaliere: 3750, svizzera: 1936 },
+    sourceArchiveHtmlPages: { frontaliere: 38, svizzera: 19 },
     sourceImages: 1990,
     rssMaxItems: 50,
   };
@@ -134,6 +136,7 @@ function healthy() {
       { name: 'rss-svizzera-de.xml', items: 50 },
     ],
     sitemaps: { 'sitemap-blog.xml': 3782, 'sitemap-blog-ch.xml': 1850 },
+    archiveHtmlPages: { frontaliere: 38, svizzera: 19 },
     images: 1990,
   };
   return { measured, expected };
@@ -318,6 +321,22 @@ test('la sitemap archive viene misurata e ha un floor indipendente', () => {
   const missing = floorViolations(measured, withArchiveSource);
   assert.equal(missing.length, 1);
   assert.match(missing[0], /sitemap-articles-archive\.xml assente/);
+});
+
+test('la catena HTML dell\'archivio ha una cardinalità separata dalla sitemap page-1-only', () => {
+  const { measured, expected } = healthy();
+  const short = {
+    ...measured,
+    archiveHtmlPages: { ...measured.archiveHtmlPages, frontaliere: 37 },
+  };
+  const violations = floorViolations(short, expected);
+  assert.equal(violations.length, 1);
+  assert.match(violations[0], /archive HTML frontaliere: 37 pagine contro 38/);
+
+  const missing = floorViolations({ ...measured, archiveHtmlPages: {} }, expected);
+  assert.equal(missing.length, 2);
+  assert.match(missing.join('\n'), /archive HTML frontaliere: cardinalità page-1\.\.page-N assente/);
+  assert.match(missing.join('\n'), /archive HTML svizzera: cardinalità page-1\.\.page-N assente/);
 });
 
 test('una sezione archive senza riferimento resta una violazione fail-closed', () => {
@@ -752,6 +771,10 @@ test("il corpus di questo checkout e' la verita' di terra, e regge i due contato
     frontaliere: countSourceArchiveSitemapUrls(ROOT, 'frontaliere'),
     svizzera: countSourceArchiveSitemapUrls(ROOT, 'svizzera'),
   });
+  assert.deepEqual(expected.sourceArchiveHtmlPages, {
+    frontaliere: countSourceArchiveHtmlPages(ROOT, 'frontaliere'),
+    svizzera: countSourceArchiveHtmlPages(ROOT, 'svizzera'),
+  });
 });
 
 test('i feed di questo checkout sono gatati contro i chunk che li generano', async () => {
@@ -1043,6 +1066,8 @@ test('build-api usa il parser SEO condiviso, non una terza finestra locale', () 
   assert.match(build, /if \(total < floor\)/);
   assert.match(build, /sectionFloor\(ROOT, section\)/);
   assert.match(build, /ARTICLES_PAGE_SIZE/);
+  assert.match(build, /countSourceArchiveHtmlPages/);
+  assert.match(build, /archiveHtmlPages/);
   assert.match(build, /sitemapArchiveUrls: sitemapCounts\.archive/);
   assert.match(build, /sitemapArchiveUrls: sitemapUrls\(ARCHIVE_SITEMAP\)/);
   assert.doesNotMatch(build, /sitemapCounts\.blog < 100/);
