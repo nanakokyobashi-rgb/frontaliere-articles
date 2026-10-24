@@ -270,4 +270,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'grand-conseil-27-ottobre',
+ category: 'fiscale',
+ date: '2026-10-24T02:01:24.615Z',
+ image: '/images/blog/article-grand-conseil-27-ottobre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

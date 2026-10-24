@@ -75,6 +75,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.budget-2027-preavviso-consiglio.title': 'Budget esercizio 2027 e investimenti: preavviso al Consiglio comunale',
     'blog.article.budget-2027-preavviso-consiglio.excerpt': 'Il preavviso relativo al budget 2027, identificato come Préavis N°2026/75, è stato diffuso al Consiglio comunale il 23 ottobre 2026.',
     'blog.article.budget-2027-preavviso-consiglio.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.grand-conseil-27-ottobre.title': 'Ordine del giorno Grand Conseil 27 ottobre su LRIPP e CHUV',
+    'blog.article.grand-conseil-27-ottobre.excerpt': 'Seduta del Grand Conseil prevista per il 27 ottobre Il punto 8 riguarda la riduzione dell\'imposta cantonale sul reddito Il punto 7 riguarda i ritardi',
+    'blog.article.grand-conseil-27-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVdIt;
