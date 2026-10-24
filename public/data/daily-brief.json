@@ -1,49 +1,33 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T10:03:51.025Z",
-  "dateIso": "2026-10-21",
+  "generatedAt": "2026-10-24T09:34:52.080Z",
+  "dateIso": "2026-10-24",
   "counts": {
     "availableBlocks": 3,
     "crossings": 141,
     "fuelMunicipalities": 0,
     "exchangePoints": 31,
-    "jobsActive": 32525
+    "jobsActive": 32779
   },
   "blocks": {
     "borderWait": {
       "available": true,
-      "updatedAt": "2026-10-21T07:08:19.145Z",
+      "updatedAt": "2026-10-24T06:07:26.057Z",
       "count": 141,
-      "zeroWaitCount": 139,
+      "zeroWaitCount": 141,
       "worst": {
-        "slug": "campione-d-italia-bissone",
-        "name": "Campione d'Italia-Bissone",
-        "waitMinutes": 8
+        "slug": "anieres",
+        "name": "Anières",
+        "waitMinutes": 0
       },
       "crossings": [
-        {
-          "slug": "campione-d-italia-bissone",
-          "name": "Campione d'Italia-Bissone",
-          "waitMinutes": 8,
-          "status": "yellow",
-          "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
-        },
-        {
-          "slug": "bardonnex",
-          "name": "Bardonnex",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
-        },
         {
           "slug": "anieres",
           "name": "Anières",
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "au-lustenau",
@@ -51,7 +35,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "bad-sackingen-stein-ag",
@@ -59,7 +43,15 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
+        },
+        {
+          "slug": "bardonnex",
+          "name": "Bardonnex",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null,
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "bargen-sh-tengen",
@@ -67,7 +59,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "basel-weil-am-rhein-autostrada-a2-a5",
@@ -75,7 +67,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "basel-weil-am-rhein-freiburgerstrasse",
@@ -83,7 +75,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "basel-weil-am-rhein-hiltalingerstrasse",
@@ -91,7 +83,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "biaufond",
@@ -99,7 +91,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "biegno-indemini",
@@ -107,7 +99,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "bizzarone-novazzano",
@@ -115,7 +107,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "blumberg-bargen-sh-alte-bargener-strasse",
@@ -123,7 +115,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "blumberg-bargen-sh-autostrasse-h4",
@@ -131,7 +123,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "blumberg-beggingen",
@@ -139,7 +131,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "boncourt-delle",
@@ -147,7 +139,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "buchs-schaan",
@@ -155,7 +147,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "busingen-am-hochrhein-dorflingen-busingerstrasse",
@@ -163,7 +155,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "busingen-am-hochrhein-dorflingen-l202",
@@ -171,7 +163,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "busingen-am-hochrhein-dorflingen-siedlerstrasse",
@@ -179,7 +171,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "busingen-am-hochrhein-schaffhausen-stemmer",
@@ -187,7 +179,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "busingen-am-hochrhein-schaffhausen-felsgasse",
@@ -195,7 +187,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "busingen-am-hochrhein-schaffhausen-gennersbrunnerstrasse",
@@ -203,7 +195,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "busingen-am-hochrhein-schaffhausen-rheinhaldenstrasse",
@@ -211,7 +203,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "busingen-am-hochrhein-schaffhausen-vogelingasschen",
@@ -219,7 +211,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "camedo",
@@ -227,7 +219,15 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
+        },
+        {
+          "slug": "campione-d-italia-bissone",
+          "name": "Campione d'Italia-Bissone",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": null,
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "campocologno-tirano",
@@ -235,7 +235,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "castasegna-villa-di-chiavenna",
@@ -243,7 +243,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "chavannes-de-bogis-divonne",
@@ -251,7 +251,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "chiasso-centro",
@@ -259,7 +259,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "chiasso-brogeda",
@@ -267,7 +267,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "chiasso-strada",
@@ -275,7 +275,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "clivio-ligornetto",
@@ -283,7 +283,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "col-des-roches",
@@ -291,7 +291,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "crassier-divonne",
@@ -299,7 +299,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "cremenaga-ponte-cremenaga",
@@ -307,7 +307,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "crociale-dei-mulini",
@@ -315,7 +315,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "dettighofen-rafz",
@@ -323,7 +323,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "dettighofen-wil-zh",
@@ -331,7 +331,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "diepoldsau-hohenems",
@@ -339,7 +339,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "diessenhofen-gailingen-am-hochrhein",
@@ -347,7 +347,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "dorflingen-gailingen-am-hochrhein-hinterdorf",
@@ -355,7 +355,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "dorflingen-gottmadingen-randegg",
@@ -363,7 +363,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "drezzo-pedrinate",
@@ -371,7 +371,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "dumenza-cassinone",
@@ -379,7 +379,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "eggingen-hallau",
@@ -387,7 +387,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "fahy-abbevillers",
@@ -395,7 +395,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "ferney-voltaire-grand-saconnex",
@@ -403,7 +403,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "forcola-di-livigno",
@@ -411,7 +411,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "gaggiolo",
@@ -419,7 +419,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "gailingen-am-hochrhein-dorflingen",
@@ -427,7 +427,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "gailingen-am-hochrhein-ramsen-sh",
@@ -435,7 +435,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "giogo-di-santa-maria",
@@ -443,7 +443,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "gottmadingen-buch-sh",
@@ -451,7 +451,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "gottmadingen-buch-blindenhausen-sh",
@@ -459,7 +459,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "gottmadingen-ramsen-hofenacker",
@@ -467,7 +467,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "gottmadingen-thayngen-autostrada-a81-a4",
@@ -475,7 +475,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "gottmadingen-thayngen-ebringerstrasse",
@@ -483,7 +483,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "goumois",
@@ -491,7 +491,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "grenzach-wyhlen-riehen",
@@ -499,7 +499,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "haag-bendern",
@@ -507,7 +507,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "hermance",
@@ -515,7 +515,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "hilzingen-thayngen-barzheimer-strasse",
@@ -523,7 +523,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "hilzingen-thayngen-schlattergasse",
@@ -531,7 +531,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "hohentengen-am-hochrhein-kaiserstuhl-ag",
@@ -539,7 +539,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "hohentengen-am-hochrhein-wasterkingen",
@@ -547,7 +547,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "inzlingen-riehen",
@@ -555,7 +555,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "jestetten-laufen-uhwiesen-dorfstrasse",
@@ -563,7 +563,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "jestetten-laufen-uhwiesen-grenzstrasse",
@@ -571,7 +571,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "jestetten-neuhausen-am-rheinfall-buchweg",
@@ -579,7 +579,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "jestetten-neuhausen-am-rheinfall-zollstrasse",
@@ -587,7 +587,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "jestetten-rheinau",
@@ -595,7 +595,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "jestetten-wilchingen",
@@ -603,7 +603,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "klettgau-trasadingen",
@@ -611,7 +611,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "klettgau-wil-zh",
@@ -619,7 +619,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "klettgau-wilchingen",
@@ -627,7 +627,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "konstanz-kreuzlingen",
@@ -635,7 +635,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "konstanz-tagerwilen-autostrada-b33n-a7",
@@ -643,7 +643,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "konstanz-tagerwilen-gottlieber-strasse",
@@ -651,7 +651,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "kriessern-mader",
@@ -659,7 +659,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "kussaberg-bad-zurzach-ag",
@@ -667,7 +667,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "l-auberson-les-fourgs",
@@ -675,7 +675,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "la-cure-les-rousses",
@@ -683,7 +683,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "landecy",
@@ -691,7 +691,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "lanzo-d-intelvi-arogno",
@@ -699,7 +699,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "laufenburg-laufenburg-ag",
@@ -707,7 +707,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "le-brassus-bois-d-amont",
@@ -715,7 +715,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "le-chatelard-vallorcine",
@@ -723,7 +723,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "les-verrieres",
@@ -731,7 +731,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "lottstetten-nack",
@@ -739,7 +739,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "lottstetten-rafz-landstrasse",
@@ -747,7 +747,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "lottstetten-rafz-schaffhausener-strasse",
@@ -755,7 +755,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "lottstetten-rudlingen",
@@ -763,7 +763,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "luino-fornasette",
@@ -771,7 +771,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "martina-nauders",
@@ -779,7 +779,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "maslianico-pizzamiglio",
@@ -787,7 +787,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "merishausen-tengen",
@@ -795,7 +795,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "meyrin-cern",
@@ -803,7 +803,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "moillesulaz",
@@ -811,7 +811,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "montlingen-koblach",
@@ -819,7 +819,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "morgins-chatel",
@@ -827,7 +827,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "ohningen-stein-am-rhein",
@@ -835,7 +835,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "opfertshofen-tengen",
@@ -843,7 +843,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "oria-gandria",
@@ -851,7 +851,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "passo-dello-spluga",
@@ -859,7 +859,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "perly",
@@ -867,7 +867,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "piaggio-valmara",
@@ -875,7 +875,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "ponte-tresa",
@@ -883,7 +883,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "porto-ceresio-brusino",
@@ -891,7 +891,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "ramsen-moskau-rielasingen-worblingen",
@@ -899,7 +899,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "rheineck-gai-au",
@@ -907,7 +907,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "rheinfelden-rheinfelden-ag-alte-rheinbrucke",
@@ -915,7 +915,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "rheinfelden-rheinfelden-ag-autostrada-a861-a3",
@@ -923,7 +923,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "riehen-lorrach-stetten",
@@ -931,7 +931,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "riehen-weil-am-rhein",
@@ -939,7 +939,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "rielasingen-worblingen-ramsen-hofenacker",
@@ -947,7 +947,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "ronago-novazzano",
@@ -955,7 +955,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "ruthi-meiningen",
@@ -963,7 +963,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "saint-gingolph",
@@ -971,7 +971,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "salez-ruggell",
@@ -979,7 +979,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "saltrio-arzo",
@@ -987,7 +987,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "samnaun-spiss",
@@ -995,7 +995,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "san-pietro",
@@ -1003,7 +1003,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "sauverny",
@@ -1011,7 +1011,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "sempione",
@@ -1019,7 +1019,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "sevelen-vaduz",
@@ -1027,7 +1027,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "st-luzisteig",
@@ -1035,7 +1035,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "st-margrethen-hochst",
@@ -1043,7 +1043,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "stuhlingen-hallau",
@@ -1051,7 +1051,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "stuhlingen-schleitheim",
@@ -1059,7 +1059,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "tengen-thayngen-l188",
@@ -1067,7 +1067,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "tengen-thayngen-wiechserstrasse",
@@ -1075,7 +1075,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "thonex-vallard",
@@ -1083,7 +1083,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "traforo-del-gran-san-bernardo",
@@ -1091,7 +1091,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "trubbach-balzers",
@@ -1099,7 +1099,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "tunnel-munt-la-schera",
@@ -1107,7 +1107,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "vallorbe-jougne",
@@ -1115,7 +1115,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "waldshut-tiengen-koblenz-ag",
@@ -1123,7 +1123,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "widnau-lustenau-schmitterbrucke",
@@ -1131,7 +1131,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "widnau-lustenau",
@@ -1139,7 +1139,7 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         },
         {
           "slug": "zenna-dirinella",
@@ -1147,38 +1147,38 @@
           "waitMinutes": 0,
           "status": "green",
           "direction": null,
-          "updatedAt": "2026-10-21T07:08:19.145Z"
+          "updatedAt": "2026-10-24T06:07:26.057Z"
         }
       ],
       "degradedEditions": 0
     },
     "fuel": {
       "available": false,
-      "reason": "fuel data is 112h old (max 48h)",
-      "degradedEditions": 1
+      "reason": "fuel rankings are empty",
+      "degradedEditions": 2
     },
     "exchange": {
       "available": true,
-      "rate": 1.0793,
-      "lastDate": "2026-10-20",
-      "prevRate": 1.0791,
-      "prevDate": "2026-10-19",
-      "delta1d": 0.0002,
-      "rate7dAgo": 1.0736,
-      "rate7dAgoDate": "2026-10-13",
-      "delta7d": 0.0057,
+      "rate": 1.0832,
+      "lastDate": "2026-10-23",
+      "prevRate": 1.0811,
+      "prevDate": "2026-10-22",
+      "delta1d": 0.0021,
+      "rate7dAgo": 1.0774,
+      "rate7dAgoDate": "2026-10-16",
+      "delta7d": 0.0058,
       "source": "frankfurter",
       "pointCount": 31,
       "degradedEditions": 0
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-10-21T04:35:06.555Z",
-      "activeJobs": 32525,
+      "generatedAt": "2026-10-24T03:15:43.094Z",
+      "activeJobs": 32779,
       "activeCompanies": 860,
-      "todayAdded": 376,
+      "todayAdded": 397,
       "yesterdayAdded": null,
-      "last7dAdded": 5411,
+      "last7dAdded": 5440,
       "degradedEditions": 0
     }
   },
@@ -1187,75 +1187,80 @@
       "topCompanies": [
         {
           "name": "fachkraft.ch GmbH",
-          "count": 3461
+          "count": 3414
         },
         {
           "name": "STA Personal AG",
-          "count": 1771
+          "count": 1765
         },
         {
           "name": "Coop Genossenschaft",
-          "count": 1111
+          "count": 1079
         },
         {
           "name": "yellowshark AG",
           "count": 950
         },
         {
-          "name": "Stellenpartner AG",
-          "count": 809
+          "name": "Stellentreff AG",
+          "count": 897
         }
       ],
       "topLocations": [
         {
           "name": "Zürich",
-          "count": 3953
+          "count": 4009
         },
         {
           "name": "Bern",
-          "count": 1275
+          "count": 1321
         },
         {
           "name": "Luzern",
-          "count": 1256
+          "count": 1294
         },
         {
           "name": "Basel",
-          "count": 884
+          "count": 864
         },
         {
           "name": "Winterthur",
-          "count": 832
+          "count": 831
         }
       ]
     },
     "exchange": {
       "referenceSalaryChf": 4000,
-      "salaryValueEur": 4317.2,
-      "weeklyRateDelta": 0.0057,
-      "weeklySalaryChangeEur": 22.8,
-      "lastDate": "2026-10-20",
-      "previousDate": "2026-10-13",
-      "rate7dAgo": 1.0736
+      "salaryValueEur": 4332.8,
+      "weeklyRateDelta": 0.0058,
+      "weeklySalaryChangeEur": 23.2,
+      "lastDate": "2026-10-23",
+      "previousDate": "2026-10-16",
+      "rate7dAgo": 1.0774
     },
     "searchDemand": {
       "available": true,
-      "startDate": "2026-10-12",
-      "endDate": "2026-10-18",
+      "startDate": "2026-10-15",
+      "endDate": "2026-10-21",
       "topics": [
         {
           "theme": "jobs",
-          "impressions": 3625,
-          "searches": 6206
+          "impressions": 3769,
+          "searches": 6784
         },
         {
           "theme": "fuel",
-          "impressions": 493,
+          "impressions": 709,
+          "searches": 0
+        },
+        {
+          "theme": "salary",
+          "impressions": 45,
           "searches": 0
         },
         {
           "theme": "traffic",
-          "impressions": 47,
+          "impressions": 37,
           "searches": 0
         }
       ],
