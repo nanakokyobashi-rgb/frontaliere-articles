@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-giura-aumento-sussidi-famiglie.webp",
-      "sha256": "418e26c6895bd366bd08a3c854d640034b4eb15e9a532098498ae4d86912eb48"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-giura-aumento-sussidi-famiglie-480w.webp",
-      "sha256": "fd6be91cd12c45ca5c179f17e387fdd4ec96581c529634266eab45b0e2bac180"
-    }
-  ]
+  "items": []
 }
