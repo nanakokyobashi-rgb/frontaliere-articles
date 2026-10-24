@@ -171,4 +171,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'rolex-acquisisce-cpautomation',
+ category: 'novita',
+ date: '2026-10-24T06:40:18.212Z',
+ image: '/images/blog/article-rolex-acquisisce-cpautomation.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['FR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

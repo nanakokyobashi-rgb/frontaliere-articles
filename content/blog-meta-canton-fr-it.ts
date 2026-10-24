@@ -48,6 +48,9 @@ const blogMetaCantonFrIt: Record<string, string> = {
     'blog.article.bulle-friburgo-linea-diretta.title': 'Friburgo rinuncia alla linea diretta Bulle-Friburgo',
     'blog.article.bulle-friburgo-linea-diretta.excerpt': 'Il Consiglio di Stato friburghese abbandona il progetto diretto: oggi Bulle-Friburgo richiede circa 37 minuti; l\'obiettivo via Romont è 25 minuti entro il 2050.',
     'blog.article.bulle-friburgo-linea-diretta.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.rolex-acquisisce-cpautomation.title': 'Rolex acquisisce la società industriale CPAutomation SA',
+    'blog.article.rolex-acquisisce-cpautomation.excerpt': 'Il gruppo orologiero Rolex ha acquisito la società industriale CPAutomation SA di Villaz-Saint-Pierre, partner di lunga data con circa 120 dipendenti.',
+    'blog.article.rolex-acquisisce-cpautomation.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonFrIt;

@@ -582,6 +582,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rolex-acquisisce-cpautomation': {
+    title: 'Rolex acquisisce la società industriale CPAutomation SA',
+    description: 'Il gruppo Rolex acquisisce la società industriale CPAutomation SA di Villaz-Saint-Pierre nel Canton Friburgo, partner di lunga data con circa 120',
+    keywords: 'frontalieri, ticino, svizzera, italia, rolex, acquisisce, società, industriale',
+    ogTitle: 'Rolex acquisisce CPAutomation a Villaz-Saint-Pierre',
+    ogDescription: 'Il gruppo orologiero Rolex ha rilevato la società industriale CPAutomation SA di Villaz-Saint-Pierre nel Canton Friburgo. L\'azienda, fondata nel 1999, conta circa 120 dipendenti nella Glâne.',
+    canonicalPath: '/articoli-friburgo/rolex-acquisisce-cpautomation/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Rolex acquisisce la società industriale CPAutomation SA",
+      "description": "Il gruppo Rolex acquisisce la società industriale CPAutomation SA di Villaz-Saint-Pierre nel Canton Friburgo, partner di lunga data con circa 120",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-rolex-acquisisce-cpautomation.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-24T06:40:18+00:00",
+      "dateModified": "2026-10-24T06:40:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-friburgo/rolex-acquisisce-cpautomation/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
