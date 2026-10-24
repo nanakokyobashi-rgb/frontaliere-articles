@@ -46,6 +46,20 @@ test('fast-publish-section mantiene il contratto dispatch esplicito', () => {
   assert.match(dispatch, /push_after:/u);
 });
 
+test('fast-publish-section ricontrolla main subito prima del replay API', () => {
+  const replay = workflow.slice(workflow.indexOf('\n  replay-api-after-staged-release:'));
+  const dispatchStep = replay.slice(replay.indexOf('- name: Replay publish-api after staged release'));
+  const guardIndex = dispatchStep.indexOf('verifyMainHeadAtDispatch() {');
+  const dispatchIndex = dispatchStep.indexOf('gh workflow run publish-api.yml');
+
+  assert.ok(guardIndex >= 0, 'manca il controllo finale della HEAD di main');
+  assert.ok(dispatchIndex > guardIndex, 'il dispatch deve avvenire dopo il controllo finale');
+  assert.match(dispatchStep, /current_main="\$\(bash scripts\/ci\/read-main-head\.sh\)"/u);
+  assert.match(dispatchStep, /\[ "\$current_main" != "\$SOURCE_COMMIT" \]/u);
+  assert.match(dispatchStep, /replay API interrotto/u);
+  assert.match(dispatchStep, /if verifyMainHeadAtDispatch; then/u);
+});
+
 test('fast-publish-section mantiene il resolver sotto il limite del parser GitHub', () => {
   assert.match(workflow, /- name: Materialize resolver from workflow revision/u);
   assert.match(workflow, /scripts\/ci\/fast-publish-section-resolve\.sh/u);
