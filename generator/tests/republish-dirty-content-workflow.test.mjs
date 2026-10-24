@@ -19,6 +19,7 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   const guard = workflow.slice(start, end);
 
   assert.match(guard, /actions\/runs\/\$run_id\/jobs\?per_page=100/);
+  assert.match(guard, /gh api --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/runs\/\$run_id\/jobs\?per_page=100"/);
   assert.match(
     guard,
     /gh api --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/runs\?per_page=100"/,
@@ -31,6 +32,7 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(guard, /\.name == \("publish \(shard, " \+ \$shard \+ "\)"\)/);
   assert.match(guard, /publish-other"\) then "occupied"/);
   assert.doesNotMatch(guard, /endswith\(", " \+ \$shard/);
+  assert.match(guard, /\[\$pages\[\]\.jobs\[\]\.id\] \| unique \| length/);
   assert.match(guard, /\$in_flight \| index\(\$status\)/);
   assert.doesNotMatch(guard, /\.status == "queued" or \.status == "in_progress"/);
   assert.match(guard, /run_event.*workflow_dispatch/);

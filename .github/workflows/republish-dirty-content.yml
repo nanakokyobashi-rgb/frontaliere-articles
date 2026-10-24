@@ -209,8 +209,43 @@ jobs:
             fi
             while IFS=$'\t' read -r run_id run_event run_name; do
               [ -n "$run_id" ] || continue
+              local jobs_pages_json
               local jobs_json
-              if ! jobs_json="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/jobs?per_page=100")"; then
+              if ! jobs_pages_json="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/jobs?per_page=100")"; then
+                echo 999
+                return
+              fi
+              if ! jobs_json="$(jq -c --argjson in_flight "$IN_FLIGHT_STATUSES" '
+                . as $pages
+                | if (type == "array" and length > 0)
+                    and all(.[];
+                      type == "object"
+                      and (.jobs | type) == "array"
+                      and (.total_count | type) == "number"
+                      and (.total_count >= 0)
+                      and ((.total_count | floor) == .total_count)
+                      and all(.jobs[];
+                        type == "object"
+                        and (.id | type) == "number"
+                        and (.id >= 1)
+                        and ((.id | floor) == .id)
+                        and (.status | type) == "string"
+                        and (.status as $status
+                          | (($in_flight | index($status)) != null or $status == "completed"))
+                        and (.name | type) == "string"
+                        and (.name | length) > 0
+                      )
+                    )
+                    and (($pages | map(.total_count) | unique | length) == 1)
+                    and (($pages | map(.jobs | length) | add) == $pages[0].total_count)
+                    and (([$pages[].jobs[].id] | unique | length)
+                      == ([$pages[].jobs[]] | length))
+                  then
+                    {jobs: [$pages[].jobs[]]}
+                  else
+                    error("workflow job listing incomplete")
+                  end
+              ' <<<"$jobs_pages_json")"; then
                 echo 999
                 return
               fi
