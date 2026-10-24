@@ -42,6 +42,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.consiglio-stato-21-ottobre-2026.title': 'Staatsrat antwortet im Jahr 2026 auf eidgenössische Vernehmlassungen',
     'blog.article.consiglio-stato-21-ottobre-2026.excerpt': 'Der Staatsrat hat auf zwei eidgenössische Vernehmlassungen geantwortet Bewilligungen für schwere Arbeiten in den Bergzonen II und III Kantonale Abstimmung',
     'blog.article.consiglio-stato-21-ottobre-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.zenith-soppressione-locle.title': 'Zenith kündigt rund hundert Stellenstreichungen in Locle an',
+    'blog.article.zenith-soppressione-locle.excerpt': 'Zenith kündigt rund hundert Stellenstreichungen in Locle an Die Manufaktur zählt 196 Mitarbeitende Konsultation für die Massenentlassung eröffnet Ankündigung am',
+    'blog.article.zenith-soppressione-locle.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNeDe;
