@@ -54,6 +54,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.stadtfonds-steuerfuss-wil.title': 'Abrogazione regolamento Stadtfonds e Steuerfuss 2026 approvato a Wil',
     'blog.article.stadtfonds-steuerfuss-wil.excerpt': 'Il Parlamento cittadino ha abrogato il regolamento Stadtfonds il 27 agosto 2026; lo Steuerfuss 2026 è fissato al 115 per cento con partecipazione del 48,34 per cento.',
     'blog.article.stadtfonds-steuerfuss-wil.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.kolumbanstrasse-nuova-velostrasse.title': 'Kolumbanstrasse ridisegnata: più verde e fermate bus senza barriere',
+    'blog.article.kolumbanstrasse-nuova-velostrasse.excerpt': 'Il 23 ottobre 2026 è stata completata la nuova configurazione della Kolumbanstrasse, che ora include 700 metri di itinerario ciclabile prioritario.',
+    'blog.article.kolumbanstrasse-nuova-velostrasse.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

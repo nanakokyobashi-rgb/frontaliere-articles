@@ -660,6 +660,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-kolumbanstrasse-nuova-velostrasse': {
+    title: 'Kolumbanstrasse ridisegnata: più verde e fermate bus senza barriere',
+    description: 'Il 23 ottobre 2026 è stata ridisegnata la Kolumbanstrasse (tra Splügenstrasse e Heiligkreuzstrasse), aggiungendo 700 metri all\'itinerario ciclabile',
+    keywords: 'frontalieri, ticino, svizzera, italia, kolumbanstrasse, ridisegnata, verde, fermate',
+    ogTitle: 'Kolumbanstrasse ridisegnata: più verde e fermate bus senza barriere',
+    ogDescription: 'La Kolumbanstrasse è stata ridisegnata il 23 ottobre 2026, integrando 700 metri all\'itinerario ciclabile prioritario con nuove aree verdi e fermate bus accessibili.',
+    canonicalPath: '/articoli-san-gallo/kolumbanstrasse-nuova-velostrasse/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Kolumbanstrasse ridisegnata: più verde e fermate bus senza barriere",
+      "description": "Il 23 ottobre 2026 è stata ridisegnata la Kolumbanstrasse (tra Splügenstrasse e Heiligkreuzstrasse), aggiungendo 700 metri all'itinerario ciclabile",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-kolumbanstrasse-nuova-velostrasse.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-24T09:05:50+00:00",
+      "dateModified": "2026-10-24T09:05:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/kolumbanstrasse-nuova-velostrasse/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

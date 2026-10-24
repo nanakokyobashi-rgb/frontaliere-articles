@@ -54,6 +54,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.stadtfonds-steuerfuss-wil.title': 'Repeal of the Stadtfonds regulation and 2026 tax rate approved in Wil',
     'blog.article.stadtfonds-steuerfuss-wil.excerpt': 'The city parliament repealed the Stadtfonds regulation on August 27, 2026; the 2026 Steuerfuss is set at 115 percent with participation of 48,34 percent.',
     'blog.article.stadtfonds-steuerfuss-wil.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.kolumbanstrasse-nuova-velostrasse.title': 'Kolumbanstrasse redesigned: greener and barrier-free bus stops',
+    'blog.article.kolumbanstrasse-nuova-velostrasse.excerpt': 'On October 23, 2026, the new configuration of Kolumbanstrasse was completed, which now includes 700 meters of priority cycling route.',
+    'blog.article.kolumbanstrasse-nuova-velostrasse.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

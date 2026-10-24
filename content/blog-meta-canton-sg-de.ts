@@ -54,6 +54,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.stadtfonds-steuerfuss-wil.title': 'Aufhebung des Reglements Stadtfonds und Genehmigung des Steuerfusses 2026 in Wil',
     'blog.article.stadtfonds-steuerfuss-wil.excerpt': 'Das Stadtparlament hat das Reglement Stadtfonds am 27.',
     'blog.article.stadtfonds-steuerfuss-wil.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.kolumbanstrasse-nuova-velostrasse.title': 'Kolumbanstrasse neu gestaltet: mehr Grün und barrierefreie Bushaltestellen',
+    'blog.article.kolumbanstrasse-nuova-velostrasse.excerpt': 'Am 23. Oktober 2026 wurde die neue Gestaltung der Kolumbanstrasse fertiggestellt, die nun 700 Meter einer prioritären Veloroute umfasst.',
+    'blog.article.kolumbanstrasse-nuova-velostrasse.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;

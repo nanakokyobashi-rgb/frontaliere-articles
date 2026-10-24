@@ -193,4 +193,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'kolumbanstrasse-nuova-velostrasse',
+ category: 'novita',
+ date: '2026-10-24T09:05:50.183Z',
+ image: '/images/blog/article-kolumbanstrasse-nuova-velostrasse.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
