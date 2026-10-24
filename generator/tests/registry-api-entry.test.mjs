@@ -30,8 +30,9 @@ import {
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 
 // Misurati il 2026-10-04 sull'API pubblicata al commit 50e046f4e
-// (articles.json 4125 voci, swiss-articles.json 2552): unione delle chiavi.
-const PUBLISHED_FIELDS_BEFORE_ARTICLE_TYPE = [
+// (articles.json 4125 voci, swiss-articles.json 2552), con il campo di
+// provenienza aggiunto esplicitamente dal contratto site #15125.
+const EXPECTED_PUBLIC_REGISTRY_FIELDS = [
   'id',
   'category',
   'date',
@@ -40,11 +41,12 @@ const PUBLISHED_FIELDS_BEFORE_ARTICLE_TYPE = [
   'hasCalculator',
   'authorSlug',
   'authorName',
+  'aiAssisted',
 ];
 
 describe('voce pubblica del registry (allowlist)', () => {
-  test('l\'allowlist e\' esattamente il contratto pubblicato prima di articleType', () => {
-    assert.deepEqual([...PUBLIC_REGISTRY_FIELDS].sort(), [...PUBLISHED_FIELDS_BEFORE_ARTICLE_TYPE].sort());
+  test('l\'allowlist espone anche la provenienza dichiarata, non i campi interni', () => {
+    assert.deepEqual([...PUBLIC_REGISTRY_FIELDS].sort(), [...EXPECTED_PUBLIC_REGISTRY_FIELDS].sort());
     assert.ok(!PUBLIC_REGISTRY_FIELDS.includes('articleType'));
     assert.ok(!PUBLIC_REGISTRY_FIELDS.includes('verifiedAt'));
     assert.ok(Object.isFrozen(PUBLIC_REGISTRY_FIELDS));
@@ -62,15 +64,17 @@ describe('voce pubblica del registry (allowlist)', () => {
       verifiedAt: '2026-10-06',
       authorSlug: 'redazione',
       authorName: 'Redazione',
+      aiAssisted: false,
       campoInternoFuturo: { qualunque: true },
     };
     const out = toPublicRegistryEntry(registryEntry, 'abc123');
-    assert.deepEqual(Object.keys(out).sort(), [...PUBLISHED_FIELDS_BEFORE_ARTICLE_TYPE, 'commit'].sort());
+    assert.deepEqual(Object.keys(out).sort(), [...EXPECTED_PUBLIC_REGISTRY_FIELDS, 'commit'].sort());
     assert.equal(out.commit, 'abc123');
     assert.equal(out.id, 'esempio-evergreen');
     assert.equal('articleType' in out, false);
     assert.equal('verifiedAt' in out, false);
     assert.equal('campoInternoFuturo' in out, false);
+    assert.equal(out.aiAssisted, false);
     // la voce sorgente non viene toccata
     assert.equal(registryEntry.articleType, 'evergreen');
     assert.equal('commit' in registryEntry, false);
@@ -78,10 +82,10 @@ describe('voce pubblica del registry (allowlist)', () => {
 
   test('campi opzionali assenti o undefined restano assenti; ordine della sorgente', () => {
     const out = toPublicRegistryEntry(
-      { image: 'i', id: 'x', articleType: 'news', category: 'novita', date: '2026-10-04', hasCalculator: true, updatedAt: undefined },
+      { image: 'i', id: 'x', articleType: 'news', category: 'novita', date: '2026-10-04', hasCalculator: true, aiAssisted: false, updatedAt: undefined },
       'c',
     );
-    assert.deepEqual(Object.keys(out), ['image', 'id', 'category', 'date', 'hasCalculator', 'commit']);
+    assert.deepEqual(Object.keys(out), ['image', 'id', 'category', 'date', 'hasCalculator', 'aiAssisted', 'commit']);
   });
 
   test('build-api.mjs pubblica il registry solo tramite la proiezione', () => {

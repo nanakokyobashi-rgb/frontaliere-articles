@@ -51,6 +51,7 @@ import {
   SECTION_SITEMAPS,
   ARCHIVE_SITEMAP,
   countSourceSitemapEntries,
+  countSourceArchiveHtmlPages,
   countSourceArchiveSitemapUrls,
   SEO_CHUNK_DIR,
   IMAGE_SOURCE_DIRS,
@@ -230,6 +231,13 @@ function archiveSitemapSource(expected) {
   return { errors, total };
 }
 
+function archiveHtmlPagesSource(expected) {
+  return {
+    errors: Object.entries(expected.sourceArchiveHtmlPageErrors ?? {}),
+    pages: expected.sourceArchiveHtmlPages ?? {},
+  };
+}
+
 function feedPopulationReference(expected, section) {
   const current = expected.feedSources?.[section] ?? 0;
   const previous = expected.previousFeedSources?.[section];
@@ -239,9 +247,9 @@ function feedPopulationReference(expected, section) {
 /**
  * Il nucleo puro: date le misure, quali pavimenti sono sfondati.
  *
- * @param {{articleCounts: Record<string, number>, sitemaps?: Record<string, number>, feeds: {name: string, items: number, latestPublication?: {datePublished: string, timestamp: number}|null}[],
+ * @param {{articleCounts: Record<string, number>, archiveHtmlPages?: Record<string, number>, sitemaps?: Record<string, number>, feeds: {name: string, items: number, latestPublication?: {datePublished: string, timestamp: number}|null}[],
  *          missingFeeds?: string[], unpublishedFamilySections?: string[], images: number|null, imageErrors?: string[]}} measured  cio' che l'artefatto dichiara
- * @param {{sourceArticles: Record<string, number>, sourceSitemaps?: Record<string, number>, sourceArchiveSitemapUrls?: Record<string, number>, sourceArchiveSitemapErrors?: Record<string, string>, feedSources: Record<string, number>,
+ * @param {{sourceArticles: Record<string, number>, sourceSitemaps?: Record<string, number>, sourceArchiveHtmlPages?: Record<string, number>, sourceArchiveHtmlPageErrors?: Record<string, string>, sourceArchiveSitemapUrls?: Record<string, number>, sourceArchiveSitemapErrors?: Record<string, string>, feedSources: Record<string, number>,
  *          previousFeedSources?: Record<string, number|null>, sourceImages: number|null,
  *          latestSeoPublications?: Record<string, {articleId: string, datePublished: string, timestamp: number}|null>,
  *          rssMaxItems: number}} expected   cio' che il corpus
@@ -336,6 +344,28 @@ export function floorViolations(measured, expected, retention = undefined) {
               `(pavimento ${min}) — sitemap archive troncata`,
           );
         }
+      }
+    }
+  }
+
+  // The sitemap floor deliberately remains page-1-only (four canonical
+  // locale URLs). The HTML archive is a separate reachability surface: its
+  // page-1..page-N chain must be present in full, even though page 2+ is
+  // intentionally absent from the public sitemap.
+  const { errors: archiveHtmlErrors, pages: archiveHtmlSources } = archiveHtmlPagesSource(expected);
+  for (const [section, message] of archiveHtmlErrors) {
+    violations.push(`archive HTML ${section}: riferimento sorgente non verificabile — ${message}`);
+  }
+  if (archiveHtmlErrors.length === 0 && Object.keys(archiveHtmlSources).length > 0) {
+    for (const [section, source] of Object.entries(archiveHtmlSources)) {
+      const declared = measured.archiveHtmlPages?.[section];
+      if (!Number.isSafeInteger(declared)) {
+        violations.push(`archive HTML ${section}: cardinalità page-1..page-N assente`);
+      } else if (declared !== source) {
+        violations.push(
+          `archive HTML ${section}: ${declared} pagine contro ${source} pagine sorgente ` +
+            `(catena page-1..page-N incompleta o divergente)`,
+        );
       }
     }
   }
@@ -644,7 +674,16 @@ export function measureDist(distDir) {
 
   const unpublishedFamilySections = unpublishedFamilySectionsOf(distDir);
 
-  return { articleCounts: manifest.counts ?? {}, sitemaps, feeds, missingFeeds, images, imageErrors, unpublishedFamilySections };
+  return {
+    articleCounts: manifest.counts ?? {},
+    archiveHtmlPages: manifest.counts?.archiveHtmlPages,
+    sitemaps,
+    feeds,
+    missingFeeds,
+    images,
+    imageErrors,
+    unpublishedFamilySections,
+  };
 }
 
 /** Riconta il corpus sorgente, che e' il riferimento esterno all'artefatto. */
@@ -682,6 +721,8 @@ export async function expectFromCorpus(root) {
   const sourceSitemaps = {};
   const sourceArchiveSitemapUrls = {};
   const sourceArchiveSitemapErrors = {};
+  const sourceArchiveHtmlPages = {};
+  const sourceArchiveHtmlPageErrors = {};
   for (const section of Object.keys(SECTION_COUNTERS)) {
     try {
       sourceSitemaps[section] = countSourceSitemapEntries(root, section);
@@ -698,6 +739,12 @@ export async function expectFromCorpus(root) {
       if (error?.code !== 'MISSING_CORPUS') throw error;
       sourceArchiveSitemapErrors[section] = error.message;
     }
+    try {
+      sourceArchiveHtmlPages[section] = countSourceArchiveHtmlPages(root, section);
+    } catch (error) {
+      if (error?.code !== 'MISSING_CORPUS') throw error;
+      sourceArchiveHtmlPageErrors[section] = error.message;
+    }
   }
   return {
     // Le sezioni con contatore proprio nel manifest, dal core: non una coppia scritta a mano.
@@ -707,6 +754,8 @@ export async function expectFromCorpus(root) {
     ...(Object.keys(sourceSitemaps).length ? { sourceSitemaps } : {}),
     ...(Object.keys(sourceArchiveSitemapUrls).length ? { sourceArchiveSitemapUrls } : {}),
     ...(Object.keys(sourceArchiveSitemapErrors).length ? { sourceArchiveSitemapErrors } : {}),
+    ...(Object.keys(sourceArchiveHtmlPages).length ? { sourceArchiveHtmlPages } : {}),
+    ...(Object.keys(sourceArchiveHtmlPageErrors).length ? { sourceArchiveHtmlPageErrors } : {}),
     feedSources,
     previousFeedSources,
     latestSeoPublications,

@@ -131,6 +131,7 @@ import {
   ARCHIVE_ALL_SLUG,
   buildSitemap,
   buildFamilySectionSitemap,
+  isPaginationSitemapEligible,
   countSitemapEntries,
   publishedArticleLocales,
 } from './lib/build-sitemap.mjs';
@@ -185,6 +186,7 @@ import {
   ARCHIVE_SITEMAP,
   countSourceArticles,
   countSourceSitemapEntries,
+  countSourceArchiveHtmlPages,
   familyFloorVerdict,
   floorPolicyOf,
   sectionFloor,
@@ -803,8 +805,9 @@ if (familySitemapRows.length > 0) {
 // the site build writes — and the site stopped emitting these pages when
 // BUILD_EMIT_SKIP went on, while fast-publish (which does emit them) passes
 // `sitemapEntries: []`. Measured on the live index: zero archive URLs across
-// every sitemap it lists. With every locale now emitting every page, that is
-// ~240 indexable pages declared nowhere.
+// every sitemap it lists. Every locale still emits the full HTML page chain,
+// but only the canonical page 1 is announced below; page 2+ is noindex and
+// remains reachable through the archive pager.
 //
 // Page count comes from the SAME union the emitter paginates
 // (`readArticleArchiveUnionSlugs`), so this file cannot list a page the
@@ -825,6 +828,7 @@ function archiveBase(section, locale) {
 }
 
 const archiveSources = {};
+const archiveHtmlPages = {};
 function buildArchiveSitemap() {
   const urls = [];
   const familyRows = [];
@@ -842,9 +846,18 @@ function buildArchiveSitemap() {
       );
     }
     const pages = Math.max(1, Math.ceil(total / ARTICLES_PAGE_SIZE));
+    const sourceHtmlPages = countSourceArchiveHtmlPages(ROOT, section);
+    if (pages !== sourceHtmlPages) {
+      throw new Error(
+        `${section} archive HTML chain has ${pages} pages, but the corpus source requires ${sourceHtmlPages} ` +
+          '— refusing to publish a divergent archive navigator',
+      );
+    }
+    archiveHtmlPages[section] = pages;
     archiveSources[section] = { total, floor, pages };
     for (const locale of LOCALES) {
       for (let page = 1; page <= pages; page++) {
+        if (!isPaginationSitemapEligible(page)) continue;
         const base = archiveBase(section, locale);
         const loc = page === 1 ? base : `${base.slice(0, -1)}/page-${page}/`;
         const parts = [`  <url>`, `    <loc>${SITE}${loc}</loc>`];
@@ -1577,6 +1590,10 @@ write('manifest.json', {
       [family.api.sitemapCounter, family.sections.reduce((n, section) => n + sitemapCounts[section.section], 0)],
     ])),
     sitemapArchiveUrls: sitemapCounts.archive,
+    // Distinct from sitemapArchiveUrls: page 2+ is deliberately noindex and
+    // omitted from the public XML, but every HTML page must remain reachable
+    // through the pager. The verifier checks this chain independently.
+    archiveHtmlPages,
     rssFeeds: rssFeedCount,
     rssItems: rssItemTotal,
     tickerArticles: tickerArticles.length,
@@ -1842,10 +1859,14 @@ console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`
   };
 
   // `tickerArticlesShadowed` conta cio' che e' stato ESCLUSO dal ticker:
-  // non ha una controparte fra i byte serviti, per costruzione. Va elencato
-  // qui e non semplicemente dimenticato, perche' il controllo di
-  // esaustivita' sotto e' la parte che protegge dal contatore FUTURO.
-  const NOT_ON_DISK = new Set(['tickerArticlesShadowed']);
+  // non ha una controparte fra i byte serviti, per costruzione. La catena
+  // HTML dell'archivio viene invece servita dal sito, non da un artefatto
+  // `dist/api/` del corpus: il gate dei conteggi non puo' ri-derivarne i byte.
+  // Il verifier di publish la confronta comunque, separatamente, con la
+  // cardinalita' sorgente e rifiuta una catena page-1..page-N divergente.
+  // Entrambi vanno elencati qui perche' il controllo di esaustivita' sotto e'
+  // la parte che protegge dal contatore FUTURO.
+  const NOT_ON_DISK = new Set(['tickerArticlesShadowed', 'archiveHtmlPages']);
   // `bySection` non e' un numero: e' la stessa cardinalita' dei contatori
   // storici, per sezione. Si ri-deriva dai byte serviti come gli altri e si
   // confronta per valore qui sotto, quindi NON sta in NOT_ON_DISK.
