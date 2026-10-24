@@ -317,8 +317,10 @@ export function buildFamilySectionSitemap({
   );
   const pageUrls = [];
   for (const page of familySectionPages(section, archiveUnionSize(meta, slugMap), pageSize)) {
-    const pageNumber = page.key === 'archive' ? 1 : Number(page.key.slice('archive:'.length));
-    if (!isPaginationSitemapEligible(pageNumber)) continue;
+    if (page.key === 'archive' || page.key.startsWith('archive:')) {
+      const pageNumber = page.key === 'archive' ? 1 : Number(page.key.slice('archive:'.length));
+      if (!isPaginationSitemapEligible(pageNumber)) continue;
+    }
     if (SITEMAP_LOCALES.some((loc) => retiredPaths.has(page.paths[loc]))) continue;
     for (const loc of SITEMAP_LOCALES) {
       const parts = [`  <url>`, `    <loc>${SITE}${xmlEsc(page.paths[loc])}</loc>`];
