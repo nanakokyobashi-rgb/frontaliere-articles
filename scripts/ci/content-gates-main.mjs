@@ -253,6 +253,10 @@ export const CONTENT_GATES = [
   // la issue dei gate invece di costare un articolo a run.
   'generator/tests/post-rebase-uniqueness-corpus.test.mjs',
   'generator/tests/prompt-placeholder-guard.test.mjs',
+  // Il segnaposto «...» di un corpo mai tradotto: l'engine lo rende noindex
+  // con <p>...</p>, e il guard qui sopra non ha una regola per l'ellissi. Un
+  // produttore che lo scrive direttamente su main deve aprire la issue.
+  'generator/tests/body-ellipsis-placeholder-gate.test.mjs',
   // Ogni voce di registry nata dal cutover dichiara `articleType`, e ogni
   // `verifiedAt` ha la sua prova nel ledger delle verifiche.
   'generator/tests/registry-article-type.test.mjs',
