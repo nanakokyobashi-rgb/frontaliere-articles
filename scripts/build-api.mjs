@@ -131,6 +131,7 @@ import {
   ARCHIVE_ALL_SLUG,
   buildSitemap,
   buildFamilySectionSitemap,
+  isPaginationSitemapEligible,
   countSitemapEntries,
   publishedArticleLocales,
 } from './lib/build-sitemap.mjs';
@@ -803,8 +804,9 @@ if (familySitemapRows.length > 0) {
 // the site build writes — and the site stopped emitting these pages when
 // BUILD_EMIT_SKIP went on, while fast-publish (which does emit them) passes
 // `sitemapEntries: []`. Measured on the live index: zero archive URLs across
-// every sitemap it lists. With every locale now emitting every page, that is
-// ~240 indexable pages declared nowhere.
+// every sitemap it lists. Every locale still emits the full HTML page chain,
+// but only the canonical page 1 is announced below; page 2+ is noindex and
+// remains reachable through the archive pager.
 //
 // Page count comes from the SAME union the emitter paginates
 // (`readArticleArchiveUnionSlugs`), so this file cannot list a page the
@@ -845,6 +847,7 @@ function buildArchiveSitemap() {
     archiveSources[section] = { total, floor, pages };
     for (const locale of LOCALES) {
       for (let page = 1; page <= pages; page++) {
+        if (!isPaginationSitemapEligible(page)) continue;
         const base = archiveBase(section, locale);
         const loc = page === 1 ? base : `${base.slice(0, -1)}/page-${page}/`;
         const parts = [`  <url>`, `    <loc>${SITE}${loc}</loc>`];

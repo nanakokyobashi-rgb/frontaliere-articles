@@ -722,18 +722,21 @@ export function countSourceSitemapEntries(root, section) {
 }
 
 /**
- * Cardinalità attesa dell'archive sitemap, derivata dai due input che il
- * writer TS unisce: meta title-keys IT e chiavi della slug map. Il conteggio
- * resta indipendente dal documento XML scritto, così la verifica può
- * distinguere un corpus corto da una serializzazione corta.
+ * Cardinalità attesa dell'archive sitemap. Il writer può emettere tutte le
+ * pagine HTML dell'archivio, ma la sitemap pubblica annuncia soltanto la
+ * pagina canonica 1 per sezione e locale: le pagine 2+ sono noindex e restano
+ * raggiungibili dal pager. Il conteggio resta indipendente dal documento XML
+ * scritto, così la verifica può distinguere un corpus corto da una
+ * serializzazione corta.
  */
 export function countSourceArchiveSitemapUrls(root, section) {
+  // Keep the source reads as a fail-closed check: a missing metadata or slug
+  // surface must still stop the floor calculation even though page 1 has a
+  // fixed cardinality.
   const metaRel = sourceOf(section).metaFile('it');
-  const metaIds = metadataArticleIds(readReference(root, metaRel, `${section} Italian metadata`));
-  const slugMap = readSlugMap(root, section);
-  const unionSize = new Set([...metaIds, ...Object.keys(slugMap)]).size;
-  const pages = Math.max(1, Math.ceil(unionSize / ARTICLES_PAGE_SIZE));
-  return pages * SECTION_META_LOCALES.length;
+  readReference(root, metaRel, `${section} Italian metadata`);
+  readSlugMap(root, section);
+  return SECTION_META_LOCALES.length;
 }
 
 /** Quante immagini hero ci sono in sorgente. */

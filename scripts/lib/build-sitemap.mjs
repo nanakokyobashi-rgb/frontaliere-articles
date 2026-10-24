@@ -207,6 +207,11 @@ export function sectionPathsOf(section, all = ARTICLE_SECTION_CORE_ALL) {
 /** Lo slug dell'archivio completo per locale (`/<sezione>/tutti/` e la sua catena `page-N`). */
 export const ARCHIVE_ALL_SLUG = Object.freeze({ it: 'tutti', en: 'all', de: 'alle', fr: 'tous' });
 
+/** Only the canonical first archive page belongs in a public sitemap. */
+export function isPaginationSitemapEligible(page) {
+  return Number.isSafeInteger(page) && page === 1;
+}
+
 const SITEMAP_LOCALES = ['it', 'en', 'de', 'fr'];
 
 /**
@@ -312,6 +317,8 @@ export function buildFamilySectionSitemap({
   );
   const pageUrls = [];
   for (const page of familySectionPages(section, archiveUnionSize(meta, slugMap), pageSize)) {
+    const pageNumber = page.key === 'archive' ? 1 : Number(page.key.slice('archive:'.length));
+    if (!isPaginationSitemapEligible(pageNumber)) continue;
     if (SITEMAP_LOCALES.some((loc) => retiredPaths.has(page.paths[loc]))) continue;
     for (const loc of SITEMAP_LOCALES) {
       const parts = [`  <url>`, `    <loc>${SITE}${xmlEsc(page.paths[loc])}</loc>`];

@@ -75,6 +75,7 @@ import {
   buildFamilySectionSitemap,
   buildSitemap,
   familySectionPages,
+  isPaginationSitemapEligible,
   SECTION_PATHS,
 } from '../../scripts/lib/build-sitemap.mjs';
 import { countXmlTags } from '../../scripts/lib/count-xml-tags.mjs';
@@ -343,8 +344,8 @@ test('sitemap di sezione: landing, 6 hub indicizzabili, archivio paginato, artic
   ];
   const slugMap = Object.fromEntries(entries.map(({ id }) => [id, { it: `${id}-it`, en: `${id}-en`, de: `${id}-de`, fr: `${id}-fr` }]));
   const built = buildFamilySectionSitemap({ section: 'canton-ti', entries, slugMap, meta: {}, pageSize: 2 });
-  // (landing + 6 hub + 2 pagine d'archivio) x 4 locali + 3 articoli x 4 locali.
-  assert.equal(built.pageCount, (1 + 6 + 2) * 4);
+  // (landing + 6 hub + canonical page-1 archive) x 4 locali + 3 articoli x 4 locali.
+  assert.equal(built.pageCount, (1 + 6 + 1) * 4);
   assert.equal(built.articleCount, 3);
   assert.equal(built.articleUrlCount, 3 * 4);
   assert.deepEqual(built.articleLocaleCounts, { it: 3, en: 3, de: 3, fr: 3 });
@@ -353,12 +354,11 @@ test('sitemap di sezione: landing, 6 hub indicizzabili, archivio paginato, artic
   for (const loc of [
     '/articoli-ticino/', '/en/ticino-articles/', '/articoli-ticino/carburanti/', '/en/ticino-articles/fuel/',
     '/de/tessin-artikel/dienstleistungen/', '/fr/articles-tessin/fiscalite/', '/articoli-ticino/tutti/',
-    '/articoli-ticino/tutti/page-2/', '/de/tessin-artikel/alle/page-2/',
     '/articoli-ticino/a-it/', '/en/ticino-articles/a-en/', '/de/tessin-artikel/a-de/', '/fr/articles-tessin/a-fr/',
   ]) {
     assert.ok(built.xml.includes(`<loc>https://frontaliereticino.ch${loc}</loc>`), loc);
   }
-  assert.ok(!built.xml.includes('/tutti/page-3/'));
+  assert.ok(!built.xml.includes('/tutti/page-2/'));
   assert.ok(!/noindex/.test(built.xml));
   // Gli articoli hanno la stessa forma della sitemap blog.
   const blocks = buildArticleUrlBlocks(entries, { it: '/articoli-ticino/', en: '/en/ticino-articles/', de: '/de/tessin-artikel/', fr: '/fr/articles-tessin/' }, slugMap, {});
@@ -381,6 +381,13 @@ test('sitemap di sezione: landing, 6 hub indicizzabili, archivio paginato, artic
   // Sezione senza articoli: le pagine ci sono comunque, archivio di una pagina.
   assert.equal(familySectionPages('canton-gr', 0, 24).length, 1 + 6 + 1);
   assert.throws(() => familySectionPages('frontaliere', 0, 24), /hub tematici/);
+});
+
+test('la policy sitemap paginata ammette solo la pagina canonica 1', () => {
+  assert.equal(isPaginationSitemapEligible(1), true);
+  assert.equal(isPaginationSitemapEligible(2), false);
+  assert.equal(isPaginationSitemapEligible(0), false);
+  assert.equal(isPaginationSitemapEligible(Number.NaN), false);
 });
 
 test('sitemap di famiglia rifiuta uno slug hub mancante prima di interpolarlo', () => {
@@ -1527,7 +1534,8 @@ test('edge: purge a blocchi da 30 senza duplicati', () => {
 test('sitemap di sezione: le pagine d\'archivio si contano sull\'unione del renderer (meta IT ∪ mappa slug)', () => {
   assert.equal(archiveUnionSize({ 'blog.article.a.title': 'A', 'blog.article.b.title': 'B', 'blog.article.a.excerpt': 'x' }, { b: {}, c: {} }), 3);
   assert.equal(archiveUnionSize(undefined, undefined), 0);
-  // 3 id nell'unione ma un solo articolo con slug IT: l'archivio ha 2 pagine (pageSize 2), e la sitemap le elenca entrambe.
+  // 3 id nell'unione ma un solo articolo con slug IT: il renderer ha 2 pagine
+  // (pageSize 2), ma la sitemap annuncia soltanto la pagina canonica 1.
   const built = buildFamilySectionSitemap({
     section: 'canton-ti',
     entries: [{ id: 'a', date: '2026-10-01' }, { id: 'b', date: '2026-10-01' }],
@@ -1536,7 +1544,7 @@ test('sitemap di sezione: le pagine d\'archivio si contano sull\'unione del rend
     pageSize: 2,
   });
   assert.equal(built.articleCount, 1);
-  assert.ok(built.xml.includes('<loc>https://frontaliereticino.ch/articoli-ticino/tutti/page-2/</loc>'));
+  assert.ok(!built.xml.includes('<loc>https://frontaliereticino.ch/articoli-ticino/tutti/page-2/</loc>'));
 });
 
 test('sitemap cantonale: una traduzione assente non diventa una loc o un alternate 404', () => {
