@@ -3997,15 +3997,23 @@ test('reconcile-section-pages.yml: dispatch per sezione, niente catena stretta',
   const globalReplay = wf.slice(wf.indexOf('- name: Replay API after all staged backfills'));
   const postBackfillProbe = globalReplay.indexOf('reconcile-sections-after-backfill.json');
   const postBackfillMissingGuard = globalReplay.indexOf('.counts.missingPages // 0');
+  const finalHeadGuard = globalReplay.indexOf('verifyMainHeadAtDispatch() {');
+  const finalHeadComparison = globalReplay.indexOf('if [ "$current_main" != "$SOURCE_COMMIT" ]', finalHeadGuard);
   const globalApiDispatch = globalReplay.indexOf('gh workflow run publish-api.yml');
   assert.ok(
-    postBackfillProbe >= 0 && postBackfillMissingGuard > postBackfillProbe && globalApiDispatch > postBackfillMissingGuard,
-    'il replay globale deve risondare la superficie dopo tutte le run e prima del dispatch API',
+    postBackfillProbe >= 0
+      && postBackfillMissingGuard > postBackfillProbe
+      && finalHeadGuard > postBackfillMissingGuard
+      && finalHeadComparison > finalHeadGuard
+      && globalApiDispatch > finalHeadComparison,
+    'il replay globale deve risondare la superficie e la HEAD di main prima del dispatch API',
   );
   assert.match(globalReplay, /if \.skip then "true" else "false" end/);
   assert.match(globalReplay, /\.pendingEdgeFlip \/\/ false/);
   assert.match(wf, /current_main="\$\(bash scripts\/ci\/read-main-head\.sh\)"/);
   assert.match(wf, /main e' avanzata dopo la detection \(\$SOURCE_COMMIT -> \$current_main\)/);
+  assert.match(globalReplay, /main e' avanzata dopo la verifica post-backfill \(\$SOURCE_COMMIT -> \$current_main\)/);
+  assert.match(globalReplay, /if verifyMainHeadAtDispatch; then/);
   assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
   assert.match(wf, /pending_edge_flip=\$\(jq -r '\.pendingEdgeFlip \/\/ false'/);
   assert.match(wf, /skip=\$\(jq -r 'if \.skip then \\"true\\" else \\"false\\" end'/);
