@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-cambio-ora-rischio-wildunfalli.webp",
+      "sha256": "bc20f2579ee22410e5c9f3724ee8aaad6879ac4a365b91674baf2d5b319142dc"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-cambio-ora-rischio-wildunfalli-480w.webp",
+      "sha256": "b9f51d3977c85425658ab9c2ed9c9586a194ef43db329a26fc9db14890d151ba"
+    }
+  ]
 }
