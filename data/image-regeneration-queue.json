@@ -12,95 +12,64 @@
       "lastFailureAt": "2026-10-25T16:50:58.700Z"
     },
     {
-      "articleId": "opportunita-impiego-federale",
-      "title": "Lavorare per l'Amministrazione federale: 50 formazioni",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-opportunita-impiego-federale: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration of a person working in a Swiss-looking studio; no text, logos, or identifiable fa",
-      "status": "queued",
-      "failureCount": 11,
-      "requestedAt": "2026-10-15T01:49:05.613Z",
-      "lastFailureAt": "2026-10-19T07:43:21.378Z"
-    },
-    {
       "articleId": "maratona-laghi-varese-2027",
       "title": "Maratona dei Laghi 2027: attesi 2000 runner tra Varese e Monate",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-maratona-laghi-varese-2027: openai-codex (vision gate rejected image: Generic synthetic lakeside running illustration; the clearly visible foreground runner violates the no-recognizable-foreground-pers",
-      "status": "queued",
-      "failureCount": 7,
+      "reason": "All image providers failed for article-maratona-laghi-varese-2027: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to a lakeside running event, but the foreground runner is recognizable from behind.); ge",
+      "status": "failed",
+      "failureCount": 8,
       "requestedAt": "2026-10-16T13:10:19.548Z",
-      "lastFailureAt": "2026-10-19T07:44:21.087Z"
+      "lastFailureAt": "2026-10-25T17:01:48.227Z"
     },
     {
       "articleId": "giovani-lavoro-futuro-ticino",
       "title": "Ai giovani non basta un lavoro. Serve un futuro",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
-      "reason": "All image providers failed for article-giovani-lavoro-futuro-ticino: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Ticino commuting, but it includes a clearly recognizable foreground person viewed f",
-      "status": "queued",
-      "failureCount": 6,
+      "reason": "All image providers failed for article-giovani-lavoro-futuro-ticino: openai-codex (vision gate rejected image: Original-looking synthetic editorial illustration of a commuter in a Ticino-like alpine lakeside setting; the foreground person i",
+      "status": "failed",
+      "failureCount": 7,
       "requestedAt": "2026-10-16T17:37:12.235Z",
-      "lastFailureAt": "2026-10-19T07:55:14.996Z"
+      "lastFailureAt": "2026-10-25T17:03:11.216Z"
     },
     {
       "articleId": "franchigia-accordo-redditi-single",
       "title": "Credito d'imposta 2026: calcolo per il frontaliere single",
       "fallbackImage": "/images/blog/article-credito-imposta-famiglia-2026.webp",
-      "reason": "All image providers failed for article-franchigia-accordo-redditi-single: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Ticino rail commuting, but it contains a recognizable foreground person viewed",
-      "status": "queued",
-      "failureCount": 2,
+      "reason": "All image providers failed for article-franchigia-accordo-redditi-single: openai-codex (vision gate rejected image: Synthetic photorealistic editorial scene relevant to commuting and tax calculation, but it includes a recognizable foregroun",
+      "status": "failed",
+      "failureCount": 3,
       "requestedAt": "2026-10-18T03:51:56.775Z",
-      "lastFailureAt": "2026-10-19T07:58:35.237Z"
+      "lastFailureAt": "2026-10-25T17:04:42.385Z"
     },
     {
       "articleId": "passaggio-nuovo-impiego-g",
       "title": "Cambio datore per frontalieri: permesso G e procedura 2026",
       "fallbackImage": "/images/blog/cambio-datore-lavoro-frontaliere-procedura-permesso-2026-single.webp",
-      "reason": "All image providers failed for article-passaggio-nuovo-impiego-g: openai-codex (vision gate rejected image: Generic synthetic commuter-train scene relevant to Ticino cross-border travel, but it includes a recognizable foreground person view",
-      "status": "queued",
-      "failureCount": 2,
+      "reason": "All image providers failed for article-passaggio-nuovo-impiego-g: openai-codex (vision gate rejected image: Generic synthetic commuter scene with no readable text or visible logos, but it includes a recognizable foreground person viewed fro",
+      "status": "failed",
+      "failureCount": 3,
       "requestedAt": "2026-10-18T05:22:21.056Z",
-      "lastFailureAt": "2026-10-19T07:59:55.456Z"
+      "lastFailureAt": "2026-10-25T17:05:41.900Z"
     },
     {
       "articleId": "g-verifica-datore-20km",
       "title": "Cambio datore per frontalieri entro 20 km: permesso G",
       "fallbackImage": "/images/blog/frontalieri-regime-fiscale-nuovo-accordo.webp",
-      "reason": "All image providers failed for article-g-verifica-datore-20km: openai-codex (vision gate rejected image: Generic synthetic commuting scene relevant to Ticino cross-border travel, but it includes blank road signage.); gemini (Gemini image re",
-      "status": "queued",
-      "failureCount": 1,
+      "reason": "All image providers failed for article-g-verifica-datore-20km: openai-codex (vision gate rejected image: Synthetic scenic illustration relevant to Ticino commuting, but it contains a recognizable foreground person viewed from behind.); gemi",
+      "status": "failed",
+      "failureCount": 2,
       "requestedAt": "2026-10-18T05:51:33.759Z",
-      "lastFailureAt": "2026-10-19T08:01:29.501Z",
-      "retryHint": "no-text"
+      "lastFailureAt": "2026-10-25T17:07:00.443Z"
     },
     {
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Synthetic photorealistic illustration with no visible text, logos, or faces; it includes a prominent foreground commuter and does not ",
-      "status": "queued",
-      "failureCount": 1,
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Generic synthetic commuter scene, but it contains a recognizable foreground person from behind and does not clearly match Arianna di C",
+      "status": "failed",
+      "failureCount": 2,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-10-19T08:04:24.326Z"
-    },
-    {
-      "articleId": "frontalieri-vendemmia-tasse-ristorni-settembre",
-      "title": "Frontalieri: vendemmia a 15 franchi, tassa ingresso 4mila, 900 mln disoccupati",
-      "fallbackImage": "/images/blog/article-tassa-salute-ristorni-17-settembre.webp",
-      "reason": "All image providers failed for article-frontalieri-vendemmia-tasse-ristorni-settembre: openai-codex (vision gate rejected image: Generic synthetic vineyard scene relevant to Ticino",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-18T07:49:25.309Z",
-      "lastFailureAt": "2026-10-18T07:49:25.309Z"
-    },
-    {
-      "articleId": "incendio-via-cortivallo",
-      "title": "Lugano, incendio in Via Cortivallo: una persona deceduta",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-incendio-via-cortivallo: openai-codex (vision gate rejected image: Relevant synthetic fire-response scene, but multiple recognizable firefigh",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-18T08:02:44.198Z",
-      "lastFailureAt": "2026-10-18T08:02:44.198Z"
+      "lastFailureAt": "2026-10-25T17:07:58.096Z"
     },
     {
       "articleId": "competitivita-svizzera-ocse-berna",

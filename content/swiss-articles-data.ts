@@ -27736,7 +27736,7 @@ const RAW_SWISS_ARTICLES: Article[] = [
     id: 'opportunita-impiego-federale',
     category: 'pratico',
     date: '2026-10-15T01:49:05.265Z',
-    image: '/images/places/lugano-view.webp',
+    image: '/images/blog/article-opportunita-impiego-federale.webp',
     hasCalculator: true,
     articleType: 'news',
     authorSlug: 'redazione',
