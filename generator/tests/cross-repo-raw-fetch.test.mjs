@@ -275,6 +275,20 @@ test('una risposta non-OK autorevole conserva il timeout per il body', async () 
   await assert.rejects(response.text(), (error) => error?.name === 'TimeoutError');
 });
 
+test('un body che ignora il segnale viene comunque rifiutato dalla deadline', async () => {
+  const fetchRaw = createRawFetcher({
+    timeoutMs: 10,
+    fetchImpl: async () => ({
+      status: 200,
+      ok: true,
+      text: () => new Promise(() => {}),
+    }),
+  });
+
+  const response = await fetchRaw('https://raw.githubusercontent.com/other/repo/main/non-cooperative.yml');
+  await assert.rejects(response.text(), (error) => error?.name === 'TimeoutError');
+});
+
 test('i chiamanti cross-repo passano dal fetcher, non da `fetch` nudo', async () => {
   const fs = await import('node:fs');
   const url = await import('node:url');
