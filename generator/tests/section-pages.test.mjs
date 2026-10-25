@@ -3556,6 +3556,12 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     /timeout --signal=TERM --kill-after=1s "\$\{fetch_budget\}s"[\s\S]*git fetch/,
     'il fetch della release edge deve essere bounded e consumare il budget residuo',
   );
+  assert.match(edgeCandidate, /edge_timestamp=.*git show -s --format=%cI/);
+  assert.match(
+    edgeCandidate,
+    /git fetch --no-tags --shallow-since="\$edge_timestamp" origin[\s\S]*"\$edge_commit" "\$current_commit"/,
+    'il controllo di ancestry deve approfondire in modo connesso edge e HEAD corrente',
+  );
   assert.match(edgeCandidate, /git merge-base --is-ancestor/);
   assert.match(edgeCandidate, /git diff --quiet "\$resolved_edge" "\$current_commit" -- sections\/registry\.json/);
   assert.match(edgeCandidate, /r2-reconcile-plan "\$edge_commit"/);

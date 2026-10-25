@@ -50,6 +50,18 @@ if [ -z "$resolved_edge" ]; then
   resolved_edge="$(git rev-parse "${edge_commit}^{commit}" 2>/dev/null || true)"
 fi
 [ -n "$resolved_edge" ] || exit 1
+if ! git merge-base --is-ancestor "$resolved_edge" "$current_commit"; then
+  # Il fetch depth=1 dell'edge e quello della HEAD corrente producono due
+  # radici shallow disconnesse. Approfondiamo entrambe fino alla data dell'edge
+  # in una singola operazione bounded, così merge-base può verificare davvero
+  # l'ancestry senza materializzare data/ o public/ nel checkout.
+  edge_timestamp="$(git show -s --format=%cI "$resolved_edge" 2>/dev/null || true)"
+  [ -n "$edge_timestamp" ] || exit 1
+  fetch_budget="$(remaining_budget)" || exit 1
+  timeout --signal=TERM --kill-after=1s "${fetch_budget}s" \
+    git fetch --no-tags --shallow-since="$edge_timestamp" origin \
+    "$edge_commit" "$current_commit" >/dev/null 2>&1 || exit 1
+fi
 git merge-base --is-ancestor "$resolved_edge" "$current_commit"
 git diff --quiet "$resolved_edge" "$current_commit" -- sections/registry.json
 echo "::notice::registro edge intermedio $edge_commit coerente con main $current_commit; uso la release pubblicata" >&2
