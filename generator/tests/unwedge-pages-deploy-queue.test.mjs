@@ -70,6 +70,7 @@ test('lo script punta al publisher che esiste, e il publisher ha ancora il gate 
   const script = read('scripts/ci/unwedge-pages-deploy-queue.mjs');
   assert.match(script, /DEPLOY_QUEUE_API_TIMEOUT_MS/);
   assert.match(script, /signal:\s*AbortSignal\.timeout\(DEPLOY_QUEUE_API_TIMEOUT_MS\)/g);
+  assert.match(script, /Math\.min\(Math\.max\(1, Math\.floor\(raw\)\), 120_000\)/);
   const workflowFile = script.match(/const WORKFLOW_FILE = '([^']+)'/)?.[1];
   assert.ok(workflowFile, 'WORKFLOW_FILE non trovato nello script');
   const publisherPath = `.github/workflows/${workflowFile}`;

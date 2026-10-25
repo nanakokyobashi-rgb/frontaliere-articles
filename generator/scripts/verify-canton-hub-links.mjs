@@ -49,7 +49,7 @@ const ORIGIN = (process.env.SITE_ORIGIN || 'https://frontaliereticino.ch').repla
 const HUB_LINKS_FETCH_TIMEOUT_MS = (() => {
   const raw = Number(process.env.HUB_LINKS_FETCH_TIMEOUT_MS);
   return Number.isFinite(raw) && raw > 0
-    ? Math.min(Math.floor(raw), 120_000)
+    ? Math.min(Math.max(1, Math.floor(raw)), 120_000)
     : 30_000;
 })();
 const args = process.argv.slice(2);
@@ -73,8 +73,12 @@ async function get(url) {
       signal: AbortSignal.timeout(HUB_LINKS_FETCH_TIMEOUT_MS),
     });
   } catch (err) {
-    err.code = 'NETWORK';
-    throw err;
+    // AbortSignal.timeout() rejects with a DOMException whose `code` property
+    // is read-only in the ESM runtime. Normalize it before annotating so the
+    // intentional-noindex path keeps its fail-closed NETWORK classification.
+    const networkError = new Error(err?.message || String(err), { cause: err });
+    networkError.code = 'NETWORK';
+    throw networkError;
   }
   if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
   return res.text();

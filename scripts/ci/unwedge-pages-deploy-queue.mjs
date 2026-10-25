@@ -115,7 +115,7 @@ const DEFAULT_WEDGE_MINUTES = 45;
 const DEPLOY_QUEUE_API_TIMEOUT_MS = (() => {
   const raw = Number(process.env.DEPLOY_QUEUE_API_TIMEOUT_MS);
   return Number.isFinite(raw) && raw > 0
-    ? Math.min(Math.floor(raw), 120_000)
+    ? Math.min(Math.max(1, Math.floor(raw)), 120_000)
     : 30_000;
 })();
 // See WHAT MUST BE PROVEN: only a run of this branch may be reaped.
