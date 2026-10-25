@@ -1013,7 +1013,10 @@ jobs:
       - name: Wait for GitHub Pages origin to serve published content
         if: needs.resolve.outputs.skip != 'true' && needs.resolve.outputs.dry != 'true'
         env:
-          PAGES_WAIT_SECONDS: ${{ vars.FAST_PUBLISH_PAGES_WAIT_SECONDS || '720' }}
+          # Keep the first served-content wait aligned with the shared hard
+          # budget below. A 720s default could exhaust the old 30-minute job
+          # cap before the recovery gate even got a chance to run (#3115).
+          PAGES_WAIT_SECONDS: ${{ vars.FAST_PUBLISH_PAGES_WAIT_SECONDS || '600' }}
         run: |
           set -euo pipefail
           args=(

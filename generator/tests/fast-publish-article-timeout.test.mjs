@@ -20,3 +20,12 @@ test('fast-publish-article leaves bounded headroom for the measured upload', () 
   assert.match(publish, /timeout-minutes: 120/u);
   assert.match(publish, /Publish to shards and CDN/u);
 });
+
+test('the initial Pages wait stays inside the shared recovery budget', () => {
+  const waitStep = workflow.slice(
+    workflow.indexOf('- name: Wait for GitHub Pages origin to serve published content'),
+    workflow.indexOf('- name: Purge the edge cache for what was published'),
+  );
+  assert.match(waitStep, /FAST_PUBLISH_PAGES_WAIT_SECONDS \|\| '600'/u);
+  assert.match(workflow, /PAGES_BUILD_WAIT_BUDGET_SECONDS=600/u);
+});
