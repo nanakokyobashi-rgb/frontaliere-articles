@@ -245,18 +245,6 @@ function unescapeQuoted(value, quote) {
  * `mainEntityOfPage: `${BASE_URL}/...`` while looking for headline/date fields.
  */
 function templateLiteralEnd(source, start) {
-  const quotedEnd = (offset, quote) => {
-    for (let cursor = offset + 1; cursor < source.length; cursor += 1) {
-      if (source[cursor] === '\\') {
-        cursor += 1;
-        continue;
-      }
-      if (source[cursor] === quote) return cursor;
-      if (/\n|\r|\u2028|\u2029/u.test(source[cursor])) return -1;
-    }
-    return -1;
-  };
-
   for (let cursor = start + 1; cursor < source.length; cursor += 1) {
     if (source[cursor] === '\\') {
       cursor += 1;
@@ -264,42 +252,9 @@ function templateLiteralEnd(source, start) {
     }
     if (source[cursor] === '`') return cursor + 1;
     if (source[cursor] !== '$' || source[cursor + 1] !== '{') continue;
-
-    let depth = 1;
-    for (cursor += 2; cursor < source.length; cursor += 1) {
-      const character = source[cursor];
-      if (character === '\\') {
-        cursor += 1;
-        continue;
-      }
-      if (character === "'" || character === '"') {
-        const end = quotedEnd(cursor, character);
-        if (end < 0) return -1;
-        cursor = end;
-        continue;
-      }
-      if (character === '`') {
-        const end = templateLiteralEnd(source, cursor);
-        if (end < 0) return -1;
-        cursor = end - 1;
-        continue;
-      }
-      if (character === '/' && source[cursor + 1] === '/') {
-        const end = source.slice(cursor + 2).search(/\n|\r|\u2028|\u2029/u);
-        if (end < 0) return -1;
-        cursor += end + 1;
-        continue;
-      }
-      if (character === '/' && source[cursor + 1] === '*') {
-        const end = source.indexOf('*/', cursor + 2);
-        if (end < 0) return -1;
-        cursor = end + 1;
-        continue;
-      }
-      if (character === '{') depth += 1;
-      if (character === '}' && --depth === 0) break;
-    }
-    if (depth !== 0) return -1;
+    const expressionEnd = matchingDelimiter(source, cursor + 1);
+    if (expressionEnd < 0) return -1;
+    cursor = expressionEnd;
   }
   return -1;
 }
