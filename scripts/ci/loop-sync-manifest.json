@@ -1991,6 +1991,16 @@
       }
     },
     {
+      "path": "scripts/lib/faq-control-contract.mjs",
+      "mode": "corpus-only",
+      "reason": "Guard condiviso del publisher corpus per rifiutare control character C0, inclusi gli escape rimasti nei fallback FAQ prima della serializzazione. E' importato da batch-add-faq-to-articles.mjs e create-article.mjs, che scrivono il corpus; il sito non esegue questi producer e riceve solo la superficie JSON pubblicata via HTTP, quindi non esiste un gemello site-side da trasportare.",
+      "baseline": {
+        "site": null,
+        "corpus": "5d25199b3ab85655",
+        "alignedAt": "2026-10-25"
+      }
+    },
+    {
       "path": "generator/tests/sanitize-control-chars.test.mjs",
       "mode": "corpus-only",
       "reason": "Suite node:test del modulo sopra, piu' il guard statico che i tre emitter lo chiamino davvero: un sanificatore che nessuno invoca e' lo stesso difetto con un file in piu'. Include il caso che il byte-scan non vede — 0x08 gia' scappato in `\\b` dentro un blocco ld+json — perche' e' quello che ha fatto passare la CI verde.",
