@@ -716,6 +716,12 @@ export function resetEventImageManifestCache() {
 // clearly mis-served assets without allowing unbounded downloads.
 export const EVENT_IMAGE_MAX_BYTES = 20 * 1024 * 1024;
 const EVENT_IMAGE_USER_AGENT = 'Mozilla/5.0 (compatible; FrontaliereTicinoBot/1.0; +https://frontaliereticino.ch)';
+const DEFAULT_EVENT_IMAGE_FETCH_TIMEOUT_MS = 30_000;
+const MAX_EVENT_IMAGE_FETCH_TIMEOUT_MS = 120_000;
+const EVENT_IMAGE_FETCH_TIMEOUT_MS = Math.min(
+  Math.max(1, Math.floor(Number(process.env.EVENT_IMAGE_FETCH_TIMEOUT_MS) || DEFAULT_EVENT_IMAGE_FETCH_TIMEOUT_MS)),
+  MAX_EVENT_IMAGE_FETCH_TIMEOUT_MS,
+);
 
 // Re-encode before storing: the source sites serve print-resolution originals
 // (measured 2026-08-20 over the whole folder: 4'089 jpg/png averaging 936-1'226 KB,
@@ -921,7 +927,10 @@ export async function mirrorEventImage(sourceUrl, stableId) {
   if (existingMatch) return `/images/events/${path.basename(existingMatch)}`;
 
   try {
-    const res = await fetch(sourceUrl, { headers: { 'User-Agent': EVENT_IMAGE_USER_AGENT } });
+    const res = await fetch(sourceUrl, {
+      headers: { 'User-Agent': EVENT_IMAGE_USER_AGENT },
+      signal: AbortSignal.timeout(EVENT_IMAGE_FETCH_TIMEOUT_MS),
+    });
     if (!res.ok) {
       await cancelEventImageResponse(res);
       return null;
