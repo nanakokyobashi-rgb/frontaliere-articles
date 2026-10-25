@@ -204,4 +204,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'imprenditori-cantone-turgovia-sostegno',
+ category: 'pratico',
+ date: '2026-10-25T12:54:45.336Z',
+ image: '/images/blog/article-imprenditori-cantone-turgovia-sostegno.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

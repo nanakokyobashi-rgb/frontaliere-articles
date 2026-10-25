@@ -21,6 +21,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'pbv-rpg2-turgovia-2026': { it: 'pbv-rpg2-turgovia-2026', en: 'pbv-rpg2-thurgau-2026', de: 'pbv-rpg2-thurgau-2026', fr: 'pbv-rpg2-thurgovie-2026' },
  'turgovia-modifica-piano-direttore-2027': { it: 'turgovia-modifica-piano-direttore-2027', en: 'thurgau-master-plan-revision-2027', de: 'thurgau-richtplan-aenderung-2027', fr: 'thurgovie-revision-plan-directeur-2027' },
  'sedi-rav-lavoratori-tg': { it: 'sedi-rav-lavoratori-tg', en: 'rav-thurgau-workers-locations', de: 'rav-thurgau-arbeitsnehmer-standorte', fr: 'rav-thurgovie-travailleurs-lieux' },
+ 'imprenditori-cantone-turgovia-sostegno': { it: 'imprenditori-cantone-turgovia-sostegno', en: 'thurgau-entrepreneurs-canton-support', de: 'unternehmer-kanton-thurgau-unterstuetzung', fr: 'entrepreneurs-canton-thurgovie-soutien' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

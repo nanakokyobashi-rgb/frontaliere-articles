@@ -57,6 +57,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.sedi-rav-lavoratori-tg.title': 'Agences RAV et services pour les employeurs dans le canton de Thurgovie',
     'blog.article.sedi-rav-lavoratori-tg.excerpt': 'Les agences RAV se trouvent à Amriswil, Frauenfeld et Kreuzlingen ; les postes vacants peuvent être publiés gratuitement sur arbeit.swiss.',
     'blog.article.sedi-rav-lavoratori-tg.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.imprenditori-cantone-turgovia-sostegno.title': 'Entrepreneurs Thurgovie : conditions-cadres attractives',
+    'blog.article.imprenditori-cantone-turgovia-sostegno.excerpt': 'Le canton soutient les entrepreneuses et les entrepreneurs en leur offrant des conditions-cadres attrayantes, notamment en matière de biens immobiliers, d’autorisations et de contacts administratifs.',
+    'blog.article.imprenditori-cantone-turgovia-sostegno.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTgFr;
