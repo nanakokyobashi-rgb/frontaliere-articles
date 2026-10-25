@@ -12,6 +12,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'axenstrasse-chiusa-quattro-notti': { it: 'axenstrasse-chiusa-quattro-notti', en: 'axenstrasse-closed-four-nights', de: 'axenstrasse-vier-naechte-gesperrt', fr: 'axenstrasse-fermee-quatre-nuits' },
  'bristenstrasse-regimi-traffico-2026': { it: 'bristenstrasse-regimi-traffico-2026', en: 'bristenstrasse-traffic-rules-2026', de: 'bristenstrasse-verkehrsregime-2026', fr: 'bristenstrasse-regimes-circulation-2026' },
  'andermatt-fisco-wyden': { it: 'andermatt-fisco-wyden', en: 'andermatt-tax-wyden-postponed', de: 'andermatt-steuern-wyden', fr: 'andermatt-impots-wyden' },
+ 'felix-gisler-pensione-uri': { it: 'felix-gisler-pensione-uri', en: 'felix-gisler-uri-retirement', de: 'felix-gisler-uri-pensionierung', fr: 'felix-gisler-uri-retraite' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

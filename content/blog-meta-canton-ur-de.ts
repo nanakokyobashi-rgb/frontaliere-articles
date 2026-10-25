@@ -30,6 +30,9 @@ const blogMetaCantonUrDe: Record<string, string> = {
     'blog.article.andermatt-fisco-wyden.title': 'Andermatt senkt die Steuern: Projekt Wyden verschoben',
     'blog.article.andermatt-fisco-wyden.excerpt': 'Andermatt senkt den Steuerfuss um 5 Punkte auf 94 Prozent; der Gemeinderat verschiebt das umstrittene Projekt Wyden vorerst.',
     'blog.article.andermatt-fisco-wyden.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.felix-gisler-pensione-uri.title': 'Felix Gisler wird die Kantonsverwaltung Uri verlassen',
+    'blog.article.felix-gisler-pensione-uri.excerpt': 'Nach rund 37 Jahren wird Felix Gisler die Kantonsverwaltung Uri Ende Oktober 2026 infolge ordentlicher Pensionierung verlassen.',
+    'blog.article.felix-gisler-pensione-uri.imageAlt': 'Neutrale redaktionelle Szene eines Gebäudes der Urner Kantonsverwaltung',
 };
 
 export default blogMetaCantonUrDe;

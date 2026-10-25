@@ -105,4 +105,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'felix-gisler-pensione-uri',
+ category: 'pensione',
+ date: '2026-10-25T14:44:59.995Z',
+ image: '/images/blog/article-felix-gisler-pensione-uri.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['UR'],
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ];

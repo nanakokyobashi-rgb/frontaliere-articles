@@ -30,6 +30,9 @@ const blogMetaCantonUrFr: Record<string, string> = {
     'blog.article.andermatt-fisco-wyden.title': 'Andermatt baisse les impôts : projet Wyden reporté',
     'blog.article.andermatt-fisco-wyden.excerpt': 'Andermatt réduit le multiplicateur fiscal de 5 points, à 94 % ; le conseil communal reporte pour l’instant le projet Wyden controversé.',
     'blog.article.andermatt-fisco-wyden.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.felix-gisler-pensione-uri.title': 'Felix Gisler quittera l’administration cantonale d’Uri',
+    'blog.article.felix-gisler-pensione-uri.excerpt': 'Après environ 37 ans, Felix Gisler quittera l’administration cantonale d’Uri à la fin du mois d’octobre 2026 pour prendre sa retraite ordinaire.',
+    'blog.article.felix-gisler-pensione-uri.imageAlt': 'Scène éditoriale neutre d\'un bâtiment de l\'administration cantonale d\'Uri',
 };
 
 export default blogMetaCantonUrFr;

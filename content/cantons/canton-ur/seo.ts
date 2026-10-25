@@ -353,6 +353,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-felix-gisler-pensione-uri': {
+    title: 'Felix Gisler lascerà l\'amministrazione cantonale di Uri',
+    description: 'Felix Gisler lascerà l\'amministrazione cantonale di Uri a fine ottobre 2026, dopo circa 37 anni per pensionamento ordinario.',
+    keywords: 'frontalieri, ticino, svizzera, italia, felix, gisler, lascerà, amministrazione',
+    ogTitle: 'Felix Gisler lascia l\'amministrazione cantonale Uri',
+    ogDescription: 'La nota del Canton Uri indica che Felix Gisler, associato all\'Amt für Informatik, lascerà la Kantonsverwaltung a fine ottobre 2026 dopo circa 37 anni. Il Regierungsrat ringrazia il dipendente e gli augura ogni bene per il futuro.',
+    canonicalPath: '/articoli-uri/felix-gisler-pensione-uri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Felix Gisler lascerà l'amministrazione cantonale di Uri",
+      "description": "Felix Gisler lascerà l'amministrazione cantonale di Uri a fine ottobre 2026, dopo circa 37 anni per pensionamento ordinario.",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/article-felix-gisler-pensione-uri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scena editoriale neutra di un edificio dell'amministrazione cantonale di Uri"
+      },
+      "datePublished": "2026-10-25T14:45:00+00:00",
+      "dateModified": "2026-10-25T14:45:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-uri/felix-gisler-pensione-uri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
