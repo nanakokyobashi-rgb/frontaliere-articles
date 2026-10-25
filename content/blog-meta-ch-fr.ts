@@ -8624,6 +8624,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.epfl-eth-top-20-europee.title': 'EPFL et ETH parmi les 20 universités européennes pour les brevets déposés',
     'blog.article.epfl-eth-top-20-europee.excerpt': 'EPFL : 107 dépôts au niveau européen l\'an dernier ETH Zurich : 101 dépôts et 16ème place européenne Suisse quatrième en Europe pour 463 spin-offs 57,5% des spin-offs',
     'blog.article.epfl-eth-top-20-europee.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.referendum-legge-collettivo-lavoro.title': 'Référendum loi obligation convention collective de travail',
+    'blog.article.referendum-legge-collettivo-lavoro.excerpt': '23 octobre 2026 : référendum formellement abouti 66 006 signatures valables sur 66 574 déposées Le référendum cantonal n’a pas été validé Pour la validation',
+    'blog.article.referendum-legge-collettivo-lavoro.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

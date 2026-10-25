@@ -8624,6 +8624,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.epfl-eth-top-20-europee.title': 'EPFL ed ETH tra le 20 università europee per brevetti depositati',
     'blog.article.epfl-eth-top-20-europee.excerpt': 'EPFL: 107 depositi a livello europeo l\'anno scorso ETH Zurigo: 101 depositi e 16° posto europeo Svizzera quarta in Europa per 463 spin-off 57,5% delle spin-off',
     'blog.article.epfl-eth-top-20-europee.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.referendum-legge-collettivo-lavoro.title': 'Referendum legge obbligo contratto collettivo lavoro',
+    'blog.article.referendum-legge-collettivo-lavoro.excerpt': '23 ottobre 2026: referendum formalmente riuscito 66 006 firme valide su 66 574 depositate Il referendum cantonale non è stato validato Per la validazione',
+    'blog.article.referendum-legge-collettivo-lavoro.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaChIt;

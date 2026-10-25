@@ -8624,6 +8624,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.epfl-eth-top-20-europee.title': 'EPFL and ETH among Europe’s top 20 universities for patents filed',
     'blog.article.epfl-eth-top-20-europee.excerpt': 'EPFL: 107 filings in Europe last year ETH Zurich: 101 filings and 16th place in Europe Switzerland fourth in Europe for 463 spin-offs 57,5% of spin-offs',
     'blog.article.epfl-eth-top-20-europee.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.referendum-legge-collettivo-lavoro.title': 'Referendum on the law requiring a collective labor agreement',
+    'blog.article.referendum-legge-collettivo-lavoro.excerpt': 'October 23, 2026: referendum formally successful 66 006 valid signatures out of 66 574 submitted The cantonal referendum was not validated For validation',
+    'blog.article.referendum-legge-collettivo-lavoro.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaChEn;

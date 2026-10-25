@@ -8624,6 +8624,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.epfl-eth-top-20-europee.title': 'EPFL und ETH in Top 20 europ. Unis mit Patenten',
     'blog.article.epfl-eth-top-20-europee.excerpt': 'EPFL: 107 Einreichungen auf europäischer Ebene im vergangenen Jahr ETH Zürich: 101 Einreichungen und Platz 16 in Europa Schweiz belegt mit 463 Spin-offs den vierten Platz in Europa 57,5% der Spin-offs',
     'blog.article.epfl-eth-top-20-europee.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.referendum-legge-collettivo-lavoro.title': 'Referendum: Gesetz zur Allgemeinverbindlichkeit von Gesamtarbeitsverträgen',
+    'blog.article.referendum-legge-collettivo-lavoro.excerpt': '23. Oktober 2026: Referendum formell erfolgreich mit 66\'006 gültigen Unterschriften von 66\'574 abgegeben. Das kantonale Referendum wurde nicht validiert. Für die Validierung',
+    'blog.article.referendum-legge-collettivo-lavoro.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

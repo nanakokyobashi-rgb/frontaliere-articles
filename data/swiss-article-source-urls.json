@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1951382/iniziativa-consiglio-stato-voto-legge-franchi-chiede-controprogetto-svizzera-cantoni": {
-    "articleId": "votazioni-cantoni-27-settembre",
-    "ts": "2026-09-20T07:41:41.361Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/politica/1951372/centrali-referendum-firme-svizzera-riuscito-costruzione": {
     "articleId": "referendum-nuove-centrali-nucleari",
     "ts": "2026-09-20T08:19:36.273Z",
@@ -2497,6 +2492,11 @@
   "https://www.rsi.ch/info/svizzera/epfl-ed-eth-tra-le-20-universit%c3%a0-europee-per-brevetti-depositati--4181978.html": {
     "articleId": "epfl-eth-top-20-europee",
     "ts": "2026-10-25T00:03:56.521Z",
+    "keyForm": 2
+  },
+  "https://www.admin.ch/it/newnsb/-t2rtlvdyzni": {
+    "articleId": "referendum-legge-collettivo-lavoro",
+    "ts": "2026-10-25T00:47:26.552Z",
     "keyForm": 2
   }
 }

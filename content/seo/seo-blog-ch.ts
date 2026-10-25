@@ -108987,6 +108987,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-referendum-legge-collettivo-lavoro': {
+    title: 'Referendum legge obbligo contratto collettivo lavoro',
+    description: '23 ottobre 2026: referendum formalmente riuscito 66 006 firme valide su 66 574 depositate Il referendum cantonale non è stato validato',
+    keywords: 'frontalieri, ticino, svizzera, italia, referendum, legge, obbligo, contratto',
+    ogTitle: 'Referendum legge obbligo contratto collettivo lavoro',
+    ogDescription: '23 ottobre 2026: referendum formalmente riuscito 66 006 firme valide su 66 574 depositate Il referendum cantonale non è stato validato Per la validazione',
+    canonicalPath: '/articoli-svizzera/referendum-legge-collettivo-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Referendum legge obbligo contratto collettivo lavoro",
+      "description": "23 ottobre 2026: referendum formalmente riuscito 66 006 firme valide su 66 574 depositate Il referendum cantonale non è stato validato",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-referendum-legge-collettivo-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-25T00:47:25+00:00",
+      "dateModified": "2026-10-25T00:47:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/referendum-legge-collettivo-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
