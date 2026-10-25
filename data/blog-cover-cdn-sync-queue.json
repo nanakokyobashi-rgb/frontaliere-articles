@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-basel-stadt-siti-online-di-nuoto.webp",
+      "sha256": "a82cb4811718299ad83f587b2d2f29718ea2263035c6063da8f6d03fba6499f3"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-basel-stadt-siti-online-di-nuoto-480w.webp",
+      "sha256": "56fb704d2a0b0aff48925e6c762716d7ac7a2e889559925e8a529bcd1fc4b57a"
+    }
+  ]
 }
