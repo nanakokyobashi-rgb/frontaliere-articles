@@ -229,6 +229,16 @@
       }
     },
     {
+      "path": "scripts/ci/fast-publish-section-edge-candidate.sh",
+      "mode": "corpus-only",
+      "reason": "Resolver fail-closed della release edge intermedia usato da fast-publish-section quando la run ha osservato una release stale: accetta solo un commit antenato della punta corrente con registro di sezione invariato e delega il piano al publisher corpus-side. Il sito non possiede questo workflow né il suo fallback edge, quindi il path resta corpus-only per costruzione.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-25"
+      }
+    },
+    {
       "path": "scripts/ci/fast-publish-section-resolve.sh",
       "mode": "corpus-only",
       "reason": "Resolver del piano fast-publish-section estratto dal run scalar del workflow per restare sotto il limite del parser GitHub Actions: calcola la matrice, gestisce cover-drain e replay stantii e redispatcha le sezioni con il contratto del publisher. Il sito non possiede il publisher corpus-side né questo helper, quindi il path resta corpus-only per costruzione.",
