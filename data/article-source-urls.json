@@ -1,9 +1,4 @@
 {
-  "https://www.ticinonews.ch/ticino/stazioni-ferroviarie-un-biglietto-da-visita-che-deve-essere-ordinato-e-sicuro-442705": {
-    "articleId": "stazioni-ferroviarie-ticino-sicurezza",
-    "ts": "2026-09-17T03:01:49.784Z",
-    "keyForm": 2
-  },
   "https://www.vconews.it/2026/09/17/leggi-notizia/argomenti/attualita-27/articolo/frontalieri-nuovo-confronto-tra-governo-e-territori-sul-tavolo-naspi-sanita-e-assegno-unico.html": {
     "articleId": "tavolo-interministeriale-frontalieri",
     "ts": "2026-09-18T00:13:06.713Z",
@@ -2497,6 +2492,11 @@
   "https://www.varesenews.it/2026/10/un-frontaliere-su-tre-passa-piu-di-unora-e-mezza-al-giorno-in-viaggio/2718007": {
     "articleId": "frontaliere-ora-mezza-viaggio",
     "ts": "2026-10-25T01:38:54.256Z",
+    "keyForm": 2
+  },
+  "https://www.ticinonews.ch/ticino/frontalieri-uno-su-due-si-sente-pagato-meno-445243": {
+    "articleId": "sondaggio-paga-colleghi-svizzeri",
+    "ts": "2026-10-25T12:30:35.684Z",
     "keyForm": 2
   }
 }

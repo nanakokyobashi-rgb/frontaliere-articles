@@ -13603,6 +13603,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-25.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.bollettino-frontaliere-2026-10-25.seoDescription': 'Cross-border daily brief for workers, October 25, 2026: latest waits, fuel prices, CHF/EUR rate and active jobs in Switzerland.',
     'blog.article.bollettino-frontaliere-2026-10-25.ogDescription': 'Daily figures for cross-border commuters, October 25, 2026: measured waits at each crossing, where fuel costs least, the latest franc-euro rate and active Swiss job listings on our board, with links to live pages.',
+    'blog.article.sondaggio-paga-colleghi-svizzeri.title': 'Cross-border workers in Ticino: 55,6% feel they are paid less',
+    'blog.article.sondaggio-paga-colleghi-svizzeri.excerpt': '1\'542 workers responded to the survey 73% satisfied with their salary 55,6% feel they are paid less than a resident 37,4% can work remotely Sample →',
+    'blog.article.sondaggio-paga-colleghi-svizzeri.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaEn;

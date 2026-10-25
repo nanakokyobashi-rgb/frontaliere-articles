@@ -45837,6 +45837,17 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'sondaggio-paga-colleghi-svizzeri',
+ category: 'novita',
+ date: '2026-10-25T12:30:34.435Z',
+ image: '/images/blog/article-sondaggio-paga-colleghi-svizzeri.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TI'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
