@@ -3131,6 +3131,7 @@ test('piano R2: sezioni cantonali toccate da un commit, con gli id dei corpi cam
     'scripts/lib/r2-image-lease-process.sh',
     'scripts/lib/r2-image-namespace-lock.mjs',
     'scripts/lib/r2-section-lock.mjs',
+    'scripts/lib/safe-lease-timestamp.mjs',
     'scripts/lib/is-invoked-directly.mjs',
     'scripts/lib/npm-ci-retry.sh',
     'scripts/lib/parse-positive-num.mjs',
