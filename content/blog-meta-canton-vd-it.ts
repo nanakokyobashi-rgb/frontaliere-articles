@@ -78,6 +78,9 @@ const blogMetaCantonVdIt: Record<string, string> = {
     'blog.article.grand-conseil-27-ottobre.title': 'Ordine del giorno Grand Conseil 27 ottobre su LRIPP e CHUV',
     'blog.article.grand-conseil-27-ottobre.excerpt': 'Seduta del Grand Conseil prevista per il 27 ottobre Il punto 8 riguarda la riduzione dell\'imposta cantonale sul reddito Il punto 7 riguarda i ritardi',
     'blog.article.grand-conseil-27-ottobre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.cantiere-stazione-morges-2026.title': 'Cantiere nuovo edificio viaggiatori stazione di Morges da dicembre 2026',
+    'blog.article.cantiere-stazione-morges-2026.excerpt': 'A dicembre 2026 partono i lavori dei CFF Il cantiere occuperà gran parte della piazza Fermate bus regionali e posti taxi restano L\'accesso ai marciapiedi resta',
+    'blog.article.cantiere-stazione-morges-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonVdIt;
