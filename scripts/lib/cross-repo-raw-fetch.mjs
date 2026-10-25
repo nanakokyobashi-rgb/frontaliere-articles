@@ -49,6 +49,7 @@ export const CROSS_REPO_FETCH_TIMEOUT_MS = 30_000;
 
 const BODY_METHODS = ['arrayBuffer', 'blob', 'formData', 'json', 'text'];
 const RESPONSE_TIMEOUT = Symbol('crossRepoResponseTimeout');
+const RESPONSE_ABORT = Symbol('crossRepoResponseAbort');
 
 function timeoutReason() {
   if (typeof DOMException === 'function') {
@@ -76,15 +77,23 @@ function createDeadline(timeoutMs) {
     clearTimeout(timer);
   };
 
-  return { signal: controller.signal, release };
+  const abort = () => {
+    if (!controller.signal.aborted) controller.abort();
+    release();
+  };
+  return { signal: controller.signal, release, abort };
 }
 
-function attachResponseDeadline(response, release) {
+function attachResponseDeadline(response, { release, abort }) {
   if (!response || typeof response !== 'object') return response;
   try {
     Object.defineProperty(response, RESPONSE_TIMEOUT, {
       configurable: true,
       value: release,
+    });
+    Object.defineProperty(response, RESPONSE_ABORT, {
+      configurable: true,
+      value: abort,
     });
     let hasBodyMethod = false;
     for (const method of BODY_METHODS) {
@@ -102,9 +111,10 @@ function attachResponseDeadline(response, release) {
   return response;
 }
 
-function releaseResponseDeadline(response) {
+function discardResponseDeadline(response) {
   try {
-    response?.[RESPONSE_TIMEOUT]?.();
+    response?.[RESPONSE_ABORT]?.();
+    response?.body?.cancel?.();
   } catch {
     // Cleanup must never mask the original HTTP/error result.
   }
@@ -184,7 +194,7 @@ export function createRawFetcher({
       // both the headers and the body, not just connection establishment.
       signal: deadline.signal,
     })).then((response) => {
-      return attachResponseDeadline(response, deadline.release);
+      return attachResponseDeadline(response, deadline);
     }, (error) => {
       deadline.release();
       throw error;
@@ -199,21 +209,33 @@ export function createRawFetcher({
       state.tokenAccepted.set(repo, true);
       return res;
     }
-    if (authenticated && !res.ok) releaseResponseDeadline(res);
     // Un rate limit sulla richiesta autenticata è un limite reale, non un
     // rifiuto del token da ritentare anonimamente: altrimenti il 429 latcherebbe
     // `tokenRejected` e degraderebbe l'intero repo al rate limit anonimo.
-    if (authenticated && isRateLimitResponse(res)) throw new CrossRepoRateLimitError(url, res);
+    if (authenticated && isRateLimitResponse(res)) {
+      discardResponseDeadline(res);
+      throw new CrossRepoRateLimitError(url, res);
+    }
     // Dopo un 2xx il token è accettato, quindi non si ritenta in anonimo:
     // un rate limit successivo resta però un limite reale, non un 404 da
     // consegnare al chiamante come se il contenuto mancasse.
-    if (isRateLimitResponse(res) && state.tokenAccepted.get(repo)) throw new CrossRepoRateLimitError(url, res);
-    if (!authenticated && isRateLimitResponse(res)) throw new CrossRepoRateLimitError(url, res);
+    if (isRateLimitResponse(res) && state.tokenAccepted.get(repo)) {
+      discardResponseDeadline(res);
+      throw new CrossRepoRateLimitError(url, res);
+    }
+    if (!authenticated && isRateLimitResponse(res)) {
+      discardResponseDeadline(res);
+      throw new CrossRepoRateLimitError(url, res);
+    }
     if (state.tokenAccepted.get(repo) || !needsAnonymousRetry(res.status, { authenticated })) return res;
 
     state.anonymousRetries += 1;
+    discardResponseDeadline(res);
     const anon = await attempt(url, false, extraHeaders);
-    if (isRateLimitResponse(anon)) throw new CrossRepoRateLimitError(url, anon);
+    if (isRateLimitResponse(anon)) {
+      discardResponseDeadline(anon);
+      throw new CrossRepoRateLimitError(url, anon);
+    }
     // Solo un anonimo che RIESCE dimostra che a rispondere era il token: un
     // 404 confermato e' un'assenza vera, e continuare a mandare il token tiene
     // il rate-limit alto per tutte le altre voci.

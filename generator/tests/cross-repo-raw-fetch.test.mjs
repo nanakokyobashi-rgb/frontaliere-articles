@@ -223,6 +223,58 @@ test('il segnale resta attivo mentre il chiamante legge un body che non completa
   assert.ok(receivedSignal instanceof AbortSignal);
 });
 
+test('una risposta sospetta viene abortita e cancellata prima del retry anonimo', async () => {
+  let authenticatedSignal;
+  let cancelled = 0;
+  const fetchRaw = createRawFetcher({
+    token: 'tok',
+    timeoutMs: 1000,
+    fetchImpl: async (_url, init) => {
+      if (init.headers.Authorization) {
+        authenticatedSignal = init.signal;
+        return {
+          status: 401,
+          ok: false,
+          body: { cancel: () => { cancelled += 1; } },
+          text: () => new Promise((_resolve, reject) => {
+            init.signal.addEventListener('abort', () => reject(init.signal.reason), { once: true });
+          }),
+        };
+      }
+      return { status: 200, ok: true };
+    },
+  });
+
+  const response = await fetchRaw('https://raw.githubusercontent.com/other/repo/main/retry.yml');
+  assert.equal(response.status, 200);
+  assert.equal(authenticatedSignal.aborted, true);
+  assert.equal(cancelled, 1);
+});
+
+test('una risposta non-OK autorevole conserva il timeout per il body', async () => {
+  let call = 0;
+  const fetchRaw = createRawFetcher({
+    token: 'tok',
+    timeoutMs: 10,
+    fetchImpl: async (_url, init) => {
+      call += 1;
+      if (call === 1) return { status: 200, ok: true };
+      return {
+        status: 500,
+        ok: false,
+        text: () => new Promise((_resolve, reject) => {
+          init.signal.addEventListener('abort', () => reject(init.signal.reason), { once: true });
+        }),
+      };
+    },
+  });
+
+  await fetchRaw('https://raw.githubusercontent.com/other/repo/main/ok.yml');
+  const response = await fetchRaw('https://raw.githubusercontent.com/other/repo/main/error.yml');
+  assert.equal(response.status, 500);
+  await assert.rejects(response.text(), (error) => error?.name === 'TimeoutError');
+});
+
 test('i chiamanti cross-repo passano dal fetcher, non da `fetch` nudo', async () => {
   const fs = await import('node:fs');
   const url = await import('node:url');
