@@ -1441,7 +1441,7 @@ EOF
           ref: ${{ github.sha }}
           path: .replay-dispatcher-source
           fetch-depth: 1
-          sparse-checkout:
+          sparse-checkout: |
             scripts/ci/dispatch-fast-publish-replay.sh
             scripts/ci/read-main-head.sh
           sparse-checkout-cone-mode: false

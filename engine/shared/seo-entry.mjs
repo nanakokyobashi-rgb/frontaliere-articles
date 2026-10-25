@@ -36,7 +36,7 @@ const BLOCK_BRACE_KEYWORDS = new Set([
  * Find the closing delimiter for the one at `openIdx`, ignoring strings,
  * comments, and regular-expression literals. Returns `-1` when unclosed.
  */
-function matchingDelimiter(src, openIdx) {
+export function matchingDelimiter(src, openIdx) {
   const open = src[openIdx];
   const close = CLOSING[open];
   if (!close) throw new Error(`matchingDelimiter: '${open}' non è un delimitatore di apertura`);

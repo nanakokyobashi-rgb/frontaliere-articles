@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-22T14:34:20.216Z",
-  "contentHash": "f0ed363fb8692dcff1e65484114cf5a58d40e985799887b86ef87d48f75ddf1d",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "95249d43b0e4845617eb7bf0ab2961195fc04b41619da137def7c3ac78c24050",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-21T12:19:56.872Z",
+      "updatedAt": "2026-10-24T11:32:51.939Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Consultazione controprogetto abitazioni accessibili nel Cantone Lucerna",
+          "url": "/articoli-lucerna/consultazione-abitazioni-lucerna/",
+          "excerpt": "La consultazione sul controprogetto all'iniziativa «Per abitazioni accessibili» è aperta dal 21 ottobre 2026 fino al 22 gennaio 2027, con voto previsto per la primavera 2028.",
+          "date": "2026-10-23T18:56:47.091Z"
+        },
         {
           "title": "FDP Lucerna: due liste per il voto cantonale 2027",
           "url": "/articoli-lucerna/fdp-lucerna-due-liste/",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/lucerna-tassi-fiscali-zero-2027/",
           "excerpt": "Nel 2027 Lucerna mantiene allo 0,00% i tassi fiscali; la mora resta al 4,00%.",
           "date": "2026-10-21T13:53:04.510Z"
-        },
-        {
-          "title": "Lucerna: stop ai riscaldamenti a olio e gas entro il 2050",
-          "url": "/articoli-lucerna/lucerna-stop-riscaldamenti-fossili-2050/",
-          "excerpt": "Il Consiglio cantonale ha approvato la revisione della legge sull'energia: divieto di nuovi impianti fossili e scadenza finale per tutti entro il 2050.",
-          "date": "2026-10-21T12:47:58.727Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-22T14:34:20.216Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "LU",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Lucerne affordable housing counterproposal consultation",
+          "url": "/en/lucerne-articles/lucerne-housing-consultation/",
+          "excerpt": "The consultation on the counterproposal to the “For affordable housing” initiative is open from October 21, 2026, until January 22, 2027, with a vote scheduled for spring 2028.",
+          "date": "2026-10-23T18:56:47.091Z"
+        },
         {
           "title": "FDP Lucerne: two lists for the 2027 cantonal election",
           "url": "/en/lucerne-articles/fdp-lucerne-two-lists/",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/lucerne-tax-interest-zero-2027/",
           "excerpt": "In 2027 Lucerne maintains tax rates at 0.00%; the default remains at 4.00%.",
           "date": "2026-10-21T13:53:04.510Z"
-        },
-        {
-          "title": "Lucerne: phase out oil and gas heating by 2050",
-          "url": "/en/lucerne-articles/lucerne-ban-fossil-heating-2050/",
-          "excerpt": "The Cantonal Council approved the revision of the Energy Act: a ban on new fossil fuel installations and a final deadline for all by 2050.",
-          "date": "2026-10-21T12:47:58.727Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-22T14:34:20.216Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "LU",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Vernehmlassung zum Gegenvorschlag für bezahlbaren Wohnraum im Kanton Luzern",
+          "url": "/de/luzern-artikel/wohnraum-konsultation-luzern/",
+          "excerpt": "Die Vernehmlassung zum Gegenvorschlag zur Initiative «Für bezahlbaren Wohnraum» läuft vom 21.",
+          "date": "2026-10-23T18:56:47.091Z"
+        },
         {
           "title": "FDP Luzern: zwei Listen für die kantonale Wahl 2027",
           "url": "/de/luzern-artikel/fdp-luzern-zwei-listen/",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/luzern-steuerzinsen-null-2027/",
           "excerpt": "Im Jahr 2027 behält Luzern die Steuersätze bei 0,00%; der Verzug bleibt bei 4,00%.",
           "date": "2026-10-21T13:53:04.510Z"
-        },
-        {
-          "title": "Luzern: Aus für Öl- und Gasheizungen bis 2050",
-          "url": "/de/luzern-artikel/luzern-ausstieg-oelgasheizungen-2050/",
-          "excerpt": "Der Kantonsrat hat die Revision des Energiegesetzes verabschiedet: Verbot neuer fossiler Anlagen und eine endgültige Frist für alle bis 2050.",
-          "date": "2026-10-21T12:47:58.727Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-22T14:34:20.216Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "LU",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Contre-projet logements abordables Lucerne : consultation",
+          "url": "/fr/articles-lucerne/consultation-logements-lucerne/",
+          "excerpt": "La consultation sur le contre-projet à l’initiative « Pour des logements abordables » est ouverte du 21 octobre 2026 au 22 janvier 2027, avec un vote prévu au printemps 2028.",
+          "date": "2026-10-23T18:56:47.091Z"
+        },
         {
           "title": "PLR Lucerne : deux listes pour les élections cantonales de 2027",
           "url": "/fr/articles-lucerne/fdp-lucerne-deux-listes/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/lucerne-interets-fiscaux-zero-2027/",
           "excerpt": "En 2027, Lucerne maintient les taux d'imposition à 0,00 % ; les arriérés restent à 4,00 %.",
           "date": "2026-10-21T13:53:04.510Z"
-        },
-        {
-          "title": "Lucerne : fin des chauffages au mazout et au gaz d’ici 2050",
-          "url": "/fr/articles-lucerne/lucerne-fin-chauffage-fossile-2050/",
-          "excerpt": "Le Conseil cantonal a approuvé la révision de la loi sur l’énergie : interdiction des nouvelles installations fossiles et échéance finale pour tous d’ici 2050.",
-          "date": "2026-10-21T12:47:58.727Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-22T14:34:20.216Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "fisco",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "e25a123913190dc26eb31a6bd661c019b653ef92a3dda7032a7a7a0aaf8f824e",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "48316d5b4e2e4708cedaf432b5a4c6197f3578b449822fa007f9870c72580f42",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,18 @@
       ],
       "curatedArticles": [
         {
+          "title": "Mellingen: preventivo 2027 con un disavanzo di 3,54 milioni",
+          "url": "/articoli-argovia/mellingen-budget-2027/",
+          "excerpt": "Il comune di Mellingen prevede per il 2027 un disavanzo di 3.546.810 franchi e conferma il coefficiente fiscale al 110%.",
+          "date": "2026-10-24T12:03:10.391Z"
+        },
+        {
+          "title": "Steuerfuss a 109% proposto a Fislisbach per il budget 2027",
+          "url": "/articoli-argovia/fislisbach-steuerfuss-109/",
+          "excerpt": "Il Gemeinderat di Fislisbach chiede l'approvazione del budget 2027 con Steuerfuss invariato al 109%, nonostante un disavanzo di CHF 357'310.",
+          "date": "2026-10-23T21:49:48.808Z"
+        },
+        {
           "title": "Buchs prevede disavanzo 3,1 milioni nel budget 2027",
           "url": "/articoli-argovia/buchs-deficit-2027-budget/",
           "excerpt": "Il Comune di Buchs prevede un disavanzo di circa 3,1 milioni di franchi per il 2027, mantenendo il moltiplicatore fiscale al 118% e prevedendo un aumento dei costi residui di cura di 600'000 franchi.",
@@ -153,7 +165,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "AG",
@@ -238,6 +250,18 @@
       ],
       "curatedArticles": [
         {
+          "title": "Mellingen: 2027 budget with a deficit of 3,54 million",
+          "url": "/en/aargau-articles/mellingen-2027-budget-with-a-deficit-of-3-54-million/",
+          "excerpt": "The municipality of Mellingen forecasts a deficit of CHF 3,546,810 for 2027 and confirms the tax coefficient at 110%.",
+          "date": "2026-10-24T12:03:10.391Z"
+        },
+        {
+          "title": "Tax rate of 109% proposed in Fislisbach for the 2027 budget",
+          "url": "/en/aargau-articles/tax-rate-of-109-proposed-in-fislisbach-for-the-2027-budget/",
+          "excerpt": "The Fislisbach municipal council is requesting approval of the 2027 budget with the tax rate unchanged at 109%, despite a deficit of CHF 357'310.",
+          "date": "2026-10-23T21:49:48.808Z"
+        },
+        {
           "title": "Buchs forecasts a 3,1 million deficit in the 2027 budget",
           "url": "/en/aargau-articles/buchs-forecasts-a-3-1-million-deficit-in-the-2027-budget/",
           "excerpt": "The Municipality of Buchs forecasts a deficit of approximately 3,1 million francs for 2027, maintaining the tax multiplier at 118% and anticipating an increase of 600'000 francs in residual care costs.",
@@ -289,7 +313,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "AG",
@@ -374,6 +398,18 @@
       ],
       "curatedArticles": [
         {
+          "title": "Mellingen: Kostenvoranschlag 2027 mit einem Defizit von 3,54 Mio.",
+          "url": "/de/aargau-artikel/mellingen-kostenvoranschlag-2027-mit-einem-defizit-von-3-54-mio/",
+          "excerpt": "Die Gemeinde Mellingen rechnet für 2027 mit einem Defizit von 3.546.810 Franken und bestätigt die Steuerquote von 110%.",
+          "date": "2026-10-24T12:03:10.391Z"
+        },
+        {
+          "title": "Für Fislisbach wird für das Budget 2027 ein Steuerfuss von 109% vorgeschlagen",
+          "url": "/de/aargau-artikel/fur-fislisbach-wird-fur-das-budget-2027-ein-steuerfuss-von-109-vorgeschlagen/",
+          "excerpt": "Der Gemeinderat von Fislisbach beantragt die Genehmigung des Budgets 2027 mit unverändertem Steuerfuss von 109%, trotz eines Defizits von CHF 357'310.",
+          "date": "2026-10-23T21:49:48.808Z"
+        },
+        {
           "title": "Buchs rechnet im Budget 2027 mit einem Defizit von 3,1 Millionen",
           "url": "/de/aargau-artikel/buchs-rechnet-im-budget-2027-mit-einem-defizit-von-3-1-millionen/",
           "excerpt": "Die Gemeinde Buchs rechnet für 2027 mit einem Defizit von rund 3,1 Millionen Franken, hält den Steuerfuss bei 118% und sieht einen Anstieg der Restkosten für Pflege um 600'000 Franken vor.",
@@ -425,7 +461,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "AG",
@@ -510,6 +546,18 @@
       ],
       "curatedArticles": [
         {
+          "title": "Mellingen : devis 2027 avec un déficit de 3,54 millions",
+          "url": "/fr/articles-argovie/mellingen-devis-2027-avec-un-deficit-de-3-54-millions/",
+          "excerpt": "La commune de Mellingen prévoit pour 2027 un déficit de 3 546 810 francs et confirme le coefficient d'imposition à 110 %.",
+          "date": "2026-10-24T12:03:10.391Z"
+        },
+        {
+          "title": "Taux d'imposition à 109% proposé à Fislisbach pour le budget 2027",
+          "url": "/fr/articles-argovie/taux-d-imposition-a-109-propose-a-fislisbach-pour-le-budget-2027/",
+          "excerpt": "Le conseil communal de Fislisbach demande l'approbation du budget 2027 avec un taux d'imposition inchangé à 109%, malgré un déficit de CHF 357'310.",
+          "date": "2026-10-23T21:49:48.808Z"
+        },
+        {
           "title": "Buchs prévoit un déficit de 3,1 millions dans le budget 2027",
           "url": "/fr/articles-argovie/buchs-prevoit-un-deficit-de-3-1-millions-dans-le-budget-2027/",
           "excerpt": "La commune de Buchs prévoit un déficit d'environ 3,1 millions de francs pour 2027, en maintenant le multiplicateur fiscal à 118% et en prévoyant une hausse des coûts résiduels de soins de 600'000 francs.",
@@ -561,7 +609,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

@@ -4,14 +4,14 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T02:45:08.484Z",
-  "contentHash": "5ebbbc6e5244db9afd05b8fd30bfc2afb0667f439ed814aa053b37f5022d2919",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "7340a345afd6b98b4c4c60789dcef8bcff1c809e444fabd99d8d355d2d32c10d",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-22T12:21:38.892Z",
+      "updatedAt": "2026-10-24T11:32:51.939Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-29T09:24:22.000Z"
+      "carryUntilAt": "2026-10-31T09:12:13.000Z"
     }
   ],
   "locales": {
@@ -54,35 +54,47 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,264 EUR/l",
-              "detail": "media regionale: minimo 1,990 EUR/l, 70 stazioni rilevate",
-              "date": "2026-10-22T09:24:22.000Z"
+              "value": "2,255 EUR/l",
+              "detail": "media regionale: minimo 1,990 EUR/l, 69 stazioni rilevate",
+              "date": "2026-10-24T09:12:13.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,454 EUR/l",
-              "detail": "media regionale: minimo 2,250 EUR/l, 74 stazioni rilevate",
-              "date": "2026-10-22T09:24:22.000Z"
+              "value": "2,464 EUR/l",
+              "detail": "media regionale: minimo 2,250 EUR/l, 73 stazioni rilevate",
+              "date": "2026-10-24T09:12:13.000Z"
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "2,155 EUR/l",
-              "detail": "media regionale: minimo 2,129 EUR/l, 7 stazioni rilevate",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,206 EUR/l",
+              "detail": "media regionale: minimo 2,149 EUR/l, 7 stazioni rilevate",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,283 EUR/l",
-              "detail": "media regionale: minimo 2,249 EUR/l, 7 stazioni rilevate",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,352 EUR/l",
+              "detail": "media regionale: minimo 2,309 EUR/l, 7 stazioni rilevate",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Canton Basilea Città riattiva siti dopo panne tecnico",
+          "url": "/articoli-basilea/basel-stadt-siti-online-di-nuoto/",
+          "excerpt": "La riapertura dei siti e applicazioni del Canton Basilea Città è progressiva da mercoledì notte; nessun incidente rilevante per la sicurezza è stato registrato giovedì.",
+          "date": "2026-10-25T05:03:13.974Z"
+        },
+        {
+          "title": "Domande edilizie solo digitali dal 1° gennaio 2027 nel Canton Basilea",
+          "url": "/articoli-basilea/domande-edilizie-solo-digitale-2027/",
+          "excerpt": "Dal 1° gennaio 2027, le domande di autorizzazione edilizia devono essere presentate solo in formato digitale, come comunicato dal Bau- und Gastgewerbeinspektorat nel settembre 2026.",
+          "date": "2026-10-23T21:50:50.738Z"
+        },
         {
           "title": "Parlamento di Basilea: mozione per iniziare i cantieri alle 6",
           "url": "/articoli-basilea/basilea-cantieri-alle-sei/",
@@ -100,18 +112,6 @@
           "url": "/articoli-basilea/basilea-larvicida-quattro-settimane/",
           "excerpt": "Una tesi di master su 180 caditoie nel quartiere St.",
           "date": "2026-10-11T00:07:19.597Z"
-        },
-        {
-          "title": "Barfüsserplatz, il difficile progetto di riqualificazione",
-          "url": "/articoli-basilea/barfusserplatz-riqualificazione-urbana/",
-          "excerpt": "La ristrutturazione di Barfüsserplatz porta al centro la qualità dello spazio urbano: per il capo della Commissione, creare una bella piazza è quasi impossibile.",
-          "date": "2026-10-09T21:31:16.945Z"
-        },
-        {
-          "title": "Basel lancia Klimpact per un quotidiano più verde",
-          "url": "/articoli-basilea/basel-klimpact-programma-2026/",
-          "excerpt": "Basel-Stadt avvia Klimpact per ridurre le emissioni.",
-          "date": "2026-10-09T21:07:09.540Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T02:45:08.484Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -165,35 +165,47 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.264 EUR/l",
-              "detail": "regional average: lowest 1.990 EUR/l, 70 stations surveyed",
-              "date": "2026-10-22T09:24:22.000Z"
+              "value": "2.255 EUR/l",
+              "detail": "regional average: lowest 1.990 EUR/l, 69 stations surveyed",
+              "date": "2026-10-24T09:12:13.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.454 EUR/l",
-              "detail": "regional average: lowest 2.250 EUR/l, 74 stations surveyed",
-              "date": "2026-10-22T09:24:22.000Z"
+              "value": "2.464 EUR/l",
+              "detail": "regional average: lowest 2.250 EUR/l, 73 stations surveyed",
+              "date": "2026-10-24T09:12:13.000Z"
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "2.155 EUR/l",
-              "detail": "regional average: lowest 2.129 EUR/l, 7 stations surveyed",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.206 EUR/l",
+              "detail": "regional average: lowest 2.149 EUR/l, 7 stations surveyed",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.283 EUR/l",
-              "detail": "regional average: lowest 2.249 EUR/l, 7 stations surveyed",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.352 EUR/l",
+              "detail": "regional average: lowest 2.309 EUR/l, 7 stations surveyed",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Canton Basel-Stadt reactivates websites after technical outage",
+          "url": "/en/basel-articles/basel-stadt-sites-online-reactivation/",
+          "excerpt": "The reopening of the Canton of Basel-Stadt's websites and applications has been gradual since Wednesday night; no significant security incident was recorded on Thursday.",
+          "date": "2026-10-25T05:03:13.974Z"
+        },
+        {
+          "title": "Building permit applications digital-only from 2027: Basel",
+          "url": "/en/basel-articles/building-permits-only-digital-2027/",
+          "excerpt": "From January 1, 2027, building permit applications must be submitted only in digital format, as announced by the Bau- und Gastgewerbeinspektorat in September 2026.",
+          "date": "2026-10-23T21:50:50.738Z"
+        },
         {
           "title": "Basel Parliament: motion to start construction work at 6",
           "url": "/en/basel-articles/basel-construction-start-six/",
@@ -211,18 +223,6 @@
           "url": "/en/basel-articles/basel-tiger-mosquito-four-weeks/",
           "excerpt": "A master's thesis on 180 loopholes in the St.",
           "date": "2026-10-11T00:07:19.597Z"
-        },
-        {
-          "title": "Barfüsserplatz, the challenging redevelopment project",
-          "url": "/en/basel-articles/basel-barfusserplatz-redesign/",
-          "excerpt": "The redevelopment of Barfüsserplatz puts the quality of urban space at the center: for the head of the Commission, creating a beautiful square is almost impossible.",
-          "date": "2026-10-09T21:31:16.945Z"
-        },
-        {
-          "title": "Basel launches Klimpact for a greener everyday life",
-          "url": "/en/basel-articles/basel-launches-klimpact-for-a-greener-everyday-life/",
-          "excerpt": "Basel-Stadt launches Klimpact to reduce emissions.",
-          "date": "2026-10-09T21:07:09.540Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T02:45:08.484Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -276,35 +276,47 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.264 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 70 erfasste Tankstellen",
-              "date": "2026-10-22T09:24:22.000Z"
+              "value": "2.255 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 69 erfasste Tankstellen",
+              "date": "2026-10-24T09:12:13.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.454 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.250 EUR/l, 74 erfasste Tankstellen",
-              "date": "2026-10-22T09:24:22.000Z"
+              "value": "2.464 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.250 EUR/l, 73 erfasste Tankstellen",
+              "date": "2026-10-24T09:12:13.000Z"
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "2.155 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.129 EUR/l, 7 erfasste Tankstellen",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.206 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.149 EUR/l, 7 erfasste Tankstellen",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.283 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.249 EUR/l, 7 erfasste Tankstellen",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.352 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.309 EUR/l, 7 erfasste Tankstellen",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Kanton Basel-Stadt reaktiviert Websites nach technischer Panne",
+          "url": "/de/basel-artikel/basel-stadt-siti-online-wiederaufnahme/",
+          "excerpt": "Die Wiedereröffnung der Websites und Anwendungen des Kantons Basel-Stadt erfolgt seit Mittwochnacht schrittweise; am Donnerstag wurde kein erheblicher Sicherheitsvorfall registriert.",
+          "date": "2026-10-25T05:03:13.974Z"
+        },
+        {
+          "title": "Baugesuche ab dem 1. Januar 2027 im Kanton Basel nur noch digital",
+          "url": "/de/basel-artikel/baugesuche-nur-digital-2027/",
+          "excerpt": "Ab dem 1. Januar 2027 müssen Baugesuche, wie das Bau- und Gastgewerbeinspektorat im September 2026 mitteilte, nur noch digital eingereicht werden.",
+          "date": "2026-10-23T21:50:50.738Z"
+        },
         {
           "title": "Basler Parlament: Motion für einen Baubeginn um 6 Uhr",
           "url": "/de/basel-artikel/basel-baustart-um-sechs/",
@@ -322,18 +334,6 @@
           "url": "/de/basel-artikel/basel-tigermuecke-vier-wochen/",
           "excerpt": "Eine Masterarbeit über 180 Fallrohre im Stadtteil St.",
           "date": "2026-10-11T00:07:19.597Z"
-        },
-        {
-          "title": "Barfüsserplatz, das schwierige Sanierungsprojekt",
-          "url": "/de/basel-artikel/umbau-barfuesserplatz-basel/",
-          "excerpt": "Die Sanierung des Barfüsserplatzes rückt die Qualität des städtischen Raums in den Mittelpunkt: Für den Kommissionspräsidenten ist es fast unmöglich, einen schönen Platz zu schaffen.",
-          "date": "2026-10-09T21:31:16.945Z"
-        },
-        {
-          "title": "Basel lanciert Klimpact für einen grüneren Alltag",
-          "url": "/de/basel-artikel/basel-lanciert-klimpact-fur-einen-gruneren-alltag/",
-          "excerpt": "Basel-Stadt startet Klimpact, um Emissionen zu reduzieren.",
-          "date": "2026-10-09T21:07:09.540Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T02:45:08.484Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -387,35 +387,47 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,264 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 70 stations relevées",
-              "date": "2026-10-22T09:24:22.000Z"
+              "value": "2,255 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 69 stations relevées",
+              "date": "2026-10-24T09:12:13.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,454 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,250 EUR/l, 74 stations relevées",
-              "date": "2026-10-22T09:24:22.000Z"
+              "value": "2,464 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,250 EUR/l, 73 stations relevées",
+              "date": "2026-10-24T09:12:13.000Z"
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "2,155 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,129 EUR/l, 7 stations relevées",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,206 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,149 EUR/l, 7 stations relevées",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,283 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,249 EUR/l, 7 stations relevées",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,352 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,309 EUR/l, 7 stations relevées",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Le canton de Bâle-Ville réactive ses sites après une panne technique",
+          "url": "/fr/articles-bale/basile-sites-en-ligne-reactivation/",
+          "excerpt": "La réouverture des sites et applications du canton de Bâle-Ville est progressive depuis mercredi soir ; aucun incident de sécurité important n’a été enregistré jeudi.",
+          "date": "2026-10-25T05:03:13.974Z"
+        },
+        {
+          "title": "Demandes de permis de construire numériques dès 2027 à Bâle",
+          "url": "/fr/articles-bale/demandes-permis-digital-2027/",
+          "excerpt": "À partir du 1er janvier 2027, les demandes de permis de construire doivent être soumises uniquement sous forme numérique, comme l’a annoncé le Bau- und Gastgewerbeinspektorat en septembre 2026.",
+          "date": "2026-10-23T21:50:50.738Z"
+        },
         {
           "title": "Parlement de Bâle : motion pour commencer les chantiers à 6 heures",
           "url": "/fr/articles-bale/bale-chantier-six-heures/",
@@ -433,18 +445,6 @@
           "url": "/fr/articles-bale/bale-moustique-tigre-quatre-semaines/",
           "excerpt": "Une thèse de master sur 180 caditoires dans le quartier St.",
           "date": "2026-10-11T00:07:19.597Z"
-        },
-        {
-          "title": "Barfüsserplatz, le difficile projet de requalification",
-          "url": "/fr/articles-bale/reamenagement-barfusserplatz-bale/",
-          "excerpt": "La rénovation de Barfüsserplatz place au centre la qualité de l’espace urbain : pour le chef de la Commission, créer une belle place est presque impossible.",
-          "date": "2026-10-09T21:31:16.945Z"
-        },
-        {
-          "title": "Bâle lance Klimpact pour un quotidien plus vert",
-          "url": "/fr/articles-bale/bale-lance-klimpact-pour-un-quotidien-plus-vert/",
-          "excerpt": "Bâle-Ville lance Klimpact pour réduire les émissions.",
-          "date": "2026-10-09T21:07:09.540Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T02:45:08.484Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

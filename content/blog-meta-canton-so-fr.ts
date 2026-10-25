@@ -45,6 +45,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.cambio-ora-rischio-wildunfalli.title': 'Changement d\'heure : plus d\'accidents avec la faune',
     'blog.article.cambio-ora-rischio-wildunfalli.excerpt': 'Dans la nuit du 24 au 25 octobre 2026, les horloges reculent d\'une heure, ce qui coïncide avec l\'activité des chevreuils, cerfs élaphes et sangliers.',
     'blog.article.cambio-ora-rischio-wildunfalli.imageAlt': 'Risque de collision avec des animaux sauvages lors du changement d\'heure dans le Canton de Soleure.',
+    'blog.article.batterie-sodio-soletta.title': 'Batteries aux ions sodium : assemblage à Soleure',
+    'blog.article.batterie-sodio-soletta.excerpt': 'Batteries aux ions sodium sans lithium Logiciels développés en Suisse, assemblage à Soleure Plus de 600 batteries vendues d’ici fin septembre 2026 Premier',
+    'blog.article.batterie-sodio-soletta.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;

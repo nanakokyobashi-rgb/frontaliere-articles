@@ -4,14 +4,14 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "bc47f816f316d41927291aaa476ff532e580a68339fa26898defbbcb2f8b4302",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "2af25c4cb616cfcbbf02f64d2ddac180e6e09b0b5e6105a2f135c43433d411be",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-22T12:21:38.892Z",
+      "updatedAt": "2026-10-24T11:32:51.939Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-29T12:21:38.892Z"
+      "carryUntilAt": "2026-10-31T11:32:51.939Z"
     }
   ],
   "locales": {
@@ -54,23 +54,41 @@
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "2,057 EUR/l",
-              "detail": "media regionale: minimo 2,029 EUR/l, 5 stazioni rilevate",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,237 EUR/l",
+              "detail": "media regionale: minimo 2,109 EUR/l, 5 stazioni rilevate",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,221 EUR/l",
-              "detail": "media regionale: minimo 2,189 EUR/l, 5 stazioni rilevate",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,387 EUR/l",
+              "detail": "media regionale: minimo 2,299 EUR/l, 5 stazioni rilevate",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Mellingen: preventivo 2027 con un disavanzo di 3,54 milioni",
+          "url": "/articoli-argovia/mellingen-budget-2027/",
+          "excerpt": "Il comune di Mellingen prevede per il 2027 un disavanzo di 3.546.810 franchi e conferma il coefficiente fiscale al 110%.",
+          "date": "2026-10-24T12:03:10.391Z"
+        },
+        {
+          "title": "Mobilità Argovia: sistema unico e potenziamento trasporti",
+          "url": "/articoli-argovia/mobilita-aargovia-sistema-unico/",
+          "excerpt": "Cinque esperti hanno presentato la revisione di mobilitätAargau, puntando a frequenze bus ogni 30 minuti e ferrovia ogni 15 minuti da 2027.",
+          "date": "2026-10-24T11:27:50.606Z"
+        },
+        {
+          "title": "Steuerfuss a 109% proposto a Fislisbach per il budget 2027",
+          "url": "/articoli-argovia/fislisbach-steuerfuss-109/",
+          "excerpt": "Il Gemeinderat di Fislisbach chiede l'approvazione del budget 2027 con Steuerfuss invariato al 109%, nonostante un disavanzo di CHF 357'310.",
+          "date": "2026-10-23T21:49:48.808Z"
+        },
         {
           "title": "SBB chiudono a Döttingen: ultimo centro viaggi del distretto",
           "url": "/articoli-argovia/sbb-chiude-reisezentrum-doettingen/",
@@ -82,24 +100,6 @@
           "url": "/articoli-argovia/dashboard-mobilita-aarau/",
           "excerpt": "Aarau riunisce in un dashboard circa 300 veicoli condivisi di cinque operatori: nell'ultimo anno 27.000 viaggi, il 38% in più.",
           "date": "2026-10-21T12:23:52.110Z"
-        },
-        {
-          "title": "Maja Riniker eletta in Consiglio di Stato argoviese con 70.137 voti",
-          "url": "/articoli-argovia/maja-riniker-eletta-governo-argovia/",
-          "excerpt": "La deputata FDP di Suhr ottiene il seggio di Stephan Attiger; partecipazione al 21,01% nei 196 comuni.",
-          "date": "2026-10-20T18:24:51.865Z"
-        },
-        {
-          "title": "KSB Baden: murales in pediatria e pronto soccorso",
-          "url": "/articoli-argovia/murales-pediatria-ksb-baden/",
-          "excerpt": "Dieci artisti di Paint a Smile hanno dipinto circa 200 metri quadrati al KSB Baden.",
-          "date": "2026-10-20T12:20:50.431Z"
-        },
-        {
-          "title": "Nuklearforum crea la sezione Medicina nucleare svizzera",
-          "url": "/articoli-argovia/sezione-medicina-nucleare/",
-          "excerpt": "Il Nuklearforum Schweiz crea una nuova sezione Assemblea costitutiva il 12 ottobre a Olten KSB, PSI e Molecular Partners tra i fondatori Focus su radionuclidi",
-          "date": "2026-10-20T12:05:23.812Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "AG",
@@ -153,23 +153,41 @@
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "2.057 EUR/l",
-              "detail": "regional average: lowest 2.029 EUR/l, 5 stations surveyed",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.237 EUR/l",
+              "detail": "regional average: lowest 2.109 EUR/l, 5 stations surveyed",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.221 EUR/l",
-              "detail": "regional average: lowest 2.189 EUR/l, 5 stations surveyed",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.387 EUR/l",
+              "detail": "regional average: lowest 2.299 EUR/l, 5 stations surveyed",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Mellingen: 2027 budget with a deficit of 3,54 million",
+          "url": "/en/aargau-articles/mellingen-2027-budget-with-a-deficit-of-3-54-million/",
+          "excerpt": "The municipality of Mellingen forecasts a deficit of CHF 3,546,810 for 2027 and confirms the tax coefficient at 110%.",
+          "date": "2026-10-24T12:03:10.391Z"
+        },
+        {
+          "title": "Aargau Mobility: unified system and transport expansion",
+          "url": "/en/aargau-articles/aargau-mobility-unified-system/",
+          "excerpt": "Five experts presented the revision of mobilitätAargau, aiming for bus services every 30 minutes and rail services every 15 minutes starting in 2027.",
+          "date": "2026-10-24T11:27:50.606Z"
+        },
+        {
+          "title": "Tax rate of 109% proposed in Fislisbach for the 2027 budget",
+          "url": "/en/aargau-articles/tax-rate-of-109-proposed-in-fislisbach-for-the-2027-budget/",
+          "excerpt": "The Fislisbach municipal council is requesting approval of the 2027 budget with the tax rate unchanged at 109%, despite a deficit of CHF 357'310.",
+          "date": "2026-10-23T21:49:48.808Z"
+        },
         {
           "title": "SBB close in Döttingen: the district’s last travel center",
           "url": "/en/aargau-articles/sbb-closes-doettingen-travel-centre/",
@@ -181,24 +199,6 @@
           "url": "/en/aargau-articles/aarau-shared-mobility-dashboard/",
           "excerpt": "Aarau brings together around 300 shared vehicles from five operators in a dashboard: 27.000 trips in the last year, 38% more.",
           "date": "2026-10-21T12:23:52.110Z"
-        },
-        {
-          "title": "Maja Riniker elected to the Aargau State Council with 70.137 votes",
-          "url": "/en/aargau-articles/maja-riniker-elected-aargau-government/",
-          "excerpt": "The FDP member of parliament from Suhr secures Stephan Attiger’s seat; turnout at 21,01% in the 196 municipalities.",
-          "date": "2026-10-20T18:24:51.865Z"
-        },
-        {
-          "title": "KSB Baden: murals in pediatrics and the emergency department",
-          "url": "/en/aargau-articles/murals-ksb-baden-pediatrics/",
-          "excerpt": "Ten artists from Paint a Smile painted approximately 200 square meters at KSB Baden.",
-          "date": "2026-10-20T12:20:50.431Z"
-        },
-        {
-          "title": "Nuklearforum creates the Swiss Nuclear Medicine section",
-          "url": "/en/aargau-articles/swiss-nuclear-medicine-section/",
-          "excerpt": "Nuklearforum Schweiz creates a new section Founding assembly on October 12 in Olten KSB, PSI and Molecular Partners among the founders Focus on radionuclides",
-          "date": "2026-10-20T12:05:23.812Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "AG",
@@ -252,23 +252,41 @@
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "2.057 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.029 EUR/l, 5 erfasste Tankstellen",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.237 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.109 EUR/l, 5 erfasste Tankstellen",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.221 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.189 EUR/l, 5 erfasste Tankstellen",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.387 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.299 EUR/l, 5 erfasste Tankstellen",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Mellingen: Kostenvoranschlag 2027 mit einem Defizit von 3,54 Mio.",
+          "url": "/de/aargau-artikel/mellingen-kostenvoranschlag-2027-mit-einem-defizit-von-3-54-mio/",
+          "excerpt": "Die Gemeinde Mellingen rechnet für 2027 mit einem Defizit von 3.546.810 Franken und bestätigt die Steuerquote von 110%.",
+          "date": "2026-10-24T12:03:10.391Z"
+        },
+        {
+          "title": "Mobilität Aargau: einheitliches System und Ausbau des Verkehrs",
+          "url": "/de/aargau-artikel/mobilitaet-aargau-einheitliches-system/",
+          "excerpt": "Fünf Experten haben die Überarbeitung von mobilitätAargau vorgestellt und dabei Busverbindungen alle 30 Minuten sowie Bahnverbindungen alle 15 Minuten ab 2027 angestrebt.",
+          "date": "2026-10-24T11:27:50.606Z"
+        },
+        {
+          "title": "Für Fislisbach wird für das Budget 2027 ein Steuerfuss von 109% vorgeschlagen",
+          "url": "/de/aargau-artikel/fur-fislisbach-wird-fur-das-budget-2027-ein-steuerfuss-von-109-vorgeschlagen/",
+          "excerpt": "Der Gemeinderat von Fislisbach beantragt die Genehmigung des Budgets 2027 mit unverändertem Steuerfuss von 109%, trotz eines Defizits von CHF 357'310.",
+          "date": "2026-10-23T21:49:48.808Z"
+        },
         {
           "title": "SBB schließen in Döttingen: letztes Reisezentrum des Bezirks",
           "url": "/de/aargau-artikel/sbb-schliesst-reisezentrum-doettingen/",
@@ -280,24 +298,6 @@
           "url": "/de/aargau-artikel/aarau-dashboard-geteilte-mobilitaet/",
           "excerpt": "Aarau fasst in einem Dashboard rund 300 gemeinsam genutzte Fahrzeuge von fünf Anbietern zusammen: Im letzten Jahr gab es 27.000 Fahrten, 38% mehr.",
           "date": "2026-10-21T12:23:52.110Z"
-        },
-        {
-          "title": "Maja Riniker mit 70.137 Stimmen in den Aargauer Regierungsrat gewählt",
-          "url": "/de/aargau-artikel/maja-riniker-gewaehlt-aargau-regierung/",
-          "excerpt": "Die FDP-Grossrätin aus Suhr erhält den Sitz von Stephan Attiger; Wahlbeteiligung von 21,01% in den 196 Gemeinden.",
-          "date": "2026-10-20T18:24:51.865Z"
-        },
-        {
-          "title": "KSB Baden: Wandbilder in der Pädiatrie und Notaufnahme",
-          "url": "/de/aargau-artikel/wandbilder-ksb-kinderabteilung/",
-          "excerpt": "Zehn Künstler von Paint a Smile haben im KSB Baden etwa 200 Quadratmeter bemalt.",
-          "date": "2026-10-20T12:20:50.431Z"
-        },
-        {
-          "title": "Nuklearforum gründet die Sektion Nuklearmedizin Schweiz",
-          "url": "/de/aargau-artikel/sektion-nuklearmedizin-schweiz/",
-          "excerpt": "Das Nuklearforum Schweiz gründet eine neue Sektion Gründungsversammlung am 12.",
-          "date": "2026-10-20T12:05:23.812Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "AG",
@@ -351,23 +351,41 @@
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "2,057 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,029 EUR/l, 5 stations relevées",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,237 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,109 EUR/l, 5 stations relevées",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,221 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,189 EUR/l, 5 stations relevées",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,387 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,299 EUR/l, 5 stations relevées",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Mellingen : devis 2027 avec un déficit de 3,54 millions",
+          "url": "/fr/articles-argovie/mellingen-devis-2027-avec-un-deficit-de-3-54-millions/",
+          "excerpt": "La commune de Mellingen prévoit pour 2027 un déficit de 3 546 810 francs et confirme le coefficient d'imposition à 110 %.",
+          "date": "2026-10-24T12:03:10.391Z"
+        },
+        {
+          "title": "Mobilité en Argovie : système unique et renforcement des transports",
+          "url": "/fr/articles-argovie/mobilite-argovie-systeme-unique/",
+          "excerpt": "Cinq experts ont présenté la révision de mobilitätAargau, visant une fréquence des bus toutes les 30 minutes et du rail toutes les 15 minutes à partir de 2027.",
+          "date": "2026-10-24T11:27:50.606Z"
+        },
+        {
+          "title": "Taux d'imposition à 109% proposé à Fislisbach pour le budget 2027",
+          "url": "/fr/articles-argovie/taux-d-imposition-a-109-propose-a-fislisbach-pour-le-budget-2027/",
+          "excerpt": "Le conseil communal de Fislisbach demande l'approbation du budget 2027 avec un taux d'imposition inchangé à 109%, malgré un déficit de CHF 357'310.",
+          "date": "2026-10-23T21:49:48.808Z"
+        },
         {
           "title": "Les SBB ferment à Döttingen : dernier centre de voyages du district",
           "url": "/fr/articles-argovie/sbb-ferme-centre-voyage-doettingen/",
@@ -379,24 +397,6 @@
           "url": "/fr/articles-argovie/aarau-tableau-mobilite-partagee/",
           "excerpt": "Aarau regroupe dans un tableau de bord environ 300 véhicules partagés de cinq opérateurs : au cours de la dernière année, 27.000 trajets, soit 38% de plus.",
           "date": "2026-10-21T12:23:52.110Z"
-        },
-        {
-          "title": "Maja Riniker élue au Conseil d'État argovien avec 70.137 voix",
-          "url": "/fr/articles-argovie/maja-riniker-elue-gouvernement-argovie/",
-          "excerpt": "La députée du PLR de Suhr obtient le siège de Stephan Attiger ; participation au 21,01% dans les 196 communes.",
-          "date": "2026-10-20T18:24:51.865Z"
-        },
-        {
-          "title": "KSB Baden : fresques en pédiatrie et aux urgences",
-          "url": "/fr/articles-argovie/murales-ksb-pediatrie-baden/",
-          "excerpt": "Dix artistes de Paint a Smile ont peint environ 200 mètres carrés au KSB Baden.",
-          "date": "2026-10-20T12:20:50.431Z"
-        },
-        {
-          "title": "Nuklearforum crée la section Médecine nucléaire suisse",
-          "url": "/fr/articles-argovie/section-medecine-nucleaire/",
-          "excerpt": "Le Nuklearforum Schweiz crée une nouvelle section Assemblée constitutive le 12 octobre à Olten KSB, PSI et Molecular Partners parmi les fondateurs Focus",
-          "date": "2026-10-20T12:05:23.812Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

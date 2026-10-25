@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-23T10:42:39.932Z",
-  "contentHash": "c86f33ba13744919811060750ae85f45ff8c834e62794283d7e145d5eaf189ed",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "43124359d9f3d3b1be7216377b94762076f9a22effeb313db3aa274866a99998",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-22T23:59:59.000Z",
+      "updatedAt": "2026-10-24T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T20:51:18.236Z",
+      "updatedAt": "2026-10-24T19:51:00.050Z",
       "keyFacts": 0
     }
   ],
@@ -28,14 +28,14 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, settimana conclusa: 22 ottobre 2026"
+          "note": "Bargen SH – Tengen, settimana conclusa: 24 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 16 ottobre 2026 – 22 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 18 ottobre 2026 – 24 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -88,13 +88,18 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-22T23:59:59.000Z"
+          "updatedAt": "2026-10-24T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Kanalerneuerung in der Kindlebildstraße",
+              "date": "2026-10-23T09:17:47.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kanalerneuerung+in+der+kindlebildstrasse"
+            },
             {
               "label": "Wallhausen/Dingelsdorf: Uferstraße und Wallhauser Straße werden für Ausbau Nahwärmenetz der Firma Solarcomplex und Erweiterung Glasfasernetz für die Stadtwerke Konstanz gesperrt",
               "date": "2026-10-21T10:17:48.000Z",
@@ -119,14 +124,9 @@
               "label": "Fahrplan Vorsorge: Was heute zu regeln ist",
               "date": "2026-10-15T12:04:00.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/spitalforum+vorsorge"
-            },
-            {
-              "label": "Arbeiten an einer Brücke im Fährhafen Konstanz",
-              "date": "2026-10-09T08:11:56.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/arbeiten+an+bruecke+im+faehrehafen"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -192,7 +192,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "SH",
@@ -203,14 +203,14 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, week ending 22 October 2026"
+          "note": "Bargen SH – Tengen, week ending 24 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 16 October 2026 to 22 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 18 October 2026 to 24 October 2026, fastest first.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -263,13 +263,18 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-22T23:59:59.000Z"
+          "updatedAt": "2026-10-24T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Kanalerneuerung in der Kindlebildstraße",
+              "date": "2026-10-23T09:17:47.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kanalerneuerung+in+der+kindlebildstrasse"
+            },
             {
               "label": "Wallhausen/Dingelsdorf: Uferstraße und Wallhauser Straße werden für Ausbau Nahwärmenetz der Firma Solarcomplex und Erweiterung Glasfasernetz für die Stadtwerke Konstanz gesperrt",
               "date": "2026-10-21T10:17:48.000Z",
@@ -294,14 +299,9 @@
               "label": "Fahrplan Vorsorge: Was heute zu regeln ist",
               "date": "2026-10-15T12:04:00.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/spitalforum+vorsorge"
-            },
-            {
-              "label": "Arbeiten an einer Brücke im Fährhafen Konstanz",
-              "date": "2026-10-09T08:11:56.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/arbeiten+an+bruecke+im+faehrehafen"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -367,7 +367,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "SH",
@@ -378,14 +378,14 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Bargen SH – Tengen, Woche bis 22. Oktober 2026"
+          "note": "Bargen SH – Tengen, Woche bis 24. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 16. Oktober 2026 bis 22. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 18. Oktober 2026 bis 24. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -438,13 +438,18 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-22T23:59:59.000Z"
+          "updatedAt": "2026-10-24T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Kanalerneuerung in der Kindlebildstraße",
+              "date": "2026-10-23T09:17:47.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kanalerneuerung+in+der+kindlebildstrasse"
+            },
             {
               "label": "Wallhausen/Dingelsdorf: Uferstraße und Wallhauser Straße werden für Ausbau Nahwärmenetz der Firma Solarcomplex und Erweiterung Glasfasernetz für die Stadtwerke Konstanz gesperrt",
               "date": "2026-10-21T10:17:48.000Z",
@@ -469,14 +474,9 @@
               "label": "Fahrplan Vorsorge: Was heute zu regeln ist",
               "date": "2026-10-15T12:04:00.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/spitalforum+vorsorge"
-            },
-            {
-              "label": "Arbeiten an einer Brücke im Fährhafen Konstanz",
-              "date": "2026-10-09T08:11:56.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/arbeiten+an+bruecke+im+faehrehafen"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -542,7 +542,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "SH",
@@ -553,14 +553,14 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, semaine jusqu’au 22 octobre 2026"
+          "note": "Bargen SH – Tengen, semaine jusqu’au 24 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 16 octobre 2026 au 22 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 18 octobre 2026 au 24 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -613,13 +613,18 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-22T23:59:59.000Z"
+          "updatedAt": "2026-10-24T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Kanalerneuerung in der Kindlebildstraße",
+              "date": "2026-10-23T09:17:47.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/kanalerneuerung+in+der+kindlebildstrasse"
+            },
             {
               "label": "Wallhausen/Dingelsdorf: Uferstraße und Wallhauser Straße werden für Ausbau Nahwärmenetz der Firma Solarcomplex und Erweiterung Glasfasernetz für die Stadtwerke Konstanz gesperrt",
               "date": "2026-10-21T10:17:48.000Z",
@@ -644,14 +649,9 @@
               "label": "Fahrplan Vorsorge: Was heute zu regeln ist",
               "date": "2026-10-15T12:04:00.000Z",
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/spitalforum+vorsorge"
-            },
-            {
-              "label": "Arbeiten an einer Brücke im Fährhafen Konstanz",
-              "date": "2026-10-09T08:11:56.000Z",
-              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/arbeiten+an+bruecke+im+faehrehafen"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -717,7 +717,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

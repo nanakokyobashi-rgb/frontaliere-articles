@@ -60,6 +60,23 @@ export const API_BASE_DEFAULT = 'https://nanakokyobashi-rgb.github.io/frontalier
 export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
 const LOCALES = ['it', 'en', 'de', 'fr'];
 const UA = 'frontaliere-corpus-reconcile/1 (+https://frontaliereticino.ch)';
+export const RECONCILE_FETCH_ATTEMPTS = 3;
+export const RECONCILE_FETCH_RETRY_DELAY_MS = 1000;
+
+const RETRYABLE_HTTP_STATUSES = new Set([408, 425, 429]);
+
+function isRetryableStatus(status) {
+  return RETRYABLE_HTTP_STATUSES.has(status) || status >= 500;
+}
+
+function defaultSleep(delayMs) {
+  return new Promise((resolve) => setTimeout(resolve, delayMs));
+}
+
+async function waitBeforeRetry(attempt, retryDelayMs, sleepImpl) {
+  if (attempt >= RECONCILE_FETCH_ATTEMPTS || retryDelayMs <= 0) return;
+  await sleepImpl(retryDelayMs * attempt);
+}
 
 /** La chiave R2 (come URL sul CDN) di un path canonico di sezione. */
 export function cdnUrlFor(canonicalPath) {
@@ -190,13 +207,33 @@ export function planSectionBackfill(section, pages, dateById, cap, orphanPages =
   };
 }
 
-async function getJson(url, fetchImpl) {
-  const res = await fetchWithRefTimeout(`${url}?_rcb=${Date.now()}`, { headers: { 'user-agent': UA } }, 30000, fetchImpl);
-  if (!res.ok) {
-    releaseFetchWithRefTimeout(res);
-    throw new Error(`${url}: HTTP ${res.status}`);
+async function getJson(url, fetchImpl, { retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS, sleepImpl = defaultSleep } = {}) {
+  for (let attempt = 1; attempt <= RECONCILE_FETCH_ATTEMPTS; attempt++) {
+    let res;
+    try {
+      res = await fetchWithRefTimeout(`${url}?_rcb=${Date.now()}.${attempt}`, { headers: { 'user-agent': UA } }, 30000, fetchImpl);
+    } catch (error) {
+      if (attempt === RECONCILE_FETCH_ATTEMPTS) throw error;
+      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl);
+      continue;
+    }
+    if (!res.ok) {
+      const status = res.status;
+      releaseFetchWithRefTimeout(res);
+      if (!isRetryableStatus(status) || attempt === RECONCILE_FETCH_ATTEMPTS) {
+        throw new Error(`${url}: HTTP ${status}`);
+      }
+      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl);
+      continue;
+    }
+    try {
+      return await res.json();
+    } catch (error) {
+      if (attempt === RECONCILE_FETCH_ATTEMPTS) throw error;
+      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl);
+    }
   }
-  return res.json();
+  throw new Error(`${url}: tentativi esauriti`);
 }
 
 /**
@@ -205,31 +242,64 @@ async function getJson(url, fetchImpl) {
  * verificato) e una risposta corrotta/non verificabile. Entrambi fermano il
  * backfill, ma il report deve dire quale superficie manca.
  */
-async function getJsonState(url, fetchImpl) {
-  try {
-    const res = await fetchWithRefTimeout(`${url}?_rcb=${Date.now()}`, { headers: { 'user-agent': UA } }, 30000, fetchImpl);
-    if (res.status === 404) {
-      releaseFetchWithRefTimeout(res);
-      return { state: 'absent', url, status: 404 };
+async function getJsonState(url, fetchImpl, { retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS, sleepImpl = defaultSleep } = {}) {
+  let lastError = null;
+  let lastStatus = null;
+  for (let attempt = 1; attempt <= RECONCILE_FETCH_ATTEMPTS; attempt++) {
+    try {
+      const res = await fetchWithRefTimeout(`${url}?_rcb=${Date.now()}.${attempt}`, { headers: { 'user-agent': UA } }, 30000, fetchImpl);
+      lastStatus = res.status;
+      if (res.status === 404) {
+        releaseFetchWithRefTimeout(res);
+        return { state: 'absent', url, status: 404 };
+      }
+      if (!res.ok) {
+        const status = res.status;
+        releaseFetchWithRefTimeout(res);
+        if (!isRetryableStatus(status) || attempt === RECONCILE_FETCH_ATTEMPTS) {
+          return { state: 'unknown', url, status, reason: `HTTP ${status}` };
+        }
+        await waitBeforeRetry(attempt, retryDelayMs, sleepImpl);
+        continue;
+      }
+      return { state: 'ok', url, status: res.status, value: await res.json() };
+    } catch (error) {
+      lastError = error;
+      if (attempt < RECONCILE_FETCH_ATTEMPTS) {
+        await waitBeforeRetry(attempt, retryDelayMs, sleepImpl);
+      }
+    }
+  }
+  return { state: 'unknown', url, ...(lastStatus === null ? {} : { status: lastStatus }), reason: lastError?.message ?? String(lastError) };
+}
+
+async function getText(url, fetchImpl, { retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS, sleepImpl = defaultSleep } = {}) {
+  for (let attempt = 1; attempt <= RECONCILE_FETCH_ATTEMPTS; attempt++) {
+    let res;
+    try {
+      res = await fetchWithRefTimeout(`${url}?_rcb=${Date.now()}.${attempt}`, { headers: { 'user-agent': UA } }, 30000, fetchImpl);
+    } catch (error) {
+      if (attempt === RECONCILE_FETCH_ATTEMPTS) throw error;
+      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl);
+      continue;
     }
     if (!res.ok) {
       const status = res.status;
       releaseFetchWithRefTimeout(res);
-      return { state: 'unknown', url, status, reason: `HTTP ${status}` };
+      if (!isRetryableStatus(status) || attempt === RECONCILE_FETCH_ATTEMPTS) {
+        throw new Error(`${url}: HTTP ${status}`);
+      }
+      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl);
+      continue;
     }
-    return { state: 'ok', url, status: res.status, value: await res.json() };
-  } catch (error) {
-    return { state: 'unknown', url, reason: error?.message ?? String(error) };
+    try {
+      return await res.text();
+    } catch (error) {
+      if (attempt === RECONCILE_FETCH_ATTEMPTS) throw error;
+      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl);
+    }
   }
-}
-
-async function getText(url, fetchImpl) {
-  const res = await fetchWithRefTimeout(`${url}?_rcb=${Date.now()}`, { headers: { 'user-agent': UA } }, 30000, fetchImpl);
-  if (!res.ok) {
-    releaseFetchWithRefTimeout(res);
-    throw new Error(`${url}: HTTP ${res.status}`);
-  }
-  return res.text();
+  throw new Error(`${url}: tentativi esauriti`);
 }
 
 /** Piano conservativo per una sitemap che non si e' potuta verificare. */
@@ -323,11 +393,18 @@ async function mapLimit(items, limit, fn) {
 /**
  * @returns {Promise<{ skipped: string | null, apiCommit: string | null, edgeCommit?: string | null, pendingEdgeFlip?: boolean, sections: ReturnType<typeof planSectionBackfill>[] }>}
  */
-export async function reconcile({ apiBase = API_BASE_DEFAULT, cap = 3, fetchImpl = fetch } = {}) {
+export async function reconcile({
+  apiBase = API_BASE_DEFAULT,
+  cap = 3,
+  fetchImpl = fetch,
+  retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS,
+  sleepImpl = defaultSleep,
+} = {}) {
+  const fetchOptions = { retryDelayMs, sleepImpl };
   const [manifest, catalog, slugs, candidateRegistryResult, edgeRegistry] = await Promise.all(
-    ['manifest.json', 'sections.json', 'slugs.json'].map((name) => getJson(`${apiBase}/${name}`, fetchImpl)).concat(
-      getJsonState(`${apiBase}/edge/sections/registry.json`, fetchImpl),
-      getJson(`${CDN_BASE}/edge/sections/registry.json`, fetchImpl),
+    ['manifest.json', 'sections.json', 'slugs.json'].map((name) => getJson(`${apiBase}/${name}`, fetchImpl, fetchOptions)).concat(
+      getJsonState(`${apiBase}/edge/sections/registry.json`, fetchImpl, fetchOptions),
+      getJson(`${CDN_BASE}/edge/sections/registry.json`, fetchImpl, fetchOptions),
     ),
   );
   if (candidateRegistryResult.state === 'absent') {
@@ -390,14 +467,14 @@ export async function reconcile({ apiBase = API_BASE_DEFAULT, cap = 3, fetchImpl
     });
   }
   if (live.length === 0) return { skipped: null, apiCommit: manifest.commit, edgeCommit: edgeRegistry.commit, pendingEdgeFlip, sections: [] };
-  const rows = await getJson(`${apiBase}/canton-articles.json`, fetchImpl);
+  const rows = await getJson(`${apiBase}/canton-articles.json`, fetchImpl, fetchOptions);
   const dateById = new Map(rows.map((row) => [row.id, row.updatedAt || row.date || '']));
   const sections = [];
   for (const entry of live) {
     const sitemapUrl = `${apiBase}${entry.sitemap}`;
     let sitemapXml;
     try {
-      sitemapXml = await getText(sitemapUrl, fetchImpl);
+      sitemapXml = await getText(sitemapUrl, fetchImpl, fetchOptions);
     } catch (error) {
       const detail = sitemapFailureDetail(sitemapUrl, error);
       console.warn(`::warning::[reconcile-sections] ${entry.id}: sitemap non verificabile (${detail}); nessun backfill`);

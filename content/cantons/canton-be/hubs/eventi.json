@@ -4,12 +4,12 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "4600b9638d3d43865033aa238687334f2dd8e2576bd6174681f66fca19f417e3",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "ea343ad1d38c964a4628a55540a5c2cd0dbcdea55a2c5c14d258003b200d26bd",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T19:30:03.925Z",
+      "updatedAt": "2026-10-25T02:23:31.213Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "226",
+          "value": "224",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Live Musik - Brooke Law",
-              "detail": "Gemmi Taverne, Kandersteg",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/events/music/kandersteg/live-music-brooke-law_AucHv7T"
+              "label": "Letzte Chance: Sammelstopp \"spychere!\"",
+              "detail": "Langnau i.E., Langnau im Emmental",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/letzte-chance-sammelstopp-spychere/"
             },
             {
-              "label": "Trüelete - vintage festival",
-              "detail": "Bielersee Tourismus",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/trueelete/"
+              "label": "Melchior Prisi Geh nicht allein ins Emmental",
+              "detail": "Soletta, Ins",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/melchior-prisi-geh-nicht-allein-ins-emmental/"
             },
             {
-              "label": "Besuchstag Militärflugplatz Meiringen",
-              "detail": "3857 Unterbach BE, Meiringen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/besuchstag-militaerflugplatz-meiringen/"
+              "label": "Familiengottesdienst",
+              "detail": "Kirche Diemtigen, Diemtigen",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/diemtigen/familiengottesdienst_AbGb2QX"
             },
             {
-              "label": "21th Homemade Metzgete",
-              "detail": "Saanenmöser",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/21th-homemade-metzgete/"
+              "label": "Kasperlitheater Gwundernäsli - Kasperli in Afrika",
+              "detail": "Kultur Spiegel Spiez, Spiez",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kasperlitheater-gwundernaesli-kasperli-in-afrika/"
             },
             {
-              "label": "Albert Mountain Award und UIAA-Awards",
-              "detail": "ALPS Alpines Museum der Schweiz",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/bern/albert-mountain-award-und-uiaa-awards_AhFvWG6"
+              "label": "Böhmischer Sonntag",
+              "detail": "Lötschbergsaal, Spiez",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/boehmischer-sonntag_Amr82Wt"
             },
             {
-              "label": "Wildabend im Restaurant Aebi",
-              "detail": "Restaurant Aebi, Adelboden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wildabend-im-restaurant-aebi/"
+              "label": "Sonntagsbrunch",
+              "detail": "Hotel Eden Spiez, Spiez",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sonntagsbrunch-13/"
             },
             {
-              "label": "Der Weg Einer Freiheit (DE)",
-              "detail": "Le Port Franc, Port",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-weg-einer-freiheit-de/"
+              "label": "Giornate svizzere del corno naturale",
+              "detail": "Beatenberg",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornate-svizzere-del-corno-naturale/"
             },
             {
-              "label": "Rolf Marti & Lisa Catena – «Mys Käthi schmöckt nach Schoggola»",
-              "detail": "KulturKapelle 9, Spiez",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/rolf-marti-und-lisa-catena-mys-kaethi-schmoeckt-nach-schoggola_Ad277Ru"
+              "label": "Schlossführung zum Saisonende",
+              "detail": "Spiez",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlossfuehrung-5/"
             },
             {
-              "label": "Super ABBA",
-              "detail": "Stadttheater Langenthal, Langenthal",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/super-abba_AUTtsbP"
+              "label": "Konzert im Sommersaal",
+              "detail": "Schloss Oberhofen, Oberhofen am Thunersee",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberhofen-am-thunersee/konzert-im-sommersaal_A5Qr8qh"
             },
             {
-              "label": "David Howald",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/david-howald/"
+              "label": "Vivaldi - Die vier Jahreszeiten",
+              "detail": "Evang.-ref. Stadtkirche / Temple Allemand",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vivaldi-die-vier-jahreszeiten-10/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/berna/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "226",
+          "value": "224",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Live music - Brooke Law",
-              "detail": "Gemmi Taverne, Kandersteg",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/events/music/kandersteg/live-music-brooke-law_AucHv7T"
+              "label": "Letzte Chance: Sammelstopp \"spychere!\"",
+              "detail": "Langnau i.E., Langnau im Emmental",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/letzte-chance-sammelstopp-spychere/"
             },
             {
-              "label": "Trüelete - vintage festival",
-              "detail": "Bielersee Tourismus",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/trueelete/"
+              "label": "Melchior Prisi Geh nicht allein ins Emmental",
+              "detail": "Soletta, Ins",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/melchior-prisi-geh-nicht-allein-ins-emmental/"
             },
             {
-              "label": "Besuchstag Militärflugplatz Meiringen",
-              "detail": "3857 Unterbach BE, Meiringen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/besuchstag-militaerflugplatz-meiringen/"
+              "label": "Familiengottesdienst",
+              "detail": "Kirche Diemtigen, Diemtigen",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/diemtigen/familiengottesdienst_AbGb2QX"
             },
             {
-              "label": "21th Homemade Metzgete",
-              "detail": "Saanenmöser",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/21th-homemade-metzgete/"
+              "label": "Kasperlitheater Gwundernäsli - Kasperli in Afrika",
+              "detail": "Kultur Spiegel Spiez, Spiez",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kasperlitheater-gwundernaesli-kasperli-in-afrika/"
             },
             {
-              "label": "Albert Mountain Award und UIAA-Awards",
-              "detail": "ALPS Alpines Museum der Schweiz",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/bern/albert-mountain-award-und-uiaa-awards_AhFvWG6"
+              "label": "Bohemian Sunday",
+              "detail": "Lötschbergsaal, Spiez",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/boehmischer-sonntag_Amr82Wt"
             },
             {
-              "label": "Wildabend im Restaurant Aebi",
-              "detail": "Restaurant Aebi, Adelboden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wildabend-im-restaurant-aebi/"
+              "label": "Sonntagsbrunch",
+              "detail": "Hotel Eden Spiez, Spiez",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sonntagsbrunch-13/"
             },
             {
-              "label": "Der Weg Einer Freiheit (DE)",
-              "detail": "Le Port Franc, Port",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-weg-einer-freiheit-de/"
+              "label": "Swiss Natural Horn Days",
+              "detail": "Beatenberg",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornate-svizzere-del-corno-naturale/"
             },
             {
-              "label": "Rolf Marti & Lisa Catena – «Mys Käthi schmöckt nach Schoggola»",
-              "detail": "KulturKapelle 9, Spiez",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/rolf-marti-und-lisa-catena-mys-kaethi-schmoeckt-nach-schoggola_Ad277Ru"
+              "label": "Castle tour at the end of the season",
+              "detail": "Spiez",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlossfuehrung-5/"
             },
             {
-              "label": "Super ABBA",
-              "detail": "Stadttheater Langenthal, Langenthal",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/super-abba_AUTtsbP"
+              "label": "Konzert im Sommersaal",
+              "detail": "Schloss Oberhofen, Oberhofen am Thunersee",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberhofen-am-thunersee/konzert-im-sommersaal_A5Qr8qh"
             },
             {
-              "label": "David Howald",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/david-howald/"
+              "label": "Vivaldi - Die vier Jahreszeiten",
+              "detail": "Evang.-ref. Stadtkirche / Temple Allemand",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vivaldi-die-vier-jahreszeiten-10/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/bern/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "226",
+          "value": "224",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,69 +279,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Live Musik - Brooke Law",
-              "detail": "Gemmi Taverne, Kandersteg",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/events/music/kandersteg/live-music-brooke-law_AucHv7T"
+              "label": "Letzte Chance: Sammelstopp \"spychere!\"",
+              "detail": "Langnau i.E., Langnau im Emmental",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/letzte-chance-sammelstopp-spychere/"
             },
             {
-              "label": "Trüelete",
-              "detail": "Bielersee Tourismus",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/trueelete/"
+              "label": "Melchior Prisi. Geh nicht allein ins Emmental",
+              "detail": "Soletta, Ins",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/melchior-prisi-geh-nicht-allein-ins-emmental/"
             },
             {
-              "label": "Besuchstag Militärflugplatz Meiringen",
-              "detail": "3857 Unterbach BE, Meiringen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/besuchstag-militaerflugplatz-meiringen/"
+              "label": "Familiengottesdienst",
+              "detail": "Kirche Diemtigen, Diemtigen",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/diemtigen/familiengottesdienst_AbGb2QX"
             },
             {
-              "label": "21. Hausgemachte Metzgete",
-              "detail": "Saanenmöser",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/21th-homemade-metzgete/"
+              "label": "Kasperlitheater Gwundernäsli - Kasperli in Afrika",
+              "detail": "Kultur Spiegel Spiez, Spiez",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kasperlitheater-gwundernaesli-kasperli-in-afrika/"
             },
             {
-              "label": "Albert Mountain Award und UIAA-Awards",
-              "detail": "ALPS Alpines Museum der Schweiz",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/bern/albert-mountain-award-und-uiaa-awards_AhFvWG6"
+              "label": "B ⑤hmischer Sonntag",
+              "detail": "Lötschbergsaal, Spiez",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/boehmischer-sonntag_Amr82Wt"
             },
             {
-              "label": "Wildabend im Restaurant Aebi",
-              "detail": "Restaurant Aebi, Adelboden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wildabend-im-restaurant-aebi/"
+              "label": "Sonntagsbrunch",
+              "detail": "Hotel Eden Spiez, Spiez",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sonntagsbrunch-13/"
             },
             {
-              "label": "Der Weg Einer Freiheit (DE)",
-              "detail": "Le Port Franc, Port",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-weg-einer-freiheit-de/"
+              "label": "Schweizer Naturhorntage",
+              "detail": "Beatenberg",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornate-svizzere-del-corno-naturale/"
             },
             {
-              "label": "Rolf Marti & Lisa Catena – «Mys Käthi schmöckt nach Schoggola»",
-              "detail": "KulturKapelle 9, Spiez",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/rolf-marti-und-lisa-catena-mys-kaethi-schmoeckt-nach-schoggola_Ad277Ru"
+              "label": "Schlossf ①hrung zum Saisonende",
+              "detail": "Spiez",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlossfuehrung-5/"
             },
             {
-              "label": "Super ABBA",
-              "detail": "Stadttheater Langenthal, Langenthal",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/super-abba_AUTtsbP"
+              "label": "Konzert im Sommersaal",
+              "detail": "Schloss Oberhofen, Oberhofen am Thunersee",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberhofen-am-thunersee/konzert-im-sommersaal_A5Qr8qh"
             },
             {
-              "label": "David Howald",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/david-howald/"
+              "label": "Vivaldi - Die vier Jahreszeiten",
+              "detail": "Evang.-ref. Stadtkirche / Temple Allemand",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vivaldi-die-vier-jahreszeiten-10/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/bern/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "226",
+          "value": "224",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,69 +402,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Musique en direct - Brooke Law",
-              "detail": "Gemmi Taverne, Kandersteg",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/events/music/kandersteg/live-music-brooke-law_AucHv7T"
+              "label": "Letzte Chance: Sammelstopp \"spychere!\"",
+              "detail": "Langnau i.E., Langnau im Emmental",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/letzte-chance-sammelstopp-spychere/"
             },
             {
-              "label": "Trüelete",
-              "detail": "Bielersee Tourismus",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/trueelete/"
+              "label": "Melchior Prisi Geh nicht allein ins Emmental",
+              "detail": "Soletta, Ins",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/melchior-prisi-geh-nicht-allein-ins-emmental/"
             },
             {
-              "label": "Besuchstag Militärflugplatz Meiringen",
-              "detail": "3857 Unterbach BE, Meiringen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/besuchstag-militaerflugplatz-meiringen/"
+              "label": "Familiengottesdienst",
+              "detail": "Kirche Diemtigen, Diemtigen",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/diemtigen/familiengottesdienst_AbGb2QX"
             },
             {
-              "label": "21e Cochonaille fait maison",
-              "detail": "Saanenmöser",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/21th-homemade-metzgete/"
+              "label": "Kasperlitheater Gwundernäsli - Kasperli in Afrika",
+              "detail": "Kultur Spiegel Spiez, Spiez",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kasperlitheater-gwundernaesli-kasperli-in-afrika/"
             },
             {
-              "label": "Albert Mountain Award und UIAA-Awards",
-              "detail": "ALPS Alpines Museum der Schweiz",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/bern/albert-mountain-award-und-uiaa-awards_AhFvWG6"
+              "label": "Dimanche bohémien",
+              "detail": "Lötschbergsaal, Spiez",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/boehmischer-sonntag_Amr82Wt"
             },
             {
-              "label": "Wildabend im Restaurant Aebi",
-              "detail": "Restaurant Aebi, Adelboden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/wildabend-im-restaurant-aebi/"
+              "label": "Sonntagsbrunch",
+              "detail": "Hotel Eden Spiez, Spiez",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sonntagsbrunch-13/"
             },
             {
-              "label": "Der Weg Einer Freiheit (DE)",
-              "detail": "Le Port Franc, Port",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/der-weg-einer-freiheit-de/"
+              "label": "Journées suisses du cor naturel",
+              "detail": "Beatenberg",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornate-svizzere-del-corno-naturale/"
             },
             {
-              "label": "Rolf Marti & Lisa Catena – «Mys Käthi schmöckt nach Schoggola»",
-              "detail": "KulturKapelle 9, Spiez",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/rolf-marti-und-lisa-catena-mys-kaethi-schmoeckt-nach-schoggola_Ad277Ru"
+              "label": "Château de la saison",
+              "detail": "Spiez",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlossfuehrung-5/"
             },
             {
-              "label": "Super ABBA",
-              "detail": "Stadttheater Langenthal, Langenthal",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/langenthal/super-abba_AUTtsbP"
+              "label": "Konzert im Sommersaal",
+              "detail": "Schloss Oberhofen, Oberhofen am Thunersee",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberhofen-am-thunersee/konzert-im-sommersaal_A5Qr8qh"
             },
             {
-              "label": "David Howald",
-              "detail": "Biel, Biel/Bienne",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/david-howald/"
+              "label": "Vivaldi - Die vier Jahreszeiten",
+              "detail": "Evang.-ref. Stadtkirche / Temple Allemand",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vivaldi-die-vier-jahreszeiten-10/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/berne/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "servizi",
-  "updatedAt": "2026-10-23T10:42:39.932Z",
-  "contentHash": "647a7ccfbffe91f9921affd8e70f52962c0e8886f991d4526497f8bd9f7bbabd",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "b21c4ff83f7021ddad1d0773c788178899f09eaa9e76f5629df517a35d59ab16",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-23T03:28:55.384Z",
+      "updatedAt": "2026-10-25T01:48:37.897Z",
       "keyFacts": 0
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-23T05:06:32.759Z",
+      "updatedAt": "2026-10-25T05:00:57.781Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T20:51:18.236Z",
+      "updatedAt": "2026-10-24T19:51:00.050Z",
       "keyFacts": 0
     }
   ],
@@ -64,21 +64,6 @@
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
             {
-              "label": "Pharmacie Neukomm",
-              "detail": "Courgenay, Ajoie",
-              "date": "2026-10-17T06:00:00.000Z"
-            },
-            {
-              "label": "Val Terbi",
-              "detail": "Delémont, Delémont",
-              "date": "2026-10-17T06:00:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
-              "date": "2026-10-23T16:30:00.000Z"
-            },
-            {
               "label": "Amavita Pré Guillaume",
               "detail": "Delémont, Delémont",
               "date": "2026-10-24T06:00:00.000Z"
@@ -91,12 +76,27 @@
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-24T16:30:00.000Z"
+              "date": "2026-10-25T09:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-25T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-25T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-26T17:30:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-23T03:28:55.384Z"
+          "updatedAt": "2026-10-25T01:48:37.897Z"
         },
         {
           "id": "meteo",
@@ -105,18 +105,23 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "10 °C",
-              "detail": "oggi da 6 a 13 °C"
+              "value": "12 °C",
+              "detail": "oggi da 7 a 14 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Subsides des primes de l'assurance-maladie dans le canton du Jura pour 2027",
+              "date": "2026-10-23",
+              "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Subsides-des-primes-de-l-assurance-maladie-dans-le-canton-du-Jura-pour-2027.html"
+            },
             {
               "label": "Le chômage en légère baisse à 4.2% en septembre 2026",
               "date": "2026-10-06",
@@ -128,7 +133,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -178,7 +183,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "JU",
@@ -215,21 +220,6 @@
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
             {
-              "label": "Pharmacie Neukomm",
-              "detail": "Courgenay, Ajoie",
-              "date": "2026-10-17T06:00:00.000Z"
-            },
-            {
-              "label": "Val Terbi",
-              "detail": "Delémont, Delémont",
-              "date": "2026-10-17T06:00:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
-              "date": "2026-10-23T16:30:00.000Z"
-            },
-            {
               "label": "Amavita Pré Guillaume",
               "detail": "Delémont, Delémont",
               "date": "2026-10-24T06:00:00.000Z"
@@ -242,12 +232,27 @@
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-24T16:30:00.000Z"
+              "date": "2026-10-25T09:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-25T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-25T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-26T17:30:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-23T03:28:55.384Z"
+          "updatedAt": "2026-10-25T01:48:37.897Z"
         },
         {
           "id": "meteo",
@@ -256,18 +261,23 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "10 °C",
-              "detail": "today from 6 to 13 °C"
+              "value": "12 °C",
+              "detail": "today from 7 to 14 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Subsides des primes de l'assurance-maladie dans le canton du Jura pour 2027",
+              "date": "2026-10-23",
+              "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Subsides-des-primes-de-l-assurance-maladie-dans-le-canton-du-Jura-pour-2027.html"
+            },
             {
               "label": "Le chômage en légère baisse à 4.2% en septembre 2026",
               "date": "2026-10-06",
@@ -279,7 +289,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -325,7 +335,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "JU",
@@ -362,21 +372,6 @@
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
             {
-              "label": "Pharmacie Neukomm",
-              "detail": "Courgenay, Ajoie",
-              "date": "2026-10-17T06:00:00.000Z"
-            },
-            {
-              "label": "Val Terbi",
-              "detail": "Delémont, Delémont",
-              "date": "2026-10-17T06:00:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
-              "date": "2026-10-23T16:30:00.000Z"
-            },
-            {
               "label": "Amavita Pré Guillaume",
               "detail": "Delémont, Delémont",
               "date": "2026-10-24T06:00:00.000Z"
@@ -389,12 +384,27 @@
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-24T16:30:00.000Z"
+              "date": "2026-10-25T09:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-25T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-25T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-26T17:30:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-23T03:28:55.384Z"
+          "updatedAt": "2026-10-25T01:48:37.897Z"
         },
         {
           "id": "meteo",
@@ -403,18 +413,23 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "10 °C",
-              "detail": "heute 6 bis 13 °C"
+              "value": "12 °C",
+              "detail": "heute 7 bis 14 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Subsides des primes de l'assurance-maladie dans le canton du Jura pour 2027",
+              "date": "2026-10-23",
+              "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Subsides-des-primes-de-l-assurance-maladie-dans-le-canton-du-Jura-pour-2027.html"
+            },
             {
               "label": "Le chômage en légère baisse à 4.2% en septembre 2026",
               "date": "2026-10-06",
@@ -426,7 +441,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -472,7 +487,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "JU",
@@ -509,21 +524,6 @@
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
             {
-              "label": "Pharmacie Neukomm",
-              "detail": "Courgenay, Ajoie",
-              "date": "2026-10-17T06:00:00.000Z"
-            },
-            {
-              "label": "Val Terbi",
-              "detail": "Delémont, Delémont",
-              "date": "2026-10-17T06:00:00.000Z"
-            },
-            {
-              "label": "Centre Migros",
-              "detail": "Moutier, Moutier",
-              "date": "2026-10-23T16:30:00.000Z"
-            },
-            {
               "label": "Amavita Pré Guillaume",
               "detail": "Delémont, Delémont",
               "date": "2026-10-24T06:00:00.000Z"
@@ -536,12 +536,27 @@
             {
               "label": "Centre Coop",
               "detail": "Moutier, Moutier",
-              "date": "2026-10-24T16:30:00.000Z"
+              "date": "2026-10-25T09:00:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-25T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-25T17:30:00.000Z"
+            },
+            {
+              "label": "Centre Coop",
+              "detail": "Moutier, Moutier",
+              "date": "2026-10-26T17:30:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Urgences/Numeros-d-urgence-Urgence.html",
-          "updatedAt": "2026-10-23T03:28:55.384Z"
+          "updatedAt": "2026-10-25T01:48:37.897Z"
         },
         {
           "id": "meteo",
@@ -550,18 +565,23 @@
           "items": [
             {
               "label": "Delémont",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 6 à 13 °C"
+              "value": "12 °C",
+              "detail": "aujourd’hui de 7 à 14 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Subsides des primes de l'assurance-maladie dans le canton du Jura pour 2027",
+              "date": "2026-10-23",
+              "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Subsides-des-primes-de-l-assurance-maladie-dans-le-canton-du-Jura-pour-2027.html"
+            },
             {
               "label": "Le chômage en légère baisse à 4.2% en septembre 2026",
               "date": "2026-10-06",
@@ -573,7 +593,7 @@
               "url": "https://www.jura.ch/fr/Autorites/Administration/CHA/SIC/Centre-medias/Communiques-2026/Primes-d-assurance-maladie-2027-nouvelle-hausse-importante-dans-le-Jura.html"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -615,7 +635,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

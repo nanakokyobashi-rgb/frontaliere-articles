@@ -4,12 +4,12 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "1df93a65d897814b4db033f066e4bd91876eaf65306bc30cb1fe85263e3ce5ef",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "0e9ca8a09d6f58694c1b2d38abd8fd353a8b0567e4f2d7e2123fd319070b5e44",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T19:30:03.925Z",
+      "updatedAt": "2026-10-25T02:23:31.213Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "97",
+          "value": "93",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "ANDY MIDDLETON QUARTET",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/andy-middleton-quartet_AGGhKR2"
+              "label": "Performance Parcours",
+              "detail": "Tanzhaus Basel - Magazin 1 - Studio Bühne, Basel",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/performance-parcours_AXxgycd"
             },
             {
-              "label": "Cordon Bleu Festial",
-              "detail": "Läufelfingen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cordon-bleu-festial/"
-            },
-            {
-              "label": "Line Dance uff em Rhy",
-              "detail": "Basel Schifflände, Basel",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/museums/children/events/basel/line-dance-cruise-on-the-river-rhine_A5yXACG"
-            },
-            {
-              "label": "Sunset Beats su Rhy - Les Acteurs",
+              "label": "La nave da ballo sul Reno - Discofox al ritmo dei più grandi successi",
               "detail": "MS Christoph Merian",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/eventi/musica/basilea/sunset-beats-su-rhy-les-acteurs_ApGsaa1"
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tanzschiff-uff-em-rhy-discofox-zu-den-groessten-hits_AqHBqQq"
             },
             {
-              "label": "Manga Workshop in der Bibliothek Dorf",
-              "detail": "Riehen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manga-workshop-in-der-bibliothek-dorf/"
+              "label": "Ashley Hribar - Das Cabinet des Dr. Caligari",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ashley-hribar-das-cabinet-des-dr-caligari/"
             },
             {
-              "label": "Spuren einer Tradition",
-              "detail": "Allschwil",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spuren-einer-tradition/"
+              "label": "Die Liebe, ein seltsames Spiel",
+              "detail": "TAM Theater am Mühlenrain",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weil-am-rhein/die-liebe-ein-seltsames-spiel_AK3ieD3"
             },
             {
-              "label": "«Mit Linggs», Pedro Lenz und Simon Ho",
-              "detail": "Revue Langenbruck, Langenbruck",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mit-linggs-pedro-lenz-und-simon-ho/"
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB)",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
             },
             {
-              "label": "Barbara Hutzenlaub – Sprechstunde",
-              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/barbara-hutzenlaub-sprechstunde_AF9kJ4d"
+              "label": "Tanznachmittag mit Joel Waldvogel",
+              "detail": "Alterszentrum Am Bachgraben, Allschwil",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/tanznachmittag-mit-joel-waldvogel_A597Ywr"
             },
             {
-              "label": "Massimo Rocchi - Live - 50 Jahre Bühnenpräsenz",
-              "detail": "Basel",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/massimo-rocchi-live-50-jahre-buehnenpraesenz/"
+              "label": "Patrick Joray Quartet",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/patrick-joray-quartet_A3p6Fni"
             },
             {
-              "label": "siJamais - Blackout – eine göttliche Komödie",
-              "detail": "Theater im Teufelhof",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sijamais-blackout-eine-goettliche-komoedie_AEqPg1j"
+              "label": "Literatur und Medizin: «Trocken» von Daniel Wagner",
+              "detail": "Universitätsbibliothek Medizin, Basel",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literatur-und-medizin-trocken-von-daniel-wagner/"
+            },
+            {
+              "label": "Baloise Session: ERYKAH BADU | MAX HERRE & JOY DENALANE",
+              "detail": "Messe Basel, Basel",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/baloise-session-erykah-badu-max-herre-und-joy-denalane_Ax6QJcP"
+            },
+            {
+              "label": "Sylphe - Pure Piaf",
+              "detail": "Theater Fauteuil - Tabourettli",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sylphe-pure-piaf_A7q9uqi"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/basilea/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "97",
+          "value": "93",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "ANDY MIDDLETON QUARTET",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/andy-middleton-quartet_AGGhKR2"
+              "label": "Performance Parcours",
+              "detail": "Tanzhaus Basel - Magazin 1 - Studio Bühne, Basel",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/performance-parcours_AXxgycd"
             },
             {
-              "label": "Cordon Bleu Festial",
-              "detail": "Läufelfingen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cordon-bleu-festial/"
-            },
-            {
-              "label": "Line Dance Cruise on the river Rhine",
-              "detail": "Basel Schifflände, Basel",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/museums/children/events/basel/line-dance-cruise-on-the-river-rhine_A5yXACG"
-            },
-            {
-              "label": "Sunset Beats on the Rhine - Les Acteurs",
+              "label": "Dance Cruise on the Rhine - Discofox to the Biggest Hits",
               "detail": "MS Christoph Merian",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/eventi/musica/basilea/sunset-beats-su-rhy-les-acteurs_ApGsaa1"
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tanzschiff-uff-em-rhy-discofox-zu-den-groessten-hits_AqHBqQq"
             },
             {
-              "label": "Manga Workshop in der Bibliothek Dorf",
-              "detail": "Riehen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manga-workshop-in-der-bibliothek-dorf/"
+              "label": "Ashley Hribar - Das Cabinet des Dr. Caligari",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ashley-hribar-das-cabinet-des-dr-caligari/"
             },
             {
-              "label": "Spuren einer Tradition",
-              "detail": "Allschwil",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spuren-einer-tradition/"
+              "label": "Die Liebe, ein seltsames Spiel",
+              "detail": "TAM Theater am Mühlenrain",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weil-am-rhein/die-liebe-ein-seltsames-spiel_AK3ieD3"
             },
             {
-              "label": "«Mit Linggs», Pedro Lenz und Simon Ho",
-              "detail": "Revue Langenbruck, Langenbruck",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mit-linggs-pedro-lenz-und-simon-ho/"
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB)",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
             },
             {
-              "label": "Barbara Hutzenlaub – Sprechstunde",
-              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/barbara-hutzenlaub-sprechstunde_AF9kJ4d"
+              "label": "Tanznachmittag mit Joel Waldvogel",
+              "detail": "Alterszentrum Am Bachgraben, Allschwil",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/tanznachmittag-mit-joel-waldvogel_A597Ywr"
             },
             {
-              "label": "Massimo Rocchi - Live - 50 Jahre Bühnenpräsenz",
-              "detail": "Basel",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/massimo-rocchi-live-50-jahre-buehnenpraesenz/"
+              "label": "Patrick Joray Quartet",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/patrick-joray-quartet_A3p6Fni"
             },
             {
-              "label": "siJamais - Blackout – eine göttliche Komödie",
-              "detail": "Theater im Teufelhof",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sijamais-blackout-eine-goettliche-komoedie_AEqPg1j"
+              "label": "Literatur und Medizin: «Trocken» von Daniel Wagner",
+              "detail": "Universitätsbibliothek Medizin, Basel",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literatur-und-medizin-trocken-von-daniel-wagner/"
+            },
+            {
+              "label": "Baloise Session: ERYKAH BADU | MAX HERRE & JOY DENALANE",
+              "detail": "Messe Basel, Basel",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/baloise-session-erykah-badu-max-herre-und-joy-denalane_Ax6QJcP"
+            },
+            {
+              "label": "Sylphe - Pure Piaf",
+              "detail": "Theater Fauteuil - Tabourettli",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sylphe-pure-piaf_A7q9uqi"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/basel/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "97",
+          "value": "93",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "ANDY MIDDLETON QUARTET",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/andy-middleton-quartet_AGGhKR2"
+              "label": "Performance Parcours",
+              "detail": "Tanzhaus Basel - Magazin 1 - Studio Bühne, Basel",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/performance-parcours_AXxgycd"
             },
             {
-              "label": "Cordon Bleu Festial",
-              "detail": "Läufelfingen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cordon-bleu-festial/"
-            },
-            {
-              "label": "Line Dance uff em Rhy",
-              "detail": "Basel Schifflände, Basel",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/museums/children/events/basel/line-dance-cruise-on-the-river-rhine_A5yXACG"
-            },
-            {
-              "label": "Sunset Beats uff em Rhy - Les Acteurs",
+              "label": "Tanzschiff uff em Rhy - Discofox zu den grössten Hits",
               "detail": "MS Christoph Merian",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/eventi/musica/basilea/sunset-beats-su-rhy-les-acteurs_ApGsaa1"
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tanzschiff-uff-em-rhy-discofox-zu-den-groessten-hits_AqHBqQq"
             },
             {
-              "label": "Manga Workshop in der Bibliothek Dorf",
-              "detail": "Riehen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manga-workshop-in-der-bibliothek-dorf/"
+              "label": "Ashley Hribar - Das Cabinet des Dr. Caligari",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ashley-hribar-das-cabinet-des-dr-caligari/"
             },
             {
-              "label": "Spuren einer Tradition",
-              "detail": "Allschwil",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spuren-einer-tradition/"
+              "label": "Die Liebe, ein seltsames Spiel",
+              "detail": "TAM Theater am Mühlenrain",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weil-am-rhein/die-liebe-ein-seltsames-spiel_AK3ieD3"
             },
             {
-              "label": "«Mit Linggs», Pedro Lenz und Simon Ho",
-              "detail": "Revue Langenbruck, Langenbruck",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mit-linggs-pedro-lenz-und-simon-ho/"
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB)",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
             },
             {
-              "label": "Barbara Hutzenlaub – Sprechstunde",
-              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/barbara-hutzenlaub-sprechstunde_AF9kJ4d"
+              "label": "Tanznachmittag mit Joel Waldvogel",
+              "detail": "Alterszentrum Am Bachgraben, Allschwil",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/tanznachmittag-mit-joel-waldvogel_A597Ywr"
             },
             {
-              "label": "Massimo Rocchi - Live - 50 Jahre Bühnenpräsenz",
-              "detail": "Basel",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/massimo-rocchi-live-50-jahre-buehnenpraesenz/"
+              "label": "Patrick Joray Quartet",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/patrick-joray-quartet_A3p6Fni"
             },
             {
-              "label": "siJamais - Blackout – eine göttliche Komödie",
-              "detail": "Theater im Teufelhof",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sijamais-blackout-eine-goettliche-komoedie_AEqPg1j"
+              "label": "Literatur und Medizin: «Trocken» von Daniel Wagner",
+              "detail": "Universitätsbibliothek Medizin, Basel",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literatur-und-medizin-trocken-von-daniel-wagner/"
+            },
+            {
+              "label": "Baloise Session: ERYKAH BADU | MAX HERRE & JOY DENALANE",
+              "detail": "Messe Basel, Basel",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/baloise-session-erykah-badu-max-herre-und-joy-denalane_Ax6QJcP"
+            },
+            {
+              "label": "Sylphe - Pure Piaf",
+              "detail": "Theater Fauteuil - Tabourettli",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sylphe-pure-piaf_A7q9uqi"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/basel/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "97",
+          "value": "93",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "ANDY MIDDLETON QUARTET",
-              "detail": "the bird's eye jazz club",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/andy-middleton-quartet_AGGhKR2"
+              "label": "Performance Parcours",
+              "detail": "Tanzhaus Basel - Magazin 1 - Studio Bühne, Basel",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/performance-parcours_AXxgycd"
             },
             {
-              "label": "Cordon Bleu Festial",
-              "detail": "Läufelfingen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cordon-bleu-festial/"
-            },
-            {
-              "label": "Line Dance uff em Rhy",
-              "detail": "Basel Schifflände, Basel",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/museums/children/events/basel/line-dance-cruise-on-the-river-rhine_A5yXACG"
-            },
-            {
-              "label": "Sunset Beats uff em Rhy - Les Acteurs",
+              "label": "Le bateau de danse sur le Rhin - Discofox sur les plus grands tubes",
               "detail": "MS Christoph Merian",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/eventi/musica/basilea/sunset-beats-su-rhy-les-acteurs_ApGsaa1"
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tanzschiff-uff-em-rhy-discofox-zu-den-groessten-hits_AqHBqQq"
             },
             {
-              "label": "Manga Workshop in der Bibliothek Dorf",
-              "detail": "Riehen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manga-workshop-in-der-bibliothek-dorf/"
+              "label": "Ashley Hribar - Das Cabinet des Dr. Caligari",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ashley-hribar-das-cabinet-des-dr-caligari/"
             },
             {
-              "label": "Spuren einer Tradition",
-              "detail": "Allschwil",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spuren-einer-tradition/"
+              "label": "Die Liebe, ein seltsames Spiel",
+              "detail": "TAM Theater am Mühlenrain",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/weil-am-rhein/die-liebe-ein-seltsames-spiel_AK3ieD3"
             },
             {
-              "label": "«Mit Linggs», Pedro Lenz und Simon Ho",
-              "detail": "Revue Langenbruck, Langenbruck",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/mit-linggs-pedro-lenz-und-simon-ho/"
+              "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
+              "detail": "Universitätsbibliothek (UB)",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/kuenstliche-intelligenz-verstehen-hilfe-im-alltag-oder-gefahr_AGvNvnf"
             },
             {
-              "label": "Barbara Hutzenlaub – Sprechstunde",
-              "detail": "Kulturzentrum Alts Schlachthuus, Laufen",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/laufen/barbara-hutzenlaub-sprechstunde_AF9kJ4d"
+              "label": "Tanznachmittag mit Joel Waldvogel",
+              "detail": "Alterszentrum Am Bachgraben, Allschwil",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/allschwil/tanznachmittag-mit-joel-waldvogel_A597Ywr"
             },
             {
-              "label": "Massimo Rocchi - Live - 50 Jahre Bühnenpräsenz",
-              "detail": "Basel",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/massimo-rocchi-live-50-jahre-buehnenpraesenz/"
+              "label": "Patrick Joray Quartet",
+              "detail": "the bird's eye jazz club",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/patrick-joray-quartet_A3p6Fni"
             },
             {
-              "label": "siJamais - Blackout – eine göttliche Komödie",
-              "detail": "Theater im Teufelhof",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sijamais-blackout-eine-goettliche-komoedie_AEqPg1j"
+              "label": "Literatur und Medizin: «Trocken» von Daniel Wagner",
+              "detail": "Universitätsbibliothek Medizin, Basel",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literatur-und-medizin-trocken-von-daniel-wagner/"
+            },
+            {
+              "label": "Baloise Session: ERYKAH BADU | MAX HERRE & JOY DENALANE",
+              "detail": "Messe Basel, Basel",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/baloise-session-erykah-badu-max-herre-und-joy-denalane_Ax6QJcP"
+            },
+            {
+              "label": "Sylphe - Pure Piaf",
+              "detail": "Theater Fauteuil - Tabourettli",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sylphe-pure-piaf_A7q9uqi"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/bale/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

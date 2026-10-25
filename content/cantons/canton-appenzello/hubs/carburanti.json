@@ -4,14 +4,14 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T02:18:36.856Z",
-  "contentHash": "f522e319d21481fcc23469ab974cc3ae116b56f531c790e3753b731e119617ad",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "93e3cca0c8959887477f60830180e773bc35e1f54e4931db5092e463d41555c4",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-22T12:21:38.892Z",
+      "updatedAt": "2026-10-24T11:32:51.939Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-29T12:21:38.892Z"
+      "carryUntilAt": "2026-10-31T11:32:51.939Z"
     }
   ],
   "locales": {
@@ -54,23 +54,29 @@
             },
             {
               "label": "Benzina 95 — Austria",
-              "value": "1,794 EUR/l",
-              "detail": "media regionale: minimo 1,789 EUR/l, 11 stazioni rilevate",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "1,749 EUR/l",
+              "detail": "media regionale: minimo 1,719 EUR/l, 13 stazioni rilevate",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2,159 EUR/l",
-              "detail": "media regionale: minimo 2,100 EUR/l, 10 stazioni rilevate",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,131 EUR/l",
+              "detail": "media regionale: minimo 2,100 EUR/l, 17 stazioni rilevate",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Herisau, più risorse per la RBH Hinterland",
+          "url": "/articoli-appenzello/rbh-herisau-piu-risorse/",
+          "excerpt": "Il Comune di Herisau segnala casi in aumento e maggiore complessità nella gestione della RBH Hinterland; negli anni scorsi sono cresciute anche le posizioni.",
+          "date": "2026-10-23T12:58:04.345Z"
+        },
         {
           "title": "Cooperazione strategica: Appenzello e San Gallo in linea",
           "url": "/articoli-appenzello/appenzello-cooperazione-strategica-2024/",
@@ -94,12 +100,6 @@
           "url": "/articoli-appenzello/hundwil-imposte-preventivo/",
           "excerpt": "Hundwil prevede nel 2027 un avanzo di CHF 111'200, con entrate per CHF 6'421'000 e spese per CHF 6'309'800, insieme alla riduzione delle imposte.",
           "date": "2026-10-21T19:06:08.539Z"
-        },
-        {
-          "title": "Feuerschaukommission Appenzell fissa le remunerazioni 2027",
-          "url": "/articoli-appenzello/appenzell-remunerazioni-energia-2027/",
-          "excerpt": "La Feuerschaukommission di Appenzell lega l'energia immessa al prezzo di borsa orario e prevede un premio minimo per impianti fino a 150 kW.",
-          "date": "2026-10-21T18:16:59.022Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T02:18:36.856Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -153,23 +153,29 @@
             },
             {
               "label": "Petrol 95 — Austria",
-              "value": "1.794 EUR/l",
-              "detail": "regional average: lowest 1.789 EUR/l, 11 stations surveyed",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "1.749 EUR/l",
+              "detail": "regional average: lowest 1.719 EUR/l, 13 stations surveyed",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2.159 EUR/l",
-              "detail": "regional average: lowest 2.100 EUR/l, 10 stations surveyed",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.131 EUR/l",
+              "detail": "regional average: lowest 2.100 EUR/l, 17 stations surveyed",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Herisau, more resources for RBH Hinterland",
+          "url": "/en/appenzell-articles/herisau-rbh-more-resources/",
+          "excerpt": "The Municipality of Herisau reports an increase in cases and greater complexity in managing RBH Hinterland; positions have also increased in recent years.",
+          "date": "2026-10-23T12:58:04.345Z"
+        },
         {
           "title": "Strategic cooperation: Appenzell and St. Gallen aligned",
           "url": "/en/appenzell-articles/appenzell-strategic-cooperation-2024/",
@@ -193,12 +199,6 @@
           "url": "/en/appenzell-articles/hundwil-tax-budget/",
           "excerpt": "Hundwil expects a surplus of CHF 111'200 in 2027, with revenue of CHF 6'421'000 and expenses of CHF 6'309'800, along with a reduction in taxes.",
           "date": "2026-10-21T19:06:08.539Z"
-        },
-        {
-          "title": "Feuerschaukommission Appenzell sets remuneration for 2027",
-          "url": "/en/appenzell-articles/appenzell-energy-remuneration-2027/",
-          "excerpt": "The Feuerschaukommission of Appenzell links the energy fed into the grid to the hourly exchange price and provides for a minimum premium for installations of up to 150 kW.",
-          "date": "2026-10-21T18:16:59.022Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T02:18:36.856Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -252,23 +252,29 @@
             },
             {
               "label": "Benzin 95 — Österreich",
-              "value": "1.794 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.789 EUR/l, 11 erfasste Tankstellen",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "1.749 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.719 EUR/l, 13 erfasste Tankstellen",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Österreich",
-              "value": "2.159 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.100 EUR/l, 10 erfasste Tankstellen",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.131 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.100 EUR/l, 17 erfasste Tankstellen",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Herisau, mehr Ressourcen für die RBH Hinterland",
+          "url": "/de/appenzell-artikel/herisau-rbh-mehr-ressourcen/",
+          "excerpt": "Die Gemeinde Herisau weist auf zunehmende Fallzahlen und eine grössere Komplexität bei der Bearbeitung der RBH Hinterland hin; in den vergangenen Jahren ist auch die Zahl der Stellen gestiegen.",
+          "date": "2026-10-23T12:58:04.345Z"
+        },
         {
           "title": "Strategische Zusammenarbeit: Appenzell und St. Gallen auf Kurs",
           "url": "/de/appenzell-artikel/appenzell-strategische-zusammenarbeit/",
@@ -292,12 +298,6 @@
           "url": "/de/appenzell-artikel/hundwil-steuern-budget/",
           "excerpt": "Für 2027 rechnet Hundwil mit einem Überschuss von CHF 111'200, Einnahmen von CHF 6'421'000 und Ausgaben von CHF 6'309'800 sowie einer Senkung der Steuern.",
           "date": "2026-10-21T19:06:08.539Z"
-        },
-        {
-          "title": "Feuerschaukommission Appenzell legt die Vergütungen für 2027 fest",
-          "url": "/de/appenzell-artikel/appenzell-ruecklieferverguetung-2027/",
-          "excerpt": "Die Feuerschaukommission Appenzell koppelt die eingespeiste Energie an den stündlichen Börsenpreis und sieht für Anlagen bis 150 kW eine Mindestprämie vor.",
-          "date": "2026-10-21T18:16:59.022Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T02:18:36.856Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -351,23 +351,29 @@
             },
             {
               "label": "Essence 95 — Autriche",
-              "value": "1,794 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,789 EUR/l, 11 stations relevées",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "1,749 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,719 EUR/l, 13 stations relevées",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Autriche",
-              "value": "2,159 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,100 EUR/l, 10 stations relevées",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,131 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,100 EUR/l, 17 stations relevées",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Herisau, davantage de ressources pour la RBH Hinterland",
+          "url": "/fr/articles-appenzell/herisau-rbh-plus-ressources/",
+          "excerpt": "La commune de Herisau signale une hausse des cas et une plus grande complexité dans la gestion de la RBH Hinterland ; ces dernières années, les postes ont également augmenté.",
+          "date": "2026-10-23T12:58:04.345Z"
+        },
         {
           "title": "Coopération stratégique : Appenzell et Saint-Gall sur la même longueur d’onde",
           "url": "/fr/articles-appenzell/appenzell-cooperation-strategique-2024/",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-appenzell/hundwil-impots-budget/",
           "excerpt": "Hundwil prévoit en 2027 un excédent de CHF 111'200, avec des recettes de CHF 6'421'000 et des dépenses de CHF 6'309'800, ainsi qu'une réduction des impôts.",
           "date": "2026-10-21T19:06:08.539Z"
-        },
-        {
-          "title": "La Feuerschaukommission Appenzell fixe les rémunérations pour 2027",
-          "url": "/fr/articles-appenzell/appenzell-remuneration-energie-2027/",
-          "excerpt": "La Feuerschaukommission d’Appenzell lie l’énergie injectée au prix de marché horaire et prévoit une prime minimale pour les installations allant jusqu’à 150 kW.",
-          "date": "2026-10-21T18:16:59.022Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T02:18:36.856Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

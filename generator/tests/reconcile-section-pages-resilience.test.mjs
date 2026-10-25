@@ -73,6 +73,43 @@ test('reconcile: timeout della sitemap e non verificabile allo stesso modo', asy
   assert.deepEqual(report.sections[0].unknown, [`${API_BASE}${CATALOG.sitemap}: fetch failed: timeout`]);
 });
 
+test('reconcile: ritenta una fetch di superficie fallita e poi continua', async () => {
+  const baseFetch = fakeFetch({ sitemap: '503' });
+  let manifestAttempts = 0;
+  const fetchImpl = async (url, options) => {
+    if (url.replace(/\?.*$/, '').endsWith('/manifest.json')) {
+      manifestAttempts++;
+      if (manifestAttempts === 1) throw new Error('fetch failed: transient network error');
+    }
+    return baseFetch(url, options);
+  };
+
+  const report = await reconcile({ apiBase: API_BASE, fetchImpl, retryDelayMs: 0 });
+
+  assert.equal(manifestAttempts, 2);
+  assert.equal(report.skipped, null);
+  assert.equal(report.sections[0].dispatch, false);
+});
+
+test('reconcile: ritenta una sitemap 5xx ma non cambia il piano prudente', async () => {
+  const sitemapXml = '<urlset><url><loc>https://frontaliereticino.ch/articoli-ticino/</loc></url></urlset>';
+  const baseFetch = fakeFetch({ sitemapXml });
+  let sitemapAttempts = 0;
+  const fetchImpl = async (url, options) => {
+    if (url.replace(/\?.*$/, '').endsWith(CATALOG.sitemap)) {
+      sitemapAttempts++;
+      if (sitemapAttempts === 1) return { ok: false, status: 503, text: async () => '' };
+    }
+    return baseFetch(url, options);
+  };
+
+  const report = await reconcile({ apiBase: API_BASE, fetchImpl, retryDelayMs: 0 });
+
+  assert.equal(sitemapAttempts, 2);
+  assert.equal(report.sections[0].expected, 1);
+  assert.equal(report.sections[0].dispatch, false);
+});
+
 test('reconcile: sitemap e slugs incoerenti non fanno fallire il run e non dispatchano', async () => {
   const sitemapXml = [
     '<urlset>',

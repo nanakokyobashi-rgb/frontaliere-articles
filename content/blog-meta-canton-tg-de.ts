@@ -54,6 +54,9 @@ const blogMetaCantonTgDe: Record<string, string> = {
     'blog.article.turgovia-modifica-piano-direttore-2027.title': 'Thurgau: Änderung des Richtplans für Wirtschaftsstandorte',
     'blog.article.turgovia-modifica-piano-direttore-2027.excerpt': 'Der Kanton Thurgau eröffnet die Vernehmlassung zur Überarbeitung des Richtplans für die Entwicklung von Handel und Industrie.',
     'blog.article.turgovia-modifica-piano-direttore-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sedi-rav-lavoratori-tg.title': 'RAV-Standorte und Dienstleistungen für Arbeitgeber im Kanton Thurgau',
+    'blog.article.sedi-rav-lavoratori-tg.excerpt': 'Die RAV-Standorte befinden sich in Amriswil, Frauenfeld und Kreuzlingen; offene Stellen werden kostenlos auf arbeit.swiss veröffentlicht.',
+    'blog.article.sedi-rav-lavoratori-tg.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonTgDe;

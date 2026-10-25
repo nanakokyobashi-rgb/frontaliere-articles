@@ -31,6 +31,7 @@ import { exitAfterDrain } from './lib/drain-stdio.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { assertLocalizedToponymPair, extractArticleProjectionText } from './lib/localized-toponyms.mjs';
 import { sanitizeArticleFaqMarkdown } from '../../scripts/lib/article-link-contract.mjs';
+import { assertFaqPairsHaveNoRejectedControls } from '../../scripts/lib/faq-control-contract.mjs';
 
 // Write-time guard (issue #66): strip any C0 control character other than
 // TAB/LF/CR before it reaches content/ — same rule as create-article.mjs write().
@@ -313,9 +314,10 @@ export function hasFaqKey(filePath, id = idOfBodyPath(filePath)) {
 
 export function replaceFaqInFile(filePath, newFaqArray, id = idOfBodyPath(filePath)) {
   const locale = basename(dirname(resolve(filePath)));
-  if (!passesLocalizedToponymGate(filePath, id, locale, newFaqArray)) return false;
+  const safeFaq = assertFaqPairsHaveNoRejectedControls(newFaqArray, `FAQ replacement ${id}`);
+  if (!passesLocalizedToponymGate(filePath, id, locale, safeFaq)) return false;
   let content = readFileSync(filePath, 'utf-8');
-  const jsonStr = serializeFaqLiteral(sanitizeArticleFaqMarkdown(newFaqArray, locale));
+  const jsonStr = serializeFaqLiteral(sanitizeArticleFaqMarkdown(safeFaq, locale));
   // Escape-aware regex + function replacer to avoid $-pattern issues.
   // `g` + last match: write the occurrence that is actually LIVE at
   // runtime, same reasoning as extractFaqFromFile above. Ancorata all'id:
@@ -334,9 +336,10 @@ export function replaceFaqInFile(filePath, newFaqArray, id = idOfBodyPath(filePa
 
 function insertFaqKey(filePath, articleId, faqArray) {
   const locale = basename(dirname(resolve(filePath)));
-  if (!passesLocalizedToponymGate(filePath, articleId, locale, faqArray)) return false;
+  const safeFaq = assertFaqPairsHaveNoRejectedControls(faqArray, `FAQ insertion ${articleId}`);
+  if (!passesLocalizedToponymGate(filePath, articleId, locale, safeFaq)) return false;
   let content = readFileSync(filePath, 'utf-8');
-  const jsonStr = serializeFaqLiteral(sanitizeArticleFaqMarkdown(faqArray, locale));
+  const jsonStr = serializeFaqLiteral(sanitizeArticleFaqMarkdown(safeFaq, locale));
   const closingIdx = content.lastIndexOf('};');
   if (closingIdx === -1) return false;
   const faqLine = `    'blog.article.${articleId}.faq': '${jsonStr}',\n`;

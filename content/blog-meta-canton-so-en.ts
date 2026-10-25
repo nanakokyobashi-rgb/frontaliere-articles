@@ -45,6 +45,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.cambio-ora-rischio-wildunfalli.title': 'Clock changes raise wildlife accident risk in Solothurn',
     'blog.article.cambio-ora-rischio-wildunfalli.excerpt': 'On the night between October 24 and 25, 2026, the clocks go back one hour, coinciding with the activity of roe deer, red deer and wild boars.',
     'blog.article.cambio-ora-rischio-wildunfalli.imageAlt': 'Risk of collisions with wild animals during the time change in Canton Solothurn.',
+    'blog.article.batterie-sodio-soletta.title': 'Sodium-ion batteries: assembly in Solothurn',
+    'blog.article.batterie-sodio-soletta.excerpt': 'Lithium-free sodium-ion batteries Software developed in Switzerland, assembly in Solothurn More than 600 batteries sold by the end of September 2026 First',
+    'blog.article.batterie-sodio-soletta.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

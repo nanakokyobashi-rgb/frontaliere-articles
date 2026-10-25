@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "d91235b9ffb62bf1351ea383630c3c2ddac953ac71153c37dc50095d828c929d",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "328882a741abeba70baf2d46ca4659373d5003b6eeb73f073f0cbed1e8b10ff2",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T19:30:03.925Z",
+      "updatedAt": "2026-10-25T02:23:31.213Z",
       "keyFacts": 1
     }
   ],
@@ -33,48 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "The Bash: Part I – Ufbruch (“Setting out”)",
-              "detail": "Andermatt",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-i-ufbruch-setting-out/"
-            },
-            {
-              "label": "Absenden Ausschiessen",
-              "detail": "Hotel Urirotstock, Isenthal",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/absenden-ausschiessen/"
-            },
-            {
-              "label": "Workshop \"Canzoni ticinesi e del nord Italia",
-              "detail": "Haus der Volksmusik",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-lieder-aus-dem-tessin-und-norditalien/"
-            },
-            {
-              "label": "Woldmanndli Umzug",
-              "detail": "6490 Andermatt, Andermatt",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woldmanndli-umzug/"
-            },
-            {
-              "label": "Sitzdampfbad - Yonisteaming",
-              "detail": "Rüttihof, Schattdorf",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sitzdampfbad-yonisteaming/"
-            },
-            {
-              "label": "The Bash: Part II – Heicho (“Coming home”)",
-              "detail": "Andermatt",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-ii-heicho-coming-home/"
-            },
-            {
-              "label": "BLUE BOX: Valentino Vivace",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-valentino-vivace/"
-            },
-            {
               "label": "Chilbisonntag: Kirchweihe St. Peter und Paul",
               "detail": "Andermatt",
               "date": "2026-10-25",
@@ -87,15 +45,57 @@
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/chilbikonzert/"
             },
             {
+              "label": "Absenden Ausschiessen",
+              "detail": "Hotel Urirotstock, Isenthal — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/absenden-ausschiessen/"
+            },
+            {
               "label": "TriffAltdorf Mittagstreff: Bistro&Lounge Baggenstos",
               "detail": "Bistro & Lounge Baggenstos",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/triffaltdorf-mittagstreff-bistrolounge-baggenstos/"
+            },
+            {
+              "label": "Manu Delago & Max ZT",
+              "detail": "Altdorf",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manu-delago-max-zt/"
+            },
+            {
+              "label": "Holz | Stein | Farbe - Kunstausstellung",
+              "detail": "Zeughaus",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
+            },
+            {
+              "label": "Literarischer Abend: «Literatur der Welt - Welt der Literatur»",
+              "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literarischer-abend-literatur-der-welt-welt-der-literatur/"
+            },
+            {
+              "label": "Joël von Mutzenbecher – UNBOXED",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/joel-von-mutzenbecher-unboxed-2/"
+            },
+            {
+              "label": "Einzig und dr Andr",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/einzig-und-dr-andr/"
+            },
+            {
+              "label": "Allerheiligen: Gedächtnis der Verstorbenen und Friedhofsbesuch",
+              "detail": "Pfarrkirche St. Peter und Paul, Andermatt",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/allerheiligen-gedaechtnis-der-verstorbenen-und-friedhofsbesuch/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/uri/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "UR",
@@ -138,48 +138,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "The Bash: Part I – Ufbruch (“Setting out”)",
-              "detail": "Andermatt",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-i-ufbruch-setting-out/"
-            },
-            {
-              "label": "Absenden Ausschiessen",
-              "detail": "Hotel Urirotstock, Isenthal",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/absenden-ausschiessen/"
-            },
-            {
-              "label": "Workshop \"Lieder aus dem Tessin und Norditalien\"",
-              "detail": "Haus der Volksmusik",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-lieder-aus-dem-tessin-und-norditalien/"
-            },
-            {
-              "label": "Woldmanndli Umzug",
-              "detail": "6490 Andermatt, Andermatt",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woldmanndli-umzug/"
-            },
-            {
-              "label": "Sitzdampfbad - Yonisteaming",
-              "detail": "Rüttihof, Schattdorf",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sitzdampfbad-yonisteaming/"
-            },
-            {
-              "label": "The Bash: Part II – Heicho (“Coming home”)",
-              "detail": "Andermatt",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-ii-heicho-coming-home/"
-            },
-            {
-              "label": "BLUE BOX: Valentino Vivace",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-valentino-vivace/"
-            },
-            {
               "label": "Chilbisonntag: Kirchweihe St. Peter und Paul",
               "detail": "Andermatt",
               "date": "2026-10-25",
@@ -192,15 +150,57 @@
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/chilbikonzert/"
             },
             {
+              "label": "Absenden Ausschiessen",
+              "detail": "Hotel Urirotstock, Isenthal — ongoing, last day: 25 October 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/absenden-ausschiessen/"
+            },
+            {
               "label": "TriffAltdorf Mittagstreff: Bistro&Lounge Baggenstos",
               "detail": "Bistro & Lounge Baggenstos",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/triffaltdorf-mittagstreff-bistrolounge-baggenstos/"
+            },
+            {
+              "label": "Manu Delago & Max ZT",
+              "detail": "Altdorf",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manu-delago-max-zt/"
+            },
+            {
+              "label": "Holz | Stein | Farbe - Kunstausstellung",
+              "detail": "Zeughaus",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
+            },
+            {
+              "label": "Literarischer Abend: «Literatur der Welt - Welt der Literatur»",
+              "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literarischer-abend-literatur-der-welt-welt-der-literatur/"
+            },
+            {
+              "label": "Joël von Mutzenbecher – UNBOXED",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/joel-von-mutzenbecher-unboxed-2/"
+            },
+            {
+              "label": "Einzig und dr Andr",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/einzig-und-dr-andr/"
+            },
+            {
+              "label": "Allerheiligen: Gedächtnis der Verstorbenen und Friedhofsbesuch",
+              "detail": "Pfarrkirche St. Peter und Paul, Andermatt",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/allerheiligen-gedaechtnis-der-verstorbenen-und-friedhofsbesuch/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/uri/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "UR",
@@ -243,48 +243,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "The Bash: Teil I – «Ufbruch»",
-              "detail": "Andermatt",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-i-ufbruch-setting-out/"
-            },
-            {
-              "label": "Absenden Ausschiessen",
-              "detail": "Hotel Urirotstock, Isenthal",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/absenden-ausschiessen/"
-            },
-            {
-              "label": "Workshop \"Lieder aus dem Tessin und Norditalien\"",
-              "detail": "Haus der Volksmusik",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-lieder-aus-dem-tessin-und-norditalien/"
-            },
-            {
-              "label": "Woldmanndli Umzug",
-              "detail": "6490 Andermatt, Andermatt",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woldmanndli-umzug/"
-            },
-            {
-              "label": "Sitzdampfbad - Yonisteaming",
-              "detail": "Rüttihof, Schattdorf",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sitzdampfbad-yonisteaming/"
-            },
-            {
-              "label": "The Bash: Teil II – «Heicho»",
-              "detail": "Andermatt",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-ii-heicho-coming-home/"
-            },
-            {
-              "label": "BLUE BOX: Valentino Vivace",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-valentino-vivace/"
-            },
-            {
               "label": "Chilbisonntag: Kirchweihe St. Peter und Paul",
               "detail": "Andermatt",
               "date": "2026-10-25",
@@ -297,15 +255,57 @@
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/chilbikonzert/"
             },
             {
+              "label": "Absenden Ausschiessen",
+              "detail": "Hotel Urirotstock, Isenthal — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/absenden-ausschiessen/"
+            },
+            {
               "label": "TriffAltdorf Mittagstreff: Bistro&Lounge Baggenstos",
               "detail": "Bistro & Lounge Baggenstos",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/triffaltdorf-mittagstreff-bistrolounge-baggenstos/"
+            },
+            {
+              "label": "Manu Delago & Max ZT",
+              "detail": "Altdorf",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manu-delago-max-zt/"
+            },
+            {
+              "label": "Holz | Stein | Farbe - Kunstausstellung",
+              "detail": "Zeughaus",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
+            },
+            {
+              "label": "Literarischer Abend: «Literatur der Welt - Welt der Literatur»",
+              "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literarischer-abend-literatur-der-welt-welt-der-literatur/"
+            },
+            {
+              "label": "Joël von Mutzenbecher – UNBOXED",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/joel-von-mutzenbecher-unboxed-2/"
+            },
+            {
+              "label": "Einzig und dr Andr",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/einzig-und-dr-andr/"
+            },
+            {
+              "label": "Allerheiligen: Gedächtnis der Verstorbenen und Friedhofsbesuch",
+              "detail": "Pfarrkirche St. Peter und Paul, Andermatt",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/allerheiligen-gedaechtnis-der-verstorbenen-und-friedhofsbesuch/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/uri/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "UR",
@@ -348,48 +348,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "The Bash: Part I – Ufbruch (“Setting out”)",
-              "detail": "Andermatt",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-i-ufbruch-setting-out/"
-            },
-            {
-              "label": "Absenden Ausschiessen",
-              "detail": "Hotel Urirotstock, Isenthal",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/absenden-ausschiessen/"
-            },
-            {
-              "label": "Workshop \"Lieder aus dem Tessin und Norditalien\"",
-              "detail": "Haus der Volksmusik",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-lieder-aus-dem-tessin-und-norditalien/"
-            },
-            {
-              "label": "Woldmanndli Umzug",
-              "detail": "6490 Andermatt, Andermatt",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/woldmanndli-umzug/"
-            },
-            {
-              "label": "Sitzdampfbad - Yonisteaming",
-              "detail": "Rüttihof, Schattdorf",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/sitzdampfbad-yonisteaming/"
-            },
-            {
-              "label": "The Bash: Part II – Heicho (“Coming home”)",
-              "detail": "Andermatt",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-bash-part-ii-heicho-coming-home/"
-            },
-            {
-              "label": "BLUE BOX: Valentino Vivace",
-              "detail": "Altdorf, Altdorf (UR)",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/blue-box-valentino-vivace/"
-            },
-            {
               "label": "Chilbisonntag: Kirchweihe St. Peter und Paul",
               "detail": "Andermatt",
               "date": "2026-10-25",
@@ -402,15 +360,57 @@
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/chilbikonzert/"
             },
             {
+              "label": "Absenden Ausschiessen",
+              "detail": "Hotel Urirotstock, Isenthal — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/absenden-ausschiessen/"
+            },
+            {
               "label": "TriffAltdorf Mittagstreff: Bistro&Lounge Baggenstos",
               "detail": "Bistro & Lounge Baggenstos",
               "date": "2026-10-27",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/triffaltdorf-mittagstreff-bistrolounge-baggenstos/"
+            },
+            {
+              "label": "Manu Delago & Max ZT",
+              "detail": "Altdorf",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/manu-delago-max-zt/"
+            },
+            {
+              "label": "Holz | Stein | Farbe - Kunstausstellung",
+              "detail": "Zeughaus",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/holz-stein-farbe-kunstausstellung/"
+            },
+            {
+              "label": "Literarischer Abend: «Literatur der Welt - Welt der Literatur»",
+              "detail": "Kantonsbibliothek Uri, Altdorf (UR)",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literarischer-abend-literatur-der-welt-welt-der-literatur/"
+            },
+            {
+              "label": "Joël von Mutzenbecher – UNBOXED",
+              "detail": "Altdorf, Altdorf (UR)",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/joel-von-mutzenbecher-unboxed-2/"
+            },
+            {
+              "label": "Einzig und dr Andr",
+              "detail": "theater(uri), Altdorf (UR)",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/einzig-und-dr-andr/"
+            },
+            {
+              "label": "Allerheiligen: Gedächtnis der Verstorbenen und Friedhofsbesuch",
+              "detail": "Pfarrkirche St. Peter und Paul, Andermatt",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/allerheiligen-gedaechtnis-der-verstorbenen-und-friedhofsbesuch/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/uri/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

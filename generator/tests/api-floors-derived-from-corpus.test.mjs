@@ -896,6 +896,36 @@ test('il collector SEO legge description e ogDescription senza catturare stringh
   });
 });
 
+test('il collector SEO segue l ultima proprietà duplicata e il description JSON-LD', () => {
+  const source = [
+    "'blog-duplicate-fields': {",
+    "  description: 'stale top-level',",
+    "  description: 'live top-level',",
+    '  structuredData: {',
+    '    "description": "stale structured",',
+    '    "description": "live structured",',
+    '    "headline": "Headline",',
+    '    "datePublished": "2026-01-04T00:00:00Z",',
+    '  },',
+    '},',
+    "'blog-structured-only': {",
+    '  structuredData: {',
+    '    "description": "description only in JSON-LD",',
+    '    "headline": "Headline 2",',
+    '    "datePublished": "2026-01-05T00:00:00Z",',
+    '  },',
+    '},',
+  ].join('\n');
+  const metadata = collectSeoEntryMetadata(source).get('duplicate-fields');
+  assert.equal(metadata.description, 'live top-level');
+  assert.equal(metadata.headline, 'Headline');
+  assert.equal(metadata.datePublished, '2026-01-04T00:00:00Z');
+  assert.equal(
+    collectSeoEntryMetadata(source).get('structured-only').description,
+    'description only in JSON-LD',
+  );
+});
+
 test('il collector SEO salta i blocchi annidati con URL template dinamici', () => {
   const source = [
     "'blog-nested-fields': {",

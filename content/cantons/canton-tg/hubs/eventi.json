@@ -4,17 +4,17 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "eventi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "0d9e837598b4b501676a249b008664e3dd6d3537bc950439acb71b601d9215b3",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "7e11b8ae6ff35dd81cb66c429835b1e53cd79b8f5a9d99789c8ca23a22ca4fd8",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T19:30:03.925Z",
+      "updatedAt": "2026-10-25T02:23:31.213Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T16:03:41.824Z",
+      "updatedAt": "2026-10-24T19:51:00.050Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "60",
+          "value": "51",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Oktoberfest Schiff im Hafen Ermatingen am Bodensee",
-              "detail": "Ermatingen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/oktoberfest-schiff-im-hafen-ermatingen-am-bodensee/"
+              "label": "Rist & Rose - Singersongwriter",
+              "detail": "Talenticum, Romanshorn",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/romanshorn/rist-und-rose-singersongwriter_AyTsaVZ"
             },
             {
-              "label": "Daxtanz Vol. 6 - Der Tanzabend mit Hits der 60er- bis 90er-Jahre",
-              "detail": "Goldener Dachs, Weinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/daxtanz-vol-3-der-tanzabend-mit-hits-der-60er-bis-90er-jahre_AGj6fbh"
+              "label": "Florales – Malend auf Entdeckungsreise gehen",
+              "detail": "Warth-Weiningen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/florales-malend-auf-entdeckungsreise-gehen/"
             },
             {
-              "label": "Gebet für die Gemeinde",
-              "detail": "Weinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gebet-fuer-die-gemeinde-9/"
+              "label": "Magic of the nettle - The threads of slowness",
+              "detail": "Schuppisried Hütte, Kreuzlingen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/magie-der-brennnessel-die-faeden-der-langsamkeit/"
             },
             {
-              "label": "Spielabend für Erwachsene",
-              "detail": "Weinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spielabend-fuer-erwachsene/"
+              "label": "Live-Vortrag: Inseln des Nordens",
+              "detail": "Liberty Cinema, Weinfelden",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/weinfelden/live-vortrag-inseln-des-nordens_APCwFL2"
             },
             {
-              "label": "Big-Band-Jazz trifft auf Breakdance!",
-              "detail": "Kulturhaus APOLLO, Kreuzlingen",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/big-band-jazz-trifft-auf-breakdance_AjrEHmw"
+              "label": "Spaghettizmittag",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Weinfelden",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spaghettizmittag-1/"
             },
             {
-              "label": "Los Grecos",
-              "detail": "Restaurant Panem, Romanshorn",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/romanshorn/los-grecos_AuALfnv"
+              "label": "WINE DEGUSTATION",
+              "detail": "Krone am See, Altnau",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-degustation/"
             },
             {
-              "label": "Crazy Diamond",
-              "detail": "Eisenwerk, Frauenfeld",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/crazy-diamond_AsdAga2"
+              "label": "Tanzcafé in Weinfelden",
+              "detail": "Alterstagesklinik Weinfelden, Weinfelden",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/weinfelden/tanzcafe_AxrYGxn"
+            },
+            {
+              "label": "Öpfel Swing",
+              "detail": "KAFF Kulturlokal, Frauenfeld",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/oepfel-swing_AGyB2XT"
+            },
+            {
+              "label": "Konzert Singing People",
+              "detail": "Katholische Kirche, Bettwiesen",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bettwiesen/konzert-singing-people_AGmBwuW"
             },
             {
               "label": "Gruppen Kunstausstellung",
               "detail": "Tierpark Lange Erlen, Erlen — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
-            {
-              "label": "Mission Erde",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/turgovia/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -123,7 +123,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -151,7 +151,7 @@
           "url": "/eventi/turgovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "TG",
@@ -161,7 +161,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "60",
+          "value": "51",
           "note": "from the site’s events calendar"
         }
       ],
@@ -172,69 +172,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Oktoberfest Schiff im Hafen Ermatingen am Bodensee",
-              "detail": "Ermatingen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/oktoberfest-schiff-im-hafen-ermatingen-am-bodensee/"
+              "label": "Rist & Rose - Singersongwriter",
+              "detail": "Talenticum, Romanshorn",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/romanshorn/rist-und-rose-singersongwriter_AyTsaVZ"
             },
             {
-              "label": "Daxtanz Vol. 6 - Der Tanzabend mit Hits der 60er- bis 90er-Jahre",
-              "detail": "Goldener Dachs, Weinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/daxtanz-vol-3-der-tanzabend-mit-hits-der-60er-bis-90er-jahre_AGj6fbh"
+              "label": "Florales – Malend auf Entdeckungsreise gehen",
+              "detail": "Warth-Weiningen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/florales-malend-auf-entdeckungsreise-gehen/"
             },
             {
-              "label": "Gebet für die Gemeinde",
-              "detail": "Weinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gebet-fuer-die-gemeinde-9/"
+              "label": "Magic of the nettle - The threads of slowness",
+              "detail": "Schuppisried Hütte, Kreuzlingen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/magie-der-brennnessel-die-faeden-der-langsamkeit/"
             },
             {
-              "label": "Spielabend für Erwachsene",
-              "detail": "Weinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spielabend-fuer-erwachsene/"
+              "label": "Live-Vortrag: Inseln des Nordens",
+              "detail": "Liberty Cinema, Weinfelden",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/weinfelden/live-vortrag-inseln-des-nordens_APCwFL2"
             },
             {
-              "label": "Big-Band-Jazz trifft auf Breakdance!",
-              "detail": "Kulturhaus APOLLO, Kreuzlingen",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/big-band-jazz-trifft-auf-breakdance_AjrEHmw"
+              "label": "Spaghettizmittag",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Weinfelden",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spaghettizmittag-1/"
             },
             {
-              "label": "Los Grecos",
-              "detail": "Restaurant Panem, Romanshorn",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/romanshorn/los-grecos_AuALfnv"
+              "label": "WINE DEGUSTATION",
+              "detail": "Krone am See, Altnau",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-degustation/"
             },
             {
-              "label": "Crazy Diamond",
-              "detail": "Eisenwerk, Frauenfeld",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/crazy-diamond_AsdAga2"
+              "label": "Tanzcafé in Weinfelden",
+              "detail": "Alterstagesklinik Weinfelden, Weinfelden",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/weinfelden/tanzcafe_AxrYGxn"
+            },
+            {
+              "label": "Öpfel Swing",
+              "detail": "KAFF Kulturlokal, Frauenfeld",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/oepfel-swing_AGyB2XT"
+            },
+            {
+              "label": "Konzert Singing People",
+              "detail": "Katholische Kirche, Bettwiesen",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bettwiesen/konzert-singing-people_AGmBwuW"
             },
             {
               "label": "Gruppen Kunstausstellung",
               "detail": "Tierpark Lange Erlen, Erlen — ongoing, last day: 25 October 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — ongoing, last day: 31 October 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
-            {
-              "label": "Mission Erde",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — ongoing, last day: 25 October 2026",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/thurgau/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -285,7 +285,7 @@
           "url": "/en/events/thurgau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "TG",
@@ -295,7 +295,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "60",
+          "value": "51",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -306,69 +306,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Oktoberfest Schiff im Hafen Ermatingen am Bodensee",
-              "detail": "Ermatingen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/oktoberfest-schiff-im-hafen-ermatingen-am-bodensee/"
+              "label": "Rist & Rose - Singersongwriter",
+              "detail": "Talenticum, Romanshorn",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/romanshorn/rist-und-rose-singersongwriter_AyTsaVZ"
             },
             {
-              "label": "Daxtanz Vol. 6 - Der Tanzabend mit Hits der 60er- bis 90er-Jahre",
-              "detail": "Goldener Dachs, Weinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/daxtanz-vol-3-der-tanzabend-mit-hits-der-60er-bis-90er-jahre_AGj6fbh"
+              "label": "Florales – Malend auf Entdeckungsreise gehen",
+              "detail": "Warth-Weiningen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/florales-malend-auf-entdeckungsreise-gehen/"
             },
             {
-              "label": "Gebet für die Gemeinde",
-              "detail": "Weinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gebet-fuer-die-gemeinde-9/"
+              "label": "Magie der Brennnessel – Die Fäden der Langsamkeit",
+              "detail": "Schuppisried Hütte, Kreuzlingen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/magie-der-brennnessel-die-faeden-der-langsamkeit/"
             },
             {
-              "label": "Spielabend für Erwachsene",
-              "detail": "Weinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spielabend-fuer-erwachsene/"
+              "label": "Live-Vortrag: Inseln des Nordens",
+              "detail": "Liberty Cinema, Weinfelden",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/weinfelden/live-vortrag-inseln-des-nordens_APCwFL2"
             },
             {
-              "label": "Big-Band-Jazz trifft auf Breakdance!",
-              "detail": "Kulturhaus APOLLO, Kreuzlingen",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/big-band-jazz-trifft-auf-breakdance_AjrEHmw"
+              "label": "Spaghettizmittag",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Weinfelden",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spaghettizmittag-1/"
             },
             {
-              "label": "Los Grecos",
-              "detail": "Restaurant Panem, Romanshorn",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/romanshorn/los-grecos_AuALfnv"
+              "label": "WINE DEGUSTATION",
+              "detail": "Krone am See, Altnau",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-degustation/"
             },
             {
-              "label": "Crazy Diamond",
-              "detail": "Eisenwerk, Frauenfeld",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/crazy-diamond_AsdAga2"
+              "label": "Tanzcafé in Weinfelden",
+              "detail": "Alterstagesklinik Weinfelden, Weinfelden",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/weinfelden/tanzcafe_AxrYGxn"
+            },
+            {
+              "label": "Öpfel Swing",
+              "detail": "KAFF Kulturlokal, Frauenfeld",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/oepfel-swing_AGyB2XT"
+            },
+            {
+              "label": "Konzert Singing People",
+              "detail": "Katholische Kirche, Bettwiesen",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bettwiesen/konzert-singing-people_AGmBwuW"
             },
             {
               "label": "Gruppen Kunstausstellung",
               "detail": "Tierpark Lange Erlen, Erlen — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
-            {
-              "label": "Mission Erde",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/thurgau/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +391,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -419,7 +419,7 @@
           "url": "/de/veranstaltungen/thurgau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "TG",
@@ -429,7 +429,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "60",
+          "value": "51",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -440,69 +440,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Oktoberfest Schiff im Hafen Ermatingen am Bodensee",
-              "detail": "Ermatingen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/oktoberfest-schiff-im-hafen-ermatingen-am-bodensee/"
+              "label": "Rist & Rose - Singersongwriter",
+              "detail": "Talenticum, Romanshorn",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/romanshorn/rist-und-rose-singersongwriter_AyTsaVZ"
             },
             {
-              "label": "Daxtanz Vol. 6 - Der Tanzabend mit Hits der 60er- bis 90er-Jahre",
-              "detail": "Goldener Dachs, Weinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/weinfelden/daxtanz-vol-3-der-tanzabend-mit-hits-der-60er-bis-90er-jahre_AGj6fbh"
+              "label": "Florales – Malend auf Entdeckungsreise gehen",
+              "detail": "Warth-Weiningen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/florales-malend-auf-entdeckungsreise-gehen/"
             },
             {
-              "label": "Gebet für die Gemeinde",
-              "detail": "Weinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gebet-fuer-die-gemeinde-9/"
+              "label": "Magic of the nettle - The threads of slowness",
+              "detail": "Schuppisried Hütte, Kreuzlingen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/magie-der-brennnessel-die-faeden-der-langsamkeit/"
             },
             {
-              "label": "Spielabend für Erwachsene",
-              "detail": "Weinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/spielabend-fuer-erwachsene/"
+              "label": "Live-Vortrag: Inseln des Nordens",
+              "detail": "Liberty Cinema, Weinfelden",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/weinfelden/live-vortrag-inseln-des-nordens_APCwFL2"
             },
             {
-              "label": "Big-Band-Jazz trifft auf Breakdance!",
-              "detail": "Kulturhaus APOLLO, Kreuzlingen",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/kreuzlingen/big-band-jazz-trifft-auf-breakdance_AjrEHmw"
+              "label": "Spaghettizmittag",
+              "detail": "Evang.-ref. Kirchgemeindehaus, Weinfelden",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/spaghettizmittag-1/"
             },
             {
-              "label": "Los Grecos",
-              "detail": "Restaurant Panem, Romanshorn",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/romanshorn/los-grecos_AuALfnv"
+              "label": "WINE DEGUSTATION",
+              "detail": "Krone am See, Altnau",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-degustation/"
             },
             {
-              "label": "Crazy Diamond",
-              "detail": "Eisenwerk, Frauenfeld",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/crazy-diamond_AsdAga2"
+              "label": "Tanzcafé in Weinfelden",
+              "detail": "Alterstagesklinik Weinfelden, Weinfelden",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/weinfelden/tanzcafe_AxrYGxn"
+            },
+            {
+              "label": "Öpfel Swing",
+              "detail": "KAFF Kulturlokal, Frauenfeld",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/frauenfeld/oepfel-swing_AGyB2XT"
+            },
+            {
+              "label": "Konzert Singing People",
+              "detail": "Katholische Kirche, Bettwiesen",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bettwiesen/konzert-singing-people_AGmBwuW"
             },
             {
               "label": "Gruppen Kunstausstellung",
               "detail": "Tierpark Lange Erlen, Erlen — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gruppen-kunstausstellung/"
-            },
-            {
-              "label": "Ziegentrekking",
-              "detail": "geissgada, Hohentannen — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ziegentrekking/"
-            },
-            {
-              "label": "Mission Erde",
-              "detail": "Bodensee Planetarium und Sternwarte, Kreuzlingen — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/kreuzlingen/mission-erde_AJCd2bV"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/thurgovie/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -525,7 +525,7 @@
               "url": "https://www.kreuzlingen.ch/aktuelles/erste-messe-60-plus-trifft-einen-nerv"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +553,7 @@
           "url": "/fr/evenements/thurgovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

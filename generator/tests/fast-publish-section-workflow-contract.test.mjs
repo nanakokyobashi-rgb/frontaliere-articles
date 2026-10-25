@@ -60,6 +60,17 @@ test('fast-publish-section ricontrolla main subito prima del replay API', () => 
   assert.match(dispatchStep, /if verifyMainHeadAtDispatch; then/u);
 });
 
+test('il replay checkout mantiene tutti gli helper nel profilo sparse', () => {
+  const replay = workflow.slice(workflow.indexOf('\n  replay-api-after-staged-release:'));
+  const checkout = replay.slice(
+    replay.indexOf('- name: Checkout replay dispatcher from workflow revision'),
+    replay.indexOf('- name: Materialize freshness helper from workflow revision'),
+  );
+
+  assert.match(checkout, /sparse-checkout:\s*\|/u);
+  assert.match(checkout, /scripts\/ci\/dispatch-fast-publish-replay\.sh[\s\S]*scripts\/ci\/read-main-head\.sh/u);
+});
+
 test('fast-publish-section mantiene il resolver sotto il limite del parser GitHub', () => {
   assert.match(workflow, /- name: Materialize resolver from workflow revision/u);
   assert.match(workflow, /scripts\/ci\/fast-publish-section-resolve\.sh/u);

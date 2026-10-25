@@ -145,6 +145,16 @@ test('fix-faq-locales: replaceFaqInFile scrive SOLO la .faq del proprio id', (t)
   assert.ok(dopo.includes(faqLine(BETA, FAQ_BETA)), 'la riga di beta-due deve restare byte per byte');
 });
 
+test('fix-faq-locales: i writer rifiutano i controlli prima della sanitizzazione', (t) => {
+  const p = fileTemporaneo(t, `${ALPHA}.ts`, DUE_FAQ);
+  const invalid = [{ q: 'Domanda valida', a: `Risposta${String.fromCharCode(8)}` }];
+  assert.throws(
+    () => fixLocales.replaceFaqInFile(p, invalid),
+    /raw control escape/,
+  );
+  assert.equal(fs.readFileSync(p, 'utf-8'), DUE_FAQ, 'il writer non deve pubblicare una FAQ alterata');
+});
+
 test('fix-faq-locales: la sostituzione valuta il FAQ finale, non quello obsoleto', (t) => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'faq-toponym-'));
   t.after(() => fs.rmSync(dir, { recursive: true, force: true }));

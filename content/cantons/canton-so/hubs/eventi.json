@@ -4,12 +4,12 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "eventi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "55d92e16c0bf1e3b64e3535f32ab8e8bc4560eec31bf6cc2e1657dfcf0e6d5a8",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "338e91de5e889ea7dc5ec1eb2737937ac7d2ca1e253f22273f7de0a868760590",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T19:30:03.925Z",
+      "updatedAt": "2026-10-25T02:23:31.213Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "65",
+          "value": "66",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Oktoberfest",
-              "detail": "Rythalle Soledurn, Solothurn",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
+              "label": "42. Kantonale Jahresausstellung des Kunstvereins Solothurn",
+              "detail": "Kunstmuseum Solothurn, Solothurn",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/42-kantonale-jahresausstellung-des-kunstvereins-solothurn/"
             },
             {
-              "label": "Dorfjass",
-              "detail": "Lüterkofen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dorfjass/"
+              "label": "Biblische Vorträge",
+              "detail": "Langendorf",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/biblische-vortraege/"
             },
             {
-              "label": "Pubquiz im gemütlichen Kulturbistro",
-              "detail": "KulturBistro Solothurn, Solothurn",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/solothurn/pub-quiz-im-gemuetlichen-kulturbistro_AiqLPJB"
+              "label": "Freispiel Daniel C. Müller, Pat Noser und Anna Stüdeli",
+              "detail": "Solothurn",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/freispiel-daniel-c-mueller-pat-noser-und-anna-stuedeli/"
             },
             {
-              "label": "Computer Grundlagen",
-              "detail": "Volkshochschule Solothurn, Solothurn — in corso, ultimo giorno: 10 novembre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
+              "label": "Café Philo – «Der freie Wille – Das Schicksal»",
+              "detail": "Solothurn",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-philo-der-freie-wille-das-schicksal/"
             },
             {
-              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
-              "detail": "Hauslimattschulhaus, Balsthal — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
+              "label": "Youngtimer-Treffen (bis 2006)",
+              "detail": "Derendingen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/youngtimertreffen-bis-2006-2/"
             },
             {
-              "label": "Herbstaromen à la carte",
-              "detail": "Genussfabrik Solothurn, Solothurn — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
+              "label": "9. Koffermarkt - Basar selbst hergestellter Sachen am 25. Oktober in Langendorf",
+              "detail": "Ökumenisches Kirchenzentrum, Langendorf",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/9-koffermarkt-basar-selbst-hergestellter-sachen-am-25-oktober-in-langendorf/"
             },
             {
-              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
-              "detail": "Car Parking — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
+              "label": "MAGNIFICAT - Colonne sonore di una luce splendente",
+              "detail": "Klosterkirche Mariastein",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/eventi/classica/mariastein/magnificat-colonne-sonore-di-una-luce-splendente_AcxnWjN"
+            },
+            {
+              "label": "Abendmusik: \"Sommerliches Mosaik\" - Klaviertrios von J.Haydn, P.Juon, E.Chausson",
+              "detail": "Olten",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendmusik-sommerliches-mosaik-klaviertrios-von-jhaydn-pjuon-echausson/"
             },
             {
               "label": "Kulturreise: 6 Tage im Herzen der Toskana mit Nicola",
-              "detail": "Volkshochschule Solothurn, Solothurn",
-              "date": "2026-10-24",
+              "detail": "Volkshochschule Solothurn, Solothurn — in corso, ultimo giorno: 29 ottobre 2026",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/kulturreise-6-tage-im-herzen-der-toskana-mit-nicola/"
             },
             {
-              "label": "Japanese & Korean Cars-Treffen",
-              "detail": "Enter Technikwelt, Derendingen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/japanese-korean-carstreffen-3/"
-            },
-            {
-              "label": "Retro-Börse",
-              "detail": "Enter Technikwelt, Derendingen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/retro-boerse/"
+              "label": "Oktoberfest",
+              "detail": "Rythalle Soledurn, Solothurn — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/soletta/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -123,7 +123,7 @@
           "url": "/eventi/soletta/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "SO",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "65",
+          "value": "66",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Oktoberfest",
-              "detail": "Rythalle Soledurn, Solothurn",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
+              "label": "42. Kantonale Jahresausstellung des Kunstvereins Solothurn",
+              "detail": "Kunstmuseum Solothurn, Solothurn",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/42-kantonale-jahresausstellung-des-kunstvereins-solothurn/"
             },
             {
-              "label": "Dorfjass",
-              "detail": "Lüterkofen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dorfjass/"
+              "label": "Biblische Vorträge",
+              "detail": "Langendorf",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/biblische-vortraege/"
             },
             {
-              "label": "Pubquiz im gemütlichen Kulturbistro",
-              "detail": "KulturBistro Solothurn, Solothurn",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/solothurn/pub-quiz-im-gemuetlichen-kulturbistro_AiqLPJB"
+              "label": "Freispiel Daniel C. Müller, Pat Noser und Anna Stüdeli",
+              "detail": "Solothurn",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/freispiel-daniel-c-mueller-pat-noser-und-anna-stuedeli/"
             },
             {
-              "label": "Computer Grundlagen",
-              "detail": "Volkshochschule Solothurn, Solothurn — ongoing, last day: 10 November 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
+              "label": "Café Philo – «Der freie Wille – Das Schicksal»",
+              "detail": "Solothurn",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-philo-der-freie-wille-das-schicksal/"
             },
             {
-              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
-              "detail": "Hauslimattschulhaus, Balsthal — ongoing, last day: 31 October 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
+              "label": "Youngtimer-Treffen (bis 2006)",
+              "detail": "Derendingen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/youngtimertreffen-bis-2006-2/"
             },
             {
-              "label": "Herbstaromen à la carte",
-              "detail": "Genussfabrik Solothurn, Solothurn — ongoing, last day: 31 October 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
+              "label": "9. Koffermarkt - Basar selbst hergestellter Sachen am 25. Oktober in Langendorf",
+              "detail": "Ökumenisches Kirchenzentrum, Langendorf",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/9-koffermarkt-basar-selbst-hergestellter-sachen-am-25-oktober-in-langendorf/"
             },
             {
-              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
-              "detail": "Car Parking — ongoing, last day: 25 October 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
+              "label": "MAGNIFICAT - Soundtracks of a shining light",
+              "detail": "Klosterkirche Mariastein",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/eventi/classica/mariastein/magnificat-colonne-sonore-di-una-luce-splendente_AcxnWjN"
+            },
+            {
+              "label": "Abendmusik: \"Sommerliches Mosaik\" - Klaviertrios von J.Haydn, P.Juon, E.Chausson",
+              "detail": "Olten",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendmusik-sommerliches-mosaik-klaviertrios-von-jhaydn-pjuon-echausson/"
             },
             {
               "label": "Kulturreise: 6 Tage im Herzen der Toskana mit Nicola",
-              "detail": "Volkshochschule Solothurn, Solothurn",
-              "date": "2026-10-24",
+              "detail": "Volkshochschule Solothurn, Solothurn — ongoing, last day: 29 October 2026",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/kulturreise-6-tage-im-herzen-der-toskana-mit-nicola/"
             },
             {
-              "label": "Japanese & Korean Cars-Treffen",
-              "detail": "Enter Technikwelt, Derendingen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/japanese-korean-carstreffen-3/"
-            },
-            {
-              "label": "Retro-Börse",
-              "detail": "Enter Technikwelt, Derendingen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/retro-boerse/"
+              "label": "Oktoberfest",
+              "detail": "Rythalle Soledurn, Solothurn — ongoing, last day: 31 October 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/solothurn/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/en/events/solothurn/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "SO",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "65",
+          "value": "66",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Oktoberfest",
-              "detail": "Rythalle Soledurn, Solothurn",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
+              "label": "42. Kantonale Jahresausstellung des Kunstvereins Solothurn",
+              "detail": "Kunstmuseum Solothurn, Solothurn",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/42-kantonale-jahresausstellung-des-kunstvereins-solothurn/"
             },
             {
-              "label": "Dorfjass",
-              "detail": "Lüterkofen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dorfjass/"
+              "label": "Biblische Vorträge",
+              "detail": "Langendorf",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/biblische-vortraege/"
             },
             {
-              "label": "Pubquiz im gemütlichen Kulturbistro",
-              "detail": "KulturBistro Solothurn, Solothurn",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/solothurn/pub-quiz-im-gemuetlichen-kulturbistro_AiqLPJB"
+              "label": "Freispiel Daniel C. Müller, Pat Noser und Anna Stüdeli",
+              "detail": "Solothurn",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/freispiel-daniel-c-mueller-pat-noser-und-anna-stuedeli/"
             },
             {
-              "label": "Computer Grundlagen",
-              "detail": "Volkshochschule Solothurn, Solothurn — läuft, letzter Tag: 10. November 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
+              "label": "Café Philo – «Der freie Wille – Das Schicksal»",
+              "detail": "Solothurn",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-philo-der-freie-wille-das-schicksal/"
             },
             {
-              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
-              "detail": "Hauslimattschulhaus, Balsthal — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
+              "label": "Youngtimer-Treffen (bis 2006)",
+              "detail": "Derendingen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/youngtimertreffen-bis-2006-2/"
             },
             {
-              "label": "Herbstaromen à la carte",
-              "detail": "Genussfabrik Solothurn, Solothurn — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
+              "label": "9. Koffermarkt - Basar selbst hergestellter Sachen am 25. Oktober in Langendorf",
+              "detail": "Ökumenisches Kirchenzentrum, Langendorf",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/9-koffermarkt-basar-selbst-hergestellter-sachen-am-25-oktober-in-langendorf/"
             },
             {
-              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
-              "detail": "Car Parking — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
+              "label": "MAGNIFICAT – Klangspuren einer Lichtgestalt",
+              "detail": "Klosterkirche Mariastein",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/eventi/classica/mariastein/magnificat-colonne-sonore-di-una-luce-splendente_AcxnWjN"
+            },
+            {
+              "label": "Abendmusik: \"Sommerliches Mosaik\" - Klaviertrios von J.Haydn, P.Juon, E.Chausson",
+              "detail": "Olten",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendmusik-sommerliches-mosaik-klaviertrios-von-jhaydn-pjuon-echausson/"
             },
             {
               "label": "Kulturreise: 6 Tage im Herzen der Toskana mit Nicola",
-              "detail": "Volkshochschule Solothurn, Solothurn",
-              "date": "2026-10-24",
+              "detail": "Volkshochschule Solothurn, Solothurn — läuft, letzter Tag: 29. Oktober 2026",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/kulturreise-6-tage-im-herzen-der-toskana-mit-nicola/"
             },
             {
-              "label": "Japanese & Korean Cars-Treffen",
-              "detail": "Enter Technikwelt, Derendingen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/japanese-korean-carstreffen-3/"
-            },
-            {
-              "label": "Retro-Börse",
-              "detail": "Enter Technikwelt, Derendingen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/retro-boerse/"
+              "label": "Oktoberfest",
+              "detail": "Rythalle Soledurn, Solothurn — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/solothurn/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/solothurn/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "SO",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "65",
+          "value": "66",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Oktoberfest",
-              "detail": "Rythalle Soledurn, Solothurn",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
+              "label": "42. Kantonale Jahresausstellung des Kunstvereins Solothurn",
+              "detail": "Kunstmuseum Solothurn, Solothurn",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/42-kantonale-jahresausstellung-des-kunstvereins-solothurn/"
             },
             {
-              "label": "Dorfjass",
-              "detail": "Lüterkofen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dorfjass/"
+              "label": "Biblische Vorträge",
+              "detail": "Langendorf",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/biblische-vortraege/"
             },
             {
-              "label": "Pubquiz im gemütlichen Kulturbistro",
-              "detail": "KulturBistro Solothurn, Solothurn",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/solothurn/pub-quiz-im-gemuetlichen-kulturbistro_AiqLPJB"
+              "label": "Freispiel Daniel C. Müller, Pat Noser und Anna Stüdeli",
+              "detail": "Solothurn",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/freispiel-daniel-c-mueller-pat-noser-und-anna-stuedeli/"
             },
             {
-              "label": "Computer Grundlagen",
-              "detail": "Volkshochschule Solothurn, Solothurn — en cours, dernier jour : 10 novembre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/computer-grundlagen-2/"
+              "label": "Café Philo – «Der freie Wille – Das Schicksal»",
+              "detail": "Solothurn",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/cafe-philo-der-freie-wille-das-schicksal/"
             },
             {
-              "label": "DLG Theater 2026 \"Tschingge- Ein Stück Schweiz\"",
-              "detail": "Hauslimattschulhaus, Balsthal — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/dlg-theater-2026-tschingge-ein-stueck-schweiz/"
+              "label": "Youngtimer-Treffen (bis 2006)",
+              "detail": "Derendingen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/youngtimertreffen-bis-2006-2/"
             },
             {
-              "label": "Herbstaromen à la carte",
-              "detail": "Genussfabrik Solothurn, Solothurn — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/herbstliche-a-la-carte-spezialitaeten/"
+              "label": "9. Koffermarkt - Basar selbst hergestellter Sachen am 25. Oktober in Langendorf",
+              "detail": "Ökumenisches Kirchenzentrum, Langendorf",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/9-koffermarkt-basar-selbst-hergestellter-sachen-am-25-oktober-in-langendorf/"
             },
             {
-              "label": "Schlösser & Genuss – drei Schlösser, drei kulinarische Stopps",
-              "detail": "Car Parking — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/schloesser-genuss-drei-schloesser-drei-kulinarische-stopps/"
+              "label": "MAGNIFICAT - Traces sonores d'une figure lumineuse",
+              "detail": "Klosterkirche Mariastein",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/eventi/classica/mariastein/magnificat-colonne-sonore-di-una-luce-splendente_AcxnWjN"
+            },
+            {
+              "label": "Abendmusik: \"Sommerliches Mosaik\" - Klaviertrios von J.Haydn, P.Juon, E.Chausson",
+              "detail": "Olten",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/abendmusik-sommerliches-mosaik-klaviertrios-von-jhaydn-pjuon-echausson/"
             },
             {
               "label": "Kulturreise: 6 Tage im Herzen der Toskana mit Nicola",
-              "detail": "Volkshochschule Solothurn, Solothurn",
-              "date": "2026-10-24",
+              "detail": "Volkshochschule Solothurn, Solothurn — en cours, dernier jour : 29 octobre 2026",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/kulturreise-6-tage-im-herzen-der-toskana-mit-nicola/"
             },
             {
-              "label": "Japanese & Korean Cars-Treffen",
-              "detail": "Enter Technikwelt, Derendingen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/japanese-korean-carstreffen-3/"
-            },
-            {
-              "label": "Retro-Börse",
-              "detail": "Enter Technikwelt, Derendingen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/retro-boerse/"
+              "label": "Oktoberfest",
+              "detail": "Rythalle Soledurn, Solothurn — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/oktoberfest-9/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/soleure/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/soleure/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

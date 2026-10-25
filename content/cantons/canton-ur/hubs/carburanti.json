@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T12:39:21.184Z",
-  "contentHash": "9e30d949b8e77c21440765b8dcd7f44acd0a3a744e3f8b1638143ee6461091ee",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "0583d21479efccb20b69fba1915d100e06095abb83c1fe2de3fb472c36dfcaed",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-22T12:21:38.892Z",
+      "updatedAt": "2026-10-24T11:32:51.939Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Andermatt abbassa le imposte: progetto Wyden rinviato",
+          "url": "/articoli-uri/andermatt-fisco-wyden/",
+          "excerpt": "Andermatt riduce il moltiplicatore fiscale di 5 punti, al 94%; il consiglio comunale rinvia per ora il contestato progetto Wyden.",
+          "date": "2026-10-23T15:40:41.343Z"
+        },
         {
           "title": "Bristenstrasse: chiusure e orari fino a novembre 2026",
           "url": "/articoli-uri/bristenstrasse-regimi-traffico-2026/",
@@ -82,12 +88,6 @@
           "url": "/articoli-uri/eventi-weekend-uri/",
           "excerpt": "Eventi nel Canton Uri ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
           "date": "2026-10-17T11:32:19.468Z"
-        },
-        {
-          "title": "Uri: budget 2027 con avanzo di CHF 1,1 milioni",
-          "url": "/articoli-uri/uri-budget-2027-surplus/",
-          "excerpt": "Per il 2027 il Cantone Uri prevede un risultato positivo di CHF 1,1 milioni: entrate a CHF 514,4 milioni e investimenti netti a CHF 25,3 milioni.",
-          "date": "2026-10-17T05:08:12.066Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T12:39:21.184Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "UR",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Andermatt cuts taxes: Wyden project postponed",
+          "url": "/en/uri-articles/andermatt-tax-wyden-postponed/",
+          "excerpt": "Andermatt reduces the tax multiplier by 5 points, to 94%; the municipal council postpones the controversial Wyden project for now.",
+          "date": "2026-10-23T15:40:41.343Z"
+        },
         {
           "title": "Bristenstrasse: closures and schedules through November 2026",
           "url": "/en/uri-articles/bristenstrasse-traffic-rules-2026/",
@@ -169,12 +175,6 @@
           "url": "/en/uri-articles/weekend-events-uri/",
           "excerpt": "Events in the canton of Uri every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
           "date": "2026-10-17T11:32:19.468Z"
-        },
-        {
-          "title": "Uri: 2027 budget with a surplus of CHF 1,1 million",
-          "url": "/en/uri-articles/uri-2027-budget-with-a-surplus-of-chf-1-1-million/",
-          "excerpt": "For 2027, the Canton of Uri expects a positive result of CHF 1,1 million: revenues of CHF 514,4 million and net investments of CHF 25,3 million.",
-          "date": "2026-10-17T05:08:12.066Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T12:39:21.184Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "UR",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Andermatt senkt die Steuern: Projekt Wyden verschoben",
+          "url": "/de/uri-artikel/andermatt-steuern-wyden/",
+          "excerpt": "Andermatt senkt den Steuerfuss um 5 Punkte auf 94 Prozent; der Gemeinderat verschiebt das umstrittene Projekt Wyden vorerst.",
+          "date": "2026-10-23T15:40:41.343Z"
+        },
         {
           "title": "Bristenstrasse: Sperrungen und Zeitfenster bis November 2026",
           "url": "/de/uri-artikel/bristenstrasse-verkehrsregime-2026/",
@@ -256,12 +262,6 @@
           "url": "/de/uri-artikel/wochenend-veranstaltungen-uri/",
           "excerpt": "Veranstaltungen im Kanton Uri an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
           "date": "2026-10-17T11:32:19.468Z"
-        },
-        {
-          "title": "Uri: Budget 2027 mit einem Überschuss von CHF 1,1 Millionen",
-          "url": "/de/uri-artikel/uri-budget-2027-ueberschuss/",
-          "excerpt": "Für 2027 erwartet der Kanton Uri ein positives Ergebnis von CHF 1,1 Millionen: Einnahmen von CHF 514,4 Millionen und Nettoinvestitionen von CHF 25,3 Millionen.",
-          "date": "2026-10-17T05:08:12.066Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T12:39:21.184Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "UR",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Andermatt baisse les impôts : projet Wyden reporté",
+          "url": "/fr/articles-uri/andermatt-impots-wyden/",
+          "excerpt": "Andermatt réduit le multiplicateur fiscal de 5 points, à 94 % ; le conseil communal reporte pour l’instant le projet Wyden controversé.",
+          "date": "2026-10-23T15:40:41.343Z"
+        },
         {
           "title": "Bristenstrasse : fermetures et horaires jusqu’en novembre 2026",
           "url": "/fr/articles-uri/bristenstrasse-regimes-circulation-2026/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-uri/evenements-week-end-uri/",
           "excerpt": "Événements dans le canton d'Uri chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
           "date": "2026-10-17T11:32:19.468Z"
-        },
-        {
-          "title": "Uri : budget 2027 avec un excédent de CHF 1,1 million",
-          "url": "/fr/articles-uri/uri-budget-2027-excedent/",
-          "excerpt": "Pour 2027, le canton d’Uri prévoit un résultat positif de CHF 1,1 million : des recettes de CHF 514,4 millions et des investissements nets de CHF 25,3 millions.",
-          "date": "2026-10-17T05:08:12.066Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T12:39:21.184Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

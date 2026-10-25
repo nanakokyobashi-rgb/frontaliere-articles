@@ -4,17 +4,17 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-23T10:42:39.932Z",
-  "contentHash": "3bb49406b9b74ec7c9ae2ebce3bc39b61cd44b6ce7156374bcf964ba05fd01a3",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "4daf283443c966b76d46f05d528b7199283b3b73df937d04a6673c556cdfe1c5",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-23T05:26:03.621Z",
+      "updatedAt": "2026-10-25T05:23:25.975Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T20:51:18.236Z",
+      "updatedAt": "2026-10-24T19:51:00.050Z",
       "keyFacts": 0
     }
   ],
@@ -27,13 +27,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "20",
-          "note": "segnalazioni aggiornate: 23 ottobre 2026"
+          "value": "17",
+          "note": "segnalazioni aggiornate: 25 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "7",
-          "note": "segnalazioni aggiornate: 23 ottobre 2026"
+          "value": "9",
+          "note": "segnalazioni aggiornate: 25 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -85,14 +85,14 @@
               "date": "2026-09-28T05:30:00.000Z"
             },
             {
-              "label": "Route de la Côte, Saint-Aubin in tutte le direzioni Situazione: chiusa",
+              "label": "Ettiwil, St. Ursen in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Chiusura",
-              "detail": "fine prevista: 23 ottobre 2026",
-              "date": "2026-10-02T05:53:00.000Z"
+              "detail": "fine prevista: 13 novembre 2026",
+              "date": "2026-10-07T07:05:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -130,7 +130,7 @@
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -188,7 +188,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "FR",
@@ -198,13 +198,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "20",
-          "note": "reports as of 23 October 2026"
+          "value": "17",
+          "note": "reports as of 25 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "7",
-          "note": "reports as of 23 October 2026"
+          "value": "9",
+          "note": "reports as of 25 October 2026"
         }
       ],
       "dataBlocks": [
@@ -256,14 +256,14 @@
               "date": "2026-09-28T05:30:00.000Z"
             },
             {
-              "label": "Route de la Côte, Saint-Aubin in tutte le direzioni Situazione: chiusa",
+              "label": "Ettiwil, St. Ursen in tutte le direzioni Situazione: divieto di transito Causa: lavori di costruzione",
               "value": "Closure",
-              "detail": "until 23 October 2026",
-              "date": "2026-10-02T05:53:00.000Z"
+              "detail": "until 13 November 2026",
+              "date": "2026-10-07T07:05:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -301,7 +301,7 @@
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -359,7 +359,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "FR",
@@ -369,13 +369,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "20",
-          "note": "Meldungen vom 23. Oktober 2026"
+          "value": "17",
+          "note": "Meldungen vom 25. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "7",
-          "note": "Meldungen vom 23. Oktober 2026"
+          "value": "9",
+          "note": "Meldungen vom 25. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -427,14 +427,14 @@
               "date": "2026-09-28T05:30:00.000Z"
             },
             {
-              "label": "Route de la Côte, Saint-Aubin in beide Richtungen Sachlage: Strecke gesperrt",
+              "label": "Ettiwil, St. Ursen in beide Richtungen Sachlage: gesperrt für Durchgangsverkehr Ursache: Bauarbeiten",
               "value": "Sperrung",
-              "detail": "bis 23. Oktober 2026",
-              "date": "2026-10-02T05:53:00.000Z"
+              "detail": "bis 13. November 2026",
+              "date": "2026-10-07T07:05:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -472,7 +472,7 @@
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -530,7 +530,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "FR",
@@ -540,13 +540,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "20",
-          "note": "signalements au 23 octobre 2026"
+          "value": "17",
+          "note": "signalements au 25 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "7",
-          "note": "signalements au 23 octobre 2026"
+          "value": "9",
+          "note": "signalements au 25 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -598,14 +598,14 @@
               "date": "2026-09-28T05:30:00.000Z"
             },
             {
-              "label": "Route de la Côte, Saint-Aubin dans les deux sens Situation: fermé",
+              "label": "Ettiwil, St. Ursen dans les deux sens Situation: circulation de transit interdite Raison: travaux de construction",
               "value": "Fermeture",
-              "detail": "jusqu’au 23 octobre 2026",
-              "date": "2026-10-02T05:53:00.000Z"
+              "detail": "jusqu’au 13 novembre 2026",
+              "date": "2026-10-07T07:05:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -643,7 +643,7 @@
               "url": "https://www.fr.ch/de/sjsd/pol/news/fahrzeug-nach-geisterfahrt-auf-der-a1-bei-domdidier-gestoppt"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -701,7 +701,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

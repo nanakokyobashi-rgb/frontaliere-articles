@@ -4,12 +4,12 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "eventi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "c35e8fa9e5c59704183a2ae68f67875a714e331385880435675d6a939a0fc8e4",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "2ad6465ba18b8dcfaac3ac6bbfc96651f34bb483de18689ea8932c25db23e30a",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T19:30:03.925Z",
+      "updatedAt": "2026-10-25T02:23:31.213Z",
       "keyFacts": 1
     }
   ],
@@ -33,22 +33,16 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Foire du Jura",
-              "detail": "Halle des Exposition, Delémont — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
-            },
-            {
-              "label": "Streuselkuchen, ein Stück für alle – Judith Bach",
-              "detail": "Kultur-Werkstatt, Alle",
-              "date": "2026-10-24",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/streuselkuchen-ein-stueck-fuer-alle-judith-bach_AuqtWJj"
-            },
-            {
               "label": "Judith Bach mit «STREUSELKUCHEN – ein Stück für alle»",
               "detail": "Alti Moschti, Alle",
               "date": "2026-10-25",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/muehlethurnen/judith-bach-mit-streuselkuchen-ein-stueck-fuer-alle_AuCs6YB"
+            },
+            {
+              "label": "Foire du Jura",
+              "detail": "Halle des Exposition, Delémont — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
             },
             {
               "label": "Arnaud Tsamere",
@@ -61,11 +55,17 @@
               "detail": "Espace La Velle (ancienne église du Noirmont), Le Noirmont",
               "date": "2026-11-01",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/le-noirmont/le-messie-handel_AnedvkV"
+            },
+            {
+              "label": "Concert annuel de la Fanfare Municipale de Porrentruy",
+              "detail": "Porrentruy",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concert-annuel-de-la-fanfare-municipale-de-porrentruy/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/giura/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -93,7 +93,7 @@
           "url": "/eventi/giura/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "JU",
@@ -114,22 +114,16 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Foire du Jura",
-              "detail": "Halle des Exposition, Delémont — ongoing, last day: 25 October 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
-            },
-            {
-              "label": "Streuselkuchen, ein Stück für alle – Judith Bach",
-              "detail": "Kultur-Werkstatt, Alle",
-              "date": "2026-10-24",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/streuselkuchen-ein-stueck-fuer-alle-judith-bach_AuqtWJj"
-            },
-            {
               "label": "Judith Bach mit «STREUSELKUCHEN – ein Stück für alle»",
               "detail": "Alti Moschti, Alle",
               "date": "2026-10-25",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/muehlethurnen/judith-bach-mit-streuselkuchen-ein-stueck-fuer-alle_AuCs6YB"
+            },
+            {
+              "label": "Foire du Jura",
+              "detail": "Halle des Exposition, Delémont — ongoing, last day: 25 October 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
             },
             {
               "label": "Arnaud Tsamere",
@@ -142,11 +136,17 @@
               "detail": "Espace La Velle (ancienne église du Noirmont), Le Noirmont",
               "date": "2026-11-01",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/le-noirmont/le-messie-handel_AnedvkV"
+            },
+            {
+              "label": "Concert annuel de la Fanfare Municipale de Porrentruy",
+              "detail": "Porrentruy",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concert-annuel-de-la-fanfare-municipale-de-porrentruy/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/jura/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -174,7 +174,7 @@
           "url": "/en/events/jura/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "JU",
@@ -195,22 +195,16 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Foire du Jura",
-              "detail": "Halle des Exposition, Delémont — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
-            },
-            {
-              "label": "Streuselkuchen, ein Stück für alle – Judith Bach",
-              "detail": "Kultur-Werkstatt, Alle",
-              "date": "2026-10-24",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/streuselkuchen-ein-stueck-fuer-alle-judith-bach_AuqtWJj"
-            },
-            {
               "label": "Judith Bach mit «STREUSELKUCHEN – ein Stück für alle»",
               "detail": "Alti Moschti, Alle",
               "date": "2026-10-25",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/muehlethurnen/judith-bach-mit-streuselkuchen-ein-stueck-fuer-alle_AuCs6YB"
+            },
+            {
+              "label": "Foire du Jura",
+              "detail": "Halle des Exposition, Delémont — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
             },
             {
               "label": "Arnaud Tsamere",
@@ -223,11 +217,17 @@
               "detail": "Espace La Velle (ancienne église du Noirmont), Le Noirmont",
               "date": "2026-11-01",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/le-noirmont/le-messie-handel_AnedvkV"
+            },
+            {
+              "label": "Concert annuel de la Fanfare Municipale de Porrentruy",
+              "detail": "Porrentruy",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concert-annuel-de-la-fanfare-municipale-de-porrentruy/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/jura/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -255,7 +255,7 @@
           "url": "/de/veranstaltungen/jura/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "JU",
@@ -276,22 +276,16 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Foire du Jura",
-              "detail": "Halle des Exposition, Delémont — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
-            },
-            {
-              "label": "Streuselkuchen, ein Stück für alle – Judith Bach",
-              "detail": "Kultur-Werkstatt, Alle",
-              "date": "2026-10-24",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/streuselkuchen-ein-stueck-fuer-alle-judith-bach_AuqtWJj"
-            },
-            {
               "label": "Judith Bach mit «STREUSELKUCHEN – ein Stück für alle»",
               "detail": "Alti Moschti, Alle",
               "date": "2026-10-25",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/muehlethurnen/judith-bach-mit-streuselkuchen-ein-stueck-fuer-alle_AuCs6YB"
+            },
+            {
+              "label": "Foire du Jura",
+              "detail": "Halle des Exposition, Delémont — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
             },
             {
               "label": "Arnaud Tsamere",
@@ -304,11 +298,17 @@
               "detail": "Espace La Velle (ancienne église du Noirmont), Le Noirmont",
               "date": "2026-11-01",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/le-noirmont/le-messie-handel_AnedvkV"
+            },
+            {
+              "label": "Concert annuel de la Fanfare Municipale de Porrentruy",
+              "detail": "Porrentruy",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concert-annuel-de-la-fanfare-municipale-de-porrentruy/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/jura/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -336,7 +336,7 @@
           "url": "/fr/evenements/jura/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

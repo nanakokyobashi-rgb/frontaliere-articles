@@ -4,94 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/703145/region-thun-sucht-nach-variante-f%c3%bcr-neuen-umfahrungstunnel": {
-      "section": "canton-be",
-      "ts": 1792671486874
-    },
-    "canton-be::https://ajour.ch/story/703073/strasse-zwischen-diesse-und-prles-bleibt-l%c3%a4nger-gesperrt": {
-      "section": "canton-be",
-      "ts": 1792671493803
-    },
-    "canton-be::https://ajour.ch/story/703099/berner-apothekenkonzern-steigert-umsatz-in-ersten-neun-monaten": {
-      "section": "canton-be",
-      "ts": 1792671547304
-    },
-    "canton-be::https://www.lejdj.ch/articles/a-tramelan-le-6e-forum-darc-horloger-mettra-le-patrimoine-vivant-a-lhonneur-au-dela-des-frontieres-franco-suisses-104688": {
-      "section": "canton-be",
-      "ts": 1792671563206
-    },
-    "canton-be::https://www.nau.ch/news/wirtschaft/valiant-ernennt-kathrin-wehrli-zur-chefin-ab-mai-2027-67191952": {
-      "section": "canton-be",
-      "ts": 1792671848024
-    },
-    "canton-be::https://ajour.ch/story/703055/un-suisse-sur-six-consacre-plus-du-tiers-de-ses-revenus-au-logement": {
-      "section": "canton-be",
-      "ts": 1792671856118
-    },
-    "canton-be::https://ajour.ch/story/703052/lia-ne-permettra-pas-de-compenser-les-dparts-la-retraite-ces-dix-prochaines-annes": {
-      "section": "canton-be",
-      "ts": 1792671871233
-    },
-    "canton-be::https://ajour.ch/story/703160/feuerwehr%c3%bcbung-f%c3%bchrt-zu-strassensperrung": {
-      "section": "canton-be",
-      "ts": 1792671885798
-    },
-    "canton-be::https://ajour.ch/story/703152/bei-radio-energy-drohen-bis-zu-15-entlassungen": {
-      "section": "canton-be",
-      "ts": 1792672190203
-    },
-    "canton-be::https://www.be.ch/de/start.html?newsid=9a6f112d-d379-4f84-916e-a5cf20f37b85": {
-      "section": "canton-be",
-      "ts": 1792674336053
-    },
-    "canton-be::https://ajour.ch/story/702540/kanton-die-frist-f%c3%bcr-die-steuererkl%c3%a4rung-verl%c3%a4ngert-sich-automatisch": {
-      "section": "canton-be",
-      "ts": 1792678093333
-    },
-    "canton-be::https://ajour.ch/story/702470/budget-2027-sieht-ertrags%c3%bcberschuss-vor": {
-      "section": "canton-be",
-      "ts": 1792678100877
-    },
-    "canton-be::https://ajour.ch/story/702511/spitalneubau-br%c3%bcgg-der-kanton-erh%c3%b6ht-den-druck-auf-biel-bei-der-planung-des-spitalareals": {
-      "section": "canton-be",
-      "ts": 1792690384800
-    },
-    "canton-be::https://ajour.ch/story/702647/berner-gesundheitsdirektor-ein-solch-hoher-betrag-vom-kanton-kommt-nicht-allen-spit%c3%a4lern-zugute": {
-      "section": "canton-be",
-      "ts": 1792709693210
-    },
-    "canton-be::https://ajour.ch/story/702703/energie-wasser-bern-reicht-baugesuch-f%c3%bcr-energiespeicher-ein": {
-      "section": "canton-be",
-      "ts": 1792709711081
-    },
-    "canton-be::https://ajour.ch/story/702686/grossratskommission-unterst%c3%bctzt-ausl%c3%a4nderstimmrecht-im-kanton-bern": {
-      "section": "canton-be",
-      "ts": 1792719414850
-    },
-    "canton-be::https://www.api.news.apps.be.ch/api/atom/news/800a98c8-943a-4f05-9895-cdba893de3cb": {
-      "section": "canton-be",
-      "ts": 1792721242796
-    },
-    "canton-be::https://ajour.ch/story/703224/just-eat-k%c3%bcndigt-massenentlassung-an-700-kuriere-bangen-um-ihren-job": {
-      "section": "canton-be",
-      "ts": 1792721244311
-    },
-    "canton-be::https://www.be.ch/de/start.html?newsid=0c0dba57-92ee-401c-b7cc-21d7bfb7a7b0": {
-      "section": "canton-be",
-      "ts": 1792730176809
-    },
-    "canton-be::https://www.api.news.apps.be.ch/api/atom/news/2b5d929d-74fa-498c-b199-22dc5cbf7f86": {
-      "section": "canton-be",
-      "ts": 1792731129019
-    },
-    "canton-be::https://ajour.ch/story/702763/araerweiterung-und-%c3%bcberbauung-bei-neuem-spital-kommen-vors-volk": {
-      "section": "canton-be",
-      "ts": 1792731150952
-    },
-    "canton-be::https://ajour.ch/story/703031/die-vollsperrung-ist-sehr-belastend": {
-      "section": "canton-be",
-      "ts": 1792731161252
-    },
     "canton-be::https://ajour.ch/story/703283/sperrung-des-ligerztunnels-wegen-tests": {
       "section": "canton-be",
       "ts": 1792759379462
@@ -103,6 +15,10 @@
     "canton-be::https://ajour.ch/story/703360/berner-regierung-legt-neue-spielregeln-f%c3%bcr-zentrumslasten-vor": {
       "section": "canton-be",
       "ts": 1792840751798
+    },
+    "canton-be::https://ajour.ch/story/703519/temporeduktion-auf-der-autobahn-bundesrat-bereitet-umstrittene-massnahme-vor": {
+      "section": "canton-be",
+      "ts": 1792925174435
     }
   }
 }

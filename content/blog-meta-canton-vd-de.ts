@@ -78,6 +78,9 @@ const blogMetaCantonVdDe: Record<string, string> = {
     'blog.article.grand-conseil-27-ottobre.title': 'Tagesordnung des Grand Conseil vom 27. Oktober zu LRIPP und CHUV',
     'blog.article.grand-conseil-27-ottobre.excerpt': 'Sitzung des Grand Conseil, die für den 27.',
     'blog.article.grand-conseil-27-ottobre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cantiere-stazione-morges-2026.title': 'Baustelle für das neue Empfangsgebäude des Bahnhofs Morges ab Dezember 2026',
+    'blog.article.cantiere-stazione-morges-2026.excerpt': 'Im Dezember 2026 beginnen die Arbeiten der CFF Die Baustelle wird einen grossen Teil des Platzes beanspruchen Haltestellen der Regionalbusse und Taxistandplätze',
+    'blog.article.cantiere-stazione-morges-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonVdDe;
