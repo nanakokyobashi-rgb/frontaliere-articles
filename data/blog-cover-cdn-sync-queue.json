@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-cantiere-stazione-morges-2026.webp",
-      "sha256": "ef733c1c75c220e734434dd9e630ffd6f587d5ce706c3da263535a8f2b242c9f"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-cantiere-stazione-morges-2026-480w.webp",
-      "sha256": "2366e0ea21c010dd929d82121e8ab70accf4b4db4d2116f991e56de82191d7bc"
-    }
-  ]
+  "items": []
 }
