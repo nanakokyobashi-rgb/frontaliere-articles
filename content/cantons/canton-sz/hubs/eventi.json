@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "f38cc149b952f0a5832fa1565719fbc742bbf42770fbaf620d2b9f84619d144a",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "142e6ee958cabf3d838fbe683d36b0ef98d145242d92dcc713686eada9b68ba9",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T19:30:03.925Z",
+      "updatedAt": "2026-10-25T02:23:31.213Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "14",
+          "value": "17",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,39 +33,15 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Frölein Da Capo - Halbzeit Show",
-              "detail": "Küssnacht am Rigi",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/froelein-da-capo-halbzeit-show-1/"
-            },
-            {
-              "label": "Bex Marshall - DER HERBST 26",
-              "detail": "Hirschen Schwyz GmbH, Schwyz",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bex-marshall-gb-der-herbst-26/"
-            },
-            {
-              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
-              "detail": "Einsiedeln — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
-            },
-            {
               "label": "30. Muotitaler Alpchäsmärcht",
-              "detail": "Alpchäsmärcht Muotathal, Muotathal",
-              "date": "2026-10-24",
+              "detail": "Alpchäsmärcht Muotathal, Muotathal — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/30th-muotitaler-alpine-cheese-market/"
             },
             {
-              "label": "«Tote Liebe! Oder doch nicht?»",
-              "detail": "Schulhaus Seefeld, Lachen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tote-liebe-oder-doch-nicht/"
-            },
-            {
               "label": "MKLA MusicFestival",
-              "detail": "Lachen SZ, Lachen",
-              "date": "2026-10-24",
+              "detail": "Lachen SZ, Lachen — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mkla-musicfestival/"
             },
             {
@@ -91,11 +67,35 @@
               "detail": "Theatersaal, Einsiedeln",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/venus-and-adonis-3/"
+            },
+            {
+              "label": "The Two - Blues & Dine - DER HERBST 26",
+              "detail": "Gersau",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-two-blues-dine-der-herbst-26/"
+            },
+            {
+              "label": "GfuG Family-Day – Musikalische Lesung «Für das Auerhuhn»",
+              "detail": "Schwyz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gfug-family-day-musikalische-lesung-fuer-das-auerhuhn/"
+            },
+            {
+              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
+              "detail": "Schwyz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
+            },
+            {
+              "label": "The Two - Blues & Dine - DER HERBST 26",
+              "detail": "Restaurant Tübli, Gersau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-two-blues-dine-der-herbst-26-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/svitto/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "SZ",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "14",
+          "value": "17",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,39 +138,15 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Frölein Da Capo - Halbzeit Show",
-              "detail": "Küssnacht am Rigi",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/froelein-da-capo-halbzeit-show-1/"
-            },
-            {
-              "label": "Bex Marshall - DER HERBST 26",
-              "detail": "Hirschen Schwyz GmbH, Schwyz",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bex-marshall-gb-der-herbst-26/"
-            },
-            {
-              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
-              "detail": "Einsiedeln — ongoing, last day: 24 October 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
-            },
-            {
               "label": "30th Muotitaler Alpine Cheese Market",
-              "detail": "Alpchäsmärcht Muotathal, Muotathal",
-              "date": "2026-10-24",
+              "detail": "Alpchäsmärcht Muotathal, Muotathal — ongoing, last day: 25 October 2026",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/30th-muotitaler-alpine-cheese-market/"
             },
             {
-              "label": "«Tote Liebe! Oder doch nicht?»",
-              "detail": "Schulhaus Seefeld, Lachen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tote-liebe-oder-doch-nicht/"
-            },
-            {
               "label": "MKLA MusicFestival",
-              "detail": "Lachen SZ, Lachen",
-              "date": "2026-10-24",
+              "detail": "Lachen SZ, Lachen — ongoing, last day: 25 October 2026",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mkla-musicfestival/"
             },
             {
@@ -196,11 +172,35 @@
               "detail": "Theatersaal, Einsiedeln",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/venus-and-adonis-3/"
+            },
+            {
+              "label": "The Two - Blues & Dine - DER HERBST 26",
+              "detail": "Gersau",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-two-blues-dine-der-herbst-26/"
+            },
+            {
+              "label": "GfuG Family-Day – Musikalische Lesung «Für das Auerhuhn»",
+              "detail": "Schwyz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gfug-family-day-musikalische-lesung-fuer-das-auerhuhn/"
+            },
+            {
+              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
+              "detail": "Schwyz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
+            },
+            {
+              "label": "The Two - Blues & Dine - DER HERBST 26",
+              "detail": "Restaurant Tübli, Gersau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-two-blues-dine-der-herbst-26-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schwyz/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "SZ",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "14",
+          "value": "17",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,39 +243,15 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Frölein Da Capo - Halbzeit Show",
-              "detail": "Küssnacht am Rigi",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/froelein-da-capo-halbzeit-show-1/"
-            },
-            {
-              "label": "Bex Marshall - DER HERBST 26",
-              "detail": "Hirschen Schwyz GmbH, Schwyz",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bex-marshall-gb-der-herbst-26/"
-            },
-            {
-              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
-              "detail": "Einsiedeln — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
-            },
-            {
               "label": "30. Muotitaler Alpchäsmärcht",
-              "detail": "Alpchäsmärcht Muotathal, Muotathal",
-              "date": "2026-10-24",
+              "detail": "Alpchäsmärcht Muotathal, Muotathal — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/30th-muotitaler-alpine-cheese-market/"
             },
             {
-              "label": "«Tote Liebe! Oder doch nicht?»",
-              "detail": "Schulhaus Seefeld, Lachen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tote-liebe-oder-doch-nicht/"
-            },
-            {
               "label": "MKLA MusicFestival",
-              "detail": "Lachen SZ, Lachen",
-              "date": "2026-10-24",
+              "detail": "Lachen SZ, Lachen — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mkla-musicfestival/"
             },
             {
@@ -301,11 +277,35 @@
               "detail": "Theatersaal, Einsiedeln",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/venus-and-adonis-3/"
+            },
+            {
+              "label": "The Two - Blues & Dine - DER HERBST 26",
+              "detail": "Gersau",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-two-blues-dine-der-herbst-26/"
+            },
+            {
+              "label": "GfuG Family-Day – Musikalische Lesung «Für das Auerhuhn»",
+              "detail": "Schwyz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gfug-family-day-musikalische-lesung-fuer-das-auerhuhn/"
+            },
+            {
+              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
+              "detail": "Schwyz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
+            },
+            {
+              "label": "The Two - Blues & Dine - DER HERBST 26",
+              "detail": "Restaurant Tübli, Gersau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-two-blues-dine-der-herbst-26-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schwyz/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "SZ",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "14",
+          "value": "17",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,39 +348,15 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Frölein Da Capo - Halbzeit Show",
-              "detail": "Küssnacht am Rigi",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/froelein-da-capo-halbzeit-show-1/"
-            },
-            {
-              "label": "Bex Marshall - DER HERBST 26",
-              "detail": "Hirschen Schwyz GmbH, Schwyz",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bex-marshall-gb-der-herbst-26/"
-            },
-            {
-              "label": "WMC-Konzert: Jubilate Deo by Dan Forrest",
-              "detail": "Einsiedeln — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wmc-konzert-jubilate-deo/"
-            },
-            {
               "label": "30. Muotitaler Alpchäsmärcht",
-              "detail": "Alpchäsmärcht Muotathal, Muotathal",
-              "date": "2026-10-24",
+              "detail": "Alpchäsmärcht Muotathal, Muotathal — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/30th-muotitaler-alpine-cheese-market/"
             },
             {
-              "label": "«Tote Liebe! Oder doch nicht?»",
-              "detail": "Schulhaus Seefeld, Lachen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tote-liebe-oder-doch-nicht/"
-            },
-            {
               "label": "MKLA MusicFestival",
-              "detail": "Lachen SZ, Lachen",
-              "date": "2026-10-24",
+              "detail": "Lachen SZ, Lachen — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/mkla-musicfestival/"
             },
             {
@@ -406,11 +382,35 @@
               "detail": "Theatersaal, Einsiedeln",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/venus-and-adonis-3/"
+            },
+            {
+              "label": "The Two - Blues & Dine - DER HERBST 26",
+              "detail": "Gersau",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/the-two-blues-dine-der-herbst-26/"
+            },
+            {
+              "label": "GfuG Family-Day – Musikalische Lesung «Für das Auerhuhn»",
+              "detail": "Schwyz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/gfug-family-day-musikalische-lesung-fuer-das-auerhuhn/"
+            },
+            {
+              "label": "IKIGAI japanisches Lebenskonzept als kreativer Workshop",
+              "detail": "Schwyz",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ikigai-japanisches-lebenskonzept-als-kreativer-workshop/"
+            },
+            {
+              "label": "The Two - Blues & Dine - DER HERBST 26",
+              "detail": "Restaurant Tübli, Gersau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-two-blues-dine-der-herbst-26-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schwytz/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

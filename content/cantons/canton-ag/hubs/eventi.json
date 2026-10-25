@@ -4,12 +4,12 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "c232e3a99e79a82babb4ddb18a5400ef6ff1420b47eaf469d4f4504d66b289d5",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "4e1a0feaf21c92cf6c4382347d42a7b52ebc5ba9ee70e75158e5d702ebbdf654",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T19:30:03.925Z",
+      "updatedAt": "2026-10-25T02:23:31.213Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "108",
+          "value": "110",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "in&out - La piattaforma dedicata al design svizzero",
-              "detail": "AHA Aeschbachhalle Aarau, Aarau",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
-            },
-            {
-              "label": "Wallbacher Wiesn",
-              "detail": "Wallbach",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wallbacher-wiesn/"
-            },
-            {
-              "label": "Rum Tasting",
+              "label": "KURWASSERMUSIK – Klanginstallation in drei Aquarien",
               "detail": "Baden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rum-tasting/"
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurwassermusik-klanginstallation-in-drei-aquarien/"
             },
             {
-              "label": "A Fine Romance, eine humoristische Swing-Revue à deux",
-              "detail": "Oberstufenzentrum Hüslerberg, Niederrohrdorf",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/niederrohrdorf/a-fine-romance-eine-humoristische-swing-revue-a-deux_Am8eTw2"
+              "label": "Sundaysports Muri",
+              "detail": "Muri AG",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sundaysports-muri/"
             },
             {
-              "label": "Chris Hopkins Quartet feat. Simon Wyrsch | Ja-ZZ",
-              "detail": "Hotel Schützen, Rheinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/chris-hopkins-quartet-feat-simon-wyrsch-ja-zz_Ae9mSUD"
+              "label": "Tierspuren",
+              "detail": "Schulareal Eggen, Meisterschwanden",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tierspuren/"
             },
             {
-              "label": "Comedy im AUREA - Reena Krasnaraya - Kurkuma",
-              "detail": "Rheinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comedy-im-aurea-reena-krasnaraya-kurkuma/"
+              "label": "SIMPLY TINA - Die Tina Turner Tribute Show",
+              "detail": "Zentrum Bärenmatte, Suhr",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/suhr/simply-tina-die-tina-turner-tribute-show_A5NP6vp"
             },
             {
-              "label": "Konzert | Kaiserschmarrn und Gassenhauer",
-              "detail": "St. Josefskirche Rheinfelden, Rheinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rheinfelden/konzert-kaiserschmarrn-und-gassenhauer_AcCsjkX"
-            },
-            {
-              "label": "Mattiu",
-              "detail": "Konservi, Seon",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/mattiu_AZGG5NA"
-            },
-            {
-              "label": "Marcoca (DE)",
+              "label": "Marko Hietala (FI)",
               "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/marcoca-de_ARGUvbe"
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/marko-hietala-fi_A5RuS6g"
+            },
+            {
+              "label": "Dida",
+              "detail": "Pflegi Muri",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/dida_AdBS29a"
+            },
+            {
+              "label": "Workshop: Cucire un abito dell'Alto Medioevo",
+              "detail": "Kloster Königsfelden, Windisch — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-kleid-aus-dem-hochmittelalter-naehen/"
+            },
+            {
+              "label": "Trümpi-Festival: Einführung ins Maultrommelspielen",
+              "detail": "Schloss Hallwyl, Seengen — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/seengen/truempi-festival-einfuehrung-ins-maultrommelspielen_ArGF4mq"
+            },
+            {
+              "label": "in&out - La piattaforma dedicata al design svizzero",
+              "detail": "AHA Aeschbachhalle Aarau, Aarau — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
             },
             {
               "label": "Die Habsburger – 800 Jahre europäische Geschichte",
               "detail": "Laufenburg — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/argovia/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "AG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "108",
+          "value": "110",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "in&out - The Platform for Swiss Design",
-              "detail": "AHA Aeschbachhalle Aarau, Aarau",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
-            },
-            {
-              "label": "Wallbacher Wiesn",
-              "detail": "Wallbach",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wallbacher-wiesn/"
-            },
-            {
-              "label": "Rum Tasting",
+              "label": "KURWASSERMUSIK – Klanginstallation in drei Aquarien",
               "detail": "Baden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rum-tasting/"
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurwassermusik-klanginstallation-in-drei-aquarien/"
             },
             {
-              "label": "A Fine Romance, eine humoristische Swing-Revue à deux",
-              "detail": "Oberstufenzentrum Hüslerberg, Niederrohrdorf",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/niederrohrdorf/a-fine-romance-eine-humoristische-swing-revue-a-deux_Am8eTw2"
+              "label": "Sundaysports Muri",
+              "detail": "Muri AG",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sundaysports-muri/"
             },
             {
-              "label": "Chris Hopkins Quartet feat. Simon Wyrsch | Ja-ZZ",
-              "detail": "Hotel Schützen, Rheinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/chris-hopkins-quartet-feat-simon-wyrsch-ja-zz_Ae9mSUD"
+              "label": "Tierspuren",
+              "detail": "Schulareal Eggen, Meisterschwanden",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tierspuren/"
             },
             {
-              "label": "Comedy im AUREA - Reena Krasnaraya - Kurkuma",
-              "detail": "Rheinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comedy-im-aurea-reena-krasnaraya-kurkuma/"
+              "label": "SIMPLY TINA - Die Tina Turner Tribute Show",
+              "detail": "Zentrum Bärenmatte, Suhr",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/suhr/simply-tina-die-tina-turner-tribute-show_A5NP6vp"
             },
             {
-              "label": "Konzert | Kaiserschmarrn und Gassenhauer",
-              "detail": "St. Josefskirche Rheinfelden, Rheinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rheinfelden/konzert-kaiserschmarrn-und-gassenhauer_AcCsjkX"
-            },
-            {
-              "label": "Mattiu",
-              "detail": "Konservi, Seon",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/mattiu_AZGG5NA"
-            },
-            {
-              "label": "Marcoca (DE)",
+              "label": "Marko Hietala (FI)",
               "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/marcoca-de_ARGUvbe"
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/marko-hietala-fi_A5RuS6g"
+            },
+            {
+              "label": "Dida",
+              "detail": "Pflegi Muri",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/dida_AdBS29a"
+            },
+            {
+              "label": "Workshop: Sewing a dress from the High Middle Ages",
+              "detail": "Kloster Königsfelden, Windisch — ongoing, last day: 25 October 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-kleid-aus-dem-hochmittelalter-naehen/"
+            },
+            {
+              "label": "Trümpi-Festival: Einführung ins Maultrommelspielen",
+              "detail": "Schloss Hallwyl, Seengen — ongoing, last day: 25 October 2026",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/seengen/truempi-festival-einfuehrung-ins-maultrommelspielen_ArGF4mq"
+            },
+            {
+              "label": "in&out - The Platform for Swiss Design",
+              "detail": "AHA Aeschbachhalle Aarau, Aarau — ongoing, last day: 25 October 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
             },
             {
               "label": "Die Habsburger – 800 Jahre europäische Geschichte",
               "detail": "Laufenburg — ongoing, last day: 1 November 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/aargau/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "AG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "108",
+          "value": "110",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Illumio am in&out - Die Plattform für Schweizer Design",
-              "detail": "AHA Aeschbachhalle Aarau, Aarau",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
-            },
-            {
-              "label": "Wallbacher Wiesn",
-              "detail": "Wallbach",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wallbacher-wiesn/"
-            },
-            {
-              "label": "Rum Tasting",
+              "label": "KURWASSERMUSIK – Klanginstallation in drei Aquarien",
               "detail": "Baden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rum-tasting/"
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurwassermusik-klanginstallation-in-drei-aquarien/"
             },
             {
-              "label": "A Fine Romance, eine humoristische Swing-Revue à deux",
-              "detail": "Oberstufenzentrum Hüslerberg, Niederrohrdorf",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/niederrohrdorf/a-fine-romance-eine-humoristische-swing-revue-a-deux_Am8eTw2"
+              "label": "Sundaysports Muri",
+              "detail": "Muri AG",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sundaysports-muri/"
             },
             {
-              "label": "Chris Hopkins Quartet feat. Simon Wyrsch | Ja-ZZ",
-              "detail": "Hotel Schützen, Rheinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/chris-hopkins-quartet-feat-simon-wyrsch-ja-zz_Ae9mSUD"
+              "label": "Tierspuren",
+              "detail": "Schulareal Eggen, Meisterschwanden",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tierspuren/"
             },
             {
-              "label": "Comedy im AUREA - Reena Krasnaraya - Kurkuma",
-              "detail": "Rheinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comedy-im-aurea-reena-krasnaraya-kurkuma/"
+              "label": "SIMPLY TINA - Die Tina Turner Tribute Show",
+              "detail": "Zentrum Bärenmatte, Suhr",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/suhr/simply-tina-die-tina-turner-tribute-show_A5NP6vp"
             },
             {
-              "label": "Konzert | Kaiserschmarrn und Gassenhauer",
-              "detail": "St. Josefskirche Rheinfelden, Rheinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rheinfelden/konzert-kaiserschmarrn-und-gassenhauer_AcCsjkX"
-            },
-            {
-              "label": "Mattiu",
-              "detail": "Konservi, Seon",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/mattiu_AZGG5NA"
-            },
-            {
-              "label": "Marcoca (DE)",
+              "label": "Marko Hietala (FI)",
               "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/marcoca-de_ARGUvbe"
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/marko-hietala-fi_A5RuS6g"
+            },
+            {
+              "label": "Dida",
+              "detail": "Pflegi Muri",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/dida_AdBS29a"
+            },
+            {
+              "label": "Workshop: Kleid aus dem Hochmittelalter nähen",
+              "detail": "Kloster Königsfelden, Windisch — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-kleid-aus-dem-hochmittelalter-naehen/"
+            },
+            {
+              "label": "Trümpi-Festival: Einführung ins Maultrommelspielen",
+              "detail": "Schloss Hallwyl, Seengen — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/seengen/truempi-festival-einfuehrung-ins-maultrommelspielen_ArGF4mq"
+            },
+            {
+              "label": "Illumio am in&out - Die Plattform für Schweizer Design",
+              "detail": "AHA Aeschbachhalle Aarau, Aarau — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
             },
             {
               "label": "Die Habsburger – 800 Jahre europäische Geschichte",
               "detail": "Laufenburg — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/aargau/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "AG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "108",
+          "value": "110",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "in&out - La plateforme dédiée au design suisse",
-              "detail": "AHA Aeschbachhalle Aarau, Aarau",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
-            },
-            {
-              "label": "Wallbacher Wiesn",
-              "detail": "Wallbach",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wallbacher-wiesn/"
-            },
-            {
-              "label": "Rum Tasting",
+              "label": "KURWASSERMUSIK – Klanginstallation in drei Aquarien",
               "detail": "Baden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rum-tasting/"
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurwassermusik-klanginstallation-in-drei-aquarien/"
             },
             {
-              "label": "A Fine Romance, eine humoristische Swing-Revue à deux",
-              "detail": "Oberstufenzentrum Hüslerberg, Niederrohrdorf",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/niederrohrdorf/a-fine-romance-eine-humoristische-swing-revue-a-deux_Am8eTw2"
+              "label": "Sundaysports Muri",
+              "detail": "Muri AG",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sundaysports-muri/"
             },
             {
-              "label": "Chris Hopkins Quartet feat. Simon Wyrsch | Ja-ZZ",
-              "detail": "Hotel Schützen, Rheinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/chris-hopkins-quartet-feat-simon-wyrsch-ja-zz_Ae9mSUD"
+              "label": "Tierspuren",
+              "detail": "Schulareal Eggen, Meisterschwanden",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tierspuren/"
             },
             {
-              "label": "Comedy im AUREA - Reena Krasnaraya - Kurkuma",
-              "detail": "Rheinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/comedy-im-aurea-reena-krasnaraya-kurkuma/"
+              "label": "SIMPLY TINA - Die Tina Turner Tribute Show",
+              "detail": "Zentrum Bärenmatte, Suhr",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/suhr/simply-tina-die-tina-turner-tribute-show_A5NP6vp"
             },
             {
-              "label": "Konzert | Kaiserschmarrn und Gassenhauer",
-              "detail": "St. Josefskirche Rheinfelden, Rheinfelden",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/rheinfelden/konzert-kaiserschmarrn-und-gassenhauer_AcCsjkX"
-            },
-            {
-              "label": "Mattiu",
-              "detail": "Konservi, Seon",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seon/mattiu_AZGG5NA"
-            },
-            {
-              "label": "Marcoca (DE)",
+              "label": "Marko Hietala (FI)",
               "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/aarau/marcoca-de_ARGUvbe"
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/marko-hietala-fi_A5RuS6g"
+            },
+            {
+              "label": "Dida",
+              "detail": "Pflegi Muri",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/dida_AdBS29a"
+            },
+            {
+              "label": "Atelier: Couture d'une robe du haut Moyen Âge",
+              "detail": "Kloster Königsfelden, Windisch — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-kleid-aus-dem-hochmittelalter-naehen/"
+            },
+            {
+              "label": "Trümpi-Festival: Einführung ins Maultrommelspielen",
+              "detail": "Schloss Hallwyl, Seengen — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/seengen/truempi-festival-einfuehrung-ins-maultrommelspielen_ArGF4mq"
+            },
+            {
+              "label": "in&out - La plateforme dédiée au design suisse",
+              "detail": "AHA Aeschbachhalle Aarau, Aarau — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
             },
             {
               "label": "Die Habsburger – 800 Jahre europäische Geschichte",
               "detail": "Laufenburg — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/argovie/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

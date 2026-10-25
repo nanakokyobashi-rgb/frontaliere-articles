@@ -4,14 +4,14 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T12:35:50.316Z",
-  "contentHash": "33d5bf0806ba2cdcf29dd4116f179ad9c356e6fcf767826d50c640e6372161dc",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "e0fe44d15b15f6a3dc3124df550393d94fd4f924610015d98a1d3366627465bb",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-22T12:21:38.892Z",
+      "updatedAt": "2026-10-24T11:32:51.939Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-29T12:21:38.892Z"
+      "carryUntilAt": "2026-10-31T11:32:51.939Z"
     }
   ],
   "locales": {
@@ -54,54 +54,30 @@
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "2,066 EUR/l",
-              "detail": "media regionale: minimo 2,029 EUR/l, 9 stazioni rilevate",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,188 EUR/l",
+              "detail": "media regionale: minimo 2,099 EUR/l, 9 stazioni rilevate",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,235 EUR/l",
-              "detail": "media regionale: minimo 2,189 EUR/l, 9 stazioni rilevate",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,351 EUR/l",
+              "detail": "media regionale: minimo 2,260 EUR/l, 9 stazioni rilevate",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Zurigo, oltre 100 infrazioni nei controlli anti-distrazione",
-          "url": "/articoli-zurigo/controlli-distrazione-zurigo/",
-          "excerpt": "La Polizia cantonale di Zurigo ha rilevato oltre 100 infrazioni il 20 ottobre 2026: 50 riguardavano l'uso vietato del cellulare alla guida.",
-          "date": "2026-10-23T12:21:12.761Z"
-        },
-        {
-          "title": "Zurigo: incentivi per l'acquisto di E-Cargovelo per le imprese",
-          "url": "/articoli-zurigo/zurigo-incentivi-e-cargo-velo/",
-          "excerpt": "La Città di Zurigo mette a disposizione centinaia di migliaia di franchi per sostenere l'acquisto di E-Cargovelo e offre corsi di guida a metà prezzo.",
-          "date": "2026-10-21T11:52:46.899Z"
-        },
-        {
-          "title": "Budget 2027 di Zurigo: 640 posti in più in amministrazione",
-          "url": "/articoli-zurigo/organico-comunale-zurigo/",
-          "excerpt": "Il bilancio 2027 della città di Zurigo prevede altri 640 posti nell'amministrazione.",
-          "date": "2026-10-21T11:30:34.419Z"
-        },
-        {
-          "title": "Zurigo: niente iniziativa congedo parentale, sinistra e centro divisi",
-          "url": "/articoli-zurigo/zurigo-niente-iniziativa-congedo-parentale/",
-          "excerpt": "Il Canton Zurigo non presenterà la Standesinitiative sul congedo parentale: sinistra e partiti di centro, inizialmente favorevoli, non hanno trovato un accordo.",
-          "date": "2026-10-21T11:09:26.023Z"
-        },
-        {
-          "title": "Dal 13 dicembre soppressi i tram 50 e 51",
-          "url": "/articoli-zurigo/vbz-tram-50-51-cambio/",
-          "excerpt": "Dal 13 dicembre spariscono le linee 50 e 51 I tram 4, 11, 13, 14 e 17 tornano sul Bahnhofquai La linea 83 viaggia ogni giorno fino alle 22 La linea notturna N8",
-          "date": "2026-10-21T10:20:51.886Z"
+          "title": "Winterthur: voto su 100 milioni per l'energia-contracting",
+          "url": "/articoli-zurigo/winterthur-voto-energia/",
+          "excerpt": "A Winterthur voto nel febbraio 2027 su 100 milioni per l'energia-contracting.",
+          "date": "2026-10-23T13:26:45.327Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcolo del costo dell’auto per pendolari",
@@ -112,7 +88,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T12:35:50.316Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "ZH",
@@ -153,54 +129,30 @@
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "2.066 EUR/l",
-              "detail": "regional average: lowest 2.029 EUR/l, 9 stations surveyed",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.188 EUR/l",
+              "detail": "regional average: lowest 2.099 EUR/l, 9 stations surveyed",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.235 EUR/l",
-              "detail": "regional average: lowest 2.189 EUR/l, 9 stations surveyed",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.351 EUR/l",
+              "detail": "regional average: lowest 2.260 EUR/l, 9 stations surveyed",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Zurich, over 100 violations in anti-distraction checks",
-          "url": "/en/zurich-articles/zurich-distraction-checks/",
-          "excerpt": "The Zurich Cantonal Police recorded more than 100 violations on October 20, 2026: 50 involved the prohibited use of a mobile phone while driving.",
-          "date": "2026-10-23T12:21:12.761Z"
-        },
-        {
-          "title": "Zurich: incentives for businesses to purchase E-Cargovelo",
-          "url": "/en/zurich-articles/zurich-incentives-e-cargo-bike/",
-          "excerpt": "The City of Zurich is making hundreds of thousands of francs available to support the purchase of E-Cargovelo and offers driving courses at half price.",
-          "date": "2026-10-21T11:52:46.899Z"
-        },
-        {
-          "title": "Zurich's 2027 budget: 640 additional positions in administration",
-          "url": "/en/zurich-articles/zurich-city-staff-budget-2027/",
-          "excerpt": "The 2027 budget of the city of Zurich provides for another 640 positions in the administration.",
-          "date": "2026-10-21T11:30:34.419Z"
-        },
-        {
-          "title": "Zurich: no parental leave initiative, left and center divided",
-          "url": "/en/zurich-articles/zurich-no-parental-leave-initiative/",
-          "excerpt": "The Canton of Zurich will not submit the cantonal initiative on parental leave: left-wing and centrist parties, initially in favor, failed to reach an agreement.",
-          "date": "2026-10-21T11:09:26.023Z"
-        },
-        {
-          "title": "Trams 50 and 51 discontinued from December 13",
-          "url": "/en/zurich-articles/vbz-tram-50-51-timetable-change/",
-          "excerpt": "From December 13, lines 50 and 51 will disappear Trams 4, 11, 13, 14 and 17 return to Bahnhofquai Line 83 runs every day until 22 Night line N8 becomes N80 Date",
-          "date": "2026-10-21T10:20:51.886Z"
+          "title": "Winterthur: vote on 100 million for energy contracting",
+          "url": "/en/zurich-articles/winterthur-energy-contracting-vote/",
+          "excerpt": "Winterthur to vote in February 2027 on 100 million for energy contracting.",
+          "date": "2026-10-23T13:26:45.327Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Commuting car cost calculator",
@@ -211,7 +163,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T12:35:50.316Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "ZH",
@@ -252,54 +204,30 @@
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "2.066 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.029 EUR/l, 9 erfasste Tankstellen",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.188 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.099 EUR/l, 9 erfasste Tankstellen",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.235 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.189 EUR/l, 9 erfasste Tankstellen",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.351 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.260 EUR/l, 9 erfasste Tankstellen",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Zürich, über 100 Verstösse bei Ablenkungskontrollen",
-          "url": "/de/zurich-artikel/zuerich-kontrolle-ablenkung/",
-          "excerpt": "Die Kantonspolizei Zürich stellte am 20.",
-          "date": "2026-10-23T12:21:12.761Z"
-        },
-        {
-          "title": "Zürich: Förderungen für den Kauf von E-Cargovelo für Unternehmen",
-          "url": "/de/zurich-artikel/zuerich-incentive-e-cargo-velo/",
-          "excerpt": "Die Stadt Zürich stellt Hunderttausende Franken zur Verfügung, um den Kauf von E-Cargovelo zu unterstützen, und bietet Fahrkurse zum halben Preis an.",
-          "date": "2026-10-21T11:52:46.899Z"
-        },
-        {
-          "title": "Budget 2027 der Stadt Zürich: 640 zusätzliche Stellen in der Verwaltung",
-          "url": "/de/zurich-artikel/zuerich-stadtpersonal-budget-2027/",
-          "excerpt": "Das Budget 2027 der Stadt Zürich sieht 640 weitere Stellen in der Verwaltung vor.",
-          "date": "2026-10-21T11:30:34.419Z"
-        },
-        {
-          "title": "Zürich: Keine Initiative zum Elternurlaub, Linke und Mitte gespalten",
-          "url": "/de/zurich-artikel/zuerich-keine-elternzeit-initiative/",
-          "excerpt": "Der Kanton Zürich wird die Standesinitiative zum Elternurlaub nicht einreichen: Die Linke und die Parteien der Mitte, die zunächst dafür waren, haben keine Einigung gefunden.",
-          "date": "2026-10-21T11:09:26.023Z"
-        },
-        {
-          "title": "Ab dem 13. Dezember entfallen die Trams 50 und 51",
-          "url": "/de/zurich-artikel/vbz-tram-50-51-fahrplanwechsel/",
-          "excerpt": "Ab dem 13. Dezember entfallen die Linien 50 und 51 Die Trams 4, 11, 13, 14 und 17 fahren wieder über den Bahnhofquai Die Linie 83 fährt täglich bis 22 Uhr",
-          "date": "2026-10-21T10:20:51.886Z"
+          "title": "Winterthur: Abstimmung über 100 Millionen für das Energie-Contracting",
+          "url": "/de/zurich-artikel/winterthur-abstimmung-energie-contracting/",
+          "excerpt": "In Winterthur Abstimmung im Februar 2027 über 100 Millionen für das Energie-Contracting.",
+          "date": "2026-10-23T13:26:45.327Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Autokosten-Rechner für Pendler",
@@ -310,7 +238,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T12:35:50.316Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "ZH",
@@ -351,54 +279,30 @@
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "2,066 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,029 EUR/l, 9 stations relevées",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,188 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,099 EUR/l, 9 stations relevées",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,235 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,189 EUR/l, 9 stations relevées",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,351 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,260 EUR/l, 9 stations relevées",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
-      "curatedArticles": [],
-      "latestCantonArticles": [
+      "curatedArticles": [
         {
-          "title": "Zurich : plus de 100 infractions lors de contrôles anti-distraction",
-          "url": "/fr/articles-zurich/controles-distraction-zurich/",
-          "excerpt": "La police cantonale de Zurich a relevé plus de 100 infractions le 20 octobre 2026 : 50 concernaient l’utilisation interdite du téléphone portable au volant.",
-          "date": "2026-10-23T12:21:12.761Z"
-        },
-        {
-          "title": "Zurich : incitations à l'achat d'E-Cargovelo pour les entreprises",
-          "url": "/fr/articles-zurich/zurich-incitations-e-cargo-bike/",
-          "excerpt": "La Ville de Zurich met à disposition des centaines de milliers de francs pour soutenir l'achat d'E-Cargovelo et propose des cours de conduite à moitié prix.",
-          "date": "2026-10-21T11:52:46.899Z"
-        },
-        {
-          "title": "Budget 2027 de Zurich : 640 postes supplémentaires dans l’administration",
-          "url": "/fr/articles-zurich/budget-zurich-personnel-ville-2027/",
-          "excerpt": "Le budget 2027 de la ville de Zurich prévoit 640 postes supplémentaires dans l’administration.",
-          "date": "2026-10-21T11:30:34.419Z"
-        },
-        {
-          "title": "Zurich : pas d’initiative sur le congé parental, gauche et centre divisés",
-          "url": "/fr/articles-zurich/zurich-pas-initiative-conge-parental/",
-          "excerpt": "Le canton de Zurich ne présentera pas l’initiative cantonale sur le congé parental : la gauche et les partis du centre, initialement favorables, ne sont pas parvenus à un accord.",
-          "date": "2026-10-21T11:09:26.023Z"
-        },
-        {
-          "title": "Dès le 13 décembre, suppression des tramways 50 et 51",
-          "url": "/fr/articles-zurich/vbz-tram-50-51-changement-horaire/",
-          "excerpt": "Dès le 13 décembre, les lignes 50 et 51 disparaissent Les tramways 4, 11, 13, 14 et 17 reprennent leur parcours sur le Bahnhofquai La ligne 83 circule tous",
-          "date": "2026-10-21T10:20:51.886Z"
+          "title": "Winterthur : vote sur 100 millions pour le contracting énergétique",
+          "url": "/fr/articles-zurich/winterthur-vote-energie-contracting/",
+          "excerpt": "À Winterthur, vote en février 2027 sur 100 millions pour le contracting énergétique.",
+          "date": "2026-10-23T13:26:45.327Z"
         }
       ],
+      "latestCantonArticles": [],
       "links": [
         {
           "label": "Calcul du coût de la voiture pour pendulaires",
@@ -409,7 +313,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T12:35:50.316Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

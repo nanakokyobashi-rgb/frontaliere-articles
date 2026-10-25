@@ -4,14 +4,14 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "648b8ee6f3ffe3612b9a95c8d76ba10df6cfa2cd863135c79757830a4a4ca632",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "29686e5778e4f8bd5142b39f6c3cd2fd6d5cd849bf4eadcf6d7d6e5eeefd15a2",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-22T12:21:38.892Z",
+      "updatedAt": "2026-10-24T11:32:51.939Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-29T11:57:43.000Z"
+      "carryUntilAt": "2026-10-31T09:24:52.000Z"
     }
   ],
   "locales": {
@@ -54,23 +54,29 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,158 EUR/l",
-              "detail": "media regionale: minimo 1,989 EUR/l, 187 stazioni rilevate",
-              "date": "2026-10-22T11:57:43.000Z"
+              "value": "2,146 EUR/l",
+              "detail": "media regionale: minimo 1,989 EUR/l, 193 stazioni rilevate",
+              "date": "2026-10-24T09:24:52.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,379 EUR/l",
-              "detail": "media regionale: minimo 2,249 EUR/l, 201 stazioni rilevate",
-              "date": "2026-10-22T11:57:43.000Z"
+              "value": "2,380 EUR/l",
+              "detail": "media regionale: minimo 2,249 EUR/l, 204 stazioni rilevate",
+              "date": "2026-10-24T10:46:36.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "HUG primo ospedale svizzero nel ranking Smart Hospitals 2027",
+          "url": "/articoli-ginevra/hug-primo-ospedale-svizzero-2027/",
+          "excerpt": "Gli HUG sono 31° al mondo nel 2027 Primo ospedale svizzero della graduatoria 37 posizioni guadagnate rispetto al 2026 410 ospedali in 33 Paesi Classifica →",
+          "date": "2026-10-23T22:19:10.680Z"
+        },
         {
           "title": "Guasto tecnico dimezza la capacità a Ginevra e Zurigo",
           "url": "/articoli-ginevra/skyguide-ginevra-capacita-ottobre/",
@@ -94,12 +100,6 @@
           "url": "/articoli-ginevra/cantieri-mobilita-ginevra/",
           "excerpt": "Nuovi cantieri nel Canton Ginevra partiranno il 12 ottobre 2026 e avranno un impatto sugli spostamenti.",
           "date": "2026-10-10T20:45:24.102Z"
-        },
-        {
-          "title": "UNIGE: salute mentale, 5-10 ottobre 2026",
-          "url": "/articoli-ginevra/unige-natura-equilibrio-mentale/",
-          "excerpt": "La Settimana della salute mentale 2026 va dal 5 al 10 ottobre.",
-          "date": "2026-10-09T16:43:09.560Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "GE",
@@ -153,23 +153,29 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.158 EUR/l",
-              "detail": "regional average: lowest 1.989 EUR/l, 187 stations surveyed",
-              "date": "2026-10-22T11:57:43.000Z"
+              "value": "2.146 EUR/l",
+              "detail": "regional average: lowest 1.989 EUR/l, 193 stations surveyed",
+              "date": "2026-10-24T09:24:52.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.379 EUR/l",
-              "detail": "regional average: lowest 2.249 EUR/l, 201 stations surveyed",
-              "date": "2026-10-22T11:57:43.000Z"
+              "value": "2.380 EUR/l",
+              "detail": "regional average: lowest 2.249 EUR/l, 204 stations surveyed",
+              "date": "2026-10-24T10:46:36.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "HUG first Swiss hospital in the Smart Hospitals 2027 ranking",
+          "url": "/en/geneva-articles/hug-first-swiss-hospital-2027/",
+          "excerpt": "HUG rank 31st in the world in 2027 First Swiss hospital in the ranking 37 positions gained compared with 2026 410 hospitals in 33 countries Ranking → Newsweek",
+          "date": "2026-10-23T22:19:10.680Z"
+        },
         {
           "title": "Technical failure halves capacity in Geneva and Zurich",
           "url": "/en/geneva-articles/skyguide-geneva-airspace-cut/",
@@ -193,12 +199,6 @@
           "url": "/en/geneva-articles/geneva-mobility-construction/",
           "excerpt": "New construction projects in the Canton of Geneva will begin on October 12, 2026, and will affect travel.",
           "date": "2026-10-10T20:45:24.102Z"
-        },
-        {
-          "title": "UNIGE: mental health, October 5-10, 2026",
-          "url": "/en/geneva-articles/unige-nature-mental-wellbeing/",
-          "excerpt": "Mental Health Week 2026 runs from October 5 to 10.",
-          "date": "2026-10-09T16:43:09.560Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "GE",
@@ -252,23 +252,29 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.158 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.989 EUR/l, 187 erfasste Tankstellen",
-              "date": "2026-10-22T11:57:43.000Z"
+              "value": "2.146 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.989 EUR/l, 193 erfasste Tankstellen",
+              "date": "2026-10-24T09:24:52.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.379 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.249 EUR/l, 201 erfasste Tankstellen",
-              "date": "2026-10-22T11:57:43.000Z"
+              "value": "2.380 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.249 EUR/l, 204 erfasste Tankstellen",
+              "date": "2026-10-24T10:46:36.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "HUG erstes Schweizer Spital im Ranking Smart Hospitals 2027",
+          "url": "/de/genf-artikel/hug-erster-schweizer-krankenhaus-2027/",
+          "excerpt": "Die HUG liegen 2027 weltweit auf Rang 31° Erstes Schweizer Spital der Rangliste Gegenüber 2026 um 37 Plätze verbessert 410 Spitäler in 33 Ländern Rangliste →",
+          "date": "2026-10-23T22:19:10.680Z"
+        },
         {
           "title": "Technische Störung halbiert die Kapazität in Genf und Zürich",
           "url": "/de/genf-artikel/skyguide-genf-luftraum-stoerung/",
@@ -292,12 +298,6 @@
           "url": "/de/genf-artikel/genf-mobilitaetsbaustellen/",
           "excerpt": "Neue Baustellen im Kanton Genf starten am 12.",
           "date": "2026-10-10T20:45:24.102Z"
-        },
-        {
-          "title": "UNIGE: psychische Gesundheit, 5.–10. Oktober 2026",
-          "url": "/de/genf-artikel/unige-natur-psychisches-wohlbefinden/",
-          "excerpt": "Die Woche der psychischen Gesundheit 2026 findet vom 5.",
-          "date": "2026-10-09T16:43:09.560Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "GE",
@@ -351,23 +351,29 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,158 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,989 EUR/l, 187 stations relevées",
-              "date": "2026-10-22T11:57:43.000Z"
+              "value": "2,146 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,989 EUR/l, 193 stations relevées",
+              "date": "2026-10-24T09:24:52.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,379 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,249 EUR/l, 201 stations relevées",
-              "date": "2026-10-22T11:57:43.000Z"
+              "value": "2,380 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,249 EUR/l, 204 stations relevées",
+              "date": "2026-10-24T10:46:36.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "HUG, premier hôpital suisse du classement Smart Hospitals 2027",
+          "url": "/fr/articles-geneve/hug-premier-hopital-suisse-2027/",
+          "excerpt": "Les HUG sont 31e au monde en 2027 Premier hôpital suisse du classement 37 places gagnées par rapport à 2026 410 hôpitaux dans 33 pays Classement → Newsweek",
+          "date": "2026-10-23T22:19:10.680Z"
+        },
         {
           "title": "Une panne technique réduit de moitié la capacité à Genève et Zurich",
           "url": "/fr/articles-geneve/skyguide-geneve-espace-aerien/",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-geneve/chantiers-mobilite-geneve/",
           "excerpt": "De nouveaux chantiers dans le canton de Genève débuteront le 12 octobre 2026 et auront un impact sur les déplacements.",
           "date": "2026-10-10T20:45:24.102Z"
-        },
-        {
-          "title": "UNIGE : santé mentale, 5-10 octobre 2026",
-          "url": "/fr/articles-geneve/unige-nature-sante-mentale/",
-          "excerpt": "La Semaine de la santé mentale 2026 va du 5 au 10 octobre.",
-          "date": "2026-10-09T16:43:09.560Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "fisco",
-  "updatedAt": "2026-10-20T17:48:42.935Z",
-  "contentHash": "5d76a889b9733b84fa38f1b4a95562044eb7c1767b7770a24cff1a1c54dd455d",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "d96dc63538e0023dbcc14ae0e49c945a8cdea55d7ac7227c77e5fa8a2010da0a",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T10:27:43.943Z",
+      "updatedAt": "2026-10-24T19:51:00.050Z",
       "keyFacts": 0
     }
   ],
@@ -140,10 +140,16 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Abrogazione regolamento Stadtfonds e Steuerfuss 2026 approvato a Wil",
+          "url": "/articoli-san-gallo/stadtfonds-steuerfuss-wil/",
+          "excerpt": "Il Parlamento cittadino ha abrogato il regolamento Stadtfonds il 27 agosto 2026; lo Steuerfuss 2026 è fissato al 115 per cento con partecipazione del 48,34 per cento.",
+          "date": "2026-10-24T08:43:34.169Z"
+        },
         {
           "title": "Confronto imposta cantonale Svizzera 2026: San Gallo",
           "url": "/articoli-svizzera/aliquote-locali-san-gallo/",
@@ -214,7 +220,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "SG",
@@ -332,10 +338,16 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Repeal of the Stadtfonds regulation and 2026 tax rate approved in Wil",
+          "url": "/en/st-gallen-articles/repeal-of-the-stadtfonds-regulation-and-2026-tax-rate-approved-in-wil/",
+          "excerpt": "The city parliament repealed the Stadtfonds regulation on August 27, 2026; the 2026 Steuerfuss is set at 115 percent with participation of 48,34 percent.",
+          "date": "2026-10-24T08:43:34.169Z"
+        },
         {
           "title": "Cantonal tax comparison Switzerland 2026: St. Gallen",
           "url": "/en/swiss-articles/cantonal-tax-rates-st-gallen/",
@@ -406,7 +418,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "SG",
@@ -524,10 +536,16 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Aufhebung des Reglements Stadtfonds und Genehmigung des Steuerfusses 2026 in Wil",
+          "url": "/de/st-gallen-artikel/aufhebung-des-reglements-stadtfonds-und-genehmigung-des-steuerfusses-2026-in-wil/",
+          "excerpt": "Das Stadtparlament hat das Reglement Stadtfonds am 27.",
+          "date": "2026-10-24T08:43:34.169Z"
+        },
         {
           "title": "Vergleich der Kantonssteuern in der Schweiz 2026: St. Gallen",
           "url": "/de/schweiz-artikel/kantonale-steuersaetze-st-gallen/",
@@ -598,7 +616,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "SG",
@@ -716,10 +734,16 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Abrogation du règlement Stadtfonds et du Steuerfuss 2026 approuvé à Wil",
+          "url": "/fr/articles-saint-gall/abrogation-du-reglement-stadtfonds-et-du-steuerfuss-2026-approuve-a-wil/",
+          "excerpt": "Le Parlement de la ville a abrogé le règlement Stadtfonds le 27 août 2026 ; le Steuerfuss 2026 est fixé à 115 pour cent avec une participation de 48,34 pour cent.",
+          "date": "2026-10-24T08:43:34.169Z"
+        },
         {
           "title": "Comparaison des impôts cantonaux en Suisse en 2026 : Saint-Gall",
           "url": "/fr/articles-suisse/taux-fiscaux-cantonaux-saint-gall/",
@@ -790,7 +814,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

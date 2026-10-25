@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "pensioni",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "662ee23c60a7098e557c52f846b27ae19a12e063a4ffbff8b0f05a11841ffee8",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "6c0e33e6845ea4be2d6a48d049101c7826a31c7dbe3562e0a6aa619e4f3fc27d",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -128,6 +128,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Frontalieri, secondo pilastro: no ai rimborsi",
+          "url": "/articoli-ticino/frontalieri-rimborsi-lpp-svizzera/",
+          "excerpt": "La fonte collega i frontalieri al secondo pilastro e riferisce un no ai rimborsi; il riferimento LPP 2026 riporta i parametri previdenziali.",
+          "date": "2026-10-23T15:42:17.176Z"
+        },
+        {
           "title": "Capitale LPP: Ticino nega rimborso imposta alla fonte",
           "url": "/articoli-ticino/capitale-lpp-rimborso-imposta-fonte/",
           "excerpt": "Dal 2024 il Ticino nega il rimborso dell'imposta alla fonte",
@@ -168,12 +174,6 @@
           "url": "/articoli-frontaliere/fondo-avs-solidarieta-giovani/",
           "excerpt": "In Ticino oltre 86mila beneficiari riceveranno più di 140 milioni di franchi: una parte della tredicesima AVS potrà sostenere progetti per i giovani.",
           "date": "2026-10-02T04:18:56.269Z"
-        },
-        {
-          "title": "Rimborso imposta LPP bloccato per i frontalieri",
-          "url": "/articoli-frontaliere/rimborso-imposta-lpp-2024/",
-          "excerpt": "Dal 2024 il Canton Ticino non rimborsa più l'imposta alla fonte del 7% sul capitale LPP, costringendo i frontalieri a pagare anche l'imposta sostitutiva italiana del 5%.",
-          "date": "2026-09-23T10:40:11.448Z"
         }
       ],
       "latestCantonArticles": [],
@@ -195,7 +195,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "TI",
@@ -301,6 +301,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Cross-border workers, second pillar: no refunds",
+          "url": "/en/ticino-articles/cross-border-workers-pension-refunds/",
+          "excerpt": "The source links cross-border workers to the second pillar and reports a rejection of reimbursements; the LPP 2026 reference lists the pension parameters.",
+          "date": "2026-10-23T15:42:17.176Z"
+        },
+        {
           "title": "LPP capital: Ticino denies withholding tax refund",
           "url": "/en/ticino-articles/lpp-capital-withholding-tax-refund/",
           "date": "2026-10-08T12:15:50.666Z"
@@ -340,12 +346,6 @@
           "url": "/en/cross-border-articles/avs-generational-solidarity-fund/",
           "excerpt": "In Ticino, more than 86 thousand beneficiaries will receive more than 140 million francs: part of the thirteenth AHV will be able to support projects for young people.",
           "date": "2026-10-02T04:18:56.269Z"
-        },
-        {
-          "title": "LPP tax refund blocked for border workers",
-          "url": "/en/cross-border-articles/lpp-tax-refund-2024/",
-          "excerpt": "From 2024, the Canton of Ticino no longer reimburses the 7% tax at source on LPP capital, forcing border workers to also pay the 5% Italian substitute tax.",
-          "date": "2026-09-23T10:40:11.448Z"
         }
       ],
       "latestCantonArticles": [],
@@ -367,7 +367,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "TI",
@@ -473,6 +473,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Grenzgänger, zweite Säule: Nein zu Rückerstattungen",
+          "url": "/de/tessin-artikel/grenzgaenger-lpp-rueckerstattung/",
+          "excerpt": "Die Quelle bringt die Grenzgänger mit der zweiten Säule in Verbindung und berichtet von einem Nein zu Rückerstattungen; die BVG-Referenz 2026 führt die Vorsorgeparameter auf.",
+          "date": "2026-10-23T15:42:17.176Z"
+        },
+        {
           "title": "BVG-Kapital: Tessin verweigert Rückerstattung der Quellensteuer",
           "url": "/de/tessin-artikel/lpp-kapital-quellensteuer-rueckerstattung/",
           "date": "2026-10-08T12:15:50.666Z"
@@ -512,12 +518,6 @@
           "url": "/de/grenzgaenger-artikel/avs-generationenfonds-jugendliche/",
           "excerpt": "Im Tessin werden über 86.000 Begünstigte mehr als 140 Millionen Franken erhalten: Ein Teil der dreizehnten AHV-Rente könnte zur Unterstützung von Jugendprojekten eingesetzt werden.",
           "date": "2026-10-02T04:18:56.269Z"
-        },
-        {
-          "title": "BVG-Steuerrückerstattung für Grenzgänger gesperrt",
-          "url": "/de/grenzgaenger-artikel/lpp-steuererstattung-2024/",
-          "excerpt": "Seit 2024 erstattet der Kanton Tessin die Quellensteuer von 7% auf das BVG-Kapital nicht mehr UND zwingt die Grenzgänger, auch die italienische Ersatzsteuer von 5% zu zahlen.",
-          "date": "2026-09-23T10:40:11.448Z"
         }
       ],
       "latestCantonArticles": [],
@@ -539,7 +539,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "TI",
@@ -645,6 +645,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Frontaliers, deuxième pilier : non aux remboursements",
+          "url": "/fr/articles-tessin/frontaliers-lpp-remboursements/",
+          "excerpt": "La source relie les frontaliers au deuxième pilier et signale un non aux remboursements ; la référence LPP 2026 indique les paramètres de prévoyance.",
+          "date": "2026-10-23T15:42:17.176Z"
+        },
+        {
           "title": "Capital LPP : le Tessin refuse le remboursement de l'impôt à la source",
           "url": "/fr/articles-tessin/capital-lpp-remboursement-impot-source/",
           "excerpt": "Depuis 2024, le Tessin refuse le remboursement de l'impôt à la source",
@@ -685,12 +691,6 @@
           "url": "/fr/articles-frontalier/fonds-avs-solidarite-jeunes/",
           "excerpt": "Au Tessin, plus de 86 000 bénéficiaires recevront plus de 140 millions de francs : une partie de la treizième AVS pourra soutenir des projets pour les jeunes.",
           "date": "2026-10-02T04:18:56.269Z"
-        },
-        {
-          "title": "Remboursement de la taxe LPP bloquée pour les frontaliers",
-          "url": "/fr/articles-frontalier/remboursement-taxe-lpp-2024/",
-          "excerpt": "Depuis 2024, le canton du Tessin ne rembourse plus l'impôt à la source de 7 % sur le capital LPP, obligeant les frontaliers à payer également l'impôt de remplacement italien de 5 %.",
-          "date": "2026-09-23T10:40:11.448Z"
         }
       ],
       "latestCantonArticles": [],
@@ -712,7 +712,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

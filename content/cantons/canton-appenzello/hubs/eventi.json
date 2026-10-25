@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "e0851e337106c071d1f0330c6fcb174b77ca22395bede41527512e6d5c8da185",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "41af6bf6d7d0a78eef041827310660cb730514386128a81c645dd0029974d637",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T19:30:03.925Z",
+      "updatedAt": "2026-10-25T02:23:31.213Z",
       "keyFacts": 1
     }
   ],
@@ -33,48 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "J. S. Bach: BWV 124 \"Gesù mio non me ne andrò\".",
-              "detail": "Evang.-ref. Kirche Trogen, Trogen",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/evenementen/klassiek/trogen/j-s-bach-bwv-124-mijn-jezus-verlaat-ik-niet_AtMcbF9"
-            },
-            {
-              "label": "Mark Geary",
-              "detail": "Besucherzentrum Brauquöll",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/appenzell/mark-geary_AnniSbB"
-            },
-            {
-              "label": "The Fools On The Hill",
-              "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/the-fools-on-the-hill_AhJcaUZ"
-            },
-            {
-              "label": "Festival del formaggio di Appenzello",
-              "detail": "Kapuzinerkloster Mariä Lichtmess",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaesefest-appenzell/"
-            },
-            {
-              "label": "Uno sguardo dietro le mura del carcere / Visite guidate pubbliche a Gmünden",
-              "detail": "Gefängnisse Gmünden, Teufen (AR)",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/blick-hinter-die-gefaengnismauern-oeffentliche-fuehrungen-in-gmuenden/"
-            },
-            {
-              "label": "Concerto in chiesa: Club di jodel Alpeblueme di Herisau",
-              "detail": "Herisau",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concerto-in-chiesa-club-di-jodel-alpeblueme-di-herisau/"
-            },
-            {
-              "label": "Manuel Stahlberger – Es geht",
-              "detail": "Altes Zeughaus, Herisau",
-              "date": "2026-10-24",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/manuel-stahlberger-es-geht_ARGwXiE"
-            },
-            {
               "label": "Musica nel Gern Beizli",
               "detail": "Gern Beizli, Bühler",
               "date": "2026-10-25",
@@ -91,11 +49,53 @@
               "detail": "Röm.-kath. Pfarrkirche St. Sebastian",
               "date": "2026-10-25",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bruelisau/bastian-konzerte-bierifroue-plus-und-laendler-jazz-trio-simon-haller_AnEVJa4"
+            },
+            {
+              "label": "Festival del formaggio di Appenzello",
+              "detail": "Kapuzinerkloster Mariä Lichtmess — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaesefest-appenzell/"
+            },
+            {
+              "label": "Chäller - Collegamento errato",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chaeller-collegamento-errato/"
+            },
+            {
+              "label": "II. Kammermusikwettbewerb Paul Juon",
+              "detail": "Kunsthalle Appenzell, Appenzell",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/ii-kammermusikwettbewerb-paul-juon_AHAjDqp"
+            },
+            {
+              "label": "10 Jahre Öhrli Chörli",
+              "detail": "9050 Appenzell, Appenzell",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/10-jahre-oehrli-choerli/"
+            },
+            {
+              "label": "Nuova apertura \"TEUFEN 1822\" ALPAMORE",
+              "detail": "Zeughaus Teufen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/neueroeffnung-teufen-1822-alpamore-1/"
+            },
+            {
+              "label": "Wort und Musik: Arthur Steiner - Gerhard Falkner - Peter Morger",
+              "detail": "Trogen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wort-und-musik-arthur-steiner-gerhard-falkner-peter-morger/"
+            },
+            {
+              "label": "Duo fehrstimmt e Esther Zimmermann",
+              "detail": "Hotel Krone, Gais",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenementen/muziek/gais/duo-fehrstimmt-en-esther-zimmermann_ANYgeAg"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/appenzello/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -138,48 +138,6 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "J. S. Bach: BWV 124 \"My Jesus I will not leave\"",
-              "detail": "Evang.-ref. Kirche Trogen, Trogen",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/evenementen/klassiek/trogen/j-s-bach-bwv-124-mijn-jezus-verlaat-ik-niet_AtMcbF9"
-            },
-            {
-              "label": "Mark Geary",
-              "detail": "Besucherzentrum Brauquöll",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/appenzell/mark-geary_AnniSbB"
-            },
-            {
-              "label": "The Fools On The Hill",
-              "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/the-fools-on-the-hill_AhJcaUZ"
-            },
-            {
-              "label": "Appenzell Cheese Festival",
-              "detail": "Kapuzinerkloster Mariä Lichtmess",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaesefest-appenzell/"
-            },
-            {
-              "label": "A Look Behind Prison Walls / Public Tours in Gmünden",
-              "detail": "Gefängnisse Gmünden, Teufen (AR)",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/blick-hinter-die-gefaengnismauern-oeffentliche-fuehrungen-in-gmuenden/"
-            },
-            {
-              "label": "Church Concert: Alpeblueme Herisau Yodeling Club",
-              "detail": "Herisau",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concerto-in-chiesa-club-di-jodel-alpeblueme-di-herisau/"
-            },
-            {
-              "label": "Manuel Stahlberger – Es geht",
-              "detail": "Altes Zeughaus, Herisau",
-              "date": "2026-10-24",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/manuel-stahlberger-es-geht_ARGwXiE"
-            },
-            {
               "label": "Music in the Gern Beizli",
               "detail": "Gern Beizli, Bühler",
               "date": "2026-10-25",
@@ -196,11 +154,53 @@
               "detail": "Röm.-kath. Pfarrkirche St. Sebastian",
               "date": "2026-10-25",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bruelisau/bastian-konzerte-bierifroue-plus-und-laendler-jazz-trio-simon-haller_AnEVJa4"
+            },
+            {
+              "label": "Appenzell Cheese Festival",
+              "detail": "Kapuzinerkloster Mariä Lichtmess — ongoing, last day: 25 October 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaesefest-appenzell/"
+            },
+            {
+              "label": "Chäller - Wrongly connected",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chaeller-collegamento-errato/"
+            },
+            {
+              "label": "II. Kammermusikwettbewerb Paul Juon",
+              "detail": "Kunsthalle Appenzell, Appenzell",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/ii-kammermusikwettbewerb-paul-juon_AHAjDqp"
+            },
+            {
+              "label": "10 Jahre Öhrli Chörli",
+              "detail": "9050 Appenzell, Appenzell",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/10-jahre-oehrli-choerli/"
+            },
+            {
+              "label": "New opening \"TEUFEN 1822\" ALPAMORE",
+              "detail": "Zeughaus Teufen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/neueroeffnung-teufen-1822-alpamore-1/"
+            },
+            {
+              "label": "Wort und Musik: Arthur Steiner - Gerhard Falkner - Peter Morger",
+              "detail": "Trogen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wort-und-musik-arthur-steiner-gerhard-falkner-peter-morger/"
+            },
+            {
+              "label": "Duo fehrstimmt and Esther Zimmermann",
+              "detail": "Hotel Krone, Gais",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenementen/muziek/gais/duo-fehrstimmt-en-esther-zimmermann_ANYgeAg"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/appenzell/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -243,48 +243,6 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "J. S. Bach: BWV 124 «Meinen Jesum laß ich nicht»",
-              "detail": "Evang.-ref. Kirche Trogen, Trogen",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/evenementen/klassiek/trogen/j-s-bach-bwv-124-mijn-jezus-verlaat-ik-niet_AtMcbF9"
-            },
-            {
-              "label": "Mark Geary",
-              "detail": "Besucherzentrum Brauquöll",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/appenzell/mark-geary_AnniSbB"
-            },
-            {
-              "label": "The Fools On The Hill",
-              "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/the-fools-on-the-hill_AhJcaUZ"
-            },
-            {
-              "label": "Käsefest Appenzell",
-              "detail": "Kapuzinerkloster Mariä Lichtmess",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaesefest-appenzell/"
-            },
-            {
-              "label": "Blick hinter die Gefängnismauern / Öffentliche Führungen in Gmünden",
-              "detail": "Gefängnisse Gmünden, Teufen (AR)",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/blick-hinter-die-gefaengnismauern-oeffentliche-fuehrungen-in-gmuenden/"
-            },
-            {
-              "label": "Kirchenkonzert: Jodlerclub Alpeblueme Herisau",
-              "detail": "Herisau",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concerto-in-chiesa-club-di-jodel-alpeblueme-di-herisau/"
-            },
-            {
-              "label": "Manuel Stahlberger – Es geht",
-              "detail": "Altes Zeughaus, Herisau",
-              "date": "2026-10-24",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/manuel-stahlberger-es-geht_ARGwXiE"
-            },
-            {
               "label": "Musik im Gern Beizli",
               "detail": "Gern Beizli, Bühler",
               "date": "2026-10-25",
@@ -301,11 +259,53 @@
               "detail": "Röm.-kath. Pfarrkirche St. Sebastian",
               "date": "2026-10-25",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bruelisau/bastian-konzerte-bierifroue-plus-und-laendler-jazz-trio-simon-haller_AnEVJa4"
+            },
+            {
+              "label": "Käsefest Appenzell",
+              "detail": "Kapuzinerkloster Mariä Lichtmess — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaesefest-appenzell/"
+            },
+            {
+              "label": "Chäller - Falsch verbunden",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chaeller-collegamento-errato/"
+            },
+            {
+              "label": "II. Kammermusikwettbewerb Paul Juon",
+              "detail": "Kunsthalle Appenzell, Appenzell",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/ii-kammermusikwettbewerb-paul-juon_AHAjDqp"
+            },
+            {
+              "label": "10 Jahre Öhrli Chörli",
+              "detail": "9050 Appenzell, Appenzell",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/10-jahre-oehrli-choerli/"
+            },
+            {
+              "label": "Neueröffnung \"TEUFEN 1822\" ALPAMORE",
+              "detail": "Zeughaus Teufen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/neueroeffnung-teufen-1822-alpamore-1/"
+            },
+            {
+              "label": "Wort und Musik: Arthur Steiner - Gerhard Falkner - Peter Morger",
+              "detail": "Trogen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wort-und-musik-arthur-steiner-gerhard-falkner-peter-morger/"
+            },
+            {
+              "label": "Duo fehrstimmt und Esther Zimmermann",
+              "detail": "Hotel Krone, Gais",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenementen/muziek/gais/duo-fehrstimmt-en-esther-zimmermann_ANYgeAg"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/appenzell/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -348,48 +348,6 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "J. S. Bach : BWV 124 \"Mon Jésus, je ne le laisse pas\".",
-              "detail": "Evang.-ref. Kirche Trogen, Trogen",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/evenementen/klassiek/trogen/j-s-bach-bwv-124-mijn-jezus-verlaat-ik-niet_AtMcbF9"
-            },
-            {
-              "label": "Mark Geary",
-              "detail": "Besucherzentrum Brauquöll",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/appenzell/mark-geary_AnniSbB"
-            },
-            {
-              "label": "The Fools On The Hill",
-              "detail": "Dä 3. Stock - Kultur hoch 3, Herisau",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/the-fools-on-the-hill_AhJcaUZ"
-            },
-            {
-              "label": "Fête du fromage d'Appenzell",
-              "detail": "Kapuzinerkloster Mariä Lichtmess",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaesefest-appenzell/"
-            },
-            {
-              "label": "Un aperçu de la vie derrière les murs de la prison / Visites guidées ouvertes au public à Gmünden",
-              "detail": "Gefängnisse Gmünden, Teufen (AR)",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/blick-hinter-die-gefaengnismauern-oeffentliche-fuehrungen-in-gmuenden/"
-            },
-            {
-              "label": "Concert à l'église : Club de yodel Alpeblueme d'Herisau",
-              "detail": "Herisau",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/concerto-in-chiesa-club-di-jodel-alpeblueme-di-herisau/"
-            },
-            {
-              "label": "Manuel Stahlberger – Es geht",
-              "detail": "Altes Zeughaus, Herisau",
-              "date": "2026-10-24",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/herisau/manuel-stahlberger-es-geht_ARGwXiE"
-            },
-            {
               "label": "Musique au Gern Beizli",
               "detail": "Gern Beizli, Bühler",
               "date": "2026-10-25",
@@ -406,11 +364,53 @@
               "detail": "Röm.-kath. Pfarrkirche St. Sebastian",
               "date": "2026-10-25",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/bruelisau/bastian-konzerte-bierifroue-plus-und-laendler-jazz-trio-simon-haller_AnEVJa4"
+            },
+            {
+              "label": "Fête du fromage d'Appenzell",
+              "detail": "Kapuzinerkloster Mariä Lichtmess — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaesefest-appenzell/"
+            },
+            {
+              "label": "Chäller - Faux-semblant",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/chaeller-collegamento-errato/"
+            },
+            {
+              "label": "II. Kammermusikwettbewerb Paul Juon",
+              "detail": "Kunsthalle Appenzell, Appenzell",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/appenzell/ii-kammermusikwettbewerb-paul-juon_AHAjDqp"
+            },
+            {
+              "label": "10 Jahre Öhrli Chörli",
+              "detail": "9050 Appenzell, Appenzell",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/10-jahre-oehrli-choerli/"
+            },
+            {
+              "label": "Réouverture \"TEUFEN 1822\" ALPAMORE",
+              "detail": "Zeughaus Teufen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/neueroeffnung-teufen-1822-alpamore-1/"
+            },
+            {
+              "label": "Wort und Musik: Arthur Steiner - Gerhard Falkner - Peter Morger",
+              "detail": "Trogen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wort-und-musik-arthur-steiner-gerhard-falkner-peter-morger/"
+            },
+            {
+              "label": "Duo fehrstimmt et Esther Zimmermann",
+              "detail": "Hotel Krone, Gais",
+              "date": "2026-10-31",
+              "url": "https://www.guidle.com/it/evenementen/muziek/gais/duo-fehrstimmt-en-esther-zimmermann_ANYgeAg"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/appenzell/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

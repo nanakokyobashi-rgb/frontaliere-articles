@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "fisco",
-  "updatedAt": "2026-10-17T05:12:25.400Z",
-  "contentHash": "e841f70dff0f41a66ce21aec5a625f89c3919aa1dd1a3752c9fd5ab496db95d9",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "0f49aed2c14f535a33fa5fefea79ba5cde6a283a589b3a2ac16cc26dfb1d69ad",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-16T20:07:19.130Z",
+      "updatedAt": "2026-10-24T19:51:00.050Z",
       "keyFacts": 0
     }
   ],
@@ -115,10 +115,16 @@
               "url": "https://www.ur.ch/_rte/information/138694"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Andermatt abbassa le imposte: progetto Wyden rinviato",
+          "url": "/articoli-uri/andermatt-fisco-wyden/",
+          "excerpt": "Andermatt riduce il moltiplicatore fiscale di 5 punti, al 94%; il consiglio comunale rinvia per ora il contestato progetto Wyden.",
+          "date": "2026-10-23T15:40:41.343Z"
+        },
         {
           "title": "Uri: budget 2027 con avanzo di CHF 1,1 milioni",
           "url": "/articoli-uri/uri-budget-2027-surplus/",
@@ -179,7 +185,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-17T05:12:25.400Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "UR",
@@ -272,10 +278,16 @@
               "url": "https://www.ur.ch/_rte/information/138694"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Andermatt cuts taxes: Wyden project postponed",
+          "url": "/en/uri-articles/andermatt-tax-wyden-postponed/",
+          "excerpt": "Andermatt reduces the tax multiplier by 5 points, to 94%; the municipal council postpones the controversial Wyden project for now.",
+          "date": "2026-10-23T15:40:41.343Z"
+        },
         {
           "title": "Uri: 2027 budget with a surplus of CHF 1,1 million",
           "url": "/en/uri-articles/uri-2027-budget-with-a-surplus-of-chf-1-1-million/",
@@ -336,7 +348,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-17T05:12:25.400Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "UR",
@@ -429,10 +441,16 @@
               "url": "https://www.ur.ch/_rte/information/138694"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Andermatt senkt die Steuern: Projekt Wyden verschoben",
+          "url": "/de/uri-artikel/andermatt-steuern-wyden/",
+          "excerpt": "Andermatt senkt den Steuerfuss um 5 Punkte auf 94 Prozent; der Gemeinderat verschiebt das umstrittene Projekt Wyden vorerst.",
+          "date": "2026-10-23T15:40:41.343Z"
+        },
         {
           "title": "Uri: Budget 2027 mit einem Überschuss von CHF 1,1 Millionen",
           "url": "/de/uri-artikel/uri-budget-2027-ueberschuss/",
@@ -493,7 +511,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-17T05:12:25.400Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "UR",
@@ -586,10 +604,16 @@
               "url": "https://www.ur.ch/_rte/information/138694"
             }
           ],
-          "updatedAt": "2026-10-16T20:07:19.130Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Andermatt baisse les impôts : projet Wyden reporté",
+          "url": "/fr/articles-uri/andermatt-impots-wyden/",
+          "excerpt": "Andermatt réduit le multiplicateur fiscal de 5 points, à 94 % ; le conseil communal reporte pour l’instant le projet Wyden controversé.",
+          "date": "2026-10-23T15:40:41.343Z"
+        },
         {
           "title": "Uri : budget 2027 avec un excédent de CHF 1,1 million",
           "url": "/fr/articles-uri/uri-budget-2027-excedent/",
@@ -650,7 +674,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-17T05:12:25.400Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

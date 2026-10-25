@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-23T10:42:39.932Z",
-  "contentHash": "3c82ca7f63300dc9f17a9f4ce016fb52b7a46d9f6f6ef4eaa3f149a9ad5c8570",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "2904ddd2980b1fa1b4ebbf2b1057710d377385f0c19f4a7a121a8ba93f53e96b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,18 +13,23 @@
       "keyFacts": 1
     },
     {
+      "id": "farmacie-di-turno",
+      "updatedAt": "2026-10-23T09:27:57.975Z",
+      "keyFacts": 0
+    },
+    {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-22T21:36:37.991Z",
+      "updatedAt": "2026-10-25T04:40:51.950Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-23T05:06:32.759Z",
+      "updatedAt": "2026-10-25T05:00:57.781Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T20:51:18.236Z",
+      "updatedAt": "2026-10-24T19:51:00.050Z",
       "keyFacts": 0
     }
   ],
@@ -69,6 +74,46 @@
           "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
+          "id": "farmacie-di-turno",
+          "title": "Farmacie di turno",
+          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
+          "items": [
+            {
+              "label": "Amavita Biasca",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-10-23T16:00:00.000Z"
+            },
+            {
+              "label": "Portone",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-23T16:30:00.000Z"
+            },
+            {
+              "label": "Internazionale Dr. Merloni",
+              "detail": "Chiasso, Mendrisiotto",
+              "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Coop Vitality Viganello",
+              "detail": "Viganello, Luganese",
+              "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Stazione",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-26T17:30:00.000Z"
+            },
+            {
+              "label": "Giardino",
+              "detail": "Coldrerio, Mendrisiotto",
+              "date": "2026-10-27T07:00:00.000Z"
+            }
+          ],
+          "sourceName": "Servizio ufficiale dei turni farmacia",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-10-23T09:27:57.975Z"
+        },
+        {
           "id": "aste-targhe",
           "title": "Aste delle targhe",
           "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
@@ -90,7 +135,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-22T21:36:37.991Z"
+          "updatedAt": "2026-10-25T04:40:51.950Z"
         },
         {
           "id": "meteo",
@@ -99,38 +144,48 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "8 °C",
+              "value": "7 °C",
               "detail": "oggi da 6 a 12 °C"
             },
             {
               "label": "Chiasso",
-              "value": "8 °C",
-              "detail": "oggi da 9 a 14 °C"
+              "value": "7 °C",
+              "detail": "oggi da 7 a 14 °C"
             },
             {
               "label": "Locarno",
               "value": "9 °C",
-              "detail": "oggi da 8 a 13 °C"
+              "detail": "oggi da 9 a 13 °C"
             },
             {
               "label": "Lugano",
               "value": "9 °C",
-              "detail": "oggi da 8 a 13 °C"
+              "detail": "oggi da 7 a 14 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "9 °C",
-              "detail": "oggi da 8 a 13 °C"
+              "value": "6 °C",
+              "detail": "oggi da 6 a 13 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
+              "date": "2026-10-24",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa0.html"
+            },
+            {
+              "label": "IOSI in prima linea contro il tumore del pancreas",
+              "date": "2026-10-23",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/cs-pancreas.html"
+            },
             {
               "label": "Blocco operatorio Ospedale San Giovanni Bellinzona",
               "date": "2026-10-12",
@@ -150,19 +205,9 @@
               "label": "Approccio medico e infermieristico in Anestesia a confronto",
               "date": "2026-10-01",
               "url": "https://www.eoc.ch/media-e-news/news/2026/anestesia.html"
-            },
-            {
-              "label": "La Clinica di Radiologia IDISI riconosciuta come centro ARCH-AI",
-              "date": "2026-09-30",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/La-Clinica-di-Radiologia-dell-IDISI-riconosciuta-come-centro-ARCH-AI.html"
-            },
-            {
-              "label": "Pronto Consulto: un progetto pilota per la gestione delle situazioni sanitarie non urgenti nel Mendrisiotto e Basso Ceresio",
-              "date": "2026-09-28",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -250,7 +295,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "TI",
@@ -292,6 +337,46 @@
           "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
+          "id": "farmacie-di-turno",
+          "title": "On-duty pharmacies",
+          "description": "Upcoming duty shifts published by the canton’s official service.",
+          "items": [
+            {
+              "label": "Amavita Biasca",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-10-23T16:00:00.000Z"
+            },
+            {
+              "label": "Portone",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-23T16:30:00.000Z"
+            },
+            {
+              "label": "Internazionale Dr. Merloni",
+              "detail": "Chiasso, Mendrisiotto",
+              "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Coop Vitality Viganello",
+              "detail": "Viganello, Luganese",
+              "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Stazione",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-26T17:30:00.000Z"
+            },
+            {
+              "label": "Giardino",
+              "detail": "Coldrerio, Mendrisiotto",
+              "date": "2026-10-27T07:00:00.000Z"
+            }
+          ],
+          "sourceName": "Official pharmacy duty service",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-10-23T09:27:57.975Z"
+        },
+        {
           "id": "aste-targhe",
           "title": "Number plate auctions",
           "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
@@ -313,7 +398,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-22T21:36:37.991Z"
+          "updatedAt": "2026-10-25T04:40:51.950Z"
         },
         {
           "id": "meteo",
@@ -322,38 +407,48 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "8 °C",
+              "value": "7 °C",
               "detail": "today from 6 to 12 °C"
             },
             {
               "label": "Chiasso",
-              "value": "8 °C",
-              "detail": "today from 9 to 14 °C"
+              "value": "7 °C",
+              "detail": "today from 7 to 14 °C"
             },
             {
               "label": "Locarno",
               "value": "9 °C",
-              "detail": "today from 8 to 13 °C"
+              "detail": "today from 9 to 13 °C"
             },
             {
               "label": "Lugano",
               "value": "9 °C",
-              "detail": "today from 8 to 13 °C"
+              "detail": "today from 7 to 14 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "9 °C",
-              "detail": "today from 8 to 13 °C"
+              "value": "6 °C",
+              "detail": "today from 6 to 13 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
+              "date": "2026-10-24",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa0.html"
+            },
+            {
+              "label": "IOSI in prima linea contro il tumore del pancreas",
+              "date": "2026-10-23",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/cs-pancreas.html"
+            },
             {
               "label": "Blocco operatorio Ospedale San Giovanni Bellinzona",
               "date": "2026-10-12",
@@ -373,19 +468,9 @@
               "label": "Approccio medico e infermieristico in Anestesia a confronto",
               "date": "2026-10-01",
               "url": "https://www.eoc.ch/media-e-news/news/2026/anestesia.html"
-            },
-            {
-              "label": "La Clinica di Radiologia IDISI riconosciuta come centro ARCH-AI",
-              "date": "2026-09-30",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/La-Clinica-di-Radiologia-dell-IDISI-riconosciuta-come-centro-ARCH-AI.html"
-            },
-            {
-              "label": "Pronto Consulto: un progetto pilota per la gestione delle situazioni sanitarie non urgenti nel Mendrisiotto e Basso Ceresio",
-              "date": "2026-09-28",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -468,7 +553,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "TI",
@@ -510,6 +595,46 @@
           "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
+          "id": "farmacie-di-turno",
+          "title": "Notfallapotheken",
+          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
+          "items": [
+            {
+              "label": "Amavita Biasca",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-10-23T16:00:00.000Z"
+            },
+            {
+              "label": "Portone",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-23T16:30:00.000Z"
+            },
+            {
+              "label": "Internazionale Dr. Merloni",
+              "detail": "Chiasso, Mendrisiotto",
+              "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Coop Vitality Viganello",
+              "detail": "Viganello, Luganese",
+              "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Stazione",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-26T17:30:00.000Z"
+            },
+            {
+              "label": "Giardino",
+              "detail": "Coldrerio, Mendrisiotto",
+              "date": "2026-10-27T07:00:00.000Z"
+            }
+          ],
+          "sourceName": "Offizieller Apotheken-Notfalldienst",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-10-23T09:27:57.975Z"
+        },
+        {
           "id": "aste-targhe",
           "title": "Kontrollschild-Auktionen",
           "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
@@ -531,7 +656,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-22T21:36:37.991Z"
+          "updatedAt": "2026-10-25T04:40:51.950Z"
         },
         {
           "id": "meteo",
@@ -540,38 +665,48 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "8 °C",
+              "value": "7 °C",
               "detail": "heute 6 bis 12 °C"
             },
             {
               "label": "Chiasso",
-              "value": "8 °C",
-              "detail": "heute 9 bis 14 °C"
+              "value": "7 °C",
+              "detail": "heute 7 bis 14 °C"
             },
             {
               "label": "Locarno",
               "value": "9 °C",
-              "detail": "heute 8 bis 13 °C"
+              "detail": "heute 9 bis 13 °C"
             },
             {
               "label": "Lugano",
               "value": "9 °C",
-              "detail": "heute 8 bis 13 °C"
+              "detail": "heute 7 bis 14 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "9 °C",
-              "detail": "heute 8 bis 13 °C"
+              "value": "6 °C",
+              "detail": "heute 6 bis 13 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
+              "date": "2026-10-24",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa0.html"
+            },
+            {
+              "label": "IOSI in prima linea contro il tumore del pancreas",
+              "date": "2026-10-23",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/cs-pancreas.html"
+            },
             {
               "label": "Blocco operatorio Ospedale San Giovanni Bellinzona",
               "date": "2026-10-12",
@@ -591,19 +726,9 @@
               "label": "Approccio medico e infermieristico in Anestesia a confronto",
               "date": "2026-10-01",
               "url": "https://www.eoc.ch/media-e-news/news/2026/anestesia.html"
-            },
-            {
-              "label": "La Clinica di Radiologia IDISI riconosciuta come centro ARCH-AI",
-              "date": "2026-09-30",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/La-Clinica-di-Radiologia-dell-IDISI-riconosciuta-come-centro-ARCH-AI.html"
-            },
-            {
-              "label": "Pronto Consulto: un progetto pilota per la gestione delle situazioni sanitarie non urgenti nel Mendrisiotto e Basso Ceresio",
-              "date": "2026-09-28",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -686,7 +811,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "TI",
@@ -728,6 +853,46 @@
           "updatedAt": "2026-10-18T08:53:01.888Z"
         },
         {
+          "id": "farmacie-di-turno",
+          "title": "Pharmacies de garde",
+          "description": "Prochaines gardes publiées par le service officiel du canton.",
+          "items": [
+            {
+              "label": "Amavita Biasca",
+              "detail": "Biasca, Biasca e Valli",
+              "date": "2026-10-23T16:00:00.000Z"
+            },
+            {
+              "label": "Portone",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-23T16:30:00.000Z"
+            },
+            {
+              "label": "Internazionale Dr. Merloni",
+              "detail": "Chiasso, Mendrisiotto",
+              "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Farmacia Coop Vitality Viganello",
+              "detail": "Viganello, Luganese",
+              "date": "2026-10-24T06:00:00.000Z"
+            },
+            {
+              "label": "Stazione",
+              "detail": "Bellinzona, Bellinzonese",
+              "date": "2026-10-26T17:30:00.000Z"
+            },
+            {
+              "label": "Giardino",
+              "detail": "Coldrerio, Mendrisiotto",
+              "date": "2026-10-27T07:00:00.000Z"
+            }
+          ],
+          "sourceName": "Service officiel des pharmacies de garde",
+          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
+          "updatedAt": "2026-10-23T09:27:57.975Z"
+        },
+        {
           "id": "aste-targhe",
           "title": "Enchères de plaques",
           "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
@@ -749,7 +914,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-22T21:36:37.991Z"
+          "updatedAt": "2026-10-25T04:40:51.950Z"
         },
         {
           "id": "meteo",
@@ -758,38 +923,48 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "8 °C",
+              "value": "7 °C",
               "detail": "aujourd’hui de 6 à 12 °C"
             },
             {
               "label": "Chiasso",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 9 à 14 °C"
+              "value": "7 °C",
+              "detail": "aujourd’hui de 7 à 14 °C"
             },
             {
               "label": "Locarno",
               "value": "9 °C",
-              "detail": "aujourd’hui de 8 à 13 °C"
+              "detail": "aujourd’hui de 9 à 13 °C"
             },
             {
               "label": "Lugano",
               "value": "9 °C",
-              "detail": "aujourd’hui de 8 à 13 °C"
+              "detail": "aujourd’hui de 7 à 14 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 8 à 13 °C"
+              "value": "6 °C",
+              "detail": "aujourd’hui de 6 à 13 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
+              "date": "2026-10-24",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/CREOC_Zappa0.html"
+            },
+            {
+              "label": "IOSI in prima linea contro il tumore del pancreas",
+              "date": "2026-10-23",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/cs-pancreas.html"
+            },
             {
               "label": "Blocco operatorio Ospedale San Giovanni Bellinzona",
               "date": "2026-10-12",
@@ -809,19 +984,9 @@
               "label": "Approccio medico e infermieristico in Anestesia a confronto",
               "date": "2026-10-01",
               "url": "https://www.eoc.ch/media-e-news/news/2026/anestesia.html"
-            },
-            {
-              "label": "La Clinica di Radiologia IDISI riconosciuta come centro ARCH-AI",
-              "date": "2026-09-30",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/La-Clinica-di-Radiologia-dell-IDISI-riconosciuta-come-centro-ARCH-AI.html"
-            },
-            {
-              "label": "Pronto Consulto: un progetto pilota per la gestione delle situazioni sanitarie non urgenti nel Mendrisiotto e Basso Ceresio",
-              "date": "2026-09-28",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/pronto-consulto.html"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -901,7 +1066,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

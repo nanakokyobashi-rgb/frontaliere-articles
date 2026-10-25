@@ -4,22 +4,22 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-23T10:42:39.932Z",
-  "contentHash": "25265c8f493df7210105c63ce19891ce5d722296a9210b4f1e7ff11cd1ba7ce8",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "4b6e1649ea6217eada251474179cfd18f448592fd8681237946460ad40597afd",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-22T23:59:59.000Z",
+      "updatedAt": "2026-10-24T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-23T05:26:03.621Z",
+      "updatedAt": "2026-10-25T05:23:25.975Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T20:51:18.236Z",
+      "updatedAt": "2026-10-24T19:51:00.050Z",
       "keyFacts": 0
     }
   ],
@@ -33,19 +33,19 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), settimana conclusa: 22 ottobre 2026"
+          "note": "Boncourt-Delle (A16), settimana conclusa: 24 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 23 ottobre 2026"
+          "note": "segnalazioni aggiornate: 25 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 16 ottobre 2026 – 22 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 18 ottobre 2026 – 24 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -68,7 +68,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-22T23:59:59.000Z"
+          "updatedAt": "2026-10-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -82,13 +82,24 @@
               "date": "2026-10-26T20:00:00.000Z"
             },
             {
-              "label": "Revocato: A16 Boncourt -> Delémont tra Svincolo autostradale Courgenay/Cornol E Galleria Galleria Mont Russelin Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "A16 Bienne <-> Boncourt tra Svincolo autostradale Bure E Raccordo autostradale Diramazione Bözingenfeld Situazione: problemi di traffico Causa: convoglio militare",
               "value": "Traffico",
-              "date": "2026-10-23T03:46:00.000Z"
+              "detail": "fine prevista: 17 novembre 2026",
+              "date": "2026-10-23T16:17:00.000Z"
+            },
+            {
+              "label": "Choindez <-> Rebeuvelier Luogo Choindez Situazione: problemi di traffico Causa: alberi caduti",
+              "value": "Traffico",
+              "date": "2026-10-25T05:09:00.000Z"
+            },
+            {
+              "label": "Courtedoux -> Damvant tra Luogo Rocourt E Luogo Réclère Situazione: problemi di traffico Causa: alberi caduti",
+              "value": "Traffico",
+              "date": "2026-10-25T05:13:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -106,7 +117,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -148,7 +159,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "JU",
@@ -159,19 +170,19 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), week ending 22 October 2026"
+          "note": "Boncourt-Delle (A16), week ending 24 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "1",
-          "note": "reports as of 23 October 2026"
+          "note": "reports as of 25 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 16 October 2026 to 22 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 18 October 2026 to 24 October 2026, fastest first.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -194,7 +205,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-22T23:59:59.000Z"
+          "updatedAt": "2026-10-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -208,13 +219,24 @@
               "date": "2026-10-26T20:00:00.000Z"
             },
             {
-              "label": "Revocato: A16 Boncourt -> Delémont tra Svincolo autostradale Courgenay/Cornol E Galleria Galleria Mont Russelin Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "A16 Bienne <-> Boncourt tra Svincolo autostradale Bure E Raccordo autostradale Diramazione Bözingenfeld Situazione: problemi di traffico Causa: convoglio militare",
               "value": "Traffic",
-              "date": "2026-10-23T03:46:00.000Z"
+              "detail": "until 17 November 2026",
+              "date": "2026-10-23T16:17:00.000Z"
+            },
+            {
+              "label": "Choindez <-> Rebeuvelier Luogo Choindez Situazione: problemi di traffico Causa: alberi caduti",
+              "value": "Traffic",
+              "date": "2026-10-25T05:09:00.000Z"
+            },
+            {
+              "label": "Courtedoux -> Damvant tra Luogo Rocourt E Luogo Réclère Situazione: problemi di traffico Causa: alberi caduti",
+              "value": "Traffic",
+              "date": "2026-10-25T05:13:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -232,7 +254,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -274,7 +296,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "JU",
@@ -285,19 +307,19 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Boncourt-Delle (A16), Woche bis 22. Oktober 2026"
+          "note": "Boncourt-Delle (A16), Woche bis 24. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "1",
-          "note": "Meldungen vom 23. Oktober 2026"
+          "note": "Meldungen vom 25. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 16. Oktober 2026 bis 22. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 18. Oktober 2026 bis 24. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -320,7 +342,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-22T23:59:59.000Z"
+          "updatedAt": "2026-10-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -334,13 +356,24 @@
               "date": "2026-10-26T20:00:00.000Z"
             },
             {
-              "label": "Aufgehoben: A16 Boncourt -> Delsberg zwischen Anschluss Courgenay/Cornol und Tunnel Mont Russelin-Tunnel Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "label": "A16 Biel <-> Boncourt zwischen Anschluss Bure und Autobahndreieck Verzweigung Bözingenfeld Sachlage: Verkehrsbehinderung Ursache: Militärkolonnen",
               "value": "Verkehr",
-              "date": "2026-10-23T03:46:00.000Z"
+              "detail": "bis 17. November 2026",
+              "date": "2026-10-23T16:17:00.000Z"
+            },
+            {
+              "label": "Choindez <-> Rebeuvelier Ortschaft Choindez Sachlage: Verkehrsbehinderung Ursache: umgestürzte Bäume",
+              "value": "Verkehr",
+              "date": "2026-10-25T05:09:00.000Z"
+            },
+            {
+              "label": "Courtedoux -> Damvant zwischen Ortschaft Rocourt und Ortschaft Réclère Sachlage: Verkehrsbehinderung Ursache: umgestürzte Bäume",
+              "value": "Verkehr",
+              "date": "2026-10-25T05:13:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -358,7 +391,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -400,7 +433,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "JU",
@@ -411,19 +444,19 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), semaine jusqu’au 22 octobre 2026"
+          "note": "Boncourt-Delle (A16), semaine jusqu’au 24 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "1",
-          "note": "signalements au 23 octobre 2026"
+          "note": "signalements au 25 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 16 octobre 2026 au 22 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 18 octobre 2026 au 24 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -446,7 +479,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-22T23:59:59.000Z"
+          "updatedAt": "2026-10-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -460,13 +493,24 @@
               "date": "2026-10-26T20:00:00.000Z"
             },
             {
-              "label": "Révoqué: A16 Boncourt -> Delémont entre Jonction autoroutière Courgenay/Cornol et Tunnel Tunnel du Mont Russelin Situation: trafic en accordéon Raison: surcharge de trafic",
+              "label": "A16 Bienne <-> Boncourt entre Jonction autoroutière Bure et Echangeur Echangeur de Champs de Boujean Situation: trafic perturbé Raison: convoi militaire",
               "value": "Trafic",
-              "date": "2026-10-23T03:46:00.000Z"
+              "detail": "jusqu’au 17 novembre 2026",
+              "date": "2026-10-23T16:17:00.000Z"
+            },
+            {
+              "label": "Choindez <-> Rebeuvelier Localité Choindez Situation: trafic perturbé Raison: arbres renversés",
+              "value": "Trafic",
+              "date": "2026-10-25T05:09:00.000Z"
+            },
+            {
+              "label": "Courtedoux -> Damvant entre Localité Rocourt et Localité Réclère Situation: trafic perturbé Raison: arbres renversés",
+              "value": "Trafic",
+              "date": "2026-10-25T05:13:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -484,7 +528,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -526,7 +570,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

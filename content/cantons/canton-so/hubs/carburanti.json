@@ -4,14 +4,14 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T03:45:01.280Z",
-  "contentHash": "e13d0ea1ae02118c53e3c3347e31e5b5f93feb99e336d1ec6a57842431be9a49",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "37f7cccc9bf76558a997a95a5a8d83bf5acfdda7183bba4414db995df6d8d72b",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-22T12:21:38.892Z",
+      "updatedAt": "2026-10-24T11:32:51.939Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-29T09:24:22.000Z"
+      "carryUntilAt": "2026-10-31T09:12:13.000Z"
     }
   ],
   "locales": {
@@ -54,23 +54,41 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,264 EUR/l",
-              "detail": "media regionale: minimo 1,990 EUR/l, 70 stazioni rilevate",
-              "date": "2026-10-22T09:24:22.000Z"
+              "value": "2,255 EUR/l",
+              "detail": "media regionale: minimo 1,990 EUR/l, 69 stazioni rilevate",
+              "date": "2026-10-24T09:12:13.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,454 EUR/l",
-              "detail": "media regionale: minimo 2,250 EUR/l, 74 stazioni rilevate",
-              "date": "2026-10-22T09:24:22.000Z"
+              "value": "2,464 EUR/l",
+              "detail": "media regionale: minimo 2,250 EUR/l, 73 stazioni rilevate",
+              "date": "2026-10-24T09:12:13.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Batterie agli ioni di sodio: montaggio a Soletta",
+          "url": "/articoli-soletta/batterie-sodio-soletta/",
+          "excerpt": "Batterie agli ioni di sodio senza litio Software sviluppato in Svizzera, montaggio a Soletta Oltre 600 batterie vendute entro fine settembre 2026 Primo sistema",
+          "date": "2026-10-25T08:55:33.164Z"
+        },
+        {
+          "title": "Cambio d'ora aumenta rischio incidenti con fauna nel Canton Soletta",
+          "url": "/articoli-soletta/cambio-ora-rischio-wildunfalli/",
+          "excerpt": "La notte tra il 24 e il 25 ottobre 2026 gli orologi tornano indietro di un'ora, coincidente con l'attività di caprioli, cervi nobili e cinghiali.",
+          "date": "2026-10-24T14:03:16.134Z"
+        },
+        {
+          "title": "Commissione finanziaria riduce credito per trasformazione digitale a Soletta",
+          "url": "/articoli-soletta/finanzkommission-k-rzt-kredit-digitalisierung/",
+          "excerpt": "La Commissione finanziaria del Consiglio cantonale di Soletta chiede di ridurre il credito d'impegno per la trasformazione digitale da CHF 21,4 a CHF 21,2 milioni.",
+          "date": "2026-10-23T14:42:31.186Z"
+        },
         {
           "title": "Polizia Soletta: comunicazione 365 giorni e divieto droni 300 m",
           "url": "/articoli-soletta/polizia-soletta-comunicazione-media-droni/",
@@ -82,24 +100,6 @@
           "url": "/articoli-soletta/cambio-ora-incidenti-stradali-soletta/",
           "excerpt": "24-25 ottobre 2026: orologi indietro di un'ora Il traffico del mattino coincide con il crepuscolo Caprioli, cervi nobili e cinghiali sono attivi presto",
           "date": "2026-10-23T00:45:27.261Z"
-        },
-        {
-          "title": "A1 Wangen–Luterbach: lavori notturni fino a metà dicembre",
-          "url": "/articoli-soletta/a1-lavori-notturni-luterbach/",
-          "excerpt": "Dal 25 ottobre 2026, lavori notturni estesi sull'A1 tra Wangen an der Aare e Luterbach: la gestione del traffico sarà modificata fino a metà dicembre.",
-          "date": "2026-10-22T22:55:43.751Z"
-        },
-        {
-          "title": "Soletta: 15 risposte a iniziative parlamentari e progetto diritti voto",
-          "url": "/articoli-soletta/soletta-regierungsrat-attiparlamentari-2026/",
-          "excerpt": "Il 20 ottobre 2026 il Regierungsrat ha pubblicato i documenti della 34ª seduta: 15 iniziative evase, 5 urgenti sulla soH e messaggio per abolire l'esclusione dal voto (RG 0270/2026).",
-          "date": "2026-10-20T15:42:25.788Z"
-        },
-        {
-          "title": "Governo di Soletta: decisioni del 20 ottobre 2026",
-          "url": "/articoli-soletta/governo-soletta-ottobre-2026/",
-          "excerpt": "NEST, formazione dei docenti, FamEL, polizia a Lugano e dossier al Consiglio cantonale tra i punti della seduta del 20 ottobre 2026.",
-          "date": "2026-10-20T15:04:51.328Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T03:45:01.280Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "SO",
@@ -153,23 +153,41 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.264 EUR/l",
-              "detail": "regional average: lowest 1.990 EUR/l, 70 stations surveyed",
-              "date": "2026-10-22T09:24:22.000Z"
+              "value": "2.255 EUR/l",
+              "detail": "regional average: lowest 1.990 EUR/l, 69 stations surveyed",
+              "date": "2026-10-24T09:12:13.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.454 EUR/l",
-              "detail": "regional average: lowest 2.250 EUR/l, 74 stations surveyed",
-              "date": "2026-10-22T09:24:22.000Z"
+              "value": "2.464 EUR/l",
+              "detail": "regional average: lowest 2.250 EUR/l, 73 stations surveyed",
+              "date": "2026-10-24T09:12:13.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Sodium-ion batteries: assembly in Solothurn",
+          "url": "/en/solothurn-articles/sodium-batteries-solothurn/",
+          "excerpt": "Lithium-free sodium-ion batteries Software developed in Switzerland, assembly in Solothurn More than 600 batteries sold by the end of September 2026 First",
+          "date": "2026-10-25T08:55:33.164Z"
+        },
+        {
+          "title": "Clock changes raise wildlife accident risk in Solothurn",
+          "url": "/en/solothurn-articles/time-change-wild-animal-risk-solothurn/",
+          "excerpt": "On the night between October 24 and 25, 2026, the clocks go back one hour, coinciding with the activity of roe deer, red deer and wild boars.",
+          "date": "2026-10-24T14:03:16.134Z"
+        },
+        {
+          "title": "Financial Committee reduces funding for digital transformation in Solothurn",
+          "url": "/en/solothurn-articles/financial-commission-cuts-digitalization-credit/",
+          "excerpt": "The Finance Committee of the Cantonal Council of Solothurn is requesting that the commitment credit for digital transformation be reduced from CHF 21,4 million to CHF 21,2 million.",
+          "date": "2026-10-23T14:42:31.186Z"
+        },
         {
           "title": "Solothurn Police: 365-day communication and 300 m drone ban",
           "url": "/en/solothurn-articles/solothurn-police-communication-media-drones/",
@@ -181,24 +199,6 @@
           "url": "/en/solothurn-articles/time-change-road-accidents-solothurn/",
           "excerpt": "October 24–25, 2026: clocks go back by one hour Morning traffic coincides with twilight Roe deer, red deer and wild boar are active early Caution",
           "date": "2026-10-23T00:45:27.261Z"
-        },
-        {
-          "title": "A1 Wangen–Luterbach: night work until mid-December",
-          "url": "/en/solothurn-articles/a1-night-work-luterbach/",
-          "excerpt": "From October 25, 2026, extended nighttime work on the A1 between Wangen an der Aare and Luterbach: traffic management will be modified until mid-December.",
-          "date": "2026-10-22T22:55:43.751Z"
-        },
-        {
-          "title": "Solothurn: 15 responses to parliamentary initiatives and voting rights project",
-          "url": "/en/solothurn-articles/solothurn-regierungsrat-parliamentary-items-october-2026/",
-          "excerpt": "On October 20, 2026, the Regierungsrat published the documents from the 34th session: 15 initiatives processed, 5 urgent matters concerning the soH, and a message to abolish exclusion from voting (RG 0270/2026).",
-          "date": "2026-10-20T15:42:25.788Z"
-        },
-        {
-          "title": "Government of Solothurn: decisions of October 20, 2026",
-          "url": "/en/solothurn-articles/solothurn-government-october-2026/",
-          "excerpt": "NEST, teacher training, FamEL, police in Lugano and dossiers before the Cantonal Council among the items on the agenda for the meeting of October 20, 2026.",
-          "date": "2026-10-20T15:04:51.328Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T03:45:01.280Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "SO",
@@ -252,23 +252,41 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.264 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 70 erfasste Tankstellen",
-              "date": "2026-10-22T09:24:22.000Z"
+              "value": "2.255 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 69 erfasste Tankstellen",
+              "date": "2026-10-24T09:12:13.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.454 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.250 EUR/l, 74 erfasste Tankstellen",
-              "date": "2026-10-22T09:24:22.000Z"
+              "value": "2.464 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.250 EUR/l, 73 erfasste Tankstellen",
+              "date": "2026-10-24T09:12:13.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Natrium-Ionen-Batterien: Montage in Solothurn",
+          "url": "/de/solothurn-artikel/sodium-batterien-solothurn/",
+          "excerpt": "Natrium-Ionen-Batterien ohne Lithium In der Schweiz entwickelte Software, Montage in Solothurn Bis Ende September 2026 über 600 verkaufte Batterien Erstes",
+          "date": "2026-10-25T08:55:33.164Z"
+        },
+        {
+          "title": "Zeitumstellung erhöht das Risiko von Wildtierunfällen im Kanton Solothurn",
+          "url": "/de/solothurn-artikel/zeitumstellung-wildunfall-solothurn/",
+          "excerpt": "In der Nacht vom 24.",
+          "date": "2026-10-24T14:03:16.134Z"
+        },
+        {
+          "title": "Finanzkommission kürzt Kredit für die digitale Transformation in Solothurn",
+          "url": "/de/solothurn-artikel/finanzkommission-kurzt-kredit-digitalisierung/",
+          "excerpt": "Die Finanzkommission des Solothurner Kantonsrats beantragt, den Verpflichtungskredit für die digitale Transformation von CHF 21,4 auf CHF 21,2 Millionen zu kürzen.",
+          "date": "2026-10-23T14:42:31.186Z"
+        },
         {
           "title": "Polizei Solothurn: Kommunikation 365 Tage und Drohnenverbot 300 m",
           "url": "/de/solothurn-artikel/polizei-solothurn-kommunikation-medien-drohnen/",
@@ -280,24 +298,6 @@
           "url": "/de/solothurn-artikel/zeitumstellung-strassenunfaelle-solothurn/",
           "excerpt": "24.–25. Oktober 2026: Uhren um eine Stunde zurückgestellt Der morgendliche Verkehr fällt mit der Dämmerung zusammen Rehe, Rothirsche und Wildschweine sind früh",
           "date": "2026-10-23T00:45:27.261Z"
-        },
-        {
-          "title": "A1 Wangen–Luterbach: Nachtarbeiten bis Mitte Dezember",
-          "url": "/de/solothurn-artikel/a1-nachtarbeiten-luterbach/",
-          "excerpt": "Ab dem 25. Oktober 2026 finden auf der A1 zwischen Wangen an der Aare und Luterbach umfangreiche Nachtarbeiten statt: Die Verkehrsführung wird bis Mitte Dezember angepasst.",
-          "date": "2026-10-22T22:55:43.751Z"
-        },
-        {
-          "title": "Solothurn: 15 Antworten und Entwurf zu Stimmrechten",
-          "url": "/de/solothurn-artikel/solothurn-regierungsrat-geschaefte-oktober-2026/",
-          "excerpt": "Am 20. Oktober 2026 hat der Regierungsrat die Unterlagen der 34. Sitzung veröffentlicht: 15 erledigte Vorstösse, 5 dringende zur soH und eine Botschaft zur Aufhebung des Ausschlusses vom Stimmrecht (RG 0270/2026).",
-          "date": "2026-10-20T15:42:25.788Z"
-        },
-        {
-          "title": "Regierung des Kantons Solothurn: Beschlüsse vom 20. Oktober 2026",
-          "url": "/de/solothurn-artikel/solothurn-regierungsrat-oktober-2026/",
-          "excerpt": "NEST, die Ausbildung der Lehrpersonen, FamEL, die Polizei in Lugano und ein Dossier für den Kantonsrat gehören zu den Traktanden der Sitzung vom 20.",
-          "date": "2026-10-20T15:04:51.328Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T03:45:01.280Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "SO",
@@ -351,23 +351,41 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,264 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 70 stations relevées",
-              "date": "2026-10-22T09:24:22.000Z"
+              "value": "2,255 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 69 stations relevées",
+              "date": "2026-10-24T09:12:13.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,454 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,250 EUR/l, 74 stations relevées",
-              "date": "2026-10-22T09:24:22.000Z"
+              "value": "2,464 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,250 EUR/l, 73 stations relevées",
+              "date": "2026-10-24T09:12:13.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Batteries aux ions sodium : assemblage à Soleure",
+          "url": "/fr/articles-soleure/batteries-sodium-soleure/",
+          "excerpt": "Batteries aux ions sodium sans lithium Logiciels développés en Suisse, assemblage à Soleure Plus de 600 batteries vendues d’ici fin septembre 2026 Premier",
+          "date": "2026-10-25T08:55:33.164Z"
+        },
+        {
+          "title": "Changement d'heure : plus d'accidents avec la faune",
+          "url": "/fr/articles-soleure/changement-heure-risque-wild-soleure/",
+          "excerpt": "Dans la nuit du 24 au 25 octobre 2026, les horloges reculent d'une heure, ce qui coïncide avec l'activité des chevreuils, cerfs élaphes et sangliers.",
+          "date": "2026-10-24T14:03:16.134Z"
+        },
+        {
+          "title": "La commission réduit le crédit de numérisation à Soleure",
+          "url": "/fr/articles-soleure/commission-financiere-coupe-credit-digitalisation/",
+          "excerpt": "La commission des finances du Conseil cantonal de Soleure demande de réduire le crédit d’engagement pour la transformation numérique de CHF 21,4 à CHF 21,2 millions.",
+          "date": "2026-10-23T14:42:31.186Z"
+        },
         {
           "title": "Police de Soleure : communication 365 jours et interdiction des drones à 300 m",
           "url": "/fr/articles-soleure/police-soleure-communication-medias-drones/",
@@ -379,24 +397,6 @@
           "url": "/fr/articles-soleure/changement-heure-accidents-route-soleure/",
           "excerpt": "24-25 octobre 2026 : horloges reculées d’une heure La circulation matinale coïncide avec le crépuscule Les chevreuils, les cerfs élaphes et les sangliers sont",
           "date": "2026-10-23T00:45:27.261Z"
-        },
-        {
-          "title": "A1 Wangen–Luterbach : travaux de nuit jusqu'à la mi-décembre",
-          "url": "/fr/articles-soleure/a1-travaux-nocturnes-luterbach/",
-          "excerpt": "À partir du 25 octobre 2026, travaux de nuit étendus sur l'A1 entre Wangen an der Aare et Luterbach : la gestion du trafic sera modifiée jusqu'à la mi-décembre.",
-          "date": "2026-10-22T22:55:43.751Z"
-        },
-        {
-          "title": "Soleure : 15 réponses sur initiatives et droits de vote",
-          "url": "/fr/articles-soleure/soleure-conseil-executif-objets-parlementaires-octobre-2026/",
-          "excerpt": "Le 20 octobre 2026, le Regierungsrat a publié les documents de la 34e séance : 15 initiatives traitées, 5 urgentes concernant la soH et un message visant à abolir l’exclusion du droit de vote (RG 0270/2026).",
-          "date": "2026-10-20T15:42:25.788Z"
-        },
-        {
-          "title": "Gouvernement de Soleure : décisions du 20 octobre 2026",
-          "url": "/fr/articles-soleure/gouvernement-soleure-octobre-2026/",
-          "excerpt": "NEST, formation des enseignants, Famel, police à Lugano et dossier au Conseil cantonal entre les points de la séance du 20 octobre 2026.",
-          "date": "2026-10-20T15:04:51.328Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T03:45:01.280Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

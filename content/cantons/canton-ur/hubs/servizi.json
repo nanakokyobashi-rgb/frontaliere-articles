@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "servizi",
-  "updatedAt": "2026-10-23T10:42:39.932Z",
-  "contentHash": "3d978ce367224772c37d849cf44b97a0c134a22ce1cfb84de886c8a2db9a579a",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "c48bd5707e7f00a865c2be12d448347f7daa6301d67cf19d544b7aff6c2bcb2e",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-23T05:06:32.759Z",
+      "updatedAt": "2026-10-25T05:00:57.781Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T20:51:18.236Z",
+      "updatedAt": "2026-10-24T19:51:00.050Z",
       "keyFacts": 0
     }
   ],
@@ -60,12 +60,12 @@
           "items": [
             {
               "label": "Altdorf",
-              "value": "9 °C",
-              "detail": "oggi da 6 a 14 °C"
+              "value": "10 °C",
+              "detail": "oggi da 7 a 14 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -78,7 +78,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -125,10 +125,10 @@
           "date": "2026-09-09T01:51:36.573Z"
         },
         {
-          "title": "Uri: premi cassa malati specifici e sussidi",
-          "url": "/articoli-svizzera/premi-cassa-malati-uri-sussidi/",
-          "excerpt": "Il Cantone di Uri applica tariffe specifiche per i premi dell'assicurazione malattia obbligatoria (LAMal). L'accesso ai sussidi avviene tramite la riduzione dei premi, con franchigie flessibili per gli adulti.",
-          "date": "2026-08-28T04:24:42.361Z"
+          "title": "Permesso di domicilio C nel Cantone di Uri: requisiti e domanda",
+          "url": "/articoli-svizzera/permesso-di-domicilio-c-ur-requisiti-e-domanda/",
+          "excerpt": "La durata richiesta per il permesso di domicilio C nel Cantone di Uri, i criteri di integrazione e le conoscenze linguistiche richieste.",
+          "date": "2026-08-16T02:10:19.833Z"
         }
       ],
       "latestCantonArticles": [],
@@ -158,7 +158,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "UR",
@@ -196,12 +196,12 @@
           "items": [
             {
               "label": "Altdorf",
-              "value": "9 °C",
-              "detail": "today from 6 to 14 °C"
+              "value": "10 °C",
+              "detail": "today from 7 to 14 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -214,7 +214,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -261,10 +261,10 @@
           "date": "2026-09-09T01:51:36.573Z"
         },
         {
-          "title": "Uri: specific sick pay premiums and subsidies",
-          "url": "/en/swiss-articles/health-insurance-premiums-uri-subsidies/",
-          "excerpt": "The Canton of Uri applies specific rates for compulsory health insurance premiums (LAMal). Access to the subsidies takes place through the reduction of premiums, with flexible deductibles for adults.",
-          "date": "2026-08-28T04:24:42.361Z"
+          "title": "Residence permit C in the Canton of Uri: requirements and application",
+          "url": "/en/swiss-articles/c-permit-uri-requirements-and-application/",
+          "excerpt": "The duration required for residence permit C in the Canton of Uri, the integration criteria and the language skills required.",
+          "date": "2026-08-16T02:10:19.833Z"
         }
       ],
       "latestCantonArticles": [],
@@ -290,7 +290,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "UR",
@@ -328,12 +328,12 @@
           "items": [
             {
               "label": "Altdorf",
-              "value": "9 °C",
-              "detail": "heute 6 bis 14 °C"
+              "value": "10 °C",
+              "detail": "heute 7 bis 14 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -346,7 +346,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -393,10 +393,10 @@
           "date": "2026-09-09T01:51:36.573Z"
         },
         {
-          "title": "URI: Spezifische Krankenkassenprämien und Zuschüsse",
-          "url": "/de/schweiz-artikel/krankenkassenpraemien-uri-zuschuesse/",
-          "excerpt": "Der Kanton Uri wendet spezifische Tarife für die Prämien der obligatorischen Krankenversicherung (KVG) an. Der Zugang zu den Beiträgen erfolgt durch Prämienverbilligung mit flexiblen Franchisen für Erwachsene.",
-          "date": "2026-08-28T04:24:42.361Z"
+          "title": "Niederlassungsbewilligung C im Kanton Uri: Voraussetzungen und Antrag",
+          "url": "/de/schweiz-artikel/c-aufenthaltstitel-uri-anforderungen-und-antrag/",
+          "excerpt": "Die erforderliche Dauer für die Niederlassungsbewilligung C im Kanton Uri, die Integrationskriterien und die erforderlichen Sprachkenntnisse.",
+          "date": "2026-08-16T02:10:19.833Z"
         }
       ],
       "latestCantonArticles": [],
@@ -422,7 +422,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "UR",
@@ -460,12 +460,12 @@
           "items": [
             {
               "label": "Altdorf",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 6 à 14 °C"
+              "value": "10 °C",
+              "detail": "aujourd’hui de 7 à 14 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -478,7 +478,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -525,10 +525,10 @@
           "date": "2026-09-09T01:51:36.573Z"
         },
         {
-          "title": "URI : primes de caisse-maladie spécifiques et subventions",
-          "url": "/fr/articles-suisse/primes-assurance-maladie-uri-subventions/",
-          "excerpt": "Le canton d'Uri applique des tarifs spécifiques pour les primes de l'assurance maladie obligatoire (LAMal). L'accès aux subventions se fait par la réduction des primes, avec des franchises flexibles pour les adultes.",
-          "date": "2026-08-28T04:24:42.361Z"
+          "title": "Permis de séjour C dans le canton d'Uri : exigences et demande",
+          "url": "/fr/articles-suisse/permis-de-sejour-c-uri-exigences-et-demande/",
+          "excerpt": "La durée requise pour le permis de séjour C dans le canton d'Uri, les critères d'intégration et les connaissances linguistiques requises.",
+          "date": "2026-08-16T02:10:19.833Z"
         }
       ],
       "latestCantonArticles": [],
@@ -550,7 +550,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

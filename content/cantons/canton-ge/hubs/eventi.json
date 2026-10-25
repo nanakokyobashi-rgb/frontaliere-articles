@@ -4,17 +4,17 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "0e5b2ab5403d31a20d4b6139fd2f8b43c0091c24f1c35be3f779ec9b7e4e6be3",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "760ba5e45aef130a36ca69d61ecd5b7552fb4a66e5f352166e1beee393b6036f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T19:30:03.925Z",
+      "updatedAt": "2026-10-25T02:23:31.213Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T16:03:41.824Z",
+      "updatedAt": "2026-10-24T19:51:00.050Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "324",
+          "value": "333",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "ARTHUR DONNOT en concert au Chat Noir",
+              "label": "(Re)découvrez Marguerite Duras au cinéma : \"Une aussi longue absence\" en présence de Jean Marc Turine",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/arthur-donnot-concert-chat-noir"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/redecouvrez-marguerite-duras-cinema-longue-absence-presence-jean-marc-turine"
             },
             {
-              "label": "Atelier chocolat pour les enfants - Chocolate monster",
+              "label": "Exposition Observatoires. Carte blanche à John M Armleder",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-1"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/exposition-observatoires-carte-blanche-john-armleder-1"
             },
             {
-              "label": "Atelier Découverte - L'École du Chocolat",
+              "label": "Geumhyung Jeong, Find Select Copy and Paste",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/geumhyung-jeong-find-select-copy-paste"
             },
             {
-              "label": "Atelier du Management Durable : Action Carbon, Scaling Impact et Genève, Capitale de l’Impact",
+              "label": "La Neuvième de Beethoven",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/atelier-management-durable-action-carbon-scaling-impact-geneve-capitale-impact"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/neuvieme-beethoven"
             },
             {
-              "label": "Avant-première LE MYSTÈRE LUCY LOST",
+              "label": "Science et tango",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/premiere-mystere-lucy-lost-1"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/science-tango"
             },
             {
-              "label": "Benjamin Epps + Sebb Bash + DJ Stresh",
+              "label": "Soirée spéciale en partenariat avec les cinémas du Grütli",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/benjamin-epps-sebb-bash-stresh"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/soiree-speciale-partenariat-cinemas-grutli"
             },
             {
-              "label": "Concert événement PAOLO FRESU / DAVID LINX / GUSTAVO BEYTELMANN Moderne / Latino",
+              "label": "TWIST ! Le spectacle d'impro où vous faites rebondir l'histoire",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/concert-evenement-paolo-fresu-david-linx-gustavo-beytelmann-moderne-latino"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/twist-spectacle-impro-rebondir-histoire"
             },
             {
-              "label": "DJ CHIVI · REGGAETON, SALSA, MERENGUE, BACHATA",
-              "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/chivi-reggaeton-salsa-merengue-bachata"
+              "label": "Visite commentée: Le futur, c'est quoi ?",
+              "detail": "MEG (Musée d'Ethnographie de Genève), Genève",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/visite-commentee-le-futur-cest-quoi-5/"
             },
             {
-              "label": "Ensemble Ensemble",
-              "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/ensemble-ensemble"
+              "label": "Boudchart à Genève",
+              "detail": "Geneva, Genève",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boudchart-a-geneve/"
             },
             {
-              "label": "Festival du Soir Présente GIMS et Triangle des Bermudes",
-              "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/festival-soir-presente-gims-triangle-bermudes"
+              "label": "ELECTRON x SUBLIME CLUB",
+              "detail": "Genève — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/electron-sublime-club"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "GE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "324",
+          "value": "333",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,69 +156,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "ARTHUR DONNOT en concert au Chat Noir",
+              "label": "(Re)découvrez Marguerite Duras au cinéma : \"Une aussi longue absence\" en présence de Jean Marc Turine",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/arthur-donnot-concert-chat-noir"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/redecouvrez-marguerite-duras-cinema-longue-absence-presence-jean-marc-turine"
             },
             {
-              "label": "Atelier chocolat pour les enfants - Chocolate monster",
+              "label": "Exposition Observatoires. Carte blanche à John M Armleder",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-1"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/exposition-observatoires-carte-blanche-john-armleder-1"
             },
             {
-              "label": "Atelier Découverte - L'École du Chocolat",
+              "label": "Geumhyung Jeong, Find Select Copy and Paste",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/geumhyung-jeong-find-select-copy-paste"
             },
             {
-              "label": "Atelier du Management Durable : Action Carbon, Scaling Impact et Genève, Capitale de l’Impact",
+              "label": "La Neuvième de Beethoven",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/atelier-management-durable-action-carbon-scaling-impact-geneve-capitale-impact"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/neuvieme-beethoven"
             },
             {
-              "label": "Avant-première LE MYSTÈRE LUCY LOST",
+              "label": "Science et tango",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/premiere-mystere-lucy-lost-1"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/science-tango"
             },
             {
-              "label": "Benjamin Epps + Sebb Bash + DJ Stresh",
+              "label": "Soirée spéciale en partenariat avec les cinémas du Grütli",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/benjamin-epps-sebb-bash-stresh"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/soiree-speciale-partenariat-cinemas-grutli"
             },
             {
-              "label": "Concert événement PAOLO FRESU / DAVID LINX / GUSTAVO BEYTELMANN Moderne / Latino",
+              "label": "TWIST ! Le spectacle d'impro où vous faites rebondir l'histoire",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/concert-evenement-paolo-fresu-david-linx-gustavo-beytelmann-moderne-latino"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/twist-spectacle-impro-rebondir-histoire"
             },
             {
-              "label": "DJ CHIVI · REGGAETON, SALSA, MERENGUE, BACHATA",
-              "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/chivi-reggaeton-salsa-merengue-bachata"
+              "label": "Visite commentée: Le futur, c'est quoi ?",
+              "detail": "MEG (Musée d'Ethnographie de Genève), Genève",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/visite-commentee-le-futur-cest-quoi-5/"
             },
             {
-              "label": "Ensemble Ensemble",
-              "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/ensemble-ensemble"
+              "label": "Boudchart à Genève",
+              "detail": "Geneva, Genève",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boudchart-a-geneve/"
             },
             {
-              "label": "Festival du Soir Présente GIMS et Triangle des Bermudes",
-              "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/festival-soir-presente-gims-triangle-bermudes"
+              "label": "ELECTRON x SUBLIME CLUB",
+              "detail": "Genève — ongoing, last day: 25 October 2026",
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/electron-sublime-club"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -231,7 +231,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +253,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "GE",
@@ -263,7 +263,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "324",
+          "value": "333",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -274,69 +274,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "ARTHUR DONNOT en concert au Chat Noir",
+              "label": "(Re)découvrez Marguerite Duras au cinéma : \"Une aussi longue absence\" en présence de Jean Marc Turine",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/arthur-donnot-concert-chat-noir"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/redecouvrez-marguerite-duras-cinema-longue-absence-presence-jean-marc-turine"
             },
             {
-              "label": "Atelier chocolat pour les enfants - Chocolate monster",
+              "label": "Exposition Observatoires. Carte blanche à John M Armleder",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-1"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/exposition-observatoires-carte-blanche-john-armleder-1"
             },
             {
-              "label": "Atelier Découverte - L'École du Chocolat",
+              "label": "Geumhyung Jeong, Find Select Copy and Paste",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/geumhyung-jeong-find-select-copy-paste"
             },
             {
-              "label": "Atelier du Management Durable : Action Carbon, Scaling Impact et Genève, Capitale de l’Impact",
+              "label": "La Neuvième de Beethoven",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/atelier-management-durable-action-carbon-scaling-impact-geneve-capitale-impact"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/neuvieme-beethoven"
             },
             {
-              "label": "Avant-première LE MYSTÈRE LUCY LOST",
+              "label": "Science et tango",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/premiere-mystere-lucy-lost-1"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/science-tango"
             },
             {
-              "label": "Benjamin Epps + Sebb Bash + DJ Stresh",
+              "label": "Soirée spéciale en partenariat avec les cinémas du Grütli",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/benjamin-epps-sebb-bash-stresh"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/soiree-speciale-partenariat-cinemas-grutli"
             },
             {
-              "label": "Concert événement PAOLO FRESU / DAVID LINX / GUSTAVO BEYTELMANN Moderne / Latino",
+              "label": "TWIST ! Le spectacle d'impro où vous faites rebondir l'histoire",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/concert-evenement-paolo-fresu-david-linx-gustavo-beytelmann-moderne-latino"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/twist-spectacle-impro-rebondir-histoire"
             },
             {
-              "label": "DJ CHIVI · REGGAETON, SALSA, MERENGUE, BACHATA",
-              "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/chivi-reggaeton-salsa-merengue-bachata"
+              "label": "Visite commentée: Le futur, c'est quoi ?",
+              "detail": "MEG (Musée d'Ethnographie de Genève), Genève",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/visite-commentee-le-futur-cest-quoi-5/"
             },
             {
-              "label": "Ensemble Ensemble",
-              "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/ensemble-ensemble"
+              "label": "Boudchart à Genève",
+              "detail": "Geneva, Genève",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boudchart-a-geneve/"
             },
             {
-              "label": "Festival du Soir Présente GIMS et Triangle des Bermudes",
-              "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/festival-soir-presente-gims-triangle-bermudes"
+              "label": "ELECTRON x SUBLIME CLUB",
+              "detail": "Genève — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/electron-sublime-club"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -349,7 +349,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "GE",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "324",
+          "value": "333",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -392,69 +392,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "ARTHUR DONNOT en concert au Chat Noir",
+              "label": "(Re)découvrez Marguerite Duras au cinéma : \"Une aussi longue absence\" en présence de Jean Marc Turine",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/arthur-donnot-concert-chat-noir"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/redecouvrez-marguerite-duras-cinema-longue-absence-presence-jean-marc-turine"
             },
             {
-              "label": "Atelier chocolat pour les enfants - Chocolate monster",
+              "label": "Exposition Observatoires. Carte blanche à John M Armleder",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/atelier-chocolat-enfants-chocolate-monster-1"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/exposition-observatoires-carte-blanche-john-armleder-1"
             },
             {
-              "label": "Atelier Découverte - L'École du Chocolat",
+              "label": "Geumhyung Jeong, Find Select Copy and Paste",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/geumhyung-jeong-find-select-copy-paste"
             },
             {
-              "label": "Atelier du Management Durable : Action Carbon, Scaling Impact et Genève, Capitale de l’Impact",
+              "label": "La Neuvième de Beethoven",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/atelier-management-durable-action-carbon-scaling-impact-geneve-capitale-impact"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/neuvieme-beethoven"
             },
             {
-              "label": "Avant-première LE MYSTÈRE LUCY LOST",
+              "label": "Science et tango",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/premiere-mystere-lucy-lost-1"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/science-tango"
             },
             {
-              "label": "Benjamin Epps + Sebb Bash + DJ Stresh",
+              "label": "Soirée spéciale en partenariat avec les cinémas du Grütli",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/benjamin-epps-sebb-bash-stresh"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/soiree-speciale-partenariat-cinemas-grutli"
             },
             {
-              "label": "Concert événement PAOLO FRESU / DAVID LINX / GUSTAVO BEYTELMANN Moderne / Latino",
+              "label": "TWIST ! Le spectacle d'impro où vous faites rebondir l'histoire",
               "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/concert-evenement-paolo-fresu-david-linx-gustavo-beytelmann-moderne-latino"
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/twist-spectacle-impro-rebondir-histoire"
             },
             {
-              "label": "DJ CHIVI · REGGAETON, SALSA, MERENGUE, BACHATA",
-              "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/chivi-reggaeton-salsa-merengue-bachata"
+              "label": "Visite commentée: Le futur, c'est quoi ?",
+              "detail": "MEG (Musée d'Ethnographie de Genève), Genève",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/visite-commentee-le-futur-cest-quoi-5/"
             },
             {
-              "label": "Ensemble Ensemble",
-              "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/ensemble-ensemble"
+              "label": "Boudchart à Genève",
+              "detail": "Geneva, Genève",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boudchart-a-geneve/"
             },
             {
-              "label": "Festival du Soir Présente GIMS et Triangle des Bermudes",
-              "detail": "Genève",
-              "date": "2026-10-23",
-              "url": "https://www.geneve.ch/agenda/festival-soir-presente-gims-triangle-bermudes"
+              "label": "ELECTRON x SUBLIME CLUB",
+              "detail": "Genève — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.geneve.ch/agenda/electron-sublime-club"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -467,7 +467,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

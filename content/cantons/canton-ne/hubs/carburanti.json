@@ -4,14 +4,14 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "f6b9617017eb81f59995260eedad703995862d576638c0b7c0ac0575dd8cb31a",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "4d19ea88e9831adc2536fa11db4949d686fbc3d1315188408f2db03c1e920c53",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-22T12:21:38.892Z",
+      "updatedAt": "2026-10-24T11:32:51.939Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-29T10:31:49.000Z"
+      "carryUntilAt": "2026-10-31T11:09:00.000Z"
     }
   ],
   "locales": {
@@ -54,23 +54,35 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,208 EUR/l",
+              "value": "2,178 EUR/l",
               "detail": "media regionale: minimo 1,990 EUR/l, 63 stazioni rilevate",
-              "date": "2026-10-22T10:31:49.000Z"
+              "date": "2026-10-24T11:09:00.000Z"
             },
             {
               "label": "Diesel — Francia",
               "value": "2,393 EUR/l",
-              "detail": "media regionale: minimo 2,250 EUR/l, 70 stazioni rilevate",
-              "date": "2026-10-22T11:29:48.000Z"
+              "detail": "media regionale: minimo 2,250 EUR/l, 67 stazioni rilevate",
+              "date": "2026-10-24T11:09:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zenith annuncia circa cento soppressioni al Locle",
+          "url": "/articoli-neuchatel/zenith-soppressione-locle/",
+          "excerpt": "Zenith annuncia circa cento soppressioni al Locle La manifattura conta 196 collaboratori Aperta la consultazione per il licenziamento collettivo Annuncio",
+          "date": "2026-10-23T23:50:03.671Z"
+        },
+        {
+          "title": "Consiglio di Stato risponde a consultazioni federali nel 2026",
+          "url": "/articoli-neuchatel/consiglio-stato-21-ottobre-2026/",
+          "excerpt": "Il Consiglio di Stato ha risposto a due consultazioni federali Autorizzazioni per lavori pesanti nelle zone montane II e III Votazione cantonale fissata",
+          "date": "2026-10-23T19:35:52.889Z"
+        },
         {
           "title": "Stazione di Le Locle: lavori di accessibilità per 8 milioni",
           "url": "/articoli-neuchatel/stazione-le-locle-accessibilita/",
@@ -88,18 +100,6 @@
           "url": "/articoli-neuchatel/neuchatel-disoccupazione-maggio-2026/",
           "excerpt": "A maggio 2026 i disoccupati nel Canton Neuchatel scendono a 3’924 e il tasso cantonale cala al 4,3%, sostenuto da fattori stagionali favorevoli.",
           "date": "2026-10-19T03:29:08.971Z"
-        },
-        {
-          "title": "Stabilità del tasso di disoccupazione nel Canton Neuchâtel a luglio 2026",
-          "url": "/articoli-neuchatel/disoccupazione-neuchatel-luglio-2026/",
-          "excerpt": "Il numero di disoccupati nel Canton Neuchâtel è aumentato di 54 unità nel luglio 2026, raggiungendo le 3.905 persone.",
-          "date": "2026-10-18T11:17:54.444Z"
-        },
-        {
-          "title": "Eventi del weekend nel Canton Neuchâtel: cosa fare sabato e domenica",
-          "url": "/articoli-neuchatel/eventi-weekend-neuchatel/",
-          "excerpt": "Eventi nel Canton Neuchâtel ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
-          "date": "2026-10-17T11:28:33.708Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "NE",
@@ -153,23 +153,35 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.208 EUR/l",
+              "value": "2.178 EUR/l",
               "detail": "regional average: lowest 1.990 EUR/l, 63 stations surveyed",
-              "date": "2026-10-22T10:31:49.000Z"
+              "date": "2026-10-24T11:09:00.000Z"
             },
             {
               "label": "Diesel — France",
               "value": "2.393 EUR/l",
-              "detail": "regional average: lowest 2.250 EUR/l, 70 stations surveyed",
-              "date": "2026-10-22T11:29:48.000Z"
+              "detail": "regional average: lowest 2.250 EUR/l, 67 stations surveyed",
+              "date": "2026-10-24T11:09:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zenith announces around one hundred job cuts in Le Locle",
+          "url": "/en/neuchatel-articles/zenith-locle-job-cuts/",
+          "excerpt": "Zenith announces approximately one hundred job cuts at Locle The manufactory has 196 employees Consultation opened for collective dismissal Announcement",
+          "date": "2026-10-23T23:50:03.671Z"
+        },
+        {
+          "title": "State Council responds to federal consultations in 2026",
+          "url": "/en/neuchatel-articles/council-state-october-21-2026/",
+          "excerpt": "The Council of State has responded to two federal consultations Authorizations for heavy work in mountain zones II and III Cantonal vote scheduled for Sunday",
+          "date": "2026-10-23T19:35:52.889Z"
+        },
         {
           "title": "Le Locle station: accessibility works costing 8 million",
           "url": "/en/neuchatel-articles/le-locle-station-accessibility/",
@@ -187,18 +199,6 @@
           "url": "/en/neuchatel-articles/neuchatel-unemployment-may-2026/",
           "excerpt": "In May 2026, the unemployed in Canton Neuchatel fell to 3’924 and the cantonal rate dropped to 4,3%, supported by favorable seasonal factors.",
           "date": "2026-10-19T03:29:08.971Z"
-        },
-        {
-          "title": "Stability of the unemployment rate in the Canton of Neuchâtel in July 2026",
-          "url": "/en/neuchatel-articles/neuchatel-unemployment-july-2026/",
-          "excerpt": "The number of unemployed people in the Canton of Neuchâtel increased by 54 in July 2026, reaching 3.905 people.",
-          "date": "2026-10-18T11:17:54.444Z"
-        },
-        {
-          "title": "Weekend events in the canton of Neuchâtel: what to do Saturday & Sunday",
-          "url": "/en/neuchatel-articles/weekend-events-neuchatel/",
-          "excerpt": "Events in the canton of Neuchâtel every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
-          "date": "2026-10-17T11:28:33.708Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "NE",
@@ -252,23 +252,35 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.208 EUR/l",
+              "value": "2.178 EUR/l",
               "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 63 erfasste Tankstellen",
-              "date": "2026-10-22T10:31:49.000Z"
+              "date": "2026-10-24T11:09:00.000Z"
             },
             {
               "label": "Diesel — Frankreich",
               "value": "2.393 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.250 EUR/l, 70 erfasste Tankstellen",
-              "date": "2026-10-22T11:29:48.000Z"
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.250 EUR/l, 67 erfasste Tankstellen",
+              "date": "2026-10-24T11:09:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zenith kündigt rund hundert Stellenstreichungen in Locle an",
+          "url": "/de/neuenburg-artikel/zenith-streichungen-locle/",
+          "excerpt": "Zenith kündigt rund hundert Stellenstreichungen in Locle an Die Manufaktur zählt 196 Mitarbeitende Konsultation für die Massenentlassung eröffnet Ankündigung am",
+          "date": "2026-10-23T23:50:03.671Z"
+        },
+        {
+          "title": "Staatsrat antwortet im Jahr 2026 auf eidgenössische Vernehmlassungen",
+          "url": "/de/neuenburg-artikel/staatsrat-21-oktober-2026/",
+          "excerpt": "Der Staatsrat hat auf zwei eidgenössische Vernehmlassungen geantwortet Bewilligungen für schwere Arbeiten in den Bergzonen II und III Kantonale Abstimmung",
+          "date": "2026-10-23T19:35:52.889Z"
+        },
         {
           "title": "Bahnhof Le Locle: Arbeiten zur Barrierefreiheit für 8 Millionen",
           "url": "/de/neuenburg-artikel/bahnhof-le-locle-barrierefreiheit/",
@@ -286,18 +298,6 @@
           "url": "/de/neuenburg-artikel/neuenburg-arbeitslosigkeit-mai-2026/",
           "excerpt": "Im Mai 2026 sinkt die Zahl der Arbeitslosen im Kanton Neuenburg auf 3’924, und die kantonale Quote fällt auf 4,3%, unterstützt durch günstige saisonale Faktoren.",
           "date": "2026-10-19T03:29:08.971Z"
-        },
-        {
-          "title": "Stabilität der Arbeitslosenquote im Kanton Neuenburg im Juli 2026",
-          "url": "/de/neuenburg-artikel/neuenburg-arbeitslosigkeit-juli-2026/",
-          "excerpt": "Die Zahl der Arbeitslosen im Kanton Neuenburg ist im Juli 2026 um 54 Personen gestiegen und erreichte 3.905 Personen.",
-          "date": "2026-10-18T11:17:54.444Z"
-        },
-        {
-          "title": "Veranstaltungen am Wochenende im Kanton Neuenburg: was tun Sa & So",
-          "url": "/de/neuenburg-artikel/wochenend-veranstaltungen-neuenburg/",
-          "excerpt": "Veranstaltungen im Kanton Neuenburg an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
-          "date": "2026-10-17T11:28:33.708Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "NE",
@@ -351,23 +351,35 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,208 EUR/l",
+              "value": "2,178 EUR/l",
               "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 63 stations relevées",
-              "date": "2026-10-22T10:31:49.000Z"
+              "date": "2026-10-24T11:09:00.000Z"
             },
             {
               "label": "Diesel — France",
               "value": "2,393 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,250 EUR/l, 70 stations relevées",
-              "date": "2026-10-22T11:29:48.000Z"
+              "detail": "moyenne régionale : prix le plus bas 2,250 EUR/l, 67 stations relevées",
+              "date": "2026-10-24T11:09:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zenith annonce environ cent suppressions de postes au Locle",
+          "url": "/fr/articles-neuchatel/zenith-suppressions-locle/",
+          "excerpt": "Zenith annonce environ cent suppressions de postes au Locle La manufacture compte 196 collaborateurs Consultation ouverte en vue d'un licenciement collectif",
+          "date": "2026-10-23T23:50:03.671Z"
+        },
+        {
+          "title": "Le Conseil d'État répond à des consultations fédérales en 2026",
+          "url": "/fr/articles-neuchatel/conseil-etat-21-octobre-2026/",
+          "excerpt": "Le Conseil d'État a répondu à deux consultations fédérales Autorisations pour des travaux lourds dans les zones montagneuses II et III Votation cantonale fixée",
+          "date": "2026-10-23T19:35:52.889Z"
+        },
         {
           "title": "Gare du Locle : travaux d'accessibilité pour 8 millions",
           "url": "/fr/articles-neuchatel/gare-le-locle-accessibilite/",
@@ -385,18 +397,6 @@
           "url": "/fr/articles-neuchatel/neuchatel-chomage-mai-2026/",
           "excerpt": "En mai 2026, le nombre de chômeurs dans le canton de Neuchatel baisse à 3’924 et le taux cantonal baisse à 4,3 %, soutenu par des facteurs saisonniers favorables.",
           "date": "2026-10-19T03:29:08.971Z"
-        },
-        {
-          "title": "Stabilité du taux de chômage dans le canton de Neuchâtel en juillet 2026",
-          "url": "/fr/articles-neuchatel/chomage-neuchatel-juillet-2026/",
-          "excerpt": "Le nombre de chômeurs dans le canton de Neuchâtel a augmenté de 54 unités en juillet 2026, atteignant 3'905 personnes.",
-          "date": "2026-10-18T11:17:54.444Z"
-        },
-        {
-          "title": "Événements du week-end dans le canton de Neuchâtel : que faire samedi & dimanche",
-          "url": "/fr/articles-neuchatel/evenements-week-end-neuchatel/",
-          "excerpt": "Événements dans le canton de Neuchâtel chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
-          "date": "2026-10-17T11:28:33.708Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

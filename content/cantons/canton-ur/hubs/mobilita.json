@@ -4,17 +4,17 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-23T12:39:21.184Z",
-  "contentHash": "806c4f8dacd02ba09bd0060eb47a4a33f41de6fd36fe8cb2c50330e9023152fe",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "f97190d512c9386d260bbd9292b68786e712f79b0f69c50d944f447d6a80123b",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-23T05:26:03.621Z",
+      "updatedAt": "2026-10-25T05:23:25.975Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T20:51:18.236Z",
+      "updatedAt": "2026-10-24T19:51:00.050Z",
       "keyFacts": 0
     }
   ],
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 23 ottobre 2026"
+          "note": "segnalazioni aggiornate: 25 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "9",
-          "note": "segnalazioni aggiornate: 23 ottobre 2026"
+          "value": "10",
+          "note": "segnalazioni aggiornate: 25 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -78,7 +78,7 @@
               "date": "2026-09-21T06:49:00.000Z"
             },
             {
-              "label": "A2 S. Gottardo <-> Luzern Galleria Galleria Seelisberg Situazione: problemi di traffico lunghezza [km] 9.5 Causa: lavori di costruzione Limitazione del traffico: circolazione bidirezionale Aggiunta…",
+              "label": "A2 S. Gottardo <-> Luzern Galleria Galleria Seelisberg Situazione: problemi di traffico lunghezza [km] 9.5, cantiere Limitazione del traffico: circolazione bidirezionale Aggiunta 1: limite…",
               "value": "Cantiere",
               "detail": "fine prevista: 31 ottobre 2026",
               "date": "2026-09-21T06:52:00.000Z"
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -187,7 +187,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-23T12:39:21.184Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "UR",
@@ -198,12 +198,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "4",
-          "note": "reports as of 23 October 2026"
+          "note": "reports as of 25 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "9",
-          "note": "reports as of 23 October 2026"
+          "value": "10",
+          "note": "reports as of 25 October 2026"
         }
       ],
       "dataBlocks": [
@@ -248,7 +248,7 @@
               "date": "2026-09-21T06:49:00.000Z"
             },
             {
-              "label": "A2 S. Gottardo <-> Luzern Galleria Galleria Seelisberg Situazione: problemi di traffico lunghezza [km] 9.5 Causa: lavori di costruzione Limitazione del traffico: circolazione bidirezionale Aggiunta…",
+              "label": "A2 S. Gottardo <-> Luzern Galleria Galleria Seelisberg Situazione: problemi di traffico lunghezza [km] 9.5, cantiere Limitazione del traffico: circolazione bidirezionale Aggiunta 1: limite…",
               "value": "Roadworks",
               "detail": "until 31 October 2026",
               "date": "2026-09-21T06:52:00.000Z"
@@ -261,7 +261,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -299,7 +299,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -357,7 +357,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-23T12:39:21.184Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "UR",
@@ -368,12 +368,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "4",
-          "note": "Meldungen vom 23. Oktober 2026"
+          "note": "Meldungen vom 25. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "9",
-          "note": "Meldungen vom 23. Oktober 2026"
+          "value": "10",
+          "note": "Meldungen vom 25. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -418,7 +418,7 @@
               "date": "2026-09-21T06:49:00.000Z"
             },
             {
-              "label": "A2 Gotthard <-> Luzern Tunnel Seelisberg-Tunnel Sachlage: Verkehrsbehinderung Länge [km] 9.5 Ursache: Bauarbeiten Verkehrsführung: Verkehr wird über die Gegenfahrbahn geleitet Zusatz 1…",
+              "label": "A2 Gotthard <-> Luzern Tunnel Seelisberg-Tunnel Sachlage: Verkehrsbehinderung Länge [km] 9.5, Baustelle Verkehrsführung: Verkehr wird über die Gegenfahrbahn geleitet Zusatz 1: vorübergehende…",
               "value": "Baustelle",
               "detail": "bis 31. Oktober 2026",
               "date": "2026-09-21T06:52:00.000Z"
@@ -431,7 +431,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -469,7 +469,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -527,7 +527,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-23T12:39:21.184Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "UR",
@@ -538,12 +538,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "4",
-          "note": "signalements au 23 octobre 2026"
+          "note": "signalements au 25 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "9",
-          "note": "signalements au 23 octobre 2026"
+          "value": "10",
+          "note": "signalements au 25 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -588,7 +588,7 @@
               "date": "2026-09-21T06:49:00.000Z"
             },
             {
-              "label": "A2 St-Gothard <-> Lucerne Tunnel Tunnel du Seelisberg Situation: trafic perturbé longueur [km] 9.5 Raison: travaux de construction Gestion du trafic: trafic bidirectionnel Complément 1: limitation…",
+              "label": "A2 St-Gothard <-> Lucerne Tunnel Tunnel du Seelisberg Situation: trafic perturbé longueur [km] 9.5, travaux Gestion du trafic: trafic bidirectionnel Complément 1: limitation temporaire de largeur…",
               "value": "Chantier",
               "detail": "jusqu’au 31 octobre 2026",
               "date": "2026-09-21T06:52:00.000Z"
@@ -601,7 +601,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -639,7 +639,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -697,7 +697,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-23T12:39:21.184Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }
