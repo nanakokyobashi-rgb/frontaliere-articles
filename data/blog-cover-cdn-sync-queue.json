@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-pesca-zurigo-servizi-regolati.webp",
+      "sha256": "c594954bfe1000e08434eb9dbf98032ec1a325a243f098420326417b43df73dd"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-pesca-zurigo-servizi-regolati-480w.webp",
+      "sha256": "1ea3a243be8f48db9688a3a7b8584a77092d70e5d1d2f6eec9a0bfba69468e2c"
+    }
+  ]
 }
