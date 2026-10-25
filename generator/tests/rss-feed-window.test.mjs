@@ -112,6 +112,62 @@ test('RSS e floor usano la stessa proprietà SEO finale', () => {
   }
 });
 
+test('RSS salta template JSON-LD non richiesti senza allentare i campi pubblicati', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'rss-template-fields-'));
+  try {
+    fs.mkdirSync(path.join(root, 'content', 'seo'), { recursive: true });
+    const source = [
+      'export const SEO = {',
+      "  'blog-template-fields': {",
+      '    "headline": "Headline statica",',
+      '    "structuredData": {',
+      '      "headline": "Headline JSON-LD",',
+      '      "description": "Descrizione JSON-LD",',
+      '      "image": { "url": `${BASE_URL}/images/hero.webp` },',
+      '      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/template-fields/`,',
+      '      "datePublished": "2026-09-12T10:00:00Z",',
+      '    },',
+      '    "datePublished": "2026-09-12T10:00:00Z",',
+      '  },',
+      '};',
+      '',
+    ].join('\n');
+    fs.writeFileSync(path.join(root, 'content', 'seo', 'seo-blog.ts'), source);
+
+    const result = buildSectionFeeds({
+      fs,
+      path,
+      rootDir: root,
+      section: { ...RSS_SECTIONS[0], seoFiles: ['seo-blog.ts'] },
+      layout: { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content' },
+      repairSerpSnippet: (text) => text,
+    });
+    const feed = result.feeds.find(([name]) => name === 'rss.xml')?.[1] ?? '';
+
+    assert.equal(result.articleCount, 1);
+    assert.match(feed, /Headline JSON-LD/);
+    assert.match(feed, /Descrizione JSON-LD/);
+
+    fs.writeFileSync(
+      path.join(root, 'content', 'seo', 'seo-blog.ts'),
+      source.replace('"headline": "Headline statica"', '"headline": `${untrusted}`'),
+    );
+    assert.throws(
+      () => buildSectionFeeds({
+        fs,
+        path,
+        rootDir: root,
+        section: { ...RSS_SECTIONS[0], seoFiles: ['seo-blog.ts'] },
+        layout: { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content' },
+        repairSerpSnippet: (text) => text,
+      }),
+      /Interpolated template literal/u,
+    );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('i pavimenti leggono solo entry reali e il loro span bilanciato', () => {
   const source = [
     'const esempio = `',

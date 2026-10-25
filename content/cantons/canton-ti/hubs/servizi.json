@@ -4,18 +4,13 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "2904ddd2980b1fa1b4ebbf2b1057710d377385f0c19f4a7a121a8ba93f53e96b",
+  "updatedAt": "2026-10-25T09:51:41.734Z",
+  "contentHash": "5920e5d63674d88f7d640992895fcdc1da6a38784ad7794625f84e7c998b606f",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-18T08:53:01.888Z",
       "keyFacts": 1
-    },
-    {
-      "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-23T09:27:57.975Z",
-      "keyFacts": 0
     },
     {
       "id": "aste-targhe",
@@ -72,46 +67,6 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Farmacie di turno",
-          "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
-          "items": [
-            {
-              "label": "Amavita Biasca",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-10-23T16:00:00.000Z"
-            },
-            {
-              "label": "Portone",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-23T16:30:00.000Z"
-            },
-            {
-              "label": "Internazionale Dr. Merloni",
-              "detail": "Chiasso, Mendrisiotto",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Coop Vitality Viganello",
-              "detail": "Viganello, Luganese",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Stazione",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-26T17:30:00.000Z"
-            },
-            {
-              "label": "Giardino",
-              "detail": "Coldrerio, Mendrisiotto",
-              "date": "2026-10-27T07:00:00.000Z"
-            }
-          ],
-          "sourceName": "Servizio ufficiale dei turni farmacia",
-          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-23T09:27:57.975Z"
         },
         {
           "id": "aste-targhe",
@@ -295,7 +250,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-25T09:51:41.734Z"
     },
     "en": {
       "canton": "TI",
@@ -335,46 +290,6 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "On-duty pharmacies",
-          "description": "Upcoming duty shifts published by the canton’s official service.",
-          "items": [
-            {
-              "label": "Amavita Biasca",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-10-23T16:00:00.000Z"
-            },
-            {
-              "label": "Portone",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-23T16:30:00.000Z"
-            },
-            {
-              "label": "Internazionale Dr. Merloni",
-              "detail": "Chiasso, Mendrisiotto",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Coop Vitality Viganello",
-              "detail": "Viganello, Luganese",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Stazione",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-26T17:30:00.000Z"
-            },
-            {
-              "label": "Giardino",
-              "detail": "Coldrerio, Mendrisiotto",
-              "date": "2026-10-27T07:00:00.000Z"
-            }
-          ],
-          "sourceName": "Official pharmacy duty service",
-          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-23T09:27:57.975Z"
         },
         {
           "id": "aste-targhe",
@@ -553,7 +468,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-25T09:51:41.734Z"
     },
     "de": {
       "canton": "TI",
@@ -593,46 +508,6 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Notfallapotheken",
-          "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
-          "items": [
-            {
-              "label": "Amavita Biasca",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-10-23T16:00:00.000Z"
-            },
-            {
-              "label": "Portone",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-23T16:30:00.000Z"
-            },
-            {
-              "label": "Internazionale Dr. Merloni",
-              "detail": "Chiasso, Mendrisiotto",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Coop Vitality Viganello",
-              "detail": "Viganello, Luganese",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Stazione",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-26T17:30:00.000Z"
-            },
-            {
-              "label": "Giardino",
-              "detail": "Coldrerio, Mendrisiotto",
-              "date": "2026-10-27T07:00:00.000Z"
-            }
-          ],
-          "sourceName": "Offizieller Apotheken-Notfalldienst",
-          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-23T09:27:57.975Z"
         },
         {
           "id": "aste-targhe",
@@ -811,7 +686,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-25T09:51:41.734Z"
     },
     "fr": {
       "canton": "TI",
@@ -851,46 +726,6 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "farmacie-di-turno",
-          "title": "Pharmacies de garde",
-          "description": "Prochaines gardes publiées par le service officiel du canton.",
-          "items": [
-            {
-              "label": "Amavita Biasca",
-              "detail": "Biasca, Biasca e Valli",
-              "date": "2026-10-23T16:00:00.000Z"
-            },
-            {
-              "label": "Portone",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-23T16:30:00.000Z"
-            },
-            {
-              "label": "Internazionale Dr. Merloni",
-              "detail": "Chiasso, Mendrisiotto",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Farmacia Coop Vitality Viganello",
-              "detail": "Viganello, Luganese",
-              "date": "2026-10-24T06:00:00.000Z"
-            },
-            {
-              "label": "Stazione",
-              "detail": "Bellinzona, Bellinzonese",
-              "date": "2026-10-26T17:30:00.000Z"
-            },
-            {
-              "label": "Giardino",
-              "detail": "Coldrerio, Mendrisiotto",
-              "date": "2026-10-27T07:00:00.000Z"
-            }
-          ],
-          "sourceName": "Service officiel des pharmacies de garde",
-          "sourceUrl": "https://www.ofct.ch/farmacieturno/",
-          "updatedAt": "2026-10-23T09:27:57.975Z"
         },
         {
           "id": "aste-targhe",
@@ -1066,7 +901,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-25T09:51:41.734Z"
     }
   }
 }
