@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-batterie-sodio-soletta.webp",
-      "sha256": "dc0a67d680581d19683477fa9b0fd163a5264c276380ffd2f985313eebc265fc"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-batterie-sodio-soletta-480w.webp",
-      "sha256": "f4eec61119b29f1902a5d924ff14fe5248182b92fbcf9e2e0da1caa90899f571"
-    }
-  ]
+  "items": []
 }
