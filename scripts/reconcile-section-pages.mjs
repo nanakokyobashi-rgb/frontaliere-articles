@@ -62,6 +62,7 @@ const LOCALES = ['it', 'en', 'de', 'fr'];
 const UA = 'frontaliere-corpus-reconcile/1 (+https://frontaliereticino.ch)';
 export const RECONCILE_FETCH_ATTEMPTS = 3;
 export const RECONCILE_FETCH_RETRY_DELAY_MS = 1000;
+export const RECONCILE_FETCH_MAX_RETRY_AFTER_MS = 300_000;
 
 const RETRYABLE_HTTP_STATUSES = new Set([408, 425, 429]);
 
@@ -73,9 +74,48 @@ function defaultSleep(delayMs) {
   return new Promise((resolve) => setTimeout(resolve, delayMs));
 }
 
-async function waitBeforeRetry(attempt, retryDelayMs, sleepImpl) {
-  if (attempt >= RECONCILE_FETCH_ATTEMPTS || retryDelayMs <= 0) return;
-  await sleepImpl(retryDelayMs * attempt);
+/**
+ * Legge `Retry-After` da una risposta HTTP come millisecondi da attendere.
+ * Sono accettati sia i delta-secondes RFC 9110 sia una data HTTP; un valore
+ * invalido lascia il backoff locale al controllo del chiamante. Il cap evita
+ * che una risposta remota possa tenere il reconcile sospeso indefinitamente.
+ *
+ * @param {Response|{headers?: {get?: Function}}|null} response
+ * @param {number} [nowMs]
+ * @returns {number|null}
+ */
+export function parseRetryAfter(response, nowMs = Date.now()) {
+  let raw;
+  try {
+    raw = response?.headers?.get?.('retry-after');
+  } catch {
+    return null;
+  }
+  if (raw === null || raw === undefined) return null;
+  const value = String(raw).trim();
+  if (!value) return null;
+
+  let delayMs;
+  if (/^\d+$/.test(value)) {
+    const seconds = Number(value);
+    delayMs = Number.isFinite(seconds) ? seconds * 1000 : Number.NaN;
+  } else {
+    const retryAtMs = Date.parse(value);
+    delayMs = Number.isFinite(retryAtMs) && Number.isFinite(nowMs)
+      ? retryAtMs - nowMs
+      : Number.NaN;
+  }
+  if (!Number.isFinite(delayMs)) return null;
+  return Math.min(RECONCILE_FETCH_MAX_RETRY_AFTER_MS, Math.max(0, Math.ceil(delayMs)));
+}
+
+async function waitBeforeRetry(attempt, retryDelayMs, sleepImpl, retryAfterMs = null) {
+  if (attempt >= RECONCILE_FETCH_ATTEMPTS) return;
+  const baseDelayMs = Number.isFinite(retryDelayMs) && retryDelayMs > 0
+    ? retryDelayMs * attempt
+    : 0;
+  const delayMs = retryAfterMs === null ? baseDelayMs : Math.max(baseDelayMs, retryAfterMs);
+  if (delayMs > 0) await sleepImpl(delayMs);
 }
 
 /** La chiave R2 (come URL sul CDN) di un path canonico di sezione. */
@@ -219,11 +259,12 @@ async function getJson(url, fetchImpl, { retryDelayMs = RECONCILE_FETCH_RETRY_DE
     }
     if (!res.ok) {
       const status = res.status;
+      const retryAfterMs = parseRetryAfter(res);
       releaseFetchWithRefTimeout(res);
       if (!isRetryableStatus(status) || attempt === RECONCILE_FETCH_ATTEMPTS) {
         throw new Error(`${url}: HTTP ${status}`);
       }
-      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl);
+      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl, retryAfterMs);
       continue;
     }
     try {
@@ -255,11 +296,12 @@ async function getJsonState(url, fetchImpl, { retryDelayMs = RECONCILE_FETCH_RET
       }
       if (!res.ok) {
         const status = res.status;
+        const retryAfterMs = parseRetryAfter(res);
         releaseFetchWithRefTimeout(res);
         if (!isRetryableStatus(status) || attempt === RECONCILE_FETCH_ATTEMPTS) {
           return { state: 'unknown', url, status, reason: `HTTP ${status}` };
         }
-        await waitBeforeRetry(attempt, retryDelayMs, sleepImpl);
+        await waitBeforeRetry(attempt, retryDelayMs, sleepImpl, retryAfterMs);
         continue;
       }
       return { state: 'ok', url, status: res.status, value: await res.json() };
@@ -285,11 +327,12 @@ async function getText(url, fetchImpl, { retryDelayMs = RECONCILE_FETCH_RETRY_DE
     }
     if (!res.ok) {
       const status = res.status;
+      const retryAfterMs = parseRetryAfter(res);
       releaseFetchWithRefTimeout(res);
       if (!isRetryableStatus(status) || attempt === RECONCILE_FETCH_ATTEMPTS) {
         throw new Error(`${url}: HTTP ${status}`);
       }
-      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl);
+      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl, retryAfterMs);
       continue;
     }
     try {
