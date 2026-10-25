@@ -229,6 +229,15 @@ test('un fixture i cui accoppiamenti sono tutti `identical` resta copiabile', ()
   assert.equal(v.transport, true, 'la chiusura è la condizione, non un divieto sui fixture');
 });
 
+test('il gemello del prefetch review resta autosufficiente rispetto alla policy adapted', () => {
+  const source = fs.readFileSync(path.join(ROOT, 'scripts/ci/prefetch-review-diff.mjs'), 'utf8');
+  assert.doesNotMatch(source, /from ['"]\.\/review-test-policy\.mjs['"]/,
+    'un gemello identical non deve importare il consumer adapted');
+  assert.match(source, /export const TEST_DIFF_EXCLUSIONS/);
+  assert.match(source, /const localMergeBaseWith = from =>/);
+  assert.match(source, /GitHub compare non disponibile/);
+});
+
 test('un accoppiamento non registrato nel manifest vale come un no', () => {
   // Non registrato = nessun gemello dichiarato sul sito = locale per
   // definizione. Trattarlo come «sconosciuto, quindi ok» riaprirebbe il buco.
