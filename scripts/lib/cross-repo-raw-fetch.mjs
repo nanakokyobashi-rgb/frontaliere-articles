@@ -44,6 +44,101 @@
  */
 export const TOKEN_SUSPECT_STATUSES = new Set([401, 403, 404]);
 
+/** Maximum time allowed for one cross-repository request, including body use. */
+export const CROSS_REPO_FETCH_TIMEOUT_MS = 30_000;
+
+const BODY_METHODS = ['arrayBuffer', 'blob', 'bytes', 'formData', 'json', 'text'];
+const RESPONSE_TIMEOUT = Symbol('crossRepoResponseTimeout');
+const RESPONSE_ABORT = Symbol('crossRepoResponseAbort');
+
+function timeoutReason() {
+  if (typeof DOMException === 'function') {
+    return new DOMException('cross-repository request timed out', 'TimeoutError');
+  }
+  const error = new Error('cross-repository request timed out');
+  error.name = 'TimeoutError';
+  return error;
+}
+
+/**
+ * AbortSignal.timeout() intentionally uses an unref'ed timer in Node. That is
+ * correct for a real fetch (the socket keeps the event loop alive), but a
+ * fetch stub which waits only on the signal can be cancelled before the timer
+ * fires. Keep a referenced timer for the same deadline and release it when a
+ * response body has been consumed or when the response is discarded.
+ */
+function createDeadline(timeoutMs) {
+  const controller = new AbortController();
+  let rejectDeadline;
+  const timeout = new Promise((_, reject) => {
+    rejectDeadline = reject;
+  });
+  // A response may be returned to a status-only caller without consuming its
+  // body; keep the deadline rejection from becoming an unhandled rejection.
+  timeout.catch(() => {});
+  const timer = setTimeout(() => {
+    const reason = timeoutReason();
+    controller.abort(reason);
+    rejectDeadline(reason);
+  }, timeoutMs);
+  let released = false;
+  const release = () => {
+    if (released) return;
+    released = true;
+    clearTimeout(timer);
+  };
+
+  const abort = () => {
+    const reason = typeof DOMException === 'function'
+      ? new DOMException('cross-repository response discarded', 'AbortError')
+      : Object.assign(new Error('cross-repository response discarded'), { name: 'AbortError' });
+    if (!controller.signal.aborted) controller.abort(reason);
+    rejectDeadline(reason);
+    release();
+  };
+  return { signal: controller.signal, release, abort, timeout };
+}
+
+function attachResponseDeadline(response, deadline) {
+  if (!response || typeof response !== 'object') return response;
+  try {
+    Object.defineProperty(response, RESPONSE_TIMEOUT, {
+      configurable: true,
+      value: deadline.release,
+    });
+    Object.defineProperty(response, RESPONSE_ABORT, {
+      configurable: true,
+      value: deadline.abort,
+    });
+    let hasBodyMethod = false;
+    for (const method of BODY_METHODS) {
+      if (typeof response[method] !== 'function') continue;
+      hasBodyMethod = true;
+      const original = response[method].bind(response);
+      response[method] = (...args) => {
+        const body = Promise.resolve().then(() => original(...args));
+        return Promise.race([body, deadline.timeout]).finally(deadline.release);
+      };
+    }
+    if (!hasBodyMethod) deadline.release();
+  } catch {
+    // A native Response may reject an instance property assignment. Its body
+    // owns a referenced stream, so the deadline still fires safely; callers
+    // can still receive the signal and abort the body.
+  }
+  return response;
+}
+
+function discardResponseDeadline(response) {
+  try {
+    response?.[RESPONSE_ABORT]?.();
+    const cancelled = response?.body?.cancel?.();
+    if (cancelled && typeof cancelled.then === 'function') cancelled.catch(() => {});
+  } catch {
+    // Cleanup must never mask the original HTTP/error result.
+  }
+}
+
 /** Vale la pena richiedere in anonimo? Solo se il token era in gioco. */
 export function needsAnonymousRetry(status, { authenticated } = {}) {
   return Boolean(authenticated) && TOKEN_SUSPECT_STATUSES.has(status);
@@ -90,7 +185,15 @@ function repositoryKey(url) {
   return parsed.origin;
 }
 
-export function createRawFetcher({ userAgent, token, fetchImpl = fetch } = {}) {
+export function createRawFetcher({
+  userAgent,
+  token,
+  fetchImpl = fetch,
+  timeoutMs = CROSS_REPO_FETCH_TIMEOUT_MS,
+} = {}) {
+  const effectiveTimeoutMs = Number.isFinite(timeoutMs) && timeoutMs > 0
+    ? Math.max(1, Math.floor(timeoutMs))
+    : CROSS_REPO_FETCH_TIMEOUT_MS;
   const state = {
     authenticated: Boolean(token),
     tokenRejected: new Map(),
@@ -102,7 +205,19 @@ export function createRawFetcher({ userAgent, token, fetchImpl = fetch } = {}) {
     const headers = { ...extraHeaders };
     if (userAgent) headers['User-Agent'] = userAgent;
     if (authenticated) headers.Authorization = `Bearer ${token}`;
-    return fetchImpl(url, { headers });
+    const deadline = createDeadline(effectiveTimeoutMs);
+    return Promise.resolve(fetchImpl(url, {
+      headers,
+      // The caller may consume text/json/arrayBuffer after this function
+      // returns. Keep this signal on the Response so the same deadline covers
+      // both the headers and the body, not just connection establishment.
+      signal: deadline.signal,
+    })).then((response) => {
+      return attachResponseDeadline(response, deadline);
+    }, (error) => {
+      deadline.release();
+      throw error;
+    });
   };
 
   const fetchRaw = async (url, extraHeaders) => {
@@ -116,17 +231,30 @@ export function createRawFetcher({ userAgent, token, fetchImpl = fetch } = {}) {
     // Un rate limit sulla richiesta autenticata è un limite reale, non un
     // rifiuto del token da ritentare anonimamente: altrimenti il 429 latcherebbe
     // `tokenRejected` e degraderebbe l'intero repo al rate limit anonimo.
-    if (authenticated && isRateLimitResponse(res)) throw new CrossRepoRateLimitError(url, res);
+    if (authenticated && isRateLimitResponse(res)) {
+      discardResponseDeadline(res);
+      throw new CrossRepoRateLimitError(url, res);
+    }
     // Dopo un 2xx il token è accettato, quindi non si ritenta in anonimo:
     // un rate limit successivo resta però un limite reale, non un 404 da
     // consegnare al chiamante come se il contenuto mancasse.
-    if (isRateLimitResponse(res) && state.tokenAccepted.get(repo)) throw new CrossRepoRateLimitError(url, res);
-    if (!authenticated && isRateLimitResponse(res)) throw new CrossRepoRateLimitError(url, res);
+    if (isRateLimitResponse(res) && state.tokenAccepted.get(repo)) {
+      discardResponseDeadline(res);
+      throw new CrossRepoRateLimitError(url, res);
+    }
+    if (!authenticated && isRateLimitResponse(res)) {
+      discardResponseDeadline(res);
+      throw new CrossRepoRateLimitError(url, res);
+    }
     if (state.tokenAccepted.get(repo) || !needsAnonymousRetry(res.status, { authenticated })) return res;
 
     state.anonymousRetries += 1;
+    discardResponseDeadline(res);
     const anon = await attempt(url, false, extraHeaders);
-    if (isRateLimitResponse(anon)) throw new CrossRepoRateLimitError(url, anon);
+    if (isRateLimitResponse(anon)) {
+      discardResponseDeadline(anon);
+      throw new CrossRepoRateLimitError(url, anon);
+    }
     // Solo un anonimo che RIESCE dimostra che a rispondere era il token: un
     // 404 confermato e' un'assenza vera, e continuare a mandare il token tiene
     // il rate-limit alto per tutte le altre voci.
