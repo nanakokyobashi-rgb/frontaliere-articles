@@ -2609,19 +2609,23 @@
     },
     {
       "path": "scripts/lib/r2-image-namespace-lock.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3265",
+      "reason": "Nel corpus il guard dei timestamp e' estratto in `safe-lease-timestamp.mjs` e condiviso dai due lock R2 per chiudere il finding #3265; il gemello del sito resta con il proprio guard inline finche' un port coordinato non porta anche quel helper. Dichiarare `identical` qui inviterebbe a copiare sul sito un import corpus-only non risolvibile.",
       "baseline": {
-        "site": "7b24e0034dcd3772",
-        "corpus": "7b24e0034dcd3772",
+        "site": "6e1873eff7291169",
+        "corpus": "228dbd601e693b61",
         "alignedAt": "2026-10-25"
       }
     },
     {
       "path": "scripts/lib/r2-section-lock.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "adaptationIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/3265",
+      "reason": "Nel corpus il guard dei timestamp e' estratto in `safe-lease-timestamp.mjs` e condiviso dai due lock R2 per chiudere il finding #3265; il gemello del sito resta con il proprio guard inline finche' un port coordinato non porta anche quel helper. Dichiarare `identical` qui inviterebbe a copiare sul sito un import corpus-only non risolvibile.",
       "baseline": {
-        "site": "e4ec015f13b8b6fb",
-        "corpus": "e4ec015f13b8b6fb",
+        "site": "65850340c78cae07",
+        "corpus": "324bbb8e413d807c",
         "alignedAt": "2026-10-23"
       }
     },
@@ -2631,7 +2635,7 @@
       "reason": "Predicato condiviso dai lock R2 del corpus per accettare solo timestamp interi, non negativi e safe; il sito non possiede questo helper e non deve importare il percorso di locking del publisher corpus-side.",
       "baseline": {
         "site": null,
-        "corpus": "f6b461bde7a2fb5c",
+        "corpus": "da70a4190d5ac179",
         "alignedAt": "2026-10-25"
       }
     },
