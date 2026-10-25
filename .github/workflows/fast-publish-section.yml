@@ -280,16 +280,45 @@ jobs:
             echo "::error::resolver non presente nel checkout della revisione del workflow"
             exit 1
           fi
-          if [ ! -f "$main_head_source" ]; then
-            echo "::error::helper della punta di main non presente nel checkout della revisione del workflow"
-            exit 1
-          fi
           # workflow_run puo' aver effettuato il checkout del corpus a una
           # revisione precedente all'estrazione del resolver. Il codice del
           # resolver deve pero' sempre provenire dalla revisione che contiene
           # il workflow; le sorgenti e i dati restano quelli del run pinnato.
           install -m 0755 "$resolver_source" "$resolver_target"
-          install -m 0755 "$main_head_source" "$main_head_target"
+          if [ -f "$main_head_source" ]; then
+            install -m 0755 "$main_head_source" "$main_head_target"
+          elif [ -f "$main_head_target" ]; then
+            chmod 0755 "$main_head_target"
+            echo "::warning::helper della punta di main assente nella revisione del dispatcher; uso quello del checkout pinned"
+          else
+            echo "::warning::helper della punta di main assente nelle revisioni disponibili; genero il fallback git-transport"
+            cat > "$main_head_target" <<'EOF'
+            #!/usr/bin/env bash
+            set -euo pipefail
+            remote="${1:-origin}"
+            ref="${2:-refs/heads/main}"
+            if [ "$#" -gt 2 ]; then
+              echo "usage: $0 [remote] [ref]" >&2
+              exit 2
+            fi
+            main_head=''
+            for attempt in 1 2 3; do
+              main_head=''
+              ls_remote_out=''
+              if ls_remote_out="$(timeout 60 git ls-remote --refs "$remote" "$ref" 2>/dev/null)"; then
+                main_head="$(printf '%s\n' "$ls_remote_out" | awk -v wanted="$ref" '$2 == wanted { print $1; exit }')"
+              fi
+              if [[ "$main_head" =~ ^[a-f0-9]{40}$ ]]; then
+                printf '%s\n' "$main_head"
+                exit 0
+              fi
+              [ "$attempt" -lt 3 ] && sleep "$((attempt * 5))"
+            done
+            echo "::error::punta di $ref non risolvibile via git ls-remote" >&2
+            exit 1
+          EOF
+            chmod 0755 "$main_head_target"
+          fi
 
       - name: Set up Node (resolve)
         uses: actions/setup-node@v7
@@ -618,11 +647,40 @@ jobs:
           set -euo pipefail
           source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
           target='scripts/ci/read-main-head.sh'
-          if [ ! -f "$source" ]; then
-            echo "::error::helper della punta di main non presente nel checkout della revisione del workflow"
+          if [ -f "$source" ]; then
+            install -m 0755 "$source" "$target"
+          elif [ -f "$target" ]; then
+            chmod 0755 "$target"
+            echo "::warning::helper della punta di main assente nella revisione del dispatcher; uso quello del checkout pinned"
+          else
+            echo "::warning::helper della punta di main assente nelle revisioni disponibili; genero il fallback git-transport"
+            cat > "$target" <<'EOF'
+            #!/usr/bin/env bash
+            set -euo pipefail
+            remote="${1:-origin}"
+            ref="${2:-refs/heads/main}"
+            if [ "$#" -gt 2 ]; then
+              echo "usage: $0 [remote] [ref]" >&2
+              exit 2
+            fi
+            main_head=''
+            for attempt in 1 2 3; do
+              main_head=''
+              ls_remote_out=''
+              if ls_remote_out="$(timeout 60 git ls-remote --refs "$remote" "$ref" 2>/dev/null)"; then
+                main_head="$(printf '%s\n' "$ls_remote_out" | awk -v wanted="$ref" '$2 == wanted { print $1; exit }')"
+              fi
+              if [[ "$main_head" =~ ^[a-f0-9]{40}$ ]]; then
+                printf '%s\n' "$main_head"
+                exit 0
+              fi
+              [ "$attempt" -lt 3 ] && sleep "$((attempt * 5))"
+            done
+            echo "::error::punta di $ref non risolvibile via git ls-remote" >&2
             exit 1
+          EOF
+            chmod 0755 "$target"
           fi
-          install -m 0755 "$source" "$target"
 
       - name: Guard pinned replay freshness
         id: replay_freshness
@@ -1404,11 +1462,40 @@ jobs:
           set -euo pipefail
           source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
           target='scripts/ci/read-main-head.sh'
-          if [ ! -f "$source" ]; then
-            echo "::error::helper della punta di main non presente nel checkout della revisione del workflow"
+          if [ -f "$source" ]; then
+            install -m 0755 "$source" "$target"
+          elif [ -f "$target" ]; then
+            chmod 0755 "$target"
+            echo "::warning::helper della punta di main assente nella revisione del dispatcher; uso quello del checkout pinned"
+          else
+            echo "::warning::helper della punta di main assente nelle revisioni disponibili; genero il fallback git-transport"
+            cat > "$target" <<'EOF'
+            #!/usr/bin/env bash
+            set -euo pipefail
+            remote="${1:-origin}"
+            ref="${2:-refs/heads/main}"
+            if [ "$#" -gt 2 ]; then
+              echo "usage: $0 [remote] [ref]" >&2
+              exit 2
+            fi
+            main_head=''
+            for attempt in 1 2 3; do
+              main_head=''
+              ls_remote_out=''
+              if ls_remote_out="$(timeout 60 git ls-remote --refs "$remote" "$ref" 2>/dev/null)"; then
+                main_head="$(printf '%s\n' "$ls_remote_out" | awk -v wanted="$ref" '$2 == wanted { print $1; exit }')"
+              fi
+              if [[ "$main_head" =~ ^[a-f0-9]{40}$ ]]; then
+                printf '%s\n' "$main_head"
+                exit 0
+              fi
+              [ "$attempt" -lt 3 ] && sleep "$((attempt * 5))"
+            done
+            echo "::error::punta di $ref non risolvibile via git ls-remote" >&2
             exit 1
+          EOF
+            chmod 0755 "$target"
           fi
-          install -m 0755 "$source" "$target"
 
       - name: Verify staged release revision is still main
         id: replay_freshness

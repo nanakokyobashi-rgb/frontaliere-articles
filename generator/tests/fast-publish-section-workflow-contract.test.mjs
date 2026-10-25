@@ -85,3 +85,17 @@ test('fast-publish-section mantiene il resolver sotto il limite del parser GitHu
   assert.match(resolver, /FAST_PUBLISH_ARMED/u);
   assert.doesNotMatch(resolver, /\$\{\{/u);
 });
+
+test('fast-publish-section conserva la guardia di freschezza anche con checkout pinned precedente', () => {
+  const materializers = [...workflow.matchAll(/- name: Materialize (?:resolver|freshness helper) from workflow revision[\s\S]*?(?=\n      - name:|\n  [A-Za-z_][A-Za-z0-9_-]*:|$)/gu)]
+    .map((match) => match[0]);
+  assert.equal(materializers.length, 3, 'ogni job che legge main deve materializzare la guardia');
+  for (const block of materializers) {
+    assert.match(block, /if \[ -f "\$(?:source|main_head_source)" \]; then/u);
+    assert.match(block, /elif \[ -f "\$(?:target|main_head_target)" \]; then/u);
+    assert.match(block, /fallback git-transport/u);
+    assert.match(block, /git ls-remote --refs/u);
+    assert.match(block, /timeout 60/u);
+    assert.doesNotMatch(block, /helper della punta di main non presente.*exit 1/u);
+  }
+});
