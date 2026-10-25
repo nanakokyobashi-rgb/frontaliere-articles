@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import {
+  headState,
   parseRetryAfter,
   reconcile,
   RECONCILE_FETCH_MAX_RETRY_AFTER_MS,
@@ -28,6 +29,23 @@ test('parseRetryAfter: accetta delta-secondes e data HTTP, con cap bounded', () 
   assert.equal(parseRetryAfter(response('Sun, 25 Oct 2026 07:59:59 GMT'), now), 0);
   assert.equal(parseRetryAfter(response('not-a-delay'), now), null);
   assert.equal(parseRetryAfter(response('86400'), now), RECONCILE_FETCH_MAX_RETRY_AFTER_MS);
+});
+
+test('headState: rispetta Retry-After anche nel retry delle probe HEAD', async () => {
+  const sleeps = [];
+  let attempts = 0;
+  const state = await headState('https://cdn.test/page', async () => {
+    attempts++;
+    return {
+      ok: false,
+      status: 503,
+      headers: { get: (name) => (name === 'retry-after' ? '7' : null) },
+    };
+  }, { retryDelayMs: 0, sleepImpl: async (ms) => sleeps.push(ms) });
+
+  assert.equal(state, 'unknown');
+  assert.equal(attempts, 2);
+  assert.deepEqual(sleeps, [7_000]);
 });
 
 function fakeFetch({ sitemap = '503', sitemapXml } = {}) {

@@ -109,8 +109,14 @@ export function parseRetryAfter(response, nowMs = Date.now()) {
   return Math.min(RECONCILE_FETCH_MAX_RETRY_AFTER_MS, Math.max(0, Math.ceil(delayMs)));
 }
 
-async function waitBeforeRetry(attempt, retryDelayMs, sleepImpl, retryAfterMs = null) {
-  if (attempt >= RECONCILE_FETCH_ATTEMPTS) return;
+async function waitBeforeRetry(
+  attempt,
+  retryDelayMs,
+  sleepImpl,
+  retryAfterMs = null,
+  maxAttempts = RECONCILE_FETCH_ATTEMPTS,
+) {
+  if (attempt >= maxAttempts) return;
   const baseDelayMs = Number.isFinite(retryDelayMs) && retryDelayMs > 0
     ? retryDelayMs * attempt
     : 0;
@@ -384,7 +390,11 @@ function skippedSurface({ code, reason, apiCommit = null, edgeCommit = null, pen
 }
 
 /** HEAD con due tentativi; 405/501 ricadono su GET, 200 presente, 404 mancante. */
-export async function headState(url, fetchImpl = fetch) {
+export async function headState(
+  url,
+  fetchImpl = fetch,
+  { retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS, sleepImpl = defaultSleep } = {},
+) {
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
       const request = (method) => fetchWithRefTimeout(`${url}?_rcb=${Date.now()}.${attempt}.${method.toLowerCase()}`, {
@@ -400,8 +410,13 @@ export async function headState(url, fetchImpl = fetch) {
         releaseFetchWithRefTimeout(res);
         return 'missing';
       }
+      const headStatus = res.status;
+      const headRetryAfterMs = parseRetryAfter(res);
       releaseFetchWithRefTimeout(res);
-      if (res.status !== 405 && res.status !== 501) continue;
+      if (headStatus !== 405 && headStatus !== 501) {
+        await waitBeforeRetry(attempt, retryDelayMs, sleepImpl, headRetryAfterMs, 2);
+        continue;
+      }
       const get = await request('GET');
       if (get.status === 200) {
         releaseFetchWithRefTimeout(get);
@@ -411,8 +426,11 @@ export async function headState(url, fetchImpl = fetch) {
         releaseFetchWithRefTimeout(get);
         return 'missing';
       }
+      const getRetryAfterMs = parseRetryAfter(get);
       releaseFetchWithRefTimeout(get);
+      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl, getRetryAfterMs, 2);
     } catch {
+      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl, null, 2);
       /* ritenta, poi non verificabile */
     }
   }
@@ -534,7 +552,7 @@ export async function reconcile({
       sections.push(unknownSitemapPlan(entry.id, detail));
       continue;
     }
-    const states = await mapLimit(expected, 8, (page) => headState(cdnUrlFor(page.path), fetchImpl));
+    const states = await mapLimit(expected, 8, (page) => headState(cdnUrlFor(page.path), fetchImpl, fetchOptions));
     const activeRows = rows.filter((row) => row.section === entry.id);
     const activeIds = activeRows.length
       ? new Set(activeRows.map((row) => row.id))
@@ -543,7 +561,7 @@ export async function reconcile({
     let orphanPages = [];
     if (pageManifest.state === 'ok') {
       const candidates = orphanedArticleCandidates(entry, pageManifest.doc, slugs.cantons?.[entry.id] ?? {}, activeIds);
-      const orphanStates = await mapLimit(candidates, 8, (page) => headState(cdnUrlFor(page.path), fetchImpl));
+      const orphanStates = await mapLimit(candidates, 8, (page) => headState(cdnUrlFor(page.path), fetchImpl, fetchOptions));
       orphanPages = candidates.map((page, i) => ({ ...page, state: orphanStates[i] }));
     }
     const plan = planSectionBackfill(entry.id, expected.map((page, i) => ({ ...page, state: states[i] })), dateById, cap, orphanPages);
