@@ -33,6 +33,9 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.domande-edilizie-solo-digitale-2027.title': 'Demandes de permis de construire numériques dès 2027 à Bâle',
     'blog.article.domande-edilizie-solo-digitale-2027.excerpt': 'À partir du 1er janvier 2027, les demandes de permis de construire doivent être soumises uniquement sous forme numérique, comme l’a annoncé le Bau- und Gastgewerbeinspektorat en septembre 2026.',
     'blog.article.domande-edilizie-solo-digitale-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.basel-stadt-siti-online-di-nuoto.title': 'Le canton de Bâle-Ville réactive ses sites après une panne technique',
+    'blog.article.basel-stadt-siti-online-di-nuoto.excerpt': 'La réouverture des sites et applications du canton de Bâle-Ville est progressive depuis mercredi soir ; aucun incident de sécurité important n’a été enregistré jeudi.',
+    'blog.article.basel-stadt-siti-online-di-nuoto.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBasileaFr;

@@ -33,6 +33,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.domande-edilizie-solo-digitale-2027.title': 'Domande edilizie solo digitali dal 1° gennaio 2027 nel Canton Basilea',
     'blog.article.domande-edilizie-solo-digitale-2027.excerpt': 'Dal 1° gennaio 2027, le domande di autorizzazione edilizia devono essere presentate solo in formato digitale, come comunicato dal Bau- und Gastgewerbeinspektorat nel settembre 2026.',
     'blog.article.domande-edilizie-solo-digitale-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.basel-stadt-siti-online-di-nuoto.title': 'Canton Basilea Città riattiva siti dopo panne tecnico',
+    'blog.article.basel-stadt-siti-online-di-nuoto.excerpt': 'La riapertura dei siti e applicazioni del Canton Basilea Città è progressiva da mercoledì notte; nessun incidente rilevante per la sicurezza è stato registrato giovedì.',
+    'blog.article.basel-stadt-siti-online-di-nuoto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBasileaIt;

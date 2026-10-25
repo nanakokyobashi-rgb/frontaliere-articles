@@ -116,4 +116,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'basel-stadt-siti-online-di-nuoto',
+ category: 'pratico',
+ date: '2026-10-25T05:03:13.974Z',
+ image: '/images/blog/article-basel-stadt-siti-online-di-nuoto.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BASILEA'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

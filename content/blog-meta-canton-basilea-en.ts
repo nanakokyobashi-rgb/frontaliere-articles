@@ -33,6 +33,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.domande-edilizie-solo-digitale-2027.title': 'Building permit applications digital-only from 2027: Basel',
     'blog.article.domande-edilizie-solo-digitale-2027.excerpt': 'From January 1, 2027, building permit applications must be submitted only in digital format, as announced by the Bau- und Gastgewerbeinspektorat in September 2026.',
     'blog.article.domande-edilizie-solo-digitale-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.basel-stadt-siti-online-di-nuoto.title': 'Canton Basel-Stadt reactivates websites after technical outage',
+    'blog.article.basel-stadt-siti-online-di-nuoto.excerpt': 'The reopening of the Canton of Basel-Stadt\'s websites and applications has been gradual since Wednesday night; no significant security incident was recorded on Thursday.',
+    'blog.article.basel-stadt-siti-online-di-nuoto.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBasileaEn;

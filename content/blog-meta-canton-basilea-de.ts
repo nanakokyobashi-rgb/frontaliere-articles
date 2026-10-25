@@ -33,6 +33,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.domande-edilizie-solo-digitale-2027.title': 'Baugesuche ab dem 1. Januar 2027 im Kanton Basel nur noch digital',
     'blog.article.domande-edilizie-solo-digitale-2027.excerpt': 'Ab dem 1. Januar 2027 müssen Baugesuche, wie das Bau- und Gastgewerbeinspektorat im September 2026 mitteilte, nur noch digital eingereicht werden.',
     'blog.article.domande-edilizie-solo-digitale-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.basel-stadt-siti-online-di-nuoto.title': 'Kanton Basel-Stadt reaktiviert Websites nach technischer Panne',
+    'blog.article.basel-stadt-siti-online-di-nuoto.excerpt': 'Die Wiedereröffnung der Websites und Anwendungen des Kantons Basel-Stadt erfolgt seit Mittwochnacht schrittweise; am Donnerstag wurde kein erheblicher Sicherheitsvorfall registriert.',
+    'blog.article.basel-stadt-siti-online-di-nuoto.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBasileaDe;
