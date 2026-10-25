@@ -14,6 +14,13 @@ test('il gate degli hub include gli shard sitemap delle varianti locali', () => 
   );
 });
 
+test('il gate include anche la sitemap plate-auctions non shardizzata', () => {
+  assert.equal(
+    isRelevantCantonHubSitemap('https://frontaliereticino.ch/sitemap-plate-auctions.xml'),
+    true,
+  );
+});
+
 test('il gate continua a ignorare le sitemap che non descrivono link di hub', () => {
   assert.equal(
     isRelevantCantonHubSitemap('https://frontaliereticino.ch/sitemap-articles-archive.xml'),
