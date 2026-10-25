@@ -3549,6 +3549,13 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /edge_candidate_source=.*fast-publish-section-edge-candidate\.sh/);
   assert.match(wf, /install -m 0755 "\$edge_candidate_source" "\$edge_candidate_target"/);
   assert.match(edgeCandidate, /r2-edge-release-commit/);
+  assert.match(edgeCandidate, /budget_seconds.*\^\[0-9\]\+\$/);
+  assert.match(edgeCandidate, /remaining_budget/);
+  assert.match(
+    edgeCandidate,
+    /timeout --signal=TERM --kill-after=1s "\$\{fetch_budget\}s"[\s\S]*git fetch/,
+    'il fetch della release edge deve essere bounded e consumare il budget residuo',
+  );
   assert.match(edgeCandidate, /git merge-base --is-ancestor/);
   assert.match(edgeCandidate, /git diff --quiet "\$resolved_edge" "\$current_commit" -- sections\/registry\.json/);
   assert.match(edgeCandidate, /r2-reconcile-plan "\$edge_commit"/);
