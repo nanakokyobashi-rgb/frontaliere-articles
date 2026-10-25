@@ -541,7 +541,14 @@ function claimLinesWithBullets(lines) {
  * anche `triageMarkerCitesBucket` di gate-minted-followups.mjs.
  */
 export function claimDailyTagBucketReferences(markerBody) {
-  return dailyTagBucketReferences(claimLinesWithBullets(String(markerBody || '').split(/\r?\n/)).join('\n'));
+  return dailyTagBucketReferences(claimLinesWithBullets(normalizeTriageMarkerBody(markerBody).split(/\r?\n/)).join('\n'));
+}
+
+function normalizeTriageMarkerBody(markerBody) {
+  const rawBody = String(markerBody || '');
+  if (!/##\s+Post-merge follow-up triage/i.test(rawBody)) return rawBody;
+  // Support producer output that serialized line endings as `\\n`/`\\r\\n`.
+  return rawBody.replace(/\\r\\n/g, '\n').replace(/\\n/g, '\n');
 }
 
 /**
@@ -638,7 +645,13 @@ function attestationLines(lines) {
  * per sempre anche con un triage non-zero reale (review di #1593).
  */
 export function triageMarkerPersistenceExpectation(markerBody) {
-  const body = String(markerBody || '');
+  // Alcuni producer hanno pubblicato il commento JSON-escaped (`\\n`) invece
+  // di inviare newline reali. Senza questa normalizzazione il marker appare
+  // come una sola riga: anche `zero outstanding items` diventa quindi un
+  // marker non riconosciuto e, dopo sei ore, una quarantena falsa (#2299).
+  // La conversione è limitata a corpi che contengono l'intestazione del
+  // marker; il testo ordinario passato a questo parser resta invariato.
+  const body = normalizeTriageMarkerBody(markerBody);
   const lines = body.split(/\r?\n/);
   // La forma corrente dichiara i claim nella riga di aggiornamento e nei suoi
   // bullet. Se manca, il fallback conserva i marker legacy (`Bucket daily:`).
