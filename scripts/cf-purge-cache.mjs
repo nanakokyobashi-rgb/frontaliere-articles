@@ -248,14 +248,43 @@ function warnStaleEdge(reason, staleWindow = 'up to 24h (Edge TTL) until the nex
   );
 }
 
+function isTimeoutError(err) {
+  return err?.name === 'AbortError'
+    || err?.name === 'TimeoutError'
+    || err?.code === 'ABORT_ERR'
+    || /\b(?:abort(?:ed|ing)?|timeout|timed out)\b/iu.test(String(err?.message || ''));
+}
+
+function timeoutError(phase) {
+  const err = new Error(
+    `ETIMEDOUT: Cloudflare API ${phase} timed out after ${CF_PURGE_API_TIMEOUT_MS}ms`,
+  );
+  err.code = 'ETIMEDOUT';
+  return err;
+}
+
 async function cf(method, path, body) {
-  const res = await fetch(`${REST_BASE}${path}`, {
-    method,
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-    ...(body ? { body: JSON.stringify(body) } : {}),
-    signal: AbortSignal.timeout(CF_PURGE_API_TIMEOUT_MS),
-  });
-  const json = await res.json().catch(() => null);
+  let res;
+  try {
+    res = await fetch(`${REST_BASE}${path}`, {
+      method,
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      ...(body ? { body: JSON.stringify(body) } : {}),
+      signal: AbortSignal.timeout(CF_PURGE_API_TIMEOUT_MS),
+    });
+  } catch (err) {
+    if (isTimeoutError(err)) throw timeoutError('request');
+    throw err;
+  }
+
+  let json;
+  try {
+    json = await res.json();
+  } catch (err) {
+    if (isTimeoutError(err)) throw timeoutError('response body');
+    const detail = String(err?.message || 'invalid JSON response');
+    throw new Error(`Cloudflare API response body could not be parsed: ${detail}`, { cause: err });
+  }
   return { status: res.status, json };
 }
 
