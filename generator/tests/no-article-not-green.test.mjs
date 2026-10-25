@@ -358,6 +358,29 @@ test('entrambi i workflow richiedono la run card producer-owned prima di assorbi
   }
 });
 
+test('article=false senza run report non pubblica modifiche staged non attestabili', () => {
+  const workflow = fs.readFileSync(CORE_WORKFLOW, 'utf8');
+  const commitStart = workflow.indexOf('      - name: Commit and push');
+  assert.ok(commitStart >= 0, 'step Commit and push non trovato');
+  const commit = workflow.slice(commitStart);
+  const missingReport = commit.indexOf('if [ ! -s .tmp/create-article-run-report.json ]; then');
+  assert.ok(missingReport >= 0, 'guard del report mancante non trovato');
+  const branch = commit.slice(missingReport, commit.indexOf('\n          fi', missingReport));
+  assert.match(branch, /steps\.generate\.outputs\.article/);
+  assert.match(branch, /git reset --mixed HEAD/);
+  assert.match(branch, /deferring the run/);
+  assert.match(
+    branch,
+    /if \[ "\$\{\{ steps\.generate\.outputs\.article \}\}" != "true" \]/,
+    'solo il percorso senza articolo puo\' scartare modifiche senza attestazione',
+  );
+  assert.match(
+    commit.slice(missingReport),
+    /if \[ "\$\{\{ steps\.generate\.outputs\.article \}\}" != "true" \][\s\S]*?exit 0[\s\S]*?echo "::error::create-article run report is missing/,
+    'article=true deve restare fail-closed',
+  );
+});
+
 test('il differimento per quota e\' subordinato alla prova, e il ramo rosso esiste', () => {
   const src = fs.readFileSync(CREATE_ARTICLE, 'utf8');
   assert.ok(
