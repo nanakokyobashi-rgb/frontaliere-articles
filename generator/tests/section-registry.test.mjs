@@ -46,6 +46,7 @@ import {
   edgeRegistryPublishable,
   effectiveStatuses,
   familySourceMissing,
+  familySourceTransitionState,
   latestArticleDate,
   loadDeclaredRegistry,
   matchSectionPath,
@@ -543,6 +544,25 @@ test('famiglia: una sezione nuova non ha nessun file; un insieme parziale e\' un
   const build = readFileSync(path.join(ROOT, 'scripts/build-api.mjs'), 'utf8');
   assert.match(build, /familySourceMissing\(\{/);
   assert.match(build, /if \(familyFileMissing\(section, section\.metaFile\(loc\)\)\) return \{\};/);
+});
+
+test('famiglia: la transizione delle sorgenti e\' atomica e fail-closed', () => {
+  assert.equal(
+    familySourceTransitionState({ registryPresent: false, slugPresent: false, metaPresent: false }),
+    'new',
+  );
+  assert.equal(
+    familySourceTransitionState({ registryPresent: true, slugPresent: true, metaPresent: true }),
+    'ready',
+  );
+  assert.equal(
+    familySourceTransitionState({ registryPresent: true, slugPresent: false, metaPresent: true }),
+    'partial',
+  );
+  assert.throws(
+    () => familySourceTransitionState({ registryPresent: true, slugPresent: true, metaPresent: 'yes' }),
+    /presence must be boolean/,
+  );
 });
 
 test('sitemap di sezione: un articolo ritirato o spostato in QUALSIASI locale esce intero', () => {

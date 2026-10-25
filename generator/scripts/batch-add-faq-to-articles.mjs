@@ -256,12 +256,33 @@ function isFaqPayloadCandidate(parsed) {
   const faq = extractFaqArray(parsed);
   return Array.isArray(faq)
     && faq.length > 0
+    && !faq.some((pair) => faqPairContainsRejectedControl(pair))
     && faq.every((pair) => (
       pair
       && typeof pair === 'object'
       && typeof pair.q === 'string'
       && typeof pair.a === 'string'
     ));
+}
+
+/**
+ * Reject, rather than silently strip, controls in model output. JSON accepts
+ * escapes such as `\\u0008`; `JSON.parse` turns them into a real C0 byte and
+ * the writer's XML sanitizer would otherwise erase it, publishing a different
+ * answer from the one that passed validation.
+ */
+export function rejectRawFaqControlEscape(value) {
+  if (typeof value !== 'string') return false;
+  if (/\\(?:u00(?:0[0-8bcef]|1[0-9a-f])|x(?:0[0-8bcef]|1[0-9a-f]))/iu.test(value)) return true;
+  for (let index = 0; index < value.length; index += 1) {
+    const code = value.charCodeAt(index);
+    if (code < 0x20 && code !== 0x09 && code !== 0x0a && code !== 0x0d) return true;
+  }
+  return false;
+}
+
+function faqPairContainsRejectedControl(pair) {
+  return rejectRawFaqControlEscape(pair?.q) || rejectRawFaqControlEscape(pair?.a);
 }
 
 /** Repair and extract a JSON FAQ payload through the shared LLM repair path. */
@@ -1022,6 +1043,9 @@ async function _generateFaqITAttempt(bodyText, maxTokens) {
     throw new Error(`JSON non valido dalla generazione FAQ: ${parseErr.message}`);
   }
   const faq = extractFaqArray(parsed);
+  if (faq?.some((pair) => faqPairContainsRejectedControl(pair))) {
+    throw new Error('FAQ response contains a raw control escape; refusing to sanitize it silently');
+  }
   if (!faq) {
     // Try extracting from raw text as last resort
     const regexFaq = extractFaqFromText(raw);
@@ -1093,6 +1117,9 @@ async function _generateTopUpFaqITAttempt(bodyText, existingFaq, maxTokens) {
     throw new Error(`JSON non valido dalla generazione top-up FAQ: ${parseErr.message}`);
   }
   const faq = extractFaqArray(parsed);
+  if (faq?.some((pair) => faqPairContainsRejectedControl(pair))) {
+    throw new Error('Top-up FAQ response contains a raw control escape; refusing to sanitize it silently');
+  }
   if (!faq) {
     const regexFaq = extractFaqFromText(raw);
     if (regexFaq && regexFaq.length >= 1) return regexFaq;

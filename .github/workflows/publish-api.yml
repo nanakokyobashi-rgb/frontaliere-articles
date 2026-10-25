@@ -106,6 +106,7 @@ on:
       - 'scripts/lib/cf-analytics.mjs'
       - 'scripts/lib/cf-purge-variants.mjs'
       - 'scripts/lib/count-xml-tags.mjs'
+      - 'scripts/lib/rss-projector-contract.mjs'
       - 'scripts/lib/ticker-shadow-check.mjs'
       - 'scripts/lib/published-slug-guard.mjs'
       - 'scripts/lib/parse-positive-num.mjs'

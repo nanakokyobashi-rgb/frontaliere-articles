@@ -1,6 +1,9 @@
 /** Shared upper bound for the public SERP description surface. */
 export const SEO_DESCRIPTION_MAX = 150;
 
+/** RSS uses the same bounded SERP description surface as the public meta tag. */
+export const RSS_DESCRIPTION_MAX_CHARS = SEO_DESCRIPTION_MAX;
+
 /** Shared upper bound for the public social-card description surface. */
 export const SEO_OG_DESCRIPTION_MAX = 250;
 
