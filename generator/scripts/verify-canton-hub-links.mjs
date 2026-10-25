@@ -41,6 +41,7 @@ import { HUB_LOCALES } from './lib/canton-hubs/format.mjs';
 import { loadSectionArticles } from './lib/canton-hubs/articles.mjs';
 import { borderRankingArticleId, buildHubLinks, eventsDigestArticleId } from './lib/canton-hubs/links.mjs';
 import { isRelevantCantonHubSitemap } from './lib/canton-hub-sitemaps.mjs';
+import { isIntentionalNoindexPharmacyPage } from './lib/canton-hub-published-route.mjs';
 import { REWIRE_FETCH_HEADERS } from './lib/rewire-fetch.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -58,9 +59,24 @@ for (const s of sections) {
 }
 
 async function get(url) {
-  const res = await fetch(url, { headers: { ...REWIRE_FETCH_HEADERS, accept: 'application/xml,text/xml,*/*' }, redirect: 'follow' });
+  let res;
+  try {
+    res = await fetch(url, { headers: { ...REWIRE_FETCH_HEADERS, accept: 'application/xml,text/xml,*/*' }, redirect: 'follow' });
+  } catch (err) {
+    err.code = 'NETWORK';
+    throw err;
+  }
   if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
   return res.text();
+}
+
+async function getIntentionalNoindexPage(url) {
+  try {
+    return await get(url);
+  } catch (err) {
+    if (err?.code === 'NETWORK') networkFailure(err);
+    return null;
+  }
 }
 
 const toPath = (u) => u.replace(ORIGIN, '').replace(/&amp;/g, '&');
@@ -136,7 +152,17 @@ for (const section of sections) {
         const probe = sitemapTwin(canton, locale, link.url);
         if (probe === null) continue;
         checked += 1;
-        if (!published.has(probe)) missing.push(`${section}/${topic}/${locale}: ${link.url}`);
+        if (published.has(probe)) continue;
+
+        // A source-gated pharmacy page is deliberately noindex while its
+        // release is stale/incomplete, so it is absent from the sitemap even
+        // though the hub link has a real destination.  Accept only the
+        // producer's explicit marker plus a self-canonical noindex page; a
+        // normal SPA fallback still fails closed.
+        const page = await getIntentionalNoindexPage(`${ORIGIN}${probe}`);
+        if (page && isIntentionalNoindexPharmacyPage(page, `${ORIGIN}${probe}`)) continue;
+
+        missing.push(`${section}/${topic}/${locale}: ${link.url}`);
       }
     }
   }
