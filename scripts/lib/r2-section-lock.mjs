@@ -627,8 +627,11 @@ export async function renewSectionLock(
     throw new Error(`[r2-section-lock] lock ${section} has no ETag; refusing an unsafe renewal`);
   }
 
-  const renewedAt = requireTimestamp(now(), 'acquiredAt');
+  const renewedAt = requireTimestamp(now(), 'renewedAt');
   const expiresAt = requireTimestamp(renewedAt + leaseMs, 'expiresAt');
+  if (expiresAt <= current.payload.acquiredAt) {
+    throw new Error('[r2-section-lock] renewal expiry must be later than acquiredAt');
+  }
   const replacement = await putLock(
     request,
     section,

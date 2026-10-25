@@ -161,6 +161,28 @@ test('acquire and renew reject clocks that cannot produce safe timestamps', asyn
       request: renewRequest,
       now: () => -1,
     }),
-    /acquiredAt must be a non-negative safe integer timestamp/u,
+    /renewedAt must be a non-negative safe integer timestamp/u,
+  );
+
+  const regressedCurrent = { ...current, acquiredAt: 1_000, expiresAt: 1_001 };
+  const regressedRequest = async ({ method }) => {
+    if (method === 'GET') {
+      return {
+        status: 200,
+        headers: { etag: '"strong"' },
+        text: async () => JSON.stringify(regressedCurrent),
+      };
+    }
+    throw new Error('renew PUT must not run after clock regression');
+  };
+  await assert.rejects(
+    () => renewSectionLock('frontaliere', {
+      owner: regressedCurrent.owner,
+      leaseId: regressedCurrent.leaseId,
+      request: regressedRequest,
+      now: () => 0,
+      leaseMs: 500,
+    }),
+    /renewal expiry must be later than acquiredAt/u,
   );
 });
