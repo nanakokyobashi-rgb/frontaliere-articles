@@ -8621,6 +8621,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.zenith-rischio-posti-svizzera.title': 'Zenith: Etwa 100 Arbeitsplätze in Le Locle und weitere 100 im Ausland gefährdet',
     'blog.article.zenith-rischio-posti-svizzera.excerpt': 'Etwa 100 Arbeitsplätze in Le Locle gefährdet Weitere 100 Arbeitsplätze könnten im Ausland abgebaut werden Zenith konsultiert das Personal wegen einer möglichen Entlassung',
     'blog.article.zenith-rischio-posti-svizzera.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.epfl-eth-top-20-europee.title': 'EPFL und ETH in Top 20 europ. Unis mit Patenten',
+    'blog.article.epfl-eth-top-20-europee.excerpt': 'EPFL: 107 Einreichungen auf europäischer Ebene im vergangenen Jahr ETH Zürich: 101 Einreichungen und Platz 16 in Europa Schweiz belegt mit 463 Spin-offs den vierten Platz in Europa 57,5% der Spin-offs',
+    'blog.article.epfl-eth-top-20-europee.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaChDe;

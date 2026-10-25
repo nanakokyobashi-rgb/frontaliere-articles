@@ -108948,6 +108948,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-epfl-eth-top-20-europee': {
+    title: 'EPFL ed ETH tra le 20 università europee per brevetti depositati',
+    description: 'EPFL: 107 depositi a livello europeo l\'anno scorso ETH Zurigo: 101 depositi e 16° posto europeo Svizzera quarta in Europa per 463 spin-off 57,5%',
+    keywords: 'frontalieri, ticino, svizzera, italia, epfl, università, europee, brevetti',
+    ogTitle: 'EPFL ed ETH tra le 20 università europee per brevetti',
+    ogDescription: 'EPFL: 107 depositi a livello europeo l\'anno scorso ETH Zurigo: 101 depositi e 16° posto europeo Svizzera quarta in Europa per 463 spin-off 57,5% delle spin-off',
+    canonicalPath: '/articoli-svizzera/epfl-eth-top-20-europee/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "EPFL ed ETH tra le 20 università europee per brevetti depositati",
+      "description": "EPFL: 107 depositi a livello europeo l'anno scorso ETH Zurigo: 101 depositi e 16° posto europeo Svizzera quarta in Europa per 463 spin-off 57,5%",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-epfl-eth-top-20-europee.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-25T00:03:55+00:00",
+      "dateModified": "2026-10-25T00:03:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/epfl-eth-top-20-europee/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

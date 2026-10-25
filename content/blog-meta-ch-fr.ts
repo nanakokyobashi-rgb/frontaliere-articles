@@ -8621,6 +8621,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.zenith-rischio-posti-svizzera.title': 'Zenith : environ 100 postes menacés à Le Locle et 100 autres à l’étranger',
     'blog.article.zenith-rischio-posti-svizzera.excerpt': 'Environ 100 postes menacés à Le Locle 100 autres postes pourraient être supprimés à l’étranger Zenith consulte le personnel en vue d’un éventuel licenciement',
     'blog.article.zenith-rischio-posti-svizzera.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.epfl-eth-top-20-europee.title': 'EPFL et ETH parmi les 20 universités européennes pour les brevets déposés',
+    'blog.article.epfl-eth-top-20-europee.excerpt': 'EPFL : 107 dépôts au niveau européen l\'an dernier ETH Zurich : 101 dépôts et 16ème place européenne Suisse quatrième en Europe pour 463 spin-offs 57,5% des spin-offs',
+    'blog.article.epfl-eth-top-20-europee.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaChFr;

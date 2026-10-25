@@ -2896,6 +2896,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'telecom-358-licenziamenti': { it: 'telecom-358-licenziamenti', en: 'telecom-358-job-cuts', de: 'telekom-358-stellenabbau', fr: 'telecom-358-licenciements' },
  'assemblea-pvl-avs-finanziamento': { it: 'assemblea-pvl-avs-finanziamento', en: 'pvl-assembly-avs-financing', de: 'pvl-versammlung-avs-finanzierung', fr: 'assemblee-pvl-financement-avs' },
  'zenith-rischio-posti-svizzera': { it: 'zenith-rischio-posti-svizzera', en: 'zenith-job-risk-switzerland', de: 'zenith-arbeitsplatzrisiko-schweiz', fr: 'zenith-risque-emplois-suisse' },
+ 'epfl-eth-top-20-europee': { it: 'epfl-eth-top-20-europee', en: 'epfl-and-eth-among-europe-s-top-20-universities-for-patents-filed', de: 'epfl-und-eth-in-top-20-europ-unis-mit-patenten', fr: 'epfl-et-eth-parmi-les-20-universites-europeennes-pour-les-brevets-deposes' },
 };
 
 /** See BLOG_SLUG_FALLBACK_REASONS in routerBlogData.ts. */
