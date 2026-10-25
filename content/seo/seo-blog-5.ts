@@ -113230,6 +113230,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frontaliere-ora-mezza-viaggio': {
+    title: '31,7% frontalieri supera un\'ora e mezza di viaggio al giorno',
+    description: '31,7% supera un\'ora e mezza al giorno 73,2% usa l\'auto privata 28,3% spende oltre il 10% dello stipendio 37,4% ha il lavoro da remoto Ricerca →',
+    keywords: 'frontalieri, ticino, svizzera, italia, supera, mezza, viaggio, giorno',
+    ogTitle: '31,7% frontalieri oltre 1,5 ore di viaggio',
+    ogDescription: '31,7% supera un\'ora e mezza al giorno 73,2% usa l\'auto privata 28,3% spende oltre il 10% dello stipendio 37,4% ha il lavoro da remoto Ricerca → «Lavorare oltre',
+    canonicalPath: '/articoli-frontaliere/frontaliere-ora-mezza-viaggio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "31,7% frontalieri supera un'ora e mezza di viaggio al giorno",
+      "description": "31,7% supera un'ora e mezza al giorno 73,2% usa l'auto privata 28,3% spende oltre il 10% dello stipendio 37,4% ha il lavoro da remoto Ricerca →",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-25T01:38:53+00:00",
+      "dateModified": "2026-10-25T01:38:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontaliere-ora-mezza-viaggio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

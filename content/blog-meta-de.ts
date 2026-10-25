@@ -13594,6 +13594,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.disparita-stipendi-frontalieri.title': 'Lohnunterschiede zwischen Männern und Frauen unter den Grenzgängern im Tessin',
     'blog.article.disparita-stipendi-frontalieri.excerpt': 'Online-Erhebung im Mai 2026 unter 1.542 Grenzgängern Frauen machen 42,4% der Stichprobe aus Unter 3.500 Franken: 41,5% der Grenzgängerinnen Bei gleichen Bedingungen etwa',
     'blog.article.disparita-stipendi-frontalieri.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.frontaliere-ora-mezza-viaggio.title': '31,7% Grenzgänger überschreiten eineinhalb Stunden Fahrt pro Tag',
+    'blog.article.frontaliere-ora-mezza-viaggio.excerpt': '31,7% mehr als eineinhalb Stunden pro Tag 73,2% benutzen das private Auto 28,3% geben mehr als 10% des Gehalts aus 37,4% haben Remote-Arbeit Forschung → «Arbeiten über',
+    'blog.article.frontaliere-ora-mezza-viaggio.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaDe;

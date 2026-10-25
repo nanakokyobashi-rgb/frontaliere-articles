@@ -45817,6 +45817,16 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'frontaliere-ora-mezza-viaggio',
+ category: 'pratico',
+ date: '2026-10-25T01:38:53.028Z',
+ image: '/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

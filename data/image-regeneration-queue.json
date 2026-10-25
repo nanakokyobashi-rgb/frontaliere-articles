@@ -323,6 +323,16 @@
       "failureCount": 0,
       "requestedAt": "2026-10-24T21:09:52.981Z",
       "lastFailureAt": "2026-10-24T21:09:52.981Z"
+    },
+    {
+      "articleId": "frontaliere-ora-mezza-viaggio",
+      "title": "31,7% frontalieri supera un'ora e mezza di viaggio al giorno",
+      "fallbackImage": "/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp",
+      "reason": "All image providers failed for article-frontaliere-ora-mezza-viaggio: openai-codex (vision gate rejected image: Generic synthetic commuter scene relevant to Ticino cross-border com",
+      "status": "queued",
+      "failureCount": 0,
+      "requestedAt": "2026-10-25T01:38:54.254Z",
+      "lastFailureAt": "2026-10-25T01:38:54.254Z"
     }
   ]
 }
