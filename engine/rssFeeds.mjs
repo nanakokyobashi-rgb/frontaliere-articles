@@ -239,6 +239,27 @@ function unescapeQuoted(value, quote) {
 }
 
 /**
+ * Find the end of a template literal without evaluating its interpolation.
+ * `readStaticStringLiteral` must remain fail-closed for values we publish, but
+ * the property walker also needs to skip unrelated JSON-LD fields such as
+ * `mainEntityOfPage: `${BASE_URL}/...`` while looking for headline/date fields.
+ */
+function templateLiteralEnd(source, start) {
+  for (let cursor = start + 1; cursor < source.length; cursor += 1) {
+    if (source[cursor] === '\\') {
+      cursor += 1;
+      continue;
+    }
+    if (source[cursor] === '`') return cursor + 1;
+    if (source[cursor] !== '$' || source[cursor + 1] !== '{') continue;
+    const expressionEnd = matchingDelimiter(source, cursor + 1);
+    if (expressionEnd < 0) return -1;
+    cursor = expressionEnd;
+  }
+  return -1;
+}
+
+/**
  * Read top-level properties from one already-balanced SEO entry.
  *
  * This deliberately stays in the mirrored engine subtree. The corpus floor
@@ -279,8 +300,13 @@ function forEachStaticProperty(block, visit) {
     let valueEnd = valueStart;
     const valueQuote = block[valueStart];
     if (valueQuote === "'" || valueQuote === '"' || valueQuote === '`') {
-      const literal = readStaticStringLiteral(block, valueStart, 'RSS SEO entry', 'rss-seo-field');
-      valueEnd = literal?.end ?? block.length;
+      if (valueQuote === '`') {
+        valueEnd = templateLiteralEnd(block, valueStart);
+        if (valueEnd < 0) valueEnd = block.length;
+      } else {
+        const literal = readStaticStringLiteral(block, valueStart, 'RSS SEO entry', 'rss-seo-field');
+        valueEnd = literal?.end ?? block.length;
+      }
     } else if (valueQuote === '{' || valueQuote === '[' || valueQuote === '(') {
       const close = matchingDelimiter(block, valueStart);
       valueEnd = close < 0 ? block.length : close + 1;
