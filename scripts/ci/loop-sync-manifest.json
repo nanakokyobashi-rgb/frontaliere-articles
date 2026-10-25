@@ -3931,11 +3931,11 @@
       "path": "host/blogContextualLinksData.ts",
       "sitePath": "build-plugins/blogContextualLinksData.ts",
       "mode": "identical",
-      "reason": "RIALLINEATA il 2026-08-26 (stesso pattern di #618, trovato in sweep sulla stessa classe): la baseline del 2026-08-09 era stantia da entrambi i lati — la correzione dell'intento transazionale dei link contestuali del blog e' atterrata sia sul sito (PR sito #6343, 2026-08-24) sia qui (#584, portata con `236ee8a69`) — ma i due lati sono di nuovo byte-identici (hash `9622c486d9badc32` su entrambi, verificato ora), quindi non e' un `both-moved` da riconciliare a mano, solo una baseline da rinfrescare.",
+      "reason": "Trasporto dal main del sito delle due regole contestuali aggiunte dopo la baseline: attesa alla dogana di Chiasso e concorsi pubblici nel Ticino. Il gemello resta identical e viene verificato byte-per-byte; il digest del SiteShellContract viene riallineato nello stesso cambiamento.",
       "baseline": {
-        "site": "9622c486d9badc32",
-        "corpus": "9622c486d9badc32",
-        "alignedAt": "2026-08-26"
+        "site": "db57b2b00b178d67",
+        "corpus": "db57b2b00b178d67",
+        "alignedAt": "2026-10-25"
       }
     },
     {
@@ -3953,18 +3953,18 @@
       "path": "host/constants.ts",
       "sitePath": "build-plugins/constants.ts",
       "mode": "adapted",
-      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 30fef84a… (sito PR #15101: gate bot GA4 in apertura di GTAG_INIT_CONTENT, portato qui come GA4_BOT_GATE_FN espanso e byte-identico; la firma square-screen resta GA4-only e i gemelli identical delle PR sito #15022/#15023 sono trasportati qui) comprende il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs della PR sito #14411, l'aggiunta del profilo Facebook canonico della PR sito #14544 e il riferimento a gtag-init con il nome derivato dal contenuto in GTAG_SNIPPET (`/assets/gtag-init-<sha256[:12] di GTAG_INIT_CONTENT>.js`, sito PR #12150, issue 9403; fino al digest 082cd6c3… era la query `?v=` della PR #11496), per cui GTAG_INIT_CONTENT e ANALYTICS_EMISSION_ID_FACTORY_JS restano nella chiusura e scripts/ci/ensure-host-shell-assets.mjs carica quel file sulla CDN prima di ogni pubblicazione (sito issue 12270); conserva Organization come tipo base dell'identita' canonica e lo snippet Funding Choices che trattiene l'Offerwall fino al click su Candidati nelle sezioni job board; il gate segue anche i cambi di rotta SPA. La specializzazione editoriale resta in additionalType. Allineamento verificato contro main del sito dopo PR #14544; il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
+      "reason": "Costanti del sito lette dall'engine via SiteShellContract, estratte per chiusura: adapted per costruzione, non byte-identiche al sorgente completo. scalarFingerprint confronta i 22 scalari authoritative, mentre i test runtime verificano i comportamenti del contratto. Il digest 08b97443… incorpora il gate GA4 del sito, il budget SERP a 150 caratteri, la canonicalizzazione Organization.sameAs, l'aggiunta del profilo Facebook canonico, il riferimento content-addressed a gtag-init e le due regole contestuali trasportate per Chiasso e concorsi pubblici; la specializzazione editoriale resta in additionalType e il runtime Firebase conserva il match sulla chiave esatta, senza segreti nei fingerprint.",
       "baseline": {
-        "site": "5bedfc2a3453a9f5",
-        "corpus": "db9e22109da26397",
-        "alignedAt": "2026-09-12",
-        "forcedAt": "2026-09-12T04:17:23.514Z"
+        "site": "2721e6c566c129a1",
+        "corpus": "d887d0a813be9844",
+        "alignedAt": "2026-10-25",
+        "forcedAt": "2026-10-25T11:16:42.000Z"
       },
       "scalarFingerprint": {
         "sitePath": "tests/articles-shell-contract-fingerprint.json",
         "corpusPath": "host/shell-contract-fingerprint.json",
         "scalarFields": 22,
-        "sha256": "30fef84a25d8cb450a2b52dacc030bf8b70b1c2dd507fcca34e0be027425612c"
+        "sha256": "08b97443ab5e85ab6ea85945a19348134a77615e488eaf3afd25d00979d7fd26"
       }
     },
     {
