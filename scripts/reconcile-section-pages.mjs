@@ -40,7 +40,7 @@
  * manca solo una pagina di sezione, con `ids: []` (rinfresco di landing,
  * archivio e hub).
  *
- * Uso: node scripts/reconcile-section-pages.mjs --out <report.json> [--cap N]
+ * Uso: node scripts/reconcile-section-pages.mjs --out <report.json> [--cap N] [--budget-ms N]
  * Solo builtin Node: gira senza npm ci.
  */
 import '../host/cantonSectionsBootstrap.mjs';
@@ -63,6 +63,14 @@ const UA = 'frontaliere-corpus-reconcile/1 (+https://frontaliereticino.ch)';
 export const RECONCILE_FETCH_ATTEMPTS = 3;
 export const RECONCILE_FETCH_RETRY_DELAY_MS = 1000;
 export const RECONCILE_FETCH_MAX_RETRY_AFTER_MS = 300_000;
+export const RECONCILE_FETCH_MAX_DURATION_MS = 180_000;
+
+export class ReconcileBudgetExceededError extends Error {
+  constructor() {
+    super('budget wall-clock del reconcile esaurito');
+    this.name = 'ReconcileBudgetExceededError';
+  }
+}
 
 const RETRYABLE_HTTP_STATUSES = new Set([408, 425, 429]);
 
@@ -72,6 +80,47 @@ function isRetryableStatus(status) {
 
 function defaultSleep(delayMs) {
   return new Promise((resolve) => setTimeout(resolve, delayMs));
+}
+
+/**
+ * Restituisce il tempo residuo di una osservazione condivisa.
+ *
+ * Tutte le letture della riconciliazione ricevono lo stesso callback: un
+ * retry di una fetch non puo' quindi moltiplicare il budget per il numero di
+ * documenti o di sezioni che stanno lavorando in parallelo.
+ */
+export function remainingBudgetMs(deadline, now = Date.now) {
+  const current = now();
+  if (!Number.isFinite(deadline) || !Number.isFinite(current)) return 0;
+  return Math.max(0, Math.floor(deadline - current));
+}
+
+function budgetTimeoutMs(defaultTimeoutMs, remainingBudget) {
+  const remaining = remainingBudget();
+  if (remaining <= 0) throw new ReconcileBudgetExceededError();
+  return Number.isFinite(remaining)
+    ? Math.max(1, Math.min(defaultTimeoutMs, remaining))
+    : defaultTimeoutMs;
+}
+
+async function waitBeforeRetry(
+  attempt,
+  retryDelayMs,
+  sleepImpl,
+  retryAfterMs,
+  maxAttempts,
+  remainingBudget,
+) {
+  if (attempt >= maxAttempts) return true;
+  const remaining = remainingBudget();
+  if (remaining <= 0) return false;
+  const baseDelayMs = Number.isFinite(retryDelayMs) && retryDelayMs > 0
+    ? retryDelayMs * attempt
+    : 0;
+  const requestedDelayMs = retryAfterMs === null ? baseDelayMs : Math.max(baseDelayMs, retryAfterMs);
+  const delayMs = Number.isFinite(remaining) ? Math.min(requestedDelayMs, remaining) : requestedDelayMs;
+  if (delayMs > 0) await sleepImpl(delayMs);
+  return remainingBudget() > 0;
 }
 
 /**
@@ -107,21 +156,6 @@ export function parseRetryAfter(response, nowMs = Date.now()) {
   }
   if (!Number.isFinite(delayMs)) return null;
   return Math.min(RECONCILE_FETCH_MAX_RETRY_AFTER_MS, Math.max(0, Math.ceil(delayMs)));
-}
-
-async function waitBeforeRetry(
-  attempt,
-  retryDelayMs,
-  sleepImpl,
-  retryAfterMs = null,
-  maxAttempts = RECONCILE_FETCH_ATTEMPTS,
-) {
-  if (attempt >= maxAttempts) return;
-  const baseDelayMs = Number.isFinite(retryDelayMs) && retryDelayMs > 0
-    ? retryDelayMs * attempt
-    : 0;
-  const delayMs = retryAfterMs === null ? baseDelayMs : Math.max(baseDelayMs, retryAfterMs);
-  if (delayMs > 0) await sleepImpl(delayMs);
 }
 
 /** La chiave R2 (come URL sul CDN) di un path canonico di sezione. */
@@ -253,14 +287,34 @@ export function planSectionBackfill(section, pages, dateById, cap, orphanPages =
   };
 }
 
-async function getJson(url, fetchImpl, { retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS, sleepImpl = defaultSleep } = {}) {
+async function getJson(
+  url,
+  fetchImpl,
+  {
+    retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS,
+    sleepImpl = defaultSleep,
+    remainingBudget = () => Number.POSITIVE_INFINITY,
+  } = {},
+) {
   for (let attempt = 1; attempt <= RECONCILE_FETCH_ATTEMPTS; attempt++) {
     let res;
     try {
-      res = await fetchWithRefTimeout(`${url}?_rcb=${Date.now()}.${attempt}`, { headers: { 'user-agent': UA } }, 30000, fetchImpl);
+      res = await fetchWithRefTimeout(
+        `${url}?_rcb=${Date.now()}.${attempt}`,
+        { headers: { 'user-agent': UA } },
+        budgetTimeoutMs(30_000, remainingBudget),
+        fetchImpl,
+      );
     } catch (error) {
       if (attempt === RECONCILE_FETCH_ATTEMPTS) throw error;
-      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl);
+      if (!(await waitBeforeRetry(
+        attempt,
+        retryDelayMs,
+        sleepImpl,
+        null,
+        RECONCILE_FETCH_ATTEMPTS,
+        remainingBudget,
+      ))) throw new ReconcileBudgetExceededError();
       continue;
     }
     if (!res.ok) {
@@ -270,14 +324,28 @@ async function getJson(url, fetchImpl, { retryDelayMs = RECONCILE_FETCH_RETRY_DE
       if (!isRetryableStatus(status) || attempt === RECONCILE_FETCH_ATTEMPTS) {
         throw new Error(`${url}: HTTP ${status}`);
       }
-      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl, retryAfterMs);
+      if (!(await waitBeforeRetry(
+        attempt,
+        retryDelayMs,
+        sleepImpl,
+        retryAfterMs,
+        RECONCILE_FETCH_ATTEMPTS,
+        remainingBudget,
+      ))) throw new ReconcileBudgetExceededError();
       continue;
     }
     try {
       return await res.json();
     } catch (error) {
       if (attempt === RECONCILE_FETCH_ATTEMPTS) throw error;
-      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl);
+      if (!(await waitBeforeRetry(
+        attempt,
+        retryDelayMs,
+        sleepImpl,
+        null,
+        RECONCILE_FETCH_ATTEMPTS,
+        remainingBudget,
+      ))) throw new ReconcileBudgetExceededError();
     }
   }
   throw new Error(`${url}: tentativi esauriti`);
@@ -289,12 +357,25 @@ async function getJson(url, fetchImpl, { retryDelayMs = RECONCILE_FETCH_RETRY_DE
  * verificato) e una risposta corrotta/non verificabile. Entrambi fermano il
  * backfill, ma il report deve dire quale superficie manca.
  */
-async function getJsonState(url, fetchImpl, { retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS, sleepImpl = defaultSleep } = {}) {
+async function getJsonState(
+  url,
+  fetchImpl,
+  {
+    retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS,
+    sleepImpl = defaultSleep,
+    remainingBudget = () => Number.POSITIVE_INFINITY,
+  } = {},
+) {
   let lastError = null;
   let lastStatus = null;
   for (let attempt = 1; attempt <= RECONCILE_FETCH_ATTEMPTS; attempt++) {
     try {
-      const res = await fetchWithRefTimeout(`${url}?_rcb=${Date.now()}.${attempt}`, { headers: { 'user-agent': UA } }, 30000, fetchImpl);
+      const res = await fetchWithRefTimeout(
+        `${url}?_rcb=${Date.now()}.${attempt}`,
+        { headers: { 'user-agent': UA } },
+        budgetTimeoutMs(30_000, remainingBudget),
+        fetchImpl,
+      );
       lastStatus = res.status;
       if (res.status === 404) {
         releaseFetchWithRefTimeout(res);
@@ -307,28 +388,61 @@ async function getJsonState(url, fetchImpl, { retryDelayMs = RECONCILE_FETCH_RET
         if (!isRetryableStatus(status) || attempt === RECONCILE_FETCH_ATTEMPTS) {
           return { state: 'unknown', url, status, reason: `HTTP ${status}` };
         }
-        await waitBeforeRetry(attempt, retryDelayMs, sleepImpl, retryAfterMs);
+        if (!(await waitBeforeRetry(
+          attempt,
+          retryDelayMs,
+          sleepImpl,
+          retryAfterMs,
+          RECONCILE_FETCH_ATTEMPTS,
+          remainingBudget,
+        ))) break;
         continue;
       }
       return { state: 'ok', url, status: res.status, value: await res.json() };
     } catch (error) {
       lastError = error;
-      if (attempt < RECONCILE_FETCH_ATTEMPTS) {
-        await waitBeforeRetry(attempt, retryDelayMs, sleepImpl);
-      }
+      if (error instanceof ReconcileBudgetExceededError) break;
+      if (attempt < RECONCILE_FETCH_ATTEMPTS && !(await waitBeforeRetry(
+        attempt,
+        retryDelayMs,
+        sleepImpl,
+        null,
+        RECONCILE_FETCH_ATTEMPTS,
+        remainingBudget,
+      ))) break;
     }
   }
   return { state: 'unknown', url, ...(lastStatus === null ? {} : { status: lastStatus }), reason: lastError?.message ?? String(lastError) };
 }
 
-async function getText(url, fetchImpl, { retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS, sleepImpl = defaultSleep } = {}) {
+async function getText(
+  url,
+  fetchImpl,
+  {
+    retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS,
+    sleepImpl = defaultSleep,
+    remainingBudget = () => Number.POSITIVE_INFINITY,
+  } = {},
+) {
   for (let attempt = 1; attempt <= RECONCILE_FETCH_ATTEMPTS; attempt++) {
     let res;
     try {
-      res = await fetchWithRefTimeout(`${url}?_rcb=${Date.now()}.${attempt}`, { headers: { 'user-agent': UA } }, 30000, fetchImpl);
+      res = await fetchWithRefTimeout(
+        `${url}?_rcb=${Date.now()}.${attempt}`,
+        { headers: { 'user-agent': UA } },
+        budgetTimeoutMs(30_000, remainingBudget),
+        fetchImpl,
+      );
     } catch (error) {
       if (attempt === RECONCILE_FETCH_ATTEMPTS) throw error;
-      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl);
+      if (!(await waitBeforeRetry(
+        attempt,
+        retryDelayMs,
+        sleepImpl,
+        null,
+        RECONCILE_FETCH_ATTEMPTS,
+        remainingBudget,
+      ))) throw new ReconcileBudgetExceededError();
       continue;
     }
     if (!res.ok) {
@@ -338,14 +452,28 @@ async function getText(url, fetchImpl, { retryDelayMs = RECONCILE_FETCH_RETRY_DE
       if (!isRetryableStatus(status) || attempt === RECONCILE_FETCH_ATTEMPTS) {
         throw new Error(`${url}: HTTP ${status}`);
       }
-      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl, retryAfterMs);
+      if (!(await waitBeforeRetry(
+        attempt,
+        retryDelayMs,
+        sleepImpl,
+        retryAfterMs,
+        RECONCILE_FETCH_ATTEMPTS,
+        remainingBudget,
+      ))) throw new ReconcileBudgetExceededError();
       continue;
     }
     try {
       return await res.text();
     } catch (error) {
       if (attempt === RECONCILE_FETCH_ATTEMPTS) throw error;
-      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl);
+      if (!(await waitBeforeRetry(
+        attempt,
+        retryDelayMs,
+        sleepImpl,
+        null,
+        RECONCILE_FETCH_ATTEMPTS,
+        remainingBudget,
+      ))) throw new ReconcileBudgetExceededError();
     }
   }
   throw new Error(`${url}: tentativi esauriti`);
@@ -393,14 +521,23 @@ function skippedSurface({ code, reason, apiCommit = null, edgeCommit = null, pen
 export async function headState(
   url,
   fetchImpl = fetch,
-  { retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS, sleepImpl = defaultSleep } = {},
+  {
+    retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS,
+    sleepImpl = defaultSleep,
+    remainingBudget = () => Number.POSITIVE_INFINITY,
+  } = {},
 ) {
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
-      const request = (method) => fetchWithRefTimeout(`${url}?_rcb=${Date.now()}.${attempt}.${method.toLowerCase()}`, {
-        method,
-        headers: { 'user-agent': UA },
-      }, 15000, fetchImpl);
+      const request = (method) => fetchWithRefTimeout(
+        `${url}?_rcb=${Date.now()}.${attempt}.${method.toLowerCase()}`,
+        {
+          method,
+          headers: { 'user-agent': UA },
+        },
+        budgetTimeoutMs(15_000, remainingBudget),
+        fetchImpl,
+      );
       const res = await request('HEAD');
       if (res.status === 200) {
         releaseFetchWithRefTimeout(res);
@@ -414,7 +551,14 @@ export async function headState(
       const headRetryAfterMs = parseRetryAfter(res);
       releaseFetchWithRefTimeout(res);
       if (headStatus !== 405 && headStatus !== 501) {
-        await waitBeforeRetry(attempt, retryDelayMs, sleepImpl, headRetryAfterMs, 2);
+        if (!(await waitBeforeRetry(
+          attempt,
+          retryDelayMs,
+          sleepImpl,
+          headRetryAfterMs,
+          2,
+          remainingBudget,
+        ))) return 'unknown';
         continue;
       }
       const get = await request('GET');
@@ -428,9 +572,24 @@ export async function headState(
       }
       const getRetryAfterMs = parseRetryAfter(get);
       releaseFetchWithRefTimeout(get);
-      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl, getRetryAfterMs, 2);
-    } catch {
-      await waitBeforeRetry(attempt, retryDelayMs, sleepImpl, null, 2);
+      if (!(await waitBeforeRetry(
+        attempt,
+        retryDelayMs,
+        sleepImpl,
+        getRetryAfterMs,
+        2,
+        remainingBudget,
+      ))) return 'unknown';
+    } catch (error) {
+      if (error instanceof ReconcileBudgetExceededError) return 'unknown';
+      if (!(await waitBeforeRetry(
+        attempt,
+        retryDelayMs,
+        sleepImpl,
+        null,
+        2,
+        remainingBudget,
+      ))) return 'unknown';
       /* ritenta, poi non verificabile */
     }
   }
@@ -460,8 +619,20 @@ export async function reconcile({
   fetchImpl = fetch,
   retryDelayMs = RECONCILE_FETCH_RETRY_DELAY_MS,
   sleepImpl = defaultSleep,
+  budgetMs = RECONCILE_FETCH_MAX_DURATION_MS,
+  now = Date.now,
 } = {}) {
-  const fetchOptions = { retryDelayMs, sleepImpl };
+  const duration = Number(budgetMs);
+  if (!Number.isFinite(duration) || duration <= 0) {
+    throw new Error('budgetMs deve essere una durata positiva finita');
+  }
+  const startedAt = now();
+  const deadline = startedAt + duration;
+  if (!Number.isFinite(startedAt) || !Number.isFinite(deadline)) {
+    throw new Error('budgetMs produce una deadline non finita');
+  }
+  const remainingBudget = () => remainingBudgetMs(deadline, now);
+  const fetchOptions = { retryDelayMs, sleepImpl, remainingBudget };
   const [manifest, catalog, slugs, candidateRegistryResult, edgeRegistry] = await Promise.all(
     ['manifest.json', 'sections.json', 'slugs.json'].map((name) => getJson(`${apiBase}/${name}`, fetchImpl, fetchOptions)).concat(
       getJsonState(`${apiBase}/edge/sections/registry.json`, fetchImpl, fetchOptions),
@@ -575,17 +746,22 @@ export async function reconcile({
 export async function main(argv = process.argv.slice(2)) {
   const args = {};
   for (let i = 0; i < argv.length; i++) {
-    if (argv[i] === '--out' || argv[i] === '--cap') {
+    if (argv[i] === '--out' || argv[i] === '--cap' || argv[i] === '--budget-ms') {
       const value = argv[i + 1];
       if (value === undefined || value.startsWith('--')) throw new Error(`${argv[i]} richiede un valore`);
       args[argv[i].slice(2)] = value;
       i++;
-    } else throw new Error(`argomento sconosciuto: ${argv[i]} (uso: --out <report.json> [--cap N])`);
+    } else throw new Error(`argomento sconosciuto: ${argv[i]} (uso: --out <report.json> [--cap N] [--budget-ms N])`);
   }
   if (!args.out) throw new Error('manca --out <report.json>');
   const cap = Number(args.cap ?? process.env.RECONCILE_SECTION_CAP ?? 3);
+  const budgetMs = Number(
+    args['budget-ms']
+      ?? process.env.RECONCILE_SECTION_BUDGET_MS
+      ?? RECONCILE_FETCH_MAX_DURATION_MS,
+  );
   const apiBase = (process.env.RECONCILE_API_BASE || API_BASE_DEFAULT).replace(/\/+$/, '');
-  const report = await reconcile({ apiBase, cap });
+  const report = await reconcile({ apiBase, cap, budgetMs });
   report.counts = {
     sections: report.sections.length,
     dispatch: report.sections.filter((s) => s.dispatch).length,

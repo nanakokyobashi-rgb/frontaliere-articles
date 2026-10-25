@@ -5,6 +5,7 @@ import {
   headState,
   parseRetryAfter,
   reconcile,
+  remainingBudgetMs,
   RECONCILE_FETCH_MAX_RETRY_AFTER_MS,
 } from '../../scripts/reconcile-section-pages.mjs';
 
@@ -29,6 +30,11 @@ test('parseRetryAfter: accetta delta-secondes e data HTTP, con cap bounded', () 
   assert.equal(parseRetryAfter(response('Sun, 25 Oct 2026 07:59:59 GMT'), now), 0);
   assert.equal(parseRetryAfter(response('not-a-delay'), now), null);
   assert.equal(parseRetryAfter(response('86400'), now), RECONCILE_FETCH_MAX_RETRY_AFTER_MS);
+});
+
+test('remainingBudgetMs: il budget condiviso non diventa negativo', () => {
+  assert.equal(remainingBudgetMs(1_000, () => 750), 250);
+  assert.equal(remainingBudgetMs(1_000, () => 1_250), 0);
 });
 
 test('headState: rispetta Retry-After anche nel retry delle probe HEAD', async () => {
@@ -150,6 +156,34 @@ test('reconcile: ritenta una sitemap 5xx ma non cambia il piano prudente', async
   assert.deepEqual(sleeps, [7_000]);
   assert.equal(report.sections[0].expected, 1);
   assert.equal(report.sections[0].dispatch, false);
+});
+
+test('reconcile: i retry delle fetch iniziali consumano un budget condiviso', async () => {
+  let clock = 1_000;
+  const calls = [];
+  const fetchImpl = async (url) => {
+    calls.push(url.replace(/\?.*$/, ''));
+    return {
+      ok: false,
+      status: 503,
+      headers: { get: () => null },
+      json: async () => ({}),
+      text: async () => '',
+    };
+  };
+
+  await assert.rejects(
+    () => reconcile({
+      apiBase: API_BASE,
+      fetchImpl,
+      retryDelayMs: 100,
+      budgetMs: 50,
+      now: () => clock,
+      sleepImpl: async (ms) => { clock += ms; },
+    }),
+    /budget wall-clock del reconcile esaurito/u,
+  );
+  assert.equal(calls.length, 5, 'il primo giro usa il budget comune, non 3 retry per ogni documento');
 });
 
 test('reconcile: sitemap e slugs incoerenti non fanno fallire il run e non dispatchano', async () => {
