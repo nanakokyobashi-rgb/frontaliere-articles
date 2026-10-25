@@ -58,7 +58,8 @@ import { realpathSync } from 'node:fs';
  * UNSET var also sees something other than `'true'`. There is no way to arrive at
  * "capability granted" without the API having said so.
  *
- * Env: APP_ID, APP_PRIVATE_KEY (PEM), GITHUB_REPOSITORY (owner/repo).
+ * Env: APP_ID, APP_PRIVATE_KEY (PEM), GITHUB_REPOSITORY (owner/repo),
+ * MINT_APP_TOKEN_TIMEOUT_MS (default 15000, cap 120000).
  * Usage: node scripts/ci/mint-app-token.mjs
  */
 import { createSign } from 'node:crypto';
@@ -66,6 +67,18 @@ import { appendFileSync } from 'node:fs';
 import { githubApiHeaders } from '../lib/githubApiHeaders.mjs';
 
 const API = 'https://api.github.com';
+const DEFAULT_MINT_APP_TOKEN_TIMEOUT_MS = 15_000;
+const MAX_MINT_APP_TOKEN_TIMEOUT_MS = 120_000;
+
+function boundedTimeoutMs(value) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric) || numeric <= 0) return DEFAULT_MINT_APP_TOKEN_TIMEOUT_MS;
+  return Math.min(Math.max(1, numeric), MAX_MINT_APP_TOKEN_TIMEOUT_MS);
+}
+
+export const MINT_APP_TOKEN_TIMEOUT_MS = boundedTimeoutMs(
+  process.env.MINT_APP_TOKEN_TIMEOUT_MS || DEFAULT_MINT_APP_TOKEN_TIMEOUT_MS,
+);
 
 /**
  * Build a signed RS256 JWT for GitHub App auth (10-min window, 60s clock-skew).
@@ -87,13 +100,55 @@ export function buildAppJwt(appId, privateKeyPem, nowSec) {
   return `${header}.${payload}.${sig}`;
 }
 
-async function ghJson(path, { token, method = 'GET', body } = {}) {
-  const res = await fetch(`${API}${path}`, {
-    method,
-    headers: githubApiHeaders(token, { 'User-Agent': 'mint-app-token' }),
-    body: body ? JSON.stringify(body) : undefined,
+export async function ghJson(path, {
+  token,
+  method = 'GET',
+  body,
+  fetchImpl = globalThis.fetch,
+  timeoutMs = MINT_APP_TOKEN_TIMEOUT_MS,
+} = {}) {
+  const effectiveTimeoutMs = boundedTimeoutMs(timeoutMs);
+  const controller = new AbortController();
+  let timedOut = false;
+  let timer;
+  const timeoutError = () => {
+    const error = new Error(`GitHub API ${method} ${path} timed out after ${effectiveTimeoutMs}ms`);
+    error.name = 'TimeoutError';
+    error.code = 'MINT_APP_TOKEN_TIMEOUT';
+    return error;
+  };
+  const deadline = new Promise((_, reject) => {
+    timer = setTimeout(() => {
+      timedOut = true;
+      controller.abort();
+      reject(timeoutError());
+    }, effectiveTimeoutMs);
   });
-  return { status: res.status, body: await res.json().catch(() => null) };
+  try {
+    const res = await Promise.race([
+      fetchImpl(`${API}${path}`, {
+        method,
+        headers: githubApiHeaders(token, { 'User-Agent': 'mint-app-token' }),
+        body: body ? JSON.stringify(body) : undefined,
+        signal: controller.signal,
+      }),
+      deadline,
+    ]);
+    let responseBody;
+    try {
+      responseBody = await Promise.race([res.json(), deadline]);
+    } catch (error) {
+      if (timedOut) throw timeoutError();
+      responseBody = null;
+    }
+    return { status: res.status, body: responseBody };
+  } catch (error) {
+    if (timedOut) throw timeoutError();
+    throw error;
+  } finally {
+    clearTimeout(timer);
+    controller.abort();
+  }
 }
 
 /**
