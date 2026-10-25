@@ -3550,6 +3550,13 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /install -m 0755 "\$edge_candidate_source" "\$edge_candidate_target"/);
   assert.match(edgeCandidate, /r2-edge-release-commit/);
   assert.match(edgeCandidate, /budget_seconds.*\^\[0-9\]\+\$/);
+  assert.match(edgeCandidate, /canonical_commit\(\)/);
+  assert.match(edgeCandidate, /git rev-parse --verify "\$\{1\}\^\{commit\}"/);
+  assert.match(
+    edgeCandidate,
+    /resolved_expected=.*canonical_commit[\s\S]*resolved_edge.*resolved_expected/,
+    'edge, expected e current devono essere confrontati dopo la canonicalizzazione',
+  );
   assert.match(edgeCandidate, /remaining_budget/);
   assert.match(
     edgeCandidate,

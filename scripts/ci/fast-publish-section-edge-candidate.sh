@@ -18,6 +18,13 @@ if [ "$budget_seconds" -le 0 ] || ! command -v timeout >/dev/null 2>&1; then
   exit 1
 fi
 
+canonical_commit() {
+  git rev-parse --verify "${1}^{commit}" 2>/dev/null || true
+}
+
+current_commit="$(canonical_commit "$current_commit")"
+[ -n "$current_commit" ] || exit 1
+
 started_at="$(date +%s)"
 remaining_budget() {
   local now elapsed remaining
@@ -39,17 +46,27 @@ edge_commit="$(
 if ! [[ "$edge_commit" =~ ^[a-f0-9]{7,40}$ ]]; then
   exit 1
 fi
-[ "$edge_commit" != "$expected_commit" ] || exit 1
-[ "$edge_commit" != "$current_commit" ] || exit 1
 
-resolved_edge="$(git rev-parse "${edge_commit}^{commit}" 2>/dev/null || true)"
+resolved_edge="$(canonical_commit "$edge_commit")"
 if [ -z "$resolved_edge" ]; then
   fetch_budget="$(remaining_budget)" || exit 1
   timeout --signal=TERM --kill-after=1s "${fetch_budget}s" \
     git fetch --no-tags --depth=1 origin "$edge_commit" >/dev/null 2>&1 || exit 1
-  resolved_edge="$(git rev-parse "${edge_commit}^{commit}" 2>/dev/null || true)"
+  resolved_edge="$(canonical_commit "$edge_commit")"
 fi
 [ -n "$resolved_edge" ] || exit 1
+
+resolved_expected="$(canonical_commit "$expected_commit")"
+if [ -z "$resolved_expected" ]; then
+  fetch_budget="$(remaining_budget)" || exit 1
+  timeout --signal=TERM --kill-after=1s "${fetch_budget}s" \
+    git fetch --no-tags --depth=1 origin "$expected_commit" >/dev/null 2>&1 || exit 1
+  resolved_expected="$(canonical_commit "$expected_commit")"
+fi
+[ -n "$resolved_expected" ] || exit 1
+[ "$resolved_edge" != "$resolved_expected" ] || exit 1
+[ "$resolved_edge" != "$current_commit" ] || exit 1
+
 if ! git merge-base --is-ancestor "$resolved_edge" "$current_commit"; then
   # Il fetch depth=1 dell'edge e quello della HEAD corrente producono due
   # radici shallow disconnesse. Approfondiamo entrambe fino alla data dell'edge
