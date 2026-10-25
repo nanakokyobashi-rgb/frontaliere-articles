@@ -16,6 +16,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { createHash, createHmac, randomUUID } from 'node:crypto';
+import { isNonNegativeSafeInteger } from './safe-lease-timestamp.mjs';
 export const ARTICLE_SECTIONS = Object.freeze(['frontaliere', 'svizzera']);
 export const LOCK_KEY_PREFIX = 'internal/ci/article-chunk-locks';
 export const LOCK_LEASE_MS = 30 * 60 * 1000;
@@ -49,12 +50,8 @@ function nonNegativeDuration(value, name) {
   return value;
 }
 
-function isSafeTimestamp(value) {
-  return Number.isSafeInteger(value) && value >= 0;
-}
-
 function safeTimestamp(value, name) {
-  if (!isSafeTimestamp(value)) {
+  if (!isNonNegativeSafeInteger(value)) {
     throw new Error(`[r2-section-lock] ${name} must be a safe non-negative integer timestamp`);
   }
   return value;
@@ -91,8 +88,8 @@ export function isLockPayload(value) {
       && typeof value.owner === 'string'
       && value.owner.length > 0
       && ARTICLE_SECTIONS.includes(value.section)
-      && isSafeTimestamp(value.acquiredAt)
-      && isSafeTimestamp(value.expiresAt)
+      && isNonNegativeSafeInteger(value.acquiredAt)
+      && isNonNegativeSafeInteger(value.expiresAt)
       && value.expiresAt > value.acquiredAt
       && (value.leaseId === undefined
         || (typeof value.leaseId === 'string' && value.leaseId.length > 0)),

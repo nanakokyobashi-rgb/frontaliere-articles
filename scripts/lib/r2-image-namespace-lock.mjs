@@ -2,6 +2,7 @@
 import { randomUUID } from 'node:crypto';
 import { isInvokedDirectly } from './is-invoked-directly.mjs';
 import { createR2Request, normalizeS3MatchEtag } from './r2-section-lock.mjs';
+import { isNonNegativeSafeInteger } from './safe-lease-timestamp.mjs';
 
 export const IMAGE_NAMESPACES = Object.freeze(['blog', 'places']);
 export const IMAGE_LEASE_PROTOCOL_VERSION = 1;
@@ -37,10 +38,6 @@ function positiveDuration(value, name) {
     throw new Error(`[r2-image-namespace-lock] ${name} must be a positive duration`);
   }
   return value;
-}
-
-function isNonNegativeSafeInteger(value) {
-  return Number.isSafeInteger(value) && value >= 0;
 }
 
 function safeTimestamp(value, name) {
