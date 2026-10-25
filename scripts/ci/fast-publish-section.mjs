@@ -86,6 +86,7 @@ const SHARED_R2_REFRESH_PATHS = new Set([
   'scripts/lib/r2-image-lease-process.sh',
   'scripts/lib/r2-image-namespace-lock.mjs',
   'scripts/lib/r2-section-lock.mjs',
+  'scripts/lib/safe-lease-timestamp.mjs',
   'scripts/lib/is-invoked-directly.mjs',
   'scripts/lib/npm-ci-retry.sh',
   'scripts/lib/parse-positive-num.mjs',
