@@ -128,3 +128,25 @@ test('i gemelli del guard usano listing completi, stati completi e fail-closed',
       `${label}: filtro status troncato trovato`);
   }
 });
+
+test('i due backfill mantengono lo stesso contratto di isolamento per shard', () => {
+  const workflowGuards = [workflow, republishWorkflow].map((source) => {
+    const start = source.indexOf('          active_runs_for_shard() {');
+    const end = source.indexOf('\n\n          # Tetto assoluto', start);
+    assert.ok(start >= 0 && end > start, 'guard per-shard non riconoscibile');
+    return source.slice(start, end);
+  });
+
+  for (const guard of workflowGuards) {
+    assert.match(guard, /\.name == "resolve"/,
+      'una run ancora nel resolve deve bloccare in modo conservativo');
+    assert.match(guard, /publish \(shard, " \+ \$shard \+ "\)/,
+      'il job publish deve essere confrontato con lo shard richiesto');
+    assert.match(guard, /publish-other"\) then "free"/,
+      'un publish su uno shard diverso non deve consumare il backfill');
+    assert.match(guard, /unknown\|no-active-job/,
+      'un payload senza stato interpretabile deve restare fail-closed');
+    assert.doesNotMatch(guard, /active_runs\(\)/,
+      'il guard non deve tornare a contare globalmente il workflow');
+  }
+});
