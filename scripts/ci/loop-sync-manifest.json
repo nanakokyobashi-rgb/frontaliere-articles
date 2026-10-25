@@ -1810,8 +1810,8 @@
       "mode": "adapted",
       "reason": "NON una copia: il test del sito e' ora riallineato all'algoritmo ATTUALE di create-article.mjs (0.72/adattivo/0.62/0.55, condizioni composte e tokenizer condiviso it-text-similarity), mentre qui la suite resta adattata a node:test, expect-shim e alle entita' distintive del corpus. Entrambi i test mantengono fixture e drift guard coerenti senza introdurre un import cross-repo.",
       "baseline": {
-        "site": "5df0e90a55cd081e",
-        "corpus": "786bb55ced34ab7d",
+        "site": "fc89661ad9825c4b",
+        "corpus": "5ff23908a70967a8",
         "alignedAt": "2026-10-25"
       }
     },
