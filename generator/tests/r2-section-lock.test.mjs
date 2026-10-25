@@ -1,7 +1,12 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
-import { createR2Request } from '../../scripts/lib/r2-section-lock.mjs';
+import {
+  acquireSectionLock,
+  createR2Request,
+  isLockPayload,
+  renewSectionLock,
+} from '../../scripts/lib/r2-section-lock.mjs';
 
 const env = {
   R2_S3_ENDPOINT: 'https://account.r2.cloudflarestorage.com',
@@ -92,4 +97,70 @@ test('lowercase GET keeps a successful response body readable', async () => {
   assert.equal(captured.init.method, 'GET');
   assert.equal(await response.text(), '{"ok":true}');
   assert.equal(cancelled, false);
+});
+
+test('lock payload timestamps are non-negative safe integers', () => {
+  const valid = {
+    owner: 'run-1',
+    section: 'frontaliere',
+    acquiredAt: 0,
+    expiresAt: 1,
+  };
+
+  assert.equal(isLockPayload(valid), true);
+  for (const [name, value] of [
+    ['negative acquiredAt', { ...valid, acquiredAt: -1 }],
+    ['fractional acquiredAt', { ...valid, acquiredAt: 0.5 }],
+    ['unsafe expiresAt', { ...valid, expiresAt: Number.MAX_SAFE_INTEGER + 1 }],
+    ['negative expiresAt', { ...valid, expiresAt: -1 }],
+    ['infinite expiresAt', { ...valid, expiresAt: Number.POSITIVE_INFINITY }],
+  ]) {
+    assert.equal(isLockPayload(value), false, name);
+  }
+});
+
+test('acquire and renew reject clocks that cannot produce safe timestamps', async () => {
+  const request = async () => {
+    throw new Error('request must not run');
+  };
+
+  await assert.rejects(
+    () => acquireSectionLock('frontaliere', { request, now: () => 0.5 }),
+    /acquiredAt must be a non-negative safe integer timestamp/u,
+  );
+  await assert.rejects(
+    () => acquireSectionLock('frontaliere', {
+      request,
+      now: () => Number.MAX_SAFE_INTEGER,
+      leaseMs: 2,
+    }),
+    /expiresAt must be a non-negative safe integer timestamp/u,
+  );
+
+  const current = {
+    owner: 'run-1',
+    leaseId: 'lease-1',
+    section: 'frontaliere',
+    acquiredAt: 1,
+    expiresAt: 2,
+  };
+  const renewRequest = async ({ method }) => {
+    if (method === 'GET') {
+      return {
+        status: 200,
+        headers: { etag: '"strong"' },
+        text: async () => JSON.stringify(current),
+      };
+    }
+    throw new Error('renew PUT must not run');
+  };
+  await assert.rejects(
+    () => renewSectionLock('frontaliere', {
+      owner: current.owner,
+      leaseId: current.leaseId,
+      request: renewRequest,
+      now: () => -1,
+    }),
+    /acquiredAt must be a non-negative safe integer timestamp/u,
+  );
 });
