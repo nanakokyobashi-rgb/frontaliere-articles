@@ -5884,6 +5884,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/canton-hub-published-route.mjs",
+      "mode": "corpus-only",
+      "reason": "Predicato del verificatore dei route hub intenzionalmente noindex: riconosce il marker di farmacia, il canonical self-referencing e `robots=noindex,follow` prima di accettare una destinazione pubblicata senza sitemap. E' una guardia del verificatore corpus e non ha un gemello operativo nel sito.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-25"
+      }
+    },
+    {
       "path": "generator/scripts/lib/blog-image-policy.mjs",
       "mode": "corpus-only",
       "reason": "Policy condivisa per gli hero WebP degli articoli: dimensioni 1200x675, target sotto 200 KiB e quality ladder comune a `create-article.mjs`, `publish-journalist-article.mjs` e allo script di manutenzione. Il sito non esegue piu' questi producer dopo il cutover del generatore e non possiede un gemello operativo di questo modulo; la policy resta quindi nel corpus, dove vengono creati e pubblicati gli asset.",
