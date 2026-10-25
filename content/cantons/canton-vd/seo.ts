@@ -972,6 +972,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cantiere-stazione-morges-2026': {
+    title: 'Cantiere nuovo edificio viaggiatori stazione di Morges da dicembre 2026',
+    description: 'A dicembre 2026 partono i lavori dei CFF Il cantiere occuperà gran parte della piazza Fermate bus regionali e posti taxi restano L\'accesso',
+    keywords: 'frontalieri, ticino, svizzera, italia, cantiere, nuovo, edificio, viaggiatori',
+    ogTitle: 'Cantiere stazione Morges da dicembre 2026',
+    ogDescription: 'A dicembre 2026 partono i lavori dei CFF Il cantiere occuperà gran parte della piazza Fermate bus regionali e posti taxi restano L\'accesso ai marciapiedi resta',
+    canonicalPath: '/articoli-vaud/cantiere-stazione-morges-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cantiere nuovo edificio viaggiatori stazione di Morges da dicembre 2026",
+      "description": "A dicembre 2026 partono i lavori dei CFF Il cantiere occuperà gran parte della piazza Fermate bus regionali e posti taxi restano L'accesso",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-cantiere-stazione-morges-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-25T11:58:21+00:00",
+      "dateModified": "2026-10-25T11:58:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vaud/cantiere-stazione-morges-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

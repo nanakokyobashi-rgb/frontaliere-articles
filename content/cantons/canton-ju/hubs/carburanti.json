@@ -4,14 +4,14 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "1997f847d049593826cf46e72fcd6823b28409210b58502c185593c696e8b078",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "5388a88f528ff3c73838fdb102f6f1d372ba6fec0f6ce31a27b65803804ba7ce",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-22T12:21:38.892Z",
+      "updatedAt": "2026-10-24T11:32:51.939Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-29T10:31:49.000Z"
+      "carryUntilAt": "2026-10-31T11:09:00.000Z"
     }
   ],
   "locales": {
@@ -54,23 +54,29 @@
             },
             {
               "label": "Benzina 95 — Francia",
-              "value": "2,239 EUR/l",
-              "detail": "media regionale: minimo 1,990 EUR/l, 143 stazioni rilevate",
-              "date": "2026-10-22T10:31:49.000Z"
+              "value": "2,220 EUR/l",
+              "detail": "media regionale: minimo 1,990 EUR/l, 142 stazioni rilevate",
+              "date": "2026-10-24T11:09:00.000Z"
             },
             {
               "label": "Diesel — Francia",
-              "value": "2,425 EUR/l",
-              "detail": "media regionale: minimo 2,250 EUR/l, 154 stazioni rilevate",
-              "date": "2026-10-22T11:29:48.000Z"
+              "value": "2,426 EUR/l",
+              "detail": "media regionale: minimo 2,250 EUR/l, 150 stazioni rilevate",
+              "date": "2026-10-24T11:09:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Giura aumenta sussidi per famiglie a basso reddito",
+          "url": "/articoli-giura/giura-aumento-sussidi-famiglie/",
+          "excerpt": "Il massimale del supplemento passa da 300 a 330 CHF al mese per genitore per famiglie con RDU inferiore a 18'000 CHF, decorrenza 2027.",
+          "date": "2026-10-24T18:24:32.255Z"
+        },
         {
           "title": "Ritardo cantiere Stockmar: rientro alunni a gennaio 2028",
           "url": "/articoli-giura/stockmar-ritardo-cantiere-2027/",
@@ -94,12 +100,6 @@
           "url": "/articoli-giura/fondo-clima-giura-2028/",
           "excerpt": "CHF 6,7 milioni annui dal 2028",
           "date": "2026-10-08T10:13:59.862Z"
-        },
-        {
-          "title": "Disoccupazione in Giura scende al 4,2% a settembre 2026",
-          "url": "/articoli-giura/disoccupazione-giura-settembre-2026/",
-          "excerpt": "A fine settembre 2026 il Giura registra 2.573 iscritti all'ORP, di cui 1.663 disoccupati e 910 richiedenti non disoccupati; tasso al 4,2%, in calo di 0,1 punti su agosto e 0,9 su anno.",
-          "date": "2026-10-07T08:42:08.212Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "JU",
@@ -153,23 +153,29 @@
             },
             {
               "label": "Petrol 95 — France",
-              "value": "2.239 EUR/l",
-              "detail": "regional average: lowest 1.990 EUR/l, 143 stations surveyed",
-              "date": "2026-10-22T10:31:49.000Z"
+              "value": "2.220 EUR/l",
+              "detail": "regional average: lowest 1.990 EUR/l, 142 stations surveyed",
+              "date": "2026-10-24T11:09:00.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2.425 EUR/l",
-              "detail": "regional average: lowest 2.250 EUR/l, 154 stations surveyed",
-              "date": "2026-10-22T11:29:48.000Z"
+              "value": "2.426 EUR/l",
+              "detail": "regional average: lowest 2.250 EUR/l, 150 stations surveyed",
+              "date": "2026-10-24T11:09:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Jura increases subsidies for low-income families",
+          "url": "/en/jura-articles/jura-subsidy-increase-low-income/",
+          "excerpt": "The maximum supplement increases from 300 to 330 CHF per month per parent for families with RDU below 18'000 CHF, effective 2027.",
+          "date": "2026-10-24T18:24:32.255Z"
+        },
         {
           "title": "Stockmar site delay: return of students in January 2028",
           "url": "/en/jura-articles/stockmar-construction-delay-2027/",
@@ -192,12 +198,6 @@
           "title": "Jura, climate fund of 6,7 million annually from 2028",
           "url": "/en/jura-articles/jura-climate-fund-2028/",
           "date": "2026-10-08T10:13:59.862Z"
-        },
-        {
-          "title": "Unemployment in Jura falls to 4,2% in September 2026",
-          "url": "/en/jura-articles/unemployment-in-jura-falls-to-4-2-in-september-2026/",
-          "excerpt": "At the end of September 2026, the Jura recorded 2.573 people registered with the ORP, including 1.663 unemployed and 910 non-unemployed job seekers; rate at 4,2%, down 0,1 points from August and 0,9 year-on-year.",
-          "date": "2026-10-07T08:42:08.212Z"
         }
       ],
       "links": [
@@ -210,7 +210,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "JU",
@@ -251,23 +251,29 @@
             },
             {
               "label": "Benzin 95 — Frankreich",
-              "value": "2.239 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 143 erfasste Tankstellen",
-              "date": "2026-10-22T10:31:49.000Z"
+              "value": "2.220 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.990 EUR/l, 142 erfasste Tankstellen",
+              "date": "2026-10-24T11:09:00.000Z"
             },
             {
               "label": "Diesel — Frankreich",
-              "value": "2.425 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.250 EUR/l, 154 erfasste Tankstellen",
-              "date": "2026-10-22T11:29:48.000Z"
+              "value": "2.426 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.250 EUR/l, 150 erfasste Tankstellen",
+              "date": "2026-10-24T11:09:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Jura erhöht die Zuschüsse für Familien mit niedrigem Einkommen",
+          "url": "/de/jura-artikel/jura-subvention-erhoehung-familien/",
+          "excerpt": "Der Höchstbetrag des Zuschlags steigt für Familien mit einem RDU unter 18'000 CHF ab 2027 von 300 auf 330 CHF pro Monat und Elternteil.",
+          "date": "2026-10-24T18:24:32.255Z"
+        },
         {
           "title": "Baustellenverzögerung Stockmar: Rückkehr der Schüler im Januar 2028",
           "url": "/de/jura-artikel/stockmar-bauverzoegerung-2027/",
@@ -290,12 +296,6 @@
           "title": "Jura, Klimafonds von 6,7 Millionen jährlich ab 2028",
           "url": "/de/jura-artikel/jura-klimafonds-2028/",
           "date": "2026-10-08T10:13:59.862Z"
-        },
-        {
-          "title": "Arbeitslosigkeit im Jura sinkt im September 2026 auf 4,2%",
-          "url": "/de/jura-artikel/arbeitslosigkeit-im-jura-sinkt-im-september-2026-auf-4-2/",
-          "excerpt": "Ende September 2026 verzeichnet der Jura 2.573 beim ORP registrierte Personen, davon 1.663 Arbeitslose und 910 nicht arbeitslose Stellensuchende; die Quote liegt bei 4,2% und ist gegenüber August um 0,1 Punkte sowie…",
-          "date": "2026-10-07T08:42:08.212Z"
         }
       ],
       "links": [
@@ -308,7 +308,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "JU",
@@ -349,23 +349,29 @@
             },
             {
               "label": "Essence 95 — France",
-              "value": "2,239 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 143 stations relevées",
-              "date": "2026-10-22T10:31:49.000Z"
+              "value": "2,220 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,990 EUR/l, 142 stations relevées",
+              "date": "2026-10-24T11:09:00.000Z"
             },
             {
               "label": "Diesel — France",
-              "value": "2,425 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,250 EUR/l, 154 stations relevées",
-              "date": "2026-10-22T11:29:48.000Z"
+              "value": "2,426 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,250 EUR/l, 150 stations relevées",
+              "date": "2026-10-24T11:09:00.000Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); prix-carburants.gouv.fr — flux instantané (Licence Ouverte)",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Le Jura augmente les aides pour les familles à faible revenu",
+          "url": "/fr/articles-jura/jura-augmentation-subventions-familles/",
+          "excerpt": "Le plafond du supplément passe de 300 à 330 CHF par mois et par parent pour les familles dont le RDU est inférieur à 18'000 CHF, à compter de 2027.",
+          "date": "2026-10-24T18:24:32.255Z"
+        },
         {
           "title": "Retard chantier Stockmar : rentrée des élèves en janvier 2028",
           "url": "/fr/articles-jura/stockmar-retard-chantier-2027/",
@@ -389,12 +395,6 @@
           "url": "/fr/articles-jura/fonds-climat-jura-2028/",
           "excerpt": "CHF 6,7 millions par an dès 2028",
           "date": "2026-10-08T10:13:59.862Z"
-        },
-        {
-          "title": "Le chômage dans le Jura baisse à 4,2% en septembre 2026",
-          "url": "/fr/articles-jura/le-chomage-dans-le-jura-baisse-a-4-2-en-septembre-2026/",
-          "excerpt": "Fin septembre 2026, le Jura compte 2.573 inscrits à l'ORP, dont 1.663 chômeurs et 910 demandeurs non chômeurs ; taux à 4,2%, en baisse de 0,1 point par rapport à août et de 0,9 sur un an.",
-          "date": "2026-10-07T08:42:08.212Z"
         }
       ],
       "links": [
@@ -407,7 +407,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

@@ -660,6 +660,84 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sedi-rav-lavoratori-tg': {
+    title: 'Sedi RAV e servizi per datori di lavoro in Canton Turgovia',
+    description: 'Informazioni sulle sedi RAV (Amriswil, Frauenfeld, Kreuzlingen), pubblicazione gratuita vacancy su arbeit.swiss e consulenza per datori di lavoro',
+    keywords: 'frontalieri, ticino, svizzera, italia, sedi, servizi, datori, lavoro',
+    ogTitle: 'Sedi RAV e servizi datori di lavoro Turgovia',
+    ogDescription: 'Scopri le sedi RAV ad Amriswil, Frauenfeld e Kreuzlingen e come pubblicare offerte di lavoro gratuitamente su arbeit.swiss per le imprese del Canton Turgovia.',
+    canonicalPath: '/articoli-turgovia/sedi-rav-lavoratori-tg/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sedi RAV e servizi per datori di lavoro in Canton Turgovia",
+      "description": "Informazioni sulle sedi RAV (Amriswil, Frauenfeld, Kreuzlingen), pubblicazione gratuita vacancy su arbeit.swiss e consulenza per datori di lavoro",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sedi-rav-lavoratori-tg.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-25T12:02:52+00:00",
+      "dateModified": "2026-10-25T12:02:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/sedi-rav-lavoratori-tg/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-imprenditori-cantone-turgovia-sostegno': {
+    title: 'Imprenditori nel Canton Turgovia: condizioni quadro attrattive',
+    description: 'Informazioni sul supporto per imprenditrici e imprenditori nel Canton Turgovia: condizioni quadro attrattive, permessi, immobili e collaborazione',
+    keywords: 'frontalieri, ticino, svizzera, italia, imprenditori, canton, turgovia, condizioni',
+    ogTitle: 'Imprenditori Canton Turgovia: condizioni quadro attrattive',
+    ogDescription: 'Il Canton Turgovia supporta imprenditrici e imprenditori con accompagnamento, informazioni e consulenza per un insediamento attrattivo, coprendo immobili e permessi.',
+    canonicalPath: '/articoli-turgovia/imprenditori-cantone-turgovia-sostegno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Imprenditori nel Canton Turgovia: condizioni quadro attrattive",
+      "description": "Informazioni sul supporto per imprenditrici e imprenditori nel Canton Turgovia: condizioni quadro attrattive, permessi, immobili e collaborazione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-imprenditori-cantone-turgovia-sostegno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-25T12:54:45+00:00",
+      "dateModified": "2026-10-25T12:54:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-turgovia/imprenditori-cantone-turgovia-sostegno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

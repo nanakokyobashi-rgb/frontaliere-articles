@@ -54,6 +54,12 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.turgovia-modifica-piano-direttore-2027.title': 'Thurgau: amendment to the structure plan for business locations',
     'blog.article.turgovia-modifica-piano-direttore-2027.excerpt': 'The Canton of Thurgau launches the consultation on the revision of the structure plan for the development of commerce and industry.',
     'blog.article.turgovia-modifica-piano-direttore-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sedi-rav-lavoratori-tg.title': 'RAV offices and services for employers in the Canton of Thurgau',
+    'blog.article.sedi-rav-lavoratori-tg.excerpt': 'The RAV offices are in Amriswil, Frauenfeld and Kreuzlingen; vacancies are posted free of charge on arbeit.swiss.',
+    'blog.article.sedi-rav-lavoratori-tg.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.imprenditori-cantone-turgovia-sostegno.title': 'Entrepreneurs in the Canton of Thurgau: attractive framework conditions',
+    'blog.article.imprenditori-cantone-turgovia-sostegno.excerpt': 'The canton supports entrepreneurs in creating attractive framework conditions, covering real estate, permits, and administrative contacts.',
+    'blog.article.imprenditori-cantone-turgovia-sostegno.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonTgEn;

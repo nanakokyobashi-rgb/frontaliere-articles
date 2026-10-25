@@ -53,11 +53,11 @@ import {
 // that it remains aligned with the SiteShell contract.
 import {
   SEO_DESCRIPTION_MAX,
+  RSS_DESCRIPTION_MAX_CHARS,
   SEO_OG_DESCRIPTION_MAX,
   assertSeoDescriptionMinimum,
   assertHistoricalSeoDescriptionsMigrated,
 } from '../generator/scripts/lib/seo-description-contract.mjs';
-const RSS_DESCRIPTION_MAX_CHARS = SEO_DESCRIPTION_MAX;
 const repairRssSnippet = (text) => {
   const repaired = repairSerpSnippetBase(text);
   const bounded = truncateToClause(repaired, RSS_DESCRIPTION_MAX_CHARS);
@@ -88,6 +88,7 @@ const repairSocialSnippet = (text) => {
   }
   return bounded;
 };
+assertRssProjectorContract(repairRssSnippet);
 // The Google News window, from the vendored module (issue #4974 item 3, §5.3).
 // Since 2026-10-24 the news emitter applies ONLY the 48h window
 // (`isWithinNewsWindow`), not the topic whitelist the module also carries: see
@@ -157,6 +158,7 @@ import {
   edgeRegistryPublishable,
   effectiveStatuses,
   familySourceMissing,
+  familySourceTransitionState,
   latestArticleDate,
   loadDeclaredRegistry,
   registryRetiredSlugs,
@@ -176,6 +178,7 @@ import { findShadowedTickerArticles } from './lib/ticker-shadow-check.mjs';
 // il markup, non il testo: una description RSS in CDATA che cita `<item>`
 // gonfiava identicamente il dichiarato e il ri-derivato (vedi il suo header).
 import { countXmlTags } from './lib/count-xml-tags.mjs';
+import { assertRssProjectorContract } from './lib/rss-projector-contract.mjs';
 import {
   buildPlateAuctionEditorial,
   fetchPlateAuctionEditorialInput,
@@ -333,17 +336,31 @@ const PUBLIC_API_FAMILIES = activeApiFamilies(PUBLIC_API_SECTIONS);
 // registro) e' un rifiuto: trattarlo come vuoto pubblicherebbe una famiglia
 // troncata con registro, sitemap e counts verdi. Un file presente ma
 // illeggibile resta un errore.
-const isNewFamilySection = (section) =>
-  section.api.family !== null && !fs.existsSync(path.join(ROOT, section.registryFile));
-const familyFileMissing = (section, rel) =>
-  section.api.family !== null &&
-  familySourceMissing({
-    section: section.section,
-    rel,
-    registryRel: section.registryFile,
-    present: fs.existsSync(path.join(ROOT, rel)),
-    registryPresent: !isNewFamilySection(section),
+const familySourceState = (section) => {
+  if (section.api.family === null) return 'ready';
+  const state = familySourceTransitionState({
+    registryPresent: fs.existsSync(path.join(ROOT, section.registryFile)),
+    slugPresent: fs.existsSync(path.join(ROOT, section.slugFile)),
+    metaPresent: LOCALES.every((locale) => fs.existsSync(path.join(ROOT, section.metaFile(locale)))),
   });
+  if (state === 'partial') {
+    throw new Error(`${section.section}: family sources are in a partial transition — refusing to publish`);
+  }
+  return state;
+};
+const isNewFamilySection = (section) =>
+  section.api.family !== null && familySourceState(section) === 'new';
+const familyFileMissing = (section, rel) =>
+  section.api.family !== null && (() => {
+    const state = familySourceState(section);
+    return familySourceMissing({
+      section: section.section,
+      rel,
+      registryRel: section.registryFile,
+      present: fs.existsSync(path.join(ROOT, rel)),
+      registryPresent: state !== 'new',
+    });
+  })();
 const SECTION_REGISTRIES = {};
 for (const section of PUBLISHED_API_SECTIONS) {
   if (isNewFamilySection(section)) {

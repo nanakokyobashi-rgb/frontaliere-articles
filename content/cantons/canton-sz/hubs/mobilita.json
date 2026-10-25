@@ -4,12 +4,12 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "mobilita",
-  "updatedAt": "2026-10-23T10:42:39.932Z",
-  "contentHash": "73367980964bad64b935b97c05740fd41124e35d86430cf5bed4a5575574a0e3",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "2703b4a84090871028b9bbff76bfd4433a55ac9a0a1ef216a493a92246b6835c",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-23T05:26:03.621Z",
+      "updatedAt": "2026-10-25T05:23:25.975Z",
       "keyFacts": 2
     }
   ],
@@ -22,13 +22,13 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "1",
-          "note": "segnalazioni aggiornate: 23 ottobre 2026"
+          "value": "2",
+          "note": "segnalazioni aggiornate: 25 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "3",
-          "note": "segnalazioni aggiornate: 23 ottobre 2026"
+          "note": "segnalazioni aggiornate: 25 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -44,10 +44,10 @@
               "date": "2026-09-21T06:53:00.000Z"
             },
             {
-              "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Limitazione del traffico: corsie…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 23 ottobre 2026",
-              "date": "2026-10-05T07:00:00.000Z"
+              "label": "A4 Altdorf <-> Brunnen Svincolo autostradale Brunnen Süd Situazione: entrato-uscito chiusa cantiere, lunghezza [km] 0.12",
+              "value": "Chiusura",
+              "detail": "fine prevista: 4 febbraio 2027",
+              "date": "2026-10-23T12:31:00.000Z"
             },
             {
               "label": "A3 Zürich <-> Chur tra Galleria Galleria Entlisberg E Raccordo autostradale Diramazione Reichenburg Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1…",
@@ -60,10 +60,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 28 ottobre 2026",
               "date": "2026-10-15T05:26:00.000Z"
+            },
+            {
+              "label": "A4 Altdorf <-> Brunnen Svincolo autostradale Brunnen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 0.12 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 11 novembre 2026",
+              "date": "2026-10-23T08:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         }
       ],
       "curatedArticles": [
@@ -97,7 +103,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "SZ",
@@ -107,13 +113,13 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "1",
-          "note": "reports as of 23 October 2026"
+          "value": "2",
+          "note": "reports as of 25 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "3",
-          "note": "reports as of 23 October 2026"
+          "note": "reports as of 25 October 2026"
         }
       ],
       "dataBlocks": [
@@ -129,10 +135,10 @@
               "date": "2026-09-21T06:53:00.000Z"
             },
             {
-              "label": "A3 Chur -> Zürich tra Raccordo autostradale Diramazione Reichenburg E Svincolo autostradale Lachen Situazione: problemi di traffico cantiere, lunghezza [km] 0.6 Limitazione del traffico: corsie…",
-              "value": "Roadworks",
-              "detail": "until 23 October 2026",
-              "date": "2026-10-05T07:00:00.000Z"
+              "label": "A4 Altdorf <-> Brunnen Svincolo autostradale Brunnen Süd Situazione: entrato-uscito chiusa cantiere, lunghezza [km] 0.12",
+              "value": "Closure",
+              "detail": "until 4 February 2027",
+              "date": "2026-10-23T12:31:00.000Z"
             },
             {
               "label": "A3 Zürich <-> Chur tra Galleria Galleria Entlisberg E Raccordo autostradale Diramazione Reichenburg Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette Aggiunta 1…",
@@ -145,10 +151,16 @@
               "value": "Roadworks",
               "detail": "until 28 October 2026",
               "date": "2026-10-15T05:26:00.000Z"
+            },
+            {
+              "label": "A4 Altdorf <-> Brunnen Svincolo autostradale Brunnen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 0.12 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
+              "value": "Roadworks",
+              "detail": "until 11 November 2026",
+              "date": "2026-10-23T08:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         }
       ],
       "curatedArticles": [
@@ -182,7 +194,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "SZ",
@@ -192,13 +204,13 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "1",
-          "note": "Meldungen vom 23. Oktober 2026"
+          "value": "2",
+          "note": "Meldungen vom 25. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "3",
-          "note": "Meldungen vom 23. Oktober 2026"
+          "note": "Meldungen vom 25. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -214,10 +226,10 @@
               "date": "2026-09-21T06:53:00.000Z"
             },
             {
-              "label": "A3 Chur -> Zürich zwischen Autobahndreieck Verzweigung Reichenburg und Anschluss Lachen Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.6 Verkehrsführung: Fahrbahnverengung auf einen…",
-              "value": "Baustelle",
-              "detail": "bis 23. Oktober 2026",
-              "date": "2026-10-05T07:00:00.000Z"
+              "label": "A4 Altdorf <-> Brunnen Anschluss Brunnen-Süd Sachlage: Ein- und Ausfahrt gesperrt Baustelle, Länge [km] 0.12",
+              "value": "Sperrung",
+              "detail": "bis 4. Februar 2027",
+              "date": "2026-10-23T12:31:00.000Z"
             },
             {
               "label": "A3 Zürich <-> Chur zwischen Tunnel Entlisberg-Tunnel und Autobahndreieck Verzweigung Reichenburg Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung Zusatz 1: vorübergehende…",
@@ -230,10 +242,16 @@
               "value": "Baustelle",
               "detail": "bis 28. Oktober 2026",
               "date": "2026-10-15T05:26:00.000Z"
+            },
+            {
+              "label": "A4 Altdorf <-> Brunnen Anschluss Brunnen-Süd Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.12 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
+              "value": "Baustelle",
+              "detail": "bis 11. November 2026",
+              "date": "2026-10-23T08:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         }
       ],
       "curatedArticles": [
@@ -267,7 +285,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "SZ",
@@ -277,13 +295,13 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "1",
-          "note": "signalements au 23 octobre 2026"
+          "value": "2",
+          "note": "signalements au 25 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "3",
-          "note": "signalements au 23 octobre 2026"
+          "note": "signalements au 25 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -299,10 +317,10 @@
               "date": "2026-09-21T06:53:00.000Z"
             },
             {
-              "label": "A3 Coire -> Zurich entre Echangeur Echangeur de Reichenburg et Jonction autoroutière Lachen Situation: trafic perturbé travaux, longueur [km] 0.6 Gestion du trafic: rétrécissement des voies sur une…",
-              "value": "Chantier",
-              "detail": "jusqu’au 23 octobre 2026",
-              "date": "2026-10-05T07:00:00.000Z"
+              "label": "A4 Altdorf <-> Brunnen Jonction autoroutière Brunnen-Sud Situation: Entrée et sortie verrouillées travaux, longueur [km] 0.12",
+              "value": "Fermeture",
+              "detail": "jusqu’au 4 février 2027",
+              "date": "2026-10-23T12:31:00.000Z"
             },
             {
               "label": "A3 Zurich <-> Coire entre Tunnel Tunnel d'Entlisberg et Echangeur Echangeur de Reichenburg Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies Complément 1: limitation…",
@@ -315,10 +333,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 28 octobre 2026",
               "date": "2026-10-15T05:26:00.000Z"
+            },
+            {
+              "label": "A4 Altdorf <-> Brunnen Jonction autoroutière Brunnen-Sud Situation: trafic perturbé travaux, longueur [km] 0.12 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de…",
+              "value": "Chantier",
+              "detail": "jusqu’au 11 novembre 2026",
+              "date": "2026-10-23T08:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         }
       ],
       "curatedArticles": [
@@ -352,7 +376,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

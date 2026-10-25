@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/nidwalden-landrat-lehnt-neue-massnahmen-gegen-wohnungsnot-ab-art-1727995": {
-      "section": "canton-sz",
-      "ts": 1792716063504
-    },
-    "canton-sz::https://www.einsiedeln.ch/verwaltung/mitteilungen/aktuelle-mitteilungen?m=4563": {
-      "section": "canton-sz",
-      "ts": 1792717171590
-    },
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/buergenstockstrasse-tieferes-tempolimit-gefordert-art-1728183": {
       "section": "canton-sz",
       "ts": 1792767285192
@@ -27,6 +19,26 @@
     "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/bund-prueft-tempo-80-auf-schweizer-autobahnen-art-1728491": {
       "section": "canton-sz",
       "ts": 1792868843927
+    },
+    "canton-sz::https://www.einsiedeln.ch/verwaltung/mitteilungen/aktuelle-mitteilungen?m=4563": {
+      "section": "canton-sz",
+      "ts": 1792918693208
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/luzern-grosser-stadtrat-will-gratis-oev-fuer-kinder-art-1728321": {
+      "section": "canton-sz",
+      "ts": 1792918701010
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/nidwalden-fordert-bessere-datenvernetzung-fuer-den-verkehr-art-1728499": {
+      "section": "canton-sz",
+      "ts": 1792924341036
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/schwyz/altersforscher-fordert-jede-gemeinde-muss-fuenf-prozent-ihres-budgets-fuer-soziale-kontakte-ausgeben-art-1728359": {
+      "section": "canton-sz",
+      "ts": 1792924526998
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/luzern-diskutiert-ueber-kopftuch-in-der-volksschule-art-1728172": {
+      "section": "canton-sz",
+      "ts": 1792924535277
     }
   }
 }

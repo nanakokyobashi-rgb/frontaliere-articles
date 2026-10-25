@@ -281,4 +281,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'cantiere-stazione-morges-2026',
+ category: 'pratico',
+ date: '2026-10-25T11:58:21.529Z',
+ image: '/images/blog/article-cantiere-stazione-morges-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['VD'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

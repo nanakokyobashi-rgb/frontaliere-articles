@@ -4,14 +4,14 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-23T09:15:58.489Z",
-  "contentHash": "727e5c0f9a971668ac7078e82a4443dc9bd82a9a9b4d228ef6203578bc263510",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "6b828c5c9f8646beda64c7fc30dd63e0b3c2db427d4cecedb6d007414e768763",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-22T12:21:38.892Z",
+      "updatedAt": "2026-10-24T11:32:51.939Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-29T12:21:38.892Z"
+      "carryUntilAt": "2026-10-31T11:32:51.939Z"
     }
   ],
   "locales": {
@@ -54,64 +54,64 @@
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "2,219 EUR/l",
-              "detail": "media regionale: minimo 2,219 EUR/l, 3 stazioni rilevate",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,229 EUR/l",
+              "detail": "media regionale: minimo 2,229 EUR/l, 3 stazioni rilevate",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,322 EUR/l",
-              "detail": "media regionale: minimo 2,319 EUR/l, 3 stazioni rilevate",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,446 EUR/l",
+              "detail": "media regionale: minimo 2,439 EUR/l, 3 stazioni rilevate",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Benzina 95 — Austria",
-              "value": "1,794 EUR/l",
-              "detail": "media regionale: minimo 1,789 EUR/l, 11 stazioni rilevate",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "1,749 EUR/l",
+              "detail": "media regionale: minimo 1,719 EUR/l, 13 stazioni rilevate",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2,159 EUR/l",
-              "detail": "media regionale: minimo 2,100 EUR/l, 10 stazioni rilevate",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,131 EUR/l",
+              "detail": "media regionale: minimo 2,100 EUR/l, 17 stazioni rilevate",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Voto 29 novembre 2026: Stazione Wil e Allee per un interscambio sicuro",
+          "url": "/articoli-san-gallo/abstimmung-bahnhof-wil-allee/",
+          "excerpt": "Il credito lordo è di 63,662 milioni di franchi; i lavori sono previsti dal 2029 al 2033.",
+          "date": "2026-10-24T13:43:09.251Z"
+        },
+        {
+          "title": "11,6 milioni CHF per 89 progetti del Canton San Gallo",
+          "url": "/articoli-san-gallo/lotteriefonds-89-progetti-cantone/",
+          "excerpt": "Il Governo propone al Consiglio cantonale 89 progetti tra cultura, sociale e ambiente per 11,6 milioni di CHF, con decisione prevista in sessione invernale.",
+          "date": "2026-10-24T10:01:50.012Z"
+        },
+        {
+          "title": "Kolumbanstrasse ridisegnata: più verde e fermate bus senza barriere",
+          "url": "/articoli-san-gallo/kolumbanstrasse-nuova-velostrasse/",
+          "excerpt": "Il 23 ottobre 2026 è stata completata la nuova configurazione della Kolumbanstrasse, che ora include 700 metri di itinerario ciclabile prioritario.",
+          "date": "2026-10-24T09:05:50.183Z"
+        },
+        {
+          "title": "Abrogazione regolamento Stadtfonds e Steuerfuss 2026 approvato a Wil",
+          "url": "/articoli-san-gallo/stadtfonds-steuerfuss-wil/",
+          "excerpt": "Il Parlamento cittadino ha abrogato il regolamento Stadtfonds il 27 agosto 2026; lo Steuerfuss 2026 è fissato al 115 per cento con partecipazione del 48,34 per cento.",
+          "date": "2026-10-24T08:43:34.169Z"
+        },
+        {
           "title": "Wil: cancellate le sedute del 5 e 12 novembre 2026",
           "url": "/articoli-san-gallo/wil-sedute-novembre-2026/",
           "excerpt": "A Wil saltano le sedute del 5 e 12 novembre 2026.",
           "date": "2026-10-23T08:59:08.998Z"
-        },
-        {
-          "title": "San Gallo: terza canna Rosenberg e cifre contestate",
-          "url": "/articoli-san-gallo/san-gallo-autostrada-rosenberg-terza-canna/",
-          "excerpt": "Sostenitori chiedono ampliamento autostradale; pianificatore Hug-Di Lena definisce discutibili le basi numeriche.",
-          "date": "2026-10-23T04:27:56.026Z"
-        },
-        {
-          "title": "San Gallo rafforza protezione infrastrutture critiche",
-          "url": "/articoli-san-gallo/san-gallo-protezione-infrastrutture-critiche/",
-          "excerpt": "Il Governo di San Gallo rafforza la protezione delle infrastrutture critiche La strategia copre infrastrutture, processi e servizi La resilienza include",
-          "date": "2026-10-23T03:10:46.389Z"
-        },
-        {
-          "title": "SBB chiudono gli sportelli a St.Margrethen e Uznach",
-          "url": "/articoli-san-gallo/sbb-sportelli-st-margrethen-uznach/",
-          "excerpt": "Dall'inizio del 2027 le SBB puntano sul self-service a St.Margrethen e Uznach: il 3% dei biglietti è ancora venduto allo sportello.",
-          "date": "2026-10-23T00:23:33.274Z"
-        },
-        {
-          "title": "Wil: voto il 29 novembre 2026 sulla rete del gas",
-          "url": "/articoli-san-gallo/voto-rete-gas-wil-2026/",
-          "excerpt": "Voto sul fondo: 29 novembre 2026.",
-          "date": "2026-10-19T13:03:39.354Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-23T09:15:58.489Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "SG",
@@ -165,64 +165,64 @@
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "2.219 EUR/l",
-              "detail": "regional average: lowest 2.219 EUR/l, 3 stations surveyed",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.229 EUR/l",
+              "detail": "regional average: lowest 2.229 EUR/l, 3 stations surveyed",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.322 EUR/l",
-              "detail": "regional average: lowest 2.319 EUR/l, 3 stations surveyed",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.446 EUR/l",
+              "detail": "regional average: lowest 2.439 EUR/l, 3 stations surveyed",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Petrol 95 — Austria",
-              "value": "1.794 EUR/l",
-              "detail": "regional average: lowest 1.789 EUR/l, 11 stations surveyed",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "1.749 EUR/l",
+              "detail": "regional average: lowest 1.719 EUR/l, 13 stations surveyed",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Austria",
-              "value": "2.159 EUR/l",
-              "detail": "regional average: lowest 2.100 EUR/l, 10 stations surveyed",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.131 EUR/l",
+              "detail": "regional average: lowest 2.100 EUR/l, 17 stations surveyed",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Vote November 29, 2026: Wil Station and Allee for a safe interchange",
+          "url": "/en/st-gallen-articles/vote-november-29-2026-wil-station-and-allee-for-a-safe-interchange/",
+          "excerpt": "The gross credit amounts to 63,662 million francs; the work is scheduled from 2029 to 2033.",
+          "date": "2026-10-24T13:43:09.251Z"
+        },
+        {
+          "title": "11.6 million CHF for 89 projects in the Canton of St. Gallen",
+          "url": "/en/st-gallen-articles/lotteriefonds-89-projects-canton/",
+          "excerpt": "The Government is proposing 89 projects in culture, social affairs and the environment to the Cantonal Council, for 11,6 million CHF, with a decision expected during the winter session.",
+          "date": "2026-10-24T10:01:50.012Z"
+        },
+        {
+          "title": "Kolumbanstrasse redesigned: greener and barrier-free bus stops",
+          "url": "/en/st-gallen-articles/kolumbanstrasse-new-velostrasse/",
+          "excerpt": "On October 23, 2026, the new configuration of Kolumbanstrasse was completed, which now includes 700 meters of priority cycling route.",
+          "date": "2026-10-24T09:05:50.183Z"
+        },
+        {
+          "title": "Repeal of the Stadtfonds regulation and 2026 tax rate approved in Wil",
+          "url": "/en/st-gallen-articles/repeal-of-the-stadtfonds-regulation-and-2026-tax-rate-approved-in-wil/",
+          "excerpt": "The city parliament repealed the Stadtfonds regulation on August 27, 2026; the 2026 Steuerfuss is set at 115 percent with participation of 48,34 percent.",
+          "date": "2026-10-24T08:43:34.169Z"
+        },
+        {
           "title": "Wil: cancel the sessions on November 5 and 12, 2026",
           "url": "/en/st-gallen-articles/wil-parliament-sessions-cancelled/",
           "excerpt": "In Wil, the sessions on November 5 and 12, 2026, are canceled.",
           "date": "2026-10-23T08:59:08.998Z"
-        },
-        {
-          "title": "St. Gallen: third Rosenberg tube and disputed figures",
-          "url": "/en/st-gallen-articles/st-gallen-highway-rosenberg-third-tube/",
-          "excerpt": "Supporters call for highway expansion; planner Hug-Di Lena deems the numerical bases questionable.",
-          "date": "2026-10-23T04:27:56.026Z"
-        },
-        {
-          "title": "St. Gallen strengthens protection of critical infrastructure",
-          "url": "/en/st-gallen-articles/st-gallen-critical-infrastructure-protection/",
-          "excerpt": "The Government of St.",
-          "date": "2026-10-23T03:10:46.389Z"
-        },
-        {
-          "title": "SBB close the ticket offices in St.Margrethen and Uznach",
-          "url": "/en/st-gallen-articles/sbb-ticket-counters-st-margrethen-uznach/",
-          "excerpt": "From the beginning of 2027, SBB are focusing on self-service in St.Margrethen and Uznach: 3% of tickets are still sold at the counter.",
-          "date": "2026-10-23T00:23:33.274Z"
-        },
-        {
-          "title": "Wil: vote on the gas network on November 29, 2026",
-          "url": "/en/st-gallen-articles/gas-network-vote-wil-2026/",
-          "excerpt": "Vote on the fund: November 29, 2026.",
-          "date": "2026-10-19T13:03:39.354Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-23T09:15:58.489Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "SG",
@@ -276,64 +276,64 @@
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "2.219 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.219 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.229 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.229 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.322 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.319 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.446 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.439 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Benzin 95 — Österreich",
-              "value": "1.794 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 1.789 EUR/l, 11 erfasste Tankstellen",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "1.749 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 1.719 EUR/l, 13 erfasste Tankstellen",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Österreich",
-              "value": "2.159 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.100 EUR/l, 10 erfasste Tankstellen",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2.131 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.100 EUR/l, 17 erfasste Tankstellen",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Abstimmung 29.11.2026: Bahnhof Wil, Allee – sicherer Umstieg",
+          "url": "/de/st-gallen-artikel/abstimmung-29-11-2026-bahnhof-wil-allee-sicherer-umstieg/",
+          "excerpt": "Der Bruttokredit beträgt 63,662 Millionen Franken; die Arbeiten sind von 2029 bis 2033 vorgesehen.",
+          "date": "2026-10-24T13:43:09.251Z"
+        },
+        {
+          "title": "11,6 Millionen CHF für 89 Projekte des Kantons St. Gallen",
+          "url": "/de/st-gallen-artikel/lotteriefonds-89-projekte-kanton/",
+          "excerpt": "Die Regierung schlägt dem Kantonsrat 89 Projekte aus den Bereichen Kultur, Soziales und Umwelt für 11,6 Millionen CHF vor, wobei die Entscheidung für die Wintersession vorgesehen ist.",
+          "date": "2026-10-24T10:01:50.012Z"
+        },
+        {
+          "title": "Kolumbanstrasse neu gestaltet: mehr Grün und barrierefreie Bushaltestellen",
+          "url": "/de/st-gallen-artikel/kolumbanstrasse-neue-velostrasse/",
+          "excerpt": "Am 23. Oktober 2026 wurde die neue Gestaltung der Kolumbanstrasse fertiggestellt, die nun 700 Meter einer prioritären Veloroute umfasst.",
+          "date": "2026-10-24T09:05:50.183Z"
+        },
+        {
+          "title": "Aufhebung des Reglements Stadtfonds und Genehmigung des Steuerfusses 2026 in Wil",
+          "url": "/de/st-gallen-artikel/aufhebung-des-reglements-stadtfonds-und-genehmigung-des-steuerfusses-2026-in-wil/",
+          "excerpt": "Das Stadtparlament hat das Reglement Stadtfonds am 27.",
+          "date": "2026-10-24T08:43:34.169Z"
+        },
+        {
           "title": "Wil: Sitzungen am 5. und 12. November 2026 abgesagt",
           "url": "/de/st-gallen-artikel/wil-parlament-sitzungen-abgesagt/",
           "excerpt": "In Wil fallen die Sitzungen am 5.",
           "date": "2026-10-23T08:59:08.998Z"
-        },
-        {
-          "title": "St. Gallen: dritte Röhre am Rosenberg und umstrittene Zahlen",
-          "url": "/de/st-gallen-artikel/st-gallen-autobahn-rosenberg-dritte-roehre/",
-          "excerpt": "Befürworter fordern Autobahnausbau; der Planer Hug-Di Lena bezeichnet die Zahlengrundlage als fragwürdig.",
-          "date": "2026-10-23T04:27:56.026Z"
-        },
-        {
-          "title": "St. Gallen stärkt den Schutz kritischer Infrastrukturen",
-          "url": "/de/st-gallen-artikel/st-gallen-schutz-kritischer-infrastrukturen/",
-          "excerpt": "Die Regierung von St.",
-          "date": "2026-10-23T03:10:46.389Z"
-        },
-        {
-          "title": "SBB schließen Schalter in St.Margrethen und Uznach",
-          "url": "/de/st-gallen-artikel/sbb-schalter-st-margrethen-uznach/",
-          "excerpt": "Ab Anfang 2027 setzen die SBB in St.Margrethen und Uznach auf Selbstbedienung: 3% der Tickets werden noch am Schalter verkauft.",
-          "date": "2026-10-23T00:23:33.274Z"
-        },
-        {
-          "title": "Wil: Abstimmung am 29. November 2026 über das Gasnetz",
-          "url": "/de/st-gallen-artikel/gasnetz-abstimmung-wil-2026/",
-          "excerpt": "Abstimmung über den Fonds: 29.",
-          "date": "2026-10-19T13:03:39.354Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-23T09:15:58.489Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "SG",
@@ -387,64 +387,64 @@
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "2,219 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,219 EUR/l, 3 stations relevées",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,229 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,229 EUR/l, 3 stations relevées",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,322 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,319 EUR/l, 3 stations relevées",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,446 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,439 EUR/l, 3 stations relevées",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Essence 95 — Autriche",
-              "value": "1,794 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 1,789 EUR/l, 11 stations relevées",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "1,749 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 1,719 EUR/l, 13 stations relevées",
+              "date": "2026-10-24T11:32:51.939Z"
             },
             {
               "label": "Diesel — Autriche",
-              "value": "2,159 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,100 EUR/l, 10 stations relevées",
-              "date": "2026-10-22T12:21:38.892Z"
+              "value": "2,131 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,100 EUR/l, 17 stations relevées",
+              "date": "2026-10-24T11:32:51.939Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de); E-Control Spritpreisrechner",
-          "updatedAt": "2026-10-22T12:21:38.892Z"
+          "updatedAt": "2026-10-24T11:32:51.939Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Vote du 29 novembre 2026 : Gare de Wil et Allee pour une correspondance sûre",
+          "url": "/fr/articles-saint-gall/vote-du-29-novembre-2026-gare-de-wil-et-allee-pour-une-correspondance-sure/",
+          "excerpt": "Le crédit brut s’élève à 63,662 millions de francs ; les travaux sont prévus de 2029 à 2033.",
+          "date": "2026-10-24T13:43:09.251Z"
+        },
+        {
+          "title": "11,6 millions CHF pour 89 projets du canton de Saint-Gall",
+          "url": "/fr/articles-saint-gall/lotteriefonds-89-projets-canton/",
+          "excerpt": "Le Gouvernement propose au Conseil cantonal 89 projets dans les domaines de la culture, du social et de l’environnement pour un montant de 11,6 millions de CHF, avec une décision prévue lors de la session d’hiver.",
+          "date": "2026-10-24T10:01:50.012Z"
+        },
+        {
+          "title": "Kolumbanstrasse réaménagée : plus de verdure et des arrêts de bus sans barrières",
+          "url": "/fr/articles-saint-gall/kolumbanstrasse-nouvelle-velostrasse/",
+          "excerpt": "Le 23 octobre 2026, la nouvelle configuration de la Kolumbanstrasse a été achevée, et elle comprend désormais 700 mètres d’itinéraire cyclable prioritaire.",
+          "date": "2026-10-24T09:05:50.183Z"
+        },
+        {
+          "title": "Abrogation du règlement Stadtfonds et du Steuerfuss 2026 approuvé à Wil",
+          "url": "/fr/articles-saint-gall/abrogation-du-reglement-stadtfonds-et-du-steuerfuss-2026-approuve-a-wil/",
+          "excerpt": "Le Parlement de la ville a abrogé le règlement Stadtfonds le 27 août 2026 ; le Steuerfuss 2026 est fixé à 115 pour cent avec une participation de 48,34 pour cent.",
+          "date": "2026-10-24T08:43:34.169Z"
+        },
+        {
           "title": "Wil : séances des 5 et 12 novembre 2026 annulées",
           "url": "/fr/articles-saint-gall/wil-seances-parlement-novembre/",
           "excerpt": "À Wil, les séances des 5 et 12 novembre 2026 sont annulées.",
           "date": "2026-10-23T08:59:08.998Z"
-        },
-        {
-          "title": "Saint-Gall : troisième tube du Rosenberg et chiffres contestés",
-          "url": "/fr/articles-saint-gall/saint-gall-autoroute-rosenberg-troisieme-tube/",
-          "excerpt": "Les partisans demandent un élargissement de l’autoroute ; le planificateur Hug-Di Lena juge les bases chiffrées discutables.",
-          "date": "2026-10-23T04:27:56.026Z"
-        },
-        {
-          "title": "Saint-Gall renforce la protection des infrastructures critiques",
-          "url": "/fr/articles-saint-gall/saint-gall-protection-infrastructures-critiques/",
-          "excerpt": "Le Gouvernement de Saint-Gall renforce la protection des infrastructures critiques La stratégie couvre les infrastructures, les processus et les services",
-          "date": "2026-10-23T03:10:46.389Z"
-        },
-        {
-          "title": "Les SBB ferment les guichets à St.Margrethen et Uznach",
-          "url": "/fr/articles-saint-gall/guichets-sbb-st-margrethen-uznach/",
-          "excerpt": "À partir du début de 2027, les SBB misent sur le libre-service à St.Margrethen et Uznach : 3% des billets sont encore vendus au guichet.",
-          "date": "2026-10-23T00:23:33.274Z"
-        },
-        {
-          "title": "Wil : vote le 29 novembre 2026 sur le réseau de gaz",
-          "url": "/fr/articles-saint-gall/vote-reseau-gaz-wil-2026/",
-          "excerpt": "Vote sur le fonds : 29 novembre 2026.",
-          "date": "2026-10-19T13:03:39.354Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-23T09:15:58.489Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

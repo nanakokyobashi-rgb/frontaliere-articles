@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "cbb0ed69d02483744ad24a78f7ce8935f17666e7bec91baa047d462bde86804f",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "7a2f300a52c6ec62de364c1d30708d7ec49775d72098fca77cbad13de4d5e3bc",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T19:30:03.925Z",
+      "updatedAt": "2026-10-25T02:23:31.213Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T16:03:41.824Z",
+      "updatedAt": "2026-10-24T19:51:00.050Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "27",
+          "value": "31",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -37,54 +37,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Ice Park Season Opener",
-              "detail": "KSS Sport- und Freizeitpark Schaffhausen, Schaffhausen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
-            },
-            {
-              "label": "Opening Reception: Ursula Palla / Petri Saarikko / Mara Röllin",
-              "detail": "Schaffhausen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/opening-reception-ursula-palla-petri-saarikko-mara-roellin/"
-            },
-            {
-              "label": "Riscoprire Sciaffusa - Un viaggio archeologico e storico nel tempo",
-              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
-            {
-              "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
-            {
-              "label": "In 80 Tagen um die Welt",
-              "detail": "Schaffhausen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/in-80-tagen-um-die-welt-1/"
-            },
-            {
-              "label": "JULE X [CH]",
-              "detail": "Kulturzentrum Kammgarn",
-              "date": "2026-10-24",
-              "url": "https://www.guidle.com/it/events/music/schaffhausen/jule-x-ch_Aa7FMYe"
-            },
-            {
-              "label": "JULE X [CH]",
-              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jule-x-ch/"
-            },
-            {
-              "label": "Michael Elsener - «Gute Entscheidung!»",
-              "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/michael-elsener-gute-entscheidung-1/"
-            },
             {
               "label": "Schaffhauser Herbstmesse",
               "detail": "Schaffhausen",
@@ -96,17 +48,70 @@
               "detail": "Kulturhaus Obere Stube, Stein am Rhein",
               "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/lesung-nikoletta-kiss-rueckkehr-nach-budapest-1/"
+            },
+            {
+              "label": "Steiner Trio Basel",
+              "detail": "Schaffhausen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/steiner-trio-basel/"
+            },
+            {
+              "label": "In 80 Tagen um die Welt",
+              "detail": "Schaffhausen — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/in-80-tagen-um-die-welt-1/"
+            },
+            {
+              "label": "Riscoprire Sciaffusa - Un viaggio archeologico e storico nel tempo",
+              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — in corso, ultimo giorno: 26 ottobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
+            },
+            {
+              "label": "Wine mobile",
+              "detail": "Bringolf Weinbau, Hallau — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
+            },
+            {
+              "label": "Vortragsabend: Garten der Zukunft",
+              "detail": "Pavillon im Park",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schaffhausen/vortragsabend-garten-der-zukunft_ANcHcfn"
+            },
+            {
+              "label": "Vortragsabend: Garten der Zukunft",
+              "detail": "Pavillon im Park, Schaffhausen",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vortragsabend-garten-der-zukunft/"
+            },
+            {
+              "label": "Pippo Pollina: «LA VITA È BELLA COSÌ COM’È»",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pippo-pollina-la-vita-e-bella-cosi-come-2/"
+            },
+            {
+              "label": "speis&trank stories with Annina Keller: Rösti, sugar cane and love",
+              "detail": "Haberhaus Bühne, Schaffhausen",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/speistrank-stories-with-annina-keller-roesti-sugar-cane-and-love/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/sciaffusa/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Veranstaltung für Kinder (4-6 Jahre) \"Super Sache: Sand\"",
+              "date": "2026-10-24T15:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/veranstaltung+fuer+kinder+_4-6+jahre_+_super+sache_+sand_"
+            },
             {
               "label": "Familienführung im Rahmen der Ausstellung „Lebensfreude und Rausch. Der Tanz in der Kunst“",
               "date": "2026-10-22T15:00:00.000Z",
@@ -128,7 +133,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -150,7 +155,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "SH",
@@ -160,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "27",
+          "value": "31",
           "note": "from the site’s events calendar"
         }
       ],
@@ -170,54 +175,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Ice Park Season Opener",
-              "detail": "KSS Sport- und Freizeitpark Schaffhausen, Schaffhausen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
-            },
-            {
-              "label": "Opening Reception: Ursula Palla / Petri Saarikko / Mara Röllin",
-              "detail": "Schaffhausen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/opening-reception-ursula-palla-petri-saarikko-mara-roellin/"
-            },
-            {
-              "label": "Rediscover Schaffhausen - An archaeological-historical journey through time",
-              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — ongoing, last day: 26 October 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
-            {
-              "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau — ongoing, last day: 25 October 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
-            {
-              "label": "In 80 Tagen um die Welt",
-              "detail": "Schaffhausen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/in-80-tagen-um-die-welt-1/"
-            },
-            {
-              "label": "JULE X [CH]",
-              "detail": "Kulturzentrum Kammgarn",
-              "date": "2026-10-24",
-              "url": "https://www.guidle.com/it/events/music/schaffhausen/jule-x-ch_Aa7FMYe"
-            },
-            {
-              "label": "JULE X [CH]",
-              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jule-x-ch/"
-            },
-            {
-              "label": "Michael Elsener - «Gute Entscheidung!»",
-              "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/michael-elsener-gute-entscheidung-1/"
-            },
             {
               "label": "Schaffhauser Herbstmesse",
               "detail": "Schaffhausen",
@@ -229,17 +186,70 @@
               "detail": "Kulturhaus Obere Stube, Stein am Rhein",
               "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/lesung-nikoletta-kiss-rueckkehr-nach-budapest-1/"
+            },
+            {
+              "label": "Steiner Trio Basel",
+              "detail": "Schaffhausen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/steiner-trio-basel/"
+            },
+            {
+              "label": "In 80 Tagen um die Welt",
+              "detail": "Schaffhausen — ongoing, last day: 25 October 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/in-80-tagen-um-die-welt-1/"
+            },
+            {
+              "label": "Rediscover Schaffhausen - An archaeological-historical journey through time",
+              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — ongoing, last day: 26 October 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
+            },
+            {
+              "label": "Wine mobile",
+              "detail": "Bringolf Weinbau, Hallau — ongoing, last day: 25 October 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
+            },
+            {
+              "label": "Vortragsabend: Garten der Zukunft",
+              "detail": "Pavillon im Park",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schaffhausen/vortragsabend-garten-der-zukunft_ANcHcfn"
+            },
+            {
+              "label": "Vortragsabend: Garten der Zukunft",
+              "detail": "Pavillon im Park, Schaffhausen",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vortragsabend-garten-der-zukunft/"
+            },
+            {
+              "label": "Pippo Pollina: «LA VITA È BELLA COSÌ COM’È»",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pippo-pollina-la-vita-e-bella-cosi-come-2/"
+            },
+            {
+              "label": "speis&trank stories with Annina Keller: Rösti, sugar cane and love",
+              "detail": "Haberhaus Bühne, Schaffhausen",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/speistrank-stories-with-annina-keller-roesti-sugar-cane-and-love/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/schaffhausen/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Veranstaltung für Kinder (4-6 Jahre) \"Super Sache: Sand\"",
+              "date": "2026-10-24T15:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/veranstaltung+fuer+kinder+_4-6+jahre_+_super+sache_+sand_"
+            },
             {
               "label": "Familienführung im Rahmen der Ausstellung „Lebensfreude und Rausch. Der Tanz in der Kunst“",
               "date": "2026-10-22T15:00:00.000Z",
@@ -261,7 +271,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -283,7 +293,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "SH",
@@ -293,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "27",
+          "value": "31",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -303,54 +313,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Saisonstart Eispark",
-              "detail": "KSS Sport- und Freizeitpark Schaffhausen, Schaffhausen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
-            },
-            {
-              "label": "Vernissage Ursula Palla / Petri Saarikko / Mara Röllin",
-              "detail": "Schaffhausen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/opening-reception-ursula-palla-petri-saarikko-mara-roellin/"
-            },
-            {
-              "label": "Schaffhausen neu entdecken ̶ Eine archäologisch-historische Zeitreise",
-              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
-            {
-              "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
-            {
-              "label": "In 80 Tagen um die Welt",
-              "detail": "Schaffhausen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/in-80-tagen-um-die-welt-1/"
-            },
-            {
-              "label": "JULE X [CH]",
-              "detail": "Kulturzentrum Kammgarn",
-              "date": "2026-10-24",
-              "url": "https://www.guidle.com/it/events/music/schaffhausen/jule-x-ch_Aa7FMYe"
-            },
-            {
-              "label": "JULE X [CH]",
-              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jule-x-ch/"
-            },
-            {
-              "label": "Michael Elsener - «Gute Entscheidung!»",
-              "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/michael-elsener-gute-entscheidung-1/"
-            },
             {
               "label": "Schaffhauser Herbstmesse",
               "detail": "Schaffhausen",
@@ -362,17 +324,70 @@
               "detail": "Kulturhaus Obere Stube, Stein am Rhein",
               "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/lesung-nikoletta-kiss-rueckkehr-nach-budapest-1/"
+            },
+            {
+              "label": "Steiner Trio Basel",
+              "detail": "Schaffhausen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/steiner-trio-basel/"
+            },
+            {
+              "label": "In 80 Tagen um die Welt",
+              "detail": "Schaffhausen — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/in-80-tagen-um-die-welt-1/"
+            },
+            {
+              "label": "Schaffhausen neu entdecken ̶ Eine archäologisch-historische Zeitreise",
+              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — läuft, letzter Tag: 26. Oktober 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
+            },
+            {
+              "label": "Weinmobil",
+              "detail": "Bringolf Weinbau, Hallau — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
+            },
+            {
+              "label": "Vortragsabend: Garten der Zukunft",
+              "detail": "Pavillon im Park",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schaffhausen/vortragsabend-garten-der-zukunft_ANcHcfn"
+            },
+            {
+              "label": "Vortragsabend: Garten der Zukunft",
+              "detail": "Pavillon im Park, Schaffhausen",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vortragsabend-garten-der-zukunft/"
+            },
+            {
+              "label": "Pippo Pollina: «LA VITA È BELLA COSÌ COM’È»",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pippo-pollina-la-vita-e-bella-cosi-come-2/"
+            },
+            {
+              "label": "speis&trank geschichten mit Annina Keller: Rösti, Zuckerrohr und Liebe",
+              "detail": "Haberhaus Bühne, Schaffhausen",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/speistrank-stories-with-annina-keller-roesti-sugar-cane-and-love/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/schaffhausen/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Veranstaltung für Kinder (4-6 Jahre) \"Super Sache: Sand\"",
+              "date": "2026-10-24T15:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/veranstaltung+fuer+kinder+_4-6+jahre_+_super+sache_+sand_"
+            },
             {
               "label": "Familienführung im Rahmen der Ausstellung „Lebensfreude und Rausch. Der Tanz in der Kunst“",
               "date": "2026-10-22T15:00:00.000Z",
@@ -394,7 +409,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -416,7 +431,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "SH",
@@ -426,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "27",
+          "value": "31",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -436,54 +451,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Ouverture de la saison à l'Eispark",
-              "detail": "KSS Sport- und Freizeitpark Schaffhausen, Schaffhausen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ice-park-season-opener/"
-            },
-            {
-              "label": "Vernissage : Ursula Palla / Petri Saarikko / Mara Röllin",
-              "detail": "Schaffhausen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/opening-reception-ursula-palla-petri-saarikko-mara-roellin/"
-            },
-            {
-              "label": "Redécouvrir Schaffhouse ̶ Un voyage dans le temps archéologique et historique",
-              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
-            {
-              "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
-            },
-            {
-              "label": "In 80 Tagen um die Welt",
-              "detail": "Schaffhausen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/in-80-tagen-um-die-welt-1/"
-            },
-            {
-              "label": "JULE X [CH]",
-              "detail": "Kulturzentrum Kammgarn",
-              "date": "2026-10-24",
-              "url": "https://www.guidle.com/it/events/music/schaffhausen/jule-x-ch_Aa7FMYe"
-            },
-            {
-              "label": "JULE X [CH]",
-              "detail": "Kulturzentrum Kammgarn, Schaffhausen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jule-x-ch/"
-            },
-            {
-              "label": "Michael Elsener - «Gute Entscheidung!»",
-              "detail": "Gemeindekanzlei Neuhausen am Rheinfall, Neuhausen am Rheinfall",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/michael-elsener-gute-entscheidung-1/"
-            },
             {
               "label": "Schaffhauser Herbstmesse",
               "detail": "Schaffhausen",
@@ -495,17 +462,70 @@
               "detail": "Kulturhaus Obere Stube, Stein am Rhein",
               "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/lesung-nikoletta-kiss-rueckkehr-nach-budapest-1/"
+            },
+            {
+              "label": "Steiner Trio Basel",
+              "detail": "Schaffhausen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/steiner-trio-basel/"
+            },
+            {
+              "label": "In 80 Tagen um die Welt",
+              "detail": "Schaffhausen — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/in-80-tagen-um-die-welt-1/"
+            },
+            {
+              "label": "Redécouvrir Schaffhouse ̶ Un voyage dans le temps archéologique et historique",
+              "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — en cours, dernier jour : 26 octobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
+            },
+            {
+              "label": "Weinmobil",
+              "detail": "Bringolf Weinbau, Hallau — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
+            },
+            {
+              "label": "Vortragsabend: Garten der Zukunft",
+              "detail": "Pavillon im Park",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/dies-das/schaffhausen/vortragsabend-garten-der-zukunft_ANcHcfn"
+            },
+            {
+              "label": "Vortragsabend: Garten der Zukunft",
+              "detail": "Pavillon im Park, Schaffhausen",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vortragsabend-garten-der-zukunft/"
+            },
+            {
+              "label": "Pippo Pollina: «LA VITA È BELLA COSÌ COM’È»",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/pippo-pollina-la-vita-e-bella-cosi-come-2/"
+            },
+            {
+              "label": "speis&trank stichten mit Annina Keller : Rösti, canne à sucre et amour",
+              "detail": "Haberhaus Bühne, Schaffhausen",
+              "date": "2026-10-29",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/speistrank-stories-with-annina-keller-roesti-sugar-cane-and-love/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/schaffhouse/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Veranstaltung für Kinder (4-6 Jahre) \"Super Sache: Sand\"",
+              "date": "2026-10-24T15:00:00.000Z",
+              "url": "https://www.konstanz.de/service/presse/pressemitteilungen/veranstaltung+fuer+kinder+_4-6+jahre_+_super+sache_+sand_"
+            },
             {
               "label": "Familienführung im Rahmen der Ausstellung „Lebensfreude und Rausch. Der Tanz in der Kunst“",
               "date": "2026-10-22T15:00:00.000Z",
@@ -527,7 +547,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +569,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "servizi",
-  "updatedAt": "2026-10-23T10:42:39.932Z",
-  "contentHash": "3e26f87bb9e4f9b265cf72f7838e40eebeb5383d8af2b2fad4d3475825fe713f",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "b7fe4ac7e01fb171387a709c116445662c5f7cf3006a9ba2376b1b3f2aad76c6",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,17 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-23T03:28:55.384Z",
+      "updatedAt": "2026-10-25T01:48:37.897Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-22T21:36:37.991Z",
+      "updatedAt": "2026-10-25T04:40:51.950Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-23T05:06:32.759Z",
+      "updatedAt": "2026-10-25T05:00:57.781Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "4",
-          "note": "offerta mediana 1087,50 CHF"
+          "note": "offerta mediana 1321 CHF"
         }
       ],
       "dataBlocks": [
@@ -81,16 +81,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-22T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
-              "date": "2026-10-23T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-10-24T22:00:00.000Z"
             },
             {
@@ -107,11 +97,21 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-10-27T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-28T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-29T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-23T03:28:55.384Z"
+          "updatedAt": "2026-10-25T01:48:37.897Z"
         },
         {
           "id": "aste-targhe",
@@ -127,14 +127,14 @@
             },
             {
               "label": "BL2787",
-              "value": "2000 CHF",
+              "value": "2222 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1157"
             },
             {
               "label": "BL13999",
-              "value": "175 CHF",
+              "value": "420 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1158"
@@ -142,7 +142,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-22T21:36:37.991Z"
+          "updatedAt": "2026-10-25T04:40:51.950Z"
         },
         {
           "id": "meteo",
@@ -151,20 +151,26 @@
           "items": [
             {
               "label": "Basel",
-              "value": "9 °C",
-              "detail": "oggi da 7 a 15 °C"
+              "value": "11 °C",
+              "detail": "oggi da 9 a 15 °C"
             },
             {
               "label": "Liestal",
-              "value": "8 °C",
-              "detail": "oggi da 6 a 14 °C"
+              "value": "11 °C",
+              "detail": "oggi da 8 a 14 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Domande edilizie solo digitali dal 1° gennaio 2027 nel Canton Basilea",
+          "url": "/articoli-basilea/domande-edilizie-solo-digitale-2027/",
+          "excerpt": "Dal 1° gennaio 2027, le domande di autorizzazione edilizia devono essere presentate solo in formato digitale, come comunicato dal Bau- und Gastgewerbeinspektorat nel settembre 2026.",
+          "date": "2026-10-23T21:50:50.738Z"
+        },
         {
           "title": "Permessi edilizi a Basilea: solo digitali dal 2027",
           "url": "/articoli-basilea/permessi-edilizi-digitali-basel/",
@@ -206,12 +212,6 @@
           "url": "/articoli-svizzera/cicli-basilea-campagna/",
           "excerpt": "Guida alla scuola dell'obbligo a Basilea Campagna: iscrizione, cicli, calendario, lingue di insegnamento e passaggio alle scuole medie superiori.",
           "date": "2026-10-02T03:08:58.952Z"
-        },
-        {
-          "title": "Permesso di dimora B Basilea Campagna: requisiti e rinnovo",
-          "url": "/articoli-svizzera/permesso-dimora-b-basilea-campagna/",
-          "excerpt": "Guida ai requisiti e alla procedura di rinnovo del permesso B nel Canton Basilea Campagna. Durata, documenti e contatti utili.",
-          "date": "2026-08-24T15:36:51.306Z"
         }
       ],
       "latestCantonArticles": [],
@@ -249,7 +249,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -266,7 +266,7 @@
         {
           "label": "Plate auctions running",
           "value": "4",
-          "note": "typical bid 1,087.50 CHF"
+          "note": "typical bid 1,321 CHF"
         }
       ],
       "dataBlocks": [
@@ -303,16 +303,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-22T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
-              "date": "2026-10-23T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-10-24T22:00:00.000Z"
             },
             {
@@ -329,11 +319,21 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-10-27T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-28T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-29T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-23T03:28:55.384Z"
+          "updatedAt": "2026-10-25T01:48:37.897Z"
         },
         {
           "id": "aste-targhe",
@@ -349,14 +349,14 @@
             },
             {
               "label": "BL2787",
-              "value": "2,000 CHF",
+              "value": "2,222 CHF",
               "detail": "current bid",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1157"
             },
             {
               "label": "BL13999",
-              "value": "175 CHF",
+              "value": "420 CHF",
               "detail": "current bid",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1158"
@@ -364,7 +364,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-22T21:36:37.991Z"
+          "updatedAt": "2026-10-25T04:40:51.950Z"
         },
         {
           "id": "meteo",
@@ -373,20 +373,26 @@
           "items": [
             {
               "label": "Basel",
-              "value": "9 °C",
-              "detail": "today from 7 to 15 °C"
+              "value": "11 °C",
+              "detail": "today from 9 to 15 °C"
             },
             {
               "label": "Liestal",
-              "value": "8 °C",
-              "detail": "today from 6 to 14 °C"
+              "value": "11 °C",
+              "detail": "today from 8 to 14 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Building permit applications digital-only from 2027: Basel",
+          "url": "/en/basel-articles/building-permits-only-digital-2027/",
+          "excerpt": "From January 1, 2027, building permit applications must be submitted only in digital format, as announced by the Bau- und Gastgewerbeinspektorat in September 2026.",
+          "date": "2026-10-23T21:50:50.738Z"
+        },
         {
           "title": "Building permits in Basel: digital only from 2027",
           "url": "/en/basel-articles/basel-digital-building-permits-2027/",
@@ -428,12 +434,6 @@
           "url": "/en/swiss-articles/basel-campagna-school-cycles/",
           "excerpt": "Guide to compulsory schooling in Basel-Landschaft: enrolment, cycles, calendar, languages of instruction and transition to secondary school.",
           "date": "2026-10-02T03:08:58.952Z"
-        },
-        {
-          "title": "Residence Permit B Basel Countryside: Requirements and Renewal",
-          "url": "/en/swiss-articles/residence-permit-b-basel-landschaft-requirements-renewal/",
-          "excerpt": "Guide to the requirements and procedure for renewing the B permit in the Basel-Country Canton. Duration, documents and useful contacts.",
-          "date": "2026-08-24T15:36:51.306Z"
         }
       ],
       "latestCantonArticles": [],
@@ -463,7 +463,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -480,7 +480,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "4",
-          "note": "mittleres Gebot 1’087.50 CHF"
+          "note": "mittleres Gebot 1’321 CHF"
         }
       ],
       "dataBlocks": [
@@ -517,16 +517,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-22T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
-              "date": "2026-10-23T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-10-24T22:00:00.000Z"
             },
             {
@@ -543,11 +533,21 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-10-27T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-28T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-29T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-23T03:28:55.384Z"
+          "updatedAt": "2026-10-25T01:48:37.897Z"
         },
         {
           "id": "aste-targhe",
@@ -563,14 +563,14 @@
             },
             {
               "label": "BL2787",
-              "value": "2’000 CHF",
+              "value": "2’222 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1157"
             },
             {
               "label": "BL13999",
-              "value": "175 CHF",
+              "value": "420 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1158"
@@ -578,7 +578,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-22T21:36:37.991Z"
+          "updatedAt": "2026-10-25T04:40:51.950Z"
         },
         {
           "id": "meteo",
@@ -587,20 +587,26 @@
           "items": [
             {
               "label": "Basel",
-              "value": "9 °C",
-              "detail": "heute 7 bis 15 °C"
+              "value": "11 °C",
+              "detail": "heute 9 bis 15 °C"
             },
             {
               "label": "Liestal",
-              "value": "8 °C",
-              "detail": "heute 6 bis 14 °C"
+              "value": "11 °C",
+              "detail": "heute 8 bis 14 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Baugesuche ab dem 1. Januar 2027 im Kanton Basel nur noch digital",
+          "url": "/de/basel-artikel/baugesuche-nur-digital-2027/",
+          "excerpt": "Ab dem 1. Januar 2027 müssen Baugesuche, wie das Bau- und Gastgewerbeinspektorat im September 2026 mitteilte, nur noch digital eingereicht werden.",
+          "date": "2026-10-23T21:50:50.738Z"
+        },
         {
           "title": "Baubewilligungen in Basel: ab 2027 nur noch digital",
           "url": "/de/basel-artikel/basel-baugesuche-ab-2027-digital/",
@@ -642,12 +648,6 @@
           "url": "/de/schweiz-artikel/schule-basel-landschaft-zyklen/",
           "excerpt": "Leitfaden zur Schulpflicht in Basel-Landschaft: Einschreibung, Zyklen, Kalender, Unterrichtssprachen und Übergang zur weiterführenden Schule.",
           "date": "2026-10-02T03:08:58.952Z"
-        },
-        {
-          "title": "Aufenthaltsbewilligung B Basel-Landschaft: Voraussetzungen und Verlängerung",
-          "url": "/de/schweiz-artikel/aufenthaltserlaubnis-b-baselland-anforderungen-erneuerung/",
-          "excerpt": "Leitfaden zu den Anforderungen und Verfahren für die Erneuerung der B-Bewilligung im Kanton Basel-Landschaft. Dauer, Dokumente und nützliche Kontakte.",
-          "date": "2026-08-24T15:36:51.306Z"
         }
       ],
       "latestCantonArticles": [],
@@ -677,7 +677,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -694,7 +694,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "4",
-          "note": "offre centrale 1 087,50 CHF"
+          "note": "offre centrale 1 321 CHF"
         }
       ],
       "dataBlocks": [
@@ -731,16 +731,6 @@
             {
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
-              "date": "2026-10-22T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
-              "date": "2026-10-23T22:00:00.000Z"
-            },
-            {
-              "label": "24 Stunden Apotheke Basel AG",
-              "detail": "Basel, Basilea Città",
               "date": "2026-10-24T22:00:00.000Z"
             },
             {
@@ -757,11 +747,21 @@
               "label": "24 Stunden Apotheke Basel AG",
               "detail": "Basel, Basilea Città",
               "date": "2026-10-27T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-28T23:00:00.000Z"
+            },
+            {
+              "label": "24 Stunden Apotheke Basel AG",
+              "detail": "Basel, Basilea Città",
+              "date": "2026-10-29T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.bs.ch/gd/md/hoheitliche-funktionen/kantonsapothekerin/liste-der-apotheken-basel-stadt",
-          "updatedAt": "2026-10-23T03:28:55.384Z"
+          "updatedAt": "2026-10-25T01:48:37.897Z"
         },
         {
           "id": "aste-targhe",
@@ -777,14 +777,14 @@
             },
             {
               "label": "BL2787",
-              "value": "2 000 CHF",
+              "value": "2 222 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1157"
             },
             {
               "label": "BL13999",
-              "value": "175 CHF",
+              "value": "420 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-25T19:00:00.000Z",
               "url": "https://eauktion.bl.ch/ecari-auction/ui/app/details/app?id=1158"
@@ -792,7 +792,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://eauktion.bl.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-22T21:36:37.991Z"
+          "updatedAt": "2026-10-25T04:40:51.950Z"
         },
         {
           "id": "meteo",
@@ -801,20 +801,26 @@
           "items": [
             {
               "label": "Basel",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 7 à 15 °C"
+              "value": "11 °C",
+              "detail": "aujourd’hui de 9 à 15 °C"
             },
             {
               "label": "Liestal",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 6 à 14 °C"
+              "value": "11 °C",
+              "detail": "aujourd’hui de 8 à 14 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "Demandes de permis de construire numériques dès 2027 à Bâle",
+          "url": "/fr/articles-bale/demandes-permis-digital-2027/",
+          "excerpt": "À partir du 1er janvier 2027, les demandes de permis de construire doivent être soumises uniquement sous forme numérique, comme l’a annoncé le Bau- und Gastgewerbeinspektorat en septembre 2026.",
+          "date": "2026-10-23T21:50:50.738Z"
+        },
         {
           "title": "Permis de construire à Bâle : uniquement numériques à partir de 2027",
           "url": "/fr/articles-bale/bale-demandes-permis-numeriques-2027/",
@@ -856,12 +862,6 @@
           "url": "/fr/articles-suisse/ecole-bale-campagne-cycles/",
           "excerpt": "Guide de la scolarité obligatoire à Bâle-Landschaft : inscription, cycles, calendrier, langues d’enseignement et transition vers le secondaire.",
           "date": "2026-10-02T03:08:58.952Z"
-        },
-        {
-          "title": "Permis de séjour B Bâle-Campagne : exigences et renouvellement",
-          "url": "/fr/articles-suisse/permis-sejour-b-bale-campagne-renouvellement/",
-          "excerpt": "Guide des exigences et de la procédure de renouvellement du permis B dans le canton de Bâle-Campagne. Durée, documents et contacts utiles.",
-          "date": "2026-08-24T15:36:51.306Z"
         }
       ],
       "latestCantonArticles": [],
@@ -883,7 +883,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

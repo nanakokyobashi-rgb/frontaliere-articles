@@ -281,6 +281,29 @@ export function loadDeclaredRegistry(root, core) {
 // ── Sorgenti di una sezione di famiglia ─────────────────────────────────────
 
 /**
+ * Classify one atomic filesystem snapshot before a family section is read.
+ *
+ * A registry-less section is new only when every companion source is absent.
+ * Treating a transition (registry, slugs, or locale metadata changing at
+ * different times) as `new` would publish a partial family as an intentional
+ * empty one. Keeping the state calculation pure also lets the build gate test
+ * every transition without materialising the corpus.
+ */
+export function familySourceTransitionState({
+  registryPresent,
+  slugPresent,
+  metaPresent,
+}) {
+  const sources = [registryPresent, slugPresent, metaPresent];
+  if (!sources.every((value) => typeof value === 'boolean')) {
+    throw new TypeError('family source presence must be boolean');
+  }
+  if (sources.every((value) => !value)) return 'new';
+  if (sources.every(Boolean)) return 'ready';
+  return 'partial';
+}
+
+/**
  * Se un file sorgente di una sezione di FAMIGLIA manca legittimamente.
  * Una sezione appena accesa non ha ancora nessun file (create-article li crea
  * tutti insieme al primo articolo): e' «nuova» se manca il REGISTRO, e allora

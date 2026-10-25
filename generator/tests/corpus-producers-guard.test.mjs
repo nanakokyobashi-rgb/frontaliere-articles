@@ -404,6 +404,35 @@ test('publish-journalist rimette in coda i completati prima di un fatal successi
   assert.match(source, /requeued_ids=\$\{JSON\.stringify\(requeuedIds\)\}/);
 });
 
+test('publish-journalist espone al workflow solo gli ID completati', () => {
+  const source = fs.readFileSync(
+    path.join(ROOT, 'generator/scripts/publish-journalist-article.mjs'),
+    'utf8',
+  );
+  const mainStart = source.indexOf('async function main()');
+  assert.ok(mainStart >= 0, 'main() del publisher giornalisti mancante');
+  const main = source.slice(mainStart);
+  const processingLoop = main.slice(
+    main.indexOf('for (const docSnap of snap.docs)'),
+    main.indexOf('  } catch (err) {'),
+  );
+  assert.match(
+    processingLoop,
+    /if \(result\.ok\) \{[\s\S]*publishedIds\.push\(id\)/,
+    'un ID deve entrare nell\'output solo dopo un risultato ok',
+  );
+  assert.match(
+    main,
+    /published_ids=\$\{JSON\.stringify\(publishedIds\)\}/,
+    'il workflow deve ricevere la lista JSON degli articoli pubblicati',
+  );
+  assert.match(
+    main,
+    /requeued_ids=\$\{JSON\.stringify\(requeuedIds\)\}/,
+    'il workflow deve ricevere anche gli ID rimessi in coda',
+  );
+});
+
 // ═══════════════════════════════════════════════════════════════════════════
 // 3a. RIFIUTO ESEGUITO — il blocco della guardia, eseguito davvero
 // ═══════════════════════════════════════════════════════════════════════════

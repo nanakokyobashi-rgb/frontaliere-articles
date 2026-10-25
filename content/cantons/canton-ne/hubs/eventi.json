@@ -4,17 +4,17 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "eventi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "077b3cf69e32518b7914a963b3977f1935b23dbc896d5d08bca815d4496e8b2c",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "db967a8f3eb41c7caa53250efad446c2f912307f4b30da8bb657c71a1714edb4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T19:30:03.925Z",
+      "updatedAt": "2026-10-25T02:23:31.213Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T16:03:41.824Z",
+      "updatedAt": "2026-10-24T19:51:00.050Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "46",
+          "value": "47",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,69 +38,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Babillages ! Atelier d'éveil pour les tout petits",
-              "detail": "Musée d'art et d'histoire, Neuchâtel",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/babillages-atelier-deveil-pour-les-tout-petits/"
-            },
-            {
-              "label": "Concert Bébé du Ruckers",
-              "detail": "Neuchâtel",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-bebe-du-ruckers/"
-            },
-            {
-              "label": "Le verger en fête. Fête d’automne et Bourse aux arbres",
-              "detail": "Neuchâtel",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-verger-en-fete-fete-dautomne-et-bourse-aux-arbres/"
-            },
-            {
-              "label": "INCANTATIONS",
-              "detail": "La Chaux-de-Fonds",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/incantations/"
-            },
-            {
-              "label": "BLUES Night - Indian Boogie / BONNY B. & ICE B",
-              "detail": "Bar king, Neuchâtel",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/blues-night-indian-boogie-bonny-b-und-ice-b_AcvccKE"
-            },
-            {
-              "label": "Je n’ai jamais vu le Kremlin. D’après « Moscou-Petouchki » de Venedikt Erofeïev",
-              "detail": "Neuchâtel — in corso, ultimo giorno: 23 ottobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/je-nai-jamais-vu-le-kremlin-dapres-moscoupetouchki-de-venedikt-erofeiev/"
-            },
-            {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
-            },
-            {
-              "label": "Démonstration de dentellières",
-              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
-            },
-            {
-              "label": "Local produce market",
-              "detail": "Marché des produits du terroir",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/markt-fuer-regionale-produkte-1/"
-            },
-            {
               "label": "Au nom de mon arbre",
               "detail": "Jardin botanique, Neuchâtel",
               "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/au-nom-de-mon-arbre-1/"
+            },
+            {
+              "label": "Contes au Muséum d’Histoire Naturelle de Neuchâtel",
+              "detail": "Neuchâtel",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/contes-au-museum-dhistoire-naturelle-de-neuchatel/"
+            },
+            {
+              "label": "Fête de la Courge 2026",
+              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fete-de-la-courge-2026/"
+            },
+            {
+              "label": "Tu comprendras quand tu seras grand",
+              "detail": "Théâtre du Passage, Neuchâtel",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tu-comprendras-quand-tu-seras-grand/"
+            },
+            {
+              "label": "À la poursuite du temps. Café-philo",
+              "detail": "Neuchâtel",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/a-la-poursuite-du-temps-cafephilo/"
+            },
+            {
+              "label": "Blake Eduardo – Atoicadabra",
+              "detail": "Colombier NE",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/blake-eduardo-atoicadabra/"
+            },
+            {
+              "label": "Christian Chamorel, piano; Léonie Renaud, chant, Damien Bachmann, clarinette",
+              "detail": "Chapelle des Dix-Mille Martyrs, Le Landeron",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/evenements/classique/le-landeron/christian-chamorel-piano-leonie-renaud-chant-damien-bachmann-clarinette_AZhC43r"
+            },
+            {
+              "label": "La Chanson d'Hauterive en concert",
+              "detail": "Collégiale de Valangin",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/evenements/musique/valangin/la-chanson-dhauterive-en-concert_Af9AgVu"
+            },
+            {
+              "label": "Émile Parisien / Floating",
+              "detail": "Théâtre De L'heure Bleue, La Chaux-de-Fonds",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/evenements/musique/la-chaux-de-fonds/emile-parisien-floating_AU9Kg5Q"
+            },
+            {
+              "label": "Local produce market",
+              "detail": "Marché des produits du terroir — in corso, ultimo giorno: 25 ottobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/markt-fuer-regionale-produkte-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/neuchatel/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -128,7 +128,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -150,7 +150,7 @@
           "url": "/eventi/neuchatel/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "NE",
@@ -160,7 +160,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "46",
+          "value": "47",
           "note": "from the site’s events calendar"
         }
       ],
@@ -171,69 +171,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Babillages ! Atelier d'éveil pour les tout petits",
-              "detail": "Musée d'art et d'histoire, Neuchâtel",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/babillages-atelier-deveil-pour-les-tout-petits/"
-            },
-            {
-              "label": "Concert Bébé du Ruckers",
-              "detail": "Neuchâtel",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-bebe-du-ruckers/"
-            },
-            {
-              "label": "Le verger en fête. Fête d’automne et Bourse aux arbres",
-              "detail": "Neuchâtel",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-verger-en-fete-fete-dautomne-et-bourse-aux-arbres/"
-            },
-            {
-              "label": "INCANTATIONS",
-              "detail": "La Chaux-de-Fonds",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/incantations/"
-            },
-            {
-              "label": "BLUES Night - Indian Boogie / BONNY B. & ICE B",
-              "detail": "Bar king, Neuchâtel",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/blues-night-indian-boogie-bonny-b-und-ice-b_AcvccKE"
-            },
-            {
-              "label": "Je n’ai jamais vu le Kremlin. D’après « Moscou-Petouchki » de Venedikt Erofeïev",
-              "detail": "Neuchâtel — ongoing, last day: 23 October 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/je-nai-jamais-vu-le-kremlin-dapres-moscoupetouchki-de-venedikt-erofeiev/"
-            },
-            {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — ongoing, last day: 1 November 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
-            },
-            {
-              "label": "Démonstration de dentellières",
-              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — ongoing, last day: 25 October 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
-            },
-            {
-              "label": "Local produce market",
-              "detail": "Marché des produits du terroir",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/markt-fuer-regionale-produkte-1/"
-            },
-            {
               "label": "Au nom de mon arbre",
               "detail": "Jardin botanique, Neuchâtel",
               "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/au-nom-de-mon-arbre-1/"
+            },
+            {
+              "label": "Contes au Muséum d’Histoire Naturelle de Neuchâtel",
+              "detail": "Neuchâtel",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/contes-au-museum-dhistoire-naturelle-de-neuchatel/"
+            },
+            {
+              "label": "Fête de la Courge 2026",
+              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fete-de-la-courge-2026/"
+            },
+            {
+              "label": "Tu comprendras quand tu seras grand",
+              "detail": "Théâtre du Passage, Neuchâtel",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tu-comprendras-quand-tu-seras-grand/"
+            },
+            {
+              "label": "À la poursuite du temps. Café-philo",
+              "detail": "Neuchâtel",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/a-la-poursuite-du-temps-cafephilo/"
+            },
+            {
+              "label": "Blake Eduardo – Atoicadabra",
+              "detail": "Colombier NE",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/blake-eduardo-atoicadabra/"
+            },
+            {
+              "label": "Christian Chamorel, piano; Léonie Renaud, chant, Damien Bachmann, clarinette",
+              "detail": "Chapelle des Dix-Mille Martyrs, Le Landeron",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/evenements/classique/le-landeron/christian-chamorel-piano-leonie-renaud-chant-damien-bachmann-clarinette_AZhC43r"
+            },
+            {
+              "label": "La Chanson d'Hauterive en concert",
+              "detail": "Collégiale de Valangin",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/evenements/musique/valangin/la-chanson-dhauterive-en-concert_Af9AgVu"
+            },
+            {
+              "label": "Émile Parisien / Floating",
+              "detail": "Théâtre De L'heure Bleue, La Chaux-de-Fonds",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/evenements/musique/la-chaux-de-fonds/emile-parisien-floating_AU9Kg5Q"
+            },
+            {
+              "label": "Local produce market",
+              "detail": "Marché des produits du terroir — ongoing, last day: 25 October 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/markt-fuer-regionale-produkte-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/neuchatel/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -261,7 +261,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -283,7 +283,7 @@
           "url": "/en/events/neuchatel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "NE",
@@ -293,7 +293,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "46",
+          "value": "47",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -304,69 +304,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Babillages ! Atelier d'éveil pour les tout petits",
-              "detail": "Musée d'art et d'histoire, Neuchâtel",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/babillages-atelier-deveil-pour-les-tout-petits/"
-            },
-            {
-              "label": "Concert Bébé du Ruckers",
-              "detail": "Neuchâtel",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-bebe-du-ruckers/"
-            },
-            {
-              "label": "Le verger en fête. Fête d’automne et Bourse aux arbres",
-              "detail": "Neuchâtel",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-verger-en-fete-fete-dautomne-et-bourse-aux-arbres/"
-            },
-            {
-              "label": "INCANTATIONS",
-              "detail": "La Chaux-de-Fonds",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/incantations/"
-            },
-            {
-              "label": "BLUES Night - Indian Boogie / BONNY B. & ICE B",
-              "detail": "Bar king, Neuchâtel",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/blues-night-indian-boogie-bonny-b-und-ice-b_AcvccKE"
-            },
-            {
-              "label": "Je n’ai jamais vu le Kremlin. D’après « Moscou-Petouchki » de Venedikt Erofeïev",
-              "detail": "Neuchâtel — läuft, letzter Tag: 23. Oktober 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/je-nai-jamais-vu-le-kremlin-dapres-moscoupetouchki-de-venedikt-erofeiev/"
-            },
-            {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
-            },
-            {
-              "label": "Démonstration de dentellières",
-              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
-            },
-            {
-              "label": "Markt für regionale Produkte",
-              "detail": "Marché des produits du terroir",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/markt-fuer-regionale-produkte-1/"
-            },
-            {
               "label": "Au nom de mon arbre",
               "detail": "Jardin botanique, Neuchâtel",
               "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/au-nom-de-mon-arbre-1/"
+            },
+            {
+              "label": "Contes au Muséum d’Histoire Naturelle de Neuchâtel",
+              "detail": "Neuchâtel",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/contes-au-museum-dhistoire-naturelle-de-neuchatel/"
+            },
+            {
+              "label": "Fête de la Courge 2026",
+              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fete-de-la-courge-2026/"
+            },
+            {
+              "label": "Tu comprendras quand tu seras grand",
+              "detail": "Théâtre du Passage, Neuchâtel",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tu-comprendras-quand-tu-seras-grand/"
+            },
+            {
+              "label": "À la poursuite du temps. Café-philo",
+              "detail": "Neuchâtel",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/a-la-poursuite-du-temps-cafephilo/"
+            },
+            {
+              "label": "Blake Eduardo – Atoicadabra",
+              "detail": "Colombier NE",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/blake-eduardo-atoicadabra/"
+            },
+            {
+              "label": "Christian Chamorel, piano; Léonie Renaud, chant, Damien Bachmann, clarinette",
+              "detail": "Chapelle des Dix-Mille Martyrs, Le Landeron",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/evenements/classique/le-landeron/christian-chamorel-piano-leonie-renaud-chant-damien-bachmann-clarinette_AZhC43r"
+            },
+            {
+              "label": "La Chanson d'Hauterive en concert",
+              "detail": "Collégiale de Valangin",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/evenements/musique/valangin/la-chanson-dhauterive-en-concert_Af9AgVu"
+            },
+            {
+              "label": "Émile Parisien / Floating",
+              "detail": "Théâtre De L'heure Bleue, La Chaux-de-Fonds",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/evenements/musique/la-chaux-de-fonds/emile-parisien-floating_AU9Kg5Q"
+            },
+            {
+              "label": "Markt für regionale Produkte",
+              "detail": "Marché des produits du terroir — läuft, letzter Tag: 25. Oktober 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/markt-fuer-regionale-produkte-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/neuenburg/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -394,7 +394,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -416,7 +416,7 @@
           "url": "/de/veranstaltungen/neuenburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "NE",
@@ -426,7 +426,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "46",
+          "value": "47",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -437,69 +437,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Babillages ! Atelier d'éveil pour les tout petits",
-              "detail": "Musée d'art et d'histoire, Neuchâtel",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/babillages-atelier-deveil-pour-les-tout-petits/"
-            },
-            {
-              "label": "Concert Bébé du Ruckers",
-              "detail": "Neuchâtel",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/concert-bebe-du-ruckers/"
-            },
-            {
-              "label": "Le verger en fête. Fête d’automne et Bourse aux arbres",
-              "detail": "Neuchâtel",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/le-verger-en-fete-fete-dautomne-et-bourse-aux-arbres/"
-            },
-            {
-              "label": "INCANTATIONS",
-              "detail": "La Chaux-de-Fonds",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/incantations/"
-            },
-            {
-              "label": "BLUES Night - Indian Boogie / BONNY B. & ICE B",
-              "detail": "Bar king, Neuchâtel",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/evenements/musique/neuchatel/blues-night-indian-boogie-bonny-b-und-ice-b_AcvccKE"
-            },
-            {
-              "label": "Je n’ai jamais vu le Kremlin. D’après « Moscou-Petouchki » de Venedikt Erofeïev",
-              "detail": "Neuchâtel — en cours, dernier jour : 23 octobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/je-nai-jamais-vu-le-kremlin-dapres-moscoupetouchki-de-venedikt-erofeiev/"
-            },
-            {
-              "label": "Atelier de gravure pour tous",
-              "detail": "Musée d'art et d'histoire, Neuchâtel — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-gravure-pour-tous/"
-            },
-            {
-              "label": "Démonstration de dentellières",
-              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/demonstration-de-dentellieres-5/"
-            },
-            {
-              "label": "Marché des produits du terroir",
-              "detail": "Marché des produits du terroir",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/markt-fuer-regionale-produkte-1/"
-            },
-            {
               "label": "Au nom de mon arbre",
               "detail": "Jardin botanique, Neuchâtel",
               "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/au-nom-de-mon-arbre-1/"
+            },
+            {
+              "label": "Contes au Muséum d’Histoire Naturelle de Neuchâtel",
+              "detail": "Neuchâtel",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/contes-au-museum-dhistoire-naturelle-de-neuchatel/"
+            },
+            {
+              "label": "Fête de la Courge 2026",
+              "detail": "A bijou at the gateway to the Val-de-Ruz - Valangin, Val-de-Ruz",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fete-de-la-courge-2026/"
+            },
+            {
+              "label": "Tu comprendras quand tu seras grand",
+              "detail": "Théâtre du Passage, Neuchâtel",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tu-comprendras-quand-tu-seras-grand/"
+            },
+            {
+              "label": "À la poursuite du temps. Café-philo",
+              "detail": "Neuchâtel",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/a-la-poursuite-du-temps-cafephilo/"
+            },
+            {
+              "label": "Blake Eduardo – Atoicadabra",
+              "detail": "Colombier NE",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/blake-eduardo-atoicadabra/"
+            },
+            {
+              "label": "Christian Chamorel, piano; Léonie Renaud, chant, Damien Bachmann, clarinette",
+              "detail": "Chapelle des Dix-Mille Martyrs, Le Landeron",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/evenements/classique/le-landeron/christian-chamorel-piano-leonie-renaud-chant-damien-bachmann-clarinette_AZhC43r"
+            },
+            {
+              "label": "La Chanson d'Hauterive en concert",
+              "detail": "Collégiale de Valangin",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/evenements/musique/valangin/la-chanson-dhauterive-en-concert_Af9AgVu"
+            },
+            {
+              "label": "Émile Parisien / Floating",
+              "detail": "Théâtre De L'heure Bleue, La Chaux-de-Fonds",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/evenements/musique/la-chaux-de-fonds/emile-parisien-floating_AU9Kg5Q"
+            },
+            {
+              "label": "Marché des produits du terroir",
+              "detail": "Marché des produits du terroir — en cours, dernier jour : 25 octobre 2026",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/markt-fuer-regionale-produkte-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/neuchatel/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -527,7 +527,7 @@
               "url": "https://www.neuchatelville.ch/medias/actualites/detail/architectures-de-papier-une-exposition-sur-neuchatel-ville-batie-revee-dessinee"
             }
           ],
-          "updatedAt": "2026-10-22T16:03:41.824Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +549,7 @@
           "url": "/fr/evenements/neuchatel/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

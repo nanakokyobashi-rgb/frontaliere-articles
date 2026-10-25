@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "fisco",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "b7424f32fd52600b7c5f43f8976c3533b904b9dd25d81254b8dd236372bc8341",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "074b5fe76eb9933e959b1ce0569e16fb21d877c10520bdf3df2f95c399ab71b5",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -102,6 +102,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Giura aumenta sussidi per famiglie a basso reddito",
+          "url": "/articoli-giura/giura-aumento-sussidi-famiglie/",
+          "excerpt": "Il massimale del supplemento passa da 300 a 330 CHF al mese per genitore per famiglie con RDU inferiore a 18'000 CHF, decorrenza 2027.",
+          "date": "2026-10-24T18:24:32.255Z"
+        },
+        {
           "title": "Imposte cantonali Giura: aliquote, scaglioni e deduzioni 2024",
           "url": "/articoli-svizzera/imposte-cantonali-giura-aliquote-deduzioni/",
           "excerpt": "Guida pratica al sistema fiscale del Cantone Giura: struttura a tre livelli, moltiplicatori comunali, deduzioni ammesse e portale ufficiale per la dichiarazione.",
@@ -135,7 +141,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "JU",
@@ -220,6 +226,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Jura increases subsidies for low-income families",
+          "url": "/en/jura-articles/jura-subsidy-increase-low-income/",
+          "excerpt": "The maximum supplement increases from 300 to 330 CHF per month per parent for families with RDU below 18'000 CHF, effective 2027.",
+          "date": "2026-10-24T18:24:32.255Z"
+        },
+        {
           "title": "Cantonal taxes Jura: rates, brackets and deductions 2024",
           "url": "/en/swiss-articles/jura-cantonal-tax-rates-deductions/",
           "excerpt": "Practical guide to the tax system of the Canton of Jura: three-level structure, municipal multipliers, allowable deductions and official portal for the declaration.",
@@ -253,7 +265,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "JU",
@@ -338,6 +350,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Jura erhöht die Zuschüsse für Familien mit niedrigem Einkommen",
+          "url": "/de/jura-artikel/jura-subvention-erhoehung-familien/",
+          "excerpt": "Der Höchstbetrag des Zuschlags steigt für Familien mit einem RDU unter 18'000 CHF ab 2027 von 300 auf 330 CHF pro Monat und Elternteil.",
+          "date": "2026-10-24T18:24:32.255Z"
+        },
+        {
           "title": "Kantonale Steuern Jura: Steuersätze, Staffeln und Abzüge 2024",
           "url": "/de/schweiz-artikel/jura-kantonssteuer-saetze-abzuege/",
           "excerpt": "Praktischer Leitfaden zum Steuersystem des Kantons Jura: dreistufige Struktur, kommunale Multiplikatoren, zulässige Abzüge und offizielles Deklarationsportal.",
@@ -371,7 +389,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "JU",
@@ -456,6 +474,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Le Jura augmente les aides pour les familles à faible revenu",
+          "url": "/fr/articles-jura/jura-augmentation-subventions-familles/",
+          "excerpt": "Le plafond du supplément passe de 300 à 330 CHF par mois et par parent pour les familles dont le RDU est inférieur à 18'000 CHF, à compter de 2027.",
+          "date": "2026-10-24T18:24:32.255Z"
+        },
+        {
           "title": "Impôts cantonaux Jura : taux, échelonnements et déductions 2024",
           "url": "/fr/articles-suisse/impots-cantonaux-jura-taux-deductions/",
           "excerpt": "Guide pratique du système fiscal du canton du Jura : structure à trois niveaux, multiplicateurs municipaux, déductions admises et portail officiel de déclaration.",
@@ -489,7 +513,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

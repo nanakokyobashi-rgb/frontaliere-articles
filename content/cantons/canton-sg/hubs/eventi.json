@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "f873ec7da3bb20e5298705bdf855eb4a1630a3cfa4582e7030f3e57ee782ee91",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "dd08c9382b463dddca5c1d24cab988cdb7344a7a755af7004e9e53da4e12c527",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T19:30:03.925Z",
+      "updatedAt": "2026-10-25T02:23:31.213Z",
       "keyFacts": 1
     }
   ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "GEROLD SPÄTH - Künstlerbücher",
-              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
+              "label": "Öffentliche Kunstführung",
+              "detail": "Rorschach",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-kunstfuehrung/"
             },
             {
-              "label": "Kinderwaren Börse",
-              "detail": "Röm.-kath. Kirchgemeindehaus Rapperswil-Jona, Rapperswil-Jona",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinderwaren-boerse/"
+              "label": "Schaufel, Schweiss und Staub: Ostschweizer Archäologie-Pionierinnen erzählen",
+              "detail": "St. Gallen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaufel-schweiss-und-staub-ostschweizer-archaeologiepionierinnen-erzaehlen/"
             },
             {
-              "label": "David Becomes King",
-              "detail": "Röm.-kath. Pfarreiheim St. Martin-Bruggen, St. Gallen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/david-becomes-king/"
+              "label": "SHEF'S KITCHEN PARTY",
+              "detail": "Grand Resort Bad Ragaz, Bad Ragaz",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/shefs-kitchen-party/"
             },
             {
-              "label": "Oktoberfest Bronschhofen",
-              "detail": "Bronschhofen, Wil (SG)",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oktoberfest-bronschhofen/"
+              "label": "Slow-Club – ein analoger Sonntag im Kulturmuseum: «Dem Licht nach»",
+              "detail": "Kulturmuseum, St. Gallen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/slow-club-ein-analoger-sonntag-im-kulturmuseum-dem-licht-nach/"
             },
             {
-              "label": "Country Night",
-              "detail": "Hotel Restaurant Sternen Unterwasser",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/alt-st-johann/country-night_AeETki1"
+              "label": "Soul Session with Sofie Amelie & Band",
+              "detail": "Kaffeehaus",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/soul-session-with-sofie-amelie-und-band_Af66U59"
             },
             {
-              "label": "Zu Gast - Grenzenlos Alpin",
-              "detail": "Wildhaus",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zu-gast-grenzenlos-alpin/"
+              "label": "Chorkonzert der Engadiner Kantorei \"Rosa et Lilium\"",
+              "detail": "Evang.-ref. Kirche Linsebühl",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/chorkonzert-der-engadiner-kantorei-rosa-et-lilium_AY3K7gC"
             },
             {
-              "label": "Blues Max String Trio « Öpis isch immer»",
-              "detail": "Chällertheater im Baronenhaus",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/blues-max-string-trio-oepis-isch-immer_AbTax14"
+              "label": "PopChor Konstanz",
+              "detail": "Lokremise St.Gallen",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/suche/st-gallen/popchor-konstanz_A1xfg6J"
             },
             {
-              "label": "Giora Feidman - For a Better World",
-              "detail": "St. Laurenzen Kirche St.Gallen",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/giora-feidman-for-a-better-world_ACcGtBd"
+              "label": "Rupert Huber, Vokalinio Meno Tinklas, Musik ist ein Modem",
+              "detail": "Evang.-ref. Kirche St. Mangen, St. Gallen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rupert-huber-vokalinio-meno-tinklas-musik-ist-ein-modem/"
             },
             {
-              "label": "Helga Schneider - Ich weiss",
-              "detail": "Wil SG",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-schneider-ich-weiss-13/"
+              "label": "The Gospel Celebration",
+              "detail": "ENTRA / KK Zürisee",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/rapperswil-sg/the-gospel-celebration_Ag88xS9"
             },
             {
-              "label": "Nicole Bernegger",
-              "detail": "ZAK Zentrum Aktueller Kultur",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/jona/nicole-bernegger_AvX8NbX"
+              "label": "Trio Sorriso",
+              "detail": "Röm.-kath. Pfarreiheim St. Nikolaus, Altstätten",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/trio-sorriso/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "SG",
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "GEROLD SPÄTH - Künstlerbücher",
-              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
+              "label": "Öffentliche Kunstführung",
+              "detail": "Rorschach",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-kunstfuehrung/"
             },
             {
-              "label": "Kinderwaren Börse",
-              "detail": "Röm.-kath. Kirchgemeindehaus Rapperswil-Jona, Rapperswil-Jona",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinderwaren-boerse/"
+              "label": "Schaufel, Schweiss und Staub: Ostschweizer Archäologie-Pionierinnen erzählen",
+              "detail": "St. Gallen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaufel-schweiss-und-staub-ostschweizer-archaeologiepionierinnen-erzaehlen/"
             },
             {
-              "label": "David Becomes King",
-              "detail": "Röm.-kath. Pfarreiheim St. Martin-Bruggen, St. Gallen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/david-becomes-king/"
+              "label": "SHEF'S KITCHEN PARTY",
+              "detail": "Grand Resort Bad Ragaz, Bad Ragaz",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/shefs-kitchen-party/"
             },
             {
-              "label": "Oktoberfest Bronschhofen",
-              "detail": "Bronschhofen, Wil (SG)",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oktoberfest-bronschhofen/"
+              "label": "Slow-Club – ein analoger Sonntag im Kulturmuseum: «Dem Licht nach»",
+              "detail": "Kulturmuseum, St. Gallen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/slow-club-ein-analoger-sonntag-im-kulturmuseum-dem-licht-nach/"
             },
             {
-              "label": "Countr Night",
-              "detail": "Hotel Restaurant Sternen Unterwasser",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/alt-st-johann/country-night_AeETki1"
+              "label": "Soul Session with Sofie Amelie & Band",
+              "detail": "Kaffeehaus",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/soul-session-with-sofie-amelie-und-band_Af66U59"
             },
             {
-              "label": "Zu Gast - Grenzenlos Alpin",
-              "detail": "Wildhaus",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zu-gast-grenzenlos-alpin/"
+              "label": "Chorkonzert der Engadiner Kantorei \"Rosa et Lilium\"",
+              "detail": "Evang.-ref. Kirche Linsebühl",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/chorkonzert-der-engadiner-kantorei-rosa-et-lilium_AY3K7gC"
             },
             {
-              "label": "Blues Max String Trio « Öpis isch immer»",
-              "detail": "Chällertheater im Baronenhaus",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/blues-max-string-trio-oepis-isch-immer_AbTax14"
+              "label": "PopChor Konstanz",
+              "detail": "Lokremise St.Gallen",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/suche/st-gallen/popchor-konstanz_A1xfg6J"
             },
             {
-              "label": "Giora Feidman - For a Better World",
-              "detail": "St. Laurenzen Kirche St.Gallen",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/giora-feidman-for-a-better-world_ACcGtBd"
+              "label": "Rupert Huber, Vokalinio Meno Tinklas, Musik ist ein Modem",
+              "detail": "Evang.-ref. Kirche St. Mangen, St. Gallen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rupert-huber-vokalinio-meno-tinklas-musik-ist-ein-modem/"
             },
             {
-              "label": "Helga Schneider - Ich weiss",
-              "detail": "Wil SG",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-schneider-ich-weiss-13/"
+              "label": "The Gospel Celebration",
+              "detail": "ENTRA / KK Zürisee",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/rapperswil-sg/the-gospel-celebration_Ag88xS9"
             },
             {
-              "label": "Nicole Bernegger",
-              "detail": "ZAK Zentrum Aktueller Kultur",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/jona/nicole-bernegger_AvX8NbX"
+              "label": "Trio Sorriso",
+              "detail": "Röm.-kath. Pfarreiheim St. Nikolaus, Altstätten",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/trio-sorriso/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "SG",
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "GEROLD SPÄTH - Künstlerbücher",
-              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
+              "label": "Öffentliche Kunstführung",
+              "detail": "Rorschach",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-kunstfuehrung/"
             },
             {
-              "label": "Kinderwaren Börse",
-              "detail": "Röm.-kath. Kirchgemeindehaus Rapperswil-Jona, Rapperswil-Jona",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinderwaren-boerse/"
+              "label": "Schaufel, Schweiss und Staub: Ostschweizer Archäologie-Pionierinnen erzählen",
+              "detail": "St. Gallen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaufel-schweiss-und-staub-ostschweizer-archaeologiepionierinnen-erzaehlen/"
             },
             {
-              "label": "David wird König",
-              "detail": "Röm.-kath. Pfarreiheim St. Martin-Bruggen, St. Gallen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/david-becomes-king/"
+              "label": "SHEF'S KITCHEN PARTY",
+              "detail": "Grand Resort Bad Ragaz, Bad Ragaz",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/shefs-kitchen-party/"
             },
             {
-              "label": "Oktoberfest Bronschhofen",
-              "detail": "Bronschhofen, Wil (SG)",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oktoberfest-bronschhofen/"
+              "label": "Slow-Club – ein analoger Sonntag im Kulturmuseum: «Dem Licht nach»",
+              "detail": "Kulturmuseum, St. Gallen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/slow-club-ein-analoger-sonntag-im-kulturmuseum-dem-licht-nach/"
             },
             {
-              "label": "Landnacht",
-              "detail": "Hotel Restaurant Sternen Unterwasser",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/alt-st-johann/country-night_AeETki1"
+              "label": "Soul Session with Sofie Amelie & Band",
+              "detail": "Kaffeehaus",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/soul-session-with-sofie-amelie-und-band_Af66U59"
             },
             {
-              "label": "Zu Gast - Grenzenlos Alpin",
-              "detail": "Wildhaus",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zu-gast-grenzenlos-alpin/"
+              "label": "Chorkonzert der Engadiner Kantorei \"Rosa et Lilium\"",
+              "detail": "Evang.-ref. Kirche Linsebühl",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/chorkonzert-der-engadiner-kantorei-rosa-et-lilium_AY3K7gC"
             },
             {
-              "label": "Blues Max String Trio « Öpis isch immer»",
-              "detail": "Chällertheater im Baronenhaus",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/blues-max-string-trio-oepis-isch-immer_AbTax14"
+              "label": "PopChor Konstanz",
+              "detail": "Lokremise St.Gallen",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/suche/st-gallen/popchor-konstanz_A1xfg6J"
             },
             {
-              "label": "Giora Feidman - For a Better World",
-              "detail": "St. Laurenzen Kirche St.Gallen",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/giora-feidman-for-a-better-world_ACcGtBd"
+              "label": "Rupert Huber, Vokalinio Meno Tinklas, Musik ist ein Modem",
+              "detail": "Evang.-ref. Kirche St. Mangen, St. Gallen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rupert-huber-vokalinio-meno-tinklas-musik-ist-ein-modem/"
             },
             {
-              "label": "Helga Schneider - Ich weiss",
-              "detail": "Wil SG",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-schneider-ich-weiss-13/"
+              "label": "The Gospel Celebration",
+              "detail": "ENTRA / KK Zürisee",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/rapperswil-sg/the-gospel-celebration_Ag88xS9"
             },
             {
-              "label": "Nicole Bernegger",
-              "detail": "ZAK Zentrum Aktueller Kultur",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/jona/nicole-bernegger_AvX8NbX"
+              "label": "Trio Sorriso",
+              "detail": "Röm.-kath. Pfarreiheim St. Nikolaus, Altstätten",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/trio-sorriso/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "SG",
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "GEROLD SPÄTH - Künstlerbücher",
-              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
+              "label": "Öffentliche Kunstführung",
+              "detail": "Rorschach",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-kunstfuehrung/"
             },
             {
-              "label": "Kinderwaren Börse",
-              "detail": "Röm.-kath. Kirchgemeindehaus Rapperswil-Jona, Rapperswil-Jona",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/kinderwaren-boerse/"
+              "label": "Schaufel, Schweiss und Staub: Ostschweizer Archäologie-Pionierinnen erzählen",
+              "detail": "St. Gallen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaufel-schweiss-und-staub-ostschweizer-archaeologiepionierinnen-erzaehlen/"
             },
             {
-              "label": "David devient roi",
-              "detail": "Röm.-kath. Pfarreiheim St. Martin-Bruggen, St. Gallen",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/david-becomes-king/"
+              "label": "SHEF'S KITCHEN PARTY",
+              "detail": "Grand Resort Bad Ragaz, Bad Ragaz",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/shefs-kitchen-party/"
             },
             {
-              "label": "Oktoberfest Bronschhofen",
-              "detail": "Bronschhofen, Wil (SG)",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oktoberfest-bronschhofen/"
+              "label": "Slow-Club – ein analoger Sonntag im Kulturmuseum: «Dem Licht nach»",
+              "detail": "Kulturmuseum, St. Gallen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/slow-club-ein-analoger-sonntag-im-kulturmuseum-dem-licht-nach/"
             },
             {
-              "label": "Soirée campagnarde",
-              "detail": "Hotel Restaurant Sternen Unterwasser",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/alt-st-johann/country-night_AeETki1"
+              "label": "Soul Session with Sofie Amelie & Band",
+              "detail": "Kaffeehaus",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/soul-session-with-sofie-amelie-und-band_Af66U59"
             },
             {
-              "label": "Zu Gast - Grenzenlos Alpin",
-              "detail": "Wildhaus",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zu-gast-grenzenlos-alpin/"
+              "label": "Chorkonzert der Engadiner Kantorei \"Rosa et Lilium\"",
+              "detail": "Evang.-ref. Kirche Linsebühl",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/chorkonzert-der-engadiner-kantorei-rosa-et-lilium_AY3K7gC"
             },
             {
-              "label": "Blues Max String Trio « Öpis isch immer»",
-              "detail": "Chällertheater im Baronenhaus",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/wil-sg/blues-max-string-trio-oepis-isch-immer_AbTax14"
+              "label": "PopChor Konstanz",
+              "detail": "Lokremise St.Gallen",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/suche/st-gallen/popchor-konstanz_A1xfg6J"
             },
             {
-              "label": "Giora Feidman - For a Better World",
-              "detail": "St. Laurenzen Kirche St.Gallen",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/giora-feidman-for-a-better-world_ACcGtBd"
+              "label": "Rupert Huber, Vokalinio Meno Tinklas, Musik ist ein Modem",
+              "detail": "Evang.-ref. Kirche St. Mangen, St. Gallen",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rupert-huber-vokalinio-meno-tinklas-musik-ist-ein-modem/"
             },
             {
-              "label": "Helga Schneider - Ich weiss",
-              "detail": "Wil SG",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/helga-schneider-ich-weiss-13/"
+              "label": "The Gospel Celebration",
+              "detail": "ENTRA / KK Zürisee",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/rapperswil-sg/the-gospel-celebration_Ag88xS9"
             },
             {
-              "label": "Nicole Bernegger",
-              "detail": "ZAK Zentrum Aktueller Kultur",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/jona/nicole-bernegger_AvX8NbX"
+              "label": "Trio Sorriso",
+              "detail": "Röm.-kath. Pfarreiheim St. Nikolaus, Altstätten",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/trio-sorriso/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

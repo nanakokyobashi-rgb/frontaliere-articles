@@ -57,6 +57,12 @@ import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 import { escapeRegExpLiteral } from './lib/escape-regexp.mjs';
 import { assertLocalizedToponymPair, extractArticleProjectionText } from './lib/localized-toponyms.mjs';
 import { sanitizeArticleFaqMarkdown } from '../../scripts/lib/article-link-contract.mjs';
+import {
+  assertFaqPairsHaveNoRejectedControls,
+  faqPairContainsRejectedControl,
+} from '../../scripts/lib/faq-control-contract.mjs';
+
+export { rejectRawFaqControlEscape } from '../../scripts/lib/faq-control-contract.mjs';
 
 // ── CLI argument parsing ─────────────────────────────────────
 function parseLimitArgs(argv) {
@@ -256,6 +262,7 @@ function isFaqPayloadCandidate(parsed) {
   const faq = extractFaqArray(parsed);
   return Array.isArray(faq)
     && faq.length > 0
+    && !faq.some((pair) => faqPairContainsRejectedControl(pair))
     && faq.every((pair) => (
       pair
       && typeof pair === 'object'
@@ -304,13 +311,13 @@ function extractFaqFromText(raw) {
   while ((m = qaPat.exec(raw)) !== null) {
     pairs.push({ q: m[1].trim(), a: m[2].trim() });
   }
-  if (pairs.length >= 2) return pairs;
+  if (pairs.length >= 2) return assertFaqPairsHaveNoRejectedControls(pairs, 'FAQ text fallback');
   // Pattern: numbered "1. Q: ... A: ..."
   const numPat = /\d+\.\s*(?:Q|D)[:.]\s*(.{15,200}?)\s*(?:A|R)[:.]\s*(.{20,500}?)(?=\d+\.\s*(?:Q|D)[:.]\s|$)/gis;
   while ((m = numPat.exec(raw)) !== null) {
     pairs.push({ q: m[1].trim(), a: m[2].trim() });
   }
-  return pairs.length >= 2 ? pairs : null;
+  return pairs.length >= 2 ? assertFaqPairsHaveNoRejectedControls(pairs, 'FAQ text fallback') : null;
 }
 
 /** Load progress file or create empty state */
@@ -965,7 +972,7 @@ function _extractCompleteJsonFaqPairs(raw) {
       // Malformed individual pair — skip, keep scanning for the rest.
     }
   }
-  return pairs;
+  return assertFaqPairsHaveNoRejectedControls(pairs, 'FAQ JSON salvage fallback');
 }
 
 function _isTruncationError(err) {
@@ -1022,6 +1029,7 @@ async function _generateFaqITAttempt(bodyText, maxTokens) {
     throw new Error(`JSON non valido dalla generazione FAQ: ${parseErr.message}`);
   }
   const faq = extractFaqArray(parsed);
+  assertFaqPairsHaveNoRejectedControls(faq, 'FAQ response');
   if (!faq) {
     // Try extracting from raw text as last resort
     const regexFaq = extractFaqFromText(raw);
@@ -1093,6 +1101,7 @@ async function _generateTopUpFaqITAttempt(bodyText, existingFaq, maxTokens) {
     throw new Error(`JSON non valido dalla generazione top-up FAQ: ${parseErr.message}`);
   }
   const faq = extractFaqArray(parsed);
+  assertFaqPairsHaveNoRejectedControls(faq, 'Top-up FAQ response');
   if (!faq) {
     const regexFaq = extractFaqFromText(raw);
     if (regexFaq && regexFaq.length >= 1) return regexFaq;
@@ -1194,7 +1203,7 @@ async function translateFaq(faqArray, targetLang) {
 /** Validate FAQ array: min 1 pair, q>10 chars, a>20 chars */
 function validateFaq(faq) {
   if (!Array.isArray(faq)) return null;
-  const valid = faq
+  const valid = assertFaqPairsHaveNoRejectedControls(faq, 'FAQ validation')
     .filter(pair =>
       pair && typeof pair.q === 'string' && typeof pair.a === 'string' &&
       pair.q.length > 10 && pair.a.length > 20
@@ -1207,6 +1216,7 @@ function validateFaq(faq) {
 
 /** Replace existing FAQ value in a body file */
 export function replaceFaqInBodyFile(filePath, faqArray, articleId, gate = {}) {
+  assertFaqPairsHaveNoRejectedControls(faqArray, 'FAQ writer');
   if (!passesLocalizedToponymGate({
     filePath,
     articleId,
@@ -1255,6 +1265,7 @@ export function replaceFaqInBodyFile(filePath, faqArray, articleId, gate = {}) {
  * Finds the last body key line and appends the FAQ key after it, before `};`
  */
 export function insertFaqIntoBodyFile(filePath, articleId, faqArray, gate = {}) {
+  assertFaqPairsHaveNoRejectedControls(faqArray, 'FAQ writer');
   let content = read(filePath);
 
   // Already has FAQ? Replace instead of insert.

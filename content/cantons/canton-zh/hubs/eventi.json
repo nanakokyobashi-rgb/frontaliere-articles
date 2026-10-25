@@ -4,12 +4,12 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "59c027fcda86ace5bd205353ede882d52341a059eaa62ae3b7761ad93d453227",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "e7a8e67e70894c05106747b499600c23036c7d745d183c05622d6e93645acaa4",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T19:30:03.925Z",
+      "updatedAt": "2026-10-25T02:23:31.213Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "373",
+          "value": "353",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Halloween-Disco",
-              "detail": "Weiningen ZH",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-disco/"
+              "label": "10 x 15 – Die Indie-Matinee",
+              "detail": "Zentrum Karl der Grosse",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/10-x-15-die-indie-matinee_AtnSPpn"
             },
             {
-              "label": "Autobiografisches Schreiben – Grundkurs",
-              "detail": "Kappel am Albis",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/autobiografisches-schreiben-grundkurs/"
+              "label": "Briefmarken Börse Schlieren",
+              "detail": "Schlieren",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/briefmarken-boerse-schlieren/"
             },
             {
-              "label": "Tagesausflug nach Solothurn",
-              "detail": "Winterthur",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tagesausflug-nach-solothurn/"
+              "label": "Familienworkshop: Maria Lassnig und Edward Munch",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familienworkshop-maria-lassnig-und-edward-munch/"
             },
             {
-              "label": "Wanderung entlang des Sempachersees",
-              "detail": "Uitikon-Waldegg, Uitikon",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wanderung-entlang-des-sempachersees/"
+              "label": "«Femizid an Agata oder Der Klang von Magma» – begleitet von Frauenliedern aus aller Welt",
+              "detail": "Zentrum Karl der Grosse",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/femizid-an-agata-oder-der-klang-von-magma-begleitet-von-frauenliedern-aus-aller-welt_A3usJSV"
             },
             {
-              "label": "Kurs Atem & Entspannung (4 Wochen)",
-              "detail": "Wetzikon",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-atem-entspannung-4-wochen/"
+              "label": "Kürbis schnitzen",
+              "detail": "Freizeitanlage Chrüzacher, Dietikon",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kuerbis-schnitzen/"
             },
             {
-              "label": "Masterclass Klavier Yulianna Avdeeva",
-              "detail": "Stadthaus, Winterthur",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/masterclass-klavier-yulianna-avdeeva/"
+              "label": "Musik aus Indien: Sahana Banerjee (Sitar) & Udai Mazumdar (Tabla)",
+              "detail": "Museum Rietberg",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/suche/zuerich/musik-aus-indien-sahana-banerjee-sitar-und-udai-mazumdar-tabla_AjfJL4J"
             },
             {
-              "label": "Grundkenntnistest",
-              "detail": "Dübendorf",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/grundkenntnistest-11/"
+              "label": "Literatur und Musik mit Thomas Sarbacher und Rachel Braunschweig",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literatur-und-musik-mit-thomas-sarbacher-und-rachel-braunschweig/"
             },
             {
-              "label": "Kantonaler Deutschtest für die Einbürgerung",
-              "detail": "Dübendorf",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kantonaler-deutschtest-fuer-die-einbuergerung-8/"
+              "label": "Old-Time Jam",
+              "detail": "Galotti",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/old-time-jam_ASX6iBe"
             },
             {
-              "label": "Tanke dein Gesundheitskonto auf - Achtsamkeit in der Natur erfahren",
-              "detail": "Richterswil",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanke-dein-gesundheitskonto-auf-achtsamkeit-in-der-natur-erfahren/"
+              "label": "Saisonausklang",
+              "detail": "Wildnispark Zürich, Zürich",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/saisonausklang/"
             },
             {
-              "label": "Clown Gili",
-              "detail": "Urdorf",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/clown-gili/"
+              "label": "«Richtig im falschen Leben» mit Marina Vidovic",
+              "detail": "Zentrum Karl der Grosse",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/richtig-im-falschen-leben-mit-marina-vidovic_Aicd68w"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/zurigo/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -104,12 +104,6 @@
           "url": "/articoli-svizzera/giorni-festivi-canton-zurigo-guida/",
           "excerpt": "Come distinguere le festività cantonali da quelle federali.",
           "date": "2026-10-12T00:26:51.075Z"
-        },
-        {
-          "title": "Elezioni cantonali a Zurigo: guida a calendario e voto",
-          "url": "/articoli-svizzera/elezioni-cantonali-zurigo-vademecum/",
-          "excerpt": "Guida pratica alle elezioni cantonali nel Cantone di Zurigo: cosa controllare su calendario, modalità di voto, liste e informazioni ufficiali.",
-          "date": "2026-10-05T01:17:29.052Z"
         },
         {
           "title": "Festival Zurigo: alla Svizzera luna wedler il golden eye award",
@@ -129,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "ZH",
@@ -139,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "373",
+          "value": "353",
           "note": "from the site’s events calendar"
         }
       ],
@@ -150,69 +144,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Halloween-Disco",
-              "detail": "Weiningen ZH",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-disco/"
+              "label": "10 x 15 – Die Indie-Matinee",
+              "detail": "Zentrum Karl der Grosse",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/10-x-15-die-indie-matinee_AtnSPpn"
             },
             {
-              "label": "Autobiografisches Schreiben – Grundkurs",
-              "detail": "Kappel am Albis",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/autobiografisches-schreiben-grundkurs/"
+              "label": "Briefmarken Börse Schlieren",
+              "detail": "Schlieren",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/briefmarken-boerse-schlieren/"
             },
             {
-              "label": "Tagesausflug nach Solothurn",
-              "detail": "Winterthur",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tagesausflug-nach-solothurn/"
+              "label": "Familienworkshop: Maria Lassnig und Edward Munch",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familienworkshop-maria-lassnig-und-edward-munch/"
             },
             {
-              "label": "Wanderung entlang des Sempachersees",
-              "detail": "Uitikon-Waldegg, Uitikon",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wanderung-entlang-des-sempachersees/"
+              "label": "«Femizid an Agata oder Der Klang von Magma» – begleitet von Frauenliedern aus aller Welt",
+              "detail": "Zentrum Karl der Grosse",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/femizid-an-agata-oder-der-klang-von-magma-begleitet-von-frauenliedern-aus-aller-welt_A3usJSV"
             },
             {
-              "label": "Kurs Atem & Entspannung (4 Wochen)",
-              "detail": "Wetzikon",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-atem-entspannung-4-wochen/"
+              "label": "Kürbis schnitzen",
+              "detail": "Freizeitanlage Chrüzacher, Dietikon",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kuerbis-schnitzen/"
             },
             {
-              "label": "Masterclass Klavier Yulianna Avdeeva",
-              "detail": "Stadthaus, Winterthur",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/masterclass-klavier-yulianna-avdeeva/"
+              "label": "Musik aus Indien: Sahana Banerjee (Sitar) & Udai Mazumdar (Tabla)",
+              "detail": "Museum Rietberg",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/suche/zuerich/musik-aus-indien-sahana-banerjee-sitar-und-udai-mazumdar-tabla_AjfJL4J"
             },
             {
-              "label": "Grundkenntnistest",
-              "detail": "Dübendorf",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/grundkenntnistest-11/"
+              "label": "Literatur und Musik mit Thomas Sarbacher und Rachel Braunschweig",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literatur-und-musik-mit-thomas-sarbacher-und-rachel-braunschweig/"
             },
             {
-              "label": "Kantonaler Deutschtest für die Einbürgerung",
-              "detail": "Dübendorf",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kantonaler-deutschtest-fuer-die-einbuergerung-8/"
+              "label": "Old-Time Jam",
+              "detail": "Galotti",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/old-time-jam_ASX6iBe"
             },
             {
-              "label": "Tanke dein Gesundheitskonto auf - Achtsamkeit in der Natur erfahren",
-              "detail": "Richterswil",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanke-dein-gesundheitskonto-auf-achtsamkeit-in-der-natur-erfahren/"
+              "label": "Saisonausklang",
+              "detail": "Wildnispark Zürich, Zürich",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/saisonausklang/"
             },
             {
-              "label": "Clown Gili",
-              "detail": "Urdorf",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/clown-gili/"
+              "label": "«Richtig im falschen Leben» mit Marina Vidovic",
+              "detail": "Zentrum Karl der Grosse",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/richtig-im-falschen-leben-mit-marina-vidovic_Aicd68w"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/zurich/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -221,12 +215,6 @@
           "url": "/en/swiss-articles/public-holidays-zurich-canton-guide/",
           "excerpt": "How to distinguish cantonal holidays from federal ones.",
           "date": "2026-10-12T00:26:51.075Z"
-        },
-        {
-          "title": "Cantonal elections in Zurich: a guide to the calendar and voting",
-          "url": "/en/swiss-articles/zurich-cantonal-elections-voting-guide/",
-          "excerpt": "Practical guide to the cantonal elections in the Canton of Zurich: what to check regarding the election schedule, voting methods, lists, and official information.",
-          "date": "2026-10-05T01:17:29.052Z"
         },
         {
           "title": "Festival Zurich: the golden eye award goes to Luna Wedler in Switzerland",
@@ -246,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "ZH",
@@ -256,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "373",
+          "value": "353",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -267,69 +255,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Halloween-Disco",
-              "detail": "Weiningen ZH",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-disco/"
+              "label": "10 x 15 – Die Indie-Matinee",
+              "detail": "Zentrum Karl der Grosse",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/10-x-15-die-indie-matinee_AtnSPpn"
             },
             {
-              "label": "Autobiografisches Schreiben – Grundkurs",
-              "detail": "Kappel am Albis",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/autobiografisches-schreiben-grundkurs/"
+              "label": "Briefmarken Börse Schlieren",
+              "detail": "Schlieren",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/briefmarken-boerse-schlieren/"
             },
             {
-              "label": "Tagesausflug nach Solothurn",
-              "detail": "Winterthur",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tagesausflug-nach-solothurn/"
+              "label": "Familienworkshop: Maria Lassnig und Edward Munch",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familienworkshop-maria-lassnig-und-edward-munch/"
             },
             {
-              "label": "Wanderung entlang des Sempachersees",
-              "detail": "Uitikon-Waldegg, Uitikon",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wanderung-entlang-des-sempachersees/"
+              "label": "«Femizid an Agata oder Der Klang von Magma» – begleitet von Frauenliedern aus aller Welt",
+              "detail": "Zentrum Karl der Grosse",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/femizid-an-agata-oder-der-klang-von-magma-begleitet-von-frauenliedern-aus-aller-welt_A3usJSV"
             },
             {
-              "label": "Kurs Atem & Entspannung (4 Wochen)",
-              "detail": "Wetzikon",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-atem-entspannung-4-wochen/"
+              "label": "Kürbis schnitzen",
+              "detail": "Freizeitanlage Chrüzacher, Dietikon",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kuerbis-schnitzen/"
             },
             {
-              "label": "Masterclass Klavier Yulianna Avdeeva",
-              "detail": "Stadthaus, Winterthur",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/masterclass-klavier-yulianna-avdeeva/"
+              "label": "Musik aus Indien: Sahana Banerjee (Sitar) & Udai Mazumdar (Tabla)",
+              "detail": "Museum Rietberg",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/suche/zuerich/musik-aus-indien-sahana-banerjee-sitar-und-udai-mazumdar-tabla_AjfJL4J"
             },
             {
-              "label": "Grundkenntnistest",
-              "detail": "Dübendorf",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/grundkenntnistest-11/"
+              "label": "Literatur und Musik mit Thomas Sarbacher und Rachel Braunschweig",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literatur-und-musik-mit-thomas-sarbacher-und-rachel-braunschweig/"
             },
             {
-              "label": "Kantonaler Deutschtest für die Einbürgerung",
-              "detail": "Dübendorf",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kantonaler-deutschtest-fuer-die-einbuergerung-8/"
+              "label": "Old-Time Jam",
+              "detail": "Galotti",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/old-time-jam_ASX6iBe"
             },
             {
-              "label": "Tanke dein Gesundheitskonto auf - Achtsamkeit in der Natur erfahren",
-              "detail": "Richterswil",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanke-dein-gesundheitskonto-auf-achtsamkeit-in-der-natur-erfahren/"
+              "label": "Saisonausklang",
+              "detail": "Wildnispark Zürich, Zürich",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/saisonausklang/"
             },
             {
-              "label": "Clown Gili",
-              "detail": "Urdorf",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/clown-gili/"
+              "label": "«Richtig im falschen Leben» mit Marina Vidovic",
+              "detail": "Zentrum Karl der Grosse",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/richtig-im-falschen-leben-mit-marina-vidovic_Aicd68w"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/zurich/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -338,12 +326,6 @@
           "url": "/de/schweiz-artikel/feiertage-kanton-zuerich-leitfaden/",
           "excerpt": "Wie man kantonale Feiertage von eidgenössischen unterscheidet.",
           "date": "2026-10-12T00:26:51.075Z"
-        },
-        {
-          "title": "Kantonswahlen in Zürich: Kalender- und Abstimmungsleitfaden",
-          "url": "/de/schweiz-artikel/zuerich-kantonswahlen-wahlleitfaden/",
-          "excerpt": "Praktischer Leitfaden zu den Kantonswahlen im Kanton Zürich: Was ist in Kalender, Abstimmungsmodalitäten, Listen und amtlichen Informationen zu beachten?",
-          "date": "2026-10-05T01:17:29.052Z"
         },
         {
           "title": "Festival Zürich: An die Schweiz Luna Wedler den Golden Eye Award",
@@ -363,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "ZH",
@@ -373,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "373",
+          "value": "353",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -384,69 +366,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Halloween-Disco",
-              "detail": "Weiningen ZH",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/halloween-disco/"
+              "label": "10 x 15 – Die Indie-Matinee",
+              "detail": "Zentrum Karl der Grosse",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/10-x-15-die-indie-matinee_AtnSPpn"
             },
             {
-              "label": "Autobiografisches Schreiben – Grundkurs",
-              "detail": "Kappel am Albis",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/autobiografisches-schreiben-grundkurs/"
+              "label": "Briefmarken Börse Schlieren",
+              "detail": "Schlieren",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/briefmarken-boerse-schlieren/"
             },
             {
-              "label": "Tagesausflug nach Solothurn",
-              "detail": "Winterthur",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tagesausflug-nach-solothurn/"
+              "label": "Familienworkshop: Maria Lassnig und Edward Munch",
+              "detail": "Zurich, Zürich",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familienworkshop-maria-lassnig-und-edward-munch/"
             },
             {
-              "label": "Wanderung entlang des Sempachersees",
-              "detail": "Uitikon-Waldegg, Uitikon",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wanderung-entlang-des-sempachersees/"
+              "label": "«Femizid an Agata oder Der Klang von Magma» – begleitet von Frauenliedern aus aller Welt",
+              "detail": "Zentrum Karl der Grosse",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/femizid-an-agata-oder-der-klang-von-magma-begleitet-von-frauenliedern-aus-aller-welt_A3usJSV"
             },
             {
-              "label": "Kurs Atem & Entspannung (4 Wochen)",
-              "detail": "Wetzikon",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-atem-entspannung-4-wochen/"
+              "label": "Kürbis schnitzen",
+              "detail": "Freizeitanlage Chrüzacher, Dietikon",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kuerbis-schnitzen/"
             },
             {
-              "label": "Masterclass Klavier Yulianna Avdeeva",
-              "detail": "Stadthaus, Winterthur",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/masterclass-klavier-yulianna-avdeeva/"
+              "label": "Musik aus Indien: Sahana Banerjee (Sitar) & Udai Mazumdar (Tabla)",
+              "detail": "Museum Rietberg",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/suche/zuerich/musik-aus-indien-sahana-banerjee-sitar-und-udai-mazumdar-tabla_AjfJL4J"
             },
             {
-              "label": "Grundkenntnistest",
-              "detail": "Dübendorf",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/grundkenntnistest-11/"
+              "label": "Literatur und Musik mit Thomas Sarbacher und Rachel Braunschweig",
+              "detail": "Tonhalle, Zürich",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literatur-und-musik-mit-thomas-sarbacher-und-rachel-braunschweig/"
             },
             {
-              "label": "Kantonaler Deutschtest für die Einbürgerung",
-              "detail": "Dübendorf",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kantonaler-deutschtest-fuer-die-einbuergerung-8/"
+              "label": "Old-Time Jam",
+              "detail": "Galotti",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/old-time-jam_ASX6iBe"
             },
             {
-              "label": "Tanke dein Gesundheitskonto auf - Achtsamkeit in der Natur erfahren",
-              "detail": "Richterswil",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/tanke-dein-gesundheitskonto-auf-achtsamkeit-in-der-natur-erfahren/"
+              "label": "Saisonausklang",
+              "detail": "Wildnispark Zürich, Zürich",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/saisonausklang/"
             },
             {
-              "label": "Clown Gili",
-              "detail": "Urdorf",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/clown-gili/"
+              "label": "«Richtig im falschen Leben» mit Marina Vidovic",
+              "detail": "Zentrum Karl der Grosse",
+              "date": "2026-10-25",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/richtig-im-falschen-leben-mit-marina-vidovic_Aicd68w"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/zurich/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -455,12 +437,6 @@
           "url": "/fr/articles-suisse/jours-feries-canton-zurich-guide/",
           "excerpt": "Comment distinguer les jours fériés cantonaux des jours fériés fédéraux.",
           "date": "2026-10-12T00:26:51.075Z"
-        },
-        {
-          "title": "Élections cantonales à Zurich : guide du calendrier et du vote",
-          "url": "/fr/articles-suisse/elections-cantonales-zurich-guide-vote/",
-          "excerpt": "Guide pratique des élections cantonales dans le canton de Zurich : ce qu'il faut vérifier concernant le calendrier, les modalités de vote, les listes et les informations officielles.",
-          "date": "2026-10-05T01:17:29.052Z"
         },
         {
           "title": "Festival Zurich : à la Suisse luna wedler le golden eye award",
@@ -480,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

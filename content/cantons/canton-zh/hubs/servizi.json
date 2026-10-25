@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-23T10:42:39.932Z",
-  "contentHash": "64352a7185e9ecf7f67b3f8396e666605eb0da2a917c5d9ec4d3e4beaa027de1",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "8a6b95e1dd0ff6d793026de4f634d65d194af2618926f062a5572db74645b198",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,22 +14,22 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-23T03:28:55.384Z",
+      "updatedAt": "2026-10-25T01:48:37.897Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-22T21:36:37.991Z",
+      "updatedAt": "2026-10-25T04:40:51.950Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-23T05:06:32.759Z",
+      "updatedAt": "2026-10-25T05:00:57.781Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T20:51:18.236Z",
+      "updatedAt": "2026-10-24T19:51:00.050Z",
       "keyFacts": 0
     }
   ],
@@ -49,7 +49,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "31",
-          "note": "offerta mediana 320 CHF"
+          "note": "offerta mediana 450 CHF"
         }
       ],
       "dataBlocks": [
@@ -86,16 +86,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-22T22:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-10-23T22:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-24T22:00:00.000Z"
             },
             {
@@ -112,11 +102,21 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-10-27T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-28T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-29T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-23T03:28:55.384Z"
+          "updatedAt": "2026-10-25T01:48:37.897Z"
         },
         {
           "id": "aste-targhe",
@@ -139,7 +139,7 @@
             },
             {
               "label": "ZH10304",
-              "value": "2550 CHF",
+              "value": "2700 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-28T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43663"
@@ -147,7 +147,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-22T21:36:37.991Z"
+          "updatedAt": "2026-10-25T04:40:51.950Z"
         },
         {
           "id": "meteo",
@@ -156,18 +156,23 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "6 °C",
-              "detail": "oggi da 6 a 13 °C"
+              "value": "8 °C",
+              "detail": "oggi da 7 a 13 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "2’000. Geburt des Jahres 2026 an der Klinik für Geburtshilfe",
+              "date": "2026-10-23T05:21:46.000Z",
+              "url": "https://www.usz.ch/2000-geburt-des-jahres-2026-an-der-klinik-fuer-geburtshilfe/"
+            },
             {
               "label": "Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
               "date": "2026-10-22T12:40:30.000Z",
@@ -192,14 +197,9 @@
               "label": "MITTE1|2 im Fachdialog: Das USZ präsentiert sein Neubauprojekt",
               "date": "2026-10-20T07:39:43.000Z",
               "url": "https://www.usz.ch/mitte12-im-fachdialog-das-usz-praesentiert-sein-neubauprojekt/"
-            },
-            {
-              "label": "Brustkrebs Zelle für Zelle verstehen",
-              "date": "2026-10-19T08:34:22.000Z",
-              "url": "https://www.usz.ch/brustkrebs-zelle-fuer-zelle-verstehen/"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -279,7 +279,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "ZH",
@@ -296,7 +296,7 @@
         {
           "label": "Plate auctions running",
           "value": "31",
-          "note": "typical bid 320 CHF"
+          "note": "typical bid 450 CHF"
         }
       ],
       "dataBlocks": [
@@ -333,16 +333,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-22T22:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-10-23T22:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-24T22:00:00.000Z"
             },
             {
@@ -359,11 +349,21 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-10-27T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-28T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-29T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-23T03:28:55.384Z"
+          "updatedAt": "2026-10-25T01:48:37.897Z"
         },
         {
           "id": "aste-targhe",
@@ -386,7 +386,7 @@
             },
             {
               "label": "ZH10304",
-              "value": "2,550 CHF",
+              "value": "2,700 CHF",
               "detail": "current bid",
               "date": "2026-10-28T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43663"
@@ -394,7 +394,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-22T21:36:37.991Z"
+          "updatedAt": "2026-10-25T04:40:51.950Z"
         },
         {
           "id": "meteo",
@@ -403,18 +403,23 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "6 °C",
-              "detail": "today from 6 to 13 °C"
+              "value": "8 °C",
+              "detail": "today from 7 to 13 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "2’000. Geburt des Jahres 2026 an der Klinik für Geburtshilfe",
+              "date": "2026-10-23T05:21:46.000Z",
+              "url": "https://www.usz.ch/2000-geburt-des-jahres-2026-an-der-klinik-fuer-geburtshilfe/"
+            },
             {
               "label": "Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
               "date": "2026-10-22T12:40:30.000Z",
@@ -439,14 +444,9 @@
               "label": "MITTE1|2 im Fachdialog: Das USZ präsentiert sein Neubauprojekt",
               "date": "2026-10-20T07:39:43.000Z",
               "url": "https://www.usz.ch/mitte12-im-fachdialog-das-usz-praesentiert-sein-neubauprojekt/"
-            },
-            {
-              "label": "Brustkrebs Zelle für Zelle verstehen",
-              "date": "2026-10-19T08:34:22.000Z",
-              "url": "https://www.usz.ch/brustkrebs-zelle-fuer-zelle-verstehen/"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -522,7 +522,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "ZH",
@@ -539,7 +539,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "31",
-          "note": "mittleres Gebot 320 CHF"
+          "note": "mittleres Gebot 450 CHF"
         }
       ],
       "dataBlocks": [
@@ -576,16 +576,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-22T22:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-10-23T22:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-24T22:00:00.000Z"
             },
             {
@@ -602,11 +592,21 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-10-27T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-28T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-29T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-23T03:28:55.384Z"
+          "updatedAt": "2026-10-25T01:48:37.897Z"
         },
         {
           "id": "aste-targhe",
@@ -629,7 +629,7 @@
             },
             {
               "label": "ZH10304",
-              "value": "2’550 CHF",
+              "value": "2’700 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-28T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43663"
@@ -637,7 +637,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-22T21:36:37.991Z"
+          "updatedAt": "2026-10-25T04:40:51.950Z"
         },
         {
           "id": "meteo",
@@ -646,18 +646,23 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "6 °C",
-              "detail": "heute 6 bis 13 °C"
+              "value": "8 °C",
+              "detail": "heute 7 bis 13 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "2’000. Geburt des Jahres 2026 an der Klinik für Geburtshilfe",
+              "date": "2026-10-23T05:21:46.000Z",
+              "url": "https://www.usz.ch/2000-geburt-des-jahres-2026-an-der-klinik-fuer-geburtshilfe/"
+            },
             {
               "label": "Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
               "date": "2026-10-22T12:40:30.000Z",
@@ -682,14 +687,9 @@
               "label": "MITTE1|2 im Fachdialog: Das USZ präsentiert sein Neubauprojekt",
               "date": "2026-10-20T07:39:43.000Z",
               "url": "https://www.usz.ch/mitte12-im-fachdialog-das-usz-praesentiert-sein-neubauprojekt/"
-            },
-            {
-              "label": "Brustkrebs Zelle für Zelle verstehen",
-              "date": "2026-10-19T08:34:22.000Z",
-              "url": "https://www.usz.ch/brustkrebs-zelle-fuer-zelle-verstehen/"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -765,7 +765,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "ZH",
@@ -782,7 +782,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "31",
-          "note": "offre centrale 320 CHF"
+          "note": "offre centrale 450 CHF"
         }
       ],
       "dataBlocks": [
@@ -819,16 +819,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-22T22:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-10-23T22:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-24T22:00:00.000Z"
             },
             {
@@ -845,11 +835,21 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-10-27T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-28T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-29T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-23T03:28:55.384Z"
+          "updatedAt": "2026-10-25T01:48:37.897Z"
         },
         {
           "id": "aste-targhe",
@@ -872,7 +872,7 @@
             },
             {
               "label": "ZH10304",
-              "value": "2 550 CHF",
+              "value": "2 700 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-28T18:00:00.000Z",
               "url": "https://www.auktion.stva.zh.ch/de/auction/43663"
@@ -880,7 +880,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-22T21:36:37.991Z"
+          "updatedAt": "2026-10-25T04:40:51.950Z"
         },
         {
           "id": "meteo",
@@ -889,18 +889,23 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "6 °C",
-              "detail": "aujourd’hui de 6 à 13 °C"
+              "value": "8 °C",
+              "detail": "aujourd’hui de 7 à 13 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-23T05:06:32.759Z"
+          "updatedAt": "2026-10-25T05:00:57.781Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "2’000. Geburt des Jahres 2026 an der Klinik für Geburtshilfe",
+              "date": "2026-10-23T05:21:46.000Z",
+              "url": "https://www.usz.ch/2000-geburt-des-jahres-2026-an-der-klinik-fuer-geburtshilfe/"
+            },
             {
               "label": "Administrativuntersuchung in der Klinik für Urologie abgeschlossen",
               "date": "2026-10-22T12:40:30.000Z",
@@ -925,14 +930,9 @@
               "label": "MITTE1|2 im Fachdialog: Das USZ präsentiert sein Neubauprojekt",
               "date": "2026-10-20T07:39:43.000Z",
               "url": "https://www.usz.ch/mitte12-im-fachdialog-das-usz-praesentiert-sein-neubauprojekt/"
-            },
-            {
-              "label": "Brustkrebs Zelle für Zelle verstehen",
-              "date": "2026-10-19T08:34:22.000Z",
-              "url": "https://www.usz.ch/brustkrebs-zelle-fuer-zelle-verstehen/"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -1004,7 +1004,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

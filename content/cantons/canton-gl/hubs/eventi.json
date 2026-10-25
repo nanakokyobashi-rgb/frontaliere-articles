@@ -4,12 +4,12 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "a8e00cdb22b6145c8c39130452dc1cfe3b3715654b6b6a6c9efee54e395eba3a",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "ea905a9b567eb3f6cf9db963b6467731c044f883b8e696e849a280de1c802026",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T19:30:03.925Z",
+      "updatedAt": "2026-10-25T02:23:31.213Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "23",
+          "value": "22",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Faszination Orgel",
+              "label": "Nachmittag für Alle Hip-Hop Tanzworkshop",
               "detail": "Glarus",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/faszination-orgel-5/"
-            },
-            {
-              "label": "Kulturbühne Lihn und Duo Schneeberger & Sieber",
-              "detail": "Seminarhotel Linh",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/filzbach/kulturbuehne-lihn-und-duo-schneeberger-und-sieber_AYv1WSF"
-            },
-            {
-              "label": "Kulturbühne Lihn und Duo Schneeberger & Sieber",
-              "detail": "Filzbach (Kerenzerberg)",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kulturbuehne-lihn-und-duo-schneeberger-sieber-1/"
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachmittag-fuer-alle-hip-hop-tanzworkshop/"
             },
             {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
               "detail": "Luchsingen-Hätzingen — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
               "label": "Stricken in der Bibliothek Grosstal Hätzingen",
               "detail": "Bibliothek Grosstal Hätzingen — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — in corso, ultimo giorno: 24 ottobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
-            {
-              "label": "Kindermusical",
+              "label": "Mittendrin - Perimenopause",
               "detail": "Glarus",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindermusical-1/"
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittendrin-perimenopause/"
             },
             {
-              "label": "90. Hauptversammlung SSCN 2026",
-              "detail": "HPZ Oberurnen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/90-hauptversammlung-sscn-2026/"
+              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
+              "detail": "Schützenhaus Glarus, Glarus",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
-              "label": "Between Heaven and Earth",
+              "label": "Extrawurst- eine schlagkräftige Komödie",
+              "detail": "Kantonsschule Glarus, Glarus",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/glarus/extrawurst-eine-schlagkraeftige-komoedie_AuAFDbZ"
+            },
+            {
+              "label": "Glarner Junioren Turnier 2026",
               "detail": "Glarus",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-himmel-und-erde/"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-junioren-turnier-2026/"
+            },
+            {
+              "label": "Flohmarkt im Vereinslokal des MV Wolves",
+              "detail": "Glarus",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flohmarkt-im-vereinslokal-des-mv-wolves/"
+            },
+            {
+              "label": "Saisonschluss und Finnissage",
+              "detail": "Freulerpalast",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/saisonschluss-und-finnissage/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/glarona/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "GL",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "23",
+          "value": "22",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,69 +138,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Faszination Orgel",
+              "label": "Nachmittag für Alle Hip-Hop Tanzworkshop",
               "detail": "Glarus",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/faszination-orgel-5/"
-            },
-            {
-              "label": "Kulturbühne Lihn und Duo Schneeberger & Sieber",
-              "detail": "Seminarhotel Linh",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/filzbach/kulturbuehne-lihn-und-duo-schneeberger-und-sieber_AYv1WSF"
-            },
-            {
-              "label": "Kulturbühne Lihn und Duo Schneeberger & Sieber",
-              "detail": "Filzbach (Kerenzerberg)",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kulturbuehne-lihn-und-duo-schneeberger-sieber-1/"
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachmittag-fuer-alle-hip-hop-tanzworkshop/"
             },
             {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — ongoing, last day: 11 November 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
               "detail": "Luchsingen-Hätzingen — ongoing, last day: 26 October 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
               "label": "Stricken in der Bibliothek Grosstal Hätzingen",
               "detail": "Bibliothek Grosstal Hätzingen — ongoing, last day: 26 October 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — ongoing, last day: 24 October 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
-            {
-              "label": "Kindermusical",
+              "label": "Mittendrin - Perimenopause",
               "detail": "Glarus",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindermusical-1/"
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittendrin-perimenopause/"
             },
             {
-              "label": "90. Hauptversammlung SSCN 2026",
-              "detail": "HPZ Oberurnen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/90-hauptversammlung-sscn-2026/"
+              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
+              "detail": "Schützenhaus Glarus, Glarus",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
-              "label": "Between Heaven and Earth",
+              "label": "Extrawurst- eine schlagkräftige Komödie",
+              "detail": "Kantonsschule Glarus, Glarus",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/glarus/extrawurst-eine-schlagkraeftige-komoedie_AuAFDbZ"
+            },
+            {
+              "label": "Glarner Junioren Turnier 2026",
               "detail": "Glarus",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-himmel-und-erde/"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-junioren-turnier-2026/"
+            },
+            {
+              "label": "Flohmarkt im Vereinslokal des MV Wolves",
+              "detail": "Glarus",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flohmarkt-im-vereinslokal-des-mv-wolves/"
+            },
+            {
+              "label": "Saisonschluss und Finnissage",
+              "detail": "Freulerpalast",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/saisonschluss-und-finnissage/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/glarus/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "GL",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "23",
+          "value": "22",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,69 +243,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Faszination Orgel",
+              "label": "Nachmittag für Alle Hip-Hop Tanzworkshop",
               "detail": "Glarus",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/faszination-orgel-5/"
-            },
-            {
-              "label": "Kulturbühne Lihn und Duo Schneeberger & Sieber",
-              "detail": "Seminarhotel Linh",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/filzbach/kulturbuehne-lihn-und-duo-schneeberger-und-sieber_AYv1WSF"
-            },
-            {
-              "label": "Kulturbühne Lihn und Duo Schneeberger & Sieber",
-              "detail": "Filzbach (Kerenzerberg)",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kulturbuehne-lihn-und-duo-schneeberger-sieber-1/"
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachmittag-fuer-alle-hip-hop-tanzworkshop/"
             },
             {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
               "detail": "Luchsingen-Hätzingen — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
               "label": "Stricken in der Bibliothek Grosstal Hätzingen",
               "detail": "Bibliothek Grosstal Hätzingen — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — läuft, letzter Tag: 24. Oktober 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
-            {
-              "label": "Kindermusical",
+              "label": "Mittendrin - Perimenopause",
               "detail": "Glarus",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindermusical-1/"
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittendrin-perimenopause/"
             },
             {
-              "label": "90. Hauptversammlung SSCN 2026",
-              "detail": "HPZ Oberurnen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/90-hauptversammlung-sscn-2026/"
+              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
+              "detail": "Schützenhaus Glarus, Glarus",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
-              "label": "Zwischen Himmel und Erde",
+              "label": "Extrawurst- eine schlagkräftige Komödie",
+              "detail": "Kantonsschule Glarus, Glarus",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/glarus/extrawurst-eine-schlagkraeftige-komoedie_AuAFDbZ"
+            },
+            {
+              "label": "Glarner Junioren Turnier 2026",
               "detail": "Glarus",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-himmel-und-erde/"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-junioren-turnier-2026/"
+            },
+            {
+              "label": "Flohmarkt im Vereinslokal des MV Wolves",
+              "detail": "Glarus",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flohmarkt-im-vereinslokal-des-mv-wolves/"
+            },
+            {
+              "label": "Saisonschluss und Finnissage",
+              "detail": "Freulerpalast",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/saisonschluss-und-finnissage/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/glarus/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "GL",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "23",
+          "value": "22",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,69 +348,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Faszination Orgel",
+              "label": "Nachmittag für Alle Hip-Hop Tanzworkshop",
               "detail": "Glarus",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/faszination-orgel-5/"
-            },
-            {
-              "label": "Kulturbühne Lihn und Duo Schneeberger & Sieber",
-              "detail": "Seminarhotel Linh",
-              "date": "2026-10-23",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/filzbach/kulturbuehne-lihn-und-duo-schneeberger-und-sieber_AYv1WSF"
-            },
-            {
-              "label": "Kulturbühne Lihn und Duo Schneeberger & Sieber",
-              "detail": "Filzbach (Kerenzerberg)",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kulturbuehne-lihn-und-duo-schneeberger-sieber-1/"
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachmittag-fuer-alle-hip-hop-tanzworkshop/"
             },
             {
               "label": "Schnupperkurs de Balboa",
               "detail": "Ennenda, Glarus — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
               "detail": "Luchsingen-Hätzingen — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
               "label": "Stricken in der Bibliothek Grosstal Hätzingen",
               "detail": "Bibliothek Grosstal Hätzingen — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-23",
+              "date": "2026-10-25",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
-              "label": "Trachtenausstellung im Dorfkern Elm",
-              "detail": "Elm, Glarus Süd — en cours, dernier jour : 24 octobre 2026",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/100-jahre-schweizer-trachtenvereinigung/"
-            },
-            {
-              "label": "Kindermusical",
+              "label": "Mittendrin - Perimenopause",
               "detail": "Glarus",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kindermusical-1/"
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mittendrin-perimenopause/"
             },
             {
-              "label": "90. Hauptversammlung SSCN 2026",
-              "detail": "HPZ Oberurnen",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/90-hauptversammlung-sscn-2026/"
+              "label": "Das Theater Glarus spielt \"Dr Franzoos im Chlüntel\" (De Franzos im Ybrig)",
+              "detail": "Schützenhaus Glarus, Glarus",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/das-theater-glarus-spielt-dr-franzoos-im-chluentel-de-franzos-im-ybrig/"
             },
             {
-              "label": "Between Heaven and Earth",
+              "label": "Extrawurst- eine schlagkräftige Komödie",
+              "detail": "Kantonsschule Glarus, Glarus",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/glarus/extrawurst-eine-schlagkraeftige-komoedie_AuAFDbZ"
+            },
+            {
+              "label": "Glarner Junioren Turnier 2026",
               "detail": "Glarus",
-              "date": "2026-10-24",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/zwischen-himmel-und-erde/"
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/glarner-junioren-turnier-2026/"
+            },
+            {
+              "label": "Flohmarkt im Vereinslokal des MV Wolves",
+              "detail": "Glarus",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flohmarkt-im-vereinslokal-des-mv-wolves/"
+            },
+            {
+              "label": "Saisonschluss und Finnissage",
+              "detail": "Freulerpalast",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/saisonschluss-und-finnissage/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/glaris/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

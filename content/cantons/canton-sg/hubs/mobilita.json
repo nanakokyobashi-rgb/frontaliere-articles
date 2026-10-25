@@ -4,22 +4,22 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-23T10:42:39.932Z",
-  "contentHash": "761e929d3eeda3679959ff2f58ce76e8f66c360847e1671bf3dc6457e5b58f34",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "3a444a6a2ffc9b6fe7e41b4fab5473d6c3f97c819a2bd64ca8c6548ee128e80f",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-22T23:59:59.000Z",
+      "updatedAt": "2026-10-24T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-23T05:26:03.621Z",
+      "updatedAt": "2026-10-25T05:23:25.975Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-22T20:51:18.236Z",
+      "updatedAt": "2026-10-24T19:51:00.050Z",
       "keyFacts": 0
     }
   ],
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Au-Lustenau, settimana conclusa: 22 ottobre 2026"
+          "note": "Au-Lustenau, settimana conclusa: 24 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "6",
-          "note": "segnalazioni aggiornate: 23 ottobre 2026"
+          "note": "segnalazioni aggiornate: 25 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "16",
-          "note": "segnalazioni aggiornate: 23 ottobre 2026"
+          "value": "15",
+          "note": "segnalazioni aggiornate: 25 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 16 ottobre 2026 – 22 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 18 ottobre 2026 – 24 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Au-Lustenau",
@@ -103,7 +103,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-22T23:59:59.000Z"
+          "updatedAt": "2026-10-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -160,13 +160,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Kolumbanstrasse neu gestaltet",
+              "date": "2026-10-23",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/kolumbanstrasse--mehr-sicherheit-und-besserer-verkehrsfluss.html"
+            },
             {
               "label": "A1 Neudorf – Rheineck: Nächtliche Sperrungen zum Einbau neuer Signalträger",
               "date": "2026-10-16",
@@ -191,14 +196,9 @@
               "label": "Sichere und attraktive Routen für den Langsamverkehr",
               "date": "2026-10-12",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/sichere-und-attraktive-routen-fuer-den-langsamverkehr.html"
-            },
-            {
-              "label": "Donnerstag, 8.10.2026 Rinder-TBC: Weitere positive PCR-Befunde in zwei bereits gesperrten Betrieben",
-              "date": "2026-10-08",
-              "url": "https://presse.vorarlberg.at/land/public/Rinder-TBC-Weitere-positive-PCR-Befunde-in-zwei-bereits-gesperrten-Betrieben"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -213,6 +213,12 @@
           "url": "/articoli-san-gallo/sbb-sportelli-st-margrethen-uznach/",
           "excerpt": "Dall'inizio del 2027 le SBB puntano sul self-service a St.Margrethen e Uznach: il 3% dei biglietti è ancora venduto allo sportello.",
           "date": "2026-10-23T00:23:33.274Z"
+        },
+        {
+          "title": "Kolumbanstrasse ridisegnata: più verde e fermate bus senza barriere",
+          "url": "/articoli-san-gallo/kolumbanstrasse-nuova-velostrasse/",
+          "excerpt": "Il 23 ottobre 2026 è stata completata la nuova configurazione della Kolumbanstrasse, che ora include 700 metri di itinerario ciclabile prioritario.",
+          "date": "2026-10-24T09:05:50.183Z"
         },
         {
           "title": "Voto sul Bahnhofplatz Wil: credito di 63,66 milioni",
@@ -268,7 +274,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "SG",
@@ -279,24 +285,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Au-Lustenau, week ending 22 October 2026"
+          "note": "Au-Lustenau, week ending 24 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "6",
-          "note": "reports as of 23 October 2026"
+          "note": "reports as of 25 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "16",
-          "note": "reports as of 23 October 2026"
+          "value": "15",
+          "note": "reports as of 25 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 16 October 2026 to 22 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 18 October 2026 to 24 October 2026, fastest first.",
           "items": [
             {
               "label": "Au-Lustenau",
@@ -349,7 +355,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-22T23:59:59.000Z"
+          "updatedAt": "2026-10-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -406,13 +412,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Kolumbanstrasse neu gestaltet",
+              "date": "2026-10-23",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/kolumbanstrasse--mehr-sicherheit-und-besserer-verkehrsfluss.html"
+            },
             {
               "label": "A1 Neudorf – Rheineck: Nächtliche Sperrungen zum Einbau neuer Signalträger",
               "date": "2026-10-16",
@@ -437,14 +448,9 @@
               "label": "Sichere und attraktive Routen für den Langsamverkehr",
               "date": "2026-10-12",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/sichere-und-attraktive-routen-fuer-den-langsamverkehr.html"
-            },
-            {
-              "label": "Donnerstag, 8.10.2026 Rinder-TBC: Weitere positive PCR-Befunde in zwei bereits gesperrten Betrieben",
-              "date": "2026-10-08",
-              "url": "https://presse.vorarlberg.at/land/public/Rinder-TBC-Weitere-positive-PCR-Befunde-in-zwei-bereits-gesperrten-Betrieben"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -458,6 +464,12 @@
           "url": "/en/st-gallen-articles/sbb-ticket-counters-st-margrethen-uznach/",
           "excerpt": "From the beginning of 2027, SBB are focusing on self-service in St.Margrethen and Uznach: 3% of tickets are still sold at the counter.",
           "date": "2026-10-23T00:23:33.274Z"
+        },
+        {
+          "title": "Kolumbanstrasse redesigned: greener and barrier-free bus stops",
+          "url": "/en/st-gallen-articles/kolumbanstrasse-new-velostrasse/",
+          "excerpt": "On October 23, 2026, the new configuration of Kolumbanstrasse was completed, which now includes 700 meters of priority cycling route.",
+          "date": "2026-10-24T09:05:50.183Z"
         },
         {
           "title": "Vote on Bahnhofplatz Wil: credit of 63,66 million",
@@ -513,7 +525,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "SG",
@@ -524,24 +536,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Au-Lustenau, Woche bis 22. Oktober 2026"
+          "note": "Au-Lustenau, Woche bis 24. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "6",
-          "note": "Meldungen vom 23. Oktober 2026"
+          "note": "Meldungen vom 25. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "16",
-          "note": "Meldungen vom 23. Oktober 2026"
+          "value": "15",
+          "note": "Meldungen vom 25. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 16. Oktober 2026 bis 22. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 18. Oktober 2026 bis 24. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Au-Lustenau",
@@ -594,7 +606,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-22T23:59:59.000Z"
+          "updatedAt": "2026-10-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -651,13 +663,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Kolumbanstrasse neu gestaltet",
+              "date": "2026-10-23",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/kolumbanstrasse--mehr-sicherheit-und-besserer-verkehrsfluss.html"
+            },
             {
               "label": "A1 Neudorf – Rheineck: Nächtliche Sperrungen zum Einbau neuer Signalträger",
               "date": "2026-10-16",
@@ -682,14 +699,9 @@
               "label": "Sichere und attraktive Routen für den Langsamverkehr",
               "date": "2026-10-12",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/sichere-und-attraktive-routen-fuer-den-langsamverkehr.html"
-            },
-            {
-              "label": "Donnerstag, 8.10.2026 Rinder-TBC: Weitere positive PCR-Befunde in zwei bereits gesperrten Betrieben",
-              "date": "2026-10-08",
-              "url": "https://presse.vorarlberg.at/land/public/Rinder-TBC-Weitere-positive-PCR-Befunde-in-zwei-bereits-gesperrten-Betrieben"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -703,6 +715,12 @@
           "url": "/de/st-gallen-artikel/sbb-schalter-st-margrethen-uznach/",
           "excerpt": "Ab Anfang 2027 setzen die SBB in St.Margrethen und Uznach auf Selbstbedienung: 3% der Tickets werden noch am Schalter verkauft.",
           "date": "2026-10-23T00:23:33.274Z"
+        },
+        {
+          "title": "Kolumbanstrasse neu gestaltet: mehr Grün und barrierefreie Bushaltestellen",
+          "url": "/de/st-gallen-artikel/kolumbanstrasse-neue-velostrasse/",
+          "excerpt": "Am 23. Oktober 2026 wurde die neue Gestaltung der Kolumbanstrasse fertiggestellt, die nun 700 Meter einer prioritären Veloroute umfasst.",
+          "date": "2026-10-24T09:05:50.183Z"
         },
         {
           "title": "Abstimmung über den Bahnhofplatz Wil: Kredit von 63,66 Millionen",
@@ -758,7 +776,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "SG",
@@ -769,24 +787,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Au-Lustenau, semaine jusqu’au 22 octobre 2026"
+          "note": "Au-Lustenau, semaine jusqu’au 24 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "6",
-          "note": "signalements au 23 octobre 2026"
+          "note": "signalements au 25 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "16",
-          "note": "signalements au 23 octobre 2026"
+          "value": "15",
+          "note": "signalements au 25 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 16 octobre 2026 au 22 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 18 octobre 2026 au 24 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Au-Lustenau",
@@ -839,7 +857,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-22T23:59:59.000Z"
+          "updatedAt": "2026-10-24T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -896,13 +914,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-23T05:26:03.621Z"
+          "updatedAt": "2026-10-25T05:23:25.975Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Kolumbanstrasse neu gestaltet",
+              "date": "2026-10-23",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/kolumbanstrasse--mehr-sicherheit-und-besserer-verkehrsfluss.html"
+            },
             {
               "label": "A1 Neudorf – Rheineck: Nächtliche Sperrungen zum Einbau neuer Signalträger",
               "date": "2026-10-16",
@@ -927,14 +950,9 @@
               "label": "Sichere und attraktive Routen für den Langsamverkehr",
               "date": "2026-10-12",
               "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/sichere-und-attraktive-routen-fuer-den-langsamverkehr.html"
-            },
-            {
-              "label": "Donnerstag, 8.10.2026 Rinder-TBC: Weitere positive PCR-Befunde in zwei bereits gesperrten Betrieben",
-              "date": "2026-10-08",
-              "url": "https://presse.vorarlberg.at/land/public/Rinder-TBC-Weitere-positive-PCR-Befunde-in-zwei-bereits-gesperrten-Betrieben"
             }
           ],
-          "updatedAt": "2026-10-22T20:51:18.236Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -949,6 +967,12 @@
           "url": "/fr/articles-saint-gall/guichets-sbb-st-margrethen-uznach/",
           "excerpt": "À partir du début de 2027, les SBB misent sur le libre-service à St.Margrethen et Uznach : 3% des billets sont encore vendus au guichet.",
           "date": "2026-10-23T00:23:33.274Z"
+        },
+        {
+          "title": "Kolumbanstrasse réaménagée : plus de verdure et des arrêts de bus sans barrières",
+          "url": "/fr/articles-saint-gall/kolumbanstrasse-nouvelle-velostrasse/",
+          "excerpt": "Le 23 octobre 2026, la nouvelle configuration de la Kolumbanstrasse a été achevée, et elle comprend désormais 700 mètres d’itinéraire cyclable prioritaire.",
+          "date": "2026-10-24T09:05:50.183Z"
         },
         {
           "title": "Vote sur le Bahnhofplatz Wil : crédit de 63,66 millions",
@@ -1004,7 +1028,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-23T10:42:39.932Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

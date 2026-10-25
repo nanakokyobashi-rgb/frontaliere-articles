@@ -4,12 +4,12 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-23T00:30:32.988Z",
-  "contentHash": "39fa180ce543779c02a43a5126c69979f8c3a348d8068fd6ea6078ebc2d38ebd",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "1213cb007c3a49808d8b153b11d6613412f80f7ee77d16bcd5ad446484c37168",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-22T19:30:03.925Z",
+      "updatedAt": "2026-10-25T02:23:31.213Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "207",
+          "value": "168",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,69 +33,69 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Buffalo Kids",
-              "detail": "Cinema GranRex, Locarno",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64395"
+              "label": "Arp, Cahn, Magnelli, Taeuber-Arp. L’arte del dono",
+              "detail": "Fondazione Marguerite Arp, Locarno",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/61586"
             },
             {
-              "label": "Mattia Polli - Vent'anni di scultura",
-              "detail": "Galleria Vecchia Posta, Brusino Arsizio",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64143"
+              "label": "Gyotaku - Tracce di pesci",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/61721"
             },
             {
-              "label": "Mirabiblia",
-              "detail": "Biblioteca cantonale, Bellinzona",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/63536"
+              "label": "Festival La donna crea",
+              "detail": "Locarno",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/festival-la-donna-crea/"
             },
             {
-              "label": "Lugano's Plan ₿ Forum 2026",
-              "detail": "Lugano Convention & Exhibition, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/luganos-plan-forum-2026/"
+              "label": "Che top! Atelier di cucito",
+              "detail": "Atelier Manoamano, Lugano",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64496"
             },
             {
-              "label": "Nervape CAMP @ Lugano's Plan ₿ Forum",
-              "detail": "Villa Ciani, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64569"
+              "label": "Matinée",
+              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64600"
             },
             {
-              "label": "L'épistolière",
-              "detail": "Centro Elisarion, Minusio",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/63970"
+              "label": "Antenne in festa per la chiusura stagionale",
+              "detail": "Museo Moesano",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64615"
             },
             {
-              "label": "Reloved PopUp",
-              "detail": "Hotel Splendide Royal, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64661"
+              "label": "Hansel e Gretel",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/63710"
             },
             {
-              "label": "BLA Biennale - Le latitudini dell'arte",
-              "detail": "Villa Santa Lucia, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/63945"
+              "label": "Mercatino autunnale",
+              "detail": "Piazzale della chiesa di Montedato, Locarno",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64234"
             },
             {
-              "label": "Ticino. Sguardi laterali",
-              "detail": "SpazioReale, Bellinzona",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64633"
+              "label": "Brunchin’zona: boogie-woogie con Silvan Zingg",
+              "detail": "Centro Spazio Aperto, Bellinzona",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64544"
             },
             {
-              "label": "Boolean Mereology",
-              "detail": "Aula Multiuso, Facoltà di Teologia di Lugano, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64332"
+              "label": "50 anni di 'Avere o essere' di Erich Fromm",
+              "detail": "Centro Leoni, Locarno",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64339"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ticino/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "207",
+          "value": "168",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,69 +184,69 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Buffalo Kids",
-              "detail": "Cinema GranRex, Locarno",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64395"
+              "label": "Arp, Cahn, Magnelli, Taeuber-Arp. The Art of the Gift",
+              "detail": "Fondazione Marguerite Arp, Locarno",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/61586"
             },
             {
-              "label": "Mattia Polli - Twentyyears of sculpture",
-              "detail": "Galleria Vecchia Posta, Brusino Arsizio",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64143"
+              "label": "Gyotaku - Fish Trails",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/61721"
             },
             {
-              "label": "Mirabiblia",
-              "detail": "Biblioteca cantonale, Bellinzona",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/63536"
+              "label": "Festival La donna crea",
+              "detail": "Locarno",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/festival-la-donna-crea/"
             },
             {
-              "label": "Lugano's Plan ₿ Forum 2026",
-              "detail": "Lugano Convention & Exhibition, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/luganos-plan-forum-2026/"
+              "label": "What a top! Sewing atelier",
+              "detail": "Atelier Manoamano, Lugano",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64496"
             },
             {
-              "label": "Nervape CAMP @ Lugano's Plan ₿",
-              "detail": "Villa Ciani, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64569"
+              "label": "Matinee",
+              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64600"
             },
             {
-              "label": "L 'épistolière",
-              "detail": "Centro Elisarion, Minusio",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/63970"
+              "label": "Antennas in celebration for the seasonal closure",
+              "detail": "Museo Moesano",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64615"
             },
             {
-              "label": "Reloved PopUp",
-              "detail": "Hotel Splendide Royal, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64661"
+              "label": "Hansel and Gretel",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/63710"
             },
             {
-              "label": "BLA Biennale - The latitudes of art",
-              "detail": "Villa Santa Lucia, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/63945"
+              "label": "Autumn market",
+              "detail": "Piazzale della chiesa di Montedato, Locarno",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64234"
             },
             {
-              "label": "Ticino. Side glances",
-              "detail": "SpazioReale, Bellinzona",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64633"
+              "label": "Brunchin 'area: boogie-woogie with Silvan Zingg",
+              "detail": "Centro Spazio Aperto, Bellinzona",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64544"
             },
             {
-              "label": "Boolean Mereology",
-              "detail": "Aula Multiuso, Facoltà di Teologia di Lugano, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64332"
+              "label": "50 Years of Erich Fromm's 'To Have or Be'",
+              "detail": "Centro Leoni, Locarno",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64339"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/ticino/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "207",
+          "value": "168",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,69 +335,69 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Büffel-Kinder",
-              "detail": "Cinema GranRex, Locarno",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64395"
+              "label": "Arp, Cahn, Magnelli, Taeuber-Arp. Die Kunst des Schenkens",
+              "detail": "Fondazione Marguerite Arp, Locarno",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/61586"
             },
             {
-              "label": "Mattia Polli - 20Jahre Bildhauerei",
-              "detail": "Galleria Vecchia Posta, Brusino Arsizio",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64143"
+              "label": "Gyotaku - Spuren von Fischen",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/61721"
             },
             {
-              "label": "Mirabiblia",
-              "detail": "Biblioteca cantonale, Bellinzona",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/63536"
+              "label": "Festival La donna crea",
+              "detail": "Locarno",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/festival-la-donna-crea/"
             },
             {
-              "label": "Lugano's Plan ₿ Forum 2026",
-              "detail": "Lugano Convention & Exhibition, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/luganos-plan-forum-2026/"
+              "label": "Was für ein Top! Nähatelier",
+              "detail": "Atelier Manoamano, Lugano",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64496"
             },
             {
-              "label": "Nervape CAMP @ Luganos Plan ₿ Forum",
-              "detail": "Villa Ciani, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64569"
+              "label": "Matinee",
+              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64600"
             },
             {
-              "label": "L 'épistolière",
-              "detail": "Centro Elisarion, Minusio",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/63970"
+              "label": "Feste Antennen für saisonale Schließung",
+              "detail": "Museo Moesano",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64615"
             },
             {
-              "label": "Wiedergeliebtes PopUp",
-              "detail": "Hotel Splendide Royal, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64661"
+              "label": "Hänsel und Gretel",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/63710"
             },
             {
-              "label": "BLA Biennale - Die Breitengrade der Kunst",
-              "detail": "Villa Santa Lucia, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/63945"
+              "label": "Herbstmarkt",
+              "detail": "Piazzale della chiesa di Montedato, Locarno",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64234"
             },
             {
-              "label": "Tessin. Seitliche Blicke",
-              "detail": "SpazioReale, Bellinzona",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64633"
+              "label": "Brunchzone: Boogie-Woogie mit Silvan Zingg",
+              "detail": "Centro Spazio Aperto, Bellinzona",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64544"
             },
             {
-              "label": "Boolesche Mereologie",
-              "detail": "Aula Multiuso, Facoltà di Teologia di Lugano, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64332"
+              "label": "50 Jahre „Haben oder Sein“ von Erich Fromm",
+              "detail": "Centro Leoni, Locarno",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64339"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/tessin/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "207",
+          "value": "168",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,69 +486,69 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Enfants de buffle",
-              "detail": "Cinema GranRex, Locarno",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64395"
+              "label": "Arp, Cahn, Magnelli, Taeuber-Arp. L’art du don",
+              "detail": "Fondazione Marguerite Arp, Locarno",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/61586"
             },
             {
-              "label": "Mattia Polli - Vingtans de sculpture",
-              "detail": "Galleria Vecchia Posta, Brusino Arsizio",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64143"
+              "label": "Gyotaku - Traces de poissons",
+              "detail": "Museo della pesca, Caslano",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/61721"
             },
             {
-              "label": "Mirabiblia",
-              "detail": "Biblioteca cantonale, Bellinzona",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/63536"
+              "label": "Festival La donna crea",
+              "detail": "Locarno",
+              "date": "2026-10-25",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/festival-la-donna-crea/"
             },
             {
-              "label": "Lugano's Plan ₿ Forum 2026",
-              "detail": "Lugano Convention & Exhibition, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/luganos-plan-forum-2026/"
+              "label": "Quel top ! Atelier de couture",
+              "detail": "Atelier Manoamano, Lugano",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64496"
             },
             {
-              "label": "Nervape CAMP @ Le plan de Lugano ₿ Forum",
-              "detail": "Villa Ciani, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64569"
+              "label": "- jusqu'à la levée du couvre-feu. - Matinées ?",
+              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64600"
             },
             {
-              "label": "L’épistolière",
-              "detail": "Centro Elisarion, Minusio",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/63970"
+              "label": "Antennes en fête pour la fermeture saisonnière",
+              "detail": "Museo Moesano",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64615"
             },
             {
-              "label": "PopUp readoré",
-              "detail": "Hotel Splendide Royal, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64661"
+              "label": "Comme dans le conte ?",
+              "detail": "Teatro Foce, Lugano",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/63710"
             },
             {
-              "label": "BLA Biennale - Les latitudes de l'art",
-              "detail": "Villa Santa Lucia, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/63945"
+              "label": "Marché d'automne",
+              "detail": "Piazzale della chiesa di Montedato, Locarno",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64234"
             },
             {
-              "label": "Tessin. Regards latéraux",
-              "detail": "SpazioReale, Bellinzona",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64633"
+              "label": "Brunchin’zone : boogie-woogie avec Silvan Zingg",
+              "detail": "Centro Spazio Aperto, Bellinzona",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64544"
             },
             {
-              "label": "Mérologie booléenne",
-              "detail": "Aula Multiuso, Facoltà di Teologia di Lugano, Lugano",
-              "date": "2026-10-23",
-              "url": "https://www.tio.ch/agenda/day/20261023/64332"
+              "label": "50 ans d '« Avoir ou être » d'Erich Fromm",
+              "detail": "Centro Leoni, Locarno",
+              "date": "2026-10-25",
+              "url": "https://www.tio.ch/agenda/day/20261025/64339"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/tessin/",
-          "updatedAt": "2026-10-22T19:30:03.925Z"
+          "updatedAt": "2026-10-25T02:23:31.213Z"
         }
       ],
       "curatedArticles": [
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-23T00:30:32.988Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

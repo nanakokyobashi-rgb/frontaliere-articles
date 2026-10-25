@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "pensioni",
-  "updatedAt": "2026-10-20T17:48:42.935Z",
-  "contentHash": "07dfd219099c0a7653c7e75fc06afd1bb9e7039a66c3391bc3d7cbb50e7e0a54",
+  "updatedAt": "2026-10-25T09:02:26.475Z",
+  "contentHash": "71ff6e1961fd879eedd483ae6eb18e4c7e0c0660c87ee6cbd51be5374ecbbfef",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T10:27:43.943Z",
+      "updatedAt": "2026-10-24T19:51:00.050Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Retraite de réversion : la procédure pour bénéficier du dispositif a été simplifiée",
+              "date": "2026-10-23",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19103"
+            },
+            {
               "label": "Aidants : dans quels cas l’accompagnement d’un proche compte pour la retraite ?",
               "date": "2026-10-20",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19097"
@@ -159,14 +164,9 @@
               "label": "Le rapport du jury du concours Cirses est disponible",
               "date": "2026-08-19",
               "url": "https://www.cpeg.ch/immobilier/le-rapport-du-jury-du-concours-cirses-est-disponible/"
-            },
-            {
-              "label": "Bike to work : la CPEG à vélo",
-              "date": "2026-07-21",
-              "url": "https://www.cpeg.ch/information-generale/bike-to-work-la-cpeg-a-velo/"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -208,7 +208,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "en": {
       "canton": "GE",
@@ -317,6 +317,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Retraite de réversion : la procédure pour bénéficier du dispositif a été simplifiée",
+              "date": "2026-10-23",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19103"
+            },
+            {
               "label": "Aidants : dans quels cas l’accompagnement d’un proche compte pour la retraite ?",
               "date": "2026-10-20",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19097"
@@ -340,14 +345,9 @@
               "label": "Le rapport du jury du concours Cirses est disponible",
               "date": "2026-08-19",
               "url": "https://www.cpeg.ch/immobilier/le-rapport-du-jury-du-concours-cirses-est-disponible/"
-            },
-            {
-              "label": "Bike to work : la CPEG à vélo",
-              "date": "2026-07-21",
-              "url": "https://www.cpeg.ch/information-generale/bike-to-work-la-cpeg-a-velo/"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -389,7 +389,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "de": {
       "canton": "GE",
@@ -498,6 +498,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Retraite de réversion : la procédure pour bénéficier du dispositif a été simplifiée",
+              "date": "2026-10-23",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19103"
+            },
+            {
               "label": "Aidants : dans quels cas l’accompagnement d’un proche compte pour la retraite ?",
               "date": "2026-10-20",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19097"
@@ -521,14 +526,9 @@
               "label": "Le rapport du jury du concours Cirses est disponible",
               "date": "2026-08-19",
               "url": "https://www.cpeg.ch/immobilier/le-rapport-du-jury-du-concours-cirses-est-disponible/"
-            },
-            {
-              "label": "Bike to work : la CPEG à vélo",
-              "date": "2026-07-21",
-              "url": "https://www.cpeg.ch/information-generale/bike-to-work-la-cpeg-a-velo/"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -570,7 +570,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     },
     "fr": {
       "canton": "GE",
@@ -679,6 +679,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Retraite de réversion : la procédure pour bénéficier du dispositif a été simplifiée",
+              "date": "2026-10-23",
+              "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19103"
+            },
+            {
               "label": "Aidants : dans quels cas l’accompagnement d’un proche compte pour la retraite ?",
               "date": "2026-10-20",
               "url": "https://www.service-public.gouv.fr/particuliers/actualites/A19097"
@@ -702,14 +707,9 @@
               "label": "Le rapport du jury du concours Cirses est disponible",
               "date": "2026-08-19",
               "url": "https://www.cpeg.ch/immobilier/le-rapport-du-jury-du-concours-cirses-est-disponible/"
-            },
-            {
-              "label": "Bike to work : la CPEG à vélo",
-              "date": "2026-07-21",
-              "url": "https://www.cpeg.ch/information-generale/bike-to-work-la-cpeg-a-velo/"
             }
           ],
-          "updatedAt": "2026-10-20T10:27:43.943Z"
+          "updatedAt": "2026-10-24T19:51:00.050Z"
         }
       ],
       "curatedArticles": [
@@ -751,7 +751,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-20T17:48:42.935Z"
+      "updatedAt": "2026-10-25T09:02:26.475Z"
     }
   }
 }

@@ -9,6 +9,7 @@ import {
   MAX_CLOCK_SKEW_SECONDS,
   MAX_DEEP_CANDIDATES,
   MAX_GET_REQUESTS,
+  MAX_ACTIVE_JOB_GET_REQUESTS,
   MAX_REPORT_BYTES,
   MAX_RESPONSE_BYTES,
   MAX_TOTAL_GET_REQUESTS,
@@ -22,7 +23,10 @@ import {
   TARGET_WORKFLOW_ID,
   TARGET_WORKFLOW_PATH,
   RERUN_PRESERVATION_PROOF,
+  activeRunSampleIsComplete,
+  compareRunIdsDeterministically,
   createReadOnlyGithubClient,
+  decodeChunkedJsonResponse,
   observeTranslateQueue,
 } from '../../scripts/ci/translate-queue-recovery.mjs';
 
@@ -163,6 +167,50 @@ async function observe(fake, overrides = {}) {
     ...overrides,
   });
 }
+
+test('il decoder JSON conserva UTF-8 spezzato fra chunk e fallisce chiuso su byte invalidi', async () => {
+  const encoded = new TextEncoder().encode(JSON.stringify({ message: 'è' }));
+  const splitAt = encoded.indexOf(0xc3) + 1;
+  const chunks = [encoded.slice(0, splitAt), encoded.slice(splitAt)];
+  let cursor = 0;
+  const reader = {
+    async read() {
+      if (cursor >= chunks.length) return { done: true, value: undefined };
+      return { done: false, value: chunks[cursor++] };
+    },
+  };
+
+  assert.deepEqual(await decodeChunkedJsonResponse(reader), { message: 'è' });
+  let invalidRead = false;
+  await assert.rejects(
+    decodeChunkedJsonResponse({
+      async read() {
+        if (invalidRead) return { done: true, value: undefined };
+        invalidRead = true;
+        return { done: false, value: new Uint8Array([0xc3, 0x28]) };
+      },
+    }),
+    /api_incomplete/,
+  );
+});
+
+test('il censimento active dichiara esplicitamente quando supera il bound', () => {
+  const active = Array.from({ length: MAX_ACTIVE_JOB_GET_REQUESTS }, (_, index) => (
+    { id: String(index + 1), status: 'in_progress' }
+  ));
+  assert.equal(activeRunSampleIsComplete(active), true);
+  assert.equal(activeRunSampleIsComplete([...active, { id: '6', status: 'in_progress' }]), false);
+  assert.equal(activeRunSampleIsComplete([{ id: '1', status: 'queued' }]), false);
+  assert.equal(activeRunSampleIsComplete([{ id: '0', status: 'in_progress' }]), false);
+  assert.equal(activeRunSampleIsComplete(active, MAX_ACTIVE_JOB_GET_REQUESTS - 1), false);
+});
+
+test('il tie-break delle run usa interi arbitrari e resta newest-first', () => {
+  assert.equal(compareRunIdsDeterministically('9', '10'), 1);
+  assert.equal(compareRunIdsDeterministically('10', '9'), -1);
+  assert.equal(compareRunIdsDeterministically('9007199254740993', '9007199254740992'), -1);
+  assert.equal(compareRunIdsDeterministically({ id: '42' }, { id: '42' }), 0);
+});
 
 test('classifica active/pending e segnala il superamento del queue SLO', async () => {
   const headZero = 'a'.repeat(40);

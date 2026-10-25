@@ -54,6 +54,12 @@ const blogMetaCantonTgIt: Record<string, string> = {
     'blog.article.turgovia-modifica-piano-direttore-2027.title': 'Turgovia: modifica piano direttore per sedi economiche',
     'blog.article.turgovia-modifica-piano-direttore-2027.excerpt': 'Il Canton Turgovia avvia la consultazione sulla revisione del piano direttore per lo sviluppo di commercio e industria.',
     'blog.article.turgovia-modifica-piano-direttore-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.sedi-rav-lavoratori-tg.title': 'Sedi RAV e servizi per datori di lavoro in Canton Turgovia',
+    'blog.article.sedi-rav-lavoratori-tg.excerpt': 'Le sedi RAV sono ad Amriswil, Frauenfeld e Kreuzlingen; le vacancy si pubblicano gratis su arbeit.swiss.',
+    'blog.article.sedi-rav-lavoratori-tg.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.imprenditori-cantone-turgovia-sostegno.title': 'Imprenditori nel Canton Turgovia: condizioni quadro attrattive',
+    'blog.article.imprenditori-cantone-turgovia-sostegno.excerpt': 'Il cantone offre supporto a imprenditrici e imprenditori per condizioni quadro attrattive, coprendo immobile, permessi e contatti amministrativi.',
+    'blog.article.imprenditori-cantone-turgovia-sostegno.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonTgIt;
