@@ -2676,6 +2676,66 @@
       "firstSeenAt": "2026-10-25T13:59:38.983Z",
       "lastValidatedAt": "2026-10-25T13:59:38.983Z",
       "expiresAt": null
+    },
+    {
+      "keyword": "imposta di successione e donazione canton Zurigo aliquote",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-25T16:23:23.525Z",
+      "lastValidatedAt": "2026-10-25T16:23:23.525Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "giorni festivi canton Zurigo guida a calendario e regole",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-25T16:23:23.752Z",
+      "lastValidatedAt": "2026-10-25T16:23:23.752Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "orari di apertura negozi canton Zurigo guida a domeniche e festivi",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-25T16:23:24.002Z",
+      "lastValidatedAt": "2026-10-25T16:23:24.002Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "imposta sui cani canton Zurigo guida a importi e registrazione",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-25T16:23:24.016Z",
+      "lastValidatedAt": "2026-10-25T16:23:24.016Z",
+      "expiresAt": null
+    },
+    {
+      "keyword": "licenza di caccia canton Zurigo requisiti e domanda",
+      "section": "svizzera",
+      "pool": "evergreen",
+      "poolEpoch": "svizzera:evergreen:f97bc65188e6a58b",
+      "status": "active",
+      "validityRule": "confirmed-duplicate",
+      "reason": "duplicate",
+      "firstSeenAt": "2026-10-25T16:23:24.031Z",
+      "lastValidatedAt": "2026-10-25T16:23:24.031Z",
+      "expiresAt": null
     }
   ],
   "strikes": [
