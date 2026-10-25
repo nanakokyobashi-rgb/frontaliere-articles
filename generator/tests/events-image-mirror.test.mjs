@@ -103,6 +103,8 @@ test('mirrorEventImage interroga il manifest PRIMA di toccare la rete', () => {
   // Il fallback su disco resta: dentro un singolo run i file mirrorati sono
   // l'unico dedup rimasto se il manifest non ha caricato.
   assert.ok(fn.indexOf('existsSync') > -1 && fn.indexOf('existsSync') < network);
+  assert.match(SRC, /EVENT_IMAGE_FETCH_TIMEOUT_MS/);
+  assert.match(fn, /signal:\s*AbortSignal\.timeout\(EVENT_IMAGE_FETCH_TIMEOUT_MS\)/);
   // Ogni immagine viene registrata subito dopo la scrittura, non a fine run:
   // questo job ha una storia di kill da `timeout-minutes` prima del commit finale.
   const write = fn.indexOf('writeFileSync(path.join(EVENT_IMAGE_DIR');
