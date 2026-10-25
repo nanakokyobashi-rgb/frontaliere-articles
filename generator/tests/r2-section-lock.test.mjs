@@ -126,7 +126,7 @@ test('acquire and renew reject clocks that cannot produce safe timestamps', asyn
 
   await assert.rejects(
     () => acquireSectionLock('frontaliere', { request, now: () => 0.5 }),
-    /acquiredAt must be a non-negative safe integer timestamp/u,
+    /acquiredAt must be a safe non-negative integer timestamp/u,
   );
   await assert.rejects(
     () => acquireSectionLock('frontaliere', {
@@ -134,7 +134,7 @@ test('acquire and renew reject clocks that cannot produce safe timestamps', asyn
       now: () => Number.MAX_SAFE_INTEGER,
       leaseMs: 2,
     }),
-    /expiresAt must be a non-negative safe integer timestamp/u,
+    /expiresAt must be a safe non-negative integer timestamp/u,
   );
 
   const current = {
@@ -161,7 +161,7 @@ test('acquire and renew reject clocks that cannot produce safe timestamps', asyn
       request: renewRequest,
       now: () => -1,
     }),
-    /renewedAt must be a non-negative safe integer timestamp/u,
+    /renewedAt must be a safe non-negative integer timestamp/u,
   );
 
   const regressedCurrent = { ...current, acquiredAt: 1_000, expiresAt: 1_001 };

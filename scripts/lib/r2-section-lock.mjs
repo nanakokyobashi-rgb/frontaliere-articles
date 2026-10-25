@@ -49,13 +49,13 @@ function nonNegativeDuration(value, name) {
   return value;
 }
 
-function isValidTimestamp(value) {
+function isSafeTimestamp(value) {
   return Number.isSafeInteger(value) && value >= 0;
 }
 
-function requireTimestamp(value, name) {
-  if (!isValidTimestamp(value)) {
-    throw new Error(`[r2-section-lock] ${name} must be a non-negative safe integer timestamp`);
+function safeTimestamp(value, name) {
+  if (!isSafeTimestamp(value)) {
+    throw new Error(`[r2-section-lock] ${name} must be a safe non-negative integer timestamp`);
   }
   return value;
 }
@@ -91,8 +91,8 @@ export function isLockPayload(value) {
       && typeof value.owner === 'string'
       && value.owner.length > 0
       && ARTICLE_SECTIONS.includes(value.section)
-      && isValidTimestamp(value.acquiredAt)
-      && isValidTimestamp(value.expiresAt)
+      && isSafeTimestamp(value.acquiredAt)
+      && isSafeTimestamp(value.expiresAt)
       && value.expiresAt > value.acquiredAt
       && (value.leaseId === undefined
         || (typeof value.leaseId === 'string' && value.leaseId.length > 0)),
@@ -487,9 +487,9 @@ export async function acquireSectionLock(
 ) {
   lockKey(section);
   positiveDuration(leaseMs, 'lease duration');
-  const startedAt = requireTimestamp(now(), 'acquiredAt');
-  const expiresAt = requireTimestamp(startedAt + leaseMs, 'expiresAt');
+  const startedAt = safeTimestamp(now(), 'acquiredAt');
   const deadline = startedAt + timeoutMs;
+  const expiresAt = safeTimestamp(startedAt + leaseMs, 'expiresAt');
   const payload = {
     owner,
     leaseId: randomUUID(),
@@ -627,8 +627,8 @@ export async function renewSectionLock(
     throw new Error(`[r2-section-lock] lock ${section} has no ETag; refusing an unsafe renewal`);
   }
 
-  const renewedAt = requireTimestamp(now(), 'renewedAt');
-  const expiresAt = requireTimestamp(renewedAt + leaseMs, 'expiresAt');
+  const renewedAt = safeTimestamp(now(), 'renewedAt');
+  const expiresAt = safeTimestamp(renewedAt + leaseMs, 'expiresAt');
   if (expiresAt <= current.payload.acquiredAt) {
     throw new Error('[r2-section-lock] renewal expiry must be later than acquiredAt');
   }
