@@ -845,6 +845,27 @@ export function liveR2ReconciliationPlan(
 }
 
 /**
+ * Legge la release edge che il Worker sta servendo e la valida con lo stesso
+ * contratto usato dal piano di riconciliazione. Il resolver shell usa il solo
+ * commit come candidato intermedio quando main e' avanzata senza cambiare il
+ * registro dichiarato: in quel caso la release edge e' un high-water mark
+ * valido, non una release corrotta da attendere o da ignorare.
+ *
+ * @param {(input: string | URL, init?: RequestInit) => Promise<Response>} [fetchImpl]
+ * @returns {Promise<Record<string, any>>}
+ */
+export async function fetchEdgeSectionRegistry(fetchImpl = globalThis.fetch) {
+  if (typeof fetchImpl !== 'function') throw new Error('fetch del registro edge non disponibile');
+  const response = await fetchImpl(`${EDGE_SECTION_REGISTRY_URL}?_fpsr=${Date.now()}`, {
+    headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
+  });
+  if (!response.ok) throw new Error(`registro edge HTTP ${response.status}`);
+  const registry = await response.json();
+  if (!validateEdgeSectionRegistry(registry)) throw new Error('registro edge effettivo non valido');
+  return registry;
+}
+
+/**
  * A successful API push can change canton RSS bytes even when its diff only
  * touched an API-generation input that r2PublishPlan cannot map to one canton.
  * Keep article work scoped to the originating diff, but refresh the
@@ -1149,11 +1170,10 @@ if (isMain()) {
       })));
     }
     else if (cmd === 'r2-reconcile-plan') {
-      const response = await fetch(`${EDGE_SECTION_REGISTRY_URL}?_fpsr=${Date.now()}`, {
-        headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
-      });
-      if (!response.ok) throw new Error(`registro edge HTTP ${response.status}`);
-      console.log(JSON.stringify(liveR2ReconciliationPlan(await response.json(), activeCorpusCoreEntries(), arg)));
+      console.log(JSON.stringify(liveR2ReconciliationPlan(await fetchEdgeSectionRegistry(), activeCorpusCoreEntries(), arg)));
+    }
+    else if (cmd === 'r2-edge-release-commit') {
+      console.log((await fetchEdgeSectionRegistry()).commit);
     }
     else if (cmd === 'r2-api-push-plan') {
       const matrices = readFileSync(0, 'utf8').split('\n').filter((line) => line.trim()).map((line) => JSON.parse(line));
@@ -1163,7 +1183,7 @@ if (isMain()) {
     else if (cmd === 'image-plan') console.log(JSON.stringify(imagePublishPlan(readFileSync(0, 'utf8').split('\n'), activeCorpusCoreEntries(), { served: arg })));
     else if (cmd === 'section-of' && arg) console.log(sectionOf(arg));
     else if (cmd === 'shard-of' && arg) console.log(shardOf(arg));
-    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | body-plan [shard|r2] < files | article-plan [shard|r2] < files | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files | r2-reconcile-plan <commit> | r2-api-push-plan < diff.json edge.json');
+    else throw new Error('uso: fast-publish-section.mjs body-regex [shard|r2] | body-plan [shard|r2] < files | article-plan [shard|r2] < files | image-plan [shard|r2] | section-of <path> | shard-of <section> | r2-plan < files | r2-reconcile-plan <commit> | r2-edge-release-commit | r2-api-push-plan < diff.json edge.json');
   };
   run().catch((error) => {
     console.error(`::error::fast-publish-section: ${error?.message ?? error}`);
