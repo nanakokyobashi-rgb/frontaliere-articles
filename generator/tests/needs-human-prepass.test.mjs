@@ -116,6 +116,22 @@ test('un tracker permanente resta dov\'è', () => {
   }).action, 'keep');
 });
 
+test('i pin permanenti restano fuori dal routing anche con label non normalizzate', () => {
+  for (const labels of [
+    ['keep-open'],
+    ['Keep-Open'],
+    [{ name: ' operations-audit-review ' }],
+    [{ name: 'AGENT:NO-AGE-OUT' }],
+  ]) {
+    const d = prepassDecision({
+      title: 'Workflow Failure: Generate Blog Article',
+      labels,
+    });
+    assert.equal(d.action, 'keep', JSON.stringify(labels));
+    assert.match(d.reason, /tracker permanente/);
+  }
+});
+
 for (const label of ['agent:fix', 'agent:fix-queued', 'agent:decompose', 'agent:decompose-queued', 'agent:in-progress']) {
   test(`già in lavorazione (${label}) → keep, mai un doppio instradamento`, () => {
     assert.equal(prepassDecision({ title: 'CI Failure: tests', labels: [label] }).action, 'keep');
