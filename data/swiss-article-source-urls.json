@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/politica/1951372/centrali-referendum-firme-svizzera-riuscito-costruzione": {
-    "articleId": "referendum-nuove-centrali-nucleari",
-    "ts": "2026-09-20T08:19:36.273Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1951384/migros-cooperative-duttweiler-svizzera-dieci": {
     "articleId": "migros-fusione-cooperative-2035",
     "ts": "2026-09-20T08:43:51.122Z",
@@ -2497,6 +2492,11 @@
   "https://www.admin.ch/it/newnsb/-t2rtlvdyzni": {
     "articleId": "referendum-legge-collettivo-lavoro",
     "ts": "2026-10-25T00:47:26.552Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/svizzera/attualita/1958918/dati-violazioni-sicurezza-aumento-svizzera": {
+    "articleId": "violazioni-sicurezza-svizzera-2026",
+    "ts": "2026-10-25T13:07:26.522Z",
     "keyForm": 2
   }
 }
