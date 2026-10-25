@@ -48,6 +48,14 @@ const SCRIPT = path.join(QUI, '..', 'scripts', 'batch-add-faq-to-articles.mjs');
 const ALPHA = 'alpha-uno';
 const BETA = 'beta-due';
 
+test('FAQ: i control escape non vengono accettati per poi essere cancellati dal writer', () => {
+  assert.equal(batch.rejectRawFaqControlEscape(String.raw`\u0008`), true);
+  assert.equal(batch.rejectRawFaqControlEscape(String.raw`\x1f`), true);
+  assert.equal(batch.rejectRawFaqControlEscape(String.raw`\u000a`), false);
+  assert.equal(batch.rejectRawFaqControlEscape('testo valido'), false);
+  assert.equal(batch.rejectRawFaqControlEscape(`testo${String.fromCharCode(8)}`), true);
+});
+
 const bodyLine = (id, n, testo) => `    'blog.article.${id}.body${n}': '${testo}',`;
 const faqLine = (id, pairs) => `    'blog.article.${id}.faq': '${JSON.stringify(pairs)}',`;
 

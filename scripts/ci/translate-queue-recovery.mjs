@@ -157,6 +157,59 @@ class ObservationFailure extends Error {
   }
 }
 
+/**
+ * Decode one Fetch body without assuming that a chunk ends on a UTF-8
+ * boundary.  The watchdog treats an incomplete byte stream as inconclusive;
+ * it must never turn a split multibyte character into a misleading JSON
+ * failure or silently continue with a truncated payload.
+ */
+export async function decodeChunkedJsonResponse(reader, { maxBytes = MAX_RESPONSE_BYTES } = {}) {
+  if (!reader || typeof reader.read !== 'function') {
+    throw new ObservationFailure('api_incomplete');
+  }
+  if (!Number.isSafeInteger(maxBytes) || maxBytes < 0) {
+    throw new TypeError('invalid_response_limit');
+  }
+
+  const decoder = new TextDecoder('utf-8', { fatal: true });
+  let text = '';
+  let receivedBytes = 0;
+  try {
+    for (;;) {
+      const result = await reader.read();
+      if (!result || typeof result !== 'object') {
+        throw new ObservationFailure('api_incomplete');
+      }
+      if (result.done) break;
+      const value = result.value;
+      if (!value || !Number.isSafeInteger(value.byteLength) || value.byteLength < 0) {
+        throw new ObservationFailure('api_incomplete');
+      }
+      receivedBytes += value.byteLength;
+      if (receivedBytes > maxBytes) {
+        try {
+          await reader.cancel?.();
+        } catch {
+          // The size violation is the useful diagnostic even if cancellation
+          // itself races the network stream's teardown.
+        }
+        throw new ObservationFailure('api_response_too_large');
+      }
+      text += decoder.decode(value, { stream: true });
+    }
+    text += decoder.decode();
+  } catch (error) {
+    if (error instanceof ObservationFailure) throw error;
+    throw new ObservationFailure('api_incomplete');
+  }
+
+  try {
+    return JSON.parse(text);
+  } catch {
+    throw new ObservationFailure('api_invalid_json');
+  }
+}
+
 function canonicalJson(value) {
   if (value === null || typeof value !== 'object') return JSON.stringify(value);
   if (Array.isArray(value)) return `[${value.map(canonicalJson).join(',')}]`;
@@ -186,6 +239,30 @@ function validRunId(value) {
   return RUN_ID_RE.test(text) ? text : null;
 }
 
+/** Compare GitHub run IDs newest-first without converting them through Number. */
+export function compareRunIdsDeterministically(left, right) {
+  const leftId = validRunId(left?.id ?? left);
+  const rightId = validRunId(right?.id ?? right);
+  if (leftId === null || rightId === null) {
+    return String(right?.id ?? right ?? '').localeCompare(String(left?.id ?? left ?? ''), 'en');
+  }
+  const leftNumber = BigInt(leftId);
+  const rightNumber = BigInt(rightId);
+  if (leftNumber === rightNumber) return 0;
+  return rightNumber > leftNumber ? 1 : -1;
+}
+
+/** Return false when the active-run census is too large or malformed. */
+export function activeRunSampleIsComplete(activeRuns, maxActiveRuns = MAX_ACTIVE_JOB_GET_REQUESTS) {
+  return Number.isSafeInteger(maxActiveRuns)
+    && maxActiveRuns >= 0
+    && Array.isArray(activeRuns)
+    && activeRuns.length <= maxActiveRuns
+    && activeRuns.every((run) => (
+      ACTIVE_STATUSES.has(run?.status) && validRunId(run?.id) !== null
+    ));
+}
+
 function validTimestamp(value) {
   if (typeof value !== 'string') return null;
   const match = TIMESTAMP_RE.exec(value);
@@ -208,9 +285,7 @@ function compareRuns(left, right) {
   const leftCreated = validTimestamp(left?.created_at) ?? -1;
   const rightCreated = validTimestamp(right?.created_at) ?? -1;
   if (leftCreated !== rightCreated) return rightCreated - leftCreated;
-  const leftId = validRunId(left?.id) ?? '';
-  const rightId = validRunId(right?.id) ?? '';
-  return rightId.localeCompare(leftId, 'en', { numeric: true });
+  return compareRunIdsDeterministically(left, right);
 }
 
 function makeInitialState(nowMs) {
@@ -293,19 +368,7 @@ export function createReadOnlyGithubClient({ fetchImpl, token }) {
       try {
         if (typeof response?.body?.getReader === 'function') {
           const reader = response.body.getReader();
-          const decoder = new TextDecoder();
-          let receivedBytes = 0;
-          for (;;) {
-            const { done, value } = await reader.read();
-            if (done) break;
-            receivedBytes += value.byteLength;
-            if (receivedBytes > MAX_RESPONSE_BYTES) {
-              await reader.cancel();
-              throw new ObservationFailure('api_response_too_large');
-            }
-            text += decoder.decode(value, { stream: true });
-          }
-          text += decoder.decode();
+          return await decodeChunkedJsonResponse(reader);
         } else {
           text = await response.text();
           if (Buffer.byteLength(text, 'utf8') > MAX_RESPONSE_BYTES) {
@@ -371,7 +434,7 @@ async function collectActiveJobStart(client, state, currentRuns) {
   const activeRuns = currentRuns.filter((run) => ACTIVE_STATUSES.has(run?.status));
   state.activeWorkflowRuns = activeRuns.length;
   if (activeRuns.length === 0) return;
-  if (activeRuns.length > MAX_ACTIVE_JOB_GET_REQUESTS) {
+  if (!activeRunSampleIsComplete(activeRuns)) {
     throw new ObservationFailure('liveness_census_inconclusive');
   }
 

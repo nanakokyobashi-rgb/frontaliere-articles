@@ -848,7 +848,14 @@ export function unescapeQuoted(value, quote = "'") {
   return decodeStaticStringLiteral(String(value), quote);
 }
 
-function readSeoStringLiteralField(block, field) {
+/**
+ * Read the value that a JavaScript object literal leaves live for `field`.
+ *
+ * Object literals use last-write-wins semantics for duplicate properties. A
+ * floor reader that returns on the first spelling can therefore count stale
+ * SEO metadata while the producer publishes the final spelling.
+ */
+export function lastStaticPropertyValue(block, field) {
   const skipQuotedValue = (start) => {
     const quote = block[start];
     for (let cursor = start + 1; cursor < block.length; cursor += 1) {
@@ -873,6 +880,7 @@ function readSeoStringLiteralField(block, field) {
   };
   const objectOpen = block.indexOf('{');
   let cursor = objectOpen >= 0 ? objectOpen + 1 : block.length;
+  let lastValue;
   while (cursor < block.length) {
     cursor = skipStaticTrivia(block, cursor, 'SEO entry', 'seo-field');
     if (cursor >= block.length) break;
@@ -901,7 +909,7 @@ function readSeoStringLiteralField(block, field) {
     const valueStart = skipStaticTrivia(block, colon + 1, 'SEO entry', 'seo-field');
     if (key === field && ["'", '"', '`'].includes(block[valueStart])) {
       const value = readStaticStringLiteral(block, valueStart, 'SEO entry', 'seo-field');
-      return decodeStaticStringLiteral(value.value, value.quote);
+      lastValue = decodeStaticStringLiteral(value.value, value.quote);
     }
     // `parseSeoBlogs` reads the publication headline and date from the
     // structuredData object. Re-enter that one known object only for those
@@ -915,7 +923,7 @@ function readSeoStringLiteralField(block, field) {
       const close = matchingDelimiter(block, valueStart);
       if (close >= 0) {
         const nested = readSeoStringLiteralField(block.slice(valueStart, close + 1), field);
-        if (nested !== undefined) return nested;
+        if (nested !== undefined) lastValue = nested;
       }
     }
     // Move over the complete value. A structuredData object contains dynamic
@@ -923,7 +931,79 @@ function readSeoStringLiteralField(block, field) {
     // for a property key and reject an otherwise valid SEO entry.
     cursor = skipValue(valueStart);
   }
-  return undefined;
+  return lastValue;
+}
+
+function readSeoStringLiteralField(block, field) {
+  return lastStaticPropertyValue(block, field);
+}
+
+/**
+ * Read the final `description` inside the JSON-LD-shaped `structuredData`
+ * property. It is intentionally separate from the top-level reader: the
+ * producer stores the SERP description in both places and the floor must not
+ * mistake a string nested in an unrelated object for that field.
+ */
+export function readStructuredSeoDescription(block) {
+  const skipQuotedValue = (start) => {
+    const quote = block[start];
+    for (let cursor = start + 1; cursor < block.length; cursor += 1) {
+      if (block[cursor] === '\\') {
+        cursor += 1;
+        continue;
+      }
+      if (block[cursor] === quote) return cursor + 1;
+    }
+    return block.length;
+  };
+  const skipValue = (start) => {
+    const first = block[start];
+    if (first === "'" || first === '"' || first === '`') return skipQuotedValue(start);
+    if (first === '{' || first === '[' || first === '(') {
+      const close = matchingDelimiter(block, start);
+      return close < 0 ? block.length : close + 1;
+    }
+    let cursor = start;
+    while (cursor < block.length && block[cursor] !== ',' && block[cursor] !== '}') cursor += 1;
+    return cursor;
+  };
+  const objectOpen = block.indexOf('{');
+  let cursor = objectOpen >= 0 ? objectOpen + 1 : block.length;
+  let description;
+  while (cursor < block.length) {
+    cursor = skipStaticTrivia(block, cursor, 'SEO entry', 'seo-field');
+    if (cursor >= block.length) break;
+    let key;
+    let keyEnd = cursor;
+    const first = block[cursor];
+    if (first === "'" || first === '"' || first === '`') {
+      const literal = readStaticStringLiteral(block, cursor, 'SEO entry', 'seo-field');
+      key = decodeStaticStringLiteral(literal.value, literal.quote);
+      keyEnd = literal.end;
+    } else if (/[A-Za-z_$]/u.test(first)) {
+      keyEnd += 1;
+      while (/[A-Za-z0-9_$]/u.test(block[keyEnd] || '')) keyEnd += 1;
+      key = block.slice(cursor, keyEnd);
+    } else {
+      cursor += 1;
+      continue;
+    }
+    const colon = skipStaticTrivia(block, keyEnd, 'SEO entry', 'seo-field');
+    if (block[colon] !== ':') {
+      cursor = keyEnd;
+      continue;
+    }
+    const valueStart = skipStaticTrivia(block, colon + 1, 'SEO entry', 'seo-field');
+    if (key === 'structuredData' && block[valueStart] === '{') {
+      const close = matchingDelimiter(block, valueStart);
+      if (close >= 0) {
+        const nested = lastStaticPropertyValue(block.slice(valueStart, close + 1), 'description');
+        if (nested !== undefined) description = nested;
+      }
+    }
+    cursor = skipValue(valueStart);
+  }
+  return description;
 }
 
 function collectSeoEntryMetadataInternal(src, into, feedOnly) {
@@ -943,7 +1023,8 @@ function collectSeoEntryMetadataInternal(src, into, feedOnly) {
       // metadata consumers both use undefined for a missing publication date.
       datePublished: readSeoStringLiteralField(block, 'datePublished') || undefined,
     };
-    const description = readSeoStringLiteralField(block, 'description');
+    const description = readSeoStringLiteralField(block, 'description')
+      ?? readStructuredSeoDescription(block);
     const ogDescription = readSeoStringLiteralField(block, 'ogDescription');
     if (description !== undefined) metadata.description = description;
     if (ogDescription !== undefined) metadata.ogDescription = ogDescription;

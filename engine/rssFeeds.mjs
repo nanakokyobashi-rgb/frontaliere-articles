@@ -37,9 +37,13 @@ import {
 } from './shared/articleSectionCore.mjs';
 import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
 import { parseStaticArticleTranslationSource, parseStaticBlogBodySource } from './shared/articleStaticSource.mjs';
-import { findAllSeoEntryMatches } from './shared/seo-entry.mjs';
+import { findAllSeoEntryMatches, matchingDelimiter } from './shared/seo-entry.mjs';
 import { createImageCreditReader, mediaRssCreditXml, renderImageCreditHtml } from './shared/imageCredits.mjs';
-import { decodeStaticStringLiteral } from './shared/ts-literals.mjs';
+import {
+  decodeStaticStringLiteral,
+  readStaticStringLiteral,
+  skipStaticTrivia,
+} from './shared/ts-literals.mjs';
 import { articleSectionEntry } from './shared/articleSectionCore.mjs';
 import { cantonRssChannel } from './shared/cantonSectionCopy.mjs';
 
@@ -234,6 +238,92 @@ function unescapeQuoted(value, quote) {
   return decodeStaticStringLiteral(value, quote);
 }
 
+/**
+ * Read top-level properties from one already-balanced SEO entry.
+ *
+ * This deliberately stays in the mirrored engine subtree. The corpus floor
+ * reader has the same last-write-wins contract, but importing it here would
+ * make the site-transported RSS engine depend on `scripts/` (corpus-only).
+ */
+function forEachStaticProperty(block, visit) {
+  const objectOpen = block.indexOf('{');
+  let cursor = objectOpen >= 0 ? objectOpen + 1 : block.length;
+
+  while (cursor < block.length) {
+    cursor = skipStaticTrivia(block, cursor, 'RSS SEO entry', 'rss-seo-field');
+    if (cursor >= block.length || block[cursor] === '}') break;
+
+    let key;
+    let keyEnd = cursor;
+    const first = block[cursor];
+    if (first === "'" || first === '"' || first === '`') {
+      const literal = readStaticStringLiteral(block, cursor, 'RSS SEO entry', 'rss-seo-field');
+      if (!literal) break;
+      key = decodeStaticStringLiteral(literal.value, literal.quote);
+      keyEnd = literal.end;
+    } else if (/[A-Za-z_$]/u.test(first)) {
+      keyEnd += 1;
+      while (/[A-Za-z0-9_$]/u.test(block[keyEnd] || '')) keyEnd += 1;
+      key = block.slice(cursor, keyEnd);
+    } else {
+      cursor += 1;
+      continue;
+    }
+
+    const colon = skipStaticTrivia(block, keyEnd, 'RSS SEO entry', 'rss-seo-field');
+    if (block[colon] !== ':') {
+      cursor = keyEnd;
+      continue;
+    }
+    const valueStart = skipStaticTrivia(block, colon + 1, 'RSS SEO entry', 'rss-seo-field');
+    let valueEnd = valueStart;
+    const valueQuote = block[valueStart];
+    if (valueQuote === "'" || valueQuote === '"' || valueQuote === '`') {
+      const literal = readStaticStringLiteral(block, valueStart, 'RSS SEO entry', 'rss-seo-field');
+      valueEnd = literal?.end ?? block.length;
+    } else if (valueQuote === '{' || valueQuote === '[' || valueQuote === '(') {
+      const close = matchingDelimiter(block, valueStart);
+      valueEnd = close < 0 ? block.length : close + 1;
+    } else {
+      while (valueEnd < block.length && block[valueEnd] !== ',' && block[valueEnd] !== '}') valueEnd += 1;
+    }
+
+    visit({ key, valueStart, valueEnd });
+    cursor = valueEnd > cursor ? valueEnd : cursor + 1;
+  }
+}
+
+/** Return the final static string assigned to a top-level field. */
+function lastStaticPropertyValue(block, field) {
+  let lastValue;
+  forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
+    const quote = block[valueStart];
+    if (key === field && (quote === "'" || quote === '"' || quote === '`')) {
+      const literal = readStaticStringLiteral(block, valueStart, 'RSS SEO entry', 'rss-seo-field');
+      if (literal) lastValue = decodeStaticStringLiteral(literal.value, literal.quote);
+    }
+    if (key === 'structuredData' && (field === 'headline' || field === 'datePublished')
+      && quote === '{') {
+      const nested = lastStaticPropertyValue(block.slice(valueStart, valueEnd), field);
+      if (nested !== undefined) lastValue = nested;
+    }
+  });
+  return lastValue;
+}
+
+/** Read the SEO description from the final structuredData object. */
+function readStructuredSeoDescription(block) {
+  let structuredData;
+  forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
+    if (key === 'structuredData' && block[valueStart] === '{') {
+      structuredData = block.slice(valueStart, valueEnd);
+    }
+  });
+  return structuredData === undefined
+    ? undefined
+    : lastStaticPropertyValue(structuredData, 'description');
+}
+
 function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
   const articles = new Map(); // articleId → metadata
 
@@ -260,9 +350,14 @@ function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
       // half of it: what the file holds is the ESCAPED form, so the backslash
       // has to come back out before the value is used as text, exactly as
       // parseLocalizedField does for its own fields.
-      const headline = unescapeQuoted(block.match(/"headline":\s*"((?:[^"\\]|\\.)*)"/)?.[1], '"');
-      const description = unescapeQuoted(block.match(/"description":\s*"((?:[^"\\]|\\.)*)"/)?.[1], '"');
-      const datePublished = block.match(/"datePublished":\s*"([^"]+)"/)?.[1];
+      // Keep the producer aligned with corpus-floors: duplicate static
+      // properties are last-write-wins, and the SEO description may live in
+      // the JSON-LD-shaped structuredData object. A first-match regex here
+      // could publish stale metadata while the floor validated the live value.
+      const headline = lastStaticPropertyValue(block, 'headline');
+      const description = lastStaticPropertyValue(block, 'description')
+        ?? readStructuredSeoDescription(block);
+      const datePublished = lastStaticPropertyValue(block, 'datePublished');
       const dateModified = block.match(/"dateModified":\s*"([^"]+)"/)?.[1];
       const articleSection = block.match(/"articleSection":\s*"([^"]+)"/)?.[1];
       // Same treatment, single-quoted. This one is the worse offender of the
