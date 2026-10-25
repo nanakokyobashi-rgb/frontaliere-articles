@@ -44,6 +44,9 @@
  */
 export const TOKEN_SUSPECT_STATUSES = new Set([401, 403, 404]);
 
+/** Maximum time allowed for one cross-repository request, including body use. */
+export const CROSS_REPO_FETCH_TIMEOUT_MS = 30_000;
+
 /** Vale la pena richiedere in anonimo? Solo se il token era in gioco. */
 export function needsAnonymousRetry(status, { authenticated } = {}) {
   return Boolean(authenticated) && TOKEN_SUSPECT_STATUSES.has(status);
@@ -90,7 +93,15 @@ function repositoryKey(url) {
   return parsed.origin;
 }
 
-export function createRawFetcher({ userAgent, token, fetchImpl = fetch } = {}) {
+export function createRawFetcher({
+  userAgent,
+  token,
+  fetchImpl = fetch,
+  timeoutMs = CROSS_REPO_FETCH_TIMEOUT_MS,
+} = {}) {
+  const effectiveTimeoutMs = Number.isFinite(timeoutMs) && timeoutMs > 0
+    ? Math.max(1, Math.floor(timeoutMs))
+    : CROSS_REPO_FETCH_TIMEOUT_MS;
   const state = {
     authenticated: Boolean(token),
     tokenRejected: new Map(),
@@ -102,7 +113,13 @@ export function createRawFetcher({ userAgent, token, fetchImpl = fetch } = {}) {
     const headers = { ...extraHeaders };
     if (userAgent) headers['User-Agent'] = userAgent;
     if (authenticated) headers.Authorization = `Bearer ${token}`;
-    return fetchImpl(url, { headers });
+    return fetchImpl(url, {
+      headers,
+      // The caller may consume text/json/arrayBuffer after this function
+      // returns. Keep this signal on the Response so the same deadline covers
+      // both the headers and the body, not just connection establishment.
+      signal: AbortSignal.timeout(effectiveTimeoutMs),
+    });
   };
 
   const fetchRaw = async (url, extraHeaders) => {

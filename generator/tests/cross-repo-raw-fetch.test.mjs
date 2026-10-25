@@ -181,6 +181,48 @@ test('senza token si parte anonimi e non si ritenta mai', async () => {
   assert.equal(fetchRaw.state.authenticated, false);
 });
 
+test('la richiesta cross-repo abortisce se il server non produce headers', async () => {
+  let receivedSignal;
+  const fetchRaw = createRawFetcher({
+    token: 'tok',
+    timeoutMs: 10,
+    fetchImpl: async (_url, init) => {
+      receivedSignal = init.signal;
+      return new Promise((_resolve, reject) => {
+        init.signal.addEventListener('abort', () => reject(init.signal.reason), { once: true });
+      });
+    },
+  });
+
+  await assert.rejects(
+    fetchRaw('https://raw.githubusercontent.com/other/repo/main/hangs.yml'),
+    (error) => error?.name === 'TimeoutError',
+  );
+  assert.ok(receivedSignal instanceof AbortSignal);
+});
+
+test('il segnale resta attivo mentre il chiamante legge un body che non completa', async () => {
+  let receivedSignal;
+  const fetchRaw = createRawFetcher({
+    token: 'tok',
+    timeoutMs: 10,
+    fetchImpl: async (_url, init) => {
+      receivedSignal = init.signal;
+      return {
+        status: 200,
+        ok: true,
+        text: () => new Promise((_resolve, reject) => {
+          init.signal.addEventListener('abort', () => reject(init.signal.reason), { once: true });
+        }),
+      };
+    },
+  });
+
+  const response = await fetchRaw('https://raw.githubusercontent.com/other/repo/main/stalls.yml');
+  await assert.rejects(response.text(), (error) => error?.name === 'TimeoutError');
+  assert.ok(receivedSignal instanceof AbortSignal);
+});
+
 test('i chiamanti cross-repo passano dal fetcher, non da `fetch` nudo', async () => {
   const fs = await import('node:fs');
   const url = await import('node:url');
