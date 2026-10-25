@@ -100,6 +100,21 @@ test('un marker senza niente di dichiarato non promette niente da verificare', (
   assert.equal(verifyTriageMarkerPersistence(marker, 1537, () => null), true);
 });
 
+test('un marker JSON-escaped conserva le righe e lo zero esplicito (#2299)', () => {
+  const marker = '## Post-merge follow-up triage: zero outstanding items.\\n\\n'
+    + '- Daily key `2026-10-25`: nessun item valido; nessun bucket daily creato.\\n'
+    + '- `## Non implementato (ancora)`: tutte le voci sono `closing-state`.';
+  const expectation = triageMarkerPersistenceExpectation(marker);
+
+  assert.deepEqual(expectation.items, []);
+  assert.deepEqual(expectation.buckets, []);
+  assert.equal(expectation.explicitZero, true);
+  assert.equal(expectation.requiresBucket, false);
+  assert.equal(verifyTriageMarkerPersistence(marker, 3237, () => {
+    throw new Error('un marker zero escaped non deve leggere un bucket');
+  }), true);
+});
+
 test('una citazione di provenienza inline non trasforma lo zero anti-nipote in un item (#2299)', () => {
   const marker = [
     '## Post-merge follow-up triage: zero outstanding items.',
