@@ -146,6 +146,30 @@ const HOME_SCOPE = 'corpus';
 // Il repo che ospita `VISION.md`. Stesso default di `needs-human-sweep.yml`.
 const SITE_REPO = process.env.SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no';
 
+// Questi pin sono condivisi con il drainer: descrivono un tracker aperto per
+// scelta, non un lavoro da rimettere in coda. `needs-human` resta invece una
+// superficie instradabile nel corpus dopo la decisione del 2026-09-24, quindi
+// non si usa direttamente `isFixerExempt()` che include anche quella label.
+const PERMANENT_TRACKER_LABELS = new Set([
+  'keep-open',
+  'agent:no-age-out',
+  'operations-audit-review',
+]);
+
+/**
+ * GitHub restituisce normalmente label come stringhe al chiamante, ma alcuni
+ * consumer passano ancora gli oggetti REST `{name}`. Normalizzare qui evita
+ * che casing o spazi esterni trasformino un pin in una decisione di routing.
+ *
+ * @param {Array<string|{name?: string}>} labels
+ * @returns {string[]}
+ */
+function normaliseLabels(labels) {
+  return (Array.isArray(labels) ? labels : [])
+    .map((label) => String(typeof label === 'string' ? label : label?.name ?? '').trim().toLowerCase())
+    .filter(Boolean);
+}
+
 /**
  * Le famiglie di issue APERTE DA UN MONITOR DI QUESTO REPO, riconosciute sul
  * titolo.
@@ -964,9 +988,10 @@ export function prepassDecision({
   verdictLookupFailed = false, expiryRequeues = 0, registryRequeues = 0, now = Date.now(),
   registry = [], staleBlocks = [], staleBlocksUnknown = false, homeScope = HOME_SCOPE,
 } = {}) {
+  const normalisedLabels = normaliseLabels(labels);
   const reg = matchRegistry(`${title}\n${body}`, registry, { homeScope });
   const d = decideAction({
-    title, labels, verdict, verdictAt, verdictLookupFailed,
+    title, labels: normalisedLabels, verdict, verdictAt, verdictLookupFailed,
     expiryRequeues, registryRequeues, now, reg,
   });
   // Un tracker permanente non si annota: il solo che porta `agent:no-age-out` è
@@ -974,7 +999,7 @@ export function prepassDecision({
   // l'elenco delle domande aperte. I riferimenti citati cambierebbero ogni
   // volta, quindi cambierebbe il marker di idempotenza e la nota diventerebbe
   // un commento settimanale sull'unica issue che nessuno vuole più rumorosa.
-  const note = labels.includes('agent:no-age-out')
+  const note = normalisedLabels.includes('agent:no-age-out')
     ? null
     : prepassNote(reg, staleBlocks, { staleBlocksUnknown });
   return note
@@ -989,7 +1014,8 @@ function decideAction({
   now = Date.now(), reg,
 } = {}) {
   // Un tracker permanente è aperto per scelta: non si accoda e non si scorpora.
-  if (labels.includes('agent:no-age-out')) return { action: 'keep', reason: 'tracker permanente' };
+  const tracker = labels.find((label) => PERMANENT_TRACKER_LABELS.has(label));
+  if (tracker) return { action: 'keep', reason: `tracker permanente (${tracker})` };
   // Già in volo da qualche parte: non si tocca.
   for (const l of ['agent:fix', 'agent:fix-queued', 'agent:decompose', 'agent:decompose-queued', 'agent:in-progress']) {
     if (labels.includes(l)) return { action: 'keep', reason: `già in lavorazione (${l})` };
