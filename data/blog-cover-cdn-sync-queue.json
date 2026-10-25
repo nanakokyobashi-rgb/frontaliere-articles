@@ -1,4 +1,29 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-frontalieri-vendemmia-tasse-ristorni-settembre.webp",
+      "sha256": "9968bad82ee3aa95fdc45e2b2d2b0861bd22782871fb117decdbeb78ab92f97e"
+    },
+    {
+      "path": "public/images/blog/article-incendio-via-cortivallo.webp",
+      "sha256": "047b83c51046e3a5aad74ef59636ab6bee8a50d3e8a45a270ee7afb427e6ea48"
+    },
+    {
+      "path": "public/images/blog/article-opportunita-impiego-federale.webp",
+      "sha256": "84b8a2739baacd6fe2acc89e10df9f59cbecc9cf99b6f979e8e7d505f7ac1603"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-frontalieri-vendemmia-tasse-ristorni-settembre-480w.webp",
+      "sha256": "8cee8cb4cf98928522b7af19618ed977f1d6a131d4f5d0812d8f874288b9a35a"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-incendio-via-cortivallo-480w.webp",
+      "sha256": "155f4b8ea31c8ee2eac658cf6f615d8d65aa2845acae17a602ea919b2cb2b8ed"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-opportunita-impiego-federale-480w.webp",
+      "sha256": "5bc56e9f6ead5988b8636bfcb1f44250aa1103f7bfc7dd659596b644e8fab4bf"
+    }
+  ]
 }
