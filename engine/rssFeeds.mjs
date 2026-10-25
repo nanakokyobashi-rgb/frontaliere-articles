@@ -239,6 +239,72 @@ function unescapeQuoted(value, quote) {
 }
 
 /**
+ * Find the end of a template literal without evaluating its interpolation.
+ * `readStaticStringLiteral` must remain fail-closed for values we publish, but
+ * the property walker also needs to skip unrelated JSON-LD fields such as
+ * `mainEntityOfPage: `${BASE_URL}/...`` while looking for headline/date fields.
+ */
+function templateLiteralEnd(source, start) {
+  const quotedEnd = (offset, quote) => {
+    for (let cursor = offset + 1; cursor < source.length; cursor += 1) {
+      if (source[cursor] === '\\') {
+        cursor += 1;
+        continue;
+      }
+      if (source[cursor] === quote) return cursor;
+      if (/\n|\r|\u2028|\u2029/u.test(source[cursor])) return -1;
+    }
+    return -1;
+  };
+
+  for (let cursor = start + 1; cursor < source.length; cursor += 1) {
+    if (source[cursor] === '\\') {
+      cursor += 1;
+      continue;
+    }
+    if (source[cursor] === '`') return cursor + 1;
+    if (source[cursor] !== '$' || source[cursor + 1] !== '{') continue;
+
+    let depth = 1;
+    for (cursor += 2; cursor < source.length; cursor += 1) {
+      const character = source[cursor];
+      if (character === '\\') {
+        cursor += 1;
+        continue;
+      }
+      if (character === "'" || character === '"') {
+        const end = quotedEnd(cursor, character);
+        if (end < 0) return -1;
+        cursor = end;
+        continue;
+      }
+      if (character === '`') {
+        const end = templateLiteralEnd(source, cursor);
+        if (end < 0) return -1;
+        cursor = end - 1;
+        continue;
+      }
+      if (character === '/' && source[cursor + 1] === '/') {
+        const end = source.slice(cursor + 2).search(/\n|\r|\u2028|\u2029/u);
+        if (end < 0) return -1;
+        cursor += end + 1;
+        continue;
+      }
+      if (character === '/' && source[cursor + 1] === '*') {
+        const end = source.indexOf('*/', cursor + 2);
+        if (end < 0) return -1;
+        cursor = end + 1;
+        continue;
+      }
+      if (character === '{') depth += 1;
+      if (character === '}' && --depth === 0) break;
+    }
+    if (depth !== 0) return -1;
+  }
+  return -1;
+}
+
+/**
  * Read top-level properties from one already-balanced SEO entry.
  *
  * This deliberately stays in the mirrored engine subtree. The corpus floor
@@ -279,8 +345,13 @@ function forEachStaticProperty(block, visit) {
     let valueEnd = valueStart;
     const valueQuote = block[valueStart];
     if (valueQuote === "'" || valueQuote === '"' || valueQuote === '`') {
-      const literal = readStaticStringLiteral(block, valueStart, 'RSS SEO entry', 'rss-seo-field');
-      valueEnd = literal?.end ?? block.length;
+      if (valueQuote === '`') {
+        valueEnd = templateLiteralEnd(block, valueStart);
+        if (valueEnd < 0) valueEnd = block.length;
+      } else {
+        const literal = readStaticStringLiteral(block, valueStart, 'RSS SEO entry', 'rss-seo-field');
+        valueEnd = literal?.end ?? block.length;
+      }
     } else if (valueQuote === '{' || valueQuote === '[' || valueQuote === '(') {
       const close = matchingDelimiter(block, valueStart);
       valueEnd = close < 0 ? block.length : close + 1;
