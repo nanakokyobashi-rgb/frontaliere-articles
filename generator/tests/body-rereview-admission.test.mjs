@@ -213,7 +213,7 @@ test('il recupero del verdetto precedente non usa una flag che `gh api` non ha',
   // Il blocco ESATTO che produce il file, non una finestra attorno al nome:
   // il prefetch fa altre chiamate `gh api` e una finestra ne pescava una
   // qualsiasi, rendendo il guard cieco alla regressione che deve vedere.
-  const open = workflow.indexOf('if ! gh api');
+  const open = workflow.indexOf('if ! timeout --kill-after=0s 60s gh api');
   assert.notEqual(open, -1, 'recupero del verdetto precedente non trovato');
   const close = workflow.indexOf('previous-review.md"; then', open);
   assert.notEqual(close, -1, 'chiusura del recupero non trovata');

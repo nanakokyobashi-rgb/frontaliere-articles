@@ -453,7 +453,7 @@ test('replay tests.yml: guard e contesto non contano review DISMISSED o ignote, 
   assert.notEqual(unknownContext.status, 0, 'uno stato ignoto deve far dichiarare il contesto mancante');
 
   const guardAt = source.indexOf('id: guard');
-  const reread = source.indexOf('reviews_reread=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp', guardAt);
+  const reread = source.indexOf('reviews_reread=$(timeout --kill-after=0s 60s gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp', guardAt);
   const unknownCheck = source.indexOf('echo "::error::Stato review sconosciuto', guardAt);
   const decision = source.indexOf('same_head=$(', guardAt);
   assert.ok(unknownCheck > guardAt && reread > unknownCheck && decision > reread,
