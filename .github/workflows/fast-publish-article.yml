@@ -558,6 +558,11 @@ jobs:
     concurrency:
       group: fast-publish-article-${{ matrix.target.shard }}
       cancel-in-progress: false
+    # One hard budget is shared by the pre-purge observation and the recovery
+    # gate. A repo variable may shorten the first observation, but can never
+    # extend the budget that the recovery path is guaranteed to receive.
+    env:
+      PAGES_BUILD_WAIT_BUDGET_SECONDS: 600
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -1017,17 +1022,26 @@ jobs:
         # skip the very recovery path that can make a slow Pages build usable.
         continue-on-error: true
         env:
-          # Keep the first served-content wait aligned with the shared hard
-          # budget below. A 720s default could exhaust the old 30-minute job
-          # cap before the recovery gate even got a chance to run (#3115).
-          PAGES_WAIT_SECONDS: ${{ vars.FAST_PUBLISH_PAGES_WAIT_SECONDS || '600' }}
+          # The override is intentionally capped in the shell below. A 720s
+          # default could exhaust the old 30-minute job cap before the
+          # recovery gate even got a chance to run (#3115).
+          PAGES_WAIT_OVERRIDE: ${{ vars.FAST_PUBLISH_PAGES_WAIT_SECONDS || '' }}
         run: |
           set -euo pipefail
+          pages_budget="${PAGES_BUILD_WAIT_BUDGET_SECONDS:-600}"
+          pages_wait="${PAGES_WAIT_OVERRIDE:-$pages_budget}"
+          if ! [[ "$pages_wait" =~ ^[1-9][0-9]*$ ]]; then
+            echo "::warning::FAST_PUBLISH_PAGES_WAIT_SECONDS is not a positive integer; using the shared ${pages_budget}s budget"
+            pages_wait="$pages_budget"
+          elif (( pages_wait > pages_budget )); then
+            echo "::notice::FAST_PUBLISH_PAGES_WAIT_SECONDS=${pages_wait}s exceeds the shared ${pages_budget}s budget; capping the pre-purge wait"
+            pages_wait="$pages_budget"
+          fi
           args=(
             wait-origin
             --fingerprints "$RUNNER_TEMP/published-fingerprints.tsv"
             --push-state "$RUNNER_TEMP/published-push-state.tsv"
-            --timeout-seconds "$PAGES_WAIT_SECONDS"
+            --timeout-seconds "$pages_wait"
             --poll-seconds 15
             --run-key "${GITHUB_RUN_ID}.${GITHUB_RUN_ATTEMPT}.${FAST_PUBLISH_SHARD}"
           )
@@ -1292,7 +1306,6 @@ jobs:
           # second poll). Give each check up to five minutes, with one ten-minute
           # budget shared by every locale in this publish job. A build that is
           # still not readable at the deadline remains a hard failure.
-          PAGES_BUILD_WAIT_BUDGET_SECONDS=600
           PAGES_BUILD_WAIT_WINDOW_SECONDS=300
           PAGES_BUILD_WAIT_DEADLINE=0
           poll_origin_for() {
