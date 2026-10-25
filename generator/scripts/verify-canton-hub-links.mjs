@@ -74,7 +74,14 @@ async function getIntentionalNoindexPage(url) {
   try {
     return await get(url);
   } catch (err) {
-    if (err?.code === 'NETWORK') networkFailure(err);
+    if (err?.code === 'NETWORK') {
+      // `--soft-network` is deliberately scoped to the sitemap inventory.
+      // A missing candidate route is otherwise being accepted without any
+      // evidence that the page is the intentional noindex target.
+      const line = `[verify-canton-hub-links] pagina candidata non verificabile (${err?.message ?? err}): link NON verificato`;
+      console.error(`::error::${line}`);
+      process.exit(1);
+    }
     return null;
   }
 }

@@ -6,6 +6,34 @@
  */
 export const INTENTIONAL_NOINDEX_PHARMACY_MARKER = '<!--PHARMACY_NOINDEX_TARGET-->';
 
+/**
+ * Return opening tags without treating a `>` inside a quoted attribute as the
+ * end of the tag.  These pages are fetched from a live SPA fallback, so the
+ * predicate must fail closed when the markup is unusual rather than silently
+ * reading a truncated attribute.
+ */
+function tagsByName(html, name) {
+  const tags = [];
+  const startPattern = new RegExp(`<${name}\\b`, 'gi');
+  for (const match of html.matchAll(startPattern)) {
+    let quote = null;
+    let end = -1;
+    for (let index = match.index; index < html.length; index += 1) {
+      const char = html[index];
+      if (quote) {
+        if (char === quote) quote = null;
+      } else if (char === '"' || char === "'") {
+        quote = char;
+      } else if (char === '>') {
+        end = index;
+        break;
+      }
+    }
+    if (end >= 0 && !quote) tags.push(html.slice(match.index, end + 1));
+  }
+  return tags;
+}
+
 function attribute(tag, name) {
   const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   const pattern = new RegExp(
@@ -17,21 +45,20 @@ function attribute(tag, name) {
 }
 
 function canonicalHref(html) {
-  for (const tag of html.match(/<link\b[^>]*>/gi) ?? []) {
+  for (const tag of tagsByName(html, 'link')) {
     const rel = attribute(tag, 'rel');
     if (rel?.split(/\s+/).some((token) => token.toLowerCase() === 'canonical')) {
-      return attribute(tag, 'href');
+      return attribute(tag, 'href')?.trim() ?? null;
     }
   }
   return null;
 }
 
-function robotsContent(html) {
-  for (const tag of html.match(/<meta\b[^>]*>/gi) ?? []) {
-    if ((attribute(tag, 'name') ?? '').toLowerCase() !== 'robots') continue;
-    return attribute(tag, 'content');
-  }
-  return null;
+function robotsContents(html) {
+  return tagsByName(html, 'meta')
+    .filter((tag) => (attribute(tag, 'name') ?? '').trim().toLowerCase() === 'robots')
+    .map((tag) => attribute(tag, 'content')?.trim() ?? '')
+    .filter(Boolean);
 }
 
 /**
@@ -56,8 +83,10 @@ export function isIntentionalNoindexPharmacyPage(html, expectedUrl) {
   }
   if (canonicalUrl !== expected) return false;
 
-  return (robotsContent(html) ?? '')
-    .split(',')
-    .map((token) => token.trim().toLowerCase())
-    .includes('noindex');
+  const directives = robotsContents(html)
+    .flatMap((content) => content.split(',').map((token) => token.trim().toLowerCase()));
+  // Multiple robots tags are combined by crawlers.  Require an unambiguous
+  // noindex verdict: a conflicting `index` directive must never turn a
+  // malformed/fallback page into an accepted published route.
+  return directives.includes('noindex') && !directives.includes('index');
 }

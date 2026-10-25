@@ -62,3 +62,33 @@ test('il verifier non trasforma un fallback SPA o un canonical diverso in un lin
     false,
   );
 });
+
+test('il verifier legge attributi multilinea anche quando un valore contiene `>`', () => {
+  const html = `
+    <meta
+      content="noindex,follow"
+      name="robots"
+      data-note="quoted > marker">
+    <link
+      href="https://frontaliereticino.ch/farmacie-di-turno/"
+      rel="canonical">
+    <!--PHARMACY_NOINDEX_TARGET-->
+  `;
+  assert.equal(
+    isIntentionalNoindexPharmacyPage(html, 'https://frontaliereticino.ch/farmacie-di-turno/'),
+    true,
+  );
+});
+
+test('il verifier rifiuta direttive robots confliggenti', () => {
+  const html = `
+    <meta name="robots" content="index,follow">
+    <meta name="robots" content="noindex,follow">
+    <link rel="canonical" href="https://frontaliereticino.ch/farmacie-di-turno/">
+    <!--PHARMACY_NOINDEX_TARGET-->
+  `;
+  assert.equal(
+    isIntentionalNoindexPharmacyPage(html, 'https://frontaliereticino.ch/farmacie-di-turno/'),
+    false,
+  );
+});
