@@ -1808,11 +1808,11 @@
       "path": "generator/tests/article-duplicate-detection.test.mjs",
       "sitePath": "tests/article-duplicate-detection.test.ts",
       "mode": "adapted",
-      "reason": "NON una copia: il test del sito replica un checkForDuplicates VECCHIO (soglie 0.60/0.45/0.35/0.40, stemmer inline) che non esiste piu' in nessuno dei due repo. Qui la replica segue l'algoritmo ATTUALE di create-article.mjs (0.72/adattivo/0.62/0.55, condizioni composte, tokenizer condiviso it-text-similarity) col comportamento MISURATO sui fixture del sito, piu' un drift guard sulle righe delle soglie nel sorgente. Il test del sito e' candidato allo stesso aggiornamento (site-ahead consapevole).",
+      "reason": "NON una copia: il test del sito e' ora riallineato all'algoritmo ATTUALE di create-article.mjs (0.72/adattivo/0.62/0.55, condizioni composte e tokenizer condiviso it-text-similarity), mentre qui la suite resta adattata a node:test, expect-shim e alle entita' distintive del corpus. Entrambi i test mantengono fixture e drift guard coerenti senza introdurre un import cross-repo.",
       "baseline": {
-        "site": "a2231b03718c068d",
-        "corpus": "66f1589c5e666941",
-        "alignedAt": "2026-08-08"
+        "site": "5df0e90a55cd081e",
+        "corpus": "786bb55ced34ab7d",
+        "alignedAt": "2026-10-25"
       }
     },
     {
