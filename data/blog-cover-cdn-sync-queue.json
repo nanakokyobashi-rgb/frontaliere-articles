@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-sondaggio-paga-colleghi-svizzeri.webp",
-      "sha256": "050a4b3c14a35312c70bb2bccd6fa48bbcba1986642ce079444dd3868a83e450"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-sondaggio-paga-colleghi-svizzeri-480w.webp",
-      "sha256": "5978f9f1ad282ecb870948197da3988ea8c14e9e6ae866741d9488ecc8197b9c"
-    }
-  ]
+  "items": []
 }
