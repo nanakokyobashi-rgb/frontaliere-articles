@@ -212,6 +212,7 @@ runs:
         printf 'node_runtime_root=%s\n' "$node_runtime_root" >> "$GITHUB_OUTPUT"
         archive_path="$node_runtime_root/$node_archive"
         /usr/bin/curl --fail --silent --show-error --location --proto '=https' --tlsv1.2 \
+          --connect-timeout 10 --max-time 180 \
           --output "$archive_path" "$node_url"
         archive_sha256="$(/usr/bin/sha256sum -- "$archive_path" | /usr/bin/cut -d ' ' -f 1)"
         if [ "$archive_sha256" != "$node_archive_sha256" ]; then
