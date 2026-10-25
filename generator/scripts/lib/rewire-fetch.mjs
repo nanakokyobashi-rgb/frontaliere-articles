@@ -13,6 +13,18 @@ export const REWIRE_FETCH_HEADERS = {
     'frontaliere-articles-rewire/1 (+https://github.com/nanakokyobashi-rgb/frontaliere-articles)',
   accept: 'application/json',
 };
+const DEFAULT_REWIRE_FETCH_TIMEOUT_MS = 30_000;
+const MAX_REWIRE_FETCH_TIMEOUT_MS = 120_000;
+
+function boundedTimeoutMs(value) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric) || numeric <= 0) return DEFAULT_REWIRE_FETCH_TIMEOUT_MS;
+  return Math.min(Math.max(1, Math.floor(numeric)), MAX_REWIRE_FETCH_TIMEOUT_MS);
+}
+
+export const REWIRE_FETCH_TIMEOUT_MS = boundedTimeoutMs(
+  process.env.REWIRE_FETCH_TIMEOUT_MS || DEFAULT_REWIRE_FETCH_TIMEOUT_MS,
+);
 
 /** True when every source failed with HTTP 403 on GitHub Actions. Policy is separate. */
 export function isCiWafBlock(errors, env = process.env) {
@@ -22,13 +34,51 @@ export function isCiWafBlock(errors, env = process.env) {
 }
 
 /** Retries 5xx/429/network. 4xx other than 429 fail immediately. */
-export async function getRewireUrl(url, { retries = 4, headers = REWIRE_FETCH_HEADERS } = {}) {
+export async function getRewireUrl(
+  url,
+  {
+    retries = 4,
+    headers = REWIRE_FETCH_HEADERS,
+    fetchImpl = globalThis.fetch,
+    timeoutMs = REWIRE_FETCH_TIMEOUT_MS,
+  } = {},
+) {
   let lastErr;
   for (let i = 1; i <= retries; i++) {
     try {
-      const res = await fetch(url, { redirect: 'follow', headers });
+      const effectiveTimeoutMs = boundedTimeoutMs(timeoutMs);
+      const controller = new AbortController();
+      let timedOut = false;
+      let timer;
+      const timeoutError = () => {
+        const error = new Error(`GET ${url} timed out after ${effectiveTimeoutMs}ms`);
+        error.name = 'TimeoutError';
+        error.code = 'REWIRE_FETCH_TIMEOUT';
+        return error;
+      };
+      const deadline = new Promise((_, reject) => {
+        timer = setTimeout(() => {
+          timedOut = true;
+          controller.abort();
+          reject(timeoutError());
+        }, effectiveTimeoutMs);
+      });
+      let res;
+      let body;
+      try {
+        res = await Promise.race([
+          fetchImpl(url, { redirect: 'follow', headers, signal: controller.signal }),
+          deadline,
+        ]);
+        if (res.ok) body = await Promise.race([res.text(), deadline]);
+      } catch (error) {
+        if (timedOut) throw timeoutError();
+        throw error;
+      } finally {
+        clearTimeout(timer);
+        controller.abort();
+      }
       if (res.ok) {
-        const body = await res.text();
         // An empty 2xx response is still a response. Let the JSON/schema
         // validator reject it so callers fail closed instead of treating two
         // empty publications as an unreachable publisher and keeping stale data.

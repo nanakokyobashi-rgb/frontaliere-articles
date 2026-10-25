@@ -63,6 +63,8 @@
  *   HEAD_SHA              ref del head della PR per la storia corpus via API
  *                         (default `GITHUB_SHA`, poi `HEAD`).
  *   GH_TOKEN              opzionale; alza il rate-limit anonimo.
+ *   LOOP_BASELINE_FETCH_TIMEOUT_MS
+ *                         deadline del fallback raw (default 15000, cap 120000).
  */
 
 import fs from 'node:fs';
@@ -79,6 +81,18 @@ const CORPUS_REPO = process.env.GITHUB_REPOSITORY || 'nanakokyobashi-rgb/frontal
 const CORPUS_REF = process.env.HEAD_SHA || process.env.GITHUB_SHA || 'HEAD';
 const BASE = process.env.BASE_SHA || process.env.BASE_REF || 'origin/main';
 const JSON_OUT = process.argv.includes('--json');
+const DEFAULT_LOOP_BASELINE_FETCH_TIMEOUT_MS = 15_000;
+const MAX_LOOP_BASELINE_FETCH_TIMEOUT_MS = 120_000;
+
+function boundedTimeoutMs(value) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric) || numeric <= 0) return DEFAULT_LOOP_BASELINE_FETCH_TIMEOUT_MS;
+  return Math.min(Math.max(1, numeric), MAX_LOOP_BASELINE_FETCH_TIMEOUT_MS);
+}
+
+export const LOOP_BASELINE_FETCH_TIMEOUT_MS = boundedTimeoutMs(
+  process.env.LOOP_BASELINE_FETCH_TIMEOUT_MS || DEFAULT_LOOP_BASELINE_FETCH_TIMEOUT_MS,
+);
 
 /**
  * Le voci il cui `baseline` e' cambiato fra base e head, un elemento per LATO
@@ -159,6 +173,55 @@ export function gateVerdict({ side, baselineHash, currentHash, historyMatch, his
   return { status: side === 'corpus' ? 'reject' : 'warn', reason: `${reason}${trace}` };
 }
 
+/**
+ * Fetch del manifest remoto con una deadline condivisa fra headers e body.
+ * L'iniezione del client serve anche a provare il percorso senza rete.
+ */
+export async function fetchRemoteBaseManifest({
+  repo = CORPUS_REPO,
+  ref = BASE,
+  fetchImpl = globalThis.fetch,
+  timeoutMs = LOOP_BASELINE_FETCH_TIMEOUT_MS,
+} = {}) {
+  const url = `https://raw.githubusercontent.com/${repo}/${ref}/${MANIFEST_REL}`;
+  const effectiveTimeoutMs = boundedTimeoutMs(timeoutMs);
+  const controller = new AbortController();
+  let timedOut = false;
+  let timer;
+  const timeoutError = () => {
+    const error = new Error(`GET ${repo}@${ref}/${MANIFEST_REL} timed out after ${effectiveTimeoutMs}ms`);
+    error.name = 'TimeoutError';
+    error.code = 'LOOP_BASELINE_FETCH_TIMEOUT';
+    return error;
+  };
+  const deadline = new Promise((_, reject) => {
+    timer = setTimeout(() => {
+      timedOut = true;
+      controller.abort();
+      reject(timeoutError());
+    }, effectiveTimeoutMs);
+  });
+  const headers = { 'User-Agent': 'loop-baseline-pr-gate' };
+  if (process.env.GH_TOKEN) headers.Authorization = `Bearer ${process.env.GH_TOKEN}`;
+  try {
+    const res = await Promise.race([
+      fetchImpl(url, { headers, signal: controller.signal }),
+      deadline,
+    ]);
+    // 404 = il manifest non esisteva alla base. Non e' un errore: significa che
+    // ogni voce e' nuova, ed e' esattamente il caso che il gate deve esaminare.
+    if (res.status === 404) return null;
+    if (!res.ok) throw new Error(`GET ${MANIFEST_REL}@${ref} → HTTP ${res.status}`);
+    return await Promise.race([res.text(), deadline]).then((text) => JSON.parse(text));
+  } catch (error) {
+    if (timedOut) throw timeoutError();
+    throw error;
+  } finally {
+    clearTimeout(timer);
+    controller.abort();
+  }
+}
+
 /** Il manifest al commit di base: da git se c'e', altrimenti da raw. */
 async function baseManifest() {
   try {
@@ -171,15 +234,7 @@ async function baseManifest() {
   } catch {
     /* checkout shallow, o base non fetchata: si prova la rete. */
   }
-  const url = `https://raw.githubusercontent.com/${CORPUS_REPO}/${BASE}/${MANIFEST_REL}`;
-  const headers = { 'User-Agent': 'loop-baseline-pr-gate' };
-  if (process.env.GH_TOKEN) headers.Authorization = `Bearer ${process.env.GH_TOKEN}`;
-  const res = await fetch(url, { headers });
-  // 404 = il manifest non esisteva alla base. Non e' un errore: significa che
-  // ogni voce e' nuova, ed e' esattamente il caso che il gate deve esaminare.
-  if (res.status === 404) return null;
-  if (!res.ok) throw new Error(`GET ${MANIFEST_REL}@${BASE} → HTTP ${res.status}`);
-  return JSON.parse(await res.text());
+  return fetchRemoteBaseManifest();
 }
 
 /**
