@@ -60,6 +60,9 @@ const blogMetaCantonShFr: Record<string, string> = {
     'blog.article.coop-aumento-salari-2027.title': 'Coop: augmentation salariale en 2027 sous 4.900 francs',
     'blog.article.coop-aumento-salari-2027.excerpt': 'Accord entre Coop et les partenaires sociaux : augmentation générale d\'au moins 1,1 % pour les personnes gagnant jusqu\'à 4.900 francs par mois en 2027.',
     'blog.article.coop-aumento-salari-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sciaffusa-budget-correzione.title': 'Gouvernement de Schaffhouse : budget 2027 corrigé, comptes dans le rouge',
+    'blog.article.sciaffusa-budget-correzione.excerpt': 'Le Gouvernement de Schaffhouse a corrigé le budget 2027 de 2,2 millions de francs ; les comptes devraient néanmoins clôturer dans le rouge.',
+    'blog.article.sciaffusa-budget-correzione.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonShFr;

@@ -60,6 +60,9 @@ const blogMetaCantonShEn: Record<string, string> = {
     'blog.article.coop-aumento-salari-2027.title': 'Coop: 2027 wage increase for employees earning under 4.900 francs',
     'blog.article.coop-aumento-salari-2027.excerpt': 'Agreement between Coop and social partners: general increase of at least 1,1% for those earning up to 4.900 francs per month in 2027.',
     'blog.article.coop-aumento-salari-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sciaffusa-budget-correzione.title': 'Government of Schaffhausen: 2027 budget corrected, accounts in the red',
+    'blog.article.sciaffusa-budget-correzione.excerpt': 'The Government of Schaffhausen revised the 2027 budget by 2,2 million francs; the accounts should nevertheless close in the red.',
+    'blog.article.sciaffusa-budget-correzione.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonShEn;

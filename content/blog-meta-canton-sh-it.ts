@@ -60,6 +60,9 @@ const blogMetaCantonShIt: Record<string, string> = {
     'blog.article.coop-aumento-salari-2027.title': 'Coop: aumento salari 2027 per dipendenti sotto i 4.900 franchi',
     'blog.article.coop-aumento-salari-2027.excerpt': 'Accordo tra Coop e partner sociali: aumento generale di almeno l\'1,1% per chi guadagna fino a 4.900 franchi mensili nel 2027.',
     'blog.article.coop-aumento-salari-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.sciaffusa-budget-correzione.title': 'Governo di Sciaffusa: budget 2027 corretto, conti in rosso',
+    'blog.article.sciaffusa-budget-correzione.excerpt': 'Il Governo di Sciaffusa ha corretto di 2,2 milioni di franchi il budget 2027; i conti dovrebbero comunque chiudere in rosso.',
+    'blog.article.sciaffusa-budget-correzione.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonShIt;

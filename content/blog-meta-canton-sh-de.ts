@@ -60,6 +60,9 @@ const blogMetaCantonShDe: Record<string, string> = {
     'blog.article.coop-aumento-salari-2027.title': 'Coop: Lohnerhöhung 2027 für Beschäftigte unter 4.900 Franken',
     'blog.article.coop-aumento-salari-2027.excerpt': 'Vereinbarung zwischen Coop und den Sozialpartnern: allgemeine Erhöhung von mindestens 1,1% für alle, die im Jahr 2027 monatlich bis zu 4.900 Franken verdienen.',
     'blog.article.coop-aumento-salari-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sciaffusa-budget-correzione.title': 'Regierung von Schaffhausen: Budget 2027 korrigiert, rote Zahlen',
+    'blog.article.sciaffusa-budget-correzione.excerpt': 'Die Regierung von Schaffhausen hat das Budget 2027 um 2,2 Millionen Franken korrigiert; die Rechnung dürfte dennoch mit roten Zahlen abschließen.',
+    'blog.article.sciaffusa-budget-correzione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonShDe;

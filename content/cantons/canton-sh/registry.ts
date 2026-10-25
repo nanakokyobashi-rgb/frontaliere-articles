@@ -215,4 +215,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sciaffusa-budget-correzione',
+ category: 'novita',
+ date: '2026-10-25T00:28:46.390Z',
+ image: '/images/blog/article-sciaffusa-budget-correzione.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
