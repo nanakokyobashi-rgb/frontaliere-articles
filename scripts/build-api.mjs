@@ -88,7 +88,7 @@ const repairSocialSnippet = (text) => {
   }
   return bounded;
 };
-const rssDescriptionProjector = assertRssProjectorContract(repairRssSnippet);
+assertRssProjectorContract(repairRssSnippet);
 // The Google News window, from the vendored module (issue #4974 item 3, §5.3).
 // Since 2026-10-24 the news emitter applies ONLY the 48h window
 // (`isWithinNewsWindow`), not the topic whitelist the module also carries: see
@@ -1007,7 +1007,7 @@ try {
       // dai test. Se questa riga manca, la riparazione della coda resta inerte
       // in produzione dietro una CI verde del sito — la stessa forma
       // dell'incidente SiteShellContract.
-      repairSerpSnippet: rssDescriptionProjector,
+      repairSerpSnippet: repairRssSnippet,
     });
   });
 } finally {

@@ -6498,6 +6498,16 @@
       }
     },
     {
+      "path": "scripts/lib/rss-projector-contract.mjs",
+      "mode": "corpus-only",
+      "reason": "Guardia runtime del publisher che verifica che il proiettore RSS sia una funzione non vuota e idempotente prima di costruire i feed. Il sito consuma i feed via HTTP e non importa questo contratto corpus-only.",
+      "baseline": {
+        "site": null,
+        "corpus": null,
+        "alignedAt": "2026-10-25"
+      }
+    },
+    {
       "path": "scripts/lib/typescript-expression-scanner.mjs",
       "mode": "corpus-only",
       "reason": "Scanner lessicale condiviso per estrazione dei body e gate dei link nel publisher del corpus. Il sito riceve i body tramite JSON HTTP e non importa questo scanner né i sorgenti del corpus.",
