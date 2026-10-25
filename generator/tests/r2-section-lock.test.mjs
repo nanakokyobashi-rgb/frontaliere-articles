@@ -129,6 +129,10 @@ test('acquire and renew reject clocks that cannot produce safe timestamps', asyn
     /acquiredAt must be a safe non-negative integer timestamp/u,
   );
   await assert.rejects(
+    () => acquireSectionLock('frontaliere', { request, timeoutMs: -1 }),
+    /acquire timeout must be a positive duration/u,
+  );
+  await assert.rejects(
     () => acquireSectionLock('frontaliere', {
       request,
       now: () => Number.MAX_SAFE_INTEGER,

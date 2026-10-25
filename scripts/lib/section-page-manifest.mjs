@@ -157,11 +157,25 @@ export function isValidPageManifest(doc, options) {
 }
 
 /** Lettura fail-closed del manifest pubblico: 404 = mai pubblicato, altro errore = unknown. */
-export async function fetchPageManifest(url, { fetchImpl = fetch, section } = {}) {
+function boundedManifestFetchTimeout(defaultTimeoutMs, remainingBudget) {
+  const remaining = remainingBudget();
+  if (!Number.isFinite(remaining)) return defaultTimeoutMs;
+  if (remaining <= 0) throw new Error('budget wall-clock del manifest esaurito');
+  return Math.max(1, Math.min(defaultTimeoutMs, remaining));
+}
+
+export async function fetchPageManifest(
+  url,
+  {
+    fetchImpl = fetch,
+    section,
+    remainingBudget = () => Number.POSITIVE_INFINITY,
+  } = {},
+) {
   try {
     const response = await fetchWithRefTimeout(`${url}${url.includes('?') ? '&' : '?'}_spm=${Date.now()}`, {
       headers: { 'user-agent': 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)' },
-    }, 20_000, fetchImpl);
+    }, boundedManifestFetchTimeout(20_000, remainingBudget), fetchImpl);
     if (response.status === 404) {
       releaseFetchWithRefTimeout(response);
       return { state: 'absent' };

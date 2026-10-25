@@ -37,6 +37,18 @@ test('remainingBudgetMs: il budget condiviso non diventa negativo', () => {
   assert.equal(remainingBudgetMs(1_000, () => 1_250), 0);
 });
 
+test('remainingBudgetMs: tronca in modo conservativo clock frazionari', () => {
+  assert.equal(remainingBudgetMs(1_000.9, () => 750.4), 250);
+  assert.equal(remainingBudgetMs(1_000.1, () => 1_000.2), 0);
+});
+
+test('reconcile: rifiuta un budget frazionario', async () => {
+  await assert.rejects(
+    () => reconcile({ budgetMs: 0.5 }),
+    /budgetMs deve essere una durata positiva intera finita/u,
+  );
+});
+
 test('headState: rispetta Retry-After anche nel retry delle probe HEAD', async () => {
   const sleeps = [];
   let attempts = 0;

@@ -483,6 +483,7 @@ export async function acquireSectionLock(
   } = {},
 ) {
   lockKey(section);
+  positiveDuration(timeoutMs, 'acquire timeout');
   positiveDuration(leaseMs, 'lease duration');
   const startedAt = safeTimestamp(now(), 'acquiredAt');
   const expiresAt = safeTimestamp(startedAt + leaseMs, 'expiresAt');

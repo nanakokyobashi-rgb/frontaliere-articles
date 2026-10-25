@@ -623,8 +623,8 @@ export async function reconcile({
   now = Date.now,
 } = {}) {
   const duration = Number(budgetMs);
-  if (!Number.isFinite(duration) || duration <= 0) {
-    throw new Error('budgetMs deve essere una durata positiva finita');
+  if (!Number.isSafeInteger(duration) || duration <= 0) {
+    throw new Error('budgetMs deve essere una durata positiva intera finita');
   }
   const startedAt = now();
   const deadline = startedAt + duration;
@@ -728,7 +728,11 @@ export async function reconcile({
     const activeIds = activeRows.length
       ? new Set(activeRows.map((row) => row.id))
       : new Set(Object.keys(slugs.cantons?.[entry.id] ?? {}));
-    const pageManifest = await fetchPageManifest(pageManifestUrl(entry.id, CDN_BASE), { fetchImpl, section: entry.id });
+    const pageManifest = await fetchPageManifest(pageManifestUrl(entry.id, CDN_BASE), {
+      fetchImpl,
+      section: entry.id,
+      remainingBudget,
+    });
     let orphanPages = [];
     if (pageManifest.state === 'ok') {
       const candidates = orphanedArticleCandidates(entry, pageManifest.doc, slugs.cantons?.[entry.id] ?? {}, activeIds);
