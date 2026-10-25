@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-epfl-eth-top-20-europee.webp",
-      "sha256": "3c3f46596df6af7c445aa5c50686b0e663a906dd32a32412fdb4c08b0260949e"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-epfl-eth-top-20-europee-480w.webp",
-      "sha256": "ba2b11cea76205d95df25c61702730a4ea3c37b7a376bc607df4f5958d81ebea"
-    }
-  ]
+  "items": []
 }
