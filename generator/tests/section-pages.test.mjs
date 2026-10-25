@@ -3304,7 +3304,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.equal((wf.match(/ref: \$\{\{ github\.sha \}\}\n\s+path: \.replay-dispatcher-source/g) ?? []).length, 3);
   assert.match(
     wf,
-    /sparse-checkout:\n\s+(?:\|\n\s+)?scripts\/ci\/dispatch-fast-publish-replay\.sh/,
+    /sparse-checkout:\s*(?:\|\s*)?\n\s+scripts\/ci\/dispatch-fast-publish-replay\.sh/,
     'il checkout sparse del replay deve conservare la lista multilinea anche con block scalar YAML',
   );
   assert.equal(
