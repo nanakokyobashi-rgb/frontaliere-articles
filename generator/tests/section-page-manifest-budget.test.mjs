@@ -18,3 +18,21 @@ test('fetchPageManifest stops before starting a request when the shared budget i
   assert.equal(result.state, 'unknown');
   assert.match(result.reason, /budget wall-clock del manifest esaurito/u);
 });
+
+test('fetchPageManifest bounds response body consumption by the shared budget', async () => {
+  let cancelled = false;
+  const result = await fetchPageManifest('https://cdn.test/manifest.json', {
+    section: 'canton-ti',
+    remainingBudget: () => 50,
+    fetchImpl: async () => ({
+      status: 200,
+      ok: true,
+      body: { cancel: () => { cancelled = true; } },
+      json: () => new Promise(() => {}),
+    }),
+  });
+
+  assert.equal(result.state, 'unknown');
+  assert.match(result.reason, /timed out/u);
+  assert.equal(cancelled, true);
+});
