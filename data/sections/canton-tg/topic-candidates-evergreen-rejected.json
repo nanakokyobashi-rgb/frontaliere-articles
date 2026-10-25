@@ -4,13 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-tg::https://www.frauenfeld.ch/wohnen-mobilitaet/wohnen/bauen-und-umwelt/oeffentliche-auflagen.html/1009/news/12569": {
-      "section": "canton-tg",
-      "ts": 1792752095878
-    },
     "canton-tg::https://awa.tg.ch/public/upload/assets/34935/infoblatt_was_tun_bei_ausstehendem_lohn.pdf?fp=1": {
       "section": "canton-tg",
-      "ts": 1792758548192
+      "ts": 1792939682405
     }
   }
 }
