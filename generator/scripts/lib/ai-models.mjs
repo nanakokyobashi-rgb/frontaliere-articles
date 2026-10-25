@@ -2847,6 +2847,43 @@ export function _cooldownSeverityDurations() {
 // below, which sizes the per-call hard cap off this same worst-case wait.
 const MAX_RETRY_AFTER_MS = 2 * 60 * 1000;
 
+/**
+ * Convert an HTTP `Retry-After` header to a bounded delay.
+ *
+ * RFC 9110 allows either delta-seconds or an HTTP-date. Invalid, missing, and
+ * already elapsed values contribute no provider-supplied delay; the caller's
+ * local backoff remains the fallback. `Math.ceil` keeps a future HTTP-date
+ * from being retried before the moment declared by the provider.
+ *
+ * @param {Response|{headers?: {get?: Function}}|null} response
+ * @param {number} [nowMs]
+ * @returns {number} milliseconds to wait, capped at MAX_RETRY_AFTER_MS
+ */
+export function parseRetryAfter(response, nowMs = Date.now()) {
+  let raw;
+  try {
+    raw = response?.headers?.get?.('retry-after');
+  } catch {
+    return 0;
+  }
+  if (raw === null || raw === undefined) return 0;
+  const value = String(raw).trim();
+  if (!value) return 0;
+
+  let delayMs;
+  if (/^\d+$/.test(value)) {
+    const seconds = Number(value);
+    delayMs = Number.isFinite(seconds) ? seconds * 1000 : Number.NaN;
+  } else {
+    const retryAtMs = Date.parse(value);
+    delayMs = Number.isFinite(retryAtMs) && Number.isFinite(nowMs)
+      ? retryAtMs - nowMs
+      : Number.NaN;
+  }
+  if (!Number.isFinite(delayMs)) return 0;
+  return Math.min(MAX_RETRY_AFTER_MS, Math.max(0, Math.ceil(delayMs)));
+}
+
 function isProviderCoolingDown(provider) {
   const until = _providerCooldown.get(provider);
   if (!until) return false;
@@ -7312,14 +7349,9 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
             // site del ramo host-unreachable, che lo faceva gia' giusto.
             if (cooldownProvider(getProvider(modelForTracking)) === 'created') _stats.providerCooldowns++;
           }
-          // Respect Retry-After header if present (seconds or HTTP-date)
-          // Cap at 2 minutes — some providers (e.g. Cerebras) return Retry-After: 86399 (24h)
-          // which would freeze the entire translation pipeline. Shared module
-          // constant (MAX_RETRY_AFTER_MS) so the per-call hard cap below can
-          // size itself off the same worst-case wait instead of duplicating it.
-          const retryAfterHeader = res.headers?.get?.('retry-after');
-          const retryAfterRaw = retryAfterHeader ? (Number(retryAfterHeader) > 0 ? Number(retryAfterHeader) * 1000 : 0) : 0;
-          const retryAfterMs = Math.min(retryAfterRaw, MAX_RETRY_AFTER_MS);
+          // Respect Retry-After delta-seconds or HTTP-date, bounded by the
+          // same cap used by the per-call hard limit.
+          const retryAfterMs = parseRetryAfter(res);
           const baseWaitMs = is429
             ? attempt * opts.backoffMs * 3   // Triple backoff for rate limits
             : attempt * opts.backoffMs;
@@ -8924,11 +8956,9 @@ async function _callGeminiRaw(model, messages, opts) {
             // Vedi il gemello nel ramo OpenAI-compatibile (#849 item 1).
             if (cooldownProvider(PROVIDER.GEMINI) === 'created') _stats.providerCooldowns++;
           }
-          // Respect Retry-After header if present (capped at 2 minutes)
-          const MAX_RETRY_AFTER_MS_GEMINI = 2 * 60 * 1000;
-          const retryAfterHeader = res.headers?.get?.('retry-after');
-          const retryAfterRaw = retryAfterHeader ? (Number(retryAfterHeader) > 0 ? Number(retryAfterHeader) * 1000 : 0) : 0;
-          const retryAfterMs = Math.min(retryAfterRaw, MAX_RETRY_AFTER_MS_GEMINI);
+          // Use the same delta-seconds/HTTP-date parser and cap as the
+          // OpenAI-compatible providers.
+          const retryAfterMs = parseRetryAfter(res);
           const waitMs = Math.max(attempt * opts.backoffMs, retryAfterMs);
           console.warn(`⚠️  [${model}] ${res.status} retry ${attempt}/${opts.maxRetriesPerModel} — wait ${waitMs}ms`);
           await sleep(waitMs);
