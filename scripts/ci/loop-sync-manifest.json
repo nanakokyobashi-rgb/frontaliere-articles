@@ -2626,6 +2626,16 @@
       }
     },
     {
+      "path": "scripts/lib/safe-lease-timestamp.mjs",
+      "mode": "corpus-only",
+      "reason": "Predicato condiviso dai lock R2 del corpus per accettare solo timestamp interi, non negativi e safe; il sito non possiede questo helper e non deve importare il percorso di locking del publisher corpus-side.",
+      "baseline": {
+        "site": null,
+        "corpus": "f6b461bde7a2fb5c",
+        "alignedAt": "2026-10-25"
+      }
+    },
+    {
       "path": "scripts/lib/seo-entry-guard.mjs",
       "mode": "corpus-only",
       "reason": "Guardia dello scrittore degli articoli (issue 2431): prima del lock di registrazione cerca l'id in tutti i file SEO della sezione con lo stesso risolutore bilanciato del motore (`engine/shared/seo-entry.mjs`) e rifiuta di aggiungere una voce gia' presente. Sul sito non esiste e non deve: lo scrittore dei contenuti vive solo qui, e il sito riceve i file SEO dal sync.",
