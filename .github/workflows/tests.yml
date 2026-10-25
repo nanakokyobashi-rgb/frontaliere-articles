@@ -362,7 +362,7 @@ jobs:
                 echo "::error::Numero PR non valido per il dispatch di recovery: $INPUT_PR_NUMBER"
                 exit 1
               fi
-              if ! pr_json=$(gh api "repos/$REPO/pulls/$INPUT_PR_NUMBER"); then
+              if ! pr_json=$(timeout --kill-after=0s 60s gh api "repos/$REPO/pulls/$INPUT_PR_NUMBER"); then
                 echo "::error::Impossibile leggere la PR #$INPUT_PR_NUMBER per validare la base del dispatch."
                 exit 1
               fi
@@ -371,7 +371,7 @@ jobs:
                 echo '::error::Il dispatch di recovery non espone una branch da associare a una PR.'
                 exit 1
               fi
-              if ! pr_pages=$(gh api --paginate --slurp "repos/$REPO/pulls?state=open&per_page=100"); then
+              if ! pr_pages=$(timeout --kill-after=0s 60s gh api --paginate --slurp "repos/$REPO/pulls?state=open&per_page=100"); then
                 echo '::error::Impossibile enumerare le PR aperte per risolvere la base del dispatch di recovery.'
                 exit 1
               fi
@@ -761,7 +761,7 @@ jobs:
           REVIEW_REVISION: ${{ steps.review_input.outputs.review_revision }}
         run: |
           set -euo pipefail
-          if ! reviews=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null); then
+          if ! reviews=$(timeout --kill-after=0s 60s gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null); then
             echo "::error::Reviews API illeggibile → claim review fail-closed, nessun nuovo Codex."
             exit 1
           fi
@@ -785,7 +785,7 @@ jobs:
           # ritirata (DISMISSED) o nuova fra le due letture cambierebbe il
           # verdetto su cui il guard sta per saltare Codex: se la proiezione
           # (id, stato, commit, body) non coincide, fail-closed.
-          if ! reviews_reread=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null); then
+          if ! reviews_reread=$(timeout --kill-after=0s 60s gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null); then
             echo "::error::Seconda lettura della Reviews API illeggibile → claim review fail-closed, nessun nuovo Codex."
             exit 1
           fi
@@ -841,7 +841,7 @@ jobs:
             if [ -z "$reviewed_at" ]; then
               return 1
             fi
-            if ! run_history=$(gh api --paginate --slurp \
+            if ! run_history=$(timeout --kill-after=0s 60s gh api --paginate --slurp \
               "repos/$REPO/actions/runs?head_sha=$reviewed_sha&event=pull_request&per_page=100" 2>/dev/null); then
               return 2
             fi
@@ -969,7 +969,7 @@ jobs:
           # PIENA (tier high su quasi ogni PR di ciclo) per una riga di prosa.
           # `lastEditedAt` vuoto = body mai modificato, e l'eccezione non scatta.
           # shellcheck disable=SC2016 # $owner/$name/$number sono variabili GraphQL, non shell.
-          body_edited_at=$(gh api graphql \
+          body_edited_at=$(timeout --kill-after=0s 60s gh api graphql \
             -f query='query($owner:String!,$name:String!,$number:Int!){repository(owner:$owner,name:$name){pullRequest(number:$number){lastEditedAt}}}' \
             -F owner="${REPO%%/*}" -F name="${REPO#*/}" -F number="$PR_NUMBER" \
             --jq '.data.repository.pullRequest.lastEditedAt // empty' 2>/dev/null || true)
@@ -1068,7 +1068,7 @@ jobs:
             exit 0
           fi
           compare_json=''
-          if ! compare_json=$(gh api "repos/$REPO/compare/$last...$HEAD_SHA" 2>/dev/null); then
+          if ! compare_json=$(timeout --kill-after=0s 60s gh api "repos/$REPO/compare/$last...$HEAD_SHA" 2>/dev/null); then
             set_claim_fingerprint
             echo "skip=false" >> "$GITHUB_OUTPUT"; echo "Compare illeggibile → review piena con claim (conservativo)."; exit 0
           fi
@@ -1264,7 +1264,7 @@ jobs:
           # precedente, si valuta SOLO il delta, non l'intera PR.
           # Uno stato review sconosciuto (#1762) fa fallire jq: niente base
           # incrementale, review piena — e il motivo resta nel log.
-          if ! lastRev=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null \
+          if ! lastRev=$(timeout --kill-after=0s 60s gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp 2>/dev/null \
             | jq -r --arg revision "$REVIEW_REVISION" '
               def has_current_revision($expected):
                 [((.body // "") | split("\n")[] | rtrimstr("\r")
@@ -1290,7 +1290,7 @@ jobs:
             lastRev=""
           fi
           if [ -n "$lastRev" ] && [ "$lastRev" != "$HEAD_SHA" ]; then
-            delta_code=$(gh api "repos/$REPO/compare/$lastRev...$HEAD_SHA" --jq '.files[] | .filename, (.previous_filename // empty)' 2>/dev/null \
+            delta_code=$(timeout --kill-after=0s 60s gh api "repos/$REPO/compare/$lastRev...$HEAD_SHA" --jq '.files[] | .filename, (.previous_filename // empty)' 2>/dev/null \
               | grep -Fxf <(echo "$code_files") || true)
             if [ -n "$delta_code" ]; then
               echo "incremental_base=$lastRev" >> "$GITHUB_OUTPUT"
@@ -1356,7 +1356,7 @@ jobs:
             || echo '{}' > "$CTX_DIR/pr.json"
           # L'elenco vero passa dalla REST paginata, non dal campo `files` del
           # payload GraphQL, che tronca a 100 senza dirlo.
-          gh api "repos/$REPO/pulls/$PR_NUMBER/files" --paginate --jq '.[].filename' \
+          timeout --kill-after=0s 60s gh api "repos/$REPO/pulls/$PR_NUMBER/files" --paginate --jq '.[].filename' \
             > "$CTX_DIR/files.txt" 2>/dev/null || : > "$CTX_DIR/files.txt"
           # Gli --exclude sono la ragione per cui una PR con 500 articoli
           # rigenerati non fa esplodere il diff: `content/` da solo ha 14.888
@@ -1381,7 +1381,7 @@ jobs:
             # si interroga con jq vero; `--slurp` annida le pagine, quindi
             # `.[][]` le appiattisce.
             # shellcheck disable=SC2016 # `$head` e' una variabile jq, non di shell.
-            if ! gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp \
+            if ! timeout --kill-after=0s 60s gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate --slurp \
               | jq -r --arg head "$CODE_UNCHANGED_SINCE" \
                   'def review_state_known: (.state | type) == "string" and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED", "PENDING", "DISMISSED"));
                   def review_state_terminal: review_state_known and (.state | IN("APPROVED", "CHANGES_REQUESTED", "COMMENTED"));
@@ -1716,7 +1716,7 @@ jobs:
             # chiude la propria esecuzione. Verifichiamo la HEAD e la finestra di
             # questa run prima di marchiare l'abort, altrimenti un 🔴 reale viene
             # trasformato in «nessun finding» dal ciclo di autorebase (#1185).
-            if RUN_STARTED_AT=$(gh api "repos/$REPO/actions/runs/$RUN_ID" --jq '.run_started_at // empty' 2>/dev/null); then
+            if RUN_STARTED_AT=$(timeout --kill-after=0s 60s gh api "repos/$REPO/actions/runs/$RUN_ID" --jq '.run_started_at // empty' 2>/dev/null); then
               :
             else
               set_review_output review_abort_cause probe_failed
@@ -1736,7 +1736,7 @@ jobs:
             # termine dell'action: tre probe bounded evitano di scambiare la
             # consistenza eventuale per assenza di verdetto.
             for attempt in 1 2 3; do
-              if REVIEWS=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews?per_page=100" --paginate --slurp 2>/dev/null); then
+              if REVIEWS=$(timeout --kill-after=0s 60s gh api "repos/$REPO/pulls/$PR_NUMBER/reviews?per_page=100" --paginate --slurp 2>/dev/null); then
                 :
               else
                 PROBE_STATUS=$?

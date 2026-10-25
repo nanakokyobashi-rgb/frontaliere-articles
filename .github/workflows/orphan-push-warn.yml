@@ -158,7 +158,7 @@ jobs:
           # storia del default branch, non e' orfano. Il confronto usa la
           # direzione base=SHA, head=branch: `ahead`/`identical` significa
           # merge-base --is-ancestor "$SHA" "$DEFAULT_BRANCH".
-          if ! MAIN_CONTAINMENT=$(gh api "repos/${REPO}/compare/${SHA}...${DEFAULT_BRANCH}" \
+          if ! MAIN_CONTAINMENT=$(timeout --kill-after=0s 60s gh api "repos/${REPO}/compare/${SHA}...${DEFAULT_BRANCH}" \
             --jq '.status' 2>/dev/null); then
             echo "::warning::Confronto con ${DEFAULT_BRANCH} non verificabile per $SHA — classificazione sospesa, nessun commento aggiunto."
             exit 0
@@ -173,7 +173,7 @@ jobs:
           # quando il push e' un antenato del merge commit trovato, anche se la
           # replica della default branch non ha ancora aggiornato il confronto.
           if [ -n "${MERGED_AT:-}" ] && [ -n "${MERGE_COMMIT_OID:-}" ]; then
-            if ! MERGE_CONTAINMENT=$(gh api "repos/${REPO}/compare/${SHA}...${MERGE_COMMIT_OID}" \
+            if ! MERGE_CONTAINMENT=$(timeout --kill-after=0s 60s gh api "repos/${REPO}/compare/${SHA}...${MERGE_COMMIT_OID}" \
               --jq '.status' 2>/dev/null); then
               echo "::warning::Confronto con il merge commit ${MERGE_COMMIT_OID} non verificabile per $SHA — classificazione sospesa, nessun commento aggiunto."
               exit 0
@@ -217,7 +217,7 @@ jobs:
           # storia precedente al merge: un nuovo commit sul branch riusato non
           # puo' spegnere il warning solo perche' aggiorna headRefOid.
           if [ -n "${MERGED_AT:-}" ] && [ -n "${HEAD_OID:-}" ]; then
-            if ! CONTAINMENT=$(gh api "repos/${REPO}/compare/${SHA}...${HEAD_OID}" \
+            if ! CONTAINMENT=$(timeout --kill-after=0s 60s gh api "repos/${REPO}/compare/${SHA}...${HEAD_OID}" \
               --jq '.status' 2>/dev/null); then
               echo "::warning::Confronto con la head ${HEAD_OID} non verificabile per $SHA — classificazione sospesa, nessun commento aggiunto."
               exit 0
@@ -227,7 +227,7 @@ jobs:
                 echo "::warning::ID server-side della run non verificabile per il confronto con la head ${HEAD_OID} — nessun commento aggiunto."
                 exit 0
               fi
-              if ! RUN_STARTED_AT=$(gh api "repos/${REPO}/actions/runs/${GITHUB_RUN_ID}" \
+              if ! RUN_STARTED_AT=$(timeout --kill-after=0s 60s gh api "repos/${REPO}/actions/runs/${GITHUB_RUN_ID}" \
                 --jq '.run_started_at // empty' 2>/dev/null); then
                 echo "::warning::Metadata server-side della run ${GITHUB_RUN_ID} non verificabile per il confronto con la head ${HEAD_OID} — nessun commento aggiunto."
                 exit 0
@@ -269,7 +269,7 @@ jobs:
           MARKER='<!-- orphan-push-warn -->'
           # `--paginate` evita che un thread lungo tronchi il marker e riapra
           # il commento duplicato a ogni push.
-          if ! COMMENTS=$(gh api --paginate "repos/${REPO}/issues/${PR_NUMBER}/comments" \
+          if ! COMMENTS=$(timeout --kill-after=0s 60s gh api --paginate "repos/${REPO}/issues/${PR_NUMBER}/comments" \
             --jq '.[].body' 2>/dev/null); then
             echo "::warning::Commenti della PR #$PR_NUMBER illeggibili — dedup indeterminabile, nessun commento aggiunto."
             exit 0
