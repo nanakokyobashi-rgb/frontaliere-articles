@@ -45,6 +45,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.cambio-ora-rischio-wildunfalli.title': 'Cambio d\'ora aumenta rischio incidenti con fauna nel Canton Soletta',
     'blog.article.cambio-ora-rischio-wildunfalli.excerpt': 'La notte tra il 24 e il 25 ottobre 2026 gli orologi tornano indietro di un\'ora, coincidente con l\'attività di caprioli, cervi nobili e cinghiali.',
     'blog.article.cambio-ora-rischio-wildunfalli.imageAlt': 'Rischio di collisioni con animali selvatici durante il cambio d\'ora nel Canton Soletta.',
+    'blog.article.batterie-sodio-soletta.title': 'Batterie agli ioni di sodio: montaggio a Soletta',
+    'blog.article.batterie-sodio-soletta.excerpt': 'Batterie agli ioni di sodio senza litio Software sviluppato in Svizzera, montaggio a Soletta Oltre 600 batterie vendute entro fine settembre 2026 Primo sistema',
+    'blog.article.batterie-sodio-soletta.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;

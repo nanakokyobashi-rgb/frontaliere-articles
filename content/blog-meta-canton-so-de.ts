@@ -45,6 +45,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.cambio-ora-rischio-wildunfalli.title': 'Zeitumstellung erhöht das Risiko von Wildtierunfällen im Kanton Solothurn',
     'blog.article.cambio-ora-rischio-wildunfalli.excerpt': 'In der Nacht vom 24.',
     'blog.article.cambio-ora-rischio-wildunfalli.imageAlt': 'Gefahr von Wildunfällen beim Zeitumstellung im Kanton Solothurn.',
+    'blog.article.batterie-sodio-soletta.title': 'Natrium-Ionen-Batterien: Montage in Solothurn',
+    'blog.article.batterie-sodio-soletta.excerpt': 'Natrium-Ionen-Batterien ohne Lithium In der Schweiz entwickelte Software, Montage in Solothurn Bis Ende September 2026 über 600 verkaufte Batterien Erstes',
+    'blog.article.batterie-sodio-soletta.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;
