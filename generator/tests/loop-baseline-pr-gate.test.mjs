@@ -14,7 +14,12 @@ import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { changedBaselines, gateVerdict, localHistoryMatch } from '../../scripts/ci/loop-baseline-pr-gate.mjs';
+import {
+  changedBaselines,
+  fetchRemoteBaseManifest,
+  gateVerdict,
+  localHistoryMatch,
+} from '../../scripts/ci/loop-baseline-pr-gate.mjs';
 
 const GATE_SOURCE = readFileSync(new URL('../../scripts/ci/loop-baseline-pr-gate.mjs', import.meta.url), 'utf8');
 
@@ -124,6 +129,41 @@ test('il rimedio del gate per una ghost-baseline allinea il guard init e traccia
   assert.match(GATE_SOURCE, /ghost-baseline/);
   assert.match(GATE_SOURCE, /--force/);
   assert.match(GATE_SOURCE, /forcedAt/);
+});
+
+test('fetchRemoteBaseManifest abortisce una richiesta senza risposta entro la deadline', async () => {
+  let signal;
+  const pendingFetch = (_url, options) => {
+    signal = options.signal;
+    return new Promise(() => {});
+  };
+  await assert.rejects(
+    fetchRemoteBaseManifest({ repo: 'owner/repo', ref: 'dead-ref', fetchImpl: pendingFetch, timeoutMs: 10 }),
+    (error) => {
+      assert.equal(error.name, 'TimeoutError');
+      assert.equal(error.code, 'LOOP_BASELINE_FETCH_TIMEOUT');
+      assert.match(error.message, /owner\/repo@dead-ref\/scripts\/ci\/loop-sync-manifest\.json/);
+      return true;
+    },
+  );
+  assert.equal(signal.aborted, true);
+});
+
+test('fetchRemoteBaseManifest applica la stessa deadline al body della risposta', async () => {
+  let signal;
+  const stalledBodyFetch = (_url, options) => {
+    signal = options.signal;
+    return Promise.resolve({
+      status: 200,
+      ok: true,
+      text: () => new Promise(() => {}),
+    });
+  };
+  await assert.rejects(
+    fetchRemoteBaseManifest({ repo: 'owner/repo', ref: 'body-stall', fetchImpl: stalledBodyFetch, timeoutMs: 10 }),
+    (error) => error.code === 'LOOP_BASELINE_FETCH_TIMEOUT',
+  );
+  assert.equal(signal.aborted, true);
 });
 
 test('localHistoryMatch: un blob storico illeggibile (partial clone) rende la storia non verificabile, non una baseline fantasma', () => {
