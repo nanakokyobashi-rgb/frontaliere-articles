@@ -2068,9 +2068,9 @@
       "mode": "identical",
       "reason": "Riesporta tipizzata clauseTail.mjs e ospita repairSerpSnippet, che l'engine chiama a render time (SiteShellContract) per riparare le description gia' scritte. Stessa ragione di clauseTail.mjs — fuori dall'allowlist del mirror dell'engine — piu' una specifica: generator/tests/seo-clause-truncation.test.mjs lega il letterale della guardia «gia' completo» di repairSerpSnippet, perche' quel .ts non e' importabile da node:test. E' un contratto senza forma di import, la classe che loop-references-exist.test.mjs esiste per coprire. RICONCILIATO il 2026-08-14 insieme a clauseTail.mjs, stessa dinamica (both-moved apparente risolto in fast-forward): qui il delta e' la sola riesportazione tipizzata di `truncateToClauseNonEmpty`. Riallineato il 2026-10-20 alla policy condivisa di 150 caratteri.",
       "baseline": {
-        "site": "7329f1a727b065fe",
-        "corpus": "7329f1a727b065fe",
-        "alignedAt": "2026-10-23"
+        "site": "5a3ae2df92db3543",
+        "corpus": "5a3ae2df92db3543",
+        "alignedAt": "2026-10-25"
       }
     },
     {
@@ -2379,9 +2379,9 @@
       "mode": "identical",
       "reason": "Postcondizione condivisa dai publisher articolo dei due repo: la dichiarazione del registro resta autorevole e una pagina ricaduta sull'immagine generica viene esclusa dal push. Il file e' riallineato byte per byte al gemello del sito, cosi' una modifica futura della stessa regola resta visibile al trasporto lockstep.",
       "baseline": {
-        "site": "433c7a0fdf348069",
-        "corpus": "433c7a0fdf348069",
-        "alignedAt": "2026-10-24"
+        "site": "a6c1cae65a7c6f05",
+        "corpus": "a6c1cae65a7c6f05",
+        "alignedAt": "2026-10-25"
       }
     },
     {
@@ -2611,9 +2611,9 @@
       "path": "scripts/lib/r2-image-namespace-lock.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "9e1d626684014965",
-        "corpus": "9e1d626684014965",
-        "alignedAt": "2026-10-24"
+        "site": "7b24e0034dcd3772",
+        "corpus": "7b24e0034dcd3772",
+        "alignedAt": "2026-10-25"
       }
     },
     {
@@ -4013,9 +4013,9 @@
       "sitePath": "services/seo/organizationLd.ts",
       "mode": "identical",
       "baseline": {
-        "site": "85d1da36f65a2db1",
-        "corpus": "85d1da36f65a2db1",
-        "alignedAt": "2026-10-22"
+        "site": "33f33cecc52a42da",
+        "corpus": "33f33cecc52a42da",
+        "alignedAt": "2026-10-25"
       }
     },
     {
@@ -4180,9 +4180,9 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "cb17c4e77aeaaaf5",
-        "corpus": "cb17c4e77aeaaaf5",
-        "alignedAt": "2026-10-24"
+        "site": "e4705ac1b47ba149",
+        "corpus": "e4705ac1b47ba149",
+        "alignedAt": "2026-10-25"
       }
     },
     {
