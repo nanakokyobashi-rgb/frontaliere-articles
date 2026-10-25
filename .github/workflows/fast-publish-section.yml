@@ -293,25 +293,30 @@ jobs:
           else
             echo "::warning::helper della punta di main assente nelle revisioni disponibili; genero il fallback git-transport"
             cat > "$main_head_target" <<'EOF'
-#!/usr/bin/env bash
-set -euo pipefail
-remote="${1:-origin}"
-ref="${2:-refs/heads/main}"
-if [ "$#" -gt 2 ]; then
-  echo "usage: $0 [remote] [ref]" >&2
-  exit 2
-fi
-for attempt in 1 2 3; do
-  value="$(timeout 60 git ls-remote --refs "$remote" "$ref" 2>/dev/null | awk -v wanted="$ref" '$2 == wanted { print $1; exit }')"
-  if [[ "$value" =~ ^[a-f0-9]{40}$ ]]; then
-    printf '%s\n' "$value"
-    exit 0
-  fi
-  [ "$attempt" -lt 3 ] && sleep "$((attempt * 5))"
-done
-echo "::error::punta di $ref non risolvibile via git ls-remote" >&2
-exit 1
-EOF
+            #!/usr/bin/env bash
+            set -euo pipefail
+            remote="${1:-origin}"
+            ref="${2:-refs/heads/main}"
+            if [ "$#" -gt 2 ]; then
+              echo "usage: $0 [remote] [ref]" >&2
+              exit 2
+            fi
+            main_head=''
+            for attempt in 1 2 3; do
+              main_head=''
+              ls_remote_out=''
+              if ls_remote_out="$(timeout 60 git ls-remote --refs "$remote" "$ref" 2>/dev/null)"; then
+                main_head="$(printf '%s\n' "$ls_remote_out" | awk -v wanted="$ref" '$2 == wanted { print $1; exit }')"
+              fi
+              if [[ "$main_head" =~ ^[a-f0-9]{40}$ ]]; then
+                printf '%s\n' "$main_head"
+                exit 0
+              fi
+              [ "$attempt" -lt 3 ] && sleep "$((attempt * 5))"
+            done
+            echo "::error::punta di $ref non risolvibile via git ls-remote" >&2
+            exit 1
+            EOF
             chmod 0755 "$main_head_target"
           fi
 
@@ -650,25 +655,30 @@ EOF
           else
             echo "::warning::helper della punta di main assente nelle revisioni disponibili; genero il fallback git-transport"
             cat > "$target" <<'EOF'
-#!/usr/bin/env bash
-set -euo pipefail
-remote="${1:-origin}"
-ref="${2:-refs/heads/main}"
-if [ "$#" -gt 2 ]; then
-  echo "usage: $0 [remote] [ref]" >&2
-  exit 2
-fi
-for attempt in 1 2 3; do
-  value="$(timeout 60 git ls-remote --refs "$remote" "$ref" 2>/dev/null | awk -v wanted="$ref" '$2 == wanted { print $1; exit }')"
-  if [[ "$value" =~ ^[a-f0-9]{40}$ ]]; then
-    printf '%s\n' "$value"
-    exit 0
-  fi
-  [ "$attempt" -lt 3 ] && sleep "$((attempt * 5))"
-done
-echo "::error::punta di $ref non risolvibile via git ls-remote" >&2
-exit 1
-EOF
+            #!/usr/bin/env bash
+            set -euo pipefail
+            remote="${1:-origin}"
+            ref="${2:-refs/heads/main}"
+            if [ "$#" -gt 2 ]; then
+              echo "usage: $0 [remote] [ref]" >&2
+              exit 2
+            fi
+            main_head=''
+            for attempt in 1 2 3; do
+              main_head=''
+              ls_remote_out=''
+              if ls_remote_out="$(timeout 60 git ls-remote --refs "$remote" "$ref" 2>/dev/null)"; then
+                main_head="$(printf '%s\n' "$ls_remote_out" | awk -v wanted="$ref" '$2 == wanted { print $1; exit }')"
+              fi
+              if [[ "$main_head" =~ ^[a-f0-9]{40}$ ]]; then
+                printf '%s\n' "$main_head"
+                exit 0
+              fi
+              [ "$attempt" -lt 3 ] && sleep "$((attempt * 5))"
+            done
+            echo "::error::punta di $ref non risolvibile via git ls-remote" >&2
+            exit 1
+            EOF
             chmod 0755 "$target"
           fi
 
@@ -1460,25 +1470,30 @@ EOF
           else
             echo "::warning::helper della punta di main assente nelle revisioni disponibili; genero il fallback git-transport"
             cat > "$target" <<'EOF'
-#!/usr/bin/env bash
-set -euo pipefail
-remote="${1:-origin}"
-ref="${2:-refs/heads/main}"
-if [ "$#" -gt 2 ]; then
-  echo "usage: $0 [remote] [ref]" >&2
-  exit 2
-fi
-for attempt in 1 2 3; do
-  value="$(timeout 60 git ls-remote --refs "$remote" "$ref" 2>/dev/null | awk -v wanted="$ref" '$2 == wanted { print $1; exit }')"
-  if [[ "$value" =~ ^[a-f0-9]{40}$ ]]; then
-    printf '%s\n' "$value"
-    exit 0
-  fi
-  [ "$attempt" -lt 3 ] && sleep "$((attempt * 5))"
-done
-echo "::error::punta di $ref non risolvibile via git ls-remote" >&2
-exit 1
-EOF
+            #!/usr/bin/env bash
+            set -euo pipefail
+            remote="${1:-origin}"
+            ref="${2:-refs/heads/main}"
+            if [ "$#" -gt 2 ]; then
+              echo "usage: $0 [remote] [ref]" >&2
+              exit 2
+            fi
+            main_head=''
+            for attempt in 1 2 3; do
+              main_head=''
+              ls_remote_out=''
+              if ls_remote_out="$(timeout 60 git ls-remote --refs "$remote" "$ref" 2>/dev/null)"; then
+                main_head="$(printf '%s\n' "$ls_remote_out" | awk -v wanted="$ref" '$2 == wanted { print $1; exit }')"
+              fi
+              if [[ "$main_head" =~ ^[a-f0-9]{40}$ ]]; then
+                printf '%s\n' "$main_head"
+                exit 0
+              fi
+              [ "$attempt" -lt 3 ] && sleep "$((attempt * 5))"
+            done
+            echo "::error::punta di $ref non risolvibile via git ls-remote" >&2
+            exit 1
+            EOF
             chmod 0755 "$target"
           fi
 
