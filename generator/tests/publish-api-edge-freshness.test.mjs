@@ -82,6 +82,12 @@ test('cf-purge-cache.mjs usa le varianti in modalita` --files (e non un files: n
   );
 });
 
+test('cf-purge-cache.mjs limita anche la richiesta e il body dell API Cloudflare', () => {
+  assert.match(PURGE, /CF_PURGE_API_TIMEOUT_MS/);
+  assert.match(PURGE, /signal:\s*AbortSignal\.timeout\(CF_PURGE_API_TIMEOUT_MS\)/);
+  assert.match(PURGE, /Math\.min\([\s\S]*?120_000,\s*\)/);
+});
+
 test('publish-api.yml non carica mai su CDN con il Cache-Control di default', () => {
   // Solo le INVOCAZIONI (`bash scripts/lib/…`), non le menzioni in prosa: il
   // commento sopra la chiamata nomina lo script per spiegare che toglie lo slash

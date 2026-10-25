@@ -58,6 +58,9 @@
  *   eval "$(GOOGLE_APPLICATION_CREDENTIALS=mcp-gsc-main/service_account_credentials.json \
  *     node scripts/load-rc-env.mjs)" && node scripts/cf-purge-cache.mjs
  *
+ * CF_PURGE_API_TIMEOUT_MS optionally bounds each Cloudflare purge request
+ * (default 30000, cap 120000).
+ *
  * Zone-id resolution itself delegates to scripts/lib/cf-analytics.mjs's
  * resolveZoneId (AGENTS.md #6 — no inline copy of that fetch+parse construct);
  * this file's own resolveZoneId() wrapper only adds this script's specific
@@ -101,6 +104,14 @@ const PURGE_SETTLE_MS = parsePositiveNum(process.env.CF_PURGE_SETTLE_MS, 20_000,
   tool: 'cf-purge-cache',
   integer: true,
 });
+const CF_PURGE_API_TIMEOUT_MS = Math.min(
+  parsePositiveNum(process.env.CF_PURGE_API_TIMEOUT_MS, 30_000, {
+    label: 'CF_PURGE_API_TIMEOUT_MS',
+    tool: 'cf-purge-cache',
+    integer: true,
+  }),
+  120_000,
+);
 const MAX_TARGETED_FILES = 30; // Cloudflare free-plan `files` purge_cache cap.
 
 const REST_BASE = 'https://api.cloudflare.com/client/v4';
@@ -242,6 +253,7 @@ async function cf(method, path, body) {
     method,
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
     ...(body ? { body: JSON.stringify(body) } : {}),
+    signal: AbortSignal.timeout(CF_PURGE_API_TIMEOUT_MS),
   });
   const json = await res.json().catch(() => null);
   return { status: res.status, json };
