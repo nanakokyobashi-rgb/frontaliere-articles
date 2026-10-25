@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-violazioni-sicurezza-svizzera-2026.webp",
-      "sha256": "b40b68111add10edea48c0b8cc7abc8c2adc0bc15cc037344c949d759cacdd56"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-violazioni-sicurezza-svizzera-2026-480w.webp",
-      "sha256": "77469c81eef86f3f80a0c3893f5994b0de3692f6c4fcc9d2ba9735e3a139129d"
-    }
-  ]
+  "items": []
 }
