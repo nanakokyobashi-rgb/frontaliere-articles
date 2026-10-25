@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-30/ist-orange-das-neue-schwarz-wie-sich-weidmueller-im-ki": {
-      "section": "canton-sh",
-      "ts": 1792729952825
-    },
-    "canton-sh::https://www.schaffhausen24.ch/articles/414161-schaffhauser-vorschlag-holt-ibk-foerderpreis": {
-      "section": "canton-sh",
-      "ts": 1792730369616
-    },
     "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-02/bei-der-wefa-in-thayngen-kommt-es-zu-einem-wechsel": {
       "section": "canton-sh",
       "ts": 1792832596766
@@ -31,6 +23,14 @@
     "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-12/gf-vizepraesidentin-gehoert-zu-den-top-100-women-in-business": {
       "section": "canton-sh",
       "ts": 1792833349171
+    },
+    "canton-sh::https://www.schaffhausen24.ch/articles/414647-boerse-neunmonatszahlen-und-ki-korrektur": {
+      "section": "canton-sh",
+      "ts": 1792924462014
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-19/transport-fever-3-im-test-erfahren-sie-ob-dieses": {
+      "section": "canton-sh",
+      "ts": 1792924470074
     }
   }
 }
