@@ -14,7 +14,17 @@ test('il backfill applica un timeout a ogni chiamata GitHub', () => {
   assert.match(WORKFLOW, /api_timeout_seconds=60/);
   assert.match(
     WORKFLOW,
-    /timeout --kill-after=0s "\$\{api_timeout_seconds\}s" gh api "\$@"/,
+    /timeout --kill-after=5s "\$\{api_timeout_seconds\}s" gh api "\$@"/,
+  );
+  assert.match(
+    WORKFLOW,
+    /if ! gh_api_timeout -X POST "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/dispatches"/,
+    'il dispatch deve degradare a lost senza terminare il backfill',
+  );
+  assert.match(
+    WORKFLOW,
+    /printf '%s\\t%s\\t%s\\n' "\$id" "\$section" "lost" >> "\$results"/,
+    'un dispatch fallito deve finire nei risultati e nel conteggio failed',
   );
   assert.doesNotMatch(WORKFLOW, /^\s+gh api\b/m, 'nessuna chiamata deve bypassare il wrapper');
   assert.equal(

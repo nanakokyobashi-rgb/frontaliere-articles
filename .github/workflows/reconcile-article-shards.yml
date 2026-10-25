@@ -224,7 +224,7 @@ jobs:
           # wrapper, una lettura appesa può consumare l'intero backfill.
           api_timeout_seconds=60
           gh_api_timeout() {
-            timeout --kill-after=0s "${api_timeout_seconds}s" gh api "$@"
+            timeout --kill-after=5s "${api_timeout_seconds}s" gh api "$@"
           }
 
           validate_workflow_runs() {
@@ -435,11 +435,16 @@ jobs:
 
             before="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
             echo "── dispatch backfill: $section/$id"
-            gh_api_timeout -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/dispatches" \
+            if ! gh_api_timeout -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/dispatches" \
               -f ref=main \
               -f "inputs[article_id]=$id" \
               -f "inputs[section]=$section" \
-              -f "inputs[dry_run]=false"
+              -f "inputs[dry_run]=false"; then
+              echo "::warning::dispatch fallito per $section/$id — la conterà il prossimo giro"
+              printf '%s\t%s\t%s\n' "$id" "$section" "lost" >> "$results"
+              failed=$((failed + 1))
+              continue
+            fi
 
             # Trova la run appena creata (event=workflow_dispatch, created >=
             # before). CORRELAZIONE EURISTICA, dichiaratamente: l'API non
