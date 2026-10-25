@@ -230,21 +230,34 @@ function authToken() {
 }
 
 async function ghJson(urlPath) {
-  const res = await fetch(`${API}${urlPath}`, {
-    headers: githubApiHeaders(authToken()),
-    signal: AbortSignal.timeout(DEPLOY_QUEUE_API_TIMEOUT_MS),
-  });
-  if (!res.ok) throw new Error(`GitHub API ${urlPath} → HTTP ${res.status}`);
-  return res.json();
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), DEPLOY_QUEUE_API_TIMEOUT_MS);
+  try {
+    const res = await fetch(`${API}${urlPath}`, {
+      headers: githubApiHeaders(authToken()),
+      signal: controller.signal,
+    });
+    if (!res.ok) throw new Error(`GitHub API ${urlPath} → HTTP ${res.status}`);
+    return await res.json();
+  } finally {
+    clearTimeout(timer);
+  }
 }
 
 /** @returns {Promise<boolean>} true when GitHub accepted the cancellation */
 async function cancelRun(runId) {
-  const res = await fetch(`${API}/repos/${REPO}/actions/runs/${runId}/cancel`, {
-    method: 'POST',
-    headers: githubApiHeaders(authToken()),
-    signal: AbortSignal.timeout(DEPLOY_QUEUE_API_TIMEOUT_MS),
-  });
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), DEPLOY_QUEUE_API_TIMEOUT_MS);
+  let res;
+  try {
+    res = await fetch(`${API}/repos/${REPO}/actions/runs/${runId}/cancel`, {
+      method: 'POST',
+      headers: githubApiHeaders(authToken()),
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timer);
+  }
   // 202 Accepted is the documented success. 409 means the run already reached a
   // terminal state between the re-read and the cancel — the group is free
   // either way, which is the outcome we wanted.
@@ -318,8 +331,12 @@ async function main() {
     console.log(
       `::warning::Run ${fresh.run.id} (${fresh.run.head_sha?.slice(0, 8) ?? '?'}) has been ${verdict.reason} — cancelling to release the publish-api group.`,
     );
-    if (await cancelRun(fresh.run.id)) cancelled += 1;
-    else failures.push(`run ${fresh.run.id}: GitHub refused the cancel`);
+    try {
+      if (await cancelRun(fresh.run.id)) cancelled += 1;
+      else failures.push(`run ${fresh.run.id}: GitHub refused the cancel`);
+    } catch (err) {
+      failures.push(`run ${fresh.run.id}: cancel failed (${err?.message || err})`);
+    }
   }
 
   // The next queued publish starting is the real signal that the surface is

@@ -65,23 +65,36 @@ for (const s of sections) {
 }
 
 async function get(url) {
-  let res;
-  try {
-    res = await fetch(url, {
-      headers: { ...REWIRE_FETCH_HEADERS, accept: 'application/xml,text/xml,*/*' },
-      redirect: 'follow',
-      signal: AbortSignal.timeout(HUB_LINKS_FETCH_TIMEOUT_MS),
-    });
-  } catch (err) {
-    // AbortSignal.timeout() rejects with a DOMException whose `code` property
-    // is read-only in the ESM runtime. Normalize it before annotating so the
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), HUB_LINKS_FETCH_TIMEOUT_MS);
+  const normalizeNetworkError = (err) => {
+    // AbortController aborts with a DOMException whose `code` property is
+    // read-only in the ESM runtime. Normalize it before annotating so the
     // intentional-noindex path keeps its fail-closed NETWORK classification.
     const networkError = new Error(err?.message || String(err), { cause: err });
     networkError.code = 'NETWORK';
-    throw networkError;
+    return networkError;
+  };
+  try {
+    let res;
+    try {
+      res = await fetch(url, {
+        headers: { ...REWIRE_FETCH_HEADERS, accept: 'application/xml,text/xml,*/*' },
+        redirect: 'follow',
+        signal: controller.signal,
+      });
+    } catch (err) {
+      throw normalizeNetworkError(err);
+    }
+    if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
+    try {
+      return await res.text();
+    } catch (err) {
+      throw normalizeNetworkError(err);
+    }
+  } finally {
+    clearTimeout(timer);
   }
-  if (!res.ok) throw new Error(`${url}: HTTP ${res.status}`);
-  return res.text();
 }
 
 async function getIntentionalNoindexPage(url) {
