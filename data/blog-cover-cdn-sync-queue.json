@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-felix-gisler-pensione-uri.webp",
-      "sha256": "1b45e146e4d665776759ca4dd632a93af4047a1e25e3b116d9795195fa944da8"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-felix-gisler-pensione-uri-480w.webp",
-      "sha256": "3f22bfc2cd1842e10b492274a8553e5af028b9806b12ffe98e6c13cc034b6c7b"
-    }
-  ]
+  "items": []
 }
