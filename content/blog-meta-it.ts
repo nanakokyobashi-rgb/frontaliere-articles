@@ -13604,6 +13604,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-25.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.bollettino-frontaliere-2026-10-25.seoDescription': 'Bollettino frontalieri 25 ottobre 2026: attese ai valichi, prezzi benzina, cambio CHF/EUR e offerte attive di lavoro in Svizzera.',
     'blog.article.bollettino-frontaliere-2026-10-25.ogDescription': 'I numeri del 25 ottobre 2026 per i frontalieri: quanto si aspetta a ogni valico, in quali comuni conviene fare il pieno, quanto vale il franco al cambio rilevato e quanti annunci di lavoro attivi sono presenti sul nostro job board in Svizzera.',
+    'blog.article.sondaggio-paga-colleghi-svizzeri.title': 'Frontalieri in Ticino: il 55,6% si sente pagato meno',
+    'blog.article.sondaggio-paga-colleghi-svizzeri.excerpt': '1\'542 lavoratori hanno risposto al sondaggio 73% soddisfatto dello stipendio 55,6% si sente pagato meno di un residente 37,4% può fare telelavoro Campione →',
+    'blog.article.sondaggio-paga-colleghi-svizzeri.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaIt;

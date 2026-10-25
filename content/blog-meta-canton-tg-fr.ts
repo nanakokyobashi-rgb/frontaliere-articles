@@ -54,6 +54,9 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.turgovia-modifica-piano-direttore-2027.title': 'Thurgovie : modification du plan directeur pour des sites économiques',
     'blog.article.turgovia-modifica-piano-direttore-2027.excerpt': 'Le canton de Thurgovie lance la consultation sur la révision du plan directeur pour le développement du commerce et de l’industrie.',
     'blog.article.turgovia-modifica-piano-direttore-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sedi-rav-lavoratori-tg.title': 'Agences RAV et services pour les employeurs dans le canton de Thurgovie',
+    'blog.article.sedi-rav-lavoratori-tg.excerpt': 'Les agences RAV se trouvent à Amriswil, Frauenfeld et Kreuzlingen ; les postes vacants peuvent être publiés gratuitement sur arbeit.swiss.',
+    'blog.article.sedi-rav-lavoratori-tg.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonTgFr;

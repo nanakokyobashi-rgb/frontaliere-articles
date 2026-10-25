@@ -113308,6 +113308,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sondaggio-paga-colleghi-svizzeri': {
+    title: 'Frontalieri in Ticino: il 55,6% si sente pagato meno',
+    description: '1\'542 lavoratori hanno risposto al sondaggio 73% soddisfatto dello stipendio 55,6% si sente pagato meno di un residente 37,4% può fare telelavoro',
+    keywords: 'frontalieri, ticino, svizzera, italia, sente, pagato, meno, lavoratori',
+    ogTitle: 'Frontalieri in Ticino: il 55,6% si sente pagato meno',
+    ogDescription: '1\'542 lavoratori hanno risposto al sondaggio 73% soddisfatto dello stipendio 55,6% si sente pagato meno di un residente 37,4% può fare telelavoro Campione →',
+    canonicalPath: '/articoli-frontaliere/sondaggio-paga-colleghi-svizzeri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri in Ticino: il 55,6% si sente pagato meno",
+      "description": "1'542 lavoratori hanno risposto al sondaggio 73% soddisfatto dello stipendio 55,6% si sente pagato meno di un residente 37,4% può fare telelavoro",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sondaggio-paga-colleghi-svizzeri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-25T12:30:34+00:00",
+      "dateModified": "2026-10-25T12:30:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sondaggio-paga-colleghi-svizzeri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

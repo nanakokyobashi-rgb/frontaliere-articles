@@ -13605,6 +13605,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-10-25.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.bollettino-frontaliere-2026-10-25.seoDescription': 'Bulletin frontalier 25 octobre 2026 : attentes aux douanes, prix du carburant, taux CHF/EUR et offres d\'emploi actives en Suisse.',
     'blog.article.bollettino-frontaliere-2026-10-25.ogDescription': 'Les chiffres du 25 octobre 2026 pour les frontaliers : attentes aux douanes, communes où le carburant coûte le moins cher, dernier taux CHF/EUR et offres d\'emploi actives sur notre job board suisse au quotidien.',
+    'blog.article.sondaggio-paga-colleghi-svizzeri.title': 'Frontaliers au Tessin : 55,6% se sentent moins bien payés',
+    'blog.article.sondaggio-paga-colleghi-svizzeri.excerpt': '1\'542 travailleurs ont répondu au sondage 73% satisfaits de leur salaire 55,6% se sentent moins bien payés qu’un résident 37,4% peuvent faire du télétravail Échantillon →',
+    'blog.article.sondaggio-paga-colleghi-svizzeri.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaFr;

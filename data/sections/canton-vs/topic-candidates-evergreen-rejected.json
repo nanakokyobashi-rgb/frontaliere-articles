@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://canal9.ch/fr/vin-et-medicaments-la-comparaison-qui-fache": {
-      "section": "canton-vs",
-      "ts": 1792711149990
-    },
-    "canton-vs::https://www.pomona.ch/story/817626/das-ist-eine-erpressungsmethode-sp-attackiert-die-fdp-im-ahvstreit": {
-      "section": "canton-vs",
-      "ts": 1792711154672
-    },
-    "canton-vs::https://www.pomona.ch/story/817791/finanzkommission-gibt-trotz-%c3%bcber-hundert-neuer-stellen-gr%c3%bcnes-licht": {
-      "section": "canton-vs",
-      "ts": 1792751199040
-    },
     "canton-vs::https://www.pomona.ch/story/818120/vom-schalter-direkt-auf-den-bildschirm-wie-der-kanton-beh%c3%b6rdeng%c3%a4nge-digitalisiert": {
       "section": "canton-vs",
       "ts": 1792771189733
@@ -31,6 +19,14 @@
     "canton-vs::https://www.pomona.ch/story/817691/just-eat-k%c3%bcndigt-massenentlassung-an-700-kuriere-bangen-um-ihren-job": {
       "section": "canton-vs",
       "ts": 1792871910996
+    },
+    "canton-vs::https://www.ossolanews.it/2026/10/25/leggi-notizia/argomenti/confine/articolo/frontalieri-la-svizzera-dice-no-ai-rimborsi-sul-secondo-pilastro.html": {
+      "section": "canton-vs",
+      "ts": 1792929029395
+    },
+    "canton-vs::https://www.pomona.ch/story/817791/finanzkommission-gibt-trotz-%c3%bcber-hundert-neuer-stellen-gr%c3%bcnes-licht": {
+      "section": "canton-vs",
+      "ts": 1792929031730
     }
   }
 }

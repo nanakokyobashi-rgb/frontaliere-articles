@@ -193,4 +193,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sedi-rav-lavoratori-tg',
+ category: 'pratico',
+ date: '2026-10-25T12:02:52.564Z',
+ image: '/images/blog/article-sedi-rav-lavoratori-tg.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['TG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -4,81 +4,21 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vd::https://www.guidedufrontalier.com/actualites/declaration-dris-tou-couple-frontalier": {
-      "section": "canton-vd",
-      "ts": 1792616925037
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/retraite-frontalier-polypensionne": {
-      "section": "canton-vd",
-      "ts": 1792665566582
-    },
-    "canton-vd::https://www.ledauphine.com/faits-divers-justice/2026/10/22/a412-la-procureure-d-annecy-demande-la-suspension-des-travaux": {
-      "section": "canton-vd",
-      "ts": 1792667481021
-    },
-    "canton-vd::https://www.ledauphine.com/economie/2026/10/21/centre-de-sante-1-000-personnes-ont-trouve-un-medecin-d-autres-attendent": {
-      "section": "canton-vd",
-      "ts": 1792667496023
-    },
-    "canton-vd::https://www.ledauphine.com/sante/2026/10/21/on-sait-que-la-distance-est-un-frein-dans-le-depistage-apres-l-albanais-un-nouveau-mammographe-dans-le-chablais-ou-la-vallee-de-l-arve": {
-      "section": "canton-vd",
-      "ts": 1792667510030
-    },
-    "canton-vd::https://www.guidedufrontalier.com/actualites/hebdo-du-frontalier": {
-      "section": "canton-vd",
-      "ts": 1792667531347
-    },
-    "canton-vd::https://www.ledauphine.com/faits-divers-justice/2026/10/22/contre-sens-sur-l-a40-trois-personnes-en-urgence-absolue-evacuees-a-l-hopital-d-annecy": {
-      "section": "canton-vd",
-      "ts": 1792667548777
-    },
-    "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-158?s=2": {
-      "section": "canton-vd",
-      "ts": 1792667562107
-    },
-    "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-157?s=6": {
-      "section": "canton-vd",
-      "ts": 1792667573137
-    },
-    "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-157?s=4": {
-      "section": "canton-vd",
-      "ts": 1792667584119
-    },
-    "canton-vd::https://www.ledauphine.com/sante/2026/10/21/le-combat-de-la-deputee-de-l-ain-olga-givernet-contre-son-cancer-du-sein-c-etait-important-de-lever-le-tabou": {
-      "section": "canton-vd",
-      "ts": 1792677811310
-    },
-    "canton-vd::https://www.ledauphine.com/economie/2026/10/22/un-belvedere-au-dessus-de-la-retenue-collinaire-du-proclou": {
-      "section": "canton-vd",
-      "ts": 1792677824026
-    },
-    "canton-vd::https://www.estrepublicain.fr/economie/2026/10/22/frontaliers-la-marque-horlogere-zenith-annonce-la-suppression-d-une-centaine-d-emplois-au-locle": {
-      "section": "canton-vd",
-      "ts": 1792684493807
-    },
-    "canton-vd::https://www.ledauphine.com/faits-divers-justice/2026/10/22/elle-fait-demi-tour-sur-l-a40-et-roule-plus-de-4-kilometres-en-contre-sens-trois-blesses-en-urgence-absolue": {
-      "section": "canton-vd",
-      "ts": 1792684502694
-    },
-    "canton-vd::https://www.ledauphine.com/culture-loisirs/2026/10/22/l-ecole-de-coupy-en-1895": {
-      "section": "canton-vd",
-      "ts": 1792684508366
-    },
-    "canton-vd::https://www.ledauphine.com/faits-divers-justice/2026/10/22/a412-la-procureure-d-annecy-demande-la-suspension-des-travaux-lemc": {
-      "section": "canton-vd",
-      "ts": 1792703112601
-    },
-    "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-159?s=4": {
-      "section": "canton-vd",
-      "ts": 1792703125216
-    },
-    "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-159?s=3": {
-      "section": "canton-vd",
-      "ts": 1792719785969
-    },
     "canton-vd::https://www.guidedufrontalier.com/actualites/hebdo-frontalier-23-au-30-octobre-2026": {
       "section": "canton-vd",
       "ts": 1792770910213
+    },
+    "canton-vd::https://www.ledauphine.com/economie/2026/10/24/en-misant-sur-la-force-du-collectif-emmanuel-a-allege-sa-facture-d-energie": {
+      "section": "canton-vd",
+      "ts": 1792931645576
+    },
+    "canton-vd::https://www.ledauphine.com/economie/2026/10/24/tourisme-un-ete-dynamique-et-une-saison-d-hiver-qui-s-annonce-deja-encourageante": {
+      "section": "canton-vd",
+      "ts": 1792931647961
+    },
+    "canton-vd::https://www.ledauphine.com/education/2026/10/25/le-chantier-de-l-ecole-de-cornieres-sera-acheve-en-septembre-2027": {
+      "section": "canton-vd",
+      "ts": 1792931654771
     }
   }
 }
