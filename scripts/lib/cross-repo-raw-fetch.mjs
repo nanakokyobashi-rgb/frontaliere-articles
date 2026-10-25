@@ -47,6 +47,69 @@ export const TOKEN_SUSPECT_STATUSES = new Set([401, 403, 404]);
 /** Maximum time allowed for one cross-repository request, including body use. */
 export const CROSS_REPO_FETCH_TIMEOUT_MS = 30_000;
 
+const BODY_METHODS = ['arrayBuffer', 'blob', 'formData', 'json', 'text'];
+const RESPONSE_TIMEOUT = Symbol('crossRepoResponseTimeout');
+
+function timeoutReason() {
+  if (typeof DOMException === 'function') {
+    return new DOMException('cross-repository request timed out', 'TimeoutError');
+  }
+  const error = new Error('cross-repository request timed out');
+  error.name = 'TimeoutError';
+  return error;
+}
+
+/**
+ * AbortSignal.timeout() intentionally uses an unref'ed timer in Node. That is
+ * correct for a real fetch (the socket keeps the event loop alive), but a
+ * fetch stub which waits only on the signal can be cancelled before the timer
+ * fires. Keep a referenced timer for the same deadline and release it when a
+ * response body has been consumed or when the response is discarded.
+ */
+function createDeadline(timeoutMs) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(timeoutReason()), timeoutMs);
+  let released = false;
+  const release = () => {
+    if (released) return;
+    released = true;
+    clearTimeout(timer);
+  };
+
+  return { signal: controller.signal, release };
+}
+
+function attachResponseDeadline(response, release) {
+  if (!response || typeof response !== 'object') return response;
+  try {
+    Object.defineProperty(response, RESPONSE_TIMEOUT, {
+      configurable: true,
+      value: release,
+    });
+    let hasBodyMethod = false;
+    for (const method of BODY_METHODS) {
+      if (typeof response[method] !== 'function') continue;
+      hasBodyMethod = true;
+      const original = response[method].bind(response);
+      response[method] = (...args) => Promise.resolve(original(...args)).finally(release);
+    }
+    if (!hasBodyMethod) release();
+  } catch {
+    // A native Response may reject an instance property assignment. Its body
+    // owns a referenced stream, so the deadline still fires safely; callers
+    // can still receive the signal and abort the body.
+  }
+  return response;
+}
+
+function releaseResponseDeadline(response) {
+  try {
+    response?.[RESPONSE_TIMEOUT]?.();
+  } catch {
+    // Cleanup must never mask the original HTTP/error result.
+  }
+}
+
 /** Vale la pena richiedere in anonimo? Solo se il token era in gioco. */
 export function needsAnonymousRetry(status, { authenticated } = {}) {
   return Boolean(authenticated) && TOKEN_SUSPECT_STATUSES.has(status);
@@ -113,12 +176,18 @@ export function createRawFetcher({
     const headers = { ...extraHeaders };
     if (userAgent) headers['User-Agent'] = userAgent;
     if (authenticated) headers.Authorization = `Bearer ${token}`;
-    return fetchImpl(url, {
+    const deadline = createDeadline(effectiveTimeoutMs);
+    return Promise.resolve(fetchImpl(url, {
       headers,
       // The caller may consume text/json/arrayBuffer after this function
       // returns. Keep this signal on the Response so the same deadline covers
       // both the headers and the body, not just connection establishment.
-      signal: AbortSignal.timeout(effectiveTimeoutMs),
+      signal: deadline.signal,
+    })).then((response) => {
+      return attachResponseDeadline(response, deadline.release);
+    }, (error) => {
+      deadline.release();
+      throw error;
     });
   };
 
@@ -130,6 +199,7 @@ export function createRawFetcher({
       state.tokenAccepted.set(repo, true);
       return res;
     }
+    if (authenticated && !res.ok) releaseResponseDeadline(res);
     // Un rate limit sulla richiesta autenticata è un limite reale, non un
     // rifiuto del token da ritentare anonimamente: altrimenti il 429 latcherebbe
     // `tokenRejected` e degraderebbe l'intero repo al rate limit anonimo.
