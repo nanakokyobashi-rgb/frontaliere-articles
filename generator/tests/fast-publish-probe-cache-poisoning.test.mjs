@@ -118,7 +118,7 @@ const PURGE = 'Purge the edge cache for what was published';
 const VERIFY = 'Verify the article is actually readable';
 const REPURGE = 'Re-purge the edge cache after the verification';
 const PAGES_BUILD_WAIT_BUDGET_SECONDS = Number(
-  /^ {10}PAGES_BUILD_WAIT_BUDGET_SECONDS=(\d+)$/m.exec(stepText(VERIFY))?.[1],
+  /^ {6}PAGES_BUILD_WAIT_BUDGET_SECONDS: (\d+)$/m.exec(WF)?.[1],
 );
 const PAGES_BUILD_WAIT_WINDOW_SECONDS = Number(
   /^ {10}PAGES_BUILD_WAIT_WINDOW_SECONDS=(\d+)$/m.exec(stepText(VERIFY))?.[1],
@@ -530,7 +530,12 @@ test('il membro del lotto passa da poll_batch_member; il gate della lingua e l\'
   );
   // Il primo percorso e il recupero di ogni lingua condividono due finestre
   // bounded, con un budget globale di dieci minuti per non superare il timeout del job.
-  assert.match(verify, /PAGES_BUILD_WAIT_BUDGET_SECONDS=600\n\s+PAGES_BUILD_WAIT_WINDOW_SECONDS=300/);
+  assert.match(
+    WF,
+    /^ {6}PAGES_BUILD_WAIT_BUDGET_SECONDS: 600$/m,
+    'il budget deve essere dichiarato una volta a livello job e condiviso dai gate',
+  );
+  assert.match(verify, /PAGES_BUILD_WAIT_WINDOW_SECONDS=300/);
   assert.match(verify, /PAGES_BUILD_WAIT_DEADLINE=\$\(\(SECONDS \+ PAGES_BUILD_WAIT_BUDGET_SECONDS\)\)/);
   assert.match(verify, /origin_locale_gate_started\[\$loc\]=1\n\s*\n?\s+if poll_origin_for "\$u" "\$PAGES_BUILD_WAIT_WINDOW_SECONDS"; then/);
   assert.equal([...verify.matchAll(/if poll_origin_for "\$u" "\$PAGES_BUILD_WAIT_WINDOW_SECONDS"; then/g)].length, 2);
