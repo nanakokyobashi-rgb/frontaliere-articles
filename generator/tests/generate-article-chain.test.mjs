@@ -900,7 +900,7 @@ test('un push su content/** non viene scartato se il producer è ancora in volo'
   assert.match(admit, /compare_status=0/);
   assert.match(
     admit,
-    /compare_payload=\$\(gh api --paginate --slurp[\s\S]*\) \|\| compare_status=\$\?/,
+    /compare_payload=\$\(gh_api_timeout --paginate --slurp[\s\S]*\) \|\| compare_status=\$\?/,
     'lo status di compare non deve essere nascosto da `|| true`',
   );
   assert.match(admit, /compare_file_count=0/);
