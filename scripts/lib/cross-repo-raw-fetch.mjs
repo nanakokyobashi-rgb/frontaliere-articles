@@ -47,7 +47,7 @@ export const TOKEN_SUSPECT_STATUSES = new Set([401, 403, 404]);
 /** Maximum time allowed for one cross-repository request, including body use. */
 export const CROSS_REPO_FETCH_TIMEOUT_MS = 30_000;
 
-const BODY_METHODS = ['arrayBuffer', 'blob', 'formData', 'json', 'text'];
+const BODY_METHODS = ['arrayBuffer', 'blob', 'bytes', 'formData', 'json', 'text'];
 const RESPONSE_TIMEOUT = Symbol('crossRepoResponseTimeout');
 const RESPONSE_ABORT = Symbol('crossRepoResponseAbort');
 
@@ -69,7 +69,18 @@ function timeoutReason() {
  */
 function createDeadline(timeoutMs) {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(timeoutReason()), timeoutMs);
+  let rejectDeadline;
+  const timeout = new Promise((_, reject) => {
+    rejectDeadline = reject;
+  });
+  // A response may be returned to a status-only caller without consuming its
+  // body; keep the deadline rejection from becoming an unhandled rejection.
+  timeout.catch(() => {});
+  const timer = setTimeout(() => {
+    const reason = timeoutReason();
+    controller.abort(reason);
+    rejectDeadline(reason);
+  }, timeoutMs);
   let released = false;
   const release = () => {
     if (released) return;
@@ -78,31 +89,38 @@ function createDeadline(timeoutMs) {
   };
 
   const abort = () => {
-    if (!controller.signal.aborted) controller.abort();
+    const reason = typeof DOMException === 'function'
+      ? new DOMException('cross-repository response discarded', 'AbortError')
+      : Object.assign(new Error('cross-repository response discarded'), { name: 'AbortError' });
+    if (!controller.signal.aborted) controller.abort(reason);
+    rejectDeadline(reason);
     release();
   };
-  return { signal: controller.signal, release, abort };
+  return { signal: controller.signal, release, abort, timeout };
 }
 
-function attachResponseDeadline(response, { release, abort }) {
+function attachResponseDeadline(response, deadline) {
   if (!response || typeof response !== 'object') return response;
   try {
     Object.defineProperty(response, RESPONSE_TIMEOUT, {
       configurable: true,
-      value: release,
+      value: deadline.release,
     });
     Object.defineProperty(response, RESPONSE_ABORT, {
       configurable: true,
-      value: abort,
+      value: deadline.abort,
     });
     let hasBodyMethod = false;
     for (const method of BODY_METHODS) {
       if (typeof response[method] !== 'function') continue;
       hasBodyMethod = true;
       const original = response[method].bind(response);
-      response[method] = (...args) => Promise.resolve(original(...args)).finally(release);
+      response[method] = (...args) => {
+        const body = Promise.resolve().then(() => original(...args));
+        return Promise.race([body, deadline.timeout]).finally(deadline.release);
+      };
     }
-    if (!hasBodyMethod) release();
+    if (!hasBodyMethod) deadline.release();
   } catch {
     // A native Response may reject an instance property assignment. Its body
     // owns a referenced stream, so the deadline still fires safely; callers
@@ -114,7 +132,8 @@ function attachResponseDeadline(response, { release, abort }) {
 function discardResponseDeadline(response) {
   try {
     response?.[RESPONSE_ABORT]?.();
-    response?.body?.cancel?.();
+    const cancelled = response?.body?.cancel?.();
+    if (cancelled && typeof cancelled.then === 'function') cancelled.catch(() => {});
   } catch {
     // Cleanup must never mask the original HTTP/error result.
   }
