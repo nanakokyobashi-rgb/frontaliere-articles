@@ -138,7 +138,7 @@ jobs:
           if [ "$EVENT_NAME" = "push" ] && [ -n "${PUSH_BEFORE:-}" ]; then
             compare_status=0
             compare_truncated=false
-            compare_payload=$(gh api --paginate --slurp "repos/$REPO/compare/$PUSH_BEFORE...$PUSH_SHA" \
+            compare_payload=$(gh_api_timeout --paginate --slurp "repos/$REPO/compare/$PUSH_BEFORE...$PUSH_SHA" \
               2>/dev/null) || compare_status=$?
             changed=
             compare_file_count=0
@@ -209,8 +209,12 @@ jobs:
 
           IN_FLIGHT_STATUSES='["queued","in_progress","requested","waiting","pending"]'
           ACTION_TERMINAL_STATUS='completed'
+          api_timeout_seconds=60
+          gh_api_timeout() {
+            timeout --kill-after=0s "${api_timeout_seconds}s" gh api "$@"
+          }
           runs_pages_json=""
-          if ! runs_pages_json="$(gh api --paginate --slurp \
+          if ! runs_pages_json="$(gh_api_timeout --paginate --slurp \
             "repos/$REPO/actions/workflows/$CALLER_WORKFLOW/runs?per_page=100" \
             2>/dev/null)"; then
             fail_closed_admission
@@ -277,7 +281,7 @@ jobs:
           self_created=$(printf '%s' "$inflight" \
             | jq -r --argjson me "$SELF_ID" '.[] | select(.id == $me) | .created_at' 2>/dev/null | head -1)
           if [ -z "${self_created:-}" ]; then
-            if ! self_run_json="$(gh api "repos/$REPO/actions/runs/$SELF_ID" 2>/dev/null)"; then
+            if ! self_run_json="$(gh_api_timeout "repos/$REPO/actions/runs/$SELF_ID" 2>/dev/null)"; then
               fail_closed_admission
             fi
             if ! self_created="$(jq -er '
