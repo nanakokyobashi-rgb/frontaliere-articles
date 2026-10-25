@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-referendum-legge-collettivo-lavoro.webp",
-      "sha256": "5ba37de391faf0dfb9552c297d194294228abbb2f9fb4368052f24e87a658162"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-referendum-legge-collettivo-lavoro-480w.webp",
-      "sha256": "6f316e8c8e81e682b9c70dc393bdd95f45e73198c54506d025248fbb6fdce9fa"
-    }
-  ]
+  "items": []
 }
