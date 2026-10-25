@@ -1996,7 +1996,7 @@
       "reason": "Guard condiviso del publisher corpus per rifiutare control character C0, inclusi gli escape rimasti nei fallback FAQ prima della serializzazione. E' importato da batch-add-faq-to-articles.mjs e create-article.mjs, che scrivono il corpus; il sito non esegue questi producer e riceve solo la superficie JSON pubblicata via HTTP, quindi non esiste un gemello site-side da trasportare.",
       "baseline": {
         "site": null,
-        "corpus": "5d25199b3ab85655",
+        "corpus": null,
         "alignedAt": "2026-10-25"
       }
     },
