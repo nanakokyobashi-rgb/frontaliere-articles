@@ -450,6 +450,7 @@ import {
 // dal classificatore deterministico (nessun LLM, nessun gate).
 import { registryCantonsForArticle } from './lib/canton-classifier.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
+import { assertFaqPairsHaveNoRejectedControls } from '../../scripts/lib/faq-control-contract.mjs';
 import {
   decodeStaticStringLiteral,
   findIdListLiteralSpan,
@@ -13234,6 +13235,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       //
       // `cleanFaqPairs` aggiunge il controllo di CONTENUTO e tiene la soglia
       // delle 2 coppie dov'era, perche' e' la stessa dell'engine.
+      assertFaqPairsHaveNoRejectedControls(rawFaq, 'Generated FAQ');
       const { pairs: cleaned, repaired, dropped } = cleanFaqPairs(rawFaq);
       if (dropped.length) {
         console.error(`  ⚠️  FAQ: ${dropped.length} coppie scartate (${dropped.map((d) => d.reason).join('; ')})`);
@@ -16469,6 +16471,7 @@ function buildBodyFile(data, locale) {
   // Build FAQ line if present — validate JSON roundtrip to catch malformed AI output
   let faqLine = '';
   if (c.faq && Array.isArray(c.faq) && c.faq.length > 0) {
+    assertFaqPairsHaveNoRejectedControls(c.faq, `FAQ ${locale}/${id}`);
     try {
       const normalizedFaq = c.faq.map((item) => (item && typeof item === 'object'
         ? {
