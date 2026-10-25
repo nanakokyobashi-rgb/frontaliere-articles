@@ -316,7 +316,7 @@ jobs:
             done
             echo "::error::punta di $ref non risolvibile via git ls-remote" >&2
             exit 1
-            EOF
+          EOF
             chmod 0755 "$main_head_target"
           fi
 
@@ -678,7 +678,7 @@ jobs:
             done
             echo "::error::punta di $ref non risolvibile via git ls-remote" >&2
             exit 1
-            EOF
+          EOF
             chmod 0755 "$target"
           fi
 
@@ -1493,7 +1493,7 @@ jobs:
             done
             echo "::error::punta di $ref non risolvibile via git ls-remote" >&2
             exit 1
-            EOF
+          EOF
             chmod 0755 "$target"
           fi
 
