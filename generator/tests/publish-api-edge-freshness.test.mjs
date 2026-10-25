@@ -84,7 +84,11 @@ test('cf-purge-cache.mjs usa le varianti in modalita` --files (e non un files: n
 
 test('cf-purge-cache.mjs limita anche la richiesta e il body dell API Cloudflare', () => {
   assert.match(PURGE, /CF_PURGE_API_TIMEOUT_MS/);
-  assert.match(PURGE, /signal:\s*AbortSignal\.timeout\(CF_PURGE_API_TIMEOUT_MS\)/);
+  assert.match(PURGE, /new AbortController\(\)/);
+  assert.match(PURGE, /signal:\s*controller\.signal/);
+  assert.match(PURGE, /Promise\.race\(\[/);
+  assert.match(PURGE, /clearTimeout\(timer\)/);
+  assert.match(PURGE, /body\?\.cancel/);
   assert.match(PURGE, /Math\.min\([\s\S]*?120_000,\s*\)/);
 });
 

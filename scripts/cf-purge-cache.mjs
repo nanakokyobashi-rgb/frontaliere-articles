@@ -263,29 +263,69 @@ function timeoutError(phase) {
   return err;
 }
 
-async function cf(method, path, body) {
-  let res;
+function cancelBodyBestEffort(response) {
   try {
-    res = await fetch(`${REST_BASE}${path}`, {
-      method,
-      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-      ...(body ? { body: JSON.stringify(body) } : {}),
-      signal: AbortSignal.timeout(CF_PURGE_API_TIMEOUT_MS),
-    });
-  } catch (err) {
-    if (isTimeoutError(err)) throw timeoutError('request');
-    throw err;
+    const body = response?.body;
+    if (typeof body?.cancel === 'function') {
+      Promise.resolve(body.cancel()).catch(() => {});
+    }
+  } catch {
+    // A minimal fetch double or an unusual response body may throw here; the
+    // deadline must still reject even when transport cleanup is unavailable.
   }
+}
 
-  let json;
+async function cf(method, path, body) {
+  // An abort signal is only a transport hint: a provider can ignore it and
+  // leave fetch() or response.json() pending. The referenced timer and the
+  // two Promise.race calls are the actual deadline for both phases.
+  const controller = new AbortController();
+  let timer;
+  let timedOut = false;
+  let response;
+  let phase = 'request';
+  const deadline = new Promise((_, reject) => {
+    timer = setTimeout(() => {
+      timedOut = true;
+      const error = timeoutError(phase);
+      controller.abort(error);
+      cancelBodyBestEffort(response);
+      reject(error);
+    }, CF_PURGE_API_TIMEOUT_MS);
+  });
+  // The deadline can lose the race and reject later; keep that rejection
+  // handled even when fetch and body parsing finish first.
+  deadline.catch(() => {});
+
+  const request = Promise.resolve().then(() => fetch(`${REST_BASE}${path}`, {
+    method,
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+    ...(body ? { body: JSON.stringify(body) } : {}),
+    signal: controller.signal,
+  }));
+  request.then((lateResponse) => {
+    response = lateResponse;
+    if (timedOut) cancelBodyBestEffort(lateResponse);
+  }, () => {});
+
   try {
-    json = await res.json();
+    response = await Promise.race([request, deadline]);
+    phase = 'response body';
+    const bodyRead = Promise.resolve().then(() => response.json());
+    bodyRead.catch(() => {});
+    const json = await Promise.race([bodyRead, deadline]);
+    return { status: response.status, json };
   } catch (err) {
-    if (isTimeoutError(err)) throw timeoutError('response body');
-    const detail = String(err?.message || 'invalid JSON response');
-    throw new Error(`Cloudflare API response body could not be parsed: ${detail}`, { cause: err });
+    if (timedOut || isTimeoutError(err)) throw timeoutError(phase);
+    if (phase === 'response body') {
+      const detail = String(err?.message || 'invalid JSON response');
+      throw new Error(`Cloudflare API response body could not be parsed: ${detail}`, { cause: err });
+    }
+    throw err;
+  } finally {
+    clearTimeout(timer);
+    if (!controller.signal.aborted) controller.abort();
   }
-  return { status: res.status, json };
 }
 
 async function resolveZoneId() {

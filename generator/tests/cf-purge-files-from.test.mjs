@@ -51,6 +51,9 @@ globalThis.fetch = async (url, init = {}) => {
     error.name = 'TimeoutError';
     throw error;
   }
+  if (process.env.PURGE_STUB_FAILURE === 'request-stall') {
+    return new Promise(() => {});
+  }
   if (process.env.PURGE_STUB_FAILURE === 'body-timeout') {
     return {
       status: 200,
@@ -59,6 +62,18 @@ globalThis.fetch = async (url, init = {}) => {
         error.name = 'TimeoutError';
         throw error;
       },
+    };
+  }
+  if (process.env.PURGE_STUB_FAILURE === 'body-stall') {
+    return {
+      status: 200,
+      body: {
+        cancel: () => appendFileSync(
+          process.env.PURGE_STUB_LOG,
+          JSON.stringify({ cancelled: true }) + '\\n',
+        ),
+      },
+      json: async () => new Promise(() => {}),
     };
   }
   return { status: 200, json: async () => ({ success: true, errors: [] }) };
@@ -80,6 +95,7 @@ function runPurge(dir, args, env = {}) {
     cwd: dir,
     encoding: 'utf8',
     maxBuffer: 64 * 1024 * 1024,
+    timeout: 5000,
     env: {
       PATH: process.env.PATH,
       CF_API_TOKEN: 'token-di-prova',
@@ -304,6 +320,22 @@ test('un timeout durante request o body resta un errore transitorio riconoscibil
     assert.match(res.stderr, /ETIMEDOUT: Cloudflare API (?:request|response body) timed out/);
     assert.doesNotMatch(res.stderr, /failed: undefined/);
     assert.match(res.stdout, /edge may serve STALE content/);
+  }
+});
+
+test('un request o body che ignora abort viene comunque limitato e il body viene cancellato', (t) => {
+  const dir = workdir(t);
+  for (const failure of ['request-stall', 'body-stall']) {
+    const res = runPurge(dir, [], {
+      CF_PURGE_API_TIMEOUT_MS: '25',
+      CF_PURGE_SETTLE_MS: '1',
+      PURGE_STUB_FAILURE: failure,
+    });
+
+    assert.equal(res.status, 1, `${failure}: ${res.stdout}${res.stderr}`);
+    assert.match(res.stderr, /ETIMEDOUT: Cloudflare API (?:request|response body) timed out/);
+    assert.match(res.stdout, /edge may serve STALE content/);
+    if (failure === 'body-stall') assert.ok(res.calls.some((call) => call.cancelled));
   }
 });
 
