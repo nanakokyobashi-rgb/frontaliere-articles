@@ -1,7 +1,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { reconcile } from '../../scripts/reconcile-section-pages.mjs';
+import {
+  headState,
+  parseRetryAfter,
+  reconcile,
+  RECONCILE_FETCH_MAX_RETRY_AFTER_MS,
+} from '../../scripts/reconcile-section-pages.mjs';
 
 const API_BASE = 'https://api.test';
 const CATALOG = {
@@ -14,6 +19,34 @@ const CATALOG = {
   },
   sitemap: '/sitemap-articles-canton-ti.xml',
 };
+
+test('parseRetryAfter: accetta delta-secondes e data HTTP, con cap bounded', () => {
+  const now = Date.parse('2026-10-25T08:00:00Z');
+  const response = (value) => ({ headers: { get: () => value } });
+
+  assert.equal(parseRetryAfter(response('7'), now), 7_000);
+  assert.equal(parseRetryAfter(response('Sun, 25 Oct 2026 08:00:30 GMT'), now), 30_000);
+  assert.equal(parseRetryAfter(response('Sun, 25 Oct 2026 07:59:59 GMT'), now), 0);
+  assert.equal(parseRetryAfter(response('not-a-delay'), now), null);
+  assert.equal(parseRetryAfter(response('86400'), now), RECONCILE_FETCH_MAX_RETRY_AFTER_MS);
+});
+
+test('headState: rispetta Retry-After anche nel retry delle probe HEAD', async () => {
+  const sleeps = [];
+  let attempts = 0;
+  const state = await headState('https://cdn.test/page', async () => {
+    attempts++;
+    return {
+      ok: false,
+      status: 503,
+      headers: { get: (name) => (name === 'retry-after' ? '7' : null) },
+    };
+  }, { retryDelayMs: 0, sleepImpl: async (ms) => sleeps.push(ms) });
+
+  assert.equal(state, 'unknown');
+  assert.equal(attempts, 2);
+  assert.deepEqual(sleeps, [7_000]);
+});
 
 function fakeFetch({ sitemap = '503', sitemapXml } = {}) {
   const docs = {
@@ -95,17 +128,26 @@ test('reconcile: ritenta una sitemap 5xx ma non cambia il piano prudente', async
   const sitemapXml = '<urlset><url><loc>https://frontaliereticino.ch/articoli-ticino/</loc></url></urlset>';
   const baseFetch = fakeFetch({ sitemapXml });
   let sitemapAttempts = 0;
+  const sleeps = [];
   const fetchImpl = async (url, options) => {
     if (url.replace(/\?.*$/, '').endsWith(CATALOG.sitemap)) {
       sitemapAttempts++;
-      if (sitemapAttempts === 1) return { ok: false, status: 503, text: async () => '' };
+      if (sitemapAttempts === 1) {
+        return {
+          ok: false,
+          status: 503,
+          headers: { get: (name) => (name === 'retry-after' ? '7' : null) },
+          text: async () => '',
+        };
+      }
     }
     return baseFetch(url, options);
   };
 
-  const report = await reconcile({ apiBase: API_BASE, fetchImpl, retryDelayMs: 0 });
+  const report = await reconcile({ apiBase: API_BASE, fetchImpl, retryDelayMs: 0, sleepImpl: async (ms) => sleeps.push(ms) });
 
   assert.equal(sitemapAttempts, 2);
+  assert.deepEqual(sleeps, [7_000]);
   assert.equal(report.sections[0].expected, 1);
   assert.equal(report.sections[0].dispatch, false);
 });
