@@ -358,7 +358,7 @@ test('entrambi i workflow richiedono la run card producer-owned prima di assorbi
   }
 });
 
-test('article=false senza run report non pubblica modifiche staged non attestabili', () => {
+test('solo un arresto cooperativo provato può differire senza run report', () => {
   const workflow = fs.readFileSync(CORE_WORKFLOW, 'utf8');
   const commitStart = workflow.indexOf('      - name: Commit and push');
   assert.ok(commitStart >= 0, 'step Commit and push non trovato');
@@ -367,18 +367,31 @@ test('article=false senza run report non pubblica modifiche staged non attestabi
   assert.ok(missingReport >= 0, 'guard del report mancante non trovato');
   const branch = commit.slice(missingReport, commit.indexOf('\n          fi', missingReport));
   assert.match(branch, /steps\.generate\.outputs\.article/);
+  assert.match(branch, /steps\.generate\.outputs\.cooperative_stop/);
   assert.match(branch, /git reset --mixed HEAD/);
   assert.match(branch, /deferring the run/);
   assert.match(
     branch,
-    /if \[ "\$\{\{ steps\.generate\.outputs\.article \}\}" != "true" \]/,
-    'solo il percorso senza articolo puo\' scartare modifiche senza attestazione',
+    /if \[ "\$\{\{ steps\.generate\.outputs\.cooperative_stop \}\}" = "true" \] && \[ "\$\{\{ steps\.generate\.outputs\.article \}\}" != "true" \]/,
+    'solo il percorso senza articolo fermato cooperativamente puo\' scartare modifiche senza attestazione',
   );
   assert.match(
     commit.slice(missingReport),
-    /if \[ "\$\{\{ steps\.generate\.outputs\.article \}\}" != "true" \][\s\S]*?exit 0[\s\S]*?echo "::error::create-article run report is missing/,
-    'article=true deve restare fail-closed',
+    /if \[ "\$\{\{ steps\.generate\.outputs\.cooperative_stop \}\}" = "true" \] && \[ "\$\{\{ steps\.generate\.outputs\.article \}\}" != "true" \][\s\S]*?exit 0[\s\S]*?echo "::error::create-article run report is missing/,
+    'un report mancante senza arresto cooperativo deve restare fail-closed',
   );
+});
+
+test('il run report viene isolato per tentativo e validato prima del passaggio stabile', () => {
+  for (const file of [WORKFLOW, CORE_WORKFLOW]) {
+    const workflow = fs.readFileSync(file, 'utf8');
+    assert.match(workflow, /attempt_report="\$diag_dir\/create-article-run-report-\$tried\.json"/);
+    assert.match(workflow, /rm -f \.tmp\/create-article-run-report\.json "\$attempt_report"/);
+    assert.match(workflow, /jq -e --arg run_id "\$run_id" --arg run_attempt "\$run_attempt" --arg section "\$sec"/);
+    assert.match(workflow, /\.runId \| tostring/);
+    assert.match(workflow, /\.runAttempt \| tostring/);
+    assert.match(workflow, /cp "\$attempt_report" \.tmp\/create-article-run-report\.json/);
+  }
 });
 
 test('il differimento per quota e\' subordinato alla prova, e il ramo rosso esiste', () => {
