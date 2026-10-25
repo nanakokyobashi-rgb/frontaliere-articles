@@ -46,6 +46,12 @@ import { REWIRE_FETCH_HEADERS } from './lib/rewire-fetch.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const ORIGIN = (process.env.SITE_ORIGIN || 'https://frontaliereticino.ch').replace(/\/$/, '');
+const HUB_LINKS_FETCH_TIMEOUT_MS = (() => {
+  const raw = Number(process.env.HUB_LINKS_FETCH_TIMEOUT_MS);
+  return Number.isFinite(raw) && raw > 0
+    ? Math.min(Math.floor(raw), 120_000)
+    : 30_000;
+})();
 const args = process.argv.slice(2);
 const warnOnly = args.includes('--warn');
 const softNetwork = args.includes('--soft-network');
@@ -61,7 +67,11 @@ for (const s of sections) {
 async function get(url) {
   let res;
   try {
-    res = await fetch(url, { headers: { ...REWIRE_FETCH_HEADERS, accept: 'application/xml,text/xml,*/*' }, redirect: 'follow' });
+    res = await fetch(url, {
+      headers: { ...REWIRE_FETCH_HEADERS, accept: 'application/xml,text/xml,*/*' },
+      redirect: 'follow',
+      signal: AbortSignal.timeout(HUB_LINKS_FETCH_TIMEOUT_MS),
+    });
   } catch (err) {
     err.code = 'NETWORK';
     throw err;

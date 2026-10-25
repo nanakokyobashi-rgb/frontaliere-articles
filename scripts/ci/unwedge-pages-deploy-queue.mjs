@@ -112,6 +112,12 @@ const API = 'https://api.github.com';
 // surfaces as a 404 in the log instead of silently reaping nothing forever.
 const WORKFLOW_FILE = 'publish-api.yml';
 const DEFAULT_WEDGE_MINUTES = 45;
+const DEPLOY_QUEUE_API_TIMEOUT_MS = (() => {
+  const raw = Number(process.env.DEPLOY_QUEUE_API_TIMEOUT_MS);
+  return Number.isFinite(raw) && raw > 0
+    ? Math.min(Math.floor(raw), 120_000)
+    : 30_000;
+})();
 // See WHAT MUST BE PROVEN: only a run of this branch may be reaped.
 const PUBLISH_BRANCH = 'main';
 const PAGES_ENVIRONMENT = 'github-pages';
@@ -224,7 +230,10 @@ function authToken() {
 }
 
 async function ghJson(urlPath) {
-  const res = await fetch(`${API}${urlPath}`, { headers: githubApiHeaders(authToken()) });
+  const res = await fetch(`${API}${urlPath}`, {
+    headers: githubApiHeaders(authToken()),
+    signal: AbortSignal.timeout(DEPLOY_QUEUE_API_TIMEOUT_MS),
+  });
   if (!res.ok) throw new Error(`GitHub API ${urlPath} → HTTP ${res.status}`);
   return res.json();
 }
@@ -234,6 +243,7 @@ async function cancelRun(runId) {
   const res = await fetch(`${API}/repos/${REPO}/actions/runs/${runId}/cancel`, {
     method: 'POST',
     headers: githubApiHeaders(authToken()),
+    signal: AbortSignal.timeout(DEPLOY_QUEUE_API_TIMEOUT_MS),
   });
   // 202 Accepted is the documented success. 409 means the run already reached a
   // terminal state between the re-read and the cancel — the group is free

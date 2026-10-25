@@ -68,6 +68,8 @@ test('tollera una risposta API malformata senza lanciare', () => {
 
 test('lo script punta al publisher che esiste, e il publisher ha ancora il gate e la concurrency che lo rendono necessario', () => {
   const script = read('scripts/ci/unwedge-pages-deploy-queue.mjs');
+  assert.match(script, /DEPLOY_QUEUE_API_TIMEOUT_MS/);
+  assert.match(script, /signal:\s*AbortSignal\.timeout\(DEPLOY_QUEUE_API_TIMEOUT_MS\)/g);
   const workflowFile = script.match(/const WORKFLOW_FILE = '([^']+)'/)?.[1];
   assert.ok(workflowFile, 'WORKFLOW_FILE non trovato nello script');
   const publisherPath = `.github/workflows/${workflowFile}`;
