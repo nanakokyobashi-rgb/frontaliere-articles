@@ -1,9 +1,4 @@
 {
-  "https://www.tio.ch/svizzera/economia/1951384/migros-cooperative-duttweiler-svizzera-dieci": {
-    "articleId": "migros-fusione-cooperative-2035",
-    "ts": "2026-09-20T08:43:51.122Z",
-    "keyForm": 2
-  },
   "https://www.tio.ch/svizzera/economia/1951385/franchi-arrotondamento-cassa-lidl-paga": {
     "articleId": "lidl-abolisce-arrotondamento-cassa",
     "ts": "2026-09-21T00:16:39.908Z",
@@ -2497,6 +2492,11 @@
   "https://www.tio.ch/svizzera/attualita/1958918/dati-violazioni-sicurezza-aumento-svizzera": {
     "articleId": "violazioni-sicurezza-svizzera-2026",
     "ts": "2026-10-25T13:07:26.522Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/rubriche/ospite/1958944/inflazione-prezzi-indice-premi-nazionale-puo-famiglia-abitazione-rincaro-svizzera": {
+    "articleId": "inflazione-premi-rincaro-svizzera",
+    "ts": "2026-10-25T14:06:50.666Z",
     "keyForm": 2
   }
 }
