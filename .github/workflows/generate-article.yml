@@ -1499,6 +1499,22 @@ jobs:
             # al secondo esatto in cui il kill duro arriva.
             export CREATE_ARTICLE_MAX_WALL_MS=$(( (cap - 60) * 1000 ))
 
+            # The report is evidence for this exact attempt. Never let a report
+            # from an earlier section/attempt reach Commit and push, and keep
+            # each producer write on a unique path so a killed process cannot
+            # leave an apparently current report behind.
+            attempt_report="$diag_dir/create-article-run-report-$tried.json"
+            if ! rm -f .tmp/create-article-run-report.json "$attempt_report"; then
+              all_declared=false
+              outcome_kind="error"
+              outcome_reason="undeclared"
+              outcome_section="$sec"
+              [ -n "$undeclared_why" ] || undeclared_why="impossibile rimuovere il run report precedente per la sezione $sec: una prova stale non può attestare l'uscita corrente"
+              echo "::error::impossibile rimuovere il run report precedente per la sezione $sec; rifiuto fail-closed"
+              break
+            fi
+            export CREATE_ARTICLE_REPORT_FILE="$attempt_report"
+
             # ── LA CARD DI RUN, E PERCHE' NON SERVE UNO STEP NUOVO ───────
             # `finalizeRunReport` scrive gia' un report su ogni percorso
             # terminale, ma dentro `.tmp/` del workspace: nessuno lo legge e
@@ -1584,6 +1600,39 @@ jobs:
               [ -n "$undeclared_why" ] || undeclared_why="il canale di diagnostica della sezione $sec non ha completato il flush (tee exit $tee_rc): classificazione fail-closed"
               echo "::error::il canale di diagnostica della sezione $sec non ha completato il flush; rifiuto fail-closed"
               break
+            fi
+
+            # A report is useful only when its producer identity matches this
+            # attempt. A cooperative deadline may legitimately have no report
+            # because SIGTERM arrived before finalization; the commit step can
+            # defer only that explicitly proven case. Every report that does
+            # exist must be copied to the stable hand-off path only after this
+            # identity check.
+            if [ -s "$attempt_report" ]; then
+              if ! jq -e --arg run_id "$run_id" --arg run_attempt "$run_attempt" --arg section "$sec" '
+                (.runId | tostring) == $run_id
+                and (.runAttempt | tostring) == $run_attempt
+                and .section == $section
+              ' "$attempt_report" >/dev/null; then
+                all_declared=false
+                outcome_kind="error"
+                outcome_reason="undeclared"
+                outcome_section="$sec"
+                [ -n "$undeclared_why" ] || undeclared_why="il run report della sezione $sec non identifica questa run/attempt: prova non attestabile"
+                echo "::error::run report non coerente per la sezione $sec (run=$run_id attempt=$run_attempt); rifiuto fail-closed"
+                break
+              fi
+              if ! mkdir -p .tmp || ! cp "$attempt_report" .tmp/create-article-run-report.json; then
+                all_declared=false
+                outcome_kind="error"
+                outcome_reason="undeclared"
+                outcome_section="$sec"
+                [ -n "$undeclared_why" ] || undeclared_why="impossibile consegnare il run report verificato della sezione $sec"
+                echo "::error::impossibile consegnare il run report verificato della sezione $sec; rifiuto fail-closed"
+                break
+              fi
+            else
+              echo "::warning::nessun run report per la sezione $sec: sarà differibile solo con marker SIGTERM cooperativo"
             fi
 
             # ── LO STALLO PRIMA DEL KILL DURO, e l'ordine e' obbligatorio ────
@@ -2064,17 +2113,22 @@ jobs:
             echo "no article generated this run"
             exit 0
           fi
-          if [ -z "${GITHUB_PAT:-}" ]; then
-            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push fires no workflow at all (anti-recursion), so the article would never reach the site via publish-api.yml AND the self-trigger chain would stop dead. Both depend on this push being PAT-authenticated."
-            exit 1
-          fi
           # `.tmp` is inside the checkout and the rebase helper can remove or
           # replace it while replaying the generated commit. Preserve the
           # report before the first push attempt so the post-rebase gate still
           # has the run's topic evidence after a remote race.
           RUN_REPORT="$RUNNER_TEMP/create-article-run-report.json"
           if [ ! -s .tmp/create-article-run-report.json ]; then
+            if [ "${{ steps.generate.outputs.cooperative_stop }}" = "true" ] && [ "${{ steps.generate.outputs.article }}" != "true" ]; then
+              echo "::warning::create-article run report is missing after a proven cooperative stop; discarding unreported staged changes and deferring the run"
+              git reset --mixed HEAD
+              exit 0
+            fi
             echo "::error::create-article run report is missing before the push/rebase loop"
+            exit 1
+          fi
+          if [ -z "${GITHUB_PAT:-}" ]; then
+            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push fires no workflow at all (anti-recursion), so the article would never reach the site via publish-api.yml AND the self-trigger chain would stop dead. Both depend on this push being PAT-authenticated."
             exit 1
           fi
           cp .tmp/create-article-run-report.json "$RUN_REPORT"
