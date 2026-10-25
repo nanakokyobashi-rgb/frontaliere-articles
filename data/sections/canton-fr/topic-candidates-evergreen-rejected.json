@@ -23,6 +23,10 @@
     "canton-fr::https://www.freiburger-nachrichten.ch/story/299000/sperrung-der-bahnhofsallee-beschwerdef%c3%bchrer-erhalten-n%c3%a4chste-abfuhr": {
       "section": "canton-fr",
       "ts": 1792845996345
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/299598/galterntal-gesperrt": {
+      "section": "canton-fr",
+      "ts": 1792911551843
     }
   }
 }

@@ -5473,9 +5473,9 @@
       "path": "scripts/ci/prefetch-review-diff.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "6dac8d15fc643639",
-        "corpus": "6dac8d15fc643639",
-        "alignedAt": "2026-10-08"
+        "site": "07c31f6244bc0772",
+        "corpus": "07c31f6244bc0772",
+        "alignedAt": "2026-10-25"
       }
     },
     {

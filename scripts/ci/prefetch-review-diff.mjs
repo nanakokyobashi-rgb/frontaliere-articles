@@ -1,10 +1,21 @@
 import { realpathSync } from 'node:fs';
 /** Build the review patch on the host, before the network-isolated reviewer starts. */
-import { TEST_DIFF_EXCLUSIONS } from './review-test-policy.mjs';
 import { execFileSync } from 'node:child_process';
 import { openSync, closeSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
+
+// This helper is transported as an `identical` twin. Keep the review-test
+// data here so the copied helper can run without importing the site's adapted
+// review policy; the policy re-exports these constants on this side.
+export const TEST_EXTENSIONS = Object.freeze([
+  'js', 'jsx', 'ts', 'tsx', 'mjs', 'cjs', 'mts', 'cts', 'd.ts', 'd.mts', 'd.cts',
+]);
+export const TEST_DIFF_EXCLUSIONS = Object.freeze([
+  ':(glob,exclude)**/tests/**', ':(glob,exclude)**/__tests__/**',
+  ...TEST_EXTENSIONS.flatMap(ext =>
+    ['test', 'spec'].map(kind => `:(glob,exclude)**/*.${kind}.${ext}`)),
+]);
 
 const sha = value => {
   if (!/^[a-f0-9]{40}$/.test(value ?? '')) throw new Error('Expected a pinned commit SHA');
@@ -123,10 +134,31 @@ export function main(env = process.env, { api: injectedApi, cwd = process.cwd() 
   if (!/^[\w.-]+\/[\w.-]+$/.test(repo ?? '')) throw new Error('Invalid repository');
   if (!/^\d+$/.test(env.PR_NUMBER ?? '')) throw new Error('Invalid PR number');
   const api = injectedApi ?? (endpoint => run(ghCommand(), ['api', endpoint]).trim());
-  // Only use compare metadata. Its patches may be absent/truncated; Git below
-  // supplies the complete patch, including deletes and binary-change headers.
-  const mergeBaseWith = from =>
-    sha(JSON.parse(api(`repos/${repo}/compare/${from}...${head}`)).merge_base_commit.sha);
+  // Only use compare metadata when GitHub can produce it. Its patches may be
+  // absent/truncated; Git below supplies the complete patch, including deletes
+  // and binary-change headers. Large data-only refreshes can make the compare
+  // endpoint return HTTP 422 (`diff: not_available`) even though the checkout
+  // has the complete history. In that case the local merge-base is equivalent
+  // and keeps the review fail-closed without asking the API to render the
+  // multi-million-line patch.
+  const localMergeBaseWith = from => {
+    try {
+      const value = run(gitCommand(), ['merge-base', from, head], { cwd, stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+      return value ? sha(value) : null;
+    } catch {
+      return null;
+    }
+  };
+  const mergeBaseWith = from => {
+    try {
+      return sha(JSON.parse(api(`repos/${repo}/compare/${from}...${head}`)).merge_base_commit.sha);
+    } catch (error) {
+      const local = localMergeBaseWith(from);
+      if (!local) throw error;
+      console.log(`GitHub compare non disponibile per ${from}...${head}; uso il merge-base locale ${local}.`);
+      return local;
+    }
+  };
   const incremental = Boolean(env.INCREMENTAL_BASE);
   // The PR's own contribution boundary — the same merge-base form `tests.yml`
   // already uses for `changed-paths.txt`. EVERY patch is anchored here, so no
