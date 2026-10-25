@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-inflazione-premi-rincaro-svizzera.webp",
-      "sha256": "b2cbcba0ebbb2b2bc44a557810115fa85b304bf3583d1067c7a6147f0e926184"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-inflazione-premi-rincaro-svizzera-480w.webp",
-      "sha256": "6fa983b513fcfd79018f532b6c32ca5a0e20dc75836211a03706a4aa8bb6ef84"
-    }
-  ]
+  "items": []
 }
