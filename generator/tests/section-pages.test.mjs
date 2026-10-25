@@ -87,7 +87,7 @@ import {
 import { cantonHubCoverage, cantonHubDataFile, cantonHubTopics, readCantonHubData } from '../../scripts/lib/canton-hub-data.mjs';
 import { declaredRegistryErrors, SECTION_REGISTRY_FILE } from '../../scripts/lib/section-registry.mjs';
 import { sourceRegistryIds } from '../../scripts/lib/corpus-floors.mjs';
-import { bodyRegex, liveR2ReconciliationPlan, liveRegistryTransitionSections, r2ApiPushPlan, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
+import { bodyRegex, fetchEdgeSectionRegistry, liveR2ReconciliationPlan, liveRegistryTransitionSections, r2ApiPushPlan, r2PublishPlan } from '../../scripts/ci/fast-publish-section.mjs';
 import { cdnUrlFor, expectedSectionPages, headState, orphanedArticleCandidates, planSectionBackfill, reconcile } from '../../scripts/reconcile-section-pages.mjs';
 import { heroCdnUploads } from '../../scripts/lib/article-render-pipeline.mjs';
 import { cantonSectionPaths } from '../scripts/lib/canton-section-profile.mjs';
@@ -3205,6 +3205,31 @@ test('piano API push: aggiorna tutte le superfici cantonali live senza ampliare 
   );
 });
 
+test('registro edge: il resolver puo\' leggere il commit effettivamente servito', async () => {
+  const releaseCommit = 'a'.repeat(40);
+  const seen = [];
+  const registry = await fetchEdgeSectionRegistry(async (url, init) => {
+    seen.push({ url: String(url), init });
+    return {
+      ok: true,
+      status: 200,
+      json: async () => ({
+        schema: 1,
+        commit: releaseCommit,
+        sections: { 'canton-ti': { status: 'live' } },
+      }),
+    };
+  });
+  assert.equal(registry.commit, releaseCommit);
+  assert.equal(seen.length, 1);
+  assert.match(seen[0].url, /edge\/sections\/registry\.json\?_fpsr=/);
+  assert.equal(seen[0].init.headers['user-agent'], 'frontaliere-section-pages/1 (+https://frontaliereticino.ch)');
+  await assert.rejects(
+    () => fetchEdgeSectionRegistry(async () => ({ ok: true, status: 200, json: async () => ({ schema: 1 }) })),
+    /registro edge effettivo non valido/,
+  );
+});
+
 test('fast-publish verso gli shard ignora i corpi cantonali, quello R2 ignora le storiche', () => {
   assert.equal(bodyRegex(WITH_TI, { served: 'shard' }), '^content/(blog-body|blog-body-ch)/[a-z]{2}/.+\\.ts$');
   assert.equal(bodyRegex(WITH_TI, { served: 'r2' }), '^content/(blog-body-canton-ti)/[a-z]{2}/.+\\.ts$');
@@ -3224,6 +3249,7 @@ test('fast-publish verso gli shard ignora i corpi cantonali, quello R2 ignora le
 test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenziali obbligatorie', () => {
   const wf = read('.github/workflows/fast-publish-section.yml');
   const resolver = read('scripts/ci/fast-publish-section-resolve.sh');
+  const edgeCandidate = read('scripts/ci/fast-publish-section-edge-candidate.sh');
   const publisher = read('scripts/publish-section-pages.mjs');
   assert.match(wf, /workflow_run:\n\s+workflows: \['Publish article data API'\]\n\s+types: \[completed\]\n\s+branches: \[main\]/);
   assert.match(wf, /github\.event\.workflow_run\.conclusion == 'success'/);
@@ -3519,6 +3545,33 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(resolver, /PUSH_BEFORE="\$before" node scripts\/ci\/fast-publish-section\.mjs r2-plan/);
   assert.match(resolver, /reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"/);
   assert.match(resolver, /edge_matrix="\$\(reconcile_edge_matrix "\$WORKFLOW_RUN_HEAD_SHA"\)"/);
+  assert.match(resolver, /fast-publish-section-edge-candidate\.sh/);
+  assert.match(wf, /edge_candidate_source=.*fast-publish-section-edge-candidate\.sh/);
+  assert.match(wf, /install -m 0755 "\$edge_candidate_source" "\$edge_candidate_target"/);
+  assert.match(edgeCandidate, /r2-edge-release-commit/);
+  assert.match(edgeCandidate, /budget_seconds.*\^\[0-9\]\+\$/);
+  assert.match(edgeCandidate, /canonical_commit\(\)/);
+  assert.match(edgeCandidate, /git rev-parse --verify "\$\{1\}\^\{commit\}"/);
+  assert.match(
+    edgeCandidate,
+    /resolved_expected=.*canonical_commit[\s\S]*resolved_edge.*resolved_expected/,
+    'edge, expected e current devono essere confrontati dopo la canonicalizzazione',
+  );
+  assert.match(edgeCandidate, /remaining_budget/);
+  assert.match(
+    edgeCandidate,
+    /timeout --signal=TERM --kill-after=1s "\$\{fetch_budget\}s"[\s\S]*git fetch/,
+    'il fetch della release edge deve essere bounded e consumare il budget residuo',
+  );
+  assert.match(edgeCandidate, /edge_timestamp=.*git show -s --format=%cI/);
+  assert.match(
+    edgeCandidate,
+    /git fetch --no-tags --shallow-since="\$edge_timestamp" origin[\s\S]*"\$edge_commit" "\$current_commit"/,
+    'il controllo di ancestry deve approfondire in modo connesso edge e HEAD corrente',
+  );
+  assert.match(edgeCandidate, /git merge-base --is-ancestor/);
+  assert.match(edgeCandidate, /git diff --quiet "\$resolved_edge" "\$current_commit" -- sections\/registry\.json/);
+  assert.match(edgeCandidate, /r2-reconcile-plan "\$edge_commit"/);
   assert.match(wf, /if \[ "\$WORKFLOW_RUN_EVENT" = 'push' \]/);
   assert.match(resolver, /r2-api-push-plan/);
   assert.match(resolver, /landing\/archive\/hub\/RSS/);

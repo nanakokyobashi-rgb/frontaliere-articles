@@ -72,6 +72,7 @@ on:
       - 'scripts/ci/retry-cmd.sh'
       - 'scripts/ci/fetch-push-base-if-missing.sh'
       - 'scripts/ci/fast-publish-section-resolve.sh'
+      - 'scripts/ci/fast-publish-section-edge-candidate.sh'
       - 'scripts/cf-purge-cache.mjs'
       - 'scripts/offload-generated-images-cdn.mjs'
       - 'scripts/lib/article-render-pipeline.mjs'
@@ -267,6 +268,7 @@ jobs:
             scripts/ci/dispatch-fast-publish-replay.sh
             scripts/ci/read-main-head.sh
             scripts/ci/fast-publish-section-resolve.sh
+            scripts/ci/fast-publish-section-edge-candidate.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
 
@@ -277,8 +279,18 @@ jobs:
           resolver_target='scripts/ci/fast-publish-section-resolve.sh'
           main_head_source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
           main_head_target='scripts/ci/read-main-head.sh'
+          edge_candidate_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-edge-candidate.sh'
+          edge_candidate_target='scripts/ci/fast-publish-section-edge-candidate.sh'
           if [ ! -f "$resolver_source" ]; then
             echo "::error::resolver non presente nel checkout della revisione del workflow"
+            exit 1
+          fi
+          if [ ! -f "$main_head_source" ]; then
+            echo "::error::helper della punta di main non presente nel checkout della revisione del workflow"
+            exit 1
+          fi
+          if [ ! -f "$edge_candidate_source" ]; then
+            echo "::error::helper della release edge non presente nel checkout della revisione del workflow"
             exit 1
           fi
           # workflow_run puo' aver effettuato il checkout del corpus a una
@@ -320,6 +332,7 @@ jobs:
           EOF
             chmod 0755 "$main_head_target"
           fi
+          install -m 0755 "$edge_candidate_source" "$edge_candidate_target"
 
       - name: Set up Node (resolve)
         uses: actions/setup-node@v7

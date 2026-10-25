@@ -60,6 +60,11 @@ reconcile_edge_matrix() {
       return 0
     fi
     remaining=$(( deadline - SECONDS ))
+    if [ -n "$fallback_commit" ] && matrix="$(bash scripts/ci/fast-publish-section-edge-candidate.sh "$source_dir" "$expected_commit" "$fallback_commit" "$remaining")"; then
+      printf %s "$matrix"
+      return
+    fi
+    remaining=$(( deadline - SECONDS ))
     if [ "$remaining" -gt 0 ] && [ -n "$fallback_commit" ] && [ "$fallback_commit" != "$expected_commit" ]; then
       attempt=$((attempt + 1))
       attempt_timeout="$remaining"
