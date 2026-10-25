@@ -545,9 +545,12 @@ jobs:
     # A shard publish can spend ~50 minutes in the Pages/CDN push after the
     # render has completed. Run 39907871128 measured 50m35s for that step,
     # followed by the render, validation, Pages propagation, purge and
-    # re-purge gates. Keep the job bounded at 120 minutes so those correctness
-    # gates have headroom after the 60-minute cap exhausted its upload (#3115).
-    timeout-minutes: 120
+    # re-purge gates. Run 40145562081 spent 1h52m in the shard/CDN push alone,
+    # so the previous 120-minute cap still killed a healthy publish before its
+    # correctness gates could finish (#3115). Keep the job bounded at three
+    # hours: this gives the measured slow path headroom without making a hung
+    # shard publish unbounded.
+    timeout-minutes: 180
     strategy:
       fail-fast: false
       matrix:
