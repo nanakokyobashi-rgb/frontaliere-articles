@@ -924,6 +924,14 @@ jobs:
           # lavoro e ha reso rosso il run — 5 run su 20 in due giorni, su articoli diversi.
           #
           # Con un push solo la corsa non esiste: una build per pubblicazione.
+          # Locale repositories are independent. Run their pushes concurrently so
+          # one slow GitHub Pages/shard operation cannot consume the whole job
+          # before the other locales even start (#3115). Each child writes one
+          # outcome file; the parent waits for every child and only then updates
+          # the shared state files, so a partial result can never be mistaken for
+          # a complete publish.
+          locale_push_pids=()
+          locale_push_locales=()
           for loc in it en de fr; do
             mapfile -t paths < <(jq -r --arg l "$loc" '.shards[] | select(.locale==$l) | .paths[]' "$summary")
             hpaths=()
@@ -934,40 +942,79 @@ jobs:
               echo "── no publishable files for $shard/$loc; shard stays unchanged"
               continue
             fi
-            # Signature is <section> <locale> <scratch_dist_dir> <relpath...>.
-            # There is no subtree argument: each relpath is BOTH the path under
-            # $dist and the destination path inside the shard repo.
-            echo "── pushing ${#paths[@]} article + ${#hpaths[@]} landing file(s) to $shard/$loc"
-            # Il fallback conserva la differenza di severità che le due chiamate separate
-            # esprimevano: l'articolo è duro, l'hub è morbido («the hub stays stale, the
-            # article is unaffected»). Se il push combinato fallisce si riprova col solo
-            # articolo, così una pagina hub malformata non può impedire la pubblicazione.
-            locale_status="$RUNNER_TEMP/article-shard-push-$loc.status"
-            rm -f "$locale_status"
-            combined_pushed=true
-            if ! ARTICLE_PUSH_STATUS_FILE="$locale_status" bash scripts/lib/push-article-shard-incremental.sh \
-                 "$shard" "$loc" "$dist" "${paths[@]}" ${hpaths[@]+"${hpaths[@]}"}; then
-              echo "::warning::combined push failed for $shard/$loc — retrying with the article alone (the hub stays stale)"
-              combined_pushed=false
-              rm -f "$locale_status"
-              ARTICLE_PUSH_STATUS_FILE="$locale_status" bash scripts/lib/push-article-shard-incremental.sh \
-                "$shard" "$loc" "$dist" "${paths[@]}"
+            (
+              # Signature is <section> <locale> <scratch_dist_dir> <relpath...>.
+              # There is no subtree argument: each relpath is BOTH the path under
+              # $dist and the destination path inside the shard repo.
+              echo "── pushing ${#paths[@]} article + ${#hpaths[@]} landing file(s) to $shard/$loc"
+              # Il fallback conserva la differenza di severità che le due chiamate separate
+              # esprimevano: l'articolo è duro, l'hub è morbido («the hub stays stale, the
+              # article is unaffected»). Se il push combinato fallisce si riprova col solo
+              # articolo, così una pagina hub malformata non può impedire la pubblicazione.
+              locale_status="$RUNNER_TEMP/article-shard-push-$loc.status"
+              locale_outcome="$RUNNER_TEMP/article-shard-push-$loc.outcome"
+              rm -f "$locale_status" "$locale_outcome"
+              combined_pushed=true
+              if ! ARTICLE_PUSH_STATUS_FILE="$locale_status" bash scripts/lib/push-article-shard-incremental.sh \
+                   "$shard" "$loc" "$dist" "${paths[@]}" ${hpaths[@]+"${hpaths[@]}"}; then
+                echo "::warning::combined push failed for $shard/$loc — retrying with the article alone (the hub stays stale)"
+                combined_pushed=false
+                rm -f "$locale_status"
+                ARTICLE_PUSH_STATUS_FILE="$locale_status" bash scripts/lib/push-article-shard-incremental.sh \
+                  "$shard" "$loc" "$dist" "${paths[@]}"
+              fi
+              push_status="$(tr -d '\r\n' < "$locale_status")"
+              case "$push_status" in
+                pushed|clean-no-op) ;;
+                *)
+                  echo "::error::unexpected push status for $shard/$loc: $push_status"
+                  exit 1
+                  ;;
+              esac
+              printf '%s\t%s\t%s\n' "$shard" "$loc" "$push_status" > "$locale_outcome"
+              printf '%s\t%s\n' "$combined_pushed" "$loc" >> "$locale_outcome"
+            ) &
+            locale_push_pids+=("$!")
+            locale_push_locales+=("$loc")
+          done
+
+          locale_push_failed=0
+          for i in "${!locale_push_pids[@]}"; do
+            loc="${locale_push_locales[$i]}"
+            if ! wait "${locale_push_pids[$i]}"; then
+              echo "::error::push failed for $shard/$loc"
+              locale_push_failed=1
+              continue
             fi
-            push_status="$(tr -d '\r\n' < "$locale_status")"
-            case "$push_status" in
-              pushed|clean-no-op) ;;
-              *)
-                echo "::error::unexpected push status for $shard/$loc: $push_status"
-                exit 1
-                ;;
-            esac
+            locale_outcome="$RUNNER_TEMP/article-shard-push-$loc.outcome"
+            if [ ! -s "$locale_outcome" ]; then
+              echo "::error::push for $shard/$loc finished without an outcome"
+              locale_push_failed=1
+              continue
+            fi
+            mapfile -t outcome_lines < "$locale_outcome"
+            if [ "${#outcome_lines[@]}" -ne 2 ]; then
+              echo "::error::invalid push outcome for $shard/$loc"
+              locale_push_failed=1
+              continue
+            fi
+            IFS=$'\t' read -r outcome_shard outcome_loc push_status <<< "${outcome_lines[0]}"
+            IFS=$'\t' read -r combined_pushed outcome_loc_check <<< "${outcome_lines[1]}"
+            if [ "$outcome_shard" != "$shard" ] || [ "$outcome_loc" != "$loc" ] || \
+               [ "$outcome_loc_check" != "$loc" ]; then
+              echo "::error::mismatched push outcome for $shard/$loc"
+              locale_push_failed=1
+              continue
+            fi
             printf '%s\t%s\t%s\n' "$shard" "$loc" "$push_status" >> "$push_state"
-            if [ "$combined_pushed" = true ]; then
+            if [ "$combined_pushed" = true ] && [ -s "$RUNNER_TEMP/hub-landing.json" ]; then
+              mapfile -t hpaths < <(jq -r --arg l "$loc" '.pages[] | select(.locale==$l) | .path' "$RUNNER_TEMP/hub-landing.json")
               for hpath in "${hpaths[@]}"; do
                 printf '%s\t%s\n' "$loc" "$hpath" >> "$pushed_hub_paths"
               done
             fi
           done
+          [ "$locale_push_failed" = 0 ] || exit 1
 
           # A combined push may fall back to the article alone. Build the hub
           # summary from the paths that went through a successful combined push,

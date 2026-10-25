@@ -21,6 +21,19 @@ test('fast-publish-article leaves bounded headroom for the measured upload', () 
   assert.match(publish, /Publish to shards and CDN/u);
 });
 
+test('independent locale pushes run concurrently and publish only completed outcomes', () => {
+  const publishStep = workflow.slice(
+    workflow.indexOf('- name: Publish to shards and CDN'),
+    workflow.indexOf('- name: Wait for GitHub Pages origin to serve published content'),
+  );
+  assert.match(publishStep, /locale_push_pids=\(\)/u);
+  assert.match(publishStep, /locale_push_pids\+=\("\$!"\)/u);
+  assert.match(publishStep, /for i in "\$\{!locale_push_pids\[@\]\}"/u);
+  assert.match(publishStep, /wait "\$\{locale_push_pids\[\$i\]\}"/u);
+  assert.match(publishStep, /finished without an outcome/u);
+  assert.match(publishStep, /locale_push_failed/u);
+});
+
 test('the initial Pages wait stays inside the shared recovery budget', () => {
   const publish = jobBlock('publish');
   const waitStep = workflow.slice(
