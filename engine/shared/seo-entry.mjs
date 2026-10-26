@@ -496,14 +496,7 @@ function hasTemplateInterpolation(block, valueStart, valueEnd) {
   return false;
 }
 
-/**
- * Return whether a value span contains an interpolated template literal.
- *
- * SEO producers occasionally wrap a template in a parenthesised expression
- * (`field: (`...`${runtime}`)`). Looking only at the first value character
- * therefore misses the dynamic assignment. Skip ordinary strings/comments so
- * a literal such as `'${notAnInterpolation}'` remains static.
- */
+/** Return whether a value span contains an interpolated template literal. */
 function hasInterpolatedTemplateInRange(source, start, end, { allowBaseUrlTemplates = false } = {}) {
   let cursor = start;
   while (cursor < end) {
@@ -528,9 +521,7 @@ function hasInterpolatedTemplateInRange(source, start, end, { allowBaseUrlTempla
     }
     if (character === '`') {
       const close = templateEnd(source, cursor);
-      const templateEndExclusive = close < 0
-        ? end
-        : Math.min(close + 1, end);
+      const templateEndExclusive = close < 0 ? end : Math.min(close + 1, end);
       if (hasTemplateInterpolation(source, cursor, templateEndExclusive)) {
         const raw = close < 0 ? '' : source.slice(cursor, close + 1);
         const resolvedByEmitter = allowBaseUrlTemplates
@@ -543,6 +534,10 @@ function hasInterpolatedTemplateInRange(source, start, end, { allowBaseUrlTempla
     cursor += 1;
   }
   return false;
+}
+
+function emptyPropertyState() {
+  return { assigned: false, dynamic: false, value: undefined };
 }
 
 function interpolatedPropertyState(block, field, options = {}) {
@@ -570,10 +565,6 @@ function interpolatedPropertyState(block, field, options = {}) {
           : emptyPropertyState();
     }
   });
-  // Top-level metadata and its JSON-LD twin are separate producer fields:
-  // either effective scope must be safe. Within each scope the loop above
-  // retains only the last assignment, so a dynamic duplicate shadowed by a
-  // later static literal no longer poisons the entry.
   return {
     assigned: lastTopLevelValue.assigned || lastStructuredDataValue.assigned,
     dynamic: lastTopLevelValue.dynamic || lastStructuredDataValue.dynamic,
@@ -581,17 +572,10 @@ function interpolatedPropertyState(block, field, options = {}) {
   };
 }
 
-function emptyPropertyState() {
-  return { assigned: false, dynamic: false, value: undefined };
-}
-
 function readPropertyState(block, valueStart, valueEnd) {
   const quote = block[valueStart];
   if ((quote === "'" || quote === '"' || quote === '`' || quote === '(')
     && hasInterpolatedTemplateInRange(block, valueStart, valueEnd)) {
-    // Keep the assignment visible to every consumer. Returning `undefined`
-    // alone would make an interpolated final value look like an absent field,
-    // which lets callers publish stale shadowed literals.
     return { assigned: true, dynamic: true, value: undefined, quote };
   }
   if (quote !== "'" && quote !== '"' && quote !== '`') {
@@ -623,9 +607,6 @@ export function staticPropertyState(block, field) {
       const nested = quote === '{'
         ? staticPropertyState(block.slice(valueStart, valueEnd), field)
         : emptyPropertyState();
-      // A later structuredData object shadows the earlier object at runtime,
-      // even when it omits this particular field. Clear the previous nested
-      // value so duplicate containers cannot leak stale JSON-LD metadata.
       lastValue = nested.assigned ? nested : lastTopLevelValue;
     }
   });
@@ -635,6 +616,40 @@ export function staticPropertyState(block, field) {
 /** Return whether any relevant assignment is an unevaluated template literal. */
 export function hasInterpolatedStaticProperty(block, field, options = {}) {
   return interpolatedPropertyState(block, field, options).dynamic;
+}
+
+/** Return the final balanced structuredData object, if it is an object. */
+export function readStructuredSeoBlock(block) {
+  let structuredData;
+  forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
+    if (key === 'structuredData') {
+      structuredData = block[valueStart] === '{'
+        ? block.slice(valueStart, valueEnd)
+        : undefined;
+    }
+  });
+  return structuredData;
+}
+
+/** Return the final structuredData description state, including interpolation. */
+export function readStructuredSeoDescriptionState(block) {
+  let structuredData;
+  let structuredDataDynamic = false;
+  forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
+    if (key !== 'structuredData') return;
+    const quote = block[valueStart];
+    if (quote === '{') {
+      structuredData = block.slice(valueStart, valueEnd);
+      structuredDataDynamic = false;
+      return;
+    }
+    structuredData = undefined;
+    structuredDataDynamic = hasInterpolatedTemplateInRange(block, valueStart, valueEnd);
+  });
+  if (structuredDataDynamic) return { assigned: true, dynamic: true, value: undefined };
+  return structuredData === undefined
+    ? emptyPropertyState()
+    : staticPropertyState(structuredData, 'description');
 }
 
 /** Return the final static string assigned to a top-level field. */
@@ -684,51 +699,12 @@ export function staticPropertySpans(block, field) {
   return spans;
 }
 
-/** Return the final balanced structuredData object, if it is an object. */
-export function readStructuredSeoBlock(block) {
-  let structuredData;
-  forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
-    if (key === 'structuredData') {
-      // Any later assignment shadows the previous container at runtime. Keep
-      // a slice only for the final object; an array, id, or template value
-      // must clear a stale description from an earlier object.
-      structuredData = block[valueStart] === '{'
-        ? block.slice(valueStart, valueEnd)
-        : undefined;
-    }
-  });
-  return structuredData;
-}
-
 /** Read the final `description` from the JSON-LD-shaped structuredData object. */
 export function readStructuredSeoDescription(block) {
   const structuredData = readStructuredSeoBlock(block);
   return structuredData === undefined
     ? undefined
     : staticPropertyState(structuredData, 'description').value;
-}
-
-/** Return the final structuredData description state, including interpolation. */
-export function readStructuredSeoDescriptionState(block) {
-  let structuredData;
-  let structuredDataDynamic = false;
-  forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
-    if (key !== 'structuredData') return;
-    const quote = block[valueStart];
-    if (quote === '{') {
-      structuredData = block.slice(valueStart, valueEnd);
-      structuredDataDynamic = false;
-      return;
-    }
-    // A dynamic or non-object replacement shadows any earlier JSON-LD object.
-    structuredData = undefined;
-    structuredDataDynamic = quote !== '{'
-      && hasInterpolatedTemplateInRange(block, valueStart, valueEnd);
-  });
-  if (structuredDataDynamic) return { assigned: true, dynamic: true, value: undefined };
-  return structuredData === undefined
-    ? emptyPropertyState()
-    : staticPropertyState(structuredData, 'description');
 }
 
 function isRealSeoKey(src, start, end) {
