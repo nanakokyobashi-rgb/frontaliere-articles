@@ -157,17 +157,18 @@ test('RSS salta template JSON-LD non richiesti senza allentare i campi pubblicat
       path.join(root, 'content', 'seo', 'seo-blog.ts'),
       source.replace('"headline": "Headline statica"', '"headline": `${untrusted}`'),
     );
-    assert.throws(
-      () => buildSectionFeeds({
-        fs,
-        path,
-        rootDir: root,
-        section: { ...RSS_SECTIONS[0], seoFiles: ['seo-blog.ts'] },
-        layout: { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content' },
-        repairSerpSnippet: (text) => text,
-      }),
-      /Interpolated template literal/u,
-    );
+    const fallbackResult = buildSectionFeeds({
+      fs,
+      path,
+      rootDir: root,
+      section: { ...RSS_SECTIONS[0], seoFiles: ['seo-blog.ts'] },
+      layout: { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content' },
+      repairSerpSnippet: (text) => text,
+    });
+    const fallbackFeed = fallbackResult.feeds.find(([name]) => name === 'rss.xml')?.[1] ?? '';
+    assert.equal(fallbackResult.articleCount, 1);
+    assert.match(fallbackFeed, /Headline JSON-LD/);
+    assert.doesNotMatch(fallbackFeed, /\$\{untrusted\}/u);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
