@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {
   ackSuccessfulPublisherSections,
   drainCoverPublishers,
+  dispatchArguments,
   groupPublisherOutbox,
   publisherStatusIsComplete,
   normalizeWorkflowRunPages,
@@ -46,6 +47,26 @@ test('il dispatch usa l outbox preesistente per sezione e avvia tutto prima dell
   assert.deepEqual(events.slice(0, 2), ['dispatch:canton-ag', 'dispatch:frontaliere']);
   assert.deepEqual(events.slice(2).sort(), ['watch:canton-ag', 'watch:frontaliere']);
   assert.deepEqual(status.counts, { started: 2, succeeded: 2, failed: 0, inProgress: 0, notStarted: 0 });
+});
+
+test('il publisher cover delle sezioni arma il replay API dello staged backfill', () => {
+  assert.deepEqual(dispatchArguments({
+    workflow: 'fast-publish-section.yml',
+    section: 'canton-ag',
+    articleIds: ['iniziativa-parita-salariale-ag'],
+    repo: 'nanakokyobashi-rgb/frontaliere-articles',
+    dispatchNonce: 'cover-canton-ag-test',
+  }), [
+    'workflow', 'run', 'fast-publish-section.yml',
+    '--repo', 'nanakokyobashi-rgb/frontaliere-articles',
+    '--ref', 'main',
+    '--field', 'section=canton-ag',
+    '--field', 'article_ids=["iniziativa-parita-salariale-ag"]',
+    '--field', 'bootstrap=false',
+    '--field', 'dry_run=false',
+    '--field', 'replay_api_after_publish=true',
+    '--field', 'dispatch_nonce=cover-canton-ag-test',
+  ]);
 });
 
 test('alla scadenza lascia i publisher avviati in corso e non ne attende altri', async () => {
