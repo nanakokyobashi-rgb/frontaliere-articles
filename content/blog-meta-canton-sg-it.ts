@@ -66,6 +66,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.unfall-a13-sevelen-2026.title': 'Tamponamento A13 a Sevelen: due feriti il 25 ottobre 2026',
     'blog.article.unfall-a13-sevelen-2026.excerpt': 'Il 25 ottobre due auto si sono tamponate sulla A13 a Sevelen Feriti un conducente di 79 anni e la passeggera di 86 Il conducente della seconda auto, 53 anni, è',
     'blog.article.unfall-a13-sevelen-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.positive-chiusure-2025-sg.title': '40 comuni del Canton San Gallo chiudono il 2025 in positivo',
+    'blog.article.positive-chiusure-2025-sg.excerpt': 'Su 75 comuni politici, 40 hanno chiuso il 2025 con avanzo; l\'eccedenza aggregata è di circa CHF 28 milioni.',
+    'blog.article.positive-chiusure-2025-sg.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

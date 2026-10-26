@@ -149,6 +149,33 @@ export function normalizeStagingVerifyAttempts(value) {
   return normalizeBoundedAttempts(value, STAGING_VERIFY_ATTEMPTS);
 }
 
+export function hasResponseBody(response) {
+  return ArrayBuffer.isView(response?.body);
+}
+
+/**
+ * A fetch adapter must return bytes for a successful response.  Treat a
+ * `200` without a body as an unverifiable read instead of dereferencing it in
+ * one of the pre-flip consumers below.  The real adapter always returns a
+ * Buffer, while tests and alternative adapters may use any typed array.
+ */
+const responseBytes = (response) => {
+  const body = response?.body;
+  if (!ArrayBuffer.isView(body)) return null;
+  return Buffer.from(body.buffer, body.byteOffset, body.byteLength);
+};
+
+/**
+ * Verify a staged CDN response without trusting an adapter to provide a body.
+ * A 200 without bytes is an incomplete propagation, not a successful staging
+ * read; callers must keep the release fail-closed and retry within their bound.
+ */
+export function hasExpectedStagingBody(served, file) {
+  const body = responseBytes(served);
+  if (served?.status !== 200 || !body) return false;
+  return body.byteLength === file.bytes && sha256(body) === file.sha256;
+}
+
 /**
  * Lo stato di un registro ridotto a cio' che il Worker applica: per ogni
  * sezione `status`, `redirects`, `gone` (una sezione assente vale `draft`,
@@ -466,7 +493,12 @@ export async function waitForBootstrapLocks(
         pending.push(`${section} (lock non verificabile: HTTP ${got.status || 'nessuna risposta'})`);
         continue;
       }
-      const state = parseSectionBootstrapLock(got.body, { section, now: now() });
+      const body = responseBytes(got);
+      if (!body) {
+        pending.push(`${section} (lock non verificabile: body assente)`);
+        continue;
+      }
+      const state = parseSectionBootstrapLock(body, { section, now: now() });
       if (state.state === 'active') pending.push(`${section} (${state.doc.owner})`);
       else if (state.state === 'unknown') pending.push(`${section} (${state.reason})`);
     }
@@ -619,13 +651,15 @@ export async function missingBootstrapPages(
     let previousSitemapXml = null;
     if (wasLive(id) && previous.doc.release?.files?.[name]) {
       const got = await io.fetchBytes(`${CDN}/${previous.doc.release.base}${name}`);
-      if (got.status === 200) previousSitemapXml = got.body.toString('utf8');
+      const body = responseBytes(got);
+      if (got.status === 200 && body) previousSitemapXml = body.toString('utf8');
     }
     pending.push(...requiredPageKeys(id, { sitemapXml: sitemap ? fs.readFileSync(sitemap.local, 'utf8') : undefined, previousSitemapXml }));
   }
   const present = async (key) => {
     const got = await io.fetchBytes(`${CDN}/${key}`);
-    return got.status === 200 && got.body.toString('utf8').includes(CORPUS_ROUTE_OWNER_META_TAG);
+    const body = responseBytes(got);
+    return got.status === 200 && Boolean(body?.toString('utf8').includes(CORPUS_ROUTE_OWNER_META_TAG));
   };
   const deadline = deadlineAt ?? Date.now() + waitMs;
   for (;;) {
@@ -647,10 +681,12 @@ export async function missingBootstrapPages(
 export async function readPreviousRelease(io) {
   const res = await io.fetchBytes(`${CDN}/${EDGE_SECTION_REGISTRY_FILE}`);
   if (res.status === 404) return { state: 'absent' };
-  if (res.status !== 200) return { state: 'unknown' };
+  if (res.status !== 200 || !hasResponseBody(res)) return { state: 'unknown' };
   let doc;
+  const registryBody = responseBytes(res);
   try {
-    doc = JSON.parse(res.body.toString('utf8'));
+    if (!registryBody) return { state: 'unknown' };
+    doc = JSON.parse(registryBody.toString('utf8'));
   } catch {
     return { state: 'unknown' };
   }
@@ -659,7 +695,8 @@ export async function readPreviousRelease(io) {
   if (files === null) return { state: 'unknown', doc };
   for (const [name, hash] of Object.entries(files)) {
     const got = await io.fetchBytes(`${CDN}/${doc.release.base}${name}`);
-    if (got.status !== 200 || sha256(got.body) !== hash) return { state: 'unknown', doc };
+    const body = responseBytes(got);
+    if (got.status !== 200 || !body || sha256(body) !== hash) return { state: 'unknown', doc };
   }
   return { state: 'ok', doc };
 }
@@ -790,14 +827,16 @@ export async function publishRelease(
   for (const file of release.files) {
     let served = { status: 0 };
     const attempts = normalizeStagingVerifyAttempts(stagingVerifyAttempts);
+    let verified = false;
     for (let attempt = 1; attempt <= attempts; attempt++) {
       served = await io.fetchBytes(`${CDN}/${file.key}`);
-      if (served.status === 200 && served.body.length === file.bytes && sha256(served.body) === file.sha256) break;
+      verified = hasExpectedStagingBody(served, file);
+      if (verified) break;
       if (attempt < attempts) {
         await (sleep ?? ((ms) => new Promise((resolve) => setTimeout(resolve, ms))))(stagingVerifyRetryMs);
       }
     }
-    if (served.status !== 200 || served.body.length !== file.bytes || sha256(served.body) !== file.sha256) {
+    if (!verified) {
       return stopBeforeFlip('staging', `${file.key} sul CDN non corrisponde ai byte locali (HTTP ${served.status || 'nessuna risposta'})`);
     }
   }

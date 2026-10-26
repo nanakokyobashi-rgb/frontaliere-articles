@@ -138,4 +138,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sissach-parco-giochi-fasce-quiete',
+ category: 'pratico',
+ date: '2026-10-26T17:38:07.309Z',
+ image: '/images/blog/article-sissach-parco-giochi-fasce-quiete.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BASILEA'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

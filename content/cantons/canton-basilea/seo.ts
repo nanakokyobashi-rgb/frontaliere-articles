@@ -470,6 +470,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sissach-parco-giochi-fasce-quiete': {
+    title: 'Sissach: nuove fasce di quiete per il parco giochi',
+    description: 'A Sissach, il parco giochi ha nuove fasce di quiete: pausa feriale 12-13 e silenzio dalle 20. Sabato dalle 18, domenica vietate attività rumorose.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sissach, nuove, fasce, quiete',
+    ogTitle: 'Sissach: nuove fasce di quiete parco giochi',
+    ogDescription: 'A Sissach, il parco giochi ha nuove fasce di quiete: pausa feriale 12-13 e silenzio dalle 20. Sabato dalle 18, domenica vietate attività rumorose. Gestione Adimmo AG.',
+    canonicalPath: '/articoli-basilea/sissach-parco-giochi-fasce-quiete/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sissach: nuove fasce di quiete per il parco giochi",
+      "description": "A Sissach, il parco giochi ha nuove fasce di quiete: pausa feriale 12-13 e silenzio dalle 20. Sabato dalle 18, domenica vietate attività rumorose.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sissach-parco-giochi-fasce-quiete.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-26T17:38:07+00:00",
+      "dateModified": "2026-10-26T17:38:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-basilea/sissach-parco-giochi-fasce-quiete/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

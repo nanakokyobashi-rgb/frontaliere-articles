@@ -39,6 +39,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.salario-minimo-basilea-2027.title': 'Salario minimo Basilea aumenta a 22.50 CHF lordi dal 2027',
     'blog.article.salario-minimo-basilea-2027.excerpt': 'Dal 1° gennaio 2027 il minimo sarà 22,50 CHF lordi L’aumento previsto è di 30 centesimi per ora L’adeguamento segue l’indice misto svizzero Cantone →',
     'blog.article.salario-minimo-basilea-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.sissach-parco-giochi-fasce-quiete.title': 'Sissach: nuove fasce di quiete per il parco giochi',
+    'blog.article.sissach-parco-giochi-fasce-quiete.excerpt': 'Nei giorni feriali è richiesta pausa quiete 12-13 e silenzio dalle 20; sabato quiete dalle 18 e domenica vietate attività rumorose.',
+    'blog.article.sissach-parco-giochi-fasce-quiete.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBasileaIt;

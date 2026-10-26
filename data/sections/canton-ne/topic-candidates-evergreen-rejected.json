@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-sgs-progresse-au-troisieme-trimestre.html": {
-      "section": "canton-ne",
-      "ts": 1792846919226
-    },
-    "canton-ne::https://www.ne.ch/communiques-de-presse/pour-sa-30eme-edition-le-prix-interculturel-salut-letranger-recompense-le-centre-portugais-de-neuchatel-et-madame-carmen-diaz-pumarejo": {
-      "section": "canton-ne",
-      "ts": 1792847070985
-    },
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-29-novembre-suspense-sur-la-13e-rente-avs-et-le-materiel-de-guerre.html": {
       "section": "canton-ne",
       "ts": 1792864731629
@@ -63,6 +55,10 @@
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-sergio-ermotti-auditionne-au-parlement-sur-la-lex-ubs.html": {
       "section": "canton-ne",
       "ts": 1793012931512
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-microsoft-propose-des-departs-volontaires-a-environ-60-000-salaries.html": {
+      "section": "canton-ne",
+      "ts": 1793036203697
     }
   }
 }

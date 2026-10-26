@@ -15,6 +15,14 @@
     "canton-be::https://www.nau.ch/news/wirtschaft/effektivlohne-steigen-2026-im-schnitt-um-05-prozent-67193453": {
       "section": "canton-be",
       "ts": 1793021802412
+    },
+    "canton-be::https://ajour.ch/story/703624/pas-de-liaison-ferroviaire-directe-entre-fribourg-et-bulle": {
+      "section": "canton-be",
+      "ts": 1793039709822
+    },
+    "canton-be::https://ajour.ch/story/703589/cre-lhomme-de-tes-rves-pourquoi-un-panier-fait-actuellement-fureur-sur-internet": {
+      "section": "canton-be",
+      "ts": 1793040351810
     }
   }
 }

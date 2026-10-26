@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "41bdfd04b6ee32ad3936551b442c4ad5ffbb3337903ba3448c85d4174a700c4c",
+  "updatedAt": "2026-10-26T17:46:31.494Z",
+  "contentHash": "a798ab545ff8cb226aa5f75c9867c9fd4386c07924109a0deda7038bbeef7344",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Sissach: nuove fasce di quiete per il parco giochi",
+          "url": "/articoli-basilea/sissach-parco-giochi-fasce-quiete/",
+          "excerpt": "Nei giorni feriali è richiesta pausa quiete 12-13 e silenzio dalle 20; sabato quiete dalle 18 e domenica vietate attività rumorose.",
+          "date": "2026-10-26T17:38:07.309Z"
+        },
+        {
           "title": "Salario minimo Basilea aumenta a 22.50 CHF lordi dal 2027",
           "url": "/articoli-basilea/salario-minimo-basilea-2027/",
           "excerpt": "Dal 1° gennaio 2027 il minimo sarà 22,50 CHF lordi L’aumento previsto è di 30 centesimi per ora L’adeguamento segue l’indice misto svizzero Cantone →",
@@ -106,12 +112,6 @@
           "url": "/articoli-basilea/basilea-cantieri-alle-sei/",
           "excerpt": "Il Gran Consiglio di Basilea ha trasmesso una mozione per consentire lavori edili alle 6 da giugno ad agosto; quelli rumorosi resterebbero dalle 7.",
           "date": "2026-10-23T02:22:16.813Z"
-        },
-        {
-          "title": "Basilea, cantieri a Claraplatz: negozi in difficoltà",
-          "url": "/articoli-basilea/claraplatz-basel-cantieri/",
-          "excerpt": "A Claraplatz i cantieri colpiscono i negozi e il chiosco perde il 40% del fatturato.",
-          "date": "2026-10-11T00:21:48.656Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T17:46:31.494Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Sissach: new quiet hours for the playground",
+          "url": "/en/basel-articles/sissach-playground-quiet-times/",
+          "excerpt": "On weekdays, quiet hours from 12-13 and silence from 20 onward are required; on Saturdays, quiet from 18 onward is required, and on Sundays, noisy activities are prohibited.",
+          "date": "2026-10-26T17:38:07.309Z"
+        },
+        {
           "title": "Basel minimum wage increases to 22.50 CHF gross from 2027",
           "url": "/en/basel-articles/basel-minimum-wage-2027/",
           "excerpt": "From January 1st, 2027, the minimum wage will be 22,50 CHF gross The planned increase is 30 cents per hour The adjustment follows the Swiss mixed index Canton →",
@@ -217,12 +223,6 @@
           "url": "/en/basel-articles/basel-construction-start-six/",
           "excerpt": "The Grand Council of Basel has referred a motion to allow construction work from 6 a.m.",
           "date": "2026-10-23T02:22:16.813Z"
-        },
-        {
-          "title": "Basel, construction work at Claraplatz: shops struggling",
-          "url": "/en/basel-articles/claraplatz-basel-construction-sites/",
-          "excerpt": "At Claraplatz, construction sites hit the shops and the kiosk loses 40% of its turnover.",
-          "date": "2026-10-11T00:21:48.656Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T17:46:31.494Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Sissach: neue Ruhezeiten für den Spielplatz",
+          "url": "/de/basel-artikel/sissach-spielplatz-ruhezeiten/",
+          "excerpt": "An Werktagen gilt eine Ruhepause von 12-13 Uhr und ab 20 Uhr Ruhe; samstags gilt Ruhe ab 18 Uhr und sonntags sind lärmende Aktivitäten verboten.",
+          "date": "2026-10-26T17:38:07.309Z"
+        },
+        {
           "title": "Mindestlohn in Basel steigt ab 2027 auf 22.50 CHF brutto",
           "url": "/de/basel-artikel/basel-mindestlohn-2027/",
           "excerpt": "Ab dem 1. Januar 2027 beträgt der Mindestlohn 22,50 CHF brutto Die vorgesehene Erhöhung beträgt 30 Rappen pro Stunde Die Anpassung folgt dem Schweizer",
@@ -328,12 +334,6 @@
           "url": "/de/basel-artikel/basel-baustart-um-sechs/",
           "excerpt": "Der Grosse Rat von Basel hat eine Motion überwiesen, um Bauarbeiten von Juni bis August um 6 Uhr zu ermöglichen; lärmintensive Arbeiten würden weiterhin erst ab 7 Uhr stattfinden.",
           "date": "2026-10-23T02:22:16.813Z"
-        },
-        {
-          "title": "Basel, Baustellen am Claraplatz: Geschäfte in Schwierigkeiten",
-          "url": "/de/basel-artikel/claraplatz-basel-baustellen/",
-          "excerpt": "Am Claraplatz setzen die Bauarbeiten den Geschäften zu, und der Kiosk verliert 40% seines Umsatzes.",
-          "date": "2026-10-11T00:21:48.656Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T17:46:31.494Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Sissach : nouvelles plages de calme pour l’aire de jeux",
+          "url": "/fr/articles-bale/sissach-aire-jeux-calme/",
+          "excerpt": "En semaine, une pause de tranquillité 12-13 est requise et le silence est exigé à partir de 20 ; le samedi, le calme est exigé à partir de 18 et, le dimanche, les activités bruyantes sont interdites.",
+          "date": "2026-10-26T17:38:07.309Z"
+        },
+        {
           "title": "Le salaire minimum à Bâle passe à 22.50 CHF bruts à partir de 2027",
           "url": "/fr/articles-bale/salaire-minimum-basle-2027/",
           "excerpt": "À partir du 1er janvier 2027, le minimum sera de 22,50 CHF bruts L’augmentation prévue est de 30 centimes par heure L’ajustement suit l’indice mixte suisse",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-bale/bale-chantier-six-heures/",
           "excerpt": "Le Grand Conseil de Bâle a transmis une motion visant à autoriser les travaux de construction à 6 heures de juin à août ; les travaux bruyants resteraient à partir de 7 heures.",
           "date": "2026-10-23T02:22:16.813Z"
-        },
-        {
-          "title": "Bâle, travaux à Claraplatz : commerces en difficulté",
-          "url": "/fr/articles-bale/claraplatz-bale-chantiers/",
-          "excerpt": "À Claraplatz, les travaux touchent les commerces et le kiosque perd 40% de son chiffre d’affaires.",
-          "date": "2026-10-11T00:21:48.656Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T17:46:31.494Z"
     }
   }
 }

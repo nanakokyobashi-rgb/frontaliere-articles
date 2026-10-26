@@ -86,52 +86,42 @@
       "articleId": "bellinzona-nuova-strada-ciclabile",
       "title": "Bellinzona inaugura la prima strada ciclabile",
       "fallbackImage": "/images/blog/article-fully-strada-ciclabile.webp",
-      "reason": "All image providers failed for article-bellinzona-nuova-strada-ciclabile: openai-codex (vision gate rejected image: Relevant bicycle-path scene, but it contains traffic signage and",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-bellinzona-nuova-strada-ciclabile: openai-codex (vision gate rejected image: Synthetic editorial illustration relevant to Bellinzona cycling infrastructure, but it contains a prominent foreground cycli",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-22T00:55:35.804Z",
-      "lastFailureAt": "2026-10-22T00:55:35.804Z",
-      "retryHint": "no-text"
+      "lastFailureAt": "2026-10-26T17:37:48.636Z"
     },
     {
       "articleId": "sanitari-italiani-fuga-svizzera",
       "title": "Operatori sanitari frontalieri: Como boccheggia",
       "fallbackImage": "/images/blog/article-confusione-tassa-salute-frontalieri.webp",
-      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial scene with no visible text or logos, b",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-sanitari-italiani-fuga-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to healthcare commuting, but the central foreground person is recognizable from beh",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-23T15:23:52.650Z",
-      "lastFailureAt": "2026-10-23T15:23:52.650Z"
+      "lastFailureAt": "2026-10-26T17:39:32.696Z"
     },
     {
       "articleId": "cisl-ricerca-lavoratori-ritiene",
       "title": "55,6% lavoratori frontalieri ritiene stipendio inferiore a residente svizzero",
       "fallbackImage": "/images/blog/article-ricerca-cisl-frontalieri-2026.webp",
-      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (vision gate rejected image: Generic synthetic border-crossing illustration; the prominent fore",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-cisl-ricerca-lavoratori-ritiene: openai-codex (Codex broker rejected the request: Codex CLI timed out after 119924ms)",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-24T19:06:53.846Z",
-      "lastFailureAt": "2026-10-24T19:06:53.846Z"
-    },
-    {
-      "articleId": "disparita-stipendi-frontalieri",
-      "title": "Disparità stipendi uomini donne frontalieri in Ticino",
-      "fallbackImage": "/images/blog/article-frontalieri-ticino-indagine-salari-2026.webp",
-      "reason": "All image providers failed for article-disparita-stipendi-frontalieri: openai-codex (vision gate rejected image: Generic synthetic editorial street scene with commuters in a Ticino",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-24T21:09:52.981Z",
-      "lastFailureAt": "2026-10-24T21:09:52.981Z"
+      "lastFailureAt": "2026-10-26T17:41:33.023Z"
     },
     {
       "articleId": "frontaliere-ora-mezza-viaggio",
       "title": "31,7% frontalieri supera un'ora e mezza di viaggio al giorno",
       "fallbackImage": "/images/blog/article-frontalieri-disoccupazione-criterio-lavoro.webp",
-      "reason": "All image providers failed for article-frontaliere-ora-mezza-viaggio: openai-codex (vision gate rejected image: Generic synthetic commuter scene relevant to Ticino cross-border com",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-frontaliere-ora-mezza-viaggio: openai-codex (vision gate rejected image: Generic synthetic commuter-train scene relevant to Ticino and cross-border commuting, but visible platform signage fails the no-",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-25T01:38:54.254Z",
-      "lastFailureAt": "2026-10-25T01:38:54.254Z"
+      "lastFailureAt": "2026-10-26T17:43:51.162Z",
+      "retryHint": "no-text"
     }
   ]
 }

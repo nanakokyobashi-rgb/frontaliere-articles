@@ -72,4 +72,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'governo-giurassiano-nomine-2027',
+ category: 'novita',
+ date: '2026-10-26T18:04:54.331Z',
+ image: '/images/blog/article-governo-giurassiano-nomine-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['JU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
