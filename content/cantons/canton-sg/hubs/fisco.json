@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "fisco",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "d96dc63538e0023dbcc14ae0e49c945a8cdea55d7ac7227c77e5fa8a2010da0a",
+  "updatedAt": "2026-10-26T17:57:05.656Z",
+  "contentHash": "88d6bd28781bdfe47aa9c1e85485eecad5831b521d6b1f3644e405bb3b9d690a",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-26T11:33:49.792Z",
       "keyFacts": 0
     }
   ],
@@ -140,10 +140,16 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "40 comuni del Canton San Gallo chiudono il 2025 in positivo",
+          "url": "/articoli-san-gallo/positive-chiusure-2025-sg/",
+          "excerpt": "Su 75 comuni politici, 40 hanno chiuso il 2025 con avanzo; l'eccedenza aggregata è di circa CHF 28 milioni.",
+          "date": "2026-10-26T17:48:42.058Z"
+        },
         {
           "title": "Abrogazione regolamento Stadtfonds e Steuerfuss 2026 approvato a Wil",
           "url": "/articoli-san-gallo/stadtfonds-steuerfuss-wil/",
@@ -185,12 +191,6 @@
           "url": "/articoli-svizzera/comprare-casa-san-gallo-mutuo/",
           "excerpt": "Guida all'acquisto immobiliare in Svizzera: mutuo ipotecario, fondi propri, imposta sui trapassi e procedure step-by-step per chi compra nel Canton San Gallo.",
           "date": "2026-09-04T05:24:58.077Z"
-        },
-        {
-          "title": "Violenza domestica: a San Gallo la prevenzione passa dal dialogo",
-          "url": "/articoli-frontaliere/prevenzione-violenza-domestica-san-gallo-2026/",
-          "excerpt": "A San Gallo, la polizia intercetta potenziali autori di violenza domestica e li coinvolge in colloqui preventivi con un tasso di successo del 90%.",
-          "date": "2026-04-27T11:01:41.901Z"
         }
       ],
       "latestCantonArticles": [],
@@ -220,7 +220,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T17:57:05.656Z"
     },
     "en": {
       "canton": "SG",
@@ -338,10 +338,16 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "40 municipalities in the Canton of St. Gallen end 2025 with a surplus",
+          "url": "/en/st-gallen-articles/positive-closures-2025-sg/",
+          "excerpt": "Of 75 political municipalities, 40 closed 2025 with a surplus; the aggregate surplus is approximately CHF 28 million.",
+          "date": "2026-10-26T17:48:42.058Z"
+        },
         {
           "title": "Repeal of the Stadtfonds regulation and 2026 tax rate approved in Wil",
           "url": "/en/st-gallen-articles/repeal-of-the-stadtfonds-regulation-and-2026-tax-rate-approved-in-wil/",
@@ -383,12 +389,6 @@
           "url": "/en/swiss-articles/buy-home-st-gallen-mortgage/",
           "excerpt": "Guide to buying real estate in Switzerland: mortgage, own funds, transfer tax and step-by-step procedures for buyers in the Canton of St. Gallen.",
           "date": "2026-09-04T05:24:58.077Z"
-        },
-        {
-          "title": "Domestic violence: prevention through dialogue in St. Gallen",
-          "url": "/en/cross-border-articles/domestic-violence-prevention-st-gallen-2026/",
-          "excerpt": "In St. Gallen, the police intercept potential domestic violence offenders and engage them in preventive talks with a 90% success rate.",
-          "date": "2026-04-27T11:01:41.901Z"
         }
       ],
       "latestCantonArticles": [],
@@ -418,7 +418,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T17:57:05.656Z"
     },
     "de": {
       "canton": "SG",
@@ -536,10 +536,16 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "40 Gemeinden des Kantons St. Gallen schliessen das Jahr 2025 positiv ab",
+          "url": "/de/st-gallen-artikel/40-gemeinden-des-kantons-st-gallen-schliessen-das-jahr-2025-positiv-ab/",
+          "excerpt": "Von 75 politischen Gemeinden schlossen 40 das Jahr 2025 mit einem Überschuss ab; der kumulierte Überschuss beträgt rund CHF 28 Millionen.",
+          "date": "2026-10-26T17:48:42.058Z"
+        },
         {
           "title": "Aufhebung des Reglements Stadtfonds und Genehmigung des Steuerfusses 2026 in Wil",
           "url": "/de/st-gallen-artikel/aufhebung-des-reglements-stadtfonds-und-genehmigung-des-steuerfusses-2026-in-wil/",
@@ -581,12 +587,6 @@
           "url": "/de/schweiz-artikel/haus-kaufen-sankt-gallen-hypothek/",
           "excerpt": "Leitfaden zum Immobilienkauf in der Schweiz: Hypothekendarlehen, Eigenmittel, Abgeltungssteuer und Schritt-für-Schritt-Verfahren für Käufer im Kanton St. Gallen.",
           "date": "2026-09-04T05:24:58.077Z"
-        },
-        {
-          "title": "Haushaltsgewalt: In St. Gallen geht die Prävention über Dialog",
-          "url": "/de/grenzgaenger-artikel/gewaltpraevention-st-gallen-2026/",
-          "excerpt": "In St. Gallen schaltet die Polizei potenzielle Täter von Haushaltsgewalt und bindet sie in präventive Gespräche ein, mit einer Erfolgsquote von 90%.",
-          "date": "2026-04-27T11:01:41.901Z"
         }
       ],
       "latestCantonArticles": [],
@@ -616,7 +616,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T17:57:05.656Z"
     },
     "fr": {
       "canton": "SG",
@@ -734,10 +734,16 @@
               "url": "https://www.sg.ch/news/sgch_sport/2026/10/der-kanton-st-gallen-war-gastgeber-der-arge-alp-sport-koordinati.html"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
+        {
+          "title": "40 communes du canton de Saint-Gall clôturent l'année 2025 en positif",
+          "url": "/fr/articles-saint-gall/positifs-clotures-2025-sg/",
+          "excerpt": "Sur 75 communes politiques, 40 ont clôturé l'année 2025 avec un excédent ; l'excédent cumulé est d'environ 28 millions de CHF.",
+          "date": "2026-10-26T17:48:42.058Z"
+        },
         {
           "title": "Abrogation du règlement Stadtfonds et du Steuerfuss 2026 approuvé à Wil",
           "url": "/fr/articles-saint-gall/abrogation-du-reglement-stadtfonds-et-du-steuerfuss-2026-approuve-a-wil/",
@@ -779,12 +785,6 @@
           "url": "/fr/articles-suisse/acheter-maison-saint-gall-hypotheque/",
           "excerpt": "Guide d'achat immobilier en Suisse : hypothèque, fonds propres, taxe de passage et procédures étape par étape pour ceux qui achètent dans le canton de Saint-Gall.",
           "date": "2026-09-04T05:24:58.077Z"
-        },
-        {
-          "title": "Violence domestique : à Saint-Gall, la prévention passe par le dialogue",
-          "url": "/fr/articles-frontalier/prevention-violence-domestique-saint-gall-2026/",
-          "excerpt": "À Saint-Gall, la police intercepte les auteurs potentiels de violence domestique et les implique dans des entretiens préventifs avec un taux de réussite de 90%.",
-          "date": "2026-04-27T11:01:41.901Z"
         }
       ],
       "latestCantonArticles": [],
@@ -814,7 +814,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T17:57:05.656Z"
     }
   }
 }
