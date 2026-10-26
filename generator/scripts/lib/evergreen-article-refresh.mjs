@@ -7,12 +7,18 @@
  * dogane-ranking digest (and any future evergreen digest) reuses the exact
  * same balanced-record rewrite logic instead of a copy-pasted sibling.
  */
+import '../../../host/cantonSectionsBootstrap.mjs';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { corpusPath } from './corpus-paths.mjs';
 import { readTopLevelString, scanTopLevelArticleRecords } from '../../../scripts/lib/article-registry-reader.mjs';
 import { findSeoEntryMatches } from '../../../scripts/lib/seo-entry.mjs';
+import {
+  lastStaticPropertyValue,
+  staticPropertySpans,
+  staticPropertyValues,
+} from '../../../engine/shared/seo-entry.mjs';
 import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
 import { writeFileSnapshotAtomically } from '../../../scripts/lib/write-file-pair-atomically.mjs';
@@ -78,6 +84,35 @@ function replaceLiteral(source, property, nextValue) {
   const range = literalRange(source, property);
   if (!range) return null;
   return source.slice(0, range.start) + nextValue + source.slice(range.end);
+}
+
+function dateModifiedProperties(block) {
+  const properties = staticPropertyValues(block, 'dateModified');
+  const structuredData = staticPropertySpans(block, 'structuredData');
+  if (structuredData.length > 1) {
+    throw new Error(
+      "bumpDateModified: entry contiene più proprietà structuredData; " +
+        'refresh rifiutato prima della scrittura.',
+    );
+  }
+  const container = structuredData[0];
+  if (container?.quote === '{') {
+    const nested = block.slice(container.valueStart, container.valueEnd);
+    for (const property of staticPropertyValues(nested, 'dateModified')) {
+      properties.push({
+        ...property,
+        valueStart: property.valueStart + container.valueStart,
+        valueEnd: property.valueEnd + container.valueStart,
+      });
+    }
+  }
+  return properties.sort((left, right) => left.valueStart - right.valueStart);
+}
+
+function replaceStaticProperty(source, property, nextValue) {
+  return source.slice(0, property.valueStart + 1)
+    + nextValue
+    + source.slice(property.valueEnd - 1);
 }
 
 function insertUpdatedAt(source, record, dateProperty, todayIso) {
@@ -175,16 +210,22 @@ export function bumpDateModified(
   // cannot make us touch a sibling's date.
   const { index: startIdx, closeIdx } = entry;
   const block = src.slice(startIdx, closeIdx + 1);
-  const dmRe = /"dateModified":\s*"([^"]*)"/;
-  if (!dmRe.test(block)) return false;
+  const dateModified = dateModifiedProperties(block);
+  if (dateModified.length === 0) return false;
+  if (dateModified.length > 1) {
+    throw new Error(
+      "bumpDateModified: entry 'blog-" + id + "' contiene più proprietà dateModified; "
+      + 'refresh rifiutato prima della scrittura.',
+    );
+  }
   // dateModified must never precede datePublished: on the publish day a fixed
   // midnight stamp falls before the publish time → an incoherent freshness
   // signal in the indexed NewsArticle JSON-LD. Clamp up to datePublished when earlier.
-  const pub = block.match(/"datePublished":\s*"([^"]*)"/);
-  const effective = pub && Date.parse(pub[1]) > Date.parse(isoDateTime) ? pub[1] : isoDateTime;
-  const current = block.match(dmRe);
-  if (current && isAtOrAfter(current[1], effective)) return true;
-  const replaced = block.replace(dmRe, `"dateModified": "${effective}"`);
+  const published = lastStaticPropertyValue(block, 'datePublished');
+  const effective = published && Date.parse(published) > Date.parse(isoDateTime) ? published : isoDateTime;
+  const current = dateModified[0].value;
+  if (current && isAtOrAfter(current, effective)) return true;
+  const replaced = replaceStaticProperty(block, dateModified[0], effective);
   writeSnapshot(file, src, src.slice(0, startIdx) + replaced + src.slice(closeIdx + 1), writeFile);
   return true;
 }
