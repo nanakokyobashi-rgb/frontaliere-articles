@@ -45,83 +45,42 @@
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Synthetic photorealistic commuter-scene illustration with a recognizable foreground woman seen from behind. No visible text, logos, re",
-      "status": "queued",
-      "failureCount": 3,
+      "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Generic synthetic commuter-train scene; it does not clearly match Arianna di Claudio at the Rome Film Festival and includes a foregrou",
+      "status": "failed",
+      "failureCount": 4,
       "requestedAt": "2026-10-18T07:27:16.643Z",
-      "lastFailureAt": "2026-10-26T00:58:14.715Z"
-    },
-    {
-      "articleId": "competitivita-svizzera-ocse-berna",
-      "title": "OCSE Svizzera: chieste riforme per sanità e crescita",
-      "fallbackImage": "/images/blog/article-disoccupazione-berna-settembre-2026-stabile.webp",
-      "reason": "All image providers failed for article-competitivita-svizzera-ocse-berna: openai-codex (vision gate rejected image: Generic synthetic Swiss architectural scene; a small wall placard/sign is visible, though no wording is readable. No logos, ",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-18T08:25:09.017Z",
-      "lastFailureAt": "2026-10-26T00:59:37.227Z",
-      "retryHint": "no-text"
-    },
-    {
-      "articleId": "indennita-giornaliere-stop-cosa-fare",
-      "title": "Indennità malattia interrotte: 5 passi per tutelarsi",
-      "fallbackImage": "/images/blog/article-indennita-lavoro-ridotto.webp",
-      "reason": "All image providers failed for article-indennita-giornaliere-stop-cosa-fare: openai-codex (vision gate rejected image: Generic synthetic train-station scene relevant to commuting and administrative paperwork, but a recognizable foreground c",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-18T11:49:39.061Z",
-      "lastFailureAt": "2026-10-26T05:45:53.618Z"
+      "lastFailureAt": "2026-10-26T17:04:54.318Z"
     },
     {
       "articleId": "tutele-frontaliero-uscita-ticino",
       "title": "Frontaliere licenziato nel 2026: diritti oltre 20 km",
       "fallbackImage": "/images/blog/article-lamal-guida-2026-canton-argovia.webp",
-      "reason": "All image providers failed for article-tutele-frontaliero-uscita-ticino: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration with no visible text, logos, or face. It clearly shows a foreground traveler ",
-      "status": "queued",
-      "failureCount": 1,
+      "reason": "All image providers failed for article-tutele-frontaliero-uscita-ticino: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Ticino cross-border commuting, but a recognizable foreground person is clearly ",
+      "status": "failed",
+      "failureCount": 2,
       "requestedAt": "2026-10-18T16:43:36.224Z",
-      "lastFailureAt": "2026-10-26T06:28:19.725Z"
-    },
-    {
-      "articleId": "apprendistato-zurigo-guida-pratica",
-      "title": "Apprendistato a Zurigo: posto, contratto, retribuzione e maturità",
-      "fallbackImage": "/images/blog/apprendistato-formazione-professionale-canton-berna.webp",
-      "reason": "All image providers failed for article-apprendistato-zurigo-guida-pratica: openai-codex (vision gate rejected image: Generic synthetic workshop illustration relevant to Swiss technical apprenticeship; no readable text, logos, or visible fac",
-      "status": "queued",
-      "failureCount": 1,
-      "requestedAt": "2026-10-18T19:10:17.168Z",
-      "lastFailureAt": "2026-10-26T06:31:06.413Z",
-      "retryHint": "no-text"
+      "lastFailureAt": "2026-10-26T17:08:25.625Z"
     },
     {
       "articleId": "giovani-donne-stipendi-svizzera",
       "title": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
-      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial illustration with a foreground woman viewed from behind; books and an uneven balance suggest educa",
-      "status": "queued",
-      "failureCount": 1,
+      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Synthetic editorial scene relevant to an educated young Swiss woman; no readable text, logos, or visible face. The foreground ",
+      "status": "failed",
+      "failureCount": 2,
       "requestedAt": "2026-10-19T03:17:12.439Z",
-      "lastFailureAt": "2026-10-26T06:32:29.513Z"
+      "lastFailureAt": "2026-10-26T17:11:17.759Z"
     },
     {
       "articleId": "ville-ponti-frontalieri-confronto",
       "title": "Frontalieri, alle Ville Ponti il confronto sul lavoro",
       "fallbackImage": "/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp",
-      "reason": "All image providers failed for article-ville-ponti-frontalieri-confronto: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to cross-border commuting, but it contains a recognizable foreground person viewe",
-      "status": "queued",
-      "failureCount": 1,
+      "reason": "All image providers failed for article-ville-ponti-frontalieri-confronto: openai-codex (vision gate rejected image: Foreground commuter is clearly recognizable from behind; the train also shows small branding/lettering.); gemini (Gemini ima",
+      "status": "failed",
+      "failureCount": 2,
       "requestedAt": "2026-10-20T21:30:49.827Z",
-      "lastFailureAt": "2026-10-26T06:36:56.657Z"
-    },
-    {
-      "articleId": "arresto-ticino-banca-occulta",
-      "title": "Arresto in Ticino nell'operazione antimafia internazionale",
-      "fallbackImage": "/images/blog/article-arresto-lite-domestica-ticino.webp",
-      "reason": "All image providers failed for article-arresto-ticino-banca-occulta: openai-codex (vision gate rejected image: Generic synthetic photorealistic editorial scene relevant to a Ticino",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-21T23:28:09.292Z",
-      "lastFailureAt": "2026-10-21T23:28:09.292Z"
+      "lastFailureAt": "2026-10-26T17:12:48.538Z",
+      "retryHint": "no-text"
     },
     {
       "articleId": "bellinzona-nuova-strada-ciclabile",

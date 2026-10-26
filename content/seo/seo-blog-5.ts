@@ -111670,7 +111670,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-indennita-lavoro-ridotto.webp`,
+        "url": `${BASE_URL}/images/blog/article-indennita-giornaliere-stop-cosa-fare.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Immagine illustrativa pertinente al tema dell’articolo"
@@ -112918,7 +112918,7 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
         "license": "https://openai.com/policies/terms-of-use/",
         "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
         "creditText": "frontaliereticino.ch",
-        "url": `${BASE_URL}/images/blog/article-arresto-lite-domestica-ticino.webp`,
+        "url": `${BASE_URL}/images/blog/article-arresto-ticino-banca-occulta.webp`,
         "width": 1200,
         "height": 675,
         "caption": "Immagine illustrativa pertinente al tema dell’articolo"
