@@ -39,6 +39,9 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.salario-minimo-basilea-2027.title': 'Le salaire minimum à Bâle passe à 22.50 CHF bruts à partir de 2027',
     'blog.article.salario-minimo-basilea-2027.excerpt': 'À partir du 1er janvier 2027, le minimum sera de 22,50 CHF bruts L’augmentation prévue est de 30 centimes par heure L’ajustement suit l’indice mixte suisse',
     'blog.article.salario-minimo-basilea-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sissach-parco-giochi-fasce-quiete.title': 'Sissach : nouvelles plages de calme pour l’aire de jeux',
+    'blog.article.sissach-parco-giochi-fasce-quiete.excerpt': 'En semaine, une pause de tranquillité 12-13 est requise et le silence est exigé à partir de 20 ; le samedi, le calme est exigé à partir de 18 et, le dimanche, les activités bruyantes sont interdites.',
+    'blog.article.sissach-parco-giochi-fasce-quiete.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBasileaFr;

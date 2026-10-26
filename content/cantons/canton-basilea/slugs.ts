@@ -15,6 +15,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'domande-edilizie-solo-digitale-2027': { it: 'domande-edilizie-solo-digitale-2027', en: 'building-permits-only-digital-2027', de: 'baugesuche-nur-digital-2027', fr: 'demandes-permis-digital-2027' },
  'basel-stadt-siti-online-di-nuoto': { it: 'basel-stadt-siti-online-di-nuoto', en: 'basel-stadt-sites-online-reactivation', de: 'basel-stadt-siti-online-wiederaufnahme', fr: 'basile-sites-en-ligne-reactivation' },
  'salario-minimo-basilea-2027': { it: 'salario-minimo-basilea-2027', en: 'basel-minimum-wage-2027', de: 'basel-mindestlohn-2027', fr: 'salaire-minimum-basle-2027' },
+ 'sissach-parco-giochi-fasce-quiete': { it: 'sissach-parco-giochi-fasce-quiete', en: 'sissach-playground-quiet-times', de: 'sissach-spielplatz-ruhezeiten', fr: 'sissach-aire-jeux-calme' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
