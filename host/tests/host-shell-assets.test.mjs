@@ -254,7 +254,16 @@ const renderers = readdirSync(path.join(ROOT, 'scripts'))
   .filter((name) => name.endsWith('.mjs'))
   .filter((name) => /from '\.\/lib\/article-render-pipeline\.mjs'/.test(read(`scripts/${name}`)))
   .map((name) => `scripts/${name}`);
-const renders = invocationOf(renderers);
+// Il publisher delle sezioni passa da uno script di shell per tenere il
+// workflow sotto il limite del parser YAML. Per il contratto del job quel
+// wrapper e' comunque l'emettitore: va contato insieme agli script mjs,
+// altrimenti la guardia vede solo fast-publish-article.yml e lascia scoperto
+// proprio il percorso che usa la shell estratta.
+const renderEntrypoints = [
+  ...renderers,
+  'scripts/ci/fast-publish-section-render.sh',
+];
+const renders = invocationOf(renderEntrypoints);
 const ensures = invocationOf([ENSURE_SCRIPT]);
 
 const renderingJobs = [];
