@@ -509,6 +509,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-basilea-stop-sconto-elettriche': {
+    title: 'Basilea Città elimina lo sconto sulle auto elettriche',
+    description: 'A Basilea Città, dal 2027 le auto elettriche pagheranno la tassa piena: termina lo sconto del 50% dopo il superamento della soglia del 5%.',
+    keywords: 'frontalieri, ticino, svizzera, italia, basilea, città, elimina, sconto',
+    ogTitle: 'Auto elettriche: tassa piena a Basilea Città dal 2027',
+    ogDescription: 'Per il 2027 Basilea Città applicherà la tassa piena alle auto elettriche: lo sconto del 50% introdotto nel 2018 viene meno dopo una quota di mercato del 6,1%. Nel Grossen Rat, una mozione chiede di mantenerlo senza interruzioni.',
+    canonicalPath: '/articoli-basilea/basilea-stop-sconto-elettriche/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Basilea Città elimina lo sconto sulle auto elettriche",
+      "description": "A Basilea Città, dal 2027 le auto elettriche pagheranno la tassa piena: termina lo sconto del 50% dopo il superamento della soglia del 5%.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-basilea-stop-sconto-elettriche.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-26T23:14:00+00:00",
+      "dateModified": "2026-10-26T23:14:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-basilea/basilea-stop-sconto-elettriche/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

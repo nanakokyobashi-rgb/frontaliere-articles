@@ -42,6 +42,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.sissach-parco-giochi-fasce-quiete.title': 'Sissach: nuove fasce di quiete per il parco giochi',
     'blog.article.sissach-parco-giochi-fasce-quiete.excerpt': 'Nei giorni feriali è richiesta pausa quiete 12-13 e silenzio dalle 20; sabato quiete dalle 18 e domenica vietate attività rumorose.',
     'blog.article.sissach-parco-giochi-fasce-quiete.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.basilea-stop-sconto-elettriche.title': 'Basilea Città elimina lo sconto sulle auto elettriche',
+    'blog.article.basilea-stop-sconto-elettriche.excerpt': 'A Basilea Città, dal 2027 le auto elettriche pagheranno la tassa piena: termina lo sconto del 50% dopo il superamento della soglia del 5%.',
+    'blog.article.basilea-stop-sconto-elettriche.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBasileaIt;

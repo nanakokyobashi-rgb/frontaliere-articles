@@ -149,4 +149,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'basilea-stop-sconto-elettriche',
+ category: 'fiscale',
+ date: '2026-10-26T23:14:00.134Z',
+ image: '/images/blog/article-basilea-stop-sconto-elettriche.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BASILEA'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

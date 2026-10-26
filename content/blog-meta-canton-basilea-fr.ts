@@ -42,6 +42,9 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.sissach-parco-giochi-fasce-quiete.title': 'Sissach : nouvelles plages de calme pour l’aire de jeux',
     'blog.article.sissach-parco-giochi-fasce-quiete.excerpt': 'En semaine, une pause de tranquillité 12-13 est requise et le silence est exigé à partir de 20 ; le samedi, le calme est exigé à partir de 18 et, le dimanche, les activités bruyantes sont interdites.',
     'blog.article.sissach-parco-giochi-fasce-quiete.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.basilea-stop-sconto-elettriche.title': 'Bâle-Ville supprime la réduction pour les voitures électriques',
+    'blog.article.basilea-stop-sconto-elettriche.excerpt': 'À Bâle-Ville, à partir de 2027, les voitures électriques paieront la taxe pleine : la réduction de 50% prend fin après le dépassement du seuil de 5%.',
+    'blog.article.basilea-stop-sconto-elettriche.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBasileaFr;

@@ -42,6 +42,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.sissach-parco-giochi-fasce-quiete.title': 'Sissach: neue Ruhezeiten für den Spielplatz',
     'blog.article.sissach-parco-giochi-fasce-quiete.excerpt': 'An Werktagen gilt eine Ruhepause von 12-13 Uhr und ab 20 Uhr Ruhe; samstags gilt Ruhe ab 18 Uhr und sonntags sind lärmende Aktivitäten verboten.',
     'blog.article.sissach-parco-giochi-fasce-quiete.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.basilea-stop-sconto-elettriche.title': 'Basel-Stadt schafft den Rabatt auf Elektroautos ab',
+    'blog.article.basilea-stop-sconto-elettriche.excerpt': 'In Basel-Stadt zahlen Elektroautos ab 2027 die volle Steuer: Der Rabatt von 50% endet, nachdem der Schwellenwert von 5% überschritten wurde.',
+    'blog.article.basilea-stop-sconto-elettriche.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBasileaDe;

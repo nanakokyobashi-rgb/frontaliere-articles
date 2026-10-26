@@ -42,6 +42,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.sissach-parco-giochi-fasce-quiete.title': 'Sissach: new quiet hours for the playground',
     'blog.article.sissach-parco-giochi-fasce-quiete.excerpt': 'On weekdays, quiet hours from 12-13 and silence from 20 onward are required; on Saturdays, quiet from 18 onward is required, and on Sundays, noisy activities are prohibited.',
     'blog.article.sissach-parco-giochi-fasce-quiete.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.basilea-stop-sconto-elettriche.title': 'Basel-Stadt abolishes the discount on electric cars',
+    'blog.article.basilea-stop-sconto-elettriche.excerpt': 'In Basel-Stadt, from 2027, electric cars will pay the full tax: the 50% discount ends once the 5% threshold is exceeded.',
+    'blog.article.basilea-stop-sconto-elettriche.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBasileaEn;
