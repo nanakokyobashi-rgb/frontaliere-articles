@@ -4,17 +4,17 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "8ceb743040352bd3d5dcaa28ff3975a9fc20d3c7bc603798ddfaa5bfd6542403",
+  "updatedAt": "2026-10-26T17:18:45.341Z",
+  "contentHash": "41feec45cd13e87fda8b414c062d0d2b87cf0bf9cdcec49b53c8227e0c87de7f",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-26T13:47:55.879Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-25T19:59:33.449Z",
+      "updatedAt": "2026-10-26T11:33:49.792Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "325",
+          "value": "340",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -56,51 +56,51 @@
               "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat-0"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+            },
+            {
+              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "detail": "Genève",
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+            },
+            {
               "label": "Café quartier : Initiation au goût du pain, pain artisanal ou industriel, quelles différences ?",
               "detail": "Genève",
               "date": "2026-10-26",
               "url": "https://www.geneve.ch/agenda/cafe-quartier-initiation-gout-pain-pain-artisanal-industriel-differences"
             },
             {
-              "label": "PILATES - 15frs - Sécheron",
+              "label": "Cafés genevois: la vie même",
               "detail": "Genève",
               "date": "2026-10-26",
-              "url": "https://www.geneve.ch/agenda/pilates-15frs-secheron"
+              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
             },
             {
-              "label": "Pratiques corporelles matinales avec Cindy Van Acker",
+              "label": "Dance First Think Later",
               "detail": "Genève",
               "date": "2026-10-26",
-              "url": "https://www.geneve.ch/agenda/pratiques-corporelles-matinales-cindy-acker"
+              "url": "https://www.geneve.ch/agenda/dance-first-think-later"
             },
             {
-              "label": "Prayers",
+              "label": "Exposition « Transparences, saison III, Dreams » avec le duo d'artistes Ana D & Noora K",
               "detail": "Genève",
               "date": "2026-10-26",
-              "url": "https://www.geneve.ch/agenda/prayers"
-            },
-            {
-              "label": "Soirée PréPro : LEÏLA | OSCAR",
-              "detail": "Genève",
-              "date": "2026-10-26",
-              "url": "https://www.geneve.ch/agenda/soiree-prepro-leila-oscar"
-            },
-            {
-              "label": "Ara Malikian «Intruso»",
-              "detail": "Victoria Hall",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/evenements/musique/geneve/ara-malikian-intruso_AyCDikJ"
-            },
-            {
-              "label": "PICTURE THIS",
-              "detail": "Alhambra",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/evenements/musique/geneve/picture-this_A6ymCVx"
+              "url": "https://www.geneve.ch/agenda/exposition-transparences-saison-dreams-artistes-noora"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/ginevra/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T13:47:55.879Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -108,12 +108,17 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Manifestations de samedi : rentrez vos bacs dès la collecte de ce vendredi",
+              "date": "2026-10-22",
+              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/manifestations-de-samedi-rentrez-vos-bacs-des-la-collecte-de-ce"
+            },
+            {
               "label": "Inauguration de la ligne 17 - Retour sur une journée de fête",
               "date": "2026-10-20",
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +140,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "en": {
       "canton": "GE",
@@ -145,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "325",
+          "value": "340",
           "note": "from the site’s events calendar"
         }
       ],
@@ -174,51 +179,51 @@
               "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat-0"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+            },
+            {
+              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "detail": "Genève",
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+            },
+            {
               "label": "Café quartier : Initiation au goût du pain, pain artisanal ou industriel, quelles différences ?",
               "detail": "Genève",
               "date": "2026-10-26",
               "url": "https://www.geneve.ch/agenda/cafe-quartier-initiation-gout-pain-pain-artisanal-industriel-differences"
             },
             {
-              "label": "PILATES - 15frs - Sécheron",
+              "label": "Cafés genevois: la vie même",
               "detail": "Genève",
               "date": "2026-10-26",
-              "url": "https://www.geneve.ch/agenda/pilates-15frs-secheron"
+              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
             },
             {
-              "label": "Pratiques corporelles matinales avec Cindy Van Acker",
+              "label": "Dance First Think Later",
               "detail": "Genève",
               "date": "2026-10-26",
-              "url": "https://www.geneve.ch/agenda/pratiques-corporelles-matinales-cindy-acker"
+              "url": "https://www.geneve.ch/agenda/dance-first-think-later"
             },
             {
-              "label": "Prayers",
+              "label": "Exposition « Transparences, saison III, Dreams » avec le duo d'artistes Ana D & Noora K",
               "detail": "Genève",
               "date": "2026-10-26",
-              "url": "https://www.geneve.ch/agenda/prayers"
-            },
-            {
-              "label": "Soirée PréPro : LEÏLA | OSCAR",
-              "detail": "Genève",
-              "date": "2026-10-26",
-              "url": "https://www.geneve.ch/agenda/soiree-prepro-leila-oscar"
-            },
-            {
-              "label": "Ara Malikian «Intruso»",
-              "detail": "Victoria Hall",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/evenements/musique/geneve/ara-malikian-intruso_AyCDikJ"
-            },
-            {
-              "label": "PICTURE THIS",
-              "detail": "Alhambra",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/evenements/musique/geneve/picture-this_A6ymCVx"
+              "url": "https://www.geneve.ch/agenda/exposition-transparences-saison-dreams-artistes-noora"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/geneva/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T13:47:55.879Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -226,12 +231,17 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Manifestations de samedi : rentrez vos bacs dès la collecte de ce vendredi",
+              "date": "2026-10-22",
+              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/manifestations-de-samedi-rentrez-vos-bacs-des-la-collecte-de-ce"
+            },
+            {
               "label": "Inauguration de la ligne 17 - Retour sur une journée de fête",
               "date": "2026-10-20",
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +263,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "de": {
       "canton": "GE",
@@ -263,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "325",
+          "value": "340",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -292,51 +302,51 @@
               "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat-0"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+            },
+            {
+              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "detail": "Genève",
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+            },
+            {
               "label": "Café quartier : Initiation au goût du pain, pain artisanal ou industriel, quelles différences ?",
               "detail": "Genève",
               "date": "2026-10-26",
               "url": "https://www.geneve.ch/agenda/cafe-quartier-initiation-gout-pain-pain-artisanal-industriel-differences"
             },
             {
-              "label": "PILATES - 15frs - Sécheron",
+              "label": "Cafés genevois: la vie même",
               "detail": "Genève",
               "date": "2026-10-26",
-              "url": "https://www.geneve.ch/agenda/pilates-15frs-secheron"
+              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
             },
             {
-              "label": "Pratiques corporelles matinales avec Cindy Van Acker",
+              "label": "Dance First Think Later",
               "detail": "Genève",
               "date": "2026-10-26",
-              "url": "https://www.geneve.ch/agenda/pratiques-corporelles-matinales-cindy-acker"
+              "url": "https://www.geneve.ch/agenda/dance-first-think-later"
             },
             {
-              "label": "Prayers",
+              "label": "Exposition « Transparences, saison III, Dreams » avec le duo d'artistes Ana D & Noora K",
               "detail": "Genève",
               "date": "2026-10-26",
-              "url": "https://www.geneve.ch/agenda/prayers"
-            },
-            {
-              "label": "Soirée PréPro : LEÏLA | OSCAR",
-              "detail": "Genève",
-              "date": "2026-10-26",
-              "url": "https://www.geneve.ch/agenda/soiree-prepro-leila-oscar"
-            },
-            {
-              "label": "Ara Malikian «Intruso»",
-              "detail": "Victoria Hall",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/evenements/musique/geneve/ara-malikian-intruso_AyCDikJ"
-            },
-            {
-              "label": "Stellen Sie sich Folgendes vor",
-              "detail": "Alhambra",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/evenements/musique/geneve/picture-this_A6ymCVx"
+              "url": "https://www.geneve.ch/agenda/exposition-transparences-saison-dreams-artistes-noora"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/genf/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T13:47:55.879Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -344,12 +354,17 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Manifestations de samedi : rentrez vos bacs dès la collecte de ce vendredi",
+              "date": "2026-10-22",
+              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/manifestations-de-samedi-rentrez-vos-bacs-des-la-collecte-de-ce"
+            },
+            {
               "label": "Inauguration de la ligne 17 - Retour sur une journée de fête",
               "date": "2026-10-20",
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +386,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "fr": {
       "canton": "GE",
@@ -381,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "325",
+          "value": "340",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -410,51 +425,51 @@
               "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat-0"
             },
             {
+              "label": "Ateliers numériques d'octobre - Permanence numérique Rive droite",
+              "detail": "Genève",
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/ateliers-numeriques-octobre-permanence-numerique-rive"
+            },
+            {
+              "label": "Balades Théâtralisées - D'une rive à l'autre (10ème saison)",
+              "detail": "Genève",
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-rive-autre-10eme-saison"
+            },
+            {
+              "label": "Balades Théâtralisées - De la haute-ville aux bas-fonds",
+              "detail": "Genève",
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/balades-theatralisees-haute-ville-fonds"
+            },
+            {
               "label": "Café quartier : Initiation au goût du pain, pain artisanal ou industriel, quelles différences ?",
               "detail": "Genève",
               "date": "2026-10-26",
               "url": "https://www.geneve.ch/agenda/cafe-quartier-initiation-gout-pain-pain-artisanal-industriel-differences"
             },
             {
-              "label": "PILATES - 15frs - Sécheron",
+              "label": "Cafés genevois: la vie même",
               "detail": "Genève",
               "date": "2026-10-26",
-              "url": "https://www.geneve.ch/agenda/pilates-15frs-secheron"
+              "url": "https://www.geneve.ch/agenda/cafes-genevois-vie"
             },
             {
-              "label": "Pratiques corporelles matinales avec Cindy Van Acker",
+              "label": "Dance First Think Later",
               "detail": "Genève",
               "date": "2026-10-26",
-              "url": "https://www.geneve.ch/agenda/pratiques-corporelles-matinales-cindy-acker"
+              "url": "https://www.geneve.ch/agenda/dance-first-think-later"
             },
             {
-              "label": "Prayers",
+              "label": "Exposition « Transparences, saison III, Dreams » avec le duo d'artistes Ana D & Noora K",
               "detail": "Genève",
               "date": "2026-10-26",
-              "url": "https://www.geneve.ch/agenda/prayers"
-            },
-            {
-              "label": "Soirée PréPro : LEÏLA | OSCAR",
-              "detail": "Genève",
-              "date": "2026-10-26",
-              "url": "https://www.geneve.ch/agenda/soiree-prepro-leila-oscar"
-            },
-            {
-              "label": "Ara Malikian «Intruso»",
-              "detail": "Victoria Hall",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/evenements/musique/geneve/ara-malikian-intruso_AyCDikJ"
-            },
-            {
-              "label": "IMAGINEZ ÇA",
-              "detail": "Alhambra",
-              "date": "2026-10-26",
-              "url": "https://www.guidle.com/it/evenements/musique/geneve/picture-this_A6ymCVx"
+              "url": "https://www.geneve.ch/agenda/exposition-transparences-saison-dreams-artistes-noora"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/geneve/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T13:47:55.879Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -462,12 +477,17 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Manifestations de samedi : rentrez vos bacs dès la collecte de ce vendredi",
+              "date": "2026-10-22",
+              "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/manifestations-de-samedi-rentrez-vos-bacs-des-la-collecte-de-ce"
+            },
+            {
               "label": "Inauguration de la ligne 17 - Retour sur une journée de fête",
               "date": "2026-10-20",
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +509,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     }
   }
 }

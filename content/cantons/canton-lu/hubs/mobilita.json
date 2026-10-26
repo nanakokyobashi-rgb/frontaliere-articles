@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T10:46:37.997Z",
-  "contentHash": "91cadfb9d1eaaf3051ced9f30edd0d0ca7979b2132085ff879043feb32271d3c",
+  "updatedAt": "2026-10-26T17:18:45.341Z",
+  "contentHash": "158822d588117d81ba6da7f824e2f40d56a3350a0720278a262c80694cbcd434",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-26T05:21:20.958Z",
+      "updatedAt": "2026-10-26T13:38:17.324Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-25T19:59:33.449Z",
+      "updatedAt": "2026-10-26T11:33:49.792Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "22",
+          "value": "25",
           "note": "segnalazioni aggiornate: 26 ottobre 2026"
         }
       ],
@@ -49,14 +49,14 @@
               "date": "2026-10-13T05:24:00.000Z"
             },
             {
-              "label": "A14 Luzern -> Zug tra Raccordo autostradale Diramazione Rotsee E Galleria Galleria Rathausen Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "A2 Luzern -> Basel tra Raccordo autostradale Diramazione Gellert E Galleria Galleria Schwarzwald Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffico",
-              "date": "2026-10-26T05:19:00.000Z"
+              "date": "2026-10-26T11:20:00.000Z"
             },
             {
-              "label": "A2 Basel -> Luzern tra Svincolo autostradale Emmen Nord E Raccordo autostradale Diramazione Rotsee Situazione: colonna Causa: traffico congestionato",
+              "label": "Revocato: A2 Luzern -> Basel Galleria Galleria Belchen Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia di destra bloccata Aggiunta 1: si prevedono lunghi…",
               "value": "Traffico",
-              "date": "2026-10-26T05:19:00.000Z"
+              "date": "2026-10-26T12:42:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -90,13 +90,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Offene Stelle: Projektleiter/in Planung öV",
+              "date": "2026-10-26",
+              "url": "https://www.vvl.ch/news/offene-stelle-projektleiter-planung-oev"
+            },
             {
               "label": "Rückmeldungen Fahrplanvernehmlassung",
               "date": "2026-09-24",
@@ -108,7 +113,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -154,7 +159,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "en": {
       "canton": "LU",
@@ -169,7 +174,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "22",
+          "value": "25",
           "note": "reports as of 26 October 2026"
         }
       ],
@@ -186,14 +191,14 @@
               "date": "2026-10-13T05:24:00.000Z"
             },
             {
-              "label": "A14 Luzern -> Zug tra Raccordo autostradale Diramazione Rotsee E Galleria Galleria Rathausen Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "label": "A2 Luzern -> Basel tra Raccordo autostradale Diramazione Gellert E Galleria Galleria Schwarzwald Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffic",
-              "date": "2026-10-26T05:19:00.000Z"
+              "date": "2026-10-26T11:20:00.000Z"
             },
             {
-              "label": "A2 Basel -> Luzern tra Svincolo autostradale Emmen Nord E Raccordo autostradale Diramazione Rotsee Situazione: colonna Causa: traffico congestionato",
+              "label": "Revocato: A2 Luzern -> Basel Galleria Galleria Belchen Situazione: problemi di traffico Causa: veicolo in avaria Limitazione del traffico: corsia di destra bloccata Aggiunta 1: si prevedono lunghi…",
               "value": "Traffic",
-              "date": "2026-10-26T05:19:00.000Z"
+              "date": "2026-10-26T12:42:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -227,13 +232,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Offene Stelle: Projektleiter/in Planung öV",
+              "date": "2026-10-26",
+              "url": "https://www.vvl.ch/news/offene-stelle-projektleiter-planung-oev"
+            },
             {
               "label": "Rückmeldungen Fahrplanvernehmlassung",
               "date": "2026-09-24",
@@ -245,7 +255,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -289,7 +299,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "de": {
       "canton": "LU",
@@ -304,7 +314,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "22",
+          "value": "25",
           "note": "Meldungen vom 26. Oktober 2026"
         }
       ],
@@ -321,14 +331,14 @@
               "date": "2026-10-13T05:24:00.000Z"
             },
             {
-              "label": "A14 Luzern -> Zug zwischen Autobahndreieck Verzweigung Rotsee und Tunnel Rathausen-Tunnel Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "label": "A2 Luzern -> Basel zwischen Autobahndreieck Verzweigung Gellert und Tunnel Schwarzwald-Tunnel Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
               "value": "Verkehr",
-              "date": "2026-10-26T05:19:00.000Z"
+              "date": "2026-10-26T11:20:00.000Z"
             },
             {
-              "label": "A2 Basel -> Luzern zwischen Anschluss Emmen-Nord und Autobahndreieck Verzweigung Rotsee Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "label": "Aufgehoben: A2 Luzern -> Basel Tunnel Belchen-Tunnel Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug Verkehrsführung: rechter Fahrstreifen blockiert Zusatz 1: es ist mit grossem Zeitverlust zu…",
               "value": "Verkehr",
-              "date": "2026-10-26T05:19:00.000Z"
+              "date": "2026-10-26T12:42:00.000Z"
             },
             {
               "label": "H10 Bern <-> Luzern zwischen Ortschaft Wiggen und Ortschaft Kröschenbrunnen Sachlage: Verkehrsbehinderung Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
@@ -362,13 +372,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Offene Stelle: Projektleiter/in Planung öV",
+              "date": "2026-10-26",
+              "url": "https://www.vvl.ch/news/offene-stelle-projektleiter-planung-oev"
+            },
             {
               "label": "Rückmeldungen Fahrplanvernehmlassung",
               "date": "2026-09-24",
@@ -380,7 +395,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -424,7 +439,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "fr": {
       "canton": "LU",
@@ -439,7 +454,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "22",
+          "value": "25",
           "note": "signalements au 26 octobre 2026"
         }
       ],
@@ -456,14 +471,14 @@
               "date": "2026-10-13T05:24:00.000Z"
             },
             {
-              "label": "A14 Lucerne -> Zoug entre Echangeur Echangeur du Rotsee et Tunnel Tunnel de Rathausen Situation: trafic en accordéon Raison: surcharge de trafic",
+              "label": "A2 Lucerne -> Bâle entre Echangeur Echangeur de Gellert et Tunnel Tunnel du Schwarzwald Situation: trafic en accordéon Raison: surcharge de trafic",
               "value": "Trafic",
-              "date": "2026-10-26T05:19:00.000Z"
+              "date": "2026-10-26T11:20:00.000Z"
             },
             {
-              "label": "A2 Bâle -> Lucerne entre Jonction autoroutière Emmen-Nord et Echangeur Echangeur du Rotsee Situation: bouchon Raison: surcharge de trafic",
+              "label": "Révoqué: A2 Lucerne -> Bâle Tunnel Tunnel du Belchen Situation: trafic perturbé Raison: véhicule en panne Gestion du trafic: voie de droite bloquée Complément 1: retards importants prévus",
               "value": "Trafic",
-              "date": "2026-10-26T05:19:00.000Z"
+              "date": "2026-10-26T12:42:00.000Z"
             },
             {
               "label": "H10 Berne <-> Lucerne entre Localité Wiggen et Localité Kröschenbrunnen Situation: trafic perturbé Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
@@ -497,13 +512,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Offene Stelle: Projektleiter/in Planung öV",
+              "date": "2026-10-26",
+              "url": "https://www.vvl.ch/news/offene-stelle-projektleiter-planung-oev"
+            },
             {
               "label": "Rückmeldungen Fahrplanvernehmlassung",
               "date": "2026-09-24",
@@ -515,7 +535,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -561,7 +581,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     }
   }
 }

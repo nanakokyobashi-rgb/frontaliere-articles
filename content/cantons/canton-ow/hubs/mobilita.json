@@ -4,17 +4,17 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T10:46:37.997Z",
-  "contentHash": "10df9cfee91b9b402eb0955f861c24d71285795f2e5f5216fefa463a3920b048",
+  "updatedAt": "2026-10-26T17:18:45.341Z",
+  "contentHash": "d20625687a136f0ecbfa562423fc7b929878d5bc8b56f3b7a9bf966405026740",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-26T05:21:20.958Z",
+      "updatedAt": "2026-10-26T13:38:17.324Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-25T19:59:33.449Z",
+      "updatedAt": "2026-10-26T11:33:49.792Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "2",
+          "value": "3",
           "note": "segnalazioni aggiornate: 26 ottobre 2026"
         }
       ],
@@ -83,10 +83,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 27 ottobre 2026",
               "date": "2026-10-22T10:24:00.000Z"
+            },
+            {
+              "label": "A8 Brienz <-> Hergiswil tra Svincolo autostradale Alpnach Süd E Svincolo autostradale Sarnen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 2.6 Limitazione del traffico: nuova…",
+              "value": "Cantiere",
+              "detail": "fine prevista: 17 novembre 2026",
+              "date": "2026-10-26T06:39:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -109,7 +115,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -143,7 +149,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "en": {
       "canton": "OW",
@@ -158,7 +164,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "2",
+          "value": "3",
           "note": "reports as of 26 October 2026"
         }
       ],
@@ -209,10 +215,16 @@
               "value": "Roadworks",
               "detail": "until 27 October 2026",
               "date": "2026-10-22T10:24:00.000Z"
+            },
+            {
+              "label": "A8 Brienz <-> Hergiswil tra Svincolo autostradale Alpnach Süd E Svincolo autostradale Sarnen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 2.6 Limitazione del traffico: nuova…",
+              "value": "Roadworks",
+              "detail": "until 17 November 2026",
+              "date": "2026-10-26T06:39:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -235,7 +247,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -269,7 +281,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "de": {
       "canton": "OW",
@@ -284,7 +296,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "2",
+          "value": "3",
           "note": "Meldungen vom 26. Oktober 2026"
         }
       ],
@@ -335,10 +347,16 @@
               "value": "Baustelle",
               "detail": "bis 27. Oktober 2026",
               "date": "2026-10-22T10:24:00.000Z"
+            },
+            {
+              "label": "A8 Brienz <-> Hergiswil zwischen Anschluss Alpnach-Süd und Anschluss Sarnen-Süd Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.6 Verkehrsführung: veränderte Verkehrsführung auf einen…",
+              "value": "Baustelle",
+              "detail": "bis 17. November 2026",
+              "date": "2026-10-26T06:39:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -361,7 +379,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -395,7 +413,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "fr": {
       "canton": "OW",
@@ -410,7 +428,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "2",
+          "value": "3",
           "note": "signalements au 26 octobre 2026"
         }
       ],
@@ -461,10 +479,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 27 octobre 2026",
               "date": "2026-10-22T10:24:00.000Z"
+            },
+            {
+              "label": "A8 Brienz <-> Hergiswil entre Jonction autoroutière Alpnach-Sud et Jonction autoroutière Sarnen-Sud Situation: trafic perturbé travaux, longueur [km] 2.6 Gestion du trafic: nouveau plan de…",
+              "value": "Chantier",
+              "detail": "jusqu’au 17 novembre 2026",
+              "date": "2026-10-26T06:39:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -487,7 +511,7 @@
               "url": "https://www.ow.ch/_rte/information/138031"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -521,7 +545,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     }
   }
 }

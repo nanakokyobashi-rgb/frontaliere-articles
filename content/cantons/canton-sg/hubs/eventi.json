@@ -4,12 +4,12 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "2f4831ad7591eb73d41092085f370937303e572f29fd1a42cf6b1de185855f65",
+  "updatedAt": "2026-10-26T17:18:45.341Z",
+  "contentHash": "1b7c2768038c248397837066b647dbe8e549133f9b37d4e5ade7e7da8aec1a63",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-26T13:47:55.879Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "79",
+          "value": "80",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,6 +32,12 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
+            {
+              "label": "«Der Fuchs – Meister der Anpassung»",
+              "detail": "St. Gallen",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-fuchs-meister-der-anpassung/"
+            },
             {
               "label": "Workshop - The Beatles - Interpretation & Groove",
               "detail": "Musikzentrum St. Gallen, St. Gallen",
@@ -85,17 +91,11 @@
               "detail": "Bad Ragaz",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/wenn-die-schulter-zwickt-ursachen-loesungen-und-praevention/"
-            },
-            {
-              "label": "Abend-Vortrag «Begegnungen mit dem Fuchs»",
-              "detail": "Naturmuseum St. Gallen, St. Gallen",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/abend-vortrag-begegnungen-mit-dem-fuchs_A9aWPiY"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/san-gallo/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T13:47:55.879Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "79",
+          "value": "80",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,6 +137,12 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
+            {
+              "label": "«Der Fuchs – Meister der Anpassung»",
+              "detail": "St. Gallen",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-fuchs-meister-der-anpassung/"
+            },
             {
               "label": "Workshop - The Beatles - Interpretation & Groove",
               "detail": "Musikzentrum St. Gallen, St. Gallen",
@@ -190,17 +196,11 @@
               "detail": "Bad Ragaz",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/wenn-die-schulter-zwickt-ursachen-loesungen-und-praevention/"
-            },
-            {
-              "label": "Abend-Vortrag «Begegnungen mit dem Fuchs»",
-              "detail": "Naturmuseum St. Gallen, St. Gallen",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/abend-vortrag-begegnungen-mit-dem-fuchs_A9aWPiY"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/st-gallen/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T13:47:55.879Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "79",
+          "value": "80",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,6 +242,12 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
+            {
+              "label": "«Der Fuchs – Meister der Anpassung»",
+              "detail": "St. Gallen",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-fuchs-meister-der-anpassung/"
+            },
             {
               "label": "Workshop - The Beatles - Interpretation & Groove",
               "detail": "Musikzentrum St. Gallen, St. Gallen",
@@ -295,17 +301,11 @@
               "detail": "Bad Ragaz",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/wenn-die-schulter-zwickt-ursachen-loesungen-und-praevention/"
-            },
-            {
-              "label": "Abend-Vortrag «Begegnungen mit dem Fuchs»",
-              "detail": "Naturmuseum St. Gallen, St. Gallen",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/abend-vortrag-begegnungen-mit-dem-fuchs_A9aWPiY"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/st-gallen/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T13:47:55.879Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "79",
+          "value": "80",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,6 +347,12 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
+            {
+              "label": "«Der Fuchs – Meister der Anpassung»",
+              "detail": "St. Gallen",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/der-fuchs-meister-der-anpassung/"
+            },
             {
               "label": "Workshop - The Beatles - Interpretation & Groove",
               "detail": "Musikzentrum St. Gallen, St. Gallen",
@@ -400,17 +406,11 @@
               "detail": "Bad Ragaz",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/wenn-die-schulter-zwickt-ursachen-loesungen-und-praevention/"
-            },
-            {
-              "label": "Abend-Vortrag «Begegnungen mit dem Fuchs»",
-              "detail": "Naturmuseum St. Gallen, St. Gallen",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/abend-vortrag-begegnungen-mit-dem-fuchs_A9aWPiY"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/saint-gall/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T13:47:55.879Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     }
   }
 }

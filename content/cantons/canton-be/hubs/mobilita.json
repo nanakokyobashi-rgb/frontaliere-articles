@@ -4,17 +4,17 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T10:46:37.997Z",
-  "contentHash": "303193329187647c3876451bcbcd5dfc7f2bdffa0d7475316479639d60b72864",
+  "updatedAt": "2026-10-26T17:18:45.341Z",
+  "contentHash": "b0723bb66fa7c96410947d41f3e5c61f958dbb4d5e3554c41bed758e52d182b6",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-26T05:21:20.958Z",
+      "updatedAt": "2026-10-26T13:38:17.324Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-25T19:59:33.449Z",
+      "updatedAt": "2026-10-26T11:33:49.792Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "21",
+          "value": "22",
           "note": "segnalazioni aggiornate: 26 ottobre 2026"
         },
         {
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +129,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/sanierungsarbeiten-an-der-brunnadernstrasse"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -175,7 +175,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "en": {
       "canton": "BE",
@@ -185,7 +185,7 @@
       "keyFacts": [
         {
           "label": "Road closures in force or imminent",
-          "value": "21",
+          "value": "22",
           "note": "reports as of 26 October 2026"
         },
         {
@@ -249,7 +249,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -287,7 +287,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/sanierungsarbeiten-an-der-brunnadernstrasse"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -333,7 +333,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "de": {
       "canton": "BE",
@@ -343,7 +343,7 @@
       "keyFacts": [
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "21",
+          "value": "22",
           "note": "Meldungen vom 26. Oktober 2026"
         },
         {
@@ -407,7 +407,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -445,7 +445,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/sanierungsarbeiten-an-der-brunnadernstrasse"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -491,7 +491,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "fr": {
       "canton": "BE",
@@ -501,7 +501,7 @@
       "keyFacts": [
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "21",
+          "value": "22",
           "note": "signalements au 26 octobre 2026"
         },
         {
@@ -565,7 +565,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -603,7 +603,7 @@
               "url": "https://www.bern.ch/mediencenter/medienmitteilungen/aktuell_ptk/sanierungsarbeiten-an-der-brunnadernstrasse"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -649,7 +649,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     }
   }
 }

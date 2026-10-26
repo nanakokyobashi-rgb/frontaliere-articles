@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "273d830cb8a401e53f056d144b8cd373797625ce5326b51d36e2909891923203",
+  "updatedAt": "2026-10-26T17:18:45.341Z",
+  "contentHash": "1fb70045937e0cfa81998f379d1ecb0332982d11cba09f2aafba4a4872e9f831",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-26T13:47:55.879Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-25T19:59:33.449Z",
+      "updatedAt": "2026-10-26T11:33:49.792Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "55",
+          "value": "62",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -85,21 +85,21 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-fuer-familien-gaenseblueemli-im-rosengarten/"
             },
             {
+              "label": "«Trop chaud» - Klimaseniorinnen - Film im Rahmen der «Lebensreise»",
+              "detail": "Luzern",
+              "date": "2026-10-28",
+              "url": "https://www.stadtluzern.ch/sitzung/7629670"
+            },
+            {
               "label": "Einführung für Lehrer:innen",
               "detail": "Museum Sammlung Rosengart Luzern, Luzern",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "Panflötenkonzert mit Duo PanTastico",
-              "detail": "Evang.-ref. Kirche Hochdorf, Hochdorf",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/hochdorf/panfloetenkonzert-mit-duo-pantastico_Adw4Ae6"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/lucerna/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T13:47:55.879Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -137,7 +137,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -171,7 +171,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "en": {
       "canton": "LU",
@@ -181,7 +181,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "55",
+          "value": "62",
           "note": "from the site’s events calendar"
         }
       ],
@@ -239,21 +239,21 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-fuer-familien-gaenseblueemli-im-rosengarten/"
             },
             {
+              "label": "«Trop chaud» - Klimaseniorinnen - Film im Rahmen der «Lebensreise»",
+              "detail": "Luzern",
+              "date": "2026-10-28",
+              "url": "https://www.stadtluzern.ch/sitzung/7629670"
+            },
+            {
               "label": "Einführung für Lehrer:innen",
               "detail": "Museum Sammlung Rosengart Luzern, Luzern",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "Panflötenkonzert mit Duo PanTastico",
-              "detail": "Evang.-ref. Kirche Hochdorf, Hochdorf",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/hochdorf/panfloetenkonzert-mit-duo-pantastico_Adw4Ae6"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/lucerne/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T13:47:55.879Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -291,7 +291,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -325,7 +325,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "de": {
       "canton": "LU",
@@ -335,7 +335,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "55",
+          "value": "62",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -393,21 +393,21 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-fuer-familien-gaenseblueemli-im-rosengarten/"
             },
             {
+              "label": "«Trop chaud» - Klimaseniorinnen - Film im Rahmen der «Lebensreise»",
+              "detail": "Luzern",
+              "date": "2026-10-28",
+              "url": "https://www.stadtluzern.ch/sitzung/7629670"
+            },
+            {
               "label": "Einführung für Lehrer:innen",
               "detail": "Museum Sammlung Rosengart Luzern, Luzern",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "Panflötenkonzert mit Duo PanTastico",
-              "detail": "Evang.-ref. Kirche Hochdorf, Hochdorf",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/hochdorf/panfloetenkonzert-mit-duo-pantastico_Adw4Ae6"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/luzern/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T13:47:55.879Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -445,7 +445,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -479,7 +479,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "fr": {
       "canton": "LU",
@@ -489,7 +489,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "55",
+          "value": "62",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -547,21 +547,21 @@
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-fuer-familien-gaenseblueemli-im-rosengarten/"
             },
             {
+              "label": "«Trop chaud» - Klimaseniorinnen - Film im Rahmen der «Lebensreise»",
+              "detail": "Luzern",
+              "date": "2026-10-28",
+              "url": "https://www.stadtluzern.ch/sitzung/7629670"
+            },
+            {
               "label": "Einführung für Lehrer:innen",
               "detail": "Museum Sammlung Rosengart Luzern, Luzern",
               "date": "2026-10-28",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
-            },
-            {
-              "label": "Panflötenkonzert mit Duo PanTastico",
-              "detail": "Evang.-ref. Kirche Hochdorf, Hochdorf",
-              "date": "2026-10-28",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/hochdorf/panfloetenkonzert-mit-duo-pantastico_Adw4Ae6"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/lucerne/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T13:47:55.879Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -599,7 +599,7 @@
               "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -633,7 +633,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     }
   }
 }

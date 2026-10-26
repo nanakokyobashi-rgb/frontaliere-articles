@@ -4,12 +4,12 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "7306833b3333d0976ee069e7a2ec80f69a8590154d75184946759d976404ac55",
+  "updatedAt": "2026-10-26T17:18:45.341Z",
+  "contentHash": "3854875ad9cd8a86d7e4085b3ae0b6482b10991858f68834fc24e2b5a817bdc1",
   "blocks": [
     {
       "id": "prossimi-eventi",
-      "updatedAt": "2026-10-25T02:23:31.213Z",
+      "updatedAt": "2026-10-26T13:47:55.879Z",
       "keyFacts": 1
     }
   ],
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "54",
+          "value": "59",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -95,7 +95,7 @@
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
           "sourceUrl": "/eventi/nidvaldo/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T13:47:55.879Z"
         }
       ],
       "curatedArticles": [
@@ -117,7 +117,7 @@
           "url": "/eventi/nidvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "en": {
       "canton": "NW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "54",
+          "value": "59",
           "note": "from the site’s events calendar"
         }
       ],
@@ -200,7 +200,7 @@
           ],
           "sourceName": "Frontaliere Ticino events calendar",
           "sourceUrl": "/en/events/nidwalden/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T13:47:55.879Z"
         }
       ],
       "curatedArticles": [
@@ -222,7 +222,7 @@
           "url": "/en/events/nidwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "de": {
       "canton": "NW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "54",
+          "value": "59",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -305,7 +305,7 @@
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
           "sourceUrl": "/de/veranstaltungen/nidwalden/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T13:47:55.879Z"
         }
       ],
       "curatedArticles": [
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "fr": {
       "canton": "NW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "54",
+          "value": "59",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -410,7 +410,7 @@
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
           "sourceUrl": "/fr/evenements/nidwald/",
-          "updatedAt": "2026-10-25T02:23:31.213Z"
+          "updatedAt": "2026-10-26T13:47:55.879Z"
         }
       ],
       "curatedArticles": [
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/nidwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     }
   }
 }

@@ -4,18 +4,13 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T10:46:37.997Z",
-  "contentHash": "31ccf792b9663adf66f6b2f66faa085d8a459032bbda1c9ffdc5ff6c61c3dd81",
+  "updatedAt": "2026-10-26T17:18:45.341Z",
+  "contentHash": "5d52d26e43898d0327e5bbcb55a0d8f82f864c7f38147a01140b24a174f9e006",
   "blocks": [
     {
       "id": "premi-cassa-malati",
       "updatedAt": "2026-10-25T09:11:35.438Z",
       "keyFacts": 1
-    },
-    {
-      "id": "meteo",
-      "updatedAt": "2026-10-26T05:02:23.290Z",
-      "keyFacts": 0
     }
   ],
   "locales": {
@@ -47,20 +42,6 @@
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Meteo",
-          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
-          "items": [
-            {
-              "label": "Glarus",
-              "value": "4 °C",
-              "detail": "oggi da 4 a 14 °C"
-            }
-          ],
-          "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-26T05:02:23.290Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +121,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "en": {
       "canton": "GL",
@@ -170,20 +151,6 @@
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Weather",
-          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
-          "items": [
-            {
-              "label": "Glarus",
-              "value": "4 °C",
-              "detail": "today from 4 to 14 °C"
-            }
-          ],
-          "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-26T05:02:23.290Z"
         }
       ],
       "curatedArticles": [
@@ -259,7 +226,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "de": {
       "canton": "GL",
@@ -289,20 +256,6 @@
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Wetter",
-          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
-          "items": [
-            {
-              "label": "Glarus",
-              "value": "4 °C",
-              "detail": "heute 4 bis 14 °C"
-            }
-          ],
-          "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-26T05:02:23.290Z"
         }
       ],
       "curatedArticles": [
@@ -378,7 +331,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "fr": {
       "canton": "GL",
@@ -408,20 +361,6 @@
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
           "updatedAt": "2026-10-25T09:11:35.438Z"
-        },
-        {
-          "id": "meteo",
-          "title": "Météo",
-          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
-          "items": [
-            {
-              "label": "Glarus",
-              "value": "4 °C",
-              "detail": "aujourd’hui de 4 à 14 °C"
-            }
-          ],
-          "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-26T05:02:23.290Z"
         }
       ],
       "curatedArticles": [
@@ -493,7 +432,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     }
   }
 }

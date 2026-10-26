@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T10:46:37.997Z",
-  "contentHash": "07b0d7ee56425a781b40a5c9372e5deb8b67fe659299a8ed0d3bfde5c4f1133f",
+  "updatedAt": "2026-10-26T17:18:45.341Z",
+  "contentHash": "d608e86ebec46a6f2d87a5d01e6f445f61c319078eb15acc5bc278e51074bbe1",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-26T05:21:20.958Z",
+      "updatedAt": "2026-10-26T13:38:17.324Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-25T19:59:33.449Z",
+      "updatedAt": "2026-10-26T11:33:49.792Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "4",
+          "value": "6",
           "note": "segnalazioni aggiornate: 26 ottobre 2026"
         },
         {
@@ -129,43 +129,45 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
+              "label": "Via Bartolomeo Varenna, Locarno in tutte le direzioni Situazione: chiusa Causa: incendio",
+              "value": "Chiusura",
+              "date": "2026-10-26T13:03:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Chiasso tra Svincolo autostradale Lugano Sud E Galleria Galleria San Nicolao Situazione: colonna Causa: veicolo in avaria Limitazione del traffico: corsia di destra chiusa",
+              "value": "Chiusura",
+              "date": "2026-10-26T13:29:00.000Z"
+            },
+            {
               "label": "A2 S. Gottardo -> Chiasso Svincolo autostradale Lugano Nord Situazione: raccordo autostradale chiuso in entrata cantiere",
               "value": "Chiusura",
               "detail": "fine prevista: 29 ottobre 2026",
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo tra Raccordo autostradale Diramazione Mendrisio E Svincolo autostradale Melide/Bissone Situazione: colonna Causa: traffico congestionato",
+              "label": "Revocato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Giornico E Galleria Galleria Biaschina Situazione: problemi di traffico Causa: veicolo in avaria mezzo pesante in avaria Limitazione del…",
               "value": "Traffico",
-              "date": "2026-10-26T05:01:00.000Z"
+              "date": "2026-10-26T10:29:00.000Z"
             },
             {
-              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
-              "value": "Cantiere",
-              "detail": "fine prevista: 29 dicembre 2028",
-              "date": "2021-06-25T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso -> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 29 dicembre 2028",
-              "date": "2022-04-20T03:00:00.000Z"
-            },
-            {
-              "label": "A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Airolo E Svincolo autostradale Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Causa: lavori stradali sulla banchina",
-              "value": "Cantiere",
-              "detail": "fine prevista: 28 giugno 2028",
-              "date": "2024-11-14T15:24:00.000Z"
+              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10",
+              "value": "Traffico",
+              "date": "2026-10-26T13:22:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Alcuni collegamenti TILO S50 sostituiti da bus tra Busto Arsizio e Malpensa Aeroporto dal 2 novembre al 4 dicembre e dal 9 all’11 dicembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.tilo.ch/avvisi/261026_lavori-Busto-Arsizio.html"
+            },
             {
               "label": "Introduzione ora invernale",
               "date": "2026-10-21",
@@ -190,14 +192,9 @@
               "label": "Collegamenti TILO S50 soppressi tra Malpensa Aeroporto T1 e T2 dal 12 al 24 ottobre 2026.",
               "date": "2026-10-05",
               "url": "https://www.tilo.ch/avvisi/2601005_Deviatoi-Novate.html"
-            },
-            {
-              "label": "Collegamenti TILO S30 soppressi tra Bellinzona e Luino dal 10 all’11 ottobre 2026.",
-              "date": "2026-10-05",
-              "url": "https://www.tilo.ch/avvisi/261005_Totale-Luino.html"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "en": {
       "canton": "TI",
@@ -308,7 +305,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "4",
+          "value": "6",
           "note": "reports as of 26 October 2026"
         },
         {
@@ -400,43 +397,45 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
+              "label": "Via Bartolomeo Varenna, Locarno in tutte le direzioni Situazione: chiusa Causa: incendio",
+              "value": "Closure",
+              "date": "2026-10-26T13:03:00.000Z"
+            },
+            {
+              "label": "A2 S. Gottardo -> Chiasso tra Svincolo autostradale Lugano Sud E Galleria Galleria San Nicolao Situazione: colonna Causa: veicolo in avaria Limitazione del traffico: corsia di destra chiusa",
+              "value": "Closure",
+              "date": "2026-10-26T13:29:00.000Z"
+            },
+            {
               "label": "A2 S. Gottardo -> Chiasso Svincolo autostradale Lugano Nord Situazione: raccordo autostradale chiuso in entrata cantiere",
               "value": "Closure",
               "detail": "until 29 October 2026",
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> S. Gottardo tra Raccordo autostradale Diramazione Mendrisio E Svincolo autostradale Melide/Bissone Situazione: colonna Causa: traffico congestionato",
+              "label": "Revocato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Giornico E Galleria Galleria Biaschina Situazione: problemi di traffico Causa: veicolo in avaria mezzo pesante in avaria Limitazione del…",
               "value": "Traffic",
-              "date": "2026-10-26T05:01:00.000Z"
+              "date": "2026-10-26T10:29:00.000Z"
             },
             {
-              "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
-              "value": "Roadworks",
-              "detail": "until 29 December 2028",
-              "date": "2021-06-25T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso -> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Limitazione del traffico: nuova viabilità Aggiunta 1: limite temporaneo…",
-              "value": "Roadworks",
-              "detail": "until 29 December 2028",
-              "date": "2022-04-20T03:00:00.000Z"
-            },
-            {
-              "label": "A2 S. Gottardo -> Chiasso tra Parcheggio Area di dosaggio Airolo E Svincolo autostradale Airolo Situazione: problemi di traffico cantiere, lunghezza [km] 0.1 Causa: lavori stradali sulla banchina",
-              "value": "Roadworks",
-              "detail": "until 28 June 2028",
-              "date": "2024-11-14T15:24:00.000Z"
+              "label": "A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 10",
+              "value": "Traffic",
+              "date": "2026-10-26T13:22:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Alcuni collegamenti TILO S50 sostituiti da bus tra Busto Arsizio e Malpensa Aeroporto dal 2 novembre al 4 dicembre e dal 9 all’11 dicembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.tilo.ch/avvisi/261026_lavori-Busto-Arsizio.html"
+            },
             {
               "label": "Introduzione ora invernale",
               "date": "2026-10-21",
@@ -461,14 +460,9 @@
               "label": "Collegamenti TILO S50 soppressi tra Malpensa Aeroporto T1 e T2 dal 12 al 24 ottobre 2026.",
               "date": "2026-10-05",
               "url": "https://www.tilo.ch/avvisi/2601005_Deviatoi-Novate.html"
-            },
-            {
-              "label": "Collegamenti TILO S30 soppressi tra Bellinzona e Luino dal 10 all’11 ottobre 2026.",
-              "date": "2026-10-05",
-              "url": "https://www.tilo.ch/avvisi/261005_Totale-Luino.html"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -563,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "de": {
       "canton": "TI",
@@ -578,7 +572,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "4",
+          "value": "6",
           "note": "Meldungen vom 26. Oktober 2026"
         },
         {
@@ -670,43 +664,45 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
+              "label": "Via Bartolomeo Varenna, Locarno in beide Richtungen Sachlage: Strecke gesperrt Ursache: Brand",
+              "value": "Sperrung",
+              "date": "2026-10-26T13:03:00.000Z"
+            },
+            {
+              "label": "A2 Gotthard -> Chiasso zwischen Anschluss Lugano-Süd und Tunnel S. Nicolao-Tunnel Sachlage: Stau Ursache: Pannenfahrzeug Verkehrsführung: rechter Fahrstreifen gesperrt",
+              "value": "Sperrung",
+              "date": "2026-10-26T13:29:00.000Z"
+            },
+            {
               "label": "A2 Gotthard -> Chiasso Anschluss Lugano-Nord Sachlage: Einfahrt gesperrt Baustelle",
               "value": "Sperrung",
               "detail": "bis 29. Oktober 2026",
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> Gotthard zwischen Autobahndreieck Verzweigung Mendrisio und Anschluss Melide/Bissone Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "label": "Aufgehoben: A2 Chiasso -> Gotthard zwischen Anschluss Giornico und Tunnel Biaschina-Tunnel Sachlage: Verkehrsbehinderung Ursache: Pannenfahrzeug defekter LKW Verkehrsführung: rechter Fahrstreifen…",
               "value": "Verkehr",
-              "date": "2026-10-26T05:01:00.000Z"
+              "date": "2026-10-26T10:29:00.000Z"
             },
             {
-              "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
-              "value": "Baustelle",
-              "detail": "bis 29. Dezember 2028",
-              "date": "2021-06-25T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso -> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Verkehrsführung: veränderte Verkehrsführung Zusatz 1: vorübergehende Begrenzung der Breite…",
-              "value": "Baustelle",
-              "detail": "bis 29. Dezember 2028",
-              "date": "2022-04-20T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Gotthard -> Chiasso zwischen Parkplatz Dosierstelle Airolo und Anschluss Airolo Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1 Ursache: Arbeiten am Pannenstreifen",
-              "value": "Baustelle",
-              "detail": "bis 28. Juni 2028",
-              "date": "2024-11-14T15:24:00.000Z"
+              "label": "A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 1.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
+              "value": "Verkehr",
+              "date": "2026-10-26T13:22:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Alcuni collegamenti TILO S50 sostituiti da bus tra Busto Arsizio e Malpensa Aeroporto dal 2 novembre al 4 dicembre e dal 9 all’11 dicembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.tilo.ch/avvisi/261026_lavori-Busto-Arsizio.html"
+            },
             {
               "label": "Introduzione ora invernale",
               "date": "2026-10-21",
@@ -731,14 +727,9 @@
               "label": "Collegamenti TILO S50 soppressi tra Malpensa Aeroporto T1 e T2 dal 12 al 24 ottobre 2026.",
               "date": "2026-10-05",
               "url": "https://www.tilo.ch/avvisi/2601005_Deviatoi-Novate.html"
-            },
-            {
-              "label": "Collegamenti TILO S30 soppressi tra Bellinzona e Luino dal 10 all’11 ottobre 2026.",
-              "date": "2026-10-05",
-              "url": "https://www.tilo.ch/avvisi/261005_Totale-Luino.html"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -833,7 +824,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     },
     "fr": {
       "canton": "TI",
@@ -848,7 +839,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "4",
+          "value": "6",
           "note": "signalements au 26 octobre 2026"
         },
         {
@@ -940,43 +931,45 @@
               "date": "2026-10-16T07:31:00.000Z"
             },
             {
+              "label": "Via Bartolomeo Varenna, Locarno dans les deux sens Situation: fermé Raison: incendie",
+              "value": "Fermeture",
+              "date": "2026-10-26T13:03:00.000Z"
+            },
+            {
+              "label": "A2 St-Gothard -> Chiasso entre Jonction autoroutière Lugano-Sud et Tunnel Tunnel de S. Nicolao Situation: bouchon Raison: véhicule en panne Gestion du trafic: voie de droite fermée",
+              "value": "Fermeture",
+              "date": "2026-10-26T13:29:00.000Z"
+            },
+            {
               "label": "A2 St-Gothard -> Chiasso Jonction autoroutière Lugano-Nord Situation: entrée fermée travaux",
               "value": "Fermeture",
               "detail": "jusqu’au 29 octobre 2026",
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "A2 Chiasso -> St-Gothard entre Echangeur Echangeur de Mendrisio et Jonction autoroutière Melide/Bissone Situation: bouchon Raison: surcharge de trafic",
+              "label": "Révoqué: A2 Chiasso -> St-Gothard entre Jonction autoroutière Giornico et Tunnel Tunnel de la Biaschina Situation: trafic perturbé Raison: véhicule en panne poids lourd en panne Gestion du trafic…",
               "value": "Trafic",
-              "date": "2026-10-26T05:01:00.000Z"
+              "date": "2026-10-26T10:29:00.000Z"
             },
             {
-              "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
-              "value": "Chantier",
-              "detail": "jusqu’au 29 décembre 2028",
-              "date": "2021-06-25T03:00:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso -> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Gestion du trafic: nouveau plan de circulation Complément 1: limitation temporaire de…",
-              "value": "Chantier",
-              "detail": "jusqu’au 29 décembre 2028",
-              "date": "2022-04-20T03:00:00.000Z"
-            },
-            {
-              "label": "A2 St-Gothard -> Chiasso entre Parking Aire de dosage Airolo et Jonction autoroutière Airolo Situation: trafic perturbé travaux, longueur [km] 0.1 Raison: travaux sur la bande d'arrêt d'urgence",
-              "value": "Chantier",
-              "detail": "jusqu’au 28 juin 2028",
-              "date": "2024-11-14T15:24:00.000Z"
+              "label": "A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre. [min] 10",
+              "value": "Trafic",
+              "date": "2026-10-26T13:22:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Alcuni collegamenti TILO S50 sostituiti da bus tra Busto Arsizio e Malpensa Aeroporto dal 2 novembre al 4 dicembre e dal 9 all’11 dicembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.tilo.ch/avvisi/261026_lavori-Busto-Arsizio.html"
+            },
             {
               "label": "Introduzione ora invernale",
               "date": "2026-10-21",
@@ -1001,14 +994,9 @@
               "label": "Collegamenti TILO S50 soppressi tra Malpensa Aeroporto T1 e T2 dal 12 al 24 ottobre 2026.",
               "date": "2026-10-05",
               "url": "https://www.tilo.ch/avvisi/2601005_Deviatoi-Novate.html"
-            },
-            {
-              "label": "Collegamenti TILO S30 soppressi tra Bellinzona e Luino dal 10 all’11 ottobre 2026.",
-              "date": "2026-10-05",
-              "url": "https://www.tilo.ch/avvisi/261005_Totale-Luino.html"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T11:33:49.792Z"
         }
       ],
       "curatedArticles": [
@@ -1104,7 +1092,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T17:18:45.341Z"
     }
   }
 }
