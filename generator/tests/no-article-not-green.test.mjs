@@ -377,9 +377,10 @@ test('solo un arresto cooperativo provato può differire senza run report', () =
   const commitStart = workflow.indexOf('      - name: Commit and push');
   assert.ok(commitStart >= 0, 'step Commit and push non trovato');
   const commit = workflow.slice(commitStart);
-  const missingReport = commit.indexOf('if [ ! -s .tmp/create-article-run-report.json ]; then');
-  assert.ok(missingReport >= 0, 'guard del report mancante non trovato');
-  const branch = commit.slice(missingReport, commit.indexOf('\n          fi', missingReport));
+  const missingReport = commit.indexOf('has_run_report=false');
+  const patGuard = commit.indexOf('\n          if [ -z "${GITHUB_PAT:-}" ]', missingReport);
+  assert.ok(missingReport >= 0 && patGuard > missingReport, 'guard del report mancante non trovato');
+  const branch = commit.slice(missingReport, patGuard);
   assert.match(branch, /steps\.generate\.outputs\.article/);
   assert.match(branch, /steps\.generate\.outputs\.cooperative_stop/);
   assert.match(branch, /git reset --mixed HEAD/);
@@ -394,6 +395,27 @@ test('solo un arresto cooperativo provato può differire senza run report', () =
     /if \[ "\$\{\{ steps\.generate\.outputs\.cooperative_stop \}\}" = "true" \] && \[ "\$\{\{ steps\.generate\.outputs\.article \}\}" != "true" \][\s\S]*?exit 0[\s\S]*?echo "::error::create-article run report is missing/,
     'un report mancante senza arresto cooperativo deve restare fail-closed',
   );
+});
+
+test('un no-article dichiarato può salvare bookkeeping senza report, mai contenuto', () => {
+  for (const file of [WORKFLOW, CORE_WORKFLOW]) {
+    const workflow = fs.readFileSync(file, 'utf8');
+    const commitStart = workflow.indexOf('      - name: Commit and push');
+    assert.ok(commitStart >= 0, `${path.basename(file)}: step Commit and push non trovato`);
+    const commit = workflow.slice(commitStart);
+    const missingReport = commit.indexOf('RUN_REPORT=');
+    const pushLoop = commit.indexOf('for attempt in 1 2 3 4 5; do');
+    assert.ok(missingReport >= 0 && pushLoop > missingReport, `${path.basename(file)}: guard report non delimitabile`);
+    const guard = commit.slice(missingReport, pushLoop);
+    assert.match(guard, /has_run_report=false/);
+    assert.match(guard, /steps\.generate\.outputs\.declared/);
+    assert.match(guard, /git diff --cached --name-only -- content\//);
+    assert.match(guard, /staged_content/);
+    assert.match(guard, /staged content; refusing to publish unverified article files/);
+    assert.match(guard, /declared no-article run report is missing; committing bookkeeping without content/);
+    assert.match(commit, /if \[ "\$has_run_report" = "true" \]; then[\s\S]*?check-post-rebase-uniqueness\.mjs/);
+    assert.match(commit, /post-rebase uniqueness skipped: declared no-article run has no report or article identity/);
+  }
 });
 
 test('il run report viene isolato per tentativo e validato prima del passaggio stabile', () => {
