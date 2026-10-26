@@ -55,6 +55,10 @@ import { assertHubLocaleSlug, assertHubTopicEntries } from './lib/assert-hub-loc
 import { sitemapPaths } from './publish-section-edge.mjs';
 import { validateEdgeSectionRegistry } from './lib/section-registry.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
+import {
+  parseRetryAfterHeader,
+  parseStrictRetryAfterValue as parseStrictRetryAfterValueShared,
+} from '../generator/scripts/lib/retry-after.mjs';
 
 export const API_BASE_DEFAULT = 'https://nanakokyobashi-rgb.github.io/frontaliere-articles';
 export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
@@ -110,8 +114,10 @@ async function waitBeforeRetry(
   retryAfterMs,
   maxAttempts,
   remainingBudget,
+  allowFinalServerDelay = false,
 ) {
-  if (attempt >= maxAttempts) return true;
+  if (attempt >= maxAttempts
+      && !(allowFinalServerDelay && Number.isFinite(retryAfterMs) && retryAfterMs > 0)) return true;
   const remaining = remainingBudget();
   if (remaining <= 0) return false;
   const baseDelayMs = Number.isFinite(retryDelayMs) && retryDelayMs > 0
@@ -133,29 +139,19 @@ async function waitBeforeRetry(
  * @param {number} [nowMs]
  * @returns {number|null}
  */
-export function parseRetryAfter(response, nowMs = Date.now()) {
-  let raw;
-  try {
-    raw = response?.headers?.get?.('retry-after');
-  } catch {
-    return null;
-  }
-  if (raw === null || raw === undefined) return null;
-  const value = String(raw).trim();
-  if (!value) return null;
+/**
+ * Parse one Retry-After value with the reconcile-specific cap.
+ *
+ * @param {unknown} raw
+ * @param {number} [nowMs]
+ * @returns {number|null}
+ */
+export function parseStrictRetryAfterValue(raw, nowMs = Date.now()) {
+  return parseStrictRetryAfterValueShared(raw, nowMs, RECONCILE_FETCH_MAX_RETRY_AFTER_MS);
+}
 
-  let delayMs;
-  if (/^\d+$/.test(value)) {
-    const seconds = Number(value);
-    delayMs = Number.isFinite(seconds) ? seconds * 1000 : Number.NaN;
-  } else {
-    const retryAtMs = Date.parse(value);
-    delayMs = Number.isFinite(retryAtMs) && Number.isFinite(nowMs)
-      ? retryAtMs - nowMs
-      : Number.NaN;
-  }
-  if (!Number.isFinite(delayMs)) return null;
-  return Math.min(RECONCILE_FETCH_MAX_RETRY_AFTER_MS, Math.max(0, Math.ceil(delayMs)));
+export function parseRetryAfter(response, nowMs = Date.now()) {
+  return parseRetryAfterHeader(response, nowMs, RECONCILE_FETCH_MAX_RETRY_AFTER_MS);
 }
 
 /** La chiave R2 (come URL sul CDN) di un path canonico di sezione. */
@@ -561,6 +557,18 @@ export async function headState(
         ))) return 'unknown';
         continue;
       }
+      // A HEAD endpoint can be unsupported while still telling us when the
+      // fallback is safe to retry. Preserve that server-directed delay before
+      // issuing GET; otherwise the fallback immediately defeats Retry-After.
+      if (headRetryAfterMs !== null && !(await waitBeforeRetry(
+        attempt,
+        0,
+        sleepImpl,
+        headRetryAfterMs,
+        2,
+        remainingBudget,
+        true,
+      ))) return 'unknown';
       const get = await request('GET');
       if (get.status === 200) {
         releaseFetchWithRefTimeout(get);
