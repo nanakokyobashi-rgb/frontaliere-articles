@@ -36,6 +36,9 @@ const blogMetaCantonVsFr: Record<string, string> = {
     'blog.article.salute-vallese-2026-ovs.title': 'Rapport OVS : 83% des Valaisans en bonne santé, 13% obèses',
     'blog.article.salute-vallese-2026-ovs.excerpt': '83% des adultes valaisans se sentent en bonne santé en 2022 Espérance de vie : 85,9 ans pour les femmes, 82,4 pour les hommes Les plus de 65 ans représentent',
     'blog.article.salute-vallese-2026-ovs.imageAlt': 'Vue aérienne de la vallée du Rhône en Valais avec vignobles et sommets alpins',
+    'blog.article.salario-minimo-valese-voto.title': 'La droite et l’économie valaisanne contre un salaire minimum de CHF 22',
+    'blog.article.salario-minimo-valese-voto.excerpt': 'La droite et l’économie valaisanne disent non à CHF 22 de l’heure.',
+    'blog.article.salario-minimo-valese-voto.imageAlt': 'Contexte de travail en Valais lié au débat sur le salaire minimum.',
 };
 
 export default blogMetaCantonVsFr;

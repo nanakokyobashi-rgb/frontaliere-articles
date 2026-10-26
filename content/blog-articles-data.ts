@@ -45810,7 +45810,7 @@ const RAW_ARTICLES = [
  id: 'disparita-stipendi-frontalieri',
  category: 'fiscale',
  date: '2026-10-24T21:09:51.910Z',
- image: '/images/blog/article-frontalieri-ticino-indagine-salari-2026.webp',
+ image: '/images/blog/article-disparita-stipendi-frontalieri.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['TI'],

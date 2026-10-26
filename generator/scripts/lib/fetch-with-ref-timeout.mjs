@@ -13,6 +13,15 @@ const BODY_METHODS = new Set(['arrayBuffer', 'blob', 'bytes', 'formData', 'json'
 const ACTIVE_DEADLINES = new WeakMap();
 export const DEFAULT_FETCH_TIMEOUT_MS = 15_000;
 
+/** Cleanup must not depend on a non-standard AbortSignal being cooperative. */
+export function removeAbortListenerSafely(signal, listener) {
+  try {
+    signal?.removeEventListener?.('abort', listener);
+  } catch {
+    // A throwing adapter must not keep the referenced deadline alive.
+  }
+}
+
 function bodyChunkToBytes(value) {
   if (typeof value === 'string') return new TextEncoder().encode(value);
   if (value instanceof Uint8Array) return Uint8Array.from(value);
@@ -203,7 +212,7 @@ export async function fetchWithRefTimeout(
     if (cleaned) return;
     cleaned = true;
     clearTimeout(timer);
-    upstreamSignal?.removeEventListener('abort', forwardAbort);
+    removeAbortListenerSafely(upstreamSignal, forwardAbort);
   };
 
   if (upstreamSignal) {

@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "878759d5090482ebc71bda23ebe49c08faba2cfaafd04cc3f236a386e7ae4912",
+  "updatedAt": "2026-10-26T17:57:05.656Z",
+  "contentHash": "ae28c0a06a8a30648f8a2b318619232f6266b8017395695a0355ef2f13c1ceb6",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "40 comuni del Canton San Gallo chiudono il 2025 in positivo",
+          "url": "/articoli-san-gallo/positive-chiusure-2025-sg/",
+          "excerpt": "Su 75 comuni politici, 40 hanno chiuso il 2025 con avanzo; l'eccedenza aggregata è di circa CHF 28 milioni.",
+          "date": "2026-10-26T17:48:42.058Z"
+        },
+        {
           "title": "Tamponamento A13 a Sevelen: due feriti il 25 ottobre 2026",
           "url": "/articoli-san-gallo/unfall-a13-sevelen-2026/",
           "excerpt": "Il 25 ottobre due auto si sono tamponate sulla A13 a Sevelen Feriti un conducente di 79 anni e la passeggera di 86 Il conducente della seconda auto, 53 anni, è",
@@ -106,12 +112,6 @@
           "url": "/articoli-san-gallo/kolumbanstrasse-nuova-velostrasse/",
           "excerpt": "Il 23 ottobre 2026 è stata completata la nuova configurazione della Kolumbanstrasse, che ora include 700 metri di itinerario ciclabile prioritario.",
           "date": "2026-10-24T09:05:50.183Z"
-        },
-        {
-          "title": "Abrogazione regolamento Stadtfonds e Steuerfuss 2026 approvato a Wil",
-          "url": "/articoli-san-gallo/stadtfonds-steuerfuss-wil/",
-          "excerpt": "Il Parlamento cittadino ha abrogato il regolamento Stadtfonds il 27 agosto 2026; lo Steuerfuss 2026 è fissato al 115 per cento con partecipazione del 48,34 per cento.",
-          "date": "2026-10-24T08:43:34.169Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T17:57:05.656Z"
     },
     "en": {
       "canton": "SG",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "40 municipalities in the Canton of St. Gallen end 2025 with a surplus",
+          "url": "/en/st-gallen-articles/positive-closures-2025-sg/",
+          "excerpt": "Of 75 political municipalities, 40 closed 2025 with a surplus; the aggregate surplus is approximately CHF 28 million.",
+          "date": "2026-10-26T17:48:42.058Z"
+        },
+        {
           "title": "Rear-end collision on A13 in Sevelen: two injured on October 25, 2026",
           "url": "/en/st-gallen-articles/accident-a13-sevelen-2026/",
           "excerpt": "On October 25, two cars rear-ended each other on the A13 at Sevelen A 79-year-old driver and an 86-year-old passenger were injured The driver of the second car",
@@ -217,12 +223,6 @@
           "url": "/en/st-gallen-articles/kolumbanstrasse-new-velostrasse/",
           "excerpt": "On October 23, 2026, the new configuration of Kolumbanstrasse was completed, which now includes 700 meters of priority cycling route.",
           "date": "2026-10-24T09:05:50.183Z"
-        },
-        {
-          "title": "Repeal of the Stadtfonds regulation and 2026 tax rate approved in Wil",
-          "url": "/en/st-gallen-articles/repeal-of-the-stadtfonds-regulation-and-2026-tax-rate-approved-in-wil/",
-          "excerpt": "The city parliament repealed the Stadtfonds regulation on August 27, 2026; the 2026 Steuerfuss is set at 115 percent with participation of 48,34 percent.",
-          "date": "2026-10-24T08:43:34.169Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T17:57:05.656Z"
     },
     "de": {
       "canton": "SG",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "40 Gemeinden des Kantons St. Gallen schliessen das Jahr 2025 positiv ab",
+          "url": "/de/st-gallen-artikel/40-gemeinden-des-kantons-st-gallen-schliessen-das-jahr-2025-positiv-ab/",
+          "excerpt": "Von 75 politischen Gemeinden schlossen 40 das Jahr 2025 mit einem Überschuss ab; der kumulierte Überschuss beträgt rund CHF 28 Millionen.",
+          "date": "2026-10-26T17:48:42.058Z"
+        },
+        {
           "title": "Auffahrunfall auf der A13 bei Sevelen: zwei Verletzte am 25. Oktober 2026",
           "url": "/de/st-gallen-artikel/auffahrunfall-auf-der-a13-bei-sevelen-zwei-verletzte-am-25-oktober-2026/",
           "excerpt": "Am 25. Oktober fuhren auf der A13 bei Sevelen zwei Autos aufeinander auf Ein 79-jähriger Fahrer und die 86-jährige Beifahrerin wurden verletzt Der 53-jährige",
@@ -328,12 +334,6 @@
           "url": "/de/st-gallen-artikel/kolumbanstrasse-neue-velostrasse/",
           "excerpt": "Am 23. Oktober 2026 wurde die neue Gestaltung der Kolumbanstrasse fertiggestellt, die nun 700 Meter einer prioritären Veloroute umfasst.",
           "date": "2026-10-24T09:05:50.183Z"
-        },
-        {
-          "title": "Aufhebung des Reglements Stadtfonds und Genehmigung des Steuerfusses 2026 in Wil",
-          "url": "/de/st-gallen-artikel/aufhebung-des-reglements-stadtfonds-und-genehmigung-des-steuerfusses-2026-in-wil/",
-          "excerpt": "Das Stadtparlament hat das Reglement Stadtfonds am 27.",
-          "date": "2026-10-24T08:43:34.169Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T17:57:05.656Z"
     },
     "fr": {
       "canton": "SG",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "40 communes du canton de Saint-Gall clôturent l'année 2025 en positif",
+          "url": "/fr/articles-saint-gall/positifs-clotures-2025-sg/",
+          "excerpt": "Sur 75 communes politiques, 40 ont clôturé l'année 2025 avec un excédent ; l'excédent cumulé est d'environ 28 millions de CHF.",
+          "date": "2026-10-26T17:48:42.058Z"
+        },
+        {
           "title": "Collision par l’arrière sur l’A13 à Sevelen : deux blessés le 25 octobre 2026",
           "url": "/fr/articles-saint-gall/accident-a13-sevelen-2026/",
           "excerpt": "Le 25 octobre, deux voitures se sont percutées par l’arrière sur l’A13 à Sevelen Un conducteur de 79 ans et la passagère de 86 ans ont été blessés Le conducteur",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-saint-gall/kolumbanstrasse-nouvelle-velostrasse/",
           "excerpt": "Le 23 octobre 2026, la nouvelle configuration de la Kolumbanstrasse a été achevée, et elle comprend désormais 700 mètres d’itinéraire cyclable prioritaire.",
           "date": "2026-10-24T09:05:50.183Z"
-        },
-        {
-          "title": "Abrogation du règlement Stadtfonds et du Steuerfuss 2026 approuvé à Wil",
-          "url": "/fr/articles-saint-gall/abrogation-du-reglement-stadtfonds-et-du-steuerfuss-2026-approuve-a-wil/",
-          "excerpt": "Le Parlement de la ville a abrogé le règlement Stadtfonds le 27 août 2026 ; le Steuerfuss 2026 est fixé à 115 pour cent avec une participation de 48,34 pour cent.",
-          "date": "2026-10-24T08:43:34.169Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T17:57:05.656Z"
     }
   }
 }

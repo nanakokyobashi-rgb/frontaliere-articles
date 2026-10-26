@@ -39,6 +39,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.salario-minimo-basilea-2027.title': 'Basel minimum wage increases to 22.50 CHF gross from 2027',
     'blog.article.salario-minimo-basilea-2027.excerpt': 'From January 1st, 2027, the minimum wage will be 22,50 CHF gross The planned increase is 30 cents per hour The adjustment follows the Swiss mixed index Canton →',
     'blog.article.salario-minimo-basilea-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sissach-parco-giochi-fasce-quiete.title': 'Sissach: new quiet hours for the playground',
+    'blog.article.sissach-parco-giochi-fasce-quiete.excerpt': 'On weekdays, quiet hours from 12-13 and silence from 20 onward are required; on Saturdays, quiet from 18 onward is required, and on Sundays, noisy activities are prohibited.',
+    'blog.article.sissach-parco-giochi-fasce-quiete.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBasileaEn;

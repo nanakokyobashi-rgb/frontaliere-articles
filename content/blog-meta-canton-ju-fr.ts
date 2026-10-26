@@ -21,6 +21,9 @@ const blogMetaCantonJuFr: Record<string, string> = {
     'blog.article.giura-aumento-sussidi-famiglie.title': 'Le Jura augmente les aides pour les familles à faible revenu',
     'blog.article.giura-aumento-sussidi-famiglie.excerpt': 'Le plafond du supplément passe de 300 à 330 CHF par mois et par parent pour les familles dont le RDU est inférieur à 18\'000 CHF, à compter de 2027.',
     'blog.article.giura-aumento-sussidi-famiglie.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.governo-giurassiano-nomine-2027.title': 'Le gouvernement Jura nomme deux chiffres pour 2027',
+    'blog.article.governo-giurassiano-nomine-2027.excerpt': 'Sandrine Crevoisier dirigera le nouveau Service pénitentiaire.',
+    'blog.article.governo-giurassiano-nomine-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonJuFr;

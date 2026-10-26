@@ -39,6 +39,9 @@ const blogMetaCantonBasileaDe: Record<string, string> = {
     'blog.article.salario-minimo-basilea-2027.title': 'Mindestlohn in Basel steigt ab 2027 auf 22.50 CHF brutto',
     'blog.article.salario-minimo-basilea-2027.excerpt': 'Ab dem 1. Januar 2027 beträgt der Mindestlohn 22,50 CHF brutto Die vorgesehene Erhöhung beträgt 30 Rappen pro Stunde Die Anpassung folgt dem Schweizer',
     'blog.article.salario-minimo-basilea-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sissach-parco-giochi-fasce-quiete.title': 'Sissach: neue Ruhezeiten für den Spielplatz',
+    'blog.article.sissach-parco-giochi-fasce-quiete.excerpt': 'An Werktagen gilt eine Ruhepause von 12-13 Uhr und ab 20 Uhr Ruhe; samstags gilt Ruhe ab 18 Uhr und sonntags sind lärmende Aktivitäten verboten.',
+    'blog.article.sissach-parco-giochi-fasce-quiete.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonBasileaDe;
