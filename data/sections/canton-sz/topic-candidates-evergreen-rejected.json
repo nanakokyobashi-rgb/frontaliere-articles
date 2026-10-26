@@ -4,10 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/budget-2027-meggen-plant-defizit-und-steuersenkung-art-1728300": {
-      "section": "canton-sz",
-      "ts": 1792851255578
-    },
     "canton-sz::https://www.bote.ch/nachrichten/schweizundwelt/bund-prueft-tempo-80-auf-schweizer-autobahnen-art-1728491": {
       "section": "canton-sz",
       "ts": 1792868843927
@@ -47,6 +43,14 @@
     "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/luzerner-bahnhofstrasse-sorgt-im-kantonsrat-fuer-kritik-art-1728675": {
       "section": "canton-sz",
       "ts": 1793011221056
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/mehrere-verkehrsunfaelle-zwei-verletzte-hoher-sachschaden-und-ein-stau-im-morgenverkehr-auf-der-a2-art-1728722": {
+      "section": "canton-sz",
+      "ts": 1793032128756
+    },
+    "canton-sz::https://www.marchanzeiger.ch/2026/10/26/jede-gemeinde-muesste-fuenf-prozent-ihres-budgets-fuer-soziale-kontakte-ausgeben": {
+      "section": "canton-sz",
+      "ts": 1793032379995
     }
   }
 }
