@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-elezioni-friburgo-8-novembre.webp",
+      "sha256": "31c99e9cfa3b2f029116b35884512c3895b616ab3cf5590d17e1e09afefc0993"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-elezioni-friburgo-8-novembre-480w.webp",
+      "sha256": "1414d1a22c9e43ccb1579bfbd8642c8c301400139dac0e51f90e553859ff1903"
+    }
+  ]
 }
