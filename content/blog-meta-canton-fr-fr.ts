@@ -51,6 +51,9 @@ const blogMetaCantonFrFr: Record<string, string> = {
     'blog.article.rolex-acquisisce-cpautomation.title': 'Rolex acquiert la société industrielle CPAutomation SA',
     'blog.article.rolex-acquisisce-cpautomation.excerpt': 'Le groupe horloger Rolex a acquis la société industrielle CPAutomation SA de Villaz-Saint-Pierre, partenaire de longue date comptant environ 120 employés.',
     'blog.article.rolex-acquisisce-cpautomation.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.friburgo-no-linea-diretta.title': 'Fribourg : le Conseil d’État rejette la ligne ferroviaire directe Fribourg-Bulle',
+    'blog.article.friburgo-no-linea-diretta.excerpt': 'Fribourg ne veut pas d’une ligne ferroviaire directe vers Bulle Le postulat a été approuvé en mai 2022 : 87 voix contre 3 Le projet est jugé coûteux',
+    'blog.article.friburgo-no-linea-diretta.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonFrFr;
