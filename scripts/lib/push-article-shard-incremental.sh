@@ -582,7 +582,7 @@ _attempt() {
   head_tree="$(git -C "$stage" rev-parse HEAD^{tree})"
   if [ "$new_tree" = "$head_tree" ]; then
     if [ "$last_skipped_newer_count" -gt 0 ]; then
-      echo "$section-$loc article shard: remote newer publication kept — no local paths eligible for push ($last_skipped_newer_count skipped)"
+      echo "$section-$loc article shard: remote newer publication kept — no content changes vs remote; no local paths eligible for push ($last_skipped_newer_count skipped)"
       last_push_status='remote-newer'
     else
       echo "$section-$loc article shard: no content changes vs remote — clean no-op ($new_count new, prev_n=$prev_n)"
