@@ -96,7 +96,7 @@ test('il path del manifest e\' risolto lazy e sovrascrivibile, cosi\' un test no
 test('mirrorEventImage interroga il manifest PRIMA di toccare la rete', () => {
   const fn = body('mirrorEventImage');
   const probe = fn.indexOf('loadEventImageManifest()');
-  const network = fn.indexOf('await fetch(');
+  const network = fn.indexOf('fetchEventImageWithRefTimeout(sourceUrl)');
   assert.notEqual(probe, -1, 'mirrorEventImage non consulta il manifest');
   assert.notEqual(network, -1);
   assert.ok(probe < network, 'il probe del manifest deve precedere il fetch');
@@ -104,12 +104,25 @@ test('mirrorEventImage interroga il manifest PRIMA di toccare la rete', () => {
   // l'unico dedup rimasto se il manifest non ha caricato.
   assert.ok(fn.indexOf('existsSync') > -1 && fn.indexOf('existsSync') < network);
   assert.match(SRC, /EVENT_IMAGE_FETCH_TIMEOUT_MS/);
-  assert.match(fn, /signal:\s*AbortSignal\.timeout\(EVENT_IMAGE_FETCH_TIMEOUT_MS\)/);
+  assert.match(body('fetchEventImageWithRefTimeout'), /signal:\s*AbortSignal\.timeout\(effectiveTimeoutMs\)/);
   // Ogni immagine viene registrata subito dopo la scrittura, non a fine run:
   // questo job ha una storia di kill da `timeout-minutes` prima del commit finale.
   const write = fn.indexOf('writeFileSync(path.join(EVENT_IMAGE_DIR');
   const record = fn.indexOf('recordEventImage(');
   assert.ok(write > -1 && record > write, 'recordEventImage deve seguire la scrittura del file');
+});
+
+test('il timeout immagini è risolto per richiesta e resta agganciato al reader', () => {
+  const resolver = body('resolveEventImageFetchTimeout');
+  assert.match(resolver, /value === undefined \|\| value === null \|\| value === ''/);
+  assert.match(resolver, /try \{\s+numeric = Number\(value\);\s+\} catch/);
+  assert.match(resolver, /Math\.max\(1, Math\.floor\(numeric\)\)/);
+
+  const fetchHelper = body('fetchEventImageWithRefTimeout');
+  assert.match(fetchHelper, /resolveEventImageFetchTimeout/);
+  assert.match(fetchHelper, /AbortSignal\.timeout\(effectiveTimeoutMs\)/);
+  assert.match(fetchHelper, /headers: \{ 'User-Agent': EVENT_IMAGE_USER_AGENT \}/);
+  assert.match(body('mirrorEventImage'), /fetchEventImageWithRefTimeout\(sourceUrl\)/);
 });
 
 test('encodeEventImage limita ENTRAMBI gli assi e non ingrandisce mai un file gia\' ottimizzato', () => {
