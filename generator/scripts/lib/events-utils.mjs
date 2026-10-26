@@ -728,6 +728,9 @@ export function resolveEventImageFetchTimeout(value = process.env.EVENT_IMAGE_FE
   if (value === undefined || value === null || value === '') {
     return DEFAULT_EVENT_IMAGE_FETCH_TIMEOUT_MS;
   }
+  if (typeof value === 'string' && value.trim() === '') {
+    return DEFAULT_EVENT_IMAGE_FETCH_TIMEOUT_MS;
+  }
   let numeric;
   try {
     numeric = Number(value);

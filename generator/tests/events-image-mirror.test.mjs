@@ -115,6 +115,7 @@ test('mirrorEventImage interroga il manifest PRIMA di toccare la rete', () => {
 test('il timeout immagini è risolto per richiesta e resta agganciato al reader', () => {
   const resolver = body('resolveEventImageFetchTimeout');
   assert.match(resolver, /value === undefined \|\| value === null \|\| value === ''/);
+  assert.match(resolver, /typeof value === 'string' && value\.trim\(\) === ''/);
   assert.match(resolver, /try \{\s+numeric = Number\(value\);\s+\} catch/);
   assert.match(resolver, /Math\.max\(1, Math\.floor\(numeric\)\)/);
 
