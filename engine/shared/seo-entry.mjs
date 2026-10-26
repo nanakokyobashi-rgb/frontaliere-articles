@@ -527,8 +527,13 @@ export function staticPropertySpans(block, field) {
 export function readStructuredSeoDescription(block) {
   let structuredData;
   forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
-    if (key === 'structuredData' && block[valueStart] === '{') {
-      structuredData = block.slice(valueStart, valueEnd);
+    if (key === 'structuredData') {
+      // Any later assignment shadows the previous container at runtime. Keep
+      // a slice only for the final object; an array, id, or template value
+      // must clear a stale description from an earlier object.
+      structuredData = block[valueStart] === '{'
+        ? block.slice(valueStart, valueEnd)
+        : undefined;
     }
   });
   return structuredData === undefined

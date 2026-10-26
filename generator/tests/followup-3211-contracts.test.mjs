@@ -47,6 +47,17 @@ test('SEO reader non eredita un campo dal primo structuredData shadowato', () =>
   assert.equal(lastStaticPropertyValue(block, 'datePublished'), '2026-09-01T00:00:00Z');
 });
 
+test('description reader resetta anche quando structuredData finale non è un oggetto', () => {
+  const block = `({
+    structuredData: {
+      description: 'stale description',
+    },
+    structuredData: ['runtime replacement'],
+  })`;
+
+  assert.equal(readStructuredSeoDescription(block), undefined);
+});
+
 test('family source transitions are explicit and fail closed', () => {
   assert.equal(familySourceTransitionState({
     registryPresent: false,
