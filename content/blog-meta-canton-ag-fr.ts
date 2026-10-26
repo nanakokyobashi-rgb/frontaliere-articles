@@ -41,7 +41,7 @@ const blogMetaCantonAgFr: Record<string, string> = {
     'blog.article.riniker-governo-argovia.imageAlt': 'Gouvernement cantonal argovien après l\'élection de Maja Riniker',
     'blog.article.iniziativa-parita-salariale-ag.title': 'Argovie : initiative visant à renforcer l’égalité salariale',
     'blog.article.iniziativa-parita-salariale-ag.excerpt': 'ArbeitAargau et une alliance d’organisations féminines et de partis demandent des analyses salariales à partir de 50 employés, des sanctions et le rétablissement de la Fachstelle.',
-    'blog.article.iniziativa-parita-salariale-ag.imageAlt': 'Initiative pour l\'égalité salariale en Argovie',
+    'blog.article.iniziativa-parita-salariale-ag.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.sezione-medicina-nucleare.title': 'Nuklearforum crée la section Médecine nucléaire suisse',
     'blog.article.sezione-medicina-nucleare.excerpt': 'Le Nuklearforum Schweiz crée une nouvelle section Assemblée constitutive le 12 octobre à Olten KSB, PSI et Molecular Partners parmi les fondateurs Focus',
     'blog.article.sezione-medicina-nucleare.imageAlt': 'Image illustrative en lien avec le sujet de l’article',

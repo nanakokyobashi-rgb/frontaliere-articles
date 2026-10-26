@@ -66,11 +66,13 @@
  * `clampSeoDescriptions` delegates to. Refusing an overlong first token is
  * intentional here: repair must not publish a mid-word SEO description.
  */
+import '../../../host/cantonSectionsBootstrap.mjs';
 import { readFileSync, writeFileSync, unlinkSync, renameSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { corpusPath } from './corpus-paths.mjs';
 import { findSeoEntryMatches } from '../../../scripts/lib/seo-entry.mjs';
+import { staticPropertySpans, staticPropertyValues } from '../../../engine/shared/seo-entry.mjs';
 import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
@@ -292,12 +294,35 @@ export function upsertLocaleMetaFields(src, id, fields, { refreshTitles = false,
   return out;
 }
 
-function replaceIndentedSeoField(source, field, value) {
-  const re = new RegExp(`(\\n)([\\t ]*)(${escapeRegex(field)}: ')((?:[^'\\\\]|\\\\.)*)(',)`);
-  return source.replace(re, (match, newline, indent, prefix, current, suffix) => {
-    if (current === value) return match;
-    return `${newline}${indent}${prefix}${value}${suffix}`;
-  });
+function replaceStaticSeoField(source, field, value, expectedQuote = "'") {
+  const matches = staticPropertyValues(source, field);
+  if (matches.length > 1) {
+    throw new Error(
+      `upsertSeoDescriptionBlock: campo '${field}' duplicato (${matches.length} occorrenze); ` +
+        'refresh rifiutato prima della scrittura.',
+    );
+  }
+  const match = matches[0];
+  if (!match || (expectedQuote && match.quote !== expectedQuote)) return source;
+  const current = source.slice(match.valueStart + 1, match.valueEnd - 1);
+  if (current === value) return source;
+  return source.slice(0, match.valueStart + 1) + value + source.slice(match.valueEnd - 1);
+}
+
+function replaceStructuredDataSeoField(source, field, value, expectedQuote = '"') {
+  const matches = staticPropertySpans(source, 'structuredData');
+  if (matches.length > 1) {
+    throw new Error(
+      "upsertSeoDescriptionBlock: campo 'structuredData' duplicato (" + matches.length +
+        ' occorrenze); refresh rifiutato prima della scrittura.',
+    );
+  }
+  const match = matches[0];
+  if (!match || match.quote !== '{') return source;
+  const nested = source.slice(match.valueStart, match.valueEnd);
+  const updated = replaceStaticSeoField(nested, field, value, expectedQuote);
+  if (updated === nested) return source;
+  return source.slice(0, match.valueStart) + updated + source.slice(match.valueEnd);
 }
 
 /**
@@ -321,31 +346,31 @@ export function upsertSeoDescriptionBlock(src, id, seo, { refreshTitles = false 
   if (refreshTitles) {
     for (const field of ['title', 'ogTitle']) {
       if (typeof seo[field] === 'string' && seo[field].trim()) {
-        block = replaceIndentedSeoField(block, field, escapeForSingleQuoteTS(seo[field]));
+        block = replaceStaticSeoField(block, field, escapeForSingleQuoteTS(seo[field]));
       }
     }
     if (typeof seo.headline === 'string' && seo.headline.trim()) {
-      block = block.replace(/("headline":\s*")((?:[^"\\]|\\.)*)(")/,
-        (_, before, _old, after) => before + JSON.stringify(seo.headline).slice(1, -1) + after);
+      block = replaceStructuredDataSeoField(
+        block,
+        'headline',
+        JSON.stringify(seo.headline).slice(1, -1),
+      );
     }
   }
 
   if (typeof seo.description === 'string' && seo.description.trim() !== '') {
     const single = escapeForSingleQuoteTS(seo.description);
-    block = replaceIndentedSeoField(block, 'description', single);
+    block = replaceStaticSeoField(block, 'description', single);
     // The structuredData twin is double-quoted and escaped the way
     // modifySeoService escapes it elsewhere in create-article.mjs — only `"`,
     // not a full JSON escape (these texts are plain sentences, never containing
     // a literal double quote in practice).
     const dbl = seo.description.replace(/"/g, '\\"');
-    block = block.replace(
-      /("description":\s*")((?:[^"\\]|\\.)*)(")/,
-      (m, g1, g2, g3) => (g2 === dbl ? m : `${g1}${dbl}${g3}`),
-    );
+    block = replaceStructuredDataSeoField(block, 'description', dbl);
   }
   if (typeof seo.ogDescription === 'string' && seo.ogDescription.trim() !== '') {
     const single = escapeForSingleQuoteTS(seo.ogDescription);
-    block = replaceIndentedSeoField(block, 'ogDescription', single);
+    block = replaceStaticSeoField(block, 'ogDescription', single);
   }
 
   if (block === original) return src;

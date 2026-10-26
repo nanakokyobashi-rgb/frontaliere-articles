@@ -32,14 +32,14 @@ import '../../host/cantonSectionsBootstrap.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { findAllSeoEntryMatches } from './seo-entry.mjs';
-import { scanTopLevelArticleRecords } from './article-registry-reader.mjs';
 import {
-  decodeStaticStringLiteral,
-  matchingDelimiter,
-  readStaticStringLiteral,
-  skipStaticTrivia,
-} from './ts-literals.mjs';
+  findAllSeoEntryMatches,
+  lastStaticPropertyValue,
+  readStructuredSeoDescription,
+} from './seo-entry.mjs';
+export { lastStaticPropertyValue, readStructuredSeoDescription };
+import { scanTopLevelArticleRecords } from './article-registry-reader.mjs';
+import { decodeStaticStringLiteral } from './ts-literals.mjs';
 import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
 import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
 import { ARTICLES_PAGE_SIZE } from '../../engine/shared/articleArchiveConfig.mjs';
@@ -834,9 +834,10 @@ export const SEO_CHUNK_DIR = path.join('content', 'seo');
  * scansione lessicale condivisa riconosce solo chiavi reali, gli stessi campi
  * obbligatori e il confine bilanciato della singola voce.
  *
- * Restano un parse in piu' — l'engine non esporta il suo — ma la LISTA dei
- * chunk no: quella si importa da `RSS_SECTIONS` (AGENTS.md #6), ed e' la parte
- * che e' gia' andata alla deriva una volta.
+ * Il resolver lessicale arriva dall'engine tramite il re-export di compatibilita'
+ * in `scripts/lib/seo-entry.mjs`; la LISTA dei chunk si importa da
+ * `RSS_SECTIONS` (AGENTS.md #6), ed e' la parte che e' gia' andata alla deriva
+ * una volta.
  */
 /**
  * Decode the quoted value using the producer shared literal contract.
@@ -846,164 +847,6 @@ export const SEO_CHUNK_DIR = path.join('content', 'seo');
 export function unescapeQuoted(value, quote = "'") {
   if (value === undefined) return undefined;
   return decodeStaticStringLiteral(String(value), quote);
-}
-
-/**
- * Read the value that a JavaScript object literal leaves live for `field`.
- *
- * Object literals use last-write-wins semantics for duplicate properties. A
- * floor reader that returns on the first spelling can therefore count stale
- * SEO metadata while the producer publishes the final spelling.
- */
-export function lastStaticPropertyValue(block, field) {
-  const skipQuotedValue = (start) => {
-    const quote = block[start];
-    for (let cursor = start + 1; cursor < block.length; cursor += 1) {
-      if (block[cursor] === '\\') {
-        cursor += 1;
-        continue;
-      }
-      if (block[cursor] === quote) return cursor + 1;
-    }
-    return block.length;
-  };
-  const skipValue = (start) => {
-    const first = block[start];
-    if (first === "'" || first === '"' || first === '`') return skipQuotedValue(start);
-    if (first === '{' || first === '[' || first === '(') {
-      const close = matchingDelimiter(block, start);
-      return close < 0 ? block.length : close + 1;
-    }
-    let cursor = start;
-    while (cursor < block.length && block[cursor] !== ',' && block[cursor] !== '}') cursor += 1;
-    return cursor;
-  };
-  const objectOpen = block.indexOf('{');
-  let cursor = objectOpen >= 0 ? objectOpen + 1 : block.length;
-  let lastValue;
-  while (cursor < block.length) {
-    cursor = skipStaticTrivia(block, cursor, 'SEO entry', 'seo-field');
-    if (cursor >= block.length) break;
-
-    let key;
-    let keyEnd = cursor;
-    const first = block[cursor];
-    if (first === "'" || first === '"' || first === '`') {
-      const literal = readStaticStringLiteral(block, cursor, 'SEO entry', 'seo-field');
-      key = decodeStaticStringLiteral(literal.value, literal.quote);
-      keyEnd = literal.end;
-    } else if (/[A-Za-z_$]/u.test(first)) {
-      keyEnd += 1;
-      while (/[A-Za-z0-9_$]/u.test(block[keyEnd] || '')) keyEnd += 1;
-      key = block.slice(cursor, keyEnd);
-    } else {
-      cursor += 1;
-      continue;
-    }
-
-    const colon = skipStaticTrivia(block, keyEnd, 'SEO entry', 'seo-field');
-    if (block[colon] !== ':') {
-      cursor = keyEnd;
-      continue;
-    }
-    const valueStart = skipStaticTrivia(block, colon + 1, 'SEO entry', 'seo-field');
-    if (key === field && ["'", '"', '`'].includes(block[valueStart])) {
-      const value = readStaticStringLiteral(block, valueStart, 'SEO entry', 'seo-field');
-      lastValue = decodeStaticStringLiteral(value.value, value.quote);
-    }
-    // `parseSeoBlogs` reads the publication headline and date from the
-    // structuredData object. Re-enter that one known object only for those
-    // fields; other nested values (notably dynamic template URLs) stay
-    // opaque, so a string inside a payload cannot become a false property.
-    if (
-      key === 'structuredData'
-      && (field === 'headline' || field === 'datePublished')
-      && block[valueStart] === '{'
-    ) {
-      const close = matchingDelimiter(block, valueStart);
-      if (close >= 0) {
-        const nested = readSeoStringLiteralField(block.slice(valueStart, close + 1), field);
-        if (nested !== undefined) lastValue = nested;
-      }
-    }
-    // Move over the complete value. A structuredData object contains dynamic
-    // template URLs; scanning one byte at a time would mistake their backtick
-    // for a property key and reject an otherwise valid SEO entry.
-    cursor = skipValue(valueStart);
-  }
-  return lastValue;
-}
-
-function readSeoStringLiteralField(block, field) {
-  return lastStaticPropertyValue(block, field);
-}
-
-/**
- * Read the final `description` inside the JSON-LD-shaped `structuredData`
- * property. It is intentionally separate from the top-level reader: the
- * producer stores the SERP description in both places and the floor must not
- * mistake a string nested in an unrelated object for that field.
- */
-export function readStructuredSeoDescription(block) {
-  const skipQuotedValue = (start) => {
-    const quote = block[start];
-    for (let cursor = start + 1; cursor < block.length; cursor += 1) {
-      if (block[cursor] === '\\') {
-        cursor += 1;
-        continue;
-      }
-      if (block[cursor] === quote) return cursor + 1;
-    }
-    return block.length;
-  };
-  const skipValue = (start) => {
-    const first = block[start];
-    if (first === "'" || first === '"' || first === '`') return skipQuotedValue(start);
-    if (first === '{' || first === '[' || first === '(') {
-      const close = matchingDelimiter(block, start);
-      return close < 0 ? block.length : close + 1;
-    }
-    let cursor = start;
-    while (cursor < block.length && block[cursor] !== ',' && block[cursor] !== '}') cursor += 1;
-    return cursor;
-  };
-  const objectOpen = block.indexOf('{');
-  let cursor = objectOpen >= 0 ? objectOpen + 1 : block.length;
-  let description;
-  while (cursor < block.length) {
-    cursor = skipStaticTrivia(block, cursor, 'SEO entry', 'seo-field');
-    if (cursor >= block.length) break;
-    let key;
-    let keyEnd = cursor;
-    const first = block[cursor];
-    if (first === "'" || first === '"' || first === '`') {
-      const literal = readStaticStringLiteral(block, cursor, 'SEO entry', 'seo-field');
-      key = decodeStaticStringLiteral(literal.value, literal.quote);
-      keyEnd = literal.end;
-    } else if (/[A-Za-z_$]/u.test(first)) {
-      keyEnd += 1;
-      while (/[A-Za-z0-9_$]/u.test(block[keyEnd] || '')) keyEnd += 1;
-      key = block.slice(cursor, keyEnd);
-    } else {
-      cursor += 1;
-      continue;
-    }
-    const colon = skipStaticTrivia(block, keyEnd, 'SEO entry', 'seo-field');
-    if (block[colon] !== ':') {
-      cursor = keyEnd;
-      continue;
-    }
-    const valueStart = skipStaticTrivia(block, colon + 1, 'SEO entry', 'seo-field');
-    if (key === 'structuredData' && block[valueStart] === '{') {
-      const close = matchingDelimiter(block, valueStart);
-      if (close >= 0) {
-        const nested = lastStaticPropertyValue(block.slice(valueStart, close + 1), 'description');
-        if (nested !== undefined) description = nested;
-      }
-    }
-    cursor = skipValue(valueStart);
-  }
-  return description;
 }
 
 function collectSeoEntryMetadataInternal(src, into, feedOnly) {
@@ -1017,15 +860,15 @@ function collectSeoEntryMetadataInternal(src, into, feedOnly) {
     const { id, start, end } = positions[i];
     const block = src.slice(start, end);
     const metadata = {
-      keywords: readSeoStringLiteralField(block, 'keywords'),
-      headline: readSeoStringLiteralField(block, 'headline'),
+      keywords: lastStaticPropertyValue(block, 'keywords'),
+      headline: lastStaticPropertyValue(block, 'headline'),
       // An empty date is semantically absent: RSS eligibility and historical
       // metadata consumers both use undefined for a missing publication date.
-      datePublished: readSeoStringLiteralField(block, 'datePublished') || undefined,
+      datePublished: lastStaticPropertyValue(block, 'datePublished') || undefined,
     };
-    const description = readSeoStringLiteralField(block, 'description')
+    const description = lastStaticPropertyValue(block, 'description')
       ?? readStructuredSeoDescription(block);
-    const ogDescription = readSeoStringLiteralField(block, 'ogDescription');
+    const ogDescription = lastStaticPropertyValue(block, 'ogDescription');
     if (description !== undefined) metadata.description = description;
     if (ogDescription !== undefined) metadata.ogDescription = ogDescription;
     // Solo il percorso RSS applica la validita' del producer prima del dedupe;
