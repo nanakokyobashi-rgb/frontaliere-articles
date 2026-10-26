@@ -30,7 +30,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { CORPUS_SECTIONS } from '../../scripts/lib/corpus-sections.mjs';
 import { patchHubLandingMetadata, SWISS_HUB_ROOT_SEO_IT } from '../../scripts/lib/hub-landing-meta.mjs';
-import { lastStaticPropertyValue } from '../../scripts/lib/seo-static-property.mjs';
+import { lastStaticPropertyValue } from '../../engine/shared/seo-entry.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..', '..');
 const writer = readFileSync(path.join(ROOT, 'scripts', 'refresh-hub-landing.mjs'), 'utf-8');
@@ -52,10 +52,11 @@ test('il reader SEO del refresher applica la semantica last-write-wins', () => {
 });
 
 test('il refresher usa il resolver bilanciato invece del regex first-match', () => {
-  assert.match(writer, /import \{ lastStaticPropertyValue \} from '\.\/lib\/seo-static-property\.mjs';/);
-  assert.match(writer, /lastStaticPropertyValue\(block, 'title'\)/);
-  assert.match(writer, /lastStaticPropertyValue\(block, 'description'\)/);
-  assert.doesNotMatch(writer, /const rxSingle = new RegExp/);
+  assert.match(writer, /lastStaticPropertyValue,\s*\n\s*readStructuredSeoDescription,/);
+  assert.match(writer, /const matchStr = \(block, key\) => flattenMeta\(lastStaticPropertyValue\(block, key\)\);/);
+  assert.match(writer, /title: matchStr\(block, 'ogTitle'\) \|\| title/);
+  assert.match(writer, /desc: matchStr\(block, 'description'\)/);
+  assert.match(writer, /readStructuredSeoDescription\(block\)/);
 });
 
 test('the writer goes through the create-or-refresh entry point', () => {

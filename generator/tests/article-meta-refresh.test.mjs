@@ -271,29 +271,41 @@ test('upsertSeoDescriptionBlock: entry duplicata — rileva indentazione tab', (
   );
 });
 
-test('upsertSeoDescriptionBlock: rifiuta le proprietà SEO duplicate invece del first-match', () => {
-  const duplicateTitle = SEO_FIXTURE.replace(
-    "    title: 'Demo',\n",
-    "    title: 'Demo',\n" +
-      "    title: 'Stale duplicate',\n",
+test('upsertSeoDescriptionBlock: campo SEO top-level duplicato — rifiuta prima della scrittura', () => {
+  const duplicateDescription = SEO_FIXTURE.replace(
+    "    description: 'Corto',\n",
+    "    description: 'Stale',\n    description: 'Corto',\n",
   );
   assert.throws(
-    () => upsertSeoDescriptionBlock(duplicateTitle, 'demo-id', { title: 'Titolo nuovo' }, { refreshTitles: true }),
-    /campo 'title' duplicato.*refresh rifiutato/,
+    () => upsertSeoDescriptionBlock(duplicateDescription, 'demo-id', { description: 'Nuova descrizione' }),
+    /campo 'description' duplicato.*refresh rifiutato/,
   );
+});
 
-  const duplicateStructuredDescription = SEO_FIXTURE.replace(
+test('upsertSeoDescriptionBlock: campo structuredData duplicato — non aggiorna il gemello stale', () => {
+  const duplicateNestedDescription = SEO_FIXTURE.replace(
     '      "description": "Corto",\n',
-    '      "description": "Corto",\n' +
-      '      "description": "Stale duplicate"\n',
+    '      "description": "Nested stale",\n      "description": "Corto",\n',
+  );
+  assert.throws(
+    () => upsertSeoDescriptionBlock(duplicateNestedDescription, 'demo-id', { description: 'Nuova descrizione' }),
+    /campo 'description' duplicato.*refresh rifiutato/,
+  );
+});
+
+test('upsertSeoDescriptionBlock: titolo top-level duplicato — rifiuta prima della scrittura', () => {
+  const duplicateTitle = SEO_FIXTURE.replace(
+    "    title: 'Demo',\n",
+    "    title: 'Demo',\n    title: 'Titolo stale',\n",
   );
   assert.throws(
     () => upsertSeoDescriptionBlock(
-      duplicateStructuredDescription,
+      duplicateTitle,
       'demo-id',
-      { description: 'Descrizione nuova e verificata.' },
+      { title: 'Titolo nuovo' },
+      { refreshTitles: true },
     ),
-    /structuredData campo 'description' duplicato.*refresh rifiutato/,
+    /campo 'title' duplicato.*refresh rifiutato/,
   );
 });
 

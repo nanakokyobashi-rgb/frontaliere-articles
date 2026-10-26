@@ -363,7 +363,11 @@ import {
   sourceRequestBudget,
   stripSourceCitations,
 } from './lib/canton-news-sources.mjs';
-import { findSeoEntryMatches } from '../../engine/shared/seo-entry.mjs';
+import {
+  findSeoEntryMatches,
+  lastStaticPropertyValue,
+  readStructuredSeoDescription,
+} from '../../engine/shared/seo-entry.mjs';
 import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
 import {
   SEO_DESCRIPTION_MAX,
@@ -16818,19 +16822,17 @@ function validateStructuredData(data) {
   const { index, closeIdx } = entryMatches[0];
   const block = src.slice(index, closeIdx + 1);
 
-  // Match single-quoted strings (same logic as ogPagesPlugin matchStr)
-  const matchStr = (key) => {
-    const rx = new RegExp(`${key}:\\s*'((?:[^'\\\\]|\\\\.)*)'`, 'm');
-    const match = block.match(rx);
-    return match ? decodeStaticStringLiteral(match[1], "'", { newlineAs: ' ' }) : '';
-  };
+  // Resolve the final static property exactly as the RSS and OG readers do.
+  // A first-match regex would validate stale metadata when a refresh leaves
+  // duplicate SEO keys in the balanced entry.
+  const matchStr = (key) => lastStaticPropertyValue(block, key) ?? '';
   const title = matchStr('title');
-  const desc = matchStr('description');
+  const desc = matchStr('description') || readStructuredSeoDescription(block) || '';
   const ogT = matchStr('ogTitle') || title;
   const ogD = matchStr('ogDescription') || desc;
   const canonicalPath = readCanonicalPath(block);
-  const datePub = block.match(/"datePublished":\s*"([^"]+)"/)?.[1] ?? '';
-  const dateMod = block.match(/"dateModified":\s*"([^"]+)"/)?.[1] ?? '';
+  const datePub = lastStaticPropertyValue(block, 'datePublished') ?? '';
+  const dateMod = lastStaticPropertyValue(block, 'dateModified') ?? '';
   const siteOrganizationId = `${BASE}/#organization`;
   const imageCreator = block.match(/"image"\s*:\s*\{[\s\S]*?"creator"\s*:\s*\{\s*"@type"\s*:\s*"([^"]+)"/);
   const imageCreatorId = block.match(/"image"\s*:\s*\{[\s\S]*?"creator"\s*:\s*\{[\s\S]*?"@id"\s*:\s*"([^"]+)"/);

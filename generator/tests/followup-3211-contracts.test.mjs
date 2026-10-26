@@ -32,6 +32,32 @@ test('SEO readers follow the producer last-write-wins contract', () => {
   assert.equal(readStructuredSeoDescription(block), 'nested final');
 });
 
+test('SEO reader non eredita un campo dal primo structuredData shadowato', () => {
+  const block = `({
+    structuredData: {
+      headline: 'stale headline',
+      datePublished: '2026-01-01T00:00:00Z',
+    },
+    structuredData: {
+      datePublished: '2026-09-01T00:00:00Z',
+    },
+  })`;
+
+  assert.equal(lastStaticPropertyValue(block, 'headline'), undefined);
+  assert.equal(lastStaticPropertyValue(block, 'datePublished'), '2026-09-01T00:00:00Z');
+});
+
+test('description reader resetta anche quando structuredData finale non è un oggetto', () => {
+  const block = `({
+    structuredData: {
+      description: 'stale description',
+    },
+    structuredData: ['runtime replacement'],
+  })`;
+
+  assert.equal(readStructuredSeoDescription(block), undefined);
+});
+
 test('family source transitions are explicit and fail closed', () => {
   assert.equal(familySourceTransitionState({
     registryPresent: false,

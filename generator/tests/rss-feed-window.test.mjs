@@ -80,6 +80,10 @@ test('RSS e floor usano la stessa proprietà SEO finale', () => {
       '    "description": "Description live",',
       '    "datePublished": "2026-01-01T00:00:00Z",',
       '    "datePublished": "2026-09-12T10:00:00Z",',
+      '    "dateModified": "2026-01-02T00:00:00Z",',
+      '    "dateModified": "2026-09-13T10:00:00Z",',
+      '    "articleSection": "Stale section",',
+      '    "articleSection": "Live section",',
       '  },',
       "  'blog-structured-live': {",
       '    "headline": "Structured headline",',
@@ -105,6 +109,7 @@ test('RSS e floor usano la stessa proprietà SEO finale', () => {
 
     assert.match(feed, /Headline live/);
     assert.match(feed, /Description live/);
+    assert.match(feed, /<category>Live section<\/category>/);
     assert.doesNotMatch(feed, /Headline stale|Description stale/);
     assert.match(feed, /Description only in structured data/);
   } finally {
