@@ -70,8 +70,9 @@ const ordinaryFailureJob = {
   ],
 };
 
-test('il monitor centrale ha permessi check e inoltra dry-run/lookback senza cambiare il settle', () => {
+test('il monitor centrale ha budget bounded, permessi check e inoltra dry-run/lookback', () => {
   assert.match(WORKFLOW, /^  checks: read # leggere l'annotation che prova un vero timeout$/m);
+  assert.match(WORKFLOW, /^    timeout-minutes: 60$/m);
 
   const step = workflowStep('Scan timed out and host-killed jobs');
   assert.match(step, /node scripts\/ci\/scan-job-timeouts\.mjs --dry-run/);
@@ -85,6 +86,7 @@ test('il monitor centrale ha permessi check e inoltra dry-run/lookback senza cam
   assert.match(step, /TIMEOUT_SCAN_LOOKBACK_INPUT: \$\{\{ github\.event\.inputs\.lookback_min \}\}/);
   assert.match(step, /export TIMEOUT_SCAN_LOOKBACK_MINUTES="\$\{TIMEOUT_SCAN_LOOKBACK_INPUT:-\$\{SCAN_RESOLVED_LOOKBACK_MIN:-40\}\}"/);
   assert.match(step, /TIMEOUT_SCAN_ALLOW_TRUNCATED_CREATED_HORIZON: 'true'/);
+  assert.match(step, /TIMEOUT_SCAN_MAX_RUN_AGE_MINUTES: '4320'/);
   assert.match(step, /HOST_KILL_SETTLE_MS: '120000'/);
   assert.match(step, /if \[ "\$\{\{ github\.event\.inputs\.dry_run \}\}" = "true" \]; then/);
 });
