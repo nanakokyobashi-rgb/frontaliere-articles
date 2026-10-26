@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T01:29:11.421Z",
-  "contentHash": "394d5e6876dba50c2826081fc64e2a2699a1300052d2732090fa7f2e40f84bbe",
+  "updatedAt": "2026-10-26T09:05:39.145Z",
+  "contentHash": "f9c928117da2bcc88ad4500a169f5dbda290d2cbbba23f6300e3a55ba0ea4b2f",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-25T20:50:56.983Z",
+      "updatedAt": "2026-10-26T04:45:08.388Z",
       "keyFacts": 1
     },
     {
@@ -93,16 +93,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6667"
             },
             {
-              "label": "SG41416",
+              "label": "SG10261",
               "value": "820 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-28T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6668"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6678"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-25T20:50:56.983Z"
+          "updatedAt": "2026-10-26T04:45:08.388Z"
         },
         {
           "id": "meteo",
@@ -234,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T01:29:11.421Z"
+      "updatedAt": "2026-10-26T09:05:39.145Z"
     },
     "en": {
       "canton": "SG",
@@ -300,16 +300,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6667"
             },
             {
-              "label": "SG41416",
+              "label": "SG10261",
               "value": "820 CHF",
               "detail": "current bid",
               "date": "2026-10-28T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6668"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6678"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-25T20:50:56.983Z"
+          "updatedAt": "2026-10-26T04:45:08.388Z"
         },
         {
           "id": "meteo",
@@ -437,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T01:29:11.421Z"
+      "updatedAt": "2026-10-26T09:05:39.145Z"
     },
     "de": {
       "canton": "SG",
@@ -503,16 +503,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6667"
             },
             {
-              "label": "SG41416",
+              "label": "SG10261",
               "value": "820 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-28T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6668"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6678"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-25T20:50:56.983Z"
+          "updatedAt": "2026-10-26T04:45:08.388Z"
         },
         {
           "id": "meteo",
@@ -640,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T01:29:11.421Z"
+      "updatedAt": "2026-10-26T09:05:39.145Z"
     },
     "fr": {
       "canton": "SG",
@@ -706,16 +706,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6667"
             },
             {
-              "label": "SG41416",
+              "label": "SG10261",
               "value": "820 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-28T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6668"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6678"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-25T20:50:56.983Z"
+          "updatedAt": "2026-10-26T04:45:08.388Z"
         },
         {
           "id": "meteo",
@@ -839,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T01:29:11.421Z"
+      "updatedAt": "2026-10-26T09:05:39.145Z"
     }
   }
 }

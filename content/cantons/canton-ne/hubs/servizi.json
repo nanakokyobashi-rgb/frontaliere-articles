@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T01:29:11.421Z",
-  "contentHash": "f464b2a7979b432129be5119850667523bd925c09c512360b114ed7b83e34f33",
+  "updatedAt": "2026-10-26T09:05:39.145Z",
+  "contentHash": "1c26df1d7e83730368fe10d400ecf6d35ef73ababc3a5407ea495be68e3a33b0",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -83,6 +83,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Mese salute mentale 2026: attività per rafforzare autostima",
+          "url": "/articoli-neuchatel/mese-salute-mentale-2026/",
+          "excerpt": "Dal 10 settembre al 10 ottobre 2026 Seconda edizione nel Canton Neuchâtel Attività gratuite e accessibili per ogni età Una ventina di organizzazioni partner",
+          "date": "2026-10-26T08:52:52.668Z"
+        },
+        {
           "title": "Nuovo centro accoglienza asilo a Couvet: parte il progetto",
           "url": "/articoli-neuchatel/nuovo-centro-asilo-couvet/",
           "excerpt": "Nuova struttura prevista in rue du 1er Mars 11, a Couvet Sostituirà il sito attuale di Chemin des Prises 8 Progetto elaborato con il Comune di Val-de-Travers",
@@ -134,7 +140,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T01:29:11.421Z"
+      "updatedAt": "2026-10-26T09:05:39.145Z"
     },
     "en": {
       "canton": "NE",
@@ -195,6 +201,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Mental Health Month 2026: activities to strengthen self-esteem",
+          "url": "/en/neuchatel-articles/mental-health-month-2026/",
+          "excerpt": "From September 10 to October 10, 2026 Second edition in the Canton of Neuchâtel Free and accessible activities for all ages Around twenty partner organizations",
+          "date": "2026-10-26T08:52:52.668Z"
+        },
+        {
           "title": "New asylum reception centre in Couvet: the project starts",
           "url": "/en/neuchatel-articles/new-asylum-center-couvet/",
           "excerpt": "New structure planned in rue du 1er Mars 11, in Couvet It will replace the current site of Chemin des Prises 8 Project developed with the Municipality",
@@ -242,7 +254,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T01:29:11.421Z"
+      "updatedAt": "2026-10-26T09:05:39.145Z"
     },
     "de": {
       "canton": "NE",
@@ -303,6 +315,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Monat der psychischen Gesundheit 2026: Selbstwert stärken",
+          "url": "/de/neuenburg-artikel/mens-gesundheits-2026/",
+          "excerpt": "Vom 10. September bis zum 10. Oktober 2026 Zweite Ausgabe im Kanton Neuenburg Kostenlose und zugängliche Aktivitäten für jedes Alter Rund zwanzig",
+          "date": "2026-10-26T08:52:52.668Z"
+        },
+        {
           "title": "Neue Kindertagesstätte in Couvet: Das Projekt beginnt",
           "url": "/de/neuenburg-artikel/neues-asylzentrum-couvet/",
           "excerpt": "Neue Struktur in der Rue du 1er Mars 11 in Couvet geplant Ersetzt den aktuellen Standort von Chemin des Prises 8 Mit der Gemeinde Val-de-Travers ausgearbeitetes",
@@ -350,7 +368,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T01:29:11.421Z"
+      "updatedAt": "2026-10-26T09:05:39.145Z"
     },
     "fr": {
       "canton": "NE",
@@ -411,6 +429,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Mois de la santé mentale 2026 : activités pour renforcer l’estime de soi",
+          "url": "/fr/articles-neuchatel/mois-sante-mentale-2026/",
+          "excerpt": "Du 10 septembre au 10 octobre 2026 Deuxième édition dans le canton de Neuchâtel Activités gratuites et accessibles pour tous les âges Une vingtaine",
+          "date": "2026-10-26T08:52:52.668Z"
+        },
+        {
           "title": "Nouveau centre d'accueil asile à Couvet : le projet commence",
           "url": "/fr/articles-neuchatel/nouveau-centre-asile-couvet/",
           "excerpt": "Nouvelle structure prévue rue du 1er Mars 11, à Couvet Remplacera le site actuel du Chemin des Prises 8 Projet élaboré avec la commune de Val-de-Travers Séance",
@@ -454,7 +478,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T01:29:11.421Z"
+      "updatedAt": "2026-10-26T09:05:39.145Z"
     }
   }
 }

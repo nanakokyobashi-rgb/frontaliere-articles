@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T05:48:28.210Z",
-  "contentHash": "8604183f4ec2b4a08453355b573e3b0a6f31de9cf65e1b4e2cdf48b45ac8d720",
+  "updatedAt": "2026-10-26T09:05:39.145Z",
+  "contentHash": "50cd5577f598468af0d59812735f6d4b78a984006dba36426e6c9f5418dc1c42",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-25T21:19:09.514Z",
+      "updatedAt": "2026-10-25T23:36:43.073Z",
       "keyFacts": 2
     },
     {
@@ -135,11 +135,6 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "Revocato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No…",
-              "value": "Traffico",
-              "date": "2026-10-25T09:26:00.000Z"
-            },
-            {
               "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
               "value": "Cantiere",
               "detail": "fine prevista: 29 dicembre 2028",
@@ -156,10 +151,16 @@
               "value": "Cantiere",
               "detail": "fine prevista: 28 giugno 2028",
               "date": "2024-11-14T15:24:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso <-> S. Gottardo Parcheggio Chiasso-Dogana commerciale Situazione: problemi di traffico cantiere, lunghezza [km] 0.1",
+              "value": "Cantiere",
+              "detail": "fine prevista: 24 marzo 2027",
+              "date": "2025-04-01T03:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-25T21:19:09.514Z"
+          "updatedAt": "2026-10-25T23:36:43.073Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -293,7 +294,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-26T05:48:28.210Z"
+      "updatedAt": "2026-10-26T09:05:39.145Z"
     },
     "en": {
       "canton": "TI",
@@ -406,11 +407,6 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "Revocato: A2 Chiasso -> S. Gottardo tra Svincolo autostradale Quinto E Parcheggio Area di dosaggio Airolo Situazione: colonna lunghezza [km] 1.0 Causa: traffico congestionato Aggiunta 1: ritardi No…",
-              "value": "Traffic",
-              "date": "2026-10-25T09:26:00.000Z"
-            },
-            {
               "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
               "value": "Roadworks",
               "detail": "until 29 December 2028",
@@ -427,10 +423,16 @@
               "value": "Roadworks",
               "detail": "until 28 June 2028",
               "date": "2024-11-14T15:24:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso <-> S. Gottardo Parcheggio Chiasso-Dogana commerciale Situazione: problemi di traffico cantiere, lunghezza [km] 0.1",
+              "value": "Roadworks",
+              "detail": "until 24 March 2027",
+              "date": "2025-04-01T03:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-25T21:19:09.514Z"
+          "updatedAt": "2026-10-25T23:36:43.073Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -563,7 +565,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-26T05:48:28.210Z"
+      "updatedAt": "2026-10-26T09:05:39.145Z"
     },
     "de": {
       "canton": "TI",
@@ -676,11 +678,6 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "Aufgehoben: A2 Chiasso -> Gotthard zwischen Anschluss Quinto und Parkplatz Dosierstelle Airolo Sachlage: Stau Länge [km] 1.0 Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 10",
-              "value": "Verkehr",
-              "date": "2026-10-25T09:26:00.000Z"
-            },
-            {
               "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
               "value": "Baustelle",
               "detail": "bis 29. Dezember 2028",
@@ -697,10 +694,16 @@
               "value": "Baustelle",
               "detail": "bis 28. Juni 2028",
               "date": "2024-11-14T15:24:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso <-> Gotthard Parkplatz Chiasso-Warenzoll Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1",
+              "value": "Baustelle",
+              "detail": "bis 24. März 2027",
+              "date": "2025-04-01T03:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-25T21:19:09.514Z"
+          "updatedAt": "2026-10-25T23:36:43.073Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -833,7 +836,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-26T05:48:28.210Z"
+      "updatedAt": "2026-10-26T09:05:39.145Z"
     },
     "fr": {
       "canton": "TI",
@@ -946,11 +949,6 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
-              "label": "Révoqué: A2 Chiasso -> St-Gothard entre Jonction autoroutière Quinto et Parking Aire de dosage Airolo Situation: bouchon longueur [km] 1.0 Raison: surcharge de trafic Complément 1: retards Nbre…",
-              "value": "Trafic",
-              "date": "2026-10-25T09:26:00.000Z"
-            },
-            {
               "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
               "value": "Chantier",
               "detail": "jusqu’au 29 décembre 2028",
@@ -967,10 +965,16 @@
               "value": "Chantier",
               "detail": "jusqu’au 28 juin 2028",
               "date": "2024-11-14T15:24:00.000Z"
+            },
+            {
+              "label": "A2 Chiasso <-> St-Gothard Parking Chiasso-Douane commercial Situation: trafic perturbé travaux, longueur [km] 0.1",
+              "value": "Chantier",
+              "detail": "jusqu’au 24 mars 2027",
+              "date": "2025-04-01T03:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-25T21:19:09.514Z"
+          "updatedAt": "2026-10-25T23:36:43.073Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1104,7 +1108,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-26T05:48:28.210Z"
+      "updatedAt": "2026-10-26T09:05:39.145Z"
     }
   }
 }

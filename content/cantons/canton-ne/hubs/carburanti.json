@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "d68120a5a3d0f691e2ac578eebb541efb5038319c0ba53861ab92399e3c3a0de",
+  "updatedAt": "2026-10-26T09:05:39.145Z",
+  "contentHash": "3bf3054e062400f9a58bbc37f3cacaba5b00d4078470603c1dd2a882fdbd641a",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Mese salute mentale 2026: attività per rafforzare autostima",
+          "url": "/articoli-neuchatel/mese-salute-mentale-2026/",
+          "excerpt": "Dal 10 settembre al 10 ottobre 2026 Seconda edizione nel Canton Neuchâtel Attività gratuite e accessibili per ogni età Una ventina di organizzazioni partner",
+          "date": "2026-10-26T08:52:52.668Z"
+        },
+        {
           "title": "Zenith annuncia circa cento soppressioni al Locle",
           "url": "/articoli-neuchatel/zenith-soppressione-locle/",
           "excerpt": "Zenith annuncia circa cento soppressioni al Locle La manifattura conta 196 collaboratori Aperta la consultazione per il licenziamento collettivo Annuncio",
@@ -94,12 +100,6 @@
           "url": "/articoli-neuchatel/collegio-longueville-cantiere-colombier/",
           "excerpt": "A Colombier, nuovo stabile scolastico entro il 2028 con 24 aule; nel frattempo sono già operative la piscina e la palestra rinnovate.",
           "date": "2026-10-21T08:31:34.879Z"
-        },
-        {
-          "title": "Neuchatel: il tasso di disoccupazione scende al 4,3% a maggio 2026",
-          "url": "/articoli-neuchatel/neuchatel-disoccupazione-maggio-2026/",
-          "excerpt": "A maggio 2026 i disoccupati nel Canton Neuchatel scendono a 3’924 e il tasso cantonale cala al 4,3%, sostenuto da fattori stagionali favorevoli.",
-          "date": "2026-10-19T03:29:08.971Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T09:05:39.145Z"
     },
     "en": {
       "canton": "NE",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Mental Health Month 2026: activities to strengthen self-esteem",
+          "url": "/en/neuchatel-articles/mental-health-month-2026/",
+          "excerpt": "From September 10 to October 10, 2026 Second edition in the Canton of Neuchâtel Free and accessible activities for all ages Around twenty partner organizations",
+          "date": "2026-10-26T08:52:52.668Z"
+        },
+        {
           "title": "Zenith announces around one hundred job cuts in Le Locle",
           "url": "/en/neuchatel-articles/zenith-locle-job-cuts/",
           "excerpt": "Zenith announces approximately one hundred job cuts at Locle The manufactory has 196 employees Consultation opened for collective dismissal Announcement",
@@ -193,12 +199,6 @@
           "url": "/en/neuchatel-articles/longueville-college-construction-colombier/",
           "excerpt": "In Colombier, a new school building with 24 classrooms by 2028; in the meantime, the renovated pool and gym are already operational.",
           "date": "2026-10-21T08:31:34.879Z"
-        },
-        {
-          "title": "Neuchatel: unemployment rate falls to 4,3% in May 2026",
-          "url": "/en/neuchatel-articles/neuchatel-unemployment-may-2026/",
-          "excerpt": "In May 2026, the unemployed in Canton Neuchatel fell to 3’924 and the cantonal rate dropped to 4,3%, supported by favorable seasonal factors.",
-          "date": "2026-10-19T03:29:08.971Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T09:05:39.145Z"
     },
     "de": {
       "canton": "NE",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Monat der psychischen Gesundheit 2026: Selbstwert stärken",
+          "url": "/de/neuenburg-artikel/mens-gesundheits-2026/",
+          "excerpt": "Vom 10. September bis zum 10. Oktober 2026 Zweite Ausgabe im Kanton Neuenburg Kostenlose und zugängliche Aktivitäten für jedes Alter Rund zwanzig",
+          "date": "2026-10-26T08:52:52.668Z"
+        },
+        {
           "title": "Zenith kündigt rund hundert Stellenstreichungen in Locle an",
           "url": "/de/neuenburg-artikel/zenith-streichungen-locle/",
           "excerpt": "Zenith kündigt rund hundert Stellenstreichungen in Locle an Die Manufaktur zählt 196 Mitarbeitende Konsultation für die Massenentlassung eröffnet Ankündigung am",
@@ -292,12 +298,6 @@
           "url": "/de/neuenburg-artikel/longueville-kolleg-baustelle-colombier/",
           "excerpt": "In Colombier, einem neuen Schulgebäude bis 2028 mit 24 Klassenzimmern; in der Zwischenzeit sind das renovierte Schwimmbad und das Fitnessstudio bereits in Betrieb.",
           "date": "2026-10-21T08:31:34.879Z"
-        },
-        {
-          "title": "Neuenburg: Die Arbeitslosenquote sinkt im Mai 2026 auf 4,3%",
-          "url": "/de/neuenburg-artikel/neuenburg-arbeitslosigkeit-mai-2026/",
-          "excerpt": "Im Mai 2026 sinkt die Zahl der Arbeitslosen im Kanton Neuenburg auf 3’924, und die kantonale Quote fällt auf 4,3%, unterstützt durch günstige saisonale Faktoren.",
-          "date": "2026-10-19T03:29:08.971Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T09:05:39.145Z"
     },
     "fr": {
       "canton": "NE",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Mois de la santé mentale 2026 : activités pour renforcer l’estime de soi",
+          "url": "/fr/articles-neuchatel/mois-sante-mentale-2026/",
+          "excerpt": "Du 10 septembre au 10 octobre 2026 Deuxième édition dans le canton de Neuchâtel Activités gratuites et accessibles pour tous les âges Une vingtaine",
+          "date": "2026-10-26T08:52:52.668Z"
+        },
+        {
           "title": "Zenith annonce environ cent suppressions de postes au Locle",
           "url": "/fr/articles-neuchatel/zenith-suppressions-locle/",
           "excerpt": "Zenith annonce environ cent suppressions de postes au Locle La manufacture compte 196 collaborateurs Consultation ouverte en vue d'un licenciement collectif",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-neuchatel/college-longueville-chantier-colombier/",
           "excerpt": "À Colombier, nouveau bâtiment scolaire d'ici 2028 avec 24 salles de classe ; entre-temps, la piscine et la salle de sport rénovées sont déjà opérationnelles.",
           "date": "2026-10-21T08:31:34.879Z"
-        },
-        {
-          "title": "Neuchatel : le taux de chômage baisse à 4,3 % en mai 2026",
-          "url": "/fr/articles-neuchatel/neuchatel-chomage-mai-2026/",
-          "excerpt": "En mai 2026, le nombre de chômeurs dans le canton de Neuchatel baisse à 3’924 et le taux cantonal baisse à 4,3 %, soutenu par des facteurs saisonniers favorables.",
-          "date": "2026-10-19T03:29:08.971Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T09:05:39.145Z"
     }
   }
 }
