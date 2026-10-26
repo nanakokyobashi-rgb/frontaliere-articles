@@ -17,7 +17,7 @@
   "crawlerGeneration": {
     "mode": "shadow",
     "rosterPath": "scripts/ci/crawler-generation-roster.json",
-    "rosterDigest": "sha256:fbb285d0cdd3795a444b9a6cb877668ec258d220f4267246ff08671197f48e7f",
+    "rosterDigest": "sha256:20158ade8da4efb435323bd0fd0067ada21cae90e07f0cddaf865a7b39eca6ce",
     "artifactRetentionDays": 14,
     "dispatchesTranslation": false
   },
