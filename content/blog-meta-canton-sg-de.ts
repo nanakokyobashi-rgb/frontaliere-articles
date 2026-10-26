@@ -63,6 +63,9 @@ const blogMetaCantonSgDe: Record<string, string> = {
     'blog.article.abstimmung-bahnhof-wil-allee.title': 'Abstimmung 29.11.2026: Bahnhof Wil, Allee – sicherer Umstieg',
     'blog.article.abstimmung-bahnhof-wil-allee.excerpt': 'Der Bruttokredit beträgt 63,662 Millionen Franken; die Arbeiten sind von 2029 bis 2033 vorgesehen.',
     'blog.article.abstimmung-bahnhof-wil-allee.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.unfall-a13-sevelen-2026.title': 'Auffahrunfall auf der A13 bei Sevelen: zwei Verletzte am 25. Oktober 2026',
+    'blog.article.unfall-a13-sevelen-2026.excerpt': 'Am 25. Oktober fuhren auf der A13 bei Sevelen zwei Autos aufeinander auf Ein 79-jähriger Fahrer und die 86-jährige Beifahrerin wurden verletzt Der 53-jährige',
+    'blog.article.unfall-a13-sevelen-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSgDe;

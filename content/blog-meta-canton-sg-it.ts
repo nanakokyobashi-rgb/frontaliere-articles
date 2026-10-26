@@ -63,6 +63,9 @@ const blogMetaCantonSgIt: Record<string, string> = {
     'blog.article.abstimmung-bahnhof-wil-allee.title': 'Voto 29 novembre 2026: Stazione Wil e Allee per un interscambio sicuro',
     'blog.article.abstimmung-bahnhof-wil-allee.excerpt': 'Il credito lordo è di 63,662 milioni di franchi; i lavori sono previsti dal 2029 al 2033.',
     'blog.article.abstimmung-bahnhof-wil-allee.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.unfall-a13-sevelen-2026.title': 'Tamponamento A13 a Sevelen: due feriti il 25 ottobre 2026',
+    'blog.article.unfall-a13-sevelen-2026.excerpt': 'Il 25 ottobre due auto si sono tamponate sulla A13 a Sevelen Feriti un conducente di 79 anni e la passeggera di 86 Il conducente della seconda auto, 53 anni, è',
+    'blog.article.unfall-a13-sevelen-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSgIt;

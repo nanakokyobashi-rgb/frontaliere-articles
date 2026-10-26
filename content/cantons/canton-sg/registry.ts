@@ -226,4 +226,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'unfall-a13-sevelen-2026',
+ category: 'pratico',
+ date: '2026-10-26T16:46:48.908Z',
+ image: '/images/blog/article-unfall-a13-sevelen-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

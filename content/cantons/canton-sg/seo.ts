@@ -777,6 +777,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-unfall-a13-sevelen-2026': {
+    title: 'Tamponamento A13 a Sevelen: due feriti il 25 ottobre 2026',
+    description: 'Il 25 ottobre due auto si sono tamponate sulla A13 a Sevelen Feriti un conducente di 79 anni e la passeggera di 86 Il conducente della seconda auto',
+    keywords: 'frontalieri, ticino, svizzera, italia, tamponamento, sevelen, feriti, ottobre',
+    ogTitle: 'Tamponamento A13 Sevelen due feriti 25/10/2026',
+    ogDescription: 'Il 25 ottobre due auto si sono tamponate sulla A13 a Sevelen Feriti un conducente di 79 anni e la passeggera di 86 Il conducente della seconda auto, 53 anni, è',
+    canonicalPath: '/articoli-san-gallo/unfall-a13-sevelen-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tamponamento A13 a Sevelen: due feriti il 25 ottobre 2026",
+      "description": "Il 25 ottobre due auto si sono tamponate sulla A13 a Sevelen Feriti un conducente di 79 anni e la passeggera di 86 Il conducente della seconda auto",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-unfall-a13-sevelen-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-26T16:46:48+00:00",
+      "dateModified": "2026-10-26T16:46:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/unfall-a13-sevelen-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

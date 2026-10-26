@@ -63,6 +63,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.abstimmung-bahnhof-wil-allee.title': 'Vote November 29, 2026: Wil Station and Allee for a safe interchange',
     'blog.article.abstimmung-bahnhof-wil-allee.excerpt': 'The gross credit amounts to 63,662 million francs; the work is scheduled from 2029 to 2033.',
     'blog.article.abstimmung-bahnhof-wil-allee.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.unfall-a13-sevelen-2026.title': 'Rear-end collision on A13 in Sevelen: two injured on October 25, 2026',
+    'blog.article.unfall-a13-sevelen-2026.excerpt': 'On October 25, two cars rear-ended each other on the A13 at Sevelen A 79-year-old driver and an 86-year-old passenger were injured The driver of the second car',
+    'blog.article.unfall-a13-sevelen-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

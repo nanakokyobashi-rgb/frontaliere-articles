@@ -63,6 +63,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.abstimmung-bahnhof-wil-allee.title': 'Vote du 29 novembre 2026 : Gare de Wil et Allee pour une correspondance sûre',
     'blog.article.abstimmung-bahnhof-wil-allee.excerpt': 'Le crédit brut s’élève à 63,662 millions de francs ; les travaux sont prévus de 2029 à 2033.',
     'blog.article.abstimmung-bahnhof-wil-allee.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.unfall-a13-sevelen-2026.title': 'Collision par l’arrière sur l’A13 à Sevelen : deux blessés le 25 octobre 2026',
+    'blog.article.unfall-a13-sevelen-2026.excerpt': 'Le 25 octobre, deux voitures se sont percutées par l’arrière sur l’A13 à Sevelen Un conducteur de 79 ans et la passagère de 86 ans ont été blessés Le conducteur',
+    'blog.article.unfall-a13-sevelen-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSgFr;

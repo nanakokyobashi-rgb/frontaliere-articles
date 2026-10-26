@@ -23,6 +23,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'kolumbanstrasse-nuova-velostrasse': { it: 'kolumbanstrasse-nuova-velostrasse', en: 'kolumbanstrasse-new-velostrasse', de: 'kolumbanstrasse-neue-velostrasse', fr: 'kolumbanstrasse-nouvelle-velostrasse' },
  'lotteriefonds-89-progetti-cantone': { it: 'lotteriefonds-89-progetti-cantone', en: 'lotteriefonds-89-projects-canton', de: 'lotteriefonds-89-projekte-kanton', fr: 'lotteriefonds-89-projets-canton' },
  'abstimmung-bahnhof-wil-allee': { it: 'abstimmung-bahnhof-wil-allee', en: 'vote-november-29-2026-wil-station-and-allee-for-a-safe-interchange', de: 'abstimmung-29-11-2026-bahnhof-wil-allee-sicherer-umstieg', fr: 'vote-du-29-novembre-2026-gare-de-wil-et-allee-pour-une-correspondance-sure' },
+ 'unfall-a13-sevelen-2026': { it: 'unfall-a13-sevelen-2026', en: 'accident-a13-sevelen-2026', de: 'auffahrunfall-auf-der-a13-bei-sevelen-zwei-verletzte-am-25-oktober-2026', fr: 'accident-a13-sevelen-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
