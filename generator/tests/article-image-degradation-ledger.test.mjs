@@ -7,6 +7,7 @@ import {
   ledgerKey,
   markDispatched,
   mergeDegradedItems,
+  normalizeRepairCap,
   parseDegradationLedger,
   removeHealthyItems,
   repairCandidates,
@@ -42,6 +43,29 @@ test('il degrado resta durevole, la pagina sana si rimuove e il cap raggruppa pe
   assert.deepEqual(groupRepairCandidates(ready).map((group) => [group.section, group.ids]), [['frontaliere', ['old']]]);
   const healthy = merged.filter((entry) => entry.articleId === 'old').map(ledgerKey);
   assert.deepEqual(removeHealthyItems(merged, healthy).map((entry) => entry.articleId), ['new']);
+});
+
+test('un cap di riparazione invalido ricade sul default senza disabilitare il retry', () => {
+  assert.equal(normalizeRepairCap(0), 0);
+  assert.equal(normalizeRepairCap('2'), 2);
+  assert.equal(normalizeRepairCap(' 2 '), 2);
+  assert.equal(normalizeRepairCap(2.5), 3);
+  assert.equal(normalizeRepairCap(Infinity), 3);
+  assert.equal(normalizeRepairCap(Symbol('invalid')), 3);
+  assert.equal(normalizeRepairCap(false), 3);
+  assert.equal(normalizeRepairCap(''), 3);
+  assert.equal(normalizeRepairCap([]), 3);
+
+  const items = ['a', 'b', 'c', 'd'].map((articleId) => item(articleId));
+  const readyKeys = items.map(ledgerKey);
+  assert.deepEqual(
+    repairCandidates(items, { readyKeys, cap: Number.NaN }).map((entry) => entry.articleId),
+    ['a', 'b', 'c'],
+  );
+  assert.deepEqual(
+    repairCandidates(items, { readyKeys, cap: 0 }).map((entry) => entry.articleId),
+    [],
+  );
 });
 
 test('tre esiti terminali falliti marcano l articolo exhausted e non lo ridispatchano', () => {

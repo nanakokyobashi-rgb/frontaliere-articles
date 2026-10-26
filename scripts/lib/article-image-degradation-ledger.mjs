@@ -9,6 +9,19 @@ export const DEFAULT_TERMINAL_RETENTION_DAYS = 14;
 
 const VALID_STATUSES = new Set(['pending', 'in-flight', 'exhausted', 'orphaned', 'retired']);
 
+/** Keep repair fan-out bounded when a caller supplies an invalid cap. */
+export function normalizeRepairCap(value, fallback = DEFAULT_REPAIR_CAP) {
+  if (typeof value !== 'number' && typeof value !== 'string') return fallback;
+  if (typeof value === 'string' && value.trim() === '') return fallback;
+  let numeric;
+  try {
+    numeric = Number(value);
+  } catch {
+    return fallback;
+  }
+  return Number.isInteger(numeric) && numeric >= 0 ? numeric : fallback;
+}
+
 export function ledgerKey({ section, articleId } = {}) {
   if (!section || !articleId) return null;
   return `${section}:${articleId}`;
@@ -250,10 +263,11 @@ export function markDispatched(items = [], dispatches = [], now = new Date().toI
 export function repairCandidates(items = [], { readyKeys = [], excludeKeys = [], cap = DEFAULT_REPAIR_CAP } = {}) {
   const ready = new Set(readyKeys);
   const excluded = new Set(excludeKeys);
+  const effectiveCap = normalizeRepairCap(cap);
   return sortedItems(items)
     .filter((item) => item.status === 'pending' && item.attempts < MAX_REPAIR_ATTEMPTS)
     .filter((item) => ready.has(ledgerKey(item)) && !excluded.has(ledgerKey(item)))
-    .slice(0, Math.max(0, cap));
+    .slice(0, effectiveCap);
 }
 
 export function groupRepairCandidates(items = []) {
