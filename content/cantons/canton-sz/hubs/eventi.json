@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "142e6ee958cabf3d838fbe683d36b0ef98d145242d92dcc713686eada9b68ba9",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "2a829f25700e809a7b81604fa843d11f929b66a1823512ed422f3bdada4711d4",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "17",
+          "value": "19",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,18 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "30. Muotitaler Alpchäsmärcht",
-              "detail": "Alpchäsmärcht Muotathal, Muotathal — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/30th-muotitaler-alpine-cheese-market/"
-            },
-            {
-              "label": "MKLA MusicFestival",
-              "detail": "Lachen SZ, Lachen — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mkla-musicfestival/"
-            },
             {
               "label": "Sauna della luna piena Einsiedeln",
               "detail": "Cantone di Einsiedeln, Einsiedeln",
@@ -91,6 +79,18 @@
               "detail": "Restaurant Tübli, Gersau",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-two-blues-dine-der-herbst-26-1/"
+            },
+            {
+              "label": "Fondue Chinoise-Abend",
+              "detail": "Restaurant Gipfelstubli Rotenflue, Schwyz",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-chinoise-abend-2/"
+            },
+            {
+              "label": "20. Kreativ-Handwerkermarkt",
+              "detail": "Kirchenkeller der Pfarrkirche Rothenthurm, Rothenthurm",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/20-kreativhandwerkermarkt/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/svitto/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "SZ",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "17",
+          "value": "19",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,18 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "30th Muotitaler Alpine Cheese Market",
-              "detail": "Alpchäsmärcht Muotathal, Muotathal — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/30th-muotitaler-alpine-cheese-market/"
-            },
-            {
-              "label": "MKLA MusicFestival",
-              "detail": "Lachen SZ, Lachen — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mkla-musicfestival/"
-            },
             {
               "label": "Full moon sauna Einsiedeln",
               "detail": "Cantone di Einsiedeln, Einsiedeln",
@@ -196,6 +184,18 @@
               "detail": "Restaurant Tübli, Gersau",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-two-blues-dine-der-herbst-26-1/"
+            },
+            {
+              "label": "Fondue Chinoise-Abend",
+              "detail": "Restaurant Gipfelstubli Rotenflue, Schwyz",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-chinoise-abend-2/"
+            },
+            {
+              "label": "20. Kreativ-Handwerkermarkt",
+              "detail": "Kirchenkeller der Pfarrkirche Rothenthurm, Rothenthurm",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/20-kreativhandwerkermarkt/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/schwyz/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "SZ",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "17",
+          "value": "19",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,18 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "30. Muotitaler Alpchäsmärcht",
-              "detail": "Alpchäsmärcht Muotathal, Muotathal — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/30th-muotitaler-alpine-cheese-market/"
-            },
-            {
-              "label": "MKLA MusicFestival",
-              "detail": "Lachen SZ, Lachen — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mkla-musicfestival/"
-            },
             {
               "label": "Vollmond-Sauna Einsiedeln",
               "detail": "Cantone di Einsiedeln, Einsiedeln",
@@ -301,6 +289,18 @@
               "detail": "Restaurant Tübli, Gersau",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-two-blues-dine-der-herbst-26-1/"
+            },
+            {
+              "label": "Fondue Chinoise-Abend",
+              "detail": "Restaurant Gipfelstubli Rotenflue, Schwyz",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-chinoise-abend-2/"
+            },
+            {
+              "label": "20. Kreativ-Handwerkermarkt",
+              "detail": "Kirchenkeller der Pfarrkirche Rothenthurm, Rothenthurm",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/20-kreativhandwerkermarkt/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/schwyz/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "SZ",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "17",
+          "value": "19",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,18 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "30. Muotitaler Alpchäsmärcht",
-              "detail": "Alpchäsmärcht Muotathal, Muotathal — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/30th-muotitaler-alpine-cheese-market/"
-            },
-            {
-              "label": "MKLA MusicFestival",
-              "detail": "Lachen SZ, Lachen — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mkla-musicfestival/"
-            },
             {
               "label": "Sauna de la pleine lune à Einsiedeln",
               "detail": "Cantone di Einsiedeln, Einsiedeln",
@@ -406,6 +394,18 @@
               "detail": "Restaurant Tübli, Gersau",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/the-two-blues-dine-der-herbst-26-1/"
+            },
+            {
+              "label": "Fondue Chinoise-Abend",
+              "detail": "Restaurant Gipfelstubli Rotenflue, Schwyz",
+              "date": "2026-11-06",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/fondue-chinoise-abend-2/"
+            },
+            {
+              "label": "20. Kreativ-Handwerkermarkt",
+              "detail": "Kirchenkeller der Pfarrkirche Rothenthurm, Rothenthurm",
+              "date": "2026-11-07",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/20-kreativhandwerkermarkt/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/schwytz/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "pensioni",
-  "updatedAt": "2026-10-16T14:10:19.148Z",
-  "contentHash": "1cdd0d94c54f491d78674c26787d74d1d5422826dfd9454ef762298acdf102f3",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "1e1c99a4fd9b29c70455a2b2f0b973a64d1345a36632a06ee7ef4c257177ef02",
   "blocks": [
     {
       "id": "parametri-previdenza",
@@ -24,7 +24,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-15T15:45:54.463Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -136,6 +136,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Journées d’action pour les droits des personnes handicapées 2027",
+              "date": "2026-10-25T16:25:20.000Z",
+              "url": "https://www.fr.ch/sante/invalidite-et-handicap/journees-daction-pour-les-droits-des-personnes-handicapees-2027"
+            },
+            {
               "label": "EMS : ajustement du prix de pension et répartition des surcoûts des journées d’attente",
               "date": "2026-07-20T08:43:01.000Z",
               "url": "https://www.fr.ch/dsas/actualites/ems-ajustement-du-prix-de-pension-et-repartition-des-surcouts-des-journees-dattente"
@@ -151,7 +156,7 @@
               "url": "https://www.cpef.ch/actualites/publication-du-rapport-de-durabilite-2025"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -187,7 +192,7 @@
           "url": "/pensioni/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "FR",
@@ -296,6 +301,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Journées d’action pour les droits des personnes handicapées 2027",
+              "date": "2026-10-25T16:25:20.000Z",
+              "url": "https://www.fr.ch/sante/invalidite-et-handicap/journees-daction-pour-les-droits-des-personnes-handicapees-2027"
+            },
+            {
               "label": "EMS : ajustement du prix de pension et répartition des surcoûts des journées d’attente",
               "date": "2026-07-20T08:43:01.000Z",
               "url": "https://www.fr.ch/dsas/actualites/ems-ajustement-du-prix-de-pension-et-repartition-des-surcouts-des-journees-dattente"
@@ -311,7 +321,7 @@
               "url": "https://www.cpef.ch/actualites/publication-du-rapport-de-durabilite-2025"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -347,7 +357,7 @@
           "url": "/en/pensions/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "FR",
@@ -456,6 +466,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Journées d’action pour les droits des personnes handicapées 2027",
+              "date": "2026-10-25T16:25:20.000Z",
+              "url": "https://www.fr.ch/sante/invalidite-et-handicap/journees-daction-pour-les-droits-des-personnes-handicapees-2027"
+            },
+            {
               "label": "EMS : ajustement du prix de pension et répartition des surcoûts des journées d’attente",
               "date": "2026-07-20T08:43:01.000Z",
               "url": "https://www.fr.ch/dsas/actualites/ems-ajustement-du-prix-de-pension-et-repartition-des-surcouts-des-journees-dattente"
@@ -471,7 +486,7 @@
               "url": "https://www.cpef.ch/actualites/publication-du-rapport-de-durabilite-2025"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -507,7 +522,7 @@
           "url": "/de/renten/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "FR",
@@ -616,6 +631,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Journées d’action pour les droits des personnes handicapées 2027",
+              "date": "2026-10-25T16:25:20.000Z",
+              "url": "https://www.fr.ch/sante/invalidite-et-handicap/journees-daction-pour-les-droits-des-personnes-handicapees-2027"
+            },
+            {
               "label": "EMS : ajustement du prix de pension et répartition des surcoûts des journées d’attente",
               "date": "2026-07-20T08:43:01.000Z",
               "url": "https://www.fr.ch/dsas/actualites/ems-ajustement-du-prix-de-pension-et-repartition-des-surcouts-des-journees-dattente"
@@ -631,7 +651,7 @@
               "url": "https://www.cpef.ch/actualites/publication-du-rapport-de-durabilite-2025"
             }
           ],
-          "updatedAt": "2026-10-15T15:45:54.463Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -667,7 +687,7 @@
           "url": "/fr/retraites/"
         }
       ],
-      "updatedAt": "2026-10-16T14:10:19.148Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

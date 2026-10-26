@@ -4,8 +4,8 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "29adfc7a74f328bcd117fc4cacf760f04e041c1582823111644f3bd584a8b6bd",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "922d10d4c424ca168539610ad42a037930d21d51fbaf680bade709f0c845dedc",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -33,24 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Sofagespräch mit Ruth Dillier und Urs Sibler",
-              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
-              "date": "2026-10-25",
-              "url": "https://www.ow.ch/anlaesseaktuelles/93847"
-            },
-            {
-              "label": "Obwaldner Huismuisig mit Organistin Silvia Wagner",
-              "detail": "Pfarrkirche Lungern, Lungern",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/lungern/obwaldner-huismuisig-mit-organistin-silvia-wagner_AxGqtTk"
-            },
-            {
-              "label": "Yoga & Breathwork",
-              "detail": "Engelberg — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/yoga-package/"
-            },
-            {
               "label": "Comedy im Hirschen – Cenk",
               "detail": "Hirschen Sarnen, Sarnen, Sarnen",
               "date": "2026-10-28",
@@ -90,6 +72,24 @@
               "detail": "Hotel Metzgern Sarnen, Sarnen, Sarnen",
               "date": "2026-10-31",
               "url": "https://www.ow.ch/anlaesseaktuelles/93313"
+            },
+            {
+              "label": "Finissage «und jetzt?!» und Saisonabschluss",
+              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
+              "date": "2026-11-01",
+              "url": "https://www.ow.ch/anlaesseaktuelles/93841"
+            },
+            {
+              "label": "Sofagespräch mit Andreas Anderhalden und Urs-Beat Frei",
+              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
+              "date": "2026-11-01",
+              "url": "https://www.ow.ch/anlaesseaktuelles/93844"
+            },
+            {
+              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
+              "detail": "Zytlade Lindenhof, Sarnen, Sarnen",
+              "date": "2026-11-02",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -116,7 +116,7 @@
           "url": "/eventi/obvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "OW",
@@ -136,24 +136,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Sofagespräch mit Ruth Dillier und Urs Sibler",
-              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
-              "date": "2026-10-25",
-              "url": "https://www.ow.ch/anlaesseaktuelles/93847"
-            },
-            {
-              "label": "Obwaldner Huismuisig mit Organistin Silvia Wagner",
-              "detail": "Pfarrkirche Lungern, Lungern",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/lungern/obwaldner-huismuisig-mit-organistin-silvia-wagner_AxGqtTk"
-            },
-            {
-              "label": "Yoga & Breathwork",
-              "detail": "Engelberg — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/yoga-package/"
-            },
             {
               "label": "Comedy im Hirschen – Cenk",
               "detail": "Hirschen Sarnen, Sarnen, Sarnen",
@@ -194,6 +176,24 @@
               "detail": "Hotel Metzgern Sarnen, Sarnen, Sarnen",
               "date": "2026-10-31",
               "url": "https://www.ow.ch/anlaesseaktuelles/93313"
+            },
+            {
+              "label": "Finissage «und jetzt?!» und Saisonabschluss",
+              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
+              "date": "2026-11-01",
+              "url": "https://www.ow.ch/anlaesseaktuelles/93841"
+            },
+            {
+              "label": "Sofagespräch mit Andreas Anderhalden und Urs-Beat Frei",
+              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
+              "date": "2026-11-01",
+              "url": "https://www.ow.ch/anlaesseaktuelles/93844"
+            },
+            {
+              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
+              "detail": "Zytlade Lindenhof, Sarnen, Sarnen",
+              "date": "2026-11-02",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -220,7 +220,7 @@
           "url": "/en/events/obwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "OW",
@@ -240,24 +240,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Sofagespräch mit Ruth Dillier und Urs Sibler",
-              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
-              "date": "2026-10-25",
-              "url": "https://www.ow.ch/anlaesseaktuelles/93847"
-            },
-            {
-              "label": "Obwaldner Huismuisig mit Organistin Silvia Wagner",
-              "detail": "Pfarrkirche Lungern, Lungern",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/lungern/obwaldner-huismuisig-mit-organistin-silvia-wagner_AxGqtTk"
-            },
-            {
-              "label": "Yoga & Breathwork",
-              "detail": "Engelberg — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/yoga-package/"
-            },
             {
               "label": "Comedy im Hirschen – Cenk",
               "detail": "Hirschen Sarnen, Sarnen, Sarnen",
@@ -298,6 +280,24 @@
               "detail": "Hotel Metzgern Sarnen, Sarnen, Sarnen",
               "date": "2026-10-31",
               "url": "https://www.ow.ch/anlaesseaktuelles/93313"
+            },
+            {
+              "label": "Finissage «und jetzt?!» und Saisonabschluss",
+              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
+              "date": "2026-11-01",
+              "url": "https://www.ow.ch/anlaesseaktuelles/93841"
+            },
+            {
+              "label": "Sofagespräch mit Andreas Anderhalden und Urs-Beat Frei",
+              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
+              "date": "2026-11-01",
+              "url": "https://www.ow.ch/anlaesseaktuelles/93844"
+            },
+            {
+              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
+              "detail": "Zytlade Lindenhof, Sarnen, Sarnen",
+              "date": "2026-11-02",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -324,7 +324,7 @@
           "url": "/de/veranstaltungen/obwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "OW",
@@ -344,24 +344,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Sofagespräch mit Ruth Dillier und Urs Sibler",
-              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
-              "date": "2026-10-25",
-              "url": "https://www.ow.ch/anlaesseaktuelles/93847"
-            },
-            {
-              "label": "Obwaldner Huismuisig mit Organistin Silvia Wagner",
-              "detail": "Pfarrkirche Lungern, Lungern",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/lungern/obwaldner-huismuisig-mit-organistin-silvia-wagner_AxGqtTk"
-            },
-            {
-              "label": "Yoga & Breathwork",
-              "detail": "Engelberg — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/yoga-package/"
-            },
             {
               "label": "Comedy im Hirschen – Cenk",
               "detail": "Hirschen Sarnen, Sarnen, Sarnen",
@@ -402,6 +384,24 @@
               "detail": "Hotel Metzgern Sarnen, Sarnen, Sarnen",
               "date": "2026-10-31",
               "url": "https://www.ow.ch/anlaesseaktuelles/93313"
+            },
+            {
+              "label": "Finissage «und jetzt?!» und Saisonabschluss",
+              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
+              "date": "2026-11-01",
+              "url": "https://www.ow.ch/anlaesseaktuelles/93841"
+            },
+            {
+              "label": "Sofagespräch mit Andreas Anderhalden und Urs-Beat Frei",
+              "detail": "Museum Bruder Klaus, Sachseln, Sachseln",
+              "date": "2026-11-01",
+              "url": "https://www.ow.ch/anlaesseaktuelles/93844"
+            },
+            {
+              "label": "FG Sarnen: Strick- und Nähgruppe im Zytlade",
+              "detail": "Zytlade Lindenhof, Sarnen, Sarnen",
+              "date": "2026-11-02",
+              "url": "https://www.ow.ch/anlaesseaktuelles/88736"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -428,7 +428,7 @@
           "url": "/fr/evenements/obwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

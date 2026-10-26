@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "328882a741abeba70baf2d46ca4659373d5003b6eeb73f073f0cbed1e8b10ff2",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "78ed0918e43376597213e2163d8f7a2cfffbe8faf07caeffe34128f6893071a3",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "20",
+          "value": "17",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,24 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Chilbisonntag: Kirchweihe St. Peter und Paul",
-              "detail": "Andermatt",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbisonntag-kirchweihe-st-peter-und-pual/"
-            },
-            {
-              "label": "Chilbikonzert",
-              "detail": "Kulturkommission Andermatt, Andermatt",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/chilbikonzert/"
-            },
-            {
-              "label": "Absenden Ausschiessen",
-              "detail": "Hotel Urirotstock, Isenthal — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/absenden-ausschiessen/"
-            },
             {
               "label": "TriffAltdorf Mittagstreff: Bistro&Lounge Baggenstos",
               "detail": "Bistro & Lounge Baggenstos",
@@ -91,6 +73,24 @@
               "detail": "Pfarrkirche St. Peter und Paul, Andermatt",
               "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/allerheiligen-gedaechtnis-der-verstorbenen-und-friedhofsbesuch/"
+            },
+            {
+              "label": "Jahreskreisfeier - Kulturkloster Altdorf",
+              "detail": "Kulturkloster Altdorf",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jahreskreisfeier-kulturkloster-altdorf/"
+            },
+            {
+              "label": "Mythen, Trends und Gesundheit - was steckt wirklich hinter der Ernährung?",
+              "detail": "Altdorf",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythen-trends-und-gesundheit-was-steckt-wirklich-hinter-der-ernaehrung/"
+            },
+            {
+              "label": "Tiro del Rütli a 300 m",
+              "detail": "Seelisberg",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tiro-del-ruetli-a-300-m/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/uri/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "UR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "20",
+          "value": "17",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,24 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Chilbisonntag: Kirchweihe St. Peter und Paul",
-              "detail": "Andermatt",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbisonntag-kirchweihe-st-peter-und-pual/"
-            },
-            {
-              "label": "Chilbikonzert",
-              "detail": "Kulturkommission Andermatt, Andermatt",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/chilbikonzert/"
-            },
-            {
-              "label": "Absenden Ausschiessen",
-              "detail": "Hotel Urirotstock, Isenthal — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/absenden-ausschiessen/"
-            },
             {
               "label": "TriffAltdorf Mittagstreff: Bistro&Lounge Baggenstos",
               "detail": "Bistro & Lounge Baggenstos",
@@ -196,6 +178,24 @@
               "detail": "Pfarrkirche St. Peter und Paul, Andermatt",
               "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/allerheiligen-gedaechtnis-der-verstorbenen-und-friedhofsbesuch/"
+            },
+            {
+              "label": "Jahreskreisfeier - Kulturkloster Altdorf",
+              "detail": "Kulturkloster Altdorf",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jahreskreisfeier-kulturkloster-altdorf/"
+            },
+            {
+              "label": "M Tr Then, Trends und Gesundheit -as",
+              "detail": "Altdorf",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythen-trends-und-gesundheit-was-steckt-wirklich-hinter-der-ernaehrung/"
+            },
+            {
+              "label": "Rütlischiessen 300 m",
+              "detail": "Seelisberg",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tiro-del-ruetli-a-300-m/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/uri/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "UR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "20",
+          "value": "17",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,24 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Chilbisonntag: Kirchweihe St. Peter und Paul",
-              "detail": "Andermatt",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbisonntag-kirchweihe-st-peter-und-pual/"
-            },
-            {
-              "label": "Chilbikonzert",
-              "detail": "Kulturkommission Andermatt, Andermatt",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/chilbikonzert/"
-            },
-            {
-              "label": "Absenden Ausschiessen",
-              "detail": "Hotel Urirotstock, Isenthal — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/absenden-ausschiessen/"
-            },
             {
               "label": "TriffAltdorf Mittagstreff: Bistro&Lounge Baggenstos",
               "detail": "Bistro & Lounge Baggenstos",
@@ -301,6 +283,24 @@
               "detail": "Pfarrkirche St. Peter und Paul, Andermatt",
               "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/allerheiligen-gedaechtnis-der-verstorbenen-und-friedhofsbesuch/"
+            },
+            {
+              "label": "Jahreskreisfeier - Kulturkloster Altdorf",
+              "detail": "Kulturkloster Altdorf",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jahreskreisfeier-kulturkloster-altdorf/"
+            },
+            {
+              "label": "Mythen, Trends und Gesundheit – was steckt wirklich hinter der Ernährung?",
+              "detail": "Altdorf",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythen-trends-und-gesundheit-was-steckt-wirklich-hinter-der-ernaehrung/"
+            },
+            {
+              "label": "Rütlischiessen 300 m",
+              "detail": "Seelisberg",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tiro-del-ruetli-a-300-m/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/uri/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "UR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "20",
+          "value": "17",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,24 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Chilbisonntag: Kirchweihe St. Peter und Paul",
-              "detail": "Andermatt",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/chilbisonntag-kirchweihe-st-peter-und-pual/"
-            },
-            {
-              "label": "Chilbikonzert",
-              "detail": "Kulturkommission Andermatt, Andermatt",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/chilbikonzert/"
-            },
-            {
-              "label": "Absenden Ausschiessen",
-              "detail": "Hotel Urirotstock, Isenthal — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/absenden-ausschiessen/"
-            },
             {
               "label": "TriffAltdorf Mittagstreff: Bistro&Lounge Baggenstos",
               "detail": "Bistro & Lounge Baggenstos",
@@ -406,6 +388,24 @@
               "detail": "Pfarrkirche St. Peter und Paul, Andermatt",
               "date": "2026-11-01",
               "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/allerheiligen-gedaechtnis-der-verstorbenen-und-friedhofsbesuch/"
+            },
+            {
+              "label": "Jahreskreisfeier - Kulturkloster Altdorf",
+              "detail": "Kulturkloster Altdorf",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/jahreskreisfeier-kulturkloster-altdorf/"
+            },
+            {
+              "label": "Mythen, Trends und Gesundheit - was steckt wirklich hinter der Ernährung ?",
+              "detail": "Altdorf",
+              "date": "2026-11-03",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mythen-trends-und-gesundheit-was-steckt-wirklich-hinter-der-ernaehrung/"
+            },
+            {
+              "label": "Tir du Rütli à 300 m",
+              "detail": "Seelisberg",
+              "date": "2026-11-04",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/tiro-del-ruetli-a-300-m/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/uri/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "7faea452827aff6c5bc94097144b114a0c9a9a47e1b0a55734d2378353f36d65",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "d85ea4096cca41e9e722b80edfc0e67382b8d923161ac4e1ca02c63b8befd48c",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-25T05:23:25.975Z",
+      "updatedAt": "2026-10-25T16:53:42.913Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -49,6 +49,16 @@
               "date": "2026-10-13T05:24:00.000Z"
             },
             {
+              "label": "Revocato: A2 Basel -> Luzern tra Svincolo autostradale Dagmersellen E Svincolo autostradale Sursee Situazione: colonna Causa: incidente precedente",
+              "value": "Traffico",
+              "date": "2026-10-25T15:29:00.000Z"
+            },
+            {
+              "label": "Revocato: A2 Basel -> Luzern tra Parcheggio Inseli, Eich E Galleria Galleria Eich Situazione: traffico fortemente rallentato Causa: incidente precedente",
+              "value": "Traffico",
+              "date": "2026-10-25T16:15:00.000Z"
+            },
+            {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
               "value": "Cantiere",
               "detail": "fine prevista: 17 dicembre 2027",
@@ -77,22 +87,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 12 novembre 2026",
               "date": "2026-02-02T07:02:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna -> Basilea Parcheggio Sonnenberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.2",
-              "value": "Cantiere",
-              "detail": "fine prevista: 13 novembre 2026",
-              "date": "2026-02-02T07:35:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna -> Basilea tra Galleria Galleria Schweizerhalle E Raccordo autostradale Raccordo di Hagnau Situazione: problemi di traffico cantiere, lunghezza [km] 1.55 Limitazione del traffico: nuova…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 16 novembre 2026",
-              "date": "2026-02-19T07:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -110,7 +108,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -156,7 +154,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "LU",
@@ -188,6 +186,16 @@
               "date": "2026-10-13T05:24:00.000Z"
             },
             {
+              "label": "Revocato: A2 Basel -> Luzern tra Svincolo autostradale Dagmersellen E Svincolo autostradale Sursee Situazione: colonna Causa: incidente precedente",
+              "value": "Traffic",
+              "date": "2026-10-25T15:29:00.000Z"
+            },
+            {
+              "label": "Revocato: A2 Basel -> Luzern tra Parcheggio Inseli, Eich E Galleria Galleria Eich Situazione: traffico fortemente rallentato Causa: incidente precedente",
+              "value": "Traffic",
+              "date": "2026-10-25T16:15:00.000Z"
+            },
+            {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
               "value": "Roadworks",
               "detail": "until 17 December 2027",
@@ -216,22 +224,10 @@
               "value": "Roadworks",
               "detail": "until 12 November 2026",
               "date": "2026-02-02T07:02:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna -> Basilea Parcheggio Sonnenberg Situazione: parcheggio chiuso cantiere, lunghezza [km] 0.2",
-              "value": "Roadworks",
-              "detail": "until 13 November 2026",
-              "date": "2026-02-02T07:35:00.000Z"
-            },
-            {
-              "label": "A2 Lucerna -> Basilea tra Galleria Galleria Schweizerhalle E Raccordo autostradale Raccordo di Hagnau Situazione: problemi di traffico cantiere, lunghezza [km] 1.55 Limitazione del traffico: nuova…",
-              "value": "Roadworks",
-              "detail": "until 16 November 2026",
-              "date": "2026-02-19T07:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -249,7 +245,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +289,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "LU",
@@ -325,6 +321,16 @@
               "date": "2026-10-13T05:24:00.000Z"
             },
             {
+              "label": "Aufgehoben: A2 Basel -> Luzern zwischen Anschluss Dagmersellen und Anschluss Sursee Sachlage: Stau Ursache: vorausgegangener Unfall",
+              "value": "Verkehr",
+              "date": "2026-10-25T15:29:00.000Z"
+            },
+            {
+              "label": "Aufgehoben: A2 Basel -> Luzern zwischen Parkplatz Inseli, Eich und Tunnel Eich-Tunnel Sachlage: stockender Verkehr Ursache: vorausgegangener Unfall",
+              "value": "Verkehr",
+              "date": "2026-10-25T16:15:00.000Z"
+            },
+            {
               "label": "H10 Bern <-> Luzern zwischen Ortschaft Wiggen und Ortschaft Kröschenbrunnen Sachlage: Verkehrsbehinderung Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
               "value": "Baustelle",
               "detail": "bis 17. Dezember 2027",
@@ -353,22 +359,10 @@
               "value": "Baustelle",
               "detail": "bis 12. November 2026",
               "date": "2026-02-02T07:02:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> Basel Parkplatz Sonnenberg Sachlage: Parkplatz geschlossen Baustelle, Länge [km] 0.2",
-              "value": "Baustelle",
-              "detail": "bis 13. November 2026",
-              "date": "2026-02-02T07:35:00.000Z"
-            },
-            {
-              "label": "A2 Luzern -> Basel zwischen Tunnel Schweizerhalle-Tunnel und Autobahndreieck Verzweigung Hagnau Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.55 Verkehrsführung: veränderte Verkehrsführung",
-              "value": "Baustelle",
-              "detail": "bis 16. November 2026",
-              "date": "2026-02-19T07:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -386,7 +380,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -430,7 +424,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "LU",
@@ -462,6 +456,16 @@
               "date": "2026-10-13T05:24:00.000Z"
             },
             {
+              "label": "Révoqué: A2 Bâle -> Lucerne entre Jonction autoroutière Dagmersellen et Jonction autoroutière Sursee Situation: bouchon Raison: accident précédent",
+              "value": "Trafic",
+              "date": "2026-10-25T15:29:00.000Z"
+            },
+            {
+              "label": "Révoqué: A2 Bâle -> Lucerne entre Parking Inseli, Eich et Tunnel Tunnel Eich Situation: trafic en accordéon Raison: accident précédent",
+              "value": "Trafic",
+              "date": "2026-10-25T16:15:00.000Z"
+            },
+            {
               "label": "H10 Berne <-> Lucerne entre Localité Wiggen et Localité Kröschenbrunnen Situation: trafic perturbé Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
               "value": "Chantier",
               "detail": "jusqu’au 17 décembre 2027",
@@ -490,22 +494,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 12 novembre 2026",
               "date": "2026-02-02T07:02:00.000Z"
-            },
-            {
-              "label": "A2 Lucerne -> Bâle Parking Sonnenberg Situation: parking fermé travaux, longueur [km] 0.2",
-              "value": "Chantier",
-              "detail": "jusqu’au 13 novembre 2026",
-              "date": "2026-02-02T07:35:00.000Z"
-            },
-            {
-              "label": "A2 Lucerne -> Bâle entre Tunnel Tunnel Schweizerhalle et Echangeur Echangeur de Hagnau Situation: trafic perturbé travaux, longueur [km] 1.55 Gestion du trafic: nouveau plan de circulation",
-              "value": "Chantier",
-              "detail": "jusqu’au 16 novembre 2026",
-              "date": "2026-02-19T07:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -523,7 +515,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +561,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

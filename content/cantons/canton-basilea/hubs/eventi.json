@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "0e9ca8a09d6f58694c1b2d38abd8fd353a8b0567e4f2d7e2123fd319070b5e44",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "66c26d4f06d1f93130ca056c0c4c2dd83cea0854b80604aa4d8e2a01e79404d5",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -33,30 +33,6 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Performance Parcours",
-              "detail": "Tanzhaus Basel - Magazin 1 - Studio Bühne, Basel",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/performance-parcours_AXxgycd"
-            },
-            {
-              "label": "La nave da ballo sul Reno - Discofox al ritmo dei più grandi successi",
-              "detail": "MS Christoph Merian",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tanzschiff-uff-em-rhy-discofox-zu-den-groessten-hits_AqHBqQq"
-            },
-            {
-              "label": "Ashley Hribar - Das Cabinet des Dr. Caligari",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ashley-hribar-das-cabinet-des-dr-caligari/"
-            },
-            {
-              "label": "Die Liebe, ein seltsames Spiel",
-              "detail": "TAM Theater am Mühlenrain",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/weil-am-rhein/die-liebe-ein-seltsames-spiel_AK3ieD3"
-            },
-            {
               "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
               "detail": "Universitätsbibliothek (UB)",
               "date": "2026-10-26",
@@ -91,6 +67,30 @@
               "detail": "Theater Fauteuil - Tabourettli",
               "date": "2026-10-27",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sylphe-pure-piaf_A7q9uqi"
+            },
+            {
+              "label": "Sylphe - Pure Piaf",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sylphe-pure-piaf/"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX LIKE A PRO",
+              "detail": "Basilea, Basel",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "ONLINE: Künstliche Intelligenz im Berufsalltag – einfach erklärt",
+              "detail": "Universitätsbibliothek (UB)",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/online-kuenstliche-intelligenz-im-berufsalltag-einfach-erklaert_AQ2sEcF"
+            },
+            {
+              "label": "Jassen für Anfänger",
+              "detail": "Riehen",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jassen-fuer-anfaenger/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/basilea/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -137,30 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Performance Parcours",
-              "detail": "Tanzhaus Basel - Magazin 1 - Studio Bühne, Basel",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/performance-parcours_AXxgycd"
-            },
-            {
-              "label": "Dance Cruise on the Rhine - Discofox to the Biggest Hits",
-              "detail": "MS Christoph Merian",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tanzschiff-uff-em-rhy-discofox-zu-den-groessten-hits_AqHBqQq"
-            },
-            {
-              "label": "Ashley Hribar - Das Cabinet des Dr. Caligari",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ashley-hribar-das-cabinet-des-dr-caligari/"
-            },
-            {
-              "label": "Die Liebe, ein seltsames Spiel",
-              "detail": "TAM Theater am Mühlenrain",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/weil-am-rhein/die-liebe-ein-seltsames-spiel_AK3ieD3"
-            },
             {
               "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
               "detail": "Universitätsbibliothek (UB)",
@@ -196,6 +172,30 @@
               "detail": "Theater Fauteuil - Tabourettli",
               "date": "2026-10-27",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sylphe-pure-piaf_A7q9uqi"
+            },
+            {
+              "label": "Sylphe - Pure Piaf",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sylphe-pure-piaf/"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "ONLINE: Künstliche Intelligenz im Berufsalltag – einfach erklärt",
+              "detail": "Universitätsbibliothek (UB)",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/online-kuenstliche-intelligenz-im-berufsalltag-einfach-erklaert_AQ2sEcF"
+            },
+            {
+              "label": "Jassen für Anfänger",
+              "detail": "Riehen",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jassen-fuer-anfaenger/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/basel/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -242,30 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Performance Parcours",
-              "detail": "Tanzhaus Basel - Magazin 1 - Studio Bühne, Basel",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/performance-parcours_AXxgycd"
-            },
-            {
-              "label": "Tanzschiff uff em Rhy - Discofox zu den grössten Hits",
-              "detail": "MS Christoph Merian",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tanzschiff-uff-em-rhy-discofox-zu-den-groessten-hits_AqHBqQq"
-            },
-            {
-              "label": "Ashley Hribar - Das Cabinet des Dr. Caligari",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ashley-hribar-das-cabinet-des-dr-caligari/"
-            },
-            {
-              "label": "Die Liebe, ein seltsames Spiel",
-              "detail": "TAM Theater am Mühlenrain",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/weil-am-rhein/die-liebe-ein-seltsames-spiel_AK3ieD3"
-            },
             {
               "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
               "detail": "Universitätsbibliothek (UB)",
@@ -301,6 +277,30 @@
               "detail": "Theater Fauteuil - Tabourettli",
               "date": "2026-10-27",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sylphe-pure-piaf_A7q9uqi"
+            },
+            {
+              "label": "Sylphe - Pure Piaf",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sylphe-pure-piaf/"
+            },
+            {
+              "label": "B1 Rooftop Bistro – COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "ONLINE: Künstliche Intelligenz im Berufsalltag – einfach erklärt",
+              "detail": "Universitätsbibliothek (UB)",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/online-kuenstliche-intelligenz-im-berufsalltag-einfach-erklaert_AQ2sEcF"
+            },
+            {
+              "label": "Jassen für Anfänger",
+              "detail": "Riehen",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jassen-fuer-anfaenger/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/basel/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -347,30 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Performance Parcours",
-              "detail": "Tanzhaus Basel - Magazin 1 - Studio Bühne, Basel",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/performance-parcours_AXxgycd"
-            },
-            {
-              "label": "Le bateau de danse sur le Rhin - Discofox sur les plus grands tubes",
-              "detail": "MS Christoph Merian",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/tanzschiff-uff-em-rhy-discofox-zu-den-groessten-hits_AqHBqQq"
-            },
-            {
-              "label": "Ashley Hribar - Das Cabinet des Dr. Caligari",
-              "detail": "Theater Fauteuil, Basel",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/ashley-hribar-das-cabinet-des-dr-caligari/"
-            },
-            {
-              "label": "Die Liebe, ein seltsames Spiel",
-              "detail": "TAM Theater am Mühlenrain",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/weil-am-rhein/die-liebe-ein-seltsames-spiel_AK3ieD3"
-            },
             {
               "label": "Künstliche Intelligenz verstehen: Hilfe im Alltag oder Gefahr?",
               "detail": "Universitätsbibliothek (UB)",
@@ -406,6 +382,30 @@
               "detail": "Theater Fauteuil - Tabourettli",
               "date": "2026-10-27",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/basel/sylphe-pure-piaf_A7q9uqi"
+            },
+            {
+              "label": "Sylphe - Pure Piaf",
+              "detail": "Theater Fauteuil, Basel",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sylphe-pure-piaf/"
+            },
+            {
+              "label": "B1 Rooftop Bistro - COCKTAIL-WORKSHOP | MIX IT LIKE A PRO",
+              "detail": "Basilea, Basel",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/b1-rooftop-bistro-cocktail-workshop-mix-like-a-pro/"
+            },
+            {
+              "label": "ONLINE: Künstliche Intelligenz im Berufsalltag – einfach erklärt",
+              "detail": "Universitätsbibliothek (UB)",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/basel/online-kuenstliche-intelligenz-im-berufsalltag-einfach-erklaert_AQ2sEcF"
+            },
+            {
+              "label": "Jassen für Anfänger",
+              "detail": "Riehen",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/jassen-fuer-anfaenger/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/bale/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

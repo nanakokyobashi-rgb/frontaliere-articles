@@ -4,32 +4,32 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "8a6b95e1dd0ff6d793026de4f634d65d194af2618926f062a5572db74645b198",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "38e82853d660e6707f15c44dc5fd3ee74288d041ecbde84f3a6c6224a29fce04",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-18T08:53:01.888Z",
+      "updatedAt": "2026-10-25T09:11:35.438Z",
       "keyFacts": 1
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-25T01:48:37.897Z",
+      "updatedAt": "2026-10-25T19:22:10.566Z",
       "keyFacts": 0
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-25T04:40:51.950Z",
+      "updatedAt": "2026-10-25T16:16:30.310Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-25T05:00:57.781Z",
+      "updatedAt": "2026-10-25T19:10:33.671Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -49,7 +49,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "31",
-          "note": "offerta mediana 450 CHF"
+          "note": "offerta mediana 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -76,18 +76,13 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "Farmacie di turno",
           "description": "Prossimi turni di guardia pubblicati dalla fonte ufficiale del cantone.",
           "items": [
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-10-24T22:00:00.000Z"
-            },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
@@ -112,11 +107,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-10-29T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-30T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-25T01:48:37.897Z"
+          "updatedAt": "2026-10-25T19:22:10.566Z"
         },
         {
           "id": "aste-targhe",
@@ -147,7 +147,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-25T04:40:51.950Z"
+          "updatedAt": "2026-10-25T16:16:30.310Z"
         },
         {
           "id": "meteo",
@@ -156,12 +156,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "8 °C",
-              "detail": "oggi da 7 a 13 °C"
+              "value": "9 °C",
+              "detail": "oggi da 7 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -199,7 +199,7 @@
               "url": "https://www.usz.ch/mitte12-im-fachdialog-das-usz-praesentiert-sein-neubauprojekt/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -220,6 +220,12 @@
           "url": "/articoli-svizzera/zurigo-suicidio-assistito/",
           "excerpt": "A Zurigo il 68,1% approva il suicidio assistito nelle strutture sanitarie. Partecipazione 47,6%; bocciata al 59,2% la legge sugli insegnanti.",
           "date": "2026-09-27T20:26:34.846Z"
+        },
+        {
+          "title": "Permesso di pesca Cantone Zurigo: verifica requisiti e competenza",
+          "url": "/articoli-svizzera/pesca-zurigo-servizi-regolati/",
+          "excerpt": "La pesca è un servizio regolato a livello cantonale; requisiti, scadenze e importi vanno verificati ufficialmente sulla fonte cantonale.",
+          "date": "2026-10-25T16:33:10.314Z"
         },
         {
           "title": "Zurigo: guida a targhe e immatricolazione",
@@ -244,12 +250,6 @@
           "url": "/articoli-svizzera/patente-di-guida-canton-zurigo-conversione-ed-esami/",
           "excerpt": "Conversione della patente di guida estera, esame teorico e pratico, corsi obbligatori e ufficio della circolazione competente nel Cantone di Zurigo.",
           "date": "2026-08-12T02:57:47.712Z"
-        },
-        {
-          "title": "Permesso di dimora B a Zurigo: requisiti e rinnovo",
-          "url": "/articoli-svizzera/permesso-dimora-b-zurigo-guida/",
-          "excerpt": "Guida completa al permesso di dimora B nel Canton Zurigo: procedure, documentazione necessaria, scadenze per il rinnovo e competenze delle autorità cantonali.",
-          "date": "2026-08-11T08:49:10.999Z"
         }
       ],
       "latestCantonArticles": [],
@@ -279,7 +279,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "ZH",
@@ -296,7 +296,7 @@
         {
           "label": "Plate auctions running",
           "value": "31",
-          "note": "typical bid 450 CHF"
+          "note": "typical bid 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -323,18 +323,13 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "On-duty pharmacies",
           "description": "Upcoming duty shifts published by the canton’s official service.",
           "items": [
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-10-24T22:00:00.000Z"
-            },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
@@ -359,11 +354,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-10-29T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-30T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-25T01:48:37.897Z"
+          "updatedAt": "2026-10-25T19:22:10.566Z"
         },
         {
           "id": "aste-targhe",
@@ -394,7 +394,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-25T04:40:51.950Z"
+          "updatedAt": "2026-10-25T16:16:30.310Z"
         },
         {
           "id": "meteo",
@@ -403,12 +403,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "8 °C",
-              "detail": "today from 7 to 13 °C"
+              "value": "9 °C",
+              "detail": "today from 7 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -446,7 +446,7 @@
               "url": "https://www.usz.ch/mitte12-im-fachdialog-das-usz-praesentiert-sein-neubauprojekt/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -467,6 +467,12 @@
           "url": "/en/swiss-articles/zurich-assisted-suicide-facilities/",
           "excerpt": "In Zurich, 68,1% approve assisted suicide in healthcare facilities. Turnout 47,6%; the law on teachers was rejected by 59,2%.",
           "date": "2026-09-27T20:26:34.846Z"
+        },
+        {
+          "title": "Zurich Canton fishing permit: check requirements and jurisdiction",
+          "url": "/en/swiss-articles/zurich-fishing-regulated-services/",
+          "excerpt": "Fishing is a service regulated at the cantonal level; requirements, deadlines and amounts must be officially verified with the cantonal source.",
+          "date": "2026-10-25T16:33:10.314Z"
         },
         {
           "title": "Zurich: guide to license plates and registration",
@@ -491,12 +497,6 @@
           "url": "/en/swiss-articles/driving-license-canton-zurich-conversion/",
           "excerpt": "Exchange of foreign driving licences, theoretical and practical examinations, compulsory courses and the competent road traffic office in the canton of Zurich.",
           "date": "2026-08-12T02:57:47.712Z"
-        },
-        {
-          "title": "Residence permit B in Zurich: requirements and renewal",
-          "url": "/en/swiss-articles/residence-permit-b-zurich-requirements/",
-          "excerpt": "Complete guide to residence permit B in the Canton of Zurich: procedures, necessary documentation, deadlines for renewal and competences of the cantonal authorities.",
-          "date": "2026-08-11T08:49:10.999Z"
         }
       ],
       "latestCantonArticles": [],
@@ -522,7 +522,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "ZH",
@@ -539,7 +539,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "31",
-          "note": "mittleres Gebot 450 CHF"
+          "note": "mittleres Gebot 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -566,18 +566,13 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "Notfallapotheken",
           "description": "Nächste Notfalldienste gemäss der offiziellen Stelle des Kantons.",
           "items": [
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-10-24T22:00:00.000Z"
-            },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
@@ -602,11 +597,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-10-29T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-30T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-25T01:48:37.897Z"
+          "updatedAt": "2026-10-25T19:22:10.566Z"
         },
         {
           "id": "aste-targhe",
@@ -637,7 +637,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-25T04:40:51.950Z"
+          "updatedAt": "2026-10-25T16:16:30.310Z"
         },
         {
           "id": "meteo",
@@ -646,12 +646,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "8 °C",
-              "detail": "heute 7 bis 13 °C"
+              "value": "9 °C",
+              "detail": "heute 7 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -689,7 +689,7 @@
               "url": "https://www.usz.ch/mitte12-im-fachdialog-das-usz-praesentiert-sein-neubauprojekt/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -710,6 +710,12 @@
           "url": "/de/schweiz-artikel/zuerich-assistierter-suizid/",
           "excerpt": "In Zürich befürworten 68,1% den assistierten Suizid in Gesundheitseinrichtungen. Beteiligung 47,6%; das Lehrergesetz wurde mit 59,2% abgelehnt.",
           "date": "2026-09-27T20:26:34.846Z"
+        },
+        {
+          "title": "Fischereibewilligung Zürich: Voraussetzungen prüfen",
+          "url": "/de/schweiz-artikel/fischen-zuerich-regulierte-dienste/",
+          "excerpt": "Die Fischerei ist eine auf kantonaler Ebene geregelte Dienstleistung; Voraussetzungen, Fristen und Beträge sind offiziell anhand der kantonalen Quelle zu überprüfen.",
+          "date": "2026-10-25T16:33:10.314Z"
         },
         {
           "title": "Zürich: Leitfaden zu Kontrollschildern und Zulassung",
@@ -734,12 +740,6 @@
           "url": "/de/schweiz-artikel/fuehrerschein-kanton-zu-rich-conversion/",
           "excerpt": "Austausch ausländischer Führerscheine, theoretische und praktische Prüfungen, Pflichtkurse und das zuständige Straßenverkehrsamt im Kanton Zürich.",
           "date": "2026-08-12T02:57:47.712Z"
-        },
-        {
-          "title": "Aufenthaltsbewilligung B in Zürich: Voraussetzungen und Verlängerung",
-          "url": "/de/schweiz-artikel/aufenthaltsbewilligung-b-zuerich-voraussetzungen/",
-          "excerpt": "Vollständiger Leitfaden zur Aufenthaltsbewilligung B im Kanton Zürich: Verfahren, erforderliche Unterlagen, Fristen für die Erneuerung und Zuständigkeiten der kantonalen Behörden.",
-          "date": "2026-08-11T08:49:10.999Z"
         }
       ],
       "latestCantonArticles": [],
@@ -765,7 +765,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "ZH",
@@ -782,7 +782,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "31",
-          "note": "offre centrale 450 CHF"
+          "note": "offre centrale 600 CHF"
         }
       ],
       "dataBlocks": [
@@ -809,18 +809,13 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "farmacie-di-turno",
           "title": "Pharmacies de garde",
           "description": "Prochaines gardes publiées par le service officiel du canton.",
           "items": [
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
-              "date": "2026-10-24T22:00:00.000Z"
-            },
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
@@ -845,11 +840,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-10-29T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-30T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-25T01:48:37.897Z"
+          "updatedAt": "2026-10-25T19:22:10.566Z"
         },
         {
           "id": "aste-targhe",
@@ -880,7 +880,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion.stva.zh.ch/de/?plate_sub_type=&plate_type=car",
-          "updatedAt": "2026-10-25T04:40:51.950Z"
+          "updatedAt": "2026-10-25T16:16:30.310Z"
         },
         {
           "id": "meteo",
@@ -889,12 +889,12 @@
           "items": [
             {
               "label": "Zürich",
-              "value": "8 °C",
-              "detail": "aujourd’hui de 7 à 13 °C"
+              "value": "9 °C",
+              "detail": "aujourd’hui de 7 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -932,7 +932,7 @@
               "url": "https://www.usz.ch/mitte12-im-fachdialog-das-usz-praesentiert-sein-neubauprojekt/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -953,6 +953,12 @@
           "url": "/fr/articles-suisse/zurich-suicide-assiste/",
           "excerpt": "À Zurich, 68,1% approuvent le suicide assisté dans les établissements de santé. Participation 47,6%; la loi sur les enseignants rejetée à 59,2%.",
           "date": "2026-09-27T20:26:34.846Z"
+        },
+        {
+          "title": "Permis de pêche à Zurich : exigences et compétences",
+          "url": "/fr/articles-suisse/pesche-zurich-services-reglementes/",
+          "excerpt": "La pêche est un service réglementé au niveau cantonal ; les exigences, les délais et les montants doivent être vérifiés officiellement auprès de la source cantonale.",
+          "date": "2026-10-25T16:33:10.314Z"
         },
         {
           "title": "Zurich : guide des plaques et de l’immatriculation",
@@ -977,12 +983,6 @@
           "url": "/fr/articles-suisse/permis-de-conduire-canton-de-zurich-conversion/",
           "excerpt": "Échange de permis de conduire étrangers, examens théoriques et pratiques, cours obligatoires et le service de circulation routière compétent dans le canton de Zurich.",
           "date": "2026-08-12T02:57:47.712Z"
-        },
-        {
-          "title": "Permis de séjour B à Zurich : exigences et renouvellement",
-          "url": "/fr/articles-suisse/permis-de-sejour-b-zurich-exigences/",
-          "excerpt": "Guide complet du permis de séjour B dans le canton de Zurich : procédures, documentation nécessaire, délais de renouvellement et compétences des autorités cantonales.",
-          "date": "2026-08-11T08:49:10.999Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1004,7 +1004,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

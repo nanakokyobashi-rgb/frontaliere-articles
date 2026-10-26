@@ -4,17 +4,17 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "f97190d512c9386d260bbd9292b68786e712f79b0f69c50d944f447d6a80123b",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "1800ebf8b698fdbdf8fa5b532d68d1e6e4ee393c8413b311b4f443947b971a84",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-25T05:23:25.975Z",
+      "updatedAt": "2026-10-25T16:53:42.913Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -66,6 +66,16 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
+              "label": "Revocato: A2 S. Gottardo -> Luzern tra Raccordo autostradale Diramazione Altdorf E Galleria Galleria Seelisberg Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-25T15:26:00.000Z"
+            },
+            {
+              "label": "Revocato: A4 Altdorf -> Brunnen tra Luogo Flüelen E Luogo Sisikon Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-25T15:28:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
               "value": "Cantiere",
               "detail": "fine prevista: 31 dicembre 2026",
@@ -76,22 +86,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 11 novembre 2026",
               "date": "2026-09-21T06:49:00.000Z"
-            },
-            {
-              "label": "A2 S. Gottardo <-> Luzern Galleria Galleria Seelisberg Situazione: problemi di traffico lunghezza [km] 9.5, cantiere Limitazione del traffico: circolazione bidirezionale Aggiunta 1: limite…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 31 ottobre 2026",
-              "date": "2026-09-21T06:52:00.000Z"
-            },
-            {
-              "label": "A2 S. Gottardo -> Luzern tra Galleria Galleria Teiftal E Svincolo autostradale Amsteg Situazione: problemi di traffico cantiere, lunghezza [km] 3.5 Limitazione del traffico: circolazione…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 28 ottobre 2026",
-              "date": "2026-09-21T06:53:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -129,7 +127,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -187,7 +185,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "UR",
@@ -236,6 +234,16 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
+              "label": "Revocato: A2 S. Gottardo -> Luzern tra Raccordo autostradale Diramazione Altdorf E Galleria Galleria Seelisberg Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-25T15:26:00.000Z"
+            },
+            {
+              "label": "Revocato: A4 Altdorf -> Brunnen tra Luogo Flüelen E Luogo Sisikon Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-25T15:28:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen tra Luogo Andermatt E Luogo Hospental Situazione: problemi di traffico cantiere, lunghezza [km] 0.5 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 4.0…",
               "value": "Roadworks",
               "detail": "until 31 December 2026",
@@ -246,22 +254,10 @@
               "value": "Roadworks",
               "detail": "until 11 November 2026",
               "date": "2026-09-21T06:49:00.000Z"
-            },
-            {
-              "label": "A2 S. Gottardo <-> Luzern Galleria Galleria Seelisberg Situazione: problemi di traffico lunghezza [km] 9.5, cantiere Limitazione del traffico: circolazione bidirezionale Aggiunta 1: limite…",
-              "value": "Roadworks",
-              "detail": "until 31 October 2026",
-              "date": "2026-09-21T06:52:00.000Z"
-            },
-            {
-              "label": "A2 S. Gottardo -> Luzern tra Galleria Galleria Teiftal E Svincolo autostradale Amsteg Situazione: problemi di traffico cantiere, lunghezza [km] 3.5 Limitazione del traffico: circolazione…",
-              "value": "Roadworks",
-              "detail": "until 28 October 2026",
-              "date": "2026-09-21T06:53:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -299,7 +295,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -357,7 +353,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "UR",
@@ -406,6 +402,16 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
+              "label": "Aufgehoben: A2 Gotthard -> Luzern zwischen Autobahndreieck Verzweigung Altdorf und Tunnel Seelisberg-Tunnel Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-25T15:26:00.000Z"
+            },
+            {
+              "label": "Aufgehoben: A4 Altdorf -> Brunnen zwischen Ortschaft Flüelen und Ortschaft Sisikon Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-25T15:28:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen zwischen Ortschaft Andermatt und Ortschaft Hospental Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.5 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m]…",
               "value": "Baustelle",
               "detail": "bis 31. Dezember 2026",
@@ -416,22 +422,10 @@
               "value": "Baustelle",
               "detail": "bis 11. November 2026",
               "date": "2026-09-21T06:49:00.000Z"
-            },
-            {
-              "label": "A2 Gotthard <-> Luzern Tunnel Seelisberg-Tunnel Sachlage: Verkehrsbehinderung Länge [km] 9.5, Baustelle Verkehrsführung: Verkehr wird über die Gegenfahrbahn geleitet Zusatz 1: vorübergehende…",
-              "value": "Baustelle",
-              "detail": "bis 31. Oktober 2026",
-              "date": "2026-09-21T06:52:00.000Z"
-            },
-            {
-              "label": "A2 Gotthard -> Luzern zwischen Tunnel Teiftal-Tunnel und Anschluss Amsteg Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 3.5 Verkehrsführung: Verkehr wird über die Gegenfahrbahn geleitet Zusatz…",
-              "value": "Baustelle",
-              "detail": "bis 28. Oktober 2026",
-              "date": "2026-09-21T06:53:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -469,7 +463,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -527,7 +521,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "UR",
@@ -576,6 +570,16 @@
               "date": "2026-09-22T09:19:00.000Z"
             },
             {
+              "label": "Révoqué: A2 St-Gothard -> Lucerne entre Echangeur Echangeur d'Altdorf et Tunnel Tunnel du Seelisberg Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-25T15:26:00.000Z"
+            },
+            {
+              "label": "Révoqué: A4 Altdorf -> Brunnen entre Localité Flüelen et Localité Sisikon Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-25T15:28:00.000Z"
+            },
+            {
               "label": "H2 Airolo <-> Göschenen entre Localité Andermatt et Localité Hospental Situation: trafic perturbé travaux, longueur [km] 0.5 Complément 1: limitation temporaire de largeur largeur de la voie [m] 4.0…",
               "value": "Chantier",
               "detail": "jusqu’au 31 décembre 2026",
@@ -586,22 +590,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 11 novembre 2026",
               "date": "2026-09-21T06:49:00.000Z"
-            },
-            {
-              "label": "A2 St-Gothard <-> Lucerne Tunnel Tunnel du Seelisberg Situation: trafic perturbé longueur [km] 9.5, travaux Gestion du trafic: trafic bidirectionnel Complément 1: limitation temporaire de largeur…",
-              "value": "Chantier",
-              "detail": "jusqu’au 31 octobre 2026",
-              "date": "2026-09-21T06:52:00.000Z"
-            },
-            {
-              "label": "A2 St-Gothard -> Lucerne entre Tunnel Tunnel Teiftal et Jonction autoroutière Amsteg Situation: trafic perturbé travaux, longueur [km] 3.5 Gestion du trafic: trafic bidirectionnel Complément 1…",
-              "value": "Chantier",
-              "detail": "jusqu’au 28 octobre 2026",
-              "date": "2026-09-21T06:53:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -639,7 +631,7 @@
               "url": "https://www.ur.ch/_rte/information/138307"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -697,7 +689,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

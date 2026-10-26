@@ -4,27 +4,22 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-25T09:51:41.734Z",
-  "contentHash": "5920e5d63674d88f7d640992895fcdc1da6a38784ad7794625f84e7c998b606f",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "a3b73c45b978d738e44ff41692b162c62520d143cff849ff30d2c8aef8880b03",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-18T08:53:01.888Z",
-      "keyFacts": 1
-    },
-    {
-      "id": "aste-targhe",
-      "updatedAt": "2026-10-25T04:40:51.950Z",
+      "updatedAt": "2026-10-25T09:11:35.438Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-25T05:00:57.781Z",
+      "updatedAt": "2026-10-25T19:10:33.671Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -40,11 +35,6 @@
           "value": "740,20 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        },
-        {
-          "label": "Aste di targhe in corso",
-          "value": "2",
-          "note": "offerta mediana 9500 CHF"
         }
       ],
       "dataBlocks": [
@@ -66,31 +56,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Aste delle targhe",
-          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
-          "items": [
-            {
-              "label": "TI426",
-              "value": "18.000 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-25T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1540"
-            },
-            {
-              "label": "TI44550",
-              "value": "1000 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-25T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1539"
-            }
-          ],
-          "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-25T04:40:51.950Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "meteo",
@@ -99,38 +65,43 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "7 °C",
-              "detail": "oggi da 6 a 12 °C"
+              "value": "9 °C",
+              "detail": "oggi da 7 a 10 °C"
             },
             {
               "label": "Chiasso",
-              "value": "7 °C",
-              "detail": "oggi da 7 a 14 °C"
+              "value": "9 °C",
+              "detail": "oggi da 6 a 12 °C"
             },
             {
               "label": "Locarno",
-              "value": "9 °C",
-              "detail": "oggi da 9 a 13 °C"
+              "value": "10 °C",
+              "detail": "oggi da 10 a 12 °C"
             },
             {
               "label": "Lugano",
               "value": "9 °C",
-              "detail": "oggi da 7 a 14 °C"
+              "detail": "oggi da 6 a 12 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "6 °C",
-              "detail": "oggi da 6 a 13 °C"
+              "value": "8 °C",
+              "detail": "oggi da 6 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Ottenuti importanti finanziamenti dall’Istituto di Ricerca Traslazionale USI-EOC",
+              "date": "2026-10-25",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/finanziamenti-irt.html"
+            },
             {
               "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
               "date": "2026-10-24",
@@ -155,14 +126,9 @@
               "label": "A Lugano il Congresso Infertilità 2026",
               "date": "2026-10-01",
               "url": "https://www.eoc.ch/media-e-news/news/2026/congresso-infertilita.html"
-            },
-            {
-              "label": "Approccio medico e infermieristico in Anestesia a confronto",
-              "date": "2026-10-01",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/anestesia.html"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -173,16 +139,16 @@
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
-          "title": "Mozione in Gran Consiglio contro la tassa sulla salute",
-          "url": "/articoli-ticino/mozione-gran-consiglio-tassa-salute/",
-          "excerpt": "Una mozione interpartitica è stata presentata in Gran Consiglio La richiesta riguarda il blocco dei ristorni verso l’Italia OCST indica la via diplomatica",
-          "date": "2026-10-18T01:16:12.242Z"
-        },
-        {
           "title": "Decreto tassa salute frontalieri pubblicato: via libera regioni",
           "url": "/articoli-ticino/decreto-tassa-salute-frontalieri-pubblicato-via-libera-regioni/",
           "excerpt": "Decreto pubblicato in Gazzetta Ufficiale a ridosso delle festività",
           "date": "2026-10-08T11:44:40.237Z"
+        },
+        {
+          "title": "Mozione in Gran Consiglio contro la tassa sulla salute",
+          "url": "/articoli-ticino/mozione-gran-consiglio-tassa-salute/",
+          "excerpt": "Una mozione interpartitica è stata presentata in Gran Consiglio La richiesta riguarda il blocco dei ristorni verso l’Italia OCST indica la via diplomatica",
+          "date": "2026-10-18T01:16:12.242Z"
         },
         {
           "title": "Inaugurati nuovi spazi ambulatoriali a San Giovanni",
@@ -250,7 +216,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-25T09:51:41.734Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "TI",
@@ -263,11 +229,6 @@
           "value": "740.20 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
-        },
-        {
-          "label": "Plate auctions running",
-          "value": "2",
-          "note": "typical bid 9,500 CHF"
         }
       ],
       "dataBlocks": [
@@ -289,31 +250,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Number plate auctions",
-          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
-          "items": [
-            {
-              "label": "TI426",
-              "value": "18,000 CHF",
-              "detail": "current bid",
-              "date": "2026-10-25T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1540"
-            },
-            {
-              "label": "TI44550",
-              "value": "1,000 CHF",
-              "detail": "current bid",
-              "date": "2026-10-25T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1539"
-            }
-          ],
-          "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-25T04:40:51.950Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "meteo",
@@ -322,38 +259,43 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "7 °C",
-              "detail": "today from 6 to 12 °C"
+              "value": "9 °C",
+              "detail": "today from 7 to 10 °C"
             },
             {
               "label": "Chiasso",
-              "value": "7 °C",
-              "detail": "today from 7 to 14 °C"
+              "value": "9 °C",
+              "detail": "today from 6 to 12 °C"
             },
             {
               "label": "Locarno",
-              "value": "9 °C",
-              "detail": "today from 9 to 13 °C"
+              "value": "10 °C",
+              "detail": "today from 10 to 12 °C"
             },
             {
               "label": "Lugano",
               "value": "9 °C",
-              "detail": "today from 7 to 14 °C"
+              "detail": "today from 6 to 12 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "6 °C",
-              "detail": "today from 6 to 13 °C"
+              "value": "8 °C",
+              "detail": "today from 6 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Ottenuti importanti finanziamenti dall’Istituto di Ricerca Traslazionale USI-EOC",
+              "date": "2026-10-25",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/finanziamenti-irt.html"
+            },
             {
               "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
               "date": "2026-10-24",
@@ -378,14 +320,9 @@
               "label": "A Lugano il Congresso Infertilità 2026",
               "date": "2026-10-01",
               "url": "https://www.eoc.ch/media-e-news/news/2026/congresso-infertilita.html"
-            },
-            {
-              "label": "Approccio medico e infermieristico in Anestesia a confronto",
-              "date": "2026-10-01",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/anestesia.html"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -396,15 +333,15 @@
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
+          "title": "Healthcare tax decree for cross-border workers approved",
+          "url": "/en/ticino-articles/healthcare-tax-decree-for-cross-border-workers-approved/",
+          "date": "2026-10-08T11:44:40.237Z"
+        },
+        {
           "title": "Motion in the Grand Council against the health tax",
           "url": "/en/ticino-articles/grand-council-motion-health-tax/",
           "excerpt": "A cross-party motion has been submitted to the Grand Council The request concerns blocking the tax rebates to Italy OCST points to the diplomatic route",
           "date": "2026-10-18T01:16:12.242Z"
-        },
-        {
-          "title": "Healthcare tax decree for cross-border workers approved",
-          "url": "/en/ticino-articles/healthcare-tax-decree-for-cross-border-workers-approved/",
-          "date": "2026-10-08T11:44:40.237Z"
         },
         {
           "title": "New outpatient facilities inaugurated in San Giovanni",
@@ -468,7 +405,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-25T09:51:41.734Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "TI",
@@ -481,11 +418,6 @@
           "value": "740.20 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
-        },
-        {
-          "label": "Laufende Kontrollschild-Auktionen",
-          "value": "2",
-          "note": "mittleres Gebot 9’500 CHF"
         }
       ],
       "dataBlocks": [
@@ -507,31 +439,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Kontrollschild-Auktionen",
-          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
-          "items": [
-            {
-              "label": "TI426",
-              "value": "18’000 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-25T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1540"
-            },
-            {
-              "label": "TI44550",
-              "value": "1’000 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-25T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1539"
-            }
-          ],
-          "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-25T04:40:51.950Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "meteo",
@@ -540,38 +448,43 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "7 °C",
-              "detail": "heute 6 bis 12 °C"
+              "value": "9 °C",
+              "detail": "heute 7 bis 10 °C"
             },
             {
               "label": "Chiasso",
-              "value": "7 °C",
-              "detail": "heute 7 bis 14 °C"
+              "value": "9 °C",
+              "detail": "heute 6 bis 12 °C"
             },
             {
               "label": "Locarno",
-              "value": "9 °C",
-              "detail": "heute 9 bis 13 °C"
+              "value": "10 °C",
+              "detail": "heute 10 bis 12 °C"
             },
             {
               "label": "Lugano",
               "value": "9 °C",
-              "detail": "heute 7 bis 14 °C"
+              "detail": "heute 6 bis 12 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "6 °C",
-              "detail": "heute 6 bis 13 °C"
+              "value": "8 °C",
+              "detail": "heute 6 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Ottenuti importanti finanziamenti dall’Istituto di Ricerca Traslazionale USI-EOC",
+              "date": "2026-10-25",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/finanziamenti-irt.html"
+            },
             {
               "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
               "date": "2026-10-24",
@@ -596,14 +509,9 @@
               "label": "A Lugano il Congresso Infertilità 2026",
               "date": "2026-10-01",
               "url": "https://www.eoc.ch/media-e-news/news/2026/congresso-infertilita.html"
-            },
-            {
-              "label": "Approccio medico e infermieristico in Anestesia a confronto",
-              "date": "2026-10-01",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/anestesia.html"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -614,15 +522,15 @@
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
+          "title": "Gesundheitsabgabe für Grenzgänger: Dekret publiziert",
+          "url": "/de/tessin-artikel/gesundheitsabgabe-fur-grenzganger-dekret-publiziert/",
+          "date": "2026-10-08T11:44:40.237Z"
+        },
+        {
           "title": "Motion im Grossen Rat gegen die Gesundheitssteuer",
           "url": "/de/tessin-artikel/grossrat-moeglicherweise-gesundheitssteuer/",
           "excerpt": "Eine überparteiliche Motion wurde im Grossen Rat eingereicht Die Forderung betrifft die Sperrung der Rückerstattungen an Italien OCST weist auf den diplomatischen Weg hin",
           "date": "2026-10-18T01:16:12.242Z"
-        },
-        {
-          "title": "Gesundheitsabgabe für Grenzgänger: Dekret publiziert",
-          "url": "/de/tessin-artikel/gesundheitsabgabe-fur-grenzganger-dekret-publiziert/",
-          "date": "2026-10-08T11:44:40.237Z"
         },
         {
           "title": "Neue ambulante Räumlichkeiten in San Giovanni eingeweiht",
@@ -686,7 +594,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-25T09:51:41.734Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "TI",
@@ -699,11 +607,6 @@
           "value": "740,20 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
-        },
-        {
-          "label": "Enchères de plaques en cours",
-          "value": "2",
-          "note": "offre centrale 9 500 CHF"
         }
       ],
       "dataBlocks": [
@@ -725,31 +628,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
-        },
-        {
-          "id": "aste-targhe",
-          "title": "Enchères de plaques",
-          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
-          "items": [
-            {
-              "label": "TI426",
-              "value": "18 000 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-25T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1540"
-            },
-            {
-              "label": "TI44550",
-              "value": "1 000 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-25T19:00:00.000Z",
-              "url": "https://www.carieauktion.ti.ch/ecari-auktion/ui/app/details/app?id=1539"
-            }
-          ],
-          "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://www.carieauktion.ti.ch/ecari-auktion/",
-          "updatedAt": "2026-10-25T04:40:51.950Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "meteo",
@@ -758,38 +637,43 @@
           "items": [
             {
               "label": "Bellinzona",
-              "value": "7 °C",
-              "detail": "aujourd’hui de 6 à 12 °C"
+              "value": "9 °C",
+              "detail": "aujourd’hui de 7 à 10 °C"
             },
             {
               "label": "Chiasso",
-              "value": "7 °C",
-              "detail": "aujourd’hui de 7 à 14 °C"
+              "value": "9 °C",
+              "detail": "aujourd’hui de 6 à 12 °C"
             },
             {
               "label": "Locarno",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 9 à 13 °C"
+              "value": "10 °C",
+              "detail": "aujourd’hui de 10 à 12 °C"
             },
             {
               "label": "Lugano",
               "value": "9 °C",
-              "detail": "aujourd’hui de 7 à 14 °C"
+              "detail": "aujourd’hui de 6 à 12 °C"
             },
             {
               "label": "Mendrisio",
-              "value": "6 °C",
-              "detail": "aujourd’hui de 6 à 13 °C"
+              "value": "8 °C",
+              "detail": "aujourd’hui de 6 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Ottenuti importanti finanziamenti dall’Istituto di Ricerca Traslazionale USI-EOC",
+              "date": "2026-10-25",
+              "url": "https://www.eoc.ch/media-e-news/news/2026/finanziamenti-irt.html"
+            },
             {
               "label": "Incontro con Marco Zappa concerto workshop “LaVitaNelleCanzoni”",
               "date": "2026-10-24",
@@ -814,14 +698,9 @@
               "label": "A Lugano il Congresso Infertilità 2026",
               "date": "2026-10-01",
               "url": "https://www.eoc.ch/media-e-news/news/2026/congresso-infertilita.html"
-            },
-            {
-              "label": "Approccio medico e infermieristico in Anestesia a confronto",
-              "date": "2026-10-01",
-              "url": "https://www.eoc.ch/media-e-news/news/2026/anestesia.html"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -832,16 +711,16 @@
           "date": "2026-10-16T03:10:47.550Z"
         },
         {
-          "title": "Motion au Grand Conseil contre la taxe sur la santé",
-          "url": "/fr/articles-tessin/motion-grand-conseil-taxe-sante/",
-          "excerpt": "Une motion interpartis a été présentée au Grand Conseil La demande concerne le blocage des ristournes vers l’Italie L’OCST indique la voie diplomatique",
-          "date": "2026-10-18T01:16:12.242Z"
-        },
-        {
           "title": "Décret sur la taxe santé des frontaliers publié : feu vert des régions",
           "url": "/fr/articles-tessin/decret-sur-la-taxe-sante-des-frontaliers-publie-feu-vert-des-regions/",
           "excerpt": "Décret publié au Journal officiel à l'approche des fêtes",
           "date": "2026-10-08T11:44:40.237Z"
+        },
+        {
+          "title": "Motion au Grand Conseil contre la taxe sur la santé",
+          "url": "/fr/articles-tessin/motion-grand-conseil-taxe-sante/",
+          "excerpt": "Une motion interpartis a été présentée au Grand Conseil La demande concerne le blocage des ristournes vers l’Italie L’OCST indique la voie diplomatique",
+          "date": "2026-10-18T01:16:12.242Z"
         },
         {
           "title": "De nouveaux espaces ambulatoires inaugurés à San Giovanni",
@@ -901,7 +780,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-25T09:51:41.734Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

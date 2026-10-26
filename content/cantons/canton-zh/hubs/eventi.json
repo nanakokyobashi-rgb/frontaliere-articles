@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "e7a8e67e70894c05106747b499600c23036c7d745d183c05622d6e93645acaa4",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "8500cc5f6c5522cfdef02481ec25c6eaa0f4ff89e07e4fe2fef9d2162177dc7d",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "353",
+          "value": "341",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "10 x 15 – Die Indie-Matinee",
-              "detail": "Zentrum Karl der Grosse",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/10-x-15-die-indie-matinee_AtnSPpn"
+              "label": "Lesezirkel",
+              "detail": "Rüti ZH, Rüti (ZH)",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesezirkel/"
             },
             {
-              "label": "Briefmarken Börse Schlieren",
-              "detail": "Schlieren",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/briefmarken-boerse-schlieren/"
+              "label": "DON TOLIVER: NITROUS - OCTANE WORLD TOUR LEG 2",
+              "detail": "Hallenstadion Zürich, Zürich",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/don-toliver-nitrous-octane-world-tour-leg-2_A2e1GAw"
             },
             {
-              "label": "Familienworkshop: Maria Lassnig und Edward Munch",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familienworkshop-maria-lassnig-und-edward-munch/"
+              "label": "Monday Blues \"Highlanders Jazzband\"",
+              "detail": "Kino Orion, Dübendorf",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duebendorf/monday-blues-highlander-jazzband_ANEJrvr"
             },
             {
-              "label": "«Femizid an Agata oder Der Klang von Magma» – begleitet von Frauenliedern aus aller Welt",
-              "detail": "Zentrum Karl der Grosse",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/femizid-an-agata-oder-der-klang-von-magma-begleitet-von-frauenliedern-aus-aller-welt_A3usJSV"
+              "label": "Prinz Pi Abschiedstour 2026",
+              "detail": "Komplex457",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/zuerich/prinz-pi-abschiedstour-2026_AQf8R3T"
+            },
+            {
+              "label": "Zsá Zsá - GIRL WHATEVER TOUR",
+              "detail": "Jugendkulturhaus Dynamo",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/zuerich/zs-zs-girl-whatever-tour_AUBUK7N"
             },
             {
               "label": "Kürbis schnitzen",
-              "detail": "Freizeitanlage Chrüzacher, Dietikon",
-              "date": "2026-10-25",
+              "detail": "Freizeitanlage Chrüzacher, Dietikon — in corso, ultimo giorno: 28 ottobre 2026",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/kuerbis-schnitzen/"
             },
             {
-              "label": "Musik aus Indien: Sahana Banerjee (Sitar) & Udai Mazumdar (Tabla)",
-              "detail": "Museum Rietberg",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/suche/zuerich/musik-aus-indien-sahana-banerjee-sitar-und-udai-mazumdar-tabla_AjfJL4J"
-            },
-            {
-              "label": "Literatur und Musik mit Thomas Sarbacher und Rachel Braunschweig",
-              "detail": "Tonhalle, Zürich",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literatur-und-musik-mit-thomas-sarbacher-und-rachel-braunschweig/"
-            },
-            {
               "label": "Old-Time Jam",
-              "detail": "Galotti",
-              "date": "2026-10-25",
+              "detail": "Galotti — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-10-26",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/old-time-jam_ASX6iBe"
             },
             {
-              "label": "Saisonausklang",
-              "detail": "Wildnispark Zürich, Zürich",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/saisonausklang/"
+              "label": "Jubiläumskonzert 25 Jahre Gospel Singers Wollishofen",
+              "detail": "Reformierte Kirche Auf der Egg, Egg — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/jubilaeumskonzert-25-jahre-gospel-singers-wollishofen_A6wbUid"
             },
             {
-              "label": "«Richtig im falschen Leben» mit Marina Vidovic",
-              "detail": "Zentrum Karl der Grosse",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/richtig-im-falschen-leben-mit-marina-vidovic_Aicd68w"
+              "label": "Le Philosophe Concerts unplugged",
+              "detail": "Bar Le Philosophe — in corso, ultimo giorno: 21 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/events/music/zuerich/le-philosophe-concerts-unplugged_AkMnGaq"
+            },
+            {
+              "label": "\"Bisch sicher?\"",
+              "detail": "Oetwil am See — in corso, ultimo giorno: 7 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bisch-sicher/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -123,7 +123,7 @@
           "url": "/eventi/zurigo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "ZH",
@@ -133,7 +133,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "353",
+          "value": "341",
           "note": "from the site’s events calendar"
         }
       ],
@@ -144,64 +144,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "10 x 15 – Die Indie-Matinee",
-              "detail": "Zentrum Karl der Grosse",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/10-x-15-die-indie-matinee_AtnSPpn"
+              "label": "Lesezirkel",
+              "detail": "Rüti ZH, Rüti (ZH)",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesezirkel/"
             },
             {
-              "label": "Briefmarken Börse Schlieren",
-              "detail": "Schlieren",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/briefmarken-boerse-schlieren/"
+              "label": "DON TOLIVER: NITROUS - OCTANE WORLD TOUR LEG 2",
+              "detail": "Hallenstadion Zürich, Zürich",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/don-toliver-nitrous-octane-world-tour-leg-2_A2e1GAw"
             },
             {
-              "label": "Familienworkshop: Maria Lassnig und Edward Munch",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familienworkshop-maria-lassnig-und-edward-munch/"
+              "label": "Monday Blues \"Highlanders Jazzband\"",
+              "detail": "Kino Orion, Dübendorf",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duebendorf/monday-blues-highlander-jazzband_ANEJrvr"
             },
             {
-              "label": "«Femizid an Agata oder Der Klang von Magma» – begleitet von Frauenliedern aus aller Welt",
-              "detail": "Zentrum Karl der Grosse",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/femizid-an-agata-oder-der-klang-von-magma-begleitet-von-frauenliedern-aus-aller-welt_A3usJSV"
+              "label": "Prinz Pi Abschiedstour 2026",
+              "detail": "Komplex457",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/zuerich/prinz-pi-abschiedstour-2026_AQf8R3T"
+            },
+            {
+              "label": "Zsá Zsá - GIRL WHATEVER TOUR",
+              "detail": "Jugendkulturhaus Dynamo",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/zuerich/zs-zs-girl-whatever-tour_AUBUK7N"
             },
             {
               "label": "Kürbis schnitzen",
-              "detail": "Freizeitanlage Chrüzacher, Dietikon",
-              "date": "2026-10-25",
+              "detail": "Freizeitanlage Chrüzacher, Dietikon — ongoing, last day: 28 October 2026",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/kuerbis-schnitzen/"
             },
             {
-              "label": "Musik aus Indien: Sahana Banerjee (Sitar) & Udai Mazumdar (Tabla)",
-              "detail": "Museum Rietberg",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/suche/zuerich/musik-aus-indien-sahana-banerjee-sitar-und-udai-mazumdar-tabla_AjfJL4J"
-            },
-            {
-              "label": "Literatur und Musik mit Thomas Sarbacher und Rachel Braunschweig",
-              "detail": "Tonhalle, Zürich",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literatur-und-musik-mit-thomas-sarbacher-und-rachel-braunschweig/"
-            },
-            {
               "label": "Old-Time Jam",
-              "detail": "Galotti",
-              "date": "2026-10-25",
+              "detail": "Galotti — ongoing, last day: 22 November 2026",
+              "date": "2026-10-26",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/old-time-jam_ASX6iBe"
             },
             {
-              "label": "Saisonausklang",
-              "detail": "Wildnispark Zürich, Zürich",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/saisonausklang/"
+              "label": "Jubiläumskonzert 25 Jahre Gospel Singers Wollishofen",
+              "detail": "Reformierte Kirche Auf der Egg, Egg — ongoing, last day: 31 October 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/jubilaeumskonzert-25-jahre-gospel-singers-wollishofen_A6wbUid"
             },
             {
-              "label": "«Richtig im falschen Leben» mit Marina Vidovic",
-              "detail": "Zentrum Karl der Grosse",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/richtig-im-falschen-leben-mit-marina-vidovic_Aicd68w"
+              "label": "Le Philosophe: Unplugged Concerts",
+              "detail": "Bar Le Philosophe — ongoing, last day: 21 November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/events/music/zuerich/le-philosophe-concerts-unplugged_AkMnGaq"
+            },
+            {
+              "label": "\"Bisch sicher?\"",
+              "detail": "Oetwil am See — ongoing, last day: 7 November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bisch-sicher/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -234,7 +234,7 @@
           "url": "/en/events/zurich/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "ZH",
@@ -244,7 +244,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "353",
+          "value": "341",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -255,64 +255,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "10 x 15 – Die Indie-Matinee",
-              "detail": "Zentrum Karl der Grosse",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/10-x-15-die-indie-matinee_AtnSPpn"
+              "label": "Lesezirkel",
+              "detail": "Rüti ZH, Rüti (ZH)",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesezirkel/"
             },
             {
-              "label": "Briefmarken Börse Schlieren",
-              "detail": "Schlieren",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/briefmarken-boerse-schlieren/"
+              "label": "DON TOLIVER: NITROUS - OCTANE WORLD TOUR LEG 2",
+              "detail": "Hallenstadion Zürich, Zürich",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/don-toliver-nitrous-octane-world-tour-leg-2_A2e1GAw"
             },
             {
-              "label": "Familienworkshop: Maria Lassnig und Edward Munch",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familienworkshop-maria-lassnig-und-edward-munch/"
+              "label": "Monday Blues \"Highlanders Jazzband\"",
+              "detail": "Kino Orion, Dübendorf",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duebendorf/monday-blues-highlander-jazzband_ANEJrvr"
             },
             {
-              "label": "«Femizid an Agata oder Der Klang von Magma» – begleitet von Frauenliedern aus aller Welt",
-              "detail": "Zentrum Karl der Grosse",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/femizid-an-agata-oder-der-klang-von-magma-begleitet-von-frauenliedern-aus-aller-welt_A3usJSV"
+              "label": "Prinz Pi Abschiedstour 2026",
+              "detail": "Komplex457",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/zuerich/prinz-pi-abschiedstour-2026_AQf8R3T"
+            },
+            {
+              "label": "Zsá Zsá - GIRL WHATEVER TOUR",
+              "detail": "Jugendkulturhaus Dynamo",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/zuerich/zs-zs-girl-whatever-tour_AUBUK7N"
             },
             {
               "label": "Kürbis schnitzen",
-              "detail": "Freizeitanlage Chrüzacher, Dietikon",
-              "date": "2026-10-25",
+              "detail": "Freizeitanlage Chrüzacher, Dietikon — läuft, letzter Tag: 28. Oktober 2026",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/kuerbis-schnitzen/"
             },
             {
-              "label": "Musik aus Indien: Sahana Banerjee (Sitar) & Udai Mazumdar (Tabla)",
-              "detail": "Museum Rietberg",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/suche/zuerich/musik-aus-indien-sahana-banerjee-sitar-und-udai-mazumdar-tabla_AjfJL4J"
-            },
-            {
-              "label": "Literatur und Musik mit Thomas Sarbacher und Rachel Braunschweig",
-              "detail": "Tonhalle, Zürich",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literatur-und-musik-mit-thomas-sarbacher-und-rachel-braunschweig/"
-            },
-            {
               "label": "Old-Time Jam",
-              "detail": "Galotti",
-              "date": "2026-10-25",
+              "detail": "Galotti — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-10-26",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/old-time-jam_ASX6iBe"
             },
             {
-              "label": "Saisonausklang",
-              "detail": "Wildnispark Zürich, Zürich",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/saisonausklang/"
+              "label": "Jubiläumskonzert 25 Jahre Gospel Singers Wollishofen",
+              "detail": "Reformierte Kirche Auf der Egg, Egg — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/jubilaeumskonzert-25-jahre-gospel-singers-wollishofen_A6wbUid"
             },
             {
-              "label": "«Richtig im falschen Leben» mit Marina Vidovic",
-              "detail": "Zentrum Karl der Grosse",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/richtig-im-falschen-leben-mit-marina-vidovic_Aicd68w"
+              "label": "Le Philosophe Concerts unplugged",
+              "detail": "Bar Le Philosophe — läuft, letzter Tag: 21. November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/events/music/zuerich/le-philosophe-concerts-unplugged_AkMnGaq"
+            },
+            {
+              "label": "\"Bisch sicher?\"",
+              "detail": "Oetwil am See — läuft, letzter Tag: 7. November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bisch-sicher/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -345,7 +345,7 @@
           "url": "/de/veranstaltungen/zurich/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "ZH",
@@ -355,7 +355,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "353",
+          "value": "341",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -366,64 +366,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "10 x 15 – Die Indie-Matinee",
-              "detail": "Zentrum Karl der Grosse",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/10-x-15-die-indie-matinee_AtnSPpn"
+              "label": "Lesezirkel",
+              "detail": "Rüti ZH, Rüti (ZH)",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lesezirkel/"
             },
             {
-              "label": "Briefmarken Börse Schlieren",
-              "detail": "Schlieren",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/briefmarken-boerse-schlieren/"
+              "label": "DON TOLIVER: NITROUS - OCTANE WORLD TOUR LEG 2",
+              "detail": "Hallenstadion Zürich, Zürich",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/don-toliver-nitrous-octane-world-tour-leg-2_A2e1GAw"
             },
             {
-              "label": "Familienworkshop: Maria Lassnig und Edward Munch",
-              "detail": "Zurich, Zürich",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/familienworkshop-maria-lassnig-und-edward-munch/"
+              "label": "Monday Blues \"Highlanders Jazzband\"",
+              "detail": "Kino Orion, Dübendorf",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/duebendorf/monday-blues-highlander-jazzband_ANEJrvr"
             },
             {
-              "label": "«Femizid an Agata oder Der Klang von Magma» – begleitet von Frauenliedern aus aller Welt",
-              "detail": "Zentrum Karl der Grosse",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/femizid-an-agata-oder-der-klang-von-magma-begleitet-von-frauenliedern-aus-aller-welt_A3usJSV"
+              "label": "Prinz Pi Abschiedstour 2026",
+              "detail": "Komplex457",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/populaer/zuerich/prinz-pi-abschiedstour-2026_AQf8R3T"
+            },
+            {
+              "label": "Zsá Zsá - GIRL WHATEVER TOUR",
+              "detail": "Jugendkulturhaus Dynamo",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/alternativ/zuerich/zs-zs-girl-whatever-tour_AUBUK7N"
             },
             {
               "label": "Kürbis schnitzen",
-              "detail": "Freizeitanlage Chrüzacher, Dietikon",
-              "date": "2026-10-25",
+              "detail": "Freizeitanlage Chrüzacher, Dietikon — en cours, dernier jour : 28 octobre 2026",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/kuerbis-schnitzen/"
             },
             {
-              "label": "Musik aus Indien: Sahana Banerjee (Sitar) & Udai Mazumdar (Tabla)",
-              "detail": "Museum Rietberg",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/suche/zuerich/musik-aus-indien-sahana-banerjee-sitar-und-udai-mazumdar-tabla_AjfJL4J"
-            },
-            {
-              "label": "Literatur und Musik mit Thomas Sarbacher und Rachel Braunschweig",
-              "detail": "Tonhalle, Zürich",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/literatur-und-musik-mit-thomas-sarbacher-und-rachel-braunschweig/"
-            },
-            {
               "label": "Old-Time Jam",
-              "detail": "Galotti",
-              "date": "2026-10-25",
+              "detail": "Galotti — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-10-26",
               "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/old-time-jam_ASX6iBe"
             },
             {
-              "label": "Saisonausklang",
-              "detail": "Wildnispark Zürich, Zürich",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/saisonausklang/"
+              "label": "Jubiläumskonzert 25 Jahre Gospel Singers Wollishofen",
+              "detail": "Reformierte Kirche Auf der Egg, Egg — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/jubilaeumskonzert-25-jahre-gospel-singers-wollishofen_A6wbUid"
             },
             {
-              "label": "«Richtig im falschen Leben» mit Marina Vidovic",
-              "detail": "Zentrum Karl der Grosse",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/zuerich/richtig-im-falschen-leben-mit-marina-vidovic_Aicd68w"
+              "label": "Le Philosophe : concerts acoustiques",
+              "detail": "Bar Le Philosophe — en cours, dernier jour : 21 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/events/music/zuerich/le-philosophe-concerts-unplugged_AkMnGaq"
+            },
+            {
+              "label": "\"Bisch sicher?\"",
+              "detail": "Oetwil am See — en cours, dernier jour : 7 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/bisch-sicher/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -456,7 +456,7 @@
           "url": "/fr/evenements/zurich/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

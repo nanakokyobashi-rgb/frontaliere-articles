@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "7a2f300a52c6ec62de364c1d30708d7ec49775d72098fca77cbad13de4d5e3bc",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "cb08c09c4aca75b4d51f96644eab9d441406293f50d19a39a8958f6f9bc34f0c",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "31",
+          "value": "27",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,40 +38,10 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Schaffhauser Herbstmesse",
-              "detail": "Schaffhausen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhauser-herbstmesse/"
-            },
-            {
-              "label": "Lesung: Nikoletta Kiss – Rückkehr nach Budapest",
-              "detail": "Kulturhaus Obere Stube, Stein am Rhein",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lesung-nikoletta-kiss-rueckkehr-nach-budapest-1/"
-            },
-            {
-              "label": "Steiner Trio Basel",
-              "detail": "Schaffhausen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/steiner-trio-basel/"
-            },
-            {
-              "label": "In 80 Tagen um die Welt",
-              "detail": "Schaffhausen — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/in-80-tagen-um-die-welt-1/"
-            },
-            {
               "label": "Riscoprire Sciaffusa - Un viaggio archeologico e storico nel tempo",
               "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
-            {
-              "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Vortragsabend: Garten der Zukunft",
@@ -96,6 +66,36 @@
               "detail": "Haberhaus Bühne, Schaffhausen",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/speistrank-stories-with-annina-keller-roesti-sugar-cane-and-love/"
+            },
+            {
+              "label": "MANUEL STAHLBERGER [CH] «ES GEHT»",
+              "detail": "TapTab",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/manuel-stahlberger-ch-es-geht_AyCHXX2"
+            },
+            {
+              "label": "Acoustic Blues Drifters",
+              "detail": "Bistro Chez Ulrique, Stein am Rhein",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/acoustic-blues-drifters_AsqQRPg"
+            },
+            {
+              "label": "ÃO [BE]",
+              "detail": "TapTab",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/events/alternative/schaffhausen/o-be_ASiEmsf"
+            },
+            {
+              "label": "ÃO [BE]",
+              "detail": "TapTab Musikraum, Schaffhausen",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ao-be/"
+            },
+            {
+              "label": "Viel Lärm um nichts",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -133,7 +133,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +155,7 @@
           "url": "/eventi/sciaffusa/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "SH",
@@ -165,7 +165,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "31",
+          "value": "27",
           "note": "from the site’s events calendar"
         }
       ],
@@ -176,40 +176,10 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Schaffhauser Herbstmesse",
-              "detail": "Schaffhausen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhauser-herbstmesse/"
-            },
-            {
-              "label": "Lesung: Nikoletta Kiss – Rückkehr nach Budapest",
-              "detail": "Kulturhaus Obere Stube, Stein am Rhein",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lesung-nikoletta-kiss-rueckkehr-nach-budapest-1/"
-            },
-            {
-              "label": "Steiner Trio Basel",
-              "detail": "Schaffhausen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/steiner-trio-basel/"
-            },
-            {
-              "label": "In 80 Tagen um die Welt",
-              "detail": "Schaffhausen — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/in-80-tagen-um-die-welt-1/"
-            },
-            {
               "label": "Rediscover Schaffhausen - An archaeological-historical journey through time",
               "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — ongoing, last day: 26 October 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
-            {
-              "label": "Wine mobile",
-              "detail": "Bringolf Weinbau, Hallau — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Vortragsabend: Garten der Zukunft",
@@ -234,6 +204,36 @@
               "detail": "Haberhaus Bühne, Schaffhausen",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/speistrank-stories-with-annina-keller-roesti-sugar-cane-and-love/"
+            },
+            {
+              "label": "MANUEL STAHLBERGER [CH] «ES GEHT»",
+              "detail": "TapTab",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/manuel-stahlberger-ch-es-geht_AyCHXX2"
+            },
+            {
+              "label": "Acoustic Blues Drifters",
+              "detail": "Bistro Chez Ulrique, Stein am Rhein",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/acoustic-blues-drifters_AsqQRPg"
+            },
+            {
+              "label": "ÃO [BE]",
+              "detail": "TapTab",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/events/alternative/schaffhausen/o-be_ASiEmsf"
+            },
+            {
+              "label": "ÃO [BE]",
+              "detail": "TapTab Musikraum, Schaffhausen",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ao-be/"
+            },
+            {
+              "label": "Viel Lärm um nichts",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -271,7 +271,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -293,7 +293,7 @@
           "url": "/en/events/schaffhausen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "SH",
@@ -303,7 +303,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "31",
+          "value": "27",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -314,40 +314,10 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Schaffhauser Herbstmesse",
-              "detail": "Schaffhausen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhauser-herbstmesse/"
-            },
-            {
-              "label": "Lesung: Nikoletta Kiss – Rückkehr nach Budapest",
-              "detail": "Kulturhaus Obere Stube, Stein am Rhein",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lesung-nikoletta-kiss-rueckkehr-nach-budapest-1/"
-            },
-            {
-              "label": "Steiner Trio Basel",
-              "detail": "Schaffhausen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/steiner-trio-basel/"
-            },
-            {
-              "label": "In 80 Tagen um die Welt",
-              "detail": "Schaffhausen — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/in-80-tagen-um-die-welt-1/"
-            },
-            {
               "label": "Schaffhausen neu entdecken ̶ Eine archäologisch-historische Zeitreise",
               "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
-            {
-              "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Vortragsabend: Garten der Zukunft",
@@ -372,6 +342,36 @@
               "detail": "Haberhaus Bühne, Schaffhausen",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/speistrank-stories-with-annina-keller-roesti-sugar-cane-and-love/"
+            },
+            {
+              "label": "MANUEL STAHLBERGER [CH] «ES GEHT»",
+              "detail": "TapTab",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/manuel-stahlberger-ch-es-geht_AyCHXX2"
+            },
+            {
+              "label": "Akustische Blues-Drifter",
+              "detail": "Bistro Chez Ulrique, Stein am Rhein",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/acoustic-blues-drifters_AsqQRPg"
+            },
+            {
+              "label": "ÃO [BE]",
+              "detail": "TapTab",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/events/alternative/schaffhausen/o-be_ASiEmsf"
+            },
+            {
+              "label": "ÃO [BE]",
+              "detail": "TapTab Musikraum, Schaffhausen",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ao-be/"
+            },
+            {
+              "label": "Viel Lärm um nichts",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -409,7 +409,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -431,7 +431,7 @@
           "url": "/de/veranstaltungen/schaffhausen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "SH",
@@ -441,7 +441,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "31",
+          "value": "27",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -452,40 +452,10 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Schaffhauser Herbstmesse",
-              "detail": "Schaffhausen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaffhauser-herbstmesse/"
-            },
-            {
-              "label": "Lesung: Nikoletta Kiss – Rückkehr nach Budapest",
-              "detail": "Kulturhaus Obere Stube, Stein am Rhein",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/lesung-nikoletta-kiss-rueckkehr-nach-budapest-1/"
-            },
-            {
-              "label": "Steiner Trio Basel",
-              "detail": "Schaffhausen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/steiner-trio-basel/"
-            },
-            {
-              "label": "In 80 Tagen um die Welt",
-              "detail": "Schaffhausen — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/in-80-tagen-um-die-welt-1/"
-            },
-            {
               "label": "Redécouvrir Schaffhouse ̶ Un voyage dans le temps archéologique et historique",
               "detail": "Chirchgmeindhuus Ochseschüür, Schaffhausen — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/rediscover-schaffhausen-an-archaeological-and-historical-journey-through-time/"
-            },
-            {
-              "label": "Weinmobil",
-              "detail": "Bringolf Weinbau, Hallau — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/wine-mobile/"
             },
             {
               "label": "Vortragsabend: Garten der Zukunft",
@@ -510,6 +480,36 @@
               "detail": "Haberhaus Bühne, Schaffhausen",
               "date": "2026-10-29",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/speistrank-stories-with-annina-keller-roesti-sugar-cane-and-love/"
+            },
+            {
+              "label": "MANUEL STAHLBERGER [CH] «ES GEHT»",
+              "detail": "TapTab",
+              "date": "2026-10-29",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/schaffhausen/manuel-stahlberger-ch-es-geht_AyCHXX2"
+            },
+            {
+              "label": "Acoustique Blues Drifters",
+              "detail": "Bistro Chez Ulrique, Stein am Rhein",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/events/small-stage/stein-am-rhein/acoustic-blues-drifters_AsqQRPg"
+            },
+            {
+              "label": "ÃO [BE]",
+              "detail": "TapTab",
+              "date": "2026-10-30",
+              "url": "https://www.guidle.com/it/events/alternative/schaffhausen/o-be_ASiEmsf"
+            },
+            {
+              "label": "ÃO [BE]",
+              "detail": "TapTab Musikraum, Schaffhausen",
+              "date": "2026-10-30",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/ao-be/"
+            },
+            {
+              "label": "Viel Lärm um nichts",
+              "detail": "Stadttheater Schaffhausen, Schaffhausen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/viel-laerm-um-nichts/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -547,7 +547,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/vhs+ausstellung"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -569,7 +569,7 @@
           "url": "/fr/evenements/schaffhouse/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

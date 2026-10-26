@@ -4,22 +4,22 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "servizi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "e5545df85d5e93305d44dae7fa51031c5f38033057b7d0041057758387af9769",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "10435762294ad0cbd82ccc01b184b45433d27b8fc2fbee9726d0a9a10903197f",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-18T08:53:01.888Z",
+      "updatedAt": "2026-10-25T09:11:35.438Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-25T05:00:57.781Z",
+      "updatedAt": "2026-10-25T19:10:33.671Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -61,7 +61,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "meteo",
@@ -70,12 +70,12 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "9 °C",
-              "detail": "oggi da 8 a 16 °C"
+              "value": "10 °C",
+              "detail": "oggi da 8 a 13 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -113,7 +113,7 @@
               "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -193,7 +193,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "LU",
@@ -232,7 +232,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "meteo",
@@ -241,12 +241,12 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "9 °C",
-              "detail": "today from 8 to 16 °C"
+              "value": "10 °C",
+              "detail": "today from 8 to 13 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -284,7 +284,7 @@
               "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -359,7 +359,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "LU",
@@ -398,7 +398,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "meteo",
@@ -407,12 +407,12 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "9 °C",
-              "detail": "heute 8 bis 16 °C"
+              "value": "10 °C",
+              "detail": "heute 8 bis 13 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -450,7 +450,7 @@
               "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -525,7 +525,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "LU",
@@ -564,7 +564,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "meteo",
@@ -573,12 +573,12 @@
           "items": [
             {
               "label": "Luzern",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 8 à 16 °C"
+              "value": "10 °C",
+              "detail": "aujourd’hui de 8 à 13 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -616,7 +616,7 @@
               "url": "https://www.lups.ch/2026/07/02/chefarzt-der-stationaeren-dienste-verlaesst-die-luzerner-psychiatrie/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -688,7 +688,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

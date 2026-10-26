@@ -4,8 +4,8 @@
   "section": "canton-nw",
   "canton": "NW",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "785cf53c60a6f2ebd238a85ffadc78ef941114f4cbac66f0b477c6cf4d65e480",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "7306833b3333d0976ee069e7a2ec80f69a8590154d75184946759d976404ac55",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "58",
+          "value": "54",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Älplerchilbi",
-              "detail": "Festplatz Gewerbe an der Aa und MZA Zälgli, Wolfenschiessen, Wolfenschiessen",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94123"
+              "label": "Älplertanz",
+              "detail": "Restaurant Happy Day, Wolfenschiessen, Wolfenschiessen",
+              "date": "2026-10-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94120"
             },
             {
-              "label": "Älplerkilbi",
-              "detail": "Älplertanz Sporthalle Breitli, Buochs, Buochs",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/91387"
+              "label": "Frauengemeinschaft - Adventsgesteck basteln",
+              "detail": "Rütimattli, Ennetmoos, Ennetmoos",
+              "date": "2026-10-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/90580"
             },
             {
-              "label": "Rochus Lussi: «zwischen da und dort»",
-              "detail": "Galerie Stans, Stans, Stans",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/93679"
-            },
-            {
-              "label": "Rochus Lussi: «zwischen da und dort»",
-              "detail": "Galerie Stans, Stans, Stans",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/93682"
-            },
-            {
-              "label": "SwissCityMarathon 2026",
-              "detail": "Ganze Seestrasse (Kreisel Schlüssel bis Kreisel Acheregg), Hergiswil",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89651"
-            },
-            {
-              "label": "Zyklus-Show",
-              "detail": "Pfarreiheim, Stans, Stans",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/88331"
-            },
-            {
-              "label": "Ökumenischer Gottesdienst und Oekifäscht",
-              "detail": "Oeki, Stansstad, Stansstad",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94291"
-            },
-            {
-              "label": "Muisigmäss",
-              "detail": "Kirche St. Jakob, Ennetmoos, Ennetmoos",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/90364"
+              "label": "Frauenspaziergang FMG Ennetbürgen",
+              "detail": "Ennetbürgen, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/89153"
             },
             {
               "label": "De Otto gwünnt im Lotto",
               "detail": "Gemeindesaal Stansstad, Stansstad — in corso, ultimo giorno: 14 novembre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
             },
             {
               "label": "Lasertraining Rütlischiessen",
               "detail": "MZA Steini, Dallenwil, Dallenwil — in corso, ultimo giorno: 27 ottobre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.nw.ch/anlaesseaktuelles/93010"
+            },
+            {
+              "label": "1. ORS - 3. ORS: Verschiebedatum Herbstwanderung",
+              "detail": "Emmetten",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93970"
+            },
+            {
+              "label": "FMG Abendvortrag: Altersarmut bei Frauen",
+              "detail": "Pfarreizentrum, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/86062"
+            },
+            {
+              "label": "Handwerkstube",
+              "detail": "Pfarreiheim, Stans, Stans",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/92665"
+            },
+            {
+              "label": "STILLE - MEDITATIONSGRUPPE",
+              "detail": "Pavillon bei der Reformierten Kirche Hergiswil, Hergiswil",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94288"
+            },
+            {
+              "label": "Meditation",
+              "detail": "kath. Pfarrkirche, Buochs, Buochs",
+              "date": "2026-10-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/92005"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/nidvaldo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "NW",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "58",
+          "value": "54",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,64 +138,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Älplerchilbi",
-              "detail": "Festplatz Gewerbe an der Aa und MZA Zälgli, Wolfenschiessen, Wolfenschiessen",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94123"
+              "label": "Älplertanz",
+              "detail": "Restaurant Happy Day, Wolfenschiessen, Wolfenschiessen",
+              "date": "2026-10-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94120"
             },
             {
-              "label": "Älplerkilbi",
-              "detail": "Älplertanz Sporthalle Breitli, Buochs, Buochs",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/91387"
+              "label": "Frauengemeinschaft - Adventsgesteck basteln",
+              "detail": "Rütimattli, Ennetmoos, Ennetmoos",
+              "date": "2026-10-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/90580"
             },
             {
-              "label": "Rochus Lussi: «zwischen da und dort»",
-              "detail": "Galerie Stans, Stans, Stans",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/93679"
-            },
-            {
-              "label": "Rochus Lussi: «zwischen da und dort»",
-              "detail": "Galerie Stans, Stans, Stans",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/93682"
-            },
-            {
-              "label": "SwissCityMarathon 2026",
-              "detail": "Ganze Seestrasse (Kreisel Schlüssel bis Kreisel Acheregg), Hergiswil",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89651"
-            },
-            {
-              "label": "Zyklus-Show",
-              "detail": "Pfarreiheim, Stans, Stans",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/88331"
-            },
-            {
-              "label": "Ökumenischer Gottesdienst und Oekifäscht",
-              "detail": "Oeki, Stansstad, Stansstad",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94291"
-            },
-            {
-              "label": "Muisigmäss",
-              "detail": "Kirche St. Jakob, Ennetmoos, Ennetmoos",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/90364"
+              "label": "Frauenspaziergang FMG Ennetbürgen",
+              "detail": "Ennetbürgen, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/89153"
             },
             {
               "label": "De Otto gwünnt im Lotto",
               "detail": "Gemeindesaal Stansstad, Stansstad — ongoing, last day: 14 November 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
             },
             {
               "label": "Lasertraining Rütlischiessen",
               "detail": "MZA Steini, Dallenwil, Dallenwil — ongoing, last day: 27 October 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.nw.ch/anlaesseaktuelles/93010"
+            },
+            {
+              "label": "1. ORS - 3. ORS: Verschiebedatum Herbstwanderung",
+              "detail": "Emmetten",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93970"
+            },
+            {
+              "label": "FMG Abendvortrag: Altersarmut bei Frauen",
+              "detail": "Pfarreizentrum, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/86062"
+            },
+            {
+              "label": "Handwerkstube",
+              "detail": "Pfarreiheim, Stans, Stans",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/92665"
+            },
+            {
+              "label": "STILLE - MEDITATIONSGRUPPE",
+              "detail": "Pavillon bei der Reformierten Kirche Hergiswil, Hergiswil",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94288"
+            },
+            {
+              "label": "Meditation",
+              "detail": "kath. Pfarrkirche, Buochs, Buochs",
+              "date": "2026-10-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/92005"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/nidwalden/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "NW",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "58",
+          "value": "54",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,64 +243,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Älplerchilbi",
-              "detail": "Festplatz Gewerbe an der Aa und MZA Zälgli, Wolfenschiessen, Wolfenschiessen",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94123"
+              "label": "Älplertanz",
+              "detail": "Restaurant Happy Day, Wolfenschiessen, Wolfenschiessen",
+              "date": "2026-10-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94120"
             },
             {
-              "label": "Älplerkilbi",
-              "detail": "Älplertanz Sporthalle Breitli, Buochs, Buochs",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/91387"
+              "label": "Frauengemeinschaft - Adventsgesteck basteln",
+              "detail": "Rütimattli, Ennetmoos, Ennetmoos",
+              "date": "2026-10-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/90580"
             },
             {
-              "label": "Rochus Lussi: «zwischen da und dort»",
-              "detail": "Galerie Stans, Stans, Stans",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/93679"
-            },
-            {
-              "label": "Rochus Lussi: «zwischen da und dort»",
-              "detail": "Galerie Stans, Stans, Stans",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/93682"
-            },
-            {
-              "label": "SwissCityMarathon 2026",
-              "detail": "Ganze Seestrasse (Kreisel Schlüssel bis Kreisel Acheregg), Hergiswil",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89651"
-            },
-            {
-              "label": "Zyklus-Show",
-              "detail": "Pfarreiheim, Stans, Stans",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/88331"
-            },
-            {
-              "label": "Ökumenischer Gottesdienst und Oekifäscht",
-              "detail": "Oeki, Stansstad, Stansstad",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94291"
-            },
-            {
-              "label": "Muisigmäss",
-              "detail": "Kirche St. Jakob, Ennetmoos, Ennetmoos",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/90364"
+              "label": "Frauenspaziergang FMG Ennetbürgen",
+              "detail": "Ennetbürgen, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/89153"
             },
             {
               "label": "De Otto gwünnt im Lotto",
               "detail": "Gemeindesaal Stansstad, Stansstad — läuft, letzter Tag: 14. November 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
             },
             {
               "label": "Lasertraining Rütlischiessen",
               "detail": "MZA Steini, Dallenwil, Dallenwil — läuft, letzter Tag: 27. Oktober 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.nw.ch/anlaesseaktuelles/93010"
+            },
+            {
+              "label": "1. ORS - 3. ORS: Verschiebedatum Herbstwanderung",
+              "detail": "Emmetten",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93970"
+            },
+            {
+              "label": "FMG Abendvortrag: Altersarmut bei Frauen",
+              "detail": "Pfarreizentrum, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/86062"
+            },
+            {
+              "label": "Handwerkstube",
+              "detail": "Pfarreiheim, Stans, Stans",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/92665"
+            },
+            {
+              "label": "STILLE - MEDITATIONSGRUPPE",
+              "detail": "Pavillon bei der Reformierten Kirche Hergiswil, Hergiswil",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94288"
+            },
+            {
+              "label": "Meditation",
+              "detail": "kath. Pfarrkirche, Buochs, Buochs",
+              "date": "2026-10-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/92005"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/nidwalden/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "NW",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "58",
+          "value": "54",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,64 +348,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Älplerchilbi",
-              "detail": "Festplatz Gewerbe an der Aa und MZA Zälgli, Wolfenschiessen, Wolfenschiessen",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94123"
+              "label": "Älplertanz",
+              "detail": "Restaurant Happy Day, Wolfenschiessen, Wolfenschiessen",
+              "date": "2026-10-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94120"
             },
             {
-              "label": "Älplerkilbi",
-              "detail": "Älplertanz Sporthalle Breitli, Buochs, Buochs",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/91387"
+              "label": "Frauengemeinschaft - Adventsgesteck basteln",
+              "detail": "Rütimattli, Ennetmoos, Ennetmoos",
+              "date": "2026-10-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/90580"
             },
             {
-              "label": "Rochus Lussi: «zwischen da und dort»",
-              "detail": "Galerie Stans, Stans, Stans",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/93679"
-            },
-            {
-              "label": "Rochus Lussi: «zwischen da und dort»",
-              "detail": "Galerie Stans, Stans, Stans",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/93682"
-            },
-            {
-              "label": "SwissCityMarathon 2026",
-              "detail": "Ganze Seestrasse (Kreisel Schlüssel bis Kreisel Acheregg), Hergiswil",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/89651"
-            },
-            {
-              "label": "Zyklus-Show",
-              "detail": "Pfarreiheim, Stans, Stans",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/88331"
-            },
-            {
-              "label": "Ökumenischer Gottesdienst und Oekifäscht",
-              "detail": "Oeki, Stansstad, Stansstad",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/94291"
-            },
-            {
-              "label": "Muisigmäss",
-              "detail": "Kirche St. Jakob, Ennetmoos, Ennetmoos",
-              "date": "2026-10-25",
-              "url": "https://www.nw.ch/anlaesseaktuelles/90364"
+              "label": "Frauenspaziergang FMG Ennetbürgen",
+              "detail": "Ennetbürgen, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-26",
+              "url": "https://www.nw.ch/anlaesseaktuelles/89153"
             },
             {
               "label": "De Otto gwünnt im Lotto",
               "detail": "Gemeindesaal Stansstad, Stansstad — en cours, dernier jour : 14 novembre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/de-otto-gwuennt-im-lotto/"
             },
             {
               "label": "Lasertraining Rütlischiessen",
               "detail": "MZA Steini, Dallenwil, Dallenwil — en cours, dernier jour : 27 octobre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.nw.ch/anlaesseaktuelles/93010"
+            },
+            {
+              "label": "1. ORS - 3. ORS: Verschiebedatum Herbstwanderung",
+              "detail": "Emmetten",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/93970"
+            },
+            {
+              "label": "FMG Abendvortrag: Altersarmut bei Frauen",
+              "detail": "Pfarreizentrum, Ennetbürgen, Ennetbürgen",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/86062"
+            },
+            {
+              "label": "Handwerkstube",
+              "detail": "Pfarreiheim, Stans, Stans",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/92665"
+            },
+            {
+              "label": "STILLE - MEDITATIONSGRUPPE",
+              "detail": "Pavillon bei der Reformierten Kirche Hergiswil, Hergiswil",
+              "date": "2026-10-27",
+              "url": "https://www.nw.ch/anlaesseaktuelles/94288"
+            },
+            {
+              "label": "Meditation",
+              "detail": "kath. Pfarrkirche, Buochs, Buochs",
+              "date": "2026-10-28",
+              "url": "https://www.nw.ch/anlaesseaktuelles/92005"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/nidwald/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

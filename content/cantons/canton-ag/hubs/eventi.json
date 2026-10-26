@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "4e1a0feaf21c92cf6c4382347d42a7b52ebc5ba9ee70e75158e5d702ebbdf654",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "e518bf0f841abb0b9ebe6781f47d8a637d3faffb0f9236bcb48f3fae0daf343e",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "110",
+          "value": "109",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "KURWASSERMUSIK – Klanginstallation in drei Aquarien",
-              "detail": "Baden",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurwassermusik-klanginstallation-in-drei-aquarien/"
-            },
-            {
-              "label": "Sundaysports Muri",
-              "detail": "Muri AG",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sundaysports-muri/"
-            },
-            {
-              "label": "Tierspuren",
-              "detail": "Schulareal Eggen, Meisterschwanden",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tierspuren/"
-            },
-            {
-              "label": "SIMPLY TINA - Die Tina Turner Tribute Show",
-              "detail": "Zentrum Bärenmatte, Suhr",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/suhr/simply-tina-die-tina-turner-tribute-show_A5NP6vp"
-            },
-            {
-              "label": "Marko Hietala (FI)",
-              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/marko-hietala-fi_A5RuS6g"
-            },
-            {
-              "label": "Dida",
-              "detail": "Pflegi Muri",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/dida_AdBS29a"
-            },
-            {
-              "label": "Workshop: Cucire un abito dell'Alto Medioevo",
-              "detail": "Kloster Königsfelden, Windisch — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-kleid-aus-dem-hochmittelalter-naehen/"
-            },
-            {
-              "label": "Trümpi-Festival: Einführung ins Maultrommelspielen",
-              "detail": "Schloss Hallwyl, Seengen — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seengen/truempi-festival-einfuehrung-ins-maultrommelspielen_ArGF4mq"
-            },
-            {
-              "label": "in&out - La piattaforma dedicata al design svizzero",
-              "detail": "AHA Aeschbachhalle Aarau, Aarau — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
+              "label": "Unitrio feat. Matthieu Michel",
+              "detail": "Stadtbistro Isebähnli, Baden",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/unitrio-feat-matthieu-michel_A4CpbXY"
             },
             {
               "label": "Die Habsburger – 800 Jahre europäische Geschichte",
               "detail": "Laufenburg — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — in corso, ultimo giorno: 30 ottobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
+            },
+            {
+              "label": "Tanzen für Junggebliebene mit Live Musik",
+              "detail": "AUREA, Rheinfelden",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/tanzen-fuer-junggebliebene-mit-live-musik_AU1jLwP"
+            },
+            {
+              "label": "Energie-Apéros Aargau 2026/2027",
+              "detail": "Kantonsschule Baden, Baden",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/baden/energie-aperos-aargau-20262027_AZQvJXD"
+            },
+            {
+              "label": "Flitzende Roboterbälle",
+              "detail": "Baden",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flitzende-roboterbaelle/"
+            },
+            {
+              "label": "Krimi-Dinner - Verliebt, Verlobt... Tot!",
+              "detail": "Rheinfelden",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krimidinner-verliebt-verlobt-tot/"
+            },
+            {
+              "label": "Quizabend mit Cyrill",
+              "detail": "Baden",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/quizabend-mit-cyrill/"
+            },
+            {
+              "label": "Stretta Concerts: SOUND OF KLEZMER",
+              "detail": "Brugg AG, Brugg",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stretta-concerts-sound-of-klezmer-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/argovia/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "AG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "110",
+          "value": "109",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,64 +138,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "KURWASSERMUSIK – Klanginstallation in drei Aquarien",
-              "detail": "Baden",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurwassermusik-klanginstallation-in-drei-aquarien/"
-            },
-            {
-              "label": "Sundaysports Muri",
-              "detail": "Muri AG",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sundaysports-muri/"
-            },
-            {
-              "label": "Tierspuren",
-              "detail": "Schulareal Eggen, Meisterschwanden",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tierspuren/"
-            },
-            {
-              "label": "SIMPLY TINA - Die Tina Turner Tribute Show",
-              "detail": "Zentrum Bärenmatte, Suhr",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/suhr/simply-tina-die-tina-turner-tribute-show_A5NP6vp"
-            },
-            {
-              "label": "Marko Hietala (FI)",
-              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/marko-hietala-fi_A5RuS6g"
-            },
-            {
-              "label": "Dida",
-              "detail": "Pflegi Muri",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/dida_AdBS29a"
-            },
-            {
-              "label": "Workshop: Sewing a dress from the High Middle Ages",
-              "detail": "Kloster Königsfelden, Windisch — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-kleid-aus-dem-hochmittelalter-naehen/"
-            },
-            {
-              "label": "Trümpi-Festival: Einführung ins Maultrommelspielen",
-              "detail": "Schloss Hallwyl, Seengen — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seengen/truempi-festival-einfuehrung-ins-maultrommelspielen_ArGF4mq"
-            },
-            {
-              "label": "in&out - The Platform for Swiss Design",
-              "detail": "AHA Aeschbachhalle Aarau, Aarau — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
+              "label": "Unitrio feat. Matthieu Michel",
+              "detail": "Stadtbistro Isebähnli, Baden",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/unitrio-feat-matthieu-michel_A4CpbXY"
             },
             {
               "label": "Die Habsburger – 800 Jahre europäische Geschichte",
               "detail": "Laufenburg — ongoing, last day: 1 November 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — ongoing, last day: 31 October 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — ongoing, last day: 30 October 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
+            },
+            {
+              "label": "Tanzen für Junggebliebene mit Live Musik",
+              "detail": "AUREA, Rheinfelden",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/tanzen-fuer-junggebliebene-mit-live-musik_AU1jLwP"
+            },
+            {
+              "label": "Energie-Apéros Aargau 2026/2027",
+              "detail": "Kantonsschule Baden, Baden",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/baden/energie-aperos-aargau-20262027_AZQvJXD"
+            },
+            {
+              "label": "Flitzende Roboterbälle",
+              "detail": "Baden",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flitzende-roboterbaelle/"
+            },
+            {
+              "label": "Krimi-Dinner - Verliebt, Verlobt... Tot!",
+              "detail": "Rheinfelden",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krimidinner-verliebt-verlobt-tot/"
+            },
+            {
+              "label": "Quizabend mit Cyrill",
+              "detail": "Baden",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/quizabend-mit-cyrill/"
+            },
+            {
+              "label": "Stretta Concerts: SOUND OF KLEZMER",
+              "detail": "Brugg AG, Brugg",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stretta-concerts-sound-of-klezmer-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/aargau/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "AG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "110",
+          "value": "109",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,64 +243,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "KURWASSERMUSIK – Klanginstallation in drei Aquarien",
-              "detail": "Baden",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurwassermusik-klanginstallation-in-drei-aquarien/"
-            },
-            {
-              "label": "Sundaysports Muri",
-              "detail": "Muri AG",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sundaysports-muri/"
-            },
-            {
-              "label": "Tierspuren",
-              "detail": "Schulareal Eggen, Meisterschwanden",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tierspuren/"
-            },
-            {
-              "label": "SIMPLY TINA - Die Tina Turner Tribute Show",
-              "detail": "Zentrum Bärenmatte, Suhr",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/suhr/simply-tina-die-tina-turner-tribute-show_A5NP6vp"
-            },
-            {
-              "label": "Marko Hietala (FI)",
-              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/marko-hietala-fi_A5RuS6g"
-            },
-            {
-              "label": "Dida",
-              "detail": "Pflegi Muri",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/dida_AdBS29a"
-            },
-            {
-              "label": "Workshop: Kleid aus dem Hochmittelalter nähen",
-              "detail": "Kloster Königsfelden, Windisch — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-kleid-aus-dem-hochmittelalter-naehen/"
-            },
-            {
-              "label": "Trümpi-Festival: Einführung ins Maultrommelspielen",
-              "detail": "Schloss Hallwyl, Seengen — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seengen/truempi-festival-einfuehrung-ins-maultrommelspielen_ArGF4mq"
-            },
-            {
-              "label": "Illumio am in&out - Die Plattform für Schweizer Design",
-              "detail": "AHA Aeschbachhalle Aarau, Aarau — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
+              "label": "Unitrio feat. Matthieu Michel",
+              "detail": "Stadtbistro Isebähnli, Baden",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/unitrio-feat-matthieu-michel_A4CpbXY"
             },
             {
               "label": "Die Habsburger – 800 Jahre europäische Geschichte",
               "detail": "Laufenburg — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — läuft, letzter Tag: 30. Oktober 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
+            },
+            {
+              "label": "Tanzen für Junggebliebene mit Live Musik",
+              "detail": "AUREA, Rheinfelden",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/tanzen-fuer-junggebliebene-mit-live-musik_AU1jLwP"
+            },
+            {
+              "label": "Energie-Apéros Aargau 2026/2027",
+              "detail": "Kantonsschule Baden, Baden",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/baden/energie-aperos-aargau-20262027_AZQvJXD"
+            },
+            {
+              "label": "Flitzende Roboterbälle",
+              "detail": "Baden",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flitzende-roboterbaelle/"
+            },
+            {
+              "label": "Krimi-Dinner - Verliebt, Verlobt... Tot!",
+              "detail": "Rheinfelden",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krimidinner-verliebt-verlobt-tot/"
+            },
+            {
+              "label": "Quizabend mit Cyrill",
+              "detail": "Baden",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/quizabend-mit-cyrill/"
+            },
+            {
+              "label": "Stretta Concerts: SOUND OF KLEZMER",
+              "detail": "Brugg AG, Brugg",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stretta-concerts-sound-of-klezmer-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/aargau/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "AG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "110",
+          "value": "109",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,64 +348,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "KURWASSERMUSIK – Klanginstallation in drei Aquarien",
-              "detail": "Baden",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurwassermusik-klanginstallation-in-drei-aquarien/"
-            },
-            {
-              "label": "Sundaysports Muri",
-              "detail": "Muri AG",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/sundaysports-muri/"
-            },
-            {
-              "label": "Tierspuren",
-              "detail": "Schulareal Eggen, Meisterschwanden",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tierspuren/"
-            },
-            {
-              "label": "SIMPLY TINA - Die Tina Turner Tribute Show",
-              "detail": "Zentrum Bärenmatte, Suhr",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/suhr/simply-tina-die-tina-turner-tribute-show_A5NP6vp"
-            },
-            {
-              "label": "Marko Hietala (FI)",
-              "detail": "KiFF - Kultur in der Futterfabrik, Aarau",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/aarau/marko-hietala-fi_A5RuS6g"
-            },
-            {
-              "label": "Dida",
-              "detail": "Pflegi Muri",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muri-ag/dida_AdBS29a"
-            },
-            {
-              "label": "Atelier: Couture d'une robe du haut Moyen Âge",
-              "detail": "Kloster Königsfelden, Windisch — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/workshop-kleid-aus-dem-hochmittelalter-naehen/"
-            },
-            {
-              "label": "Trümpi-Festival: Einführung ins Maultrommelspielen",
-              "detail": "Schloss Hallwyl, Seengen — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/seengen/truempi-festival-einfuehrung-ins-maultrommelspielen_ArGF4mq"
-            },
-            {
-              "label": "in&out - La plateforme dédiée au design suisse",
-              "detail": "AHA Aeschbachhalle Aarau, Aarau — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/inout-die-plattform-fuer-schweizer-design/"
+              "label": "Unitrio feat. Matthieu Michel",
+              "detail": "Stadtbistro Isebähnli, Baden",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/baden/unitrio-feat-matthieu-michel_A4CpbXY"
             },
             {
               "label": "Die Habsburger – 800 Jahre europäische Geschichte",
               "detail": "Laufenburg — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/die-habsburger-800-jahre-europaeische-geschichte/"
+            },
+            {
+              "label": "Oktoberfest Baden 2026",
+              "detail": "Brown Boveri Platz, Baden — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/oktoberfest-baden-2026/"
+            },
+            {
+              "label": "Mehr Klangschalen für EndeckerInnen und GeniesserInnen (3 teiliger Kurs)",
+              "detail": "Untersiggenthal — en cours, dernier jour : 30 octobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mehr-klangschalen-fuer-endeckerinnen-und-geniesserinnen-3-teiliger-kurs/"
+            },
+            {
+              "label": "Tanzen für Junggebliebene mit Live Musik",
+              "detail": "AUREA, Rheinfelden",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rheinfelden/tanzen-fuer-junggebliebene-mit-live-musik_AU1jLwP"
+            },
+            {
+              "label": "Energie-Apéros Aargau 2026/2027",
+              "detail": "Kantonsschule Baden, Baden",
+              "date": "2026-10-27",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/baden/energie-aperos-aargau-20262027_AZQvJXD"
+            },
+            {
+              "label": "Flitzende Roboterbälle",
+              "detail": "Baden",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/flitzende-roboterbaelle/"
+            },
+            {
+              "label": "Krimi-Dinner - Verliebt, Verlobt... Tot!",
+              "detail": "Rheinfelden",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/krimidinner-verliebt-verlobt-tot/"
+            },
+            {
+              "label": "Quizabend mit Cyrill",
+              "detail": "Baden",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/quizabend-mit-cyrill/"
+            },
+            {
+              "label": "Stretta Concerts: SOUND OF KLEZMER",
+              "detail": "Brugg AG, Brugg",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/stretta-concerts-sound-of-klezmer-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/argovie/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

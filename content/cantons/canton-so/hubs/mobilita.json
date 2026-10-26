@@ -4,17 +4,17 @@
   "section": "canton-so",
   "canton": "SO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "71a64d6b4be785b406dd84254d85e2135f46d6a579c04e2dec99130b8c29e4f2",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "36fbdbcdd9ab0fe93bad9bbc012a3d7c3edd6e86baaf25ba47beb7deb6c59bcc",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-25T05:23:25.975Z",
+      "updatedAt": "2026-10-25T16:53:42.913Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -85,14 +85,13 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
-              "value": "Cantiere",
-              "detail": "fine prevista: 31 dicembre 2028",
-              "date": "2024-12-30T04:49:00.000Z"
+              "label": "A1 Zürich -> Bern tra Area di servizio Gunzgen Nord E Svincolo autostradale Oensingen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 15",
+              "value": "Traffico",
+              "date": "2026-10-25T09:47:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -115,7 +114,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -161,7 +160,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "SO",
@@ -229,14 +228,13 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "Balsthal <-> Laufen tra Luogo Oberbeinwil E Passo Passwang Situazione: problemi di traffico cantiere Limitazione del traffico: corsie strette",
-              "value": "Roadworks",
-              "detail": "until 31 December 2028",
-              "date": "2024-12-30T04:49:00.000Z"
+              "label": "A1 Zürich -> Bern tra Area di servizio Gunzgen Nord E Svincolo autostradale Oensingen Situazione: colonna Causa: traffico congestionato Aggiunta 1: ritardi No. [min] 15",
+              "value": "Traffic",
+              "date": "2026-10-25T09:47:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -259,7 +257,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -304,7 +302,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "SO",
@@ -372,14 +370,13 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "Balsthal <-> Laufen zwischen Ortschaft Oberbeinwil und Pass Passwang Sachlage: Verkehrsbehinderung Baustelle Verkehrsführung: Fahrbahnverengung",
-              "value": "Baustelle",
-              "detail": "bis 31. Dezember 2028",
-              "date": "2024-12-30T04:49:00.000Z"
+              "label": "A1 Zürich -> Bern zwischen Raststätte Gunzgen-Nord und Anschluss Oensingen Sachlage: Stau Ursache: Verkehrsüberlastung Zusatz 1: Zeitverlust Anz. [min] 15",
+              "value": "Verkehr",
+              "date": "2026-10-25T09:47:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -402,7 +399,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -447,7 +444,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "SO",
@@ -515,14 +512,13 @@
               "date": "2026-10-22T06:00:00.000Z"
             },
             {
-              "label": "Balsthal <-> Laufon entre Localité Oberbeinwil et Col Passwang Situation: trafic perturbé travaux Gestion du trafic: rétrécissement des voies",
-              "value": "Chantier",
-              "detail": "jusqu’au 31 décembre 2028",
-              "date": "2024-12-30T04:49:00.000Z"
+              "label": "A1 Zurich -> Berne entre Aire de service Gunzgen-Nord et Jonction autoroutière Oensingen Situation: bouchon Raison: surcharge de trafic Complément 1: retards Nbre. [min] 15",
+              "value": "Trafic",
+              "date": "2026-10-25T09:47:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -545,7 +541,7 @@
               "url": "https://so.ch/verwaltung/staatskanzlei/medien/medienmitteilung/news/verkehr-45-kanton-solothurn-begruesst-wichtige-vorhaben-und-fordert-verlaessliche-perspektiven/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -591,7 +587,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

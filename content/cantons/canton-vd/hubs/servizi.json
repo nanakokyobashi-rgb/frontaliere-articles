@@ -4,22 +4,22 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "servizi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "43cd76e5d97eb98ec24693a1d356757d3ecc7ee15a925775ff799ac64d29efff",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "1c85f7240bba1f2b9ee156c141894d62da9966e3fd8b59d3dc5ba4fbe7a5fa86",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-18T08:53:01.888Z",
+      "updatedAt": "2026-10-25T09:11:35.438Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-25T05:00:57.781Z",
+      "updatedAt": "2026-10-25T19:10:33.671Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -56,7 +56,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "meteo",
@@ -65,12 +65,12 @@
           "items": [
             {
               "label": "Lausanne",
-              "value": "9 °C",
-              "detail": "oggi da 9 a 14 °C"
+              "value": "11 °C",
+              "detail": "oggi da 9 a 13 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -108,7 +108,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -188,7 +188,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "VD",
@@ -222,7 +222,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "meteo",
@@ -231,12 +231,12 @@
           "items": [
             {
               "label": "Lausanne",
-              "value": "9 °C",
-              "detail": "today from 9 to 14 °C"
+              "value": "11 °C",
+              "detail": "today from 9 to 13 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -274,7 +274,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -350,7 +350,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "VD",
@@ -384,7 +384,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "meteo",
@@ -393,12 +393,12 @@
           "items": [
             {
               "label": "Lausanne",
-              "value": "9 °C",
-              "detail": "heute 9 bis 14 °C"
+              "value": "11 °C",
+              "detail": "heute 9 bis 13 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -436,7 +436,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -512,7 +512,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "VD",
@@ -546,7 +546,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "meteo",
@@ -555,12 +555,12 @@
           "items": [
             {
               "label": "Lausanne",
-              "value": "9 °C",
-              "detail": "aujourd’hui de 9 à 14 °C"
+              "value": "11 °C",
+              "detail": "aujourd’hui de 9 à 13 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -598,7 +598,7 @@
               "url": "https://www.vd.ch/actualites/actualite/news/26534-remise-des-cles-du-campus-sante"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -670,7 +670,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

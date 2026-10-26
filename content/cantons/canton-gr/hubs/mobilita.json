@@ -4,8 +4,8 @@
   "section": "canton-gr",
   "canton": "GR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "6f34127eaa73f0c92a467e2660d3b7c8a9288d4c5034a2bc1128cb7247cb9912",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "1071247bed3a4639b0eba4f1c5d66820af98e8740fdf4bc8382db4d23c793d42",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-25T05:23:25.975Z",
+      "updatedAt": "2026-10-25T16:53:42.913Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "12",
+          "value": "13",
           "note": "segnalazioni aggiornate: 25 ottobre 2026"
         }
       ],
@@ -160,13 +160,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Der neue Bahnhof Chur West geht in Betrieb",
+              "date": "2026-10-26",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/inbetriebnahme-bahnhof-chur-west/"
+            },
             {
               "label": "Umbau Bahnhof Versam-Safien",
               "date": "2026-10-19",
@@ -191,14 +196,9 @@
               "label": "Calancastrasse: Wiederöffnung ab Mittwochabend mit Einschränkungen",
               "date": "2026-09-01",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090103.aspx"
-            },
-            {
-              "label": "Spatenstich für den Neubau Bahnhofgebäude in Schiers",
-              "date": "2026-08-20",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/spatenstich-bahnhofgebaeude-schiers/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "GR",
@@ -310,7 +310,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "12",
+          "value": "13",
           "note": "reports as of 25 October 2026"
         }
       ],
@@ -428,13 +428,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Der neue Bahnhof Chur West geht in Betrieb",
+              "date": "2026-10-26",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/inbetriebnahme-bahnhof-chur-west/"
+            },
             {
               "label": "Umbau Bahnhof Versam-Safien",
               "date": "2026-10-19",
@@ -459,14 +464,9 @@
               "label": "Calancastrasse: Wiederöffnung ab Mittwochabend mit Einschränkungen",
               "date": "2026-09-01",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090103.aspx"
-            },
-            {
-              "label": "Spatenstich für den Neubau Bahnhofgebäude in Schiers",
-              "date": "2026-08-20",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/spatenstich-bahnhofgebaeude-schiers/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "GR",
@@ -577,7 +577,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "12",
+          "value": "13",
           "note": "Meldungen vom 25. Oktober 2026"
         }
       ],
@@ -695,13 +695,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Der neue Bahnhof Chur West geht in Betrieb",
+              "date": "2026-10-26",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/inbetriebnahme-bahnhof-chur-west/"
+            },
             {
               "label": "Umbau Bahnhof Versam-Safien",
               "date": "2026-10-19",
@@ -726,14 +731,9 @@
               "label": "Calancastrasse: Wiederöffnung ab Mittwochabend mit Einschränkungen",
               "date": "2026-09-01",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090103.aspx"
-            },
-            {
-              "label": "Spatenstich für den Neubau Bahnhofgebäude in Schiers",
-              "date": "2026-08-20",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/spatenstich-bahnhofgebaeude-schiers/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -825,7 +825,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "GR",
@@ -845,7 +845,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "12",
+          "value": "13",
           "note": "signalements au 25 octobre 2026"
         }
       ],
@@ -963,13 +963,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Der neue Bahnhof Chur West geht in Betrieb",
+              "date": "2026-10-26",
+              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/inbetriebnahme-bahnhof-chur-west/"
+            },
             {
               "label": "Umbau Bahnhof Versam-Safien",
               "date": "2026-10-19",
@@ -994,14 +999,9 @@
               "label": "Calancastrasse: Wiederöffnung ab Mittwochabend mit Einschränkungen",
               "date": "2026-09-01",
               "url": "https://www.gr.ch/DE/Medien/Mitteilungen/MMStaka/2026/Seiten/2026090103.aspx"
-            },
-            {
-              "label": "Spatenstich für den Neubau Bahnhofgebäude in Schiers",
-              "date": "2026-08-20",
-              "url": "https://www.rhb.ch/de/medien/medienmitteilungen/spatenstich-bahnhofgebaeude-schiers/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -1093,7 +1093,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

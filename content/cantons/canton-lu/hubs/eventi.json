@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "0ba08e4412dc3eba314d1f580f51260a742ba8dc9756d05daad757e6edb07a88",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "273d830cb8a401e53f056d144b8cd373797625ce5326b51d36e2909891923203",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "63",
+          "value": "55",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,63 +38,63 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Maratona della città svizzera",
-              "detail": "Verkehrshaus, Luzern",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/swiss-city-marathon/"
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-10-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7648408"
             },
             {
-              "label": "För euch - vo Härze 40 Jahre Trachtengruppe Nottwil",
-              "detail": "Nottwil",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foer-euch-vo-haerze-40-jahre-trachtengruppe-nottwil/"
+              "label": "Sauna della luna piena a Lucerna",
+              "detail": "Lucerna, Luzern",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-a-lucerna/"
             },
             {
-              "label": "Castagna Chilbi Greppen",
-              "detail": "Chestene Chilbi, Greppen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chestene-chilbi-greppen/"
+              "label": "Sauna della luna piena a Sursee",
+              "detail": "Sursee",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-a-sursee/"
             },
             {
-              "label": "Tag der offenen Tür im Schweizerischen Flaschenmuseum Willisau",
-              "detail": "Flaschenmuseum, Willisau",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tag-der-offenen-tuer-im-schweizerischen-flaschenmuseum-willisau-5/"
+              "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
+              "detail": "Luzern",
+              "date": "2026-10-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7253945"
             },
             {
-              "label": "Spoken Word Festival woerdz 2026: Spoken Word für Kinder ab 7 Jahren",
-              "detail": "Lucerne, Luzern",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spoken-word-festival-woerdz-2026-spoken-word-fuer-kinder-ab-7-jahren/"
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — in corso, ultimo giorno: 12 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             },
             {
-              "label": "Öffentliche Führung",
-              "date": "2026-10-25",
-              "url": "https://www.stadtluzern.ch/sitzung/7463668"
+              "label": "Pilzkontrolle",
+              "detail": "Museum Luzern, Luzern — in corso, ultimo giorno: 26 ottobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
             },
             {
-              "label": "Brazen Barbie",
-              "detail": "Jugendkulturhaus Treibhaus",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/brazen-barbie_AM2yuL3"
+              "label": "Winter Qi Gong Inseli",
+              "detail": "Ebikon",
+              "date": "2026-10-27",
+              "url": "https://www.stadtluzern.ch/sitzung/7694110"
             },
             {
-              "label": "Kunstausstellung Arts Crossroad",
-              "detail": "Luzern — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.stadtluzern.ch/sitzung/6840403"
+              "label": "Konzert für Familien «Gänseblüemli im Rosengarten»",
+              "detail": "Weggis",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-fuer-familien-gaenseblueemli-im-rosengarten/"
             },
             {
-              "label": "Contemporary Art Fair Luzern",
-              "detail": "Kornschütte, Luzern — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/contemporary-art-fair-luzern-2026/"
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
             },
             {
-              "label": "Ausstellung NachtLeben",
-              "detail": "Luzern — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.stadtluzern.ch/sitzung/7626901"
+              "label": "Panflötenkonzert mit Duo PanTastico",
+              "detail": "Evang.-ref. Kirche Hochdorf, Hochdorf",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/hochdorf/panfloetenkonzert-mit-duo-pantastico_Adw4Ae6"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -106,6 +106,16 @@
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
+              "date": "2026-10-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7253945"
+            },
+            {
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-10-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648408"
+            },
             {
               "label": "Öffentliche Führung",
               "date": "2026-10-24T22:00:00.000Z",
@@ -125,19 +135,9 @@
               "label": "Wissen am Mittag",
               "date": "2026-10-22T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-10-22T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694296"
-            },
-            {
-              "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
-              "date": "2026-10-21T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7729408"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -171,7 +171,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "LU",
@@ -181,7 +181,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "63",
+          "value": "55",
           "note": "from the site’s events calendar"
         }
       ],
@@ -192,63 +192,63 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Swiss City Marathon",
-              "detail": "Verkehrshaus, Luzern",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/swiss-city-marathon/"
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-10-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7648408"
             },
             {
-              "label": "För euch - vo Härze 40 Jahre Trachtengruppe Nottwil",
-              "detail": "Nottwil",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foer-euch-vo-haerze-40-jahre-trachtengruppe-nottwil/"
+              "label": "Full Moon Sauna Lucerne",
+              "detail": "Lucerna, Luzern",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-a-lucerna/"
             },
             {
-              "label": "Chestene Chilbi Greppen",
-              "detail": "Chestene Chilbi, Greppen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chestene-chilbi-greppen/"
+              "label": "Full Moon Sauna in Sursee",
+              "detail": "Sursee",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-a-sursee/"
             },
             {
-              "label": "Tag der offenen Tür im Schweizerischen Flaschenmuseum Willisau",
-              "detail": "Flaschenmuseum, Willisau",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tag-der-offenen-tuer-im-schweizerischen-flaschenmuseum-willisau-5/"
+              "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
+              "detail": "Luzern",
+              "date": "2026-10-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7253945"
             },
             {
-              "label": "Spoken Word Festival woerdz 2026: Spoken Word für Kinder ab 7 Jahren",
-              "detail": "Lucerne, Luzern",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spoken-word-festival-woerdz-2026-spoken-word-fuer-kinder-ab-7-jahren/"
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — ongoing, last day: 12 November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             },
             {
-              "label": "Öffentliche Führung",
-              "date": "2026-10-25",
-              "url": "https://www.stadtluzern.ch/sitzung/7463668"
+              "label": "Pilzkontrolle",
+              "detail": "Museum Luzern, Luzern — ongoing, last day: 26 October 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
             },
             {
-              "label": "Brazen Barbie",
-              "detail": "Jugendkulturhaus Treibhaus",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/brazen-barbie_AM2yuL3"
+              "label": "Winter Qi Gong Inseli",
+              "detail": "Ebikon",
+              "date": "2026-10-27",
+              "url": "https://www.stadtluzern.ch/sitzung/7694110"
             },
             {
-              "label": "Kunstausstellung Arts Crossroad",
-              "detail": "Luzern — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.stadtluzern.ch/sitzung/6840403"
+              "label": "Konzert für Familien «Gänseblüemli im Rosengarten»",
+              "detail": "Weggis",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-fuer-familien-gaenseblueemli-im-rosengarten/"
             },
             {
-              "label": "Contemporary Art Fair Luzern",
-              "detail": "Kornschütte, Luzern — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/contemporary-art-fair-luzern-2026/"
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
             },
             {
-              "label": "Ausstellung NachtLeben",
-              "detail": "Luzern — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.stadtluzern.ch/sitzung/7626901"
+              "label": "Panflötenkonzert mit Duo PanTastico",
+              "detail": "Evang.-ref. Kirche Hochdorf, Hochdorf",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/hochdorf/panfloetenkonzert-mit-duo-pantastico_Adw4Ae6"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -260,6 +260,16 @@
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
+              "date": "2026-10-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7253945"
+            },
+            {
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-10-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648408"
+            },
             {
               "label": "Öffentliche Führung",
               "date": "2026-10-24T22:00:00.000Z",
@@ -279,19 +289,9 @@
               "label": "Wissen am Mittag",
               "date": "2026-10-22T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-10-22T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694296"
-            },
-            {
-              "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
-              "date": "2026-10-21T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7729408"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -325,7 +325,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "LU",
@@ -335,7 +335,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "63",
+          "value": "55",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -346,63 +346,63 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "SwissCityMarathon",
-              "detail": "Verkehrshaus, Luzern",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/swiss-city-marathon/"
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-10-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7648408"
             },
             {
-              "label": "För euch - vo Härze 40 Jahre Trachtengruppe Nottwil",
-              "detail": "Nottwil",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foer-euch-vo-haerze-40-jahre-trachtengruppe-nottwil/"
+              "label": "Vollmond-Sauna Luzern",
+              "detail": "Lucerna, Luzern",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-a-lucerna/"
             },
             {
-              "label": "Chestene Chilbi Greppen",
-              "detail": "Chestene Chilbi, Greppen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chestene-chilbi-greppen/"
+              "label": "Vollmond-Sauna Sursee",
+              "detail": "Sursee",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-a-sursee/"
             },
             {
-              "label": "Tag der offenen Tür im Schweizerischen Flaschenmuseum Willisau",
-              "detail": "Flaschenmuseum, Willisau",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tag-der-offenen-tuer-im-schweizerischen-flaschenmuseum-willisau-5/"
+              "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
+              "detail": "Luzern",
+              "date": "2026-10-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7253945"
             },
             {
-              "label": "Spoken Word Festival woerdz 2026: Spoken Word für Kinder ab 7 Jahren",
-              "detail": "Lucerne, Luzern",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spoken-word-festival-woerdz-2026-spoken-word-fuer-kinder-ab-7-jahren/"
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — läuft, letzter Tag: 12. November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             },
             {
-              "label": "Öffentliche Führung",
-              "date": "2026-10-25",
-              "url": "https://www.stadtluzern.ch/sitzung/7463668"
+              "label": "Pilzkontrolle",
+              "detail": "Museum Luzern, Luzern — läuft, letzter Tag: 26. Oktober 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
             },
             {
-              "label": "Brazen Barbie",
-              "detail": "Jugendkulturhaus Treibhaus",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/brazen-barbie_AM2yuL3"
+              "label": "Winter Qi Gong Inseli",
+              "detail": "Ebikon",
+              "date": "2026-10-27",
+              "url": "https://www.stadtluzern.ch/sitzung/7694110"
             },
             {
-              "label": "Kunstausstellung Arts Crossroad",
-              "detail": "Luzern — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.stadtluzern.ch/sitzung/6840403"
+              "label": "Konzert für Familien «Gänseblüemli im Rosengarten»",
+              "detail": "Weggis",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-fuer-familien-gaenseblueemli-im-rosengarten/"
             },
             {
-              "label": "Kunstmesse Luzern 2026",
-              "detail": "Kornschütte, Luzern — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/contemporary-art-fair-luzern-2026/"
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
             },
             {
-              "label": "Ausstellung NachtLeben",
-              "detail": "Luzern — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.stadtluzern.ch/sitzung/7626901"
+              "label": "Panflötenkonzert mit Duo PanTastico",
+              "detail": "Evang.-ref. Kirche Hochdorf, Hochdorf",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/hochdorf/panfloetenkonzert-mit-duo-pantastico_Adw4Ae6"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -414,6 +414,16 @@
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
+              "date": "2026-10-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7253945"
+            },
+            {
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-10-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648408"
+            },
             {
               "label": "Öffentliche Führung",
               "date": "2026-10-24T22:00:00.000Z",
@@ -433,19 +443,9 @@
               "label": "Wissen am Mittag",
               "date": "2026-10-22T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-10-22T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694296"
-            },
-            {
-              "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
-              "date": "2026-10-21T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7729408"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -479,7 +479,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "LU",
@@ -489,7 +489,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "63",
+          "value": "55",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -500,63 +500,63 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Swiss City Marathon",
-              "detail": "Verkehrshaus, Luzern",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/swiss-city-marathon/"
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-10-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7648408"
             },
             {
-              "label": "För euch - vo Härze 40 Jahre Trachtengruppe Nottwil",
-              "detail": "Nottwil",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foer-euch-vo-haerze-40-jahre-trachtengruppe-nottwil/"
+              "label": "Sauna « Pleine Lune » de Lucerne",
+              "detail": "Lucerna, Luzern",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-a-lucerna/"
             },
             {
-              "label": "Chestene Chilbi Greppen",
-              "detail": "Chestene Chilbi, Greppen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/chestene-chilbi-greppen/"
+              "label": "Sauna « Pleine Lune » à Sursee",
+              "detail": "Sursee",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/sauna-della-luna-piena-a-sursee/"
             },
             {
-              "label": "Tag der offenen Tür im Schweizerischen Flaschenmuseum Willisau",
-              "detail": "Flaschenmuseum, Willisau",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/tag-der-offenen-tuer-im-schweizerischen-flaschenmuseum-willisau-5/"
+              "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
+              "detail": "Luzern",
+              "date": "2026-10-26",
+              "url": "https://www.stadtluzern.ch/sitzung/7253945"
             },
             {
-              "label": "Spoken Word Festival woerdz 2026: Spoken Word für Kinder ab 7 Jahren",
-              "detail": "Lucerne, Luzern",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/spoken-word-festival-woerdz-2026-spoken-word-fuer-kinder-ab-7-jahren/"
+              "label": "360° Mitsingen",
+              "detail": "Bourbaki Panorama — en cours, dernier jour : 12 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/360-mitsingen_ASRy6eA"
             },
             {
-              "label": "Öffentliche Führung",
-              "date": "2026-10-25",
-              "url": "https://www.stadtluzern.ch/sitzung/7463668"
+              "label": "Pilzkontrolle",
+              "detail": "Museum Luzern, Luzern — en cours, dernier jour : 26 octobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/luzern/pilzkontrolle_AkPC7Ym"
             },
             {
-              "label": "Brazen Barbie",
-              "detail": "Jugendkulturhaus Treibhaus",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/luzern/brazen-barbie_AM2yuL3"
+              "label": "Winter Qi Gong Inseli",
+              "detail": "Ebikon",
+              "date": "2026-10-27",
+              "url": "https://www.stadtluzern.ch/sitzung/7694110"
             },
             {
-              "label": "Kunstausstellung Arts Crossroad",
-              "detail": "Luzern — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.stadtluzern.ch/sitzung/6840403"
+              "label": "Konzert für Familien «Gänseblüemli im Rosengarten»",
+              "detail": "Weggis",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/konzert-fuer-familien-gaenseblueemli-im-rosengarten/"
             },
             {
-              "label": "Contemporary Art Fair Luzern",
-              "detail": "Kornschütte, Luzern — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/contemporary-art-fair-luzern-2026/"
+              "label": "Einführung für Lehrer:innen",
+              "detail": "Museum Sammlung Rosengart Luzern, Luzern",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/einfuehrung-fuer-lehrerinnen/"
             },
             {
-              "label": "Ausstellung NachtLeben",
-              "detail": "Luzern — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.stadtluzern.ch/sitzung/7626901"
+              "label": "Panflötenkonzert mit Duo PanTastico",
+              "detail": "Evang.-ref. Kirche Hochdorf, Hochdorf",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/hochdorf/panfloetenkonzert-mit-duo-pantastico_Adw4Ae6"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -568,6 +568,16 @@
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
+              "date": "2026-10-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7253945"
+            },
+            {
+              "label": "Bewegung und Begegnung - Feldenkrais",
+              "date": "2026-10-25T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7648408"
+            },
             {
               "label": "Öffentliche Führung",
               "date": "2026-10-24T22:00:00.000Z",
@@ -587,19 +597,9 @@
               "label": "Wissen am Mittag",
               "date": "2026-10-22T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
-            },
-            {
-              "label": "Winter Qi Gong Waldfriedhof Staffeln",
-              "date": "2026-10-22T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7694296"
-            },
-            {
-              "label": "28. Sitzung des Grossen Stadtrates von Luzern vom 22. Oktober 2026",
-              "date": "2026-10-21T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7729408"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -633,7 +633,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

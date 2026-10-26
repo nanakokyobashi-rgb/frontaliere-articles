@@ -4,8 +4,8 @@
   "section": "canton-be",
   "canton": "BE",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "ea343ad1d38c964a4628a55540a5c2cd0dbcdea55a2c5c14d258003b200d26bd",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "65b8e0b5c3955558bd9a3f1b91746d374c4fd6c92b02735859185cabf2b9bd0c",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "224",
+          "value": "214",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Letzte Chance: Sammelstopp \"spychere!\"",
-              "detail": "Langnau i.E., Langnau im Emmental",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/letzte-chance-sammelstopp-spychere/"
+              "label": "4th Mixed Doubles Curling Tournament",
+              "detail": "Sportzentrum Curlinghalle, Saanen",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/4-mixed-doubles-curlingturnier/"
             },
             {
-              "label": "Melchior Prisi Geh nicht allein ins Emmental",
-              "detail": "Soletta, Ins",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/melchior-prisi-geh-nicht-allein-ins-emmental/"
+              "label": "Bachibouzouk",
+              "detail": "BIOTOP",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bachibouzouk-1/"
             },
             {
-              "label": "Familiengottesdienst",
-              "detail": "Kirche Diemtigen, Diemtigen",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/diemtigen/familiengottesdienst_AbGb2QX"
+              "label": "«Fly my soul» - 1050 Jahre Faszination Chorgesang Konzert mit den Regensburger Domspatzen",
+              "detail": "Dreifaltigkeitskirche Bern, Bern",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/fly-my-soul-1050-jahre-faszination-chorgesang-konzert-mit-den-regensburger-domspatzen_A9E2Rmk"
             },
             {
-              "label": "Kasperlitheater Gwundernäsli - Kasperli in Afrika",
-              "detail": "Kultur Spiegel Spiez, Spiez",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kasperlitheater-gwundernaesli-kasperli-in-afrika/"
+              "label": "Die Frauen der Helden",
+              "detail": "Alpines Museum der Schweiz, Bern",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-frauen-der-helden/"
             },
             {
-              "label": "Böhmischer Sonntag",
-              "detail": "Lötschbergsaal, Spiez",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/boehmischer-sonntag_Amr82Wt"
+              "label": "Mondayblues",
+              "detail": "Mahogany Hall Bern, Bern",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/mondayblues_A5ynMH8"
             },
             {
-              "label": "Sonntagsbrunch",
-              "detail": "Hotel Eden Spiez, Spiez",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sonntagsbrunch-13/"
+              "label": "Lundi Lesungen Oktober",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lundi-lesungen-oktober/"
+            },
+            {
+              "label": "Il Civetto - ALBUM TOUR 2026",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/il-civetto-album-tour-2026_Ax97Fef"
             },
             {
               "label": "Giornate svizzere del corno naturale",
-              "detail": "Beatenberg",
-              "date": "2026-10-25",
+              "detail": "Beatenberg — in corso, ultimo giorno: 29 ottobre 2026",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornate-svizzere-del-corno-naturale/"
             },
             {
-              "label": "Schlossführung zum Saisonende",
-              "detail": "Spiez",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlossfuehrung-5/"
+              "label": "Selbstplanerkurs PV-Anlage e-wende",
+              "detail": "Bern — in corso, ultimo giorno: 5 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             },
             {
-              "label": "Konzert im Sommersaal",
-              "detail": "Schloss Oberhofen, Oberhofen am Thunersee",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberhofen-am-thunersee/konzert-im-sommersaal_A5Qr8qh"
-            },
-            {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Evang.-ref. Stadtkirche / Temple Allemand",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vivaldi-die-vier-jahreszeiten-10/"
+              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
+              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — in corso, ultimo giorno: 21 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -135,7 +135,7 @@
           "url": "/eventi/berna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "BE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "224",
+          "value": "214",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,64 +156,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Letzte Chance: Sammelstopp \"spychere!\"",
-              "detail": "Langnau i.E., Langnau im Emmental",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/letzte-chance-sammelstopp-spychere/"
+              "label": "4th Mixed Doubles Curling Tournament",
+              "detail": "Sportzentrum Curlinghalle, Saanen",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/4-mixed-doubles-curlingturnier/"
             },
             {
-              "label": "Melchior Prisi Geh nicht allein ins Emmental",
-              "detail": "Soletta, Ins",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/melchior-prisi-geh-nicht-allein-ins-emmental/"
+              "label": "Bachibouzouk",
+              "detail": "BIOTOP",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bachibouzouk-1/"
             },
             {
-              "label": "Familiengottesdienst",
-              "detail": "Kirche Diemtigen, Diemtigen",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/diemtigen/familiengottesdienst_AbGb2QX"
+              "label": "«Fly my soul» - 1050 Jahre Faszination Chorgesang Konzert mit den Regensburger Domspatzen",
+              "detail": "Dreifaltigkeitskirche Bern, Bern",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/fly-my-soul-1050-jahre-faszination-chorgesang-konzert-mit-den-regensburger-domspatzen_A9E2Rmk"
             },
             {
-              "label": "Kasperlitheater Gwundernäsli - Kasperli in Afrika",
-              "detail": "Kultur Spiegel Spiez, Spiez",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kasperlitheater-gwundernaesli-kasperli-in-afrika/"
+              "label": "Die Frauen der Helden",
+              "detail": "Alpines Museum der Schweiz, Bern",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-frauen-der-helden/"
             },
             {
-              "label": "Bohemian Sunday",
-              "detail": "Lötschbergsaal, Spiez",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/boehmischer-sonntag_Amr82Wt"
+              "label": "Mondayblues",
+              "detail": "Mahogany Hall Bern, Bern",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/mondayblues_A5ynMH8"
             },
             {
-              "label": "Sonntagsbrunch",
-              "detail": "Hotel Eden Spiez, Spiez",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sonntagsbrunch-13/"
+              "label": "Lundi Lesungen Oktober",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lundi-lesungen-oktober/"
+            },
+            {
+              "label": "Il Civetto - ALBUM TOUR 2026",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/il-civetto-album-tour-2026_Ax97Fef"
             },
             {
               "label": "Swiss Natural Horn Days",
-              "detail": "Beatenberg",
-              "date": "2026-10-25",
+              "detail": "Beatenberg — ongoing, last day: 29 October 2026",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornate-svizzere-del-corno-naturale/"
             },
             {
-              "label": "Castle tour at the end of the season",
-              "detail": "Spiez",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlossfuehrung-5/"
+              "label": "Selbstplanerkurs PV-Anlage e-wende",
+              "detail": "Bern — ongoing, last day: 5 November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             },
             {
-              "label": "Konzert im Sommersaal",
-              "detail": "Schloss Oberhofen, Oberhofen am Thunersee",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberhofen-am-thunersee/konzert-im-sommersaal_A5Qr8qh"
-            },
-            {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Evang.-ref. Stadtkirche / Temple Allemand",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vivaldi-die-vier-jahreszeiten-10/"
+              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
+              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — ongoing, last day: 21 November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -258,7 +258,7 @@
           "url": "/en/events/bern/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "BE",
@@ -268,7 +268,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "224",
+          "value": "214",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -279,64 +279,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Letzte Chance: Sammelstopp \"spychere!\"",
-              "detail": "Langnau i.E., Langnau im Emmental",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/letzte-chance-sammelstopp-spychere/"
+              "label": "4. Mixed Doubles Curlingturnier",
+              "detail": "Sportzentrum Curlinghalle, Saanen",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/4-mixed-doubles-curlingturnier/"
             },
             {
-              "label": "Melchior Prisi. Geh nicht allein ins Emmental",
-              "detail": "Soletta, Ins",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/melchior-prisi-geh-nicht-allein-ins-emmental/"
+              "label": "Bachibouzouk",
+              "detail": "BIOTOP",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bachibouzouk-1/"
             },
             {
-              "label": "Familiengottesdienst",
-              "detail": "Kirche Diemtigen, Diemtigen",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/diemtigen/familiengottesdienst_AbGb2QX"
+              "label": "«Fly my soul» - 1050 Jahre Faszination Chorgesang Konzert mit den Regensburger Domspatzen",
+              "detail": "Dreifaltigkeitskirche Bern, Bern",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/fly-my-soul-1050-jahre-faszination-chorgesang-konzert-mit-den-regensburger-domspatzen_A9E2Rmk"
             },
             {
-              "label": "Kasperlitheater Gwundernäsli - Kasperli in Afrika",
-              "detail": "Kultur Spiegel Spiez, Spiez",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kasperlitheater-gwundernaesli-kasperli-in-afrika/"
+              "label": "Die Frauen der Helden",
+              "detail": "Alpines Museum der Schweiz, Bern",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-frauen-der-helden/"
             },
             {
-              "label": "B ⑤hmischer Sonntag",
-              "detail": "Lötschbergsaal, Spiez",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/boehmischer-sonntag_Amr82Wt"
+              "label": "Mondayblues",
+              "detail": "Mahogany Hall Bern, Bern",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/mondayblues_A5ynMH8"
             },
             {
-              "label": "Sonntagsbrunch",
-              "detail": "Hotel Eden Spiez, Spiez",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sonntagsbrunch-13/"
+              "label": "Lundi Lesungen Oktober",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lundi-lesungen-oktober/"
+            },
+            {
+              "label": "Il Civetto - ALBUM TOUR 2026",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/il-civetto-album-tour-2026_Ax97Fef"
             },
             {
               "label": "Schweizer Naturhorntage",
-              "detail": "Beatenberg",
-              "date": "2026-10-25",
+              "detail": "Beatenberg — läuft, letzter Tag: 29. Oktober 2026",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornate-svizzere-del-corno-naturale/"
             },
             {
-              "label": "Schlossf ①hrung zum Saisonende",
-              "detail": "Spiez",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlossfuehrung-5/"
+              "label": "Selbstplanerkurs PV-Anlage e-wende",
+              "detail": "Bern — läuft, letzter Tag: 5. November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             },
             {
-              "label": "Konzert im Sommersaal",
-              "detail": "Schloss Oberhofen, Oberhofen am Thunersee",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberhofen-am-thunersee/konzert-im-sommersaal_A5Qr8qh"
-            },
-            {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Evang.-ref. Stadtkirche / Temple Allemand",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vivaldi-die-vier-jahreszeiten-10/"
+              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
+              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — läuft, letzter Tag: 21. November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -381,7 +381,7 @@
           "url": "/de/veranstaltungen/bern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "BE",
@@ -391,7 +391,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "224",
+          "value": "214",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -402,64 +402,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Letzte Chance: Sammelstopp \"spychere!\"",
-              "detail": "Langnau i.E., Langnau im Emmental",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/letzte-chance-sammelstopp-spychere/"
+              "label": "4e Tournoi de curling en double mixte",
+              "detail": "Sportzentrum Curlinghalle, Saanen",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/4-mixed-doubles-curlingturnier/"
             },
             {
-              "label": "Melchior Prisi Geh nicht allein ins Emmental",
-              "detail": "Soletta, Ins",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/melchior-prisi-geh-nicht-allein-ins-emmental/"
+              "label": "Bachibouzouk",
+              "detail": "BIOTOP",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/bachibouzouk-1/"
             },
             {
-              "label": "Familiengottesdienst",
-              "detail": "Kirche Diemtigen, Diemtigen",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/diemtigen/familiengottesdienst_AbGb2QX"
+              "label": "«Fly my soul» - 1050 Jahre Faszination Chorgesang Konzert mit den Regensburger Domspatzen",
+              "detail": "Dreifaltigkeitskirche Bern, Bern",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/fly-my-soul-1050-jahre-faszination-chorgesang-konzert-mit-den-regensburger-domspatzen_A9E2Rmk"
             },
             {
-              "label": "Kasperlitheater Gwundernäsli - Kasperli in Afrika",
-              "detail": "Kultur Spiegel Spiez, Spiez",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kasperlitheater-gwundernaesli-kasperli-in-afrika/"
+              "label": "Die Frauen der Helden",
+              "detail": "Alpines Museum der Schweiz, Bern",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/die-frauen-der-helden/"
             },
             {
-              "label": "Dimanche bohémien",
-              "detail": "Lötschbergsaal, Spiez",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/spiez/boehmischer-sonntag_Amr82Wt"
+              "label": "Mondayblues",
+              "detail": "Mahogany Hall Bern, Bern",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/mondayblues_A5ynMH8"
             },
             {
-              "label": "Sonntagsbrunch",
-              "detail": "Hotel Eden Spiez, Spiez",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/sonntagsbrunch-13/"
+              "label": "Lundi Lectures Octobre",
+              "detail": "Biel, Biel/Bienne",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lundi-lesungen-oktober/"
+            },
+            {
+              "label": "Il Civetto - ALBUM TOUR 2026",
+              "detail": "Mühle Hunziken, Rubigen",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/rubigen/il-civetto-album-tour-2026_Ax97Fef"
             },
             {
               "label": "Journées suisses du cor naturel",
-              "detail": "Beatenberg",
-              "date": "2026-10-25",
+              "detail": "Beatenberg — en cours, dernier jour : 29 octobre 2026",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/giornate-svizzere-del-corno-naturale/"
             },
             {
-              "label": "Château de la saison",
-              "detail": "Spiez",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schlossfuehrung-5/"
+              "label": "Selbstplanerkurs PV-Anlage e-wende",
+              "detail": "Bern — en cours, dernier jour : 5 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/selbstplanerkurs-pv-anlage-e-wende-2/"
             },
             {
-              "label": "Konzert im Sommersaal",
-              "detail": "Schloss Oberhofen, Oberhofen am Thunersee",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/oberhofen-am-thunersee/konzert-im-sommersaal_A5Qr8qh"
-            },
-            {
-              "label": "Vivaldi - Die vier Jahreszeiten",
-              "detail": "Evang.-ref. Stadtkirche / Temple Allemand",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/vivaldi-die-vier-jahreszeiten-10/"
+              "label": "Ein Berner namens Matter. Kennet Dir das Gschichtli scho?",
+              "detail": "Bern, Münsterplatz, Mosesbrunnen, Bern — en cours, dernier jour : 21 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/bern/ein-berner-namens-matter-kennet-dir-das-gschichtli-scho_A4fYS1Z"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -504,7 +504,7 @@
           "url": "/fr/evenements/berne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

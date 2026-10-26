@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "6f88221ea85aed1463b2593145093aec0460e93996b1ae1a66cb2b04e2009e77",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "6d5225f41b1dd0208b1c8b8dde0f50a56337d9c2403cd03784526ea79888ec4a",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "116",
+          "value": "103",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Doudou Show",
-              "detail": "LAFABRIK Cucheturelle, Vevey",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/doudou-show/"
+              "label": "Emotions and Immunity",
+              "detail": "Vevey",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/emotions-and-immunity/"
             },
             {
-              "label": "Team QUIZ",
-              "detail": "Villeneuve VD, Villeneuve (VD)",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/team-quiz/"
+              "label": "St. Martin's Day Sale",
+              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/st-martins-day-sale/"
+            },
+            {
+              "label": "Fermentation Course for Professional and Amateur Cooks",
+              "detail": "Les Jardins de Chivrageon, Aubonne",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/formation-fermentation-pour-cuisiniers-professionnels-et-passionnes/"
             },
             {
               "label": "Kombucha, Kefir, and Homemade Soda Workshop",
-              "detail": "Aubonne",
-              "date": "2026-10-25",
+              "detail": "Aubonne — in corso, ultimo giorno: 9 novembre 2026",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
             },
             {
-              "label": "Maratona di Losanna",
-              "detail": "Place de Bellerive, Lausanne",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-marathon/"
+              "label": "Reflections",
+              "detail": "Vevey — in corso, ultimo giorno: 15 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
             },
             {
-              "label": "Why don't you dance? - Visites",
-              "detail": "Photo Elysée",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/why-dont-you-dance-visites_AuKEbt3"
+              "label": "Tokyo-Ga",
+              "detail": "Cinémathèque suisse, Lausanne — in corso, ultimo giorno: 30 ottobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
             },
             {
-              "label": "Visite commentée – Hannah Darabi. Why Don’t You Dance?",
-              "detail": "Photo Elysée",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/visite-commentee-hannah-darabi-why-dont-you-dance_AxyGHw5"
+              "label": "Before Midnight",
+              "detail": "Cinémathèque suisse, Lausanne — in corso, ultimo giorno: 29 ottobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
             },
             {
-              "label": "Jass Tournament",
-              "detail": "Restaurant du Signal de Bougy, Bougy-Villars",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jass-tournament-2/"
+              "label": "ABSTRACTS FROM REALITY",
+              "detail": "Galerie du Magasin du Monde, Vevey — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auszuege-aus-der-wirklichkeit/"
             },
             {
-              "label": "Atelier de broderie",
-              "detail": "Renens",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-broderie/"
-            },
-            {
-              "label": "Workshop: Everything You Need to Know About Miso",
-              "detail": "Les Jardins de Chivrageon, Aubonne",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/atelier-tout-savoir-sur-le-miso/"
-            },
-            {
-              "label": "Un dimanche animé",
+              "label": "ECAL Bachelor : Programme de films de diplôme",
               "detail": "Lausanne",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-dimanche-anime/"
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ecal-bachelor-programme-de-films-de-diplome/"
+            },
+            {
+              "label": "ECAL Master : Programme de films de diplôme",
+              "detail": "Lausanne",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ecal-master-programme-de-films-de-diplome/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -118,7 +118,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -140,7 +140,7 @@
           "url": "/eventi/vaud/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "VD",
@@ -150,7 +150,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "116",
+          "value": "103",
           "note": "from the site’s events calendar"
         }
       ],
@@ -161,64 +161,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Doudou Show",
-              "detail": "LAFABRIK Cucheturelle, Vevey",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/doudou-show/"
+              "label": "Emotions and Immunity",
+              "detail": "Vevey",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/emotions-and-immunity/"
             },
             {
-              "label": "Team QUIZ",
-              "detail": "Villeneuve VD, Villeneuve (VD)",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/team-quiz/"
+              "label": "St. Martin's Day Sale",
+              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/st-martins-day-sale/"
+            },
+            {
+              "label": "Fermentation Course for Professional and Amateur Cooks",
+              "detail": "Les Jardins de Chivrageon, Aubonne",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/formation-fermentation-pour-cuisiniers-professionnels-et-passionnes/"
             },
             {
               "label": "Kombucha, Kefir, and Homemade Soda Workshop",
-              "detail": "Aubonne",
-              "date": "2026-10-25",
+              "detail": "Aubonne — ongoing, last day: 9 November 2026",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
             },
             {
-              "label": "Lausanne Marathon",
-              "detail": "Place de Bellerive, Lausanne",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-marathon/"
+              "label": "Reflections",
+              "detail": "Vevey — ongoing, last day: 15 November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
             },
             {
-              "label": "Why don't you dance? - Visites",
-              "detail": "Photo Elysée",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/why-dont-you-dance-visites_AuKEbt3"
+              "label": "Tokyo-Ga",
+              "detail": "Cinémathèque suisse, Lausanne — ongoing, last day: 30 October 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
             },
             {
-              "label": "Visite commentée – Hannah Darabi. Why Don’t You Dance?",
-              "detail": "Photo Elysée",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/visite-commentee-hannah-darabi-why-dont-you-dance_AxyGHw5"
+              "label": "Before Midnight",
+              "detail": "Cinémathèque suisse, Lausanne — ongoing, last day: 29 October 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
             },
             {
-              "label": "Jass Tournament",
-              "detail": "Restaurant du Signal de Bougy, Bougy-Villars",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jass-tournament-2/"
+              "label": "ABSTRACTS FROM REALITY",
+              "detail": "Galerie du Magasin du Monde, Vevey — ongoing, last day: 31 October 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auszuege-aus-der-wirklichkeit/"
             },
             {
-              "label": "Broderie workshop",
-              "detail": "Renens",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-broderie/"
-            },
-            {
-              "label": "Workshop: Everything You Need to Know About Miso",
-              "detail": "Les Jardins de Chivrageon, Aubonne",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/atelier-tout-savoir-sur-le-miso/"
-            },
-            {
-              "label": "Un dimanche animé",
+              "label": "ECAL Bachelor : Programme de films de diplôme",
               "detail": "Lausanne",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-dimanche-anime/"
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ecal-bachelor-programme-de-films-de-diplome/"
+            },
+            {
+              "label": "ECAL Master : Programme de films de diplôme",
+              "detail": "Lausanne",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ecal-master-programme-de-films-de-diplome/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -241,7 +241,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -263,7 +263,7 @@
           "url": "/en/events/vaud/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "VD",
@@ -273,7 +273,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "116",
+          "value": "103",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -284,64 +284,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Show Doudou",
-              "detail": "LAFABRIK Cucheturelle, Vevey",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/doudou-show/"
+              "label": "Emotionen und Immunität",
+              "detail": "Vevey",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/emotions-and-immunity/"
             },
             {
-              "label": "QUIZ in Teams",
-              "detail": "Villeneuve VD, Villeneuve (VD)",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/team-quiz/"
+              "label": "Verkauf am Martinstag",
+              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/st-martins-day-sale/"
+            },
+            {
+              "label": "Formation Fermentation pour cuisiniers professionnels et passionnés",
+              "detail": "Les Jardins de Chivrageon, Aubonne",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/formation-fermentation-pour-cuisiniers-professionnels-et-passionnes/"
             },
             {
               "label": "Workshop zu Kombucha, Kefir und hausgemachten Limonaden",
-              "detail": "Aubonne",
-              "date": "2026-10-25",
+              "detail": "Aubonne — läuft, letzter Tag: 9. November 2026",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
             },
             {
-              "label": "Lausanne Marathon",
-              "detail": "Place de Bellerive, Lausanne",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-marathon/"
+              "label": "Reflexionen",
+              "detail": "Vevey — läuft, letzter Tag: 15. November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
             },
             {
-              "label": "Why don't you dance? - Visites",
-              "detail": "Photo Elysée",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/why-dont-you-dance-visites_AuKEbt3"
+              "label": "Tokyo-Ga",
+              "detail": "Cinémathèque suisse, Lausanne — läuft, letzter Tag: 30. Oktober 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
             },
             {
-              "label": "Visite commentée – Hannah Darabi. Why Don’t You Dance?",
-              "detail": "Photo Elysée",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/visite-commentee-hannah-darabi-why-dont-you-dance_AxyGHw5"
+              "label": "Before Midnight",
+              "detail": "Cinémathèque suisse, Lausanne — läuft, letzter Tag: 29. Oktober 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
             },
             {
-              "label": "Jass Turnier",
-              "detail": "Restaurant du Signal de Bougy, Bougy-Villars",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jass-tournament-2/"
+              "label": "AUSZÜGE AUS DER WIRKLICHKEIT",
+              "detail": "Galerie du Magasin du Monde, Vevey — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auszuege-aus-der-wirklichkeit/"
             },
             {
-              "label": "Broderie-Workshop",
-              "detail": "Renens",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-broderie/"
-            },
-            {
-              "label": "Atelier Tout savoir sur le Miso",
-              "detail": "Les Jardins de Chivrageon, Aubonne",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/atelier-tout-savoir-sur-le-miso/"
-            },
-            {
-              "label": "Un dimanche animé",
+              "label": "ECAL Bachelor : Programme de films de diplôme",
               "detail": "Lausanne",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-dimanche-anime/"
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ecal-bachelor-programme-de-films-de-diplome/"
+            },
+            {
+              "label": "ECAL Master : Programme de films de diplôme",
+              "detail": "Lausanne",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ecal-master-programme-de-films-de-diplome/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -364,7 +364,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -386,7 +386,7 @@
           "url": "/de/veranstaltungen/waadt/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "VD",
@@ -396,7 +396,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "116",
+          "value": "103",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -407,64 +407,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Show Doudou",
-              "detail": "LAFABRIK Cucheturelle, Vevey",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/doudou-show/"
+              "label": "Émotions et immunité",
+              "detail": "Vevey",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/emotions-and-immunity/"
             },
             {
-              "label": "Quiz par équipe",
-              "detail": "Villeneuve VD, Villeneuve (VD)",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/team-quiz/"
+              "label": "Vente de la St-Martin",
+              "detail": "Bibliothèque médiathèque municipale de Vevey, Vevey",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/st-martins-day-sale/"
+            },
+            {
+              "label": "Formation Fermentation pour cuisiniers professionnels et passionnés",
+              "detail": "Les Jardins de Chivrageon, Aubonne",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/formation-fermentation-pour-cuisiniers-professionnels-et-passionnes/"
             },
             {
               "label": "Atelier Kombucha, kéfir et sodas sauvages",
-              "detail": "Aubonne",
-              "date": "2026-10-25",
+              "detail": "Aubonne — en cours, dernier jour : 9 novembre 2026",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/kombucha-kefir-and-homemade-soda-workshop/"
             },
             {
-              "label": "Lausanne Marathon",
-              "detail": "Place de Bellerive, Lausanne",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/lausanne-marathon/"
+              "label": "Reflets",
+              "detail": "Vevey — en cours, dernier jour : 15 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/reflections/"
             },
             {
-              "label": "Why don't you dance? - Visites",
-              "detail": "Photo Elysée",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/why-dont-you-dance-visites_AuKEbt3"
+              "label": "Tokyo-Ga",
+              "detail": "Cinémathèque suisse, Lausanne — en cours, dernier jour : 30 octobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/tokyo-ga/"
             },
             {
-              "label": "Visite commentée – Hannah Darabi. Why Don’t You Dance?",
-              "detail": "Photo Elysée",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/evenements/musique/lausanne/visite-commentee-hannah-darabi-why-dont-you-dance_AxyGHw5"
+              "label": "Before Midnight",
+              "detail": "Cinémathèque suisse, Lausanne — en cours, dernier jour : 29 octobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/before-midnight/"
             },
             {
-              "label": "Tournoi de Jass",
-              "detail": "Restaurant du Signal de Bougy, Bougy-Villars",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/jass-tournament-2/"
+              "label": "Abstraits du Réel",
+              "detail": "Galerie du Magasin du Monde, Vevey — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/auszuege-aus-der-wirklichkeit/"
             },
             {
-              "label": "Atelier de broderie",
-              "detail": "Renens",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/atelier-de-broderie/"
-            },
-            {
-              "label": "Atelier Tout savoir sur le Miso",
-              "detail": "Les Jardins de Chivrageon, Aubonne",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/atelier-tout-savoir-sur-le-miso/"
-            },
-            {
-              "label": "Un dimanche animé",
+              "label": "ECAL Bachelor : Programme de films de diplôme",
               "detail": "Lausanne",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/un-dimanche-anime/"
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/ecal-bachelor-programme-de-films-de-diplome/"
+            },
+            {
+              "label": "ECAL Master : Programme de films de diplôme",
+              "detail": "Lausanne",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/ecal-master-programme-de-films-de-diplome/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -487,7 +487,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90440"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -509,7 +509,7 @@
           "url": "/fr/evenements/vaud/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

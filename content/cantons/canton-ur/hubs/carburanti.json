@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "carburanti",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "0583d21479efccb20b69fba1915d100e06095abb83c1fe2de3fb472c36dfcaed",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "2a096f89d7a8854ab34b6b62749a7c5ae62be4592d28f7682d85c70d264a3518",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-24T11:32:51.939Z",
+      "updatedAt": "2026-10-25T12:00:24.779Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-24T11:32:51.939Z"
+          "updatedAt": "2026-10-25T12:00:24.779Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Felix Gisler lascerà l'amministrazione cantonale di Uri",
+          "url": "/articoli-uri/felix-gisler-pensione-uri/",
+          "excerpt": "Dopo circa 37 anni, Felix Gisler lascerà l'amministrazione cantonale di Uri a fine ottobre 2026 per pensionamento ordinario.",
+          "date": "2026-10-25T14:44:59.995Z"
+        },
         {
           "title": "Andermatt abbassa le imposte: progetto Wyden rinviato",
           "url": "/articoli-uri/andermatt-fisco-wyden/",
@@ -82,12 +88,6 @@
           "url": "/articoli-uri/silenen-muri-secco/",
           "excerpt": "Il Landrat approva CHF 207.000 senza voti contrari 3,6 km di muri storici nell'area di Silenen Circa il 60% presenta un rischio per la sicurezza I lavori",
           "date": "2026-10-18T06:56:11.601Z"
-        },
-        {
-          "title": "Eventi del weekend nel Canton Uri: cosa fare sabato e domenica",
-          "url": "/articoli-uri/eventi-weekend-uri/",
-          "excerpt": "Eventi nel Canton Uri ogni weekend: concerti, mostre, feste e mercati, comune per comune. Agenda aggiornata ogni giorno.",
-          "date": "2026-10-17T11:32:19.468Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "UR",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-24T11:32:51.939Z"
+          "updatedAt": "2026-10-25T12:00:24.779Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Felix Gisler will leave the cantonal administration of Uri",
+          "url": "/en/uri-articles/felix-gisler-uri-retirement/",
+          "excerpt": "After approximately 37 years, Felix Gisler will leave the cantonal administration of Uri at the end of October 2026 due to regular retirement.",
+          "date": "2026-10-25T14:44:59.995Z"
+        },
         {
           "title": "Andermatt cuts taxes: Wyden project postponed",
           "url": "/en/uri-articles/andermatt-tax-wyden-postponed/",
@@ -169,12 +175,6 @@
           "url": "/en/uri-articles/silenen-dry-stone-walls/",
           "excerpt": "The Landrat approves CHF 207.000 with no votes against 3,6 km of historic walls in the Silenen area Around 60% pose a safety risk Work starts in October",
           "date": "2026-10-18T06:56:11.601Z"
-        },
-        {
-          "title": "Weekend events in the canton of Uri: what to do Saturday & Sunday",
-          "url": "/en/uri-articles/weekend-events-uri/",
-          "excerpt": "Events in the canton of Uri every weekend: concerts, exhibitions, festivals and markets, municipality by municipality. Refreshed daily.",
-          "date": "2026-10-17T11:32:19.468Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "UR",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-24T11:32:51.939Z"
+          "updatedAt": "2026-10-25T12:00:24.779Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Felix Gisler wird die Kantonsverwaltung Uri verlassen",
+          "url": "/de/uri-artikel/felix-gisler-uri-pensionierung/",
+          "excerpt": "Nach rund 37 Jahren wird Felix Gisler die Kantonsverwaltung Uri Ende Oktober 2026 infolge ordentlicher Pensionierung verlassen.",
+          "date": "2026-10-25T14:44:59.995Z"
+        },
         {
           "title": "Andermatt senkt die Steuern: Projekt Wyden verschoben",
           "url": "/de/uri-artikel/andermatt-steuern-wyden/",
@@ -256,12 +262,6 @@
           "url": "/de/uri-artikel/silenen-trockenmauern-sanierung/",
           "excerpt": "Der Landrat genehmigt CHF 207.000 ohne Gegenstimmen 3,6 km historische Mauern im Gebiet von Silenen Rund 60% stellen ein Sicherheitsrisiko dar Die Arbeiten",
           "date": "2026-10-18T06:56:11.601Z"
-        },
-        {
-          "title": "Veranstaltungen am Wochenende im Kanton Uri: was tun Sa & So",
-          "url": "/de/uri-artikel/wochenend-veranstaltungen-uri/",
-          "excerpt": "Veranstaltungen im Kanton Uri an jedem Wochenende: Konzerte, Ausstellungen, Feste und Märkte, Gemeinde für Gemeinde. Täglich aktualisiert.",
-          "date": "2026-10-17T11:32:19.468Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "UR",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-24T11:32:51.939Z"
+          "updatedAt": "2026-10-25T12:00:24.779Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Felix Gisler quittera l’administration cantonale d’Uri",
+          "url": "/fr/articles-uri/felix-gisler-uri-retraite/",
+          "excerpt": "Après environ 37 ans, Felix Gisler quittera l’administration cantonale d’Uri à la fin du mois d’octobre 2026 pour prendre sa retraite ordinaire.",
+          "date": "2026-10-25T14:44:59.995Z"
+        },
         {
           "title": "Andermatt baisse les impôts : projet Wyden reporté",
           "url": "/fr/articles-uri/andermatt-impots-wyden/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-uri/silenen-murs-pierre-seche/",
           "excerpt": "Le Landrat approuve CHF 207.000 sans voix contre 3,6 km de murs historiques dans la région de Silenen Environ 60% présentent un risque pour la sécurité",
           "date": "2026-10-18T06:56:11.601Z"
-        },
-        {
-          "title": "Événements du week-end dans le canton d'Uri : que faire samedi & dimanche",
-          "url": "/fr/articles-uri/evenements-week-end-uri/",
-          "excerpt": "Événements dans le canton d'Uri chaque week-end : concerts, expositions, fêtes et marchés, commune par commune. Mis à jour chaque jour.",
-          "date": "2026-10-17T11:32:19.468Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

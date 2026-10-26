@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "1213cb007c3a49808d8b153b11d6613412f80f7ee77d16bcd5ad446484c37168",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "189ef58dc7b14535abd30e6cc260ac954bd2af5951e08f8784e4826a72496843",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "168",
+          "value": "136",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
+              "label": "Soffia, vola, scopri!",
+              "detail": "Atelier Manoamano, Lugano",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261026/64657"
+            },
+            {
+              "label": "Congo Boy",
+              "detail": "Cinema GranRex, Locarno",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261026/64400"
+            },
+            {
+              "label": "Musica al volo",
+              "detail": "Teatro Sociale, Bellinzona",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261026/64458"
+            },
+            {
+              "label": "Showcase Mario Biondi",
+              "detail": "LAC, Lugano",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261026/64543"
+            },
+            {
               "label": "Arp, Cahn, Magnelli, Taeuber-Arp. L’arte del dono",
-              "detail": "Fondazione Marguerite Arp, Locarno",
-              "date": "2026-10-25",
+              "detail": "Fondazione Marguerite Arp, Locarno — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-26",
               "url": "https://www.tio.ch/agenda/day/20261025/61586"
             },
             {
               "label": "Gyotaku - Tracce di pesci",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-10-25",
+              "detail": "Museo della pesca, Caslano — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-10-26",
               "url": "https://www.tio.ch/agenda/day/20261025/61721"
             },
             {
-              "label": "Festival La donna crea",
-              "detail": "Locarno",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/festival-la-donna-crea/"
+              "label": "Aline d'Auria - Mai più, tra poco, spesso, un tempo.",
+              "detail": "Casa Rotonda — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261025/64617"
             },
             {
-              "label": "Che top! Atelier di cucito",
-              "detail": "Atelier Manoamano, Lugano",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64496"
+              "label": "Note d'Autunno 2026 – Rassegna di musica da camera",
+              "detail": "Chiesa Parrocchiale di S. Maria Assunta, Sorengo — in corso, ultimo giorno: 22 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/note-dautunno-2026-kammermusikalische-veranstaltung/"
             },
             {
-              "label": "Matinée",
-              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64600"
+              "label": "Rassegna gastronomica carne di capra",
+              "detail": "Cavergno — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/rassegna-gastronomica-carne-di-capra/"
             },
             {
-              "label": "Antenne in festa per la chiusura stagionale",
-              "detail": "Museo Moesano",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64615"
-            },
-            {
-              "label": "Hansel e Gretel",
-              "detail": "Teatro Foce, Lugano",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/63710"
-            },
-            {
-              "label": "Mercatino autunnale",
-              "detail": "Piazzale della chiesa di Montedato, Locarno",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64234"
-            },
-            {
-              "label": "Brunchin’zona: boogie-woogie con Silvan Zingg",
-              "detail": "Centro Spazio Aperto, Bellinzona",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64544"
-            },
-            {
-              "label": "50 anni di 'Avere o essere' di Erich Fromm",
-              "detail": "Centro Leoni, Locarno",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64339"
+              "label": "Vivi il giardino",
+              "detail": "GiardinoPiù di Gudo, Bellinzona — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261024/62880"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -163,7 +163,7 @@
           "url": "/articoli-frontaliere/eventi-weekend-ticino/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "TI",
@@ -173,7 +173,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "168",
+          "value": "136",
           "note": "from the site’s events calendar"
         }
       ],
@@ -184,64 +184,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
+              "label": "Blow, fly, find out!",
+              "detail": "Atelier Manoamano, Lugano",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261026/64657"
+            },
+            {
+              "label": "Congo Bo Bo",
+              "detail": "Cinema GranRex, Locarno",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261026/64400"
+            },
+            {
+              "label": "Music on the fly",
+              "detail": "Teatro Sociale, Bellinzona",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261026/64458"
+            },
+            {
+              "label": "Mario Biondi Showcase",
+              "detail": "LAC, Lugano",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261026/64543"
+            },
+            {
               "label": "Arp, Cahn, Magnelli, Taeuber-Arp. The Art of the Gift",
-              "detail": "Fondazione Marguerite Arp, Locarno",
-              "date": "2026-10-25",
+              "detail": "Fondazione Marguerite Arp, Locarno — ongoing, last day: 1 November 2026",
+              "date": "2026-10-26",
               "url": "https://www.tio.ch/agenda/day/20261025/61586"
             },
             {
               "label": "Gyotaku - Fish Trails",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-10-25",
+              "detail": "Museo della pesca, Caslano — ongoing, last day: 8 November 2026",
+              "date": "2026-10-26",
               "url": "https://www.tio.ch/agenda/day/20261025/61721"
             },
             {
-              "label": "Festival La donna crea",
-              "detail": "Locarno",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/festival-la-donna-crea/"
+              "label": "Aline d 'Auria - Never again, soon, often, once.",
+              "detail": "Casa Rotonda — ongoing, last day: 8 November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261025/64617"
             },
             {
-              "label": "What a top! Sewing atelier",
-              "detail": "Atelier Manoamano, Lugano",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64496"
+              "label": "Note d'Autunno 2026 – Chambers music",
+              "detail": "Chiesa Parrocchiale di S. Maria Assunta, Sorengo — ongoing, last day: 22 November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/note-dautunno-2026-kammermusikalische-veranstaltung/"
             },
             {
-              "label": "Matinee",
-              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64600"
+              "label": "Goat meat gastronomical festival",
+              "detail": "Cavergno — ongoing, last day: 8 November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/rassegna-gastronomica-carne-di-capra/"
             },
             {
-              "label": "Antennas in celebration for the seasonal closure",
-              "detail": "Museo Moesano",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64615"
-            },
-            {
-              "label": "Hansel and Gretel",
-              "detail": "Teatro Foce, Lugano",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/63710"
-            },
-            {
-              "label": "Autumn market",
-              "detail": "Piazzale della chiesa di Montedato, Locarno",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64234"
-            },
-            {
-              "label": "Brunchin 'area: boogie-woogie with Silvan Zingg",
-              "detail": "Centro Spazio Aperto, Bellinzona",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64544"
-            },
-            {
-              "label": "50 Years of Erich Fromm's 'To Have or Be'",
-              "detail": "Centro Leoni, Locarno",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64339"
+              "label": "ENJOY YOUR GARDEN",
+              "detail": "GiardinoPiù di Gudo, Bellinzona — ongoing, last day: 31 October 2026",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261024/62880"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -314,7 +314,7 @@
           "url": "/en/cross-border-articles/weekend-events-ticino/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "TI",
@@ -324,7 +324,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "168",
+          "value": "136",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -335,64 +335,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
+              "label": "Blasen, fliegen, entdecken!",
+              "detail": "Atelier Manoamano, Lugano",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261026/64657"
+            },
+            {
+              "label": "Kongo-Junge",
+              "detail": "Cinema GranRex, Locarno",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261026/64400"
+            },
+            {
+              "label": "Musik on the fly",
+              "detail": "Teatro Sociale, Bellinzona",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261026/64458"
+            },
+            {
+              "label": "Präsentiert Mario Biondi",
+              "detail": "LAC, Lugano",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261026/64543"
+            },
+            {
               "label": "Arp, Cahn, Magnelli, Taeuber-Arp. Die Kunst des Schenkens",
-              "detail": "Fondazione Marguerite Arp, Locarno",
-              "date": "2026-10-25",
+              "detail": "Fondazione Marguerite Arp, Locarno — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-26",
               "url": "https://www.tio.ch/agenda/day/20261025/61586"
             },
             {
               "label": "Gyotaku - Spuren von Fischen",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-10-25",
+              "detail": "Museo della pesca, Caslano — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-10-26",
               "url": "https://www.tio.ch/agenda/day/20261025/61721"
             },
             {
-              "label": "Festival La donna crea",
-              "detail": "Locarno",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/festival-la-donna-crea/"
+              "label": "Aline d 'Auria - Nie wieder, bald, oft, einst.",
+              "detail": "Casa Rotonda — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261025/64617"
             },
             {
-              "label": "Was für ein Top! Nähatelier",
-              "detail": "Atelier Manoamano, Lugano",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64496"
+              "label": "Note d'Autunno 2026 – Kammermusikalische Veranstaltung",
+              "detail": "Chiesa Parrocchiale di S. Maria Assunta, Sorengo — läuft, letzter Tag: 22. November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/note-dautunno-2026-kammermusikalische-veranstaltung/"
             },
             {
-              "label": "Matinee",
-              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64600"
+              "label": "Gastronomie-Festival über das Ziegenfleisch",
+              "detail": "Cavergno — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/rassegna-gastronomica-carne-di-capra/"
             },
             {
-              "label": "Feste Antennen für saisonale Schließung",
-              "detail": "Museo Moesano",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64615"
-            },
-            {
-              "label": "Hänsel und Gretel",
-              "detail": "Teatro Foce, Lugano",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/63710"
-            },
-            {
-              "label": "Herbstmarkt",
-              "detail": "Piazzale della chiesa di Montedato, Locarno",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64234"
-            },
-            {
-              "label": "Brunchzone: Boogie-Woogie mit Silvan Zingg",
-              "detail": "Centro Spazio Aperto, Bellinzona",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64544"
-            },
-            {
-              "label": "50 Jahre „Haben oder Sein“ von Erich Fromm",
-              "detail": "Centro Leoni, Locarno",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64339"
+              "label": "Der Garten",
+              "detail": "GiardinoPiù di Gudo, Bellinzona — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261024/62880"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -465,7 +465,7 @@
           "url": "/de/grenzgaenger-artikel/wochenend-veranstaltungen-tessin/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "TI",
@@ -475,7 +475,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "168",
+          "value": "136",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -486,64 +486,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
+              "label": "Soufflez, volez, découvrez !",
+              "detail": "Atelier Manoamano, Lugano",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261026/64657"
+            },
+            {
+              "label": "Garçon Congo",
+              "detail": "Cinema GranRex, Locarno",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261026/64400"
+            },
+            {
+              "label": "Musique à la volée",
+              "detail": "Teatro Sociale, Bellinzona",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261026/64458"
+            },
+            {
+              "label": "Présentation de Mario Biondi",
+              "detail": "LAC, Lugano",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261026/64543"
+            },
+            {
               "label": "Arp, Cahn, Magnelli, Taeuber-Arp. L’art du don",
-              "detail": "Fondazione Marguerite Arp, Locarno",
-              "date": "2026-10-25",
+              "detail": "Fondazione Marguerite Arp, Locarno — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-26",
               "url": "https://www.tio.ch/agenda/day/20261025/61586"
             },
             {
               "label": "Gyotaku - Traces de poissons",
-              "detail": "Museo della pesca, Caslano",
-              "date": "2026-10-25",
+              "detail": "Museo della pesca, Caslano — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-10-26",
               "url": "https://www.tio.ch/agenda/day/20261025/61721"
             },
             {
-              "label": "Festival La donna crea",
-              "detail": "Locarno",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/festival-la-donna-crea/"
+              "label": "Aline d'Auria - Plus jamais, bientôt, souvent, depuis longtemps.",
+              "detail": "Casa Rotonda — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261025/64617"
             },
             {
-              "label": "Quel top ! Atelier de couture",
-              "detail": "Atelier Manoamano, Lugano",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64496"
+              "label": "Note d'Autunno 2026 – Musique de Chambre",
+              "detail": "Chiesa Parrocchiale di S. Maria Assunta, Sorengo — en cours, dernier jour : 22 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/note-dautunno-2026-kammermusikalische-veranstaltung/"
             },
             {
-              "label": "- jusqu'à la levée du couvre-feu. - Matinées ?",
-              "detail": "Sala Musica nel Mendrisiotto, Mendrisio",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64600"
+              "label": "Festival gastronomique de la viande de chèvre",
+              "detail": "Cavergno — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/rassegna-gastronomica-carne-di-capra/"
             },
             {
-              "label": "Antennes en fête pour la fermeture saisonnière",
-              "detail": "Museo Moesano",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64615"
-            },
-            {
-              "label": "Comme dans le conte ?",
-              "detail": "Teatro Foce, Lugano",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/63710"
-            },
-            {
-              "label": "Marché d'automne",
-              "detail": "Piazzale della chiesa di Montedato, Locarno",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64234"
-            },
-            {
-              "label": "Brunchin’zone : boogie-woogie avec Silvan Zingg",
-              "detail": "Centro Spazio Aperto, Bellinzona",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64544"
-            },
-            {
-              "label": "50 ans d '« Avoir ou être » d'Erich Fromm",
-              "detail": "Centro Leoni, Locarno",
-              "date": "2026-10-25",
-              "url": "https://www.tio.ch/agenda/day/20261025/64339"
+              "label": "VIVEZ VOTRE JARDIN",
+              "detail": "GiardinoPiù di Gudo, Bellinzona — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.tio.ch/agenda/day/20261024/62880"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -616,7 +616,7 @@
           "url": "/fr/articles-frontalier/evenements-week-end-tessin/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

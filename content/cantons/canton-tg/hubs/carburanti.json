@@ -4,14 +4,14 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "546b90e2b0e40d378047bb55e44ae9c96a4df2f1c0a85abbac638c6e12ad3f5f",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "a09fb528d7cbf96576a1e62ca6d87008c9da24e678ecc372f085b302258a1b28",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-24T11:32:51.939Z",
+      "updatedAt": "2026-10-25T12:00:24.779Z",
       "keyFacts": 2,
-      "carryUntilAt": "2026-10-31T11:32:51.939Z"
+      "carryUntilAt": "2026-11-01T12:00:24.779Z"
     }
   ],
   "locales": {
@@ -54,23 +54,35 @@
             },
             {
               "label": "Benzina 95 — Germania",
-              "value": "2,256 EUR/l",
+              "value": "2,302 EUR/l",
               "detail": "media regionale: minimo 2,229 EUR/l, 3 stazioni rilevate",
-              "date": "2026-10-24T11:32:51.939Z"
+              "date": "2026-10-25T12:00:24.779Z"
             },
             {
               "label": "Diesel — Germania",
-              "value": "2,446 EUR/l",
-              "detail": "media regionale: minimo 2,439 EUR/l, 3 stazioni rilevate",
-              "date": "2026-10-24T11:32:51.939Z"
+              "value": "2,462 EUR/l",
+              "detail": "media regionale: minimo 2,449 EUR/l, 3 stazioni rilevate",
+              "date": "2026-10-25T12:00:24.779Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-24T11:32:51.939Z"
+          "updatedAt": "2026-10-25T12:00:24.779Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Imprenditori nel Canton Turgovia: condizioni quadro attrattive",
+          "url": "/articoli-turgovia/imprenditori-cantone-turgovia-sostegno/",
+          "excerpt": "Il cantone offre supporto a imprenditrici e imprenditori per condizioni quadro attrattive, coprendo immobile, permessi e contatti amministrativi.",
+          "date": "2026-10-25T12:54:45.336Z"
+        },
+        {
+          "title": "Sedi RAV e servizi per datori di lavoro in Canton Turgovia",
+          "url": "/articoli-turgovia/sedi-rav-lavoratori-tg/",
+          "excerpt": "Le sedi RAV sono ad Amriswil, Frauenfeld e Kreuzlingen; le vacancy si pubblicano gratis su arbeit.swiss.",
+          "date": "2026-10-25T12:02:52.564Z"
+        },
         {
           "title": "Turgovia: modifica piano direttore per sedi economiche",
           "url": "/articoli-turgovia/turgovia-modifica-piano-direttore-2027/",
@@ -88,18 +100,6 @@
           "url": "/articoli-turgovia/turgovia-servizi-datori-lavoro/",
           "excerpt": "Il Canton Turgovia mette a disposizione dei datori di lavoro le sedi RAV di Amriswil, Frauenfeld e Kreuzlingen e il portale arbeit.swiss per vacancy vacancy",
           "date": "2026-10-19T15:27:38.407Z"
-        },
-        {
-          "title": "Turgovia: supporto alle imprese che valutano l'insediamento",
-          "url": "/articoli-turgovia/supporto-imprese-turgovia/",
-          "excerpt": "Il Canton Turgovia offre alle imprese informazioni, consulenza e sostegno per condizioni quadro, immobili, autorizzazioni e contatti con uffici e autorità.",
-          "date": "2026-10-18T11:06:15.235Z"
-        },
-        {
-          "title": "Strada principale di Felben-Wellhausen: risanamento",
-          "url": "/articoli-turgovia/felben-wellhausen-cantiere/",
-          "excerpt": "Dal 19 ottobre 2026 a metà luglio 2027, la Hauptstrasse di Felben-Wellhausen sarà risanata: Römerstrasse chiusa a tratti, Römerhof spostata o soppressa.",
-          "date": "2026-10-18T03:25:32.644Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "TG",
@@ -153,23 +153,35 @@
             },
             {
               "label": "Petrol 95 — Germany",
-              "value": "2.256 EUR/l",
+              "value": "2.302 EUR/l",
               "detail": "regional average: lowest 2.229 EUR/l, 3 stations surveyed",
-              "date": "2026-10-24T11:32:51.939Z"
+              "date": "2026-10-25T12:00:24.779Z"
             },
             {
               "label": "Diesel — Germany",
-              "value": "2.446 EUR/l",
-              "detail": "regional average: lowest 2.439 EUR/l, 3 stations surveyed",
-              "date": "2026-10-24T11:32:51.939Z"
+              "value": "2.462 EUR/l",
+              "detail": "regional average: lowest 2.449 EUR/l, 3 stations surveyed",
+              "date": "2026-10-25T12:00:24.779Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-24T11:32:51.939Z"
+          "updatedAt": "2026-10-25T12:00:24.779Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Entrepreneurs in the Canton of Thurgau: attractive framework conditions",
+          "url": "/en/thurgau-articles/thurgau-entrepreneurs-canton-support/",
+          "excerpt": "The canton supports entrepreneurs in creating attractive framework conditions, covering real estate, permits, and administrative contacts.",
+          "date": "2026-10-25T12:54:45.336Z"
+        },
+        {
+          "title": "RAV offices and services for employers in the Canton of Thurgau",
+          "url": "/en/thurgau-articles/rav-thurgau-workers-locations/",
+          "excerpt": "The RAV offices are in Amriswil, Frauenfeld and Kreuzlingen; vacancies are posted free of charge on arbeit.swiss.",
+          "date": "2026-10-25T12:02:52.564Z"
+        },
         {
           "title": "Thurgau: amendment to the structure plan for business locations",
           "url": "/en/thurgau-articles/thurgau-master-plan-revision-2027/",
@@ -187,18 +199,6 @@
           "url": "/en/thurgau-articles/thurgau-services-employers/",
           "excerpt": "The Canton of Thurgau makes the RAV offices in Amriswil, Frauenfeld and Kreuzlingen and the arbeit.swiss portal available to employers for vacancy vacancy",
           "date": "2026-10-19T15:27:38.407Z"
-        },
-        {
-          "title": "Thurgau: support for companies considering establishing themselves",
-          "url": "/en/thurgau-articles/thurgau-business-support/",
-          "excerpt": "The Canton of Thurgau offers businesses information, advice and support regarding framework conditions, real estate, permits, and contacts with offices and authorities.",
-          "date": "2026-10-18T11:06:15.235Z"
-        },
-        {
-          "title": "Felben-Wellhausen main road: renovation",
-          "url": "/en/thurgau-articles/felben-wellhausen-road-works/",
-          "excerpt": "From October 19, 2026 to mid-July 2027, Felben-Wellhausen’s Hauptstrasse will be renovated: Römerstrasse closed in sections, Römerhof relocated or discontinued.",
-          "date": "2026-10-18T03:25:32.644Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "TG",
@@ -252,23 +252,35 @@
             },
             {
               "label": "Benzin 95 — Deutschland",
-              "value": "2.256 EUR/l",
+              "value": "2.302 EUR/l",
               "detail": "regionaler Durchschnitt: tiefster Preis 2.229 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-10-24T11:32:51.939Z"
+              "date": "2026-10-25T12:00:24.779Z"
             },
             {
               "label": "Diesel — Deutschland",
-              "value": "2.446 EUR/l",
-              "detail": "regionaler Durchschnitt: tiefster Preis 2.439 EUR/l, 3 erfasste Tankstellen",
-              "date": "2026-10-24T11:32:51.939Z"
+              "value": "2.462 EUR/l",
+              "detail": "regionaler Durchschnitt: tiefster Preis 2.449 EUR/l, 3 erfasste Tankstellen",
+              "date": "2026-10-25T12:00:24.779Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-24T11:32:51.939Z"
+          "updatedAt": "2026-10-25T12:00:24.779Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Unternehmerinnen und Unternehmer im Kanton Thurgau: attraktive Rahmenbedingungen",
+          "url": "/de/thurgau-artikel/unternehmer-kanton-thurgau-unterstuetzung/",
+          "excerpt": "Der Kanton unterstützt Unternehmerinnen und Unternehmer bei der Schaffung attraktiver Rahmenbedingungen in den Bereichen Immobilien, Bewilligungen und Kontakte zur Verwaltung.",
+          "date": "2026-10-25T12:54:45.336Z"
+        },
+        {
+          "title": "RAV-Standorte und Dienstleistungen für Arbeitgeber im Kanton Thurgau",
+          "url": "/de/thurgau-artikel/rav-thurgau-arbeitsnehmer-standorte/",
+          "excerpt": "Die RAV-Standorte befinden sich in Amriswil, Frauenfeld und Kreuzlingen; offene Stellen werden kostenlos auf arbeit.swiss veröffentlicht.",
+          "date": "2026-10-25T12:02:52.564Z"
+        },
         {
           "title": "Thurgau: Änderung des Richtplans für Wirtschaftsstandorte",
           "url": "/de/thurgau-artikel/thurgau-richtplan-aenderung-2027/",
@@ -286,18 +298,6 @@
           "url": "/de/thurgau-artikel/thurgau-dienstleistungen-arbeitgeber/",
           "excerpt": "Der Kanton Thurgau stellt Arbeitgebern die RAV-Standorte in Amriswil, Frauenfeld und Kreuzlingen sowie das Portal arbeit.swiss für offene Stellen offene Stellen zur Verfügung",
           "date": "2026-10-19T15:27:38.407Z"
-        },
-        {
-          "title": "Thurgau: Unterstützung für Unternehmen, die eine Ansiedlung prüfen",
-          "url": "/de/thurgau-artikel/thurgau-unterstuetzung-firmen/",
-          "excerpt": "Der Kanton Thurgau bietet Unternehmen Informationen, Beratung und Unterstützung zu Rahmenbedingungen, Immobilien, Bewilligungen und Kontakten zu Ämtern und Behörden.",
-          "date": "2026-10-18T11:06:15.235Z"
-        },
-        {
-          "title": "Hauptstrasse in Felben-Wellhausen: Sanierung",
-          "url": "/de/thurgau-artikel/felben-wellhausen-hauptstrasse-sanierung/",
-          "excerpt": "Vom 19. Oktober 2026 bis Mitte Juli 2027 wird die Hauptstrasse in Felben-Wellhausen saniert: Die Römerstrasse wird abschnittsweise gesperrt, die Haltestelle Römerhof verlegt oder aufgehoben.",
-          "date": "2026-10-18T03:25:32.644Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "TG",
@@ -351,23 +351,35 @@
             },
             {
               "label": "Essence 95 — Allemagne",
-              "value": "2,256 EUR/l",
+              "value": "2,302 EUR/l",
               "detail": "moyenne régionale : prix le plus bas 2,229 EUR/l, 3 stations relevées",
-              "date": "2026-10-24T11:32:51.939Z"
+              "date": "2026-10-25T12:00:24.779Z"
             },
             {
               "label": "Diesel — Allemagne",
-              "value": "2,446 EUR/l",
-              "detail": "moyenne régionale : prix le plus bas 2,439 EUR/l, 3 stations relevées",
-              "date": "2026-10-24T11:32:51.939Z"
+              "value": "2,462 EUR/l",
+              "detail": "moyenne régionale : prix le plus bas 2,449 EUR/l, 3 stations relevées",
+              "date": "2026-10-25T12:00:24.779Z"
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria); Tankerkönig / MTS-K — CC BY 4.0 (https://creativecommons.tankerkoenig.de)",
-          "updatedAt": "2026-10-24T11:32:51.939Z"
+          "updatedAt": "2026-10-25T12:00:24.779Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Entrepreneurs Thurgovie : conditions-cadres attractives",
+          "url": "/fr/articles-thurgovie/entrepreneurs-canton-thurgovie-soutien/",
+          "excerpt": "Le canton soutient les entrepreneuses et les entrepreneurs en leur offrant des conditions-cadres attrayantes, notamment en matière de biens immobiliers, d’autorisations et de contacts administratifs.",
+          "date": "2026-10-25T12:54:45.336Z"
+        },
+        {
+          "title": "Agences RAV et services pour les employeurs dans le canton de Thurgovie",
+          "url": "/fr/articles-thurgovie/rav-thurgovie-travailleurs-lieux/",
+          "excerpt": "Les agences RAV se trouvent à Amriswil, Frauenfeld et Kreuzlingen ; les postes vacants peuvent être publiés gratuitement sur arbeit.swiss.",
+          "date": "2026-10-25T12:02:52.564Z"
+        },
         {
           "title": "Thurgovie : modification du plan directeur pour des sites économiques",
           "url": "/fr/articles-thurgovie/thurgovie-revision-plan-directeur-2027/",
@@ -385,18 +397,6 @@
           "url": "/fr/articles-thurgovie/thurgovie-services-employeurs/",
           "excerpt": "Le canton de Thurgovie met à la disposition des employeurs les sites RAV d’Amriswil, Frauenfeld et Kreuzlingen ainsi que le portail arbeit.swiss pour les postes vacants postes vacants",
           "date": "2026-10-19T15:27:38.407Z"
-        },
-        {
-          "title": "Thurgovie : soutien aux entreprises qui envisagent de s'implanter",
-          "url": "/fr/articles-thurgovie/soutien-entreprises-thurgovie/",
-          "excerpt": "Le canton de Thurgovie offre aux entreprises des informations, des conseils et un soutien concernant les conditions-cadres, les biens immobiliers, les autorisations et les contacts avec les services et les autorités.",
-          "date": "2026-10-18T11:06:15.235Z"
-        },
-        {
-          "title": "Route principale de Felben-Wellhausen : assainissement",
-          "url": "/fr/articles-thurgovie/felben-wellhausen-travaux-route/",
-          "excerpt": "Du 19 octobre 2026 à la mi-juillet 2027, la Hauptstrasse de Felben-Wellhausen sera assainie : Römerstrasse fermée par tronçons, Römerhof déplacé ou supprimé.",
-          "date": "2026-10-18T03:25:32.644Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

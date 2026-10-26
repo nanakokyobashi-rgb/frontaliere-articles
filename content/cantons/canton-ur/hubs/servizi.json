@@ -4,22 +4,22 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "servizi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "c48bd5707e7f00a865c2be12d448347f7daa6301d67cf19d544b7aff6c2bcb2e",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "7b586db7b41d536c4647bc3d3bfdffa7063222abc26545553c6fc39e58940832",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-18T08:53:01.888Z",
+      "updatedAt": "2026-10-25T09:11:35.438Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-25T05:00:57.781Z",
+      "updatedAt": "2026-10-25T19:10:33.671Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -51,7 +51,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "meteo",
@@ -61,11 +61,11 @@
             {
               "label": "Altdorf",
               "value": "10 °C",
-              "detail": "oggi da 7 a 14 °C"
+              "detail": "oggi da 7 a 13 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -78,7 +78,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -158,7 +158,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "UR",
@@ -187,7 +187,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "meteo",
@@ -197,11 +197,11 @@
             {
               "label": "Altdorf",
               "value": "10 °C",
-              "detail": "today from 7 to 14 °C"
+              "detail": "today from 7 to 13 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -214,7 +214,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -290,7 +290,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "UR",
@@ -319,7 +319,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "meteo",
@@ -329,11 +329,11 @@
             {
               "label": "Altdorf",
               "value": "10 °C",
-              "detail": "heute 7 bis 14 °C"
+              "detail": "heute 7 bis 13 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -346,7 +346,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -422,7 +422,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "UR",
@@ -451,7 +451,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "meteo",
@@ -461,11 +461,11 @@
             {
               "label": "Altdorf",
               "value": "10 °C",
-              "detail": "aujourd’hui de 7 à 14 °C"
+              "detail": "aujourd’hui de 7 à 13 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -478,7 +478,7 @@
               "url": "https://www.ksuri.ch/aktuelles/neuigkeiten/roboter-rosa-unterstuetzt-neu-bei-knieprothesen"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -550,7 +550,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

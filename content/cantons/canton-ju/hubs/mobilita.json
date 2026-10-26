@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "4b6e1649ea6217eada251474179cfd18f448592fd8681237946460ad40597afd",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "2c8d84ef3ecec1020737add8b356cb8c910741d4b8032d83441b0a28f59315f0",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-25T05:23:25.975Z",
+      "updatedAt": "2026-10-25T16:53:42.913Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -86,20 +86,10 @@
               "value": "Traffico",
               "detail": "fine prevista: 17 novembre 2026",
               "date": "2026-10-23T16:17:00.000Z"
-            },
-            {
-              "label": "Choindez <-> Rebeuvelier Luogo Choindez Situazione: problemi di traffico Causa: alberi caduti",
-              "value": "Traffico",
-              "date": "2026-10-25T05:09:00.000Z"
-            },
-            {
-              "label": "Courtedoux -> Damvant tra Luogo Rocourt E Luogo Réclère Situazione: problemi di traffico Causa: alberi caduti",
-              "value": "Traffico",
-              "date": "2026-10-25T05:13:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -117,7 +107,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -159,7 +149,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "JU",
@@ -223,20 +213,10 @@
               "value": "Traffic",
               "detail": "until 17 November 2026",
               "date": "2026-10-23T16:17:00.000Z"
-            },
-            {
-              "label": "Choindez <-> Rebeuvelier Luogo Choindez Situazione: problemi di traffico Causa: alberi caduti",
-              "value": "Traffic",
-              "date": "2026-10-25T05:09:00.000Z"
-            },
-            {
-              "label": "Courtedoux -> Damvant tra Luogo Rocourt E Luogo Réclère Situazione: problemi di traffico Causa: alberi caduti",
-              "value": "Traffic",
-              "date": "2026-10-25T05:13:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -254,7 +234,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -296,7 +276,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "JU",
@@ -360,20 +340,10 @@
               "value": "Verkehr",
               "detail": "bis 17. November 2026",
               "date": "2026-10-23T16:17:00.000Z"
-            },
-            {
-              "label": "Choindez <-> Rebeuvelier Ortschaft Choindez Sachlage: Verkehrsbehinderung Ursache: umgestürzte Bäume",
-              "value": "Verkehr",
-              "date": "2026-10-25T05:09:00.000Z"
-            },
-            {
-              "label": "Courtedoux -> Damvant zwischen Ortschaft Rocourt und Ortschaft Réclère Sachlage: Verkehrsbehinderung Ursache: umgestürzte Bäume",
-              "value": "Verkehr",
-              "date": "2026-10-25T05:13:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -391,7 +361,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -433,7 +403,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "JU",
@@ -497,20 +467,10 @@
               "value": "Trafic",
               "detail": "jusqu’au 17 novembre 2026",
               "date": "2026-10-23T16:17:00.000Z"
-            },
-            {
-              "label": "Choindez <-> Rebeuvelier Localité Choindez Situation: trafic perturbé Raison: arbres renversés",
-              "value": "Trafic",
-              "date": "2026-10-25T05:09:00.000Z"
-            },
-            {
-              "label": "Courtedoux -> Damvant entre Localité Rocourt et Localité Réclère Situation: trafic perturbé Raison: arbres renversés",
-              "value": "Trafic",
-              "date": "2026-10-25T05:13:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -528,7 +488,7 @@
               "url": "https://www.les-cj.ch/InfoTrafic/Tramelan-Place-du-Marche-Arret-de-bus-non-desservi-du-05-au-09-octobre-2026"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -570,7 +530,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

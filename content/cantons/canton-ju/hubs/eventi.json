@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "2ad6465ba18b8dcfaac3ac6bbfc96651f34bb483de18689ea8932c25db23e30a",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "e6564e8021f31fa961ecb36c4fa21f49e874844bd3be1d630d7276b4c50f889f",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "5",
+          "value": "3",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,18 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Judith Bach mit «STREUSELKUCHEN – ein Stück für alle»",
-              "detail": "Alti Moschti, Alle",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muehlethurnen/judith-bach-mit-streuselkuchen-ein-stueck-fuer-alle_AuCs6YB"
-            },
-            {
-              "label": "Foire du Jura",
-              "detail": "Halle des Exposition, Delémont — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
-            },
             {
               "label": "Arnaud Tsamere",
               "detail": "Vicques",
@@ -93,7 +81,7 @@
           "url": "/eventi/giura/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "JU",
@@ -103,7 +91,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "5",
+          "value": "3",
           "note": "from the site’s events calendar"
         }
       ],
@@ -113,18 +101,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Judith Bach mit «STREUSELKUCHEN – ein Stück für alle»",
-              "detail": "Alti Moschti, Alle",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muehlethurnen/judith-bach-mit-streuselkuchen-ein-stueck-fuer-alle_AuCs6YB"
-            },
-            {
-              "label": "Foire du Jura",
-              "detail": "Halle des Exposition, Delémont — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
-            },
             {
               "label": "Arnaud Tsamere",
               "detail": "Vicques",
@@ -174,7 +150,7 @@
           "url": "/en/events/jura/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "JU",
@@ -184,7 +160,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "5",
+          "value": "3",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -194,18 +170,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Judith Bach mit «STREUSELKUCHEN – ein Stück für alle»",
-              "detail": "Alti Moschti, Alle",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muehlethurnen/judith-bach-mit-streuselkuchen-ein-stueck-fuer-alle_AuCs6YB"
-            },
-            {
-              "label": "Foire du Jura",
-              "detail": "Halle des Exposition, Delémont — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
-            },
             {
               "label": "Arnaud Tsamere",
               "detail": "Vicques",
@@ -255,7 +219,7 @@
           "url": "/de/veranstaltungen/jura/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "JU",
@@ -265,7 +229,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "5",
+          "value": "3",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -275,18 +239,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Judith Bach mit «STREUSELKUCHEN – ein Stück für alle»",
-              "detail": "Alti Moschti, Alle",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/muehlethurnen/judith-bach-mit-streuselkuchen-ein-stueck-fuer-alle_AuCs6YB"
-            },
-            {
-              "label": "Foire du Jura",
-              "detail": "Halle des Exposition, Delémont — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/foire-du-jura/"
-            },
             {
               "label": "Arnaud Tsamere",
               "detail": "Vicques",
@@ -336,7 +288,7 @@
           "url": "/fr/evenements/jura/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

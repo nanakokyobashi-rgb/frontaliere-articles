@@ -4,27 +4,27 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "a64cdbb57880c263f9ca5f2448589a9fadec4634eecfc081881883e6f120f29d",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "a0f30526a313d8ec363816de2a990406cb022043566c10ff94caa8c806d7bad5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-18T08:53:01.888Z",
+      "updatedAt": "2026-10-25T09:11:35.438Z",
       "keyFacts": 1
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-25T04:40:51.950Z",
+      "updatedAt": "2026-10-25T16:16:30.310Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-25T05:00:57.781Z",
+      "updatedAt": "2026-10-25T19:10:33.671Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "10",
-          "note": "offerta mediana 640 CHF"
+          "note": "offerta mediana 690 CHF"
         }
       ],
       "dataBlocks": [
@@ -71,7 +71,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "aste-targhe",
@@ -93,16 +93,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6667"
             },
             {
-              "label": "SG41416",
+              "label": "SG10261",
               "value": "820 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-28T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6668"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6678"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-25T04:40:51.950Z"
+          "updatedAt": "2026-10-25T16:16:30.310Z"
         },
         {
           "id": "meteo",
@@ -112,11 +112,11 @@
             {
               "label": "St. Gallen",
               "value": "7 °C",
-              "detail": "oggi da 5 a 12 °C"
+              "detail": "oggi da 5 a 9 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -154,7 +154,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/duo-ausgabe-02-2026-online-2026-10-13/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -234,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "SG",
@@ -251,7 +251,7 @@
         {
           "label": "Plate auctions running",
           "value": "10",
-          "note": "typical bid 640 CHF"
+          "note": "typical bid 690 CHF"
         }
       ],
       "dataBlocks": [
@@ -278,7 +278,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "aste-targhe",
@@ -300,16 +300,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6667"
             },
             {
-              "label": "SG41416",
+              "label": "SG10261",
               "value": "820 CHF",
               "detail": "current bid",
               "date": "2026-10-28T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6668"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6678"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-25T04:40:51.950Z"
+          "updatedAt": "2026-10-25T16:16:30.310Z"
         },
         {
           "id": "meteo",
@@ -319,11 +319,11 @@
             {
               "label": "St. Gallen",
               "value": "7 °C",
-              "detail": "today from 5 to 12 °C"
+              "detail": "today from 5 to 9 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -361,7 +361,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/duo-ausgabe-02-2026-online-2026-10-13/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -437,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "SG",
@@ -454,7 +454,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "10",
-          "note": "mittleres Gebot 640 CHF"
+          "note": "mittleres Gebot 690 CHF"
         }
       ],
       "dataBlocks": [
@@ -481,7 +481,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "aste-targhe",
@@ -503,16 +503,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6667"
             },
             {
-              "label": "SG41416",
+              "label": "SG10261",
               "value": "820 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-28T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6668"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6678"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-25T04:40:51.950Z"
+          "updatedAt": "2026-10-25T16:16:30.310Z"
         },
         {
           "id": "meteo",
@@ -522,11 +522,11 @@
             {
               "label": "St. Gallen",
               "value": "7 °C",
-              "detail": "heute 5 bis 12 °C"
+              "detail": "heute 5 bis 9 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -564,7 +564,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/duo-ausgabe-02-2026-online-2026-10-13/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -640,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "SG",
@@ -657,7 +657,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "10",
-          "note": "offre centrale 640 CHF"
+          "note": "offre centrale 690 CHF"
         }
       ],
       "dataBlocks": [
@@ -684,7 +684,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "aste-targhe",
@@ -706,16 +706,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6667"
             },
             {
-              "label": "SG41416",
+              "label": "SG10261",
               "value": "820 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-28T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6668"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6678"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-25T04:40:51.950Z"
+          "updatedAt": "2026-10-25T16:16:30.310Z"
         },
         {
           "id": "meteo",
@@ -725,11 +725,11 @@
             {
               "label": "St. Gallen",
               "value": "7 °C",
-              "detail": "aujourd’hui de 5 à 12 °C"
+              "detail": "aujourd’hui de 5 à 9 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -767,7 +767,7 @@
               "url": "https://www.h-och.ch/ueber-uns/news/duo-ausgabe-02-2026-online-2026-10-13/"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -839,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

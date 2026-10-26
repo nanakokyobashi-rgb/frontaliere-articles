@@ -4,8 +4,8 @@
   "section": "canton-gl",
   "canton": "GL",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "ea905a9b567eb3f6cf9db963b6467731c044f883b8e696e849a280de1c802026",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "4bbbab07dca66e510273d65fe5f699665c0f1468b092fef5876064bb86c1e5b2",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "22",
+          "value": "21",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,27 +33,21 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Nachmittag für Alle Hip-Hop Tanzworkshop",
-              "detail": "Glarus",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachmittag-fuer-alle-hip-hop-tanzworkshop/"
-            },
-            {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — in corso, ultimo giorno: 11 novembre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
               "detail": "Luchsingen-Hätzingen — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
               "label": "Stricken in der Bibliothek Grosstal Hätzingen",
               "detail": "Bibliothek Grosstal Hätzingen — in corso, ultimo giorno: 26 ottobre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
@@ -91,6 +85,12 @@
               "detail": "Freulerpalast",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/saisonschluss-und-finnissage/"
+            },
+            {
+              "label": "RISE UP - Singen - Beten - Impuls - Kinderparty",
+              "detail": "Ennenda, Glarus",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rise-up-singen-beten-impuls-kinderparty/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/glarona/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "GL",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "22",
+          "value": "21",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,27 +138,21 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Nachmittag für Alle Hip-Hop Tanzworkshop",
-              "detail": "Glarus",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachmittag-fuer-alle-hip-hop-tanzworkshop/"
-            },
-            {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — ongoing, last day: 11 November 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
               "detail": "Luchsingen-Hätzingen — ongoing, last day: 26 October 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
               "label": "Stricken in der Bibliothek Grosstal Hätzingen",
               "detail": "Bibliothek Grosstal Hätzingen — ongoing, last day: 26 October 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
@@ -196,6 +190,12 @@
               "detail": "Freulerpalast",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/saisonschluss-und-finnissage/"
+            },
+            {
+              "label": "RISE UP - Singen - Beten - Impuls - Kinderparty",
+              "detail": "Ennenda, Glarus",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rise-up-singen-beten-impuls-kinderparty/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/glarus/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "GL",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "22",
+          "value": "21",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,27 +243,21 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Nachmittag für Alle Hip-Hop Tanzworkshop",
-              "detail": "Glarus",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachmittag-fuer-alle-hip-hop-tanzworkshop/"
-            },
-            {
               "label": "Balboa Schnupperkurs",
               "detail": "Ennenda, Glarus — läuft, letzter Tag: 11. November 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
               "detail": "Luchsingen-Hätzingen — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
               "label": "Stricken in der Bibliothek Grosstal Hätzingen",
               "detail": "Bibliothek Grosstal Hätzingen — läuft, letzter Tag: 26. Oktober 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
@@ -301,6 +295,12 @@
               "detail": "Freulerpalast",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/saisonschluss-und-finnissage/"
+            },
+            {
+              "label": "RISE UP - Singen - Beten - Impuls - Kinderparty",
+              "detail": "Ennenda, Glarus",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rise-up-singen-beten-impuls-kinderparty/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/glarus/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "GL",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "22",
+          "value": "21",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,27 +348,21 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Nachmittag für Alle Hip-Hop Tanzworkshop",
-              "detail": "Glarus",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/nachmittag-fuer-alle-hip-hop-tanzworkshop/"
-            },
-            {
               "label": "Schnupperkurs de Balboa",
               "detail": "Ennenda, Glarus — en cours, dernier jour : 11 novembre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/balboa-schnupperkurs/"
             },
             {
               "label": "Häkeln für Kinder in der Bibliothek Grosstal Hätzingen",
               "detail": "Luchsingen-Hätzingen — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/haekeln-fuer-kinder-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
               "label": "Stricken in der Bibliothek Grosstal Hätzingen",
               "detail": "Bibliothek Grosstal Hätzingen — en cours, dernier jour : 26 octobre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/stricken-in-der-bibliothek-grosstal-haetzingen/"
             },
             {
@@ -406,6 +400,12 @@
               "detail": "Freulerpalast",
               "date": "2026-10-31",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/saisonschluss-und-finnissage/"
+            },
+            {
+              "label": "RISE UP - Singen - Beten - Impuls - Kinderparty",
+              "detail": "Ennenda, Glarus",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/rise-up-singen-beten-impuls-kinderparty/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/glaris/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

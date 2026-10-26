@@ -4,27 +4,27 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "servizi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "1eba6fd313886e1a1cda5faf18805fdc74f5597d5b8e4eb2bbcb0d772ca514ad",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "1c7364fe1387ba46db3d5e1b711935fe54a64d4833579c3197a02e7420fba9a6",
   "blocks": [
     {
       "id": "premi-cassa-malati",
-      "updatedAt": "2026-10-18T08:53:01.888Z",
+      "updatedAt": "2026-10-25T09:11:35.438Z",
       "keyFacts": 1
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-25T04:40:51.950Z",
+      "updatedAt": "2026-10-25T16:16:30.310Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-25T05:00:57.781Z",
+      "updatedAt": "2026-10-25T19:10:33.671Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -44,7 +44,7 @@
         {
           "label": "Aste di targhe in corso",
           "value": "18",
-          "note": "offerta mediana 2110 CHF"
+          "note": "offerta mediana 2120 CHF"
         }
       ],
       "dataBlocks": [
@@ -61,7 +61,7 @@
           ],
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "aste-targhe",
@@ -76,23 +76,23 @@
               "url": "https://www.auktion-ag.ch/de/auction/58792"
             },
             {
+              "label": "AG9139",
+              "value": "5000 CHF",
+              "detail": "offerta attuale",
+              "date": "2026-10-28T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58793"
+            },
+            {
               "label": "AG7493",
               "value": "4600 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58790"
-            },
-            {
-              "label": "AG7835",
-              "value": "4600 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-28T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58791"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-25T04:40:51.950Z"
+          "updatedAt": "2026-10-25T16:16:30.310Z"
         },
         {
           "id": "meteo",
@@ -102,11 +102,11 @@
             {
               "label": "Aarau",
               "value": "8 °C",
-              "detail": "oggi da 7 a 13 °C"
+              "detail": "oggi da 7 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -144,7 +144,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/simon-staempfli-wird-neuer-chefarzt-kardiologie-am-ksb"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -224,7 +224,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "AG",
@@ -241,7 +241,7 @@
         {
           "label": "Plate auctions running",
           "value": "18",
-          "note": "typical bid 2,110 CHF"
+          "note": "typical bid 2,120 CHF"
         }
       ],
       "dataBlocks": [
@@ -258,7 +258,7 @@
           ],
           "sourceName": "Federal Office of Public Health (FOPH)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "aste-targhe",
@@ -273,23 +273,23 @@
               "url": "https://www.auktion-ag.ch/de/auction/58792"
             },
             {
+              "label": "AG9139",
+              "value": "5,000 CHF",
+              "detail": "current bid",
+              "date": "2026-10-28T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58793"
+            },
+            {
               "label": "AG7493",
               "value": "4,600 CHF",
               "detail": "current bid",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58790"
-            },
-            {
-              "label": "AG7835",
-              "value": "4,600 CHF",
-              "detail": "current bid",
-              "date": "2026-10-28T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58791"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-25T04:40:51.950Z"
+          "updatedAt": "2026-10-25T16:16:30.310Z"
         },
         {
           "id": "meteo",
@@ -299,11 +299,11 @@
             {
               "label": "Aarau",
               "value": "8 °C",
-              "detail": "today from 7 to 13 °C"
+              "detail": "today from 7 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -341,7 +341,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/simon-staempfli-wird-neuer-chefarzt-kardiologie-am-ksb"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -417,7 +417,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "AG",
@@ -434,7 +434,7 @@
         {
           "label": "Laufende Kontrollschild-Auktionen",
           "value": "18",
-          "note": "mittleres Gebot 2’110 CHF"
+          "note": "mittleres Gebot 2’120 CHF"
         }
       ],
       "dataBlocks": [
@@ -451,7 +451,7 @@
           ],
           "sourceName": "Bundesamt für Gesundheit (BAG)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "aste-targhe",
@@ -466,23 +466,23 @@
               "url": "https://www.auktion-ag.ch/de/auction/58792"
             },
             {
+              "label": "AG9139",
+              "value": "5’000 CHF",
+              "detail": "aktuelles Gebot",
+              "date": "2026-10-28T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58793"
+            },
+            {
               "label": "AG7493",
               "value": "4’600 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58790"
-            },
-            {
-              "label": "AG7835",
-              "value": "4’600 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-28T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58791"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-25T04:40:51.950Z"
+          "updatedAt": "2026-10-25T16:16:30.310Z"
         },
         {
           "id": "meteo",
@@ -492,11 +492,11 @@
             {
               "label": "Aarau",
               "value": "8 °C",
-              "detail": "heute 7 bis 13 °C"
+              "detail": "heute 7 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -534,7 +534,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/simon-staempfli-wird-neuer-chefarzt-kardiologie-am-ksb"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -610,7 +610,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "AG",
@@ -627,7 +627,7 @@
         {
           "label": "Enchères de plaques en cours",
           "value": "18",
-          "note": "offre centrale 2 110 CHF"
+          "note": "offre centrale 2 120 CHF"
         }
       ],
       "dataBlocks": [
@@ -644,7 +644,7 @@
           ],
           "sourceName": "Office fédéral de la santé publique (OFSP)",
           "sourceUrl": "https://www.priminfo.admin.ch/",
-          "updatedAt": "2026-10-18T08:53:01.888Z"
+          "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
           "id": "aste-targhe",
@@ -659,23 +659,23 @@
               "url": "https://www.auktion-ag.ch/de/auction/58792"
             },
             {
+              "label": "AG9139",
+              "value": "5 000 CHF",
+              "detail": "offre actuelle",
+              "date": "2026-10-28T20:00:00.000Z",
+              "url": "https://www.auktion-ag.ch/de/auction/58793"
+            },
+            {
               "label": "AG7493",
               "value": "4 600 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-28T20:00:00.000Z",
               "url": "https://www.auktion-ag.ch/de/auction/58790"
-            },
-            {
-              "label": "AG7835",
-              "value": "4 600 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-28T20:00:00.000Z",
-              "url": "https://www.auktion-ag.ch/de/auction/58791"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-ag.ch/de/",
-          "updatedAt": "2026-10-25T04:40:51.950Z"
+          "updatedAt": "2026-10-25T16:16:30.310Z"
         },
         {
           "id": "meteo",
@@ -685,11 +685,11 @@
             {
               "label": "Aarau",
               "value": "8 °C",
-              "detail": "aujourd’hui de 7 à 13 °C"
+              "detail": "aujourd’hui de 7 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-25T05:00:57.781Z"
+          "updatedAt": "2026-10-25T19:10:33.671Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -727,7 +727,7 @@
               "url": "https://www.kantonsspitalbaden.ch/news/simon-staempfli-wird-neuer-chefarzt-kardiologie-am-ksb"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -799,7 +799,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "dd08c9382b463dddca5c1d24cab988cdb7344a7a755af7004e9e53da4e12c527",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "2f4831ad7591eb73d41092085f370937303e572f29fd1a42cf6b1de185855f65",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "87",
+          "value": "79",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Öffentliche Kunstführung",
-              "detail": "Rorschach",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-kunstfuehrung/"
+              "label": "Workshop - The Beatles - Interpretation & Groove",
+              "detail": "Musikzentrum St. Gallen, St. Gallen",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/workshop-the-beatles-interpretation-und-groove_AqMAJ3t"
             },
             {
-              "label": "Schaufel, Schweiss und Staub: Ostschweizer Archäologie-Pionierinnen erzählen",
-              "detail": "St. Gallen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaufel-schweiss-und-staub-ostschweizer-archaeologiepionierinnen-erzaehlen/"
+              "label": "GEROLD SPÄTH - Künstlerbücher",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — in corso, ultimo giorno: 1 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
             },
             {
-              "label": "SHEF'S KITCHEN PARTY",
-              "detail": "Grand Resort Bad Ragaz, Bad Ragaz",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/shefs-kitchen-party/"
+              "label": "Claudia Valer, Werkschau",
+              "detail": "Pflegeheim Heiligkreuz, St. Gallen — in corso, ultimo giorno: 8 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
             },
             {
-              "label": "Slow-Club – ein analoger Sonntag im Kulturmuseum: «Dem Licht nach»",
-              "detail": "Kulturmuseum, St. Gallen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/slow-club-ein-analoger-sonntag-im-kulturmuseum-dem-licht-nach/"
+              "label": "Kurs: Homöopathische Notfallapotheke",
+              "detail": "St. Gallen — in corso, ultimo giorno: 29 ottobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-homoeopathische-notfallapotheke/"
             },
             {
-              "label": "Soul Session with Sofie Amelie & Band",
-              "detail": "Kaffeehaus",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/soul-session-with-sofie-amelie-und-band_Af66U59"
+              "label": "Fokusmodul – Meisner-Workout",
+              "detail": "Switzerland Innovation Park Ost — in corso, ultimo giorno: 12 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
             },
             {
-              "label": "Chorkonzert der Engadiner Kantorei \"Rosa et Lilium\"",
-              "detail": "Evang.-ref. Kirche Linsebühl",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/chorkonzert-der-engadiner-kantorei-rosa-et-lilium_AY3K7gC"
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — in corso, ultimo giorno: 2 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             },
             {
-              "label": "PopChor Konstanz",
-              "detail": "Lokremise St.Gallen",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/suche/st-gallen/popchor-konstanz_A1xfg6J"
+              "label": "GEROLD SPÄTH - Ein Gespräch zu den Künstlerbüchern",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gerold-spaeth-ein-gespraech-zu-den-kuenstlerbuechern/"
             },
             {
-              "label": "Rupert Huber, Vokalinio Meno Tinklas, Musik ist ein Modem",
-              "detail": "Evang.-ref. Kirche St. Mangen, St. Gallen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rupert-huber-vokalinio-meno-tinklas-musik-ist-ein-modem/"
+              "label": "mariegottlieb – Singer-Songwriterin",
+              "detail": "DenkBar",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/st-gallen/mariegottlieb-singer-songwriterin_A6tx8LE"
             },
             {
-              "label": "The Gospel Celebration",
-              "detail": "ENTRA / KK Zürisee",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/rapperswil-sg/the-gospel-celebration_Ag88xS9"
+              "label": "Wenn die Schulter zwickt: Ursachen, Lösungen und Prävention",
+              "detail": "Bad Ragaz",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wenn-die-schulter-zwickt-ursachen-loesungen-und-praevention/"
             },
             {
-              "label": "Trio Sorriso",
-              "detail": "Röm.-kath. Pfarreiheim St. Nikolaus, Altstätten",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/trio-sorriso/"
+              "label": "Abend-Vortrag «Begegnungen mit dem Fuchs»",
+              "detail": "Naturmuseum St. Gallen, St. Gallen",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/abend-vortrag-begegnungen-mit-dem-fuchs_A9aWPiY"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/san-gallo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "SG",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "87",
+          "value": "79",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,64 +138,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Öffentliche Kunstführung",
-              "detail": "Rorschach",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-kunstfuehrung/"
+              "label": "Workshop - The Beatles - Interpretation & Groove",
+              "detail": "Musikzentrum St. Gallen, St. Gallen",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/workshop-the-beatles-interpretation-und-groove_AqMAJ3t"
             },
             {
-              "label": "Schaufel, Schweiss und Staub: Ostschweizer Archäologie-Pionierinnen erzählen",
-              "detail": "St. Gallen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaufel-schweiss-und-staub-ostschweizer-archaeologiepionierinnen-erzaehlen/"
+              "label": "GEROLD SPÄTH - Künstlerbücher",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — ongoing, last day: 1 November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
             },
             {
-              "label": "SHEF'S KITCHEN PARTY",
-              "detail": "Grand Resort Bad Ragaz, Bad Ragaz",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/shefs-kitchen-party/"
+              "label": "Claudia Valer, Werkschau",
+              "detail": "Pflegeheim Heiligkreuz, St. Gallen — ongoing, last day: 8 November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
             },
             {
-              "label": "Slow-Club – ein analoger Sonntag im Kulturmuseum: «Dem Licht nach»",
-              "detail": "Kulturmuseum, St. Gallen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/slow-club-ein-analoger-sonntag-im-kulturmuseum-dem-licht-nach/"
+              "label": "Kurs: Homöopathische Notfallapotheke",
+              "detail": "St. Gallen — ongoing, last day: 29 October 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-homoeopathische-notfallapotheke/"
             },
             {
-              "label": "Soul Session with Sofie Amelie & Band",
-              "detail": "Kaffeehaus",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/soul-session-with-sofie-amelie-und-band_Af66U59"
+              "label": "Fokusmodul-Meisner -ork",
+              "detail": "Switzerland Innovation Park Ost — ongoing, last day: 12 November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
             },
             {
-              "label": "Chorkonzert der Engadiner Kantorei \"Rosa et Lilium\"",
-              "detail": "Evang.-ref. Kirche Linsebühl",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/chorkonzert-der-engadiner-kantorei-rosa-et-lilium_AY3K7gC"
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — ongoing, last day: 2 November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             },
             {
-              "label": "PopChor Konstanz",
-              "detail": "Lokremise St.Gallen",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/suche/st-gallen/popchor-konstanz_A1xfg6J"
+              "label": "GEROLD SPÄTH - Ein Gespräch zu den Künstlerbüchern",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gerold-spaeth-ein-gespraech-zu-den-kuenstlerbuechern/"
             },
             {
-              "label": "Rupert Huber, Vokalinio Meno Tinklas, Musik ist ein Modem",
-              "detail": "Evang.-ref. Kirche St. Mangen, St. Gallen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rupert-huber-vokalinio-meno-tinklas-musik-ist-ein-modem/"
+              "label": "mariegottlieb – Singer-Songwriterin",
+              "detail": "DenkBar",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/st-gallen/mariegottlieb-singer-songwriterin_A6tx8LE"
             },
             {
-              "label": "The Gospel Celebration",
-              "detail": "ENTRA / KK Zürisee",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/rapperswil-sg/the-gospel-celebration_Ag88xS9"
+              "label": "Wenn die Schulter zwickt: Ursachen, Lösungen und Prävention",
+              "detail": "Bad Ragaz",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wenn-die-schulter-zwickt-ursachen-loesungen-und-praevention/"
             },
             {
-              "label": "Trio Sorriso",
-              "detail": "Röm.-kath. Pfarreiheim St. Nikolaus, Altstätten",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/trio-sorriso/"
+              "label": "Abend-Vortrag «Begegnungen mit dem Fuchs»",
+              "detail": "Naturmuseum St. Gallen, St. Gallen",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/abend-vortrag-begegnungen-mit-dem-fuchs_A9aWPiY"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/st-gallen/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "SG",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "87",
+          "value": "79",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,64 +243,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Öffentliche Kunstführung",
-              "detail": "Rorschach",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-kunstfuehrung/"
+              "label": "Workshop - The Beatles - Interpretation & Groove",
+              "detail": "Musikzentrum St. Gallen, St. Gallen",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/workshop-the-beatles-interpretation-und-groove_AqMAJ3t"
             },
             {
-              "label": "Schaufel, Schweiss und Staub: Ostschweizer Archäologie-Pionierinnen erzählen",
-              "detail": "St. Gallen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaufel-schweiss-und-staub-ostschweizer-archaeologiepionierinnen-erzaehlen/"
+              "label": "GEROLD SPÄTH - Künstlerbücher",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — läuft, letzter Tag: 1. November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
             },
             {
-              "label": "SHEF'S KITCHEN PARTY",
-              "detail": "Grand Resort Bad Ragaz, Bad Ragaz",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/shefs-kitchen-party/"
+              "label": "Claudia Valer, Werkschau",
+              "detail": "Pflegeheim Heiligkreuz, St. Gallen — läuft, letzter Tag: 8. November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
             },
             {
-              "label": "Slow-Club – ein analoger Sonntag im Kulturmuseum: «Dem Licht nach»",
-              "detail": "Kulturmuseum, St. Gallen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/slow-club-ein-analoger-sonntag-im-kulturmuseum-dem-licht-nach/"
+              "label": "Kurs: Homöopathische Notfallapotheke",
+              "detail": "St. Gallen — läuft, letzter Tag: 29. Oktober 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-homoeopathische-notfallapotheke/"
             },
             {
-              "label": "Soul Session with Sofie Amelie & Band",
-              "detail": "Kaffeehaus",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/soul-session-with-sofie-amelie-und-band_Af66U59"
+              "label": "Fokusmodul-Meisner-Grafforkout",
+              "detail": "Switzerland Innovation Park Ost — läuft, letzter Tag: 12. November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
             },
             {
-              "label": "Chorkonzert der Engadiner Kantorei \"Rosa et Lilium\"",
-              "detail": "Evang.-ref. Kirche Linsebühl",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/chorkonzert-der-engadiner-kantorei-rosa-et-lilium_AY3K7gC"
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — läuft, letzter Tag: 2. November 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             },
             {
-              "label": "PopChor Konstanz",
-              "detail": "Lokremise St.Gallen",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/suche/st-gallen/popchor-konstanz_A1xfg6J"
+              "label": "GEROLD SPÄTH - Ein Gespräch zu den Künstlerbüchern",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gerold-spaeth-ein-gespraech-zu-den-kuenstlerbuechern/"
             },
             {
-              "label": "Rupert Huber, Vokalinio Meno Tinklas, Musik ist ein Modem",
-              "detail": "Evang.-ref. Kirche St. Mangen, St. Gallen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rupert-huber-vokalinio-meno-tinklas-musik-ist-ein-modem/"
+              "label": "mariegottlieb – Singer-Songwriterin",
+              "detail": "DenkBar",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/st-gallen/mariegottlieb-singer-songwriterin_A6tx8LE"
             },
             {
-              "label": "The Gospel Celebration",
-              "detail": "ENTRA / KK Zürisee",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/rapperswil-sg/the-gospel-celebration_Ag88xS9"
+              "label": "Wenn die Schulter zwickt: Ursachen, Lösungen und Prävention",
+              "detail": "Bad Ragaz",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wenn-die-schulter-zwickt-ursachen-loesungen-und-praevention/"
             },
             {
-              "label": "Trio Sorriso",
-              "detail": "Röm.-kath. Pfarreiheim St. Nikolaus, Altstätten",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/trio-sorriso/"
+              "label": "Abend-Vortrag «Begegnungen mit dem Fuchs»",
+              "detail": "Naturmuseum St. Gallen, St. Gallen",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/abend-vortrag-begegnungen-mit-dem-fuchs_A9aWPiY"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/st-gallen/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "SG",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "87",
+          "value": "79",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,64 +348,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Öffentliche Kunstführung",
-              "detail": "Rorschach",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeffentliche-kunstfuehrung/"
+              "label": "Workshop - The Beatles - Interpretation & Groove",
+              "detail": "Musikzentrum St. Gallen, St. Gallen",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/workshop-the-beatles-interpretation-und-groove_AqMAJ3t"
             },
             {
-              "label": "Schaufel, Schweiss und Staub: Ostschweizer Archäologie-Pionierinnen erzählen",
-              "detail": "St. Gallen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/schaufel-schweiss-und-staub-ostschweizer-archaeologiepionierinnen-erzaehlen/"
+              "label": "GEROLD SPÄTH - Künstlerbücher",
+              "detail": "Alte Fabrik Rapperswil, Rapperswil-Jona — en cours, dernier jour : 1er novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/gerold-spaeth-kuenstlerbuecher/"
             },
             {
-              "label": "SHEF'S KITCHEN PARTY",
-              "detail": "Grand Resort Bad Ragaz, Bad Ragaz",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/shefs-kitchen-party/"
+              "label": "Claudia Valer, Werkschau",
+              "detail": "Pflegeheim Heiligkreuz, St. Gallen — en cours, dernier jour : 8 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/claudia-valer-werkschau/"
             },
             {
-              "label": "Slow-Club – ein analoger Sonntag im Kulturmuseum: «Dem Licht nach»",
-              "detail": "Kulturmuseum, St. Gallen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/slow-club-ein-analoger-sonntag-im-kulturmuseum-dem-licht-nach/"
+              "label": "Kurs: Homöopathische Notfallapotheke",
+              "detail": "St. Gallen — en cours, dernier jour : 29 octobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/kurs-homoeopathische-notfallapotheke/"
             },
             {
-              "label": "Soul Session with Sofie Amelie & Band",
-              "detail": "Kaffeehaus",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/soul-session-with-sofie-amelie-und-band_Af66U59"
+              "label": "Module d'alimentation-Meisner-ork",
+              "detail": "Switzerland Innovation Park Ost — en cours, dernier jour : 12 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/veranstaltungen/klassisch/st-gallen/fokusmodul-meisner-workout_ANDsWPQ"
             },
             {
-              "label": "Chorkonzert der Engadiner Kantorei \"Rosa et Lilium\"",
-              "detail": "Evang.-ref. Kirche Linsebühl",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/st-gallen/chorkonzert-der-engadiner-kantorei-rosa-et-lilium_AY3K7gC"
+              "label": "Klangwald musige - Open Jam und Treffpunkt für MusikerInnen und deren Zuhörer",
+              "detail": "Verein Klangwald, Kirchberg (SG) — en cours, dernier jour : 2 novembre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/klangwald-musige-open-jam-und-treffpunkt-fuer-musikerinnen-und-deren-zuhoerer/"
             },
             {
-              "label": "PopChor Konstanz",
-              "detail": "Lokremise St.Gallen",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/suche/st-gallen/popchor-konstanz_A1xfg6J"
+              "label": "GEROLD SPÄTH - Ein Gespräch zu den Künstlerbüchern",
+              "detail": "Rapperswil-Jona",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/gerold-spaeth-ein-gespraech-zu-den-kuenstlerbuechern/"
             },
             {
-              "label": "Rupert Huber, Vokalinio Meno Tinklas, Musik ist ein Modem",
-              "detail": "Evang.-ref. Kirche St. Mangen, St. Gallen",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/rupert-huber-vokalinio-meno-tinklas-musik-ist-ein-modem/"
+              "label": "mariegottlieb – Singer-Songwriterin",
+              "detail": "DenkBar",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/kleinkunst/st-gallen/mariegottlieb-singer-songwriterin_A6tx8LE"
             },
             {
-              "label": "The Gospel Celebration",
-              "detail": "ENTRA / KK Zürisee",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/rapperswil-sg/the-gospel-celebration_Ag88xS9"
+              "label": "Wenn die Schulter zwickt: Ursachen, Lösungen und Prävention",
+              "detail": "Bad Ragaz",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wenn-die-schulter-zwickt-ursachen-loesungen-und-praevention/"
             },
             {
-              "label": "Trio Sorriso",
-              "detail": "Röm.-kath. Pfarreiheim St. Nikolaus, Altstätten",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/trio-sorriso/"
+              "label": "Abend-Vortrag «Begegnungen mit dem Fuchs»",
+              "detail": "Naturmuseum St. Gallen, St. Gallen",
+              "date": "2026-10-28",
+              "url": "https://www.guidle.com/it/veranstaltungen/wissen/st-gallen/abend-vortrag-begegnungen-mit-dem-fuchs_A9aWPiY"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/saint-gall/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

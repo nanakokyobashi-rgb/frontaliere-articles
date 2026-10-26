@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "552526e6a4eda0575ee888db837dd9ef23e61eadf5870243870ad1644b0dfd06",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "969705588fea1493a51c195c76c7e727d413130fa7b3f6c5032aa904136cd3fc",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "49",
+          "value": "48",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,52 +33,22 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Flieg, Märchenvogel, flieg! – Maya Silfverberg",
-              "detail": "Kellerpoche, Fribourg",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/flieg-maerchenvogel-flieg-maya-silfverberg/"
-            },
-            {
-              "label": "La Chaumière s'anime",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-10-25",
-              "url": "https://www.fr.ch/mhnf/evenements/la-chaumiere-sanime-1"
-            },
-            {
-              "label": "COLIN VALLON TRIO · Samares",
-              "detail": "Aux Losanges, Vallon",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/colin-vallon-trio-samares/"
-            },
-            {
-              "label": "Bénichon Menu at Café Tivoli in Châtel-St-Denis",
-              "detail": "Café Tivoli, Châtel-Saint-Denis — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
+              "label": "Séance d'information pour l'école de Police - 26.10.2026 (en allemand)",
+              "detail": "Granges-Paccot",
+              "date": "2026-10-26",
+              "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-26102026-en-allemand"
             },
             {
               "label": "Regards affinés",
               "detail": "L'Atelier, Fribourg — in corso, ultimo giorno: 31 ottobre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
             },
             {
               "label": "Halloween à Moléson",
               "detail": "Office du Tourisme de Moléson, Gruyères — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
-              "label": "Automne à Charmey",
-              "detail": "Case postale, Val-de-Charmey — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
-            },
-            {
-              "label": "Séance d'information pour l'école de Police - 26.10.2026 (en allemand)",
-              "detail": "Granges-Paccot",
               "date": "2026-10-26",
-              "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-26102026-en-allemand"
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
             },
             {
               "label": "Montée du masculinisme dans la Gen Z : un défi pour l'égalité",
@@ -91,6 +61,36 @@
               "detail": "Granges-Paccot",
               "date": "2026-10-27",
               "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-27102026"
+            },
+            {
+              "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
+              "detail": "Villars-sur-Glâne",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foutue-bergerie-pierre-guillois-cie-le-fils-du-grand-reseau/"
+            },
+            {
+              "label": "L’heure du conte",
+              "detail": "Châtel-St-Denis, Châtel-Saint-Denis",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lheure-du-conte/"
+            },
+            {
+              "label": "Primes d’assurance-maladie 2027 : comment économiser ?",
+              "detail": "Fribourg",
+              "date": "2026-10-28",
+              "url": "https://www.fr.ch/dsas/sasoc/fpt/evenements/primes-dassurance-maladie-2027-comment-economiser-0"
+            },
+            {
+              "label": "COMPLET | Kiwi Club – Apprentis taxidermistes",
+              "detail": "Fribourg",
+              "date": "2026-10-28",
+              "url": "https://www.fr.ch/mhnf/evenements/complet-kiwi-club-apprentis-taxidermistes"
+            },
+            {
+              "label": "Kiwi Club – Apprentis taxidermistes",
+              "detail": "Fribourg",
+              "date": "2026-10-28",
+              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/friburgo/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "FR",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "49",
+          "value": "48",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,52 +138,22 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Flieg, Märchenvogel, flieg! – Maya Silfverberg",
-              "detail": "Kellerpoche, Fribourg",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/flieg-maerchenvogel-flieg-maya-silfverberg/"
-            },
-            {
-              "label": "La Chaumière s'anime",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-10-25",
-              "url": "https://www.fr.ch/mhnf/evenements/la-chaumiere-sanime-1"
-            },
-            {
-              "label": "COLIN VALLON TRIO · Samares",
-              "detail": "Aux Losanges, Vallon",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/colin-vallon-trio-samares/"
-            },
-            {
-              "label": "Bénichon Menu at Café Tivoli in Châtel-St-Denis",
-              "detail": "Café Tivoli, Châtel-Saint-Denis — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
+              "label": "Séance d'information pour l'école de Police - 26.10.2026 (en allemand)",
+              "detail": "Granges-Paccot",
+              "date": "2026-10-26",
+              "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-26102026-en-allemand"
             },
             {
               "label": "Regards affinés",
               "detail": "L'Atelier, Fribourg — ongoing, last day: 31 October 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
             },
             {
               "label": "Halloween à Moléson",
               "detail": "Office du Tourisme de Moléson, Gruyères — ongoing, last day: 1 November 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
-              "label": "Automne à Charmey",
-              "detail": "Case postale, Val-de-Charmey — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
-            },
-            {
-              "label": "Séance d'information pour l'école de Police - 26.10.2026 (en allemand)",
-              "detail": "Granges-Paccot",
               "date": "2026-10-26",
-              "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-26102026-en-allemand"
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
             },
             {
               "label": "Montée du masculinisme dans la Gen Z : un défi pour l'égalité",
@@ -196,6 +166,36 @@
               "detail": "Granges-Paccot",
               "date": "2026-10-27",
               "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-27102026"
+            },
+            {
+              "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
+              "detail": "Villars-sur-Glâne",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foutue-bergerie-pierre-guillois-cie-le-fils-du-grand-reseau/"
+            },
+            {
+              "label": "L’heure du conte",
+              "detail": "Châtel-St-Denis, Châtel-Saint-Denis",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lheure-du-conte/"
+            },
+            {
+              "label": "Primes d’assurance-maladie 2027 : comment économiser ?",
+              "detail": "Fribourg",
+              "date": "2026-10-28",
+              "url": "https://www.fr.ch/dsas/sasoc/fpt/evenements/primes-dassurance-maladie-2027-comment-economiser-0"
+            },
+            {
+              "label": "COMPLET | Kiwi Club – Apprentis taxidermistes",
+              "detail": "Fribourg",
+              "date": "2026-10-28",
+              "url": "https://www.fr.ch/mhnf/evenements/complet-kiwi-club-apprentis-taxidermistes"
+            },
+            {
+              "label": "Kiwi Club – Apprentis taxidermistes",
+              "detail": "Fribourg",
+              "date": "2026-10-28",
+              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/fribourg/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "FR",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "49",
+          "value": "48",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,52 +243,22 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Flieg, Märchenvogel, flieg! – Maya Silfverberg",
-              "detail": "Kellerpoche, Fribourg",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/flieg-maerchenvogel-flieg-maya-silfverberg/"
-            },
-            {
-              "label": "La Chaumière s'anime",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-10-25",
-              "url": "https://www.fr.ch/mhnf/evenements/la-chaumiere-sanime-1"
-            },
-            {
-              "label": "COLIN VALLON TRIO · Samares",
-              "detail": "Aux Losanges, Vallon",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/colin-vallon-trio-samares/"
-            },
-            {
-              "label": "Kilbi-Menu in Café Tivoli in Châtel-St-Denis",
-              "detail": "Café Tivoli, Châtel-Saint-Denis — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
+              "label": "Séance d'information pour l'école de Police - 26.10.2026 (en allemand)",
+              "detail": "Granges-Paccot",
+              "date": "2026-10-26",
+              "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-26102026-en-allemand"
             },
             {
               "label": "Regards affinés",
               "detail": "L'Atelier, Fribourg — läuft, letzter Tag: 31. Oktober 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
             },
             {
               "label": "Halloween à Moléson",
               "detail": "Office du Tourisme de Moléson, Gruyères — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
-              "label": "Automne à Charmey",
-              "detail": "Case postale, Val-de-Charmey — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
-            },
-            {
-              "label": "Séance d'information pour l'école de Police - 26.10.2026 (en allemand)",
-              "detail": "Granges-Paccot",
               "date": "2026-10-26",
-              "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-26102026-en-allemand"
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
             },
             {
               "label": "Montée du masculinisme dans la Gen Z : un défi pour l'égalité",
@@ -301,6 +271,36 @@
               "detail": "Granges-Paccot",
               "date": "2026-10-27",
               "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-27102026"
+            },
+            {
+              "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
+              "detail": "Villars-sur-Glâne",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foutue-bergerie-pierre-guillois-cie-le-fils-du-grand-reseau/"
+            },
+            {
+              "label": "L’heure du conte",
+              "detail": "Châtel-St-Denis, Châtel-Saint-Denis",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lheure-du-conte/"
+            },
+            {
+              "label": "Primes d’assurance-maladie 2027 : comment économiser ?",
+              "detail": "Fribourg",
+              "date": "2026-10-28",
+              "url": "https://www.fr.ch/dsas/sasoc/fpt/evenements/primes-dassurance-maladie-2027-comment-economiser-0"
+            },
+            {
+              "label": "COMPLET | Kiwi Club – Apprentis taxidermistes",
+              "detail": "Fribourg",
+              "date": "2026-10-28",
+              "url": "https://www.fr.ch/mhnf/evenements/complet-kiwi-club-apprentis-taxidermistes"
+            },
+            {
+              "label": "Kiwi Club – Apprentis taxidermistes",
+              "detail": "Fribourg",
+              "date": "2026-10-28",
+              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/freiburg/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "FR",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "49",
+          "value": "48",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,52 +348,22 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Flieg, Märchenvogel, flieg! – Maya Silfverberg",
-              "detail": "Kellerpoche, Fribourg",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/flieg-maerchenvogel-flieg-maya-silfverberg/"
-            },
-            {
-              "label": "La Chaumière s'anime",
-              "detail": "Villars-sur-Glâne",
-              "date": "2026-10-25",
-              "url": "https://www.fr.ch/mhnf/evenements/la-chaumiere-sanime-1"
-            },
-            {
-              "label": "COLIN VALLON TRIO · Samares",
-              "detail": "Aux Losanges, Vallon",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/colin-vallon-trio-samares/"
-            },
-            {
-              "label": "Menu de Bénichon au Café Tivoli à Châtel-St-Denis",
-              "detail": "Café Tivoli, Châtel-Saint-Denis — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/benichon-menu-at-cafe-tivoli-in-chatel-st-denis/"
+              "label": "Séance d'information pour l'école de Police - 26.10.2026 (en allemand)",
+              "detail": "Granges-Paccot",
+              "date": "2026-10-26",
+              "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-26102026-en-allemand"
             },
             {
               "label": "Regards affinés",
               "detail": "L'Atelier, Fribourg — en cours, dernier jour : 31 octobre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/regards-affines/"
             },
             {
               "label": "Halloween à Moléson",
               "detail": "Office du Tourisme de Moléson, Gruyères — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
-            },
-            {
-              "label": "Automne à Charmey",
-              "detail": "Case postale, Val-de-Charmey — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/automne-a-charmey/"
-            },
-            {
-              "label": "Séance d'information pour l'école de Police - 26.10.2026 (en allemand)",
-              "detail": "Granges-Paccot",
               "date": "2026-10-26",
-              "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-26102026-en-allemand"
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/halloween-a-moleson/"
             },
             {
               "label": "Montée du masculinisme dans la Gen Z : un défi pour l'égalité",
@@ -406,6 +376,36 @@
               "detail": "Granges-Paccot",
               "date": "2026-10-27",
               "url": "https://www.fr.ch/dsjs/pol/evenements/seance-dinformation-pour-lecole-de-police-27102026"
+            },
+            {
+              "label": "Foutue bergerie – Pierre Guillois / Cie le Fils du Grand réseau",
+              "detail": "Villars-sur-Glâne",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/foutue-bergerie-pierre-guillois-cie-le-fils-du-grand-reseau/"
+            },
+            {
+              "label": "L’heure du conte",
+              "detail": "Châtel-St-Denis, Châtel-Saint-Denis",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/lheure-du-conte/"
+            },
+            {
+              "label": "Primes d’assurance-maladie 2027 : comment économiser ?",
+              "detail": "Fribourg",
+              "date": "2026-10-28",
+              "url": "https://www.fr.ch/dsas/sasoc/fpt/evenements/primes-dassurance-maladie-2027-comment-economiser-0"
+            },
+            {
+              "label": "COMPLET | Kiwi Club – Apprentis taxidermistes",
+              "detail": "Fribourg",
+              "date": "2026-10-28",
+              "url": "https://www.fr.ch/mhnf/evenements/complet-kiwi-club-apprentis-taxidermistes"
+            },
+            {
+              "label": "Kiwi Club – Apprentis taxidermistes",
+              "detail": "Fribourg",
+              "date": "2026-10-28",
+              "url": "https://www.fr.ch/mhnf/evenements/kiwi-club-apprentis-taxidermistes"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/fribourg/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

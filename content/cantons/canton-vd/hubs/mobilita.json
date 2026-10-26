@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "b707aefdfe38f8263417ec8710402ec856a37afb45bff6d4a639960ec1aef512",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "5edc0b7c7b167e8686cb58ecc17d607c7c7ec736c0e4fa6fa21fc2d7641acae0",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-25T05:23:25.975Z",
+      "updatedAt": "2026-10-25T16:53:42.913Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "17",
+          "value": "18",
           "note": "segnalazioni aggiornate: 25 ottobre 2026"
         },
         {
@@ -148,7 +148,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -186,7 +186,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -201,6 +201,12 @@
           "url": "/articoli-vaud/morges-mobilita-consultazione-2045/",
           "excerpt": "Morges interviene nella consultazione federale «Transports ’45»",
           "date": "2026-10-08T11:29:50.102Z"
+        },
+        {
+          "title": "Cantiere nuovo edificio viaggiatori stazione di Morges da dicembre 2026",
+          "url": "/articoli-vaud/cantiere-stazione-morges-2026/",
+          "excerpt": "A dicembre 2026 partono i lavori dei CFF Il cantiere occuperà gran parte della piazza Fermate bus regionali e posti taxi restano L'accesso ai marciapiedi resta",
+          "date": "2026-10-25T11:58:21.529Z"
         },
         {
           "title": "Lausanne Marathon 2026: chiusure strade cantonali e vie cittadine il 25 ottobre",
@@ -231,12 +237,6 @@
           "url": "/articoli-svizzera/abbonamenti-trasporti-vaud-zone/",
           "excerpt": "Abbonamenti mensili, annuali, metà-prezzo e Generale Abonnement nei trasporti pubblici svizzeri. Come funzionano le zone tariffarie e gli sconti per studenti.",
           "date": "2026-09-05T05:50:23.197Z"
-        },
-        {
-          "title": "Migros valuta la chiusura a Écublens: 57 posti",
-          "url": "/articoli-svizzera/migros-ecublens-57-posti/",
-          "excerpt": "Migros valuta la chiusura della Centrale Traiteur A rischio 57 impieghi a Écublens La consultazione con il personale è in corso Nessuna decisione finale è stata",
-          "date": "2026-10-13T21:00:56.385Z"
         }
       ],
       "latestCantonArticles": [],
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "VD",
@@ -285,7 +285,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "17",
+          "value": "18",
           "note": "reports as of 25 October 2026"
         },
         {
@@ -396,7 +396,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -434,7 +434,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -448,6 +448,12 @@
           "title": "Morges: mobility requirements for 2045",
           "url": "/en/vaud-articles/morges-mobility-consultation-2045/",
           "date": "2026-10-08T11:29:50.102Z"
+        },
+        {
+          "title": "Construction of the new passenger building at Morges station from December 2026",
+          "url": "/en/vaud-articles/morges-station-construction-2026/",
+          "excerpt": "CFF construction work begins in December 2026 The construction site will occupy much of the square Regional bus stops and taxi spaces remain Access",
+          "date": "2026-10-25T11:58:21.529Z"
         },
         {
           "title": "Lausanne Marathon 2026: road and street closures Oct 25",
@@ -478,12 +484,6 @@
           "url": "/en/swiss-articles/public-transport-subscriptions-vaud-zones/",
           "excerpt": "Monthly, annual, half-price and General Subscriptions in Swiss public transport. How fare zones and student discounts work.",
           "date": "2026-09-05T05:50:23.197Z"
-        },
-        {
-          "title": "Migros evaluates the closure in Écublens: 57 places",
-          "url": "/en/swiss-articles/migros-ecublens-57-jobs/",
-          "excerpt": "Migros assesses the closure of the Traiteur At-Risk Plant 57 jobs in Écublens Consultation with staff is ongoing No final decision has been",
-          "date": "2026-10-13T21:00:56.385Z"
         }
       ],
       "latestCantonArticles": [],
@@ -517,7 +517,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "VD",
@@ -532,7 +532,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "17",
+          "value": "18",
           "note": "Meldungen vom 25. Oktober 2026"
         },
         {
@@ -643,7 +643,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -681,7 +681,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -695,6 +695,12 @@
           "title": "Morges: Forderungen zur Mobilität für 2045",
           "url": "/de/waadt-artikel/morges-mobilitat-konsultation-2045/",
           "date": "2026-10-08T11:29:50.102Z"
+        },
+        {
+          "title": "Baustelle für das neue Empfangsgebäude des Bahnhofs Morges ab Dezember 2026",
+          "url": "/de/waadt-artikel/morges-bahnhof-bau-2026/",
+          "excerpt": "Im Dezember 2026 beginnen die Arbeiten der CFF Die Baustelle wird einen grossen Teil des Platzes beanspruchen Haltestellen der Regionalbusse und Taxistandplätze",
+          "date": "2026-10-25T11:58:21.529Z"
         },
         {
           "title": "Lausanne Marathon 2026: Strassensperren am 25. Oktober",
@@ -725,12 +731,6 @@
           "url": "/de/schweiz-artikel/abos-oepnv-waadt-zonen/",
           "excerpt": "Monats-, Jahres-, Halbtax- und General Abonnement-Abonnements im öffentlichen Verkehr der Schweiz. Wie Tarifzonen und Studentenrabatte funktionieren.",
           "date": "2026-09-05T05:50:23.197Z"
-        },
-        {
-          "title": "Migros prüft Schließung in Écublens: 57 Plätze",
-          "url": "/de/schweiz-artikel/migros-ecublens-57-stellen/",
-          "excerpt": "Migros prüft Schließung der Zentrale Traiteur A Risk 57 Stellen in Écublens Konsultation des Personals läuft Keine abschließende Entscheidung getroffen",
-          "date": "2026-10-13T21:00:56.385Z"
         }
       ],
       "latestCantonArticles": [],
@@ -764,7 +764,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "VD",
@@ -779,7 +779,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "17",
+          "value": "18",
           "note": "signalements au 25 octobre 2026"
         },
         {
@@ -890,7 +890,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-25T05:23:25.975Z"
+          "updatedAt": "2026-10-25T16:53:42.913Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -928,7 +928,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -943,6 +943,12 @@
           "url": "/fr/articles-vaud/morges-mobilite-consultation-2045/",
           "excerpt": "Morges intervient dans la consultation fédérale « Transports ’45 »",
           "date": "2026-10-08T11:29:50.102Z"
+        },
+        {
+          "title": "Chantier du nouveau bâtiment voyageurs de la gare de Morges dès décembre 2026",
+          "url": "/fr/articles-vaud/chantier-gare-morges-2026/",
+          "excerpt": "En décembre 2026, les travaux des CFF commenceront Le chantier occupera une grande partie de la place Les arrêts de bus régionaux et les places de taxi restent",
+          "date": "2026-10-25T11:58:21.529Z"
         },
         {
           "title": "Lausanne Marathon 2026 : routes fermées le 25 octobre",
@@ -973,12 +979,6 @@
           "url": "/fr/articles-suisse/abonnements-transports-vaud-zones/",
           "excerpt": "Abonnements mensuels, annuels, demi-tarif et Général Abonnement dans les transports publics suisses. Comment fonctionnent les zones tarifaires et les réductions pour les étudiants.",
           "date": "2026-09-05T05:50:23.197Z"
-        },
-        {
-          "title": "Migros évalue la fermeture à Écublens : 57 places",
-          "url": "/fr/articles-suisse/migros-ecublens-57-emplois/",
-          "excerpt": "Migros évalue la fermeture de la Centrale Traiteur À risque 57 emplois à Écublens La consultation avec le personnel est en cours Aucune décision finale n'a été",
-          "date": "2026-10-13T21:00:56.385Z"
         }
       ],
       "latestCantonArticles": [],
@@ -1012,7 +1012,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

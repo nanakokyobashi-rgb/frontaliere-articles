@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "41af6bf6d7d0a78eef041827310660cb730514386128a81c645dd0029974d637",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "fb6a1c001bc25ed5fc4f6020df3699c296923440bef9398515241752582c8f6f",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "20",
+          "value": "17",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -32,30 +32,6 @@
           "title": "Eventi dei prossimi 14 giorni",
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
-            {
-              "label": "Musica nel Gern Beizli",
-              "detail": "Gern Beizli, Bühler",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/events/music/buehler/music-in-the-gern-beizli_AWWgCjL"
-            },
-            {
-              "label": "Festa dei giovani musicisti",
-              "detail": "Schwellbrunn",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/festa-dei-giovani-musicisti/"
-            },
-            {
-              "label": "Bastian-Konzerte: BieriFroue plus und Ländler-Jazz-Trio Simon Haller",
-              "detail": "Röm.-kath. Pfarrkirche St. Sebastian",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bruelisau/bastian-konzerte-bierifroue-plus-und-laendler-jazz-trio-simon-haller_AnEVJa4"
-            },
-            {
-              "label": "Festival del formaggio di Appenzello",
-              "detail": "Kapuzinerkloster Mariä Lichtmess — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaesefest-appenzell/"
-            },
             {
               "label": "Chäller - Collegamento errato",
               "detail": "Casino Herisau, Herisau",
@@ -91,6 +67,30 @@
               "detail": "Hotel Krone, Gais",
               "date": "2026-10-31",
               "url": "https://www.guidle.com/it/evenementen/muziek/gais/duo-fehrstimmt-en-esther-zimmermann_ANYgeAg"
+            },
+            {
+              "label": "Betty Dieterle - Apocalypso Blues",
+              "detail": "Walzenhausen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/betty-dieterle-apocalypso-blues/"
+            },
+            {
+              "label": "Wild Hogs HC Arosa vs. SC Herisau",
+              "detail": "Arosa, Herisau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-hogs-hc-arosa-vs-sc-herisau/"
+            },
+            {
+              "label": "Allerheiligen",
+              "detail": "Appenzell",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/allerheiligen/"
+            },
+            {
+              "label": "Cuarteto Quiroga",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/akce/klasicky/herisau/cuarteto-quiroga_AsgGLCC"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/appenzello/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "20",
+          "value": "17",
           "note": "from the site’s events calendar"
         }
       ],
@@ -137,30 +137,6 @@
           "title": "Events in the next 14 days",
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
-            {
-              "label": "Music in the Gern Beizli",
-              "detail": "Gern Beizli, Bühler",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/events/music/buehler/music-in-the-gern-beizli_AWWgCjL"
-            },
-            {
-              "label": "Young Musicians' Party",
-              "detail": "Schwellbrunn",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/festa-dei-giovani-musicisti/"
-            },
-            {
-              "label": "Bastian-Konzerte: BieriFroue plus und Ländler-Jazz-Trio Simon Haller",
-              "detail": "Röm.-kath. Pfarrkirche St. Sebastian",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bruelisau/bastian-konzerte-bierifroue-plus-und-laendler-jazz-trio-simon-haller_AnEVJa4"
-            },
-            {
-              "label": "Appenzell Cheese Festival",
-              "detail": "Kapuzinerkloster Mariä Lichtmess — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaesefest-appenzell/"
-            },
             {
               "label": "Chäller - Wrongly connected",
               "detail": "Casino Herisau, Herisau",
@@ -196,6 +172,30 @@
               "detail": "Hotel Krone, Gais",
               "date": "2026-10-31",
               "url": "https://www.guidle.com/it/evenementen/muziek/gais/duo-fehrstimmt-en-esther-zimmermann_ANYgeAg"
+            },
+            {
+              "label": "Betty Dieterle - Apocalypso Blues",
+              "detail": "Walzenhausen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/betty-dieterle-apocalypso-blues/"
+            },
+            {
+              "label": "Wild Hogs HC Arosa vs. SC Herisau",
+              "detail": "Arosa, Herisau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-hogs-hc-arosa-vs-sc-herisau/"
+            },
+            {
+              "label": "Allerheiligen",
+              "detail": "Appenzell",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/allerheiligen/"
+            },
+            {
+              "label": "Cuarteto Quiroga",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/akce/klasicky/herisau/cuarteto-quiroga_AsgGLCC"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/appenzell/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "20",
+          "value": "17",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -242,30 +242,6 @@
           "title": "Veranstaltungen der nächsten 14 Tage",
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
-            {
-              "label": "Musik im Gern Beizli",
-              "detail": "Gern Beizli, Bühler",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/events/music/buehler/music-in-the-gern-beizli_AWWgCjL"
-            },
-            {
-              "label": "Jungmusikanten Stobete",
-              "detail": "Schwellbrunn",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/festa-dei-giovani-musicisti/"
-            },
-            {
-              "label": "Bastian-Konzerte: BieriFroue plus und Ländler-Jazz-Trio Simon Haller",
-              "detail": "Röm.-kath. Pfarrkirche St. Sebastian",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bruelisau/bastian-konzerte-bierifroue-plus-und-laendler-jazz-trio-simon-haller_AnEVJa4"
-            },
-            {
-              "label": "Käsefest Appenzell",
-              "detail": "Kapuzinerkloster Mariä Lichtmess — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaesefest-appenzell/"
-            },
             {
               "label": "Chäller - Falsch verbunden",
               "detail": "Casino Herisau, Herisau",
@@ -301,6 +277,30 @@
               "detail": "Hotel Krone, Gais",
               "date": "2026-10-31",
               "url": "https://www.guidle.com/it/evenementen/muziek/gais/duo-fehrstimmt-en-esther-zimmermann_ANYgeAg"
+            },
+            {
+              "label": "Betty Dieterle - Apocalypso Blues",
+              "detail": "Walzenhausen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/betty-dieterle-apocalypso-blues/"
+            },
+            {
+              "label": "Wild Hogs HC Arosa vs. SC Herisau",
+              "detail": "Arosa, Herisau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-hogs-hc-arosa-vs-sc-herisau/"
+            },
+            {
+              "label": "Allerheiligen",
+              "detail": "Appenzell",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/allerheiligen/"
+            },
+            {
+              "label": "Cuarteto Quiroga",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/akce/klasicky/herisau/cuarteto-quiroga_AsgGLCC"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/appenzell/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "20",
+          "value": "17",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -347,30 +347,6 @@
           "title": "Événements des 14 prochains jours",
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
-            {
-              "label": "Musique au Gern Beizli",
-              "detail": "Gern Beizli, Bühler",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/events/music/buehler/music-in-the-gern-beizli_AWWgCjL"
-            },
-            {
-              "label": "Fête des jeunes musiciens",
-              "detail": "Schwellbrunn",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/festa-dei-giovani-musicisti/"
-            },
-            {
-              "label": "Bastian-Konzerte: BieriFroue plus und Ländler-Jazz-Trio Simon Haller",
-              "detail": "Röm.-kath. Pfarrkirche St. Sebastian",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/veranstaltungen/musik/bruelisau/bastian-konzerte-bierifroue-plus-und-laendler-jazz-trio-simon-haller_AnEVJa4"
-            },
-            {
-              "label": "Fête du fromage d'Appenzell",
-              "detail": "Kapuzinerkloster Mariä Lichtmess — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/kaesefest-appenzell/"
-            },
             {
               "label": "Chäller - Faux-semblant",
               "detail": "Casino Herisau, Herisau",
@@ -406,6 +382,30 @@
               "detail": "Hotel Krone, Gais",
               "date": "2026-10-31",
               "url": "https://www.guidle.com/it/evenementen/muziek/gais/duo-fehrstimmt-en-esther-zimmermann_ANYgeAg"
+            },
+            {
+              "label": "Betty Dieterle - Apocalypso Blues",
+              "detail": "Walzenhausen",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/betty-dieterle-apocalypso-blues/"
+            },
+            {
+              "label": "Sauvages Sangliers HC Arosa contre SC Herisau",
+              "detail": "Arosa, Herisau",
+              "date": "2026-10-31",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/wild-hogs-hc-arosa-vs-sc-herisau/"
+            },
+            {
+              "label": "Allerheiligen",
+              "detail": "Appenzell",
+              "date": "2026-11-01",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/allerheiligen/"
+            },
+            {
+              "label": "Cuarteto Quiroga",
+              "detail": "Casino Herisau, Herisau",
+              "date": "2026-11-04",
+              "url": "https://www.guidle.com/it/akce/klasicky/herisau/cuarteto-quiroga_AsgGLCC"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/appenzell/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

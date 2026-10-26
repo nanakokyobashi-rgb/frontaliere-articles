@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "d1facd5461c86194fff075a735d5c4b5ae550408799b9cc9454b0a1e254ff7e2",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "f76c71bc19b32c9fb05946a8dedcfb4f354e445c69d6c865c30bd9ca0614d7b8",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -22,7 +22,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "63",
+          "value": "60",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -33,64 +33,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "Caves du Manoir : Bourse aux livres [EN]",
-              "detail": "Caves du Manoir, Martigny",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/caves-du-manoir-bourse-aux-livres-en/"
-            },
-            {
-              "label": "Fondation Louis Moret : Exposition de Anne Peverelli [EN]",
-              "detail": "Martigny",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fondation-louis-moret-exposition-de-anne-peverelli-en/"
-            },
-            {
-              "label": "Gemmi Gesundheitswoche",
-              "detail": "3954 Leukerbad, Leukerbad",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/gemmi-gesundheitswoche/"
-            },
-            {
-              "label": "Delizie per il palato “Autunno”",
-              "detail": "Ferden",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/delizie-per-il-palato-autunno-2/"
-            },
-            {
-              "label": "Eleonora Duse",
-              "detail": "Fondation Opale, Lens",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/duse/"
-            },
-            {
-              "label": "Schlosskonzerte Brig",
-              "detail": "Stockalperschloss",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/evenements/classique/brig/schlosskonzerte-brig_A6Atibc"
-            },
-            {
-              "label": "Country Tulip Battle",
-              "detail": "Tourismusbüro c/o Konsum Grengiols, Grengiols — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laendlertulpenschlacht/"
-            },
-            {
-              "label": "MÈRE MORTE",
-              "detail": "Evionnaz — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mere-morte/"
-            },
-            {
               "label": "Es ist dies beinahe Unsichtbare",
               "detail": "Visp — in corso, ultimo giorno: 1 novembre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
             },
             {
               "label": "Theater: Aufführungen in Bellwald",
               "detail": "Mehrzweckhalle Bellwald, Bellwald — in corso, ultimo giorno: 8 novembre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Adelia Clavien & Stéphanie Pothier, “Sens”",
+              "detail": "Riddes — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
+            },
+            {
+              "label": "Geek – Mostra sulle console di gioco",
+              "detail": "Galerie St. Laurent, Leukerbad — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
+            },
+            {
+              "label": "Oeno events",
+              "detail": "Vercorin, Chalais — in corso, ultimo giorno: 30 ottobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeno-events/"
+            },
+            {
+              "label": "Clowns & Acrobates",
+              "detail": "Espace Culturel El Encuentro, Sion — in corso, ultimo giorno: 31 ottobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/clowns-akrobaten/"
+            },
+            {
+              "label": "Mostra di Mathieu Bonvin",
+              "detail": "Sierre — in corso, ultimo giorno: 29 ottobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-di-mathieu-bonvin/"
+            },
+            {
+              "label": "Vinyard hikes in autumn",
+              "detail": "Inden — in corso, ultimo giorno: 29 ottobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vinyard-hikes-in-autumn/"
+            },
+            {
+              "label": "Café littéraire",
+              "detail": "Médiathèque Valais, Saint-Maurice",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/cafe-litteraire-5/"
+            },
+            {
+              "label": "Guihome",
+              "detail": "Conthey",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guihome-1/"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -117,7 +117,7 @@
           "url": "/eventi/vallese/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "VS",
@@ -127,7 +127,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "63",
+          "value": "60",
           "note": "from the site’s events calendar"
         }
       ],
@@ -138,64 +138,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "Caves du Manoir : Bourse aux livres [EN]",
-              "detail": "Caves du Manoir, Martigny",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/caves-du-manoir-bourse-aux-livres-en/"
-            },
-            {
-              "label": "Fondation Louis Moret : Exposition de Anne Peverelli [EN]",
-              "detail": "Martigny",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fondation-louis-moret-exposition-de-anne-peverelli-en/"
-            },
-            {
-              "label": "Gemmi Gesundheitswoche",
-              "detail": "3954 Leukerbad, Leukerbad",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/gemmi-gesundheitswoche/"
-            },
-            {
-              "label": "\"Fall\" Culinary Delights",
-              "detail": "Ferden",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/delizie-per-il-palato-autunno-2/"
-            },
-            {
-              "label": "Eleonora Duse",
-              "detail": "Fondation Opale, Lens",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/duse/"
-            },
-            {
-              "label": "Schlosskonzerte Brig",
-              "detail": "Stockalperschloss",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/evenements/classique/brig/schlosskonzerte-brig_A6Atibc"
-            },
-            {
-              "label": "Country Tulip Battle",
-              "detail": "Tourismusbüro c/o Konsum Grengiols, Grengiols — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laendlertulpenschlacht/"
-            },
-            {
-              "label": "MÈRE MORTE",
-              "detail": "Evionnaz — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mere-morte/"
-            },
-            {
               "label": "It is these days that are unavailable",
               "detail": "Visp — ongoing, last day: 1 November 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
             },
             {
               "label": "Theater: Aufführungen in Bellwald",
               "detail": "Mehrzweckhalle Bellwald, Bellwald — ongoing, last day: 8 November 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Adelia Clavien & Stéphanie Pothier, “Sens”",
+              "detail": "Riddes — ongoing, last day: 31 October 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
+            },
+            {
+              "label": "Geek—Video Game Consoles Exhibition",
+              "detail": "Galerie St. Laurent, Leukerbad — ongoing, last day: 31 October 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
+            },
+            {
+              "label": "Oeno events",
+              "detail": "Vercorin, Chalais — ongoing, last day: 30 October 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeno-events/"
+            },
+            {
+              "label": "Clowns & Acrobates",
+              "detail": "Espace Culturel El Encuentro, Sion — ongoing, last day: 31 October 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/clowns-akrobaten/"
+            },
+            {
+              "label": "Exhibition by Mathieu Bonvin",
+              "detail": "Sierre — ongoing, last day: 29 October 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-di-mathieu-bonvin/"
+            },
+            {
+              "label": "Vinyard hikes in autumn",
+              "detail": "Inden — ongoing, last day: 29 October 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vinyard-hikes-in-autumn/"
+            },
+            {
+              "label": "Café littéraire",
+              "detail": "Médiathèque Valais, Saint-Maurice",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/cafe-litteraire-5/"
+            },
+            {
+              "label": "Guihome",
+              "detail": "Conthey",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guihome-1/"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -222,7 +222,7 @@
           "url": "/en/events/valais/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "VS",
@@ -232,7 +232,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "63",
+          "value": "60",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -243,64 +243,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "Caves du Manoir : Bourse aux livres [DE]",
-              "detail": "Caves du Manoir, Martigny",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/caves-du-manoir-bourse-aux-livres-en/"
-            },
-            {
-              "label": "Fondation Louis Moret : Exposition de Anne Peverelli [DE]",
-              "detail": "Martigny",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fondation-louis-moret-exposition-de-anne-peverelli-en/"
-            },
-            {
-              "label": "Gemmi Gesundheitswoche",
-              "detail": "3954 Leukerbad, Leukerbad",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/gemmi-gesundheitswoche/"
-            },
-            {
-              "label": "Gaumenkitzeln „Herbst“",
-              "detail": "Ferden",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/delizie-per-il-palato-autunno-2/"
-            },
-            {
-              "label": "Eleonora Duse",
-              "detail": "Fondation Opale, Lens",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/duse/"
-            },
-            {
-              "label": "Schlosskonzerte Brig",
-              "detail": "Stockalperschloss",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/evenements/classique/brig/schlosskonzerte-brig_A6Atibc"
-            },
-            {
-              "label": "Ländlertulpenschlacht",
-              "detail": "Tourismusbüro c/o Konsum Grengiols, Grengiols — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laendlertulpenschlacht/"
-            },
-            {
-              "label": "MÈRE MORTE",
-              "detail": "Evionnaz — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mere-morte/"
-            },
-            {
               "label": "Es ist die beinahe Unsichtbare",
               "detail": "Visp — läuft, letzter Tag: 1. November 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
             },
             {
               "label": "Theater: Aufführungen in Bellwald",
               "detail": "Mehrzweckhalle Bellwald, Bellwald — läuft, letzter Tag: 8. November 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Adelia Clavien & Stéphanie Pothier „Sens“",
+              "detail": "Riddes — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
+            },
+            {
+              "label": "Geek – Spielkonsolen Ausstellung",
+              "detail": "Galerie St. Laurent, Leukerbad — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
+            },
+            {
+              "label": "Veranstaltungen von Oeno",
+              "detail": "Vercorin, Chalais — läuft, letzter Tag: 30. Oktober 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeno-events/"
+            },
+            {
+              "label": "Clowns & Akrobaten",
+              "detail": "Espace Culturel El Encuentro, Sion — läuft, letzter Tag: 31. Oktober 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/clowns-akrobaten/"
+            },
+            {
+              "label": "Ausstellung von Mathieu Bonvin",
+              "detail": "Sierre — läuft, letzter Tag: 29. Oktober 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-di-mathieu-bonvin/"
+            },
+            {
+              "label": "Rebwanderungen im Herbst",
+              "detail": "Inden — läuft, letzter Tag: 29. Oktober 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vinyard-hikes-in-autumn/"
+            },
+            {
+              "label": "Café littéraire",
+              "detail": "Médiathèque Valais, Saint-Maurice",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/cafe-litteraire-5/"
+            },
+            {
+              "label": "Guihome",
+              "detail": "Conthey",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guihome-1/"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -327,7 +327,7 @@
           "url": "/de/veranstaltungen/wallis/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "VS",
@@ -337,7 +337,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "63",
+          "value": "60",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -348,64 +348,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "Caves du Manoir : Bourse aux livres",
-              "detail": "Caves du Manoir, Martigny",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/en-ch/experiences/events/caves-du-manoir-bourse-aux-livres-en/"
-            },
-            {
-              "label": "Fondation Louis Moret : Exposition de Anne Peverelli",
-              "detail": "Martigny",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/fondation-louis-moret-exposition-de-anne-peverelli-en/"
-            },
-            {
-              "label": "Gemmi Gesundheitswoche",
-              "detail": "3954 Leukerbad, Leukerbad",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/gemmi-gesundheitswoche/"
-            },
-            {
-              "label": "Délices « d'automne »",
-              "detail": "Ferden",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/delizie-per-il-palato-autunno-2/"
-            },
-            {
-              "label": "Eleonora Duse",
-              "detail": "Fondation Opale, Lens",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/duse/"
-            },
-            {
-              "label": "Schlosskonzerte Brig",
-              "detail": "Stockalperschloss",
-              "date": "2026-10-25",
-              "url": "https://www.guidle.com/it/evenements/classique/brig/schlosskonzerte-brig_A6Atibc"
-            },
-            {
-              "label": "Bataille de tulipes du Ländler",
-              "detail": "Tourismusbüro c/o Konsum Grengiols, Grengiols — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/laendlertulpenschlacht/"
-            },
-            {
-              "label": "MÈRE MORTE",
-              "detail": "Evionnaz — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/mere-morte/"
-            },
-            {
               "label": "Es is dies beinahe Unsichtbare",
               "detail": "Visp — en cours, dernier jour : 1er novembre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/it-ch/experiences/events/es-ist-dies-beinahe-unsichtbare/"
             },
             {
               "label": "Théâtre : représentations à Bellwald",
               "detail": "Mehrzweckhalle Bellwald, Bellwald — en cours, dernier jour : 8 novembre 2026",
-              "date": "2026-10-25",
+              "date": "2026-10-26",
               "url": "https://www.myswitzerland.com/en-ch/experiences/events/theater-auffuehrungen-in-bellwald/"
+            },
+            {
+              "label": "Adelia Clavien & Stéphanie Pothier « Sens »",
+              "detail": "Riddes — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/adelia-clavien-stephanie-pothier-sens/"
+            },
+            {
+              "label": "Exposition « Geek – Consoles de jeux »",
+              "detail": "Galerie St. Laurent, Leukerbad — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/en-ch/experiences/events/geekspielkonsolen-ausstellung/"
+            },
+            {
+              "label": "Événements à l'Oeno",
+              "detail": "Vercorin, Chalais — en cours, dernier jour : 30 octobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/oeno-events/"
+            },
+            {
+              "label": "Clowns & Acrobates",
+              "detail": "Espace Culturel El Encuentro, Sion — en cours, dernier jour : 31 octobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/clowns-akrobaten/"
+            },
+            {
+              "label": "Exposition de Mathieu Bonvin",
+              "detail": "Sierre — en cours, dernier jour : 29 octobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/scoprire-la-svizzera/manifestazioni/mostra-di-mathieu-bonvin/"
+            },
+            {
+              "label": "Randonnés en automne",
+              "detail": "Inden — en cours, dernier jour : 29 octobre 2026",
+              "date": "2026-10-26",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/vinyard-hikes-in-autumn/"
+            },
+            {
+              "label": "Café littéraire",
+              "detail": "Médiathèque Valais, Saint-Maurice",
+              "date": "2026-10-27",
+              "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/cafe-litteraire-5/"
+            },
+            {
+              "label": "Guihome",
+              "detail": "Conthey",
+              "date": "2026-10-28",
+              "url": "https://www.myswitzerland.com/it-ch/experiences/events/guihome-1/"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -432,7 +432,7 @@
           "url": "/fr/evenements/valais/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }

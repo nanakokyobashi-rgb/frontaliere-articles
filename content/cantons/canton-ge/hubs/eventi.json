@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "eventi",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "760ba5e45aef130a36ca69d61ecd5b7552fb4a66e5f352166e1beee393b6036f",
+  "updatedAt": "2026-10-26T01:02:08.769Z",
+  "contentHash": "8ceb743040352bd3d5dcaa28ff3975a9fc20d3c7bc603798ddfaa5bfd6542403",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -14,7 +14,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -27,7 +27,7 @@
       "keyFacts": [
         {
           "label": "Eventi in calendario nei prossimi 14 giorni",
-          "value": "333",
+          "value": "325",
           "note": "dall’agenda eventi del sito"
         }
       ],
@@ -38,64 +38,64 @@
           "description": "Appuntamenti in calendario sul territorio, dall’agenda eventi del sito, in ordine di data.",
           "items": [
             {
-              "label": "(Re)découvrez Marguerite Duras au cinéma : \"Une aussi longue absence\" en présence de Jean Marc Turine",
+              "label": "Ara Malikian «Intruso»",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/redecouvrez-marguerite-duras-cinema-longue-absence-presence-jean-marc-turine"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/malikian-intruso"
             },
             {
-              "label": "Exposition Observatoires. Carte blanche à John M Armleder",
+              "label": "Atelier de collages lundi 26 octobre de 18h30 à 20h30 à la Villa Freundler à Plainpalais. Pour adultes et ados. Tarif…",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/exposition-observatoires-carte-blanche-john-armleder-1"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/atelier-collages-lundi-26-octobre-18h30-20h30-villa-freundler-plainpalais-adultes-ados-tarif-materiel-fourni-20"
             },
             {
-              "label": "Geumhyung Jeong, Find Select Copy and Paste",
+              "label": "Atelier Découverte - L'École du Chocolat",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/geumhyung-jeong-find-select-copy-paste"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat-0"
             },
             {
-              "label": "La Neuvième de Beethoven",
+              "label": "Café quartier : Initiation au goût du pain, pain artisanal ou industriel, quelles différences ?",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/neuvieme-beethoven"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/cafe-quartier-initiation-gout-pain-pain-artisanal-industriel-differences"
             },
             {
-              "label": "Science et tango",
+              "label": "PILATES - 15frs - Sécheron",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/science-tango"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/pilates-15frs-secheron"
             },
             {
-              "label": "Soirée spéciale en partenariat avec les cinémas du Grütli",
+              "label": "Pratiques corporelles matinales avec Cindy Van Acker",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/soiree-speciale-partenariat-cinemas-grutli"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/pratiques-corporelles-matinales-cindy-acker"
             },
             {
-              "label": "TWIST ! Le spectacle d'impro où vous faites rebondir l'histoire",
+              "label": "Prayers",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/twist-spectacle-impro-rebondir-histoire"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/prayers"
             },
             {
-              "label": "Visite commentée: Le futur, c'est quoi ?",
-              "detail": "MEG (Musée d'Ethnographie de Genève), Genève",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/visite-commentee-le-futur-cest-quoi-5/"
+              "label": "Soirée PréPro : LEÏLA | OSCAR",
+              "detail": "Genève",
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/soiree-prepro-leila-oscar"
             },
             {
-              "label": "Boudchart à Genève",
-              "detail": "Geneva, Genève",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boudchart-a-geneve/"
+              "label": "Ara Malikian «Intruso»",
+              "detail": "Victoria Hall",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/evenements/musique/geneve/ara-malikian-intruso_AyCDikJ"
             },
             {
-              "label": "ELECTRON x SUBLIME CLUB",
-              "detail": "Genève — in corso, ultimo giorno: 25 ottobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/electron-sublime-club"
+              "label": "PICTURE THIS",
+              "detail": "Alhambra",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/evenements/musique/geneve/picture-this_A6ymCVx"
             }
           ],
           "sourceName": "Agenda eventi di Frontaliere Ticino",
@@ -113,7 +113,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -135,7 +135,7 @@
           "url": "/eventi/ginevra/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "en": {
       "canton": "GE",
@@ -145,7 +145,7 @@
       "keyFacts": [
         {
           "label": "Events scheduled in the next 14 days",
-          "value": "333",
+          "value": "325",
           "note": "from the site’s events calendar"
         }
       ],
@@ -156,64 +156,64 @@
           "description": "Upcoming events in the area, from the site’s events calendar, in date order.",
           "items": [
             {
-              "label": "(Re)découvrez Marguerite Duras au cinéma : \"Une aussi longue absence\" en présence de Jean Marc Turine",
+              "label": "Ara Malikian «Intruso»",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/redecouvrez-marguerite-duras-cinema-longue-absence-presence-jean-marc-turine"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/malikian-intruso"
             },
             {
-              "label": "Exposition Observatoires. Carte blanche à John M Armleder",
+              "label": "Atelier de collages lundi 26 octobre de 18h30 à 20h30 à la Villa Freundler à Plainpalais. Pour adultes et ados. Tarif…",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/exposition-observatoires-carte-blanche-john-armleder-1"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/atelier-collages-lundi-26-octobre-18h30-20h30-villa-freundler-plainpalais-adultes-ados-tarif-materiel-fourni-20"
             },
             {
-              "label": "Geumhyung Jeong, Find Select Copy and Paste",
+              "label": "Atelier Découverte - L'École du Chocolat",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/geumhyung-jeong-find-select-copy-paste"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat-0"
             },
             {
-              "label": "La Neuvième de Beethoven",
+              "label": "Café quartier : Initiation au goût du pain, pain artisanal ou industriel, quelles différences ?",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/neuvieme-beethoven"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/cafe-quartier-initiation-gout-pain-pain-artisanal-industriel-differences"
             },
             {
-              "label": "Science et tango",
+              "label": "PILATES - 15frs - Sécheron",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/science-tango"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/pilates-15frs-secheron"
             },
             {
-              "label": "Soirée spéciale en partenariat avec les cinémas du Grütli",
+              "label": "Pratiques corporelles matinales avec Cindy Van Acker",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/soiree-speciale-partenariat-cinemas-grutli"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/pratiques-corporelles-matinales-cindy-acker"
             },
             {
-              "label": "TWIST ! Le spectacle d'impro où vous faites rebondir l'histoire",
+              "label": "Prayers",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/twist-spectacle-impro-rebondir-histoire"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/prayers"
             },
             {
-              "label": "Visite commentée: Le futur, c'est quoi ?",
-              "detail": "MEG (Musée d'Ethnographie de Genève), Genève",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/visite-commentee-le-futur-cest-quoi-5/"
+              "label": "Soirée PréPro : LEÏLA | OSCAR",
+              "detail": "Genève",
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/soiree-prepro-leila-oscar"
             },
             {
-              "label": "Boudchart à Genève",
-              "detail": "Geneva, Genève",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boudchart-a-geneve/"
+              "label": "Ara Malikian «Intruso»",
+              "detail": "Victoria Hall",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/evenements/musique/geneve/ara-malikian-intruso_AyCDikJ"
             },
             {
-              "label": "ELECTRON x SUBLIME CLUB",
-              "detail": "Genève — ongoing, last day: 25 October 2026",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/electron-sublime-club"
+              "label": "PICTURE THIS",
+              "detail": "Alhambra",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/evenements/musique/geneve/picture-this_A6ymCVx"
             }
           ],
           "sourceName": "Frontaliere Ticino events calendar",
@@ -231,7 +231,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -253,7 +253,7 @@
           "url": "/en/events/geneva/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "de": {
       "canton": "GE",
@@ -263,7 +263,7 @@
       "keyFacts": [
         {
           "label": "Veranstaltungen in den nächsten 14 Tagen",
-          "value": "333",
+          "value": "325",
           "note": "aus dem Veranstaltungskalender der Website"
         }
       ],
@@ -274,64 +274,64 @@
           "description": "Anstehende Termine im Gebiet aus dem Veranstaltungskalender der Website, nach Datum geordnet.",
           "items": [
             {
-              "label": "(Re)découvrez Marguerite Duras au cinéma : \"Une aussi longue absence\" en présence de Jean Marc Turine",
+              "label": "Ara Malikian «Intruso»",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/redecouvrez-marguerite-duras-cinema-longue-absence-presence-jean-marc-turine"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/malikian-intruso"
             },
             {
-              "label": "Exposition Observatoires. Carte blanche à John M Armleder",
+              "label": "Atelier de collages lundi 26 octobre de 18h30 à 20h30 à la Villa Freundler à Plainpalais. Pour adultes et ados. Tarif…",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/exposition-observatoires-carte-blanche-john-armleder-1"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/atelier-collages-lundi-26-octobre-18h30-20h30-villa-freundler-plainpalais-adultes-ados-tarif-materiel-fourni-20"
             },
             {
-              "label": "Geumhyung Jeong, Find Select Copy and Paste",
+              "label": "Atelier Découverte - L'École du Chocolat",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/geumhyung-jeong-find-select-copy-paste"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat-0"
             },
             {
-              "label": "La Neuvième de Beethoven",
+              "label": "Café quartier : Initiation au goût du pain, pain artisanal ou industriel, quelles différences ?",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/neuvieme-beethoven"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/cafe-quartier-initiation-gout-pain-pain-artisanal-industriel-differences"
             },
             {
-              "label": "Science et tango",
+              "label": "PILATES - 15frs - Sécheron",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/science-tango"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/pilates-15frs-secheron"
             },
             {
-              "label": "Soirée spéciale en partenariat avec les cinémas du Grütli",
+              "label": "Pratiques corporelles matinales avec Cindy Van Acker",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/soiree-speciale-partenariat-cinemas-grutli"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/pratiques-corporelles-matinales-cindy-acker"
             },
             {
-              "label": "TWIST ! Le spectacle d'impro où vous faites rebondir l'histoire",
+              "label": "Prayers",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/twist-spectacle-impro-rebondir-histoire"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/prayers"
             },
             {
-              "label": "Visite commentée: Le futur, c'est quoi ?",
-              "detail": "MEG (Musée d'Ethnographie de Genève), Genève",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/visite-commentee-le-futur-cest-quoi-5/"
+              "label": "Soirée PréPro : LEÏLA | OSCAR",
+              "detail": "Genève",
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/soiree-prepro-leila-oscar"
             },
             {
-              "label": "Boudchart à Genève",
-              "detail": "Geneva, Genève",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boudchart-a-geneve/"
+              "label": "Ara Malikian «Intruso»",
+              "detail": "Victoria Hall",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/evenements/musique/geneve/ara-malikian-intruso_AyCDikJ"
             },
             {
-              "label": "ELECTRON x SUBLIME CLUB",
-              "detail": "Genève — läuft, letzter Tag: 25. Oktober 2026",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/electron-sublime-club"
+              "label": "Stellen Sie sich Folgendes vor",
+              "detail": "Alhambra",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/evenements/musique/geneve/picture-this_A6ymCVx"
             }
           ],
           "sourceName": "Veranstaltungskalender von Frontaliere Ticino",
@@ -349,7 +349,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -371,7 +371,7 @@
           "url": "/de/veranstaltungen/genf/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     },
     "fr": {
       "canton": "GE",
@@ -381,7 +381,7 @@
       "keyFacts": [
         {
           "label": "Événements prévus dans les 14 prochains jours",
-          "value": "333",
+          "value": "325",
           "note": "d’après l’agenda du site"
         }
       ],
@@ -392,64 +392,64 @@
           "description": "Rendez-vous à venir sur le territoire, tirés de l’agenda du site, par ordre de date.",
           "items": [
             {
-              "label": "(Re)découvrez Marguerite Duras au cinéma : \"Une aussi longue absence\" en présence de Jean Marc Turine",
+              "label": "Ara Malikian «Intruso»",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/redecouvrez-marguerite-duras-cinema-longue-absence-presence-jean-marc-turine"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/malikian-intruso"
             },
             {
-              "label": "Exposition Observatoires. Carte blanche à John M Armleder",
+              "label": "Atelier de collages lundi 26 octobre de 18h30 à 20h30 à la Villa Freundler à Plainpalais. Pour adultes et ados. Tarif…",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/exposition-observatoires-carte-blanche-john-armleder-1"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/atelier-collages-lundi-26-octobre-18h30-20h30-villa-freundler-plainpalais-adultes-ados-tarif-materiel-fourni-20"
             },
             {
-              "label": "Geumhyung Jeong, Find Select Copy and Paste",
+              "label": "Atelier Découverte - L'École du Chocolat",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/geumhyung-jeong-find-select-copy-paste"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/atelier-decouverte-ecole-chocolat-0"
             },
             {
-              "label": "La Neuvième de Beethoven",
+              "label": "Café quartier : Initiation au goût du pain, pain artisanal ou industriel, quelles différences ?",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/neuvieme-beethoven"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/cafe-quartier-initiation-gout-pain-pain-artisanal-industriel-differences"
             },
             {
-              "label": "Science et tango",
+              "label": "PILATES - 15frs - Sécheron",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/science-tango"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/pilates-15frs-secheron"
             },
             {
-              "label": "Soirée spéciale en partenariat avec les cinémas du Grütli",
+              "label": "Pratiques corporelles matinales avec Cindy Van Acker",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/soiree-speciale-partenariat-cinemas-grutli"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/pratiques-corporelles-matinales-cindy-acker"
             },
             {
-              "label": "TWIST ! Le spectacle d'impro où vous faites rebondir l'histoire",
+              "label": "Prayers",
               "detail": "Genève",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/twist-spectacle-impro-rebondir-histoire"
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/prayers"
             },
             {
-              "label": "Visite commentée: Le futur, c'est quoi ?",
-              "detail": "MEG (Musée d'Ethnographie de Genève), Genève",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/fr-ch/decouvrir/manifestations/visite-commentee-le-futur-cest-quoi-5/"
+              "label": "Soirée PréPro : LEÏLA | OSCAR",
+              "detail": "Genève",
+              "date": "2026-10-26",
+              "url": "https://www.geneve.ch/agenda/soiree-prepro-leila-oscar"
             },
             {
-              "label": "Boudchart à Genève",
-              "detail": "Geneva, Genève",
-              "date": "2026-10-25",
-              "url": "https://www.myswitzerland.com/it-ch/experiences/events/boudchart-a-geneve/"
+              "label": "Ara Malikian «Intruso»",
+              "detail": "Victoria Hall",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/evenements/musique/geneve/ara-malikian-intruso_AyCDikJ"
             },
             {
-              "label": "ELECTRON x SUBLIME CLUB",
-              "detail": "Genève — en cours, dernier jour : 25 octobre 2026",
-              "date": "2026-10-25",
-              "url": "https://www.geneve.ch/agenda/electron-sublime-club"
+              "label": "IMAGINEZ ÇA",
+              "detail": "Alhambra",
+              "date": "2026-10-26",
+              "url": "https://www.guidle.com/it/evenements/musique/geneve/picture-this_A6ymCVx"
             }
           ],
           "sourceName": "Agenda des événements de Frontaliere Ticino",
@@ -467,7 +467,7 @@
               "url": "https://www.annemasse-agglo.fr/infos-et-loisirs/actualites/inauguration-de-la-ligne-17-retour-sur-une-journee-de-fete"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +489,7 @@
           "url": "/fr/evenements/geneve/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T01:02:08.769Z"
     }
   }
 }
