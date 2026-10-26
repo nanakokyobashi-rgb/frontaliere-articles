@@ -493,12 +493,7 @@ export async function waitForBootstrapLocks(
         pending.push(`${section} (lock non verificabile: HTTP ${got.status || 'nessuna risposta'})`);
         continue;
       }
-      const body = responseBytes(got);
-      if (!body) {
-        pending.push(`${section} (lock non verificabile: body assente)`);
-        continue;
-      }
-      const state = parseSectionBootstrapLock(body, { section, now: now() });
+      const state = parseSectionBootstrapLock(got.body, { section, now: now() });
       if (state.state === 'active') pending.push(`${section} (${state.doc.owner})`);
       else if (state.state === 'unknown') pending.push(`${section} (${state.reason})`);
     }
@@ -528,7 +523,7 @@ export async function releaseBootstrapLocks(
     };
   }
 
-  const maxAttempts = normalizeStagingVerifyAttempts(attempts);
+  const maxAttempts = normalizeBoundedAttempts(attempts, BOOTSTRAP_RELEASE_ATTEMPTS);
   let pending = ids;
   let failures = new Map();
   for (let attempt = 1; attempt <= maxAttempts && pending.length > 0; attempt++) {
@@ -651,15 +646,13 @@ export async function missingBootstrapPages(
     let previousSitemapXml = null;
     if (wasLive(id) && previous.doc.release?.files?.[name]) {
       const got = await io.fetchBytes(`${CDN}/${previous.doc.release.base}${name}`);
-      const body = responseBytes(got);
-      if (got.status === 200 && body) previousSitemapXml = body.toString('utf8');
+      if (got.status === 200) previousSitemapXml = got.body.toString('utf8');
     }
     pending.push(...requiredPageKeys(id, { sitemapXml: sitemap ? fs.readFileSync(sitemap.local, 'utf8') : undefined, previousSitemapXml }));
   }
   const present = async (key) => {
     const got = await io.fetchBytes(`${CDN}/${key}`);
-    const body = responseBytes(got);
-    return got.status === 200 && Boolean(body?.toString('utf8').includes(CORPUS_ROUTE_OWNER_META_TAG));
+    return got.status === 200 && got.body.toString('utf8').includes(CORPUS_ROUTE_OWNER_META_TAG);
   };
   const deadline = deadlineAt ?? Date.now() + waitMs;
   for (;;) {
@@ -681,12 +674,10 @@ export async function missingBootstrapPages(
 export async function readPreviousRelease(io) {
   const res = await io.fetchBytes(`${CDN}/${EDGE_SECTION_REGISTRY_FILE}`);
   if (res.status === 404) return { state: 'absent' };
-  if (res.status !== 200 || !hasResponseBody(res)) return { state: 'unknown' };
+  if (res.status !== 200) return { state: 'unknown' };
   let doc;
-  const registryBody = responseBytes(res);
   try {
-    if (!registryBody) return { state: 'unknown' };
-    doc = JSON.parse(registryBody.toString('utf8'));
+    doc = JSON.parse(res.body.toString('utf8'));
   } catch {
     return { state: 'unknown' };
   }
@@ -695,8 +686,7 @@ export async function readPreviousRelease(io) {
   if (files === null) return { state: 'unknown', doc };
   for (const [name, hash] of Object.entries(files)) {
     const got = await io.fetchBytes(`${CDN}/${doc.release.base}${name}`);
-    const body = responseBytes(got);
-    if (got.status !== 200 || !body || sha256(body) !== hash) return { state: 'unknown', doc };
+    if (got.status !== 200 || sha256(got.body) !== hash) return { state: 'unknown', doc };
   }
   return { state: 'ok', doc };
 }
