@@ -492,7 +492,7 @@ export async function releaseBootstrapLocks(
     };
   }
 
-  const maxAttempts = Math.max(1, Math.floor(Number(attempts) || 0));
+  const maxAttempts = normalizeStagingVerifyAttempts(attempts);
   let pending = ids;
   let failures = new Map();
   for (let attempt = 1; attempt <= maxAttempts && pending.length > 0; attempt++) {
