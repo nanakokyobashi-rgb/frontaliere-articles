@@ -65,7 +65,9 @@
 # Optional env:
 #   RUNNER_TEMP — scratch dir; falls back to a mktemp dir if unset (logged).
 #   ARTICLE_PUSH_STATUS_FILE — optional one-line outcome for the caller:
-#       `pushed`, `clean-no-op`, or `failed`.
+#       `pushed`, `clean-no-op`, `remote-newer`, or `failed`.
+#   ARTICLE_PUSH_SKIPPED_PATHS_FILE — optional file receiving one relative path
+#       per line when the monotonic guard keeps a newer remote publication.
 #
 # Exit codes:
 #   0 — pushed, or a clean no-op (identical content already live, or the
@@ -206,6 +208,7 @@ last_commit=''
 last_push_status=''
 last_skipped_newer_count=0
 last_skipped_newer_names=''
+last_skipped_newer_paths=()
 last_history_warning_count=0
 
 article_content_revision="${ARTICLE_CONTENT_REVISION:-}"
@@ -432,6 +435,24 @@ write_push_summary() {
     "$last_history_warning_count" > "$summary_file" || true
 }
 
+reset_skipped_newer_paths() {
+  local skipped_file="${ARTICLE_PUSH_SKIPPED_PATHS_FILE:-}"
+  [ -n "$skipped_file" ] || return 0
+  if ! mkdir -p "$(dirname "$skipped_file")" 2>/dev/null; then
+    echo "::warning::unable to create skipped-path directory for $skipped_file" >&2
+    return 0
+  fi
+  : > "$skipped_file" || echo "::warning::unable to reset skipped-path file $skipped_file" >&2
+}
+
+write_skipped_newer_paths() {
+  local skipped_file="${ARTICLE_PUSH_SKIPPED_PATHS_FILE:-}"
+  [ -n "$skipped_file" ] || return 0
+  if [ "${#last_skipped_newer_paths[@]}" -gt 0 ]; then
+    printf '%s\n' "${last_skipped_newer_paths[@]}" > "$skipped_file" || true
+  fi
+}
+
 write_push_status() {
   local status_file="${ARTICLE_PUSH_STATUS_FILE:-}"
   [ -n "$status_file" ] || return 0
@@ -444,6 +465,7 @@ write_push_status() {
 
 _attempt() {
   rm -rf "$stage"
+  reset_skipped_newer_paths
   local clone_err
   clone_err="$(mktemp)"
   if ! git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} clone -q --depth 1 --filter=blob:none --no-checkout "$SHARD_REPO" "$stage" 2>"$clone_err"; then
@@ -500,6 +522,8 @@ _attempt() {
   done
 
   last_skipped_newer_count="${#skipped_newer_paths[@]}"
+  last_skipped_newer_paths=("${skipped_newer_paths[@]}")
+  write_skipped_newer_paths
   if [ "$last_skipped_newer_count" -gt 0 ]; then
     local skipped_name shown_count=0
     for skipped_name in "${skipped_newer_paths[@]}"; do
@@ -557,8 +581,13 @@ _attempt() {
   # shellcheck disable=SC1083  # HEAD^{tree} is git rev-parse syntax, not a shell brace expansion
   head_tree="$(git -C "$stage" rev-parse HEAD^{tree})"
   if [ "$new_tree" = "$head_tree" ]; then
-    echo "$section-$loc article shard: no content changes vs remote — clean no-op ($new_count new, prev_n=$prev_n)"
-    last_push_status='clean-no-op'
+    if [ "$last_skipped_newer_count" -gt 0 ]; then
+      echo "$section-$loc article shard: remote newer publication kept — no local paths eligible for push ($last_skipped_newer_count skipped)"
+      last_push_status='remote-newer'
+    else
+      echo "$section-$loc article shard: no content changes vs remote — clean no-op ($new_count new, prev_n=$prev_n)"
+      last_push_status='clean-no-op'
+    fi
     return 0
   fi
 

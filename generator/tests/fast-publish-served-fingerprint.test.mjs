@@ -18,6 +18,8 @@ import {
   classifyApexFailureLog,
   apexFailureDecision,
   fingerprintHtml,
+  omitFingerprintRecords,
+  readOmittedPathsFile,
   readFingerprintFile,
   readPushStateFile,
   recordsFromSummary,
@@ -532,11 +534,45 @@ test('lo stato pushed/no-op è isolato per lingua: una lingua aspetta e l’altr
   }
 });
 
+test('una pubblicazione remota più recente omette il path dalla verifica origin', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'served-fingerprint-remote-newer-'));
+  try {
+    const stateFile = join(root, 'published-push-state.tsv');
+    const omittedFile = join(root, 'published-skipped-paths.tsv');
+    writeFileSync(
+      stateFile,
+      'shard\tlocale\tstatus\narticolifrontaliere\tit\tremote-newer\narticolifrontaliere\ten\tpushed\n',
+    );
+    writeFileSync(omittedFile, `locale\tpath\nit\t${RECORD.path}\n`);
+    const omitted = readOmittedPathsFile(omittedFile);
+    assert.deepEqual(omitFingerprintRecords([RECORD, EN_RECORD], omitted), [EN_RECORD]);
+
+    let fetches = 0;
+    const result = await waitForOrigin({
+      records: [RECORD, EN_RECORD],
+      pushState: readPushStateFile(stateFile),
+      fetchImpl: async (url) => {
+        fetches += 1;
+        assert.match(url, /origin-articolifrontaliere-en/u);
+        return response(NEW_HTML);
+      },
+      timeoutMs: 120,
+      pollIntervalMs: 15,
+    });
+    assert.equal(result.checked, 1);
+    assert.equal(fetches, 1);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('il fallback solo-articoli costruisce il TSV senza le landing non pushate', () => {
   assert.match(workflow, /pushed_hub_summary/);
   assert.match(workflow, /if \[ "\$combined_pushed" = true \]/);
   assert.match(workflow, /--hub-summary "\$pushed_hub_summary"/);
   assert.match(workflow, /published-push-state\.tsv/);
+  assert.match(workflow, /published-skipped-paths\.tsv/);
+  assert.match(workflow, /--omit-paths "\$skipped_paths"/);
   assert.doesNotMatch(workflow, /FAST_PUBLISH_REPLAY_NOOP/);
 
   const root = mkdtempSync(join(tmpdir(), 'served-fingerprint-fallback-'));

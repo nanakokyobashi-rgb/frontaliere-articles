@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 const execFileAsync = promisify(execFile);
 const TSV_HEADER = ['url', 'path', 'sha', 'origin', 'locale', 'shard'].join('\t');
 const PUSH_STATE_HEADER = ['shard', 'locale', 'status'].join('\t');
+const OMITTED_PATHS_HEADER = ['locale', 'path'].join('\t');
 const DEFAULT_TIMEOUT_SECONDS = 12 * 60;
 const DEFAULT_POLL_SECONDS = 15;
 const DEFAULT_PROBE_TIMEOUT_MS = 30 * 1000;
@@ -324,7 +325,7 @@ export function readPushStateFile(file) {
     if (!shard || !['it', 'en', 'de', 'fr'].includes(locale)) {
       throw new TypeError(`${file}:${index + 2}: invalid push-state shard or locale`);
     }
-    if (!['pushed', 'clean-no-op'].includes(status)) {
+    if (!['pushed', 'clean-no-op', 'remote-newer'].includes(status)) {
       throw new TypeError(`${file}:${index + 2}: invalid push-state status ${status}`);
     }
     const key = `${shard}\t${locale}`;
@@ -334,8 +335,38 @@ export function readPushStateFile(file) {
   return states;
 }
 
+/**
+ * Legge i path che la guardia monotona ha lasciato alla pubblicazione remota.
+ * Questi path non appartengono all'insieme dei byte che il fast-publish deve
+ * attendere o verificare: la revisione remota è deliberatamente più recente.
+ */
+export function readOmittedPathsFile(file) {
+  const lines = fs.readFileSync(file, 'utf8').split(/\r?\n/u).filter(Boolean);
+  if (lines.length === 0 || lines[0] !== OMITTED_PATHS_HEADER) {
+    throw new TypeError(`${file} has no omitted-paths TSV header`);
+  }
+  const omitted = new Set();
+  for (const [index, line] of lines.slice(1).entries()) {
+    const fields = line.split('\t');
+    if (fields.length !== 2) throw new TypeError(`${file}:${index + 2}: invalid omitted path row`);
+    const [locale, recordPath] = fields;
+    if (!['it', 'en', 'de', 'fr'].includes(locale) || !recordPath) {
+      throw new TypeError(`${file}:${index + 2}: invalid omitted path`);
+    }
+    const key = `${locale}\t${recordPath}`;
+    if (omitted.has(key)) throw new TypeError(`${file}:${index + 2}: duplicate omitted path ${key}`);
+    omitted.add(key);
+  }
+  return omitted;
+}
+
 function sampleKey(record) {
   return `${record.shard || 'unknown-shard'}\t${record.locale || 'unknown-locale'}`;
+}
+
+export function omitFingerprintRecords(records, omittedPaths = null) {
+  if (!omittedPaths || omittedPaths.size === 0) return records;
+  return records.filter((record) => !omittedPaths.has(`${record.locale || ''}\t${record.path}`));
 }
 
 /** Un URL stabile per ogni combinazione shard/lingua, ordinato per path. */
@@ -638,7 +669,14 @@ export async function waitForOrigin({
   onObservation = null,
 } = {}) {
   if (typeof fetchImpl !== 'function') throw new TypeError('fetch implementation is required');
-  const samples = selectOriginSamples(records || []);
+  const remoteNewerKeys = new Set(
+    [...(pushState || [])]
+      .filter(([, status]) => status === 'remote-newer')
+      .map(([key]) => key),
+  );
+  const samples = selectOriginSamples(
+    (records || []).filter((record) => !remoteNewerKeys.has(sampleKey(record))),
+  );
   if (samples.length === 0) return { checked: 0, attempts: 0, waitedMs: 0, immediate: true };
   if (!Number.isFinite(timeoutMs) || timeoutMs <= 0) throw new TypeError('timeoutMs must be positive');
   if (!Number.isFinite(probeTimeoutMs) || probeTimeoutMs <= 0) throw new TypeError('probeTimeoutMs must be positive');
@@ -844,12 +882,16 @@ async function main(argv) {
   if (command === 'write') {
     const summary = readJson(requiredFlag(args, '--summary'));
     const hubFile = flag(args, '--hub-summary');
-    const records = recordsFromSummary({
+    const omittedFile = flag(args, '--omit-paths');
+    const omittedPaths = omittedFile && fs.existsSync(omittedFile)
+      ? readOmittedPathsFile(omittedFile)
+      : null;
+    const records = omitFingerprintRecords(recordsFromSummary({
       summary,
       hubSummary: hubFile && fs.existsSync(hubFile) ? readJson(hubFile) : null,
       distDir: requiredFlag(args, '--dist'),
       shard: requiredFlag(args, '--shard'),
-    });
+    }), omittedPaths);
     writeFingerprintFile(requiredFlag(args, '--output'), records);
     console.log(`wrote ${records.length} published HTML fingerprint(s)`);
     return;

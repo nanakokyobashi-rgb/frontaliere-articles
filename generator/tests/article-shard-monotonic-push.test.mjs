@@ -71,6 +71,8 @@ function runPush(remote, incomingHtml, { revision = null, failFetch = false, tra
   const dist = fs.mkdtempSync(path.join(os.tmpdir(), 'corpus-article-monotonic-dist-'));
   const runnerTemp = fs.mkdtempSync(path.join(os.tmpdir(), 'corpus-article-monotonic-runner-'));
   const summary = path.join(runnerTemp, 'push-summary.tsv');
+  const statusFile = path.join(runnerTemp, 'push-status.txt');
+  const skippedFile = path.join(runnerTemp, 'push-skipped.txt');
   const traceFile = path.join(runnerTemp, 'git-trace.log');
   const wrapperDir = path.join(runnerTemp, 'bin');
   fs.mkdirSync(path.join(dist, path.dirname(REL)), { recursive: true });
@@ -86,6 +88,8 @@ function runPush(remote, incomingHtml, { revision = null, failFetch = false, tra
     SHARD_ARTICOLIFRONTALIERE_IT_DEPLOY_KEY: 'test-deploy-key',
     SHARD_REPO_OVERRIDE: `file://${remote}`,
     ARTICLE_PUSH_SUMMARY_FILE: summary,
+    ARTICLE_PUSH_STATUS_FILE: statusFile,
+    ARTICLE_PUSH_SKIPPED_PATHS_FILE: skippedFile,
     RUNNER_TEMP: runnerTemp,
     GITHUB_PAT: '',
     SHARD_PUSH_PAT: '',
@@ -103,12 +107,14 @@ function runPush(remote, incomingHtml, { revision = null, failFetch = false, tra
   if (expectFailure) assert.notEqual(result.status, 0, output);
   else assert.equal(result.status, 0, output);
   const summaryText = fs.readFileSync(summary, 'utf8');
+  const statusText = fs.readFileSync(statusFile, 'utf8');
+  const skippedText = fs.existsSync(skippedFile) ? fs.readFileSync(skippedFile, 'utf8') : '';
   assert.match(summaryText, /^articolifrontaliere-it\t/);
   const traceText = fs.existsSync(traceFile) ? fs.readFileSync(traceFile, 'utf8') : '';
   const head = git(['-C', remote, 'rev-parse', 'main']);
   fs.rmSync(dist, { recursive: true, force: true });
   fs.rmSync(runnerTemp, { recursive: true, force: true });
-  return { output, summaryText, traceText, head };
+  return { output, summaryText, statusText, skippedText, traceText, head };
 }
 
 function remoteHtml(remote) {
@@ -184,6 +190,8 @@ test('Content-Rev remoto più recente mantiene la pagina senza leggere il blob r
     assert.equal(result.head, scenario.head);
     assert.equal(remoteHtml(scenario.remote), page('remote-newer'));
     assert.match(result.output, /kept remote for 1 newer article path/);
+    assert.equal(result.statusText, 'remote-newer\n');
+    assert.equal(result.skippedText, `${REL}\n`);
     assert.doesNotMatch(result.traceText, new RegExp(`show HEAD:${REL.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`));
   } finally {
     fs.rmSync(scenario.root, { recursive: true, force: true });
