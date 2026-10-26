@@ -98,7 +98,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'disoccupazione-neuchatel-luglio-2026',
  category: 'pratico',
  date: '2026-10-18T11:17:54.444Z',
- image: '/images/blog/article-disoccupazione-stabile-4-4-neuchatel-settembre-2026.webp',
+ image: '/images/blog/article-disoccupazione-neuchatel-luglio-2026.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['NE'],

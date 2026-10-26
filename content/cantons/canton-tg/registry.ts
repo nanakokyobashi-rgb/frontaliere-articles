@@ -153,7 +153,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'supporto-imprese-turgovia',
  category: 'pratico',
  date: '2026-10-18T11:06:15.235Z',
- image: '/images/blog/article-servizi-imprese-turgovia-rav.webp',
+ image: '/images/blog/article-supporto-imprese-turgovia.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['TG'],

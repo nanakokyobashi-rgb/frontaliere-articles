@@ -29,7 +29,7 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.eventi-weekend-neuchatel.imageAlt': 'Eventi del weekend nel Canton Neuchâtel',
     'blog.article.disoccupazione-neuchatel-luglio-2026.title': 'Stabilità del tasso di disoccupazione nel Canton Neuchâtel a luglio 2026',
     'blog.article.disoccupazione-neuchatel-luglio-2026.excerpt': 'Il numero di disoccupati nel Canton Neuchâtel è aumentato di 54 unità nel luglio 2026, raggiungendo le 3.905 persone.',
-    'blog.article.disoccupazione-neuchatel-luglio-2026.imageAlt': 'Donna in cerca di lavoro a Neuchâtel',
+    'blog.article.disoccupazione-neuchatel-luglio-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
     'blog.article.neuchatel-disoccupazione-maggio-2026.title': 'Neuchatel: il tasso di disoccupazione scende al 4,3% a maggio 2026',
     'blog.article.neuchatel-disoccupazione-maggio-2026.excerpt': 'A maggio 2026 i disoccupati nel Canton Neuchatel scendono a 3’924 e il tasso cantonale cala al 4,3%, sostenuto da fattori stagionali favorevoli.',
     'blog.article.neuchatel-disoccupazione-maggio-2026.imageAlt': 'Statistiche sulla disoccupazione nel Canton Neuchatel',

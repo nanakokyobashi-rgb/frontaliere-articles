@@ -44,7 +44,7 @@ const blogMetaCantonTgFr: Record<string, string> = {
     'blog.article.felben-wellhausen-cantiere.imageAlt': 'Illustration générée pour cet article',
     'blog.article.supporto-imprese-turgovia.title': 'Thurgovie : soutien aux entreprises qui envisagent de s\'implanter',
     'blog.article.supporto-imprese-turgovia.excerpt': 'Le canton de Thurgovie offre aux entreprises des informations, des conseils et un soutien concernant les conditions-cadres, les biens immobiliers, les autorisations et les contacts avec les services et les autorités.',
-    'blog.article.supporto-imprese-turgovia.imageAlt': 'Entreprises et implantation dans le canton de Thurgovie',
+    'blog.article.supporto-imprese-turgovia.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
     'blog.article.turgovia-servizi-datori-lavoro.title': 'Thurgovie : services de recherche de personnel et protection lari',
     'blog.article.turgovia-servizi-datori-lavoro.excerpt': 'Le canton de Thurgovie met à la disposition des employeurs les sites RAV d’Amriswil, Frauenfeld et Kreuzlingen ainsi que le portail arbeit.swiss pour les postes vacants postes vacants',
     'blog.article.turgovia-servizi-datori-lavoro.imageAlt': 'Image illustrative en lien avec le sujet de l’article',

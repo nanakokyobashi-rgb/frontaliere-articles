@@ -63,66 +63,6 @@
       "retryHint": "no-text"
     },
     {
-      "articleId": "rogo-cortivallo-persona-morta",
-      "title": "Incendio in appartamento a Lugano: morta una persona",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-rogo-cortivallo-persona-morta: openai-codex (vision gate rejected image: Photorealistic fire-response scene with recognizable foreground fire",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-18T09:43:01.890Z",
-      "lastFailureAt": "2026-10-18T09:43:01.890Z"
-    },
-    {
-      "articleId": "checklist-neonato-ticino",
-      "title": "Nascita figlio e anagrafe: pratiche 2026 per frontalieri",
-      "fallbackImage": "/images/blog/frontaliere-nascita-figlio-anagrafe-2026.webp",
-      "reason": "All image providers failed for article-checklist-neonato-ticino: openai-codex (vision gate rejected image: Original synthetic photorealistic illustration with no readable text or l",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-18T10:50:48.628Z",
-      "lastFailureAt": "2026-10-18T10:50:48.628Z"
-    },
-    {
-      "articleId": "prodex-40-anni-esericerca-spaziale",
-      "title": "Prodex compie 40 anni: 130 progetti spaziali finanziati in Svizzera",
-      "fallbackImage": "/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-zurigo.webp",
-      "reason": "All image providers failed for article-prodex-40-anni-esericerca-spaziale: openai-codex (vision gate rejected image: Generic synthetic Swiss research-lab illustration; no readable",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-18T11:05:16.549Z",
-      "lastFailureAt": "2026-10-18T11:05:16.549Z"
-    },
-    {
-      "articleId": "supporto-imprese-turgovia",
-      "title": "Turgovia: supporto alle imprese che valutano l'insediamento",
-      "fallbackImage": "/images/blog/article-servizi-imprese-turgovia-rav.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-18T11:06:15.287Z",
-      "lastFailureAt": "2026-10-18T11:06:15.287Z"
-    },
-    {
-      "articleId": "disoccupazione-neuchatel-luglio-2026",
-      "title": "Stabilità del tasso di disoccupazione nel Canton Neuchâtel a luglio 2026",
-      "fallbackImage": "/images/blog/article-disoccupazione-stabile-4-4-neuchatel-settembre-2026.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-18T11:17:54.485Z",
-      "lastFailureAt": "2026-10-18T11:17:54.485Z"
-    },
-    {
-      "articleId": "checklist-neonato-confine-2026",
-      "title": "Nascita figlio: anagrafe e assegni per frontalieri 2026",
-      "fallbackImage": "/images/blog/nuovo-accordo-frontalieri-2024.webp",
-      "reason": "All image providers failed for article-checklist-neonato-confine-2026: openai-codex (vision gate rejected image: Synthetic photorealistic editorial scene relevant to the topic, wit",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-18T11:33:44.059Z",
-      "lastFailureAt": "2026-10-18T11:33:44.059Z"
-    },
-    {
       "articleId": "indennita-giornaliere-stop-cosa-fare",
       "title": "Indennità malattia interrotte: 5 passi per tutelarsi",
       "fallbackImage": "/images/blog/article-indennita-lavoro-ridotto.webp",

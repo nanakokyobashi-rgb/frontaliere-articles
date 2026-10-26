@@ -44,7 +44,7 @@ const blogMetaCantonTgEn: Record<string, string> = {
     'blog.article.felben-wellhausen-cantiere.imageAlt': 'Illustration generated for this article',
     'blog.article.supporto-imprese-turgovia.title': 'Thurgau: support for companies considering establishing themselves',
     'blog.article.supporto-imprese-turgovia.excerpt': 'The Canton of Thurgau offers businesses information, advice and support regarding framework conditions, real estate, permits, and contacts with offices and authorities.',
-    'blog.article.supporto-imprese-turgovia.imageAlt': 'Businesses and company relocation in Canton Thurgau',
+    'blog.article.supporto-imprese-turgovia.imageAlt': 'Illustrative image relevant to the article topic',
     'blog.article.turgovia-servizi-datori-lavoro.title': 'Thurgau: personnel search and lari protection services',
     'blog.article.turgovia-servizi-datori-lavoro.excerpt': 'The Canton of Thurgau makes the RAV offices in Amriswil, Frauenfeld and Kreuzlingen and the arbeit.swiss portal available to employers for vacancy vacancy',
     'blog.article.turgovia-servizi-datori-lavoro.imageAlt': 'Illustrative image relevant to the article topic',
