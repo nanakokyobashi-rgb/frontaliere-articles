@@ -110,7 +110,7 @@ test('i gemelli del guard usano listing completi, stati completi e fail-closed',
     ['generate-article', generationWorkflow],
     ['generate-article-core', generationCoreWorkflow],
   ]) {
-    assert.match(source, /gh api --paginate --slurp/,
+    assert.match(source, /gh_api_timeout --paginate --slurp/,
       `${label}: il listing delle run deve essere paginato`);
     assert.match(source, /actions\/workflows\/(?:generate-article\.yml|\$CALLER_WORKFLOW)\/runs\?per_page=100/,
       `${label}: endpoint del listing non riconoscibile`);
