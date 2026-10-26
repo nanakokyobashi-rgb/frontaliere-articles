@@ -3,6 +3,7 @@ import { randomUUID } from 'node:crypto';
 import { isInvokedDirectly } from './is-invoked-directly.mjs';
 import { createR2Request, normalizeS3MatchEtag } from './r2-section-lock.mjs';
 import { isNonNegativeSafeInteger } from './safe-lease-timestamp.mjs';
+import { removeAbortListenerSafely } from '../../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 
 export const IMAGE_NAMESPACES = Object.freeze(['blog', 'places']);
 export const IMAGE_LEASE_PROTOCOL_VERSION = 1;
@@ -136,7 +137,7 @@ function delay(ms, signal) {
     let timer;
     const cleanup = () => {
       clearTimeout(timer);
-      signal?.removeEventListener('abort', onAbort);
+      removeAbortListenerSafely(signal, onAbort);
     };
     const onAbort = () => {
       cleanup();
@@ -167,7 +168,7 @@ function waitForRetry(ms, sleep, signal) {
     if (signal.aborted) onAbort();
   });
   return Promise.race([Promise.resolve().then(() => sleep(ms, signal)), aborted])
-    .finally(() => signal.removeEventListener('abort', onAbort));
+    .finally(() => removeAbortListenerSafely(signal, onAbort));
 }
 
 function parseLeaseContext(value) {

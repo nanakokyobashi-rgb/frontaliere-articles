@@ -9,6 +9,8 @@
  * e il budget di lettura, così non possono divergere fra i gemelli.
  */
 
+import { removeAbortListenerSafely } from '../../generator/scripts/lib/fetch-with-ref-timeout.mjs';
+
 const SURFACE_FETCH_MAX_ATTEMPTS = 3;
 const SURFACE_FETCH_TIMEOUT_MS = 30_000;
 const SURFACE_FETCH_BACKOFF_MS = (attempt) => 2_000 * attempt;
@@ -138,11 +140,11 @@ function waitForRetry(delayMs, { deadline, now, signal } = {}) {
     let timer;
     const onAbort = () => {
       clearTimeout(timer);
-      signal?.removeEventListener('abort', onAbort);
+      removeAbortListenerSafely(signal, onAbort);
       reject(signal.reason || new Error('fetch annullato'));
     };
     timer = setTimeout(() => {
-      signal?.removeEventListener('abort', onAbort);
+      removeAbortListenerSafely(signal, onAbort);
       if (Number.isFinite(deadline) && deadline - now() <= 0) {
         reject(new AnnouncedSurfaceDeadlineError());
       } else {
