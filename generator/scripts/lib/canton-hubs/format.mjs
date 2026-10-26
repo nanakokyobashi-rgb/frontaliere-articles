@@ -7,6 +7,7 @@
  * scritte qui.
  */
 
+import '../../../../host/cantonSectionsBootstrap.mjs';
 export { httpsUrlOrNull } from '../../../../engine/shared/httpsUrl.mjs';
 
 export const HUB_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
