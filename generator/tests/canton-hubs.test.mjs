@@ -1175,6 +1175,17 @@ test('link: il catalogo e\' fatto di path verificati sulle sitemap, non di URL c
   const fuelBorderStats = CATALOGUE.static.find((entry) => entry.id === 'fuel-border-stats');
   assert.ok(fuelBorderStats, 'catalogo carburanti senza la voce delle statistiche al confine');
   assert.equal(fuelBorderStats.paths.de, undefined, 'non riemettere il path tedesco assente dalle sitemap pubblicate');
+  const pharmacyHub = CATALOGUE.static.find((entry) => entry.id === 'on-duty-pharmacies');
+  assert.deepEqual(
+    pharmacyHub?.paths,
+    {
+      it: '/farmacie/',
+      en: '/en/pharmacies/',
+      de: '/de/apotheken/',
+      fr: '/fr/pharmacies/',
+    },
+    'il catalogo deve seguire i quattro route del plugin pharmacyHub e della sitemap-farmacie',
+  );
   for (const entry of CATALOGUE.static) {
     assert.ok(!ids.has(entry.id), `id duplicato ${entry.id}`);
     ids.add(entry.id);
