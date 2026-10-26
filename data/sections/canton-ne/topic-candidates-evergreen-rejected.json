@@ -39,6 +39,14 @@
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-les-salaires-effectifs-ont-augmente-de-0-5-en-2026.html": {
       "section": "canton-ne",
       "ts": 1793003504979
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-migros-veut-fusionner-ses-dix-cooperatives.html": {
+      "section": "canton-ne",
+      "ts": 1793009222391
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-la-desinformation-inquiete-plus-de-la-moitie-des-suisses.html": {
+      "section": "canton-ne",
+      "ts": 1793009231988
     }
   }
 }
