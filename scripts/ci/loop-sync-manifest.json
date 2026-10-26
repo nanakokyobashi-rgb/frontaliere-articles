@@ -4709,9 +4709,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-09.yml",
       "mode": "identical",
       "baseline": {
-        "site": "5ecde1495d93b590",
-        "corpus": "5ecde1495d93b590",
-        "alignedAt": "2026-10-23"
+        "site": "cc844e84b3f772e8",
+        "corpus": "cc844e84b3f772e8",
+        "alignedAt": "2026-10-26"
       }
     },
     {
@@ -4719,9 +4719,9 @@
       "sitePath": ".github/corpus-workflows/crawler-group-10.yml",
       "mode": "identical",
       "baseline": {
-        "site": "f765ac13c6ca5490",
-        "corpus": "f765ac13c6ca5490",
-        "alignedAt": "2026-10-23"
+        "site": "c6f4e12dd4ab9e2a",
+        "corpus": "c6f4e12dd4ab9e2a",
+        "alignedAt": "2026-10-26"
       }
     },
     {
@@ -4868,10 +4868,10 @@
       "path": "generator/data/crawler-cross-repo-contract.json",
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
-      "reason": "La baseline del 2026-10-26 registra lo stesso digest SHA-256 raw sui due lati (8f65f1993e14eaec); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
+      "reason": "La baseline del 2026-10-26 registra lo stesso digest SHA-256 raw sui due lati (f48ce5eaab70a96e); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "8f65f1993e14eaec",
-        "corpus": "8f65f1993e14eaec",
+        "site": "f48ce5eaab70a96e",
+        "corpus": "f48ce5eaab70a96e",
         "alignedAt": "2026-10-26"
       }
     },
