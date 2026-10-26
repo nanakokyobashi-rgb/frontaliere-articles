@@ -4,17 +4,9 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ag::https://www.fricktal.info/news/ueberregionales/maessige-waldbrandgefahr-im-kanton-aargau.html": {
+    "canton-ag::https://www.fricktal.info/news/gemeinden/moehlin/die-sp-moehlin-fordert-klimatisierung-in-schulen-und-pflegeheim.html": {
       "section": "canton-ag",
-      "ts": 1792588100682
-    },
-    "canton-ag::https://www.baden.ch/de/home/wirtschaft/baden-40/wirtschafts-news-baden-40.html/3258/news/19646": {
-      "section": "canton-ag",
-      "ts": 1792588106413
-    },
-    "canton-ag::https://www.reussbote.ch/2026101/weiterbildung-zahlt-sich-aus-fuer-fachkraefte-und-unternehmen": {
-      "section": "canton-ag",
-      "ts": 1792760139112
+      "ts": 1793056603351
     }
   }
 }
