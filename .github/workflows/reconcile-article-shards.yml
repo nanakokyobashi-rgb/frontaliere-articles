@@ -181,6 +181,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WF: fast-publish-article.yml
+          GH_API_TIMEOUT_SECONDS: ${{ vars.GH_API_TIMEOUT_SECONDS }}
         run: |
           set -euo pipefail
           results="$RUNNER_TEMP/backfill-results.tsv"
@@ -227,6 +228,11 @@ jobs:
           api_timeout_seconds="${GH_API_TIMEOUT_SECONDS:-60}"
           case "$api_timeout_seconds" in
             ''|*[!0-9]*) api_timeout_seconds=60 ;;
+            *)
+              api_timeout_seconds="${api_timeout_seconds#"${api_timeout_seconds%%[!0]*}"}"
+              [ -n "$api_timeout_seconds" ] || api_timeout_seconds=0
+              [ "${#api_timeout_seconds}" -le 3 ] || api_timeout_seconds=60
+              ;;
           esac
           if [ "$api_timeout_seconds" -lt 1 ] || [ "$api_timeout_seconds" -gt 300 ]; then
             api_timeout_seconds=60
