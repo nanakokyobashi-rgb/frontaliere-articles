@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-frontaliere-tasse-dopo-licenziamento.webp",
+      "sha256": "6b7a91b02ed7a857b9123213337b9aea0a775d9cc85c28711b321545af130311"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-frontaliere-tasse-dopo-licenziamento-480w.webp",
+      "sha256": "214f63d89dc7bbdda2b0d3abbfb357ec28750623f6c61aa4d3668ad2eb1831b1"
+    }
+  ]
 }
