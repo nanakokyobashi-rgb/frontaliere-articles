@@ -122,6 +122,13 @@ export const CANTON_HUBS_API = 'canton-hubs.json';
 export const REGISTRY_CACHE_CONTROL = 'public,max-age=60';
 /** Una chiave di release non cambia mai contenuto. */
 export const RELEASE_CACHE_CONTROL = 'public,max-age=31536000,immutable';
+/**
+ * Un oggetto appena caricato puo' essere leggibile da R2 prima che il CDN
+ * abbia propagato la stessa chiave. Il controllo di staging resta bounded ma
+ * non tratta la prima risposta vuota come un fallimento definitivo.
+ */
+export const STAGING_VERIFY_ATTEMPTS = 6;
+export const STAGING_VERIFY_RETRY_MS = 4000;
 
 const sha256 = (data) => createHash('sha256').update(data).digest('hex');
 const isPlainObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -656,6 +663,8 @@ export async function publishRelease(
     bootstrapWaitMs = BOOTSTRAP_WAIT_MS,
     bootstrapRetryMs = BOOTSTRAP_RETRY_MS,
     bootstrapReleaseAttempts = BOOTSTRAP_RELEASE_ATTEMPTS,
+    stagingVerifyAttempts = STAGING_VERIFY_ATTEMPTS,
+    stagingVerifyRetryMs = STAGING_VERIFY_RETRY_MS,
     sleep,
   },
 ) {
@@ -763,7 +772,15 @@ export async function publishRelease(
     if (!io.upload(file.local, file.key, RELEASE_CACHE_CONTROL)) return stopBeforeFlip('staging', `upload non confermato: ${file.key}`);
   }
   for (const file of release.files) {
-    const served = await io.fetchBytes(`${CDN}/${file.key}`);
+    let served = { status: 0 };
+    const attempts = Math.max(1, Math.floor(stagingVerifyAttempts));
+    for (let attempt = 1; attempt <= attempts; attempt++) {
+      served = await io.fetchBytes(`${CDN}/${file.key}`);
+      if (served.status === 200 && served.body.length === file.bytes && sha256(served.body) === file.sha256) break;
+      if (attempt < attempts) {
+        await (sleep ?? ((ms) => new Promise((resolve) => setTimeout(resolve, ms))))(stagingVerifyRetryMs);
+      }
+    }
     if (served.status !== 200 || served.body.length !== file.bytes || sha256(served.body) !== file.sha256) {
       return stopBeforeFlip('staging', `${file.key} sul CDN non corrisponde ai byte locali (HTTP ${served.status || 'nessuna risposta'})`);
     }
