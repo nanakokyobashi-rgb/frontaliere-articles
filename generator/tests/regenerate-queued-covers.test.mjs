@@ -1726,10 +1726,9 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(sectionPublisher, /validated_head="\$PREFLIGHT_HEAD"/u);
   assert.match(
     sectionPublisher,
-    /if \{ \[ "\$EVENT_NAME" = 'push' \] \\\n\s+\|\| \{ \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ "\$BOOTSTRAP" != 'true' \]; \}; \} \\\n\s+&& \[ "\$REF" = 'refs\/heads\/main' \] \\\n\s+&& \[ -z "\$\{SOURCE_COMMIT:-\}" \]; then/u,
-    'il retry live del publisher sezione include i push bootstrap e i dispatch dalla main',
+    /if \{ \[ "\$EVENT_NAME" = 'push' \] \\\n\s+\|\| \[ "\$EVENT_NAME" = 'workflow_dispatch' \]; \} \\\n\s+&& \[ "\$REF" = 'refs\/heads\/main' \] \\\n\s+&& \[ -z "\$\{SOURCE_COMMIT:-\}" \]; then/u,
+    'il retry live del publisher sezione include push e dispatch dalla main, anche bootstrap',
   );
-  assert.match(sectionPublisher, /\[ "\$BOOTSTRAP" != 'true' \]/u);
   assert.match(sectionPublisher, /for publish_attempt in 1 2 3/u);
   assert.match(sectionPublisher, /git fetch --no-tags origin main/u);
   assert.match(sectionPublisher, /git checkout --detach FETCH_HEAD/u);
