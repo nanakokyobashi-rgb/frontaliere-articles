@@ -133,13 +133,17 @@ export const STAGING_VERIFY_RETRY_MS = 4000;
 const sha256 = (data) => createHash('sha256').update(data).digest('hex');
 const isPlainObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
 
+export function hasResponseBody(response) {
+  return ArrayBuffer.isView(response?.body);
+}
+
 /**
  * Verify a staged CDN response without trusting an adapter to provide a body.
  * A 200 without bytes is an incomplete propagation, not a successful staging
  * read; callers must keep the release fail-closed and retry within their bound.
  */
 export function hasExpectedStagingBody(served, file) {
-  if (served?.status !== 200 || !ArrayBuffer.isView(served.body)) return false;
+  if (served?.status !== 200 || !hasResponseBody(served)) return false;
   return served.body.byteLength === file.bytes && sha256(served.body) === file.sha256;
 }
 
@@ -460,6 +464,10 @@ export async function waitForBootstrapLocks(
         pending.push(`${section} (lock non verificabile: HTTP ${got.status || 'nessuna risposta'})`);
         continue;
       }
+      if (!hasResponseBody(got)) {
+        pending.push(`${section} (lock non verificabile: body assente)`);
+        continue;
+      }
       const state = parseSectionBootstrapLock(got.body, { section, now: now() });
       if (state.state === 'active') pending.push(`${section} (${state.doc.owner})`);
       else if (state.state === 'unknown') pending.push(`${section} (${state.reason})`);
@@ -613,13 +621,13 @@ export async function missingBootstrapPages(
     let previousSitemapXml = null;
     if (wasLive(id) && previous.doc.release?.files?.[name]) {
       const got = await io.fetchBytes(`${CDN}/${previous.doc.release.base}${name}`);
-      if (got.status === 200) previousSitemapXml = got.body.toString('utf8');
+      if (got.status === 200 && hasResponseBody(got)) previousSitemapXml = got.body.toString('utf8');
     }
     pending.push(...requiredPageKeys(id, { sitemapXml: sitemap ? fs.readFileSync(sitemap.local, 'utf8') : undefined, previousSitemapXml }));
   }
   const present = async (key) => {
     const got = await io.fetchBytes(`${CDN}/${key}`);
-    return got.status === 200 && got.body.toString('utf8').includes(CORPUS_ROUTE_OWNER_META_TAG);
+    return got.status === 200 && hasResponseBody(got) && got.body.toString('utf8').includes(CORPUS_ROUTE_OWNER_META_TAG);
   };
   const deadline = deadlineAt ?? Date.now() + waitMs;
   for (;;) {
@@ -641,7 +649,7 @@ export async function missingBootstrapPages(
 export async function readPreviousRelease(io) {
   const res = await io.fetchBytes(`${CDN}/${EDGE_SECTION_REGISTRY_FILE}`);
   if (res.status === 404) return { state: 'absent' };
-  if (res.status !== 200) return { state: 'unknown' };
+  if (res.status !== 200 || !hasResponseBody(res)) return { state: 'unknown' };
   let doc;
   try {
     doc = JSON.parse(res.body.toString('utf8'));
@@ -653,7 +661,7 @@ export async function readPreviousRelease(io) {
   if (files === null) return { state: 'unknown', doc };
   for (const [name, hash] of Object.entries(files)) {
     const got = await io.fetchBytes(`${CDN}/${doc.release.base}${name}`);
-    if (got.status !== 200 || sha256(got.body) !== hash) return { state: 'unknown', doc };
+    if (got.status !== 200 || !hasResponseBody(got) || sha256(got.body) !== hash) return { state: 'unknown', doc };
   }
   return { state: 'ok', doc };
 }

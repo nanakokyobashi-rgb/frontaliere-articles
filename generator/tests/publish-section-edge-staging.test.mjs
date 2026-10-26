@@ -1,12 +1,19 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 import {
   CDN,
   hasExpectedStagingBody,
+  hasResponseBody,
+  missingBootstrapPages,
   publishRelease,
+  readPreviousRelease,
   releaseBase,
+  waitForBootstrapLocks,
 } from '../../scripts/publish-section-edge.mjs';
 import { EDGE_SECTION_REGISTRY_FILE } from '../../scripts/lib/section-registry.mjs';
 
@@ -18,8 +25,35 @@ const file = {
 };
 
 test('la verifica staging rifiuta un 200 senza body senza lanciare', () => {
+  assert.equal(hasResponseBody({ status: 200 }), false);
+  assert.equal(hasResponseBody({ status: 200, body: bytes }), true);
   assert.equal(hasExpectedStagingBody({ status: 200 }, file), false);
   assert.equal(hasExpectedStagingBody({ status: 200, body: bytes }, file), true);
+});
+
+test('i consumer bootstrap e registry trattano un 200 senza body come non verificabile', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'section-edge-empty-body-'));
+  const sitemap = join(root, 'sitemap-articles-canton-ti.xml');
+  writeFileSync(sitemap, '<urlset />');
+  const emptyBodyIo = { fetchBytes: async () => ({ status: 200 }) };
+  try {
+    const locked = await waitForBootstrapLocks(['canton-ti'], emptyBodyIo, {
+      deadline: 0,
+      retryMs: 0,
+    });
+    assert.deepEqual(locked, ['canton-ti (lock non verificabile: body assente)']);
+
+    const missing = await missingBootstrapPages(
+      { live: ['canton-ti'], files: [{ name: 'sitemap-articles-canton-ti.xml', local: sitemap }] },
+      { state: 'absent' },
+      emptyBodyIo,
+      { deadline: 0, retryMs: 0 },
+    );
+    assert.ok(missing.length > 0);
+    assert.equal(await readPreviousRelease(emptyBodyIo).then((result) => result.state), 'unknown');
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('publishRelease resta fail-closed quando un adapter CDN restituisce 200 senza body', async () => {
