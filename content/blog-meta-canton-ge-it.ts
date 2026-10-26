@@ -36,6 +36,9 @@ const blogMetaCantonGeIt: Record<string, string> = {
     'blog.article.hug-primo-ospedale-svizzero-2027.title': 'HUG primo ospedale svizzero nel ranking Smart Hospitals 2027',
     'blog.article.hug-primo-ospedale-svizzero-2027.excerpt': 'Gli HUG sono 31° al mondo nel 2027 Primo ospedale svizzero della graduatoria 37 posizioni guadagnate rispetto al 2026 410 ospedali in 33 Paesi Classifica →',
     'blog.article.hug-primo-ospedale-svizzero-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.furti-cantone-ginevra-2025.title': 'Furti con effrazione nel Canton Ginevra: 3\'410 nel 2025',
+    'blog.article.furti-cantone-ginevra-2025.excerpt': '3\'410 furti nel 2025, contro 3\'196 nel 2024 Crescita del 6,7% tra 2024 e 2025 Incontri della Polizia: mercoledì 28 ottobre Termine Valore Cosa Furti',
+    'blog.article.furti-cantone-ginevra-2025.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGeIt;

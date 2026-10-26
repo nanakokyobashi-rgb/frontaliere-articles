@@ -36,6 +36,9 @@ const blogMetaCantonGeEn: Record<string, string> = {
     'blog.article.hug-primo-ospedale-svizzero-2027.title': 'HUG first Swiss hospital in the Smart Hospitals 2027 ranking',
     'blog.article.hug-primo-ospedale-svizzero-2027.excerpt': 'HUG rank 31st in the world in 2027 First Swiss hospital in the ranking 37 positions gained compared with 2026 410 hospitals in 33 countries Ranking → Newsweek',
     'blog.article.hug-primo-ospedale-svizzero-2027.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.furti-cantone-ginevra-2025.title': 'Burglaries in the Canton of Geneva: 3\'410 in 2025',
+    'blog.article.furti-cantone-ginevra-2025.excerpt': '3\'410 thefts in 2025, compared with 3\'196 in 2024 6,7% growth between 2024 and 2025 Police meetings: Wednesday, 28 October Term Value What Burglaries involving',
+    'blog.article.furti-cantone-ginevra-2025.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGeEn;

@@ -36,6 +36,9 @@ const blogMetaCantonGeDe: Record<string, string> = {
     'blog.article.hug-primo-ospedale-svizzero-2027.title': 'HUG erstes Schweizer Spital im Ranking Smart Hospitals 2027',
     'blog.article.hug-primo-ospedale-svizzero-2027.excerpt': 'Die HUG liegen 2027 weltweit auf Rang 31° Erstes Schweizer Spital der Rangliste Gegenüber 2026 um 37 Plätze verbessert 410 Spitäler in 33 Ländern Rangliste →',
     'blog.article.hug-primo-ospedale-svizzero-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.furti-cantone-ginevra-2025.title': 'Einbruchdiebstähle im Kanton Genf: 3\'410 im Jahr 2025',
+    'blog.article.furti-cantone-ginevra-2025.excerpt': '3\'410 Diebstähle im Jahr 2025 gegenüber 3\'196 im Jahr 2024 Anstieg von 6,7% zwischen 2024 und 2025 Treffen der Polizei: Mittwoch, 28.',
+    'blog.article.furti-cantone-ginevra-2025.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGeDe;

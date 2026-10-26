@@ -36,6 +36,9 @@ const blogMetaCantonGeFr: Record<string, string> = {
     'blog.article.hug-primo-ospedale-svizzero-2027.title': 'HUG, premier hôpital suisse du classement Smart Hospitals 2027',
     'blog.article.hug-primo-ospedale-svizzero-2027.excerpt': 'Les HUG sont 31e au monde en 2027 Premier hôpital suisse du classement 37 places gagnées par rapport à 2026 410 hôpitaux dans 33 pays Classement → Newsweek',
     'blog.article.hug-primo-ospedale-svizzero-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.furti-cantone-ginevra-2025.title': 'Vols par effraction dans le canton de Genève : 3\'410 en 2025',
+    'blog.article.furti-cantone-ginevra-2025.excerpt': '3\'410 vols en 2025, contre 3\'196 en 2024 Hausse de 6,7% entre 2024 et 2025 Rencontres de la police : mercredi 28 octobre Terme Valeur Quoi Vols avec effraction',
+    'blog.article.furti-cantone-ginevra-2025.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonGeFr;
