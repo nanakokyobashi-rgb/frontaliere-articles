@@ -48,6 +48,7 @@ test('il degrado resta durevole, la pagina sana si rimuove e il cap raggruppa pe
 test('un cap di riparazione invalido ricade sul default senza disabilitare il retry', () => {
   assert.equal(normalizeRepairCap(0), 0);
   assert.equal(normalizeRepairCap('2'), 2);
+  assert.equal(normalizeRepairCap(' 2 '), 2);
   assert.equal(normalizeRepairCap(2.5), 3);
   assert.equal(normalizeRepairCap(Infinity), 3);
   assert.equal(normalizeRepairCap(Symbol('invalid')), 3);
