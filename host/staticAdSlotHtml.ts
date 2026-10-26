@@ -17,7 +17,15 @@ export type StaticAdSlotKey =
   | 'canton-hub-top'
   | 'canton-hub-inline-1'
   | 'canton-hub-inline-2'
-  | 'canton-hub-end';
+  | 'canton-hub-end'
+  | 'article-atf';
+
+export interface StaticAdSlotHtmlOptions {
+  collapseWhenUnfilled?: boolean;
+  placement?: string;
+  experimentId?: string;
+  experimentVariant?: string;
+}
 
 const STATIC_AD_SLOTS: Record<StaticAdSlotKey, {
   slot: string;
@@ -54,13 +62,25 @@ const STATIC_AD_SLOTS: Record<StaticAdSlotKey, {
     placement: 'ssg_end_multiplex',
     fullWidthResponsive: false,
   },
+  'article-atf': {
+    slot: '1982411173',
+    format: 'fluid',
+    layout: 'in-article',
+    placeholderMinHeight: 220,
+    placement: 'article-atf',
+    fullWidthResponsive: false,
+  },
 };
 
 export function isStaticAdSlotKey(value: unknown): value is StaticAdSlotKey {
   return typeof value === 'string' && Object.prototype.hasOwnProperty.call(STATIC_AD_SLOTS, value);
 }
 
-export function staticAdSlotHtml(slot: StaticAdSlotKey): string {
+function safeDataValue(value: string): string {
+  return String(value).replace(/[^a-zA-Z0-9_.:-]/g, '-').slice(0, 80);
+}
+
+export function staticAdSlotHtml(slot: StaticAdSlotKey, options?: StaticAdSlotHtmlOptions): string {
   if (!isStaticAdSlotKey(slot)) return '';
 
   const config = STATIC_AD_SLOTS[slot];
@@ -72,7 +92,12 @@ export function staticAdSlotHtml(slot: StaticAdSlotKey): string {
     `data-ad-format="${config.format}"`,
   ];
   if (config.layout) attrs.push(`data-ad-layout="${config.layout}"`);
-  if (config.placement) attrs.push(`data-ad-placement="${config.placement}"`);
+  if (options?.placement || config.placement) {
+    attrs.push(`data-ad-placement="${safeDataValue(options?.placement || config.placement || '')}"`);
+  }
+  if (options?.collapseWhenUnfilled) attrs.push('data-ft-static-ad="true"');
+  if (options?.experimentId) attrs.push(`data-ad-experiment="${safeDataValue(options.experimentId)}"`);
+  if (options?.experimentVariant) attrs.push(`data-ad-variant="${safeDataValue(options.experimentVariant)}"`);
   if (config.fullWidthResponsive) attrs.push('data-full-width-responsive="true"');
   return `<ins ${attrs.join(' ')}></ins>`;
 }

@@ -8,6 +8,11 @@ test('canton hub ad placements keep the reserved formats and slots', () => {
   const inlineOne = staticAdSlotHtml('canton-hub-inline-1');
   const inlineTwo = staticAdSlotHtml('canton-hub-inline-2');
   const end = staticAdSlotHtml('canton-hub-end');
+  const articleAtf = staticAdSlotHtml('article-atf', {
+    collapseWhenUnfilled: true,
+    experimentId: 'article-detail-atf-ad-v1',
+    experimentVariant: 'atf',
+  });
 
   assert.match(top, /<ins class="adsbygoogle" style="display:block;min-height:100px"/);
   assert.match(top, /data-ad-slot="3205029282"/);
@@ -29,10 +34,17 @@ test('canton hub ad placements keep the reserved formats and slots', () => {
   assert.match(end, /data-ad-format="autorelaxed"/);
   assert.match(end, /data-ad-placement="ssg_end_multiplex"/);
   assert.doesNotMatch(end, /data-full-width-responsive/);
+  assert.match(articleAtf, /data-ad-slot="1982411173"/);
+  assert.match(articleAtf, /data-ad-layout="in-article"/);
+  assert.match(articleAtf, /data-ad-placement="article-atf"/);
+  assert.match(articleAtf, /data-ft-static-ad="true"/);
+  assert.match(articleAtf, /data-ad-experiment="article-detail-atf-ad-v1"/);
+  assert.match(articleAtf, /data-ad-variant="atf"/);
 });
 
 test('runtime ad slot values outside the TypeScript union fail closed', () => {
   assert.equal(isStaticAdSlotKey('canton-hub-top'), true);
+  assert.equal(isStaticAdSlotKey('article-atf'), true);
   assert.equal(isStaticAdSlotKey('unknown-runtime-slot'), false);
   assert.equal(isStaticAdSlotKey('toString'), false);
   assert.equal(isStaticAdSlotKey(null), false);
