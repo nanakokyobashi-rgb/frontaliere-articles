@@ -11,6 +11,7 @@ export const HUB_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 
 const GROUP_SEP = { it: '.', en: ',', de: '’', fr: ' ' };
 const DECIMAL_SEP = { it: ',', en: '.', de: '.', fr: ',' };
+const MAX_DECIMALS = 20;
 
 const MONTHS = {
   it: ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'],
@@ -24,6 +25,18 @@ function checkLocale(locale) {
   return locale;
 }
 
+function checkDecimals(decimals) {
+  if (!Number.isInteger(decimals) || decimals < 0 || decimals > MAX_DECIMALS) {
+    throw new Error(`canton-hubs: numero di decimali non valido ${JSON.stringify(decimals)}`);
+  }
+  return decimals;
+}
+
+function isRealCalendarDay(year, month, day) {
+  const date = new Date(Date.UTC(year, month - 1, day));
+  return date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day;
+}
+
 /**
  * Un numero con `decimals` cifre decimali fisse e separatore delle migliaia.
  * @param {number} value
@@ -32,6 +45,7 @@ function checkLocale(locale) {
  */
 export function fmtNumber(value, locale, decimals = 0) {
   checkLocale(locale);
+  checkDecimals(decimals);
   if (typeof value !== 'number' || !Number.isFinite(value)) throw new Error(`canton-hubs: numero non valido ${JSON.stringify(value)}`);
   const fixed = Math.abs(value).toFixed(decimals);
   const [int, frac] = fixed.split('.');
@@ -64,10 +78,18 @@ export function fmtPerLitre(value, currency, locale) {
 
 /** Il giorno UTC (`YYYY-MM-DD`) di un istante o di una data ISO. */
 export function isoDayOf(value) {
-  if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
+  if (typeof value === 'string') {
+    const dayMatch = /^(\d{4})-(\d{2})-(\d{2})(?:$|T)/.exec(value);
+    if (dayMatch && !isRealCalendarDay(Number(dayMatch[1]), Number(dayMatch[2]), Number(dayMatch[3]))) {
+      throw new Error(`canton-hubs: data non valida ${JSON.stringify(value)}`);
+    }
+    if (/^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
+  }
   const ms = typeof value === 'number' ? value : Date.parse(value);
   if (!Number.isFinite(ms)) throw new Error(`canton-hubs: data non valida ${JSON.stringify(value)}`);
-  return new Date(ms).toISOString().slice(0, 10);
+  const date = new Date(ms);
+  if (!Number.isFinite(date.getTime())) throw new Error(`canton-hubs: data non valida ${JSON.stringify(value)}`);
+  return date.toISOString().slice(0, 10);
 }
 
 /** «5 ottobre 2026» / «5 October 2026» / «5. Oktober 2026» / «5 octobre 2026». */
@@ -83,7 +105,7 @@ export function fmtDay(value, locale) {
 /** «a, b e c» nelle quattro locali. */
 export function joinList(items, locale) {
   checkLocale(locale);
-  const list = items.filter(Boolean);
+  const list = Array.isArray(items) ? items.filter(Boolean) : [];
   if (list.length <= 1) return list.join('');
   const and = { it: ' e ', en: ' and ', de: ' und ', fr: ' et ' }[locale];
   return `${list.slice(0, -1).join(', ')}${and}${list[list.length - 1]}`;
@@ -104,7 +126,8 @@ export function httpsUrlOrNull(value) {
   const v = value.trim();
   if (!/^https:\/\/[^\s"<>]+$/.test(v)) return null;
   try {
-    return new URL(v).hostname ? v : null;
+    const url = new URL(v);
+    return url.hostname && !url.username && !url.password ? v : null;
   } catch {
     return null;
   }
