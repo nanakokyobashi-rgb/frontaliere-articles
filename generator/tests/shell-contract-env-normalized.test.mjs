@@ -41,10 +41,6 @@ const NOT_REACHING_CONTRACT = {
   WRITE_COLLISION_MODE:
     'host/sharedWriteRegistry.ts: letta per chiamata in currentMode(), e la probe pinna ' +
     'solo la forma di WriteCollector (typeof add/flush, skippedByHash iniziale).',
-  WRITE_COLLECTOR_CHAIN:
-    'host/batchWrite.ts: abilita solo l’ordinamento delle riscritture concorrenti; la probe ' +
-    'del contratto pinna la forma di WriteCollector (typeof add/flush, skippedByHash iniziale), ' +
-    'non la strategia di scheduling delle scritture.',
   BUILD_LOCALE: 'host/shared/localeEmitFilter.ts: non raggiunta da nessun membro del contratto.',
   FIREBASE_API_KEY:
     'host/firebaseAuthPersistence.ts: getFirebaseApiKey() è usata solo dai consumer runtime; ' +
