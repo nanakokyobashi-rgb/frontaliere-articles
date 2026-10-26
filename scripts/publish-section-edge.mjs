@@ -134,6 +134,16 @@ const sha256 = (data) => createHash('sha256').update(data).digest('hex');
 const isPlainObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
 
 /**
+ * Verify a staged CDN response without trusting an adapter to provide a body.
+ * A 200 without bytes is an incomplete propagation, not a successful staging
+ * read; callers must keep the release fail-closed and retry within their bound.
+ */
+export function hasExpectedStagingBody(served, file) {
+  if (served?.status !== 200 || !ArrayBuffer.isView(served.body)) return false;
+  return served.body.byteLength === file.bytes && sha256(served.body) === file.sha256;
+}
+
+/**
  * Lo stato di un registro ridotto a cio' che il Worker applica: per ogni
  * sezione `status`, `redirects`, `gone` (una sezione assente vale `draft`,
  * come nel Worker). `commit` e `release` non sono stato.
@@ -773,15 +783,17 @@ export async function publishRelease(
   }
   for (const file of release.files) {
     let served = { status: 0 };
+    let verified = false;
     const attempts = Math.max(1, Math.floor(stagingVerifyAttempts));
     for (let attempt = 1; attempt <= attempts; attempt++) {
       served = await io.fetchBytes(`${CDN}/${file.key}`);
-      if (served.status === 200 && served.body.length === file.bytes && sha256(served.body) === file.sha256) break;
+      verified = hasExpectedStagingBody(served, file);
+      if (verified) break;
       if (attempt < attempts) {
         await (sleep ?? ((ms) => new Promise((resolve) => setTimeout(resolve, ms))))(stagingVerifyRetryMs);
       }
     }
-    if (served.status !== 200 || served.body.length !== file.bytes || sha256(served.body) !== file.sha256) {
+    if (!verified) {
       return stopBeforeFlip('staging', `${file.key} sul CDN non corrisponde ai byte locali (HTTP ${served.status || 'nessuna risposta'})`);
     }
   }
