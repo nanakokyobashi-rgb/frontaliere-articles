@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-furti-cantone-ginevra-2025.webp",
+      "sha256": "9ffb21e5663da625fbbf5b95b17ab5c3cc7c2040b63d5afd19f34b553ccee1e1"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-furti-cantone-ginevra-2025-480w.webp",
+      "sha256": "bc61bdf8e523299709f0d173c8f417b2cadb016696722491a6feddf21678612f"
+    }
+  ]
 }
