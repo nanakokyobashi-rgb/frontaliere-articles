@@ -87,6 +87,13 @@ test('il loader corpus conserva il mapping della chiave Tankerkönig', () => {
   assert.match(source, /TANKERKOENIG_API_KEY:\s+\['TANKERKOENIG_API_KEY'\]/);
 });
 
+test('il loader espone le due Application key Maileroo senza riunirle nella chiave legacy', () => {
+  assert.deepEqual(RC_TO_ENV.MAILEROO_TRANSACTIONAL_API_KEY, ['MAILEROO_TRANSACTIONAL_API_KEY']);
+  assert.deepEqual(RC_TO_ENV.MAILEROO_NEWSLETTER_API_KEY, ['MAILEROO_NEWSLETTER_API_KEY']);
+  assert.notDeepEqual(RC_TO_ENV.MAILEROO_TRANSACTIONAL_API_KEY, RC_TO_ENV.MAILEROO_API_KEY);
+  assert.notDeepEqual(RC_TO_ENV.MAILEROO_NEWSLETTER_API_KEY, RC_TO_ENV.MAILEROO_API_KEY);
+});
+
 test('il loader nomina i parametri RC irrisolti senza loggare valori', () => {
   assert.equal(
     formatMissingRcKeys(['JOB_EMAIL_RANKING_SHRINK_K', 'JOB_EMAIL_RANKING_MAX_CONSECUTIVE_EXPOSURES']),
