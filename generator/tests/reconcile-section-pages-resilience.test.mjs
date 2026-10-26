@@ -94,6 +94,39 @@ test('headState: propaga Retry-After di HEAD 405 al GET di fallback', async () =
   assert.deepEqual(sleeps, [7_000]);
 });
 
+test('headState: attende Retry-After di HEAD 405 anche nel secondo tentativo', async () => {
+  const sleeps = [];
+  const methods = [];
+  let headAttempts = 0;
+  const state = await headState('https://cdn.test/page', async (_url, options) => {
+    methods.push(options.method);
+    if (options.method === 'HEAD') {
+      headAttempts++;
+      if (headAttempts === 1) {
+        return {
+          ok: false,
+          status: 503,
+          headers: { get: () => '0' },
+        };
+      }
+      return {
+        ok: false,
+        status: 405,
+        headers: { get: (name) => (name === 'retry-after' ? '7' : null) },
+      };
+    }
+    return {
+      ok: true,
+      status: 200,
+      headers: { get: () => null },
+    };
+  }, { retryDelayMs: 0, sleepImpl: async (ms) => sleeps.push(ms) });
+
+  assert.equal(state, 'present');
+  assert.deepEqual(methods, ['HEAD', 'HEAD', 'GET']);
+  assert.deepEqual(sleeps, [7_000]);
+});
+
 function fakeFetch({ sitemap = '503', sitemapXml } = {}) {
   const docs = {
     'manifest.json': { commit: 'abc1234' },

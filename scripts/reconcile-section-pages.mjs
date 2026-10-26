@@ -55,6 +55,10 @@ import { assertHubLocaleSlug, assertHubTopicEntries } from './lib/assert-hub-loc
 import { sitemapPaths } from './publish-section-edge.mjs';
 import { validateEdgeSectionRegistry } from './lib/section-registry.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
+import {
+  parseRetryAfterHeader,
+  parseStrictRetryAfterValue as parseStrictRetryAfterValueShared,
+} from '../generator/scripts/lib/retry-after.mjs';
 
 export const API_BASE_DEFAULT = 'https://nanakokyobashi-rgb.github.io/frontaliere-articles';
 export const CDN_BASE = 'https://cdn.frontaliereticino.ch';
@@ -110,8 +114,10 @@ async function waitBeforeRetry(
   retryAfterMs,
   maxAttempts,
   remainingBudget,
+  allowFinalServerDelay = false,
 ) {
-  if (attempt >= maxAttempts) return true;
+  if (attempt >= maxAttempts
+      && !(allowFinalServerDelay && Number.isFinite(retryAfterMs) && retryAfterMs > 0)) return true;
   const remaining = remainingBudget();
   if (remaining <= 0) return false;
   const baseDelayMs = Number.isFinite(retryDelayMs) && retryDelayMs > 0
@@ -133,50 +139,19 @@ async function waitBeforeRetry(
  * @param {number} [nowMs]
  * @returns {number|null}
  */
-const HTTP_DATE_RE = /^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} GMT$/;
-
 /**
- * Parse one Retry-After value without letting Date.parse accept unrelated
- * locale/date syntaxes or an unsafe numeric value. The cap is applied only
- * after the input has been proven representable.
+ * Parse one Retry-After value with the reconcile-specific cap.
  *
  * @param {unknown} raw
  * @param {number} [nowMs]
  * @returns {number|null}
  */
 export function parseStrictRetryAfterValue(raw, nowMs = Date.now()) {
-  if (typeof raw !== 'string' || !Number.isFinite(nowMs)) return null;
-  const value = raw.trim();
-  if (!value) return null;
-
-  let delayMs;
-  if (/^\d+$/.test(value)) {
-    const seconds = Number(value);
-    if (!Number.isSafeInteger(seconds)) return null;
-    if (seconds > RECONCILE_FETCH_MAX_RETRY_AFTER_MS / 1000) {
-      return RECONCILE_FETCH_MAX_RETRY_AFTER_MS;
-    }
-    delayMs = seconds * 1000;
-  } else {
-    if (!HTTP_DATE_RE.test(value)) return null;
-    const retryAtMs = Date.parse(value);
-    // Require the canonical IMF-fixdate spelling so Date.parse cannot turn a
-    // locale date or an invalid weekday into a valid retry delay.
-    if (!Number.isFinite(retryAtMs) || new Date(retryAtMs).toUTCString() !== value) return null;
-    delayMs = retryAtMs - nowMs;
-  }
-  if (!Number.isFinite(delayMs)) return null;
-  return Math.min(RECONCILE_FETCH_MAX_RETRY_AFTER_MS, Math.max(0, Math.ceil(delayMs)));
+  return parseStrictRetryAfterValueShared(raw, nowMs, RECONCILE_FETCH_MAX_RETRY_AFTER_MS);
 }
 
 export function parseRetryAfter(response, nowMs = Date.now()) {
-  let raw;
-  try {
-    raw = response?.headers?.get?.('retry-after');
-  } catch {
-    return null;
-  }
-  return parseStrictRetryAfterValue(raw, nowMs);
+  return parseRetryAfterHeader(response, nowMs, RECONCILE_FETCH_MAX_RETRY_AFTER_MS);
 }
 
 /** La chiave R2 (come URL sul CDN) di un path canonico di sezione. */
@@ -592,6 +567,7 @@ export async function headState(
         headRetryAfterMs,
         2,
         remainingBudget,
+        true,
       ))) return 'unknown';
       const get = await request('GET');
       if (get.status === 200) {
