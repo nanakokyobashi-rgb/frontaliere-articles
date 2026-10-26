@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-tagli-orologeria-locle-lvmh.webp",
-      "sha256": "33dac99f161f2dfa2729b0880cb484dd893a43c86b6b09ef43d2cb65db69c39f"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-tagli-orologeria-locle-lvmh-480w.webp",
-      "sha256": "05e9a82911b3c974bddc6c8e725f8e6beb96c38d8e306ecd20315f8337c0c433"
-    }
-  ]
+  "items": []
 }
