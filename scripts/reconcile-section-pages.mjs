@@ -133,6 +133,42 @@ async function waitBeforeRetry(
  * @param {number} [nowMs]
  * @returns {number|null}
  */
+const HTTP_DATE_RE = /^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} GMT$/;
+
+/**
+ * Parse one Retry-After value without letting Date.parse accept unrelated
+ * locale/date syntaxes or an unsafe numeric value. The cap is applied only
+ * after the input has been proven representable.
+ *
+ * @param {unknown} raw
+ * @param {number} [nowMs]
+ * @returns {number|null}
+ */
+export function parseStrictRetryAfterValue(raw, nowMs = Date.now()) {
+  if (typeof raw !== 'string' || !Number.isFinite(nowMs)) return null;
+  const value = raw.trim();
+  if (!value) return null;
+
+  let delayMs;
+  if (/^\d+$/.test(value)) {
+    const seconds = Number(value);
+    if (!Number.isSafeInteger(seconds)) return null;
+    if (seconds > RECONCILE_FETCH_MAX_RETRY_AFTER_MS / 1000) {
+      return RECONCILE_FETCH_MAX_RETRY_AFTER_MS;
+    }
+    delayMs = seconds * 1000;
+  } else {
+    if (!HTTP_DATE_RE.test(value)) return null;
+    const retryAtMs = Date.parse(value);
+    // Require the canonical IMF-fixdate spelling so Date.parse cannot turn a
+    // locale date or an invalid weekday into a valid retry delay.
+    if (!Number.isFinite(retryAtMs) || new Date(retryAtMs).toUTCString() !== value) return null;
+    delayMs = retryAtMs - nowMs;
+  }
+  if (!Number.isFinite(delayMs)) return null;
+  return Math.min(RECONCILE_FETCH_MAX_RETRY_AFTER_MS, Math.max(0, Math.ceil(delayMs)));
+}
+
 export function parseRetryAfter(response, nowMs = Date.now()) {
   let raw;
   try {
@@ -140,22 +176,7 @@ export function parseRetryAfter(response, nowMs = Date.now()) {
   } catch {
     return null;
   }
-  if (raw === null || raw === undefined) return null;
-  const value = String(raw).trim();
-  if (!value) return null;
-
-  let delayMs;
-  if (/^\d+$/.test(value)) {
-    const seconds = Number(value);
-    delayMs = Number.isFinite(seconds) ? seconds * 1000 : Number.NaN;
-  } else {
-    const retryAtMs = Date.parse(value);
-    delayMs = Number.isFinite(retryAtMs) && Number.isFinite(nowMs)
-      ? retryAtMs - nowMs
-      : Number.NaN;
-  }
-  if (!Number.isFinite(delayMs)) return null;
-  return Math.min(RECONCILE_FETCH_MAX_RETRY_AFTER_MS, Math.max(0, Math.ceil(delayMs)));
+  return parseStrictRetryAfterValue(raw, nowMs);
 }
 
 /** La chiave R2 (come URL sul CDN) di un path canonico di sezione. */
@@ -561,6 +582,17 @@ export async function headState(
         ))) return 'unknown';
         continue;
       }
+      // A HEAD endpoint can be unsupported while still telling us when the
+      // fallback is safe to retry. Preserve that server-directed delay before
+      // issuing GET; otherwise the fallback immediately defeats Retry-After.
+      if (headRetryAfterMs !== null && !(await waitBeforeRetry(
+        attempt,
+        0,
+        sleepImpl,
+        headRetryAfterMs,
+        2,
+        remainingBudget,
+      ))) return 'unknown';
       const get = await request('GET');
       if (get.status === 200) {
         releaseFetchWithRefTimeout(get);

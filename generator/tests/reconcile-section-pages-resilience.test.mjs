@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {
   headState,
   parseRetryAfter,
+  parseStrictRetryAfterValue,
   reconcile,
   remainingBudgetMs,
   RECONCILE_FETCH_MAX_RETRY_AFTER_MS,
@@ -30,6 +31,9 @@ test('parseRetryAfter: accetta delta-secondes e data HTTP, con cap bounded', () 
   assert.equal(parseRetryAfter(response('Sun, 25 Oct 2026 07:59:59 GMT'), now), 0);
   assert.equal(parseRetryAfter(response('not-a-delay'), now), null);
   assert.equal(parseRetryAfter(response('86400'), now), RECONCILE_FETCH_MAX_RETRY_AFTER_MS);
+  assert.equal(parseStrictRetryAfterValue('10/25/2026', now), null);
+  assert.equal(parseStrictRetryAfterValue('Mon, 25 Oct 2026 08:00:30 GMT', now), null);
+  assert.equal(parseStrictRetryAfterValue('9'.repeat(100), now), null);
 });
 
 test('remainingBudgetMs: il budget condiviso non diventa negativo', () => {
@@ -63,6 +67,30 @@ test('headState: rispetta Retry-After anche nel retry delle probe HEAD', async (
 
   assert.equal(state, 'unknown');
   assert.equal(attempts, 2);
+  assert.deepEqual(sleeps, [7_000]);
+});
+
+test('headState: propaga Retry-After di HEAD 405 al GET di fallback', async () => {
+  const sleeps = [];
+  const methods = [];
+  const state = await headState('https://cdn.test/page', async (_url, options) => {
+    methods.push(options.method);
+    if (options.method === 'HEAD') {
+      return {
+        ok: false,
+        status: 405,
+        headers: { get: (name) => (name === 'retry-after' ? '7' : null) },
+      };
+    }
+    return {
+      ok: true,
+      status: 200,
+      headers: { get: () => null },
+    };
+  }, { retryDelayMs: 0, sleepImpl: async (ms) => sleeps.push(ms) });
+
+  assert.equal(state, 'present');
+  assert.deepEqual(methods, ['HEAD', 'GET']);
   assert.deepEqual(sleeps, [7_000]);
 });
 
