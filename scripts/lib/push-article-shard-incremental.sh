@@ -203,6 +203,7 @@ permanent_fail=0
 # Set by _attempt once it has a commit to push; read by the PAT fallback after
 # the retry loop. Declared here because `set -u` is on.
 last_commit=''
+last_push_status=''
 last_skipped_newer_count=0
 last_skipped_newer_names=''
 last_history_warning_count=0
@@ -557,7 +558,7 @@ _attempt() {
   head_tree="$(git -C "$stage" rev-parse HEAD^{tree})"
   if [ "$new_tree" = "$head_tree" ]; then
     echo "$section-$loc article shard: no content changes vs remote — clean no-op ($new_count new, prev_n=$prev_n)"
-    write_push_status 'clean-no-op'
+    last_push_status='clean-no-op'
     return 0
   fi
 
@@ -579,7 +580,7 @@ _attempt() {
   # in the meantime. Re-clone onto the new tip and rebuild, don't overwrite it.
   if git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} -C "$stage" push "$SHARD_REPO" "$commit":main; then
     echo "✅ $section-$loc article shard: pushed $commit ($new_count new file(s), filecount $prev_n -> $new_total)"
-    write_push_status 'pushed'
+    last_push_status='pushed'
     return 0
   fi
   return 1
@@ -605,6 +606,7 @@ if [ "$ok" != 1 ] && [ "$permanent_fail" != 1 ] && [ -n "$last_commit" ]; then
   # tip; the tree must be rebuilt on it, never overwritten).
   if shard_pat_push "$stage" "$SHARD_REPO" "$last_commit":main "$section-$loc article shard" 0; then
     ok=1
+    last_push_status='pushed'
   fi
 fi
 
@@ -616,6 +618,6 @@ if [ "$ok" != 1 ]; then
   write_push_summary
   exit 1
 fi
-write_push_status 'pushed'
+write_push_status "${last_push_status:-pushed}"
 write_push_summary
 exit 0
