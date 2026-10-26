@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-friburgo-no-linea-diretta.webp",
+      "sha256": "558f9b8d6889d55a5d9cfd70455e876ee307ce4fedc28843ccc80bbed6af07b6"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-friburgo-no-linea-diretta-480w.webp",
+      "sha256": "cfc08cc55e44b08cc0b107afe72fc7c9176babbcf9628040fde2f1df908b1e07"
+    }
+  ]
 }
