@@ -5,48 +5,48 @@
       "articleId": "offerte-formazione-federale",
       "title": "Amministrazione federale: lavoro, praticantati e formazione",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Synthetic office illustration relevant to work and training, with no visible text, logos, faces, or specific real event; however, ",
+      "reason": "All image providers failed for article-offerte-formazione-federale: openai-codex (vision gate rejected image: Generic synthetic office-training illustration, but it includes a recognizable foreground person viewed from behind.); gemini (Gem",
       "status": "failed",
-      "failureCount": 16,
+      "failureCount": 17,
       "requestedAt": "2026-10-13T23:44:58.192Z",
-      "lastFailureAt": "2026-10-26T00:50:33.924Z"
+      "lastFailureAt": "2026-10-26T16:04:32.943Z"
     },
     {
       "articleId": "maratona-laghi-varese-2027",
       "title": "Maratona dei Laghi 2027: attesi 2000 runner tra Varese e Monate",
       "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-maratona-laghi-varese-2027: openai-codex (vision gate rejected image: Synthetic photorealistic illustration of a lakeside runner; the foreground person violates the no-recognizable-person requirement.)",
+      "reason": "All image providers failed for article-maratona-laghi-varese-2027: openai-codex (vision gate rejected image: Generic photorealistic synthetic lakeside running illustration; no readable text, logos, or visible face. The foreground runner is ",
       "status": "failed",
-      "failureCount": 9,
+      "failureCount": 10,
       "requestedAt": "2026-10-16T13:10:19.548Z",
-      "lastFailureAt": "2026-10-26T00:51:42.272Z"
+      "lastFailureAt": "2026-10-26T16:06:07.724Z"
     },
     {
       "articleId": "giovani-lavoro-futuro-ticino",
       "title": "Ai giovani non basta un lavoro. Serve un futuro",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
-      "reason": "All image providers failed for article-giovani-lavoro-futuro-ticino: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to Ticino rail commuting, but it includes a recognizable foreground person viewed from",
+      "reason": "All image providers failed for article-giovani-lavoro-futuro-ticino: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration matching Ticino cross-border commuting, with no text, logo, or visible face. Reje",
       "status": "failed",
-      "failureCount": 8,
+      "failureCount": 9,
       "requestedAt": "2026-10-16T17:37:12.235Z",
-      "lastFailureAt": "2026-10-26T00:52:45.591Z"
+      "lastFailureAt": "2026-10-26T16:07:36.274Z"
     },
     {
       "articleId": "franchigia-accordo-redditi-single",
       "title": "Credito d'imposta 2026: calcolo per il frontaliere single",
       "fallbackImage": "/images/blog/article-credito-imposta-famiglia-2026.webp",
-      "reason": "All image providers failed for article-franchigia-accordo-redditi-single: openai-codex (vision gate rejected image: Generic synthetic transit illustration relevant to cross-border commuting, but it includes a recognizable foreground person.",
+      "reason": "All image providers failed for article-franchigia-accordo-redditi-single: openai-codex (vision gate rejected image: Synthetic photorealistic illustration relevant to cross-border commuting and tax calculation; a clearly recognizable foregro",
       "status": "failed",
-      "failureCount": 4,
+      "failureCount": 5,
       "requestedAt": "2026-10-18T03:51:56.775Z",
-      "lastFailureAt": "2026-10-26T00:54:12.343Z"
+      "lastFailureAt": "2026-10-26T16:08:36.256Z"
     },
     {
       "articleId": "arianna-di-claudio-roma",
       "title": "Arianna di claudio alla festa del cinema di roma",
       "fallbackImage": "/images/places/lugano-view.webp",
       "reason": "All image providers failed for article-arianna-di-claudio-roma: openai-codex (vision gate rejected image: Synthetic photorealistic commuter-scene illustration with a recognizable foreground woman seen from behind. No visible text, logos, re",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 3,
       "requestedAt": "2026-10-18T07:27:16.643Z",
       "lastFailureAt": "2026-10-26T00:58:14.715Z"
@@ -56,7 +56,7 @@
       "title": "OCSE Svizzera: chieste riforme per sanità e crescita",
       "fallbackImage": "/images/blog/article-disoccupazione-berna-settembre-2026-stabile.webp",
       "reason": "All image providers failed for article-competitivita-svizzera-ocse-berna: openai-codex (vision gate rejected image: Generic synthetic Swiss architectural scene; a small wall placard/sign is visible, though no wording is readable. No logos, ",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 1,
       "requestedAt": "2026-10-18T08:25:09.017Z",
       "lastFailureAt": "2026-10-26T00:59:37.227Z",
@@ -67,7 +67,7 @@
       "title": "Indennità malattia interrotte: 5 passi per tutelarsi",
       "fallbackImage": "/images/blog/article-indennita-lavoro-ridotto.webp",
       "reason": "All image providers failed for article-indennita-giornaliere-stop-cosa-fare: openai-codex (vision gate rejected image: Generic synthetic train-station scene relevant to commuting and administrative paperwork, but a recognizable foreground c",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 1,
       "requestedAt": "2026-10-18T11:49:39.061Z",
       "lastFailureAt": "2026-10-26T05:45:53.618Z"
@@ -77,7 +77,7 @@
       "title": "Frontaliere licenziato nel 2026: diritti oltre 20 km",
       "fallbackImage": "/images/blog/article-lamal-guida-2026-canton-argovia.webp",
       "reason": "All image providers failed for article-tutele-frontaliero-uscita-ticino: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration with no visible text, logos, or face. It clearly shows a foreground traveler ",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 1,
       "requestedAt": "2026-10-18T16:43:36.224Z",
       "lastFailureAt": "2026-10-26T06:28:19.725Z"
@@ -87,7 +87,7 @@
       "title": "Apprendistato a Zurigo: posto, contratto, retribuzione e maturità",
       "fallbackImage": "/images/blog/apprendistato-formazione-professionale-canton-berna.webp",
       "reason": "All image providers failed for article-apprendistato-zurigo-guida-pratica: openai-codex (vision gate rejected image: Generic synthetic workshop illustration relevant to Swiss technical apprenticeship; no readable text, logos, or visible fac",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 1,
       "requestedAt": "2026-10-18T19:10:17.168Z",
       "lastFailureAt": "2026-10-26T06:31:06.413Z",
@@ -98,7 +98,7 @@
       "title": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
       "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial illustration with a foreground woman viewed from behind; books and an uneven balance suggest educa",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 1,
       "requestedAt": "2026-10-19T03:17:12.439Z",
       "lastFailureAt": "2026-10-26T06:32:29.513Z"
@@ -108,7 +108,7 @@
       "title": "Frontalieri, alle Ville Ponti il confronto sul lavoro",
       "fallbackImage": "/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp",
       "reason": "All image providers failed for article-ville-ponti-frontalieri-confronto: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to cross-border commuting, but it contains a recognizable foreground person viewe",
-      "status": "failed",
+      "status": "queued",
       "failureCount": 1,
       "requestedAt": "2026-10-20T21:30:49.827Z",
       "lastFailureAt": "2026-10-26T06:36:56.657Z"
