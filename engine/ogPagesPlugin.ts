@@ -793,10 +793,18 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const e = pos[i].end;
  const b = seoSrc.substring(s, e);
 
+ const sdType = b.match(/"@type":\s*"([^"]+)"/)?.[1] ?? '';
+
  // A dynamic assignment cannot be represented by this static renderer.
  // Skip the entry explicitly instead of letting a previous static duplicate
  // leak into OG metadata or canonical URLs.
- const dynamicField = ['title', 'description', 'keywords', 'ogTitle', 'ogDescription', 'canonicalPath', 'datePublished', 'dateModified']
+ // Event JSON-LD is parsed separately below, so guard every field that parser
+ // consumes there as well. `image`/`url` are deliberately not in this list:
+ // their BASE_URL templates are intentional and resolved by the emitter.
+ const eventFields = sdType === 'Event'
+  ? ['name', 'startDate', 'endDate', 'eventStatus', 'eventAttendanceMode', 'location', 'organizer', 'offers', 'performer']
+  : [];
+ const dynamicField = ['@type', 'title', 'description', 'keywords', 'ogTitle', 'ogDescription', 'canonicalPath', 'datePublished', 'dateModified', ...eventFields]
   .find((field) => hasInterpolatedStaticProperty(b, field));
  if (dynamicField || readStructuredSeoDescriptionState(b).dynamic) continue;
 
@@ -842,7 +850,6 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  || seoDateMod;
 
  // Extract source structuredData @type and author format
- const sdType = b.match(/"@type":\s*"([^"]+)"/)?.[1] ?? '';
  const sdAuthorHasId = /"author":\s*\{\s*"@id"/.test(b);
  // Capture the structuredData block for Event-specific fields
  const sdBlockMatch = b.match(/structuredData:\s*\{/);

@@ -80,6 +80,22 @@ test('SEO reader espone l assegnazione interpolata invece di riusare un valore s
   assert.equal(readStructuredSeoDescriptionState(block).dynamic, true);
 });
 
+test('SEO reader riconosce template interpolate annidate in wrapper e oggetti Event', () => {
+  const block = `({
+    canonicalPath: (\`${'${runtimePath}'}\`),
+    structuredData: {
+      location: {
+        name: \`${'${runtimeLocation}'}\`,
+      },
+      description: '\${notAnInterpolation}',
+    },
+  })`;
+
+  assert.equal(hasInterpolatedStaticProperty(block, 'canonicalPath'), true);
+  assert.equal(hasInterpolatedStaticProperty(block, 'location'), true);
+  assert.equal(hasInterpolatedStaticProperty(block, 'description'), false);
+});
+
 test('family source transitions are explicit and fail closed', () => {
   assert.equal(familySourceTransitionState({
     registryPresent: false,

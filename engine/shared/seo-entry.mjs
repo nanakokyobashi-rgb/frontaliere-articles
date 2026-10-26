@@ -469,20 +469,65 @@ function hasTemplateInterpolation(block, valueStart, valueEnd) {
   return false;
 }
 
+/**
+ * Return whether a value span contains an interpolated template literal.
+ *
+ * SEO producers occasionally wrap a template in a parenthesised expression
+ * (`field: (`...`${runtime}`)`). Looking only at the first value character
+ * therefore misses the dynamic assignment. Skip ordinary strings/comments so
+ * a literal such as `'${notAnInterpolation}'` remains static.
+ */
+function hasInterpolatedTemplateInRange(source, start, end) {
+  let cursor = start;
+  while (cursor < end) {
+    const character = source[cursor];
+    if (character === "'" || character === '"') {
+      const close = quotedEnd(source, cursor, character);
+      if (close < 0) return false;
+      cursor = Math.min(close + 1, end);
+      continue;
+    }
+    if (character === '/' && source[cursor + 1] === '/') {
+      const lineEnd = lineTerminatorIndex(source, cursor + 2);
+      if (lineEnd < 0) return false;
+      cursor = Math.min(lineEnd, end);
+      continue;
+    }
+    if (character === '/' && source[cursor + 1] === '*') {
+      const close = source.indexOf('*/', cursor + 2);
+      if (close < 0) return false;
+      cursor = Math.min(close + 2, end);
+      continue;
+    }
+    if (character === '`') {
+      const close = templateEnd(source, cursor);
+      const templateEndExclusive = close < 0
+        ? end
+        : Math.min(close + 1, end);
+      if (hasTemplateInterpolation(source, cursor, templateEndExclusive)) return true;
+      cursor = templateEndExclusive;
+      continue;
+    }
+    cursor += 1;
+  }
+  return false;
+}
+
 function emptyPropertyState() {
   return { assigned: false, dynamic: false, value: undefined };
 }
 
 function readPropertyState(block, valueStart, valueEnd) {
   const quote = block[valueStart];
-  if (quote !== "'" && quote !== '"' && quote !== '`') {
-    return { assigned: true, dynamic: false, value: undefined, quote };
-  }
-  if (quote === '`' && hasTemplateInterpolation(block, valueStart, valueEnd)) {
+  if ((quote === '`' || quote === '(')
+    && hasInterpolatedTemplateInRange(block, valueStart, valueEnd)) {
     // Keep the assignment visible to every consumer. Returning `undefined`
     // alone would make an interpolated final value look like an absent field,
     // which lets callers publish stale shadowed literals.
     return { assigned: true, dynamic: true, value: undefined, quote };
+  }
+  if (quote !== "'" && quote !== '"' && quote !== '`') {
+    return { assigned: true, dynamic: false, value: undefined, quote };
   }
   const literal = readStaticStringLiteral(block, valueStart, 'SEO entry', 'seo-field');
   return {
@@ -525,12 +570,12 @@ export function hasInterpolatedStaticProperty(block, field) {
   forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
     if (dynamic) return;
     const quote = block[valueStart];
-    if (key === field && quote === '`' && hasTemplateInterpolation(block, valueStart, valueEnd)) {
+    if (key === field && hasInterpolatedTemplateInRange(block, valueStart, valueEnd)) {
       dynamic = true;
       return;
     }
-    if (key === 'structuredData' && ['headline', 'datePublished', 'dateModified', 'articleSection'].includes(field)) {
-      if (quote === '`' && hasTemplateInterpolation(block, valueStart, valueEnd)) {
+    if (key === 'structuredData') {
+      if (quote !== '{' && hasInterpolatedTemplateInRange(block, valueStart, valueEnd)) {
         dynamic = true;
       } else if (quote === '{') {
         dynamic = hasInterpolatedStaticProperty(block.slice(valueStart, valueEnd), field);
@@ -619,7 +664,8 @@ export function readStructuredSeoDescriptionState(block) {
     }
     // A dynamic or non-object replacement shadows any earlier JSON-LD object.
     structuredData = undefined;
-    structuredDataDynamic = quote === '`' && hasTemplateInterpolation(block, valueStart, valueEnd);
+    structuredDataDynamic = quote !== '{'
+      && hasInterpolatedTemplateInRange(block, valueStart, valueEnd);
   });
   if (structuredDataDynamic) return { assigned: true, dynamic: true, value: undefined };
   return structuredData === undefined
