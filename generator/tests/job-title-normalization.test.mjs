@@ -17,6 +17,17 @@ test('salta il bold non introdotto e prende il primo segmento introdotto', () =>
   );
 });
 
+test('preferisce l introduzione del titolo a un preambolo generico', () => {
+  assert.equal(
+    extractNarrativeJobTitle('I need to **translate** the title: **Titolo corretto** and **nota**'),
+    'Titolo corretto',
+  );
+  assert.equal(
+    extractNarrativeJobTitle('Based on the context, **Bozza**. The title appears to be **Titolo finale**'),
+    'Titolo finale',
+  );
+});
+
 test('non tratta un titolo bold isolato come narrativa', () => {
   assert.equal(extractNarrativeJobTitle('**Titolo di lavoro**'), '');
 });
