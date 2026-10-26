@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T10:46:37.997Z",
-  "contentHash": "2cf36fb1a36f20a9e29588eae920a78144a81151dd6ee2a0681a4ed529a84ae4",
+  "updatedAt": "2026-10-26T15:12:35.468Z",
+  "contentHash": "22da298a5c7d379c7d70e7a8d035ed20431162b61f6f751bae01b355471b0a97",
   "blocks": [
     {
       "id": "chiusure-cantieri",
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "8",
+          "value": "7",
           "note": "segnalazioni aggiornate: 26 ottobre 2026"
         }
       ],
@@ -135,6 +135,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Friburgo: Consiglio di Stato rigetta linea ferroviaria diretta Friburgo-Bulle",
+          "url": "/articoli-friburgo/friburgo-no-linea-diretta/",
+          "excerpt": "Friburgo non vuole una linea ferroviaria diretta per Bulle Il postulato è stato approvato nel maggio 2022: 87 voti contro 3 Il progetto è giudicato costoso",
+          "date": "2026-10-26T15:03:53.947Z"
+        },
+        {
           "title": "Friburgo: approvato il nuovo piano della rete ciclabile",
           "url": "/articoli-friburgo/nuovo-piano-ciclabile-friburgo/",
           "excerpt": "RIMU approva il nuovo piano ciclabile cantonale Consultazione: 80 pareri e quasi 270 osservazioni Obiettivo: più bici nella vita quotidiana entro il 2042",
@@ -147,16 +153,16 @@
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
-          "title": "Abbonamenti trasporti pubblici nel Cantone di Friburgo: zone e tariffe",
-          "url": "/articoli-svizzera/trasporti-pubblici-canton-friburgo-abbonamenti/",
-          "excerpt": "Ecco i dettagli sugli abbonamenti dei trasporti pubblici nel Cantone di Friburgo.",
-          "date": "2026-08-18T00:58:21.517Z"
-        },
-        {
           "title": "Abbonamenti trasporti Friburgo: zone e tariffe",
           "url": "/articoli-svizzera/abbonamenti-trasporti-friburgo/",
           "excerpt": "Come funzionano zone tariffarie, metà-prezzo, AG e sconti per studenti negli abbonamenti trasporti del Cantone Friburgo.",
           "date": "2026-08-24T01:48:56.377Z"
+        },
+        {
+          "title": "Abbonamenti trasporti pubblici nel Cantone di Friburgo: zone e tariffe",
+          "url": "/articoli-svizzera/trasporti-pubblici-canton-friburgo-abbonamenti/",
+          "excerpt": "Ecco i dettagli sugli abbonamenti dei trasporti pubblici nel Cantone di Friburgo.",
+          "date": "2026-08-18T00:58:21.517Z"
         },
         {
           "title": "Abbonamenti trasporti pubblici canton Friburgo: zone e tariffe",
@@ -188,7 +194,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T15:12:35.468Z"
     },
     "en": {
       "canton": "FR",
@@ -203,7 +209,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "8",
+          "value": "7",
           "note": "reports as of 26 October 2026"
         }
       ],
@@ -306,6 +312,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Fribourg: State Council rejects direct Fribourg-Bulle railway line",
+          "url": "/en/fribourg-articles/fribourg-no-direct-line/",
+          "excerpt": "Fribourg does not want a direct railway line to Bulle The postulate was approved in May 2022: 87 votes to 3 The project is considered costly and technically",
+          "date": "2026-10-26T15:03:53.947Z"
+        },
+        {
           "title": "Fribourg: new cycle network plan approved",
           "url": "/en/fribourg-articles/fribourg-new-bicycle-network-plan/",
           "excerpt": "RIMU approves the new cantonal cycle plan Consultation: 80 opinions and almost 270 observations Goal: more bikes in daily life by 2042 The plan covers network",
@@ -318,16 +330,16 @@
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
-          "title": "Public transport passes in the canton of Fribourg: zones and fares",
-          "url": "/en/swiss-articles/fribourg-public-transport-abonements/",
-          "excerpt": "Here are the details on public transport subscriptions in the Canton of Fribourg.",
-          "date": "2026-08-18T00:58:21.517Z"
-        },
-        {
           "title": "Fribourg Transport Subscriptions: Zones and Rates",
           "url": "/en/swiss-articles/public-transport-subscriptions-fribourg/",
           "excerpt": "How fare zones, half-price, AG and student discounts work in the transport subscriptions of the Canton of Fribourg.",
           "date": "2026-08-24T01:48:56.377Z"
+        },
+        {
+          "title": "Public transport passes in the canton of Fribourg: zones and fares",
+          "url": "/en/swiss-articles/fribourg-public-transport-abonements/",
+          "excerpt": "Here are the details on public transport subscriptions in the Canton of Fribourg.",
+          "date": "2026-08-18T00:58:21.517Z"
         },
         {
           "title": "Public transport tickets canton Fribourg: zones and fares",
@@ -359,7 +371,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T15:12:35.468Z"
     },
     "de": {
       "canton": "FR",
@@ -374,7 +386,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "8",
+          "value": "7",
           "note": "Meldungen vom 26. Oktober 2026"
         }
       ],
@@ -477,6 +489,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Freiburg: Staatsrat lehnt direkte Bahnlinie Freiburg-Bulle ab",
+          "url": "/de/freiburg-artikel/friburg-keine-direktstrecke/",
+          "excerpt": "Freiburg will keine direkte Bahnlinie nach Bulle Das Postulat wurde im Mai 2022 angenommen: 87 Stimmen gegen 3 Das Projekt wird als kostspielig und technisch",
+          "date": "2026-10-26T15:03:53.947Z"
+        },
+        {
           "title": "Freiburg: Neuer Radnetzplan genehmigt",
           "url": "/de/freiburg-artikel/freiburg-neuer-velowegnetzplan/",
           "excerpt": "RIMU genehmigt den neuen kantonalen Radfahrplan Befassung: 80 Stellungnahmen und fast 270 Bemerkungen Ziel: Mehr Fahrräder im Alltag bis 2042 Der Plan deckt",
@@ -489,16 +507,16 @@
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
-          "title": "Öffentliche Verkehrsmittel im Kanton Freiburg: Zonen und Tarife",
-          "url": "/de/schweiz-artikel/freiburg-oeffentliche-verkehr-abos/",
-          "excerpt": "Hier finden Sie die Details zu den ÖV-Abos im Kanton Freiburg.",
-          "date": "2026-08-18T00:58:21.517Z"
-        },
-        {
           "title": "Fahrkarten Freiburg: Zonen und Tarife",
           "url": "/de/schweiz-artikel/abonnementes-oeffentliche-verkehrsmittel-freiburg/",
           "excerpt": "Wie Tarifzonen, Halbtax, GA und Studentenrabatte in den Verkehrsabos des Kantons Freiburg funktionieren.",
           "date": "2026-08-24T01:48:56.377Z"
+        },
+        {
+          "title": "Öffentliche Verkehrsmittel im Kanton Freiburg: Zonen und Tarife",
+          "url": "/de/schweiz-artikel/freiburg-oeffentliche-verkehr-abos/",
+          "excerpt": "Hier finden Sie die Details zu den ÖV-Abos im Kanton Freiburg.",
+          "date": "2026-08-18T00:58:21.517Z"
         },
         {
           "title": "Öffentliche Verkehrsmittel Kanton Freiburg: Zonen und Tarife",
@@ -530,7 +548,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T15:12:35.468Z"
     },
     "fr": {
       "canton": "FR",
@@ -545,7 +563,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "8",
+          "value": "7",
           "note": "signalements au 26 octobre 2026"
         }
       ],
@@ -648,6 +666,12 @@
       ],
       "curatedArticles": [
         {
+          "title": "Fribourg : le Conseil d’État rejette la ligne ferroviaire directe Fribourg-Bulle",
+          "url": "/fr/articles-fribourg/fribourg-pas-de-liaison-directe/",
+          "excerpt": "Fribourg ne veut pas d’une ligne ferroviaire directe vers Bulle Le postulat a été approuvé en mai 2022 : 87 voix contre 3 Le projet est jugé coûteux",
+          "date": "2026-10-26T15:03:53.947Z"
+        },
+        {
           "title": "Fribourg : le nouveau plan du réseau cyclable approuvé",
           "url": "/fr/articles-fribourg/fribourg-nouveau-plan-reseau-cyclable/",
           "excerpt": "RIMU approuve le nouveau plan cyclable cantonal Consultation : 80 avis et près de 270 observations Objectif : plus de vélos dans la vie quotidienne d'ici 2042",
@@ -660,16 +684,16 @@
           "date": "2026-10-08T21:08:07.621Z"
         },
         {
-          "title": "Abonnements transports publics dans le canton de Fribourg : zones et tarifs",
-          "url": "/fr/articles-suisse/fribourg-transports-en-commun-abonnements/",
-          "excerpt": "Voici les détails des abonnements aux transports publics dans le canton de Fribourg.",
-          "date": "2026-08-18T00:58:21.517Z"
-        },
-        {
           "title": "Abonnements transports Fribourg : zones et tarifs",
           "url": "/fr/articles-suisse/abonnements-transports-publics-fribourg/",
           "excerpt": "Comment fonctionnent les zones tarifaires, demi-tarif, AG et réductions pour étudiants dans les abonnements transports du canton de Fribourg.",
           "date": "2026-08-24T01:48:56.377Z"
+        },
+        {
+          "title": "Abonnements transports publics dans le canton de Fribourg : zones et tarifs",
+          "url": "/fr/articles-suisse/fribourg-transports-en-commun-abonnements/",
+          "excerpt": "Voici les détails des abonnements aux transports publics dans le canton de Fribourg.",
+          "date": "2026-08-18T00:58:21.517Z"
         },
         {
           "title": "Abonnements transports publics canton de Fribourg : zones et tarifs",
@@ -701,7 +725,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-26T10:46:37.997Z"
+      "updatedAt": "2026-10-26T15:12:35.468Z"
     }
   }
 }
