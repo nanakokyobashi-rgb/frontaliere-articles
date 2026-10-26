@@ -2693,6 +2693,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/retry-after.mjs",
+      "mode": "corpus-only",
+      "reason": "Parser condiviso dal generatore corpus-side per validare Retry-After come delta-seconds safe o IMF-fixdate canonica prima del cap locale; il sito mantiene i propri consumer e non possiede questo helper, quindi non va importato oltre il confine del publisher.",
+      "baseline": {
+        "site": null,
+        "corpus": "693ab6cc0de5e05a",
+        "alignedAt": "2026-10-26"
+      }
+    },
+    {
       "path": "generator/scripts/lib/provider-preflight.mjs",
       "mode": "corpus-only",
       "reason": "Preflight zero-inference che censisce i provider disponibili prima delle chiamate del generatore e distingue credenziali mancanti, rete irraggiungibile e quota bloccata. E' consumato dai workflow di produzione del corpus; il sito non possiede il gemello ne' questi entry point del generatore, quindi non c'e' nulla da portare.",
