@@ -133,6 +133,18 @@ export const STAGING_VERIFY_RETRY_MS = 4000;
 const sha256 = (data) => createHash('sha256').update(data).digest('hex');
 const isPlainObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
 
+/** Keep adapter/test overrides finite and ensure the verification loop runs. */
+export function normalizeStagingVerifyAttempts(value) {
+  let numeric;
+  try {
+    numeric = Number(value);
+  } catch {
+    return STAGING_VERIFY_ATTEMPTS;
+  }
+  if (!Number.isFinite(numeric)) return STAGING_VERIFY_ATTEMPTS;
+  return Math.max(1, Math.floor(numeric));
+}
+
 /**
  * Lo stato di un registro ridotto a cio' che il Worker applica: per ogni
  * sezione `status`, `redirects`, `gone` (una sezione assente vale `draft`,
@@ -773,7 +785,7 @@ export async function publishRelease(
   }
   for (const file of release.files) {
     let served = { status: 0 };
-    const attempts = Math.max(1, Math.floor(stagingVerifyAttempts));
+    const attempts = normalizeStagingVerifyAttempts(stagingVerifyAttempts);
     for (let attempt = 1; attempt <= attempts; attempt++) {
       served = await io.fetchBytes(`${CDN}/${file.key}`);
       if (served.status === 200 && served.body.length === file.bytes && sha256(served.body) === file.sha256) break;
