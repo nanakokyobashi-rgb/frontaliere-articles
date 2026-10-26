@@ -283,10 +283,38 @@ collect_path_scoped_commits() {
   fi
 }
 
+# Return every path changed by a commit against every one of its parents.
+# Comparing only "$commit^" is insufficient for a merge whose resolved tree
+# happens to match the first parent for a requested path: that path can still
+# differ from a non-first parent and therefore be part of the newer
+# publication. A shallow commit with no readable parents remains unreadable;
+# only a genuine root commit is allowed to use --root.
+diffTreeMergeParents() {
+  local commit="$1"
+  local parent_line parent
+  parent_line="$(git -C "$stage" rev-list --parents -n 1 "$commit" 2>/dev/null)" || return 1
+  [ -n "$parent_line" ] || return 1
+
+  set -- $parent_line
+  [ "$1" = "$commit" ] || return 1
+  shift
+  if [ "$#" -eq 0 ]; then
+    if [ -f "$shallow_file" ] && grep -qx "$commit" "$shallow_file" 2>/dev/null; then
+      return 1
+    fi
+    git -C "$stage" diff-tree --root --no-commit-id --name-only -r "$commit" 2>/dev/null
+    return $?
+  fi
+
+  for parent in "$@"; do
+    git -C "$stage" diff-tree --no-commit-id --name-only -r "$parent" "$commit" 2>/dev/null || return 1
+  done
+}
+
 collect_remote_newer_paths() {
   local own_revision="$1"
   local own_epoch="${own_revision%%.*}"
-  local head_epoch boundary commits commit commit_epoch trailer trailer_valid trailer_wins parent changed_path changed_paths shallow_file requested_path
+  local head_epoch boundary commits commit commit_epoch trailer trailer_valid trailer_wins changed_path changed_paths shallow_file requested_path
   remote_newer_paths=()
 
   head_epoch="$(git -C "$stage" show -s --format=%ct HEAD 2>/dev/null)" || {
@@ -363,13 +391,7 @@ collect_remote_newer_paths() {
     # commit without exactly one valid Content-Rev is not harmless when it
     # touches one of the requested pages: its ordering is unknowable and must
     # fail closed.
-    if parent="$(git -C "$stage" rev-parse --verify --quiet "$commit^" 2>/dev/null)"; then
-      changed_paths="$(git -C "$stage" diff-tree --no-commit-id --name-only -r "$parent" "$commit" 2>/dev/null)" || changed_paths='__unreadable__'
-    elif [ -f "$shallow_file" ] && grep -qx "$commit" "$shallow_file" 2>/dev/null; then
-      changed_paths='__unreadable__'
-    else
-      changed_paths="$(git -C "$stage" diff-tree --root --no-commit-id --name-only -r "$commit" 2>/dev/null)" || changed_paths='__unreadable__'
-    fi
+    changed_paths="$(diffTreeMergeParents "$commit")" || changed_paths='__unreadable__'
     if [ "$changed_paths" = '__unreadable__' ]; then
       history_unavailable "cannot list the paths of shard commit $commit"
       return 1
