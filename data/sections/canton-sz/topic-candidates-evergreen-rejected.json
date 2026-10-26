@@ -51,6 +51,14 @@
     "canton-sz::https://www.marchanzeiger.ch/2026/10/26/jede-gemeinde-muesste-fuenf-prozent-ihres-budgets-fuer-soziale-kontakte-ausgeben": {
       "section": "canton-sz",
       "ts": 1793032379995
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/falsche-lohnausweise-fuer-luzerner-kantonsatsmitglieder-nachzahlungen-faellig-art-1728713": {
+      "section": "canton-sz",
+      "ts": 1793036096681
+    },
+    "canton-sz::https://www.bote.ch/nachrichten/zentralschweiz/laermblitzer-kantonsrat-bremst-forderung-der-gruenen-art-1728786": {
+      "section": "canton-sz",
+      "ts": 1793036115576
     }
   }
 }
