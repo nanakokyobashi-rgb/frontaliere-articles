@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "eventi",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "1fb70045937e0cfa81998f379d1ecb0332982d11cba09f2aafba4a4872e9f831",
+  "updatedAt": "2026-10-26T22:07:17.679Z",
+  "contentHash": "e09c46ca9648266492bd359d749a0ec497723017eb7157b189608f9e8aa143b3",
   "blocks": [
     {
       "id": "prossimi-eventi",
@@ -107,6 +107,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-10-26T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694110"
+            },
+            {
               "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
               "date": "2026-10-25T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7253945"
@@ -130,11 +135,6 @@
               "label": "Salonkonzert",
               "date": "2026-10-22T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
-            },
-            {
-              "label": "Wissen am Mittag",
-              "date": "2026-10-22T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
             }
           ],
           "updatedAt": "2026-10-26T11:33:49.792Z"
@@ -171,7 +171,7 @@
           "url": "/eventi/lucerna/questo-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T22:07:17.679Z"
     },
     "en": {
       "canton": "LU",
@@ -261,6 +261,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-10-26T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694110"
+            },
+            {
               "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
               "date": "2026-10-25T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7253945"
@@ -284,11 +289,6 @@
               "label": "Salonkonzert",
               "date": "2026-10-22T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
-            },
-            {
-              "label": "Wissen am Mittag",
-              "date": "2026-10-22T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
             }
           ],
           "updatedAt": "2026-10-26T11:33:49.792Z"
@@ -325,7 +325,7 @@
           "url": "/en/events/lucerne/this-weekend/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T22:07:17.679Z"
     },
     "de": {
       "canton": "LU",
@@ -415,6 +415,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-10-26T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694110"
+            },
+            {
               "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
               "date": "2026-10-25T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7253945"
@@ -438,11 +443,6 @@
               "label": "Salonkonzert",
               "date": "2026-10-22T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
-            },
-            {
-              "label": "Wissen am Mittag",
-              "date": "2026-10-22T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
             }
           ],
           "updatedAt": "2026-10-26T11:33:49.792Z"
@@ -479,7 +479,7 @@
           "url": "/de/veranstaltungen/luzern/dieses-wochenende/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T22:07:17.679Z"
     },
     "fr": {
       "canton": "LU",
@@ -569,6 +569,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Winter Qi Gong Inseli",
+              "date": "2026-10-26T23:00:00.000Z",
+              "url": "https://www.stadtluzern.ch/_rte/anlass/7694110"
+            },
+            {
               "label": "Energie Apéro Luzern: Regenerative Baumaterialien – eine Wiederentdeckung",
               "date": "2026-10-25T23:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7253945"
@@ -592,11 +597,6 @@
               "label": "Salonkonzert",
               "date": "2026-10-22T22:00:00.000Z",
               "url": "https://www.stadtluzern.ch/_rte/anlass/7463710"
-            },
-            {
-              "label": "Wissen am Mittag",
-              "date": "2026-10-22T22:00:00.000Z",
-              "url": "https://www.stadtluzern.ch/_rte/anlass/7649788"
             }
           ],
           "updatedAt": "2026-10-26T11:33:49.792Z"
@@ -633,7 +633,7 @@
           "url": "/fr/evenements/lucerne/ce-week-end/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T22:07:17.679Z"
     }
   }
 }
