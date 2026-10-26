@@ -14,16 +14,23 @@ import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../../generator
 export const SECTION_BOOTSTRAP_LOCK_PREFIX = 'edge/sections/_bootstrap-locks';
 export const SECTION_BOOTSTRAP_LOCK_SCHEMA = 1;
 // fast-publish-section.yml può durare al massimo 360m: il producer ha quindi
-// 15m di margine per terminare prima che un runner morto diventi reclaimable.
+// 15m di margine per terminare prima che un marker non verificabile diventi
+// reclaimable. Un acquire verifica prima lo stato dell'attempt GitHub e prende
+// in carico subito un marker il cui owner e' gia' terminato; il TTL resta il
+// fallback per una run che non si puo' interrogare.
 export const SECTION_BOOTSTRAP_LOCK_TTL_MS = 375 * 60 * 1000;
 // publish-api ha un timeout di 180m. Il publisher usa un TTL separato e
-// bounded al proprio job, con lo stesso margine di cleanup; un cancel non può
-// lasciare il gate edge bloccato per il resto del TTL del producer.
+// bounded al proprio job, con lo stesso margine di cleanup.
 export const SECTION_EDGE_PUBLISHER_LOCK_TTL_MS = 195 * 60 * 1000;
 export const SECTION_BOOTSTRAP_LOCK_CACHE_CONTROL = 'public,max-age=5';
+export const SECTION_BOOTSTRAP_OWNER_STATUS_CACHE_MS = 60 * 1000;
 const SECTION_RE = /^canton-[a-z]+$/;
 const SHA_RE = /^[a-f0-9]{7,64}$/;
+const OWNER_RE = /^([^:]+\/[^:]+):(\d+):(\d+)$/;
+const GITHUB_API_BASE = 'https://api.github.com';
+const RUN_STATES = new Set(['queued', 'in_progress', 'waiting', 'requested', 'pending']);
 const LOCK_ROLES = new Set(['bootstrap', 'edge-publisher', 'released']);
+const ownerStatusCache = new Map();
 
 export function sectionBootstrapLockKey(section) {
   if (typeof section !== 'string' || !SECTION_RE.test(section)) {
@@ -42,6 +49,81 @@ export function bootstrapLockOwner(env = process.env) {
   const run = String(env.GITHUB_RUN_ID || process.pid).trim();
   const attempt = String(env.GITHUB_RUN_ATTEMPT || '1').trim();
   return `${repository}:${run}:${attempt}`;
+}
+
+export function parseBootstrapLockOwner(owner) {
+  const match = typeof owner === 'string' ? OWNER_RE.exec(owner.trim()) : null;
+  if (!match) return null;
+  return { repository: match[1], runId: match[2], attempt: match[3] };
+}
+
+export function classifyBootstrapLockOwnerRun(payload) {
+  if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
+    return { state: 'unknown', reason: 'risposta GitHub non oggetto' };
+  }
+  if (payload.status === 'completed') {
+    return {
+      state: 'terminal',
+      status: payload.status,
+      conclusion: typeof payload.conclusion === 'string' ? payload.conclusion : null,
+    };
+  }
+  if (typeof payload.status === 'string' && RUN_STATES.has(payload.status)) {
+    return { state: 'active', status: payload.status };
+  }
+  return { state: 'unknown', reason: `stato GitHub inatteso: ${String(payload.status ?? '(assente)')}` };
+}
+
+export function clearBootstrapLockOwnerStatusCache() {
+  ownerStatusCache.clear();
+}
+
+export async function readBootstrapLockOwnerRun(
+  owner,
+  {
+    fetchImpl = fetch,
+    env = process.env,
+    now = Date.now,
+    apiBase = GITHUB_API_BASE,
+    cache = true,
+  } = {},
+) {
+  const parsed = parseBootstrapLockOwner(owner);
+  if (!parsed) return { state: 'unknown', reason: 'owner non associato a un attempt GitHub' };
+  const token = String(env.GH_TOKEN || env.GITHUB_TOKEN || '').trim();
+  if (!token) return { state: 'unknown', reason: 'token GitHub assente' };
+  const cacheKey = `${apiBase}|${owner}`;
+  const checkedAt = now();
+  const cached = ownerStatusCache.get(cacheKey);
+  if (cache && cached && checkedAt - cached.checkedAt < SECTION_BOOTSTRAP_OWNER_STATUS_CACHE_MS) return cached.value;
+
+  const [repositoryOwner, repositoryName] = parsed.repository.split('/');
+  const url = `${String(apiBase).replace(/\/+$/, '')}/repos/${encodeURIComponent(repositoryOwner)}/${encodeURIComponent(repositoryName)}/actions/runs/${parsed.runId}/attempts/${parsed.attempt}`;
+  let result;
+  try {
+    const response = await fetchWithRefTimeout(url, {
+      headers: {
+        accept: 'application/vnd.github+json',
+        authorization: `Bearer ${token}`,
+        'user-agent': 'frontaliere-section-bootstrap-lock/1',
+        'x-github-api-version': '2022-11-28',
+      },
+    }, 15_000, fetchImpl);
+    const body = await response.text();
+    if (!response.ok) {
+      result = { state: 'unknown', reason: `GitHub Actions API HTTP ${response.status}` };
+    } else {
+      try {
+        result = classifyBootstrapLockOwnerRun(JSON.parse(body));
+      } catch {
+        result = { state: 'unknown', reason: 'risposta GitHub non JSON' };
+      }
+    }
+  } catch (error) {
+    result = { state: 'unknown', reason: error?.message ?? String(error) };
+  }
+  if (cache) ownerStatusCache.set(cacheKey, { checkedAt, value: result });
+  return result;
 }
 
 export function makeSectionBootstrapLock({

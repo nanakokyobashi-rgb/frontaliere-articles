@@ -888,6 +888,7 @@ jobs:
           SECTION: ${{ matrix.target.section }}
           LOCK_WAIT_MS: 3300000
           LOCK_RETRY_MS: 20000
+          GH_TOKEN: ${{ github.token }}
         run: node scripts/ci/section-bootstrap-lock.mjs acquire --section "$SECTION" --commit "$(git rev-parse HEAD)" --wait-ms "$LOCK_WAIT_MS" --retry-ms "$LOCK_RETRY_MS"
 
       - name: Render, validate and publish the section pages

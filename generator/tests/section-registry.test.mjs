@@ -1768,6 +1768,8 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
     '      - name: Publish the canton sections release to the edge',
     '        id: publish_edge',
     "        if: steps.deploy.outcome == 'success'",
+    '        env:',
+    '          GH_TOKEN: ${{ github.token }}',
     '        run: node scripts/publish-section-edge.mjs',
   ].join('\n'));
   // Nessuno step fra il flip e la notifica, e la notifica non porta
