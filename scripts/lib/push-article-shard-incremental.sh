@@ -67,7 +67,8 @@
 #   ARTICLE_PUSH_STATUS_FILE — optional one-line outcome for the caller:
 #       `pushed`, `clean-no-op`, `remote-newer`, or `failed`.
 #   ARTICLE_PUSH_SKIPPED_PATHS_FILE — optional file receiving one relative path
-#       per line when the monotonic guard keeps a newer remote publication.
+#       per line when the monotonic guard keeps a newer remote publication;
+#       when set, failure to reset or write this metadata fails the push.
 #
 # Exit codes:
 #   0 — pushed, or a clean no-op (identical content already live, or the
@@ -209,6 +210,9 @@ last_push_status=''
 last_skipped_newer_count=0
 last_skipped_newer_names=''
 last_skipped_newer_paths=()
+last_commit_skipped_newer_count=0
+last_commit_skipped_newer_names=''
+last_commit_skipped_newer_paths=()
 last_history_warning_count=0
 
 article_content_revision="${ARTICLE_CONTENT_REVISION:-}"
@@ -439,18 +443,37 @@ reset_skipped_newer_paths() {
   local skipped_file="${ARTICLE_PUSH_SKIPPED_PATHS_FILE:-}"
   [ -n "$skipped_file" ] || return 0
   if ! mkdir -p "$(dirname "$skipped_file")" 2>/dev/null; then
-    echo "::warning::unable to create skipped-path directory for $skipped_file" >&2
-    return 0
+    echo "::error::unable to create skipped-path directory for $skipped_file" >&2
+    return 1
   fi
-  : > "$skipped_file" || echo "::warning::unable to reset skipped-path file $skipped_file" >&2
+  if ! : > "$skipped_file"; then
+    echo "::error::unable to reset skipped-path file $skipped_file" >&2
+    return 1
+  fi
 }
 
 write_skipped_newer_paths() {
   local skipped_file="${ARTICLE_PUSH_SKIPPED_PATHS_FILE:-}"
   [ -n "$skipped_file" ] || return 0
-  if [ "${#last_skipped_newer_paths[@]}" -gt 0 ]; then
-    printf '%s\n' "${last_skipped_newer_paths[@]}" > "$skipped_file" || true
+  if ! mkdir -p "$(dirname "$skipped_file")" 2>/dev/null; then
+    echo "::error::unable to create skipped-path directory for $skipped_file" >&2
+    return 1
   fi
+  if ! : > "$skipped_file"; then
+    echo "::error::unable to reset skipped-path file $skipped_file" >&2
+    return 1
+  fi
+  if [ "${#last_skipped_newer_paths[@]}" -gt 0 ] && ! printf '%s\n' "${last_skipped_newer_paths[@]}" > "$skipped_file"; then
+    echo "::error::unable to write skipped-path file $skipped_file" >&2
+    return 1
+  fi
+}
+
+restore_last_commit_skipped_newer_paths() {
+  last_skipped_newer_count="$last_commit_skipped_newer_count"
+  last_skipped_newer_names="$last_commit_skipped_newer_names"
+  last_skipped_newer_paths=("${last_commit_skipped_newer_paths[@]}")
+  write_skipped_newer_paths
 }
 
 write_push_status() {
@@ -465,7 +488,9 @@ write_push_status() {
 
 _attempt() {
   rm -rf "$stage"
-  reset_skipped_newer_paths
+  if ! reset_skipped_newer_paths; then
+    return 1
+  fi
   local clone_err
   clone_err="$(mktemp)"
   if ! git ${GIT_PAT_OPTS[@]+"${GIT_PAT_OPTS[@]}"} clone -q --depth 1 --filter=blob:none --no-checkout "$SHARD_REPO" "$stage" 2>"$clone_err"; then
@@ -523,7 +548,9 @@ _attempt() {
 
   last_skipped_newer_count="${#skipped_newer_paths[@]}"
   last_skipped_newer_paths=("${skipped_newer_paths[@]}")
-  write_skipped_newer_paths
+  if ! write_skipped_newer_paths; then
+    return 1
+  fi
   if [ "$last_skipped_newer_count" -gt 0 ]; then
     local skipped_name shown_count=0
     for skipped_name in "${skipped_newer_paths[@]}"; do
@@ -601,8 +628,13 @@ _attempt() {
       -m "$section-$loc article fast-push (${GITHUB_SHA:-local}) — +$new_count new, ${#eligible_relpaths[@]} path(s) touched")" || return 1
   fi
   # Published for the PAT fallback below: it re-pushes THIS commit, so it must
-  # outlive the function scope.
+  # outlive the function scope. Keep the exact skipped-path set beside it: a
+  # later retry resets the shared metadata file before cloning, and a fallback
+  # must restore the set belonging to this commit rather than the later try.
   last_commit="$commit"
+  last_commit_skipped_newer_count="$last_skipped_newer_count"
+  last_commit_skipped_newer_names="$last_skipped_newer_names"
+  last_commit_skipped_newer_paths=("${last_skipped_newer_paths[@]}")
 
   # Never `push -f`: a non-fast-forward here means someone else (the periodic
   # full deploy's push-section-shard.sh, or another fast-path publish) pushed
@@ -633,7 +665,7 @@ if [ "$ok" != 1 ] && [ "$permanent_fail" != 1 ] && [ -n "$last_commit" ]; then
   # that misses the fast path waits for the next full deploy. force=0 — a
   # non-fast-forward here still has to FAIL (a concurrent full deploy moved the
   # tip; the tree must be rebuilt on it, never overwritten).
-  if shard_pat_push "$stage" "$SHARD_REPO" "$last_commit":main "$section-$loc article shard" 0; then
+  if restore_last_commit_skipped_newer_paths && shard_pat_push "$stage" "$SHARD_REPO" "$last_commit":main "$section-$loc article shard" 0; then
     ok=1
     last_push_status='pushed'
   fi

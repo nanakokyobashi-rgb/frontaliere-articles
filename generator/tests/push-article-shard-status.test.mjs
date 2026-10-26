@@ -71,3 +71,11 @@ test('reports clean-no-op when the incoming tree is already live', () => {
     rmSync(root, { recursive: true, force: true });
   }
 });
+
+test('il metadata remote-newer è obbligatorio e resta associato al commit del fallback', () => {
+  const source = readFileSync(PUSHER, 'utf8');
+  assert.match(source, /if ! reset_skipped_newer_paths; then\s+return 1/u);
+  assert.match(source, /if ! write_skipped_newer_paths; then\s+return 1/u);
+  assert.match(source, /last_commit_skipped_newer_paths=\("\$\{last_skipped_newer_paths\[@\]\}"\)/u);
+  assert.match(source, /restore_last_commit_skipped_newer_paths && shard_pat_push/u);
+});
