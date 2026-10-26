@@ -34,6 +34,7 @@ import { buildHubIntro, foreignToponymsInCopy } from './copy.mjs';
 import { curatedEntry } from './articles.mjs';
 import { buildHubLinks } from './links.mjs';
 import { HUB_LOCALES } from './format.mjs';
+import { httpsUrlOrNull } from '../../../../engine/shared/httpsUrl.mjs';
 import { hubFilePath, hubFilePaths } from './paths.mjs';
 
 export const HUB_SCHEMA_VERSION = 1;
@@ -96,7 +97,7 @@ export { hubFilePath, hubFilePaths };
 
 function checkHref(url, what) {
   const value = String(url ?? '').trim();
-  if (/^https:\/\/[^\s"<>]+$/.test(value)) return;
+  if (httpsUrlOrNull(value)) return;
   if (/^\/(?!\/)[^\s"<>]*$/.test(value)) {
     if (!value.split(/[?#]/)[0].endsWith('/')) throw new Error(`${what}: link interno senza slash finale: ${value}`);
     return;

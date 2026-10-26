@@ -7,6 +7,8 @@
  * scritte qui.
  */
 
+export { httpsUrlOrNull } from '../../../../engine/shared/httpsUrl.mjs';
+
 export const HUB_LOCALES = Object.freeze(['it', 'en', 'de', 'fr']);
 
 const GROUP_SEP = { it: '.', en: ',', de: '’', fr: ' ' };
@@ -121,14 +123,3 @@ export function clip(text, max = 180) {
 }
 
 /** `https://…` valido per il renderer (che rifiuta http e URL con spazi), oppure null. */
-export function httpsUrlOrNull(value) {
-  if (typeof value !== 'string') return null;
-  const v = value.trim();
-  if (!/^https:\/\/[^\s"<>]+$/.test(v)) return null;
-  try {
-    const url = new URL(v);
-    return url.hostname && !url.username && !url.password ? v : null;
-  } catch {
-    return null;
-  }
-}

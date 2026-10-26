@@ -1378,6 +1378,8 @@ test('il producer rifiuta cio\' che il renderer rifiuterebbe o scarterebbe in si
   bad((i) => { delete i.dataBlocks[0].sourceName; i.dataBlocks[0].sourceUrl = 'https://example.org/'; }, /sourceUrl senza sourceName/);
   bad((i) => { i.keyFacts.push({ label: 'x', value: 'y', sourceUrl: 'https://example.org/' }); }, /sourceUrl senza sourceName/);
   bad((i) => { i.links[0].url = 'http://example.org/'; }, /URL non ammesso/);
+  bad((i) => { i.links[0].url = 'https://user:pass@example.org/'; }, /URL non ammesso/);
+  bad((i) => { i.links[0].url = 'https://%75ser:pass@example.org/'; }, /URL non ammesso/);
   bad((i) => { i.links[0].url = '/senza-slash'; }, /senza slash finale/);
   bad((i) => { i.links.push({ ...i.links[0] }); }, /link duplicato/);
   bad((i) => { i.dataBlocks[0].id = 'Non Valido'; }, /id non valido/);

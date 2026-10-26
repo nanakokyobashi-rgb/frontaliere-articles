@@ -27,10 +27,17 @@ import {
 import { acceptCommonsCandidate, finalizeCreditRecord, writeCreditRecord } from '../scripts/lib/commons-credit.mjs';
 import { relativeImportClosure } from './lib/reachable-source.mjs';
 import { imageCreditParts, imageObjectCreditFields, validateImageCreditRecord } from '../../engine/shared/imageCredits.mjs';
+import { httpsUrlOrNull } from '../../engine/shared/httpsUrl.mjs';
 import { CORPUS_SECTIONS } from '../../scripts/lib/corpus-sections.mjs';
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const SNAPSHOT = JSON.parse(fs.readFileSync(new URL('./fixtures/commons-credit/probe-2026-10-04.snapshot.json', import.meta.url), 'utf-8'));
+
+test('shared HTTPS link predicate rejects embedded credentials on every surface', () => {
+  assert.equal(httpsUrlOrNull('https://user:pass@example.org/source'), null);
+  assert.equal(httpsUrlOrNull('https://%75ser:pass@example.org/source'), null);
+  assert.equal(httpsUrlOrNull('https://example.org/source'), 'https://example.org/source');
+});
 
 function recordFor(title, cover, modified = 'cropped') {
   const verdict = acceptCommonsCandidate({ title, ...SNAPSHOT.files[title] }, { fetchedAt: '2026-10-04' });
