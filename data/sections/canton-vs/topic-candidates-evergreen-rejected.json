@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-vs::https://www.pomona.ch/story/818120/vom-schalter-direkt-auf-den-bildschirm-wie-der-kanton-beh%c3%b6rdeng%c3%a4nge-digitalisiert": {
-      "section": "canton-vs",
-      "ts": 1792771189733
-    },
-    "canton-vs::https://www.pomona.ch/story/817103/bessere-arbeitsbedingungen-in-der-pflege-k%c3%b6nnten-sich-auch-finanziell-lohnen": {
-      "section": "canton-vs",
-      "ts": 1792771191209
-    },
-    "canton-vs::https://www.pomona.ch/story/809392/die-kaufkraftillusion-wie-krankenkassen-und-benzin-das-walliser-budget-fressen": {
-      "section": "canton-vs",
-      "ts": 1792788128173
-    },
     "canton-vs::https://www.pomona.ch/story/817691/just-eat-k%c3%bcndigt-massenentlassung-an-700-kuriere-bangen-um-ihren-job": {
       "section": "canton-vs",
       "ts": 1792871910996
@@ -27,6 +15,14 @@
     "canton-vs::https://www.pomona.ch/story/817791/finanzkommission-gibt-trotz-%c3%bcber-hundert-neuer-stellen-gr%c3%bcnes-licht": {
       "section": "canton-vs",
       "ts": 1792929031730
+    },
+    "canton-vs::https://www.pomona.ch/story/818120/vom-schalter-direkt-auf-den-bildschirm-wie-der-kanton-beh%c3%b6rdeng%c3%a4nge-digitalisiert": {
+      "section": "canton-vs",
+      "ts": 1793012531708
+    },
+    "canton-vs::https://vework-public.vs.ch/app/publication/fr/08-03-2026/3": {
+      "section": "canton-vs",
+      "ts": 1793012534056
     }
   }
 }
