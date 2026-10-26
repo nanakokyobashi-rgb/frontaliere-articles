@@ -207,7 +207,7 @@ test('issue-fix legge il set identical trusted con il PAT runtime, senza fallbac
   const end = yaml.indexOf('\n      - name:', start + 1);
   const step = yaml.slice(start, end < 0 ? yaml.length : end);
   const exportAt = step.indexOf('export GH_TOKEN="$runtime_pat"');
-  const lookupAt = step.indexOf('trusted_sha=$(gh api');
+  const lookupAt = step.indexOf('trusted_sha=$(timeout --kill-after=1s 60s gh api');
   assert.match(step, /runtime_pat="\$\{GITHUB_PAT_NANAKO:-\}"/);
   assert.match(step, /if \[ -z "\$runtime_pat" \]; then[\s\S]*available=false/);
   assert.ok(exportAt >= 0, 'il PAT operativo non viene esportato nel preflight trusted');

@@ -315,7 +315,7 @@ jobs:
             echo "::error::source_commit non e' una SHA completa"
             exit 1
           fi
-          if ! current_main="$(gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
+          if ! current_main="$(timeout --kill-after=1s 60s gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
             echo "::error::impossibile verificare la HEAD corrente di main per il replay bounded"
             exit 1
           fi

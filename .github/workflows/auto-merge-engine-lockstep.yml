@@ -166,7 +166,7 @@ jobs:
           fi
           CHECK_RUNS_FILE="$RUNNER_TEMP/lockstep-check-runs.json"
           CHECK_RUNS_EXIT=0
-          if gh api --paginate --slurp \
+          if timeout --kill-after=1s 60s gh api --paginate --slurp \
             "repos/${GH_REPO}/commits/${HEAD_SHA}/check-runs?filter=all&per_page=100" > "$CHECK_RUNS_FILE"; then
             CHECK_RUNS_EXIT=0
           else
