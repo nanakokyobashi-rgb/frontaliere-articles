@@ -143,11 +143,13 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           # La query Actions filtra per created, non updated. Il detector realtime
-          # limita quindi la pre-finestra a 6 ore: il job non percorre più giorni
-          # di run storiche per trovare aggiornamenti recenti. Un deep scan
-          # retention-complete usa un override esplicito senza questo budget.
+          # mantiene quindi l'orizzonte bounded di 3 giorni del detector: include
+          # anche run rimaste in coda o in attesa di approvazione prima di diventare
+          # cancellate/fallite, senza percorrere l'intera retention di 35 giorni.
+          # Un deep scan retention-complete usa un override esplicito senza questo
+          # budget.
           TIMEOUT_SCAN_ALLOW_TRUNCATED_CREATED_HORIZON: 'true'
-          TIMEOUT_SCAN_MAX_RUN_AGE_MINUTES: '360'
+          TIMEOUT_SCAN_MAX_RUN_AGE_MINUTES: '4320'
           # NON si interpola `env.SCAN_RESOLVED_LOOKBACK_MIN` qui: una variabile
           # scritta in `GITHUB_ENV` da un passo precedente non alimenta in modo
           # affidabile il context `env.*` del passo successivo — è la stessa
