@@ -4,26 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-02/bei-der-wefa-in-thayngen-kommt-es-zu-einem-wechsel": {
-      "section": "canton-sh",
-      "ts": 1792832596766
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-01/gf-verkauft-luft-und-raumfahrt-sowie-industriegasturbinen": {
-      "section": "canton-sh",
-      "ts": 1792833343992
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-07/georg-fischer-schlaegt-ton-buechner-als-neuen-praesidenten": {
-      "section": "canton-sh",
-      "ts": 1792833345735
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-23/gvs-weine-ag-verlaesst-herblingen-und-zieht-nach-osterfingen": {
-      "section": "canton-sh",
-      "ts": 1792833347512
-    },
-    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-12/gf-vizepraesidentin-gehoert-zu-den-top-100-women-in-business": {
-      "section": "canton-sh",
-      "ts": 1792833349171
-    },
     "canton-sh::https://www.schaffhausen24.ch/articles/414647-boerse-neunmonatszahlen-und-ki-korrektur": {
       "section": "canton-sh",
       "ts": 1792924462014
@@ -35,6 +15,18 @@
     "canton-sh::https://www.schaffhausen24.ch/articles/414655-rutschgefahr-in-der-rhybadi": {
       "section": "canton-sh",
       "ts": 1792937557307
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-10-02/bei-der-wefa-in-thayngen-kommt-es-zu-einem-wechsel": {
+      "section": "canton-sh",
+      "ts": 1793013449004
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-23/gvs-weine-ag-verlaesst-herblingen-und-zieht-nach-osterfingen": {
+      "section": "canton-sh",
+      "ts": 1793013893991
+    },
+    "canton-sh::https://www.shn.ch/region/regionale-wirtschaft/2026-09-30/ist-orange-das-neue-schwarz-wie-sich-weidmueller-im-ki": {
+      "section": "canton-sh",
+      "ts": 1793013895806
     }
   }
 }
