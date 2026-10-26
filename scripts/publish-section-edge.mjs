@@ -493,7 +493,11 @@ export async function waitForBootstrapLocks(
         pending.push(`${section} (lock non verificabile: HTTP ${got.status || 'nessuna risposta'})`);
         continue;
       }
-      const state = parseSectionBootstrapLock(got.body, { section, now: now() });
+      if (!hasResponseBody(got)) {
+        pending.push(`${section} (lock non verificabile: body assente)`);
+        continue;
+      }
+      const state = parseSectionBootstrapLock(responseBytes(got), { section, now: now() });
       if (state.state === 'active') pending.push(`${section} (${state.doc.owner})`);
       else if (state.state === 'unknown') pending.push(`${section} (${state.reason})`);
     }
@@ -646,13 +650,13 @@ export async function missingBootstrapPages(
     let previousSitemapXml = null;
     if (wasLive(id) && previous.doc.release?.files?.[name]) {
       const got = await io.fetchBytes(`${CDN}/${previous.doc.release.base}${name}`);
-      if (got.status === 200) previousSitemapXml = got.body.toString('utf8');
+      if (got.status === 200 && hasResponseBody(got)) previousSitemapXml = responseBytes(got).toString('utf8');
     }
     pending.push(...requiredPageKeys(id, { sitemapXml: sitemap ? fs.readFileSync(sitemap.local, 'utf8') : undefined, previousSitemapXml }));
   }
   const present = async (key) => {
     const got = await io.fetchBytes(`${CDN}/${key}`);
-    return got.status === 200 && got.body.toString('utf8').includes(CORPUS_ROUTE_OWNER_META_TAG);
+    return got.status === 200 && hasResponseBody(got) && responseBytes(got).toString('utf8').includes(CORPUS_ROUTE_OWNER_META_TAG);
   };
   const deadline = deadlineAt ?? Date.now() + waitMs;
   for (;;) {
@@ -675,9 +679,10 @@ export async function readPreviousRelease(io) {
   const res = await io.fetchBytes(`${CDN}/${EDGE_SECTION_REGISTRY_FILE}`);
   if (res.status === 404) return { state: 'absent' };
   if (res.status !== 200) return { state: 'unknown' };
+  if (!hasResponseBody(res)) return { state: 'unknown' };
   let doc;
   try {
-    doc = JSON.parse(res.body.toString('utf8'));
+    doc = JSON.parse(responseBytes(res).toString('utf8'));
   } catch {
     return { state: 'unknown' };
   }
@@ -686,7 +691,7 @@ export async function readPreviousRelease(io) {
   if (files === null) return { state: 'unknown', doc };
   for (const [name, hash] of Object.entries(files)) {
     const got = await io.fetchBytes(`${CDN}/${doc.release.base}${name}`);
-    if (got.status !== 200 || sha256(got.body) !== hash) return { state: 'unknown', doc };
+    if (got.status !== 200 || !hasResponseBody(got) || sha256(responseBytes(got)) !== hash) return { state: 'unknown', doc };
   }
   return { state: 'ok', doc };
 }
