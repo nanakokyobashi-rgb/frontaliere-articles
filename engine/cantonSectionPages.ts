@@ -65,7 +65,6 @@ import { readArticleRegistryMetadata } from './shared/articleRegistryMetadata';
 import { readArticleDates, readArticleMetadata, readBlogUrlSlugs } from './shared/articleReaders';
 import type { ArticleSection } from '../articleSections';
 import { buildTwitterCardMetaTags } from './shared/twitterCardMeta';
-import { httpsUrlOrNull } from './shared/httpsUrl.mjs';
 
 type Locale = ArticleLocale;
 
@@ -145,7 +144,7 @@ function checkLocale(locale: string): Locale {
  */
 function safeHref(url: string, what: string): string {
   const value = String(url ?? '').trim();
-  if (httpsUrlOrNull(value)) return value;
+  if (/^https:\/\/[^\s"<>]+$/.test(value)) return value;
   if (/^\/(?!\/)[^\s"<>]*$/.test(value)) {
     const path = value.split(/[?#]/)[0];
     if (!path.endsWith('/')) throw new Error(`${what}: link interno senza slash finale: ${value}`);

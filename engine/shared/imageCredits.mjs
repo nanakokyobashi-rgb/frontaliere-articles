@@ -57,7 +57,6 @@ import {
   LICENSED_PHOTO_PROVIDERS,
   validateGeneratedImageRecord,
 } from './generatedImageRegistry.mjs';
-import { httpsUrlOrNull } from './httpsUrl.mjs';
 
 export const IMAGE_CREDIT_SCHEMA_VERSION = 1;
 
@@ -354,6 +353,21 @@ function escapeMarkup(value) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+/**
+ * The value only when it is an absolute https URL; links in the visible credit
+ * are emitted from this and nothing else.
+ * @param {unknown} value
+ * @returns {string | null}
+ */
+function httpsUrlOrNull(value) {
+  if (typeof value !== 'string') return null;
+  try {
+    return new URL(value).protocol === 'https:' ? value : null;
+  } catch {
+    return null;
+  }
 }
 
 /** @param {unknown} locale @returns {ImageCreditLocale} */
