@@ -312,6 +312,9 @@ export const RC_TO_ENV = {
   // loader so `bin/rc-env.sh` can activate the site build from one RC source;
   // the corpus generator itself does not consume the flag.
   EMPLOYER_PROFILE_MID_AD_TEST_VARIANT: ['EMPLOYER_PROFILE_MID_AD_TEST_VARIANT'],
+  // Site-owned article-detail near-ATF ad test. The shared engine reads the
+  // build-frozen arm during fast publish; missing/unknown stays control.
+  ARTICLE_DETAIL_ATF_AD_TEST_VARIANT: ['ARTICLE_DETAIL_ATF_AD_TEST_VARIANT'],
   // Exact-job application-intent ranking (#9934); absent/false stays control.
   APPLICATION_INTENT_RANKING_ENABLED: ['APPLICATION_INTENT_RANKING_ENABLED'],
   // Job-email ranking (#7922). Keep the switch, treatment and legacy tuning
