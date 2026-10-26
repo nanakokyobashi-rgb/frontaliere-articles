@@ -43,6 +43,18 @@
     "canton-vd::https://www.guidedufrontalier.com/actualites/hebdo-du-frontalier": {
       "section": "canton-vd",
       "ts": 1793014434254
+    },
+    "canton-vd::https://www.ledauphine.com/economie/2026/10/26/atmb-ou-en-sont-les-gros-dossiers-de-la-societe-d-autoroute": {
+      "section": "canton-vd",
+      "ts": 1793035313632
+    },
+    "canton-vd::https://www.ledauphine.com/economie/2026/10/26/un-projet-de-poulailler-geant-suscite-des-inquietudes": {
+      "section": "canton-vd",
+      "ts": 1793035322301
+    },
+    "canton-vd::https://www.ledauphine.com/economie/2026/10/26/l-horlogerie-repart-avec-une-hausse-generale-des-exportations": {
+      "section": "canton-vd",
+      "ts": 1793035329858
     }
   }
 }
