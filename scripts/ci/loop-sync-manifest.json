@@ -2694,9 +2694,9 @@
       "mode": "identical",
       "reason": "Garanzia che gli script statici della shell siano serviti dalla CDN prima che un emettitore pubblichi l'HTML che li referenzia (sito issue 12270, sito PR #12275, #12299 e #12305): chiede alla CDN, legge R2 solo per un file non servito, carica cio' che R2 non ha e non sostituisce mai un oggetto; poi chiede l'URL delle pagine nelle due varianti di cache per ogni file, anche per quelli che la sonda mostra (la HEAD della sonda legge R2 e non vede un 404 tenuto dall'edge): un file che la sonda non ha mostrato, o che a quell'URL non risponde, viene invalidato all'edge e riconfermato, e se non puo' stabilirlo si ferma. Usa solo i moduli di Node e due comandi, proprio per poter restare byte-identico: scripts/lib/upload-cdn-file.sh (anch'esso identical) e scripts/cf-purge-cache.mjs, che qui e' la copia di questo repo con la stessa modalita' `--files=` e la stessa riga di successo (lo verifica host/tests/host-shell-assets.test.mjs). Il sito lo chiama da scripts/ci/ensure-cdn-shell-assets.mjs con tutti i file di staticScriptsPlugin; qui lo chiama scripts/ci/ensure-host-shell-assets.mjs con i file di cui host/ porta il contenuto.",
       "baseline": {
-        "site": "0c0beaca0d92eaf5",
-        "corpus": "0c0beaca0d92eaf5",
-        "alignedAt": "2026-10-11"
+        "site": "7ab4d979569a23e6",
+        "corpus": "7ab4d979569a23e6",
+        "alignedAt": "2026-10-26"
       }
     },
     {
@@ -2798,9 +2798,9 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "eec81dd5f065c2c6",
-        "corpus": "eec81dd5f065c2c6",
-        "alignedAt": "2026-10-19"
+        "site": "954e1ff64e9166d7",
+        "corpus": "954e1ff64e9166d7",
+        "alignedAt": "2026-10-26"
       }
     },
     {
@@ -3986,9 +3986,9 @@
       "sitePath": "build-plugins/batchWrite.ts",
       "mode": "identical",
       "baseline": {
-        "site": "926173cc037c2740",
-        "corpus": "926173cc037c2740",
-        "alignedAt": "2026-10-23"
+        "site": "a213d0f1664a5f40",
+        "corpus": "a213d0f1664a5f40",
+        "alignedAt": "2026-10-26"
       }
     },
     {
@@ -4868,10 +4868,10 @@
       "path": "generator/data/crawler-cross-repo-contract.json",
       "sitePath": ".github/corpus-workflows/contract.json",
       "mode": "identical",
-      "reason": "La baseline del 2026-10-26 registra lo stesso digest SHA-256 raw sui due lati (d2601d1443a18c67); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
+      "reason": "La baseline del 2026-10-26 registra lo stesso digest SHA-256 raw sui due lati (8f65f1993e14eaec); `identical` mantiene il contratto sotto drift-check e segnala future divergenze.",
       "baseline": {
-        "site": "d2601d1443a18c67",
-        "corpus": "d2601d1443a18c67",
+        "site": "8f65f1993e14eaec",
+        "corpus": "8f65f1993e14eaec",
         "alignedAt": "2026-10-26"
       }
     },
