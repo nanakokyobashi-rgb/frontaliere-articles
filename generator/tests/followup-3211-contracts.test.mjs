@@ -8,6 +8,7 @@ import {
 } from '../../scripts/lib/corpus-floors.mjs';
 import {
   hasInterpolatedStaticProperty,
+  readStructuredSeoBlock,
   readStructuredSeoDescriptionState,
 } from '../../engine/shared/seo-entry.mjs';
 import { assertRssProjectorContract } from '../../scripts/lib/rss-projector-contract.mjs';
@@ -50,6 +51,19 @@ test('SEO reader non eredita un campo dal primo structuredData shadowato', () =>
 
   assert.equal(lastStaticPropertyValue(block, 'headline'), undefined);
   assert.equal(lastStaticPropertyValue(block, 'datePublished'), '2026-09-01T00:00:00Z');
+});
+
+test('SEO reader espone il container structuredData finale e bilanciato', () => {
+  const block = `({
+    structuredData: { "@type": "NewsArticle", "headline": "stale" },
+    structuredData: {
+      "@type": "Event",
+      "name": "Evento finale",
+    },
+  })`;
+
+  assert.match(readStructuredSeoBlock(block), /"@type":\s*"Event"/u);
+  assert.doesNotMatch(readStructuredSeoBlock(block), /NewsArticle/u);
 });
 
 test('description reader resetta anche quando structuredData finale non è un oggetto', () => {

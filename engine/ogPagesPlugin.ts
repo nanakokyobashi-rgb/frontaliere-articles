@@ -32,6 +32,7 @@ import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
 import {
  hasInterpolatedStaticProperty,
  lastStaticPropertyValue,
+ readStructuredSeoBlock,
  readStructuredSeoDescription,
  readStructuredSeoDescriptionState,
  staticPropertyValues,
@@ -793,7 +794,8 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const e = pos[i].end;
  const b = seoSrc.substring(s, e);
 
- const sdType = b.match(/"@type":\s*"([^"]+)"/)?.[1] ?? '';
+ const sdBlock = readStructuredSeoBlock(b) ?? '';
+ const sdType = sdBlock.match(/"@type":\s*"([^"]+)"/)?.[1] ?? '';
 
  // A dynamic assignment cannot be represented by this static renderer.
  // Skip the entry explicitly instead of letting a previous static duplicate
@@ -854,23 +856,6 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
 
  // Extract source structuredData @type and author format
  const sdAuthorHasId = /"author":\s*\{\s*"@id"/.test(b);
- // Capture the structuredData block for Event-specific fields
- const sdBlockMatch = b.match(/structuredData:\s*\{/);
- let sdBlock = '';
- if (sdBlockMatch && sdBlockMatch.index !== undefined) {
- // Find matching closing brace by counting braces
- let depth = 0;
- let started = false;
- const startIdx = sdBlockMatch.index + sdBlockMatch[0].length - 1; // position of opening {
- for (let ci = startIdx; ci < b.length; ci++) {
- if (b[ci] === '{') { depth++; started = true; }
- if (b[ci] === '}') { depth--; }
- if (started && depth === 0) {
- sdBlock = b.substring(startIdx, ci + 1);
- break;
- }
- }
- }
 
  if (cp.startsWith(SECTION.canonicalPrefix)) {
  const authorSlug = articleAuthorSlugById[articleId] || '';

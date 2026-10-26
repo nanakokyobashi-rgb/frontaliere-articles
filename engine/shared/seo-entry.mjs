@@ -657,8 +657,8 @@ export function staticPropertySpans(block, field) {
   return spans;
 }
 
-/** Read the final `description` from the JSON-LD-shaped structuredData object. */
-export function readStructuredSeoDescription(block) {
+/** Return the final balanced structuredData object, if it is an object. */
+export function readStructuredSeoBlock(block) {
   let structuredData;
   forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
     if (key === 'structuredData') {
@@ -670,6 +670,12 @@ export function readStructuredSeoDescription(block) {
         : undefined;
     }
   });
+  return structuredData;
+}
+
+/** Read the final `description` from the JSON-LD-shaped structuredData object. */
+export function readStructuredSeoDescription(block) {
+  const structuredData = readStructuredSeoBlock(block);
   return structuredData === undefined
     ? undefined
     : staticPropertyState(structuredData, 'description').value;
