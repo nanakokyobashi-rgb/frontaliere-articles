@@ -30,6 +30,13 @@ import { parseStaticArticleTranslationSource, parseStaticBlogBodySource } from '
 export { parseStaticBlogBodySource };
 import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
 import {
+ hasInterpolatedStaticProperty,
+ lastStaticPropertyValue,
+ readStructuredSeoBlock,
+ readStructuredSeoDescription,
+ readStructuredSeoDescriptionState,
+} from './shared/seo-entry.mjs';
+import {
  ARTICLE_DETAIL_ATF_AD_TEST_VARIANT_RC_KEY,
  ARTICLE_DETAIL_ATF_EXPERIMENT_ID,
  ARTICLE_DETAIL_ATF_TREATMENT_VARIANT,
@@ -792,24 +799,38 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const e = pos[i].end;
  const b = seoSrc.substring(s, e);
 
- // Match title/desc/og* allowing escaped quotes, trying single-quoted first
- // (dominant style) then double-quoted: the SEO entry sources mix both (e.g. the
- // metodologia + author entries in seo-pages.ts use `description: "…"`), and a
- // single-quote-only regex silently dropped those → empty og:title/og:description,
- // the same failure mode as #2996 transposed onto the OG emitter.
- const matchStr = (key: string, flags = ''): string => {
- const rxSingle = new RegExp(`${key}:\\s*'((?:[^'\\\\]|\\\\.)*)'`, flags);
- const rxDouble = new RegExp(`${key}:\\s*"((?:[^"\\\\]|\\\\.)*)"`, flags);
- const m = b.match(rxSingle) || b.match(rxDouble);
- return m ? decodeTsStringEscapes(m[1], { newlineAs: ' ' }) : '';
- };
- const title = matchStr('title', 'm') || '';
- const desc = matchStr('description', 'm') || '';
- const keywords = matchStr('keywords', 'm') || '';
+ // Resolve the final static assignments with the same balanced reader as the
+ // corpus floor and RSS producer. A first-match regex could publish stale
+ // metadata, and interpolated values have not been evaluated in this source
+ // reader so they must fail closed rather than emitting a partial OG page.
+ const dynamicField = [
+  'title',
+  'description',
+  'keywords',
+  'ogTitle',
+  'ogDescription',
+  'canonicalPath',
+  'datePublished',
+  'dateModified',
+ ].find((field) => hasInterpolatedStaticProperty(b, field));
+ if (dynamicField || readStructuredSeoDescriptionState(b).dynamic) {
+  throw new Error(
+   `OG: entry '${articleId}' contains an interpolated SEO field` +
+    (dynamicField ? ` '${dynamicField}'` : ' in structuredData') +
+    '; refusing to publish a reduced OG page.',
+  );
+ }
+ const matchStr = (key: string): string => lastStaticPropertyValue(b, key) ?? '';
+ const title = matchStr('title');
+ const desc = matchStr('description') || readStructuredSeoDescription(b) || '';
+ const keywords = matchStr('keywords');
  const ogT = matchStr('ogTitle') || title;
  const ogD = matchStr('ogDescription') || desc;
- const cp = b.match(/canonicalPath:\s*'([^']+)'/)?.[1] ?? '';
- const imRaw = b.match(/\/images\/[^'"`\s,}]+/)?.[0] ?? DEFAULT_IMG;
+ const cp = matchStr('canonicalPath');
+ const imRaw = decodeTsStringEscapes(
+  b.match(/\/images\/[^'"`\s,}]+/)?.[0] ?? DEFAULT_IMG,
+  { newlineAs: ' ' },
+ );
  const im = resolveImagePath(imRaw, articleId);
  // Measured here, next to the resolution that produced the path, so the
  // size and the URL can never be computed from two different candidates.
@@ -818,13 +839,13 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  // date. Older entries may omit that literal even though the article registry
  // has one; use the registry as the fallback, and keep `''` when both sources
  // say the publication date is unknown.
- const datePub = b.match(/"datePublished":\s*"([^"]+)"/)?.[1]
+ const datePub = matchStr('datePublished')
  || articlePublishedAtById[articleId]
  || '';
  // dateModified: prefer updatedAt from blog-articles-data.ts, then sitemap <lastmod>,
  // then the SEO metadata literal (if any). BUILD_DATE_ISO in seo-blog.ts is a variable
  // reference that the regex can't capture, so we need these external sources.
- const seoDateMod = b.match(/"dateModified":\s*"([^"]+)"/)?.[1] ?? '';
+ const seoDateMod = matchStr('dateModified');
  const articleSlug = cp.replace(SECTION.canonicalPrefix, '').replace(/\/$/, '');
  // Issue #3368 item 1: a shadowed article's own slug was dropped from its
  // section's sitemap (SECTION.sitemap — sitemap-blog-ch.xml for svizzera,
@@ -840,23 +861,8 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  // Extract source structuredData @type and author format
  const sdType = b.match(/"@type":\s*"([^"]+)"/)?.[1] ?? '';
  const sdAuthorHasId = /"author":\s*\{\s*"@id"/.test(b);
- // Capture the structuredData block for Event-specific fields
- const sdBlockMatch = b.match(/structuredData:\s*\{/);
- let sdBlock = '';
- if (sdBlockMatch && sdBlockMatch.index !== undefined) {
- // Find matching closing brace by counting braces
- let depth = 0;
- let started = false;
- const startIdx = sdBlockMatch.index + sdBlockMatch[0].length - 1; // position of opening {
- for (let ci = startIdx; ci < b.length; ci++) {
- if (b[ci] === '{') { depth++; started = true; }
- if (b[ci] === '}') { depth--; }
- if (started && depth === 0) {
- sdBlock = b.substring(startIdx, ci + 1);
- break;
- }
- }
- }
+ // Capture the final balanced structuredData block for Event-specific fields.
+ const sdBlock = readStructuredSeoBlock(b) ?? '';
 
  if (cp.startsWith(SECTION.canonicalPrefix)) {
  const authorSlug = articleAuthorSlugById[articleId] || '';
