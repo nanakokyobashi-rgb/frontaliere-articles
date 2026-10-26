@@ -13,11 +13,91 @@ const BODY_METHODS = new Set(['arrayBuffer', 'blob', 'bytes', 'formData', 'json'
 const ACTIVE_DEADLINES = new WeakMap();
 export const DEFAULT_FETCH_TIMEOUT_MS = 15_000;
 
+function bodyChunkToBytes(value) {
+  if (typeof value === 'string') return new TextEncoder().encode(value);
+  if (value instanceof Uint8Array) return Uint8Array.from(value);
+  if (value instanceof ArrayBuffer) return Uint8Array.from(new Uint8Array(value));
+  if (ArrayBuffer.isView(value)) {
+    return Uint8Array.from(new Uint8Array(value.buffer, value.byteOffset, value.byteLength));
+  }
+  throw new TypeError('unsupported response body chunk');
+}
+
+async function readBodyBytesWithReader(response, onReader) {
+  const body = response?.body;
+  if (typeof body?.getReader !== 'function') return null;
+
+  const reader = body.getReader();
+  onReader(reader);
+  const chunks = [];
+  let totalLength = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      if (value == null) continue;
+      const chunk = bodyChunkToBytes(value);
+      chunks.push(chunk);
+      totalLength += chunk.byteLength;
+    }
+    const bytes = new Uint8Array(totalLength);
+    let offset = 0;
+    for (const chunk of chunks) {
+      bytes.set(chunk, offset);
+      offset += chunk.byteLength;
+    }
+    return bytes;
+  } finally {
+    onReader(null);
+    try { reader.releaseLock?.(); } catch { /* cleanup stays best effort */ }
+  }
+}
+
+async function readBodyMethod(response, property, args, onReader) {
+  const body = response?.body;
+  if (typeof body?.getReader !== 'function') {
+    const value = Reflect.get(response, property, response);
+    return value.apply(response, args);
+  }
+  const bytes = await readBodyBytesWithReader(response, onReader);
+  switch (property) {
+    case 'arrayBuffer':
+      return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+    case 'blob':
+      return new Blob([bytes], { type: response.headers?.get?.('content-type') || '' });
+    case 'bytes':
+      return bytes;
+    case 'formData': {
+      const init = response.headers ? { headers: response.headers } : undefined;
+      return new Response(bytes, init).formData();
+    }
+    case 'json':
+      return JSON.parse(new TextDecoder().decode(bytes));
+    case 'text':
+      return new TextDecoder().decode(bytes);
+    default: {
+      const value = Reflect.get(response, property, response);
+      return value.apply(response, args);
+    }
+  }
+}
+
 function withBodyDeadline(response, cleanup, timeoutPromise) {
   let wrappedResponse;
+  let activeReader = null;
   const trackedCleanup = () => {
     cleanup();
+    ACTIVE_DEADLINES.delete(response);
     if (wrappedResponse) ACTIVE_DEADLINES.delete(wrappedResponse);
+  };
+  const deadline = {
+    response,
+    cleanup: trackedCleanup,
+    cancel: () => {
+      const reader = activeReader;
+      if (typeof reader?.cancel === 'function') return reader.cancel();
+      return response?.body?.cancel?.();
+    },
   };
   wrappedResponse = new Proxy(response, {
     get(target, property) {
@@ -27,7 +107,12 @@ function withBodyDeadline(response, cleanup, timeoutPromise) {
         // Defer invocation so a synchronous brand/type error still reaches
         // finally(cleanup), rather than leaking the referenced timer.
         return (...args) => Promise.race([
-          Promise.resolve().then(() => value.apply(target, args)),
+          Promise.resolve().then(() => readBodyMethod(
+            target,
+            property,
+            args,
+            (reader) => { activeReader = reader; },
+          )),
           timeoutPromise,
         ]).finally(trackedCleanup);
       }
@@ -36,11 +121,17 @@ function withBodyDeadline(response, cleanup, timeoutPromise) {
       return value.bind(target);
     },
   });
-  ACTIVE_DEADLINES.set(wrappedResponse, { response, cleanup: trackedCleanup });
+  ACTIVE_DEADLINES.set(response, deadline);
+  ACTIVE_DEADLINES.set(wrappedResponse, deadline);
   return wrappedResponse;
 }
 
 function cancelBodyBestEffort(response) {
+  const deadline = ACTIVE_DEADLINES.get(response);
+  if (deadline) {
+    try { Promise.resolve(deadline.cancel()).catch(() => {}); } catch { /* best effort */ }
+    return;
+  }
   try {
     const body = response?.body;
     if (typeof body?.cancel === 'function') {
@@ -64,7 +155,6 @@ function cancelBodyBestEffort(response) {
 export function releaseFetchWithRefTimeout(response) {
   const deadline = ACTIVE_DEADLINES.get(response);
   if (!deadline) return;
-  ACTIVE_DEADLINES.delete(response);
   try {
     cancelBodyBestEffort(deadline.response);
   } finally {

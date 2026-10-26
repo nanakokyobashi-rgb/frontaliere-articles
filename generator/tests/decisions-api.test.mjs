@@ -226,3 +226,35 @@ test('mantiene la deadline anche se il body HTTP non termina', async () => {
     (error) => error.code === 'DECISIONS_API_TIMEOUT',
   );
 });
+
+test('cancella il reader attivo quando il body Decisions è locked', async () => {
+  let cancelled = 0;
+  let wakeReader;
+  const reader = {
+    read() {
+      return new Promise((resolve) => { wakeReader = resolve; });
+    },
+    cancel() {
+      cancelled += 1;
+      wakeReader?.({ done: true });
+      return Promise.resolve();
+    },
+    releaseLock() {},
+  };
+
+  await assert.rejects(
+    classifyWithDecisionsApi({
+      apiKey: 'test-decision-key',
+      input: 'contenuto',
+      instructions: 'criteri',
+      timeoutMs: 10,
+      fetchImpl: async () => ({
+        ok: true,
+        status: 200,
+        body: { getReader: () => reader },
+      }),
+    }),
+    (error) => error.code === 'DECISIONS_API_TIMEOUT',
+  );
+  assert.equal(cancelled, 1);
+});

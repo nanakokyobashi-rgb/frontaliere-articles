@@ -65,6 +65,7 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const FIX = path.join(HERE, 'fixtures', 'canton-sources');
 const PROFILE = JSON.parse(fs.readFileSync(path.join(HERE, '..', 'data', 'canton-sections.json'), 'utf8'));
 const SRC = fs.readFileSync(path.join(HERE, '..', 'scripts', 'create-article.mjs'), 'utf8');
+const CANTON_SOURCE = fs.readFileSync(path.join(HERE, '..', 'scripts', 'lib', 'canton-news-sources.mjs'), 'utf8');
 
 // Gli estrattori storici, dal sorgente vero (stessa tecnica di
 // extract-headlines-sr-prefix.test.mjs e news-scan-quality.test.mjs).
@@ -107,6 +108,14 @@ function fakeFetch(routes) {
 
 const NOW = new Date('2026-10-05T16:00:00Z');
 const ctx = (fetchImpl, extra = {}) => ({ fetchImpl, extractRssItems, extractHeadlines, now: NOW, throttle: createHostThrottle({ sleep: async () => {} }), ...extra });
+
+test('lo scanner cantonale legge arrayBuffer dal fetch con timeout condiviso', () => {
+  const fetchStart = CANTON_SOURCE.indexOf('res = await fetchWithRefTimeout(url');
+  const decodeStart = CANTON_SOURCE.indexOf('const decoded = decodeResponseBody(body', fetchStart);
+  assert.ok(fetchStart >= 0 && decodeStart > fetchStart, 'percorso body della fonte mancante');
+  const request = CANTON_SOURCE.slice(fetchStart, decodeStart);
+  assert.match(request, /const body = await res\.arrayBuffer\(\)/u);
+});
 
 // ── Copertura dei parser del profilo ────────────────────────────────────────
 

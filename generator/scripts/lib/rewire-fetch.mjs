@@ -15,6 +15,7 @@ export const REWIRE_FETCH_HEADERS = {
 };
 const DEFAULT_REWIRE_FETCH_TIMEOUT_MS = 30_000;
 const MAX_REWIRE_FETCH_TIMEOUT_MS = 120_000;
+const REWIRE_RESPONSE_CANCEL_TIMEOUT_MS = 1_000;
 
 function boundedTimeoutMs(value) {
   const numeric = Number(value);
@@ -25,6 +26,92 @@ function boundedTimeoutMs(value) {
 export const REWIRE_FETCH_TIMEOUT_MS = boundedTimeoutMs(
   process.env.REWIRE_FETCH_TIMEOUT_MS || DEFAULT_REWIRE_FETCH_TIMEOUT_MS,
 );
+
+/**
+ * Keep response cleanup bounded and independent from the fetch verdict. An
+ * abort signal is only a cancellation hint: a late response or a reader can
+ * ignore it, and a broken upstream can even leave `cancel()` pending.
+ */
+async function awaitRewireResponseCleanup(cleanup) {
+  let timer;
+  try {
+    await Promise.race([
+      Promise.resolve().then(cleanup),
+      new Promise((resolve) => {
+        timer = setTimeout(resolve, REWIRE_RESPONSE_CANCEL_TIMEOUT_MS);
+      }),
+    ]);
+  } catch {
+    // Cleanup must never replace the fetch/retry verdict.
+  } finally {
+    if (timer !== undefined) clearTimeout(timer);
+  }
+}
+
+/**
+ * Cancel a response body or its active reader, safely and idempotently.
+ *
+ * The optional reader is the one owned by `readRewireResponseBody`; using it
+ * matters while a body read is pending because `response.body.cancel()` is
+ * rejected by a locked stream. Late responses have no reader yet, so their
+ * unlocked body is cancelled directly. Both paths are best effort and
+ * bounded: a broken upstream must not hold a retry forever.
+ *
+ * @param {Response|undefined} response
+ * @param {{cancel?: () => Promise<unknown>|unknown, releaseLock?: () => void}|null} [activeReader]
+ */
+export async function cancelRewireResponseBody(response, activeReader = null) {
+  let reader = activeReader;
+  let cancel;
+  try {
+    const body = response?.body;
+    if (typeof reader?.cancel === 'function') {
+      cancel = () => reader.cancel();
+    } else if (typeof body?.cancel === 'function') {
+      cancel = () => body.cancel();
+    } else if (body?.locked !== true && typeof body?.getReader === 'function') {
+      try {
+        reader = body.getReader();
+        cancel = () => reader.cancel();
+      } catch {
+        // A minimal fetch double or an already-claimed stream may not expose
+        // a cancellable reader. There is nothing further to release here.
+      }
+    }
+    if (cancel) await awaitRewireResponseCleanup(cancel);
+  } catch {
+    // A response body is transport cleanup, never the authoritative error.
+  } finally {
+    try { reader?.releaseLock?.(); } catch { /* cleanup stays best effort */ }
+  }
+}
+
+/**
+ * Read a response body while retaining its reader for deadline cleanup.
+ * Minimal fetch doubles may only implement `text()`, so keep that fallback.
+ */
+async function readRewireResponseBody(response, onReader) {
+  const body = response?.body;
+  if (typeof body?.getReader !== 'function') return response.text();
+
+  const reader = body.getReader();
+  onReader(reader);
+  const decoder = new TextDecoder();
+  let text = '';
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) return text + decoder.decode();
+      if (value == null) continue;
+      text += typeof value === 'string'
+        ? value
+        : decoder.decode(value, { stream: true });
+    }
+  } finally {
+    onReader(null);
+    try { reader.releaseLock(); } catch { /* cancellation owns the verdict */ }
+  }
+}
 
 /** True when every source failed with HTTP 403 on GitHub Actions. Policy is separate. */
 export function isCiWafBlock(errors, env = process.env) {
@@ -49,6 +136,8 @@ export async function getRewireUrl(
       const effectiveTimeoutMs = boundedTimeoutMs(timeoutMs);
       const controller = new AbortController();
       let timedOut = false;
+      let cancelResponse = false;
+      let activeReader = null;
       let timer;
       const timeoutError = () => {
         const error = new Error(`GET ${url} timed out after ${effectiveTimeoutMs}ms`);
@@ -65,18 +154,35 @@ export async function getRewireUrl(
       });
       let res;
       let body;
+      const responsePromise = Promise.resolve().then(() => (
+        fetchImpl(url, { redirect: 'follow', headers, signal: controller.signal })
+      ));
+      responsePromise.then((lateResponse) => {
+        if (timedOut) void cancelRewireResponseBody(lateResponse);
+      }, () => {});
       try {
         res = await Promise.race([
-          fetchImpl(url, { redirect: 'follow', headers, signal: controller.signal }),
+          responsePromise,
           deadline,
         ]);
-        if (res.ok) body = await Promise.race([res.text(), deadline]);
+        if (res.ok) {
+          body = await Promise.race([
+            readRewireResponseBody(res, (reader) => { activeReader = reader; }),
+            deadline,
+          ]);
+        } else {
+          cancelResponse = true;
+        }
       } catch (error) {
+        cancelResponse = true;
         if (timedOut) throw timeoutError();
         throw error;
       } finally {
         clearTimeout(timer);
         controller.abort();
+        if (cancelResponse || timedOut) {
+          await cancelRewireResponseBody(res, activeReader);
+        }
       }
       if (res.ok) {
         // An empty 2xx response is still a response. Let the JSON/schema
