@@ -35,6 +35,7 @@ import {
  readStructuredSeoBlock,
  readStructuredSeoDescription,
  readStructuredSeoDescriptionState,
+ staticPropertyValues,
 } from './shared/seo-entry.mjs';
 import {
  ARTICLE_DETAIL_ATF_AD_TEST_VARIANT_RC_KEY,
@@ -788,6 +789,8 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  authorName: string;
  aiAssisted?: boolean;
  }
+ const flattenOgText = (value: string | undefined): string =>
+  (value ?? '').replace(/\r\n|\r|\n/gu, ' ');
  const entries: Entry[] = [];
 
  const pos = extractBlogEntryPositions(seoSrc);
@@ -799,34 +802,37 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const e = pos[i].end;
  const b = seoSrc.substring(s, e);
 
- // Resolve the final static assignments with the same balanced reader as the
- // corpus floor and RSS producer. A first-match regex could publish stale
- // metadata, and interpolated values have not been evaluated in this source
- // reader so they must fail closed rather than emitting a partial OG page.
- const dynamicField = [
-  'title',
-  'description',
-  'keywords',
-  'ogTitle',
-  'ogDescription',
-  'canonicalPath',
-  'datePublished',
-  'dateModified',
- ].find((field) => hasInterpolatedStaticProperty(b, field));
- if (dynamicField || readStructuredSeoDescriptionState(b).dynamic) {
-  throw new Error(
-   `OG: entry '${articleId}' contains an interpolated SEO field` +
-    (dynamicField ? ` '${dynamicField}'` : ' in structuredData') +
-    '; refusing to publish a reduced OG page.',
-  );
- }
- const matchStr = (key: string): string => lastStaticPropertyValue(b, key) ?? '';
+ const sdBlock = readStructuredSeoBlock(b) ?? '';
+ const sdType = sdBlock.match(/"@type":\s*"([^"]+)"/)?.[1] ?? '';
+
+ // A dynamic assignment cannot be represented by this static renderer.
+ // Skip the entry explicitly instead of letting a previous static duplicate
+ // leak into OG metadata or canonical URLs. Event JSON-LD is parsed separately
+ // below, so guard every field that parser consumes there as well. `image`/`url`
+ // are deliberately not in this list: their BASE_URL templates are intentional
+ // and resolved by the emitter.
+ const eventFields = sdType === 'Event'
+  ? ['name', 'startDate', 'endDate', 'eventStatus', 'eventAttendanceMode', 'location', 'organizer', 'offers', 'performer']
+  : [];
+ const eventBaseUrlFields = new Set(['location', 'organizer', 'offers', 'performer']);
+ const dynamicField = ['@type', 'title', 'description', 'keywords', 'ogTitle', 'ogDescription', 'canonicalPath', 'datePublished', 'dateModified', ...eventFields]
+  .find((field) => hasInterpolatedStaticProperty(b, field, {
+   allowBaseUrlTemplates: eventBaseUrlFields.has(field),
+  }));
+ if (dynamicField || readStructuredSeoDescriptionState(b).dynamic) continue;
+
+ // Resolve every static property with the same balanced last-write-wins
+ // reader as RSS. A first-match regex here would let stale title/description
+ // values diverge from the feed and from the corpus floor.
+ const matchStr = (key: string): string => flattenOgText(lastStaticPropertyValue(b, key));
  const title = matchStr('title');
- const desc = matchStr('description') || readStructuredSeoDescription(b) || '';
+ const desc = matchStr('description') || flattenOgText(readStructuredSeoDescription(b)) || '';
  const keywords = matchStr('keywords');
  const ogT = matchStr('ogTitle') || title;
  const ogD = matchStr('ogDescription') || desc;
- const cp = matchStr('canonicalPath');
+ const canonicalCandidates = staticPropertyValues(b, 'canonicalPath');
+ const canonicalCandidate = canonicalCandidates[canonicalCandidates.length - 1];
+ const cp = canonicalCandidate?.quote === "'" ? canonicalCandidate.value : '';
  const imRaw = decodeTsStringEscapes(
   b.match(/\/images\/[^'"`\s,}]+/)?.[0] ?? DEFAULT_IMG,
   { newlineAs: ' ' },
@@ -858,11 +864,8 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  || (winnerSlug ? sitemapLastmodBySlug[winnerSlug] : '')
  || seoDateMod;
 
- // Extract source structuredData @type and author format
- const sdType = b.match(/"@type":\s*"([^"]+)"/)?.[1] ?? '';
- const sdAuthorHasId = /"author":\s*\{\s*"@id"/.test(b);
- // Capture the final balanced structuredData block for Event-specific fields.
- const sdBlock = readStructuredSeoBlock(b) ?? '';
+ // Author identity is read from the same final structuredData block.
+ const sdAuthorHasId = /"author":\s*\{\s*"@id"/.test(sdBlock);
 
  if (cp.startsWith(SECTION.canonicalPrefix)) {
  const authorSlug = articleAuthorSlugById[articleId] || '';
