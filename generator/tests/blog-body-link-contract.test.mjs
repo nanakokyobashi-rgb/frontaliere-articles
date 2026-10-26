@@ -870,9 +870,19 @@ test('i publisher rapidi usano la stessa chiusura delle dipendenze del gate di p
       ? preflight
       : workflow.slice(start, workflow.indexOf('node scripts/ci/check-blog-body-links.mjs', start));
     const selfPath = `.github/workflows/${file}`;
+    const sectionHelpers = [
+      'scripts/ci/fast-publish-section-preflight.sh',
+      'scripts/ci/fast-publish-section-render.sh',
+      'scripts/ci/fast-publish-section-recovery.sh',
+    ];
     assert.ok(paths.includes(selfPath), `${file} deve riattivare il gate quando cambia`);
+    if (file === 'fast-publish-section.yml') {
+      for (const helper of sectionHelpers) {
+        assert.ok(paths.includes(helper), `${file} deve riattivare il gate quando cambia ${helper}`);
+      }
+    }
     assert.deepEqual(
-      paths.filter((filePath) => filePath !== selfPath),
+      paths.filter((filePath) => filePath !== selfPath && !sectionHelpers.includes(filePath)),
       apiPaths,
       `${file} deve condividere la chiusura di publish-api oltre al proprio path`,
     );

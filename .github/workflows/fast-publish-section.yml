@@ -272,6 +272,7 @@ jobs:
             scripts/ci/read-main-head.sh
             scripts/ci/fast-publish-section-resolve.sh
             scripts/ci/fast-publish-section-edge-candidate.sh
+            scripts/ci/fast-publish-section-preflight.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
 
@@ -284,6 +285,8 @@ jobs:
           main_head_target='scripts/ci/read-main-head.sh'
           edge_candidate_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-edge-candidate.sh'
           edge_candidate_target='scripts/ci/fast-publish-section-edge-candidate.sh'
+          preflight_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-preflight.sh'
+          preflight_target='scripts/ci/fast-publish-section-preflight.sh'
           if [ ! -f "$resolver_source" ]; then
             echo "::error::resolver non presente nel checkout della revisione del workflow"
             exit 1
@@ -294,6 +297,10 @@ jobs:
           fi
           if [ ! -f "$edge_candidate_source" ]; then
             echo "::error::helper della release edge non presente nel checkout della revisione del workflow"
+            exit 1
+          fi
+          if [ ! -f "$preflight_source" ]; then
+            echo "::error::helper di preflight non presente nel checkout della revisione del workflow"
             exit 1
           fi
           # workflow_run puo' aver effettuato il checkout del corpus a una
@@ -336,6 +343,7 @@ jobs:
             chmod 0755 "$main_head_target"
           fi
           install -m 0755 "$edge_candidate_source" "$edge_candidate_target"
+          install -m 0755 "$preflight_source" "$preflight_target"
 
       - name: Set up Node (resolve)
         uses: actions/setup-node@v7
@@ -580,6 +588,7 @@ jobs:
             scripts/lib/npm-ci-retry.sh
             scripts/ci/dispatch-fast-publish-replay.sh
             scripts/ci/read-main-head.sh
+            scripts/ci/fast-publish-section-render.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
 
@@ -588,6 +597,13 @@ jobs:
           set -euo pipefail
           source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
           target='scripts/ci/read-main-head.sh'
+          render_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-render.sh'
+          render_target='scripts/ci/fast-publish-section-render.sh'
+          if [ ! -f "$render_source" ]; then
+            echo "::error::helper di render non presente nel checkout della revisione del workflow"
+            exit 1
+          fi
+          install -m 0755 "$render_source" "$render_target"
           if [ -f "$source" ]; then
             install -m 0755 "$source" "$target"
           elif [ -f "$target" ]; then
@@ -1051,6 +1067,7 @@ jobs:
           sparse-checkout: |
             scripts/ci/dispatch-fast-publish-replay.sh
             scripts/ci/read-main-head.sh
+            scripts/ci/fast-publish-section-recovery.sh
           sparse-checkout-cone-mode: false
           persist-credentials: false
 
@@ -1059,6 +1076,13 @@ jobs:
           set -euo pipefail
           source='.replay-dispatcher-source/scripts/ci/read-main-head.sh'
           target='scripts/ci/read-main-head.sh'
+          recovery_source='.replay-dispatcher-source/scripts/ci/fast-publish-section-recovery.sh'
+          recovery_target='scripts/ci/fast-publish-section-recovery.sh'
+          if [ ! -f "$recovery_source" ]; then
+            echo "::error::helper di recovery non presente nel checkout della revisione del workflow"
+            exit 1
+          fi
+          install -m 0755 "$recovery_source" "$recovery_target"
           if [ -f "$source" ]; then
             install -m 0755 "$source" "$target"
           elif [ -f "$target" ]; then

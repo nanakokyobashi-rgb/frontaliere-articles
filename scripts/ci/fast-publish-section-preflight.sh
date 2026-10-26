@@ -10,6 +10,9 @@ scan_mode=full
 gate_input_paths=(
   .github/workflows/fast-publish-section.yml
   .github/workflows/publish-api.yml
+  scripts/ci/fast-publish-section-preflight.sh
+  scripts/ci/fast-publish-section-render.sh
+  scripts/ci/fast-publish-section-recovery.sh
   engine/articleSeoFallback.ts
   engine/ogPagesPlugin.ts
   engine/rssFeeds.mjs
