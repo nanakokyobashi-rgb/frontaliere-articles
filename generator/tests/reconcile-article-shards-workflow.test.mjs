@@ -53,11 +53,11 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(guard, /unknown\|no-active-job/);
   assert.match(
     guard,
-    /gh api --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/runs\?per_page=100"/,
+    /gh_api_timeout --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/runs\?per_page=100"/,
   );
   assert.match(
     guard,
-    /gh api --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/runs\/\$run_id\/jobs\?per_page=100"/,
+    /gh_api_timeout --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/runs\/\$run_id\/jobs\?per_page=100"/,
   );
   assert.match(workflow, /workflow_runs \| length/);
   assert.match(guard, /total_count/);
@@ -81,7 +81,7 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
     /\.selected\[\].*\[\.id, \.section, \.shard\]/,
   );
   assert.doesNotMatch(workflow, /active_runs\(\)/, 'il gate non deve tornare a contare il workflow globalmente');
-  assert.match(workflow, /recent_pages_json=.*gh api --paginate --slurp/);
+  assert.match(workflow, /recent_pages_json=.*gh_api_timeout --paginate --slurp/);
   assert.match(workflow, /recent_runs_json=.*validate_workflow_runs/);
   assert.match(workflow, /\.created_at_epoch >= \(\$t \| fromdateiso8601\)/);
 });
@@ -93,8 +93,8 @@ test('i gemelli del guard usano listing completi, stati completi e fail-closed',
   const republishGuard = republishWorkflow.slice(start, end);
 
   assert.match(republishWorkflow, /IN_FLIGHT_STATUSES='\["queued","in_progress","requested","waiting","pending"\]'/);
-  assert.match(republishGuard, /gh api --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/runs\?per_page=100"/);
-  assert.match(republishGuard, /gh api --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/runs\/\$run_id\/jobs\?per_page=100"/);
+  assert.match(republishGuard, /gh_api_timeout --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/runs\?per_page=100"/);
+  assert.match(republishGuard, /gh_api_timeout --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/runs\/\$run_id\/jobs\?per_page=100"/);
   assert.match(republishWorkflow, /total_count/);
   assert.match(republishWorkflow, /validate_workflow_runs/);
   assert.match(republishWorkflow, /created_at_epoch/);
