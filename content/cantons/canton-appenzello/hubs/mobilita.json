@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T09:05:39.145Z",
-  "contentHash": "ed36f5772b92bf22f9d034918dec195c80d8b96a8a7c5063b1c16734705c411d",
+  "updatedAt": "2026-10-26T10:46:37.997Z",
+  "contentHash": "b80e5166c3d07bf10846a638fed6a5c803a2f3084909587d68fb35ab20b4cfb9",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-25T23:36:43.073Z",
+      "updatedAt": "2026-10-26T05:21:20.958Z",
       "keyFacts": 1
     },
     {
@@ -28,7 +28,7 @@
         {
           "label": "Cantieri attivi o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 25 ottobre 2026"
+          "note": "segnalazioni aggiornate: 26 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -40,7 +40,7 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffico",
-              "date": "2026-10-25T23:36:43.073Z",
+              "date": "2026-10-26T05:21:20.958Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
@@ -51,7 +51,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-25T23:36:43.073Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -117,7 +117,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-26T09:05:39.145Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -128,7 +128,7 @@
         {
           "label": "Roadworks active or imminent",
           "value": "1",
-          "note": "reports as of 25 October 2026"
+          "note": "reports as of 26 October 2026"
         }
       ],
       "dataBlocks": [
@@ -140,7 +140,7 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffic",
-              "date": "2026-10-25T23:36:43.073Z",
+              "date": "2026-10-26T05:21:20.958Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
@@ -151,7 +151,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-25T23:36:43.073Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -217,7 +217,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-26T09:05:39.145Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -228,7 +228,7 @@
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "1",
-          "note": "Meldungen vom 25. Oktober 2026"
+          "note": "Meldungen vom 26. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -240,7 +240,7 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Verkehr",
-              "date": "2026-10-25T23:36:43.073Z",
+              "date": "2026-10-26T05:21:20.958Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
@@ -251,7 +251,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-25T23:36:43.073Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -317,7 +317,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-26T09:05:39.145Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -328,7 +328,7 @@
         {
           "label": "Chantiers actifs ou imminents",
           "value": "1",
-          "note": "signalements au 25 octobre 2026"
+          "note": "signalements au 26 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -340,7 +340,7 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Trafic",
-              "date": "2026-10-25T23:36:43.073Z",
+              "date": "2026-10-26T05:21:20.958Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
@@ -351,7 +351,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-25T23:36:43.073Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -417,7 +417,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-26T09:05:39.145Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     }
   }
 }

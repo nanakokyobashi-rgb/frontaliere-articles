@@ -4,8 +4,8 @@
   "section": "canton-fr",
   "canton": "FR",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T01:29:11.421Z",
-  "contentHash": "fdfabccdfa9d0e204adadfcd4bbd9f12b30774f39893f578116edf4380381f13",
+  "updatedAt": "2026-10-26T11:20:32.372Z",
+  "contentHash": "5ee0724492910738d6a4318cdf75c2d1081636830712f37687f82a98f69c4efd",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -13,13 +13,8 @@
       "keyFacts": 1
     },
     {
-      "id": "aste-targhe",
-      "updatedAt": "2026-10-25T20:50:56.983Z",
-      "keyFacts": 1
-    },
-    {
       "id": "meteo",
-      "updatedAt": "2026-10-25T22:42:31.401Z",
+      "updatedAt": "2026-10-26T05:02:23.290Z",
       "keyFacts": 0
     },
     {
@@ -40,11 +35,6 @@
           "value": "606,90 CHF",
           "note": "regione di premio 1, franchigia 300 CHF",
           "sourceName": "Ufficio federale della sanità pubblica (UFSP)"
-        },
-        {
-          "label": "Aste di targhe in corso",
-          "value": "14",
-          "note": "offerta mediana 262,50 CHF"
         }
       ],
       "dataBlocks": [
@@ -69,49 +59,18 @@
           "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Aste delle targhe",
-          "description": "Aste ufficiali di targhe in corso nel cantone, con le offerte più alte al momento della rilevazione.",
-          "items": [
-            {
-              "label": "FR12026",
-              "value": "800 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-26T11:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7287&locale=fr_ch"
-            },
-            {
-              "label": "FR14632",
-              "value": "700 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-26T11:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7288&locale=fr_ch"
-            },
-            {
-              "label": "FR19739",
-              "value": "500 CHF",
-              "detail": "offerta attuale",
-              "date": "2026-10-26T11:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7289&locale=fr_ch"
-            }
-          ],
-          "sourceName": "Ufficio cantonale della circolazione",
-          "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-25T20:50:56.983Z"
-        },
-        {
           "id": "meteo",
           "title": "Meteo",
           "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
           "items": [
             {
               "label": "Fribourg",
-              "value": "7 °C",
-              "detail": "oggi da 7 a 10 °C"
+              "value": "4 °C",
+              "detail": "oggi da 3 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-25T22:42:31.401Z"
+          "updatedAt": "2026-10-26T05:02:23.290Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -229,7 +188,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T01:29:11.421Z"
+      "updatedAt": "2026-10-26T11:20:32.372Z"
     },
     "en": {
       "canton": "FR",
@@ -242,11 +201,6 @@
           "value": "606.90 CHF",
           "note": "premium region 1, CHF 300 deductible",
           "sourceName": "Federal Office of Public Health (FOPH)"
-        },
-        {
-          "label": "Plate auctions running",
-          "value": "14",
-          "note": "typical bid 262.50 CHF"
         }
       ],
       "dataBlocks": [
@@ -271,49 +225,18 @@
           "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Number plate auctions",
-          "description": "Official number plate auctions running in the canton, with the highest bids at the time of the snapshot.",
-          "items": [
-            {
-              "label": "FR12026",
-              "value": "800 CHF",
-              "detail": "current bid",
-              "date": "2026-10-26T11:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7287&locale=fr_ch"
-            },
-            {
-              "label": "FR14632",
-              "value": "700 CHF",
-              "detail": "current bid",
-              "date": "2026-10-26T11:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7288&locale=fr_ch"
-            },
-            {
-              "label": "FR19739",
-              "value": "500 CHF",
-              "detail": "current bid",
-              "date": "2026-10-26T11:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7289&locale=fr_ch"
-            }
-          ],
-          "sourceName": "Cantonal road traffic office",
-          "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-25T20:50:56.983Z"
-        },
-        {
           "id": "meteo",
           "title": "Weather",
           "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
           "items": [
             {
               "label": "Fribourg",
-              "value": "7 °C",
-              "detail": "today from 7 to 10 °C"
+              "value": "4 °C",
+              "detail": "today from 3 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-25T22:42:31.401Z"
+          "updatedAt": "2026-10-26T05:02:23.290Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -427,7 +350,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T01:29:11.421Z"
+      "updatedAt": "2026-10-26T11:20:32.372Z"
     },
     "de": {
       "canton": "FR",
@@ -440,11 +363,6 @@
           "value": "606.90 CHF",
           "note": "Prämienregion 1, Franchise 300 CHF",
           "sourceName": "Bundesamt für Gesundheit (BAG)"
-        },
-        {
-          "label": "Laufende Kontrollschild-Auktionen",
-          "value": "14",
-          "note": "mittleres Gebot 262.50 CHF"
         }
       ],
       "dataBlocks": [
@@ -469,49 +387,18 @@
           "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Kontrollschild-Auktionen",
-          "description": "Laufende offizielle Kontrollschild-Auktionen im Kanton mit den höchsten Geboten zum Zeitpunkt der Erhebung.",
-          "items": [
-            {
-              "label": "FR12026",
-              "value": "800 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-26T11:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7287&locale=fr_ch"
-            },
-            {
-              "label": "FR14632",
-              "value": "700 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-26T11:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7288&locale=fr_ch"
-            },
-            {
-              "label": "FR19739",
-              "value": "500 CHF",
-              "detail": "aktuelles Gebot",
-              "date": "2026-10-26T11:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7289&locale=fr_ch"
-            }
-          ],
-          "sourceName": "Kantonales Strassenverkehrsamt",
-          "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-25T20:50:56.983Z"
-        },
-        {
           "id": "meteo",
           "title": "Wetter",
           "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
           "items": [
             {
               "label": "Fribourg",
-              "value": "7 °C",
-              "detail": "heute 7 bis 10 °C"
+              "value": "4 °C",
+              "detail": "heute 3 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-25T22:42:31.401Z"
+          "updatedAt": "2026-10-26T05:02:23.290Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -625,7 +512,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T01:29:11.421Z"
+      "updatedAt": "2026-10-26T11:20:32.372Z"
     },
     "fr": {
       "canton": "FR",
@@ -638,11 +525,6 @@
           "value": "606,90 CHF",
           "note": "région de primes 1, franchise 300 CHF",
           "sourceName": "Office fédéral de la santé publique (OFSP)"
-        },
-        {
-          "label": "Enchères de plaques en cours",
-          "value": "14",
-          "note": "offre centrale 262,50 CHF"
         }
       ],
       "dataBlocks": [
@@ -667,49 +549,18 @@
           "updatedAt": "2026-10-25T09:11:35.438Z"
         },
         {
-          "id": "aste-targhe",
-          "title": "Enchères de plaques",
-          "description": "Enchères officielles de plaques d’immatriculation en cours dans le canton, avec les offres les plus élevées au moment du relevé.",
-          "items": [
-            {
-              "label": "FR12026",
-              "value": "800 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-26T11:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7287&locale=fr_ch"
-            },
-            {
-              "label": "FR14632",
-              "value": "700 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-26T11:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7288&locale=fr_ch"
-            },
-            {
-              "label": "FR19739",
-              "value": "500 CHF",
-              "detail": "offre actuelle",
-              "date": "2026-10-26T11:00:00.000Z",
-              "url": "https://appls.ocn.ch/ecari-auction/ui/app/details/app?id=7289&locale=fr_ch"
-            }
-          ],
-          "sourceName": "Office cantonal de la circulation",
-          "sourceUrl": "https://appls.ocn.ch/ecari-auction/ui/app/init?locale=fr_ch",
-          "updatedAt": "2026-10-25T20:50:56.983Z"
-        },
-        {
           "id": "meteo",
           "title": "Météo",
           "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
           "items": [
             {
               "label": "Fribourg",
-              "value": "7 °C",
-              "detail": "aujourd’hui de 7 à 10 °C"
+              "value": "4 °C",
+              "detail": "aujourd’hui de 3 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-25T22:42:31.401Z"
+          "updatedAt": "2026-10-26T05:02:23.290Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -819,7 +670,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T01:29:11.421Z"
+      "updatedAt": "2026-10-26T11:20:32.372Z"
     }
   }
 }

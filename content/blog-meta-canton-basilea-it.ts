@@ -36,6 +36,9 @@ const blogMetaCantonBasileaIt: Record<string, string> = {
     'blog.article.basel-stadt-siti-online-di-nuoto.title': 'Canton Basilea Città riattiva siti dopo panne tecnico',
     'blog.article.basel-stadt-siti-online-di-nuoto.excerpt': 'La riapertura dei siti e applicazioni del Canton Basilea Città è progressiva da mercoledì notte; nessun incidente rilevante per la sicurezza è stato registrato giovedì.',
     'blog.article.basel-stadt-siti-online-di-nuoto.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.salario-minimo-basilea-2027.title': 'Salario minimo Basilea aumenta a 22.50 CHF lordi dal 2027',
+    'blog.article.salario-minimo-basilea-2027.excerpt': 'Dal 1° gennaio 2027 il minimo sarà 22,50 CHF lordi L’aumento previsto è di 30 centesimi per ora L’adeguamento segue l’indice misto svizzero Cantone →',
+    'blog.article.salario-minimo-basilea-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonBasileaIt;

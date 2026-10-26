@@ -54,6 +54,9 @@ const blogMetaCantonLuEn: Record<string, string> = {
     'blog.article.consultazione-abitazioni-lucerna.title': 'Lucerne affordable housing counterproposal consultation',
     'blog.article.consultazione-abitazioni-lucerna.excerpt': 'The consultation on the counterproposal to the “For affordable housing” initiative is open from October 21, 2026, until January 22, 2027, with a vote scheduled for spring 2028.',
     'blog.article.consultazione-abitazioni-lucerna.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.fluhli-tassa-seconde-case.title': 'Motion on the second-home tax approved in Lucerne',
+    'blog.article.fluhli-tassa-seconde-case.excerpt': 'With 70 votes against 41, the Lucerne Cantonal Parliament approved Hella Schnider’s motion for a special tax on second homes.',
+    'blog.article.fluhli-tassa-seconde-case.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonLuEn;

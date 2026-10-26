@@ -127,4 +127,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'furti-cantone-ginevra-2025',
+ category: 'pratico',
+ date: '2026-10-26T11:28:00.433Z',
+ image: '/images/blog/article-furti-cantone-ginevra-2025.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

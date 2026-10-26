@@ -14,6 +14,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'taf-regolamento-aeroporto-ginevra': { it: 'taf-regolamento-aeroporto-ginevra', en: 'geneva-airport-taf-ruling', de: 'genfer-flughafen-taf-urteil', fr: 'aeroport-geneve-arret-taf' },
  'skyguide-ginevra-capacita-ottobre': { it: 'skyguide-ginevra-capacita-ottobre', en: 'skyguide-geneva-airspace-cut', de: 'skyguide-genf-luftraum-stoerung', fr: 'skyguide-geneve-espace-aerien' },
  'hug-primo-ospedale-svizzero-2027': { it: 'hug-primo-ospedale-svizzero-2027', en: 'hug-first-swiss-hospital-2027', de: 'hug-erster-schweizer-krankenhaus-2027', fr: 'hug-premier-hopital-suisse-2027' },
+ 'furti-cantone-ginevra-2025': { it: 'furti-cantone-ginevra-2025', en: 'geneva-canton-burglary-2025', de: 'einbrueche-kanton-genf-2025', fr: 'cambriolages-canton-geneve-2025' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

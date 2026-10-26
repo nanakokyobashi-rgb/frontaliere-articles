@@ -670,6 +670,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fluhli-tassa-seconde-case': {
+    title: 'Mozione sulla tassa per le seconde case approvata a Lucerna',
+    description: 'Il Parlamento cantonale di Lucerna ha accolto 70-41 la mozione di Hella Schnider per una tassa comunale sulle seconde case.',
+    keywords: 'frontalieri, ticino, svizzera, italia, mozione, sulla, tassa, seconde',
+    ogTitle: 'Mozione seconde case approvata a Lucerna',
+    ogDescription: 'Il Parlamento cantonale di Lucerna sostiene una tassa speciale sulle seconde case nei comuni turistici. La proposta mira a compensare le minori entrate dopo l\'abolizione del valore locativo; Governo, FDP e SVP hanno espresso la loro contrarietà.',
+    canonicalPath: '/articoli-lucerna/fluhli-tassa-seconde-case/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mozione sulla tassa per le seconde case approvata a Lucerna",
+      "description": "Il Parlamento cantonale di Lucerna ha accolto 70-41 la mozione di Hella Schnider per una tassa comunale sulle seconde case.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-fluhli-tassa-seconde-case.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-26T11:23:57+00:00",
+      "dateModified": "2026-10-26T11:23:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-lucerna/fluhli-tassa-seconde-case/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

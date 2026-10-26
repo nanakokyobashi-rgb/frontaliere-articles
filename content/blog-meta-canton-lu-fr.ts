@@ -54,6 +54,9 @@ const blogMetaCantonLuFr: Record<string, string> = {
     'blog.article.consultazione-abitazioni-lucerna.title': 'Contre-projet logements abordables Lucerne : consultation',
     'blog.article.consultazione-abitazioni-lucerna.excerpt': 'La consultation sur le contre-projet à l’initiative « Pour des logements abordables » est ouverte du 21 octobre 2026 au 22 janvier 2027, avec un vote prévu au printemps 2028.',
     'blog.article.consultazione-abitazioni-lucerna.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.fluhli-tassa-seconde-case.title': 'Motion sur la taxe sur les résidences secondaires approuvée à Lucerne',
+    'blog.article.fluhli-tassa-seconde-case.excerpt': 'Par 70 voix contre 41, le Parlement cantonal de Lucerne a adopté la motion de Hella Schnider en faveur d’une taxe spéciale sur les résidences secondaires.',
+    'blog.article.fluhli-tassa-seconde-case.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonLuFr;

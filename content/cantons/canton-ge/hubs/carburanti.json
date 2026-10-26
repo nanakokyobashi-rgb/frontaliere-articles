@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "296c0f91286797965f967442acd7b33135d3d095e9eac6cc41d438f5f7fe7b37",
+  "updatedAt": "2026-10-26T11:42:09.855Z",
+  "contentHash": "17e23c4529d8729b75e7a59ffbb3bece3cfcf29c77037ef6a6ed30b25f5c7aed",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Furti con effrazione nel Canton Ginevra: 3'410 nel 2025",
+          "url": "/articoli-ginevra/furti-cantone-ginevra-2025/",
+          "excerpt": "3'410 furti nel 2025, contro 3'196 nel 2024 Crescita del 6,7% tra 2024 e 2025 Incontri della Polizia: mercoledì 28 ottobre Termine Valore Cosa Furti",
+          "date": "2026-10-26T11:28:00.433Z"
+        },
+        {
           "title": "HUG primo ospedale svizzero nel ranking Smart Hospitals 2027",
           "url": "/articoli-ginevra/hug-primo-ospedale-svizzero-2027/",
           "excerpt": "Gli HUG sono 31° al mondo nel 2027 Primo ospedale svizzero della graduatoria 37 posizioni guadagnate rispetto al 2026 410 ospedali in 33 Paesi Classifica →",
@@ -94,12 +100,6 @@
           "url": "/articoli-ginevra/indagini-imprese-ginevrine/",
           "excerpt": "La Repubblica e il Cantone di Ginevra segnala indagini congiunturali di settembre nelle imprese ginevrine.",
           "date": "2026-10-10T20:58:56.034Z"
-        },
-        {
-          "title": "Cantieri a Ginevra: mobilità impattata dal 12 ottobre 2026",
-          "url": "/articoli-ginevra/cantieri-mobilita-ginevra/",
-          "excerpt": "Nuovi cantieri nel Canton Ginevra partiranno il 12 ottobre 2026 e avranno un impatto sugli spostamenti.",
-          "date": "2026-10-10T20:45:24.102Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T11:42:09.855Z"
     },
     "en": {
       "canton": "GE",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Burglaries in the Canton of Geneva: 3'410 in 2025",
+          "url": "/en/geneva-articles/geneva-canton-burglary-2025/",
+          "excerpt": "3'410 thefts in 2025, compared with 3'196 in 2024 6,7% growth between 2024 and 2025 Police meetings: Wednesday, 28 October Term Value What Burglaries involving",
+          "date": "2026-10-26T11:28:00.433Z"
+        },
+        {
           "title": "HUG first Swiss hospital in the Smart Hospitals 2027 ranking",
           "url": "/en/geneva-articles/hug-first-swiss-hospital-2027/",
           "excerpt": "HUG rank 31st in the world in 2027 First Swiss hospital in the ranking 37 positions gained compared with 2026 410 hospitals in 33 countries Ranking → Newsweek",
@@ -193,12 +199,6 @@
           "url": "/en/geneva-articles/geneva-business-surveys/",
           "excerpt": "The Republic and Canton of Geneva reports September business surveys among Geneva companies.",
           "date": "2026-10-10T20:58:56.034Z"
-        },
-        {
-          "title": "Construction work in Geneva: mobility affected from October 12, 2026",
-          "url": "/en/geneva-articles/geneva-mobility-construction/",
-          "excerpt": "New construction projects in the Canton of Geneva will begin on October 12, 2026, and will affect travel.",
-          "date": "2026-10-10T20:45:24.102Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T11:42:09.855Z"
     },
     "de": {
       "canton": "GE",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Einbruchdiebstähle im Kanton Genf: 3'410 im Jahr 2025",
+          "url": "/de/genf-artikel/einbrueche-kanton-genf-2025/",
+          "excerpt": "3'410 Diebstähle im Jahr 2025 gegenüber 3'196 im Jahr 2024 Anstieg von 6,7% zwischen 2024 und 2025 Treffen der Polizei: Mittwoch, 28.",
+          "date": "2026-10-26T11:28:00.433Z"
+        },
+        {
           "title": "HUG erstes Schweizer Spital im Ranking Smart Hospitals 2027",
           "url": "/de/genf-artikel/hug-erster-schweizer-krankenhaus-2027/",
           "excerpt": "Die HUG liegen 2027 weltweit auf Rang 31° Erstes Schweizer Spital der Rangliste Gegenüber 2026 um 37 Plätze verbessert 410 Spitäler in 33 Ländern Rangliste →",
@@ -292,12 +298,6 @@
           "url": "/de/genf-artikel/konjunkturumfragen-genfer-unternehmen/",
           "excerpt": "Die Republik und der Kanton Genf melden Konjunkturumfragen im September bei Genfer Unternehmen.",
           "date": "2026-10-10T20:58:56.034Z"
-        },
-        {
-          "title": "Baustellen in Genf: Beeinträchtigte Mobilität ab 12. Oktober 2026",
-          "url": "/de/genf-artikel/genf-mobilitaetsbaustellen/",
-          "excerpt": "Neue Baustellen im Kanton Genf starten am 12.",
-          "date": "2026-10-10T20:45:24.102Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T11:42:09.855Z"
     },
     "fr": {
       "canton": "GE",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Vols par effraction dans le canton de Genève : 3'410 en 2025",
+          "url": "/fr/articles-geneve/cambriolages-canton-geneve-2025/",
+          "excerpt": "3'410 vols en 2025, contre 3'196 en 2024 Hausse de 6,7% entre 2024 et 2025 Rencontres de la police : mercredi 28 octobre Terme Valeur Quoi Vols avec effraction",
+          "date": "2026-10-26T11:28:00.433Z"
+        },
+        {
           "title": "HUG, premier hôpital suisse du classement Smart Hospitals 2027",
           "url": "/fr/articles-geneve/hug-premier-hopital-suisse-2027/",
           "excerpt": "Les HUG sont 31e au monde en 2027 Premier hôpital suisse du classement 37 places gagnées par rapport à 2026 410 hôpitaux dans 33 pays Classement → Newsweek",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-geneve/enquetes-conjoncture-entreprises-genevoises/",
           "excerpt": "La République et le canton de Genève signale des enquêtes conjoncturelles de septembre dans les entreprises genevoises.",
           "date": "2026-10-10T20:58:56.034Z"
-        },
-        {
-          "title": "Chantiers à Genève : mobilité perturbée à partir du 12 octobre 2026",
-          "url": "/fr/articles-geneve/chantiers-mobilite-geneve/",
-          "excerpt": "De nouveaux chantiers dans le canton de Genève débuteront le 12 octobre 2026 et auront un impact sur les déplacements.",
-          "date": "2026-10-10T20:45:24.102Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T11:42:09.855Z"
     }
   }
 }

@@ -4,12 +4,12 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T05:48:28.210Z",
-  "contentHash": "d87d61094931c2ebb1d37a80fd4a9ac85717bee09f0399704f7677f0f1df4be0",
+  "updatedAt": "2026-10-26T10:46:37.997Z",
+  "contentHash": "300951f0ffaac9c24e9e0bc3b51e4a013ba0225e3e03d10419251fd35bf01cc6",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-25T21:19:09.514Z",
+      "updatedAt": "2026-10-26T05:21:20.958Z",
       "keyFacts": 2
     },
     {
@@ -28,12 +28,12 @@
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 25 ottobre 2026"
+          "note": "segnalazioni aggiornate: 26 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "7",
-          "note": "segnalazioni aggiornate: 25 ottobre 2026"
+          "note": "segnalazioni aggiornate: 26 ottobre 2026"
         }
       ],
       "dataBlocks": [
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-25T21:19:09.514Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -187,7 +187,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-26T05:48:28.210Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "en": {
       "canton": "UR",
@@ -198,12 +198,12 @@
         {
           "label": "Road closures in force or imminent",
           "value": "4",
-          "note": "reports as of 25 October 2026"
+          "note": "reports as of 26 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "7",
-          "note": "reports as of 25 October 2026"
+          "note": "reports as of 26 October 2026"
         }
       ],
       "dataBlocks": [
@@ -261,7 +261,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-25T21:19:09.514Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -357,7 +357,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-26T05:48:28.210Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "de": {
       "canton": "UR",
@@ -368,12 +368,12 @@
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "4",
-          "note": "Meldungen vom 25. Oktober 2026"
+          "note": "Meldungen vom 26. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "7",
-          "note": "Meldungen vom 25. Oktober 2026"
+          "note": "Meldungen vom 26. Oktober 2026"
         }
       ],
       "dataBlocks": [
@@ -431,7 +431,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-25T21:19:09.514Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -527,7 +527,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-26T05:48:28.210Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "fr": {
       "canton": "UR",
@@ -538,12 +538,12 @@
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "4",
-          "note": "signalements au 25 octobre 2026"
+          "note": "signalements au 26 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "7",
-          "note": "signalements au 25 octobre 2026"
+          "note": "signalements au 26 octobre 2026"
         }
       ],
       "dataBlocks": [
@@ -601,7 +601,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-25T21:19:09.514Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -697,7 +697,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-26T05:48:28.210Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     }
   }
 }
