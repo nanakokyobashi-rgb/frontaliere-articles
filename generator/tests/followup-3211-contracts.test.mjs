@@ -110,6 +110,21 @@ test('SEO reader riconosce template interpolate annidate in wrapper e oggetti Ev
   assert.equal(hasInterpolatedStaticProperty(block, 'description'), false);
 });
 
+test('SEO reader non tronca una concatenazione prima del template dinamico', () => {
+  const block = `({
+    description: 'prefisso' + \`${'${runtimeDescription}'}\`,
+  })`;
+
+  assert.equal(hasInterpolatedStaticProperty(block, 'description'), true);
+  assert.equal(lastStaticPropertyValue(block, 'description'), undefined);
+
+  const identifierExpression = `({
+    description: runtimePrefix + \`${'${runtimeDescription}'}\`,
+  })`;
+  assert.equal(hasInterpolatedStaticProperty(identifierExpression, 'description'), true);
+  assert.equal(lastStaticPropertyValue(identifierExpression, 'description'), undefined);
+});
+
 test('SEO reader rispetta i template BASE_URL risolvibili solo quando richiesto', () => {
   const block = `({
     structuredData: {

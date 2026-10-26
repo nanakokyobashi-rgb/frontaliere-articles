@@ -72,7 +72,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { corpusPath } from './corpus-paths.mjs';
 import { findSeoEntryMatches } from '../../../scripts/lib/seo-entry.mjs';
-import { staticPropertySpans, staticPropertyValues } from '../../../engine/shared/seo-entry.mjs';
+import {
+  hasInterpolatedStaticProperty,
+  staticPropertySpans,
+  staticPropertyValues,
+} from '../../../engine/shared/seo-entry.mjs';
 import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
@@ -295,6 +299,12 @@ export function upsertLocaleMetaFields(src, id, fields, { refreshTitles = false,
 }
 
 function replaceStaticSeoField(source, field, value, expectedQuote = "'") {
+  if (hasInterpolatedStaticProperty(source, field)) {
+    throw new Error(
+      `upsertSeoDescriptionBlock: campo '${field}' contiene un'assegnazione interpolata; ` +
+        'refresh rifiutato prima della scrittura.',
+    );
+  }
   const matches = staticPropertyValues(source, field);
   if (matches.some((match) => match.dynamic)) {
     throw new Error(

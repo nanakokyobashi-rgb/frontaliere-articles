@@ -397,6 +397,46 @@ function templateEnd(src, start) {
   return -1;
 }
 
+/** Find the end of a value expression before its containing object delimiter. */
+function valueExpressionEnd(src, start) {
+  let cursor = start;
+  while (cursor < src.length) {
+    const character = src[cursor];
+    if (/\s/u.test(character)) {
+      cursor += 1;
+      continue;
+    }
+    if (character === ',' || character === '}') return cursor;
+    if (character === "'" || character === '"') {
+      const close = quotedEnd(src, cursor, character);
+      cursor = close < 0 ? src.length : close + 1;
+      continue;
+    }
+    if (character === '`') {
+      const close = templateEnd(src, cursor);
+      cursor = close < 0 ? src.length : close + 1;
+      continue;
+    }
+    if (character === '/' && src[cursor + 1] === '/') {
+      const lineEnd = lineTerminatorIndex(src, cursor + 2);
+      cursor = lineEnd < 0 ? src.length : lineEnd;
+      continue;
+    }
+    if (character === '/' && src[cursor + 1] === '*') {
+      const close = src.indexOf('*/', cursor + 2);
+      cursor = close < 0 ? src.length : close + 2;
+      continue;
+    }
+    if (CLOSING[character]) {
+      const close = matchingDelimiter(src, cursor);
+      cursor = close < 0 ? src.length : close + 1;
+      continue;
+    }
+    cursor += 1;
+  }
+  return cursor;
+}
+
 /**
  * Read top-level properties from one already-balanced SEO entry.
  *
@@ -437,20 +477,7 @@ function forEachStaticProperty(block, visit) {
       continue;
     }
     const valueStart = skipStaticTrivia(block, colon + 1, 'SEO entry', 'seo-field');
-    let valueEnd = valueStart;
-    const valueQuote = block[valueStart];
-    if (valueQuote === "'" || valueQuote === '"') {
-      const literal = readStaticStringLiteral(block, valueStart, 'SEO entry', 'seo-field');
-      valueEnd = literal?.end ?? block.length;
-    } else if (valueQuote === '`') {
-      const close = templateEnd(block, valueStart);
-      valueEnd = close < 0 ? block.length : close + 1;
-    } else if (valueQuote === '{' || valueQuote === '[' || valueQuote === '(') {
-      const close = matchingDelimiter(block, valueStart);
-      valueEnd = close < 0 ? block.length : close + 1;
-    } else {
-      while (valueEnd < block.length && block[valueEnd] !== ',' && block[valueEnd] !== '}') valueEnd += 1;
-    }
+    const valueEnd = valueExpressionEnd(block, valueStart);
 
     visit({ key, valueStart, valueEnd });
     cursor = valueEnd > cursor ? valueEnd : cursor + 1;
@@ -560,7 +587,7 @@ function emptyPropertyState() {
 
 function readPropertyState(block, valueStart, valueEnd) {
   const quote = block[valueStart];
-  if ((quote === '`' || quote === '(')
+  if ((quote === "'" || quote === '"' || quote === '`' || quote === '(')
     && hasInterpolatedTemplateInRange(block, valueStart, valueEnd)) {
     // Keep the assignment visible to every consumer. Returning `undefined`
     // alone would make an interpolated final value look like an absent field,
