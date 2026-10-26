@@ -208,8 +208,8 @@ refresh_live_plan_and_preflight() {
   PREFLIGHT_SCAN_MODE=full \
     node scripts/ci/check-blog-body-links.mjs
 }
-# A normal push or cover-drain dispatch from main is a live
-# publication request, including bootstrap pushes. If main advances
+# A normal push or an unpinned dispatch from main is a live
+# publication request, including bootstrap dispatches. If main advances
 # during the render, rebase
 # onto the live head between attempts instead of retrying the stale
 # snapshot. The original push range remains the publication scope,
@@ -223,7 +223,7 @@ refresh_live_plan_and_preflight() {
 # freshness invariant.
 normal_dispatch='false'
 if { [ "$EVENT_NAME" = 'push' ] \
-  || { [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ "$BOOTSTRAP" != 'true' ]; }; } \
+  || [ "$EVENT_NAME" = 'workflow_dispatch' ]; } \
   && [ "$REF" = 'refs/heads/main' ] \
   && [ -z "${SOURCE_COMMIT:-}" ]; then
   normal_dispatch='true'
