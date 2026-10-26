@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T17:46:31.494Z",
-  "contentHash": "a798ab545ff8cb226aa5f75c9867c9fd4386c07924109a0deda7038bbeef7344",
+  "updatedAt": "2026-10-26T23:21:47.402Z",
+  "contentHash": "96d008cb10bef4a97b9f64721d107277a1c8766d31b1a32c8d00287d57420fa7",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Basilea Città elimina lo sconto sulle auto elettriche",
+          "url": "/articoli-basilea/basilea-stop-sconto-elettriche/",
+          "excerpt": "A Basilea Città, dal 2027 le auto elettriche pagheranno la tassa piena: termina lo sconto del 50% dopo il superamento della soglia del 5%.",
+          "date": "2026-10-26T23:14:00.134Z"
+        },
+        {
           "title": "Sissach: nuove fasce di quiete per il parco giochi",
           "url": "/articoli-basilea/sissach-parco-giochi-fasce-quiete/",
           "excerpt": "Nei giorni feriali è richiesta pausa quiete 12-13 e silenzio dalle 20; sabato quiete dalle 18 e domenica vietate attività rumorose.",
@@ -106,12 +112,6 @@
           "url": "/articoli-basilea/domande-edilizie-solo-digitale-2027/",
           "excerpt": "Dal 1° gennaio 2027, le domande di autorizzazione edilizia devono essere presentate solo in formato digitale, come comunicato dal Bau- und Gastgewerbeinspektorat nel settembre 2026.",
           "date": "2026-10-23T21:50:50.738Z"
-        },
-        {
-          "title": "Parlamento di Basilea: mozione per iniziare i cantieri alle 6",
-          "url": "/articoli-basilea/basilea-cantieri-alle-sei/",
-          "excerpt": "Il Gran Consiglio di Basilea ha trasmesso una mozione per consentire lavori edili alle 6 da giugno ad agosto; quelli rumorosi resterebbero dalle 7.",
-          "date": "2026-10-23T02:22:16.813Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T17:46:31.494Z"
+      "updatedAt": "2026-10-26T23:21:47.402Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Basel-Stadt abolishes the discount on electric cars",
+          "url": "/en/basel-articles/basel-electric-car-discount/",
+          "excerpt": "In Basel-Stadt, from 2027, electric cars will pay the full tax: the 50% discount ends once the 5% threshold is exceeded.",
+          "date": "2026-10-26T23:14:00.134Z"
+        },
+        {
           "title": "Sissach: new quiet hours for the playground",
           "url": "/en/basel-articles/sissach-playground-quiet-times/",
           "excerpt": "On weekdays, quiet hours from 12-13 and silence from 20 onward are required; on Saturdays, quiet from 18 onward is required, and on Sundays, noisy activities are prohibited.",
@@ -217,12 +223,6 @@
           "url": "/en/basel-articles/building-permits-only-digital-2027/",
           "excerpt": "From January 1, 2027, building permit applications must be submitted only in digital format, as announced by the Bau- und Gastgewerbeinspektorat in September 2026.",
           "date": "2026-10-23T21:50:50.738Z"
-        },
-        {
-          "title": "Basel Parliament: motion to start construction work at 6",
-          "url": "/en/basel-articles/basel-construction-start-six/",
-          "excerpt": "The Grand Council of Basel has referred a motion to allow construction work from 6 a.m.",
-          "date": "2026-10-23T02:22:16.813Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T17:46:31.494Z"
+      "updatedAt": "2026-10-26T23:21:47.402Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Basel-Stadt schafft den Rabatt auf Elektroautos ab",
+          "url": "/de/basel-artikel/basel-elektroauto-steuerrabatt/",
+          "excerpt": "In Basel-Stadt zahlen Elektroautos ab 2027 die volle Steuer: Der Rabatt von 50% endet, nachdem der Schwellenwert von 5% überschritten wurde.",
+          "date": "2026-10-26T23:14:00.134Z"
+        },
+        {
           "title": "Sissach: neue Ruhezeiten für den Spielplatz",
           "url": "/de/basel-artikel/sissach-spielplatz-ruhezeiten/",
           "excerpt": "An Werktagen gilt eine Ruhepause von 12-13 Uhr und ab 20 Uhr Ruhe; samstags gilt Ruhe ab 18 Uhr und sonntags sind lärmende Aktivitäten verboten.",
@@ -328,12 +334,6 @@
           "url": "/de/basel-artikel/baugesuche-nur-digital-2027/",
           "excerpt": "Ab dem 1. Januar 2027 müssen Baugesuche, wie das Bau- und Gastgewerbeinspektorat im September 2026 mitteilte, nur noch digital eingereicht werden.",
           "date": "2026-10-23T21:50:50.738Z"
-        },
-        {
-          "title": "Basler Parlament: Motion für einen Baubeginn um 6 Uhr",
-          "url": "/de/basel-artikel/basel-baustart-um-sechs/",
-          "excerpt": "Der Grosse Rat von Basel hat eine Motion überwiesen, um Bauarbeiten von Juni bis August um 6 Uhr zu ermöglichen; lärmintensive Arbeiten würden weiterhin erst ab 7 Uhr stattfinden.",
-          "date": "2026-10-23T02:22:16.813Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T17:46:31.494Z"
+      "updatedAt": "2026-10-26T23:21:47.402Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Bâle-Ville supprime la réduction pour les voitures électriques",
+          "url": "/fr/articles-bale/bale-rabais-voitures-electriques/",
+          "excerpt": "À Bâle-Ville, à partir de 2027, les voitures électriques paieront la taxe pleine : la réduction de 50% prend fin après le dépassement du seuil de 5%.",
+          "date": "2026-10-26T23:14:00.134Z"
+        },
+        {
           "title": "Sissach : nouvelles plages de calme pour l’aire de jeux",
           "url": "/fr/articles-bale/sissach-aire-jeux-calme/",
           "excerpt": "En semaine, une pause de tranquillité 12-13 est requise et le silence est exigé à partir de 20 ; le samedi, le calme est exigé à partir de 18 et, le dimanche, les activités bruyantes sont interdites.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-bale/demandes-permis-digital-2027/",
           "excerpt": "À partir du 1er janvier 2027, les demandes de permis de construire doivent être soumises uniquement sous forme numérique, comme l’a annoncé le Bau- und Gastgewerbeinspektorat en septembre 2026.",
           "date": "2026-10-23T21:50:50.738Z"
-        },
-        {
-          "title": "Parlement de Bâle : motion pour commencer les chantiers à 6 heures",
-          "url": "/fr/articles-bale/bale-chantier-six-heures/",
-          "excerpt": "Le Grand Conseil de Bâle a transmis une motion visant à autoriser les travaux de construction à 6 heures de juin à août ; les travaux bruyants resteraient à partir de 7 heures.",
-          "date": "2026-10-23T02:22:16.813Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T17:46:31.494Z"
+      "updatedAt": "2026-10-26T23:21:47.402Z"
     }
   }
 }
