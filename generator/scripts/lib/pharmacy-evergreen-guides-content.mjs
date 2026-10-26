@@ -63,25 +63,25 @@ export const PHARMACY_ROUTES = Object.freeze({
     hub: '/farmacie/',
     ticino: '/farmacie/ticino/',
     italy: '/farmacie/italia/',
-    duty: '/farmacie-di-turno/',
+    duty: '/farmacie/',
   }),
   en: Object.freeze({
     hub: '/en/pharmacies/',
     ticino: '/en/pharmacies/ticino/',
     italy: '/en/pharmacies/italy/',
-    duty: '/en/on-duty-pharmacies/',
+    duty: '/en/pharmacies/',
   }),
   de: Object.freeze({
     hub: '/de/apotheken/',
     ticino: '/de/apotheken/ticino/',
     italy: '/de/apotheken/italien/',
-    duty: '/de/notdienst-apotheken/',
+    duty: '/de/apotheken/',
   }),
   fr: Object.freeze({
     hub: '/fr/pharmacies/',
     ticino: '/fr/pharmacies/ticino/',
     italy: '/fr/pharmacies/italie/',
-    duty: '/fr/pharmacies-de-garde/',
+    duty: '/fr/pharmacies/',
   }),
 });
 

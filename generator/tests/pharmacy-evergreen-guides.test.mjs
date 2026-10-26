@@ -91,6 +91,18 @@ const ANNUAL_SOURCE_NOTES = {
   fr: 'document annuel, édition 2026',
 };
 
+test('pharmacy evergreen: i link ai turni usano le route pubblicate degli hub', () => {
+  assert.deepEqual(
+    Object.fromEntries(PHARMACY_LOCALES.map((locale) => [locale, PHARMACY_ROUTES[locale].duty])),
+    {
+      it: '/farmacie/',
+      en: '/en/pharmacies/',
+      de: '/de/apotheken/',
+      fr: '/fr/pharmacies/',
+    },
+  );
+});
+
 test('pharmacy evergreen: ogni guida localizzata espone scope, fonti, semantica e link operativi', () => {
   const snapshots = loadPharmacySnapshots();
   const guides = buildPharmacyEvergreenGuides(snapshots);
