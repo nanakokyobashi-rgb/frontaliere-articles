@@ -222,9 +222,18 @@ jobs:
           # Ogni chiamata GitHub deve avere un limite proprio: il budget del
           # job non interrompe una `gh api` già bloccata e, senza questo
           # wrapper, una lettura appesa può consumare l'intero backfill.
-          api_timeout_seconds=60
+          # Keep an operator override available for a slow GitHub incident,
+          # but never let malformed input remove the per-call deadline.
+          api_timeout_seconds="${GH_API_TIMEOUT_SECONDS:-60}"
+          case "$api_timeout_seconds" in
+            ''|*[!0-9]*) api_timeout_seconds=60 ;;
+          esac
+          if [ "$api_timeout_seconds" -lt 1 ] || [ "$api_timeout_seconds" -gt 300 ]; then
+            api_timeout_seconds=60
+          fi
+          api_kill_after_seconds=5
           gh_api_timeout() {
-            timeout --kill-after=5s "${api_timeout_seconds}s" gh api "$@"
+            timeout --kill-after="${api_kill_after_seconds}s" "${api_timeout_seconds}s" gh api "$@"
           }
 
           validate_workflow_runs() {

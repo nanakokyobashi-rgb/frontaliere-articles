@@ -11,10 +11,12 @@ const WORKFLOW = readFileSync(
 );
 
 test('il backfill applica un timeout a ogni chiamata GitHub', () => {
+  assert.match(WORKFLOW, /api_timeout_seconds="\$\{GH_API_TIMEOUT_SECONDS:-60\}"/);
+  assert.match(WORKFLOW, /api_kill_after_seconds=5/);
   assert.match(WORKFLOW, /api_timeout_seconds=60/);
   assert.match(
     WORKFLOW,
-    /timeout --kill-after=5s "\$\{api_timeout_seconds\}s" gh api "\$@"/,
+    /timeout --kill-after="\$\{api_kill_after_seconds\}s" "\$\{api_timeout_seconds\}s" gh api "\$@"/,
   );
   assert.match(
     WORKFLOW,
