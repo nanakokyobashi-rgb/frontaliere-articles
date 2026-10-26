@@ -55,6 +55,14 @@
     "canton-ne::https://www.rts.ch/play/tv/emission/couleurs-locales?id=470618": {
       "section": "canton-ne",
       "ts": 1793010226268
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-train-aspirateur-en-action-dans-le-tunnel-de-base-du-gothard.html": {
+      "section": "canton-ne",
+      "ts": 1793012812211
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-sergio-ermotti-auditionne-au-parlement-sur-la-lex-ubs.html": {
+      "section": "canton-ne",
+      "ts": 1793012931512
     }
   }
 }
