@@ -48,6 +48,9 @@ const blogMetaCantonZgDe: Record<string, string> = {
     'blog.article.zugo-multa-mancata-dichiarazione-fiscale.title': 'Zug: Busse von CHF 900 wegen Nichtabgabe der Steuererklärung',
     'blog.article.zugo-multa-mancata-dichiarazione-fiscale.excerpt': 'Gericht Zug: Busse von 900 CHF Effektive Steuer von 41,15 CHF gestrichen 105 CHF Verzugskosten bleiben bestehen Die Steuererklärung 2023 wurde nicht eingereicht',
     'blog.article.zugo-multa-mancata-dichiarazione-fiscale.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.esecutivo-zugo-mandato-2030.title': 'Zug: Zuteilung der Direktionen ab dem 1. Januar 2027',
+    'blog.article.esecutivo-zugo-mandato-2030.excerpt': 'Der Regierungsrat von Zug hat die Direktionen und Stellvertretungen für die Amtsperiode 2027-2030 festgelegt und die Direktionen der bereits amtierenden Mitglieder bestätigt.',
+    'blog.article.esecutivo-zugo-mandato-2030.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZgDe;

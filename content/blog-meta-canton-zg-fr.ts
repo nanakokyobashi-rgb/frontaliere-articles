@@ -48,6 +48,9 @@ const blogMetaCantonZgFr: Record<string, string> = {
     'blog.article.zugo-multa-mancata-dichiarazione-fiscale.title': 'Zoug : amende de CHF 900 pour non-déclaration fiscale',
     'blog.article.zugo-multa-mancata-dichiarazione-fiscale.excerpt': 'Tribunal de Zoug : amende de 900 CHF Impôt effectif de 41,15 CHF annulé Frais de retard de 105 CHF restant La déclaration 2023 n\'a pas été déposée Autorité →',
     'blog.article.zugo-multa-mancata-dichiarazione-fiscale.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.esecutivo-zugo-mandato-2030.title': 'Zoug : attribution des départements à partir du 1er janvier 2027',
+    'blog.article.esecutivo-zugo-mandato-2030.excerpt': 'Le Conseil d\'État de Zoug a défini les départements et les suppléances pour la période 2027-2030, confirmant les départements des membres déjà en fonction.',
+    'blog.article.esecutivo-zugo-mandato-2030.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonZgFr;
