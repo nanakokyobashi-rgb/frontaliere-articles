@@ -4,12 +4,12 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "95249d43b0e4845617eb7bf0ab2961195fc04b41619da137def7c3ac78c24050",
+  "updatedAt": "2026-10-26T11:35:21.204Z",
+  "contentHash": "1cc0352fb8c7efa9e64c424380581d6eab0bceb8f4a9e0a7e909fd11163777af",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-24T11:32:51.939Z",
+      "updatedAt": "2026-10-25T12:00:24.779Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-24T11:32:51.939Z"
+          "updatedAt": "2026-10-25T12:00:24.779Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Mozione sulla tassa per le seconde case approvata a Lucerna",
+          "url": "/articoli-lucerna/fluhli-tassa-seconde-case/",
+          "excerpt": "Con 70 voti contro 41, il Parlamento cantonale di Lucerna ha accolto la mozione di Hella Schnider per una tassa speciale sulle seconde case.",
+          "date": "2026-10-26T11:23:57.392Z"
+        },
         {
           "title": "Consultazione controprogetto abitazioni accessibili nel Cantone Lucerna",
           "url": "/articoli-lucerna/consultazione-abitazioni-lucerna/",
@@ -82,12 +88,6 @@
           "url": "/articoli-lucerna/lucerna-governo-risposta-sp/",
           "excerpt": "Nel 2024 solo il 15% delle abitazioni in affitto nel Canton Lucerna era a prezzi accessibili.",
           "date": "2026-10-22T07:56:30.871Z"
-        },
-        {
-          "title": "Lucerna: interessi fiscali 2027 restano allo 0%",
-          "url": "/articoli-lucerna/lucerna-tassi-fiscali-zero-2027/",
-          "excerpt": "Nel 2027 Lucerna mantiene allo 0,00% i tassi fiscali; la mora resta al 4,00%.",
-          "date": "2026-10-21T13:53:04.510Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T11:35:21.204Z"
     },
     "en": {
       "canton": "LU",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-24T11:32:51.939Z"
+          "updatedAt": "2026-10-25T12:00:24.779Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Motion on the second-home tax approved in Lucerne",
+          "url": "/en/lucerne-articles/fluehli-second-home-tax/",
+          "excerpt": "With 70 votes against 41, the Lucerne Cantonal Parliament approved Hella Schnider’s motion for a special tax on second homes.",
+          "date": "2026-10-26T11:23:57.392Z"
+        },
         {
           "title": "Lucerne affordable housing counterproposal consultation",
           "url": "/en/lucerne-articles/lucerne-housing-consultation/",
@@ -169,12 +175,6 @@
           "url": "/en/lucerne-articles/lucerne-government-sp-response/",
           "excerpt": "In 2024, only 15% of rental housing in the Canton of Lucerne was affordable.",
           "date": "2026-10-22T07:56:30.871Z"
-        },
-        {
-          "title": "Lucerne: tax interest 2027 remains at 0%",
-          "url": "/en/lucerne-articles/lucerne-tax-interest-zero-2027/",
-          "excerpt": "In 2027 Lucerne maintains tax rates at 0.00%; the default remains at 4.00%.",
-          "date": "2026-10-21T13:53:04.510Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T11:35:21.204Z"
     },
     "de": {
       "canton": "LU",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-24T11:32:51.939Z"
+          "updatedAt": "2026-10-25T12:00:24.779Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Motion zur Zweitwohnungssteuer in Luzern angenommen",
+          "url": "/de/luzern-artikel/fluehli-steuer-zweitwohnungen/",
+          "excerpt": "Mit 70 zu 41 Stimmen hat das Luzerner Kantonsparlament die Motion von Hella Schnider für eine Sondersteuer auf Zweitwohnungen angenommen.",
+          "date": "2026-10-26T11:23:57.392Z"
+        },
         {
           "title": "Vernehmlassung zum Gegenvorschlag für bezahlbaren Wohnraum im Kanton Luzern",
           "url": "/de/luzern-artikel/wohnraum-konsultation-luzern/",
@@ -256,12 +262,6 @@
           "url": "/de/luzern-artikel/luzern-regierung-sp-antwort/",
           "excerpt": "Im Jahr 2024 waren im Kanton Luzern nur 15% der Mietwohnungen bezahlbar.",
           "date": "2026-10-22T07:56:30.871Z"
-        },
-        {
-          "title": "Luzern: Steuerzinsen 2027 bleiben bei 0%",
-          "url": "/de/luzern-artikel/luzern-steuerzinsen-null-2027/",
-          "excerpt": "Im Jahr 2027 behält Luzern die Steuersätze bei 0,00%; der Verzug bleibt bei 4,00%.",
-          "date": "2026-10-21T13:53:04.510Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T11:35:21.204Z"
     },
     "fr": {
       "canton": "LU",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-24T11:32:51.939Z"
+          "updatedAt": "2026-10-25T12:00:24.779Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Motion sur la taxe sur les résidences secondaires approuvée à Lucerne",
+          "url": "/fr/articles-lucerne/fluehli-taxe-residences-secondaires/",
+          "excerpt": "Par 70 voix contre 41, le Parlement cantonal de Lucerne a adopté la motion de Hella Schnider en faveur d’une taxe spéciale sur les résidences secondaires.",
+          "date": "2026-10-26T11:23:57.392Z"
+        },
         {
           "title": "Contre-projet logements abordables Lucerne : consultation",
           "url": "/fr/articles-lucerne/consultation-logements-lucerne/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-lucerne/lucerne-gouvernement-reponse-sp/",
           "excerpt": "En 2024, seuls 15 % des logements locatifs du canton de Lucerne étaient abordables.",
           "date": "2026-10-22T07:56:30.871Z"
-        },
-        {
-          "title": "Lucerne : les intérêts fiscaux 2027 restent à 0%",
-          "url": "/fr/articles-lucerne/lucerne-interets-fiscaux-zero-2027/",
-          "excerpt": "En 2027, Lucerne maintient les taux d'imposition à 0,00 % ; les arriérés restent à 4,00 %.",
-          "date": "2026-10-21T13:53:04.510Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T11:35:21.204Z"
     }
   }
 }

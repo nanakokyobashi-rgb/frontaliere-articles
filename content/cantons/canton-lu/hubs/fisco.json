@@ -4,8 +4,8 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "fisco",
-  "updatedAt": "2026-10-21T14:03:21.791Z",
-  "contentHash": "b56a7c13609d1ac4c5d19ee2efc8501f51866c016882b40e32051983b0705010",
+  "updatedAt": "2026-10-26T11:35:21.204Z",
+  "contentHash": "29cd426e04dfa437f4786fc5c0ded0d22572f613df6d5c78216413992d38da79",
   "blocks": [
     {
       "id": "onere-fiscale",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-20T20:55:38.574Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -115,7 +115,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -130,6 +130,12 @@
           "url": "/articoli-lucerna/lucerna-tassi-fiscali-zero-2027/",
           "excerpt": "Nel 2027 Lucerna mantiene allo 0,00% i tassi fiscali; la mora resta al 4,00%.",
           "date": "2026-10-21T13:53:04.510Z"
+        },
+        {
+          "title": "Mozione sulla tassa per le seconde case approvata a Lucerna",
+          "url": "/articoli-lucerna/fluhli-tassa-seconde-case/",
+          "excerpt": "Con 70 voti contro 41, il Parlamento cantonale di Lucerna ha accolto la mozione di Hella Schnider per una tassa speciale sulle seconde case.",
+          "date": "2026-10-26T11:23:57.392Z"
         },
         {
           "title": "Kriens torna in rosso dopo surplus milionari",
@@ -160,12 +166,6 @@
           "url": "/articoli-svizzera/imposte-cantonali-canton-lucerna-aliquote/",
           "excerpt": "Guida alle imposte cantonali e comunali nel Cantone di Lucerna con aliquote, scaglioni, deduzioni e portale ufficiale dell'amministrazione fiscale.",
           "date": "2026-08-14T01:47:31.544Z"
-        },
-        {
-          "title": "Imposta di successione e donazione nel Cantone di Lucerna",
-          "url": "/articoli-svizzera/imposta-di-succesione-e-donazione-canton-lucerna/",
-          "excerpt": "Sono previste aliquote diverse in base al grado di parentela tra i beneficiari e i donanti.",
-          "date": "2026-08-15T22:49:24.474Z"
         }
       ],
       "latestCantonArticles": [],
@@ -191,7 +191,7 @@
           "url": "/fisco/"
         }
       ],
-      "updatedAt": "2026-10-21T14:03:21.791Z"
+      "updatedAt": "2026-10-26T11:35:21.204Z"
     },
     "en": {
       "canton": "LU",
@@ -284,7 +284,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -299,6 +299,12 @@
           "url": "/en/lucerne-articles/lucerne-tax-interest-zero-2027/",
           "excerpt": "In 2027 Lucerne maintains tax rates at 0.00%; the default remains at 4.00%.",
           "date": "2026-10-21T13:53:04.510Z"
+        },
+        {
+          "title": "Motion on the second-home tax approved in Lucerne",
+          "url": "/en/lucerne-articles/fluehli-second-home-tax/",
+          "excerpt": "With 70 votes against 41, the Lucerne Cantonal Parliament approved Hella Schnider’s motion for a special tax on second homes.",
+          "date": "2026-10-26T11:23:57.392Z"
         },
         {
           "title": "Kriens back in the red after million-dollar surpluses",
@@ -329,12 +335,6 @@
           "url": "/en/swiss-articles/canton-lucerne-cantonal-taxes-deductions/",
           "excerpt": "Guide to cantonal and municipal taxes in the Canton of Lucerne with rates, brackets, deductions and official portal of the tax administration.",
           "date": "2026-08-14T01:47:31.544Z"
-        },
-        {
-          "title": "Inheritance and gift tax in the Canton of Lucerne",
-          "url": "/en/swiss-articles/imposta-di-succesione-e-donazione-canton-lucerne-en/",
-          "excerpt": "Different rates are provided according to the degree of kinship between beneficiaries and donors.",
-          "date": "2026-08-15T22:49:24.474Z"
         }
       ],
       "latestCantonArticles": [],
@@ -360,7 +360,7 @@
           "url": "/en/tax/"
         }
       ],
-      "updatedAt": "2026-10-21T14:03:21.791Z"
+      "updatedAt": "2026-10-26T11:35:21.204Z"
     },
     "de": {
       "canton": "LU",
@@ -453,7 +453,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -468,6 +468,12 @@
           "url": "/de/luzern-artikel/luzern-steuerzinsen-null-2027/",
           "excerpt": "Im Jahr 2027 behält Luzern die Steuersätze bei 0,00%; der Verzug bleibt bei 4,00%.",
           "date": "2026-10-21T13:53:04.510Z"
+        },
+        {
+          "title": "Motion zur Zweitwohnungssteuer in Luzern angenommen",
+          "url": "/de/luzern-artikel/fluehli-steuer-zweitwohnungen/",
+          "excerpt": "Mit 70 zu 41 Stimmen hat das Luzerner Kantonsparlament die Motion von Hella Schnider für eine Sondersteuer auf Zweitwohnungen angenommen.",
+          "date": "2026-10-26T11:23:57.392Z"
         },
         {
           "title": "Kriens schreibt nach Überschüssen in Millionenhöhe wieder rote Zahlen",
@@ -498,12 +504,6 @@
           "url": "/de/schweiz-artikel/kantonssteuern-kanton-luzern-abzuege/",
           "excerpt": "Leitfaden zu den Kantons- und Gemeindesteuern im Kanton Luzern mit Steuersätzen, Staffelungen, Abzügen und dem offiziellen Portal der Steuerverwaltung.",
           "date": "2026-08-14T01:47:31.544Z"
-        },
-        {
-          "title": "Erbschafts- und Schenkungssteuer im Kanton Luzern",
-          "url": "/de/schweiz-artikel/imposta-di-succesione-e-donazione-canton-luzern-de/",
-          "excerpt": "Je nach Verwandtschaftsgrad zwischen den Begünstigten und den Spendern gibt es unterschiedliche Sätze.",
-          "date": "2026-08-15T22:49:24.474Z"
         }
       ],
       "latestCantonArticles": [],
@@ -529,7 +529,7 @@
           "url": "/de/steuern/"
         }
       ],
-      "updatedAt": "2026-10-21T14:03:21.791Z"
+      "updatedAt": "2026-10-26T11:35:21.204Z"
     },
     "fr": {
       "canton": "LU",
@@ -622,7 +622,7 @@
               "url": "https://news.lu.ch/html_mail.jsp?id=0&email=news.lu.ch&mailref=000mz40000076000000000000c45ckmf"
             }
           ],
-          "updatedAt": "2026-10-20T20:55:38.574Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -637,6 +637,12 @@
           "url": "/fr/articles-lucerne/lucerne-interets-fiscaux-zero-2027/",
           "excerpt": "En 2027, Lucerne maintient les taux d'imposition à 0,00 % ; les arriérés restent à 4,00 %.",
           "date": "2026-10-21T13:53:04.510Z"
+        },
+        {
+          "title": "Motion sur la taxe sur les résidences secondaires approuvée à Lucerne",
+          "url": "/fr/articles-lucerne/fluehli-taxe-residences-secondaires/",
+          "excerpt": "Par 70 voix contre 41, le Parlement cantonal de Lucerne a adopté la motion de Hella Schnider en faveur d’une taxe spéciale sur les résidences secondaires.",
+          "date": "2026-10-26T11:23:57.392Z"
         },
         {
           "title": "Kriens repasse dans le rouge après des excédents de plusieurs millions",
@@ -667,12 +673,6 @@
           "url": "/fr/articles-suisse/impots-cantonaux-canton-lucerne-baremes/",
           "excerpt": "Guide des impôts cantonaux et communaux dans le canton de Lucerne avec taux, tranches, déductions et portail officiel de l'administration fiscale.",
           "date": "2026-08-14T01:47:31.544Z"
-        },
-        {
-          "title": "Droits de succession et de donation dans le canton de Lucerne",
-          "url": "/fr/articles-suisse/imposta-di-succesione-e-donazione-canton-lucerne-fr/",
-          "excerpt": "Des taux différents sont prévus en fonction du degré de parenté entre les bénéficiaires et les donneurs.",
-          "date": "2026-08-15T22:49:24.474Z"
         }
       ],
       "latestCantonArticles": [],
@@ -698,7 +698,7 @@
           "url": "/fr/fiscalite/"
         }
       ],
-      "updatedAt": "2026-10-21T14:03:21.791Z"
+      "updatedAt": "2026-10-26T11:35:21.204Z"
     }
   }
 }
