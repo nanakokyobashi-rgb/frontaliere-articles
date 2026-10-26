@@ -811,8 +811,15 @@ function assertWorkflowRebaseGate(workflow) {
     'PRODUCED va preso dopo il commit e PRIMA di ogni rebase: dopo, la voce del ledger del run puo\' essere sparita');
   assert.ok(reportPathAt >= 0 && reportCopyAt > reportPathAt && reportCopyAt < loopAt,
     'il report del run va copiato fuori dal checkout prima del primo rebase');
-  assert.match(active.slice(reportPathAt, loopAt), /if \[ ! -s \.tmp\/create-article-run-report\.json \]; then[\s\S]*?exit 1/,
-    'un report assente deve fermare il push prima del rebase');
+  const reportGuard = active.slice(reportPathAt, loopAt);
+  assert.match(reportGuard, /if \[ -s \.tmp\/create-article-run-report\.json \]; then[\s\S]*?has_run_report=true/,
+    'un report presente deve essere isolato prima del rebase');
+  assert.ok(reportGuard.includes('elif [ "${{ steps.generate.outputs.article }}" != "true" ] && [ "${{ steps.generate.outputs.declared }}" = "true" ]; then'),
+    'un no-article dichiarato deve avere un percorso fail-closed senza report');
+  assert.match(reportGuard, /staged_content=/,
+    'il percorso no-article deve verificare che non sia stato staged contenuto');
+  assert.match(reportGuard, /else[\s\S]*?::error::create-article run report is missing before the push\/rebase loop[\s\S]*?exit 1/,
+    'un report assente per un articolo o un esito non dichiarato deve fermare il push prima del rebase');
   assert.ok(rebaseAt > loopAt && checkAt > rebaseAt && doneAt > checkAt,
     'il controllo sta nel loop, dopo il rebase e prima del prossimo push');
   const rebaseCall = active.slice(rebaseAt, checkAt);

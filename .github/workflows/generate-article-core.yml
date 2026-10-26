@@ -1155,12 +1155,22 @@ jobs:
             exit 0
           fi
           RUN_REPORT="$RUNNER_TEMP/create-article-run-report.json"
-          if [ ! -s .tmp/create-article-run-report.json ]; then
-            if [ "${{ steps.generate.outputs.cooperative_stop }}" = "true" ] && [ "${{ steps.generate.outputs.article }}" != "true" ]; then
-              echo "::warning::create-article run report is missing after a proven cooperative stop; discarding unreported staged changes and deferring the run"
-              git reset --mixed HEAD
-              exit 0
+          has_run_report=false
+          if [ -s .tmp/create-article-run-report.json ]; then
+            cp .tmp/create-article-run-report.json "$RUN_REPORT"
+            has_run_report=true
+          elif [ "${{ steps.generate.outputs.cooperative_stop }}" = "true" ] && [ "${{ steps.generate.outputs.article }}" != "true" ]; then
+            echo "::warning::create-article run report is missing after a proven cooperative stop; discarding unreported staged changes and deferring the run"
+            git reset --mixed HEAD
+            exit 0
+          elif [ "${{ steps.generate.outputs.article }}" != "true" ] && [ "${{ steps.generate.outputs.declared }}" = "true" ]; then
+            staged_content="$(git diff --cached --name-only -- content/ || true)"
+            if [ -n "$staged_content" ]; then
+              echo "::error::create-article run report is missing with staged content; refusing to publish unverified article files"
+              exit 1
             fi
+            echo "::warning::declared no-article run report is missing; committing bookkeeping without content"
+          else
             echo "::error::create-article run report is missing before the push/rebase loop"
             exit 1
           fi
@@ -1168,8 +1178,6 @@ jobs:
             echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push fires no workflow at all (anti-recursion), so the article would never reach the site via publish-api.yml AND the self-trigger chain would stop dead. Both depend on this push being PAT-authenticated."
             exit 1
           fi
-          cp .tmp/create-article-run-report.json "$RUN_REPORT"
-
           if [ "${{ steps.generate.outputs.article }}" = "true" ]; then
             git commit -m "Generate blog article (${{ steps.generate.outputs.section }})"
           else
@@ -1251,11 +1259,15 @@ jobs:
                   git commit --amend --no-edit
                 fi
               fi
-              uniq_rc=0
-              node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD --run-report "$RUN_REPORT" || uniq_rc=$?
-              if [ "$uniq_rc" -ne 0 ]; then
-                echo "::error::post-rebase uniqueness check exited $uniq_rc — not pushing (POST_REBASE_UNIQUENESS_VIOLATION: the article collides on id, source URL, topic, or content; POST_REBASE_UNIQUENESS_ERROR: the check could not run). See the lines above."
-                exit 1
+              if [ "$has_run_report" = "true" ]; then
+                uniq_rc=0
+                node scripts/ci/check-post-rebase-uniqueness.mjs --produced "$PRODUCED" --against HEAD --run-report "$RUN_REPORT" || uniq_rc=$?
+                if [ "$uniq_rc" -ne 0 ]; then
+                  echo "::error::post-rebase uniqueness check exited $uniq_rc — not pushing (POST_REBASE_UNIQUENESS_VIOLATION: the article collides on id, source URL, topic, or content; POST_REBASE_UNIQUENESS_ERROR: the check could not run). See the lines above."
+                  exit 1
+                fi
+              else
+                echo "post-rebase uniqueness skipped: declared no-article run has no report or article identity"
               fi
             fi
           done
