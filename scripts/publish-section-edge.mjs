@@ -133,6 +133,22 @@ export const STAGING_VERIFY_RETRY_MS = 4000;
 const sha256 = (data) => createHash('sha256').update(data).digest('hex');
 const isPlainObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
 
+/** Keep adapter/test overrides finite and ensure bounded loops still run. */
+export function normalizeBoundedAttempts(value, fallback) {
+  let numeric;
+  try {
+    numeric = Number(value);
+  } catch {
+    return fallback;
+  }
+  if (!Number.isFinite(numeric)) return fallback;
+  return Math.max(1, Math.floor(numeric));
+}
+
+export function normalizeStagingVerifyAttempts(value) {
+  return normalizeBoundedAttempts(value, STAGING_VERIFY_ATTEMPTS);
+}
+
 export function hasResponseBody(response) {
   return ArrayBuffer.isView(response?.body);
 }
@@ -477,12 +493,11 @@ export async function waitForBootstrapLocks(
         pending.push(`${section} (lock non verificabile: HTTP ${got.status || 'nessuna risposta'})`);
         continue;
       }
-      const body = responseBytes(got);
-      if (!body) {
+      if (!hasResponseBody(got)) {
         pending.push(`${section} (lock non verificabile: body assente)`);
         continue;
       }
-      const state = parseSectionBootstrapLock(body, { section, now: now() });
+      const state = parseSectionBootstrapLock(responseBytes(got), { section, now: now() });
       if (state.state === 'active') pending.push(`${section} (${state.doc.owner})`);
       else if (state.state === 'unknown') pending.push(`${section} (${state.reason})`);
     }
@@ -512,7 +527,7 @@ export async function releaseBootstrapLocks(
     };
   }
 
-  const maxAttempts = Math.max(1, Math.floor(Number(attempts) || 0));
+  const maxAttempts = normalizeBoundedAttempts(attempts, BOOTSTRAP_RELEASE_ATTEMPTS);
   let pending = ids;
   let failures = new Map();
   for (let attempt = 1; attempt <= maxAttempts && pending.length > 0; attempt++) {
@@ -635,15 +650,13 @@ export async function missingBootstrapPages(
     let previousSitemapXml = null;
     if (wasLive(id) && previous.doc.release?.files?.[name]) {
       const got = await io.fetchBytes(`${CDN}/${previous.doc.release.base}${name}`);
-      const body = responseBytes(got);
-      if (got.status === 200 && body) previousSitemapXml = body.toString('utf8');
+      if (got.status === 200 && hasResponseBody(got)) previousSitemapXml = responseBytes(got).toString('utf8');
     }
     pending.push(...requiredPageKeys(id, { sitemapXml: sitemap ? fs.readFileSync(sitemap.local, 'utf8') : undefined, previousSitemapXml }));
   }
   const present = async (key) => {
     const got = await io.fetchBytes(`${CDN}/${key}`);
-    const body = responseBytes(got);
-    return got.status === 200 && Boolean(body?.toString('utf8').includes(CORPUS_ROUTE_OWNER_META_TAG));
+    return got.status === 200 && hasResponseBody(got) && responseBytes(got).toString('utf8').includes(CORPUS_ROUTE_OWNER_META_TAG);
   };
   const deadline = deadlineAt ?? Date.now() + waitMs;
   for (;;) {
@@ -665,12 +678,11 @@ export async function missingBootstrapPages(
 export async function readPreviousRelease(io) {
   const res = await io.fetchBytes(`${CDN}/${EDGE_SECTION_REGISTRY_FILE}`);
   if (res.status === 404) return { state: 'absent' };
-  if (res.status !== 200 || !hasResponseBody(res)) return { state: 'unknown' };
+  if (res.status !== 200) return { state: 'unknown' };
+  if (!hasResponseBody(res)) return { state: 'unknown' };
   let doc;
-  const registryBody = responseBytes(res);
   try {
-    if (!registryBody) return { state: 'unknown' };
-    doc = JSON.parse(registryBody.toString('utf8'));
+    doc = JSON.parse(responseBytes(res).toString('utf8'));
   } catch {
     return { state: 'unknown' };
   }
@@ -679,8 +691,7 @@ export async function readPreviousRelease(io) {
   if (files === null) return { state: 'unknown', doc };
   for (const [name, hash] of Object.entries(files)) {
     const got = await io.fetchBytes(`${CDN}/${doc.release.base}${name}`);
-    const body = responseBytes(got);
-    if (got.status !== 200 || !body || sha256(body) !== hash) return { state: 'unknown', doc };
+    if (got.status !== 200 || !hasResponseBody(got) || sha256(responseBytes(got)) !== hash) return { state: 'unknown', doc };
   }
   return { state: 'ok', doc };
 }
@@ -810,8 +821,8 @@ export async function publishRelease(
   }
   for (const file of release.files) {
     let served = { status: 0 };
+    const attempts = normalizeStagingVerifyAttempts(stagingVerifyAttempts);
     let verified = false;
-    const attempts = Math.max(1, Math.floor(stagingVerifyAttempts));
     for (let attempt = 1; attempt <= attempts; attempt++) {
       served = await io.fetchBytes(`${CDN}/${file.key}`);
       verified = hasExpectedStagingBody(served, file);
