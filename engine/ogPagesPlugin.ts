@@ -29,7 +29,11 @@ import { readImageIntrinsicSize } from './shared/imageIntrinsicSize';
 import { parseStaticArticleTranslationSource, parseStaticBlogBodySource } from './shared/articleStaticSource.mjs';
 export { parseStaticBlogBodySource };
 import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
-import { lastStaticPropertyValue, readStructuredSeoDescription } from './shared/seo-entry.mjs';
+import {
+ lastStaticPropertyValue,
+ readStructuredSeoDescription,
+ staticPropertyValues,
+} from './shared/seo-entry.mjs';
 import { createImageCreditReader, imageObjectCreditFields, renderImageCreditHtml } from './shared/imageCredits.mjs';
 import { computeSectionTopicAssignment } from './articleHubPagesPlugin';
 import { TOPIC_CLUSTERS, TOPIC_HUB_SEGMENT, type TopicLocale } from './topicTaxonomy';
@@ -797,7 +801,9 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const keywords = matchStr('keywords');
  const ogT = matchStr('ogTitle') || title;
  const ogD = matchStr('ogDescription') || desc;
- const cp = lastStaticPropertyValue(b, 'canonicalPath') ?? '';
+ const canonicalCandidates = staticPropertyValues(b, 'canonicalPath');
+ const canonicalCandidate = canonicalCandidates[canonicalCandidates.length - 1];
+ const cp = canonicalCandidate?.quote === "'" ? canonicalCandidate.value : '';
  const imRaw = b.match(/\/images\/[^'"`\s,}]+/)?.[0] ?? DEFAULT_IMG;
  const im = resolveImagePath(imRaw, articleId);
  // Measured here, next to the resolution that produced the path, so the
