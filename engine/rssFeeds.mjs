@@ -39,8 +39,10 @@ import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
 import { parseStaticArticleTranslationSource, parseStaticBlogBodySource } from './shared/articleStaticSource.mjs';
 import {
   findAllSeoEntryMatches,
+  hasInterpolatedStaticProperty,
   lastStaticPropertyValue,
   readStructuredSeoDescription,
+  readStructuredSeoDescriptionState,
 } from './shared/seo-entry.mjs';
 import { createImageCreditReader, mediaRssCreditXml, renderImageCreditHtml } from './shared/imageCredits.mjs';
 import { decodeStaticStringLiteral } from './shared/ts-literals.mjs';
@@ -268,6 +270,15 @@ function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
       // properties are last-write-wins, and the SEO description may live in
       // the JSON-LD-shaped structuredData object. A first-match regex here
       // could publish stale metadata while the floor validated the live value.
+      const dynamicField = ['headline', 'description', 'datePublished', 'dateModified', 'articleSection', 'ogDescription']
+        .find((field) => hasInterpolatedStaticProperty(block, field));
+      if (dynamicField || readStructuredSeoDescriptionState(block).dynamic) {
+        throw new Error(
+          `RSS: entry '${articleId}' contains an interpolated SEO field` +
+            (dynamicField ? ` '${dynamicField}'` : ' in structuredData') +
+            '; refusing to publish a reduced section feed.',
+        );
+      }
       const headline = lastStaticPropertyValue(block, 'headline');
       const description = lastStaticPropertyValue(block, 'description')
         ?? readStructuredSeoDescription(block);

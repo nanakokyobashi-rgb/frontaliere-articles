@@ -34,10 +34,17 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import {
   findAllSeoEntryMatches,
+  hasInterpolatedStaticProperty,
   lastStaticPropertyValue,
   readStructuredSeoDescription,
+  readStructuredSeoDescriptionState,
 } from './seo-entry.mjs';
-export { lastStaticPropertyValue, readStructuredSeoDescription };
+export {
+  hasInterpolatedStaticProperty,
+  lastStaticPropertyValue,
+  readStructuredSeoDescription,
+  readStructuredSeoDescriptionState,
+};
 import { scanTopLevelArticleRecords } from './article-registry-reader.mjs';
 import { decodeStaticStringLiteral } from './ts-literals.mjs';
 import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';

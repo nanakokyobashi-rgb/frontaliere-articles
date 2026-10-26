@@ -15,6 +15,7 @@ import { corpusPath } from './corpus-paths.mjs';
 import { readTopLevelString, scanTopLevelArticleRecords } from '../../../scripts/lib/article-registry-reader.mjs';
 import { findSeoEntryMatches } from '../../../scripts/lib/seo-entry.mjs';
 import {
+  hasInterpolatedStaticProperty,
   lastStaticPropertyValue,
   staticPropertySpans,
   staticPropertyValues,
@@ -87,8 +88,18 @@ function replaceLiteral(source, property, nextValue) {
 }
 
 function dateModifiedProperties(block) {
+  if (hasInterpolatedStaticProperty(block, 'dateModified')) {
+    throw new Error(
+      'bumpDateModified: entry contiene un dateModified interpolato; refresh rifiutato prima della scrittura.',
+    );
+  }
   const properties = staticPropertyValues(block, 'dateModified');
   const structuredData = staticPropertySpans(block, 'structuredData');
+  if (structuredData.some((property) => property.dynamic)) {
+    throw new Error(
+      'bumpDateModified: entry contiene un structuredData interpolato; refresh rifiutato prima della scrittura.',
+    );
+  }
   if (structuredData.length > 1) {
     throw new Error(
       "bumpDateModified: entry contiene più proprietà structuredData; " +
@@ -105,6 +116,14 @@ function dateModifiedProperties(block) {
         valueEnd: property.valueEnd + container.valueStart,
       });
     }
+  }
+  // Check after collecting the nested properties as well: otherwise a
+  // dynamic `structuredData.dateModified` was invisible to the writer and
+  // could be passed to replaceStaticProperty with an undefined value.
+  if (properties.some((property) => property.dynamic)) {
+    throw new Error(
+      'bumpDateModified: entry contiene un dateModified interpolato; refresh rifiutato prima della scrittura.',
+    );
   }
   return properties.sort((left, right) => left.valueStart - right.valueStart);
 }
@@ -221,6 +240,12 @@ export function bumpDateModified(
   // dateModified must never precede datePublished: on the publish day a fixed
   // midnight stamp falls before the publish time → an incoherent freshness
   // signal in the indexed NewsArticle JSON-LD. Clamp up to datePublished when earlier.
+  if (hasInterpolatedStaticProperty(block, 'datePublished')) {
+    throw new Error(
+      "bumpDateModified: entry contiene un datePublished interpolato; " +
+        'refresh rifiutato prima del calcolo della data effettiva.',
+    );
+  }
   const published = lastStaticPropertyValue(block, 'datePublished');
   const effective = published && Date.parse(published) > Date.parse(isoDateTime) ? published : isoDateTime;
   const current = dateModified[0].value;

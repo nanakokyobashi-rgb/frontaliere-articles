@@ -11,8 +11,12 @@ export {
   findSeoEntryMatches,
   findAllSeoEntryMatches,
   removeSeoEntriesFromSource,
+  hasInterpolatedStaticProperty,
   lastStaticPropertyValue,
+  readStructuredSeoBlock,
   readStructuredSeoDescription,
+  readStructuredSeoDescriptionState,
+  staticPropertyState,
   staticPropertyValues,
   staticPropertySpans,
 } from '../../engine/shared/seo-entry.mjs';

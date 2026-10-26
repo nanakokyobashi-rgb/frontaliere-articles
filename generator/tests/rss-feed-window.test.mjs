@@ -166,7 +166,7 @@ test('RSS salta template JSON-LD non richiesti senza allentare i campi pubblicat
         layout: { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content' },
         repairSerpSnippet: (text) => text,
       }),
-      /Interpolated template literal/u,
+      /refusing to publish a reduced section feed/u,
     );
   } finally {
     fs.rmSync(root, { recursive: true, force: true });

@@ -71,8 +71,10 @@ import { createRawFetcher } from './lib/cross-repo-raw-fetch.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
 import { decodeStaticStringLiteral, readStaticObjectEntries } from './lib/ts-literals.mjs';
 import {
+  hasInterpolatedStaticProperty,
   lastStaticPropertyValue,
   readStructuredSeoDescription,
+  readStructuredSeoDescriptionState,
 } from '../engine/shared/seo-entry.mjs';
 import { readCanonicalPath } from './lib/seo-canonical-path.mjs';
 import { CORPUS_SECTIONS } from './lib/corpus-sections.mjs';
@@ -276,6 +278,15 @@ function readSeoMap() {
       const block = extractBalanced(src, bracePos);
       if (!block) continue;
       claimedUntil = bracePos + block.length;
+      const dynamicField = ['title', 'ogTitle', 'description', 'canonicalPath']
+        .find((field) => hasInterpolatedStaticProperty(block, field));
+      if (dynamicField || readStructuredSeoDescriptionState(block).dynamic) {
+        throw new Error(
+          `[hub-landing] ${file}: SEO entry contains an interpolated field` +
+            (dynamicField ? ` '${dynamicField}'` : ' in structuredData') +
+            '; refusing to refresh a degraded landing.',
+        );
+      }
       const canonicalPath = readCanonicalPath(block);
       const cp = canonicalPath.kind === 'resolved' ? canonicalPath.value : null;
       if (!cp) continue;

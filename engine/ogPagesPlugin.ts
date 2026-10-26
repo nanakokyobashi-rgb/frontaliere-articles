@@ -30,8 +30,11 @@ import { parseStaticArticleTranslationSource, parseStaticBlogBodySource } from '
 export { parseStaticBlogBodySource };
 import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
 import {
+ hasInterpolatedStaticProperty,
  lastStaticPropertyValue,
+ readStructuredSeoBlock,
  readStructuredSeoDescription,
+ readStructuredSeoDescriptionState,
  staticPropertyValues,
 } from './shared/seo-entry.mjs';
 import { createImageCreditReader, imageObjectCreditFields, renderImageCreditHtml } from './shared/imageCredits.mjs';
@@ -791,10 +794,29 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const e = pos[i].end;
  const b = seoSrc.substring(s, e);
 
+ const sdBlock = readStructuredSeoBlock(b) ?? '';
+ const sdType = sdBlock.match(/"@type":\s*"([^"]+)"/)?.[1] ?? '';
+
+ // A dynamic assignment cannot be represented by this static renderer.
+ // Skip the entry explicitly instead of letting a previous static duplicate
+ // leak into OG metadata or canonical URLs.
+ // Event JSON-LD is parsed separately below, so guard every field that parser
+ // consumes there as well. `image`/`url` are deliberately not in this list:
+ // their BASE_URL templates are intentional and resolved by the emitter.
+ const eventFields = sdType === 'Event'
+  ? ['name', 'startDate', 'endDate', 'eventStatus', 'eventAttendanceMode', 'location', 'organizer', 'offers', 'performer']
+  : [];
+ const eventBaseUrlFields = new Set(['location', 'organizer', 'offers', 'performer']);
+ const dynamicField = ['@type', 'title', 'description', 'keywords', 'ogTitle', 'ogDescription', 'canonicalPath', 'datePublished', 'dateModified', ...eventFields]
+  .find((field) => hasInterpolatedStaticProperty(b, field, {
+   allowBaseUrlTemplates: eventBaseUrlFields.has(field),
+  }));
+ if (dynamicField || readStructuredSeoDescriptionState(b).dynamic) continue;
+
  // Resolve every static property with the same balanced last-write-wins
  // reader as RSS. A first-match regex here would let stale title/description
- // values diverge from the feed and from the corpus floor when a refresh leaves
- // duplicate SEO keys in one entry.
+ // values diverge from the feed and from the corpus floor when a refresh
+ // leaves duplicate SEO keys in one entry.
  const matchStr = (key: string): string => flattenOgText(lastStaticPropertyValue(b, key));
  const title = matchStr('title');
  const desc = matchStr('description') || flattenOgText(readStructuredSeoDescription(b)) || '';
@@ -833,25 +855,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  || seoDateMod;
 
  // Extract source structuredData @type and author format
- const sdType = b.match(/"@type":\s*"([^"]+)"/)?.[1] ?? '';
  const sdAuthorHasId = /"author":\s*\{\s*"@id"/.test(b);
- // Capture the structuredData block for Event-specific fields
- const sdBlockMatch = b.match(/structuredData:\s*\{/);
- let sdBlock = '';
- if (sdBlockMatch && sdBlockMatch.index !== undefined) {
- // Find matching closing brace by counting braces
- let depth = 0;
- let started = false;
- const startIdx = sdBlockMatch.index + sdBlockMatch[0].length - 1; // position of opening {
- for (let ci = startIdx; ci < b.length; ci++) {
- if (b[ci] === '{') { depth++; started = true; }
- if (b[ci] === '}') { depth--; }
- if (started && depth === 0) {
- sdBlock = b.substring(startIdx, ci + 1);
- break;
- }
- }
- }
 
  if (cp.startsWith(SECTION.canonicalPrefix)) {
  const authorSlug = articleAuthorSlugById[articleId] || '';
