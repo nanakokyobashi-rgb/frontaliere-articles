@@ -961,13 +961,15 @@ jobs:
               locale_skipped="$RUNNER_TEMP/article-shard-push-$loc.skipped"
               locale_outcome="$RUNNER_TEMP/article-shard-push-$loc.outcome"
               rm -f "$locale_status" "$locale_skipped" "$locale_outcome"
+              export ARTICLE_PUSH_STATUS_FILE="$locale_status"
+              export ARTICLE_PUSH_SKIPPED_PATHS_FILE="$locale_skipped"
               combined_pushed=true
-              if ! ARTICLE_PUSH_STATUS_FILE="$locale_status" ARTICLE_PUSH_SKIPPED_PATHS_FILE="$locale_skipped" bash scripts/lib/push-article-shard-incremental.sh \
+              if ! bash scripts/lib/push-article-shard-incremental.sh \
                    "$shard" "$loc" "$dist" "${paths[@]}" ${hpaths[@]+"${hpaths[@]}"}; then
                 echo "::warning::combined push failed for $shard/$loc — retrying with the article alone (the hub stays stale)"
                 combined_pushed=false
                 rm -f "$locale_status" "$locale_skipped"
-                ARTICLE_PUSH_STATUS_FILE="$locale_status" ARTICLE_PUSH_SKIPPED_PATHS_FILE="$locale_skipped" bash scripts/lib/push-article-shard-incremental.sh \
+                bash scripts/lib/push-article-shard-incremental.sh \
                   "$shard" "$loc" "$dist" "${paths[@]}"
               fi
               push_status="$(tr -d '\r\n' < "$locale_status")"
