@@ -293,6 +293,22 @@ test('upsertSeoDescriptionBlock: campo structuredData duplicato — non aggiorna
   );
 });
 
+test('upsertSeoDescriptionBlock: titolo top-level duplicato — rifiuta prima della scrittura', () => {
+  const duplicateTitle = SEO_FIXTURE.replace(
+    "    title: 'Demo',\n",
+    "    title: 'Demo',\n    title: 'Titolo stale',\n",
+  );
+  assert.throws(
+    () => upsertSeoDescriptionBlock(
+      duplicateTitle,
+      'demo-id',
+      { title: 'Titolo nuovo' },
+      { refreshTitles: true },
+    ),
+    /campo 'title' duplicato.*refresh rifiutato/,
+  );
+});
+
 test('upsertSeoDescriptionBlock: aggiorna anche i campi top-level con indentazione tab', () => {
   const out = upsertSeoDescriptionBlock(INDENTED_SEO_FIXTURE, 'demo-id', {
     description: 'Descrizione tab.',
