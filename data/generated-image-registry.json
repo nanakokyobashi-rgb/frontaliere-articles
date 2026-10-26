@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "assetCount": 954,
+  "assetCount": 955,
   "assets": [
     {
       "schema": 1,
@@ -39163,6 +39163,56 @@
         "is_photograph": false,
         "is_topic_relevant": true,
         "notes": "Generic synthetic illustration of a municipal administrative building; no people, text, signage, logos, or specific event."
+      }
+    },
+    {
+      "schema": 1,
+      "assetId": "article-salario-minimo-valese-voto",
+      "kind": "photo",
+      "provider": "wikimedia",
+      "model": "Wikimedia Commons file mirror",
+      "executorModel": "Wikimedia Commons file mirror",
+      "license": "Public domain",
+      "licenseFamily": "pd",
+      "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "credit": "Jeff Schmaltz, MODIS Land Rapid Response Team, NASA GSFC · Public domain",
+      "author": {
+        "name": "Jeff Schmaltz, MODIS Land Rapid Response Team, NASA GSFC"
+      },
+      "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:North-central_Europe_(MODIS_2016-03-29).jpg",
+      "sourceImageUrl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/North-central_Europe_%28MODIS_2016-03-29%29.jpg/1920px-North-central_Europe_%28MODIS_2016-03-29%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "sourceWidth": 5600,
+      "sourceHeight": 4400,
+      "photoTitle": "File:North-central Europe (MODIS 2016-03-29).jpg",
+      "copyrightNotice": "Public domain",
+      "acquireLicensePage": "https://commons.wikimedia.org/wiki/File:North-central_Europe_(MODIS_2016-03-29).jpg",
+      "sha256": "6ccb77df510c4efe7b6cb473549e400b96ae46462b5fb2c82af84e859a9ce407",
+      "bytes": 218910,
+      "width": 1200,
+      "height": 675,
+      "format": "webp",
+      "generatedAt": "2026-10-26T17:48:39.003Z",
+      "verifiedAt": "2026-10-26T17:48:49.310Z",
+      "restrictions": [
+        "licensed-source",
+        "no-recognizable-foreground-person",
+        "no-logo-brand-or-trademark"
+      ],
+      "scope": "article-hero",
+      "imageUrl": "/images/blog/article-salario-minimo-valese-voto.webp",
+      "area": "Swiss border region",
+      "season": "all seasons",
+      "variant": "article hero",
+      "vision": {
+        "ok": true,
+        "contains_text": false,
+        "contains_logo": false,
+        "contains_recognizable_face": false,
+        "contains_recognizable_foreground_person": false,
+        "looks_like_specific_real_event": false,
+        "is_photograph": true,
+        "is_topic_relevant": true,
+        "notes": "Aerial/satellite photograph of the Alps, plausibly including Valais; no people, text, logos, or event-specific content."
       }
     }
   ]

@@ -36,6 +36,9 @@ const blogMetaCantonVsIt: Record<string, string> = {
     'blog.article.salute-vallese-2026-ovs.title': 'Rapporto OVS: 83% vallesani in buona salute, obesità al 13% e rischi psicosociali al 44%',
     'blog.article.salute-vallese-2026-ovs.excerpt': '83% degli adulti vallesani si sente in buona salute nel 2022 Speranza di vita: 85,9 anni per le donne, 82,4 per gli uomini Gli over 65 sono il 21%',
     'blog.article.salute-vallese-2026-ovs.imageAlt': 'Veduta aerea della valle del Rodano in Vallese con vigneti e vette alpine',
+    'blog.article.salario-minimo-valese-voto.title': 'Destra e economia vallesana contro salario minimo a CHF 22',
+    'blog.article.salario-minimo-valese-voto.excerpt': 'La destra e l\'economia vallesana dicono no a CHF 22 l\'ora.',
+    'blog.article.salario-minimo-valese-voto.imageAlt': 'Contesto lavorativo in Vallese in relazione al dibattito sul salario minimo.',
 };
 
 export default blogMetaCantonVsIt;
