@@ -2,20 +2,8 @@
   "schema": 1,
   "items": [
     {
-      "articleId": "indennita-covid-abusi-aziende",
-      "section": "svizzera"
-    },
-    {
       "articleId": "iniziativa-parita-salariale-ag",
       "section": "canton-ag"
-    },
-    {
-      "articleId": "italia-rincari-crescita-2027",
-      "section": "frontaliere"
-    },
-    {
-      "articleId": "schianto-auto-moto-appiano-gentile",
-      "section": "frontaliere"
     }
   ]
 }
