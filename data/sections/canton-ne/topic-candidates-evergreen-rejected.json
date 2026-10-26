@@ -47,6 +47,14 @@
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-la-desinformation-inquiete-plus-de-la-moitie-des-suisses.html": {
       "section": "canton-ne",
       "ts": 1793009231988
+    },
+    "canton-ne::https://www.rts.ch/audio-podcast/2012/emission/le-journal-horaire-25000140.html": {
+      "section": "canton-ne",
+      "ts": 1793010136141
+    },
+    "canton-ne::https://www.rts.ch/play/tv/emission/couleurs-locales?id=470618": {
+      "section": "canton-ne",
+      "ts": 1793010226268
     }
   }
 }
