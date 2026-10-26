@@ -9,7 +9,7 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../.
 const SCRIPT = path.join(ROOT, 'scripts/lib/push-article-shard-incremental.sh');
 const SECTION = 'articolifrontaliere';
 const LOCALE = 'it';
-const REL = 'articoli-frontaliere/monotonic-test/index.html';
+const REL = 'articoli-frontaliere/monotonic-[literal]/index.html';
 const OTHER_REL = 'unrelated/observer.txt';
 
 function git(args, cwd, extraEnv = {}) {
@@ -127,9 +127,54 @@ test('la guardia monotona limita la scansione della storia ai path richiesti', (
   const source = fs.readFileSync(SCRIPT, 'utf8');
   assert.match(
     source,
-    /git -C "\$stage" log --format=%H --full-history HEAD -- "\$\{relpaths\[@\]\}"/u,
+    /git -C "\$stage" --literal-pathspecs log --format=%H --full-history HEAD --/u,
   );
+  assert.match(source, /pathspec_budget=32768/u);
+  assert.match(source, /sort -u/u);
   assert.doesNotMatch(source, /git -C "\$stage" log --format=%H HEAD 2>\/dev\/null/u);
+});
+
+test('il benchmark della storia distingue il walk completo da quello path-scoped', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'corpus-article-history-benchmark-'));
+  const repo = path.join(root, 'repo');
+  try {
+    fs.mkdirSync(path.join(repo, path.dirname(REL)), { recursive: true });
+    fs.writeFileSync(path.join(repo, REL), page('target'));
+    fs.writeFileSync(path.join(repo, '.shard-filecount'), '1\n');
+    git(['init', '-q', '-b', 'main', repo]);
+    git(['-C', repo, 'config', 'user.name', 'history benchmark']);
+    git(['-C', repo, 'config', 'user.email', 'history-benchmark@example.invalid']);
+    commitSeed(repo, 'target seed', 1_700_000_000);
+
+    for (let index = 0; index < 80; index += 1) {
+      const unrelated = path.join(repo, 'unrelated', `article-${index}.html`);
+      fs.mkdirSync(path.dirname(unrelated), { recursive: true });
+      fs.writeFileSync(unrelated, `unrelated ${index}\n`);
+      git(['-C', repo, 'add', 'unrelated']);
+      git(['-C', repo, 'commit', '-qm', `unrelated publication ${index}`], undefined, {
+        GIT_AUTHOR_DATE: dateFor(1_700_000_001 + index),
+        GIT_COMMITTER_DATE: dateFor(1_700_000_001 + index),
+      });
+    }
+
+    const fullWalk = git(['-C', repo, 'log', '--format=%H', '--full-history', 'HEAD']).split('\n').filter(Boolean);
+    const scopedWalk = git([
+      '-C',
+      repo,
+      '--literal-pathspecs',
+      'log',
+      '--format=%H',
+      '--full-history',
+      'HEAD',
+      '--',
+      REL,
+    ]).split('\n').filter(Boolean);
+    assert.equal(scopedWalk.length, 1);
+    assert.equal(fullWalk.length, 81);
+    assert.ok(fullWalk.length > scopedWalk.length * 10);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('Content-Rev remoto più recente mantiene la pagina senza leggere il blob remoto', () => {

@@ -256,6 +256,33 @@ history_unavailable() {
   return 1
 }
 
+collect_path_scoped_commits() {
+  local pathspec_budget=32768
+  local pathspec_bytes=0
+  local path path_bytes
+  local -a pathspec_chunk=()
+
+  # Keep every invocation comfortably below the runner's ARG_MAX. The caller
+  # already passed the paths to this process, but a batch can still be large
+  # enough for one `git log ... -- path...` invocation to fail. Git has no
+  # pathspec-from-file option for log/rev-list, so chunk the exact paths and
+  # deduplicate the resulting commit list at the call site.
+  for path in "$@"; do
+    path_bytes=${#path}
+    if [ "${#pathspec_chunk[@]}" -gt 0 ] && [ $((pathspec_bytes + path_bytes + 1)) -gt "$pathspec_budget" ]; then
+      git -C "$stage" --literal-pathspecs log --format=%H --full-history HEAD -- "${pathspec_chunk[@]}" || return 1
+      pathspec_chunk=()
+      pathspec_bytes=0
+    fi
+    pathspec_chunk+=("$path")
+    pathspec_bytes=$((pathspec_bytes + path_bytes + 1))
+  done
+
+  if [ "${#pathspec_chunk[@]}" -gt 0 ]; then
+    git -C "$stage" --literal-pathspecs log --format=%H --full-history HEAD -- "${pathspec_chunk[@]}" || return 1
+  fi
+}
+
 collect_remote_newer_paths() {
   local own_revision="$1"
   local own_epoch="${own_revision%%.*}"
@@ -295,12 +322,13 @@ collect_remote_newer_paths() {
   shallow_file="$(git -C "$stage" rev-parse --absolute-git-dir 2>/dev/null)/shallow"
   # The shard can receive many fast-path publications in one hour. Walking
   # every commit in that window and then diffing each tree made the monotonic
-  # guard scale with unrelated articles; on a busy shard that scan could
-  # consume the whole publisher timeout before the requested page was pushed.
-  # Git can walk only the paths we are about to replace. Keep the subsequent
-  # diff-tree check: it still fail-closes on a malformed shallow boundary and
-  # proves which requested paths each selected commit touched.
-  commits="$(git -C "$stage" log --format=%H --full-history HEAD -- "${relpaths[@]}" 2>/dev/null)" || {
+  # guard scale with unrelated articles. Git can walk only the paths we are
+  # about to replace; the helper keeps each argv chunk below 32 KiB, treats
+  # every path literally, and the sort removes commits found in multiple
+  # chunks. Keep the subsequent diff-tree check: it still fail-closes on a
+  # malformed shallow boundary and proves which requested paths each selected
+  # commit touched.
+  commits="$(collect_path_scoped_commits "${relpaths[@]}" | LC_ALL=C sort -u)" || {
     history_unavailable "the shard history is unreadable"
     return 1
   }
