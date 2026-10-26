@@ -59,7 +59,11 @@ import os from 'node:os';
 import path from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
+import {
+  fetchWithRefTimeout,
+  releaseFetchWithRefTimeout,
+  removeAbortListenerSafely,
+} from '../generator/scripts/lib/fetch-with-ref-timeout.mjs';
 
 import { IMAGE_FETCH_TIMEOUT_MS, MAX_DECLARED_IMAGE_BYTES } from './lib/declared-image-fetch.mjs';
 import { ARTICLE_SECTION_CORE_ALL } from '../engine/shared/articleSectionCore.mjs';
@@ -937,11 +941,11 @@ function publishAbortError() {
 const sleep = (ms, signal) => new Promise((resolve, reject) => {
   const onAbort = () => {
     clearTimeout(timer);
-    signal.removeEventListener('abort', onAbort);
+    removeAbortListenerSafely(signal, onAbort);
     reject(publishAbortError());
   };
   const timer = setTimeout(() => {
-    signal?.removeEventListener('abort', onAbort);
+    removeAbortListenerSafely(signal, onAbort);
     resolve();
   }, ms);
   if (signal) {
@@ -972,7 +976,7 @@ async function waitForPublishRetry(ms, sleepImpl, signal) {
       aborted,
     ]);
   } finally {
-    signal.removeEventListener('abort', onAbort);
+    removeAbortListenerSafely(signal, onAbort);
   }
   await publishSignalBoundary(signal);
 }
@@ -993,7 +997,7 @@ async function runWithPublishSignal(operation, signal) {
       aborted,
     ]);
   } finally {
-    signal.removeEventListener('abort', onAbort);
+    removeAbortListenerSafely(signal, onAbort);
   }
 }
 
