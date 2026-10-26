@@ -4,17 +4,17 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "2c8d84ef3ecec1020737add8b356cb8c910741d4b8032d83441b0a28f59315f0",
+  "updatedAt": "2026-10-26T10:46:37.997Z",
+  "contentHash": "fca7d78ad649026ca244ba9ef3f6d9b01592ccdf00f236649e72476e330a424e",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-24T23:59:59.000Z",
+      "updatedAt": "2026-10-25T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-25T16:53:42.913Z",
+      "updatedAt": "2026-10-26T05:21:20.958Z",
       "keyFacts": 1
     },
     {
@@ -33,19 +33,19 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), settimana conclusa: 24 ottobre 2026"
+          "note": "Boncourt-Delle (A16), settimana conclusa: 25 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "1",
-          "note": "segnalazioni aggiornate: 25 ottobre 2026"
+          "note": "segnalazioni aggiornate: 26 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 18 ottobre 2026 – 24 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 19 ottobre 2026 – 25 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -68,7 +68,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-24T23:59:59.000Z"
+          "updatedAt": "2026-10-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -86,10 +86,15 @@
               "value": "Traffico",
               "detail": "fine prevista: 17 novembre 2026",
               "date": "2026-10-23T16:17:00.000Z"
+            },
+            {
+              "label": "A16 Boncourt -> Delémont tra Svincolo autostradale Courgenay/Cornol E Svincolo autostradale St-Ursanne Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-26T04:47:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-25T16:53:42.913Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -149,7 +154,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "en": {
       "canton": "JU",
@@ -160,19 +165,19 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), week ending 24 October 2026"
+          "note": "Boncourt-Delle (A16), week ending 25 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "1",
-          "note": "reports as of 25 October 2026"
+          "note": "reports as of 26 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 18 October 2026 to 24 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 19 October 2026 to 25 October 2026, fastest first.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -195,7 +200,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-24T23:59:59.000Z"
+          "updatedAt": "2026-10-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -213,10 +218,15 @@
               "value": "Traffic",
               "detail": "until 17 November 2026",
               "date": "2026-10-23T16:17:00.000Z"
+            },
+            {
+              "label": "A16 Boncourt -> Delémont tra Svincolo autostradale Courgenay/Cornol E Svincolo autostradale St-Ursanne Situazione: traffico fortemente rallentato Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-26T04:47:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-25T16:53:42.913Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -276,7 +286,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "de": {
       "canton": "JU",
@@ -287,19 +297,19 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Boncourt-Delle (A16), Woche bis 24. Oktober 2026"
+          "note": "Boncourt-Delle (A16), Woche bis 25. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "1",
-          "note": "Meldungen vom 25. Oktober 2026"
+          "note": "Meldungen vom 26. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 18. Oktober 2026 bis 24. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 19. Oktober 2026 bis 25. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -322,7 +332,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-24T23:59:59.000Z"
+          "updatedAt": "2026-10-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -340,10 +350,15 @@
               "value": "Verkehr",
               "detail": "bis 17. November 2026",
               "date": "2026-10-23T16:17:00.000Z"
+            },
+            {
+              "label": "A16 Boncourt -> Delsberg zwischen Anschluss Courgenay/Cornol und Anschluss St-Ursanne Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-26T04:47:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-25T16:53:42.913Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -403,7 +418,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "fr": {
       "canton": "JU",
@@ -414,19 +429,19 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Boncourt-Delle (A16), semaine jusqu’au 24 octobre 2026"
+          "note": "Boncourt-Delle (A16), semaine jusqu’au 25 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "1",
-          "note": "signalements au 25 octobre 2026"
+          "note": "signalements au 26 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 18 octobre 2026 au 24 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 19 octobre 2026 au 25 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Boncourt-Delle (A16)",
@@ -449,7 +464,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-24T23:59:59.000Z"
+          "updatedAt": "2026-10-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -467,10 +482,15 @@
               "value": "Trafic",
               "detail": "jusqu’au 17 novembre 2026",
               "date": "2026-10-23T16:17:00.000Z"
+            },
+            {
+              "label": "A16 Boncourt -> Delémont entre Jonction autoroutière Courgenay/Cornol et Jonction autoroutière St-Ursanne Situation: trafic en accordéon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-26T04:47:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-25T16:53:42.913Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -530,7 +550,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     }
   }
 }

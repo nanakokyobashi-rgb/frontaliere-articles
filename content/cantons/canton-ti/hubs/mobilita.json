@@ -4,17 +4,17 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T09:05:39.145Z",
-  "contentHash": "50cd5577f598468af0d59812735f6d4b78a984006dba36426e6c9f5418dc1c42",
+  "updatedAt": "2026-10-26T10:46:37.997Z",
+  "contentHash": "07b0d7ee56425a781b40a5c9372e5deb8b67fe659299a8ed0d3bfde5c4f1133f",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-24T23:59:59.000Z",
+      "updatedAt": "2026-10-25T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-25T23:36:43.073Z",
+      "updatedAt": "2026-10-26T05:21:20.958Z",
       "keyFacts": 2
     },
     {
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Biegno-Indemini, settimana conclusa: 24 ottobre 2026"
+          "note": "Biegno-Indemini, settimana conclusa: 25 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "4",
-          "note": "segnalazioni aggiornate: 25 ottobre 2026"
+          "note": "segnalazioni aggiornate: 26 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "32",
-          "note": "segnalazioni aggiornate: 25 ottobre 2026"
+          "note": "segnalazioni aggiornate: 26 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 18 ottobre 2026 – 24 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 19 ottobre 2026 – 25 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -103,7 +103,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-24T23:59:59.000Z"
+          "updatedAt": "2026-10-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -135,6 +135,11 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
+              "label": "A2 Chiasso -> S. Gottardo tra Raccordo autostradale Diramazione Mendrisio E Svincolo autostradale Melide/Bissone Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-26T05:01:00.000Z"
+            },
+            {
               "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
               "value": "Cantiere",
               "detail": "fine prevista: 29 dicembre 2028",
@@ -151,16 +156,10 @@
               "value": "Cantiere",
               "detail": "fine prevista: 28 giugno 2028",
               "date": "2024-11-14T15:24:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> S. Gottardo Parcheggio Chiasso-Dogana commerciale Situazione: problemi di traffico cantiere, lunghezza [km] 0.1",
-              "value": "Cantiere",
-              "detail": "fine prevista: 24 marzo 2027",
-              "date": "2025-04-01T03:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-25T23:36:43.073Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -294,7 +293,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-26T09:05:39.145Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "en": {
       "canton": "TI",
@@ -305,24 +304,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Biegno-Indemini, week ending 24 October 2026"
+          "note": "Biegno-Indemini, week ending 25 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "4",
-          "note": "reports as of 25 October 2026"
+          "note": "reports as of 26 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "32",
-          "note": "reports as of 25 October 2026"
+          "note": "reports as of 26 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 18 October 2026 to 24 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 19 October 2026 to 25 October 2026, fastest first.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -375,7 +374,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-24T23:59:59.000Z"
+          "updatedAt": "2026-10-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -407,6 +406,11 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
+              "label": "A2 Chiasso -> S. Gottardo tra Raccordo autostradale Diramazione Mendrisio E Svincolo autostradale Melide/Bissone Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-26T05:01:00.000Z"
+            },
+            {
               "label": "A2 Chiasso <-> S. Gottardo Galleria Galleria del S. Gottardo Situazione: problemi di traffico cantiere, lunghezza [km] 0.3 Aggiunta 1: limite temporaneo larghezza Larghezza carreggiata [m] 5.2",
               "value": "Roadworks",
               "detail": "until 29 December 2028",
@@ -423,16 +427,10 @@
               "value": "Roadworks",
               "detail": "until 28 June 2028",
               "date": "2024-11-14T15:24:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> S. Gottardo Parcheggio Chiasso-Dogana commerciale Situazione: problemi di traffico cantiere, lunghezza [km] 0.1",
-              "value": "Roadworks",
-              "detail": "until 24 March 2027",
-              "date": "2025-04-01T03:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-25T23:36:43.073Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -565,7 +563,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-26T09:05:39.145Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "de": {
       "canton": "TI",
@@ -576,24 +574,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Biegno-Indemini, Woche bis 24. Oktober 2026"
+          "note": "Biegno-Indemini, Woche bis 25. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "4",
-          "note": "Meldungen vom 25. Oktober 2026"
+          "note": "Meldungen vom 26. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "32",
-          "note": "Meldungen vom 25. Oktober 2026"
+          "note": "Meldungen vom 26. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 18. Oktober 2026 bis 24. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 19. Oktober 2026 bis 25. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -646,7 +644,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-24T23:59:59.000Z"
+          "updatedAt": "2026-10-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -678,6 +676,11 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
+              "label": "A2 Chiasso -> Gotthard zwischen Autobahndreieck Verzweigung Mendrisio und Anschluss Melide/Bissone Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-26T05:01:00.000Z"
+            },
+            {
               "label": "A2 Chiasso <-> Gotthard Tunnel Gotthard-Tunnel Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.3 Zusatz 1: vorübergehende Begrenzung der Breite Fahrbahnbreite [m] 5.2",
               "value": "Baustelle",
               "detail": "bis 29. Dezember 2028",
@@ -694,16 +697,10 @@
               "value": "Baustelle",
               "detail": "bis 28. Juni 2028",
               "date": "2024-11-14T15:24:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> Gotthard Parkplatz Chiasso-Warenzoll Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 0.1",
-              "value": "Baustelle",
-              "detail": "bis 24. März 2027",
-              "date": "2025-04-01T03:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-25T23:36:43.073Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -836,7 +833,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-26T09:05:39.145Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "fr": {
       "canton": "TI",
@@ -847,24 +844,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Biegno-Indemini, semaine jusqu’au 24 octobre 2026"
+          "note": "Biegno-Indemini, semaine jusqu’au 25 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "4",
-          "note": "signalements au 25 octobre 2026"
+          "note": "signalements au 26 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "32",
-          "note": "signalements au 25 octobre 2026"
+          "note": "signalements au 26 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 18 octobre 2026 au 24 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 19 octobre 2026 au 25 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Biegno-Indemini",
@@ -917,7 +914,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-24T23:59:59.000Z"
+          "updatedAt": "2026-10-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -949,6 +946,11 @@
               "date": "2026-10-28T20:30:00.000Z"
             },
             {
+              "label": "A2 Chiasso -> St-Gothard entre Echangeur Echangeur de Mendrisio et Jonction autoroutière Melide/Bissone Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-26T05:01:00.000Z"
+            },
+            {
               "label": "A2 Chiasso <-> St-Gothard Tunnel Tunnel du St-Gothard Situation: trafic perturbé travaux, longueur [km] 0.3 Complément 1: limitation temporaire de largeur largeur de la voie [m] 5.2",
               "value": "Chantier",
               "detail": "jusqu’au 29 décembre 2028",
@@ -965,16 +967,10 @@
               "value": "Chantier",
               "detail": "jusqu’au 28 juin 2028",
               "date": "2024-11-14T15:24:00.000Z"
-            },
-            {
-              "label": "A2 Chiasso <-> St-Gothard Parking Chiasso-Douane commercial Situation: trafic perturbé travaux, longueur [km] 0.1",
-              "value": "Chantier",
-              "detail": "jusqu’au 24 mars 2027",
-              "date": "2025-04-01T03:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-25T23:36:43.073Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -1108,7 +1104,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-26T09:05:39.145Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     }
   }
 }

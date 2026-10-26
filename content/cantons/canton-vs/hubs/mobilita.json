@@ -4,17 +4,17 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "b757f4ffadc12c43a46b6fb799443f70d2d5350f32679199506320d2fec9f4e8",
+  "updatedAt": "2026-10-26T10:46:37.997Z",
+  "contentHash": "b822d11ec20af60a586c6229efea6c2c5460ad5e276768f9636ac62bb6ee7a74",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-24T23:59:59.000Z",
+      "updatedAt": "2026-10-25T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-25T16:53:42.913Z",
+      "updatedAt": "2026-10-26T05:21:20.958Z",
       "keyFacts": 2
     },
     {
@@ -33,24 +33,24 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Le Châtelard-Vallorcine, settimana conclusa: 24 ottobre 2026"
+          "note": "Le Châtelard-Vallorcine, settimana conclusa: 25 ottobre 2026"
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
           "value": "17",
-          "note": "segnalazioni aggiornate: 25 ottobre 2026"
+          "note": "segnalazioni aggiornate: 26 ottobre 2026"
         },
         {
           "label": "Cantieri attivi o imminenti",
           "value": "22",
-          "note": "segnalazioni aggiornate: 25 ottobre 2026"
+          "note": "segnalazioni aggiornate: 26 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 18 ottobre 2026 – 24 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 19 ottobre 2026 – 25 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Le Châtelard-Vallorcine",
@@ -85,7 +85,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-24T23:59:59.000Z"
+          "updatedAt": "2026-10-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -142,7 +142,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-25T16:53:42.913Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -250,7 +250,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "en": {
       "canton": "VS",
@@ -261,24 +261,24 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Le Châtelard-Vallorcine, week ending 24 October 2026"
+          "note": "Le Châtelard-Vallorcine, week ending 25 October 2026"
         },
         {
           "label": "Road closures in force or imminent",
           "value": "17",
-          "note": "reports as of 25 October 2026"
+          "note": "reports as of 26 October 2026"
         },
         {
           "label": "Roadworks active or imminent",
           "value": "22",
-          "note": "reports as of 25 October 2026"
+          "note": "reports as of 26 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 18 October 2026 to 24 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 19 October 2026 to 25 October 2026, fastest first.",
           "items": [
             {
               "label": "Le Châtelard-Vallorcine",
@@ -313,7 +313,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-24T23:59:59.000Z"
+          "updatedAt": "2026-10-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -370,7 +370,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-25T16:53:42.913Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -478,7 +478,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "de": {
       "canton": "VS",
@@ -489,24 +489,24 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Le Châtelard-Vallorcine, Woche bis 24. Oktober 2026"
+          "note": "Le Châtelard-Vallorcine, Woche bis 25. Oktober 2026"
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
           "value": "17",
-          "note": "Meldungen vom 25. Oktober 2026"
+          "note": "Meldungen vom 26. Oktober 2026"
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
           "value": "22",
-          "note": "Meldungen vom 25. Oktober 2026"
+          "note": "Meldungen vom 26. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 18. Oktober 2026 bis 24. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 19. Oktober 2026 bis 25. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Le Châtelard-Vallorcine",
@@ -541,7 +541,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-24T23:59:59.000Z"
+          "updatedAt": "2026-10-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -598,7 +598,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-25T16:53:42.913Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -706,7 +706,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "fr": {
       "canton": "VS",
@@ -717,24 +717,24 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Le Châtelard-Vallorcine, semaine jusqu’au 24 octobre 2026"
+          "note": "Le Châtelard-Vallorcine, semaine jusqu’au 25 octobre 2026"
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
           "value": "17",
-          "note": "signalements au 25 octobre 2026"
+          "note": "signalements au 26 octobre 2026"
         },
         {
           "label": "Chantiers actifs ou imminents",
           "value": "22",
-          "note": "signalements au 25 octobre 2026"
+          "note": "signalements au 26 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 18 octobre 2026 au 24 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 19 octobre 2026 au 25 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Le Châtelard-Vallorcine",
@@ -769,7 +769,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-24T23:59:59.000Z"
+          "updatedAt": "2026-10-25T23:59:59.000Z"
         },
         {
           "id": "chiusure-cantieri",
@@ -826,7 +826,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-25T16:53:42.913Z"
+          "updatedAt": "2026-10-26T05:21:20.958Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -934,7 +934,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     }
   }
 }

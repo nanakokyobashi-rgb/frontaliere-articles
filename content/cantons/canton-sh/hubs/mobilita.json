@@ -4,17 +4,17 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-25T09:02:26.475Z",
-  "contentHash": "43124359d9f3d3b1be7216377b94762076f9a22effeb313db3aa274866a99998",
+  "updatedAt": "2026-10-26T10:46:37.997Z",
+  "contentHash": "70b7fd79a4a33cfd7b3ab9a38cc81a25c78579d6c574a6365379fa01b7f641c3",
   "blocks": [
     {
       "id": "attese-valichi",
-      "updatedAt": "2026-10-24T23:59:59.000Z",
+      "updatedAt": "2026-10-25T23:59:59.000Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-24T19:51:00.050Z",
+      "updatedAt": "2026-10-25T19:59:33.449Z",
       "keyFacts": 0
     }
   ],
@@ -28,14 +28,14 @@
         {
           "label": "Valico più scorrevole della settimana",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, settimana conclusa: 24 ottobre 2026"
+          "note": "Bargen SH – Tengen, settimana conclusa: 25 ottobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attese ai valichi",
-          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 18 ottobre 2026 – 24 ottobre 2026, dal più scorrevole al più lento.",
+          "description": "Tempo medio di attesa ai valichi del cantone nella settimana 19 ottobre 2026 – 25 ottobre 2026, dal più scorrevole al più lento.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -88,7 +88,7 @@
           ],
           "sourceName": "Monitoraggio dei valichi di Frontaliere Ticino",
           "sourceUrl": "/traffico-dogane/",
-          "updatedAt": "2026-10-24T23:59:59.000Z"
+          "updatedAt": "2026-10-25T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -126,7 +126,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/spitalforum+vorsorge"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -192,7 +192,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "en": {
       "canton": "SH",
@@ -203,14 +203,14 @@
         {
           "label": "Fastest crossing of the week",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, week ending 24 October 2026"
+          "note": "Bargen SH – Tengen, week ending 25 October 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Border crossing waits",
-          "description": "Average waiting time at the canton’s border crossings in the week from 18 October 2026 to 24 October 2026, fastest first.",
+          "description": "Average waiting time at the canton’s border crossings in the week from 19 October 2026 to 25 October 2026, fastest first.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -263,7 +263,7 @@
           ],
           "sourceName": "Frontaliere Ticino border-crossing monitoring",
           "sourceUrl": "/en/border-wait/",
-          "updatedAt": "2026-10-24T23:59:59.000Z"
+          "updatedAt": "2026-10-25T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -301,7 +301,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/spitalforum+vorsorge"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -367,7 +367,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "de": {
       "canton": "SH",
@@ -378,14 +378,14 @@
         {
           "label": "Schnellster Grenzübergang der Woche",
           "value": "0 Min.",
-          "note": "Bargen SH – Tengen, Woche bis 24. Oktober 2026"
+          "note": "Bargen SH – Tengen, Woche bis 25. Oktober 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Wartezeiten an den Grenzübergängen",
-          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 18. Oktober 2026 bis 24. Oktober 2026, vom schnellsten zum langsamsten.",
+          "description": "Durchschnittliche Wartezeit an den Grenzübergängen des Kantons in der Woche vom 19. Oktober 2026 bis 25. Oktober 2026, vom schnellsten zum langsamsten.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -438,7 +438,7 @@
           ],
           "sourceName": "Grenzübergangs-Monitoring von Frontaliere Ticino",
           "sourceUrl": "/de/wartezeit-grenze/",
-          "updatedAt": "2026-10-24T23:59:59.000Z"
+          "updatedAt": "2026-10-25T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -476,7 +476,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/spitalforum+vorsorge"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -542,7 +542,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     },
     "fr": {
       "canton": "SH",
@@ -553,14 +553,14 @@
         {
           "label": "Poste-frontière le plus fluide de la semaine",
           "value": "0 min",
-          "note": "Bargen SH – Tengen, semaine jusqu’au 24 octobre 2026"
+          "note": "Bargen SH – Tengen, semaine jusqu’au 25 octobre 2026"
         }
       ],
       "dataBlocks": [
         {
           "id": "attese-valichi",
           "title": "Attente aux postes-frontières",
-          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 18 octobre 2026 au 24 octobre 2026, du plus fluide au plus lent.",
+          "description": "Temps d’attente moyen aux postes-frontières du canton pendant la semaine du 19 octobre 2026 au 25 octobre 2026, du plus fluide au plus lent.",
           "items": [
             {
               "label": "Bargen SH – Tengen",
@@ -613,7 +613,7 @@
           ],
           "sourceName": "Suivi des postes-frontières de Frontaliere Ticino",
           "sourceUrl": "/fr/temps-attente-douane/",
-          "updatedAt": "2026-10-24T23:59:59.000Z"
+          "updatedAt": "2026-10-25T23:59:59.000Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -651,7 +651,7 @@
               "url": "https://www.konstanz.de/service/presse/pressemitteilungen/spitalforum+vorsorge"
             }
           ],
-          "updatedAt": "2026-10-24T19:51:00.050Z"
+          "updatedAt": "2026-10-25T19:59:33.449Z"
         }
       ],
       "curatedArticles": [
@@ -717,7 +717,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-25T09:02:26.475Z"
+      "updatedAt": "2026-10-26T10:46:37.997Z"
     }
   }
 }
