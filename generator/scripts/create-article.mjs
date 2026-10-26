@@ -1610,6 +1610,11 @@ function computeAdaptiveMinChars(sourceText) {
 const PROJECT_ROOT = new URL('../..', import.meta.url).pathname.replace(/\/$/, '');
 
 function resolve(rel) {
+  // CI passes CREATE_ARTICLE_REPORT_FILE as an absolute RUNNER_TEMP path.
+  // Keep it outside the corpus mapper: prefixing PROJECT_ROOT would silently
+  // write the report into a nested `home/runner/...` tree, leaving the
+  // workflow's producer-owned hand-off path empty.
+  if (path.isAbsolute(rel)) return rel;
   return `${PROJECT_ROOT}/${corpusPath(rel)}`;
 }
 

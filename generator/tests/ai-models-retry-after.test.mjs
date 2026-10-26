@@ -5,6 +5,7 @@ import {
   AI_MODELS,
   callSingleModel,
   parseRetryAfter,
+  parseStrictRetryAfterValue,
   resetState,
 } from '../scripts/lib/ai-models.mjs';
 
@@ -44,6 +45,10 @@ test('parseRetryAfter accetta delta-seconds e HTTP-date con cap bounded', () => 
   );
   assert.equal(parseRetryAfter(response('not-a-delay'), NOW_MS), 0);
   assert.equal(parseRetryAfter(response('86400'), NOW_MS), 120_000);
+  assert.equal(parseStrictRetryAfterValue('10/25/2026', NOW_MS), 0);
+  assert.equal(parseStrictRetryAfterValue('Mon, 25 Oct 2026 08:00:30 GMT', NOW_MS), 0);
+  assert.equal(parseStrictRetryAfterValue('9007199254740992', NOW_MS), 0);
+  assert.equal(parseStrictRetryAfterValue('9'.repeat(100), NOW_MS), 0);
 });
 
 async function assertHttpDateRetryIsHonored(model, successBody, options) {

@@ -2846,6 +2846,39 @@ export function _cooldownSeverityDurations() {
 // drift apart: the 429 backoff in _callOpenAICompatible, and _hardCallCapMs
 // below, which sizes the per-call hard cap off this same worst-case wait.
 const MAX_RETRY_AFTER_MS = 2 * 60 * 1000;
+const HTTP_DATE_RE = /^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} GMT$/;
+
+/**
+ * Parse one Retry-After value without letting Date.parse accept unrelated
+ * locale/date syntaxes or an unsafe numeric value. The cap is applied only
+ * after the input has been proven representable.
+ *
+ * @param {unknown} raw
+ * @param {number} [nowMs]
+ * @returns {number}
+ */
+export function parseStrictRetryAfterValue(raw, nowMs = Date.now()) {
+  if (typeof raw !== 'string' || !Number.isFinite(nowMs)) return 0;
+  const value = raw.trim();
+  if (!value) return 0;
+
+  let delayMs;
+  if (/^\d+$/.test(value)) {
+    const seconds = Number(value);
+    if (!Number.isSafeInteger(seconds)) return 0;
+    if (seconds > MAX_RETRY_AFTER_MS / 1000) return MAX_RETRY_AFTER_MS;
+    delayMs = seconds * 1000;
+  } else {
+    if (!HTTP_DATE_RE.test(value)) return 0;
+    const retryAtMs = Date.parse(value);
+    // Require the canonical IMF-fixdate spelling so Date.parse cannot turn a
+    // locale date or an invalid weekday into a valid retry delay.
+    if (!Number.isFinite(retryAtMs) || new Date(retryAtMs).toUTCString() !== value) return 0;
+    delayMs = retryAtMs - nowMs;
+  }
+  if (!Number.isFinite(delayMs)) return 0;
+  return Math.min(MAX_RETRY_AFTER_MS, Math.max(0, Math.ceil(delayMs)));
+}
 
 /**
  * Convert an HTTP `Retry-After` header to a bounded delay.
@@ -2866,22 +2899,7 @@ export function parseRetryAfter(response, nowMs = Date.now()) {
   } catch {
     return 0;
   }
-  if (raw === null || raw === undefined) return 0;
-  const value = String(raw).trim();
-  if (!value) return 0;
-
-  let delayMs;
-  if (/^\d+$/.test(value)) {
-    const seconds = Number(value);
-    delayMs = Number.isFinite(seconds) ? seconds * 1000 : Number.NaN;
-  } else {
-    const retryAtMs = Date.parse(value);
-    delayMs = Number.isFinite(retryAtMs) && Number.isFinite(nowMs)
-      ? retryAtMs - nowMs
-      : Number.NaN;
-  }
-  if (!Number.isFinite(delayMs)) return 0;
-  return Math.min(MAX_RETRY_AFTER_MS, Math.max(0, Math.ceil(delayMs)));
+  return parseStrictRetryAfterValue(raw, nowMs);
 }
 
 function isProviderCoolingDown(provider) {
