@@ -43,6 +43,39 @@ function escaped(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+test('pharmacy evergreen: il percorso turno segue il route hub pubblicato', () => {
+  const expectedPublishedHubRoutes = {
+    it: '/farmacie/',
+    en: '/en/pharmacies/',
+    de: '/de/apotheken/',
+    fr: '/fr/pharmacies/',
+  };
+
+  for (const locale of PHARMACY_LOCALES) {
+    assert.equal(PHARMACY_ROUTES[locale].duty, PHARMACY_ROUTES[locale].hub);
+    assert.equal(PHARMACY_ROUTES[locale].duty, expectedPublishedHubRoutes[locale]);
+  }
+});
+
+test('pharmacy evergreen: le guide non emettono i percorsi turno legacy', () => {
+  const legacyDutyRoutes = [
+    '/farmacie-di-turno/',
+    '/en/on-duty-pharmacies/',
+    '/de/notdienst-apotheken/',
+    '/fr/pharmacies-de-garde/',
+  ];
+  const guides = buildPharmacyEvergreenGuides(loadPharmacySnapshots());
+
+  for (const guide of guides) {
+    for (const locale of PHARMACY_LOCALES) {
+      const text = allArticleText(guide, locale);
+      for (const route of legacyDutyRoutes) {
+        assert.doesNotMatch(text, new RegExp(escaped(route)), `${guide.id}/${locale}: route legacy ${route}`);
+      }
+    }
+  }
+});
+
 const NOT_NATIONWIDE = {
   it: 'non è una copertura nazionale',
   en: 'not nationwide coverage',
