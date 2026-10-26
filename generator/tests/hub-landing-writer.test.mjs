@@ -24,6 +24,7 @@
  * source of truth. What can only be checked HERE is that this repo's writer
  * actually reaches for it.
  */
+import '../../host/cantonSectionsBootstrap.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
