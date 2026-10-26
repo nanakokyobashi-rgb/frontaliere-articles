@@ -4,12 +4,12 @@
   "section": "canton-zg",
   "canton": "ZG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-22T11:37:38.369Z",
-  "contentHash": "c91fbe6ceaaf5a077b84fb08e77c95b955b484d0d51ca4139d853a1bb3657154",
+  "updatedAt": "2026-10-26T12:31:20.302Z",
+  "contentHash": "99accb1cf6e4e5841def1b8a7962658ecc2361d9401d60b61d85a47e1930251a",
   "blocks": [
     {
       "id": "prezzi-carburanti",
-      "updatedAt": "2026-10-21T12:19:56.872Z",
+      "updatedAt": "2026-10-25T12:00:24.779Z",
       "keyFacts": 2,
       "carryUntilAt": "2026-11-02T00:00:00.000Z"
     }
@@ -54,11 +54,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-25T12:00:24.779Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zugo: assegnate le direzioni dal 1° gennaio 2027",
+          "url": "/articoli-zugo/esecutivo-zugo-mandato-2030/",
+          "excerpt": "Il Regierungsrat di Zugo ha definito direzioni e supplenze per il periodo 2027-2030, confermando le direzioni dei membri già in carica.",
+          "date": "2026-10-26T12:22:22.628Z"
+        },
         {
           "title": "Zugo: multa di CHF 900 per mancata dichiarazione fiscale",
           "url": "/articoli-zugo/zugo-multa-mancata-dichiarazione-fiscale/",
@@ -82,12 +88,6 @@
           "url": "/articoli-zugo/zugo-agenda-consiglio-29-ottobre/",
           "excerpt": "L'ordine del giorno della seduta del Consiglio cantonale di Zugo del 29 ottobre 2026 è disponibile, ma il testo non elenca le trattande.",
           "date": "2026-10-21T21:24:59.776Z"
-        },
-        {
-          "title": "Zugo: assegnate le direzioni per il periodo 2027-2030",
-          "url": "/articoli-zugo/zugo-assegnazione-mandato-2030/",
-          "excerpt": "Il Consiglio di Stato di Zugo ha assegnato le direzioni per il periodo 2027-2030 e regolato le supplenze dal 1° gennaio 2027.",
-          "date": "2026-10-20T23:44:17.371Z"
         }
       ],
       "links": [
@@ -100,7 +100,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-22T11:37:38.369Z"
+      "updatedAt": "2026-10-26T12:31:20.302Z"
     },
     "en": {
       "canton": "ZG",
@@ -141,11 +141,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-25T12:00:24.779Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zug: departments assigned from January 1, 2027",
+          "url": "/en/zug-articles/zug-government-term-2030/",
+          "excerpt": "The Government Council of Zug has defined the portfolios and deputy arrangements for the 2027-2030 period, confirming the portfolios of the incumbent members.",
+          "date": "2026-10-26T12:22:22.628Z"
+        },
         {
           "title": "Zug: CHF 900 fine for failure to file a tax return",
           "url": "/en/zug-articles/zug-tax-fine-missing-return/",
@@ -169,12 +175,6 @@
           "url": "/en/zug-articles/zug-cantonal-council-agenda-october-29-2026/",
           "excerpt": "The agenda of the meeting of the Cantonal Council of Zug on 29 October 2026 is available, but the text does not list the issues.",
           "date": "2026-10-21T21:24:59.776Z"
-        },
-        {
-          "title": "Zug: departments assigned for the 2027–2030 period",
-          "url": "/en/zug-articles/zug-directorates-term-2030/",
-          "excerpt": "The State Council of Zug has assigned the departments for the 2027–2030 term and regulated deputizing arrangements from January 1, 2027.",
-          "date": "2026-10-20T23:44:17.371Z"
         }
       ],
       "links": [
@@ -187,7 +187,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-22T11:37:38.369Z"
+      "updatedAt": "2026-10-26T12:31:20.302Z"
     },
     "de": {
       "canton": "ZG",
@@ -228,11 +228,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-25T12:00:24.779Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zug: Zuteilung der Direktionen ab dem 1. Januar 2027",
+          "url": "/de/zug-artikel/zug-regierungsrat-amtsperiode-2030/",
+          "excerpt": "Der Regierungsrat von Zug hat die Direktionen und Stellvertretungen für die Amtsperiode 2027-2030 festgelegt und die Direktionen der bereits amtierenden Mitglieder bestätigt.",
+          "date": "2026-10-26T12:22:22.628Z"
+        },
         {
           "title": "Zug: Busse von CHF 900 wegen Nichtabgabe der Steuererklärung",
           "url": "/de/zug-artikel/zug-steuerstrafe-fehlende-erklarung/",
@@ -256,12 +262,6 @@
           "url": "/de/zug-artikel/zug-kantonsrat-traktanden-29-oktober-2026/",
           "excerpt": "Die Tagesordnung der Sitzung des Kantonsrates Zug vom 29.",
           "date": "2026-10-21T21:24:59.776Z"
-        },
-        {
-          "title": "Zug: Direktionen für den Zeitraum 2027-2030 zugewiesen",
-          "url": "/de/zug-artikel/zug-direktionen-amtsperiode-2030/",
-          "excerpt": "Der Regierungsrat des Kantons Zug hat die Direktionen für den Zeitraum 2027-2030 zugewiesen und die Stellvertretungen ab dem 1.",
-          "date": "2026-10-20T23:44:17.371Z"
         }
       ],
       "links": [
@@ -274,7 +274,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-22T11:37:38.369Z"
+      "updatedAt": "2026-10-26T12:31:20.302Z"
     },
     "fr": {
       "canton": "ZG",
@@ -315,11 +315,17 @@
             }
           ],
           "sourceName": "BFS/UST — LIK prezzi medi di energia e carburanti (OPEN-BY; attribuzione obbligatoria)",
-          "updatedAt": "2026-10-21T12:19:56.872Z"
+          "updatedAt": "2026-10-25T12:00:24.779Z"
         }
       ],
       "curatedArticles": [],
       "latestCantonArticles": [
+        {
+          "title": "Zoug : attribution des départements à partir du 1er janvier 2027",
+          "url": "/fr/articles-zoug/gouvernement-zoug-mandat-2030/",
+          "excerpt": "Le Conseil d'État de Zoug a défini les départements et les suppléances pour la période 2027-2030, confirmant les départements des membres déjà en fonction.",
+          "date": "2026-10-26T12:22:22.628Z"
+        },
         {
           "title": "Zoug : amende de CHF 900 pour non-déclaration fiscale",
           "url": "/fr/articles-zoug/zoug-amende-declaration-fiscale-manquante/",
@@ -343,12 +349,6 @@
           "url": "/fr/articles-zoug/zoug-conseil-cantonal-ordre-jour-29-octobre-2026/",
           "excerpt": "L'ordre du jour de la séance du Conseil cantonal de Zoug du 29 octobre 2026 est disponible, mais le texte n'en dresse pas la liste.",
           "date": "2026-10-21T21:24:59.776Z"
-        },
-        {
-          "title": "Zoug : attributions des directions pour la période 2027-2030",
-          "url": "/fr/articles-zoug/zoug-directions-mandat-2030/",
-          "excerpt": "Le Conseil d'État de Zoug a attribué les directions pour la période 2027-2030 et réglé les suppléances à compter du 1er janvier 2027.",
-          "date": "2026-10-20T23:44:17.371Z"
         }
       ],
       "links": [
@@ -361,7 +361,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-22T11:37:38.369Z"
+      "updatedAt": "2026-10-26T12:31:20.302Z"
     }
   }
 }

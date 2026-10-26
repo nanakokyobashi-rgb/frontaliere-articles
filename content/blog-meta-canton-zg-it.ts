@@ -48,6 +48,9 @@ const blogMetaCantonZgIt: Record<string, string> = {
     'blog.article.zugo-multa-mancata-dichiarazione-fiscale.title': 'Zugo: multa di CHF 900 per mancata dichiarazione fiscale',
     'blog.article.zugo-multa-mancata-dichiarazione-fiscale.excerpt': 'Tribunale di Zugo: multa di CHF 900 Cancellata l\'imposta effettiva di CHF 41.15 Restano CHF 105 di spese per ritardo La dichiarazione 2023 non è stata',
     'blog.article.zugo-multa-mancata-dichiarazione-fiscale.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.esecutivo-zugo-mandato-2030.title': 'Zugo: assegnate le direzioni dal 1° gennaio 2027',
+    'blog.article.esecutivo-zugo-mandato-2030.excerpt': 'Il Regierungsrat di Zugo ha definito direzioni e supplenze per il periodo 2027-2030, confermando le direzioni dei membri già in carica.',
+    'blog.article.esecutivo-zugo-mandato-2030.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonZgIt;

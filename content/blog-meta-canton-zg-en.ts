@@ -48,6 +48,9 @@ const blogMetaCantonZgEn: Record<string, string> = {
     'blog.article.zugo-multa-mancata-dichiarazione-fiscale.title': 'Zug: CHF 900 fine for failure to file a tax return',
     'blog.article.zugo-multa-mancata-dichiarazione-fiscale.excerpt': 'Zug Court: CHF 900 fine Actual tax of CHF 41.15 cancelled CHF 105 in late fees remain The 2023 tax return was not filed Authority → Administrative Court of Zug',
     'blog.article.zugo-multa-mancata-dichiarazione-fiscale.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.esecutivo-zugo-mandato-2030.title': 'Zug: departments assigned from January 1, 2027',
+    'blog.article.esecutivo-zugo-mandato-2030.excerpt': 'The Government Council of Zug has defined the portfolios and deputy arrangements for the 2027-2030 period, confirming the portfolios of the incumbent members.',
+    'blog.article.esecutivo-zugo-mandato-2030.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZgEn;

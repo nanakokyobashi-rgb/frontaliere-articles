@@ -203,7 +203,7 @@ export function ackSuccessfulPublisherSections(outbox, publisherStatus) {
   };
 }
 
-function dispatchArguments({ workflow, section, articleIds, repo, dispatchNonce }) {
+export function dispatchArguments({ workflow, section, articleIds, repo, dispatchNonce }) {
   if (workflow === 'fast-publish-article.yml') {
     return [
       'workflow', 'run', workflow,
@@ -223,6 +223,7 @@ function dispatchArguments({ workflow, section, articleIds, repo, dispatchNonce 
     '--field', `article_ids=${JSON.stringify(articleIds)}`,
     '--field', 'bootstrap=false',
     '--field', 'dry_run=false',
+    '--field', 'replay_api_after_publish=true',
     '--field', `dispatch_nonce=${dispatchNonce}`,
   ];
 }

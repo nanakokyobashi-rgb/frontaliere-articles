@@ -171,4 +171,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'esecutivo-zugo-mandato-2030',
+ category: 'novita',
+ date: '2026-10-26T12:22:22.628Z',
+ image: '/images/blog/article-esecutivo-zugo-mandato-2030.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

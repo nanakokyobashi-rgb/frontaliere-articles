@@ -128,13 +128,16 @@ test('article-source runtime is isolated, pinned, retried, and limited to parser
   const fastSectionResolve = getJobBlock(fastSection, 'resolve');
   const sectionPlan = fastSectionResolve.indexOf('Resolve sections and article ids');
   const sectionRuntime = fastSectionResolve.indexOf('Setup isolated article source runtime');
-  const sectionPreflight = fastSectionResolve.indexOf('node scripts/ci/check-blog-body-links.mjs');
+  const sectionPreflight = fastSectionResolve.indexOf('bash scripts/ci/fast-publish-section-preflight.sh');
+  const sectionPreflightSource = read('scripts/ci/fast-publish-section-preflight.sh');
   assert.ok(sectionPlan >= 0 && sectionPlan < sectionRuntime && sectionRuntime < sectionPreflight,
     'fast-publish-section must decide no-op with builtin Node before installing the parser, then run the real preflight');
   const sectionRuntimeStep = fastSectionResolve.slice(sectionRuntime).split('\n      - ')[0];
-  const sectionPreflightStep = fastSectionResolve.slice(fastSectionResolve.lastIndexOf('      - name: Preflight', sectionPreflight), sectionPreflight);
+  const sectionPreflightStep = fastSectionResolve.slice(fastSectionResolve.lastIndexOf('      - name: Preflight', sectionPreflight));
   assert.match(sectionRuntimeStep, /if: steps\.plan\.outputs\.any == 'true'/);
   assert.match(sectionPreflightStep, /if: steps\.plan\.outputs\.any == 'true'/);
+  assert.match(sectionPreflightStep, /run: bash scripts\/ci\/fast-publish-section-preflight\.sh/);
+  assert.match(sectionPreflightSource, /node scripts\/ci\/check-blog-body-links\.mjs/);
 
   for (const [workflowPath, jobName, detectCommand] of [
     ['.github/workflows/reconcile-article-shards.yml', 'reconcile', 'node scripts/reconcile-article-shards.mjs'],

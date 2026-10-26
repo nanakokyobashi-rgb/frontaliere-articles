@@ -23,6 +23,7 @@ const PROMPT_ROOTS = [
 // The site already ratchets this empirical ceiling; keep the corpus aligned
 // while leaving margin below the undocumented server-side invalidation limit.
 const MAX_PROMPT_CHARS = 20_000;
+const MAX_WORKFLOW_BYTES = 64 * 1024;
 const PROMPT_KEY_RE = /^(\s*)prompt\s*:(.*)$/;
 const BLOCK_SCALAR_RE = /^\s*[|>](?:[+-]?\d?|\d?[+-]?)(?:[ \t]+(?:#.*)?)?$/;
 
@@ -187,5 +188,14 @@ test('nessun prompt multilinea supera il tetto che evita workflow invalidi', () 
     [],
     'prompt oversize: il workflow diventerebbe invalido e smetterebbe di girare:\n'
       + offenders.join('\n'),
+  );
+});
+
+test('fast-publish-section resta sotto il limite del parser GitHub', () => {
+  const file = path.join(ROOT, '.github/workflows/fast-publish-section.yml');
+  const size = fs.statSync(file).size;
+  assert.ok(
+    size <= MAX_WORKFLOW_BYTES,
+    `${file} pesa ${size} byte: GitHub può rifiutarlo prima di creare i job`,
   );
 });

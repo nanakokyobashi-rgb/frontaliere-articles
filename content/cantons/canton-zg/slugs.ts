@@ -18,6 +18,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'adeguamento-piano-direttore-zone-bianche-2026': { it: 'adeguamento-piano-direttore-zone-bianche-2026', en: 'zug-director-plan-adjustment-white-zones-2026', de: 'zug-richtplan-anpassung-weisse-zonen-2026', fr: 'zoug-plan-directeur-ajustement-zones-blanches-2026' },
  'revisione-pbg-zugo-2026': { it: 'revisione-pbg-zugo-2026', en: 'zug-pbg-revision-2026', de: 'zug-pbg-revision-2026', fr: 'revision-pbg-zoug-2026' },
  'zugo-multa-mancata-dichiarazione-fiscale': { it: 'zugo-multa-mancata-dichiarazione-fiscale', en: 'zug-tax-fine-missing-return', de: 'zug-steuerstrafe-fehlende-erklarung', fr: 'zoug-amende-declaration-fiscale-manquante' },
+ 'esecutivo-zugo-mandato-2030': { it: 'esecutivo-zugo-mandato-2030', en: 'zug-government-term-2030', de: 'zug-regierungsrat-amtsperiode-2030', fr: 'gouvernement-zoug-mandat-2030' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {
