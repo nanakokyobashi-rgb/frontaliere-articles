@@ -36,7 +36,7 @@ import { shapeWeatherBlock } from '../scripts/lib/canton-hubs/blocks-services.mj
 import { HUB_MIN_CONTENT_WORDS, TOPIC_BLOCKS, buildHubFile, hubContentHash, hubFilePaths, validateHubInput } from '../scripts/lib/canton-hubs/build.mjs';
 import { buildHubIntro, cantonPlace, foreignToponymsInCopy } from '../scripts/lib/canton-hubs/copy.mjs';
 import { loadTopicEngine } from '../scripts/lib/canton-hubs/engine-loader.mjs';
-import { HUB_LOCALES, fmtDay, fmtNumber, fmtPct } from '../scripts/lib/canton-hubs/format.mjs';
+import { HUB_LOCALES, fmtDay, fmtNumber, fmtPct, httpsUrlOrNull, isoDayOf, joinList } from '../scripts/lib/canton-hubs/format.mjs';
 import { buildHubLinks, jobsPagePath } from '../scripts/lib/canton-hubs/links.mjs';
 import { enabledCantonSections, generateCantonHubs, loadDatasets, parseArgs } from '../scripts/generate-canton-hubs.mjs';
 import { countCantonHubContentWords } from '../../scripts/lib/canton-hub-content.mjs';
@@ -1303,6 +1303,24 @@ test('formattazione per locale, senza Intl', () => {
   assert.equal(fmtDay('2026-10-01', 'fr'), '1er octobre 2026');
 });
 
+test('formattazione hub: input malformati non producono dati invalidi o crash generici', () => {
+  assert.throws(() => fmtNumber(1, 'it', -1), /numero di decimali non valido/);
+  assert.throws(() => fmtNumber(1, 'it', 1.5), /numero di decimali non valido/);
+  assert.throws(() => fmtNumber(1, 'it', 21), /numero di decimali non valido/);
+
+  assert.throws(() => isoDayOf('2026-02-31'), /data non valida/);
+  assert.throws(() => fmtDay('2024-02-30T09:00:00Z', 'it'), /data non valida/);
+  assert.equal(isoDayOf('2024-02-29'), '2024-02-29');
+
+  assert.equal(joinList(null, 'it'), '');
+  assert.equal(joinList('Ticino', 'it'), '');
+  assert.equal(joinList(['Ticino', '', 'Grigioni'], 'it'), 'Ticino e Grigioni');
+
+  assert.equal(httpsUrlOrNull('https://user:pass@example.org/source'), null);
+  assert.equal(httpsUrlOrNull('https://%75ser:pass@example.org/source'), null);
+  assert.equal(httpsUrlOrNull('https://example.org/source'), 'https://example.org/source');
+});
+
 // ─────────────────────────────────────────────────────────────────────────────
 // 7. Il confine col renderer dell'engine
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1360,6 +1378,8 @@ test('il producer rifiuta cio\' che il renderer rifiuterebbe o scarterebbe in si
   bad((i) => { delete i.dataBlocks[0].sourceName; i.dataBlocks[0].sourceUrl = 'https://example.org/'; }, /sourceUrl senza sourceName/);
   bad((i) => { i.keyFacts.push({ label: 'x', value: 'y', sourceUrl: 'https://example.org/' }); }, /sourceUrl senza sourceName/);
   bad((i) => { i.links[0].url = 'http://example.org/'; }, /URL non ammesso/);
+  bad((i) => { i.links[0].url = 'https://user:pass@example.org/'; }, /URL non ammesso/);
+  bad((i) => { i.links[0].url = 'https://%75ser:pass@example.org/'; }, /URL non ammesso/);
   bad((i) => { i.links[0].url = '/senza-slash'; }, /senza slash finale/);
   bad((i) => { i.links.push({ ...i.links[0] }); }, /link duplicato/);
   bad((i) => { i.dataBlocks[0].id = 'Non Valido'; }, /id non valido/);
