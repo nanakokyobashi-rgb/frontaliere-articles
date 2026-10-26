@@ -28,3 +28,12 @@ test('journalist publisher drains queued documents sequentially', () => {
   assert.match(loop, /await processDoc\(db, FieldValue, docSnap\)/u);
   assert.doesNotMatch(loop, /Promise\.all/u);
 });
+
+test('journalist publisher legge il body dell’immagine dal fetch con timeout condiviso', () => {
+  const downloadStart = SOURCE.indexOf('const response = await fetchWithRefTimeout(rawImage');
+  const sharpStart = SOURCE.indexOf("const sharpModule = await import('sharp')", downloadStart);
+  assert.ok(downloadStart >= 0 && sharpStart > downloadStart, 'percorso download immagine mancante');
+  const download = SOURCE.slice(downloadStart, sharpStart);
+  assert.match(download, /Buffer\.from\(await response\.arrayBuffer\(\)\)/u);
+  assert.doesNotMatch(download, /await fetch\(/u);
+});

@@ -277,31 +277,68 @@ test('fetchWithRefTimeout forza il timeout anche se il body reader ignora l’ab
 });
 
 test('fetchWithRefTimeout cancella il reader attivo quando il body è locked', async () => {
-  let cancelled = 0;
-  let wakeReader;
-  const reader = {
-    read() {
-      return new Promise((resolve) => { wakeReader = resolve; });
-    },
-    cancel() {
-      cancelled += 1;
-      wakeReader?.({ done: true });
-      return Promise.resolve();
-    },
-    releaseLock() {},
-  };
-  const response = await fetchWithRefTimeout(
-    'https://locked-body.invalid',
-    {},
-    20,
-    async () => ({
-      body: { getReader: () => reader },
-      json() { return new Promise(() => {}); },
-    }),
-  );
+  for (const method of ['arrayBuffer', 'blob', 'bytes', 'formData', 'json', 'text']) {
+    let cancelled = 0;
+    let wakeReader;
+    const reader = {
+      read() {
+        return new Promise((resolve) => { wakeReader = resolve; });
+      },
+      cancel() {
+        cancelled += 1;
+        wakeReader?.({ done: true });
+        return Promise.resolve();
+      },
+      releaseLock() {},
+    };
+    const response = await fetchWithRefTimeout(
+      'https://locked-body.invalid',
+      {},
+      20,
+      async () => ({
+        body: { getReader: () => reader },
+        headers: new Headers({ 'content-type': 'application/x-www-form-urlencoded' }),
+        [method]() { return new Promise(() => {}); },
+      }),
+    );
 
-  await assert.rejects(response.json(), { name: 'TimeoutError' });
-  assert.equal(cancelled, 1);
+    await assert.rejects(response[method](), { name: 'TimeoutError' });
+    assert.equal(cancelled, 1, `${method} deve cancellare il reader attivo`);
+  }
+});
+
+test('fetchWithRefTimeout conserva i risultati di tutti i body method tramite il reader tracciato', async () => {
+  const cases = [
+    ['arrayBuffer', 'hello'],
+    ['blob', 'hello'],
+    ['bytes', 'hello'],
+    ['formData', 'a=b&c=d'],
+    ['json', '{"ok":true}'],
+    ['text', 'hello'],
+  ];
+  for (const [method, payload] of cases) {
+    const response = await fetchWithRefTimeout(
+      'https://body-method.invalid',
+      {},
+      100,
+      async () => new Response(payload, {
+        headers: {
+          'content-type': method === 'json'
+            ? 'application/json'
+            : method === 'formData'
+              ? 'application/x-www-form-urlencoded'
+              : 'text/plain',
+        },
+      }),
+    );
+    const value = await response[method]();
+    if (method === 'arrayBuffer') assert.equal(new TextDecoder().decode(value), payload);
+    else if (method === 'blob') assert.equal(await value.text(), payload);
+    else if (method === 'bytes') assert.equal(new TextDecoder().decode(value), payload);
+    else if (method === 'formData') assert.deepEqual([value.get('a'), value.get('c')], ['b', 'd']);
+    else if (method === 'json') assert.deepEqual(value, { ok: true });
+    else assert.equal(value, payload);
+  }
 });
 
 test('fetchWithRefTimeout mantiene il brand della Response e accetta un fetch iniettato', async () => {

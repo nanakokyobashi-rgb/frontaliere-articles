@@ -13,23 +13,40 @@ const BODY_METHODS = new Set(['arrayBuffer', 'blob', 'bytes', 'formData', 'json'
 const ACTIVE_DEADLINES = new WeakMap();
 export const DEFAULT_FETCH_TIMEOUT_MS = 15_000;
 
-async function readBodyTextWithReader(response, onReader) {
+function bodyChunkToBytes(value) {
+  if (typeof value === 'string') return new TextEncoder().encode(value);
+  if (value instanceof Uint8Array) return value;
+  if (value instanceof ArrayBuffer) return new Uint8Array(value);
+  if (ArrayBuffer.isView(value)) {
+    return new Uint8Array(value.buffer, value.byteOffset, value.byteLength);
+  }
+  throw new TypeError('unsupported response body chunk');
+}
+
+async function readBodyBytesWithReader(response, onReader) {
   const body = response?.body;
-  if (typeof body?.getReader !== 'function') return response.text();
+  if (typeof body?.getReader !== 'function') return null;
 
   const reader = body.getReader();
   onReader(reader);
-  const decoder = new TextDecoder();
-  let text = '';
+  const chunks = [];
+  let totalLength = 0;
   try {
     while (true) {
       const { done, value } = await reader.read();
-      if (done) return text + decoder.decode();
+      if (done) break;
       if (value == null) continue;
-      text += typeof value === 'string'
-        ? value
-        : decoder.decode(value, { stream: true });
+      const chunk = bodyChunkToBytes(value);
+      chunks.push(chunk);
+      totalLength += chunk.byteLength;
     }
+    const bytes = new Uint8Array(totalLength);
+    let offset = 0;
+    for (const chunk of chunks) {
+      bytes.set(chunk, offset);
+      offset += chunk.byteLength;
+    }
+    return bytes;
   } finally {
     onReader(null);
     try { reader.releaseLock?.(); } catch { /* cleanup stays best effort */ }
@@ -38,13 +55,31 @@ async function readBodyTextWithReader(response, onReader) {
 
 async function readBodyMethod(response, property, args, onReader) {
   const body = response?.body;
-  if ((property !== 'json' && property !== 'text')
-    || typeof body?.getReader !== 'function') {
+  if (typeof body?.getReader !== 'function') {
     const value = Reflect.get(response, property, response);
     return value.apply(response, args);
   }
-  const text = await readBodyTextWithReader(response, onReader);
-  return property === 'json' ? JSON.parse(text) : text;
+  const bytes = await readBodyBytesWithReader(response, onReader);
+  switch (property) {
+    case 'arrayBuffer':
+      return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+    case 'blob':
+      return new Blob([bytes], { type: response.headers?.get?.('content-type') || '' });
+    case 'bytes':
+      return bytes;
+    case 'formData': {
+      const init = response.headers ? { headers: response.headers } : undefined;
+      return new Response(bytes, init).formData();
+    }
+    case 'json':
+      return JSON.parse(new TextDecoder().decode(bytes));
+    case 'text':
+      return new TextDecoder().decode(bytes);
+    default: {
+      const value = Reflect.get(response, property, response);
+      return value.apply(response, args);
+    }
+  }
 }
 
 function withBodyDeadline(response, cleanup, timeoutPromise) {
