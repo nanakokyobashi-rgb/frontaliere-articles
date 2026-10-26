@@ -2,14 +2,6 @@
   "schema": 1,
   "items": [
     {
-      "articleId": "rogo-cortivallo-persona-morta",
-      "section": "frontaliere"
-    },
-    {
-      "articleId": "checklist-neonato-ticino",
-      "section": "frontaliere"
-    },
-    {
       "articleId": "prodex-40-anni-esericerca-spaziale",
       "section": "svizzera"
     },
@@ -20,10 +12,6 @@
     {
       "articleId": "disoccupazione-neuchatel-luglio-2026",
       "section": "canton-ne"
-    },
-    {
-      "articleId": "checklist-neonato-confine-2026",
-      "section": "frontaliere"
     }
   ]
 }
