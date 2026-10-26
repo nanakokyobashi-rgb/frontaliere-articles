@@ -176,6 +176,13 @@ jobs:
           IN_FLIGHT_STATUSES='["queued","in_progress","requested","waiting","pending"]'
           ACTION_TERMINAL_STATUS='completed'
 
+          # Ogni lettura o dispatch GitHub ha un limite proprio: il budget del
+          # job non interrompe una `gh api` già bloccata.
+          api_timeout_seconds=60
+          gh_api_timeout() {
+            timeout --kill-after=5s "${api_timeout_seconds}s" gh api "$@"
+          }
+
           validate_workflow_runs() {
             jq -c --argjson in_flight "$IN_FLIGHT_STATUSES" --arg terminal "$ACTION_TERMINAL_STATUS" '
               . as $pages
@@ -260,7 +267,7 @@ jobs:
             local dispatch_section
             local runs_pages_json
             local runs_json
-            if ! runs_pages_json="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=100")"; then
+            if ! runs_pages_json="$(gh_api_timeout --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=100")"; then
               echo 999
               return
             fi
@@ -275,7 +282,7 @@ jobs:
               fi
               local jobs_pages_json
               local jobs_json
-              if ! jobs_pages_json="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/jobs?per_page=100")"; then
+              if ! jobs_pages_json="$(gh_api_timeout --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/jobs?per_page=100")"; then
                 echo 999
                 return
               fi
@@ -350,7 +357,7 @@ jobs:
           deferred=false
           hour_ago="$(date -u -d '60 minutes ago' +%Y-%m-%dT%H:%M:%SZ)"
           recent=999
-          if recent_pages_json="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=100" 2>/dev/null)"; then
+          if recent_pages_json="$(gh_api_timeout --paginate --slurp "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=100" 2>/dev/null)"; then
             if recent_runs_json="$(validate_workflow_runs <<<"$recent_pages_json")"; then
               recent="$(jq -r --arg t "$hour_ago" '[.workflow_runs[] | select(.event == "workflow_dispatch" and .created_at_epoch >= ($t | fromdateiso8601))] | length' <<<"$recent_runs_json" 2>/dev/null)" || recent=999
             fi
@@ -389,18 +396,23 @@ jobs:
 
             dispatch_nonce="dirty-content-${GITHUB_RUN_ID}-${section}-${id}-$(date +%s%N)"
             echo "── dispatch republish: $section/$id (nonce=$dispatch_nonce)"
-            gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/dispatches" \
+            if ! gh_api_timeout -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/dispatches" \
               -f ref=main \
               -f "inputs[article_id]=$id" \
               -f "inputs[section]=$section" \
               -f "inputs[dry_run]=false" \
-              -f "inputs[dispatch_nonce]=$dispatch_nonce"
+              -f "inputs[dispatch_nonce]=$dispatch_nonce"; then
+              echo "::warning::dispatch fallito per $section/$id — la conterà il prossimo giro"
+              printf '%s\t%s\t%s\n' "$id" "$section" "lost" >> "$results"
+              failed=$((failed + 1))
+              continue
+            fi
 
             run_id=""
             for i in $(seq 1 12); do
               echo "dispatch lookup attempt $i/12"
               sleep 10
-              run_id="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=100" \
+              run_id="$(gh_api_timeout "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=100" \
                 | jq -r --arg nonce "$dispatch_nonce" '
                   [.workflow_runs[]
                     | select(
@@ -423,9 +435,9 @@ jobs:
             conclusion=""
             waited=0
             while [ "$waited" -lt 1500 ] && [ "$(elapsed)" -lt "$HARD_DEADLINE" ]; do
-              status="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" | jq -r '.status' || echo '')"
+              status="$(gh_api_timeout "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" | jq -r '.status' || echo '')"
               if [ "$status" = "completed" ]; then
-                conclusion="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" | jq -r '.conclusion' || echo '')"
+                conclusion="$(gh_api_timeout "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" | jq -r '.conclusion' || echo '')"
                 break
               fi
               sleep 30; waited=$((waited + 30))

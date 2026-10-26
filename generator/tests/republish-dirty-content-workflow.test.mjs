@@ -19,10 +19,18 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   const validation = workflow.slice(0, start);
   const guard = workflow.slice(start, end);
 
+  assert.match(validation, /api_timeout_seconds=60/);
+  assert.match(validation, /timeout --kill-after=5s "\$\{api_timeout_seconds\}s" gh api "\$@"/);
+  assert.doesNotMatch(workflow, /^\s+gh api\b/m, 'nessuna chiamata deve bypassare il wrapper');
+  assert.equal(
+    (workflow.match(/gh_api_timeout(?:\s|\()/g) || []).length,
+    8,
+    'sette chiamate più la definizione devono restare protette',
+  );
   assert.match(guard, /actions\/runs\/\$run_id\/jobs\?per_page=100/);
   assert.match(
     guard,
-    /gh api --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/runs\?per_page=100"/,
+    /gh_api_timeout --paginate --slurp "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/runs\?per_page=100"/,
   );
   assert.match(validation, /workflow_runs \| length/);
   assert.match(validation, /total_count/);
@@ -52,7 +60,15 @@ test('il backfill aspetta solo il gruppo dello shard target', () => {
   assert.match(workflow, /-f "inputs\[dispatch_nonce\]=\$dispatch_nonce"/);
   assert.match(workflow, /--arg nonce "\$dispatch_nonce"/);
   assert.match(workflow, /contains\("nonce=" \+ \$nonce\)/);
-  assert.match(workflow, /recent_pages_json=.*gh api --paginate --slurp/);
+  assert.match(workflow, /recent_pages_json=.*gh_api_timeout --paginate --slurp/);
+  assert.match(
+    workflow,
+    /if ! gh_api_timeout -X POST "repos\/\$GITHUB_REPOSITORY\/actions\/workflows\/\$WF\/dispatches"/,
+  );
+  assert.match(
+    workflow,
+    /printf '%s\\t%s\\t%s\\n' "\$id" "\$section" "lost" >> "\$results"/,
+  );
   assert.match(workflow, /recent_runs_json=.*validate_workflow_runs/);
   assert.match(workflow, /\.created_at \| fromdateiso8601/);
   assert.doesNotMatch(workflow, /created_at >= \$before/);
