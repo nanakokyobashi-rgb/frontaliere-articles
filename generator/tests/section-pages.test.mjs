@@ -3348,22 +3348,22 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE_INPUT: \$\{\{ inputs\.cleanup_inactive_surface \}\}/);
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE: \$\{\{ matrix\.target\.cleanupInactiveSurface \|\| false \}\}/);
   assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
-  assert.match(wf, /-f source_commit="\$current_main"/);
+  assert.match(sectionContract, /-f source_commit="\$current_main"/);
   assert.equal(
     (sectionContract.match(/-f dispatch_nonce="\$dispatch_nonce"/g) ?? []).length,
     4,
     'ogni redispatch stale deve conservare il nonce della run originaria o generarne un fallback per sezione',
   );
-  assert.match(wf, /source_commit richiede una SHA completa/);
-  assert.match(wf, /source_main_commit e' obbligatorio e richiede una SHA completa quando source_commit e' valorizzato/);
+  assert.match(sectionContract, /source_commit richiede una SHA completa/);
+  assert.match(sectionContract, /source_main_commit e' obbligatorio e richiede una SHA completa quando source_commit e' valorizzato/);
   assert.match(wf, /if \[ "\$SOURCE_COMMIT_INPUT" != "\$SOURCE_MAIN_COMMIT_INPUT" \]/);
-  assert.match(wf, /if \[ "\$SOURCE_COMMIT" != "\$SOURCE_MAIN_COMMIT" \]/);
+  assert.match(sectionContract, /if \[ "\$SOURCE_COMMIT" != "\$SOURCE_MAIN_COMMIT" \]/);
   assert.equal(
-    (wf.match(/source_commit deve coincidere con source_main_commit nel replay bounded/g) ?? []).length,
+    (sectionContract.match(/source_commit deve coincidere con source_main_commit nel replay bounded/g) ?? []).length,
     2,
     'resolve e publish devono rifiutare un checkout diverso dalla HEAD certificata',
   );
-  assert.match(wf, /checkout non coincide con source_commit/);
+  assert.match(sectionContract, /checkout non coincide con source_commit/);
   assert.match(wf, /inputs\.source_commit/);
   assert.match(wf, /source_main_commit:/);
   assert.match(wf, /replay_api_after_publish:/);
@@ -3400,26 +3400,26 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /known_missing_page_paths:/);
   assert.match(wf, /MISSING_PAGE_PATHS_JSON: \$\{\{ toJSON\(matrix\.target\.missingPagePaths \|\| fromJSON\('\[\]'\)\) \}\}/);
   assert.match(wf, /KNOWN_MISSING_PAGE_PATHS_JSON: \$\{\{ toJSON\(matrix\.target\.knownMissingPagePaths \|\| fromJSON\('\[\]'\)\) \}\}/);
-  assert.match(wf, /article_ids_file="\$RUNNER_TEMP\/fast-section-article-ids\.json"/);
-  assert.match(wf, /printf '%s' "\$ARTICLE_IDS_JSON" > "\$article_ids_file"/);
-  assert.match(wf, /args\+=\(--ids-file "\$article_ids_file"\)/);
-  assert.match(wf, /args\+=\(--missing-pages-file "\$missing_page_paths_file"\)/);
-  assert.match(wf, /args\+=\(--known-missing-pages-file "\$known_missing_page_paths_file"\)/);
-  assert.doesNotMatch(wf, /args\+=\(--ids "\$\(printf '%s' "\$ARTICLE_IDS_JSON"/);
+  assert.match(render, /article_ids_file="\$RUNNER_TEMP\/fast-section-article-ids\.json"/);
+  assert.match(render, /printf '%s' "\$ARTICLE_IDS_JSON" > "\$article_ids_file"/);
+  assert.match(render, /args\+=\(--ids-file "\$article_ids_file"\)/);
+  assert.match(render, /args\+=\(--missing-pages-file "\$missing_page_paths_file"\)/);
+  assert.match(render, /args\+=\(--known-missing-pages-file "\$known_missing_page_paths_file"\)/);
+  assert.doesNotMatch(render, /args\+=\(--ids "\$\(printf '%s' "\$ARTICLE_IDS_JSON"/);
   assert.match(wf, /ALLOW_DEFERRED_LIVE_RELEASE: \$\{\{ needs\.resolve\.outputs\.allow_deferred_live_release \}\}/);
   assert.match(wf, /EXPECTED_MAIN_HEAD: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_main_commit \|\| github\.event\.after \|\| github\.sha \}\}/);
   assert.match(wf, /-f source_main_commit="\$CURRENT_MAIN"/);
-  assert.match(wf, /-f source_main_commit="\$current_main"/);
+  assert.match(sectionContract, /-f source_main_commit="\$current_main"/);
   assert.match(wf, /replay_before="\$\{ORIGINAL_PUSH_BEFORE:-\$STALE_HEAD\}"/);
   assert.doesNotMatch(wf, /replay_after="\$\{ORIGINAL_PUSH_AFTER:-\$STALE_HEAD\}"/);
   assert.match(wf, /replay_after="\$CURRENT_MAIN"/);
-  assert.match(wf, /replay_after="\$current_main"/);
+  assert.match(sectionContract, /replay_after="\$current_main"/);
   assert.match(wf, /-f push_before="\$replay_before"/);
   assert.match(wf, /-f push_after="\$replay_after"/);
-  assert.equal((wf.match(/-f api_release_commit="\$api_release_commit"/g) ?? []).length, 2);
-  assert.match(wf, /resolveStaleReplayApiReleaseCommit/);
+  assert.equal((sectionContract.match(/-f api_release_commit="\$api_release_commit"/g) ?? []).length, 2);
+  assert.match(sectionContract, /resolveStaleReplayApiReleaseCommit/);
   assert.equal(
-    (wf.match(/release API stantia non copre la HEAD corrente; il replay ricalcolera' la release senza override/g) ?? []).length,
+    (sectionContract.match(/release API stantia non copre la HEAD corrente; il replay ricalcolera' la release senza override/g) ?? []).length,
     2,
     'i redispatch devono lasciare vuoto l override quando la release futura non e ancora pubblicata',
   );
@@ -3429,7 +3429,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /-f replay_api_after_publish="\$REPLAY_API_AFTER_PUBLISH"/);
   assert.match(wf, /REPLAY_API_AFTER_PUBLISH: \$\{\{ needs\.resolve\.outputs\.replay_api_after_publish \}\}/);
   assert.equal(
-    (wf.match(/-f replay_api_after_publish="\$REPLAY_API_AFTER_PUBLISH"/g) ?? []).length,
+    (sectionContract.match(/-f replay_api_after_publish="\$REPLAY_API_AFTER_PUBLISH"/g) ?? []).length,
     3,
     'resolve, late guard e recovery devono propagare il flag del replay API',
   );
@@ -3498,9 +3498,9 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /preflight_head: \$\{\{ steps\.preflight_head\.outputs\.head \}\}/);
   assert.match(wf, /Record preflight revision/);
   assert.match(wf, /PREFLIGHT_HEAD: \$\{\{ needs\.resolve\.outputs\.preflight_head \}\}/);
-  assert.match(wf, /validated_head="\$PREFLIGHT_HEAD"/);
+  assert.match(sectionContract, /validated_head="\$PREFLIGHT_HEAD"/);
   assert.match(
-    wf,
+    sectionContract,
     /if \{ \[ "\$EVENT_NAME" = 'push' \] \\\n\s+\|\| \{ \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ "\$BOOTSTRAP" != 'true' \]; \}; \} \\\n\s+&& \[ "\$REF" = 'refs\/heads\/main' \] \\\n\s+&& \[ -z "\$\{SOURCE_COMMIT:-\}" \]; then/u,
   );
   assert.match(wf, /actions\/upload-artifact@v7/);
@@ -3523,14 +3523,14 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /main e' avanzata da \$SOURCE_COMMIT a \$current_main/);
   assert.match(wf, /gh workflow run publish-api\.yml --repo "\$REPOSITORY" --ref main -f source_commit="\$SOURCE_COMMIT"/);
   assert.match(stagedReplay, /ref: \$\{\{ needs\.publish_release_head\.outputs\.rendered_head \|\| inputs\.source_commit \|\| github\.sha \}\}/);
-  assert.match(wf, /replay workflow_run redispatchato prima degli upload/);
-  assert.match(wf, /elif \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ -n "\$\{SOURCE_COMMIT:-\}" \]; then\n\s+pinned_replay_main="\$SOURCE_MAIN_COMMIT"/);
-  assert.match(wf, /replay bounded redispatchato prima degli upload/);
+  assert.match(sectionContract, /replay workflow_run redispatchato prima degli upload/);
+  assert.match(sectionContract, /elif \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ -n "\$\{SOURCE_COMMIT:-\}" \]; then\n\s+pinned_replay_main="\$SOURCE_MAIN_COMMIT"/);
+  assert.match(sectionContract, /replay bounded redispatchato prima degli upload/);
   // Il workflow ha due guard con lo stesso assegnamento locale; questa
   // asserzione riguarda quello finale, che costruisce il nonce `stale-late`.
-  const lateGuardNonceStart = wf.lastIndexOf('dispatch_nonce="${DISPATCH_NONCE:-}"');
-  const lateGuardTitleStart = wf.indexOf('dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"', lateGuardNonceStart);
-  const lateGuardNonce = wf.slice(lateGuardNonceStart, lateGuardTitleStart);
+  const lateGuardNonceStart = render.lastIndexOf('dispatch_nonce="${DISPATCH_NONCE:-}"');
+  const lateGuardTitleStart = render.indexOf('dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"', lateGuardNonceStart);
+  const lateGuardNonce = render.slice(lateGuardNonceStart, lateGuardTitleStart);
   assert.match(lateGuardNonce, /nonce_hash="\$\(printf '%s\\0%s\\0%s' "\$nonce_seed" "\$current_main" "\$SECTION" \| sha256sum \| cut -c1-16\)"/);
   assert.match(lateGuardNonce, /dispatch_nonce="stale-late-\$\{current_main:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/);
   assert.match(wf, /id: push_range[\s\S]*resolve-workflow-run-push-range\.mjs/);
@@ -3594,20 +3594,17 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   assert.match(resolveCheckout, /fetch-depth: 0/, 'il resolve deve conservare la storia per il preflight high-water');
   assert.doesNotMatch(resolveCheckout, /fetch-depth: 2/, 'il preflight non puo\' usare un checkout shallow');
-  const liveRetryLoop = wf.slice(
-    wf.indexOf('          for publish_attempt in 1 2 3; do'),
-    wf.indexOf('      - name: Release bootstrap R2 gate'),
-  );
+  const liveRetryLoop = render;
   const liveCheckout = liveRetryLoop.indexOf('git checkout --detach FETCH_HEAD');
   assert.equal(
     liveRetryLoop.includes('git checkout --detach origin/main'),
     false,
     'il retry deve usare il commit appena restituito da fetch, non un ref remoto eventualmente stale',
   );
-  const liveKillSwitch = liveRetryLoop.indexOf('if [ -f .github/FAST_PUBLISH_DISABLED ]');
+  const liveKillSwitch = liveRetryLoop.lastIndexOf('if [ -f .github/FAST_PUBLISH_DISABLED ]');
   const liveDependencyRefresh = liveRetryLoop.indexOf('bash scripts/lib/npm-ci-retry.sh');
   const liveEnsure = liveRetryLoop.indexOf('scripts/ci/ensure-host-shell-assets.mjs');
-  const liveRender = liveRetryLoop.indexOf('scripts/publish-section-pages.mjs');
+  const liveRender = liveRetryLoop.indexOf('RETRY_CMD_ATTEMPTS=2 bash scripts/ci/retry-cmd.sh npx -y tsx@4.23.15 scripts/publish-section-pages.mjs');
   assert.ok(
     liveCheckout >= 0
       && liveKillSwitch > liveCheckout
@@ -3628,8 +3625,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(stagedReplay, /TARGET_MATRIX: \$\{\{ needs\.resolve\.outputs\.matrix \}\}/);
   assert.match(stagedReplay, /ORIGINAL_PUSH_BEFORE: \$\{\{ needs\.resolve\.outputs\.push_before \}\}/);
   assert.match(stagedReplay, /MIXED_MATRIX: \$\{\{ needs\.publish_release_head\.outputs\.mixed_matrix \}\}/);
-  assert.match(stagedReplay, /-f missing_page_paths="\$missing_page_paths"/);
-  assert.match(stagedReplay, /-f known_missing_page_paths="\$known_missing_page_paths"/);
+  assert.match(recovery, /-f missing_page_paths="\$missing_page_paths"/);
+  assert.match(recovery, /-f known_missing_page_paths="\$known_missing_page_paths"/);
   const replayDispatchStep = stagedReplay.slice(
     stagedReplay.indexOf('- name: Replay publish-api after staged release'),
   );
@@ -3650,12 +3647,13 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     stagedReplay.indexOf('- name: Redispatch staged backfill on current main after stale replay or mixed matrix'),
     stagedReplay.indexOf('- name: Replay publish-api after staged release'),
   );
-  assert.match(staleRecoveryStep, /if: >-[\s\S]*steps\.replay_freshness\.outputs\.fresh == 'false'[\s\S]*mixed_matrix == 'true'/);
-  assert.match(staleRecoveryStep, /bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh "\$REPOSITORY" "\$dispatch_title" --ref main/);
-  assert.match(staleRecoveryStep, /-f source_commit="\$CURRENT_MAIN"/);
-  assert.match(staleRecoveryStep, /-f source_main_commit="\$CURRENT_MAIN"/);
-  assert.match(staleRecoveryStep, /target_matrix="\$TARGET_MATRIX"[\s\S]*MIXED_MATRIX:-false[\s\S]*fast-publish-section\.mjs r2-plan/);
-  assert.match(wf, /PREFLIGHT_BASE_REVISION="\$plan_before"/);
+  const recoveryContract = `${staleRecoveryStep}\n${recovery}`;
+  assert.match(recoveryContract, /if: >-[\s\S]*steps\.replay_freshness\.outputs\.fresh == 'false'[\s\S]*mixed_matrix == 'true'/);
+  assert.match(recoveryContract, /bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh "\$REPOSITORY" "\$dispatch_title" --ref main/);
+  assert.match(recoveryContract, /-f source_commit="\$CURRENT_MAIN"/);
+  assert.match(recoveryContract, /-f source_main_commit="\$CURRENT_MAIN"/);
+  assert.match(recoveryContract, /target_matrix="\$TARGET_MATRIX"[\s\S]*MIXED_MATRIX:-false[\s\S]*fast-publish-section\.mjs r2-plan/);
+  assert.match(render, /PREFLIGHT_BASE_REVISION="\$plan_before"/);
   assert.match(wf, /push_before:/);
   assert.match(wf, /push_after:/);
   assert.match(
@@ -3664,11 +3662,11 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'il retry live conserva PUSH_BEFORE per le push e usa HEAD^ solo per un dispatch senza base',
   );
   assert.match(liveRetryLoop, /refresh_live_plan_and_preflight/);
-  assert.match(wf, /refresh_live_plan_and_preflight\(\) \{[\s\S]*fast-publish-section\.mjs r2-plan/);
-  assert.match(wf, /refresh_live_plan_and_preflight\(\) \{[\s\S]*check-blog-body-syntax\.mjs/);
-  assert.match(wf, /refresh_live_plan_and_preflight\(\) \{[\s\S]*check-blog-body-links\.mjs/);
-  assert.match(wf, /dynamic_bootstrap_lock='false'/);
-  assert.match(wf, /acquire_dynamic_bootstrap_lock\(\) \{[\s\S]*section-bootstrap-lock\.mjs acquire[\s\S]*dynamic_bootstrap_lock=true/);
+  assert.match(render, /refresh_live_plan_and_preflight\(\) \{[\s\S]*fast-publish-section\.mjs r2-plan/);
+  assert.match(render, /refresh_live_plan_and_preflight\(\) \{[\s\S]*check-blog-body-syntax\.mjs/);
+  assert.match(render, /refresh_live_plan_and_preflight\(\) \{[\s\S]*check-blog-body-links\.mjs/);
+  assert.match(render, /dynamic_bootstrap_lock='false'/);
+  assert.match(render, /acquire_dynamic_bootstrap_lock\(\) \{[\s\S]*section-bootstrap-lock\.mjs acquire[\s\S]*dynamic_bootstrap_lock=true/);
   assert.match(liveRetryLoop, /if \[ "\$attempt_dry" != 'true' \]; then\n\s+acquire_dynamic_bootstrap_lock/);
   assert.match(liveRetryLoop, /rendered_head=\$EXPECTED_MAIN_HEAD/);
   assert.doesNotMatch(liveRetryLoop, /sleep 30/);
@@ -3683,7 +3681,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /PUSH_BEFORE: \$\{\{ github\.event\.before \}\}/);
   assert.match(resolver, /git diff --name-status "\$before" HEAD/);
   assert.match(wf, /Fetch fallback corpus revision for manifest migration/);
-  assert.match(wf, /--previous-revision/);
+  assert.match(render, /--previous-revision/);
   const fallbackFetchStart = wf.indexOf('name: Fetch fallback corpus revision for manifest migration');
   const fallbackFetchEnd = wf.indexOf('- name: Set up Node', fallbackFetchStart);
   const fallbackFetch = wf.slice(fallbackFetchStart, fallbackFetchEnd);
@@ -3745,8 +3743,8 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'engine/**'\n"));
   assert.ok(read('.github/workflows/fast-publish-article.yml').includes("      - 'host/**'\n"));
   assert.match(wf, /if: needs\.resolve\.outputs\.any == 'true'/);
-  assert.match(wf, /RETRY_CMD_ATTEMPTS=2 bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs "\$\{args\[@\]\}"/);
-  assert.match(wf, /\[ "\$dry_mode" = "true" \]; then\n\s+args\+=\(--dry-run\)\n\s+else\n\s+args\+=\(--publish\)/);
+  assert.match(render, /RETRY_CMD_ATTEMPTS=2 bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs "\$\{args\[@\]\}"/);
+  assert.match(render, /\[ "\$dry_mode" = "true" \]; then\n\s+args\+=\(--dry-run\)\n\s+else\n\s+args\+=\(--publish\)/);
   // upload-cdn-file.sh esce 0 senza credenziali: l'assenza deve fermare il job.
   assert.match(wf, /for v in R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_S3_ENDPOINT R2_BUCKET CF_API_TOKEN; do/);
   assert.match(wf, /timeout-minutes: 360/);

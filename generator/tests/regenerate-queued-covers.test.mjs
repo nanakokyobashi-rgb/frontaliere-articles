@@ -1728,21 +1728,21 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(sectionPublisher, /PREFLIGHT_HEAD: \$\{\{ needs\.resolve\.outputs\.preflight_head \}\}/u);
   assert.match(sectionRender, /validated_head="\$PREFLIGHT_HEAD"/u);
   assert.match(
-    sectionPublisher,
+    sectionRender,
     /if \{ \[ "\$EVENT_NAME" = 'push' \] \\\n\s+\|\| \{ \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ "\$BOOTSTRAP" != 'true' \]; \}; \} \\\n\s+&& \[ "\$REF" = 'refs\/heads\/main' \] \\\n\s+&& \[ -z "\$\{SOURCE_COMMIT:-\}" \]; then/u,
     'il retry live del publisher sezione include i push bootstrap e i dispatch dalla main',
   );
-  assert.match(sectionPublisher, /\[ "\$BOOTSTRAP" != 'true' \]/u);
-  assert.match(sectionPublisher, /for publish_attempt in 1 2 3/u);
-  assert.match(sectionPublisher, /git fetch --no-tags origin main/u);
-  assert.match(sectionPublisher, /git checkout --detach FETCH_HEAD/u);
-  assert.match(sectionPublisher, /export PUSH_AFTER="\$EXPECTED_MAIN_HEAD"/u);
+  assert.match(sectionRender, /\[ "\$BOOTSTRAP" != 'true' \]/u);
+  assert.match(sectionRender, /for publish_attempt in 1 2 3/u);
+  assert.match(sectionRender, /git fetch --no-tags origin main/u);
+  assert.match(sectionRender, /git checkout --detach FETCH_HEAD/u);
+  assert.match(sectionRender, /export PUSH_AFTER="\$EXPECTED_MAIN_HEAD"/u);
   assert.match(
-    sectionPublisher,
+    sectionRender,
     /if \[ -z "\$\{PUSH_BEFORE:-\}" \] \|\| \[\[ "\$PUSH_BEFORE" =~ \^0\+\$ \]\]; then[\s\S]*previous_revision="\$\(git rev-parse HEAD\^\)"[\s\S]*else[\s\S]*previous_revision="\$PUSH_BEFORE"/u,
   );
-  assert.doesNotMatch(sectionPublisher, /git checkout --detach origin\/main/u);
-  assert.match(sectionPublisher, /main avanzata durante il render/u);
+  assert.doesNotMatch(sectionContract, /git checkout --detach origin\/main/u);
+  assert.match(sectionRender, /main avanzata durante il render/u);
   const sectionLiveLoop = sectionRender.slice(sectionRender.indexOf('for publish_attempt in 1 2 3'));
   assert.match(sectionLiveLoop, /if \[ -f \.github\/FAST_PUBLISH_DISABLED \]/u);
   assert.match(sectionLiveLoop, /build_publish_args "\$attempt_dry"/u);
