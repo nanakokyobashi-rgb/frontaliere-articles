@@ -1265,6 +1265,8 @@ jobs:
       - name: Publish the canton sections release to the edge
         id: publish_edge
         if: steps.deploy.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: node scripts/publish-section-edge.mjs
 
       # Tell the site the surface moved after the edge flip. A push is the

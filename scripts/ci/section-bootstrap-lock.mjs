@@ -14,6 +14,7 @@ import {
   makeSectionBootstrapLock,
   makeReleasedSectionBootstrapLock,
   readSectionBootstrapLock,
+  readBootstrapLockOwnerRun,
   sectionBootstrapLockKey,
 } from '../lib/section-bootstrap-lock.mjs';
 
@@ -87,8 +88,18 @@ async function acquireOnce({ section, commit, role }) {
     console.log(`bootstrap lock gia' acquisito: ${section} (${existing.doc.commit.slice(0, 8)}, role=${role})`);
     return;
   }
+  let takeoverEtag = null;
   if (existing.state === 'active' && existing.doc.owner !== owner) {
-    throw new LockBusyError(`bootstrap lock gia' detenuto da ${existing.doc.owner}`);
+    const ownerRun = await readBootstrapLockOwnerRun(existing.doc.owner);
+    if (ownerRun.state !== 'terminal') {
+      const detail = ownerRun.state === 'active'
+        ? `run ancora ${ownerRun.status}`
+        : `stato non verificabile (${ownerRun.reason})`;
+      throw new LockBusyError(`bootstrap lock gia' detenuto da ${existing.doc.owner}: ${detail}`);
+    }
+    if (!existing.etag) throw new Error(`etag lock terminato non disponibile per ${section}`);
+    takeoverEtag = existing.etag;
+    console.log(`::notice::[section-bootstrap-lock] recupero lock di ${section}: owner ${existing.doc.owner} ha terminato (${ownerRun.conclusion || 'completed'})`);
   }
   if (existing.state === 'unknown') throw new Error(`bootstrap lock non verificabile: ${existing.reason}`);
   const resolvedCommit = currentCommit(commit);
@@ -96,9 +107,10 @@ async function acquireOnce({ section, commit, role }) {
   const temp = writeTempDocument(doc);
   try {
     let condition;
-    if (existing.state === 'expired') {
-      if (!existing.etag) throw new Error(`etag lock scaduto non disponibile per ${section}`);
-      condition = `If-Match: ${existing.etag}`;
+    if (existing.state === 'expired' || takeoverEtag) {
+      const etag = takeoverEtag || existing.etag;
+      if (!etag) throw new Error(`etag lock scaduto non disponibile per ${section}`);
+      condition = `If-Match: ${etag}`;
     } else {
       condition = 'If-None-Match: *';
     }
