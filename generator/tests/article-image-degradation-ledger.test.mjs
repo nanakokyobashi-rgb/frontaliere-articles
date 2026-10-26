@@ -51,6 +51,9 @@ test('un cap di riparazione invalido ricade sul default senza disabilitare il re
   assert.equal(normalizeRepairCap(2.5), 3);
   assert.equal(normalizeRepairCap(Infinity), 3);
   assert.equal(normalizeRepairCap(Symbol('invalid')), 3);
+  assert.equal(normalizeRepairCap(false), 3);
+  assert.equal(normalizeRepairCap(''), 3);
+  assert.equal(normalizeRepairCap([]), 3);
 
   const items = ['a', 'b', 'c', 'd'].map((articleId) => item(articleId));
   const readyKeys = items.map(ledgerKey);

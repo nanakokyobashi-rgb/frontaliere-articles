@@ -11,6 +11,8 @@ const VALID_STATUSES = new Set(['pending', 'in-flight', 'exhausted', 'orphaned',
 
 /** Keep repair fan-out bounded when a caller supplies an invalid cap. */
 export function normalizeRepairCap(value, fallback = DEFAULT_REPAIR_CAP) {
+  if (typeof value !== 'number' && typeof value !== 'string') return fallback;
+  if (typeof value === 'string' && value.trim() === '') return fallback;
   let numeric;
   try {
     numeric = Number(value);
