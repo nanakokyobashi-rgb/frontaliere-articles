@@ -36,6 +36,9 @@ const blogMetaCantonBasileaFr: Record<string, string> = {
     'blog.article.basel-stadt-siti-online-di-nuoto.title': 'Le canton de Bâle-Ville réactive ses sites après une panne technique',
     'blog.article.basel-stadt-siti-online-di-nuoto.excerpt': 'La réouverture des sites et applications du canton de Bâle-Ville est progressive depuis mercredi soir ; aucun incident de sécurité important n’a été enregistré jeudi.',
     'blog.article.basel-stadt-siti-online-di-nuoto.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.salario-minimo-basilea-2027.title': 'Le salaire minimum à Bâle passe à 22.50 CHF bruts à partir de 2027',
+    'blog.article.salario-minimo-basilea-2027.excerpt': 'À partir du 1er janvier 2027, le minimum sera de 22,50 CHF bruts L’augmentation prévue est de 30 centimes par heure L’ajustement suit l’indice mixte suisse',
+    'blog.article.salario-minimo-basilea-2027.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonBasileaFr;

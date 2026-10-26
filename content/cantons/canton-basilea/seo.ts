@@ -431,6 +431,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-salario-minimo-basilea-2027': {
+    title: 'Salario minimo Basilea aumenta a 22.50 CHF lordi dal 2027',
+    description: 'Dal 1° gennaio 2027 il minimo sarà 22,50 CHF lordi L’aumento previsto è di 30 centesimi per ora L’adeguamento segue l’indice misto svizzero Cantone →',
+    keywords: 'frontalieri, ticino, svizzera, italia, salario, minimo, basilea, aumenta',
+    ogTitle: 'Salario minimo Basilea 2027: 22.50 CHF all\'ora',
+    ogDescription: 'Dal 1° gennaio 2027 il minimo sarà 22,50 CHF lordi L’aumento previsto è di 30 centesimi per ora L’adeguamento segue l’indice misto svizzero Cantone →',
+    canonicalPath: '/articoli-basilea/salario-minimo-basilea-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salario minimo Basilea aumenta a 22.50 CHF lordi dal 2027",
+      "description": "Dal 1° gennaio 2027 il minimo sarà 22,50 CHF lordi L’aumento previsto è di 30 centesimi per ora L’adeguamento segue l’indice misto svizzero Cantone →",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-salario-minimo-basilea-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-26T11:06:00+00:00",
+      "dateModified": "2026-10-26T11:06:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-basilea/salario-minimo-basilea-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

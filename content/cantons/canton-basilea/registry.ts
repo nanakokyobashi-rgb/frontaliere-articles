@@ -127,4 +127,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'salario-minimo-basilea-2027',
+ category: 'novita',
+ date: '2026-10-26T11:06:00.747Z',
+ image: '/images/blog/article-salario-minimo-basilea-2027.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['BASILEA'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

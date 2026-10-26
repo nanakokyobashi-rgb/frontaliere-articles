@@ -36,6 +36,9 @@ const blogMetaCantonBasileaEn: Record<string, string> = {
     'blog.article.basel-stadt-siti-online-di-nuoto.title': 'Canton Basel-Stadt reactivates websites after technical outage',
     'blog.article.basel-stadt-siti-online-di-nuoto.excerpt': 'The reopening of the Canton of Basel-Stadt\'s websites and applications has been gradual since Wednesday night; no significant security incident was recorded on Thursday.',
     'blog.article.basel-stadt-siti-online-di-nuoto.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.salario-minimo-basilea-2027.title': 'Basel minimum wage increases to 22.50 CHF gross from 2027',
+    'blog.article.salario-minimo-basilea-2027.excerpt': 'From January 1st, 2027, the minimum wage will be 22,50 CHF gross The planned increase is 30 cents per hour The adjustment follows the Swiss mixed index Canton →',
+    'blog.article.salario-minimo-basilea-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonBasileaEn;
