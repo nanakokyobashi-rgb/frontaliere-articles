@@ -66,6 +66,9 @@ const blogMetaCantonSgFr: Record<string, string> = {
     'blog.article.unfall-a13-sevelen-2026.title': 'Collision par l’arrière sur l’A13 à Sevelen : deux blessés le 25 octobre 2026',
     'blog.article.unfall-a13-sevelen-2026.excerpt': 'Le 25 octobre, deux voitures se sont percutées par l’arrière sur l’A13 à Sevelen Un conducteur de 79 ans et la passagère de 86 ans ont été blessés Le conducteur',
     'blog.article.unfall-a13-sevelen-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.positive-chiusure-2025-sg.title': '40 communes du canton de Saint-Gall clôturent l\'année 2025 en positif',
+    'blog.article.positive-chiusure-2025-sg.excerpt': 'Sur 75 communes politiques, 40 ont clôturé l\'année 2025 avec un excédent ; l\'excédent cumulé est d\'environ 28 millions de CHF.',
+    'blog.article.positive-chiusure-2025-sg.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSgFr;

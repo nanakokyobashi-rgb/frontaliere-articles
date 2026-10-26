@@ -237,4 +237,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'positive-chiusure-2025-sg',
+ category: 'fiscale',
+ date: '2026-10-26T17:48:42.058Z',
+ image: '/images/blog/article-positive-chiusure-2025-sg.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SG'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

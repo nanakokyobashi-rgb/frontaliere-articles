@@ -66,6 +66,9 @@ const blogMetaCantonSgEn: Record<string, string> = {
     'blog.article.unfall-a13-sevelen-2026.title': 'Rear-end collision on A13 in Sevelen: two injured on October 25, 2026',
     'blog.article.unfall-a13-sevelen-2026.excerpt': 'On October 25, two cars rear-ended each other on the A13 at Sevelen A 79-year-old driver and an 86-year-old passenger were injured The driver of the second car',
     'blog.article.unfall-a13-sevelen-2026.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.positive-chiusure-2025-sg.title': '40 municipalities in the Canton of St. Gallen end 2025 with a surplus',
+    'blog.article.positive-chiusure-2025-sg.excerpt': 'Of 75 political municipalities, 40 closed 2025 with a surplus; the aggregate surplus is approximately CHF 28 million.',
+    'blog.article.positive-chiusure-2025-sg.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSgEn;

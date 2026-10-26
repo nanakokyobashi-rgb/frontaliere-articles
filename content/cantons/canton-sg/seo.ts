@@ -816,6 +816,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-positive-chiusure-2025-sg': {
+    title: '40 comuni del Canton San Gallo chiudono il 2025 in positivo',
+    description: '40 dei 75 comuni politici del Canton San Gallo hanno chiuso il 2025 in positivo, con un avanzo aggregato di circa CHF 28 milioni. Debito netto medio',
+    keywords: 'frontalieri, ticino, svizzera, italia, comuni, canton, gallo, chiudono',
+    ogTitle: '40 comuni SG chiudono 2025 in positivo',
+    ogDescription: 'Statistiche finanziarie comunali 2025: 40 su 75 comuni hanno chiuso in positivo con un avanzo di circa CHF 28 milioni. Il debito netto medio è circa CHF 828 per abitante.',
+    canonicalPath: '/articoli-san-gallo/positive-chiusure-2025-sg/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "40 comuni del Canton San Gallo chiudono il 2025 in positivo",
+      "description": "40 dei 75 comuni politici del Canton San Gallo hanno chiuso il 2025 in positivo, con un avanzo aggregato di circa CHF 28 milioni. Debito netto medio",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-positive-chiusure-2025-sg.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-26T17:48:42+00:00",
+      "dateModified": "2026-10-26T17:48:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-san-gallo/positive-chiusure-2025-sg/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;
