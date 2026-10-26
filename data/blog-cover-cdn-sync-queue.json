@@ -1,21 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-g-verifica-datore-20km.webp",
-      "sha256": "4013a6199b73696b4f43c816a19d6f52a2e241ac1e505ae658414ad4b0f69c68"
-    },
-    {
-      "path": "public/images/blog/article-passaggio-nuovo-impiego-g.webp",
-      "sha256": "8cf9177dfc4a71cb086063f2ac03d15a9fbb8298db7bd95a1d0aff22c9d0929a"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-g-verifica-datore-20km-480w.webp",
-      "sha256": "844d262425ec5d1f1c826d9a29b0e665565cbe6c3789474b5d9c525b953254f4"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-passaggio-nuovo-impiego-g-480w.webp",
-      "sha256": "74d34323a76e02315075ada1cfe09ca70a193a83f644222a749ba7fd5c0ab55e"
-    }
-  ]
+  "items": []
 }
