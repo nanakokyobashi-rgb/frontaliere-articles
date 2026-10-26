@@ -4,14 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-be::https://ajour.ch/story/703283/sperrung-des-ligerztunnels-wegen-tests": {
-      "section": "canton-be",
-      "ts": 1792759379462
-    },
-    "canton-be::https://ajour.ch/story/703342/le-gant-coop-va-augmenter-les-salaires-de-ses-employs-de-11-lanne-prochaine": {
-      "section": "canton-be",
-      "ts": 1792760337350
-    },
     "canton-be::https://ajour.ch/story/703360/berner-regierung-legt-neue-spielregeln-f%c3%bcr-zentrumslasten-vor": {
       "section": "canton-be",
       "ts": 1792840751798
@@ -19,6 +11,10 @@
     "canton-be::https://ajour.ch/story/703519/temporeduktion-auf-der-autobahn-bundesrat-bereitet-umstrittene-massnahme-vor": {
       "section": "canton-be",
       "ts": 1792925174435
+    },
+    "canton-be::https://ajour.ch/story/703520/rduction-de-la-vitesse-sur-lautoroute-le-conseil-fdral-prpare-une-mesure-controverse": {
+      "section": "canton-be",
+      "ts": 1793013455648
     }
   }
 }
