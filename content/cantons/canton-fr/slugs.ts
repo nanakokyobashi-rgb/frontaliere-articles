@@ -19,6 +19,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'julmy-corsa-consiglio-stato': { it: 'julmy-corsa-consiglio-stato', en: 'julmy-centre-state-council', de: 'julmy-mitte-staatsrat', fr: 'julmy-candidat-conseil-etat' },
  'bulle-friburgo-linea-diretta': { it: 'bulle-friburgo-linea-diretta', en: 'bulle-fribourg-direct-rail', de: 'bulle-freiburg-direktbahn', fr: 'bulle-fribourg-ligne-directe' },
  'rolex-acquisisce-cpautomation': { it: 'rolex-acquisisce-cpautomation', en: 'rolex-acquires-cpautomation', de: 'rolex-uebernimmt-cpautomation', fr: 'rolex-acquiert-cpautomation' },
+ 'friburgo-no-linea-diretta': { it: 'friburgo-no-linea-diretta', en: 'fribourg-no-direct-line', de: 'friburg-keine-direktstrecke', fr: 'fribourg-pas-de-liaison-directe' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

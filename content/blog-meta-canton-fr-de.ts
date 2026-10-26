@@ -51,6 +51,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.rolex-acquisisce-cpautomation.title': 'Rolex übernimmt das Industrieunternehmen CPAutomation SA',
     'blog.article.rolex-acquisisce-cpautomation.excerpt': 'Der Uhrenkonzern Rolex hat das Industrieunternehmen CPAutomation SA aus Villaz-Saint-Pierre, einen langjährigen Partner mit rund 120 Beschäftigten, übernommen.',
     'blog.article.rolex-acquisisce-cpautomation.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.friburgo-no-linea-diretta.title': 'Freiburg: Staatsrat lehnt direkte Bahnlinie Freiburg-Bulle ab',
+    'blog.article.friburgo-no-linea-diretta.excerpt': 'Freiburg will keine direkte Bahnlinie nach Bulle Das Postulat wurde im Mai 2022 angenommen: 87 Stimmen gegen 3 Das Projekt wird als kostspielig und technisch',
+    'blog.article.friburgo-no-linea-diretta.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonFrDe;
