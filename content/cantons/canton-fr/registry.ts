@@ -193,4 +193,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'elezioni-friburgo-8-novembre',
+ category: 'pratico',
+ date: '2026-10-26T15:40:18.151Z',
+ image: '/images/blog/article-elezioni-friburgo-8-novembre.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['FR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

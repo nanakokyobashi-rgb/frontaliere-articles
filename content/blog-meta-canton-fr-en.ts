@@ -54,6 +54,9 @@ const blogMetaCantonFrEn: Record<string, string> = {
     'blog.article.friburgo-no-linea-diretta.title': 'Fribourg: State Council rejects direct Fribourg-Bulle railway line',
     'blog.article.friburgo-no-linea-diretta.excerpt': 'Fribourg does not want a direct railway line to Bulle The postulate was approved in May 2022: 87 votes to 3 The project is considered costly and technically',
     'blog.article.friburgo-no-linea-diretta.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.elezioni-friburgo-8-novembre.title': 'Fribourg Cantonal Election: Single list for the Council of State on November 8',
+    'blog.article.elezioni-friburgo-8-novembre.excerpt': 'Single list for the State Council 14 candidacies, maximum 7 names Materials in the mailboxes by Thursday One envelope for three elections Date → November 8',
+    'blog.article.elezioni-friburgo-8-novembre.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonFrEn;

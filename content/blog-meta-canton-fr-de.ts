@@ -54,6 +54,9 @@ const blogMetaCantonFrDe: Record<string, string> = {
     'blog.article.friburgo-no-linea-diretta.title': 'Freiburg: Staatsrat lehnt direkte Bahnlinie Freiburg-Bulle ab',
     'blog.article.friburgo-no-linea-diretta.excerpt': 'Freiburg will keine direkte Bahnlinie nach Bulle Das Postulat wurde im Mai 2022 angenommen: 87 Stimmen gegen 3 Das Projekt wird als kostspielig und technisch',
     'blog.article.friburgo-no-linea-diretta.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.elezioni-friburgo-8-novembre.title': 'Kantonale Wahlen in Freiburg: Einheitsliste für den Staatsrat am 8. November',
+    'blog.article.elezioni-friburgo-8-novembre.excerpt': 'Einheitsliste für den Staatsrat 14 Kandidaturen, höchstens 7 Namen Wahlmaterial bis Donnerstag in den Briefkästen Ein Umschlag für drei Wahlen Daten → 8.',
+    'blog.article.elezioni-friburgo-8-novembre.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonFrDe;

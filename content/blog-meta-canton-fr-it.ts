@@ -54,6 +54,9 @@ const blogMetaCantonFrIt: Record<string, string> = {
     'blog.article.friburgo-no-linea-diretta.title': 'Friburgo: Consiglio di Stato rigetta linea ferroviaria diretta Friburgo-Bulle',
     'blog.article.friburgo-no-linea-diretta.excerpt': 'Friburgo non vuole una linea ferroviaria diretta per Bulle Il postulato è stato approvato nel maggio 2022: 87 voti contro 3 Il progetto è giudicato costoso',
     'blog.article.friburgo-no-linea-diretta.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.elezioni-friburgo-8-novembre.title': 'Elezione Cantonale Friburgo: Unica lista per Consiglio di Stato l\'8 novembre',
+    'blog.article.elezioni-friburgo-8-novembre.excerpt': 'Lista unica per il Consiglio di Stato 14 candidature, massimo 7 nomi Materiale nelle cassette entro giovedì Una busta per tre elezioni Data → 8 novembre',
+    'blog.article.elezioni-friburgo-8-novembre.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonFrIt;
