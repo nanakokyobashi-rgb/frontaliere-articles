@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-zurigo-crisi-alloggi-giovani.webp",
+      "sha256": "8d5b98f14de63a1432be2294efaf435c6863ff5454ab4c1f166213beefb83189"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-zurigo-crisi-alloggi-giovani-480w.webp",
+      "sha256": "46e0ed8b148eb1948176ab300d0d37bd758087c86445915a132f539a30eb2bf3"
+    }
+  ]
 }
