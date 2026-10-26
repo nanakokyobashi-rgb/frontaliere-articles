@@ -41,7 +41,7 @@ const blogMetaCantonAgDe: Record<string, string> = {
     'blog.article.riniker-governo-argovia.imageAlt': 'Aargauer Kantonsregierung nach der Wahl von Maja Riniker',
     'blog.article.iniziativa-parita-salariale-ag.title': 'Aargau: Initiative zur Stärkung der Lohngleichheit',
     'blog.article.iniziativa-parita-salariale-ag.excerpt': 'ArbeitAargau und ein Bündnis von Frauenorganisationen und Parteien fordern Lohnanalysen ab 50 Beschäftigten, Sanktionen und die Wiederherstellung der Fachstelle.',
-    'blog.article.iniziativa-parita-salariale-ag.imageAlt': 'Initiative für Lohngleichheit im Kanton Aargau',
+    'blog.article.iniziativa-parita-salariale-ag.imageAlt': 'Illustratives Bild zum Thema des Artikels',
     'blog.article.sezione-medicina-nucleare.title': 'Nuklearforum gründet die Sektion Nuklearmedizin Schweiz',
     'blog.article.sezione-medicina-nucleare.excerpt': 'Das Nuklearforum Schweiz gründet eine neue Sektion Gründungsversammlung am 12.',
     'blog.article.sezione-medicina-nucleare.imageAlt': 'Illustratives Bild zum Thema des Artikels',

@@ -142,7 +142,7 @@ export const CANTON_ARTICLES: Article[] = [
  id: 'iniziativa-parita-salariale-ag',
  category: 'novita',
  date: '2026-10-18T17:13:03.661Z',
- image: '/images/blog/article-argovia-parita-salariale.webp',
+ image: '/images/blog/article-iniziativa-parita-salariale-ag.webp',
  hasCalculator: true,
  articleType: 'news',
  canton: ['AG'],

@@ -73,85 +73,45 @@
       "lastFailureAt": "2026-10-26T05:45:53.618Z"
     },
     {
-      "articleId": "indennita-covid-abusi-aziende",
-      "title": "Indennità Covid: abusi in centinaia di aziende. Lastminute ha restituito 28,9 milioni",
-      "fallbackImage": "/images/places/lugano-view.webp",
-      "reason": "All image providers failed for article-indennita-covid-abusi-aziende: openai-codex (vision gate rejected image: Relevant generic Swiss office scene, but it includes recognizable fo",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-18T16:04:42.643Z",
-      "lastFailureAt": "2026-10-18T16:04:42.643Z"
-    },
-    {
       "articleId": "tutele-frontaliero-uscita-ticino",
       "title": "Frontaliere licenziato nel 2026: diritti oltre 20 km",
       "fallbackImage": "/images/blog/article-lamal-guida-2026-canton-argovia.webp",
-      "reason": "All image providers failed for article-tutele-frontaliero-uscita-ticino: openai-codex (vision gate rejected image: Generic synthetic editorial scene with no readable text or logos;",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-tutele-frontaliero-uscita-ticino: openai-codex (vision gate rejected image: Synthetic photorealistic editorial illustration with no visible text, logos, or face. It clearly shows a foreground traveler ",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-18T16:43:36.224Z",
-      "lastFailureAt": "2026-10-18T16:43:36.224Z"
-    },
-    {
-      "articleId": "iniziativa-parita-salariale-ag",
-      "title": "Argovia: iniziativa per rafforzare la parità salariale",
-      "fallbackImage": "/images/blog/article-argovia-parita-salariale.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-18T17:13:03.704Z",
-      "lastFailureAt": "2026-10-18T17:13:03.704Z"
+      "lastFailureAt": "2026-10-26T06:28:19.725Z"
     },
     {
       "articleId": "apprendistato-zurigo-guida-pratica",
       "title": "Apprendistato a Zurigo: posto, contratto, retribuzione e maturità",
       "fallbackImage": "/images/blog/apprendistato-formazione-professionale-canton-berna.webp",
-      "reason": "image generation deadline exceeded",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-apprendistato-zurigo-guida-pratica: openai-codex (vision gate rejected image: Generic synthetic workshop illustration relevant to Swiss technical apprenticeship; no readable text, logos, or visible fac",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-18T19:10:17.168Z",
-      "lastFailureAt": "2026-10-18T19:10:17.168Z"
+      "lastFailureAt": "2026-10-26T06:31:06.413Z",
+      "retryHint": "no-text"
     },
     {
       "articleId": "giovani-donne-stipendi-svizzera",
       "title": "Di più Le giovani svizzere guadagnano meno nonostante siano più istruite",
       "fallbackImage": "/images/blog/article-divario-reddito-giovani-svizzera.webp",
-      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Generic synthetic office scene relevant to the topic, but it conta",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-giovani-donne-stipendi-svizzera: openai-codex (vision gate rejected image: Generic synthetic editorial illustration with a foreground woman viewed from behind; books and an uneven balance suggest educa",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-19T03:17:12.439Z",
-      "lastFailureAt": "2026-10-19T03:17:12.439Z"
-    },
-    {
-      "articleId": "italia-rincari-crescita-2027",
-      "title": "Italia: rincari energetici e crescita debole, 2027 più difficile",
-      "fallbackImage": "/images/blog/article-autotrasporto-rincari-confine-2026.webp",
-      "reason": "All image providers failed for article-italia-rincari-crescita-2027: openai-codex (vision gate rejected image: Generic synthetic Lake Lugano/Ticino scene with a distant train, but",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-19T14:41:28.061Z",
-      "lastFailureAt": "2026-10-19T14:41:28.061Z"
-    },
-    {
-      "articleId": "schianto-auto-moto-appiano-gentile",
-      "title": "Schianto ad Appiano Gentile: auto contro moto, un ferito grave",
-      "fallbackImage": "/images/blog/article-caslano-colombera-incidente-moto.webp",
-      "reason": "All image providers failed for article-schianto-auto-moto-appiano-gentile: openai-codex (vision gate rejected image: Synthetic illustrative crash scene relevant to the topic; a vis",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-20T03:38:17.054Z",
-      "lastFailureAt": "2026-10-20T03:38:17.054Z",
-      "retryHint": "no-text"
+      "lastFailureAt": "2026-10-26T06:32:29.513Z"
     },
     {
       "articleId": "ville-ponti-frontalieri-confronto",
       "title": "Frontalieri, alle Ville Ponti il confronto sul lavoro",
       "fallbackImage": "/images/blog/article-canton-san-gallo-stabile-ricerca-lavoro-cala-disoccupazione.webp",
-      "reason": "All image providers failed for article-ville-ponti-frontalieri-confronto: openai-codex (vision gate rejected image: Synthetic photorealistic conference scene relevant to Ticino cro",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-ville-ponti-frontalieri-confronto: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to cross-border commuting, but it contains a recognizable foreground person viewe",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-20T21:30:49.827Z",
-      "lastFailureAt": "2026-10-20T21:30:49.827Z"
+      "lastFailureAt": "2026-10-26T06:36:56.657Z"
     },
     {
       "articleId": "arresto-ticino-banca-occulta",
