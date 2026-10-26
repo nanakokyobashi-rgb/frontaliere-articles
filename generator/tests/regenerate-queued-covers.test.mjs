@@ -1714,33 +1714,36 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
 
   const sectionPublisher = fs.readFileSync(new URL('../../.github/workflows/fast-publish-section.yml', import.meta.url), 'utf8');
   const sectionResolver = fs.readFileSync(new URL('../../scripts/ci/fast-publish-section-resolve.sh', import.meta.url), 'utf8');
+  const sectionRender = fs.readFileSync(new URL('../../scripts/ci/fast-publish-section-render.sh', import.meta.url), 'utf8');
+  const sectionRecovery = fs.readFileSync(new URL('../../scripts/ci/fast-publish-section-recovery.sh', import.meta.url), 'utf8');
+  const sectionContract = `${sectionPublisher}\n${sectionResolver}\n${sectionRender}\n${sectionRecovery}`;
   assert.equal(
     sectionPublisher.match(/ref: \$\{\{ github\.event\.workflow_run\.head_sha \|\| inputs\.source_commit \|\| \(github\.event_name == 'workflow_dispatch' && inputs\.bootstrap != true && github\.ref\) \|\| github\.sha \}\}/gu)?.length,
     2,
     'i due checkout principali del publisher sezione devono distinguere dispatch live e replay pinnato',
   );
-  assert.match(sectionPublisher, /normal_dispatch='false'/u);
+  assert.match(sectionContract, /normal_dispatch='false'/u);
   assert.match(sectionPublisher, /REF: \$\{\{ github\.ref \}\}/u);
   assert.match(sectionPublisher, /preflight_head: \$\{\{ steps\.preflight_head\.outputs\.head \}\}/u);
   assert.match(sectionPublisher, /PREFLIGHT_HEAD: \$\{\{ needs\.resolve\.outputs\.preflight_head \}\}/u);
-  assert.match(sectionPublisher, /validated_head="\$PREFLIGHT_HEAD"/u);
+  assert.match(sectionRender, /validated_head="\$PREFLIGHT_HEAD"/u);
   assert.match(
-    sectionPublisher,
+    sectionRender,
     /if \{ \[ "\$EVENT_NAME" = 'push' \] \\\n\s+\|\| \{ \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ "\$BOOTSTRAP" != 'true' \]; \}; \} \\\n\s+&& \[ "\$REF" = 'refs\/heads\/main' \] \\\n\s+&& \[ -z "\$\{SOURCE_COMMIT:-\}" \]; then/u,
     'il retry live del publisher sezione include i push bootstrap e i dispatch dalla main',
   );
-  assert.match(sectionPublisher, /\[ "\$BOOTSTRAP" != 'true' \]/u);
-  assert.match(sectionPublisher, /for publish_attempt in 1 2 3/u);
-  assert.match(sectionPublisher, /git fetch --no-tags origin main/u);
-  assert.match(sectionPublisher, /git checkout --detach FETCH_HEAD/u);
-  assert.match(sectionPublisher, /export PUSH_AFTER="\$EXPECTED_MAIN_HEAD"/u);
+  assert.match(sectionRender, /\[ "\$BOOTSTRAP" != 'true' \]/u);
+  assert.match(sectionRender, /for publish_attempt in 1 2 3/u);
+  assert.match(sectionRender, /git fetch --no-tags origin main/u);
+  assert.match(sectionRender, /git checkout --detach FETCH_HEAD/u);
+  assert.match(sectionRender, /export PUSH_AFTER="\$EXPECTED_MAIN_HEAD"/u);
   assert.match(
-    sectionPublisher,
+    sectionRender,
     /if \[ -z "\$\{PUSH_BEFORE:-\}" \] \|\| \[\[ "\$PUSH_BEFORE" =~ \^0\+\$ \]\]; then[\s\S]*previous_revision="\$\(git rev-parse HEAD\^\)"[\s\S]*else[\s\S]*previous_revision="\$PUSH_BEFORE"/u,
   );
-  assert.doesNotMatch(sectionPublisher, /git checkout --detach origin\/main/u);
-  assert.match(sectionPublisher, /main avanzata durante il render/u);
-  const sectionLiveLoop = sectionPublisher.slice(sectionPublisher.indexOf('for publish_attempt in 1 2 3'));
+  assert.doesNotMatch(sectionContract, /git checkout --detach origin\/main/u);
+  assert.match(sectionRender, /main avanzata durante il render/u);
+  const sectionLiveLoop = sectionRender.slice(sectionRender.indexOf('for publish_attempt in 1 2 3'));
   assert.match(sectionLiveLoop, /if \[ -f \.github\/FAST_PUBLISH_DISABLED \]/u);
   assert.match(sectionLiveLoop, /build_publish_args "\$attempt_dry"/u);
   assert.match(sectionLiveLoop, /bash scripts\/lib\/npm-ci-retry\.sh/u);
@@ -1748,24 +1751,24 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(sectionLiveLoop, /if RETRY_CMD_ATTEMPTS=2 bash scripts\/ci\/retry-cmd\.sh npx -y tsx@4\.23\.15 scripts\/publish-section-pages\.mjs/u);
   assert.match(sectionLiveLoop, /deferredLiveRelease == true and \.published\.deferredReason != null/u);
   assert.match(sectionLiveLoop, /refresh_live_plan_and_preflight/u);
-  assert.match(sectionPublisher, /refresh_live_plan_and_preflight\(\) \{[\s\S]*fast-publish-section\.mjs r2-plan/u);
-  assert.match(sectionPublisher, /refresh_live_plan_and_preflight\(\) \{[\s\S]*check-blog-body-syntax\.mjs/u);
-  assert.match(sectionPublisher, /refresh_live_plan_and_preflight\(\) \{[\s\S]*check-blog-body-links\.mjs/u);
+  assert.match(sectionContract, /refresh_live_plan_and_preflight\(\) \{[\s\S]*fast-publish-section\.mjs r2-plan/u);
+  assert.match(sectionContract, /refresh_live_plan_and_preflight\(\) \{[\s\S]*check-blog-body-syntax\.mjs/u);
+  assert.match(sectionContract, /refresh_live_plan_and_preflight\(\) \{[\s\S]*check-blog-body-links\.mjs/u);
   assert.match(sectionLiveLoop, /rendered_head=\$EXPECTED_MAIN_HEAD/u);
   assert.match(sectionLiveLoop, /staging live completata sulla HEAD \$EXPECTED_MAIN_HEAD/u);
-  assert.match(sectionPublisher, /mixed_matrix: \$\{\{ steps\.collect\.outputs\.mixed_matrix \}\}/u);
-  assert.match(sectionPublisher, /echo 'mixed_matrix=false'/u);
-  assert.match(sectionPublisher, /HEAD diverse[\s\S]*mixed_matrix=true[\s\S]*exit 0/u);
-  assert.match(sectionPublisher, /Redispatch staged backfill on current main after stale replay or mixed matrix/u);
-  assert.match(sectionPublisher, /MIXED_MATRIX: \$\{\{ needs\.publish_release_head\.outputs\.mixed_matrix \}\}/u);
-  assert.match(sectionPublisher, /matrix mista rilevata[\s\S]*read-main-head\.sh/u);
-  assert.match(sectionPublisher, /needs\.publish_release_head\.outputs\.mixed_matrix == 'true'/u);
-  assert.match(sectionPublisher, /needs\.publish_release_head\.outputs\.mixed_matrix != 'true'/u);
+  assert.match(sectionContract, /mixed_matrix: \$\{\{ steps\.collect\.outputs\.mixed_matrix \}\}/u);
+  assert.match(sectionContract, /echo 'mixed_matrix=false'/u);
+  assert.match(sectionContract, /HEAD diverse[\s\S]*mixed_matrix=true[\s\S]*exit 0/u);
+  assert.match(sectionContract, /Redispatch staged backfill on current main after stale replay or mixed matrix/u);
+  assert.match(sectionContract, /MIXED_MATRIX: \$\{\{ needs\.publish_release_head\.outputs\.mixed_matrix \}\}/u);
+  assert.match(sectionContract, /matrix mista rilevata[\s\S]*read-main-head\.sh/u);
+  assert.match(sectionContract, /needs\.publish_release_head\.outputs\.mixed_matrix == 'true'/u);
+  assert.match(sectionContract, /needs\.publish_release_head\.outputs\.mixed_matrix != 'true'/u);
   assert.doesNotMatch(sectionLiveLoop, /sleep 30/u);
   assert.doesNotMatch(sectionLiveLoop, /deferred_retry/u);
   for (const [publisher, contract] of [
     [articlePublisher, articlePublisher],
-    [sectionPublisher, `${sectionPublisher}\n${sectionResolver}`],
+    [sectionPublisher, sectionContract],
   ]) {
     assert.match(publisher, /COVER_DRAIN_COMMIT_MESSAGE: \$\{\{ github\.event\.head_commit\.message \}\}/u);
     assert.match(contract, /cover_drain_marker="\$\(node scripts\/ci\/cover-drain-commit\.mjs is-cover-drain\)"/u);

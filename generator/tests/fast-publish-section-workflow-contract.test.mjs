@@ -99,3 +99,18 @@ test('fast-publish-section conserva la guardia di freschezza anche con checkout 
     assert.doesNotMatch(block, /helper della punta di main non presente.*exit 1/u);
   }
 });
+
+test('fast-publish-section delega i blocchi shell grandi a script senza espressioni YAML', () => {
+  for (const name of [
+    'preflight',
+    'render',
+    'recovery',
+  ]) {
+    const path = `scripts/ci/fast-publish-section-${name}.sh`;
+    assert.match(workflow, new RegExp(`run: bash ${path.replaceAll('/', '\\/')}`));
+    const source = readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
+    assert.match(source, /^#!\/usr\/bin\/env bash/u);
+    assert.match(source, /^set -euo pipefail$/mu);
+    assert.doesNotMatch(source, /\$\{\{/u);
+  }
+});
