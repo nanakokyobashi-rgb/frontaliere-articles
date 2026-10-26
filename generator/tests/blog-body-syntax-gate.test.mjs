@@ -831,7 +831,11 @@ test('i publisher rapidi eseguono il syntax gate con lo stesso fallback full', (
   assert.match(publishApi, /ESBUILD_PIN:\s*esbuild@\d+\.\d+\.\d+/);
 
   for (const workflowPath of [FAST_ARTICLE_WORKFLOW, FAST_SECTION_WORKFLOW]) {
-    const src = fs.readFileSync(workflowPath, 'utf8');
+    const workflowSource = fs.readFileSync(workflowPath, 'utf8');
+    const preflightSource = workflowPath === FAST_SECTION_WORKFLOW
+      ? fs.readFileSync(path.join(ROOT, 'scripts/ci/fast-publish-section-preflight.sh'), 'utf8')
+      : '';
+    const src = `${workflowSource}\n${preflightSource}`;
     const syntaxAt = src.indexOf('node scripts/ci/check-blog-body-syntax.mjs');
     const linksAt = src.indexOf('node scripts/ci/check-blog-body-links.mjs');
     const parserAt = src.indexOf('Install isolated blog-body syntax parser (esbuild)');

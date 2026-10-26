@@ -807,13 +807,20 @@ test('publish-api esegue il link gate prima della pubblicazione', () => {
 test('i publisher rapidi eseguono il link gate prima di ogni pubblicazione', () => {
   for (const file of ['fast-publish-article.yml', 'fast-publish-section.yml']) {
     const workflow = readFileSync(path.join(ROOT, '.github/workflows', file), 'utf8');
-    const linkGate = workflow.indexOf('node scripts/ci/check-blog-body-links.mjs');
-    const syntaxGate = workflow.indexOf('node scripts/ci/check-blog-body-syntax.mjs');
+    const preflight = file === 'fast-publish-section.yml'
+      ? readFileSync(path.join(ROOT, 'scripts/ci/fast-publish-section-preflight.sh'), 'utf8')
+      : '';
+    const gateSource = `${workflow}\n${preflight}`;
+    const linkGate = gateSource.indexOf('node scripts/ci/check-blog-body-links.mjs');
+    const syntaxGate = gateSource.indexOf('node scripts/ci/check-blog-body-syntax.mjs');
     const publishJob = workflow.indexOf('\n  publish:');
+    const preflightStep = file === 'fast-publish-section.yml'
+      ? workflow.indexOf('bash scripts/ci/fast-publish-section-preflight.sh')
+      : linkGate;
     const pushPaths = workflow.slice(workflow.indexOf('on:'), workflow.indexOf('permissions:'));
     assert.ok(linkGate > 0, `${file} non invoca il link gate`);
     assert.ok(syntaxGate > 0 && linkGate > syntaxGate, `${file} deve eseguire syntax prima dei link`);
-    assert.ok(publishJob > linkGate, `${file} deve terminare il gate prima del job di pubblicazione`);
+    assert.ok(publishJob > preflightStep, `${file} deve terminare il gate prima del job di pubblicazione`);
     for (const dependency of [
       'scripts/ci/check-blog-body-links.mjs',
       'scripts/ci/check-blog-body-syntax.mjs',
@@ -824,8 +831,8 @@ test('i publisher rapidi eseguono il link gate prima di ogni pubblicazione', () 
     ]) {
       assert.ok(pushPaths.includes(`'${dependency}'`), `${file} deve ripartire quando cambia ${dependency}`);
     }
-    assert.match(workflow, /PREFLIGHT_ARTICLE_IDS/);
-    assert.match(workflow, /PREFLIGHT_SECTION/);
+    assert.match(gateSource, /PREFLIGHT_ARTICLE_IDS/);
+    assert.match(gateSource, /PREFLIGHT_SECTION/);
   }
 });
 
@@ -853,7 +860,10 @@ test('i publisher rapidi usano la stessa chiusura delle dipendenze del gate di p
     const end = workflow.indexOf('\n          )', start);
     const paths = [...workflow.slice(start, end).matchAll(/^\s+([^\s()]+)$/gm)]
       .map((match) => match[1]);
-    const gate = workflow.slice(start, workflow.indexOf('node scripts/ci/check-blog-body-links.mjs', start));
+    const gateEndMarker = file === 'fast-publish-section.yml'
+      ? 'bash scripts/ci/fast-publish-section-preflight.sh'
+      : 'node scripts/ci/check-blog-body-links.mjs';
+    const gate = workflow.slice(start, workflow.indexOf(gateEndMarker, start));
     const selfPath = `.github/workflows/${file}`;
     assert.ok(paths.includes(selfPath), `${file} deve riattivare il gate quando cambia`);
     assert.deepEqual(

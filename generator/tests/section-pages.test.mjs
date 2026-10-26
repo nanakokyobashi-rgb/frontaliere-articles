@@ -3249,6 +3249,9 @@ test('fast-publish verso gli shard ignora i corpi cantonali, quello R2 ignora le
 test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenziali obbligatorie', () => {
   const wf = read('.github/workflows/fast-publish-section.yml');
   const resolver = read('scripts/ci/fast-publish-section-resolve.sh');
+  const render = read('scripts/ci/fast-publish-section-render.sh');
+  const recovery = read('scripts/ci/fast-publish-section-recovery.sh');
+  const sectionContract = `${wf}\n${resolver}\n${render}\n${recovery}`;
   const edgeCandidate = read('scripts/ci/fast-publish-section-edge-candidate.sh');
   const publisher = read('scripts/publish-section-pages.mjs');
   assert.match(wf, /workflow_run:\n\s+workflows: \['Publish article data API'\]\n\s+types: \[completed\]\n\s+branches: \[main\]/);
@@ -3320,11 +3323,15 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   const dispatchPlan = resolver.slice(dispatchPlanStart, dispatchPlanEnd);
   assert.match(dispatchPlan, /FAST_PUBLISH_DISABLED/);
   assert.match(dispatchPlan, /FAST_PUBLISH_ARMED/);
-  assert.equal((wf.match(/-f dry_run="\$DRY"/g) ?? []).length, 3, 'tutti i redispatch propagano il dry-run calcolato');
-  assert.doesNotMatch(wf, /-f dry_run=false/);
+  const replayDispatchCount = (sectionContract.match(/bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh/g) ?? []).length;
   assert.equal(
-    ((wf.match(/bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh/g) ?? []).length
-      + (resolver.match(/bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh/g) ?? []).length),
+    (sectionContract.match(/-f dry_run="\$DRY"/g) ?? []).length,
+    replayDispatchCount,
+    'tutti i redispatch propagano il dry-run calcolato',
+  );
+  assert.doesNotMatch(sectionContract, /-f dry_run=false/);
+  assert.equal(
+    replayDispatchCount,
     4,
   );
   assert.equal((wf.match(/name: Checkout replay dispatcher from workflow revision/g) ?? []).length, 3);
@@ -3335,8 +3342,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
     'il checkout sparse del replay deve conservare la lista multilinea anche con block scalar YAML',
   );
   assert.equal(
-    ((wf.match(/-f cleanup_inactive_surface="\$[A-Za-z_]+"/g) ?? []).length
-      + (resolver.match(/-f cleanup_inactive_surface="\$[A-Za-z_]+"/g) ?? []).length),
+    (sectionContract.match(/-f cleanup_inactive_surface="\$[A-Za-z_]+"/g) ?? []).length,
     4,
   );
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE_INPUT: \$\{\{ inputs\.cleanup_inactive_surface \}\}/);
@@ -3344,8 +3350,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(wf, /-f source_commit="\$current_main"/);
   assert.equal(
-    ((wf.match(/-f dispatch_nonce="\$dispatch_nonce"/g) ?? []).length
-      + (resolver.match(/-f dispatch_nonce="\$dispatch_nonce"/g) ?? []).length),
+    (sectionContract.match(/-f dispatch_nonce="\$dispatch_nonce"/g) ?? []).length,
     4,
     'ogni redispatch stale deve conservare il nonce della run originaria o generarne un fallback per sezione',
   );
