@@ -193,4 +193,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'fluhli-tassa-seconde-case',
+ category: 'fiscale',
+ date: '2026-10-26T11:23:57.392Z',
+ image: '/images/blog/article-fluhli-tassa-seconde-case.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['LU'],
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ];

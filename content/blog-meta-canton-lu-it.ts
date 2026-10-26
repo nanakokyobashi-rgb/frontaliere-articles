@@ -54,6 +54,9 @@ const blogMetaCantonLuIt: Record<string, string> = {
     'blog.article.consultazione-abitazioni-lucerna.title': 'Consultazione controprogetto abitazioni accessibili nel Cantone Lucerna',
     'blog.article.consultazione-abitazioni-lucerna.excerpt': 'La consultazione sul controprogetto all\'iniziativa «Per abitazioni accessibili» è aperta dal 21 ottobre 2026 fino al 22 gennaio 2027, con voto previsto per la primavera 2028.',
     'blog.article.consultazione-abitazioni-lucerna.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.fluhli-tassa-seconde-case.title': 'Mozione sulla tassa per le seconde case approvata a Lucerna',
+    'blog.article.fluhli-tassa-seconde-case.excerpt': 'Con 70 voti contro 41, il Parlamento cantonale di Lucerna ha accolto la mozione di Hella Schnider per una tassa speciale sulle seconde case.',
+    'blog.article.fluhli-tassa-seconde-case.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonLuIt;

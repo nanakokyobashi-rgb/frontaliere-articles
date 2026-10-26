@@ -20,6 +20,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'lucerna-controlli-percorsi-scolastici': { it: 'lucerna-controlli-percorsi-scolastici', en: 'lucerne-school-route-speed-checks', de: 'luzern-geschwindigkeitskontrollen-schulwege', fr: 'lucerne-controles-vitesse-trajets-scolaires' },
  'fdp-lucerna-due-liste': { it: 'fdp-lucerna-due-liste', en: 'fdp-lucerne-two-lists', de: 'fdp-luzern-zwei-listen', fr: 'fdp-lucerne-deux-listes' },
  'consultazione-abitazioni-lucerna': { it: 'consultazione-abitazioni-lucerna', en: 'lucerne-housing-consultation', de: 'wohnraum-konsultation-luzern', fr: 'consultation-logements-lucerne' },
+ 'fluhli-tassa-seconde-case': { it: 'fluhli-tassa-seconde-case', en: 'fluehli-second-home-tax', de: 'fluehli-steuer-zweitwohnungen', fr: 'fluehli-taxe-residences-secondaires' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

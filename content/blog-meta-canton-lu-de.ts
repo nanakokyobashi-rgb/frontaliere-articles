@@ -54,6 +54,9 @@ const blogMetaCantonLuDe: Record<string, string> = {
     'blog.article.consultazione-abitazioni-lucerna.title': 'Vernehmlassung zum Gegenvorschlag für bezahlbaren Wohnraum im Kanton Luzern',
     'blog.article.consultazione-abitazioni-lucerna.excerpt': 'Die Vernehmlassung zum Gegenvorschlag zur Initiative «Für bezahlbaren Wohnraum» läuft vom 21.',
     'blog.article.consultazione-abitazioni-lucerna.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.fluhli-tassa-seconde-case.title': 'Motion zur Zweitwohnungssteuer in Luzern angenommen',
+    'blog.article.fluhli-tassa-seconde-case.excerpt': 'Mit 70 zu 41 Stimmen hat das Luzerner Kantonsparlament die Motion von Hella Schnider für eine Sondersteuer auf Zweitwohnungen angenommen.',
+    'blog.article.fluhli-tassa-seconde-case.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonLuDe;
