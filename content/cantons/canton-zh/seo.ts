@@ -699,6 +699,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-zurigo-crisi-alloggi-giovani': {
+    title: 'Crisi alloggi Zurigo: giovani consigliere chiedono soluzioni',
+    description: 'Cinque consigliere cantonali di Zurigo presentano un postulato per chiedere soluzioni abitative economiche per giovani e persone in formazione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, crisi, alloggi, zurigo, giovani',
+    ogTitle: 'Crisi alloggi a Zurigo: chieste soluzioni per studenti e giovani',
+    ogDescription: 'Le consigliere cantonali Leandra Columberg, Nadja Wirth, Tina Deplazes, Gianna Berger e Viviane Kägi firmano un postulato per affrontare la carenza di alloggi a prezzi accessibili nel Cantone di Zurigo.',
+    canonicalPath: '/articoli-zurigo/zurigo-crisi-alloggi-giovani/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Crisi alloggi Zurigo: giovani consigliere chiedono soluzioni",
+      "description": "Cinque consigliere cantonali di Zurigo presentano un postulato per chiedere soluzioni abitative economiche per giovani e persone in formazione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-zurigo-crisi-alloggi-giovani.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-26T15:23:22+00:00",
+      "dateModified": "2026-10-26T15:23:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-zurigo/zurigo-crisi-alloggi-giovani/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

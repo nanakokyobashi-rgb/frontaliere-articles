@@ -57,6 +57,9 @@ const blogMetaCantonZhDe: Record<string, string> = {
     'blog.article.wetzikon-binzacher-kempten-info.title': 'Wetzikon: öffentliche Veranstaltung zu Binzacher und Kempten',
     'blog.article.wetzikon-binzacher-kempten-info.excerpt': 'Am 29. Oktober 2026 um 19.00 Uhr informieren die Stadt Wetzikon und SBB in der Alten Turnhalle über das weitere Vorgehen bei der Parkierungsanlage Binzacher und beim Bahnhof Kempten.',
     'blog.article.wetzikon-binzacher-kempten-info.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.zurigo-crisi-alloggi-giovani.title': 'Wohnungskrise in Zürich: Junge Kantonsrätinnen fordern Lösungen',
+    'blog.article.zurigo-crisi-alloggi-giovani.excerpt': 'Fünf Zürcher Kantonsrätinnen fordern mit einem auf den ganzen Kanton ausgeweiteten Postulat Wohnlösungen für Menschen in Ausbildung.',
+    'blog.article.zurigo-crisi-alloggi-giovani.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonZhDe;

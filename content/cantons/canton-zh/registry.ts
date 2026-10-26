@@ -204,4 +204,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'zurigo-crisi-alloggi-giovani',
+ category: 'pratico',
+ date: '2026-10-26T15:23:22.166Z',
+ image: '/images/blog/article-zurigo-crisi-alloggi-giovani.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['ZH'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

@@ -57,6 +57,9 @@ const blogMetaCantonZhEn: Record<string, string> = {
     'blog.article.wetzikon-binzacher-kempten-info.title': 'Wetzikon: public meeting on Binzacher and Kempten',
     'blog.article.wetzikon-binzacher-kempten-info.excerpt': 'On October 29, 2026, at 19:00, the City of Wetzikon and SBB will provide information at the Alte Turnhalle about the future of the Binzacher parking facility and Kempten station.',
     'blog.article.wetzikon-binzacher-kempten-info.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.zurigo-crisi-alloggi-giovani.title': 'Zurich housing crisis: young female councillors call for solutions',
+    'blog.article.zurigo-crisi-alloggi-giovani.excerpt': 'Five Zurich cantonal councillors are calling for housing solutions for people in training through a postulate applying throughout the canton.',
+    'blog.article.zurigo-crisi-alloggi-giovani.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonZhEn;
