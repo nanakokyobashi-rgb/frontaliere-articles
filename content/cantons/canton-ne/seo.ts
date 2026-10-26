@@ -543,6 +543,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-mese-salute-mentale-2026': {
+    title: 'Mese salute mentale 2026: attività per rafforzare autostima',
+    description: 'Dal 10 settembre al 10 ottobre 2026 Seconda edizione nel Canton Neuchâtel Attività gratuite e accessibili per ogni età Una ventina di organizzazioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, mese, salute, mentale, attività',
+    ogTitle: 'Mese salute mentale 2026: attività per autostima',
+    ogDescription: 'Dal 10 settembre al 10 ottobre 2026 Seconda edizione nel Canton Neuchâtel Attività gratuite e accessibili per ogni età Una ventina di organizzazioni partner',
+    canonicalPath: '/articoli-neuchatel/mese-salute-mentale-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mese salute mentale 2026: attività per rafforzare autostima",
+      "description": "Dal 10 settembre al 10 ottobre 2026 Seconda edizione nel Canton Neuchâtel Attività gratuite e accessibili per ogni età Una ventina di organizzazioni",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/article-mese-salute-mentale-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Attività per la salute mentale nel Canton Neuchâtel nel 2026"
+      },
+      "datePublished": "2026-10-26T08:52:52+00:00",
+      "dateModified": "2026-10-26T08:52:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/mese-salute-mentale-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

@@ -4,22 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-sunrise-edulcore-son-projet-de-restructuration-358-postes-biffes.html": {
-      "section": "canton-ne",
-      "ts": 1792786388499
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-coop-augmentera-les-salaires-en-2027.html": {
-      "section": "canton-ne",
-      "ts": 1792800603124
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-swiss-prolonge-la-suspension-de-ses-vols-vers-dubai.html": {
-      "section": "canton-ne",
-      "ts": 1792828986412
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-eni-benefice-triple-au-3e-trimestre.html": {
-      "section": "canton-ne",
-      "ts": 1792828993639
-    },
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-sgs-progresse-au-troisieme-trimestre.html": {
       "section": "canton-ne",
       "ts": 1792846919226
@@ -51,6 +35,10 @@
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261024-a-marseille-une-boutique-breitling-victime-des-troubles-en-france.html": {
       "section": "canton-ne",
       "ts": 1792914862829
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-les-salaires-effectifs-ont-augmente-de-0-5-en-2026.html": {
+      "section": "canton-ne",
+      "ts": 1793003504979
     }
   }
 }

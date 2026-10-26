@@ -45,6 +45,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.zenith-soppressione-locle.title': 'Zenith announces around one hundred job cuts in Le Locle',
     'blog.article.zenith-soppressione-locle.excerpt': 'Zenith announces approximately one hundred job cuts at Locle The manufactory has 196 employees Consultation opened for collective dismissal Announcement',
     'blog.article.zenith-soppressione-locle.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.mese-salute-mentale-2026.title': 'Mental Health Month 2026: activities to strengthen self-esteem',
+    'blog.article.mese-salute-mentale-2026.excerpt': 'From September 10 to October 10, 2026 Second edition in the Canton of Neuchâtel Free and accessible activities for all ages Around twenty partner organizations',
+    'blog.article.mese-salute-mentale-2026.imageAlt': 'Mental health activities in Canton Neuchâtel in 2026',
 };
 
 export default blogMetaCantonNeEn;

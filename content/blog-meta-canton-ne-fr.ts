@@ -45,6 +45,9 @@ const blogMetaCantonNeFr: Record<string, string> = {
     'blog.article.zenith-soppressione-locle.title': 'Zenith annonce environ cent suppressions de postes au Locle',
     'blog.article.zenith-soppressione-locle.excerpt': 'Zenith annonce environ cent suppressions de postes au Locle La manufacture compte 196 collaborateurs Consultation ouverte en vue d\'un licenciement collectif',
     'blog.article.zenith-soppressione-locle.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.mese-salute-mentale-2026.title': 'Mois de la santé mentale 2026 : activités pour renforcer l’estime de soi',
+    'blog.article.mese-salute-mentale-2026.excerpt': 'Du 10 septembre au 10 octobre 2026 Deuxième édition dans le canton de Neuchâtel Activités gratuites et accessibles pour tous les âges Une vingtaine',
+    'blog.article.mese-salute-mentale-2026.imageAlt': 'Activités de santé mentale dans le Canton de Neuchâtel 2026',
 };
 
 export default blogMetaCantonNeFr;

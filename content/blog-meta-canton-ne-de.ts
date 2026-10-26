@@ -45,6 +45,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.zenith-soppressione-locle.title': 'Zenith kündigt rund hundert Stellenstreichungen in Locle an',
     'blog.article.zenith-soppressione-locle.excerpt': 'Zenith kündigt rund hundert Stellenstreichungen in Locle an Die Manufaktur zählt 196 Mitarbeitende Konsultation für die Massenentlassung eröffnet Ankündigung am',
     'blog.article.zenith-soppressione-locle.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.mese-salute-mentale-2026.title': 'Monat der psychischen Gesundheit 2026: Selbstwert stärken',
+    'blog.article.mese-salute-mentale-2026.excerpt': 'Vom 10. September bis zum 10. Oktober 2026 Zweite Ausgabe im Kanton Neuenburg Kostenlose und zugängliche Aktivitäten für jedes Alter Rund zwanzig',
+    'blog.article.mese-salute-mentale-2026.imageAlt': 'Aktivitäten für die psychische Gesundheit im Kanton Neuenburg 2026',
 };
 
 export default blogMetaCantonNeDe;
