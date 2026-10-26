@@ -1,8 +1,13 @@
+import '../../host/cantonSectionsBootstrap.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { readCanonicalPath } from '../../scripts/lib/seo-canonical-path.mjs';
 import { decodeStaticStringLiteral } from '../../scripts/lib/ts-literals.mjs';
+import {
+  lastStaticPropertyValue,
+  readStructuredSeoDescription,
+} from '../../engine/shared/seo-entry.mjs';
 
 const source = readFileSync(new URL('../scripts/create-article.mjs', import.meta.url), 'utf8');
 const start = source.indexOf('function validateStructuredData(data) {');
@@ -19,12 +24,12 @@ function validateCreator(type, id = 'https://frontaliereticino.ch/#organization'
   }`;
   const validate = new Function(
     'SECTION', 'BASE_URL', 'read', 'findSeoEntryMatches', 'readCanonicalPath', 'corpusPath', 'console',
-    'decodeStaticStringLiteral',
+    'decodeStaticStringLiteral', 'lastStaticPropertyValue', 'readStructuredSeoDescription',
     `${source.slice(start, end)}\nreturn validateStructuredData;`,
   )(
     { seoFile: 'memory.ts' }, 'https://frontaliereticino.ch', () => entry,
     () => [{ index: 0, closeIdx: entry.length - 1 }], readCanonicalPath, (p) => p, { error() {} },
-    decodeStaticStringLiteral,
+    decodeStaticStringLiteral, lastStaticPropertyValue, readStructuredSeoDescription,
   );
   return validate({ id: 'example', image: 'example.webp' });
 }

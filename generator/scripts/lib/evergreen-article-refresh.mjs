@@ -7,6 +7,7 @@
  * dogane-ranking digest (and any future evergreen digest) reuses the exact
  * same balanced-record rewrite logic instead of a copy-pasted sibling.
  */
+import '../../../host/cantonSectionsBootstrap.mjs';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
