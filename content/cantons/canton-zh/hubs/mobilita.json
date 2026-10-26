@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T01:29:11.421Z",
-  "contentHash": "5ba8b0ff25aa4a04f2fb8bfb27ad683565056f9ebe201a1ec6338d3a3f00dde5",
+  "updatedAt": "2026-10-26T05:48:28.210Z",
+  "contentHash": "6ba891ee523321abd70a68ad778b821395d6e14cba6cd028563f2905545f729f",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -37,7 +37,7 @@
         },
         {
           "label": "Chiusure stradali in corso o imminenti",
-          "value": "17",
+          "value": "15",
           "note": "segnalazioni aggiornate: 25 ottobre 2026"
         },
         {
@@ -153,10 +153,10 @@
               "date": "2026-10-20T07:42:00.000Z"
             },
             {
-              "label": "A52 Hinwil -> Zürich tra Raccordo autostradale Diramazione Hinwil E Svincolo autostradale Oetwil am See Situazione: chiusa cantiere",
+              "label": "A52 Hinwil -> Zürich Svincolo autostradale Hinteregg Situazione: raccordo autostradale chiuso in entrata cantiere",
               "value": "Chiusura",
-              "detail": "fine prevista: 26 ottobre 2026",
-              "date": "2026-10-20T20:54:00.000Z"
+              "detail": "fine prevista: 27 ottobre 2026",
+              "date": "2026-10-20T20:56:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
@@ -282,7 +282,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-26T01:29:11.421Z"
+      "updatedAt": "2026-10-26T05:48:28.210Z"
     },
     "en": {
       "canton": "ZH",
@@ -297,7 +297,7 @@
         },
         {
           "label": "Road closures in force or imminent",
-          "value": "17",
+          "value": "15",
           "note": "reports as of 25 October 2026"
         },
         {
@@ -413,10 +413,10 @@
               "date": "2026-10-20T07:42:00.000Z"
             },
             {
-              "label": "A52 Hinwil -> Zürich tra Raccordo autostradale Diramazione Hinwil E Svincolo autostradale Oetwil am See Situazione: chiusa cantiere",
+              "label": "A52 Hinwil -> Zürich Svincolo autostradale Hinteregg Situazione: raccordo autostradale chiuso in entrata cantiere",
               "value": "Closure",
-              "detail": "until 26 October 2026",
-              "date": "2026-10-20T20:54:00.000Z"
+              "detail": "until 27 October 2026",
+              "date": "2026-10-20T20:56:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
@@ -542,7 +542,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-26T01:29:11.421Z"
+      "updatedAt": "2026-10-26T05:48:28.210Z"
     },
     "de": {
       "canton": "ZH",
@@ -557,7 +557,7 @@
         },
         {
           "label": "Laufende oder bevorstehende Strassensperrungen",
-          "value": "17",
+          "value": "15",
           "note": "Meldungen vom 25. Oktober 2026"
         },
         {
@@ -673,10 +673,10 @@
               "date": "2026-10-20T07:42:00.000Z"
             },
             {
-              "label": "A52 Hinwil -> Zürich zwischen Autobahndreieck Verzweigung Hinwil und Anschluss Oetwil am See Sachlage: Strecke gesperrt Baustelle",
+              "label": "A52 Hinwil -> Zürich Anschluss Hinteregg Sachlage: Einfahrt gesperrt Baustelle",
               "value": "Sperrung",
-              "detail": "bis 26. Oktober 2026",
-              "date": "2026-10-20T20:54:00.000Z"
+              "detail": "bis 27. Oktober 2026",
+              "date": "2026-10-20T20:56:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
@@ -802,7 +802,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-26T01:29:11.421Z"
+      "updatedAt": "2026-10-26T05:48:28.210Z"
     },
     "fr": {
       "canton": "ZH",
@@ -817,7 +817,7 @@
         },
         {
           "label": "Fermetures de routes en cours ou imminentes",
-          "value": "17",
+          "value": "15",
           "note": "signalements au 25 octobre 2026"
         },
         {
@@ -933,10 +933,10 @@
               "date": "2026-10-20T07:42:00.000Z"
             },
             {
-              "label": "A52 Hinwil -> Zurich entre Echangeur Echangeur de Hinwil et Jonction autoroutière Oetwil am See Situation: fermé travaux",
+              "label": "A52 Hinwil -> Zurich Jonction autoroutière Hinteregg Situation: entrée fermée travaux",
               "value": "Fermeture",
-              "detail": "jusqu’au 26 octobre 2026",
-              "date": "2026-10-20T20:54:00.000Z"
+              "detail": "jusqu’au 27 octobre 2026",
+              "date": "2026-10-20T20:56:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
@@ -1062,7 +1062,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-26T01:29:11.421Z"
+      "updatedAt": "2026-10-26T05:48:28.210Z"
     }
   }
 }
