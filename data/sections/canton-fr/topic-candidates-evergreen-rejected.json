@@ -11,6 +11,10 @@
     "canton-fr::https://www.freiburger-nachrichten.ch/story/299268/wildunf%c3%a4lle-im-herbst-wo-es-besonders-h%c3%a4ufig-kracht-und-was-man-dagegen-tun-kann": {
       "section": "canton-fr",
       "ts": 1793029808951
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/300285/autobahn-a12-zwischen-matran-und-freiburgs%c3%bcd-gesperrt": {
+      "section": "canton-fr",
+      "ts": 1793037214793
     }
   }
 }
