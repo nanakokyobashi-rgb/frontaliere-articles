@@ -40,6 +40,8 @@ import {
   readStaticStringLiteral,
   skipStaticTrivia,
 } from './ts-literals.mjs';
+import { lastStaticPropertyValue } from './seo-static-property.mjs';
+export { lastStaticPropertyValue } from './seo-static-property.mjs';
 import { selectRetiredDailyEditions } from '../../generator/scripts/lib/daily-brief-content.mjs';
 import { parseArticleUrlSlugs } from '../../engine/shared/articleReaderSource.mjs';
 import { ARTICLES_PAGE_SIZE } from '../../engine/shared/articleArchiveConfig.mjs';
@@ -846,92 +848,6 @@ export const SEO_CHUNK_DIR = path.join('content', 'seo');
 export function unescapeQuoted(value, quote = "'") {
   if (value === undefined) return undefined;
   return decodeStaticStringLiteral(String(value), quote);
-}
-
-/**
- * Read the value that a JavaScript object literal leaves live for `field`.
- *
- * Object literals use last-write-wins semantics for duplicate properties. A
- * floor reader that returns on the first spelling can therefore count stale
- * SEO metadata while the producer publishes the final spelling.
- */
-export function lastStaticPropertyValue(block, field) {
-  const skipQuotedValue = (start) => {
-    const quote = block[start];
-    for (let cursor = start + 1; cursor < block.length; cursor += 1) {
-      if (block[cursor] === '\\') {
-        cursor += 1;
-        continue;
-      }
-      if (block[cursor] === quote) return cursor + 1;
-    }
-    return block.length;
-  };
-  const skipValue = (start) => {
-    const first = block[start];
-    if (first === "'" || first === '"' || first === '`') return skipQuotedValue(start);
-    if (first === '{' || first === '[' || first === '(') {
-      const close = matchingDelimiter(block, start);
-      return close < 0 ? block.length : close + 1;
-    }
-    let cursor = start;
-    while (cursor < block.length && block[cursor] !== ',' && block[cursor] !== '}') cursor += 1;
-    return cursor;
-  };
-  const objectOpen = block.indexOf('{');
-  let cursor = objectOpen >= 0 ? objectOpen + 1 : block.length;
-  let lastValue;
-  while (cursor < block.length) {
-    cursor = skipStaticTrivia(block, cursor, 'SEO entry', 'seo-field');
-    if (cursor >= block.length) break;
-
-    let key;
-    let keyEnd = cursor;
-    const first = block[cursor];
-    if (first === "'" || first === '"' || first === '`') {
-      const literal = readStaticStringLiteral(block, cursor, 'SEO entry', 'seo-field');
-      key = decodeStaticStringLiteral(literal.value, literal.quote);
-      keyEnd = literal.end;
-    } else if (/[A-Za-z_$]/u.test(first)) {
-      keyEnd += 1;
-      while (/[A-Za-z0-9_$]/u.test(block[keyEnd] || '')) keyEnd += 1;
-      key = block.slice(cursor, keyEnd);
-    } else {
-      cursor += 1;
-      continue;
-    }
-
-    const colon = skipStaticTrivia(block, keyEnd, 'SEO entry', 'seo-field');
-    if (block[colon] !== ':') {
-      cursor = keyEnd;
-      continue;
-    }
-    const valueStart = skipStaticTrivia(block, colon + 1, 'SEO entry', 'seo-field');
-    if (key === field && ["'", '"', '`'].includes(block[valueStart])) {
-      const value = readStaticStringLiteral(block, valueStart, 'SEO entry', 'seo-field');
-      lastValue = decodeStaticStringLiteral(value.value, value.quote);
-    }
-    // `parseSeoBlogs` reads the publication headline and date from the
-    // structuredData object. Re-enter that one known object only for those
-    // fields; other nested values (notably dynamic template URLs) stay
-    // opaque, so a string inside a payload cannot become a false property.
-    if (
-      key === 'structuredData'
-      && (field === 'headline' || field === 'datePublished')
-      && block[valueStart] === '{'
-    ) {
-      const close = matchingDelimiter(block, valueStart);
-      if (close >= 0) {
-        const nested = readSeoStringLiteralField(block.slice(valueStart, close + 1), field);
-        if (nested !== undefined) lastValue = nested;
-      }
-    }
-    // Move over the complete value. A structuredData object contains dynamic
-    // template URLs; scanning one byte at a time would mistake their backtick
-    // for a property key and reject an otherwise valid SEO entry.
-    cursor = skipValue(valueStart);
-  }
-  return lastValue;
 }
 
 function readSeoStringLiteralField(block, field) {

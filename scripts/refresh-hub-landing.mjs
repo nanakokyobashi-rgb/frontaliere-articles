@@ -69,8 +69,9 @@ import path from 'node:path';
 import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 import { createRawFetcher } from './lib/cross-repo-raw-fetch.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
-import { decodeStaticStringLiteral, readStaticObjectEntries } from './lib/ts-literals.mjs';
+import { readStaticObjectEntries } from './lib/ts-literals.mjs';
 import { readCanonicalPath } from './lib/seo-canonical-path.mjs';
+import { lastStaticPropertyValue } from './lib/seo-static-property.mjs';
 import { CORPUS_SECTIONS } from './lib/corpus-sections.mjs';
 import { patchHubLandingMetadata } from './lib/hub-landing-meta.mjs';
 import { rewriteGenericImageRefs } from './lib/article-render-pipeline.mjs';
@@ -258,15 +259,6 @@ function readSeoMap() {
   const out = new Map();
   if (!fs.existsSync(dir)) return out;
 
-  const matchStr = (block, key) => {
-    const rxSingle = new RegExp(`${key}:\\s*'((?:[^'\\\\]|\\\\.)*)'`);
-    const rxDouble = new RegExp(`${key}:\\s*"((?:[^"\\\\]|\\\\.)*)"`);
-    const single = block.match(rxSingle);
-    const m = single || block.match(rxDouble);
-    if (!m) return '';
-    return decodeStaticStringLiteral(m[1], single ? "'" : '"', { newlineAs: ' ' });
-  };
-
   for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.ts'))) {
     const src = fs.readFileSync(path.join(dir, file), 'utf-8');
     const entryStartRx = /['"][^'"]+['"]\s*:\s*\{/g;
@@ -281,10 +273,10 @@ function readSeoMap() {
       const canonicalPath = readCanonicalPath(block);
       const cp = canonicalPath.kind === 'resolved' ? canonicalPath.value : null;
       if (!cp) continue;
-      const title = matchStr(block, 'title');
+      const title = lastStaticPropertyValue(block, 'title') ?? '';
       out.set(seoKey(cp), {
-        title: matchStr(block, 'ogTitle') || title,
-        desc: matchStr(block, 'description'),
+        title: lastStaticPropertyValue(block, 'ogTitle') || title,
+        desc: lastStaticPropertyValue(block, 'description') ?? '',
       });
     }
   }

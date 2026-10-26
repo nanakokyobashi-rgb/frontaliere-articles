@@ -271,6 +271,32 @@ test('upsertSeoDescriptionBlock: entry duplicata — rileva indentazione tab', (
   );
 });
 
+test('upsertSeoDescriptionBlock: rifiuta le proprietà SEO duplicate invece del first-match', () => {
+  const duplicateTitle = SEO_FIXTURE.replace(
+    "    title: 'Demo',\n",
+    "    title: 'Demo',\n" +
+      "    title: 'Stale duplicate',\n",
+  );
+  assert.throws(
+    () => upsertSeoDescriptionBlock(duplicateTitle, 'demo-id', { title: 'Titolo nuovo' }, { refreshTitles: true }),
+    /campo 'title' duplicato.*refresh rifiutato/,
+  );
+
+  const duplicateStructuredDescription = SEO_FIXTURE.replace(
+    '      "description": "Corto",\n',
+    '      "description": "Corto",\n' +
+      '      "description": "Stale duplicate"\n',
+  );
+  assert.throws(
+    () => upsertSeoDescriptionBlock(
+      duplicateStructuredDescription,
+      'demo-id',
+      { description: 'Descrizione nuova e verificata.' },
+    ),
+    /structuredData campo 'description' duplicato.*refresh rifiutato/,
+  );
+});
+
 test('upsertSeoDescriptionBlock: aggiorna anche i campi top-level con indentazione tab', () => {
   const out = upsertSeoDescriptionBlock(INDENTED_SEO_FIXTURE, 'demo-id', {
     description: 'Descrizione tab.',

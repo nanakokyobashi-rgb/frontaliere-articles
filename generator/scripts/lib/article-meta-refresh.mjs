@@ -293,11 +293,34 @@ export function upsertLocaleMetaFields(src, id, fields, { refreshTitles = false,
 }
 
 function replaceIndentedSeoField(source, field, value) {
-  const re = new RegExp(`(\\n)([\\t ]*)(${escapeRegex(field)}: ')((?:[^'\\\\]|\\\\.)*)(',)`);
+  const re = new RegExp(`(\\n)([\\t ]*)(${escapeRegex(field)}: ')((?:[^'\\\\]|\\\\.)*)(',)`, 'g');
+  const matches = [...source.matchAll(re)];
+  if (matches.length > 1) {
+    throw new Error(
+      `upsertSeoDescriptionBlock: campo '${field}' duplicato (${matches.length} occorrenze); ` +
+      'refresh rifiutato prima della scrittura.',
+    );
+  }
+  if (matches.length === 0) return source;
   return source.replace(re, (match, newline, indent, prefix, current, suffix) => {
     if (current === value) return match;
     return `${newline}${indent}${prefix}${value}${suffix}`;
   });
+}
+
+function replaceStructuredDataSeoField(source, field, value) {
+  const re = new RegExp(`("${escapeRegex(field)}":\\s*")((?:[^"\\\\]|\\\\.)*)(")`, 'g');
+  const matches = [...source.matchAll(re)];
+  if (matches.length > 1) {
+    throw new Error(
+      `upsertSeoDescriptionBlock: structuredData campo '${field}' duplicato ` +
+      `(${matches.length} occorrenze); refresh rifiutato prima della scrittura.`,
+    );
+  }
+  if (matches.length === 0) return source;
+  return source.replace(re, (match, prefix, current, suffix) => (
+    current === value ? match : `${prefix}${value}${suffix}`
+  ));
 }
 
 /**
@@ -338,10 +361,7 @@ export function upsertSeoDescriptionBlock(src, id, seo, { refreshTitles = false 
     // not a full JSON escape (these texts are plain sentences, never containing
     // a literal double quote in practice).
     const dbl = seo.description.replace(/"/g, '\\"');
-    block = block.replace(
-      /("description":\s*")((?:[^"\\]|\\.)*)(")/,
-      (m, g1, g2, g3) => (g2 === dbl ? m : `${g1}${dbl}${g3}`),
-    );
+    block = replaceStructuredDataSeoField(block, 'description', dbl);
   }
   if (typeof seo.ogDescription === 'string' && seo.ogDescription.trim() !== '') {
     const single = escapeForSingleQuoteTS(seo.ogDescription);

@@ -30,11 +30,33 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { CORPUS_SECTIONS } from '../../scripts/lib/corpus-sections.mjs';
 import { patchHubLandingMetadata, SWISS_HUB_ROOT_SEO_IT } from '../../scripts/lib/hub-landing-meta.mjs';
+import { lastStaticPropertyValue } from '../../scripts/lib/seo-static-property.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..', '..');
 const writer = readFileSync(path.join(ROOT, 'scripts', 'refresh-hub-landing.mjs'), 'utf-8');
 const engine = readFileSync(path.join(ROOT, 'engine', 'articlesHubCards.ts'), 'utf-8');
 const flatRedirect = readFileSync(path.join(ROOT, 'engine', 'flatHtmlRedirect.ts'), 'utf-8');
+
+test('il reader SEO del refresher applica la semantica last-write-wins', () => {
+  const block = `{
+    title: 'Titolo stale',
+    title: 'Titolo finale',
+    ogTitle: 'OG finale',
+    description: 'Descrizione stale',
+    description: 'Descrizione finale',
+    structuredData: { headline: 'Non è il title della entry' },
+  }`;
+  assert.equal(lastStaticPropertyValue(block, 'title'), 'Titolo finale');
+  assert.equal(lastStaticPropertyValue(block, 'description'), 'Descrizione finale');
+  assert.equal(lastStaticPropertyValue(block, 'ogTitle'), 'OG finale');
+});
+
+test('il refresher usa il resolver bilanciato invece del regex first-match', () => {
+  assert.match(writer, /import \{ lastStaticPropertyValue \} from '\.\/lib\/seo-static-property\.mjs';/);
+  assert.match(writer, /lastStaticPropertyValue\(block, 'title'\)/);
+  assert.match(writer, /lastStaticPropertyValue\(block, 'description'\)/);
+  assert.doesNotMatch(writer, /const rxSingle = new RegExp/);
+});
 
 test('the writer goes through the create-or-refresh entry point', () => {
   assert.match(
