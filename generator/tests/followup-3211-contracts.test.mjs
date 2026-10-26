@@ -5,6 +5,10 @@ import {
   lastStaticPropertyValue,
   readStructuredSeoDescription,
 } from '../../scripts/lib/corpus-floors.mjs';
+import {
+  hasInterpolatedStaticProperty,
+  readStructuredSeoDescriptionState,
+} from '../../engine/shared/seo-entry.mjs';
 import { assertRssProjectorContract } from '../../scripts/lib/rss-projector-contract.mjs';
 import { familySourceTransitionState } from '../../scripts/lib/section-registry.mjs';
 import { rejectRawFaqControlEscape } from '../../scripts/lib/faq-control-contract.mjs';
@@ -56,6 +60,23 @@ test('description reader resetta anche quando structuredData finale non è un og
   })`;
 
   assert.equal(readStructuredSeoDescription(block), undefined);
+});
+
+test('SEO reader espone l assegnazione interpolata invece di riusare un valore shadowed', () => {
+  const block = `({
+    canonicalPath: '/articoli-frontaliere/vecchio/',
+    canonicalPath: \`${'${runtimePath}'}\`,
+    structuredData: {
+      description: 'descrizione statica',
+    },
+    structuredData: {
+      description: \`${'${runtimeDescription}'}\`,
+    },
+  })`;
+
+  assert.equal(lastStaticPropertyValue(block, 'canonicalPath'), undefined);
+  assert.equal(hasInterpolatedStaticProperty(block, 'canonicalPath'), true);
+  assert.equal(readStructuredSeoDescriptionState(block).dynamic, true);
 });
 
 test('family source transitions are explicit and fail closed', () => {

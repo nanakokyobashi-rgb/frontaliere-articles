@@ -296,6 +296,12 @@ export function upsertLocaleMetaFields(src, id, fields, { refreshTitles = false,
 
 function replaceStaticSeoField(source, field, value, expectedQuote = "'") {
   const matches = staticPropertyValues(source, field);
+  if (matches.some((match) => match.dynamic)) {
+    throw new Error(
+      `upsertSeoDescriptionBlock: campo '${field}' contiene un'assegnazione interpolata; ` +
+        'refresh rifiutato prima della scrittura.',
+    );
+  }
   if (matches.length > 1) {
     throw new Error(
       `upsertSeoDescriptionBlock: campo '${field}' duplicato (${matches.length} occorrenze); ` +
@@ -311,6 +317,12 @@ function replaceStaticSeoField(source, field, value, expectedQuote = "'") {
 
 function replaceStructuredDataSeoField(source, field, value, expectedQuote = '"') {
   const matches = staticPropertySpans(source, 'structuredData');
+  if (matches.some((match) => match.dynamic)) {
+    throw new Error(
+      "upsertSeoDescriptionBlock: campo 'structuredData' contiene un'assegnazione interpolata; " +
+        'refresh rifiutato prima della scrittura.',
+    );
+  }
   if (matches.length > 1) {
     throw new Error(
       "upsertSeoDescriptionBlock: campo 'structuredData' duplicato (" + matches.length +

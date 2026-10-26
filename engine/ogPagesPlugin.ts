@@ -30,8 +30,10 @@ import { parseStaticArticleTranslationSource, parseStaticBlogBodySource } from '
 export { parseStaticBlogBodySource };
 import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
 import {
+ hasInterpolatedStaticProperty,
  lastStaticPropertyValue,
  readStructuredSeoDescription,
+ readStructuredSeoDescriptionState,
  staticPropertyValues,
 } from './shared/seo-entry.mjs';
 import { createImageCreditReader, imageObjectCreditFields, renderImageCreditHtml } from './shared/imageCredits.mjs';
@@ -790,6 +792,13 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const articleId = blogKeyToArticleId(key);
  const e = pos[i].end;
  const b = seoSrc.substring(s, e);
+
+ // A dynamic assignment cannot be represented by this static renderer.
+ // Skip the entry explicitly instead of letting a previous static duplicate
+ // leak into OG metadata or canonical URLs.
+ const dynamicField = ['title', 'description', 'keywords', 'ogTitle', 'ogDescription', 'canonicalPath', 'datePublished', 'dateModified']
+  .find((field) => hasInterpolatedStaticProperty(b, field));
+ if (dynamicField || readStructuredSeoDescriptionState(b).dynamic) continue;
 
  // Resolve every static property with the same balanced last-write-wins
  // reader as RSS. A first-match regex here would let stale title/description

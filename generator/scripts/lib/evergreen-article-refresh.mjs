@@ -88,7 +88,17 @@ function replaceLiteral(source, property, nextValue) {
 
 function dateModifiedProperties(block) {
   const properties = staticPropertyValues(block, 'dateModified');
+  if (properties.some((property) => property.dynamic)) {
+    throw new Error(
+      'bumpDateModified: entry contiene un dateModified interpolato; refresh rifiutato prima della scrittura.',
+    );
+  }
   const structuredData = staticPropertySpans(block, 'structuredData');
+  if (structuredData.some((property) => property.dynamic)) {
+    throw new Error(
+      'bumpDateModified: entry contiene un structuredData interpolato; refresh rifiutato prima della scrittura.',
+    );
+  }
   if (structuredData.length > 1) {
     throw new Error(
       "bumpDateModified: entry contiene più proprietà structuredData; " +
