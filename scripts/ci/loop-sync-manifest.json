@@ -1203,7 +1203,7 @@
     {
       "path": ".github/workflows/workflow-failure-issues.yml",
       "mode": "corpus-only",
-      "reason": "Il sito apre le issue di fallimento con uno step dentro ognuno dei suoi 135 workflow. Qui la scansione e' centrale: modificare i workflow di generazione (il core operativo del repo) per una preoccupazione che non e' la loro lascerebbe comunque scoperto ogni workflow nuovo. Il sito e' gia' arrivato alla stessa conclusione per il lato che CHIUDE (close-recovered, 'without wiring a per-workflow step into ~300 YAML files'): questa e' la meta' simmetrica, ed e' un candidato a risalire. Dal trasporto #1971 il monitor dichiara anche l'opt-in al budget realtime di 3 giorni sul filtro `created`; un deep scan a 35 giorni resta retention-complete senza opt-in.",
+      "reason": "Il sito apre le issue di fallimento con uno step dentro ognuno dei suoi 135 workflow. Qui la scansione e' centrale: modificare i workflow di generazione (il core operativo del repo) per una preoccupazione che non e' la loro lascerebbe comunque scoperto ogni workflow nuovo. Il sito e' gia' arrivato alla stessa conclusione per il lato che CHIUDE (close-recovered, 'without wiring a per-workflow step into ~300 YAML files'): questa e' la meta' simmetrica, ed e' un candidato a risalire. Dal trasporto #1971 il monitor dichiara l'opt-in a un budget realtime bounded di 6 ore sul filtro `created`; un deep scan retention-complete usa un override esplicito senza questo budget.",
       "baseline": {
         "site": null,
         "corpus": "60a4ea3dc256edcd",
