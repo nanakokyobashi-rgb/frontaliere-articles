@@ -4,8 +4,8 @@
   "section": "canton-vd",
   "canton": "VD",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "976e18b2550f01c98abf9d76c31457b35d30c8697cec6b08ac2076f08686dce2",
+  "updatedAt": "2026-10-26T23:12:35.898Z",
+  "contentHash": "c4161a343fd12cf1430cf507a81c6522501739d797950a31a0678accc924e979",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T11:33:49.792Z",
+      "updatedAt": "2026-10-26T17:41:28.137Z",
       "keyFacts": 0
     }
   ],
@@ -42,7 +42,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "30",
+          "value": "29",
           "note": "segnalazioni aggiornate: 26 ottobre 2026"
         }
       ],
@@ -186,7 +186,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -270,7 +270,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "en": {
       "canton": "VD",
@@ -290,7 +290,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "30",
+          "value": "29",
           "note": "reports as of 26 October 2026"
         }
       ],
@@ -434,7 +434,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -517,7 +517,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "de": {
       "canton": "VD",
@@ -537,7 +537,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "30",
+          "value": "29",
           "note": "Meldungen vom 26. Oktober 2026"
         }
       ],
@@ -681,7 +681,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -764,7 +764,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "fr": {
       "canton": "VD",
@@ -784,7 +784,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "30",
+          "value": "29",
           "note": "signalements au 26 octobre 2026"
         }
       ],
@@ -928,7 +928,7 @@
               "url": "https://www.lausanne.ch/apps/actualites/index.php?actu_id=90330"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -1012,7 +1012,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     }
   }
 }

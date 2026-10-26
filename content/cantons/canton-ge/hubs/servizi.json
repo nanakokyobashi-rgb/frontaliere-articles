@@ -4,8 +4,8 @@
   "section": "canton-ge",
   "canton": "GE",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "3ec0c045c6101259de532f7ed0feb39796a3b8da1f58e5ac651e6ee3fbf6e7b1",
+  "updatedAt": "2026-10-26T23:12:35.898Z",
+  "contentHash": "516acda9eea2c2985cc0c96c574e8c6a992858f5b71e0bb1e4d52325ca18ca45",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,17 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-26T10:51:40.496Z",
+      "updatedAt": "2026-10-26T17:13:54.202Z",
+      "keyFacts": 0
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-26T15:21:46.969Z",
       "keyFacts": 0
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T11:33:49.792Z",
+      "updatedAt": "2026-10-26T17:41:28.137Z",
       "keyFacts": 0
     }
   ],
@@ -61,11 +66,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-25T23:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-26T23:00:00.000Z"
             },
             {
@@ -87,17 +87,41 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-10-30T23:00:00.000Z"
+            },
+            {
+              "label": "Pharmacie du Museum",
+              "detail": "Genève, Genève",
+              "date": "2026-10-31T07:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-26T10:51:40.496Z"
+          "updatedAt": "2026-10-26T17:13:54.202Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "11 °C",
+              "detail": "oggi da 5 a 12 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-26T15:21:46.969Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Une personne atteinte d’Ebola prise en charge aux HUG",
+              "date": "2026-10-26",
+              "url": "https://www.hug.ch/actualite/personne-atteinte-ebola-prise-charge-aux-hug"
+            },
             {
               "label": "Les HUG, 1er hôpital de Suisse dans le classement Best Smart Hospitals 2027 de Newsweek",
               "date": "2026-10-23",
@@ -119,17 +143,12 @@
               "url": "https://www.ge.ch/node/283"
             },
             {
-              "label": "Quatre projets primés lors de la 20e édition de la Journée de l’innovation des HUG",
+              "label": "Demande de subside 2027 - Formulaire 2 - Personnes imposées à la source",
               "date": "2026-10-16",
-              "url": "https://www.hug.ch/actualite/quatre-projets-primes-lors-20e-edition-journee-innovation-hug"
-            },
-            {
-              "label": "Formation 2026 \"Maintien au travail des salariés seniors : enjeux de santé au travail\"",
-              "date": "2026-10-15",
-              "url": "https://www.ge.ch/node/42070"
+              "url": "https://www.ge.ch/node/45258"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -209,7 +228,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "en": {
       "canton": "GE",
@@ -248,11 +267,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-25T23:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-26T23:00:00.000Z"
             },
             {
@@ -274,17 +288,41 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-10-30T23:00:00.000Z"
+            },
+            {
+              "label": "Pharmacie du Museum",
+              "detail": "Genève, Genève",
+              "date": "2026-10-31T07:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-26T10:51:40.496Z"
+          "updatedAt": "2026-10-26T17:13:54.202Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "11 °C",
+              "detail": "today from 5 to 12 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-26T15:21:46.969Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Une personne atteinte d’Ebola prise en charge aux HUG",
+              "date": "2026-10-26",
+              "url": "https://www.hug.ch/actualite/personne-atteinte-ebola-prise-charge-aux-hug"
+            },
             {
               "label": "Les HUG, 1er hôpital de Suisse dans le classement Best Smart Hospitals 2027 de Newsweek",
               "date": "2026-10-23",
@@ -306,17 +344,12 @@
               "url": "https://www.ge.ch/node/283"
             },
             {
-              "label": "Quatre projets primés lors de la 20e édition de la Journée de l’innovation des HUG",
+              "label": "Demande de subside 2027 - Formulaire 2 - Personnes imposées à la source",
               "date": "2026-10-16",
-              "url": "https://www.hug.ch/actualite/quatre-projets-primes-lors-20e-edition-journee-innovation-hug"
-            },
-            {
-              "label": "Formation 2026 \"Maintien au travail des salariés seniors : enjeux de santé au travail\"",
-              "date": "2026-10-15",
-              "url": "https://www.ge.ch/node/42070"
+              "url": "https://www.ge.ch/node/45258"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -391,7 +424,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "de": {
       "canton": "GE",
@@ -430,11 +463,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-25T23:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-26T23:00:00.000Z"
             },
             {
@@ -456,17 +484,41 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-10-30T23:00:00.000Z"
+            },
+            {
+              "label": "Pharmacie du Museum",
+              "detail": "Genève, Genève",
+              "date": "2026-10-31T07:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-26T10:51:40.496Z"
+          "updatedAt": "2026-10-26T17:13:54.202Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "11 °C",
+              "detail": "heute 5 bis 12 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-26T15:21:46.969Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Une personne atteinte d’Ebola prise en charge aux HUG",
+              "date": "2026-10-26",
+              "url": "https://www.hug.ch/actualite/personne-atteinte-ebola-prise-charge-aux-hug"
+            },
             {
               "label": "Les HUG, 1er hôpital de Suisse dans le classement Best Smart Hospitals 2027 de Newsweek",
               "date": "2026-10-23",
@@ -488,17 +540,12 @@
               "url": "https://www.ge.ch/node/283"
             },
             {
-              "label": "Quatre projets primés lors de la 20e édition de la Journée de l’innovation des HUG",
+              "label": "Demande de subside 2027 - Formulaire 2 - Personnes imposées à la source",
               "date": "2026-10-16",
-              "url": "https://www.hug.ch/actualite/quatre-projets-primes-lors-20e-edition-journee-innovation-hug"
-            },
-            {
-              "label": "Formation 2026 \"Maintien au travail des salariés seniors : enjeux de santé au travail\"",
-              "date": "2026-10-15",
-              "url": "https://www.ge.ch/node/42070"
+              "url": "https://www.ge.ch/node/45258"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -573,7 +620,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "fr": {
       "canton": "GE",
@@ -612,11 +659,6 @@
             {
               "label": "pharma24",
               "detail": "Genève, Genève",
-              "date": "2026-10-25T23:00:00.000Z"
-            },
-            {
-              "label": "pharma24",
-              "detail": "Genève, Genève",
               "date": "2026-10-26T23:00:00.000Z"
             },
             {
@@ -638,17 +680,41 @@
               "label": "pharma24",
               "detail": "Genève, Genève",
               "date": "2026-10-30T23:00:00.000Z"
+            },
+            {
+              "label": "Pharmacie du Museum",
+              "detail": "Genève, Genève",
+              "date": "2026-10-31T07:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://pharmageneve.swiss/pharmacie-de-garde/",
-          "updatedAt": "2026-10-26T10:51:40.496Z"
+          "updatedAt": "2026-10-26T17:13:54.202Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Genève",
+              "value": "11 °C",
+              "detail": "aujourd’hui de 5 à 12 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-26T15:21:46.969Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Une personne atteinte d’Ebola prise en charge aux HUG",
+              "date": "2026-10-26",
+              "url": "https://www.hug.ch/actualite/personne-atteinte-ebola-prise-charge-aux-hug"
+            },
             {
               "label": "Les HUG, 1er hôpital de Suisse dans le classement Best Smart Hospitals 2027 de Newsweek",
               "date": "2026-10-23",
@@ -670,17 +736,12 @@
               "url": "https://www.ge.ch/node/283"
             },
             {
-              "label": "Quatre projets primés lors de la 20e édition de la Journée de l’innovation des HUG",
+              "label": "Demande de subside 2027 - Formulaire 2 - Personnes imposées à la source",
               "date": "2026-10-16",
-              "url": "https://www.hug.ch/actualite/quatre-projets-primes-lors-20e-edition-journee-innovation-hug"
-            },
-            {
-              "label": "Formation 2026 \"Maintien au travail des salariés seniors : enjeux de santé au travail\"",
-              "date": "2026-10-15",
-              "url": "https://www.ge.ch/node/42070"
+              "url": "https://www.ge.ch/node/45258"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -752,7 +813,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     }
   }
 }

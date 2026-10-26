@@ -4,8 +4,8 @@
   "section": "canton-zh",
   "canton": "ZH",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "4abb80997b60f23081f85b62f442c4687499c7a8287f6aa42a72bca327a534dc",
+  "updatedAt": "2026-10-26T23:12:35.898Z",
+  "contentHash": "17fc8b52d3260de88b39cfa73a4192547517c33ebd3dee61dc9206241d33a93b",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "farmacie-di-turno",
-      "updatedAt": "2026-10-26T10:51:41.710Z",
+      "updatedAt": "2026-10-26T17:13:55.374Z",
       "keyFacts": 0
     },
     {
@@ -23,8 +23,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-26T15:21:46.969Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T11:33:49.792Z",
+      "updatedAt": "2026-10-26T17:41:28.137Z",
       "keyFacts": 0
     }
   ],
@@ -81,11 +86,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-25T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-26T23:00:00.000Z"
             },
             {
@@ -107,11 +107,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-10-30T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-31T23:00:00.000Z"
             }
           ],
           "sourceName": "Servizio ufficiale dei turni farmacia",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-26T10:51:41.710Z"
+          "updatedAt": "2026-10-26T17:13:55.374Z"
         },
         {
           "id": "aste-targhe",
@@ -145,10 +150,29 @@
           "updatedAt": "2026-10-26T12:59:08.913Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "11 °C",
+              "detail": "oggi da 7 a 11 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-26T15:21:46.969Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "USZ nimmt Patienten mit vermuteter Ebolaviruskrankheit auf",
+              "date": "2026-10-26T15:33:02.000Z",
+              "url": "https://www.usz.ch/usz-nimmt-patienten-mit-vermuteter-ebolaviruskrankheit-auf/"
+            },
             {
               "label": "2’000. Geburt des Jahres 2026 an der Klinik für Geburtshilfe",
               "date": "2026-10-23T05:21:46.000Z",
@@ -173,14 +197,9 @@
               "label": "Wieder hören nach Ertaubung: 2’000. Cochlea-Implantat am Universitätsspital Zürich eingesetzt",
               "date": "2026-10-21T07:00:09.000Z",
               "url": "https://www.usz.ch/2000-cochlea-implantat-am-universitaetsspital-zuerich-eingesetzt/"
-            },
-            {
-              "label": "MITTE1|2 im Fachdialog: Das USZ präsentiert sein Neubauprojekt",
-              "date": "2026-10-20T07:39:43.000Z",
-              "url": "https://www.usz.ch/mitte12-im-fachdialog-das-usz-praesentiert-sein-neubauprojekt/"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -260,7 +279,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "en": {
       "canton": "ZH",
@@ -314,11 +333,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-25T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-26T23:00:00.000Z"
             },
             {
@@ -340,11 +354,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-10-30T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-31T23:00:00.000Z"
             }
           ],
           "sourceName": "Official pharmacy duty service",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-26T10:51:41.710Z"
+          "updatedAt": "2026-10-26T17:13:55.374Z"
         },
         {
           "id": "aste-targhe",
@@ -378,10 +397,29 @@
           "updatedAt": "2026-10-26T12:59:08.913Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "11 °C",
+              "detail": "today from 7 to 11 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-26T15:21:46.969Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "USZ nimmt Patienten mit vermuteter Ebolaviruskrankheit auf",
+              "date": "2026-10-26T15:33:02.000Z",
+              "url": "https://www.usz.ch/usz-nimmt-patienten-mit-vermuteter-ebolaviruskrankheit-auf/"
+            },
             {
               "label": "2’000. Geburt des Jahres 2026 an der Klinik für Geburtshilfe",
               "date": "2026-10-23T05:21:46.000Z",
@@ -406,14 +444,9 @@
               "label": "Wieder hören nach Ertaubung: 2’000. Cochlea-Implantat am Universitätsspital Zürich eingesetzt",
               "date": "2026-10-21T07:00:09.000Z",
               "url": "https://www.usz.ch/2000-cochlea-implantat-am-universitaetsspital-zuerich-eingesetzt/"
-            },
-            {
-              "label": "MITTE1|2 im Fachdialog: Das USZ präsentiert sein Neubauprojekt",
-              "date": "2026-10-20T07:39:43.000Z",
-              "url": "https://www.usz.ch/mitte12-im-fachdialog-das-usz-praesentiert-sein-neubauprojekt/"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -489,7 +522,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "de": {
       "canton": "ZH",
@@ -543,11 +576,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-25T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-26T23:00:00.000Z"
             },
             {
@@ -569,11 +597,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-10-30T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-31T23:00:00.000Z"
             }
           ],
           "sourceName": "Offizieller Apotheken-Notfalldienst",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-26T10:51:41.710Z"
+          "updatedAt": "2026-10-26T17:13:55.374Z"
         },
         {
           "id": "aste-targhe",
@@ -607,10 +640,29 @@
           "updatedAt": "2026-10-26T12:59:08.913Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "11 °C",
+              "detail": "heute 7 bis 11 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-26T15:21:46.969Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "USZ nimmt Patienten mit vermuteter Ebolaviruskrankheit auf",
+              "date": "2026-10-26T15:33:02.000Z",
+              "url": "https://www.usz.ch/usz-nimmt-patienten-mit-vermuteter-ebolaviruskrankheit-auf/"
+            },
             {
               "label": "2’000. Geburt des Jahres 2026 an der Klinik für Geburtshilfe",
               "date": "2026-10-23T05:21:46.000Z",
@@ -635,14 +687,9 @@
               "label": "Wieder hören nach Ertaubung: 2’000. Cochlea-Implantat am Universitätsspital Zürich eingesetzt",
               "date": "2026-10-21T07:00:09.000Z",
               "url": "https://www.usz.ch/2000-cochlea-implantat-am-universitaetsspital-zuerich-eingesetzt/"
-            },
-            {
-              "label": "MITTE1|2 im Fachdialog: Das USZ präsentiert sein Neubauprojekt",
-              "date": "2026-10-20T07:39:43.000Z",
-              "url": "https://www.usz.ch/mitte12-im-fachdialog-das-usz-praesentiert-sein-neubauprojekt/"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -718,7 +765,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "fr": {
       "canton": "ZH",
@@ -772,11 +819,6 @@
             {
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
-              "date": "2026-10-25T23:00:00.000Z"
-            },
-            {
-              "label": "Bellevue Apotheke",
-              "detail": "Zürich, Zurigo",
               "date": "2026-10-26T23:00:00.000Z"
             },
             {
@@ -798,11 +840,16 @@
               "label": "Bellevue Apotheke",
               "detail": "Zürich, Zurigo",
               "date": "2026-10-30T23:00:00.000Z"
+            },
+            {
+              "label": "Bellevue Apotheke",
+              "detail": "Zürich, Zurigo",
+              "date": "2026-10-31T23:00:00.000Z"
             }
           ],
           "sourceName": "Service officiel des pharmacies de garde",
           "sourceUrl": "https://www.avkz.ch/notfalldienst",
-          "updatedAt": "2026-10-26T10:51:41.710Z"
+          "updatedAt": "2026-10-26T17:13:55.374Z"
         },
         {
           "id": "aste-targhe",
@@ -836,10 +883,29 @@
           "updatedAt": "2026-10-26T12:59:08.913Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Zürich",
+              "value": "11 °C",
+              "detail": "aujourd’hui de 7 à 11 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-26T15:21:46.969Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "USZ nimmt Patienten mit vermuteter Ebolaviruskrankheit auf",
+              "date": "2026-10-26T15:33:02.000Z",
+              "url": "https://www.usz.ch/usz-nimmt-patienten-mit-vermuteter-ebolaviruskrankheit-auf/"
+            },
             {
               "label": "2’000. Geburt des Jahres 2026 an der Klinik für Geburtshilfe",
               "date": "2026-10-23T05:21:46.000Z",
@@ -864,14 +930,9 @@
               "label": "Wieder hören nach Ertaubung: 2’000. Cochlea-Implantat am Universitätsspital Zürich eingesetzt",
               "date": "2026-10-21T07:00:09.000Z",
               "url": "https://www.usz.ch/2000-cochlea-implantat-am-universitaetsspital-zuerich-eingesetzt/"
-            },
-            {
-              "label": "MITTE1|2 im Fachdialog: Das USZ präsentiert sein Neubauprojekt",
-              "date": "2026-10-20T07:39:43.000Z",
-              "url": "https://www.usz.ch/mitte12-im-fachdialog-das-usz-praesentiert-sein-neubauprojekt/"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -943,7 +1004,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     }
   }
 }

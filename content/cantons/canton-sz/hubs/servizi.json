@@ -4,8 +4,8 @@
   "section": "canton-sz",
   "canton": "SZ",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "f5cfc47af4606e3d6d50997d5fa2fa6a434ad5fa8922199f37c17cd16203da28",
+  "updatedAt": "2026-10-26T23:12:35.898Z",
+  "contentHash": "eec2f703d18ab6fd327adee04df0f411100ed77f823d8af57bc4efecad31e2f5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -18,8 +18,13 @@
       "keyFacts": 1
     },
     {
+      "id": "meteo",
+      "updatedAt": "2026-10-26T15:21:46.969Z",
+      "keyFacts": 0
+    },
+    {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T11:33:49.792Z",
+      "updatedAt": "2026-10-26T17:41:28.137Z",
       "keyFacts": 0
     }
   ],
@@ -90,6 +95,20 @@
           "updatedAt": "2026-10-26T12:59:08.913Z"
         },
         {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "11 °C",
+              "detail": "oggi da 7 a 12 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-26T15:21:46.969Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
@@ -115,7 +134,7 @@
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/7-parlamentarischer-abend-der-ameos-gruppe-1/"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -195,7 +214,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "en": {
       "canton": "SZ",
@@ -263,6 +282,20 @@
           "updatedAt": "2026-10-26T12:59:08.913Z"
         },
         {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "11 °C",
+              "detail": "today from 7 to 12 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-26T15:21:46.969Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
@@ -288,7 +321,7 @@
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/7-parlamentarischer-abend-der-ameos-gruppe-1/"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -364,7 +397,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "de": {
       "canton": "SZ",
@@ -432,6 +465,20 @@
           "updatedAt": "2026-10-26T12:59:08.913Z"
         },
         {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "11 °C",
+              "detail": "heute 7 bis 12 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-26T15:21:46.969Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
@@ -457,7 +504,7 @@
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/7-parlamentarischer-abend-der-ameos-gruppe-1/"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -533,7 +580,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "fr": {
       "canton": "SZ",
@@ -601,6 +648,20 @@
           "updatedAt": "2026-10-26T12:59:08.913Z"
         },
         {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Schwyz",
+              "value": "11 °C",
+              "detail": "aujourd’hui de 7 à 12 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-26T15:21:46.969Z"
+        },
+        {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
@@ -626,7 +687,7 @@
               "url": "https://www.ameos.ch/spital-einsiedeln/aktuelles/nachrichten/artikel/7-parlamentarischer-abend-der-ameos-gruppe-1/"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -698,7 +759,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     }
   }
 }

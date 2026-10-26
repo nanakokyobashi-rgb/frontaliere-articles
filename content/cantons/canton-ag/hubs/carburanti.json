@@ -4,8 +4,8 @@
   "section": "canton-ag",
   "canton": "AG",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "92fdf423a50ed81b3460ca21ece89cca8ed05b36d5954456302c3fcee391d509",
+  "updatedAt": "2026-10-26T23:12:35.898Z",
+  "contentHash": "20d97c466431f39722e11700aa8a8ff1e05ab8358f04710182ec837f4a1019ea",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Restrizioni traffico Rüeblimärt Aarau mercoledì 4 novembre 2026",
+          "url": "/articoli-argovia/ristrizioni-rueeblimart-aarau/",
+          "excerpt": "Il Rüeblimärt attira circa 35.000 visitatori; Graben, Schlossplatz e Laurenzentorgasse saranno chiusi al traffico.",
+          "date": "2026-10-26T23:06:58.843Z"
+        },
+        {
           "title": "Mellingen: preventivo 2027 con un disavanzo di 3,54 milioni",
           "url": "/articoli-argovia/mellingen-budget-2027/",
           "excerpt": "Il comune di Mellingen prevede per il 2027 un disavanzo di 3.546.810 franchi e conferma il coefficiente fiscale al 110%.",
@@ -94,12 +100,6 @@
           "url": "/articoli-argovia/sbb-chiude-reisezentrum-doettingen/",
           "excerpt": "Le SBB chiudono a Döttingen l'ultimo Reisezentrum del distretto.",
           "date": "2026-10-22T23:32:53.543Z"
-        },
-        {
-          "title": "Aarau crea un dashboard sulla mobilità condivisa",
-          "url": "/articoli-argovia/dashboard-mobilita-aarau/",
-          "excerpt": "Aarau riunisce in un dashboard circa 300 veicoli condivisi di cinque operatori: nell'ultimo anno 27.000 viaggi, il 38% in più.",
-          "date": "2026-10-21T12:23:52.110Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "en": {
       "canton": "AG",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Traffic restrictions Rüeblimärt Aarau Wednesday, November 4, 2026",
+          "url": "/en/aargau-articles/aarau-rueeblimart-restrictions/",
+          "excerpt": "Rüeblimärt attracts approximately 35.000 visitors; Graben, Schlossplatz and Laurenzentorgasse will be closed to traffic.",
+          "date": "2026-10-26T23:06:58.843Z"
+        },
+        {
           "title": "Mellingen: 2027 budget with a deficit of 3,54 million",
           "url": "/en/aargau-articles/mellingen-2027-budget-with-a-deficit-of-3-54-million/",
           "excerpt": "The municipality of Mellingen forecasts a deficit of CHF 3,546,810 for 2027 and confirms the tax coefficient at 110%.",
@@ -193,12 +199,6 @@
           "url": "/en/aargau-articles/sbb-closes-doettingen-travel-centre/",
           "excerpt": "SBB are closing the district’s last travel centre in Döttingen.",
           "date": "2026-10-22T23:32:53.543Z"
-        },
-        {
-          "title": "Aarau creates a dashboard on shared mobility",
-          "url": "/en/aargau-articles/aarau-shared-mobility-dashboard/",
-          "excerpt": "Aarau brings together around 300 shared vehicles from five operators in a dashboard: 27.000 trips in the last year, 38% more.",
-          "date": "2026-10-21T12:23:52.110Z"
         }
       ],
       "links": [
@@ -211,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "de": {
       "canton": "AG",
@@ -270,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Verkehrsbeschränkungen Rüeblimärt Aarau am Mittwoch, 4. November 2026",
+          "url": "/de/aargau-artikel/aarau-rueeblimart-einschrankungen/",
+          "excerpt": "Der Rüeblimärt zieht etwa 35.000 Besucher an; Graben, Schlossplatz und Laurenzentorgasse werden für den Verkehr gesperrt.",
+          "date": "2026-10-26T23:06:58.843Z"
+        },
+        {
           "title": "Mellingen: Kostenvoranschlag 2027 mit einem Defizit von 3,54 Mio.",
           "url": "/de/aargau-artikel/mellingen-kostenvoranschlag-2027-mit-einem-defizit-von-3-54-mio/",
           "excerpt": "Die Gemeinde Mellingen rechnet für 2027 mit einem Defizit von 3.546.810 Franken und bestätigt die Steuerquote von 110%.",
@@ -292,12 +298,6 @@
           "url": "/de/aargau-artikel/sbb-schliesst-reisezentrum-doettingen/",
           "excerpt": "Die SBB schließen in Döttingen das letzte Reisezentrum des Bezirks.",
           "date": "2026-10-22T23:32:53.543Z"
-        },
-        {
-          "title": "Aarau erstellt ein Dashboard zur geteilten Mobilität",
-          "url": "/de/aargau-artikel/aarau-dashboard-geteilte-mobilitaet/",
-          "excerpt": "Aarau fasst in einem Dashboard rund 300 gemeinsam genutzte Fahrzeuge von fünf Anbietern zusammen: Im letzten Jahr gab es 27.000 Fahrten, 38% mehr.",
-          "date": "2026-10-21T12:23:52.110Z"
         }
       ],
       "links": [
@@ -310,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "fr": {
       "canton": "AG",
@@ -369,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Restrictions de circulation du Rüeblimärt à Aarau le mercredi 4 novembre 2026",
+          "url": "/fr/articles-argovie/restrictions-rueeblimart-aarau/",
+          "excerpt": "Le Rüeblimärt attire environ 35.000 visiteurs ; Graben, Schlossplatz et Laurenzentorgasse seront fermés à la circulation.",
+          "date": "2026-10-26T23:06:58.843Z"
+        },
+        {
           "title": "Mellingen : devis 2027 avec un déficit de 3,54 millions",
           "url": "/fr/articles-argovie/mellingen-devis-2027-avec-un-deficit-de-3-54-millions/",
           "excerpt": "La commune de Mellingen prévoit pour 2027 un déficit de 3 546 810 francs et confirme le coefficient d'imposition à 110 %.",
@@ -391,12 +397,6 @@
           "url": "/fr/articles-argovie/sbb-ferme-centre-voyage-doettingen/",
           "excerpt": "Les SBB ferment à Döttingen le dernier centre de voyages du district.",
           "date": "2026-10-22T23:32:53.543Z"
-        },
-        {
-          "title": "Aarau crée un tableau de bord sur la mobilité partagée",
-          "url": "/fr/articles-argovie/aarau-tableau-mobilite-partagee/",
-          "excerpt": "Aarau regroupe dans un tableau de bord environ 300 véhicules partagés de cinq opérateurs : au cours de la dernière année, 27.000 trajets, soit 38% de plus.",
-          "date": "2026-10-21T12:23:52.110Z"
         }
       ],
       "links": [
@@ -409,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     }
   }
 }

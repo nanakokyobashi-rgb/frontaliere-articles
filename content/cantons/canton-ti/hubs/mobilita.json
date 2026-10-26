@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "d608e86ebec46a6f2d87a5d01e6f445f61c319078eb15acc5bc278e51074bbe1",
+  "updatedAt": "2026-10-26T23:12:35.898Z",
+  "contentHash": "71c2445738a5639214ef50b4e5fceb036fc3f9ce28bdd3a024e6f13a0dcd292c",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -19,7 +19,7 @@
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T11:33:49.792Z",
+      "updatedAt": "2026-10-26T17:41:28.137Z",
       "keyFacts": 0
     }
   ],
@@ -164,6 +164,11 @@
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
             {
+              "label": "Modifiche ai collegamenti TILO S20 tra Castione-Arbedo e Bellinzona nelle notti 2/3, 3/4, 4/5, 5/6, 23/24, 24/25, 25/26 e 26/27 novembre 2026.",
+              "date": "2026-10-26",
+              "url": "https://www.tilo.ch/avvisi/261026_NSIF-Castione-intervalli-notturni.html"
+            },
+            {
               "label": "Alcuni collegamenti TILO S50 sostituiti da bus tra Busto Arsizio e Malpensa Aeroporto dal 2 novembre al 4 dicembre e dal 9 all’11 dicembre 2026",
               "date": "2026-10-26",
               "url": "https://www.tilo.ch/avvisi/261026_lavori-Busto-Arsizio.html"
@@ -187,14 +192,9 @@
               "label": "Indagine sulla soddisfazione della clientela TILO. Prova a vincere un iPhone 17!",
               "date": "2026-10-05",
               "url": "https://www.tilo.ch/news/2026/indagine-soddisfazione-clienti-2026.html"
-            },
-            {
-              "label": "Collegamenti TILO S50 soppressi tra Malpensa Aeroporto T1 e T2 dal 12 al 24 ottobre 2026.",
-              "date": "2026-10-05",
-              "url": "https://www.tilo.ch/avvisi/2601005_Deviatoi-Novate.html"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -290,7 +290,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "en": {
       "canton": "TI",
@@ -432,6 +432,11 @@
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
             {
+              "label": "Modifiche ai collegamenti TILO S20 tra Castione-Arbedo e Bellinzona nelle notti 2/3, 3/4, 4/5, 5/6, 23/24, 24/25, 25/26 e 26/27 novembre 2026.",
+              "date": "2026-10-26",
+              "url": "https://www.tilo.ch/avvisi/261026_NSIF-Castione-intervalli-notturni.html"
+            },
+            {
               "label": "Alcuni collegamenti TILO S50 sostituiti da bus tra Busto Arsizio e Malpensa Aeroporto dal 2 novembre al 4 dicembre e dal 9 all’11 dicembre 2026",
               "date": "2026-10-26",
               "url": "https://www.tilo.ch/avvisi/261026_lavori-Busto-Arsizio.html"
@@ -455,14 +460,9 @@
               "label": "Indagine sulla soddisfazione della clientela TILO. Prova a vincere un iPhone 17!",
               "date": "2026-10-05",
               "url": "https://www.tilo.ch/news/2026/indagine-soddisfazione-clienti-2026.html"
-            },
-            {
-              "label": "Collegamenti TILO S50 soppressi tra Malpensa Aeroporto T1 e T2 dal 12 al 24 ottobre 2026.",
-              "date": "2026-10-05",
-              "url": "https://www.tilo.ch/avvisi/2601005_Deviatoi-Novate.html"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -557,7 +557,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "de": {
       "canton": "TI",
@@ -699,6 +699,11 @@
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
             {
+              "label": "Modifiche ai collegamenti TILO S20 tra Castione-Arbedo e Bellinzona nelle notti 2/3, 3/4, 4/5, 5/6, 23/24, 24/25, 25/26 e 26/27 novembre 2026.",
+              "date": "2026-10-26",
+              "url": "https://www.tilo.ch/avvisi/261026_NSIF-Castione-intervalli-notturni.html"
+            },
+            {
               "label": "Alcuni collegamenti TILO S50 sostituiti da bus tra Busto Arsizio e Malpensa Aeroporto dal 2 novembre al 4 dicembre e dal 9 all’11 dicembre 2026",
               "date": "2026-10-26",
               "url": "https://www.tilo.ch/avvisi/261026_lavori-Busto-Arsizio.html"
@@ -722,14 +727,9 @@
               "label": "Indagine sulla soddisfazione della clientela TILO. Prova a vincere un iPhone 17!",
               "date": "2026-10-05",
               "url": "https://www.tilo.ch/news/2026/indagine-soddisfazione-clienti-2026.html"
-            },
-            {
-              "label": "Collegamenti TILO S50 soppressi tra Malpensa Aeroporto T1 e T2 dal 12 al 24 ottobre 2026.",
-              "date": "2026-10-05",
-              "url": "https://www.tilo.ch/avvisi/2601005_Deviatoi-Novate.html"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -824,7 +824,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "fr": {
       "canton": "TI",
@@ -966,6 +966,11 @@
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
             {
+              "label": "Modifiche ai collegamenti TILO S20 tra Castione-Arbedo e Bellinzona nelle notti 2/3, 3/4, 4/5, 5/6, 23/24, 24/25, 25/26 e 26/27 novembre 2026.",
+              "date": "2026-10-26",
+              "url": "https://www.tilo.ch/avvisi/261026_NSIF-Castione-intervalli-notturni.html"
+            },
+            {
               "label": "Alcuni collegamenti TILO S50 sostituiti da bus tra Busto Arsizio e Malpensa Aeroporto dal 2 novembre al 4 dicembre e dal 9 all’11 dicembre 2026",
               "date": "2026-10-26",
               "url": "https://www.tilo.ch/avvisi/261026_lavori-Busto-Arsizio.html"
@@ -989,14 +994,9 @@
               "label": "Indagine sulla soddisfazione della clientela TILO. Prova a vincere un iPhone 17!",
               "date": "2026-10-05",
               "url": "https://www.tilo.ch/news/2026/indagine-soddisfazione-clienti-2026.html"
-            },
-            {
-              "label": "Collegamenti TILO S50 soppressi tra Malpensa Aeroporto T1 e T2 dal 12 al 24 ottobre 2026.",
-              "date": "2026-10-05",
-              "url": "https://www.tilo.ch/avvisi/2601005_Deviatoi-Novate.html"
             }
           ],
-          "updatedAt": "2026-10-26T11:33:49.792Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -1092,7 +1092,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     }
   }
 }

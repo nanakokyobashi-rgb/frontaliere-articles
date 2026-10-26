@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T16:52:39.261Z",
-  "contentHash": "c736d18deef90455b047ab65d2a4d5934036097adb433d3996c68df19478b179",
+  "updatedAt": "2026-10-26T23:12:35.898Z",
+  "contentHash": "8fd8ce40e3bd048a1cf19438d67b966036c202911cef74d9d764d4b1cb015420",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-26T05:21:20.958Z",
+      "updatedAt": "2026-10-26T13:38:17.324Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-25T19:59:33.449Z",
+      "updatedAt": "2026-10-26T17:41:28.137Z",
       "keyFacts": 0
     }
   ],
@@ -160,13 +160,18 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avvisi ufficiali",
           "description": "Ultimi comunicati di amministrazioni ed enti del cantone su questo tema, con il link alla fonte. I titoli sono nella lingua originale.",
           "items": [
+            {
+              "label": "Velovorzugsroute entlang der Bahn - öffentliche Mitwirkung startet im November",
+              "date": "2026-10-26",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/velovorzugsroute-entlang-der-bahn---oeffentliche-mitwirkung.html"
+            },
             {
               "label": "Kolumbanstrasse neu gestaltet",
               "date": "2026-10-23",
@@ -191,14 +196,9 @@
               "label": "Sonnental: Auto in Strassenlaterne geprallt",
               "date": "2026-10-12",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/sonnental--auto-in-strassenlaterne-geprallt.html"
-            },
-            {
-              "label": "Sichere und attraktive Routen für den Langsamverkehr",
-              "date": "2026-10-12",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/sichere-und-attraktive-routen-fuer-den-langsamverkehr.html"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -280,7 +280,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-26T16:52:39.261Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "en": {
       "canton": "SG",
@@ -418,13 +418,18 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Official notices",
           "description": "Latest releases on this topic from the canton’s administrations and public bodies, linked to the source. Titles are in the original wording.",
           "items": [
+            {
+              "label": "Velovorzugsroute entlang der Bahn - öffentliche Mitwirkung startet im November",
+              "date": "2026-10-26",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/velovorzugsroute-entlang-der-bahn---oeffentliche-mitwirkung.html"
+            },
             {
               "label": "Kolumbanstrasse neu gestaltet",
               "date": "2026-10-23",
@@ -449,14 +454,9 @@
               "label": "Sonnental: Auto in Strassenlaterne geprallt",
               "date": "2026-10-12",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/sonnental--auto-in-strassenlaterne-geprallt.html"
-            },
-            {
-              "label": "Sichere und attraktive Routen für den Langsamverkehr",
-              "date": "2026-10-12",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/sichere-und-attraktive-routen-fuer-den-langsamverkehr.html"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -537,7 +537,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-26T16:52:39.261Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "de": {
       "canton": "SG",
@@ -675,13 +675,18 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Amtliche Mitteilungen",
           "description": "Neueste Mitteilungen von Verwaltung und Institutionen des Kantons zu diesem Thema, mit Link zur Quelle. Die Titel stehen im Originalwortlaut.",
           "items": [
+            {
+              "label": "Velovorzugsroute entlang der Bahn - öffentliche Mitwirkung startet im November",
+              "date": "2026-10-26",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/velovorzugsroute-entlang-der-bahn---oeffentliche-mitwirkung.html"
+            },
             {
               "label": "Kolumbanstrasse neu gestaltet",
               "date": "2026-10-23",
@@ -706,14 +711,9 @@
               "label": "Sonnental: Auto in Strassenlaterne geprallt",
               "date": "2026-10-12",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/sonnental--auto-in-strassenlaterne-geprallt.html"
-            },
-            {
-              "label": "Sichere und attraktive Routen für den Langsamverkehr",
-              "date": "2026-10-12",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/sichere-und-attraktive-routen-fuer-den-langsamverkehr.html"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -794,7 +794,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-26T16:52:39.261Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "fr": {
       "canton": "SG",
@@ -932,13 +932,18 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-26T05:21:20.958Z"
+          "updatedAt": "2026-10-26T13:38:17.324Z"
         },
         {
           "id": "avvisi-ufficiali",
           "title": "Avis officiels",
           "description": "Derniers communiqués des administrations et organismes du canton sur ce thème, avec le lien vers l’origine. Les titres sont dans leur version originale.",
           "items": [
+            {
+              "label": "Velovorzugsroute entlang der Bahn - öffentliche Mitwirkung startet im November",
+              "date": "2026-10-26",
+              "url": "https://www.stadt.sg.ch/news/stsg_medienmitteilungen/2026/10/velovorzugsroute-entlang-der-bahn---oeffentliche-mitwirkung.html"
+            },
             {
               "label": "Kolumbanstrasse neu gestaltet",
               "date": "2026-10-23",
@@ -963,14 +968,9 @@
               "label": "Sonnental: Auto in Strassenlaterne geprallt",
               "date": "2026-10-12",
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/sonnental--auto-in-strassenlaterne-geprallt.html"
-            },
-            {
-              "label": "Sichere und attraktive Routen für den Langsamverkehr",
-              "date": "2026-10-12",
-              "url": "https://www.sg.ch/news/sgch_allgemein/2026/10/sichere-und-attraktive-routen-fuer-den-langsamverkehr.html"
             }
           ],
-          "updatedAt": "2026-10-25T19:59:33.449Z"
+          "updatedAt": "2026-10-26T17:41:28.137Z"
         }
       ],
       "curatedArticles": [
@@ -1052,7 +1052,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-26T16:52:39.261Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     }
   }
 }

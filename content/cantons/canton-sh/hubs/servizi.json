@@ -4,8 +4,8 @@
   "section": "canton-sh",
   "canton": "SH",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "27cadccd2101c540a5340831ea4208480e208253159d3c1aca84f9eef608484b",
+  "updatedAt": "2026-10-26T23:12:35.898Z",
+  "contentHash": "0f0076c2749da2bfa0d36d052fcbe8207cd9d7da3e5d46e929ff7382f6f4d15f",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -16,6 +16,11 @@
       "id": "aste-targhe",
       "updatedAt": "2026-10-26T12:59:08.913Z",
       "keyFacts": 1
+    },
+    {
+      "id": "meteo",
+      "updatedAt": "2026-10-26T15:21:46.969Z",
+      "keyFacts": 0
     }
   ],
   "locales": {
@@ -88,6 +93,20 @@
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://www.auktion-stva.sh.ch/de/",
           "updatedAt": "2026-10-26T12:59:08.913Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Meteo",
+          "description": "Temperatura attuale e previsione di oggi nelle città del cantone seguite dal sito.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "10 °C",
+              "detail": "oggi da 6 a 11 °C"
+            }
+          ],
+          "sourceName": "Meteo di Frontaliere Ticino",
+          "updatedAt": "2026-10-26T15:21:46.969Z"
         }
       ],
       "curatedArticles": [
@@ -155,7 +174,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "en": {
       "canton": "SH",
@@ -226,6 +245,20 @@
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://www.auktion-stva.sh.ch/de/",
           "updatedAt": "2026-10-26T12:59:08.913Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Weather",
+          "description": "Current temperature and today’s forecast in the canton’s cities covered by the site.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "10 °C",
+              "detail": "today from 6 to 11 °C"
+            }
+          ],
+          "sourceName": "Frontaliere Ticino weather",
+          "updatedAt": "2026-10-26T15:21:46.969Z"
         }
       ],
       "curatedArticles": [
@@ -289,7 +322,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "de": {
       "canton": "SH",
@@ -360,6 +393,20 @@
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://www.auktion-stva.sh.ch/de/",
           "updatedAt": "2026-10-26T12:59:08.913Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Wetter",
+          "description": "Aktuelle Temperatur und heutige Prognose in den Städten des Kantons, die die Website abdeckt.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "10 °C",
+              "detail": "heute 6 bis 11 °C"
+            }
+          ],
+          "sourceName": "Wetter von Frontaliere Ticino",
+          "updatedAt": "2026-10-26T15:21:46.969Z"
         }
       ],
       "curatedArticles": [
@@ -423,7 +470,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     },
     "fr": {
       "canton": "SH",
@@ -494,6 +541,20 @@
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://www.auktion-stva.sh.ch/de/",
           "updatedAt": "2026-10-26T12:59:08.913Z"
+        },
+        {
+          "id": "meteo",
+          "title": "Météo",
+          "description": "Température actuelle et prévision du jour dans les villes du canton suivies par le site.",
+          "items": [
+            {
+              "label": "Schaffhausen",
+              "value": "10 °C",
+              "detail": "aujourd’hui de 6 à 11 °C"
+            }
+          ],
+          "sourceName": "Météo de Frontaliere Ticino",
+          "updatedAt": "2026-10-26T15:21:46.969Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +614,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T23:12:35.898Z"
     }
   }
 }
