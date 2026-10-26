@@ -63,6 +63,18 @@
     "canton-vd::https://latele.ch/emissions/national-league-saison/lausanne-fribourg-2": {
       "section": "canton-vd",
       "ts": 1793036162027
+    },
+    "canton-vd::https://www.ledauphine.com/economie/2026/10/26/un-dechet-jete-a-morzine-a-des-chances-de-finir-dans-le-lac-comment-l-usine-de-chevilly-parvient-a-potabiliser-l-eau-du-leman": {
+      "section": "canton-vd",
+      "ts": 1793058924478
+    },
+    "canton-vd::https://www.ledauphine.com/economie/2026/10/26/deux-reunions-publiques-sur-l-evolution-du-projet-d-ecoquartier-de-la-gare": {
+      "section": "canton-vd",
+      "ts": 1793058931950
+    },
+    "canton-vd::https://www.ledauphine.com/economie/2026/10/26/halloween-vtt-bike-park-le-plein-d-activites-pendant-les-vacances-de-la-toussaint": {
+      "section": "canton-vd",
+      "ts": 1793058938737
     }
   }
 }
