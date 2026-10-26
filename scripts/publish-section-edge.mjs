@@ -133,16 +133,20 @@ export const STAGING_VERIFY_RETRY_MS = 4000;
 const sha256 = (data) => createHash('sha256').update(data).digest('hex');
 const isPlainObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
 
-/** Keep adapter/test overrides finite and ensure the verification loop runs. */
-export function normalizeStagingVerifyAttempts(value) {
+/** Keep adapter/test overrides finite and ensure bounded loops still run. */
+export function normalizeBoundedAttempts(value, fallback) {
   let numeric;
   try {
     numeric = Number(value);
   } catch {
-    return STAGING_VERIFY_ATTEMPTS;
+    return fallback;
   }
-  if (!Number.isFinite(numeric)) return STAGING_VERIFY_ATTEMPTS;
+  if (!Number.isFinite(numeric)) return fallback;
   return Math.max(1, Math.floor(numeric));
+}
+
+export function normalizeStagingVerifyAttempts(value) {
+  return normalizeBoundedAttempts(value, STAGING_VERIFY_ATTEMPTS);
 }
 
 /**
@@ -492,7 +496,7 @@ export async function releaseBootstrapLocks(
     };
   }
 
-  const maxAttempts = Math.max(1, Math.floor(Number(attempts) || 0));
+  const maxAttempts = normalizeBoundedAttempts(attempts, BOOTSTRAP_RELEASE_ATTEMPTS);
   let pending = ids;
   let failures = new Map();
   for (let attempt = 1; attempt <= maxAttempts && pending.length > 0; attempt++) {
