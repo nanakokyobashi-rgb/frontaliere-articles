@@ -217,6 +217,16 @@ export function retryAfterSeconds(value, nowMs = Date.now()) {
   return Math.max(1, Math.ceil(delayMs / 1000));
 }
 
+/** Read an optional Retry-After header without trusting an HTTP adapter. */
+export function readRetryAfterHeader(response) {
+  try {
+    const value = response?.headers?.get?.('retry-after');
+    return typeof value === 'string' ? value : null;
+  } catch {
+    return null;
+  }
+}
+
 /** The titles in request-sized groups: at most BATCH_SIZE, and a `titles` value no longer than MAX_TITLES_PARAM. */
 export function titleBatches(titles) {
   const batches = [];
@@ -287,7 +297,7 @@ export async function fetchSnapshot({
       try { json = JSON.parse(body); } catch { json = null; }
       const lagged = json?.error?.code === 'maxlag';
       if ((res.status === 429 || res.status >= 500 || lagged) && attempt < MAX_RETRIES) {
-        const retryAfter = retryAfterSeconds(res.headers?.get?.('retry-after'));
+        const retryAfter = retryAfterSeconds(readRetryAfterHeader(res));
         log(`[backfill] batch ${n}: HTTP ${res.status}${lagged ? ' maxlag' : ''}, retrying in ${retryAfter}s`);
         await sleep(retryAfter * 1000);
         continue;
