@@ -15,10 +15,10 @@ export const DEFAULT_FETCH_TIMEOUT_MS = 15_000;
 
 function bodyChunkToBytes(value) {
   if (typeof value === 'string') return new TextEncoder().encode(value);
-  if (value instanceof Uint8Array) return value;
-  if (value instanceof ArrayBuffer) return new Uint8Array(value);
+  if (value instanceof Uint8Array) return Uint8Array.from(value);
+  if (value instanceof ArrayBuffer) return Uint8Array.from(new Uint8Array(value));
   if (ArrayBuffer.isView(value)) {
-    return new Uint8Array(value.buffer, value.byteOffset, value.byteLength);
+    return Uint8Array.from(new Uint8Array(value.buffer, value.byteOffset, value.byteLength));
   }
   throw new TypeError('unsupported response body chunk');
 }

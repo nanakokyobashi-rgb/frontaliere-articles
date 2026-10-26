@@ -341,6 +341,33 @@ test('fetchWithRefTimeout conserva i risultati di tutti i body method tramite il
   }
 });
 
+test('fetchWithRefTimeout copia i chunk prima che il reader riusi il buffer', async () => {
+  const shared = new Uint8Array(5);
+  const chunks = [new TextEncoder().encode('{"a":'), new TextEncoder().encode('1}')];
+  let index = 0;
+  const reader = {
+    read() {
+      if (index >= chunks.length) return Promise.resolve({ done: true });
+      const chunk = chunks[index++];
+      shared.fill(0);
+      shared.set(chunk);
+      return Promise.resolve({ done: false, value: shared.subarray(0, chunk.byteLength) });
+    },
+    cancel() { return Promise.resolve(); },
+    releaseLock() {},
+  };
+  const response = await fetchWithRefTimeout(
+    'https://reused-buffer.invalid',
+    {},
+    100,
+    async () => ({
+      body: { getReader: () => reader },
+      json() { return new Promise(() => {}); },
+    }),
+  );
+  assert.deepEqual(await response.json(), { a: 1 });
+});
+
 test('fetchWithRefTimeout mantiene il brand della Response e accetta un fetch iniettato', async () => {
   const response = await fetchWithRefTimeout(
     'https://example.test',
