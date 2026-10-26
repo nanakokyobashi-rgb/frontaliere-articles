@@ -4,8 +4,8 @@
   "section": "canton-ti",
   "canton": "TI",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "5709b686119365743c0a1049de4951b71300505d41e6b97fa4b62bf38460e4cc",
+  "updatedAt": "2026-10-26T17:53:49.208Z",
+  "contentHash": "5c64601f238ce57a1e842bdf91dd8187d823dfa57de34db9d0db0a903bf522b5",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -200,7 +200,7 @@
         },
         {
           "label": "Farmacie di turno",
-          "url": "/farmacie-di-turno/"
+          "url": "/farmacie/"
         },
         {
           "label": "Guida ai permessi di lavoro",
@@ -211,7 +211,7 @@
           "url": "/meteo-frontalieri/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T17:53:49.208Z"
     },
     "en": {
       "canton": "TI",
@@ -384,7 +384,7 @@
         },
         {
           "label": "On-duty pharmacies",
-          "url": "/en/on-duty-pharmacies/"
+          "url": "/en/pharmacies/"
         },
         {
           "label": "Work permits guide",
@@ -395,7 +395,7 @@
           "url": "/en/commute-weather/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T17:53:49.208Z"
     },
     "de": {
       "canton": "TI",
@@ -568,7 +568,7 @@
         },
         {
           "label": "Notfallapotheken",
-          "url": "/de/notdienst-apotheken/"
+          "url": "/de/apotheken/"
         },
         {
           "label": "Ratgeber Arbeitsbewilligungen",
@@ -579,7 +579,7 @@
           "url": "/de/pendler-wetter/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T17:53:49.208Z"
     },
     "fr": {
       "canton": "TI",
@@ -749,7 +749,7 @@
         },
         {
           "label": "Pharmacies de garde",
-          "url": "/fr/pharmacies-de-garde/"
+          "url": "/fr/pharmacies/"
         },
         {
           "label": "Guide des permis de travail",
@@ -760,7 +760,7 @@
           "url": "/fr/meteo-frontaliers/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T17:53:49.208Z"
     }
   }
 }
