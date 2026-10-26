@@ -1,6 +1,34 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { cancelRewireResponseBody, getRewireUrl } from '../scripts/lib/rewire-fetch.mjs';
+import {
+  cancelRewireResponseBody,
+  getRewireUrl,
+  resolveRewireFetchTimeout,
+} from '../scripts/lib/rewire-fetch.mjs';
+
+test('resolveRewireFetchTimeout normalizza valori invalidi senza propagare errori di coercizione', () => {
+  assert.equal(resolveRewireFetchTimeout(0), 30_000);
+  assert.equal(resolveRewireFetchTimeout('120001'), 120_000);
+  assert.equal(resolveRewireFetchTimeout({ valueOf() { throw new Error('bad config'); } }), 30_000);
+  assert.equal(resolveRewireFetchTimeout(Symbol('bad config')), 30_000);
+});
+
+test('getRewireUrl legge il timeout env al momento della richiesta', async () => {
+  const previous = process.env.REWIRE_FETCH_TIMEOUT_MS;
+  process.env.REWIRE_FETCH_TIMEOUT_MS = '5';
+  try {
+    await assert.rejects(
+      getRewireUrl('https://example.invalid/runtime-env.json', {
+        retries: 1,
+        fetchImpl: () => new Promise(() => {}),
+      }),
+      (error) => error.code === 'REWIRE_FETCH_TIMEOUT' && /after 5ms/.test(error.message),
+    );
+  } finally {
+    if (previous === undefined) delete process.env.REWIRE_FETCH_TIMEOUT_MS;
+    else process.env.REWIRE_FETCH_TIMEOUT_MS = previous;
+  }
+});
 
 test('getRewireUrl abortisce una richiesta che non riceve headers entro la deadline', async () => {
   let signal;

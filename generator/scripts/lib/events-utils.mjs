@@ -718,10 +718,51 @@ export const EVENT_IMAGE_MAX_BYTES = 20 * 1024 * 1024;
 const EVENT_IMAGE_USER_AGENT = 'Mozilla/5.0 (compatible; FrontaliereTicinoBot/1.0; +https://frontaliereticino.ch)';
 const DEFAULT_EVENT_IMAGE_FETCH_TIMEOUT_MS = 30_000;
 const MAX_EVENT_IMAGE_FETCH_TIMEOUT_MS = 120_000;
-const EVENT_IMAGE_FETCH_TIMEOUT_MS = Math.min(
-  Math.max(1, Math.floor(Number(process.env.EVENT_IMAGE_FETCH_TIMEOUT_MS) || DEFAULT_EVENT_IMAGE_FETCH_TIMEOUT_MS)),
-  MAX_EVENT_IMAGE_FETCH_TIMEOUT_MS,
-);
+
+/**
+ * Resolve the image deadline when a crawl starts, rather than freezing the
+ * environment at module import. `0` is an explicit minimum (1 ms); an empty,
+ * non-numeric, or throwing coercion falls back to the safe default.
+ */
+export function resolveEventImageFetchTimeout(value = process.env.EVENT_IMAGE_FETCH_TIMEOUT_MS) {
+  if (value === undefined || value === null || value === '') {
+    return DEFAULT_EVENT_IMAGE_FETCH_TIMEOUT_MS;
+  }
+  if (typeof value === 'string' && value.trim() === '') {
+    return DEFAULT_EVENT_IMAGE_FETCH_TIMEOUT_MS;
+  }
+  let numeric;
+  try {
+    numeric = Number(value);
+  } catch {
+    return DEFAULT_EVENT_IMAGE_FETCH_TIMEOUT_MS;
+  }
+  if (!Number.isFinite(numeric)) return DEFAULT_EVENT_IMAGE_FETCH_TIMEOUT_MS;
+  return Math.min(Math.max(1, Math.floor(numeric)), MAX_EVENT_IMAGE_FETCH_TIMEOUT_MS);
+}
+
+// Compatibility snapshot for code that imports the old constant. The request
+// helper below resolves the current env again for every image.
+export const EVENT_IMAGE_FETCH_TIMEOUT_MS = resolveEventImageFetchTimeout();
+
+/**
+ * Fetch an event image with one signal that remains attached after headers
+ * arrive. `AbortSignal.timeout()` is deliberately passed to fetch rather than
+ * racing only the fetch promise: undici propagates that abort to a body reader
+ * that stalls after the response headers.
+ */
+export async function fetchEventImageWithRefTimeout(
+  sourceUrl,
+  { fetchImpl = globalThis.fetch, timeoutMs } = {},
+) {
+  const effectiveTimeoutMs = resolveEventImageFetchTimeout(
+    timeoutMs === undefined ? process.env.EVENT_IMAGE_FETCH_TIMEOUT_MS : timeoutMs,
+  );
+  return fetchImpl(sourceUrl, {
+    headers: { 'User-Agent': EVENT_IMAGE_USER_AGENT },
+    signal: AbortSignal.timeout(effectiveTimeoutMs),
+  });
+}
 
 // Re-encode before storing: the source sites serve print-resolution originals
 // (measured 2026-08-20 over the whole folder: 4'089 jpg/png averaging 936-1'226 KB,
@@ -927,10 +968,7 @@ export async function mirrorEventImage(sourceUrl, stableId) {
   if (existingMatch) return `/images/events/${path.basename(existingMatch)}`;
 
   try {
-    const res = await fetch(sourceUrl, {
-      headers: { 'User-Agent': EVENT_IMAGE_USER_AGENT },
-      signal: AbortSignal.timeout(EVENT_IMAGE_FETCH_TIMEOUT_MS),
-    });
+    const res = await fetchEventImageWithRefTimeout(sourceUrl);
     if (!res.ok) {
       await cancelEventImageResponse(res);
       return null;

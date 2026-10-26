@@ -17,15 +17,29 @@ const DEFAULT_REWIRE_FETCH_TIMEOUT_MS = 30_000;
 const MAX_REWIRE_FETCH_TIMEOUT_MS = 120_000;
 const REWIRE_RESPONSE_CANCEL_TIMEOUT_MS = 1_000;
 
-function boundedTimeoutMs(value) {
-  const numeric = Number(value);
+/**
+ * Resolve the timeout at call time, not only while this module is imported.
+ * Workflows load Remote Config after importing the helper, and test runners
+ * also change the env between cases. A hostile valueOf/toString must not turn
+ * configuration into an uncaught exception on the network path.
+ */
+export function resolveRewireFetchTimeout(value = process.env.REWIRE_FETCH_TIMEOUT_MS) {
+  if (value === undefined || value === null || value === '') {
+    return DEFAULT_REWIRE_FETCH_TIMEOUT_MS;
+  }
+  let numeric;
+  try {
+    numeric = Number(value);
+  } catch {
+    return DEFAULT_REWIRE_FETCH_TIMEOUT_MS;
+  }
   if (!Number.isFinite(numeric) || numeric <= 0) return DEFAULT_REWIRE_FETCH_TIMEOUT_MS;
   return Math.min(Math.max(1, Math.floor(numeric)), MAX_REWIRE_FETCH_TIMEOUT_MS);
 }
 
-export const REWIRE_FETCH_TIMEOUT_MS = boundedTimeoutMs(
-  process.env.REWIRE_FETCH_TIMEOUT_MS || DEFAULT_REWIRE_FETCH_TIMEOUT_MS,
-);
+// Kept as a compatibility snapshot for callers that import the old constant.
+// getRewireUrl resolves the environment again for every request below.
+export const REWIRE_FETCH_TIMEOUT_MS = resolveRewireFetchTimeout();
 
 /**
  * Keep response cleanup bounded and independent from the fetch verdict. An
@@ -127,13 +141,15 @@ export async function getRewireUrl(
     retries = 4,
     headers = REWIRE_FETCH_HEADERS,
     fetchImpl = globalThis.fetch,
-    timeoutMs = REWIRE_FETCH_TIMEOUT_MS,
+    timeoutMs,
   } = {},
 ) {
   let lastErr;
   for (let i = 1; i <= retries; i++) {
     try {
-      const effectiveTimeoutMs = boundedTimeoutMs(timeoutMs);
+      const effectiveTimeoutMs = resolveRewireFetchTimeout(
+        timeoutMs === undefined ? process.env.REWIRE_FETCH_TIMEOUT_MS : timeoutMs,
+      );
       const controller = new AbortController();
       let timedOut = false;
       let cancelResponse = false;
