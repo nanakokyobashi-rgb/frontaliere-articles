@@ -1290,8 +1290,16 @@ jobs:
             lastRev=""
           fi
           if [ -n "$lastRev" ] && [ "$lastRev" != "$HEAD_SHA" ]; then
-            delta_code=$(timeout --kill-after=1s 60s gh api "repos/$REPO/compare/$lastRev...$HEAD_SHA" --jq '.files[] | .filename, (.previous_filename // empty)' 2>/dev/null \
-              | grep -Fxf <(echo "$code_files") || true)
+            delta_files=''
+            if delta_files=$(timeout --kill-after=1s 60s gh api "repos/$REPO/compare/$lastRev...$HEAD_SHA" --jq '.files[] | .filename, (.previous_filename // empty)' 2>/dev/null); then
+              # Il filtro puo' non trovare file, ma non deve poter inghiottire
+              # il codice di uscita del compare bounded: un timeout non e'
+              # prova di un delta parziale e forza la review piena.
+              delta_code=$(printf '%s\n' "$delta_files" | grep -Fxf <(echo "$code_files") || true)
+            else
+              delta_code=''
+              echo "::warning::Compare illeggibile o timeout → delta non calcolabile, review piena."
+            fi
             if [ -n "$delta_code" ]; then
               echo "incremental_base=$lastRev" >> "$GITHUB_OUTPUT"
               echo "Re-review incrementale: solo il delta dei file PR da $lastRev:"; echo "$delta_code"

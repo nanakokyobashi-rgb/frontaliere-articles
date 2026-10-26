@@ -26,4 +26,25 @@ test('le letture GitHub dei workflow CI hanno un limite di 60 secondi', () => {
     /(?:=\(gh api\b|if ! gh api\b|^\s*gh api\b)/m,
     'nessuna chiamata shell deve bypassare il timeout',
   );
+  const testsWorkflow = readFileSync(path.join(ROOT, '.github/workflows/tests.yml'), 'utf8');
+  assert.match(
+    testsWorkflow,
+    /if delta_files=\$\(timeout --kill-after=1s 60s gh api "repos\/\$REPO\/compare\/\$lastRev\.\.\.\$HEAD_SHA"[^\n]*\); then/u,
+    'il compare incrementale deve catturare lo status del timeout',
+  );
+  assert.match(
+    testsWorkflow,
+    /delta_code=\$\(printf '%s\\n' "\$delta_files" \| grep -Fxf <\(echo "\$code_files"\) \|\| true\)/u,
+    'il filtro deve applicarsi solo al payload gia\u0027 verificato',
+  );
+  assert.match(
+    testsWorkflow,
+    /else\n\s+delta_code=''\n\s+echo "::warning::Compare illeggibile o timeout → delta non calcolabile, review piena\."/u,
+    'un compare non leggibile deve forzare la review piena',
+  );
+  assert.doesNotMatch(
+    testsWorkflow,
+    /delta_code=\$\(timeout --kill-after=1s 60s gh api[\s\S]*?\|\s*grep[\s\S]*?\|\| true\)/u,
+    'un timeout del compare non deve essere inghiottito dalla pipeline di filtro',
+  );
 });
