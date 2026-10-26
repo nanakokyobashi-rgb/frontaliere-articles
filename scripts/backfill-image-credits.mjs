@@ -94,6 +94,7 @@ import {
   normaliseLicenceUrl,
   validateImageCreditRecord,
 } from '../engine/shared/imageCredits.mjs';
+import { parseStrictRetryAfterValue } from '../generator/scripts/lib/retry-after.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -211,12 +212,9 @@ export function hasRedactedAddress(value) {
  * @param {number} [nowMs]
  */
 export function retryAfterSeconds(value, nowMs = Date.now()) {
-  const raw = String(value ?? '').trim();
-  let seconds = Number.NaN;
-  if (/^\d+$/.test(raw)) seconds = Number(raw);
-  else if (raw) seconds = (Date.parse(raw) - nowMs) / 1000;
-  if (!Number.isFinite(seconds)) seconds = 5;
-  return Math.min(300, Math.max(1, Math.ceil(seconds)));
+  const delayMs = parseStrictRetryAfterValue(value, nowMs, 300 * 1000);
+  if (delayMs == null) return 5;
+  return Math.max(1, Math.ceil(delayMs / 1000));
 }
 
 /** The titles in request-sized groups: at most BATCH_SIZE, and a `titles` value no longer than MAX_TITLES_PARAM. */

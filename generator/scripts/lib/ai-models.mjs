@@ -6,6 +6,7 @@ import { CODEX_FALLBACK_MODEL } from '../../../scripts/ci/claude-codex-fallback.
 import { exitAfterDrain } from './drain-stdio.mjs';
 import { GH_MODELS_URL } from './gh-models-endpoint.mjs';
 import { fetchWithRefTimeout, releaseFetchWithRefTimeout } from './fetch-with-ref-timeout.mjs';
+import { parseStrictRetryAfterValue as parseSharedRetryAfterValue } from './retry-after.mjs';
 
 /**
  * Centralized AI Model Service — v15 (free-only, 115+ models, 14 providers)
@@ -2846,7 +2847,6 @@ export function _cooldownSeverityDurations() {
 // drift apart: the 429 backoff in _callOpenAICompatible, and _hardCallCapMs
 // below, which sizes the per-call hard cap off this same worst-case wait.
 const MAX_RETRY_AFTER_MS = 2 * 60 * 1000;
-const HTTP_DATE_RE = /^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} GMT$/;
 
 /**
  * Parse one Retry-After value without letting Date.parse accept unrelated
@@ -2858,26 +2858,7 @@ const HTTP_DATE_RE = /^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (?:Jan|Feb|Mar|Apr
  * @returns {number}
  */
 export function parseStrictRetryAfterValue(raw, nowMs = Date.now()) {
-  if (typeof raw !== 'string' || !Number.isFinite(nowMs)) return 0;
-  const value = raw.trim();
-  if (!value) return 0;
-
-  let delayMs;
-  if (/^\d+$/.test(value)) {
-    const seconds = Number(value);
-    if (!Number.isSafeInteger(seconds)) return 0;
-    if (seconds > MAX_RETRY_AFTER_MS / 1000) return MAX_RETRY_AFTER_MS;
-    delayMs = seconds * 1000;
-  } else {
-    if (!HTTP_DATE_RE.test(value)) return 0;
-    const retryAtMs = Date.parse(value);
-    // Require the canonical IMF-fixdate spelling so Date.parse cannot turn a
-    // locale date or an invalid weekday into a valid retry delay.
-    if (!Number.isFinite(retryAtMs) || new Date(retryAtMs).toUTCString() !== value) return 0;
-    delayMs = retryAtMs - nowMs;
-  }
-  if (!Number.isFinite(delayMs)) return 0;
-  return Math.min(MAX_RETRY_AFTER_MS, Math.max(0, Math.ceil(delayMs)));
+  return parseSharedRetryAfterValue(raw, nowMs, MAX_RETRY_AFTER_MS) ?? 0;
 }
 
 /**

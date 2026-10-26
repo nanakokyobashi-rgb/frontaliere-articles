@@ -489,6 +489,8 @@ test('--fetch: Retry-After as seconds or as an HTTP date, never NaN, never a sta
   assert.equal(retryAfterSeconds('Mon, 05 Oct 2026 08:00:30 GMT', now), 30, 'an HTTP date is a moment, not a number');
   assert.equal(retryAfterSeconds('Mon, 05 Oct 2026 07:00:00 GMT', now), 1, 'a date already past still pauses');
   assert.equal(retryAfterSeconds('soon', now), 5);
+  assert.equal(retryAfterSeconds('10/05/2026', now), 5, 'non-IMF dates use the local fallback');
+  assert.equal(retryAfterSeconds('9007199254740992', now), 5, 'unsafe delta-seconds use the local fallback');
   assert.equal(retryAfterSeconds(null, now), 5);
   assert.equal(retryAfterSeconds('86400', now), 300, 'capped: a far date cannot stall the run');
 });
