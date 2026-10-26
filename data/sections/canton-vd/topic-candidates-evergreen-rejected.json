@@ -55,6 +55,14 @@
     "canton-vd::https://www.ledauphine.com/economie/2026/10/26/l-horlogerie-repart-avec-une-hausse-generale-des-exportations": {
       "section": "canton-vd",
       "ts": 1793035329858
+    },
+    "canton-vd::https://www.ledauphine.com/sante/2026/10/25/deux-journees-d-immersion-pour-vanter-les-bienfaits-du-thermalisme": {
+      "section": "canton-vd",
+      "ts": 1793036154953
+    },
+    "canton-vd::https://latele.ch/emissions/national-league-saison/lausanne-fribourg-2": {
+      "section": "canton-vd",
+      "ts": 1793036162027
     }
   }
 }

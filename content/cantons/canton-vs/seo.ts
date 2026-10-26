@@ -426,6 +426,40 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-salario-minimo-valese-voto': {
+    title: 'Destra e economia vallesana contro salario minimo a CHF 22',
+    description: 'La destra e l\'economia vallesana dicono no a CHF 22 l\'ora. Il voto popolare è previsto per il 29 novembre. Il Gran Consiglio ha respinto il testo: 93',
+    keywords: 'frontalieri, ticino, svizzera, italia, destra, economia, vallesana, contro',
+    ogTitle: 'Salario minimo Vallese: voto 29 novembre',
+    ogDescription: 'La destra e l\'economia vallesana dicono no a CHF 22 l\'ora.',
+    canonicalPath: '/articoli-vallese/salario-minimo-valese-voto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Destra e economia vallesana contro salario minimo a CHF 22",
+      "description": "La destra e l'economia vallesana dicono no a CHF 22 l'ora. Il voto popolare è previsto per il 29 novembre. Il Gran Consiglio ha respinto il testo: 93",
+      "image": {
+        "@type": "ImageObject",
+        "url": `${BASE_URL}/images/blog/article-salario-minimo-valese-voto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Contesto lavorativo in Vallese in relazione al dibattito sul salario minimo."
+      },
+      "datePublished": "2026-10-26T17:48:49+00:00",
+      "dateModified": "2026-10-26T17:48:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-vallese/salario-minimo-valese-voto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

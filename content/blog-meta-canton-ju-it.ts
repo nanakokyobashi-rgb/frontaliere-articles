@@ -21,6 +21,9 @@ const blogMetaCantonJuIt: Record<string, string> = {
     'blog.article.giura-aumento-sussidi-famiglie.title': 'Giura aumenta sussidi per famiglie a basso reddito',
     'blog.article.giura-aumento-sussidi-famiglie.excerpt': 'Il massimale del supplemento passa da 300 a 330 CHF al mese per genitore per famiglie con RDU inferiore a 18\'000 CHF, decorrenza 2027.',
     'blog.article.giura-aumento-sussidi-famiglie.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.governo-giurassiano-nomine-2027.title': 'Governo giurassiano nomina due figure per il 2027',
+    'blog.article.governo-giurassiano-nomine-2027.excerpt': 'Sandrine Crevoisier guiderà il nuovo Servizio penitenziario.',
+    'blog.article.governo-giurassiano-nomine-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonJuIt;

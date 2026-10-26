@@ -36,6 +36,9 @@ const blogMetaCantonVsDe: Record<string, string> = {
     'blog.article.salute-vallese-2026-ovs.title': 'OVS-Bericht: 83% Walliser fit, 13% adipös, 44% Psychorisiken',
     'blog.article.salute-vallese-2026-ovs.excerpt': '83% der erwachsenen Walliser fühlen sich 2022 bei guter Gesundheit Lebenserwartung: 85,9 Jahre für Frauen, 82,4 für Männer Die über 65-Jährigen machen 2024 21%',
     'blog.article.salute-vallese-2026-ovs.imageAlt': 'Luftbild des Rhonetals im Wallis mit Weinbergen und Alpengipfeln',
+    'blog.article.salario-minimo-valese-voto.title': 'Rechte und Walliser Wirtschaft gegen einen Mindestlohn von CHF 22',
+    'blog.article.salario-minimo-valese-voto.excerpt': 'Die Rechte und die Walliser Wirtschaft sagen Nein zu CHF 22 pro Stunde.',
+    'blog.article.salario-minimo-valese-voto.imageAlt': 'Arbeitskontext im Wallis bezüglich der Mindestlohndebatte.',
 };
 
 export default blogMetaCantonVsDe;

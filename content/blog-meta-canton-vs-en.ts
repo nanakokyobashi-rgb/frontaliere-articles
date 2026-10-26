@@ -36,6 +36,9 @@ const blogMetaCantonVsEn: Record<string, string> = {
     'blog.article.salute-vallese-2026-ovs.title': 'OVS report: 83% of Valais residents in good health',
     'blog.article.salute-vallese-2026-ovs.excerpt': '83% of Valais adults feel in good health in 2022 Life expectancy: 85,9 years for women, 82,4 for men People over 65 account for 21% of the population in 2024',
     'blog.article.salute-vallese-2026-ovs.imageAlt': 'Aerial view of Rhone valley in Valais with vineyards and alpine peaks',
+    'blog.article.salario-minimo-valese-voto.title': 'Valais right and business oppose a minimum wage of CHF 22',
+    'blog.article.salario-minimo-valese-voto.excerpt': 'The right wing and the Valais economy say no to CHF 22 an hour.',
+    'blog.article.salario-minimo-valese-voto.imageAlt': 'Valais working context related to the minimum wage debate.',
 };
 
 export default blogMetaCantonVsEn;

@@ -505,10 +505,10 @@
         "fr": "Pharmacies de garde"
       },
       "paths": {
-        "it": "/farmacie-di-turno/",
-        "en": "/en/on-duty-pharmacies/",
-        "de": "/de/notdienst-apotheken/",
-        "fr": "/fr/pharmacies-de-garde/"
+        "it": "/farmacie/",
+        "en": "/en/pharmacies/",
+        "de": "/de/apotheken/",
+        "fr": "/fr/pharmacies/"
       }
     },
     {

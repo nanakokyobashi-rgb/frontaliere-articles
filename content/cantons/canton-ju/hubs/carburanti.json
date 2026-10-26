@@ -4,8 +4,8 @@
   "section": "canton-ju",
   "canton": "JU",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "a9fe4bf540376ead8cf301f99d9476fabf6aaacc70635a5c005216106ee6768e",
+  "updatedAt": "2026-10-26T18:10:53.698Z",
+  "contentHash": "c11976c3b64d917d87ff4ff9029c8b28c52f0d4758047cf216bd0fbb6459492c",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Governo giurassiano nomina due figure per il 2027",
+          "url": "/articoli-giura/governo-giurassiano-nomine-2027/",
+          "excerpt": "Sandrine Crevoisier guiderà il nuovo Servizio penitenziario.",
+          "date": "2026-10-26T18:04:54.331Z"
+        },
+        {
           "title": "Giura aumenta sussidi per famiglie a basso reddito",
           "url": "/articoli-giura/giura-aumento-sussidi-famiglie/",
           "excerpt": "Il massimale del supplemento passa da 300 a 330 CHF al mese per genitore per famiglie con RDU inferiore a 18'000 CHF, decorrenza 2027.",
@@ -94,12 +100,6 @@
           "url": "/articoli-giura/casse-pensioni-migliorano-terzo-trimestre/",
           "excerpt": "L'indice WTW sale da 130,2% a 131,9% Il tasso di attualizzazione arriva all'1,65% Gli impegni pensionistici scendono del 6,5% Gli attivi dei piani calano",
           "date": "2026-10-08T15:48:11.331Z"
-        },
-        {
-          "title": "Giura, fondo clima da 6,7 milioni annui dal 2028",
-          "url": "/articoli-giura/fondo-clima-giura-2028/",
-          "excerpt": "CHF 6,7 milioni annui dal 2028",
-          "date": "2026-10-08T10:13:59.862Z"
         }
       ],
       "links": [
@@ -112,7 +112,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T18:10:53.698Z"
     },
     "en": {
       "canton": "JU",
@@ -171,6 +171,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Jura government appoints two figures for 2027",
+          "url": "/en/jura-articles/jura-government-appointments-2027/",
+          "excerpt": "Sandrine Crevoisier will lead the new Penitentiary Service.",
+          "date": "2026-10-26T18:04:54.331Z"
+        },
+        {
           "title": "Jura increases subsidies for low-income families",
           "url": "/en/jura-articles/jura-subsidy-increase-low-income/",
           "excerpt": "The maximum supplement increases from 300 to 330 CHF per month per parent for families with RDU below 18'000 CHF, effective 2027.",
@@ -193,11 +199,6 @@
           "url": "/en/jura-articles/swiss-pension-funds-improve-q3-2026/",
           "excerpt": "WTW index rises from 130.2% to 131.9% The discount rate reaches 1.65% Pension commitments fall by 6.5% Plan assets fall by 0.6% Who → Willis Towers Watson (WTW)",
           "date": "2026-10-08T15:48:11.331Z"
-        },
-        {
-          "title": "Jura, climate fund of 6,7 million annually from 2028",
-          "url": "/en/jura-articles/jura-climate-fund-2028/",
-          "date": "2026-10-08T10:13:59.862Z"
         }
       ],
       "links": [
@@ -210,7 +211,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T18:10:53.698Z"
     },
     "de": {
       "canton": "JU",
@@ -269,6 +270,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Die Regierung von Jura ernennt für 2027 zweistellige Personen",
+          "url": "/de/jura-artikel/jurakanton-nominationen-2027/",
+          "excerpt": "Sandrine Crevoisier wird den neuen Gefängnisdienst leiten.",
+          "date": "2026-10-26T18:04:54.331Z"
+        },
+        {
           "title": "Jura erhöht die Zuschüsse für Familien mit niedrigem Einkommen",
           "url": "/de/jura-artikel/jura-subvention-erhoehung-familien/",
           "excerpt": "Der Höchstbetrag des Zuschlags steigt für Familien mit einem RDU unter 18'000 CHF ab 2027 von 300 auf 330 CHF pro Monat und Elternteil.",
@@ -291,11 +298,6 @@
           "url": "/de/jura-artikel/schweizer-pensionskassen-verbessern-q3-2026/",
           "excerpt": "Der WTW-Index steigt von 130,2% auf 131,9% Der Abzinsungssatz beträgt bis zu 1,65% Pensionsverpflichtungen sinken um 6,5% Die Aktiva der Stockwerke sinken um",
           "date": "2026-10-08T15:48:11.331Z"
-        },
-        {
-          "title": "Jura, Klimafonds von 6,7 Millionen jährlich ab 2028",
-          "url": "/de/jura-artikel/jura-klimafonds-2028/",
-          "date": "2026-10-08T10:13:59.862Z"
         }
       ],
       "links": [
@@ -308,7 +310,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T18:10:53.698Z"
     },
     "fr": {
       "canton": "JU",
@@ -367,6 +369,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Le gouvernement Jura nomme deux chiffres pour 2027",
+          "url": "/fr/articles-jura/gouvernement-jurassien-nominations-2027/",
+          "excerpt": "Sandrine Crevoisier dirigera le nouveau Service pénitentiaire.",
+          "date": "2026-10-26T18:04:54.331Z"
+        },
+        {
           "title": "Le Jura augmente les aides pour les familles à faible revenu",
           "url": "/fr/articles-jura/jura-augmentation-subventions-familles/",
           "excerpt": "Le plafond du supplément passe de 300 à 330 CHF par mois et par parent pour les familles dont le RDU est inférieur à 18'000 CHF, à compter de 2027.",
@@ -389,12 +397,6 @@
           "url": "/fr/articles-jura/les-caisses-de-pension-suisses-ameliorent-q3-2026/",
           "excerpt": "L'indice WTW passe de 130,2 % à 131,9 % Le taux d'actualisation atteint 1,65 % Les engagements de retraite baissent de 6,5 % Les actifs des plans baissent",
           "date": "2026-10-08T15:48:11.331Z"
-        },
-        {
-          "title": "Jura, fonds climatique de 6,7 millions par an dès 2028",
-          "url": "/fr/articles-jura/fonds-climat-jura-2028/",
-          "excerpt": "CHF 6,7 millions par an dès 2028",
-          "date": "2026-10-08T10:13:59.862Z"
         }
       ],
       "links": [
@@ -407,7 +409,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T18:10:53.698Z"
     }
   }
 }

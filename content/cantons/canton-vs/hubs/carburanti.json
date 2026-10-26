@@ -4,8 +4,8 @@
   "section": "canton-vs",
   "canton": "VS",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T17:18:45.341Z",
-  "contentHash": "d7fbfeab12b95c4a2d476142d368c7d904f4de04c60bf59c83adf7f415efd4d2",
+  "updatedAt": "2026-10-26T17:57:05.656Z",
+  "contentHash": "07ec7bfaad54defa618386aa72c26055c19fc6965ca53effd954337f3cc2d543",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -72,6 +72,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Destra e economia vallesana contro salario minimo a CHF 22",
+          "url": "/articoli-vallese/salario-minimo-valese-voto/",
+          "excerpt": "La destra e l'economia vallesana dicono no a CHF 22 l'ora.",
+          "date": "2026-10-26T17:48:49.413Z"
+        },
+        {
           "title": "Rapporto OVS: 83% vallesani in buona salute, obesità al 13% e rischi psicosociali al 44%",
           "url": "/articoli-vallese/salute-vallese-2026-ovs/",
           "excerpt": "83% degli adulti vallesani si sente in buona salute nel 2022 Speranza di vita: 85,9 anni per le donne, 82,4 per gli uomini Gli over 65 sono il 21%",
@@ -94,12 +100,6 @@
           "url": "/articoli-vallese/valais-salario-minimo-2026/",
           "excerpt": "15'000 salariati a tempo pieno non vivono del salario Il voto sul salario minimo è fissato al 29 novembre La proposta prevede CHF 22 lordi l'ora Il Parlamento",
           "date": "2026-10-17T01:13:51.089Z"
-        },
-        {
-          "title": "Fully: oltre 5,5 km di strada diventano ciclabili",
-          "url": "/articoli-vallese/fully-strada-ciclabile/",
-          "excerpt": "Il Comune di Fully amplia la mobilità dolce: la strada a nord del canale diventa rue cyclable e i ciclisti hanno la priorità a 12 intersezioni.",
-          "date": "2026-10-17T01:00:16.066Z"
         }
       ],
       "links": [
@@ -128,7 +128,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T17:57:05.656Z"
     },
     "en": {
       "canton": "VS",
@@ -187,6 +187,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Valais right and business oppose a minimum wage of CHF 22",
+          "url": "/en/valais-articles/valais-minimum-wage-vote/",
+          "excerpt": "The right wing and the Valais economy say no to CHF 22 an hour.",
+          "date": "2026-10-26T17:48:49.413Z"
+        },
+        {
           "title": "OVS report: 83% of Valais residents in good health",
           "url": "/en/valais-articles/valais-health-2026-ovs/",
           "excerpt": "83% of Valais adults feel in good health in 2022 Life expectancy: 85,9 years for women, 82,4 for men People over 65 account for 21% of the population in 2024",
@@ -209,12 +215,6 @@
           "url": "/en/valais-articles/valais-minimum-wage-2026/",
           "excerpt": "15'000 full-time employees cannot make a living from their wages The vote on the minimum wage is set for November 29 The proposal provides for a gross hourly",
           "date": "2026-10-17T01:13:51.089Z"
-        },
-        {
-          "title": "Fully: over 5,5 km of road become cycle paths",
-          "url": "/en/valais-articles/fully-cycle-street/",
-          "excerpt": "The Municipality of Fully expands active mobility: the road north of the canal becomes a bicycle street, and cyclists have priority at 12 intersections.",
-          "date": "2026-10-17T01:00:16.066Z"
         }
       ],
       "links": [
@@ -243,7 +243,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T17:57:05.656Z"
     },
     "de": {
       "canton": "VS",
@@ -302,6 +302,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Rechte und Walliser Wirtschaft gegen einen Mindestlohn von CHF 22",
+          "url": "/de/wallis-artikel/wallis-mindestlohn-abstimmung/",
+          "excerpt": "Die Rechte und die Walliser Wirtschaft sagen Nein zu CHF 22 pro Stunde.",
+          "date": "2026-10-26T17:48:49.413Z"
+        },
+        {
           "title": "OVS-Bericht: 83% Walliser fit, 13% adipös, 44% Psychorisiken",
           "url": "/de/wallis-artikel/wallis-gesundheit-2026-ovs/",
           "excerpt": "83% der erwachsenen Walliser fühlen sich 2022 bei guter Gesundheit Lebenserwartung: 85,9 Jahre für Frauen, 82,4 für Männer Die über 65-Jährigen machen 2024 21%",
@@ -324,12 +330,6 @@
           "url": "/de/wallis-artikel/wallis-mindestlohn-2026/",
           "excerpt": "15'000 Vollzeitbeschäftigte leben nicht vom Lohn Die Abstimmung über den Mindestlohn ist auf den 29.",
           "date": "2026-10-17T01:13:51.089Z"
-        },
-        {
-          "title": "Fully: Mehr als 5,5 km Straße werden zu Fahrradstraßen",
-          "url": "/de/wallis-artikel/fully-fahrradstrasse/",
-          "excerpt": "Die Gemeinde Fully baut die sanfte Mobilität aus: Die Straße nördlich des Kanals wird zur Fahrradstraße, und Radfahrende haben an 12 Kreuzungen Vorrang.",
-          "date": "2026-10-17T01:00:16.066Z"
         }
       ],
       "links": [
@@ -354,7 +354,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T17:57:05.656Z"
     },
     "fr": {
       "canton": "VS",
@@ -413,6 +413,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "La droite et l’économie valaisanne contre un salaire minimum de CHF 22",
+          "url": "/fr/articles-valais/salaire-minimum-valais-vote/",
+          "excerpt": "La droite et l’économie valaisanne disent non à CHF 22 de l’heure.",
+          "date": "2026-10-26T17:48:49.413Z"
+        },
+        {
           "title": "Rapport OVS : 83% des Valaisans en bonne santé, 13% obèses",
           "url": "/fr/articles-valais/valais-sante-2026-ovs/",
           "excerpt": "83% des adultes valaisans se sentent en bonne santé en 2022 Espérance de vie : 85,9 ans pour les femmes, 82,4 pour les hommes Les plus de 65 ans représentent",
@@ -435,12 +441,6 @@
           "url": "/fr/articles-valais/valais-salaire-minimum-2026/",
           "excerpt": "15'000 salariés à temps plein ne vivent pas de leur salaire Le vote sur le salaire minimum est fixé au 29 novembre La proposition prévoit CHF 22 bruts",
           "date": "2026-10-17T01:13:51.089Z"
-        },
-        {
-          "title": "Fully : plus de 5,5 km de route deviennent cyclables",
-          "url": "/fr/articles-valais/fully-rue-cyclable/",
-          "excerpt": "La commune de Fully étend la mobilité douce : la route au nord du canal devient une rue cyclable et les cyclistes ont la priorité à 12 intersections.",
-          "date": "2026-10-17T01:00:16.066Z"
         }
       ],
       "links": [
@@ -469,7 +469,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T17:18:45.341Z"
+      "updatedAt": "2026-10-26T17:57:05.656Z"
     }
   }
 }
