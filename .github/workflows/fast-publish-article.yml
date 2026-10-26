@@ -905,10 +905,12 @@ jobs:
           shard="$FAST_PUBLISH_SHARD"
           push_log="$RUNNER_TEMP/article-shard-push.log"
           push_state="$RUNNER_TEMP/published-push-state.tsv"
+          skipped_paths="$RUNNER_TEMP/published-skipped-paths.tsv"
           pushed_hub_paths="$RUNNER_TEMP/pushed-hub-paths.tsv"
           pushed_hub_summary="$RUNNER_TEMP/pushed-hub-landing.json"
           : > "$push_log"
           printf 'shard\tlocale\tstatus\n' > "$push_state"
+          printf 'locale\tpath\n' > "$skipped_paths"
           : > "$pushed_hub_paths"
           exec > >(tee -a "$push_log") 2>&1
 
@@ -956,20 +958,23 @@ jobs:
               # article is unaffected»). Se il push combinato fallisce si riprova col solo
               # articolo, così una pagina hub malformata non può impedire la pubblicazione.
               locale_status="$RUNNER_TEMP/article-shard-push-$loc.status"
+              locale_skipped="$RUNNER_TEMP/article-shard-push-$loc.skipped"
               locale_outcome="$RUNNER_TEMP/article-shard-push-$loc.outcome"
-              rm -f "$locale_status" "$locale_outcome"
+              rm -f "$locale_status" "$locale_skipped" "$locale_outcome"
+              export ARTICLE_PUSH_STATUS_FILE="$locale_status"
+              export ARTICLE_PUSH_SKIPPED_PATHS_FILE="$locale_skipped"
               combined_pushed=true
-              if ! ARTICLE_PUSH_STATUS_FILE="$locale_status" bash scripts/lib/push-article-shard-incremental.sh \
+              if ! bash scripts/lib/push-article-shard-incremental.sh \
                    "$shard" "$loc" "$dist" "${paths[@]}" ${hpaths[@]+"${hpaths[@]}"}; then
                 echo "::warning::combined push failed for $shard/$loc — retrying with the article alone (the hub stays stale)"
                 combined_pushed=false
-                rm -f "$locale_status"
-                ARTICLE_PUSH_STATUS_FILE="$locale_status" bash scripts/lib/push-article-shard-incremental.sh \
+                rm -f "$locale_status" "$locale_skipped"
+                bash scripts/lib/push-article-shard-incremental.sh \
                   "$shard" "$loc" "$dist" "${paths[@]}"
               fi
               push_status="$(tr -d '\r\n' < "$locale_status")"
               case "$push_status" in
-                pushed|clean-no-op) ;;
+                pushed|clean-no-op|remote-newer) ;;
                 *)
                   echo "::error::unexpected push status for $shard/$loc: $push_status"
                   exit 1
@@ -1011,6 +1016,13 @@ jobs:
               continue
             fi
             printf '%s\t%s\t%s\n' "$shard" "$loc" "$push_status" >> "$push_state"
+            locale_skipped="$RUNNER_TEMP/article-shard-push-$loc.skipped"
+            if [ -s "$locale_skipped" ]; then
+              while IFS= read -r skipped_path; do
+                [ -n "$skipped_path" ] || continue
+                printf '%s\t%s\n' "$loc" "$skipped_path" >> "$skipped_paths"
+              done < "$locale_skipped"
+            fi
             if [ "$combined_pushed" = true ] && [ -s "$RUNNER_TEMP/hub-landing.json" ]; then
               mapfile -t hpaths < <(jq -r --arg l "$loc" '.pages[] | select(.locale==$l) | .path' "$RUNNER_TEMP/hub-landing.json")
               for hpath in "${hpaths[@]}"; do
@@ -1064,6 +1076,7 @@ jobs:
             --hub-summary "$pushed_hub_summary" \
             --dist "$dist" \
             --shard "$shard" \
+            --omit-paths "$skipped_paths" \
             --output "$RUNNER_TEMP/published-fingerprints.tsv"
 
       - name: Wait for GitHub Pages origin to serve published content

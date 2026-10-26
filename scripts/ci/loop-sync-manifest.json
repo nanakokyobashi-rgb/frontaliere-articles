@@ -5366,7 +5366,7 @@
     {
       "path": "scripts/ci/verify-served-fingerprint.mjs",
       "mode": "corpus-only",
-      "reason": "Registra l'impronta dei byte HTML del set effettivamente pushato dal fast-publish, distingue pushed e clean-no-op per shard e lingua, attende che l'origine GitHub Pages serva il contenuto dove c'e' stato un push reale e verifica l'apex dopo la purge. Il CLI usa curl come le sonde storiche, con fallback fetch solo se curl non e' disponibile; una risposta edge-blocked resta fail-closed, viene diagnosticata con body/header e non attiva la ripetizione cieca della purge. Le sonde hanno un timeout per richiesta legato al budget residuo, cosi' una risposta appesa non blocca la purge. Il sito consuma la superficie risultante e non possiede il publisher o il suo workflow; il confronto e' specifico del corpus che scrive gli shard Pages.",
+      "reason": "Registra l'impronta dei byte HTML del set effettivamente pushato dal fast-publish, distingue pushed, clean-no-op e remote-newer per shard e lingua, omette dalla verifica i path mantenuti dalla pubblicazione remota più recente, attende che l'origine GitHub Pages serva il contenuto dove c'e' stato un push reale e verifica l'apex dopo la purge. Il CLI usa curl come le sonde storiche, con fallback fetch solo se curl non e' disponibile; una risposta edge-blocked resta fail-closed, viene diagnosticata con body/header e non attiva la ripetizione cieca della purge. Le sonde hanno un timeout per richiesta legato al budget residuo, cosi' una risposta appesa non blocca la purge. Il sito consuma la superficie risultante e non possiede il publisher o il suo workflow; il confronto e' specifico del corpus che scrive gli shard Pages.",
       "baseline": {
         "site": null,
         "corpus": null,
