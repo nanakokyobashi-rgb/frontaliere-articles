@@ -864,28 +864,30 @@ test('i publisher rapidi eseguono il syntax gate con lo stesso fallback full', (
     }
   }
   const sectionSrc = fs.readFileSync(FAST_SECTION_WORKFLOW, 'utf8');
+  const sectionPreflight = fs.readFileSync(path.join(ROOT, 'scripts/ci/fast-publish-section-preflight.sh'), 'utf8');
+  const sectionContract = `${sectionSrc}\n${sectionPreflight}`;
   assert.match(
-    sectionSrc,
+    sectionContract,
     /^\s+EVENT_NAME:\s*\$\{\{\s*github\.event_name\s*\}\}/mu,
     'fast-publish-section deve esportare EVENT_NAME allo shell preflight',
   );
   assert.match(
-    sectionSrc,
+    sectionContract,
     /PREFLIGHT_BASE_REVISION=\$BEFORE/u,
     'fast-publish-section deve costruire la base reale della push anche nei replay workflow_run',
   );
   assert.doesNotMatch(
-    sectionSrc,
+    sectionContract,
     /^\s+PREFLIGHT_BASE_REVISION:/mu,
     'la base non deve essere esportata come env vuoto nei workflow_dispatch',
   );
   assert.match(
-    sectionSrc,
+    sectionContract,
     /if \[ -n "\$\{BEFORE:-\}" \][\s\S]*PREFLIGHT_BASE_REVISION=\$BEFORE/u,
     'il gate deve ricevere PREFLIGHT_BASE_REVISION solo quando BEFORE non e\' vuoto',
   );
   assert.match(
-    sectionSrc,
+    sectionContract,
     /if \[ "\$EVENT_NAME" = 'push' \] \\\n\s+&& \[\[ "\$\{BEFORE:-\}" =~/u,
     'fast-publish-section deve calcolare lo scope changed solo per una push, non per una dispatch bounded',
   );

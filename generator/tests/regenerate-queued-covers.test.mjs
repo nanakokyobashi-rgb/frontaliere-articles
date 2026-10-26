@@ -1726,7 +1726,7 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(sectionPublisher, /REF: \$\{\{ github\.ref \}\}/u);
   assert.match(sectionPublisher, /preflight_head: \$\{\{ steps\.preflight_head\.outputs\.head \}\}/u);
   assert.match(sectionPublisher, /PREFLIGHT_HEAD: \$\{\{ needs\.resolve\.outputs\.preflight_head \}\}/u);
-  assert.match(sectionPublisher, /validated_head="\$PREFLIGHT_HEAD"/u);
+  assert.match(sectionRender, /validated_head="\$PREFLIGHT_HEAD"/u);
   assert.match(
     sectionPublisher,
     /if \{ \[ "\$EVENT_NAME" = 'push' \] \\\n\s+\|\| \{ \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ "\$BOOTSTRAP" != 'true' \]; \}; \} \\\n\s+&& \[ "\$REF" = 'refs\/heads\/main' \] \\\n\s+&& \[ -z "\$\{SOURCE_COMMIT:-\}" \]; then/u,

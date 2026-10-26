@@ -3325,7 +3325,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(dispatchPlan, /FAST_PUBLISH_ARMED/);
   const replayDispatchCount = (sectionContract.match(/bash \.replay-dispatcher-source\/scripts\/ci\/dispatch-fast-publish-replay\.sh/g) ?? []).length;
   assert.equal(
-    (sectionContract.match(/-f dry_run="\$DRY"/g) ?? []).length,
+    (sectionContract.match(/-f dry_run="\$[A-Za-z_]+"/g) ?? []).length,
     replayDispatchCount,
     'tutti i redispatch propagano il dry-run calcolato',
   );

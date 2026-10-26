@@ -857,13 +857,21 @@ test('i publisher rapidi usano la stessa chiusura delle dipendenze del gate di p
   for (const file of ['fast-publish-article.yml', 'fast-publish-section.yml']) {
     const workflow = readFileSync(path.join(ROOT, '.github/workflows', file), 'utf8');
     const start = workflow.indexOf('gate_input_paths=(');
-    const end = workflow.indexOf('\n          )', start);
-    const paths = [...workflow.slice(start, end).matchAll(/^\s+([^\s()]+)$/gm)]
+    const preflight = file === 'fast-publish-section.yml'
+      ? readFileSync(path.join(ROOT, 'scripts/ci/fast-publish-section-preflight.sh'), 'utf8')
+      : '';
+    const pathSource = file === 'fast-publish-section.yml' ? preflight : workflow;
+    const pathStart = pathSource.indexOf('gate_input_paths=');
+    const pathEndMarker = file === 'fast-publish-section.yml' ? '\n  )' : '\n          )';
+    const end = pathSource.indexOf(pathEndMarker, pathStart);
+    const paths = [...pathSource.slice(pathStart, end).matchAll(/^\s+([^\s()]+)$/gm)]
       .map((match) => match[1]);
     const gateEndMarker = file === 'fast-publish-section.yml'
       ? 'bash scripts/ci/fast-publish-section-preflight.sh'
       : 'node scripts/ci/check-blog-body-links.mjs';
-    const gate = workflow.slice(start, workflow.indexOf(gateEndMarker, start));
+    const gate = file === 'fast-publish-section.yml'
+      ? preflight
+      : workflow.slice(start, workflow.indexOf(gateEndMarker, start));
     const selfPath = `.github/workflows/${file}`;
     assert.ok(paths.includes(selfPath), `${file} deve riattivare il gate quando cambia`);
     assert.deepEqual(
