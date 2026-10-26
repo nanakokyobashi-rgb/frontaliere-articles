@@ -816,6 +816,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ristrizioni-rueeblimart-aarau': {
+    title: 'Restrizioni traffico Rüeblimärt Aarau mercoledì 4 novembre 2026',
+    description: 'Informazioni sulle chiusure stradali a Graben e Schlossplatz durante il Rüeblimärt ad Aarau mercoledì 4 novembre 2026. Autobus deviati.',
+    keywords: 'frontalieri, ticino, svizzera, italia, restrizioni, traffico, rüeblimärt, aarau',
+    ogTitle: 'Restrizioni traffico Rüeblimärt Aarau mercoledì 4 novembre 2026',
+    ogDescription: 'Mercoledì 4 novembre 2026, il Rüeblimärt ad Aarau comporta chiusure a Graben e Schlossplatz. Autobus deviati via Ziegelrain. Verificare le eccezioni per carico/scarico.',
+    canonicalPath: '/articoli-argovia/ristrizioni-rueeblimart-aarau/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Restrizioni traffico Rüeblimärt Aarau mercoledì 4 novembre 2026",
+      "description": "Informazioni sulle chiusure stradali a Graben e Schlossplatz durante il Rüeblimärt ad Aarau mercoledì 4 novembre 2026. Autobus deviati.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-ristrizioni-rueeblimart-aarau.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-26T23:06:58+00:00",
+      "dateModified": "2026-10-26T23:06:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-argovia/ristrizioni-rueeblimart-aarau/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

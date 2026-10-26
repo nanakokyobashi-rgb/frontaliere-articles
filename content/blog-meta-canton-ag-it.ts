@@ -66,6 +66,9 @@ const blogMetaCantonAgIt: Record<string, string> = {
     'blog.article.mellingen-budget-2027.title': 'Mellingen: preventivo 2027 con un disavanzo di 3,54 milioni',
     'blog.article.mellingen-budget-2027.excerpt': 'Il comune di Mellingen prevede per il 2027 un disavanzo di 3.546.810 franchi e conferma il coefficiente fiscale al 110%.',
     'blog.article.mellingen-budget-2027.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.ristrizioni-rueeblimart-aarau.title': 'Restrizioni traffico Rüeblimärt Aarau mercoledì 4 novembre 2026',
+    'blog.article.ristrizioni-rueeblimart-aarau.excerpt': 'Il Rüeblimärt attira circa 35.000 visitatori; Graben, Schlossplatz e Laurenzentorgasse saranno chiusi al traffico.',
+    'blog.article.ristrizioni-rueeblimart-aarau.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAgIt;

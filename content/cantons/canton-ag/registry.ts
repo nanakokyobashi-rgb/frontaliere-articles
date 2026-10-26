@@ -237,4 +237,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'ristrizioni-rueeblimart-aarau',
+ category: 'pratico',
+ date: '2026-10-26T23:06:58.843Z',
+ image: '/images/blog/article-ristrizioni-rueeblimart-aarau.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['AG'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
