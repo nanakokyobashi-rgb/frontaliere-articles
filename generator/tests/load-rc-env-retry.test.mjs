@@ -276,6 +276,34 @@ test('fetchWithRefTimeout forza il timeout anche se il body reader ignora l’ab
   }
 });
 
+test('fetchWithRefTimeout cancella il reader attivo quando il body è locked', async () => {
+  let cancelled = 0;
+  let wakeReader;
+  const reader = {
+    read() {
+      return new Promise((resolve) => { wakeReader = resolve; });
+    },
+    cancel() {
+      cancelled += 1;
+      wakeReader?.({ done: true });
+      return Promise.resolve();
+    },
+    releaseLock() {},
+  };
+  const response = await fetchWithRefTimeout(
+    'https://locked-body.invalid',
+    {},
+    20,
+    async () => ({
+      body: { getReader: () => reader },
+      json() { return new Promise(() => {}); },
+    }),
+  );
+
+  await assert.rejects(response.json(), { name: 'TimeoutError' });
+  assert.equal(cancelled, 1);
+});
+
 test('fetchWithRefTimeout mantiene il brand della Response e accetta un fetch iniettato', async () => {
   const response = await fetchWithRefTimeout(
     'https://example.test',

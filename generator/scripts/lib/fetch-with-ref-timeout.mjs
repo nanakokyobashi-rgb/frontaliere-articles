@@ -13,11 +13,56 @@ const BODY_METHODS = new Set(['arrayBuffer', 'blob', 'bytes', 'formData', 'json'
 const ACTIVE_DEADLINES = new WeakMap();
 export const DEFAULT_FETCH_TIMEOUT_MS = 15_000;
 
+async function readBodyTextWithReader(response, onReader) {
+  const body = response?.body;
+  if (typeof body?.getReader !== 'function') return response.text();
+
+  const reader = body.getReader();
+  onReader(reader);
+  const decoder = new TextDecoder();
+  let text = '';
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) return text + decoder.decode();
+      if (value == null) continue;
+      text += typeof value === 'string'
+        ? value
+        : decoder.decode(value, { stream: true });
+    }
+  } finally {
+    onReader(null);
+    try { reader.releaseLock?.(); } catch { /* cleanup stays best effort */ }
+  }
+}
+
+async function readBodyMethod(response, property, args, onReader) {
+  const body = response?.body;
+  if ((property !== 'json' && property !== 'text')
+    || typeof body?.getReader !== 'function') {
+    const value = Reflect.get(response, property, response);
+    return value.apply(response, args);
+  }
+  const text = await readBodyTextWithReader(response, onReader);
+  return property === 'json' ? JSON.parse(text) : text;
+}
+
 function withBodyDeadline(response, cleanup, timeoutPromise) {
   let wrappedResponse;
+  let activeReader = null;
   const trackedCleanup = () => {
     cleanup();
+    ACTIVE_DEADLINES.delete(response);
     if (wrappedResponse) ACTIVE_DEADLINES.delete(wrappedResponse);
+  };
+  const deadline = {
+    response,
+    cleanup: trackedCleanup,
+    cancel: () => {
+      const reader = activeReader;
+      if (typeof reader?.cancel === 'function') return reader.cancel();
+      return response?.body?.cancel?.();
+    },
   };
   wrappedResponse = new Proxy(response, {
     get(target, property) {
@@ -27,7 +72,12 @@ function withBodyDeadline(response, cleanup, timeoutPromise) {
         // Defer invocation so a synchronous brand/type error still reaches
         // finally(cleanup), rather than leaking the referenced timer.
         return (...args) => Promise.race([
-          Promise.resolve().then(() => value.apply(target, args)),
+          Promise.resolve().then(() => readBodyMethod(
+            target,
+            property,
+            args,
+            (reader) => { activeReader = reader; },
+          )),
           timeoutPromise,
         ]).finally(trackedCleanup);
       }
@@ -36,11 +86,17 @@ function withBodyDeadline(response, cleanup, timeoutPromise) {
       return value.bind(target);
     },
   });
-  ACTIVE_DEADLINES.set(wrappedResponse, { response, cleanup: trackedCleanup });
+  ACTIVE_DEADLINES.set(response, deadline);
+  ACTIVE_DEADLINES.set(wrappedResponse, deadline);
   return wrappedResponse;
 }
 
 function cancelBodyBestEffort(response) {
+  const deadline = ACTIVE_DEADLINES.get(response);
+  if (deadline) {
+    try { Promise.resolve(deadline.cancel()).catch(() => {}); } catch { /* best effort */ }
+    return;
+  }
   try {
     const body = response?.body;
     if (typeof body?.cancel === 'function') {
@@ -64,7 +120,6 @@ function cancelBodyBestEffort(response) {
 export function releaseFetchWithRefTimeout(response) {
   const deadline = ACTIVE_DEADLINES.get(response);
   if (!deadline) return;
-  ACTIVE_DEADLINES.delete(response);
   try {
     cancelBodyBestEffort(deadline.response);
   } finally {

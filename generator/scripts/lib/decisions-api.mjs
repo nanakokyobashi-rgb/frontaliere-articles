@@ -61,10 +61,12 @@ function safeTimeout(timeoutMs) {
   return Math.max(1, Math.floor(value));
 }
 
-async function cancelResponseBody(response, timeoutMs = 0) {
+async function cancelResponseBody(response, timeoutMs = 0, activeReader = null) {
   let settledCancellation;
   try {
-    const cancellation = response?.body?.cancel?.();
+    const cancellation = typeof activeReader?.cancel === 'function'
+      ? activeReader.cancel()
+      : response?.body?.cancel?.();
     if (!cancellation || typeof cancellation.then !== 'function') return true;
     settledCancellation = Promise.resolve(cancellation).catch(() => {});
   } catch {
@@ -75,6 +77,7 @@ async function cancelResponseBody(response, timeoutMs = 0) {
   const budgetMs = Number(timeoutMs);
   if (!Number.isFinite(budgetMs) || budgetMs <= 0) {
     void settledCancellation;
+    try { activeReader?.releaseLock?.(); } catch { /* cleanup stays best effort */ }
     return false;
   }
 
@@ -88,6 +91,30 @@ async function cancelResponseBody(response, timeoutMs = 0) {
     ]);
   } finally {
     if (timer !== undefined) clearTimeout(timer);
+    try { activeReader?.releaseLock?.(); } catch { /* cleanup stays best effort */ }
+  }
+}
+
+async function readResponseJson(response, onReader) {
+  const body = response?.body;
+  if (typeof body?.getReader !== 'function') return response.json();
+
+  const reader = body.getReader();
+  onReader(reader);
+  const decoder = new TextDecoder();
+  let text = '';
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) return JSON.parse(text + decoder.decode());
+      if (value == null) continue;
+      text += typeof value === 'string'
+        ? value
+        : decoder.decode(value, { stream: true });
+    }
+  } finally {
+    onReader(null);
+    try { reader.releaseLock?.(); } catch { /* cleanup stays best effort */ }
   }
 }
 
@@ -134,6 +161,8 @@ export async function classifyWithDecisionsApi({
   const deadlineAt = Date.now() + timeout;
   let timedOut = false;
   let rejectTimeout;
+  let response;
+  let activeReader = null;
   const timeoutPromise = new Promise((_, reject) => {
     rejectTimeout = reject;
   });
@@ -146,7 +175,6 @@ export async function classifyWithDecisionsApi({
   }, timeout);
 
   try {
-    let response;
     try {
       const fetchPromise = fetchImpl(DECISIONS_API_URL, {
         method: 'POST',
@@ -210,7 +238,10 @@ export async function classifyWithDecisionsApi({
 
     let payload;
     try {
-      payload = await Promise.race([response.json(), timeoutPromise]);
+      payload = await Promise.race([
+        readResponseJson(response, (reader) => { activeReader = reader; }),
+        timeoutPromise,
+      ]);
     } catch (error) {
       if (error instanceof DecisionsApiError) throw error;
       throw new DecisionsApiError('Decision API returned invalid JSON', {
@@ -249,5 +280,8 @@ export async function classifyWithDecisionsApi({
     };
   } finally {
     clearTimeout(timer);
+    if (timedOut || activeReader) {
+      await cancelResponseBody(response, Math.max(0, deadlineAt - Date.now()), activeReader);
+    }
   }
 }
