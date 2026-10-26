@@ -112,3 +112,63 @@ test('publishRelease resta fail-closed quando un adapter CDN restituisce 200 sen
   assert.deepEqual(removed, [key]);
   assert.equal(requests.length, 2);
 });
+
+test('le letture di release e bootstrap restano fail-closed con un 200 senza body', async () => {
+  assert.deepEqual(
+    await readPreviousRelease({ fetchBytes: async () => ({ status: 200 }) }),
+    { state: 'unknown' },
+  );
+
+  const commit = 'b'.repeat(40);
+  const fileName = 'sitemap-cantons.xml';
+  const registry = {
+    schema: 1,
+    commit,
+    sections: { 'canton-ti': { status: 'draft' } },
+    release: {
+      commit,
+      base: releaseBase(commit),
+      files: { [fileName]: { sha256: '0'.repeat(64), bytes: 0 } },
+    },
+  };
+  let registryRead = true;
+  assert.deepEqual(
+    await readPreviousRelease({
+      fetchBytes: async () => {
+        if (registryRead) {
+          registryRead = false;
+          return { status: 200, body: Buffer.from(JSON.stringify(registry)) };
+        }
+        return { status: 200 };
+      },
+    }),
+    { state: 'unknown', doc: registry },
+  );
+
+  const dir = mkdtempSync(join(tmpdir(), 'frontaliere-3351-'));
+  try {
+    const sitemapName = 'sitemap-articles-canton-ti.xml';
+    const sitemap = join(dir, sitemapName);
+    writeFileSync(sitemap, '<urlset><url><loc>https://frontaliereticino.ch/articoli-ticino/</loc></url></urlset>');
+    const calls = [];
+    const pending = await missingBootstrapPages(
+      {
+        live: ['canton-ti'],
+        files: [{ name: sitemapName, local: sitemap }],
+      },
+      {
+        state: 'ok',
+        doc: {
+          sections: { 'canton-ti': { status: 'live' } },
+          release: { base: releaseBase('c'.repeat(40)), files: { [sitemapName]: { sha256: '0'.repeat(64), bytes: 0 } } },
+        },
+      },
+      { fetchBytes: async (url) => { calls.push(url); return { status: 200 }; } },
+      { waitMs: 0, retryMs: 0 },
+    );
+    assert.ok(pending.length > 0);
+    assert.ok(calls.length > 1, 'il controllo deve leggere sia la sitemap precedente sia le pagine');
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
