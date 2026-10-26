@@ -1,37 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-indennita-covid-abusi-aziende.webp",
-      "sha256": "7b015692e80f523bf173cd280cd88fe7c0efb06cfe58cbfaee76671ec84ba8ea"
-    },
-    {
-      "path": "public/images/blog/article-iniziativa-parita-salariale-ag.webp",
-      "sha256": "be496dfee8ad3c3be60c2d4ec3f442e814eafd5049bd9f7ab587e5e08c2eb937"
-    },
-    {
-      "path": "public/images/blog/article-italia-rincari-crescita-2027.webp",
-      "sha256": "d7d50dfff1490ba15344bccc21d83d0a4c621b13c279eb7687ec486123f502bc"
-    },
-    {
-      "path": "public/images/blog/article-schianto-auto-moto-appiano-gentile.webp",
-      "sha256": "7c535fc1d365456af3cb192091f7eaf5de29947466981e9178e8c034dc13f731"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-indennita-covid-abusi-aziende-480w.webp",
-      "sha256": "f024767fc377a235e3f630eb7d8a6a70309ad1facebd8e3c0f62452b1057656b"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-iniziativa-parita-salariale-ag-480w.webp",
-      "sha256": "19d5c458a7681ff84ec6b000344c6acdb434d1677f475c751fff3db92f3b2bfd"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-italia-rincari-crescita-2027-480w.webp",
-      "sha256": "5d8a73428009bdc71911c8fefd275a99cad1d264d12985cb60e55e5a70a2a68d"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-schianto-auto-moto-appiano-gentile-480w.webp",
-      "sha256": "ac2f112c3715364b25a2ddf715cb619a8bb8d56ac531cfd3f3329b66f9462e0c"
-    }
-  ]
+  "items": []
 }
