@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-unfall-a13-sevelen-2026.webp",
-      "sha256": "83527e16b3d4f3ccd7c4f6ba642a70b74947ecbfcd0e78cce197a0a38f089494"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-unfall-a13-sevelen-2026-480w.webp",
-      "sha256": "1bdc188cafeccae7b48ed3238208ff350dcb25477b011e6dba0fe48ad0ae262c"
-    }
-  ]
+  "items": []
 }
