@@ -477,7 +477,7 @@ function hasTemplateInterpolation(block, valueStart, valueEnd) {
  * therefore misses the dynamic assignment. Skip ordinary strings/comments so
  * a literal such as `'${notAnInterpolation}'` remains static.
  */
-function hasInterpolatedTemplateInRange(source, start, end) {
+function hasInterpolatedTemplateInRange(source, start, end, { allowBaseUrlTemplates = false } = {}) {
   let cursor = start;
   while (cursor < end) {
     const character = source[cursor];
@@ -504,13 +504,54 @@ function hasInterpolatedTemplateInRange(source, start, end) {
       const templateEndExclusive = close < 0
         ? end
         : Math.min(close + 1, end);
-      if (hasTemplateInterpolation(source, cursor, templateEndExclusive)) return true;
+      if (hasTemplateInterpolation(source, cursor, templateEndExclusive)) {
+        const raw = close < 0 ? '' : source.slice(cursor, close + 1);
+        const resolvedByEmitter = allowBaseUrlTemplates
+          && /^`\$\{BASE_URL\}(?:(?!\$\{)[^`])*`$/u.test(raw);
+        if (!resolvedByEmitter) return true;
+      }
       cursor = templateEndExclusive;
       continue;
     }
     cursor += 1;
   }
   return false;
+}
+
+function interpolatedPropertyState(block, field, options = {}) {
+  let lastTopLevelValue = emptyPropertyState();
+  let lastStructuredDataValue = emptyPropertyState();
+  forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
+    const quote = block[valueStart];
+    if (key === field) {
+      lastTopLevelValue = {
+        assigned: true,
+        dynamic: hasInterpolatedTemplateInRange(block, valueStart, valueEnd, options),
+        value: undefined,
+      };
+    }
+    if (key === 'structuredData') {
+      const nested = quote === '{'
+        ? interpolatedPropertyState(block.slice(valueStart, valueEnd), field, options)
+        : emptyPropertyState();
+      const dynamicContainer = quote !== '{'
+        && hasInterpolatedTemplateInRange(block, valueStart, valueEnd);
+      lastStructuredDataValue = nested.assigned
+        ? nested
+        : dynamicContainer
+          ? { assigned: true, dynamic: true, value: undefined }
+          : emptyPropertyState();
+    }
+  });
+  // Top-level metadata and its JSON-LD twin are separate producer fields:
+  // either effective scope must be safe. Within each scope the loop above
+  // retains only the last assignment, so a dynamic duplicate shadowed by a
+  // later static literal no longer poisons the entry.
+  return {
+    assigned: lastTopLevelValue.assigned || lastStructuredDataValue.assigned,
+    dynamic: lastTopLevelValue.dynamic || lastStructuredDataValue.dynamic,
+    value: undefined,
+  };
 }
 
 function emptyPropertyState() {
@@ -565,24 +606,8 @@ export function staticPropertyState(block, field) {
 }
 
 /** Return whether any relevant assignment is an unevaluated template literal. */
-export function hasInterpolatedStaticProperty(block, field) {
-  let dynamic = false;
-  forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
-    if (dynamic) return;
-    const quote = block[valueStart];
-    if (key === field && hasInterpolatedTemplateInRange(block, valueStart, valueEnd)) {
-      dynamic = true;
-      return;
-    }
-    if (key === 'structuredData') {
-      if (quote !== '{' && hasInterpolatedTemplateInRange(block, valueStart, valueEnd)) {
-        dynamic = true;
-      } else if (quote === '{') {
-        dynamic = hasInterpolatedStaticProperty(block.slice(valueStart, valueEnd), field);
-      }
-    }
-  });
-  return dynamic;
+export function hasInterpolatedStaticProperty(block, field, options = {}) {
+  return interpolatedPropertyState(block, field, options).dynamic;
 }
 
 /** Return the final static string assigned to a top-level field. */

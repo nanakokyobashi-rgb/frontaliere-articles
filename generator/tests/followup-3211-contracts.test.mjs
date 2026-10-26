@@ -96,6 +96,37 @@ test('SEO reader riconosce template interpolate annidate in wrapper e oggetti Ev
   assert.equal(hasInterpolatedStaticProperty(block, 'description'), false);
 });
 
+test('SEO reader rispetta i template BASE_URL risolvibili solo quando richiesto', () => {
+  const block = `({
+    structuredData: {
+      offers: {
+        url: \`${'${BASE_URL}'}/articoli-frontaliere/demo\`,
+      },
+      offers: {
+        url: \`${'${runtimeUrl}'}\`,
+      },
+    },
+  })`;
+
+  assert.equal(hasInterpolatedStaticProperty(block, 'offers'), true);
+  assert.equal(hasInterpolatedStaticProperty(block, 'offers', { allowBaseUrlTemplates: true }), true);
+
+  const staticLast = `({
+    structuredData: {
+      offers: { url: \`${'${runtimeUrl}'}\` },
+      offers: { url: 'https://example.test/static' },
+    },
+  })`;
+  assert.equal(hasInterpolatedStaticProperty(staticLast, 'offers', { allowBaseUrlTemplates: true }), false);
+
+  const baseUrlOnly = `({
+    structuredData: {
+      offers: { url: \`${'${BASE_URL}'}/articoli-frontaliere/demo\` },
+    },
+  })`;
+  assert.equal(hasInterpolatedStaticProperty(baseUrlOnly, 'offers', { allowBaseUrlTemplates: true }), false);
+});
+
 test('family source transitions are explicit and fail closed', () => {
   assert.equal(familySourceTransitionState({
     registryPresent: false,

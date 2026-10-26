@@ -804,8 +804,11 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const eventFields = sdType === 'Event'
   ? ['name', 'startDate', 'endDate', 'eventStatus', 'eventAttendanceMode', 'location', 'organizer', 'offers', 'performer']
   : [];
+ const eventBaseUrlFields = new Set(['location', 'organizer', 'offers', 'performer']);
  const dynamicField = ['@type', 'title', 'description', 'keywords', 'ogTitle', 'ogDescription', 'canonicalPath', 'datePublished', 'dateModified', ...eventFields]
-  .find((field) => hasInterpolatedStaticProperty(b, field));
+  .find((field) => hasInterpolatedStaticProperty(b, field, {
+   allowBaseUrlTemplates: eventBaseUrlFields.has(field),
+  }));
  if (dynamicField || readStructuredSeoDescriptionState(b).dynamic) continue;
 
  // Resolve every static property with the same balanced last-write-wins
