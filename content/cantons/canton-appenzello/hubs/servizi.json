@@ -4,8 +4,8 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "f85d1ad647d59c483c0aee0c6fa1c91fc1522c62e5ce568a8f122558f5f7721d",
+  "updatedAt": "2026-10-26T01:29:11.421Z",
+  "contentHash": "a68e8f70ccb4c8687a0599807ce7104a21a64038ce3d07b7599f3407e20103cd",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-25T16:16:30.310Z",
+      "updatedAt": "2026-10-25T20:50:56.983Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-25T19:10:33.671Z",
+      "updatedAt": "2026-10-25T22:42:31.401Z",
       "keyFacts": 0
     },
     {
@@ -97,7 +97,7 @@
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-25T16:16:30.310Z"
+          "updatedAt": "2026-10-25T20:50:56.983Z"
         },
         {
           "id": "meteo",
@@ -106,7 +106,7 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "7 °C",
+              "value": "6 °C",
               "detail": "oggi da 5 a 10 °C"
             },
             {
@@ -116,7 +116,7 @@
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -237,7 +237,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -307,7 +307,7 @@
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-25T16:16:30.310Z"
+          "updatedAt": "2026-10-25T20:50:56.983Z"
         },
         {
           "id": "meteo",
@@ -316,7 +316,7 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "7 °C",
+              "value": "6 °C",
               "detail": "today from 5 to 10 °C"
             },
             {
@@ -326,7 +326,7 @@
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -439,7 +439,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -509,7 +509,7 @@
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-25T16:16:30.310Z"
+          "updatedAt": "2026-10-25T20:50:56.983Z"
         },
         {
           "id": "meteo",
@@ -518,7 +518,7 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "7 °C",
+              "value": "6 °C",
               "detail": "heute 5 bis 10 °C"
             },
             {
@@ -528,7 +528,7 @@
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -641,7 +641,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -711,7 +711,7 @@
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://ai.ch/themen/mobilitaet-und-verkehr/strassenverkehr/kontrollschilder#liste-freie-kontrollschilder",
-          "updatedAt": "2026-10-25T16:16:30.310Z"
+          "updatedAt": "2026-10-25T20:50:56.983Z"
         },
         {
           "id": "meteo",
@@ -720,7 +720,7 @@
           "items": [
             {
               "label": "Appenzell",
-              "value": "7 °C",
+              "value": "6 °C",
               "detail": "aujourd’hui de 5 à 10 °C"
             },
             {
@@ -730,7 +730,7 @@
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -835,7 +835,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     }
   }
 }

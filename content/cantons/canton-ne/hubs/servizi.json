@@ -4,8 +4,8 @@
   "section": "canton-ne",
   "canton": "NE",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "0203f18e875d66192111d6a53bc7326328fd48026453e1d5f77c024f1f10f68f",
+  "updatedAt": "2026-10-26T01:29:11.421Z",
+  "contentHash": "f464b2a7979b432129be5119850667523bd925c09c512360b114ed7b83e34f33",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-25T19:10:33.671Z",
+      "updatedAt": "2026-10-25T22:42:31.401Z",
       "keyFacts": 0
     },
     {
@@ -61,11 +61,11 @@
             {
               "label": "Neuchâtel",
               "value": "9 °C",
-              "detail": "oggi da 8 a 12 °C"
+              "detail": "oggi da 8 a 11 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -134,7 +134,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "en": {
       "canton": "NE",
@@ -173,11 +173,11 @@
             {
               "label": "Neuchâtel",
               "value": "9 °C",
-              "detail": "today from 8 to 12 °C"
+              "detail": "today from 8 to 11 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -242,7 +242,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "de": {
       "canton": "NE",
@@ -281,11 +281,11 @@
             {
               "label": "Neuchâtel",
               "value": "9 °C",
-              "detail": "heute 8 bis 12 °C"
+              "detail": "heute 8 bis 11 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -350,7 +350,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "fr": {
       "canton": "NE",
@@ -389,11 +389,11 @@
             {
               "label": "Neuchâtel",
               "value": "9 °C",
-              "detail": "aujourd’hui de 8 à 12 °C"
+              "detail": "aujourd’hui de 8 à 11 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -454,7 +454,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     }
   }
 }

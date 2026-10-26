@@ -4,8 +4,8 @@
   "section": "canton-ur",
   "canton": "UR",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "7b586db7b41d536c4647bc3d3bfdffa7063222abc26545553c6fc39e58940832",
+  "updatedAt": "2026-10-26T01:29:11.421Z",
+  "contentHash": "259d0fe89bce53b296e7c379e2d013baf5e79d7a6416e849681f02e9a828a940",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-25T19:10:33.671Z",
+      "updatedAt": "2026-10-25T22:42:31.401Z",
       "keyFacts": 0
     },
     {
@@ -60,12 +60,12 @@
           "items": [
             {
               "label": "Altdorf",
-              "value": "10 °C",
+              "value": "9 °C",
               "detail": "oggi da 7 a 13 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -158,7 +158,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "en": {
       "canton": "UR",
@@ -196,12 +196,12 @@
           "items": [
             {
               "label": "Altdorf",
-              "value": "10 °C",
+              "value": "9 °C",
               "detail": "today from 7 to 13 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -290,7 +290,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "de": {
       "canton": "UR",
@@ -328,12 +328,12 @@
           "items": [
             {
               "label": "Altdorf",
-              "value": "10 °C",
+              "value": "9 °C",
               "detail": "heute 7 bis 13 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -422,7 +422,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "fr": {
       "canton": "UR",
@@ -460,12 +460,12 @@
           "items": [
             {
               "label": "Altdorf",
-              "value": "10 °C",
+              "value": "9 °C",
               "detail": "aujourd’hui de 7 à 13 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -550,7 +550,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     }
   }
 }

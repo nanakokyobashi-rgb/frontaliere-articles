@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "a0f30526a313d8ec363816de2a990406cb022043566c10ff94caa8c806d7bad5",
+  "updatedAt": "2026-10-26T01:29:11.421Z",
+  "contentHash": "394d5e6876dba50c2826081fc64e2a2699a1300052d2732090fa7f2e40f84bbe",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,12 +14,12 @@
     },
     {
       "id": "aste-targhe",
-      "updatedAt": "2026-10-25T16:16:30.310Z",
+      "updatedAt": "2026-10-25T20:50:56.983Z",
       "keyFacts": 1
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-25T19:10:33.671Z",
+      "updatedAt": "2026-10-25T22:42:31.401Z",
       "keyFacts": 0
     },
     {
@@ -93,16 +93,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6667"
             },
             {
-              "label": "SG10261",
+              "label": "SG41416",
               "value": "820 CHF",
               "detail": "offerta attuale",
               "date": "2026-10-28T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6678"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6668"
             }
           ],
           "sourceName": "Ufficio cantonale della circolazione",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-25T16:16:30.310Z"
+          "updatedAt": "2026-10-25T20:50:56.983Z"
         },
         {
           "id": "meteo",
@@ -111,12 +111,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "7 °C",
+              "value": "6 °C",
               "detail": "oggi da 5 a 9 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -234,7 +234,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "en": {
       "canton": "SG",
@@ -300,16 +300,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6667"
             },
             {
-              "label": "SG10261",
+              "label": "SG41416",
               "value": "820 CHF",
               "detail": "current bid",
               "date": "2026-10-28T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6678"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6668"
             }
           ],
           "sourceName": "Cantonal road traffic office",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-25T16:16:30.310Z"
+          "updatedAt": "2026-10-25T20:50:56.983Z"
         },
         {
           "id": "meteo",
@@ -318,12 +318,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "7 °C",
+              "value": "6 °C",
               "detail": "today from 5 to 9 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -437,7 +437,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "de": {
       "canton": "SG",
@@ -503,16 +503,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6667"
             },
             {
-              "label": "SG10261",
+              "label": "SG41416",
               "value": "820 CHF",
               "detail": "aktuelles Gebot",
               "date": "2026-10-28T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6678"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6668"
             }
           ],
           "sourceName": "Kantonales Strassenverkehrsamt",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-25T16:16:30.310Z"
+          "updatedAt": "2026-10-25T20:50:56.983Z"
         },
         {
           "id": "meteo",
@@ -521,12 +521,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "7 °C",
+              "value": "6 °C",
               "detail": "heute 5 bis 9 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -640,7 +640,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "fr": {
       "canton": "SG",
@@ -706,16 +706,16 @@
               "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6667"
             },
             {
-              "label": "SG10261",
+              "label": "SG41416",
               "value": "820 CHF",
               "detail": "offre actuelle",
               "date": "2026-10-28T18:30:00.000Z",
-              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6678"
+              "url": "https://egov.stva.sg.ch/ecari-auction/ui/app/details/app?id=6668"
             }
           ],
           "sourceName": "Office cantonal de la circulation",
           "sourceUrl": "https://egov.stva.sg.ch/ecari-auction/ui/app/init",
-          "updatedAt": "2026-10-25T16:16:30.310Z"
+          "updatedAt": "2026-10-25T20:50:56.983Z"
         },
         {
           "id": "meteo",
@@ -724,12 +724,12 @@
           "items": [
             {
               "label": "St. Gallen",
-              "value": "7 °C",
+              "value": "6 °C",
               "detail": "aujourd’hui de 5 à 9 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -839,7 +839,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     }
   }
 }

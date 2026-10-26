@@ -4,8 +4,8 @@
   "section": "canton-ow",
   "canton": "OW",
   "topic": "servizi",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "9948ac005165417caacc0c6421a4240dabcbd5df91bb3c51bedb94efc132e1b8",
+  "updatedAt": "2026-10-26T01:29:11.421Z",
+  "contentHash": "623ad5cfd444ee88780fd467684f3501c58e771065dd9ffe257be94152555755",
   "blocks": [
     {
       "id": "premi-cassa-malati",
@@ -14,7 +14,7 @@
     },
     {
       "id": "meteo",
-      "updatedAt": "2026-10-25T19:10:33.671Z",
+      "updatedAt": "2026-10-25T22:42:31.401Z",
       "keyFacts": 0
     },
     {
@@ -60,12 +60,12 @@
           "items": [
             {
               "label": "Sarnen",
-              "value": "10 °C",
-              "detail": "oggi da 8 a 13 °C"
+              "value": "8 °C",
+              "detail": "oggi da 8 a 12 °C"
             }
           ],
           "sourceName": "Meteo di Frontaliere Ticino",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -163,7 +163,7 @@
           "url": "/guida-frontaliere/permessi-di-lavoro/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "en": {
       "canton": "OW",
@@ -201,12 +201,12 @@
           "items": [
             {
               "label": "Sarnen",
-              "value": "10 °C",
-              "detail": "today from 8 to 13 °C"
+              "value": "8 °C",
+              "detail": "today from 8 to 12 °C"
             }
           ],
           "sourceName": "Frontaliere Ticino weather",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -300,7 +300,7 @@
           "url": "/en/cross-border-guide/work-permits-guide/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "de": {
       "canton": "OW",
@@ -338,12 +338,12 @@
           "items": [
             {
               "label": "Sarnen",
-              "value": "10 °C",
-              "detail": "heute 8 bis 13 °C"
+              "value": "8 °C",
+              "detail": "heute 8 bis 12 °C"
             }
           ],
           "sourceName": "Wetter von Frontaliere Ticino",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -437,7 +437,7 @@
           "url": "/de/grenzgaenger-ratgeber/arbeitsbewilligungen/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "fr": {
       "canton": "OW",
@@ -475,12 +475,12 @@
           "items": [
             {
               "label": "Sarnen",
-              "value": "10 °C",
-              "detail": "aujourd’hui de 8 à 13 °C"
+              "value": "8 °C",
+              "detail": "aujourd’hui de 8 à 12 °C"
             }
           ],
           "sourceName": "Météo de Frontaliere Ticino",
-          "updatedAt": "2026-10-25T19:10:33.671Z"
+          "updatedAt": "2026-10-25T22:42:31.401Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -570,7 +570,7 @@
           "url": "/fr/guide-frontalier/permis-de-travail/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     }
   }
 }

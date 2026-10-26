@@ -4,12 +4,12 @@
   "section": "canton-appenzello",
   "canton": "APPENZELLO",
   "topic": "mobilita",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "6b4ba50acba972056cb3a981c1eca30a35610cc1eb947eb069f7121e8bbfb198",
+  "updatedAt": "2026-10-26T01:29:11.421Z",
+  "contentHash": "a59febfb8a0ef1b4c5e7bc6a741aedc823f52ddd3732499558c326942f38feff",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-25T16:53:42.913Z",
+      "updatedAt": "2026-10-25T21:19:09.514Z",
       "keyFacts": 1
     },
     {
@@ -40,7 +40,7 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffico",
-              "date": "2026-10-25T16:53:42.913Z",
+              "date": "2026-10-25T21:19:09.514Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
@@ -51,7 +51,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-25T16:53:42.913Z"
+          "updatedAt": "2026-10-25T21:19:09.514Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -117,7 +117,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "en": {
       "canton": "APPENZELLO",
@@ -140,7 +140,7 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Traffic",
-              "date": "2026-10-25T16:53:42.913Z",
+              "date": "2026-10-25T21:19:09.514Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
@@ -151,7 +151,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-25T16:53:42.913Z"
+          "updatedAt": "2026-10-25T21:19:09.514Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -217,7 +217,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "de": {
       "canton": "APPENZELLO",
@@ -240,7 +240,7 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Verkehr",
-              "date": "2026-10-25T16:53:42.913Z",
+              "date": "2026-10-25T21:19:09.514Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
@@ -251,7 +251,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-25T16:53:42.913Z"
+          "updatedAt": "2026-10-25T21:19:09.514Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -317,7 +317,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     },
     "fr": {
       "canton": "APPENZELLO",
@@ -340,7 +340,7 @@
             {
               "label": "Appenzell - Betrugsversuche mit missbräuchlich verwendetem ASTRA-Logo",
               "value": "Trafic",
-              "date": "2026-10-25T16:53:42.913Z",
+              "date": "2026-10-25T21:19:09.514Z",
               "url": "https://www.ai.ch/themen/sicherheit/kantonspolizei/polizeimeldungen/betrugsversuche-mit-missbraeuchlich-verwendeten-logos"
             },
             {
@@ -351,7 +351,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-25T16:53:42.913Z"
+          "updatedAt": "2026-10-25T21:19:09.514Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -417,7 +417,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T01:29:11.421Z"
     }
   }
 }
