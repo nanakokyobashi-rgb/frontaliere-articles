@@ -4,8 +4,8 @@
   "section": "canton-basilea",
   "canton": "BASILEA",
   "topic": "carburanti",
-  "updatedAt": "2026-10-26T01:02:08.769Z",
-  "contentHash": "7e500401b324995409a16bc0edc9864ae655c02ff332653f0853cb6023cb7587",
+  "updatedAt": "2026-10-26T11:20:32.372Z",
+  "contentHash": "190ce410ef2e0471fa2db855ff5406f3cd49b9903174351b54451f224ca55820",
   "blocks": [
     {
       "id": "prezzi-carburanti",
@@ -84,6 +84,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Salario minimo Basilea aumenta a 22.50 CHF lordi dal 2027",
+          "url": "/articoli-basilea/salario-minimo-basilea-2027/",
+          "excerpt": "Dal 1° gennaio 2027 il minimo sarà 22,50 CHF lordi L’aumento previsto è di 30 centesimi per ora L’adeguamento segue l’indice misto svizzero Cantone →",
+          "date": "2026-10-26T11:06:00.747Z"
+        },
+        {
           "title": "Canton Basilea Città riattiva siti dopo panne tecnico",
           "url": "/articoli-basilea/basel-stadt-siti-online-di-nuoto/",
           "excerpt": "La riapertura dei siti e applicazioni del Canton Basilea Città è progressiva da mercoledì notte; nessun incidente rilevante per la sicurezza è stato registrato giovedì.",
@@ -106,12 +112,6 @@
           "url": "/articoli-basilea/claraplatz-basel-cantieri/",
           "excerpt": "A Claraplatz i cantieri colpiscono i negozi e il chiosco perde il 40% del fatturato.",
           "date": "2026-10-11T00:21:48.656Z"
-        },
-        {
-          "title": "Basilea, zanzara tigre: trattamenti ogni 4 settimane",
-          "url": "/articoli-basilea/basilea-larvicida-quattro-settimane/",
-          "excerpt": "Una tesi di master su 180 caditoie nel quartiere St.",
-          "date": "2026-10-11T00:07:19.597Z"
         }
       ],
       "links": [
@@ -124,7 +124,7 @@
           "url": "/compara-servizi/cambio-franco-euro/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T11:20:32.372Z"
     },
     "en": {
       "canton": "BASILEA",
@@ -195,6 +195,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Basel minimum wage increases to 22.50 CHF gross from 2027",
+          "url": "/en/basel-articles/basel-minimum-wage-2027/",
+          "excerpt": "From January 1st, 2027, the minimum wage will be 22,50 CHF gross The planned increase is 30 cents per hour The adjustment follows the Swiss mixed index Canton →",
+          "date": "2026-10-26T11:06:00.747Z"
+        },
+        {
           "title": "Canton Basel-Stadt reactivates websites after technical outage",
           "url": "/en/basel-articles/basel-stadt-sites-online-reactivation/",
           "excerpt": "The reopening of the Canton of Basel-Stadt's websites and applications has been gradual since Wednesday night; no significant security incident was recorded on Thursday.",
@@ -217,12 +223,6 @@
           "url": "/en/basel-articles/claraplatz-basel-construction-sites/",
           "excerpt": "At Claraplatz, construction sites hit the shops and the kiosk loses 40% of its turnover.",
           "date": "2026-10-11T00:21:48.656Z"
-        },
-        {
-          "title": "Basel, tiger mosquito: treatments every 4 weeks",
-          "url": "/en/basel-articles/basel-tiger-mosquito-four-weeks/",
-          "excerpt": "A master's thesis on 180 loopholes in the St.",
-          "date": "2026-10-11T00:07:19.597Z"
         }
       ],
       "links": [
@@ -235,7 +235,7 @@
           "url": "/en/service-comparison/chf-eur-exchange-rate/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T11:20:32.372Z"
     },
     "de": {
       "canton": "BASILEA",
@@ -306,6 +306,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Mindestlohn in Basel steigt ab 2027 auf 22.50 CHF brutto",
+          "url": "/de/basel-artikel/basel-mindestlohn-2027/",
+          "excerpt": "Ab dem 1. Januar 2027 beträgt der Mindestlohn 22,50 CHF brutto Die vorgesehene Erhöhung beträgt 30 Rappen pro Stunde Die Anpassung folgt dem Schweizer",
+          "date": "2026-10-26T11:06:00.747Z"
+        },
+        {
           "title": "Kanton Basel-Stadt reaktiviert Websites nach technischer Panne",
           "url": "/de/basel-artikel/basel-stadt-siti-online-wiederaufnahme/",
           "excerpt": "Die Wiedereröffnung der Websites und Anwendungen des Kantons Basel-Stadt erfolgt seit Mittwochnacht schrittweise; am Donnerstag wurde kein erheblicher Sicherheitsvorfall registriert.",
@@ -328,12 +334,6 @@
           "url": "/de/basel-artikel/claraplatz-basel-baustellen/",
           "excerpt": "Am Claraplatz setzen die Bauarbeiten den Geschäften zu, und der Kiosk verliert 40% seines Umsatzes.",
           "date": "2026-10-11T00:21:48.656Z"
-        },
-        {
-          "title": "Basel, Tigermücke: Behandlungen alle 4 Wochen",
-          "url": "/de/basel-artikel/basel-tigermuecke-vier-wochen/",
-          "excerpt": "Eine Masterarbeit über 180 Fallrohre im Stadtteil St.",
-          "date": "2026-10-11T00:07:19.597Z"
         }
       ],
       "links": [
@@ -346,7 +346,7 @@
           "url": "/de/service-vergleich/chf-eur-wechselkurs/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T11:20:32.372Z"
     },
     "fr": {
       "canton": "BASILEA",
@@ -417,6 +417,12 @@
       "curatedArticles": [],
       "latestCantonArticles": [
         {
+          "title": "Le salaire minimum à Bâle passe à 22.50 CHF bruts à partir de 2027",
+          "url": "/fr/articles-bale/salaire-minimum-basle-2027/",
+          "excerpt": "À partir du 1er janvier 2027, le minimum sera de 22,50 CHF bruts L’augmentation prévue est de 30 centimes par heure L’ajustement suit l’indice mixte suisse",
+          "date": "2026-10-26T11:06:00.747Z"
+        },
+        {
           "title": "Le canton de Bâle-Ville réactive ses sites après une panne technique",
           "url": "/fr/articles-bale/basile-sites-en-ligne-reactivation/",
           "excerpt": "La réouverture des sites et applications du canton de Bâle-Ville est progressive depuis mercredi soir ; aucun incident de sécurité important n’a été enregistré jeudi.",
@@ -439,12 +445,6 @@
           "url": "/fr/articles-bale/claraplatz-bale-chantiers/",
           "excerpt": "À Claraplatz, les travaux touchent les commerces et le kiosque perd 40% de son chiffre d’affaires.",
           "date": "2026-10-11T00:21:48.656Z"
-        },
-        {
-          "title": "Bâle, moustique tigre : traitements toutes les 4 semaines",
-          "url": "/fr/articles-bale/bale-moustique-tigre-quatre-semaines/",
-          "excerpt": "Une thèse de master sur 180 caditoires dans le quartier St.",
-          "date": "2026-10-11T00:07:19.597Z"
         }
       ],
       "links": [
@@ -457,7 +457,7 @@
           "url": "/fr/comparaison-services/taux-change-chf-eur/"
         }
       ],
-      "updatedAt": "2026-10-26T01:02:08.769Z"
+      "updatedAt": "2026-10-26T11:20:32.372Z"
     }
   }
 }
