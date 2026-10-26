@@ -496,7 +496,7 @@ export async function releaseBootstrapLocks(
     };
   }
 
-  const maxAttempts = normalizeBoundedAttempts(attempts, BOOTSTRAP_RELEASE_ATTEMPTS);
+  const maxAttempts = normalizeStagingVerifyAttempts(attempts);
   let pending = ids;
   let failures = new Map();
   for (let attempt = 1; attempt <= maxAttempts && pending.length > 0; attempt++) {
