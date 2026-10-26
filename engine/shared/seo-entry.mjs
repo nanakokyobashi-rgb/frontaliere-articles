@@ -460,21 +460,30 @@ function forEachStaticProperty(block, visit) {
 /** Return the final static string assigned to a top-level field. */
 export function lastStaticPropertyValue(block, field) {
   let lastValue;
+  let lastTopLevelValue;
   forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
     const quote = block[valueStart];
-    if (key === field && (quote === "'" || quote === '"' || quote === '`')) {
-      // Static no-substitution templates are valid producer literals and must
-      // decode exactly like quoted strings. Interpolated templates deliberately
-      // fail closed in readStaticStringLiteral rather than publishing a value
-      // that was never evaluated by this static reader.
-      const literal = readStaticStringLiteral(block, valueStart, 'SEO entry', 'seo-field');
-      lastValue = decodeStaticStringLiteral(literal.value, literal.quote);
+    if (key === field) {
+      lastTopLevelValue = undefined;
+      if (quote === "'" || quote === '"' || quote === '`') {
+        // Static no-substitution templates are valid producer literals and
+        // must decode exactly like quoted strings. Interpolated templates
+        // deliberately fail closed in readStaticStringLiteral rather than
+        // publishing a value that was never evaluated by this static reader.
+        const literal = readStaticStringLiteral(block, valueStart, 'SEO entry', 'seo-field');
+        lastTopLevelValue = decodeStaticStringLiteral(literal.value, literal.quote);
+      }
+      lastValue = lastTopLevelValue;
     }
     if (key === 'structuredData'
-      && ['headline', 'datePublished', 'dateModified', 'articleSection'].includes(field)
-      && quote === '{') {
-      const nested = lastStaticPropertyValue(block.slice(valueStart, valueEnd), field);
-      if (nested !== undefined) lastValue = nested;
+      && ['headline', 'datePublished', 'dateModified', 'articleSection'].includes(field)) {
+      const nested = quote === '{'
+        ? lastStaticPropertyValue(block.slice(valueStart, valueEnd), field)
+        : undefined;
+      // A later structuredData object shadows the earlier object at runtime,
+      // even when it omits this particular field. Clear the previous nested
+      // value so duplicate containers cannot leak stale JSON-LD metadata.
+      lastValue = nested === undefined ? lastTopLevelValue : nested;
     }
   });
   return lastValue;
