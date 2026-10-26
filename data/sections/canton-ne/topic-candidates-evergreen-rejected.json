@@ -4,18 +4,6 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-29-novembre-suspense-sur-la-13e-rente-avs-et-le-materiel-de-guerre.html": {
-      "section": "canton-ne",
-      "ts": 1792864731629
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-holcim-avance-au-3e-trimestre-et-releve-ses-ambitions.html": {
-      "section": "canton-ne",
-      "ts": 1792864739830
-    },
-    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-sika-etoffe-ses-recettes-sur-9-mois-malgre-l-immobilier-chinois.html": {
-      "section": "canton-ne",
-      "ts": 1792864749128
-    },
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261023-plusieurs-cols-alpins-sont-deja-fermes.html": {
       "section": "canton-ne",
       "ts": 1792914841183
@@ -59,6 +47,14 @@
     "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-microsoft-propose-des-departs-volontaires-a-environ-60-000-salaries.html": {
       "section": "canton-ne",
       "ts": 1793036203697
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-sps-releve-ses-objectifs-2026.html": {
+      "section": "canton-ne",
+      "ts": 1793058648296
+    },
+    "canton-ne::https://www.rtn.ch/rtn/actualite/economie/20261026-anthropic-leve-le-voile-avant-son-entree-en-bourse.html": {
+      "section": "canton-ne",
+      "ts": 1793058656355
     }
   }
 }
