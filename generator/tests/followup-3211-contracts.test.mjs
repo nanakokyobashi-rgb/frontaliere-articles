@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import '../../host/cantonSectionsBootstrap.mjs';
 
 import {
   lastStaticPropertyValue,
