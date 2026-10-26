@@ -66,21 +66,11 @@
       "articleId": "indennita-giornaliere-stop-cosa-fare",
       "title": "Indennità malattia interrotte: 5 passi per tutelarsi",
       "fallbackImage": "/images/blog/article-indennita-lavoro-ridotto.webp",
-      "reason": "All image providers failed for article-indennita-giornaliere-stop-cosa-fare: openai-codex (vision gate rejected image: Generic synthetic editorial scene relevant to the topic, with",
-      "status": "queued",
-      "failureCount": 0,
+      "reason": "All image providers failed for article-indennita-giornaliere-stop-cosa-fare: openai-codex (vision gate rejected image: Generic synthetic train-station scene relevant to commuting and administrative paperwork, but a recognizable foreground c",
+      "status": "failed",
+      "failureCount": 1,
       "requestedAt": "2026-10-18T11:49:39.061Z",
-      "lastFailureAt": "2026-10-18T11:49:39.061Z"
-    },
-    {
-      "articleId": "frontaliere-tasse-dopo-licenziamento",
-      "title": "Licenziamento frontaliere 2026: diritti fiscali e contributi",
-      "fallbackImage": "/images/blog/article-frontaliere-tasse-italia-svizzera-2026-simulazione-pratica.webp",
-      "reason": "All image providers failed for article-frontaliere-tasse-dopo-licenziamento: openai-codex (vision gate rejected image: Relevant synthetic editorial scene, but it contains a recogni",
-      "status": "queued",
-      "failureCount": 0,
-      "requestedAt": "2026-10-18T14:15:05.535Z",
-      "lastFailureAt": "2026-10-18T14:15:05.535Z"
+      "lastFailureAt": "2026-10-26T05:45:53.618Z"
     },
     {
       "articleId": "indennita-covid-abusi-aziende",
