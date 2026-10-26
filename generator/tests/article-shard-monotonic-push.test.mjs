@@ -123,6 +123,15 @@ function remoteHtml(remote) {
 
 const page = (body) => `<html><head><title>article</title></head><body>${body}</body></html>\n`;
 
+test('la guardia monotona limita la scansione della storia ai path richiesti', () => {
+  const source = fs.readFileSync(SCRIPT, 'utf8');
+  assert.match(
+    source,
+    /git -C "\$stage" log --format=%H --full-history HEAD -- "\$\{relpaths\[@\]\}"/u,
+  );
+  assert.doesNotMatch(source, /git -C "\$stage" log --format=%H HEAD 2>\/dev\/null/u);
+});
+
 test('Content-Rev remoto più recente mantiene la pagina senza leggere il blob remoto', () => {
   const scenario = seedRemote({ body: page('remote'), remoteRevision: '2000000100.fffffff', remoteEpoch: 2_000_000_100 });
   try {

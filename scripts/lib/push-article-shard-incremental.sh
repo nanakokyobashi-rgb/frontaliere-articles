@@ -293,7 +293,14 @@ collect_remote_newer_paths() {
     fi
   fi
   shallow_file="$(git -C "$stage" rev-parse --absolute-git-dir 2>/dev/null)/shallow"
-  commits="$(git -C "$stage" log --format=%H HEAD 2>/dev/null)" || {
+  # The shard can receive many fast-path publications in one hour. Walking
+  # every commit in that window and then diffing each tree made the monotonic
+  # guard scale with unrelated articles; on a busy shard that scan could
+  # consume the whole publisher timeout before the requested page was pushed.
+  # Git can walk only the paths we are about to replace. Keep the subsequent
+  # diff-tree check: it still fail-closes on a malformed shallow boundary and
+  # proves which requested paths each selected commit touched.
+  commits="$(git -C "$stage" log --format=%H --full-history HEAD -- "${relpaths[@]}" 2>/dev/null)" || {
     history_unavailable "the shard history is unreadable"
     return 1
   }
