@@ -341,6 +341,20 @@ test('le ragioni locali alla sezione e quelle del pool condiviso usano codici di
   assert.ok(!/(?:process\.exit|exitAfterFlush)\(4\)/.test(src), 'nessun `process.exit(4)` letterale: solo la costante');
 });
 
+test('il report del runner resta sul path assoluto del producer', () => {
+  const src = fs.readFileSync(CREATE_ARTICLE, 'utf8');
+  const resolveStart = src.indexOf('function resolve(rel) {');
+  const resolveEnd = src.indexOf('\n}\n\n// Static places catalog', resolveStart);
+  assert.ok(resolveStart >= 0 && resolveEnd > resolveStart, 'resolver principale non trovato');
+  const resolver = src.slice(resolveStart, resolveEnd);
+  assert.match(
+    resolver,
+    /if \(path\.isAbsolute\(rel\)\) return rel;/,
+    'CREATE_ARTICLE_REPORT_FILE deve restare nel RUNNER_TEMP, non sotto PROJECT_ROOT',
+  );
+  assert.match(resolver, /return `\$\{PROJECT_ROOT\}\/\$\{corpusPath\(rel\)\}`;/);
+});
+
 test('entrambi i workflow richiedono la run card producer-owned prima di assorbire exit 5', () => {
   for (const file of [WORKFLOW, CORE_WORKFLOW]) {
     const workflow = fs.readFileSync(file, 'utf8');
