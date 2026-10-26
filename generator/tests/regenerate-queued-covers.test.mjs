@@ -1729,8 +1729,8 @@ test('il workflow pubblica in parallelo, ha una scadenza interna e acka per sezi
   assert.match(sectionRender, /validated_head="\$PREFLIGHT_HEAD"/u);
   assert.match(
     sectionRender,
-    /if \{ \[ "\$EVENT_NAME" = 'push' \] \\\n\s+\|\| \{ \[ "\$EVENT_NAME" = 'workflow_dispatch' \] && \[ "\$BOOTSTRAP" != 'true' \]; \}; \} \\\n\s+&& \[ "\$REF" = 'refs\/heads\/main' \] \\\n\s+&& \[ -z "\$\{SOURCE_COMMIT:-\}" \]; then/u,
-    'il retry live del publisher sezione include i push bootstrap e i dispatch dalla main',
+    /if \{ \[ "\$EVENT_NAME" = 'push' \] \\\n\s+\|\| \[ "\$EVENT_NAME" = 'workflow_dispatch' \]; \} \\\n\s+&& \[ "\$REF" = 'refs\/heads\/main' \] \\\n\s+&& \[ -z "\$\{SOURCE_COMMIT:-\}" \]; then/u,
+    'il retry live del publisher sezione include push e dispatch dalla main, anche bootstrap',
   );
   assert.match(sectionRender, /\[ "\$BOOTSTRAP" != 'true' \]/u);
   assert.match(sectionRender, /for publish_attempt in 1 2 3/u);
