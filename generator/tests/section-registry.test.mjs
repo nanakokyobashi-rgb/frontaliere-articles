@@ -94,6 +94,7 @@ import {
   CANTON_HUBS_API,
   acquireBootstrapLocks,
   BOOTSTRAP_WAIT_MS,
+  STAGING_VERIFY_ATTEMPTS,
   declaredFiles,
   main as edgeMain,
   planRelease,
@@ -872,7 +873,14 @@ async function publish(registry, { history = [], seed, fail, corrupt, salt, extr
   if (corrupt) io.corrupt = corrupt;
   const logs = [];
   const before = served(io);
-  const result = await publishRelease(planRelease(fakeDist(registry, { salt, extraArticles })), { io, env, log: (line) => logs.push(line), bootstrapWaitMs, sleep });
+  const result = await publishRelease(planRelease(fakeDist(registry, { salt, extraArticles })), {
+    io,
+    env,
+    log: (line) => logs.push(line),
+    bootstrapWaitMs,
+    sleep,
+    stagingVerifyRetryMs: 0,
+  });
   return { io, logs, before, result };
 }
 
@@ -962,6 +970,32 @@ test('edge: ordine — file sotto la base della release, riletti, poi UN solo PU
   assert.equal(pointer.release.base, base);
   assert.equal(registryState(pointer), registryState(withLive(['canton-ti'])));
   assert.equal(validateEdgeSectionRegistry(pointer), true);
+});
+
+test('edge: la verifica di staging ritenta una propagazione CDN transitoria senza fare il flip a byte non verificati', async () => {
+  let transientMisses = 0;
+  const { result, io } = await publish(withLive(['canton-ti']), {
+    history: [DRAFT_ALL(OLD)],
+    bootstrapWaitMs: 0,
+    sleep: async () => {},
+    seed: (targetIo) => {
+      const originalFetch = targetIo.fetchBytes;
+      targetIo.fetchBytes = async (url) => {
+        if (url.includes(`/_releases/${COMMIT}/`) && transientMisses < 2) {
+          transientMisses += 1;
+          return { status: 0 };
+        }
+        return originalFetch(url);
+      };
+    },
+  });
+
+  assert.equal(transientMisses, 2);
+  assert.equal(result.code, 0);
+  assert.equal(result.phase, 'done');
+  assert.equal(result.flipped, true);
+  assert.ok(transientMisses < STAGING_VERIFY_ATTEMPTS);
+  assert.equal(pointerOf(io).commit, COMMIT);
 });
 
 test('edge: push obbligatorio a ogni differenza — accensione, spegnimento, ritiro, byte di un file', async () => {
