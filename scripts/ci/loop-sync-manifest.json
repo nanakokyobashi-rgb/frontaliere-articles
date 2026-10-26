@@ -2698,7 +2698,7 @@
       "reason": "Parser condiviso dal generatore corpus-side per validare Retry-After come delta-seconds safe o IMF-fixdate canonica prima del cap locale; il sito mantiene i propri consumer e non possiede questo helper, quindi non va importato oltre il confine del publisher.",
       "baseline": {
         "site": null,
-        "corpus": "693ab6cc0de5e05a",
+        "corpus": null,
         "alignedAt": "2026-10-26"
       }
     },
