@@ -480,6 +480,40 @@ export function lastStaticPropertyValue(block, field) {
   return lastValue;
 }
 
+/**
+ * Return every top-level static string assigned to `field`.
+ *
+ * Writers use this to reject ambiguous duplicate fields before a refresh. The
+ * returned ranges are source-relative and retain the original quote, so a
+ * caller can replace the chosen literal without falling back to a first-match
+ * regular expression that might cross into structuredData.
+ */
+export function staticPropertyValues(block, field) {
+  const values = [];
+  forEachStaticProperty(block, ({ key, valueStart }) => {
+    if (key !== field) return;
+    const quote = block[valueStart];
+    if (quote !== "'" && quote !== '"' && quote !== '`') return;
+    const literal = readStaticStringLiteral(block, valueStart, 'SEO entry', 'seo-field');
+    values.push({
+      quote: literal.quote,
+      valueStart,
+      valueEnd: literal.end,
+      value: decodeStaticStringLiteral(literal.value, literal.quote),
+    });
+  });
+  return values;
+}
+
+/** Return source spans for every top-level property, including object values. */
+export function staticPropertySpans(block, field) {
+  const spans = [];
+  forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
+    if (key === field) spans.push({ valueStart, valueEnd, quote: block[valueStart] });
+  });
+  return spans;
+}
+
 /** Read the final `description` from the JSON-LD-shaped structuredData object. */
 export function readStructuredSeoDescription(block) {
   let structuredData;

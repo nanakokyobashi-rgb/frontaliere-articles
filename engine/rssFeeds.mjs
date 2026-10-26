@@ -274,10 +274,10 @@ function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
       const datePublished = lastStaticPropertyValue(block, 'datePublished');
       const dateModified = lastStaticPropertyValue(block, 'dateModified');
       const articleSection = lastStaticPropertyValue(block, 'articleSection');
-      // Same treatment, single-quoted. This one is the worse offender of the
-      // two: apostrophes are far commoner than double quotes in Italian, so the
-      // naive class truncated 1065 of 2986 entries — a third of the corpus.
-      const ogDescription = unescapeQuoted(block.match(/ogDescription:\s*'((?:[^'\\]|\\.)*)'/)?.[1], "'");
+      // Resolve the final static assignment with the same balanced reader as
+      // the other SEO fields. This keeps duplicate metadata deterministic and
+      // supports every literal form emitted by the generator.
+      const ogDescription = lastStaticPropertyValue(block, 'ogDescription');
 
       // Per-article byline, from the same `"author"` object the page's JSON-LD
       // and visible byline are built from. Carry only a named real Person or

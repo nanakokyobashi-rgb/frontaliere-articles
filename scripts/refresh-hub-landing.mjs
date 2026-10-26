@@ -70,6 +70,10 @@ import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 import { createRawFetcher } from './lib/cross-repo-raw-fetch.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
 import { decodeStaticStringLiteral, readStaticObjectEntries } from './lib/ts-literals.mjs';
+import {
+  lastStaticPropertyValue,
+  readStructuredSeoDescription,
+} from '../engine/shared/seo-entry.mjs';
 import { readCanonicalPath } from './lib/seo-canonical-path.mjs';
 import { CORPUS_SECTIONS } from './lib/corpus-sections.mjs';
 import { patchHubLandingMetadata } from './lib/hub-landing-meta.mjs';
@@ -258,14 +262,8 @@ function readSeoMap() {
   const out = new Map();
   if (!fs.existsSync(dir)) return out;
 
-  const matchStr = (block, key) => {
-    const rxSingle = new RegExp(`${key}:\\s*'((?:[^'\\\\]|\\\\.)*)'`);
-    const rxDouble = new RegExp(`${key}:\\s*"((?:[^"\\\\]|\\\\.)*)"`);
-    const single = block.match(rxSingle);
-    const m = single || block.match(rxDouble);
-    if (!m) return '';
-    return decodeStaticStringLiteral(m[1], single ? "'" : '"', { newlineAs: ' ' });
-  };
+  const flattenMeta = (value) => (value ?? '').replace(/\r\n|\r|\n/gu, ' ');
+  const matchStr = (block, key) => flattenMeta(lastStaticPropertyValue(block, key));
 
   for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.ts'))) {
     const src = fs.readFileSync(path.join(dir, file), 'utf-8');
@@ -284,7 +282,7 @@ function readSeoMap() {
       const title = matchStr(block, 'title');
       out.set(seoKey(cp), {
         title: matchStr(block, 'ogTitle') || title,
-        desc: matchStr(block, 'description'),
+        desc: matchStr(block, 'description') || flattenMeta(readStructuredSeoDescription(block)),
       });
     }
   }

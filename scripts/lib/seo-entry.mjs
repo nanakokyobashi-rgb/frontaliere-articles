@@ -13,4 +13,6 @@ export {
   removeSeoEntriesFromSource,
   lastStaticPropertyValue,
   readStructuredSeoDescription,
+  staticPropertyValues,
+  staticPropertySpans,
 } from '../../engine/shared/seo-entry.mjs';

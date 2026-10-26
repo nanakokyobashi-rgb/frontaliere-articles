@@ -774,6 +774,8 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  authorName: string;
  aiAssisted?: boolean;
  }
+ const flattenOgText = (value: string | undefined): string =>
+  (value ?? '').replace(/\r\n|\r|\n/gu, ' ');
  const entries: Entry[] = [];
 
  const pos = extractBlogEntryPositions(seoSrc);
@@ -789,13 +791,13 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  // reader as RSS. A first-match regex here would let stale title/description
  // values diverge from the feed and from the corpus floor when a refresh leaves
  // duplicate SEO keys in one entry.
- const matchStr = (key: string): string => lastStaticPropertyValue(b, key) ?? '';
+ const matchStr = (key: string): string => flattenOgText(lastStaticPropertyValue(b, key));
  const title = matchStr('title');
- const desc = matchStr('description') || readStructuredSeoDescription(b) || '';
+ const desc = matchStr('description') || flattenOgText(readStructuredSeoDescription(b)) || '';
  const keywords = matchStr('keywords');
  const ogT = matchStr('ogTitle') || title;
  const ogD = matchStr('ogDescription') || desc;
- const cp = b.match(/canonicalPath:\s*'([^']+)'/)?.[1] ?? '';
+ const cp = lastStaticPropertyValue(b, 'canonicalPath') ?? '';
  const imRaw = b.match(/\/images\/[^'"`\s,}]+/)?.[0] ?? DEFAULT_IMG;
  const im = resolveImagePath(imRaw, articleId);
  // Measured here, next to the resolution that produced the path, so the
