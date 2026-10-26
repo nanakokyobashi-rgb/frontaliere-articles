@@ -171,4 +171,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'tagli-orologeria-locle-lvmh',
+ category: 'novita',
+ date: '2026-10-26T09:27:07.480Z',
+ image: '/images/blog/article-tagli-orologeria-locle-lvmh.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

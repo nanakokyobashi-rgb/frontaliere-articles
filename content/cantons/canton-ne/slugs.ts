@@ -18,6 +18,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'consiglio-stato-21-ottobre-2026': { it: 'consiglio-stato-21-ottobre-2026', en: 'council-state-october-21-2026', de: 'staatsrat-21-oktober-2026', fr: 'conseil-etat-21-octobre-2026' },
  'zenith-soppressione-locle': { it: 'zenith-soppressione-locle', en: 'zenith-locle-job-cuts', de: 'zenith-streichungen-locle', fr: 'zenith-suppressions-locle' },
  'mese-salute-mentale-2026': { it: 'mese-salute-mentale-2026', en: 'mental-health-month-2026', de: 'mens-gesundheits-2026', fr: 'mois-sante-mentale-2026' },
+ 'tagli-orologeria-locle-lvmh': { it: 'tagli-orologeria-locle-lvmh', en: 'watchmaker-cuts-le-locle', de: 'stellenabbau-uhrmacher-le-locle', fr: 'suppressions-emplois-le-locle' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -48,6 +48,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.mese-salute-mentale-2026.title': 'Monat der psychischen Gesundheit 2026: Selbstwert stärken',
     'blog.article.mese-salute-mentale-2026.excerpt': 'Vom 10. September bis zum 10. Oktober 2026 Zweite Ausgabe im Kanton Neuenburg Kostenlose und zugängliche Aktivitäten für jedes Alter Rund zwanzig',
     'blog.article.mese-salute-mentale-2026.imageAlt': 'Aktivitäten für die psychische Gesundheit im Kanton Neuenburg 2026',
+    'blog.article.tagli-orologeria-locle-lvmh.title': 'Uhrenbranche: Abbau von rund 100 Stellen in Le Locle',
+    'blog.article.tagli-orologeria-locle-lvmh.excerpt': 'Zenith baut in Le Locle rund 100 Stellen bei insgesamt 196 Beschäftigten ab; 101 Personen im internationalen Vertrieb sind gefährdet.',
+    'blog.article.tagli-orologeria-locle-lvmh.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNeDe;

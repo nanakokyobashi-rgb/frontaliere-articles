@@ -577,6 +577,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tagli-orologeria-locle-lvmh': {
+    title: 'Orologeria: soppressione di circa 100 posti a Le Locle',
+    description: 'Zenith sopprime circa 100 posti a Le Locle su 196 dipendenti. Lunedì si apre la consultazione per cercare alternative ai licenziamenti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, orologeria, soppressione, circa, posti',
+    ogTitle: 'Zenith: circa 100 posti a rischio a Le Locle',
+    ogDescription: 'L\'azienda orologiera fondata a Le Locle nel 1865 cerca l\'alto di gamma e riduce i volumi. Anche 101 persone della rete internazionale di distribuzione sono a rischio; lunedì inizia la consultazione per cercare alternative ai licenziamenti.',
+    canonicalPath: '/articoli-neuchatel/tagli-orologeria-locle-lvmh/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Orologeria: soppressione di circa 100 posti a Le Locle",
+      "description": "Zenith sopprime circa 100 posti a Le Locle su 196 dipendenti. Lunedì si apre la consultazione per cercare alternative ai licenziamenti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-tagli-orologeria-locle-lvmh.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-26T09:27:07+00:00",
+      "dateModified": "2026-10-26T09:27:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/tagli-orologeria-locle-lvmh/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

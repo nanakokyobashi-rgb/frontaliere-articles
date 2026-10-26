@@ -48,6 +48,9 @@ const blogMetaCantonNeFr: Record<string, string> = {
     'blog.article.mese-salute-mentale-2026.title': 'Mois de la santé mentale 2026 : activités pour renforcer l’estime de soi',
     'blog.article.mese-salute-mentale-2026.excerpt': 'Du 10 septembre au 10 octobre 2026 Deuxième édition dans le canton de Neuchâtel Activités gratuites et accessibles pour tous les âges Une vingtaine',
     'blog.article.mese-salute-mentale-2026.imageAlt': 'Activités de santé mentale dans le Canton de Neuchâtel 2026',
+    'blog.article.tagli-orologeria-locle-lvmh.title': 'Horlogerie : suppression d’environ 100 postes au Locle',
+    'blog.article.tagli-orologeria-locle-lvmh.excerpt': 'Zenith supprime environ 100 postes au Locle sur 196 employés ; 101 personnes sont menacées dans la distribution internationale.',
+    'blog.article.tagli-orologeria-locle-lvmh.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonNeFr;
