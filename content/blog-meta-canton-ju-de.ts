@@ -21,6 +21,9 @@ const blogMetaCantonJuDe: Record<string, string> = {
     'blog.article.giura-aumento-sussidi-famiglie.title': 'Jura erhöht die Zuschüsse für Familien mit niedrigem Einkommen',
     'blog.article.giura-aumento-sussidi-famiglie.excerpt': 'Der Höchstbetrag des Zuschlags steigt für Familien mit einem RDU unter 18\'000 CHF ab 2027 von 300 auf 330 CHF pro Monat und Elternteil.',
     'blog.article.giura-aumento-sussidi-famiglie.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.governo-giurassiano-nomine-2027.title': 'Die Regierung von Jura ernennt für 2027 zweistellige Personen',
+    'blog.article.governo-giurassiano-nomine-2027.excerpt': 'Sandrine Crevoisier wird den neuen Gefängnisdienst leiten.',
+    'blog.article.governo-giurassiano-nomine-2027.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonJuDe;

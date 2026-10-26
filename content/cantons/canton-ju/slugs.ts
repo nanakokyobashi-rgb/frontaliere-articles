@@ -9,6 +9,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'giura-formazione-postobbligatoria-2026': { it: 'giura-formazione-postobbligatoria-2026', en: 'jura-post-compulsory-education-2026', de: 'jura-nachobligatorische-bildung-2026', fr: 'jura-formation-postobligatoire-2026' },
  'stockmar-ritardo-cantiere-2027': { it: 'stockmar-ritardo-cantiere-2027', en: 'stockmar-construction-delay-2027', de: 'stockmar-bauverzoegerung-2027', fr: 'stockmar-retard-chantier-2027' },
  'giura-aumento-sussidi-famiglie': { it: 'giura-aumento-sussidi-famiglie', en: 'jura-subsidy-increase-low-income', de: 'jura-subvention-erhoehung-familien', fr: 'jura-augmentation-subventions-familles' },
+ 'governo-giurassiano-nomine-2027': { it: 'governo-giurassiano-nomine-2027', en: 'jura-government-appointments-2027', de: 'jurakanton-nominationen-2027', fr: 'gouvernement-jurassien-nominations-2027' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

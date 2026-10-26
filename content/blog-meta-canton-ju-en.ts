@@ -21,6 +21,9 @@ const blogMetaCantonJuEn: Record<string, string> = {
     'blog.article.giura-aumento-sussidi-famiglie.title': 'Jura increases subsidies for low-income families',
     'blog.article.giura-aumento-sussidi-famiglie.excerpt': 'The maximum supplement increases from 300 to 330 CHF per month per parent for families with RDU below 18\'000 CHF, effective 2027.',
     'blog.article.giura-aumento-sussidi-famiglie.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.governo-giurassiano-nomine-2027.title': 'Jura government appoints two figures for 2027',
+    'blog.article.governo-giurassiano-nomine-2027.excerpt': 'Sandrine Crevoisier will lead the new Penitentiary Service.',
+    'blog.article.governo-giurassiano-nomine-2027.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonJuEn;
