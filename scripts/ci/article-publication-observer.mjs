@@ -30,6 +30,7 @@ import {
   markDispatched,
   markLedgerItemsAbsent,
   mergeDegradedItems,
+  normalizeRepairCap,
   parseDegradationLedger,
   retainDegradationLedger,
   removeHealthyItems,
@@ -874,6 +875,8 @@ export async function runObserver({
   clock = () => Date.now(),
   gitLogImpl = gitText,
 } = {}) {
+  const effectiveRepairCap = normalizeRepairCap(repairCap);
+  const effectiveLagRepairCap = normalizeRepairCap(lagRepairCap);
   const since = new Date(nowMs - days * 24 * 60 * 60 * 1000).toISOString();
   const log = gitLogImpl([
     'log', '--first-parent', `--since=${since}`, '--format=commit %H %ct', '--name-only', '--diff-filter=AM', '--',
@@ -969,7 +972,7 @@ export async function runObserver({
   const candidates = repairCandidates(ledger, {
     readyKeys,
     excludeKeys: reconciled.handledKeys,
-    cap: repairCap,
+    cap: effectiveRepairCap,
   });
   // A lagging page is already a live, actionable publication failure. Retry
   // only readable stale pages: HTTP failures describe an unavailable origin,
@@ -978,7 +981,7 @@ export async function runObserver({
   // cannot starve the durable image ledger (or vice versa).
   const laggingRepairs = report.lagging
     .filter((entry) => entry.page?.status === 200)
-    .slice(0, Math.max(0, lagRepairCap))
+    .slice(0, effectiveLagRepairCap)
     .map((entry) => ({ ...entry.target, repairKind: 'lagging' }));
   const repairItems = [
     ...laggingRepairs,
