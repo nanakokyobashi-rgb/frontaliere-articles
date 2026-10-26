@@ -4,29 +4,13 @@
   "strikes": [],
   "legacy": [],
   "topicGateUrls": {
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/298676/bessere-arbeitsbedingungen-in-der-pflege-k%c3%b6nnten-sich-auch-finanziell-lohnen": {
-      "section": "canton-fr",
-      "ts": 1792779457721
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/299189/patt-bei-der-ahv-kopfankopf-beim-kriegsmaterial-das-zeigt-die-neuste-umfrage": {
-      "section": "canton-fr",
-      "ts": 1792824898080
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/296169/t%c3%a4glicher-stau-nervt-die-menschen": {
-      "section": "canton-fr",
-      "ts": 1792844594181
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/299093/just-eat-k%c3%bcndigt-massenentlassung-an-700-kuriere-bangen-um-ihren-job": {
-      "section": "canton-fr",
-      "ts": 1792845994145
-    },
-    "canton-fr::https://www.freiburger-nachrichten.ch/story/299000/sperrung-der-bahnhofsallee-beschwerdef%c3%bchrer-erhalten-n%c3%a4chste-abfuhr": {
-      "section": "canton-fr",
-      "ts": 1792845996345
-    },
     "canton-fr::https://www.freiburger-nachrichten.ch/story/299598/galterntal-gesperrt": {
       "section": "canton-fr",
       "ts": 1792911551843
+    },
+    "canton-fr::https://www.freiburger-nachrichten.ch/story/299268/wildunf%c3%a4lle-im-herbst-wo-es-besonders-h%c3%a4ufig-kracht-und-was-man-dagegen-tun-kann": {
+      "section": "canton-fr",
+      "ts": 1793029808951
     }
   }
 }
