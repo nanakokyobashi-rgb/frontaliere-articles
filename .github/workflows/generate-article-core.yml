@@ -1178,8 +1178,6 @@ jobs:
             echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push fires no workflow at all (anti-recursion), so the article would never reach the site via publish-api.yml AND the self-trigger chain would stop dead. Both depend on this push being PAT-authenticated."
             exit 1
           fi
-          cp .tmp/create-article-run-report.json "$RUN_REPORT"
-
           if [ "${{ steps.generate.outputs.article }}" = "true" ]; then
             git commit -m "Generate blog article (${{ steps.generate.outputs.section }})"
           else
