@@ -18,6 +18,12 @@ for (const relativePath of WORKFLOWS) {
       source,
       /timeout --kill-after=0s "\$\{api_timeout_seconds\}s" gh api "\$@"/,
     );
+    const wrapperDefinition = source.indexOf('gh_api_timeout() {');
+    const firstWrapperUse = source.indexOf('gh_api_timeout --');
+    assert.ok(
+      wrapperDefinition >= 0 && firstWrapperUse > wrapperDefinition,
+      'il confronto push deve usare il wrapper dopo la sua definizione',
+    );
     assert.doesNotMatch(source, /^\s+gh api\b/m, 'nessuna chiamata deve bypassare il wrapper');
     assert.equal(
       (source.match(/gh_api_timeout(?:\s|\()/g) || []).length,
