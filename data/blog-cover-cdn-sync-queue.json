@@ -1,4 +1,13 @@
 {
   "schema": 1,
-  "items": []
+  "items": [
+    {
+      "path": "public/images/blog/article-mese-salute-mentale-2026.webp",
+      "sha256": "769d41f1ea4d9918774f8d25a994e7beb6c439c7cd0fcec2aa5cf2198adb812f"
+    },
+    {
+      "path": "public/images/blog/thumbnails/article-mese-salute-mentale-2026-480w.webp",
+      "sha256": "c654a1d2a2cf2b0d01a7d824eaab7094b9f7804f999a0abf82b1d4d95b1aece5"
+    }
+  ]
 }
