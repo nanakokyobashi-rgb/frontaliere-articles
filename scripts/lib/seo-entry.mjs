@@ -11,4 +11,6 @@ export {
   findSeoEntryMatches,
   findAllSeoEntryMatches,
   removeSeoEntriesFromSource,
+  lastStaticPropertyValue,
+  readStructuredSeoDescription,
 } from '../../engine/shared/seo-entry.mjs';

@@ -1,3 +1,9 @@
+import {
+  decodeStaticStringLiteral,
+  readStaticStringLiteral,
+  skipStaticTrivia,
+} from './ts-literals.mjs';
+
 /**
  * Lexical, balanced resolver for generated SEO entries.
  *
@@ -389,6 +395,102 @@ function templateEnd(src, start) {
     if (depth !== 0) return -1;
   }
   return -1;
+}
+
+/**
+ * Read top-level properties from one already-balanced SEO entry.
+ *
+ * Generated SEO objects can contain duplicate static properties while a
+ * refresh is being reconciled. JavaScript object literals keep the last
+ * assignment, so every metadata consumer must resolve the same final value.
+ * Dynamic template values are skipped as opaque source; they are never
+ * evaluated by the static reader.
+ */
+function forEachStaticProperty(block, visit) {
+  const objectOpen = block.indexOf('{');
+  let cursor = objectOpen >= 0 ? objectOpen + 1 : block.length;
+
+  while (cursor < block.length) {
+    cursor = skipStaticTrivia(block, cursor, 'SEO entry', 'seo-field');
+    if (cursor >= block.length || block[cursor] === '}') break;
+
+    let key;
+    let keyEnd = cursor;
+    const first = block[cursor];
+    if (first === "'" || first === '"' || first === '`') {
+      const literal = readStaticStringLiteral(block, cursor, 'SEO entry', 'seo-field');
+      if (!literal) break;
+      key = decodeStaticStringLiteral(literal.value, literal.quote);
+      keyEnd = literal.end;
+    } else if (/[A-Za-z_$]/u.test(first)) {
+      keyEnd += 1;
+      while (/[A-Za-z0-9_$]/u.test(block[keyEnd] || '')) keyEnd += 1;
+      key = block.slice(cursor, keyEnd);
+    } else {
+      cursor += 1;
+      continue;
+    }
+
+    const colon = skipStaticTrivia(block, keyEnd, 'SEO entry', 'seo-field');
+    if (block[colon] !== ':') {
+      cursor = keyEnd;
+      continue;
+    }
+    const valueStart = skipStaticTrivia(block, colon + 1, 'SEO entry', 'seo-field');
+    let valueEnd = valueStart;
+    const valueQuote = block[valueStart];
+    if (valueQuote === "'" || valueQuote === '"') {
+      const literal = readStaticStringLiteral(block, valueStart, 'SEO entry', 'seo-field');
+      valueEnd = literal?.end ?? block.length;
+    } else if (valueQuote === '`') {
+      const close = templateEnd(block, valueStart);
+      valueEnd = close < 0 ? block.length : close + 1;
+    } else if (valueQuote === '{' || valueQuote === '[' || valueQuote === '(') {
+      const close = matchingDelimiter(block, valueStart);
+      valueEnd = close < 0 ? block.length : close + 1;
+    } else {
+      while (valueEnd < block.length && block[valueEnd] !== ',' && block[valueEnd] !== '}') valueEnd += 1;
+    }
+
+    visit({ key, valueStart, valueEnd });
+    cursor = valueEnd > cursor ? valueEnd : cursor + 1;
+  }
+}
+
+/** Return the final static string assigned to a top-level field. */
+export function lastStaticPropertyValue(block, field) {
+  let lastValue;
+  forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
+    const quote = block[valueStart];
+    if (key === field && (quote === "'" || quote === '"' || quote === '`')) {
+      // Static no-substitution templates are valid producer literals and must
+      // decode exactly like quoted strings. Interpolated templates deliberately
+      // fail closed in readStaticStringLiteral rather than publishing a value
+      // that was never evaluated by this static reader.
+      const literal = readStaticStringLiteral(block, valueStart, 'SEO entry', 'seo-field');
+      lastValue = decodeStaticStringLiteral(literal.value, literal.quote);
+    }
+    if (key === 'structuredData'
+      && ['headline', 'datePublished', 'dateModified', 'articleSection'].includes(field)
+      && quote === '{') {
+      const nested = lastStaticPropertyValue(block.slice(valueStart, valueEnd), field);
+      if (nested !== undefined) lastValue = nested;
+    }
+  });
+  return lastValue;
+}
+
+/** Read the final `description` from the JSON-LD-shaped structuredData object. */
+export function readStructuredSeoDescription(block) {
+  let structuredData;
+  forEachStaticProperty(block, ({ key, valueStart, valueEnd }) => {
+    if (key === 'structuredData' && block[valueStart] === '{') {
+      structuredData = block.slice(valueStart, valueEnd);
+    }
+  });
+  return structuredData === undefined
+    ? undefined
+    : lastStaticPropertyValue(structuredData, 'description');
 }
 
 function isRealSeoKey(src, start, end) {

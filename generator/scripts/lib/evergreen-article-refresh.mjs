@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 import { corpusPath } from './corpus-paths.mjs';
 import { readTopLevelString, scanTopLevelArticleRecords } from '../../../scripts/lib/article-registry-reader.mjs';
 import { findSeoEntryMatches } from '../../../scripts/lib/seo-entry.mjs';
+import { lastStaticPropertyValue } from '../../../engine/shared/seo-entry.mjs';
 import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
 import { writeFileSnapshotAtomically } from '../../../scripts/lib/write-file-pair-atomically.mjs';
@@ -175,15 +176,23 @@ export function bumpDateModified(
   // cannot make us touch a sibling's date.
   const { index: startIdx, closeIdx } = entry;
   const block = src.slice(startIdx, closeIdx + 1);
-  const dmRe = /"dateModified":\s*"([^"]*)"/;
-  if (!dmRe.test(block)) return false;
+  const dmRe = /"dateModified":\s*"([^"]*)"/g;
+  const dmMatches = [...block.matchAll(dmRe)];
+  if (dmMatches.length === 0) return false;
+  if (dmMatches.length > 1) {
+    throw new Error(
+      "bumpDateModified: entry 'blog-" + id + "' contiene più proprietà dateModified; "
+      + 'refresh rifiutato prima della scrittura.',
+    );
+  }
+  dmRe.lastIndex = 0;
   // dateModified must never precede datePublished: on the publish day a fixed
   // midnight stamp falls before the publish time → an incoherent freshness
   // signal in the indexed NewsArticle JSON-LD. Clamp up to datePublished when earlier.
-  const pub = block.match(/"datePublished":\s*"([^"]*)"/);
-  const effective = pub && Date.parse(pub[1]) > Date.parse(isoDateTime) ? pub[1] : isoDateTime;
-  const current = block.match(dmRe);
-  if (current && isAtOrAfter(current[1], effective)) return true;
+  const published = lastStaticPropertyValue(block, 'datePublished');
+  const effective = published && Date.parse(published) > Date.parse(isoDateTime) ? published : isoDateTime;
+  const current = lastStaticPropertyValue(block, 'dateModified');
+  if (current && isAtOrAfter(current, effective)) return true;
   const replaced = block.replace(dmRe, `"dateModified": "${effective}"`);
   writeSnapshot(file, src, src.slice(0, startIdx) + replaced + src.slice(closeIdx + 1), writeFile);
   return true;

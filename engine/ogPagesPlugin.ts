@@ -10,7 +10,6 @@
 import path from 'path';
 import { readArticleRegistryMetadata } from './shared/articleRegistryMetadata';
 import { decodeHtmlText } from './shared/htmlEntities';
-import { decodeTsStringEscapes } from './shared/tsStringEscapes';
 import { buildRelatedArticlesIndex } from './relatedArticlesIndex';
 import type { Plugin } from 'vite';
 import { getSiteShell, type ArticleAuthor, type SiteShellContract } from './siteShell';
@@ -29,6 +28,7 @@ import { readImageIntrinsicSize } from './shared/imageIntrinsicSize';
 import { parseStaticArticleTranslationSource, parseStaticBlogBodySource } from './shared/articleStaticSource.mjs';
 export { parseStaticBlogBodySource };
 import { parseArticleUrlSlugs } from './shared/articleReaderSource.mjs';
+import { lastStaticPropertyValue, readStructuredSeoDescription } from './shared/seo-entry.mjs';
 import { createImageCreditReader, imageObjectCreditFields, renderImageCreditHtml } from './shared/imageCredits.mjs';
 import { computeSectionTopicAssignment } from './articleHubPagesPlugin';
 import { TOPIC_CLUSTERS, TOPIC_HUB_SEGMENT, type TopicLocale } from './topicTaxonomy';
@@ -784,20 +784,14 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const e = pos[i].end;
  const b = seoSrc.substring(s, e);
 
- // Match title/desc/og* allowing escaped quotes, trying single-quoted first
- // (dominant style) then double-quoted: the SEO entry sources mix both (e.g. the
- // metodologia + author entries in seo-pages.ts use `description: "…"`), and a
- // single-quote-only regex silently dropped those → empty og:title/og:description,
- // the same failure mode as #2996 transposed onto the OG emitter.
- const matchStr = (key: string, flags = ''): string => {
- const rxSingle = new RegExp(`${key}:\\s*'((?:[^'\\\\]|\\\\.)*)'`, flags);
- const rxDouble = new RegExp(`${key}:\\s*"((?:[^"\\\\]|\\\\.)*)"`, flags);
- const m = b.match(rxSingle) || b.match(rxDouble);
- return m ? decodeTsStringEscapes(m[1], { newlineAs: ' ' }) : '';
- };
- const title = matchStr('title', 'm') || '';
- const desc = matchStr('description', 'm') || '';
- const keywords = matchStr('keywords', 'm') || '';
+ // Resolve every static property with the same balanced last-write-wins
+ // reader as RSS. A first-match regex here would let stale title/description
+ // values diverge from the feed and from the corpus floor when a refresh leaves
+ // duplicate SEO keys in one entry.
+ const matchStr = (key: string): string => lastStaticPropertyValue(b, key) ?? '';
+ const title = matchStr('title');
+ const desc = matchStr('description') || readStructuredSeoDescription(b) || '';
+ const keywords = matchStr('keywords');
  const ogT = matchStr('ogTitle') || title;
  const ogD = matchStr('ogDescription') || desc;
  const cp = b.match(/canonicalPath:\s*'([^']+)'/)?.[1] ?? '';
@@ -810,13 +804,13 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  // date. Older entries may omit that literal even though the article registry
  // has one; use the registry as the fallback, and keep `''` when both sources
  // say the publication date is unknown.
- const datePub = b.match(/"datePublished":\s*"([^"]+)"/)?.[1]
+ const datePub = lastStaticPropertyValue(b, 'datePublished')
  || articlePublishedAtById[articleId]
  || '';
  // dateModified: prefer updatedAt from blog-articles-data.ts, then sitemap <lastmod>,
  // then the SEO metadata literal (if any). BUILD_DATE_ISO in seo-blog.ts is a variable
  // reference that the regex can't capture, so we need these external sources.
- const seoDateMod = b.match(/"dateModified":\s*"([^"]+)"/)?.[1] ?? '';
+ const seoDateMod = lastStaticPropertyValue(b, 'dateModified') ?? '';
  const articleSlug = cp.replace(SECTION.canonicalPrefix, '').replace(/\/$/, '');
  // Issue #3368 item 1: a shadowed article's own slug was dropped from its
  // section's sitemap (SECTION.sitemap — sitemap-blog-ch.xml for svizzera,
