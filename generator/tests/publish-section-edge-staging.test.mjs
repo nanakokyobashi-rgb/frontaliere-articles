@@ -16,6 +16,7 @@ import {
   waitForBootstrapLocks,
 } from '../../scripts/publish-section-edge.mjs';
 import { EDGE_SECTION_REGISTRY_FILE } from '../../scripts/lib/section-registry.mjs';
+import { makeSectionBootstrapLock } from '../../scripts/lib/section-bootstrap-lock.mjs';
 
 const bytes = Buffer.from('staging-fixture');
 const file = {
@@ -54,6 +55,37 @@ test('i consumer bootstrap e registry trattano un 200 senza body come non verifi
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
+});
+
+test('il publisher recupera un lease il cui attempt GitHub e\' gia\' terminato', async () => {
+  const commit = 'a'.repeat(40);
+  const owner = 'nanakokyobashi-rgb/frontaliere-articles:40594085901:1';
+  const lock = makeSectionBootstrapLock({
+    section: 'canton-ow',
+    commit,
+    owner,
+    now: Date.now() - 1_000,
+    ttlMs: 60 * 60 * 1000,
+  });
+  const takeovers = [];
+  const logs = [];
+  const recovered = await waitForBootstrapLocks(['canton-ow'], {
+    fetchBytes: async () => ({ status: 200, body: Buffer.from(JSON.stringify(lock)) }),
+    readBootstrapLockOwnerRun: async () => ({ state: 'terminal', status: 'completed', conclusion: 'failure' }),
+    acquireBootstrapLock: async (section, requestedCommit) => {
+      takeovers.push([section, requestedCommit]);
+      return 'acquired';
+    },
+  }, {
+    commit,
+    deadline: 0,
+    retryMs: 0,
+    log: (line) => logs.push(line),
+  });
+
+  assert.deepEqual(recovered, []);
+  assert.deepEqual(takeovers, [['canton-ow', commit]]);
+  assert.match(logs.join('\n'), /owner .* terminato/);
 });
 
 test('publishRelease resta fail-closed quando un adapter CDN restituisce 200 senza body', async () => {

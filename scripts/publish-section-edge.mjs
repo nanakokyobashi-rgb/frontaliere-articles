@@ -103,6 +103,7 @@ import { CORPUS_ROUTE_OWNER_META_TAG } from '../engine/shared/corpusRouteOwner.m
 import { familySectionPages } from './lib/build-sitemap.mjs';
 import {
   parseSectionBootstrapLock,
+  readBootstrapLockOwnerRun,
   sectionBootstrapLockKey,
 } from './lib/section-bootstrap-lock.mjs';
 import {
@@ -389,6 +390,7 @@ export const realIo = {
     purgeChunks(urls).every(
       (chunk) => run('bash', ['scripts/ci/retry-cmd.sh', 'node', 'scripts/cf-purge-cache.mjs', `--files=${chunk.join(',')}`]).code === 0,
     ),
+  readBootstrapLockOwnerRun: (owner) => readBootstrapLockOwnerRun(owner, { env: process.env }),
   /** GET sul CDN con cache-buster: `{ status, body }`, o `{ status: 0 }` se la rete non risponde. */
   fetchBytes: async (url) => {
     for (let attempt = 1; attempt <= 3; attempt++) {
@@ -477,7 +479,15 @@ export const BOOTSTRAP_RELEASE_ATTEMPTS = 3;
 export async function waitForBootstrapLocks(
   sections,
   io,
-  { waitMs = BOOTSTRAP_WAIT_MS, retryMs = BOOTSTRAP_RETRY_MS, sleep, now = Date.now, deadline: deadlineAt } = {},
+  {
+    waitMs = BOOTSTRAP_WAIT_MS,
+    retryMs = BOOTSTRAP_RETRY_MS,
+    sleep,
+    now = Date.now,
+    deadline: deadlineAt,
+    commit,
+    log = () => {},
+  } = {},
 ) {
   const pause = sleep ?? ((ms) => new Promise((resolve) => setTimeout(resolve, ms)));
   const ids = [...new Set((sections ?? []).filter((section) => typeof section === 'string' && section))];
@@ -498,7 +508,42 @@ export async function waitForBootstrapLocks(
         continue;
       }
       const state = parseSectionBootstrapLock(responseBytes(got), { section, now: now() });
-      if (state.state === 'active') pending.push(`${section} (${state.doc.owner})`);
+      if (state.state === 'active') {
+        // Un runner puo' terminare prima di riuscire a scrivere il tombstone
+        // (timeout CDN, processo ucciso, teardown del runner). Il TTL lungo
+        // protegge dalla collisione, ma non deve trasformare un owner gia'
+        // terminato in un blocco cieco del publisher. L'acquire condizionale
+        // del CLI fa il takeover solo dopo avere verificato l'attempt GitHub;
+        // un owner attivo o non verificabile resta invece fail-closed.
+        if (
+          commit
+          && typeof io?.readBootstrapLockOwnerRun === 'function'
+          && typeof io?.acquireBootstrapLock === 'function'
+        ) {
+          let ownerRun;
+          try {
+            ownerRun = await io.readBootstrapLockOwnerRun(state.doc.owner);
+          } catch (error) {
+            ownerRun = { state: 'unknown', reason: error?.message ?? String(error) };
+          }
+          if (ownerRun?.state === 'terminal') {
+            let takeover;
+            try {
+              takeover = await io.acquireBootstrapLock(section, commit);
+            } catch (error) {
+              takeover = 'error';
+              log(`::warning::[section-edge] takeover del bootstrap lock di ${section} non verificato: ${error?.message ?? error}`);
+            }
+            if (takeover === 'acquired') {
+              log(`::notice::[section-edge] recuperato bootstrap lock di ${section}: owner ${state.doc.owner} terminato (${ownerRun.conclusion || 'completed'})`);
+              continue;
+            }
+            pending.push(`${section} (${state.doc.owner}; takeover non confermato: ${takeover ?? 'nessun risultato'})`);
+            continue;
+          }
+        }
+        pending.push(`${section} (${state.doc.owner})`);
+      }
       else if (state.state === 'unknown') pending.push(`${section} (${state.reason})`);
     }
     if (pending.length === 0 || now() + retryMs > deadline) return pending;
@@ -841,6 +886,8 @@ export async function publishRelease(
     retryMs: bootstrapRetryMs,
     sleep,
     deadline: bootstrapDeadline,
+    commit: release.commit,
+    log,
   });
   if (lockedBeforeBootstrap.length) {
     return stopBeforeFlip('bootstrap-lock', `bootstrap live ancora in corso (${lockedBeforeBootstrap.join(', ')})`);

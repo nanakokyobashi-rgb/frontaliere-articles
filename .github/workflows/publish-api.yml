@@ -297,30 +297,63 @@ jobs:
       - name: Setup isolated article source runtime
         uses: ./.article-source-runtime/.github/actions/setup-article-source-runtime
 
-      # A bounded replay starts from the exact corpus revision that uploaded the
-      # HTML. If main advances after dispatch, the source remains usable only
-      # when it is an ancestor and the intervening commits do not change an
-      # input watched by publish-api. In that case the current main checkout is
-      # the equivalent release and avoids stranding the publisher queue; a
-      # concurrent API input remains fail-closed for its own push-triggered run.
-      - name: Verify bounded replay source is still main
-        if: inputs.source_commit != ''
+      # Every trigger is serialized, but a queued run can still start from the
+      # ref that was current when it was dispatched. A stale publisher must
+      # never overwrite a newer API surface. Non-API advances can be rebased to
+      # current main; an API advance remains fail-closed so the push-triggered
+      # run for that revision owns the release.
+      - name: Verify publish source is current main
         env:
           GH_TOKEN: ${{ github.token }}
           REPOSITORY: ${{ github.repository }}
           SOURCE_COMMIT: ${{ inputs.source_commit }}
         run: |
           set -euo pipefail
-          if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
-            echo "::error::source_commit non e' una SHA completa"
-            exit 1
-          fi
           if ! current_main="$(timeout --kill-after=1s 60s gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
-            echo "::error::impossibile verificare la HEAD corrente di main per il replay bounded"
+            echo "::error::impossibile verificare la HEAD corrente di main prima della pubblicazione"
             exit 1
           fi
           if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]]; then
             echo "::error::HEAD corrente di main non e' una SHA completa: $current_main"
+            exit 1
+          fi
+          checked_out="$(git rev-parse HEAD)"
+
+          if [ -z "$SOURCE_COMMIT" ]; then
+            if [ "$checked_out" = "$current_main" ]; then
+              echo "sorgente publish confermata sulla HEAD corrente di main $current_main"
+              echo "PUBLISH_API_SOURCE_COMMIT=$current_main" >> "$GITHUB_ENV"
+              exit 0
+            fi
+            if ! git fetch --no-tags origin main; then
+              echo "::error::impossibile scaricare la HEAD corrente di main per riallineare il publish"
+              exit 1
+            fi
+            if ! git merge-base --is-ancestor "$checked_out" "$current_main"; then
+              echo "::error::publish non riconciliabile: checkout=$checked_out non e' antenato di main=$current_main"
+              exit 1
+            fi
+            api_input_changed="$(
+              SOURCE_COMMIT="$checked_out" CURRENT_MAIN="$current_main" node --input-type=module -e '
+                import { apiInputChangedInRange } from "./scripts/publish-section-pages.mjs";
+                process.stdout.write(String(apiInputChangedInRange({
+                  before: process.env.SOURCE_COMMIT,
+                  after: process.env.CURRENT_MAIN,
+                })));
+              '
+            )"
+            if [ "$api_input_changed" = 'true' ]; then
+              echo "::error::publish stantio: main=$current_main contiene input API piu' recenti del checkout=$checked_out; attendo il run della nuova push"
+              exit 1
+            fi
+            git checkout --detach "$current_main"
+            echo "PUBLISH_API_SOURCE_COMMIT=$current_main" >> "$GITHUB_ENV"
+            echo "::notice::publish riallineato dal checkout $checked_out alla HEAD corrente $current_main: nessun input API nel delta"
+            exit 0
+          fi
+
+          if ! [[ "$SOURCE_COMMIT" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::source_commit non e' una SHA completa"
             exit 1
           fi
           if [ "$current_main" = "$SOURCE_COMMIT" ]; then
@@ -1236,6 +1269,29 @@ jobs:
             printf '%s\n' "${urls[@]}" > "$purge_list"
             bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files-from=$purge_list"
           fi
+
+      - name: Verify source is still current before edge flip
+        if: steps.deploy.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          PUBLISHED_SOURCE_COMMIT: ${{ inputs.source_commit || github.sha }}
+        run: |
+          set -euo pipefail
+          if ! current_main="$(timeout --kill-after=1s 60s gh api "repos/$REPOSITORY/git/ref/heads/main" --jq '.object.sha')"; then
+            echo "::error::impossibile verificare la HEAD corrente di main prima del flip edge"
+            exit 1
+          fi
+          published_source="${PUBLISH_API_SOURCE_COMMIT:-$PUBLISHED_SOURCE_COMMIT}"
+          if ! [[ "$current_main" =~ ^[a-f0-9]{40}$ ]] || ! [[ "$published_source" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::identita' della sorgente non verificabile prima del flip edge (source=$published_source main=$current_main)"
+            exit 1
+          fi
+          if [ "$current_main" != "$published_source" ]; then
+            echo "::error::publish superato durante il build: source=$published_source main=$current_main; salto il flip edge e lascio il run successivo riallineare la superficie"
+            exit 1
+          fi
+          echo "sorgente ancora corrente prima del flip edge: $published_source"
 
       # La release edge delle sezioni cantonali (piano «sezioni articoli per
       # cantone», P7). Lo stato servito (live|draft|retired) ha UNA sola fonte:

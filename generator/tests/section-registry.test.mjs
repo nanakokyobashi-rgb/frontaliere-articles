@@ -1690,15 +1690,18 @@ test('publish-api: osserva tutta la chiusura degli import del publisher, e pubbl
   const wf = readFileSync(path.join(ROOT, '.github/workflows/publish-api.yml'), 'utf8');
   assert.match(wf, /source_commit:\n\s+description: .*replay bootstrap bounded/);
   assert.match(wf, /ref: \$\{\{ inputs\.source_commit \|\| github\.sha \}\}/);
-  assert.match(wf, /Verify bounded replay source is still main/);
+  assert.match(wf, /Verify publish source is current main/);
   assert.match(wf, /gh api "repos\/\$REPOSITORY\/git\/ref\/heads\/main"/);
   assert.match(wf, /SOURCE_COMMIT: \$\{\{ inputs\.source_commit \}\}/);
+  assert.match(wf, /if \[ -z "\$SOURCE_COMMIT" \]/);
+  assert.match(wf, /publish stantio: main=\$current_main contiene input API/);
   assert.match(wf, /git fetch --no-tags origin main/);
   assert.match(wf, /git merge-base --is-ancestor "\$SOURCE_COMMIT" "\$current_main"/);
   assert.match(wf, /apiInputChangedInRange/);
   assert.match(wf, /git checkout --detach "\$current_main"/);
   assert.match(wf, /PUBLISH_API_SOURCE_COMMIT=\$current_main/);
   assert.match(wf, /nessun input publish-api nel delta/);
+  assert.match(wf, /Verify source is still current before edge flip/);
   const filters = [...wf.slice(0, wf.indexOf('\n  schedule:')).matchAll(/^      - '([^']+)'$/gm)].map((m) => m[1]);
   const covered = (file) => filters.some((p) => p === file || (p.endsWith('/**') && file.startsWith(p.slice(0, -2))));
   for (const p of [
