@@ -10,11 +10,6 @@ if [ "$EVENT_NAME" = 'workflow_dispatch' ] && [ "$DRY_RUN_INPUT" = 'false' ] \
   echo "::error::replay richiesto con dry_run=false ma il publisher è disarmato; nessuna pubblicazione è stata eseguita"
   exit 1
 fi
-# A workflow_run or a bounded workflow_dispatch can be queued after
-# main has moved while the edge pointer is still between releases.
-# Reconcile against the pinned/current release and retry within the
-# resolve budget instead of turning a harmless stale replay into a
-# deterministic red run before the publish freshness guard.
 reconcile_edge_matrix() {
   local expected_commit="${1:-}"
   local fallback_commit="${2:-}"
@@ -141,9 +136,6 @@ if [ -n "$pinned_source" ]; then
       exit 1
     fi
     export GH_TOKEN="$runtime_pat"
-    # The stale plan dispatches one helper per section in parallel.
-    # Share one short-lived run snapshot across that fan-out so each
-    # worker reuses the same visibility result within the TTL window.
     # Controlled harness evidence (16 workers, empty run list, two
     # attempts × ten polls): 352 `gh run list` calls without the
     # snapshot, 2 with it. This is a request-count measurement, not
@@ -165,6 +157,7 @@ if [ -n "$pinned_source" ]; then
       local replay_after="${11:-}"
       local dispatch_nonce="${12:-}"
       local cleanup_inactive_surface="${13:-false}"
+      local coordinated_recovery="${14:-false}"
       local nonce_seed="$dispatch_nonce"
       local nonce_hash=''
       local dispatch_title=''
@@ -172,7 +165,7 @@ if [ -n "$pinned_source" ]; then
       if [ -z "$nonce_seed" ]; then
         nonce_seed='stale-resolve'
       fi
-      nonce_hash="$(printf '%s\0%s\0%s' "$nonce_seed" "$current_main" "$section" | sha256sum | cut -c1-16)"
+      nonce_hash="$(printf '%s\0%s\0%s\0%s' "$nonce_seed" "$current_main" "$section" "$coordinated_recovery" | sha256sum | cut -c1-16)"
       dispatch_nonce="stale-resolve-${current_main:0:12}-${section}-${nonce_hash}"
       dispatch_title="cover-publish-section / ${section} / nonce=${dispatch_nonce}"
       if bash .replay-dispatcher-source/scripts/ci/dispatch-fast-publish-replay.sh "$REPO" "$dispatch_title" --ref main \
@@ -190,7 +183,8 @@ if [ -n "$pinned_source" ]; then
         -f dry_run="$dry" \
         -f push_before="$replay_before" \
         -f push_after="$replay_after" \
-        -f dispatch_nonce="$dispatch_nonce"; then
+        -f dispatch_nonce="$dispatch_nonce" \
+        -f coordinated_recovery="$coordinated_recovery"; then
         return 0
       fi
       echo "::error::replay non accodato per $section sulla HEAD $current_main"
@@ -225,7 +219,8 @@ if [ -n "$pinned_source" ]; then
         "$replay_before" \
         "$replay_after" \
         "${DISPATCH_NONCE_INPUT:-}" \
-        "${CLEANUP_INACTIVE_SURFACE_INPUT:-false}"
+        "${CLEANUP_INACTIVE_SURFACE_INPUT:-false}" \
+        "${COORDINATED_RECOVERY_INPUT:-false}"
     else
       if [ -n "$replay_before" ]; then
         replay_after="$current_main"
@@ -281,10 +276,6 @@ if [ -n "$pinned_source" ]; then
         echo "::error::impossibile preparare i risultati dei redispatch stale"
         exit 1
       fi
-      # The edge plan may consume eight minutes of this ten-minute
-      # job. Dispatch bounded waves concurrently so the slowest
-      # section, rather than the sum of visibility waits, sets the
-      # remaining time; still retain every section's result.
       max_parallel_dispatches=16
       dispatch_worker_pids=()
       dispatch_sections=()
@@ -306,7 +297,8 @@ if [ -n "$pinned_source" ]; then
           if dispatch_stale_replay \
             "$section" "$article_ids" '[]' '[]' "$bootstrap" "$remove_stale" \
             "$replay_dry" "$replay_api_after_publish" "$allow_deferred_live_release" \
-            "$replay_before" "$replay_after" '' "$cleanup_inactive_surface"; then
+            "$replay_before" "$replay_after" '' "$cleanup_inactive_surface" \
+            "${COORDINATED_RECOVERY_INPUT:-false}"; then
             printf 'accepted\n' > "$dispatch_result_dir/$dispatch_index"
           else
             printf 'failed\n' > "$dispatch_result_dir/$dispatch_index"

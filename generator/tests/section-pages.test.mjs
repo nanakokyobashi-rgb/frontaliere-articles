@@ -3451,6 +3451,10 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   );
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE_INPUT: \$\{\{ inputs\.cleanup_inactive_surface \}\}/);
   assert.match(wf, /CLEANUP_INACTIVE_SURFACE: \$\{\{ matrix\.target\.cleanupInactiveSurface \|\| false \}\}/);
+  assert.match(wf, /COORDINATED_RECOVERY_INPUT: \$\{\{ inputs\.coordinated_recovery \}\}/);
+  assert.match(wf, /COORDINATED_RECOVERY: \$\{\{ inputs\.coordinated_recovery \}\}/);
+  assert.match(resolver, /-f coordinated_recovery="\$coordinated_recovery"/);
+  assert.match(render, /-f coordinated_recovery="\$coordinated_recovery"/);
   assert.match(wf, /-f source_commit="\$CURRENT_MAIN"/);
   assert.match(sectionContract, /-f source_commit="\$current_main"/);
   assert.equal(
@@ -3552,7 +3556,13 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   assert.match(recovery, /-f coordinated_recovery="\$child_coordinated_recovery"/);
   assert.match(recovery, /wait_for_dispatched_children/);
   assert.match(recovery, /REPLAY_CHILD_WAIT_MAX_S/);
+  assert.match(recovery, /REPLAY_COORDINATOR_TIMEOUT_S/);
+  assert.match(recovery, /REPLAY_COORDINATOR_RESERVE_S/);
   assert.match(recovery, /gh run list --repo "\$REPOSITORY" --workflow fast-publish-section\.yml/);
+  assert.match(recovery, /gh run download "\$run_id" --repo "\$REPOSITORY" --name "fast-publish-result-\$section"/);
+  assert.match(recovery, /\.rendered_head == \$expected_head/);
+  assert.match(recovery, /\.stale_handoff \/\/ "false"\) != "true"/);
+  assert.match(recovery, /if \[ "\$\{DRY:-false\}" = 'true' \]/);
   assert.match(recovery, /dispatch_run_snapshot=.*gh run list/);
   assert.match(recovery, /dispatch_baseline_ids=\(\)/);
   assert.match(recovery, /initial_run_state/);
@@ -3658,7 +3668,7 @@ test('fast-publish-section.yml: concurrency per sezione, piano dal core, credenz
   const lateGuardNonceStart = render.lastIndexOf('dispatch_nonce="${DISPATCH_NONCE:-}"');
   const lateGuardTitleStart = render.indexOf('dispatch_title="cover-publish-section / ${SECTION} / nonce=${dispatch_nonce}"', lateGuardNonceStart);
   const lateGuardNonce = render.slice(lateGuardNonceStart, lateGuardTitleStart);
-  assert.match(lateGuardNonce, /nonce_hash="\$\(printf '%s\\0%s\\0%s' "\$nonce_seed" "\$current_main" "\$SECTION" \| sha256sum \| cut -c1-16\)"/);
+  assert.match(lateGuardNonce, /nonce_hash="\$\(printf '%s\\0%s\\0%s\\0%s' "\$nonce_seed" "\$current_main" "\$SECTION" "\$coordinated_recovery" \| sha256sum \| cut -c1-16\)"/);
   assert.match(lateGuardNonce, /dispatch_nonce="stale-late-\$\{current_main:0:12\}-\$\{SECTION\}-\$\{nonce_hash\}"/);
   assert.match(wf, /id: push_range[\s\S]*resolve-workflow-run-push-range\.mjs/);
   assert.doesNotMatch(wf, /commits\/\$WORKFLOW_RUN_HEAD_SHA\/events/);

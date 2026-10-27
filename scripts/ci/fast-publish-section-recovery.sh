@@ -13,31 +13,53 @@ fi
 export GH_TOKEN="$runtime_pat"
 target_matrix="$TARGET_MATRIX"
 if [ "${MIXED_MATRIX:-false}" = 'true' ]; then
-  # Una matrice mista non può riusare il piano risolto prima che
-  # main avanzasse: ricostruisci il piano dalla revisione corrente
-  # e dalla base della push originaria prima di redispatchare.
-  if [ "$(git rev-parse --is-shallow-repository)" = 'true' ]; then
-    git fetch --no-tags --unshallow origin main
-  else
-    git fetch --no-tags origin main
-  fi
   plan_before="${ORIGINAL_PUSH_BEFORE:-}"
   if [ -z "$plan_before" ] || [[ "$plan_before" =~ ^0+$ ]]; then
-    plan_before="$(git rev-parse "${CURRENT_MAIN}^")"
+    # A manual workflow_dispatch carries an explicit section/article scope but
+    # no push range. Never replace that request with CURRENT_MAIN^: doing so
+    # can silently broaden or empty the recovery matrix.
+    target_matrix="$(jq -c 'map(. + {bootstrap: (.bootstrap // false)})' <<<"$target_matrix")"
+    echo "::notice::recovery mixed senza base push: conservo lo scope esplicito del workflow_dispatch"
+  else
+    # Una matrice mista non può riusare il piano risolto prima che main
+    # avanzasse: ricostruisci il piano dalla revisione corrente e dalla base
+    # della push originaria prima di redispatchare.
+    if [ "$(git rev-parse --is-shallow-repository)" = 'true' ]; then
+      git fetch --no-tags --unshallow origin main
+    else
+      git fetch --no-tags origin main
+    fi
+    fetched_current_main="$(git rev-parse refs/remotes/origin/main)"
+    if [ "$fetched_current_main" != "$CURRENT_MAIN" ]; then
+      echo "::error::main e' avanzata durante la preparazione del piano mixed-matrix ($CURRENT_MAIN -> $fetched_current_main); annullo il recovery"
+      exit 1
+    fi
+    if ! [[ "$plan_before" =~ ^[a-f0-9]{40}$ ]]; then
+      echo "::error::base della push non valida per il piano mixed-matrix: $plan_before"
+      exit 1
+    fi
+    git checkout --detach "$CURRENT_MAIN"
+    target_matrix="$(git diff --name-status "$plan_before" "$CURRENT_MAIN" \
+      | PUSH_BEFORE="$plan_before" node scripts/ci/fast-publish-section.mjs r2-plan \
+      | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
   fi
-  if ! [[ "$plan_before" =~ ^[a-f0-9]{40}$ ]]; then
-    echo "::error::base della push non valida per il piano mixed-matrix: $plan_before"
-    exit 1
-  fi
-  git checkout --detach "$CURRENT_MAIN"
-  target_matrix="$(git diff --name-status "$plan_before" "$CURRENT_MAIN" \
-    | PUSH_BEFORE="$plan_before" node scripts/ci/fast-publish-section.mjs r2-plan \
-    | jq -c 'map(. + {bootstrap: (.bootstrap // false)})')"
   if [ -z "$target_matrix" ] || [ "$target_matrix" = '[]' ]; then
     echo "::error::il piano ricalcolato sulla HEAD corrente è vuoto"
     exit 1
   fi
   echo "::notice::piano mixed-matrix ricalcolato sulla HEAD $CURRENT_MAIN dalla base $plan_before"
+fi
+if ! [[ "$target_matrix" =~ ^\[.*\]$ ]] || ! jq -e 'type == "array" and length > 0' <<<"$target_matrix" >/dev/null 2>&1; then
+  echo "::error::piano target non valido o vuoto nel recovery staged"
+  exit 1
+fi
+if ! verified_current_main="$(bash scripts/ci/read-main-head.sh)"; then
+  echo "::error::impossibile rileggere main prima del dispatch dei child staged"
+  exit 1
+fi
+if [ "$verified_current_main" != "$CURRENT_MAIN" ]; then
+  echo "::error::main e' avanzata dopo la costruzione del piano staged ($CURRENT_MAIN -> $verified_current_main); annullo il recovery"
+  exit 1
 fi
 dispatch_nonce_input="${DISPATCH_NONCE:-}"
 dispatched=0
@@ -139,7 +161,24 @@ fi
 # therefore have an explicit barrier before the coordinator can replay the
 # API: otherwise readiness can observe the old surface and publish a manifest
 # while one or more section uploads are still in flight.
-replay_child_wait_max_s="${REPLAY_CHILD_WAIT_MAX_S:-21000}"
+# The coordinator job has a 360-minute timeout. Keep an explicit 60-minute
+# reserve for checkout, readiness probes and the final publish-api dispatch;
+# callers may lower/raise the child budget only with an explicit override.
+replay_coordinator_timeout_s="${REPLAY_COORDINATOR_TIMEOUT_S:-21600}"
+replay_coordinator_reserve_s="${REPLAY_COORDINATOR_RESERVE_S:-3600}"
+if ! [[ "$replay_coordinator_timeout_s" =~ ^[0-9]+$ ]] || [ "$replay_coordinator_timeout_s" -lt 1 ]; then
+  echo "::error::REPLAY_COORDINATOR_TIMEOUT_S non valido: $replay_coordinator_timeout_s"
+  exit 1
+fi
+if ! [[ "$replay_coordinator_reserve_s" =~ ^[0-9]+$ ]] || [ "$replay_coordinator_reserve_s" -lt 1 ]; then
+  echo "::error::REPLAY_COORDINATOR_RESERVE_S non valido: $replay_coordinator_reserve_s"
+  exit 1
+fi
+if [ -n "${REPLAY_CHILD_WAIT_MAX_S:-}" ]; then
+  replay_child_wait_max_s="$REPLAY_CHILD_WAIT_MAX_S"
+else
+  replay_child_wait_max_s=$((replay_coordinator_timeout_s - replay_coordinator_reserve_s))
+fi
 replay_child_wait_interval_s="${REPLAY_CHILD_WAIT_INTERVAL_S:-15}"
 if ! [[ "$replay_child_wait_max_s" =~ ^[0-9]+$ ]] || [ "$replay_child_wait_max_s" -lt 1 ]; then
   echo "::error::REPLAY_CHILD_WAIT_MAX_S non valido: $replay_child_wait_max_s"
@@ -200,7 +239,19 @@ wait_for_dispatched_children() {
       fi
       case "$child_state" in
         success)
-          echo "::notice::child staged completato per $section"
+          if [ "${DRY:-false}" = 'true' ]; then
+            echo "::notice::child staged dry-run completato per $section"
+          elif verify_child_publish_evidence "$latest_run_id" "$section"; then
+            echo "::notice::child staged produttivo verificato per $section"
+          else
+            evidence_status=$?
+            all_success=false
+            if [ "$evidence_status" -eq 1 ]; then
+              pending_sections_csv+="${section}, "
+            else
+              failed_sections_csv+="${section}, "
+            fi
+          fi
           ;;
         failed)
           all_success=false
@@ -231,6 +282,40 @@ wait_for_dispatched_children() {
   done
   echo "::error::timeout della barriera child staged dopo ${replay_child_wait_max_s}s"
   return 1
+}
+
+verify_child_publish_evidence() {
+  local run_id="$1"
+  local section="$2"
+  local evidence_dir=''
+  local evidence_file=''
+  if ! evidence_dir="$(mktemp -d "$RUNNER_TEMP/fast-publish-child-evidence.XXXXXX")"; then
+    echo "::warning::impossibile creare la directory dell evidence per $section"
+    return 1
+  fi
+  if ! gh run download "$run_id" --repo "$REPOSITORY" --name "fast-publish-result-$section" --dir "$evidence_dir" >/dev/null 2>&1; then
+    rm -rf -- "$evidence_dir"
+    echo "::warning::artifact publish non ancora leggibile per $section (run $run_id)"
+    return 1
+  fi
+  evidence_file="$(find "$evidence_dir" -type f -name fast-publish-result.json -print -quit)"
+  if [ -z "$evidence_file" ] || [ ! -s "$evidence_file" ]; then
+    rm -rf -- "$evidence_dir"
+    echo "::warning::artifact publish assente per $section (run $run_id)"
+    return 1
+  fi
+  if ! jq -e --arg section "$section" --arg expected_head "$CURRENT_MAIN" '
+    .section == $section and
+    (.stale_handoff // "false") != "true" and
+    .fresh == "true" and
+    .rendered_head == $expected_head
+  ' "$evidence_file" >/dev/null 2>&1; then
+    rm -rf -- "$evidence_dir"
+    echo "::error::artifact publish non produttivo per $section: rendered_head/fresh/stale_handoff non certificano $CURRENT_MAIN"
+    return 2
+  fi
+  rm -rf -- "$evidence_dir"
+  return 0
 }
 
 wait_for_dispatched_children

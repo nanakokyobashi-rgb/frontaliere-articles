@@ -461,6 +461,7 @@ jobs:
           CLEANUP_INACTIVE_SURFACE_INPUT: ${{ inputs.cleanup_inactive_surface }}
           REPLAY_API_INPUT: ${{ inputs.replay_api_after_publish }}
           ALLOW_DEFERRED_LIVE_RELEASE_INPUT: ${{ inputs.allow_deferred_live_release }}
+          COORDINATED_RECOVERY_INPUT: ${{ inputs.coordinated_recovery }}
           EVENT_NAME: ${{ github.event_name }}
           COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           WORKFLOW_RUN_COVER_DRAIN_COMMIT_MESSAGE: ${{ github.event.workflow_run.head_commit.message }}
@@ -722,6 +723,7 @@ jobs:
           ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
           DRY: ${{ needs.resolve.outputs.dry }}
           REPLAY_API_AFTER_PUBLISH: ${{ inputs.replay_api_after_publish }}
+          COORDINATED_RECOVERY: ${{ inputs.coordinated_recovery }}
           STALE_HEAD: ${{ github.event.workflow_run.head_sha }}
           CURRENT_MAIN: ${{ steps.replay_freshness.outputs.current_main }}
           ORIGINAL_PUSH_BEFORE: ${{ needs.resolve.outputs.push_before }}
@@ -917,6 +919,7 @@ jobs:
           API_RELEASE_COMMIT: ${{ inputs.api_release_commit }}
           ALLOW_DEFERRED_LIVE_RELEASE: ${{ needs.resolve.outputs.allow_deferred_live_release }}
           REPLAY_API_AFTER_PUBLISH: ${{ needs.resolve.outputs.replay_api_after_publish }}
+          COORDINATED_RECOVERY: ${{ inputs.coordinated_recovery }}
           SOURCE_COMMIT: ${{ inputs.source_commit }}
           SOURCE_MAIN_COMMIT: ${{ inputs.source_main_commit }}
           DISPATCH_NONCE: ${{ inputs.dispatch_nonce }}
