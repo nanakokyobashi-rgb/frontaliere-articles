@@ -51,6 +51,9 @@ const blogMetaCantonNeFr: Record<string, string> = {
     'blog.article.tagli-orologeria-locle-lvmh.title': 'Horlogerie : suppression d’environ 100 postes au Locle',
     'blog.article.tagli-orologeria-locle-lvmh.excerpt': 'Zenith supprime environ 100 postes au Locle sur 196 employés ; 101 personnes sont menacées dans la distribution internationale.',
     'blog.article.tagli-orologeria-locle-lvmh.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.successo-abbonamenti-trasporti-ridotti.title': 'Succès abonnements transports en commun à prix réduit',
+    'blog.article.successo-abbonamenti-trasporti-ridotti.excerpt': '66% de réduction pour les moins de 25 ans à partir du 1er juillet 2026 Plus de 15\'000 bons de réduction déjà utilisés Près de 2\'300 abonnements annuels',
+    'blog.article.successo-abbonamenti-trasporti-ridotti.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonNeFr;

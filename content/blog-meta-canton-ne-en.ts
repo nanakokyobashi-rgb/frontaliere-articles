@@ -51,6 +51,9 @@ const blogMetaCantonNeEn: Record<string, string> = {
     'blog.article.tagli-orologeria-locle-lvmh.title': 'Watchmaking: approximately 100 jobs eliminated in Le Locle',
     'blog.article.tagli-orologeria-locle-lvmh.excerpt': 'Zenith is eliminating around 100 positions in Le Locle, out of 196 employees; 101 people are at risk in international distribution.',
     'blog.article.tagli-orologeria-locle-lvmh.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.successo-abbonamenti-trasporti-ridotti.title': 'Success of discounted public transport passes',
+    'blog.article.successo-abbonamenti-trasporti-ridotti.excerpt': '66% discount for under 25s from July 1, 2026 Over 15,000 discount vouchers already used Almost 2,300 additional annual subscriptions in July-September Second',
+    'blog.article.successo-abbonamenti-trasporti-ridotti.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonNeEn;

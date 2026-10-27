@@ -19,6 +19,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'zenith-soppressione-locle': { it: 'zenith-soppressione-locle', en: 'zenith-locle-job-cuts', de: 'zenith-streichungen-locle', fr: 'zenith-suppressions-locle' },
  'mese-salute-mentale-2026': { it: 'mese-salute-mentale-2026', en: 'mental-health-month-2026', de: 'mens-gesundheits-2026', fr: 'mois-sante-mentale-2026' },
  'tagli-orologeria-locle-lvmh': { it: 'tagli-orologeria-locle-lvmh', en: 'watchmaker-cuts-le-locle', de: 'stellenabbau-uhrmacher-le-locle', fr: 'suppressions-emplois-le-locle' },
+ 'successo-abbonamenti-trasporti-ridotti': { it: 'successo-abbonamenti-trasporti-ridotti', en: 'success-reduced-transport-passes', de: 'erfolg-reduzierte-verkehrstickets', fr: 'succes-abonnements-transports-reduits' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

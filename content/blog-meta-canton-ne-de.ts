@@ -51,6 +51,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.tagli-orologeria-locle-lvmh.title': 'Uhrenbranche: Abbau von rund 100 Stellen in Le Locle',
     'blog.article.tagli-orologeria-locle-lvmh.excerpt': 'Zenith baut in Le Locle rund 100 Stellen bei insgesamt 196 Beschäftigten ab; 101 Personen im internationalen Vertrieb sind gefährdet.',
     'blog.article.tagli-orologeria-locle-lvmh.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.successo-abbonamenti-trasporti-ridotti.title': 'Erfolgreiche ermäßigte Fahrkarten für öffentliche Verkehrsmittel',
+    'blog.article.successo-abbonamenti-trasporti-ridotti.excerpt': '66% Rabatt für unter 25-Jährige ab 1.',
+    'blog.article.successo-abbonamenti-trasporti-ridotti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNeDe;
