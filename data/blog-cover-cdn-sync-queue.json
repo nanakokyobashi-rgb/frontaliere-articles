@@ -1,13 +1,4 @@
 {
   "schema": 1,
-  "items": [
-    {
-      "path": "public/images/blog/article-maratona-laghi-varese-2027.webp",
-      "sha256": "0f7102bdf71ac5f06dd0862da375bef325a213f37437fd722c1f1010ba3c8f83"
-    },
-    {
-      "path": "public/images/blog/thumbnails/article-maratona-laghi-varese-2027-480w.webp",
-      "sha256": "961f557d3fe3e3c47431514e0f88a6041bd3b61a815214b7d23fe9483e685139"
-    }
-  ]
+  "items": []
 }
