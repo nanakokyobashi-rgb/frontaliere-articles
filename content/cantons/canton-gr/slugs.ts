@@ -16,6 +16,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'a13-code-grigioni-vacanze-zurighesi': { it: 'a13-code-grigioni-vacanze-zurighesi', en: 'a13-traffic-graubuenden-zurich-holidays', de: 'a13-stau-graubuenden-zuercher-ferien', fr: 'a13-bouchons-grisons-vacances-zurichoises' },
  'rhb-albula-chiusura-thusis-preda': { it: 'rhb-albula-chiusura-thusis-preda', en: 'rhb-albula-line-closure-thusis-preda', de: 'rhb-albulalinie-sperre-thusis-preda', fr: 'rhb-fermeture-ligne-albula-thusis-preda' },
  'cuira-alloggi-acqua-sursaissa': { it: 'cuira-alloggi-acqua-sursaissa', en: 'chur-affordable-housing-water', de: 'chur-bezahlbarer-wohnraum-wasser', fr: 'coire-logements-abordables-eau' },
+ 'cantiere-caraa-guera-interrogazione': { it: 'cantiere-caraa-guera-interrogazione', en: 'caraa-guera-construction-inquiry', de: 'cantiere-caraa-guera-interrogations', fr: 'chantier-caraa-guera-questionnement' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -42,6 +42,9 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.cuira-alloggi-acqua-sursaissa.title': 'Cuira: vote on affordable housing and counter-proposal',
     'blog.article.cuira-alloggi-acqua-sursaissa.excerpt': 'The population of Cuira will vote on November 29 on "abitar pajabel a Cuira" and a counter-proposal; in Sursaissa Mundaun they are asked to save water.',
     'blog.article.cuira-alloggi-acqua-sursaissa.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.cantiere-caraa-guera-interrogazione.title': 'Inquiry into the Caraa de Guèra construction site: clarity on works and costs',
+    'blog.article.cantiere-caraa-guera-interrogazione.excerpt': 'Construction site on Caraa de Guèra, between Maron and Ai Tecc Renovation of utility networks and laying of river cobblestones Seven questions for the Municipality about approvals and costs',
+    'blog.article.cantiere-caraa-guera-interrogazione.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGrEn;

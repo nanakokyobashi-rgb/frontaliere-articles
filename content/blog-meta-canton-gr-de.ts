@@ -42,6 +42,9 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.cuira-alloggi-acqua-sursaissa.title': 'Cuira: Abstimmung über bezahlbaren Wohnraum und Gegenvorschlag',
     'blog.article.cuira-alloggi-acqua-sursaissa.excerpt': 'Die Bevölkerung von Cuira wird am 29.',
     'blog.article.cuira-alloggi-acqua-sursaissa.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.cantiere-caraa-guera-interrogazione.title': 'Anfrage zur Baustelle Caraa de Guèra: Klarheit über Arbeiten und Kosten',
+    'blog.article.cantiere-caraa-guera-interrogazione.excerpt': 'Baustelle an der Caraa de Guèra zwischen Maron und Ai Tecc Erneuerung von Netzen und Verlegung von Flusskieselpflaster Sieben Fragen an die Gemeindeverwaltung zu Genehmigungen und Kosten',
+    'blog.article.cantiere-caraa-guera-interrogazione.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGrDe;

@@ -149,4 +149,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'cantiere-caraa-guera-interrogazione',
+ category: 'pratico',
+ date: '2026-10-27T07:03:29.459Z',
+ image: '/images/blog/article-cantiere-caraa-guera-interrogazione.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
