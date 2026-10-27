@@ -48,6 +48,9 @@ const blogMetaCantonGrDe: Record<string, string> = {
     'blog.article.val-calanca-strada-chiusa.title': 'Val Calanca: 2 Wochen Straßensperrung, Hilfe bei Isolation nötig',
     'blog.article.val-calanca-strada-chiusa.excerpt': 'Val Calanca: Straße nach Erdrutschen zwei Wochen gesperrt Censi fordert dauerhafte Instrumente von der Bündner Regierung Fonds ab dem dritten Tag erwogen',
     'blog.article.val-calanca-strada-chiusa.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.brigels-sette-milioni-impianti.title': 'Brigels genehmigt 7 Mio. CHF zur Sanierung der Anlagen',
+    'blog.article.brigels-sette-milioni-impianti.excerpt': 'Brigels bewilligt 7 Mio.',
+    'blog.article.brigels-sette-milioni-impianti.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonGrDe;

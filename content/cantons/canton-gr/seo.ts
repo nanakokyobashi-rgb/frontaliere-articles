@@ -587,6 +587,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-brigels-sette-milioni-impianti': {
+    title: 'Brigels approva 7 milioni di CHF per risanare gli impianti',
+    description: 'Brigels approva 7 milioni di CHF per risanare gli impianti di risalita: il sostegno punta a garantire l\'operatività e la manutenzione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, brigels, approva, milioni, risanare',
+    ogTitle: 'Brigels approva 7 milioni di CHF per risanare gli impianti',
+    ogDescription: 'Dopo il sì, gli impianti di risalita di Brigels ricevono un sostegno di 7 milioni di CHF per il risanamento. La fonte indica due obiettivi: garantire l\'operatività e mantenere le strutture esistenti. Calendario e ripartizione non sono indicati.',
+    canonicalPath: '/articoli-grigioni/brigels-sette-milioni-impianti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Brigels approva 7 milioni di CHF per risanare gli impianti",
+      "description": "Brigels approva 7 milioni di CHF per risanare gli impianti di risalita: il sostegno punta a garantire l'operatività e la manutenzione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-brigels-sette-milioni-impianti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T09:37:54+00:00",
+      "dateModified": "2026-10-27T09:37:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-grigioni/brigels-sette-milioni-impianti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

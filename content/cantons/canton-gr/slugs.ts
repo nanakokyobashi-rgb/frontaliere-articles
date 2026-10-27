@@ -18,6 +18,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'cuira-alloggi-acqua-sursaissa': { it: 'cuira-alloggi-acqua-sursaissa', en: 'chur-affordable-housing-water', de: 'chur-bezahlbarer-wohnraum-wasser', fr: 'coire-logements-abordables-eau' },
  'cantiere-caraa-guera-interrogazione': { it: 'cantiere-caraa-guera-interrogazione', en: 'caraa-guera-construction-inquiry', de: 'cantiere-caraa-guera-interrogations', fr: 'chantier-caraa-guera-questionnement' },
  'val-calanca-strada-chiusa': { it: 'val-calanca-strada-chiusa', en: 'val-calanca-road-closed', de: 'val-calanca-strasse-geschlossen', fr: 'val-calanca-route-fermee' },
+ 'brigels-sette-milioni-impianti': { it: 'brigels-sette-milioni-impianti', en: 'brigels-seven-million-mountain-lifts', de: 'brigels-sieben-millionen-bergbahnen', fr: 'brigels-sept-millions-remontees' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

@@ -48,6 +48,9 @@ const blogMetaCantonGrIt: Record<string, string> = {
     'blog.article.val-calanca-strada-chiusa.title': 'Val Calanca: chiusura strada per due settimane, chiede sostegno per isolamento',
     'blog.article.val-calanca-strada-chiusa.excerpt': 'Val Calanca: strada chiusa per due settimane dopo smottamenti Censi chiede strumenti permanenti al governo retico Fondo ipotizzato dal terzo giorno',
     'blog.article.val-calanca-strada-chiusa.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.brigels-sette-milioni-impianti.title': 'Brigels approva 7 milioni di CHF per risanare gli impianti',
+    'blog.article.brigels-sette-milioni-impianti.excerpt': 'Brigels approva 7 milioni di CHF per il risanamento degli impianti di risalita.',
+    'blog.article.brigels-sette-milioni-impianti.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonGrIt;

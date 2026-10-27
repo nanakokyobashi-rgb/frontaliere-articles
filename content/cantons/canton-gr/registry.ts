@@ -171,4 +171,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'brigels-sette-milioni-impianti',
+ category: 'novita',
+ date: '2026-10-27T09:37:54.912Z',
+ image: '/images/blog/article-brigels-sette-milioni-impianti.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['GR'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

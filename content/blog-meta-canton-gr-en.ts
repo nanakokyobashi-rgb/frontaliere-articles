@@ -48,6 +48,9 @@ const blogMetaCantonGrEn: Record<string, string> = {
     'blog.article.val-calanca-strada-chiusa.title': 'Val Calanca: road closure for two weeks, seeks support over isolation',
     'blog.article.val-calanca-strada-chiusa.excerpt': 'Calanca Valley: road closed for two weeks after landslides Censi calls on the Rhaetian government for permanent tools Fund envisaged from the third day',
     'blog.article.val-calanca-strada-chiusa.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.brigels-sette-milioni-impianti.title': 'Brigels approves CHF 7 million to rehabilitate the plants',
+    'blog.article.brigels-sette-milioni-impianti.excerpt': 'Brigels approves CHF 7 million for the rehabilitation of ski lifts.',
+    'blog.article.brigels-sette-milioni-impianti.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonGrEn;
