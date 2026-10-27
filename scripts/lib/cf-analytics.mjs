@@ -85,14 +85,21 @@ export async function resolveZoneId(
   timeoutMs = CF_ANALYTICS_TIMEOUT_MS,
 ) {
   if (zoneIdOverride) return zoneIdOverride;
-  const { json } = await fetchJsonWithDeadline(
+  const { res, json } = await fetchJsonWithDeadline(
     `${REST_BASE}/zones?name=${encodeURIComponent(zoneName)}`,
     { headers: { Authorization: `Bearer ${token}` } },
     fetchImpl,
     timeoutMs,
   );
+  const httpStatus = Number.isInteger(res?.status) ? `HTTP ${res.status}` : 'HTTP status sconosciuto';
+  if (!json) {
+    throw new Error(`Cloudflare zone lookup returned non-JSON (${httpStatus}).`);
+  }
   if (!json || !json.success || !json.result?.length) {
-    throw new Error(`Could not resolve Cloudflare zone id for ${zoneName} (check token scope).`);
+    const apiErrors = Array.isArray(json.errors) && json.errors.length > 0
+      ? `: ${json.errors.map((error) => error?.message || JSON.stringify(error)).join('; ')}`
+      : '';
+    throw new Error(`Could not resolve Cloudflare zone id for ${zoneName} (${httpStatus}; check token scope${apiErrors}).`);
   }
   return json.result[0].id;
 }

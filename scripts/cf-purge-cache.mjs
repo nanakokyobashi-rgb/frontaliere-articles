@@ -63,8 +63,9 @@
  *
  * Zone-id resolution itself delegates to scripts/lib/cf-analytics.mjs's
  * resolveZoneId (AGENTS.md #6 — no inline copy of that fetch+parse construct);
- * this file's own resolveZoneId() wrapper only adds this script's specific
- * warnStaleEdge annotation on failure.
+ * this file's own resolveZoneId() wrapper adds this script's specific
+ * warnStaleEdge annotation while preserving the resolver's HTTP diagnostic
+ * so retry-cmd can still classify a transient 5xx.
  *
  * Exit: 0 = purged (or no-op when CF_API_TOKEN absent — non-fatal so a
  * missing secret never fails the deploy), 1 = API/auth error, or arguments
@@ -332,9 +333,10 @@ async function cf(method, path, body) {
 async function resolveZoneId() {
   try {
     return await resolveZoneIdShared(token, ZONE_NAME, process.env.CF_ZONE_ID);
-  } catch {
-    console.error(`❌ Cannot resolve zone id for ${ZONE_NAME} (token scope?).`);
-    warnStaleEdge(`could not resolve zone id for ${ZONE_NAME} (token scope?)`);
+  } catch (error) {
+    const detail = error?.message || 'errore Cloudflare senza dettagli';
+    console.error(`❌ Cannot resolve zone id for ${ZONE_NAME}: ${detail}`);
+    warnStaleEdge(`could not resolve zone id for ${ZONE_NAME}: ${detail}`);
     process.exit(1);
   }
 }

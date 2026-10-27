@@ -143,6 +143,11 @@ test('il purge Cloudflare conserva lo status HTTP per il wrapper di retry', () =
   assert.match(src, /\$\{httpStatus\} API call failed/u);
   assert.match(
     src,
+    /const detail = error\?\.message[\s\S]*Cannot resolve zone id/u,
+    'anche la risoluzione della zona deve lasciare visibile lo status al retry wrapper',
+  );
+  assert.match(
+    src,
     /Cloudflare API response body could not be parsed \(\$\{httpStatus\}\)/u,
     'anche una risposta HTML del provider deve conservare il codice HTTP per il retry',
   );
