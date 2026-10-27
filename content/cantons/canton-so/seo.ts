@@ -582,6 +582,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sedute-parlamento-novembre-2026': {
+    title: 'Consiglio Cantonale Soletta: sedute 3, 4 e 11 novembre 2026',
+    description: 'Dettagli sulle sedute del Consiglio Cantonale di Soletta il 3, 4 e 11 novembre 2026: 58 affari, 7 normativi e 7 urgenti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, cantonale, soletta, sedute',
+    ogTitle: 'Sedute Parlamento Soletta Novembre 2026',
+    ogDescription: 'Consultare il calendario del Consiglio Cantonale di Soletta per le sedute del 3, 4 e 11 novembre 2026. Sono previsti 58 affari, inclusi 7 normativi e 7 urgenti.',
+    canonicalPath: '/articoli-soletta/sedute-parlamento-novembre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio Cantonale Soletta: sedute 3, 4 e 11 novembre 2026",
+      "description": "Dettagli sulle sedute del Consiglio Cantonale di Soletta il 3, 4 e 11 novembre 2026: 58 affari, 7 normativi e 7 urgenti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-sedute-parlamento-novembre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T11:07:13+00:00",
+      "dateModified": "2026-10-27T11:07:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-soletta/sedute-parlamento-novembre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

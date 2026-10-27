@@ -18,6 +18,7 @@ export const CANTON_SLUGS: Record<string, { it: string; en: string; de: string; 
  'finanzkommission-k-rzt-kredit-digitalisierung': { it: 'finanzkommission-k-rzt-kredit-digitalisierung', en: 'financial-commission-cuts-digitalization-credit', de: 'finanzkommission-kurzt-kredit-digitalisierung', fr: 'commission-financiere-coupe-credit-digitalisation' },
  'cambio-ora-rischio-wildunfalli': { it: 'cambio-ora-rischio-wildunfalli', en: 'time-change-wild-animal-risk-solothurn', de: 'zeitumstellung-wildunfall-solothurn', fr: 'changement-heure-risque-wild-soleure' },
  'batterie-sodio-soletta': { it: 'batterie-sodio-soletta', en: 'sodium-batteries-solothurn', de: 'sodium-batterien-solothurn', fr: 'batteries-sodium-soleure' },
+ 'sedute-parlamento-novembre-2026': { it: 'sedute-parlamento-novembre-2026', en: 'parliament-sessions-november-2026', de: 'parlament-sitzungen-november-2026', fr: 'sessions-parlement-novembre-2026' },
 };
 
 export const CANTON_SLUG_FALLBACK_REASONS: Record<string, Record<string, string>> = {

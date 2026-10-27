@@ -48,6 +48,9 @@ const blogMetaCantonSoEn: Record<string, string> = {
     'blog.article.batterie-sodio-soletta.title': 'Sodium-ion batteries: assembly in Solothurn',
     'blog.article.batterie-sodio-soletta.excerpt': 'Lithium-free sodium-ion batteries Software developed in Switzerland, assembly in Solothurn More than 600 batteries sold by the end of September 2026 First',
     'blog.article.batterie-sodio-soletta.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.sedute-parlamento-novembre-2026.title': 'Solothurn Cantonal Council: meetings of 3, 4 and 11 November 2026',
+    'blog.article.sedute-parlamento-novembre-2026.excerpt': 'On the agenda 58 affairs, including 7 regulatory and substantive affairs and 7 urgent parliamentary interventions.',
+    'blog.article.sedute-parlamento-novembre-2026.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonSoEn;

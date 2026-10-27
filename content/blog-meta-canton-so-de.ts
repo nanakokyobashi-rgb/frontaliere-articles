@@ -48,6 +48,9 @@ const blogMetaCantonSoDe: Record<string, string> = {
     'blog.article.batterie-sodio-soletta.title': 'Natrium-Ionen-Batterien: Montage in Solothurn',
     'blog.article.batterie-sodio-soletta.excerpt': 'Natrium-Ionen-Batterien ohne Lithium In der Schweiz entwickelte Software, Montage in Solothurn Bis Ende September 2026 über 600 verkaufte Batterien Erstes',
     'blog.article.batterie-sodio-soletta.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.sedute-parlamento-novembre-2026.title': 'Kantonsrat Solothurn: Sitzungen vom 3., 4. und 11. November 2026',
+    'blog.article.sedute-parlamento-novembre-2026.excerpt': 'Auf der Tagesordnung stehen 58 Angelegenheiten, darunter 7 regulatorische und materielle Angelegenheiten sowie 7 dringende parlamentarische Interventionen.',
+    'blog.article.sedute-parlamento-novembre-2026.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonSoDe;

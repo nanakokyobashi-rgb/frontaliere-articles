@@ -48,6 +48,9 @@ const blogMetaCantonSoFr: Record<string, string> = {
     'blog.article.batterie-sodio-soletta.title': 'Batteries aux ions sodium : assemblage à Soleure',
     'blog.article.batterie-sodio-soletta.excerpt': 'Batteries aux ions sodium sans lithium Logiciels développés en Suisse, assemblage à Soleure Plus de 600 batteries vendues d’ici fin septembre 2026 Premier',
     'blog.article.batterie-sodio-soletta.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
+    'blog.article.sedute-parlamento-novembre-2026.title': 'Conseil cantonal de Soleure : réunions des 3, 4 et 11 novembre 2026',
+    'blog.article.sedute-parlamento-novembre-2026.excerpt': 'À l\'ordre du jour 58 affaires, dont 7 affaires réglementaires et substantielles et 7 interventions parlementaires urgentes.',
+    'blog.article.sedute-parlamento-novembre-2026.imageAlt': 'Image illustrative en lien avec le sujet de l’article',
 };
 
 export default blogMetaCantonSoFr;

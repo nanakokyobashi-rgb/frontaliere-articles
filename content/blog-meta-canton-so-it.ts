@@ -48,6 +48,9 @@ const blogMetaCantonSoIt: Record<string, string> = {
     'blog.article.batterie-sodio-soletta.title': 'Batterie agli ioni di sodio: montaggio a Soletta',
     'blog.article.batterie-sodio-soletta.excerpt': 'Batterie agli ioni di sodio senza litio Software sviluppato in Svizzera, montaggio a Soletta Oltre 600 batterie vendute entro fine settembre 2026 Primo sistema',
     'blog.article.batterie-sodio-soletta.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.sedute-parlamento-novembre-2026.title': 'Consiglio Cantonale Soletta: sedute 3, 4 e 11 novembre 2026',
+    'blog.article.sedute-parlamento-novembre-2026.excerpt': 'In agenda 58 affari, inclusi 7 affari normativi e di merito e 7 interventi parlamentari urgenti.',
+    'blog.article.sedute-parlamento-novembre-2026.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonSoIt;

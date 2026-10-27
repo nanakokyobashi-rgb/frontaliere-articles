@@ -171,4 +171,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sedute-parlamento-novembre-2026',
+ category: 'novita',
+ date: '2026-10-27T11:07:13.770Z',
+ image: '/images/blog/article-sedute-parlamento-novembre-2026.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['SO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];
