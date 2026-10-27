@@ -41,11 +41,12 @@ import {
   findAllSeoEntryMatches,
   hasInterpolatedStaticProperty,
   lastStaticPropertyValue,
+  readStaticObjectProperty,
   readStructuredSeoDescription,
   readStructuredSeoDescriptionState,
+  readStructuredSeoObjectBlocks,
 } from './shared/seo-entry.mjs';
 import { createImageCreditReader, mediaRssCreditXml, renderImageCreditHtml } from './shared/imageCredits.mjs';
-import { decodeStaticStringLiteral } from './shared/ts-literals.mjs';
 import { articleSectionEntry } from './shared/articleSectionCore.mjs';
 import { cantonRssChannel } from './shared/cantonSectionCopy.mjs';
 
@@ -225,21 +226,6 @@ function resolveSlugFile(path, slugFile, slugDir) {
 // ── Parsers ───────────────────────────────────────────────────────────
 
 /** Parse seo-blog*.ts chunks for per-article SEO metadata. */
-/**
- * Undo the escaping create-article applies when it writes a value into a
- * quoted TS/JSON literal. Matching the escape in the regex keeps the value from
- * being truncated; this is what turns the matched text back into what the
- * article actually says, so `dell\'Italia` reads `dell'Italia`.
- *
- * @param {string | undefined} value
- * @param {'"' | "'" | '`'} quote
- * @returns {string | undefined}
- */
-function unescapeQuoted(value, quote) {
-  if (value === undefined) return undefined;
-  return decodeStaticStringLiteral(value, quote);
-}
-
 function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
   const articles = new Map(); // articleId → metadata
 
@@ -294,16 +280,21 @@ function parseSeoBlogs(fs, path, rootDir, seoDir, seoFiles) {
       // and visible byline are built from. Carry only a named real Person or
       // editorial-profile Organization: the newsroom fallback is the channel
       // title and repeating it as <dc:creator> would say nothing.
-      const authorBlock = block.match(/"author":\s*\{[^}]*\}/)?.[0];
+      const authorBlock = readStructuredSeoObjectBlocks(block)
+        .map((structuredDataObject) => readStaticObjectProperty(structuredDataObject, 'author'))
+        .filter(Boolean)
+        .at(-1);
       const isNamedAuthor =
         authorBlock &&
-        ((/"@type":\s*"Organization"/.test(authorBlock) &&
-          (/"@id":\s*"[^"]+#profile"/.test(authorBlock) || /"url":\s*"[^"]*\/autori\//.test(authorBlock)))
-          || (/(?:"@type":\s*"Person")/.test(authorBlock) &&
-            (/"@id":\s*"[^"]+#person"/.test(authorBlock) || /"url":\s*"[^"]*\/autori\//.test(authorBlock))));
+        ((lastStaticPropertyValue(authorBlock, '@type') === 'Organization' &&
+          (lastStaticPropertyValue(authorBlock, '@id')?.endsWith('#profile')
+            || lastStaticPropertyValue(authorBlock, 'url')?.includes('/autori/')))
+          || (lastStaticPropertyValue(authorBlock, '@type') === 'Person' &&
+            (lastStaticPropertyValue(authorBlock, '@id')?.endsWith('#person')
+              || lastStaticPropertyValue(authorBlock, 'url')?.includes('/autori/'))));
       const authorName =
         isNamedAuthor
-          ? unescapeQuoted(authorBlock.match(/"name":\s*"((?:[^"\\]|\\.)*)"/)?.[1], '"')
+          ? lastStaticPropertyValue(authorBlock, 'name') || ''
           : '';
 
       // An item needs a REAL date: `<pubDate>` and the newest-first sort are
