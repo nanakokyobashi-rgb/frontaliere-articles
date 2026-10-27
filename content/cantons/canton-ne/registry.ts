@@ -215,4 +215,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'arco-giurassiano-frontalieri',
+ category: 'novita',
+ date: '2026-10-27T19:06:44.911Z',
+ image: '/images/blog/article-arco-giurassiano-frontalieri.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['NE', 'JU'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

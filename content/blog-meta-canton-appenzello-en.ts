@@ -60,6 +60,9 @@ const blogMetaCantonAppenzelloEn: Record<string, string> = {
     'blog.article.credito-pfas-appenzello.title': 'Appenzell Ausserrhoden: credit approved for the PFAS program',
     'blog.article.credito-pfas-appenzello.excerpt': 'The Parliament of Appenzell Ausserrhoden approved the funding for a PFAS program by 60 votes to zero, with one abstention.',
     'blog.article.credito-pfas-appenzello.imageAlt': 'Illustrative image relevant to the article topic',
+    'blog.article.teufen-ricorso-progetto-bundt.title': 'Teufen: appeal concerning the Bündt project partially upheld',
+    'blog.article.teufen-ricorso-progetto-bundt.excerpt': 'The Obergericht of Appenzell Ausserrhoden partially upheld the residents\' appeal: the Bündt road project cannot be implemented in its current form.',
+    'blog.article.teufen-ricorso-progetto-bundt.imageAlt': 'Illustrative image relevant to the article topic',
 };
 
 export default blogMetaCantonAppenzelloEn;

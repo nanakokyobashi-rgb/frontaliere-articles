@@ -60,6 +60,9 @@ const blogMetaCantonAppenzelloIt: Record<string, string> = {
     'blog.article.credito-pfas-appenzello.title': 'Appenzello Esterno: credito approvato per il programma PFAS',
     'blog.article.credito-pfas-appenzello.excerpt': 'Il Parlamento di Appenzello Esterno ha approvato con 60 voti a zero e un\'astensione il credito per un programma PFAS.',
     'blog.article.credito-pfas-appenzello.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.teufen-ricorso-progetto-bundt.title': 'Teufen: accolto in parte il ricorso sul progetto Bündt',
+    'blog.article.teufen-ricorso-progetto-bundt.excerpt': 'L\'Obergericht dell\'Appenzello Esterno ha accolto in parte il ricorso degli abitanti: il progetto stradale Bündt non può essere attuato nella forma attuale.',
+    'blog.article.teufen-ricorso-progetto-bundt.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonAppenzelloIt;

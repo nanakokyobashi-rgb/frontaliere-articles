@@ -4,8 +4,8 @@
   "section": "canton-sg",
   "canton": "SG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T10:55:28.229Z",
-  "contentHash": "e6e1012f15a976f1baa013cdf25d121dced1a745af0b00adbd8062c35384416a",
+  "updatedAt": "2026-10-27T19:21:58.604Z",
+  "contentHash": "509c157b66cd4ce548f74248a94f641f9aea68ccd6d5a451b832f9e7a185fb03",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-27T00:53:25.881Z",
+      "updatedAt": "2026-10-27T15:37:37.261Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T21:55:18.630Z",
+      "updatedAt": "2026-10-27T11:01:59.897Z",
       "keyFacts": 0
     }
   ],
@@ -153,14 +153,13 @@
               "date": "2026-10-26T15:31:00.000Z"
             },
             {
-              "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità…",
-              "value": "Cantiere",
-              "detail": "fine prevista: 13 novembre 2026",
-              "date": "2026-04-10T06:30:00.000Z"
+              "label": "Revocato: A13 Sargans -> St. Margrethen tra Svincolo autostradale Sennwald E Svincolo autostradale Oberriet Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-27T15:00:00.000Z"
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T15:37:37.261Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -198,7 +197,7 @@
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/sonnental--auto-in-strassenlaterne-geprallt.html"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -286,7 +285,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     },
     "en": {
       "canton": "SG",
@@ -417,14 +416,13 @@
               "date": "2026-10-26T15:31:00.000Z"
             },
             {
-              "label": "A13 Sargans <-> St. Margrethen tra Svincolo autostradale Oberriet E Svincolo autostradale Haag Situazione: problemi di traffico cantiere, lunghezza [km] 2.0 Limitazione del traffico: nuova viabilità…",
-              "value": "Roadworks",
-              "detail": "until 13 November 2026",
-              "date": "2026-04-10T06:30:00.000Z"
+              "label": "Revocato: A13 Sargans -> St. Margrethen tra Svincolo autostradale Sennwald E Svincolo autostradale Oberriet Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-27T15:00:00.000Z"
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T15:37:37.261Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -462,7 +460,7 @@
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/sonnental--auto-in-strassenlaterne-geprallt.html"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -549,7 +547,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     },
     "de": {
       "canton": "SG",
@@ -680,14 +678,13 @@
               "date": "2026-10-26T15:31:00.000Z"
             },
             {
-              "label": "A13 Sargans <-> St. Margrethen zwischen Anschluss Oberriet und Anschluss Haag Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 2.0 Verkehrsführung: veränderte Verkehrsführung Zusatz 1…",
-              "value": "Baustelle",
-              "detail": "bis 13. November 2026",
-              "date": "2026-04-10T06:30:00.000Z"
+              "label": "Aufgehoben: A13 Sargans -> St. Margrethen zwischen Anschluss Sennwald und Anschluss Oberriet Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-27T15:00:00.000Z"
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T15:37:37.261Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -725,7 +722,7 @@
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/sonnental--auto-in-strassenlaterne-geprallt.html"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -812,7 +809,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     },
     "fr": {
       "canton": "SG",
@@ -943,14 +940,13 @@
               "date": "2026-10-26T15:31:00.000Z"
             },
             {
-              "label": "A13 Sargans <-> St. Margrethen entre Jonction autoroutière Oberriet et Jonction autoroutière Haag Situation: trafic perturbé travaux, longueur [km] 2.0 Gestion du trafic: nouveau plan de circulation…",
-              "value": "Chantier",
-              "detail": "jusqu’au 13 novembre 2026",
-              "date": "2026-04-10T06:30:00.000Z"
+              "label": "Révoqué: A13 Sargans -> St. Margrethen entre Jonction autoroutière Sennwald et Jonction autoroutière Oberriet Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-27T15:00:00.000Z"
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T15:37:37.261Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -988,7 +984,7 @@
               "url": "https://www.sg.ch/news/sgch_kantonspolizei/2026/10/sonnental--auto-in-strassenlaterne-geprallt.html"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -1076,7 +1072,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     }
   }
 }

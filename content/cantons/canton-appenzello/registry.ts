@@ -215,4 +215,15 @@ export const CANTON_ARTICLES: Article[] = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'teufen-ricorso-progetto-bundt',
+ category: 'novita',
+ date: '2026-10-27T20:08:13.817Z',
+ image: '/images/blog/article-teufen-ricorso-progetto-bundt.webp',
+ hasCalculator: true,
+ articleType: 'news',
+ canton: ['APPENZELLO'],
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ];

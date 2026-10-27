@@ -4,8 +4,8 @@
   "section": "canton-tg",
   "canton": "TG",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T10:55:28.229Z",
-  "contentHash": "28c3a8438c72ba05d26f724c7ad3f0f0d73ee3d766efeecc5b4eecf164c7eb71",
+  "updatedAt": "2026-10-27T19:21:58.604Z",
+  "contentHash": "70ced77b88ab414bea35907a32fb605ec825bb5e877483bb1bca84dae7a2fe1f",
   "blocks": [
     {
       "id": "attese-valichi",
@@ -14,12 +14,12 @@
     },
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-27T00:53:25.881Z",
+      "updatedAt": "2026-10-27T15:37:37.261Z",
       "keyFacts": 1
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T21:55:18.630Z",
+      "updatedAt": "2026-10-27T11:01:59.897Z",
       "keyFacts": 0
     }
   ],
@@ -82,6 +82,11 @@
           "description": "Limitazioni in corso o in partenza nei prossimi giorni sulle strade e sul trasporto pubblico del cantone.",
           "items": [
             {
+              "label": "H14 Frauenfeld -> Romanshorn tra Luogo Weinfelden E Luogo Bürglen Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffico",
+              "date": "2026-10-27T15:20:00.000Z"
+            },
+            {
               "label": "A7 Kreuzlingen -> Winterthur tra Svincolo autostradale Kreuzlingen Nord E Svincolo autostradale Kreuzlingen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 1.8 Limitazione del…",
               "value": "Cantiere",
               "detail": "fine prevista: 30 ottobre 2026",
@@ -101,7 +106,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T15:37:37.261Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -139,7 +144,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80333"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -199,7 +204,7 @@
           "url": "/dogana/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     },
     "en": {
       "canton": "TG",
@@ -259,6 +264,11 @@
           "description": "Restrictions in force or starting in the coming days on the canton’s roads and public transport.",
           "items": [
             {
+              "label": "H14 Frauenfeld -> Romanshorn tra Luogo Weinfelden E Luogo Bürglen Situazione: colonna Causa: traffico congestionato",
+              "value": "Traffic",
+              "date": "2026-10-27T15:20:00.000Z"
+            },
+            {
               "label": "A7 Kreuzlingen -> Winterthur tra Svincolo autostradale Kreuzlingen Nord E Svincolo autostradale Kreuzlingen Süd Situazione: problemi di traffico cantiere, lunghezza [km] 1.8 Limitazione del…",
               "value": "Roadworks",
               "detail": "until 30 October 2026",
@@ -278,7 +288,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T15:37:37.261Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -316,7 +326,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80333"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -376,7 +386,7 @@
           "url": "/en/customs/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     },
     "de": {
       "canton": "TG",
@@ -436,6 +446,11 @@
           "description": "Laufende oder in den nächsten Tagen beginnende Einschränkungen auf den Strassen und im öffentlichen Verkehr des Kantons.",
           "items": [
             {
+              "label": "H14 Frauenfeld -> Romanshorn zwischen Ortschaft Weinfelden und Ortschaft Bürglen Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "value": "Verkehr",
+              "date": "2026-10-27T15:20:00.000Z"
+            },
+            {
               "label": "A7 Kreuzlingen -> Winterthur zwischen Anschluss Kreuzlingen-Nord und Anschluss Kreuzlingen-Süd Sachlage: Verkehrsbehinderung Baustelle, Länge [km] 1.8 Verkehrsführung: Fahrbahnverengung auf einen…",
               "value": "Baustelle",
               "detail": "bis 30. Oktober 2026",
@@ -455,7 +470,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T15:37:37.261Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -493,7 +508,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80333"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -553,7 +568,7 @@
           "url": "/de/zoll/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     },
     "fr": {
       "canton": "TG",
@@ -613,6 +628,11 @@
           "description": "Restrictions en cours ou débutant dans les prochains jours sur les routes et les transports publics du canton.",
           "items": [
             {
+              "label": "H14 Frauenfeld -> Romanshorn entre Localité Weinfelden et Localité Bürglen Situation: bouchon Raison: surcharge de trafic",
+              "value": "Trafic",
+              "date": "2026-10-27T15:20:00.000Z"
+            },
+            {
               "label": "A7 Kreuzlingen -> Winterthur entre Jonction autoroutière Kreuzlingen-Nord et Jonction autoroutière Kreuzlingen-Sud Situation: trafic perturbé travaux, longueur [km] 1.8 Gestion du trafic…",
               "value": "Chantier",
               "detail": "jusqu’au 30 octobre 2026",
@@ -632,7 +652,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-27T00:53:25.881Z"
+          "updatedAt": "2026-10-27T15:37:37.261Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -670,7 +690,7 @@
               "url": "https://www.tg.ch/news.html/485/news/80333"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -730,7 +750,7 @@
           "url": "/fr/douane/"
         }
       ],
-      "updatedAt": "2026-10-27T10:55:28.229Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     }
   }
 }

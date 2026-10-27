@@ -4,17 +4,17 @@
   "section": "canton-lu",
   "canton": "LU",
   "topic": "mobilita",
-  "updatedAt": "2026-10-27T13:04:04.614Z",
-  "contentHash": "796bbaa0d98c0f4d4fa909f390554e4026989c56841fe23d011633f2f17b6810",
+  "updatedAt": "2026-10-27T19:21:58.604Z",
+  "contentHash": "5f3c4c9f02c36933dba890f0088a9c70281d04413b9f452da86e4b535db5e8d0",
   "blocks": [
     {
       "id": "chiusure-cantieri",
-      "updatedAt": "2026-10-27T09:24:17.388Z",
+      "updatedAt": "2026-10-27T15:37:37.261Z",
       "keyFacts": 2
     },
     {
       "id": "avvisi-ufficiali",
-      "updatedAt": "2026-10-26T21:55:18.630Z",
+      "updatedAt": "2026-10-27T11:01:59.897Z",
       "keyFacts": 0
     }
   ],
@@ -32,7 +32,7 @@
         },
         {
           "label": "Cantieri attivi o imminenti",
-          "value": "28",
+          "value": "30",
           "note": "segnalazioni aggiornate: 27 ottobre 2026"
         }
       ],
@@ -49,9 +49,9 @@
               "date": "2026-10-13T05:24:00.000Z"
             },
             {
-              "label": "Revocato: A14 Luzern -> Zug tra Raccordo autostradale Diramazione Rotsee E Svincolo autostradale Buchrain Situazione: colonna Causa: traffico congestionato",
+              "label": "H4 Luzern <-> Zürich tra Svincolo autostradale Walterswil E Luogo Sihlbrugg Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffico",
-              "date": "2026-10-27T05:05:00.000Z"
+              "date": "2026-10-27T14:25:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -91,7 +91,7 @@
             }
           ],
           "sourceName": "Ufficio federale delle strade (USTRA) e avvisi cantonali",
-          "updatedAt": "2026-10-27T09:24:17.388Z"
+          "updatedAt": "2026-10-27T15:37:37.261Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -114,7 +114,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -160,7 +160,7 @@
           "url": "/trasporti/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     },
     "en": {
       "canton": "LU",
@@ -175,7 +175,7 @@
         },
         {
           "label": "Roadworks active or imminent",
-          "value": "28",
+          "value": "30",
           "note": "reports as of 27 October 2026"
         }
       ],
@@ -192,9 +192,9 @@
               "date": "2026-10-13T05:24:00.000Z"
             },
             {
-              "label": "Revocato: A14 Luzern -> Zug tra Raccordo autostradale Diramazione Rotsee E Svincolo autostradale Buchrain Situazione: colonna Causa: traffico congestionato",
+              "label": "H4 Luzern <-> Zürich tra Svincolo autostradale Walterswil E Luogo Sihlbrugg Situazione: traffico fortemente rallentato Causa: traffico congestionato",
               "value": "Traffic",
-              "date": "2026-10-27T05:05:00.000Z"
+              "date": "2026-10-27T14:25:00.000Z"
             },
             {
               "label": "H10 Berna <-> Lucerna tra Luogo Wiggen E Luogo Kröschenbrunnen Situazione: problemi di traffico Causa: lavori di costruzione Limitazione del traffico: circolazione a corsie alternate",
@@ -234,7 +234,7 @@
             }
           ],
           "sourceName": "Federal Roads Office (FEDRO) and cantonal notices",
-          "updatedAt": "2026-10-27T09:24:17.388Z"
+          "updatedAt": "2026-10-27T15:37:37.261Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -257,7 +257,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -301,7 +301,7 @@
           "url": "/en/transport/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     },
     "de": {
       "canton": "LU",
@@ -316,7 +316,7 @@
         },
         {
           "label": "Aktive oder bevorstehende Baustellen",
-          "value": "28",
+          "value": "30",
           "note": "Meldungen vom 27. Oktober 2026"
         }
       ],
@@ -333,9 +333,9 @@
               "date": "2026-10-13T05:24:00.000Z"
             },
             {
-              "label": "Aufgehoben: A14 Luzern -> Zug zwischen Autobahndreieck Verzweigung Rotsee und Anschluss Buchrain Sachlage: Stau Ursache: Verkehrsüberlastung",
+              "label": "H4 Luzern <-> Zürich zwischen Anschluss Walterswil und Ortschaft Sihlbrugg Sachlage: stockender Verkehr Ursache: Verkehrsüberlastung",
               "value": "Verkehr",
-              "date": "2026-10-27T05:05:00.000Z"
+              "date": "2026-10-27T14:25:00.000Z"
             },
             {
               "label": "H10 Bern <-> Luzern zwischen Ortschaft Wiggen und Ortschaft Kröschenbrunnen Sachlage: Verkehrsbehinderung Ursache: Bauarbeiten Verkehrsführung: wechselseitige Verkehrsführung",
@@ -375,7 +375,7 @@
             }
           ],
           "sourceName": "Bundesamt für Strassen (ASTRA) und kantonale Meldungen",
-          "updatedAt": "2026-10-27T09:24:17.388Z"
+          "updatedAt": "2026-10-27T15:37:37.261Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -398,7 +398,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -442,7 +442,7 @@
           "url": "/de/verkehr/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     },
     "fr": {
       "canton": "LU",
@@ -457,7 +457,7 @@
         },
         {
           "label": "Chantiers actifs ou imminents",
-          "value": "28",
+          "value": "30",
           "note": "signalements au 27 octobre 2026"
         }
       ],
@@ -474,9 +474,9 @@
               "date": "2026-10-13T05:24:00.000Z"
             },
             {
-              "label": "Révoqué: A14 Lucerne -> Zoug entre Echangeur Echangeur du Rotsee et Jonction autoroutière Buchrain Situation: bouchon Raison: surcharge de trafic",
+              "label": "H4 Lucerne <-> Zurich entre Jonction autoroutière Walterswil et Localité Sihlbrugg Situation: trafic en accordéon Raison: surcharge de trafic",
               "value": "Trafic",
-              "date": "2026-10-27T05:05:00.000Z"
+              "date": "2026-10-27T14:25:00.000Z"
             },
             {
               "label": "H10 Berne <-> Lucerne entre Localité Wiggen et Localité Kröschenbrunnen Situation: trafic perturbé Raison: travaux de construction Gestion du trafic: circulation alternée à une voie",
@@ -516,7 +516,7 @@
             }
           ],
           "sourceName": "Office fédéral des routes (OFROU) et avis cantonaux",
-          "updatedAt": "2026-10-27T09:24:17.388Z"
+          "updatedAt": "2026-10-27T15:37:37.261Z"
         },
         {
           "id": "avvisi-ufficiali",
@@ -539,7 +539,7 @@
               "url": "https://www.vvl.ch/news/verbundrat-beschliesst-oev-angebot-fuer-2027"
             }
           ],
-          "updatedAt": "2026-10-26T21:55:18.630Z"
+          "updatedAt": "2026-10-27T11:01:59.897Z"
         }
       ],
       "curatedArticles": [
@@ -585,7 +585,7 @@
           "url": "/fr/transports/"
         }
       ],
-      "updatedAt": "2026-10-27T13:04:04.614Z"
+      "updatedAt": "2026-10-27T19:21:58.604Z"
     }
   }
 }
