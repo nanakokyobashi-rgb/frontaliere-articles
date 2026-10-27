@@ -733,6 +733,45 @@ const CANTON_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-arco-giurassiano-frontalieri': {
+    title: 'Mutamenti del lavoro frontaliero nell\'Arco giurassiano',
+    description: 'Arco giurassiano, lavoro frontaliero e quadro fiscale e previdenziale 2026 del Cantone di Neuchâtel, con aliquote A0 e parametri sociali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, mutamenti, lavoro, frontaliero, nell',
+    ogTitle: 'Mutamenti del lavoro frontaliero nell\'Arco giurassiano',
+    ogDescription: 'Il tema è l\'evoluzione dell\'occupazione frontaliera nell\'Arco giurassiano. Il quadro 2026 del Cantone di Neuchâtel aggiunge aliquote A0 e parametri AVS, AD e LPP, separati dai fatti dell\'episodio, senza anticipare esiti.',
+    canonicalPath: '/articoli-neuchatel/arco-giurassiano-frontalieri/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mutamenti del lavoro frontaliero nell'Arco giurassiano",
+      "description": "Arco giurassiano, lavoro frontaliero e quadro fiscale e previdenziale 2026 del Cantone di Neuchâtel, con aliquote A0 e parametri sociali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://openai.com/policies/terms-of-use/",
+        "copyrightNotice": "Generated media; provider terms apply.",
+        "license": "https://openai.com/policies/terms-of-use/",
+        "creator": { "@type": "Organization", "@id": "https://frontaliereticino.ch/#organization", "name": "frontaliereticino.ch", "url": "https://frontaliereticino.ch/" },
+        "creditText": "frontaliereticino.ch",
+        "url": `${BASE_URL}/images/blog/article-arco-giurassiano-frontalieri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine illustrativa pertinente al tema dell’articolo"
+      },
+      "datePublished": "2026-10-27T19:06:44+00:00",
+      "dateModified": "2026-10-27T19:06:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-neuchatel/arco-giurassiano-frontalieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default CANTON_SEO_METADATA;

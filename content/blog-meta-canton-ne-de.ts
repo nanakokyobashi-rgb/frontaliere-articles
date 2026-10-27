@@ -60,6 +60,9 @@ const blogMetaCantonNeDe: Record<string, string> = {
     'blog.article.rht-ritorno-normale-orologeria.title': 'RHT: Uhrenbranche akzeptiert in Bern geplante Rückkehr zur Norm',
     'blog.article.rht-ritorno-normale-orologeria.excerpt': 'Zenith hat in Le Locle eine Massenentlassung eingeleitet.',
     'blog.article.rht-ritorno-normale-orologeria.imageAlt': 'Illustratives Bild zum Thema des Artikels',
+    'blog.article.arco-giurassiano-frontalieri.title': 'Veränderungen der Grenzgängerbeschäftigung im Jurabogen',
+    'blog.article.arco-giurassiano-frontalieri.excerpt': 'Eine Folge über den Jurabogen behandelt die Veränderungen der Grenzgängerbeschäftigung; der Steuerüberblick 2026 des Kantons Neuenburg trennt Steuern und Vorsorge.',
+    'blog.article.arco-giurassiano-frontalieri.imageAlt': 'Illustratives Bild zum Thema des Artikels',
 };
 
 export default blogMetaCantonNeDe;

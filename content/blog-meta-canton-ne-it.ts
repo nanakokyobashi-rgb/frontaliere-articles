@@ -60,6 +60,9 @@ const blogMetaCantonNeIt: Record<string, string> = {
     'blog.article.rht-ritorno-normale-orologeria.title': 'RHT: orologeria accetta ritorno alla normale previsto a Berna',
     'blog.article.rht-ritorno-normale-orologeria.excerpt': 'Zenith ha avviato un licenziamento collettivo a Le Locle.',
     'blog.article.rht-ritorno-normale-orologeria.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
+    'blog.article.arco-giurassiano-frontalieri.title': 'Mutamenti del lavoro frontaliero nell\'Arco giurassiano',
+    'blog.article.arco-giurassiano-frontalieri.excerpt': 'Un episodio sull\'Arco giurassiano affronta i mutamenti dell\'occupazione frontaliera; il quadro 2026 del Cantone di Neuchâtel separa fisco e previdenza.',
+    'blog.article.arco-giurassiano-frontalieri.imageAlt': 'Immagine illustrativa pertinente al tema dell’articolo',
 };
 
 export default blogMetaCantonNeIt;
