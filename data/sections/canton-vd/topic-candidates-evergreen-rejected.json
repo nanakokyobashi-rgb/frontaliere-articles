@@ -87,6 +87,10 @@
     "canton-vd::https://latele.ch/emissions/les-puckalistes/les-puckalistes-s-2026-e-31?s=5": {
       "section": "canton-vd",
       "ts": 1793064580193
+    },
+    "canton-vd::https://latele.ch/emissions/info-vaud/info-vaud-s-2026-e-161?s=6": {
+      "section": "canton-vd",
+      "ts": 1793068612951
     }
   }
 }
